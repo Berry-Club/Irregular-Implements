@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blue_stained_glass"
+    },
+    "G": {
+      "item": "minecraft:green_stained_glass"
+    },
+    "L": {
+      "item": "minecraft:redstone_lamp"
+    },
+    "R": {
+      "item": "minecraft:red_stained_glass"
+    },
+    "W": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "pattern": [
+    "RGB",
+    "WLW",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:voxel_projector"
+  }
+}

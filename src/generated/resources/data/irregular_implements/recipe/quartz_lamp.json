@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:redstone_lamp"
+    },
+    "Q": {
+      "tag": "c:gems/quartz"
+    }
+  },
+  "pattern": [
+    " Q ",
+    "QLQ",
+    " Q "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:quartz_lamp"
+  }
+}
