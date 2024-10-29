@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystal
 import dev.aaronhowser.mods.irregular_implements.item.FilterEntity
 import dev.aaronhowser.mods.irregular_implements.item.FilterLocation
 import dev.aaronhowser.mods.irregular_implements.item.StableEnderPearl
@@ -16,7 +17,8 @@ object ModItems {
     val ANALOG_EMITTER = basic("analog_emitter")
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearl> =
         register("stable_ender_pearl") { StableEnderPearl() }
-    val BIOME_CRYSTAL = basic("biome_crystal")
+    val BIOME_CRYSTAL: DeferredItem<BiomeCrystal> =
+        register("biome_crystal") { BiomeCrystal() }
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
     val BEAN = basic("bean")
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")

@@ -3,11 +3,13 @@ package dev.aaronhowser.mods.irregular_implements.registries
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
+import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.level.biome.Biome
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.*
@@ -43,6 +45,13 @@ object ModDataComponents {
                     { java.util.UUID.fromString(it) },
                     { it.toString() }
                 ))
+        }
+
+    val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("biome") {
+            it
+                .persistent(Biome.CODEC)
+                .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.BIOME))
         }
 
 }
