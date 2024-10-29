@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:cobblestones/normal"
+    },
+    "P": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "CPC",
+    "CTC",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:block_breaker"
+  }
+}

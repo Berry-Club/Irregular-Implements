@@ -32,6 +32,8 @@ class ModRecipeProvider(
     // Potions of Collapse
     // Crafting Tables
     // Platforms
+    // Luminous Blocks
+    // Translucent Luminous Blocks
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -257,6 +259,94 @@ class ModRecipeProvider(
                 'B' to IngredientType.ItemLikeIng(Items.BLUE_STAINED_GLASS),
                 'W' to IngredientType.ItemLikeIng(Items.BLACK_WOOL),
                 'L' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.CONTACT_BUTTON,
+            "SIS,SBS,SSS",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
+                'I' to IngredientType.ItemLikeIng(Items.IRON_BARS),
+                'B' to IngredientType.ItemLikeIng(Items.STONE_BUTTON)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.CONTACT_LEVER,
+            "SIS,SLS,SSS",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
+                'I' to IngredientType.ItemLikeIng(Items.IRON_BARS),
+                'L' to IngredientType.ItemLikeIng(Items.LEVER)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.RAIN_SHIELD,
+            " F , B ,NNN",
+            mapOf(
+                'F' to IngredientType.ItemLikeIng(Items.FLINT),
+                'B' to IngredientType.TagKeyIng(Tags.Items.RODS_BLAZE),
+                'N' to IngredientType.TagKeyIng(Tags.Items.NETHERRACKS)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.BLOCK_BREAKER,
+            "CPC,CTC,CCC",
+            mapOf(
+                'C' to IngredientType.TagKeyIng(Tags.Items.COBBLESTONES_NORMAL),
+                'P' to IngredientType.ItemLikeIng(Items.IRON_PICKAXE),
+                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.SUPER_LUBRICANT_ICE,
+            "S,I,B",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.SLIMEBALLS),
+                'I' to IngredientType.ItemLikeIng(Items.ICE),
+                'B' to IngredientType.ItemLikeIng(Items.WATER_BUCKET)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.REDSTONE_OBSERVER,
+            "RQR,QEQ,RQR",
+            mapOf(
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
+                'Q' to IngredientType.TagKeyIng(Tags.Items.GEMS_QUARTZ),
+                'E' to IngredientType.ItemLikeIng(Items.ENDER_EYE)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.BIOME_RADAR,
+            "III,GBG,III",
+            mapOf(
+                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
+                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
+                'B' to IngredientType.ItemLikeIng(ModItems.BIOME_SENSOR)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.IRON_DROPPER,
+            "III,I I,IDI",
+            mapOf(
+                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
+                'D' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.BLOCK_OF_STICKS,
+            16,
+            "SSS,S S,SSS",
+            mapOf(
+                'S' to IngredientType.ItemLikeIng(Items.STICK)
+            )
+        ),
+        makeShapedRecipe(
+            ModBlocks.RETURNING_BLOCK_OF_STICKS,
+            8,
+            "SSS,SES,SSS",
+            mapOf(
+                'S' to IngredientType.ItemLikeIng(ModBlocks.BLOCK_OF_STICKS),
+                'E' to IngredientType.ItemLikeIng(Items.ENDER_PEARL)
             )
         )
     )
