@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "irregular_implements:super_lubricant_tincture"
+    },
+    {
+      "item": "minecraft:iron_boots"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:super_lubricant_boots"
+  }
+}

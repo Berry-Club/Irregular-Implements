@@ -844,6 +844,92 @@ class ModRecipeProvider(
                 'R' to ing(Tags.Items.DUSTS_REDSTONE),
                 'B' to ing(ModItems.BIOME_CRYSTAL)
             )
+        ),
+        shapedRecipe(
+            ModItems.PLATE_BASE,
+            8,
+            "I I, B ,I I",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'B' to ing(Items.IRON_BARS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_STRING,
+            4,
+            "ESE,SDS,ESE",
+            mapOf(
+                'E' to ing(ModItems.ECTOPLASM),
+                'S' to ing(Tags.Items.STRINGS),
+                'D' to ing(Tags.Items.GEMS_DIAMOND)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ITEM_FILTER,
+            " Y ,YPY, Y ",
+            mapOf(
+                'Y' to ing(Tags.Items.DYES_YELLOW),
+                'P' to ing(Items.PAPER)
+            )
+        ),
+        shapedRecipe(
+            ModItems.REDSTONE_ACTIVATOR,
+            "IRI,ITI,III",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'T' to ing(Items.REDSTONE_TORCH)
+            )
+        ),
+        shapedRecipe(
+            ModItems.REDSTONE_REMOTE,
+            "RRR,OPO,OOO",
+            mapOf(
+                'R' to ing(ModItems.REDSTONE_ACTIVATOR),
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'P' to ing(ModItems.STABLE_ENDER_PEARL)
+            )
+        ),
+        shapedRecipe(
+            ModItems.GOLDEN_COMPASS,
+            " G ,GCG, G ",
+            mapOf(
+                'G' to ing(Tags.Items.NUGGETS_GOLD),
+                'C' to ing(Items.COMPASS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.FLOO_SIGN,
+            "PPP,PSP,PPP",
+            mapOf(
+                'P' to ing(ModItems.FLOO_POWDER),
+                'S' to ing(ItemTags.SIGNS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.EMERALD_COMPASS,
+            " E ,ECE, E ",
+            mapOf(
+                'E' to ing(Tags.Items.GEMS_EMERALD),
+                'C' to ing(Items.COMPASS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.FLOO_TOKEN,
+            "FFF,FPF,FFF",
+            mapOf(
+                'F' to ing(ModItems.FLOO_POWDER),
+                'P' to ing(Items.PAPER)
+            )
+        ),
+        shapedRecipe(
+            ModItems.PORTKEY,
+            "GEG, D ",
+            mapOf(
+                'G' to ing(Tags.Items.GUNPOWDERS),
+                'E' to ing(ModItems.STABLE_ENDER_PEARL),
+                'D' to ing(Tags.Items.GEMS_DIAMOND)
+            )
         )
     )
 
@@ -895,6 +981,55 @@ class ModRecipeProvider(
                 ing(ModItems.BEAN),
                 ing(Tags.Items.CROPS_WHEAT),
                 ing(Items.BOWL)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.LUMINOUS_POWDER,
+            4,
+            listOf(
+                ing(Tags.Items.DUSTS_GLOWSTONE),
+                ing(Tags.Items.GLASS_BLOCKS),
+                ing(ModBlocks.GLOWING_MUSHROOM)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.FLOO_POWDER,
+            16,
+            listOf(
+                ing(Tags.Items.ENDER_PEARLS),
+                ing(Tags.Items.DUSTS_REDSTONE),
+                ing(Tags.Items.GUNPOWDERS),
+                ing(ModItems.BEAN)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.BLACKOUT_POWDER,
+            4,
+            listOf(
+                ing(Tags.Items.DYES_BLACK),
+                ing(Tags.Items.OBSIDIANS),
+                ing(Tags.Items.DYES_BLUE),
+            )
+        ),
+        shapelessRecipe(
+            ModItems.BLAZE_AND_STEEL,
+            listOf(
+                ing(Items.BLAZE_POWDER),
+                ing(Tags.Items.INGOTS_IRON)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.SUPER_LUBRICANT_BOOTS,
+            listOf(
+                ing(ModItems.SUPER_LUBRICANT_TINCTURE),
+                ing(Items.IRON_BOOTS)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.ID_CARD,
+            listOf(
+                ing(Items.INK_SAC),
+                ing(Items.PAPER)
             )
         )
     )

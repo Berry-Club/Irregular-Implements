@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "Y": {
+      "tag": "c:dyes/yellow"
+    }
+  },
+  "pattern": [
+    " Y ",
+    "YPY",
+    " Y "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:item_filter"
+  }
+}

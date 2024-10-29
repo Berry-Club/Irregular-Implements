@@ -87,7 +87,7 @@ object ModItems {
 
     // Lubricant
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
-    val SUPER_LUBRICANT_BOOTS = basic("super_lubricant_boots")
+    val SUPER_LUBRICANT_BOOTS = basic("super_lubricant_boots")  // What if you could instead apply the tincture to any boots?
 
     // Floo
     val FLOO_POWDER = basic("floo_powder")
