@@ -31,7 +31,6 @@ object ModBlocks {
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
     val QUARTZ_GLASS = basicBlock("quartz_glass")
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
-    val VOXEL_PROJECTOR = basicBlock("voxel_projector") // Was WIP, might not even be possible lol
     val CONTACT_BUTTON = basicBlock("contact_button")
     val CONTACT_LEVER = basicBlock("contact_lever")     // Contact Mike reference?
     val RAIN_SHIELD = basicBlock("rain_shield")

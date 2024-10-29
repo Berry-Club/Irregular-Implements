@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-29T14:30:19.5331412	Recipes
+// 1.21.1	2024-10-29T15:04:49.6136477	Recipes
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
 5f970649e951f0706eb2264a0a8a95fe4cf53026 data/irregular_implements/advancement/recipes/misc/advanced_redstone_interface.json
@@ -117,7 +117,6 @@ fecaf2a297dc007bd97b5cd351ef2c7f18f1cbca data/irregular_implements/advancement/r
 334078afb241cdd360a273808a647045e999654a data/irregular_implements/advancement/recipes/misc/super_lubricant_tincture.json
 d104b7764fc21bbbd741ca505408e0c1d333ad2f data/irregular_implements/advancement/recipes/misc/time_in_a_bottle.json
 4a4978e767c0374c919a4ff0c5b9de6617377532 data/irregular_implements/advancement/recipes/misc/trigger_glass.json
-6ab9ea351de6b55a736c8dbce32a0ced998eef47 data/irregular_implements/advancement/recipes/misc/voxel_projector.json
 781d5747416311a4cae67357b2c01687f019c603 data/irregular_implements/recipe/accelerator_plate.json
 2042b4591c07809f17336706636a45b08d708a07 data/irregular_implements/recipe/advanced_item_collector.json
 caff91eb1b7d49106f6eb932d5cd49ceb618c28e data/irregular_implements/recipe/advanced_redstone_interface.json
@@ -236,4 +235,3 @@ d774469f40d8d21fb95584328d8d77f5556b5292 data/irregular_implements/recipe/stable
 8fbc6ff270c09902f0f2dff6e370fb3435315d8c data/irregular_implements/recipe/super_lubricant_tincture.json
 26de94ec7d6184a45f766da2ccf94c15438779f3 data/irregular_implements/recipe/time_in_a_bottle.json
 64c9b29db0e05a868902cb9d1217d1e6e05c38b6 data/irregular_implements/recipe/trigger_glass.json
-6956900b172ffbf0e66de9a54b1a5b47069cca0c data/irregular_implements/recipe/voxel_projector.json

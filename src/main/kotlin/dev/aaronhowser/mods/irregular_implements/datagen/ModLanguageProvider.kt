@@ -150,7 +150,6 @@ class ModLanguageProvider(
         addBlock(ModBlocks.QUARTZ_LAMP, "Quartz Lamp")
         addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")
         addBlock(ModBlocks.POTION_VAPORIZER, "Potion Vaporizer")
-        addBlock(ModBlocks.VOXEL_PROJECTOR, "Voxel Projector")
         addBlock(ModBlocks.CONTACT_BUTTON, "Contact Button")
         addBlock(ModBlocks.CONTACT_LEVER, "Contact Lever")
         addBlock(ModBlocks.RAIN_SHIELD, "Rain Shield")
@@ -245,5 +244,30 @@ class ModLanguageProvider(
         addInfo(ModBlocks.ENDER_BRIDGE, "Upon the Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it.\n\nIt searches at 20 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
         addInfo(ModBlocks.PRISMARINE_ENDER_BRIDGE, "Upon the Prismarine Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it (with no distance limit, though it must be loaded, and no other blocks can be in the way).\n\nIt searches at 200 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
         addInfo(ModBlocks.ENDER_ANCHOR, "Works with the Ender Bridge or Prismarine Ender Bridge.")
+        addInfo(ModBlocks.BEAN_POD, "Found at the top of a grown Magic Bean.\n\nContains loot!")
+        addInfo(ModBlocks.LIGHT_REDIRECTOR, "Swaps the appearance of blocks placed on opposite sides.\n\nYou can set a side to not be changed by right-clicking it. This does not prevent the opposite side from copying it.")
+        addInfo(ModBlocks.SPECTRE_BLOCK, "An indestructible block that spawns in the Spectre Dimension.")
+        addInfo(ModBlocks.ANALOG_EMITTER, "Emits a configurable Redstone signal.")
+        addInfo(ModBlocks.FLUID_DISPLAY, "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.")
+        addInfo(ModBlocks.ENDER_MAILBOX, "Allows players to send and receive Ender Letters.")
+        addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
+        addInfo(ModBlocks.PLATFORM, "Only solid to non-sneaking entities.")
+        addInfo(ModBlocks.ENTITY_DETECTOR, "Emits a Redstone signal if a configured entity is within a configured range.")
+        addInfo(ModBlocks.QUARTZ_LAMP, "Provides invisible light, which can't be seen but affects mob spawning.")   //TODO: Make some joke about radiation
+        addInfo(ModBlocks.QUARTZ_GLASS, "Solid for everything but players.")
+        addInfo(ModBlocks.POTION_VAPORIZER, "Allows you to fill a room with a potion effect.\n\nInsert Potions and Furnace fuel, and it will scan the area in front of it to check if it's an enclosed area.\n\nIf it is, it'll fill it with the potion effect.")
+        addInfo(ModBlocks.CONTACT_LEVER, "Acts like a Lever, but if the block in front of it is clicked instead.")
+        addInfo(ModBlocks.CONTACT_BUTTON, "Acts like a Button, but if the block in front of it is clicked instead.")
+        addInfo(ModBlocks.RAIN_SHIELD, "Prevents rain in a 5 chunk radius.")
+        addInfo(ModBlocks.BLOCK_BREAKER, "Breaks blocks in front of it with the effectiveness of an Iron Pickaxe. Drops are inserted into the inventory behind it, or dropped.\n\nCan be disabled with a Redstone signal.")
+        addInfo(ModBlocks.SUPER_LUBRICANT_ICE, "No friction.")
+        addInfo(ModBlocks.COMPRESSED_SLIME_BLOCK, "Create by clicking a Slime Block with a Shovel. Can be compressed multiple times.\n\nLaunches entities into the air.")
+
+
+
+
+
+
+
     }
 }

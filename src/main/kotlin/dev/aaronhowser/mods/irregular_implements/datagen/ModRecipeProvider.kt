@@ -263,17 +263,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.VOXEL_PROJECTOR,
-            "RGB,WLW,WWW",
-            mapOf(
-                'R' to ing(Items.RED_STAINED_GLASS),
-                'G' to ing(Items.GREEN_STAINED_GLASS),
-                'B' to ing(Items.BLUE_STAINED_GLASS),
-                'W' to ing(Items.BLACK_WOOL),
-                'L' to ing(Items.REDSTONE_LAMP)
-            )
-        ),
-        shapedRecipe(
             ModBlocks.CONTACT_BUTTON,
             "SIS,SBS,SSS",
             mapOf(
