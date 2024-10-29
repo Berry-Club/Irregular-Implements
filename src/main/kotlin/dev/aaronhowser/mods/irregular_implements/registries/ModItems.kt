@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.FilterLocation
+import dev.aaronhowser.mods.irregular_implements.item.FilterEntity
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -14,8 +15,6 @@ object ModItems {
     val ANALOG_EMITTER = basic("analog_emitter")
     val STABLE_ENDER_PEARL = basic("stable_ender_pearl")
     val BIOME_CRYSTAL = basic("biome_crystal")
-    val LOCATION_FILTER: DeferredItem<FilterLocation> =
-        register("location_filter") { FilterLocation() }
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
     val BEAN = basic("bean")
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
@@ -32,7 +31,6 @@ object ModItems {
     val BOTTLE_OF_AIR = basic("bottle_of_air")
     val BLOOD_STONE = basic("blood_stone")
     val ENDER_LETTER = basic("ender_letter")
-    val ENTITY_FILTER = basic("entity_filter")
     val SAKANADE_SPORES = basic("sakanade_spores")
     val EVIL_TEAR = basic("evil_tear")
     val ECTOPLASM = basic("ectoplasm")
@@ -43,7 +41,6 @@ object ModItems {
     val LOTUS_BLOSSOM = basic("lotus_blossom")
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
-    val ITEM_FILTER = basic("item_filter")
     val EMERALD_COMPASS = basic("emerald_compass")
     val BLAZE_AND_STEEL = basic("blaze_and_steel")
     val RUNE_PATTERN = basic("rune_pattern")
@@ -60,6 +57,13 @@ object ModItems {
     val GRASS_SEEDS = basic("grass_seeds")  //Same item for all colors
     val RUNE_DUST = basic("rune_dust") //Same item for all colors
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
+
+    // Filters
+    val LOCATION_FILTER: DeferredItem<FilterLocation> =
+        register("location_filter") { FilterLocation() }
+    val ENTITY_FILTER: DeferredItem<FilterEntity> =
+        register("entity_filter") { FilterEntity() }
+    val ITEM_FILTER = basic("item_filter")
 
     // Imbues
     val FIRE_IMBUE = basic("fire_imbue")
