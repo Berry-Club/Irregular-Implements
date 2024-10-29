@@ -541,6 +541,78 @@ class ModRecipeProvider(
                 'I' to ing(Tags.Items.INGOTS_IRON),
                 'S' to ing(Items.STICK)
             )
+        ),
+        shapedRecipe(
+            ModBlocks.ITEM_COLLECTOR,
+            " P , H ,OOO",
+            mapOf(
+                'P' to ing(Tags.Items.ENDER_PEARLS),
+                'H' to ing(Items.HOPPER),
+                'O' to ing(Tags.Items.OBSIDIANS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.ADVANCED_ITEM_COLLECTOR,
+            " T ,GCG",
+            mapOf(
+                'T' to ing(Items.REDSTONE_TORCH),
+                'G' to ing(Tags.Items.DUSTS_GLOWSTONE),
+                'C' to ing(ModBlocks.ITEM_COLLECTOR)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BIOME_COBBLESTONE,
+            16,
+            "CCC,CBC,CCC",
+            mapOf(
+                'C' to ing(Tags.Items.COBBLESTONES_NORMAL),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BIOME_STONE,
+            16,
+            "SSS,SBS,SSS",
+            mapOf(
+                'S' to ing(Tags.Items.STONES),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BIOME_STONE_BRICKS,
+            16,
+            "SSS,SBS,SSS",
+            mapOf(
+                'S' to ing(Items.STONE_BRICKS),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BIOME_STONE_BRICKS_CRACKED,
+            16,
+            "SSS,SBS,SSS",
+            mapOf(
+                'S' to ing(Items.CRACKED_STONE_BRICKS),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BIOME_STONE_BRICKS_CHISELED,
+            16,
+            "SSS,SBS,SSS",
+            mapOf(
+                'S' to ing(Items.CHISELED_STONE_BRICKS),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BIOME_GLASS,
+            16,
+            "GGG,GBG,GGG",
+            mapOf(
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
         )
     )
 
@@ -578,6 +650,11 @@ class ModRecipeProvider(
                 ing(Items.POTION),        //TODO: Water bottle
                 ing(ModItems.BEAN)
             )
+        ),
+        shapelessRecipe(
+            ModBlocks.SPECTRE_PLANKS,
+            4,
+            listOf(ing(ModBlocks.SPECTRE_WOOD))
         )
     )
 

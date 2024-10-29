@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "irregular_implements:biome_crystal"
+    },
+    "C": {
+      "tag": "c:cobblestones/normal"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "count": 16,
+    "id": "irregular_implements:biome_cobblestone"
+  }
+}
