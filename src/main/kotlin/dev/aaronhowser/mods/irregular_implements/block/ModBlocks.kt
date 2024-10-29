@@ -1,6 +1,6 @@
-package example.examplemod.block
+package dev.aaronhowser.mods.irregular_implements.block
 
-import example.examplemod.ExampleMod
+import dev.aaronhowser.mods.irregular_implements.ExampleMod
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredRegister

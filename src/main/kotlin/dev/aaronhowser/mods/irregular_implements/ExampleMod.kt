@@ -1,6 +1,6 @@
-package example.examplemod
+package dev.aaronhowser.mods.irregular_implements
 
-import example.examplemod.block.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.block.ModBlocks
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -32,7 +32,7 @@ import kotlin.time.Duration.Companion.seconds
 @Mod(ExampleMod.ID)
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 object ExampleMod {
-    const val ID = "examplemod"
+    const val ID = "irregular_implements"
 
     // the logger for our mod
     val LOGGER: Logger = LogManager.getLogger(ID)
@@ -45,11 +45,11 @@ object ExampleMod {
 
         val obj = runForDist(
             clientTarget = {
-                MOD_BUS.addListener(::onClientSetup)
+                MOD_BUS.addListener(ExampleMod::onClientSetup)
                 Minecraft.getInstance()
             },
             serverTarget = {
-                MOD_BUS.addListener(::onServerSetup)
+                MOD_BUS.addListener(ExampleMod::onServerSetup)
                 "test"
             })
 
