@@ -1,8 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredItem
@@ -16,7 +17,7 @@ object ModCreativeModeTabs {
 
     val MOD_TAB: DeferredHolder<CreativeModeTab, CreativeModeTab> = TABS_REGISTRY.register("creative_tab", Supplier {
         CreativeModeTab.builder()
-            .title(Component.literal("A"))
+            .title(ModLanguageProvider.Items.CREATIVE_TAB.toComponent())
             .icon { ModItems.SPECTRE_PICKAXE.toStack() }
             .displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
                 val regularItems =
