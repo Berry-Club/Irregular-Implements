@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "irregular_implements:position_filter"
+        "recipe": "irregular_implements:location_filter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "irregular_implements:position_filter"
+      "irregular_implements:location_filter"
     ]
   }
 }

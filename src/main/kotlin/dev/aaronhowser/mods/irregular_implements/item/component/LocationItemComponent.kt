@@ -7,10 +7,10 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.level.dimension.DimensionType
+import net.minecraft.world.level.Level
 
 data class LocationItemComponent(
-    val dimension: ResourceKey<DimensionType>,
+    val dimension: ResourceKey<Level>,
     val blockPos: BlockPos
 ) {
 
@@ -18,7 +18,7 @@ data class LocationItemComponent(
         val CODEC: Codec<LocationItemComponent> =
             RecordCodecBuilder.create { instance ->
                 instance.group(
-                    ResourceKey.codec(Registries.DIMENSION_TYPE)
+                    ResourceKey.codec(Registries.DIMENSION)
                         .fieldOf("dimension")
                         .forGetter(LocationItemComponent::dimension),
                     BlockPos.CODEC
@@ -29,7 +29,7 @@ data class LocationItemComponent(
 
         val STREAM_CODEC: StreamCodec<ByteBuf, LocationItemComponent> =
             StreamCodec.composite(
-                ResourceKey.streamCodec(Registries.DIMENSION_TYPE), LocationItemComponent::dimension,
+                ResourceKey.streamCodec(Registries.DIMENSION), LocationItemComponent::dimension,
                 BlockPos.STREAM_CODEC, LocationItemComponent::blockPos,
                 ::LocationItemComponent
             )

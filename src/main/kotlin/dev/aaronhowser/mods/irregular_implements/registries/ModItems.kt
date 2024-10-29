@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.FilterLocation
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -13,7 +14,8 @@ object ModItems {
     val ANALOG_EMITTER = basic("analog_emitter")
     val STABLE_ENDER_PEARL = basic("stable_ender_pearl")
     val BIOME_CRYSTAL = basic("biome_crystal")
-    val POSITION_FILTER = basic("position_filter")
+    val LOCATION_FILTER: DeferredItem<FilterLocation> =
+        register("location_filter") { FilterLocation() }
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
     val BEAN = basic("bean")
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")

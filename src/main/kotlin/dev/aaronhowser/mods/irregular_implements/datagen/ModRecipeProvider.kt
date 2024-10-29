@@ -752,7 +752,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.POSITION_FILTER,
+            ModItems.LOCATION_FILTER,
             " M ,MPM, M ",
             mapOf(
                 'M' to ing(Tags.Items.DYES_MAGENTA),

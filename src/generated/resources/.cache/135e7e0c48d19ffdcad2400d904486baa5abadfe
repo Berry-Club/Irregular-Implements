@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-29T11:53:11.0919339	Item Models: irregular_implements
+// 1.21.1	2024-10-29T16:48:19.6228103	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -26,6 +26,7 @@ d400a4c8f213aa5600f1bdb15ef9b55dbc44ab4b assets/irregular_implements/models/item
 e90431818e2275b0fd91346aa6c3a58d98852bb9 assets/irregular_implements/models/item/lava_charm.json
 713e1b88036347fc981c2a68bd96328779643c26 assets/irregular_implements/models/item/lava_waders.json
 f5dc61079df7b78a368ec6bedeaa95cbd1c5987d assets/irregular_implements/models/item/lesser_magic_bean.json
+5a16230a5fb28035cc87410d9b04826c8b1ea9fe assets/irregular_implements/models/item/location_filter.json
 898bbf98b7e6ffd6a5775a5750a9f84d7d6cf12f assets/irregular_implements/models/item/loot_generator.json
 b59732801ab7d4c0e69648601fc074770ee8b854 assets/irregular_implements/models/item/lotus_blossom.json
 5b1200455f4391ca8c2d48717e52665d21a3eb99 assets/irregular_implements/models/item/lotus_seeds.json
@@ -38,7 +39,6 @@ fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item
 8fe9238451fcdf36b1b009b258e5a121f89039ec assets/irregular_implements/models/item/plate_base.json
 5b611da92a5119bfd819f9f5343c9b4efc0e572f assets/irregular_implements/models/item/portable_sound_dampener.json
 4214406cc226378f86df85b4a9572cd4e578b286 assets/irregular_implements/models/item/portkey.json
-abc29ee3e718daeff0149c1f964b0278b3fa55ea assets/irregular_implements/models/item/position_filter.json
 d6d7268794599910379dbb06671188e7fa11d671 assets/irregular_implements/models/item/precious_emerald.json
 c299c97f1655718329d091dfd1414ba0ed860212 assets/irregular_implements/models/item/redstone_remote.json
 1e7b926a6994afcc883ff949e1b92384981da27f assets/irregular_implements/models/item/redstone_tool.json
