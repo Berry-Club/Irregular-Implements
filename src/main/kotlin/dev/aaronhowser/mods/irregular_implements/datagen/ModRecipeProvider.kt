@@ -40,6 +40,9 @@ class ModRecipeProvider(
     // Imbues
     // Weather Eggs
     // Grass Seeds
+    // Rune Dusts
+    // Spectre Charger tiers
+    // Divining Rods
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -1033,6 +1036,64 @@ class ModRecipeProvider(
                 'O' to ing(Tags.Items.OBSIDIANS),
                 'G' to ing(Tags.Items.INGOTS_GOLD),
                 'T' to ing(ModItems.EVIL_TEAR)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_KEY,
+            "S  ,SP ,  S",
+            mapOf(
+                'S' to ing(ModItems.SPECTRE_INGOT),
+                'P' to ing(ModItems.STABLE_ENDER_PEARL)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_ANCHOR,
+            " I ,IEI,III",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'E' to ing(ModItems.ECTOPLASM)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_SWORD,
+            "E,E,O",
+            mapOf(
+                'E' to ing(ModItems.SPECTRE_INGOT),
+                'O' to ing(Tags.Items.OBSIDIANS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_PICKAXE,
+            "EEE, O , O ",
+            mapOf(
+                'E' to ing(ModItems.SPECTRE_INGOT),
+                'O' to ing(Tags.Items.OBSIDIANS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_AXE,
+            "EE ,EO , O ",
+            mapOf(
+                'E' to ing(ModItems.SPECTRE_INGOT),
+                'O' to ing(Tags.Items.OBSIDIANS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_SHOVEL,
+            "E,O,O",
+            mapOf(
+                'E' to ing(ModItems.SPECTRE_INGOT),
+                'O' to ing(Tags.Items.OBSIDIANS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_CHARGER,
+            "BOS,OIO,SOB",
+            mapOf(
+                'B' to ing(Items.IRON_BARS),
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'I' to ing(ModItems.SPECTRE_INGOT)
             )
         )
     )

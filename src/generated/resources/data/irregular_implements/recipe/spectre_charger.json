@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "I": {
+      "item": "irregular_implements:spectre_ingot"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "S": {
+      "item": "irregular_implements:spectre_string"
+    }
+  },
+  "pattern": [
+    "BOS",
+    "OIO",
+    "SOB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:spectre_charger"
+  }
+}

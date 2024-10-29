@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "irregular_implements:spectre_ingot"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    }
+  },
+  "pattern": [
+    "E",
+    "E",
+    "O"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:spectre_sword"
+  }
+}
