@@ -37,7 +37,7 @@ object ModBlocks {
     val BLOCK_BREAKER = basicBlock("block_breaker")
     val COMPRESSED_SLIME_BLOCK = basicBlock("compressed_slime_block")
     val REDSTONE_OBSERVER = basicBlock("redstone_observer")
-    val BIOME_RADAR = basicBlock("biome_radar")
+    val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
     val IRON_DROPPER = basicBlock("iron_dropper")
     val IGNITER = basicBlock("igniter")
     val BLOCK_OF_STICKS = basicBlock("block_of_sticks")
