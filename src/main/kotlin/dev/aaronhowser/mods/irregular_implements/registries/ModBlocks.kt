@@ -11,15 +11,9 @@ object ModBlocks {
     val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
     val FERTILIZED_DIRT = basicBlock("fertilized_dirt")
-    val PLAYER_INTERFACE = basicBlock("player_interface")
-    val CREATIVE_PLAYER_INTERFACE = basicBlock("creative_player_interface")
     val LAPIS_GLASS = basicBlock("lapis_glass")
     val LAPIS_LAMP = basicBlock("lapis_lamp")
     val DYING_MACHINE = basicBlock("dying_machine")
-    val ONLINE_DETECTOR = basicBlock("online_detector")
-    val CHAT_DETECTOR = basicBlock("chat_detector")
-    val GLOBAL_CHAT_DETECTOR = basicBlock("global_chat_detector")
-    val ENTITY_DETECTOR = basicBlock("entity_detector")
     val ENDER_BRIDGE = basicBlock("ender_bridge")
     val PRISMARINE_ENDER_BRIDGE = basicBlock("prismarine_ender_bridge")
     val ENDER_ANCHOR = basicBlock("ender_anchor")
@@ -42,10 +36,7 @@ object ModBlocks {
     val CONTACT_LEVER = basicBlock("contact_lever")     // Contact Mike reference?
     val RAIN_SHIELD = basicBlock("rain_shield")
     val BLOCK_BREAKER = basicBlock("block_breaker")
-    val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
     val COMPRESSED_SLIME_BLOCK = basicBlock("compressed_slime_block")
-    val SUPER_LUBRICANT_PLATFORM = basicBlock("super_lubricant_platform")
-    val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
     val REDSTONE_OBSERVER = basicBlock("redstone_observer")
     val BIOME_RADAR = basicBlock("biome_radar")
     val IRON_DROPPER = basicBlock("iron_dropper")
@@ -57,10 +48,8 @@ object ModBlocks {
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
     val PEACE_CANDLE = basicBlock("peace_candle")
-    val NOTIFICATION_INTERFACE = basicBlock("notification_interface")
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val INVENTORY_TESTER = basicBlock("inventory_tester")
-    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
     val TRIGGER_GLASS = basicBlock("trigger_glass")
     val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
     val SOUND_BOX = basicBlock("sound_box")
@@ -72,10 +61,27 @@ object ModBlocks {
     val NATURE_CORE = basicBlock("nature_core")
     val COLORED_GRASS = basicBlock("colored_grass") // Same block for all colors
     val RAINBOW_LAMP = basicBlock("rainbow_lamp")
-    val BASIC_REDSTONE_INTERFACE = basicBlock("basic_redstone_interface")
-    val ADVANCED_REDSTONE_INTERFACE = basicBlock("advanced_redstone_interface")
     val STAINED_BRICKS = basicBlock("stained_bricks") // Same block for all colors
     val LUMINOUS_STAINED_BRICKS = basicBlock("luminous_stained_bricks") // Same block for all colors
+
+    // Lubricant
+    val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
+    val SUPER_LUBRICANT_PLATFORM = basicBlock("super_lubricant_platform")
+    val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
+    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
+
+    // Detectors
+    val ONLINE_DETECTOR = basicBlock("online_detector")
+    val CHAT_DETECTOR = basicBlock("chat_detector")
+    val GLOBAL_CHAT_DETECTOR = basicBlock("global_chat_detector")
+    val ENTITY_DETECTOR = basicBlock("entity_detector")
+
+    // Interfaces
+    val PLAYER_INTERFACE = basicBlock("player_interface")
+    val CREATIVE_PLAYER_INTERFACE = basicBlock("creative_player_interface")
+    val NOTIFICATION_INTERFACE = basicBlock("notification_interface")
+    val BASIC_REDSTONE_INTERFACE = basicBlock("basic_redstone_interface")
+    val ADVANCED_REDSTONE_INTERFACE = basicBlock("advanced_redstone_interface")
 
     // Spectre blocks
     val SPECTRE_BLOCK = basicBlock("spectre_block")

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.data.PackOutput
 import net.minecraft.network.chat.Component
@@ -20,6 +21,8 @@ class ModLanguageProvider(
     }
 
     override fun addTranslations() {
+
+        add(Items.CREATIVE_TAB, "Irregular Implements")
 
         addItem(ModItems.ANALOG_EMITTER, "Analog Emitter")
         addItem(ModItems.STABLE_ENDER_PEARL, "Stable Ender Pearl")
@@ -104,6 +107,112 @@ class ModLanguageProvider(
         addItem(ModItems.SOUND_PATTERN, "Sound Pattern")
         addItem(ModItems.SOUND_RECORDER, "Sound Recorder")
         addItem(ModItems.PORTABLE_SOUND_DAMPENER, "Portable Sound Dampener")
+
+        addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
+        addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")
+        addBlock(ModBlocks.LAPIS_LAMP, "Lapis Lamp")
+        addBlock(ModBlocks.DYING_MACHINE, "Dying Machine")
+        addBlock(ModBlocks.ENDER_BRIDGE, "Ender Bridge")
+        addBlock(ModBlocks.PRISMARINE_ENDER_BRIDGE, "Prismarine Ender Bridge")
+        addBlock(ModBlocks.ENDER_ANCHOR, "Ender Anchor")
+        addBlock(ModBlocks.BEAN_POD, "Bean Pod")
+        addBlock(ModBlocks.LIGHT_REDIRECTOR, "Light Redirector")
+        addBlock(ModBlocks.IMBUING_STATION, "Imbuing Station")
+        addBlock(ModBlocks.NATURE_CHEST, "Nature Chest")
+        addBlock(ModBlocks.WATER_CHEST, "Water Chest")
+        addBlock(ModBlocks.ANALOG_EMITTER, "Analog Emitter Block")
+        addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
+        addBlock(ModBlocks.CUSTOM_WORKBENCH, "Custom Workbench")
+        addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
+        addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
+        addBlock(ModBlocks.PLATFORM, "Platform")
+        addBlock(ModBlocks.QUARTZ_LAMP, "Quartz Lamp")
+        addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")
+        addBlock(ModBlocks.POTION_VAPORIZER, "Potion Vaporizer")
+        addBlock(ModBlocks.VOXEL_PROJECTOR, "Voxel Projector")
+        addBlock(ModBlocks.CONTACT_BUTTON, "Contact Button")
+        addBlock(ModBlocks.CONTACT_LEVER, "Contact Lever")
+        addBlock(ModBlocks.RAIN_SHIELD, "Rain Shield")
+        addBlock(ModBlocks.BLOCK_BREAKER, "Block Breaker")
+        addBlock(ModBlocks.COMPRESSED_SLIME_BLOCK, "Compressed Slime Block")
+        addBlock(ModBlocks.REDSTONE_OBSERVER, "Redstone Observer")
+        addBlock(ModBlocks.BIOME_RADAR, "Biome Radar")
+        addBlock(ModBlocks.IRON_DROPPER, "Iron Dropper")
+        addBlock(ModBlocks.IGNITER, "Igniter")
+        addBlock(ModBlocks.BLOCK_OF_STICKS, "Block of Sticks")
+        addBlock(ModBlocks.RETURNING_BLOCK_OF_STICKS, "Returning Block of Sticks")
+        addBlock(ModBlocks.LUMINOUS_BLOCK, "Luminous Block")
+        addBlock(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK, "Translucent Luminous Block")
+        addBlock(ModBlocks.INVENTORY_REROUTER, "Inventory Rerouter")
+        addBlock(ModBlocks.SLIME_CUBE, "Slime Cube")
+        addBlock(ModBlocks.PEACE_CANDLE, "Peace Candle")
+        addBlock(ModBlocks.GLOWING_MUSHROOM, "Glowing Mushroom")
+        addBlock(ModBlocks.INVENTORY_TESTER, "Inventory Tester")
+        addBlock(ModBlocks.TRIGGER_GLASS, "Trigger Glass")
+        addBlock(ModBlocks.BLOCK_DESTABILIZER, "Block Destabilizer")
+        addBlock(ModBlocks.SOUND_BOX, "Sound Box")
+        addBlock(ModBlocks.SOUND_DAMPENER, "Sound Dampener")
+        addBlock(ModBlocks.DIAPHANOUS_BLOCK, "Diaphanous Block")
+        addBlock(ModBlocks.SIDED_BLOCK_OF_REDSTONE, "Sided Block of Redstone")
+        addBlock(ModBlocks.ITEM_COLLECTOR, "Item Collector")
+        addBlock(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Advanced Item Collector")
+        addBlock(ModBlocks.NATURE_CORE, "Nature Core")
+        addBlock(ModBlocks.COLORED_GRASS, "Colored Grass")
+        addBlock(ModBlocks.RAINBOW_LAMP, "Rainbow Lamp")
+        addBlock(ModBlocks.STAINED_BRICKS, "Stained Bricks")
+        addBlock(ModBlocks.LUMINOUS_STAINED_BRICKS, "Luminous Stained Bricks")
+
+        addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
+        addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")
+        addBlock(ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM, "Filtered Super Lubricant Platform")
+        addBlock(ModBlocks.SUPER_LUBRICANT_STONE, "Super Lubricant Stone")
+
+        addBlock(ModBlocks.ONLINE_DETECTOR, "Online Detector")
+        addBlock(ModBlocks.CHAT_DETECTOR, "Chat Detector")
+        addBlock(ModBlocks.GLOBAL_CHAT_DETECTOR, "Global Chat Detector")
+        addBlock(ModBlocks.ENTITY_DETECTOR, "Entity Detector")
+
+        addBlock(ModBlocks.PLAYER_INTERFACE, "Player Interface")
+        addBlock(ModBlocks.CREATIVE_PLAYER_INTERFACE, "Creative Player Interface")
+        addBlock(ModBlocks.NOTIFICATION_INTERFACE, "Notification Interface")
+        addBlock(ModBlocks.BASIC_REDSTONE_INTERFACE, "Basic Redstone Interface")
+        addBlock(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Advanced Redstone Interface")
+
+        addBlock(ModBlocks.SPECTRE_BLOCK, "Spectre Block")
+        addBlock(ModBlocks.SPECTRE_LENS, "Spectre Lens")
+        addBlock(ModBlocks.SPECTRE_ENERGY_INJECTOR, "Spectre Energy Injector")
+        addBlock(ModBlocks.SPECTRE_COIL, "Spectre Coil")
+        addBlock(ModBlocks.SPECTRE_COIL_REDSTONE, "Spectre Coil Redstone")
+        addBlock(ModBlocks.SPECTRE_COIL_ENDER, "Spectre Coil Ender")
+        addBlock(ModBlocks.SPECTRE_COIL_NUMBER, "Spectre Coil Number")
+        addBlock(ModBlocks.SPECTRE_COIL_GENESIS, "Spectre Coil Genesis")
+        addBlock(ModBlocks.SPECTRE_PLANKS, "Spectre Planks")
+        addBlock(ModBlocks.SPECTRE_SAPLING, "Spectre Sapling")
+        addBlock(ModBlocks.SPECTRE_WOOD, "Spectre Wood")
+        addBlock(ModBlocks.SPECTRE_LEAVES, "Spectre Leaves")
+
+        addBlock(ModBlocks.BIOME_COBBLESTONE, "Biome Cobblestone")
+        addBlock(ModBlocks.BIOME_STONE, "Biome Stone")
+        addBlock(ModBlocks.BIOME_STONE_BRICKS, "Biome Stone Bricks")
+        addBlock(ModBlocks.BIOME_STONE_BRICKS_CRACKED, "Cracked Biome Stone Bricks")
+        addBlock(ModBlocks.BIOME_STONE_BRICKS_CHISELED, "Chiseled Biome Stone Bricks")
+        addBlock(ModBlocks.BIOME_GLASS, "Biome Glass")
+
+        addBlock(ModBlocks.PROCESSING_PLATE, "Processing Plate")
+        addBlock(ModBlocks.REDIRECTOR_PLATE, "Redirector Plate")
+        addBlock(ModBlocks.FILTERED_REDIRECTOR_PLATE, "Filtered Redirector Plate")
+        addBlock(ModBlocks.REDSTONE_PLATE, "Redstone Plate")
+        addBlock(ModBlocks.CORRECTOR_PLATE, "Corrector Plate")
+        addBlock(ModBlocks.ITEM_SEALER_PLATE, "Item Sealer Plate")
+        addBlock(ModBlocks.ITEM_REJUVINATOR_PLATE, "Item Rejuvinator Plate")
+        addBlock(ModBlocks.ACCELERATOR_PLATE, "Accelerator Plate")
+        addBlock(ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE, "Directional Accelerator Plate")
+        addBlock(ModBlocks.BOUNCY_PLATE, "Bouncy Plate")
+        addBlock(ModBlocks.COLLECTION_PLATE, "Collection Plate")
+        addBlock(ModBlocks.EXTRACTION_PLATE, "Extraction Plate")
+
+        addBlock(ModBlocks.FLOO_BRICK, "Floo Bricks")
+        addBlock(ModBlocks.ANCIENT_BRICK, "Ancient Brick")
 
 
     }
