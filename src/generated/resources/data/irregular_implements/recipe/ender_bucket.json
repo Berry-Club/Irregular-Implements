@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "c:ender_pearls"
+    }
+  },
+  "pattern": [
+    "I I",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:ender_bucket"
+  }
+}

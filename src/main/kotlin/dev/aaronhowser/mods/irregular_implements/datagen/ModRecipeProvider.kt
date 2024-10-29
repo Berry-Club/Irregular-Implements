@@ -38,6 +38,8 @@ class ModRecipeProvider(
     // Stained Bricks
     // Luminous Stained Bricks
     // Imbues
+    // Weather Eggs
+    // Grass Seeds
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -929,6 +931,108 @@ class ModRecipeProvider(
                 'G' to ing(Tags.Items.GUNPOWDERS),
                 'E' to ing(ModItems.STABLE_ENDER_PEARL),
                 'D' to ing(Tags.Items.GEMS_DIAMOND)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SOUND_PATTERN,
+            "S,P,L",
+            mapOf(
+                'S' to ing(Tags.Items.STRINGS),
+                'P' to ing(Items.PAPER),
+                'L' to ing(Tags.Items.GEMS_LAPIS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SOUND_RECORDER,
+            "BGG,ILI,III",
+            mapOf(
+                'B' to ing(Items.IRON_BARS),
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'L' to ing(Tags.Items.GEMS_LAPIS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.PORTABLE_SOUND_DAMPENER,
+            "ISI,SLS,ISI",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'S' to ing(Tags.Items.STRINGS),
+                'L' to ing(Tags.Items.GEMS_LAPIS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ESCAPE_ROPE,
+            "SGP,GSG,PGS",
+            mapOf(
+                'S' to ing(Tags.Items.STRINGS),
+                'G' to ing(Tags.Items.INGOTS_GOLD),
+                'P' to ing(Tags.Items.ENDER_PEARLS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ENDER_BUCKET,
+            "I I, P ",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'P' to ing(Tags.Items.ENDER_PEARLS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.REINFORCED_ENDER_BUCKET,
+            "OBO, S ",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'B' to ing(ModItems.ENDER_BUCKET),
+                'S' to ing(ModItems.STABLE_ENDER_PEARL)
+            )
+        ),
+        shapedRecipe(
+            ModItems.CHUNK_ANALYZER,
+            "B B,IGI,SID",
+            mapOf(
+                'B' to ing(Items.IRON_BARS),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'S' to ing(Tags.Items.STONES),
+                'D' to ing(ItemTags.DIRT)
+            )
+        ),
+        shapedRecipe(
+            ModItems.FLOO_POUCH,
+            " L ,LFL,LLL",
+            mapOf(
+                'L' to ing(Tags.Items.LEATHERS),
+                'F' to ing(ModItems.FLOO_POWDER)
+            )
+        ),
+        shapedRecipe(
+            ModItems.TIME_IN_A_BOTTLE,
+            "GGG,DCD,LBL",
+            mapOf(
+                'G' to ing(Tags.Items.INGOTS_GOLD),
+                'D' to ing(Tags.Items.GEMS_DIAMOND),
+                'C' to ing(Items.CLOCK),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'B' to ing(Items.GLASS_BOTTLE)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_ILLUMINATOR,
+            "EGE,GIG,EGE",
+            mapOf(
+                'E' to ing(ModItems.ECTOPLASM),
+                'G' to ing(Tags.Items.DUSTS_GLOWSTONE),
+                'I' to ing(ModItems.LUMINOUS_POWDER)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ECLIPSED_CLOCK,
+            "OGO,GTG,OGO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'G' to ing(Tags.Items.INGOTS_GOLD),
+                'T' to ing(ModItems.EVIL_TEAR)
             )
         )
     )
