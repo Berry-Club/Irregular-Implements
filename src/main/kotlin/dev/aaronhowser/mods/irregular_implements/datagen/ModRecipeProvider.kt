@@ -5,10 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.advancements.Criterion
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
-import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.RecipeOutput
-import net.minecraft.data.recipes.RecipeProvider
-import net.minecraft.data.recipes.ShapedRecipeBuilder
+import net.minecraft.data.recipes.*
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
@@ -26,6 +23,10 @@ class ModRecipeProvider(
         for (shapedRecipe in shapedRecipes) {
             shapedRecipe.save(recipeOutput)
         }
+
+        for (shapelessRecipe in shapelessRecipes) {
+            shapelessRecipe.save(recipeOutput)
+        }
     }
 
     //TODO:
@@ -40,7 +41,7 @@ class ModRecipeProvider(
         data class ItemLikeIng(val item: ItemLike) : IngredientType()
     }
 
-    private fun <T : IngredientType> makeShapedRecipe(
+    private fun <T : IngredientType> shapedRecipe(
         output: ItemLike,
         count: Int,
         patterns: String,
@@ -65,18 +66,18 @@ class ModRecipeProvider(
         return temp.unlockedBy(unlockedByName, unlockedByCriterion)
     }
 
-    private fun <T : IngredientType> makeShapedRecipe(
+    private fun <T : IngredientType> shapedRecipe(
         output: ItemLike,
         patterns: String,
         definitions: Map<Char, T>,
         unlockedByName: String = "has_log",
         unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
     ): ShapedRecipeBuilder {
-        return makeShapedRecipe(output, 1, patterns, definitions, unlockedByName, unlockedByCriterion)
+        return shapedRecipe(output, 1, patterns, definitions, unlockedByName, unlockedByCriterion)
     }
 
     private val shapedRecipes: List<ShapedRecipeBuilder> = listOf(
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.FERTILIZED_DIRT,
             2,
             "FBF,BDB,FBF",
@@ -86,7 +87,7 @@ class ModRecipeProvider(
                 'D' to IngredientType.ItemLikeIng(Items.DIRT)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.PLAYER_INTERFACE,
             "OEO,OSO,OPO",
             mapOf(
@@ -96,7 +97,7 @@ class ModRecipeProvider(
                 'P' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.LAPIS_GLASS,
             "GGG,GLG,GGG",
             mapOf(
@@ -104,7 +105,7 @@ class ModRecipeProvider(
                 'L' to IngredientType.TagKeyIng(Tags.Items.STORAGE_BLOCKS_LAPIS)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.LAPIS_LAMP,
             " L ,LRL, L ",
             mapOf(
@@ -112,7 +113,7 @@ class ModRecipeProvider(
                 'R' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.DYEING_MACHINE,
             " G ,RCB, W ",
             mapOf(
@@ -123,7 +124,7 @@ class ModRecipeProvider(
                 'W' to IngredientType.ItemLikeIng(Items.BLACK_WOOL)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.ONLINE_DETECTOR,
             "SRS,RLR,SRS",
             mapOf(
@@ -132,7 +133,7 @@ class ModRecipeProvider(
                 'L' to IngredientType.TagKeyIng(Tags.Items.GEMS_LAPIS)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.CHAT_DETECTOR,
             "SRS,RDR,SRS",
             mapOf(
@@ -141,7 +142,7 @@ class ModRecipeProvider(
                 'D' to IngredientType.TagKeyIng(Tags.Items.DYES_RED)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.ENDER_BRIDGE,
             "EEE,ERP,EEE",
             mapOf(
@@ -150,7 +151,7 @@ class ModRecipeProvider(
                 'P' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.PRISMARINE_ENDER_BRIDGE,
             "SCS,CEC,SCS",
             mapOf(
@@ -159,7 +160,7 @@ class ModRecipeProvider(
                 'E' to IngredientType.ItemLikeIng(ModBlocks.ENDER_BRIDGE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.ENDER_ANCHOR,
             "OOO,OEO,OOO",
             mapOf(
@@ -167,7 +168,7 @@ class ModRecipeProvider(
                 'E' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.LIGHT_REDIRECTOR,
             "PGP,G G,PGP",
             mapOf(
@@ -175,7 +176,7 @@ class ModRecipeProvider(
                 'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.IMBUING_STATION,
             " W ,VTV,LEL",
             mapOf(
@@ -186,7 +187,7 @@ class ModRecipeProvider(
                 'E' to IngredientType.TagKeyIng(Tags.Items.GEMS_EMERALD)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.ANALOG_EMITTER,
             "TIR,III,RIT",
             mapOf(
@@ -195,7 +196,7 @@ class ModRecipeProvider(
                 'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.FLUID_DISPLAY,
             "GGG,GBG,GGG",
             mapOf(
@@ -203,7 +204,7 @@ class ModRecipeProvider(
                 'B' to IngredientType.ItemLikeIng(Items.GLASS_BOTTLE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.ENDER_MAILBOX,
             "EHE,III, F ",
             mapOf(
@@ -213,7 +214,7 @@ class ModRecipeProvider(
                 'F' to IngredientType.TagKeyIng(Tags.Items.FENCES_WOODEN)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.ENTITY_DETECTOR,
             "STS,EPE,STS",
             mapOf(
@@ -223,7 +224,7 @@ class ModRecipeProvider(
                 'P' to IngredientType.ItemLikeIng(Items.STONE_PRESSURE_PLATE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.QUARTZ_LAMP,
             " Q ,QLQ, Q ",
             mapOf(
@@ -231,7 +232,7 @@ class ModRecipeProvider(
                 'L' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.QUARTZ_GLASS,
             "GGG,GQG,GGG",
             mapOf(
@@ -239,7 +240,7 @@ class ModRecipeProvider(
                 'Q' to IngredientType.ItemLikeIng(Items.QUARTZ_BLOCK)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.POTION_VAPORIZER,
             "STS,ICI,SFS",
             mapOf(
@@ -250,7 +251,7 @@ class ModRecipeProvider(
                 'F' to IngredientType.ItemLikeIng(Items.FURNACE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.VOXEL_PROJECTOR,
             "RGB,WLW,WWW",
             mapOf(
@@ -261,7 +262,7 @@ class ModRecipeProvider(
                 'L' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.CONTACT_BUTTON,
             "SIS,SBS,SSS",
             mapOf(
@@ -270,7 +271,7 @@ class ModRecipeProvider(
                 'B' to IngredientType.ItemLikeIng(Items.STONE_BUTTON)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.CONTACT_LEVER,
             "SIS,SLS,SSS",
             mapOf(
@@ -279,7 +280,7 @@ class ModRecipeProvider(
                 'L' to IngredientType.ItemLikeIng(Items.LEVER)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.RAIN_SHIELD,
             " F , B ,NNN",
             mapOf(
@@ -288,7 +289,7 @@ class ModRecipeProvider(
                 'N' to IngredientType.TagKeyIng(Tags.Items.NETHERRACKS)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.BLOCK_BREAKER,
             "CPC,CTC,CCC",
             mapOf(
@@ -297,7 +298,7 @@ class ModRecipeProvider(
                 'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.SUPER_LUBRICANT_ICE,
             "S,I,B",
             mapOf(
@@ -306,7 +307,7 @@ class ModRecipeProvider(
                 'B' to IngredientType.ItemLikeIng(Items.WATER_BUCKET)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.REDSTONE_OBSERVER,
             "RQR,QEQ,RQR",
             mapOf(
@@ -315,7 +316,7 @@ class ModRecipeProvider(
                 'E' to IngredientType.ItemLikeIng(Items.ENDER_EYE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.BIOME_RADAR,
             "III,GBG,III",
             mapOf(
@@ -324,7 +325,7 @@ class ModRecipeProvider(
                 'B' to IngredientType.ItemLikeIng(ModItems.BIOME_SENSOR)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.IRON_DROPPER,
             "III,I I,IDI",
             mapOf(
@@ -332,7 +333,7 @@ class ModRecipeProvider(
                 'D' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.BLOCK_OF_STICKS,
             16,
             "SSS,S S,SSS",
@@ -340,13 +341,95 @@ class ModRecipeProvider(
                 'S' to IngredientType.ItemLikeIng(Items.STICK)
             )
         ),
-        makeShapedRecipe(
+        shapedRecipe(
             ModBlocks.RETURNING_BLOCK_OF_STICKS,
             8,
             "SSS,SES,SSS",
             mapOf(
                 'S' to IngredientType.ItemLikeIng(ModBlocks.BLOCK_OF_STICKS),
                 'E' to IngredientType.ItemLikeIng(Items.ENDER_PEARL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.INVENTORY_REROUTER,
+            "SBS,BHB,SBS",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
+                'B' to IngredientType.ItemLikeIng(Items.IRON_BARS),
+                'H' to IngredientType.ItemLikeIng(Items.HOPPER)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SLIME_CUBE,
+            " S ,SWS, S ",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.SLIMEBALLS),
+                'W' to IngredientType.ItemLikeIng(Items.NETHER_STAR)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.NOTIFICATION_INTERFACE,
+            "SPS,PQP,SPS",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
+                'P' to IngredientType.ItemLikeIng(Items.PAPER),
+                'Q' to IngredientType.TagKeyIng(Tags.Items.GEMS_QUARTZ)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.INVENTORY_TESTER,
+            2,
+            " S ,SRS, C ",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
+                'R' to IngredientType.ItemLikeIng(Items.COMPARATOR),
+                'C' to IngredientType.TagKeyIng(Tags.Items.CHESTS_WOODEN)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SUPER_LUBRICANT_STONE,
+            8,
+            "SSS,SLS,SSS",
+            mapOf(
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
+                'L' to IngredientType.ItemLikeIng(ModItems.SUPER_LUBRICANT_TINCTURE)
+            )
+        )
+    )
+
+    private fun shapelessRecipe(
+        output: ItemLike,
+        count: Int,
+        requirements: List<IngredientType>,
+        unlockedByName: String = "has_log",
+        unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
+    ): ShapelessRecipeBuilder {
+        var temp = ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, count)
+
+        for (requirement in requirements) {
+            temp = when (requirement) {
+                is IngredientType.TagKeyIng -> temp.requires(requirement.tagKey)
+                is IngredientType.ItemLikeIng -> temp.requires(requirement.item)
+            }
+        }
+
+        return temp.unlockedBy(unlockedByName, unlockedByCriterion)
+    }
+
+    private fun shapelessRecipe(
+        output: ItemLike,
+        requirements: List<IngredientType>,
+        unlockedByName: String = "has_log",
+        unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
+    ) = shapelessRecipe(output, 1, requirements, unlockedByName, unlockedByCriterion)
+
+    private val shapelessRecipes = listOf(
+        shapelessRecipe(
+            ModItems.SUPER_LUBRICANT_TINCTURE,
+            listOf(
+                IngredientType.TagKeyIng(Tags.Items.SEEDS),
+                IngredientType.ItemLikeIng(Items.POTION),        //TODO: Water bottle
+                IngredientType.ItemLikeIng(ModItems.BEAN)
             )
         )
     )

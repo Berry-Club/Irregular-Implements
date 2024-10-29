@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "Q": {
+      "tag": "c:gems/quartz"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PQP",
+    "SPS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:notification_interface"
+  }
+}
