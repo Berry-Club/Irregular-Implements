@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
+import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import net.minecraft.core.component.DataComponentType
@@ -9,6 +10,7 @@ import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.world.entity.EntityType
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
+import java.util.*
 
 object ModDataComponents {
 
@@ -27,6 +29,20 @@ object ModDataComponents {
             it
                 .persistent(BuiltInRegistries.ENTITY_TYPE.byNameCodec())
                 .networkSynchronized(ByteBufCodecs.registry(Registries.ENTITY_TYPE))
+        }
+
+    val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("uuid") { builder ->
+            builder
+                .persistent(
+                    Codec.STRING.xmap(
+                        { java.util.UUID.fromString(it) },
+                        { it.toString() }
+                    ))
+                .networkSynchronized(ByteBufCodecs.STRING_UTF8.map(
+                    { java.util.UUID.fromString(it) },
+                    { it.toString() }
+                ))
         }
 
 }

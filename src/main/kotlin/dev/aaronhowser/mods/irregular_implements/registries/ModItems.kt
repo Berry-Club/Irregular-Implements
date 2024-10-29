@@ -1,8 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.FilterLocation
 import dev.aaronhowser.mods.irregular_implements.item.FilterEntity
+import dev.aaronhowser.mods.irregular_implements.item.FilterLocation
+import dev.aaronhowser.mods.irregular_implements.item.StableEnderPearl
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -13,7 +14,8 @@ object ModItems {
         DeferredRegister.createItems(IrregularImplements.ID)
 
     val ANALOG_EMITTER = basic("analog_emitter")
-    val STABLE_ENDER_PEARL = basic("stable_ender_pearl")
+    val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearl> =
+        register("stable_ender_pearl") { StableEnderPearl() }
     val BIOME_CRYSTAL = basic("biome_crystal")
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
     val BEAN = basic("bean")
