@@ -339,15 +339,16 @@ class ModLanguageProvider(
         addInfo(ModItems.ITEM_FILTER, "Allows you to filter Item Stacks. Do so in its GUI.")
         addInfo(ModItems.REDSTONE_ACTIVATOR, "Using it on a block will give it a temporary Redstone signal.\n\nUse it on the air to change the duration.")
         addInfo(ModItems.REDSTONE_REMOTE, "Allows you to temporarily power one of nine blocks from a distance.\n\nSneak right-click it to open its GUI, where you can place up to 9 Position Filters. Under each you can set an item to represent that position.\n\nRight-click normally to see all the positions it can power.")
-
-
-
-
-
-
-
-
-
+        addInfo(ModItems.BLAZE_AND_STEEL, "Lights a much more aggressive Fire.")
+        addInfo(ModItems.RUNE_PATTERN, "Allows you to quickly recreate Runic Dust patterns.\n\nUse it on a placed Runic Dust pattern to save it, then use it on another block to place a copy of it.")
+        addInfo(ModItems.SUPER_LUBRICANT_BOOTS, "Removes your friction when worn.")
+        addInfo(ModItems.FLOO_SIGN, "?????????????????????")
+        addInfo(ModItems.ID_CARD, "Acts like an Entity Filter, but specifically for the player set.\n\nSet by using it in your hand.")
+        addInfo(ModItems.EMERALD_COMPASS, "When combined with an ID Card, points to the player.")
+        addInfo(ModItems.SOUND_PATTERN, "Represents a sound.\n\nSet with a Sound Recorder.")
+        addInfo(ModItems.SOUND_RECORDER, "Lets you save a sound to a stored Sound Pattern.\n\nUse it to toggle recording; it will stop automatically once it reaches 10 unique sounds.\n\nSneak right-click again to choose which sound to save to the Pattern.")
+        addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
+        //TODO: The others
 
 
     }
