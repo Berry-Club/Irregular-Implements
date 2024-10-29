@@ -35,6 +35,8 @@ class ModRecipeProvider(
     // Platforms
     // Luminous Blocks
     // Translucent Luminous Blocks
+    // Stained Bricks
+    // Luminous Stained Bricks
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -612,6 +614,137 @@ class ModRecipeProvider(
             mapOf(
                 'G' to ing(Tags.Items.GLASS_BLOCKS),
                 'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.RAINBOW_LAMP,
+            " G ,RLB",
+            mapOf(
+                'G' to ing(Tags.Items.DYES_GREEN),
+                'R' to ing(Tags.Items.DYES_RED),
+                'L' to ing(Items.REDSTONE_LAMP),
+                'B' to ing(Tags.Items.DYES_BLUE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BASIC_REDSTONE_INTERFACE,
+            "IRI,RPR,IRI",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'P' to ing(ModItems.STABLE_ENDER_PEARL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.ADVANCED_REDSTONE_INTERFACE,
+            "ROR,OIO,ROR",
+            mapOf(
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'I' to ing(ModBlocks.BASIC_REDSTONE_INTERFACE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.REDIRECTOR_PLATE,
+            2,
+            "BGB,G G,BGB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'G' to ing(Tags.Items.DYES_GREEN)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.FILTERED_REDIRECTOR_PLATE,
+            2,
+            "BGB,Y L,BGB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'G' to ing(Tags.Items.DYES_GREEN),
+                'Y' to ing(Tags.Items.DYES_YELLOW),
+                'L' to ing(Tags.Items.DYES_BLUE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.REDSTONE_PLATE,
+            2,
+            "BGB,R R,BGB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'G' to ing(Tags.Items.DYES_GREEN),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.CORRECTOR_PLATE,
+            2,
+            "BIB,I I,BIB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'I' to ing(Items.IRON_BARS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.ITEM_SEALER_PLATE,
+            2,
+            "BLB,L L,BLB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'L' to ing(Tags.Items.GEMS_LAPIS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.ITEM_REJUVINATOR_PLATE,
+            2,
+            "BMB,M M,BMB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'M' to ing(Tags.Items.DYES_MAGENTA)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.ACCELERATOR_PLATE,
+            2,
+            "BRB,R R,BRB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'R' to ing(Tags.Items.DYES_RED)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE,
+            2,
+            "BRB,   ,BRB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'R' to ing(Tags.Items.DYES_RED)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BOUNCY_PLATE,
+            2,
+            "B B, S ,B B",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'S' to ing(Tags.Items.SLIMEBALLS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.COLLECTION_PLATE,
+            2,
+            "B B, H ,B B",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'H' to ing(Items.HOPPER)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.EXTRACTION_PLATE,
+            2,
+            "BIB,IHI,BIB",
+            mapOf(
+                'B' to ing(ModItems.PLATE_BASE),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'H' to ing(Items.HOPPER)
             )
         )
     )

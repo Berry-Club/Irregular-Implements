@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "irregular_implements:plate_base"
+    },
+    "M": {
+      "tag": "c:dyes/magenta"
+    }
+  },
+  "pattern": [
+    "BMB",
+    "M M",
+    "BMB"
+  ],
+  "result": {
+    "count": 2,
+    "id": "irregular_implements:item_rejuvinator_plate"
+  }
+}

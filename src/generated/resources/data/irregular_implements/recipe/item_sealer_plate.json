@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "irregular_implements:plate_base"
+    },
+    "L": {
+      "tag": "c:gems/lapis"
+    }
+  },
+  "pattern": [
+    "BLB",
+    "L L",
+    "BLB"
+  ],
+  "result": {
+    "count": 2,
+    "id": "irregular_implements:item_sealer_plate"
+  }
+}

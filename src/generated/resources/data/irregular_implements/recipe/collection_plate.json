@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "irregular_implements:plate_base"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    }
+  },
+  "pattern": [
+    "B B",
+    " H ",
+    "B B"
+  ],
+  "result": {
+    "count": 2,
+    "id": "irregular_implements:collection_plate"
+  }
+}
