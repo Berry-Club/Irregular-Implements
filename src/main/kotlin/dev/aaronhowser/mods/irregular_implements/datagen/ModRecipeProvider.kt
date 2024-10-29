@@ -394,6 +394,150 @@ class ModRecipeProvider(
                 'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
                 'L' to IngredientType.ItemLikeIng(ModItems.SUPER_LUBRICANT_TINCTURE)
             )
+        ),
+        shapedRecipe(
+            ModBlocks.GLOBAL_CHAT_DETECTOR,
+            " T ,RCR, R ",
+            mapOf(
+                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH),
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
+                'C' to IngredientType.ItemLikeIng(ModBlocks.CHAT_DETECTOR)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.TRIGGER_GLASS,
+            4,
+            " L ,GRG, L ",
+            mapOf(
+                'L' to IngredientType.ItemLikeIng(ModBlocks.LAPIS_GLASS),
+                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BLOCK_DESTABILIZER,
+            "ORO,SDS,ORO",
+            mapOf(
+                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
+                'S' to IngredientType.TagKeyIng(Tags.Items.SANDS),
+                'D' to IngredientType.TagKeyIng(Tags.Items.GEMS_DIAMOND)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SOUND_BOX,
+            "PPP,PLP,PPP",
+            mapOf(
+                'P' to IngredientType.TagKeyIng(ItemTags.PLANKS),
+                'L' to IngredientType.TagKeyIng(Tags.Items.GEMS_LAPIS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SOUND_DAMPENER,
+            "PWP,WSW,PWP",
+            mapOf(
+                'P' to IngredientType.TagKeyIng(ItemTags.PLANKS),
+                'W' to IngredientType.TagKeyIng(ItemTags.WOOL),
+                'S' to IngredientType.ItemLikeIng(ModItems.PORTABLE_SOUND_DAMPENER)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.DIAPHANOUS_BLOCK,
+            4,
+            " G ,RBL, Y ",
+            mapOf(
+                'G' to IngredientType.ItemLikeIng(Items.GREEN_STAINED_GLASS),
+                'R' to IngredientType.ItemLikeIng(Items.RED_STAINED_GLASS),
+                'L' to IngredientType.ItemLikeIng(Items.BLUE_STAINED_GLASS),
+                'B' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS_COLORLESS),
+                'Y' to IngredientType.ItemLikeIng(Items.YELLOW_STAINED_GLASS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SIDED_BLOCK_OF_REDSTONE,
+            "GGR,GGR,GGR",
+            mapOf(
+                'G' to IngredientType.TagKeyIng(Tags.Items.GUNPOWDERS),
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SPECTRE_LENS,
+            "SES,DGD,SES",
+            mapOf(
+                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_INGOT),
+                'E' to IngredientType.TagKeyIng(Tags.Items.GEMS_EMERALD),
+                'D' to IngredientType.TagKeyIng(Tags.Items.GEMS_DIAMOND),
+                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SPECTRE_ENERGY_INJECTOR,
+            "OLO,SBS,OBO",
+            mapOf(
+                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
+                'L' to IngredientType.ItemLikeIng(ModBlocks.SPECTRE_LENS),
+                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
+                'B' to IngredientType.ItemLikeIng(Items.BEACON)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.PROCESSING_PLATE,
+            "B B,E C,B B",
+            mapOf(
+                'B' to IngredientType.ItemLikeIng(ModItems.PLATE_BASE),
+                'E' to IngredientType.ItemLikeIng(ModBlocks.EXTRACTION_PLATE),
+                'C' to IngredientType.ItemLikeIng(ModBlocks.COLLECTION_PLATE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SPECTRE_COIL,
+            "OSO,OIG,OSO",
+            mapOf(
+                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
+                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
+                'I' to IngredientType.ItemLikeIng(ModItems.SPECTRE_INGOT),
+                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SPECTRE_COIL_REDSTONE,
+            "BSR,SCS,RSB",
+            mapOf(
+                'B' to IngredientType.TagKeyIng(Tags.Items.STORAGE_BLOCKS_REDSTONE),
+                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
+                'C' to IngredientType.ItemLikeIng(ModBlocks.SPECTRE_COIL)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.SPECTRE_COIL_ENDER,
+            "PSE,SCS,ESP",
+            mapOf(
+                'P' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL),
+                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
+                'E' to IngredientType.TagKeyIng(Tags.Items.ENDER_PEARLS),
+                'C' to IngredientType.ItemLikeIng(ModBlocks.SPECTRE_COIL_REDSTONE)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ADVANCED_REDSTONE_REPEATER,
+            "TRT,ISI",
+            mapOf(
+                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH),
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
+                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
+                'S' to IngredientType.TagKeyIng(Tags.Items.STONES)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ADVANCED_REDSTONE_TORCH,
+            " R ,RIR, S ",
+            mapOf(
+                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
+                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
+                'S' to IngredientType.ItemLikeIng(Items.STICK)
+            )
         )
     )
 

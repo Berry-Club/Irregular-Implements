@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "S": {
+      "tag": "c:sands"
+    }
+  },
+  "pattern": [
+    "ORO",
+    "SDS",
+    "ORO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:block_destabilizer"
+  }
+}

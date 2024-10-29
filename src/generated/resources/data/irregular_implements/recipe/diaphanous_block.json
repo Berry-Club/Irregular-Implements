@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "G": {
+      "item": "minecraft:green_stained_glass"
+    },
+    "L": {
+      "item": "minecraft:blue_stained_glass"
+    },
+    "R": {
+      "item": "minecraft:red_stained_glass"
+    },
+    "Y": {
+      "item": "minecraft:yellow_stained_glass"
+    }
+  },
+  "pattern": [
+    " G ",
+    "RBL",
+    " Y "
+  ],
+  "result": {
+    "count": 4,
+    "id": "irregular_implements:diaphanous_block"
+  }
+}

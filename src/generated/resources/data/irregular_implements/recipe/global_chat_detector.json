@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "irregular_implements:chat_detector"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    " T ",
+    "RCR",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:global_chat_detector"
+  }
+}
