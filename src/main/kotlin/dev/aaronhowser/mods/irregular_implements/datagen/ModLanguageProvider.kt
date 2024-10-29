@@ -111,7 +111,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
         addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")
         addBlock(ModBlocks.LAPIS_LAMP, "Lapis Lamp")
-        addBlock(ModBlocks.DYING_MACHINE, "Dying Machine")
+        addBlock(ModBlocks.DYEING_MACHINE, "Dyeing Machine")
         addBlock(ModBlocks.ENDER_BRIDGE, "Ender Bridge")
         addBlock(ModBlocks.PRISMARINE_ENDER_BRIDGE, "Prismarine Ender Bridge")
         addBlock(ModBlocks.ENDER_ANCHOR, "Ender Anchor")

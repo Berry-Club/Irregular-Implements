@@ -13,7 +13,7 @@ object ModBlocks {
     val FERTILIZED_DIRT = basicBlock("fertilized_dirt")
     val LAPIS_GLASS = basicBlock("lapis_glass")
     val LAPIS_LAMP = basicBlock("lapis_lamp")
-    val DYING_MACHINE = basicBlock("dying_machine")
+    val DYEING_MACHINE = basicBlock("dyeing_machine")
     val ENDER_BRIDGE = basicBlock("ender_bridge")
     val PRISMARINE_ENDER_BRIDGE = basicBlock("prismarine_ender_bridge")
     val ENDER_ANCHOR = basicBlock("ender_anchor")
