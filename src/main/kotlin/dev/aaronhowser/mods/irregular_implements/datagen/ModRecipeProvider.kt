@@ -41,6 +41,9 @@ class ModRecipeProvider(
         data class ItemLikeIng(val item: ItemLike) : IngredientType()
     }
 
+    private fun ing(tagKey: TagKey<Item>) = IngredientType.TagKeyIng(tagKey)
+    private fun ing(item: ItemLike) = IngredientType.ItemLikeIng(item)
+
     private fun <T : IngredientType> shapedRecipe(
         output: ItemLike,
         count: Int,
@@ -82,255 +85,255 @@ class ModRecipeProvider(
             2,
             "FBF,BDB,FBF",
             mapOf(
-                'F' to IngredientType.ItemLikeIng(Items.ROTTEN_FLESH),
-                'B' to IngredientType.ItemLikeIng(Items.BONE_MEAL),
-                'D' to IngredientType.ItemLikeIng(Items.DIRT)
+                'F' to ing(Items.ROTTEN_FLESH),
+                'B' to ing(Items.BONE_MEAL),
+                'D' to ing(Items.DIRT)
             )
         ),
         shapedRecipe(
             ModBlocks.PLAYER_INTERFACE,
             "OEO,OSO,OPO",
             mapOf(
-                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
-                'E' to IngredientType.ItemLikeIng(Items.ENDER_CHEST),
-                'S' to IngredientType.ItemLikeIng(Items.NETHER_STAR),
-                'P' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL)
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'E' to ing(Items.ENDER_CHEST),
+                'S' to ing(Items.NETHER_STAR),
+                'P' to ing(ModItems.STABLE_ENDER_PEARL)
             )
         ),
         shapedRecipe(
             ModBlocks.LAPIS_GLASS,
             "GGG,GLG,GGG",
             mapOf(
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
-                'L' to IngredientType.TagKeyIng(Tags.Items.STORAGE_BLOCKS_LAPIS)
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'L' to ing(Tags.Items.STORAGE_BLOCKS_LAPIS)
             )
         ),
         shapedRecipe(
             ModBlocks.LAPIS_LAMP,
             " L ,LRL, L ",
             mapOf(
-                'L' to IngredientType.TagKeyIng(Tags.Items.GEMS_LAPIS),
-                'R' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'R' to ing(Items.REDSTONE_LAMP)
             )
         ),
         shapedRecipe(
             ModBlocks.DYEING_MACHINE,
             " G ,RCB, W ",
             mapOf(
-                'G' to IngredientType.TagKeyIng(Tags.Items.DYES_RED),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DYES_RED),
-                'C' to IngredientType.ItemLikeIng(Items.CRAFTING_TABLE),
-                'B' to IngredientType.TagKeyIng(Tags.Items.DYES_BLUE),
-                'W' to IngredientType.ItemLikeIng(Items.BLACK_WOOL)
+                'G' to ing(Tags.Items.DYES_RED),
+                'R' to ing(Tags.Items.DYES_RED),
+                'C' to ing(Items.CRAFTING_TABLE),
+                'B' to ing(Tags.Items.DYES_BLUE),
+                'W' to ing(Items.BLACK_WOOL)
             )
         ),
         shapedRecipe(
             ModBlocks.ONLINE_DETECTOR,
             "SRS,RLR,SRS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'R' to IngredientType.ItemLikeIng(Items.REPEATER),
-                'L' to IngredientType.TagKeyIng(Tags.Items.GEMS_LAPIS)
+                'S' to ing(Tags.Items.STONES),
+                'R' to ing(Items.REPEATER),
+                'L' to ing(Tags.Items.GEMS_LAPIS)
             )
         ),
         shapedRecipe(
             ModBlocks.CHAT_DETECTOR,
             "SRS,RDR,SRS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'R' to IngredientType.ItemLikeIng(Items.REPEATER),
-                'D' to IngredientType.TagKeyIng(Tags.Items.DYES_RED)
+                'S' to ing(Tags.Items.STONES),
+                'R' to ing(Items.REPEATER),
+                'D' to ing(Tags.Items.DYES_RED)
             )
         ),
         shapedRecipe(
             ModBlocks.ENDER_BRIDGE,
             "EEE,ERP,EEE",
             mapOf(
-                'E' to IngredientType.TagKeyIng(Tags.Items.END_STONES),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'P' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL)
+                'E' to ing(Tags.Items.END_STONES),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'P' to ing(ModItems.STABLE_ENDER_PEARL)
             )
         ),
         shapedRecipe(
             ModBlocks.PRISMARINE_ENDER_BRIDGE,
             "SCS,CEC,SCS",
             mapOf(
-                'S' to IngredientType.ItemLikeIng(Items.PRISMARINE_SHARD),
-                'C' to IngredientType.ItemLikeIng(Items.PRISMARINE_CRYSTALS),
-                'E' to IngredientType.ItemLikeIng(ModBlocks.ENDER_BRIDGE)
+                'S' to ing(Items.PRISMARINE_SHARD),
+                'C' to ing(Items.PRISMARINE_CRYSTALS),
+                'E' to ing(ModBlocks.ENDER_BRIDGE)
             )
         ),
         shapedRecipe(
             ModBlocks.ENDER_ANCHOR,
             "OOO,OEO,OOO",
             mapOf(
-                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
-                'E' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL)
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'E' to ing(ModItems.STABLE_ENDER_PEARL)
             )
         ),
         shapedRecipe(
             ModBlocks.LIGHT_REDIRECTOR,
             "PGP,G G,PGP",
             mapOf(
-                'P' to IngredientType.TagKeyIng(ItemTags.PLANKS),
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS)
+                'P' to ing(ItemTags.PLANKS),
+                'G' to ing(Tags.Items.GLASS_BLOCKS)
             )
         ),
         shapedRecipe(
             ModBlocks.IMBUING_STATION,
             " W ,VTV,LEL",
             mapOf(
-                'W' to IngredientType.ItemLikeIng(Items.WATER_BUCKET),
-                'V' to IngredientType.ItemLikeIng(Items.VINE),
-                'T' to IngredientType.TagKeyIng(ItemTags.TERRACOTTA),
-                'L' to IngredientType.ItemLikeIng(Items.LILY_PAD),
-                'E' to IngredientType.TagKeyIng(Tags.Items.GEMS_EMERALD)
+                'W' to ing(Items.WATER_BUCKET),
+                'V' to ing(Items.VINE),
+                'T' to ing(ItemTags.TERRACOTTA),
+                'L' to ing(Items.LILY_PAD),
+                'E' to ing(Tags.Items.GEMS_EMERALD)
             )
         ),
         shapedRecipe(
             ModBlocks.ANALOG_EMITTER,
             "TIR,III,RIT",
             mapOf(
-                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH),
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+                'T' to ing(Items.REDSTONE_TORCH),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE)
             )
         ),
         shapedRecipe(
             ModBlocks.FLUID_DISPLAY,
             "GGG,GBG,GGG",
             mapOf(
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
-                'B' to IngredientType.ItemLikeIng(Items.GLASS_BOTTLE)
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'B' to ing(Items.GLASS_BOTTLE)
             )
         ),
         shapedRecipe(
             ModBlocks.ENDER_MAILBOX,
             "EHE,III, F ",
             mapOf(
-                'E' to IngredientType.TagKeyIng(Tags.Items.ENDER_PEARLS),
-                'H' to IngredientType.ItemLikeIng(Items.HOPPER),
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'F' to IngredientType.TagKeyIng(Tags.Items.FENCES_WOODEN)
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+                'H' to ing(Items.HOPPER),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'F' to ing(Tags.Items.FENCES_WOODEN)
             )
         ),
         shapedRecipe(
             ModBlocks.ENTITY_DETECTOR,
             "STS,EPE,STS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH),
-                'E' to IngredientType.TagKeyIng(Tags.Items.ENDER_PEARLS),
-                'P' to IngredientType.ItemLikeIng(Items.STONE_PRESSURE_PLATE)
+                'S' to ing(Tags.Items.STONES),
+                'T' to ing(Items.REDSTONE_TORCH),
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+                'P' to ing(Items.STONE_PRESSURE_PLATE)
             )
         ),
         shapedRecipe(
             ModBlocks.QUARTZ_LAMP,
             " Q ,QLQ, Q ",
             mapOf(
-                'Q' to IngredientType.TagKeyIng(Tags.Items.GEMS_QUARTZ),
-                'L' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
+                'Q' to ing(Tags.Items.GEMS_QUARTZ),
+                'L' to ing(Items.REDSTONE_LAMP)
             )
         ),
         shapedRecipe(
             ModBlocks.QUARTZ_GLASS,
             "GGG,GQG,GGG",
             mapOf(
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
-                'Q' to IngredientType.ItemLikeIng(Items.QUARTZ_BLOCK)
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'Q' to ing(Items.QUARTZ_BLOCK)
             )
         ),
         shapedRecipe(
             ModBlocks.POTION_VAPORIZER,
             "STS,ICI,SFS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.COBBLESTONES_NORMAL),
-                'T' to IngredientType.ItemLikeIng(Items.IRON_TRAPDOOR),
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'C' to IngredientType.ItemLikeIng(Items.CAULDRON),
-                'F' to IngredientType.ItemLikeIng(Items.FURNACE)
+                'S' to ing(Tags.Items.COBBLESTONES_NORMAL),
+                'T' to ing(Items.IRON_TRAPDOOR),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'C' to ing(Items.CAULDRON),
+                'F' to ing(Items.FURNACE)
             )
         ),
         shapedRecipe(
             ModBlocks.VOXEL_PROJECTOR,
             "RGB,WLW,WWW",
             mapOf(
-                'R' to IngredientType.ItemLikeIng(Items.RED_STAINED_GLASS),
-                'G' to IngredientType.ItemLikeIng(Items.GREEN_STAINED_GLASS),
-                'B' to IngredientType.ItemLikeIng(Items.BLUE_STAINED_GLASS),
-                'W' to IngredientType.ItemLikeIng(Items.BLACK_WOOL),
-                'L' to IngredientType.ItemLikeIng(Items.REDSTONE_LAMP)
+                'R' to ing(Items.RED_STAINED_GLASS),
+                'G' to ing(Items.GREEN_STAINED_GLASS),
+                'B' to ing(Items.BLUE_STAINED_GLASS),
+                'W' to ing(Items.BLACK_WOOL),
+                'L' to ing(Items.REDSTONE_LAMP)
             )
         ),
         shapedRecipe(
             ModBlocks.CONTACT_BUTTON,
             "SIS,SBS,SSS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'I' to IngredientType.ItemLikeIng(Items.IRON_BARS),
-                'B' to IngredientType.ItemLikeIng(Items.STONE_BUTTON)
+                'S' to ing(Tags.Items.STONES),
+                'I' to ing(Items.IRON_BARS),
+                'B' to ing(Items.STONE_BUTTON)
             )
         ),
         shapedRecipe(
             ModBlocks.CONTACT_LEVER,
             "SIS,SLS,SSS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'I' to IngredientType.ItemLikeIng(Items.IRON_BARS),
-                'L' to IngredientType.ItemLikeIng(Items.LEVER)
+                'S' to ing(Tags.Items.STONES),
+                'I' to ing(Items.IRON_BARS),
+                'L' to ing(Items.LEVER)
             )
         ),
         shapedRecipe(
             ModBlocks.RAIN_SHIELD,
             " F , B ,NNN",
             mapOf(
-                'F' to IngredientType.ItemLikeIng(Items.FLINT),
-                'B' to IngredientType.TagKeyIng(Tags.Items.RODS_BLAZE),
-                'N' to IngredientType.TagKeyIng(Tags.Items.NETHERRACKS)
+                'F' to ing(Items.FLINT),
+                'B' to ing(Tags.Items.RODS_BLAZE),
+                'N' to ing(Tags.Items.NETHERRACKS)
             )
         ),
         shapedRecipe(
             ModBlocks.BLOCK_BREAKER,
             "CPC,CTC,CCC",
             mapOf(
-                'C' to IngredientType.TagKeyIng(Tags.Items.COBBLESTONES_NORMAL),
-                'P' to IngredientType.ItemLikeIng(Items.IRON_PICKAXE),
-                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH)
+                'C' to ing(Tags.Items.COBBLESTONES_NORMAL),
+                'P' to ing(Items.IRON_PICKAXE),
+                'T' to ing(Items.REDSTONE_TORCH)
             )
         ),
         shapedRecipe(
             ModBlocks.SUPER_LUBRICANT_ICE,
             "S,I,B",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.SLIMEBALLS),
-                'I' to IngredientType.ItemLikeIng(Items.ICE),
-                'B' to IngredientType.ItemLikeIng(Items.WATER_BUCKET)
+                'S' to ing(Tags.Items.SLIMEBALLS),
+                'I' to ing(Items.ICE),
+                'B' to ing(Items.WATER_BUCKET)
             )
         ),
         shapedRecipe(
             ModBlocks.REDSTONE_OBSERVER,
             "RQR,QEQ,RQR",
             mapOf(
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'Q' to IngredientType.TagKeyIng(Tags.Items.GEMS_QUARTZ),
-                'E' to IngredientType.ItemLikeIng(Items.ENDER_EYE)
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'Q' to ing(Tags.Items.GEMS_QUARTZ),
+                'E' to ing(Items.ENDER_EYE)
             )
         ),
         shapedRecipe(
             ModBlocks.BIOME_RADAR,
             "III,GBG,III",
             mapOf(
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
-                'B' to IngredientType.ItemLikeIng(ModItems.BIOME_SENSOR)
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'B' to ing(ModItems.BIOME_SENSOR)
             )
         ),
         shapedRecipe(
             ModBlocks.IRON_DROPPER,
             "III,I I,IDI",
             mapOf(
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'D' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'D' to ing(Tags.Items.DUSTS_REDSTONE)
             )
         ),
         shapedRecipe(
@@ -338,7 +341,7 @@ class ModRecipeProvider(
             16,
             "SSS,S S,SSS",
             mapOf(
-                'S' to IngredientType.ItemLikeIng(Items.STICK)
+                'S' to ing(Items.STICK)
             )
         ),
         shapedRecipe(
@@ -346,34 +349,34 @@ class ModRecipeProvider(
             8,
             "SSS,SES,SSS",
             mapOf(
-                'S' to IngredientType.ItemLikeIng(ModBlocks.BLOCK_OF_STICKS),
-                'E' to IngredientType.ItemLikeIng(Items.ENDER_PEARL)
+                'S' to ing(ModBlocks.BLOCK_OF_STICKS),
+                'E' to ing(Items.ENDER_PEARL)
             )
         ),
         shapedRecipe(
             ModBlocks.INVENTORY_REROUTER,
             "SBS,BHB,SBS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'B' to IngredientType.ItemLikeIng(Items.IRON_BARS),
-                'H' to IngredientType.ItemLikeIng(Items.HOPPER)
+                'S' to ing(Tags.Items.STONES),
+                'B' to ing(Items.IRON_BARS),
+                'H' to ing(Items.HOPPER)
             )
         ),
         shapedRecipe(
             ModBlocks.SLIME_CUBE,
             " S ,SWS, S ",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.SLIMEBALLS),
-                'W' to IngredientType.ItemLikeIng(Items.NETHER_STAR)
+                'S' to ing(Tags.Items.SLIMEBALLS),
+                'W' to ing(Items.NETHER_STAR)
             )
         ),
         shapedRecipe(
             ModBlocks.NOTIFICATION_INTERFACE,
             "SPS,PQP,SPS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'P' to IngredientType.ItemLikeIng(Items.PAPER),
-                'Q' to IngredientType.TagKeyIng(Tags.Items.GEMS_QUARTZ)
+                'S' to ing(Tags.Items.STONES),
+                'P' to ing(Items.PAPER),
+                'Q' to ing(Tags.Items.GEMS_QUARTZ)
             )
         ),
         shapedRecipe(
@@ -381,9 +384,9 @@ class ModRecipeProvider(
             2,
             " S ,SRS, C ",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'R' to IngredientType.ItemLikeIng(Items.COMPARATOR),
-                'C' to IngredientType.TagKeyIng(Tags.Items.CHESTS_WOODEN)
+                'S' to ing(Tags.Items.STONES),
+                'R' to ing(Items.COMPARATOR),
+                'C' to ing(Tags.Items.CHESTS_WOODEN)
             )
         ),
         shapedRecipe(
@@ -391,17 +394,17 @@ class ModRecipeProvider(
             8,
             "SSS,SLS,SSS",
             mapOf(
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES),
-                'L' to IngredientType.ItemLikeIng(ModItems.SUPER_LUBRICANT_TINCTURE)
+                'S' to ing(Tags.Items.STONES),
+                'L' to ing(ModItems.SUPER_LUBRICANT_TINCTURE)
             )
         ),
         shapedRecipe(
             ModBlocks.GLOBAL_CHAT_DETECTOR,
             " T ,RCR, R ",
             mapOf(
-                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'C' to IngredientType.ItemLikeIng(ModBlocks.CHAT_DETECTOR)
+                'T' to ing(Items.REDSTONE_TORCH),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'C' to ing(ModBlocks.CHAT_DETECTOR)
             )
         ),
         shapedRecipe(
@@ -409,36 +412,36 @@ class ModRecipeProvider(
             4,
             " L ,GRG, L ",
             mapOf(
-                'L' to IngredientType.ItemLikeIng(ModBlocks.LAPIS_GLASS),
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+                'L' to ing(ModBlocks.LAPIS_GLASS),
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE)
             )
         ),
         shapedRecipe(
             ModBlocks.BLOCK_DESTABILIZER,
             "ORO,SDS,ORO",
             mapOf(
-                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'S' to IngredientType.TagKeyIng(Tags.Items.SANDS),
-                'D' to IngredientType.TagKeyIng(Tags.Items.GEMS_DIAMOND)
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'S' to ing(Tags.Items.SANDS),
+                'D' to ing(Tags.Items.GEMS_DIAMOND)
             )
         ),
         shapedRecipe(
             ModBlocks.SOUND_BOX,
             "PPP,PLP,PPP",
             mapOf(
-                'P' to IngredientType.TagKeyIng(ItemTags.PLANKS),
-                'L' to IngredientType.TagKeyIng(Tags.Items.GEMS_LAPIS)
+                'P' to ing(ItemTags.PLANKS),
+                'L' to ing(Tags.Items.GEMS_LAPIS)
             )
         ),
         shapedRecipe(
             ModBlocks.SOUND_DAMPENER,
             "PWP,WSW,PWP",
             mapOf(
-                'P' to IngredientType.TagKeyIng(ItemTags.PLANKS),
-                'W' to IngredientType.TagKeyIng(ItemTags.WOOL),
-                'S' to IngredientType.ItemLikeIng(ModItems.PORTABLE_SOUND_DAMPENER)
+                'P' to ing(ItemTags.PLANKS),
+                'W' to ing(ItemTags.WOOL),
+                'S' to ing(ModItems.PORTABLE_SOUND_DAMPENER)
             )
         ),
         shapedRecipe(
@@ -446,97 +449,97 @@ class ModRecipeProvider(
             4,
             " G ,RBL, Y ",
             mapOf(
-                'G' to IngredientType.ItemLikeIng(Items.GREEN_STAINED_GLASS),
-                'R' to IngredientType.ItemLikeIng(Items.RED_STAINED_GLASS),
-                'L' to IngredientType.ItemLikeIng(Items.BLUE_STAINED_GLASS),
-                'B' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS_COLORLESS),
-                'Y' to IngredientType.ItemLikeIng(Items.YELLOW_STAINED_GLASS)
+                'G' to ing(Items.GREEN_STAINED_GLASS),
+                'R' to ing(Items.RED_STAINED_GLASS),
+                'L' to ing(Items.BLUE_STAINED_GLASS),
+                'B' to ing(Tags.Items.GLASS_BLOCKS_COLORLESS),
+                'Y' to ing(Items.YELLOW_STAINED_GLASS)
             )
         ),
         shapedRecipe(
             ModBlocks.SIDED_BLOCK_OF_REDSTONE,
             "GGR,GGR,GGR",
             mapOf(
-                'G' to IngredientType.TagKeyIng(Tags.Items.GUNPOWDERS),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE)
+                'G' to ing(Tags.Items.GUNPOWDERS),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE)
             )
         ),
         shapedRecipe(
             ModBlocks.SPECTRE_LENS,
             "SES,DGD,SES",
             mapOf(
-                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_INGOT),
-                'E' to IngredientType.TagKeyIng(Tags.Items.GEMS_EMERALD),
-                'D' to IngredientType.TagKeyIng(Tags.Items.GEMS_DIAMOND),
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS)
+                'S' to ing(ModItems.SPECTRE_INGOT),
+                'E' to ing(Tags.Items.GEMS_EMERALD),
+                'D' to ing(Tags.Items.GEMS_DIAMOND),
+                'G' to ing(Tags.Items.GLASS_BLOCKS)
             )
         ),
         shapedRecipe(
             ModBlocks.SPECTRE_ENERGY_INJECTOR,
             "OLO,SBS,OBO",
             mapOf(
-                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
-                'L' to IngredientType.ItemLikeIng(ModBlocks.SPECTRE_LENS),
-                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
-                'B' to IngredientType.ItemLikeIng(Items.BEACON)
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'L' to ing(ModBlocks.SPECTRE_LENS),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'B' to ing(Items.BEACON)
             )
         ),
         shapedRecipe(
             ModBlocks.PROCESSING_PLATE,
             "B B,E C,B B",
             mapOf(
-                'B' to IngredientType.ItemLikeIng(ModItems.PLATE_BASE),
-                'E' to IngredientType.ItemLikeIng(ModBlocks.EXTRACTION_PLATE),
-                'C' to IngredientType.ItemLikeIng(ModBlocks.COLLECTION_PLATE)
+                'B' to ing(ModItems.PLATE_BASE),
+                'E' to ing(ModBlocks.EXTRACTION_PLATE),
+                'C' to ing(ModBlocks.COLLECTION_PLATE)
             )
         ),
         shapedRecipe(
             ModBlocks.SPECTRE_COIL,
             "OSO,OIG,OSO",
             mapOf(
-                'O' to IngredientType.TagKeyIng(Tags.Items.OBSIDIANS),
-                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
-                'I' to IngredientType.ItemLikeIng(ModItems.SPECTRE_INGOT),
-                'G' to IngredientType.TagKeyIng(Tags.Items.GLASS_BLOCKS)
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'I' to ing(ModItems.SPECTRE_INGOT),
+                'G' to ing(Tags.Items.GLASS_BLOCKS)
             )
         ),
         shapedRecipe(
             ModBlocks.SPECTRE_COIL_REDSTONE,
             "BSR,SCS,RSB",
             mapOf(
-                'B' to IngredientType.TagKeyIng(Tags.Items.STORAGE_BLOCKS_REDSTONE),
-                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'C' to IngredientType.ItemLikeIng(ModBlocks.SPECTRE_COIL)
+                'B' to ing(Tags.Items.STORAGE_BLOCKS_REDSTONE),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'C' to ing(ModBlocks.SPECTRE_COIL)
             )
         ),
         shapedRecipe(
             ModBlocks.SPECTRE_COIL_ENDER,
             "PSE,SCS,ESP",
             mapOf(
-                'P' to IngredientType.ItemLikeIng(ModItems.STABLE_ENDER_PEARL),
-                'S' to IngredientType.ItemLikeIng(ModItems.SPECTRE_STRING),
-                'E' to IngredientType.TagKeyIng(Tags.Items.ENDER_PEARLS),
-                'C' to IngredientType.ItemLikeIng(ModBlocks.SPECTRE_COIL_REDSTONE)
+                'P' to ing(ModItems.STABLE_ENDER_PEARL),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+                'C' to ing(ModBlocks.SPECTRE_COIL_REDSTONE)
             )
         ),
         shapedRecipe(
             ModItems.ADVANCED_REDSTONE_REPEATER,
             "TRT,ISI",
             mapOf(
-                'T' to IngredientType.ItemLikeIng(Items.REDSTONE_TORCH),
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'S' to IngredientType.TagKeyIng(Tags.Items.STONES)
+                'T' to ing(Items.REDSTONE_TORCH),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'S' to ing(Tags.Items.STONES)
             )
         ),
         shapedRecipe(
             ModItems.ADVANCED_REDSTONE_TORCH,
             " R ,RIR, S ",
             mapOf(
-                'R' to IngredientType.TagKeyIng(Tags.Items.DUSTS_REDSTONE),
-                'I' to IngredientType.TagKeyIng(Tags.Items.INGOTS_IRON),
-                'S' to IngredientType.ItemLikeIng(Items.STICK)
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'S' to ing(Items.STICK)
             )
         )
     )
@@ -571,9 +574,9 @@ class ModRecipeProvider(
         shapelessRecipe(
             ModItems.SUPER_LUBRICANT_TINCTURE,
             listOf(
-                IngredientType.TagKeyIng(Tags.Items.SEEDS),
-                IngredientType.ItemLikeIng(Items.POTION),        //TODO: Water bottle
-                IngredientType.ItemLikeIng(ModItems.BEAN)
+                ing(Tags.Items.SEEDS),
+                ing(Items.POTION),        //TODO: Water bottle
+                ing(ModItems.BEAN)
             )
         )
     )
