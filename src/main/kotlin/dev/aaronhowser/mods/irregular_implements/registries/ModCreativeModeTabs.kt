@@ -19,7 +19,7 @@ object ModCreativeModeTabs {
     val MOD_TAB: DeferredHolder<CreativeModeTab, CreativeModeTab> = TABS_REGISTRY.register("creative_tab", Supplier {
         CreativeModeTab.builder()
             .title(ModLanguageProvider.Items.CREATIVE_TAB.toComponent())
-            .icon { (ModItems.ITEM_REGISTRY.entries.filter { it.get() !is BlockItem }.random() as DeferredItem).toStack() }
+            .icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
             .displayItems { _: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
                 val regularItems =
                     ModItems.ITEM_REGISTRY.entries
