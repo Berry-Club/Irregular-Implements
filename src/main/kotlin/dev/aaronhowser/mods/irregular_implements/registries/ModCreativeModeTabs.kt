@@ -25,11 +25,6 @@ object ModCreativeModeTabs {
 
                 val itemsToDisplay = buildList {
                     addAll(regularItems.map { (it as DeferredItem).toStack() })
-
-//                    add(EntityDnaItem.getOrganicStack(EntityType.PIG))
-//                    add(EntityDnaItem.getCell(EntityType.PIG))
-//                    addAll(DnaHelixItem.getAllHelices(displayContext.holders))
-//                    addAll(PlasmidItem.getAllPlasmids(displayContext.holders))
                 }
 
                 output.acceptAll(itemsToDisplay)

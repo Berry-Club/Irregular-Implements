@@ -38,7 +38,7 @@ class ModLanguageProvider(
     }
 
     object Info {
-
+        const val BIOME_BLOCKS = "Changes color to match the biome."
     }
 
     override fun addTranslations() {
@@ -293,13 +293,26 @@ class ModLanguageProvider(
         addInfo(ModBlocks.SPECTRE_SAPLING, "Created by using Ectoplasm on a Sapling.\n\nGrows into a Spectre Tree, whose blocks have a chance of dropping Ectoplasm.")
         addInfo(ModBlocks.ITEM_COLLECTOR, "Collects items in a 3 block radius and inserts it into the inventory it's placed on.")
         addInfo(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Collects items in a configurable radius and inserts it into the inventory it's placed on.\n\nYou can also insert an Item Filter for more control.")
-
-
-
-
-
-
-
+        addInfo(ModBlocks.BIOME_GLASS, Info.BIOME_BLOCKS)
+        addInfo(ModBlocks.BIOME_STONE_BRICKS, Info.BIOME_BLOCKS)
+        addInfo(ModBlocks.BIOME_STONE_BRICKS_CHISELED, Info.BIOME_BLOCKS)
+        addInfo(ModBlocks.BIOME_STONE_BRICKS_CRACKED, Info.BIOME_BLOCKS)
+        addInfo(ModBlocks.BIOME_STONE, Info.BIOME_BLOCKS)
+        addInfo(ModBlocks.BIOME_COBBLESTONE, Info.BIOME_BLOCKS)
+        addInfo(ModBlocks.RAINBOW_LAMP, "Changes color depending on the Redstone signal strength.\n\nOnly the texture changes, the light stays the same color.")
+        addInfo(ModBlocks.BASIC_REDSTONE_INTERFACE, "Powers the linked block with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to a block.")
+        addInfo(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Powers up to 9 linked blocks with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to blocks.")
+        addInfo(ModBlocks.REDIRECTOR_PLATE, "Has two \"enabled\" sides. Entities that enter from one side are sent to the other side.")
+        addInfo(ModBlocks.FILTERED_REDIRECTOR_PLATE, "Has two \"input\" sides, and two color-coded \"output\" sides.\n\nBoth output sides have a slot for an Entity Filter, and any entity that enters from the input sides are teleported to the output with a matching Filter.")
+        addInfo(ModBlocks.REDSTONE_PLATE, "Has an \"input\" side, a \"default\" side, and a \"powered\" side.\n\nEntities that entier from the input side are teleported to the default side if the Plate is unpowered, or the powered side if it is.")
+        addInfo(ModBlocks.CORRECTOR_PLATE, "Entities moving on the Plate are centered along the axis they're moving.\n\nFor example, if they're moving South, they're teleported to the middle of the North-South axis of the block.")
+        addInfo(ModBlocks.ITEM_SEALER_PLATE, "Dropped item entities that pass over this Plate have their pickup delay set to 30 seconds.")
+        addInfo(ModBlocks.ITEM_REJUVINATOR_PLATE, "Dropped item entities that pass over this Plate have their despawn timer set to 4 minutes.")
+        addInfo(ModBlocks.ACCELERATOR_PLATE, "Entities moving on this Plate are sped up slightly, to a limit.")
+        addInfo(ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE, "Entities moving on this Plate are sped up slightly, to a limit, in the direction the Plate is facing.")
+        addInfo(ModBlocks.BOUNCY_PLATE, "Entities on this Plate are propelled upwards.")
+        addInfo(ModBlocks.COLLECTION_PLATE, "Dropped item entities that pass over this Plate attempt to insert into adjacent inventories.")
+        addInfo(ModBlocks.EXTRACTION_PLATE, "Has an \"input\" side and an \"output\" side. Extracts stacks from the input side, and drops or inserts them on the output side, depending on if there's an inventory there.\n\nRight-click with an empty hand to change the output side, and do so while sneaking to change the input side.")
 
 
 
