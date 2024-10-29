@@ -3,9 +3,11 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
+import net.minecraft.world.level.ItemLike
 import net.neoforged.neoforge.common.data.LanguageProvider
 
 class ModLanguageProvider(
@@ -14,10 +16,29 @@ class ModLanguageProvider(
 
     companion object {
         fun String.toComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args)
+
+        fun getInfoString(itemLike: ItemLike): String {
+            val location = BuiltInRegistries.ITEM.getKey(itemLike.asItem())
+
+            return StringBuilder()
+                .append("info.")
+                .append(location.namespace)
+                .append(".")
+                .append(location.path)
+                .toString()
+        }
     }
 
     object Items {
         const val CREATIVE_TAB = "itemGroup.irregular_implements"
+    }
+
+    fun addInfo(itemLike: ItemLike, infoString: String) {
+        add(getInfoString(itemLike), infoString)
+    }
+
+    object Info {
+
     }
 
     override fun addTranslations() {
@@ -173,7 +194,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.ENTITY_DETECTOR, "Entity Detector")
 
         addBlock(ModBlocks.PLAYER_INTERFACE, "Player Interface")
-        addBlock(ModBlocks.CREATIVE_PLAYER_INTERFACE, "Creative Player Interface")
+//        addBlock(ModBlocks.CREATIVE_PLAYER_INTERFACE, "Creative Player Interface")
         addBlock(ModBlocks.NOTIFICATION_INTERFACE, "Notification Interface")
         addBlock(ModBlocks.BASIC_REDSTONE_INTERFACE, "Basic Redstone Interface")
         addBlock(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Advanced Redstone Interface")
@@ -214,6 +235,15 @@ class ModLanguageProvider(
         addBlock(ModBlocks.FLOO_BRICK, "Floo Bricks")
         addBlock(ModBlocks.ANCIENT_BRICK, "Ancient Brick")
 
-
+        addInfo(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt does not require hydration, grows crops 3 times faster, and can't be trampled.\n\nYou still have to till it with a Hoe.")
+        addInfo(ModBlocks.PLAYER_INTERFACE, "Exposes the inventory of the block's owner, as if it was the block's inventory.")
+        addInfo(ModBlocks.LAPIS_GLASS, "Solid for players, not solid for anything else.")
+        addInfo(ModBlocks.LAPIS_LAMP, "Provides false light, which changes visibility but does not affect mob spawning.")
+        addInfo(ModBlocks.DYEING_MACHINE, "Allows you to add a color filter to either an item's texture, or its enchantment glint.")
+        addInfo(ModBlocks.ONLINE_DETECTOR, "Emits a Redstone signal if the specified player is online.")
+        addInfo(ModBlocks.CHAT_DETECTOR, "Emits a Redstone pulse if the block's owner sends a chat message containing some specified text.")
+        addInfo(ModBlocks.ENDER_BRIDGE, "Upon the Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it.\n\nIt searches at 20 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
+        addInfo(ModBlocks.PRISMARINE_ENDER_BRIDGE, "Upon the Prismarine Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it (with no distance limit, though it must be loaded, and no other blocks can be in the way).\n\nIt searches at 200 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
+        addInfo(ModBlocks.ENDER_ANCHOR, "Works with the Ender Bridge or Prismarine Ender Bridge.")
     }
 }

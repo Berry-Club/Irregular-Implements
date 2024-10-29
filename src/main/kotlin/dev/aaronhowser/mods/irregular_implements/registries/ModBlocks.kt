@@ -78,7 +78,6 @@ object ModBlocks {
 
     // Interfaces
     val PLAYER_INTERFACE = basicBlock("player_interface")
-    val CREATIVE_PLAYER_INTERFACE = basicBlock("creative_player_interface")
     val NOTIFICATION_INTERFACE = basicBlock("notification_interface")
     val BASIC_REDSTONE_INTERFACE = basicBlock("basic_redstone_interface")
     val ADVANCED_REDSTONE_INTERFACE = basicBlock("advanced_redstone_interface")
