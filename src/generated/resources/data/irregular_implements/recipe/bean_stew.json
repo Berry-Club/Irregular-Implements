@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "irregular_implements:bean"
+    },
+    {
+      "item": "irregular_implements:bean"
+    },
+    {
+      "item": "irregular_implements:bean"
+    },
+    {
+      "tag": "c:crops/wheat"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:bean_stew"
+  }
+}

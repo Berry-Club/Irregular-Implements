@@ -37,6 +37,7 @@ class ModRecipeProvider(
     // Translucent Luminous Blocks
     // Stained Bricks
     // Luminous Stained Bricks
+    // Imbues
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -746,6 +747,103 @@ class ModRecipeProvider(
                 'I' to ing(Tags.Items.INGOTS_IRON),
                 'H' to ing(Items.HOPPER)
             )
+        ),
+        shapedRecipe(
+            ModItems.STABLE_ENDER_PEARL,
+            "OLO,LPL,OLO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'P' to ing(Tags.Items.ENDER_PEARLS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.POSITION_FILTER,
+            " M ,MPM, M ",
+            mapOf(
+                'M' to ing(Tags.Items.DYES_MAGENTA),
+                'P' to ing(Items.PAPER)
+            )
+        ),
+        shapedRecipe(
+            ModItems.LESSER_MAGIC_BEAN,
+            "NNN,NBN,NNN",
+            mapOf(
+                'N' to ing(Tags.Items.NUGGETS_GOLD),
+                'B' to ing(ModItems.BEAN)
+            )
+        ),
+        shapedRecipe(
+            ModItems.REDSTONE_TOOL,
+            "R,S,S",
+            mapOf(
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'S' to ing(Items.STICK)
+            )
+        ),
+        shapedRecipe(
+            ModItems.OBSIDIAN_SKULL,
+            "OBO,NWN,OBO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'B' to ing(Tags.Items.RODS_BLAZE),
+                'N' to ing(Tags.Items.NUGGETS_GOLD),
+                'W' to ing(Items.WITHER_SKELETON_SKULL)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ENDER_LETTER,
+            "PEP, P ",
+            mapOf(
+                'P' to ing(Items.PAPER),
+                'E' to ing(Tags.Items.ENDER_PEARLS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.ENTITY_FILTER,
+            " L ,LPL, L ",
+            mapOf(
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'P' to ing(Items.PAPER)
+            )
+        ),
+        shapedRecipe(
+            ModItems.EVIL_TEAR,
+            "S,T,P",
+            mapOf(
+                'S' to ing(Items.WITHER_SKELETON_SKULL),
+                'T' to ing(Items.GHAST_TEAR),
+                'P' to ing(Tags.Items.ENDER_PEARLS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_INGOT,
+            9,
+            "ELE,EGE,EEE",
+            mapOf(
+                'E' to ing(ModItems.ECTOPLASM),
+                'L' to ing(Tags.Items.STORAGE_BLOCKS_LAPIS),
+                'G' to ing(Tags.Items.STORAGE_BLOCKS_GOLD)
+            )
+        ),
+        //TODO
+//        shapedRecipe(
+//            ModItems.SPECTRE_INGOT,
+//            "L,G,E",
+//            mapOf(
+//                'L' to ing(Tags.Items.GEMS_LAPIS),
+//                'G' to ing(Tags.Items.INGOTS_GOLD),
+//                'E' to ing(ModItems.ECTOPLASM)
+//            )
+//        ),
+        shapedRecipe(
+            ModItems.BIOME_SENSOR,
+            "III,RBI,IRI",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'R' to ing(Tags.Items.DUSTS_REDSTONE),
+                'B' to ing(ModItems.BIOME_CRYSTAL)
+            )
         )
     )
 
@@ -788,6 +886,16 @@ class ModRecipeProvider(
             ModBlocks.SPECTRE_PLANKS,
             4,
             listOf(ing(ModBlocks.SPECTRE_WOOD))
+        ),
+        shapelessRecipe(
+            ModItems.BEAN_STEW,
+            listOf(
+                ing(ModItems.BEAN),
+                ing(ModItems.BEAN),
+                ing(ModItems.BEAN),
+                ing(Tags.Items.CROPS_WHEAT),
+                ing(Items.BOWL)
+            )
         )
     )
 

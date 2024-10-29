@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "R",
+    "S",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:redstone_tool"
+  }
+}

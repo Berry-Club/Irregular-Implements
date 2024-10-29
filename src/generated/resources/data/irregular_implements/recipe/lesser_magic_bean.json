@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "irregular_implements:bean"
+    },
+    "N": {
+      "tag": "c:nuggets/gold"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NBN",
+    "NNN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:lesser_magic_bean"
+  }
+}

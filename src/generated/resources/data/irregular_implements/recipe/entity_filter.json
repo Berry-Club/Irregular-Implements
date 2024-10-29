@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "c:gems/lapis"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    " L ",
+    "LPL",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:entity_filter"
+  }
+}
