@@ -45,7 +45,7 @@ class ModLanguageProvider(
         addItem(ModItems.BLOOD_STONE, "Blood Stone")
         addItem(ModItems.ENDER_LETTER, "Ender Letter")
         addItem(ModItems.ENTITY_FILTER, "Entity Filter")
-        addItem(ModItems.SAKANDE_SPORES, "Sakande Spores")
+        addItem(ModItems.SAKANADE_SPORES, "Sakande Spores")
         addItem(ModItems.EVIL_TEAR, "Evil Tear")
         addItem(ModItems.ECTOPLASM, "Ectoplasm")
         addItem(ModItems.BIOME_SENSOR, "Biome Sensor")

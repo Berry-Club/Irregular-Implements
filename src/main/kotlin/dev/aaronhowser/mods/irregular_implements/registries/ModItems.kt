@@ -31,7 +31,7 @@ object ModItems {
     val BLOOD_STONE = basic("blood_stone")
     val ENDER_LETTER = basic("ender_letter")
     val ENTITY_FILTER = basic("entity_filter")
-    val SAKANDE_SPORES = basic("sakande_spores")
+    val SAKANADE_SPORES = basic("sakanade_spores")
     val EVIL_TEAR = basic("evil_tear")
     val ECTOPLASM = basic("ectoplasm")
     val BIOME_SENSOR = basic("biome_sensor")

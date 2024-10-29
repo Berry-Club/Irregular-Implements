@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.PackOutput
@@ -24,6 +25,12 @@ object ModDataGen {
         val lookupProvider: CompletableFuture<HolderLookup.Provider> = event.lookupProvider
 
         val languageProvider = generator.addProvider(event.includeClient(), ModLanguageProvider(output))
+
+        val itemModelProvider = generator.addProvider(
+            event.includeClient(),
+            ModItemModelProvider(output, existingFileHelper)
+        )
+
     }
 
 }
