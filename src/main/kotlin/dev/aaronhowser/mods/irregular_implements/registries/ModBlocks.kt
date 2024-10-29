@@ -28,7 +28,7 @@ object ModBlocks {
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
     val WATER_CHEST = basicBlock("water_chest")
-    val ANALOG_EMITTER = basicBlock("analog_emitter")
+    val ANALOG_EMITTER = basicBlock("analog_emitter_block")
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val CUSTOM_WORKBENCH = basicBlock("custom_workbench")   // Same block for every variant
     val ENDER_MAILBOX = basicBlock("ender_mailbox")

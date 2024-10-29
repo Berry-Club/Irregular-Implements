@@ -7,7 +7,8 @@ object ModRegistries {
 
     private val registries: List<DeferredRegister<out Any>> = listOf(
         ModItems.ITEM_REGISTRY,
-        ModBlocks.BLOCK_REGISTRY
+        ModBlocks.BLOCK_REGISTRY,
+        ModCreativeModeTabs.TABS_REGISTRY
     )
 
     fun register(modBus: IEventBus) {
