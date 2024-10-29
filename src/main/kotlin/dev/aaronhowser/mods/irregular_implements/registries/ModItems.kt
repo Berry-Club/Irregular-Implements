@@ -42,7 +42,6 @@ object ModItems {
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
     val ITEM_FILTER = basic("item_filter")
-    val GOLDEN_COMPASS = basic("golden_compass")
     val EMERALD_COMPASS = basic("emerald_compass")
     val BLAZE_AND_STEEL = basic("blaze_and_steel")
     val RUNE_PATTERN = basic("rune_pattern")

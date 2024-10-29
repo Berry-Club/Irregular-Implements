@@ -17,7 +17,6 @@ class ModItemModelProvider(
         val complexModels = listOf(
             ModItems.ECLIPSED_CLOCK,
             ModItems.EMERALD_COMPASS,
-            ModItems.GOLDEN_COMPASS,
             ModItems.ENDER_BUCKET,
             ModItems.REINFORCED_ENDER_BUCKET,
             ModItems.FIRE_IMBUE,

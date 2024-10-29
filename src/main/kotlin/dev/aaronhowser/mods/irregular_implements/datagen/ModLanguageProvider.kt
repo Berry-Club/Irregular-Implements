@@ -77,7 +77,6 @@ class ModLanguageProvider(
         addItem(ModItems.GOLDEN_EGG, "Golden Egg")
         addItem(ModItems.BLACKOUT_POWDER, "Blackout Powder")
         addItem(ModItems.ITEM_FILTER, "Item Filter")
-        addItem(ModItems.GOLDEN_COMPASS, "Golden Compass")
         addItem(ModItems.EMERALD_COMPASS, "Emerald Compass")
         addItem(ModItems.BLAZE_AND_STEEL, "Blaze and Steel")
         addItem(ModItems.RUNE_PATTERN, "Rune Pattern")
@@ -313,6 +312,41 @@ class ModLanguageProvider(
         addInfo(ModBlocks.BOUNCY_PLATE, "Entities on this Plate are propelled upwards.")
         addInfo(ModBlocks.COLLECTION_PLATE, "Dropped item entities that pass over this Plate attempt to insert into adjacent inventories.")
         addInfo(ModBlocks.EXTRACTION_PLATE, "Has an \"input\" side and an \"output\" side. Extracts stacks from the input side, and drops or inserts them on the output side, depending on if there's an inventory there.\n\nRight-click with an empty hand to change the output side, and do so while sneaking to change the input side.")
+        addInfo(ModItems.STABLE_ENDER_PEARL, "Use to bind to yourself.\n\nSeven seconds after being dropped, it teleports the bound entity to it. If no entity is bound, it grabs a random entity within 10 blocks instead.")
+        addInfo(ModItems.BIOME_CRYSTAL, "Used in the Biome Radar.")
+        addInfo(ModItems.POSITION_FILTER, "An item representation of a position in the world.\n\nSet by either using it on a block, an entity, or empty space.")
+        addInfo(ModItems.LESSER_MAGIC_BEAN, "Can be planted on any block, and grows into a bean stalk.\n\nBean Stalk blocks can be climbed faster than Ladders.")
+        addInfo(ModItems.MAGIC_BEAN, "Can be planted on any block, and grows a bean stalk that reaches the sky.\n\nThe top of the bean stalk has treasures.")
+        addInfo(ModItems.REDSTONE_TOOL, "Used to bind the Redstone Observer or Redstone Interfaces to blocks.\n\nSneak right-click on the Observer/Interface, then click on the block to bind/unbind it.\n\nAlso shows the signal strength of the block you're looking at!")
+        addInfo(ModItems.WATER_WALKING_BOOTS, "Allows you to walk on water when not sneaking.")
+        addInfo(ModItems.LAVA_CHARM, "Adds a temporary lava shield, visible above your armor bar.")
+        addInfo(ModItems.OBSIDIAN_SKULL, "Has a chance of negating damage.\n\nOn success, it lowers durability. At lower durability, it has a lower chance.")
+        addInfo(ModItems.OBSIDIAN_SKULL_RING, "Works like the Obsidian Skull, but can be worn as a Curio.")
+        addInfo(ModItems.MAGIC_HOOD, "Disables your name plate and potion particles.")
+        addInfo(ModItems.FIRE_IMBUE, "Sets entities you hit with melee attacks on fire.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
+        addInfo(ModItems.POISON_IMBUE, "Inflicts Poison II on entities you hit with melee attacks.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
+        addInfo(ModItems.EXPERIENCE_IMBUE, "Increases experience dropped by entities by 50%%.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
+        addInfo(ModItems.WITHER_IMBUE, "Inflicts Wither II on entities you hit with melee attacks.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
+        addInfo(ModItems.BOTTLE_OF_AIR, "Refills your breath.")
+        addInfo(ModItems.ENDER_LETTER, "Can be used to send items and messages to other players.\n\nType the name of the player at the top, and insert up to 9 items.\n\nClick an Ender Mailbox, and it will be inserted into their Ender Mailbox if it has room.")
+        addInfo(ModItems.ENTITY_FILTER, "Allows you to filter by entity type. Do so by using it on an entity.")
+        addInfo(ModItems.SAKANADE_SPORES, "Found on the bottom of huge brown mushrooms.")
+        addInfo(ModItems.ECTOPLASM, "Dropped by Spirits, which have a small chance of spawning when any entity dies.\n\nMagic damage drops more.\n\nAlso drops from Spectre Trees.")
+        addInfo(ModItems.LUMINOUS_POWDER, "Can be crafted onto enchanted items to make their glints glow in the dark.")
+        addInfo(ModItems.LOTUS_BLOSSOM, "Grants experience when consumed.")
+        addInfo(ModItems.GOLDEN_EGG, "Spawns a Chicken that lays Gold Ingots rather than Eggs.")
+        addInfo(ModItems.BLACKOUT_POWDER, "Removes the Spectre Illuminator in the chunk it's used in.")
+        addInfo(ModItems.ITEM_FILTER, "Allows you to filter Item Stacks. Do so in its GUI.")
+        addInfo(ModItems.REDSTONE_ACTIVATOR, "Using it on a block will give it a temporary Redstone signal.\n\nUse it on the air to change the duration.")
+        addInfo(ModItems.REDSTONE_REMOTE, "Allows you to temporarily power one of nine blocks from a distance.\n\nSneak right-click it to open its GUI, where you can place up to 9 Position Filters. Under each you can set an item to represent that position.\n\nRight-click normally to see all the positions it can power.")
+
+
+
+
+
+
+
+
 
 
 

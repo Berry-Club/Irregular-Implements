@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-29T15:04:49.6136477	Recipes
+// 1.21.1	2024-10-29T16:26:33.0888857	Recipes
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
 5f970649e951f0706eb2264a0a8a95fe4cf53026 data/irregular_implements/advancement/recipes/misc/advanced_redstone_interface.json
@@ -50,7 +50,6 @@ d701beb71e0f7f2685b877420ea0d0a6d8e639ee data/irregular_implements/advancement/r
 b86d313877fee64d58e1bee21f1d5eb4cf8a77af data/irregular_implements/advancement/recipes/misc/floo_token.json
 261dfbf233cb962162ff26e11c35fe909b0b0aa9 data/irregular_implements/advancement/recipes/misc/fluid_display.json
 20f0b744de9fffd70122ec8793f09a1194d615f7 data/irregular_implements/advancement/recipes/misc/global_chat_detector.json
-4c9b9f03ea0576f44136eaa0e1e452d2ad14c63d data/irregular_implements/advancement/recipes/misc/golden_compass.json
 9d6f9f6cd040a055baa5186484ca3e9767ed47f2 data/irregular_implements/advancement/recipes/misc/id_card.json
 ba58bbec6c68fb5b87a7d9d7f341ba3fc330fd5e data/irregular_implements/advancement/recipes/misc/imbuing_station.json
 2bdc5c3bcee7ff920a2bbfdb9d38e8eeee3c2fcb data/irregular_implements/advancement/recipes/misc/inventory_rerouter.json
@@ -168,7 +167,6 @@ f6851b4c28969bd9cfbf0c9f71c6e463431b9655 data/irregular_implements/recipe/floo_p
 941aed21078fddf73c1f8696edbde58703e6cbe4 data/irregular_implements/recipe/floo_token.json
 43fe09ee4efa642923aaa00890d569dfe92ea7f7 data/irregular_implements/recipe/fluid_display.json
 161ef828a66dd78cd5241218a70864611aee49b3 data/irregular_implements/recipe/global_chat_detector.json
-081ff2af2a53cc86d0ca6bba7159a5d1b8fe190b data/irregular_implements/recipe/golden_compass.json
 5b9f7f94ea95b2d14d83be67449538ea4f877316 data/irregular_implements/recipe/id_card.json
 bf77c4d6662d7511949baeb5483afd3a57789e86 data/irregular_implements/recipe/imbuing_station.json
 c60e5608256b7c20a800285ddeb5b040f8da5d9b data/irregular_implements/recipe/inventory_rerouter.json
