@@ -75,10 +75,22 @@ repositories {
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
         content { includeGroup "thedarkcolour" }
     }
+
+    // For EMI
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+
 }
 
 dependencies {
-    implementation 'thedarkcolour:kotlinforforge-neoforge:5.5.0'
+    implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
+
+    // EMI
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+
 }
 
 tasks.withType(ProcessResources).configureEach {
