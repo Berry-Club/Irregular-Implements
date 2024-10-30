@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticksBlock
-import dev.aaronhowser.mods.irregular_implements.block.LightRedirectorBlock
+import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
@@ -21,8 +21,7 @@ object ModBlocks {
     val PRISMARINE_ENDER_BRIDGE = basicBlock("prismarine_ender_bridge")
     val ENDER_ANCHOR = basicBlock("ender_anchor")
     val BEAN_POD = basicBlock("bean_pod")
-    val LIGHT_REDIRECTOR: DeferredBlock<LightRedirectorBlock> =
-        registerBlock("light_redirector") { LightRedirectorBlock() }
+    val LIGHT_REDIRECTOR = basicBlock("light_redirector")
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
     val WATER_CHEST = basicBlock("water_chest")
@@ -37,7 +36,8 @@ object ModBlocks {
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val CONTACT_BUTTON = basicBlock("contact_button")
     val CONTACT_LEVER = basicBlock("contact_lever")     // Contact Mike reference?
-    val RAIN_SHIELD = basicBlock("rain_shield")
+    val RAIN_SHIELD =
+        registerBlock("rain_shield") { RainShieldBlock() }
     val BLOCK_BREAKER = basicBlock("block_breaker")
     val COMPRESSED_SLIME_BLOCK = basicBlock("compressed_slime_block")
     val REDSTONE_OBSERVER = basicBlock("redstone_observer")
