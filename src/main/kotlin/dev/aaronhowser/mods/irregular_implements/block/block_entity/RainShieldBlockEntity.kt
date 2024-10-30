@@ -19,12 +19,16 @@ class RainShieldBlockEntity(
 
         fun shouldBlockRain(level: Level, blockPos: BlockPos): Boolean {
             if (rainCache.getOrDefault(blockPos, false)) {
-                return true
+                return false
             }
 
             synchronized(shields) {
                 for (shield in shields) {
-                    if (shield.level == level && shield.blockPos.closerThan(blockPos, 10.0)) {
+                    if (
+                        shield.level == level
+                        && !shield.isRemoved
+                        && shield.blockPos.closerThan(blockPos, 10.0)
+                    ) {
                         rainCache[blockPos] = true
                         return true
                     }
