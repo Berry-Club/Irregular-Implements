@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput
 import net.minecraft.world.level.block.Block
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 
 class ModBlockStateProvider(
@@ -67,6 +68,13 @@ class ModBlockStateProvider(
                     .build()
             }
 
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/rainbow_lamp_white"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun singleTextureTransparent(block: Block) {
