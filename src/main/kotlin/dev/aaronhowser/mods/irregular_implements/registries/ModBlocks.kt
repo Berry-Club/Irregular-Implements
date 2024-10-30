@@ -46,6 +46,7 @@ object ModBlocks {
     val TRANSLUCENT_LUMINOUS_BLOCK = basicBlock("translucent_luminous_block")   // Same block for all colors
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
+    /** [net.neoforged.neoforge.common.world.StructureModifier] */
     val PEACE_CANDLE = basicBlock("peace_candle")
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val INVENTORY_TESTER = basicBlock("inventory_tester")
