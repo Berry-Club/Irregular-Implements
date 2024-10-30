@@ -1,11 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModBlockLootTablesSubProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.PackOutput
+import net.minecraft.data.loot.LootTableProvider
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -39,6 +42,21 @@ object ModDataGen {
         val recipeProvider = generator.addProvider(
             event.includeServer(),
             ModRecipeProvider(output, lookupProvider)
+        )
+
+        val lootTableProvider = generator.addProvider(
+            event.includeServer(),
+            LootTableProvider(
+                output,
+                setOf(),
+                listOf(
+                    LootTableProvider.SubProviderEntry(
+                        ::ModBlockLootTablesSubProvider,
+                        LootContextParamSets.BLOCK
+                    )
+                ),
+                lookupProvider
+            )
         )
 
     }
