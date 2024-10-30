@@ -51,6 +51,7 @@ class BlockOfSticks(
             false   // "Should exclude creative players" == false
         )
 
+        //TODO: Make this a blockstate property instead
         val shouldDrop = nearestPlayer == null || !nearestPlayer.hasInfiniteMaterials()
 
         if (!this.returning) {
