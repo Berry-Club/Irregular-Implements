@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
@@ -29,6 +30,10 @@ object ModDataGen {
         val itemModelProvider = generator.addProvider(
             event.includeClient(),
             ModItemModelProvider(output, existingFileHelper)
+        )
+        val blockModelProvider = generator.addProvider(
+            event.includeClient(),
+            ModBlockStateProvider(output, existingFileHelper)
         )
 
         val recipeProvider = generator.addProvider(
