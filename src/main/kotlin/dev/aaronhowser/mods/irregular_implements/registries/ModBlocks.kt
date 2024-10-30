@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticks
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredBlock
@@ -40,12 +41,15 @@ object ModBlocks {
     val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
     val IRON_DROPPER = basicBlock("iron_dropper")
     val IGNITER = basicBlock("igniter")
-    val BLOCK_OF_STICKS = basicBlock("block_of_sticks")
-    val RETURNING_BLOCK_OF_STICKS = basicBlock("returning_block_of_sticks")
+    val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticks> =
+        registerBlock("block_of_sticks") { BlockOfSticks(returning = false) }
+    val RETURNING_BLOCK_OF_STICKS: DeferredBlock<BlockOfSticks> =
+        registerBlock("returning_block_of_sticks") { BlockOfSticks(returning = true) }
     val LUMINOUS_BLOCK = basicBlock("luminous_block")   // Same block for all colors
     val TRANSLUCENT_LUMINOUS_BLOCK = basicBlock("translucent_luminous_block")   // Same block for all colors
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
+
     /** [net.neoforged.neoforge.common.world.StructureModifier] */
     val PEACE_CANDLE = basicBlock("peace_candle")
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
