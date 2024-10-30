@@ -7,7 +7,6 @@ plugins {
     id 'net.neoforged.moddev' version '1.0.11'
 
     id 'org.jetbrains.kotlin.jvm' version '2.0.0'
-    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = mod_version
@@ -94,10 +93,6 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
-}
-
-mixin {
-    config 'mixins.irregular_implements.json'
 }
 
 tasks.withType(ProcessResources).configureEach {
