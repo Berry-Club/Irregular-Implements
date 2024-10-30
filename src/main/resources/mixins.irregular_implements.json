@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "dev.aaronhowser.mods.irregular_implements.mixin",
   "mixins": [
-    "BlockRenderDispatcherMixins"
+    "LevelMixins"
   ],
   "injectors": {
     "defaultRequire": 1
