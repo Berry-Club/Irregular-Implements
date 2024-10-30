@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticksBlock
+import dev.aaronhowser.mods.irregular_implements.block.LightRedirectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
@@ -20,7 +21,8 @@ object ModBlocks {
     val PRISMARINE_ENDER_BRIDGE = basicBlock("prismarine_ender_bridge")
     val ENDER_ANCHOR = basicBlock("ender_anchor")
     val BEAN_POD = basicBlock("bean_pod")
-    val LIGHT_REDIRECTOR = basicBlock("light_redirector")
+    val LIGHT_REDIRECTOR: DeferredBlock<LightRedirectorBlock> =
+        registerBlock("light_redirector") { LightRedirectorBlock() }
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
     val WATER_CHEST = basicBlock("water_chest")
