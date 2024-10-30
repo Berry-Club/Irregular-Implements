@@ -137,15 +137,17 @@ object ModInformationRecipes {
 
         return buildList {
 
-            for (item in itemsWithBasicInfo) {
+            for (deferredItemLike in itemsWithBasicInfo) {
 
-                val textComponent = ModLanguageProvider.getInfoString(item).toComponent()
+                val textComponent = ModLanguageProvider.getInfoString(deferredItemLike).toComponent()
+                val id = deferredItemLike.key!!.location().toString().replace(':', '_')
+
                 val recipe = EmiInfoRecipe(
                     listOf(
-                        EmiIngredient.of(Ingredient.of(item))
+                        EmiIngredient.of(Ingredient.of(deferredItemLike))
                     ),
                     listOf(textComponent),
-                    OtherUtil.modResource("/info/${item.key!!.location().toString().replace(':', '/')}")
+                    OtherUtil.modResource("/info/$id")
                 )
 
                 add(recipe)
