@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "color=0": {
+      "model": "irregular_implements:block/rainbow_lamp_white"
+    },
+    "color=1": {
+      "model": "irregular_implements:block/rainbow_lamp_light_gray"
+    },
+    "color=10": {
+      "model": "irregular_implements:block/rainbow_lamp_cyan"
+    },
+    "color=11": {
+      "model": "irregular_implements:block/rainbow_lamp_blue"
+    },
+    "color=12": {
+      "model": "irregular_implements:block/rainbow_lamp_purple"
+    },
+    "color=13": {
+      "model": "irregular_implements:block/rainbow_lamp_magenta"
+    },
+    "color=14": {
+      "model": "irregular_implements:block/rainbow_lamp_pink"
+    },
+    "color=15": {
+      "model": "irregular_implements:block/rainbow_lamp_brown"
+    },
+    "color=2": {
+      "model": "irregular_implements:block/rainbow_lamp_gray"
+    },
+    "color=3": {
+      "model": "irregular_implements:block/rainbow_lamp_black"
+    },
+    "color=4": {
+      "model": "irregular_implements:block/rainbow_lamp_red"
+    },
+    "color=5": {
+      "model": "irregular_implements:block/rainbow_lamp_orange"
+    },
+    "color=6": {
+      "model": "irregular_implements:block/rainbow_lamp_yellow"
+    },
+    "color=7": {
+      "model": "irregular_implements:block/rainbow_lamp_lime"
+    },
+    "color=8": {
+      "model": "irregular_implements:block/rainbow_lamp_green"
+    },
+    "color=9": {
+      "model": "irregular_implements:block/rainbow_lamp_light_blue"
+    }
+  }
+}

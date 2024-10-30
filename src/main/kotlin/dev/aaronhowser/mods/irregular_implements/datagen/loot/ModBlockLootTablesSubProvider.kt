@@ -20,7 +20,8 @@ class ModBlockLootTablesSubProvider(
 
     private val dropsSelf = listOf(
         ModBlocks.BLOCK_OF_STICKS,
-        ModBlocks.RETURNING_BLOCK_OF_STICKS
+        ModBlocks.RETURNING_BLOCK_OF_STICKS,
+        ModBlocks.RAINBOW_LAMP
     ).map { it.get() }
 
     private val blocksToDatagen = dropsSelf

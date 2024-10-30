@@ -1,3 +1,4 @@
-// 1.21.1	2024-10-30T08:25:10.2603101	Loot Tables
+// 1.21.1	2024-10-30T14:05:12.8907212	Loot Tables
 c55bd7a25836b23e6125010cad41d8408977a182 data/irregular_implements/loot_table/blocks/block_of_sticks.json
+487e23400ae7d632b1da3eb66ad601dffa8493e4 data/irregular_implements/loot_table/blocks/rainbow_lamp.json
 7be38ad70d6c5b10e1278ea7894b5c28f7d8798b data/irregular_implements/loot_table/blocks/returning_block_of_sticks.json

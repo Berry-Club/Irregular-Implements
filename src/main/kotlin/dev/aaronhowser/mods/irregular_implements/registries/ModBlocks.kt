@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticks
+import dev.aaronhowser.mods.irregular_implements.block.RainbowLamp
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredBlock
@@ -64,7 +65,7 @@ object ModBlocks {
     val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
     val NATURE_CORE = basicBlock("nature_core")
     val COLORED_GRASS = basicBlock("colored_grass") // Same block for all colors
-    val RAINBOW_LAMP = basicBlock("rainbow_lamp")
+    val RAINBOW_LAMP = registerBlock("rainbow_lamp") { RainbowLamp() }
     val STAINED_BRICKS = basicBlock("stained_bricks") // Same block for all colors
     val LUMINOUS_STAINED_BRICKS = basicBlock("luminous_stained_bricks") // Same block for all colors
 
