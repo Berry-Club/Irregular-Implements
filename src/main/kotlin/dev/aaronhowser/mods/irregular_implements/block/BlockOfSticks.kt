@@ -37,8 +37,35 @@ class BlockOfSticks(
         super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston)
     }
 
-    override fun tick(pState: BlockState, pLevel: ServerLevel, pPos: BlockPos, pRandom: RandomSource) {
-        pLevel.destroyBlock(pPos, true)
+    override fun tick(
+        pState: BlockState,
+        pLevel: ServerLevel,
+        pPos: BlockPos,
+        pRandom: RandomSource
+    ) {
+        val nearestPlayer = pLevel.getNearestPlayer(
+            pPos.x.toDouble(),
+            pPos.y.toDouble(),
+            pPos.z.toDouble(),
+            100.0,
+            false   // "Should exclude creative players" == false
+        )
+
+        val shouldDrop = nearestPlayer == null || !nearestPlayer.hasInfiniteMaterials()
+
+        if (!this.returning) {
+            pLevel.destroyBlock(pPos, shouldDrop)
+            return super.tick(pState, pLevel, pPos, pRandom)
+        }
+
+        if (shouldDrop) {
+            val drops = getDrops(pState, pLevel, pPos, null)
+            for (drop in drops) {
+                popResource(pLevel, nearestPlayer?.blockPosition() ?: pPos, drop)
+            }
+        }
+
+        pLevel.destroyBlock(pPos, false)
         super.tick(pState, pLevel, pPos, pRandom)
     }
 
