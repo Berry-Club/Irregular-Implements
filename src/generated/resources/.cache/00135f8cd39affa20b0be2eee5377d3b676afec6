@@ -1,7 +1,7 @@
-// 1.21.1	2024-10-30T07:56:47.7803703	Block States: irregular_implements
+// 1.21.1	2024-10-30T08:16:32.8825543	Block States: irregular_implements
 05b107da8d0e55eac9b88ce743c167ceedd0308b assets/irregular_implements/blockstates/block_of_sticks.json
 1d53006ff1b24541b3a995578ae4fc62ff0e1930 assets/irregular_implements/blockstates/returning_block_of_sticks.json
-8144340dc196e45c65f37c1400174df993cdabfb assets/irregular_implements/models/block/block_of_sticks.json
-898633d959e36d92ada91198230e56d2e825d611 assets/irregular_implements/models/block/returning_block_of_sticks.json
+e83552b2c066bc1047b3bf71a9f9df2c213e2411 assets/irregular_implements/models/block/block_of_sticks.json
+50ca2b583444e81ebc28bfabb3ff2a7b209ca80a assets/irregular_implements/models/block/returning_block_of_sticks.json
 e0fefa63f229da5d50e19c4a40d07a5442be6e85 assets/irregular_implements/models/item/block_of_sticks.json
 7cb98c8726f6b096eb5a640453138ab4b38c7b88 assets/irregular_implements/models/item/returning_block_of_sticks.json

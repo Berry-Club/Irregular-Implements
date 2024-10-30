@@ -23,6 +23,7 @@ class BlockOfSticks(
         .isValidSpawn(Blocks::never)
         .isSuffocating(Blocks::never)
         .isViewBlocking(Blocks::never)
+        .noOcclusion()
 ) {
 
     override fun onPlace(
