@@ -15,7 +15,7 @@ class ModBlockStateProvider(
 
         for (block in basicBlock) {
             val model = cubeAll(block.get())
-            simpleBlockItem(block.get(), model)
+            simpleBlockWithItem(block.get(), model)
         }
 
     }
