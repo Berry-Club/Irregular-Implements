@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.RainbowLamp
+import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -36,7 +36,7 @@ class ModBlockStateProvider(
 
         getVariantBuilder(block)
             .forAllStates {
-                val colorInt = it.getValue(RainbowLamp.COLOR)
+                val colorInt = it.getValue(RainbowLampBlock.COLOR)
                 val colorString = when (colorInt) {
                     0 -> "white"
                     1 -> "light_gray"

@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystal
+import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.CreativeModeTab
 import net.neoforged.neoforge.registries.DeferredHolder
@@ -27,7 +27,7 @@ object ModCreativeModeTabs {
                 val itemsToDisplay = buildList {
                     addAll(regularItems.map { (it as DeferredItem).toStack() })
 
-                    addAll(BiomeCrystal.getAllCrystals(displayContext.holders))
+                    addAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
                 }
 
                 output.acceptAll(itemsToDisplay)

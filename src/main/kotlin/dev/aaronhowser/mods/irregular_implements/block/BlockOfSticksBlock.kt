@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 
-class BlockOfSticks(
+class BlockOfSticksBlock(
     val returning: Boolean
 ) : Block(
     Properties.of()

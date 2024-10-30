@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SoundType
 
-class LightRedirector : Block(
+class LightRedirectorBlock : Block(
     Properties
         .of()
         .sound(SoundType.WOOD)

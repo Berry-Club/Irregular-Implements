@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
 
-class StableEnderPearl : Item(
+class StableEnderPearlItem : Item(
     Properties()
         .stacksTo(1)
 ) {

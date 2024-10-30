@@ -12,7 +12,7 @@ import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.biome.Biome
 
-class BiomeCrystal : Item(
+class BiomeCrystalItem : Item(
     Properties()
         .rarity(Rarity.UNCOMMON)
 ) {

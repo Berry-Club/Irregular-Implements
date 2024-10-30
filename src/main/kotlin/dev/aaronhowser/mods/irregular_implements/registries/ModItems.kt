@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystal
-import dev.aaronhowser.mods.irregular_implements.item.FilterEntity
-import dev.aaronhowser.mods.irregular_implements.item.FilterLocation
-import dev.aaronhowser.mods.irregular_implements.item.StableEnderPearl
+import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
+import dev.aaronhowser.mods.irregular_implements.item.FilterEntityItem
+import dev.aaronhowser.mods.irregular_implements.item.FilterLocationItem
+import dev.aaronhowser.mods.irregular_implements.item.StableEnderPearlItem
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -15,10 +15,10 @@ object ModItems {
         DeferredRegister.createItems(IrregularImplements.ID)
 
     val ANALOG_EMITTER = basic("analog_emitter")
-    val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearl> =
-        register("stable_ender_pearl") { StableEnderPearl() }
-    val BIOME_CRYSTAL: DeferredItem<BiomeCrystal> =
-        register("biome_crystal") { BiomeCrystal() }
+    val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
+        register("stable_ender_pearl") { StableEnderPearlItem() }
+    val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
+        register("biome_crystal") { BiomeCrystalItem() }
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
     val BEAN = basic("bean")
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
@@ -63,10 +63,10 @@ object ModItems {
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
 
     // Filters
-    val LOCATION_FILTER: DeferredItem<FilterLocation> =
-        register("location_filter") { FilterLocation() }
-    val ENTITY_FILTER: DeferredItem<FilterEntity> =
-        register("entity_filter") { FilterEntity() }
+    val LOCATION_FILTER: DeferredItem<FilterLocationItem> =
+        register("location_filter") { FilterLocationItem() }
+    val ENTITY_FILTER: DeferredItem<FilterEntityItem> =
+        register("entity_filter") { FilterEntityItem() }
     val ITEM_FILTER = basic("item_filter")
 
     // Imbues

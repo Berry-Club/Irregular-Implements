@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticks
-import dev.aaronhowser.mods.irregular_implements.block.RainbowLamp
+import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticksBlock
+import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredBlock
@@ -42,10 +42,10 @@ object ModBlocks {
     val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
     val IRON_DROPPER = basicBlock("iron_dropper")
     val IGNITER = basicBlock("igniter")
-    val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticks> =
-        registerBlock("block_of_sticks") { BlockOfSticks(returning = false) }
-    val RETURNING_BLOCK_OF_STICKS: DeferredBlock<BlockOfSticks> =
-        registerBlock("returning_block_of_sticks") { BlockOfSticks(returning = true) }
+    val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
+        registerBlock("block_of_sticks") { BlockOfSticksBlock(returning = false) }
+    val RETURNING_BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
+        registerBlock("returning_block_of_sticks") { BlockOfSticksBlock(returning = true) }
     val LUMINOUS_BLOCK = basicBlock("luminous_block")   // Same block for all colors
     val TRANSLUCENT_LUMINOUS_BLOCK = basicBlock("translucent_luminous_block")   // Same block for all colors
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
@@ -65,7 +65,7 @@ object ModBlocks {
     val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
     val NATURE_CORE = basicBlock("nature_core")
     val COLORED_GRASS = basicBlock("colored_grass") // Same block for all colors
-    val RAINBOW_LAMP = registerBlock("rainbow_lamp") { RainbowLamp() }
+    val RAINBOW_LAMP = registerBlock("rainbow_lamp") { RainbowLampBlock() }
     val STAINED_BRICKS = basicBlock("stained_bricks") // Same block for all colors
     val LUMINOUS_STAINED_BRICKS = basicBlock("luminous_stained_bricks") // Same block for all colors
 
