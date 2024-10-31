@@ -50,5 +50,10 @@ public class LevelMixins implements RainShieldChunks {
         return this.irregular_implements$rainShieldChunks.contains(pos);
     }
 
+    @Unique
+    @Override
+    public LongOpenHashSet irregular_implements$getRainShieldChunks() {
+        return this.irregular_implements$rainShieldChunks;
+    }
 
 }
