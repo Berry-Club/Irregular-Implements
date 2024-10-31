@@ -13,7 +13,10 @@ public class LevelMixins {
 
     @Inject(
             method = "isRainingAt",
-            at = @At("HEAD"),
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
+            ),
             cancellable = true
     )
     private void isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
