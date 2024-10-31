@@ -26,11 +26,15 @@ class RainShieldBlockEntity(
         }
 
         fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
-            if (!blockState.getValue(RainShieldBlock.ENABLED)) return
             if (level !is RainShieldChunks) return
 
             val chunkPos = level.getChunk(blockPos).pos.toLong()
-            level.`irregular_implements$addChunkPos`(chunkPos)
+
+            if (blockState.getValue(RainShieldBlock.ENABLED)) {
+                level.`irregular_implements$addChunkPos`(chunkPos)
+            } else {
+                level.`irregular_implements$removeChunkPos`(chunkPos)
+            }
         }
     }
 
