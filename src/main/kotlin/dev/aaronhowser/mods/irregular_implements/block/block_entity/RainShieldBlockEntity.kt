@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
@@ -18,7 +19,7 @@ class RainShieldBlockEntity(
         val rainCache: ConcurrentHashMap<BlockPos, Boolean> = ConcurrentHashMap()
         val shields: MutableSet<RainShieldBlockEntity> = mutableSetOf()
 
-        fun shouldPreventRain(level: Level, blockPos: BlockPos): Boolean {
+        fun isNearActiveRainShield(level: Level, blockPos: BlockPos): Boolean {
             if (rainCache.getOrDefault(blockPos, false)) {
                 return true
             }
@@ -28,6 +29,7 @@ class RainShieldBlockEntity(
                     if (
                         shield.level == level
                         && !shield.isRemoved
+                        && shield.blockState.getValue(RainShieldBlock.ENABLED)
                         && shield.blockPos.closerThan(blockPos, 10.0)
                     ) {
                         rainCache[blockPos] = true
