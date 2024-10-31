@@ -20,11 +20,11 @@ class RainShieldBlockEntity(
         val shields: MutableSet<RainShieldBlockEntity> = mutableSetOf()
 
         fun isNearActiveRainShield(level: LevelReader, blockPos: BlockPos): Boolean {
-            if (rainCache.getOrDefault(blockPos, false)) {
-                return true
-            }
-
             synchronized(shields) {
+                if (rainCache.getOrDefault(blockPos, false)) {
+                    return true
+                }
+
                 for (shield in shields) {
                     if (shield.level != level) continue
                     if (shield.isRemoved) continue
@@ -34,10 +34,10 @@ class RainShieldBlockEntity(
                     rainCache[blockPos] = true
                     return true
                 }
-            }
 
-            rainCache[blockPos] = false
-            return false
+                rainCache[blockPos] = false
+                return false
+            }
         }
 
     }
