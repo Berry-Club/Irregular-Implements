@@ -14,6 +14,7 @@ class RainShieldBlockEntity(
 
     companion object {
 
+        // For if the same block is checked twice in a tick. At the end of every tick this is cleared, on both server and client
         val rainCache: ConcurrentHashMap<BlockPos, Boolean> = ConcurrentHashMap()
         val shields: MutableSet<RainShieldBlockEntity> = mutableSetOf()
 
