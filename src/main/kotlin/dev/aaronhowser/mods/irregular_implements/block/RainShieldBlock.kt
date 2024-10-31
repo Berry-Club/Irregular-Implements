@@ -52,7 +52,7 @@ class RainShieldBlock : EntityBlock, Block(
         if (level.isClientSide) return
 
         val redstoneStrength = level.getBestNeighborSignal(pos)
-        level.setBlockAndUpdate(pos, state.setValue(ENABLED, redstoneStrength > 0))
+        level.setBlockAndUpdate(pos, state.setValue(ENABLED, redstoneStrength == 0))
     }
 
     override fun onRemove(
