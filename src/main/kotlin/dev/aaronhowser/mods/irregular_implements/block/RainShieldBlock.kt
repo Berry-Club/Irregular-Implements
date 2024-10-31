@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -10,6 +11,8 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -55,21 +58,17 @@ class RainShieldBlock : EntityBlock, Block(
         level.setBlockAndUpdate(pos, state.setValue(ENABLED, redstoneStrength == 0))
     }
 
-    override fun onRemove(
-        state: BlockState,
+    override fun <T : BlockEntity?> getTicker(
         level: Level,
-        pos: BlockPos,
-        newState: BlockState,
-        movedByPiston: Boolean
-    ) {
-        val blockEntity = level.getBlockEntity(pos) as? RainShieldBlockEntity
-        if (blockEntity != null) {
-            synchronized(RainShieldBlockEntity.shieldsPerLevel) {
-                RainShieldBlockEntity.shieldsPerLevel.remove(blockEntity)
-            }
-        }
+        state: BlockState,
+        blockEntityType: BlockEntityType<T>
+    ): BlockEntityTicker<T>? {
+        if (blockEntityType != ModBlockEntities.RAIN_SHIELD.get()) return null
 
-        super.onRemove(state, level, pos, newState, movedByPiston)
+        return BlockEntityTicker { tLevel, tPos, tState, _ ->
+            RainShieldBlockEntity.tick(tLevel, tPos, tState)
+        }
     }
+
 
 }

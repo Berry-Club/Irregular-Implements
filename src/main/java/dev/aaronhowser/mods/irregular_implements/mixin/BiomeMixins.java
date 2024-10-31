@@ -21,7 +21,7 @@ public class BiomeMixins {
             cancellable = true
     )
     private void shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.Companion.isNearActiveRainShield(level, pos)) {
+        if (RainShieldBlockEntity.Companion.chunkHasActiveRainShield(level, pos)) {
             cir.setReturnValue(false);
         }
     }
