@@ -26,15 +26,13 @@ class RainShieldBlockEntity(
 
             synchronized(shields) {
                 for (shield in shields) {
-                    if (
-                        shield.level == level
-                        && !shield.isRemoved
-                        && shield.blockState.getValue(RainShieldBlock.ENABLED)
-                        && shield.blockPos.closerThan(blockPos, 10.0)
-                    ) {
-                        rainCache[blockPos] = true
-                        return true
-                    }
+                    if (shield.level != level) continue
+                    if (shield.isRemoved) continue
+                    if (!shield.blockState.getValue(RainShieldBlock.ENABLED)) continue
+                    if (!shield.blockPos.closerThan(blockPos, 10.0)) continue
+
+                    rainCache[blockPos] = true
+                    return true
                 }
             }
 
