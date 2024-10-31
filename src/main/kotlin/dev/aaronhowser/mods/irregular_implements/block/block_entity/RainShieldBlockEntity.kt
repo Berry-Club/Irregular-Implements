@@ -18,9 +18,9 @@ class RainShieldBlockEntity(
         val rainCache: ConcurrentHashMap<BlockPos, Boolean> = ConcurrentHashMap()
         val shields: MutableSet<RainShieldBlockEntity> = mutableSetOf()
 
-        fun shouldBlockRain(level: Level, blockPos: BlockPos): Boolean {
+        fun shouldPreventRain(level: Level, blockPos: BlockPos): Boolean {
             if (rainCache.getOrDefault(blockPos, false)) {
-                return false
+                return true
             }
 
             synchronized(shields) {

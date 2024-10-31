@@ -20,7 +20,7 @@ public class LevelMixins {
             cancellable = true
     )
     private void isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.Companion.shouldBlockRain((Level) (Object) this, pos)) {
+        if (RainShieldBlockEntity.Companion.shouldPreventRain((Level) (Object) this, pos)) {
             cir.setReturnValue(false);
         }
     }
