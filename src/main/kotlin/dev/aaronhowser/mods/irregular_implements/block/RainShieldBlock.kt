@@ -64,8 +64,8 @@ class RainShieldBlock : EntityBlock, Block(
     ) {
         val blockEntity = level.getBlockEntity(pos) as? RainShieldBlockEntity
         if (blockEntity != null) {
-            synchronized(RainShieldBlockEntity.shields) {
-                RainShieldBlockEntity.shields.remove(blockEntity)
+            synchronized(RainShieldBlockEntity.shieldsPerLevel) {
+                RainShieldBlockEntity.shieldsPerLevel.remove(blockEntity)
             }
         }
 
