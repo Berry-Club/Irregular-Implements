@@ -15,7 +15,8 @@ object OtherEvents {
 
     @SubscribeEvent
     fun onChat(event: ServerChatEvent) {
-        event.player.sendSystemMessage(Component.literal("Is raining: ${event.player.level().isRainingAt(event.player.blockPosition())}"))
+        val isRaining = event.player.level().isRainingAt(event.player.blockPosition())
+        event.player.sendSystemMessage(Component.literal("Is raining: $isRaining"))
     }
 
     @SubscribeEvent
