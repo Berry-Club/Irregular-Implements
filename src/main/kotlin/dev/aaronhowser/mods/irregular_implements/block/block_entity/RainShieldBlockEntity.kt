@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
-import dev.aaronhowser.mods.irregular_implements.mixin.RainShieldsPerChunk
+import dev.aaronhowser.mods.irregular_implements.RainShieldsPerChunk
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level

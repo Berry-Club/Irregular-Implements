@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.mixin;
+package dev.aaronhowser.mods.irregular_implements;
 
 public interface RainShieldsPerChunk {
 
