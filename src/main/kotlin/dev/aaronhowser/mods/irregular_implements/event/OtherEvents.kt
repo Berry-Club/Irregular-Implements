@@ -23,7 +23,6 @@ object OtherEvents {
     fun beforeLevelTick(event: LevelTickEvent.Pre) {
         val level = event.level
         if (level is RainShieldChunks) {
-            // Needs to happen on both client and server, which is why it's in LevelTickEvent and not ClientTickEvent or ServerTickEvent
             level.`irregular_implements$clearRainShieldChunks`()
         }
     }
