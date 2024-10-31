@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
-public class LevelMixin implements RainShieldChunks {
+public abstract class LevelMixin implements RainShieldChunks {
 
     @Inject(
             method = "isRainingAt",
