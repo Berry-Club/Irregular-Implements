@@ -16,6 +16,10 @@ public interface RainShieldChunks {
         throw new IllegalStateException();
     }
 
+    default void irregular_implements$clearRainShieldChunks() {
+        throw new IllegalStateException();
+    }
+
     default LongOpenHashSet irregular_implements$getRainShieldChunks() {
         throw new IllegalStateException();
     }

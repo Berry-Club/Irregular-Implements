@@ -32,21 +32,8 @@ class RainShieldBlockEntity(
 
             if (blockState.getValue(RainShieldBlock.ENABLED)) {
                 level.`irregular_implements$addChunkPos`(chunkPos)
-            } else {
-                level.`irregular_implements$removeChunkPos`(chunkPos)
             }
         }
-    }
-
-    override fun setRemoved() {
-        val level = this.level
-
-        if (level is RainShieldChunks) {
-            val chunkPos = level.getChunk(worldPosition).pos.toLong()
-            level.`irregular_implements$removeChunkPos`(chunkPos)
-        }
-
-        super.setRemoved()
     }
 
 }

@@ -52,6 +52,12 @@ public abstract class LevelMixin implements RainShieldChunks {
 
     @Unique
     @Override
+    public void irregular_implements$clearRainShieldChunks() {
+        this.irregular_implements$rainShieldChunks.clear();
+    }
+
+    @Unique
+    @Override
     public LongOpenHashSet irregular_implements$getRainShieldChunks() {
         return this.irregular_implements$rainShieldChunks;
     }
