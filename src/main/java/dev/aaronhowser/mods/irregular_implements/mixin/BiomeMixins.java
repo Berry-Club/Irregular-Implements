@@ -20,7 +20,7 @@ public class BiomeMixins {
             ),
             cancellable = true
     )
-    private void shouldShowAt(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (RainShieldBlockEntity.Companion.isNearActiveRainShield(level, pos)) {
             cir.setReturnValue(false);
         }
