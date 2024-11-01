@@ -9,6 +9,10 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
+/**
+ * The majority of the logic is in [dev.aaronhowser.mods.irregular_implements.mixin.LevelMixin],
+ * but some is also in [dev.aaronhowser.mods.irregular_implements.mixin.BiomeMixin] and [dev.aaronhowser.mods.irregular_implements.mixin.LevelRendererMixin]
+ */
 class RainShieldBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
