@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
@@ -27,6 +28,15 @@ public abstract class LevelMixin implements RainShieldChunks {
             cir.setReturnValue(false);
         }
     }
+
+    @Inject(
+            method = "tickBlockEntities",
+            at = @At("HEAD")
+    )
+    private void tickBlockEntities(CallbackInfo ci) {
+        irregular_implements$clearRainShieldChunks();
+    }
+
 
     // The Long is the chunk pos converted to long `ChunkPos.toLong()`
     @Unique
