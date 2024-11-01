@@ -139,7 +139,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.IMBUING_STATION, "Imbuing Station")
         addBlock(ModBlocks.NATURE_CHEST, "Nature Chest")
         addBlock(ModBlocks.WATER_CHEST, "Water Chest")
-        addBlock(ModBlocks.ANALOG_EMITTER, "Analog Emitter Block")
+        addBlock(ModBlocks.ANALOG_EMITTER, "Analog Emitter")
         addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
         addBlock(ModBlocks.CUSTOM_WORKBENCH, "Custom Workbench")
         addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")

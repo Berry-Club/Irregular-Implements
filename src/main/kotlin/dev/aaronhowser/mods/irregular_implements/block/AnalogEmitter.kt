@@ -63,4 +63,21 @@ class AnalogEmitter(
         state.setValue(ENABLED, facingSideIsPowered)
     }
 
+    override fun isSignalSource(state: BlockState): Boolean {
+        return true
+    }
+
+    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+        val enabled = state.getValue(ENABLED)
+        if (!enabled) return 0
+
+        val facing = state.getValue(FACING)
+        if (facing == direction.opposite) return 16
+        return 0
+    }
+
+    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+        return getDirectSignal(state, level, pos, direction)
+    }
+
 }
