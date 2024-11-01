@@ -35,6 +35,15 @@ public abstract class LevelMixin implements RainShieldChunks {
     )
     private void tickBlockEntities(CallbackInfo ci) {
         irregular_implements$clearRainShieldChunks();
+
+        // Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.
+        // I was doing it on LevelTickEvent before, but neither Pre not Post worked. The order that it was going was:
+        // 1. LevelTickEvent.Pre
+        // 2. The set is checked
+        // 3. The set is added to
+        // 4. LevelTickEvent.Post
+        // So no matter if the event is checked on Pre or Post, the set will always be empty when checked.
+        // Doing it this way adds a single tick delay, but honestly that's fine.
     }
 
 
