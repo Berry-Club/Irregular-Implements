@@ -45,7 +45,6 @@ class ModLanguageProvider(
 
         add(Items.CREATIVE_TAB, "Irregular Implements")
 
-        addItem(ModItems.ANALOG_EMITTER, "Analog Emitter")
         addItem(ModItems.STABLE_ENDER_PEARL, "Stable Ender Pearl")
         addItem(ModItems.BIOME_CRYSTAL, "Biome Crystal")
         addItem(ModItems.LOCATION_FILTER, "Location Filter")

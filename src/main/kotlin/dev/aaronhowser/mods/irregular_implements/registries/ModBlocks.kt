@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.AnalogEmitter
 import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticksBlock
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
@@ -25,7 +26,8 @@ object ModBlocks {
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
     val WATER_CHEST = basicBlock("water_chest")
-    val ANALOG_EMITTER = basicBlock("analog_emitter_block")
+    val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
+        registerBlock("analog_emitter") { AnalogEmitter() }
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val CUSTOM_WORKBENCH = basicBlock("custom_workbench")   // Same block for every variant
     val ENDER_MAILBOX = basicBlock("ender_mailbox")

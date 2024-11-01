@@ -27,7 +27,6 @@ class ModItemModelProvider(
             ModItems.REDSTONE_ACTIVATOR,
             ModItems.SOUND_PATTERN,
             ModItems.SOUND_RECORDER,
-            ModItems.ANALOG_EMITTER,
             ModItems.SPECTRE_CHARGER,
             ModItems.ADVANCED_REDSTONE_TORCH
         )

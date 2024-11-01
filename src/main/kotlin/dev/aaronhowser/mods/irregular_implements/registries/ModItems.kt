@@ -14,7 +14,6 @@ object ModItems {
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
 
-    val ANALOG_EMITTER = basic("analog_emitter")
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
