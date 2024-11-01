@@ -1,48 +1,738 @@
 {
   "variants": {
-    "enabled=false,facing=down": {
+    "enabled=false,facing=down,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "x": 90
     },
-    "enabled=false,facing=east": {
+    "enabled=false,facing=down,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=down,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=false,facing=east,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "y": 90
     },
-    "enabled=false,facing=north": {
+    "enabled=false,facing=east,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=east,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=false,facing=north,power=0": {
       "model": "irregular_implements:block/analog_emitter"
     },
-    "enabled=false,facing=south": {
+    "enabled=false,facing=north,power=1": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=10": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=11": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=12": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=13": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=14": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=15": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=2": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=3": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=4": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=5": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=6": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=7": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=8": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=north,power=9": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=false,facing=south,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "y": 180
     },
-    "enabled=false,facing=up": {
+    "enabled=false,facing=south,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=south,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=false,facing=up,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "x": 270
     },
-    "enabled=false,facing=west": {
+    "enabled=false,facing=up,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=up,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=false,facing=west,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "y": 270
     },
-    "enabled=true,facing=down": {
+    "enabled=false,facing=west,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=false,facing=west,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=down,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "x": 90
     },
-    "enabled=true,facing=east": {
+    "enabled=true,facing=down,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=down,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 90
+    },
+    "enabled=true,facing=east,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "y": 90
     },
-    "enabled=true,facing=north": {
+    "enabled=true,facing=east,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=east,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 90
+    },
+    "enabled=true,facing=north,power=0": {
       "model": "irregular_implements:block/analog_emitter"
     },
-    "enabled=true,facing=south": {
+    "enabled=true,facing=north,power=1": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=10": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=11": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=12": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=13": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=14": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=15": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=2": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=3": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=4": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=5": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=6": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=7": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=8": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=north,power=9": {
+      "model": "irregular_implements:block/analog_emitter"
+    },
+    "enabled=true,facing=south,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "y": 180
     },
-    "enabled=true,facing=up": {
+    "enabled=true,facing=south,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=south,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 180
+    },
+    "enabled=true,facing=up,power=0": {
       "model": "irregular_implements:block/analog_emitter",
       "x": 270
     },
-    "enabled=true,facing=west": {
+    "enabled=true,facing=up,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=up,power=9": {
+      "model": "irregular_implements:block/analog_emitter",
+      "x": 270
+    },
+    "enabled=true,facing=west,power=0": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=1": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=10": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=11": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=12": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=13": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=14": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=15": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=2": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=3": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=4": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=5": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=6": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=7": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=8": {
+      "model": "irregular_implements:block/analog_emitter",
+      "y": 270
+    },
+    "enabled=true,facing=west,power=9": {
       "model": "irregular_implements:block/analog_emitter",
       "y": 270
     }

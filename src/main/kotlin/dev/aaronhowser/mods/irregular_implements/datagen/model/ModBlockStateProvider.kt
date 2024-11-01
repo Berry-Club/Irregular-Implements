@@ -32,6 +32,11 @@ class ModBlockStateProvider(
             uniqueTexture = modLoc("block/analog_emitter_front"),
             otherTexture = modLoc("block/analog_emitter_side")
         )
+        oneUniqueFace(
+            ModBlocks.SIDED_BLOCK_OF_REDSTONE.get(),
+            uniqueTexture = modLoc("block/sided_redstone_front"),
+            otherTexture = modLoc("block/sided_redstone_side")
+        )
 
     }
 

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "irregular_implements:sided_block_of_redstone"
+        "recipe": "irregular_implements:sided_redstone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "irregular_implements:sided_block_of_redstone"
+      "irregular_implements:sided_redstone"
     ]
   }
 }

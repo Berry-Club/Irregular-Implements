@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.AnalogEmitter
-import dev.aaronhowser.mods.irregular_implements.block.BlockOfSticksBlock
-import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
-import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
+import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredBlock
@@ -64,12 +61,14 @@ object ModBlocks {
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
     val DIAPHANOUS_BLOCK = basicBlock("diaphanous_block")
-    val SIDED_BLOCK_OF_REDSTONE = basicBlock("sided_block_of_redstone")
+    val SIDED_BLOCK_OF_REDSTONE =
+        registerBlock("sided_redstone") { SidedRedstoneBlock() }
     val ITEM_COLLECTOR = basicBlock("item_collector")
     val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
     val NATURE_CORE = basicBlock("nature_core")
     val COLORED_GRASS = basicBlock("colored_grass") // Same block for all colors
-    val RAINBOW_LAMP = registerBlock("rainbow_lamp") { RainbowLampBlock() }
+    val RAINBOW_LAMP =
+        registerBlock("rainbow_lamp") { RainbowLampBlock() }
     val STAINED_BRICKS = basicBlock("stained_bricks") // Same block for all colors
     val LUMINOUS_STAINED_BRICKS = basicBlock("luminous_stained_bricks") // Same block for all colors
 
