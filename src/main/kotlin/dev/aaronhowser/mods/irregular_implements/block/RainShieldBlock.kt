@@ -25,8 +25,6 @@ class RainShieldBlock : EntityBlock, Block(
         .strength(2f)
 ) {
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = RainShieldBlockEntity(pos, state)
-
     companion object {
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
     }
@@ -64,6 +62,8 @@ class RainShieldBlock : EntityBlock, Block(
         val redstoneStrength = level.getBestNeighborSignal(pos)
         level.setBlockAndUpdate(pos, state.setValue(ENABLED, redstoneStrength == 0))
     }
+
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = RainShieldBlockEntity(pos, state)
 
     override fun <T : BlockEntity?> getTicker(
         level: Level,
