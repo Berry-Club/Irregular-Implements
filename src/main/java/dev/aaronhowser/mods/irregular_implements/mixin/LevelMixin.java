@@ -24,7 +24,7 @@ public abstract class LevelMixin implements RainShieldChunks {
             cancellable = true
     )
     private void isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.Companion.chunkHasActiveRainShield((Level) (Object) this, pos)) {
+        if (RainShieldBlockEntity.Companion.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
             cir.setReturnValue(false);
         }
     }

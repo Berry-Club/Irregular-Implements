@@ -22,7 +22,7 @@ class RainShieldBlockEntity(
 
     companion object {
 
-        fun chunkHasActiveRainShield(level: LevelReader, blockPos: BlockPos): Boolean {
+        fun chunkIsProtectedFromRain(level: LevelReader, blockPos: BlockPos): Boolean {
             if (!level.isAreaLoaded(blockPos, 1)) return false
             if (level !is RainShieldChunks) return false
 
