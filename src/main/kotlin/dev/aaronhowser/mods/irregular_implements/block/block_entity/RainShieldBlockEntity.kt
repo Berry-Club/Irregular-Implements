@@ -21,6 +21,9 @@ class RainShieldBlockEntity(
             if (level !is RainShieldChunks) return false
 
             val chunkPos = level.getChunk(blockPos).pos.toLong()
+            if (level is Level) {
+                println("AAAAAAAAAAAAA CHECKING RAIN SHIELD CHUNK POS ${level.gameTime}")
+            }
             return level.`irregular_implements$chunkPosHasRainShields`(chunkPos)
         }
 
@@ -29,6 +32,7 @@ class RainShieldBlockEntity(
 
             val chunkPos = level.getChunk(blockPos).pos.toLong()
             if (blockState.getValue(RainShieldBlock.ENABLED)) {
+                println("AAAAAAAAAAAAA ADDING RAIN SHIELD CHUNK POS ON TICK ${level.gameTime}")
                 level.`irregular_implements$addChunkPos`(chunkPos)
             }
         }

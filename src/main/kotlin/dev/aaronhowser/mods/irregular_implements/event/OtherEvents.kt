@@ -23,6 +23,7 @@ object OtherEvents {
     fun beforeLevelTick(event: LevelTickEvent.Pre) {
         val level = event.level
         if (level is RainShieldChunks) {
+            println("AAAAAAAAAAAAA CLEARING RAIN SHIELD CHUNKS ON TICK ${event.level.gameTime}")
             level.`irregular_implements$clearRainShieldChunks`()
         }
     }
