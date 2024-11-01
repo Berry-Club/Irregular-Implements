@@ -3,9 +3,12 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.DirectionalBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
@@ -24,12 +27,68 @@ class ModBlockStateProvider(
 
         rainbowLamp()
 
+        oneUniqueFace(
+            ModBlocks.ANALOG_EMITTER.get(),
+            uniqueTexture = modLoc("block/analog_emitter_front"),
+            otherTexture = modLoc("block/analog_emitter_side")
+        )
+
     }
 
     private val singleTextureTransparentBlocks = listOf(
         ModBlocks.BLOCK_OF_STICKS,
         ModBlocks.RETURNING_BLOCK_OF_STICKS
     )
+
+    private fun oneUniqueFace(
+        block: Block,
+        uniqueTexture: ResourceLocation,
+        otherTexture: ResourceLocation
+    ) {
+        val name = name(block)
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DirectionalBlock.FACING)
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(
+                        models()
+                            .orientable(
+                                name,
+                                otherTexture,
+                                uniqueTexture,
+                                otherTexture
+                            )
+                    )
+                    .rotationY(yRotation)
+                    .rotationX(xRotation)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/$name"),
+                existingFileHelper
+            )
+        )
+    }
 
     private fun rainbowLamp() {
         val block = ModBlocks.RAINBOW_LAMP.get()
