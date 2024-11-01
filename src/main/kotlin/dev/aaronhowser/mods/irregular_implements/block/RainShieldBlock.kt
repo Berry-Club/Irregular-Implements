@@ -1,13 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.irregular_implements.RainShieldChunks
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.SoundType
@@ -19,10 +18,6 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 
-/**
- * The majority of the logic is in [dev.aaronhowser.mods.irregular_implements.mixin.LevelMixin],
- * but some is also in [dev.aaronhowser.mods.irregular_implements.mixin.BiomeMixin] and [dev.aaronhowser.mods.irregular_implements.mixin.LevelRendererMixin]
- */
 class RainShieldBlock : EntityBlock, Block(
     Properties
         .of()
@@ -30,27 +25,10 @@ class RainShieldBlock : EntityBlock, Block(
         .strength(2f)
 ) {
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? = null
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = RainShieldBlockEntity(pos, state)
 
     companion object {
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-
-        fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
-            if (level !is RainShieldChunks) return
-
-            val chunkPos = level.getChunk(blockPos).pos.toLong()
-            if (blockState.getValue(ENABLED)) {
-                level.`irregular_implements$addChunkPos`(chunkPos)
-            }
-        }
-
-        fun chunkHasActiveRainShield(level: LevelReader, blockPos: BlockPos): Boolean {
-            if (!level.isAreaLoaded(blockPos, 1)) return false
-            if (level !is RainShieldChunks) return false
-
-            val chunkPos = level.getChunk(blockPos).pos.toLong()
-            return level.`irregular_implements$chunkPosHasRainShields`(chunkPos)
-        }
     }
 
     init {
@@ -87,13 +65,15 @@ class RainShieldBlock : EntityBlock, Block(
         level.setBlockAndUpdate(pos, state.setValue(ENABLED, redstoneStrength == 0))
     }
 
-    override fun <T : BlockEntity> getTicker(
+    override fun <T : BlockEntity?> getTicker(
         level: Level,
         state: BlockState,
         blockEntityType: BlockEntityType<T>
-    ): BlockEntityTicker<T> {
+    ): BlockEntityTicker<T>? {
+        if (blockEntityType != ModBlockEntities.RAIN_SHIELD.get()) return null
+
         return BlockEntityTicker { tLevel, tPos, tState, _ ->
-            tick(tLevel, tPos, tState)
+            RainShieldBlockEntity.tick(tLevel, tPos, tState)
         }
     }
 

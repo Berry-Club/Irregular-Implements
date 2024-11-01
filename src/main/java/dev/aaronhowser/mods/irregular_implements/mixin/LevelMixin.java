@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.RainShieldChunks;
-import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock;
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -24,7 +24,7 @@ public abstract class LevelMixin implements RainShieldChunks {
             cancellable = true
     )
     private void isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlock.Companion.chunkHasActiveRainShield((Level) (Object) this, pos)) {
+        if (RainShieldBlockEntity.Companion.chunkHasActiveRainShield((Level) (Object) this, pos)) {
             cir.setReturnValue(false);
         }
     }

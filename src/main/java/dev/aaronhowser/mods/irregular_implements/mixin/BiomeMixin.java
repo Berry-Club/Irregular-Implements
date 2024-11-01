@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock;
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
@@ -21,7 +21,7 @@ public abstract class BiomeMixin {
             cancellable = true
     )
     private void shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlock.Companion.chunkHasActiveRainShield(level, pos)) {
+        if (RainShieldBlockEntity.Companion.chunkHasActiveRainShield(level, pos)) {
             cir.setReturnValue(false);
         }
     }
