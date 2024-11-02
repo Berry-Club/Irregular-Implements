@@ -48,7 +48,7 @@ class BlazeAndSteelItem : FlintAndSteelItem(
         level.setBlock(blockPos, newState, 11)
         level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos)
         if (player != null) {
-            context.itemInHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()))
+            context.itemInHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.hand))
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide())
