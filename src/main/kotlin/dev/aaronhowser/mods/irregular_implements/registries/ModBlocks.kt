@@ -12,7 +12,8 @@ object ModBlocks {
     val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
     val FERTILIZED_DIRT = basicBlock("fertilized_dirt")
-    val LAPIS_GLASS = basicBlock("lapis_glass")
+    val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
+        registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
     val LAPIS_LAMP = basicBlock("lapis_lamp")
     val DYEING_MACHINE = basicBlock("dyeing_machine")
     val ENDER_BRIDGE = basicBlock("ender_bridge")
@@ -31,7 +32,8 @@ object ModBlocks {
     val PITCHER_PLANT = basicBlock("pitcher_plant")
     val PLATFORM = basicBlock("platform")   // Same block for every variant
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
-    val QUARTZ_GLASS = basicBlock("quartz_glass")
+    val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
+        registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val CONTACT_BUTTON = basicBlock("contact_button")
     val CONTACT_LEVER = basicBlock("contact_lever")     // Contact Mike reference?
