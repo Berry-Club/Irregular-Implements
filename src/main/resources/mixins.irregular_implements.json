@@ -4,6 +4,7 @@
   "package": "dev.aaronhowser.mods.irregular_implements.mixin",
   "mixins": [
     "BiomeMixin",
+    "FireMixin",
     "LevelMixin"
   ],
   "injectors": {

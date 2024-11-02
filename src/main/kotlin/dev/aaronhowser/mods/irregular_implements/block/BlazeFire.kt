@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.BetterFire
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Blocks
@@ -9,9 +10,11 @@ import net.minecraft.world.level.block.state.BlockState
 class BlazeFire : FireBlock(
     Properties
         .ofFullCopy(Blocks.FIRE)
-) {
+), BetterFire {
 
-
+    override fun `irregular_implements$getTickDelayFactor`(): Float {
+        return 0.1f
+    }
 
     override fun getIgniteOdds(state: BlockState): Int {
         return super.getIgniteOdds(state) * 3
