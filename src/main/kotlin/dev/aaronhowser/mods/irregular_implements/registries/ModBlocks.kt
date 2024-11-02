@@ -53,6 +53,8 @@ object ModBlocks {
     val TRANSLUCENT_LUMINOUS_BLOCK = basicBlock("translucent_luminous_block")   // Same block for all colors
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
+    val BLAZE_FIRE: DeferredBlock<BlazeFire> =
+        registerBlock("blaze_fire") { BlazeFire() }
 
     /** [net.neoforged.neoforge.common.world.StructureModifier] */
     val PEACE_CANDLE = basicBlock("peace_candle")

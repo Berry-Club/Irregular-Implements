@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
-import dev.aaronhowser.mods.irregular_implements.item.FilterEntityItem
-import dev.aaronhowser.mods.irregular_implements.item.FilterLocationItem
-import dev.aaronhowser.mods.irregular_implements.item.StableEnderPearlItem
+import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -45,7 +42,8 @@ object ModItems {
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
     val EMERALD_COMPASS = basic("emerald_compass")
-    val BLAZE_AND_STEEL = basic("blaze_and_steel")
+    val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
+        register("blaze_and_steel") { BlazeAndSteelItem() }
     val RUNE_PATTERN = basic("rune_pattern")
     val ID_CARD = basic("id_card")
     val PORTKEY = basic("portkey")
