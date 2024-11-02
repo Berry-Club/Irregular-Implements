@@ -31,8 +31,10 @@ class BlazeAndSteelItem : FlintAndSteelItem(
         val player = context.player
         val level = context.level
         val blockPos = context.clickedPos
-        val blockState = level.getBlockState(blockPos)
-        val newState = blockState.getToolModifiedState(context, ItemAbilities.FIRESTARTER_LIGHT, false) ?: return InteractionResult.PASS
+        val newState = level
+            .getBlockState(blockPos)
+            .getToolModifiedState(context, ItemAbilities.FIRESTARTER_LIGHT, false)
+            ?: return InteractionResult.PASS
 
         level.playSound(
             player,
@@ -55,9 +57,8 @@ class BlazeAndSteelItem : FlintAndSteelItem(
     private fun tryPlaceFire(context: UseOnContext): InteractionResult {
         val player = context.player
         val level = context.level
-        val blockPos = context.clickedPos
 
-        val firePos = blockPos.relative(context.clickedFace)
+        val firePos = context.clickedPos.relative(context.clickedFace)
         if (!BaseFireBlock.canBePlacedAt(level, firePos, context.horizontalDirection)) return InteractionResult.FAIL
 
         level.playSound(
