@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
+import dev.aaronhowser.mods.irregular_implements.block.TriggerGlass
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
@@ -38,12 +39,42 @@ class ModBlockStateProvider(
             otherTexture = modLoc("block/sided_redstone_side")
         )
 
+        triggerGlass()
+
     }
 
-    private val singleTextureTransparentBlocks = listOf(
-        ModBlocks.BLOCK_OF_STICKS,
-        ModBlocks.RETURNING_BLOCK_OF_STICKS
-    )
+    private fun triggerGlass() {
+        val block = ModBlocks.TRIGGER_GLASS.get()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val notSolid = it.getValue(TriggerGlass.NOT_SOLID)
+                val modelName = name(block) + if (notSolid) "_triggered" else ""
+                val textureLocation = if (notSolid) "block/trigger_glass_triggered" else "block/trigger_glass"
+
+                //TODO: Is it not using the new texture? wtf?
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(
+                        models()
+                            .cubeAll(
+                                modelName,
+                                modLoc(textureLocation)
+                            )
+                            .renderType(mcLoc("cutout"))
+                    )
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/trigger_glass"),
+                existingFileHelper
+            )
+        )
+    }
 
     private fun oneUniqueFace(
         block: Block,
@@ -140,6 +171,14 @@ class ModBlockStateProvider(
             )
         )
     }
+
+    private val singleTextureTransparentBlocks = listOf(
+        ModBlocks.BLOCK_OF_STICKS,
+        ModBlocks.RETURNING_BLOCK_OF_STICKS,
+        ModBlocks.BIOME_GLASS,
+        ModBlocks.LAPIS_GLASS,
+        ModBlocks.QUARTZ_GLASS
+    )
 
     private fun singleTextureTransparent(block: Block) {
         val model = models()

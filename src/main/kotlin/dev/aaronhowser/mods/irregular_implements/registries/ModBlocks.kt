@@ -56,7 +56,8 @@ object ModBlocks {
     val PEACE_CANDLE = basicBlock("peace_candle")
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val INVENTORY_TESTER = basicBlock("inventory_tester")
-    val TRIGGER_GLASS = basicBlock("trigger_glass")
+    val TRIGGER_GLASS: DeferredBlock<TriggerGlass> =
+        registerBlock("trigger_glass") { TriggerGlass() }
     val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")

@@ -67,7 +67,7 @@ class AnalogEmitter(
         if (!player.getItemInHand(player.usedItemHand).isEmpty) return InteractionResult.PASS
 
         val newState = oldState.cycle(POWER)
-        level.setBlock(pos, newState, 3)
+        level.setBlockAndUpdate(pos, newState)
         val newPower = newState.getValue(POWER)
 
         val pitch = 0.5f + (newPower.toFloat() / 15f) * (2f - 0.5f)   // 0.5 to 5
@@ -101,7 +101,7 @@ class AnalogEmitter(
         val facingSideIsPowered = level.hasSignal(pos.relative(facing), facing.opposite)
 
         val newState = oldState.setValue(ENABLED, facingSideIsPowered)
-        level.setBlock(pos, newState, 3)
+        level.setBlockAndUpdate(pos, newState)
     }
 
     override fun isSignalSource(state: BlockState): Boolean {
