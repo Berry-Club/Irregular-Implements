@@ -21,10 +21,8 @@ class BlazeAndSteelItem : FlintAndSteelItem(
 ) {
 
     override fun useOn(context: UseOnContext): InteractionResult {
-        val level = context.level
-        val blockPos = context.clickedPos
-        val blockState = level.getBlockState(blockPos)
-        val modifiedState = blockState.getToolModifiedState(context, ItemAbilities.FIRESTARTER_LIGHT, false)
+        val originalState = context.level.getBlockState(context.clickedPos)
+        val modifiedState = originalState.getToolModifiedState(context, ItemAbilities.FIRESTARTER_LIGHT, false)
 
         return if (modifiedState != null) tryModifyBlock(context) else tryPlaceFire(context)
     }
@@ -58,7 +56,6 @@ class BlazeAndSteelItem : FlintAndSteelItem(
         val player = context.player
         val level = context.level
         val blockPos = context.clickedPos
-        val blockState = level.getBlockState(blockPos)
 
         val firePos = blockPos.relative(context.clickedFace)
         if (!BaseFireBlock.canBePlacedAt(level, firePos, context.horizontalDirection)) return InteractionResult.FAIL
