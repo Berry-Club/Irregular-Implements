@@ -63,13 +63,31 @@ class TriggerGlass : Block(
         isMoving: Boolean
     ) {
         if (level.isClientSide) return
-        if (state.getValue(NOT_SOLID)) return
 
         val isPowered = level.hasNeighborSignal(pos)
         if (!isPowered) return
 
+        propagate(level, pos, 0)
+    }
+
+    private fun propagate(
+        level: Level,
+        pos: BlockPos,
+        recursions: Int
+    ) {
+        if (recursions >= 20) return        //TODO: Configurable range
+
+        val state = level.getBlockState(pos)
+        if (state.block != this) return
+        if (state.getValue(NOT_SOLID)) return
+
         level.setBlockAndUpdate(pos, state.setValue(NOT_SOLID, true))
-        level.scheduleTick(pos, this, 20 * 3)   //TODO: configurable?
+        level.scheduleTick(pos, this, 20 * 3)   //TODO: configurable duration
+
+        for (direction in Direction.entries) {
+            val offset = pos.relative(direction)
+            propagate(level, offset, recursions + 1)
+        }
     }
 
     override fun tick(
