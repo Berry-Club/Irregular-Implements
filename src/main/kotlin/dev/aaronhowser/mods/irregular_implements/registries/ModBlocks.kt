@@ -54,7 +54,7 @@ object ModBlocks {
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
     val BLAZE_FIRE: DeferredBlock<BlazeFire> =
-        registerBlock("blaze_fire") { BlazeFire() }
+        registerBlockWithoutItem("blaze_fire") { BlazeFire() }
 
     /** [net.neoforged.neoforge.common.world.StructureModifier] */
     val PEACE_CANDLE = basicBlock("peace_candle")
@@ -144,10 +144,15 @@ object ModBlocks {
         supplier: () -> T
     ): DeferredBlock<T> {
         val block = BLOCK_REGISTRY.register(name, supplier)
-
         ModItems.ITEM_REGISTRY.registerSimpleBlockItem(name, block)
-
         return block
+    }
+
+    private fun <T : Block> registerBlockWithoutItem(
+        name: String,
+        supplier: () -> T
+    ): DeferredBlock<T> {
+        return BLOCK_REGISTRY.register(name, supplier)
     }
 
 }
