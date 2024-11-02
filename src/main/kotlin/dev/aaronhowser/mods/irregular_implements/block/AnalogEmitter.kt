@@ -55,6 +55,7 @@ class AnalogEmitter(
             .setValue(POWER, 0)
     }
 
+    //TODO: GUI?
     override fun useWithoutItem(
         oldState: BlockState,
         level: Level,
@@ -63,6 +64,7 @@ class AnalogEmitter(
         hitResult: BlockHitResult
     ): InteractionResult {
         if (level.isClientSide) return InteractionResult.SUCCESS
+        if (!player.getItemInHand(player.usedItemHand).isEmpty) return InteractionResult.PASS
 
         val newState = oldState.cycle(POWER)
         level.setBlock(pos, newState, 3)
