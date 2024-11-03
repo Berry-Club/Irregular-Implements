@@ -144,7 +144,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.CUSTOM_WORKBENCH, "Custom Workbench")
         addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
         addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
-        addBlock(ModBlocks.PLATFORM, "Platform")
+//        addBlock(ModBlocks.PLATFORM, "Platform")
         addBlock(ModBlocks.QUARTZ_LAMP, "Quartz Lamp")
         addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")
         addBlock(ModBlocks.POTION_VAPORIZER, "Potion Vaporizer")
@@ -249,7 +249,7 @@ class ModLanguageProvider(
         addInfo(ModBlocks.FLUID_DISPLAY, "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.")
         addInfo(ModBlocks.ENDER_MAILBOX, "Allows players to send and receive Ender Letters.")
         addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
-        addInfo(ModBlocks.PLATFORM, "Only solid to non-sneaking entities.")
+//        addInfo(ModBlocks.PLATFORM, "Only solid to non-sneaking entities.")
         addInfo(ModBlocks.ENTITY_DETECTOR, "Emits a Redstone signal if a configured entity is within a configured range.")
         addInfo(ModBlocks.QUARTZ_LAMP, "Provides invisible light, which can't be seen but affects mob spawning.")   //TODO: Make some joke about radiation
         addInfo(ModBlocks.QUARTZ_GLASS, "Solid for everything but players.")

@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -30,7 +31,6 @@ object ModBlocks {
     val CUSTOM_WORKBENCH = basicBlock("custom_workbench")   // Same block for every variant
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val PITCHER_PLANT = basicBlock("pitcher_plant")
-    val PLATFORM = basicBlock("platform")   // Same block for every variant
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
     val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
         registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
@@ -77,9 +77,34 @@ object ModBlocks {
     val STAINED_BRICKS = basicBlock("stained_bricks") // Same block for all colors
     val LUMINOUS_STAINED_BRICKS = basicBlock("luminous_stained_bricks") // Same block for all colors
 
+    // Platform
+    val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("oak_platform") { PlatformBlock(blockSetType = BlockSetType.OAK) }
+    val SPRUCE_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("spruce_platform") { PlatformBlock(blockSetType = BlockSetType.SPRUCE) }
+    val BIRCH_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("birch_platform") { PlatformBlock(blockSetType = BlockSetType.BIRCH) }
+    val JUNGLE_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("jungle_platform") { PlatformBlock(blockSetType = BlockSetType.JUNGLE) }
+    val ACACIA_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("acacia_platform") { PlatformBlock(blockSetType = BlockSetType.ACACIA) }
+    val DARK_OAK_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("dark_oak_platform") { PlatformBlock(blockSetType = BlockSetType.DARK_OAK) }
+    val CRIMSON_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("crimson_platform") { PlatformBlock(blockSetType = BlockSetType.CRIMSON) }
+    val WARPED_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("warped_platform") { PlatformBlock(blockSetType = BlockSetType.WARPED) }
+    val MANGROVE_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("mangrove_platform") { PlatformBlock(blockSetType = BlockSetType.MANGROVE) }
+    val BAMBOO_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("bamboo_platform") { PlatformBlock(blockSetType = BlockSetType.BAMBOO) }
+    val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("cherry_platform") { PlatformBlock(blockSetType = BlockSetType.CHERRY) }
+
     // Lubricant
     val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
-    val SUPER_LUBRICANT_PLATFORM = basicBlock("super_lubricant_platform")
+    val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("super_lubricant_platform") { PlatformBlock(blockSetType = null) }
     val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
     val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
 

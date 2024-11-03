@@ -35,7 +35,7 @@ object ModInformationRecipes {
             ModBlocks.FLUID_DISPLAY,
             ModBlocks.ENDER_MAILBOX,
             ModBlocks.PITCHER_PLANT,
-            ModBlocks.PLATFORM,
+//            ModBlocks.PLATFORM,
             ModBlocks.ENTITY_DETECTOR,
             ModBlocks.QUARTZ_LAMP,
             ModBlocks.QUARTZ_GLASS,
