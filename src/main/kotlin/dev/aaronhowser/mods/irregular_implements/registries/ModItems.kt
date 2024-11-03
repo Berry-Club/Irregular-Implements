@@ -37,7 +37,8 @@ object ModItems {
                 Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))
             )
         }
-    val BOTTLE_OF_AIR = basic("bottle_of_air")
+    val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
+        register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
     val SAKANADE_SPORES = basic("sakanade_spores")
     val EVIL_TEAR = basic("evil_tear")
