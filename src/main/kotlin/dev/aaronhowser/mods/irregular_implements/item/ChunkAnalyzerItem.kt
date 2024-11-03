@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.Block
 import org.apache.commons.lang3.mutable.MutableInt
 import java.util.*
 
@@ -29,7 +29,7 @@ class ChunkAnalyzerItem : Item(
 
         val chunk = level.getChunkAt(player.blockPosition())
 
-        val blockStateCounts: IdentityHashMap<BlockState, MutableInt> = IdentityHashMap()
+        val blockStateCounts: IdentityHashMap<Block, MutableInt> = IdentityHashMap()
 
         val minX = chunk.pos.minBlockX
         val maxX = chunk.pos.maxBlockX
@@ -45,17 +45,17 @@ class ChunkAnalyzerItem : Item(
                     if (blockState.isAir) continue
 
                     blockStateCounts
-                        .computeIfAbsent(blockState) { MutableInt(0) }
+                        .computeIfAbsent(blockState.block) { MutableInt(0) }
                         .increment()
                 }
             }
         }
 
-        for ((blockState, count) in blockStateCounts) {
+        for ((block, count) in blockStateCounts.entries.sortedByDescending { it.value }) {
 
             player.sendSystemMessage(
                 Component.literal(
-                    "${blockState.block.name.string} x${count.value}"
+                    "${block.name.string} x${count.value}"
                 )
             )
 
