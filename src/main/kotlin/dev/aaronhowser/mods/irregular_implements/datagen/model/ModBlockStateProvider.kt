@@ -22,6 +22,10 @@ class ModBlockStateProvider(
 
     override fun registerStatesAndModels() {
 
+        for (block in singleTextureBlocks) {
+            simpleBlockWithItem(block.get(), cubeAll(block.get()))
+        }
+
         for (block in singleTextureTransparentBlocks) {
             singleTextureTransparent(block.get())
         }
@@ -187,6 +191,16 @@ class ModBlockStateProvider(
 
         simpleBlockWithItem(block, model)
     }
+
+    private val singleTextureBlocks = listOf(
+        ModBlocks.SUPER_LUBRICANT_STONE,
+        ModBlocks.SPECTRE_PLANKS,
+        ModBlocks.SOUND_DAMPENER,
+        ModBlocks.REDSTONE_OBSERVER,
+        ModBlocks.QUARTZ_LAMP,
+        ModBlocks.ENTITY_DETECTOR,
+        ModBlocks.BEAN_POD
+    )
 
     private fun name(block: Block): String {
         return BuiltInRegistries.BLOCK.getKey(block).path
