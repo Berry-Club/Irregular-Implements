@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(FireBlock.class)
-public class FireMixin implements BetterFire {
+public abstract class FireMixin implements BetterFire {
 
     @Override
     public float irregular_implements$getTickDelayFactor() {
