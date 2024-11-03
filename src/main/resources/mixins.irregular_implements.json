@@ -5,7 +5,8 @@
   "mixins": [
     "BiomeMixin",
     "FireMixin",
-    "LevelMixin"
+    "LevelMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

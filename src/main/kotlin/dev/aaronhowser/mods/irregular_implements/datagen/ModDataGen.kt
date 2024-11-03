@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModBlockLootTablesSubProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.PackOutput
@@ -57,6 +58,11 @@ object ModDataGen {
                 ),
                 lookupProvider
             )
+        )
+
+        val blockTagProvider = generator.addProvider(
+            event.includeServer(),
+            ModBlockTagsProvider(output, lookupProvider, existingFileHelper)
         )
 
     }
