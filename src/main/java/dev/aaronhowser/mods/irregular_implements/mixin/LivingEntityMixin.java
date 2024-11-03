@@ -20,6 +20,10 @@ public class LivingEntityMixin {
     private void shouldDiscardFriction(CallbackInfoReturnable<Boolean> cir) {
         var livingEntity = (LivingEntity) (Object) this;
 
+        if (livingEntity.getDeltaMovement().lengthSqr() > 1f) {
+            return;
+        }
+
         if (livingEntity
                 .getItemBySlot(EquipmentSlot.FEET)
                 .is(ModItems.INSTANCE.getSUPER_LUBRICANT_BOOTS())
