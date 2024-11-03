@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
-import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityItemComponent
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
@@ -36,15 +36,8 @@ object ModDataComponents {
     val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("uuid") { builder ->
             builder
-                .persistent(
-                    Codec.STRING.xmap(
-                        { java.util.UUID.fromString(it) },
-                        { it.toString() }
-                    ))
-                .networkSynchronized(ByteBufCodecs.STRING_UTF8.map(
-                    { java.util.UUID.fromString(it) },
-                    { it.toString() }
-                ))
+                .persistent(SpecificEntityItemComponent.UUID_CODEC)
+                .networkSynchronized(SpecificEntityItemComponent.UUID_STREAM_CODEC)
         }
 
     val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
@@ -52,6 +45,13 @@ object ModDataComponents {
             it
                 .persistent(Biome.CODEC)
                 .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.BIOME))
+        }
+
+    val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityItemComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("player") {
+            it
+                .persistent(SpecificEntityItemComponent.CODEC)
+                .networkSynchronized(SpecificEntityItemComponent.STREAM_CODEC)
         }
 
 }
