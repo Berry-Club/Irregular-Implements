@@ -12,7 +12,7 @@ import net.minecraft.world.entity.Entity
 import net.neoforged.neoforge.common.util.NeoForgeExtraCodecs
 import java.util.*
 
-class SpecificEntityItemComponent(
+data class SpecificEntityItemComponent(
     val uuid: UUID,
     val name: Component
 ) {
