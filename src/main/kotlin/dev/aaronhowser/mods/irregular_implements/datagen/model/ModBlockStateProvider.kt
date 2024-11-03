@@ -44,7 +44,43 @@ class ModBlockStateProvider(
         )
 
         triggerGlass()
+        platforms()
 
+    }
+
+    private fun platforms() {
+        val platformTextureMap = mapOf(
+            ModBlocks.OAK_PLATFORM to mcLoc("block/oak_planks"),
+            ModBlocks.SPRUCE_PLATFORM to mcLoc("block/spruce_planks"),
+            ModBlocks.BIRCH_PLATFORM to mcLoc("block/birch_planks"),
+            ModBlocks.JUNGLE_PLATFORM to mcLoc("block/jungle_planks"),
+            ModBlocks.ACACIA_PLATFORM to mcLoc("block/acacia_planks"),
+            ModBlocks.DARK_OAK_PLATFORM to mcLoc("block/dark_oak_planks"),
+            ModBlocks.CRIMSON_PLATFORM to mcLoc("block/crimson_planks"),
+            ModBlocks.WARPED_PLATFORM to mcLoc("block/warped_planks"),
+            ModBlocks.MANGROVE_PLATFORM to mcLoc("block/mangrove_planks"),
+            ModBlocks.BAMBOO_PLATFORM to mcLoc("block/bamboo_planks"),
+            ModBlocks.CHERRY_PLATFORM to mcLoc("block/cherry_planks"),
+            ModBlocks.SUPER_LUBRICANT_PLATFORM to modLoc("block/super_lubricant_ice"),
+            ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM to modLoc("block/filtered_super_lubricant_platform")
+        )
+
+        for ((deferred, texture) in platformTextureMap) {
+            val modelName = "block/" + name(deferred.get())
+
+            val model = models()
+                .withExistingParent(modelName, mcLoc("block/block"))
+                .texture("texture", texture)
+                .texture("particle", texture)
+
+                .element()
+                .from(0f, 15f, 0f)
+                .to(16f, 16f, 16f)
+                .textureAll("#texture")
+                .end()
+
+            simpleBlockWithItem(deferred.get(), model)
+        }
     }
 
     private fun triggerGlass() {
