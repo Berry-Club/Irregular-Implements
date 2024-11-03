@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "tag": "c:ender_pearls"
+    },
+    "P": {
+      "item": "minecraft:cherry_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    " E "
+  ],
+  "result": {
+    "count": 6,
+    "id": "irregular_implements:cherry_platform"
+  }
+}

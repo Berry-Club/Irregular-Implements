@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "irregular_implements:super_lubricant_platform"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "P",
+    "L",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:filtered_super_lubricant_platform"
+  }
+}

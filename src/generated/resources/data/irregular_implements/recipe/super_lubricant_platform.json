@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "tag": "c:ender_pearls"
+    },
+    "P": {
+      "item": "irregular_implements:super_lubricant_ice"
+    }
+  },
+  "pattern": [
+    "PPP",
+    " E "
+  ],
+  "result": {
+    "count": 6,
+    "id": "irregular_implements:super_lubricant_platform"
+  }
+}

@@ -27,12 +27,16 @@ class ModRecipeProvider(
         for (shapelessRecipe in shapelessRecipes) {
             shapelessRecipe.save(recipeOutput)
         }
+
+        for (platform in platforms()) {
+            platform.save(recipeOutput)
+        }
+
     }
 
     //TODO:
     // Potions of Collapse
     // Crafting Tables
-    // Platforms
     // Luminous Blocks
     // Translucent Luminous Blocks
     // Stained Bricks
@@ -1179,5 +1183,42 @@ class ModRecipeProvider(
             )
         )
     )
+
+    private fun platforms(): List<ShapedRecipeBuilder> {
+        val platformIngredientMap = mapOf(
+            ModBlocks.OAK_PLATFORM to Items.OAK_PLANKS,
+            ModBlocks.SPRUCE_PLATFORM to Items.SPRUCE_PLANKS,
+            ModBlocks.BIRCH_PLATFORM to Items.BIRCH_PLANKS,
+            ModBlocks.JUNGLE_PLATFORM to Items.JUNGLE_PLANKS,
+            ModBlocks.ACACIA_PLATFORM to Items.ACACIA_PLANKS,
+            ModBlocks.DARK_OAK_PLATFORM to Items.DARK_OAK_PLANKS,
+            ModBlocks.CRIMSON_PLATFORM to Items.CRIMSON_PLANKS,
+            ModBlocks.WARPED_PLATFORM to Items.WARPED_PLANKS,
+            ModBlocks.MANGROVE_PLATFORM to Items.MANGROVE_PLANKS,
+            ModBlocks.BAMBOO_PLATFORM to Items.BAMBOO_PLANKS,
+            ModBlocks.CHERRY_PLATFORM to Items.CHERRY_PLANKS,
+            ModBlocks.SUPER_LUBRICANT_PLATFORM to ModBlocks.SUPER_LUBRICANT_ICE
+        )
+
+        return platformIngredientMap.map { (platform, ingredient) ->
+            shapedRecipe(
+                platform.get(),
+                6,
+                "PPP, E ",
+                mapOf(
+                    'P' to ing(ingredient),
+                    'E' to ing(Tags.Items.ENDER_PEARLS)
+                )
+            )
+        } + shapedRecipe(
+            ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM.get(),
+            "P,L,S",
+            mapOf(
+                'P' to ing(Items.PAPER),
+                'L' to ing(ModBlocks.SUPER_LUBRICANT_PLATFORM.get()),
+                'S' to ing(Tags.Items.STRINGS)
+            )
+        )
+    }
 
 }

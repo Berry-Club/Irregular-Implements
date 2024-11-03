@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "tag": "c:ender_pearls"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    " E "
+  ],
+  "result": {
+    "count": 6,
+    "id": "irregular_implements:dark_oak_platform"
+  }
+}
