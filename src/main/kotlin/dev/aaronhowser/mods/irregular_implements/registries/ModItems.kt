@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
+import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.ArmorMaterials
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -93,7 +95,16 @@ object ModItems {
 
     // Lubricant
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
-    val SUPER_LUBRICANT_BOOTS = basic("super_lubricant_boots")  // What if you could instead apply the tincture to any boots?
+
+    // What if you could instead apply the tincture to any boots?
+    val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =
+        register("super_lubricant_boots") {
+            ArmorItem(
+                ArmorMaterials.IRON,
+                ArmorItem.Type.BOOTS,
+                Item.Properties().durability(15)
+            )
+        }
 
     // Floo
     val FLOO_POWDER = basic("floo_powder")
