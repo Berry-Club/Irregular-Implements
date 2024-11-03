@@ -74,7 +74,8 @@ object ModItems {
     val ITEM_FILTER = basic("item_filter")
     val ENTITY_FILTER: DeferredItem<FilterEntityItem> =
         register("entity_filter") { FilterEntityItem() }
-    val ID_CARD = basic("id_card")
+    val ID_CARD: DeferredItem<FilterPlayerItem> =
+        register("id_card") { FilterPlayerItem() }
 
     // Imbues
     val FIRE_IMBUE = basic("fire_imbue")

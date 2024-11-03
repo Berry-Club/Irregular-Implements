@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentSerialization
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
+import net.minecraft.world.entity.Entity
 import net.neoforged.neoforge.common.util.NeoForgeExtraCodecs
 import java.util.*
 
@@ -15,6 +16,8 @@ class SpecificEntityItemComponent(
     val uuid: UUID,
     val name: Component
 ) {
+
+    constructor(entity: Entity) : this(entity.uuid, entity.name)
 
     companion object {
 
