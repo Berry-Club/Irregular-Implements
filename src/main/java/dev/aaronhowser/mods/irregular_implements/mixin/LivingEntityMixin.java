@@ -47,13 +47,14 @@ public abstract class LivingEntityMixin {
     }
 
     @ModifyVariable(
-            method = "updateSynchronizedMobEffectParticles",
+            method = "tickEffects",
             at = @At(
                     value = "STORE",
-                    target = "Ljava/util/stream/Stream;toList()Ljava/util/List;"
+                    target = "Lnet/minecraft/network/syncher/SynchedEntityData;get(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;",
+                    ordinal = 0
             )
     )
-    private List<ParticleOptions> hideMobEffectParticles(List<ParticleOptions> value) {
+    private List<ParticleOptions> hideMobEffectParticles(List<ParticleOptions> original) {
         if (
                 ((LivingEntity) (Object) this)
                         .getItemBySlot(EquipmentSlot.HEAD)
@@ -61,7 +62,7 @@ public abstract class LivingEntityMixin {
         ) {
             return List.of();
         }
-        return value;
+        return original;
     }
 
 }
