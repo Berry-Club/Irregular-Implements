@@ -29,7 +29,14 @@ object ModItems {
     val OBSIDIAN_SKULL = basic("obsidian_skull")
     val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
     val OBSIDIAN_WATER_WALKING_BOOTS = basic("obsidian_water_walking_boots")
-    val MAGIC_HOOD = basic("magic_hood")
+    val MAGIC_HOOD: DeferredItem<ArmorItem> =
+        register("magic_hood") {
+            ArmorItem(
+                ArmorMaterials.CHAIN,
+                ArmorItem.Type.HELMET,
+                Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))
+            )
+        }
     val BOTTLE_OF_AIR = basic("bottle_of_air")
     val BLOOD_STONE = basic("blood_stone")
     val ENDER_LETTER = basic("ender_letter")
@@ -47,7 +54,6 @@ object ModItems {
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
         register("blaze_and_steel") { BlazeAndSteelItem() }
     val RUNE_PATTERN = basic("rune_pattern")
-    val ID_CARD = basic("id_card")
     val PORTKEY = basic("portkey")
     val LOTUS_SEEDS = basic("lotus_seeds")
     val ESCAPE_ROPE = basic("escape_rope")
@@ -64,9 +70,10 @@ object ModItems {
     // Filters
     val LOCATION_FILTER: DeferredItem<FilterLocationItem> =
         register("location_filter") { FilterLocationItem() }
+    val ITEM_FILTER = basic("item_filter")
     val ENTITY_FILTER: DeferredItem<FilterEntityItem> =
         register("entity_filter") { FilterEntityItem() }
-    val ITEM_FILTER = basic("item_filter")
+    val ID_CARD = basic("id_card")
 
     // Imbues
     val FIRE_IMBUE = basic("fire_imbue")
@@ -102,7 +109,7 @@ object ModItems {
             ArmorItem(
                 ArmorMaterials.IRON,
                 ArmorItem.Type.BOOTS,
-                Item.Properties().durability(15)
+                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
             )
         }
 
