@@ -63,7 +63,6 @@ class ModLanguageProvider(
         addItem(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, "Obsidian Water Walking Boots")
         addItem(ModItems.MAGIC_HOOD, "Magic Hood")
         addItem(ModItems.BOTTLE_OF_AIR, "Bottle of Air")
-        addItem(ModItems.BLOOD_STONE, "Blood Stone")
         addItem(ModItems.ENDER_LETTER, "Ender Letter")
         addItem(ModItems.ENTITY_FILTER, "Entity Filter")
         addItem(ModItems.SAKANADE_SPORES, "Sakande Spores")
