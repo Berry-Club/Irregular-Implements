@@ -12,22 +12,24 @@ class ModBlockLootTablesSubProvider(
 
     override fun generate() {
 
-        for (block in dropsSelf) {
+        for (block in knownBlocks - nonDropSelfBlocks) {
             dropSelf(block)
+        }
+
+        for (block in blocksWithoutDrops) {
+            add(block, noDrop())
         }
 
     }
 
-    private val dropsSelf = listOf(
-        ModBlocks.BLOCK_OF_STICKS,
-        ModBlocks.RETURNING_BLOCK_OF_STICKS,
-        ModBlocks.RAINBOW_LAMP
-    ).map { it.get() }
+    private val blocksWithoutDrops = listOf(
+        ModBlocks.BLAZE_FIRE
+    ).map { it.get() }.toSet()
 
-    private val blocksToDatagen = dropsSelf
+    private val nonDropSelfBlocks: Set<Block> = blocksWithoutDrops
 
     override fun getKnownBlocks(): List<Block> {
-        return blocksToDatagen
+        return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }
     }
 
 }

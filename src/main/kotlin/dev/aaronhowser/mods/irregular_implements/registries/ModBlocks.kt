@@ -103,10 +103,10 @@ object ModBlocks {
 
     // Lubricant
     val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
+    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("super_lubricant_platform") { PlatformBlock(blockSetType = null) }
     val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
-    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
 
     // Detectors
     val ONLINE_DETECTOR = basicBlock("online_detector")

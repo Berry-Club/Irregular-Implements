@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irregular_implements:filtered_super_lubricant_platform"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "irregular_implements:blocks/filtered_super_lubricant_platform"
+}
