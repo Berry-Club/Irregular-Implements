@@ -8,11 +8,12 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiInfoRecipe
 import dev.emi.emi.api.stack.EmiIngredient
 import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.ItemLike
 
 object ModInformationRecipes {
 
     fun getInformationRecipes(): List<EmiInfoRecipe> {
-        return getBasicInformationRecipes()
+        return getBasicInformationRecipes() + complexRecipes()
     }
 
     private fun getBasicInformationRecipes(): List<EmiInfoRecipe> {
@@ -35,7 +36,6 @@ object ModInformationRecipes {
             ModBlocks.FLUID_DISPLAY,
             ModBlocks.ENDER_MAILBOX,
             ModBlocks.PITCHER_PLANT,
-//            ModBlocks.PLATFORM,
             ModBlocks.ENTITY_DETECTOR,
             ModBlocks.QUARTZ_LAMP,
             ModBlocks.QUARTZ_GLASS,
@@ -154,6 +154,47 @@ object ModInformationRecipes {
             }
 
         }
+    }
+
+    private fun toEmiIngredients(vararg itemLikes: ItemLike): List<EmiIngredient> {
+        return itemLikes.map { EmiIngredient.of(Ingredient.of(it)) }
+    }
+
+    private fun complexRecipes(): List<EmiInfoRecipe> {
+        val platforms = EmiInfoRecipe(
+            toEmiIngredients(
+                ModBlocks.OAK_PLATFORM,
+                ModBlocks.SPRUCE_PLATFORM,
+                ModBlocks.BIRCH_PLATFORM,
+                ModBlocks.JUNGLE_PLATFORM,
+                ModBlocks.ACACIA_PLATFORM,
+                ModBlocks.DARK_OAK_PLATFORM,
+                ModBlocks.CRIMSON_PLATFORM,
+                ModBlocks.WARPED_PLATFORM,
+                ModBlocks.MANGROVE_PLATFORM,
+                ModBlocks.BAMBOO_PLATFORM,
+                ModBlocks.CHERRY_PLATFORM,
+                ModBlocks.SUPER_LUBRICANT_PLATFORM,
+                ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM
+            ),
+            listOf(ModLanguageProvider.Info.PLATFORM.toComponent()),
+            OtherUtil.modResource("/info/platform")
+        )
+
+        val biomeBlocks = EmiInfoRecipe(
+            toEmiIngredients(
+                ModBlocks.BIOME_GLASS,
+                ModBlocks.BIOME_STONE_BRICKS,
+                ModBlocks.BIOME_STONE_BRICKS_CHISELED,
+                ModBlocks.BIOME_STONE_BRICKS_CRACKED,
+                ModBlocks.BIOME_STONE,
+                ModBlocks.BIOME_COBBLESTONE
+            ),
+            listOf(ModLanguageProvider.Info.BIOME_BLOCKS.toComponent()),
+            OtherUtil.modResource("/info/biome_blocks")
+        )
+
+        return listOf(platforms, biomeBlocks)
     }
 
 }

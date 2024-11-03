@@ -38,7 +38,8 @@ class ModLanguageProvider(
     }
 
     object Info {
-        const val BIOME_BLOCKS = "Changes color to match the biome."
+        const val PLATFORM = "info.irregular_implements.platform"
+        const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
     }
 
     override fun addTranslations() {
@@ -249,7 +250,7 @@ class ModLanguageProvider(
         addInfo(ModBlocks.FLUID_DISPLAY, "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.")
         addInfo(ModBlocks.ENDER_MAILBOX, "Allows players to send and receive Ender Letters.")
         addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
-//        addInfo(ModBlocks.PLATFORM, "Only solid to non-sneaking entities.")
+        add(Info.PLATFORM, "Only solid to non-sneaking entities.")
         addInfo(ModBlocks.ENTITY_DETECTOR, "Emits a Redstone signal if a configured entity is within a configured range.")
         addInfo(ModBlocks.QUARTZ_LAMP, "Provides invisible light, which can't be seen but affects mob spawning.")   //TODO: Make some joke about radiation
         addInfo(ModBlocks.QUARTZ_GLASS, "Solid for everything but players.")
@@ -291,12 +292,7 @@ class ModLanguageProvider(
         addInfo(ModBlocks.SPECTRE_SAPLING, "Created by using Ectoplasm on a Sapling.\n\nGrows into a Spectre Tree, whose blocks have a chance of dropping Ectoplasm.")
         addInfo(ModBlocks.ITEM_COLLECTOR, "Collects items in a 3 block radius and inserts it into the inventory it's placed on.")
         addInfo(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Collects items in a configurable radius and inserts it into the inventory it's placed on.\n\nYou can also insert an Item Filter for more control.")
-        addInfo(ModBlocks.BIOME_GLASS, Info.BIOME_BLOCKS)
-        addInfo(ModBlocks.BIOME_STONE_BRICKS, Info.BIOME_BLOCKS)
-        addInfo(ModBlocks.BIOME_STONE_BRICKS_CHISELED, Info.BIOME_BLOCKS)
-        addInfo(ModBlocks.BIOME_STONE_BRICKS_CRACKED, Info.BIOME_BLOCKS)
-        addInfo(ModBlocks.BIOME_STONE, Info.BIOME_BLOCKS)
-        addInfo(ModBlocks.BIOME_COBBLESTONE, Info.BIOME_BLOCKS)
+        add(Info.BIOME_BLOCKS, "Changes color to match the biome.")
         addInfo(ModBlocks.RAINBOW_LAMP, "Changes color depending on the Redstone signal strength.\n\nOnly the texture changes, the light stays the same color.")
         addInfo(ModBlocks.BASIC_REDSTONE_INTERFACE, "Powers the linked block with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to a block.")
         addInfo(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Powers up to 9 linked blocks with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to blocks.")
