@@ -5,6 +5,7 @@
   "mixins": [
     "BiomeMixin",
     "FireMixin",
+    "ItemEntityMixin",
     "LevelMixin",
     "LivingEntityMixin"
   ],
