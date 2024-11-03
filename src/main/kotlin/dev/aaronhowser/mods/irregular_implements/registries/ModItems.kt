@@ -59,7 +59,8 @@ object ModItems {
     val WEATHER_EGG = basic("weather_egg")  //Same item for all weathers
     val ENDER_BUCKET = basic("ender_bucket")
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
-    val CHUNK_ANALYZER = basic("chunk_analyzer")
+    val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
+        register("chunk_analyzer") { ChunkAnalyzerItem() }
     val TIME_IN_A_BOTTLE = basic("time_in_a_bottle")
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val GRASS_SEEDS = basic("grass_seeds")  //Same item for all colors
