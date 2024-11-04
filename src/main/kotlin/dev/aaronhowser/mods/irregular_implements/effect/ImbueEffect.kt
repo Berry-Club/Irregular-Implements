@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity
 // You can only have one Imbue at a time
 class ImbueEffect : MobEffect(
     MobEffectCategory.BENEFICIAL,
-    0x00000000  // invisible
+    0x00FFFFFF  // invisible
 ) {
 
     override fun onEffectStarted(livingEntity: LivingEntity, amplifier: Int) {

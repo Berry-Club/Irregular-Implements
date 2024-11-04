@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registries.ModEffects
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -34,6 +35,7 @@ class ModLanguageProvider(
         addItems()
         addBlocks()
         addInfo()
+        addEffects()
     }
 
     object Items {
@@ -381,4 +383,13 @@ class ModLanguageProvider(
         addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
         //TODO: The others
     }
+
+    private fun addEffects() {
+        addEffect(ModEffects.FIRE_IMBUE, "Fire Imbue")
+        addEffect(ModEffects.POISON_IMBUE, "Poison Imbue")
+        addEffect(ModEffects.EXPERIENCE_IMBUE, "Experience Imbue")
+        addEffect(ModEffects.WITHER_IMBUE, "Wither Imbue")
+        addEffect(ModEffects.COLLAPSE_IMBUE, "Collapse Imbue")
+    }
+
 }

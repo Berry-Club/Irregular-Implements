@@ -14,14 +14,14 @@ object ModEffects {
         DeferredRegister.create(Registries.MOB_EFFECT, IrregularImplements.ID)
 
     val FIRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("fire_imbue", Supplier { ImbueEffect() })
+        EFFECT_REGISTRY.register("imbue_fire", Supplier { ImbueEffect() })
     val POISON_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("poison_imbue", Supplier { ImbueEffect() })
+        EFFECT_REGISTRY.register("imbue_poison", Supplier { ImbueEffect() })
     val EXPERIENCE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("experience_imbue", Supplier { ImbueEffect() })
+        EFFECT_REGISTRY.register("imbue_experience", Supplier { ImbueEffect() })
     val WITHER_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("wither_imbue", Supplier { ImbueEffect() })
+        EFFECT_REGISTRY.register("imbue_wither", Supplier { ImbueEffect() })
     val COLLAPSE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("collapse_imbue", Supplier { ImbueEffect() })
+        EFFECT_REGISTRY.register("imbue_collapse", Supplier { ImbueEffect() })
 
 }
