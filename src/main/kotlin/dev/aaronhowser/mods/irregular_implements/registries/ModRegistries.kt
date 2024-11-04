@@ -10,7 +10,8 @@ object ModRegistries {
         ModBlocks.BLOCK_REGISTRY,
         ModBlockEntities.BLOCK_ENTITY_REGISTRY,
         ModCreativeModeTabs.TABS_REGISTRY,
-        ModDataComponents.DATA_COMPONENT_REGISTRY
+        ModDataComponents.DATA_COMPONENT_REGISTRY,
+        ModEffects.EFFECT_REGISTRY,
     )
 
     fun register(modBus: IEventBus) {

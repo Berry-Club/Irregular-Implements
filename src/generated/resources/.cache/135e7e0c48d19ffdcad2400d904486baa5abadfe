@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-04T15:43:48.155321	Item Models: irregular_implements
+// 1.21.1	2024-11-04T16:51:35.3784678	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -21,6 +21,11 @@ d400a4c8f213aa5600f1bdb15ef9b55dbc44ab4b assets/irregular_implements/models/item
 6f5a051a6cedb9806b44532e02fe5f5a5e453d86 assets/irregular_implements/models/item/golden_egg.json
 2f2c02bfc8463bc8cfe0e23c212ffe4a4cfeace5 assets/irregular_implements/models/item/grass_seeds.json
 98e0d89aa956252e6c60d19a2d753c6feded7149 assets/irregular_implements/models/item/id_card.json
+0afb3511ab633f671dc6854695bef580b53c5cbc assets/irregular_implements/models/item/imbue_collapse.json
+53ba67fef77b698c2d1c8db3a61518771f3c3218 assets/irregular_implements/models/item/imbue_experience.json
+30eb6af84b0fcd7cc94f03cc9fb61e58d8abe69e assets/irregular_implements/models/item/imbue_fire.json
+d02613e04e3fb1b7e3097922dbf809999e9462b2 assets/irregular_implements/models/item/imbue_poison.json
+9a59f96c486532c797ba7dd7c014df5d0f4275b6 assets/irregular_implements/models/item/imbue_wither.json
 8eecac30b1b3b8e841fa47c090b95bceab2179c2 assets/irregular_implements/models/item/item_filter.json
 e90431818e2275b0fd91346aa6c3a58d98852bb9 assets/irregular_implements/models/item/lava_charm.json
 713e1b88036347fc981c2a68bd96328779643c26 assets/irregular_implements/models/item/lava_waders.json

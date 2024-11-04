@@ -78,10 +78,16 @@ object ModItems {
         register("id_card") { FilterPlayerItem() }
 
     // Imbues
-    val FIRE_IMBUE = basic("fire_imbue")
-    val POISON_IMBUE = basic("poison_imbue")
-    val EXPERIENCE_IMBUE = basic("experience_imbue")
-    val WITHER_IMBUE = basic("wither_imbue")
+    val FIRE_IMBUE: DeferredItem<ImbueItem> =
+        register("imbue_fire") { ImbueItem(ModEffects.FIRE_IMBUE) }
+    val POISON_IMBUE: DeferredItem<ImbueItem> =
+        register("imbue_poison") { ImbueItem(ModEffects.POISON_IMBUE) }
+    val EXPERIENCE_IMBUE: DeferredItem<ImbueItem> =
+        register("imbue_experience") { ImbueItem(ModEffects.EXPERIENCE_IMBUE) }
+    val WITHER_IMBUE: DeferredItem<ImbueItem> =
+        register("imbue_wither") { ImbueItem(ModEffects.WITHER_IMBUE) }
+    val COLLAPSE_IMBUE: DeferredItem<ImbueItem> =
+        register("imbue_collapse") { ImbueItem(ModEffects.COLLAPSE_IMBUE) }
 
     // Spectre
     val SPECTRE_INGOT = basic("spectre_ingot")
