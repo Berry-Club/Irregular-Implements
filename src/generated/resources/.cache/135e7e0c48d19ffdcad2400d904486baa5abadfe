@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-29T16:48:19.6228103	Item Models: irregular_implements
+// 1.21.1	2024-11-04T14:28:07.966191	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -6,7 +6,6 @@
 1ebbc3ffab02e7f57144255f02279c5f072024f3 assets/irregular_implements/models/item/biome_sensor.json
 13853e2f77048b5e2b35b345e8f07eb3bc1aadb2 assets/irregular_implements/models/item/blackout_powder.json
 6946b75e98be81f17ea8ed0cd1bc5b8e3aa11a79 assets/irregular_implements/models/item/blaze_and_steel.json
-1ce925db981c317f31b6b8493d4ad3a7e7d56b07 assets/irregular_implements/models/item/blood_stone.json
 d8ab2c37c2bb391cba73e11c8e8fd457c739381b assets/irregular_implements/models/item/bottle_of_air.json
 9ffed579675236228264a6cf2263b5081955c97d assets/irregular_implements/models/item/chunk_analyzer.json
 4797647d66afbbf3e928154c360581b58469c76f assets/irregular_implements/models/item/divining_rod.json
