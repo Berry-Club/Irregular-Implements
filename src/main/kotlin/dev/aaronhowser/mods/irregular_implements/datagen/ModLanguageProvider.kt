@@ -51,8 +51,8 @@ class ModLanguageProvider(
         add(Items.ENTITY_FILTER_UNSET, "Entity Filter")
         add(Items.ENTITY_FILTER_SET, "Entity Filter (%s)")
 
-        add(Items.PLAYER_FILTER_UNSET, "Player Filter")
-        add(Items.PLAYER_FILTER_SET, "Player Filter (%s)")
+        add(Items.PLAYER_FILTER_UNSET, "ID Card")
+        add(Items.PLAYER_FILTER_SET, "ID Card (%s)")
 
         add(Items.CREATIVE_TAB, "Irregular Implements")
 
@@ -90,7 +90,6 @@ class ModLanguageProvider(
         addItem(ModItems.EMERALD_COMPASS, "Emerald Compass")
         addItem(ModItems.BLAZE_AND_STEEL, "Blaze and Steel")
         addItem(ModItems.RUNE_PATTERN, "Rune Pattern")
-        addItem(ModItems.ID_CARD, "ID Card")
         addItem(ModItems.PORTKEY, "Portkey")
         addItem(ModItems.LOTUS_SEEDS, "Lotus Seeds")
         addItem(ModItems.ESCAPE_ROPE, "Escape Rope")
