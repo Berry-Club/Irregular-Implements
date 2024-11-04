@@ -59,6 +59,18 @@ class FilterPlayerItem : Item(
         return InteractionResultHolder.success(usedStack)
     }
 
+    override fun getName(stack: ItemStack): Component {
+
+        val playerName = stack.get(ModDataComponents.PLAYER.get())?.name
+        return if (playerName != null) {
+            ModLanguageProvider.Items.PLAYER_FILTER_SET
+                .toComponent(playerName)
+        } else {
+            ModLanguageProvider.Items.PLAYER_FILTER_UNSET
+                .toComponent()
+        }
+    }
+
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
         OtherUtil.moreInfoTooltip(
             tooltipComponents,

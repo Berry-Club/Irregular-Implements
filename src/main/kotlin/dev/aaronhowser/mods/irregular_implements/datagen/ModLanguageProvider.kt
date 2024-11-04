@@ -29,37 +29,24 @@ class ModLanguageProvider(
         }
     }
 
+    override fun addTranslations() {
+        addTooltips()
+        addItems()
+        addBlocks()
+        addInfo()
+    }
+
     object Items {
         const val CREATIVE_TAB = "itemGroup.irregular_implements"
+
+        const val ENTITY_FILTER_UNSET = "item.irregular_implements.entity_filter.unset"
+        const val ENTITY_FILTER_SET = "item.irregular_implements.entity_filter.set"
+
+        const val PLAYER_FILTER_UNSET = "item.irregular_implements.player_filter.unset"
+        const val PLAYER_FILTER_SET = "item.irregular_implements.player_filter.set"
     }
 
-    private fun addInfo(itemLike: ItemLike, infoString: String) {
-        add(getInfoString(itemLike), infoString)
-    }
-
-    object Info {
-        const val PLATFORM = "info.irregular_implements.platform"
-        const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
-    }
-
-    object Tooltips {
-        const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
-
-        const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
-        const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
-
-        const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
-        const val PLAYER_FILTER_PLAYER = "tooltip.irregular_implements.player_filter_player"
-    }
-
-    override fun addTranslations() {
-        add(Tooltips.SHIFT_FOR_MORE, "Hold [Shift] for more information")
-
-        add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
-        add(Tooltips.ENTITY_FILTER_ENTITY, "Entity type: %s")
-        add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
-        add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
-
+    private fun addItems() {
         add(Items.CREATIVE_TAB, "Irregular Implements")
 
         addItem(ModItems.STABLE_ENDER_PEARL, "Stable Ender Pearl")
@@ -80,7 +67,6 @@ class ModLanguageProvider(
         addItem(ModItems.MAGIC_HOOD, "Magic Hood")
         addItem(ModItems.BOTTLE_OF_AIR, "Bottle of Air")
         addItem(ModItems.ENDER_LETTER, "Ender Letter")
-        addItem(ModItems.ENTITY_FILTER, "Entity Filter")
         addItem(ModItems.SAKANADE_SPORES, "Sakande Spores")
         addItem(ModItems.EVIL_TEAR, "Evil Tear")
         addItem(ModItems.ECTOPLASM, "Ectoplasm")
@@ -142,7 +128,9 @@ class ModLanguageProvider(
         addItem(ModItems.SOUND_PATTERN, "Sound Pattern")
         addItem(ModItems.SOUND_RECORDER, "Sound Recorder")
         addItem(ModItems.PORTABLE_SOUND_DAMPENER, "Portable Sound Dampener")
+    }
 
+    private fun addBlocks() {
         addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
         addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")
         addBlock(ModBlocks.LAPIS_LAMP, "Lapis Lamp")
@@ -247,7 +235,37 @@ class ModLanguageProvider(
 
         addBlock(ModBlocks.FLOO_BRICK, "Floo Bricks")
         addBlock(ModBlocks.ANCIENT_BRICK, "Ancient Brick")
+    }
 
+    object Tooltips {
+        const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
+
+        const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
+        const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
+
+        const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
+        const val PLAYER_FILTER_PLAYER = "tooltip.irregular_implements.player_filter_player"
+    }
+
+    private fun addTooltips() {
+        add(Tooltips.SHIFT_FOR_MORE, "Hold [Shift] for more information")
+
+        add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
+        add(Tooltips.ENTITY_FILTER_ENTITY, "Entity type: %s")
+        add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
+        add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
+    }
+
+    object Info {
+        const val PLATFORM = "info.irregular_implements.platform"
+        const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
+    }
+
+    private fun addInfo(itemLike: ItemLike, infoString: String) {
+        add(getInfoString(itemLike), infoString)
+    }
+
+    private fun addInfo() {
         addInfo(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt does not require hydration, grows crops 3 times faster, and can't be trampled.\n\nYou still have to till it with a Hoe.")
         addInfo(ModBlocks.PLAYER_INTERFACE, "Exposes the inventory of the block's owner, as if it was the block's inventory.")
         addInfo(ModBlocks.LAPIS_GLASS, "Solid for players, not solid for anything else.")
@@ -359,7 +377,5 @@ class ModLanguageProvider(
         addInfo(ModItems.SOUND_RECORDER, "Lets you save a sound to a stored Sound Pattern.\n\nUse it to toggle recording; it will stop automatically once it reaches 10 unique sounds.\n\nSneak right-click again to choose which sound to save to the Pattern.")
         addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
         //TODO: The others
-
-
     }
 }
