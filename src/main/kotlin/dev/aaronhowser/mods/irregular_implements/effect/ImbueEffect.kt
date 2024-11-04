@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.effect
 
 import dev.aaronhowser.mods.irregular_implements.registries.ModEffects
+import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
@@ -8,6 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.LivingEntity
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
+import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
 
 class ImbueEffect : MobEffect(
     MobEffectCategory.BENEFICIAL,
@@ -26,7 +28,7 @@ class ImbueEffect : MobEffect(
     }
 
     companion object {
-        fun handleAttacks(event: LivingDamageEvent.Post) {
+        fun handleAttackImbues(event: LivingDamageEvent.Post) {
             val damageSource = event.source
 
             if (!damageSource.isDirect) return
@@ -44,6 +46,12 @@ class ImbueEffect : MobEffect(
 
                 ModEffects.COLLAPSE_IMBUE.get() -> TODO("Do something if they have Collapse Imbue")
             }
+        }
+
+        fun handleXpImbue(event: LivingExperienceDropEvent) {
+            val attacker = event.attackingPlayer ?: return
+
+            if (attacker.hasEffect(ModEffects.EXPERIENCE_IMBUE)) event.droppedExperience = Mth.ceil(event.droppedExperience * 1.5f)
         }
     }
 
