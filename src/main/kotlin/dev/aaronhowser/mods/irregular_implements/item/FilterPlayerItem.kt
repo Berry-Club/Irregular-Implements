@@ -17,11 +17,29 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import java.util.*
 
 class FilterPlayerItem : Item(
     Properties()
         .stacksTo(1)
 ) {
+
+    companion object {
+        fun getPlayerName(stack: ItemStack): Component? {
+            return stack.get(ModDataComponents.PLAYER)?.name
+        }
+
+        fun getPlayerUuid(stack: ItemStack): UUID? {
+            return stack.get(ModDataComponents.PLAYER)?.uuid
+        }
+
+        fun setPlayer(stack: ItemStack, player: Player) {
+            stack.set(
+                ModDataComponents.PLAYER.get(),
+                SpecificEntityItemComponent(player)
+            )
+        }
+    }
 
     override fun interactLivingEntity(
         stack: ItemStack,
@@ -33,10 +51,7 @@ class FilterPlayerItem : Item(
         if (player.cooldowns.isOnCooldown(this)) return InteractionResult.PASS
 
         val usedStack = player.getItemInHand(usedHand)
-        usedStack.set(
-            ModDataComponents.PLAYER.get(),
-            SpecificEntityItemComponent(interactionTarget)
-        )
+        setPlayer(usedStack, interactionTarget)
 
         player.cooldowns.addCooldown(this, 1)
 
@@ -49,10 +64,7 @@ class FilterPlayerItem : Item(
 
         if (player.cooldowns.isOnCooldown(this)) return InteractionResultHolder.pass(usedStack)
 
-        usedStack.set(
-            ModDataComponents.PLAYER.get(),
-            SpecificEntityItemComponent(player)
-        )
+        setPlayer(usedStack, player)
 
         player.cooldowns.addCooldown(this, 1)
 
@@ -60,8 +72,7 @@ class FilterPlayerItem : Item(
     }
 
     override fun getName(stack: ItemStack): Component {
-
-        val playerName = stack.get(ModDataComponents.PLAYER.get())?.name
+        val playerName = getPlayerName(stack)
         return if (playerName != null) {
             ModLanguageProvider.Items.PLAYER_FILTER_SET
                 .toComponent(playerName)
@@ -79,16 +90,6 @@ class FilterPlayerItem : Item(
                 .toComponent()
                 .withStyle(ChatFormatting.GRAY)
         )
-
-        val playerName = stack.get(ModDataComponents.PLAYER.get())?.name
-        if (playerName != null) {
-            tooltipComponents.add(
-                ModLanguageProvider.Tooltips.PLAYER_FILTER_PLAYER
-                    .toComponent(playerName)
-                    .withStyle(ChatFormatting.GRAY)
-            )
-        }
-
     }
 
 }

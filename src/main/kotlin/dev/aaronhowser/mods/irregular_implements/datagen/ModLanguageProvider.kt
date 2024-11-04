@@ -47,7 +47,16 @@ class ModLanguageProvider(
     }
 
     private fun addItems() {
+
+        add(Items.ENTITY_FILTER_UNSET, "Entity Filter")
+        add(Items.ENTITY_FILTER_SET, "Entity Filter (%s)")
+
+        add(Items.PLAYER_FILTER_UNSET, "Player Filter")
+        add(Items.PLAYER_FILTER_SET, "Player Filter (%s)")
+
         add(Items.CREATIVE_TAB, "Irregular Implements")
+
+        // Regular items
 
         addItem(ModItems.STABLE_ENDER_PEARL, "Stable Ender Pearl")
         addItem(ModItems.BIOME_CRYSTAL, "Biome Crystal")
@@ -241,19 +250,14 @@ class ModLanguageProvider(
         const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
 
         const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
-        const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
-
         const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
-        const val PLAYER_FILTER_PLAYER = "tooltip.irregular_implements.player_filter_player"
     }
 
     private fun addTooltips() {
         add(Tooltips.SHIFT_FOR_MORE, "Hold [Shift] for more information")
 
         add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
-        add(Tooltips.ENTITY_FILTER_ENTITY, "Entity type: %s")
         add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
-        add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
     }
 
     object Info {

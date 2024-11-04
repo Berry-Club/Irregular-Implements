@@ -220,7 +220,8 @@
   "item.irregular_implements.emerald_compass": "Emerald Compass",
   "item.irregular_implements.ender_bucket": "Ender Bucket",
   "item.irregular_implements.ender_letter": "Ender Letter",
-  "item.irregular_implements.entity_filter": "Entity Filter",
+  "item.irregular_implements.entity_filter.set": "Entity Filter (%s)",
+  "item.irregular_implements.entity_filter.unset": "Entity Filter",
   "item.irregular_implements.escape_rope": "Escape Rope",
   "item.irregular_implements.evil_tear": "Evil Tear",
   "item.irregular_implements.experience_imbue": "Experience Imbue",
@@ -247,6 +248,8 @@
   "item.irregular_implements.obsidian_skull_ring": "Obsidian Skull Ring",
   "item.irregular_implements.obsidian_water_walking_boots": "Obsidian Water Walking Boots",
   "item.irregular_implements.plate_base": "Plate Base",
+  "item.irregular_implements.player_filter.set": "Player Filter (%s)",
+  "item.irregular_implements.player_filter.unset": "Player Filter",
   "item.irregular_implements.poison_imbue": "Poison Imbue",
   "item.irregular_implements.portable_sound_dampener": "Portable Sound Dampener",
   "item.irregular_implements.portkey": "Portkey",
@@ -280,8 +283,6 @@
   "item.irregular_implements.wither_imbue": "Wither Imbue",
   "itemGroup.irregular_implements": "Irregular Implements",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
-  "tooltip.irregular_implements.entity_filter_entity": "Entity type: %s",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
-  "tooltip.irregular_implements.player_filter_player": "Player: %s",
   "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information"
 }
