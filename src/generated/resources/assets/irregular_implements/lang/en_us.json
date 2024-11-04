@@ -281,5 +281,7 @@
   "itemGroup.irregular_implements": "Irregular Implements",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
   "tooltip.irregular_implements.entity_filter_entity": "Entity type: %s",
+  "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
+  "tooltip.irregular_implements.player_filter_player": "Player: %s",
   "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information"
 }

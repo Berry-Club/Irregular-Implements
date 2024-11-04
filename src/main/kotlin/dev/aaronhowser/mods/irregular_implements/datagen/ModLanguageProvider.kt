@@ -47,6 +47,9 @@ class ModLanguageProvider(
 
         const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
         const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
+
+        const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
+        const val PLAYER_FILTER_PLAYER = "tooltip.irregular_implements.player_filter_player"
     }
 
     override fun addTranslations() {
@@ -54,6 +57,8 @@ class ModLanguageProvider(
 
         add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
         add(Tooltips.ENTITY_FILTER_ENTITY, "Entity type: %s")
+        add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
+        add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
 
         add(Items.CREATIVE_TAB, "Irregular Implements")
 

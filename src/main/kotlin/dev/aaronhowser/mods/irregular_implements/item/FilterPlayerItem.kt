@@ -1,8 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityItemComponent
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.InteractionResultHolder
@@ -10,6 +15,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class FilterPlayerItem : Item(
@@ -39,7 +45,7 @@ class FilterPlayerItem : Item(
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
-        if (!player.isSecondaryUseActive || player.isClientSide) return InteractionResultHolder.pass(usedStack)
+        if (player.isClientSide) return InteractionResultHolder.pass(usedStack)
 
         if (player.cooldowns.isOnCooldown(this)) return InteractionResultHolder.pass(usedStack)
 
@@ -51,6 +57,26 @@ class FilterPlayerItem : Item(
         player.cooldowns.addCooldown(this, 1)
 
         return InteractionResultHolder.success(usedStack)
+    }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        OtherUtil.moreInfoTooltip(
+            tooltipComponents,
+            tooltipFlag,
+            ModLanguageProvider.Tooltips.PLAYER_FILTER_CONTROLS
+                .toComponent()
+                .withStyle(ChatFormatting.GRAY)
+        )
+
+        val playerName = stack.get(ModDataComponents.PLAYER.get())?.name
+        if (playerName != null) {
+            tooltipComponents.add(
+                ModLanguageProvider.Tooltips.PLAYER_FILTER_PLAYER
+                    .toComponent(playerName)
+                    .withStyle(ChatFormatting.GRAY)
+            )
+        }
+
     }
 
 }
