@@ -1,6 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.InteractionResultHolder
@@ -8,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class FilterEntityItem : Item(
@@ -51,6 +57,28 @@ class FilterEntityItem : Item(
         player.cooldowns.addCooldown(this, 1)
 
         return InteractionResultHolder.success(usedStack)
+    }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+
+        OtherUtil.moreInfoTooltip(
+            tooltipComponents,
+            tooltipFlag,
+            ModLanguageProvider.Tooltips.ENTITY_FILTER_CONTROLS
+                .toComponent()
+                .withStyle(ChatFormatting.GRAY)
+        )
+
+        val entityType = stack.get(ModDataComponents.ENTITY_TYPE.get())
+        if (entityType != null) {
+            tooltipComponents
+                .add(
+                    ModLanguageProvider.Tooltips.ENTITY_FILTER_ENTITY
+                        .toComponent(entityType.description)
+                        .withStyle(ChatFormatting.GRAY)
+                )
+        }
+
     }
 
 }

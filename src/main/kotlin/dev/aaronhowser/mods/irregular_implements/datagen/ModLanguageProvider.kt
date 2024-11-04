@@ -33,7 +33,7 @@ class ModLanguageProvider(
         const val CREATIVE_TAB = "itemGroup.irregular_implements"
     }
 
-    fun addInfo(itemLike: ItemLike, infoString: String) {
+    private fun addInfo(itemLike: ItemLike, infoString: String) {
         add(getInfoString(itemLike), infoString)
     }
 
@@ -42,7 +42,18 @@ class ModLanguageProvider(
         const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
     }
 
+    object Tooltips {
+        const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
+
+        const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
+        const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
+    }
+
     override fun addTranslations() {
+        add(Tooltips.SHIFT_FOR_MORE, "Hold [Shift] for more information")
+
+        add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
+        add(Tooltips.ENTITY_FILTER_ENTITY, "Entity type: %s")
 
         add(Items.CREATIVE_TAB, "Irregular Implements")
 
