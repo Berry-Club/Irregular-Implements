@@ -192,4 +192,26 @@ object ModItems {
         return ITEM_REGISTRY.registerItem(id, itemBuilder)
     }
 
+    //TODO: Move to rune dust class, when that's been made
+    fun getRuneDust(dyeColor: DyeColor): DeferredItem<Item> {
+        return when (dyeColor) {
+            DyeColor.WHITE -> RUNE_DUST_WHITE
+            DyeColor.ORANGE -> RUNE_DUST_ORANGE
+            DyeColor.MAGENTA -> RUNE_DUST_MAGENTA
+            DyeColor.LIGHT_BLUE -> RUNE_DUST_LIGHT_BLUE
+            DyeColor.YELLOW -> RUNE_DUST_YELLOW
+            DyeColor.LIME -> RUNE_DUST_LIME
+            DyeColor.PINK -> RUNE_DUST_PINK
+            DyeColor.GRAY -> RUNE_DUST_GRAY
+            DyeColor.LIGHT_GRAY -> RUNE_DUST_LIGHT_GRAY
+            DyeColor.CYAN -> RUNE_DUST_CYAN
+            DyeColor.PURPLE -> RUNE_DUST_PURPLE
+            DyeColor.BLUE -> RUNE_DUST_BLUE
+            DyeColor.BROWN -> RUNE_DUST_BROWN
+            DyeColor.GREEN -> RUNE_DUST_GREEN
+            DyeColor.RED -> RUNE_DUST_RED
+            DyeColor.BLACK -> RUNE_DUST_BLACK
+        }
+    }
+
 }

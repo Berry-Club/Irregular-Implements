@@ -53,10 +53,10 @@ class ModBlockStateProvider(
 
     private fun luminousBlocks() {
 
-        for (color in DyeColor.entries.map { it.getName() }) {
+        for (color in DyeColor.entries) {
 
-            val opaqueBlock = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$color" }.get()
-            val translucentBlock = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$color" }.get()
+            val opaqueBlock = ModBlocks.getLuminousBlock(color).get()
+            val translucentBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
 
             val opaqueTexture = modLoc("block/luminous_block/$color")
             val translucentTexture = modLoc("block/luminous_block/translucent/$color")
@@ -92,10 +92,10 @@ class ModBlockStateProvider(
 
     private fun stainedBricks() {
 
-        for (color in DyeColor.entries.map { it.getName() }) {
+        for (color in DyeColor.entries) {
 
-            val regular = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$color" }.get()
-            val luminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$color" }.get()
+            val regular = ModBlocks.getStainedBrick(color).get()
+            val luminous = ModBlocks.getStainedBrickLuminous(color).get()
 
             val regularTexture = modLoc("block/stained_bricks/$color")
             val luminousBaseTexture = modLoc("block/luminous_stained_brick/base/$color")

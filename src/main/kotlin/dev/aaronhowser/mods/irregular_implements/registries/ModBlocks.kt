@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.TransparentBlock
@@ -261,6 +262,90 @@ object ModBlocks {
         supplier: () -> T
     ): DeferredBlock<T> {
         return BLOCK_REGISTRY.register(name, supplier)
+    }
+
+    fun getLuminousBlock(dyeColor: DyeColor): DeferredBlock<Block> {
+        return when (dyeColor) {
+            DyeColor.WHITE -> LUMINOUS_BLOCK_WHITE
+            DyeColor.ORANGE -> LUMINOUS_BLOCK_ORANGE
+            DyeColor.MAGENTA -> LUMINOUS_BLOCK_MAGENTA
+            DyeColor.LIGHT_BLUE -> LUMINOUS_BLOCK_LIGHT_BLUE
+            DyeColor.YELLOW -> LUMINOUS_BLOCK_YELLOW
+            DyeColor.LIME -> LUMINOUS_BLOCK_LIME
+            DyeColor.PINK -> LUMINOUS_BLOCK_PINK
+            DyeColor.GRAY -> LUMINOUS_BLOCK_GRAY
+            DyeColor.LIGHT_GRAY -> LUMINOUS_BLOCK_LIGHT_GRAY
+            DyeColor.CYAN -> LUMINOUS_BLOCK_CYAN
+            DyeColor.PURPLE -> LUMINOUS_BLOCK_PURPLE
+            DyeColor.BLUE -> LUMINOUS_BLOCK_BLUE
+            DyeColor.BROWN -> LUMINOUS_BLOCK_BROWN
+            DyeColor.GREEN -> LUMINOUS_BLOCK_GREEN
+            DyeColor.RED -> LUMINOUS_BLOCK_RED
+            DyeColor.BLACK -> LUMINOUS_BLOCK_BLACK
+        }
+    }
+
+    fun getLuminousBlockTranslucent(dyeColor: DyeColor): DeferredBlock<TransparentBlock> {
+        return when (dyeColor) {
+            DyeColor.WHITE -> TRANSLUCENT_LUMINOUS_BLOCK_WHITE
+            DyeColor.ORANGE -> TRANSLUCENT_LUMINOUS_BLOCK_ORANGE
+            DyeColor.MAGENTA -> TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA
+            DyeColor.LIGHT_BLUE -> TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE
+            DyeColor.YELLOW -> TRANSLUCENT_LUMINOUS_BLOCK_YELLOW
+            DyeColor.LIME -> TRANSLUCENT_LUMINOUS_BLOCK_LIME
+            DyeColor.PINK -> TRANSLUCENT_LUMINOUS_BLOCK_PINK
+            DyeColor.GRAY -> TRANSLUCENT_LUMINOUS_BLOCK_GRAY
+            DyeColor.LIGHT_GRAY -> TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY
+            DyeColor.CYAN -> TRANSLUCENT_LUMINOUS_BLOCK_CYAN
+            DyeColor.PURPLE -> TRANSLUCENT_LUMINOUS_BLOCK_PURPLE
+            DyeColor.BLUE -> TRANSLUCENT_LUMINOUS_BLOCK_BLUE
+            DyeColor.BROWN -> TRANSLUCENT_LUMINOUS_BLOCK_BROWN
+            DyeColor.GREEN -> TRANSLUCENT_LUMINOUS_BLOCK_GREEN
+            DyeColor.RED -> TRANSLUCENT_LUMINOUS_BLOCK_RED
+            DyeColor.BLACK -> TRANSLUCENT_LUMINOUS_BLOCK_BLACK
+        }
+    }
+
+    fun getStainedBrick(dyeColor: DyeColor): DeferredBlock<Block> {
+        return when (dyeColor) {
+            DyeColor.WHITE -> STAINED_BRICKS_WHITE
+            DyeColor.ORANGE -> STAINED_BRICKS_ORANGE
+            DyeColor.MAGENTA -> STAINED_BRICKS_MAGENTA
+            DyeColor.LIGHT_BLUE -> STAINED_BRICKS_LIGHT_BLUE
+            DyeColor.YELLOW -> STAINED_BRICKS_YELLOW
+            DyeColor.LIME -> STAINED_BRICKS_LIME
+            DyeColor.PINK -> STAINED_BRICKS_PINK
+            DyeColor.GRAY -> STAINED_BRICKS_GRAY
+            DyeColor.LIGHT_GRAY -> STAINED_BRICKS_LIGHT_GRAY
+            DyeColor.CYAN -> STAINED_BRICKS_CYAN
+            DyeColor.PURPLE -> STAINED_BRICKS_PURPLE
+            DyeColor.BLUE -> STAINED_BRICKS_BLUE
+            DyeColor.BROWN -> STAINED_BRICKS_BROWN
+            DyeColor.GREEN -> STAINED_BRICKS_GREEN
+            DyeColor.RED -> STAINED_BRICKS_RED
+            DyeColor.BLACK -> STAINED_BRICKS_BLACK
+        }
+    }
+
+    fun getStainedBrickLuminous(dyeColor: DyeColor): DeferredBlock<Block> {
+        return when (dyeColor) {
+            DyeColor.WHITE -> LUMINOUS_STAINED_BRICKS_WHITE
+            DyeColor.ORANGE -> LUMINOUS_STAINED_BRICKS_ORANGE
+            DyeColor.MAGENTA -> LUMINOUS_STAINED_BRICKS_MAGENTA
+            DyeColor.LIGHT_BLUE -> LUMINOUS_STAINED_BRICKS_LIGHT_BLUE
+            DyeColor.YELLOW -> LUMINOUS_STAINED_BRICKS_YELLOW
+            DyeColor.LIME -> LUMINOUS_STAINED_BRICKS_LIME
+            DyeColor.PINK -> LUMINOUS_STAINED_BRICKS_PINK
+            DyeColor.GRAY -> LUMINOUS_STAINED_BRICKS_GRAY
+            DyeColor.LIGHT_GRAY -> LUMINOUS_STAINED_BRICKS_LIGHT_GRAY
+            DyeColor.CYAN -> LUMINOUS_STAINED_BRICKS_CYAN
+            DyeColor.PURPLE -> LUMINOUS_STAINED_BRICKS_PURPLE
+            DyeColor.BLUE -> LUMINOUS_STAINED_BRICKS_BLUE
+            DyeColor.BROWN -> LUMINOUS_STAINED_BRICKS_BROWN
+            DyeColor.GREEN -> LUMINOUS_STAINED_BRICKS_GREEN
+            DyeColor.RED -> LUMINOUS_STAINED_BRICKS_RED
+            DyeColor.BLACK -> LUMINOUS_STAINED_BRICKS_BLACK
+        }
     }
 
 }

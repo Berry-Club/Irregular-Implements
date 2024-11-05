@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -50,10 +51,8 @@ class ModItemModelProvider(
     private fun coloredItems() {
         for (color in DyeColor.entries) {
 
-            val colorName = color.getName()
-
-            val grassSeeds = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "grass_seeds_$colorName" }.get()
-            val runeDust = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "rune_dust_$colorName" }.get()
+            val grassSeeds = GrassSeedItem.getFromColor(color).get()
+            val runeDust = ModItems.getRuneDust(color).get()
 
             getBuilder(getName(grassSeeds).toString())
                 .parent(ModelFile.UncheckedModelFile("item/generated"))

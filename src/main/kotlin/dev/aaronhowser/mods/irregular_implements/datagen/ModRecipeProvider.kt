@@ -1230,19 +1230,18 @@ class ModRecipeProvider(
     private fun coloredThings(): List<RecipeBuilder> {
         return buildList {
             for (color in DyeColor.entries) {
-
-                val colorString = color.name
+                val colorString = color.getName()
 
                 val dyeTag = OtherUtil.getDyeTag(color)
 
-                val luminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$colorString" }.get()
-                val transLuminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$colorString" }.get()
+                val luminous = ModBlocks.getLuminousBlock(color).get()
+                val transLuminous = ModBlocks.getLuminousBlockTranslucent(color).get()
 
-                val stainedBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$colorString" }.get()
-                val transBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$colorString" }.get()
+                val stainedBrick = ModBlocks.getStainedBrick(color).get()
+                val transBrick = ModBlocks.getStainedBrickLuminous(color).get()
 
                 val grassSeeds = GrassSeedItem.getFromColor(color)
-                val runeDust = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "rune_dust_$colorString" }.get()
+                val runeDust = ModItems.getRuneDust(color)
 
                 add(
                     shapedRecipe(
