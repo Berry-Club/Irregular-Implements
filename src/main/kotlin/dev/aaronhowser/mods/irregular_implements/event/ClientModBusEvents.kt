@@ -26,10 +26,14 @@ object ClientModBusEvents {
 
             val seedItem = GrassSeedItem.getFromColor(dyeColor).get()
             val runeDustItem = ModItems.getRuneDust(dyeColor).get()
+            val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
             event.register(itemColor, seedItem)
             event.register(itemColor, runeDustItem)
+            event.register(itemColor, coloredGrassBlock)
         }
+
+        event.register(DyeItemColor.LIME, ModItems.GRASS_SEEDS)
     }
 
     @SubscribeEvent
