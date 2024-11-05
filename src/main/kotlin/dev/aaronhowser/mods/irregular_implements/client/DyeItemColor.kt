@@ -4,7 +4,7 @@ import net.minecraft.client.color.item.ItemColor
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 
-class DyedItemColor private constructor(
+class DyeItemColor private constructor(
     private val dyeColor: DyeColor
 ) : ItemColor {
 
@@ -12,24 +12,24 @@ class DyedItemColor private constructor(
 
     companion object {
 
-        val WHITE = DyedItemColor(DyeColor.WHITE)
-        val ORANGE = DyedItemColor(DyeColor.ORANGE)
-        val MAGENTA = DyedItemColor(DyeColor.MAGENTA)
-        val LIGHT_BLUE = DyedItemColor(DyeColor.LIGHT_BLUE)
-        val YELLOW = DyedItemColor(DyeColor.YELLOW)
-        val LIME = DyedItemColor(DyeColor.LIME)
-        val PINK = DyedItemColor(DyeColor.PINK)
-        val GRAY = DyedItemColor(DyeColor.GRAY)
-        val LIGHT_GRAY = DyedItemColor(DyeColor.LIGHT_GRAY)
-        val CYAN = DyedItemColor(DyeColor.CYAN)
-        val PURPLE = DyedItemColor(DyeColor.PURPLE)
-        val BLUE = DyedItemColor(DyeColor.BLUE)
-        val BROWN = DyedItemColor(DyeColor.BROWN)
-        val GREEN = DyedItemColor(DyeColor.GREEN)
-        val RED = DyedItemColor(DyeColor.RED)
-        val BLACK = DyedItemColor(DyeColor.BLACK)
+        val WHITE = DyeItemColor(DyeColor.WHITE)
+        val ORANGE = DyeItemColor(DyeColor.ORANGE)
+        val MAGENTA = DyeItemColor(DyeColor.MAGENTA)
+        val LIGHT_BLUE = DyeItemColor(DyeColor.LIGHT_BLUE)
+        val YELLOW = DyeItemColor(DyeColor.YELLOW)
+        val LIME = DyeItemColor(DyeColor.LIME)
+        val PINK = DyeItemColor(DyeColor.PINK)
+        val GRAY = DyeItemColor(DyeColor.GRAY)
+        val LIGHT_GRAY = DyeItemColor(DyeColor.LIGHT_GRAY)
+        val CYAN = DyeItemColor(DyeColor.CYAN)
+        val PURPLE = DyeItemColor(DyeColor.PURPLE)
+        val BLUE = DyeItemColor(DyeColor.BLUE)
+        val BROWN = DyeItemColor(DyeColor.BROWN)
+        val GREEN = DyeItemColor(DyeColor.GREEN)
+        val RED = DyeItemColor(DyeColor.RED)
+        val BLACK = DyeItemColor(DyeColor.BLACK)
 
-        fun getFromColor(dyeColor: DyeColor): DyedItemColor {
+        fun getFromColor(dyeColor: DyeColor): DyeItemColor {
             return when (dyeColor) {
                 DyeColor.WHITE -> WHITE
                 DyeColor.ORANGE -> ORANGE

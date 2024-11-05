@@ -6,7 +6,7 @@ import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.block.state.BlockState
 
-class DyedBlockColor private constructor(
+class DyeBlockColor private constructor(
     private val dyeColor: DyeColor
 ) : BlockColor {
 
@@ -14,24 +14,24 @@ class DyedBlockColor private constructor(
 
     companion object {
 
-        val WHITE = DyedBlockColor(DyeColor.WHITE)
-        val ORANGE = DyedBlockColor(DyeColor.ORANGE)
-        val MAGENTA = DyedBlockColor(DyeColor.MAGENTA)
-        val LIGHT_BLUE = DyedBlockColor(DyeColor.LIGHT_BLUE)
-        val YELLOW = DyedBlockColor(DyeColor.YELLOW)
-        val LIME = DyedBlockColor(DyeColor.LIME)
-        val PINK = DyedBlockColor(DyeColor.PINK)
-        val GRAY = DyedBlockColor(DyeColor.GRAY)
-        val LIGHT_GRAY = DyedBlockColor(DyeColor.LIGHT_GRAY)
-        val CYAN = DyedBlockColor(DyeColor.CYAN)
-        val PURPLE = DyedBlockColor(DyeColor.PURPLE)
-        val BLUE = DyedBlockColor(DyeColor.BLUE)
-        val BROWN = DyedBlockColor(DyeColor.BROWN)
-        val GREEN = DyedBlockColor(DyeColor.GREEN)
-        val RED = DyedBlockColor(DyeColor.RED)
-        val BLACK = DyedBlockColor(DyeColor.BLACK)
+        val WHITE = DyeBlockColor(DyeColor.WHITE)
+        val ORANGE = DyeBlockColor(DyeColor.ORANGE)
+        val MAGENTA = DyeBlockColor(DyeColor.MAGENTA)
+        val LIGHT_BLUE = DyeBlockColor(DyeColor.LIGHT_BLUE)
+        val YELLOW = DyeBlockColor(DyeColor.YELLOW)
+        val LIME = DyeBlockColor(DyeColor.LIME)
+        val PINK = DyeBlockColor(DyeColor.PINK)
+        val GRAY = DyeBlockColor(DyeColor.GRAY)
+        val LIGHT_GRAY = DyeBlockColor(DyeColor.LIGHT_GRAY)
+        val CYAN = DyeBlockColor(DyeColor.CYAN)
+        val PURPLE = DyeBlockColor(DyeColor.PURPLE)
+        val BLUE = DyeBlockColor(DyeColor.BLUE)
+        val BROWN = DyeBlockColor(DyeColor.BROWN)
+        val GREEN = DyeBlockColor(DyeColor.GREEN)
+        val RED = DyeBlockColor(DyeColor.RED)
+        val BLACK = DyeBlockColor(DyeColor.BLACK)
 
-        fun getFromColor(dyeColor: DyeColor): DyedBlockColor {
+        fun getFromColor(dyeColor: DyeColor): DyeBlockColor {
             return when (dyeColor) {
                 DyeColor.WHITE -> WHITE
                 DyeColor.ORANGE -> ORANGE
