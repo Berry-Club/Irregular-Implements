@@ -57,19 +57,31 @@ class ModBlockStateProvider(
             val opaqueBlock = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$color" }.get()
             val translucentBlock = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$color" }.get()
 
+            val opaqueTexture = modLoc("block/luminous_block/$color")
+            val translucentTexture = modLoc("block/luminous_block/translucent/$color")
+
             val opaqueModel = models()
-                .cubeAll(
-                    name(opaqueBlock),
-                    modLoc("block/luminous_block/$color")
-                )
-                .renderType(RenderType.solid().name)
+                .withExistingParent(name(opaqueBlock), mcLoc("block/block"))
+                .texture("all", opaqueTexture)
+                .texture("particle", translucentTexture)
+
+                .element()
+                .cube("#all")
+                .ao(false)
+                .emissivity(15, 15)
+                .end()
 
             val translucentModel = models()
-                .cubeAll(
-                    name(translucentBlock),
-                    modLoc("block/luminous_block/translucent/$color")
-                )
+                .withExistingParent(name(translucentBlock), "block/block")
                 .renderType(RenderType.translucent().name)
+                .texture("all", translucentTexture)
+                .texture("particle", translucentTexture)
+
+                .element()
+                .cube("#all")
+                .ao(false)
+                .emissivity(15, 15)
+                .end()
 
             simpleBlockWithItem(opaqueBlock, opaqueModel)
             simpleBlockWithItem(translucentBlock, translucentModel)
