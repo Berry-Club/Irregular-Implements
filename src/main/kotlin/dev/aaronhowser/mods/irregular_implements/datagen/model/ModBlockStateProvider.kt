@@ -110,6 +110,7 @@ class ModBlockStateProvider(
                 .texture("tint", luminousTintTexture)
                 .texture("particle", luminousTintTexture)
 
+                //FIXME: For some reason this is glowing white in every block
                 .element()
                 .cube("#base")
                 .end()
