@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
+import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -1228,36 +1229,20 @@ class ModRecipeProvider(
 
     private fun coloredThings(): List<RecipeBuilder> {
         return buildList {
-            for (color in DyeColor.entries.map { it.getName() }) {
+            for (color in DyeColor.entries) {
 
-                val dyeTag = when (color) {
-                    "white" -> Tags.Items.DYES_WHITE
-                    "orange" -> Tags.Items.DYES_ORANGE
-                    "magenta" -> Tags.Items.DYES_MAGENTA
-                    "light_blue" -> Tags.Items.DYES_LIGHT_BLUE
-                    "yellow" -> Tags.Items.DYES_YELLOW
-                    "lime" -> Tags.Items.DYES_LIME
-                    "pink" -> Tags.Items.DYES_PINK
-                    "gray" -> Tags.Items.DYES_GRAY
-                    "light_gray" -> Tags.Items.DYES_LIGHT_GRAY
-                    "cyan" -> Tags.Items.DYES_CYAN
-                    "purple" -> Tags.Items.DYES_PURPLE
-                    "blue" -> Tags.Items.DYES_BLUE
-                    "brown" -> Tags.Items.DYES_BROWN
-                    "green" -> Tags.Items.DYES_GREEN
-                    "red" -> Tags.Items.DYES_RED
-                    "black" -> Tags.Items.DYES_BLACK
-                    else -> error("Invalid color: $color")
-                }
+                val colorString = color.name
 
-                val luminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$color" }.get()
-                val transLuminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$color" }.get()
+                val dyeTag = OtherUtil.getDyeTag(color)
 
-                val stainedBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$color" }.get()
-                val transBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$color" }.get()
+                val luminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$colorString" }.get()
+                val transLuminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$colorString" }.get()
 
-                val grassSeeds = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "grass_seeds_$color" }.get()
-                val runeDust = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "rune_dust_$color" }.get()
+                val stainedBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$colorString" }.get()
+                val transBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$colorString" }.get()
+
+                val grassSeeds = GrassSeedItem.getFromColor(color)
+                val runeDust = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "rune_dust_$colorString" }.get()
 
                 add(
                     shapedRecipe(
@@ -1335,7 +1320,7 @@ class ModRecipeProvider(
                     )
                 )
 
-                recipesWithNames[runeConversionRecipe] = "rune_dust_convert_$color"
+                recipesWithNames[runeConversionRecipe] = "rune_dust_convert_$colorString"
             }
         }
     }
