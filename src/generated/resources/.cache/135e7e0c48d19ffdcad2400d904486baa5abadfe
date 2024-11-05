@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-04T16:51:35.3784678	Item Models: irregular_implements
+// 1.21.1	2024-11-04T21:16:55.0709744	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -46,7 +46,6 @@ fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item
 d6d7268794599910379dbb06671188e7fa11d671 assets/irregular_implements/models/item/precious_emerald.json
 c299c97f1655718329d091dfd1414ba0ed860212 assets/irregular_implements/models/item/redstone_remote.json
 1e7b926a6994afcc883ff949e1b92384981da27f assets/irregular_implements/models/item/redstone_tool.json
-4f8b7e1169aee5357aec01c53a9fdf856a0966e0 assets/irregular_implements/models/item/rune_dust.json
 bbf0cccc4a7ca72fa873da626928e61d2d877ae1 assets/irregular_implements/models/item/rune_pattern.json
 4128021949fd3acdd91ba499dc4ebe46147d0376 assets/irregular_implements/models/item/sakanade_spores.json
 e4941ae6f65a39290b17ebff3228ced7c55c9869 assets/irregular_implements/models/item/spectre_anchor.json

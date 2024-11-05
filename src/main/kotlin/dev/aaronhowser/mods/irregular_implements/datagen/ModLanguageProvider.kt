@@ -102,7 +102,6 @@ class ModLanguageProvider(
         addItem(ModItems.TIME_IN_A_BOTTLE, "Time in a Bottle")
         addItem(ModItems.ECLIPSED_CLOCK, "Eclipsed Clock")
         addItem(ModItems.GRASS_SEEDS, "Grass Seeds")
-        addItem(ModItems.RUNE_DUST, "Rune Dust")
         addItem(ModItems.DIVINING_ROD, "Divining Rod")
 
         addItem(ModItems.FIRE_IMBUE, "Fire Imbue")

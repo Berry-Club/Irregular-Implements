@@ -1253,6 +1253,9 @@ class ModRecipeProvider(
                 val stainedBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$color" }.get()
                 val transBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$color" }.get()
 
+                val grassSeeds = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "grass_seeds_$color" }.get()
+                val runeDust = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "rune_dust_$color" }.get()
+
                 add(
                     shapedRecipe(
                         luminous,
@@ -1293,6 +1296,28 @@ class ModRecipeProvider(
                         listOf(
                             ing(ModItems.LUMINOUS_POWDER),
                             ing(stainedBrick)
+                        )
+                    )
+                )
+
+                add(
+                    shapelessRecipe(
+                        grassSeeds,
+                        listOf(
+                            ing(ModItems.GRASS_SEEDS),
+                            ing(dyeTag)
+                        )
+                    )
+                )
+
+                add(
+                    shapelessRecipe(
+                        runeDust,
+                        8,
+                        listOf(
+                            ing(Items.CLAY_BALL),
+                            ing(ModItems.LUMINOUS_POWDER),
+                            ing(dyeTag)
                         )
                     )
                 )

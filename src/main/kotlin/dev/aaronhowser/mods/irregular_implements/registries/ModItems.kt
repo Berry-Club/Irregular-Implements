@@ -64,8 +64,6 @@ object ModItems {
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val TIME_IN_A_BOTTLE = basic("time_in_a_bottle")
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
-    val GRASS_SEEDS = basic("grass_seeds")  //Same item for all colors
-    val RUNE_DUST = basic("rune_dust") //Same item for all colors
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
 
     // Filters
@@ -131,6 +129,42 @@ object ModItems {
     val SOUND_PATTERN = basic("sound_pattern")
     val SOUND_RECORDER = basic("sound_recorder")
     val PORTABLE_SOUND_DAMPENER = basic("portable_sound_dampener")
+
+    // Colors
+    val GRASS_SEEDS = basic("grass_seeds")
+    val GRASS_SEEDS_WHITE = basic("grass_seeds_white")
+    val GRASS_SEEDS_ORANGE = basic("grass_seeds_orange")
+    val GRASS_SEEDS_MAGENTA = basic("grass_seeds_magenta")
+    val GRASS_SEEDS_LIGHT_BLUE = basic("grass_seeds_light_blue")
+    val GRASS_SEEDS_YELLOW = basic("grass_seeds_yellow")
+    val GRASS_SEEDS_LIME = basic("grass_seeds_lime")
+    val GRASS_SEEDS_PINK = basic("grass_seeds_pink")
+    val GRASS_SEEDS_GRAY = basic("grass_seeds_gray")
+    val GRASS_SEEDS_LIGHT_GRAY = basic("grass_seeds_light_gray")
+    val GRASS_SEEDS_CYAN = basic("grass_seeds_cyan")
+    val GRASS_SEEDS_PURPLE = basic("grass_seeds_purple")
+    val GRASS_SEEDS_BLUE = basic("grass_seeds_blue")
+    val GRASS_SEEDS_BROWN = basic("grass_seeds_brown")
+    val GRASS_SEEDS_GREEN = basic("grass_seeds_green")
+    val GRASS_SEEDS_RED = basic("grass_seeds_red")
+    val GRASS_SEEDS_BLACK = basic("grass_seeds_black")
+
+    val RUNE_DUST_WHITE = basic("rune_dust_white")
+    val RUNE_DUST_ORANGE = basic("rune_dust_orange")
+    val RUNE_DUST_MAGENTA = basic("rune_dust_magenta")
+    val RUNE_DUST_LIGHT_BLUE = basic("rune_dust_light_blue")
+    val RUNE_DUST_YELLOW = basic("rune_dust_yellow")
+    val RUNE_DUST_LIME = basic("rune_dust_lime")
+    val RUNE_DUST_PINK = basic("rune_dust_pink")
+    val RUNE_DUST_GRAY = basic("rune_dust_gray")
+    val RUNE_DUST_LIGHT_GRAY = basic("rune_dust_light_gray")
+    val RUNE_DUST_CYAN = basic("rune_dust_cyan")
+    val RUNE_DUST_PURPLE = basic("rune_dust_purple")
+    val RUNE_DUST_BLUE = basic("rune_dust_blue")
+    val RUNE_DUST_BROWN = basic("rune_dust_brown")
+    val RUNE_DUST_GREEN = basic("rune_dust_green")
+    val RUNE_DUST_RED = basic("rune_dust_red")
+    val RUNE_DUST_BLACK = basic("rune_dust_black")
 
     private fun basic(id: String): DeferredItem<Item> {
         return ITEM_REGISTRY.registerSimpleItem(id)
