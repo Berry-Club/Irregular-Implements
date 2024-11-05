@@ -38,11 +38,10 @@ class ImbueEffect : MobEffect(
             val attackerImbue = attacker.activeEffects.firstOrNull { it.effect.value() is ImbueEffect }?.effect?.value() ?: return
 
             when (attackerImbue) {
-                ModEffects.FIRE_IMBUE.get() -> event.entity.igniteForSeconds(5f)
+                ModEffects.FIRE_IMBUE.get() -> event.entity.igniteForSeconds(10f)
 
-                //TODO: Check duration and amplifier
-                ModEffects.POISON_IMBUE.get() -> event.entity.addEffect(MobEffectInstance(MobEffects.POISON, 20 * 5, 0))
-                ModEffects.WITHER_IMBUE.get() -> event.entity.addEffect(MobEffectInstance(MobEffects.WITHER, 20 * 5, 0))
+                ModEffects.POISON_IMBUE.get() -> event.entity.addEffect(MobEffectInstance(MobEffects.POISON, 20 * 10, 1))
+                ModEffects.WITHER_IMBUE.get() -> event.entity.addEffect(MobEffectInstance(MobEffects.WITHER, 20 * 10, 1))
 
                 ModEffects.COLLAPSE_IMBUE.get() -> TODO("Do something if they have Collapse Imbue")
             }
