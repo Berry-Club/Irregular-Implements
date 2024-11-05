@@ -1,14 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
-import net.minecraft.tags.BlockTags
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.block.Blocks
 
 object ModInteractionRecipes {
 
@@ -39,13 +37,6 @@ object ModInteractionRecipes {
             val seedItem = deferred.get()
 
             val colorString = seedItem.dyeColor?.getName()
-            val endProduct = when (colorString) {
-                null -> Items.GRASS_BLOCK
-                else -> ModBlocks.BLOCK_REGISTRY
-                    .entries
-                    .first { it.key!!.location().path == "colored_grass_${colorString}" }
-                    .get().asItem()
-            }
 
             val id = if (colorString == null) {
                 OtherUtil.modResource("grass")
@@ -55,9 +46,9 @@ object ModInteractionRecipes {
 
             EmiWorldInteractionRecipe
                 .builder()
-                .leftInput(EmiIngredient.of(BlockTags.DIRT))
+                .leftInput(EmiIngredient.of(Ingredient.of(Blocks.DIRT)))
                 .rightInput(EmiIngredient.of(Ingredient.of(seedItem)), true)
-                .output(EmiStack.of(endProduct))
+                .output(EmiStack.of(seedItem.resultBlock))
                 .id(id)
                 .build()
         }
