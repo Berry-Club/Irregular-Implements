@@ -4,10 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import dev.aaronhowser.mods.irregular_implements.block.TriggerGlass
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
@@ -45,7 +47,34 @@ class ModBlockStateProvider(
 
         triggerGlass()
         platforms()
+        luminousBlocks()
+    }
 
+    private fun luminousBlocks() {
+
+        for (color in DyeColor.entries.map { it.getName() }) {
+
+            val opaqueBlock = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$color" }.get()
+            val translucentBlock = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$color" }.get()
+
+            val opaqueModel = models()
+                .cubeAll(
+                    name(opaqueBlock),
+                    modLoc("block/luminous_block/$color")
+                )
+                .renderType(RenderType.solid().name)
+
+            val translucentModel = models()
+                .cubeAll(
+                    name(translucentBlock),
+                    modLoc("block/luminous_block/translucent/$color")
+                )
+                .renderType(RenderType.translucent().name)
+
+            simpleBlockWithItem(opaqueBlock, opaqueModel)
+            simpleBlockWithItem(translucentBlock, translucentModel)
+
+        }
     }
 
     private fun platforms() {
@@ -102,7 +131,7 @@ class ModBlockStateProvider(
                                 modelName,
                                 modLoc(textureLocation)
                             )
-                            .renderType(mcLoc("cutout"))
+                            .renderType(RenderType.CUTOUT.name)
                     )
                     .build()
             }
@@ -223,7 +252,7 @@ class ModBlockStateProvider(
     private fun singleTextureTransparent(block: Block) {
         val model = models()
             .cubeAll(name(block), blockTexture(block))
-            .renderType(mcLoc("cutout"))
+            .renderType(RenderType.translucent().name)
 
         simpleBlockWithItem(block, model)
     }

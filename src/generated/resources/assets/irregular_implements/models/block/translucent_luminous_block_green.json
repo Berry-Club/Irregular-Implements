@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "render_type": "minecraft:translucent",
   "textures": {
-    "all": "irregular_implements:block/returning_block_of_sticks"
+    "all": "irregular_implements:block/luminous_block/translucent/green"
   }
 }
