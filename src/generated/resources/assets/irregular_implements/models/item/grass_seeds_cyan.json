@@ -1,0 +1,46 @@
+{
+  "parent": "minecraft:item/generated",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "minecraft:missingno",
+          "tintindex": 9
+        },
+        "east": {
+          "texture": "minecraft:missingno",
+          "tintindex": 9
+        },
+        "north": {
+          "texture": "minecraft:missingno",
+          "tintindex": 9
+        },
+        "south": {
+          "texture": "minecraft:missingno",
+          "tintindex": 9
+        },
+        "up": {
+          "texture": "minecraft:missingno",
+          "tintindex": 9
+        },
+        "west": {
+          "texture": "minecraft:missingno",
+          "tintindex": 9
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "layer0": "irregular_implements:item/grass_seeds"
+  }
+}

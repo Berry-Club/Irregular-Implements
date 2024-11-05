@@ -2,9 +2,14 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.Item
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
+import net.neoforged.neoforge.client.model.generators.ModelFile
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 
 class ModItemModelProvider(
@@ -24,47 +29,53 @@ class ModItemModelProvider(
             ModItems.SOUND_PATTERN,
             ModItems.SOUND_RECORDER,
             ModItems.SPECTRE_CHARGER,
-            ModItems.ADVANCED_REDSTONE_TORCH,
-            ModItems.GRASS_SEEDS_WHITE,
-            ModItems.GRASS_SEEDS_ORANGE,
-            ModItems.GRASS_SEEDS_MAGENTA,
-            ModItems.GRASS_SEEDS_LIGHT_BLUE,
-            ModItems.GRASS_SEEDS_YELLOW,
-            ModItems.GRASS_SEEDS_LIME,
-            ModItems.GRASS_SEEDS_PINK,
-            ModItems.GRASS_SEEDS_GRAY,
-            ModItems.GRASS_SEEDS_LIGHT_GRAY,
-            ModItems.GRASS_SEEDS_CYAN,
-            ModItems.GRASS_SEEDS_PURPLE,
-            ModItems.GRASS_SEEDS_BLUE,
-            ModItems.GRASS_SEEDS_BROWN,
-            ModItems.GRASS_SEEDS_GREEN,
-            ModItems.GRASS_SEEDS_RED,
-            ModItems.GRASS_SEEDS_BLACK,
-            ModItems.RUNE_DUST_WHITE,
-            ModItems.RUNE_DUST_ORANGE,
-            ModItems.RUNE_DUST_MAGENTA,
-            ModItems.RUNE_DUST_LIGHT_BLUE,
-            ModItems.RUNE_DUST_YELLOW,
-            ModItems.RUNE_DUST_LIME,
-            ModItems.RUNE_DUST_PINK,
-            ModItems.RUNE_DUST_GRAY,
-            ModItems.RUNE_DUST_LIGHT_GRAY,
-            ModItems.RUNE_DUST_CYAN,
-            ModItems.RUNE_DUST_PURPLE,
-            ModItems.RUNE_DUST_BLUE,
-            ModItems.RUNE_DUST_BROWN,
-            ModItems.RUNE_DUST_GREEN,
-            ModItems.RUNE_DUST_RED,
-            ModItems.RUNE_DUST_BLACK,
+            ModItems.ADVANCED_REDSTONE_TORCH
         )
 
+        coloredItems()
+
         for (item in ModItems.ITEM_REGISTRY.entries - complexModels.toSet()) {
+            if (item.get() in handledItems) continue
+
             if (item.get() !is BlockItem) {
                 basicItem(item.get())
             }
         }
 
+    }
+
+    private val handledItems: MutableSet<Item> = mutableSetOf()
+
+    //TODO: This doesn't even work
+    private fun coloredItems() {
+        for (color in DyeColor.entries) {
+
+            val colorName = color.getName()
+
+            val grassSeeds = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "grass_seeds_$colorName" }.get()
+            val runeDust = ModItems.ITEM_REGISTRY.entries.first { it.key!!.location().path == "rune_dust_$colorName" }.get()
+
+            getBuilder(getName(grassSeeds).toString())
+                .parent(ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", "item/grass_seeds")
+                .element()
+                .allFaces { t, u -> u.tintindex(color.id) }
+                .end()
+
+            getBuilder(getName(runeDust).toString())
+                .parent(ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", "item/rune_dust")
+                .element()
+                .allFaces { t, u -> u.tintindex(color.id) }
+                .end()
+
+            handledItems.add(grassSeeds)
+            handledItems.add(runeDust)
+        }
+    }
+
+    private fun getName(item: Item): ResourceLocation {
+        return BuiltInRegistries.ITEM.getKey(item)
     }
 
 }

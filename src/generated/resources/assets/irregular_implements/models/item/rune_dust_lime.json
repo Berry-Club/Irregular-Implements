@@ -1,0 +1,46 @@
+{
+  "parent": "minecraft:item/generated",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "minecraft:missingno",
+          "tintindex": 5
+        },
+        "east": {
+          "texture": "minecraft:missingno",
+          "tintindex": 5
+        },
+        "north": {
+          "texture": "minecraft:missingno",
+          "tintindex": 5
+        },
+        "south": {
+          "texture": "minecraft:missingno",
+          "tintindex": 5
+        },
+        "up": {
+          "texture": "minecraft:missingno",
+          "tintindex": 5
+        },
+        "west": {
+          "texture": "minecraft:missingno",
+          "tintindex": 5
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "layer0": "irregular_implements:item/rune_dust"
+  }
+}
