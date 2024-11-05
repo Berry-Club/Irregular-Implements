@@ -112,8 +112,6 @@ class ModBlockStateProvider(
 
                 .element()
                 .cube("#base")
-                .ao(true)
-                .emissivity(0, 0)
                 .end()
 
                 .element()
