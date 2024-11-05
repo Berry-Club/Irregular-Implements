@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput
 import net.minecraft.data.recipes.*
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.ItemLike
@@ -32,15 +33,16 @@ class ModRecipeProvider(
             platform.save(recipeOutput)
         }
 
+        for (coloredThing in coloredThings()) {
+            coloredThing.save(recipeOutput)
+        }
+
     }
 
     //TODO:
     // Potions of Collapse
     // Crafting Tables
-    // Luminous Blocks
-    // Translucent Luminous Blocks
     // Stained Bricks
-    // Luminous Stained Bricks
     // Imbues
     // Weather Eggs
     // Grass Seeds
@@ -1219,6 +1221,84 @@ class ModRecipeProvider(
                 'S' to ing(Tags.Items.STRINGS)
             )
         )
+    }
+
+    private fun coloredThings(): List<RecipeBuilder> {
+        return buildList {
+            for (color in DyeColor.entries.map { it.getName() }) {
+
+                val dyeTag = when (color) {
+                    "white" -> Tags.Items.DYES_WHITE
+                    "orange" -> Tags.Items.DYES_ORANGE
+                    "magenta" -> Tags.Items.DYES_MAGENTA
+                    "light_blue" -> Tags.Items.DYES_LIGHT_BLUE
+                    "yellow" -> Tags.Items.DYES_YELLOW
+                    "lime" -> Tags.Items.DYES_LIME
+                    "pink" -> Tags.Items.DYES_PINK
+                    "gray" -> Tags.Items.DYES_GRAY
+                    "light_gray" -> Tags.Items.DYES_LIGHT_GRAY
+                    "cyan" -> Tags.Items.DYES_CYAN
+                    "purple" -> Tags.Items.DYES_PURPLE
+                    "blue" -> Tags.Items.DYES_BLUE
+                    "brown" -> Tags.Items.DYES_BROWN
+                    "green" -> Tags.Items.DYES_GREEN
+                    "red" -> Tags.Items.DYES_RED
+                    "black" -> Tags.Items.DYES_BLACK
+                    else -> error("Invalid color: $color")
+                }
+
+                val luminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_block_$color" }.get()
+                val transLuminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "translucent_luminous_block_$color" }.get()
+
+                val stainedBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$color" }.get()
+                val transBrick = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$color" }.get()
+
+                add(
+                    shapedRecipe(
+                        luminous,
+                        "LD,LL",
+                        mapOf(
+                            'L' to ing(ModItems.LUMINOUS_POWDER),
+                            'D' to ing(dyeTag)
+                        )
+                    )
+                )
+
+                add(
+                    shapedRecipe(
+                        transLuminous,
+                        " P ,PLP, P ",
+                        mapOf(
+                            'P' to ing(Tags.Items.GLASS_PANES_COLORLESS),
+                            'L' to ing(luminous)
+                        )
+                    )
+                )
+
+                add(
+                    shapedRecipe(
+                        stainedBrick,
+                        8,
+                        "BBB,BDB,BBB",
+                        mapOf(
+                            'B' to ing(Items.BRICKS),
+                            'D' to ing(dyeTag)
+                        )
+                    )
+                )
+
+                add(
+                    shapelessRecipe(
+                        transBrick,
+                        listOf(
+                            ing(ModItems.LUMINOUS_POWDER),
+                            ing(stainedBrick)
+                        )
+                    )
+                )
+
+            }
+        }
     }
 
 }

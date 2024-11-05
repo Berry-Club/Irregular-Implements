@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:dyes/blue"
+    },
+    "L": {
+      "item": "irregular_implements:luminous_powder"
+    }
+  },
+  "pattern": [
+    "LD",
+    "LL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:luminous_block_blue"
+  }
+}
