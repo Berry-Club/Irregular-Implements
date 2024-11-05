@@ -3,14 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "irregular_implements:grass_seeds"
-    },
-    {
-      "tag": "c:dyes/red"
+      "item": "minecraft:grass_block"
     }
   ],
   "result": {
     "count": 1,
-    "id": "irregular_implements:grass_seeds_red"
+    "id": "irregular_implements:grass_seeds"
   }
 }

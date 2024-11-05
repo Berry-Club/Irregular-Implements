@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.advancements.Criterion
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
@@ -37,16 +39,19 @@ class ModRecipeProvider(
             coloredThing.save(recipeOutput)
         }
 
+        populatedNamedRecipes()
+
+        for ((recipe, name) in recipesWithNames) {
+            recipe.save(recipeOutput, OtherUtil.modResource(name))
+        }
+
     }
 
     //TODO:
     // Potions of Collapse
     // Crafting Tables
-    // Stained Bricks
     // Imbues
     // Weather Eggs
-    // Grass Seeds
-    // Rune Dusts
     // Spectre Charger tiers
     // Divining Rods
 
@@ -826,16 +831,6 @@ class ModRecipeProvider(
                 'G' to ing(Tags.Items.STORAGE_BLOCKS_GOLD)
             )
         ),
-        //TODO
-//        shapedRecipe(
-//            ModItems.SPECTRE_INGOT,
-//            "L,G,E",
-//            mapOf(
-//                'L' to ing(Tags.Items.GEMS_LAPIS),
-//                'G' to ing(Tags.Items.INGOTS_GOLD),
-//                'E' to ing(ModItems.ECTOPLASM)
-//            )
-//        ),
         shapedRecipe(
             ModItems.BIOME_SENSOR,
             "III,RBI,IRI",
@@ -1183,6 +1178,12 @@ class ModRecipeProvider(
                 ing(Items.INK_SAC),
                 ing(Items.PAPER)
             )
+        ),
+        shapelessRecipe(
+            ModItems.GRASS_SEEDS,
+            listOf(
+                ing(Items.GRASS_BLOCK)
+            )
         )
     )
 
@@ -1222,6 +1223,8 @@ class ModRecipeProvider(
             )
         )
     }
+
+    private val recipesWithNames: MutableMap<RecipeBuilder, String> = mutableMapOf()
 
     private fun coloredThings(): List<RecipeBuilder> {
         return buildList {
@@ -1304,7 +1307,7 @@ class ModRecipeProvider(
                     shapelessRecipe(
                         grassSeeds,
                         listOf(
-                            ing(ModItems.GRASS_SEEDS),
+                            ing(ModItemTagsProvider.GRASS_SEEDS),
                             ing(dyeTag)
                         )
                     )
@@ -1322,8 +1325,35 @@ class ModRecipeProvider(
                     )
                 )
 
+                val runeConversionRecipe = shapedRecipe(
+                    runeDust,
+                    8,
+                    "RRR,RDR,RRR",
+                    mapOf(
+                        'R' to ing(ModItemTagsProvider.RUNE_DUSTS),
+                        'D' to ing(dyeTag)
+                    )
+                )
+
+                recipesWithNames[runeConversionRecipe] = "rune_dust_convert_$color"
             }
         }
+    }
+
+    private fun populatedNamedRecipes() {
+
+        val spectreIngotRecipe = shapedRecipe(
+            ModItems.SPECTRE_INGOT,
+            "L,G,E",
+            mapOf(
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'G' to ing(Tags.Items.INGOTS_GOLD),
+                'E' to ing(ModItems.ECTOPLASM)
+            )
+        )
+
+        recipesWithNames[spectreIngotRecipe] = "spectre_ingot_single"
+
     }
 
 }

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "irregular_implements:grass_seeds"
+      "tag": "irregular_implements:grass_seeds"
     },
     {
       "tag": "c:dyes/light_blue"
