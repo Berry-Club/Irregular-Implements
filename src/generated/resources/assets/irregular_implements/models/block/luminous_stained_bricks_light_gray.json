@@ -1,0 +1,91 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#base"
+        },
+        "east": {
+          "cullface": "east",
+          "texture": "#base"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#base"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#base"
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#base"
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#base"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#tint"
+        },
+        "east": {
+          "cullface": "east",
+          "texture": "#tint"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#tint"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#tint"
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#tint"
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#tint"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "neoforge_data": {
+        "ambient_occlusion": false,
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "base": "irregular_implements:block/luminous_stained_brick/base/light_gray",
+    "particle": "irregular_implements:block/luminous_stained_brick/tint/light_gray",
+    "tint": "irregular_implements:block/luminous_stained_brick/tint/light_gray"
+  }
+}

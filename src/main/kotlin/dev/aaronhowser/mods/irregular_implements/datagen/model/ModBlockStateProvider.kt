@@ -48,6 +48,7 @@ class ModBlockStateProvider(
         triggerGlass()
         platforms()
         luminousBlocks()
+        stainedBricks()
     }
 
     private fun luminousBlocks() {
@@ -87,6 +88,44 @@ class ModBlockStateProvider(
             simpleBlockWithItem(translucentBlock, translucentModel)
 
         }
+    }
+
+    private fun stainedBricks() {
+
+        for (color in DyeColor.entries.map { it.getName() }) {
+
+            val regular = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "stained_bricks_$color" }.get()
+            val luminous = ModBlocks.BLOCK_REGISTRY.entries.first { it.key!!.location().path == "luminous_stained_bricks_$color" }.get()
+
+            val regularTexture = modLoc("block/stained_bricks/$color")
+            val luminousBaseTexture = modLoc("block/luminous_stained_brick/base/$color")
+            val luminousTintTexture = modLoc("block/luminous_stained_brick/tint/$color")
+
+            val regularModel = models()
+                .cubeAll(name(regular), regularTexture)
+
+            val luminousModel = models()
+                .withExistingParent(name(luminous), mcLoc("block/block"))
+                .texture("base", luminousBaseTexture)
+                .texture("tint", luminousTintTexture)
+                .texture("particle", luminousTintTexture)
+
+                .element()
+                .cube("#base")
+                .ao(true)
+                .emissivity(0, 0)
+                .end()
+
+                .element()
+                .cube("#tint")
+                .ao(false)
+                .emissivity(15, 15)
+                .end()
+
+            simpleBlockWithItem(regular, regularModel)
+            simpleBlockWithItem(luminous, luminousModel)
+        }
+
     }
 
     private fun platforms() {
