@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.registries
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.neoforged.neoforge.registries.DeferredBlock
@@ -135,7 +137,7 @@ object ModBlocks {
     val BIOME_STONE_BRICKS = basicBlock("biome_stone_bricks")
     val BIOME_STONE_BRICKS_CRACKED = basicBlock("biome_stone_bricks_cracked")
     val BIOME_STONE_BRICKS_CHISELED = basicBlock("biome_stone_bricks_chiseled")
-    val BIOME_GLASS = basicBlock("biome_glass")
+    val BIOME_GLASS = basicGlassBlock("biome_glass")
 
     // Plates
     val PROCESSING_PLATE = basicBlock("processing_plate")
@@ -186,22 +188,22 @@ object ModBlocks {
     val LUMINOUS_BLOCK_RED = basicBlock("luminous_block_red")
     val LUMINOUS_BLOCK_BLACK = basicBlock("luminous_block_black")
 
-    val TRANSLUCENT_LUMINOUS_BLOCK_WHITE = basicBlock("translucent_luminous_block_white")
-    val TRANSLUCENT_LUMINOUS_BLOCK_ORANGE = basicBlock("translucent_luminous_block_orange")
-    val TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA = basicBlock("translucent_luminous_block_magenta")
-    val TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE = basicBlock("translucent_luminous_block_light_blue")
-    val TRANSLUCENT_LUMINOUS_BLOCK_YELLOW = basicBlock("translucent_luminous_block_yellow")
-    val TRANSLUCENT_LUMINOUS_BLOCK_LIME = basicBlock("translucent_luminous_block_lime")
-    val TRANSLUCENT_LUMINOUS_BLOCK_PINK = basicBlock("translucent_luminous_block_pink")
-    val TRANSLUCENT_LUMINOUS_BLOCK_GRAY = basicBlock("translucent_luminous_block_gray")
-    val TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY = basicBlock("translucent_luminous_block_light_gray")
-    val TRANSLUCENT_LUMINOUS_BLOCK_CYAN = basicBlock("translucent_luminous_block_cyan")
-    val TRANSLUCENT_LUMINOUS_BLOCK_PURPLE = basicBlock("translucent_luminous_block_purple")
-    val TRANSLUCENT_LUMINOUS_BLOCK_BLUE = basicBlock("translucent_luminous_block_blue")
-    val TRANSLUCENT_LUMINOUS_BLOCK_BROWN = basicBlock("translucent_luminous_block_brown")
-    val TRANSLUCENT_LUMINOUS_BLOCK_GREEN = basicBlock("translucent_luminous_block_green")
-    val TRANSLUCENT_LUMINOUS_BLOCK_RED = basicBlock("translucent_luminous_block_red")
-    val TRANSLUCENT_LUMINOUS_BLOCK_BLACK = basicBlock("translucent_luminous_block_black")
+    val TRANSLUCENT_LUMINOUS_BLOCK_WHITE = basicGlassBlock("translucent_luminous_block_white")
+    val TRANSLUCENT_LUMINOUS_BLOCK_ORANGE = basicGlassBlock("translucent_luminous_block_orange")
+    val TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA = basicGlassBlock("translucent_luminous_block_magenta")
+    val TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE = basicGlassBlock("translucent_luminous_block_light_blue")
+    val TRANSLUCENT_LUMINOUS_BLOCK_YELLOW = basicGlassBlock("translucent_luminous_block_yellow")
+    val TRANSLUCENT_LUMINOUS_BLOCK_LIME = basicGlassBlock("translucent_luminous_block_lime")
+    val TRANSLUCENT_LUMINOUS_BLOCK_PINK = basicGlassBlock("translucent_luminous_block_pink")
+    val TRANSLUCENT_LUMINOUS_BLOCK_GRAY = basicGlassBlock("translucent_luminous_block_gray")
+    val TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY = basicGlassBlock("translucent_luminous_block_light_gray")
+    val TRANSLUCENT_LUMINOUS_BLOCK_CYAN = basicGlassBlock("translucent_luminous_block_cyan")
+    val TRANSLUCENT_LUMINOUS_BLOCK_PURPLE = basicGlassBlock("translucent_luminous_block_purple")
+    val TRANSLUCENT_LUMINOUS_BLOCK_BLUE = basicGlassBlock("translucent_luminous_block_blue")
+    val TRANSLUCENT_LUMINOUS_BLOCK_BROWN = basicGlassBlock("translucent_luminous_block_brown")
+    val TRANSLUCENT_LUMINOUS_BLOCK_GREEN = basicGlassBlock("translucent_luminous_block_green")
+    val TRANSLUCENT_LUMINOUS_BLOCK_RED = basicGlassBlock("translucent_luminous_block_red")
+    val TRANSLUCENT_LUMINOUS_BLOCK_BLACK = basicGlassBlock("translucent_luminous_block_black")
 
     val STAINED_BRICKS_WHITE = basicBlock("stained_bricks_white")
     val STAINED_BRICKS_ORANGE = basicBlock("stained_bricks_orange")
@@ -243,6 +245,7 @@ object ModBlocks {
 
 
     private fun basicBlock(name: String) = registerBlock(name) { Block(BlockBehaviour.Properties.of()) }
+    private fun basicGlassBlock(name: String) = registerBlock(name) { TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)) }
 
     private fun <T : Block> registerBlock(
         name: String,

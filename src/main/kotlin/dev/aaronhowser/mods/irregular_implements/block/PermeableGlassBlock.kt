@@ -3,8 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -14,7 +14,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class PermeableGlassBlock(
     val type: Type
-) : Block(
+) : TransparentBlock(
     Properties
         .ofFullCopy(if (type == Type.LAPIS) Blocks.BLUE_STAINED_GLASS else Blocks.LIGHT_GRAY_STAINED_GLASS)
 ) {
