@@ -83,6 +83,7 @@
       ]
     }
   ],
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "base": "irregular_implements:block/luminous_stained_brick/base/white",
     "particle": "irregular_implements:block/luminous_stained_brick/tint/white",

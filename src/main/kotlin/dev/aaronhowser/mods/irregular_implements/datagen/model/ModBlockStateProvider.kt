@@ -109,8 +109,8 @@ class ModBlockStateProvider(
                 .texture("base", luminousBaseTexture)
                 .texture("tint", luminousTintTexture)
                 .texture("particle", luminousTintTexture)
+                .renderType(RenderType.cutoutMipped().name)
 
-                //FIXME: For some reason this is glowing white in every block
                 .element()
                 .cube("#base")
                 .end()
