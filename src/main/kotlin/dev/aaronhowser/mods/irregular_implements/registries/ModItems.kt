@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterials
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -131,23 +132,40 @@ object ModItems {
     val PORTABLE_SOUND_DAMPENER = basic("portable_sound_dampener")
 
     // Colors
-    val GRASS_SEEDS = basic("grass_seeds")
-    val GRASS_SEEDS_WHITE = basic("grass_seeds_white")
-    val GRASS_SEEDS_ORANGE = basic("grass_seeds_orange")
-    val GRASS_SEEDS_MAGENTA = basic("grass_seeds_magenta")
-    val GRASS_SEEDS_LIGHT_BLUE = basic("grass_seeds_light_blue")
-    val GRASS_SEEDS_YELLOW = basic("grass_seeds_yellow")
-    val GRASS_SEEDS_LIME = basic("grass_seeds_lime")
-    val GRASS_SEEDS_PINK = basic("grass_seeds_pink")
-    val GRASS_SEEDS_GRAY = basic("grass_seeds_gray")
-    val GRASS_SEEDS_LIGHT_GRAY = basic("grass_seeds_light_gray")
-    val GRASS_SEEDS_CYAN = basic("grass_seeds_cyan")
-    val GRASS_SEEDS_PURPLE = basic("grass_seeds_purple")
-    val GRASS_SEEDS_BLUE = basic("grass_seeds_blue")
-    val GRASS_SEEDS_BROWN = basic("grass_seeds_brown")
-    val GRASS_SEEDS_GREEN = basic("grass_seeds_green")
-    val GRASS_SEEDS_RED = basic("grass_seeds_red")
-    val GRASS_SEEDS_BLACK = basic("grass_seeds_black")
+    val GRASS_SEEDS: DeferredItem<GrassSeedItem> =
+        register("grass_seeds") { GrassSeedItem(dyeColor = null) }
+    val GRASS_SEEDS_WHITE: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_white") { GrassSeedItem(dyeColor = DyeColor.WHITE) }
+    val GRASS_SEEDS_ORANGE: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_orange") { GrassSeedItem(dyeColor = DyeColor.ORANGE) }
+    val GRASS_SEEDS_MAGENTA: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_magenta") { GrassSeedItem(dyeColor = DyeColor.MAGENTA) }
+    val GRASS_SEEDS_LIGHT_BLUE: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_light_blue") { GrassSeedItem(dyeColor = DyeColor.LIGHT_BLUE) }
+    val GRASS_SEEDS_YELLOW: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_yellow") { GrassSeedItem(dyeColor = DyeColor.YELLOW) }
+    val GRASS_SEEDS_LIME: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_lime") { GrassSeedItem(dyeColor = DyeColor.LIME) }
+    val GRASS_SEEDS_PINK: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_pink") { GrassSeedItem(dyeColor = DyeColor.PINK) }
+    val GRASS_SEEDS_GRAY: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_gray") { GrassSeedItem(dyeColor = DyeColor.GRAY) }
+    val GRASS_SEEDS_LIGHT_GRAY: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_light_gray") { GrassSeedItem(dyeColor = DyeColor.LIGHT_GRAY) }
+    val GRASS_SEEDS_CYAN: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_cyan") { GrassSeedItem(dyeColor = DyeColor.CYAN) }
+    val GRASS_SEEDS_PURPLE: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_purple") { GrassSeedItem(dyeColor = DyeColor.PURPLE) }
+    val GRASS_SEEDS_BLUE: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_blue") { GrassSeedItem(dyeColor = DyeColor.BLUE) }
+    val GRASS_SEEDS_BROWN: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_brown") { GrassSeedItem(dyeColor = DyeColor.LIGHT_BLUE) }
+    val GRASS_SEEDS_GREEN: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_green") { GrassSeedItem(dyeColor = DyeColor.GREEN) }
+    val GRASS_SEEDS_RED: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_red") { GrassSeedItem(dyeColor = DyeColor.RED) }
+    val GRASS_SEEDS_BLACK: DeferredItem<GrassSeedItem> =
+        register("grass_seeds_black") { GrassSeedItem(dyeColor = DyeColor.BLACK) }
 
     val RUNE_DUST_WHITE = basic("rune_dust_white")
     val RUNE_DUST_ORANGE = basic("rune_dust_orange")
