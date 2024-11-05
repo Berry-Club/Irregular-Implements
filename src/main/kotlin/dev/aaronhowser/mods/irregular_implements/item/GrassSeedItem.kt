@@ -31,25 +31,7 @@ class GrassSeedItem(
     val dyeColor: DyeColor?
 ) : Item(Properties()) {
 
-    val resultBlock: Block = when (dyeColor) {
-        DyeColor.WHITE -> ModBlocks.COLORED_GRASS_WHITE.get()
-        DyeColor.ORANGE -> ModBlocks.COLORED_GRASS_ORANGE.get()
-        DyeColor.MAGENTA -> ModBlocks.COLORED_GRASS_MAGENTA.get()
-        DyeColor.LIGHT_BLUE -> ModBlocks.COLORED_GRASS_LIGHT_BLUE.get()
-        DyeColor.YELLOW -> ModBlocks.COLORED_GRASS_YELLOW.get()
-        DyeColor.LIME -> ModBlocks.COLORED_GRASS_LIME.get()
-        DyeColor.PINK -> ModBlocks.COLORED_GRASS_PINK.get()
-        DyeColor.GRAY -> ModBlocks.COLORED_GRASS_GRAY.get()
-        DyeColor.LIGHT_GRAY -> ModBlocks.COLORED_GRASS_LIGHT_GRAY.get()
-        DyeColor.CYAN -> ModBlocks.COLORED_GRASS_CYAN.get()
-        DyeColor.PURPLE -> ModBlocks.COLORED_GRASS_PURPLE.get()
-        DyeColor.BLUE -> ModBlocks.COLORED_GRASS_BLUE.get()
-        DyeColor.BROWN -> ModBlocks.COLORED_GRASS_BROWN.get()
-        DyeColor.GREEN -> ModBlocks.COLORED_GRASS_GREEN.get()
-        DyeColor.RED -> ModBlocks.COLORED_GRASS_RED.get()
-        DyeColor.BLACK -> ModBlocks.COLORED_GRASS_BLACK.get()
-        null -> Blocks.GRASS_BLOCK
-    }
+    val resultBlock: Block = if (dyeColor == null) Blocks.GRASS_BLOCK else ModBlocks.getColoredGrass(dyeColor).get()
 
     override fun useOn(context: UseOnContext): InteractionResult {
         val clickedPos = context.clickedPos

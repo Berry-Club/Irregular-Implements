@@ -264,6 +264,27 @@ object ModBlocks {
         return BLOCK_REGISTRY.register(name, supplier)
     }
 
+    fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<Block> {
+        return when (dyeColor) {
+            DyeColor.WHITE -> COLORED_GRASS_WHITE
+            DyeColor.ORANGE -> COLORED_GRASS_ORANGE
+            DyeColor.MAGENTA -> COLORED_GRASS_MAGENTA
+            DyeColor.LIGHT_BLUE -> COLORED_GRASS_LIGHT_BLUE
+            DyeColor.YELLOW -> COLORED_GRASS_YELLOW
+            DyeColor.LIME -> COLORED_GRASS_LIME
+            DyeColor.PINK -> COLORED_GRASS_PINK
+            DyeColor.GRAY -> COLORED_GRASS_GRAY
+            DyeColor.LIGHT_GRAY -> COLORED_GRASS_LIGHT_GRAY
+            DyeColor.CYAN -> COLORED_GRASS_CYAN
+            DyeColor.PURPLE -> COLORED_GRASS_PURPLE
+            DyeColor.BLUE -> COLORED_GRASS_BLUE
+            DyeColor.BROWN -> COLORED_GRASS_BROWN
+            DyeColor.GREEN -> COLORED_GRASS_GREEN
+            DyeColor.RED -> COLORED_GRASS_RED
+            DyeColor.BLACK -> COLORED_GRASS_BLACK
+        }
+    }
+
     fun getLuminousBlock(dyeColor: DyeColor): DeferredBlock<Block> {
         return when (dyeColor) {
             DyeColor.WHITE -> LUMINOUS_BLOCK_WHITE

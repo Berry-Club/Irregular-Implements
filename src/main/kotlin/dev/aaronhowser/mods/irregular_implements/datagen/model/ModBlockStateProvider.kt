@@ -49,6 +49,20 @@ class ModBlockStateProvider(
         platforms()
         luminousBlocks()
         stainedBricks()
+        coloredGrass()
+    }
+
+    private fun coloredGrass() {
+        for (color in DyeColor.entries) {
+            val block = ModBlocks.getColoredGrass(color).get()
+
+            //TODO: Figure out how to color
+            val model = models()
+                .withExistingParent(name(block), mcLoc("block/grass_block"))
+
+            simpleBlockWithItem(block, model)
+        }
+
     }
 
     private fun luminousBlocks() {
