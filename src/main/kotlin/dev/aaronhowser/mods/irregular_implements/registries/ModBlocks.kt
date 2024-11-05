@@ -49,8 +49,6 @@ object ModBlocks {
         registerBlock("block_of_sticks") { BlockOfSticksBlock(returning = false) }
     val RETURNING_BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
         registerBlock("returning_block_of_sticks") { BlockOfSticksBlock(returning = true) }
-    val LUMINOUS_BLOCK = basicBlock("luminous_block")   // Same block for all colors
-    val TRANSLUCENT_LUMINOUS_BLOCK = basicBlock("translucent_luminous_block")   // Same block for all colors
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
     val BLAZE_FIRE: DeferredBlock<BlazeFire> =
@@ -71,11 +69,8 @@ object ModBlocks {
     val ITEM_COLLECTOR = basicBlock("item_collector")
     val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
     val NATURE_CORE = basicBlock("nature_core")
-    val COLORED_GRASS = basicBlock("colored_grass") // Same block for all colors
     val RAINBOW_LAMP =
         registerBlock("rainbow_lamp") { RainbowLampBlock() }
-    val STAINED_BRICKS = basicBlock("stained_bricks") // Same block for all colors
-    val LUMINOUS_STAINED_BRICKS = basicBlock("luminous_stained_bricks") // Same block for all colors
 
     // Platform
     val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
@@ -156,8 +151,93 @@ object ModBlocks {
     val COLLECTION_PLATE = basicBlock("collection_plate")
     val EXTRACTION_PLATE = basicBlock("extraction_plate")
 
-    // Internal
+    // Colored blocks
+    val COLORED_GRASS_WHITE = basicBlock("colored_grass_white")
+    val COLORED_GRASS_ORANGE = basicBlock("colored_grass_orange")
+    val COLORED_GRASS_MAGENTA = basicBlock("colored_grass_magenta")
+    val COLORED_GRASS_LIGHT_BLUE = basicBlock("colored_grass_light_blue")
+    val COLORED_GRASS_YELLOW = basicBlock("colored_grass_yellow")
+    val COLORED_GRASS_LIME = basicBlock("colored_grass_lime")
+    val COLORED_GRASS_PINK = basicBlock("colored_grass_pink")
+    val COLORED_GRASS_GRAY = basicBlock("colored_grass_gray")
+    val COLORED_GRASS_LIGHT_GRAY = basicBlock("colored_grass_light_gray")
+    val COLORED_GRASS_CYAN = basicBlock("colored_grass_cyan")
+    val COLORED_GRASS_PURPLE = basicBlock("colored_grass_purple")
+    val COLORED_GRASS_BLUE = basicBlock("colored_grass_blue")
+    val COLORED_GRASS_BROWN = basicBlock("colored_grass_brown")
+    val COLORED_GRASS_GREEN = basicBlock("colored_grass_green")
+    val COLORED_GRASS_RED = basicBlock("colored_grass_red")
+    val COLORED_GRASS_BLACK = basicBlock("colored_grass_black")
 
+    val LUMINOUS_BLOCK_WHITE = basicBlock("luminous_block_white")
+    val LUMINOUS_BLOCK_ORANGE = basicBlock("luminous_block_orange")
+    val LUMINOUS_BLOCK_MAGENTA = basicBlock("luminous_block_magenta")
+    val LUMINOUS_BLOCK_LIGHT_BLUE = basicBlock("luminous_block_light_blue")
+    val LUMINOUS_BLOCK_YELLOW = basicBlock("luminous_block_yellow")
+    val LUMINOUS_BLOCK_LIME = basicBlock("luminous_block_lime")
+    val LUMINOUS_BLOCK_PINK = basicBlock("luminous_block_pink")
+    val LUMINOUS_BLOCK_GRAY = basicBlock("luminous_block_gray")
+    val LUMINOUS_BLOCK_LIGHT_GRAY = basicBlock("luminous_block_light_gray")
+    val LUMINOUS_BLOCK_CYAN = basicBlock("luminous_block_cyan")
+    val LUMINOUS_BLOCK_PURPLE = basicBlock("luminous_block_purple")
+    val LUMINOUS_BLOCK_BLUE = basicBlock("luminous_block_blue")
+    val LUMINOUS_BLOCK_BROWN = basicBlock("luminous_block_brown")
+    val LUMINOUS_BLOCK_GREEN = basicBlock("luminous_block_green")
+    val LUMINOUS_BLOCK_RED = basicBlock("luminous_block_red")
+    val LUMINOUS_BLOCK_BLACK = basicBlock("luminous_block_black")
+
+    val TRANSLUCENT_LUMINOUS_BLOCK_WHITE = basicBlock("translucent_luminous_block_white")
+    val TRANSLUCENT_LUMINOUS_BLOCK_ORANGE = basicBlock("translucent_luminous_block_orange")
+    val TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA = basicBlock("translucent_luminous_block_magenta")
+    val TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE = basicBlock("translucent_luminous_block_light_blue")
+    val TRANSLUCENT_LUMINOUS_BLOCK_YELLOW = basicBlock("translucent_luminous_block_yellow")
+    val TRANSLUCENT_LUMINOUS_BLOCK_LIME = basicBlock("translucent_luminous_block_lime")
+    val TRANSLUCENT_LUMINOUS_BLOCK_PINK = basicBlock("translucent_luminous_block_pink")
+    val TRANSLUCENT_LUMINOUS_BLOCK_GRAY = basicBlock("translucent_luminous_block_gray")
+    val TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY = basicBlock("translucent_luminous_block_light_gray")
+    val TRANSLUCENT_LUMINOUS_BLOCK_CYAN = basicBlock("translucent_luminous_block_cyan")
+    val TRANSLUCENT_LUMINOUS_BLOCK_PURPLE = basicBlock("translucent_luminous_block_purple")
+    val TRANSLUCENT_LUMINOUS_BLOCK_BLUE = basicBlock("translucent_luminous_block_blue")
+    val TRANSLUCENT_LUMINOUS_BLOCK_BROWN = basicBlock("translucent_luminous_block_brown")
+    val TRANSLUCENT_LUMINOUS_BLOCK_GREEN = basicBlock("translucent_luminous_block_green")
+    val TRANSLUCENT_LUMINOUS_BLOCK_RED = basicBlock("translucent_luminous_block_red")
+    val TRANSLUCENT_LUMINOUS_BLOCK_BLACK = basicBlock("translucent_luminous_block_black")
+
+    val STAINED_BRICKS_WHITE = basicBlock("stained_bricks_white")
+    val STAINED_BRICKS_ORANGE = basicBlock("stained_bricks_orange")
+    val STAINED_BRICKS_MAGENTA = basicBlock("stained_bricks_magenta")
+    val STAINED_BRICKS_LIGHT_BLUE = basicBlock("stained_bricks_light_blue")
+    val STAINED_BRICKS_YELLOW = basicBlock("stained_bricks_yellow")
+    val STAINED_BRICKS_LIME = basicBlock("stained_bricks_lime")
+    val STAINED_BRICKS_PINK = basicBlock("stained_bricks_pink")
+    val STAINED_BRICKS_GRAY = basicBlock("stained_bricks_gray")
+    val STAINED_BRICKS_LIGHT_GRAY = basicBlock("stained_bricks_light_gray")
+    val STAINED_BRICKS_CYAN = basicBlock("stained_bricks_cyan")
+    val STAINED_BRICKS_PURPLE = basicBlock("stained_bricks_purple")
+    val STAINED_BRICKS_BLUE = basicBlock("stained_bricks_blue")
+    val STAINED_BRICKS_BROWN = basicBlock("stained_bricks_brown")
+    val STAINED_BRICKS_GREEN = basicBlock("stained_bricks_green")
+    val STAINED_BRICKS_RED = basicBlock("stained_bricks_red")
+    val STAINED_BRICKS_BLACK = basicBlock("stained_bricks_black")
+
+    val LUMINOUS_STAINED_BRICKS_WHITE = basicBlock("luminous_stained_bricks_white")
+    val LUMINOUS_STAINED_BRICKS_ORANGE = basicBlock("luminous_stained_bricks_orange")
+    val LUMINOUS_STAINED_BRICKS_MAGENTA = basicBlock("luminous_stained_bricks_magenta")
+    val LUMINOUS_STAINED_BRICKS_LIGHT_BLUE = basicBlock("luminous_stained_bricks_light_blue")
+    val LUMINOUS_STAINED_BRICKS_YELLOW = basicBlock("luminous_stained_bricks_yellow")
+    val LUMINOUS_STAINED_BRICKS_LIME = basicBlock("luminous_stained_bricks_lime")
+    val LUMINOUS_STAINED_BRICKS_PINK = basicBlock("luminous_stained_bricks_pink")
+    val LUMINOUS_STAINED_BRICKS_GRAY = basicBlock("luminous_stained_bricks_gray")
+    val LUMINOUS_STAINED_BRICKS_LIGHT_GRAY = basicBlock("luminous_stained_bricks_light_gray")
+    val LUMINOUS_STAINED_BRICKS_CYAN = basicBlock("luminous_stained_bricks_cyan")
+    val LUMINOUS_STAINED_BRICKS_PURPLE = basicBlock("luminous_stained_bricks_purple")
+    val LUMINOUS_STAINED_BRICKS_BLUE = basicBlock("luminous_stained_bricks_blue")
+    val LUMINOUS_STAINED_BRICKS_BROWN = basicBlock("luminous_stained_bricks_brown")
+    val LUMINOUS_STAINED_BRICKS_GREEN = basicBlock("luminous_stained_bricks_green")
+    val LUMINOUS_STAINED_BRICKS_RED = basicBlock("luminous_stained_bricks_red")
+    val LUMINOUS_STAINED_BRICKS_BLACK = basicBlock("luminous_stained_bricks_black")
+
+    // Internal
     val FLOO_BRICK = basicBlock("floo_brick")
     val ANCIENT_BRICK = basicBlock("ancient_brick") // "Internal"? Whatever that means
 

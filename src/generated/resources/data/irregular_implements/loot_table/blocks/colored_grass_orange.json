@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:colored_grass"
+          "name": "irregular_implements:colored_grass_orange"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:blocks/colored_grass"
+  "random_sequence": "irregular_implements:blocks/colored_grass_orange"
 }

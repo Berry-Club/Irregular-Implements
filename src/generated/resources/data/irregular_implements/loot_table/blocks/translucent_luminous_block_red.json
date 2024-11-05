@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:stained_bricks"
+          "name": "irregular_implements:translucent_luminous_block_red"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:blocks/stained_bricks"
+  "random_sequence": "irregular_implements:blocks/translucent_luminous_block_red"
 }
