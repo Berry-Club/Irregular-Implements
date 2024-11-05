@@ -47,7 +47,6 @@ class ModItemModelProvider(
 
     private val handledItems: MutableSet<Item> = mutableSetOf()
 
-    //TODO: This doesn't even work
     private fun coloredItems() {
         for (color in DyeColor.entries) {
 
