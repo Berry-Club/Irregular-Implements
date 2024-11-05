@@ -8,5 +8,4 @@ class ColoredGrassBlock(dyeColor: DyeColor) : GrassBlock(
     Properties
         .ofFullCopy(Blocks.GRASS_BLOCK)
         .mapColor(dyeColor)
-) {
-}
+)

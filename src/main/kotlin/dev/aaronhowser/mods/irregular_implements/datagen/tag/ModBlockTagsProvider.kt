@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -35,6 +36,20 @@ class ModBlockTagsProvider(
                 ModBlocks.SUPER_LUBRICANT_PLATFORM.get(),
                 ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM.get()
             )
+
+        val coloredGrassBlocks = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }.toTypedArray()
+
+        this.tag(BlockTags.DIRT)
+            .add(*coloredGrassBlocks)
+
+        this.tag(BlockTags.VALID_SPAWN)
+            .add(*coloredGrassBlocks)
+
+        this.tag(BlockTags.ANIMALS_SPAWNABLE_ON)
+            .add(*coloredGrassBlocks)
+
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
+            .add(*coloredGrassBlocks)
 
     }
 
