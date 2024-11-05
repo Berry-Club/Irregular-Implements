@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import net.minecraft.SharedConstants
 import net.minecraft.core.Holder
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -27,7 +28,7 @@ class ImbueItem(
     override fun finishUsingItem(stack: ItemStack, level: Level, livingEntity: LivingEntity): ItemStack {
         val mobEffectInstance = MobEffectInstance(
             imbueHolder,
-            20 * 60 * 60 * 20,
+            SharedConstants.TICKS_PER_MINUTE * 20,
             0
         )
 
