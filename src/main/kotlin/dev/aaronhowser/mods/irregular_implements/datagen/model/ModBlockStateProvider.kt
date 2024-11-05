@@ -185,8 +185,6 @@ class ModBlockStateProvider(
                 val modelName = name(block) + if (notSolid) "_triggered" else ""
                 val textureLocation = if (notSolid) "block/trigger_glass_triggered" else "block/trigger_glass"
 
-                //TODO: Is it not using the new texture? wtf?
-
                 ConfiguredModel
                     .builder()
                     .modelFile(
@@ -195,7 +193,7 @@ class ModBlockStateProvider(
                                 modelName,
                                 modLoc(textureLocation)
                             )
-                            .renderType(RenderType.CUTOUT.name)
+                            .renderType(RenderType.translucent().name)
                     )
                     .build()
             }
