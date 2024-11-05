@@ -155,22 +155,38 @@ object ModBlocks {
     val EXTRACTION_PLATE = basicBlock("extraction_plate")
 
     // Colored blocks
-    val COLORED_GRASS_WHITE = basicBlock("colored_grass_white")
-    val COLORED_GRASS_ORANGE = basicBlock("colored_grass_orange")
-    val COLORED_GRASS_MAGENTA = basicBlock("colored_grass_magenta")
-    val COLORED_GRASS_LIGHT_BLUE = basicBlock("colored_grass_light_blue")
-    val COLORED_GRASS_YELLOW = basicBlock("colored_grass_yellow")
-    val COLORED_GRASS_LIME = basicBlock("colored_grass_lime")
-    val COLORED_GRASS_PINK = basicBlock("colored_grass_pink")
-    val COLORED_GRASS_GRAY = basicBlock("colored_grass_gray")
-    val COLORED_GRASS_LIGHT_GRAY = basicBlock("colored_grass_light_gray")
-    val COLORED_GRASS_CYAN = basicBlock("colored_grass_cyan")
-    val COLORED_GRASS_PURPLE = basicBlock("colored_grass_purple")
-    val COLORED_GRASS_BLUE = basicBlock("colored_grass_blue")
-    val COLORED_GRASS_BROWN = basicBlock("colored_grass_brown")
-    val COLORED_GRASS_GREEN = basicBlock("colored_grass_green")
-    val COLORED_GRASS_RED = basicBlock("colored_grass_red")
-    val COLORED_GRASS_BLACK = basicBlock("colored_grass_black")
+    val COLORED_GRASS_WHITE: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_white") { ColoredGrassBlock(DyeColor.WHITE) }
+    val COLORED_GRASS_ORANGE: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_orange") { ColoredGrassBlock(DyeColor.ORANGE) }
+    val COLORED_GRASS_MAGENTA: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_magenta") { ColoredGrassBlock(DyeColor.MAGENTA) }
+    val COLORED_GRASS_LIGHT_BLUE: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_light_blue") { ColoredGrassBlock(DyeColor.LIGHT_BLUE) }
+    val COLORED_GRASS_YELLOW: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_yellow") { ColoredGrassBlock(DyeColor.YELLOW) }
+    val COLORED_GRASS_LIME: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_lime") { ColoredGrassBlock(DyeColor.LIME) }
+    val COLORED_GRASS_PINK: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_pink") { ColoredGrassBlock(DyeColor.PINK) }
+    val COLORED_GRASS_GRAY: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_gray") { ColoredGrassBlock(DyeColor.GRAY) }
+    val COLORED_GRASS_LIGHT_GRAY: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_light_gray") { ColoredGrassBlock(DyeColor.LIGHT_GRAY) }
+    val COLORED_GRASS_CYAN: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_cyan") { ColoredGrassBlock(DyeColor.CYAN) }
+    val COLORED_GRASS_PURPLE: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_purple") { ColoredGrassBlock(DyeColor.PURPLE) }
+    val COLORED_GRASS_BLUE: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_blue") { ColoredGrassBlock(DyeColor.BLUE) }
+    val COLORED_GRASS_BROWN: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_brown") { ColoredGrassBlock(DyeColor.BROWN) }
+    val COLORED_GRASS_GREEN: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_green") { ColoredGrassBlock(DyeColor.GREEN) }
+    val COLORED_GRASS_RED: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_red") { ColoredGrassBlock(DyeColor.RED) }
+    val COLORED_GRASS_BLACK: DeferredBlock<ColoredGrassBlock> =
+        registerBlock("colored_grass_black") { ColoredGrassBlock(DyeColor.BLACK) }
 
     val LUMINOUS_BLOCK_WHITE = basicBlock("luminous_block_white")
     val LUMINOUS_BLOCK_ORANGE = basicBlock("luminous_block_orange")
@@ -264,7 +280,7 @@ object ModBlocks {
         return BLOCK_REGISTRY.register(name, supplier)
     }
 
-    fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<Block> {
+    fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<ColoredGrassBlock> {
         return when (dyeColor) {
             DyeColor.WHITE -> COLORED_GRASS_WHITE
             DyeColor.ORANGE -> COLORED_GRASS_ORANGE

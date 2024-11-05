@@ -4,6 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags
+import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Block
 
 class ModBlockLootTablesSubProvider(
@@ -20,13 +22,19 @@ class ModBlockLootTablesSubProvider(
             add(block, noDrop())
         }
 
+        for (block in dropsDirtWithoutSilkTouch) {
+            add(block) { createSingleItemTableWithSilkTouch(it, Items.DIRT) }
+        }
+
     }
+
+    private val dropsDirtWithoutSilkTouch = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }
 
     private val blocksWithoutDrops = listOf(
         ModBlocks.BLAZE_FIRE
     ).map { it.get() }.toSet()
 
-    private val nonDropSelfBlocks: Set<Block> = blocksWithoutDrops
+    private val nonDropSelfBlocks: Set<Block> = blocksWithoutDrops + dropsDirtWithoutSilkTouch
 
     override fun getKnownBlocks(): List<Block> {
         return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }
