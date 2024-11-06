@@ -65,6 +65,8 @@ object ModItems {
     val TIME_IN_A_BOTTLE = basic("time_in_a_bottle")
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
+    val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
+        register("diaphanous_block") { DiaphanousBlockItem() }
 
     // Weather Eggs
     val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =

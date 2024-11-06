@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registries
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.component.ItemStackComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityItemComponent
 import net.minecraft.core.Holder
@@ -9,6 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.biome.Biome
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -52,6 +54,13 @@ object ModDataComponents {
             it
                 .persistent(SpecificEntityItemComponent.CODEC)
                 .networkSynchronized(SpecificEntityItemComponent.STREAM_CODEC)
+        }
+
+    val ITEMSTACK: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStackComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("itemstack") {
+            it
+                .persistent(ItemStackComponent.CODEC)
+                .networkSynchronized(ItemStackComponent.STREAM_CODEC)
         }
 
 }

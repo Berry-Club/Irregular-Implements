@@ -71,7 +71,7 @@ object ModBlocks {
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
     val DIAPHANOUS_BLOCK =
-        registerBlock("diaphanous_block") { DiaphanousBlock() }
+        registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
     val SIDED_BLOCK_OF_REDSTONE =
         registerBlock("sided_redstone") { SidedRedstoneBlock() }
     val ITEM_COLLECTOR = basicBlock("item_collector")
