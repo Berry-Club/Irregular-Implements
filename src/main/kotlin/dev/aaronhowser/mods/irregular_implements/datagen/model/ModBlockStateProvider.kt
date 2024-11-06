@@ -50,6 +50,22 @@ class ModBlockStateProvider(
         luminousBlocks()
         stainedBricks()
         coloredGrass()
+        customCraftingTable()
+    }
+
+    private fun customCraftingTable() {
+        val block = ModBlocks.CUSTOM_CRAFTING_TABLE.get()
+
+        val model = models()
+            .withExistingParent(name(block), mcLoc("block/crafting_table"))
+            .texture("up", modLoc("block/crafting_table/top"))
+            .texture("north", modLoc("block/crafting_table/front"))
+            .texture("east", modLoc("block/crafting_table/side"))
+            .texture("south", modLoc("block/crafting_table/side"))
+            .texture("west", modLoc("block/crafting_table/side"))
+            .renderType(RenderType.cutout().name)
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun coloredGrass() {
