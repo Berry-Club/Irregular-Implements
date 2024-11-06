@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.CraftingTableBlock
 import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockSetType
@@ -32,6 +31,7 @@ object ModBlocks {
     val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
         registerBlock("analog_emitter") { AnalogEmitter() }
     val FLUID_DISPLAY = basicBlock("fluid_display")
+    val CUSTOM_WORKBENCH = basicBlock("custom_workbench")   // Same block for every variant
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val PITCHER_PLANT = basicBlock("pitcher_plant")
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
@@ -153,35 +153,6 @@ object ModBlocks {
     val BOUNCY_PLATE = basicBlock("bouncy_plate")
     val COLLECTION_PLATE = basicBlock("collection_plate")
     val EXTRACTION_PLATE = basicBlock("extraction_plate")
-
-    // Workbenches
-    private fun workbench(name: String) =
-        registerBlock(name) {
-            CraftingTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE))
-        }
-
-    val OAK_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("oak_crafting_table")
-    val SPRUCE_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("spruce_crafting_table")
-    val BIRCH_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("birch_crafting_table")
-    val JUNGLE_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("jungle_crafting_table")
-    val ACACIA_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("acacia_crafting_table")
-    val DARK_OAK_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("dark_oak_crafting_table")
-    val CRIMSON_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("crimson_crafting_table")
-    val WARPED_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("warped_crafting_table")
-    val MANGROVE_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("mangrove_crafting_table")
-    val BAMBOO_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("bamboo_crafting_table")
-    val CHERRY_CRAFTING_TABLE: DeferredBlock<CraftingTableBlock> =
-        workbench("cherry_crafting_table")
 
     // Colored blocks
     val COLORED_GRASS_WHITE: DeferredBlock<ColoredGrassBlock> =
