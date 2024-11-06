@@ -1,11 +1,3 @@
 {
-  "parent": "minecraft:block/crafting_table",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "east": "irregular_implements:block/crafting_table/side",
-    "north": "irregular_implements:block/crafting_table/front",
-    "south": "irregular_implements:block/crafting_table/side",
-    "up": "irregular_implements:block/crafting_table/top",
-    "west": "irregular_implements:block/crafting_table/side"
-  }
+  "parent": "minecraft:block/bed"
 }
