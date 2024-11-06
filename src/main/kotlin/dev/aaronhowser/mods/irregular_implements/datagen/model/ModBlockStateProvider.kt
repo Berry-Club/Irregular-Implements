@@ -27,11 +27,18 @@ class ModBlockStateProvider(
     override fun registerStatesAndModels() {
 
         for (block in singleTextureBlocks) {
-            simpleBlockWithItem(block.get(), cubeAll(block.get()))
+            simpleBlockWithItem(block, cubeAll(block))
         }
 
         for (block in singleTextureTransparentBlocks) {
             singleTextureTransparent(block.get())
+        }
+
+        for (block in crossBlocks) {
+            val model = models()
+                .cross(name(block), blockTexture(block))
+                .renderType(RenderType.translucent().name)
+            simpleBlockWithItem(block, model)
         }
 
         rainbowLamp()
@@ -56,6 +63,11 @@ class ModBlockStateProvider(
         contactLever()
         contactButton()
     }
+
+    private val crossBlocks = listOf(
+        ModBlocks.PITCHER_PLANT,
+        ModBlocks.SPECTRE_SAPLING
+    ).map { it.get() }
 
     private fun contactButton() {
         val block = ModBlocks.CONTACT_BUTTON.get()
@@ -441,7 +453,7 @@ class ModBlockStateProvider(
         ModBlocks.QUARTZ_LAMP,
         ModBlocks.ENTITY_DETECTOR,
         ModBlocks.BEAN_POD
-    )
+    ).map { it.get() }
 
     private fun name(block: Block): String {
         return BuiltInRegistries.BLOCK.getKey(block).path

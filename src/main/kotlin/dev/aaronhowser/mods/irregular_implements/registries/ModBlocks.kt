@@ -34,7 +34,8 @@ object ModBlocks {
     val CUSTOM_CRAFTING_TABLE =
         registerBlock("custom_crafting_table") { CustomCraftingTableBlock() }
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
-    val PITCHER_PLANT = basicBlock("pitcher_plant")
+    val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
+        registerBlock("pitcher_plant") { PitcherPlantBlock() }
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
     val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
         registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
