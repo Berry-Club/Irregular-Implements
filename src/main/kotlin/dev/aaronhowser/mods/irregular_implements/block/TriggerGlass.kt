@@ -100,4 +100,10 @@ class TriggerGlass : TransparentBlock(
         level.setBlockAndUpdate(pos, state.setValue(NOT_SOLID, false))
     }
 
+    override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
+        if (adjacentBlockState.block != this) return super.skipRendering(state, adjacentBlockState, side)
+
+        return adjacentBlockState.getValue(NOT_SOLID) == state.getValue(NOT_SOLID)
+    }
+
 }
