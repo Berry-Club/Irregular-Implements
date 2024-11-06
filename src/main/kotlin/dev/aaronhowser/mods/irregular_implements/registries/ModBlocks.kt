@@ -40,7 +40,8 @@ object ModBlocks {
         registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val CONTACT_BUTTON = basicBlock("contact_button")
-    val CONTACT_LEVER = basicBlock("contact_lever")     // Contact Mike reference?
+    val CONTACT_LEVER =
+        registerBlock("contact_lever") { ContactLever() }
     val RAIN_SHIELD =
         registerBlock("rain_shield") { RainShieldBlock() }
     val BLOCK_BREAKER = basicBlock("block_breaker")

@@ -1,11 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.ContactLever
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
+import net.minecraft.world.InteractionHand
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID
@@ -20,6 +23,13 @@ object OtherEvents {
     @SubscribeEvent
     fun entityXpDrop(event: LivingExperienceDropEvent) {
         ImbueEffect.handleXpImbue(event)
+    }
+
+    @SubscribeEvent
+    fun onClickBlock(event: PlayerInteractEvent.RightClickBlock) {
+        if (event.hand == InteractionHand.MAIN_HAND) {
+            ContactLever.handleClickBlock(event.level, event.pos)
+        }
     }
 
 }

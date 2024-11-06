@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "irregular_implements:block/contact_lever/front",
+    "side": "irregular_implements:block/contact_lever/side_on",
+    "top": "irregular_implements:block/contact_lever/side_on"
+  }
+}

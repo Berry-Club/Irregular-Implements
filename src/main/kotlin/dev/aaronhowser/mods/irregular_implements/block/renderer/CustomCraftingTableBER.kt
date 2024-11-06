@@ -16,7 +16,7 @@ class CustomCraftingTableBER(
 
     companion object {
         val TOP_TEXTURE = OtherUtil.modResource("textures/block/crafting_table/top.png")
-        val SIDE_TEXTURE = OtherUtil.modResource("textures/block/crafting_table/side.png")
+        val SIDE_TEXTURE = OtherUtil.modResource("textures/block/crafting_table/side_off.png")
         val FRONT_TEXTURE = OtherUtil.modResource("textures/block/crafting_table/front.png")
     }
 
