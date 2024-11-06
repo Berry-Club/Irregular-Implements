@@ -9,6 +9,7 @@ import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
@@ -28,6 +29,7 @@ class ModBlockTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
 
         this.tag(SUPER_LUBRICATED)
             .add(
@@ -50,6 +52,27 @@ class ModBlockTagsProvider(
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(*coloredGrassBlocks)
+
+        val craftingTables = listOf(
+            ModBlocks.OAK_CRAFTING_TABLE,
+            ModBlocks.SPRUCE_CRAFTING_TABLE,
+            ModBlocks.BIRCH_CRAFTING_TABLE,
+            ModBlocks.JUNGLE_CRAFTING_TABLE,
+            ModBlocks.ACACIA_CRAFTING_TABLE,
+            ModBlocks.DARK_OAK_CRAFTING_TABLE,
+            ModBlocks.CRIMSON_CRAFTING_TABLE,
+            ModBlocks.WARPED_CRAFTING_TABLE,
+            ModBlocks.MANGROVE_CRAFTING_TABLE,
+            ModBlocks.BAMBOO_CRAFTING_TABLE,
+            ModBlocks.CHERRY_CRAFTING_TABLE,
+        ).map { it.get() }.toTypedArray()
+
+        this.tag(Tags.Blocks.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+            .add(*craftingTables)
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+            .add(*craftingTables)
+
 
     }
 
