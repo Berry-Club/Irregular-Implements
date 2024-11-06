@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 
-class CustomCraftingTableBlockEntityRenderer(
+class CustomCraftingTableBER(
     val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<CustomCraftingTableBlockEntity> {
     override fun render(

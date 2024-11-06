@@ -1,7 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableBlockEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableBER
+import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableClientExtensions
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
@@ -16,6 +17,7 @@ import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID,
@@ -65,7 +67,15 @@ object ClientModBusEvents {
     fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
         event.registerBlockEntityRenderer(
             ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(),
-            ::CustomCraftingTableBlockEntityRenderer
+            ::CustomCraftingTableBER
+        )
+    }
+
+    @SubscribeEvent
+    fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
+        event.registerItem(
+            CustomCraftingTableClientExtensions(),
+            ModBlocks.CUSTOM_CRAFTING_TABLE.get().asItem()
         )
     }
 
