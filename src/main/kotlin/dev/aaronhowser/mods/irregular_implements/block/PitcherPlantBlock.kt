@@ -23,6 +23,7 @@ import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import java.util.*
 
+//TODO: Add to level gen
 class PitcherPlantBlock : FlowerBlock(
     MobEffects.WATER_BREATHING,
     5f,
