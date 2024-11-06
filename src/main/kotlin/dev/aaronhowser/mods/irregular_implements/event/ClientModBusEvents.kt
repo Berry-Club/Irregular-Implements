@@ -1,15 +1,18 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.DyeBlockColor
 import dev.aaronhowser.mods.irregular_implements.client.DyeItemColor
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
+import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.world.item.DyeColor
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 
 @EventBusSubscriber(
@@ -46,6 +49,11 @@ object ClientModBusEvents {
 
             event.register(blockColor, coloredGrassBlock)
         }
+    }
+
+    @SubscribeEvent
+    fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
+        event.registerBlockEntityRenderer(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
     }
 
 }
