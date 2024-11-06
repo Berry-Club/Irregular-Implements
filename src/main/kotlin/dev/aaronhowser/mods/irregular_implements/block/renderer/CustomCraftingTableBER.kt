@@ -1,12 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.renderer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import net.minecraft.client.renderer.LightTexture
+import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import org.joml.Matrix4f
@@ -43,59 +42,40 @@ class CustomCraftingTableBER(
             )
 
         renderTop(
-            bufferSource.getBuffer(RenderType.entityTranslucent(TOP_TEXTURE)),
             poseStack.last().pose(),
-            LightTexture.FULL_BRIGHT,
-            packedOverlay
+            packedLight
         )
 
         poseStack.popPose()
     }
 
     private fun renderTop(
-        vertexConsumer: VertexConsumer,
         matrix: Matrix4f,
         packedLight: Int,
-        packedOverlay: Int,
     ) {
         val xMin = 0.0f
         val xMax = 1.0f
         val zMin = 0.0f
         val zMax = 1.0f
-        val yTop = 1.01f
+        val yTop = 1.2f
 
-        vertexConsumer
-            .addVertex(matrix, xMin, yTop, zMin)
-            .setColor(1.0f, 1.0f, 1.0f, 1.0f)
-            .setUv(1f, 0f)
-            .setOverlay(packedOverlay)
-            .setLight(packedLight)
-            .setNormal(0.0f, 1.0f, 0.0f)
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderTexture(0, TOP_TEXTURE)
+        RenderSystem.enableBlend()
 
-        vertexConsumer
-            .addVertex(matrix, xMin, yTop, zMax)
-            .setColor(1.0f, 1.0f, 1.0f, 1.0f)
-            .setUv(1f, 0f)
-            .setOverlay(packedOverlay)
-            .setLight(packedLight)
-            .setNormal(0.0f, 1.0f, 0.0f)
+        val lightFloat = packedLight.toFloat()
+        RenderSystem.setShaderColor(lightFloat, lightFloat, lightFloat, 1f)
 
-        vertexConsumer
-            .addVertex(matrix, xMax, yTop, zMax)
-            .setColor(1.0f, 1.0f, 1.0f, 1.0f)
-            .setUv(1f, 0f)
-            .setOverlay(packedOverlay)
-            .setLight(packedLight)
-            .setNormal(0.0f, 1.0f, 0.0f)
+        val bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX)
 
-        vertexConsumer
-            .addVertex(matrix, xMax, yTop, zMin)
-            .setColor(1.0f, 1.0f, 1.0f, 1.0f)
-            .setUv(1f, 0f)
-            .setOverlay(packedOverlay)
-            .setLight(packedLight)
-            .setNormal(0.0f, 1.0f, 0.0f)
+        bufferBuilder.addVertex(matrix, xMin, yTop, zMax).setUv(0f, 1f)
+        bufferBuilder.addVertex(matrix, xMax, yTop, zMax).setUv(0f, 1f)
+        bufferBuilder.addVertex(matrix, xMax, yTop, zMin).setUv(0f, 1f)
+        bufferBuilder.addVertex(matrix, xMin, yTop, zMin).setUv(0f, 1f)
 
+        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow())
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+        RenderSystem.disableBlend()
     }
 
 
