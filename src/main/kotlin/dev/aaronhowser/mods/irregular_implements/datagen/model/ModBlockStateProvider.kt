@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.ContactButton
 import dev.aaronhowser.mods.irregular_implements.block.ContactLever
 import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
 import dev.aaronhowser.mods.irregular_implements.block.TriggerGlass
@@ -53,6 +54,57 @@ class ModBlockStateProvider(
         coloredGrass()
         customCraftingTable()
         contactLever()
+        contactButton()
+    }
+
+    private fun contactButton() {
+        val block = ModBlocks.CONTACT_BUTTON.get()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DirectionalBlock.FACING)
+                val enabled = it.getValue(ContactButton.ENABLED)
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                val modelName = name(block) + if (enabled) "_on" else "_off"
+                val sideTexture = "block/contact_button/" + if (enabled) "side_on" else "side_off"
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(
+                        models()
+                            .orientable(
+                                modelName,
+                                modLoc(sideTexture),
+                                modLoc("block/contact_button/front"),
+                                modLoc(sideTexture)
+                            )
+                    )
+                    .rotationY(yRotation)
+                    .rotationX(xRotation)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/contact_button_off"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun contactLever() {

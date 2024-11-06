@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.ContactButton
 import dev.aaronhowser.mods.irregular_implements.block.ContactLever
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import net.minecraft.world.InteractionHand
@@ -27,8 +28,12 @@ object OtherEvents {
 
     @SubscribeEvent
     fun onClickBlock(event: PlayerInteractEvent.RightClickBlock) {
+        val level = event.level
+        val pos = event.pos
+
         if (event.hand == InteractionHand.MAIN_HAND) {
-            ContactLever.handleClickBlock(event.level, event.pos)
+            ContactLever.handleClickBlock(level, pos)
+            ContactButton.handleClickBlock(level, pos)
         }
     }
 

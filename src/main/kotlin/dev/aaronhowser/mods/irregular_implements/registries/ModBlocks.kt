@@ -39,8 +39,9 @@ object ModBlocks {
     val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
         registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
-    val CONTACT_BUTTON = basicBlock("contact_button")
-    val CONTACT_LEVER =
+    val CONTACT_BUTTON: DeferredBlock<ContactButton> =
+        registerBlock("contact_button") { ContactButton() }
+    val CONTACT_LEVER: DeferredBlock<ContactLever> =
         registerBlock("contact_lever") { ContactLever() }
     val RAIN_SHIELD =
         registerBlock("rain_shield") { RainShieldBlock() }
