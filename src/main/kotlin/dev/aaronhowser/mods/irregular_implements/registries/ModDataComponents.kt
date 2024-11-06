@@ -10,7 +10,6 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.biome.Biome
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister

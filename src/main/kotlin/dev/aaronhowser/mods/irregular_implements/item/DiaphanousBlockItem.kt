@@ -17,9 +17,10 @@ class DiaphanousBlockItem : BlockItem(
     ModBlocks.DIAPHANOUS_BLOCK.get(),
     Properties()
         .stacksTo(64)
-        .component(ModDataComponents.ITEMSTACK.get(), ItemStackComponent(Items.STONE.defaultInstance))
+        .component(ModDataComponents.ITEMSTACK.get(), ItemStackComponent(Items.DIRT.defaultInstance))
 ) {
 
+    // Mostly the same
     override fun place(context: BlockPlaceContext): InteractionResult {
         if (!context.canPlace()) return InteractionResult.FAIL
 
@@ -28,15 +29,14 @@ class DiaphanousBlockItem : BlockItem(
 
         if (!placeBlock(blockPlaceContext, stateToPlace)) return InteractionResult.FAIL
 
-        val clickedPos = blockPlaceContext.clickedPos
-        val clickedFace = blockPlaceContext.clickedFace
+        val posToPlace = blockPlaceContext.clickedPos
         val level = blockPlaceContext.level
-
         val player = blockPlaceContext.player
         val usedStack = blockPlaceContext.itemInHand
-        var clickedBlockState = level.getBlockState(clickedPos)
+        var clickedBlockState = level.getBlockState(posToPlace)
 
-        val blockEntity = level.getBlockEntity(clickedPos.relative(clickedFace))
+        // This is the only part that's different
+        val blockEntity = level.getBlockEntity(posToPlace)
         if (blockEntity is DiaphanousBlockEntity) {
             val blockItemStack = usedStack.get(ModDataComponents.ITEMSTACK.get())?.itemStack
             if (blockItemStack != null) {
@@ -45,30 +45,30 @@ class DiaphanousBlockItem : BlockItem(
         }
 
         if (clickedBlockState.`is`(stateToPlace.block)) {
-            clickedBlockState = this.updateBlockStateFromTag(clickedPos, level, usedStack, clickedBlockState)
+            clickedBlockState = this.updateBlockStateFromTag(posToPlace, level, usedStack, clickedBlockState)
 
-            this.updateCustomBlockEntityTag(clickedPos, level, player, usedStack, clickedBlockState)
-            updateBlockEntityComponents(level, clickedPos, usedStack)
+            this.updateCustomBlockEntityTag(posToPlace, level, player, usedStack, clickedBlockState)
+            updateBlockEntityComponents(level, posToPlace, usedStack)
 
-            clickedBlockState.block.setPlacedBy(level, clickedPos, clickedBlockState, player, usedStack)
+            clickedBlockState.block.setPlacedBy(level, posToPlace, clickedBlockState, player, usedStack)
             if (player is ServerPlayer) {
-                CriteriaTriggers.PLACED_BLOCK.trigger(player, clickedPos, usedStack)
+                CriteriaTriggers.PLACED_BLOCK.trigger(player, posToPlace, usedStack)
             }
         }
 
         if (player != null) {
-            val soundType = clickedBlockState.getSoundType(level, clickedPos, player)
+            val soundType = clickedBlockState.getSoundType(level, posToPlace, player)
             level.playSound(
                 player,
-                clickedPos,
-                this.getPlaceSound(clickedBlockState, level, clickedPos, player),
+                posToPlace,
+                this.getPlaceSound(clickedBlockState, level, posToPlace, player),
                 SoundSource.BLOCKS,
                 (soundType.getVolume() + 1.0f) / 2.0f,
                 soundType.getPitch() * 0.8f
             )
         }
 
-        level.gameEvent(GameEvent.BLOCK_PLACE, clickedPos, GameEvent.Context.of(player, clickedBlockState))
+        level.gameEvent(GameEvent.BLOCK_PLACE, posToPlace, GameEvent.Context.of(player, clickedBlockState))
         usedStack.consume(1, player)
         return InteractionResult.sidedSuccess(level.isClientSide)
     }
