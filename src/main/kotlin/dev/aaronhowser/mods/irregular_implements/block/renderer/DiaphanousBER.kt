@@ -23,17 +23,20 @@ class DiaphanousBER(
         val blockToRender = (blockEntity.blockToRender.item as? BlockItem)?.block ?: Blocks.STONE
         val alpha = blockEntity.alpha
 
-        poseStack.pushPose()
+        //FIXME: Is there no way to render a block with a custom alpha?
+        if (alpha > 0f) {
+            poseStack.popPose()
 
-        context.blockRenderDispatcher
-            .renderSingleBlock(
-                blockToRender.defaultBlockState(),
-                poseStack,
-                bufferSource,
-                packedLight,
-                packedOverlay
-            )
+            context.blockRenderDispatcher
+                .renderSingleBlock(
+                    blockToRender.defaultBlockState(),
+                    poseStack,
+                    bufferSource,
+                    packedLight,
+                    packedOverlay
+                )
 
-        poseStack.popPose()
+            poseStack.pushPose()
+        }
     }
 }
