@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.event
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableBER
 import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableClientExtensions
+import dev.aaronhowser.mods.irregular_implements.block.renderer.DiaphanousBER
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
@@ -69,6 +70,12 @@ object ClientModBusEvents {
             ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(),
             ::CustomCraftingTableBER
         )
+
+        event.registerBlockEntityRenderer(
+            ModBlockEntities.DIAPHANOUS_BLOCK.get(),
+            ::DiaphanousBER
+        )
+
     }
 
     @SubscribeEvent

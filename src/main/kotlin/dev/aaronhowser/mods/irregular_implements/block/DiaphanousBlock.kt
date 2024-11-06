@@ -18,20 +18,31 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 
 class DiaphanousBlock : EntityBlock, Block(
     Properties
-        .of()
-        .isSuffocating(Blocks::never)
-        .isViewBlocking(::checkViewBlocking)
+        .ofFullCopy(Blocks.STONE)
+        .noOcclusion()
+        .isRedstoneConductor(Blocks::never)
+        .isViewBlocking(::shouldViewBlock)
+        .isSuffocating(::shouldSuffocate)
 ) {
 
     companion object {
         val NOT_SOLID: BooleanProperty = BooleanProperty.create("not_solid")
 
-        private fun checkViewBlocking(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+        private fun shouldViewBlock(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
             val blockEntity = blockGetter.getBlockEntity(blockPos) as? DiaphanousBlockEntity ?: return false
+            if (blockEntity.alpha < 1f) return false
             val blockItem = blockEntity.blockToRender.item as? BlockItem ?: return false
 
             return blockItem.block.defaultBlockState().isViewBlocking(blockGetter, blockPos)
         }
+
+        private fun shouldSuffocate(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+            val blockEntity = blockGetter.getBlockEntity(blockPos) as? DiaphanousBlockEntity ?: return false
+            if (blockEntity.alpha < 1f) return false
+            val blockItem = blockEntity.blockToRender.item as? BlockItem ?: return false
+            return blockItem.block.defaultBlockState().isSuffocating(blockGetter, blockPos)
+        }
+
     }
 
     init {
