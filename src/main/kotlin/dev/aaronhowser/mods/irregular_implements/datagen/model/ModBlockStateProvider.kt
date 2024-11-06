@@ -41,7 +41,13 @@ class ModBlockStateProvider(
             simpleBlockWithItem(block, model)
         }
 
-        rainbowLamp()
+        for ((block, particle) in customRendererBlocks) {
+            val model = models()
+                .withExistingParent(name(block), mcLoc("block/bed"))
+                .texture("particle", particle)
+
+            simpleBlockWithItem(block, model)
+        }
 
         oneUniqueFace(
             ModBlocks.ANALOG_EMITTER.get(),
@@ -54,15 +60,20 @@ class ModBlockStateProvider(
             otherTexture = modLoc("block/sided_redstone_side")
         )
 
+        rainbowLamp()
         triggerGlass()
         platforms()
         luminousBlocks()
         stainedBricks()
         coloredGrass()
-        customCraftingTable()
         contactLever()
         contactButton()
     }
+
+    private val customRendererBlocks: Map<Block, ResourceLocation> = mapOf(
+        ModBlocks.CUSTOM_CRAFTING_TABLE.get() to mcLoc("block/oak_planks"),
+        ModBlocks.DIAPHANOUS_BLOCK.get() to mcLoc("block/stone"),
+    )
 
     private val crossBlocks = listOf(
         ModBlocks.PITCHER_PLANT,
@@ -167,15 +178,6 @@ class ModBlockStateProvider(
                 existingFileHelper
             )
         )
-    }
-
-    private fun customCraftingTable() {
-        val block = ModBlocks.CUSTOM_CRAFTING_TABLE.get()
-
-        val model = models()
-            .withExistingParent(name(block), mcLoc("block/bed"))
-
-        simpleBlockWithItem(block, model)
     }
 
     private fun coloredGrass() {
