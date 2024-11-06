@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:custom_workbench"
+          "name": "irregular_implements:custom_crafting_table"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:blocks/custom_workbench"
+  "random_sequence": "irregular_implements:blocks/custom_crafting_table"
 }

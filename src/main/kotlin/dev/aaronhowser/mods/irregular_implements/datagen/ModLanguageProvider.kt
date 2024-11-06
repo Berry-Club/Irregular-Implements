@@ -154,7 +154,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.WATER_CHEST, "Water Chest")
         addBlock(ModBlocks.ANALOG_EMITTER, "Analog Emitter")
         addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
-        addBlock(ModBlocks.CUSTOM_WORKBENCH, "Custom Workbench")
+        addBlock(ModBlocks.CUSTOM_CRAFTING_TABLE, "Custom Crafting Table")
         addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
         addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
 //        addBlock(ModBlocks.PLATFORM, "Platform")

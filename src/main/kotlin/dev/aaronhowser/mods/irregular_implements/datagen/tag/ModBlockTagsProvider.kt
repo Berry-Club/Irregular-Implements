@@ -9,6 +9,7 @@ import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
@@ -50,6 +51,12 @@ class ModBlockTagsProvider(
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(*coloredGrassBlocks)
+
+        this.tag(Tags.Blocks.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+            .add(ModBlocks.CUSTOM_CRAFTING_TABLE.get())
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+            .add(ModBlocks.CUSTOM_CRAFTING_TABLE.get())
 
     }
 

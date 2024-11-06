@@ -1,6 +1,8 @@
-// 1.21.1	2024-11-05T00:19:46.0309202	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2024-11-05T20:08:50.6999023	Tags for minecraft:block mod id irregular_implements
+e0c68f1c8997e4f90f0cd70d34725bcf6d261cd7 data/c/tags/block/player_workstations/crafting_tables.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/block/super_lubricated.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/animals_spawnable_on.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/dirt.json
+e0c68f1c8997e4f90f0cd70d34725bcf6d261cd7 data/minecraft/tags/block/mineable/axe.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/mineable/shovel.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/valid_spawn.json

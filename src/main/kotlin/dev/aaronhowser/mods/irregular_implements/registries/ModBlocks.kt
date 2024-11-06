@@ -31,7 +31,7 @@ object ModBlocks {
     val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
         registerBlock("analog_emitter") { AnalogEmitter() }
     val FLUID_DISPLAY = basicBlock("fluid_display")
-    val CUSTOM_WORKBENCH = basicBlock("custom_workbench")   // Same block for every variant
+    val CUSTOM_CRAFTING_TABLE = basicBlock("custom_crafting_table")   // Same block for every variant
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val PITCHER_PLANT = basicBlock("pitcher_plant")
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
