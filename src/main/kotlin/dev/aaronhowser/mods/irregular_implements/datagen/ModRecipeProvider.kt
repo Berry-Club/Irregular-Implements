@@ -13,9 +13,13 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.alchemy.Potions
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.neoforged.neoforge.common.Tags
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient
 import java.util.concurrent.CompletableFuture
 
 class ModRecipeProvider(
@@ -59,12 +63,30 @@ class ModRecipeProvider(
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
         data class ItemLikeIng(val item: ItemLike) : IngredientType()
+        data class ItemStackIng(val itemStack: ItemStack) : IngredientType()
+
+        ;
+
+        fun getIngredient(): Ingredient {
+            return when (this) {
+                is TagKeyIng -> Ingredient.of(tagKey)
+                is ItemLikeIng -> Ingredient.of(item)
+                is ItemStackIng -> if (itemStack.isComponentsPatchEmpty) {
+                    Ingredient.of(itemStack)
+                } else {
+                    DataComponentIngredient.of(false, itemStack)
+                }
+
+            }
+        }
+
     }
 
     private fun ing(tagKey: TagKey<Item>) = IngredientType.TagKeyIng(tagKey)
     private fun ing(item: ItemLike) = IngredientType.ItemLikeIng(item)
+    private fun ing(itemStack: ItemStack) = IngredientType.ItemStackIng(itemStack)
 
-    private fun <T : IngredientType> shapedRecipe(
+    fun <T : IngredientType> shapedRecipe(
         output: ItemLike,
         count: Int,
         patterns: String,
@@ -80,9 +102,11 @@ class ModRecipeProvider(
 
         for (definition in definitions) {
             temp = when (val ing = definition.value) {
-                is IngredientType.TagKeyIng -> temp.define(definition.key, ing.tagKey)
-                is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.item)
-                else -> error("Unknown ingredient type: $ing")
+                is IngredientType.TagKeyIng -> temp.define(definition.key, ing.getIngredient())
+                is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.getIngredient())
+                is IngredientType.ItemStackIng -> temp.define(definition.key, ing.getIngredient())
+
+                else -> error("Unknown ingredient type")
             }
         }
 
@@ -1078,6 +1102,39 @@ class ModRecipeProvider(
                 'S' to ing(ModItems.SPECTRE_STRING),
                 'I' to ing(ModItems.SPECTRE_INGOT)
             )
+        ),
+        shapedRecipe(
+            ModItems.WEATHER_EGG_SUNNY,
+            2,
+            "OFO,SCS,OFO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'F' to ing(Items.FEATHER),
+                'S' to ing(Items.SUNFLOWER),
+                'C' to ing(Items.FIRE_CHARGE),
+            )
+        ),
+        shapedRecipe(
+            ModItems.WEATHER_EGG_RAINY,
+            2,
+            "OWO,LCL,OWO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'W' to ing(OtherUtil.getPotionStack(Potions.WATER)),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'C' to ing(Items.FIRE_CHARGE),
+            )
+        ),
+        shapedRecipe(
+            ModItems.WEATHER_EGG_STORMY,
+            2,
+            "OSO,LCL,OSO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'S' to ing(Items.SUGAR),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'C' to ing(Items.FIRE_CHARGE),
+            )
         )
     )
 
@@ -1091,10 +1148,7 @@ class ModRecipeProvider(
         var temp = ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, count)
 
         for (requirement in requirements) {
-            temp = when (requirement) {
-                is IngredientType.TagKeyIng -> temp.requires(requirement.tagKey)
-                is IngredientType.ItemLikeIng -> temp.requires(requirement.item)
-            }
+            temp = temp.requires(requirement.getIngredient())
         }
 
         return temp.unlockedBy(unlockedByName, unlockedByCriterion)
@@ -1112,7 +1166,7 @@ class ModRecipeProvider(
             ModItems.SUPER_LUBRICANT_TINCTURE,
             listOf(
                 ing(Tags.Items.SEEDS),
-                ing(Items.POTION),        //TODO: Water bottle
+                ing(OtherUtil.getPotionStack(Potions.WATER)),
                 ing(ModItems.BEAN)
             )
         ),

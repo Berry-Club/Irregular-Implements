@@ -25,7 +25,6 @@ class ModItemModelProvider(
             ModItems.EMERALD_COMPASS,
             ModItems.ENDER_BUCKET,
             ModItems.REINFORCED_ENDER_BUCKET,
-            ModItems.WEATHER_EGG,
             ModItems.REDSTONE_ACTIVATOR,
             ModItems.SOUND_PATTERN,
             ModItems.SOUND_RECORDER,

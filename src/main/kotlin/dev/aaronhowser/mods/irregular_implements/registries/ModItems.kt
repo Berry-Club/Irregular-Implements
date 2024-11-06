@@ -58,7 +58,6 @@ object ModItems {
     val PORTKEY = basic("portkey")
     val LOTUS_SEEDS = basic("lotus_seeds")
     val ESCAPE_ROPE = basic("escape_rope")
-    val WEATHER_EGG = basic("weather_egg")  //Same item for all weathers
     val ENDER_BUCKET = basic("ender_bucket")
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
@@ -66,6 +65,14 @@ object ModItems {
     val TIME_IN_A_BOTTLE = basic("time_in_a_bottle")
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
+
+    // Weather Eggs
+    val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =
+        register("weather_egg_sunny") { WeatherEggItem.SUNNY }
+    val WEATHER_EGG_RAINY: DeferredItem<WeatherEggItem> =
+        register("weather_egg_rainy") { WeatherEggItem.RAINY }
+    val WEATHER_EGG_STORMY: DeferredItem<WeatherEggItem> =
+        register("weather_egg_stormy") { WeatherEggItem.STORMY }
 
     // Filters
     val LOCATION_FILTER: DeferredItem<FilterLocationItem> =

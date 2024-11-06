@@ -1,11 +1,17 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "ingredients": [
-    {
-      "tag": "c:seeds"
+  "key": {
+    "C": {
+      "item": "minecraft:fire_charge"
     },
-    {
+    "L": {
+      "tag": "c:gems/lapis"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "W": {
       "type": "neoforge:components",
       "components": {
         "minecraft:attribute_modifiers": {
@@ -23,13 +29,15 @@
         "minecraft:repair_cost": 0
       },
       "items": "minecraft:potion"
-    },
-    {
-      "item": "irregular_implements:bean"
     }
+  },
+  "pattern": [
+    "OWO",
+    "LCL",
+    "OWO"
   ],
   "result": {
-    "count": 1,
-    "id": "irregular_implements:super_lubricant_tincture"
+    "count": 2,
+    "id": "irregular_implements:weather_egg_rainy"
   }
 }
