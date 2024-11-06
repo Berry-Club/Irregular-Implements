@@ -5,11 +5,18 @@ import dev.aaronhowser.mods.irregular_implements.item.component.ItemStackCompone
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import net.minecraft.advancements.CriteriaTriggers
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.SlotAccess
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.ClickAction
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.gameevent.GameEvent
 
@@ -71,6 +78,38 @@ class DiaphanousBlockItem : BlockItem(
         level.gameEvent(GameEvent.BLOCK_PLACE, posToPlace, GameEvent.Context.of(player, clickedBlockState))
         usedStack.consume(1, player)
         return InteractionResult.sidedSuccess(level.isClientSide)
+    }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
+
+        val itemStack = stack.get(ModDataComponents.ITEMSTACK.get())?.itemStack
+        if (itemStack != null) {
+            tooltipComponents.add(itemStack.displayName)
+        }
+    }
+
+    override fun overrideOtherStackedOnMe(
+        thisStack: ItemStack,
+        otherStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player,
+        access: SlotAccess
+    ): Boolean {
+        if (action != ClickAction.SECONDARY) return false
+
+        val otherStackBlock = (otherStack.item as? BlockItem)?.block ?: return false
+
+        val blockIsFull = otherStackBlock.defaultBlockState().isCollisionShapeFullBlock(player.level(), player.blockPosition())
+        if (!blockIsFull) return false
+
+        thisStack.set(
+            ModDataComponents.ITEMSTACK.get(),
+            ItemStackComponent(otherStack)
+        )
+
+        return true
     }
 
 }
