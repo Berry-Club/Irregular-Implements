@@ -32,11 +32,6 @@ class RainbowLampBlock : Block(
         builder.add(COLOR)
     }
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(COLOR, 0)
-    }
-
     override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
         return true
     }

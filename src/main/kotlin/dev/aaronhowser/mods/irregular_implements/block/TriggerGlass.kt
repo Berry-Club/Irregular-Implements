@@ -38,11 +38,6 @@ class TriggerGlass : TransparentBlock(
         builder.add(NOT_SOLID)
     }
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(NOT_SOLID, false)
-    }
-
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return if (state.getValue(NOT_SOLID)) {
             Shapes.empty()

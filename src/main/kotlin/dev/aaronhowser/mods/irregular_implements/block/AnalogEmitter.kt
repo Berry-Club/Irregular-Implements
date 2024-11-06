@@ -51,8 +51,6 @@ class AnalogEmitter(
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         return defaultBlockState()
             .setValue(FACING, context.nearestLookingDirection.opposite)
-            .setValue(ENABLED, false)
-            .setValue(POWER, 0)
     }
 
     //TODO: GUI?

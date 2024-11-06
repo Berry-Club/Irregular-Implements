@@ -40,11 +40,6 @@ class RainShieldBlock : EntityBlock, Block(
         builder.add(ENABLED)
     }
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(ENABLED, true)
-    }
-
     override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
         return true
     }
