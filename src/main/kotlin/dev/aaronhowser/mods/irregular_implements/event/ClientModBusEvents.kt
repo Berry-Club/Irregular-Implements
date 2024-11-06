@@ -81,15 +81,15 @@ object ClientModBusEvents {
 
     @SubscribeEvent
     fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
-        event.registerItem(
-            CustomCraftingTableClientExtensions(),
-            ModBlocks.CUSTOM_CRAFTING_TABLE.get().asItem()
-        )
+//        event.registerItem(
+//            CustomCraftingTableClientExtensions(),
+//            ModItems.
+//        )
 
-        event.registerItem(
-            DiaphanousBlockClientExtensions(),
-            ModBlocks.DIAPHANOUS_BLOCK.get().asItem()
-        )
+//        event.registerItem(
+//            DiaphanousBlockClientExtensions(),
+//            ModItems.DIAPHANOUS_BLOCK.get()
+//        )
 
     }
 
