@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
+import net.minecraft.util.ExtraCodecs
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.biome.Biome
 import net.neoforged.neoforge.registries.DeferredHolder
@@ -60,6 +61,13 @@ object ModDataComponents {
             it
                 .persistent(ItemStackComponent.CODEC)
                 .networkSynchronized(ItemStackComponent.STREAM_CODEC)
+        }
+
+    val STORED_TIME: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("stored_time") {
+            it
+                .persistent(ExtraCodecs.NON_NEGATIVE_INT)
+                .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
 }

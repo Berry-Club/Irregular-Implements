@@ -62,7 +62,8 @@ object ModItems {
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
         register("chunk_analyzer") { ChunkAnalyzerItem() }
-    val TIME_IN_A_BOTTLE = basic("time_in_a_bottle")
+    val TIME_IN_A_BOTTLE: DeferredItem<TimeInABottleItem> =
+        register("time_in_a_bottle") { TimeInABottleItem() }
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
     val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
