@@ -12,6 +12,7 @@ object ModRegistries {
         ModCreativeModeTabs.TABS_REGISTRY,
         ModDataComponents.DATA_COMPONENT_REGISTRY,
         ModEffects.EFFECT_REGISTRY,
+        ModEntityTypes.ENTITY_TYPE_REGISTRY,
     )
 
     fun register(modBus: IEventBus) {

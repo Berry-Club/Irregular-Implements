@@ -26,6 +26,7 @@ class ModBlockTagsProvider(
         }
 
         val SUPER_LUBRICATED = create("super_lubricated")
+        val CANNOT_ACCELERATE = create("cannot_accelerate")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
@@ -37,6 +38,9 @@ class ModBlockTagsProvider(
                 ModBlocks.SUPER_LUBRICANT_PLATFORM.get(),
                 ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM.get()
             )
+
+        this.tag(CANNOT_ACCELERATE)
+            .addTag(Tags.Blocks.CHESTS)
 
         val coloredGrassBlocks = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }.toTypedArray()
 

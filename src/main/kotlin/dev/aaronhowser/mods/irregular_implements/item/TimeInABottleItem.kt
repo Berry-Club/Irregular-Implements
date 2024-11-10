@@ -1,13 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.entity.TimeAcceleratorEntity
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import net.minecraft.network.chat.Component
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.AABB
 
+// Code largely inspired by https://github.com/RealMangorage/time-in-a-bottle/blob/1.21/common/src/main/java/org/mangorage/tiab/common/items/TiabItem.java
+// Which is MIT which means I don't have to live in guilt
+// It's not going to stop me, though
 class TimeInABottleItem : Item(
     Properties()
         .stacksTo(1)
@@ -24,6 +32,28 @@ class TimeInABottleItem : Item(
 
     override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
         modifyStoredTime(stack, 1)
+    }
+
+    override fun useOn(context: UseOnContext): InteractionResult {
+        val level = context.level
+        if (level.isClientSide) return InteractionResult.PASS
+
+        val clickedPos = context.clickedPos
+        val clickedState = level.getBlockState(clickedPos)
+        val clickedBlockEntity = level.getBlockEntity(clickedPos)
+
+        if (clickedState.`is`(ModBlockTagsProvider.CANNOT_ACCELERATE)) return InteractionResult.FAIL
+        if (!clickedState.isRandomlyTicking && clickedBlockEntity == null) return InteractionResult.FAIL
+
+        val usedStack = context.itemInHand
+        val player = context.player
+
+        val existingAccelerator = level.getEntitiesOfClass(
+            TimeAcceleratorEntity::class.java,
+            AABB(clickedPos)
+        ).firstOrNull()
+
+        return InteractionResult.SUCCESS
     }
 
     override fun appendHoverText(
@@ -48,6 +78,10 @@ class TimeInABottleItem : Item(
         val component = Component.literal(timeDisplay)
 
         tooltipComponents.add(component)
+    }
+
+    override fun shouldCauseReequipAnimation(oldStack: ItemStack, newStack: ItemStack, slotChanged: Boolean): Boolean {
+        return slotChanged
     }
 
 
