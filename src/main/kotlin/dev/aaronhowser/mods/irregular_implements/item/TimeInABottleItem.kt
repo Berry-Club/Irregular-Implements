@@ -59,7 +59,7 @@ class TimeInABottleItem : Item(
     }
 
     override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-        addTicks(stack, +1)
+        addTicks(stack, 1)
     }
 
     override fun useOn(context: UseOnContext): InteractionResult {
@@ -77,13 +77,12 @@ class TimeInABottleItem : Item(
         val player = context.player
 
         val useSuccessful = consumeTicks(player, usedStack)
+        if (!useSuccessful) return InteractionResult.FAIL
 
         val existingAccelerator = level.getEntitiesOfClass(
             TimeAcceleratorEntity::class.java,
             AABB(clickedPos)
         ).firstOrNull()
-
-
 
         return InteractionResult.SUCCESS
     }
