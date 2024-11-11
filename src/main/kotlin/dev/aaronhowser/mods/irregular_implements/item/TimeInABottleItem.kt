@@ -115,5 +115,8 @@ class TimeInABottleItem : Item(
         return slotChanged
     }
 
+    override fun isFoil(stack: ItemStack): Boolean {
+        return true
+    }
 
 }
