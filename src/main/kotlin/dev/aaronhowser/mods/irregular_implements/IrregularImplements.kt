@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements
 
 import dev.aaronhowser.mods.irregular_implements.config.CommonConfig
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registries.ModRegistries
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.fml.ModContainer
@@ -31,7 +32,7 @@ class IrregularImplements(
         }
 
         modContainer.registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC)
-
+        modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.CONFIG_SPEC)
     }
 
 }

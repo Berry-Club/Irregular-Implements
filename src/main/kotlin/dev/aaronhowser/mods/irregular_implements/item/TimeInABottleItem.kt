@@ -1,17 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.entity.TimeAcceleratorEntity
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
+import kotlin.math.abs
 
 // Code largely inspired by https://github.com/RealMangorage/time-in-a-bottle/blob/1.21/common/src/main/java/org/mangorage/tiab/common/items/TiabItem.java
 // Which is MIT which means I don't have to live in guilt
@@ -28,10 +32,34 @@ class TimeInABottleItem : Item(
             val new = maxOf(0, old + change)
             stack.set(ModDataComponents.STORED_TIME, new)
         }
+
+        fun addTicks(stack: ItemStack, amount: Int) {
+            modifyStoredTime(stack, abs(amount))
+        }
+
+        fun drainTicks(stack: ItemStack, amount: Int) {
+            modifyStoredTime(stack, -abs(amount))
+        }
+
+        fun getStoredTicks(stack: ItemStack): Int {
+            return stack.get(ModDataComponents.STORED_TIME) ?: 0
+        }
+
+        private fun consumeTicks(player: LivingEntity?, itemStack: ItemStack): Boolean {
+            if (player?.hasInfiniteMaterials().isTrue) return true
+
+            val storedTicks = getStoredTicks(itemStack)
+            val ticksRequired = ServerConfig.TIAB_COST.get()
+
+            if (storedTicks < ticksRequired) return false
+            drainTicks(itemStack, ticksRequired)
+
+            return true
+        }
     }
 
     override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-        modifyStoredTime(stack, 1)
+        addTicks(stack, +1)
     }
 
     override fun useOn(context: UseOnContext): InteractionResult {
@@ -48,10 +76,14 @@ class TimeInABottleItem : Item(
         val usedStack = context.itemInHand
         val player = context.player
 
+        val useSuccessful = consumeTicks(player, usedStack)
+
         val existingAccelerator = level.getEntitiesOfClass(
             TimeAcceleratorEntity::class.java,
             AABB(clickedPos)
         ).firstOrNull()
+
+
 
         return InteractionResult.SUCCESS
     }

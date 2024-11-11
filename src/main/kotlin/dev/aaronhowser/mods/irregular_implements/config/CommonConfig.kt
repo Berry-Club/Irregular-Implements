@@ -22,11 +22,9 @@ class CommonConfig(
     }
 
     private fun commonConfigs() {
-
         RAIN_SHIELD_CHUNK_RADIUS = builder
             .comment("What chunk radius should the Rain Shield have?")
             .defineInRange("rainShieldChunkRadius", 5, 0, Int.MAX_VALUE)
-
     }
 
 }

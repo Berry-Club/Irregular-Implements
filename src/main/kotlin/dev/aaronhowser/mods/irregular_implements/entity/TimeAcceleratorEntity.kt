@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.registries.ModEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -19,6 +20,8 @@ class TimeAcceleratorEntity(
     entityType: EntityType<TimeAcceleratorEntity>,
     level: Level
 ) : Entity(entityType, level) {
+
+    constructor(level: Level) : this(ModEntityTypes.TIME_ACCELERATOR.get(), level)
 
     companion object {
         val TICK_RATE: EntityDataAccessor<Int> = SynchedEntityData.defineId(TimeAcceleratorEntity::class.java, EntityDataSerializers.INT)
