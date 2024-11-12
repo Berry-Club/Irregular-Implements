@@ -24,10 +24,9 @@ public abstract class ItemEntityMixin extends Entity {
             )
     )
     private float replaceFriction(float original) {
-        if (!this.level()
+        return (this.level()
                 .getBlockState(getBlockPosBelowThatAffectsMyMovement())
                 .is(ModBlockTagsProvider.Companion.getSUPER_LUBRICATED())
-        ) return original;
-        return 1f;
+        ) ? 1f : original;
     }
 }
