@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.GrassBlock
 import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockSetType
@@ -159,25 +160,27 @@ object ModBlocks {
     val EXTRACTION_PLATE = basicBlock("extraction_plate")
 
     // Colored blocks
-    val COLORED_GRASS_WHITE: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.WHITE)
-    val COLORED_GRASS_ORANGE: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.ORANGE)
-    val COLORED_GRASS_MAGENTA: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.MAGENTA)
-    val COLORED_GRASS_LIGHT_BLUE: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.LIGHT_BLUE)
-    val COLORED_GRASS_YELLOW: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.YELLOW)
-    val COLORED_GRASS_LIME: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.LIME)
-    val COLORED_GRASS_PINK: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.PINK)
-    val COLORED_GRASS_GRAY: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.GRAY)
-    val COLORED_GRASS_LIGHT_GRAY: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.LIGHT_GRAY)
-    val COLORED_GRASS_CYAN: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.CYAN)
-    val COLORED_GRASS_PURPLE: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.PURPLE)
-    val COLORED_GRASS_BLUE: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.BLUE)
-    val COLORED_GRASS_BROWN: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.BROWN)
-    val COLORED_GRASS_GREEN: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.GREEN)
-    val COLORED_GRASS_RED: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.RED)
-    val COLORED_GRASS_BLACK: DeferredBlock<ColoredGrassBlock> = coloredGrass(DyeColor.BLACK)
+    val COLORED_GRASS_WHITE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.WHITE)
+    val COLORED_GRASS_ORANGE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.ORANGE)
+    val COLORED_GRASS_MAGENTA: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.MAGENTA)
+    val COLORED_GRASS_LIGHT_BLUE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.LIGHT_BLUE)
+    val COLORED_GRASS_YELLOW: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.YELLOW)
+    val COLORED_GRASS_LIME: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.LIME)
+    val COLORED_GRASS_PINK: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.PINK)
+    val COLORED_GRASS_GRAY: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.GRAY)
+    val COLORED_GRASS_LIGHT_GRAY: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.LIGHT_GRAY)
+    val COLORED_GRASS_CYAN: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.CYAN)
+    val COLORED_GRASS_PURPLE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.PURPLE)
+    val COLORED_GRASS_BLUE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.BLUE)
+    val COLORED_GRASS_BROWN: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.BROWN)
+    val COLORED_GRASS_GREEN: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.GREEN)
+    val COLORED_GRASS_RED: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.RED)
+    val COLORED_GRASS_BLACK: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.BLACK)
 
-    private fun coloredGrass(dyeColor: DyeColor): DeferredBlock<ColoredGrassBlock> =
-        registerBlock("colored_grass_${dyeColor.getName()}") { ColoredGrassBlock(dyeColor) }
+    private fun coloredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock> =
+        registerBlock("colored_grass_${dyeColor.getName()}") {
+            GrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(dyeColor))
+        }
 
     val LUMINOUS_BLOCK_WHITE: DeferredBlock<Block> = basicStoneBlock("luminous_block_white")
     val LUMINOUS_BLOCK_ORANGE: DeferredBlock<Block> = basicStoneBlock("luminous_block_orange")
@@ -282,7 +285,7 @@ object ModBlocks {
         return BLOCK_REGISTRY.register(name, supplier)
     }
 
-    fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<ColoredGrassBlock> {
+    fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock> {
         return when (dyeColor) {
             DyeColor.WHITE -> COLORED_GRASS_WHITE
             DyeColor.ORANGE -> COLORED_GRASS_ORANGE
