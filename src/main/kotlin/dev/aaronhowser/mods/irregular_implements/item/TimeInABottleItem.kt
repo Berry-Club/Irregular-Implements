@@ -97,13 +97,25 @@ class TimeInABottleItem : Item(
 
         val timeDisplay = if (tooltipFlag.hasShiftDown() || storedTicks < 20) {
             "${storedTicks}t"
-        } else if (storedTicks < (20 * 60)) {
-            "${storedTicks / 20}s"
         } else {
-            val minutes = storedTicks / (20 * 60)
-            val seconds = (storedTicks % (20 * 60)) / 20
+            var seconds = storedTicks / 20
+            var minutes = seconds / 60
+            val hoursTotal = minutes / 60
 
-            "${minutes}m ${seconds}s"
+            val sb = StringBuilder()
+
+            if (hoursTotal > 0) {
+                sb.append(hoursTotal).append("h ")
+                minutes %= 60
+            }
+
+            if (minutes > 0) {
+                sb.append(minutes).append("m ")
+                seconds %= 60
+            }
+
+            sb.append(seconds).append("s")
+            sb.toString()
         }
 
         val component = Component.literal(timeDisplay)
