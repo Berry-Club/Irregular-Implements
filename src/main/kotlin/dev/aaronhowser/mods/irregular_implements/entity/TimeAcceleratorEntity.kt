@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registries.ModEntityTypes
 import net.minecraft.core.BlockPos
@@ -8,6 +9,7 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
@@ -21,14 +23,21 @@ class TimeAcceleratorEntity(
     level: Level
 ) : Entity(entityType, level) {
 
-    constructor(level: Level) : this(ModEntityTypes.TIME_ACCELERATOR.get(), level)
+    constructor(level: Level, pos: BlockPos) : this(ModEntityTypes.TIME_ACCELERATOR.get(), level) {
+        this.setPos(pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble())
+    }
 
     companion object {
         val TICK_RATE: EntityDataAccessor<Int> = SynchedEntityData.defineId(TimeAcceleratorEntity::class.java, EntityDataSerializers.INT)
-        val TIME_REMAINING: EntityDataAccessor<Int> = SynchedEntityData.defineId(TimeAcceleratorEntity::class.java, EntityDataSerializers.INT)
+        val TICKS_REMAINING: EntityDataAccessor<Int> = SynchedEntityData.defineId(TimeAcceleratorEntity::class.java, EntityDataSerializers.INT)
 
         const val TICK_RATE_NBT = "tick_rate"
-        const val TIME_REMAINING_NBT = "time_remaining"
+        const val TICKS_REMAINING_NBT = "ticks_remaining"
+    }
+
+    override fun onAddedToLevel() {
+        tickRate = 1
+        ticksRemaining = ServerConfig.TIAB_TICKS_PER
     }
 
     override fun tick() {
@@ -67,8 +76,8 @@ class TimeAcceleratorEntity(
             }
         }
 
-        timeRemaining--
-        if (timeRemaining <= 0) {
+        ticksRemaining--
+        if (ticksRemaining <= 0) {
             this.discard()
         }
 
@@ -78,23 +87,23 @@ class TimeAcceleratorEntity(
         get() = entityData.get(TICK_RATE)
         set(value) = entityData.set(TICK_RATE, value)
 
-    var timeRemaining: Int
-        get() = entityData.get(TIME_REMAINING)
-        set(value) = entityData.set(TIME_REMAINING, value)
+    var ticksRemaining: Int
+        get() = entityData.get(TICKS_REMAINING)
+        set(value) = entityData.set(TICKS_REMAINING, value)
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         tickRate = compound.getInt(TICK_RATE_NBT)
-        timeRemaining = compound.getInt(TIME_REMAINING_NBT)
+        ticksRemaining = compound.getInt(TICKS_REMAINING_NBT)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         compound.putInt(TICK_RATE_NBT, tickRate)
-        compound.putInt(TIME_REMAINING_NBT, timeRemaining)
+        compound.putInt(TICKS_REMAINING_NBT, ticksRemaining)
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(TICK_RATE, 1)
-        builder.define(TIME_REMAINING, 0)
+        builder.define(TICKS_REMAINING, 0)
     }
 
     override fun isColliding(pos: BlockPos, state: BlockState): Boolean = false

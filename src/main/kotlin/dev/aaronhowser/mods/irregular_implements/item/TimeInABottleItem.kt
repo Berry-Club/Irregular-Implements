@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.TimeAcceleratorEntity
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.network.chat.Component
+import net.minecraft.util.Mth
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -83,6 +84,19 @@ class TimeInABottleItem : Item(
             TimeAcceleratorEntity::class.java,
             AABB(clickedPos)
         ).firstOrNull()
+
+        if (existingAccelerator != null) {
+            val currentRate = existingAccelerator.tickRate
+            if (currentRate >= ServerConfig.TIAB_MAX_STACKS.get()) return InteractionResult.FAIL
+
+            existingAccelerator.tickRate++
+            existingAccelerator.ticksRemaining = ServerConfig.TIAB_TICKS_PER
+
+            return InteractionResult.SUCCESS
+        }
+
+        val newAccelerator = TimeAcceleratorEntity(level, clickedPos)
+        level.addFreshEntity(newAccelerator)
 
         return InteractionResult.SUCCESS
     }
