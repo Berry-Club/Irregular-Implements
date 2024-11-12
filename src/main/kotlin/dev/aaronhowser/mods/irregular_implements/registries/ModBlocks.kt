@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.GrassBlock
 import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
-import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -82,33 +81,33 @@ object ModBlocks {
 
     // Platform
     val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("oak_platform") { PlatformBlock(blockSetType = BlockSetType.OAK) }
+        registerBlock("oak_platform") { PlatformBlock.OAK }
     val SPRUCE_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("spruce_platform") { PlatformBlock(blockSetType = BlockSetType.SPRUCE) }
+        registerBlock("spruce_platform") { PlatformBlock.SPRUCE }
     val BIRCH_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("birch_platform") { PlatformBlock(blockSetType = BlockSetType.BIRCH) }
+        registerBlock("birch_platform") { PlatformBlock.BIRCH }
     val JUNGLE_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("jungle_platform") { PlatformBlock(blockSetType = BlockSetType.JUNGLE) }
+        registerBlock("jungle_platform") { PlatformBlock.JUNGLE }
     val ACACIA_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("acacia_platform") { PlatformBlock(blockSetType = BlockSetType.ACACIA) }
+        registerBlock("acacia_platform") { PlatformBlock.ACACIA }
     val DARK_OAK_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("dark_oak_platform") { PlatformBlock(blockSetType = BlockSetType.DARK_OAK) }
+        registerBlock("dark_oak_platform") { PlatformBlock.DARK_OAK }
     val CRIMSON_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("crimson_platform") { PlatformBlock(blockSetType = BlockSetType.CRIMSON) }
+        registerBlock("crimson_platform") { PlatformBlock.CRIMSON }
     val WARPED_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("warped_platform") { PlatformBlock(blockSetType = BlockSetType.WARPED) }
+        registerBlock("warped_platform") { PlatformBlock.WARPED }
     val MANGROVE_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("mangrove_platform") { PlatformBlock(blockSetType = BlockSetType.MANGROVE) }
+        registerBlock("mangrove_platform") { PlatformBlock.MANGROVE }
     val BAMBOO_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("bamboo_platform") { PlatformBlock(blockSetType = BlockSetType.BAMBOO) }
+        registerBlock("bamboo_platform") { PlatformBlock.BAMBOO }
     val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("cherry_platform") { PlatformBlock(blockSetType = BlockSetType.CHERRY) }
+        registerBlock("cherry_platform") { PlatformBlock.CHERRY }
 
     // Lubricant
     val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
     val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("super_lubricant_platform") { PlatformBlock(blockSetType = null) }
+        registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
     val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
 
     // Detectors
