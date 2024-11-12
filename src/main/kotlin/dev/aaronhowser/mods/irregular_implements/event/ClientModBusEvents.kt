@@ -3,11 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.event
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableBER
 import dev.aaronhowser.mods.irregular_implements.block.renderer.DiaphanousBER
-import dev.aaronhowser.mods.irregular_implements.entity.render.TimeAcceleratorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registries.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.DyeColor
@@ -76,8 +74,6 @@ object ClientModBusEvents {
             ModBlockEntities.DIAPHANOUS_BLOCK.get(),
             ::DiaphanousBER
         )
-
-        event.registerEntityRenderer(ModEntityTypes.TIME_ACCELERATOR.get(), ::TimeAcceleratorEntityRenderer)
     }
 
     @SubscribeEvent

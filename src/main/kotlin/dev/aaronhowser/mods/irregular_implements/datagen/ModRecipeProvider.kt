@@ -65,8 +65,6 @@ class ModRecipeProvider(
         data class ItemLikeIng(val item: ItemLike) : IngredientType()
         data class ItemStackIng(val itemStack: ItemStack) : IngredientType()
 
-        ;
-
         fun getIngredient(): Ingredient {
             return when (this) {
                 is TagKeyIng -> Ingredient.of(tagKey)
@@ -1014,17 +1012,6 @@ class ModRecipeProvider(
             mapOf(
                 'L' to ing(Tags.Items.LEATHERS),
                 'F' to ing(ModItems.FLOO_POWDER)
-            )
-        ),
-        shapedRecipe(
-            ModItems.TIME_IN_A_BOTTLE,
-            "GGG,DCD,LBL",
-            mapOf(
-                'G' to ing(Tags.Items.INGOTS_GOLD),
-                'D' to ing(Tags.Items.GEMS_DIAMOND),
-                'C' to ing(Items.CLOCK),
-                'L' to ing(Tags.Items.GEMS_LAPIS),
-                'B' to ing(Items.GLASS_BOTTLE)
             )
         ),
         shapedRecipe(
