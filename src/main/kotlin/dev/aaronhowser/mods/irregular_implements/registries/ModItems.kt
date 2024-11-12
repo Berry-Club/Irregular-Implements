@@ -192,6 +192,10 @@ object ModItems {
     val RUNE_DUST_RED = basic("rune_dust_red")
     val RUNE_DUST_BLACK = basic("rune_dust_black")
 
+    // Removed items:
+    // - Time in a Bottle (Use the standalone one!)
+
+
     private fun basic(id: String): DeferredItem<Item> {
         return ITEM_REGISTRY.registerSimpleItem(id)
     }

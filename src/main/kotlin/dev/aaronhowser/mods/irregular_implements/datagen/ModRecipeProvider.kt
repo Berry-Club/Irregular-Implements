@@ -214,14 +214,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.LIGHT_REDIRECTOR,
-            "PGP,G G,PGP",
-            mapOf(
-                'P' to ing(ItemTags.PLANKS),
-                'G' to ing(Tags.Items.GLASS_BLOCKS)
-            )
-        ),
-        shapedRecipe(
             ModBlocks.IMBUING_STATION,
             " W ,VTV,LEL",
             mapOf(

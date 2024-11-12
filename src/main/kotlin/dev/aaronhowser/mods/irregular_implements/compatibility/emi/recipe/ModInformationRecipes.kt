@@ -30,7 +30,6 @@ object ModInformationRecipes {
             ModBlocks.PRISMARINE_ENDER_BRIDGE,
             ModBlocks.ENDER_ANCHOR,
             ModBlocks.BEAN_POD,
-            ModBlocks.LIGHT_REDIRECTOR,
             ModBlocks.SPECTRE_BLOCK,
             ModBlocks.ANALOG_EMITTER,
             ModBlocks.FLUID_DISPLAY,

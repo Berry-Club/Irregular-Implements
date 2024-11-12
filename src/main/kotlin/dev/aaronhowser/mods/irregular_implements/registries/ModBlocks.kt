@@ -24,7 +24,6 @@ object ModBlocks {
     val PRISMARINE_ENDER_BRIDGE = basicBlock("prismarine_ender_bridge")
     val ENDER_ANCHOR = basicBlock("ender_anchor")
     val BEAN_POD = basicBlock("bean_pod")
-    val LIGHT_REDIRECTOR = basicBlock("light_redirector")
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
     val WATER_CHEST = basicBlock("water_chest")
@@ -265,6 +264,8 @@ object ModBlocks {
     val FLOO_BRICK = basicBlock("floo_brick")
     val ANCIENT_BRICK = basicBlock("ancient_brick") // "Internal"? Whatever that means
 
+    // Removed blocks:
+    // - Light Redirector: Just too hard to implement lmao
 
     private fun basicBlock(name: String) = registerBlock(name) { Block(BlockBehaviour.Properties.of()) }
     private fun basicGlassBlock(name: String) = registerBlock(name) { TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)) }
