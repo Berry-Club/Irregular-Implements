@@ -79,6 +79,13 @@ object ModBlocks {
     val RAINBOW_LAMP =
         registerBlock("rainbow_lamp") { RainbowLampBlock() }
 
+    // Lubricant
+    val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
+    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
+    val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
+    val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
+
     // Platform
     val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("oak_platform") { PlatformBlock.OAK }
@@ -102,13 +109,6 @@ object ModBlocks {
         registerBlock("bamboo_platform") { PlatformBlock.BAMBOO }
     val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("cherry_platform") { PlatformBlock.CHERRY }
-
-    // Lubricant
-    val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
-    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
-    val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
-    val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
 
     // Detectors
     val ONLINE_DETECTOR = basicBlock("online_detector")
