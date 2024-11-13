@@ -30,8 +30,6 @@ object ModBlocks {
     val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
         registerBlock("analog_emitter") { AnalogEmitter() }
     val FLUID_DISPLAY = basicBlock("fluid_display")
-    val CUSTOM_CRAFTING_TABLE =
-        registerBlock("custom_crafting_table") { CustomCraftingTableBlock() }
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
@@ -69,8 +67,6 @@ object ModBlocks {
     val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
-    val DIAPHANOUS_BLOCK =
-        registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
     val SIDED_BLOCK_OF_REDSTONE =
         registerBlock("sided_redstone") { SidedRedstoneBlock() }
     val ITEM_COLLECTOR = basicBlock("item_collector")
@@ -255,6 +251,8 @@ object ModBlocks {
 
     // Removed blocks:
     // - Light Redirector: Just too hard to implement lmao
+    // - Diaphanous Block: Too hard and nobody would use
+    // - Custom Crafting Table: Too hard and nobody would use
 
     private fun blockWithProperties(name: String, properties: BlockBehaviour.Properties) =
         registerBlock(name) { Block(properties) }

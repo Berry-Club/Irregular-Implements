@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-12T04:03:03.7932787	Loot Tables
+// 1.21.1	2024-11-13T10:13:01.7912897	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -45,9 +45,7 @@ e9cb224960ac0c68ae326551524af8440268775b data/irregular_implements/loot_table/bl
 8103fb5a61ab063981bd8f3fb6eb7e4febfbceb5 data/irregular_implements/loot_table/blocks/contact_lever.json
 1ff6eb3b3b31c72b31c07d08fa53b9ac666db1c5 data/irregular_implements/loot_table/blocks/corrector_plate.json
 2b4a3332949924043060365e4bfc2b38c7419a2d data/irregular_implements/loot_table/blocks/crimson_platform.json
-b6549004daf0f3bed19389c6cf772baefa037ff8 data/irregular_implements/loot_table/blocks/custom_crafting_table.json
 0926c51ed049dc7c0e3ec1cda1c9c04737cb548d data/irregular_implements/loot_table/blocks/dark_oak_platform.json
-001e3bb5832a8d15e3747258fe4d3e4052e5f19a data/irregular_implements/loot_table/blocks/diaphanous_block.json
 563fca730137401a965de633b966ed7a9590927c data/irregular_implements/loot_table/blocks/directional_accelerator_plate.json
 6d1a929dd3cf073c548f11844c611ccd8bd189f7 data/irregular_implements/loot_table/blocks/dyeing_machine.json
 82bcf54c9c0dee54829fd040de8c8b3dfbdb2a66 data/irregular_implements/loot_table/blocks/ender_anchor.json

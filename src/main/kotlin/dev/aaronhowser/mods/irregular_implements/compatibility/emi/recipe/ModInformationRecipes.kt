@@ -62,7 +62,6 @@ object ModInformationRecipes {
             ModBlocks.BLOCK_DESTABILIZER,
             ModBlocks.SOUND_BOX,
             ModBlocks.SOUND_DAMPENER,
-            ModBlocks.DIAPHANOUS_BLOCK,
             ModBlocks.SIDED_BLOCK_OF_REDSTONE,
             ModBlocks.SPECTRE_LENS,
             ModBlocks.SPECTRE_ENERGY_INJECTOR,

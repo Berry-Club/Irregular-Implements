@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.client.renderer.block_entity.CustomCraftingTableBER
-import dev.aaronhowser.mods.irregular_implements.client.renderer.block_entity.DiaphanousBER
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
 import net.minecraft.core.BlockPos
@@ -15,9 +12,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
-import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID,
@@ -61,33 +56,6 @@ object ClientModBusEvents {
 
             event.register(colorFunction, coloredGrassBlock)
         }
-    }
-
-    @SubscribeEvent
-    fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(),
-            ::CustomCraftingTableBER
-        )
-
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.DIAPHANOUS_BLOCK.get(),
-            ::DiaphanousBER
-        )
-    }
-
-    @SubscribeEvent
-    fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
-//        event.registerItem(
-//            CustomCraftingTableClientExtensions(),
-//            ModItems.
-//        )
-
-//        event.registerItem(
-//            DiaphanousBlockClientExtensions(),
-//            ModItems.DIAPHANOUS_BLOCK.get()
-//        )
-
     }
 
 }

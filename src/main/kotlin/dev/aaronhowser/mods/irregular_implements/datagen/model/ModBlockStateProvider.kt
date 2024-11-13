@@ -41,14 +41,6 @@ class ModBlockStateProvider(
             simpleBlockWithItem(block, model)
         }
 
-        for ((block, particle) in customRendererBlocks) {
-            val model = models()
-                .withExistingParent(name(block), mcLoc("block/bed"))
-                .texture("particle", particle)
-
-            simpleBlockWithItem(block, model)
-        }
-
         oneUniqueFace(
             ModBlocks.ANALOG_EMITTER.get(),
             uniqueTexture = modLoc("block/analog_emitter_front"),
@@ -69,11 +61,6 @@ class ModBlockStateProvider(
         contactLever()
         contactButton()
     }
-
-    private val customRendererBlocks: Map<Block, ResourceLocation> = mapOf(
-        ModBlocks.CUSTOM_CRAFTING_TABLE.get() to mcLoc("block/oak_planks"),
-        ModBlocks.DIAPHANOUS_BLOCK.get() to mcLoc("block/stone"),
-    )
 
     private val crossBlocks = listOf(
         ModBlocks.PITCHER_PLANT,

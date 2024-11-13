@@ -468,18 +468,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.DIAPHANOUS_BLOCK,
-            4,
-            " G ,RBL, Y ",
-            mapOf(
-                'G' to ing(Items.GREEN_STAINED_GLASS),
-                'R' to ing(Items.RED_STAINED_GLASS),
-                'L' to ing(Items.BLUE_STAINED_GLASS),
-                'B' to ing(Tags.Items.GLASS_BLOCKS_COLORLESS),
-                'Y' to ing(Items.YELLOW_STAINED_GLASS)
-            )
-        ),
-        shapedRecipe(
             ModBlocks.SIDED_BLOCK_OF_REDSTONE,
             "GGR,GGR,GGR",
             mapOf(

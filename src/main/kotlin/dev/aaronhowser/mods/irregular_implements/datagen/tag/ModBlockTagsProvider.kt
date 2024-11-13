@@ -56,12 +56,6 @@ class ModBlockTagsProvider(
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(*coloredGrassBlocks)
 
-        this.tag(Tags.Blocks.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
-            .add(ModBlocks.CUSTOM_CRAFTING_TABLE.get())
-
-        this.tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(ModBlocks.CUSTOM_CRAFTING_TABLE.get())
-
     }
 
 }

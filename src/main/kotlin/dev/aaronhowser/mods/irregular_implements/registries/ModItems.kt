@@ -64,8 +64,6 @@ object ModItems {
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
-    val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
-        register("diaphanous_block") { DiaphanousBlockItem() }
 
     // Weather Eggs
     val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =
