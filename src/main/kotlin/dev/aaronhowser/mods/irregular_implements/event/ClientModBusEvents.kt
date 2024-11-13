@@ -4,11 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
-import net.minecraft.core.BlockPos
+import net.minecraft.client.Minecraft
+import net.minecraft.client.color.block.BlockColor
+import net.minecraft.client.color.block.BlockColors
+import net.minecraft.client.color.item.ItemColor
 import net.minecraft.world.item.DyeColor
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.BlockAndTintGetter
-import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.GrassColor
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -21,12 +22,8 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 )
 object ClientModBusEvents {
 
-    private fun getItemColor(dyeColor: DyeColor): (ItemStack, Int) -> Int {
-        return { _, _ -> dyeColor.textureDiffuseColor }
-    }
-
-    private fun getBlockFunction(dyeColor: DyeColor): (BlockState, BlockAndTintGetter?, BlockPos?, Int) -> Int {
-        return { _, _, _, _ -> dyeColor.textureDiffuseColor }
+    private fun getItemColorFromDye(dyeColor: DyeColor): ItemColor {
+        return ItemColor { _, _ -> dyeColor.textureDiffuseColor }
     }
 
     @SubscribeEvent
@@ -36,25 +33,31 @@ object ClientModBusEvents {
             val runeDustItem = ModItems.getRuneDust(dyeColor).get()
             val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
-            val colorFunction = getItemColor(dyeColor)
+            val colorFunction = getItemColorFromDye(dyeColor)
 
             event.register(colorFunction, seedItem)
             event.register(colorFunction, runeDustItem)
             event.register(colorFunction, coloredGrassBlock)
         }
 
-        event.register(getItemColor(DyeColor.LIME), ModItems.GRASS_SEEDS)
+        event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
+    }
+
+    private val blockColors: BlockColors by lazy { Minecraft.getInstance().blockColors }
+
+    private fun getBlockColorFromDye(dyeColor: DyeColor): BlockColor {
+        return BlockColor { _, _, _, _ -> dyeColor.textureDiffuseColor }
     }
 
     @SubscribeEvent
     fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
         for (dyeColor in DyeColor.entries) {
-            val colorFunction = getBlockFunction(dyeColor)
-
-            //FIXME
             val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
-            event.register(colorFunction, coloredGrassBlock)
+            event.register(
+                getBlockColorFromDye(dyeColor),
+                coloredGrassBlock
+            )
         }
     }
 
