@@ -51,6 +51,23 @@ object ClientModBusEvents {
                 coloredGrassBlock
             )
         }
+
+        event.register(
+            { _, level, pos, _ ->
+                if (level == null || pos == null) {
+                    GrassColor.getDefaultColor()
+                } else {
+                    BiomeColors.getAverageGrassColor(level, pos)
+                }
+            },
+            ModBlocks.BIOME_GLASS.get(),
+            ModBlocks.BIOME_STONE.get(),
+            ModBlocks.BIOME_COBBLESTONE.get(),
+            ModBlocks.BIOME_STONE_BRICKS.get(),
+            ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
+            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
+        )
+
     }
 
 }
