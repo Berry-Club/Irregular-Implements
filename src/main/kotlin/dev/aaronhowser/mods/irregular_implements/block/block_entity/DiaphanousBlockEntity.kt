@@ -3,8 +3,11 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -15,11 +18,18 @@ class DiaphanousBlockEntity(
     pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
 
-    var blockToRender: ItemStack = Items.STONE.defaultInstance
     var alpha: Float = 1f
 
-    companion object {
+    //FIXME: Sync this with client
+    private val items: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
+    var blockToRender: ItemStack
+        get() = items[0]
+        set(value) {
+            items[0] = value
+            setChanged()
+        }
 
+    companion object {
         fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
             val nearestPlayerDistance = level
                 .players()
@@ -38,7 +48,19 @@ class DiaphanousBlockEntity(
             val newState = blockState.setValue(DiaphanousBlock.NOT_SOLID, blockEntity.alpha < 1f)
             level.setBlock(blockPos, newState, 3)
         }
+    }
 
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+
+        ContainerHelper.saveAllItems(tag, items, registries)
+    }
+
+
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+
+        ContainerHelper.loadAllItems(tag, items, registries)
     }
 
 }

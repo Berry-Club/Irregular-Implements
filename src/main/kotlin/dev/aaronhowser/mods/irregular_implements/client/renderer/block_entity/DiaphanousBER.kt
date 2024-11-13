@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.world.item.BlockItem
-import net.minecraft.world.level.block.Blocks
 
 class DiaphanousBER(
     val context: BlockEntityRendererProvider.Context
@@ -20,7 +19,7 @@ class DiaphanousBER(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val blockToRender = (blockEntity.blockToRender.item as? BlockItem)?.block ?: Blocks.STONE
+        val blockToRender = (blockEntity.blockToRender.item as? BlockItem)?.block ?: return
         val alpha = blockEntity.alpha
 
         //FIXME: Is there no way to render a block with a custom alpha?

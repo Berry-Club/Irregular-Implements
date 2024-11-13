@@ -101,7 +101,7 @@ class DiaphanousBlock : EntityBlock, Block(
         if (!blockIsCube) return ItemInteractionResult.FAIL
 
         val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return ItemInteractionResult.FAIL
-        blockEntity.blockToRender = stack.copy()
+        blockEntity.blockToRender = stack.copyWithCount(1)
 
         return ItemInteractionResult.SUCCESS
     }
