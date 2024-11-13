@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.renderer.CustomCraftingTableBER
-import dev.aaronhowser.mods.irregular_implements.block.renderer.DiaphanousBER
+import dev.aaronhowser.mods.irregular_implements.client.renderer.block_entity.CustomCraftingTableBER
+import dev.aaronhowser.mods.irregular_implements.client.renderer.block_entity.DiaphanousBER
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks

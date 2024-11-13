@@ -1,15 +1,15 @@
-package dev.aaronhowser.mods.irregular_implements.block.renderer
+package dev.aaronhowser.mods.irregular_implements.client.renderer.item
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 
-class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
+class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
     Minecraft.getInstance().blockEntityRenderDispatcher,
     Minecraft.getInstance().entityModels
 ) {
@@ -22,19 +22,25 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val baseStack = stack.get(ModDataComponents.ITEMSTACK)?.itemStack ?: return
+        val baseBlock = Items.BIRCH_PLANKS as BlockItem
+
+        poseStack.pushPose()
+
+        poseStack.scale(0.999f, 0.999f, 0.999f)
+        poseStack.translate(0.0005, 0.0005, 0.0005)
 
         Minecraft.getInstance().itemRenderer.render(
-            baseStack,
+            baseBlock.defaultInstance,
             displayContext,
             false,
             poseStack,
             buffer,
             packedLight,
             packedOverlay,
-            Minecraft.getInstance().itemRenderer.getModel(baseStack, null, null, 0)
+            Minecraft.getInstance().itemRenderer.getModel(baseBlock.defaultInstance, null, null, 0)
         )
 
+        poseStack.popPose()
     }
 
 }

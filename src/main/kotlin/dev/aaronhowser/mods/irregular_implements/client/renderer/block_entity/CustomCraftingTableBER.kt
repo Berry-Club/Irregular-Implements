@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.block.renderer
+package dev.aaronhowser.mods.irregular_implements.client.renderer.block_entity
 
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.*

@@ -1,11 +1,11 @@
-package dev.aaronhowser.mods.irregular_implements.block.renderer
+package dev.aaronhowser.mods.irregular_implements.client.renderer.item
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
-class DiaphanousBlockClientExtensions : IClientItemExtensions {
+class CustomCraftingTableClientExtensions : IClientItemExtensions {
 
-    private val bewlr = DiaphanousBEWLR()
+    private val bewlr = CustomCraftingTableBEWLR()
 
     override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
         return bewlr
