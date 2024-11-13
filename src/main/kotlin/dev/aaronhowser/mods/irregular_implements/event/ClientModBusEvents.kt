@@ -4,10 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems
-import net.minecraft.client.Minecraft
-import net.minecraft.client.color.block.BlockColor
-import net.minecraft.client.color.block.BlockColors
 import net.minecraft.client.color.item.ItemColor
+import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.GrassColor
 import net.neoforged.api.distmarker.Dist
@@ -43,19 +41,13 @@ object ClientModBusEvents {
         event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
     }
 
-    private val blockColors: BlockColors by lazy { Minecraft.getInstance().blockColors }
-
-    private fun getBlockColorFromDye(dyeColor: DyeColor): BlockColor {
-        return BlockColor { _, _, _, _ -> dyeColor.textureDiffuseColor }
-    }
-
     @SubscribeEvent
     fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
         for (dyeColor in DyeColor.entries) {
             val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
             event.register(
-                getBlockColorFromDye(dyeColor),
+                { _, _, _, _ -> dyeColor.textureDiffuseColor },
                 coloredGrassBlock
             )
         }
