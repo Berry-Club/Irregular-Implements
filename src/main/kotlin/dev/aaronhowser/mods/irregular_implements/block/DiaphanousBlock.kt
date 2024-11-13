@@ -15,6 +15,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.Shapes
+import net.minecraft.world.phys.shapes.VoxelShape
 
 class DiaphanousBlock : EntityBlock, Block(
     Properties
@@ -29,6 +32,8 @@ class DiaphanousBlock : EntityBlock, Block(
         val NOT_SOLID: BooleanProperty = BooleanProperty.create("not_solid")
 
         private fun shouldViewBlock(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+            if (blockState.getValue(NOT_SOLID)) return false
+
             val blockEntity = blockGetter.getBlockEntity(blockPos) as? DiaphanousBlockEntity ?: return false
             if (blockEntity.alpha < 1f) return false
             val blockItem = blockEntity.blockToRender.item as? BlockItem ?: return false
@@ -37,6 +42,8 @@ class DiaphanousBlock : EntityBlock, Block(
         }
 
         private fun shouldSuffocate(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+            if (blockState.getValue(NOT_SOLID)) return false
+
             val blockEntity = blockGetter.getBlockEntity(blockPos) as? DiaphanousBlockEntity ?: return false
             if (blockEntity.alpha < 1f) return false
             val blockItem = blockEntity.blockToRender.item as? BlockItem ?: return false
@@ -54,6 +61,14 @@ class DiaphanousBlock : EntityBlock, Block(
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(NOT_SOLID)
+    }
+
+    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        return if (state.getValue(NOT_SOLID)) {
+            Shapes.empty()
+        } else {
+            Shapes.block()
+        }
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = DiaphanousBlockEntity(pos, state)
