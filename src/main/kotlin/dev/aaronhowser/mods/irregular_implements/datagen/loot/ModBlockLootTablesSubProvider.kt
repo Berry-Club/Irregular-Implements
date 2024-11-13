@@ -18,7 +18,7 @@ class ModBlockLootTablesSubProvider(
             dropSelf(block)
         }
 
-        for (block in blocksWithoutDrops) {
+        for (block in noDropBlocks) {
             add(block, noDrop())
         }
 
@@ -30,11 +30,11 @@ class ModBlockLootTablesSubProvider(
 
     private val dropsDirtWithoutSilkTouch = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }
 
-    private val blocksWithoutDrops = listOf(
+    private val noDropBlocks = listOf(
         ModBlocks.BLAZE_FIRE
     ).map { it.get() }.toSet()
 
-    private val nonDropSelfBlocks: Set<Block> = blocksWithoutDrops + dropsDirtWithoutSilkTouch
+    private val nonDropSelfBlocks: Set<Block> = noDropBlocks + dropsDirtWithoutSilkTouch
 
     override fun getKnownBlocks(): List<Block> {
         return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }

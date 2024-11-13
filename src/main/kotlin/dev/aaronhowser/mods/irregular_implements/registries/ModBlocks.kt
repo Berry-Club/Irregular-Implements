@@ -76,8 +76,10 @@ object ModBlocks {
         registerBlock("rainbow_lamp") { RainbowLampBlock() }
 
     // Lubricant
-    val SUPER_LUBRICANT_ICE = basicBlock("super_lubricant_ice")
-    val SUPER_LUBRICANT_STONE = basicBlock("super_lubricant_stone")
+    val SUPER_LUBRICANT_ICE: DeferredBlock<Block> =
+        basicCopiedBlock("super_lubricant_ice", Blocks.BLUE_ICE)
+    val SUPER_LUBRICANT_STONE: DeferredBlock<Block> =
+        basicStoneBlock("super_lubricant_stone")
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
     val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
@@ -133,11 +135,11 @@ object ModBlocks {
     val SPECTRE_LEAVES = basicBlock("spectre_leaves")
 
     // Biome blocks
-    val BIOME_COBBLESTONE = basicBlock("biome_cobblestone")
-    val BIOME_STONE = basicBlock("biome_stone")
-    val BIOME_STONE_BRICKS = basicBlock("biome_stone_bricks")
-    val BIOME_STONE_BRICKS_CRACKED = basicBlock("biome_stone_bricks_cracked")
-    val BIOME_STONE_BRICKS_CHISELED = basicBlock("biome_stone_bricks_chiseled")
+    val BIOME_COBBLESTONE = basicStoneBlock("biome_cobblestone")
+    val BIOME_STONE = basicStoneBlock("biome_stone")
+    val BIOME_STONE_BRICKS = basicStoneBlock("biome_stone_bricks")
+    val BIOME_STONE_BRICKS_CRACKED = basicStoneBlock("biome_stone_bricks_cracked")
+    val BIOME_STONE_BRICKS_CHISELED = basicStoneBlock("biome_stone_bricks_chiseled")
     val BIOME_GLASS = basicGlassBlock("biome_glass")
 
     // Plates
@@ -263,8 +265,11 @@ object ModBlocks {
     private fun basicGlassBlock(name: String) =
         registerBlock(name) { TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)) }
 
+    private fun basicCopiedBlock(name: String, blockToCopy: Block) =
+        blockWithProperties(name, BlockBehaviour.Properties.ofFullCopy(blockToCopy))
+
     private fun basicStoneBlock(name: String) =
-        blockWithProperties(name, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE))
+        basicCopiedBlock(name, Blocks.STONE)
 
     private fun <T : Block> registerBlock(
         name: String,
