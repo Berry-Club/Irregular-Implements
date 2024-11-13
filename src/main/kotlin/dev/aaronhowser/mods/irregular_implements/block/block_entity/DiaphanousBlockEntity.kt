@@ -23,8 +23,10 @@ class DiaphanousBlockEntity(
         fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
             val nearestPlayerDistance = level
                 .players()
+                .asSequence()
                 .filter { it.isAlive && !it.isSpectator }
-                .minByOrNull { it.distanceToSqr(blockPos.toVec3()) }?.distanceToSqr(blockPos.toVec3())
+                .map { it.distanceToSqr(blockPos.toVec3()) }
+                .minOrNull()
 
             val blockEntity = level.getBlockEntity(blockPos) as? DiaphanousBlockEntity ?: return
 
