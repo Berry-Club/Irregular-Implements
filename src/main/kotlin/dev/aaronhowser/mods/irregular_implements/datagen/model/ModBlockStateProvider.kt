@@ -25,33 +25,10 @@ class ModBlockStateProvider(
 ) : BlockStateProvider(output, IrregularImplements.ID, existingFileHelper) {
 
     override fun registerStatesAndModels() {
-
-        for (block in singleTextureBlocks) {
-            simpleBlockWithItem(block, cubeAll(block))
-        }
-
-        for (block in singleTextureTransparentBlocks) {
-            singleTextureTransparent(block.get())
-        }
-
-        for (block in crossBlocks) {
-            val model = models()
-                .cross(name(block), blockTexture(block))
-                .renderType(RenderType.translucent().name)
-            simpleBlockWithItem(block, model)
-        }
-
-        oneUniqueFace(
-            ModBlocks.ANALOG_EMITTER.get(),
-            uniqueTexture = modLoc("block/analog_emitter_front"),
-            otherTexture = modLoc("block/analog_emitter_side")
-        )
-        oneUniqueFace(
-            ModBlocks.SIDED_BLOCK_OF_REDSTONE.get(),
-            uniqueTexture = modLoc("block/sided_redstone_front"),
-            otherTexture = modLoc("block/sided_redstone_side")
-        )
-
+        singleTextureBlocks()
+        singleTextureTransparentBlocks()
+        crossBlocks()
+        buildSingleFaces()
         rainbowLamp()
         triggerGlass()
         platforms()
@@ -60,12 +37,40 @@ class ModBlockStateProvider(
         coloredGrass()
         contactLever()
         contactButton()
+        biomeBlocks()
     }
 
-    private val crossBlocks = listOf(
-        ModBlocks.PITCHER_PLANT,
-        ModBlocks.SPECTRE_SAPLING
-    ).map { it.get() }
+    private fun biomeBlocks() {
+        val biomeBlocks = mapOf(
+            ModBlocks.BIOME_STONE.get() to mcLoc("block/stone"),
+            ModBlocks.BIOME_COBBLESTONE.get() to mcLoc("block/cobblestone"),
+            ModBlocks.BIOME_STONE_BRICKS.get() to mcLoc("block/stone_bricks"),
+            ModBlocks.BIOME_STONE_BRICKS_CHISELED.get() to mcLoc("block/chiseled_stone_bricks"),
+            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get() to mcLoc("block/cracked_stone_bricks")
+        )
+
+        for ((block, texture) in biomeBlocks) {
+
+            val model = models()
+                .cubeAll(name(block), texture)
+
+            simpleBlockWithItem(block, model)
+        }
+    }
+
+    private fun crossBlocks() {
+        val crossBlocks = listOf(
+            ModBlocks.PITCHER_PLANT,
+            ModBlocks.SPECTRE_SAPLING
+        ).map { it.get() }
+
+        for (block in crossBlocks) {
+            val model = models()
+                .cross(name(block), blockTexture(block))
+                .renderType(RenderType.translucent().name)
+            simpleBlockWithItem(block, model)
+        }
+    }
 
     private fun contactButton() {
         val block = ModBlocks.CONTACT_BUTTON.get()
@@ -322,6 +327,19 @@ class ModBlockStateProvider(
         )
     }
 
+    private fun buildSingleFaces() {
+        oneUniqueFace(
+            ModBlocks.ANALOG_EMITTER.get(),
+            uniqueTexture = modLoc("block/analog_emitter_front"),
+            otherTexture = modLoc("block/analog_emitter_side")
+        )
+        oneUniqueFace(
+            ModBlocks.SIDED_BLOCK_OF_REDSTONE.get(),
+            uniqueTexture = modLoc("block/sided_redstone_front"),
+            otherTexture = modLoc("block/sided_redstone_side")
+        )
+    }
+
     private fun oneUniqueFace(
         block: Block,
         uniqueTexture: ResourceLocation,
@@ -418,31 +436,39 @@ class ModBlockStateProvider(
         )
     }
 
-    private val singleTextureTransparentBlocks = listOf(
-        ModBlocks.BLOCK_OF_STICKS,
-        ModBlocks.RETURNING_BLOCK_OF_STICKS,
-        ModBlocks.BIOME_GLASS,
-        ModBlocks.LAPIS_GLASS,
-        ModBlocks.QUARTZ_GLASS
-    )
+    private fun singleTextureTransparentBlocks() {
+        val singleTextureTransparentBlocks = listOf(
+            ModBlocks.BLOCK_OF_STICKS,
+            ModBlocks.RETURNING_BLOCK_OF_STICKS,
+            ModBlocks.BIOME_GLASS,
+            ModBlocks.LAPIS_GLASS,
+            ModBlocks.QUARTZ_GLASS
+        ).map { it.get() }
 
-    private fun singleTextureTransparent(block: Block) {
-        val model = models()
-            .cubeAll(name(block), blockTexture(block))
-            .renderType(RenderType.translucent().name)
+        for (block in singleTextureTransparentBlocks) {
+            val model = models()
+                .cubeAll(name(block), blockTexture(block))
+                .renderType(RenderType.translucent().name)
 
-        simpleBlockWithItem(block, model)
+            simpleBlockWithItem(block, model)
+        }
     }
 
-    private val singleTextureBlocks = listOf(
-        ModBlocks.SUPER_LUBRICANT_STONE,
-        ModBlocks.SPECTRE_PLANKS,
-        ModBlocks.SOUND_DAMPENER,
-        ModBlocks.REDSTONE_OBSERVER,
-        ModBlocks.QUARTZ_LAMP,
-        ModBlocks.ENTITY_DETECTOR,
-        ModBlocks.BEAN_POD
-    ).map { it.get() }
+    private fun singleTextureBlocks() {
+        val singleTextureBlocks = listOf(
+            ModBlocks.SUPER_LUBRICANT_STONE,
+            ModBlocks.SPECTRE_PLANKS,
+            ModBlocks.SOUND_DAMPENER,
+            ModBlocks.REDSTONE_OBSERVER,
+            ModBlocks.QUARTZ_LAMP,
+            ModBlocks.ENTITY_DETECTOR,
+            ModBlocks.BEAN_POD
+        ).map { it.get() }
+
+        for (block in singleTextureBlocks) {
+            simpleBlockWithItem(block, cubeAll(block))
+        }
+    }
 
     private fun name(block: Block): String {
         return BuiltInRegistries.BLOCK.getKey(block).path
