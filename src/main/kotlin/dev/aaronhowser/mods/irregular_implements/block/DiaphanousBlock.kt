@@ -95,7 +95,10 @@ class DiaphanousBlock : EntityBlock, Block(
         hand: InteractionHand,
         hitResult: BlockHitResult
     ): ItemInteractionResult {
-        if (stack.item !is BlockItem) return ItemInteractionResult.FAIL
+        val blockItem = stack.item as? BlockItem ?: return ItemInteractionResult.FAIL
+
+        val blockIsCube = blockItem.block.defaultBlockState().isCollisionShapeFullBlock(level, pos)
+        if (!blockIsCube) return ItemInteractionResult.FAIL
 
         val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return ItemInteractionResult.FAIL
         blockEntity.blockToRender = stack.copy()
