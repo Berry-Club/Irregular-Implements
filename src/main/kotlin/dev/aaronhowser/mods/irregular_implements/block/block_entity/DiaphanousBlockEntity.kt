@@ -6,6 +6,9 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
@@ -20,7 +23,6 @@ class DiaphanousBlockEntity(
 
     var alpha: Float = 1f
 
-    //FIXME: Sync this with client
     private val items: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
     var blockToRender: ItemStack
         get() = items[0]
@@ -62,5 +64,9 @@ class DiaphanousBlockEntity(
 
         ContainerHelper.loadAllItems(tag, items, registries)
     }
+
+    // Syncs with client
+    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }
