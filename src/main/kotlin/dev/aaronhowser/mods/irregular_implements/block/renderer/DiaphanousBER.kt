@@ -25,8 +25,6 @@ class DiaphanousBER(
 
         //FIXME: Is there no way to render a block with a custom alpha?
         if (alpha > 0f) {
-            poseStack.popPose()
-
             context.blockRenderDispatcher
                 .renderSingleBlock(
                     blockToRender.defaultBlockState(),
@@ -35,8 +33,6 @@ class DiaphanousBER(
                     packedLight,
                     packedOverlay
                 )
-
-            poseStack.pushPose()
         }
     }
 }

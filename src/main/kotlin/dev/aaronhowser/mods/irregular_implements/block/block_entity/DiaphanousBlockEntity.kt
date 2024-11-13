@@ -24,7 +24,7 @@ class DiaphanousBlockEntity(
             val nearestPlayerDistance = level
                 .players()
                 .asSequence()
-                .mapNotNull { if (it.isAlive && !it.isSpectator) null else it.distanceToSqr(blockPos.toVec3()) }
+                .mapNotNull { if (!it.isAlive || it.isSpectator) null else it.distanceToSqr(blockPos.toVec3()) }
                 .minOrNull()
 
             val blockEntity = level.getBlockEntity(blockPos) as? DiaphanousBlockEntity ?: return
