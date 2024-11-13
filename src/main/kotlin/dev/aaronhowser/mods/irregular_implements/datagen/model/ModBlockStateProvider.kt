@@ -46,13 +46,29 @@ class ModBlockStateProvider(
             ModBlocks.BIOME_COBBLESTONE.get() to mcLoc("block/cobblestone"),
             ModBlocks.BIOME_STONE_BRICKS.get() to mcLoc("block/stone_bricks"),
             ModBlocks.BIOME_STONE_BRICKS_CHISELED.get() to mcLoc("block/chiseled_stone_bricks"),
-            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get() to mcLoc("block/cracked_stone_bricks")
+            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get() to mcLoc("block/cracked_stone_bricks"),
+            ModBlocks.BIOME_GLASS.get() to mcLoc("block/glass"),
         )
 
         for ((block, texture) in biomeBlocks) {
 
-            val model = models()
-                .cubeAll(name(block), texture)
+            var model = models()
+                .withExistingParent(name(block), "block/block")
+                .texture("all", texture)
+                .texture("particle", texture)
+
+                .element()
+                .from(0f, 0f, 0f)
+                .to(16f, 16f, 16f)
+                .allFaces { _, faceBuilder ->
+                    faceBuilder.tintindex(0)
+                }
+                .textureAll("#all")
+                .end()
+
+            if (block == ModBlocks.BIOME_GLASS.get()) {
+                model = model.renderType(RenderType.translucent().name)
+            }
 
             simpleBlockWithItem(block, model)
         }
@@ -440,7 +456,6 @@ class ModBlockStateProvider(
         val singleTextureTransparentBlocks = listOf(
             ModBlocks.BLOCK_OF_STICKS,
             ModBlocks.RETURNING_BLOCK_OF_STICKS,
-            ModBlocks.BIOME_GLASS,
             ModBlocks.LAPIS_GLASS,
             ModBlocks.QUARTZ_GLASS
         ).map { it.get() }

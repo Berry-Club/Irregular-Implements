@@ -39,6 +39,16 @@ object ClientModBusEvents {
         }
 
         event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
+
+        event.register(
+            { _, _ -> GrassColor.getDefaultColor() },
+            ModBlocks.BIOME_GLASS.get(),
+            ModBlocks.BIOME_STONE.get(),
+            ModBlocks.BIOME_COBBLESTONE.get(),
+            ModBlocks.BIOME_STONE_BRICKS.get(),
+            ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
+            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
+        )
     }
 
     @SubscribeEvent
