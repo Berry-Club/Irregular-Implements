@@ -550,7 +550,11 @@ class ModBlockStateProvider(
             ModBlocks.REDSTONE_OBSERVER,
             ModBlocks.QUARTZ_LAMP,
             ModBlocks.ENTITY_DETECTOR,
-            ModBlocks.BEAN_POD
+            ModBlocks.BEAN_POD,
+            ModBlocks.ENDER_ANCHOR,
+            ModBlocks.FERTILIZED_DIRT,
+            ModBlocks.FLUID_DISPLAY,
+            ModBlocks.NATURE_CORE,
         ).map { it.get() }
 
         for (block in singleTextureBlocks) {
