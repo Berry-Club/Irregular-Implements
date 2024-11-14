@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import net.minecraft.core.BlockPos
@@ -18,13 +20,20 @@ import net.minecraft.world.phys.AABB
 import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
 
 class EnderBridgeBlock(
-//    val isPrismarine: Boolean,
+    val distancePerTick: Int,
     properties: Properties = Properties
         .ofFullCopy(Blocks.STONE)
 ) : DirectionalBlock(properties) {
 
     companion object {
-        val CODEC: MapCodec<EnderBridgeBlock> = simpleCodec(::EnderBridgeBlock)
+        val CODEC: MapCodec<EnderBridgeBlock> = RecordCodecBuilder.mapCodec { instance ->
+            instance.group(
+                Codec.INT
+                    .fieldOf("distance_per_tick")
+                    .forGetter(EnderBridgeBlock::distancePerTick),
+                propertiesCodec()
+            ).apply(instance, ::EnderBridgeBlock)
+        }
 
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 
@@ -37,8 +46,9 @@ class EnderBridgeBlock(
          */
         fun searchForAnchor(
             level: Level,
+            distanceToSearch: Int,
             bridgePos: BlockPos,
-            searchPos: BlockPos,
+            searchOrigin: BlockPos,
             direction: Direction,
             iterations: Int
         ) {
@@ -47,21 +57,33 @@ class EnderBridgeBlock(
                 return
             }
 
-            if (level.isLoaded(searchPos)) {
-                val state = level.getBlockState(searchPos)
-                if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
-                    foundAnchor(level, bridgePos, searchPos)
-                    return
+            for (i in 0 until distanceToSearch) {
+                val pos = searchOrigin.relative(direction, i)
+
+                if (level.isLoaded(pos)) {
+                    val state = level.getBlockState(pos)
+                    if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
+                        foundAnchor(level, bridgePos, pos)
+                        return
+                    }
+
+                    if (state.isCollisionShapeFullBlock(level, pos)) {
+                        turnOffBridge(level, bridgePos)
+                        return
+                    }
                 }
 
-                if (!state.isCollisionShapeFullBlock(level, searchPos)) {
-                    turnOffBridge(level, bridgePos)
-                    return
-                }
             }
 
             ServerScheduler.scheduleTaskInTicks(1) {
-                searchForAnchor(level, bridgePos, searchPos.relative(direction), direction, iterations + 1)
+                searchForAnchor(
+                    level = level,
+                    distanceToSearch = distanceToSearch,
+                    bridgePos = bridgePos,
+                    searchOrigin = searchOrigin.relative(direction),
+                    direction = direction,
+                    iterations = iterations + distanceToSearch
+                )
             }
         }
 
@@ -137,8 +159,9 @@ class EnderBridgeBlock(
         val direction = state.getValue(FACING)
         searchForAnchor(
             level = level,
+            distanceToSearch = distancePerTick,
             bridgePos = pos,
-            searchPos = pos.relative(direction),
+            searchOrigin = pos.relative(direction),
             direction = direction,
             iterations = 0
         )

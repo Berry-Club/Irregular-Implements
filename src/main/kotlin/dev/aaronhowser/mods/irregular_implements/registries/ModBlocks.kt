@@ -21,9 +21,9 @@ object ModBlocks {
     val LAPIS_LAMP = basicBlock("lapis_lamp")
     val DYEING_MACHINE = basicBlock("dyeing_machine")
     val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
-        registerBlock("ender_bridge") { EnderBridgeBlock() }
+        registerBlock("ender_bridge") { EnderBridgeBlock(distancePerTick = 1) }
     val PRISMARINE_ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
-        registerBlock("prismarine_ender_bridge") { EnderBridgeBlock() }
+        registerBlock("prismarine_ender_bridge") { EnderBridgeBlock(distancePerTick = 2) }
     val ENDER_ANCHOR = basicBlock("ender_anchor")
     val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")
