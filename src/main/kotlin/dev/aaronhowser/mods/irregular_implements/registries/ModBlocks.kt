@@ -142,7 +142,7 @@ object ModBlocks {
     val BIOME_STONE_BRICKS = basicStoneBlock("biome_stone_bricks")
     val BIOME_STONE_BRICKS_CRACKED = basicStoneBlock("biome_stone_bricks_cracked")
     val BIOME_STONE_BRICKS_CHISELED = basicStoneBlock("biome_stone_bricks_chiseled")
-    val BIOME_GLASS = basicGlassBlock("biome_glass")
+    val BIOME_GLASS = basicGlassBlock("biome_glass")    //FIXME: not skipping rendering on adjacent biome glass
 
     // Plates
     val PROCESSING_PLATE = basicBlock("processing_plate")
