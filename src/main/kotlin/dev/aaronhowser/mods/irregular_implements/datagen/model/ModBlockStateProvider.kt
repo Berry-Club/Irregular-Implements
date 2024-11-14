@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.ContactButton
-import dev.aaronhowser.mods.irregular_implements.block.ContactLever
-import dev.aaronhowser.mods.irregular_implements.block.RainbowLampBlock
-import dev.aaronhowser.mods.irregular_implements.block.TriggerGlass
+import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
@@ -38,6 +35,82 @@ class ModBlockStateProvider(
         contactLever()
         contactButton()
         biomeBlocks()
+        enderBridges()
+    }
+
+    private fun enderBridges() {
+        val enderBridges = listOf(
+            ModBlocks.ENDER_BRIDGE,
+            ModBlocks.PRISMARINE_ENDER_BRIDGE
+        ).map { it.get() }
+
+        for (enderBridge in enderBridges) {
+            val isPrismarine = enderBridge == ModBlocks.PRISMARINE_ENDER_BRIDGE.get()
+
+            getVariantBuilder(enderBridge)
+                .forAllStates {
+                    val facing = it.getValue(DirectionalBlock.FACING)
+                    val enabled = it.getValue(EnderBridgeBlock.ENABLED)
+
+                    val yRotation = when (facing) {
+                        Direction.NORTH -> 0
+                        Direction.EAST -> 90
+                        Direction.SOUTH -> 180
+                        Direction.WEST -> 270
+                        else -> 0
+                    }
+
+                    val xRotation = when (facing) {
+                        Direction.UP -> 270
+                        Direction.DOWN -> 90
+                        else -> 0
+                    }
+
+                    val modelName = name(enderBridge) + if (enabled) "_on" else "_off"
+
+                    val sideTexture = StringBuilder()
+                        .append("block/ender_bridge/")
+                        .append(if (isPrismarine) "prismarine/" else "")
+                        .append("side")
+                        .toString()
+
+                    val frontTexture = StringBuilder()
+                        .append("block/ender_bridge/")
+                        .append(if (isPrismarine) "prismarine/" else "")
+                        .append("front")
+                        .append(if (enabled) "_on" else "_off")
+                        .toString()
+
+                    ConfiguredModel
+                        .builder()
+                        .modelFile(
+                            models()
+                                .orientable(
+                                    modelName,
+                                    modLoc(sideTexture),
+                                    modLoc(frontTexture),
+                                    modLoc(sideTexture)
+                                )
+                        )
+                        .rotationY(yRotation)
+                        .rotationX(xRotation)
+                        .build()
+                }
+
+            simpleBlockItem(
+                enderBridge,
+                ItemModelBuilder(
+                    modLoc(
+                        StringBuilder()
+                            .append("block/")
+                            .append(if (isPrismarine) "prismarine_" else "")
+                            .append("ender_bridge_off")
+                            .toString()
+                    ),
+                    existingFileHelper
+                )
+            )
+        }
     }
 
     private fun biomeBlocks() {

@@ -20,8 +20,10 @@ object ModBlocks {
         registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
     val LAPIS_LAMP = basicBlock("lapis_lamp")
     val DYEING_MACHINE = basicBlock("dyeing_machine")
-    val ENDER_BRIDGE = basicBlock("ender_bridge")
-    val PRISMARINE_ENDER_BRIDGE = basicBlock("prismarine_ender_bridge")
+    val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
+        registerBlock("ender_bridge") { EnderBridgeBlock() }
+    val PRISMARINE_ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
+        registerBlock("prismarine_ender_bridge") { EnderBridgeBlock() }
     val ENDER_ANCHOR = basicBlock("ender_anchor")
     val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")

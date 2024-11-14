@@ -87,9 +87,7 @@ class ContactButton(
         )
     }
 
-    override fun codec(): MapCodec<ContactButton> {
-        return CODEC
-    }
+    override fun codec(): MapCodec<ContactButton> = CODEC
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(FACING, ENABLED)

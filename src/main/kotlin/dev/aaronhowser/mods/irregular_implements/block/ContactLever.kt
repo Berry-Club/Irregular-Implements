@@ -72,9 +72,7 @@ class ContactLever(
         )
     }
 
-    override fun codec(): MapCodec<ContactLever> {
-        return CODEC
-    }
+    override fun codec(): MapCodec<ContactLever> = CODEC
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(FACING, ENABLED)

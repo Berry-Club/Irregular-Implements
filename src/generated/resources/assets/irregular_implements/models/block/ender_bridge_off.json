@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "irregular_implements:block/ender_bridge/front_off",
+    "side": "irregular_implements:block/ender_bridge/side",
+    "top": "irregular_implements:block/ender_bridge/side"
+  }
+}
