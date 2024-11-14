@@ -14,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.phys.AABB
+import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
 
 class EnderBridgeBlock(
 //    val isPrismarine: Boolean,
@@ -26,6 +28,13 @@ class EnderBridgeBlock(
 
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 
+        val MAX_ITERATIONS = 100
+
+        /**
+         * Searches for an anchor block in the given direction.
+         * Searches through unloaded chunks and non-full blocks.
+         * Only stops searching if it reaches the maximum iterations, or if it's found an Anchor.
+         */
         fun searchForAnchor(
             level: Level,
             bridgePos: BlockPos,
@@ -33,27 +42,48 @@ class EnderBridgeBlock(
             direction: Direction,
             iterations: Int
         ) {
-            if (iterations > 100) {
-                println("Too many iterations")
+            if (iterations > MAX_ITERATIONS) {
                 turnOffBridge(level, bridgePos)
                 return
             }
 
-            if (!level.isLoaded(searchPos)) {
-                println("Block not loaded")
-                turnOffBridge(level, bridgePos)
-                return
-            }
+            if (level.isLoaded(searchPos)) {
+                val state = level.getBlockState(searchPos)
+                if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
+                    foundAnchor(level, bridgePos, searchPos)
+                    return
+                }
 
-            if (level.getBlockState(searchPos).`is`(ModBlocks.ENDER_ANCHOR)) {
-                println("Found anchor at $searchPos")
-                turnOffBridge(level, bridgePos)
-                return
+                if (!state.isCollisionShapeFullBlock(level, searchPos)) {
+                    turnOffBridge(level, bridgePos)
+                    return
+                }
             }
 
             ServerScheduler.scheduleTaskInTicks(1) {
                 searchForAnchor(level, bridgePos, searchPos.relative(direction), direction, iterations + 1)
             }
+        }
+
+        private fun foundAnchor(
+            level: Level,
+            bridgePos: BlockPos,
+            anchorPos: BlockPos
+        ) {
+            val entitiesOnBridge = level.getEntities(
+                null,
+                AABB.ofSize(bridgePos.toVec3(), 2.5, 2.5, 2.5)
+            ).filter { it.blockPosBelowThatAffectsMyMovement == bridgePos }
+
+            for (entity in entitiesOnBridge) {
+                entity.teleportTo(
+                    anchorPos.x + 0.5,
+                    anchorPos.y + 1.0,
+                    anchorPos.z + 0.5
+                )
+            }
+
+            turnOffBridge(level, bridgePos)
         }
 
         private fun turnOffBridge(
