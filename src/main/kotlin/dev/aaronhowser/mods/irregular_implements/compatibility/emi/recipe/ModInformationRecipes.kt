@@ -23,7 +23,6 @@ object ModInformationRecipes {
             ModBlocks.PLAYER_INTERFACE,
             ModBlocks.LAPIS_GLASS,
             ModBlocks.LAPIS_LAMP,
-            ModBlocks.DYEING_MACHINE,
             ModBlocks.ONLINE_DETECTOR,
             ModBlocks.CHAT_DETECTOR,
             ModBlocks.ENDER_BRIDGE,

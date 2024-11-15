@@ -159,17 +159,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.DYEING_MACHINE,
-            " G ,RCB, W ",
-            mapOf(
-                'G' to ing(Tags.Items.DYES_RED),
-                'R' to ing(Tags.Items.DYES_RED),
-                'C' to ing(Items.CRAFTING_TABLE),
-                'B' to ing(Tags.Items.DYES_BLUE),
-                'W' to ing(Items.BLACK_WOOL)
-            )
-        ),
-        shapedRecipe(
             ModBlocks.ONLINE_DETECTOR,
             "SRS,RLR,SRS",
             mapOf(

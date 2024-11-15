@@ -22,7 +22,7 @@ import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
 class EnderBridgeBlock(
     val distancePerTick: Int,
     properties: Properties = Properties
-        .ofFullCopy(Blocks.STONE)
+        .ofFullCopy(Blocks.OBSIDIAN)
 ) : DirectionalBlock(properties) {
 
     companion object {

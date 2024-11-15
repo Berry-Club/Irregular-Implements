@@ -19,12 +19,12 @@ object ModBlocks {
     val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
         registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
     val LAPIS_LAMP = basicBlock("lapis_lamp")
-    val DYEING_MACHINE = basicBlock("dyeing_machine")
     val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
         registerBlock("ender_bridge") { EnderBridgeBlock(distancePerTick = 1) }
     val PRISMARINE_ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
         registerBlock("prismarine_ender_bridge") { EnderBridgeBlock(distancePerTick = 2) }
-    val ENDER_ANCHOR = basicBlock("ender_anchor")
+    val ENDER_ANCHOR: DeferredBlock<Block> =
+        basicCopiedBlock("ender_anchor", Blocks.OBSIDIAN)
     val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
@@ -257,6 +257,7 @@ object ModBlocks {
     // - Light Redirector: Just too hard to implement lmao
     // - Diaphanous Block: Too hard and nobody would use
     // - Custom Crafting Table: Too hard and nobody would use
+    // - Dyeing Machine
 
     private fun blockWithProperties(name: String, properties: BlockBehaviour.Properties) =
         registerBlock(name) { Block(properties) }
