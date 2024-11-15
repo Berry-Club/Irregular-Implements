@@ -12,6 +12,8 @@
     "irregular_implements:warped_platform",
     "irregular_implements:mangrove_platform",
     "irregular_implements:bamboo_platform",
-    "irregular_implements:cherry_platform"
+    "irregular_implements:cherry_platform",
+    "irregular_implements:spectre_planks",
+    "irregular_implements:spectre_wood"
   ]
 }
