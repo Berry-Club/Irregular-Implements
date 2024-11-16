@@ -20,7 +20,7 @@ object OtherUtil {
         ResourceLocation.fromNamespaceAndPath(IrregularImplements.ID, path)
 
     val Boolean?.isTrue: Boolean
-        get() = this == true
+        inline get() = this == true
 
     val Entity.isClientSide: Boolean
         get() = this.level().isClientSide
