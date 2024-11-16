@@ -21,7 +21,7 @@ public abstract class FireMixin implements BetterFire {
                     target = "Lnet/minecraft/world/level/block/FireBlock;getFireTickDelay(Lnet/minecraft/util/RandomSource;)I"
             )
     )
-    private int replaceFireTickSpeed(int original) {
+    private int irregular_implements$replaceFireTickSpeed(int original) {
         return (int) (original * irregular_implements$getTickDelayFactor());
     }
 

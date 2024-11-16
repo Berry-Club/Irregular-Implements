@@ -38,7 +38,7 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
             ),
             cancellable = true
     )
-    private void isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (RainShieldBlockEntity.Companion.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
             cir.setReturnValue(false);
         }
@@ -48,7 +48,7 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
             method = "tickBlockEntities",
             at = @At("HEAD")
     )
-    private void tickBlockEntities(CallbackInfo ci) {
+    private void irregular_implements$tickBlockEntities(CallbackInfo ci) {
         irregular_implements$clearRainShieldChunks();
 
         // Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.

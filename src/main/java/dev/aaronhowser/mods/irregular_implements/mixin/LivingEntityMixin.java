@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin extends Entity {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void shouldDiscardFriction(CallbackInfoReturnable<Boolean> cir) {
+    private void irregular_implements$shouldDiscardFriction(CallbackInfoReturnable<Boolean> cir) {
         if (getDeltaMovement().lengthSqr() > 1f) {
             return;
         }
@@ -63,7 +63,7 @@ public abstract class LivingEntityMixin extends Entity {
                     ordinal = 0
             )
     )
-    private List<ParticleOptions> hideMobEffectParticles(List<ParticleOptions> original) {
+    private List<ParticleOptions> irregular_implements$hideMobEffectParticles(List<ParticleOptions> original) {
         if (this.getItemBySlot(EquipmentSlot.HEAD)
                 .is(ModItems.INSTANCE.getMAGIC_HOOD())
         ) {

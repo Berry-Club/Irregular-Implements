@@ -27,7 +27,7 @@ public abstract class LevelRendererMixin {
                     target = "Lnet/minecraft/world/level/biome/Biome;getPrecipitationAt(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/biome/Biome$Precipitation;"
             )
     )
-    private Biome.Precipitation getPrecipitationAt(Biome biome, BlockPos pos) {
+    private Biome.Precipitation irregular_implements$getPrecipitationAt(Biome biome, BlockPos pos) {
         if (level instanceof RainShieldChunks l) {
             var chunkPos = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
             if (l.irregular_implements$chunkPosHasRainShields(chunkPos)) {

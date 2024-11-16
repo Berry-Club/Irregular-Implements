@@ -20,7 +20,7 @@ public abstract class BiomeMixin {
             ),
             cancellable = true
     )
-    private void shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void irregular_implements$shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (RainShieldBlockEntity.Companion.chunkIsProtectedFromRain(level, pos)) {
             cir.setReturnValue(false);
         }
