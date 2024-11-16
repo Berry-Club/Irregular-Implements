@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-12T04:00:10.5568957	Item Models: irregular_implements
+// 1.21.1	2024-11-16T09:24:35.0237822	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -61,7 +61,7 @@ fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item
 4214406cc226378f86df85b4a9572cd4e578b286 assets/irregular_implements/models/item/portkey.json
 d6d7268794599910379dbb06671188e7fa11d671 assets/irregular_implements/models/item/precious_emerald.json
 c299c97f1655718329d091dfd1414ba0ed860212 assets/irregular_implements/models/item/redstone_remote.json
-1e7b926a6994afcc883ff949e1b92384981da27f assets/irregular_implements/models/item/redstone_tool.json
+e688f830f67bf8d48fc0aa877fbcbb440ba19614 assets/irregular_implements/models/item/redstone_tool.json
 e5888588397ea4fce44f9188ea90a164af96651e assets/irregular_implements/models/item/rune_dust_black.json
 2048ffa0612d67fa13ac34b7e6b82efe68abf316 assets/irregular_implements/models/item/rune_dust_blue.json
 a55d9ddc34cbd1498eec188001230bf73986acf8 assets/irregular_implements/models/item/rune_dust_brown.json

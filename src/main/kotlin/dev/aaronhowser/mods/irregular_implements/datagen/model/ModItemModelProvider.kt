@@ -18,8 +18,15 @@ class ModItemModelProvider(
     existingFileHelper: ExistingFileHelper
 ) : ItemModelProvider(output, IrregularImplements.ID, existingFileHelper) {
 
-    override fun registerModels() {
+    private val handledItems: MutableSet<Item> = mutableSetOf()
 
+    override fun registerModels() {
+        coloredItems()
+        handheldItems()
+        basicItems()
+    }
+
+    private fun basicItems() {
         val complexModels = listOf(
             ModItems.ECLIPSED_CLOCK,
             ModItems.EMERALD_COMPASS,
@@ -32,8 +39,6 @@ class ModItemModelProvider(
             ModItems.ADVANCED_REDSTONE_TORCH
         )
 
-        coloredItems()
-
         for (item in ModItems.ITEM_REGISTRY.entries - complexModels.toSet()) {
             if (item.get() in handledItems) continue
 
@@ -41,10 +46,23 @@ class ModItemModelProvider(
                 basicItem(item.get())
             }
         }
-
     }
 
-    private val handledItems: MutableSet<Item> = mutableSetOf()
+    private fun handheldItems() {
+        val handHeldItems = listOf(
+            ModItems.REDSTONE_TOOL
+        ).map { it.get() }
+
+        for (item in handHeldItems) {
+            val name = getName(item)
+
+            getBuilder(name.toString())
+                .parent(ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", "item/${name.path}")
+
+            handledItems.add(item)
+        }
+    }
 
     private fun coloredItems() {
         for (color in DyeColor.entries) {
