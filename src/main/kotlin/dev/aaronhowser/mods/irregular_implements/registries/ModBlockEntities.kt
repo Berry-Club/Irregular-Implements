@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registries
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceBasicBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneObserverBlockEntity
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.neoforged.neoforge.registries.DeferredHolder
@@ -27,6 +28,14 @@ object ModBlockEntities {
             BlockEntityType.Builder.of(
                 { pos, state -> RedstoneInterfaceBasicBlockEntity(pos, state) },
                 ModBlocks.BASIC_REDSTONE_INTERFACE.get()
+            ).build(null)
+        })
+
+    val REDSTONE_OBSERVER: DeferredHolder<BlockEntityType<*>, BlockEntityType<RedstoneObserverBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("redstone_observer", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> RedstoneObserverBlockEntity(pos, state) },
+                ModBlocks.REDSTONE_OBSERVER.get()
             ).build(null)
         })
 
