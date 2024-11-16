@@ -18,7 +18,7 @@ public interface SignalGetterMixin {
     default int irregular_implements$getSignal(int original, BlockPos pos, Direction direction) {
         return original >= 15 || !(this instanceof PoweredRedstoneInterfaces f)
                 ? original
-                : Math.max(original, f.irregular_implements$getStrongPower(pos, direction));
+                : Math.max(original, f.irregular_implements$getLinkedInterfacePower(pos, direction));
     }
 
     //FIXME: Adjacent ones only get detected after a block update, which is strange
@@ -29,7 +29,7 @@ public interface SignalGetterMixin {
     default int irregular_implements$getDirectSignal(int original, BlockPos pos, Direction direction) {
         return original >= 15 || !(this instanceof PoweredRedstoneInterfaces f)
                 ? original
-                : Math.max(original, f.irregular_implements$getStrongPower(pos, direction));
+                : Math.max(original, f.irregular_implements$getLinkedInterfacePower(pos, direction));
     }
 
 }

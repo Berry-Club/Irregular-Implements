@@ -103,7 +103,7 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
     //
 
     @Override
-    public int irregular_implements$getStrongPower(BlockPos blockPos, @Nullable Direction direction) {
+    public int irregular_implements$getLinkedInterfacePower(BlockPos blockPos, @Nullable Direction direction) {
         return RedstoneInterfaceBlockEntity
                 .Companion
                 .getLinkedPower(

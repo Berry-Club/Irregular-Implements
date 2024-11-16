@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 public interface PoweredRedstoneInterfaces {
 
-    default int irregular_implements$getStrongPower(
+    default int irregular_implements$getLinkedInterfacePower(
             BlockPos blockPos,
             @Nullable Direction direction
     ) {
