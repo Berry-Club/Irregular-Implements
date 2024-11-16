@@ -14,9 +14,6 @@ class RedstoneObserverBlockEntity(
 ) : RedstoneToolLinkable, BlockEntity(ModBlockEntities.REDSTONE_OBSERVER.get(), pPos, pBlockState) {
 
     override var linkedPos: BlockPos? = null
-        set(value) {
-            field = value
-        }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
