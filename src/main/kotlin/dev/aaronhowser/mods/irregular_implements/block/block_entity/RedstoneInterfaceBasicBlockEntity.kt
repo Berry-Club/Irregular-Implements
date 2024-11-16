@@ -42,12 +42,12 @@ class RedstoneInterfaceBasicBlockEntity(
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
-        saveToTag(tag)
+        this.saveToTag(tag)
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
-        loadFromTag(tag)
+        this.loadFromTag(tag)
     }
 
 }
