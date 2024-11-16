@@ -555,6 +555,8 @@ class ModBlockStateProvider(
             ModBlocks.FERTILIZED_DIRT,
             ModBlocks.FLUID_DISPLAY,
             ModBlocks.NATURE_CORE,
+            ModBlocks.BASIC_REDSTONE_INTERFACE,
+            ModBlocks.ADVANCED_REDSTONE_INTERFACE
         ).map { it.get() }
 
         for (block in singleTextureBlocks) {

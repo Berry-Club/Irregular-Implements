@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "irregular_implements:block/basic_redstone_interface"
+    }
+  }
+}
