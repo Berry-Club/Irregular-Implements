@@ -20,27 +20,7 @@ abstract class RedstoneInterfaceBlockEntity(
 ) : BlockEntity(pBlockEntityType, pPos, pBlockState) {
 
     companion object {
-        private data class LevelPos(val level: Level, val pos: BlockPos) {
-
-            //FIXME: Hashcode not working??? in array get
-            override fun hashCode(): Int {
-                var result = level.hashCode()
-                result = 31 * result + pos.hashCode()
-                return result
-            }
-
-            override fun equals(other: Any?): Boolean {
-                if (this === other) return true
-                if (javaClass != other?.javaClass) return false
-
-                other as LevelPos
-
-                if (level != other.level) return false
-                if (pos != other.pos) return false
-
-                return true
-            }
-        }
+        private data class LevelPos(val level: Level, val pos: BlockPos)
 
         /**
          * A map of a linked position to the position of every Interface that links to it

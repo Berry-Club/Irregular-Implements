@@ -22,11 +22,19 @@ class RedstoneInterfaceBasicBlockEntity(
         set(value) {
             val oldField = field
             if (oldField != null) {
-                unlinkBlock(this.level!!, this.blockPos, oldField)
+                unlinkBlock(
+                    level = this.level!!,
+                    interfacePos = this.blockPos,
+                    targetPos = oldField
+                )
             }
 
             if (value != null) {
-                linkBlock(this.level!!, this.blockPos, value)
+                linkBlock(
+                    level = this.level!!,
+                    interfacePos = this.blockPos,
+                    targetPos = value
+                )
             }
 
             field = value
