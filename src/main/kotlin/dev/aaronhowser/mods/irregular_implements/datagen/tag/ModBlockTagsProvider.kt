@@ -25,16 +25,9 @@ class ModBlockTagsProvider(
         }
 
         val SUPER_LUBRICATED = create("super_lubricated")
-        val REDSTONE_TOOL_ACCESSIBLE = create("redstone_tool_accessible")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
-
-        this.tag(REDSTONE_TOOL_ACCESSIBLE)
-            .add(
-                ModBlocks.REDSTONE_OBSERVER.get(),
-                ModBlocks.BASIC_REDSTONE_INTERFACE.get()
-            )
 
         this.tag(SUPER_LUBRICATED)
             .add(

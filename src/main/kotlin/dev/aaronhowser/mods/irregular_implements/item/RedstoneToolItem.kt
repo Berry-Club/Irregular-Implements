@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.block.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import net.minecraft.network.chat.Component
@@ -20,14 +20,14 @@ class RedstoneToolItem : Item(
 
         val clickedPos = context.clickedPos
         val clickedState = level.getBlockState(clickedPos)
+        val blockName = clickedState.block.name
+        val clickedBlockEntity = level.getBlockEntity(clickedPos)
 
         val usedStack = context.itemInHand
 
-        if (clickedState.`is`(ModBlockTagsProvider.REDSTONE_TOOL_ACCESSIBLE)) {
+        if (clickedBlockEntity is RedstoneToolLinkable) {
             val locationComponent = LocationItemComponent(level, clickedPos)
             usedStack.set(ModDataComponents.LOCATION, locationComponent)
-
-            val blockName = clickedState.block.name
 
             player.displayClientMessage(
                 Component.literal("Location set to the ").append(blockName).append(Component.literal(" at $clickedPos")),
@@ -37,6 +37,51 @@ class RedstoneToolItem : Item(
             return InteractionResult.SUCCESS
         }
 
+        val locationComponent = usedStack.get(ModDataComponents.LOCATION)
+        if (locationComponent == null) {
+            player.displayClientMessage(
+                Component.literal("No location set"),
+                true
+            )
+
+            return InteractionResult.FAIL
+        }
+
+        if (level.dimension() != locationComponent.dimension) {
+            player.displayClientMessage(
+                Component.literal("Location is in a different dimension"),
+                true
+            )
+
+            return InteractionResult.FAIL
+        }
+
+        val linkedBLockPos = locationComponent.blockPos
+        if (!level.isLoaded(linkedBLockPos)) {
+            player.displayClientMessage(
+                Component.literal("Location is not loaded"),
+                true
+            )
+
+            return InteractionResult.FAIL
+        }
+
+        val linkedBlockEntity = level.getBlockEntity(linkedBLockPos)
+        if (linkedBlockEntity !is RedstoneToolLinkable) {
+            player.displayClientMessage(
+                Component.literal("Location is not a valid block"),
+                true
+            )
+
+            return InteractionResult.FAIL
+        }
+
+        linkedBlockEntity.linkedPos = clickedPos
+
+        player.displayClientMessage(
+            Component.literal("Linked the ").append(blockName).append(Component.literal(" at $clickedPos")),
+            true
+        )
 
         return InteractionResult.SUCCESS
     }
