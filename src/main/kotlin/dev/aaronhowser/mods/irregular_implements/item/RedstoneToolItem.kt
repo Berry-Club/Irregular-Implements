@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.block.base.RedstoneToolLinkable
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import net.minecraft.network.chat.Component

@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.block.base
+package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
 import net.minecraft.core.BlockPos
 

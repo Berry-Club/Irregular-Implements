@@ -1,21 +1,22 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.block.base.RedstoneToolLinkable
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.protocol.Packet
-import net.minecraft.network.protocol.game.ClientGamePacketListener
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class RedstoneInterfaceBasicBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.REDSTONE_INTERFACE.get(), pPos, pBlockState), RedstoneToolLinkable {
+) : RedstoneToolLinkable, RedstoneInterfaceBlockEntity(
+    ModBlockEntities.REDSTONE_INTERFACE.get(),
+    pPos,
+    pBlockState
+) {
 
     companion object {
         fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
@@ -23,6 +24,7 @@ class RedstoneInterfaceBasicBlockEntity(
 
             val linkedPos = blockEntity.linkedPos ?: return
             if (!level.isLoaded(linkedPos)) return
+
 
         }
     }
@@ -49,9 +51,5 @@ class RedstoneInterfaceBasicBlockEntity(
             linkedPos = BlockPos.of(tag.getLong(RedstoneToolLinkable.LINKED_POS_NBT))
         }
     }
-
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }
