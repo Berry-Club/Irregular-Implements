@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceBasicBlockEntity
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -24,15 +25,20 @@ class RedstoneInterfaceBasicBlock : EntityBlock, Block(
         val blockEntity = level.getBlockEntity(pos) as? RedstoneInterfaceBasicBlockEntity ?: return
         val linkedPos = blockEntity.linkedPos ?: return
 
-        if (level.isLoaded(linkedPos)) {
-            val linkedState = level.getBlockState(linkedPos)
-            linkedState.handleNeighborChanged(
-                level,
-                linkedPos,
-                neighborBlock,
-                neighborPos,
-                movedByPiston
-            )
+        val positionsToUpdate = Direction.entries.map { linkedPos.relative(it) } + linkedPos
+
+        for (posToUpdate in positionsToUpdate) {
+
+            if (level.isLoaded(posToUpdate)) {
+                level.getBlockState(linkedPos)
+                    .handleNeighborChanged(
+                        level,
+                        linkedPos,
+                        neighborBlock,
+                        neighborPos,
+                        movedByPiston
+                    )
+            }
         }
     }
 
