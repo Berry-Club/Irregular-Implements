@@ -68,6 +68,15 @@ class RedstoneObserverBlockEntity(
 
     }
 
+    override fun setRemoved() {
+        val level = this.level
+        if (level != null) {
+            removeObserver(level, this.blockPos)
+        }
+
+        super.setRemoved()
+    }
+
     override var linkedPos: BlockPos? = null
         set(value) {
             val oldField = field
