@@ -21,4 +21,15 @@ public interface SignalGetterMixin {
                 : Math.max(original, f.irregular_implements$getStrongPower(pos, direction));
     }
 
+    //FIXME: Adjacent ones only get detected after a block update, which is strange
+    @ModifyReturnValue(
+            method = "getDirectSignal",
+            at = @At("RETURN")
+    )
+    default int irregular_implements$getDirectSignal(int original, BlockPos pos, Direction direction) {
+        return original >= 15 || !(this instanceof PoweredRedstoneInterfaces f)
+                ? original
+                : Math.max(original, f.irregular_implements$getStrongPower(pos, direction));
+    }
+
 }

@@ -28,7 +28,6 @@ class RedstoneInterfaceBasicBlock : EntityBlock, Block(
         val positionsToUpdate = Direction.entries.map { linkedPos.relative(it) } + linkedPos
 
         for (posToUpdate in positionsToUpdate) {
-
             if (level.isLoaded(posToUpdate)) {
                 level.getBlockState(linkedPos)
                     .handleNeighborChanged(
