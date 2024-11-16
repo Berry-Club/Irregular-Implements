@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 class RedstoneObserverBlock : EntityBlock, Block(
     Properties
-        .ofFullCopy(Blocks.IRON_BLOCK)
+        .ofFullCopy(Blocks.QUARTZ_BLOCK)
 ) {
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
