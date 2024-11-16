@@ -39,7 +39,7 @@ public abstract class LivingEntityMixin extends Entity {
         }
 
         if (this.getItemBySlot(EquipmentSlot.FEET)
-                .is(ModItems.INSTANCE.getSUPER_LUBRICANT_BOOTS())
+                .is(ModItems.getSUPER_LUBRICANT_BOOTS())
         ) {
             cir.setReturnValue(true);
             return;
@@ -48,7 +48,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (this.level()
                 .getBlockState(
                         this.getBlockPosBelowThatAffectsMyMovement()
-                ).is(ModBlockTagsProvider.Companion.getSUPER_LUBRICATED())
+                ).is(ModBlockTagsProvider.getSUPER_LUBRICATED())
         ) {
             cir.setReturnValue(true);
         }
@@ -65,7 +65,7 @@ public abstract class LivingEntityMixin extends Entity {
     )
     private List<ParticleOptions> irregular_implements$hideMobEffectParticles(List<ParticleOptions> original) {
         if (this.getItemBySlot(EquipmentSlot.HEAD)
-                .is(ModItems.INSTANCE.getMAGIC_HOOD())
+                .is(ModItems.getMAGIC_HOOD())
         ) {
             return List.of();
         }

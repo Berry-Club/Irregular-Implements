@@ -22,6 +22,7 @@ class RainShieldBlockEntity(
 
     companion object {
 
+        @JvmStatic
         fun chunkIsProtectedFromRain(level: LevelReader, blockPos: BlockPos): Boolean {
             if (!level.isAreaLoaded(blockPos, 1)) return false
             if (level !is RainShieldChunks) return false

@@ -24,6 +24,7 @@ class ModBlockTagsProvider(
             return BlockTags.create(OtherUtil.modResource(id))
         }
 
+        @JvmStatic
         val SUPER_LUBRICATED = create("super_lubricated")
     }
 

@@ -26,7 +26,7 @@ public abstract class ItemEntityMixin extends Entity {
     private float irregular_implements$replaceFriction(float original) {
         return (this.level()
                 .getBlockState(getBlockPosBelowThatAffectsMyMovement())
-                .is(ModBlockTagsProvider.Companion.getSUPER_LUBRICATED())
+                .is(ModBlockTagsProvider.getSUPER_LUBRICATED())
         ) ? 1f : original;
     }
 }

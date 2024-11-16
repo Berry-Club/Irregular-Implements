@@ -19,7 +19,7 @@ public class LivingEntityRendererMixin<T extends LivingEntity> {
             cancellable = true
     )
     private void irregular_implements$shouldShowNameMixin(T entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD())) {
+        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.getMAGIC_HOOD())) {
             cir.setReturnValue(false);
         }
     }

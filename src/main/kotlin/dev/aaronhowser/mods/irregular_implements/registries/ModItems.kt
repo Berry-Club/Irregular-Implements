@@ -30,6 +30,7 @@ object ModItems {
     val OBSIDIAN_SKULL = basic("obsidian_skull")
     val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
     val OBSIDIAN_WATER_WALKING_BOOTS = basic("obsidian_water_walking_boots")
+    @JvmStatic
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
         register("magic_hood") {
             ArmorItem(
@@ -118,6 +119,7 @@ object ModItems {
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
     // What if you could instead apply the tincture to any boots?
+    @JvmStatic
     val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =
         register("super_lubricant_boots") {
             ArmorItem(

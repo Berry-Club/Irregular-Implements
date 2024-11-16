@@ -36,7 +36,7 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
             cancellable = true
     )
     private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.Companion.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
+        if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
             cir.setReturnValue(false);
         }
     }
