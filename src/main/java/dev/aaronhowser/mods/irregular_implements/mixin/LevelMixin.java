@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 import dev.aaronhowser.mods.irregular_implements.PoweredRedstoneInterfaces;
 import dev.aaronhowser.mods.irregular_implements.RainShieldChunks;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
-import it.unimi.dsi.fastutil.Pair;
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,9 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Mixin(Level.class)
 public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInterfaces {
@@ -105,39 +102,8 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
     //
     //
 
-    @Unique
-    Map<Pair<BlockPos, Direction>, Integer> irregular_implements$interfaceStrongPower = new HashMap<>();
-
-    @Override
-    public void irregular_implements$addStrongPower(BlockPos blockPos, @Nullable Direction direction, int power) {
-        this.irregular_implements$interfaceStrongPower.put(Pair.of(blockPos, direction), power);
-    }
-
-    @Override
-    public void irregular_implements$removeStrongPower(BlockPos blockPos, @Nullable Direction direction) {
-        this.irregular_implements$interfaceStrongPower.remove(Pair.of(blockPos, direction));
-    }
-
     @Override
     public int irregular_implements$getStrongPower(BlockPos blockPos, @Nullable Direction direction) {
-        return this.irregular_implements$interfaceStrongPower.getOrDefault(Pair.of(blockPos, direction), 0);
-    }
-
-    @Unique
-    Map<Pair<BlockPos, Direction>, Integer> irregular_implements$interfaceWeakPower = new HashMap<>();
-
-    @Override
-    public void irregular_implements$addWeakPower(BlockPos blockPos, @Nullable Direction direction, int power) {
-        this.irregular_implements$interfaceWeakPower.put(Pair.of(blockPos, direction), power);
-    }
-
-    @Override
-    public void irregular_implements$removeWeakPower(BlockPos blockPos, @Nullable Direction direction) {
-        this.irregular_implements$interfaceWeakPower.remove(Pair.of(blockPos, direction));
-    }
-
-    @Override
-    public int irregular_implements$getWeakPower(BlockPos blockPos, @Nullable Direction direction) {
-        return this.irregular_implements$interfaceWeakPower.getOrDefault(Pair.of(blockPos, direction), 0);
+        return RedstoneInterfaceBlockEntity.Companion.getLinkedPower((Level) (Object) this, blockPos);
     }
 }

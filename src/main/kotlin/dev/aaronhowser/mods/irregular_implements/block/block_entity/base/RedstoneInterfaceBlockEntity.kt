@@ -19,7 +19,6 @@ abstract class RedstoneInterfaceBlockEntity(
 ) : BlockEntity(pBlockEntityType, pPos, pBlockState) {
 
     companion object {
-
         val linkedPositions: MultiMap<BlockPos, BlockPos> = MultiMap()
 
         fun linkBlock(interfacePos: BlockPos, targetPos: BlockPos) {
