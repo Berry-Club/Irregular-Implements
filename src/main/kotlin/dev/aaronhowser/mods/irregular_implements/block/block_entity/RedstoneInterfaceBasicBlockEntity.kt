@@ -34,6 +34,8 @@ class RedstoneInterfaceBasicBlockEntity(
                     interfacePos = this.blockPos,
                     targetPos = value
                 )
+            } else {
+                removeInterface(this.level!!, this.blockPos)
             }
 
             field = value

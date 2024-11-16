@@ -27,13 +27,15 @@ abstract class RedstoneInterfaceBlockEntity(
          */
         private val linkedPositions: MultiMap<LevelPos, BlockPos> = MultiMap()
 
-        fun linkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
+        @JvmStatic
+        protected fun linkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
             linkedPositions
                 .getOrPut(LevelPos(level, targetPos)) { mutableListOf() }
                 .add(interfacePos)
         }
 
-        fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
+        @JvmStatic
+        protected fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
             val levelPos = LevelPos(level, targetPos)
 
             linkedPositions[levelPos]?.remove(interfacePos)
@@ -42,6 +44,7 @@ abstract class RedstoneInterfaceBlockEntity(
             }
         }
 
+        @JvmStatic
         fun getLinkedPower(level: Level, targetPos: BlockPos): Int {
             val levelPos = LevelPos(level, targetPos)
             val interfaces = linkedPositions[levelPos] ?: return -1
@@ -49,7 +52,8 @@ abstract class RedstoneInterfaceBlockEntity(
             return interfaces.maxOf { level.getBestNeighborSignal(it) }
         }
 
-        fun removeInterface(level: Level, interfacePos: BlockPos) {
+        @JvmStatic
+        protected fun removeInterface(level: Level, interfacePos: BlockPos) {
             val iterator = linkedPositions.entries.iterator()
 
             while (iterator.hasNext()) {
