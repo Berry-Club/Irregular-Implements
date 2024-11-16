@@ -14,6 +14,8 @@ data class LocationItemComponent(
     val blockPos: BlockPos
 ) {
 
+    constructor(level: Level, blockPos: BlockPos) : this(level.dimension(), blockPos)
+
     companion object {
         val CODEC: Codec<LocationItemComponent> =
             RecordCodecBuilder.create { instance ->

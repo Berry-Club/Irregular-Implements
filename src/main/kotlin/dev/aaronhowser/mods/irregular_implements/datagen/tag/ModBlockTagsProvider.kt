@@ -9,7 +9,6 @@ import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
-import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
@@ -26,10 +25,16 @@ class ModBlockTagsProvider(
         }
 
         val SUPER_LUBRICATED = create("super_lubricated")
-        val CANNOT_ACCELERATE = create("cannot_accelerate")
+        val REDSTONE_TOOL_ACCESSIBLE = create("redstone_tool_accessible")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(REDSTONE_TOOL_ACCESSIBLE)
+            .add(
+                ModBlocks.REDSTONE_OBSERVER.get(),
+                ModBlocks.BASIC_REDSTONE_INTERFACE.get()
+            )
 
         this.tag(SUPER_LUBRICATED)
             .add(
@@ -38,9 +43,6 @@ class ModBlockTagsProvider(
                 ModBlocks.SUPER_LUBRICANT_PLATFORM.get(),
                 ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM.get()
             )
-
-        this.tag(CANNOT_ACCELERATE)
-            .addTag(Tags.Blocks.CHESTS)
 
         val coloredGrassBlocks = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }.toTypedArray()
 

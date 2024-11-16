@@ -26,10 +26,7 @@ class FilterLocationItem : Item(
         val usedStack = context.itemInHand
         usedStack.set(
             ModDataComponents.LOCATION.get(),
-            LocationItemComponent(
-                context.level.dimension(),
-                context.clickedPos
-            )
+            LocationItemComponent(context.level, context.clickedPos)
         )
 
         player?.cooldowns?.addCooldown(this, 1)
@@ -46,10 +43,7 @@ class FilterLocationItem : Item(
 
         usedStack.set(
             ModDataComponents.LOCATION.get(),
-            LocationItemComponent(
-                level.dimension(),
-                player.blockPosition()
-            )
+            LocationItemComponent(level, player.blockPosition())
         )
 
         player.cooldowns.addCooldown(this, 1)
