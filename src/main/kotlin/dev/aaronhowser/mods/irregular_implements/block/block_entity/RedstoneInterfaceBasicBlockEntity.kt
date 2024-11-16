@@ -46,7 +46,9 @@ class RedstoneInterfaceBasicBlockEntity(
         super.loadAdditional(tag, registries)
 
         if (tag.contains(RedstoneToolLinkable.LINKED_POS_NBT)) {
-            linkedPos = BlockPos.of(tag.getLong(RedstoneToolLinkable.LINKED_POS_NBT))
+            ServerScheduler.scheduleTaskInTicks(1) {
+                linkedPos = BlockPos.of(tag.getLong(RedstoneToolLinkable.LINKED_POS_NBT))
+            }
         }
     }
 
