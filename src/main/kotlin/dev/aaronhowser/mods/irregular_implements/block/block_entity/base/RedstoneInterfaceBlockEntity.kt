@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -19,24 +20,59 @@ abstract class RedstoneInterfaceBlockEntity(
 ) : BlockEntity(pBlockEntityType, pPos, pBlockState) {
 
     companion object {
-        val linkedPositions: MultiMap<BlockPos, BlockPos> = MultiMap()
+        private data class LevelPos(val level: Level, val pos: BlockPos)
 
-        fun linkBlock(interfacePos: BlockPos, targetPos: BlockPos) {
-            linkedPositions.getOrPut(interfacePos) { mutableListOf() }.add(targetPos)
+        /**
+         * A map of a linked position to the position of every Interface that links to it
+         */
+        private val linkedPositions: MultiMap<LevelPos, BlockPos> = MultiMap()
+
+        fun linkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
+            linkedPositions
+                .getOrPut(LevelPos(level, targetPos)) { mutableListOf() }
+                .add(interfacePos)
         }
 
-        fun unlinkBlock(interfacePos: BlockPos, targetPos: BlockPos) {
-            linkedPositions[interfacePos]?.remove(targetPos)
-            if (!linkedPositions.containsKey(interfacePos)) {
-                linkedPositions.remove(interfacePos)
+        fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
+            val levelPos = LevelPos(level, targetPos)
+
+            linkedPositions[levelPos]?.remove(interfacePos)
+            if (linkedPositions[levelPos]?.isEmpty().isTrue) {
+                linkedPositions.remove(levelPos)
             }
         }
 
         fun getLinkedPower(level: Level, targetPos: BlockPos): Int {
-            val interfaces = linkedPositions[targetPos] ?: return -1
+            val levelPos = LevelPos(level, targetPos)
+            val interfaces = linkedPositions[levelPos] ?: return -1
+
             return interfaces.maxOf { level.getBestNeighborSignal(it) }
         }
 
+        fun removeInterface(level: Level, interfacePos: BlockPos) {
+            val iterator = linkedPositions.entries.iterator()
+
+            while (iterator.hasNext()) {
+                val (levelPos, interfaces) = iterator.next()
+
+                if (levelPos.level == level && interfaces.contains(interfacePos)) {
+                    interfaces.remove(interfacePos)
+                    if (interfaces.isEmpty()) {
+                        iterator.remove()
+                    }
+                }
+            }
+        }
+
+    }
+
+    override fun setRemoved() {
+        val level = this.level
+        if (level != null) {
+            removeInterface(level, this.blockPos)
+        }
+
+        super.setRemoved()
     }
 
     // Syncs with client

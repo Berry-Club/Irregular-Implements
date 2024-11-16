@@ -18,19 +18,17 @@ class RedstoneInterfaceBasicBlockEntity(
     pBlockState
 ) {
 
-    companion object {
-        fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
-            val blockEntity = level.getBlockEntity(blockPos) as? RedstoneInterfaceBasicBlockEntity ?: return
-
-            val linkedPos = blockEntity.linkedPos ?: return
-            if (!level.isLoaded(linkedPos)) return
-
-
-        }
-    }
-
     override var linkedPos: BlockPos? = null
         set(value) {
+            val oldField = field
+            if (oldField != null) {
+                unlinkBlock(this.level!!, this.blockPos, oldField)
+            }
+
+            if (value != null) {
+                linkBlock(this.level!!, this.blockPos, value)
+            }
+
             field = value
             setChanged()
         }
