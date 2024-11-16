@@ -50,7 +50,11 @@ class ModItemModelProvider(
 
     private fun handheldItems() {
         val handHeldItems = listOf(
-            ModItems.REDSTONE_TOOL
+            ModItems.REDSTONE_TOOL,
+            ModItems.SPECTRE_PICKAXE,
+            ModItems.SPECTRE_AXE,
+            ModItems.SPECTRE_SWORD,
+            ModItems.SPECTRE_SHOVEL
         ).map { it.get() }
 
         for (item in handHeldItems) {
