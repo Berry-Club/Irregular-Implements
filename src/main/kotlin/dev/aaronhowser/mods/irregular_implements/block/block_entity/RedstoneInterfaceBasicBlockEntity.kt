@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -15,6 +16,16 @@ class RedstoneInterfaceBasicBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.REDSTONE_INTERFACE.get(), pPos, pBlockState), RedstoneToolLinkable {
+
+    companion object {
+        fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
+            val blockEntity = level.getBlockEntity(blockPos) as? RedstoneInterfaceBasicBlockEntity ?: return
+
+            val linkedPos = blockEntity.linkedPos ?: return
+            if (!level.isLoaded(linkedPos)) return
+
+        }
+    }
 
     override var linkedPos: BlockPos? = null
         set(value) {
