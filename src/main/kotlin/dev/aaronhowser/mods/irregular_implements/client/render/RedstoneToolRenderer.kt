@@ -127,20 +127,6 @@ object RedstoneToolRenderer {
         }
     }
 
-    //FIXME: Lines are 1 pixel wide. Maybe move this to be quads?
-    private fun renderLine(
-        buffer: BufferBuilder,
-        x1: Float, y1: Float, z1: Float,
-        x2: Float, y2: Float, z2: Float,
-        alpha: Float,
-        red: Float,
-        green: Float,
-        blue: Float
-    ) {
-        buffer.addVertex(x1, y1, z1).setColor(red, green, blue, alpha)
-        buffer.addVertex(x2, y2, z2).setColor(red, green, blue, alpha)
-    }
-
     private fun drawQuad(
         buffer: BufferBuilder,
         x1: Float, y1: Float, z1: Float,
@@ -167,19 +153,26 @@ object RedstoneToolRenderer {
         green: Float,
         blue: Float
     ) {
-        renderLine(
-            buffer,
-            startPos.x.toFloat(),
-            startPos.y.toFloat(),
-            startPos.z.toFloat(),
-            endPos.x.toFloat(),
-            endPos.y.toFloat(),
-            endPos.z.toFloat(),
-            alpha,
-            red,
-            green,
-            blue
-        )
+
+        val endPointRadius = 0.05f
+
+        val x1 = startPos.x.toFloat()
+        val y1 = startPos.y.toFloat()
+        val z1 = startPos.z.toFloat()
+
+        val x2 = startPos.x.toFloat()
+        val y2 = startPos.y.toFloat() - endPointRadius
+        val z2 = startPos.z.toFloat()
+
+        val x3 = endPos.x.toFloat()
+        val y3 = endPos.y.toFloat() - endPointRadius
+        val z3 = endPos.z.toFloat()
+
+        val x4 = endPos.x.toFloat()
+        val y4 = endPos.y.toFloat()
+        val z4 = endPos.z.toFloat()
+
+        drawQuad(buffer, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, alpha, red, green, blue)
     }
 
     private fun renderCube(
