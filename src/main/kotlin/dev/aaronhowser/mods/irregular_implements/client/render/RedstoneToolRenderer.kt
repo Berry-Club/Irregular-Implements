@@ -85,8 +85,6 @@ object RedstoneToolRenderer {
         )
 
         VertexBuffer.unbind()
-
-        VertexBuffer.unbind()
         RenderSystem.depthFunc(GL11.GL_LEQUAL)
 
         poseStack.popPose()
@@ -110,9 +108,9 @@ object RedstoneToolRenderer {
         if (mainBlockPos != null && linkedBlockPos != null) {
             renderLine(buffer, mainBlockPos!!, linkedBlockPos!!, alpha, red, green, blue)
         }
-
     }
 
+    //FIXME: Lines are 1 pixel wide. Maybe move this to be quads?
     private fun renderLine(
         buffer: BufferBuilder,
         x1: Float, y1: Float, z1: Float,
