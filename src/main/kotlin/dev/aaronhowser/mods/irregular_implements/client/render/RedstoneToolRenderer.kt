@@ -52,19 +52,21 @@ object RedstoneToolRenderer {
 
     private var vertexBuffer: VertexBuffer? = null
 
+    private lateinit var cameraPos: Vec3
+
     @SubscribeEvent
     fun onRenderLevel(event: RenderLevelStageEvent) {
         if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
         if (ClientUtil.localPlayer == null) return
         if (this.mainBlockPos == null) return
 
+        cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+
         refresh()
         render(event)
     }
 
     private fun render(event: RenderLevelStageEvent) {
-        val playerView = Minecraft.getInstance().entityRenderDispatcher.camera.position
-
         RenderSystem.depthMask(false)
         RenderSystem.enableBlend()
         RenderSystem.defaultBlendFunc()
@@ -79,7 +81,7 @@ object RedstoneToolRenderer {
         RenderSystem.depthFunc(GL11.GL_ALWAYS)
 
         poseStack.mulPose(event.modelViewMatrix)
-        poseStack.translate(-playerView.x, -playerView.y, -playerView.z)
+        poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
         vertexBuffer.bind()
         vertexBuffer.drawWithShader(
@@ -138,10 +140,45 @@ object RedstoneToolRenderer {
         green: Float,
         blue: Float
     ) {
-        buffer.addVertex(x1, y1, z1).setColor(red, green, blue, alpha)
-        buffer.addVertex(x2, y2, z2).setColor(red, green, blue, alpha)
-        buffer.addVertex(x3, y3, z3).setColor(red, green, blue, alpha)
-        buffer.addVertex(x4, y4, z4).setColor(red, green, blue, alpha)
+        // Calculate the center of the quad
+        val centerX = (x1 + x2 + x3 + x4) / 4
+        val centerY = (y1 + y2 + y3 + y4) / 4
+        val centerZ = (z1 + z2 + z3 + z4) / 4
+
+        // Calculate the normal of the quad
+        val edge1X = x2 - x1
+        val edge1Y = y2 - y1
+        val edge1Z = z2 - z1
+
+        val edge2X = x3 - x1
+        val edge2Y = y3 - y1
+        val edge2Z = z3 - z1
+
+        val normalX = edge1Y * edge2Z - edge1Z * edge2Y
+        val normalY = edge1Z * edge2X - edge1X * edge2Z
+        val normalZ = edge1X * edge2Y - edge1Y * edge2X
+
+        // Vector from the quad center to the camera
+        val toCameraX = cameraPos.x.toFloat() - centerX
+        val toCameraY = cameraPos.y.toFloat() - centerY
+        val toCameraZ = cameraPos.z.toFloat() - centerZ
+
+        // Dot product to determine if the normal faces the camera
+        val dotProduct = normalX * toCameraX + normalY * toCameraY + normalZ * toCameraZ
+
+        if (dotProduct > 0) {
+            // Normal faces away from the camera, use the original order
+            buffer.addVertex(x1, y1, z1).setColor(red, green, blue, alpha)
+            buffer.addVertex(x2, y2, z2).setColor(red, green, blue, alpha)
+            buffer.addVertex(x3, y3, z3).setColor(red, green, blue, alpha)
+            buffer.addVertex(x4, y4, z4).setColor(red, green, blue, alpha)
+        } else {
+            // Normal faces the camera, reverse the order
+            buffer.addVertex(x4, y4, z4).setColor(red, green, blue, alpha)
+            buffer.addVertex(x3, y3, z3).setColor(red, green, blue, alpha)
+            buffer.addVertex(x2, y2, z2).setColor(red, green, blue, alpha)
+            buffer.addVertex(x1, y1, z1).setColor(red, green, blue, alpha)
+        }
     }
 
     private fun renderLine(
