@@ -10,13 +10,17 @@ import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.core.BlockPos
+import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
-@EventBusSubscriber(modid = IrregularImplements.ID)
+@EventBusSubscriber(
+    modid = IrregularImplements.ID,
+    value = [Dist.CLIENT]
+)
 object RedstoneToolRenderer {
 
     private var mainBlockPos: BlockPos? = null
@@ -37,11 +41,11 @@ object RedstoneToolRenderer {
         if (toolLocation.dimension != player.level().dimension()) return
 
         val toolBlockPos = toolLocation.blockPos
+        this.mainBlockPos = toolBlockPos
 
         val toolBlockEntity = player.level().getBlockEntity(toolLocation.blockPos) as? RedstoneToolLinkable ?: return
         val linkedPos = toolBlockEntity.linkedPos ?: return
 
-        this.mainBlockPos = toolBlockPos
         this.linkedBlockPos = linkedPos
     }
 
@@ -51,15 +55,14 @@ object RedstoneToolRenderer {
     fun onRenderLevel(event: RenderLevelStageEvent) {
         if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
         if (ClientUtil.localPlayer == null) return
-        if (this.mainBlockPos == null || this.linkedBlockPos == null) return
+        if (this.mainBlockPos == null) return
 
-        if (vertexBuffer == null) refresh()
-
+        refresh()
         render(event)
     }
 
     private fun render(event: RenderLevelStageEvent) {
-        val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+        val playerView = Minecraft.getInstance().entityRenderDispatcher.camera.position
 
         RenderSystem.depthMask(false)
         RenderSystem.enableBlend()
@@ -75,7 +78,7 @@ object RedstoneToolRenderer {
         RenderSystem.depthFunc(GL11.GL_ALWAYS)
 
         poseStack.mulPose(event.modelViewMatrix)
-        poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
+        poseStack.translate(-playerView.x, -playerView.y, -playerView.z)
 
         vertexBuffer.bind()
         vertexBuffer.drawWithShader(
@@ -107,6 +110,15 @@ object RedstoneToolRenderer {
 
         if (mainBlockPos != null && linkedBlockPos != null) {
             renderLine(buffer, mainBlockPos!!, linkedBlockPos!!, alpha, red, green, blue)
+        }
+
+        val build = buffer.build()
+        if (build == null) {
+            vertexBuffer = null
+        } else {
+            vertexBuffer!!.bind()
+            vertexBuffer!!.upload(build)
+            VertexBuffer.unbind()
         }
     }
 
