@@ -10,6 +10,7 @@ import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.core.BlockPos
+import net.minecraft.world.phys.Vec3
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -98,18 +99,22 @@ object RedstoneToolRenderer {
         vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
 
         val tesselator = Tesselator.getInstance()
-        val buffer = tesselator.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR)
+        val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
 
-        val alpha = 1f
+        val alpha = 0.45f
         val red = 1f
         val green = 0f
         val blue = 0f
 
-        if (mainBlockPos != null) renderCube(buffer, mainBlockPos!!, alpha, red, green, blue)
-        if (linkedBlockPos != null) renderCube(buffer, linkedBlockPos!!, alpha, red, green, blue)
+        if (mainBlockPos != null) {
+            renderCube(buffer, mainBlockPos!!.center, alpha, red, green, blue)
+        }
+        if (linkedBlockPos != null) {
+            renderCube(buffer, linkedBlockPos!!.center, alpha, red, green, blue)
+        }
 
         if (mainBlockPos != null && linkedBlockPos != null) {
-            renderLine(buffer, mainBlockPos!!, linkedBlockPos!!, alpha, red, green, blue)
+            renderLine(buffer, mainBlockPos!!.center, linkedBlockPos!!.center, alpha, red, green, blue)
         }
 
         val build = buffer.build()
@@ -136,10 +141,27 @@ object RedstoneToolRenderer {
         buffer.addVertex(x2, y2, z2).setColor(red, green, blue, alpha)
     }
 
+    private fun drawQuad(
+        buffer: BufferBuilder,
+        x1: Float, y1: Float, z1: Float,
+        x2: Float, y2: Float, z2: Float,
+        x3: Float, y3: Float, z3: Float,
+        x4: Float, y4: Float, z4: Float,
+        alpha: Float,
+        red: Float,
+        green: Float,
+        blue: Float
+    ) {
+        buffer.addVertex(x1, y1, z1).setColor(red, green, blue, alpha)
+        buffer.addVertex(x2, y2, z2).setColor(red, green, blue, alpha)
+        buffer.addVertex(x3, y3, z3).setColor(red, green, blue, alpha)
+        buffer.addVertex(x4, y4, z4).setColor(red, green, blue, alpha)
+    }
+
     private fun renderLine(
         buffer: BufferBuilder,
-        blockPos1: BlockPos,
-        blockPos2: BlockPos,
+        startPos: Vec3,
+        endPos: Vec3,
         alpha: Float,
         red: Float,
         green: Float,
@@ -147,12 +169,12 @@ object RedstoneToolRenderer {
     ) {
         renderLine(
             buffer,
-            blockPos1.x.toFloat(),
-            blockPos1.y.toFloat(),
-            blockPos1.z.toFloat(),
-            blockPos2.x.toFloat(),
-            blockPos2.y.toFloat(),
-            blockPos2.z.toFloat(),
+            startPos.x.toFloat(),
+            startPos.y.toFloat(),
+            startPos.z.toFloat(),
+            endPos.x.toFloat(),
+            endPos.y.toFloat(),
+            endPos.z.toFloat(),
             alpha,
             red,
             green,
@@ -162,35 +184,52 @@ object RedstoneToolRenderer {
 
     private fun renderCube(
         buffer: BufferBuilder,
-        blockPos: BlockPos,
+        center: Vec3,
         alpha: Float,
         red: Float,
         green: Float,
         blue: Float
     ) {
-        val cubeSize = 0.5f
-        val x1 = blockPos.x - cubeSize / 2
-        val y1 = blockPos.y - cubeSize / 2
-        val z1 = blockPos.z - cubeSize / 2
-        val x2 = blockPos.x + cubeSize / 2
-        val y2 = blockPos.y + cubeSize / 2
-        val z2 = blockPos.z + cubeSize / 2
+        val cubeRadius = 0.4f
 
-        renderLine(buffer, x1, y1, z1, x2, y1, z1, alpha, red, green, blue)
-        renderLine(buffer, x1, y1, z1, x1, y2, z1, alpha, red, green, blue)
-        renderLine(buffer, x1, y1, z1, x1, y1, z2, alpha, red, green, blue)
+        val x1 = center.x.toFloat() - cubeRadius
+        val y1 = center.y.toFloat() - cubeRadius
+        val z1 = center.z.toFloat() - cubeRadius
 
-        renderLine(buffer, x2, y1, z1, x2, y2, z1, alpha, red, green, blue)
-        renderLine(buffer, x2, y1, z1, x2, y1, z2, alpha, red, green, blue)
-        renderLine(buffer, x1, y2, z1, x2, y2, z1, alpha, red, green, blue)
+        val x2 = center.x.toFloat() + cubeRadius
+        val y2 = center.y.toFloat() - cubeRadius
+        val z2 = center.z.toFloat() - cubeRadius
 
-        renderLine(buffer, x1, y2, z1, x1, y2, z2, alpha, red, green, blue)
-        renderLine(buffer, x1, y1, z2, x2, y1, z2, alpha, red, green, blue)
-        renderLine(buffer, x1, y1, z2, x1, y2, z2, alpha, red, green, blue)
+        val x3 = center.x.toFloat() + cubeRadius
+        val y3 = center.y.toFloat() + cubeRadius
+        val z3 = center.z.toFloat() - cubeRadius
 
-        renderLine(buffer, x1, y2, z2, x2, y2, z2, alpha, red, green, blue)
-        renderLine(buffer, x2, y1, z2, x2, y2, z2, alpha, red, green, blue)
-        renderLine(buffer, x2, y2, z1, x2, y2, z2, alpha, red, green, blue)
+        val x4 = center.x.toFloat() - cubeRadius
+        val y4 = center.y.toFloat() + cubeRadius
+        val z4 = center.z.toFloat() - cubeRadius
+
+        val x5 = center.x.toFloat() - cubeRadius
+        val y5 = center.y.toFloat() - cubeRadius
+        val z5 = center.z.toFloat() + cubeRadius
+
+        val x6 = center.x.toFloat() + cubeRadius
+        val y6 = center.y.toFloat() - cubeRadius
+        val z6 = center.z.toFloat() + cubeRadius
+
+        val x7 = center.x.toFloat() + cubeRadius
+        val y7 = center.y.toFloat() + cubeRadius
+        val z7 = center.z.toFloat() + cubeRadius
+
+        val x8 = center.x.toFloat() - cubeRadius
+        val y8 = center.y.toFloat() + cubeRadius
+        val z8 = center.z.toFloat() + cubeRadius
+
+        drawQuad(buffer, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, alpha, red, green, blue)
+        drawQuad(buffer, x5, y5, z5, x6, y6, z6, x7, y7, z7, x8, y8, z8, alpha, red, green, blue)
+        drawQuad(buffer, x1, y1, z1, x2, y2, z2, x6, y6, z6, x5, y5, z5, alpha, red, green, blue)
+        drawQuad(buffer, x2, y2, z2, x3, y3, z3, x7, y7, z7, x6, y6, z6, alpha, red, green, blue)
+        drawQuad(buffer, x3, y3, z3, x4, y4, z4, x8, y8, z8, x7, y7, z7, alpha, red, green, blue)
+        drawQuad(buffer, x4, y4, z4, x1, y1, z1, x5, y5, z5, x8, y8, z8, alpha, red, green, blue)
     }
 
 }
