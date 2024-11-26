@@ -40,7 +40,6 @@ object RedstoneToolRenderer {
         if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
 
         val toolLocation = itemInHand.get(ModDataComponents.LOCATION) ?: return
-
         if (toolLocation.dimension != player.level().dimension()) return
 
         val toolBlockPos = toolLocation.blockPos

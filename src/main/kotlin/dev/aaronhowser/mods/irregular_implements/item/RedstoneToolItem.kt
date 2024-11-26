@@ -82,6 +82,7 @@ class RedstoneToolItem : Item(
             return InteractionResult.FAIL
         }
 
+        //FIXME: Not updating on client?
         baseBlockEntity.linkedPos = clickedPos
 
         player.displayClientMessage(
