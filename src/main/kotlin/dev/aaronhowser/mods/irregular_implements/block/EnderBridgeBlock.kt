@@ -7,6 +7,9 @@ import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.Mth
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -46,7 +49,7 @@ class EnderBridgeBlock(
          * Only stops searching if it reaches the maximum iterations, or if it's found an Anchor.
          */
         fun searchForAnchor(
-            level: Level,
+            level: ServerLevel,
             distanceToSearch: Int,
             bridgePos: BlockPos,
             searchOrigin: BlockPos,
@@ -58,12 +61,48 @@ class EnderBridgeBlock(
                 return
             }
 
+            val players = level.players()
+
             for (i in 0 until distanceToSearch) {
                 val pos = searchOrigin.relative(direction, i)
                 if (!level.isLoaded(pos)) continue
 
+                if (iterations % 4 == 0) {
+                    val particleCount = (1 + Mth.ceil(iterations.toDouble() / 20)).coerceIn(1, 100)
+                    val particleSpeed = (0.5 + iterations / 30.0).coerceIn(0.5, 3.0)
+
+                    for (player in players) {
+                        level.sendParticles(
+                            ParticleTypes.PORTAL,
+                            bridgePos.x + 0.5,
+                            bridgePos.y + 2.5,
+                            bridgePos.z + 0.5,
+                            particleCount,
+                            0.0,
+                            0.0,
+                            0.0,
+                            particleSpeed
+                        )
+                    }
+                }
+
                 val state = level.getBlockState(pos)
                 if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
+                    val particleCount = (1 + Mth.ceil(iterations.toDouble() / 20)).coerceIn(10, 100)
+                    for (player in players) {
+                        level.sendParticles(
+                            ParticleTypes.REVERSE_PORTAL,
+                            pos.x + 0.5,
+                            pos.y + 1.5,
+                            pos.z + 0.5,
+                            particleCount,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.5
+                        )
+                    }
+
                     foundAnchor(level, bridgePos, pos)
                     return
                 }
@@ -146,7 +185,7 @@ class EnderBridgeBlock(
         fromPos: BlockPos,
         isMoving: Boolean
     ) {
-        if (level.isClientSide) return
+        if (level !is ServerLevel) return
 
         val isPowered = level.hasNeighborSignal(pos)
         if (!isPowered) return
@@ -164,7 +203,6 @@ class EnderBridgeBlock(
             direction = direction,
             iterations = 0
         )
-
     }
 
 }
