@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registries.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
@@ -13,6 +15,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.util.Mth
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -43,6 +46,14 @@ class EnderBridgeBlock(
 
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 
+        //FIXME: Sometimes doesn't grab players that are stepping on it
+        private fun getEntities(level: Level, bridgePos: BlockPos): List<Entity> {
+            return level.getEntities(
+                null,
+                AABB.ofSize(bridgePos.above().toVec3(), 1.25, 2.5, 1.25)
+            )
+        }
+
         //TODO: Config
         private const val MAX_ITERATIONS = Int.MAX_VALUE
 
@@ -53,7 +64,7 @@ class EnderBridgeBlock(
          */
         fun searchForAnchor(
             level: ServerLevel,
-            distanceToSearch: Int,
+            blocksPerIteration: Int,
             bridgePos: BlockPos,
             searchOrigin: BlockPos,
             direction: Direction,
@@ -61,12 +72,20 @@ class EnderBridgeBlock(
         ) {
             if (iterations >= MAX_ITERATIONS) {
                 turnOffBridge(level, bridgePos, bridgeFailed = true)
+
+                val component = ModLanguageProvider.Messages.ENDER_BRIDGE_ITERATIONS
+                    .toComponent(iterations * blocksPerIteration)
+
+                for (entity in getEntities(level, bridgePos)) {
+                    entity.sendSystemMessage(component)
+                }
+
                 return
             }
 
             val players = level.players()
 
-            for (i in 0 until distanceToSearch) {
+            for (i in 0 until blocksPerIteration) {
                 val pos = searchOrigin.relative(direction, i)
                 if (!level.isLoaded(pos)) continue
 
@@ -114,6 +133,16 @@ class EnderBridgeBlock(
 
                 if (state.isCollisionShapeFullBlock(level, pos)) {
                     turnOffBridge(level, bridgePos, bridgeFailed = true)
+
+                    val blockName = state.block.name
+
+                    val component = ModLanguageProvider.Messages.ENDER_BRIDGE_HIT_BLOCK
+                        .toComponent(blockName, pos.x, pos.y, pos.z)
+
+                    for (entity in getEntities(level, bridgePos)) {
+                        entity.sendSystemMessage(component)
+                    }
+
                     return
                 }
             }
@@ -121,11 +150,11 @@ class EnderBridgeBlock(
             ServerScheduler.scheduleTaskInTicks(1) {
                 searchForAnchor(
                     level = level,
-                    distanceToSearch = distanceToSearch,
+                    blocksPerIteration = blocksPerIteration,
                     bridgePos = bridgePos,
                     searchOrigin = searchOrigin.relative(direction),
                     direction = direction,
-                    iterations = iterations + distanceToSearch
+                    iterations = iterations + blocksPerIteration
                 )
             }
         }
@@ -135,13 +164,7 @@ class EnderBridgeBlock(
             bridgePos: BlockPos,
             anchorPos: BlockPos
         ) {
-            //FIXME: Sometimes doesn't grab players that are stepping on it
-            val entitiesOnBridge = level.getEntities(
-                null,
-                AABB.ofSize(bridgePos.above().toVec3(), 1.25, 2.5, 1.25)
-            )
-
-            for (entity in entitiesOnBridge) {
+            for (entity in getEntities(level, bridgePos)) {
                 entity.teleportTo(
                     anchorPos.x + 0.5,
                     anchorPos.y + 1.0,
@@ -220,7 +243,7 @@ class EnderBridgeBlock(
         val direction = state.getValue(FACING)
         searchForAnchor(
             level = level,
-            distanceToSearch = distancePerTick,
+            blocksPerIteration = distancePerTick,
             bridgePos = pos,
             searchOrigin = pos.relative(direction),
             direction = direction,

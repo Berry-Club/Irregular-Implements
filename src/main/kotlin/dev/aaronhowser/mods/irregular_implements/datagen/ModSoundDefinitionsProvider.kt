@@ -21,7 +21,7 @@ class ModSoundDefinitionsProvider(
                 .with(
                     sound(OtherUtil.modResource("fart"), SoundDefinition.SoundType.SOUND)
                 )
-                .subtitle(ModLanguageProvider.Subtitle.FART)
+                .subtitle(ModLanguageProvider.Subtitles.FART)
         )
 
     }

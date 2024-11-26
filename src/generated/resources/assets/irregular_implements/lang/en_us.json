@@ -354,6 +354,8 @@
   "item.irregular_implements.weather_egg_stormy": "Weather Egg (Stormy)",
   "item.irregular_implements.weather_egg_sunny": "Weather Egg (Sunny)",
   "itemGroup.irregular_implements": "Irregular Implements",
+  "message.irregular_implements.ender_bridge.hit_block": "Ender Bridge stopped searching because it hit a %s at %d %d %d.",
+  "message.irregular_implements.ender_bridge.iterations": "Ender Bridge stopped searching after %d blocks.",
   "subtitle.irregular_implements.fart": "Pbbbt",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",

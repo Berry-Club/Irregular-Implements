@@ -37,14 +37,25 @@ class ModLanguageProvider(
         addInfo()
         addEffects()
         addSubtitles()
+        addMessages()
     }
 
-    object Subtitle {
+    object Messages {
+        const val ENDER_BRIDGE_ITERATIONS = "message.irregular_implements.ender_bridge.iterations"
+        const val ENDER_BRIDGE_HIT_BLOCK = "message.irregular_implements.ender_bridge.hit_block"
+    }
+
+    private fun addMessages() {
+        add(Messages.ENDER_BRIDGE_ITERATIONS, "Ender Bridge stopped searching after %d blocks.")
+        add(Messages.ENDER_BRIDGE_HIT_BLOCK, "Ender Bridge stopped searching because it hit a %s at %d %d %d.")
+    }
+
+    object Subtitles {
         const val FART = "subtitle.irregular_implements.fart"
     }
 
     private fun addSubtitles() {
-        add(Subtitle.FART, "Pbbbt")
+        add(Subtitles.FART, "Pbbbt")
     }
 
     object Items {
