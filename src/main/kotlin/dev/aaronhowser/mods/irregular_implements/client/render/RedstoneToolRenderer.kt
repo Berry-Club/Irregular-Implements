@@ -144,18 +144,12 @@ object RedstoneToolRenderer {
         val maxY = pos.y + cubeRadius
         val maxZ = pos.z + cubeRadius
 
-        val minU = 0.0f
-        val minV = 0.0f
-
-        val maxU = 1.0f
-        val maxV = 1.0f
-
-        renderQuad(pose, consumer, color, minX, minY, minZ, maxX, minY, maxZ, minU, minV, maxU, maxV)
-        renderQuad(pose, consumer, color, minX, maxY, minZ, maxX, maxY, maxZ, minU, minV, maxU, maxV)
-        renderQuad(pose, consumer, color, minX, minY, minZ, minX, maxY, maxZ, minU, minV, maxU, maxV)
-        renderQuad(pose, consumer, color, maxX, minY, minZ, maxX, maxY, maxZ, minU, minV, maxU, maxV)
-        renderQuad(pose, consumer, color, minX, minY, minZ, maxX, maxY, minZ, minU, minV, maxU, maxV)
-        renderQuad(pose, consumer, color, minX, minY, maxZ, maxX, maxY, maxZ, minU, minV, maxU, maxV)
+        renderQuad(pose, consumer, color, minX, minY, minZ, maxX, minY, maxZ)
+        renderQuad(pose, consumer, color, minX, maxY, minZ, maxX, maxY, maxZ)
+        renderQuad(pose, consumer, color, minX, minY, minZ, minX, maxY, maxZ)
+        renderQuad(pose, consumer, color, maxX, minY, minZ, maxX, maxY, maxZ)
+        renderQuad(pose, consumer, color, minX, minY, minZ, maxX, maxY, minZ)
+        renderQuad(pose, consumer, color, minX, minY, maxZ, maxX, maxY, maxZ)
     }
 
     private fun renderQuad(
@@ -164,21 +158,18 @@ object RedstoneToolRenderer {
         color: Int,
         minX: Float, minY: Float, minZ: Float,
         maxX: Float, maxY: Float, maxZ: Float,
-        minU: Float, minV: Float,
-        maxU: Float, maxV: Float
     ) {
-        addVertex(pose, consumer, color, maxY, minX, minZ, maxU, minV)
-        addVertex(pose, consumer, color, minY, minX, minZ, maxU, maxV)
-        addVertex(pose, consumer, color, minY, maxX, maxZ, minU, maxV)
-        addVertex(pose, consumer, color, maxY, maxX, maxZ, minU, minV)
+        addVertex(pose, consumer, color, maxY, minX, minZ)
+        addVertex(pose, consumer, color, minY, minX, minZ)
+        addVertex(pose, consumer, color, minY, maxX, maxZ)
+        addVertex(pose, consumer, color, maxY, maxX, maxZ)
     }
 
     private fun addVertex(
-        pose: PoseStack.Pose, consumer: VertexConsumer, color: Int, y: Float, x: Float, z: Float, u: Float, v: Float
+        pose: PoseStack.Pose, consumer: VertexConsumer, color: Int, y: Float, x: Float, z: Float
     ) {
         consumer.addVertex(pose, x, y, z)
             .setColor(color)
-            .setUv(u, v)
             .setOverlay(OverlayTexture.NO_OVERLAY)
             .setLight(15728880)
             .setNormal(pose, 0.0f, 1.0f, 0.0f)
