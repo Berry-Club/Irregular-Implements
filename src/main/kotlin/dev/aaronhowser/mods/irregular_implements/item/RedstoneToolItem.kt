@@ -1,9 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
@@ -20,7 +21,7 @@ class RedstoneToolItem : Item(
 
         val clickedPos = context.clickedPos
         val clickedState = level.getBlockState(clickedPos)
-        val blockName = clickedState.block.name
+        val clickedBlockName = clickedState.block.name
         val clickedBlockEntity = level.getBlockEntity(clickedPos)
 
         val usedStack = context.itemInHand
@@ -30,7 +31,8 @@ class RedstoneToolItem : Item(
             usedStack.set(ModDataComponents.LOCATION, locationComponent)
 
             player.displayClientMessage(
-                Component.literal("Location set to the ").append(blockName).append(Component.literal(" at $clickedPos")),
+                ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_SET
+                    .toComponent(clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z),
                 true
             )
 
@@ -40,7 +42,7 @@ class RedstoneToolItem : Item(
         val locationComponent = usedStack.get(ModDataComponents.LOCATION)
         if (locationComponent == null) {
             player.displayClientMessage(
-                Component.literal("No location set"),
+                ModLanguageProvider.Messages.REDSTONE_TOOL_INVALID_BASE_BLOCK.toComponent(),
                 true
             )
 
@@ -49,37 +51,45 @@ class RedstoneToolItem : Item(
 
         if (level.dimension() != locationComponent.dimension) {
             player.displayClientMessage(
-                Component.literal("Location is in a different dimension"),
+                ModLanguageProvider.Messages.REDSTONE_TOOL_WRONG_DIMENSION.toComponent(),
                 true
             )
 
             return InteractionResult.FAIL
         }
 
-        val linkedBLockPos = locationComponent.blockPos
-        if (!level.isLoaded(linkedBLockPos)) {
+        val baseBlockPos = locationComponent.blockPos
+        val baseBlockName = locationComponent.blockName
+
+        if (!level.isLoaded(baseBlockPos)) {
             player.displayClientMessage(
-                Component.literal("Location is not loaded"),
+                ModLanguageProvider.Messages.REDSTONE_TOOL_UNLOADED
+                    .toComponent(baseBlockName),
                 true
             )
 
             return InteractionResult.FAIL
         }
 
-        val linkedBlockEntity = level.getBlockEntity(linkedBLockPos)
-        if (linkedBlockEntity !is RedstoneToolLinkable) {
+        val baseBlockEntity = level.getBlockEntity(baseBlockPos)
+        if (baseBlockEntity !is RedstoneToolLinkable) {
             player.displayClientMessage(
-                Component.literal("Location is not a valid block"),
+                ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_NOT_LINKABLE
+                    .toComponent(baseBlockName, level.getBlockState(baseBlockPos).block.name),
                 true
             )
 
             return InteractionResult.FAIL
         }
 
-        linkedBlockEntity.linkedPos = clickedPos
+        baseBlockEntity.linkedPos = clickedPos
 
         player.displayClientMessage(
-            Component.literal("Linked the ").append(blockName).append(Component.literal(" at $clickedPos")),
+            ModLanguageProvider.Messages.REDSTONE_TOOL_LINKED
+                .toComponent(
+                    clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z,
+                    baseBlockName, baseBlockPos.x, baseBlockPos.y, baseBlockPos.z
+                ),
             true
         )
 

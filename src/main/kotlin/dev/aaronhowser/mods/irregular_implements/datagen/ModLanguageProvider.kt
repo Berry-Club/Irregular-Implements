@@ -43,11 +43,25 @@ class ModLanguageProvider(
     object Messages {
         const val ENDER_BRIDGE_ITERATIONS = "message.irregular_implements.ender_bridge.iterations"
         const val ENDER_BRIDGE_HIT_BLOCK = "message.irregular_implements.ender_bridge.hit_block"
+
+        const val REDSTONE_TOOL_BASE_SET = "message.irregular_implements.redstone_tool.base_block_set"
+        const val REDSTONE_TOOL_INVALID_BASE_BLOCK = "message.irregular_implements.redstone_tool.no_base_block"
+        const val REDSTONE_TOOL_WRONG_DIMENSION = "message.irregular_implements.redstone_tool.wrong_dimension"
+        const val REDSTONE_TOOL_UNLOADED = "message.irregular_implements.redstone_tool.unloaded"
+        const val REDSTONE_TOOL_BASE_NOT_LINKABLE = "message.irregular_implements.redstone_tool.base_not_linkable"
+        const val REDSTONE_TOOL_LINKED = "message.irregular_implements.redstone_tool.linked"
     }
 
     private fun addMessages() {
         add(Messages.ENDER_BRIDGE_ITERATIONS, "Ender Bridge stopped searching after %d blocks.")
         add(Messages.ENDER_BRIDGE_HIT_BLOCK, "Ender Bridge stopped searching because it hit a %s at %d %d %d.")
+
+        add(Messages.REDSTONE_TOOL_BASE_SET, "Redstone Tool linked to the %s at %d %d %d.")
+        add(Messages.REDSTONE_TOOL_INVALID_BASE_BLOCK, "Cannot link as no base block is set.")
+        add(Messages.REDSTONE_TOOL_WRONG_DIMENSION, "Cannot link as base %s is in a different dimension.")
+        add(Messages.REDSTONE_TOOL_UNLOADED, "Cannot link as base %s is in an unloaded chunk.")
+        add(Messages.REDSTONE_TOOL_BASE_NOT_LINKABLE, "Cannot link as base %s was replaced with a %s.")
+        add(Messages.REDSTONE_TOOL_LINKED, "Linked the %s at %d %d %d to the %s at %d %d %d.")
     }
 
     object Subtitles {
