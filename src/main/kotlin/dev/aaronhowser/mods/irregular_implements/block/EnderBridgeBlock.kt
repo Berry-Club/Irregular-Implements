@@ -93,8 +93,8 @@ class EnderBridgeBlock(
         ) {
             val entitiesOnBridge = level.getEntities(
                 null,
-                AABB.ofSize(bridgePos.toVec3(), 2.5, 2.5, 2.5)
-            ).filter { it.blockPosBelowThatAffectsMyMovement == bridgePos }
+                AABB.ofSize(bridgePos.above().toVec3(), 1.1, 2.5, 1.1)
+            )
 
             for (entity in entitiesOnBridge) {
                 entity.teleportTo(
