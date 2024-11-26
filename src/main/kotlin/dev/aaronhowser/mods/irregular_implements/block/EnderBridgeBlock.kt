@@ -37,7 +37,8 @@ class EnderBridgeBlock(
 
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 
-        val MAX_ITERATIONS = 100
+        //TODO: Config
+        private const val MAX_ITERATIONS = Int.MAX_VALUE
 
         /**
          * Searches for an anchor block in the given direction.
@@ -52,27 +53,25 @@ class EnderBridgeBlock(
             direction: Direction,
             iterations: Int
         ) {
-            if (iterations > MAX_ITERATIONS) {
+            if (iterations >= MAX_ITERATIONS) {
                 turnOffBridge(level, bridgePos)
                 return
             }
 
             for (i in 0 until distanceToSearch) {
                 val pos = searchOrigin.relative(direction, i)
+                if (!level.isLoaded(pos)) continue
 
-                if (level.isLoaded(pos)) {
-                    val state = level.getBlockState(pos)
-                    if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
-                        foundAnchor(level, bridgePos, pos)
-                        return
-                    }
-
-                    if (state.isCollisionShapeFullBlock(level, pos)) {
-                        turnOffBridge(level, bridgePos)
-                        return
-                    }
+                val state = level.getBlockState(pos)
+                if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
+                    foundAnchor(level, bridgePos, pos)
+                    return
                 }
 
+                if (state.isCollisionShapeFullBlock(level, pos)) {
+                    turnOffBridge(level, bridgePos)
+                    return
+                }
             }
 
             ServerScheduler.scheduleTaskInTicks(1) {
