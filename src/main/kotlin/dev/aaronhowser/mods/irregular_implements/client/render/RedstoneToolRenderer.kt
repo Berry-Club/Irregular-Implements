@@ -145,18 +145,19 @@ object RedstoneToolRenderer {
         val maxY = pos.y + cubeRadius
         val maxZ = pos.z + cubeRadius
 
-        // Front face
+        // South face
         renderQuad(pose, consumer, color, minX, minY, maxZ, maxX, maxY, maxZ)
-        // Back face
+        // North face
         renderQuad(pose, consumer, color, maxX, minY, minZ, minX, maxY, minZ)
+        // West face
+        renderQuad(pose, consumer, color, minX, minY, minZ, minX, maxY, maxZ)
+        // East face
+        renderQuad(pose, consumer, color, maxX, minY, maxZ, maxX, maxY, minZ)
+
         // Top face
         renderQuad(pose, consumer, color, minX, maxY, minZ, maxX, maxY, maxZ)
         // Bottom face
         renderQuad(pose, consumer, color, minX, minY, maxZ, maxX, minY, minZ)
-        // Left face
-        renderQuad(pose, consumer, color, minX, minY, minZ, minX, maxY, maxZ)
-        // Right face
-        renderQuad(pose, consumer, color, maxX, minY, maxZ, maxX, maxY, minZ)
     }
 
     private fun renderQuad(
