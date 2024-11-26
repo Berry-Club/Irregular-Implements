@@ -36,6 +36,15 @@ class ModLanguageProvider(
         addBlocks()
         addInfo()
         addEffects()
+        addSubtitles()
+    }
+
+    object Subtitle {
+        const val FART = "subtitle.irregular_implements.fart"
+    }
+
+    private fun addSubtitles() {
+        add(Subtitle.FART, "Pbbbt")
     }
 
     object Items {

@@ -4,11 +4,14 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registries.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.util.Mth
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
@@ -57,7 +60,7 @@ class EnderBridgeBlock(
             iterations: Int
         ) {
             if (iterations >= MAX_ITERATIONS) {
-                turnOffBridge(level, bridgePos)
+                turnOffBridge(level, bridgePos, bridgeFailed = true)
                 return
             }
 
@@ -88,6 +91,8 @@ class EnderBridgeBlock(
 
                 val state = level.getBlockState(pos)
                 if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
+
+                    //TODO: Particles not spawning?
                     val particleCount = (1 + Mth.ceil(iterations.toDouble() / 20)).coerceIn(10, 100)
                     for (player in players) {
                         level.sendParticles(
@@ -108,7 +113,7 @@ class EnderBridgeBlock(
                 }
 
                 if (state.isCollisionShapeFullBlock(level, pos)) {
-                    turnOffBridge(level, bridgePos)
+                    turnOffBridge(level, bridgePos, bridgeFailed = true)
                     return
                 }
             }
@@ -130,9 +135,10 @@ class EnderBridgeBlock(
             bridgePos: BlockPos,
             anchorPos: BlockPos
         ) {
+            //FIXME: Sometimes doesn't grab players that are stepping on it
             val entitiesOnBridge = level.getEntities(
                 null,
-                AABB.ofSize(bridgePos.above().toVec3(), 1.1, 2.5, 1.1)
+                AABB.ofSize(bridgePos.above().toVec3(), 1.25, 2.5, 1.25)
             )
 
             for (entity in entitiesOnBridge) {
@@ -143,18 +149,28 @@ class EnderBridgeBlock(
                 )
             }
 
-            turnOffBridge(level, bridgePos)
+            turnOffBridge(level, bridgePos, bridgeFailed = false)
         }
 
         private fun turnOffBridge(
             level: Level,
-            bridgePos: BlockPos
+            bridgePos: BlockPos,
+            bridgeFailed: Boolean
         ) {
             val state = level.getBlockState(bridgePos)
             if (!state.getValue(ENABLED)) return
 
             val newState = state.setValue(ENABLED, false)
             level.setBlockAndUpdate(bridgePos, newState)
+
+            val soundEvent = if (bridgeFailed) ModSounds.FART.get() else SoundEvents.ENDERMAN_TELEPORT
+
+            level.playSound(
+                null,
+                bridgePos.above(),
+                soundEvent,
+                SoundSource.BLOCKS
+            )
         }
     }
 

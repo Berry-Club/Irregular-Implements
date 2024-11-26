@@ -61,6 +61,11 @@ object ModDataGen {
             )
         )
 
+        val soundDefinitionsProvider = generator.addProvider(
+            event.includeClient(),
+            ModSoundDefinitionsProvider(output, existingFileHelper)
+        )
+
         val blockTagProvider = generator.addProvider(
             event.includeServer(),
             ModBlockTagsProvider(output, lookupProvider, existingFileHelper)

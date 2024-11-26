@@ -354,6 +354,7 @@
   "item.irregular_implements.weather_egg_stormy": "Weather Egg (Stormy)",
   "item.irregular_implements.weather_egg_sunny": "Weather Egg (Sunny)",
   "itemGroup.irregular_implements": "Irregular Implements",
+  "subtitle.irregular_implements.fart": "Pbbbt",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
   "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information"
