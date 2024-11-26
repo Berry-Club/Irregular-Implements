@@ -78,7 +78,7 @@ class EnderBridgeBlock(
                         level.sendParticles(
                             ParticleTypes.PORTAL,
                             bridgePos.x + 0.5,
-                            bridgePos.y + 2.5,
+                            bridgePos.y + 2.0,
                             bridgePos.z + 0.5,
                             particleCount,
                             0.0,
@@ -148,6 +148,13 @@ class EnderBridgeBlock(
                     anchorPos.z + 0.5
                 )
             }
+
+            level.playSound(
+                null,
+                anchorPos.above(),
+                SoundEvents.ENDERMAN_TELEPORT,
+                SoundSource.BLOCKS
+            )
 
             turnOffBridge(level, bridgePos, bridgeFailed = false)
         }
