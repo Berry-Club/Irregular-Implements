@@ -105,13 +105,14 @@ object RedstoneToolRenderer {
         val tesselator = Tesselator.getInstance()
         val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
 
-        val color = 0x66FF0000
+        val startColor = 0x66FF0000
+        val endColor = 0x660000FF
 
         if (mainBlockPos != null) {
-            renderCube(poseStack.last(), buffer, mainBlockPos!!.center.toVector3f(), color)
+            renderCube(poseStack.last(), buffer, mainBlockPos!!.center.toVector3f(), startColor)
         }
         if (linkedBlockPos != null) {
-            renderCube(poseStack.last(), buffer, linkedBlockPos!!.center.toVector3f(), color)
+            renderCube(poseStack.last(), buffer, linkedBlockPos!!.center.toVector3f(), endColor)
         }
 
         if (mainBlockPos != null && linkedBlockPos != null) {
