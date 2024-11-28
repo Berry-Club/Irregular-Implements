@@ -17,20 +17,6 @@ public class ReloadableStatics {
 
         if (livingEntity.isUnderWater()) return false;
 
-        var footY = livingEntity.position().y();
-        var fluidY = livingEntity.blockPosition().getY();
-        var fluidHeight = fluidState.getHeight(livingEntity.level(), livingEntity.blockPosition());
-        var surfaceY = fluidY + fluidHeight;
-
-        System.out.println("footY: " + footY);
-        System.out.println("fluidY: " + fluidY);
-        System.out.println("fluidHeight: " + fluidHeight);
-        System.out.println("surfaceY: " + surfaceY);
-        System.out.println("Feet under surface: " + (footY < surfaceY));
-        System.out.println("\n\n");
-
-        if (footY < surfaceY) return false;
-
         var wornBoots = livingEntity.getItemBySlot(EquipmentSlot.FEET);
 
         if (fluidState.is(ModFluidTagsProvider.getALLOWS_WATER_WALKING())) {
