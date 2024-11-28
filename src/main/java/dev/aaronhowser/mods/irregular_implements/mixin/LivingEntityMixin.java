@@ -37,7 +37,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             cancellable = true
     )
     private void irregular_implements$shouldDiscardFriction(CallbackInfoReturnable<Boolean> cir) {
-        if (checkShouldDiscardFriction((LivingEntity) (Object) this)) cir.setReturnValue(true);
+        if (checkShouldDiscardFriction()) cir.setReturnValue(true);
     }
 
     @ModifyVariable(

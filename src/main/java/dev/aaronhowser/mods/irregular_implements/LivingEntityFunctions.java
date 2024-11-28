@@ -7,7 +7,9 @@ import net.minecraft.world.entity.LivingEntity;
 
 public interface LivingEntityFunctions {
 
-    default boolean checkShouldDiscardFriction(LivingEntity livingEntity) {
+    default boolean checkShouldDiscardFriction() {
+        LivingEntity livingEntity = (LivingEntity) this;
+
         if (livingEntity.getDeltaMovement().lengthSqr() > 1f) return false;
 
         if (livingEntity.getItemBySlot(EquipmentSlot.FEET)
