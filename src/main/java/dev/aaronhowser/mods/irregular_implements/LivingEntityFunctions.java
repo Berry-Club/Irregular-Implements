@@ -24,6 +24,7 @@ public interface LivingEntityFunctions {
                 .is(ModBlockTagsProvider.getSUPER_LUBRICATED());
     }
 
+    //FIXME: Breaks if the player's footpos is under the surface of the water
     default boolean checkCanStandOnFluid(FluidState fluidState) {
         LivingEntity livingEntity = (LivingEntity) this;
 
