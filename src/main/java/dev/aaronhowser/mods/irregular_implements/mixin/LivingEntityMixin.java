@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
-import dev.aaronhowser.mods.irregular_implements.ReloadableStatics;
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
@@ -49,10 +48,9 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             )
     )
     private List<ParticleOptions> irregular_implements$hideMobEffectParticles(List<ParticleOptions> original) {
-        if (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD())) {
-            return List.of();
-        }
-        return original;
+        return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD()))
+                ? List.of()
+                : original;
     }
 
     @ModifyReturnValue(
@@ -62,7 +60,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
     private boolean irregular_implements$canStandOnFluid(boolean original, FluidState fluidState) {
         if (original) return true;
 
-        return ReloadableStatics.test((LivingEntity) (Object) this, fluidState);
+        return checkCanStandOnFluid(fluidState);
     }
 
 }
