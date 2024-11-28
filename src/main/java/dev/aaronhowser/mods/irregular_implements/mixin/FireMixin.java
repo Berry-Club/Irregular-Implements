@@ -9,11 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(FireBlock.class)
 public abstract class FireMixin implements BetterFire {
 
-    @Override
-    public float irregular_implements$getTickDelayFactor() {
-        return 1.0f;
-    }
-
     @ModifyExpressionValue(
             method = "tick",
             at = @At(
