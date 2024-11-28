@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
 import dev.aaronhowser.mods.irregular_implements.ReloadableStatics;
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider;
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
+public abstract class LivingEntityMixin extends Entity implements LivingEntityFunctions {
 
     public LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -37,23 +37,8 @@ public abstract class LivingEntityMixin extends Entity {
             cancellable = true
     )
     private void irregular_implements$shouldDiscardFriction(CallbackInfoReturnable<Boolean> cir) {
-        if (getDeltaMovement().lengthSqr() > 1f) return;
-
-        if (this.getItemBySlot(EquipmentSlot.FEET)
-                .is(ModItems.getSUPER_LUBRICANT_BOOTS())
-        ) {
-            cir.setReturnValue(true);
-            return;
-        }
-
-        if (this.level()
-                .getBlockState(this.getBlockPosBelowThatAffectsMyMovement())
-                .is(ModBlockTagsProvider.getSUPER_LUBRICATED())
-        ) {
-            cir.setReturnValue(true);
-        }
+        if (checkShouldDiscardFriction((LivingEntity) (Object) this)) cir.setReturnValue(true);
     }
-
 
     @ModifyVariable(
             method = "tickEffects",
