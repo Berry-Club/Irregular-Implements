@@ -30,7 +30,6 @@ object ModItems {
     val OBSIDIAN_SKULL = basic("obsidian_skull")
     val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
     val OBSIDIAN_WATER_WALKING_BOOTS = basic("obsidian_water_walking_boots")
-    @JvmStatic
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
         register("magic_hood") {
             ArmorItem(
