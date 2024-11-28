@@ -23,21 +23,7 @@ object ModItems {
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
     val MAGIC_BEAN = basic("magic_bean")
     val BEAN_STEW = basic("bean_stew")
-    val WATER_WALKING_BOOTS = basic("water_walking_boots")
     val LOOT_GENERATOR = basic("loot_generator")
-    val LAVA_CHARM = basic("lava_charm")
-    val LAVA_WADERS = basic("lava_waders")
-    val OBSIDIAN_SKULL = basic("obsidian_skull")
-    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
-    val OBSIDIAN_WATER_WALKING_BOOTS = basic("obsidian_water_walking_boots")
-    val MAGIC_HOOD: DeferredItem<ArmorItem> =
-        register("magic_hood") {
-            ArmorItem(
-                ArmorMaterials.CHAIN,   //TODO: Something that allows a custom texture
-                ArmorItem.Type.HELMET,
-                Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))
-            )
-        }
     val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
@@ -64,6 +50,36 @@ object ModItems {
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
+
+    // Armors
+    val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
+        register("water_walking_boots") {
+            ArmorItem(
+                ArmorMaterials.CHAIN,
+                ArmorItem.Type.BOOTS,
+                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
+            )
+        }
+    val LAVA_CHARM = basic("lava_charm")
+    val LAVA_WADERS: DeferredItem<ArmorItem> =
+        register("lava_waders") {
+            ArmorItem(
+                ArmorMaterials.CHAIN,
+                ArmorItem.Type.BOOTS,
+                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
+            )
+        }
+    val OBSIDIAN_SKULL = basic("obsidian_skull")
+    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
+    val OBSIDIAN_WATER_WALKING_BOOTS = basic("obsidian_water_walking_boots")
+    val MAGIC_HOOD: DeferredItem<ArmorItem> =
+        register("magic_hood") {
+            ArmorItem(
+                ArmorMaterials.CHAIN,   //TODO: Something that allows a custom texture
+                ArmorItem.Type.HELMET,
+                Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))
+            )
+        }
 
     // Weather Eggs
     val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =
