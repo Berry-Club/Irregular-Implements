@@ -15,14 +15,14 @@ class LubricateBootRecipe(
     craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-    val bootIngredient: Ingredient
-    val lubeIngredient: Ingredient = Ingredient.of(ModItems.SUPER_LUBRICANT_TINCTURE)
-
-    init {
-        val boots = BuiltInRegistries.ITEM.filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }.map { it.defaultInstance }
-
-        bootIngredient = Ingredient.of(*boots.toTypedArray())
+    companion object {
+        val boots = BuiltInRegistries.ITEM
+            .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
+            .map { it.defaultInstance }
     }
+
+    val bootIngredient: Ingredient = Ingredient.of(*boots.toTypedArray())
+    val lubeIngredient: Ingredient = Ingredient.of(ModItems.SUPER_LUBRICANT_TINCTURE)
 
     override fun matches(input: CraftingInput, level: Level): Boolean {
         var bootStack: ItemStack? = null
