@@ -69,14 +69,6 @@ class ModArmorItems(
             )
         }
 
-        val SUPER_LUBRICANT_BOOTS by lazy {
-            ArmorItem(
-                ModArmorMaterials.SUPER_LUBRICANT,
-                Type.BOOTS,
-                Properties().durability(Type.BOOTS.getDurability(15))
-            )
-        }
-
         val MAGIC_HOOD by lazy {
             ArmorItem(
                 ModArmorMaterials.MAGIC,

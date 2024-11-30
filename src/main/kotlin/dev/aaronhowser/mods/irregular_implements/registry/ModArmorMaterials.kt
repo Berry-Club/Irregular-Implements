@@ -6,9 +6,12 @@ import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
@@ -20,31 +23,22 @@ object ModArmorMaterials {
         DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, IrregularImplements.ID)
 
     val WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("water_walking", Builder())
+        register("water_walking", Builder().repair(Tags.Items.INGOTS_IRON))
 
     val OBSIDIAN_WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("obsidian_water_walking", Builder())
+        register("obsidian_water_walking", Builder().repair(Tags.Items.INGOTS_IRON))
 
     val LAVA_WADERS: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("lava_waders", Builder())
-
-    val SUPER_LUBRICANT: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("super_lubricant", Builder())
+        register("lava_waders", Builder().repair(Tags.Items.INGOTS_IRON))
 
     val MAGIC: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("magic", Builder())
+        register("magic", Builder().repair(Tags.Items.LEATHERS))
 
 
     private fun register(id: String, builder: Builder): DeferredHolder<ArmorMaterial, ArmorMaterial> {
-        val baseLayer = ArmorMaterial.Layer(OtherUtil.modResource(id))
+        val layer = ArmorMaterial.Layer(OtherUtil.modResource(id))
 
-        if (builder.layers == null) {
-            builder.layers = mutableListOf(baseLayer)
-        } else {
-            builder.layers!!.addFirst(baseLayer)
-        }
-
-        return ARMOR_MATERIAL_REGISTRY.register(id, Supplier { builder.build() })
+        return ARMOR_MATERIAL_REGISTRY.register(id, Supplier { builder.build(layer) })
     }
 
     private class Builder {
@@ -57,9 +51,18 @@ object ModArmorMaterials {
         private var enchantValue = 10
         private var equipSound: Holder<SoundEvent> = SoundEvents.ARMOR_EQUIP_GENERIC
         private var repairIngredient = Supplier { Ingredient.EMPTY }
-        var layers: MutableList<ArmorMaterial.Layer>? = null
 
-        fun build(): ArmorMaterial {
+        fun boot(armour: Int): Builder {
+            bootsArmour = armour
+            return this
+        }
+
+        fun repair(tag: TagKey<Item>): Builder {
+            repairIngredient = Supplier { Ingredient.of(tag) }
+            return this
+        }
+
+        fun build(layer: ArmorMaterial.Layer): ArmorMaterial {
             return ArmorMaterial(
                 mapOf(
                     ArmorItem.Type.BOOTS to bootsArmour,
@@ -70,7 +73,7 @@ object ModArmorMaterials {
                 enchantValue,
                 equipSound,
                 repairIngredient,
-                layers!!,
+                listOf(layer),
                 toughness,
                 knockbackResist
             )
