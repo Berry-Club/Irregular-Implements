@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-30T08:58:32.2241722	Loot Tables
+// 1.21.1	2024-11-30T10:04:03.1126379	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -40,7 +40,7 @@ a1ee5e88d803bf26555fe71524b5fa8a8a2bbbef data/irregular_implements/loot_table/bl
 bb8420afb2a4c57e5faa9dbd08647f0a9ec79116 data/irregular_implements/loot_table/blocks/colored_grass_red.json
 e9cb224960ac0c68ae326551524af8440268775b data/irregular_implements/loot_table/blocks/colored_grass_white.json
 1f1d4b67270d00cefbd6527f52350e747cc2628c data/irregular_implements/loot_table/blocks/colored_grass_yellow.json
-1e19d979c25f42c7a8a100095f8d0bcabf3d4f92 data/irregular_implements/loot_table/blocks/compressed_slime_block.json
+27e317faf99a52c0a357105da829398d6e74d30f data/irregular_implements/loot_table/blocks/compressed_slime_block.json
 3766305083844d2ce8ff505b44838e0192a1f99b data/irregular_implements/loot_table/blocks/contact_button.json
 8103fb5a61ab063981bd8f3fb6eb7e4febfbceb5 data/irregular_implements/loot_table/blocks/contact_lever.json
 1ff6eb3b3b31c72b31c07d08fa53b9ac666db1c5 data/irregular_implements/loot_table/blocks/corrector_plate.json

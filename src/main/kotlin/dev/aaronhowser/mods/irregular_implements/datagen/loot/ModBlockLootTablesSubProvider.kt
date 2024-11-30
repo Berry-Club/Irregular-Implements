@@ -7,6 +7,7 @@ import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 
 class ModBlockLootTablesSubProvider(
     provider: HolderLookup.Provider
@@ -26,6 +27,8 @@ class ModBlockLootTablesSubProvider(
             add(block) { createSingleItemTableWithSilkTouch(it, Items.DIRT) }
         }
 
+        add(ModBlocks.COMPRESSED_SLIME_BLOCK.get()) { createSingleItemTable(Blocks.SLIME_BLOCK) }
+
     }
 
     private val dropsDirtWithoutSilkTouch = buildList {
@@ -38,7 +41,9 @@ class ModBlockLootTablesSubProvider(
         ModBlocks.BLAZE_FIRE
     ).map { it.get() }.toSet()
 
-    private val nonDropSelfBlocks: Set<Block> = noDropBlocks + dropsDirtWithoutSilkTouch
+    private val nonDropSelfBlocks: Set<Block> = noDropBlocks + dropsDirtWithoutSilkTouch + setOf(
+        ModBlocks.COMPRESSED_SLIME_BLOCK.get()
+    )
 
     override fun getKnownBlocks(): List<Block> {
         return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }

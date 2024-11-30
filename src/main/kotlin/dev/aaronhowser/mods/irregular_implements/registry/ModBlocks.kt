@@ -26,7 +26,8 @@ object ModBlocks {
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val RAIN_SHIELD =
         registerBlock("rain_shield") { RainShieldBlock() }
-    val COMPRESSED_SLIME_BLOCK = basicBlock("compressed_slime_block")
+    val COMPRESSED_SLIME_BLOCK: DeferredBlock<CompressedSlimeBlock> =
+        registerBlock("compressed_slime_block") { CompressedSlimeBlock() }
     val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")

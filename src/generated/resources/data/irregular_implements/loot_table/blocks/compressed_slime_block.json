@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:compressed_slime_block"
+          "name": "minecraft:slime_block"
         }
       ],
       "rolls": 1.0

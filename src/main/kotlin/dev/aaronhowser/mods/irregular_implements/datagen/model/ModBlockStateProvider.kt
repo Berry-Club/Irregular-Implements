@@ -37,6 +37,53 @@ class ModBlockStateProvider(
         biomeBlocks()
         enderBridges()
         fertilizedDirt()
+        compressedSlime()
+    }
+
+    //FIXME: Make it 2 layers with 1 transparent, like real slime block
+    private fun compressedSlime() {
+        val block = ModBlocks.COMPRESSED_SLIME_BLOCK.get()
+
+        val texture = mcLoc("block/slime_block")
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val compressionLevel = it.getValue(CompressedSlimeBlock.COMPRESSION_LEVEL)
+                val modelName = name(block) + "_$compressionLevel"
+
+                val model = models()
+                    .withExistingParent(modelName, mcLoc("block/block"))
+                    .texture("all", texture)
+                    .texture("particle", texture)
+
+                    .element()
+                    .from(0f, 0f, 0f)
+                    .to(
+                        16f,
+                        when (compressionLevel) {
+                            0 -> 8f
+                            1 -> 4f
+                            2 -> 2f
+                            else -> 0f
+                        },
+                        16f
+                    )
+                    .textureAll("#all")
+                    .end()
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/compressed_slime_block_0"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun fertilizedDirt() {
