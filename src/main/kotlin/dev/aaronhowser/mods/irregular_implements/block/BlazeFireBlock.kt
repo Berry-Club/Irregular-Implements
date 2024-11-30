@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.level.block.state.BlockState
 
 @Suppress("OVERRIDE_DEPRECATION")
-class BlazeFire : FireBlock(
+class BlazeFireBlock : FireBlock(
     Properties
         .ofFullCopy(Blocks.FIRE)
 ), BetterFire {

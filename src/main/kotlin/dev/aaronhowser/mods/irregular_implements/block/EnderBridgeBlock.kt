@@ -210,7 +210,7 @@ class EnderBridgeBlock(
         registerDefaultState(
             stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(ContactLever.ENABLED, false)
+                .setValue(ContactLeverBlock.ENABLED, false)
         )
     }
 

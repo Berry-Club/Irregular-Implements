@@ -167,7 +167,7 @@ class ModBlockStateProvider(
         getVariantBuilder(block)
             .forAllStates {
                 val facing = it.getValue(DirectionalBlock.FACING)
-                val enabled = it.getValue(ContactButton.ENABLED)
+                val enabled = it.getValue(ContactButtonBlock.ENABLED)
 
                 val yRotation = when (facing) {
                     Direction.NORTH -> 0
@@ -217,7 +217,7 @@ class ModBlockStateProvider(
         getVariantBuilder(block)
             .forAllStates {
                 val facing = it.getValue(DirectionalBlock.FACING)
-                val enabled = it.getValue(ContactLever.ENABLED)
+                val enabled = it.getValue(ContactLeverBlock.ENABLED)
 
                 val yRotation = when (facing) {
                     Direction.NORTH -> 0
@@ -390,7 +390,7 @@ class ModBlockStateProvider(
 
         getVariantBuilder(block)
             .forAllStates {
-                val notSolid = it.getValue(TriggerGlass.NOT_SOLID)
+                val notSolid = it.getValue(TriggerGlassBlock.NOT_SOLID)
                 val modelName = name(block) + if (notSolid) "_triggered" else ""
                 val textureLocation = if (notSolid) "block/trigger_glass_triggered" else "block/trigger_glass"
 

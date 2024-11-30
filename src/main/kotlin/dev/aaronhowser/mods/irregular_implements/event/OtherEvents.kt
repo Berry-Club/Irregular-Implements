@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.ContactButton
-import dev.aaronhowser.mods.irregular_implements.block.ContactLever
+import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
+import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import net.minecraft.world.InteractionHand
 import net.neoforged.bus.api.SubscribeEvent
@@ -32,8 +32,8 @@ object OtherEvents {
         val pos = event.pos
 
         if (event.hand == InteractionHand.MAIN_HAND) {
-            ContactLever.handleClickBlock(level, pos)
-            ContactButton.handleClickBlock(level, pos)
+            ContactLeverBlock.handleClickBlock(level, pos)
+            ContactButtonBlock.handleClickBlock(level, pos)
         }
     }
 

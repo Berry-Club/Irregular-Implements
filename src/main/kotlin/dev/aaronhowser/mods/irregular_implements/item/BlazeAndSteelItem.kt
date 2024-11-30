@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.block.BlazeFire
+import dev.aaronhowser.mods.irregular_implements.block.BlazeFireBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.server.level.ServerPlayer
@@ -74,7 +74,7 @@ class BlazeAndSteelItem : FlintAndSteelItem(
         val fireState = if (potentialFireState.block == Blocks.SOUL_FIRE) {
             potentialFireState
         } else {
-            (ModBlocks.BLAZE_FIRE.get() as BlazeFire).getStateForPlacement(level, firePos)
+            (ModBlocks.BLAZE_FIRE.get() as BlazeFireBlock).getStateForPlacement(level, firePos)
         }
 
         level.setBlock(firePos, fireState, 11)

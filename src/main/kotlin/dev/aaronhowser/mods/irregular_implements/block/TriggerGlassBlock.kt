@@ -16,7 +16,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class TriggerGlass : TransparentBlock(
+class TriggerGlassBlock : TransparentBlock(
     Properties
         .ofFullCopy(Blocks.RED_STAINED_GLASS)
         .dynamicShape()

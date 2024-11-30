@@ -46,12 +46,12 @@ object ModBlocks {
     val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
 
     // Redstone blocks
-    val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
-        registerBlock("analog_emitter") { AnalogEmitter() }
-    val CONTACT_BUTTON: DeferredBlock<ContactButton> =
-        registerBlock("contact_button") { ContactButton() }
-    val CONTACT_LEVER: DeferredBlock<ContactLever> =
-        registerBlock("contact_lever") { ContactLever() }
+    val ANALOG_EMITTER: DeferredBlock<AnalogEmitterBlock> =
+        registerBlock("analog_emitter") { AnalogEmitterBlock() }
+    val CONTACT_BUTTON: DeferredBlock<ContactButtonBlock> =
+        registerBlock("contact_button") { ContactButtonBlock() }
+    val CONTACT_LEVER: DeferredBlock<ContactLeverBlock> =
+        registerBlock("contact_lever") { ContactLeverBlock() }
     val IRON_DROPPER = basicBlock("iron_dropper")
     val IGNITER = basicBlock("igniter")
     val INVENTORY_TESTER = basicBlock("inventory_tester")
@@ -69,12 +69,12 @@ object ModBlocks {
         registerBlock("returning_block_of_sticks") { BlockOfSticksBlock(returning = true) }
 
     // No Item
-    val BLAZE_FIRE: DeferredBlock<BlazeFire> =
-        registerBlockWithoutItem("blaze_fire") { BlazeFire() }
+    val BLAZE_FIRE: DeferredBlock<BlazeFireBlock> =
+        registerBlockWithoutItem("blaze_fire") { BlazeFireBlock() }
 
     // Glass
-    val TRIGGER_GLASS: DeferredBlock<TriggerGlass> =
-        registerBlock("trigger_glass") { TriggerGlass() }
+    val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
+        registerBlock("trigger_glass") { TriggerGlassBlock() }
     val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
         registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
     val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =

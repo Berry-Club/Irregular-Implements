@@ -4,8 +4,10 @@ import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.util.RandomSource
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -17,14 +19,14 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 
-class ContactLever(
+class ContactButtonBlock(
     properties: Properties =
         Properties
             .ofFullCopy(Blocks.STONE)
 ) : DirectionalBlock(properties) {
 
     companion object {
-        val CODEC: MapCodec<ContactLever> = simpleCodec(::ContactLever)
+        val CODEC: MapCodec<ContactButtonBlock> = simpleCodec(::ContactButtonBlock)
 
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 
@@ -38,14 +40,15 @@ class ContactLever(
                 val blockPos = pos.relative(direction)
                 val blockState = level.getBlockState(blockPos)
 
-                if (!blockState.`is`(ModBlocks.CONTACT_LEVER.get())) continue
+                if (!blockState.`is`(ModBlocks.CONTACT_BUTTON.get())) continue
                 if (blockState.getValue(FACING) != direction.opposite) continue
+                if (blockState.getValue(ENABLED)) continue
 
-                pull(level, blockPos, blockState)
+                press(level, blockPos, blockState)
             }
         }
 
-        private fun pull(
+        private fun press(
             level: Level,
             pos: BlockPos,
             blockState: BlockState
@@ -56,11 +59,11 @@ class ContactLever(
             level.playSound(
                 null,
                 pos,
-                SoundEvents.LEVER_CLICK,
+                SoundEvents.STONE_BUTTON_CLICK_ON,
                 SoundSource.BLOCKS,
-                0.3f,
-                if (newState.getValue(ENABLED)) 0.6f else 0.5f
             )
+
+            level.scheduleTick(pos, ModBlocks.CONTACT_BUTTON.get(), 20)
         }
     }
 
@@ -72,7 +75,19 @@ class ContactLever(
         )
     }
 
-    override fun codec(): MapCodec<ContactLever> = CODEC
+    override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
+        val newState = state.setValue(ENABLED, false)
+        level.setBlockAndUpdate(pos, newState)
+
+        level.playSound(
+            null,
+            pos,
+            SoundEvents.STONE_BUTTON_CLICK_OFF,
+            SoundSource.BLOCKS,
+        )
+    }
+
+    override fun codec(): MapCodec<ContactButtonBlock> = CODEC
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(FACING, ENABLED)

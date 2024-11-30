@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.IntegerProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class AnalogEmitter(
+class AnalogEmitterBlock(
     properties: Properties =
         Properties
             .ofFullCopy(Blocks.TARGET)
@@ -28,7 +28,7 @@ class AnalogEmitter(
 ) : DirectionalBlock(properties) {
 
     companion object {
-        private val CODEC = simpleCodec(::AnalogEmitter)
+        private val CODEC = simpleCodec(::AnalogEmitterBlock)
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
         val POWER: IntegerProperty = BlockStateProperties.POWER
     }
@@ -42,7 +42,7 @@ class AnalogEmitter(
         )
     }
 
-    override fun codec(): MapCodec<AnalogEmitter> = CODEC
+    override fun codec(): MapCodec<AnalogEmitterBlock> = CODEC
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(FACING, ENABLED, POWER)
