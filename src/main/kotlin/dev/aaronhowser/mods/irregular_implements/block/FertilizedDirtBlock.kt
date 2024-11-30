@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
@@ -70,4 +72,22 @@ class FertilizedDirtBlock : FarmBlock(Properties.ofFullCopy(Blocks.FARMLAND)) {
     override fun isOcclusionShapeFullBlock(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
         return !state.getValue(TILLED)
     }
+
+    override fun isRandomlyTicking(state: BlockState): Boolean {
+        return true
+    }
+
+    override fun randomTick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
+        if (level.isClientSide) return
+
+        val cropPos = pos.above()
+        val cropState = level.getBlockState(cropPos)
+
+        if (cropState.isRandomlyTicking) {
+            repeat(3) {
+                cropState.randomTick(level, cropPos, random)
+            }
+        }
+    }
+
 }
