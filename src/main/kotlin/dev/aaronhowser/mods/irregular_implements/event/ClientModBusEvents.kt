@@ -88,7 +88,7 @@ object ClientModBusEvents {
         ItemProperties.register(
             ModItems.EMERALD_COMPASS.get(),
             EmeraldCompassItem.ANGLE,
-            EmeraldCompassItem::itemPropertyFunction
+            EmeraldCompassItem::getAngleFloat
         )
 
     }

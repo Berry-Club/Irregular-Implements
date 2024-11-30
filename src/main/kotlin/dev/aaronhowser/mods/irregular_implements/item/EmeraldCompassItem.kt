@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
@@ -14,27 +15,30 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.phys.Vec3
 import kotlin.math.atan2
 
 class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
 
     companion object {
-
         val ANGLE: ResourceLocation = OtherUtil.modResource("angle")
 
-        fun itemPropertyFunction(
+        private const val DEFAULT = 0.52f
+
+        //FIXME: 0.5 is slightly left rather than straight forward
+        fun getAngleFloat(
             stack: ItemStack,
             localLevel: ClientLevel?,
             holdingEntity: LivingEntity?,
             int: Int
         ): Float {
-            if (localLevel == null || holdingEntity == null) return 0f
-            val itemComponent = stack.get(ModDataComponents.SPECIFIC_ENTITY) ?: return 0f
+            if (localLevel == null || holdingEntity == null) return DEFAULT
+            val itemComponent = stack.get(ModDataComponents.SPECIFIC_ENTITY) ?: return DEFAULT
 
             val playerUuid = itemComponent.uuid
-            val targetPlayer = localLevel.getPlayerByUUID(playerUuid) ?: return 0f
-            if (targetPlayer == holdingEntity) return 0f
+            val targetPlayer = localLevel.getPlayerByUUID(playerUuid) ?: return DEFAULT
+            if (targetPlayer == holdingEntity) return DEFAULT
 
             val angleToTarget = getAngleFromEntityToPos(holdingEntity, targetPlayer.blockPosition())
             val holderYaw = getWrappedVisualRotationY(holdingEntity)
@@ -67,6 +71,12 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
         usedStack.set(ModDataComponents.SPECIFIC_ENTITY, SpecificEntityItemComponent(interactionTarget))
 
         return InteractionResult.SUCCESS
+    }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        val component = stack.get(ModDataComponents.SPECIFIC_ENTITY) ?: return
+
+        tooltipComponents.add(component.name)
     }
 
 }
