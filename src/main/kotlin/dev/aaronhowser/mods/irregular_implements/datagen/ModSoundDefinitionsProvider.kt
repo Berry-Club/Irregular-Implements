@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.registries.ModSounds
+import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.data.PackOutput
 import net.neoforged.neoforge.common.data.ExistingFileHelper

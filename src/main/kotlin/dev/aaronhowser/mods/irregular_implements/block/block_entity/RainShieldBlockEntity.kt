@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.RainShieldChunks
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.config.CommonConfig
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level

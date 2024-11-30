@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements;
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider;
-import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents;
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 

@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.registries
+package dev.aaronhowser.mods.irregular_implements.registry
 
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.neoforge.registries.DeferredRegister

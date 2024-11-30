@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries

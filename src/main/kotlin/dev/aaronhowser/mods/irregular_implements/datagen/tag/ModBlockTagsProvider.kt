@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.tag
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput

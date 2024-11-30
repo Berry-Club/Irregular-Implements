@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.block.BlazeFire
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents

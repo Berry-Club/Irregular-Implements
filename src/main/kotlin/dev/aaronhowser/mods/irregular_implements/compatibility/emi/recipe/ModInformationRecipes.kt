@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiInfoRecipe
 import dev.emi.emi.api.stack.EmiIngredient

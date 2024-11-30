@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation

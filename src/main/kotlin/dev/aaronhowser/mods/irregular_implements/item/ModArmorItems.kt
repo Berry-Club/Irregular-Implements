@@ -1,15 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
-import dev.aaronhowser.mods.irregular_implements.registries.ModArmorMaterials
-import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
-import net.minecraft.world.item.Item
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.phys.shapes.CollisionContext

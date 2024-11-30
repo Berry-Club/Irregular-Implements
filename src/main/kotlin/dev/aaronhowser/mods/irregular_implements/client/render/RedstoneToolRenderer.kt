@@ -4,8 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
-import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer

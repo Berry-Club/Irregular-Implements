@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.effect
 
-import dev.aaronhowser.mods.irregular_implements.registries.ModEffects
+import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffect

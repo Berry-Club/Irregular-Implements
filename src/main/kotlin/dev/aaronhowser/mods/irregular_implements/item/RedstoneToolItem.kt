@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Redston
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
-import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
-import dev.aaronhowser.mods.irregular_implements.registries.ModItems;
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

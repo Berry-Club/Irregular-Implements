@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import com.mojang.serialization.MapCodec
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel

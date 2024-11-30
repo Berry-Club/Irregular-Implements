@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.world.item.DyeColor

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.loot
 
-import dev.aaronhowser.mods.irregular_implements.registries.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags

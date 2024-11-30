@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements
 
 import dev.aaronhowser.mods.irregular_implements.config.CommonConfig
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.registries.ModRegistries
+import dev.aaronhowser.mods.irregular_implements.registry.ModRegistries
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.fml.ModContainer
 import net.neoforged.fml.common.Mod
