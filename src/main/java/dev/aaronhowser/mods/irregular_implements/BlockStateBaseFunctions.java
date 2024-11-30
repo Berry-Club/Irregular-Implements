@@ -4,11 +4,14 @@ import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvide
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -24,16 +27,16 @@ public interface BlockStateBaseFunctions {
     default VoxelShape checkCollisionShape(BlockGetter level, BlockPos pos, CollisionContext context, VoxelShape original) {
         if (!(context instanceof EntityCollisionContext collisionContext)) return null;
 
-        var fluidState = level.getFluidState(pos);
-        var fluidAmount = fluidState.getAmount();
-        if (fluidAmount <= 0) return null;
+        FluidState fluidState = level.getFluidState(pos);
+        float fluidHeight = fluidState.getHeight(level, pos);
+        if (fluidHeight <= 0) return null;
 
-        var entity = collisionContext.getEntity();
+        Entity entity = collisionContext.getEntity();
         if (!(entity instanceof LivingEntity livingEntity)) return null;
 
-        if (entity.isCrouching() || entity.isUnderWater()) return null;
+        if (livingEntity.isCrouching() || livingEntity.isUnderWater()) return null;
 
-        var footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET);
+        ItemStack footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET);
 
         TagKey<Fluid> tagKey;
 
@@ -47,25 +50,15 @@ public interface BlockStateBaseFunctions {
 
         if (!fluidState.is(tagKey)) return null;
 
-        var shape = getOrCalculateShape(fluidAmount);
-        var shapeBelow = getOrCalculateShape(fluidAmount - 1);
+        VoxelShape shape = SHAPES.computeIfAbsent(
+                fluidHeight,
+                h -> Block.box(0, 0, 0, 16, h * 16, 16)
+        );
 
-        return (context.isAbove(shapeBelow, pos, true))
-                ? (original != null) ? Shapes.or(original, shape) : shape
-                : null;
+        return (original == null)
+                ? shape
+                : Shapes.or(original, shape);
     }
 
-    Map<Integer, VoxelShape> SHAPES = new HashMap<>();
-
-    private VoxelShape getOrCalculateShape(int height) {
-        if (SHAPES.containsKey(height)) {
-            return SHAPES.get(height);
-        }
-
-        var shape = Block.box(0, 0, 0, 16, height, 16);
-        SHAPES.put(height, shape);
-
-        return shape;
-    }
-
+    Map<Float, VoxelShape> SHAPES = new HashMap<>();
 }
