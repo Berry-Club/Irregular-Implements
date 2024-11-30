@@ -51,23 +51,32 @@ class ModBlockStateProvider(
                 val compressionLevel = it.getValue(CompressedSlimeBlock.COMPRESSION_LEVEL)
                 val modelName = name(block) + "_$compressionLevel"
 
+                val height = when (compressionLevel) {
+                    0 -> 8f
+                    1 -> 4f
+                    2 -> 2f
+                    else -> 0f
+                }
+
+                val innerHeight = height * 0.5f
+                val innerBottom = height * 0.5f - innerHeight * 0.5f
+                val innerTop = height * 0.5f + innerHeight * 0.5f
+
                 val model = models()
                     .withExistingParent(modelName, mcLoc("block/block"))
                     .texture("all", texture)
                     .texture("particle", texture)
+                    .renderType(RenderType.translucent().name)
 
                     .element()
                     .from(0f, 0f, 0f)
-                    .to(
-                        16f,
-                        when (compressionLevel) {
-                            0 -> 8f
-                            1 -> 4f
-                            2 -> 2f
-                            else -> 0f
-                        },
-                        16f
-                    )
+                    .to(16f, height, 16f)
+                    .textureAll("#all")
+                    .end()
+
+                    .element()
+                    .from(2f, innerBottom, 2f)
+                    .to(14f, innerTop, 14f)
                     .textureAll("#all")
                     .end()
 
