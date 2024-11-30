@@ -4,7 +4,6 @@ import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityIt
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
-import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -16,7 +15,6 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.phys.Vec3
 import kotlin.math.atan2
 
 class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
@@ -40,7 +38,7 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
             val targetPlayer = localLevel.getPlayerByUUID(playerUuid) ?: return DEFAULT
             if (targetPlayer == holdingEntity) return DEFAULT
 
-            val angleToTarget = getAngleFromEntityToPos(holdingEntity, targetPlayer.blockPosition())
+            val angleToTarget = getAngleToTargetEntity(holdingEntity, targetPlayer)
             val holderYaw = getWrappedVisualRotationY(holdingEntity)
 
             val adjustedYaw = angleToTarget + 0.25 - holderYaw
@@ -48,8 +46,8 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
             return Mth.positiveModulo(adjustedYaw.toFloat(), 1f)
         }
 
-        private fun getAngleFromEntityToPos(entity: Entity, pos: BlockPos): Double {
-            val vec3 = Vec3.atCenterOf(pos)
+        private fun getAngleToTargetEntity(entity: Entity, targetEntity: Entity): Double {
+            val vec3 = targetEntity.position()
             return atan2(vec3.z() - entity.z, vec3.x() - entity.x) / (Math.PI * 2).toFloat()
         }
 
