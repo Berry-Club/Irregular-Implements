@@ -15,7 +15,8 @@ object ModBlocks {
 
     val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
-    val FERTILIZED_DIRT = basicBlock("fertilized_dirt")
+    val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
+        registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
     val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")
     val FLUID_DISPLAY = basicBlock("fluid_display")

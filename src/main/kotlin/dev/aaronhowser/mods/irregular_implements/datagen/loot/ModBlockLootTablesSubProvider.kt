@@ -28,7 +28,11 @@ class ModBlockLootTablesSubProvider(
 
     }
 
-    private val dropsDirtWithoutSilkTouch = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }
+    private val dropsDirtWithoutSilkTouch = buildList {
+        addAll(DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() })
+
+        add(ModBlocks.FERTILIZED_DIRT.get())
+    }
 
     private val noDropBlocks = listOf(
         ModBlocks.BLAZE_FIRE
