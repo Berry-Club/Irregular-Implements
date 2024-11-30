@@ -40,7 +40,6 @@ class ModBlockStateProvider(
         compressedSlime()
     }
 
-    //FIXME: Make it 2 layers with 1 transparent, like real slime block
     private fun compressedSlime() {
         val block = ModBlocks.COMPRESSED_SLIME_BLOCK.get()
 
