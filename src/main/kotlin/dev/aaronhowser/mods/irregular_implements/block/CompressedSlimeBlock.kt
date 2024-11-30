@@ -19,9 +19,9 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 
     companion object {
 
-        val SHAPE_0: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0)
-        val SHAPE_1: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0)
-        val SHAPE_2: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0)
+        val SHAPE_0: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 8.0, 15.99)
+        val SHAPE_1: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 4.0, 15.99)
+        val SHAPE_2: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 2.0, 15.99)
 
         val COMPRESSION_LEVEL: IntegerProperty = IntegerProperty.create("compression_level", 0, 2)
     }
@@ -38,10 +38,14 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
     }
 
     override fun getShape(state: BlockState, world: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        return if (state.getValue(COMPRESSION_LEVEL) == 2) SHAPE_2 else getCollisionShape(state, world, pos, context)
+    }
+
+    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return when (state.getValue(COMPRESSION_LEVEL)) {
             0 -> SHAPE_0
             1 -> SHAPE_1
-            2 -> SHAPE_2
+            2 -> SHAPE_1    // Because SHAPE_2 is too small for updateEntityAfterFallOn
             else -> SHAPE_0
         }
     }
@@ -58,7 +62,6 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
         return false
     }
 
-    //FIXME: Doesn't proc for the smallest one
     override fun updateEntityAfterFallOn(level: BlockGetter, entity: Entity) {
         super.updateEntityAfterFallOn(level, entity)
 
