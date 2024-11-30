@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
+import net.minecraft.world.item.Item
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -16,7 +17,7 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class FluidWalkingBoots(
+class ModArmorItems(
     material: Holder<ArmorMaterial>,
     type: Type,
     properties: Properties
@@ -29,7 +30,7 @@ class FluidWalkingBoots(
         // BlockStateBaseMixin calls FluidWalkingBoots#checkCollisionShape
 
         val WATER_WALKING_BOOTS by lazy {
-            FluidWalkingBoots(
+            ModArmorItems(
                 ModArmorMaterials.WATER_WALKING,
                 Type.BOOTS,
                 Properties()
@@ -42,7 +43,7 @@ class FluidWalkingBoots(
         }
 
         val OBSIDIAN_WATER_WALKING_BOOTS by lazy {
-            FluidWalkingBoots(
+            ModArmorItems(
                 ModArmorMaterials.OBSIDIAN_WATER_WALKING,
                 Type.BOOTS,
                 Properties()
@@ -55,7 +56,7 @@ class FluidWalkingBoots(
         }
 
         val LAVA_WADERS by lazy {
-            FluidWalkingBoots(
+            ModArmorItems(
                 ModArmorMaterials.LAVA_WADERS,
                 Type.BOOTS,
                 Properties()
@@ -64,6 +65,22 @@ class FluidWalkingBoots(
                         ModDataComponents.FLUID_TAGS,
                         listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
                     )
+            )
+        }
+
+        val SUPER_LUBRICANT_BOOTS by lazy {
+            ArmorItem(
+                ModArmorMaterials.SUPER_LUBRICANT,
+                Type.BOOTS,
+                Properties().durability(Type.BOOTS.getDurability(15))
+            )
+        }
+
+        val MAGIC_HOOD by lazy {
+            ArmorItem(
+                ModArmorMaterials.MAGIC,
+                Type.HELMET,
+                Properties().durability(Type.HELMET.getDurability(15))
             )
         }
 

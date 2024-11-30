@@ -51,32 +51,22 @@ object ModItems {
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
-    // Armors
-    val MAGIC_HOOD: DeferredItem<ArmorItem> =
-        register("magic_hood") {
-            ArmorItem(
-                ModArmorMaterials.MAGIC,
-                ArmorItem.Type.HELMET,
-                Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))
-            )
-        }
+    // Curios
     val LAVA_CHARM = basic("lava_charm")
     val OBSIDIAN_SKULL = basic("obsidian_skull")
     val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
-    val WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
-        register("water_walking_boots") { FluidWalkingBoots.WATER_WALKING_BOOTS }
-    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
-        register("obsidian_water_walking_boots") { FluidWalkingBoots.OBSIDIAN_WATER_WALKING_BOOTS }
-    val LAVA_WADERS: DeferredItem<FluidWalkingBoots> =
-        register("lava_waders") { FluidWalkingBoots.LAVA_WADERS }
+
+    // Armors
+    val MAGIC_HOOD: DeferredItem<ArmorItem> =
+        register("magic_hood") { ModArmorItems.MAGIC_HOOD }
+    val WATER_WALKING_BOOTS: DeferredItem<ModArmorItems> =
+        register("water_walking_boots") { ModArmorItems.WATER_WALKING_BOOTS }
+    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ModArmorItems> =
+        register("obsidian_water_walking_boots") { ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS }
+    val LAVA_WADERS: DeferredItem<ModArmorItems> =
+        register("lava_waders") { ModArmorItems.LAVA_WADERS }
     val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =            // What if you could instead apply the tincture to any boots?
-        register("super_lubricant_boots") {
-            ArmorItem(
-                ModArmorMaterials.SUPER_LUBRICANT,
-                ArmorItem.Type.BOOTS,
-                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
-            )
-        }
+        register("super_lubricant_boots") { ModArmorItems.SUPER_LUBRICANT_BOOTS }
 
     // Weather Eggs
     val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =

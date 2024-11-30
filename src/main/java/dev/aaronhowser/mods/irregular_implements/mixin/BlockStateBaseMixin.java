@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneObserverBlockEntity;
-import dev.aaronhowser.mods.irregular_implements.item.FluidWalkingBoots;
+import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -41,7 +41,7 @@ public class BlockStateBaseMixin {
             cancellable = true
     )
     private void irregular_implements$getCollisionShape(BlockGetter level, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        @Nullable VoxelShape shape = FluidWalkingBoots.checkCollisionShape(level, pos, context, cir.getReturnValue());
+        @Nullable VoxelShape shape = ModArmorItems.checkCollisionShape(level, pos, context, cir.getReturnValue());
 
         if (shape != null) {
             cir.setReturnValue(shape);
