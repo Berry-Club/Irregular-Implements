@@ -54,6 +54,7 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
         }
     }
 
+    //TODO: Crafting recipe with ID Card
     override fun interactLivingEntity(
         stack: ItemStack,
         player: Player,
