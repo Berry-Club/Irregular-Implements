@@ -1,19 +1,24 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.FarmBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
-import net.neoforged.neoforge.common.util.TriState
+import net.neoforged.neoforge.common.ItemAbilities
+import net.neoforged.neoforge.common.ItemAbility
 
-class FertilizedDirtBlock : Block(Properties.ofFullCopy(Blocks.FARMLAND)) {
+class FertilizedDirtBlock : FarmBlock(Properties.ofFullCopy(Blocks.FARMLAND)) {
 
     companion object {
         val TILLED: BooleanProperty = BooleanProperty.create("tilled")
@@ -25,10 +30,12 @@ class FertilizedDirtBlock : Block(Properties.ofFullCopy(Blocks.FARMLAND)) {
         registerDefaultState(
             stateDefinition.any()
                 .setValue(TILLED, false)
+                .setValue(MOISTURE, MAX_MOISTURE)
         )
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        super.createBlockStateDefinition(builder)
         builder.add(TILLED)
     }
 
@@ -40,6 +47,22 @@ class FertilizedDirtBlock : Block(Properties.ofFullCopy(Blocks.FARMLAND)) {
         }
     }
 
+    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+        return true
+    }
+
+    override fun getToolModifiedState(state: BlockState, context: UseOnContext, itemAbility: ItemAbility, simulate: Boolean): BlockState? {
+        if (itemAbility == ItemAbilities.HOE_TILL && !state.getValue(TILLED)) {
+            return state.setValue(TILLED, true)
+        }
+
+        return super.getToolModifiedState(state, context, itemAbility, simulate)
+    }
+
+    override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
+        entity.causeFallDamage(fallDistance, 1.0f, entity.damageSources().fall())
+    }
+
     override fun isFertile(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
         return state.getValue(TILLED)
     }
@@ -47,15 +70,4 @@ class FertilizedDirtBlock : Block(Properties.ofFullCopy(Blocks.FARMLAND)) {
     override fun isOcclusionShapeFullBlock(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
         return !state.getValue(TILLED)
     }
-
-    override fun canSustainPlant(
-        state: BlockState,
-        level: BlockGetter,
-        soilPosition: BlockPos,
-        facing: Direction,
-        plant: BlockState
-    ): TriState {
-
-    }
-
 }
