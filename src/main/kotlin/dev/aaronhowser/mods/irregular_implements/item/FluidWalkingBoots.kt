@@ -19,32 +19,53 @@ import net.minecraft.world.phys.shapes.VoxelShape
 class FluidWalkingBoots(
     material: Holder<ArmorMaterial>,
     type: Type,
-) : ArmorItem(
-    material, type,
-    Properties()
-        .durability(Type.BOOTS.getDurability(15))
-        .component(
-            ModDataComponents.FLUID_TAGS,
-            listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
-        )
-) {
+    properties: Properties
+) : ArmorItem(material, type, properties) {
 
     companion object {
 
-        val WATER_WALKING_BOOTS = FluidWalkingBoots(
-            ArmorMaterials.CHAIN,
-            Type.BOOTS
-        )
+        // These are lazy so they don't freak out due
+        // to data components not being available yet when
+        // BlockStateBaseMixin calls FluidWalkingBoots#checkCollisionShape
 
-        val OBSIDIAN_WATER_WALKING_BOOTS = FluidWalkingBoots(
-            ArmorMaterials.CHAIN,
-            Type.BOOTS
-        )
+        val WATER_WALKING_BOOTS by lazy {
+            FluidWalkingBoots(
+                ArmorMaterials.CHAIN,
+                Type.BOOTS,
+                Properties()
+                    .durability(Type.BOOTS.getDurability(15))
+                    .component(
+                        ModDataComponents.FLUID_TAGS,
+                        listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
+                    )
+            )
+        }
 
-        val LAVA_WADERS = FluidWalkingBoots(
-            ArmorMaterials.CHAIN,
-            Type.BOOTS
-        )
+        val OBSIDIAN_WATER_WALKING_BOOTS by lazy {
+            FluidWalkingBoots(
+                ArmorMaterials.CHAIN,
+                Type.BOOTS,
+                Properties()
+                    .durability(Type.BOOTS.getDurability(15))
+                    .component(
+                        ModDataComponents.FLUID_TAGS,
+                        listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
+                    )
+            )
+        }
+
+        val LAVA_WADERS by lazy {
+            FluidWalkingBoots(
+                ArmorMaterials.CHAIN,
+                Type.BOOTS,
+                Properties()
+                    .durability(Type.BOOTS.getDurability(15))
+                    .component(
+                        ModDataComponents.FLUID_TAGS,
+                        listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
+                    )
+            )
+        }
 
         @JvmStatic
         fun checkCollisionShape(
