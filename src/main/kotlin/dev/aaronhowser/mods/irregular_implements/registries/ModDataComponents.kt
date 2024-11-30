@@ -10,7 +10,9 @@ import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
+import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
+import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.material.Fluid
@@ -76,6 +78,14 @@ object ModDataComponents {
                     OtherUtil.tagKeyStreamCodec(Registries.FLUID)
                         .apply(ByteBufCodecs.list())
                 )
+        }
+
+    @JvmStatic
+    val LUBRICATED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("lubricated") {
+            it
+                .persistent(Unit.CODEC)
+                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
         }
 
 }

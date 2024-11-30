@@ -65,8 +65,6 @@ object ModItems {
         register("obsidian_water_walking_boots") { ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS }
     val LAVA_WADERS: DeferredItem<ModArmorItems> =
         register("lava_waders") { ModArmorItems.LAVA_WADERS }
-    val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =            // What if you could instead apply the tincture to any boots?
-        register("super_lubricant_boots") { ModArmorItems.SUPER_LUBRICANT_BOOTS }
 
     // Weather Eggs
     val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =

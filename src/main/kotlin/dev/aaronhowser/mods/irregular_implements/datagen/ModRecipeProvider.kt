@@ -1177,13 +1177,6 @@ class ModRecipeProvider(
             )
         ),
         shapelessRecipe(
-            ModItems.SUPER_LUBRICANT_BOOTS,
-            listOf(
-                ing(ModItems.SUPER_LUBRICANT_TINCTURE),
-                ing(Items.IRON_BOOTS)
-            )
-        ),
-        shapelessRecipe(
             ModItems.ID_CARD,
             listOf(
                 ing(Items.INK_SAC),

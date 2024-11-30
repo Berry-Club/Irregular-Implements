@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/super_lubricant_boots"
-  }
-}

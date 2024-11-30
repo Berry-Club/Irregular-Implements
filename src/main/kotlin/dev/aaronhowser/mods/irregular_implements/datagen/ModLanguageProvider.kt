@@ -162,7 +162,6 @@ class ModLanguageProvider(
         addItem(ModItems.REDSTONE_REMOTE, "Redstone Remote")
 
         addItem(ModItems.SUPER_LUBRICANT_TINCTURE, "Super Lubricant Tincture")
-        addItem(ModItems.SUPER_LUBRICANT_BOOTS, "Super Lubricant Boots")
 
         addItem(ModItems.FLOO_POWDER, "Floo Powder")
         addItem(ModItems.FLOO_SIGN, "Floo Sign")
@@ -481,7 +480,6 @@ class ModLanguageProvider(
         addInfo(ModItems.REDSTONE_REMOTE, "Allows you to temporarily power one of nine blocks from a distance.\n\nSneak right-click it to open its GUI, where you can place up to 9 Location Filters. Under each you can set an item to represent that position.\n\nRight-click normally to see all the positions it can power.")
         addInfo(ModItems.BLAZE_AND_STEEL, "Lights a much more aggressive Fire.")
         addInfo(ModItems.RUNE_PATTERN, "Allows you to quickly recreate Runic Dust patterns.\n\nUse it on a placed Runic Dust pattern to save it, then use it on another block to place a copy of it.")
-        addInfo(ModItems.SUPER_LUBRICANT_BOOTS, "Removes your friction when worn.")
         addInfo(ModItems.FLOO_SIGN, "?????????????????????")
         addInfo(ModItems.ID_CARD, "Acts like an Entity Filter, but specifically for the player set.\n\nSet by using it in your hand.")
         addInfo(ModItems.EMERALD_COMPASS, "When combined with an ID Card, points to the player.")

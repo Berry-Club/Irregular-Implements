@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-16T09:27:08.3933549	Item Models: irregular_implements
+// 1.21.1	2024-11-30T04:23:27.0246385	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -91,7 +91,6 @@ e8fe75a67e23e58bdbef9d59009fb8f2d53381e7 assets/irregular_implements/models/item
 be91beaf787f992ec2b142b436bdbc6ed41afb87 assets/irregular_implements/models/item/spectre_sword.json
 a3992fc6f62f9a86348d957340590a309b7c2764 assets/irregular_implements/models/item/stable_ender_pearl.json
 f44849d2b42d607952807068731a6dfe9089eadd assets/irregular_implements/models/item/summoning_pendulum.json
-37b188dd40ad63d33ced616de431c81df90e054c assets/irregular_implements/models/item/super_lubricant_boots.json
 c4edc9c5a1986b42e5e0dc6d8e6311e37dbf3b88 assets/irregular_implements/models/item/super_lubricant_tincture.json
 36bec370827934d92433be1d1857b7b19e613498 assets/irregular_implements/models/item/water_walking_boots.json
 36682ad712b8eb4d74ef5b510fddc0dcb3bb35ec assets/irregular_implements/models/item/weather_egg_rainy.json
