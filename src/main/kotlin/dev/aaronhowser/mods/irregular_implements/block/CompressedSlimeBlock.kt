@@ -52,7 +52,12 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 
     override fun getToolModifiedState(state: BlockState, context: UseOnContext, itemAbility: ItemAbility, simulate: Boolean): BlockState? {
         if (itemAbility == ItemAbilities.SHOVEL_FLATTEN) {
-            return state.cycle(COMPRESSION_LEVEL)
+            return when (state.getValue(COMPRESSION_LEVEL)) {
+                0 -> state.setValue(COMPRESSION_LEVEL, 1)
+                1 -> state.setValue(COMPRESSION_LEVEL, 2)
+                2 -> Blocks.SLIME_BLOCK.defaultBlockState()
+                else -> state
+            }
         }
 
         return super.getToolModifiedState(state, context, itemAbility, simulate)
