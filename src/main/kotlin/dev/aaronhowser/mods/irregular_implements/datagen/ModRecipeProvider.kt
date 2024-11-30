@@ -1237,12 +1237,31 @@ class ModRecipeProvider(
 
     private val recipesWithNames: MutableMap<RecipeBuilder, String> = mutableMapOf()
 
+    private val dyeTags: Map<DyeColor, TagKey<Item>> = mapOf(
+        DyeColor.WHITE to Tags.Items.DYES_WHITE,
+        DyeColor.ORANGE to Tags.Items.DYES_ORANGE,
+        DyeColor.MAGENTA to Tags.Items.DYES_MAGENTA,
+        DyeColor.LIGHT_BLUE to Tags.Items.DYES_LIGHT_BLUE,
+        DyeColor.YELLOW to Tags.Items.DYES_YELLOW,
+        DyeColor.LIME to Tags.Items.DYES_LIME,
+        DyeColor.PINK to Tags.Items.DYES_PINK,
+        DyeColor.GRAY to Tags.Items.DYES_GRAY,
+        DyeColor.LIGHT_GRAY to Tags.Items.DYES_LIGHT_GRAY,
+        DyeColor.CYAN to Tags.Items.DYES_CYAN,
+        DyeColor.PURPLE to Tags.Items.DYES_PURPLE,
+        DyeColor.BLUE to Tags.Items.DYES_BLUE,
+        DyeColor.BROWN to Tags.Items.DYES_BROWN,
+        DyeColor.GREEN to Tags.Items.DYES_GREEN,
+        DyeColor.RED to Tags.Items.DYES_RED,
+        DyeColor.BLACK to Tags.Items.DYES_BLACK
+    )
+
     private fun coloredThings(): List<RecipeBuilder> {
         return buildList {
             for (color in DyeColor.entries) {
                 val colorString = color.getName()
 
-                val dyeTag = OtherUtil.getDyeTag(color)
+                val dyeTag = dyeTags[color]!!
 
                 val luminous = ModBlocks.getLuminousBlock(color).get()
                 val transLuminous = ModBlocks.getLuminousBlockTranslucent(color).get()
