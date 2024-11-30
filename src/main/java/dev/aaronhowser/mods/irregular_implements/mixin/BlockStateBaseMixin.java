@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.BlockStateBaseFunctions;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneObserverBlockEntity;
+import dev.aaronhowser.mods.irregular_implements.item.FluidWalkingBoots;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import javax.annotation.Nullable;
 
 @Mixin(BlockBehaviour.BlockStateBase.class)
-public class BlockStateBaseMixin implements BlockStateBaseFunctions {
+public class BlockStateBaseMixin {
 
     @Inject(
             method = "handleNeighborChanged",
@@ -41,7 +41,7 @@ public class BlockStateBaseMixin implements BlockStateBaseFunctions {
             cancellable = true
     )
     private void irregular_implements$getCollisionShape(BlockGetter level, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        @Nullable VoxelShape shape = this.checkCollisionShape(level, pos, context, cir.getReturnValue());
+        @Nullable VoxelShape shape = FluidWalkingBoots.checkCollisionShape(level, pos, context, cir.getReturnValue());
 
         if (shape != null) {
             cir.setReturnValue(shape);
