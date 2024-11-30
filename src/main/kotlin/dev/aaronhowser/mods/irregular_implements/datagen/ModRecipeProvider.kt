@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
+import dev.aaronhowser.mods.irregular_implements.recipe.WashBootRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -52,10 +53,12 @@ class ModRecipeProvider(
         }
 
         lubricateBoot.save(recipeOutput, OtherUtil.modResource("lubricate_boot"))
+        washBoot.save(recipeOutput, OtherUtil.modResource("wash_boot"))
 
     }
 
     private val lubricateBoot = SpecialRecipeBuilder.special(::LubricateBootRecipe)
+    private val washBoot = SpecialRecipeBuilder.special(::WashBootRecipe)
 
     //TODO:
     // Potions of Collapse

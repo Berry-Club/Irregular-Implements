@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-30T04:35:42.6024372	Recipes
+// 1.21.1	2024-11-30T05:34:48.8165722	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -481,6 +481,7 @@ cb6432ab10cbea2e6f6d7abf11231d0ba2b8cf1e data/irregular_implements/recipe/transl
 d4ca7a1723ca6021de8e5851d2e60be3731a3cde data/irregular_implements/recipe/translucent_luminous_block_yellow.json
 64c9b29db0e05a868902cb9d1217d1e6e05c38b6 data/irregular_implements/recipe/trigger_glass.json
 05dca021d75fd34335eaef07326af70c9bab9a1c data/irregular_implements/recipe/warped_platform.json
+cf9a48f2bb098783c7950395886c38bb2a966c59 data/irregular_implements/recipe/wash_boot.json
 606616ababcccad676a713b12d468e73cd08837d data/irregular_implements/recipe/weather_egg_rainy.json
 51a7a3889f80951306f8bcbfa3ddc6da460d30c5 data/irregular_implements/recipe/weather_egg_stormy.json
 817280da7dcfc3a61735e47b100ee3bde16cf411 data/irregular_implements/recipe/weather_egg_sunny.json
