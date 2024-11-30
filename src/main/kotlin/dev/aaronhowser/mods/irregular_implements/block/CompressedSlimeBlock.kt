@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.context.UseOnContext
@@ -14,6 +15,8 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.common.ItemAbilities
 import net.neoforged.neoforge.common.ItemAbility
+import net.neoforged.neoforge.common.util.TriState
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 
 class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 
@@ -24,6 +27,28 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
         val SHAPE_2: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 2.0, 15.99)
 
         val COMPRESSION_LEVEL: IntegerProperty = IntegerProperty.create("compression_level", 0, 2)
+
+        //FIXME: Clicking slime turns to compressed slime but also compresses it a second time instantly
+        fun compressSlimeBlock(event: PlayerInteractEvent.RightClickBlock) {
+            if (event.isCanceled) return
+
+            val level = event.level
+            val pos = event.pos
+
+            val clickedBlockState = level.getBlockState(pos)
+            if (!clickedBlockState.`is`(Blocks.SLIME_BLOCK)) return
+
+            val usedItem = event.itemStack
+            if (!usedItem.canPerformAction(ItemAbilities.SHOVEL_FLATTEN)) return
+
+            val newState = ModBlocks.COMPRESSED_SLIME_BLOCK.get().defaultBlockState()
+
+            level.setBlockAndUpdate(pos, newState)
+
+            event.useBlock = TriState.TRUE
+            event.useItem = TriState.TRUE
+        }
+
     }
 
     init {

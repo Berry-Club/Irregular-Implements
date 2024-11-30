@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.CompressedSlimeBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
@@ -30,6 +31,8 @@ object OtherEvents {
     fun onClickBlock(event: PlayerInteractEvent.RightClickBlock) {
         val level = event.level
         val pos = event.pos
+
+        CompressedSlimeBlock.compressSlimeBlock(event)
 
         if (event.hand == InteractionHand.MAIN_HAND) {
             ContactLeverBlock.handleClickBlock(level, pos)
