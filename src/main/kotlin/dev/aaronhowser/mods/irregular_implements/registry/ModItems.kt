@@ -47,7 +47,6 @@ object ModItems {
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
         register("chunk_analyzer") { ChunkAnalyzerItem() }
-    val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
@@ -181,6 +180,7 @@ object ModItems {
 
     // Removed items:
     // - Time in a Bottle (Use the standalone one!)
+    // - Eclipsed Clock (requires TIAB)
 
 
     private fun basic(id: String): DeferredItem<Item> {

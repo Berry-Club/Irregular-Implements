@@ -135,7 +135,6 @@ class ModLanguageProvider(
         addItem(ModItems.ENDER_BUCKET, "Ender Bucket")
         addItem(ModItems.REINFORCED_ENDER_BUCKET, "Reinforced Ender Bucket")
         addItem(ModItems.CHUNK_ANALYZER, "Chunk Analyzer")
-        addItem(ModItems.ECLIPSED_CLOCK, "Eclipsed Clock")
         addItem(ModItems.GRASS_SEEDS, "Grass Seeds")
         addItem(ModItems.DIVINING_ROD, "Divining Rod")
 

@@ -1001,15 +1001,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.ECLIPSED_CLOCK,
-            "OGO,GTG,OGO",
-            mapOf(
-                'O' to ing(Tags.Items.OBSIDIANS),
-                'G' to ing(Tags.Items.INGOTS_GOLD),
-                'T' to ing(ModItems.EVIL_TEAR)
-            )
-        ),
-        shapedRecipe(
             ModItems.SPECTRE_KEY,
             "S  ,SP ,  S",
             mapOf(
