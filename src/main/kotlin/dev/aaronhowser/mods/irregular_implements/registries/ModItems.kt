@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.registries
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.world.item.ArmorItem
-import net.minecraft.world.item.ArmorMaterials
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
@@ -50,23 +49,32 @@ object ModItems {
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val ECLIPSED_CLOCK = basic("eclipsed_clock")
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
+    val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
     // Armors
-    val WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
-        register("water_walking_boots") { FluidWalkingBoots.WATER_WALKING_BOOTS }
-    val LAVA_CHARM = basic("lava_charm")
-    val LAVA_WADERS: DeferredItem<FluidWalkingBoots> =
-        register("lava_waders") { FluidWalkingBoots.LAVA_WADERS }
-    val OBSIDIAN_SKULL = basic("obsidian_skull")
-    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
-    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
-        register("obsidian_water_walking_boots") { FluidWalkingBoots.OBSIDIAN_WATER_WALKING_BOOTS }
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
         register("magic_hood") {
             ArmorItem(
-                ArmorMaterials.CHAIN,   //TODO: Something that allows a custom texture
+                ModArmorMaterials.MAGIC,
                 ArmorItem.Type.HELMET,
                 Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))
+            )
+        }
+    val LAVA_CHARM = basic("lava_charm")
+    val OBSIDIAN_SKULL = basic("obsidian_skull")
+    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
+    val WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
+        register("water_walking_boots") { FluidWalkingBoots.WATER_WALKING_BOOTS }
+    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
+        register("obsidian_water_walking_boots") { FluidWalkingBoots.OBSIDIAN_WATER_WALKING_BOOTS }
+    val LAVA_WADERS: DeferredItem<FluidWalkingBoots> =
+        register("lava_waders") { FluidWalkingBoots.LAVA_WADERS }
+    val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =            // What if you could instead apply the tincture to any boots?
+        register("super_lubricant_boots") {
+            ArmorItem(
+                ModArmorMaterials.SUPER_LUBRICANT,
+                ArmorItem.Type.BOOTS,
+                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
             )
         }
 
@@ -118,19 +126,6 @@ object ModItems {
         register("redstone_tool") { RedstoneToolItem() }
     val REDSTONE_ACTIVATOR = basic("redstone_activator")
     val REDSTONE_REMOTE = basic("redstone_remote")
-
-    // Lubricant
-    val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
-
-    // What if you could instead apply the tincture to any boots?
-    val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =
-        register("super_lubricant_boots") {
-            ArmorItem(
-                ArmorMaterials.IRON,
-                ArmorItem.Type.BOOTS,
-                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
-            )
-        }
 
     // Floo
     val FLOO_POWDER = basic("floo_powder")

@@ -27,6 +27,12 @@ object ModArmorMaterials {
     val LAVA_WADERS: DeferredHolder<ArmorMaterial, ArmorMaterial> =
         register("lava_waders", Builder())
 
+    val SUPER_LUBRICANT: DeferredHolder<ArmorMaterial, ArmorMaterial> =
+        register("super_lubricant", Builder())
+
+    val MAGIC: DeferredHolder<ArmorMaterial, ArmorMaterial> =
+        register("magic", Builder())
+
 
     private fun register(id: String, builder: Builder): DeferredHolder<ArmorMaterial, ArmorMaterial> {
         val baseLayer = ArmorMaterial.Layer(OtherUtil.modResource(id))
