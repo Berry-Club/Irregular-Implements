@@ -4,14 +4,16 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemStackComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityItemComponent
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
-import net.minecraft.util.ExtraCodecs
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.material.Fluid
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.*
@@ -63,11 +65,17 @@ object ModDataComponents {
                 .networkSynchronized(ItemStackComponent.STREAM_CODEC)
         }
 
-    val STORED_TIME: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("stored_time") {
+    val FLUID_TAGS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("fluid_tags") {
             it
-                .persistent(ExtraCodecs.NON_NEGATIVE_INT)
-                .networkSynchronized(ByteBufCodecs.VAR_INT)
+                .persistent(
+                    TagKey.codec(Registries.FLUID)
+                        .listOf()
+                )
+                .networkSynchronized(
+                    OtherUtil.tagKeyStreamCodec(Registries.FLUID)
+                        .apply(ByteBufCodecs.list())
+                )
         }
 
 }
