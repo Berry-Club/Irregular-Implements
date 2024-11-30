@@ -18,45 +18,55 @@ object ModBlocks {
     val FERTILIZED_DIRT = basicBlock("fertilized_dirt")
     val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")
-    val NATURE_CHEST = basicBlock("nature_chest")
-    val WATER_CHEST = basicBlock("water_chest")
-    val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
-        registerBlock("analog_emitter") { AnalogEmitter() }
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
+    val RAIN_SHIELD =
+        registerBlock("rain_shield") { RainShieldBlock() }
+    val COMPRESSED_SLIME_BLOCK = basicBlock("compressed_slime_block")
+    val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
+    val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
+    val SLIME_CUBE = basicBlock("slime_cube")
+    val PEACE_CANDLE = basicBlock("peace_candle")
+
+    /** [net.neoforged.neoforge.common.world.StructureModifier] */
+    val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
+    val SOUND_BOX = basicBlock("sound_box")
+    val SOUND_DAMPENER = basicBlock("sound_dampener")
+
+    // Loot blocks
+    val NATURE_CORE = basicBlock("nature_core")
+    val NATURE_CHEST = basicBlock("nature_chest")
+    val WATER_CHEST = basicBlock("water_chest")
+
+    // Collectors
+    val ITEM_COLLECTOR = basicBlock("item_collector")
+    val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
+
+    // Redstone blocks
+    val ANALOG_EMITTER: DeferredBlock<AnalogEmitter> =
+        registerBlock("analog_emitter") { AnalogEmitter() }
     val CONTACT_BUTTON: DeferredBlock<ContactButton> =
         registerBlock("contact_button") { ContactButton() }
     val CONTACT_LEVER: DeferredBlock<ContactLever> =
         registerBlock("contact_lever") { ContactLever() }
-    val RAIN_SHIELD =
-        registerBlock("rain_shield") { RainShieldBlock() }
-    val BLOCK_BREAKER = basicBlock("block_breaker")
-    val COMPRESSED_SLIME_BLOCK = basicBlock("compressed_slime_block")
-    val REDSTONE_OBSERVER: DeferredBlock<RedstoneObserverBlock> =
-        registerBlock("redstone_observer") { RedstoneObserverBlock() }
-    val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
     val IRON_DROPPER = basicBlock("iron_dropper")
     val IGNITER = basicBlock("igniter")
+    val INVENTORY_TESTER = basicBlock("inventory_tester")
+    val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
+    val BLOCK_BREAKER = basicBlock("block_breaker")
+    val REDSTONE_OBSERVER: DeferredBlock<RedstoneObserverBlock> =
+        registerBlock("redstone_observer") { RedstoneObserverBlock() }
+    val SIDED_BLOCK_OF_REDSTONE =
+        registerBlock("sided_redstone") { SidedRedstoneBlock() }
+
+    // Sticks
     val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
         registerBlock("block_of_sticks") { BlockOfSticksBlock(returning = false) }
     val RETURNING_BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
         registerBlock("returning_block_of_sticks") { BlockOfSticksBlock(returning = true) }
-    val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
-    val SLIME_CUBE = basicBlock("slime_cube")
-    val PEACE_CANDLE = basicBlock("peace_candle") /** [net.neoforged.neoforge.common.world.StructureModifier] */
-    val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
-    val INVENTORY_TESTER = basicBlock("inventory_tester")
-    val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
-    val SOUND_BOX = basicBlock("sound_box")
-    val SOUND_DAMPENER = basicBlock("sound_dampener")
-    val SIDED_BLOCK_OF_REDSTONE =
-        registerBlock("sided_redstone") { SidedRedstoneBlock() }
-    val ITEM_COLLECTOR = basicBlock("item_collector")
-    val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
-    val NATURE_CORE = basicBlock("nature_core")
 
     // No Item
     val BLAZE_FIRE: DeferredBlock<BlazeFire> =
@@ -223,43 +233,43 @@ object ModBlocks {
     val TRANSLUCENT_LUMINOUS_BLOCK_RED: DeferredBlock<TransparentBlock> = basicGlassBlock("translucent_luminous_block_red")
     val TRANSLUCENT_LUMINOUS_BLOCK_BLACK: DeferredBlock<TransparentBlock> = basicGlassBlock("translucent_luminous_block_black")
 
-    val STAINED_BRICKS_WHITE: DeferredBlock<Block> = basicStoneBlock("stained_bricks_white")
-    val STAINED_BRICKS_ORANGE: DeferredBlock<Block> = basicStoneBlock("stained_bricks_orange")
-    val STAINED_BRICKS_MAGENTA: DeferredBlock<Block> = basicStoneBlock("stained_bricks_magenta")
-    val STAINED_BRICKS_LIGHT_BLUE: DeferredBlock<Block> = basicStoneBlock("stained_bricks_light_blue")
-    val STAINED_BRICKS_YELLOW: DeferredBlock<Block> = basicStoneBlock("stained_bricks_yellow")
-    val STAINED_BRICKS_LIME: DeferredBlock<Block> = basicStoneBlock("stained_bricks_lime")
-    val STAINED_BRICKS_PINK: DeferredBlock<Block> = basicStoneBlock("stained_bricks_pink")
-    val STAINED_BRICKS_GRAY: DeferredBlock<Block> = basicStoneBlock("stained_bricks_gray")
-    val STAINED_BRICKS_LIGHT_GRAY: DeferredBlock<Block> = basicStoneBlock("stained_bricks_light_gray")
-    val STAINED_BRICKS_CYAN: DeferredBlock<Block> = basicStoneBlock("stained_bricks_cyan")
-    val STAINED_BRICKS_PURPLE: DeferredBlock<Block> = basicStoneBlock("stained_bricks_purple")
-    val STAINED_BRICKS_BLUE: DeferredBlock<Block> = basicStoneBlock("stained_bricks_blue")
-    val STAINED_BRICKS_BROWN: DeferredBlock<Block> = basicStoneBlock("stained_bricks_brown")
-    val STAINED_BRICKS_GREEN: DeferredBlock<Block> = basicStoneBlock("stained_bricks_green")
-    val STAINED_BRICKS_RED: DeferredBlock<Block> = basicStoneBlock("stained_bricks_red")
-    val STAINED_BRICKS_BLACK: DeferredBlock<Block> = basicStoneBlock("stained_bricks_black")
+    val STAINED_BRICKS_WHITE: DeferredBlock<Block> = coloredStone("stained_bricks_white", DyeColor.WHITE)
+    val STAINED_BRICKS_ORANGE: DeferredBlock<Block> = coloredStone("stained_bricks_orange", DyeColor.ORANGE)
+    val STAINED_BRICKS_MAGENTA: DeferredBlock<Block> = coloredStone("stained_bricks_magenta", DyeColor.MAGENTA)
+    val STAINED_BRICKS_LIGHT_BLUE: DeferredBlock<Block> = coloredStone("stained_bricks_light_blue", DyeColor.LIGHT_BLUE)
+    val STAINED_BRICKS_YELLOW: DeferredBlock<Block> = coloredStone("stained_bricks_yellow", DyeColor.YELLOW)
+    val STAINED_BRICKS_LIME: DeferredBlock<Block> = coloredStone("stained_bricks_lime", DyeColor.LIME)
+    val STAINED_BRICKS_PINK: DeferredBlock<Block> = coloredStone("stained_bricks_pink", DyeColor.PINK)
+    val STAINED_BRICKS_GRAY: DeferredBlock<Block> = coloredStone("stained_bricks_gray", DyeColor.GRAY)
+    val STAINED_BRICKS_LIGHT_GRAY: DeferredBlock<Block> = coloredStone("stained_bricks_light_gray", DyeColor.LIGHT_GRAY)
+    val STAINED_BRICKS_CYAN: DeferredBlock<Block> = coloredStone("stained_bricks_cyan", DyeColor.CYAN)
+    val STAINED_BRICKS_PURPLE: DeferredBlock<Block> = coloredStone("stained_bricks_purple", DyeColor.PURPLE)
+    val STAINED_BRICKS_BLUE: DeferredBlock<Block> = coloredStone("stained_bricks_blue", DyeColor.BLUE)
+    val STAINED_BRICKS_BROWN: DeferredBlock<Block> = coloredStone("stained_bricks_brown", DyeColor.BROWN)
+    val STAINED_BRICKS_GREEN: DeferredBlock<Block> = coloredStone("stained_bricks_green", DyeColor.GREEN)
+    val STAINED_BRICKS_RED: DeferredBlock<Block> = coloredStone("stained_bricks_red", DyeColor.RED)
+    val STAINED_BRICKS_BLACK: DeferredBlock<Block> = coloredStone("stained_bricks_black", DyeColor.BLACK)
 
-    val LUMINOUS_STAINED_BRICKS_WHITE: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_white")
-    val LUMINOUS_STAINED_BRICKS_ORANGE: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_orange")
-    val LUMINOUS_STAINED_BRICKS_MAGENTA: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_magenta")
-    val LUMINOUS_STAINED_BRICKS_LIGHT_BLUE: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_light_blue")
-    val LUMINOUS_STAINED_BRICKS_YELLOW: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_yellow")
-    val LUMINOUS_STAINED_BRICKS_LIME: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_lime")
-    val LUMINOUS_STAINED_BRICKS_PINK: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_pink")
-    val LUMINOUS_STAINED_BRICKS_GRAY: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_gray")
-    val LUMINOUS_STAINED_BRICKS_LIGHT_GRAY: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_light_gray")
-    val LUMINOUS_STAINED_BRICKS_CYAN: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_cyan")
-    val LUMINOUS_STAINED_BRICKS_PURPLE: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_purple")
-    val LUMINOUS_STAINED_BRICKS_BLUE: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_blue")
-    val LUMINOUS_STAINED_BRICKS_BROWN: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_brown")
-    val LUMINOUS_STAINED_BRICKS_GREEN: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_green")
-    val LUMINOUS_STAINED_BRICKS_RED: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_red")
-    val LUMINOUS_STAINED_BRICKS_BLACK: DeferredBlock<Block> = basicStoneBlock("luminous_stained_bricks_black")
+    val LUMINOUS_STAINED_BRICKS_WHITE: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_white", DyeColor.WHITE)
+    val LUMINOUS_STAINED_BRICKS_ORANGE: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_orange", DyeColor.ORANGE)
+    val LUMINOUS_STAINED_BRICKS_MAGENTA: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_magenta", DyeColor.MAGENTA)
+    val LUMINOUS_STAINED_BRICKS_LIGHT_BLUE: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_light_blue", DyeColor.LIGHT_BLUE)
+    val LUMINOUS_STAINED_BRICKS_YELLOW: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_yellow", DyeColor.YELLOW)
+    val LUMINOUS_STAINED_BRICKS_LIME: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_lime", DyeColor.LIME)
+    val LUMINOUS_STAINED_BRICKS_PINK: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_pink", DyeColor.PINK)
+    val LUMINOUS_STAINED_BRICKS_GRAY: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_gray", DyeColor.GRAY)
+    val LUMINOUS_STAINED_BRICKS_LIGHT_GRAY: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_light_gray", DyeColor.LIGHT_GRAY)
+    val LUMINOUS_STAINED_BRICKS_CYAN: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_cyan", DyeColor.CYAN)
+    val LUMINOUS_STAINED_BRICKS_PURPLE: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_purple", DyeColor.PURPLE)
+    val LUMINOUS_STAINED_BRICKS_BLUE: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_blue", DyeColor.BLUE)
+    val LUMINOUS_STAINED_BRICKS_BROWN: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_brown", DyeColor.BROWN)
+    val LUMINOUS_STAINED_BRICKS_GREEN: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_green", DyeColor.GREEN)
+    val LUMINOUS_STAINED_BRICKS_RED: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_red", DyeColor.RED)
+    val LUMINOUS_STAINED_BRICKS_BLACK: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_black", DyeColor.BLACK)
 
     // Internal
     val FLOO_BRICK = basicBlock("floo_brick")
-    val ANCIENT_BRICK = basicBlock("ancient_brick") // "Internal"? Whatever that means
+    val ANCIENT_BRICK = basicBlock("ancient_brick")
 
     // Removed blocks:
     // - Light Redirector: Just too hard to implement lmao
@@ -281,6 +291,9 @@ object ModBlocks {
 
     private fun basicStoneBlock(name: String) =
         basicCopiedBlock(name, Blocks.STONE)
+
+    private fun coloredStone(name: String, color: DyeColor) =
+        blockWithProperties(name, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).mapColor(color))
 
     private fun <T : Block> registerBlock(
         name: String,
