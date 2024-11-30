@@ -29,17 +29,17 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
             holdingEntity: LivingEntity?,
             int: Int
         ): Float {
-            if (localLevel == null) return 0f
-            if (holdingEntity == null) return 0f
+            if (localLevel == null || holdingEntity == null) return 0f
             val itemComponent = stack.get(ModDataComponents.SPECIFIC_ENTITY) ?: return 0f
 
             val playerUuid = itemComponent.uuid
             val targetPlayer = localLevel.getPlayerByUUID(playerUuid) ?: return 0f
+            if (targetPlayer == holdingEntity) return 0f
 
             val angleToTarget = getAngleFromEntityToPos(holdingEntity, targetPlayer.blockPosition())
             val holderYaw = getWrappedVisualRotationY(holdingEntity)
 
-            val adjustedYaw = 0.5 - holderYaw - 0.25 - angleToTarget
+            val adjustedYaw = angleToTarget + 0.25 - holderYaw
 
             return Mth.positiveModulo(adjustedYaw.toFloat(), 1f)
         }
@@ -60,9 +60,10 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
         interactionTarget: LivingEntity,
         usedHand: InteractionHand
     ): InteractionResult {
-        val usedStack = player.getItemInHand(usedHand)
+        if (interactionTarget !is Player) return InteractionResult.PASS
 
-        usedStack.set(ModDataComponents.SPECIFIC_ENTITY, SpecificEntityItemComponent(player))
+        val usedStack = player.getItemInHand(usedHand)
+        usedStack.set(ModDataComponents.SPECIFIC_ENTITY, SpecificEntityItemComponent(interactionTarget))
 
         return InteractionResult.SUCCESS
     }
