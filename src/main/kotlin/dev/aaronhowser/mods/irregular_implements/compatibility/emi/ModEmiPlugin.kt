@@ -11,7 +11,6 @@ import dev.emi.emi.api.EmiRegistry
 class ModEmiPlugin : EmiPlugin {
 
     override fun register(registry: EmiRegistry) {
-
         for (infoRecipe in ModInformationRecipes.getInformationRecipes()) {
             registry.addRecipe(infoRecipe)
         }
@@ -20,7 +19,9 @@ class ModEmiPlugin : EmiPlugin {
             registry.addRecipe(interactionRecipe)
         }
 
-        LubricateBootRecipes.lubricateRecipe(registry)
+        for (bootRecipe in LubricateBootRecipes.getRecipes()) {
+            registry.addRecipe(bootRecipe)
+        }
     }
 
 }
