@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-30T04:23:27.0168607	Recipes
+// 1.21.1	2024-11-30T04:35:42.6024372	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -328,6 +328,7 @@ ba16331681dcca1d99c73699d568cbda6042842d data/irregular_implements/recipe/lapis_
 27fdc96a5e2ec8e3ccf9562763ed5177dca5f31e data/irregular_implements/recipe/lapis_lamp.json
 1f6806919c36469084b361c4c81c88b633b1885f data/irregular_implements/recipe/lesser_magic_bean.json
 a4787591fed28efdf5db18003e25c1ebaa8cbf00 data/irregular_implements/recipe/location_filter.json
+ef6d3ec75c1d76def77039979a26df54f32fe59a data/irregular_implements/recipe/lubricate_boot.json
 8cf12b025dd789986a257906c93ff82776a1545a data/irregular_implements/recipe/luminous_block_black.json
 c32db60a3cb6be73660b365488cd918453fca135 data/irregular_implements/recipe/luminous_block_blue.json
 dc4b25e13a89cc16578ed625b0200b3406a36d0c data/irregular_implements/recipe/luminous_block_brown.json

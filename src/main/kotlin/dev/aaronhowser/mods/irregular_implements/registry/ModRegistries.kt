@@ -14,7 +14,8 @@ object ModRegistries {
         ModEffects.EFFECT_REGISTRY,
         ModEntityTypes.ENTITY_TYPE_REGISTRY,
         ModSounds.SOUND_EVENT_REGISTRY,
-        ModArmorMaterials.ARMOR_MATERIAL_REGISTRY
+        ModArmorMaterials.ARMOR_MATERIAL_REGISTRY,
+        ModRecipeSerializers.RECIPE_SERIALIZERS_REGISTRY
     )
 
     fun register(modBus: IEventBus) {

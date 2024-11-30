@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
@@ -15,6 +16,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
 class ModArmorItems(
     material: Holder<ArmorMaterial>,
@@ -116,6 +118,14 @@ class ModArmorItems(
         }
 
         private val SHAPES: MutableMap<Float, VoxelShape> = HashMap()
+
+        fun tooltip(event: ItemTooltipEvent) {
+
+            if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
+                event.toolTip.add(Component.literal("Lubricated").withColor(0xFCF4DD))
+            }
+
+        }
     }
 
 }
