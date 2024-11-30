@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi
 
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.LubricateBootRecipes
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.ModInformationRecipes
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.ModInteractionRecipes
 import dev.emi.emi.api.EmiEntrypoint
@@ -19,6 +20,7 @@ class ModEmiPlugin : EmiPlugin {
             registry.addRecipe(interactionRecipe)
         }
 
+        LubricateBootRecipes.lubricateRecipe(registry)
     }
 
 }
