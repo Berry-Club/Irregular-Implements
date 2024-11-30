@@ -55,6 +55,8 @@ public interface BlockStateBaseFunctions {
                 h -> Block.box(0, 0, 0, 16, h * 16, 16)
         );
 
+        if (!context.isAbove(shape, pos, true)) return null;
+
         return (original == null)
                 ? shape
                 : Shapes.or(original, shape);
