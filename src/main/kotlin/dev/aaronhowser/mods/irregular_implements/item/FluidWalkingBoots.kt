@@ -23,6 +23,21 @@ class FluidWalkingBoots(
 
     companion object {
 
+        val WATER_WALKING_BOOTS = FluidWalkingBoots(
+            ArmorMaterials.CHAIN,
+            Type.BOOTS
+        )
+
+        val OBSIDIAN_WATER_WALKING_BOOTS = FluidWalkingBoots(
+            ArmorMaterials.CHAIN,
+            Type.BOOTS
+        )
+
+        val LAVA_WADERS = FluidWalkingBoots(
+            ArmorMaterials.CHAIN,
+            Type.BOOTS
+        )
+
         @JvmStatic
         fun checkCollisionShape(
             level: BlockGetter,

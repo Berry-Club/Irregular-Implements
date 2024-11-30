@@ -52,26 +52,15 @@ object ModItems {
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
 
     // Armors
-    val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
-        register("water_walking_boots") {
-            ArmorItem(
-                ArmorMaterials.CHAIN,
-                ArmorItem.Type.BOOTS,
-                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
-            )
-        }
+    val WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
+        register("water_walking_boots") { FluidWalkingBoots.WATER_WALKING_BOOTS }
     val LAVA_CHARM = basic("lava_charm")
-    val LAVA_WADERS: DeferredItem<ArmorItem> =
-        register("lava_waders") {
-            ArmorItem(
-                ArmorMaterials.CHAIN,
-                ArmorItem.Type.BOOTS,
-                Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))
-            )
-        }
+    val LAVA_WADERS: DeferredItem<FluidWalkingBoots> =
+        register("lava_waders") { FluidWalkingBoots.LAVA_WADERS }
     val OBSIDIAN_SKULL = basic("obsidian_skull")
     val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
-    val OBSIDIAN_WATER_WALKING_BOOTS = basic("obsidian_water_walking_boots")
+    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<FluidWalkingBoots> =
+        register("obsidian_water_walking_boots") { FluidWalkingBoots.OBSIDIAN_WATER_WALKING_BOOTS }
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
         register("magic_hood") {
             ArmorItem(
