@@ -16,15 +16,6 @@ object ModBlocks {
     val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
     val FERTILIZED_DIRT = basicBlock("fertilized_dirt")
-    val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
-        registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
-    val LAPIS_LAMP = basicBlock("lapis_lamp")
-    val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
-        registerBlock("ender_bridge") { EnderBridgeBlock(distancePerTick = 1) }
-    val PRISMARINE_ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
-        registerBlock("prismarine_ender_bridge") { EnderBridgeBlock(distancePerTick = 2) }
-    val ENDER_ANCHOR: DeferredBlock<Block> =
-        basicCopiedBlock("ender_anchor", Blocks.OBSIDIAN)
     val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")
     val NATURE_CHEST = basicBlock("nature_chest")
@@ -35,9 +26,6 @@ object ModBlocks {
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
-    val QUARTZ_LAMP = basicBlock("quartz_lamp")
-    val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
-        registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val CONTACT_BUTTON: DeferredBlock<ContactButton> =
         registerBlock("contact_button") { ContactButton() }
@@ -58,15 +46,9 @@ object ModBlocks {
         registerBlock("returning_block_of_sticks") { BlockOfSticksBlock(returning = true) }
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
-    val BLAZE_FIRE: DeferredBlock<BlazeFire> =
-        registerBlockWithoutItem("blaze_fire") { BlazeFire() }
-
-    /** [net.neoforged.neoforge.common.world.StructureModifier] */
-    val PEACE_CANDLE = basicBlock("peace_candle")
+    val PEACE_CANDLE = basicBlock("peace_candle") /** [net.neoforged.neoforge.common.world.StructureModifier] */
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val INVENTORY_TESTER = basicBlock("inventory_tester")
-    val TRIGGER_GLASS: DeferredBlock<TriggerGlass> =
-        registerBlock("trigger_glass") { TriggerGlass() }
     val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
@@ -75,8 +57,32 @@ object ModBlocks {
     val ITEM_COLLECTOR = basicBlock("item_collector")
     val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
     val NATURE_CORE = basicBlock("nature_core")
+
+    // No Item
+    val BLAZE_FIRE: DeferredBlock<BlazeFire> =
+        registerBlockWithoutItem("blaze_fire") { BlazeFire() }
+
+    // Glass
+    val TRIGGER_GLASS: DeferredBlock<TriggerGlass> =
+        registerBlock("trigger_glass") { TriggerGlass() }
+    val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
+        registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
+    val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
+        registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
+
+    // Lamp
     val RAINBOW_LAMP =
         registerBlock("rainbow_lamp") { RainbowLampBlock() }
+    val QUARTZ_LAMP = basicBlock("quartz_lamp")
+    val LAPIS_LAMP = basicBlock("lapis_lamp")
+
+    // Ender Bridge
+    val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
+        registerBlock("ender_bridge") { EnderBridgeBlock(distancePerTick = 1) }
+    val PRISMARINE_ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
+        registerBlock("prismarine_ender_bridge") { EnderBridgeBlock(distancePerTick = 2) }
+    val ENDER_ANCHOR: DeferredBlock<Block> =
+        basicCopiedBlock("ender_anchor", Blocks.OBSIDIAN)
 
     // Lubricant
     val SUPER_LUBRICANT_ICE: DeferredBlock<Block> =
