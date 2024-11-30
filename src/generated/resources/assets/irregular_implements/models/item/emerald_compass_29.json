@@ -1,0 +1,6 @@
+{
+  "parent": "irregular_implements:item/emerald_compass",
+  "textures": {
+    "layer0": "irregular_implements:item/emerald_compass/emerald_compass_29"
+  }
+}

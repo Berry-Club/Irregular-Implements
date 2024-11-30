@@ -1,16 +1,19 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.renderer.BiomeColors
+import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.GrassColor
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.neoforge.client.event.ModelEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 
 @EventBusSubscriber(
@@ -76,6 +79,16 @@ object ClientModBusEvents {
             ModBlocks.BIOME_STONE_BRICKS.get(),
             ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
             ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
+        )
+    }
+
+    @SubscribeEvent
+    fun onModelRegistry(event: ModelEvent.RegisterAdditional) {
+
+        ItemProperties.register(
+            ModItems.EMERALD_COMPASS.get(),
+            EmeraldCompassItem.ANGLE,
+            EmeraldCompassItem::itemPropertyFunction
         )
 
     }

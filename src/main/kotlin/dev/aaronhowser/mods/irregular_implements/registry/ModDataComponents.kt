@@ -60,6 +60,13 @@ object ModDataComponents {
                 .networkSynchronized(SpecificEntityItemComponent.STREAM_CODEC)
         }
 
+    val SPECIFIC_ENTITY: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityItemComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("specific_entity") {
+            it
+                .persistent(SpecificEntityItemComponent.CODEC)
+                .networkSynchronized(SpecificEntityItemComponent.STREAM_CODEC)
+        }
+
     val ITEMSTACK: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStackComponent>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("itemstack") {
             it

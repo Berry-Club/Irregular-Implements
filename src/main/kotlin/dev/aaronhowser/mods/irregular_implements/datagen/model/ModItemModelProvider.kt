@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
@@ -24,6 +25,30 @@ class ModItemModelProvider(
         coloredItems()
         handheldItems()
         basicItems()
+
+        emeraldCompass()
+    }
+
+    private fun emeraldCompass() {
+        val item = ModItems.EMERALD_COMPASS.get()
+
+        val baseModel = getBuilder(getName(item).toString())
+            .parent(ModelFile.UncheckedModelFile("item/handheld"))
+            .texture("layer0", "item/emerald_compass/emerald_compass_00")
+
+        for (i in 0 until 31) {
+            val number = i.toString().padStart(2, '0')
+            val model = getBuilder("${getName(item)}_$number")
+                .parent(baseModel)
+                .texture("layer0", "item/emerald_compass/emerald_compass_$number")
+
+            baseModel
+                .override()
+                .predicate(EmeraldCompassItem.ANGLE, i.toFloat() / 31)
+                .model(model)
+                .end()
+        }
+
     }
 
     private fun basicItems() {
