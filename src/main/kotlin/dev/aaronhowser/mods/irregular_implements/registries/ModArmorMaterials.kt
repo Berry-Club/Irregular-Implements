@@ -13,6 +13,7 @@ import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
 
+// Inspired largely by Advent of Ascension's class
 object ModArmorMaterials {
 
     val ARMOR_MATERIAL_REGISTRY: DeferredRegister<ArmorMaterial> =
