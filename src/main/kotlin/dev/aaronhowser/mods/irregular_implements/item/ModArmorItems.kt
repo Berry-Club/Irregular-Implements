@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
+import net.minecraft.world.item.Rarity
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -36,6 +37,7 @@ class ModArmorItems(
                 Type.BOOTS,
                 Properties()
                     .durability(Type.BOOTS.getDurability(15))
+                    .rarity(Rarity.RARE)
                     .component(
                         ModDataComponents.FLUID_TAGS,
                         listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
@@ -49,6 +51,7 @@ class ModArmorItems(
                 Type.BOOTS,
                 Properties()
                     .durability(Type.BOOTS.getDurability(15))
+                    .rarity(Rarity.RARE)
                     .component(
                         ModDataComponents.FLUID_TAGS,
                         listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
@@ -62,6 +65,7 @@ class ModArmorItems(
                 Type.BOOTS,
                 Properties()
                     .durability(Type.BOOTS.getDurability(15))
+                    .rarity(Rarity.RARE)
                     .component(
                         ModDataComponents.FLUID_TAGS,
                         listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
@@ -73,7 +77,9 @@ class ModArmorItems(
             ArmorItem(
                 ModArmorMaterials.MAGIC,
                 Type.HELMET,
-                Properties().durability(Type.HELMET.getDurability(15))
+                Properties()
+                    .durability(Type.HELMET.getDurability(15))
+                    .rarity(Rarity.RARE)
             )
         }
 

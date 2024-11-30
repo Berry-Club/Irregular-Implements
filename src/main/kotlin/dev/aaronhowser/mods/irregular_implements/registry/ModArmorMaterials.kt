@@ -23,16 +23,16 @@ object ModArmorMaterials {
         DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, IrregularImplements.ID)
 
     val WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("water_walking", Builder().repair(Tags.Items.INGOTS_IRON))
+        register("water_walking", Builder().repair(Tags.Items.INGOTS_IRON).boot(1))
 
     val OBSIDIAN_WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("obsidian_water_walking", Builder().repair(Tags.Items.INGOTS_IRON))
+        register("obsidian_water_walking", Builder().repair(Tags.Items.INGOTS_IRON).boot(1))
 
     val LAVA_WADERS: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("lava_waders", Builder().repair(Tags.Items.INGOTS_IRON))
+        register("lava_waders", Builder().repair(Tags.Items.INGOTS_IRON).boot(1))
 
     val MAGIC: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("magic", Builder().repair(Tags.Items.LEATHERS))
+        register("magic", Builder().repair(Tags.Items.LEATHERS).helmet(1))
 
 
     private fun register(id: String, builder: Builder): DeferredHolder<ArmorMaterial, ArmorMaterial> {
@@ -51,6 +51,11 @@ object ModArmorMaterials {
         private var enchantValue = 10
         private var equipSound: Holder<SoundEvent> = SoundEvents.ARMOR_EQUIP_GENERIC
         private var repairIngredient = Supplier { Ingredient.EMPTY }
+
+        fun helmet(armour: Int): Builder {
+            helmetArmour = armour
+            return this
+        }
 
         fun boot(armour: Int): Builder {
             bootsArmour = armour
