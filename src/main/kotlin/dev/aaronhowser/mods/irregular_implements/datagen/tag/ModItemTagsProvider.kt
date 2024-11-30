@@ -27,9 +27,23 @@ class ModItemTagsProvider(
 
         val GRASS_SEEDS = create("grass_seeds")
         val RUNE_DUSTS = create("rune_dusts")
+
+        val WATER_WALKING_BOOTS = create("water_walking_boots")
+        val LAVA_WALKING_BOOTS = create("lava_walking_boots")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(WATER_WALKING_BOOTS)
+            .add(
+                ModItems.WATER_WALKING_BOOTS.get(),
+                ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
+            )
+
+        this.tag(LAVA_WALKING_BOOTS)
+            .add(
+                ModItems.LAVA_WADERS.get()
+            )
 
         this.tag(GRASS_SEEDS)
             .add(

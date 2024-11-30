@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
-import dev.aaronhowser.mods.irregular_implements.registries.ModItems
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.world.entity.EquipmentSlot
@@ -42,15 +42,11 @@ class FluidWalkingBoots(
 
             val footArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
-            val tagKey = if (footArmor.`is`(ModItems.WATER_WALKING_BOOTS)) {
-                ModFluidTagsProvider.ALLOWS_WATER_WALKING
-            } else if (footArmor.`is`(ModItems.LAVA_WADERS)) {
-                ModFluidTagsProvider.ALLOWS_LAVA_WALKING
-            } else {
-                return null
-            }
+            val standOnWater = footArmor.`is`(ModItemTagsProvider.WATER_WALKING_BOOTS)
+            val standOnLava = footArmor.`is`(ModItemTagsProvider.LAVA_WALKING_BOOTS)
 
-            if (!fluidState.`is`(tagKey)) return null
+            if (standOnWater && !fluidState.`is`(ModFluidTagsProvider.ALLOWS_WATER_WALKING)) return null
+            if (standOnLava && !fluidState.`is`(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)) return null
 
             val shape = SHAPES.computeIfAbsent(
                 fluidHeight

@@ -1,3 +1,5 @@
-// 1.21.1	2024-11-04T21:32:27.0033854	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2024-11-30T02:12:11.1592569	Tags for minecraft:item mod id irregular_implements
 929c63e629fa72731eb642bf2e3527ea64d16ade data/irregular_implements/tags/item/grass_seeds.json
+c64880aa43833302f5d654b4c5257a9f97d29752 data/irregular_implements/tags/item/lava_walking_boots.json
 d0629a4ab22d21c9a1a19c58d80458acac94f8a7 data/irregular_implements/tags/item/rune_dusts.json
+343ed959d33969cf6f419c9dc34c9066e73229c7 data/irregular_implements/tags/item/water_walking_boots.json
