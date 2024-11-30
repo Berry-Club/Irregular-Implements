@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems;
 import net.minecraft.core.particles.ParticleOptions;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.FluidState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -51,16 +49,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
         return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD()))
                 ? List.of()
                 : original;
-    }
-
-    @ModifyReturnValue(
-            method = "canStandOnFluid",
-            at = @At("RETURN")
-    )
-    private boolean irregular_implements$canStandOnFluid(boolean original, FluidState fluidState) {
-        if (original) return true;
-
-        return checkCanStandOnFluid(fluidState);
     }
 
 }
