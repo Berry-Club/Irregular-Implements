@@ -36,6 +36,51 @@ class ModBlockStateProvider(
         contactButton()
         biomeBlocks()
         enderBridges()
+        fertilizedDirt()
+    }
+
+    private fun fertilizedDirt() {
+        val block = ModBlocks.FERTILIZED_DIRT.get()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val tilled = it.getValue(FertilizedDirtBlock.TILLED)
+
+                val texture = blockTexture(block)
+
+                val modelName = name(block) + if (tilled) "_tilled" else ""
+                val model = if (tilled) {
+                    models()
+                        .withExistingParent(modelName, mcLoc("block/block"))
+                        .texture("texture", texture)
+                        .texture("particle", texture)
+
+                        .element()
+                        .from(0f, 0f, 0f)
+                        .to(16f, 15f, 16f)
+                        .textureAll("#texture")
+                        .end()
+                } else {
+                    models()
+                        .cubeAll(
+                            modelName,
+                            texture
+                        )
+                }
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/fertilized_dirt"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun enderBridges() {
@@ -265,7 +310,6 @@ class ModBlockStateProvider(
         for (color in DyeColor.entries) {
             val block = ModBlocks.getColoredGrass(color).get()
 
-            //TODO: Figure out how to color
             val model = models()
                 .withExistingParent(name(block), mcLoc("block/grass_block"))
 
@@ -552,7 +596,6 @@ class ModBlockStateProvider(
             ModBlocks.ENTITY_DETECTOR,
             ModBlocks.BEAN_POD,
             ModBlocks.ENDER_ANCHOR,
-            ModBlocks.FERTILIZED_DIRT,
             ModBlocks.FLUID_DISPLAY,
             ModBlocks.NATURE_CORE,
             ModBlocks.BASIC_REDSTONE_INTERFACE,
