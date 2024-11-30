@@ -15,6 +15,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public interface BlockStateBaseFunctions {
 
@@ -24,7 +26,7 @@ public interface BlockStateBaseFunctions {
 
         var fluidState = level.getFluidState(pos);
         var fluidAmount = fluidState.getAmount();
-        if (fluidAmount == 0) return null;
+        if (fluidAmount <= 0) return null;
 
         var entity = collisionContext.getEntity();
         if (!(entity instanceof LivingEntity livingEntity)) return null;
@@ -45,12 +47,25 @@ public interface BlockStateBaseFunctions {
 
         if (!fluidState.is(tagKey)) return null;
 
-        var shape = Block.box(0, 0, 0, 16, fluidAmount, 16);
-        var shapeBelow = Block.box(0, 0, 0, 16, fluidAmount - 1, 16);
+        var shape = getOrCalculateShape(fluidAmount);
+        var shapeBelow = getOrCalculateShape(fluidAmount - 1);
 
         return (context.isAbove(shapeBelow, pos, true))
                 ? (original != null) ? Shapes.or(original, shape) : shape
                 : null;
+    }
+
+    Map<Integer, VoxelShape> SHAPES = new HashMap<>();
+
+    private VoxelShape getOrCalculateShape(int height) {
+        if (SHAPES.containsKey(height)) {
+            return SHAPES.get(height);
+        }
+
+        var shape = Block.box(0, 0, 0, 16, height, 16);
+        SHAPES.put(height, shape);
+
+        return shape;
     }
 
 }
