@@ -274,6 +274,7 @@
   "info.irregular_implements.stable_ender_pearl": "Use to bind to yourself.\n\nSeven seconds after being dropped, it teleports the bound entity to it. If no entity is bound, it grabs a random entity within 10 blocks instead.",
   "info.irregular_implements.super_lubricant_ice": "No friction.",
   "info.irregular_implements.super_lubricant_stone": "No friction.",
+  "info.irregular_implements.super_lubricant_tincture": "Can be applied to any Boots to make you slide when wearing them.\n\nCan be washed with a Water Bottle after.",
   "info.irregular_implements.trigger_glass": "When given a Redstone pulse, loses its collision for 3 seconds.\n\nAlso triggers adjacent Trigger Glass.",
   "info.irregular_implements.water_walking_boots": "Allows you to walk on water when not sneaking.",
   "item.irregular_implements.advanced_redstone_repeater": "Advanced Redstone Repeater",

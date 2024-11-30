@@ -451,6 +451,7 @@ class ModLanguageProvider(
         addInfo(ModBlocks.BOUNCY_PLATE, "Entities on this Plate are propelled upwards.")
         addInfo(ModBlocks.COLLECTION_PLATE, "Dropped item entities that pass over this Plate attempt to insert into adjacent inventories.")
         addInfo(ModBlocks.EXTRACTION_PLATE, "Has an \"input\" side and an \"output\" side. Extracts stacks from the input side, and drops or inserts them on the output side, depending on if there's an inventory there.\n\nRight-click with an empty hand to change the output side, and do so while sneaking to change the input side.")
+
         addInfo(ModItems.STABLE_ENDER_PEARL, "Use to bind to yourself.\n\nSeven seconds after being dropped, it teleports the bound entity to it. If no entity is bound, it grabs a random entity within 10 blocks instead.")
         addInfo(ModItems.BIOME_CRYSTAL, "Used in the Biome Radar.")
         addInfo(ModItems.LOCATION_FILTER, "An item representation of a position in the world.\n\nSet by either using it on a block, an entity, or empty space.")
@@ -486,6 +487,7 @@ class ModLanguageProvider(
         addInfo(ModItems.SOUND_PATTERN, "Represents a sound.\n\nSet with a Sound Recorder.")
         addInfo(ModItems.SOUND_RECORDER, "Lets you save a sound to a stored Sound Pattern.\n\nUse it to toggle recording; it will stop automatically once it reaches 10 unique sounds.\n\nSneak right-click again to choose which sound to save to the Pattern.")
         addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
+        addInfo(ModItems.SUPER_LUBRICANT_TINCTURE, "Can be applied to any Boots to make you slide when wearing them.\n\nCan be washed with a Water Bottle after.")
         //TODO: The others
     }
 
