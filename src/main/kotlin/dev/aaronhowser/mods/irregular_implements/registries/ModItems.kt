@@ -134,7 +134,6 @@ object ModItems {
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
     // What if you could instead apply the tincture to any boots?
-    @JvmStatic
     val SUPER_LUBRICANT_BOOTS: DeferredItem<ArmorItem> =
         register("super_lubricant_boots") {
             ArmorItem(

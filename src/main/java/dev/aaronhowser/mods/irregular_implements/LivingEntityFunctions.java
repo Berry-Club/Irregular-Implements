@@ -1,12 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements;
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider;
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider;
 import dev.aaronhowser.mods.irregular_implements.registries.ModItems;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
 
 public interface LivingEntityFunctions {
 
@@ -16,7 +13,7 @@ public interface LivingEntityFunctions {
         if (livingEntity.getDeltaMovement().lengthSqr() > 1f) return false;
 
         if (livingEntity.getItemBySlot(EquipmentSlot.FEET)
-                .is(ModItems.getSUPER_LUBRICANT_BOOTS())
+                .is(ModItems.INSTANCE.getSUPER_LUBRICANT_BOOTS())
         ) return true;
 
         return livingEntity.level()
