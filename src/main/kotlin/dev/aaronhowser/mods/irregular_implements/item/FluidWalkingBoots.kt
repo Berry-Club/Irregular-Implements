@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
+import dev.aaronhowser.mods.irregular_implements.registries.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registries.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -8,7 +9,6 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
-import net.minecraft.world.item.ArmorMaterials
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -30,7 +30,7 @@ class FluidWalkingBoots(
 
         val WATER_WALKING_BOOTS by lazy {
             FluidWalkingBoots(
-                ArmorMaterials.CHAIN,
+                ModArmorMaterials.WATER_WALKING,
                 Type.BOOTS,
                 Properties()
                     .durability(Type.BOOTS.getDurability(15))
@@ -43,7 +43,7 @@ class FluidWalkingBoots(
 
         val OBSIDIAN_WATER_WALKING_BOOTS by lazy {
             FluidWalkingBoots(
-                ArmorMaterials.CHAIN,
+                ModArmorMaterials.OBSIDIAN_WATER_WALKING,
                 Type.BOOTS,
                 Properties()
                     .durability(Type.BOOTS.getDurability(15))
@@ -56,7 +56,7 @@ class FluidWalkingBoots(
 
         val LAVA_WADERS by lazy {
             FluidWalkingBoots(
-                ArmorMaterials.CHAIN,
+                ModArmorMaterials.LAVA_WADERS,
                 Type.BOOTS,
                 Properties()
                     .durability(Type.BOOTS.getDurability(15))
