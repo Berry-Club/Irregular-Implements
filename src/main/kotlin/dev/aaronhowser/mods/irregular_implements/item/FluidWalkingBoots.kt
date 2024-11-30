@@ -36,7 +36,7 @@ class FluidWalkingBoots(
                     .durability(Type.BOOTS.getDurability(15))
                     .component(
                         ModDataComponents.FLUID_TAGS,
-                        listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
+                        listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
                     )
             )
         }
@@ -49,7 +49,7 @@ class FluidWalkingBoots(
                     .durability(Type.BOOTS.getDurability(15))
                     .component(
                         ModDataComponents.FLUID_TAGS,
-                        listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
+                        listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
                     )
             )
         }
