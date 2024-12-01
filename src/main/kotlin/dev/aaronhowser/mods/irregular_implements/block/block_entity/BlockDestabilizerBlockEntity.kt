@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.entity.item.FallingBlockEntity
+import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -254,6 +255,24 @@ class BlockDestabilizerBlockEntity(
         } else if (this.lazy) {
             this.invalidBlocks.add(nextPos)
         }
+    }
+
+    private fun initStart() {
+        val level = this.level ?: return
+
+        val facing = this.blockState.getValue(DirectionalBlock.FACING)
+
+        val targetBlockPos = this.blockPos.relative(facing)
+        val targetBlockState = level.getBlockState(targetBlockPos)
+
+        if (targetBlockState.isAir) return
+        if (targetBlockState.getDestroySpeed(level, targetBlockPos) <= 0) return
+
+        this.targetState = targetBlockState
+        this.state = State.SEARCHING
+
+        this.toCheck.add(targetBlockPos)
+
     }
 
     // Syncs with client
