@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
@@ -223,6 +225,36 @@ class BlockDestabilizerBlockEntity(
         this.alreadyChecked.clear()
     }
 
+    private fun stepSearch() {
+        val doneSearching = this.toCheck.isEmpty() || this.targetBlocks.count() >= ServerConfig.BLOCK_DESTABILIZER_LIMIT.get()
+        if (doneSearching) {
+            initDrop()
+            return
+        }
+
+        val nextPos = this.toCheck.removeFirst()
+        if (this.alreadyChecked.contains(nextPos)) return
+
+        this.alreadyChecked.add(nextPos)
+
+        val level = this.level ?: return
+        val checkedState = level.getBlockState(nextPos)
+
+        val shouldAdd = (this.fuzzy && checkedState.block == targetState?.block) || checkedState == targetState
+        if (shouldAdd) {
+            this.targetBlocks.add(nextPos)
+
+            for (direction in Direction.entries) {
+                val offsetPos = nextPos.relative(direction)
+                if (!this.alreadyChecked.contains(offsetPos)) {
+                    this.toCheck.add(offsetPos)
+                }
+            }
+
+        } else if (this.lazy) {
+            this.invalidBlocks.add(nextPos)
+        }
+    }
 
     // Syncs with client
     override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
