@@ -38,6 +38,54 @@ class ModBlockStateProvider(
         enderBridges()
         fertilizedDirt()
         compressedSlime()
+        blockDestabilizer()
+    }
+
+    private fun blockDestabilizer() {
+        val block = ModBlocks.BLOCK_DESTABILIZER.get()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DirectionalBlock.FACING)
+                val modelName = name(block) + "_" + facing.name.lowercase()
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                val model = models()
+                    .cubeAll(
+                        modelName,
+                        modLoc("block/block_destabilizer/face")
+                    )
+                    .texture("front", modLoc("block/block_destabilizer/front"))
+                    .renderType(RenderType.CUTOUT_MIPPED.name)
+
+                    .element()
+                    .from(0f, 0f, 0f)
+                    .to(16f, 0f, 16f)
+                    .texture("#front")
+                    .emissivity(15, 15)
+                    .end()
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .rotationY(yRotation)
+                    .rotationX(xRotation)
+                    .build()
+            }
+
     }
 
     private fun compressedSlime() {

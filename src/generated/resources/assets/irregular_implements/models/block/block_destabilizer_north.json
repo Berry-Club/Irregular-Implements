@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "to": [
+        16,
+        0,
+        16
+      ]
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "to": [
+        16,
+        0,
+        16
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "all": "irregular_implements:block/block_destabilizer/face",
+    "front": "irregular_implements:block/block_destabilizer/front"
+  }
+}
