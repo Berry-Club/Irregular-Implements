@@ -4,15 +4,19 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.renderer.BiomeColors
+import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
+import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.GrassColor
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.ModelEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 
@@ -91,6 +95,11 @@ object ClientModBusEvents {
             EmeraldCompassItem::getAngleFloat
         )
 
+    }
+
+    @SubscribeEvent
+    fun onClientSetup(event: FMLClientSetupEvent) {
+        EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
     }
 
 }

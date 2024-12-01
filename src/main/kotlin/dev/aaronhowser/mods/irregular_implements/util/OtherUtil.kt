@@ -4,6 +4,7 @@ import com.mojang.math.Transformation
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
@@ -15,7 +16,6 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
@@ -63,7 +63,6 @@ object OtherUtil {
         )
     }
 
-    //TODO: Use a custom entity instead of block displays
     fun spawnIndicatorBlockDisplay(
         level: Level,
         pos: BlockPos,
@@ -72,25 +71,18 @@ object OtherUtil {
     ) {
         if (level.isClientSide) return
 
-        val blockDisplay = EntityType.BLOCK_DISPLAY.create(level) ?: return
-
-        blockDisplay.setBlockState(Blocks.GLASS.defaultBlockState())
-        val transformation = Transformation(
-            null,
-            null,
-            Vector3f(0.5f, 0.5f, 0.5f),
-            null
+        val indicatorDisplay = IndicatorDisplayEntity(
+            level,
+            Blocks.GLASS.defaultBlockState(),
+            color,
+            5
         )
-        blockDisplay.setTransformation(transformation)
 
-        blockDisplay.setGlowingTag(true)
-        blockDisplay.setGlowColorOverride(color)
-
-        blockDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
-        level.addFreshEntity(blockDisplay)
+        indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
+        level.addFreshEntity(indicatorDisplay)
 
         ServerScheduler.scheduleTaskInTicks(duration) {
-            blockDisplay.discard()
+            indicatorDisplay.discard()
         }
     }
 
