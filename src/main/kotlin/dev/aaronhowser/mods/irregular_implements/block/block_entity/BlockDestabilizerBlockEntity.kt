@@ -273,6 +273,11 @@ class BlockDestabilizerBlockEntity(
 
         this.toCheck.add(targetBlockPos)
 
+        if (this.isLazy) {
+            this.alreadyChecked.addAll(this.invalidBlocks)
+        } else {
+            this.invalidBlocks.clear()
+        }
     }
 
     // Syncs with client
