@@ -55,7 +55,8 @@ object ModBlocks {
     val CONTACT_LEVER: DeferredBlock<ContactLeverBlock> =
         registerBlock("contact_lever") { ContactLeverBlock() }
     val IRON_DROPPER = basicBlock("iron_dropper")
-    val IGNITER = basicBlock("igniter")
+    val IGNITER: DeferredBlock<IgniterBlock> =
+        registerBlock("igniter") { IgniterBlock() }
     val INVENTORY_TESTER = basicBlock("inventory_tester")
     val BLOCK_DESTABILIZER: DeferredBlock<BlockDestabilizerBlock> =
         registerBlock("block_destabilizer") { BlockDestabilizerBlock() }
