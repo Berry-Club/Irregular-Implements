@@ -67,16 +67,27 @@ object ModInteractionRecipes {
     private fun slime(): MutableList<EmiWorldInteractionRecipe> {
         val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
 
-        val shovel = BuiltInRegistries.ITEM.filter { it.defaultInstance.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) }
         val slimeBlock = Items.SLIME_BLOCK.defaultInstance
         val compressedSlimeOne = slimeStackWithLore(1)
         val compressedSlimeTwo = slimeStackWithLore(2)
         val compressedSlimeThree = slimeStackWithLore(3)
 
+        val shovels = BuiltInRegistries.ITEM
+            .filter { it.defaultInstance.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) }
+
+        val shovelsEmiIngredient = EmiIngredient.of(Ingredient.of(*shovels.toTypedArray()))
+
+        for (emiStack in shovelsEmiIngredient.emiStacks) {
+            val damagedStack = emiStack.itemStack.copy()
+            damagedStack.damageValue = 1
+            emiStack.setRemainder(EmiStack.of(damagedStack))
+        }
+
+
         val recipeOne = EmiWorldInteractionRecipe
             .builder()
             .leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
-            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
+            .rightInput(shovelsEmiIngredient, true)
             .output(EmiStack.of(compressedSlimeOne))
             .id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
             .build()
@@ -84,7 +95,7 @@ object ModInteractionRecipes {
         val recipeTwo = EmiWorldInteractionRecipe
             .builder()
             .leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeOne)))
-            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
+            .rightInput(shovelsEmiIngredient, true)
             .output(EmiStack.of(compressedSlimeTwo))
             .id(OtherUtil.modResource("/interaction/slime/compressed_one_to_compressed_two"))
             .build()
@@ -92,7 +103,7 @@ object ModInteractionRecipes {
         val recipeThree = EmiWorldInteractionRecipe
             .builder()
             .leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeTwo)))
-            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
+            .rightInput(shovelsEmiIngredient, true)
             .output(EmiStack.of(compressedSlimeThree))
             .id(OtherUtil.modResource("/interaction/slime/compressed_two_to_compressed_three"))
             .build()
@@ -100,7 +111,7 @@ object ModInteractionRecipes {
         val recipeFour = EmiWorldInteractionRecipe
             .builder()
             .leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeThree)))
-            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
+            .rightInput(shovelsEmiIngredient, true)
             .output(EmiStack.of(slimeBlock))
             .id(OtherUtil.modResource("/interaction/slime/compressed_three_to_slime"))
             .build()
