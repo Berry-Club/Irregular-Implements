@@ -43,7 +43,7 @@ object ModInteractionRecipes {
             EmiWorldInteractionRecipe
                 .builder()
                 .leftInput(EmiIngredient.of(Ingredient.of(Blocks.DIRT)))
-                .rightInput(EmiIngredient.of(Ingredient.of(seedItem)), true)
+                .rightInput(EmiIngredient.of(Ingredient.of(seedItem)), false)
                 .output(EmiStack.of(seedItem.resultBlock))
                 .id(id)
                 .build()
