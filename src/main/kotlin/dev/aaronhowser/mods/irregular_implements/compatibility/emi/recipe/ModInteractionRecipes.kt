@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -10,7 +12,6 @@ import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.network.chat.Component
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -49,12 +50,14 @@ object ModInteractionRecipes {
         }
     }
 
-    private fun slimeStackWithLore(lore: String): ItemStack {
+    private fun slimeStackWithLore(compressionLevel: Int): ItemStack {
         val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
 
-        val component = Component.literal(lore).withStyle {
-            it.withColor(ChatFormatting.GRAY).withUnderlined(true).withItalic(false)
-        }
+        val component = ModLanguageProvider.Tooltips.COMPRESSED_SLIME_AMOUNT
+            .toComponent(compressionLevel)
+            .withStyle {
+                it.withColor(ChatFormatting.GRAY).withUnderlined(true).withItalic(false)
+            }
 
         stack.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))
 
@@ -66,9 +69,9 @@ object ModInteractionRecipes {
 
         val shovel = BuiltInRegistries.ITEM.filter { it.defaultInstance.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) }
         val slimeBlock = Items.SLIME_BLOCK.defaultInstance
-        val compressedSlimeOne = slimeStackWithLore("Compression level 1")
-        val compressedSlimeTwo = slimeStackWithLore("Compression level 2")
-        val compressedSlimeThree = slimeStackWithLore("Compression level 3")
+        val compressedSlimeOne = slimeStackWithLore(1)
+        val compressedSlimeTwo = slimeStackWithLore(2)
+        val compressedSlimeThree = slimeStackWithLore(3)
 
         val recipeOne = EmiWorldInteractionRecipe
             .builder()

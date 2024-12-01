@@ -361,6 +361,7 @@
   "message.irregular_implements.redstone_tool.unloaded": "Cannot link as base %s is in an unloaded chunk.",
   "message.irregular_implements.redstone_tool.wrong_dimension": "Cannot link as base %s is in a different dimension.",
   "subtitle.irregular_implements.fart": "Pbbbt",
+  "tooltip.irregular_implements.compressed_slime_AMOUNT": "Compressed level %d",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
   "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information"

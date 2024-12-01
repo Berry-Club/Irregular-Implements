@@ -360,6 +360,8 @@ class ModLanguageProvider(
 
         const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
         const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
+
+        const val COMPRESSED_SLIME_AMOUNT = "tooltip.irregular_implements.compressed_slime_AMOUNT"
     }
 
     private fun addTooltips() {
@@ -367,6 +369,8 @@ class ModLanguageProvider(
 
         add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
         add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
+
+        add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
     }
 
     object Info {
