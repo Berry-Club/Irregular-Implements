@@ -7,10 +7,12 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
+import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ItemLore
 import net.minecraft.world.item.crafting.Ingredient
@@ -47,25 +49,34 @@ object ModInteractionRecipes {
         }
     }
 
+    private fun slimeStackWithLore(lore: String): ItemStack {
+        val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
+
+        val component = Component.literal(lore).withStyle {
+            it.withColor(ChatFormatting.GRAY).withUnderlined(true).withItalic(false)
+        }
+
+        stack.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))
+
+        return stack
+    }
+
     private fun slime(): MutableList<EmiWorldInteractionRecipe> {
         val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
 
         val shovel = BuiltInRegistries.ITEM.filter { it.defaultInstance.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) }
         val slimeBlock = Items.SLIME_BLOCK.defaultInstance
-        val compressedSlimeOne = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
-            .apply { set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.literal("1"))) }
-        val compressedSlimeTwo = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
-            .apply { set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.literal("2"))) }
-        val compressedSlimeThree = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
-            .apply { set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.literal("3"))) }
+        val compressedSlimeOne = slimeStackWithLore("Compression level 1")
+        val compressedSlimeTwo = slimeStackWithLore("Compression level 2")
+        val compressedSlimeThree = slimeStackWithLore("Compression level 3")
 
-        val recipeOne = EmiWorldInteractionRecipe
-            .builder()
-            .leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
-            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
-            .output(EmiStack.of(compressedSlimeOne))
-            .id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
-            .build()
+//        val recipeOne = EmiWorldInteractionRecipe
+//            .builder()
+//            .leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
+//            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
+//            .output(EmiStack.of(compressedSlimeOne))
+//            .id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
+//            .build()
 
         val recipeTwo = EmiWorldInteractionRecipe
             .builder()
@@ -91,7 +102,7 @@ object ModInteractionRecipes {
             .id(OtherUtil.modResource("/interaction/slime/compressed_three_to_slime"))
             .build()
 
-        recipes.add(recipeOne)
+//        recipes.add(recipeOne)
         recipes.add(recipeTwo)
         recipes.add(recipeThree)
         recipes.add(recipeFour)
