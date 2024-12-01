@@ -268,7 +268,7 @@ class BlockDestabilizerBlockEntity(
         }
     }
 
-    private fun initStart() {
+    fun initStart() {
         val level = this.level ?: return
 
         val facing = this.blockState.getValue(DirectionalBlock.FACING)

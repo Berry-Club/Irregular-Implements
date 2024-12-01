@@ -44,6 +44,24 @@ class BlockDestabilizerBlock(
             .setValue(FACING, context.nearestLookingDirection.opposite)
     }
 
+    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+        val powered = level.hasNeighborSignal(pos)
+        val currentlyEnabled = state.getValue(ENABLED)
+
+        if (powered != currentlyEnabled) {
+            val newState = state.setValue(ENABLED, powered)
+            level.setBlockAndUpdate(pos, newState)
+
+            if (powered) {
+                val blockEntity = level.getBlockEntity(pos) as? BlockDestabilizerBlockEntity ?: return
+
+                if (blockEntity.state == BlockDestabilizerBlockEntity.State.IDLE) {
+                    blockEntity.initStart()
+                }
+            }
+        }
+    }
+
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return BlockDestabilizerBlockEntity(pos, state)
     }
