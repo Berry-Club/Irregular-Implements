@@ -718,7 +718,8 @@ class ModBlockStateProvider(
             ModBlocks.BLOCK_OF_STICKS,
             ModBlocks.RETURNING_BLOCK_OF_STICKS,
             ModBlocks.LAPIS_GLASS,
-            ModBlocks.QUARTZ_GLASS
+            ModBlocks.QUARTZ_GLASS,
+            ModBlocks.SUPER_LUBRICANT_ICE
         ).map { it.get() }
 
         for (block in singleTextureTransparentBlocks) {

@@ -3,10 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.item.DyeColor
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.GrassBlock
-import net.minecraft.world.level.block.TransparentBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -98,8 +95,7 @@ object ModBlocks {
         basicCopiedBlock("ender_anchor", Blocks.OBSIDIAN)
 
     // Lubricant
-    val SUPER_LUBRICANT_ICE: DeferredBlock<Block> =
-        basicCopiedBlock("super_lubricant_ice", Blocks.BLUE_ICE)
+    val SUPER_LUBRICANT_ICE: DeferredBlock<TransparentBlock> = basicGlassBlock("super_lubricant_ice")
     val SUPER_LUBRICANT_STONE: DeferredBlock<Block> =
         basicStoneBlock("super_lubricant_stone")
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
