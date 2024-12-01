@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
-import com.mojang.math.Transformation
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
@@ -23,7 +22,6 @@ import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.PotionContents
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
-import org.joml.Vector3f
 
 object OtherUtil {
 
@@ -67,7 +65,7 @@ object OtherUtil {
         level: Level,
         pos: BlockPos,
         color: Int = 0xFFFFFF,
-        duration: Int = 1
+        duration: Int = 5
     ) {
         if (level.isClientSide) return
 
@@ -75,15 +73,11 @@ object OtherUtil {
             level,
             Blocks.GLASS.defaultBlockState(),
             color,
-            5
+            duration
         )
 
         indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
         level.addFreshEntity(indicatorDisplay)
-
-        ServerScheduler.scheduleTaskInTicks(duration) {
-            indicatorDisplay.discard()
-        }
     }
 
 }

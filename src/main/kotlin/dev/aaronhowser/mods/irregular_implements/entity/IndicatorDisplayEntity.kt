@@ -40,8 +40,15 @@ class IndicatorDisplayEntity(
         setTransformation(defaultTransformation)
     }
 
-    var maximumAge = 20
-        private set
+    private var maximumAge = 20
+
+    override fun tick() {
+        super.tick()
+
+        if (this.tickCount >= maximumAge) {
+            kill()
+        }
+    }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
