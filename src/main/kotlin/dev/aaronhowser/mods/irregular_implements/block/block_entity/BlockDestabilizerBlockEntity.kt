@@ -7,6 +7,10 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.LongTag
 import net.minecraft.nbt.Tag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.entity.item.FallingBlockEntity
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -37,13 +41,20 @@ class BlockDestabilizerBlockEntity(
     val toCheck: ArrayList<BlockPos> = arrayListOf()
 
     val targetBlocks: HashSet<BlockPos> = hashSetOf()
-    var currentTargetState: BlockState? = null
+
+    // Initialized when the BE starts searching, it only accepts positions that have this BlockState
+    // TL;DR: If it starts on Obsidian, targetState gets set to Obsidian and only Obsidian blocks are accepted
+    var targetState: BlockState? = null
 
     val targetBlocksSorted: ArrayList<BlockPos> = arrayListOf()
     var dropCounter: Int = 0
 
-    var lazy: Boolean = false
+    // Fuzzy makes it so it compares Block rather than BlockState
+    // TODO: Make it use tags or something instead
     var fuzzy: Boolean = false
+
+    // Makes it save the shape of the structure and only search there
+    var lazy: Boolean = false
 
     val invalidBlocks: HashSet<BlockPos> = hashSetOf()
 
@@ -172,5 +183,35 @@ class BlockDestabilizerBlockEntity(
             //TODO: Target block name and metadata
         }
     }
+
+
+    private fun dropNextBlock() {
+        val dropCounter = this.dropCounter
+
+        if (dropCounter > this.targetBlocksSorted.size) {
+            this.state = State.IDLE
+            targetBlocksSorted.clear()
+            targetState = null
+
+            return
+        }
+
+        val level = this.level ?: return
+        val checkedPos = this.targetBlocksSorted.getOrNull(dropCounter) ?: return
+        val checkedState = level.getBlockState(checkedPos)
+
+        val shouldDrop = (this.fuzzy && checkedState.block == targetState?.block) || checkedState == targetState
+
+        if (shouldDrop) {
+            FallingBlockEntity.fall(level, checkedPos, checkedState)
+        }
+
+        this.dropCounter++
+    }
+
+
+    // Syncs with client
+    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }
