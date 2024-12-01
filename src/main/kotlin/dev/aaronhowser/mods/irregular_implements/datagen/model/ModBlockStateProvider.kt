@@ -53,6 +53,20 @@ class ModBlockStateProvider(
                 val facing = it.getValue(DirectionalBlock.FACING)
                 val modelName = name(block) + "_" + facing.name.lowercase()
 
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
                 val model = models()
                     .withExistingParent(modelName, mcLoc("block/block"))
                     .texture("all", faceTexture)
@@ -67,25 +81,52 @@ class ModBlockStateProvider(
                     .textureAll("#all")
                     .end()
 
-                    // Overlay just off the north face
                     .element()
                     .from(-0.01f, -0.01f, -0.01f)
                     .to(16.01f, 16.01f, 16.01f)
                     .emissivity(15, 15)
-                    .faces { direction, modelBuilder ->
-                        when (direction) {
-                            facing -> modelBuilder.texture("#front")
-                            else -> modelBuilder.texture("#side")
-                        }
-                    }
+
+                    .face(Direction.NORTH)
+                    .texture("#front")
+                    .end()
+
+                    .face(Direction.EAST)
+                    .texture("#side")
+                    .end()
+
+                    .face(Direction.SOUTH)
+                    .texture("#side")
+                    .end()
+
+                    .face(Direction.WEST)
+                    .texture("#side")
+                    .end()
+
+                    .face(Direction.UP)
+                    .texture("#side")
+                    .end()
+
+                    .face(Direction.DOWN)
+                    .texture("#side")
+                    .end()
+
                     .end()
 
                 ConfiguredModel
                     .builder()
                     .modelFile(model)
+                    .rotationX(xRotation)
+                    .rotationY(yRotation)
                     .build()
             }
 
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/block_destabilizer_north"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun compressedSlime() {

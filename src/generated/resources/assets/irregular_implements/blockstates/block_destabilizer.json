@@ -1,40 +1,50 @@
 {
   "variants": {
     "enabled=false,facing=down": {
-      "model": "irregular_implements:block/block_destabilizer_down"
+      "model": "irregular_implements:block/block_destabilizer_down",
+      "x": 90
     },
     "enabled=false,facing=east": {
-      "model": "irregular_implements:block/block_destabilizer_east"
+      "model": "irregular_implements:block/block_destabilizer_east",
+      "y": 90
     },
     "enabled=false,facing=north": {
       "model": "irregular_implements:block/block_destabilizer_north"
     },
     "enabled=false,facing=south": {
-      "model": "irregular_implements:block/block_destabilizer_south"
+      "model": "irregular_implements:block/block_destabilizer_south",
+      "y": 180
     },
     "enabled=false,facing=up": {
-      "model": "irregular_implements:block/block_destabilizer_up"
+      "model": "irregular_implements:block/block_destabilizer_up",
+      "x": 270
     },
     "enabled=false,facing=west": {
-      "model": "irregular_implements:block/block_destabilizer_west"
+      "model": "irregular_implements:block/block_destabilizer_west",
+      "y": 270
     },
     "enabled=true,facing=down": {
-      "model": "irregular_implements:block/block_destabilizer_down"
+      "model": "irregular_implements:block/block_destabilizer_down",
+      "x": 90
     },
     "enabled=true,facing=east": {
-      "model": "irregular_implements:block/block_destabilizer_east"
+      "model": "irregular_implements:block/block_destabilizer_east",
+      "y": 90
     },
     "enabled=true,facing=north": {
       "model": "irregular_implements:block/block_destabilizer_north"
     },
     "enabled=true,facing=south": {
-      "model": "irregular_implements:block/block_destabilizer_south"
+      "model": "irregular_implements:block/block_destabilizer_south",
+      "y": 180
     },
     "enabled=true,facing=up": {
-      "model": "irregular_implements:block/block_destabilizer_up"
+      "model": "irregular_implements:block/block_destabilizer_up",
+      "x": 270
     },
     "enabled=true,facing=west": {
-      "model": "irregular_implements:block/block_destabilizer_west"
+      "model": "irregular_implements:block/block_destabilizer_west",
+      "y": 270
     }
   }
 }
