@@ -17,6 +17,8 @@ class ServerConfig(
     }
 
     init {
+        serverConfigs()
+
         builder.build()
     }
 
