@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.entity.item.FallingBlockEntity
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -34,6 +35,21 @@ class BlockDestabilizerBlockEntity(
 
         const val DROP_COUNTER_NBT = "drop_counter"
         const val TARGET_BLOCKS_SORTED_NBT = "target_blocks_sorted"
+
+        fun tick(
+            level: Level,
+            blockPos: BlockPos,
+            blockState: BlockState,
+            blockEntity: BlockDestabilizerBlockEntity
+        ) {
+            if (level.isClientSide) return
+
+            if (blockEntity.state == State.SEARCHING) {
+                blockEntity.stepSearch()
+            } else if (blockEntity.state == State.DROPPING) {
+                blockEntity.dropNextBlock()
+            }
+        }
     }
 
     enum class State { IDLE, SEARCHING, DROPPING }
@@ -182,7 +198,6 @@ class BlockDestabilizerBlockEntity(
             //TODO: Target block name and metadata
         }
     }
-
 
     private fun dropNextBlock() {
         val dropCounter = this.dropCounter
