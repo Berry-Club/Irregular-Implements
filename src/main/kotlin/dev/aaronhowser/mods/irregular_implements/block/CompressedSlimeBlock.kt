@@ -1,8 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.item.ShovelItem
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
@@ -15,8 +16,6 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.common.ItemAbilities
 import net.neoforged.neoforge.common.ItemAbility
-import net.neoforged.neoforge.common.util.TriState
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 
 class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 
@@ -27,28 +26,6 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
         val SHAPE_2: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 2.0, 15.99)
 
         val COMPRESSION_LEVEL: IntegerProperty = IntegerProperty.create("compression_level", 0, 2)
-
-        //FIXME: Clicking slime turns to compressed slime but also compresses it a second time instantly
-        fun compressSlimeBlock(event: PlayerInteractEvent.RightClickBlock) {
-            if (event.isCanceled) return
-
-            val level = event.level
-            val pos = event.pos
-
-            val clickedBlockState = level.getBlockState(pos)
-            if (!clickedBlockState.`is`(Blocks.SLIME_BLOCK)) return
-
-            val usedItem = event.itemStack
-            if (!usedItem.canPerformAction(ItemAbilities.SHOVEL_FLATTEN)) return
-
-            val newState = ModBlocks.COMPRESSED_SLIME_BLOCK.get().defaultBlockState()
-
-            level.setBlockAndUpdate(pos, newState)
-
-            event.useBlock = TriState.TRUE
-            event.useItem = TriState.TRUE
-        }
-
     }
 
     init {
@@ -56,6 +33,15 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
             defaultBlockState()
                 .setValue(COMPRESSION_LEVEL, 0)
         )
+
+        val flattenState = ShovelItem.FLATTENABLES[Blocks.SLIME_BLOCK]
+        if (flattenState == null) {
+            ShovelItem.FLATTENABLES[Blocks.SLIME_BLOCK] = this.defaultBlockState()
+            IrregularImplements.LOGGER.info("Added Slime Block -> Compressed Slime Block to ShovelItem.FLATTENABLES")
+        } else {
+            IrregularImplements.LOGGER.warn("Another mod is already changing the flattening behavior of Slime Blocks! It currently gets transformed into $flattenState")
+            IrregularImplements.LOGGER.warn("Therefore, Compressed Slime currently can not be compressed with a shovel. Add a recipe for it yourself with KubeJS!")
+        }
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
