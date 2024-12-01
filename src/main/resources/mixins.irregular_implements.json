@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "dev.aaronhowser.mods.irregular_implements.mixin",
   "mixins": [
+    "BeaconBlockEntityMixin",
     "BiomeMixin",
     "BlockStateBaseMixin",
     "FireMixin",

@@ -2,7 +2,10 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreLensBlockEntity
 import net.minecraft.core.BlockPos
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
@@ -32,6 +35,11 @@ class SpectreLensBlock : EntityBlock, TransparentBlock(Properties.ofFullCopy(Blo
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return SpectreLensBlockEntity(pos, state)
+    }
+
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+        val blockEntity = level.getBlockEntity(pos) as? SpectreLensBlockEntity ?: return
+        blockEntity.owner = placer?.uuid
     }
 
 }
