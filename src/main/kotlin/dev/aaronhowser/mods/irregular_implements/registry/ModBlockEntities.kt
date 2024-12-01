@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceBasicBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneObserverBlockEntity
@@ -36,6 +37,14 @@ object ModBlockEntities {
             BlockEntityType.Builder.of(
                 { pos, state -> RedstoneObserverBlockEntity(pos, state) },
                 ModBlocks.REDSTONE_OBSERVER.get()
+            ).build(null)
+        })
+
+    val BLOCK_DESTABILIZER: DeferredHolder<BlockEntityType<*>, BlockEntityType<BlockDestabilizerBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("block_destabilizer", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> BlockDestabilizerBlockEntity(pos, state) },
+                ModBlocks.BLOCK_DESTABILIZER.get()
             ).build(null)
         })
 

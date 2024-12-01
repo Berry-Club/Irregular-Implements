@@ -57,7 +57,8 @@ object ModBlocks {
     val IRON_DROPPER = basicBlock("iron_dropper")
     val IGNITER = basicBlock("igniter")
     val INVENTORY_TESTER = basicBlock("inventory_tester")
-    val BLOCK_DESTABILIZER = basicBlock("block_destabilizer")
+    val BLOCK_DESTABILIZER: DeferredBlock<BlockDestabilizerBlock> =
+        registerBlock("block_destabilizer") { BlockDestabilizerBlock() }
     val BLOCK_BREAKER = basicBlock("block_breaker")
     val REDSTONE_OBSERVER: DeferredBlock<RedstoneObserverBlock> =
         registerBlock("redstone_observer") { RedstoneObserverBlock() }
