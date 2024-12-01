@@ -1,42 +1,108 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/block",
   "elements": [
     {
+      "faces": {
+        "down": {
+          "texture": "#all"
+        },
+        "east": {
+          "texture": "#all"
+        },
+        "north": {
+          "texture": "#all"
+        },
+        "south": {
+          "texture": "#all"
+        },
+        "up": {
+          "texture": "#all"
+        },
+        "west": {
+          "texture": "#all"
+        }
+      },
       "from": [
         0,
         0,
         0
       ],
-      "neoforge_data": {
-        "block_light": 15,
-        "sky_light": 15
-      },
       "to": [
         16,
-        0,
+        16,
         16
       ]
     },
     {
       "from": [
-        0,
-        0,
-        0
+        -0.01,
+        -0.01,
+        -0.01
       ],
       "neoforge_data": {
         "block_light": 15,
         "sky_light": 15
       },
       "to": [
-        16,
+        16.01,
+        16.01,
+        16.01
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#all"
+        },
+        "east": {
+          "texture": "#all"
+        },
+        "north": {
+          "texture": "#all"
+        },
+        "south": {
+          "texture": "#all"
+        },
+        "up": {
+          "texture": "#all"
+        },
+        "west": {
+          "texture": "#all"
+        }
+      },
+      "from": [
         0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
         16
+      ]
+    },
+    {
+      "from": [
+        -0.01,
+        -0.01,
+        -0.01
+      ],
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "to": [
+        16.01,
+        16.01,
+        16.01
       ]
     }
   ],
   "render_type": "minecraft:cutout_mipped",
   "textures": {
     "all": "irregular_implements:block/block_destabilizer/face",
-    "front": "irregular_implements:block/block_destabilizer/front"
+    "front": "irregular_implements:block/block_destabilizer/front",
+    "particle": "irregular_implements:block/block_destabilizer/face",
+    "side": "irregular_implements:block/block_destabilizer/side"
   }
 }
