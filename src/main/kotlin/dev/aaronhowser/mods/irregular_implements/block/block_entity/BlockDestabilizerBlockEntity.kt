@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.LongTag
@@ -13,8 +14,10 @@ import net.minecraft.nbt.Tag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.item.FallingBlockEntity
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -27,7 +30,8 @@ class BlockDestabilizerBlockEntity(
     companion object {
         const val STATE_NBT = "state"
         const val LAZY_NBT = "lazy"
-        const val FUZZY_NBT = "fuzzy"
+
+        const val TARGET_STATE_BLOCK_NBT = "target_state_block"
 
         const val INVALID_BLOCKS_NBT = "invalid_blocks"
         const val ALREADY_CHECKED_NBT = "already_checked"
@@ -60,20 +64,16 @@ class BlockDestabilizerBlockEntity(
     val alreadyChecked: HashSet<BlockPos> = hashSetOf()
     val toCheck: ArrayList<BlockPos> = arrayListOf()
 
-    val targetBlocks: HashSet<BlockPos> = hashSetOf()
+    val targetBlockPositions: HashSet<BlockPos> = hashSetOf()
 
     // Initialized when the BE starts searching, it only accepts positions that have this BlockState
     // TL;DR: If it starts on Obsidian, targetState gets set to Obsidian and only Obsidian blocks are accepted
-    var targetState: BlockState? = null
+    var targetBlock: Block? = null
 
     var targetBlocksSorted: MutableList<BlockPos> = mutableListOf()
     var dropCounter: Int = 0
 
-    // Fuzzy makes it so it compares Block rather than BlockState
-    // TODO: Make it use tags or something instead
-    var isFuzzy: Boolean = false
-
-    // Makes it save the shape of the structure and only search there
+    // Makes it save the shape of the structure and only search there TODO: Make sure this is working once lazy can be toggled
     var isLazy: Boolean = false
 
     val invalidBlocks: HashSet<BlockPos> = hashSetOf()
@@ -83,7 +83,6 @@ class BlockDestabilizerBlockEntity(
 
         tag.putInt(STATE_NBT, this.state.ordinal)
         tag.putBoolean(LAZY_NBT, this.isLazy)
-        tag.putBoolean(FUZZY_NBT, this.isFuzzy)
 
         if (this.isLazy && this.invalidBlocks.isNotEmpty()) {
             val invalidBlocksTag = ListTag()
@@ -113,14 +112,12 @@ class BlockDestabilizerBlockEntity(
             tag.put(TO_CHECK_NBT, toCheckTag)
 
             val targetBlocksTag = ListTag()
-            for (blockPos in this.targetBlocks) {
+            for (blockPos in this.targetBlockPositions) {
                 val posLong = blockPos.asLong()
                 val longTag = LongTag.valueOf(posLong)
                 targetBlocksTag.add(longTag)
             }
             tag.put(TARGET_BLOCKS_NBT, targetBlocksTag)
-
-            //TODO: Put a string and integer of the current block's name and metadata? obviously that doesn't exist any more but why even bother with that?
         }
 
         if (this.state == State.DROPPING) {
@@ -133,8 +130,11 @@ class BlockDestabilizerBlockEntity(
                 targetBlocksSortedTag.add(longTag)
             }
             tag.put(TARGET_BLOCKS_SORTED_NBT, targetBlocksSortedTag)
+        }
 
-            //TODO: Put a string and integer of the current block's name and metadata? obviously that doesn't exist any more but why even bother with that?
+        if (this.targetBlock != null) {
+            val targetBlockStateName = BuiltInRegistries.BLOCK.getKey(targetBlock!!).toString()
+            tag.putString(TARGET_STATE_BLOCK_NBT, targetBlockStateName)
         }
     }
 
@@ -146,9 +146,6 @@ class BlockDestabilizerBlockEntity(
 
         val lazy = tag.getBoolean(LAZY_NBT)
         this.isLazy = lazy
-
-        val fuzzy = tag.getBoolean(FUZZY_NBT)
-        this.isFuzzy = fuzzy
 
         if (this.isLazy && tag.contains(INVALID_BLOCKS_NBT)) {
             val invalidBlocksTag = tag.getList(INVALID_BLOCKS_NBT, Tag.TAG_LONG.toInt())
@@ -179,10 +176,8 @@ class BlockDestabilizerBlockEntity(
             for (tagElement in targetBlocksTag) {
                 val posLong = (tagElement as LongTag).asLong
                 val blockPos = BlockPos.of(posLong)
-                this.targetBlocks.add(blockPos)
+                this.targetBlockPositions.add(blockPos)
             }
-
-            //TODO: Target block name and metadata
         }
 
         if (this.state == State.DROPPING) {
@@ -195,8 +190,12 @@ class BlockDestabilizerBlockEntity(
                 val blockPos = BlockPos.of(posLong)
                 this.targetBlocksSorted.add(blockPos)
             }
+        }
 
-            //TODO: Target block name and metadata
+        if (tag.contains(TARGET_STATE_BLOCK_NBT)) {
+            val targetBlockStateName = ResourceLocation.parse(tag.getString(TARGET_STATE_BLOCK_NBT))
+            val targetBlock = BuiltInRegistries.BLOCK.get(targetBlockStateName)
+            this.targetBlock = targetBlock
         }
     }
 
@@ -205,8 +204,8 @@ class BlockDestabilizerBlockEntity(
 
         if (dropCounter >= this.targetBlocksSorted.size) {
             this.state = State.IDLE
-            targetBlocksSorted.clear()
-            targetState = null
+            this.targetBlocksSorted.clear()
+            this.targetBlock = null
 
             return
         }
@@ -215,7 +214,7 @@ class BlockDestabilizerBlockEntity(
         val checkedPos = this.targetBlocksSorted.getOrNull(dropCounter) ?: return
         val checkedState = level.getBlockState(checkedPos)
 
-        val shouldDrop = (this.isFuzzy && checkedState.block == targetState?.block) || checkedState == targetState
+        val shouldDrop = checkedState.block == this.targetBlock
 
         if (shouldDrop) {
             FallingBlockEntity.fall(level, checkedPos, checkedState)
@@ -225,7 +224,7 @@ class BlockDestabilizerBlockEntity(
     }
 
     private fun initDrop() {
-        this.targetBlocksSorted = this.targetBlocks.sortedWith(
+        this.targetBlocksSorted = this.targetBlockPositions.sortedWith(
             compareBy<BlockPos> { it.y }
                 .thenBy { it.distSqr(this.blockPos) }
         ).toMutableList()
@@ -233,13 +232,13 @@ class BlockDestabilizerBlockEntity(
         this.state = State.DROPPING
         this.dropCounter = 0
 
-        this.targetBlocks.clear()
+        this.targetBlockPositions.clear()
         this.toCheck.clear()
         this.alreadyChecked.clear()
     }
 
     private fun stepSearch() {
-        val doneSearching = this.toCheck.isEmpty() || this.targetBlocks.count() >= ServerConfig.BLOCK_DESTABILIZER_LIMIT.get()
+        val doneSearching = this.toCheck.isEmpty() || this.targetBlockPositions.count() >= ServerConfig.BLOCK_DESTABILIZER_LIMIT.get()
         if (doneSearching) {
             initDrop()
             return
@@ -253,9 +252,9 @@ class BlockDestabilizerBlockEntity(
         val level = this.level ?: return
         val checkedState = level.getBlockState(nextPos)
 
-        val shouldAdd = (this.isFuzzy && checkedState.block == targetState?.block) || checkedState == targetState
+        val shouldAdd = checkedState.block == this.targetBlock
         if (shouldAdd) {
-            this.targetBlocks.add(nextPos)
+            this.targetBlockPositions.add(nextPos)
 
             for (direction in Direction.entries) {
                 val offsetPos = nextPos.relative(direction)
@@ -283,7 +282,7 @@ class BlockDestabilizerBlockEntity(
         if (targetBlockState.isAir) return
         if (targetBlockState.getDestroySpeed(level, targetBlockPos) <= 0) return
 
-        this.targetState = targetBlockState
+        this.targetBlock = targetBlockState.block
         this.state = State.SEARCHING
 
         this.toCheck.add(targetBlockPos)
@@ -304,10 +303,6 @@ class BlockDestabilizerBlockEntity(
 
     fun resetLazy() {
         if (this.state == State.IDLE) this.invalidBlocks.clear()
-    }
-
-    fun toggleFuzzy() {
-        this.isFuzzy = !this.isFuzzy
     }
 
     // Syncs with client
