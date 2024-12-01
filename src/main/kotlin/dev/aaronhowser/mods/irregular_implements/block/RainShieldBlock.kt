@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.SoundType
@@ -64,11 +65,11 @@ class RainShieldBlock : EntityBlock, Block(
         state: BlockState,
         blockEntityType: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        if (blockEntityType != ModBlockEntities.RAIN_SHIELD.get()) return null
-
-        return BlockEntityTicker { tLevel, tPos, tState, _ ->
-            RainShieldBlockEntity.tick(tLevel, tPos, tState)
-        }
+        return BaseEntityBlock.createTickerHelper(
+            blockEntityType,
+            ModBlockEntities.RAIN_SHIELD.get(),
+            RainShieldBlockEntity::tick
+        )
     }
 
 

@@ -31,7 +31,12 @@ class RainShieldBlockEntity(
             return level.`irregular_implements$chunkPosHasRainShields`(chunkPos)
         }
 
-        fun tick(level: Level, blockPos: BlockPos, blockState: BlockState) {
+        fun tick(
+            level: Level,
+            blockPos: BlockPos,
+            blockState: BlockState,
+            blockEntity: RainShieldBlockEntity
+        ) {
             if (level !is RainShieldChunks) return
 
             if (blockState.getValue(RainShieldBlock.ENABLED)) {
