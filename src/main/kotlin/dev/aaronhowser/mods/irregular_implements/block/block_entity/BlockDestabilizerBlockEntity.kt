@@ -54,10 +54,10 @@ class BlockDestabilizerBlockEntity(
 
     // Fuzzy makes it so it compares Block rather than BlockState
     // TODO: Make it use tags or something instead
-    var fuzzy: Boolean = false
+    var isFuzzy: Boolean = false
 
     // Makes it save the shape of the structure and only search there
-    var lazy: Boolean = false
+    var isLazy: Boolean = false
 
     val invalidBlocks: HashSet<BlockPos> = hashSetOf()
 
@@ -69,10 +69,10 @@ class BlockDestabilizerBlockEntity(
         super.saveAdditional(tag, registries)
 
         tag.putInt(STATE_NBT, this.state.ordinal)
-        tag.putBoolean(LAZY_NBT, this.lazy)
-        tag.putBoolean(FUZZY_NBT, this.fuzzy)
+        tag.putBoolean(LAZY_NBT, this.isLazy)
+        tag.putBoolean(FUZZY_NBT, this.isFuzzy)
 
-        if (this.lazy && this.invalidBlocks.isNotEmpty()) {
+        if (this.isLazy && this.invalidBlocks.isNotEmpty()) {
             val invalidBlocksTag = ListTag()
             for (blockPos in this.invalidBlocks) {
                 val posLong = blockPos.asLong()
@@ -132,12 +132,12 @@ class BlockDestabilizerBlockEntity(
         this.state = State.entries[stateOrdinal]
 
         val lazy = tag.getBoolean(LAZY_NBT)
-        this.lazy = lazy
+        this.isLazy = lazy
 
         val fuzzy = tag.getBoolean(FUZZY_NBT)
-        this.fuzzy = fuzzy
+        this.isFuzzy = fuzzy
 
-        if (this.lazy && tag.contains(INVALID_BLOCKS_NBT)) {
+        if (this.isLazy && tag.contains(INVALID_BLOCKS_NBT)) {
             val invalidBlocksTag = tag.getList(INVALID_BLOCKS_NBT, Tag.TAG_LONG.toInt())
 
             for (tagElement in invalidBlocksTag) {
@@ -203,7 +203,7 @@ class BlockDestabilizerBlockEntity(
         val checkedPos = this.targetBlocksSorted.getOrNull(dropCounter) ?: return
         val checkedState = level.getBlockState(checkedPos)
 
-        val shouldDrop = (this.fuzzy && checkedState.block == targetState?.block) || checkedState == targetState
+        val shouldDrop = (this.isFuzzy && checkedState.block == targetState?.block) || checkedState == targetState
 
         if (shouldDrop) {
             FallingBlockEntity.fall(level, checkedPos, checkedState)
@@ -241,7 +241,7 @@ class BlockDestabilizerBlockEntity(
         val level = this.level ?: return
         val checkedState = level.getBlockState(nextPos)
 
-        val shouldAdd = (this.fuzzy && checkedState.block == targetState?.block) || checkedState == targetState
+        val shouldAdd = (this.isFuzzy && checkedState.block == targetState?.block) || checkedState == targetState
         if (shouldAdd) {
             this.targetBlocks.add(nextPos)
 
@@ -252,7 +252,7 @@ class BlockDestabilizerBlockEntity(
                 }
             }
 
-        } else if (this.lazy) {
+        } else if (this.isLazy) {
             this.invalidBlocks.add(nextPos)
         }
     }
