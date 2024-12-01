@@ -203,7 +203,7 @@ class BlockDestabilizerBlockEntity(
     private fun dropNextBlock() {
         val dropCounter = this.dropCounter
 
-        if (dropCounter > this.targetBlocksSorted.size) {
+        if (dropCounter >= this.targetBlocksSorted.size) {
             this.state = State.IDLE
             targetBlocksSorted.clear()
             targetState = null
