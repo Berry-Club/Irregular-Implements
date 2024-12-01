@@ -70,13 +70,13 @@ object ModInteractionRecipes {
         val compressedSlimeTwo = slimeStackWithLore("Compression level 2")
         val compressedSlimeThree = slimeStackWithLore("Compression level 3")
 
-//        val recipeOne = EmiWorldInteractionRecipe
-//            .builder()
-//            .leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
-//            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
-//            .output(EmiStack.of(compressedSlimeOne))
-//            .id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
-//            .build()
+        val recipeOne = EmiWorldInteractionRecipe
+            .builder()
+            .leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
+            .rightInput(EmiIngredient.of(Ingredient.of(*shovel.toTypedArray())), true)
+            .output(EmiStack.of(compressedSlimeOne))
+            .id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
+            .build()
 
         val recipeTwo = EmiWorldInteractionRecipe
             .builder()
@@ -102,7 +102,7 @@ object ModInteractionRecipes {
             .id(OtherUtil.modResource("/interaction/slime/compressed_three_to_slime"))
             .build()
 
-//        recipes.add(recipeOne)
+        recipes.add(recipeOne)
         recipes.add(recipeTwo)
         recipes.add(recipeThree)
         recipes.add(recipeFour)
