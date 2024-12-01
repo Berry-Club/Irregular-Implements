@@ -135,13 +135,13 @@ class ModLanguageProvider(
         addItem(ModItems.ENDER_BUCKET, "Ender Bucket")
         addItem(ModItems.REINFORCED_ENDER_BUCKET, "Reinforced Ender Bucket")
         addItem(ModItems.CHUNK_ANALYZER, "Chunk Analyzer")
-        addItem(ModItems.GRASS_SEEDS, "Grass Seeds")
         addItem(ModItems.DIVINING_ROD, "Divining Rod")
 
         addItem(ModItems.FIRE_IMBUE, "Fire Imbue")
         addItem(ModItems.POISON_IMBUE, "Poison Imbue")
         addItem(ModItems.EXPERIENCE_IMBUE, "Experience Imbue")
         addItem(ModItems.WITHER_IMBUE, "Wither Imbue")
+        addItem(ModItems.COLLAPSE_IMBUE, "Collapse Imbue")
 
         addItem(ModItems.SPECTRE_INGOT, "Spectre Ingot")
         addItem(ModItems.SPECTRE_STRING, "Spectre String")
@@ -170,6 +170,41 @@ class ModLanguageProvider(
         addItem(ModItems.SOUND_PATTERN, "Sound Pattern")
         addItem(ModItems.SOUND_RECORDER, "Sound Recorder")
         addItem(ModItems.PORTABLE_SOUND_DAMPENER, "Portable Sound Dampener")
+
+        addItem(ModItems.GRASS_SEEDS, "Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_WHITE, "White Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_ORANGE, "Orange Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_MAGENTA, "Magenta Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_LIGHT_BLUE, "Light Blue Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_YELLOW, "Yellow Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_LIME, "Lime Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_PINK, "Pink Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_GRAY, "Gray Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_LIGHT_GRAY, "Light Gray Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_CYAN, "Cyan Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_PURPLE, "Purple Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_BLUE, "Blue Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_BROWN, "Brown Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_GREEN, "Green Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_RED, "Red Grass Seeds")
+        addItem(ModItems.GRASS_SEEDS_BLACK, "Black Grass Seeds")
+
+        addItem(ModItems.RUNE_DUST_WHITE, "White Rune Dust")
+        addItem(ModItems.RUNE_DUST_ORANGE, "Orange Rune Dust")
+        addItem(ModItems.RUNE_DUST_MAGENTA, "Magenta Rune Dust")
+        addItem(ModItems.RUNE_DUST_LIGHT_BLUE, "Light Blue Rune Dust")
+        addItem(ModItems.RUNE_DUST_YELLOW, "Yellow Rune Dust")
+        addItem(ModItems.RUNE_DUST_LIME, "Lime Rune Dust")
+        addItem(ModItems.RUNE_DUST_PINK, "Pink Rune Dust")
+        addItem(ModItems.RUNE_DUST_GRAY, "Gray Rune Dust")
+        addItem(ModItems.RUNE_DUST_LIGHT_GRAY, "Light Gray Rune Dust")
+        addItem(ModItems.RUNE_DUST_CYAN, "Cyan Rune Dust")
+        addItem(ModItems.RUNE_DUST_PURPLE, "Purple Rune Dust")
+        addItem(ModItems.RUNE_DUST_BLUE, "Blue Rune Dust")
+        addItem(ModItems.RUNE_DUST_BROWN, "Brown Rune Dust")
+        addItem(ModItems.RUNE_DUST_GREEN, "Green Rune Dust")
+        addItem(ModItems.RUNE_DUST_RED, "Red Rune Dust")
+        addItem(ModItems.RUNE_DUST_BLACK, "Black Rune Dust")
     }
 
     private fun addBlocks() {
@@ -187,7 +222,6 @@ class ModLanguageProvider(
         addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
         addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
         addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
-//        addBlock(ModBlocks.PLATFORM, "Platform")
         addBlock(ModBlocks.QUARTZ_LAMP, "Quartz Lamp")
         addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")
         addBlock(ModBlocks.POTION_VAPORIZER, "Potion Vaporizer")
@@ -228,7 +262,6 @@ class ModLanguageProvider(
         addBlock(ModBlocks.ENTITY_DETECTOR, "Entity Detector")
 
         addBlock(ModBlocks.PLAYER_INTERFACE, "Player Interface")
-//        addBlock(ModBlocks.CREATIVE_PLAYER_INTERFACE, "Creative Player Interface")
         addBlock(ModBlocks.NOTIFICATION_INTERFACE, "Notification Interface")
         addBlock(ModBlocks.BASIC_REDSTONE_INTERFACE, "Basic Redstone Interface")
         addBlock(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Advanced Redstone Interface")
@@ -353,6 +386,19 @@ class ModLanguageProvider(
 
         addBlock(ModBlocks.FLOO_BRICK, "Floo Bricks")
         addBlock(ModBlocks.ANCIENT_BRICK, "Ancient Brick")
+
+        addBlock(ModBlocks.OAK_PLATFORM, "Oak Platform")
+        addBlock(ModBlocks.SPRUCE_PLATFORM, "Spruce Platform")
+        addBlock(ModBlocks.BIRCH_PLATFORM, "Birch Platform")
+        addBlock(ModBlocks.JUNGLE_PLATFORM, "Jungle Platform")
+        addBlock(ModBlocks.ACACIA_PLATFORM, "Acacia Platform")
+        addBlock(ModBlocks.DARK_OAK_PLATFORM, "Dark Oak Platform")
+        addBlock(ModBlocks.CRIMSON_PLATFORM, "Crimson Platform")
+        addBlock(ModBlocks.WARPED_PLATFORM, "Warped Platform")
+        addBlock(ModBlocks.MANGROVE_PLATFORM, "Mangrove Platform")
+        addBlock(ModBlocks.BAMBOO_PLATFORM, "Bamboo Platform")
+        addBlock(ModBlocks.CHERRY_PLATFORM, "Cherry Platform")
+
     }
 
     object Tooltips {
