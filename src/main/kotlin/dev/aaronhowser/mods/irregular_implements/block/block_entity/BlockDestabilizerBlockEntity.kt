@@ -61,10 +61,6 @@ class BlockDestabilizerBlockEntity(
 
     val invalidBlocks: HashSet<BlockPos> = hashSetOf()
 
-    fun resetLazy() {
-        if (this.state == State.IDLE) this.invalidBlocks.clear()
-    }
-
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
@@ -278,6 +274,21 @@ class BlockDestabilizerBlockEntity(
         } else {
             this.invalidBlocks.clear()
         }
+    }
+
+    fun toggleLazy() {
+        if (state != State.IDLE) return
+
+        this.isLazy = !this.isLazy
+        if (!this.isLazy) this.invalidBlocks.clear()
+    }
+
+    fun resetLazy() {
+        if (this.state == State.IDLE) this.invalidBlocks.clear()
+    }
+
+    fun toggleFuzzy() {
+        this.isFuzzy = !this.isFuzzy
     }
 
     // Syncs with client
