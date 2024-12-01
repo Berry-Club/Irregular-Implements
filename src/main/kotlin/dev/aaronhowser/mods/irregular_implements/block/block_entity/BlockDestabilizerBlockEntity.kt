@@ -46,7 +46,7 @@ class BlockDestabilizerBlockEntity(
     // TL;DR: If it starts on Obsidian, targetState gets set to Obsidian and only Obsidian blocks are accepted
     var targetState: BlockState? = null
 
-    val targetBlocksSorted: ArrayList<BlockPos> = arrayListOf()
+    var targetBlocksSorted: MutableList<BlockPos> = mutableListOf()
     var dropCounter: Int = 0
 
     // Fuzzy makes it so it compares Block rather than BlockState
@@ -207,6 +207,20 @@ class BlockDestabilizerBlockEntity(
         }
 
         this.dropCounter++
+    }
+
+    private fun initDrop() {
+        this.targetBlocksSorted = this.targetBlocks.sortedWith(
+            compareBy<BlockPos> { it.y }
+                .thenBy { it.distSqr(this.blockPos) }
+        ).toMutableList()
+
+        this.state = State.DROPPING
+        this.dropCounter = 0
+
+        this.targetBlocks.clear()
+        this.toCheck.clear()
+        this.alreadyChecked.clear()
     }
 
 
