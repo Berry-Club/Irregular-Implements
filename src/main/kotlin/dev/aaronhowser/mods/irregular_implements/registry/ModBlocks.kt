@@ -3,7 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import net.minecraft.world.item.DyeColor
-import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.GrassBlock
+import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -141,7 +144,8 @@ object ModBlocks {
 
     // Spectre blocks
     val SPECTRE_BLOCK = basicBlock("spectre_block")
-    val SPECTRE_LENS = basicBlock("spectre_lens")
+    val SPECTRE_LENS: DeferredBlock<SpectreLensBlock> =
+        registerBlock("spectre_lens") { SpectreLensBlock() }
     val SPECTRE_ENERGY_INJECTOR = basicBlock("spectre_energy_injector")
     val SPECTRE_COIL = basicBlock("spectre_coil")
     val SPECTRE_COIL_REDSTONE = basicBlock("spectre_coil_redstone")
