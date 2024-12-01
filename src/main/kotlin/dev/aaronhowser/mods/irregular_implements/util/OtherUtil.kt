@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
+import com.mojang.math.Transformation
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
+import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
 import net.minecraft.network.chat.Component
@@ -13,11 +15,15 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.PotionContents
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
+import org.joml.Vector3f
 
 object OtherUtil {
 
@@ -55,6 +61,37 @@ object OtherUtil {
             { TagKey.create(registry, it) },
             { it.location() }
         )
+    }
+
+    //TODO: Use a custom entity instead of block displays
+    fun spawnIndicatorBlockDisplay(
+        level: Level,
+        pos: BlockPos,
+        color: Int = 0xFFFFFF,
+        duration: Int = 1
+    ) {
+        if (level.isClientSide) return
+
+        val blockDisplay = EntityType.BLOCK_DISPLAY.create(level) ?: return
+
+        blockDisplay.setBlockState(Blocks.GLASS.defaultBlockState())
+        val transformation = Transformation(
+            null,
+            null,
+            Vector3f(0.5f, 0.5f, 0.5f),
+            null
+        )
+        blockDisplay.setTransformation(transformation)
+
+        blockDisplay.setGlowingTag(true)
+        blockDisplay.setGlowColorOverride(color)
+
+        blockDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
+        level.addFreshEntity(blockDisplay)
+
+        ServerScheduler.scheduleTaskInTicks(duration) {
+            blockDisplay.discard()
+        }
     }
 
 }

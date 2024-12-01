@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -266,6 +267,9 @@ class BlockDestabilizerBlockEntity(
         } else if (this.isLazy) {
             this.invalidBlocks.add(nextPos)
         }
+
+        val color = if (shouldAdd) 0x00FF00 else 0xFF0000
+        OtherUtil.spawnIndicatorBlockDisplay(level, nextPos, color, 5)
     }
 
     fun initStart() {
