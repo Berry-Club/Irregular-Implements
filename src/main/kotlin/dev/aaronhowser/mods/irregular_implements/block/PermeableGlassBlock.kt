@@ -28,6 +28,7 @@ class PermeableGlassBlock(
         return if (entity is Player && type == Type.LAPIS) Shapes.block() else Shapes.empty()
     }
 
+    //FIXME: Figure out why mobs wont pathfind through Lapis glass
     override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
         return when (pathComputationType) {
             PathComputationType.LAND -> type == Type.QUARTZ
