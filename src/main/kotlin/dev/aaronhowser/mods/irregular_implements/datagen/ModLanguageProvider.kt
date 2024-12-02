@@ -250,6 +250,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Advanced Item Collector")
         addBlock(ModBlocks.NATURE_CORE, "Nature Core")
         addBlock(ModBlocks.RAINBOW_LAMP, "Rainbow Lamp")
+        addBlock(ModBlocks.LOTUS, "Lotus")
 
         addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
         addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")
