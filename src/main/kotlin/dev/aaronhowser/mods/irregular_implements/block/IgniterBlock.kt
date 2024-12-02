@@ -9,11 +9,13 @@ import net.minecraft.util.StringRepresentable
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.DirectionalBlock
+import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -42,25 +44,26 @@ class IgniterBlock(
         val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
         val IGNITER_MODE: EnumProperty<Mode> = EnumProperty.create("igniter_mode", Mode::class.java)
 
-        //FIXME: Lags horribly if facing down
-        fun ignite(level: Level, pos: BlockPos, blockState: BlockState) {
+        fun ignite(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
             if (level.isClientSide) return
 
-            val facing = blockState.getValue(FACING)
-            val targetPos = pos.relative(facing)
+            val facing = igniterState.getValue(FACING)
+            val targetPos = igniterPos.relative(facing)
             val targetState = level.getBlockState(targetPos)
 
             val canPlaceFire = targetState.canBeReplaced()
             if (canPlaceFire) {
-                level.setBlockAndUpdate(targetPos, Blocks.FIRE.defaultBlockState())
+                val fireState = (Blocks.FIRE as FireBlock).getStateForPlacement(level, targetPos)
+
+                level.setBlockAndUpdate(targetPos, fireState)
             }
         }
 
-        fun extinguish(level: Level, pos: BlockPos, blockState: BlockState) {
+        fun extinguish(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
             if (level.isClientSide) return
 
-            val facing = blockState.getValue(FACING)
-            val targetPos = pos.relative(facing)
+            val facing = igniterState.getValue(FACING)
+            val targetPos = igniterPos.relative(facing)
             val targetState = level.getBlockState(targetPos)
 
             if (targetState.`is`(BlockTags.FIRE)) {
@@ -92,6 +95,10 @@ class IgniterBlock(
     }
 
     override fun isFireSource(state: BlockState, level: LevelReader, pos: BlockPos, direction: Direction): Boolean {
+        return direction == state.getValue(FACING)
+    }
+
+    override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
         return direction == state.getValue(FACING)
     }
 
