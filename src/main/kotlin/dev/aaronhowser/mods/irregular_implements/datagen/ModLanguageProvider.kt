@@ -522,7 +522,7 @@ class ModLanguageProvider(
         addInfo(ModItems.SAKANADE_SPORES, "Found on the bottom of huge brown mushrooms.")
         addInfo(ModItems.ECTOPLASM, "Dropped by Spirits, which have a small chance of spawning when any entity dies.\n\nMagic damage drops more.\n\nAlso drops from Spectre Trees.")
         addInfo(ModItems.LUMINOUS_POWDER, "Can be crafted onto enchanted items to make their glints glow in the dark.")
-        addInfo(ModItems.LOTUS_BLOSSOM, "Grants experience when consumed.")
+        addInfo(ModItems.LOTUS_BLOSSOM, "Grants experience when consumed.\n\nSneak to consume the entire stack.")
         addInfo(ModItems.GOLDEN_EGG, "Spawns a Chicken that lays Gold Ingots rather than Eggs.")
         addInfo(ModItems.BLACKOUT_POWDER, "Removes the Spectre Illuminator in the chunk it's used in.")
         addInfo(ModItems.ITEM_FILTER, "Allows you to filter Item Stacks. Do so in its GUI.")

@@ -33,7 +33,8 @@ object ModItems {
     val LUMINOUS_POWDER = basic("luminous_powder")
     val PLATE_BASE = basic("plate_base")
     val PRECIOUS_EMERALD = basic("precious_emerald")
-    val LOTUS_BLOSSOM = basic("lotus_blossom")
+    val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
+        register("lotus_blossom") { LotusBlossomItem() }
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
