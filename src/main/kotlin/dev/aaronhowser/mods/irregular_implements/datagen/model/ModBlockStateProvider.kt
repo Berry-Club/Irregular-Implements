@@ -39,6 +39,53 @@ class ModBlockStateProvider(
         fertilizedDirt()
         compressedSlime()
         blockDestabilizer()
+        igniter()
+    }
+
+    private fun igniter() {
+        val block = ModBlocks.IGNITER.get()
+
+        val front = modLoc("block/igniter/front")
+        val side = modLoc("block/igniter/side")
+        val back = modLoc("block/igniter/back")
+
+        val model = models()
+            .withExistingParent(name(block), "minecraft:block/template_piston")
+            .texture("bottom", back)
+            .texture("platform", front)
+            .texture("side", side)
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DirectionalBlock.FACING)
+
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .rotationX(xRotation)
+                    .rotationY(yRotation)
+                    .build()
+            }
+
+        itemModels()
+            .withExistingParent(name(block), mcLoc("piston"))
+            .texture("bottom", back)
+            .texture("top", front)
+            .texture("side", side)
     }
 
     private fun blockDestabilizer() {

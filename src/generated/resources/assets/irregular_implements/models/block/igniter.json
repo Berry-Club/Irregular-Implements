@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_piston",
+  "textures": {
+    "bottom": "irregular_implements:block/igniter/back",
+    "platform": "irregular_implements:block/igniter/front",
+    "side": "irregular_implements:block/igniter/side"
+  }
+}
