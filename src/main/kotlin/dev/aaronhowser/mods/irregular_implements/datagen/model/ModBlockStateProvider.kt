@@ -40,6 +40,27 @@ class ModBlockStateProvider(
         compressedSlime()
         blockDestabilizer()
         igniter()
+        lotus()
+    }
+
+    private fun lotus() {
+        val block = ModBlocks.LOTUS.get()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val age = it.getValue(LotusBlock.AGE)
+                val nameWithAge = name(block) + "_$age"
+
+                val model = models()
+                    .cross(nameWithAge, modLoc("block/$nameWithAge"))
+                    .renderType(RenderType.cutout().name)
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
     }
 
     private fun igniter() {
@@ -120,7 +141,7 @@ class ModBlockStateProvider(
                     .texture("particle", faceTexture)
                     .texture("front", frontOverlay)
                     .texture("side", sideOverlay)
-                    .renderType(RenderType.CUTOUT_MIPPED.name)
+                    .renderType(RenderType.cutout().name)
 
                     .element()
                     .from(0f, 0f, 0f)
@@ -392,7 +413,7 @@ class ModBlockStateProvider(
         for (block in crossBlocks) {
             val model = models()
                 .cross(name(block), blockTexture(block))
-                .renderType(RenderType.translucent().name)
+                .renderType(RenderType.cutout().name)
             simpleBlockWithItem(block, model)
         }
     }

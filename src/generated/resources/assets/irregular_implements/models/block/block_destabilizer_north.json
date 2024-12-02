@@ -138,7 +138,7 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout_mipped",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "irregular_implements:block/block_destabilizer/face",
     "front": "irregular_implements:block/block_destabilizer/front",

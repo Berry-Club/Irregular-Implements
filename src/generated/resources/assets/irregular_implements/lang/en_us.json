@@ -239,7 +239,7 @@
   "info.irregular_implements.lava_charm": "Adds a temporary lava shield, visible above your armor bar.",
   "info.irregular_implements.lesser_magic_bean": "Can be planted on any block, and grows into a bean stalk.\n\nBean Stalk blocks can be climbed faster than Ladders.",
   "info.irregular_implements.location_filter": "An item representation of a position in the world.\n\nSet by either using it on a block, an entity, or empty space.",
-  "info.irregular_implements.lotus_blossom": "Grants experience when consumed.",
+  "info.irregular_implements.lotus_blossom": "Grants experience when consumed.\n\nSneak to consume the entire stack.",
   "info.irregular_implements.luminous_powder": "Can be crafted onto enchanted items to make their glints glow in the dark.",
   "info.irregular_implements.magic_bean": "Can be planted on any block, and grows a bean stalk that reaches the sky.\n\nThe top of the bean stalk has treasures.",
   "info.irregular_implements.magic_hood": "Disables your name plate and potion particles.",

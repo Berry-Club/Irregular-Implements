@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "irregular_implements:block/lotus_0"
+    },
+    "age=1": {
+      "model": "irregular_implements:block/lotus_1"
+    },
+    "age=2": {
+      "model": "irregular_implements:block/lotus_2"
+    },
+    "age=3": {
+      "model": "irregular_implements:block/lotus_3"
+    }
+  }
+}

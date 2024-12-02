@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-30T10:04:03.1126379	Loot Tables
+// 1.21.1	2024-12-02T08:46:54.4437401	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -70,6 +70,7 @@ ac32231fac897221d86e311ccda953acce678ca7 data/irregular_implements/loot_table/bl
 0cc70f337a56f93c81ddc35a255ec09b8936360b data/irregular_implements/loot_table/blocks/jungle_platform.json
 1c3f5de97fd202f876d6b8460adb0924a9e9362f data/irregular_implements/loot_table/blocks/lapis_glass.json
 291bebeb1372f99fc53fdeba8323350392ca8563 data/irregular_implements/loot_table/blocks/lapis_lamp.json
+5c12a8e9d09b73137c0085a95b115228b09345a2 data/irregular_implements/loot_table/blocks/lotus.json
 ffcff8c5b5c37e7b66ad1c862e4ad6b17fbbd020 data/irregular_implements/loot_table/blocks/luminous_block_black.json
 20275d39c0c67ad7ef3d64356b08d7d2e5020304 data/irregular_implements/loot_table/blocks/luminous_block_blue.json
 d7ae2ae01c964560aa481fa27e0425f152e0057d data/irregular_implements/loot_table/blocks/luminous_block_brown.json
