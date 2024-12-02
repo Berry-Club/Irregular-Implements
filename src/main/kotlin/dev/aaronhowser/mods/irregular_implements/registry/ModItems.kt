@@ -54,7 +54,11 @@ object ModItems {
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
         register("lotus_blossom") { LotusBlossomItem() }
     val LOTUS_SEEDS: DeferredItem<BlockItem> =
-        register("lotus_seeds") { object : BlockItem(ModBlocks.LOTUS.get(), Properties()) {} }
+        register("lotus_seeds") {
+            object : BlockItem(ModBlocks.LOTUS.get(), Properties()) {
+                override fun getDescriptionId() = "item.${IrregularImplements.ID}.lotus_seeds"
+            }
+        }
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")

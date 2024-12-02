@@ -24,9 +24,9 @@ class ModItemModelProvider(
     override fun registerModels() {
         coloredItems()
         handheldItems()
-        basicItems()
-
         emeraldCompass()
+
+        basicItems()
     }
 
     private fun emeraldCompass() {
@@ -63,11 +63,16 @@ class ModItemModelProvider(
             ModItems.ADVANCED_REDSTONE_TORCH
         )
 
-        for (item in ModItems.ITEM_REGISTRY.entries - complexModels.toSet()) {
-            if (item.get() in handledItems) continue
+        val blockItemsToModel = listOf(
+            ModItems.LOTUS_SEEDS
+        ).map { it.get() }
 
-            if (item.get() !is BlockItem) {
-                basicItem(item.get())
+        for (deferred in ModItems.ITEM_REGISTRY.entries - complexModels.toSet()) {
+            val item = deferred.get()
+            if (item in handledItems) continue
+
+            if (item !is BlockItem || item in blockItemsToModel) {
+                basicItem(item)
             }
         }
     }
