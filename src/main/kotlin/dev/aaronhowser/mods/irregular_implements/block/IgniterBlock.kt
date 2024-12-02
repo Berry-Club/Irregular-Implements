@@ -134,6 +134,7 @@ class IgniterBlock(
         }
     }
 
+    //FIXME: Improve this
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
         if (level.isClientSide) return InteractionResult.SUCCESS
 
