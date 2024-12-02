@@ -10,6 +10,7 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
 
@@ -30,6 +31,17 @@ class ModItemTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(Tags.Items.SEEDS)
+            .addTag(GRASS_SEEDS)
+            .add(
+                ModItems.LOTUS_SEEDS.get()
+            )
+
+        this.tag(Tags.Items.FOODS)
+            .add(
+                ModItems.LOTUS_BLOSSOM.get()
+            )
 
         this.tag(GRASS_SEEDS)
             .add(

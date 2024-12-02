@@ -30,6 +30,11 @@ class ModBlockTagsProvider(
 
     override fun addTags(provider: HolderLookup.Provider) {
 
+        this.tag(BlockTags.SMALL_FLOWERS)
+            .add(
+                ModBlocks.LOTUS.get()
+            )
+
         this.tag(SUPER_LUBRICATED)
             .add(
                 ModBlocks.SUPER_LUBRICANT_ICE.get(),
