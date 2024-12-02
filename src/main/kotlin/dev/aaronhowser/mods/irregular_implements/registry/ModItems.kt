@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
@@ -33,8 +34,6 @@ object ModItems {
     val LUMINOUS_POWDER = basic("luminous_powder")
     val PLATE_BASE = basic("plate_base")
     val PRECIOUS_EMERALD = basic("precious_emerald")
-    val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
-        register("lotus_blossom") { LotusBlossomItem() }
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
@@ -43,7 +42,6 @@ object ModItems {
         register("blaze_and_steel") { BlazeAndSteelItem() }
     val RUNE_PATTERN = basic("rune_pattern")
     val PORTKEY = basic("portkey")
-    val LOTUS_SEEDS = basic("lotus_seeds")
     val ESCAPE_ROPE = basic("escape_rope")
     val ENDER_BUCKET = basic("ender_bucket")
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
@@ -51,6 +49,12 @@ object ModItems {
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
+
+    // Lotus
+    val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
+        register("lotus_blossom") { LotusBlossomItem() }
+    val LOTUS_SEEDS: DeferredItem<BlockItem> =
+        register("lotus_seeds") { object : BlockItem(ModBlocks.LOTUS.get(), Properties()) {} }
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")

@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-02T08:51:16.5980722	Block States: irregular_implements
+// 1.21.1	2024-12-02T09:21:12.9674557	Block States: irregular_implements
 1c29572310303db674c5bbef1a5f51c49a200c42 assets/irregular_implements/blockstates/acacia_platform.json
 6d0a7815cb9597ae2286d791040f76a2e39c963e assets/irregular_implements/blockstates/advanced_redstone_interface.json
 78a02cf892959c7febbd8e61c0f84369dff8f8fe assets/irregular_implements/blockstates/analog_emitter.json
@@ -338,7 +338,6 @@ e38e03cc49d70804b2c4414e785e2e732026b2ae assets/irregular_implements/models/item
 4aed3a16d63e3ac862ae61377323dfd13b291688 assets/irregular_implements/models/item/igniter.json
 2389dd4d9aa2409f76ada794a893e50ccc11891b assets/irregular_implements/models/item/jungle_platform.json
 30272c4e149e4cea2f68843b4d3b0e4291a51627 assets/irregular_implements/models/item/lapis_glass.json
-5b1d426fe5dac261fb241bedf9953e83a6bfc687 assets/irregular_implements/models/item/lotus.json
 be50cb5fa5bc22fa023403c64ce7c0ad9c45dbbc assets/irregular_implements/models/item/luminous_block_black.json
 634c43ed7f01b0e74e46aa94a08c04e2ef08a9fa assets/irregular_implements/models/item/luminous_block_blue.json
 d6cf3ea06e79fb09612459d63bd981bc77ccd31e assets/irregular_implements/models/item/luminous_block_brown.json

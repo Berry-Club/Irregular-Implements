@@ -24,7 +24,7 @@ object ModBlocks {
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
     val LOTUS: DeferredBlock<LotusBlock> =
-        registerBlock("lotus") { LotusBlock() }
+        registerBlockWithoutItem("lotus") { LotusBlock() }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val RAIN_SHIELD =
         registerBlock("rain_shield") { RainShieldBlock() }

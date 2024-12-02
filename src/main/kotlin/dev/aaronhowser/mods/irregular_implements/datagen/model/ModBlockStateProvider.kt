@@ -60,10 +60,6 @@ class ModBlockStateProvider(
                     .modelFile(model)
                     .build()
             }
-
-        itemModels()
-            .withExistingParent(name(block), mcLoc("item/generated"))
-            .texture("layer0", modLoc("block/lotus_3"))
     }
 
     private fun igniter() {
