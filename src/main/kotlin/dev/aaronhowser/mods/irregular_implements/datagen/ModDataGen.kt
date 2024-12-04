@@ -79,6 +79,12 @@ object ModDataGen {
             event.includeServer(),
             ModFluidTagsProvider(output, lookupProvider, existingFileHelper)
         )
+
+        val dataPackProvider = generator.addProvider(
+            event.includeServer(),
+            ModDataPackProvider(output, lookupProvider)
+        )
+
     }
 
 }
