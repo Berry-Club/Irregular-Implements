@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
@@ -48,7 +49,15 @@ object ClientModBusEvents {
         event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
 
         event.register(
-            { _, _ -> GrassColor.getDefaultColor() },
+            { _, _ ->
+                val localPlayer = ClientUtil.localPlayer
+                val localFoliageColor = localPlayer?.level()
+                    ?.getBiome(localPlayer.blockPosition())
+                    ?.value()
+                    ?.foliageColor
+
+                localFoliageColor ?: GrassColor.getDefaultColor()
+            },
             ModBlocks.BIOME_GLASS.get(),
             ModBlocks.BIOME_STONE.get(),
             ModBlocks.BIOME_COBBLESTONE.get(),
