@@ -2,10 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
-import net.minecraft.world.item.ArmorItem
-import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.DyeColor
-import net.minecraft.world.item.Item
+import net.minecraft.world.item.*
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -54,11 +51,7 @@ object ModItems {
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
         register("lotus_blossom") { LotusBlossomItem() }
     val LOTUS_SEEDS: DeferredItem<BlockItem> =
-        register("lotus_seeds") {
-            object : BlockItem(ModBlocks.LOTUS.get(), Properties()) {
-                override fun getDescriptionId() = "item.${IrregularImplements.ID}.lotus_seeds"
-            }
-        }
+        register("lotus_seeds") { ItemNameBlockItem(ModBlocks.LOTUS.get(), Item.Properties()) }
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")
