@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -21,16 +22,17 @@ object ModCreativeModeTabs {
             .title(ModLanguageProvider.Items.CREATIVE_TAB.toComponent())
             .icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
             .displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
-                val regularItems =
-                    ModItems.ITEM_REGISTRY.entries
+                val itemsToSkip = setOf(
+                    ModItems.BIOME_CRYSTAL.get()
+                )
 
-                val itemsToDisplay = buildList {
-                    addAll(regularItems.map { (it as DeferredItem).toStack() })
+                val regularItems: Set<DeferredHolder<Item, out Item>> = ModItems.ITEM_REGISTRY.entries.toSet()
 
-                    addAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
-                }
+                output.acceptAll(
+                    (regularItems - itemsToSkip).map { (it as DeferredItem<*>).toStack() }
+                )
 
-                output.acceptAll(itemsToDisplay)
+                output.acceptAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
             }
             .build()
     })
