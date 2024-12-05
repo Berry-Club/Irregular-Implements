@@ -26,9 +26,22 @@ class ModBlockTagsProvider(
 
         @JvmStatic
         val SUPER_LUBRICATED = create("super_lubricated")
+        val C_CROPS_BEAN: TagKey<Block> = BlockTags.create(OtherUtil.modResource("crops/bean"))
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(C_CROPS_BEAN)
+            .add(
+                ModBlocks.BEAN_SPROUT.get()
+            )
+
+        this.tag(BlockTags.CROPS)
+            .add(
+                ModBlocks.LOTUS.get(),
+                ModBlocks.BEAN_SPROUT.get()
+            )
+            .addTag(C_CROPS_BEAN)
 
         this.tag(BlockTags.SMALL_FLOWERS)
             .add(

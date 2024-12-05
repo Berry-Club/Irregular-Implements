@@ -43,12 +43,14 @@ class ModItemTagsProvider(
         this.tag(Tags.Items.SEEDS)
             .addTag(GRASS_SEEDS)
             .add(
-                ModItems.LOTUS_SEEDS.get()
+                ModItems.LOTUS_SEEDS.get(),
+                ModItems.BEAN.get()
             )
 
         this.tag(Tags.Items.FOODS)
             .add(
-                ModItems.LOTUS_BLOSSOM.get()
+                ModItems.LOTUS_BLOSSOM.get(),
+                ModItems.BEAN_STEW.get()
             )
 
         this.tag(GRASS_SEEDS)
