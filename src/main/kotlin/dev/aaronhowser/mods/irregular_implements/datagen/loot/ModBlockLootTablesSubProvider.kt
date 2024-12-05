@@ -1,19 +1,23 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.loot
 
+import dev.aaronhowser.mods.irregular_implements.block.BeanSproutBlock
 import dev.aaronhowser.mods.irregular_implements.block.LotusBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.advancements.critereon.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
 
 class ModBlockLootTablesSubProvider(
@@ -36,6 +40,41 @@ class ModBlockLootTablesSubProvider(
 
         add(ModBlocks.COMPRESSED_SLIME_BLOCK.get()) { createSingleItemTable(Blocks.SLIME_BLOCK) }
 
+        lotus()
+        beanSprout()
+    }
+
+    private fun beanSprout() {
+        add(ModBlocks.BEAN_SPROUT.get()) {
+            super.applyExplosionDecay(
+                it,
+                LootTable.lootTable()
+                    .withPool(
+                        LootPool.lootPool()
+                            .add(LootItem.lootTableItem(ModItems.BEAN.get()))
+                    )
+                    .withPool(
+                        LootPool.lootPool()
+                            .`when`(
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(it)
+                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BeanSproutBlock.AGE, BeanSproutBlock.MAXIMUM_AGE))
+                            )
+                            .add(
+                                LootItem.lootTableItem(ModItems.BEAN.get())
+                                    .apply(
+                                        ApplyBonusCount.addBonusBinomialDistributionCount(
+                                            this.registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE),
+                                            0.5714286f,
+                                            3
+                                        )
+                                    )
+                            )
+                    )
+            )
+        }
+    }
+
+    private fun lotus() {
         add(ModBlocks.LOTUS.get()) {
             super.applyExplosionDecay(
                 it,
