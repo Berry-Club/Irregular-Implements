@@ -36,11 +36,13 @@ object ModBlocks {
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
 
-    // Flowers
+    // Plants
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
     val LOTUS: DeferredBlock<LotusBlock> =
         registerBlockWithoutItem("lotus") { LotusBlock() }
+    val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
+        registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }
 
     // Loot blocks
     val NATURE_CORE = basicBlock("nature_core")

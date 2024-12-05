@@ -1,4 +1,6 @@
-// 1.21.1	2024-12-02T10:45:21.6378614	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2024-12-04T21:29:18.9498501	Tags for minecraft:item mod id irregular_implements
+996ecf49e1bfe2419630ebb12ec9338e2cb73fec data/c/tags/item/crops.json
+e1a2f90f364fa88dc3a75bde96655d5523d40d0b data/c/tags/item/crops/bean.json
 9cfe6b45e7cad2a64a844cd1425bc1cb679a0e9b data/c/tags/item/foods.json
 eba7e8650dad79c8d7b20439f2846d867545bdaf data/c/tags/item/seeds.json
 929c63e629fa72731eb642bf2e3527ea64d16ade data/irregular_implements/tags/item/grass_seeds.json

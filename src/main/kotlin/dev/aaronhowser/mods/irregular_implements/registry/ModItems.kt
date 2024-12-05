@@ -16,7 +16,6 @@ object ModItems {
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
         register("biome_crystal") { BiomeCrystalItem() }
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
-    val BEAN = basic("bean")
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
     val MAGIC_BEAN = basic("magic_bean")
     val BEAN_STEW = basic("bean_stew")
@@ -52,6 +51,7 @@ object ModItems {
         register("lotus_blossom") { LotusBlossomItem() }
     val LOTUS_SEEDS: DeferredItem<BlockItem> =
         register("lotus_seeds") { ItemNameBlockItem(ModBlocks.LOTUS.get(), Item.Properties()) }
+    val BEAN = basic("bean")
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")

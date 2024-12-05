@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture
 class ModBlockTagsProvider(
     output: PackOutput,
     lookupProvider: CompletableFuture<HolderLookup.Provider>,
-    existingFileHelper: ExistingFileHelper?
+    existingFileHelper: ExistingFileHelper
 ) : BlockTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
 
     companion object {
