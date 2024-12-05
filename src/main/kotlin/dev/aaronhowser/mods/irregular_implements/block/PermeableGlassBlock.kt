@@ -23,12 +23,12 @@ class PermeableGlassBlock private constructor(
     companion object {
 
         val LAPIS = PermeableGlassBlock(
-            isSolidForMobsOnly = true,
+            isSolidForMobsOnly = false,
             Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
         )
 
         val QUARTZ = PermeableGlassBlock(
-            isSolidForMobsOnly = false,
+            isSolidForMobsOnly = true,
             Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
         )
 
@@ -45,7 +45,7 @@ class PermeableGlassBlock private constructor(
         }
     }
 
-    //FIXME: Figure out why mobs wont pathfind through Lapis glass
+    //FIXME: Figure out why mobs won't pathfind through Lapis glass
     override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
         return when (pathComputationType) {
             PathComputationType.LAND -> !mobsPassThrough
