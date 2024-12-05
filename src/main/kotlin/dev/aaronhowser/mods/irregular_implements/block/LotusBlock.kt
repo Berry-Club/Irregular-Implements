@@ -62,7 +62,11 @@ class LotusBlock(
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
         if (level.isClientSide || state.getValue(AGE) != MAXIMUM_AGE) return InteractionResult.PASS
 
-        Block.popResource(level, pos, ModItems.LOTUS_BLOSSOM.get().defaultInstance)
+        val stack = ModItems.LOTUS_BLOSSOM.get().defaultInstance
+        val added = player.inventory.add(stack)
+        if (!added) {
+            Block.popResource(level, pos, stack)
+        }
 
         val newState = state.setValue(AGE, 0)
         level.setBlockAndUpdate(pos, newState)
