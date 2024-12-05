@@ -5,7 +5,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModRegistries {
 
-    private val registries: List<DeferredRegister<out Any>> = listOf(
+    private val registries: List<DeferredRegister<*>> = listOf(
         ModItems.ITEM_REGISTRY,
         ModBlocks.BLOCK_REGISTRY,
         ModBlockEntities.BLOCK_ENTITY_REGISTRY,
