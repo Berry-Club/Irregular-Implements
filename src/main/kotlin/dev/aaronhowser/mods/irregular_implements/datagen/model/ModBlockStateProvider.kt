@@ -41,6 +41,26 @@ class ModBlockStateProvider(
         blockDestabilizer()
         igniter()
         lotus()
+        beanSprout()
+    }
+
+    private fun beanSprout() {
+        val block = ModBlocks.BEAN_SPROUT.get()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val fullyGrown = it.getValue(BeanSproutBlock.AGE) == BeanSproutBlock.MAXIMUM_AGE
+                val modelName = name(block) + if (fullyGrown) "_big" else "_small"
+
+                val model = models()
+                    .cross(modelName, modLoc("block/$modelName"))
+                    .renderType(RenderType.cutout().name)
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
     }
 
     private fun lotus() {
