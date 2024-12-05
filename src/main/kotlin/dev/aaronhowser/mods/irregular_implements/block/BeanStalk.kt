@@ -21,11 +21,14 @@ class BeanStalk(
         val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
 
         @JvmStatic
-        fun isClimbingBeanStalk(livingEntity: LivingEntity): Boolean {
-            return livingEntity
-                .level()
-                .getBlockState(livingEntity.blockPosition())
-                .`is`(ModBlocks.BEAN_STALK.get())
+        fun climbingFactor(livingEntity: LivingEntity): Float {
+            val blockState = livingEntity.inBlockState
+
+            return when {
+                blockState.`is`(ModBlocks.BEAN_STALK.get()) -> 1.75f
+                blockState.`is`(ModBlocks.LESSER_BEAN_STALK.get()) -> 1.5f
+                else -> 1f
+            }
         }
 
     }

@@ -64,7 +64,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
     )
     private double irregular_implements$climbingBeanStalk(double a, double b, Operation<Double> original) {
         double originalValue = original.call(a, b);
-        return BeanStalk.isClimbingBeanStalk((LivingEntity) (Object) this) ? originalValue * 2 : originalValue;
+        return originalValue * BeanStalk.climbingFactor((LivingEntity) (Object) this);
     }
 
 }
