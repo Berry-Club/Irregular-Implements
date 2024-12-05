@@ -12,7 +12,9 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.BucketPickup
 import net.minecraft.world.level.block.FlowerBlock
 import net.minecraft.world.level.block.state.BlockState
@@ -23,11 +25,12 @@ import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import java.util.*
 
+//TODO: Rename? Vanilla already has a Pitcher Plant now
 class PitcherPlantBlock : FlowerBlock(
     MobEffects.WATER_BREATHING,
     5f,
     Properties.ofFullCopy(Blocks.RED_TULIP)
-), BucketPickup {
+), BucketPickup, BonemealableBlock {
 
     override fun isRandomlyTicking(state: BlockState): Boolean = true
 
@@ -78,6 +81,28 @@ class PitcherPlantBlock : FlowerBlock(
 
     override fun pickupBlock(player: Player?, level: LevelAccessor, pos: BlockPos, state: BlockState): ItemStack {
         return Fluids.WATER.bucket.defaultInstance
+    }
+
+    override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+        return level is Level && Direction.entries.any {
+            val fluidCap = level.getCapability(
+                Capabilities.FluidHandler.BLOCK,
+                pos.relative(it),
+                it.opposite
+            ) ?: return@any false
+
+            val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, 1), IFluidHandler.FluidAction.SIMULATE)
+
+            amountThatFits > 0
+        }
+    }
+
+    override fun isBonemealSuccess(level: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
+        return true
+    }
+
+    override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+        randomTick(state, level, pos, random)
     }
 
 }
