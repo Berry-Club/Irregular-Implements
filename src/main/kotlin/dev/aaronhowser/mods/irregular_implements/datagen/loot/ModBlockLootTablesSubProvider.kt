@@ -103,7 +103,9 @@ class ModBlockLootTablesSubProvider(
 
     private val noDropBlocks = listOf(
         ModBlocks.BLAZE_FIRE,
-        ModBlocks.LOTUS
+        ModBlocks.LOTUS,
+        ModBlocks.BEAN_STALK,
+        ModBlocks.LESSER_BEAN_STALK
     ).map { it.get() }.toSet()
 
     private val nonDropSelfBlocks: Set<Block> = noDropBlocks + dropsDirtWithoutSilkTouch + setOf(
