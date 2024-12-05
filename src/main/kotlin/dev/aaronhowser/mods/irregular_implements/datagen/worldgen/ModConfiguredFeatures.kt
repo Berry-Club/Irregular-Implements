@@ -3,14 +3,17 @@ package dev.aaronhowser.mods.irregular_implements.datagen.worldgen
 import dev.aaronhowser.mods.irregular_implements.block.LotusBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.core.Direction
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
-import net.minecraft.data.worldgen.features.FeatureUtils
+import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.level.block.Blocks
+import net.minecraft.tags.BlockTags
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
@@ -21,21 +24,32 @@ object ModConfiguredFeatures {
     fun bootstrap(context: BootstrapContext<ConfiguredFeature<*, *>>) {
 
         register(
-            context, LOTUS_BUSH_KEY,
+            context,
+            LOTUS_BUSH_KEY,
             Feature.RANDOM_PATCH,
-            FeatureUtils.simplePatchConfiguration(
-                Feature.SIMPLE_BLOCK,
-                SimpleBlockConfiguration(
-                    BlockStateProvider.simple(
-                        ModBlocks.LOTUS.get()
-                            .defaultBlockState()
-                            .setValue(LotusBlock.AGE, LotusBlock.MAXIMUM_AGE)
+            RandomPatchConfiguration(
+                96,
+                0,
+                3,
+                PlacementUtils.filtered(
+                    Feature.SIMPLE_BLOCK,
+                    SimpleBlockConfiguration(
+                        BlockStateProvider.simple(
+                            ModBlocks.LOTUS.get()
+                                .defaultBlockState()
+                                .setValue(LotusBlock.AGE, LotusBlock.MAXIMUM_AGE)
+                        )
+                    ),
+                    BlockPredicate.allOf(
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                        BlockPredicate.matchesTag(
+                            Direction.DOWN.normal,
+                            BlockTags.DIRT
+                        )
                     )
-                ),
-                listOf(Blocks.GRASS_BLOCK)
+                )
             )
         )
-
     }
 
     fun registerKey(name: String): ResourceKey<ConfiguredFeature<*, *>> {
