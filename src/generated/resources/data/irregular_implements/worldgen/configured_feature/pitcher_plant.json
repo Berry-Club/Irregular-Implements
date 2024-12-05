@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "minecraft:flower",
   "config": {
     "feature": {
       "feature": {
@@ -8,10 +8,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "irregular_implements:lotus",
-              "Properties": {
-                "age": "3"
-              }
+              "Name": "irregular_implements:pitcher_plant"
             }
           }
         }

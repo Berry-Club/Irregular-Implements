@@ -1,9 +1,9 @@
 {
-  "feature": "irregular_implements:lotus_bush",
+  "feature": "irregular_implements:pitcher_plant",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 288
+      "chance": 50
     },
     {
       "type": "minecraft:in_square"
