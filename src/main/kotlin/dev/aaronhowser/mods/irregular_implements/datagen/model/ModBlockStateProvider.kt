@@ -42,6 +42,17 @@ class ModBlockStateProvider(
         igniter()
         lotus()
         beanSprout()
+        beanStalk()
+    }
+
+    private fun beanStalk() {
+        val leafModel = models()
+            .cross("bean_stalk", modLoc("block/bean_stalk"))
+            .renderType(RenderType.cutout().name)
+
+        for (block in listOf(ModBlocks.BEAN_STALK.get(), ModBlocks.LESSER_BEAN_STALK.get())) {
+            simpleBlock(block, leafModel)
+        }
     }
 
     private fun beanSprout() {
