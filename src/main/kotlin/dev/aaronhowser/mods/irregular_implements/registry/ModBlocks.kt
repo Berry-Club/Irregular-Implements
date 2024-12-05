@@ -21,10 +21,6 @@ object ModBlocks {
     val IMBUING_STATION = basicBlock("imbuing_station")
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
-    val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
-        registerBlock("pitcher_plant") { PitcherPlantBlock() }
-    val LOTUS: DeferredBlock<LotusBlock> =
-        registerBlockWithoutItem("lotus") { LotusBlock() }
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
     val RAIN_SHIELD =
         registerBlock("rain_shield") { RainShieldBlock() }
@@ -39,6 +35,12 @@ object ModBlocks {
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
+
+    // Flowers
+    val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
+        registerBlock("pitcher_plant") { PitcherPlantBlock() }
+    val LOTUS: DeferredBlock<LotusBlock> =
+        registerBlockWithoutItem("lotus") { LotusBlock() }
 
     // Loot blocks
     val NATURE_CORE = basicBlock("nature_core")
