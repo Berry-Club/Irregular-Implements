@@ -17,7 +17,6 @@ object ModBlocks {
 
     val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
         registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
-    val BEAN_POD = basicBlock("bean_pod")
     val IMBUING_STATION = basicBlock("imbuing_station")
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
@@ -43,6 +42,11 @@ object ModBlocks {
         registerBlockWithoutItem("lotus") { LotusBlock() }
     val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
         registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }
+    val LESSER_BEAN_STALK: DeferredBlock<BeanStalk> =
+        registerBlockWithoutItem("lesser_bean_stalk") { BeanStalk(isStrong = false) }
+    val BEAN_STALK: DeferredBlock<BeanStalk> =
+        registerBlockWithoutItem("bean_stalk") { BeanStalk(isStrong = false) }
+    val BEAN_POD = basicBlock("bean_pod")
 
     // Loot blocks
     val NATURE_CORE = basicBlock("nature_core")
