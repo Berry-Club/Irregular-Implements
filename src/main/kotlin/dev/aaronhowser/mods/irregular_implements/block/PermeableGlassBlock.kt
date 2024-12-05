@@ -12,28 +12,45 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class PermeableGlassBlock(
-    val type: Type
-) : TransparentBlock(
-    Properties
-        .ofFullCopy(if (type == Type.LAPIS) Blocks.BLUE_STAINED_GLASS else Blocks.LIGHT_GRAY_STAINED_GLASS)
-) {
+class PermeableGlassBlock private constructor(
+    isSolidForMobsOnly: Boolean,
+    properties: Properties
+) : TransparentBlock(properties) {
 
-    enum class Type { QUARTZ, LAPIS }
+    val mobsPassThrough = !isSolidForMobsOnly
+    val playersPassThrough = isSolidForMobsOnly
+
+    companion object {
+
+        val LAPIS = PermeableGlassBlock(
+            isSolidForMobsOnly = true,
+            Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
+        )
+
+        val QUARTZ = PermeableGlassBlock(
+            isSolidForMobsOnly = false,
+            Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
+        )
+
+    }
 
     override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         if (context !is EntityCollisionContext) return Shapes.block()
         val entity = context.entity ?: return Shapes.block()
 
-        return if (entity is Player && type == Type.LAPIS) Shapes.block() else Shapes.empty()
+        return when {
+            entity is Player && playersPassThrough -> Shapes.empty()
+            entity !is Player && mobsPassThrough -> Shapes.empty()
+            else -> Shapes.block()
+        }
     }
 
     //FIXME: Figure out why mobs wont pathfind through Lapis glass
     override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
         return when (pathComputationType) {
-            PathComputationType.LAND -> type == Type.QUARTZ
+            PathComputationType.LAND -> !mobsPassThrough
             PathComputationType.WATER -> false
-            PathComputationType.AIR -> type == Type.LAPIS
+            PathComputationType.AIR -> mobsPassThrough
         }
     }
 
