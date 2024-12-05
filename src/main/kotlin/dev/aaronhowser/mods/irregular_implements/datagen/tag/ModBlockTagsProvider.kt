@@ -31,6 +31,12 @@ class ModBlockTagsProvider(
 
     override fun addTags(provider: HolderLookup.Provider) {
 
+        this.tag(BlockTags.CLIMBABLE)
+            .add(
+                ModBlocks.BEAN_STALK.get(),
+                ModBlocks.LESSER_BEAN_STALK.get()
+            )
+
         this.tag(C_CROPS_BEAN)
             .add(
                 ModBlocks.BEAN_SPROUT.get()
