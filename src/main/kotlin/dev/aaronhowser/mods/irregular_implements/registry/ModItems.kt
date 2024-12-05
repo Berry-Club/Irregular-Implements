@@ -2,7 +2,11 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
-import net.minecraft.world.item.*
+import net.minecraft.world.food.Foods
+import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemNameBlockItem
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -16,9 +20,6 @@ object ModItems {
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
         register("biome_crystal") { BiomeCrystalItem() }
     val SUMMONING_PENDULUM = basic("summoning_pendulum")
-    val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
-    val MAGIC_BEAN = basic("magic_bean")
-    val BEAN_STEW = basic("bean_stew")
     val LOOT_GENERATOR = basic("loot_generator")
     val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
         register("bottle_of_air") { AirBottleItem() }
@@ -53,6 +54,10 @@ object ModItems {
         register("lotus_seeds") { ItemNameBlockItem(ModBlocks.LOTUS.get(), Item.Properties()) }
     val BEAN: DeferredItem<ItemNameBlockItem> =
         register("bean") { ItemNameBlockItem(ModBlocks.BEAN_SPROUT.get(), Item.Properties()) }
+    val BEAN_STEW: DeferredItem<Item> =
+        register("bean_stew") { Item(Item.Properties().stacksTo(1).food(Foods.stew(8).build())) }
+    val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
+    val MAGIC_BEAN = basic("magic_bean")
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")
