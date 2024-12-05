@@ -49,9 +49,10 @@ object ModItems {
     // Lotus
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
         register("lotus_blossom") { LotusBlossomItem() }
-    val LOTUS_SEEDS: DeferredItem<BlockItem> =
+    val LOTUS_SEEDS: DeferredItem<ItemNameBlockItem> =
         register("lotus_seeds") { ItemNameBlockItem(ModBlocks.LOTUS.get(), Item.Properties()) }
-    val BEAN = basic("bean")
+    val BEAN: DeferredItem<ItemNameBlockItem> =
+        register("bean") { ItemNameBlockItem(ModBlocks.BEAN_SPROUT.get(), Item.Properties()) }
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")

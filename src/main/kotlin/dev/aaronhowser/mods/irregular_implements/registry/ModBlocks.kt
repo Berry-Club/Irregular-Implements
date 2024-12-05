@@ -86,9 +86,9 @@ object ModBlocks {
     val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
         registerBlock("trigger_glass") { TriggerGlassBlock() }
     val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
-        registerBlock("lapis_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.LAPIS) }
+        registerBlock("lapis_glass") { PermeableGlassBlock.LAPIS }
     val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
-        registerBlock("quartz_glass") { PermeableGlassBlock(PermeableGlassBlock.Type.QUARTZ) }
+        registerBlock("quartz_glass") { PermeableGlassBlock.QUARTZ }
 
     // Lamp
     val RAINBOW_LAMP =
