@@ -36,8 +36,4 @@ class BeanStalk(
         return SHAPE
     }
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        super.entityInside(state, level, pos, entity)
-    }
-
 }
