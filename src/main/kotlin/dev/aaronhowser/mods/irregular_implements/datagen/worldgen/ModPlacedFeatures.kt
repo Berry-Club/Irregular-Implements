@@ -36,7 +36,7 @@ object ModPlacedFeatures {
             PITCHER_PLANT_PLACEMENT_KEY,
             configuredFeatures.getOrThrow(ModConfiguredFeatures.PITCHER_PLANT_KEY),
             listOf(
-                RarityFilter.onAverageOnceEvery(50),
+                RarityFilter.onAverageOnceEvery(10),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()
