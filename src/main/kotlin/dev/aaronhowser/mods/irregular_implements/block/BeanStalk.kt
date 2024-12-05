@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -18,6 +19,15 @@ class BeanStalk(
 
     companion object {
         val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
+
+        @JvmStatic
+        fun isClimbingBeanStalk(livingEntity: LivingEntity): Boolean {
+            return livingEntity
+                .level()
+                .getBlockState(livingEntity.blockPosition())
+                .`is`(ModBlocks.BEAN_STALK.get())
+        }
+
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {

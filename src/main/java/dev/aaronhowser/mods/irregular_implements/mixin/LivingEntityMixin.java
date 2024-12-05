@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
+import dev.aaronhowser.mods.irregular_implements.block.BeanStalk;
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
@@ -49,6 +52,19 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
         return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD()))
                 ? List.of()
                 : original;
+    }
+
+    @WrapOperation(
+            method = "handleOnClimbable",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Ljava/lang/Math;max(DD)D",
+                    ordinal = 0
+            )
+    )
+    private double irregular_implements$climbingBeanStalk(double a, double b, Operation<Double> original) {
+        double originalValue = original.call(a, b);
+        return BeanStalk.isClimbingBeanStalk((LivingEntity) (Object) this) ? originalValue * 2 : originalValue;
     }
 
 }
