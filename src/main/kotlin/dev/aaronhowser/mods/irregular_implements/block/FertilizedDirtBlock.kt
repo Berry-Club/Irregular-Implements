@@ -20,7 +20,11 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.common.ItemAbilities
 import net.neoforged.neoforge.common.ItemAbility
 
-class FertilizedDirtBlock : FarmBlock(Properties.ofFullCopy(Blocks.FARMLAND)) {
+class FertilizedDirtBlock : FarmBlock(
+    Properties
+        .ofFullCopy(Blocks.FARMLAND)
+        .dynamicShape()
+) {
 
     companion object {
         val TILLED: BooleanProperty = BooleanProperty.create("tilled")

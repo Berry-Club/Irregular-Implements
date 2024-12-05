@@ -26,14 +26,16 @@ import net.neoforged.neoforge.common.CommonHooks
 
 class LotusBlock(
     properties: Properties =
-        Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)
+        Properties
+            .ofFullCopy(Blocks.SWEET_BERRY_BUSH)
+            .randomTicks()
 ) : BushBlock(properties), BonemealableBlock {
 
     companion object {
         val AGE: IntegerProperty = BlockStateProperties.AGE_3
         const val MAXIMUM_AGE = 3
 
-        val SAPLING_SHAPE: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0)
+        val SHAPE: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0)
 
         val CODEC: MapCodec<LotusBlock> = simpleCodec(::LotusBlock)
     }
@@ -54,7 +56,7 @@ class LotusBlock(
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return SAPLING_SHAPE
+        return SHAPE
     }
 
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
