@@ -1,7 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
 import dev.aaronhowser.mods.irregular_implements.block.BeanStalk;
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems;
@@ -53,7 +51,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
     }
 
     @ModifyConstant(
-            method = "travel",
+            method = {"travel", "handleRelativeFrictionAndCalculateMovement"},
             constant = @Constant(doubleValue = 0.2)
     )
     private double irregular_implements$fasterOnStalk(double constant) {
