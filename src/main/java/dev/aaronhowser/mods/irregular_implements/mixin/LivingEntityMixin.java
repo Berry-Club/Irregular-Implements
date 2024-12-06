@@ -14,9 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -54,17 +52,12 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
                 : original;
     }
 
-    @WrapOperation(
-            method = "handleOnClimbable",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Ljava/lang/Math;max(DD)D",
-                    ordinal = 0
-            )
+    @ModifyConstant(
+            method = "travel",
+            constant = @Constant(doubleValue = 0.2)
     )
-    private double irregular_implements$climbingBeanStalk(double a, double b, Operation<Double> original) {
-        double originalValue = original.call(a, b);
-        return originalValue * BeanStalk.climbingFactor((LivingEntity) (Object) this);
+    private double irregular_implements$fasterOnStalk(double constant) {
+        return constant * BeanStalk.climbingFactor((LivingEntity) (Object) this);
     }
 
 }
