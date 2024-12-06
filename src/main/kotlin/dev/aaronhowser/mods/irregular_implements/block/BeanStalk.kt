@@ -12,7 +12,11 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class BeanStalk(
     val isStrong: Boolean
-) : Block(Properties.ofFullCopy(Blocks.BAMBOO)) {
+) : Block(
+    Properties
+        .ofFullCopy(Blocks.BAMBOO)
+        .offsetType(OffsetType.NONE)
+) {
 
     companion object {
         val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
