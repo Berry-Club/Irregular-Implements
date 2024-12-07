@@ -67,11 +67,11 @@ object ModItems {
     // Armors
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
         register("magic_hood") { ModArmorItems.MAGIC_HOOD }
-    val WATER_WALKING_BOOTS: DeferredItem<ModArmorItems> =
+    val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
         register("water_walking_boots") { ModArmorItems.WATER_WALKING_BOOTS }
-    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ModArmorItems> =
+    val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
         register("obsidian_water_walking_boots") { ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS }
-    val LAVA_WADERS: DeferredItem<ModArmorItems> =
+    val LAVA_WADERS: DeferredItem<ArmorItem> =
         register("lava_waders") { ModArmorItems.LAVA_WADERS }   //TODO: Advancement joking about the ui bar
 
     // Weather Eggs
