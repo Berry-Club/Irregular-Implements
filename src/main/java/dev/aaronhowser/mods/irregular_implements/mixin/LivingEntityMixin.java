@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
 import dev.aaronhowser.mods.irregular_implements.block.BeanStalk;
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems;
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -45,7 +45,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             )
     )
     private List<ParticleOptions> irregular_implements$hideMobEffectParticles(List<ParticleOptions> original) {
-        return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD()))
+        return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.getHIDE_POTION_HELMET()))
                 ? List.of()
                 : original;
     }

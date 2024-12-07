@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems;
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,7 +19,7 @@ public class LivingEntityRendererMixin<T extends LivingEntity> {
             cancellable = true
     )
     private void irregular_implements$shouldShowNameMixin(T entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.INSTANCE.getMAGIC_HOOD())) {
+        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.getHIDE_NAME_HELMET())) {
             cir.setReturnValue(false);
         }
     }

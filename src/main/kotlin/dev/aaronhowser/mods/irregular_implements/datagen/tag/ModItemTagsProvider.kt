@@ -30,9 +30,25 @@ class ModItemTagsProvider(
         val GRASS_SEEDS = create("grass_seeds")
         val RUNE_DUSTS = create("rune_dusts")
         val C_CROPS_BEAN: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "crops/bean"))
+
+        @JvmStatic
+        val HIDE_POTION_HELMET = create("hide_potion_helmet")
+
+        @JvmStatic
+        val HIDE_NAME_HELMET = create("hide_name_helmet")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(HIDE_NAME_HELMET)
+            .add(
+                ModItems.MAGIC_HOOD.get()
+            )
+
+        this.tag(HIDE_POTION_HELMET)
+            .add(
+                ModItems.MAGIC_HOOD.get()
+            )
 
         this.tag(C_CROPS_BEAN)
             .add(ModItems.BEAN.get())
