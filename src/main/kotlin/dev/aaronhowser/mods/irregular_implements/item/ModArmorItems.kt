@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.world.damagesource.FallLocation
@@ -136,24 +136,17 @@ object ModArmorItems {
 
     @JvmStatic
     fun fluidWalkingDeathMessage(entity: LivingEntity): Component {
-        val fluidBelowName = entity.level().getFluidState(entity.blockPosition()).fluidType.description
+        val fluidBelow = entity.level().getFluidState(entity.blockPosition())
         val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
-        val bootWasResponsible = when (bootArmor.item) {
-            ModItems.WATER_WALKING_BOOTS.get(),
-            ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
-            ModItems.LAVA_WADERS.get() -> true
-
-            else -> false
-        }
-
+        val bootWasResponsible = bootArmor.get(ModDataComponents.FLUID_TAGS)?.any { fluidBelow.`is`(it) }.isTrue
         return if (bootWasResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
             entity.displayName ?: entity.name,
-            fluidBelowName,
+            fluidBelow.fluidType.description,
             bootArmor.displayName
         ) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_GENERIC.toComponent(
             entity.displayName ?: entity.name,
-            fluidBelowName,
+            fluidBelow.fluidType.description,
         )
     }
 
