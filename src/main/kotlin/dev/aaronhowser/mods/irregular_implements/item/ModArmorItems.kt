@@ -140,7 +140,10 @@ object ModArmorItems {
         val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
         val bootArmorResponsible = when (bootArmor.item) {
-            ModItems.WATER_WALKING_BOOTS.get(), ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(), ModItems.LAVA_WADERS.get() -> true
+            ModItems.WATER_WALKING_BOOTS.get(),
+            ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
+            ModItems.LAVA_WADERS.get() -> true
+
             else -> false
         }
 
