@@ -410,6 +410,7 @@
   "subtitle.irregular_implements.fart": "Pbbbt",
   "tooltip.irregular_implements.compressed_slime_AMOUNT": "Compression level %d",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
+  "tooltip.irregular_implements.lubricated": "Lubricated",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
   "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information"
 }

@@ -415,6 +415,7 @@ class ModLanguageProvider(
         const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
 
         const val COMPRESSED_SLIME_AMOUNT = "tooltip.irregular_implements.compressed_slime_AMOUNT"
+        const val LUBRICATED = "tooltip.irregular_implements.lubricated"
     }
 
     private fun addTooltips() {
@@ -424,6 +425,7 @@ class ModLanguageProvider(
         add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
 
         add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
+        add(Tooltips.LUBRICATED, "Lubricated")
     }
 
     object Info {
