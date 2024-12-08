@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.ChatFormatting
+import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
@@ -41,13 +43,19 @@ class BiomeCrystalItem : Item(
         tooltipComponents: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
-
         val biomeHolder = stack.get(ModDataComponents.BIOME)
-        if (biomeHolder != null) {
-            val biome = biomeHolder.key!!
-            tooltipComponents.add(Component.literal(biome.location().toString()))
-        }
+        val biome = biomeHolder?.key ?: return
 
+        val probableTranslationKey = "biome.${biome.location().namespace}.${biome.location().path}"
+        val hasTranslation = I18n.exists(probableTranslationKey)
+
+        val component = if (hasTranslation) {
+            Component.translatable(probableTranslationKey)
+        } else {
+            Component.literal(biome.location().toString())
+        }.withStyle(ChatFormatting.GRAY)
+
+        tooltipComponents.add(component)
     }
 
 }

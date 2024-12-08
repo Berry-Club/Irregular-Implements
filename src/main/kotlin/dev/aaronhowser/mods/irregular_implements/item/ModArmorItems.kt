@@ -119,7 +119,11 @@ object ModArmorItems {
 
     fun tooltip(event: ItemTooltipEvent) {
         if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
-            event.toolTip.add(ModLanguageProvider.Tooltips.LUBRICATED.toComponent().withColor(0xFCF4DD))
+            event.toolTip.add(
+                ModLanguageProvider.Tooltips.LUBRICATED
+                    .toComponent()
+                    .withColor(0xFCF4DD)
+            )
         }
     }
 
