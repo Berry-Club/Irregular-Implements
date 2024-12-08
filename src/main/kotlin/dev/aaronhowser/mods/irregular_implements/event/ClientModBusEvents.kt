@@ -67,13 +67,16 @@ object ClientModBusEvents {
         )
     }
 
+    //FIXME: Sides of colored grass blocks are pitch black
     @SubscribeEvent
     fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
         for (dyeColor in DyeColor.entries) {
             val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
             event.register(
-                { _, _, _, _ -> dyeColor.textureDiffuseColor },
+                { _, _, _, tintIndex ->
+                    if (tintIndex == 0) dyeColor.textureDiffuseColor else 0xFFFFFF
+                },
                 coloredGrassBlock
             )
         }
