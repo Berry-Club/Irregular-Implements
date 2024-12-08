@@ -139,7 +139,7 @@ object ModArmorItems {
         val fluidBelowName = entity.level().getFluidState(entity.blockPosition()).fluidType.description
         val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
-        val bootArmorResponsible = when (bootArmor.item) {
+        val bootWasResponsible = when (bootArmor.item) {
             ModItems.WATER_WALKING_BOOTS.get(),
             ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
             ModItems.LAVA_WADERS.get() -> true
@@ -147,11 +147,11 @@ object ModArmorItems {
             else -> false
         }
 
-        return if (bootArmorResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
+        return if (bootWasResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
             entity.displayName ?: entity.name,
             fluidBelowName,
             bootArmor.displayName
-        ) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
+        ) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_GENERIC.toComponent(
             entity.displayName ?: entity.name,
             fluidBelowName,
         )
