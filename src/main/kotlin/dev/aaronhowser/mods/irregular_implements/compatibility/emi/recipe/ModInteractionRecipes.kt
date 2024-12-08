@@ -12,12 +12,12 @@ import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ItemLore
 import net.minecraft.world.item.crafting.Ingredient
-import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.ItemAbilities
 
 object ModInteractionRecipes {
@@ -42,7 +42,7 @@ object ModInteractionRecipes {
 
             EmiWorldInteractionRecipe
                 .builder()
-                .leftInput(EmiIngredient.of(Ingredient.of(Blocks.DIRT)))
+                .leftInput(EmiIngredient.of(Ingredient.of(ItemTags.DIRT)))
                 .rightInput(EmiIngredient.of(Ingredient.of(seedItem)), false)
                 .output(EmiStack.of(seedItem.resultBlock))
                 .id(id)

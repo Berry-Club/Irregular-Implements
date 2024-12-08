@@ -162,7 +162,7 @@ object ModItems {
     val GRASS_SEEDS_BLUE: DeferredItem<GrassSeedItem> =
         register("grass_seeds_blue") { GrassSeedItem(dyeColor = DyeColor.BLUE) }
     val GRASS_SEEDS_BROWN: DeferredItem<GrassSeedItem> =
-        register("grass_seeds_brown") { GrassSeedItem(dyeColor = DyeColor.LIGHT_BLUE) }
+        register("grass_seeds_brown") { GrassSeedItem(dyeColor = DyeColor.BROWN) }
     val GRASS_SEEDS_GREEN: DeferredItem<GrassSeedItem> =
         register("grass_seeds_green") { GrassSeedItem(dyeColor = DyeColor.GREEN) }
     val GRASS_SEEDS_RED: DeferredItem<GrassSeedItem> =

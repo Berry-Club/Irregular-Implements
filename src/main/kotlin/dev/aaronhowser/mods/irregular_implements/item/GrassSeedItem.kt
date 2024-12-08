@@ -19,6 +19,9 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_R
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_WHITE
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_YELLOW
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
+import net.minecraft.tags.BlockTags
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
@@ -40,9 +43,18 @@ class GrassSeedItem(
         val level = context.level
 
         val clickedState = level.getBlockState(clickedPos)
-        if (!clickedState.`is`(Blocks.DIRT)) return InteractionResult.PASS
+        if (
+            clickedState.`is`(resultBlock)
+            || !clickedState.`is`(BlockTags.DIRT)
+        ) return InteractionResult.PASS
 
         level.setBlockAndUpdate(clickedPos, resultBlock.defaultBlockState())
+        level.playSound(
+            null,
+            clickedPos,
+            SoundEvents.GRASS_BREAK,
+            SoundSource.BLOCKS
+        )
 
         if (!context.player?.hasInfiniteMaterials().isTrue) {
             val usedStack = context.itemInHand
