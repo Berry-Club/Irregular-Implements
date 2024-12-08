@@ -5,10 +5,12 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
@@ -29,7 +31,123 @@ class ModBlockTagsProvider(
         val C_CROPS_BEAN: TagKey<Block> = BlockTags.create(OtherUtil.modResource("crops/bean"))
     }
 
+    private fun colorTags() {
+        for (color in DyeColor.entries) {
+            val coloredGrass = ModBlocks.getColoredGrass(color).get()
+            val stainedBrick = ModBlocks.getStainedBrick(color).get()
+            val luminousStainedBrick = ModBlocks.getStainedBrickLuminous(color).get()
+            val luminousBlock = ModBlocks.getLuminousBlock(color).get()
+            val translucentLuminousBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
+
+            this.tag(Tags.Blocks.DYED)
+                .add(
+                    coloredGrass,
+                    stainedBrick,
+                    luminousStainedBrick,
+                    luminousBlock,
+                    translucentLuminousBlock
+                )
+
+            val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.getName()))
+
+            this.tag(coloredTag)
+                .add(
+                    coloredGrass,
+                    stainedBrick,
+                    luminousStainedBrick,
+                    luminousBlock,
+                    translucentLuminousBlock
+                )
+
+        }
+    }
+
     override fun addTags(provider: HolderLookup.Provider) {
+
+        colorTags()
+
+        this.tag(Tags.Blocks.GLASS_BLOCKS)
+            .add(
+                ModBlocks.BIOME_GLASS.get(),
+                ModBlocks.LAPIS_GLASS.get(),
+                ModBlocks.QUARTZ_GLASS.get(),
+                ModBlocks.TRIGGER_GLASS.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_WHITE.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_ORANGE.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_YELLOW.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_LIME.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_PINK.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_GRAY.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_CYAN.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_PURPLE.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_BLUE.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_BROWN.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_GREEN.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_RED.get(),
+                ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_BLACK.get(),
+            )
+
+        this.tag(BlockTags.STONE_BRICKS)
+            .add(
+                ModBlocks.BIOME_STONE_BRICKS.get(),
+                ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
+                ModBlocks.BIOME_STONE_BRICKS_CRACKED.get(),
+                ModBlocks.STAINED_BRICKS_WHITE.get(),
+                ModBlocks.STAINED_BRICKS_ORANGE.get(),
+                ModBlocks.STAINED_BRICKS_MAGENTA.get(),
+                ModBlocks.STAINED_BRICKS_LIGHT_BLUE.get(),
+                ModBlocks.STAINED_BRICKS_YELLOW.get(),
+                ModBlocks.STAINED_BRICKS_LIME.get(),
+                ModBlocks.STAINED_BRICKS_PINK.get(),
+                ModBlocks.STAINED_BRICKS_GRAY.get(),
+                ModBlocks.STAINED_BRICKS_LIGHT_GRAY.get(),
+                ModBlocks.STAINED_BRICKS_CYAN.get(),
+                ModBlocks.STAINED_BRICKS_PURPLE.get(),
+                ModBlocks.STAINED_BRICKS_BLUE.get(),
+                ModBlocks.STAINED_BRICKS_BROWN.get(),
+                ModBlocks.STAINED_BRICKS_GREEN.get(),
+                ModBlocks.STAINED_BRICKS_RED.get(),
+                ModBlocks.STAINED_BRICKS_BLACK.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_WHITE.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_ORANGE.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_MAGENTA.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_LIGHT_BLUE.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_YELLOW.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_LIME.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_PINK.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_GRAY.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_LIGHT_GRAY.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_CYAN.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_PURPLE.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_BLUE.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_BROWN.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_GREEN.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_RED.get(),
+                ModBlocks.LUMINOUS_STAINED_BRICKS_BLACK.get(),
+            )
+
+        this.tag(Tags.Blocks.COBBLESTONES)
+            .add(
+                ModBlocks.BIOME_COBBLESTONE.get()
+            )
+
+        this.tag(Tags.Blocks.STONES)
+            .add(
+                ModBlocks.BIOME_STONE.get()
+            )
+
+        this.tag(BlockTags.SAPLINGS)
+            .add(
+                ModBlocks.SPECTRE_SAPLING.get()
+            )
+
+        this.tag(BlockTags.WITHER_IMMUNE)
+            .add(
+                ModBlocks.SPECTRE_BLOCK.get()
+            )
 
         this.tag(BlockTags.CLIMBABLE)
             .add(
@@ -211,6 +329,9 @@ class ModBlockTagsProvider(
                 ModBlocks.LUMINOUS_STAINED_BRICKS_GREEN.get(),
                 ModBlocks.LUMINOUS_STAINED_BRICKS_RED.get(),
                 ModBlocks.LUMINOUS_STAINED_BRICKS_BLACK.get(),
+                ModBlocks.SLIME_CUBE.get(),
+                ModBlocks.INVENTORY_TESTER.get(),
+                ModBlocks.BLOCK_DESTABILIZER.get()
             )
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
