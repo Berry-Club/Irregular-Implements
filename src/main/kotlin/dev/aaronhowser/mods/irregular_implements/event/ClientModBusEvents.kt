@@ -67,7 +67,6 @@ object ClientModBusEvents {
         )
     }
 
-    //FIXME: Sides of colored grass blocks are pitch black
     @SubscribeEvent
     fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
         for (dyeColor in DyeColor.entries) {

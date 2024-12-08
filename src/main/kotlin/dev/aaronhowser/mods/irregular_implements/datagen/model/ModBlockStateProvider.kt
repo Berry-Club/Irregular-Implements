@@ -554,6 +554,7 @@ class ModBlockStateProvider(
 
             val model = models()
                 .withExistingParent(name(block), mcLoc("block/grass_block"))
+                .renderType(RenderType.cutout().name)
 
             simpleBlockWithItem(block, model)
         }
