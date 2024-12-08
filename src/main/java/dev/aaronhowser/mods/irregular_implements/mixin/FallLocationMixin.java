@@ -17,7 +17,7 @@ public class FallLocationMixin {
     private static FallLocation irregular_implements$fallOnWaterMessage(FallLocation original, LivingEntity entity) {
         if (original != null) return original;
 
-        return ModArmorItems.checkForFluidWalking(entity);
+        return ModArmorItems.fluidWalkingFallLocation(entity);
     }
 
 }

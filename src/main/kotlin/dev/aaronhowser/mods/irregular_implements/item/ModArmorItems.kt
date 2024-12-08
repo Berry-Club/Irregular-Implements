@@ -1,8 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.world.damagesource.FallLocation
@@ -120,14 +123,35 @@ object ModArmorItems {
         }
     }
 
+    @JvmStatic
     val FLUID_BOOT_FALL = FallLocation("fluid_boot_fall")
 
     @JvmStatic
-    fun checkForFluidWalking(entity: LivingEntity): FallLocation? {
+    fun fluidWalkingFallLocation(entity: LivingEntity): FallLocation? {
         val fluidBelow = entity.level().getFluidState(entity.blockPosition())
         if (!shouldEntityStandOnFluid(entity, fluidBelow)) return null
 
         return FLUID_BOOT_FALL
+    }
+
+    @JvmStatic
+    fun fluidWalkingDeathMessage(entity: LivingEntity): Component {
+        val fluidBelowName = entity.level().getFluidState(entity.blockPosition()).fluidType.description
+        val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
+
+        val bootArmorResponsible = when (bootArmor.item) {
+            ModItems.WATER_WALKING_BOOTS.get(), ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(), ModItems.LAVA_WADERS.get() -> true
+            else -> false
+        }
+
+        return if (bootArmorResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
+            entity.displayName ?: entity.name,
+            fluidBelowName,
+            bootArmor.displayName
+        ) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
+            entity.displayName ?: entity.name,
+            fluidBelowName,
+        )
     }
 
 }

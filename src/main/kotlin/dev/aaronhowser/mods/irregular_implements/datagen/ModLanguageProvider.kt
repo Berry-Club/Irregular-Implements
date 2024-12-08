@@ -50,6 +50,9 @@ class ModLanguageProvider(
         const val REDSTONE_TOOL_UNLOADED = "message.irregular_implements.redstone_tool.unloaded"
         const val REDSTONE_TOOL_BASE_NOT_LINKABLE = "message.irregular_implements.redstone_tool.base_not_linkable"
         const val REDSTONE_TOOL_LINKED = "message.irregular_implements.redstone_tool.linked"
+
+        const val FLUID_FALL_DEATH_BOOT = "death.fell.accident.fluid_fall.boot"
+        const val FLUID_FALL_DEATH_GENERIC = "death.fell.accident.fluid_fall.generic"
     }
 
     private fun addMessages() {
@@ -62,6 +65,9 @@ class ModLanguageProvider(
         add(Messages.REDSTONE_TOOL_UNLOADED, "Cannot link as base %s is in an unloaded chunk.")
         add(Messages.REDSTONE_TOOL_BASE_NOT_LINKABLE, "Cannot link as base %s was replaced with a %s.")
         add(Messages.REDSTONE_TOOL_LINKED, "Linked the %s at %d %d %d to the %s at %d %d %d.")
+
+        add(Messages.FLUID_FALL_DEATH_BOOT, "%s splattered against the surface of %s because they were wearing %s")
+        add(Messages.FLUID_FALL_DEATH_GENERIC, "%s splattered against the surface of %s because they could walk on it")
     }
 
     object Subtitles {

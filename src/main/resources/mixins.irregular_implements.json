@@ -6,6 +6,7 @@
     "BeaconBlockEntityMixin",
     "BiomeMixin",
     "BlockStateBaseMixin",
+    "CombatTrackerMixin",
     "FallLocationMixin",
     "FireMixin",
     "ItemEntityMixin",

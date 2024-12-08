@@ -177,6 +177,8 @@
   "block.irregular_implements.trigger_glass": "Trigger Glass",
   "block.irregular_implements.warped_platform": "Warped Platform",
   "block.irregular_implements.water_chest": "Water Chest",
+  "death.fell.accident.fluid_fall.boot": "%s splattered against the surface of %s because they were wearing %s",
+  "death.fell.accident.fluid_fall.generic": "%s splattered against the surface of %s because they could walk on it",
   "effect.irregular_implements.imbue_collapse": "Collapse Imbue",
   "effect.irregular_implements.imbue_experience": "Experience Imbue",
   "effect.irregular_implements.imbue_fire": "Fire Imbue",
