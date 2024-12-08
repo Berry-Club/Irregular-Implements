@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
+import net.minecraft.world.damagesource.FallLocation
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
@@ -12,6 +13,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
@@ -76,6 +78,15 @@ object ModArmorItems {
         )
     }
 
+    fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
+        if (livingEntity.isCrouching || livingEntity.isUnderWater) return false
+
+        val footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET)
+        val fluidTags = footArmor.get(ModDataComponents.FLUID_TAGS) ?: return false
+
+        return fluidTags.any { fluidState.`is`(it) }
+    }
+
     @JvmStatic
     fun checkCollisionShape(
         level: BlockGetter,
@@ -90,14 +101,7 @@ object ModArmorItems {
         if (fluidHeight <= 0) return null
 
         val entity = context.entity as? LivingEntity ?: return null
-
-        if (entity.isCrouching || entity.isUnderWater) return null
-
-        val footArmor = entity.getItemBySlot(EquipmentSlot.FEET)
-        val fluidTags = footArmor.get(ModDataComponents.FLUID_TAGS) ?: return null
-
-        val canStandOnFluid = fluidTags.any { fluidState.`is`(it) }
-        if (!canStandOnFluid) return null
+        if (!shouldEntityStandOnFluid(entity, fluidState)) return null
 
         val shape = FLUID_SHAPES.computeIfAbsent(fluidHeight) {
             Block.box(0.0, 0.0, 0.0, 16.0, (it * 16).toDouble(), 16.0)
@@ -111,11 +115,19 @@ object ModArmorItems {
     private val FLUID_SHAPES: MutableMap<Float, VoxelShape> = HashMap()
 
     fun tooltip(event: ItemTooltipEvent) {
-
         if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
             event.toolTip.add(Component.literal("Lubricated").withColor(0xFCF4DD))
         }
+    }
 
+    val FLUID_BOOT_FALL = FallLocation("fluid_boot_fall")
+
+    @JvmStatic
+    fun checkForFluidWalking(entity: LivingEntity): FallLocation? {
+        val fluidBelow = entity.level().getFluidState(entity.blockPosition())
+        if (!shouldEntityStandOnFluid(entity, fluidBelow)) return null
+
+        return FLUID_BOOT_FALL
     }
 
 }
