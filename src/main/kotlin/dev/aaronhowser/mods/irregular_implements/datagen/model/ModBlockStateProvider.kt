@@ -66,7 +66,7 @@ class ModBlockStateProvider(
             val texture = modLoc("block/plate/$textureName")
 
             val model = models()
-                .pressurePlateDown(name(plate), texture)
+                .pressurePlate(name(plate), texture)
                 .renderType(RenderType.cutout().name)
 
             simpleBlockWithItem(plate, model)
