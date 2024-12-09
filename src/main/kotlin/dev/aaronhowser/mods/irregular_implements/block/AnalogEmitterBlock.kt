@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import com.mojang.serialization.MapCodec
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
@@ -64,9 +66,18 @@ class AnalogEmitterBlock(
         if (level.isClientSide) return InteractionResult.SUCCESS
         if (!player.getItemInHand(player.usedItemHand).isEmpty) return InteractionResult.PASS
 
-        val newState = oldState.cycle(POWER)
+        var newPower = oldState.getValue(POWER) + if (player.isSecondaryUseActive) -1 else 1
+        if (newPower < 0) newPower = 15
+        if (newPower > 15) newPower = 0
+
+        val component = newPower.toString()
+            .toComponent()
+            .withStyle(ChatFormatting.RED)
+
+        player.displayClientMessage(component, true)
+
+        val newState = oldState.setValue(POWER, newPower)
         level.setBlockAndUpdate(pos, newState)
-        val newPower = newState.getValue(POWER)
 
         val pitch = 0.5f + (newPower.toFloat() / 15f) * (2f - 0.5f)   // 0.5 to 5
         level.playSound(
