@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.AcceleratorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.block.plate.BouncyPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.CollectionPlateBlock
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -191,7 +192,8 @@ object ModBlocks {
     val DIRECTIONAL_ACCELERATOR_PLATE = basicBlock("directional_accelerator_plate")
     val BOUNCY_PLATE: DeferredBlock<BouncyPlateBlock> =
         registerBlock("bouncy_plate") { BouncyPlateBlock() }
-    val COLLECTION_PLATE = basicBlock("collection_plate")
+    val COLLECTION_PLATE: DeferredBlock<CollectionPlateBlock> =
+        registerBlock("collection_plate") { CollectionPlateBlock() }
     val EXTRACTION_PLATE = basicBlock("extraction_plate")
 
     // Colored blocks
