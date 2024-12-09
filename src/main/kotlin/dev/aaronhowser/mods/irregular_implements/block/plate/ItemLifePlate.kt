@@ -15,7 +15,7 @@ class ItemLifePlate private constructor(
     }
 
     companion object {
-        val SEALER = ItemLifePlate(20 * 30)
+        val SEALER = ItemLifePlate(20 * 30) //FIXME: This is supposed to *stop you from being able to pick it up*, not make it not despawn
         val REJUVENATOR = ItemLifePlate(20 * 60 * 4)
     }
 

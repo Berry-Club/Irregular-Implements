@@ -22,6 +22,6 @@ object ModEffects {
     val WITHER_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
         EFFECT_REGISTRY.register("imbue_wither", Supplier { ImbueEffect() })
     val COLLAPSE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("imbue_collapse", Supplier { ImbueEffect() })
+        EFFECT_REGISTRY.register("imbue_collapse", Supplier { ImbueEffect() })  //TODO: Inverts wasd
 
 }

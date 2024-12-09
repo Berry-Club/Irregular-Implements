@@ -97,4 +97,6 @@ class RedstoneToolItem : Item(
         return InteractionResult.SUCCESS
     }
 
+    //TODO: Display the signal strength of redstone dust
+
 }

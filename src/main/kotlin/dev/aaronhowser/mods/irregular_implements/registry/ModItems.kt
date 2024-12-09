@@ -28,7 +28,7 @@ object ModItems {
     val EVIL_TEAR = basic("evil_tear")
     val ECTOPLASM = basic("ectoplasm")
     val BIOME_SENSOR = basic("biome_sensor")
-    val LUMINOUS_POWDER = basic("luminous_powder")
+    val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val PLATE_BASE = basic("plate_base")
     val PRECIOUS_EMERALD = basic("precious_emerald")
     val GOLDEN_EGG = basic("golden_egg")
@@ -57,7 +57,7 @@ object ModItems {
     val BEAN_STEW: DeferredItem<Item> =
         register("bean_stew") { Item(Item.Properties().stacksTo(1).food(Foods.stew(8).build())) }
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
-    val MAGIC_BEAN = basic("magic_bean")
+    val MAGIC_BEAN = basic("magic_bean")    //rarity blue
 
     // Curios
     val LAVA_CHARM = basic("lava_charm")
@@ -190,6 +190,7 @@ object ModItems {
     // Removed items:
     // - Time in a Bottle (Use the standalone one!)
     // - Eclipsed Clock (requires TIAB)
+    // - Golden Compass (redundant, use Lodestones)
 
 
     private fun basic(id: String): DeferredItem<Item> {

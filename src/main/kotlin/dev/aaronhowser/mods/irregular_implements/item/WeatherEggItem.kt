@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
+//TODO: Make it throw a projectile
 class WeatherEggItem private constructor(
     private val weather: Weather
 ) : Item(Properties()) {
