@@ -25,6 +25,7 @@ class CollectionPlateBlock : BasePlateBlock() {
 
     }
 
+    //TODO: Maybe make a plop sound on inserting items?
     override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
         if (level.gameTime % COLLECT_RATE != 0L) return
         if (entity !is ItemEntity) return
