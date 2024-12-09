@@ -43,10 +43,10 @@ class ModBlockStateProvider(
         lotus()
         beanSprout()
         beanStalk()
-        plates()
+        basePlates()
     }
 
-    private fun plates() {
+    private fun basePlates() {
 
         //TODO: Extraction, Filtered Director, Processing, Redirector, Redstone
 
