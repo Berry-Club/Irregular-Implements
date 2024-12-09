@@ -22,7 +22,9 @@ object ModEffects {
         EFFECT_REGISTRY.register("imbue_experience", Supplier { ImbueEffect(Color.YELLOW.rgb) })
     val WITHER_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
         EFFECT_REGISTRY.register("imbue_wither", Supplier { ImbueEffect(Color.BLACK.brighter().rgb) })
+
+    @JvmStatic
     val COLLAPSE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-        EFFECT_REGISTRY.register("imbue_collapse", Supplier { ImbueEffect(Color.PINK.rgb) })  //TODO: Inverts wasd
+        EFFECT_REGISTRY.register("imbue_collapse", Supplier { ImbueEffect(Color.PINK.rgb) })
 
 }

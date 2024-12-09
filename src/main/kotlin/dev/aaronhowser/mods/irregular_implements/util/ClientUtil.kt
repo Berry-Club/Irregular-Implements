@@ -5,6 +5,7 @@ import net.minecraft.client.player.LocalPlayer
 
 object ClientUtil {
 
+    @JvmStatic
     val localPlayer: LocalPlayer?
         get() = Minecraft.getInstance().player
 
