@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
+import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
@@ -44,6 +45,37 @@ class ModBlockStateProvider(
         beanSprout()
         beanStalk()
         basePlates()
+        directionalAcceleratorPlate()
+    }
+
+    private fun directionalAcceleratorPlate() {
+        val block = ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get()
+
+        val texture = modLoc("block/plate/directional_accelerator")
+        val model = models()
+            .pressurePlate(name(block), texture)
+            .renderType(RenderType.cutout().name)
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(HorizontalDirectionalBlock.FACING)
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .rotationY(yRotation)
+                    .build()
+            }
+
+        simpleBlockItem(block, model)
     }
 
     private fun basePlates() {
@@ -52,7 +84,6 @@ class ModBlockStateProvider(
 
         val plateBlocks = listOf(
             ModBlocks.ACCELERATOR_PLATE,
-            ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE,
             ModBlocks.BOUNCY_PLATE,
             ModBlocks.COLLECTION_PLATE,
             ModBlocks.CORRECTOR_PLATE,
@@ -62,7 +93,7 @@ class ModBlockStateProvider(
 
         for (plate in plateBlocks) {
 
-            val textureName = name(plate).removeSuffix("_plate") + "_base"
+            val textureName = name(plate).removeSuffix("_plate")
             val texture = modLoc("block/plate/$textureName")
 
             val model = models()
