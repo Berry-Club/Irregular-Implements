@@ -2,10 +2,12 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreLensBlockEntity
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
@@ -27,6 +29,14 @@ class SpectreLensBlock : EntityBlock, TransparentBlock(Properties.ofFullCopy(Blo
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
         return level.getBlockState(pos.below()).`is`(Blocks.BEACON)
+    }
+
+    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+        return if (canSurvive(state, level, pos)) {
+            state
+        } else {
+            Blocks.AIR.defaultBlockState()
+        }
     }
 
     override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
