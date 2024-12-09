@@ -12,9 +12,6 @@ import net.neoforged.neoforge.capabilities.Capabilities
 class CollectionPlateBlock : BasePlateBlock() {
 
     companion object {
-        //TODO: Configurable?
-        const val COLLECT_RATE = 10
-
         private val directions = setOf(
             Direction.DOWN,
             Direction.NORTH,
@@ -23,12 +20,10 @@ class CollectionPlateBlock : BasePlateBlock() {
             Direction.EAST,
             Direction.UP
         )
-
     }
 
     //TODO: Maybe make a plop sound on inserting items?
     override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        if (level.gameTime % COLLECT_RATE != 0L) return
         if (entity !is ItemEntity) return
 
         for (direction in directions) {
