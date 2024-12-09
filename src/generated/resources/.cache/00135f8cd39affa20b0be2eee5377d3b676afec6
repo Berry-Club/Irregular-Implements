@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-08T22:17:17.0993651	Block States: irregular_implements
+// 1.21.1	2024-12-08T23:43:43.3075159	Block States: irregular_implements
 1c29572310303db674c5bbef1a5f51c49a200c42 assets/irregular_implements/blockstates/acacia_platform.json
 121014afa3830c821a53dfa8a59c8786aef65387 assets/irregular_implements/blockstates/accelerator_plate.json
 6d0a7815cb9597ae2286d791040f76a2e39c963e assets/irregular_implements/blockstates/advanced_redstone_interface.json
@@ -409,7 +409,7 @@ b0f7ede79d668d345c227f9f9f43da482871cd80 assets/irregular_implements/models/item
 ed9a2df562453762828a1f40f77ec987cb473b1a assets/irregular_implements/models/item/quartz_glass.json
 0ec6874a0e4aed9733469ef0a780b35e65212ef2 assets/irregular_implements/models/item/quartz_lamp.json
 35e93768454e5ecaba51efbae1c610ca00344c62 assets/irregular_implements/models/item/rainbow_lamp.json
-d271b8f8622d4c77332bb424bbe6b04d100b0503 assets/irregular_implements/models/item/redirector_plate.json
+8b17b86ff0e1a321e7d555be654c363cfc43fd6a assets/irregular_implements/models/item/redirector_plate.json
 2edd1d057f3b6b269fe880deb50597b72fad2573 assets/irregular_implements/models/item/redstone_observer.json
 7cb98c8726f6b096eb5a640453138ab4b38c7b88 assets/irregular_implements/models/item/returning_block_of_sticks.json
 32e1177dfd4681ec917afaa988af7ff3f4b23afa assets/irregular_implements/models/item/sided_redstone.json

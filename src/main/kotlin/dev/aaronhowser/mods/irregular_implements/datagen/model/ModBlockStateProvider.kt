@@ -106,10 +106,7 @@ class ModBlockStateProvider(
 
         simpleBlockItem(
             block,
-            ItemModelBuilder(
-                modLoc("block/redirector_plate_north_south"),
-                existingFileHelper
-            )
+            baseModel
         )
     }
 
