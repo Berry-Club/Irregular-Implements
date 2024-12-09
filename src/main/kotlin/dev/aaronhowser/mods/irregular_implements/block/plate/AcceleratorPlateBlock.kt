@@ -8,19 +8,17 @@ import net.minecraft.world.phys.Vec3
 
 class AcceleratorPlateBlock : BasePlateBlock() {
 
-    //FIXME: Not working?
     override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        if (level.isClientSide || entity.isShiftKeyDown) return
+        if (entity.isShiftKeyDown) return
 
-        var entityMotion = entity.deltaMovement
-        val y = entityMotion.y
-        if (entityMotion.horizontalDistanceSqr() < 0.5 * 0.5) {
-            entityMotion = entityMotion.normalize().scale(0.5)
+        val originalMotion = entity.deltaMovement
+
+        var newMotion = originalMotion.scale(1.2)
+        if (newMotion.horizontalDistanceSqr() > 0.5 * 0.5) {
+            newMotion = newMotion.normalize().scale(0.5)
         }
 
-        entityMotion = entityMotion.scale(1.5)
-
-        entity.deltaMovement = Vec3(entityMotion.x, y, entityMotion.z)
+        entity.deltaMovement = Vec3(newMotion.x, originalMotion.y, newMotion.z)
     }
 
 }
