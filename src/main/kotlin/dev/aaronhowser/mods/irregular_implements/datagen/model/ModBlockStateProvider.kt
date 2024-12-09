@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
+import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.RedirectorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
@@ -11,7 +13,6 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
-import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
@@ -46,6 +47,70 @@ class ModBlockStateProvider(
         beanStalk()
         basePlates()
         directionalAcceleratorPlate()
+        redirectorPlate()
+    }
+
+    private fun redirectorPlate() {
+        val block = ModBlocks.REDIRECTOR_PLATE.get()
+
+        val baseTexture = modLoc("block/plate/redirector_base")
+        val greenTexture = modLoc("block/plate/redirector_green")
+        val grayTexture = modLoc("block/plate/redirector_gray")
+
+        val baseModel = models()
+            .pressurePlate(name(block), baseTexture)
+            .renderType(RenderType.cutout().name)
+
+        val greenModel = models()
+            .pressurePlate(name(block) + "_green", greenTexture)
+            .renderType(RenderType.cutout().name)
+
+        val grayModel = models()
+            .pressurePlate(name(block) + "_gray", grayTexture)
+            .renderType(RenderType.cutout().name)
+
+        val builder = getMultipartBuilder(block)
+            .part().modelFile(baseModel).addModel().end()
+
+        for (direction in Direction.Plane.HORIZONTAL) {
+            builder
+                .part()
+                .modelFile(greenModel)
+                .rotationY(
+                    when (direction) {
+                        Direction.NORTH -> 0
+                        Direction.EAST -> 90
+                        Direction.SOUTH -> 180
+                        Direction.WEST -> 270
+                        else -> 0
+                    }
+                )
+                .addModel()
+                .condition(RedirectorPlateBlock.INPUT_DIRECTION, direction)
+
+            builder
+                .part()
+                .modelFile(grayModel)
+                .rotationY(
+                    when (direction) {
+                        Direction.NORTH -> 0
+                        Direction.EAST -> 90
+                        Direction.SOUTH -> 180
+                        Direction.WEST -> 270
+                        else -> 0
+                    }
+                )
+                .addModel()
+                .condition(RedirectorPlateBlock.OUTPUT_DIRECTION, direction)
+        }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/redirector_plate_north_south"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun directionalAcceleratorPlate() {
@@ -58,7 +123,7 @@ class ModBlockStateProvider(
 
         getVariantBuilder(block)
             .forAllStates {
-                val facing = it.getValue(HorizontalDirectionalBlock.FACING)
+                val facing = it.getValue(DirectionalAcceleratorPlateBlock.FACING)
 
                 val yRotation = when (facing) {
                     Direction.NORTH -> 0

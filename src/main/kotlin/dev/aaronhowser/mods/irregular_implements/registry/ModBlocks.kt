@@ -179,7 +179,8 @@ object ModBlocks {
 
     // Plates
     val PROCESSING_PLATE = basicBlock("processing_plate")
-    val REDIRECTOR_PLATE = basicBlock("redirector_plate")
+    val REDIRECTOR_PLATE: DeferredBlock<RedirectorPlateBlock> =
+        registerBlock("redirector_plate") { RedirectorPlateBlock() }
     val FILTERED_REDIRECTOR_PLATE = basicBlock("filtered_redirector_plate")
     val REDSTONE_PLATE = basicBlock("redstone_plate")
     val CORRECTOR_PLATE: DeferredBlock<CorrectorPlateBlock> =

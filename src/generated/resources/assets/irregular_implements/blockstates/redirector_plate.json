@@ -1,0 +1,79 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_green"
+      },
+      "when": {
+        "input": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_gray"
+      },
+      "when": {
+        "output": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_green",
+        "y": 90
+      },
+      "when": {
+        "input": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_gray",
+        "y": 90
+      },
+      "when": {
+        "output": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_green",
+        "y": 180
+      },
+      "when": {
+        "input": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_gray",
+        "y": 180
+      },
+      "when": {
+        "output": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_green",
+        "y": 270
+      },
+      "when": {
+        "input": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/redirector_plate_gray",
+        "y": 270
+      },
+      "when": {
+        "output": "west"
+      }
+    }
+  ]
+}
