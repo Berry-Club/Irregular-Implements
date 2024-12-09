@@ -2,10 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
-import dev.aaronhowser.mods.irregular_implements.block.plate.AcceleratorPlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.BouncyPlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.CollectionPlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.*
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -185,7 +182,8 @@ object ModBlocks {
     val REDIRECTOR_PLATE = basicBlock("redirector_plate")
     val FILTERED_REDIRECTOR_PLATE = basicBlock("filtered_redirector_plate")
     val REDSTONE_PLATE = basicBlock("redstone_plate")
-    val CORRECTOR_PLATE = basicBlock("corrector_plate")
+    val CORRECTOR_PLATE: DeferredBlock<CorrectorPlateBlock> =
+        registerBlock("corrector_plate") { CorrectorPlateBlock() }
     val ITEM_SEALER_PLATE = basicBlock("item_sealer_plate")
     val ITEM_REJUVENATOR_PLATE = basicBlock("item_rejuvenator_plate")
     val ACCELERATOR_PLATE: DeferredBlock<AcceleratorPlateBlock> =
