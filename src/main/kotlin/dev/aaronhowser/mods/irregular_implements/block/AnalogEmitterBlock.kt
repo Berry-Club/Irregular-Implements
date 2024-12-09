@@ -67,8 +67,7 @@ class AnalogEmitterBlock(
         if (!player.getItemInHand(player.usedItemHand).isEmpty) return InteractionResult.PASS
 
         var newPower = oldState.getValue(POWER) + if (player.isSecondaryUseActive) -1 else 1
-        if (newPower < 0) newPower = 15
-        if (newPower > 15) newPower = 0
+        newPower = newPower and 15
 
         val component = newPower.toString()
             .toComponent()
