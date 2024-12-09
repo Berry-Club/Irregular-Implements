@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemStackComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
@@ -85,6 +86,13 @@ object ModDataComponents {
                     OtherUtil.tagKeyStreamCodec(Registries.FLUID)
                         .apply(ByteBufCodecs.list())
                 )
+        }
+
+    val DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("duration") {
+            it
+                .persistent(Codec.INT)
+                .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
     @JvmStatic

@@ -120,7 +120,8 @@ object ModItems {
     val ADVANCED_REDSTONE_TORCH = basic("advanced_redstone_torch")
     val REDSTONE_TOOL: DeferredItem<RedstoneToolItem> =
         register("redstone_tool") { RedstoneToolItem() }
-    val REDSTONE_ACTIVATOR = basic("redstone_activator")
+    val REDSTONE_ACTIVATOR: DeferredItem<RedstoneActivatorItem> =
+        register("redstone_activator") { RedstoneActivatorItem() }
     val REDSTONE_REMOTE = basic("redstone_remote")
 
     // Floo
