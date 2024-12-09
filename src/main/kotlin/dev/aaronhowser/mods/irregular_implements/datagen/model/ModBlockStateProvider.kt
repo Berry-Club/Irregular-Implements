@@ -53,20 +53,20 @@ class ModBlockStateProvider(
     private fun redirectorPlate() {
         val block = ModBlocks.REDIRECTOR_PLATE.get()
 
-        val baseTexture = modLoc("block/plate/redirector_base")
-        val greenTexture = modLoc("block/plate/redirector_green")
-        val grayTexture = modLoc("block/plate/redirector_gray")
+        val baseTexture = modLoc("block/plate/redirector/base")
+        val inTexture = modLoc("block/plate/redirector/in")
+        val outTexture = modLoc("block/plate/redirector/out")
 
         val baseModel = models()
             .pressurePlate(name(block), baseTexture)
             .renderType(RenderType.cutout().name)
 
-        val greenModel = models()
-            .pressurePlate(name(block) + "_green", greenTexture)
+        val inModel = models()
+            .pressurePlate(name(block) + "_in", inTexture)
             .renderType(RenderType.cutout().name)
 
-        val grayModel = models()
-            .pressurePlate(name(block) + "_gray", grayTexture)
+        val outModel = models()
+            .pressurePlate(name(block) + "_out", outTexture)
             .renderType(RenderType.cutout().name)
 
         val builder = getMultipartBuilder(block)
@@ -75,7 +75,7 @@ class ModBlockStateProvider(
         for (direction in Direction.Plane.HORIZONTAL) {
             builder
                 .part()
-                .modelFile(greenModel)
+                .modelFile(inModel)
                 .rotationY(
                     when (direction) {
                         Direction.NORTH -> 0
@@ -90,7 +90,7 @@ class ModBlockStateProvider(
 
             builder
                 .part()
-                .modelFile(grayModel)
+                .modelFile(outModel)
                 .rotationY(
                     when (direction) {
                         Direction.NORTH -> 0

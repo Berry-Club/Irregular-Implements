@@ -7,7 +7,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_green"
+        "model": "irregular_implements:block/redirector_plate_in"
       },
       "when": {
         "input": "north"
@@ -15,7 +15,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_gray"
+        "model": "irregular_implements:block/redirector_plate_out"
       },
       "when": {
         "output": "north"
@@ -23,7 +23,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_green",
+        "model": "irregular_implements:block/redirector_plate_in",
         "y": 90
       },
       "when": {
@@ -32,7 +32,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_gray",
+        "model": "irregular_implements:block/redirector_plate_out",
         "y": 90
       },
       "when": {
@@ -41,7 +41,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_green",
+        "model": "irregular_implements:block/redirector_plate_in",
         "y": 180
       },
       "when": {
@@ -50,7 +50,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_gray",
+        "model": "irregular_implements:block/redirector_plate_out",
         "y": 180
       },
       "when": {
@@ -59,7 +59,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_green",
+        "model": "irregular_implements:block/redirector_plate_in",
         "y": 270
       },
       "when": {
@@ -68,7 +68,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_gray",
+        "model": "irregular_implements:block/redirector_plate_out",
         "y": 270
       },
       "when": {
