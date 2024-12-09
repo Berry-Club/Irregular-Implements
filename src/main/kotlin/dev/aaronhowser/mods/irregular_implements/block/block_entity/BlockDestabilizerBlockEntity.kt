@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
+//TODO: Menu
 class BlockDestabilizerBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState

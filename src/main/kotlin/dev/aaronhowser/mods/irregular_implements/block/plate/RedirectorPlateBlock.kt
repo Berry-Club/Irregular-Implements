@@ -18,27 +18,27 @@ import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
 class RedirectorPlateBlock : BasePlateBlock() {
 
     companion object {
-        val INPUT_DIRECTION: DirectionProperty = DirectionProperty.create("input", Direction.Plane.HORIZONTAL)
-        val OUTPUT_DIRECTION: DirectionProperty = DirectionProperty.create("output", Direction.Plane.HORIZONTAL)
+        val ACTIVE_ONE: DirectionProperty = DirectionProperty.create("active_one", Direction.Plane.HORIZONTAL)
+        val ACTIVE_TWO: DirectionProperty = DirectionProperty.create("active_two", Direction.Plane.HORIZONTAL)
     }
 
 
     init {
         registerDefaultState(
             defaultBlockState()
-                .setValue(INPUT_DIRECTION, Direction.NORTH)
-                .setValue(OUTPUT_DIRECTION, Direction.NORTH)
+                .setValue(ACTIVE_ONE, Direction.NORTH)
+                .setValue(ACTIVE_TWO, Direction.NORTH)
         )
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(INPUT_DIRECTION, OUTPUT_DIRECTION)
+        builder.add(ACTIVE_ONE, ACTIVE_TWO)
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         return defaultBlockState()
-            .setValue(INPUT_DIRECTION, context.horizontalDirection.opposite)
-            .setValue(OUTPUT_DIRECTION, context.horizontalDirection)
+            .setValue(ACTIVE_ONE, context.horizontalDirection.opposite)
+            .setValue(ACTIVE_TWO, context.horizontalDirection)
     }
 
     override fun useWithoutItem(
@@ -50,17 +50,17 @@ class RedirectorPlateBlock : BasePlateBlock() {
     ): InteractionResult {
         if (level.isClientSide) return InteractionResult.SUCCESS
 
-        val currentInput = state.getValue(INPUT_DIRECTION)
-        val currentOutput = state.getValue(OUTPUT_DIRECTION)
+        val currentOne = state.getValue(ACTIVE_ONE)
+        val currentTwo = state.getValue(ACTIVE_TWO)
 
         val centerPos = pos.toVec3().add(0.5, 0.0, 0.5)
         val deltaVec = centerPos.vectorTo(hitResult.location)
 
         val direction = Direction.getNearest(deltaVec.x, deltaVec.y, deltaVec.z)
 
-        if (direction == currentInput || direction == currentOutput) return InteractionResult.FAIL
+        if (direction == currentOne || direction == currentTwo) return InteractionResult.FAIL
 
-        val newState = state.setValue(OUTPUT_DIRECTION, direction)
+        val newState = state.setValue(ACTIVE_TWO, direction)
         level.setBlockAndUpdate(pos, newState)
 
         return InteractionResult.SUCCESS
@@ -77,13 +77,13 @@ class RedirectorPlateBlock : BasePlateBlock() {
         val entityDisplacementVector = blockCenter.vectorTo(entity.position())
         val entityComingFromDirection = Direction.getNearest(entityDisplacementVector.x, 0.0, entityDisplacementVector.z)
 
-        val currentInput = state.getValue(INPUT_DIRECTION)
-        val currentOutput = state.getValue(OUTPUT_DIRECTION)
+        val currentOne = state.getValue(ACTIVE_ONE)
+        val currentTwo = state.getValue(ACTIVE_TWO)
 
-        val moveToDirection = if (entityComingFromDirection == currentInput && movingInDirection == currentInput.opposite) {
-            currentOutput
-        } else if (entityComingFromDirection == currentOutput && movingInDirection == currentOutput.opposite) {
-            currentInput
+        val moveToDirection = if (entityComingFromDirection == currentOne && movingInDirection == currentOne.opposite) {
+            currentTwo
+        } else if (entityComingFromDirection == currentTwo && movingInDirection == currentTwo.opposite) {
+            currentOne
         } else {
             return
         }

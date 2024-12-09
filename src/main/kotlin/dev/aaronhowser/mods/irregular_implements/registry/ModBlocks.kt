@@ -97,7 +97,7 @@ object ModBlocks {
 
     // Lamp
     val RAINBOW_LAMP =
-        registerBlock("rainbow_lamp") { RainbowLampBlock() }
+        registerBlock("rainbow_lamp") { RainbowLampBlock() }    //TODO: animate the item color
     val QUARTZ_LAMP = basicBlock("quartz_lamp")
     val LAPIS_LAMP = basicBlock("lapis_lamp")
 

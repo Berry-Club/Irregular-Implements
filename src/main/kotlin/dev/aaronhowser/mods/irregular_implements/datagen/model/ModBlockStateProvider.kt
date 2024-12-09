@@ -54,19 +54,20 @@ class ModBlockStateProvider(
         val block = ModBlocks.REDIRECTOR_PLATE.get()
 
         val baseTexture = modLoc("block/plate/redirector/base")
-        val inTexture = modLoc("block/plate/redirector/in")
-        val outTexture = modLoc("block/plate/redirector/out")
+        val activeTexture = modLoc("block/plate/redirector/active")
+        val inactiveTexture = modLoc("block/plate/redirector/inactive")
 
         val baseModel = models()
             .pressurePlate(name(block), baseTexture)
             .renderType(RenderType.cutout().name)
 
-        val inModel = models()
-            .pressurePlate(name(block) + "_in", inTexture)
+        val activeModel = models()
+            .pressurePlate(name(block) + "_active", activeTexture)
             .renderType(RenderType.cutout().name)
 
-        val outModel = models()
-            .pressurePlate(name(block) + "_out", outTexture)
+        //TODO: Figure out how to get this on the inactive sides
+        val inactiveModel = models()
+            .pressurePlate(name(block) + "_inactive", inactiveTexture)
             .renderType(RenderType.cutout().name)
 
         val builder = getMultipartBuilder(block)
@@ -75,7 +76,7 @@ class ModBlockStateProvider(
         for (direction in Direction.Plane.HORIZONTAL) {
             builder
                 .part()
-                .modelFile(inModel)
+                .modelFile(activeModel)
                 .rotationY(
                     when (direction) {
                         Direction.NORTH -> 0
@@ -86,22 +87,8 @@ class ModBlockStateProvider(
                     }
                 )
                 .addModel()
-                .condition(RedirectorPlateBlock.INPUT_DIRECTION, direction)
-
-            builder
-                .part()
-                .modelFile(outModel)
-                .rotationY(
-                    when (direction) {
-                        Direction.NORTH -> 0
-                        Direction.EAST -> 90
-                        Direction.SOUTH -> 180
-                        Direction.WEST -> 270
-                        else -> 0
-                    }
-                )
-                .addModel()
-                .condition(RedirectorPlateBlock.OUTPUT_DIRECTION, direction)
+                .condition(RedirectorPlateBlock.ACTIVE_ONE, direction)
+                .condition(RedirectorPlateBlock.ACTIVE_TWO, direction)
         }
 
         simpleBlockItem(

@@ -438,7 +438,7 @@ class ModLanguageProvider(
     }
 
     private fun addInfo() {
-        addInfo(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt does not require hydration, grows crops 3 times faster, and can't be trampled.\n\nYou still have to till it with a Hoe.")
+        addInfo(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt does not require hydration, grows crops 3 times faster, and can't be trampled.\n\nYou still have to till it with a Hoe to grow crops.")
         addInfo(ModBlocks.PLAYER_INTERFACE, "Exposes the inventory of the block's owner, as if it was the block's inventory.")
         addInfo(ModBlocks.LAPIS_GLASS, "Solid for players, not solid for anything else.")
         addInfo(ModBlocks.LAPIS_LAMP, "Provides false light, which changes visibility but does not affect mob spawning.")
@@ -446,10 +446,10 @@ class ModLanguageProvider(
         addInfo(ModBlocks.CHAT_DETECTOR, "Emits a Redstone pulse if the block's owner sends a chat message containing some specified text.")
         addInfo(ModBlocks.ENDER_BRIDGE, "Upon the Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it.\n\nIt searches at 20 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
         addInfo(ModBlocks.PRISMARINE_ENDER_BRIDGE, "Upon the Prismarine Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it (with no distance limit, though it must be loaded, and no other blocks can be in the way).\n\nIt searches at 200 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
-        addInfo(ModBlocks.ENDER_ANCHOR, "Works with the Ender Bridge or Prismarine Ender Bridge.")
+        addInfo(ModBlocks.ENDER_ANCHOR, "Destination point for the Ender Bridge or Prismarine Ender Bridge.")
         addInfo(ModBlocks.BEAN_POD, "Found at the top of a grown Magic Bean.\n\nContains loot!")
         addInfo(ModBlocks.SPECTRE_BLOCK, "An indestructible block that spawns in the Spectre Dimension.")
-        addInfo(ModBlocks.ANALOG_EMITTER, "Emits a configurable Redstone signal.")
+        addInfo(ModBlocks.ANALOG_EMITTER, "Emits a Redstone signal with a configurable strength when the front face is powered.")
         addInfo(ModBlocks.FLUID_DISPLAY, "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.")
         addInfo(ModBlocks.ENDER_MAILBOX, "Allows players to send and receive Ender Letters.")
         addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
@@ -458,32 +458,33 @@ class ModLanguageProvider(
         addInfo(ModBlocks.QUARTZ_LAMP, "Provides invisible light, which can't be seen but affects mob spawning.")   //TODO: Make some joke about radiation
         addInfo(ModBlocks.QUARTZ_GLASS, "Solid for everything but players.")
         addInfo(ModBlocks.POTION_VAPORIZER, "Allows you to fill a room with a potion effect.\n\nInsert Potions and Furnace fuel, and it will scan the area in front of it to check if it's an enclosed area.\n\nIf it is, it'll fill it with the potion effect.")
-        addInfo(ModBlocks.CONTACT_LEVER, "Acts like a Lever, but if the block in front of it is clicked instead.")
-        addInfo(ModBlocks.CONTACT_BUTTON, "Acts like a Button, but if the block in front of it is clicked instead.")
+        addInfo(ModBlocks.CONTACT_LEVER, "Acts like a Lever, but works when the block in front of it is clicked instead.")
+        addInfo(ModBlocks.CONTACT_BUTTON, "Acts like a Button, but works when the block in front of it is clicked instead.")
         addInfo(ModBlocks.RAIN_SHIELD, "Prevents rain in a 5 chunk radius.")
         addInfo(ModBlocks.BLOCK_BREAKER, "Breaks blocks in front of it with the effectiveness of an Iron Pickaxe. Drops are inserted into the inventory behind it, or dropped.\n\nCan be disabled with a Redstone signal.")
+        //FIXME: Make this use a block tag instead of specifically listing the blocks
         addInfo(ModBlocks.SUPER_LUBRICANT_ICE, "No friction.")
         addInfo(ModBlocks.SUPER_LUBRICANT_STONE, "No friction.")
         addInfo(ModBlocks.COMPRESSED_SLIME_BLOCK, "Create by clicking a Slime Block with a Shovel. Can be compressed multiple times.\n\nLaunches entities into the air.")
         addInfo(ModBlocks.REDSTONE_OBSERVER, "Emits the same Redstone signal as a linked block.\n\nUse a Redstone Tool to link it to a block.")
         addInfo(ModBlocks.BIOME_RADAR, "Insert a Biome Crystal and provide a Redstone signal, and it will attempt to find the Crystal's biome.\n\nIf it succeeds, it will spawn particles aiming in its direction.\n\nUsing a Paper on it will create a Location Filter for the biome.")
-        addInfo(ModBlocks.IRON_DROPPER, "An upgraded Dropper, where the following can be configured:\n\n• Pickup Delay\n• Item motion randomness\n• Particle/Sound toggle\n• Redstone control")
+        addInfo(ModBlocks.IRON_DROPPER, "An upgraded Dropper, where the following can be configured:\n\n• Item pickup delay\n• Item motion randomness\n• Particle/Sound toggle\n• Redstone control")
         addInfo(ModBlocks.IGNITER, "Sets or extinguishes the block on front of it, depending on the Redstone signal.\n\nCan be set to keep the fire lit.")
         addInfo(ModBlocks.BLOCK_OF_STICKS, "Cheap building material that automatically breaks after 10 seconds.")
-        addInfo(ModBlocks.RETURNING_BLOCK_OF_STICKS, "Works like a Block of Sticks, but the item drop is teleported to the nearest player.")
-        addInfo(ModBlocks.INVENTORY_REROUTER, "??????????")
+        addInfo(ModBlocks.RETURNING_BLOCK_OF_STICKS, "Works like a Block of Sticks, but teleports itself to the nearest player after breaking.")
+        addInfo(ModBlocks.INVENTORY_REROUTER, "Each side can be configured to \"point\" to one side of the block in front.\n\nFor example, setting this block's bottom face to \"U\" will and then inserting items into it will try to insert those items into the top face of the block in front of it.\n\nAlso allows for extracting.")
         addInfo(ModBlocks.SLIME_CUBE, "Causes Slimes to spawn in great numbers in the chunk its in.\n\nWhen powered, it instead prevents Slimes from spawning in the chunk.")
         addInfo(ModBlocks.PEACE_CANDLE, "Prevents natural mob spawns in a 3 chunk radius.\n\nCan be found in roughly one third of Villager Churches.")
         addInfo(ModBlocks.NOTIFICATION_INTERFACE, "Sends a configurable toast notification to the block's owner when a Redstone signal is received.")
-        addInfo(ModBlocks.INVENTORY_TESTER, "When placed on an inventory, constantly simulates attempting to insert a configured Item Stack.\n\nIf the simulation would succeed, emits a Redstone signal.")
+        addInfo(ModBlocks.INVENTORY_TESTER, "When placed on an inventory, constantly simulates attempting to insert a configured Item Stack.\n\nIf the simulation would succeed, it emits a Redstone signal. You can invert this behavior.")
         addInfo(ModBlocks.GLOBAL_CHAT_DETECTOR, "Emits a redstone pulse if any player sends a chat message containing the specified text.\n\nCan have a player whitelist using ID Cards.")
         addInfo(ModBlocks.TRIGGER_GLASS, "When given a Redstone pulse, loses its collision for 3 seconds.\n\nAlso triggers adjacent Trigger Glass.")
         addInfo(ModBlocks.BLOCK_DESTABILIZER, "When given a Redstone pulse, scans the blocks in front of it.\n\nIt then gives the nearest 50 connected blocks gravity, making them fall.\n\nYou can set it to \"lazy\" mode, which makes it remember the shape, and only destabilize those blocks.")
-        addInfo(ModBlocks.SOUND_BOX, "When given a Redstone pulse, plays the held Sound Pattern.")
+        addInfo(ModBlocks.SOUND_BOX, "When given a Redstone pulse, plays the contained Sound Pattern.")
         addInfo(ModBlocks.SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard, within 10 blocks.")
         addInfo(ModBlocks.SIDED_BLOCK_OF_REDSTONE, "Emits a Redstone signal on only one side.")
-        addInfo(ModBlocks.SPECTRE_LENS, "Place on a Beacon, and its effects will be granted to you no matter the distance.\n\nStill requires you be in the same dimension, and you can only have one Lens per dimension.")
-        addInfo(ModBlocks.SPECTRE_ENERGY_INJECTOR, "Acts like an Ender Chest for FE.\n\nThe Energy Injector can insert FE, Spectre Coils are required to extract it.\n\nA player's Spectre Energy Buffer can store up to 1,000,000 FE by default.")
+        addInfo(ModBlocks.SPECTRE_LENS, "Place on a Beacon, and its effects will be granted to you no matter the distance.\n\nOnly works in the same dimension, and only when the Beacon's chunk is loaded.")
+        addInfo(ModBlocks.SPECTRE_ENERGY_INJECTOR, "Acts like an Ender Chest for FE.\n\nFE can be inserted into the Spectre Energy Injector, but Spectre Coils are required to extract it.\n\nA player's Spectre Energy Buffer can store up to 1,000,000 FE by default.")
         addInfo(ModBlocks.SPECTRE_COIL, "Outputs FE from the Spectre Energy Buffer, which is filled using Spectre Energy Injectors.\n\nHas a rate of 1,024 FE/t.")
         addInfo(ModBlocks.SPECTRE_COIL_REDSTONE, "Outputs FE from the Spectre Energy Buffer, which is filled using Spectre Energy Injectors.\n\nHas a rate of 4,096 FE/t.")
         addInfo(ModBlocks.SPECTRE_COIL_ENDER, "Outputs FE from the Spectre Energy Buffer, which is filled using Spectre Energy Injectors.\n\nHas a rate of 20,480 FE/t.")
@@ -498,6 +499,8 @@ class ModLanguageProvider(
         addInfo(ModBlocks.RAINBOW_LAMP, "Changes color depending on the Redstone signal strength.\n\nOnly the texture changes, the light stays the same color.")
         addInfo(ModBlocks.BASIC_REDSTONE_INTERFACE, "Powers the linked block with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to a block.")
         addInfo(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Powers up to 9 linked blocks with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to blocks.")
+
+        addInfo(ModBlocks.PROCESSING_PLATE, "???")
         addInfo(ModBlocks.REDIRECTOR_PLATE, "Has two \"enabled\" sides. Entities that enter from one side are sent to the other side.")
         addInfo(ModBlocks.FILTERED_REDIRECTOR_PLATE, "Has two \"input\" sides, and two color-coded \"output\" sides.\n\nBoth output sides have a slot for an Entity Filter, and any entity that enters from the input sides are teleported to the output with a matching Filter.")
         addInfo(ModBlocks.REDSTONE_PLATE, "Has an \"input\" side, a \"default\" side, and a \"powered\" side.\n\nEntities that entier from the input side are teleported to the default side if the Plate is unpowered, or the powered side if it is.")
@@ -546,8 +549,11 @@ class ModLanguageProvider(
         addInfo(ModItems.SOUND_RECORDER, "Lets you save a sound to a stored Sound Pattern.\n\nUse it to toggle recording; it will stop automatically once it reaches 10 unique sounds.\n\nSneak right-click again to choose which sound to save to the Pattern.")
         addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
         addInfo(ModItems.SUPER_LUBRICANT_TINCTURE, "Can be applied to any Boots to make you slide when wearing them.\n\nCan be washed with a Water Bottle after.")
-        //TODO: The others
+        addInfo(ModItems.DIVINING_ROD, "When held in hand, highlights the corresponding ore in an 11x11x11 cube around you.")
+
     }
+
+    //TODO: Info for Magnetic enchant
 
     private fun addEffects() {
         addEffect(ModEffects.FIRE_IMBUE, "Fire Imbue")

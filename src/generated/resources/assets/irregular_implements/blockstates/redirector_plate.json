@@ -7,72 +7,41 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_in"
+        "model": "irregular_implements:block/redirector_plate_active"
       },
       "when": {
-        "input": "north"
+        "active_one": "north",
+        "active_two": "north"
       }
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_out"
-      },
-      "when": {
-        "output": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_in",
+        "model": "irregular_implements:block/redirector_plate_active",
         "y": 90
       },
       "when": {
-        "input": "east"
+        "active_one": "east",
+        "active_two": "east"
       }
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_out",
-        "y": 90
-      },
-      "when": {
-        "output": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_in",
+        "model": "irregular_implements:block/redirector_plate_active",
         "y": 180
       },
       "when": {
-        "input": "south"
+        "active_one": "south",
+        "active_two": "south"
       }
     },
     {
       "apply": {
-        "model": "irregular_implements:block/redirector_plate_out",
-        "y": 180
-      },
-      "when": {
-        "output": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_in",
+        "model": "irregular_implements:block/redirector_plate_active",
         "y": 270
       },
       "when": {
-        "input": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_out",
-        "y": 270
-      },
-      "when": {
-        "output": "west"
+        "active_one": "west",
+        "active_two": "west"
       }
     }
   ]
