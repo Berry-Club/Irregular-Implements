@@ -20,7 +20,8 @@ class CollectionPlateBlock : BasePlateBlock() {
             Direction.NORTH,
             Direction.SOUTH,
             Direction.WEST,
-            Direction.EAST
+            Direction.EAST,
+            Direction.UP
         )
 
     }
