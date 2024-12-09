@@ -88,7 +88,7 @@ object ModInformationRecipes {
             ModBlocks.REDSTONE_PLATE,
             ModBlocks.CORRECTOR_PLATE,
             ModBlocks.ITEM_SEALER_PLATE,
-            ModBlocks.ITEM_REJUVINATOR_PLATE,
+            ModBlocks.ITEM_REJUVENATOR_PLATE,
             ModBlocks.ACCELERATOR_PLATE,
             ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE,
             ModBlocks.BOUNCY_PLATE,

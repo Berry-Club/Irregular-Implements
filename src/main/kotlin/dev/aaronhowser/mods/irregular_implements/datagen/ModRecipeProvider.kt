@@ -699,7 +699,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.ITEM_REJUVINATOR_PLATE,
+            ModBlocks.ITEM_REJUVENATOR_PLATE,
             2,
             "BMB,M M,BMB",
             mapOf(

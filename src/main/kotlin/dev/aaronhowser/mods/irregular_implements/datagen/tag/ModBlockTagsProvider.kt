@@ -259,7 +259,7 @@ class ModBlockTagsProvider(
                 ModBlocks.REDSTONE_PLATE.get(),
                 ModBlocks.CORRECTOR_PLATE.get(),
                 ModBlocks.ITEM_SEALER_PLATE.get(),
-                ModBlocks.ITEM_REJUVINATOR_PLATE.get(),
+                ModBlocks.ITEM_REJUVENATOR_PLATE.get(),
                 ModBlocks.ACCELERATOR_PLATE.get(),
                 ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get(),
                 ModBlocks.BOUNCY_PLATE.get(),

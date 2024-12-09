@@ -184,7 +184,7 @@ object ModBlocks {
     val REDSTONE_PLATE = basicBlock("redstone_plate")
     val CORRECTOR_PLATE = basicBlock("corrector_plate")
     val ITEM_SEALER_PLATE = basicBlock("item_sealer_plate")
-    val ITEM_REJUVINATOR_PLATE = basicBlock("item_rejuvinator_plate")
+    val ITEM_REJUVENATOR_PLATE = basicBlock("item_rejuvenator_plate")
     val ACCELERATOR_PLATE: DeferredBlock<AcceleratorPlateBlock> =
         registerBlock("accelerator_plate") { AcceleratorPlateBlock() }
     val DIRECTIONAL_ACCELERATOR_PLATE = basicBlock("directional_accelerator_plate")

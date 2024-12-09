@@ -43,6 +43,34 @@ class ModBlockStateProvider(
         lotus()
         beanSprout()
         beanStalk()
+        plates()
+    }
+
+    private fun plates() {
+
+        //TODO: Extraction, Filtered Director, Processing, Redirector, Redstone
+
+        val plateBlocks = listOf(
+            ModBlocks.ACCELERATOR_PLATE,
+            ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE,
+            ModBlocks.BOUNCY_PLATE,
+            ModBlocks.COLLECTION_PLATE,
+            ModBlocks.CORRECTOR_PLATE,
+            ModBlocks.ITEM_REJUVENATOR_PLATE,
+            ModBlocks.ITEM_SEALER_PLATE
+        ).map { it.get() }
+
+        for (plate in plateBlocks) {
+
+            val textureName = name(plate).removeSuffix("_plate") + "_base"
+            val texture = modLoc("block/plate/$textureName")
+
+            val model = models()
+                .pressurePlateDown(name(plate), texture)
+                .renderType(RenderType.cutout().name)
+
+            simpleBlockWithItem(plate, model)
+        }
     }
 
     private fun beanStalk() {
