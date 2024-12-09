@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
@@ -25,8 +26,7 @@ object ClientEvents {
     fun onPlayerTurn(event: CalculatePlayerTurnEvent) {
         val player = ClientUtil.localPlayer ?: return
 
-        //TODO: Add a config to disable this part (or just remove it entirely)
-        if (player.hasEffect(ModEffects.COLLAPSE_IMBUE)) {
+        if (ClientConfig.COLLAPSE_INVERTS_MOUSE.get() && player.hasEffect(ModEffects.COLLAPSE_IMBUE)) {
             event.mouseSensitivity *= -1.75
         }
     }
