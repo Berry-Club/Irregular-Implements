@@ -11,9 +11,11 @@ import net.minecraft.world.entity.LivingEntity
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
 
-class ImbueEffect : MobEffect(
+class ImbueEffect(
+    color: Int
+) : MobEffect(
     MobEffectCategory.BENEFICIAL,
-    0x00FFFFFF  // TODO: Set color
+    color
 ) {
 
     // You can only have one Imbue at a time
