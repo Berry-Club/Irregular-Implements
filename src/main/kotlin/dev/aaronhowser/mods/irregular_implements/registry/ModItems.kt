@@ -27,7 +27,6 @@ object ModItems {
     val VOIDING_DROP_FILTER = basic("voiding_drop_filter")  // voids items that match filter when picked up
     val VOID_STONE = basic("void_stone")    // gui that deletes items you insert into it
     val WHITE_STONE = basic("white_stone")  // found in dungeons, charges during full moon and if full, prevents death and discharges
-    val BLOODSTONE = basic("bloodstone")    // found in dungeons, charges during blood moon, gives regeneration while full, discharges on death
     val MAGNETIC_FORCE = basic("magnetic_force")    // gui that lets you basically tpa request to other players, consuming the item, 200 block radius
     // Spectre armor: diamond level, makes you slightly transparent (probably won't bother)
 
