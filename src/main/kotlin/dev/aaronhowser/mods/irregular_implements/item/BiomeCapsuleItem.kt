@@ -29,7 +29,11 @@ class BiomeCapsuleItem : Item(
     }
 
     override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-        val biome = entity.level().getBiome(entity.blockPosition())
+        val onBlockPos = entity.blockPosBelowThatAffectsMyMovement
+
+        if (entity.level().getBlockState(onBlockPos).isAir) return super.onEntityItemUpdate(stack, entity)
+
+        val biome = entity.level().getBiome(onBlockPos)
         val component = stack.get(ModDataComponents.BIOME_POINTS) ?: BiomePointsDataComponent(biome, 0)
 
         val newComponent = component.withMorePoints(1)
