@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.phys.BlockHitResult
+import java.util.*
 
 class IgniterBlock(
     properties: Properties = Properties.ofFullCopy(Blocks.DISPENSER)
@@ -34,7 +35,7 @@ class IgniterBlock(
         ;
 
         override fun getSerializedName(): String {
-            return name.toLowerCase()
+            return name.lowercase(Locale.getDefault())
         }
     }
 

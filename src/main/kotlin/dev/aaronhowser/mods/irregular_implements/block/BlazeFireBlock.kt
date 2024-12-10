@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.BetterFire
 import net.minecraft.core.BlockPos
-import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.FireBlock
