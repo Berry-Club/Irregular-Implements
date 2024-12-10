@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level
 class RedstoneActivatorItem : Item(
     Properties()
         .stacksTo(1)
-        .component(ModDataComponents.ACTIVATOR_DURATION, 20)
+        .component(ModDataComponents.ACTIVATOR_DURATION, Duration.MEDIUM.serializedName)
 ) {
 
     enum class Duration(val ticks: Int) : StringRepresentable {
@@ -31,21 +31,29 @@ class RedstoneActivatorItem : Item(
         ;
 
         override fun getSerializedName(): String {
-            return name.lowercase()
+            return name
+        }
+
+        fun next(): Duration {
+            return when (this) {
+                SHORT -> MEDIUM
+                MEDIUM -> LONG
+                LONG -> SHORT
+            }
         }
     }
 
     companion object {
         fun cycleDuration(stack: ItemStack) {
-            val currentDuration = stack.get(ModDataComponents.ACTIVATOR_DURATION) ?: return
-            val newDuration = when (currentDuration) {
-                20 -> 100
-                100 -> 2
-                else -> 20
-            }
-
-            stack.set(ModDataComponents.ACTIVATOR_DURATION, newDuration)
+            val newDuration = getDuration(stack).next()
+            stack.set(ModDataComponents.ACTIVATOR_DURATION, newDuration.serializedName)
         }
+
+        private fun getDuration(itemStack: ItemStack): Duration {
+            val durationName = itemStack.get(ModDataComponents.ACTIVATOR_DURATION) ?: return Duration.MEDIUM
+            return Duration.valueOf(durationName)
+        }
+
     }
 
     override fun use(
@@ -73,14 +81,14 @@ class RedstoneActivatorItem : Item(
         val level = context.level as? ServerLevel ?: return InteractionResult.PASS
 
         val usedStack = context.itemInHand
-        val duration = usedStack.get(ModDataComponents.ACTIVATOR_DURATION) ?: return InteractionResult.PASS
+        val duration = getDuration(usedStack)
 
         val clickedPos = context.clickedPos
 
         RedstoneHandlerSavedData.addSignal(
             level = level,
             blockPos = clickedPos,
-            duration = duration,
+            duration = duration.ticks,
             strength = 15
         )
 
