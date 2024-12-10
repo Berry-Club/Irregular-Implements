@@ -35,24 +35,24 @@ class BiomePainterItem : Item(
         val blocksBelow = ServerConfig.BIOME_PAINTER_BLOCKS_BELOW.get()
         val blocksAbove = ServerConfig.BIOME_PAINTER_BLOCKS_ABOVE.get()
 
-        var pointsLeft = points
+        var counter = 0
 
         val result = FillBiomeCommand.fill(
             level,
             clickedPos.offset(-horizontalRadius, -blocksBelow, -horizontalRadius),
             clickedPos.offset(horizontalRadius, blocksAbove, horizontalRadius),
             biomeToPlace,
-            { _ -> pointsLeft-- > 0 },
+            { checkedBiome -> checkedBiome != biomeToPlace && counter++ <= points },
             { _ -> }
         )
 
         val amountChanged = result.left().orElse(0)
         if (amountChanged == 0) return InteractionResult.FAIL
 
-        if (pointsLeft > 0) {
+        if (amountChanged < points) {
             firstNonEmptyCapsule.set(
                 ModDataComponents.BIOME_POINTS,
-                component.copy(points = pointsLeft)
+                component.withLessPoints(amountChanged)
             )
         } else {
             firstNonEmptyCapsule.remove(ModDataComponents.BIOME_POINTS)
