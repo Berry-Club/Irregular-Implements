@@ -185,10 +185,10 @@ object ModBlocks {
     val REDSTONE_PLATE = basicBlock("redstone_plate")
     val CORRECTOR_PLATE: DeferredBlock<CorrectorPlateBlock> =
         registerBlock("corrector_plate") { CorrectorPlateBlock() }
-    val ITEM_SEALER_PLATE: DeferredBlock<ItemLifePlate> =
-        registerBlock("item_sealer_plate") { ItemLifePlate.SEALER }
-    val ITEM_REJUVENATOR_PLATE: DeferredBlock<ItemLifePlate> =
-        registerBlock("item_rejuvenator_plate") { ItemLifePlate.REJUVENATOR }
+    val ITEM_SEALER_PLATE: DeferredBlock<ItemSealerPlate> =
+        registerBlock("item_sealer_plate") { ItemSealerPlate() }
+    val ITEM_REJUVENATOR_PLATE: DeferredBlock<ItemRejuvenatorPlate> =
+        registerBlock("item_rejuvenator_plate") { ItemRejuvenatorPlate() }
     val ACCELERATOR_PLATE: DeferredBlock<AcceleratorPlateBlock> =
         registerBlock("accelerator_plate") { AcceleratorPlateBlock() }
     val DIRECTIONAL_ACCELERATOR_PLATE: DeferredBlock<DirectionalAcceleratorPlateBlock> =

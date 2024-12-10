@@ -6,17 +6,10 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
-class ItemLifePlate private constructor(
-    private val duration: Int
-) : BasePlateBlock() {
+class ItemSealerPlate : BasePlateBlock() {
 
     override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        if (entity is ItemEntity) entity.lifespan = this.duration
-    }
-
-    companion object {
-        val SEALER = ItemLifePlate(20 * 30) //FIXME: This is supposed to *stop you from being able to pick it up*, not make it not despawn
-        val REJUVENATOR = ItemLifePlate(20 * 60 * 4)
+        if (entity is ItemEntity) entity.setPickUpDelay(20 * 30)
     }
 
 }
