@@ -1,13 +1,17 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.saveddata.SavedData
 
 class RedstoneHandlerSavedData : SavedData() {
@@ -30,7 +34,7 @@ class RedstoneHandlerSavedData : SavedData() {
             return redstoneHandlerSavedData
         }
 
-        fun get(level: ServerLevel): RedstoneHandlerSavedData {
+        private fun get(level: ServerLevel): RedstoneHandlerSavedData {
             require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
 
             return level.dataStorage.computeIfAbsent(
@@ -38,9 +42,59 @@ class RedstoneHandlerSavedData : SavedData() {
                 "redstone_handler"
             )
         }
+
+        @JvmStatic
+        val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
+            inline get() = this.server.redstoneHandlerSavedData
+
+        val MinecraftServer.redstoneHandlerSavedData: RedstoneHandlerSavedData
+            get() = get(this.overworld())
+
+        fun tick(level: Level) {
+            if (level !is ServerLevel) return
+            level.redstoneHandlerSavedData.tick(level.server)
+        }
     }
 
     private val signals: MutableSet<SavedSignal> = mutableSetOf()
+
+    fun tick(server: MinecraftServer) {
+        val iterator = signals.iterator()
+
+        while (iterator.hasNext()) {
+            val signal = iterator.next()
+            val level = server.getLevel(signal.dimension)
+
+            if (level == null || signal.isExpired(level.gameTime)) {
+                iterator.remove()
+                continue
+            }
+
+            updatePosition(level, signal.blockPos)
+        }
+    }
+
+    private fun updatePosition(level: ServerLevel, blockPos: BlockPos) {
+        val targetState = level.getBlockState(blockPos)
+
+        targetState.handleNeighborChanged(level, blockPos, Blocks.REDSTONE_BLOCK, blockPos, false)  //TODO: Apparently dangerous?
+        level.updateNeighborsAt(blockPos, targetState.block)
+    }
+
+    private fun updatePosition(level: ServerLevel, blockPos: Long) = updatePosition(level, BlockPos.of(blockPos))
+
+    fun getStrongPower(level: ServerLevel, blockPos: BlockPos, facing: Direction): Int {
+        val pos = blockPos.relative(facing.opposite)
+        val dimension = level.dimension()
+
+        for (signal in signals) {
+            if (signal.blockPos == pos.asLong() && signal.dimension == dimension) {
+                return signal.strength
+            }
+        }
+
+        return 0
+    }
 
     override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
         val signalsTag = tag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
