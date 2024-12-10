@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModItems {
 
-    //TODO: Look at pre-1.12 stuff! https://youtu.be/l6CcQMWSUII
+    //TODO: Recipes and info for pre 1.12 items and blocks
 
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
@@ -20,7 +20,8 @@ object ModItems {
     // Not above 1.7
     val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
         register("biome_capsule") { BiomeCapsuleItem() }  // throw on ground, it absorbs the biome, generates points with time
-    val BIOME_PAINTER = basic("biome_painter")  // right click on block, changes biome to first biome capsule, uses points
+    val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
+        register("biome_painter") { BiomePainterItem() }  // right click on block, changes biome to first biome capsule, uses points
     val FLASK_OF_SPECTRE = basic("flask_of_spectre")
     val GINTO = basic("ginto")
     val TRANSFORMATION_CORE = basic("transformation_core")
