@@ -98,8 +98,10 @@ object ModBlocks {
     // Lamp
     val RAINBOW_LAMP =
         registerBlock("rainbow_lamp") { RainbowLampBlock() }    //TODO: animate the item color
-    val QUARTZ_LAMP = basicBlock("quartz_lamp")
-    val LAPIS_LAMP = basicBlock("lapis_lamp")
+    val QUARTZ_LAMP: DeferredBlock<SingleSidedLampBlock> =
+        registerBlock("quartz_lamp") { SingleSidedLampBlock.QUARTZ }
+    val LAPIS_LAMP: DeferredBlock<SingleSidedLampBlock> =
+        registerBlock("lapis_lamp") { SingleSidedLampBlock.LAPIS }
 
     // Ender Bridge
     val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
