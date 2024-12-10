@@ -75,6 +75,8 @@ object ClientModBusEvents {
 
     }
 
+    //TODO: Make Rainbow Lamp use this instead of unique textures
+
     @SubscribeEvent
     fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
         for (dyeColor in DyeColor.entries) {
