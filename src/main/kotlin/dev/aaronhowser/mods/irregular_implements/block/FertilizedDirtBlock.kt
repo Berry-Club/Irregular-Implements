@@ -26,6 +26,8 @@ class FertilizedDirtBlock : FarmBlock(
         .dynamicShape()
 ) {
 
+    //FIXME: Disallow crops from being placed on non-tilled fertilized dirt
+
     companion object {
         val TILLED: BooleanProperty = BooleanProperty.create("tilled")
 
