@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.RedstoneLampBlock
@@ -26,8 +26,10 @@ class SingleSidedLampBlock private constructor(
     }
 
     override fun getLightEmission(state: BlockState, level: BlockGetter, pos: BlockPos): Int {
-        return if (level is ClientLevel && state.getValue(LIT)) 15 else 0
-    }
+        val onServer = level is ServerLevel
+        if (onServer && onlyOn == Side.CLIENT) return 0
 
+        return if (state.getValue(LIT)) 15 else 0
+    }
 
 }
