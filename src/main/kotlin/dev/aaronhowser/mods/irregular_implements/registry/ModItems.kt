@@ -12,6 +12,8 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModItems {
 
+    //TODO: Look at pre-1.12 stuff! https://youtu.be/l6CcQMWSUII
+
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
 
