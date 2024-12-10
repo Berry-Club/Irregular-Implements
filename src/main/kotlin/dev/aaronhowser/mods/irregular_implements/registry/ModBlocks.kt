@@ -20,6 +20,11 @@ object ModBlocks {
     val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")
     val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
 
+    // Not above 1.6.4
+    val SHOCK_ABSORBER = basicBlock("shock_absorber")
+    val AUTO_PLACER = basicBlock("auto_placer")
+    val BLOCK_TELEPORTER = basicBlock("block_teleporter")
+
     val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
         registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
     val IMBUING_STATION = basicBlock("imbuing_station")

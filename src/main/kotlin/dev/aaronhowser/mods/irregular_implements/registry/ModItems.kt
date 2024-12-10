@@ -21,14 +21,20 @@ object ModItems {
     val BIOME_CAPSULE = basic("biome_capsule")  // throw on ground, it absorbs the biome, generates points with time
     val BIOME_PAINTER = basic("biome_painter")  // right click on block, changes biome to first biome capsule, uses points
     val FLASK_OF_SPECTRE = basic("flask_of_spectre")
-    val BLOODSTONE = basic("bloodstone")
     val GINTO = basic("ginto")
     val TRANSFORMATION_CORE = basic("transformation_core")
     val DROP_FILTER = basic("drop_filter")  // prevents you from picking up items that match filter
     val VOIDING_DROP_FILTER = basic("voiding_drop_filter")  // voids items that match filter when picked up
     val VOID_STONE = basic("void_stone")    // gui that deletes items you insert into it
-    val WHITE_STONE = basic("white_stone")  // found in dungeons, charges as you kill things (?) and if full, prevents death and discharges
+    val WHITE_STONE = basic("white_stone")  // found in dungeons, charges during full moon and if full, prevents death and discharges
+    val BLOODSTONE = basic("bloodstone")    // found in dungeons, charges during blood moon, gives regeneration while full, discharges on death
     val MAGNETIC_FORCE = basic("magnetic_force")    // gui that lets you basically tpa request to other players, consuming the item, 200 block radius
+    // Spectre armor: diamond level, makes you slightly transparent (probably won't bother)
+
+    // Not above 1.6.4
+    val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
+    val BLOCK_MOVER = basic("block_mover")  // pick up and place blocks, uses durability
+    val DIAMOND_BREAKER = basic("diamond_breaker")  // upgrade to block breaker
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
