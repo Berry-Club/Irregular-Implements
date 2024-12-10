@@ -63,6 +63,8 @@ class RedstoneHandlerSavedData : SavedData() {
     private val signals: MutableSet<SavedSignal> = mutableSetOf()
 
     private fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+        signals.removeIf { it.blockPos == blockPos.asLong() && it.dimension == level.dimension() }
+
         val signal = SavedSignal(blockPos.asLong(), level.dimension(), duration, strength, level.gameTime)
 
         signals.add(signal)
