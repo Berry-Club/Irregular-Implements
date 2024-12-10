@@ -18,7 +18,8 @@ object ModItems {
         DeferredRegister.createItems(IrregularImplements.ID)
 
     // Not above 1.7
-    val BIOME_CAPSULE = basic("biome_capsule")  // throw on ground, it absorbs the biome, generates points with time
+    val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
+        register("biome_capsule") { BiomeCapsuleItem() }  // throw on ground, it absorbs the biome, generates points with time
     val BIOME_PAINTER = basic("biome_painter")  // right click on block, changes biome to first biome capsule, uses points
     val FLASK_OF_SPECTRE = basic("flask_of_spectre")
     val GINTO = basic("ginto")

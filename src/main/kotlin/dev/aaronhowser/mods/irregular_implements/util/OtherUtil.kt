@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
+import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
@@ -21,6 +22,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.PotionContents
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 
 object OtherUtil {
@@ -78,6 +80,19 @@ object OtherUtil {
 
         indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
         level.addFreshEntity(indicatorDisplay)
+    }
+
+    fun getBiomeComponent(biomeHolder: Holder<Biome>): Component {
+        val biomeKey = biomeHolder.key!!
+
+        val probableTranslationKey = "biome.${biomeKey.location().namespace}.${biomeKey.location().path}"
+        val hasTranslation = I18n.exists(probableTranslationKey)
+
+        return if (hasTranslation) {
+            Component.translatable(probableTranslationKey)
+        } else {
+            Component.literal(biomeKey.location().toString())
+        }.withStyle(ChatFormatting.GRAY)
     }
 
 }
