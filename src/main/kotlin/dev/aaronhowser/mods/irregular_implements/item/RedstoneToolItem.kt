@@ -5,10 +5,18 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.ChatFormatting
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.ClipContext
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.RedStoneWireBlock
 
 class RedstoneToolItem : Item(
     Properties()
@@ -97,6 +105,31 @@ class RedstoneToolItem : Item(
         return InteractionResult.SUCCESS
     }
 
-    //TODO: Display the signal strength of redstone dust
+    override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
+        if (!isSelected) return
+        if (entity !is Player) return
+
+        val clipResult = level.clip(
+            ClipContext(
+                entity.eyePosition,
+                entity.eyePosition.add(entity.lookAngle.scale(entity.blockInteractionRange())),
+                ClipContext.Block.OUTLINE,
+                ClipContext.Fluid.NONE,
+                entity
+            )
+        )
+
+        val pos = clipResult.blockPos
+        val state = level.getBlockState(pos)
+
+        if (state.`is`(Blocks.REDSTONE_WIRE)) {
+            val signalStrength = state.getValue(RedStoneWireBlock.POWER)
+
+            entity.displayClientMessage(
+                signalStrength.toString().toComponent().withStyle(ChatFormatting.RED),
+                true
+            )
+        }
+    }
 
 }

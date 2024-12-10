@@ -92,7 +92,7 @@ class RedstoneHandlerSavedData : SavedData() {
     private fun updatePosition(level: ServerLevel, blockPos: BlockPos) {
         val targetState = level.getBlockState(blockPos)
 
-        targetState.handleNeighborChanged(level, blockPos, Blocks.AIR, blockPos, false)  //TODO: Apparently dangerous?
+        targetState.handleNeighborChanged(level, blockPos, Blocks.AIR, blockPos, false)  //TODO: Dangerous according to Random Things source?
         level.updateNeighborsAt(blockPos, targetState.block)
     }
 
