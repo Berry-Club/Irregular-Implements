@@ -76,19 +76,23 @@ class RedstoneHandlerSavedData : SavedData() {
             val signal = iterator.next()
             val level = server.getLevel(signal.dimension)
 
-            if (level == null || signal.isExpired(level.gameTime)) {
+            if (level == null) {
                 iterator.remove()
                 continue
             }
 
             updatePosition(level, signal.blockPos)
+
+            if (signal.isExpired(level.gameTime)) {
+                iterator.remove()
+            }
         }
     }
 
     private fun updatePosition(level: ServerLevel, blockPos: BlockPos) {
         val targetState = level.getBlockState(blockPos)
 
-        targetState.handleNeighborChanged(level, blockPos, Blocks.REDSTONE_BLOCK, blockPos, false)  //TODO: Apparently dangerous?
+        targetState.handleNeighborChanged(level, blockPos, Blocks.AIR, blockPos, false)  //TODO: Apparently dangerous?
         level.updateNeighborsAt(blockPos, targetState.block)
     }
 
@@ -99,6 +103,7 @@ class RedstoneHandlerSavedData : SavedData() {
         val dimension = level.dimension()
 
         for (signal in signals) {
+            if (signal.isExpired(level.gameTime)) continue
             if (signal.blockPos == pos.asLong() && signal.dimension == dimension) {
                 return signal.strength
             }
