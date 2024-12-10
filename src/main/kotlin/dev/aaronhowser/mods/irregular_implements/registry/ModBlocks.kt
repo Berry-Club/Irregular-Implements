@@ -16,6 +16,10 @@ object ModBlocks {
 
     val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
+    // Not above 1.7
+    val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")
+    val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
+
     val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
         registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
     val IMBUING_STATION = basicBlock("imbuing_station")
@@ -76,6 +80,7 @@ object ModBlocks {
         registerBlock("redstone_observer") { RedstoneObserverBlock() }
     val SIDED_BLOCK_OF_REDSTONE =
         registerBlock("sided_redstone") { SidedRedstoneBlock() }
+    val MOON_PHASE_DETECTOR = basicBlock("moon_phase_detector") // 1.7.10
 
     // Sticks
     val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
