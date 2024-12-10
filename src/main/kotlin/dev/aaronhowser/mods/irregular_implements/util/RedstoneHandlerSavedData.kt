@@ -54,9 +54,20 @@ class RedstoneHandlerSavedData : SavedData() {
             if (level !is ServerLevel) return
             level.redstoneHandlerSavedData.tick(level.server)
         }
+
+        fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+            level.redstoneHandlerSavedData.addSignal(level, blockPos, duration, strength)
+        }
     }
 
     private val signals: MutableSet<SavedSignal> = mutableSetOf()
+
+    private fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+        val signal = SavedSignal(blockPos.asLong(), level.dimension(), duration, strength, level.gameTime)
+
+        signals.add(signal)
+        updatePosition(level, blockPos)
+    }
 
     fun tick(server: MinecraftServer) {
         val iterator = signals.iterator()

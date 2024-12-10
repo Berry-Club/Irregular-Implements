@@ -13,6 +13,8 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
+import net.minecraft.util.ExtraCodecs
+import net.minecraft.util.StringRepresentable.EnumCodec
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.biome.Biome
@@ -88,19 +90,20 @@ object ModDataComponents {
                 )
         }
 
-    val DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("duration") {
-            it
-                .persistent(Codec.INT)
-                .networkSynchronized(ByteBufCodecs.VAR_INT)
-        }
-
     @JvmStatic
     val LUBRICATED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("lubricated") {
             it
                 .persistent(Unit.CODEC)
                 .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+        }
+
+    //TODO: Make use enum
+    val ACTIVATOR_DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("activator_duration") {
+            it
+                .persistent(EnumCodec.INT)
+                .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
 }
