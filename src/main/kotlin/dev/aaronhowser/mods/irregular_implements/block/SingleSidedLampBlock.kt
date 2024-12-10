@@ -32,4 +32,8 @@ class SingleSidedLampBlock private constructor(
         return if (state.getValue(LIT)) 15 else 0
     }
 
+    override fun hasDynamicLightEmission(state: BlockState): Boolean {
+        return true
+    }
+
 }
