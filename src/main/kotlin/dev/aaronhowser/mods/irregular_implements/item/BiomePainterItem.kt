@@ -13,6 +13,7 @@ class BiomePainterItem : Item(
         .stacksTo(1)
 ) {
 
+    //FIXME: Somehow making some blockpos immune to biome change??? maybe???
     override fun useOn(context: UseOnContext): InteractionResult {
         val player = context.player ?: return InteractionResult.FAIL
 
