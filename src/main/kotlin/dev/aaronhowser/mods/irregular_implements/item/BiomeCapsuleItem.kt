@@ -36,8 +36,12 @@ class BiomeCapsuleItem : Item(
         val biome = entity.level().getBiome(onBlockPos)
         val component = stack.get(ModDataComponents.BIOME_POINTS) ?: BiomePointsDataComponent(biome, 0)
 
-        val newComponent = component.withMorePoints(1)
-        stack.set(ModDataComponents.BIOME_POINTS, newComponent)
+        if (component.biome != biome) return super.onEntityItemUpdate(stack, entity)
+
+        stack.set(
+            ModDataComponents.BIOME_POINTS,
+            component.withMorePoints(1)
+        )
 
         return super.onEntityItemUpdate(stack, entity)
     }
