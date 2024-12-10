@@ -216,7 +216,6 @@ class ModLanguageProvider(
     private fun addBlocks() {
         addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
         addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")
-        addBlock(ModBlocks.LAPIS_LAMP, "Lapis Lamp")
         addBlock(ModBlocks.ENDER_BRIDGE, "Ender Bridge")
         addBlock(ModBlocks.PRISMARINE_ENDER_BRIDGE, "Prismarine Ender Bridge")
         addBlock(ModBlocks.ENDER_ANCHOR, "Ender Anchor")
@@ -228,7 +227,6 @@ class ModLanguageProvider(
         addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
         addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
         addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
-        addBlock(ModBlocks.QUARTZ_LAMP, "Quartz Lamp")
         addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")
         addBlock(ModBlocks.POTION_VAPORIZER, "Potion Vaporizer")
         addBlock(ModBlocks.CONTACT_BUTTON, "Contact Button")
@@ -441,7 +439,6 @@ class ModLanguageProvider(
         addInfo(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt does not require hydration, grows crops 3 times faster, and can't be trampled.\n\nYou still have to till it with a Hoe to grow crops.")
         addInfo(ModBlocks.PLAYER_INTERFACE, "Exposes the inventory of the block's owner, as if it was the block's inventory.")
         addInfo(ModBlocks.LAPIS_GLASS, "Solid for players, not solid for anything else.")
-        addInfo(ModBlocks.LAPIS_LAMP, "Provides false light, which changes visibility but does not affect mob spawning.")
         addInfo(ModBlocks.ONLINE_DETECTOR, "Emits a Redstone signal if the specified player is online.")
         addInfo(ModBlocks.CHAT_DETECTOR, "Emits a Redstone pulse if the block's owner sends a chat message containing some specified text.")
         addInfo(ModBlocks.ENDER_BRIDGE, "Upon the Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it.\n\nIt searches at 20 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).")
@@ -455,7 +452,6 @@ class ModLanguageProvider(
         addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
         add(Info.PLATFORM, "Only solid to non-sneaking entities.")
         addInfo(ModBlocks.ENTITY_DETECTOR, "Emits a Redstone signal if a configured entity is within a configured range.")
-        addInfo(ModBlocks.QUARTZ_LAMP, "Provides invisible light, which can't be seen but affects mob spawning.")   //TODO: Make some joke about radiation
         addInfo(ModBlocks.QUARTZ_GLASS, "Solid for everything but players.")
         addInfo(ModBlocks.POTION_VAPORIZER, "Allows you to fill a room with a potion effect.\n\nInsert Potions and Furnace fuel, and it will scan the area in front of it to check if it's an enclosed area.\n\nIf it is, it'll fill it with the potion effect.")
         addInfo(ModBlocks.CONTACT_LEVER, "Acts like a Lever, but works when the block in front of it is clicked instead.")

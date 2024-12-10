@@ -1,6 +1,5 @@
 {
   "values": [
-    "irregular_implements:lapis_lamp",
     "irregular_implements:ender_bridge",
     "irregular_implements:prismarine_ender_bridge",
     "irregular_implements:ender_anchor",
@@ -8,7 +7,6 @@
     "irregular_implements:analog_emitter",
     "irregular_implements:fluid_display",
     "irregular_implements:ender_mailbox",
-    "irregular_implements:quartz_lamp",
     "irregular_implements:potion_vaporizer",
     "irregular_implements:contact_button",
     "irregular_implements:contact_lever",

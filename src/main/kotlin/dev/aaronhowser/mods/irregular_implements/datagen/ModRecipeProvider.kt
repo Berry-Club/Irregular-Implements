@@ -159,14 +159,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.LAPIS_LAMP,
-            " L ,LRL, L ",
-            mapOf(
-                'L' to ing(Tags.Items.GEMS_LAPIS),
-                'R' to ing(Items.REDSTONE_LAMP)
-            )
-        ),
-        shapedRecipe(
             ModBlocks.ONLINE_DETECTOR,
             "SRS,RLR,SRS",
             mapOf(
@@ -256,14 +248,6 @@ class ModRecipeProvider(
                 'T' to ing(Items.REDSTONE_TORCH),
                 'E' to ing(Tags.Items.ENDER_PEARLS),
                 'P' to ing(Items.STONE_PRESSURE_PLATE)
-            )
-        ),
-        shapedRecipe(
-            ModBlocks.QUARTZ_LAMP,
-            " Q ,QLQ, Q ",
-            mapOf(
-                'Q' to ing(Tags.Items.GEMS_QUARTZ),
-                'L' to ing(Items.REDSTONE_LAMP)
             )
         ),
         shapedRecipe(

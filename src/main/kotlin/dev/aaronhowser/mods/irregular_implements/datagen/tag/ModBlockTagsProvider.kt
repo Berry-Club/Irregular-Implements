@@ -203,7 +203,6 @@ class ModBlockTagsProvider(
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(
-                ModBlocks.LAPIS_LAMP.get(),
                 ModBlocks.ENDER_BRIDGE.get(),
                 ModBlocks.PRISMARINE_ENDER_BRIDGE.get(),
                 ModBlocks.ENDER_ANCHOR.get(),
@@ -211,7 +210,6 @@ class ModBlockTagsProvider(
                 ModBlocks.ANALOG_EMITTER.get(),
                 ModBlocks.FLUID_DISPLAY.get(),
                 ModBlocks.ENDER_MAILBOX.get(),
-                ModBlocks.QUARTZ_LAMP.get(),
                 ModBlocks.POTION_VAPORIZER.get(),
                 ModBlocks.CONTACT_BUTTON.get(),
                 ModBlocks.CONTACT_LEVER.get(),

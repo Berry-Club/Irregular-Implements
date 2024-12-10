@@ -98,10 +98,6 @@ object ModBlocks {
     // Lamp
     val RAINBOW_LAMP =
         registerBlock("rainbow_lamp") { RainbowLampBlock() }    //TODO: animate the item color
-    val QUARTZ_LAMP: DeferredBlock<SingleSidedLampBlock> =
-        registerBlock("quartz_lamp") { SingleSidedLampBlock.QUARTZ }
-    val LAPIS_LAMP: DeferredBlock<SingleSidedLampBlock> =
-        registerBlock("lapis_lamp") { SingleSidedLampBlock.LAPIS }
 
     // Ender Bridge
     val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
@@ -300,7 +296,8 @@ object ModBlocks {
     // - Light Redirector: Just too hard to implement lmao
     // - Diaphanous Block: Too hard and nobody would use
     // - Custom Crafting Table: Too hard and nobody would use
-    // - Dyeing Machine
+    // - Dyeing Machine: Too hard and nobody would use
+    // - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
 
     private fun blockWithProperties(name: String, properties: BlockBehaviour.Properties) =
         registerBlock(name) { Block(properties) }

@@ -944,7 +944,6 @@ class ModBlockStateProvider(
             ModBlocks.SPECTRE_PLANKS,
             ModBlocks.SOUND_DAMPENER,
             ModBlocks.REDSTONE_OBSERVER,
-            ModBlocks.QUARTZ_LAMP,
             ModBlocks.ENTITY_DETECTOR,
             ModBlocks.BEAN_POD,
             ModBlocks.ENDER_ANCHOR,
