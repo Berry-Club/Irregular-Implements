@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "irregular_implements:item/redstone_activator/right"
+  }
+}

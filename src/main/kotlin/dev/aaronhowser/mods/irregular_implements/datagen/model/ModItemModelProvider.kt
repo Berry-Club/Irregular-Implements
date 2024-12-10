@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
+import dev.aaronhowser.mods.irregular_implements.item.RedstoneActivatorItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -25,8 +26,35 @@ class ModItemModelProvider(
         coloredItems()
         handheldItems()
         emeraldCompass()
+        redstoneActivator()
 
         basicItems()
+    }
+
+    private fun redstoneActivator() {
+        val item = ModItems.REDSTONE_ACTIVATOR.get()
+
+        val middleModel = getBuilder("${getName(item)}_middle")
+            .parent(ModelFile.UncheckedModelFile("item/handheld"))
+            .texture("layer0", "item/redstone_activator/middle")
+
+        val rightModel = getBuilder("${getName(item)}_right")
+            .parent(ModelFile.UncheckedModelFile("item/handheld"))
+            .texture("layer0", "item/redstone_activator/right")
+
+        getBuilder(getName(item).toString())
+            .parent(ModelFile.UncheckedModelFile("item/handheld"))
+            .texture("layer0", "item/redstone_activator/left")
+
+            .override()
+            .predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.MEDIUM.toFloat())
+            .model(middleModel)
+            .end()
+
+            .override()
+            .predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.LONG.toFloat())
+            .model(rightModel)
+            .end()
     }
 
     private fun emeraldCompass() {

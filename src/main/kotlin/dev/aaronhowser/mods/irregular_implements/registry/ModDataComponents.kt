@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
-import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemStackComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
@@ -13,7 +12,6 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
-import net.minecraft.util.ExtraCodecs
 import net.minecraft.util.StringRepresentable.EnumCodec
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
@@ -98,9 +96,8 @@ object ModDataComponents {
                 .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
         }
 
-    //TODO: Make use enum
-    val ACTIVATOR_DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("activator_duration") {
+    val DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("duration") {
             it
                 .persistent(EnumCodec.INT)
                 .networkSynchronized(ByteBufCodecs.VAR_INT)

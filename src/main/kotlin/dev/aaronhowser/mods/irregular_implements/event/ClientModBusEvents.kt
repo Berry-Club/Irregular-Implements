@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.event
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
+import dev.aaronhowser.mods.irregular_implements.item.RedstoneActivatorItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -104,6 +105,12 @@ object ClientModBusEvents {
             ModItems.EMERALD_COMPASS.get(),
             EmeraldCompassItem.ANGLE,
             EmeraldCompassItem::getAngleFloat
+        )
+
+        ItemProperties.register(
+            ModItems.REDSTONE_ACTIVATOR.get(),
+            RedstoneActivatorItem.DURATION,
+            RedstoneActivatorItem::getDurationFloat
         )
 
     }
