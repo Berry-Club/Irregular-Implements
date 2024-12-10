@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.item.BiomeCapsuleItem
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.item.RedstoneActivatorItem
@@ -66,6 +67,12 @@ object ClientModBusEvents {
             ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
             ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
         )
+
+        event.register(
+            BiomeCapsuleItem.itemColorFunction,
+            ModItems.BIOME_CAPSULE.get()
+        )
+
     }
 
     @SubscribeEvent
