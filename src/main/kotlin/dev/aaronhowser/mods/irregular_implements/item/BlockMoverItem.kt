@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.NeoForge
+import net.neoforged.neoforge.common.util.BlockSnapshot
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 
@@ -73,7 +74,26 @@ class BlockMoverItem : Item(
         }
 
         fun tryPlaceBlock(player: Player, stack: ItemStack, context: UseOnContext): InteractionResult {
-            return InteractionResult.FAIL
+            val level = context.level
+            val clickedPos = context.clickedPos
+            val clickedState = level.getBlockState(clickedPos)
+
+            val posToPlaceBlock = if (clickedState.canBeReplaced()) clickedPos else clickedPos.relative(context.clickedFace)
+            val stateAlreadyThere = level.getBlockState(posToPlaceBlock)
+
+            if (!stateAlreadyThere.canBeReplaced()
+                || !level.mayInteract(player, clickedPos)
+                || !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
+                || NeoForge.EVENT_BUS.post(
+                    BlockEvent.EntityPlaceEvent(
+                        BlockSnapshot.create(level.dimension(), level, posToPlaceBlock),
+                        clickedState,
+                        player
+                    )
+                ).isCanceled
+            ) return InteractionResult.FAIL
+
+            return InteractionResult.PASS
         }
     }
 
