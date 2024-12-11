@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionResult
@@ -11,6 +13,7 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.NeoForge
@@ -34,7 +37,21 @@ class BlockMoverItem : Item(
         return if (blockDataComponent == null) tryPickUpBlock(player, stack, context) else tryPlaceBlock(player, stack, context)
     }
 
-    //TODO: Plop sounds
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA) ?: return
+
+        var blockName = blockDataComponent.blockState.block.name
+        if (blockName.style.isEmpty) blockName = blockName.withStyle(ChatFormatting.GRAY)
+
+        val component = if (blockDataComponent.blockEntityNbt == null) {
+            blockName
+        } else {
+            blockName.append(Component.literal(" + Block Entity").withStyle(ChatFormatting.GRAY))
+        }
+
+        tooltipComponents.add(component)
+    }
+
     companion object {
         private var blockMoverPreventingContainerDrops = false
 
