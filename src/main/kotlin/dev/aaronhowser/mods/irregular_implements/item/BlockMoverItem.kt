@@ -92,10 +92,8 @@ class BlockMoverItem : Item(
             val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA) ?: return InteractionResult.FAIL
 
             val posToPlaceBlock = if (clickedState.canBeReplaced()) clickedPos else clickedPos.relative(context.clickedFace)
-            val stateAlreadyThere = level.getBlockState(posToPlaceBlock)
 
-            if (!stateAlreadyThere.canBeReplaced()
-                || !level.mayInteract(player, clickedPos)
+            if (!level.mayInteract(player, clickedPos)
                 || !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
                 || !blockDataComponent.tryPlace(level, posToPlaceBlock, player)
             ) return InteractionResult.FAIL

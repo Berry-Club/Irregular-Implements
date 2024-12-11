@@ -54,11 +54,10 @@ data class BlockDataComponent(
     fun tryPlace(level: Level, posToPlaceIn: BlockPos, player: Player?): Boolean {
 
         // Update the shape so double chests become single, etc
-        val adjustedState = Block.updateFromNeighbourShapes(blockState, level, posToPlaceIn)
+        val adjustedState = Block.updateFromNeighbourShapes(this.blockState, level, posToPlaceIn)
         val stateAlreadyThere = level.getBlockState(posToPlaceIn)
 
-        if (
-            adjustedState.isAir
+        if (adjustedState.isAir
             || !stateAlreadyThere.canBeReplaced()
             || !level.isUnobstructed(adjustedState, posToPlaceIn, if (player == null) CollisionContext.empty() else CollisionContext.of(player))
             || !adjustedState.canSurvive(level, posToPlaceIn)
@@ -67,7 +66,7 @@ data class BlockDataComponent(
         }
 
         level.captureBlockSnapshots = true
-        level.setBlockAndUpdate(posToPlaceIn, blockState)
+        level.setBlockAndUpdate(posToPlaceIn, adjustedState)
         level.captureBlockSnapshots = false
 
         val snapshots = level.capturedBlockSnapshots.toList()
@@ -82,7 +81,7 @@ data class BlockDataComponent(
             return false
         }
 
-        val soundType = blockState.block.getSoundType(blockState, level, posToPlaceIn, player)
+        val soundType = adjustedState.block.getSoundType(adjustedState, level, posToPlaceIn, player)
         level.playSound(
             null,
             posToPlaceIn,
@@ -92,14 +91,14 @@ data class BlockDataComponent(
             soundType.pitch * 0.8f
         )
 
-        if (blockEntityNbt != null) {
+        if (this.blockEntityNbt != null) {
 
-            blockEntityNbt.putInt("x", posToPlaceIn.x)
-            blockEntityNbt.putInt("y", posToPlaceIn.y)
-            blockEntityNbt.putInt("z", posToPlaceIn.z)
+            this.blockEntityNbt.putInt("x", posToPlaceIn.x)
+            this.blockEntityNbt.putInt("y", posToPlaceIn.y)
+            this.blockEntityNbt.putInt("z", posToPlaceIn.z)
 
             level.getBlockEntity(posToPlaceIn)
-                ?.loadWithComponents(blockEntityNbt, level.registryAccess())
+                ?.loadWithComponents(this.blockEntityNbt, level.registryAccess())
         }
 
         val fluidState = level.getFluidState(posToPlaceIn)
