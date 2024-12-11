@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.BucketPickup
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
+import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.FluidType
@@ -74,7 +75,7 @@ data class BlockDataComponent(
 
         val snapshot = snapshots.firstOrNull() ?: return false
 
-        if (BlockEvent.EntityPlaceEvent(snapshot, stateAlreadyThere, player).isCanceled) {
+        if (NeoForge.EVENT_BUS.post(BlockEvent.EntityPlaceEvent(snapshot, stateAlreadyThere, player)).isCanceled) {
             level.restoringBlockSnapshots = true
             snapshot.restore(snapshot.flags or Block.UPDATE_CLIENTS)
             level.restoringBlockSnapshots = false
