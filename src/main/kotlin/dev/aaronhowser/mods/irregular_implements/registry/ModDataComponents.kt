@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.component.BiomePointsDataComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.ItemStackComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.*
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
@@ -109,6 +106,13 @@ object ModDataComponents {
             it
                 .persistent(BiomePointsDataComponent.CODEC)
                 .networkSynchronized(BiomePointsDataComponent.STREAM_CODEC)
+        }
+
+    val BLOCK_DATA: DeferredHolder<DataComponentType<*>, DataComponentType<BlockDataComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("block_data") {
+            it
+                .persistent(BlockDataComponent.CODEC)
+                .networkSynchronized(BlockDataComponent.STREAM_CODEC)
         }
 
 }

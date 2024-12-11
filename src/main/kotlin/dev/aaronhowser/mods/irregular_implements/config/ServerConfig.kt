@@ -18,6 +18,8 @@ class ServerConfig(
         lateinit var BIOME_PAINTER_HORIZONTAL_RADIUS: ModConfigSpec.IntValue
         lateinit var BIOME_PAINTER_BLOCKS_BELOW: ModConfigSpec.IntValue
         lateinit var BIOME_PAINTER_BLOCKS_ABOVE: ModConfigSpec.IntValue
+
+        lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
     }
 
     init {
@@ -42,6 +44,10 @@ class ServerConfig(
         BIOME_PAINTER_BLOCKS_ABOVE = builder
             .comment("How many blocks above the clicked block should the Biome Painter change?")
             .defineInRange("biomePainterBlocksAbove", 0, 0, Int.MAX_VALUE)
+
+        BLOCK_MOVER_TRY_VAPORIZE_FLUID = builder
+            .comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")
+            .define("blockMoverTryVaporizeFluid", true)
     }
 
 }
