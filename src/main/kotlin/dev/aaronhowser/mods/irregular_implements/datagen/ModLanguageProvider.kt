@@ -142,6 +142,7 @@ class ModLanguageProvider(
         addItem(ModItems.REINFORCED_ENDER_BUCKET, "Reinforced Ender Bucket")
         addItem(ModItems.CHUNK_ANALYZER, "Chunk Analyzer")
         addItem(ModItems.DIVINING_ROD, "Divining Rod")
+        addItem(ModItems.BLOCK_MOVER, "Block Mover")
 
         addItem(ModItems.FIRE_IMBUE, "Fire Imbue")
         addItem(ModItems.POISON_IMBUE, "Poison Imbue")
@@ -414,6 +415,8 @@ class ModLanguageProvider(
 
         const val COMPRESSED_SLIME_AMOUNT = "tooltip.irregular_implements.compressed_slime_AMOUNT"
         const val LUBRICATED = "tooltip.irregular_implements.lubricated"
+
+        const val WITH_BLOCK_ENTITY = "tooltip.irregular_implements.with_block_entity"
     }
 
     private fun addTooltips() {
@@ -424,6 +427,8 @@ class ModLanguageProvider(
 
         add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
         add(Tooltips.LUBRICATED, "Lubricated")
+
+        add(Tooltips.WITH_BLOCK_ENTITY, "%s with block entity")
     }
 
     object Info {

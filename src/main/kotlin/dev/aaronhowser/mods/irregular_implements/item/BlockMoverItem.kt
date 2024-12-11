@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -46,7 +48,9 @@ class BlockMoverItem : Item(
         val component = if (blockDataComponent.blockEntityNbt == null) {
             blockName
         } else {
-            blockName.append(Component.literal(" + Block Entity").withStyle(ChatFormatting.GRAY))
+            ModLanguageProvider.Tooltips.WITH_BLOCK_ENTITY
+                .toComponent(blockName)
+                .withStyle(ChatFormatting.GRAY)
         }
 
         tooltipComponents.add(component)

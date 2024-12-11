@@ -318,6 +318,7 @@
   "item.irregular_implements.biome_sensor": "Biome Sensor",
   "item.irregular_implements.blackout_powder": "Blackout Powder",
   "item.irregular_implements.blaze_and_steel": "Blaze and Steel",
+  "item.irregular_implements.block_mover": "Block Mover",
   "item.irregular_implements.bottle_of_air": "Bottle of Air",
   "item.irregular_implements.chunk_analyzer": "Chunk Analyzer",
   "item.irregular_implements.divining_rod": "Divining Rod",
@@ -431,5 +432,6 @@
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
   "tooltip.irregular_implements.lubricated": "Lubricated",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
-  "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information"
+  "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information",
+  "tooltip.irregular_implements.with_block_entity": "%s with block entity"
 }
