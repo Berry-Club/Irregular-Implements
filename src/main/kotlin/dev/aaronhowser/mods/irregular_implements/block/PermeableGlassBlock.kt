@@ -12,6 +12,7 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
+//FIXME: Update texture
 class PermeableGlassBlock private constructor(
     isSolidForMobsOnly: Boolean,
     properties: Properties
