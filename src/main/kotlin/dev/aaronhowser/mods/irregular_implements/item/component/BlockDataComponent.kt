@@ -64,21 +64,6 @@ data class BlockDataComponent(
             return false
         }
 
-        val fluidState = level.getFluidState(posToPlaceIn)
-        val fluidType = fluidState.fluidType
-        val fluidStack = FluidStack(fluidState.type, FluidType.BUCKET_VOLUME)
-
-        var fluidPickup: BucketPickup? = null
-        if (fluidType.isVaporizedOnPlacement(level, posToPlaceIn, fluidStack)) {
-            val adjustedStateBlock = adjustedState.block
-
-            if (ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID.get() && adjustedStateBlock is BucketPickup) {
-                fluidPickup = adjustedStateBlock
-            } else {
-                return false
-            }
-        }
-
         level.captureBlockSnapshots = true
         level.setBlockAndUpdate(posToPlaceIn, blockState)
         level.captureBlockSnapshots = false
@@ -103,6 +88,21 @@ data class BlockDataComponent(
 
             level.getBlockEntity(posToPlaceIn)
                 ?.loadWithComponents(blockEntityNbt, level.registryAccess())
+        }
+
+        val fluidState = level.getFluidState(posToPlaceIn)
+        val fluidType = fluidState.fluidType
+        val fluidStack = FluidStack(fluidState.type, FluidType.BUCKET_VOLUME)
+
+        var fluidPickup: BucketPickup? = null
+        if (fluidType.isVaporizedOnPlacement(level, posToPlaceIn, fluidStack)) {
+            val adjustedStateBlock = adjustedState.block
+
+            if (ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID.get() && adjustedStateBlock is BucketPickup) {
+                fluidPickup = adjustedStateBlock
+            } else {
+                return false
+            }
         }
 
         if (fluidPickup != null) {
