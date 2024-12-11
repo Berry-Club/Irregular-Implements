@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -79,6 +80,16 @@ data class BlockDataComponent(
             level.restoringBlockSnapshots = false
             return false
         }
+
+        val soundType = blockState.block.getSoundType(blockState, level, posToPlaceIn, player)
+        level.playSound(
+            null,
+            posToPlaceIn,
+            soundType.placeSound,
+            SoundSource.BLOCKS,
+            (soundType.volume + 1.0f) / 2.0f,
+            soundType.pitch * 0.8f
+        )
 
         if (blockEntityNbt != null) {
 
