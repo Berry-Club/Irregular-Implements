@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.BucketPickup
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.FluidType
 import java.util.*
@@ -51,8 +53,14 @@ data class BlockDataComponent(
 
         // Update the shape so double chests become single, etc
         val adjustedState = Block.updateFromNeighbourShapes(blockState, level, posToPlaceIn)
-        if (adjustedState.isAir) {
-            // This means you can't place the block here
+        val stateAlreadyThere = level.getBlockState(posToPlaceIn)
+
+        if (
+            adjustedState.isAir
+            || !stateAlreadyThere.canBeReplaced()
+            || !level.isUnobstructed(adjustedState, posToPlaceIn, if (player == null) CollisionContext.empty() else CollisionContext.of(player))
+            || !adjustedState.canSurvive(level, posToPlaceIn)
+        ) {
             return false
         }
 
@@ -71,7 +79,21 @@ data class BlockDataComponent(
             }
         }
 
-        level.setBlockAndUpdate(posToPlaceIn, adjustedState)
+        level.captureBlockSnapshots = true
+        level.setBlockAndUpdate(posToPlaceIn, blockState)
+        level.captureBlockSnapshots = false
+
+        val snapshots = level.capturedBlockSnapshots.toList()
+        level.capturedBlockSnapshots.clear()
+
+        val snapshot = snapshots.firstOrNull() ?: return false
+
+        if (BlockEvent.EntityPlaceEvent(snapshot, stateAlreadyThere, player).isCanceled) {
+            level.restoringBlockSnapshots = true
+            snapshot.restore(snapshot.flags or Block.UPDATE_CLIENTS)
+            level.restoringBlockSnapshots = false
+            return false
+        }
 
         if (blockEntityNbt != null) {
 
