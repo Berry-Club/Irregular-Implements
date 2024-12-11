@@ -10,6 +10,7 @@ import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -29,9 +30,27 @@ class ModBlockTagsProvider(
         @JvmStatic
         val SUPER_LUBRICATED = create("super_lubricated")
         val C_CROPS_BEAN: TagKey<Block> = BlockTags.create(OtherUtil.modResource("crops/bean"))
+        val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
     }
 
     private fun colorTags() {
+
+        this.tag(BLOCK_MOVER_BLACKLIST)
+            .add(
+                Blocks.BEDROCK,
+                Blocks.BARRIER,
+                Blocks.COMMAND_BLOCK,
+                Blocks.CHAIN_COMMAND_BLOCK,
+                Blocks.REPEATING_COMMAND_BLOCK,
+                Blocks.STRUCTURE_BLOCK,
+                Blocks.JIGSAW,
+                Blocks.STRUCTURE_VOID,
+                Blocks.END_PORTAL_FRAME,
+            )
+            .addTag(
+                BlockTags.PORTALS,
+            )
+
         for (color in DyeColor.entries) {
             val coloredGrass = ModBlocks.getColoredGrass(color).get()
             val stainedBrick = ModBlocks.getStainedBrick(color).get()

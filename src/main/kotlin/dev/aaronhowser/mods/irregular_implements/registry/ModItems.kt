@@ -34,7 +34,8 @@ object ModItems {
 
     // Not above 1.6.4
     val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
-    val BLOCK_MOVER = basic("block_mover")  // pick up and place blocks, uses durability
+    val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
+        register("block_mover") { BlockMoverItem() }  // pick up and place blocks, uses durability
     val DIAMOND_BREAKER = basic("diamond_breaker")  // upgrade to block breaker
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =

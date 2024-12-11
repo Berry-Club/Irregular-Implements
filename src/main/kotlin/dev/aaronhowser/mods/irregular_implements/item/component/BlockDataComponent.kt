@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.BucketPickup
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.FluidType
@@ -22,6 +24,9 @@ data class BlockDataComponent(
     val blockState: BlockState,
     val blockEntityNbt: CompoundTag?
 ) {
+
+    constructor(provider: HolderLookup.Provider, blockState: BlockState, blockEntity: BlockEntity?) :
+            this(blockState, blockEntity?.saveWithFullMetadata(provider))
 
     companion object {
         val CODEC: Codec<BlockDataComponent> =
