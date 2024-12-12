@@ -65,7 +65,7 @@ object ModArmorMaterials {
                 .leg(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.LEGGINGS))
                 .chestplate(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.CHESTPLATE))
                 .helmet(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.HELMET))
-                .enchantValue(Mth.ceil(ArmorMaterials.GOLD.value().enchantmentValue * 1.5))
+                .enchantValue(Mth.ceil(ArmorMaterials.DIAMOND.value().enchantmentValue * 1.5))
         )
 
 

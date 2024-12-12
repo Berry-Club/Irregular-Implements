@@ -119,7 +119,6 @@ class ModLanguageProvider(
         addItem(ModItems.BOTTLE_OF_AIR, "Bottle of Air")
         addItem(ModItems.ENDER_LETTER, "Ender Letter")
         addItem(ModItems.SAKANADE_SPORES, "Sakande Spores")
-        addItem(ModItems.EVIL_TEAR, "Evil Tear")
         addItem(ModItems.ECTOPLASM, "Ectoplasm")
         addItem(ModItems.BIOME_SENSOR, "Biome Sensor")
         addItem(ModItems.LUMINOUS_POWDER, "Luminous Powder")
@@ -439,6 +438,7 @@ class ModLanguageProvider(
         const val PLATFORM = "info.irregular_implements.platform"
         const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
         const val LUBRICANT = "info.irregular_implements.lubricant"
+        const val SPECTRE_ARMOR = "info.irregular_implements.spectre_armor"
     }
 
     private fun addInfo(itemLike: ItemLike, infoString: String) {
@@ -467,7 +467,8 @@ class ModLanguageProvider(
         addInfo(ModBlocks.CONTACT_LEVER, "Acts like a Lever, but works when the block in front of it is clicked instead.")
         addInfo(ModBlocks.CONTACT_BUTTON, "Acts like a Button, but works when the block in front of it is clicked instead.")
         addInfo(ModBlocks.RAIN_SHIELD, "Prevents rain in a 5 chunk radius.")
-        addInfo(ModBlocks.BLOCK_BREAKER, "Breaks blocks in front of it with the effectiveness of an Iron Pickaxe. Drops are inserted into the inventory behind it, or dropped.\n\nCan be disabled with a Redstone signal.")
+        addInfo(ModBlocks.BLOCK_BREAKER, "Breaks blocks in front of it with the effectiveness of an Iron Pickaxe. Drops are inserted into the inventory behind it, or dropped.\n\nCan be disabled with a Redstone signal.\n\nCan be upgraded with a Diamond Breaker.")
+        addInfo(ModBlocks.AUTO_PLACER, "Places blocks in front of it from its inventory.\n\nCan be disabled with a Redstone signal.")
         add(Info.LUBRICANT, "Completely frictionless. Anything moving on it will retain its momentum.")
         addInfo(ModBlocks.COMPRESSED_SLIME_BLOCK, "Create by clicking a Slime Block with a Shovel. Can be compressed multiple times.\n\nLaunches entities into the air.")
         addInfo(ModBlocks.REDSTONE_OBSERVER, "Emits the same Redstone signal as a linked block.\n\nUse a Redstone Tool to link it to a block.")
@@ -503,6 +504,8 @@ class ModLanguageProvider(
         addInfo(ModBlocks.RAINBOW_LAMP, "Changes color depending on the Redstone signal strength.\n\nOnly the texture changes, the light stays the same color.")
         addInfo(ModBlocks.BASIC_REDSTONE_INTERFACE, "Powers the linked block with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to a block.")
         addInfo(ModBlocks.ADVANCED_REDSTONE_INTERFACE, "Powers up to 9 linked blocks with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to blocks.")
+        addInfo(ModBlocks.SHOCK_ABSORBER, "Reduces all fall damage, and also emits a redstone signal strength relative to the distance fallen.")
+        addInfo(ModBlocks.MOON_PHASE_DETECTOR, "Emits a Redstone signal depending on the current moon phase.")
 
         addInfo(ModBlocks.PROCESSING_PLATE, "???")
         addInfo(ModBlocks.REDIRECTOR_PLATE, "Has two \"enabled\" sides. Entities that enter from one side are sent to the other side.")
@@ -577,7 +580,7 @@ class ModLanguageProvider(
         addInfo(ModItems.SPECTRE_PICKAXE, "Comparable to a Diamond Pickaxe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
         addInfo(ModItems.SPECTRE_AXE, "Comparable to a Diamond Axe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
         addInfo(ModItems.SPECTRE_SHOVEL, "Comparable to a Diamond Shovel with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
-        //TODO: Spectre armor
+        add(Info.SPECTRE_ARMOR, "Comparable to Diamond Armor with higher durability and enchantability.\n\nAlso makes you slightly transparent!")
         addInfo(ModItems.BIOME_CAPSULE, "Throw on the ground, and it will capture the biome it lands in.\n\nUsed in conjunction with the Biome Painter.")
         addInfo(ModItems.BIOME_PAINTER, "Use it on a block, and it will paint the biome of the first Biome Capsule in your inventory.\n\nThe radius can be configured.")
         addInfo(ModItems.VOID_STONE, "In its menu, has a slot that immediately deletes whatever is inserted.")

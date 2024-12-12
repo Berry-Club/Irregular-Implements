@@ -797,15 +797,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.EVIL_TEAR,
-            "S,T,P",
-            mapOf(
-                'S' to ing(Items.WITHER_SKELETON_SKULL),
-                'T' to ing(Items.GHAST_TEAR),
-                'P' to ing(Tags.Items.ENDER_PEARLS)
-            )
-        ),
-        shapedRecipe(
             ModItems.SPECTRE_INGOT,
             9,
             "ELE,EGE,EEE",

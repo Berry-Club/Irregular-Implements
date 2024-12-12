@@ -9,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
+import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.FallLocation
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
@@ -89,7 +90,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.HELMET,
             Item.Properties()
-                .durability(Items.DIAMOND_HELMET.defaultInstance.maxDamage)
+                .durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
                 .rarity(Rarity.UNCOMMON)
         )
     }
@@ -99,7 +100,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.CHESTPLATE,
             Item.Properties()
-                .durability(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage)
+                .durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
                 .rarity(Rarity.UNCOMMON)
         )
     }
@@ -109,7 +110,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.LEGGINGS,
             Item.Properties()
-                .durability(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage)
+                .durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
                 .rarity(Rarity.UNCOMMON)
         )
     }
@@ -119,7 +120,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.BOOTS,
             Item.Properties()
-                .durability(Items.DIAMOND_BOOTS.defaultInstance.maxDamage)
+                .durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
                 .rarity(Rarity.UNCOMMON)
         )
     }

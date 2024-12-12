@@ -15,12 +15,6 @@ object ModItems {
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
 
-    // Ingredients
-    val TRANSFORMATION_CORE = basic("transformation_core")
-    val OBSIDIAN_ROD = basic("obsidian_rod")
-    val EVIL_TEAR = basic("evil_tear")
-    val BIOME_SENSOR = basic("biome_sensor")
-
     // Not above 1.7
     val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
         register("biome_capsule") { BiomeCapsuleItem() }
@@ -52,7 +46,6 @@ object ModItems {
     val SAKANADE_SPORES = basic("sakanade_spores")
     val ECTOPLASM = basic("ectoplasm")
     val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
-    val PLATE_BASE = basic("plate_base")
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
@@ -68,7 +61,13 @@ object ModItems {
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
-    // Lotus
+    // Ingredients
+    val TRANSFORMATION_CORE = basic("transformation_core")
+    val OBSIDIAN_ROD = basic("obsidian_rod")
+    val BIOME_SENSOR = basic("biome_sensor")
+    val PLATE_BASE = basic("plate_base")
+
+    // Plants
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
         register("lotus_blossom") { LotusBlossomItem() }
     val LOTUS_SEEDS: DeferredItem<ItemNameBlockItem> =

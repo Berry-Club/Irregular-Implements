@@ -96,7 +96,18 @@ object ModInformationRecipes {
             OtherUtil.modResource("/info/lubricated_blocks")
         )
 
-        return listOf(platforms, biomeBlocks, lubricatedBlocks)
+        val spectreArmor = EmiInfoRecipe(
+            toEmiIngredients(
+                ModItems.SPECTRE_HELMET,
+                ModItems.SPECTRE_CHESTPLATE,
+                ModItems.SPECTRE_LEGGINGS,
+                ModItems.SPECTRE_BOOTS
+            ),
+            listOf(ModLanguageProvider.Info.SPECTRE_ARMOR.toComponent()),
+            OtherUtil.modResource("/info/spectre_armor")
+        )
+
+        return listOf(platforms, biomeBlocks, lubricatedBlocks, spectreArmor)
     }
 
 }

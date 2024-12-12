@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-12T04:15:26.6474139	Item Models: irregular_implements
+// 1.21.1	2024-12-12T04:20:12.1198099	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -51,7 +51,6 @@ ca82f2cd1f0ae2622fa433f5769d3b344d9e7efd assets/irregular_implements/models/item
 7091da0d57c764efc1a8a86c98b6bd0a68fb615e assets/irregular_implements/models/item/ender_letter.json
 ce0bae92627930536b5dfc6a5fdb5d58e2b92383 assets/irregular_implements/models/item/entity_filter.json
 e81dc96d4a52cc18433eb61e67fb34565eaf4faf assets/irregular_implements/models/item/escape_rope.json
-9cd3d6ba6d82d3f451a44adac565a7e26b13b10d assets/irregular_implements/models/item/evil_tear.json
 aaa7b3f4180df1c8128a7b330b1d266f98bc78e0 assets/irregular_implements/models/item/floo_pouch.json
 be196ae062e2483e30f7e1cf69abe09770c68655 assets/irregular_implements/models/item/floo_powder.json
 d671f4df656967b1d8a7232deec751b324e2c6e1 assets/irregular_implements/models/item/floo_sign.json
