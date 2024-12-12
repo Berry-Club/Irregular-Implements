@@ -116,11 +116,11 @@ object ModDataComponents {
                 .networkSynchronized(BlockDataComponent.STREAM_CODEC)
         }
 
-    val ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Boolean>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("enabled") {
+    val CHARGE: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("charge") {
             it
-                .persistent(Codec.BOOL)
-                .networkSynchronized(ByteBufCodecs.BOOL)
+                .persistent(Codec.INT)
+                .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
 }
