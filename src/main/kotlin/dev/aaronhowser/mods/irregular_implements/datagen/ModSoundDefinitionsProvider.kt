@@ -24,5 +24,46 @@ class ModSoundDefinitionsProvider(
                 .subtitle(ModLanguageProvider.Subtitles.FART)
         )
 
+        add(
+            ModSounds.EXTRACTINATOR,
+            SoundDefinition.definition()
+                .with(
+                    sound(OtherUtil.modResource("extractinator"), SoundDefinition.SoundType.SOUND)
+                )
+        )
+
+        add(
+            ModSounds.NOTIFICATION,
+            SoundDefinition.definition()
+                .with(
+                    sound(OtherUtil.modResource("notification"), SoundDefinition.SoundType.SOUND)
+                )
+        )
+
+        add(
+            ModSounds.REVIVE,
+            SoundDefinition.definition()
+                .with(
+                    sound(OtherUtil.modResource("revive"), SoundDefinition.SoundType.SOUND)
+                )
+        )
+
+        add(
+            ModSounds.TELEPORT,
+            SoundDefinition.definition()
+                .with(
+                    sound(OtherUtil.modResource("teleport"), SoundDefinition.SoundType.SOUND)
+                )
+        )
+
+        add(
+            ModSounds.WHITE_STONE_ACTIVATE,
+            SoundDefinition.definition()
+                .with(
+                    sound(OtherUtil.modResource("white_stone_activate"), SoundDefinition.SoundType.SOUND)
+                )
+        )
+
+
     }
 }

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.effect.MobEffectInstance
@@ -44,7 +45,7 @@ class WhiteStoneItem : Item(
             entity.level().playSound(
                 null,
                 entity.blockPosition(),
-                SoundEvents.ZOMBIE_VILLAGER_CURE,
+                ModSounds.WHITE_STONE_ACTIVATE.get(),
                 entity.soundSource,
             )
 

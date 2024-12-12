@@ -1,8 +1,33 @@
 {
+  "extractinator": {
+    "sounds": [
+      "irregular_implements:extractinator"
+    ]
+  },
   "fart": {
     "sounds": [
       "irregular_implements:fart"
     ],
     "subtitle": "subtitle.irregular_implements.fart"
+  },
+  "notification": {
+    "sounds": [
+      "irregular_implements:notification"
+    ]
+  },
+  "revive": {
+    "sounds": [
+      "irregular_implements:revive"
+    ]
+  },
+  "teleport": {
+    "sounds": [
+      "irregular_implements:teleport"
+    ]
+  },
+  "white_stone_activate": {
+    "sounds": [
+      "irregular_implements:white_stone_activate"
+    ]
   }
 }
