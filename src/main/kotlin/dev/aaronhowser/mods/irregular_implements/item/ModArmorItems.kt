@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
@@ -88,7 +89,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.HELMET,
             Item.Properties()
-                .durability(ArmorItem.Type.HELMET.getDurability(15))
+                .durability(Items.DIAMOND_HELMET.defaultInstance.maxDamage)
                 .rarity(Rarity.UNCOMMON)
         )
     }
@@ -98,7 +99,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.CHESTPLATE,
             Item.Properties()
-                .durability(ArmorItem.Type.CHESTPLATE.getDurability(15))
+                .durability(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage)
                 .rarity(Rarity.UNCOMMON)
         )
     }
@@ -108,7 +109,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.LEGGINGS,
             Item.Properties()
-                .durability(ArmorItem.Type.LEGGINGS.getDurability(15))
+                .durability(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage)
                 .rarity(Rarity.UNCOMMON)
         )
     }
@@ -118,7 +119,7 @@ object ModArmorItems {
             ModArmorMaterials.SPECTRE,
             ArmorItem.Type.BOOTS,
             Item.Properties()
-                .durability(ArmorItem.Type.BOOTS.getDurability(15))
+                .durability(Items.DIAMOND_BOOTS.defaultInstance.maxDamage)
                 .rarity(Rarity.UNCOMMON)
         )
     }
