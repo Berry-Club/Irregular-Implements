@@ -124,7 +124,6 @@ class ModLanguageProvider(
         addItem(ModItems.BIOME_SENSOR, "Biome Sensor")
         addItem(ModItems.LUMINOUS_POWDER, "Luminous Powder")
         addItem(ModItems.PLATE_BASE, "Plate Base")
-        addItem(ModItems.PRECIOUS_EMERALD, "Precious Emerald")
         addItem(ModItems.LOTUS_BLOSSOM, "Lotus Blossom")
         addItem(ModItems.GOLDEN_EGG, "Golden Egg")
         addItem(ModItems.BLACKOUT_POWDER, "Blackout Powder")

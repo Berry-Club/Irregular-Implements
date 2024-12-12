@@ -12,18 +12,20 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModItems {
 
-    //TODO: Recipes and info for pre 1.12 items and blocks
-
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
+
+    // Ingredients
+    val TRANSFORMATION_CORE = basic("transformation_core")
+    val OBSIDIAN_ROD = basic("obsidian_rod")
+    val EVIL_TEAR = basic("evil_tear")
+    val BIOME_SENSOR = basic("biome_sensor")
 
     // Not above 1.7
     val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
         register("biome_capsule") { BiomeCapsuleItem() }
     val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
         register("biome_painter") { BiomePainterItem() }
-    val TRANSFORMATION_CORE = basic("transformation_core")
-    val OBSIDIAN_ROD = basic("obsidian_rod")
     val DROP_FILTER = basic("drop_filter")
     val VOIDING_DROP_FILTER = basic("voiding_drop_filter")
     val VOID_STONE = basic("void_stone")
@@ -48,12 +50,9 @@ object ModItems {
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
     val SAKANADE_SPORES = basic("sakanade_spores")
-    val EVIL_TEAR = basic("evil_tear")
     val ECTOPLASM = basic("ectoplasm")
-    val BIOME_SENSOR = basic("biome_sensor")
     val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val PLATE_BASE = basic("plate_base")
-    val PRECIOUS_EMERALD = basic("precious_emerald")
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =

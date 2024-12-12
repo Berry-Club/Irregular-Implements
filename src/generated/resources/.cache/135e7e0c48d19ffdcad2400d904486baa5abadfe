@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-12T01:37:43.9190168	Item Models: irregular_implements
+// 1.21.1	2024-12-12T04:15:26.6474139	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -101,7 +101,6 @@ fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item
 753048c5304fe3f27ab27a7815fbb2704d077287 assets/irregular_implements/models/item/portable_ender_porter.json
 5b611da92a5119bfd819f9f5343c9b4efc0e572f assets/irregular_implements/models/item/portable_sound_dampener.json
 4214406cc226378f86df85b4a9572cd4e578b286 assets/irregular_implements/models/item/portkey.json
-d6d7268794599910379dbb06671188e7fa11d671 assets/irregular_implements/models/item/precious_emerald.json
 ddf6a28c4e17c83daffe022d026902960a5f64d0 assets/irregular_implements/models/item/redstone_activator.json
 a2c6fcdae70e30c2d8354819f1b3f482eb81a86a assets/irregular_implements/models/item/redstone_activator_middle.json
 e209a91eb52d35d8a2e9c3234a3b91ad336f705f assets/irregular_implements/models/item/redstone_activator_right.json
