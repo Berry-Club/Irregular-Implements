@@ -19,9 +19,9 @@ object ModItems {
 
     // Not above 1.7
     val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
-        register("biome_capsule") { BiomeCapsuleItem() }  // throw on ground, it absorbs the biome, generates points with time
+        register("biome_capsule") { BiomeCapsuleItem() }
     val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
-        register("biome_painter") { BiomePainterItem() }  // right click on block, changes biome to first biome capsule, uses points
+        register("biome_painter") { BiomePainterItem() }
     val FLASK_OF_SPECTRE = basic("flask_of_spectre")
     val TRANSFORMATION_CORE = basic("transformation_core")
     val OBSIDIAN_ROD = basic("obsidian_rod")
@@ -35,7 +35,7 @@ object ModItems {
     // Not above 1.6.4
     val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
     val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
-        register("block_mover") { BlockMoverItem() }  // pick up and place blocks, uses durability
+        register("block_mover") { BlockMoverItem() }
     val DIAMOND_BREAKER = basic("diamond_breaker")  // upgrade to block breaker
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =

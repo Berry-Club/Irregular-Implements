@@ -24,7 +24,7 @@ import net.neoforged.neoforge.event.level.BlockEvent
 
 class BlockMoverItem : Item(
     Properties()
-        .stacksTo(1)
+        .durability(99)
 ) {
 
     override fun onItemUseFirst(stack: ItemStack, context: UseOnContext): InteractionResult {
@@ -36,7 +36,17 @@ class BlockMoverItem : Item(
 
         val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA)
 
-        return if (blockDataComponent == null) tryPickUpBlock(player, stack, context) else tryPlaceBlock(player, stack, context)
+        val result = if (blockDataComponent == null) tryPickUpBlock(player, stack, context) else tryPlaceBlock(player, stack, context)
+
+        // Damage the item when placing a block
+        if (blockDataComponent != null
+            && result.indicateItemUse()
+            && !player.hasInfiniteMaterials()
+        ) {
+            stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack))
+        }
+
+        return result
     }
 
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
