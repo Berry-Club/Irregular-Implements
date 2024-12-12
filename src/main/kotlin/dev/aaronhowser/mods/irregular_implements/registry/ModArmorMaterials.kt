@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
+import net.minecraft.util.Mth
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.ArmorMaterials
@@ -64,6 +65,7 @@ object ModArmorMaterials {
                 .leg(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.LEGGINGS))
                 .chestplate(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.CHESTPLATE))
                 .helmet(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.HELMET))
+                .enchantValue(Mth.ceil(ArmorMaterials.GOLD.value().enchantmentValue * 1.5))
         )
 
 
@@ -84,6 +86,11 @@ object ModArmorMaterials {
         private var equipSound: Holder<SoundEvent> = SoundEvents.ARMOR_EQUIP_GENERIC
         private var repairIngredient = Supplier { Ingredient.EMPTY }
         private val layers = mutableListOf<ArmorMaterial.Layer>()
+
+        fun enchantValue(value: Int): Builder {
+            enchantValue = value
+            return this
+        }
 
         fun boot(armorAmount: Int): Builder {
             bootsArmour = armorAmount
