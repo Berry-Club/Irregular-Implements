@@ -11,34 +11,36 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.IntegerProperty
 
 class ShockAbsorberBlock : Block(Properties.of()) {
 
     companion object {
-        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+        val POWER: IntegerProperty = BlockStateProperties.POWER
     }
 
     init {
         registerDefaultState(
             defaultBlockState()
-                .setValue(ENABLED, false)
+                .setValue(POWER, 0)
         )
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(ENABLED)
+        builder.add(POWER)
     }
 
     override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
-        if (state.getValue(ENABLED)) return
+        val currentPower = state.getValue(POWER)
+        val newPower = fallDistance.toInt().coerceIn(0, 15)
+        if (currentPower > newPower) return
 
-        level.scheduleTick(pos, this, 20)
-        level.setBlockAndUpdate(pos, state.setValue(ENABLED, true))
+        level.scheduleTick(pos, this, 40)
+        level.setBlockAndUpdate(pos, state.setValue(POWER, newPower))
     }
 
     override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-        level.setBlockAndUpdate(pos, state.setValue(ENABLED, false))
+        level.setBlockAndUpdate(pos, state.setValue(POWER, 0))
     }
 
     override fun isSignalSource(state: BlockState): Boolean {
@@ -46,7 +48,7 @@ class ShockAbsorberBlock : Block(Properties.of()) {
     }
 
     override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return if (state.getValue(ENABLED)) 15 else 0
+        return state.getValue(POWER)
     }
 
 }
