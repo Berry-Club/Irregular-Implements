@@ -49,6 +49,43 @@ class ModBlockStateProvider(
         directionalAcceleratorPlate()
         redirectorPlate()
         moonPhaseDetector()
+        shockAbsorber()
+    }
+
+    private fun shockAbsorber() {
+        val block = ModBlocks.SHOCK_ABSORBER.get()
+
+        val sideTexture = modLoc("block/shock_absorber/side")
+        val bottomTexture = modLoc("block/shock_absorber/bottom")
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val isActive = it.getValue(ShockAbsorberBlock.POWER) > 0
+
+                val modelName = name(block) + if (isActive) "_active" else ""
+                val topTexture = modLoc("block/shock_absorber/top" + if (isActive) "_active" else "")
+
+                val model = models()
+                    .cubeBottomTop(
+                        modelName,
+                        sideTexture,
+                        bottomTexture,
+                        topTexture
+                    )
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/shock_absorber"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun moonPhaseDetector() {

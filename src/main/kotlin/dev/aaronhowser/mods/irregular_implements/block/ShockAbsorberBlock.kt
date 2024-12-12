@@ -33,9 +33,9 @@ class ShockAbsorberBlock : Block(Properties.of()) {
     override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
         val currentPower = state.getValue(POWER)
         val newPower = fallDistance.toInt().coerceIn(0, 15)
-        if (currentPower > newPower) return
+        if (currentPower >= newPower) return
 
-        level.scheduleTick(pos, this, 40)
+        level.scheduleTick(pos, this, 20)
         level.setBlockAndUpdate(pos, state.setValue(POWER, newPower))
     }
 
