@@ -22,43 +22,11 @@ object ModInformationRecipes {
 
     private fun getBasicInformationRecipes(): List<EmiInfoRecipe> {
 
-        val itemsWithoutBasicInfo = listOf(
-            ModItems.SPECTRE_BOOTS,
-            ModBlocks.OAK_PLATFORM,
-            ModBlocks.SPRUCE_PLATFORM,
-            ModBlocks.BIRCH_PLATFORM,
-            ModBlocks.JUNGLE_PLATFORM,
-            ModBlocks.ACACIA_PLATFORM,
-            ModBlocks.DARK_OAK_PLATFORM,
-            ModBlocks.CRIMSON_PLATFORM,
-            ModBlocks.WARPED_PLATFORM,
-            ModBlocks.MANGROVE_PLATFORM,
-            ModBlocks.BAMBOO_PLATFORM,
-            ModBlocks.CHERRY_PLATFORM,
-            ModBlocks.SUPER_LUBRICANT_PLATFORM,
-            ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM,
-            ModBlocks.BIOME_GLASS,
-            ModBlocks.BIOME_STONE_BRICKS,
-            ModBlocks.BIOME_STONE_BRICKS_CHISELED,
-            ModBlocks.BIOME_STONE_BRICKS_CRACKED,
-            ModBlocks.BIOME_STONE,
-            ModBlocks.BIOME_COBBLESTONE,
-            ModItems.OBSIDIAN_ROD,
-            ModItems.TRANSFORMATION_CORE,
-            ModItems.EVIL_TEAR,
-            ModItems.BIOME_SENSOR,
-            ModItems.PLATE_BASE,
-            ModItems.PRECIOUS_EMERALD,
-            ModItems.BEAN_STEW,
-            ModItems.SPECTRE_INGOT,
-            ModItems.SPECTRE_STRING
-        ).map { it.get() }
-
-        val itemsWithBasicInfo = ModItems.ITEM_REGISTRY.entries.map { it.get() } - itemsWithoutBasicInfo.toSet()
+        val items = ModItems.ITEM_REGISTRY.entries.map { it.get() }
 
         return buildList {
 
-            for (itemLike: ItemLike in itemsWithBasicInfo) {
+            for (itemLike: ItemLike in items) {
                 val item = itemLike.asItem()
 
                 val infoString = ModLanguageProvider.getInfoString(item)

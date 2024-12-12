@@ -27,9 +27,9 @@ class ModItemTagsProvider(
         private fun common(id: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
 
         val GRASS_SEEDS = create("grass_seeds")
+        val SUPER_LUBRICATED_BLOCKS = create("super_lubricated")
         val C_CROPS_BEAN = common("crops/bean")
         val C_RODS_OBSIDIAN = common("rods/obsidian")
-        val SUPER_LUBRICATED_BLOCKS = common("super_lubricated")
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
