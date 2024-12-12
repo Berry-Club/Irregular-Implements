@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.*
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -113,6 +114,13 @@ object ModDataComponents {
             it
                 .persistent(BlockDataComponent.CODEC)
                 .networkSynchronized(BlockDataComponent.STREAM_CODEC)
+        }
+
+    val ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Boolean>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("enabled") {
+            it
+                .persistent(Codec.BOOL)
+                .networkSynchronized(ByteBufCodecs.BOOL)
         }
 
 }
