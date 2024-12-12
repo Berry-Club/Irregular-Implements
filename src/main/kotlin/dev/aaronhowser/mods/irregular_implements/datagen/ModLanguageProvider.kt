@@ -256,6 +256,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.NATURE_CORE, "Nature Core")
         addBlock(ModBlocks.RAINBOW_LAMP, "Rainbow Lamp")
         addBlock(ModBlocks.LOTUS, "Lotus")
+        addBlock(ModBlocks.MOON_PHASE_DETECTOR, "Moon Phase Detector")
 
         addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
         addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")
