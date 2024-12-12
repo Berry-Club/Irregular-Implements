@@ -62,11 +62,7 @@ class ModBlockStateProvider(
 
                 val name = name(block) + if (isInverted) "_inverted" else ""
 
-                val topTexture = if (isInverted) {
-                    modLoc("block/moon_phase_detector_top_inverted")
-                } else {
-                    modLoc("block/moon_phase_detector_top")
-                }
+                val topTexture = modLoc("block/moon_phase_detector_top" + if (isInverted) "_inverted" else "")
 
                 val model = models()
                     .withExistingParent(name, mcLoc("block/daylight_detector"))
