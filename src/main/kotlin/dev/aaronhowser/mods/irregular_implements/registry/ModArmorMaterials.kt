@@ -55,6 +55,7 @@ object ModArmorMaterials {
                 .armor(1)
         )
 
+    //TODO: Make the entity slightly transparent
     val SPECTRE: DeferredHolder<ArmorMaterial, ArmorMaterial> =
         register(
             "spectre",
@@ -68,9 +69,9 @@ object ModArmorMaterials {
 
 
     private fun register(id: String, builder: Builder): DeferredHolder<ArmorMaterial, ArmorMaterial> {
-        val layer = ArmorMaterial.Layer(OtherUtil.modResource(id))
+        val defaultLayer = ArmorMaterial.Layer(OtherUtil.modResource(id))
 
-        return ARMOR_MATERIAL_REGISTRY.register(id, Supplier { builder.build(layer) })
+        return ARMOR_MATERIAL_REGISTRY.register(id, Supplier { builder.addLayer(defaultLayer).build() })
     }
 
     private class Builder {
@@ -83,6 +84,7 @@ object ModArmorMaterials {
         private var enchantValue = 10
         private var equipSound: Holder<SoundEvent> = SoundEvents.ARMOR_EQUIP_GENERIC
         private var repairIngredient = Supplier { Ingredient.EMPTY }
+        private val layers = mutableListOf<ArmorMaterial.Layer>()
 
         fun boot(armorAmount: Int): Builder {
             bootsArmour = armorAmount
@@ -122,7 +124,12 @@ object ModArmorMaterials {
             return this
         }
 
-        fun build(layer: ArmorMaterial.Layer): ArmorMaterial {
+        fun addLayer(layer: ArmorMaterial.Layer): Builder {
+            layers.add(layer)
+            return this
+        }
+
+        fun build(): ArmorMaterial {
             return ArmorMaterial(
                 mapOf(
                     ArmorItem.Type.BOOTS to bootsArmour,
@@ -133,7 +140,7 @@ object ModArmorMaterials {
                 enchantValue,
                 equipSound,
                 repairIngredient,
-                listOf(layer),
+                layers,
                 toughness,
                 knockbackResist
             )
