@@ -55,7 +55,6 @@ object ModArmorMaterials {
                 .armor(1)
         )
 
-    //TODO: Make the entity slightly transparent
     val SPECTRE: DeferredHolder<ArmorMaterial, ArmorMaterial> =
         register(
             "spectre",
