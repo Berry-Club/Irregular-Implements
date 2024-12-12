@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
+import net.minecraft.world.item.ArmorMaterials
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
 import net.neoforged.neoforge.common.Tags
@@ -23,16 +24,47 @@ object ModArmorMaterials {
         DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, IrregularImplements.ID)
 
     val WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("water_walking", Builder().repair(Tags.Items.INGOTS_IRON).boot(1))
+        register(
+            "water_walking",
+            Builder()
+                .repair(Tags.Items.INGOTS_IRON)
+                .armor(1)
+        )
 
     val OBSIDIAN_WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("obsidian_water_walking", Builder().repair(Tags.Items.INGOTS_IRON).boot(1))
+        register(
+            "obsidian_water_walking",
+            Builder()
+                .repair(Tags.Items.INGOTS_IRON)
+                .armor(1)
+        )
 
     val LAVA_WADERS: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("lava_waders", Builder().repair(Tags.Items.INGOTS_IRON).boot(1))
+        register(
+            "lava_waders",
+            Builder()
+                .repair(Tags.Items.INGOTS_IRON)
+                .armor(1)
+        )
 
     val MAGIC: DeferredHolder<ArmorMaterial, ArmorMaterial> =
-        register("magic", Builder().repair(Tags.Items.LEATHERS).helmet(1))
+        register(
+            "magic",
+            Builder()
+                .repair(Tags.Items.LEATHERS)
+                .armor(1)
+        )
+
+    val SPECTRE: DeferredHolder<ArmorMaterial, ArmorMaterial> =
+        register(
+            "spectre",
+            Builder()
+                .repair(ModItems.SPECTRE_INGOT)
+                .boot(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.BOOTS))
+                .leg(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.LEGGINGS))
+                .chestplate(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.CHESTPLATE))
+                .helmet(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.HELMET))
+        )
 
 
     private fun register(id: String, builder: Builder): DeferredHolder<ArmorMaterial, ArmorMaterial> {
@@ -52,18 +84,41 @@ object ModArmorMaterials {
         private var equipSound: Holder<SoundEvent> = SoundEvents.ARMOR_EQUIP_GENERIC
         private var repairIngredient = Supplier { Ingredient.EMPTY }
 
-        fun helmet(armour: Int): Builder {
-            helmetArmour = armour
+        fun boot(armorAmount: Int): Builder {
+            bootsArmour = armorAmount
             return this
         }
 
-        fun boot(armour: Int): Builder {
-            bootsArmour = armour
+        fun leg(armorAmount: Int): Builder {
+            legsArmour = armorAmount
+            return this
+        }
+
+        fun chestplate(armorAmount: Int): Builder {
+            chestplateArmour = armorAmount
+            return this
+        }
+
+        fun helmet(armorAmount: Int): Builder {
+            helmetArmour = armorAmount
+            return this
+        }
+
+        fun armor(armorAmount: Int): Builder {
+            bootsArmour = armorAmount
+            legsArmour = armorAmount
+            chestplateArmour = armorAmount
+            helmetArmour = armorAmount
             return this
         }
 
         fun repair(tag: TagKey<Item>): Builder {
             repairIngredient = Supplier { Ingredient.of(tag) }
+            return this
+        }
+
+        fun repair(itemHolder: Holder<Item>): Builder {
+            repairIngredient = Supplier { Ingredient.of(itemHolder.value()) }
             return this
         }
 

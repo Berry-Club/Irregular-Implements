@@ -96,6 +96,14 @@ object ModItems {
         register("obsidian_water_walking_boots") { ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS }
     val LAVA_WADERS: DeferredItem<ArmorItem> =
         register("lava_waders") { ModArmorItems.LAVA_WADERS }   //TODO: Advancement joking about the ui bar
+    val SPECTRE_HELMET: DeferredItem<ArmorItem> =
+        register("spectre_helmet") { ModArmorItems.SPECTRE_HELMET }
+    val SPECTRE_CHESTPLATE: DeferredItem<ArmorItem> =
+        register("spectre_chestplate") { ModArmorItems.SPECTRE_CHESTPLATE }
+    val SPECTRE_LEGGINGS: DeferredItem<ArmorItem> =
+        register("spectre_leggings") { ModArmorItems.SPECTRE_LEGGINGS }
+    val SPECTRE_BOOTS: DeferredItem<ArmorItem> =
+        register("spectre_boots") { ModArmorItems.SPECTRE_BOOTS }
 
     // Weather Eggs
     val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =

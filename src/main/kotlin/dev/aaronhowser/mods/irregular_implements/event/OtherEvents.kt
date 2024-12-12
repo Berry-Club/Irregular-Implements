@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.BlockMoverItem
+import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
 import dev.aaronhowser.mods.irregular_implements.item.WhiteStoneItem
 import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData
 import net.minecraft.world.InteractionHand
@@ -28,6 +29,7 @@ object OtherEvents {
     @SubscribeEvent
     fun afterEntityDamaged(event: LivingDamageEvent.Post) {
         ImbueEffect.handleAttackImbues(event)
+        ModArmorItems.handleSpectreArmorAttack(event)
     }
 
     @SubscribeEvent

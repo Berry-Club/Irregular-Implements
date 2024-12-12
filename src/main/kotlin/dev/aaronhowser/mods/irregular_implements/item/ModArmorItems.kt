@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
@@ -21,6 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
 object ModArmorItems {
@@ -78,6 +80,46 @@ object ModArmorItems {
             Item.Properties()
                 .durability(ArmorItem.Type.HELMET.getDurability(15))
                 .rarity(Rarity.RARE)
+        )
+    }
+
+    val SPECTRE_HELMET by lazy {
+        ArmorItem(
+            ModArmorMaterials.SPECTRE,
+            ArmorItem.Type.HELMET,
+            Item.Properties()
+                .durability(ArmorItem.Type.HELMET.getDurability(15))
+                .rarity(Rarity.UNCOMMON)
+        )
+    }
+
+    val SPECTRE_CHESTPLATE by lazy {
+        ArmorItem(
+            ModArmorMaterials.SPECTRE,
+            ArmorItem.Type.CHESTPLATE,
+            Item.Properties()
+                .durability(ArmorItem.Type.CHESTPLATE.getDurability(15))
+                .rarity(Rarity.UNCOMMON)
+        )
+    }
+
+    val SPECTRE_LEGGINGS by lazy {
+        ArmorItem(
+            ModArmorMaterials.SPECTRE,
+            ArmorItem.Type.LEGGINGS,
+            Item.Properties()
+                .durability(ArmorItem.Type.LEGGINGS.getDurability(15))
+                .rarity(Rarity.UNCOMMON)
+        )
+    }
+
+    val SPECTRE_BOOTS by lazy {
+        ArmorItem(
+            ModArmorMaterials.SPECTRE,
+            ArmorItem.Type.BOOTS,
+            Item.Properties()
+                .durability(ArmorItem.Type.BOOTS.getDurability(15))
+                .rarity(Rarity.UNCOMMON)
         )
     }
 
@@ -152,6 +194,19 @@ object ModArmorItems {
             entity.displayName ?: entity.name,
             fluidBelow.fluidType.description,
         )
+    }
+
+    fun handleSpectreArmorAttack(event: LivingDamageEvent.Post) {
+        val attacker = event.source.entity as? LivingEntity ?: return
+
+        val wearingFullSpectreArmor = attacker.getItemBySlot(EquipmentSlot.HEAD).`is`(ModItems.SPECTRE_HELMET)
+                && attacker.getItemBySlot(EquipmentSlot.CHEST).`is`(ModItems.SPECTRE_CHESTPLATE)
+                && attacker.getItemBySlot(EquipmentSlot.LEGS).`is`(ModItems.SPECTRE_LEGGINGS)
+                && attacker.getItemBySlot(EquipmentSlot.FEET).`is`(ModItems.SPECTRE_BOOTS)
+
+        if (!wearingFullSpectreArmor) return
+
+        println("Spectre armor attack")
     }
 
 }

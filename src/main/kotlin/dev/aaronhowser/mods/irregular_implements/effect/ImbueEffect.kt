@@ -67,7 +67,7 @@ class ImbueEffect(
                 && entity.random.nextFloat() <= ServerConfig.SPECTRE_IMBUE_CHANCE.get()
             ) {
                 event.isCanceled = true
-                entity.hurtMarked = true
+                entity.hurtMarked = true    //TODO: Is this correctly marking them as invulnerable?
             }
         }
 
