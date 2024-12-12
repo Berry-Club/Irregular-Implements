@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
@@ -38,6 +39,13 @@ class WhiteStoneItem : Item(
             event.isCanceled = true
             whiteStone.set(ModDataComponents.ENABLED, false)
 
+            entity.level().playSound(
+                null,
+                entity.blockPosition(),
+                SoundEvents.ZOMBIE_VILLAGER_CURE,
+                entity.soundSource,
+            )
+
             entity.health = entity.maxHealth
         }
     }
@@ -50,6 +58,13 @@ class WhiteStoneItem : Item(
             || level.dayTime !in 17000..19000
             || !level.canSeeSky(entity.blockPosition())
         ) return
+
+        level.playSound(
+            null,
+            entity.blockPosition(),
+            SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
+            entity.soundSource,
+        )
 
         stack.set(ModDataComponents.ENABLED, true)
     }
