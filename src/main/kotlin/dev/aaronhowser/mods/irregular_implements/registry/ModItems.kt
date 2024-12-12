@@ -23,7 +23,7 @@ object ModItems {
     val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
         register("biome_painter") { BiomePainterItem() }  // right click on block, changes biome to first biome capsule, uses points
     val FLASK_OF_SPECTRE = basic("flask_of_spectre")
-    val GINTO = basic("ginto")
+    val GINTO = basic("ginto")  // click a spectre spawned by a player's death to respawn them and teleport them to the spectre
     val TRANSFORMATION_CORE = basic("transformation_core")
     val DROP_FILTER = basic("drop_filter")  // prevents you from picking up items that match filter
     val VOIDING_DROP_FILTER = basic("voiding_drop_filter")  // voids items that match filter when picked up

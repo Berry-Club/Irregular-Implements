@@ -1074,6 +1074,53 @@ class ModRecipeProvider(
                 'L' to ing(Tags.Items.GEMS_LAPIS),
                 'C' to ing(Items.FIRE_CHARGE),
             )
+        ),
+        shapedRecipe(
+            ModBlocks.SHOCK_ABSORBER,
+            "WWW,WAW,DDD",
+            mapOf(
+                'W' to ing(ItemTags.WOOL),
+                'A' to ing(Items.WATER_BUCKET),
+                'D' to ing(ItemTags.DIRT)
+            )
+        ),
+        shapedRecipe(
+            ModItems.BIOME_CAPSULE,
+            "DTE,GQG,OOO",
+            mapOf(
+                'D' to ing(Tags.Items.STORAGE_BLOCKS_DIAMOND),
+                'E' to ing(Tags.Items.GEMS_EMERALD),
+                'T' to ing(ModItems.TRANSFORMATION_CORE),
+                'Q' to ing(Tags.Items.GEMS_QUARTZ),
+                'G' to ing(Tags.Items.GLASS_BLOCKS),
+                'O' to ing(Tags.Items.OBSIDIANS),
+            )
+        ),
+        shapedRecipe(
+            ModItems.BIOME_PAINTER,
+            " T , W , O ",
+            mapOf(
+                'T' to ing(ModItems.TRANSFORMATION_CORE),
+                'W' to ing(ItemTags.WOOL),
+                'O' to ing(ModItemTagsProvider.C_RODS_OBSIDIAN),
+            )
+        ),
+        shapedRecipe(
+            ModItems.DROP_FILTER,
+            "LSL,SFS,LSL",
+            mapOf(
+                'L' to ing(Tags.Items.LEATHERS),
+                'S' to ing(Tags.Items.STRINGS),
+                'F' to ing(Items.FLINT),
+            )
+        ),
+        shapedRecipe(
+            ModItems.VOID_STONE,
+            " O ,OEO, O ",
+            mapOf(
+                'O' to ing(Tags.Items.STONES),
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+            )
         )
     )
 
@@ -1170,6 +1217,13 @@ class ModRecipeProvider(
             ModItems.GRASS_SEEDS,
             listOf(
                 ing(Items.GRASS_BLOCK)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.VOIDING_DROP_FILTER,
+            listOf(
+                ing(ModItems.DROP_FILTER),
+                ing(ModItems.VOID_STONE)
             )
         )
     )

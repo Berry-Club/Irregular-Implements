@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:storage_blocks/diamond"
+    },
+    "E": {
+      "tag": "c:gems/emerald"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "Q": {
+      "tag": "c:gems/quartz"
+    },
+    "T": {
+      "item": "irregular_implements:transformation_core"
+    }
+  },
+  "pattern": [
+    "DTE",
+    "GQG",
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:biome_capsule"
+  }
+}

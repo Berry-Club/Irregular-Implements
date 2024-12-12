@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "LSL",
+    "SFS",
+    "LSL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:drop_filter"
+  }
+}

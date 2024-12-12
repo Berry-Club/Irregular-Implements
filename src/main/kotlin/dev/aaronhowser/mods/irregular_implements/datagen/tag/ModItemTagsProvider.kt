@@ -23,13 +23,13 @@ class ModItemTagsProvider(
 ) : ItemTagsProvider(pOutput, pLookupProvider, pBlockTags, IrregularImplements.ID, existingFileHelper) {
 
     companion object {
-        private fun create(id: String): TagKey<Item> {
-            return ItemTags.create(OtherUtil.modResource(id))
-        }
+        private fun create(id: String): TagKey<Item> = ItemTags.create(OtherUtil.modResource(id))
+        private fun common(id: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
 
         val GRASS_SEEDS = create("grass_seeds")
         val RUNE_DUSTS = create("rune_dusts")
-        val C_CROPS_BEAN: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "crops/bean"))
+        val C_CROPS_BEAN = common("crops/bean")
+        val C_RODS_OBSIDIAN = common("rods/obsidian")   //TODO: Add obsidian rod
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
