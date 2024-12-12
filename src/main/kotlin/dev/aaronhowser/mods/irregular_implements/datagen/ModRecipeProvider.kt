@@ -1182,7 +1182,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.BLOCK_REPLACER,
+            ModItems.BLOCK_REPLACER,
             " GF, RL,R  ",
             mapOf(
                 'G' to ing(Tags.Items.NUGGETS_GOLD),

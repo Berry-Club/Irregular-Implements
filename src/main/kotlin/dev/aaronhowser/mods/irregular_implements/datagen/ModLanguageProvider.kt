@@ -153,6 +153,7 @@ class ModLanguageProvider(
         addItem(ModItems.MAGNETIC_FORCE, "Magnetic Force")
         addItem(ModItems.PORTABLE_ENDER_PORTER, "Portable Ender Porter")
         addItem(ModItems.DIAMOND_BREAKER, "Diamond Breaker")
+        addItem(ModItems.BLOCK_REPLACER, "Block Replacer")
 
         addItem(ModItems.FIRE_IMBUE, "Fire Imbue")
         addItem(ModItems.POISON_IMBUE, "Poison Imbue")
@@ -254,7 +255,6 @@ class ModLanguageProvider(
         addBlock(ModBlocks.ENDER_ENERGY_DISTRIBUTOR, "Ender Energy Distributor")
         addBlock(ModBlocks.SHOCK_ABSORBER, "Shock Absorber")
         addBlock(ModBlocks.AUTO_PLACER, "Auto Placer")
-        addBlock(ModBlocks.BLOCK_REPLACER, "Block Replacer")
         addBlock(ModBlocks.BLOCK_TELEPORTER, "Block Teleporter")
 
         addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
