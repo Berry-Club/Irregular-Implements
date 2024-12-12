@@ -37,6 +37,7 @@ object ModItems {
     val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
         register("block_mover") { BlockMoverItem() }
     val DIAMOND_BREAKER = basic("diamond_breaker")  // upgrade to block breaker
+    val BLOCK_REPLACER = basic("block_replacer")    // Holds 9 blocks, clicking a block will replace it with a random one
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
