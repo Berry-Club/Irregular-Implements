@@ -159,7 +159,8 @@ object ModItems {
     val MAGNETIC_FORCE = basic("magnetic_force")
 
     // Not above 1.6.4
-    val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
+    val PORTABLE_ENDER_BRIDGE: DeferredItem<PortableEnderBridgeItem> =
+        register("portable_ender_bridge") { PortableEnderBridgeItem() }
     val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
         register("block_mover") { BlockMoverItem() }
     val DIAMOND_BREAKER = basic("diamond_breaker")

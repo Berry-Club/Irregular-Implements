@@ -1131,7 +1131,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.PORTABLE_ENDER_PORTER,
+            ModItems.PORTABLE_ENDER_BRIDGE,
             "P,S,S",
             mapOf(
                 'P' to ing(ModBlocks.PRISMARINE_ENDER_BRIDGE),
