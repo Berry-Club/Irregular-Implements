@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "G": {
+      "tag": "c:nuggets/gold"
+    },
+    "L": {
+      "tag": "c:gems/lapis"
+    },
+    "R": {
+      "tag": "c:rods/obsidian"
+    }
+  },
+  "pattern": [
+    " GF",
+    " RL",
+    "R  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:block_replacer"
+  }
+}

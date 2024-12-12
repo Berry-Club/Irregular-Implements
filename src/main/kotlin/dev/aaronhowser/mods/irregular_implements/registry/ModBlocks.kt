@@ -24,7 +24,8 @@ object ModBlocks {
     val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
         registerBlock("shock_absorber") { ShockAbsorberBlock() }
     val AUTO_PLACER = basicBlock("auto_placer")
-    val BLOCK_TELEPORTER = basicBlock("block_teleporter")
+    val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Wtf does this do
+    val BLOCK_REPLACER = basicBlock("block_replacer")   // Wtf does this do
 
     val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
         registerBlock("fertilized_dirt") { FertilizedDirtBlock() }

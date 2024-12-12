@@ -1162,6 +1162,34 @@ class ModRecipeProvider(
                 'I' to ing(Tags.Items.INGOTS_IRON),
                 'D' to ing(Items.DIAMOND_PICKAXE),
             )
+        ),
+        shapedRecipe(
+            ModBlocks.AUTO_PLACER,
+            "S S,IPI,S S",
+            mapOf(
+                'S' to ing(Tags.Items.STONES),
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'P' to ing(Items.PISTON),
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BLOCK_TELEPORTER,
+            "OCO,OEO,OOO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'C' to ing(Items.COMPARATOR),
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.BLOCK_REPLACER,
+            " GF, RL,R  ",
+            mapOf(
+                'G' to ing(Tags.Items.NUGGETS_GOLD),
+                'F' to ing(Items.FLINT),
+                'R' to ing(ModItemTagsProvider.C_RODS_OBSIDIAN),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+            )
         )
     )
 
