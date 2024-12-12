@@ -21,7 +21,8 @@ object ModBlocks {
     val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
 
     // Not above 1.6.4
-    val SHOCK_ABSORBER = basicBlock("shock_absorber")
+    val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
+        registerBlock("shock_absorber") { ShockAbsorberBlock() }
     val AUTO_PLACER = basicBlock("auto_placer")
     val BLOCK_TELEPORTER = basicBlock("block_teleporter")
 
