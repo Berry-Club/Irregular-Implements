@@ -591,6 +591,7 @@ class ModLanguageProvider(
         addInfo(ModItems.BLOCK_MOVER, "Use on a block to pick it up, and use it again to place it.\n\nCan be used on blocks with Block Entities, like Chests and machines.")
         addInfo(ModItems.DIAMOND_BREAKER, "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.")
         addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
+        addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
     }
 
     //TODO: Info for Magnetic enchant

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -22,7 +23,7 @@ class PortableEnderBridgeItem : Item(
         val clipResult = level.clip(
             ClipContext(
                 player.eyePosition,
-                player.eyePosition.add(player.lookAngle.scale(300.0)),
+                player.eyePosition.add(player.lookAngle.scale(ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE.get().toDouble())),
                 ClipContext.Block.OUTLINE,
                 ClipContext.Fluid.NONE,
                 player

@@ -22,6 +22,8 @@ class ServerConfig(
         lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
 
         lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
+
+        lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
     }
 
     init {
@@ -54,6 +56,10 @@ class ServerConfig(
         SPECTRE_IMBUE_CHANCE = builder
             .comment("What is the chance that the Spectre Imbue will cancel incoming damage?")
             .defineInRange("spectreImbueChance", 0.1, 0.0, 1.0)
+
+        PORTABLE_ENDER_BRIDGE_RANGE = builder
+            .comment("How far should the Portable Ender Bridge be able to look for an Ender Anchor?")
+            .defineInRange("portableEnderBridgeRange", 300, 1, Int.MAX_VALUE)
     }
 
 }
