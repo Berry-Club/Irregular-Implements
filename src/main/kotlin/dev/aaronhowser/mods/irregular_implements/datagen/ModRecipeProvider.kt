@@ -1200,7 +1200,35 @@ class ModRecipeProvider(
                 'Q' to ing(Tags.Items.GEMS_QUARTZ),
                 'S' to ing(ItemTags.WOODEN_SLABS)
             )
-        )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_HELMET,
+            "SSS,S S",
+            mapOf(
+                'S' to ing(ModItems.SPECTRE_INGOT),
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_CHESTPLATE,
+            "S S,SSS,SSS",
+            mapOf(
+                'S' to ing(ModItems.SPECTRE_INGOT),
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_LEGGINGS,
+            "SSS,S S,S S",
+            mapOf(
+                'S' to ing(ModItems.SPECTRE_INGOT),
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_BOOTS,
+            "S S,S S",
+            mapOf(
+                'S' to ing(ModItems.SPECTRE_INGOT),
+            )
+        ),
     )
 
     private fun shapelessRecipe(
