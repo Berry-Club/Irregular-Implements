@@ -16,14 +16,17 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.PotionContents
+import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.phys.BlockHitResult
 
 object OtherUtil {
 
@@ -38,6 +41,18 @@ object OtherUtil {
 
     fun getPotionStack(potion: Holder<Potion>): ItemStack {
         return PotionContents.createItemStack(Items.POTION, potion)
+    }
+
+    fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
+        return level.clip(
+            ClipContext(
+                entity.eyePosition,
+                entity.eyePosition.add(entity.lookAngle.scale(range.toDouble())),
+                ClipContext.Block.OUTLINE,
+                ClipContext.Fluid.NONE,
+                entity
+            )
+        )
     }
 
     fun moreInfoTooltip(

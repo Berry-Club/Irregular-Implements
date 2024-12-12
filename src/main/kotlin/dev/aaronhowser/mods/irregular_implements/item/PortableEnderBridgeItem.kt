@@ -2,12 +2,12 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 
 class PortableEnderBridgeItem : Item(
@@ -20,15 +20,7 @@ class PortableEnderBridgeItem : Item(
         val usedStack = player.getItemInHand(usedHand)
         if (level.isClientSide) return InteractionResultHolder.pass(usedStack)
 
-        val clipResult = level.clip(
-            ClipContext(
-                player.eyePosition,
-                player.eyePosition.add(player.lookAngle.scale(ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE.get().toDouble())),
-                ClipContext.Block.OUTLINE,
-                ClipContext.Fluid.NONE,
-                player
-            )
-        )
+        val clipResult = OtherUtil.getPovResult(level, player, ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE.get())
 
         val pos = clipResult.blockPos
         val state = level.getBlockState(pos)
