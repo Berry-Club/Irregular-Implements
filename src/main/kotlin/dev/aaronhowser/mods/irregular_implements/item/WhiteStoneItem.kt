@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
@@ -45,6 +47,10 @@ class WhiteStoneItem : Item(
                 SoundEvents.ZOMBIE_VILLAGER_CURE,
                 entity.soundSource,
             )
+
+            entity.addEffect(MobEffectInstance(MobEffects.REGENERATION, 10 * 20))
+            entity.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 10 * 20))
+            entity.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 10 * 20, 1))
 
             entity.health = entity.maxHealth
         }
