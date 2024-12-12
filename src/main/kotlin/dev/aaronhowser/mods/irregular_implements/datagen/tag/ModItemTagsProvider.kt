@@ -29,7 +29,7 @@ class ModItemTagsProvider(
         val GRASS_SEEDS = create("grass_seeds")
         val RUNE_DUSTS = create("rune_dusts")
         val C_CROPS_BEAN = common("crops/bean")
-        val C_RODS_OBSIDIAN = common("rods/obsidian")   //TODO: Add obsidian rod
+        val C_RODS_OBSIDIAN = common("rods/obsidian")
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -39,6 +39,11 @@ class ModItemTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(C_RODS_OBSIDIAN)
+            .add(
+                ModItems.OBSIDIAN_ROD.get()
+            )
 
         this.tag(HIDE_NAME_HELMET)
             .add(

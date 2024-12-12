@@ -1098,7 +1098,7 @@ class ModRecipeProvider(
         ),
         shapedRecipe(
             ModItems.BIOME_PAINTER,
-            " T , W , O ",
+            "T,W,O",
             mapOf(
                 'T' to ing(ModItems.TRANSFORMATION_CORE),
                 'W' to ing(ItemTags.WOOL),
@@ -1120,6 +1120,14 @@ class ModRecipeProvider(
             mapOf(
                 'O' to ing(Tags.Items.STONES),
                 'E' to ing(Tags.Items.ENDER_PEARLS),
+            )
+        ),
+        shapedRecipe(
+            ModItems.OBSIDIAN_ROD,
+            3,
+            "O,O",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
             )
         )
     )
@@ -1224,6 +1232,20 @@ class ModRecipeProvider(
             listOf(
                 ing(ModItems.DROP_FILTER),
                 ing(ModItems.VOID_STONE)
+            )
+        ),
+        shapelessRecipe(
+            ModItems.TRANSFORMATION_CORE,
+            listOf(
+                ing(Tags.Items.DYES_RED),
+                ing(Tags.Items.DYES_ORANGE),
+                ing(Tags.Items.DYES_YELLOW),
+                ing(Tags.Items.DYES_GREEN),
+                ing(Tags.Items.DYES_CYAN),
+                ing(Tags.Items.DYES_PURPLE),
+                ing(Tags.Items.DYES_GRAY),
+                ing(Tags.Items.DYES_LIME),
+                ing(Tags.Items.DYES_MAGENTA),
             )
         )
     )

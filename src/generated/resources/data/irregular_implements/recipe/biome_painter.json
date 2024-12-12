@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    " T ",
-    " W ",
-    " O "
+    "T",
+    "W",
+    "O"
   ],
   "result": {
     "count": 1,

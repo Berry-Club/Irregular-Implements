@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-09T23:53:37.0915182	Item Models: irregular_implements
+// 1.21.1	2024-12-11T20:12:56.8633672	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -91,6 +91,7 @@ b59732801ab7d4c0e69648601fc074770ee8b854 assets/irregular_implements/models/item
 f48a738fdc5fe310ff6501102ce4aadf45066d09 assets/irregular_implements/models/item/magic_bean.json
 f5bc71aba2ccebe5ac0de4744720dc347a688201 assets/irregular_implements/models/item/magic_hood.json
 69be8bf61df188a2117651d62ae5d75256582f73 assets/irregular_implements/models/item/magnetic_force.json
+e35bed2bf8cc9e703e4f6555397d7d73f48f7b14 assets/irregular_implements/models/item/obsidian_rod.json
 fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item/obsidian_skull.json
 7e08bf54251f08e60adb11cd8118beefdbbc0b3d assets/irregular_implements/models/item/obsidian_skull_ring.json
 835a164b633f463f4d436298c7ad0b6a4cba0e98 assets/irregular_implements/models/item/obsidian_water_walking_boots.json

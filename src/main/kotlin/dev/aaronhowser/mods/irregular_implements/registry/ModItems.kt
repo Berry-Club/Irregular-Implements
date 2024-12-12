@@ -24,6 +24,7 @@ object ModItems {
         register("biome_painter") { BiomePainterItem() }  // right click on block, changes biome to first biome capsule, uses points
     val FLASK_OF_SPECTRE = basic("flask_of_spectre")
     val TRANSFORMATION_CORE = basic("transformation_core")
+    val OBSIDIAN_ROD = basic("obsidian_rod")
     val DROP_FILTER = basic("drop_filter")  // prevents you from picking up items that match filter
     val VOIDING_DROP_FILTER = basic("voiding_drop_filter")  // voids items that match filter when picked up
     val VOID_STONE = basic("void_stone")    // gui that deletes items you insert into it
