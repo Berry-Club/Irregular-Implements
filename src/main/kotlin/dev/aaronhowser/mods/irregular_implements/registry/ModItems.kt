@@ -15,25 +15,6 @@ object ModItems {
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
 
-    // Not above 1.7
-    val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
-        register("biome_capsule") { BiomeCapsuleItem() }
-    val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
-        register("biome_painter") { BiomePainterItem() }
-    val DROP_FILTER = basic("drop_filter")
-    val VOIDING_DROP_FILTER = basic("voiding_drop_filter")
-    val VOID_STONE = basic("void_stone")
-    val WHITE_STONE: DeferredItem<WhiteStoneItem> =
-        register("white_stone") { WhiteStoneItem() }
-    val MAGNETIC_FORCE = basic("magnetic_force")
-
-    // Not above 1.6.4
-    val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
-    val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
-        register("block_mover") { BlockMoverItem() }
-    val DIAMOND_BREAKER = basic("diamond_breaker")
-    val BLOCK_REPLACER = basic("block_replacer")
-
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
@@ -164,6 +145,26 @@ object ModItems {
     val SOUND_PATTERN = basic("sound_pattern")
     val SOUND_RECORDER = basic("sound_recorder")
     val PORTABLE_SOUND_DAMPENER = basic("portable_sound_dampener")
+
+    // Not above 1.7
+    val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
+        register("biome_capsule") { BiomeCapsuleItem() }
+    val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
+        register("biome_painter") { BiomePainterItem() }
+    val DROP_FILTER = basic("drop_filter")
+    val VOIDING_DROP_FILTER = basic("voiding_drop_filter")
+    val VOID_STONE = basic("void_stone")
+    val WHITE_STONE: DeferredItem<WhiteStoneItem> =
+        register("white_stone") { WhiteStoneItem() }
+    val MAGNETIC_FORCE = basic("magnetic_force")
+
+    // Not above 1.6.4
+    val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
+    val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
+        register("block_mover") { BlockMoverItem() }
+    val DIAMOND_BREAKER = basic("diamond_breaker")
+    val BLOCK_REPLACER = basic("block_replacer")
+
 
     // Colors
     val GRASS_SEEDS: DeferredItem<GrassSeedItem> =

@@ -16,16 +16,6 @@ object ModBlocks {
 
     val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
-    // Not above 1.7
-    val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")
-    val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
-
-    // Not above 1.6.4
-    val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
-        registerBlock("shock_absorber") { ShockAbsorberBlock() }
-    val AUTO_PLACER = basicBlock("auto_placer")
-    val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Wtf does this do
-
     val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
         registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
     val IMBUING_STATION = basicBlock("imbuing_station")
@@ -126,6 +116,16 @@ object ModBlocks {
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
     val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
+
+    // Not above 1.7
+    val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")
+    val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
+
+    // Not above 1.6.4
+    val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
+        registerBlock("shock_absorber") { ShockAbsorberBlock() }
+    val AUTO_PLACER = basicBlock("auto_placer")
+    val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Wtf does this do
 
     // Platform
     val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
