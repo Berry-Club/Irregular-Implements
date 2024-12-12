@@ -38,13 +38,11 @@ object ClientModBusEvents {
     fun registerItemColors(event: RegisterColorHandlersEvent.Item) {
         for (dyeColor in DyeColor.entries) {
             val seedItem = GrassSeedItem.getFromColor(dyeColor).get()
-            val runeDustItem = ModItems.getRuneDust(dyeColor).get()
             val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
             val colorFunction = getItemColorFromDye(dyeColor)
 
             event.register(colorFunction, seedItem)
-            event.register(colorFunction, runeDustItem)
             event.register(colorFunction, coloredGrassBlock)
         }
 

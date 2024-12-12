@@ -131,7 +131,6 @@ class ModItemModelProvider(
         for (color in DyeColor.entries) {
 
             val grassSeeds = GrassSeedItem.getFromColor(color).get()
-            val runeDust = ModItems.getRuneDust(color).get()
 
             getBuilder(getName(grassSeeds).toString())
                 .parent(ModelFile.UncheckedModelFile("item/generated"))
@@ -140,15 +139,7 @@ class ModItemModelProvider(
                 .allFaces { t, u -> u.tintindex(color.id) }
                 .end()
 
-            getBuilder(getName(runeDust).toString())
-                .parent(ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", "item/rune_dust")
-                .element()
-                .allFaces { t, u -> u.tintindex(color.id) }
-                .end()
-
             handledItems.add(grassSeeds)
-            handledItems.add(runeDust)
         }
     }
 

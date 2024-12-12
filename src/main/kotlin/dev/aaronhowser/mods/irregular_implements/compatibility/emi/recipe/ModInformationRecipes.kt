@@ -120,7 +120,6 @@ object ModInformationRecipes {
             ModItems.REDSTONE_ACTIVATOR,
             ModItems.REDSTONE_REMOTE,
             ModItems.BLAZE_AND_STEEL,
-            ModItems.RUNE_PATTERN,
             ModItems.FLOO_SIGN,
             ModItems.ID_CARD,
             ModItems.EMERALD_COMPASS,

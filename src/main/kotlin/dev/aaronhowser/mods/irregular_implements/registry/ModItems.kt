@@ -60,7 +60,6 @@ object ModItems {
         register("emerald_compass") { EmeraldCompassItem() }
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
         register("blaze_and_steel") { BlazeAndSteelItem() }
-    val RUNE_PATTERN = basic("rune_pattern")
     val PORTKEY = basic("portkey")
     val ESCAPE_ROPE = basic("escape_rope")
     val ENDER_BUCKET = basic("ender_bucket")
@@ -194,27 +193,12 @@ object ModItems {
     val GRASS_SEEDS_BLACK: DeferredItem<GrassSeedItem> =
         register("grass_seeds_black") { GrassSeedItem(dyeColor = DyeColor.BLACK) }
 
-    val RUNE_DUST_WHITE = basic("rune_dust_white")
-    val RUNE_DUST_ORANGE = basic("rune_dust_orange")
-    val RUNE_DUST_MAGENTA = basic("rune_dust_magenta")
-    val RUNE_DUST_LIGHT_BLUE = basic("rune_dust_light_blue")
-    val RUNE_DUST_YELLOW = basic("rune_dust_yellow")
-    val RUNE_DUST_LIME = basic("rune_dust_lime")
-    val RUNE_DUST_PINK = basic("rune_dust_pink")
-    val RUNE_DUST_GRAY = basic("rune_dust_gray")
-    val RUNE_DUST_LIGHT_GRAY = basic("rune_dust_light_gray")
-    val RUNE_DUST_CYAN = basic("rune_dust_cyan")
-    val RUNE_DUST_PURPLE = basic("rune_dust_purple")
-    val RUNE_DUST_BLUE = basic("rune_dust_blue")
-    val RUNE_DUST_BROWN = basic("rune_dust_brown")
-    val RUNE_DUST_GREEN = basic("rune_dust_green")
-    val RUNE_DUST_RED = basic("rune_dust_red")
-    val RUNE_DUST_BLACK = basic("rune_dust_black")
-
     // Removed items:
     // - Time in a Bottle (Use the standalone one!)
     // - Eclipsed Clock (requires TIAB)
     // - Golden Compass (redundant, use Lodestones)
+    // - Runic Dust (obscure and difficult)
+    // - Blood Stone (requires Blood Moon)
 
 
     private fun basic(id: String): DeferredItem<Item> {
@@ -223,28 +207,6 @@ object ModItems {
 
     private fun <T : Item> register(id: String, itemBuilder: (Item.Properties) -> T): DeferredItem<T> {
         return ITEM_REGISTRY.registerItem(id, itemBuilder)
-    }
-
-    //TODO: Move to rune dust class, when that's been made
-    fun getRuneDust(dyeColor: DyeColor): DeferredItem<Item> {
-        return when (dyeColor) {
-            DyeColor.WHITE -> RUNE_DUST_WHITE
-            DyeColor.ORANGE -> RUNE_DUST_ORANGE
-            DyeColor.MAGENTA -> RUNE_DUST_MAGENTA
-            DyeColor.LIGHT_BLUE -> RUNE_DUST_LIGHT_BLUE
-            DyeColor.YELLOW -> RUNE_DUST_YELLOW
-            DyeColor.LIME -> RUNE_DUST_LIME
-            DyeColor.PINK -> RUNE_DUST_PINK
-            DyeColor.GRAY -> RUNE_DUST_GRAY
-            DyeColor.LIGHT_GRAY -> RUNE_DUST_LIGHT_GRAY
-            DyeColor.CYAN -> RUNE_DUST_CYAN
-            DyeColor.PURPLE -> RUNE_DUST_PURPLE
-            DyeColor.BLUE -> RUNE_DUST_BLUE
-            DyeColor.BROWN -> RUNE_DUST_BROWN
-            DyeColor.GREEN -> RUNE_DUST_GREEN
-            DyeColor.RED -> RUNE_DUST_RED
-            DyeColor.BLACK -> RUNE_DUST_BLACK
-        }
     }
 
 }

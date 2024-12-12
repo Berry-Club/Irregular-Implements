@@ -27,7 +27,6 @@ class ModItemTagsProvider(
         private fun common(id: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
 
         val GRASS_SEEDS = create("grass_seeds")
-        val RUNE_DUSTS = create("rune_dusts")
         val C_CROPS_BEAN = common("crops/bean")
         val C_RODS_OBSIDIAN = common("rods/obsidian")
 
@@ -93,26 +92,6 @@ class ModItemTagsProvider(
                 ModItems.GRASS_SEEDS_GREEN.get(),
                 ModItems.GRASS_SEEDS_RED.get(),
                 ModItems.GRASS_SEEDS_BLACK.get(),
-            )
-
-        this.tag(RUNE_DUSTS)
-            .add(
-                ModItems.RUNE_DUST_WHITE.get(),
-                ModItems.RUNE_DUST_ORANGE.get(),
-                ModItems.RUNE_DUST_MAGENTA.get(),
-                ModItems.RUNE_DUST_LIGHT_BLUE.get(),
-                ModItems.RUNE_DUST_YELLOW.get(),
-                ModItems.RUNE_DUST_LIME.get(),
-                ModItems.RUNE_DUST_PINK.get(),
-                ModItems.RUNE_DUST_GRAY.get(),
-                ModItems.RUNE_DUST_LIGHT_GRAY.get(),
-                ModItems.RUNE_DUST_CYAN.get(),
-                ModItems.RUNE_DUST_PURPLE.get(),
-                ModItems.RUNE_DUST_BLUE.get(),
-                ModItems.RUNE_DUST_BROWN.get(),
-                ModItems.RUNE_DUST_GREEN.get(),
-                ModItems.RUNE_DUST_RED.get(),
-                ModItems.RUNE_DUST_BLACK.get(),
             )
 
     }

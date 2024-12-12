@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-11T20:13:59.0226672	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2024-12-11T20:36:00.1842063	Tags for minecraft:item mod id irregular_implements
 996ecf49e1bfe2419630ebb12ec9338e2cb73fec data/c/tags/item/crops.json
 e1a2f90f364fa88dc3a75bde96655d5523d40d0b data/c/tags/item/crops/bean.json
 e4864d4209d36a3fa46a2d0ab896b95aadaed527 data/c/tags/item/foods.json
@@ -7,4 +7,3 @@ f295023d9097dceee86fc283bed494a82c9c0156 data/c/tags/item/seeds.json
 929c63e629fa72731eb642bf2e3527ea64d16ade data/irregular_implements/tags/item/grass_seeds.json
 27129810700cab73bf23b754952138832a8a45b2 data/irregular_implements/tags/item/hide_name_helmet.json
 27129810700cab73bf23b754952138832a8a45b2 data/irregular_implements/tags/item/hide_potion_helmet.json
-d0629a4ab22d21c9a1a19c58d80458acac94f8a7 data/irregular_implements/tags/item/rune_dusts.json

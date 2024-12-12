@@ -1393,7 +1393,6 @@ class ModRecipeProvider(
                 val transBrick = ModBlocks.getStainedBrickLuminous(color).get()
 
                 val grassSeeds = GrassSeedItem.getFromColor(color)
-                val runeDust = ModItems.getRuneDust(color)
 
                 add(
                     shapedRecipe(
@@ -1449,29 +1448,6 @@ class ModRecipeProvider(
                     )
                 )
 
-                add(
-                    shapelessRecipe(
-                        runeDust,
-                        8,
-                        listOf(
-                            ing(Items.CLAY_BALL),
-                            ing(ModItems.LUMINOUS_POWDER),
-                            ing(dyeTag)
-                        )
-                    )
-                )
-
-                val runeConversionRecipe = shapedRecipe(
-                    runeDust,
-                    8,
-                    "RRR,RDR,RRR",
-                    mapOf(
-                        'R' to ing(ModItemTagsProvider.RUNE_DUSTS),
-                        'D' to ing(dyeTag)
-                    )
-                )
-
-                recipesWithNames[runeConversionRecipe] = "rune_dust_convert_$colorString"
             }
         }
     }
