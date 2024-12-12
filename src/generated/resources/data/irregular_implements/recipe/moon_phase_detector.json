@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "L": {
+      "tag": "c:gems/lapis"
+    },
+    "Q": {
+      "tag": "c:gems/quartz"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "LQL",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:moon_phase_detector"
+  }
+}

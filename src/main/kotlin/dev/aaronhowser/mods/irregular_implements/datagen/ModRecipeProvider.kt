@@ -1190,6 +1190,16 @@ class ModRecipeProvider(
                 'R' to ing(ModItemTagsProvider.C_RODS_OBSIDIAN),
                 'L' to ing(Tags.Items.GEMS_LAPIS),
             )
+        ),
+        shapedRecipe(
+            ModBlocks.MOON_PHASE_DETECTOR,
+            "GGG,LQL,SSS",
+            mapOf(
+                'G' to ing(Tags.Items.GLASS_BLOCKS_COLORLESS),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'Q' to ing(Tags.Items.GEMS_QUARTZ),
+                'S' to ing(ItemTags.WOODEN_SLABS)
+            )
         )
     )
 
