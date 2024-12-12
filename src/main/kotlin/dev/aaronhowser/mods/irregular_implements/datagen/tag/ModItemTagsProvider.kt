@@ -39,6 +39,78 @@ class ModItemTagsProvider(
 
     override fun addTags(provider: HolderLookup.Provider) {
 
+        this.tag(Tags.Items.MELEE_WEAPON_TOOLS)
+            .add(
+                ModItems.SPECTRE_SWORD.get()
+            )
+
+        this.tag(Tags.Items.MINING_TOOL_TOOLS)
+            .add(
+                ModItems.SPECTRE_PICKAXE.get(),
+                ModItems.SPECTRE_SHOVEL.get(),
+                ModItems.SPECTRE_AXE.get()
+            )
+
+        this.tag(ItemTags.AXES)
+            .add(
+                ModItems.SPECTRE_AXE.get()
+            )
+
+        this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
+            .add(
+                ModItems.SPECTRE_INGOT.get()
+            )
+
+        this.tag(ItemTags.SWORDS)
+            .add(
+                ModItems.SPECTRE_SWORD.get()
+            )
+
+        this.tag(ItemTags.SHOVELS)
+            .add(
+                ModItems.SPECTRE_SHOVEL.get()
+            )
+
+        this.tag(ItemTags.PICKAXES)
+            .add(
+                ModItems.SPECTRE_PICKAXE.get()
+            )
+
+        this.tag(ItemTags.TRIMMABLE_ARMOR)
+            .remove(
+                ModItems.SPECTRE_HELMET.get(),
+                ModItems.SPECTRE_CHESTPLATE.get(),
+                ModItems.SPECTRE_LEGGINGS.get(),
+                ModItems.SPECTRE_BOOTS.get(),
+                ModItems.WATER_WALKING_BOOTS.get(),
+                ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
+                ModItems.LAVA_WADERS.get()
+            )
+
+        this.tag(ItemTags.HEAD_ARMOR)
+            .add(
+                ModItems.MAGIC_HOOD.get(),
+                ModItems.SPECTRE_HELMET.get()
+            )
+
+        this.tag(ItemTags.CHEST_ARMOR)
+            .add(
+                ModItems.SPECTRE_CHESTPLATE.get()
+            )
+
+        this.tag(ItemTags.LEG_ARMOR)
+            .add(
+                ModItems.SPECTRE_LEGGINGS.get()
+            )
+
+        this.tag(ItemTags.FOOT_ARMOR)
+            .add(
+                ModItems.SPECTRE_BOOTS.get(),
+                ModItems.WATER_WALKING_BOOTS.get(),
+                ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
+                ModItems.LAVA_WADERS.get()
+            )
+
         this.tag(C_RODS_OBSIDIAN)
             .add(
                 ModItems.OBSIDIAN_ROD.get()

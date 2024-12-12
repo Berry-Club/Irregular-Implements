@@ -1,9 +1,21 @@
-// 1.21.1	2024-12-12T01:37:43.9220805	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2024-12-12T02:18:42.111527	Tags for minecraft:item mod id irregular_implements
 996ecf49e1bfe2419630ebb12ec9338e2cb73fec data/c/tags/item/crops.json
 e1a2f90f364fa88dc3a75bde96655d5523d40d0b data/c/tags/item/crops/bean.json
 e4864d4209d36a3fa46a2d0ab896b95aadaed527 data/c/tags/item/foods.json
 6ab3345f6b7d46dcd242d7d563ab0a0c3ccf58b1 data/c/tags/item/rods/obsidian.json
 f295023d9097dceee86fc283bed494a82c9c0156 data/c/tags/item/seeds.json
+f24a294d5a5bc06b589128afc84ca3c2d64ec08b data/c/tags/item/tools/melee_weapon.json
+279848705f910bd7bc5e3ac091006cde1076451b data/c/tags/item/tools/mining_tool.json
 929c63e629fa72731eb642bf2e3527ea64d16ade data/irregular_implements/tags/item/grass_seeds.json
 27129810700cab73bf23b754952138832a8a45b2 data/irregular_implements/tags/item/hide_name_helmet.json
 27129810700cab73bf23b754952138832a8a45b2 data/irregular_implements/tags/item/hide_potion_helmet.json
+04b36322b6251d1c992152b543ec475e6cccb412 data/minecraft/tags/item/axes.json
+73619d156874a598fb309764f5f44176d5653e3d data/minecraft/tags/item/beacon_payment_items.json
+beb33ae4db75051bd8a2bd8a95deec167541d0c1 data/minecraft/tags/item/chest_armor.json
+775574b98cf9b423d10f661aa64ee8d4b0435811 data/minecraft/tags/item/foot_armor.json
+90f779bf3d607a3d76f5452c28884fa1631a3588 data/minecraft/tags/item/head_armor.json
+d8aa40a16b3782acbf239ca31bf712dcb93d96e0 data/minecraft/tags/item/leg_armor.json
+8c83e2a84c863e49469b7b860664eb967e86bf59 data/minecraft/tags/item/pickaxes.json
+b81ba30bcf9a101ea81e55e9f9b6c72f5b3ed0f9 data/minecraft/tags/item/shovels.json
+f24a294d5a5bc06b589128afc84ca3c2d64ec08b data/minecraft/tags/item/swords.json
+63b547eb9f56bf79ebbcd8d946b376372c307edf data/minecraft/tags/item/trimmable_armor.json

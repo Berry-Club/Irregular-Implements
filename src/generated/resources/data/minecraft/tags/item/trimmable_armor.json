@@ -1,0 +1,12 @@
+{
+  "remove": [
+    "irregular_implements:spectre_helmet",
+    "irregular_implements:spectre_chestplate",
+    "irregular_implements:spectre_leggings",
+    "irregular_implements:spectre_boots",
+    "irregular_implements:water_walking_boots",
+    "irregular_implements:obsidian_water_walking_boots",
+    "irregular_implements:lava_waders"
+  ],
+  "values": []
+}
