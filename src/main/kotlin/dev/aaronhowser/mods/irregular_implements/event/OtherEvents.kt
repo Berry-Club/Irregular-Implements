@@ -15,6 +15,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
@@ -27,6 +28,11 @@ object OtherEvents {
     @SubscribeEvent
     fun afterEntityDamaged(event: LivingDamageEvent.Post) {
         ImbueEffect.handleAttackImbues(event)
+    }
+
+    @SubscribeEvent
+    fun onLivingIncomingDamage(event: LivingIncomingDamageEvent) {
+        ImbueEffect.handleDamageImbue(event)
     }
 
     @SubscribeEvent

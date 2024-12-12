@@ -22,7 +22,6 @@ object ModItems {
         register("biome_capsule") { BiomeCapsuleItem() }
     val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
         register("biome_painter") { BiomePainterItem() }
-    val FLASK_OF_SPECTRE = basic("flask_of_spectre")
     val TRANSFORMATION_CORE = basic("transformation_core")
     val OBSIDIAN_ROD = basic("obsidian_rod")
     val DROP_FILTER = basic("drop_filter")  // prevents you from picking up items that match filter
@@ -126,6 +125,8 @@ object ModItems {
         register("imbue_wither") { ImbueItem(ModEffects.WITHER_IMBUE) }
     val COLLAPSE_IMBUE: DeferredItem<ImbueItem> =
         register("imbue_collapse") { ImbueItem(ModEffects.COLLAPSE_IMBUE) }
+    val SPECTRE_IMBUE: DeferredItem<ImbueItem> =
+        register("imbue_spectre") { ImbueItem(ModEffects.SPECTRE_IMBUE) }
 
     // Spectre
     val SPECTRE_INGOT = basic("spectre_ingot")

@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.effect
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
+import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.effect.MobEffect
@@ -10,6 +12,7 @@ import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.LivingEntity
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 
 class ImbueEffect(
     color: Int
@@ -49,10 +52,31 @@ class ImbueEffect(
             }
         }
 
+        fun handleDamageImbue(event: LivingIncomingDamageEvent) {
+            if (event.isCanceled) return
+
+            val entity = event.entity
+            val damageSource = event.source
+
+            if (damageSource.`is`(DamageTypeTags.BYPASSES_EFFECTS)
+                || damageSource.`is`(DamageTypeTags.BYPASSES_RESISTANCE)
+                || damageSource.`is`(DamageTypeTags.BYPASSES_INVULNERABILITY)
+            ) return
+
+            if (entity.hasEffect(ModEffects.SPECTRE_IMBUE)
+                && entity.random.nextFloat() <= ServerConfig.SPECTRE_IMBUE_CHANCE.get()
+            ) {
+                event.isCanceled = true
+                entity.hurtMarked = true
+            }
+        }
+
         fun handleXpImbue(event: LivingExperienceDropEvent) {
             val attacker = event.attackingPlayer ?: return
 
-            if (attacker.hasEffect(ModEffects.EXPERIENCE_IMBUE)) event.droppedExperience = Mth.ceil(event.droppedExperience * 1.5f)
+            if (attacker.hasEffect(ModEffects.EXPERIENCE_IMBUE)) {
+                event.droppedExperience = Mth.ceil(event.droppedExperience * 1.5f)
+            }
         }
     }
 

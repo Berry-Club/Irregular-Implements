@@ -20,6 +20,8 @@ class ServerConfig(
         lateinit var BIOME_PAINTER_BLOCKS_ABOVE: ModConfigSpec.IntValue
 
         lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
+
+        lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
     }
 
     init {
@@ -48,6 +50,10 @@ class ServerConfig(
         BLOCK_MOVER_TRY_VAPORIZE_FLUID = builder
             .comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")
             .define("blockMoverTryVaporizeFluid", true)
+
+        SPECTRE_IMBUE_CHANCE = builder
+            .comment("What is the chance that the Spectre Imbue will cancel incoming damage?")
+            .defineInRange("spectreImbueChance", 0.1, 0.0, 1.0)
     }
 
 }

@@ -89,7 +89,6 @@ class ModItemModelProvider(
             ModItems.SOUND_RECORDER,
             ModItems.SPECTRE_CHARGER,
             ModItems.ADVANCED_REDSTONE_TORCH,
-            ModItems.FLASK_OF_SPECTRE
         )
 
         val blockItemsToModel = listOf(
