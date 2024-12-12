@@ -1129,6 +1129,39 @@ class ModRecipeProvider(
             mapOf(
                 'O' to ing(Tags.Items.OBSIDIANS),
             )
+        ),
+        shapedRecipe(
+            ModItems.MAGNETIC_FORCE,
+            "E,M,P",
+            mapOf(
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+                'M' to ing(Tags.Items.GEMS_EMERALD),
+                'P' to ing(Items.PAPER),
+            )
+        ),
+        shapedRecipe(
+            ModItems.PORTABLE_ENDER_PORTER,
+            "P,S,S",
+            mapOf(
+                'P' to ing(ModBlocks.PRISMARINE_ENDER_BRIDGE),
+                'S' to ing(ModItemTagsProvider.C_RODS_OBSIDIAN)
+            )
+        ),
+        shapedRecipe(
+            ModItems.BLOCK_MOVER,
+            "S S,O O, O ",
+            mapOf(
+                'S' to ing(ModItems.STABLE_ENDER_PEARL),
+                'O' to ing(Tags.Items.OBSIDIANS),
+            )
+        ),
+        shapedRecipe(
+            ModItems.DIAMOND_BREAKER,
+            " I ,IDI, I ",
+            mapOf(
+                'I' to ing(Tags.Items.INGOTS_IRON),
+                'D' to ing(Items.DIAMOND_PICKAXE),
+            )
         )
     )
 
