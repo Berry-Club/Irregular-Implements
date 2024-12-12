@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.effect.MobEffectInstance
@@ -62,8 +63,7 @@ class WhiteStoneItem : Item(
     }
 
     override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-        if (level.isClientSide
-            || level.moonPhase != 0
+        if (level.moonPhase != 0
             || level.dayTime !in 14000..23000
             || isChargedWhiteStone(stack)
             || !level.canSeeSky(entity.blockPosition())
@@ -73,6 +73,16 @@ class WhiteStoneItem : Item(
         val newCharge = currentCharge + 1
 
         stack.set(ModDataComponents.CHARGE, newCharge)
+
+        level.addParticle(
+            ParticleTypes.ENCHANT,
+            entity.eyePosition.x,
+            entity.eyePosition.y,
+            entity.eyePosition.z,
+            4 * (entity.random.nextFloat() - 0.5),
+            4 * (entity.random.nextFloat() - 0.5),
+            4 * (entity.random.nextFloat() - 0.5),
+        )
 
         if (newCharge == MAX_CHARGE) {
             level.playSound(
