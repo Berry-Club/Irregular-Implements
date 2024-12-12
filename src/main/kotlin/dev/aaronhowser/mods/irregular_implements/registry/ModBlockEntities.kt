@@ -53,4 +53,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val MOON_PHASE_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<MoonPhaseDetectorBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("moon_phase_detector", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> MoonPhaseDetectorBlockEntity(pos, state) },
+                ModBlocks.MOON_PHASE_DETECTOR.get()
+            ).build(null)
+        })
+
 }

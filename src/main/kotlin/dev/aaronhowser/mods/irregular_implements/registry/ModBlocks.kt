@@ -85,7 +85,8 @@ object ModBlocks {
         registerBlock("redstone_observer") { RedstoneObserverBlock() }
     val SIDED_BLOCK_OF_REDSTONE =
         registerBlock("sided_redstone") { SidedRedstoneBlock() }
-    val MOON_PHASE_DETECTOR = basicBlock("moon_phase_detector") // 1.7.10
+    val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
+        registerBlock("moon_phase_detector") { MoonPhaseDetectorBlock() }
 
     // Sticks
     val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
