@@ -160,6 +160,7 @@ class ModLanguageProvider(
         addItem(ModItems.EXPERIENCE_IMBUE, "Experience Imbue")
         addItem(ModItems.WITHER_IMBUE, "Wither Imbue")
         addItem(ModItems.COLLAPSE_IMBUE, "Collapse Imbue")
+        addItem(ModItems.SPECTRE_IMBUE, "Spectre Imbue")
 
         addItem(ModItems.SPECTRE_INGOT, "Spectre Ingot")
         addItem(ModItems.SPECTRE_STRING, "Spectre String")
@@ -434,6 +435,7 @@ class ModLanguageProvider(
     object Info {
         const val PLATFORM = "info.irregular_implements.platform"
         const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
+        const val LUBRICANT = "info.irregular_implements.lubricant"
     }
 
     private fun addInfo(itemLike: ItemLike, infoString: String) {
@@ -463,9 +465,7 @@ class ModLanguageProvider(
         addInfo(ModBlocks.CONTACT_BUTTON, "Acts like a Button, but works when the block in front of it is clicked instead.")
         addInfo(ModBlocks.RAIN_SHIELD, "Prevents rain in a 5 chunk radius.")
         addInfo(ModBlocks.BLOCK_BREAKER, "Breaks blocks in front of it with the effectiveness of an Iron Pickaxe. Drops are inserted into the inventory behind it, or dropped.\n\nCan be disabled with a Redstone signal.")
-        //FIXME: Make this use a block tag instead of specifically listing the blocks
-        addInfo(ModBlocks.SUPER_LUBRICANT_ICE, "No friction.")
-        addInfo(ModBlocks.SUPER_LUBRICANT_STONE, "No friction.")
+        add(Info.LUBRICANT, "Completely frictionless. Anything moving on it will retain its momentum.")
         addInfo(ModBlocks.COMPRESSED_SLIME_BLOCK, "Create by clicking a Slime Block with a Shovel. Can be compressed multiple times.\n\nLaunches entities into the air.")
         addInfo(ModBlocks.REDSTONE_OBSERVER, "Emits the same Redstone signal as a linked block.\n\nUse a Redstone Tool to link it to a block.")
         addInfo(ModBlocks.BIOME_RADAR, "Insert a Biome Crystal and provide a Redstone signal, and it will attempt to find the Crystal's biome.\n\nIf it succeeds, it will spawn particles aiming in its direction.\n\nUsing a Paper on it will create a Location Filter for the biome.")
@@ -532,6 +532,8 @@ class ModLanguageProvider(
         addInfo(ModItems.POISON_IMBUE, "Inflicts Poison II on entities you hit with melee attacks.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
         addInfo(ModItems.EXPERIENCE_IMBUE, "Increases experience dropped by entities by 50%%.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
         addInfo(ModItems.WITHER_IMBUE, "Inflicts Wither II on entities you hit with melee attacks.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
+        addInfo(ModItems.SPECTRE_IMBUE, "Gives you a configurable chance to fully negate damage.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
+        addInfo(ModItems.COLLAPSE_IMBUE, "Inverts your controls.\n\nWhy would you want this?")
         addInfo(ModItems.BOTTLE_OF_AIR, "Refills your breath.")
         addInfo(ModItems.ENDER_LETTER, "Can be used to send items and messages to other players.\n\nType the name of the player at the top, and insert up to 9 items.\n\nClick an Ender Mailbox, and it will be inserted into their Ender Mailbox if it has room.")
         addInfo(ModItems.ENTITY_FILTER, "Allows you to filter by entity type. Do so by using it on an entity.")
@@ -548,7 +550,7 @@ class ModLanguageProvider(
         addInfo(ModItems.FLOO_SIGN, "?????????????????????")
         addInfo(ModItems.PORTKEY, "?????????????????????")
         addInfo(ModItems.ID_CARD, "Acts like an Entity Filter, but specifically for the player set.\n\nSet by using it in your hand.")
-        addInfo(ModItems.EMERALD_COMPASS, "When combined with an ID Card, points to the player.")
+        addInfo(ModItems.EMERALD_COMPASS, "Points to the set player, if they are online.\n\nSet the player by crafting with an ID Card.")
         addInfo(ModItems.SOUND_PATTERN, "Represents a sound.\n\nSet with a Sound Recorder.")
         addInfo(ModItems.SOUND_RECORDER, "Lets you save a sound to a stored Sound Pattern.\n\nUse it to toggle recording; it will stop automatically once it reaches 10 unique sounds.\n\nSneak right-click again to choose which sound to save to the Pattern.")
         addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
@@ -566,14 +568,23 @@ class ModLanguageProvider(
         addInfo(ModItems.SPECTRE_ILLUMINATOR, "When used, spawns a Spectre Illuminator that lights up the entire chunk.\n\nCan be removed either by clicking the Illuminator, or using Blackout Powder in the chunk.")
         //TODO: Chargers
         addInfo(ModItems.GRASS_SEEDS, "Can be planted on Dirt to grow Grass.")
-        //TODO: Colored Grass Seeds
         addInfo(ModItems.SPECTRE_KEY, "Use for 5 seconds to teleport to a private dimension.\n\nDo the same there to return.")
         addInfo(ModItems.SPECTRE_ANCHOR, "When crafted with an item, the item is kept after death.")
         addInfo(ModItems.SPECTRE_SWORD, "Comparable to a Diamond Sword with higher durability and enchantability.\n\nCan be used to kill Spirits.")
         addInfo(ModItems.SPECTRE_PICKAXE, "Comparable to a Diamond Pickaxe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
         addInfo(ModItems.SPECTRE_AXE, "Comparable to a Diamond Axe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
         addInfo(ModItems.SPECTRE_SHOVEL, "Comparable to a Diamond Shovel with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
-        //TODO: Runic Dust
+        //TODO: Spectre armor
+        addInfo(ModItems.BIOME_CAPSULE, "Throw on the ground, and it will capture the biome it lands in.\n\nUsed in conjunction with the Biome Painter.")
+        addInfo(ModItems.BIOME_PAINTER, "Use it on a block, and it will paint the biome of the first Biome Capsule in your inventory.\n\nThe radius can be configured.")
+        addInfo(ModItems.VOID_STONE, "In its menu, has a slot that immediately deletes whatever is inserted.")
+        addInfo(ModItems.DROP_FILTER, "Filters out items that match the contained Item Filters from entering your inventory.")
+        addInfo(ModItems.VOIDING_DROP_FILTER, "Works like the Drop Filter, but deletes the items instead of preventing them from entering your inventory.")
+        addInfo(ModItems.WHITE_STONE, "Charges when held while under the fool moon. When fully charged, it will prevent your death once and discharges.\n\nCan be found in dungeon loot.")
+        addInfo(ModItems.MAGNETIC_FORCE, "Single-use item that allows you to teleport to any player, if they accept, in a radius around you.\n\nThe radius is configurable.")
+        addInfo(ModItems.BLOCK_MOVER, "Use on a block to pick it up, and use it again to place it.\n\nCan be used on blocks with Block Entities, like Chests and machines.")
+        addInfo(ModItems.DIAMOND_BREAKER, "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.")
+        addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
     }
 
     //TODO: Info for Magnetic enchant
@@ -584,6 +595,7 @@ class ModLanguageProvider(
         addEffect(ModEffects.EXPERIENCE_IMBUE, "Experience Imbue")
         addEffect(ModEffects.WITHER_IMBUE, "Wither Imbue")
         addEffect(ModEffects.COLLAPSE_IMBUE, "Collapse Imbue")
+        addEffect(ModEffects.SPECTRE_IMBUE, "Spectre Imbue")
     }
 
 }

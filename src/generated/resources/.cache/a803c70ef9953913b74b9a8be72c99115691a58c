@@ -1,9 +1,10 @@
-// 1.21.1	2024-12-12T02:18:42.111527	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2024-12-12T04:05:58.7669719	Tags for minecraft:item mod id irregular_implements
 996ecf49e1bfe2419630ebb12ec9338e2cb73fec data/c/tags/item/crops.json
 e1a2f90f364fa88dc3a75bde96655d5523d40d0b data/c/tags/item/crops/bean.json
 e4864d4209d36a3fa46a2d0ab896b95aadaed527 data/c/tags/item/foods.json
 6ab3345f6b7d46dcd242d7d563ab0a0c3ccf58b1 data/c/tags/item/rods/obsidian.json
 f295023d9097dceee86fc283bed494a82c9c0156 data/c/tags/item/seeds.json
+56b06c86273d978ec4445a59d131e4f35425d6f3 data/c/tags/item/super_lubricated.json
 f24a294d5a5bc06b589128afc84ca3c2d64ec08b data/c/tags/item/tools/melee_weapon.json
 279848705f910bd7bc5e3ac091006cde1076451b data/c/tags/item/tools/mining_tool.json
 929c63e629fa72731eb642bf2e3527ea64d16ade data/irregular_implements/tags/item/grass_seeds.json

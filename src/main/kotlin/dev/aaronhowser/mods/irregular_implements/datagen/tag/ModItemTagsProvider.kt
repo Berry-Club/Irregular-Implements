@@ -29,6 +29,7 @@ class ModItemTagsProvider(
         val GRASS_SEEDS = create("grass_seeds")
         val C_CROPS_BEAN = common("crops/bean")
         val C_RODS_OBSIDIAN = common("rods/obsidian")
+        val SUPER_LUBRICATED_BLOCKS = common("super_lubricated")
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -38,6 +39,8 @@ class ModItemTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.copy(ModBlockTagsProvider.SUPER_LUBRICATED, SUPER_LUBRICATED_BLOCKS)
 
         this.tag(Tags.Items.MELEE_WEAPON_TOOLS)
             .add(

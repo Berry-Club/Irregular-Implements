@@ -24,20 +24,19 @@ object ModItems {
         register("biome_painter") { BiomePainterItem() }
     val TRANSFORMATION_CORE = basic("transformation_core")
     val OBSIDIAN_ROD = basic("obsidian_rod")
-    val DROP_FILTER = basic("drop_filter")  // prevents you from picking up items that match filter
-    val VOIDING_DROP_FILTER = basic("voiding_drop_filter")  // voids items that match filter when picked up
-    val VOID_STONE = basic("void_stone")    // gui that deletes items you insert into it
+    val DROP_FILTER = basic("drop_filter")
+    val VOIDING_DROP_FILTER = basic("voiding_drop_filter")
+    val VOID_STONE = basic("void_stone")
     val WHITE_STONE: DeferredItem<WhiteStoneItem> =
-        register("white_stone") { WhiteStoneItem() }  // found in dungeons, charges during full moon and if full, prevents death and discharges
-    val MAGNETIC_FORCE = basic("magnetic_force")    // gui that lets you basically tpa request to other players, consuming the item, 200 block radius
-    // Spectre armor: diamond level, makes you slightly transparent (probably won't bother)
+        register("white_stone") { WhiteStoneItem() }
+    val MAGNETIC_FORCE = basic("magnetic_force")
 
     // Not above 1.6.4
     val PORTABLE_ENDER_PORTER = basic("portable_ender_porter")  // right click, teleport to ender porter above
     val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
         register("block_mover") { BlockMoverItem() }
-    val DIAMOND_BREAKER = basic("diamond_breaker")  // upgrade to block breaker
-    val BLOCK_REPLACER = basic("block_replacer")    // Holds 9 blocks, clicking a block will replace it with a random one
+    val DIAMOND_BREAKER = basic("diamond_breaker")
+    val BLOCK_REPLACER = basic("block_replacer")
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
