@@ -48,6 +48,44 @@ class ModBlockStateProvider(
         basePlates()
         directionalAcceleratorPlate()
         redirectorPlate()
+        moonPhaseDetector()
+    }
+
+    private fun moonPhaseDetector() {
+        val block = ModBlocks.MOON_PHASE_DETECTOR.get()
+
+        val sideTexture = modLoc("block/moon_phase_detector_side")
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val isInverted = it.getValue(MoonPhaseDetectorBlock.INVERTED)
+
+                val name = name(block) + if (isInverted) "_inverted" else ""
+
+                val topTexture = if (isInverted) {
+                    modLoc("block/moon_phase_detector_top_inverted")
+                } else {
+                    modLoc("block/moon_phase_detector_top")
+                }
+
+                val model = models()
+                    .withExistingParent(name, mcLoc("block/daylight_detector"))
+                    .texture("side", sideTexture)
+                    .texture("top", topTexture)
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/moon_phase_detector"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun redirectorPlate() {
