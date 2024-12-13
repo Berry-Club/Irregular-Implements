@@ -30,7 +30,7 @@ class LavaCharmItem : Item(
         const val MAX_CHARGE = 200
         const val MAX_COOLDOWN = 40
 
-        private fun charge(stack: ItemStack) {
+        fun charge(stack: ItemStack) {
             val charge = stack.get(ModDataComponents.CHARGE) ?: 0
             val cooldown = stack.get(ModDataComponents.COOLDOWN) ?: MAX_COOLDOWN
 

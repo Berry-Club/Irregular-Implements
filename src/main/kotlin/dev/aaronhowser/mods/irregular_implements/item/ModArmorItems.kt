@@ -13,14 +13,13 @@ import net.minecraft.network.chat.Component
 import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.FallLocation
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ArmorItem
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.Rarity
+import net.minecraft.world.item.*
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -67,11 +66,11 @@ object ModArmorItems {
     }
 
     val LAVA_WADERS by lazy {
-        ArmorItem(
+        object : ArmorItem(
             ModArmorMaterials.LAVA_WADERS,
-            ArmorItem.Type.BOOTS,
-            Item.Properties()
-                .durability(ArmorItem.Type.BOOTS.getDurability(15))
+            Type.BOOTS,
+            Properties()
+                .durability(Type.BOOTS.getDurability(15))
                 .rarity(Rarity.RARE)
                 .fireResistant()
                 .component(
@@ -83,7 +82,11 @@ object ModArmorItems {
                 )
                 .component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
                 .component(ModDataComponents.COOLDOWN, 0)
-        )
+        ) {
+            override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
+                LavaCharmItem.charge(stack)
+            }
+        }
     }
 
     val MAGIC_HOOD by lazy {
