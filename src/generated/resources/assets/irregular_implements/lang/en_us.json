@@ -271,7 +271,7 @@
   "info.irregular_implements.magnetic_force": "Single-use item that allows you to teleport to any player, if they accept, in a radius around you.\n\nThe radius is configurable.",
   "info.irregular_implements.moon_phase_detector": "Emits a Redstone signal depending on the current moon phase.",
   "info.irregular_implements.notification_interface": "Sends a configurable toast notification to the block's owner when a Redstone signal is received.",
-  "info.irregular_implements.obsidian_skull": "Has a chance of negating fire damage.\n\nOn success, it lowers durability. At lower durability, it has a higher chance.",
+  "info.irregular_implements.obsidian_skull": "Has a chance of negating fire damage.\n\nThe chance is higher the lower the damage would be.",
   "info.irregular_implements.obsidian_skull_ring": "Works like the Obsidian Skull, but can be worn as a Curio.",
   "info.irregular_implements.obsidian_water_walking_boots": "Combines the effects of the Obsidian Skull and Water Walking Boots.",
   "info.irregular_implements.online_detector": "Emits a Redstone signal if the specified player is online.",

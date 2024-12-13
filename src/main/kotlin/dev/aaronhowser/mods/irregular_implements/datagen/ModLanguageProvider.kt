@@ -527,7 +527,7 @@ class ModLanguageProvider(
         addInfo(ModItems.REDSTONE_TOOL, "Used to bind the Redstone Observer or Redstone Interfaces to blocks.\n\nSneak right-click on the Observer/Interface, then click on the block to bind/unbind it.\n\nAlso shows the signal strength of the block you're looking at!")
         addInfo(ModItems.WATER_WALKING_BOOTS, "Allows you to walk on water when not sneaking.")
         addInfo(ModItems.LAVA_CHARM, "Adds a temporary lava shield, visible above your armor bar. This prevents taking damage from Lava, but does NOT prevent you from lighting on fire!\n\nLasts about 10 seconds.")
-        addInfo(ModItems.OBSIDIAN_SKULL, "Has a chance of negating fire damage.\n\nOn success, it lowers durability. At lower durability, it has a higher chance.")
+        addInfo(ModItems.OBSIDIAN_SKULL, "Has a chance of negating fire damage.\n\nThe chance is higher the lower the damage would be.")
         addInfo(ModItems.OBSIDIAN_SKULL_RING, "Works like the Obsidian Skull, but can be worn as a Curio.")
         addInfo(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, "Combines the effects of the Obsidian Skull and Water Walking Boots.")
         addInfo(ModItems.LAVA_WADERS, "Combines the effects of Obsidian Water Walking Boots and a Lava Charm.\n\nAdditionally allows you to stand on lava.")

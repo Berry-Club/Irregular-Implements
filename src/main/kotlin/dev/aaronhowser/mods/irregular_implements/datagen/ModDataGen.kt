@@ -85,6 +85,11 @@ object ModDataGen {
             ModDataPackProvider(output, lookupProvider)
         )
 
+        val curioProvider = generator.addProvider(
+            event.includeServer(),
+            ModCurioProvider(output, existingFileHelper, lookupProvider)
+        )
+
     }
 
 }
