@@ -123,4 +123,11 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
+    val COOLDOWN: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("cooldown") {
+            it
+                .persistent(Codec.INT)
+                .networkSynchronized(ByteBufCodecs.VAR_INT)
+        }
+
 }

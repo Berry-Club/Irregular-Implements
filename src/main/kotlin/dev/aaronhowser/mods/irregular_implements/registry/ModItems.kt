@@ -61,8 +61,8 @@ object ModItems {
     val MAGIC_BEAN = basic("magic_bean")    //rarity blue
 
     // Curios
-    val LAVA_CHARM: DeferredItem<Item> =
-        basic("lava_charm", Item.Properties().stacksTo(1).fireResistant())
+    val LAVA_CHARM: DeferredItem<LavaCharmItem> =
+        register("lava_charm") { LavaCharmItem() } //TODO: Advancement joking about the ui bar
     val OBSIDIAN_SKULL: DeferredItem<Item> =
         basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
     val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
@@ -76,7 +76,7 @@ object ModItems {
     val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
         register("obsidian_water_walking_boots") { ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS }
     val LAVA_WADERS: DeferredItem<ArmorItem> =
-        register("lava_waders") { ModArmorItems.LAVA_WADERS }   //TODO: Advancement joking about the ui bar
+        register("lava_waders") { ModArmorItems.LAVA_WADERS }
     val SPECTRE_HELMET: DeferredItem<ArmorItem> =
         register("spectre_helmet") { ModArmorItems.SPECTRE_HELMET }
     val SPECTRE_CHESTPLATE: DeferredItem<ArmorItem> =

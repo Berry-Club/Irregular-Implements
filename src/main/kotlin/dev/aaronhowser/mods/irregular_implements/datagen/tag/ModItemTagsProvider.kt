@@ -43,7 +43,8 @@ class ModItemTagsProvider(
 
         this.tag(RING_CURIO)
             .add(
-                ModItems.OBSIDIAN_SKULL_RING.get()
+                ModItems.OBSIDIAN_SKULL_RING.get(),
+                ModItems.LAVA_CHARM.get()
             )
 
         this.copy(ModBlockTagsProvider.SUPER_LUBRICATED, SUPER_LUBRICATED_BLOCKS)

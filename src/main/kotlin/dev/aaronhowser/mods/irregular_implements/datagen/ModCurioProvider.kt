@@ -22,6 +22,5 @@ class ModCurioProvider(
         this.createEntities(PLAYERS_RULE)
             .addPlayer()
             .addSlots(RING_SLOT)
-
     }
 }

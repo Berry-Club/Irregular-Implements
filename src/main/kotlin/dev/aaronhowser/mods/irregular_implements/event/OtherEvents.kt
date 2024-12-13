@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.BlockMoverItem
+import dev.aaronhowser.mods.irregular_implements.item.LavaCharmItem
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
 import dev.aaronhowser.mods.irregular_implements.item.WhiteStoneItem
 import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData
@@ -35,6 +36,7 @@ object OtherEvents {
     fun onLivingIncomingDamage(event: LivingIncomingDamageEvent) {
         ImbueEffect.handleDamageImbue(event)
         ModArmorItems.tryBlockFireDamage(event)
+        LavaCharmItem.tryBlockLavaDamage(event)
     }
 
     @SubscribeEvent
