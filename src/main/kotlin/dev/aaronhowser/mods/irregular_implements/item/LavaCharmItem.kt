@@ -16,6 +16,7 @@ import top.theillusivec4.curios.api.CuriosApi
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.type.capability.ICurioItem
 
+//TODO: Crafting etc
 class LavaCharmItem : Item(
     Properties()
         .stacksTo(1)
@@ -32,7 +33,7 @@ class LavaCharmItem : Item(
             val charge = stack.get(ModDataComponents.CHARGE) ?: 0
             val cooldown = stack.get(ModDataComponents.COOLDOWN) ?: MAX_COOLDOWN
 
-            if (cooldown >= 0) {
+            if (cooldown >= 1) {
                 stack.set(ModDataComponents.COOLDOWN, cooldown - 1)
                 return
             }
@@ -47,15 +48,21 @@ class LavaCharmItem : Item(
 
             val entity = event.entity
 
-            val lavaCharmStack = getFirstLavaBlockingItem(entity) ?: return
+            val lavaProtectorStack = getFirstLavaProtector(entity) ?: return
+            val charge = lavaProtectorStack.get(ModDataComponents.CHARGE) ?: return
 
+            if (charge > 0) {
+                lavaProtectorStack.set(ModDataComponents.CHARGE, charge - 1)
+                lavaProtectorStack.set(ModDataComponents.COOLDOWN, MAX_COOLDOWN)
+                event.isCanceled = true
+            }
         }
 
-        private fun isChargedLavaCharm(stack: ItemStack): Boolean {
+        private fun isChargedLavaProtector(stack: ItemStack): Boolean {
             return stack.`is`(ModItems.LAVA_CHARM) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
         }
 
-        private fun getFirstLavaBlockingItem(entity: LivingEntity): ItemStack? {
+        private fun getFirstLavaProtector(entity: LivingEntity): ItemStack? {
             var lavaCharmStack: ItemStack? = null
 
             if (entity is Player) {
@@ -63,7 +70,7 @@ class LavaCharmItem : Item(
                     inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
                         for (i in 0 until ringSlotHandler.slots) {
                             val stack = ringSlotHandler.stacks.getStackInSlot(i)
-                            if (isChargedLavaCharm(stack)) {
+                            if (isChargedLavaProtector(stack)) {
                                 lavaCharmStack = stack
                                 break
                             }
@@ -73,12 +80,12 @@ class LavaCharmItem : Item(
 
                 if (lavaCharmStack != null) return lavaCharmStack
 
-                lavaCharmStack = entity.inventory.items.firstOrNull { isChargedLavaCharm(it) }
+                lavaCharmStack = entity.inventory.items.firstOrNull { isChargedLavaProtector(it) }
             }
 
             if (lavaCharmStack != null) return lavaCharmStack
 
-            return entity.handSlots.firstOrNull { isChargedLavaCharm(it) }
+            return entity.handSlots.firstOrNull { isChargedLavaProtector(it) }
         }
 
     }
