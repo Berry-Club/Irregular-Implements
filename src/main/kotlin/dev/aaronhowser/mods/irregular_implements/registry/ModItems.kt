@@ -166,7 +166,6 @@ object ModItems {
     val DIAMOND_BREAKER = basic("diamond_breaker")
     val BLOCK_REPLACER = basic("block_replacer")
 
-
     // Colors
     val GRASS_SEEDS: DeferredItem<GrassSeedItem> =
         register("grass_seeds") { GrassSeedItem(dyeColor = null) }
