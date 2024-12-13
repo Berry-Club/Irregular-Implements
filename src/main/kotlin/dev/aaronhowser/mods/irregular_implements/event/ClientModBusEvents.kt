@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.client.render.RenderLavaCharmOverlay
+import dev.aaronhowser.mods.irregular_implements.client.render.RenderLavaProtectionOverlay
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCapsuleItem
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
@@ -134,8 +134,8 @@ object ClientModBusEvents {
     fun registerGuiLayers(event: RegisterGuiLayersEvent) {
         event.registerBelow(
             VanillaGuiLayers.ARMOR_LEVEL,
-            RenderLavaCharmOverlay.LAYER_NAME,
-            RenderLavaCharmOverlay::tryRender
+            RenderLavaProtectionOverlay.LAYER_NAME,
+            RenderLavaProtectionOverlay::tryRender
         )
     }
 

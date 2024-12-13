@@ -8,7 +8,7 @@ import net.minecraft.client.DeltaTracker
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.util.Mth
 
-object RenderLavaCharmOverlay {
+object RenderLavaProtectionOverlay {
 
     val LAYER_NAME = OtherUtil.modResource("lava_protection")
     private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection.png")
