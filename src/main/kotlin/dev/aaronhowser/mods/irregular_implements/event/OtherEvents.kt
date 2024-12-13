@@ -29,12 +29,12 @@ object OtherEvents {
     @SubscribeEvent
     fun afterEntityDamaged(event: LivingDamageEvent.Post) {
         ImbueEffect.handleAttackImbues(event)
-        ModArmorItems.handleSpectreArmorAttack(event)
     }
 
     @SubscribeEvent
     fun onLivingIncomingDamage(event: LivingIncomingDamageEvent) {
         ImbueEffect.handleDamageImbue(event)
+        ModArmorItems.checkShouldBLockFireDamage(event)
     }
 
     @SubscribeEvent

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModCurioProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
@@ -9,10 +10,12 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
+import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.FallLocation
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -24,8 +27,9 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
+import top.theillusivec4.curios.api.CuriosApi
 
 object ModArmorItems {
 
@@ -198,17 +202,43 @@ object ModArmorItems {
         )
     }
 
-    fun handleSpectreArmorAttack(event: LivingDamageEvent.Post) {
-        val attacker = event.source.entity as? LivingEntity ?: return
+    fun checkShouldBLockFireDamage(event: LivingIncomingDamageEvent) {
+        if (event.isCanceled) return
 
-        val wearingFullSpectreArmor = attacker.getItemBySlot(EquipmentSlot.HEAD).`is`(ModItems.SPECTRE_HELMET)
-                && attacker.getItemBySlot(EquipmentSlot.CHEST).`is`(ModItems.SPECTRE_CHESTPLATE)
-                && attacker.getItemBySlot(EquipmentSlot.LEGS).`is`(ModItems.SPECTRE_LEGGINGS)
-                && attacker.getItemBySlot(EquipmentSlot.FEET).`is`(ModItems.SPECTRE_BOOTS)
+        val target = event.entity
+        val damageSource = event.source
 
-        if (!wearingFullSpectreArmor) return
+        if (!damageSource.`is`(DamageTypeTags.IS_FIRE)) return
 
-        println("Spectre armor attack")
+        val amount = event.originalAmount
+        val chance = (amount * amount * amount) / 100
+
+        if (target.random.nextFloat() <= chance) return
+
+        var canBlockFire = false
+
+        CuriosApi.getCuriosInventory(target).ifPresent { inventory ->
+            inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
+                for (i in 0 until ringSlotHandler.slots) {
+                    val stack = ringSlotHandler.stacks.getStackInSlot(i)
+                    if (stack.`is`(ModItems.OBSIDIAN_SKULL_RING)) {
+                        canBlockFire = true
+                        break
+                    }
+                }
+            }
+        }
+
+        if (!canBlockFire) {
+            if (target is Player && target.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) {
+                canBlockFire = true
+            } else if (target.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) {
+                canBlockFire = true
+            }
+        }
+
+        if (canBlockFire) event.isCanceled = true
     }
+
 
 }
