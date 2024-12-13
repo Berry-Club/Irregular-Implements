@@ -89,6 +89,12 @@ repositories {
         url = "https://maven.terraformersmc.com/"
     }
 
+    // For Curios
+    maven {
+        name = "OctoStudios"
+        url = uri("https://maven.octo-studios.com/releases")
+    }
+
 }
 
 dependencies {
@@ -97,6 +103,8 @@ dependencies {
     // EMI
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+
+    implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
 }
 
@@ -113,6 +121,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_version            : mod_version,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
+            curios_version_range: curios_version_range,
     ]
     inputs.properties replaceProperties
 
