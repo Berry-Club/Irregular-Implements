@@ -74,7 +74,10 @@ object ModArmorItems {
                 .rarity(Rarity.RARE)
                 .component(
                     ModDataComponents.FLUID_TAGS,
-                    listOf(ModFluidTagsProvider.ALLOWS_LAVA_WALKING)
+                    listOf(
+                        ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
+                        ModFluidTagsProvider.ALLOWS_WATER_WALKING
+                    )
                 )
         )
     }
