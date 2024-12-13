@@ -125,10 +125,11 @@ class WhiteStoneItem : Item(
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
         val charge = stack.get(ModDataComponents.CHARGE.get()) ?: 0
         val percentCharge = charge / MAX_CHARGE.toFloat() * 100
+        val formattedCharge = String.format("%.2f", percentCharge)
 
         tooltipComponents.add(
             Component
-                .literal("Charge: $percentCharge%")
+                .literal("Charge: $formattedCharge%")
         )
     }
 
