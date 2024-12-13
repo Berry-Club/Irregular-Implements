@@ -67,7 +67,7 @@ class LavaCharmItem : Item(
             return stack.`is`(ModItems.LAVA_WADERS) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
         }
 
-        private fun getFirstLavaProtector(entity: LivingEntity): ItemStack? {
+        fun getFirstLavaProtector(entity: LivingEntity): ItemStack? {
             val footArmor = entity.getItemBySlot(EquipmentSlot.FEET)
             if (isChargedLavaWader(footArmor)) {
                 return footArmor
