@@ -11,7 +11,7 @@ import net.minecraft.util.Mth
 object RenderLavaProtectionOverlay {
 
     val LAYER_NAME = OtherUtil.modResource("lava_protection")
-    private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection.png")
+    private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection")
 
     private const val FILE_WIDTH = 16
     private const val IMAGE_WIDTH = 11
