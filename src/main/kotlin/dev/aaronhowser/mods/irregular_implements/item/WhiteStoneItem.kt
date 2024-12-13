@@ -31,8 +31,7 @@ class WhiteStoneItem : Item(
 ) {
 
     companion object {
-
-        private const val MAX_CHARGE = 20 * 100
+        const val MAX_CHARGE = 20 * 100
 
         fun isChargedWhiteStone(itemStack: ItemStack): Boolean {
             return itemStack.`is`(ModItems.WHITE_STONE.get()) && itemStack.get(ModDataComponents.CHARGE.get()) == MAX_CHARGE

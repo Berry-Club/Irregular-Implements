@@ -4,7 +4,9 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
+import dev.aaronhowser.mods.irregular_implements.item.WhiteStoneItem
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredHolder
@@ -23,16 +25,24 @@ object ModCreativeModeTabs {
             .icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
             .displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
                 val itemsToSkip = setOf(
-                    ModItems.BIOME_CRYSTAL.get()
+                    ModItems.BIOME_CRYSTAL.get(),
+                    ModItems.WHITE_STONE.get(),
                 )
 
-                val regularItems: Set<DeferredHolder<Item, out Item>> = ModItems.ITEM_REGISTRY.entries.toSet()
+                val regularItems: List<Item> = ModItems.ITEM_REGISTRY.entries.map { it.get() }
+                val blockItems: Set<BlockItem> = regularItems.filterIsInstance<BlockItem>().toSet()
 
                 output.acceptAll(
-                    (regularItems - itemsToSkip).map { (it as DeferredItem<*>).toStack() }
+                    (regularItems - itemsToSkip - blockItems).map { it.defaultInstance }
                 )
 
+                output.accept(ModItems.WHITE_STONE)
+                output.accept(ModItems.WHITE_STONE.toStack().also { it.set(ModDataComponents.CHARGE, WhiteStoneItem.MAX_CHARGE) })
+
+                output.acceptAll(blockItems.map { it.defaultInstance })
+
                 output.acceptAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
+
             }
             .build()
     })
