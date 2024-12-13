@@ -202,7 +202,7 @@ object ModArmorItems {
         )
     }
 
-    fun checkShouldBLockFireDamage(event: LivingIncomingDamageEvent) {
+    fun tryBlockFireDamage(event: LivingIncomingDamageEvent) {
         if (event.isCanceled) return
 
         val target = event.entity
@@ -215,29 +215,33 @@ object ModArmorItems {
 
         if (target.random.nextFloat() <= chance) return
 
-        var canBlockFire = false
+        if (canBlockFireDamage(target)) event.isCanceled = true
+    }
 
-        CuriosApi.getCuriosInventory(target).ifPresent { inventory ->
+    private fun canBlockFireDamage(entity: LivingEntity): Boolean {
+
+        val footItem = entity.getItemBySlot(EquipmentSlot.FEET)
+        if (footItem.`is`(ModItems.LAVA_WADERS)
+            || footItem.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
+        ) return true
+
+        var goodCurio = false
+        CuriosApi.getCuriosInventory(entity).ifPresent { inventory ->
             inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
                 for (i in 0 until ringSlotHandler.slots) {
                     val stack = ringSlotHandler.stacks.getStackInSlot(i)
                     if (stack.`is`(ModItems.OBSIDIAN_SKULL_RING)) {
-                        canBlockFire = true
+                        goodCurio = true
                         break
                     }
                 }
             }
         }
+        if (goodCurio) return true
 
-        if (!canBlockFire) {
-            if (target is Player && target.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) {
-                canBlockFire = true
-            } else if (target.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) {
-                canBlockFire = true
-            }
-        }
+        if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true
 
-        if (canBlockFire) event.isCanceled = true
+        return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }
     }
 
 

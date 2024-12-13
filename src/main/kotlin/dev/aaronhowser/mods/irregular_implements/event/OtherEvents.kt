@@ -34,7 +34,7 @@ object OtherEvents {
     @SubscribeEvent
     fun onLivingIncomingDamage(event: LivingIncomingDamageEvent) {
         ImbueEffect.handleDamageImbue(event)
-        ModArmorItems.checkShouldBLockFireDamage(event)
+        ModArmorItems.tryBlockFireDamage(event)
     }
 
     @SubscribeEvent
