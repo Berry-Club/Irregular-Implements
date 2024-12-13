@@ -412,26 +412,24 @@ class ModLanguageProvider(
 
     object Tooltips {
         const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
-
         const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
         const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
-
         const val COMPRESSED_SLIME_AMOUNT = "tooltip.irregular_implements.compressed_slime_AMOUNT"
         const val LUBRICATED = "tooltip.irregular_implements.lubricated"
-
         const val WITH_BLOCK_ENTITY = "tooltip.irregular_implements.with_block_entity"
+        const val CHARGE = "tooltip.irregular_implements.charge"
+        const val WHITE_STONE_FULL_MOON = "tooltip.irregular_implements.white_stone_full_moon"
     }
 
     private fun addTooltips() {
         add(Tooltips.SHIFT_FOR_MORE, "Hold [Shift] for more information")
-
         add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
         add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
-
         add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
         add(Tooltips.LUBRICATED, "Lubricated")
-
         add(Tooltips.WITH_BLOCK_ENTITY, "%s with block entity")
+        add(Tooltips.CHARGE, "Charge: %d%%")
+        add(Tooltips.WHITE_STONE_FULL_MOON, "Charge under the full moon")
     }
 
     object Info {

@@ -448,10 +448,12 @@
   "message.irregular_implements.redstone_tool.unloaded": "Cannot link as base %s is in an unloaded chunk.",
   "message.irregular_implements.redstone_tool.wrong_dimension": "Cannot link as base %s is in a different dimension.",
   "subtitle.irregular_implements.fart": "Pbbbt",
+  "tooltip.irregular_implements.charge": "Charge: %d%%",
   "tooltip.irregular_implements.compressed_slime_AMOUNT": "Compression level %d",
   "tooltip.irregular_implements.entity_filter_controls": "Set entity type by clicking an entity,\nor sneak click to set as Player",
   "tooltip.irregular_implements.lubricated": "Lubricated",
   "tooltip.irregular_implements.player_filter_controls": "Set player by clicking",
   "tooltip.irregular_implements.shift_for_more": "Hold [Shift] for more information",
+  "tooltip.irregular_implements.white_stone_full_moon": "Charge under the full moon",
   "tooltip.irregular_implements.with_block_entity": "%s with block entity"
 }

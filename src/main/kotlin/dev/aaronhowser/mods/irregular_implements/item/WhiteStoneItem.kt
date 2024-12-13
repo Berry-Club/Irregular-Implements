@@ -1,8 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
+import net.minecraft.ChatFormatting
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -127,10 +130,12 @@ class WhiteStoneItem : Item(
         val percentCharge = charge / MAX_CHARGE.toFloat() * 100
         val formattedCharge = String.format("%.2f", percentCharge)
 
-        tooltipComponents.add(
-            Component
-                .literal("Charge: $formattedCharge%")
-        )
+        tooltipComponents.add(ModLanguageProvider.Tooltips.CHARGE.toComponent(formattedCharge).withStyle(ChatFormatting.GRAY))
+
+        if (charge < MAX_CHARGE) {
+            tooltipComponents.add(ModLanguageProvider.Tooltips.WHITE_STONE_FULL_MOON.toComponent().withStyle(ChatFormatting.GRAY))
+        }
+
     }
 
 }
