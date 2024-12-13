@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.client.render.RenderLavaCharmOverlay
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCapsuleItem
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
@@ -22,6 +23,8 @@ import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.ModelEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID,
@@ -125,6 +128,15 @@ object ClientModBusEvents {
     @SubscribeEvent
     fun onClientSetup(event: FMLClientSetupEvent) {
         EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
+    }
+
+    @SubscribeEvent
+    fun registerGuiLayers(event: RegisterGuiLayersEvent) {
+        event.registerBelow(
+            VanillaGuiLayers.ARMOR_LEVEL,
+            RenderLavaCharmOverlay.LAYER_NAME,
+            RenderLavaCharmOverlay::tryRender
+        )
     }
 
 }

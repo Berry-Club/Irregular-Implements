@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.client.render.RenderLavaCharmOverlay
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
@@ -16,7 +15,6 @@ import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent
-import net.neoforged.neoforge.client.event.RenderGuiEvent
 import net.neoforged.neoforge.client.event.RenderLivingEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
@@ -38,11 +36,6 @@ object ClientEvents {
         if (ClientConfig.COLLAPSE_INVERTS_MOUSE.get() && player.hasEffect(ModEffects.COLLAPSE_IMBUE)) {
             event.mouseSensitivity *= -1.75
         }
-    }
-
-    @SubscribeEvent
-    fun onRenderGameOverlay(event: RenderGuiEvent.Post) {
-        RenderLavaCharmOverlay.tryRender(event)
     }
 
     private var changedAlpha = false
