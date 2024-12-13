@@ -28,6 +28,13 @@ object RenderLavaProtectionOverlay {
 
         for (i in 0 until count) {
 
+            //FIXME: Not working?
+            if (i == count - 1) {
+                var countFloat = (charge / 2f / 10f + 10f)
+                countFloat %= countFloat.toInt()
+                guiGraphics.setColor(1f, 1f, 1f, 0.5f)
+            }
+
             guiGraphics.blitSprite(
                 SPRITE_LOCATION,
                 FILE_WIDTH,
@@ -39,6 +46,8 @@ object RenderLavaProtectionOverlay {
                 IMAGE_WIDTH,
                 IMAGE_WIDTH
             )
+
+            guiGraphics.setColor(1f, 1f, 1f, 1f)
 
             left += IMAGE_WIDTH
         }
