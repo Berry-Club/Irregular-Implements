@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
@@ -58,34 +59,42 @@ class LavaCharmItem : Item(
             }
         }
 
-        private fun isChargedLavaProtector(stack: ItemStack): Boolean {
+        private fun isChargedLavaCharm(stack: ItemStack): Boolean {
             return stack.`is`(ModItems.LAVA_CHARM) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
         }
 
+        private fun isChargedLavaWader(stack: ItemStack): Boolean {
+            return stack.`is`(ModItems.LAVA_WADERS) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
+        }
+
         private fun getFirstLavaProtector(entity: LivingEntity): ItemStack? {
-            var lavaCharmStack: ItemStack? = null
+            val footArmor = entity.getItemBySlot(EquipmentSlot.FEET)
+            if (isChargedLavaWader(footArmor)) {
+                return footArmor
+            }
 
             if (entity is Player) {
+                var curioProtector: ItemStack? = null
+
                 CuriosApi.getCuriosInventory(entity).ifPresent { inventory ->
                     inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
                         for (i in 0 until ringSlotHandler.slots) {
                             val stack = ringSlotHandler.stacks.getStackInSlot(i)
-                            if (isChargedLavaProtector(stack)) {
-                                lavaCharmStack = stack
+                            if (isChargedLavaCharm(stack)) {
+                                curioProtector = stack
                                 break
                             }
                         }
                     }
                 }
 
-                if (lavaCharmStack != null) return lavaCharmStack
+                if (curioProtector != null) return curioProtector
 
-                lavaCharmStack = entity.inventory.items.firstOrNull { isChargedLavaProtector(it) }
+                val inventoryCharm = entity.inventory.items.firstOrNull { isChargedLavaCharm(it) }
+                if (inventoryCharm != null) return inventoryCharm
             }
 
-            if (lavaCharmStack != null) return lavaCharmStack
-
-            return entity.handSlots.firstOrNull { isChargedLavaProtector(it) }
+            return entity.handSlots.firstOrNull { isChargedLavaCharm(it) }
         }
 
     }
