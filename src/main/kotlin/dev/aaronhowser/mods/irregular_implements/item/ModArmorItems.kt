@@ -58,6 +58,7 @@ object ModArmorItems {
             Item.Properties()
                 .durability(ArmorItem.Type.BOOTS.getDurability(15))
                 .rarity(Rarity.RARE)
+                .fireResistant()
                 .component(
                     ModDataComponents.FLUID_TAGS,
                     listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
@@ -72,6 +73,7 @@ object ModArmorItems {
             Item.Properties()
                 .durability(ArmorItem.Type.BOOTS.getDurability(15))
                 .rarity(Rarity.RARE)
+                .fireResistant()
                 .component(
                     ModDataComponents.FLUID_TAGS,
                     listOf(
@@ -79,6 +81,8 @@ object ModArmorItems {
                         ModFluidTagsProvider.ALLOWS_WATER_WALKING
                     )
                 )
+                .component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
+                .component(ModDataComponents.COOLDOWN, 0)
         )
     }
 
