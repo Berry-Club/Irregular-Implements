@@ -61,9 +61,9 @@ object ModItems {
     val MAGIC_BEAN = basic("magic_bean")    //rarity blue
 
     // Curios
-    val LAVA_CHARM = basic("lava_charm")
-    val OBSIDIAN_SKULL = basic("obsidian_skull")
-    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring")      //Maybe you could just put the regular skull in the slot?
+    val LAVA_CHARM = basic("lava_charm", 1)
+    val OBSIDIAN_SKULL = basic("obsidian_skull", 1)
+    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring", 1)
 
     // Armors
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
@@ -212,6 +212,14 @@ object ModItems {
 
     private fun basic(id: String): DeferredItem<Item> {
         return ITEM_REGISTRY.registerSimpleItem(id)
+    }
+
+    private fun basic(id: String, properties: Item.Properties): DeferredItem<Item> {
+        return ITEM_REGISTRY.registerSimpleItem(id, properties)
+    }
+
+    private fun basic(id: String, maxStackSize: Int): DeferredItem<Item> {
+        return ITEM_REGISTRY.registerSimpleItem(id, Item.Properties().stacksTo(maxStackSize))
     }
 
     private fun <T : Item> register(id: String, itemBuilder: (Item.Properties) -> T): DeferredItem<T> {

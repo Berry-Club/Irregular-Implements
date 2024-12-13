@@ -30,6 +30,7 @@ class ModItemTagsProvider(
         val SUPER_LUBRICATED_BLOCKS = create("super_lubricated")
         val C_CROPS_BEAN = common("crops/bean")
         val C_RODS_OBSIDIAN = common("rods/obsidian")
+        val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -39,6 +40,11 @@ class ModItemTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(RING_CURIO)
+            .add(
+                ModItems.OBSIDIAN_SKULL_RING.get()
+            )
 
         this.copy(ModBlockTagsProvider.SUPER_LUBRICATED, SUPER_LUBRICATED_BLOCKS)
 

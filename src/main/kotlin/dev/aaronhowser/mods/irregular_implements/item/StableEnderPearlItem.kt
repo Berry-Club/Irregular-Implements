@@ -15,7 +15,7 @@ import net.minecraft.world.phys.AABB
 
 class StableEnderPearlItem : Item(
     Properties()
-        .stacksTo(1)
+        .stacksTo(16)
 ) {
 
     override fun use(

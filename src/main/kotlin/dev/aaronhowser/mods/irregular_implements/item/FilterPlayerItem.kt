@@ -82,6 +82,7 @@ class FilterPlayerItem : Item(
         }
     }
 
+    //TODO: Remove? Put in info recipe?
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
         OtherUtil.moreInfoTooltip(
             tooltipComponents,
