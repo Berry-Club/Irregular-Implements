@@ -61,9 +61,12 @@ object ModItems {
     val MAGIC_BEAN = basic("magic_bean")    //rarity blue
 
     // Curios
-    val LAVA_CHARM = basic("lava_charm", 1)
-    val OBSIDIAN_SKULL = basic("obsidian_skull", 1)
-    val OBSIDIAN_SKULL_RING = basic("obsidian_skull_ring", 1)
+    val LAVA_CHARM: DeferredItem<Item> =
+        basic("lava_charm", Item.Properties().stacksTo(1).fireResistant())
+    val OBSIDIAN_SKULL: DeferredItem<Item> =
+        basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
+    val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
+        basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
 
     // Armors
     val MAGIC_HOOD: DeferredItem<ArmorItem> =

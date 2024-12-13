@@ -210,7 +210,7 @@ object ModArmorItems {
 
         if (!damageSource.`is`(DamageTypeTags.IS_FIRE)) return
 
-        val amount = event.originalAmount
+        val amount = event.amount
         val chance = (amount * amount * amount) / 100
 
         if (target.random.nextFloat() <= chance) return
