@@ -21,35 +21,28 @@ object RenderLavaProtectionOverlay {
         val lavaProtector = LavaCharmItem.getFirstLavaProtector(player) ?: return
 
         val charge = lavaProtector.get(ModDataComponents.CHARGE) ?: return
+        val maxCharge = LavaCharmItem.MAX_CHARGE
 
-        val count = Mth.floor(charge / 2f / 10f)
+        val percentCharged = charge.toFloat() / maxCharge.toFloat()
+        val amountFullSprites = Mth.floor(percentCharged * 10f)
 
-        var left = 0
+        //TODO: Add another partially filled sprite
 
-        for (i in 0 until count) {
+        var leftPos = 0
 
-            //FIXME: Not working?
-            if (i == count - 1) {
-                var countFloat = (charge / 2f / 10f + 10f)
-                countFloat %= countFloat.toInt()
-                guiGraphics.setColor(1f, 1f, 1f, 0.5f)
-            }
-
+        for (i in 0 until amountFullSprites) {
             guiGraphics.blitSprite(
                 SPRITE_LOCATION,
                 FILE_WIDTH,
                 FILE_WIDTH,
                 0,
                 0,
-                left,
+                leftPos,
                 0,
                 IMAGE_WIDTH,
                 IMAGE_WIDTH
             )
-
-            guiGraphics.setColor(1f, 1f, 1f, 1f)
-
-            left += IMAGE_WIDTH
+            leftPos += IMAGE_WIDTH
         }
     }
 
