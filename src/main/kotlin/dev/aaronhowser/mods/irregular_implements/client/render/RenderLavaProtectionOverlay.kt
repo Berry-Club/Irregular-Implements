@@ -26,8 +26,6 @@ object RenderLavaProtectionOverlay {
         val percentCharged = charge.toFloat() / maxCharge.toFloat()
         val amountFullSprites = Mth.floor(percentCharged * 10f)
 
-        //TODO: Add another partially filled sprite
-
         var leftPos = 0
 
         for (i in 0 until amountFullSprites) {
@@ -43,6 +41,20 @@ object RenderLavaProtectionOverlay {
                 IMAGE_WIDTH
             )
             leftPos += IMAGE_WIDTH
+        }
+
+        if (percentCharged * 10 - amountFullSprites > 0.5) {
+            guiGraphics.blitSprite(
+                SPRITE_LOCATION,
+                FILE_WIDTH,
+                FILE_WIDTH,
+                0,
+                0,
+                leftPos,
+                0,
+                IMAGE_WIDTH / 2,
+                IMAGE_WIDTH
+            )
         }
     }
 
