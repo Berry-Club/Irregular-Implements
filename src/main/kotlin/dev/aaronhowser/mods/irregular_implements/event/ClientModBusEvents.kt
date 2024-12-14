@@ -132,8 +132,8 @@ object ClientModBusEvents {
 
     @SubscribeEvent
     fun registerGuiLayers(event: RegisterGuiLayersEvent) {
-        event.registerBelow(
-            VanillaGuiLayers.ARMOR_LEVEL,
+        event.registerAbove(
+            VanillaGuiLayers.AIR_LEVEL,
             RenderLavaProtectionOverlay.LAYER_NAME,
             RenderLavaProtectionOverlay::tryRender
         )
