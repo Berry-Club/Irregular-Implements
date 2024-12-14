@@ -13,8 +13,8 @@ object RenderLavaProtectionOverlay {
     val LAYER_NAME = OtherUtil.modResource("lava_protection")
     private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection")
 
-    private const val FILE_WIDTH = 16
-    private const val IMAGE_WIDTH = 11
+    private const val IMAGE_SCALE = 13
+    private const val IMAGE_WIDTH = 9
 
     fun tryRender(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
         val player = ClientUtil.localPlayer ?: return
@@ -31,8 +31,8 @@ object RenderLavaProtectionOverlay {
         for (i in 0 until amountFullSprites) {
             guiGraphics.blitSprite(
                 SPRITE_LOCATION,
-                FILE_WIDTH,
-                FILE_WIDTH,
+                IMAGE_SCALE,
+                IMAGE_SCALE,
                 0,
                 0,
                 leftPos,
@@ -47,8 +47,8 @@ object RenderLavaProtectionOverlay {
 
         guiGraphics.blitSprite(
             SPRITE_LOCATION,
-            FILE_WIDTH,
-            FILE_WIDTH,
+            IMAGE_SCALE,
+            IMAGE_SCALE,
             0,
             0,
             leftPos,
