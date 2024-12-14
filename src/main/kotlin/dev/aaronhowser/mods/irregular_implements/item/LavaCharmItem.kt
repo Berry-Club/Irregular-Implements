@@ -22,6 +22,7 @@ class LavaCharmItem : Item(
     Properties()
         .stacksTo(1)
         .rarity(Rarity.RARE)
+        .fireResistant()
         .component(ModDataComponents.COOLDOWN, 0)
         .component(ModDataComponents.CHARGE, MAX_CHARGE)
 ), ICurioItem {
