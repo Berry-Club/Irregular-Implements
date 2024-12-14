@@ -43,19 +43,19 @@ object RenderLavaProtectionOverlay {
             leftPos += IMAGE_WIDTH
         }
 
-        if (percentCharged * 10 - amountFullSprites > 0.5) {
-            guiGraphics.blitSprite(
-                SPRITE_LOCATION,
-                FILE_WIDTH,
-                FILE_WIDTH,
-                0,
-                0,
-                leftPos,
-                0,
-                IMAGE_WIDTH / 2,
-                IMAGE_WIDTH
-            )
-        }
+        val leftOver = percentCharged * 10 - amountFullSprites
+
+        guiGraphics.blitSprite(
+            SPRITE_LOCATION,
+            FILE_WIDTH,
+            FILE_WIDTH,
+            0,
+            0,
+            leftPos,
+            0,
+            Mth.floor(IMAGE_WIDTH * leftOver),
+            IMAGE_WIDTH
+        )
     }
 
 }
