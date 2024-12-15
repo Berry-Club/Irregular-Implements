@@ -14,8 +14,6 @@ object RenderLavaProtectionOverlay {
     val LAYER_NAME = OtherUtil.modResource("lava_protection")
     private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection")
 
-    private const val IMAGE_SCALE = 14
-    private const val IMAGE_WIDTH = 9
 
     fun tryRender(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
         val player = ClientUtil.localPlayer ?: return
@@ -33,30 +31,30 @@ object RenderLavaProtectionOverlay {
         for (i in 0 until amountFullSprites) {
             guiGraphics.blitSprite(
                 SPRITE_LOCATION,
-                IMAGE_SCALE,
-                IMAGE_SCALE,
+                9,
+                9,
                 0,
                 0,
-                rightPos - i * 8 - IMAGE_WIDTH,
+                rightPos - i * 8 - 9,
                 height,
-                IMAGE_WIDTH,
-                IMAGE_WIDTH
+                9,
+                9
             )
-            rightPos += IMAGE_WIDTH
+            rightPos += 9
         }
 
         val leftOver = percentCharged * 10 - amountFullSprites
 
         guiGraphics.blitSprite(
             SPRITE_LOCATION,
-            IMAGE_SCALE,
-            IMAGE_SCALE,
+            9,
+            9,
             0,
             0,
             rightPos,
             height,
-            Mth.floor(IMAGE_WIDTH * leftOver),
-            IMAGE_WIDTH
+            Mth.floor(9 * leftOver),
+            9
         )
 
         Minecraft.getInstance().gui.rightHeight += 10
