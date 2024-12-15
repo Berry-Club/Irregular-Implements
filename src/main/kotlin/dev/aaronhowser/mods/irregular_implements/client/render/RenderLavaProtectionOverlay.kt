@@ -25,7 +25,7 @@ object RenderLavaProtectionOverlay {
         val percentCharged = charge.toFloat() / maxCharge.toFloat()
         val amountFullSprites = Mth.floor(percentCharged * 10f)
 
-        var rightPos = guiGraphics.guiWidth() / 2 + 91
+        val rightPos = guiGraphics.guiWidth() / 2 + 91
         val height = guiGraphics.guiHeight() - Minecraft.getInstance().gui.rightHeight
 
         for (i in 0 until amountFullSprites) {
@@ -40,7 +40,6 @@ object RenderLavaProtectionOverlay {
                 9,
                 9
             )
-            rightPos += 9
         }
 
         val leftOver = percentCharged * 10 - amountFullSprites
