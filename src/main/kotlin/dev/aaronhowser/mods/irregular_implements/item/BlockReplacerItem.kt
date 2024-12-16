@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.component.DataComponents
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
@@ -9,6 +11,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
@@ -19,10 +22,10 @@ class BlockReplacerItem : Item(
 ) {
 
     // TODO: Cooldown based on how the mining time of the block? Or maybe based on the difference in mining time between the block placed and the block broken?
-    // TODO: Check for cancellation of events, and if the player is allowed to use the item
+    // TODO: Maybe add a mining level? Maybe like it uses the highest tier tool stored or something
     override fun useOn(context: UseOnContext): InteractionResult {
 
-        val level = context.level
+        val level = context.level as? ServerLevel ?: return InteractionResult.PASS
         val clickedPos = context.clickedPos
         val clickedState = level.getBlockState(clickedPos)
 
@@ -62,10 +65,52 @@ class BlockReplacerItem : Item(
             .getStateForPlacement(BlockPlaceContext(context))
             ?: return InteractionResult.PASS
 
-        if (player != null
+        if (!stateToPlace.canSurvive(level, clickedPos)
+            || player != null
             && NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
-            || !stateToPlace.canSurvive(level, clickedPos)
         ) return InteractionResult.PASS
+
+        val drops = Block.getDrops(clickedState, level, clickedPos, level.getBlockEntity(clickedPos))
+
+        level.captureBlockSnapshots = true
+        level.setBlockAndUpdate(clickedPos, stateToPlace)
+        level.captureBlockSnapshots = false
+
+        val snapshots = level.capturedBlockSnapshots.toList()
+        level.capturedBlockSnapshots.clear()
+
+        for (snapshot in snapshots) {
+            if (NeoForge.EVENT_BUS.post(BlockEvent.EntityPlaceEvent(snapshot, clickedState, player)).isCanceled) {
+                level.restoringBlockSnapshots = true
+                snapshot.restore(snapshot.flags or Block.UPDATE_CLIENTS)
+                level.restoringBlockSnapshots = false
+                return InteractionResult.FAIL
+            }
+        }
+
+        val originalStateSoundType = clickedState.soundType
+        level.playSound(
+            null,
+            clickedPos,
+            originalStateSoundType.breakSound,
+            SoundSource.BLOCKS,
+            (originalStateSoundType.volume + 1.0f) / 2.0f,
+            originalStateSoundType.pitch * 0.8f
+        )
+
+        val newStateSoundType = stateToPlace.soundType
+        level.playSound(
+            null,
+            clickedPos,
+            newStateSoundType.placeSound,
+            SoundSource.BLOCKS,
+            (newStateSoundType.volume + 1.0f) / 2.0f,
+            newStateSoundType.pitch * 0.8f
+        )
+
+        for (drop in drops) {
+            Block.popResourceFromFace(level, clickedPos, context.clickedFace, drop)
+        }
 
         stackToPlace.consume(1, player)
 
@@ -73,9 +118,6 @@ class BlockReplacerItem : Item(
             DataComponents.CONTAINER,
             ItemContainerContents.fromItems(storedStacks)
         )
-
-        level.destroyBlock(clickedPos, true)    //TODO: Make it pop out of the clicked face
-        level.setBlockAndUpdate(clickedPos, stateToPlace)
 
         return InteractionResult.SUCCESS
     }
