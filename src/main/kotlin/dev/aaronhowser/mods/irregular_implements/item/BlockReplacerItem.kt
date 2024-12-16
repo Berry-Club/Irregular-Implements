@@ -1,12 +1,20 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.component.DataComponents
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.SlotAccess
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.ClickAction
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -26,6 +34,8 @@ class BlockReplacerItem : Item(
     override fun useOn(context: UseOnContext): InteractionResult {
 
         val level = context.level as? ServerLevel ?: return InteractionResult.PASS
+        val player = context.player ?: return InteractionResult.PASS
+        val usedStack = context.itemInHand
         val clickedPos = context.clickedPos
         val clickedState = level.getBlockState(clickedPos)
 
@@ -33,10 +43,7 @@ class BlockReplacerItem : Item(
             || clickedState.`is`(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)
         ) return InteractionResult.PASS
 
-        val usedStack = context.itemInHand
-
-        val player = context.player
-        if (player != null && !player.mayUseItemAt(clickedPos, context.clickedFace, usedStack)) return InteractionResult.PASS
+        if (!player.mayUseItemAt(clickedPos, context.clickedFace, usedStack)) return InteractionResult.PASS
 
         //TODO: Obvious placeholder
         val component = usedStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(
@@ -66,7 +73,6 @@ class BlockReplacerItem : Item(
             ?: return InteractionResult.PASS
 
         if (!stateToPlace.canSurvive(level, clickedPos)
-            || player != null
             && NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
         ) return InteractionResult.PASS
 
@@ -120,6 +126,75 @@ class BlockReplacerItem : Item(
         )
 
         return InteractionResult.SUCCESS
+    }
+
+    override fun overrideOtherStackedOnMe(
+        thisStack: ItemStack,
+        other: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player,
+        access: SlotAccess
+    ): Boolean {
+        if (action != ClickAction.SECONDARY
+            || !slot.allowModification(player)
+            || other.item !is BlockItem
+        ) return false
+
+        val currentContents = thisStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(listOf())
+        val storedStacks = currentContents.nonEmptyItems().toList()
+
+        val mayInsert = storedStacks.any { it.item == other.item } || storedStacks.size + 1 <= ServerConfig.BLOCK_REPLACER_UNIQUE_BLOCKS.get()
+        if (!mayInsert) return false
+
+        val newContents = OtherUtil.flattenStacks(storedStacks + other.copy())
+        thisStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(newContents))
+
+        other.count = 0
+
+        player.level().playSound(
+            null,
+            player.blockPosition(),
+            SoundEvents.ITEM_PICKUP,
+            SoundSource.PLAYERS,
+            1f,
+            0.33f
+        )
+
+        return true
+    }
+
+    override fun overrideStackedOnOther(
+        thisStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player
+    ): Boolean {
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
+
+        val otherStack = slot.item
+        if (!otherStack.isEmpty) return false
+
+        val currentContents = thisStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(listOf())
+        val storedStacks = currentContents.nonEmptyItems().toMutableList()
+
+        if (storedStacks.isEmpty()) return false
+
+        val stackToInsert = storedStacks.removeLast()
+        slot.set(stackToInsert.copy())
+
+        thisStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(storedStacks))
+
+        player.level().playSound(
+            null,
+            player.blockPosition(),
+            SoundEvents.ITEM_PICKUP,
+            SoundSource.PLAYERS,
+            1f,
+            0.33f
+        )
+
+        return true
     }
 
 }

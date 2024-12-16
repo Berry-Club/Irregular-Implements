@@ -26,6 +26,7 @@ class ServerConfig(
         lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
 
         lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
+        lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
     }
 
     init {
@@ -66,6 +67,10 @@ class ServerConfig(
         SUMMONING_PENDULUM_CAPACITY = builder
             .comment("How many entities should the Summoning Pendulum be able to store?")
             .defineInRange("summoningPendulumCapacity", 5, 1, Int.MAX_VALUE)
+
+        BLOCK_REPLACER_UNIQUE_BLOCKS = builder
+            .comment("How many unique blocks should the Block Replacer be able to store?")
+            .defineInRange("blockReplacerUniqueBlocks", 9, 1, Int.MAX_VALUE)
     }
 
 }
