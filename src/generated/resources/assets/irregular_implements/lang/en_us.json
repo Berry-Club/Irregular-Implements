@@ -281,7 +281,7 @@
   "info.irregular_implements.player_interface": "Exposes the inventory of the block's owner, as if it was the block's inventory.",
   "info.irregular_implements.portable_ender_bridge": "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.",
   "info.irregular_implements.portable_sound_dampener": "Prevents sounds matching held Sound Patterns from being heard by the player holding it.",
-  "info.irregular_implements.portkey": "?????????????????????",
+  "info.irregular_implements.portkey": "Use on a block to set a destination, then throw it on the ground.\n\nAfter 5 seconds, anyone who picks it up will be teleported to the destination.\n\nYou can craft it with any other item to disguise it!",
   "info.irregular_implements.potion_vaporizer": "Allows you to fill a room with a potion effect.\n\nInsert Potions and Furnace fuel, and it will scan the area in front of it to check if it's an enclosed area.\n\nIf it is, it'll fill it with the potion effect.",
   "info.irregular_implements.prismarine_ender_bridge": "Upon the Prismarine Ender Bridge receiving a Redstone Signal, it looks for an Ender Anchor in front of it (with no distance limit, though it must be loaded, and no other blocks can be in the way).\n\nIt searches at 200 blocks per second, and then teleports the player standing on top to it.\n\nThere's no distance limit, though there can be no blocks between (save for the block directly in front of the Bridge).",
   "info.irregular_implements.processing_plate": "???",

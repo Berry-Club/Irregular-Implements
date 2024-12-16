@@ -14,6 +14,7 @@ import net.minecraft.world.item.context.UseOnContext
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
+//TODO: Ability to hide it as other items
 class PortkeyItem : Item(
     Properties()
         .stacksTo(1)
@@ -26,7 +27,7 @@ class PortkeyItem : Item(
             val itemEntity = event.itemEntity
             val itemStack = itemEntity.item
 
-            if (!itemStack.`is`(ModItems.PORTKEY.get())) return
+            if (!itemStack.`is`(ModItems.PORTKEY)) return
 
             val locationComponent = itemStack.get(ModDataComponents.LOCATION) ?: return
             if (!itemStack.get(ModDataComponents.ENABLED).isTrue) return
@@ -83,8 +84,10 @@ class PortkeyItem : Item(
     }
 
     override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-        if (entity.age > 20 * 1 && !stack.get(ModDataComponents.ENABLED).isTrue) {
+        if (entity.age == 20 * 5) {
             stack.set(ModDataComponents.ENABLED, true)
+
+            entity.setUnlimitedLifetime()
 
             entity.level().playSound(
                 null,
@@ -99,5 +102,7 @@ class PortkeyItem : Item(
 
         return super.onEntityItemUpdate(stack, entity)
     }
+
+    //TODO: Tooltip
 
 }

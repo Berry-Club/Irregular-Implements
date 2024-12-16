@@ -572,7 +572,7 @@ class ModLanguageProvider(
         addInfo(ModItems.REDSTONE_REMOTE, "Allows you to temporarily power one of nine blocks from a distance.\n\nSneak right-click it to open its GUI, where you can place up to 9 Location Filters. Under each you can set an item to represent that position.\n\nRight-click normally to see all the positions it can power.")
         addInfo(ModItems.BLAZE_AND_STEEL, "Lights a much more aggressive Fire.")
         addInfo(ModItems.FLOO_SIGN, "?????????????????????")
-        addInfo(ModItems.PORTKEY, "?????????????????????")
+        addInfo(ModItems.PORTKEY, "Use on a block to set a destination, then throw it on the ground.\n\nAfter 5 seconds, anyone who picks it up will be teleported to the destination.\n\nYou can craft it with any other item to disguise it!")
         addInfo(ModItems.ID_CARD, "Acts like an Entity Filter, but specifically for the player set.\n\nSet by using it in your hand.")
         addInfo(ModItems.EMERALD_COMPASS, "Points to the set player, if they are online.\n\nSet the player by crafting with an ID Card.")
         addInfo(ModItems.SOUND_PATTERN, "Represents a sound.\n\nSet with a Sound Recorder.")
