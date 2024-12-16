@@ -16,13 +16,13 @@ object ModItems {
         register("stable_ender_pearl") { StableEnderPearlItem() }
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
         register("biome_crystal") { BiomeCrystalItem() }
-    val SUMMONING_PENDULUM = basic("summoning_pendulum")
+    val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
+        register("summoning_pendulum") { SummoningPendulumItem() }
     val LOOT_GENERATOR = basic("loot_generator")
     val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
     val SAKANADE_SPORES = basic("sakanade_spores")
-    val ECTOPLASM = basic("ectoplasm")
     val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
@@ -37,13 +37,15 @@ object ModItems {
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
-    val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
 
     // Ingredients
     val TRANSFORMATION_CORE = basic("transformation_core")
     val OBSIDIAN_ROD = basic("obsidian_rod")
     val BIOME_SENSOR = basic("biome_sensor")
     val PLATE_BASE = basic("plate_base")
+    val ECTOPLASM = basic("ectoplasm")
+    val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
+
 
     // Plants
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =

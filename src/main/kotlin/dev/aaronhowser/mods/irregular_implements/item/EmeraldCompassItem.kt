@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
@@ -32,7 +32,7 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
             int: Int
         ): Float {
             if (localLevel == null || holdingEntity == null) return DEFAULT
-            val itemComponent = stack.get(ModDataComponents.SPECIFIC_ENTITY) ?: return DEFAULT
+            val itemComponent = stack.get(ModDataComponents.ENTITY_IDENTIFIER) ?: return DEFAULT
 
             val playerUuid = itemComponent.uuid
             val targetPlayer = localLevel.getPlayerByUUID(playerUuid) ?: return DEFAULT
@@ -66,13 +66,13 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
         if (interactionTarget !is Player) return InteractionResult.PASS
 
         val usedStack = player.getItemInHand(usedHand)
-        usedStack.set(ModDataComponents.SPECIFIC_ENTITY, SpecificEntityItemComponent(interactionTarget))
+        usedStack.set(ModDataComponents.ENTITY_IDENTIFIER, EntityIdentifierItemComponent(interactionTarget))
 
         return InteractionResult.SUCCESS
     }
 
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val component = stack.get(ModDataComponents.SPECIFIC_ENTITY) ?: return
+        val component = stack.get(ModDataComponents.ENTITY_IDENTIFIER) ?: return
 
         tooltipComponents.add(component.name)
     }

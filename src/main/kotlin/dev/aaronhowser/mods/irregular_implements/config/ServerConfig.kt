@@ -24,6 +24,8 @@ class ServerConfig(
         lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
 
         lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
+
+        lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
     }
 
     init {
@@ -60,6 +62,10 @@ class ServerConfig(
         PORTABLE_ENDER_BRIDGE_RANGE = builder
             .comment("How far should the Portable Ender Bridge be able to look for an Ender Anchor?")
             .defineInRange("portableEnderBridgeRange", 300, 1, Int.MAX_VALUE)
+
+        SUMMONING_PENDULUM_CAPACITY = builder
+            .comment("How many entities should the Summoning Pendulum be able to store?")
+            .defineInRange("summoningPendulumCapacity", 5, 1, Int.MAX_VALUE)
     }
 
 }
