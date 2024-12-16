@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
 
+//FIXME: Outdated info page
 class BlockReplacerItem : Item(
     Properties()
         .stacksTo(1)
@@ -201,6 +202,7 @@ class BlockReplacerItem : Item(
         return true
     }
 
+    //FIXME: Too long, maybe move to info page?
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,

@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.ItemContainerContents
 
+//FIXME: Outdated info page
 class VoidStoneItem : Item(
     Properties()
         .stacksTo(1)
@@ -80,7 +81,7 @@ class VoidStoneItem : Item(
         return true
     }
 
-    //FIXME: Too long
+    //FIXME: Too long, maybe move to info page?
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
         tooltipComponents.add(ModLanguageProvider.Tooltips.VOID_STONE_INSERT.toGrayComponent())
 
