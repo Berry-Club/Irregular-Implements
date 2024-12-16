@@ -169,7 +169,8 @@ object ModItems {
     val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
         register("block_mover") { BlockMoverItem() }
     val DIAMOND_BREAKER = basic("diamond_breaker")
-    val BLOCK_REPLACER = basic("block_replacer")
+    val BLOCK_REPLACER: DeferredItem<BlockReplacerItem> =
+        register("block_replacer") { BlockReplacerItem() }
 
     // Colors
     val GRASS_SEEDS: DeferredItem<GrassSeedItem> =

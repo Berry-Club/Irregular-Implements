@@ -2,21 +2,22 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.component.*
+import dev.aaronhowser.mods.irregular_implements.item.component.BiomePointsDataComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
-import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
-import net.minecraft.network.chat.contents.EntityDataSource
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
-import net.minecraft.network.syncher.EntityDataSerializer
 import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable.EnumCodec
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.material.Fluid
@@ -78,13 +79,6 @@ object ModDataComponents {
                 .networkSynchronized(CustomData.STREAM_CODEC.apply(ByteBufCodecs.list()))
         }
 
-    val ITEMSTACK: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStackComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("itemstack") {
-            it
-                .persistent(ItemStackComponent.CODEC)
-                .networkSynchronized(ItemStackComponent.STREAM_CODEC)
-        }
-
     val FLUID_TAGS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("fluid_tags") {
             it
@@ -139,6 +133,13 @@ object ModDataComponents {
             it
                 .persistent(Codec.INT)
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
+        }
+
+    val STACK_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<List<ItemStack>>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("stack_list") {
+            it
+                .persistent(ItemStack.CODEC.listOf())
+                .networkSynchronized(ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()))
         }
 
 }
