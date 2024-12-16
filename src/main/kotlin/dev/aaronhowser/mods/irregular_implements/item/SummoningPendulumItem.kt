@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.ChatFormatting
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -108,7 +109,9 @@ class SummoningPendulumItem : Item(
         val capacity = ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()
 
         tooltipComponents.add(
-            Component.literal("$amount/$capacity")
+            ModLanguageProvider.Tooltips.SUMMONING_PENDULUM_FRACTION
+                .toComponent(amount, capacity)
+                .withStyle(ChatFormatting.GRAY)
         )
 
         if (tooltipFlag.hasShiftDown()) {
@@ -129,7 +132,11 @@ class SummoningPendulumItem : Item(
                     entityType.getDescription()
                 }
 
-                tooltipComponents.add(ModLanguageProvider.Tooltips.LIST_POINT.toComponent(entityName))
+                tooltipComponents.add(
+                    ModLanguageProvider.Tooltips.LIST_POINT
+                        .toComponent(entityName)
+                        .withStyle(ChatFormatting.GRAY)
+                )
             }
         }
 
