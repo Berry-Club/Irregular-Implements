@@ -574,7 +574,7 @@ class ModLanguageProvider(
         addInfo(ModItems.GRASS_SEEDS, "Can be planted on Dirt to grow Grass.")
         addInfo(ModItems.SPECTRE_KEY, "Use for 5 seconds to teleport to a private dimension.\n\nDo the same there to return.")
         addInfo(ModItems.SPECTRE_ANCHOR, "When crafted with an item, the item is kept after death.")
-        addInfo(ModItems.SPECTRE_SWORD, "Comparable to a Diamond Sword with higher durability and enchantability.\n\nCan be used to kill Spirits.")
+        addInfo(ModItems.SPECTRE_SWORD, "Comparable to a Diamond Sword with higher durability and enchantability.\n\nIncreases the entity reach range of the player by 3 blocks, and can be used to kill Spirits.")
         addInfo(ModItems.SPECTRE_PICKAXE, "Comparable to a Diamond Pickaxe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
         addInfo(ModItems.SPECTRE_AXE, "Comparable to a Diamond Axe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")
         addInfo(ModItems.SPECTRE_SHOVEL, "Comparable to a Diamond Shovel with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.")

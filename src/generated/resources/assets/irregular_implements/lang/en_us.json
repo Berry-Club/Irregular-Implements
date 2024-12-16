@@ -320,7 +320,7 @@
   "info.irregular_implements.spectre_pickaxe": "Comparable to a Diamond Pickaxe with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.",
   "info.irregular_implements.spectre_sapling": "Created by using Ectoplasm on a Sapling.\n\nGrows into a Spectre Tree, whose blocks have a chance of dropping Ectoplasm.",
   "info.irregular_implements.spectre_shovel": "Comparable to a Diamond Shovel with higher durability and enchantability.\n\nIncreases the block reach of the player by 3 blocks.",
-  "info.irregular_implements.spectre_sword": "Comparable to a Diamond Sword with higher durability and enchantability.\n\nCan be used to kill Spirits.",
+  "info.irregular_implements.spectre_sword": "Comparable to a Diamond Sword with higher durability and enchantability.\n\nIncreases the entity reach range of the player by 3 blocks, and can be used to kill Spirits.",
   "info.irregular_implements.stable_ender_pearl": "Use to bind to yourself.\n\nSeven seconds after being dropped, it teleports the bound entity to it. If no entity is bound, it grabs a random entity within 10 blocks instead.",
   "info.irregular_implements.summoning_pendulum": "Found in dungeon chests, can be used to pick up and place entities.",
   "info.irregular_implements.super_lubricant_tincture": "Can be applied to any Boots to make you slide when wearing them.\n\nCan be washed with a Water Bottle after.",
