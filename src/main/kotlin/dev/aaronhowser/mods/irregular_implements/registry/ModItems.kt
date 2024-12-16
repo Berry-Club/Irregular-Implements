@@ -3,10 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.world.food.Foods
-import net.minecraft.world.item.ArmorItem
-import net.minecraft.world.item.DyeColor
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemNameBlockItem
+import net.minecraft.world.item.*
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -123,11 +120,15 @@ object ModItems {
     val SPECTRE_ILLUMINATOR = basic("spectre_illuminator")
     val SPECTRE_KEY = basic("spectre_key")
     val SPECTRE_ANCHOR = basic("spectre_anchor")
-    val SPECTRE_SWORD = basic("spectre_sword")
-    val SPECTRE_PICKAXE = basic("spectre_pickaxe")
-    val SPECTRE_AXE = basic("spectre_axe")
-    val SPECTRE_SHOVEL = basic("spectre_shovel")
     val SPECTRE_CHARGER = basic("spectre_charger") //Same item for all tiers
+    val SPECTRE_SWORD: DeferredItem<SwordItem> =
+        register("spectre_sword") { ModToolItems.SPECTRE_SWORD }
+    val SPECTRE_PICKAXE: DeferredItem<PickaxeItem> =
+        register("spectre_pickaxe") { ModToolItems.SPECTRE_PICKAXE }
+    val SPECTRE_AXE: DeferredItem<AxeItem> =
+        register("spectre_axe") { ModToolItems.SPECTRE_AXE }
+    val SPECTRE_SHOVEL: DeferredItem<ShovelItem> =
+        register("spectre_shovel") { ModToolItems.SPECTRE_SHOVEL }
 
     // Redstone
     val ADVANCED_REDSTONE_REPEATER = basic("advanced_redstone_repeater")

@@ -7,7 +7,6 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
-import net.minecraft.util.Mth
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.ArmorMaterials
@@ -65,7 +64,7 @@ object ModArmorMaterials {
                 .leg(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.LEGGINGS))
                 .chestplate(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.CHESTPLATE))
                 .helmet(ArmorMaterials.DIAMOND.value().getDefense(ArmorItem.Type.HELMET))
-                .enchantValue(Mth.ceil(ArmorMaterials.DIAMOND.value().enchantmentValue * 1.5))
+                .enchantValue(ArmorMaterials.GOLD.value().enchantmentValue)
         )
 
 
