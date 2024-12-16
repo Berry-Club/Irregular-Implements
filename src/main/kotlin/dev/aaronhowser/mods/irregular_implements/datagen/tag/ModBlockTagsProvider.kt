@@ -31,9 +31,24 @@ class ModBlockTagsProvider(
         val SUPER_LUBRICATED = create("super_lubricated")
         val C_CROPS_BEAN: TagKey<Block> = BlockTags.create(OtherUtil.modResource("crops/bean"))
         val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
+        val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
     }
 
-    private fun colorTags() {
+    override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(BLOCK_REPLACER_BLACKLIST)
+            .add(
+                Blocks.BEDROCK,
+                Blocks.BARRIER,
+                Blocks.COMMAND_BLOCK,
+                Blocks.CHAIN_COMMAND_BLOCK,
+                Blocks.REPEATING_COMMAND_BLOCK,
+                Blocks.STRUCTURE_BLOCK,
+                Blocks.JIGSAW,
+                Blocks.STRUCTURE_VOID,
+                Blocks.END_PORTAL_FRAME,
+                Blocks.AIR,
+            )
 
         this.tag(BLOCK_MOVER_BLACKLIST)
             .add(
@@ -50,38 +65,6 @@ class ModBlockTagsProvider(
             .addTag(
                 BlockTags.PORTALS,
             )
-
-        for (color in DyeColor.entries) {
-            val coloredGrass = ModBlocks.getColoredGrass(color).get()
-            val stainedBrick = ModBlocks.getStainedBrick(color).get()
-            val luminousStainedBrick = ModBlocks.getStainedBrickLuminous(color).get()
-            val luminousBlock = ModBlocks.getLuminousBlock(color).get()
-            val translucentLuminousBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
-
-            this.tag(Tags.Blocks.DYED)
-                .add(
-                    coloredGrass,
-                    stainedBrick,
-                    luminousStainedBrick,
-                    luminousBlock,
-                    translucentLuminousBlock
-                )
-
-            val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.getName()))
-
-            this.tag(coloredTag)
-                .add(
-                    coloredGrass,
-                    stainedBrick,
-                    luminousStainedBrick,
-                    luminousBlock,
-                    translucentLuminousBlock
-                )
-
-        }
-    }
-
-    override fun addTags(provider: HolderLookup.Provider) {
 
         colorTags()
 
@@ -375,6 +358,38 @@ class ModBlockTagsProvider(
                 ModBlocks.SPECTRE_LEAVES.get()
             )
 
+    }
+
+    private fun colorTags() {
+
+        for (color in DyeColor.entries) {
+            val coloredGrass = ModBlocks.getColoredGrass(color).get()
+            val stainedBrick = ModBlocks.getStainedBrick(color).get()
+            val luminousStainedBrick = ModBlocks.getStainedBrickLuminous(color).get()
+            val luminousBlock = ModBlocks.getLuminousBlock(color).get()
+            val translucentLuminousBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
+
+            this.tag(Tags.Blocks.DYED)
+                .add(
+                    coloredGrass,
+                    stainedBrick,
+                    luminousStainedBrick,
+                    luminousBlock,
+                    translucentLuminousBlock
+                )
+
+            val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.getName()))
+
+            this.tag(coloredTag)
+                .add(
+                    coloredGrass,
+                    stainedBrick,
+                    luminousStainedBrick,
+                    luminousBlock,
+                    translucentLuminousBlock
+                )
+
+        }
     }
 
 }

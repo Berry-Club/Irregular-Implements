@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.BlockItem
@@ -15,6 +16,13 @@ class BlockReplacerItem : Item(
 ) {
 
     override fun useOn(context: UseOnContext): InteractionResult {
+
+        val level = context.level
+        val clickedPos = context.clickedPos
+        val clickedState = level.getBlockState(clickedPos)
+
+        if (clickedState.`is`(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)) return InteractionResult.PASS
+
 //        val storedStacks = context.itemInHand.get(ModDataComponents.STACK_LIST)
 //            ?.filter { it.item is BlockItem }
 //            ?: return InteractionResult.PASS
@@ -22,10 +30,6 @@ class BlockReplacerItem : Item(
         val storedStacks = listOf(Blocks.STONE.asItem().defaultInstance)
 
         if (storedStacks.isEmpty()) return InteractionResult.PASS
-
-        val level = context.level
-        val clickedPos = context.clickedPos
-        val clickedState = level.getBlockState(clickedPos)
 
         val possibleBlocksToPlace = storedStacks.filterNot { clickedState.`is`((it.item as BlockItem).block) }
 
@@ -36,6 +40,7 @@ class BlockReplacerItem : Item(
             .getStateForPlacement(BlockPlaceContext(context))
             ?: return InteractionResult.PASS
 
+        level.destroyBlock(clickedPos, true)    //TODO: Make it pop out of the clicked face
         level.setBlockAndUpdate(clickedPos, stateToPlace)
 
         return InteractionResult.SUCCESS
