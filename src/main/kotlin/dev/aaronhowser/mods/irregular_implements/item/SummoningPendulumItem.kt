@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsPr
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.item.context.UseOnContext
 
@@ -90,6 +92,45 @@ class SummoningPendulumItem : Item(
         level.addFreshEntity(entity)
 
         return InteractionResult.SUCCESS
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        val customDataList: List<CustomData> = stack.get(ModDataComponents.ENTITY_LIST) ?: emptyList()
+
+        val amount = customDataList.size
+        val capacity = ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()
+
+        tooltipComponents.add(
+            Component.literal("$amount/$capacity")
+        )
+
+        if (tooltipFlag.hasShiftDown()) {
+            for (customData in customDataList) {
+                val entityNbt = customData.copyTag()
+
+                val entityName: Component = if (entityNbt.contains("CustomName")) {
+                    val customName = entityNbt.getString("CustomName")
+                    Component.literal(customName)
+                } else {
+                    val entityTypeString = entityNbt.getString("id")
+                    val entityType = context.level()
+                        ?.registryAccess()
+                        ?.registryOrThrow(Registries.ENTITY_TYPE)
+                        ?.get(ResourceLocation.parse(entityTypeString))
+                        ?: continue
+
+                    entityType.getDescription()
+                }
+
+                tooltipComponents.add(entityName)
+            }
+        }
+
     }
 
 }
