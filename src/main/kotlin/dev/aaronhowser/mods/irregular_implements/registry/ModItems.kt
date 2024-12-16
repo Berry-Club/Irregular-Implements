@@ -45,7 +45,8 @@ object ModItems {
     val PLATE_BASE = basic("plate_base")
     val ECTOPLASM = basic("ectoplasm")
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
-
+    val SPECTRE_INGOT = basic("spectre_ingot")
+    val SPECTRE_STRING = basic("spectre_string")
 
     // Plants
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
@@ -117,8 +118,6 @@ object ModItems {
         register("imbue_spectre") { ImbueItem(ModEffects.SPECTRE_IMBUE) }
 
     // Spectre
-    val SPECTRE_INGOT = basic("spectre_ingot")
-    val SPECTRE_STRING = basic("spectre_string")
     val SPECTRE_ILLUMINATOR = basic("spectre_illuminator")
     val SPECTRE_KEY = basic("spectre_key")
     val SPECTRE_ANCHOR = basic("spectre_anchor")
