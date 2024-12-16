@@ -17,7 +17,6 @@ import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable.EnumCodec
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.material.Fluid
@@ -133,6 +132,13 @@ object ModDataComponents {
             it
                 .persistent(Codec.INT)
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
+        }
+
+    val ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Boolean>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("enabled") {
+            it
+                .persistent(Codec.BOOL)
+                .networkSynchronized(ByteBufCodecs.BOOL)
         }
 
 }

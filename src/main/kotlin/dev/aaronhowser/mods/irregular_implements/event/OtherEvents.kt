@@ -5,10 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.block.CompressedSlimeBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
-import dev.aaronhowser.mods.irregular_implements.item.BlockMoverItem
-import dev.aaronhowser.mods.irregular_implements.item.LavaCharmItem
-import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
-import dev.aaronhowser.mods.irregular_implements.item.WhiteStoneItem
+import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData
 import net.minecraft.world.InteractionHand
 import net.neoforged.bus.api.SubscribeEvent
@@ -18,6 +15,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
@@ -73,6 +71,11 @@ object OtherEvents {
     @SubscribeEvent
     fun onLivingDeath(event: LivingDeathEvent) {
         WhiteStoneItem.tryPreventDeath(event)
+    }
+
+    @SubscribeEvent
+    fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
+        PortkeyItem.pickUpPortkey(event)
     }
 
 }

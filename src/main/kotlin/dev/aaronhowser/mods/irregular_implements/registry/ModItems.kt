@@ -9,11 +9,15 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModItems {
 
+    //TODO: Check rarity for all items
+
     val ITEM_REGISTRY: DeferredRegister.Items =
         DeferredRegister.createItems(IrregularImplements.ID)
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
+    val PORTKEY: DeferredItem<PortkeyItem> =
+        register("portkey") { PortkeyItem() }
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
         register("biome_crystal") { BiomeCrystalItem() }
     val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
@@ -30,12 +34,17 @@ object ModItems {
         register("emerald_compass") { EmeraldCompassItem() }
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
         register("blaze_and_steel") { BlazeAndSteelItem() }
-    val PORTKEY = basic("portkey")
     val ESCAPE_ROPE = basic("escape_rope")
     val ENDER_BUCKET = basic("ender_bucket")
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
         register("chunk_analyzer") { ChunkAnalyzerItem() }
+    val LAVA_CHARM: DeferredItem<LavaCharmItem> =
+        register("lava_charm") { LavaCharmItem() } //TODO: Advancement joking about the ui bar
+    val OBSIDIAN_SKULL: DeferredItem<Item> =
+        basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
+    val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
+        basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
     val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
 
     // Ingredients
@@ -59,14 +68,6 @@ object ModItems {
         register("bean_stew") { Item(Item.Properties().stacksTo(1).food(Foods.stew(8).build())) }
     val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
     val MAGIC_BEAN = basic("magic_bean")    //rarity blue
-
-    // Curios
-    val LAVA_CHARM: DeferredItem<LavaCharmItem> =
-        register("lava_charm") { LavaCharmItem() } //TODO: Advancement joking about the ui bar
-    val OBSIDIAN_SKULL: DeferredItem<Item> =
-        basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
-    val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
-        basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
 
     // Armors
     val MAGIC_HOOD: DeferredItem<ArmorItem> =
