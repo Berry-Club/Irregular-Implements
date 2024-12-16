@@ -460,6 +460,9 @@
   "tooltip.irregular_implements.shift_for_more": "Hold SHIFT for more information",
   "tooltip.irregular_implements.summoning_pendulum_fraction": "Stored: %d/%d",
   "tooltip.irregular_implements.summoning_pendulum_list_each": "• %s",
+  "tooltip.irregular_implements.void_stone_holding": "Currently holding %s, inserting another will void and replace it",
+  "tooltip.irregular_implements.void_stone_insert": "Store items by right-clicking them on this stack",
+  "tooltip.irregular_implements.void_stone_remove": "You can remove the %s by right-clicking the Stone into an empty slot",
   "tooltip.irregular_implements.white_stone_full_moon": "Charge under the full moon",
   "tooltip.irregular_implements.with_block_entity": "%s with block entity"
 }

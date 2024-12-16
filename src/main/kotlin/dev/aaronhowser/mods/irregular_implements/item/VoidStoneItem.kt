@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import net.minecraft.core.component.DataComponents
+import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.SlotAccess
@@ -9,6 +12,7 @@ import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.ItemContainerContents
 
 class VoidStoneItem : Item(
@@ -74,6 +78,18 @@ class VoidStoneItem : Item(
         )
 
         return true
+    }
+
+    //FIXME: Too long
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        tooltipComponents.add(ModLanguageProvider.Tooltips.VOID_STONE_INSERT.toGrayComponent())
+
+        val heldItem = stack.get(DataComponents.CONTAINER)?.nonEmptyItems()?.firstOrNull()
+        if (heldItem != null) {
+            tooltipComponents.add(ModLanguageProvider.Tooltips.VOID_STONE_HOLDING.toGrayComponent(heldItem.displayName))
+            tooltipComponents.add(ModLanguageProvider.Tooltips.VOID_STONE_REMOVE.toGrayComponent(heldItem.displayName))
+        }
+
     }
 
 }

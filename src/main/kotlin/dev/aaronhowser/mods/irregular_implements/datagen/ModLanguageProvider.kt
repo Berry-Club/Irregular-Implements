@@ -427,6 +427,9 @@ class ModLanguageProvider(
         const val BLOCK_REPLACER_UNLOADING = "tooltip.irregular_implements.block_replacer_unloading"
         const val BLOCK_REPLACER_ALT_FOR_LIST = "tooltip.irregular_implements.block_replacer_alt_for_list"
         const val ITEM_COUNT = "tooltip.irregular_implements.item_count"
+        const val VOID_STONE_INSERT = "tooltip.irregular_implements.void_stone_insert"
+        const val VOID_STONE_HOLDING = "tooltip.irregular_implements.void_stone_holding"
+        const val VOID_STONE_REMOVE = "tooltip.irregular_implements.void_stone_remove"
     }
 
     private fun addTooltips() {
@@ -444,6 +447,9 @@ class ModLanguageProvider(
         add(Tooltips.BLOCK_REPLACER_UNLOADING, "Remove blocks by right-clicking this stack on empty slots")
         add(Tooltips.BLOCK_REPLACER_ALT_FOR_LIST, "Hold ALT to see stored blocks")
         add(Tooltips.ITEM_COUNT, "%s x%d")
+        add(Tooltips.VOID_STONE_INSERT, "Store items by right-clicking them on this stack")
+        add(Tooltips.VOID_STONE_HOLDING, "Currently holding %s, inserting another will void and replace it")
+        add(Tooltips.VOID_STONE_REMOVE, "You can remove the %s by right-clicking the Stone into an empty slot")
     }
 
     object Info {
