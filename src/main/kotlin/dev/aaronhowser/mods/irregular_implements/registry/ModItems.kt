@@ -158,7 +158,8 @@ object ModItems {
         register("biome_painter") { BiomePainterItem() }
     val DROP_FILTER = basic("drop_filter")
     val VOIDING_DROP_FILTER = basic("voiding_drop_filter")
-    val VOID_STONE = basic("void_stone")
+    val VOID_STONE: DeferredItem<VoidStoneItem> =
+        register("void_stone") { VoidStoneItem() }
     val WHITE_STONE: DeferredItem<WhiteStoneItem> =
         register("white_stone") { WhiteStoneItem() }
     val MAGNETIC_FORCE = basic("magnetic_force")
