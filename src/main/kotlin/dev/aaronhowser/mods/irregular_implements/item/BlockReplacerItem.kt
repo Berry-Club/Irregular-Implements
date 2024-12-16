@@ -39,7 +39,10 @@ class BlockReplacerItem : Item(
         if (storedStacks.isEmpty()) return InteractionResult.PASS
 
         val storedBlockStacks = storedStacks.filter { it.item is BlockItem }
-        val possibleBlocksToPlace = storedBlockStacks.filterNot { clickedState.`is`((it.item as BlockItem).block) }
+        val possibleBlocksToPlace = storedBlockStacks.filter {
+            !clickedState.`is`((it.item as BlockItem).block)
+                    && (it.item as BlockItem).block.getStateForPlacement(BlockPlaceContext(context)) != null
+        }
 
         val stackToPlace = possibleBlocksToPlace.randomOrNull() ?: return InteractionResult.PASS
 
