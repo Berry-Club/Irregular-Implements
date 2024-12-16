@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.registries.Registries
@@ -127,7 +129,7 @@ class SummoningPendulumItem : Item(
                     entityType.getDescription()
                 }
 
-                tooltipComponents.add(entityName)
+                tooltipComponents.add(ModLanguageProvider.Tooltips.LIST_POINT.toComponent(entityName))
             }
         }
 

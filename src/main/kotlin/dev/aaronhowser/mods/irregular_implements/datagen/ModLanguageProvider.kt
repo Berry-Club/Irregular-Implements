@@ -419,6 +419,8 @@ class ModLanguageProvider(
         const val WITH_BLOCK_ENTITY = "tooltip.irregular_implements.with_block_entity"
         const val CHARGE = "tooltip.irregular_implements.charge"
         const val WHITE_STONE_FULL_MOON = "tooltip.irregular_implements.white_stone_full_moon"
+        const val SUMMONING_PENDULUM_FRACTION = "tooltip.irregular_implements.summoning_pendulum_fraction"
+        const val LIST_POINT = "tooltip.irregular_implements.summoning_pendulum_list_each"
     }
 
     private fun addTooltips() {
@@ -430,6 +432,8 @@ class ModLanguageProvider(
         add(Tooltips.WITH_BLOCK_ENTITY, "%s with block entity")
         add(Tooltips.CHARGE, "Charge: %d%%")
         add(Tooltips.WHITE_STONE_FULL_MOON, "Charge under the full moon")
+        add(Tooltips.SUMMONING_PENDULUM_FRACTION, "Stored: %d/%d")
+        add(Tooltips.LIST_POINT, "• %s")
     }
 
     object Info {
