@@ -1,9 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.component.DataComponents
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -12,10 +15,7 @@ import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
-import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
+import net.minecraft.world.item.*
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.context.UseOnContext
@@ -179,7 +179,7 @@ class BlockReplacerItem : Item(
         val otherStack = slot.item
         if (!otherStack.isEmpty) return false
 
-        val currentContents = thisStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(listOf())
+        val currentContents = thisStack.get(DataComponents.CONTAINER) ?: return false
         val storedStacks = currentContents.nonEmptyItems().toMutableList()
 
         if (storedStacks.isEmpty()) return false
@@ -199,6 +199,48 @@ class BlockReplacerItem : Item(
         )
 
         return true
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+
+        if (!tooltipFlag.hasShiftDown()) {
+            val controlsComponent = ModLanguageProvider.Tooltips.SHIFT_FOR_MORE.toGrayComponent()
+            tooltipComponents.add(controlsComponent)
+        } else {
+            val loadingComponent = ModLanguageProvider.Tooltips.BLOCK_REPLACER_LOADING.toGrayComponent()
+            val unloadingComponent = ModLanguageProvider.Tooltips.BLOCK_REPLACER_UNLOADING.toGrayComponent()
+
+            tooltipComponents.add(loadingComponent)
+            tooltipComponents.add(unloadingComponent)
+        }
+
+        val storedStacks = stack.get(DataComponents.CONTAINER)?.nonEmptyItems()?.toList() ?: return
+
+        if (!tooltipFlag.hasAltDown()) {
+            val altComponent = ModLanguageProvider.Tooltips.BLOCK_REPLACER_ALT_FOR_LIST.toGrayComponent()
+            tooltipComponents.add(altComponent)
+        } else {
+            val map = mutableMapOf<Item, Int>()
+
+            for (storedStack in storedStacks) {
+                val count = map.getOrDefault(storedStack.item, 0)
+                map[storedStack.item] = count + storedStack.count
+            }
+
+            for ((item, count) in map) {
+                val itemComponent = item.defaultInstance.displayName
+
+                val component = ModLanguageProvider.Tooltips.ITEM_COUNT
+                    .toGrayComponent(itemComponent, count)
+
+                tooltipComponents.add(component)
+            }
+        }
     }
 
 }

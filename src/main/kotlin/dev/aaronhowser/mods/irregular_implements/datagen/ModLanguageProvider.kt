@@ -18,7 +18,7 @@ class ModLanguageProvider(
 
     companion object {
         fun String.toComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args)
-        fun String.toGrayComponent(vararg args: Any?): MutableComponent = this.toComponent(args).withStyle(ChatFormatting.GRAY)
+        fun String.toGrayComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args).withStyle(ChatFormatting.GRAY)
 
         fun getInfoString(itemLike: ItemLike): String {
             val location = BuiltInRegistries.ITEM.getKey(itemLike.asItem())
@@ -425,6 +425,7 @@ class ModLanguageProvider(
         const val LIST_POINT = "tooltip.irregular_implements.summoning_pendulum_list_each"
         const val BLOCK_REPLACER_LOADING = "tooltip.irregular_implements.block_replacer_loading"
         const val BLOCK_REPLACER_UNLOADING = "tooltip.irregular_implements.block_replacer_unloading"
+        const val BLOCK_REPLACER_ALT_FOR_LIST = "tooltip.irregular_implements.block_replacer_alt_for_list"
         const val ITEM_COUNT = "tooltip.irregular_implements.item_count"
     }
 
@@ -441,6 +442,7 @@ class ModLanguageProvider(
         add(Tooltips.LIST_POINT, "• %s")
         add(Tooltips.BLOCK_REPLACER_LOADING, "Store blocks by right-clicking them on this stack")
         add(Tooltips.BLOCK_REPLACER_UNLOADING, "Remove blocks by right-clicking this stack on empty slots")
+        add(Tooltips.BLOCK_REPLACER_ALT_FOR_LIST, "Hold ALT to see stored blocks")
         add(Tooltips.ITEM_COUNT, "%s x%d")
     }
 
