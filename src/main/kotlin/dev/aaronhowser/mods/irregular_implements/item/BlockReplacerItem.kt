@@ -76,7 +76,11 @@ class BlockReplacerItem : Item(
             && NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
         ) return InteractionResult.PASS
 
-        val drops = Block.getDrops(clickedState, level, clickedPos, level.getBlockEntity(clickedPos))
+        val drops = if (player.hasInfiniteMaterials()) {
+            emptyList()
+        } else {
+            Block.getDrops(clickedState, level, clickedPos, level.getBlockEntity(clickedPos))
+        }
 
         level.captureBlockSnapshots = true
         level.setBlockAndUpdate(clickedPos, stateToPlace)
@@ -153,7 +157,7 @@ class BlockReplacerItem : Item(
         other.count = 0
 
         player.level().playSound(
-            null,
+            if (player.level().isClientSide) player else null,
             player.blockPosition(),
             SoundEvents.ITEM_PICKUP,
             SoundSource.PLAYERS,
@@ -186,7 +190,7 @@ class BlockReplacerItem : Item(
         thisStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(storedStacks))
 
         player.level().playSound(
-            null,
+            if (player.level().isClientSide) player else null,
             player.blockPosition(),
             SoundEvents.ITEM_PICKUP,
             SoundSource.PLAYERS,
