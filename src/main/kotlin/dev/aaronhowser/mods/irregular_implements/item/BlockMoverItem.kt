@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -61,8 +61,7 @@ class BlockMoverItem : Item(
             blockName
         } else {
             ModLanguageProvider.Tooltips.WITH_BLOCK_ENTITY
-                .toComponent(blockName)
-                .withStyle(ChatFormatting.GRAY)
+                .toGrayComponent(blockName)
         }
 
         tooltipComponents.add(component)

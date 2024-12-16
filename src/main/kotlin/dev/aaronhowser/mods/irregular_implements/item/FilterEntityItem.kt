@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.ChatFormatting
@@ -80,8 +81,7 @@ class FilterEntityItem : Item(
             tooltipComponents,
             tooltipFlag,
             ModLanguageProvider.Tooltips.ENTITY_FILTER_CONTROLS
-                .toComponent()
-                .withStyle(ChatFormatting.GRAY)
+                .toGrayComponent()
         )
     }
 

@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.ChatFormatting
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.network.chat.Component
@@ -17,6 +18,7 @@ class ModLanguageProvider(
 
     companion object {
         fun String.toComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args)
+        fun String.toGrayComponent(vararg args: Any?): MutableComponent = this.toComponent(args).withStyle(ChatFormatting.GRAY)
 
         fun getInfoString(itemLike: ItemLike): String {
             val location = BuiltInRegistries.ITEM.getKey(itemLike.asItem())
@@ -421,10 +423,13 @@ class ModLanguageProvider(
         const val WHITE_STONE_FULL_MOON = "tooltip.irregular_implements.white_stone_full_moon"
         const val SUMMONING_PENDULUM_FRACTION = "tooltip.irregular_implements.summoning_pendulum_fraction"
         const val LIST_POINT = "tooltip.irregular_implements.summoning_pendulum_list_each"
+        const val BLOCK_REPLACER_LOADING = "tooltip.irregular_implements.block_replacer_loading"
+        const val BLOCK_REPLACER_UNLOADING = "tooltip.irregular_implements.block_replacer_unloading"
+        const val ITEM_COUNT = "tooltip.irregular_implements.item_count"
     }
 
     private fun addTooltips() {
-        add(Tooltips.SHIFT_FOR_MORE, "Hold [Shift] for more information")
+        add(Tooltips.SHIFT_FOR_MORE, "Hold SHIFT for more information")
         add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
         add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
         add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
@@ -434,6 +439,9 @@ class ModLanguageProvider(
         add(Tooltips.WHITE_STONE_FULL_MOON, "Charge under the full moon")
         add(Tooltips.SUMMONING_PENDULUM_FRACTION, "Stored: %d/%d")
         add(Tooltips.LIST_POINT, "• %s")
+        add(Tooltips.BLOCK_REPLACER_LOADING, "Store blocks by right-clicking them on this stack")
+        add(Tooltips.BLOCK_REPLACER_UNLOADING, "Remove blocks by right-clicking this stack on empty slots")
+        add(Tooltips.ITEM_COUNT, "%s x%d")
     }
 
     object Info {

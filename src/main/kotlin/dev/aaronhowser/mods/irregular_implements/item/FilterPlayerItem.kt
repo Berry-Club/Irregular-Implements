@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -87,9 +88,7 @@ class FilterPlayerItem : Item(
         OtherUtil.moreInfoTooltip(
             tooltipComponents,
             tooltipFlag,
-            ModLanguageProvider.Tooltips.PLAYER_FILTER_CONTROLS
-                .toComponent()
-                .withStyle(ChatFormatting.GRAY)
+            ModLanguageProvider.Tooltips.PLAYER_FILTER_CONTROLS.toGrayComponent()
         )
     }
 

@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
@@ -63,8 +64,7 @@ object OtherUtil {
         if (!tooltipFlag.hasShiftDown()) {
             tooltipComponents.add(
                 ModLanguageProvider.Tooltips.SHIFT_FOR_MORE
-                    .toComponent()
-                    .withStyle(ChatFormatting.GRAY)
+                    .toGrayComponent()
             )
         } else {
             tooltipComponents.addAll(moreInfo)

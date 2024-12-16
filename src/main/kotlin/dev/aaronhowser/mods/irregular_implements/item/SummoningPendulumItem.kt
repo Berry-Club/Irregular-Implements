@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.ChatFormatting
@@ -110,8 +111,7 @@ class SummoningPendulumItem : Item(
 
         tooltipComponents.add(
             ModLanguageProvider.Tooltips.SUMMONING_PENDULUM_FRACTION
-                .toComponent(amount, capacity)
-                .withStyle(ChatFormatting.GRAY)
+                .toGrayComponent(amount, capacity)
         )
 
         if (tooltipFlag.hasShiftDown()) {
@@ -134,8 +134,7 @@ class SummoningPendulumItem : Item(
 
                 tooltipComponents.add(
                     ModLanguageProvider.Tooltips.LIST_POINT
-                        .toComponent(entityName)
-                        .withStyle(ChatFormatting.GRAY)
+                        .toGrayComponent(entityName)
                 )
             }
         }

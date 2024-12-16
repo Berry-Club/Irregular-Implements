@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -54,9 +55,9 @@ object ModInteractionRecipes {
         val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
 
         val component = ModLanguageProvider.Tooltips.COMPRESSED_SLIME_AMOUNT
-            .toComponent(compressionLevel)
+            .toGrayComponent(compressionLevel)
             .withStyle {
-                it.withColor(ChatFormatting.GRAY).withUnderlined(true).withItalic(false)
+                it.withUnderlined(true).withItalic(false)
             }
 
         stack.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))

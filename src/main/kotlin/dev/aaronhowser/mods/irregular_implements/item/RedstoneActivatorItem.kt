@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData
@@ -98,8 +99,7 @@ class RedstoneActivatorItem : Item(
         val duration = stack.get(ModDataComponents.DURATION) ?: return
 
         val component = "Duration: $duration"
-            .toComponent()
-            .withStyle(ChatFormatting.GRAY)
+            .toGrayComponent()
 
         tooltipComponents.add(component)
     }
