@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.core.component.DataComponents
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.block.Blocks
@@ -12,7 +14,6 @@ import net.minecraft.world.level.block.Blocks
 class BlockReplacerItem : Item(
     Properties()
         .stacksTo(1)
-        .component(ModDataComponents.STACK_LIST, emptyList())
 ) {
 
     override fun useOn(context: UseOnContext): InteractionResult {
@@ -23,15 +24,22 @@ class BlockReplacerItem : Item(
 
         if (clickedState.`is`(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)) return InteractionResult.PASS
 
-//        val storedStacks = context.itemInHand.get(ModDataComponents.STACK_LIST)
-//            ?.filter { it.item is BlockItem }
-//            ?: return InteractionResult.PASS
+        val usedStack = context.itemInHand
 
-        val storedStacks = listOf(Blocks.STONE.asItem().defaultInstance)
+        val component = usedStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(
+            listOf(
+                Blocks.STONE.asItem().defaultInstance.copyWithCount(32),
+                Blocks.GRASS_BLOCK.asItem().defaultInstance.copyWithCount(32),
+                Items.DIAMOND_PICKAXE.defaultInstance
+            )
+        )
+
+        val storedStacks = component.nonEmptyItems().toList()
 
         if (storedStacks.isEmpty()) return InteractionResult.PASS
 
-        val possibleBlocksToPlace = storedStacks.filterNot { clickedState.`is`((it.item as BlockItem).block) }
+        val storedBlockStacks = storedStacks.filter { it.item is BlockItem }
+        val possibleBlocksToPlace = storedBlockStacks.filterNot { clickedState.`is`((it.item as BlockItem).block) }
 
         val stackToPlace = possibleBlocksToPlace.randomOrNull() ?: return InteractionResult.PASS
 
@@ -39,6 +47,13 @@ class BlockReplacerItem : Item(
             .block
             .getStateForPlacement(BlockPlaceContext(context))
             ?: return InteractionResult.PASS
+
+        stackToPlace.consume(1, context.player)
+
+        usedStack.set(
+            DataComponents.CONTAINER,
+            ItemContainerContents.fromItems(storedStacks)
+        )
 
         level.destroyBlock(clickedPos, true)    //TODO: Make it pop out of the clicked face
         level.setBlockAndUpdate(clickedPos, stateToPlace)

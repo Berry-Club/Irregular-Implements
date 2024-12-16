@@ -135,11 +135,4 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
-    val STACK_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<List<ItemStack>>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("stack_list") {
-            it
-                .persistent(ItemStack.CODEC.listOf())
-                .networkSynchronized(ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()))
-        }
-
 }
