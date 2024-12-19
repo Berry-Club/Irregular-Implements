@@ -189,6 +189,7 @@
   "effect.irregular_implements.imbue_poison": "Poison Imbue",
   "effect.irregular_implements.imbue_spectre": "Spectre Imbue",
   "effect.irregular_implements.imbue_wither": "Wither Imbue",
+  "enchantment.irregular_implements.magnetic": "Magnetic",
   "info.irregular_implements.accelerator_plate": "Entities moving on this Plate are sped up slightly, to a limit.",
   "info.irregular_implements.advanced_item_collector": "Collects items in a configurable radius and inserts it into the inventory it's placed on.\n\nYou can also insert an Item Filter for more control.",
   "info.irregular_implements.advanced_redstone_interface": "Powers up to 9 linked blocks with the Redstone signal it's receiving.\n\nUse a Redstone Tool to link it to blocks.",

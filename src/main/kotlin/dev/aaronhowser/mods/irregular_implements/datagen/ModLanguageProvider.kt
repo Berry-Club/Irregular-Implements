@@ -40,6 +40,15 @@ class ModLanguageProvider(
         addEffects()
         addSubtitles()
         addMessages()
+        addMisc()
+    }
+
+    object Misc {
+        const val MAGNETIC_ENCHANT = "enchantment.irregular_implements.magnetic"
+    }
+
+    private fun addMisc() {
+        add(Misc.MAGNETIC_ENCHANT, "Magnetic")
     }
 
     object Messages {
@@ -611,8 +620,6 @@ class ModLanguageProvider(
         addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
         addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
     }
-
-    //TODO: Info for Magnetic enchant
 
     private fun addEffects() {
         addEffect(ModEffects.FIRE_IMBUE, "Fire Imbue")

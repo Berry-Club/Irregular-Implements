@@ -4,10 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModBlockLootTablesSubProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.PackOutput
@@ -68,6 +65,11 @@ object ModDataGen {
             ModSoundDefinitionsProvider(output, existingFileHelper)
         )
 
+        val dataPackProvider = generator.addProvider(
+            event.includeServer(),
+            ModDataPackProvider(output, lookupProvider)
+        )
+
         val blockTagProvider = generator.addProvider(
             event.includeServer(),
             ModBlockTagsProvider(output, lookupProvider, existingFileHelper)
@@ -84,10 +86,9 @@ object ModDataGen {
             event.includeServer(),
             ModEntityTypeTagsProvider(output, lookupProvider, existingFileHelper)
         )
-
-        val dataPackProvider = generator.addProvider(
+        val enchantmentTagProvider = generator.addProvider(
             event.includeServer(),
-            ModDataPackProvider(output, lookupProvider)
+            ModEnchantmentTagsProvider(output, dataPackProvider.registryProvider, existingFileHelper)
         )
 
         val curioProvider = generator.addProvider(

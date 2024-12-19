@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.datagen.worldgen
+package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderGetter

@@ -31,6 +31,7 @@ class ModItemTagsProvider(
         val C_CROPS_BEAN = common("crops/bean")
         val C_RODS_OBSIDIAN = common("rods/obsidian")
         val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
+        val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -40,6 +41,12 @@ class ModItemTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(ENCHANTABLE_MAGNETIC)
+            .addTags(
+                Tags.Items.MINING_TOOL_TOOLS,
+                Tags.Items.MELEE_WEAPON_TOOLS
+            )
 
         this.tag(RING_CURIO)
             .add(
