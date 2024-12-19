@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.GrassColor
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
@@ -37,6 +38,16 @@ object ClientModBusEvents {
         return ItemColor { _, _ -> dyeColor.textureDiffuseColor }
     }
 
+    private fun getLocalFoliageColor(stack: ItemStack, int: Int): Int {
+        val localPlayer = ClientUtil.localPlayer
+        val localFoliageColor = localPlayer?.level()
+            ?.getBiome(localPlayer.blockPosition())
+            ?.value()
+            ?.foliageColor
+
+        return localFoliageColor ?: GrassColor.getDefaultColor()
+    }
+
     @SubscribeEvent
     fun registerItemColors(event: RegisterColorHandlersEvent.Item) {
         for (dyeColor in DyeColor.entries) {
@@ -52,15 +63,7 @@ object ClientModBusEvents {
         event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
 
         event.register(
-            { _, _ ->
-                val localPlayer = ClientUtil.localPlayer
-                val localFoliageColor = localPlayer?.level()
-                    ?.getBiome(localPlayer.blockPosition())
-                    ?.value()
-                    ?.foliageColor
-
-                localFoliageColor ?: GrassColor.getDefaultColor()
-            },
+            ::getLocalFoliageColor,
             ModBlocks.BIOME_GLASS.get(),
             ModBlocks.BIOME_STONE.get(),
             ModBlocks.BIOME_COBBLESTONE.get(),
@@ -70,7 +73,7 @@ object ClientModBusEvents {
         )
 
         event.register(
-            BiomeCapsuleItem.itemColorFunction,
+            BiomeCapsuleItem::getItemColor,
             ModItems.BIOME_CAPSULE.get()
         )
 

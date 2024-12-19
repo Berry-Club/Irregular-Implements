@@ -18,12 +18,12 @@ class BiomeCapsuleItem : Item(
 
     companion object {
 
-        val itemColorFunction = ItemColor { stack: ItemStack, tintIndex: Int ->
-            stack.get(ModDataComponents.BIOME_POINTS)
+        fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
+            return stack.get(ModDataComponents.BIOME_POINTS)
                 ?.biome
                 ?.value()
                 ?.foliageColor
-                ?: return@ItemColor 0xFFFFFFFF.toInt()
+                ?: 0xFFFFFFFF.toInt()
         }
 
     }
