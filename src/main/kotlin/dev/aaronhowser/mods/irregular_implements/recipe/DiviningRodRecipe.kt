@@ -19,13 +19,15 @@ class DiviningRodRecipe(
 ) : CustomRecipe(craftingCategory) {
 
     companion object {
-        private val oreSlots = setOf(Pair(0, 0), Pair(0, 2))
-        private val stickSlots = setOf(Pair(0, 1), Pair(1, 0), Pair(1, 2), Pair(2, 1), Pair(2, 2))
-        private val eyeSlots = setOf(Pair(1, 1))
+        private val oreSlots = setOf(0, 2)
+        private val stickSlots = setOf(1, 3, 5, 6, 8)
+        private val eyeSlots = setOf(4)
 
         private fun getOreTag(input: CraftingInput): TagKey<Item>? {
-            val topLeftStack = input.getItem(0, 0)
-            val topRightStack = input.getItem(0, 2)
+            if (input.width() < 3 || input.height() < 3) return null
+
+            val topLeftStack = input.getItem(0)
+            val topRightStack = input.getItem(2)
 
             return topLeftStack.tags
                 .filter { tag ->
@@ -39,10 +41,13 @@ class DiviningRodRecipe(
 
     override fun matches(input: CraftingInput, level: Level): Boolean {
         val oreTag = getOreTag(input) ?: return false
+        if (input.width() < 3 || input.height() < 3) return false
 
-        val oresMatch = oreSlots.all { (x, y) -> input.getItem(x, y).`is`(oreTag) }
-        val sticksMatch = stickSlots.all { (x, y) -> input.getItem(x, y).`is`(Items.STICK) }
-        val eyeMatch = eyeSlots.all { (x, y) -> input.getItem(x, y).`is`(Items.SPIDER_EYE) }
+        val inputSlots = input.size()
+
+        val oresMatch = oreSlots.all { input.getItem(it).`is`(oreTag) }
+        val sticksMatch = stickSlots.all { input.getItem(it).`is`(Items.STICK) }
+        val eyeMatch = eyeSlots.all { input.getItem(it).`is`(Items.SPIDER_EYE) }
 
         return oresMatch && sticksMatch && eyeMatch
     }
