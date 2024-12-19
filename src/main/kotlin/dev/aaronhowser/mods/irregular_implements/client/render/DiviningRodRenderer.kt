@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
@@ -51,7 +52,9 @@ object DiviningRodRenderer {
 
         if (offHandTag == null && mainHandTag == null) return
 
-        for (dX in -5..5) for (dY in -5..5) for (dZ in -5..5) {
+        val radius = ClientConfig.DIVINING_ROD_CHECK_RADIUS.get()
+
+        for (dX in -radius..radius) for (dY in -radius..radius) for (dZ in -radius..radius) {
             val checkedPos = playerPos.offset(dX, dY, dZ)
             if (!level.isLoaded(checkedPos)) continue
 
