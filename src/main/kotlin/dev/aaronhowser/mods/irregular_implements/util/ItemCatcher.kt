@@ -48,9 +48,21 @@ object ItemCatcher {
         }
     }
 
-    @JvmStatic
-    fun isCatching(): Boolean {
-        return catchingDrops
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    fun onLivingDropItems(event: LivingDropsEvent) {
+        if (event.isCanceled || !event.source.isDirect) return
+
+        val killer = event.source.entity as? LivingEntity ?: return
+        val usedItem = killer.mainHandItem
+
+        if (usedItem.getEnchantmentLevel(getHolder(MAGNETIC, killer.registryAccess())) < 1) return
+
+        for (itemEntity in event.drops) {
+            itemEntity.setNoPickUpDelay()
+            if (killer is Player) itemEntity.playerTouch(killer)
+            itemEntity.target = killer.uuid
+            itemEntity.teleportTo(killer.x, killer.y, killer.z)
+        }
     }
 
 
