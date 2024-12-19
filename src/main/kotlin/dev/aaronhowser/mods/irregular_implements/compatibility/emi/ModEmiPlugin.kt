@@ -1,9 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.DiviningRodRecipes
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.LubricateBootRecipes
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.ModInformationRecipes
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.ModInteractionRecipes
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
@@ -57,6 +54,10 @@ class ModEmiPlugin : EmiPlugin {
 
         for (diviningRodRecipe in DiviningRodRecipes.getRecipes()) {
             registry.addRecipe(diviningRodRecipe)
+        }
+
+        for (anvilRecipe in AnvilRecipes.getRecipes()) {
+            registry.addRecipe(anvilRecipe)
         }
 
     }
