@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.recipe.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.DiviningRodRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.WashBootRecipe
@@ -23,6 +24,9 @@ object ModRecipeSerializers {
 
     val DIVINING_ROD =
         registerRecipeSerializer("divining_rod") { SimpleCraftingRecipeSerializer(::DiviningRodRecipe) }
+
+    val APPLY_SPECTRE_ANCHOR =
+        registerRecipeSerializer("apply_spectre_anchor") { SimpleCraftingRecipeSerializer(::ApplySpectreAnchorRecipe) }
 
     private fun registerRecipeSerializer(
         name: String,

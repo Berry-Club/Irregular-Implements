@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-19T11:22:14.4226034	Recipes
+// 1.21.1	2024-12-19T16:21:39.4392357	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -233,6 +233,7 @@ caff91eb1b7d49106f6eb932d5cd49ceb618c28e data/irregular_implements/recipe/advanc
 b53a5541ccfddc45c1cee0f665e1d3a806d5dbc1 data/irregular_implements/recipe/advanced_redstone_repeater.json
 223cacbc140d53fe9b66ec5dfacd5ce15d86616e data/irregular_implements/recipe/advanced_redstone_torch.json
 e0043b19b674afb5bf47e4b1fe839dd481de7afa data/irregular_implements/recipe/analog_emitter.json
+0b11ba5ace5d69dbd8b9a411d73e822b7cb9fff5 data/irregular_implements/recipe/apply_spectre_anchor.json
 83f47f4ba0f8750cc6ff7e0a32e4e891190366be data/irregular_implements/recipe/auto_placer.json
 57301eff3538dd2fce60b23133d1a92f10bba5f5 data/irregular_implements/recipe/bamboo_platform.json
 aff73731d0e007b90c0f3c1294aca75f927bbb37 data/irregular_implements/recipe/basic_redstone_interface.json

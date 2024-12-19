@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
+import dev.aaronhowser.mods.irregular_implements.recipe.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.DiviningRodRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.WashBootRecipe
@@ -57,12 +58,14 @@ class ModRecipeProvider(
         lubricateBoot.save(recipeOutput, OtherUtil.modResource("lubricate_boot"))
         washBoot.save(recipeOutput, OtherUtil.modResource("wash_boot"))
         diviningRod.save(recipeOutput, OtherUtil.modResource("divining_rod"))
+        applySpectreAnchor.save(recipeOutput, OtherUtil.modResource("apply_spectre_anchor"))
 
     }
 
     private val lubricateBoot = SpecialRecipeBuilder.special(::LubricateBootRecipe)
     private val washBoot = SpecialRecipeBuilder.special(::WashBootRecipe)
     private val diviningRod = SpecialRecipeBuilder.special(::DiviningRodRecipe)
+    private val applySpectreAnchor = SpecialRecipeBuilder.special(::ApplySpectreAnchorRecipe)
 
     //TODO:
     // Potions of Collapse
