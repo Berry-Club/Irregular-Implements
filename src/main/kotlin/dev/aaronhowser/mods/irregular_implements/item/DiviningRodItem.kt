@@ -24,6 +24,12 @@ class DiviningRodItem : Item(
 ) {
 
     companion object {
+
+        fun getRodForItemTag(itemTag: TagKey<Item>): ItemStack {
+            val blockTag = TagKey.create(Registries.BLOCK, itemTag.location)
+            return getRodForBlockTag(blockTag)
+        }
+
         fun getRodForBlockTag(blockTag: TagKey<Block>): ItemStack {
             val stack = ModItems.DIVINING_ROD.toStack()
 

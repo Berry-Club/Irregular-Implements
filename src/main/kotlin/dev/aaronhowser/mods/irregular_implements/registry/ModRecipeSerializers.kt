@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.recipe.DiviningRodRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.WashBootRecipe
 import net.minecraft.core.registries.BuiltInRegistries
@@ -19,6 +20,9 @@ object ModRecipeSerializers {
 
     val WASH_BOOT =
         registerRecipeSerializer("wash_boot") { SimpleCraftingRecipeSerializer(::WashBootRecipe) }
+
+    val DIVINING_ROD =
+        registerRecipeSerializer("divining_rod") { DiviningRodRecipe.Serializer() }
 
     private fun registerRecipeSerializer(
         name: String,
