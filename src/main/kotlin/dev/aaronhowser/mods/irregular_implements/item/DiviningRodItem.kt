@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.common.Tags
-import java.awt.Color
 import kotlin.jvm.optionals.getOrNull
 
 class DiviningRodItem : Item(
@@ -83,24 +82,24 @@ class DiviningRodItem : Item(
             }
         }
 
-        val colorsPerTag = hashMapOf(
-            Tags.Blocks.ORES_COAL to Color(20, 20, 20, 50),
-            Tags.Blocks.ORES_IRON to Color(211, 180, 159, 50),
-            Tags.Blocks.ORES_GOLD to Color(246, 233, 80, 50),
-            Tags.Blocks.ORES_LAPIS to Color(5, 45, 150, 50),
-            Tags.Blocks.ORES_REDSTONE to Color(211, 1, 1, 50),
-            Tags.Blocks.ORES_EMERALD to Color(0, 220, 0, 50),
-            Tags.Blocks.ORES_DIAMOND to Color(87, 221, 229, 50),
+        private val colorsPerTag = hashMapOf(
+            Tags.Blocks.ORES_COAL to 0x32141414,
+            Tags.Blocks.ORES_IRON to 0x32d3b09f,
+            Tags.Blocks.ORES_GOLD to 0x32f6e950,
+            Tags.Blocks.ORES_LAPIS to 0x32053096,
+            Tags.Blocks.ORES_REDSTONE to 0x32d30101,
+            Tags.Blocks.ORES_EMERALD to 0x3200dc00,
+            Tags.Blocks.ORES_DIAMOND to 0x3257dde5,
         )
 
-        fun getColor(blockState: BlockState): Color {
+        fun getColor(blockState: BlockState): Int {
             for ((tag, color) in colorsPerTag) {
                 if (blockState.`is`(tag)) {
                     return color
                 }
             }
 
-            return Color.WHITE
+            return 0x32ffffff
         }
 
     }

@@ -27,7 +27,7 @@ object DiviningRodRenderer {
     private val positionsToCheck: LinkedHashSet<BlockPos> = linkedSetOf()
     private val indicators: MutableList<Indicator> = mutableListOf()
 
-    private class Indicator(val target: BlockPos, var duration: Int, val color: Color)
+    private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
 
     //TODO: Probably laggy, maybe make it only check once a second?
     @SubscribeEvent
@@ -140,10 +140,7 @@ object DiviningRodRenderer {
                 1f,
                 1f,
                 1f,
-                indicator.color.red / 255f,
-                indicator.color.green / 255f,
-                indicator.color.blue / 255f,
-                0.5f
+                indicator.color
             )
         }
 
