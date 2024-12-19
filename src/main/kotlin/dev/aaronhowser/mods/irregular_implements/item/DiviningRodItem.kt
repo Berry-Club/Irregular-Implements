@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.ChatFormatting
@@ -84,17 +83,21 @@ class DiviningRodItem : Item(
             }
         }
 
+        val colorsPerTag = hashMapOf(
+            Tags.Blocks.ORES_COAL to Color(20, 20, 20, 50),
+            Tags.Blocks.ORES_IRON to Color(211, 180, 159, 50),
+            Tags.Blocks.ORES_GOLD to Color(246, 233, 80, 50),
+            Tags.Blocks.ORES_LAPIS to Color(5, 45, 150, 50),
+            Tags.Blocks.ORES_REDSTONE to Color(211, 1, 1, 50),
+            Tags.Blocks.ORES_EMERALD to Color(0, 220, 0, 50),
+            Tags.Blocks.ORES_DIAMOND to Color(87, 221, 229, 50),
+        )
+
         fun getColor(blockState: BlockState): Color {
-            for (blockTag in blockState.tags) {
-                val tagString = blockTag.location.toString()
-                val colorString = ClientConfig.DIVINING_ROD_COLORS.get()[tagString] ?: continue
-
-                try {
-                    return Color.decode(colorString)
-                } catch (e: NumberFormatException) {
-                    continue
+            for ((tag, color) in colorsPerTag) {
+                if (blockState.`is`(tag)) {
+                    return color
                 }
-
             }
 
             return Color.WHITE
