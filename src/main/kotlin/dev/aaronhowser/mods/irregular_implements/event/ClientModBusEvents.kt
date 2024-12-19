@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
@@ -141,6 +142,12 @@ object ClientModBusEvents {
             VanillaGuiLayers.AIR_LEVEL,
             LavaProtectionOverlayRenderer.LAYER_NAME,
             LavaProtectionOverlayRenderer::tryRender
+        )
+
+        event.registerAbove(
+            VanillaGuiLayers.CROSSHAIR,
+            RedstoneToolRenderer.RENDER_WIRE_STRENGTH_NAME,
+            RedstoneToolRenderer::tryRenderWireStrength
         )
     }
 

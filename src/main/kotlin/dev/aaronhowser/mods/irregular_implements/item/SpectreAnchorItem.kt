@@ -52,6 +52,7 @@ class SpectreAnchorItem : Item(
             if (items.isEmpty()) return
 
             for (item in items) {
+                //TODO: Actually, should we?
                 if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
                     item.remove(ModDataComponents.ANCHORED)
                 }

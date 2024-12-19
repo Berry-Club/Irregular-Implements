@@ -7,9 +7,14 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Redston
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.core.BlockPos
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.RedStoneWireBlock
 import net.minecraft.world.phys.Vec3
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
@@ -128,4 +133,31 @@ object RedstoneToolRenderer {
             VertexBuffer.unbind()
         }
     }
+
+    val RENDER_WIRE_STRENGTH_NAME = OtherUtil.modResource("wire_strength")
+
+    fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
+        val player = ClientUtil.localPlayer ?: return
+        if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
+
+        val level = player.level()
+
+        val clipResult = OtherUtil.getPovResult(level, player, player.blockInteractionRange())
+
+        val pos = clipResult.blockPos
+        val state = level.getBlockState(pos)
+
+        if (!state.`is`(Blocks.REDSTONE_WIRE)) return
+
+        val strength = state.getValue(RedStoneWireBlock.POWER)
+
+        guiGraphics.drawString(
+            Minecraft.getInstance().font,
+            strength.toString(),
+            guiGraphics.guiWidth() / 2 + 5,
+            guiGraphics.guiHeight() / 2 + 5,
+            0xFF0000
+        )
+    }
+
 }
