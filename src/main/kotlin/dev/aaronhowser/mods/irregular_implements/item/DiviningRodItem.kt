@@ -4,10 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.block.Block
 import kotlin.jvm.optionals.getOrNull
 
@@ -42,6 +44,27 @@ class DiviningRodItem : Item(
             return oreTags.map { getRodForBlockTag(it) }
         }
 
+        fun getNameForBlockTag(blockTag: TagKey<Block>): Component {
+            val firstBlock = BuiltInRegistries.BLOCK
+                .getTag(blockTag)
+                .getOrNull()
+                ?.firstOrNull()
+                ?.value()
+                ?: return Component.literal(blockTag.location.toString())
+
+            return firstBlock.name
+        }
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
+
+        tooltipComponents.add(getNameForBlockTag(blockTag))
     }
 
 }
