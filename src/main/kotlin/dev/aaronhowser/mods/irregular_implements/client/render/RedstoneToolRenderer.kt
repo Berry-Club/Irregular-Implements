@@ -134,7 +134,7 @@ object RedstoneToolRenderer {
         }
     }
 
-    val RENDER_WIRE_STRENGTH_NAME = OtherUtil.modResource("wire_strength")
+    val LAYER_NAME = OtherUtil.modResource("wire_strength")
 
     fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
         val player = ClientUtil.localPlayer ?: return

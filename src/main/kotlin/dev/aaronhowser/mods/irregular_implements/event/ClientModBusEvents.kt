@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -146,8 +147,14 @@ object ClientModBusEvents {
 
         event.registerAbove(
             VanillaGuiLayers.CROSSHAIR,
-            RedstoneToolRenderer.RENDER_WIRE_STRENGTH_NAME,
+            RedstoneToolRenderer.LAYER_NAME,
             RedstoneToolRenderer::tryRenderWireStrength
+        )
+
+        event.registerAbove(
+            VanillaGuiLayers.CROSSHAIR,
+            BiomeSensorBlockEntity.LAYER_NAME,
+            BiomeSensorBlockEntity::tryRenderBiomeName
         )
     }
 
