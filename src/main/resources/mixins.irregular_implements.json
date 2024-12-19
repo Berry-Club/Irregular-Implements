@@ -12,6 +12,7 @@
     "ItemEntityMixin",
     "LevelMixin",
     "LivingEntityMixin",
+    "ServerPlayerGameModeMixin",
     "SignalGetterMixin"
   ],
   "injectors": {
