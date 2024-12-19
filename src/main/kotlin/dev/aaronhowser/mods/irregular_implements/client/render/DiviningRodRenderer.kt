@@ -131,11 +131,19 @@ object DiviningRodRenderer {
         val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
 
         for (indicator in indicators) {
-            RenderUtils.renderCube(
-                poseStack.last(),
+            RenderUtils.drawCube(
+                poseStack,
                 buffer,
-                indicator.target.center.toVector3f(),
-                indicator.color.rgb
+                indicator.target.x.toFloat(),
+                indicator.target.y.toFloat(),
+                indicator.target.z.toFloat(),
+                1f,
+                1f,
+                1f,
+                indicator.color.red / 255f,
+                indicator.color.green / 255f,
+                indicator.color.blue / 255f,
+                0.5f
             )
         }
 
