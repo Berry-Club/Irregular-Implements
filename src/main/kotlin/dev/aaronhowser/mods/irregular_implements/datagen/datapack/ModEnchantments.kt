@@ -29,7 +29,7 @@ object ModEnchantments {
         context.register(
             MAGNETIC,
             Enchantment(
-                ModLanguageProvider.Misc.MAGNETIC_ENCHANT.toComponent(),
+                ModLanguageProvider.Misc.MAGNETIC_NAME.toComponent(),
                 Enchantment.EnchantmentDefinition(
                     context.lookup(Registries.ITEM).getOrThrow(ModItemTagsProvider.ENCHANTABLE_MAGNETIC),
                     Optional.empty(),

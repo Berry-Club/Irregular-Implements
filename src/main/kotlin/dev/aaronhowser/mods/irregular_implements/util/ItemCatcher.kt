@@ -1,8 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments.MAGNETIC
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments.getHolder
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
@@ -31,7 +30,7 @@ object ItemCatcher {
     @JvmStatic
     fun beforeDestroyBlock(player: ServerPlayer) {
         val usedItem = player.mainHandItem
-        if (usedItem.getEnchantmentLevel(getHolder(MAGNETIC, player.registryAccess())) < 1) return
+        if (usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) < 1) return
 
         catchingDrops = true
     }
@@ -55,7 +54,7 @@ object ItemCatcher {
         val killer = event.source.entity as? LivingEntity ?: return
         val usedItem = killer.mainHandItem
 
-        if (usedItem.getEnchantmentLevel(getHolder(MAGNETIC, killer.registryAccess())) < 1) return
+        if (usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, killer.registryAccess())) < 1) return
 
         for (itemEntity in event.drops) {
             itemEntity.setNoPickUpDelay()

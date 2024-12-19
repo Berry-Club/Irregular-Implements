@@ -44,11 +44,13 @@ class ModLanguageProvider(
     }
 
     object Misc {
-        const val MAGNETIC_ENCHANT = "enchantment.irregular_implements.magnetic"
+        const val MAGNETIC_NAME = "enchantment.irregular_implements.magnetic"
+        const val MAGNETIC_DESC = "enchantment.irregular_implements.magnetic.desc"
     }
 
     private fun addMisc() {
-        add(Misc.MAGNETIC_ENCHANT, "Magnetic")
+        add(Misc.MAGNETIC_NAME, "Magnetic")
+        add(Misc.MAGNETIC_DESC, "Teleports fresh item drops towards you")
     }
 
     object Messages {
@@ -466,6 +468,7 @@ class ModLanguageProvider(
         const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
         const val LUBRICANT = "info.irregular_implements.lubricant"
         const val SPECTRE_ARMOR = "info.irregular_implements.spectre_armor"
+        const val MAGNETIC_ENCHANT = "info.irregular_implements.magnetic_enchant"
     }
 
     private fun addInfo(itemLike: ItemLike, infoString: String) {
@@ -473,6 +476,7 @@ class ModLanguageProvider(
     }
 
     private fun addInfo() {
+        add(Info.MAGNETIC_ENCHANT, "Teleports fresh item drops towards you.")
         addInfo(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt does not require hydration, grows crops 3 times faster, and can't be trampled.\n\nYou still have to till it with a Hoe to grow crops.")
         addInfo(ModBlocks.PLAYER_INTERFACE, "Exposes the inventory of the block's owner, as if it was the block's inventory.")
         addInfo(ModBlocks.LAPIS_GLASS, "Solid for players, not solid for anything else.")
