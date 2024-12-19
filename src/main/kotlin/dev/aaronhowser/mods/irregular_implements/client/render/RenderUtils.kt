@@ -3,12 +3,33 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
 
 
 object RenderUtils {
 
-    fun drawCube(
+    fun renderCube(
+        poseStack: PoseStack,
+        vertexConsumer: VertexConsumer,
+        center: Vec3,
+        width: Number,
+        color: Int
+    ) {
+        renderCube(
+            poseStack,
+            vertexConsumer,
+            center.x.toFloat() - width.toFloat() / 2,
+            center.y.toFloat() - width.toFloat() / 2,
+            center.z.toFloat() - width.toFloat() / 2,
+            width.toFloat(),
+            width.toFloat(),
+            width.toFloat(),
+            color
+        )
+    }
+
+    fun renderCube(
         poseStack: PoseStack,
         vertexConsumer: VertexConsumer,
         posX: Float,
@@ -17,12 +38,8 @@ object RenderUtils {
         width: Float,
         length: Float,
         height: Float,
-        red: Float,
-        green: Float,
-        blue: Float,
-        alpha: Float
+        color: Int
     ) {
-
         poseStack.pushPose()
         poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
@@ -52,7 +69,7 @@ object RenderUtils {
             for (vertexIndex in face) {
                 val vertex = vertices[vertexIndex]
                 vertexConsumer.addVertex(pose.pose(), vertex.x, vertex.y, vertex.z)
-                    .setColor(red, green, blue, alpha)
+                    .setColor(color)
                     .setUv(0f, 0f)
                     .setOverlay(OverlayTexture.NO_OVERLAY)
                     .setNormal(pose, 0f, 1f, 0f)
@@ -60,60 +77,6 @@ object RenderUtils {
         }
 
         poseStack.popPose()
-    }
-
-    fun renderCube(
-        pose: PoseStack.Pose,
-        consumer: VertexConsumer,
-        pos: Vector3f,
-        color: Int
-    ) {
-        val cubeRadius = 0.3f
-
-        val minX = pos.x - cubeRadius
-        val minY = pos.y - cubeRadius
-        val minZ = pos.z - cubeRadius
-
-        val maxX = pos.x + cubeRadius
-        val maxY = pos.y + cubeRadius
-        val maxZ = pos.z + cubeRadius
-
-        // South face
-        renderQuad(pose, consumer, color, minX, minY, maxZ, maxX, maxY, maxZ)
-        // North face
-        renderQuad(pose, consumer, color, maxX, minY, minZ, minX, maxY, minZ)
-        // West face
-        renderQuad(pose, consumer, color, minX, minY, minZ, minX, maxY, maxZ)
-        // East face
-        renderQuad(pose, consumer, color, maxX, minY, maxZ, maxX, maxY, minZ)
-
-        // Top face
-        renderQuad(pose, consumer, color, minX, maxY, minZ, maxX, maxY, maxZ)
-        // Bottom face
-        renderQuad(pose, consumer, color, minX, minY, maxZ, maxX, minY, minZ)
-    }
-
-    fun renderQuad(
-        pose: PoseStack.Pose,
-        consumer: VertexConsumer,
-        color: Int,
-        minX: Float, minY: Float, minZ: Float,
-        maxX: Float, maxY: Float, maxZ: Float,
-    ) {
-        addVertex(pose, consumer, color, maxY, minX, minZ)
-        addVertex(pose, consumer, color, minY, minX, minZ)
-        addVertex(pose, consumer, color, minY, maxX, maxZ)
-        addVertex(pose, consumer, color, maxY, maxX, maxZ)
-    }
-
-    fun addVertex(
-        pose: PoseStack.Pose, consumer: VertexConsumer, color: Int, y: Float, x: Float, z: Float
-    ) {
-        consumer.addVertex(pose, x, y, z)
-            .setColor(color)
-            .setOverlay(OverlayTexture.NO_OVERLAY)
-            .setLight(15728880)
-            .setNormal(pose, 0f, 1f, 0f)
     }
 
 }

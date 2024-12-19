@@ -9,7 +9,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
-import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.core.BlockPos
 import net.minecraft.world.phys.Vec3
 import net.neoforged.api.distmarker.Dist
@@ -17,7 +16,6 @@ import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
-import org.joml.Vector3f
 import org.lwjgl.opengl.GL11
 
 @EventBusSubscriber(
@@ -100,6 +98,7 @@ object RedstoneToolRenderer {
         RenderSystem.depthMask(true)
     }
 
+    //TODO: Make sure this is working
     private fun refresh(poseStack: PoseStack) {
         vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
 
@@ -110,10 +109,10 @@ object RedstoneToolRenderer {
         val endColor = 0x660000FF
 
         if (mainBlockPos != null) {
-            RenderUtils.renderCube(poseStack.last(), buffer, mainBlockPos!!.center.toVector3f(), startColor)
+            RenderUtils.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45, startColor)
         }
         if (linkedBlockPos != null) {
-            RenderUtils.renderCube(poseStack.last(), buffer, linkedBlockPos!!.center.toVector3f(), endColor)
+            RenderUtils.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45, endColor)
         }
 
         if (mainBlockPos != null && linkedBlockPos != null) {
