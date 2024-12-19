@@ -43,8 +43,6 @@ class DiviningRodRecipe(
         val oreTag = getOreTag(input) ?: return false
         if (input.width() < 3 || input.height() < 3) return false
 
-        val inputSlots = input.size()
-
         val oresMatch = oreSlots.all { input.getItem(it).`is`(oreTag) }
         val sticksMatch = stickSlots.all { input.getItem(it).`is`(Items.STICK) }
         val eyeMatch = eyeSlots.all { input.getItem(it).`is`(Items.SPIDER_EYE) }
