@@ -58,6 +58,20 @@ class DiviningRodItem : Item(
 
             return firstBlock.name
         }
+
+        private val tagColors: HashMap<TagKey<Block>, Int> = hashMapOf()
+
+        fun getColorForBlockTag(blockTag: TagKey<Block>): Int {
+            return tagColors.computeIfAbsent(blockTag) {
+                val firstBlock = BuiltInRegistries.BLOCK
+                    .getTag(blockTag)
+                    .getOrNull()
+                    ?.firstOrNull()
+                    ?.value()
+
+                firstBlock?.defaultMapColor()?.col ?: 0xFFFFFF
+            }
+        }
     }
 
     override fun appendHoverText(
