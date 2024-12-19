@@ -19,6 +19,7 @@ import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.material.Fluid
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -139,6 +140,13 @@ object ModDataComponents {
             it
                 .persistent(Codec.BOOL)
                 .networkSynchronized(ByteBufCodecs.BOOL)
+        }
+
+    val BLOCK_TAG: DeferredHolder<DataComponentType<*>, DataComponentType<TagKey<Block>>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("block_tag") {
+            it
+                .persistent(TagKey.codec(Registries.BLOCK))
+                .networkSynchronized(OtherUtil.tagKeyStreamCodec(Registries.BLOCK))
         }
 
 }

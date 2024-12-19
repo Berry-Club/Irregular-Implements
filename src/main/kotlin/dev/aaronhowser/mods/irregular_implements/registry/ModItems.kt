@@ -44,7 +44,8 @@ object ModItems {
         basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
     val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
         basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
-    val DIVINING_ROD = basic("divining_rod")    // Same item for all ores
+    val DIVINING_ROD: DeferredItem<DiviningRodItem> =
+        register("divining_rod") { DiviningRodItem() }
 
     // Ingredients
     val TRANSFORMATION_CORE = basic("transformation_core")
