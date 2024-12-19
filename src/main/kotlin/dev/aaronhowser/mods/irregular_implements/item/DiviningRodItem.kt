@@ -102,7 +102,7 @@ class DiviningRodItem : Item(
             oreTag("lead") to 0x5786CC
         )
 
-        fun getItemColor(blockState: BlockState): Int {
+        fun getOverlayColor(blockState: BlockState): Int {
             for ((tag, color) in colorsPerTag) {
                 if (blockState.`is`(tag)) {
                     return (50 shl 24) or color
