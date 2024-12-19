@@ -23,9 +23,9 @@ class ApplySpectreAnchorRecipe(
 
     override fun matches(input: CraftingInput, level: Level): Boolean {
         val amountAnchors = input.items().count { anchorIngredient.test(it) }
-        val nonAnchors = input.items().count { isApplicable(it) }
+        val amountNonAnchors = input.items().count { isApplicable(it) }
 
-        return amountAnchors == 1 && nonAnchors == 1
+        return amountAnchors == 1 && amountNonAnchors == 1
     }
 
     override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
