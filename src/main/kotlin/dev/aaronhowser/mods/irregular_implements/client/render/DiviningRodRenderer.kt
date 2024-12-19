@@ -116,6 +116,8 @@ object DiviningRodRenderer {
 
         poseStack.popPose()
         RenderSystem.applyModelViewMatrix()
+
+        RenderSystem.depthMask(true)
     }
 
     private fun refresh(poseStack: PoseStack) {
