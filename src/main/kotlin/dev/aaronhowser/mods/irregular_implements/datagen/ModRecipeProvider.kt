@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
+import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.recipe.DiviningRodRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
@@ -94,7 +95,33 @@ class ModRecipeProvider(
     private fun ing(item: ItemLike) = IngredientType.ItemLikeIng(item)
     private fun ing(itemStack: ItemStack) = IngredientType.ItemStackIng(itemStack)
 
-    fun <T : IngredientType> shapedRecipe(
+    private fun <T : IngredientType> shapedRecipe(
+        output: ItemStack,
+        patterns: String,
+        definitions: Map<Char, T>,
+        unlockedByName: String = "has_log",
+        unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
+    ): ShapedRecipeBuilder {
+        var temp = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, output)
+
+        for (pattern in patterns.split(",")) {
+            temp = temp.pattern(pattern)
+        }
+
+        for (definition in definitions) {
+            temp = when (val ing = definition.value) {
+                is IngredientType.TagKeyIng -> temp.define(definition.key, ing.getIngredient())
+                is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.getIngredient())
+                is IngredientType.ItemStackIng -> temp.define(definition.key, ing.getIngredient())
+
+                else -> error("Unknown ingredient type")
+            }
+        }
+
+        return temp.unlockedBy(unlockedByName, unlockedByCriterion)
+    }
+
+    private fun <T : IngredientType> shapedRecipe(
         output: ItemLike,
         count: Int,
         patterns: String,
@@ -1487,6 +1514,23 @@ class ModRecipeProvider(
 
         recipesWithNames[spectreIngotRecipe] = "spectre_ingot_single"
 
+        val universalOreDiviningRod = shapedRecipe(
+            DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES),
+            "CSD,ILE,GPR",
+            mapOf(
+                'S' to ing(Items.STICK),
+                'L' to ing(Tags.Items.SLIME_BALLS),
+                'C' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_COAL)),
+                'D' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_DIAMOND)),
+                'I' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_IRON)),
+                'E' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_EMERALD)),
+                'G' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_GOLD)),
+                'P' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_LAPIS)),
+                'R' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_REDSTONE))
+            )
+        )
+
+        recipesWithNames[universalOreDiviningRod] = "universal_ore_divining_rod"
     }
 
 }

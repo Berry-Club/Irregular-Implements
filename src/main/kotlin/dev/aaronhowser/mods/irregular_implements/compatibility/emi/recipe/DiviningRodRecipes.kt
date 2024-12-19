@@ -9,12 +9,13 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
+import net.neoforged.neoforge.common.Tags
 
 object DiviningRodRecipes {
 
     fun getRecipes(): MutableList<EmiCraftingRecipe> {
 
-        val allOreBlockTags = DiviningRodItem.getAllOreTags()
+        val allOreBlockTags = DiviningRodItem.getAllOreTags() - Tags.Blocks.ORES
         val allOreItemTags = allOreBlockTags.map { TagKey.create(Registries.ITEM, it.location) }
 
         val stickIngredient = EmiIngredient.of(Ingredient.of(Items.STICK))
