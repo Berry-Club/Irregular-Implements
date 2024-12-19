@@ -82,6 +82,8 @@ class DiviningRodItem : Item(
             }
         }
 
+        private fun oreTag(name: String) = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores/$name"))
+
         private val colorsPerTag = hashMapOf(
             Tags.Blocks.ORES_COAL to 0x141414,
             Tags.Blocks.ORES_IRON to 0xD3B09F,
@@ -90,16 +92,23 @@ class DiviningRodItem : Item(
             Tags.Blocks.ORES_REDSTONE to 0xD30101,
             Tags.Blocks.ORES_EMERALD to 0x00DC00,
             Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
+            Tags.Blocks.ORES_COPPER to 0xC6522B,
+            Tags.Blocks.ORES_QUARTZ to 0xDBCEBA,
+            oreTag("tin") to 0xAF9557,
+            oreTag("osmium") to 0x416FAF,
+            oreTag("uranium") to 0x5ED323,
+            oreTag("fluorite") to 0xC462C1,
+            oreTag("lead") to 0x5786CC
         )
 
         fun getColor(blockState: BlockState): Int {
             for ((tag, color) in colorsPerTag) {
                 if (blockState.`is`(tag)) {
-                    return color
+                    return (50 shl 24) or color
                 }
             }
 
-            return 0x32ffffff
+            return (50 shl 24) or 0xFFFFFF
         }
 
     }
