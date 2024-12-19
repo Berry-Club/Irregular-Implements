@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
+import dev.aaronhowser.mods.irregular_implements.recipe.DiviningRodRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.WashBootRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -54,11 +55,13 @@ class ModRecipeProvider(
 
         lubricateBoot.save(recipeOutput, OtherUtil.modResource("lubricate_boot"))
         washBoot.save(recipeOutput, OtherUtil.modResource("wash_boot"))
+        diviningRod.save(recipeOutput, OtherUtil.modResource("divining_rod"))
 
     }
 
     private val lubricateBoot = SpecialRecipeBuilder.special(::LubricateBootRecipe)
     private val washBoot = SpecialRecipeBuilder.special(::WashBootRecipe)
+    private val diviningRod = SpecialRecipeBuilder.special(::DiviningRodRecipe)
 
     //TODO:
     // Potions of Collapse
@@ -66,7 +69,6 @@ class ModRecipeProvider(
     // Imbues
     // Weather Eggs
     // Spectre Charger tiers
-    // Divining Rods
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()

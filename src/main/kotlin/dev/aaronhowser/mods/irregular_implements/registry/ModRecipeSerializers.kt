@@ -22,7 +22,7 @@ object ModRecipeSerializers {
         registerRecipeSerializer("wash_boot") { SimpleCraftingRecipeSerializer(::WashBootRecipe) }
 
     val DIVINING_ROD =
-        registerRecipeSerializer("divining_rod") { DiviningRodRecipe.Serializer() }
+        registerRecipeSerializer("divining_rod") { SimpleCraftingRecipeSerializer(::DiviningRodRecipe) }
 
     private fun registerRecipeSerializer(
         name: String,

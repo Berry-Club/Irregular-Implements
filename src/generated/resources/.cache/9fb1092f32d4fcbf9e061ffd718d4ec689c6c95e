@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-12T04:39:56.2896689	Recipes
+// 1.21.1	2024-12-19T10:38:46.8926581	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -267,6 +267,7 @@ c15b7316741f5513fc417957265db1208530b8f1 data/irregular_implements/recipe/crimso
 041c922fcafd357f55e5deca1d75e56323dbc295 data/irregular_implements/recipe/dark_oak_platform.json
 225ceba3e375990338ffa708d760faa8733797e9 data/irregular_implements/recipe/diamond_breaker.json
 b12670ebde5f70661425f2b6b6492e0a9f65fedc data/irregular_implements/recipe/directional_accelerator_plate.json
+8f37a4112f31d835e6f8a7813864bf83ff5e61fa data/irregular_implements/recipe/divining_rod.json
 07cbc37e48950471b07e78ac0341841ac4f158b7 data/irregular_implements/recipe/drop_filter.json
 ce2a2554fdb724d195d8a9d8c5680d5d40369b45 data/irregular_implements/recipe/emerald_compass.json
 152b99e7f29d4d255b8024bbf5e7852232721938 data/irregular_implements/recipe/ender_anchor.json
