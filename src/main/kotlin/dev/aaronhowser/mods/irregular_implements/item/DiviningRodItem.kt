@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.ChatFormatting
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
@@ -11,6 +12,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import kotlin.jvm.optionals.getOrNull
 
 class DiviningRodItem : Item(
@@ -49,27 +51,34 @@ class DiviningRodItem : Item(
         }
 
         fun getNameForBlockTag(blockTag: TagKey<Block>): Component {
-            val firstBlock = BuiltInRegistries.BLOCK
-                .getTag(blockTag)
-                .getOrNull()
-                ?.firstOrNull()
-                ?.value()
-                ?: return Component.literal(blockTag.location.toString())
+            val firstBlock = getBlockForTag(blockTag)
+
+            if (firstBlock == Blocks.AIR) return Component
+                .literal(blockTag.location.toString())
+                .withStyle(ChatFormatting.RED)
+                .withStyle(ChatFormatting.STRIKETHROUGH)
 
             return firstBlock.name
+        }
+
+        private val defaultBlockForTag: HashMap<TagKey<Block>, Block> = hashMapOf()
+
+        fun getBlockForTag(blockTag: TagKey<Block>): Block {
+            return defaultBlockForTag.computeIfAbsent(blockTag) {
+                BuiltInRegistries.BLOCK
+                    .getTag(blockTag)
+                    .getOrNull()
+                    ?.firstOrNull()
+                    ?.value()
+                    ?: Blocks.AIR
+            }
         }
 
         private val tagColors: HashMap<TagKey<Block>, Int> = hashMapOf()
 
         fun getColorForBlockTag(blockTag: TagKey<Block>): Int {
             return tagColors.computeIfAbsent(blockTag) {
-                val firstBlock = BuiltInRegistries.BLOCK
-                    .getTag(blockTag)
-                    .getOrNull()
-                    ?.firstOrNull()
-                    ?.value()
-
-                firstBlock?.defaultMapColor()?.col ?: 0xFFFFFF
+                getBlockForTag(blockTag).defaultMapColor().col
             }
         }
     }
