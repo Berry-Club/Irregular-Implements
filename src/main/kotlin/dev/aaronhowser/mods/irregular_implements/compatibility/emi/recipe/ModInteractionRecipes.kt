@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
@@ -41,8 +42,8 @@ object ModInteractionRecipes {
 
             EmiWorldInteractionRecipe
                 .builder()
-                .leftInput(EmiIngredient.of(Ingredient.of(ItemTags.DIRT)))
-                .rightInput(EmiIngredient.of(Ingredient.of(seedItem)), false)
+                .leftInput(ItemTags.DIRT.emiIngredient)
+                .rightInput(seedItem.emiIngredient, false)
                 .output(EmiStack.of(seedItem.resultBlock))
                 .id(id)
                 .build()

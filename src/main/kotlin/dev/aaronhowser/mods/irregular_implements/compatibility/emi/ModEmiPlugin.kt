@@ -9,10 +9,36 @@ import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.stack.Comparison
+import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.ItemLike
 
 @EmiEntrypoint
 class ModEmiPlugin : EmiPlugin {
+
+    companion object {
+        val ItemLike.emiStack: EmiStack
+            get() = EmiStack.of(this.asItem())
+
+        val ItemLike.ingredient: Ingredient
+            get() = Ingredient.of(this)
+
+        val Ingredient.emiIngredient: EmiIngredient
+            get() = EmiIngredient.of(this)
+
+        val ItemLike.emiIngredient: EmiIngredient
+            get() = EmiIngredient.of(this.ingredient)
+
+        val TagKey<Item>.ingredient: Ingredient
+            get() = Ingredient.of(this)
+
+        val TagKey<Item>.emiIngredient: EmiIngredient
+            get() = EmiIngredient.of(this)
+
+    }
 
     override fun register(registry: EmiRegistry) {
         setComparisons(registry)

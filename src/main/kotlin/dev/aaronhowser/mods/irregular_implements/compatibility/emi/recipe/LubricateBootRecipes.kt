@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -23,7 +24,7 @@ object LubricateBootRecipes {
             .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
             .map { it.defaultInstance }
 
-        val lubeIngredient = EmiIngredient.of(Ingredient.of(ModItems.SUPER_LUBRICANT_TINCTURE))
+        val lubeIngredient = ModItems.SUPER_LUBRICANT_TINCTURE.emiIngredient
 
         return boots.map { bootStack ->
             val name = BuiltInRegistries.ITEM.getKey(bootStack.item).toString().replace(':', '/')

@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.world.entity.EquipmentSlotGroup
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.*
-import net.minecraft.world.item.crafting.Ingredient
 import net.neoforged.neoforge.common.SimpleTier
 
 object ModToolItems {
@@ -17,7 +17,7 @@ object ModToolItems {
         Tiers.DIAMOND.speed,
         Tiers.DIAMOND.attackDamageBonus,
         Tiers.GOLD.enchantmentValue
-    ) { Ingredient.of(ModItems.SPECTRE_INGOT.get()) }
+    ) { ModItems.SPECTRE_INGOT.ingredient }
 
     private val BLOCK_RANGE_INCREASE_RL = OtherUtil.modResource("block_range_increase")
     private val ENTITY_RANGE_INCREASE_RL = OtherUtil.modResource("entity_range_increase")

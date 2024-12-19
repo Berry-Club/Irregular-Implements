@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
@@ -14,7 +15,6 @@ import dev.emi.emi.api.stack.EmiIngredient
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.EnchantedBookItem
-import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.enchantment.EnchantmentInstance
 import net.minecraft.world.level.ItemLike
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient
@@ -45,7 +45,7 @@ object ModInformationRecipes {
 
                 val recipe = EmiInfoRecipe(
                     listOf(
-                        EmiIngredient.of(Ingredient.of(item))
+                        item.emiIngredient
                     ),
                     listOf(infoString.toComponent()),
                     OtherUtil.modResource("/info/$id")
@@ -58,7 +58,7 @@ object ModInformationRecipes {
     }
 
     private fun toEmiIngredients(vararg itemLikes: ItemLike): List<EmiIngredient> {
-        return itemLikes.map { EmiIngredient.of(Ingredient.of(it)) }
+        return itemLikes.map { it.emiIngredient }
     }
 
     private fun complexRecipes(): List<EmiInfoRecipe> {
@@ -104,7 +104,7 @@ object ModInformationRecipes {
 
         recipes.add(
             EmiInfoRecipe(
-                listOf(EmiIngredient.of(Ingredient.of(ModItemTagsProvider.SUPER_LUBRICATED_BLOCKS))),
+                listOf(ModItemTagsProvider.SUPER_LUBRICATED_BLOCKS.emiIngredient),
                 listOf(ModLanguageProvider.Info.LUBRICANT.toComponent()),
                 OtherUtil.modResource("/info/lubricated_blocks")
             )

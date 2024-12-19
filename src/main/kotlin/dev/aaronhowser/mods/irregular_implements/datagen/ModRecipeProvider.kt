@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
@@ -81,8 +82,8 @@ class ModRecipeProvider(
 
         fun getIngredient(): Ingredient {
             return when (this) {
-                is TagKeyIng -> Ingredient.of(tagKey)
-                is ItemLikeIng -> Ingredient.of(item)
+                is TagKeyIng -> tagKey.ingredient
+                is ItemLikeIng -> item.ingredient
                 is ItemStackIng -> if (itemStack.isComponentsPatchEmpty) {
                     Ingredient.of(itemStack)
                 } else {

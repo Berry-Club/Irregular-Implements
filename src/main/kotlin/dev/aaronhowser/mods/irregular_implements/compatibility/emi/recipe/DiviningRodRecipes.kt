@@ -1,14 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiCraftingRecipe
-import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.crafting.Ingredient
 import net.neoforged.neoforge.common.Tags
 
 object DiviningRodRecipes {
@@ -18,14 +17,14 @@ object DiviningRodRecipes {
         val allOreBlockTags = DiviningRodItem.getAllOreTags() - Tags.Blocks.ORES
         val allOreItemTags = allOreBlockTags.map { TagKey.create(Registries.ITEM, it.location) }
 
-        val stickIngredient = EmiIngredient.of(Ingredient.of(Items.STICK))
-        val eyeIngredient = EmiIngredient.of(Ingredient.of(Items.SPIDER_EYE))
-        val emptyIngredient = EmiIngredient.of(Ingredient.of(Items.AIR))
+        val stickIngredient = Items.STICK.emiIngredient
+        val eyeIngredient = Items.SPIDER_EYE.emiIngredient
+        val emptyIngredient = Items.AIR.emiIngredient
 
         val recipes = mutableListOf<EmiCraftingRecipe>()
 
         for (oreTag in allOreItemTags) {
-            val oreIngredient = EmiIngredient.of(Ingredient.of(oreTag))
+            val oreIngredient = oreTag.emiIngredient
 
             val shapedRecipe = EmiCraftingRecipe(
                 listOf(
