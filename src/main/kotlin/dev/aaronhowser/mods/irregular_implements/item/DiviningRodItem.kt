@@ -83,13 +83,13 @@ class DiviningRodItem : Item(
         }
 
         private val colorsPerTag = hashMapOf(
-            Tags.Blocks.ORES_COAL to 0x32141414,
-            Tags.Blocks.ORES_IRON to 0x32d3b09f,
-            Tags.Blocks.ORES_GOLD to 0x32f6e950,
-            Tags.Blocks.ORES_LAPIS to 0x32053096,
-            Tags.Blocks.ORES_REDSTONE to 0x32d30101,
-            Tags.Blocks.ORES_EMERALD to 0x3200dc00,
-            Tags.Blocks.ORES_DIAMOND to 0x3257dde5,
+            Tags.Blocks.ORES_COAL to 0x141414,
+            Tags.Blocks.ORES_IRON to 0xD3B09F,
+            Tags.Blocks.ORES_GOLD to 0xF6E950,
+            Tags.Blocks.ORES_LAPIS to 0x053096,
+            Tags.Blocks.ORES_REDSTONE to 0xD30101,
+            Tags.Blocks.ORES_EMERALD to 0x00DC00,
+            Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
         )
 
         fun getColor(blockState: BlockState): Int {
