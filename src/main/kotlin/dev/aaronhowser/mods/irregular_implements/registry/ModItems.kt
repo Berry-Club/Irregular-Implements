@@ -122,7 +122,8 @@ object ModItems {
     // Spectre
     val SPECTRE_ILLUMINATOR = basic("spectre_illuminator")
     val SPECTRE_KEY = basic("spectre_key")
-    val SPECTRE_ANCHOR = basic("spectre_anchor")
+    val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
+        register("spectre_anchor") { SpectreAnchorItem() }
     val SPECTRE_CHARGER = basic("spectre_charger") //Same item for all tiers
     val SPECTRE_SWORD: DeferredItem<SwordItem> =
         register("spectre_sword") { ModToolItems.SPECTRE_SWORD }

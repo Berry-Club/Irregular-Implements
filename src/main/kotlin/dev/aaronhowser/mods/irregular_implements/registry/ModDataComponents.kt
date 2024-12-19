@@ -149,4 +149,11 @@ object ModDataComponents {
                 .networkSynchronized(OtherUtil.tagKeyStreamCodec(Registries.BLOCK))
         }
 
+    val ANCHORED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("anchored") {
+            it
+                .persistent(Unit.CODEC)
+                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+        }
+
 }

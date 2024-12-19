@@ -8,6 +8,8 @@ import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.player.Player
+import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
@@ -16,6 +18,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
+import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
@@ -71,6 +74,19 @@ object OtherEvents {
     @SubscribeEvent
     fun onLivingDeath(event: LivingDeathEvent) {
         WhiteStoneItem.tryPreventDeath(event)
+    }
+
+    @SubscribeEvent(
+        priority = EventPriority.LOWEST     //In case something else cancels the event after it was saved
+    )
+    fun keepInventoryFailsafe(event: LivingDeathEvent) {
+        val player = event.entity as? Player ?: return
+        if (!event.isCanceled) SpectreAnchorItem.saveAnchoredItems(player)
+    }
+
+    @SubscribeEvent
+    fun onPlayerRespawn(event: PlayerEvent.PlayerRespawnEvent) {
+        SpectreAnchorItem.returnItems(event.entity)
     }
 
     @SubscribeEvent

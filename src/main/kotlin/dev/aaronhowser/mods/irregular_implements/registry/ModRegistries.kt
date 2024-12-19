@@ -17,7 +17,8 @@ object ModRegistries {
         ModArmorMaterials.ARMOR_MATERIAL_REGISTRY,
         ModRecipeSerializers.RECIPE_SERIALIZERS_REGISTRY,
         ModParticleTypes.PARTICLE_TYPE_REGISTRY,
-        ModMenuTypes.MENU_TYPE_REGISTRY
+        ModMenuTypes.MENU_TYPE_REGISTRY,
+        ModAttachmentTypes.ATTACHMENT_TYPES_REGISTRY,
     )
 
     fun register(modBus: IEventBus) {
