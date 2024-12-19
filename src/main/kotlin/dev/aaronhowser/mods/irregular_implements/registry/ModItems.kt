@@ -26,7 +26,6 @@ object ModItems {
     val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
-    val SAKANADE_SPORES = basic("sakanade_spores")
     val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val GOLDEN_EGG = basic("golden_egg")
     val BLACKOUT_POWDER = basic("blackout_powder")
@@ -58,6 +57,7 @@ object ModItems {
     val SPECTRE_STRING = basic("spectre_string")
 
     // Plants
+    val SAKANADE_SPORES = basic("sakanade_spores")
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
         register("lotus_blossom") { LotusBlossomItem() }
     val LOTUS_SEEDS: DeferredItem<ItemNameBlockItem> =

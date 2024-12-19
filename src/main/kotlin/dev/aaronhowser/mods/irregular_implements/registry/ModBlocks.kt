@@ -127,30 +127,6 @@ object ModBlocks {
     val AUTO_PLACER = basicBlock("auto_placer")
     val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Wtf does this do
 
-    // Platform
-    val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("oak_platform") { PlatformBlock.OAK }
-    val SPRUCE_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("spruce_platform") { PlatformBlock.SPRUCE }
-    val BIRCH_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("birch_platform") { PlatformBlock.BIRCH }
-    val JUNGLE_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("jungle_platform") { PlatformBlock.JUNGLE }
-    val ACACIA_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("acacia_platform") { PlatformBlock.ACACIA }
-    val DARK_OAK_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("dark_oak_platform") { PlatformBlock.DARK_OAK }
-    val CRIMSON_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("crimson_platform") { PlatformBlock.CRIMSON }
-    val WARPED_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("warped_platform") { PlatformBlock.WARPED }
-    val MANGROVE_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("mangrove_platform") { PlatformBlock.MANGROVE }
-    val BAMBOO_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("bamboo_platform") { PlatformBlock.BAMBOO }
-    val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("cherry_platform") { PlatformBlock.CHERRY }
-
     // Detectors
     val ONLINE_DETECTOR = basicBlock("online_detector")
     val CHAT_DETECTOR = basicBlock("chat_detector")
@@ -208,6 +184,30 @@ object ModBlocks {
     val COLLECTION_PLATE: DeferredBlock<CollectionPlateBlock> =
         registerBlock("collection_plate") { CollectionPlateBlock() }
     val EXTRACTION_PLATE = basicBlock("extraction_plate")
+
+    // Platform
+    val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("oak_platform") { PlatformBlock.OAK }
+    val SPRUCE_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("spruce_platform") { PlatformBlock.SPRUCE }
+    val BIRCH_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("birch_platform") { PlatformBlock.BIRCH }
+    val JUNGLE_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("jungle_platform") { PlatformBlock.JUNGLE }
+    val ACACIA_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("acacia_platform") { PlatformBlock.ACACIA }
+    val DARK_OAK_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("dark_oak_platform") { PlatformBlock.DARK_OAK }
+    val CRIMSON_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("crimson_platform") { PlatformBlock.CRIMSON }
+    val WARPED_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("warped_platform") { PlatformBlock.WARPED }
+    val MANGROVE_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("mangrove_platform") { PlatformBlock.MANGROVE }
+    val BAMBOO_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("bamboo_platform") { PlatformBlock.BAMBOO }
+    val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("cherry_platform") { PlatformBlock.CHERRY }
 
     // Colored blocks
     val COLORED_GRASS_WHITE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.WHITE)
