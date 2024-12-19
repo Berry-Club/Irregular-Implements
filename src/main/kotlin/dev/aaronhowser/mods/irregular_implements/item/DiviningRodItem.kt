@@ -28,8 +28,12 @@ class DiviningRodItem : Item(
         }
 
         fun getAllOreRods(): List<ItemStack> {
+            return getAllOreTags().map { getRodForBlockTag(it) }
+        }
+
+        fun getAllOreTags(): Set<TagKey<Block>> {
             val oresTagKey = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores"))
-            val ores = BuiltInRegistries.BLOCK.getTag(oresTagKey).getOrNull() ?: return emptyList()
+            val ores = BuiltInRegistries.BLOCK.getTag(oresTagKey).getOrNull() ?: return emptySet()
 
             val oreTags = mutableSetOf(oresTagKey)
 
@@ -41,7 +45,7 @@ class DiviningRodItem : Item(
                 }
             }
 
-            return oreTags.map { getRodForBlockTag(it) }
+            return oreTags
         }
 
         fun getNameForBlockTag(blockTag: TagKey<Block>): Component {
