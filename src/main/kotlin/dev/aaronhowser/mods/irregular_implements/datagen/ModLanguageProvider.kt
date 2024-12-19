@@ -441,6 +441,7 @@ class ModLanguageProvider(
         const val VOID_STONE_INSERT = "tooltip.irregular_implements.void_stone_insert"
         const val VOID_STONE_HOLDING = "tooltip.irregular_implements.void_stone_holding"
         const val VOID_STONE_REMOVE = "tooltip.irregular_implements.void_stone_remove"
+        const val ANCHORED = "tooltip.irregular_implements.anchored"
     }
 
     private fun addTooltips() {
@@ -461,6 +462,7 @@ class ModLanguageProvider(
         add(Tooltips.VOID_STONE_INSERT, "Store items by right-clicking them on this stack")
         add(Tooltips.VOID_STONE_HOLDING, "Currently holding %s, inserting another will void and replace it")
         add(Tooltips.VOID_STONE_REMOVE, "You can remove the %s by right-clicking the Stone into an empty slot")
+        add(Tooltips.ANCHORED, "Anchored")
     }
 
     object Info {

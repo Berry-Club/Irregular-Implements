@@ -1,15 +1,19 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.attachment.DeathKeptItems
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModAttachmentTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.ChatFormatting
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.GameRules
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import top.theillusivec4.curios.api.CuriosApi
 
 class SpectreAnchorItem : Item(
@@ -59,6 +63,17 @@ class SpectreAnchorItem : Item(
             }
 
             player.setData(ModAttachmentTypes.DEATH_KEPT_ITEMS, DeathKeptItems(emptyList()))
+        }
+
+        fun tooltip(event: ItemTooltipEvent) {
+            val stack = event.itemStack
+            if (!stack.has(ModDataComponents.ANCHORED)) return
+
+            event.toolTip.add(
+                ModLanguageProvider.Tooltips.ANCHORED
+                    .toComponent()
+                    .withStyle(ChatFormatting.DARK_AQUA)
+            )
         }
 
     }

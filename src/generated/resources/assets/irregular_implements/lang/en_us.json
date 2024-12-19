@@ -451,6 +451,7 @@
   "message.irregular_implements.redstone_tool.unloaded": "Cannot link as base %s is in an unloaded chunk.",
   "message.irregular_implements.redstone_tool.wrong_dimension": "Cannot link as base %s is in a different dimension.",
   "subtitle.irregular_implements.fart": "Pbbbt",
+  "tooltip.irregular_implements.anchored": "Anchored",
   "tooltip.irregular_implements.block_replacer_alt_for_list": "Hold ALT to see stored blocks",
   "tooltip.irregular_implements.block_replacer_loading": "Store blocks by right-clicking them on this stack",
   "tooltip.irregular_implements.block_replacer_unloading": "Remove blocks by right-clicking this stack on empty slots",

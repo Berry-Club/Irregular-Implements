@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
+import dev.aaronhowser.mods.irregular_implements.item.SpectreAnchorItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
@@ -27,6 +28,7 @@ object ClientEvents {
     @SubscribeEvent
     fun tooltipEvent(event: ItemTooltipEvent) {
         ModArmorItems.tooltip(event)
+        SpectreAnchorItem.tooltip(event)
     }
 
     @SubscribeEvent
