@@ -17,11 +17,9 @@ import java.util.*
 
 object ModEnchantments {
 
-    @JvmStatic
     val MAGNETIC: ResourceKey<Enchantment> =
         ResourceKey.create(Registries.ENCHANTMENT, OtherUtil.modResource("magnetic"))
 
-    @JvmStatic
     fun getHolder(enchantment: ResourceKey<Enchantment>, registryAccess: RegistryAccess): Holder.Reference<Enchantment> {
         return registryAccess.registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(enchantment)
     }

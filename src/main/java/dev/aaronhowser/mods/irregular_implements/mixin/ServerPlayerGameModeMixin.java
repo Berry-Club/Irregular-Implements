@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.ServerPlayerGameModeFunctions;
+import dev.aaronhowser.mods.irregular_implements.util.ItemCatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerPlayerGameMode;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayerGameMode.class)
-abstract public class ServerPlayerGameModeMixin implements ServerPlayerGameModeFunctions {
+abstract public class ServerPlayerGameModeMixin {
 
     @Final
     @Shadow
@@ -26,7 +26,7 @@ abstract public class ServerPlayerGameModeMixin implements ServerPlayerGameModeF
             )
     )
     private void irregular_implements$beforeDestroy(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        beforeDestroy(player);
+        ItemCatcher.beforeDestroyBlock(player);
     }
 
     @Inject(
@@ -38,7 +38,7 @@ abstract public class ServerPlayerGameModeMixin implements ServerPlayerGameModeF
             )
     )
     private void irregular_implements$afterDestroy(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        afterDestroy(player);
+        ItemCatcher.afterDestroyBlock(player);
     }
 
 }
