@@ -48,13 +48,13 @@ class SpectreAnchorItem : Item(
             if (items.isEmpty()) return
 
             for (item in items) {
+                if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
+                    item.remove(ModDataComponents.ANCHORED)
+                }
+
                 if (!player.inventory.add(item)) {
                     val itemEntity = ItemEntity(player.level(), player.x, player.y, player.z, item)
                     player.level().addFreshEntity(itemEntity)
-                }
-
-                if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
-                    item.remove(ModDataComponents.ANCHORED)
                 }
             }
 
