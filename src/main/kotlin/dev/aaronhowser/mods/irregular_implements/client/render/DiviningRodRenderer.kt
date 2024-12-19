@@ -1,17 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
+import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.core.BlockPos
-import net.minecraft.tags.TagKey
-import net.minecraft.world.level.block.Block
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
+import org.lwjgl.opengl.GL11
+import java.awt.Color
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID,
@@ -22,9 +26,7 @@ object DiviningRodRenderer {
     private val positionsToCheck: LinkedHashSet<BlockPos> = linkedSetOf()
     private val indicators: MutableList<Indicator> = mutableListOf()
 
-    private class Indicator(val target: BlockPos, var duration: Int, val oreTag: TagKey<Block>) {
-        val color = DiviningRodItem.getColorForBlockTag(oreTag)
-    }
+    private class Indicator(val target: BlockPos, var duration: Int, val color: Color)
 
     //TODO: Probably laggy, maybe make it only check once a second?
     @SubscribeEvent
@@ -64,20 +66,82 @@ object DiviningRodRenderer {
             val indicator = Indicator(
                 checkedPos,
                 20,
-                if (matchesMainHand) mainHandTag!! else offHandTag!!
+                DiviningRodItem.getColor(checkedState)
             )
 
             indicators.add(indicator)
         }
     }
 
+    private var vertexBuffer: VertexBuffer? = null
+
     @SubscribeEvent
     fun onRenderLevel(event: RenderLevelStageEvent) {
         if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
-        val player = ClientUtil.localPlayer ?: return
 
-        val partialTicks = event.partialTick
+        if (indicators.isEmpty()) return
 
+        refresh(event.poseStack)
+        render(event)
+    }
+
+    private fun render(event: RenderLevelStageEvent) {
+        RenderSystem.depthMask(false)
+        RenderSystem.enableBlend()
+        RenderSystem.defaultBlendFunc()
+
+        val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+
+        val poseStack = event.poseStack
+        val vertexBuffer = this.vertexBuffer ?: return
+
+        poseStack.pushPose()
+
+        RenderSystem.setShader(GameRenderer::getPositionColorShader)
+        RenderSystem.applyModelViewMatrix()
+        RenderSystem.depthFunc(GL11.GL_ALWAYS)
+
+        poseStack.mulPose(event.modelViewMatrix)
+        poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
+
+        vertexBuffer.bind()
+        vertexBuffer.drawWithShader(
+            poseStack.last().pose(),
+            event.projectionMatrix,
+            RenderSystem.getShader()!!
+        )
+
+        VertexBuffer.unbind()
+        RenderSystem.depthFunc(GL11.GL_LEQUAL)
+
+        poseStack.popPose()
+        RenderSystem.applyModelViewMatrix()
+    }
+
+    private fun refresh(poseStack: PoseStack) {
+        vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
+        val vertexBuffer = vertexBuffer ?: return
+
+        val tesselator = Tesselator.getInstance()
+        val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
+
+        for (indicator in indicators) {
+            RenderUtils.renderCube(
+                poseStack.last(),
+                buffer,
+                indicator.target.center.toVector3f(),
+                indicator.color.rgb
+            )
+        }
+
+        val build = buffer.build()
+        if (build == null) {
+            this.vertexBuffer = null
+        } else {
+            vertexBuffer.bind()
+            vertexBuffer.upload(build)
+            VertexBuffer.unbind()
+        }
     }
 
 }

@@ -13,6 +13,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.common.Tags
+import java.awt.Color
 import kotlin.jvm.optionals.getOrNull
 
 class DiviningRodItem : Item(
@@ -74,13 +77,26 @@ class DiviningRodItem : Item(
             }
         }
 
-        private val tagColors: HashMap<TagKey<Block>, Int> = hashMapOf()
+        val colorsPerTag = hashMapOf(
+            Tags.Blocks.ORES_COAL to Color(20, 20, 20, 50),
+            Tags.Blocks.ORES_IRON to Color(211, 180, 159, 50),
+            Tags.Blocks.ORES_GOLD to Color(246, 233, 80, 50),
+            Tags.Blocks.ORES_LAPIS to Color(5, 45, 150, 50),
+            Tags.Blocks.ORES_REDSTONE to Color(211, 1, 1, 50),
+            Tags.Blocks.ORES_EMERALD to Color(0, 220, 0, 50),
+            Tags.Blocks.ORES_DIAMOND to Color(87, 221, 229, 50),
+        )
 
-        fun getColorForBlockTag(blockTag: TagKey<Block>): Int {
-            return tagColors.computeIfAbsent(blockTag) {
-                getBlockForTag(blockTag).defaultMapColor().col
+        fun getColor(blockState: BlockState): Color {
+            for ((tag, color) in colorsPerTag) {
+                if (blockState.`is`(tag)) {
+                    return color
+                }
             }
+
+            return Color.WHITE
         }
+
     }
 
     override fun appendHoverText(
@@ -91,7 +107,15 @@ class DiviningRodItem : Item(
     ) {
         val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
 
-        tooltipComponents.add(getNameForBlockTag(blockTag))
+        val component = if (blockTag == Tags.Blocks.ORES) {
+            Component
+                .literal("All Ores")
+                .withStyle(ChatFormatting.GRAY)
+        } else {
+            getNameForBlockTag(blockTag)
+        }
+
+        tooltipComponents.add(component)
     }
 
 }
