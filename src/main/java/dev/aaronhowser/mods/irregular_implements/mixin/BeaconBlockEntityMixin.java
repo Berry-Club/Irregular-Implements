@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import javax.annotation.Nullable;
 
 @Mixin(BeaconBlockEntity.class)
-public class BeaconBlockEntityMixin {
+abstract public class BeaconBlockEntityMixin {
 
     @Inject(
             method = "applyEffects",

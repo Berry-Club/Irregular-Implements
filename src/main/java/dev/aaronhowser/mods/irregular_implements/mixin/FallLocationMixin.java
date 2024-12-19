@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(FallLocation.class)
-public class FallLocationMixin {
+abstract public class FallLocationMixin {
 
     @ModifyReturnValue(
             method = "getCurrentFallLocation",

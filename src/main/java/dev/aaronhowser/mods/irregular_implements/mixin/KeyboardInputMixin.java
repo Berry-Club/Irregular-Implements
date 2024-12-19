@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(KeyboardInput.class)
-public class KeyboardInputMixin implements KeyboardInputFunctions {
+abstract public class KeyboardInputMixin implements KeyboardInputFunctions {
 
     @Inject(
             method = "tick",

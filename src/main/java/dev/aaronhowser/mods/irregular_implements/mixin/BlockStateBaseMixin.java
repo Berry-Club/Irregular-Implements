@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import javax.annotation.Nullable;
 
 @Mixin(BlockBehaviour.BlockStateBase.class)
-public class BlockStateBaseMixin {
+abstract public class BlockStateBaseMixin {
 
     @Inject(
             method = "handleNeighborChanged",
