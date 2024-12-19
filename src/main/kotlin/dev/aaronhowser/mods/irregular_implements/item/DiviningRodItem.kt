@@ -94,6 +94,7 @@ class DiviningRodItem : Item(
             Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
             Tags.Blocks.ORES_COPPER to 0xC6522B,
             Tags.Blocks.ORES_QUARTZ to 0xDBCEBA,
+            Tags.Blocks.ORES_NETHERITE_SCRAP to 0xB76659,
             oreTag("tin") to 0xAF9557,
             oreTag("osmium") to 0x416FAF,
             oreTag("uranium") to 0x5ED323,
@@ -101,7 +102,7 @@ class DiviningRodItem : Item(
             oreTag("lead") to 0x5786CC
         )
 
-        fun getColor(blockState: BlockState): Int {
+        fun getItemColor(blockState: BlockState): Int {
             for ((tag, color) in colorsPerTag) {
                 if (blockState.`is`(tag)) {
                     return (50 shl 24) or color
@@ -111,6 +112,18 @@ class DiviningRodItem : Item(
             return (50 shl 24) or 0xFFFFFF
         }
 
+        fun getItemColor(itemStack: ItemStack, tintIndex: Int): Int {
+            if (tintIndex != 1) return 0xFFFFFFFF.toInt()
+
+            val blockTag = itemStack.get(ModDataComponents.BLOCK_TAG)
+
+            if (blockTag != null) {
+                val rgb = colorsPerTag[blockTag] ?: 0xFFFFFF
+                return (0xFF shl 24) or rgb
+            }
+
+            return 0xFFFFFFFF.toInt()
+        }
     }
 
     override fun appendHoverText(

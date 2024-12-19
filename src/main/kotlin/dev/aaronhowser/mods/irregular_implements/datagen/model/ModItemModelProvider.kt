@@ -27,8 +27,18 @@ class ModItemModelProvider(
         handheldItems()
         emeraldCompass()
         redstoneActivator()
+        diviningRod()
 
         basicItems()
+    }
+
+    private fun diviningRod() {
+        val item = ModItems.DIVINING_ROD.get()
+
+        getBuilder(getName(item).toString())
+            .parent(ModelFile.UncheckedModelFile("item/handheld"))
+            .texture("layer0", "item/divining_rod")
+            .texture("layer1", "item/divining_rod_overlay")
     }
 
     private fun redstoneActivator() {
@@ -89,6 +99,7 @@ class ModItemModelProvider(
             ModItems.SOUND_RECORDER,
             ModItems.SPECTRE_CHARGER,
             ModItems.ADVANCED_REDSTONE_TORCH,
+            ModItems.DIVINING_ROD
         )
 
         val blockItemsToModel = listOf(

@@ -2,10 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
-import dev.aaronhowser.mods.irregular_implements.item.BiomeCapsuleItem
-import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
-import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.item.RedstoneActivatorItem
+import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -75,6 +72,11 @@ object ClientModBusEvents {
         event.register(
             BiomeCapsuleItem::getItemColor,
             ModItems.BIOME_CAPSULE.get()
+        )
+
+        event.register(
+            DiviningRodItem::getItemColor,
+            ModItems.DIVINING_ROD.get()
         )
 
     }

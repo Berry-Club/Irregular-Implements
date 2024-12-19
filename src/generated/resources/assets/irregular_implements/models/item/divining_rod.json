@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "irregular_implements:item/divining_rod"
+    "layer0": "irregular_implements:item/divining_rod",
+    "layer1": "irregular_implements:item/divining_rod_overlay"
   }
 }

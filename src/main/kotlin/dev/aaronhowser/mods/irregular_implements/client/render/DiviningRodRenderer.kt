@@ -72,7 +72,7 @@ object DiviningRodRenderer {
             val indicator = Indicator(
                 checkedPos,
                 160,
-                DiviningRodItem.getColor(checkedState)
+                DiviningRodItem.getItemColor(checkedState)
             )
 
             indicators.add(indicator)
