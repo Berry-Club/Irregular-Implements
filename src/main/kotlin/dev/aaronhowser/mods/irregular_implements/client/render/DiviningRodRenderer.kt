@@ -88,6 +88,37 @@ object DiviningRodRenderer {
         render(event)
     }
 
+    private fun refresh(poseStack: PoseStack) {
+        vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
+        val vertexBuffer = vertexBuffer ?: return
+
+        val tesselator = Tesselator.getInstance()
+        val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
+
+        for (indicator in indicators) {
+            RenderUtils.renderCube(
+                poseStack,
+                buffer,
+                indicator.target.x.toFloat(),
+                indicator.target.y.toFloat(),
+                indicator.target.z.toFloat(),
+                1f,
+                1f,
+                1f,
+                indicator.color
+            )
+        }
+
+        val build = buffer.build()
+        if (build == null) {
+            this.vertexBuffer = null
+        } else {
+            vertexBuffer.bind()
+            vertexBuffer.upload(build)
+            VertexBuffer.unbind()
+        }
+    }
+
     private fun render(event: RenderLevelStageEvent) {
         RenderSystem.depthMask(false)
         RenderSystem.enableBlend()
@@ -121,37 +152,6 @@ object DiviningRodRenderer {
         RenderSystem.applyModelViewMatrix()
 
         RenderSystem.depthMask(true)
-    }
-
-    private fun refresh(poseStack: PoseStack) {
-        vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
-        val vertexBuffer = vertexBuffer ?: return
-
-        val tesselator = Tesselator.getInstance()
-        val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
-
-        for (indicator in indicators) {
-            RenderUtils.renderCube(
-                poseStack,
-                buffer,
-                indicator.target.x.toFloat(),
-                indicator.target.y.toFloat(),
-                indicator.target.z.toFloat(),
-                1f,
-                1f,
-                1f,
-                indicator.color
-            )
-        }
-
-        val build = buffer.build()
-        if (build == null) {
-            this.vertexBuffer = null
-        } else {
-            vertexBuffer.bind()
-            vertexBuffer.upload(build)
-            VertexBuffer.unbind()
-        }
     }
 
 }
