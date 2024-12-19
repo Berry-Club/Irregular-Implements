@@ -14,7 +14,6 @@ class ClientConfig(
         val CONFIG_SPEC: ModConfigSpec = configPair.right
 
         lateinit var COLLAPSE_INVERTS_MOUSE: ModConfigSpec.BooleanValue
-        lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue  //TODO: Make serverside? For lag reasons
     }
 
     init {
@@ -27,10 +26,6 @@ class ClientConfig(
         COLLAPSE_INVERTS_MOUSE = builder
             .comment("Should the Collapse Imbue invert the player's mouse sensitivity?")
             .define("collapseInvertsMouse", true)
-
-        DIVINING_ROD_CHECK_RADIUS = builder
-            .comment("The radius around the player to check for blocks with the Divining Rod")
-            .defineInRange("diviningRodCheckRadius", 5, 1, 100)
 
     }
 

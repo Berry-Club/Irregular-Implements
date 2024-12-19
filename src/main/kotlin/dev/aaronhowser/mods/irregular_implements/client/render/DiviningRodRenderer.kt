@@ -3,9 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
@@ -16,7 +17,6 @@ import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
-import java.awt.Color
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID,
@@ -47,12 +47,15 @@ object DiviningRodRenderer {
         val playerPos = player.blockPosition()
         val level = player.level()
 
-        val offHandTag = player.offhandItem.get(ModDataComponents.BLOCK_TAG)
-        val mainHandTag = player.mainHandItem.get(ModDataComponents.BLOCK_TAG)
+        val offHandItem = player.offhandItem
+        val mainHandItem = player.mainHandItem
+
+        val offHandTag = if (offHandItem.`is`(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.BLOCK_TAG) else null
+        val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.BLOCK_TAG) else null
 
         if (offHandTag == null && mainHandTag == null) return
 
-        val radius = ClientConfig.DIVINING_ROD_CHECK_RADIUS.get()
+        val radius = ServerConfig.DIVINING_ROD_CHECK_RADIUS.get()
 
         for (dX in -radius..radius) for (dY in -radius..radius) for (dZ in -radius..radius) {
             val checkedPos = playerPos.offset(dX, dY, dZ)
@@ -68,7 +71,7 @@ object DiviningRodRenderer {
 
             val indicator = Indicator(
                 checkedPos,
-                20,
+                160,
                 DiviningRodItem.getColor(checkedState)
             )
 

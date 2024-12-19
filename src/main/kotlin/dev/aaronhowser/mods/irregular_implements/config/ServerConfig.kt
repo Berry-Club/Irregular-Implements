@@ -27,6 +27,8 @@ class ServerConfig(
 
         lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
         lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
+
+        lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
     }
 
     init {
@@ -71,6 +73,10 @@ class ServerConfig(
         BLOCK_REPLACER_UNIQUE_BLOCKS = builder
             .comment("How many unique blocks should the Block Replacer be able to store?")
             .defineInRange("blockReplacerUniqueBlocks", 9, 1, Int.MAX_VALUE)
+
+        DIVINING_ROD_CHECK_RADIUS = builder
+            .comment("The radius around the player to check for blocks with the Divining Rod")
+            .defineInRange("diviningRodCheckRadius", 20, 1, 100)
     }
 
 }

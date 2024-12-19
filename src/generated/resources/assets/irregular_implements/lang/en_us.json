@@ -221,7 +221,7 @@
   "info.irregular_implements.corrector_plate": "Entities moving on the Plate are centered along the axis they're moving.\n\nFor example, if they're moving South, they're teleported to the middle of the North-South axis of the block.",
   "info.irregular_implements.diamond_breaker": "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.",
   "info.irregular_implements.directional_accelerator_plate": "Entities on this Plate are pushed slightly in the direction the Plate is facing.",
-  "info.irregular_implements.divining_rod": "When held in hand, highlights the corresponding ore in an 11x11x11 cube around you.",
+  "info.irregular_implements.divining_rod": "When held in hand, highlights the corresponding ore if it's within 20 blocks of you.\n\nThis radius can be configured.",
   "info.irregular_implements.drop_filter": "Filters out items that match the contained Item Filters from entering your inventory.",
   "info.irregular_implements.ectoplasm": "Every time an entity dies, it has a chance of spawning a Spirit.\n\nSpirits can only be killed by magic, and they drop Ectoplasm.\n\nCan also be harvested from Spectre Trees.",
   "info.irregular_implements.emerald_compass": "Points to the set player, if they are online.\n\nSet the player by crafting with an ID Card.",

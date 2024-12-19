@@ -579,7 +579,7 @@ class ModLanguageProvider(
         addInfo(ModItems.SOUND_RECORDER, "Lets you save a sound to a stored Sound Pattern.\n\nUse it to toggle recording; it will stop automatically once it reaches 10 unique sounds.\n\nSneak right-click again to choose which sound to save to the Pattern.")
         addInfo(ModItems.PORTABLE_SOUND_DAMPENER, "Prevents sounds matching held Sound Patterns from being heard by the player holding it.")
         addInfo(ModItems.SUPER_LUBRICANT_TINCTURE, "Can be applied to any Boots to make you slide when wearing them.\n\nCan be washed with a Water Bottle after.")
-        addInfo(ModItems.DIVINING_ROD, "When held in hand, highlights the corresponding ore in an 11x11x11 cube around you.")
+        addInfo(ModItems.DIVINING_ROD, "When held in hand, highlights the corresponding ore if it's within 20 blocks of you.\n\nThis radius can be configured.")
         addInfo(ModItems.LOTUS_SEEDS, "Can be planted to grow Lotus Blossoms.\n\nLotus plants can be found in cold biomes.")
         addInfo(ModItems.ESCAPE_ROPE, "Hold right-click to begin searching for the nearest location that can see the sky.\n\nRelease to teleport to that location, if found.")
         addInfo(ModItems.WEATHER_EGG_SUNNY, "When thrown, spawns a cloud that changes the weather to clear.")
