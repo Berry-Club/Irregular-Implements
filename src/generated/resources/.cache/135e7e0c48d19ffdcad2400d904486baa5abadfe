@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-19T13:01:39.9630348	Item Models: irregular_implements
+// 1.21.1	2024-12-19T18:02:18.0491913	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -51,6 +51,7 @@ ca82f2cd1f0ae2622fa433f5769d3b344d9e7efd assets/irregular_implements/models/item
 7091da0d57c764efc1a8a86c98b6bd0a68fb615e assets/irregular_implements/models/item/ender_letter.json
 ce0bae92627930536b5dfc6a5fdb5d58e2b92383 assets/irregular_implements/models/item/entity_filter.json
 e81dc96d4a52cc18433eb61e67fb34565eaf4faf assets/irregular_implements/models/item/escape_rope.json
+9cd3d6ba6d82d3f451a44adac565a7e26b13b10d assets/irregular_implements/models/item/evil_tear.json
 aaa7b3f4180df1c8128a7b330b1d266f98bc78e0 assets/irregular_implements/models/item/floo_pouch.json
 be196ae062e2483e30f7e1cf69abe09770c68655 assets/irregular_implements/models/item/floo_powder.json
 d671f4df656967b1d8a7232deec751b324e2c6e1 assets/irregular_implements/models/item/floo_sign.json
@@ -100,6 +101,7 @@ fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item
 a13d140718200291095c27259ba6a6f34a1b904b assets/irregular_implements/models/item/portable_ender_bridge.json
 5b611da92a5119bfd819f9f5343c9b4efc0e572f assets/irregular_implements/models/item/portable_sound_dampener.json
 4214406cc226378f86df85b4a9572cd4e578b286 assets/irregular_implements/models/item/portkey.json
+d6d7268794599910379dbb06671188e7fa11d671 assets/irregular_implements/models/item/precious_emerald.json
 ddf6a28c4e17c83daffe022d026902960a5f64d0 assets/irregular_implements/models/item/redstone_activator.json
 a2c6fcdae70e30c2d8354819f1b3f482eb81a86a assets/irregular_implements/models/item/redstone_activator_middle.json
 e209a91eb52d35d8a2e9c3234a3b91ad336f705f assets/irregular_implements/models/item/redstone_activator_right.json

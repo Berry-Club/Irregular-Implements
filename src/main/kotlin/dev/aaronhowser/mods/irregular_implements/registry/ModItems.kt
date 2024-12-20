@@ -16,6 +16,8 @@ object ModItems {
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
+    val PRECIOUS_EMERALD = basic("precious_emerald") //Click on a villager to start a "festival" in the village
+    val EVIL_TEAR = basic("evil_tear")  // Used for artificial end portal
     val PORTKEY: DeferredItem<PortkeyItem> =
         register("portkey") { PortkeyItem() }
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
@@ -52,7 +54,7 @@ object ModItems {
     val OBSIDIAN_ROD = basic("obsidian_rod")
     val BIOME_SENSOR = basic("biome_sensor")
     val PLATE_BASE = basic("plate_base")
-    val ECTOPLASM = basic("ectoplasm")
+    val ECTOPLASM = basic("ectoplasm")  // use on sapling to make spectre sapling
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
     val SPECTRE_INGOT = basic("spectre_ingot")
     val SPECTRE_STRING = basic("spectre_string")
