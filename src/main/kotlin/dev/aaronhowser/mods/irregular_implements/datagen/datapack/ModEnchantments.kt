@@ -33,10 +33,10 @@ object ModEnchantments {
                 Enchantment.EnchantmentDefinition(
                     context.lookup(Registries.ITEM).getOrThrow(ModItemTagsProvider.ENCHANTABLE_MAGNETIC),
                     Optional.empty(),
-                    3,
                     1,
-                    Enchantment.Cost(5, 8),
-                    Enchantment.Cost(55, 8),
+                    1,
+                    Enchantment.Cost(15, 0),
+                    Enchantment.Cost(65, 0),
                     2,
                     listOf(EquipmentSlotGroup.HAND)
                 ),

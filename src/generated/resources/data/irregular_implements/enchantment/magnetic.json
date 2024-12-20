@@ -4,17 +4,17 @@
     "translate": "enchantment.irregular_implements.magnetic"
   },
   "max_cost": {
-    "base": 55,
-    "per_level_above_first": 8
+    "base": 65,
+    "per_level_above_first": 0
   },
   "max_level": 1,
   "min_cost": {
-    "base": 5,
-    "per_level_above_first": 8
+    "base": 15,
+    "per_level_above_first": 0
   },
   "slots": [
     "hand"
   ],
   "supported_items": "#irregular_implements:enchantable/magnetic",
-  "weight": 3
+  "weight": 1
 }
