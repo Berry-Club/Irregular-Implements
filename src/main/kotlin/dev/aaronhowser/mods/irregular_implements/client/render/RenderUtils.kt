@@ -22,24 +22,33 @@ object RenderUtils {
             center.x.toFloat() - width.toFloat() / 2,
             center.y.toFloat() - width.toFloat() / 2,
             center.z.toFloat() - width.toFloat() / 2,
-            width.toFloat(),
-            width.toFloat(),
-            width.toFloat(),
+            width,
+            width,
+            width,
             color
         )
     }
 
+    @Suppress("NAME_SHADOWING")
     fun renderCube(
         poseStack: PoseStack,
         vertexConsumer: VertexConsumer,
-        posX: Float,
-        posY: Float,
-        posZ: Float,
-        width: Float,
-        length: Float,
-        height: Float,
+        posX: Number,
+        posY: Number,
+        posZ: Number,
+        width: Number,
+        length: Number,
+        height: Number,
         color: Int
     ) {
+
+        val posX = posX.toFloat()
+        val posY = posY.toFloat()
+        val posZ = posZ.toFloat()
+        val width = width.toFloat()
+        val length = length.toFloat()
+        val height = height.toFloat()
+
         poseStack.pushPose()
         poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 

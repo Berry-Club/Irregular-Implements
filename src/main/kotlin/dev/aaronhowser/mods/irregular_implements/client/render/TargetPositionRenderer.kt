@@ -3,10 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
@@ -22,60 +19,29 @@ import org.lwjgl.opengl.GL11
     modid = IrregularImplements.ID,
     value = [Dist.CLIENT]
 )
-object DiviningRodRenderer {
+object TargetPositionRenderer {
 
-    private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
+    private val positions: MutableList<BlockPos> = mutableListOf()
 
-    private val indicators: MutableList<Indicator> = mutableListOf()
-
-    //TODO: Probably laggy, maybe make it only check once a second?
     @SubscribeEvent
     fun afterClientTick(event: ClientTickEvent.Post) {
-
-        val iterator = indicators.iterator()
-        while (iterator.hasNext()) {
-            val indicator = iterator.next()
-            indicator.duration--
-
-            if (indicator.duration <= 0) {
-                iterator.remove()
-            }
-        }
+        positions.clear()
 
         val player = ClientUtil.localPlayer ?: return
-        val playerPos = player.blockPosition()
+
+        val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.LOCATION)
+        val offHandItemLocation = player.offhandItem.get(ModDataComponents.LOCATION)
+
         val level = player.level()
 
-        val offHandItem = player.offhandItem
-        val mainHandItem = player.mainHandItem
-
-        val offHandTag = if (offHandItem.`is`(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.BLOCK_TAG) else null
-        val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.BLOCK_TAG) else null
-
-        if (offHandTag == null && mainHandTag == null) return
-
-        val radius = ServerConfig.DIVINING_ROD_CHECK_RADIUS.get()
-
-        for (dX in -radius..radius) for (dY in -radius..radius) for (dZ in -radius..radius) {
-            val checkedPos = playerPos.offset(dX, dY, dZ)
-            if (!level.isLoaded(checkedPos)) continue
-
-            val checkedState = level.getBlockState(checkedPos)
-
-            val matchesOffHand = offHandTag != null && checkedState.`is`(offHandTag)
-            val matchesMainHand = mainHandTag != null && checkedState.`is`(mainHandTag)
-
-            if (!matchesOffHand && !matchesMainHand) continue
-            if (indicators.any { it.target == checkedPos }) continue
-
-            val indicator = Indicator(
-                checkedPos,
-                160,
-                DiviningRodItem.getOverlayColor(checkedState)
-            )
-
-            indicators.add(indicator)
+        if (mainHandItemLocation != null && mainHandItemLocation.dimension == level.dimension()) {
+            positions.add(mainHandItemLocation.blockPos)
         }
+
+        if (offHandItemLocation != null && offHandItemLocation.dimension == level.dimension()) {
+            positions.add(offHandItemLocation.blockPos)
+        }
+
     }
 
     private var vertexBuffer: VertexBuffer? = null
@@ -83,8 +49,6 @@ object DiviningRodRenderer {
     @SubscribeEvent
     fun onRenderLevel(event: RenderLevelStageEvent) {
         if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
-
-        if (indicators.isEmpty()) return
 
         refresh(event.poseStack)
         render(event)
@@ -97,17 +61,17 @@ object DiviningRodRenderer {
         val tesselator = Tesselator.getInstance()
         val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
 
-        for (indicator in indicators) {
+        for (position in positions) {
             RenderUtils.renderCube(
                 poseStack,
                 buffer,
-                indicator.target.x,
-                indicator.target.y,
-                indicator.target.z,
+                position.x,
+                position.y,
+                position.z,
                 1,
                 1,
                 1,
-                indicator.color
+                0x3200FF00.toInt()
             )
         }
 

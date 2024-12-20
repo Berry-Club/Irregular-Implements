@@ -19,9 +19,6 @@ class FilterLocationItem : Item(
 
     override fun useOn(context: UseOnContext): InteractionResult {
         val player = context.player
-        if (player?.cooldowns?.isOnCooldown(this).isTrue) {
-            return InteractionResult.PASS
-        }
 
         val usedStack = context.itemInHand
         usedStack.set(
@@ -36,10 +33,6 @@ class FilterLocationItem : Item(
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
-
-        if (player.cooldowns.isOnCooldown(this)) {
-            return InteractionResultHolder.pass(usedStack)
-        }
 
         usedStack.set(
             ModDataComponents.LOCATION.get(),

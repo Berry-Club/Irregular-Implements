@@ -12,6 +12,7 @@ class BiomeSensorBlockEntity {
     companion object {
         val LAYER_NAME = OtherUtil.modResource("biome_name")
 
+        //TODO: Does this crash on servers?
         fun tryRenderBiomeName(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
             val player = ClientUtil.localPlayer ?: return
             if (!player.isHolding(ModItems.BIOME_SENSOR.get())) return
