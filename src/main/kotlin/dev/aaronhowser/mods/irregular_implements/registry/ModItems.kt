@@ -122,7 +122,7 @@ object ModItems {
         register("imbue_spectre") { ImbueItem(ModEffects.SPECTRE_IMBUE) }
 
     // Spectre
-    val SPECTRE_ILLUMINATOR = basic("spectre_illuminator")
+    val SPECTRE_ILLUMINATOR = register("spectre_illuminator") { SpectreIlluminatorItem() }
     val SPECTRE_KEY = basic("spectre_key")
     val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
         register("spectre_anchor") { SpectreAnchorItem() }

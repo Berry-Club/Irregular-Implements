@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
+import dev.aaronhowser.mods.irregular_implements.item.SpectreIlluminatorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.ServerLevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,8 +18,8 @@ public interface BlockAndTintGetterMixin {
             cancellable = true
     )
     default void irregular_implements$getBrightness(LightLayer lightType, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
-        if (this instanceof ServerLevelAccessor) {
-            cir.setReturnValue(0);
+        if (SpectreIlluminatorItem.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
+            cir.setReturnValue(15);
         }
     }
 
@@ -29,8 +29,8 @@ public interface BlockAndTintGetterMixin {
             cancellable = true
     )
     default void irregular_implements$getRawBrightness(BlockPos blockPos, int amount, CallbackInfoReturnable<Integer> cir) {
-        if (this instanceof ServerLevelAccessor) {
-            cir.setReturnValue(0);
+        if (SpectreIlluminatorItem.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
+            cir.setReturnValue(15);
         }
     }
 
