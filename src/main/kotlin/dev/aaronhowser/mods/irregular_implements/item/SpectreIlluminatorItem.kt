@@ -15,19 +15,6 @@ class SpectreIlluminatorItem : Item(
         .stacksTo(1)
 ) {
 
-    companion object {
-        private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
-
-        @JvmStatic
-        fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
-            if (blockAndTintGetter !is Level) return false
-
-            val chunkPos = ChunkPos(blockPos)
-
-            return illuminatedChunks[blockAndTintGetter].contains(chunkPos.toLong())
-        }
-    }
-
     override fun useOn(context: UseOnContext): InteractionResult {
         val level = context.level
         val clickedPos = context.clickedPos
