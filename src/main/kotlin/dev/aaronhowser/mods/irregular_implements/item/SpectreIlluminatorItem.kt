@@ -1,8 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import com.google.common.collect.HashMultimap
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.BlockAndTintGetter
+import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.Level
 
 class SpectreIlluminatorItem : Item(
     Properties()
@@ -11,12 +14,15 @@ class SpectreIlluminatorItem : Item(
 
     companion object {
 
-        private val illuminatedChunks: HashSet<Int> = HashSet()
+        private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
         @JvmStatic
         fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
+            if (blockAndTintGetter !is Level) return false
 
-            return false
+            val chunkPos = ChunkPos(blockPos)
+
+            return illuminatedChunks[blockAndTintGetter].contains(chunkPos.toLong())
         }
 
     }
