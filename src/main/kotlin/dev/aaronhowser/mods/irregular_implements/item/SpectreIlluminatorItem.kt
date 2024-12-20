@@ -1,14 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
-import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
-import net.minecraft.world.level.BlockAndTintGetter
-import net.minecraft.world.level.ChunkPos
-import net.minecraft.world.level.Level
 
 class SpectreIlluminatorItem : Item(
     Properties()
@@ -18,6 +14,12 @@ class SpectreIlluminatorItem : Item(
     override fun useOn(context: UseOnContext): InteractionResult {
         val level = context.level
         val clickedPos = context.clickedPos
+
+        if (IlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
+            context.player?.sendSystemMessage(Component.literal("No!"))
+            return InteractionResult.FAIL
+        }
+
         val clickedFace = context.clickedFace
 
         val spawnPos = clickedPos.relative(clickedFace).center
