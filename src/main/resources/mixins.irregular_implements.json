@@ -5,6 +5,7 @@
   "mixins": [
     "BeaconBlockEntityMixin",
     "BiomeMixin",
+    "BlockAndTintGetterMixin",
     "BlockStateBaseMixin",
     "CombatTrackerMixin",
     "FallLocationMixin",
