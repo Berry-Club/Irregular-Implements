@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.entity.IlluminatorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
@@ -135,6 +136,7 @@ object ClientModBusEvents {
     @SubscribeEvent
     fun onClientSetup(event: FMLClientSetupEvent) {
         EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
+        EntityRenderers.register(ModEntityTypes.ILLUMINATOR.get(), ::IlluminatorEntityRenderer)
     }
 
     @SubscribeEvent

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
@@ -22,6 +23,16 @@ object ModEntityTypes {
             )
                 .sized(1f, 1f)
                 .build("indicator_display")
+        })
+
+    val ILLUMINATOR: DeferredHolder<EntityType<*>, EntityType<IlluminatorEntity>> =
+        ENTITY_TYPE_REGISTRY.register("illuminator", Supplier {
+            EntityType.Builder.of(
+                ::IlluminatorEntity,
+                MobCategory.MISC
+            )
+                .sized(1f, 1f)
+                .build("illuminator")
         })
 
 }
