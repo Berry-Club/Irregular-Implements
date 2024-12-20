@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.util
+package dev.aaronhowser.mods.irregular_implements.savedata
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -38,7 +38,7 @@ class RedstoneHandlerSavedData : SavedData() {
             require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
 
             return level.dataStorage.computeIfAbsent(
-                Factory(::RedstoneHandlerSavedData, ::load),
+                Factory(::RedstoneHandlerSavedData, Companion::load),
                 "redstone_handler"
             )
         }

@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.aaronhowser.mods.irregular_implements.PoweredRedstoneInterfaces;
-import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData;
+import dev.aaronhowser.mods.irregular_implements.savedata.RedstoneHandlerSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

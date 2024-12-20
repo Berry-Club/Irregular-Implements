@@ -7,8 +7,11 @@ import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.RedstoneHandlerSavedData
+import dev.aaronhowser.mods.irregular_implements.savedata.RedstoneHandlerSavedData
+import dev.aaronhowser.mods.irregular_implements.savedata.WorldInformationSavedData.Companion.worldInformationSavedData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
 import net.neoforged.bus.api.EventPriority
@@ -77,6 +80,16 @@ object OtherEvents {
     @SubscribeEvent
     fun onLivingDeath(event: LivingDeathEvent) {
         WhiteStoneItem.tryPreventDeath(event)
+    }
+
+    @SubscribeEvent(
+        priority = EventPriority.LOWEST
+    )
+    fun onLivingDeathLowPriority(event: LivingDeathEvent) {
+        if (!event.isCanceled && event.entity.type == EntityType.ENDER_DRAGON) {
+            val level = event.entity.level() as? ServerLevel ?: return
+            level.worldInformationSavedData.enderDragonKilled = true
+        }
     }
 
     @SubscribeEvent(

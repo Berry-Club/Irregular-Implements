@@ -71,7 +71,7 @@ object TargetPositionRenderer {
                 1,
                 1,
                 1,
-                0x3200FF00.toInt()
+                0x3200FF00  //TODO: Change color?
             )
         }
 
