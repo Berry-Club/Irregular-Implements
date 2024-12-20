@@ -27,6 +27,19 @@ class IlluminatorEntity(
 
             return illuminatedChunks[blockAndTintGetter].contains(chunkPos.toLong())
         }
+
+        private fun updateLightLevels(level: Level, chunkPos: ChunkPos) {
+            val minX = chunkPos.minBlockX
+            val maxX = chunkPos.maxBlockX
+            val minY = level.minBuildHeight
+            val maxY = level.maxBuildHeight
+            val minZ = chunkPos.minBlockZ
+            val maxZ = chunkPos.maxBlockZ
+
+            for (x in minX..maxX) for (y in minY..maxY) for (z in minZ..maxZ) {
+                level.lightEngine.checkBlock(BlockPos(x, y, z))
+            }
+        }
     }
 
     override fun onAddedToLevel() {
@@ -35,7 +48,7 @@ class IlluminatorEntity(
         val chunkPos = ChunkPos(this.blockPosition())
 
         illuminatedChunks[level()].add(chunkPos.toLong())
-        level().lightEngine.propagateLightSources(chunkPos)
+        updateLightLevels(level(), chunkPos)
     }
 
     override fun onRemovedFromLevel() {
@@ -44,7 +57,7 @@ class IlluminatorEntity(
         val chunkPos = ChunkPos(this.blockPosition())
 
         illuminatedChunks[level()].remove(chunkPos.toLong())
-        level().lightEngine.propagateLightSources(chunkPos)
+        updateLightLevels(level(), chunkPos)
     }
 
     constructor(level: Level) : this(ModEntityTypes.ILLUMINATOR.get(), level)
