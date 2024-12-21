@@ -53,8 +53,8 @@ class IlluminatorEntity(
         illuminatedChunks[level()].add(chunkPos.toLong())
     }
 
-    override fun onRemovedFromLevel() {
-        super.onRemovedFromLevel()
+    override fun remove(reason: RemovalReason) {
+        super.remove(reason)
 
         val chunkPos = ChunkPos(this.blockPosition())
         illuminatedChunks[level()].remove(chunkPos.toLong())
