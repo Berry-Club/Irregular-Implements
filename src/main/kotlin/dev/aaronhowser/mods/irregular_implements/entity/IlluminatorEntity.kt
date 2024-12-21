@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
-import net.minecraft.client.renderer.chunk.RenderChunkRegion        //FIXME: This crashes servers if loaded on them
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.SynchedEntityData
@@ -10,6 +10,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
 
 class IlluminatorEntity(
@@ -24,8 +25,11 @@ class IlluminatorEntity(
         fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
             val level: Level = when (blockAndTintGetter) {
                 is Level -> blockAndTintGetter
-                is RenderChunkRegion -> blockAndTintGetter.level ?: return false
-                else -> return false
+
+                // If it's something that can be accessed on server, but isn't a Level, return false before it tries to load client-only class
+                is CommonLevelAccessor -> return false
+
+                else -> ClientUtil.levelFromBlockAndTintGetter(blockAndTintGetter) ?: return false
             }
 
             val chunkPos = ChunkPos(blockPos)
