@@ -71,12 +71,12 @@ object RedstoneToolRenderer {
     }
 
     private fun render(event: RenderLevelStageEvent) {
+        val poseStack = event.poseStack
+        val vertexBuffer = this.vertexBuffer ?: return
+
         RenderSystem.depthMask(false)
         RenderSystem.enableBlend()
         RenderSystem.defaultBlendFunc()
-
-        val poseStack = event.poseStack
-        val vertexBuffer = this.vertexBuffer ?: return
 
         poseStack.pushPose()
 
