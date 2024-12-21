@@ -28,8 +28,25 @@ class ModItemModelProvider(
         emeraldCompass()
         redstoneActivator()
         diviningRod()
+        buckets()
 
         basicItems()
+    }
+
+    private fun buckets() {
+        val enderBucket = ModItems.ENDER_BUCKET.get()
+
+        getBuilder(getName(enderBucket).toString())
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", "item/ender_bucket/base")
+            .texture("layer1", "item/ender_bucket/fluid")
+
+        val reinforcedEnderBucket = ModItems.REINFORCED_ENDER_BUCKET.get()
+
+        getBuilder(getName(reinforcedEnderBucket).toString())
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", "item/reinforced_ender_bucket/base")
+            .texture("layer1", "item/reinforced_ender_bucket/fluid")
     }
 
     private fun diviningRod() {
