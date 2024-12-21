@@ -2,8 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
-import net.minecraft.client.renderer.chunk.RenderChunkRegion
+import net.minecraft.client.renderer.chunk.RenderChunkRegion        //FIXME: This crashes servers if loaded on them
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.SynchedEntityData
@@ -24,8 +23,8 @@ class IlluminatorEntity(
         @JvmStatic
         fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
             val level: Level = when (blockAndTintGetter) {
-                is RenderChunkRegion -> ClientUtil.localPlayer?.clientLevel ?: return false
                 is Level -> blockAndTintGetter
+                is RenderChunkRegion -> blockAndTintGetter.level ?: return false
                 else -> return false
             }
 
