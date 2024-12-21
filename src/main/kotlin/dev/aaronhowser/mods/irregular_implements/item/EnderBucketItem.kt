@@ -46,7 +46,7 @@ class EnderBucketItem : Item(
 
             if (block !is BucketPickup) return InteractionResultHolder.fail(usedStack)
 
-            val sourcePos = followFlowToSource(level, blockPos, blockState.fluidState.fluidType)
+            val sourcePos = getNearestSource(level, blockPos, blockState.fluidState.fluidType)
                 ?: return InteractionResultHolder.fail(usedStack)
 
             val sourceState = level.getBlockState(sourcePos)
@@ -65,29 +65,40 @@ class EnderBucketItem : Item(
 
             level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
-            usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+            if (!player.hasInfiniteMaterials()) {
+                usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+            }
 
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
-        private fun followFlowToSource(
+        private fun getNearestSource(
             level: Level,
             blockPos: BlockPos,
             fluidType: FluidType
         ): BlockPos? {
-            val fluidState = level.getFluidState(blockPos)
-            val fluidTypeAt = fluidState.fluidType
 
-            if (fluidState.isSource && fluidTypeAt == fluidType) return blockPos
+            val positionsToCheck: MutableList<BlockPos> = mutableListOf()
+            val checkedPositions: MutableList<BlockPos> = mutableListOf()
 
-            if (fluidState.isEmpty || fluidState.fluidType != fluidType) return null
+            positionsToCheck.add(blockPos)
 
-            val flow = fluidState.getFlow(level, blockPos)
-            val flowDirection = Direction.getNearest(flow.x, flow.y, flow.z)
+            while (positionsToCheck.isNotEmpty() && checkedPositions.size < 2000) {
+                val currentPos = positionsToCheck.removeAt(0)
+                checkedPositions.add(currentPos)
 
-            val nextPos = blockPos.relative(flowDirection.opposite)
+                if (!level.isLoaded(currentPos)) continue
 
-            return followFlowToSource(level, nextPos, fluidType)
+                val checkedFluidState = level.getFluidState(currentPos)
+                if (checkedFluidState.isSource && checkedFluidState.fluidType == fluidType) return currentPos
+
+                for (direction in Direction.entries) {
+                    val nextPos = currentPos.relative(direction)
+                    if (!checkedPositions.contains(nextPos)) positionsToCheck.add(nextPos)
+                }
+            }
+
+            return null
         }
 
         private fun tryEmpty(
