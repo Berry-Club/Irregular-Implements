@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -71,7 +72,12 @@ class EnderBucketItem : Item(Properties()) {
             level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
             if (!player.hasInfiniteMaterials()) {
-                usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+                val newStack = usedStack.copyWithCount(1)
+                newStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+
+                OtherUtil.giveOrDropStack(newStack, player)
+
+                usedStack.shrink(1)
             }
 
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)

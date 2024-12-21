@@ -4,12 +4,12 @@ import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
@@ -59,8 +59,7 @@ class IlluminatorEntity(
         val chunkPos = ChunkPos(this.blockPosition())
         illuminatedChunks[level()].remove(chunkPos.toLong())
 
-        val itemEntity = ItemEntity(level(), position().x, position().y, position().z, ModItems.SPECTRE_ILLUMINATOR.toStack())
-        level().addFreshEntity(itemEntity)
+        OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
     }
 
     constructor(level: Level) : this(ModEntityTypes.ILLUMINATOR.get(), level)

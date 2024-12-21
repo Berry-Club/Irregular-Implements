@@ -17,6 +17,8 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
@@ -27,6 +29,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.Vec3
 
 object OtherUtil {
 
@@ -130,6 +133,21 @@ object OtherUtil {
         }
 
         return output
+    }
+
+    fun giveOrDropStack(itemStack: ItemStack, player: Player): Boolean {
+        return player.inventory.add(itemStack)
+                || dropStackAt(itemStack, player, true)
+    }
+
+    fun dropStackAt(itemStack: ItemStack, entity: Entity, instantPickup: Boolean = false): Boolean {
+        return dropStackAt(itemStack, entity.level(), entity.position(), instantPickup)
+    }
+
+    fun dropStackAt(itemStack: ItemStack, level: Level, pos: Vec3, instantPickup: Boolean = false): Boolean {
+        val itemEntity = ItemEntity(level, pos.x, pos.y, pos.z, itemStack)
+        if (instantPickup) itemEntity.setNoPickUpDelay()
+        return level.addFreshEntity(itemEntity)
     }
 
 }

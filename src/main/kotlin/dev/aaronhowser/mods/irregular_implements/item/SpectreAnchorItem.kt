@@ -6,9 +6,9 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.registry.ModAttachmentTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.ChatFormatting
 import net.minecraft.util.Unit
-import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -57,10 +57,7 @@ class SpectreAnchorItem : Item(
                     item.remove(ModDataComponents.ANCHORED)
                 }
 
-                if (!player.inventory.add(item)) {
-                    val itemEntity = ItemEntity(player.level(), player.x, player.y, player.z, item)
-                    player.level().addFreshEntity(itemEntity)
-                }
+                OtherUtil.giveOrDropStack(item, player)
             }
 
             player.setData(ModAttachmentTypes.DEATH_KEPT_ITEMS, DeathKeptItems(emptyList()))
