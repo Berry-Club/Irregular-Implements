@@ -34,6 +34,14 @@ class EnderBucketItem : Item(
 
     companion object {
 
+        fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
+            if (tintIndex != 1) return 0xFFFFFFFF.toInt()
+
+            val fluid = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)?.fluid ?: return 0xFFFFFFFF.toInt()
+
+            return 0xFFFFFFFF.toInt()
+        }
+
         private fun tryFill(
             level: Level,
             player: Player,
