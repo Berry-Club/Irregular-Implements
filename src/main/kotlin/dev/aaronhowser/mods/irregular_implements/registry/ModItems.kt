@@ -30,7 +30,8 @@ object ModItems {
     val ENDER_LETTER = basic("ender_letter")
     val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val GOLDEN_EGG = basic("golden_egg")
-    val BLACKOUT_POWDER = basic("blackout_powder")
+    val BLACKOUT_POWDER: DeferredItem<BlackoutPowderItem> =
+        register("blackout_powder") { BlackoutPowderItem() }
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
         register("emerald_compass") { EmeraldCompassItem() }
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =

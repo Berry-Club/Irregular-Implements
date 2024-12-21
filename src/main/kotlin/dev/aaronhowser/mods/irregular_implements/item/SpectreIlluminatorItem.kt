@@ -6,10 +6,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
 
-class SpectreIlluminatorItem : Item(
-    Properties()
-        .stacksTo(1)
-) {
+class SpectreIlluminatorItem : Item(Properties()) {
 
     override fun useOn(context: UseOnContext): InteractionResult {
         val level = context.level
