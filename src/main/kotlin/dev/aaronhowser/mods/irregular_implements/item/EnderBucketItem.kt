@@ -83,7 +83,9 @@ class EnderBucketItem : Item(
 
             if (!attemptPlace(player, level, posToPlace, blockHitResult, usedStack)) return InteractionResultHolder.fail(usedStack)
 
-            TODO()
+            usedStack.remove(ModDataComponents.SIMPLE_FLUID_CONTENT)
+
+            return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
         //TL;DR BucketItem#emptyContents but kotlin
@@ -176,7 +178,7 @@ class EnderBucketItem : Item(
         if (!level.mayInteract(player, clickedPos) || !player.mayUseItemAt(blockPos, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
 
         return if (currentContents.isEmpty) {
-            tryFill(level, player, usedStack, blockPos)
+            tryFill(level, player, usedStack, clickedPos)
         } else {
             tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
         }
