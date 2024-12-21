@@ -29,6 +29,8 @@ class SpectreIlluminatorItem : Item(
 
         level.addFreshEntity(entity)
 
+        context.itemInHand.consume(1, context.player)
+
         return InteractionResult.SUCCESS
     }
 
