@@ -27,10 +27,7 @@ import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.fluids.SimpleFluidContent
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 
-class EnderBucketItem : Item(
-    Properties()
-        .stacksTo(1)
-) {
+class EnderBucketItem : Item(Properties()) {
 
     companion object {
 
@@ -231,4 +228,10 @@ class EnderBucketItem : Item(
             tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
         }
     }
+
+    //FIXME: Probably need to make a new bucket and give it, rather than just changing the data component now
+    override fun getMaxStackSize(stack: ItemStack): Int {
+        return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
+    }
+
 }
