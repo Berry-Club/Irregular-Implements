@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -13,6 +12,7 @@ import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.ItemUtils
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BucketPickup
@@ -71,16 +71,12 @@ class EnderBucketItem : Item(Properties()) {
 
             level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
-            if (!player.hasInfiniteMaterials()) {
-                val newStack = usedStack.copyWithCount(1)
-                newStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+            val newStack = usedStack.copyWithCount(1)
+            newStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
 
-                OtherUtil.giveOrDropStack(newStack, player)
+            val resultStack = ItemUtils.createFilledResult(usedStack, player, newStack)
 
-                usedStack.shrink(1)
-            }
-
-            return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+            return InteractionResultHolder.sidedSuccess(resultStack, level.isClientSide)
         }
 
         private fun getNearestSource(
