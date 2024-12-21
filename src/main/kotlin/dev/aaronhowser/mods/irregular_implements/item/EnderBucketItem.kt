@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.FluidTags
@@ -22,6 +23,7 @@ import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.common.SoundActions
+import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.fluids.SimpleFluidContent
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 
@@ -44,21 +46,48 @@ class EnderBucketItem : Item(
 
             if (block !is BucketPickup) return InteractionResultHolder.fail(usedStack)
 
-            val pickup = block.pickupBlock(player, level, blockPos, blockState)
+            val sourcePos = followFlowToSource(level, blockPos, blockState.fluidState.fluidType)
+                ?: return InteractionResultHolder.fail(usedStack)
+
+            val sourceState = level.getBlockState(sourcePos)
+            val sourceBlock = sourceState.block as? BucketPickup
+                ?: return InteractionResultHolder.fail(usedStack)
+
+            val pickup = sourceBlock.pickupBlock(player, level, sourcePos, sourceState)
             val pickupFluidStack = pickup.getCapability(Capabilities.FluidHandler.ITEM)
             val fluidStack = pickupFluidStack?.drain(Int.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE)
 
             if (pickup.isEmpty || fluidStack == null) return InteractionResultHolder.fail(usedStack)
 
-            block.getPickupSound(blockState).ifPresent {
+            sourceBlock.getPickupSound(sourceState).ifPresent {
                 player.playSound(it)
             }
 
-            level.gameEvent(player, GameEvent.FLUID_PICKUP, blockPos)
+            level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
             usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
 
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+        }
+
+        private fun followFlowToSource(
+            level: Level,
+            blockPos: BlockPos,
+            fluidType: FluidType
+        ): BlockPos? {
+            val fluidState = level.getFluidState(blockPos)
+            val fluidTypeAt = fluidState.fluidType
+
+            if (fluidState.isSource && fluidTypeAt == fluidType) return blockPos
+
+            if (fluidState.isEmpty || fluidState.fluidType != fluidType) return null
+
+            val flow = fluidState.getFlow(level, blockPos)
+            val flowDirection = Direction.getNearest(flow.x, flow.y, flow.z)
+
+            val nextPos = blockPos.relative(flowDirection.opposite)
+
+            return followFlowToSource(level, nextPos, fluidType)
         }
 
         private fun tryEmpty(
@@ -165,7 +194,7 @@ class EnderBucketItem : Item(
         val blockHitResult = getPlayerPOVHitResult(
             level,
             player,
-            if (currentContents.isEmpty) ClipContext.Fluid.SOURCE_ONLY else ClipContext.Fluid.NONE
+            if (currentContents.isEmpty) ClipContext.Fluid.ANY else ClipContext.Fluid.NONE
         )
 
         if (blockHitResult.type != HitResult.Type.BLOCK) return InteractionResultHolder.pass(usedStack)
