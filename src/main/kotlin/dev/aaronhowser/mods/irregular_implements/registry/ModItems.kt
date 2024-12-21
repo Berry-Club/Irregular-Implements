@@ -37,8 +37,6 @@ object ModItems {
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
         register("blaze_and_steel") { BlazeAndSteelItem() }
     val ESCAPE_ROPE = basic("escape_rope")
-    val ENDER_BUCKET = basic("ender_bucket")
-    val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val LAVA_CHARM: DeferredItem<LavaCharmItem> =
@@ -59,6 +57,11 @@ object ModItems {
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
     val SPECTRE_INGOT = basic("spectre_ingot")
     val SPECTRE_STRING = basic("spectre_string")
+
+    // Bucket
+    val ENDER_BUCKET: DeferredItem<EnderBucketItem> =
+        register("ender_bucket") { EnderBucketItem() }
+    val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
 
     // Plants
     val SAKANADE_SPORES = basic("sakanade_spores")

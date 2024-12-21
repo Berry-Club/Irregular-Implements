@@ -21,6 +21,7 @@ import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.material.Fluid
+import net.neoforged.neoforge.fluids.SimpleFluidContent
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.*
@@ -154,6 +155,13 @@ object ModDataComponents {
             it
                 .persistent(Unit.CODEC)
                 .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+        }
+
+    val SIMPLE_FLUID_CONTENT: DeferredHolder<DataComponentType<*>, DataComponentType<SimpleFluidContent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("simple_fluid_content") {
+            it
+                .persistent(SimpleFluidContent.CODEC)
+                .networkSynchronized(SimpleFluidContent.STREAM_CODEC)
         }
 
 }
