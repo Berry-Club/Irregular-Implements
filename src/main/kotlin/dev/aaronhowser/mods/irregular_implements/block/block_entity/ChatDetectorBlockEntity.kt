@@ -23,7 +23,6 @@ class ChatDetectorBlockEntity(
 
     // Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
     var ownerUuid: UUID = UUID.randomUUID()
-        private set
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
