@@ -37,7 +37,7 @@ class AnalogEmitterBlock(
 
     init {
         registerDefaultState(
-            stateDefinition.any()
+            defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(ENABLED, false)
                 .setValue(POWER, 0)

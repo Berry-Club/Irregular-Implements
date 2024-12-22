@@ -129,7 +129,8 @@ object ModBlocks {
 
     // Detectors
     val ONLINE_DETECTOR = basicBlock("online_detector")
-    val CHAT_DETECTOR = basicBlock("chat_detector")
+    val CHAT_DETECTOR: DeferredBlock<ChatDetectorBlock> =
+        registerBlock("chat_detector") { ChatDetectorBlock() }
     val GLOBAL_CHAT_DETECTOR = basicBlock("global_chat_detector")
     val ENTITY_DETECTOR = basicBlock("entity_detector")
 

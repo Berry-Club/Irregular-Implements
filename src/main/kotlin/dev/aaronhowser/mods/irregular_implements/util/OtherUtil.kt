@@ -10,6 +10,7 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
@@ -30,6 +31,7 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
+import java.util.*
 
 object OtherUtil {
 
@@ -148,6 +150,10 @@ object OtherUtil {
         val itemEntity = ItemEntity(level, pos.x, pos.y, pos.z, itemStack)
         if (instantPickup) itemEntity.setNoPickUpDelay()
         return level.addFreshEntity(itemEntity)
+    }
+
+    fun CompoundTag.getUuidOrNull(key: String): UUID? {
+        return if (this.hasUUID(key)) this.getUUID(key) else null
     }
 
 }

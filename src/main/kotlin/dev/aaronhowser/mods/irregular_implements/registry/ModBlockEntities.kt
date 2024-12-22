@@ -61,4 +61,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val CHAT_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<ChatDetectorBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("chat_detector", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> ChatDetectorBlockEntity(pos, state) },
+                ModBlocks.CHAT_DETECTOR.get()
+            ).build(null)
+        })
+
 }
