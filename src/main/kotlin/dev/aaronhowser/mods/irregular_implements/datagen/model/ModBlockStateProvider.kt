@@ -50,6 +50,44 @@ class ModBlockStateProvider(
         redirectorPlate()
         moonPhaseDetector()
         shockAbsorber()
+        chatDetector()
+    }
+
+    private fun chatDetector() {
+        val block = ModBlocks.CHAT_DETECTOR.get()
+
+        val topTexture = modLoc("block/chat_detector/top")
+        val bottomTexture = modLoc("block/chat_detector/bottom")
+        val sideOffTexture = modLoc("block/chat_detector/side_off")
+        val sideOnTexture = modLoc("block/chat_detector/side_on")
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val isEnabled = it.getValue(ChatDetectorBlock.ENABLED)
+
+                val modelName = name(block) + if (isEnabled) "_on" else "_off"
+
+                val model = models()
+                    .cubeBottomTop(
+                        modelName,
+                        if (isEnabled) sideOnTexture else sideOffTexture,
+                        bottomTexture,
+                        topTexture
+                    )
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/chat_detector_off"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun shockAbsorber() {
