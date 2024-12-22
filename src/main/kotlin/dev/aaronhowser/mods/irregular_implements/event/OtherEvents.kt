@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.CompressedSlimeBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -18,6 +19,7 @@ import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.event.AnvilUpdateEvent
+import net.neoforged.neoforge.event.ServerChatEvent
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
@@ -112,7 +114,6 @@ object OtherEvents {
 
     @SubscribeEvent
     fun onAnvilUpdate(event: AnvilUpdateEvent) {
-
         val left = event.left
         val right = event.right
 
@@ -133,6 +134,11 @@ object OtherEvents {
             event.materialCost = 1
             event.output = ModItems.LAVA_WADERS.toStack()
         }
+    }
+
+    @SubscribeEvent
+    fun onServerChat(event: ServerChatEvent) {
+        ChatDetectorBlockEntity.processMessage(event)
     }
 
 }
