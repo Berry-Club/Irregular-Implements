@@ -6,11 +6,19 @@ object ScreenTextures {
 
     object Backgrounds {
 
+        object ChatDetector {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/chat_detector.png")
+
+            const val WIDTH = 137
+            const val HEIGHT = 54
+            const val CANVAS_SIZE = 256
+
+        }
+
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
         val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")
         val BLOCK_DESTABILIZER = OtherUtil.modResource("textures/gui/block_destabilizer.png")
-        val CHAT_DETECTOR = OtherUtil.modResource("textures/gui/chat_detector.png")
         val CHUNK_ANALYZER = OtherUtil.modResource("textures/gui/chunk_analyzer.png")
         val CRAFTING_RECIPE = OtherUtil.modResource("textures/gui/crafting_recipe.png")
         val DYEING_MACHINE = OtherUtil.modResource("textures/gui/dyeing_machine.png")
