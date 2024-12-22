@@ -19,22 +19,29 @@ class ChatDetectorBlockEntity(
 
     companion object {
         const val OWNER_UUID_NBT = "owner_uuid"
+        const val REGEX_NBT = "regex"
     }
 
     // Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
     var ownerUuid: UUID = UUID.randomUUID()
 
+    var regex: String = ""
+
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
 
         val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
-        if (uuid != null) ownerUuid = uuid
+        if (uuid != null) this.ownerUuid = uuid
+
+        val regex = tag.getString(REGEX_NBT)
+        this.regex = regex
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
         tag.putUUID(OWNER_UUID_NBT, ownerUuid)
+        tag.putString(REGEX_NBT, regex)
     }
 
     // Syncs with client
