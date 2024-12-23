@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu
+package dev.aaronhowser.mods.irregular_implements.menu.base
 
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 
