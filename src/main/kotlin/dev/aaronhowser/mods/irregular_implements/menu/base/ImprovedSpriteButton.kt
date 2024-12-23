@@ -18,9 +18,9 @@ class ImprovedSpriteButton(
     private val spriteHeight: Int,
     private val sprite: ResourceLocation,
     onPress: OnPress,
-    private val tooltipComponent: Component,
+    message: Component = Component.empty(),
     private val font: Font
-) : Button(x, y, width, height, Component.empty(), onPress, DEFAULT_NARRATION) {
+) : Button(x, y, width, height, message, onPress, DEFAULT_NARRATION) {
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
