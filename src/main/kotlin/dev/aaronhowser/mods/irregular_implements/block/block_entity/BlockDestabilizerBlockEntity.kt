@@ -76,6 +76,10 @@ class BlockDestabilizerBlockEntity(
 
     // Makes it save the shape of the structure and only search there TODO: Make sure this is working once lazy can be toggled
     var isLazy: Boolean = false
+        set(value) {
+            field = value
+            setChanged()
+        }
 
     val invalidBlocks: HashSet<BlockPos> = hashSetOf()
 

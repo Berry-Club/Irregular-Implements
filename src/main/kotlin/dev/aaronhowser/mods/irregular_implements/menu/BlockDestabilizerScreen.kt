@@ -27,7 +27,7 @@ class BlockDestabilizerScreen(
 
     private lateinit var toggleLazyButton: Button
     private lateinit var showLazyShapeButton: Button
-    private lateinit var resetLazyShapeButton: Button
+    private lateinit var forgetLazyShapeButton: Button
 
     override fun init() {
         this.leftPos = (this.width - ScreenTextures.Background.BlockDestabilizer.WIDTH) / 2
@@ -58,11 +58,11 @@ class BlockDestabilizerScreen(
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_HEIGHT,
             sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
             onPress = ::pressShowLazyShapeButton,
-            tooltipComponent = Component.empty(),
+            message = Component.literal("Show Lazy shape"),
             font = this.font
         )
 
-        resetLazyShapeButton = ImprovedSpriteButton(
+        forgetLazyShapeButton = ImprovedSpriteButton(
             x = this.rightPos - 20,
             y = this.topPos + 5,
             width = 20,
@@ -70,14 +70,14 @@ class BlockDestabilizerScreen(
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT,
             sprite = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
-            onPress = ::pressResetLazyShapeButton,
-            tooltipComponent = Component.empty(),
+            onPress = ::pressForgetLazyShapeButton,
+            message = Component.literal("Forget Lazy shape"),
             font = this.font
         )
 
         this.addRenderableWidget(toggleLazyButton)
         this.addRenderableWidget(showLazyShapeButton)
-        this.addRenderableWidget(resetLazyShapeButton)
+        this.addRenderableWidget(forgetLazyShapeButton)
     }
 
     // Rendering
@@ -108,7 +108,7 @@ class BlockDestabilizerScreen(
                 mouseX,
                 mouseY
             )
-        } else if (resetLazyShapeButton.isHovered) {
+        } else if (forgetLazyShapeButton.isHovered) {
             guiGraphics.renderComponentTooltip(
                 this.font,
                 listOf(
@@ -151,7 +151,7 @@ class BlockDestabilizerScreen(
         )
     }
 
-    private fun pressResetLazyShapeButton(button: Button) {
+    private fun pressForgetLazyShapeButton(button: Button) {
         ModPacketHandler.messageServer(
             ClientClickedBlockDestabilizerButton(
                 blockDestabilizerBlockEntity.blockPos,
