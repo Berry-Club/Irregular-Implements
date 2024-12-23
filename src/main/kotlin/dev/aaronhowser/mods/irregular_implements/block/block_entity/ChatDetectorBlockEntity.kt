@@ -67,7 +67,15 @@ class ChatDetectorBlockEntity(
     var ownerUuid: UUID = UUID.randomUUID()
 
     var regexString: String = ""
+        set(value) {
+            field = value
+            setChanged()
+        }
     var stopsMessage = false
+        set(value) {
+            field = value
+            setChanged()
+        }
     private var timeOn = 0
 
     /**

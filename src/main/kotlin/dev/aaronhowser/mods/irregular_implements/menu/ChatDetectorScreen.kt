@@ -4,7 +4,6 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetector
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -15,7 +14,7 @@ import kotlin.properties.Delegates
 
 class ChatDetectorScreen(
     private val chatDetectorBlockEntity: ChatDetectorBlockEntity,
-    title: Component = ModBlocks.CHAT_DETECTOR.get().name
+    title: Component = chatDetectorBlockEntity.blockState.block.name
 ) : Screen(title) {
 
     private var leftPos: Int by Delegates.notNull()
@@ -29,7 +28,7 @@ class ChatDetectorScreen(
         this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
 
         toggleMessagePassButton = SpriteIconButton
-            .builder(Component.literal("test"), ::pressToggleMessagePassButton, true)
+            .builder(Component.empty(), ::pressToggleMessagePassButton, true)
             .sprite(
                 ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
                 ScreenTextures.Sprite.ChatDetector.CANVAS_SIZE,
