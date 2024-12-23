@@ -10,12 +10,12 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class TellClientChatDetectorChanged(
     val stopsMessage: Boolean,
-    val message: String
+    val regexString: String
 ) : IModPacket {
 
     override fun receiveMessage(context: IPayloadContext) {
         context.enqueueWork {
-            Companion.message = this.message
+            Companion.regexString = this.regexString
             Companion.stopsMessage = this.stopsMessage
         }
     }
@@ -32,13 +32,13 @@ class TellClientChatDetectorChanged(
         val STREAM_CODEC: StreamCodec<ByteBuf, TellClientChatDetectorChanged> =
             StreamCodec.composite(
                 ByteBufCodecs.BOOL, TellClientChatDetectorChanged::stopsMessage,
-                ByteBufCodecs.STRING_UTF8, TellClientChatDetectorChanged::message,
+                ByteBufCodecs.STRING_UTF8, TellClientChatDetectorChanged::regexString,
                 ::TellClientChatDetectorChanged
             )
 
         var stopsMessage: Boolean = false
             private set
-        var message: String = ""
+        var regexString: String = ""
             private set
     }
 

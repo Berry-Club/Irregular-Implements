@@ -17,7 +17,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 class ClientChangedChatDetector(
     val blockPos: BlockPos,
     val stopsMessage: Boolean,
-    val message: String
+    val regexString: String
 ) : IModPacket {
 
     override fun receiveMessage(context: IPayloadContext) {
@@ -29,10 +29,10 @@ class ClientChangedChatDetector(
             val playerReach = player.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE)
             if (!player.canInteractWithBlock(blockPos, playerReach)) return@enqueueWork
 
-            chatDetectorBlockEntity.regexString = message
+            chatDetectorBlockEntity.regexString = regexString
             chatDetectorBlockEntity.stopsMessage = stopsMessage
 
-            ModPacketHandler.messagePlayer(player, TellClientChatDetectorChanged(stopsMessage, message))
+            ModPacketHandler.messagePlayer(player, TellClientChatDetectorChanged(stopsMessage, regexString))
         }
     }
 
@@ -48,7 +48,7 @@ class ClientChangedChatDetector(
             StreamCodec.composite(
                 BlockPos.STREAM_CODEC, ClientChangedChatDetector::blockPos,
                 ByteBufCodecs.BOOL, ClientChangedChatDetector::stopsMessage,
-                ByteBufCodecs.STRING_UTF8, ClientChangedChatDetector::message,
+                ByteBufCodecs.STRING_UTF8, ClientChangedChatDetector::regexString,
                 ::ClientChangedChatDetector
             )
 

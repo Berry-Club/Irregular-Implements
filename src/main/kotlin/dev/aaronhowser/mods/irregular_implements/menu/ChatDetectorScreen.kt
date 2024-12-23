@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -48,15 +51,10 @@ class ChatDetectorScreen(
         )
 
         regexStringEditBox.setHint(Component.literal("the hint"))
-        regexStringEditBox.setResponder(::setBoxValue)
-    }
+        regexStringEditBox.setResponder(::setRegexString)
 
-    private fun pressToggleMessagePassButton(button: Button) {
-
-    }
-
-    private fun setBoxValue(string: String) {
-
+        addRenderableWidget(toggleMessagePassButton)
+        addRenderableWidget(regexStringEditBox)
     }
 
     // Rendering
@@ -99,7 +97,32 @@ class ChatDetectorScreen(
             onClose()
         }
 
+        if (this.regexStringEditBox.value != TellClientChatDetectorChanged.regexString) {
+            this.regexStringEditBox.value = TellClientChatDetectorChanged.regexString
+        }
+
     }
 
+    private fun pressToggleMessagePassButton(button: Button) {
+        ModPacketHandler.messageServer(
+            ClientChangedChatDetector(
+                this.chatDetectorBlockEntity.blockPos,
+                !this.chatDetectorBlockEntity.stopsMessage,
+                this.chatDetectorBlockEntity.regexString
+            )
+        )
+    }
+
+    private fun setRegexString(string: String) {
+        this.regexStringEditBox.value = string
+
+        ModPacketHandler.messageServer(
+            ClientChangedChatDetector(
+                this.chatDetectorBlockEntity.blockPos,
+                this.chatDetectorBlockEntity.stopsMessage,
+                string
+            )
+        )
+    }
 
 }
