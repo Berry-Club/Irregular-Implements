@@ -39,9 +39,13 @@ class ChatDetectorScreen(
             height = 16,
             spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
             spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT,
-            spriteOff = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
             spriteOn = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
-            onPress = ::pressToggleMessagePassButton
+            spriteOff = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
+            messageOn = Component.literal("Stops message"),
+            messageOff = Component.literal("Doesn't stop message"),
+            currentState = this.chatDetectorBlockEntity.stopsMessage,   // On means it stops messages
+            onPress = ::pressToggleMessagePassButton,
+            font = this.font
         )
 
         toggleMessagePassButton.setPosition(
