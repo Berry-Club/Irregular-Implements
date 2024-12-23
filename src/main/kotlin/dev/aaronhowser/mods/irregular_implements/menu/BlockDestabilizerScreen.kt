@@ -1,13 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import kotlin.properties.Delegates
@@ -49,37 +49,31 @@ class BlockDestabilizerScreen(
             font = this.font
         )
 
-        showLazyShapeButton = SpriteIconButton.builder(
-            Component.empty(),
-            ::pressShowLazyShapeButton,
-            true
+        showLazyShapeButton = ImprovedSpriteButton(
+            x = this.rightPos - 40,
+            y = this.topPos + 5,
+            width = 20,
+            height = 20,
+            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_WIDTH,
+            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_HEIGHT,
+            sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
+            onPress = ::pressShowLazyShapeButton,
+            tooltipComponent = Component.empty(),
+            font = this.font
         )
-            .size(20, 20)
-            .sprite(
-                ScreenTextures.Sprite.BlockDestabilizer.FUZZY,
-                ScreenTextures.Sprite.BlockDestabilizer.FUZZY_WIDTH,
-                ScreenTextures.Sprite.BlockDestabilizer.FUZZY_HEIGHT
-            )
-            .build()
 
-        showLazyShapeButton.x = this.rightPos - 40
-        showLazyShapeButton.y = this.topPos + 5
-
-        resetLazyShapeButton = SpriteIconButton.builder(
-            Component.empty(),
-            ::pressResetLazyShapeButton,
-            true
+        resetLazyShapeButton = ImprovedSpriteButton(
+            x = this.rightPos - 20,
+            y = this.topPos + 5,
+            width = 20,
+            height = 20,
+            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
+            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT,
+            sprite = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
+            onPress = ::pressResetLazyShapeButton,
+            tooltipComponent = Component.empty(),
+            font = this.font
         )
-            .size(20, 20)
-            .sprite(
-                ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
-                ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
-                ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT
-            )
-            .build()
-
-        resetLazyShapeButton.x = this.rightPos - 20
-        resetLazyShapeButton.y = this.topPos + 5
 
         this.addRenderableWidget(toggleLazyButton)
         this.addRenderableWidget(showLazyShapeButton)

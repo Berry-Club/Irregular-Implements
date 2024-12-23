@@ -9,35 +9,18 @@ import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 
-class ToggleSpriteButton(
+class ImprovedSpriteButton(
     x: Int = 0,
     y: Int = 0,
     width: Int,
     height: Int,
-    private var currentState: Boolean = false,
-    private val messageOff: Component = Component.empty(),
-    private val messageOn: Component = messageOff,
     private val spriteWidth: Int,
     private val spriteHeight: Int,
-    private val spriteOn: ResourceLocation,
-    private val spriteOff: ResourceLocation,
-    private val font: Font,
+    private val sprite: ResourceLocation,
     onPress: OnPress,
-    narration: CreateNarration? = null
-) : Button(
-    x,
-    y,
-    width,
-    height,
-    messageOff,
-    onPress,
-    narration ?: DEFAULT_NARRATION
-) {
-
-    override fun onPress() {
-        super.onPress()
-        this.currentState = !this.currentState
-    }
+    private val tooltipComponent: Component,
+    private val font: Font
+) : Button(x, y, width, height, Component.empty(), onPress, DEFAULT_NARRATION) {
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
@@ -45,7 +28,7 @@ class ToggleSpriteButton(
         val i = this.x + this.getWidth() / 2 - this.spriteWidth / 2
         val j = this.y + this.getHeight() / 2 - this.spriteHeight / 2
         guiGraphics.blitSprite(
-            if (this.currentState) this.spriteOn else this.spriteOff,
+            sprite,
             i,
             j,
             this.spriteWidth,
@@ -70,14 +53,6 @@ class ToggleSpriteButton(
 
     override fun renderString(guiGraphics: GuiGraphics, font: Font, color: Int) {
         // Do nothing
-    }
-
-    override fun getMessage(): Component {
-        return if (this.currentState) {
-            this.messageOn
-        } else {
-            this.messageOff
-        }
     }
 
     private fun baseRenderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
