@@ -34,8 +34,8 @@ class ChatDetectorScreen(
         this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
 
         toggleMessagePassButton = ToggleSpriteButton(
-            width = 16,
-            height = 16,
+            width = 20,
+            height = 20,
             spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
             spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT,
             spriteOn = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
