@@ -22,12 +22,10 @@ class ChatDetectorScreen(
     private var leftPos: Int by Delegates.notNull()
     private var topPos: Int by Delegates.notNull()
 
-    private val rightPos: Int by lazy {
-        this.leftPos + ScreenTextures.Background.ChatDetector.WIDTH
-    }
-    private val bottomPos: Int by lazy {
-        this.topPos + ScreenTextures.Background.ChatDetector.HEIGHT
-    }
+    private val rightPos: Int
+        get() = this.leftPos + ScreenTextures.Background.ChatDetector.WIDTH
+    private val bottomPos: Int
+        get() = this.topPos + ScreenTextures.Background.ChatDetector.HEIGHT
 
     private lateinit var toggleMessagePassButton: Button
     private lateinit var regexStringEditBox: EditBox
