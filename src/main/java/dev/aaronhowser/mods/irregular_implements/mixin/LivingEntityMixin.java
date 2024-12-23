@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
-import dev.aaronhowser.mods.irregular_implements.block.BeanStalk;
+import dev.aaronhowser.mods.irregular_implements.block.BeanStalkBlock;
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
@@ -55,7 +55,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             constant = @Constant(doubleValue = 0.2)
     )
     private double irregular_implements$fasterOnStalk(double constant) {
-        return constant * BeanStalk.climbingFactor((LivingEntity) (Object) this);
+        return constant * BeanStalkBlock.climbingFactor((LivingEntity) (Object) this);
     }
 
 }
