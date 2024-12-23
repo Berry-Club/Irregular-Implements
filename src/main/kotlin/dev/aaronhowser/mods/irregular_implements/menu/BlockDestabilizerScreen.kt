@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.Screen
@@ -29,10 +30,12 @@ class BlockDestabilizerScreen(
     private lateinit var resetLazyShapeButton: Button
 
     override fun init() {
-        this.leftPos = (this.width - ScreenTextures.Background.ChatDetector.WIDTH) / 2
-        this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
+        this.leftPos = (this.width - ScreenTextures.Background.BlockDestabilizer.WIDTH) / 2
+        this.topPos = (this.height - ScreenTextures.Background.BlockDestabilizer.HEIGHT) / 2
 
         toggleLazyButton = ToggleSpriteButton(
+            x = this.leftPos + 5,
+            y = this.topPos + 5,
             width = 20,
             height = 20,
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
@@ -49,16 +52,66 @@ class BlockDestabilizerScreen(
         showLazyShapeButton = SpriteIconButton.builder(
             Component.empty(),
             ::pressShowLazyShapeButton,
+            true
         )
-            .bounds(this.rightPos - 40, this.topPos + 5, 20, 20)
+            .size(20, 20)
+            .sprite(
+                ScreenTextures.Sprite.BlockDestabilizer.FUZZY,
+                ScreenTextures.Sprite.BlockDestabilizer.FUZZY_WIDTH,
+                ScreenTextures.Sprite.BlockDestabilizer.FUZZY_HEIGHT
+            )
             .build()
+
+        showLazyShapeButton.x = this.rightPos - 40
+        showLazyShapeButton.y = this.topPos + 5
 
         resetLazyShapeButton = SpriteIconButton.builder(
             Component.empty(),
             ::pressResetLazyShapeButton,
+            true
         )
-            .bounds(this.rightPos - 20, this.topPos + 5, 20, 20)
+            .size(20, 20)
+            .sprite(
+                ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
+                ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
+                ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT
+            )
             .build()
+
+        resetLazyShapeButton.x = this.rightPos - 20
+        resetLazyShapeButton.y = this.topPos + 5
+
+        this.addRenderableWidget(toggleLazyButton)
+        this.addRenderableWidget(showLazyShapeButton)
+        this.addRenderableWidget(resetLazyShapeButton)
+    }
+
+    // Rendering
+
+    override fun renderMenuBackground(guiGraphics: GuiGraphics) {
+        guiGraphics.blit(
+            ScreenTextures.Background.BlockDestabilizer.BACKGROUND,
+            this.leftPos,
+            this.topPos,
+            0f,
+            0f,
+            ScreenTextures.Background.BlockDestabilizer.WIDTH,
+            ScreenTextures.Background.BlockDestabilizer.HEIGHT,
+            ScreenTextures.Background.BlockDestabilizer.CANVAS_SIZE,
+            ScreenTextures.Background.BlockDestabilizer.CANVAS_SIZE
+        )
+    }
+
+    // Behavior
+
+    override fun isPauseScreen(): Boolean {
+        return false
+    }
+
+    override fun tick() {
+        if (this.blockDestabilizerBlockEntity.isRemoved) {
+            onClose()
+        }
     }
 
     private fun pressToggleLazyButton(button: Button) {
