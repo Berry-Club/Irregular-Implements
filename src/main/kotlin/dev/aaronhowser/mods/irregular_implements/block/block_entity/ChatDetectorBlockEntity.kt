@@ -96,7 +96,7 @@ class ChatDetectorBlockEntity(
     }
 
     private fun pulse() {
-        this.timeOn = 20
+        this.timeOn = 20 * 3    //TODO: Some way to configure this
 
         this.level?.setBlockAndUpdate(
             this.blockPos,
