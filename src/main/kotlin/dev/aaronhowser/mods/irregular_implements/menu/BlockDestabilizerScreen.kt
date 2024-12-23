@@ -102,6 +102,31 @@ class BlockDestabilizerScreen(
         )
     }
 
+    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick)
+
+        if (showLazyShapeButton.isHovered) {
+            guiGraphics.renderComponentTooltip(
+                this.font,
+                listOf(
+                    Component.literal("Show Lazy Shape")
+                ),
+                mouseX,
+                mouseY
+            )
+        } else if (resetLazyShapeButton.isHovered) {
+            guiGraphics.renderComponentTooltip(
+                this.font,
+                listOf(
+                    Component.literal("Reset Lazy Shape")
+                ),
+                mouseX,
+                mouseY
+            )
+        }
+
+    }
+
     // Behavior
 
     override fun isPauseScreen(): Boolean {
