@@ -3,10 +3,13 @@ package dev.aaronhowser.mods.irregular_implements.block
 import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerScreen
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientBlockDestabilizerChanged
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -80,13 +83,10 @@ class BlockDestabilizerBlock(
             val screen = BlockDestabilizerScreen(blockEntity)
             Minecraft.getInstance().setScreen(screen)
         } else {
-//            ModPacketHandler.messagePlayer(
-//                pPlayer as ServerPlayer,
-//                TellClientChatDetectorChanged(
-//                    blockEntity.stopsMessage,
-//                    blockEntity.regexString
-//                )
-//            )
+            ModPacketHandler.messagePlayer(
+                pPlayer as ServerPlayer,
+                TellClientBlockDestabilizerChanged(blockEntity.isLazy)
+            )
         }
 
         return InteractionResult.SUCCESS

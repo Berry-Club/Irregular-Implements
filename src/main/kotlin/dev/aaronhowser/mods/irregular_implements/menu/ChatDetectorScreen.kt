@@ -113,6 +113,10 @@ class ChatDetectorScreen(
         if (this.regexStringEditBox.value != TellClientChatDetectorChanged.regexString) {
             this.regexStringEditBox.value = TellClientChatDetectorChanged.regexString
         }
+
+        if (this.chatDetectorBlockEntity.stopsMessage != TellClientChatDetectorChanged.stopsMessage) {
+            this.chatDetectorBlockEntity.stopsMessage = TellClientChatDetectorChanged.stopsMessage
+        }
     }
 
     override fun onClose() {
