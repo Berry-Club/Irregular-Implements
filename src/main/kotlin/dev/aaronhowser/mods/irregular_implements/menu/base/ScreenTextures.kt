@@ -14,10 +14,17 @@ object ScreenTextures {
             const val CANVAS_SIZE = 256
         }
 
+        object BlockDestabilizer {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/block_destabilizer.png")
+
+            const val WIDTH = 83
+            const val HEIGHT = 39
+            const val CANVAS_SIZE = 256
+        }
+
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
         val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")
-        val BLOCK_DESTABILIZER = OtherUtil.modResource("textures/gui/block_destabilizer.png")
         val CHUNK_ANALYZER = OtherUtil.modResource("textures/gui/chunk_analyzer.png")
         val CRAFTING_RECIPE = OtherUtil.modResource("textures/gui/crafting_recipe.png")
         val DYEING_MACHINE = OtherUtil.modResource("textures/gui/dyeing_machine.png")
@@ -52,6 +59,28 @@ object ScreenTextures {
 
             const val WIDTH = 13
             const val HEIGHT = 12
+        }
+
+        object BlockDestabilizer {
+            val FUZZY = OtherUtil.modResource("buttons/block_destabilizer/fuzzy")
+            const val FUZZY_WIDTH = 9
+            const val FUZZY_HEIGHT = 12
+
+            val NOT_FUZZY = OtherUtil.modResource("buttons/block_destabilizer/fuzzy_not")
+            const val NOT_FUZZY_WIDTH = 13
+            const val NOT_FUZZY_HEIGHT = 13
+
+            val LAZY = OtherUtil.modResource("buttons/block_destabilizer/lazy")
+            const val LAZY_WIDTH = 9
+            const val LAZY_HEIGHT = 12
+
+            val NOT_LAZY = OtherUtil.modResource("buttons/block_destabilizer/lazy_not")
+            const val NOT_LAZY_WIDTH = 13
+            const val NOT_LAZY_HEIGHT = 13
+
+            val RESET_LAZY_SHAPE = OtherUtil.modResource("buttons/block_destabilizer/reset_lazy_shape")
+            const val RESET_LAZY_SHAPE_WIDTH = 15
+            const val RESET_LAZY_SHAPE_HEIGHT = 12
         }
 
     }

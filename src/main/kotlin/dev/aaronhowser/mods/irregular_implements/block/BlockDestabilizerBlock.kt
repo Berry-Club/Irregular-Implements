@@ -2,9 +2,13 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerScreen
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.*
@@ -15,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.phys.BlockHitResult
 
 class BlockDestabilizerBlock(
     properties: Properties = Properties
@@ -60,6 +65,31 @@ class BlockDestabilizerBlock(
                 }
             }
         }
+    }
+
+    override fun useWithoutItem(
+        pState: BlockState,
+        pLevel: Level,
+        pPos: BlockPos,
+        pPlayer: Player,
+        pHitResult: BlockHitResult
+    ): InteractionResult {
+        val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDestabilizerBlockEntity ?: return InteractionResult.FAIL
+
+        if (pLevel.isClientSide) {
+            val screen = BlockDestabilizerScreen(blockEntity)
+            Minecraft.getInstance().setScreen(screen)
+        } else {
+//            ModPacketHandler.messagePlayer(
+//                pPlayer as ServerPlayer,
+//                TellClientChatDetectorChanged(
+//                    blockEntity.stopsMessage,
+//                    blockEntity.regexString
+//                )
+//            )
+        }
+
+        return InteractionResult.SUCCESS
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
