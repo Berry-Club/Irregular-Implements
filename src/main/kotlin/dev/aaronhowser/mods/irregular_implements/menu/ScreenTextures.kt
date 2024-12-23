@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 
 object ScreenTextures {
 
-    object Backgrounds {
+    object Background {
 
         object ChatDetector {
             val BACKGROUND = OtherUtil.modResource("textures/gui/chat_detector.png")
@@ -12,7 +12,6 @@ object ScreenTextures {
             const val WIDTH = 137
             const val HEIGHT = 54
             const val CANVAS_SIZE = 256
-
         }
 
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
@@ -43,6 +42,17 @@ object ScreenTextures {
         val PROCESSING_PLATE = OtherUtil.modResource("textures/gui/processing_plate.png")
         val SOUND_RECORDER = OtherUtil.modResource("textures/gui/sound_recorder.png")
         val VOID_STONE = OtherUtil.modResource("textures/gui/void_stone.png")
+    }
+
+    object Sprite {
+
+        object ChatDetector {
+            val MESSAGE_CONTINUE = OtherUtil.modResource("textures/gui/chat_detector/message_continue.png")
+            val MESSAGE_STOP = OtherUtil.modResource("textures/gui/chat_detector/message_stop.png")
+
+            const val CANVAS_SIZE = 20
+        }
+
     }
 
     //TODO: Button preset? slot button?

@@ -3,36 +3,75 @@ package dev.aaronhowser.mods.irregular_implements.menu
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.components.EditBox
+import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import kotlin.properties.Delegates
 
 class ChatDetectorScreen(
-    val chatDetectorBlockEntity: ChatDetectorBlockEntity,
+    private val chatDetectorBlockEntity: ChatDetectorBlockEntity,
     title: Component = ModBlocks.CHAT_DETECTOR.get().name
 ) : Screen(title) {
 
-    var leftPos: Int by Delegates.notNull()
-    var topPos: Int by Delegates.notNull()
+    private var leftPos: Int by Delegates.notNull()
+    private var topPos: Int by Delegates.notNull()
+
+    private lateinit var toggleMessagePassButton: Button
+    private lateinit var regexStringEditBox: EditBox
 
     override fun init() {
-        leftPos = (width - ScreenTextures.Backgrounds.ChatDetector.WIDTH) / 2
-        topPos = (height - ScreenTextures.Backgrounds.ChatDetector.HEIGHT) / 2
+        this.leftPos = (this.width - ScreenTextures.Background.ChatDetector.WIDTH) / 2
+        this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
+
+        toggleMessagePassButton = SpriteIconButton
+            .builder(Component.literal("test"), ::pressToggleMessagePassButton, true)
+            .sprite(
+                ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
+                ScreenTextures.Sprite.ChatDetector.CANVAS_SIZE,
+                ScreenTextures.Sprite.ChatDetector.CANVAS_SIZE
+            )
+            .size(16, 16)
+            .build()
+
+        toggleMessagePassButton.x = this.leftPos + 10
+        toggleMessagePassButton.y = this.topPos + 30
+
+        regexStringEditBox = EditBox(
+            this.font,
+            this.leftPos,
+            this.topPos - 20,
+            72,
+            14,
+            Component.empty()
+        )
+
+        regexStringEditBox.setHint(Component.literal("the hint"))
+        regexStringEditBox.setResponder(::setBoxValue)
+    }
+
+    private fun pressToggleMessagePassButton(button: Button) {
+
+    }
+
+    private fun setBoxValue(string: String) {
+
     }
 
     // Rendering
 
     override fun renderMenuBackground(guiGraphics: GuiGraphics) {
         guiGraphics.blit(
-            ScreenTextures.Backgrounds.ChatDetector.BACKGROUND,
-            leftPos,
-            topPos,
+            ScreenTextures.Background.ChatDetector.BACKGROUND,
+            this.leftPos,
+            this.topPos,
             0f,
             0f,
-            ScreenTextures.Backgrounds.ChatDetector.WIDTH,
-            ScreenTextures.Backgrounds.ChatDetector.HEIGHT,
-            ScreenTextures.Backgrounds.ChatDetector.CANVAS_SIZE,
-            ScreenTextures.Backgrounds.ChatDetector.CANVAS_SIZE
+            ScreenTextures.Background.ChatDetector.WIDTH,
+            ScreenTextures.Background.ChatDetector.HEIGHT,
+            ScreenTextures.Background.ChatDetector.CANVAS_SIZE,
+            ScreenTextures.Background.ChatDetector.CANVAS_SIZE
         )
     }
 
@@ -40,10 +79,10 @@ class ChatDetectorScreen(
         super.render(guiGraphics, mouseX, mouseY, partialTick)
 
         guiGraphics.drawString(
-            font,
-            title,
-            leftPos + 10,
-            topPos + 10,
+            this.font,
+            this.title,
+            this.leftPos + 10,
+            this.topPos + 10,
             0x403030,
             false
         )
@@ -56,7 +95,7 @@ class ChatDetectorScreen(
     }
 
     override fun tick() {
-        if (chatDetectorBlockEntity.isRemoved) {
+        if (this.chatDetectorBlockEntity.isRemoved) {
             onClose()
         }
 
