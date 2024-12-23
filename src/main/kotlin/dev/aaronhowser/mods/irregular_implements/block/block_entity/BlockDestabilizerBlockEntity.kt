@@ -295,6 +295,18 @@ class BlockDestabilizerBlockEntity(
         }
     }
 
+    fun showLazyShape(): Boolean {
+        if (state != State.IDLE) return false
+
+        val level = this.level ?: return false
+
+        for (blockPos in this.invalidBlocks) {
+            OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0xFF0000, 5)
+        }
+
+        return true
+    }
+
     fun toggleLazy() {
         if (state != State.IDLE) return
 
@@ -302,7 +314,7 @@ class BlockDestabilizerBlockEntity(
         if (!this.isLazy) this.invalidBlocks.clear()
     }
 
-    fun resetLazy() {
+    fun resetLazyShape() {
         if (this.state == State.IDLE) this.invalidBlocks.clear()
     }
 

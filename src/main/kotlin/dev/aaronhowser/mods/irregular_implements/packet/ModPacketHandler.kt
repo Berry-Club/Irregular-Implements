@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet
 
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -26,6 +27,15 @@ object ModPacketHandler {
         registrar.playToClient(
             TellClientChatDetectorChanged.TYPE,
             TellClientChatDetectorChanged.STREAM_CODEC,
+            DirectionalPayloadHandler(
+                { packet, context -> packet.receiveMessage(context) },
+                { packet, context -> packet.receiveMessage(context) }
+            )
+        )
+
+        registrar.playToServer(
+            ClientClickedBlockDestabilizerButton.TYPE,
+            ClientClickedBlockDestabilizerButton.STREAM_CODEC,
             DirectionalPayloadHandler(
                 { packet, context -> packet.receiveMessage(context) },
                 { packet, context -> packet.receiveMessage(context) }

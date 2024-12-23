@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.menu
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.Screen
@@ -23,7 +25,7 @@ class BlockDestabilizerScreen(
         get() = this.topPos + ScreenTextures.Background.BlockDestabilizer.HEIGHT
 
     private lateinit var toggleLazyButton: Button
-    private lateinit var toggleFuzzyButton: Button
+    private lateinit var showLazyShapeButton: Button
     private lateinit var resetLazyShapeButton: Button
 
     override fun init() {
@@ -44,19 +46,12 @@ class BlockDestabilizerScreen(
             font = this.font
         )
 
-        toggleFuzzyButton = ToggleSpriteButton(
-            width = 20,
-            height = 20,
-            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.FUZZY_WIDTH,
-            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.FUZZY_HEIGHT,
-            spriteOn = ScreenTextures.Sprite.BlockDestabilizer.FUZZY,
-            spriteOff = ScreenTextures.Sprite.BlockDestabilizer.NOT_FUZZY,
-            messageOn = Component.literal("Fuzzy"),
-            messageOff = Component.literal("Not Fuzzy"),
-            currentState = false,
-            onPress = ::pressToggleFuzzyButton,
-            font = this.font
+        showLazyShapeButton = SpriteIconButton.builder(
+            Component.empty(),
+            ::pressShowLazyShapeButton,
         )
+            .bounds(this.rightPos - 40, this.topPos + 5, 20, 20)
+            .build()
 
         resetLazyShapeButton = SpriteIconButton.builder(
             Component.empty(),
@@ -67,15 +62,30 @@ class BlockDestabilizerScreen(
     }
 
     private fun pressToggleLazyButton(button: Button) {
-
+        ModPacketHandler.messageServer(
+            ClientClickedBlockDestabilizerButton(
+                blockDestabilizerBlockEntity.blockPos,
+                ClientClickedBlockDestabilizerButton.Button.TOGGLE_LAZY
+            )
+        )
     }
 
-    private fun pressToggleFuzzyButton(button: Button) {
-
+    private fun pressShowLazyShapeButton(button: Button) {
+        ModPacketHandler.messageServer(
+            ClientClickedBlockDestabilizerButton(
+                blockDestabilizerBlockEntity.blockPos,
+                ClientClickedBlockDestabilizerButton.Button.SHOW_LAZY_SHAPE
+            )
+        )
     }
 
     private fun pressResetLazyShapeButton(button: Button) {
-
+        ModPacketHandler.messageServer(
+            ClientClickedBlockDestabilizerButton(
+                blockDestabilizerBlockEntity.blockPos,
+                ClientClickedBlockDestabilizerButton.Button.RESET_LAZY_SHAPE
+            )
+        )
     }
 
 }
