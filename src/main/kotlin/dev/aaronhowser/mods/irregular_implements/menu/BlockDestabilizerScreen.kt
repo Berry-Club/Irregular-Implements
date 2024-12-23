@@ -6,7 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientBlockDestabilizerChanged
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
@@ -133,13 +133,13 @@ class BlockDestabilizerScreen(
             onClose()
         }
 
-        if (this.blockDestabilizerBlockEntity.isLazy != UpdateClientBlockDestabilizer.isLazy) {
-            this.blockDestabilizerBlockEntity.isLazy = UpdateClientBlockDestabilizer.isLazy
+        if (this.blockDestabilizerBlockEntity.isLazy != TellClientBlockDestabilizerChanged.isLazy) {
+            this.blockDestabilizerBlockEntity.isLazy = TellClientBlockDestabilizerChanged.isLazy
         }
     }
 
     override fun onClose() {
-        UpdateClientBlockDestabilizer.unset()
+        TellClientBlockDestabilizerChanged.unset()
 
         super.onClose()
     }
