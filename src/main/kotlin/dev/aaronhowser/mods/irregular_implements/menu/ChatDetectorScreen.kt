@@ -106,7 +106,12 @@ class ChatDetectorScreen(
         if (this.regexStringEditBox.value != TellClientChatDetectorChanged.regexString) {
             this.regexStringEditBox.value = TellClientChatDetectorChanged.regexString
         }
+    }
 
+    override fun onClose() {
+        TellClientChatDetectorChanged.unset()
+
+        super.onClose()
     }
 
     private fun pressToggleMessagePassButton(button: Button) {

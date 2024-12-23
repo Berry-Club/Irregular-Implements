@@ -40,6 +40,11 @@ class TellClientChatDetectorChanged(
             private set
         var regexString: String = ""
             private set
+
+        fun unset() {
+            regexString = ""
+            stopsMessage = false
+        }
     }
 
 }
