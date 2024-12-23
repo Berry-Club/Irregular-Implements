@@ -35,17 +35,19 @@ class ChatDetectorScreen(
         this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
 
         toggleMessagePassButton = ToggleSpriteButton(
-            16,
-            16,
-            ScreenTextures.Sprite.ChatDetector.WIDTH,
-            ScreenTextures.Sprite.ChatDetector.HEIGHT,
-            ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
-            ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
-            ::pressToggleMessagePassButton
+            width = 16,
+            height = 16,
+            spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
+            spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT,
+            spriteOff = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
+            spriteOn = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
+            onPress = ::pressToggleMessagePassButton
         )
 
-        toggleMessagePassButton.x = this.rightPos - toggleMessagePassButton.width - 10
-        toggleMessagePassButton.y = this.topPos + 10
+        toggleMessagePassButton.setPosition(
+            this.rightPos - toggleMessagePassButton.width - 10,
+            this.topPos + 10
+        )
 
         regexStringEditBox = EditBox(
             this.font,

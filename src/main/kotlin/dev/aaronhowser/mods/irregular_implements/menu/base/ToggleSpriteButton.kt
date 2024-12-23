@@ -9,19 +9,21 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 
 class ToggleSpriteButton(
+    x: Int = 0,
+    y: Int = 0,
     width: Int,
     height: Int,
-    private val messageOff: Component,
+    private val messageOff: Component = Component.empty(),
     private val messageOn: Component = messageOff,
     private val spriteWidth: Int,
     private val spriteHeight: Int,
     private val spriteOn: ResourceLocation,
     private val spriteOff: ResourceLocation,
     onPress: OnPress,
-    narration: CreateNarration?
+    narration: CreateNarration? = null
 ) : Button(
-    0,
-    0,
+    x,
+    y,
     width,
     height,
     messageOff,
@@ -29,17 +31,7 @@ class ToggleSpriteButton(
     narration ?: DEFAULT_NARRATION
 ) {
 
-    constructor(
-        width: Int,
-        height: Int,
-        spriteWidth: Int,
-        spriteHeight: Int,
-        spriteOn: ResourceLocation,
-        spriteOff: ResourceLocation,
-        onPress: OnPress,
-    ) : this(width, height, Component.empty(), Component.empty(), spriteWidth, spriteHeight, spriteOn, spriteOff, onPress, null)
-
-    var toggledOn: Boolean = false
+    private var toggledOn: Boolean = false
 
     override fun onPress() {
         super.onPress()
