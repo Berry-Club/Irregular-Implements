@@ -29,6 +29,16 @@ class ToggleSpriteButton(
     narration ?: DEFAULT_NARRATION
 ) {
 
+    constructor(
+        width: Int,
+        height: Int,
+        spriteWidth: Int,
+        spriteHeight: Int,
+        spriteOn: ResourceLocation,
+        spriteOff: ResourceLocation,
+        onPress: OnPress,
+    ) : this(width, height, Component.empty(), Component.empty(), spriteWidth, spriteHeight, spriteOn, spriteOff, onPress, null)
+
     var toggledOn: Boolean = false
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

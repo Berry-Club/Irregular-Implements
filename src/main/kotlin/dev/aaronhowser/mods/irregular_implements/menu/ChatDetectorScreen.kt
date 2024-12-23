@@ -39,14 +39,11 @@ class ChatDetectorScreen(
         toggleMessagePassButton = ToggleSpriteButton(
             16,
             16,
-            Component.empty(),
-            Component.empty(),
             ScreenTextures.Sprite.ChatDetector.WIDTH,
             ScreenTextures.Sprite.ChatDetector.HEIGHT,
             ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
             ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
-            ::pressToggleMessagePassButton,
-            null
+            ::pressToggleMessagePassButton
         )
 
         toggleMessagePassButton.x = this.rightPos - toggleMessagePassButton.width - 10
