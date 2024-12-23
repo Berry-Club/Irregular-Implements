@@ -113,8 +113,12 @@ class ChatDetectorScreen(
         )
     }
 
+    private var isChangingRegexString = false
     private fun setRegexString(string: String) {
+        if (isChangingRegexString) return
+        isChangingRegexString = true
         this.regexStringEditBox.value = string
+        isChangingRegexString = false
 
         ModPacketHandler.messageServer(
             ClientChangedChatDetector(
