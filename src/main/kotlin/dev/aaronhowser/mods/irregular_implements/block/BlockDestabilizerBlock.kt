@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerScreen
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientBlockDestabilizerChanged
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
@@ -85,7 +85,7 @@ class BlockDestabilizerBlock(
         } else {
             ModPacketHandler.messagePlayer(
                 pPlayer as ServerPlayer,
-                TellClientBlockDestabilizerChanged(blockEntity.isLazy)
+                UpdateClientBlockDestabilizer(pPos)
             )
         }
 

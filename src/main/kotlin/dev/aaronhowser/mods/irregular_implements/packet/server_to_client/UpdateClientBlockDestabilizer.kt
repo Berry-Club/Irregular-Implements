@@ -1,20 +1,26 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
-import net.minecraft.network.codec.ByteBufCodecs
+import net.minecraft.core.BlockPos
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class TellClientBlockDestabilizerChanged(
-    val isLazy: Boolean
+class UpdateClientBlockDestabilizer(
+    private val blockPos: BlockPos
 ) : IModPacket {
 
     override fun receiveMessage(context: IPayloadContext) {
         context.enqueueWork {
-            Companion.isLazy = this.isLazy
+            val level = context.player().level()
+
+            val blockDestabilizerBlockEntity = level.getBlockEntity(blockPos) as? BlockDestabilizerBlockEntity
+                ?: return@enqueueWork
+
+            isLazy = blockDestabilizerBlockEntity.isLazy
         }
     }
 
@@ -23,13 +29,13 @@ class TellClientBlockDestabilizerChanged(
     }
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<TellClientBlockDestabilizerChanged> =
-            CustomPacketPayload.Type(OtherUtil.modResource("tell_client_block_destabilizer_changed"))
+        val TYPE: CustomPacketPayload.Type<UpdateClientBlockDestabilizer> =
+            CustomPacketPayload.Type(OtherUtil.modResource("update_client_block_destabilizer"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, TellClientBlockDestabilizerChanged> =
+        val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientBlockDestabilizer> =
             StreamCodec.composite(
-                ByteBufCodecs.BOOL, TellClientBlockDestabilizerChanged::isLazy,
-                ::TellClientBlockDestabilizerChanged
+                BlockPos.STREAM_CODEC, UpdateClientBlockDestabilizer::blockPos,
+                ::UpdateClientBlockDestabilizer
             )
 
         var isLazy: Boolean = false
