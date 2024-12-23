@@ -66,18 +66,18 @@ class ChatDetectorBlockEntity(
     // Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
     var ownerUuid: UUID = UUID.randomUUID()
 
-    var regex: String = ""
+    var regexString: String = ""
+    var stopsMessage = false
     private var timeOn = 0
-    private var stopsMessage = false
 
     /**
      * @return true if the message should be stopped
      */
     fun checkMessage(player: Player, message: Component): Boolean {
-        if (this.regex.isEmpty() || player.uuid != this.ownerUuid) return false
+        if (this.regexString.isEmpty() || player.uuid != this.ownerUuid) return false
 
         val messageString = message.string
-        val regex = this.regex.toRegex()
+        val regex = this.regexString.toRegex()
 
         if (regex.containsMatchIn(messageString)) {
             pulse()
@@ -103,7 +103,7 @@ class ChatDetectorBlockEntity(
         if (uuid != null) this.ownerUuid = uuid
 
         val regex = tag.getString(REGEX_NBT)
-        this.regex = regex
+        this.regexString = regex
 
         val stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
         this.stopsMessage = stopsMessage
@@ -113,7 +113,7 @@ class ChatDetectorBlockEntity(
         super.saveAdditional(tag, registries)
 
         tag.putUUID(OWNER_UUID_NBT, ownerUuid)
-        tag.putString(REGEX_NBT, regex)
+        tag.putString(REGEX_NBT, regexString)
         tag.putBoolean(STOPS_MESSAGE_NBT, stopsMessage)
     }
 
