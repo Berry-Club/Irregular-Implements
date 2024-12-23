@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet
 
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
@@ -14,8 +15,17 @@ object ModPacketHandler {
         val registrar = event.registrar("1")
 
         registrar.playToServer(
-            UpdateChatDetector.TYPE,
-            UpdateChatDetector.STREAM_CODEC,
+            ClientChangedChatDetector.TYPE,
+            ClientChangedChatDetector.STREAM_CODEC,
+            DirectionalPayloadHandler(
+                { packet, context -> packet.receiveMessage(context) },
+                { packet, context -> packet.receiveMessage(context) }
+            )
+        )
+
+        registrar.playToClient(
+            TellClientChatDetectorChanged.TYPE,
+            TellClientChatDetectorChanged.STREAM_CODEC,
             DirectionalPayloadHandler(
                 { packet, context -> packet.receiveMessage(context) },
                 { packet, context -> packet.receiveMessage(context) }

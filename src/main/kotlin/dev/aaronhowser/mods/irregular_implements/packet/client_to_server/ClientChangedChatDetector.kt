@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
+package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class UpdateChatDetector(
+class ClientChangedChatDetector(
     val blockPos: BlockPos,
     val stopsMessage: Boolean,
     val message: String
@@ -32,20 +32,20 @@ class UpdateChatDetector(
         }
     }
 
-    override fun type(): CustomPacketPayload.Type<UpdateChatDetector> {
+    override fun type(): CustomPacketPayload.Type<ClientChangedChatDetector> {
         return TYPE
     }
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<UpdateChatDetector> =
-            CustomPacketPayload.Type(OtherUtil.modResource("update_chat_detector"))
+        val TYPE: CustomPacketPayload.Type<ClientChangedChatDetector> =
+            CustomPacketPayload.Type(OtherUtil.modResource("client_changed_chat_detector"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, UpdateChatDetector> =
+        val STREAM_CODEC: StreamCodec<ByteBuf, ClientChangedChatDetector> =
             StreamCodec.composite(
-                BlockPos.STREAM_CODEC, UpdateChatDetector::blockPos,
-                ByteBufCodecs.BOOL, UpdateChatDetector::stopsMessage,
-                ByteBufCodecs.STRING_UTF8, UpdateChatDetector::message,
-                ::UpdateChatDetector
+                BlockPos.STREAM_CODEC, ClientChangedChatDetector::blockPos,
+                ByteBufCodecs.BOOL, ClientChangedChatDetector::stopsMessage,
+                ByteBufCodecs.STRING_UTF8, ClientChangedChatDetector::message,
+                ::ClientChangedChatDetector
             )
 
     }
