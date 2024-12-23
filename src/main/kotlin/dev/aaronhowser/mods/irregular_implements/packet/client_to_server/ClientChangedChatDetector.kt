@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.BlockPos
@@ -29,6 +31,8 @@ class ClientChangedChatDetector(
 
             chatDetectorBlockEntity.regexString = message
             chatDetectorBlockEntity.stopsMessage = stopsMessage
+
+            ModPacketHandler.messagePlayer(player, TellClientChatDetectorChanged(stopsMessage, message))
         }
     }
 
