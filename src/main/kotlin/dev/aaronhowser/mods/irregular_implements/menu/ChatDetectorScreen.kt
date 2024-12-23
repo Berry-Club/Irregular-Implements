@@ -46,10 +46,9 @@ class ChatDetectorScreen(
             this.topPos - 20,
             72,
             14,
-            Component.empty()
+            Component.literal(this.chatDetectorBlockEntity.regexString)
         )
 
-        regexStringEditBox.setHint(Component.literal("the hint"))
         regexStringEditBox.setResponder(::setRegexString)
 
         addRenderableWidget(toggleMessagePassButton)
