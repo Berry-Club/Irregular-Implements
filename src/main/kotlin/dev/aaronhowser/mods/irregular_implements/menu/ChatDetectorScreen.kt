@@ -10,6 +10,7 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
+import net.minecraft.util.Mth
 import kotlin.properties.Delegates
 
 class ChatDetectorScreen(
@@ -19,6 +20,13 @@ class ChatDetectorScreen(
 
     private var leftPos: Int by Delegates.notNull()
     private var topPos: Int by Delegates.notNull()
+
+    private val rightPos: Int by lazy {
+        this.leftPos + ScreenTextures.Background.ChatDetector.WIDTH
+    }
+    private val bottomPos: Int by lazy {
+        this.topPos + ScreenTextures.Background.ChatDetector.HEIGHT
+    }
 
     private lateinit var toggleMessagePassButton: Button
     private lateinit var regexStringEditBox: EditBox
@@ -37,14 +45,14 @@ class ChatDetectorScreen(
             .size(16, 16)
             .build()
 
-        toggleMessagePassButton.x = this.leftPos + 10
-        toggleMessagePassButton.y = this.topPos + 30
+        toggleMessagePassButton.x = this.rightPos - toggleMessagePassButton.width - 10
+        toggleMessagePassButton.y = this.topPos + 10
 
         regexStringEditBox = EditBox(
             this.font,
-            this.leftPos,
-            this.topPos - 20,
-            72,
+            this.leftPos + 5,
+            this.bottomPos - 5 - 14,
+            Mth.floor(ScreenTextures.Background.ChatDetector.WIDTH * 0.8f),
             14,
             Component.literal(this.chatDetectorBlockEntity.regexString)
         )
