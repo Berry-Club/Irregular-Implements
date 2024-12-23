@@ -65,6 +65,7 @@ class ChatDetectorScreen(
 
         regexStringEditBox.setResponder(::setRegexString)
         regexStringEditBox.setMaxLength(10000)
+        regexStringEditBox.setHint(Component.literal("Message regex"))
 
         addRenderableWidget(toggleMessagePassButton)
         addRenderableWidget(regexStringEditBox)
