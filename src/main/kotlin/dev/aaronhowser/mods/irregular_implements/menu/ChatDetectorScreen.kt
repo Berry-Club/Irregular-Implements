@@ -2,13 +2,13 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
-import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.util.Mth
@@ -36,15 +36,18 @@ class ChatDetectorScreen(
         this.leftPos = (this.width - ScreenTextures.Background.ChatDetector.WIDTH) / 2
         this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
 
-        toggleMessagePassButton = SpriteIconButton
-            .builder(Component.empty(), ::pressToggleMessagePassButton, true)
-            .sprite(
-                ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
-                ScreenTextures.Sprite.ChatDetector.CANVAS_SIZE,
-                ScreenTextures.Sprite.ChatDetector.CANVAS_SIZE
-            )
-            .size(16, 16)
-            .build()
+        toggleMessagePassButton = ToggleSpriteButton(
+            16,
+            16,
+            Component.empty(),
+            Component.empty(),
+            ScreenTextures.Sprite.ChatDetector.WIDTH,
+            ScreenTextures.Sprite.ChatDetector.HEIGHT,
+            ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
+            ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
+            ::pressToggleMessagePassButton,
+            null
+        )
 
         toggleMessagePassButton.x = this.rightPos - toggleMessagePassButton.width - 10
         toggleMessagePassButton.y = this.topPos + 10

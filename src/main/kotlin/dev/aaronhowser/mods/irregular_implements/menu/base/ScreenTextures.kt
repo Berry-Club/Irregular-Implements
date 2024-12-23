@@ -50,7 +50,8 @@ object ScreenTextures {
             val MESSAGE_CONTINUE = OtherUtil.modResource("chat_detector/message_continue")
             val MESSAGE_STOP = OtherUtil.modResource("chat_detector/message_stop")
 
-            const val CANVAS_SIZE = 20
+            const val WIDTH = 13
+            const val HEIGHT = 12
         }
 
     }
