@@ -41,6 +41,11 @@ class ToggleSpriteButton(
 
     var toggledOn: Boolean = false
 
+    override fun onPress() {
+        super.onPress()
+        this.toggledOn = !this.toggledOn
+    }
+
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
 
