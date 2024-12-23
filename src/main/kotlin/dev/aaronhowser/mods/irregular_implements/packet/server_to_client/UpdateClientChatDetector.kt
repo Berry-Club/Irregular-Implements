@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class TellClientChatDetectorChanged(
+class UpdateClientChatDetector(
     val stopsMessage: Boolean,
     val regexString: String
 ) : IModPacket {
@@ -20,20 +20,20 @@ class TellClientChatDetectorChanged(
         }
     }
 
-    override fun type(): CustomPacketPayload.Type<TellClientChatDetectorChanged> {
+    override fun type(): CustomPacketPayload.Type<UpdateClientChatDetector> {
         return TYPE
     }
 
     companion object {
 
-        val TYPE: CustomPacketPayload.Type<TellClientChatDetectorChanged> =
-            CustomPacketPayload.Type(OtherUtil.modResource("tell_client_chat_detector_changed"))
+        val TYPE: CustomPacketPayload.Type<UpdateClientChatDetector> =
+            CustomPacketPayload.Type(OtherUtil.modResource("update_client_chat_detector"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, TellClientChatDetectorChanged> =
+        val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientChatDetector> =
             StreamCodec.composite(
-                ByteBufCodecs.BOOL, TellClientChatDetectorChanged::stopsMessage,
-                ByteBufCodecs.STRING_UTF8, TellClientChatDetectorChanged::regexString,
-                ::TellClientChatDetectorChanged
+                ByteBufCodecs.BOOL, UpdateClientChatDetector::stopsMessage,
+                ByteBufCodecs.STRING_UTF8, UpdateClientChatDetector::regexString,
+                ::UpdateClientChatDetector
             )
 
         var stopsMessage: Boolean = false

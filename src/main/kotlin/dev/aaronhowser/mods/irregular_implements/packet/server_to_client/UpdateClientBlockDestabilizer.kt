@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class TellClientBlockDestabilizerChanged(
+class UpdateClientBlockDestabilizer(
     val isLazy: Boolean
 ) : IModPacket {
 
@@ -23,13 +23,13 @@ class TellClientBlockDestabilizerChanged(
     }
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<TellClientBlockDestabilizerChanged> =
-            CustomPacketPayload.Type(OtherUtil.modResource("tell_client_block_destabilizer_changed"))
+        val TYPE: CustomPacketPayload.Type<UpdateClientBlockDestabilizer> =
+            CustomPacketPayload.Type(OtherUtil.modResource("update_client_block_destabilizer"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, TellClientBlockDestabilizerChanged> =
+        val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientBlockDestabilizer> =
             StreamCodec.composite(
-                ByteBufCodecs.BOOL, TellClientBlockDestabilizerChanged::isLazy,
-                ::TellClientBlockDestabilizerChanged
+                ByteBufCodecs.BOOL, UpdateClientBlockDestabilizer::isLazy,
+                ::UpdateClientBlockDestabilizer
             )
 
         var isLazy: Boolean = false

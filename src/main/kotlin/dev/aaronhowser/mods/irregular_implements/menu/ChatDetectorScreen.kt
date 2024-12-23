@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -110,17 +110,17 @@ class ChatDetectorScreen(
             onClose()
         }
 
-        if (this.regexStringEditBox.value != TellClientChatDetectorChanged.regexString) {
-            this.regexStringEditBox.value = TellClientChatDetectorChanged.regexString
+        if (this.regexStringEditBox.value != UpdateClientChatDetector.regexString) {
+            this.regexStringEditBox.value = UpdateClientChatDetector.regexString
         }
 
-        if (this.chatDetectorBlockEntity.stopsMessage != TellClientChatDetectorChanged.stopsMessage) {
-            this.chatDetectorBlockEntity.stopsMessage = TellClientChatDetectorChanged.stopsMessage
+        if (this.chatDetectorBlockEntity.stopsMessage != UpdateClientChatDetector.stopsMessage) {
+            this.chatDetectorBlockEntity.stopsMessage = UpdateClientChatDetector.stopsMessage
         }
     }
 
     override fun onClose() {
-        TellClientChatDetectorChanged.unset()
+        UpdateClientChatDetector.unset()
 
         super.onClose()
     }

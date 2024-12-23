@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
@@ -84,7 +84,7 @@ class ChatDetectorBlock : EntityBlock, Block(
         } else {
             ModPacketHandler.messagePlayer(
                 pPlayer as ServerPlayer,
-                TellClientChatDetectorChanged(
+                UpdateClientChatDetector(
                     blockEntity.stopsMessage,
                     blockEntity.regexString
                 )

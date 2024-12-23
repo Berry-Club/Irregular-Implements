@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.packet
 
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientBlockDestabilizerChanged
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.TellClientChatDetectorChanged
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
@@ -26,8 +26,8 @@ object ModPacketHandler {
         )
 
         registrar.playToClient(
-            TellClientChatDetectorChanged.TYPE,
-            TellClientChatDetectorChanged.STREAM_CODEC,
+            UpdateClientChatDetector.TYPE,
+            UpdateClientChatDetector.STREAM_CODEC,
             DirectionalPayloadHandler(
                 { packet, context -> packet.receiveMessage(context) },
                 { packet, context -> packet.receiveMessage(context) }
@@ -44,8 +44,8 @@ object ModPacketHandler {
         )
 
         registrar.playToClient(
-            TellClientBlockDestabilizerChanged.TYPE,
-            TellClientBlockDestabilizerChanged.STREAM_CODEC,
+            UpdateClientBlockDestabilizer.TYPE,
+            UpdateClientBlockDestabilizer.STREAM_CODEC,
             DirectionalPayloadHandler(
                 { packet, context -> packet.receiveMessage(context) },
                 { packet, context -> packet.receiveMessage(context) }
