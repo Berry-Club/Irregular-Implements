@@ -86,7 +86,7 @@ class ToggleSpriteButton(
         guiGraphics.setColor(1.0f, 1.0f, 1.0f, this.alpha)
         RenderSystem.enableBlend()
         RenderSystem.enableDepthTest()
-        guiGraphics.blitSprite(SPRITES[active, this.isHoveredOrFocused], this.x, this.y, this.getWidth(), this.getHeight())
+        guiGraphics.blitSprite(SPRITES[this.active, this.isHovered], this.x, this.y, this.getWidth(), this.getHeight())
         guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
         val i = fgColor
         this.renderString(guiGraphics, minecraft.font, i or (Mth.ceil(this.alpha * 255.0f) shl 24))
