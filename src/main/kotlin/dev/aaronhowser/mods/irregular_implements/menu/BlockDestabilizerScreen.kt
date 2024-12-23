@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
@@ -43,8 +45,8 @@ class BlockDestabilizerScreen(
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.LAZY_HEIGHT,
             spriteOn = ScreenTextures.Sprite.BlockDestabilizer.LAZY,
             spriteOff = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
-            messageOn = Component.literal("Lazy"),
-            messageOff = Component.literal("Not Lazy"),
+            messageOn = ModLanguageProvider.Tooltips.LAZY.toComponent(),
+            messageOff = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
             currentState = this.blockDestabilizerBlockEntity.isLazy,
             onPress = ::pressToggleLazyButton,
             font = this.font
@@ -59,7 +61,7 @@ class BlockDestabilizerScreen(
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_HEIGHT,
             sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
             onPress = ::pressShowLazyShapeButton,
-            message = Component.literal("Show Lazy shape"),
+            message = ModLanguageProvider.Tooltips.SHOW_LAZY_SHAPE.toComponent(),
             font = this.font
         )
 
@@ -72,7 +74,7 @@ class BlockDestabilizerScreen(
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT,
             sprite = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
             onPress = ::pressForgetLazyShapeButton,
-            message = Component.literal("Forget Lazy shape"),
+            message = ModLanguageProvider.Tooltips.FORGET_LAZY_SHAPE.toComponent(),
             font = this.font
         )
 
@@ -95,31 +97,6 @@ class BlockDestabilizerScreen(
             ScreenTextures.Background.BlockDestabilizer.CANVAS_SIZE,
             ScreenTextures.Background.BlockDestabilizer.CANVAS_SIZE
         )
-    }
-
-    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick)
-
-        if (showLazyShapeButton.isHovered) {
-            guiGraphics.renderComponentTooltip(
-                this.font,
-                listOf(
-                    Component.literal("Show Lazy Shape")
-                ),
-                mouseX,
-                mouseY
-            )
-        } else if (forgetLazyShapeButton.isHovered) {
-            guiGraphics.renderComponentTooltip(
-                this.font,
-                listOf(
-                    Component.literal("Reset Lazy Shape")
-                ),
-                mouseX,
-                mouseY
-            )
-        }
-
     }
 
     // Behavior

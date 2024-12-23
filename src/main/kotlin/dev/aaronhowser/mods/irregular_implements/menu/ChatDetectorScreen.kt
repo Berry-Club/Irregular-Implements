@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -40,8 +42,8 @@ class ChatDetectorScreen(
             spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT,
             spriteOn = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
             spriteOff = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
-            messageOn = Component.literal("Stops message"),
-            messageOff = Component.literal("Doesn't stop message"),
+            messageOn = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
+            messageOff = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
             currentState = this.chatDetectorBlockEntity.stopsMessage,   // On means it stops messages
             onPress = ::pressToggleMessagePassButton,
             font = this.font
@@ -65,7 +67,7 @@ class ChatDetectorScreen(
 
         regexStringEditBox.setResponder(::setRegexString)
         regexStringEditBox.setMaxLength(10000)
-        regexStringEditBox.setHint(Component.literal("Message regex"))
+        regexStringEditBox.setHint(ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent())
 
         addRenderableWidget(toggleMessagePassButton)
         addRenderableWidget(regexStringEditBox)

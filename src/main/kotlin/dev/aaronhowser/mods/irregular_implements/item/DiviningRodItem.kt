@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.ChatFormatting
@@ -135,9 +137,7 @@ class DiviningRodItem : Item(
         val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
 
         val component = if (blockTag == Tags.Blocks.ORES) {
-            Component
-                .literal("All Ores")
-                .withStyle(ChatFormatting.GRAY)
+            ModLanguageProvider.Tooltips.ALL_ORES.toGrayComponent()
         } else {
             getNameForBlockTag(blockTag)
         }

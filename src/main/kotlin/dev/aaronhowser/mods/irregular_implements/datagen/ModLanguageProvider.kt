@@ -66,6 +66,8 @@ class ModLanguageProvider(
 
         const val FLUID_FALL_DEATH_BOOT = "death.fell.accident.fluid_fall.boot"
         const val FLUID_FALL_DEATH_GENERIC = "death.fell.accident.fluid_fall.generic"
+
+        const val ILLUMINATOR_ALREADY_PRESENT = "message.irregular_implements.spectre_illuminator.already_present"
     }
 
     private fun addMessages() {
@@ -81,6 +83,8 @@ class ModLanguageProvider(
 
         add(Messages.FLUID_FALL_DEATH_BOOT, "%s splattered against the surface of %s because they were wearing %s")
         add(Messages.FLUID_FALL_DEATH_GENERIC, "%s splattered against the surface of %s because they could walk on it")
+
+        add(Messages.ILLUMINATOR_ALREADY_PRESENT, "This chunk already has a Spectre Illuminator!")
     }
 
     object Subtitles {
@@ -442,6 +446,17 @@ class ModLanguageProvider(
         const val VOID_STONE_HOLDING = "tooltip.irregular_implements.void_stone_holding"
         const val VOID_STONE_REMOVE = "tooltip.irregular_implements.void_stone_remove"
         const val ANCHORED = "tooltip.irregular_implements.anchored"
+        const val ALL_ORES = "tooltip.irregular_implements.all_ores"
+
+        const val LAZY = "tooltip.irregular_implements.lazy"
+        const val NOT_LAZY = "tooltip.irregular_implements.not_lazy"
+        const val SHOW_LAZY_SHAPE = "tooltip.irregular_implements.show_lazy_shape"
+        const val FORGET_LAZY_SHAPE = "tooltip.irregular_implements.forget_lazy_shape"
+
+        const val STOPS_MESSAGE = "tooltip.irregular_implements.stops_message"
+        const val DOESNT_STOP_MESSAGE = "tooltip.irregular_implements.doesnt_stop_message"
+        const val MESSAGE_REGEX = "tooltip.irregular_implements.message_regex"
+
     }
 
     private fun addTooltips() {
@@ -463,6 +478,17 @@ class ModLanguageProvider(
         add(Tooltips.VOID_STONE_HOLDING, "Currently holding %s, inserting another will void and replace it")
         add(Tooltips.VOID_STONE_REMOVE, "You can remove the %s by right-clicking the Stone into an empty slot")
         add(Tooltips.ANCHORED, "Anchored")
+        add(Tooltips.ALL_ORES, "All Ores")
+
+        add(Tooltips.LAZY, "Lazy")
+        add(Tooltips.NOT_LAZY, "Not Lazy")
+        add(Tooltips.SHOW_LAZY_SHAPE, "Show Lazy Shape")
+        add(Tooltips.FORGET_LAZY_SHAPE, "Forget Lazy Shape")
+
+        add(Tooltips.STOPS_MESSAGE, "Stops message")
+        add(Tooltips.DOESNT_STOP_MESSAGE, "Doesn't stop message")
+        add(Tooltips.MESSAGE_REGEX, "Message regex")
+
     }
 
     object Info {

@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
-import net.minecraft.network.chat.Component
+import net.minecraft.ChatFormatting
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
@@ -13,7 +15,11 @@ class SpectreIlluminatorItem : Item(Properties()) {
         val clickedPos = context.clickedPos
 
         if (IlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
-            context.player?.sendSystemMessage(Component.literal("No!"))
+            context.player?.sendSystemMessage(
+                ModLanguageProvider.Messages.ILLUMINATOR_ALREADY_PRESENT
+                    .toComponent()
+                    .withStyle(ChatFormatting.RED)
+            )
             return InteractionResult.FAIL
         }
 
