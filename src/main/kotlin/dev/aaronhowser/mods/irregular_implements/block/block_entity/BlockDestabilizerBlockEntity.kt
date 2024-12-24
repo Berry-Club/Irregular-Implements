@@ -68,14 +68,15 @@ class BlockDestabilizerBlockEntity(
 
     val targetBlockPositions: HashSet<BlockPos> = hashSetOf()
 
-    // Initialized when the BE starts searching, it only accepts positions that have this BlockState
-    // TL;DR: If it starts on Obsidian, targetState gets set to Obsidian and only Obsidian blocks are accepted
+    // Initialized when the BE starts searching, it only accepts positions with this block
+    // TL;DR: If it starts on Obsidian, targetBlock gets set to Obsidian and only Obsidian blocks are accepted
     var targetBlock: Block? = null
 
     var targetBlocksSorted: MutableList<BlockPos> = mutableListOf()
     var dropCounter: Int = 0
 
-    // Makes it save the shape of the structure and only search there TODO: Make sure this is working once lazy can be toggled
+    // Makes it save a list of positions and then load from that every time, rather than searching again
+    // This also makes it not use targetBlock
     var isLazy: Boolean = false
         set(value) {
             field = value
@@ -90,7 +91,7 @@ class BlockDestabilizerBlockEntity(
         tag.putInt(STATE_NBT, this.state.ordinal)
         tag.putBoolean(LAZY_NBT, this.isLazy)
 
-        if (this.isLazy && this.lazyBlocks.isNotEmpty()) {
+        if (this.lazyBlocks.isNotEmpty()) {
             val invalidBlocksTag = ListTag()
             for (blockPos in this.lazyBlocks) {
                 val posLong = blockPos.asLong()
@@ -153,7 +154,7 @@ class BlockDestabilizerBlockEntity(
         val lazy = tag.getBoolean(LAZY_NBT)
         this.isLazy = lazy
 
-        if (this.isLazy && tag.contains(LAZY_BLOCKS)) {
+        if (tag.contains(LAZY_BLOCKS)) {
             val invalidBlocksTag = tag.getList(LAZY_BLOCKS, Tag.TAG_LONG.toInt())
 
             for (tagElement in invalidBlocksTag) {
