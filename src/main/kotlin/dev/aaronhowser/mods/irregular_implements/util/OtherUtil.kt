@@ -87,8 +87,8 @@ object OtherUtil {
         pos: BlockPos,
         color: Int = 0xFFFFFF,
         duration: Int = 5
-    ) {
-        if (level.isClientSide) return
+    ): IndicatorDisplayEntity? {
+        if (level.isClientSide) return null
 
         val indicatorDisplay = IndicatorDisplayEntity(
             level,
@@ -99,6 +99,8 @@ object OtherUtil {
 
         indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
         level.addFreshEntity(indicatorDisplay)
+
+        return indicatorDisplay
     }
 
     fun getBiomeComponent(biomeHolder: Holder<Biome>): Component {

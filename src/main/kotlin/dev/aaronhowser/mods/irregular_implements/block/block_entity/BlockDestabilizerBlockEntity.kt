@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
@@ -300,13 +301,16 @@ class BlockDestabilizerBlockEntity(
         }
     }
 
+    private val lazyIndicatorDisplays: MutableList<IndicatorDisplayEntity> = mutableListOf()
     fun showLazyShape(): Boolean {
-        if (this.state != State.IDLE) return false
+        if (removeLazyIndicators() || this.state != State.IDLE) return false
 
         val level = this.level ?: return false
 
         for (blockPos in this.lazyBlocks) {
-            OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0x0000FF, 20 * 15)
+            OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0x0000FF, 20 * 15)?.let {
+                this.lazyIndicatorDisplays.add(it)
+            }
         }
 
         return true
@@ -320,6 +324,19 @@ class BlockDestabilizerBlockEntity(
 
     fun resetLazyShape() {
         if (this.state == State.IDLE) this.lazyBlocks.clear()
+    }
+
+    private fun removeLazyIndicators(): Boolean {
+        var anyAlive = false
+
+        for (indicator in this.lazyIndicatorDisplays) {
+            if (indicator.isAlive) anyAlive = true
+            indicator.discard()
+        }
+
+        lazyIndicatorDisplays.clear()
+
+        return anyAlive
     }
 
     // Syncs with client
