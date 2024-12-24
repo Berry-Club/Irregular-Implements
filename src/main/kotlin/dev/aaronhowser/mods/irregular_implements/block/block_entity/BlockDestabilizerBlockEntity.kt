@@ -63,17 +63,17 @@ class BlockDestabilizerBlockEntity(
 
     var state: State = State.IDLE
 
-    val alreadyChecked: HashSet<BlockPos> = hashSetOf()
-    val toCheck: ArrayList<BlockPos> = arrayListOf()
+    private val alreadyChecked: HashSet<BlockPos> = hashSetOf()
+    private val toCheck: ArrayList<BlockPos> = arrayListOf()
 
-    val targetBlockPositions: HashSet<BlockPos> = hashSetOf()
+    private val targetBlockPositions: HashSet<BlockPos> = hashSetOf()
 
     // Initialized when the BE starts searching, it only accepts positions with this block
     // TL;DR: If it starts on Obsidian, targetBlock gets set to Obsidian and only Obsidian blocks are accepted
-    var targetBlock: Block? = null
+    private var targetBlock: Block? = null
 
-    var targetBlocksSorted: MutableList<BlockPos> = mutableListOf()
-    var dropCounter: Int = 0
+    private var targetBlocksSorted: MutableList<BlockPos> = mutableListOf()
+    private var dropCounter: Int = 0
 
     // Makes it save a list of positions and then load from that every time, rather than searching again
     // This also makes it not use targetBlock
@@ -83,7 +83,7 @@ class BlockDestabilizerBlockEntity(
             setChanged()
         }
 
-    val lazyBlocks: HashSet<BlockPos> = hashSetOf()
+    private val lazyBlocks: HashSet<BlockPos> = hashSetOf()
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
@@ -270,10 +270,8 @@ class BlockDestabilizerBlockEntity(
                 .thenBy { it.distSqr(this.blockPos) }
         ).toMutableList()
 
-        if (!this.isLazy) {
-            this.lazyBlocks.clear()
-            this.lazyBlocks.addAll(this.targetBlocksSorted)
-        }
+        this.lazyBlocks.clear()
+        this.lazyBlocks.addAll(this.targetBlocksSorted)
 
         this.state = State.DROPPING
         this.dropCounter = 0
@@ -342,7 +340,10 @@ class BlockDestabilizerBlockEntity(
     }
 
     fun resetLazyShape() {
-        if (this.state == State.IDLE) this.lazyBlocks.clear()
+        if (this.state != State.IDLE) return
+
+        removeLazyIndicators()
+        this.lazyBlocks.clear()
     }
 
     // Syncs with client
