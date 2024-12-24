@@ -34,7 +34,7 @@ class BlockDestabilizerBlockEntity(
 
         const val TARGET_STATE_BLOCK_NBT = "target_state_block"
 
-        const val INVALID_BLOCKS_NBT = "invalid_blocks"
+        const val LAZY_BLOCKS = "lazy_blocks"
         const val ALREADY_CHECKED_NBT = "already_checked"
         const val TO_CHECK_NBT = "to_check"
         const val TARGET_BLOCKS_NBT = "target_blocks"
@@ -81,7 +81,7 @@ class BlockDestabilizerBlockEntity(
             setChanged()
         }
 
-    val invalidBlocks: HashSet<BlockPos> = hashSetOf()
+    val lazyBlocks: HashSet<BlockPos> = hashSetOf()
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
@@ -89,14 +89,14 @@ class BlockDestabilizerBlockEntity(
         tag.putInt(STATE_NBT, this.state.ordinal)
         tag.putBoolean(LAZY_NBT, this.isLazy)
 
-        if (this.isLazy && this.invalidBlocks.isNotEmpty()) {
+        if (this.isLazy && this.lazyBlocks.isNotEmpty()) {
             val invalidBlocksTag = ListTag()
-            for (blockPos in this.invalidBlocks) {
+            for (blockPos in this.lazyBlocks) {
                 val posLong = blockPos.asLong()
                 val longTag = LongTag.valueOf(posLong)
                 invalidBlocksTag.add(longTag)
             }
-            tag.put(INVALID_BLOCKS_NBT, invalidBlocksTag)
+            tag.put(LAZY_BLOCKS, invalidBlocksTag)
         }
 
         if (this.state == State.SEARCHING) {
@@ -152,13 +152,13 @@ class BlockDestabilizerBlockEntity(
         val lazy = tag.getBoolean(LAZY_NBT)
         this.isLazy = lazy
 
-        if (this.isLazy && tag.contains(INVALID_BLOCKS_NBT)) {
-            val invalidBlocksTag = tag.getList(INVALID_BLOCKS_NBT, Tag.TAG_LONG.toInt())
+        if (this.isLazy && tag.contains(LAZY_BLOCKS)) {
+            val invalidBlocksTag = tag.getList(LAZY_BLOCKS, Tag.TAG_LONG.toInt())
 
             for (tagElement in invalidBlocksTag) {
                 val posLong = (tagElement as LongTag).asLong
                 val blockPos = BlockPos.of(posLong)
-                this.invalidBlocks.add(blockPos)
+                this.lazyBlocks.add(blockPos)
             }
         }
 
@@ -269,7 +269,7 @@ class BlockDestabilizerBlockEntity(
             }
 
         } else if (this.isLazy) {
-            this.invalidBlocks.add(nextPos)
+            this.lazyBlocks.add(nextPos)
         }
 
         val color = if (shouldAdd) 0x00FF00 else 0xFF0000
@@ -293,18 +293,18 @@ class BlockDestabilizerBlockEntity(
         this.toCheck.add(targetBlockPos)
 
         if (this.isLazy) {
-            this.alreadyChecked.addAll(this.invalidBlocks)
+            this.alreadyChecked.addAll(this.lazyBlocks)
         } else {
-            this.invalidBlocks.clear()
+            this.lazyBlocks.clear()
         }
     }
 
     fun showLazyShape(): Boolean {
-        if (state != State.IDLE) return false
+        if (!this.isLazy || this.state != State.IDLE) return false
 
         val level = this.level ?: return false
 
-        for (blockPos in this.invalidBlocks) {
+        for (blockPos in this.lazyBlocks) {
             OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0xFF0000, 5)
         }
 
@@ -315,11 +315,11 @@ class BlockDestabilizerBlockEntity(
         if (state != State.IDLE) return
 
         this.isLazy = !this.isLazy
-        if (!this.isLazy) this.invalidBlocks.clear()
+        if (!this.isLazy) this.lazyBlocks.clear()
     }
 
     fun resetLazyShape() {
-        if (this.state == State.IDLE) this.invalidBlocks.clear()
+        if (this.state == State.IDLE) this.lazyBlocks.clear()
     }
 
     // Syncs with client
