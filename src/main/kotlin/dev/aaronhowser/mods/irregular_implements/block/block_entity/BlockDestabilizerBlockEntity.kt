@@ -205,9 +205,7 @@ class BlockDestabilizerBlockEntity(
     }
 
     private fun dropNextBlock() {
-        val dropCounter = this.dropCounter
-
-        if (dropCounter >= this.targetBlocksSorted.size) {
+        if (this.dropCounter >= this.targetBlocksSorted.size) {
             this.state = State.IDLE
             this.targetBlocksSorted.clear()
             this.targetBlock = null
@@ -216,10 +214,10 @@ class BlockDestabilizerBlockEntity(
         }
 
         val level = this.level ?: return
-        val checkedPos = this.targetBlocksSorted.getOrNull(dropCounter) ?: return
+        val checkedPos = this.targetBlocksSorted.getOrNull(this.dropCounter) ?: return
         val checkedState = level.getBlockState(checkedPos)
 
-        val shouldDrop = checkedState.block == this.targetBlock
+        val shouldDrop = (checkedState.block == this.targetBlock || this.isLazy) && level.getBlockEntity(checkedPos) == null
 
         if (shouldDrop) {
             FallingBlockEntity.fall(level, checkedPos, checkedState)
@@ -233,6 +231,11 @@ class BlockDestabilizerBlockEntity(
             compareBy<BlockPos> { it.y }
                 .thenBy { it.distSqr(this.blockPos) }
         ).toMutableList()
+
+        if (!this.isLazy) {
+            this.lazyBlocks.clear()
+            this.lazyBlocks.addAll(this.targetBlocksSorted)
+        }
 
         this.state = State.DROPPING
         this.dropCounter = 0
@@ -267,9 +270,6 @@ class BlockDestabilizerBlockEntity(
                     this.toCheck.add(offsetPos)
                 }
             }
-
-        } else if (this.isLazy) {
-            this.lazyBlocks.add(nextPos)
         }
 
         val color = if (shouldAdd) 0x00FF00 else 0xFF0000
@@ -287,15 +287,16 @@ class BlockDestabilizerBlockEntity(
         if (targetBlockState.isAir) return
         if (targetBlockState.getDestroySpeed(level, targetBlockPos) <= 0) return
 
-        this.targetBlock = targetBlockState.block
-        this.state = State.SEARCHING
+        if (this.isLazy && this.lazyBlocks.isNotEmpty()) {
+            this.targetBlockPositions.clear()
+            this.targetBlockPositions.addAll(this.lazyBlocks)
 
-        this.toCheck.add(targetBlockPos)
-
-        if (this.isLazy) {
-            this.alreadyChecked.addAll(this.lazyBlocks)
+            initDrop()
         } else {
-            this.lazyBlocks.clear()
+            this.targetBlock = targetBlockState.block
+            this.state = State.SEARCHING
+
+            this.toCheck.add(targetBlockPos)
         }
     }
 
@@ -305,7 +306,7 @@ class BlockDestabilizerBlockEntity(
         val level = this.level ?: return false
 
         for (blockPos in this.lazyBlocks) {
-            OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0xFF0000, 5)
+            OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0x0000FF, 20 * 15)
         }
 
         return true
