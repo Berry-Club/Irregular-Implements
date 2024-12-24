@@ -301,7 +301,7 @@ class BlockDestabilizerBlockEntity(
     }
 
     fun showLazyShape(): Boolean {
-        if (!this.isLazy || this.state != State.IDLE) return false
+        if (this.state != State.IDLE) return false
 
         val level = this.level ?: return false
 
@@ -316,7 +316,6 @@ class BlockDestabilizerBlockEntity(
         if (state != State.IDLE) return
 
         this.isLazy = !this.isLazy
-        if (!this.isLazy) this.lazyBlocks.clear()
     }
 
     fun resetLazyShape() {
