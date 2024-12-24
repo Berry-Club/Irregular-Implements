@@ -321,9 +321,8 @@ class BlockDestabilizerBlockEntity(
         val level = this.level ?: return false
 
         for (blockPos in this.lazyBlocks) {
-            OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0x0000FF, 20 * 15)?.let {
-                this.lazyIndicatorDisplays.add(it)
-            }
+            val indicator = OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0x0000FF, 20 * 15)
+            if (indicator != null) lazyIndicatorDisplays.add(indicator)
         }
 
         return true
