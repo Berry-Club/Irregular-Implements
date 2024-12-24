@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import com.mojang.math.Transformation
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.entity.Display.BlockDisplay
 import net.minecraft.world.entity.EntityType
@@ -45,7 +46,7 @@ class IndicatorDisplayEntity(
     override fun tick() {
         super.tick()
 
-        if (this.tickCount >= maximumAge) {
+        if (!this.level().isClientSide.isTrue && this.tickCount >= maximumAge) {
             kill()
         }
     }
