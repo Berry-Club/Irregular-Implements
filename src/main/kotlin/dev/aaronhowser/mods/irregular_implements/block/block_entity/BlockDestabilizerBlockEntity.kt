@@ -62,6 +62,7 @@ class BlockDestabilizerBlockEntity(
     enum class State { IDLE, SEARCHING, DROPPING }
 
     var state: State = State.IDLE
+        private set
 
     private val alreadyChecked: HashSet<BlockPos> = hashSetOf()
     private val toCheck: ArrayList<BlockPos> = arrayListOf()
