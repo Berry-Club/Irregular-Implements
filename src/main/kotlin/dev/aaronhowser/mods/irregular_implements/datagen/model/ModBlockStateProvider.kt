@@ -65,6 +65,15 @@ class ModBlockStateProvider(
         getVariantBuilder(block)
             .forAllStates {
                 val isEnabled = it.getValue(OnlineDetectorBlock.ENABLED)
+                val facing = it.getValue(OnlineDetectorBlock.HORIZONTAL_FACING)
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
 
                 val modelName = name(block) + if (isEnabled) "_on" else "_off"
 
@@ -79,6 +88,7 @@ class ModBlockStateProvider(
                 ConfiguredModel
                     .builder()
                     .modelFile(model)
+                    .rotationY(yRotation)
                     .build()
             }
 
