@@ -62,17 +62,9 @@ object ScreenTextures {
         }
 
         object BlockDestabilizer {
-            val FUZZY = OtherUtil.modResource("buttons/block_destabilizer/fuzzy")
-            const val FUZZY_WIDTH = 9
-            const val FUZZY_HEIGHT = 12
-
-            val NOT_FUZZY = OtherUtil.modResource("buttons/block_destabilizer/fuzzy_not")
-            const val NOT_FUZZY_WIDTH = 13
-            const val NOT_FUZZY_HEIGHT = 13
-
             val LAZY = OtherUtil.modResource("buttons/block_destabilizer/lazy")
-            const val LAZY_WIDTH = 9
-            const val LAZY_HEIGHT = 12
+            const val LAZY_WIDTH = 13
+            const val LAZY_HEIGHT = 13
 
             val NOT_LAZY = OtherUtil.modResource("buttons/block_destabilizer/lazy_not")
             const val NOT_LAZY_WIDTH = 13
