@@ -133,7 +133,7 @@ class ChatDetectorScreen(
             ClientChangedChatDetector(
                 this.chatDetectorBlockEntity.blockPos,
                 !this.chatDetectorBlockEntity.stopsMessage,
-                this.chatDetectorBlockEntity.regexString
+                regexStringEditBox.value
             )
         )
     }
