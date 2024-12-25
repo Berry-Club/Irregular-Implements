@@ -76,8 +76,6 @@ object ModBlocks {
         registerBlock("redstone_observer") { RedstoneObserverBlock() }
     val SIDED_BLOCK_OF_REDSTONE =
         registerBlock("sided_redstone") { SidedRedstoneBlock() }
-    val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
-        registerBlock("moon_phase_detector") { MoonPhaseDetectorBlock() }
 
     // Sticks
     val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =
@@ -126,9 +124,12 @@ object ModBlocks {
         registerBlock("shock_absorber") { ShockAbsorberBlock() }
     val AUTO_PLACER = basicBlock("auto_placer")
     val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Wtf does this do
+    val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
+        registerBlock("moon_phase_detector") { MoonPhaseDetectorBlock() }
 
     // Detectors
-    val ONLINE_DETECTOR = basicBlock("online_detector")
+    val ONLINE_DETECTOR: DeferredBlock<OnlineDetectorBlock> =
+        registerBlock("online_detector") { OnlineDetectorBlock() }
     val CHAT_DETECTOR: DeferredBlock<ChatDetectorBlock> =
         registerBlock("chat_detector") { ChatDetectorBlock() }
     val GLOBAL_CHAT_DETECTOR = basicBlock("global_chat_detector")

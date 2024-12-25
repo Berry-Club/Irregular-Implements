@@ -69,4 +69,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val ONLINE_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<OnlineDetectorBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("online_detector", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> OnlineDetectorBlockEntity(pos, state) },
+                ModBlocks.ONLINE_DETECTOR.get()
+            ).build(null)
+        })
+
 }
