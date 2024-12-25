@@ -13,6 +13,7 @@ import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.alchemy.Potions
 import net.minecraft.world.item.crafting.Ingredient
 
+//TODO: Copy the implementation of EmiBookCloningRecipe
 object LubricateBootRecipes {
 
     fun getRecipes(): List<EmiCraftingRecipe> {
