@@ -70,6 +70,11 @@ object ScreenTextures {
             const val NOT_LAZY_WIDTH = 13
             const val NOT_LAZY_HEIGHT = 13
 
+            //TODO: Replace with an original texture
+            val SHOW_LAZY_SHAPE = OtherUtil.modResource("buttons/block_destabilizer/show_lazy_shape")
+            const val SHOW_LAZY_SHAPE_WIDTH = 16
+            const val SHOW_LAZY_SHAPE_HEIGHT = 16
+
             val RESET_LAZY_SHAPE = OtherUtil.modResource("buttons/block_destabilizer/reset_lazy_shape")
             const val RESET_LAZY_SHAPE_WIDTH = 15
             const val RESET_LAZY_SHAPE_HEIGHT = 12

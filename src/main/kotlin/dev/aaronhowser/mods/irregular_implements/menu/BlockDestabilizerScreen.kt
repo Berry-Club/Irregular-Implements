@@ -52,9 +52,9 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_WIDTH,
-            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_HEIGHT,
-            sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
+            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE_WIDTH,
+            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE_HEIGHT,
+            sprite = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE,
             onPress = ::pressShowLazyShapeButton,
             message = ModLanguageProvider.Tooltips.SHOW_LAZY_SHAPE.toComponent(),
             font = this.font
