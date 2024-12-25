@@ -27,6 +27,10 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
     //
     //
 
+    // The Long is the chunk pos converted to long `ChunkPos.toLong()`
+    @Unique
+    LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
+
     @Inject(
             method = "isRainingAt",
             at = @At(
@@ -57,11 +61,6 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
         // So no matter if the event is checked on Pre or Post, the set will always be empty when checked.
         // Doing it this way adds a single tick delay, but honestly that's fine.
     }
-
-
-    // The Long is the chunk pos converted to long `ChunkPos.toLong()`
-    @Unique
-    LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
 
     @Unique
     @Override

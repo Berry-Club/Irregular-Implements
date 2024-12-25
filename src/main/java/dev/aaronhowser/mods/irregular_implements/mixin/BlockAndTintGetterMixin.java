@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity;
-import dev.aaronhowser.mods.irregular_implements.item.SpectreIlluminatorItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LightLayer;
