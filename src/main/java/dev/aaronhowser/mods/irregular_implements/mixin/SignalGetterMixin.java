@@ -22,7 +22,6 @@ public interface SignalGetterMixin {
         return irregular_Implements$getModifiedSignal(original, pos, direction);
     }
 
-    //FIXME: Adjacent ones only get detected after a block update, which is strange
     @ModifyReturnValue(
             method = "getDirectSignal",
             at = @At("RETURN")

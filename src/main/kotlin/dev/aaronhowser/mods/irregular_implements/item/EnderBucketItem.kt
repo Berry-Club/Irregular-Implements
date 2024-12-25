@@ -231,7 +231,6 @@ class EnderBucketItem : Item(Properties()) {
         }
     }
 
-    //FIXME: Probably need to make a new bucket and give it, rather than just changing the data component now
     override fun getMaxStackSize(stack: ItemStack): Int {
         return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
     }

@@ -47,8 +47,6 @@ class ImbueEffect(
 
                 ModEffects.POISON_IMBUE.get() -> event.entity.addEffect(MobEffectInstance(MobEffects.POISON, 20 * 10, 1))
                 ModEffects.WITHER_IMBUE.get() -> event.entity.addEffect(MobEffectInstance(MobEffects.WITHER, 20 * 10, 1))
-
-                ModEffects.COLLAPSE_IMBUE.get() -> TODO("Do something if they have Collapse Imbue")
             }
         }
 

@@ -32,6 +32,7 @@ class BiomePainterItem : Item(
         val biomeToPlace = component.biome
         val points = component.points
 
+        //TODO: Make this configurable in-game with a GUI
         val horizontalRadius = ServerConfig.BIOME_PAINTER_HORIZONTAL_RADIUS.get()
         val blocksBelow = ServerConfig.BIOME_PAINTER_BLOCKS_BELOW.get()
         val blocksAbove = ServerConfig.BIOME_PAINTER_BLOCKS_ABOVE.get()

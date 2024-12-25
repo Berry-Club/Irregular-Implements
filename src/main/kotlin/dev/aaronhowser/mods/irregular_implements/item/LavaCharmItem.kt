@@ -17,7 +17,6 @@ import top.theillusivec4.curios.api.CuriosApi
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.type.capability.ICurioItem
 
-//TODO: Crafting etc
 class LavaCharmItem : Item(
     Properties()
         .stacksTo(1)

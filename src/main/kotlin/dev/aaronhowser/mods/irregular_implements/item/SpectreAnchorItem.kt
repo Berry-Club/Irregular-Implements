@@ -54,6 +54,7 @@ class SpectreAnchorItem : Item(
             for (item in items) {
                 //TODO: Actually, should we?
                 if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
+                    //TODO: Tell the player that the item was returned, and that the anchor was consumed
                     item.remove(ModDataComponents.ANCHORED)
                 }
 

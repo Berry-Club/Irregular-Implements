@@ -82,7 +82,6 @@ object ScreenTextures {
 
     }
 
-    //TODO: Button preset? slot button?
     //TODO: Check that all of these are actually used
 
 }
