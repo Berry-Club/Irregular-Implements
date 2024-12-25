@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -209,6 +210,14 @@ class BlockDestabilizerBlockEntity(
 
     // Runs when the block is powered
     fun initStart() {
+        if (this.isLazy && this.lazyBlocks.isNotEmpty()) {
+            this.targetBlockPositions.clear()
+            this.targetBlockPositions.addAll(this.lazyBlocks)
+
+            initDrop()
+            return
+        }
+
         val level = this.level ?: return
 
         val facing = this.blockState.getValue(DirectionalBlock.FACING)
@@ -216,20 +225,16 @@ class BlockDestabilizerBlockEntity(
         val targetBlockPos = this.blockPos.relative(facing)
         val targetBlockState = level.getBlockState(targetBlockPos)
 
-        if (targetBlockState.isAir) return
-        if (targetBlockState.getDestroySpeed(level, targetBlockPos) <= 0) return
+        if (targetBlockState.isAir
+            || targetBlockState.`is`(ModBlockTagsProvider.BLOCK_DESTABILIZER_BLACKLIST)
+            || targetBlockState.getDestroySpeed(level, targetBlockPos) <= 0
+            || level.getBlockEntity(targetBlockPos) != null
+        ) return
 
-        if (this.isLazy && this.lazyBlocks.isNotEmpty()) {
-            this.targetBlockPositions.clear()
-            this.targetBlockPositions.addAll(this.lazyBlocks)
+        this.targetBlock = targetBlockState.block
+        this.state = State.SEARCHING
 
-            initDrop()
-        } else {
-            this.targetBlock = targetBlockState.block
-            this.state = State.SEARCHING
-
-            this.toCheck.add(targetBlockPos)
-        }
+        this.toCheck.add(targetBlockPos)
     }
 
     // Runs every tick if `this.state` is `SEARCHING`
