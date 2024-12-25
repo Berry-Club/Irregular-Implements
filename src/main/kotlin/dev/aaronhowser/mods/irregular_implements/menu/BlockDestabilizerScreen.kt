@@ -32,8 +32,8 @@ class BlockDestabilizerScreen(
         this.topPos = (this.height - ScreenTextures.Background.BlockDestabilizer.HEIGHT) / 2
 
         toggleLazyButton = ToggleSpriteButton(
-            x = this.leftPos + 5,
-            y = this.topPos + 5,
+            x = this.leftPos + 7,
+            y = this.topPos + 7,
             width = 20,
             height = 20,
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
@@ -48,8 +48,8 @@ class BlockDestabilizerScreen(
         )
 
         showLazyShapeButton = ImprovedSpriteButton(
-            x = this.leftPos + 5 + 20 + 5,
-            y = this.topPos + 5,
+            x = this.leftPos + 33,
+            y = this.topPos + 7,
             width = 20,
             height = 20,
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_WIDTH,
@@ -61,8 +61,8 @@ class BlockDestabilizerScreen(
         )
 
         forgetLazyShapeButton = ImprovedSpriteButton(
-            x = this.leftPos + 5 + 20 + 5 + 20 + 5,
-            y = this.topPos + 5,
+            x = this.leftPos + 58,
+            y = this.topPos + 7,
             width = 20,
             height = 20,
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
