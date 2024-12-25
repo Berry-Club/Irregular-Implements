@@ -23,11 +23,6 @@ class BlockDestabilizerScreen(
     private var leftPos: Int by Delegates.notNull()
     private var topPos: Int by Delegates.notNull()
 
-    private val rightPos: Int
-        get() = this.leftPos + ScreenTextures.Background.BlockDestabilizer.WIDTH
-    private val bottomPos: Int
-        get() = this.topPos + ScreenTextures.Background.BlockDestabilizer.HEIGHT
-
     private lateinit var toggleLazyButton: Button
     private lateinit var showLazyShapeButton: Button
     private lateinit var forgetLazyShapeButton: Button
@@ -53,7 +48,7 @@ class BlockDestabilizerScreen(
         )
 
         showLazyShapeButton = ImprovedSpriteButton(
-            x = this.rightPos - 40,
+            x = this.leftPos + 5 + 20 + 5,
             y = this.topPos + 5,
             width = 20,
             height = 20,
@@ -66,7 +61,7 @@ class BlockDestabilizerScreen(
         )
 
         forgetLazyShapeButton = ImprovedSpriteButton(
-            x = this.rightPos - 20,
+            x = this.leftPos + 5 + 20 + 5 + 20 + 5,
             y = this.topPos + 5,
             width = 20,
             height = 20,

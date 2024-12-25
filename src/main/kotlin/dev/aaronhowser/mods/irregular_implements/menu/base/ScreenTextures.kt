@@ -17,8 +17,8 @@ object ScreenTextures {
         object BlockDestabilizer {
             val BACKGROUND = OtherUtil.modResource("textures/gui/block_destabilizer.png")
 
-            const val WIDTH = 83
-            const val HEIGHT = 39
+            const val WIDTH = 86
+            const val HEIGHT = 35
             const val CANVAS_SIZE = 256
         }
 
