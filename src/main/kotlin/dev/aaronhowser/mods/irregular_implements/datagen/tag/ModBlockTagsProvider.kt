@@ -32,9 +32,24 @@ class ModBlockTagsProvider(
         val C_CROPS_BEAN: TagKey<Block> = BlockTags.create(OtherUtil.modResource("crops/bean"))
         val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
         val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
+        val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(BLOCK_DESTABILIZER_BLACKLIST)
+            .add(
+                Blocks.BEDROCK,
+                Blocks.BARRIER,
+                Blocks.COMMAND_BLOCK,
+                Blocks.CHAIN_COMMAND_BLOCK,
+                Blocks.REPEATING_COMMAND_BLOCK,
+                Blocks.STRUCTURE_BLOCK,
+                Blocks.JIGSAW,
+                Blocks.STRUCTURE_VOID,
+                Blocks.END_PORTAL_FRAME,
+                Blocks.AIR,
+            )
 
         this.tag(BLOCK_REPLACER_BLACKLIST)
             .add(
