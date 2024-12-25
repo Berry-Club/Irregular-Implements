@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "enabled=false": {
+      "model": "irregular_implements:block/online_detector_off"
+    },
+    "enabled=true": {
+      "model": "irregular_implements:block/online_detector_on"
+    }
+  }
+}
