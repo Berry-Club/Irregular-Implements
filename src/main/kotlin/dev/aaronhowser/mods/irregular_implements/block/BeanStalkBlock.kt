@@ -3,10 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.core.particles.BlockParticleOption
-import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.LivingEntity
@@ -46,7 +43,9 @@ class BeanStalkBlock(
     override fun onPlace(state: BlockState, level: Level, pos: BlockPos, oldState: BlockState, movedByPiston: Boolean) {
         super.onPlace(state, level, pos, oldState, movedByPiston)
 
-        level.scheduleTick(pos, this, 5)
+        if (!level.getBlockState(pos.below()).`is`(this)) {
+            level.scheduleTick(pos, this, 5)
+        }
     }
 
     override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
@@ -64,36 +63,14 @@ class BeanStalkBlock(
                 return
             }
         } else {
-            if (level.maxBuildHeight == pos.y || !level.isEmptyBlock(pos.above())) return
+            if (pos.y >= level.maxBuildHeight || !level.isEmptyBlock(pos.above())) return
         }
 
         val blockAbove = level.getBlockState(pos.above())
         if (blockAbove.getDestroySpeed(level, pos.above()) == -1.0f) return
 
         if (!level.isEmptyBlock(pos.above())) {
-            level.addParticle(
-                BlockParticleOption(ParticleTypes.BLOCK, blockAbove),
-                pos.above().x + 0.5,
-                pos.above().y + 0.5,
-                pos.above().z + 0.5,
-                0.0, 0.0, 0.0
-            )
-        } else {
-            level.addParticle(
-                ParticleTypes.HAPPY_VILLAGER,
-                pos.above().x + 0.5,
-                pos.above().y + 0.5,
-                pos.above().z + 0.5,
-                0.0, 0.0, 0.0
-            )
-            level.playSound(
-                null,
-                pos.above(),
-                this.soundType.placeSound,
-                SoundSource.BLOCKS,
-                1f,
-                2f
-            )
+            level.destroyBlock(pos.above(), true)
         }
 
         level.setBlockAndUpdate(
