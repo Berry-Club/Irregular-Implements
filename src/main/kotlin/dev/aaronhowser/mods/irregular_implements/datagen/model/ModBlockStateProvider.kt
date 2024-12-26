@@ -52,6 +52,26 @@ class ModBlockStateProvider(
         shockAbsorber()
         chatDetector()
         onlineDetector()
+        spectreLens()
+    }
+
+    private fun spectreLens() {
+        val block = ModBlocks.SPECTRE_LENS.get()
+
+        val texture = modLoc("block/spectre_lens")
+
+        val model = models()
+            .withExistingParent(name(block), "block/thin_block")
+            .texture("texture", texture)
+            .texture("particle", texture)
+            .element()
+            .from(0f, 0f, 0f)
+            .to(16f, 1f, 16f)
+            .textureAll("#texture")
+            .end()
+            .renderType(RenderType.translucent().name)
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun onlineDetector() {
