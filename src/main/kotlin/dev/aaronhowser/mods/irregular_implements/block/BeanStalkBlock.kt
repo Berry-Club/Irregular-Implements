@@ -3,7 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.LivingEntity
@@ -13,8 +16,6 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BonemealableBlock
-import net.minecraft.world.level.block.LevelEvent
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
@@ -25,7 +26,7 @@ class BeanStalkBlock(
     Properties
         .ofFullCopy(Blocks.BAMBOO)
         .offsetType(OffsetType.NONE)
-), BonemealableBlock {
+) {
 
     companion object {
         val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
@@ -80,11 +81,26 @@ class BeanStalkBlock(
             this.defaultBlockState()
         )
 
-        level.levelEvent(
-            LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH,
+        level.playSound(
+            null,
             pos.above(),
-            15
+            SoundEvents.BONE_MEAL_USE,
+            SoundSource.BLOCKS,
         )
+
+        for (player in level.players()) {
+            level.sendParticles(
+                ParticleTypes.HAPPY_VILLAGER,
+                pos.above().x + 0.5,
+                pos.above().y + 0.5,
+                pos.above().z + 0.5,
+                5,
+                0.25,
+                0.25,
+                0.25,
+                0.0
+            )
+        }
 
         level.scheduleTick(pos.above(), this, if (this.isStrong) 1 else 5)
     }
@@ -105,20 +121,6 @@ class BeanStalkBlock(
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return SHAPE
-    }
-
-    override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
-        return false
-    }
-
-    override fun isBonemealSuccess(level: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
-        return false
-    }
-
-    override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        // Do nothing
-        // This is just for BoneMealItem#addGrowthParticles
-        // which is invoked by LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH in the tick method
     }
 
 }
