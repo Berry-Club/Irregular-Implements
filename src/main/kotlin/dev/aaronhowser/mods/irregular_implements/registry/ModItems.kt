@@ -76,7 +76,7 @@ object ModItems {
     val LESSER_MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
         register("lesser_magic_bean") { ItemNameBlockItem(ModBlocks.LESSER_BEAN_STALK.get(), Item.Properties()) }
     val MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
-        register("magic_bean") { ItemNameBlockItem(ModBlocks.BEAN_STALK.get(), Item.Properties().rarity(Rarity.RARE)) }
+        register("magic_bean") { ItemNameBlockItem(ModBlocks.BEAN_STALK.get(), Item.Properties().rarity(Rarity.RARE)) } //TODO: Add to dungeon loot
 
     // Armors
     val MAGIC_HOOD: DeferredItem<ArmorItem> =

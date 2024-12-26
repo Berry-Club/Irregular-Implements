@@ -42,7 +42,7 @@ object ModBlocks {
     val LOTUS: DeferredBlock<LotusBlock> =
         registerBlockWithoutItem("lotus") { LotusBlock() }
     val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
-        registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }
+        registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }   //TODO: Naturally generating
     val BEAN_POD = basicBlock("bean_pod")
 
     // Loot blocks
