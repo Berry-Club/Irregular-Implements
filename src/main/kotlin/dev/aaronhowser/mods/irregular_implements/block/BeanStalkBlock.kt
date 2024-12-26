@@ -13,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.LevelEvent
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -24,7 +25,7 @@ class BeanStalkBlock(
     Properties
         .ofFullCopy(Blocks.BAMBOO)
         .offsetType(OffsetType.NONE)
-) {
+), BonemealableBlock {
 
     companion object {
         val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
@@ -49,7 +50,6 @@ class BeanStalkBlock(
         }
     }
 
-    //TODO: Growth particles
     override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
         if (this.isStrong) {
             if (level.maxBuildHeight == pos.y + 2) {
@@ -80,6 +80,12 @@ class BeanStalkBlock(
             this.defaultBlockState()
         )
 
+        level.levelEvent(
+            LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH,
+            pos.above(),
+            15
+        )
+
         level.scheduleTick(pos.above(), this, if (this.isStrong) 1 else 5)
     }
 
@@ -99,6 +105,20 @@ class BeanStalkBlock(
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return SHAPE
+    }
+
+    override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+        return false
+    }
+
+    override fun isBonemealSuccess(level: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
+        return false
+    }
+
+    override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+        // Do nothing
+        // This is just for BoneMealItem#addGrowthParticles
+        // which is invoked by LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH in the tick method
     }
 
 }
