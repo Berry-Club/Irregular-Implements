@@ -365,7 +365,9 @@ class ModBlockTagsProvider(
                 ModBlocks.BAMBOO_PLATFORM.get(),
                 ModBlocks.CHERRY_PLATFORM.get(),
                 ModBlocks.SPECTRE_PLANKS.get(),
-                ModBlocks.SPECTRE_WOOD.get()
+                ModBlocks.SPECTRE_WOOD.get(),
+                ModBlocks.BEAN_STALK.get(),
+                ModBlocks.LESSER_BEAN_STALK.get(),
             )
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)

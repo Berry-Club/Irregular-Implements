@@ -73,8 +73,10 @@ object ModItems {
         register("bean") { ItemNameBlockItem(ModBlocks.BEAN_SPROUT.get(), Item.Properties()) }
     val BEAN_STEW: DeferredItem<Item> =
         register("bean_stew") { Item(Item.Properties().stacksTo(1).food(Foods.stew(8).build())) }
-    val LESSER_MAGIC_BEAN = basic("lesser_magic_bean")
-    val MAGIC_BEAN = basic("magic_bean")    //rarity blue
+    val LESSER_MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
+        register("lesser_magic_bean") { ItemNameBlockItem(ModBlocks.LESSER_BEAN_STALK.get(), Item.Properties()) }
+    val MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
+        register("magic_bean") { ItemNameBlockItem(ModBlocks.BEAN_STALK.get(), Item.Properties().rarity(Rarity.RARE)) }
 
     // Armors
     val MAGIC_HOOD: DeferredItem<ArmorItem> =

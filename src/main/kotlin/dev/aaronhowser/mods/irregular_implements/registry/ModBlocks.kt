@@ -43,10 +43,6 @@ object ModBlocks {
         registerBlockWithoutItem("lotus") { LotusBlock() }
     val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
         registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }
-    val LESSER_BEAN_STALK: DeferredBlock<BeanStalkBlock> =
-        registerBlock("lesser_bean_stalk") { BeanStalkBlock(isStrong = false) }
-    val BEAN_STALK: DeferredBlock<BeanStalkBlock> =
-        registerBlock("bean_stalk") { BeanStalkBlock(isStrong = true) }
     val BEAN_POD = basicBlock("bean_pod")
 
     // Loot blocks
@@ -86,6 +82,10 @@ object ModBlocks {
     // No Item
     val BLAZE_FIRE: DeferredBlock<BlazeFireBlock> =
         registerBlockWithoutItem("blaze_fire") { BlazeFireBlock() }
+    val LESSER_BEAN_STALK: DeferredBlock<BeanStalkBlock> =
+        registerBlockWithoutItem("lesser_bean_stalk") { BeanStalkBlock(isStrong = false) }
+    val BEAN_STALK: DeferredBlock<BeanStalkBlock> =
+        registerBlockWithoutItem("bean_stalk") { BeanStalkBlock(isStrong = true) }
 
     // Glass
     val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
