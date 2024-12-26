@@ -46,7 +46,7 @@ object ModBlocks {
     val LESSER_BEAN_STALK: DeferredBlock<BeanStalkBlock> =
         registerBlock("lesser_bean_stalk") { BeanStalkBlock(isStrong = false) }
     val BEAN_STALK: DeferredBlock<BeanStalkBlock> =
-        registerBlock("bean_stalk") { BeanStalkBlock(isStrong = false) }
+        registerBlock("bean_stalk") { BeanStalkBlock(isStrong = true) }
     val BEAN_POD = basicBlock("bean_pod")
 
     // Loot blocks
