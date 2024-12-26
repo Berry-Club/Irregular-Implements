@@ -35,6 +35,8 @@ object ModBlocks {
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
+    val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
+        registerBlock("diaphanous_block") { DiaphanousBlock() }
 
     // Plants
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
@@ -308,7 +310,6 @@ object ModBlocks {
 
     // Removed blocks:
     // - Light Redirector: Just too hard to implement lmao
-    // - Diaphanous Block: Too hard and nobody would use
     // - Custom Crafting Table: Too hard and nobody would use
     // - Dyeing Machine: Too hard and nobody would use
     // - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
