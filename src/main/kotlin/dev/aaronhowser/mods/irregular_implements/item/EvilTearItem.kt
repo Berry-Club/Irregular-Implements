@@ -80,11 +80,16 @@ class EvilTearItem : Item(Properties()) {
         val clickedPos = context.clickedPos
         val level = context.level
 
-        return if (!level.isClientSide && tryPlacePortal(level, clickedPos)) {
-            InteractionResult.SUCCESS
-        } else {
-            InteractionResult.FAIL
+        if (level.isClientSide) return InteractionResult.PASS
+
+        if (tryPlacePortal(level, clickedPos)) {
+            val usedStack = context.itemInHand
+            usedStack.consume(1, context.player)
+
+            return InteractionResult.SUCCESS
         }
+
+        return InteractionResult.FAIL
     }
 
 }
