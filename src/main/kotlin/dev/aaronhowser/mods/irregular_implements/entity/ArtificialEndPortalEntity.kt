@@ -79,7 +79,7 @@ class ArtificialEndPortalEntity(
     }
 
     constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
-        this.setPos(blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble())
+        this.setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
     }
 
     var actionTimer = 0
@@ -88,13 +88,13 @@ class ArtificialEndPortalEntity(
     override fun tick() {
         super.tick()
 
-//        if (this.actionTimer < 200) {
-        actionTimer++
+        if (this.actionTimer < 200) {
+            actionTimer++
 
-        if (this.level().isClientSide && this.actionTimer > 40) {
-            spawnParticles()
+            if (this.level().isClientSide && this.actionTimer > 40) {
+                spawnParticles()
+            }
         }
-//        }
 
         if (this.level().isClientSide) {
             if (this.actionTimer == 85) {
@@ -107,9 +107,9 @@ class ArtificialEndPortalEntity(
             }
         } else {
             if (this.tickCount % 40 == 0) {
-                if (!isValidPosition(this.level(), this.blockPosition(), false)) {
-                    this.kill()
-                }
+//                if (!isValidPosition(this.level(), this.blockPosition(), false)) {
+//                    this.kill()
+//                }
             }
         }
 

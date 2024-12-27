@@ -26,6 +26,10 @@ class ArtificialEndPortalRenderer(
         packedLight: Int
     ) {
         val size = min(3.0, 3.0 / 115 * (portalEntity.actionTimer + partialTick - 85)).toFloat()
+
+        //FIXME: Make show up at size 0, for some reason it isn't showing until size like 1
+        if (size <= 0) return
+
         val radius = size / 2
 
         val min = -radius - 0.5f
