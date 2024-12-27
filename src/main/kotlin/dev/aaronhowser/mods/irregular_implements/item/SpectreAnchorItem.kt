@@ -18,7 +18,6 @@ import top.theillusivec4.curios.api.CuriosApi
 
 class SpectreAnchorItem : Item(
     Properties()
-        .stacksTo(1)
         .component(ModDataComponents.ANCHORED, Unit.INSTANCE)
 ) {
 
