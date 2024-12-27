@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
@@ -19,6 +20,20 @@ class ArtificialEndPortalBlockEntity(
 ) : TheEndPortalBlockEntity(ModBlockEntities.ARTIFICIAL_END_PORTAL.get(), pos, blockState) {
 
     companion object {
+
+        fun tick(
+            level: Level,
+            blockPos: BlockPos,
+            blockState: BlockState,
+            blockEntity: ArtificialEndPortalBlockEntity
+        ) {
+            if (level.isClientSide || level.gameTime % 100 != 0L) return
+
+            if (!blockState.canSurvive(level, blockPos)) {
+                level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
+                return
+            }
+        }
 
         fun canSurvive(level: LevelReader, pos: BlockPos): Boolean {
             for (direction in Direction.Plane.HORIZONTAL) {
