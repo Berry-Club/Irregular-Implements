@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndPortalBlock
@@ -127,6 +128,15 @@ class ArtificialEndPortalEntity(
             if (entity is ArtificialEndPortalEntity) continue
 
             entity.setAsInsidePortal(
+                Blocks.END_PORTAL as EndPortalBlock,
+                this.blockPosition()
+            )
+        }
+    }
+
+    override fun playerTouch(player: Player) {
+        if (this.actionTimer >= 200) {
+            player.setAsInsidePortal(
                 Blocks.END_PORTAL as EndPortalBlock,
                 this.blockPosition()
             )
