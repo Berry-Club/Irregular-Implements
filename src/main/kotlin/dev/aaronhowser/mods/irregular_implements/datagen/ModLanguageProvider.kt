@@ -655,7 +655,7 @@ class ModLanguageProvider(
         addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
         addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
         addInfo(ModItems.DIAPHANOUS_BLOCK, "Looks like another block, but becomes transparent as you approach.\n\nCraft it with any block to set its appearance.\n\nCraft it by itself to invert it, so it starts transparent and becomes opaque.")
-        addInfo(ModItems.EVIL_TEAR, "Can be used on a specific structure to make an Artificial End Portal.\n\nPlace an End Stone, and place an End Rod under it.\n\nUp to 10 blocks below it, have a 3x3 of End Stone, with a 5x5 ring of Obsidian one block above it.\n\nUse the Evil Tear on the End Rod to complete the structure.")
+        addInfo(ModItems.EVIL_TEAR, "Can be used on a specific structure to make an Artificial End Portal.\n\nPlace an End Stone, and place an End Rod under it.\n\n4 blocks below it, build a 3x3 of End Stone, with a 5x5 ring of Obsidian one block above it.\n\nUse the Evil Tear on the End Rod to complete the structure.")
     }
 
     private fun addEffects() {
