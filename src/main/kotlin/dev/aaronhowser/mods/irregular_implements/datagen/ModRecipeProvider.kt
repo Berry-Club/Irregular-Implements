@@ -4,10 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.recipe.ApplySpectreAnchorRecipe
-import dev.aaronhowser.mods.irregular_implements.recipe.DiviningRodRecipe
-import dev.aaronhowser.mods.irregular_implements.recipe.LubricateBootRecipe
-import dev.aaronhowser.mods.irregular_implements.recipe.WashBootRecipe
+import dev.aaronhowser.mods.irregular_implements.recipe.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -60,6 +57,7 @@ class ModRecipeProvider(
         washBoot.save(recipeOutput, OtherUtil.modResource("wash_boot"))
         diviningRod.save(recipeOutput, OtherUtil.modResource("divining_rod"))
         applySpectreAnchor.save(recipeOutput, OtherUtil.modResource("apply_spectre_anchor"))
+        setDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("set_diaphanous_block"))
 
     }
 
@@ -67,6 +65,7 @@ class ModRecipeProvider(
     private val washBoot = SpecialRecipeBuilder.special(::WashBootRecipe)
     private val diviningRod = SpecialRecipeBuilder.special(::DiviningRodRecipe)
     private val applySpectreAnchor = SpecialRecipeBuilder.special(::ApplySpectreAnchorRecipe)
+    private val setDiaphanousBlock = SpecialRecipeBuilder.special(::SetDiaphanousBlockRecipe)
 
     //TODO:
     // Potions of Collapse

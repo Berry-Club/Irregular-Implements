@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-19T16:21:39.4392357	Recipes
+// 1.21.1	2024-12-26T22:24:00.0663249	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -381,6 +381,7 @@ e46100a9e395b243178cdf14b7712c372ebae295 data/irregular_implements/recipe/redsto
 258b150ffb88e9eb6364c669b05404430298edc6 data/irregular_implements/recipe/redstone_tool.json
 d1c082fecea6d457e7c149a13bed473f2810131b data/irregular_implements/recipe/reinforced_ender_bucket.json
 0fa928a24fef61cb0d79f0b822ea1d35f35f0758 data/irregular_implements/recipe/returning_block_of_sticks.json
+26fce538e3bf50f0d584f526541f609ffc5d8348 data/irregular_implements/recipe/set_diaphanous_block.json
 e8ce8a85e02c2d13119e03c59f67deae47681ce2 data/irregular_implements/recipe/shock_absorber.json
 de1ca4c31bdd627c8ca2a0cd41c3b77385eb3ec3 data/irregular_implements/recipe/sided_redstone.json
 40226ef21c9e82202cc35fa777088e132cd139c5 data/irregular_implements/recipe/slime_cube.json

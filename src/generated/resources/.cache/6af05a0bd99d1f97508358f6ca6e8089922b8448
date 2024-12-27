@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-26T01:52:26.385492	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2024-12-26T22:24:00.0638176	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 9eb871311b4810f0b570fce35e8570c5dc5d31d9 data/c/tags/block/dyed.json
 5ed28726c2a04a9324aaad89352be5777f70c52f data/c/tags/block/dyed/black.json
@@ -23,6 +23,7 @@ c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/bl
 176956da2ca540b41940ab90ff1ba3684ffc12d8 data/irregular_implements/tags/block/block_mover_blacklist.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_replacer_blacklist.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/irregular_implements/tags/block/crops/bean.json
+42feff80ecc6486ed11bba53612d77101cfbe694 data/irregular_implements/tags/block/diaphanous_block_blacklist.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/block/super_lubricated.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/animals_spawnable_on.json
 ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.json
