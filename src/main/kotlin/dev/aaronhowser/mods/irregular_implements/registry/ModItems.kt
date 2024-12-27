@@ -17,7 +17,8 @@ object ModItems {
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
     val PRECIOUS_EMERALD = basic("precious_emerald") //Click on a villager to start a "festival" in the village
-    val EVIL_TEAR = basic("evil_tear")  // Used for artificial end portal
+    val EVIL_TEAR: DeferredItem<EvilTearItem> =
+        register("evil_tear") { EvilTearItem() }
     val PORTKEY: DeferredItem<PortkeyItem> =
         register("portkey") { PortkeyItem() }
     val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
