@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Blocks
@@ -42,17 +41,15 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 
         poseStack.translate(0.5, 0.5, 0.5)
 
-        val translucentBuffer = buffer.getBuffer(RenderType.translucent())
-
-        translucentBuffer.setColor(1f, 1f, 1f, 0.5f)
-
-        itemRenderer.renderModelLists(
-            itemRenderer.getModel(block.asItem().defaultInstance, null, null, 0),
+        itemRenderer.renderStatic(
             block.asItem().defaultInstance,
+            displayContext,
             packedLight,
             packedOverlay,
             poseStack,
-            translucentBuffer,
+            buffer,
+            null,
+            0,
         )
 
         poseStack.popPose()
