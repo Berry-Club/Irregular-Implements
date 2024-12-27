@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EndPortalBlock
 import net.minecraft.world.level.block.EndRodBlock
 import net.minecraft.world.phys.AABB
 import net.neoforged.neoforge.common.Tags
@@ -113,6 +114,23 @@ class ArtificialEndPortalEntity(
             }
         }
 
+        if (this.actionTimer >= 200 && this.tickCount % 20 == 0) {
+            teleportEntitiesToEnd()
+        }
+
+    }
+
+    private fun teleportEntitiesToEnd() {
+        val entities = this.level().getEntitiesOfClass(Entity::class.java, this.boundingBox)
+
+        for (entity in entities) {
+            if (entity is ArtificialEndPortalEntity) continue
+
+            entity.setAsInsidePortal(
+                Blocks.END_PORTAL as EndPortalBlock,
+                this.blockPosition()
+            )
+        }
     }
 
     private fun spawnParticles() {
