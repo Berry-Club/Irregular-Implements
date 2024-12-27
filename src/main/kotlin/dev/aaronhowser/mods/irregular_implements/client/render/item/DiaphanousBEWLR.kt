@@ -25,6 +25,7 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
         }
     }
 
+    //TODO: Maybe instead of pulsating transparency, add an icon to the corner?
     override fun renderByItem(
         stack: ItemStack,
         displayContext: ItemDisplayContext,
@@ -34,11 +35,9 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
         packedOverlay: Int
     ) {
         val block = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
-
         val itemRenderer = Minecraft.getInstance().itemRenderer
 
         poseStack.pushPose()
-
         poseStack.translate(0.5, 0.5, 0.5)
 
         itemRenderer.renderStatic(
