@@ -82,17 +82,18 @@ class ArtificialEndPortalEntity(
         this.setPos(blockPos.x.toDouble(), blockPos.y.toDouble(), blockPos.z.toDouble())
     }
 
-    private var actionTimer = 0
+    var actionTimer = 0
+        private set
 
     override fun tick() {
         super.tick()
 
 //        if (this.actionTimer < 200) {
-            actionTimer++
+        actionTimer++
 
-            if (this.level().isClientSide && this.actionTimer > 40) {
-                spawnParticles()
-            }
+        if (this.level().isClientSide && this.actionTimer > 40) {
+            spawnParticles()
+        }
 //        }
 
         if (this.level().isClientSide) {
