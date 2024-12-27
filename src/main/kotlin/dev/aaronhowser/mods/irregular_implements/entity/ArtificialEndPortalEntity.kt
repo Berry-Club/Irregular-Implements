@@ -12,6 +12,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
+import net.minecraft.world.phys.AABB
 import net.neoforged.neoforge.common.Tags
 
 class ArtificialEndPortalEntity(
@@ -20,7 +21,22 @@ class ArtificialEndPortalEntity(
 ) : Entity(entityType, level) {
 
     companion object {
-        private fun isValidPosition(level: Level, entityPos: BlockPos): Boolean {
+        private fun isValidPosition(
+            level: Level,
+            entityPos: BlockPos,
+            checkForOtherPortals: Boolean
+        ): Boolean {
+
+            //TODO: Does this detect itself?
+            if (checkForOtherPortals) {
+                val entities = level.getEntitiesOfClass(
+                    ArtificialEndPortalEntity::class.java,
+                    AABB.ofSize(entityPos.bottomCenter, 3.0, 1.0, 3.0)
+                )
+
+                if (entities.isNotEmpty()) return false
+            }
+
             var endRodPos: BlockPos? = null
             for (dY in 0..10) {
                 val pos = entityPos.above(dY)
@@ -89,7 +105,7 @@ class ArtificialEndPortalEntity(
             }
         } else {
             if (this.tickCount % 40 == 0) {
-                if (!isValidPosition(this.level(), this.blockPosition())) {
+                if (!isValidPosition(this.level(), this.blockPosition(), false)) {
                     this.kill()
                 }
             }
