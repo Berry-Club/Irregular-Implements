@@ -88,8 +88,6 @@ object ModBlocks {
         registerBlockWithoutItem("bean_stalk") { BeanStalkBlock(isStrong = true) }
     val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
         registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
-    val ARTIFICIAL_END_PORTAL: DeferredBlock<ArtificialEndPortalBlock> =
-        registerBlockWithoutItem("artificial_end_portal") { ArtificialEndPortalBlock() }
 
     // Glass
     val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =

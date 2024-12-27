@@ -85,12 +85,4 @@ object ModBlockEntities {
             ).build(null)
         })
 
-    val ARTIFICIAL_END_PORTAL: DeferredHolder<BlockEntityType<*>, BlockEntityType<ArtificialEndPortalBlockEntity>> =
-        BLOCK_ENTITY_REGISTRY.register("artificial_end_portal", Supplier {
-            BlockEntityType.Builder.of(
-                { pos, state -> ArtificialEndPortalBlockEntity(pos, state) },
-                ModBlocks.ARTIFICIAL_END_PORTAL.get()
-            ).build(null)
-        })
-
 }

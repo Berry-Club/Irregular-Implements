@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.entity.ArtificialEndPortalEntity
 import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import net.minecraft.core.registries.BuiltInRegistries
@@ -33,6 +34,16 @@ object ModEntityTypes {
             )
                 .sized(1f, 1f)
                 .build("illuminator")
+        })
+
+    val ARTIFICIAL_END_PORTAL: DeferredHolder<EntityType<*>, EntityType<ArtificialEndPortalEntity>> =
+        ENTITY_TYPE_REGISTRY.register("artificial_end_portal", Supplier {
+            EntityType.Builder.of(
+                ::ArtificialEndPortalEntity,
+                MobCategory.MISC
+            )
+                .sized(3f, 1f)
+                .build("artificial_end_portal")
         })
 
 }

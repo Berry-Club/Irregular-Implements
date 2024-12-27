@@ -279,7 +279,6 @@ class ModLanguageProvider(
         addBlock(ModBlocks.AUTO_PLACER, "Auto Placer")
         addBlock(ModBlocks.BLOCK_TELEPORTER, "Block Teleporter")
         addBlock(ModBlocks.DIAPHANOUS_BLOCK, "Diaphanous Block")
-        addBlock(ModBlocks.ARTIFICIAL_END_PORTAL, "Artificial End Portal")
 
         addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
         addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")

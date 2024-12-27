@@ -15,7 +15,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.renderer.BiomeColors
-import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.item.ItemProperties
@@ -171,11 +170,6 @@ object ClientModBusEvents {
         event.registerBlockEntityRenderer(
             ModBlockEntities.DIAPHANOUS_BLOCK.get(),
             ::DiaphanousBlockEntityRenderer
-        )
-
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.ARTIFICIAL_END_PORTAL.get(),
-            ::TheEndPortalRenderer
         )
     }
 

@@ -113,7 +113,7 @@ class ModBlockLootTablesSubProvider(
     )
 
     override fun getKnownBlocks(): List<Block> {
-        return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() } - ModBlocks.ARTIFICIAL_END_PORTAL.get()    //FIXME: Why is this required? It crashes when I try to put it in noDropBlocks instead
+        return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }
     }
 
 }

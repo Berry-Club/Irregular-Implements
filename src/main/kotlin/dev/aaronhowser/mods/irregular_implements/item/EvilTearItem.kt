@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.ArtificialEndPortalBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.entity.ArtificialEndPortalEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
@@ -62,17 +61,8 @@ class EvilTearItem : Item(Properties()) {
                 }
             }
 
-            for (dX in -1..1) for (dZ in -1..1) {
-                val posThere = centerPos.offset(dX, 0, dZ)
-
-                level.setBlockAndUpdate(
-                    posThere,
-                    ModBlocks.ARTIFICIAL_END_PORTAL.get().defaultBlockState()
-                )
-
-                val blockEntityThere = level.getBlockEntity(posThere) as? ArtificialEndPortalBlockEntity ?: return false
-                blockEntityThere.endRodBlockPos = clickedPos
-            }
+            val artificialEndPortalEntity = ArtificialEndPortalEntity(level, centerPos)
+            level.addFreshEntity(artificialEndPortalEntity)
 
             return true
         }
