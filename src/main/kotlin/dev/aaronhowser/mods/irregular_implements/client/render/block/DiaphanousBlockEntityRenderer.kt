@@ -30,8 +30,10 @@ class DiaphanousBlockEntityRenderer(
 
         poseStack.translate(0.5, 0.5, 0.5)
 
-        val state = blockEntity.renderedBlock.defaultBlockState()
+        val state = blockEntity.block.defaultBlockState()
+
         val model = Minecraft.getInstance().blockRenderer.getBlockModel(state)
+
         val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
 
         val quads = model.getQuads(state, null, level.random)       //FIXME: Why is this empty?
