@@ -35,8 +35,6 @@ object ModBlocks {
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
-    val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
-        registerBlock("diaphanous_block") { DiaphanousBlock() }
 
     // Plants
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
@@ -88,6 +86,8 @@ object ModBlocks {
         registerBlockWithoutItem("lesser_bean_stalk") { BeanStalkBlock(isStrong = false) }
     val BEAN_STALK: DeferredBlock<BeanStalkBlock> =
         registerBlockWithoutItem("bean_stalk") { BeanStalkBlock(isStrong = true) }
+    val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
+        registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
 
     // Glass
     val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =

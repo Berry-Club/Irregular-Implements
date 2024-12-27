@@ -47,6 +47,8 @@ object ModItems {
         basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
     val DIVINING_ROD: DeferredItem<DiviningRodItem> =
         register("divining_rod") { DiviningRodItem() }
+    val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
+        register("diaphanous_block") { DiaphanousBlockItem() }
 
     // Ingredients
     val TRANSFORMATION_CORE = basic("transformation_core")
