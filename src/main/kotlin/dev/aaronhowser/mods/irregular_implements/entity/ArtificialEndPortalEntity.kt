@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvents
@@ -86,13 +87,13 @@ class ArtificialEndPortalEntity(
     override fun tick() {
         super.tick()
 
-        if (this.actionTimer < 200) {
+//        if (this.actionTimer < 200) {
             actionTimer++
 
             if (this.level().isClientSide && this.actionTimer > 40) {
                 spawnParticles()
             }
-        }
+//        }
 
         if (this.level().isClientSide) {
             if (this.actionTimer == 85) {
@@ -114,7 +115,21 @@ class ArtificialEndPortalEntity(
     }
 
     private fun spawnParticles() {
+        for (i in 0..5) {
 
+            val modX = this.random.nextFloat() * 0.05f - 0.025f
+            val modZ = this.random.nextFloat() * 0.05f - 0.025f
+
+            level().addParticle(
+                ParticleTypes.ENCHANT,
+                this.x + modX,
+                this.y + 2,
+                this.z + modZ,
+                modX.toDouble() * 2,
+                1.0,
+                modZ.toDouble() * 2
+            )
+        }
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
