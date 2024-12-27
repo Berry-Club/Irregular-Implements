@@ -1268,6 +1268,15 @@ class ModRecipeProvider(
                 'B' to ing(Items.BLUE_STAINED_GLASS),
                 'Y' to ing(Items.YELLOW_STAINED_GLASS)
             )
+        ),
+        shapedRecipe(
+            ModItems.EVIL_TEAR,
+            "W,G,E",
+            mapOf(
+                'W' to ing(Items.WITHER_SKELETON_SKULL),
+                'G' to ing(Items.GHAST_TEAR),
+                'E' to ing(Tags.Items.ENDER_PEARLS)
+            )
         )
     )
 

@@ -170,6 +170,7 @@ class ModLanguageProvider(
         addItem(ModItems.DIAMOND_BREAKER, "Diamond Breaker")
         addItem(ModItems.BLOCK_REPLACER, "Block Replacer")
         addItem(ModItems.DIAPHANOUS_BLOCK, "Diaphanous Block")
+        addItem(ModItems.EVIL_TEAR, "Evil Tear")
 
         addItem(ModItems.FIRE_IMBUE, "Fire Imbue")
         addItem(ModItems.POISON_IMBUE, "Poison Imbue")
@@ -278,6 +279,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.AUTO_PLACER, "Auto Placer")
         addBlock(ModBlocks.BLOCK_TELEPORTER, "Block Teleporter")
         addBlock(ModBlocks.DIAPHANOUS_BLOCK, "Diaphanous Block")
+        addBlock(ModBlocks.ARTIFICIAL_END_PORTAL, "Artificial End Portal")
 
         addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
         addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")
@@ -654,6 +656,7 @@ class ModLanguageProvider(
         addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
         addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
         addInfo(ModItems.DIAPHANOUS_BLOCK, "Looks like another block, but becomes transparent as you approach.\n\nCraft it with any block to set its appearance.\n\nCraft it by itself to invert it, so it starts transparent and becomes opaque.")
+        addInfo(ModItems.EVIL_TEAR, "Can be used on a specific structure to make an Artificial End Portal.\n\nPlace an End Stone, and place an End Rod under it.\n\nUp to 10 blocks below it, have a 3x3 of End Stone, with a 5x5 ring of Obsidian one block above it.\n\nUse the Evil Tear on the End Rod to complete the structure.")
     }
 
     private fun addEffects() {
