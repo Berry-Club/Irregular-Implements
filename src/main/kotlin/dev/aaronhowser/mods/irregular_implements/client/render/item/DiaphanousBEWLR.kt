@@ -34,14 +34,14 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val block = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
-        val itemRenderer = Minecraft.getInstance().itemRenderer
-
         poseStack.pushPose()
         poseStack.translate(0.5, 0.5, 0.5)
 
+        val blockToRender = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
+        val itemRenderer = Minecraft.getInstance().itemRenderer
+
         itemRenderer.renderStatic(
-            block.asItem().defaultInstance,
+            blockToRender.asItem().defaultInstance,
             displayContext,
             packedLight,
             packedOverlay,
