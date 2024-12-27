@@ -13,5 +13,6 @@ class DiaphanousBlockEntity(
 ) : BlockEntity(ModBlockEntities.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
 
     var renderedBlock: Block = Blocks.STONE
+    var isInverted: Boolean = false
 
 }

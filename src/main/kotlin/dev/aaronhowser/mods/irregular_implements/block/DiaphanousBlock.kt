@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.BlockItem
@@ -54,6 +55,13 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+    }
+
+    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+        val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return InteractionResult.PASS
+
+        blockEntity.isInverted = !blockEntity.isInverted
+        return InteractionResult.SUCCESS
     }
 
 }
