@@ -77,12 +77,4 @@ object ModBlockEntities {
             ).build(null)
         })
 
-    val DIAPHANOUS_BLOCK: DeferredHolder<BlockEntityType<*>, BlockEntityType<DiaphanousBlockEntity>> =
-        BLOCK_ENTITY_REGISTRY.register("diaphanous_block", Supplier {
-            BlockEntityType.Builder.of(
-                { pos, state -> DiaphanousBlockEntity(pos, state) },
-                ModBlocks.DIAPHANOUS_BLOCK.get()
-            ).build(null)
-        })
-
 }

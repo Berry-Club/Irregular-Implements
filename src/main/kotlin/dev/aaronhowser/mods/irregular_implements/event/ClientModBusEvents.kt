@@ -4,10 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.IlluminatorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.item.*
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -24,7 +22,6 @@ import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
-import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.ModelEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent
@@ -160,14 +157,6 @@ object ClientModBusEvents {
             VanillaGuiLayers.CROSSHAIR,
             BiomeSensorBlockEntity.LAYER_NAME,
             BiomeSensorBlockEntity::tryRenderBiomeName
-        )
-    }
-
-    @SubscribeEvent
-    fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.DIAPHANOUS_BLOCK.get(),
-            ::DiaphanousBlockEntityRenderer
         )
     }
 
