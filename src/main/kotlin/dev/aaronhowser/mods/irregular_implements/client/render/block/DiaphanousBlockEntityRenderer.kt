@@ -26,7 +26,7 @@ class DiaphanousBlockEntityRenderer(
         val level = blockEntity.level ?: return
         val time = level.gameTime + partialTick
 
-        val alpha = (0.65 + 0.25 * sin(time.toDouble() / 20.0)).toFloat()
+        val alpha = (0.5 + 0.5 * sin(time.toDouble() / 20.0)).toFloat()
 
         poseStack.pushPose()
 
