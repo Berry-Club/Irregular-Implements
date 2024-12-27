@@ -33,9 +33,16 @@ class ModBlockTagsProvider(
         val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
         val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
         val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
+        val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(DIAPHANOUS_BLOCK_BLACKLIST)
+            .add(
+                Blocks.CHAIN,
+                Blocks.CACTUS
+            )
 
         this.tag(BLOCK_DESTABILIZER_BLACKLIST)
             .add(
