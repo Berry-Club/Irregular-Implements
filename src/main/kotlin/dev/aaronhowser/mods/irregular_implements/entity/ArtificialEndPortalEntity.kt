@@ -78,6 +78,8 @@ class ArtificialEndPortalEntity(
 
             return true
         }
+
+        const val ACTION_TIMER_NBT = "action_timer"
     }
 
     constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
@@ -143,6 +145,7 @@ class ArtificialEndPortalEntity(
         }
     }
 
+    //TODO: Color purple somehow, maybe need a custom particle type
     private fun spawnParticles() {
         for (i in 0..5) {
 
@@ -166,10 +169,11 @@ class ArtificialEndPortalEntity(
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
-
+        this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
     }
 
+    //FIXME: Is this actually saving?
     override fun addAdditionalSaveData(compound: CompoundTag) {
-
+        compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
     }
 }

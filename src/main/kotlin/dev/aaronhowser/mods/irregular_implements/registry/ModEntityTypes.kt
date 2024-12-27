@@ -42,7 +42,7 @@ object ModEntityTypes {
                 ::ArtificialEndPortalEntity,
                 MobCategory.MISC
             )
-                .sized(3f, 1f)
+                .sized(3f, 0.25f)
                 .build("artificial_end_portal")
         })
 
