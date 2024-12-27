@@ -18,6 +18,10 @@ class DiaphanousBlockEntityRenderer(
     val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<DiaphanousBlockEntity> {
 
+    override fun getViewDistance(): Int {
+        return 256
+    }
+
     override fun render(
         blockEntity: DiaphanousBlockEntity,
         partialTick: Float,

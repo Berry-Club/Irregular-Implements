@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -19,10 +21,17 @@ import net.minecraft.world.level.block.RenderShape
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock {
+
+    companion object {
+        fun isValidBlock(block: Block): Boolean {
+            return block.defaultBlockState().renderShape == RenderShape.MODEL
+        }
+    }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return DiaphanousBlockEntity(pos, state)
@@ -36,6 +45,32 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
         return Shapes.empty()
     }
 
+    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return Shapes.block()
+
+        return if (blockEntity.isInverted) Shapes.block() else Shapes.empty()
+    }
+
+    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        if (level is Level && level.isClientSide) {
+            val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
+            val player = ClientUtil.localPlayer
+
+            if (blockEntity != null && player != null) {
+                if (blockEntity.isInverted) return Shapes.block()
+
+                return if (player.isHolding { it.item is BlockItem && (it.item as BlockItem).block == ModBlocks.DIAPHANOUS_BLOCK.get() }) {
+                    Shapes.block()
+                } else {
+                    Shapes.empty()
+                }
+            }
+
+        }
+
+        return Shapes.block()
+    }
+
     override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
         super.setPlacedBy(level, pos, state, placer, stack)
 
@@ -47,36 +82,6 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
             blockEntity?.renderedBlock = blockToRender
             blockEntity?.isInverted = isInverted
         }
-    }
-
-    override fun useItemOn(
-        stack: ItemStack,
-        state: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        hand: InteractionHand,
-        hitResult: BlockHitResult
-    ): ItemInteractionResult {
-        val item = stack.item
-        if (item is BlockItem) {
-            val block = item.block
-            val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
-
-            if (blockEntity != null) {
-                blockEntity.renderedBlock = block
-                return ItemInteractionResult.SUCCESS
-            }
-        }
-
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
-    }
-
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return InteractionResult.PASS
-
-        blockEntity.isInverted = !blockEntity.isInverted
-        return InteractionResult.SUCCESS
     }
 
 }
