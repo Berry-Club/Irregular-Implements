@@ -53,6 +53,17 @@ class ModBlockStateProvider(
         chatDetector()
         onlineDetector()
         spectreLens()
+        diaphanousBlock()
+    }
+
+    private fun diaphanousBlock() {
+        val block = ModBlocks.DIAPHANOUS_BLOCK.get()
+
+        //Never actually gets loaded, just need it for the particles and block state
+        val model = models()
+            .cubeAll(name(block), mcLoc("block/stone"))
+
+        simpleBlock(block, model)
     }
 
     private fun spectreLens() {
