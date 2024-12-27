@@ -12,6 +12,6 @@ class DiaphanousBlockEntity(
     pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
 
-    var block: Block = Blocks.STONE
+    var renderedBlock: Block = Blocks.STONE
 
 }
