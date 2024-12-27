@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorB
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.IlluminatorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -170,6 +171,11 @@ object ClientModBusEvents {
         event.registerBlockEntityRenderer(
             ModBlockEntities.DIAPHANOUS_BLOCK.get(),
             ::DiaphanousBlockEntityRenderer
+        )
+
+        event.registerEntityRenderer(
+            ModEntityTypes.ARTIFICIAL_END_PORTAL.get(),
+            ::ArtificialEndPortalRenderer
         )
     }
 

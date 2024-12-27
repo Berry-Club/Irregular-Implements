@@ -134,14 +134,14 @@ class ArtificialEndPortalEntity(
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        TODO("Not yet implemented")
+
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
-        TODO("Not yet implemented")
+
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
-        TODO("Not yet implemented")
+
     }
 }
