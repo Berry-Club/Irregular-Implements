@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-26T22:24:00.0663249	Recipes
+// 1.21.1	2024-12-26T22:46:38.0989105	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -311,6 +311,7 @@ ed1abcfa3a9fa73f04861aaedd056a418e437630 data/irregular_implements/recipe/grass_
 bf77c4d6662d7511949baeb5483afd3a57789e86 data/irregular_implements/recipe/imbuing_station.json
 c60e5608256b7c20a800285ddeb5b040f8da5d9b data/irregular_implements/recipe/inventory_rerouter.json
 556c559eb6b39fe7effeb722ac91da3eb055b79d data/irregular_implements/recipe/inventory_tester.json
+31869e2e71e774ae2530c5031e23bd45a0c300f9 data/irregular_implements/recipe/invert_diaphanous_block.json
 7f96c6090edbf42384e8e25d3941d7850aac7109 data/irregular_implements/recipe/iron_dropper.json
 ac84adec0f0d8499a6e35a98b6caf2cf15892719 data/irregular_implements/recipe/item_collector.json
 38a2f4726f0c2699be3a1f040c7720d5906a95a3 data/irregular_implements/recipe/item_filter.json

@@ -58,6 +58,7 @@ class ModRecipeProvider(
         diviningRod.save(recipeOutput, OtherUtil.modResource("divining_rod"))
         applySpectreAnchor.save(recipeOutput, OtherUtil.modResource("apply_spectre_anchor"))
         setDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("set_diaphanous_block"))
+        invertedDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("invert_diaphanous_block"))
 
     }
 
@@ -66,6 +67,7 @@ class ModRecipeProvider(
     private val diviningRod = SpecialRecipeBuilder.special(::DiviningRodRecipe)
     private val applySpectreAnchor = SpecialRecipeBuilder.special(::ApplySpectreAnchorRecipe)
     private val setDiaphanousBlock = SpecialRecipeBuilder.special(::SetDiaphanousBlockRecipe)
+    private val invertedDiaphanousBlock = SpecialRecipeBuilder.special(::InvertDiaphanousBlockRecipe)
 
     //TODO:
     // Potions of Collapse

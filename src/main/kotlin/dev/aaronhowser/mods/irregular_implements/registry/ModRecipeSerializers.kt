@@ -25,8 +25,11 @@ object ModRecipeSerializers {
     val APPLY_SPECTRE_ANCHOR: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
         registerRecipeSerializer("apply_spectre_anchor") { SimpleCraftingRecipeSerializer(::ApplySpectreAnchorRecipe) }
 
-    val SET_DIAPHANOUS_BLOCK =
+    val SET_DIAPHANOUS_BLOCK: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
         registerRecipeSerializer("set_diaphanous_block") { SimpleCraftingRecipeSerializer(::SetDiaphanousBlockRecipe) }
+
+    val INVERT_DIAPHANOUS_BLOCK: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+        registerRecipeSerializer("invert_diaphanous_block") { SimpleCraftingRecipeSerializer(::InvertDiaphanousBlockRecipe) }
 
     private fun registerRecipeSerializer(
         name: String,
