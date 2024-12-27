@@ -15,6 +15,8 @@ import net.neoforged.neoforge.common.Tags
 class EvilTearItem : Item(Properties()) {
 
     companion object {
+
+        //FIXME: This should spawn an entity with a fancy animation, not spawn 9 blocks
         private fun tryPlacePortal(level: Level, clickedPos: BlockPos): Boolean {
             val blockState = level.getBlockState(clickedPos)
 
