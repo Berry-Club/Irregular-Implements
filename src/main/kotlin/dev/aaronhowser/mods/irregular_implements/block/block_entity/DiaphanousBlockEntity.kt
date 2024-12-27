@@ -18,8 +18,8 @@ class DiaphanousBlockEntity(
 ) : BlockEntity(ModBlockEntities.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
 
     companion object {
-        const val BLOCK_NBT = "block"
-        const val IS_INVERTED_NBT = "is_inverted"
+        const val BLOCK_NBT = "Block"
+        const val IS_INVERTED_NBT = "IsInverted"
     }
 
     var renderedBlock: Block = Blocks.STONE

@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag
 interface RedstoneToolLinkable {
 
     companion object {
-        private const val LINKED_POS_NBT = "linked_pos"
+        private const val LINKED_POS_NBT = "LinkedPos"
     }
 
     var linkedPos: BlockPos?

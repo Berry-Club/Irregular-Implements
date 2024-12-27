@@ -16,7 +16,7 @@ class IndicatorDisplayEntity(
 ) : BlockDisplay(entityType, level) {
 
     companion object {
-        private const val MAX_AGE_NBT = "max_age"
+        private const val MAX_AGE_NBT = "MaxAge"
 
         val defaultTransformation = Transformation(
             null,

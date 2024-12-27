@@ -21,7 +21,7 @@ class SpectreLensBlockEntity(
 ) : BlockEntity(ModBlockEntities.SPECTRE_LENS.get(), pPos, pBlockState) {
 
     companion object {
-        const val OWNER_UUID_NBT = "owner_uuid"
+        const val OWNER_UUID_NBT = "OwnerUuid"
 
         //TODO: Only allow one Lens per dimension
         @JvmStatic

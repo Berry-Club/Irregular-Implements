@@ -31,7 +31,7 @@ class OnlineDetectorBlockEntity(
             }
         }
 
-        const val USERNAME_NBT = "username"
+        const val USERNAME_NBT = "Username"
     }
 
     var username: String = ""

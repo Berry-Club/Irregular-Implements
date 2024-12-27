@@ -10,7 +10,7 @@ import net.minecraft.client.gui.GuiGraphics
 class BiomeSensorBlockEntity {
 
     companion object {
-        val LAYER_NAME = OtherUtil.modResource("biome_name")
+        val LAYER_NAME = OtherUtil.modResource("biome_sensor_gui_layer")
 
         //TODO: Does this crash on servers?
         fun tryRenderBiomeName(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {

@@ -58,9 +58,9 @@ class ChatDetectorBlockEntity(
             }
         }
 
-        const val OWNER_UUID_NBT = "owner_uuid"
-        const val STOPS_MESSAGE_NBT = "stops_message"
-        const val REGEX_NBT = "regex"
+        const val OWNER_UUID_NBT = "OwnerUuid"
+        const val STOPS_MESSAGE_NBT = "StopsMessage"
+        const val MESSAGE_REGEX_NBT = "MessageRegex"
     }
 
     // Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
@@ -110,7 +110,7 @@ class ChatDetectorBlockEntity(
         val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
         if (uuid != null) this.ownerUuid = uuid
 
-        val regex = tag.getString(REGEX_NBT)
+        val regex = tag.getString(MESSAGE_REGEX_NBT)
         this.regexString = regex
 
         val stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
@@ -121,7 +121,7 @@ class ChatDetectorBlockEntity(
         super.saveAdditional(tag, registries)
 
         tag.putUUID(OWNER_UUID_NBT, ownerUuid)
-        tag.putString(REGEX_NBT, regexString)
+        tag.putString(MESSAGE_REGEX_NBT, regexString)
         tag.putBoolean(STOPS_MESSAGE_NBT, stopsMessage)
     }
 

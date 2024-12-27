@@ -73,7 +73,7 @@ class ArtificialEndPortalEntity(
         }
 
         val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
-        const val ACTION_TIMER_NBT = "action_timer"
+        const val ACTION_TIMER_NBT = "ActionTimer"
     }
 
     constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
