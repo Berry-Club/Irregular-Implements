@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.core.Direction
 import net.neoforged.neoforge.client.model.data.ModelData
-import kotlin.math.sin
 
 class DiaphanousBlockEntityRenderer(
     context: BlockEntityRendererProvider.Context
@@ -23,28 +22,21 @@ class DiaphanousBlockEntityRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val level = blockEntity.level ?: return
-        val time = level.gameTime + partialTick
-
-        val alpha = (0.5 + 0.5 * sin(time.toDouble() / 20.0)).toFloat()
-
         poseStack.pushPose()
 
         val state = blockEntity.renderedBlock.defaultBlockState()
         val model = Minecraft.getInstance().blockRenderer.getBlockModel(state)
         val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
 
-        for (direction in Direction.entries) {
-            val quads = model.getQuads(state, direction, level.random, ModelData.EMPTY, null)
-            for (quad in quads) {
-                vertexConsumer.putBulkData(
-                    poseStack.last(),
-                    quad,
-                    1f, 1f, 1f, alpha,
-                    packedLight, packedOverlay,
-                    true
-                )
-            }
+        val quads = model.getQuads(state, Direction.UP, blockEntity.level!!.random, ModelData.EMPTY, null)
+        for (quad in quads) {
+            vertexConsumer.putBulkData(
+                poseStack.last(),
+                quad,
+                1f, 1f, 1f, 0.75f,
+                packedLight, packedOverlay,
+                true
+            )
         }
 
         poseStack.popPose()
