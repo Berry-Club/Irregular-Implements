@@ -164,4 +164,18 @@ object ModDataComponents {
                 .networkSynchronized(SimpleFluidContent.STREAM_CODEC)
         }
 
+    val BLOCK: DeferredHolder<DataComponentType<*>, DataComponentType<Block>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("block") {
+            it
+                .persistent(BuiltInRegistries.BLOCK.byNameCodec())
+                .networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
+        }
+
+    val IS_INVERTED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("is_inverted") {
+            it
+                .persistent(Unit.CODEC)
+                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+        }
+
 }

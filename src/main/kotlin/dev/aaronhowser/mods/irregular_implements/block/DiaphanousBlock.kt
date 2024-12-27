@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.ItemInteractionResult
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
@@ -32,6 +34,19 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
 
     override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
         return Shapes.empty()
+    }
+
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+        super.setPlacedBy(level, pos, state, placer, stack)
+
+        val blockToRender = stack.get(ModDataComponents.BLOCK)
+        val isInverted = stack.has(ModDataComponents.IS_INVERTED)
+        if (blockToRender != null) {
+            val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
+
+            blockEntity?.renderedBlock = blockToRender
+            blockEntity?.isInverted = isInverted
+        }
     }
 
     override fun useItemOn(
