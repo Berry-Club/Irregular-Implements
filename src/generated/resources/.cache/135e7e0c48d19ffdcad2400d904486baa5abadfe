@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-26T01:52:26.389581	Item Models: irregular_implements
+// 1.21.1	2024-12-26T21:34:55.4487132	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -85,11 +85,13 @@ d02613e04e3fb1b7e3097922dbf809999e9462b2 assets/irregular_implements/models/item
 8eecac30b1b3b8e841fa47c090b95bceab2179c2 assets/irregular_implements/models/item/item_filter.json
 e90431818e2275b0fd91346aa6c3a58d98852bb9 assets/irregular_implements/models/item/lava_charm.json
 713e1b88036347fc981c2a68bd96328779643c26 assets/irregular_implements/models/item/lava_waders.json
+f5dc61079df7b78a368ec6bedeaa95cbd1c5987d assets/irregular_implements/models/item/lesser_magic_bean.json
 5a16230a5fb28035cc87410d9b04826c8b1ea9fe assets/irregular_implements/models/item/location_filter.json
 898bbf98b7e6ffd6a5775a5750a9f84d7d6cf12f assets/irregular_implements/models/item/loot_generator.json
 b59732801ab7d4c0e69648601fc074770ee8b854 assets/irregular_implements/models/item/lotus_blossom.json
 5b1200455f4391ca8c2d48717e52665d21a3eb99 assets/irregular_implements/models/item/lotus_seeds.json
 6e4492bf31ca73cc7ad2c8cfd4b6c0904b1b1053 assets/irregular_implements/models/item/luminous_powder.json
+f48a738fdc5fe310ff6501102ce4aadf45066d09 assets/irregular_implements/models/item/magic_bean.json
 f5bc71aba2ccebe5ac0de4744720dc347a688201 assets/irregular_implements/models/item/magic_hood.json
 69be8bf61df188a2117651d62ae5d75256582f73 assets/irregular_implements/models/item/magnetic_force.json
 e35bed2bf8cc9e703e4f6555397d7d73f48f7b14 assets/irregular_implements/models/item/obsidian_rod.json

@@ -121,7 +121,9 @@ class ModItemModelProvider(
 
         val blockItemsToModel = listOf(
             ModItems.LOTUS_SEEDS,
-            ModItems.BEAN
+            ModItems.BEAN,
+            ModItems.LESSER_MAGIC_BEAN,
+            ModItems.MAGIC_BEAN
         ).map { it.get() }
 
         for (deferred in ModItems.ITEM_REGISTRY.entries - complexModels.toSet()) {
