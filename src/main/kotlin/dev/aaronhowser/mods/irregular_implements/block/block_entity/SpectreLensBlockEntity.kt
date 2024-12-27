@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
@@ -70,9 +71,7 @@ class SpectreLensBlockEntity(
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
 
-        if (tag.contains(OWNER_UUID_NBT)) {
-            owner = tag.getUUID(OWNER_UUID_NBT)
-        }
+        owner = tag.getUuidOrNull(OWNER_UUID_NBT)
     }
 
     // Syncs with client
