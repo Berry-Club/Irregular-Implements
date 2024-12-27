@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.recipe.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.advancements.Criterion
@@ -21,6 +22,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potions
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
+import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient
 import java.util.concurrent.CompletableFuture
@@ -1254,6 +1256,19 @@ class ModRecipeProvider(
                 'S' to ing(ModItems.SPECTRE_INGOT),
             )
         ),
+        shapedRecipe(
+            ItemStack(ModItems.DIAPHANOUS_BLOCK.get(), 4).also {
+                it.set(ModDataComponents.BLOCK, Blocks.STONE)
+            },
+            " G ,RLB, Y ",
+            mapOf(
+                'G' to ing(Items.GREEN_STAINED_GLASS),
+                'R' to ing(Items.RED_STAINED_GLASS),
+                'L' to ing(Tags.Items.GLASS_BLOCKS_COLORLESS),
+                'B' to ing(Items.BLUE_STAINED_GLASS),
+                'Y' to ing(Items.YELLOW_STAINED_GLASS)
+            )
+        )
     )
 
     private fun shapelessRecipe(
