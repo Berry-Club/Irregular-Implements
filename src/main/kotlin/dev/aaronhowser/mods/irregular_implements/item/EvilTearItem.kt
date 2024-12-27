@@ -26,19 +26,14 @@ class EvilTearItem : Item(Properties()) {
                 || !level.getBlockState(clickedPos.below()).isAir
             ) return false
 
-            var blocksBelow = 2
-            while (blocksBelow <= 10) {
-                val stateThere = level.getBlockState(clickedPos.below(blocksBelow))
-                if (stateThere.isAir) {
-                    blocksBelow++
-                    continue
-                }
-                if (stateThere.`is`(Tags.Blocks.END_STONES)) break
+            val distanceToObsidianRing = 3
 
-                return false
+            for (dY in 1..distanceToObsidianRing) {
+                val stateThere = level.getBlockState(clickedPos.below(dY))
+                if (!stateThere.isAir) return false
             }
 
-            val centerPos = clickedPos.below(blocksBelow - 1)
+            val centerPos = clickedPos.below(distanceToObsidianRing)
 
             for (dX in -1..1) for (dZ in -1..1) {
                 val posThere = centerPos.offset(dX, 0, dZ)

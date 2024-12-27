@@ -40,18 +40,9 @@ class ArtificialEndPortalEntity(
                 if (entities.isNotEmpty()) return false
             }
 
-            var endRodPos: BlockPos? = null
-            for (dY in 0..10) {
-                val pos = entityPos.above(dY)
-                val state = level.getBlockState(pos)
-
-                if (state.`is`(Blocks.END_ROD) && state.getValue(EndRodBlock.FACING) == Direction.DOWN) {
-                    endRodPos = pos
-                    break
-                }
-            }
-
-            if (endRodPos == null) return false
+            val endRodPos = entityPos.above(3)
+            val endRodState = level.getBlockState(endRodPos)
+            if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
 
             if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
 
