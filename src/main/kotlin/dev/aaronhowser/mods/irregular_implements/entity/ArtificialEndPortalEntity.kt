@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -70,6 +72,7 @@ class ArtificialEndPortalEntity(
             return true
         }
 
+        val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
         const val ACTION_TIMER_NBT = "action_timer"
     }
 
@@ -77,8 +80,13 @@ class ArtificialEndPortalEntity(
         this.setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
     }
 
-    var actionTimer = 0
-        private set
+    var actionTimer: Int
+        private set(value) {
+            this.entityData.set(ACTION_TIMER, value)
+        }
+        get() {
+            return this.entityData.get(ACTION_TIMER)
+        }
 
     override fun tick() {
         super.tick()
@@ -156,14 +164,13 @@ class ArtificialEndPortalEntity(
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-
+        builder.define(ACTION_TIMER, 0)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
     }
 
-    //FIXME: Is this actually saving?
     override fun addAdditionalSaveData(compound: CompoundTag) {
         compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
     }
