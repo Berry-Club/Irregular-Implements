@@ -29,8 +29,22 @@ class ModItemModelProvider(
         redstoneActivator()
         diviningRod()
         buckets()
+        blockEntityWithoutLevelRenderers()
 
         basicItems()
+    }
+
+    private fun blockEntityWithoutLevelRenderers() {
+        val blockEntityWithoutLevelRenderers = listOf(
+            ModItems.DIAPHANOUS_BLOCK
+        ).map { it.get() }
+
+        for (item in blockEntityWithoutLevelRenderers) {
+            val name = getName(item)
+
+            getBuilder(name.toString())
+                .parent(ModelFile.UncheckedModelFile("builtin/entity"))
+        }
     }
 
     private fun buckets() {

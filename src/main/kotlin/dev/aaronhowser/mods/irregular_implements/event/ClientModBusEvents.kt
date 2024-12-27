@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOve
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.IlluminatorEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.ModelEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 
 @EventBusSubscriber(
@@ -168,6 +170,14 @@ object ClientModBusEvents {
         event.registerBlockEntityRenderer(
             ModBlockEntities.DIAPHANOUS_BLOCK.get(),
             ::DiaphanousBlockEntityRenderer
+        )
+    }
+
+    @SubscribeEvent
+    fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
+        event.registerItem(
+            DiaphanousBEWLR.clientItemExtensions,
+            ModItems.DIAPHANOUS_BLOCK.get()
         )
     }
 
