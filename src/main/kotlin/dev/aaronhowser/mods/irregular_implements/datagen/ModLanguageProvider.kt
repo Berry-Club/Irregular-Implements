@@ -169,6 +169,7 @@ class ModLanguageProvider(
         addItem(ModItems.PORTABLE_ENDER_BRIDGE, "Portable Ender Bridge")
         addItem(ModItems.DIAMOND_BREAKER, "Diamond Breaker")
         addItem(ModItems.BLOCK_REPLACER, "Block Replacer")
+        addItem(ModItems.DIAPHANOUS_BLOCK, "Diaphanous Block")
 
         addItem(ModItems.FIRE_IMBUE, "Fire Imbue")
         addItem(ModItems.POISON_IMBUE, "Poison Imbue")
@@ -276,6 +277,7 @@ class ModLanguageProvider(
         addBlock(ModBlocks.SHOCK_ABSORBER, "Shock Absorber")
         addBlock(ModBlocks.AUTO_PLACER, "Auto Placer")
         addBlock(ModBlocks.BLOCK_TELEPORTER, "Block Teleporter")
+        addBlock(ModBlocks.DIAPHANOUS_BLOCK, "Diaphanous Block")
 
         addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
         addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")
@@ -651,6 +653,7 @@ class ModLanguageProvider(
         addInfo(ModItems.DIAMOND_BREAKER, "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.")
         addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
         addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
+        addInfo(ModItems.DIAPHANOUS_BLOCK, "Looks like another block, but becomes transparent as you approach.\n\nCraft it with any block to set its appearance.\n\nCraft it by itself to invert it, so it starts transparent and becomes opaque.")
     }
 
     private fun addEffects() {
