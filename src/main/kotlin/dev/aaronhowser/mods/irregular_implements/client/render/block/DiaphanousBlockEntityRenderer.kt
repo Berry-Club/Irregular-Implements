@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.core.Direction
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource
 import net.neoforged.neoforge.client.model.data.ModelData
 import kotlin.math.sin
 
@@ -35,7 +36,7 @@ class DiaphanousBlockEntityRenderer(
         val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
 
         for (direction in Direction.entries) {
-            val quads = model.getQuads(state, direction, level.random, ModelData.EMPTY, null)
+            val quads = model.getQuads(state, direction, XoroshiroRandomSource(0, 0), ModelData.EMPTY, null)
             for (quad in quads) {
                 vertexConsumer.putBulkData(
                     poseStack.last(),
