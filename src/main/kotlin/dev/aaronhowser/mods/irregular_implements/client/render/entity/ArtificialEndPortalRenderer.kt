@@ -1,12 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.aaronhowser.mods.irregular_implements.entity.ArtificialEndPortalEntity
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.resources.ResourceLocation
+import org.joml.Matrix4f
 import kotlin.math.min
 
 class ArtificialEndPortalRenderer(
@@ -23,15 +25,37 @@ class ArtificialEndPortalRenderer(
         bufferSource: MultiBufferSource,
         packedLight: Int
     ) {
-        if (portalEntity.actionTimer > 85) return
-        val player = ClientUtil.localPlayer ?: return
+        val size = min(3.0, 3.0 / 115 * (portalEntity.actionTimer + partialTick - 85)).toFloat()
+        val radius = size / 2
 
-        val size = min(3.0, 3.0 / 115 * (portalEntity.actionTimer + partialTick - 85))
+        val min = -radius - 0.5f
+        val max = radius + 0.5f
 
-        val level = portalEntity.level()
+        val pose = poseStack.last().pose()
+        val consumer = bufferSource.getBuffer(RenderType.endPortal())
 
-
+        renderFace(pose, consumer, min, max, 0.375f, 0.375f, min, min, max, max)
+        renderFace(pose, consumer, min, max, 0.75f, 0.75f, max, max, min, min)
     }
+
+    private fun renderFace(
+        pose: Matrix4f,
+        vertexConsumer: VertexConsumer,
+        x0: Float,
+        x1: Float,
+        y0: Float,
+        y1: Float,
+        z0: Float,
+        z1: Float,
+        z2: Float,
+        z3: Float,
+    ) {
+        vertexConsumer.addVertex(pose, x0, y0, z0)
+        vertexConsumer.addVertex(pose, x1, y0, z1)
+        vertexConsumer.addVertex(pose, x1, y1, z2)
+        vertexConsumer.addVertex(pose, x0, y1, z3)
+    }
+
 
     @Suppress("WRONG_NULLABILITY_FOR_JAVA_OVERRIDE")
     override fun getTextureLocation(entity: ArtificialEndPortalEntity): ResourceLocation? {
