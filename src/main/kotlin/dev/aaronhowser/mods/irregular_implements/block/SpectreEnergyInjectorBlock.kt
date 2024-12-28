@@ -6,10 +6,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.EntityBlock
-import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.Shapes
@@ -23,6 +20,10 @@ class SpectreEnergyInjectorBlock : Block(
 
     override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
         return Shapes.empty()
+    }
+
+    override fun getRenderShape(state: BlockState): RenderShape {
+        return RenderShape.ENTITYBLOCK_ANIMATED
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
