@@ -1,28 +1,18 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.block
 
 import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.vertex.DefaultVertexFormat
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.Tesselator
-import com.mojang.blaze3d.vertex.VertexFormat
+import com.mojang.blaze3d.vertex.*
+import com.mojang.math.Axis
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.util.Mth
-import net.minecraft.world.phys.Vec3
 import kotlin.random.Random
 
 class SpectreEnergyInjectorBlockEntityRenderer(
     val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<SpectreEnergyInjectorBlockEntity> {
-
-    companion object {
-        private val XP = Vec3(1.0, 0.0, 0.0)
-        private val YP = Vec3(0.0, 1.0, 0.0)
-        private val ZP = Vec3(0.0, 0.0, 1.0)
-
-    }
 
     override fun render(
         blockEntity: SpectreEnergyInjectorBlockEntity,
@@ -47,6 +37,13 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         for (i in 0 until 25) {
             poseStack.pushPose()
 
+            poseStack.mulPose(Axis.XP.rotationDegrees(Random.nextFloat() * 360f))
+            poseStack.mulPose(Axis.YP.rotationDegrees(Random.nextFloat() * 360.0f))
+            poseStack.mulPose(Axis.ZP.rotationDegrees(Random.nextFloat() * 360.0f))
+            poseStack.mulPose(Axis.XP.rotationDegrees(Random.nextFloat() * 360.0f))
+            poseStack.mulPose(Axis.YP.rotationDegrees(Random.nextFloat() * 360.0f))
+            poseStack.mulPose(Axis.ZP.rotationDegrees(Random.nextFloat() * 360.0f + animationCounter * 90.0f))
+
             val size1 = Random.nextFloat() * 0.2f + 0.1f
             val size2 = Random.nextFloat() * 0.1f
 
@@ -70,6 +67,12 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         RenderSystem.depthMask(true)
         RenderSystem.enableCull()
         RenderSystem.disableBlend()
+
         poseStack.popPose()
     }
+
+    override fun shouldRenderOffScreen(blockEntity: SpectreEnergyInjectorBlockEntity): Boolean {
+        return true
+    }
+
 }
