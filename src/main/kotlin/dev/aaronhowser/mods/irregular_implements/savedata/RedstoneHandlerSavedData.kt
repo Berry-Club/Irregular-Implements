@@ -38,7 +38,7 @@ class RedstoneHandlerSavedData : SavedData() {
             require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
 
             return level.dataStorage.computeIfAbsent(
-                Factory(::RedstoneHandlerSavedData, Companion::load),
+                Factory(::RedstoneHandlerSavedData, ::load),
                 "redstone_handler"
             )
         }
@@ -69,6 +69,8 @@ class RedstoneHandlerSavedData : SavedData() {
 
         signals.add(signal)
         updatePosition(level, blockPos)
+
+        setDirty()
     }
 
     fun tick(server: MinecraftServer) {
@@ -87,6 +89,7 @@ class RedstoneHandlerSavedData : SavedData() {
 
             if (signal.isExpired(level.gameTime)) {
                 iterator.remove()
+                setDirty()
             }
         }
     }

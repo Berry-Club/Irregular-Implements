@@ -23,7 +23,7 @@ class WorldInformationSavedData : SavedData() {
             require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
 
             return level.dataStorage.computeIfAbsent(
-                Factory(::WorldInformationSavedData, Companion::load),
+                Factory(::WorldInformationSavedData, ::load),
                 "redstone_handler"
             )
         }
@@ -37,6 +37,10 @@ class WorldInformationSavedData : SavedData() {
     }
 
     var enderDragonKilled: Boolean = false
+        set(value) {
+            field = value
+            setDirty()
+        }
 
     override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
         tag.putBoolean(ENDER_DRAGON_KILLED, enderDragonKilled)

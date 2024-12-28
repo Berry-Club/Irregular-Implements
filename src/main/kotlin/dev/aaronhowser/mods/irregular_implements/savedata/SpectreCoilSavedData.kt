@@ -35,7 +35,7 @@ class SpectreCoilSavedData : SavedData() {
             require(level == level.server.overworld()) { "SpectreCoilSavedData can only be accessed on the overworld" }
 
             return level.dataStorage.computeIfAbsent(
-                Factory(::SpectreCoilSavedData, Companion::load),
+                Factory(::SpectreCoilSavedData, ::load),
                 "spectre_coil"
             )
         }
@@ -59,22 +59,32 @@ class SpectreCoilSavedData : SavedData() {
         return object : IEnergyStorage {
             override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
                 val currentEnergy = coilEntries.getOrDefault(ownerUuid, 0)
-                val newEnergy = currentEnergy + toReceive
+                val newEnergy = minOf(
+                    this.maxEnergyStored,
+                    currentEnergy + toReceive
+                )
 
                 if (!simulate) {
                     coilEntries[ownerUuid] = newEnergy
                 }
+
+                this@SpectreCoilSavedData.setDirty()
 
                 return newEnergy - currentEnergy
             }
 
             override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
                 val currentEntity = coilEntries.getOrDefault(ownerUuid, 0)
-                val newEnergy = maxOf(currentEntity - toExtract, 0)
+                val newEnergy = maxOf(
+                    0,
+                    currentEntity - toExtract
+                )
 
                 if (!simulate) {
                     coilEntries[ownerUuid] = newEnergy
                 }
+
+                this@SpectreCoilSavedData.setDirty()
 
                 return currentEntity - newEnergy
             }
