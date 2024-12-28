@@ -53,6 +53,14 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val SPECTRE_ENERGY_INJECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpectreEnergyInjectorBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("spectre_energy_injector", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> SpectreEnergyInjectorBlockEntity(pos, state) },
+                ModBlocks.SPECTRE_ENERGY_INJECTOR.get()
+            ).build(null)
+        })
+
     val MOON_PHASE_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<MoonPhaseDetectorBlockEntity>> =
         BLOCK_ENTITY_REGISTRY.register("moon_phase_detector", Supplier {
             BlockEntityType.Builder.of(

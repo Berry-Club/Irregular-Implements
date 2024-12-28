@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.savedata
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.saveddata.SavedData
 import net.neoforged.neoforge.energy.IEnergyStorage
@@ -38,6 +39,12 @@ class SpectreCoilSavedData : SavedData() {
                 "spectre_coil"
             )
         }
+
+        val ServerLevel.spectreCoilSavedData: SpectreCoilSavedData
+            inline get() = this.server.spectreCoilSavedData
+
+        val MinecraftServer.spectreCoilSavedData: SpectreCoilSavedData
+            get() = get(this.overworld())
 
         const val COIL_ENTRIES_NBT = "coil_entries"
         const val UUID_NBT = "uuid"
