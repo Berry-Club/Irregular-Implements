@@ -31,6 +31,7 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         val animationCounter = level.gameTime + partialTick
 
         val tesselator = Tesselator.getInstance()
+        val bufferBuilder = tesselator.begin(VertexFormat.Mode.TRIANGLES, DefaultVertexFormat.POSITION_COLOR)
 
         poseStack.pushPose()
 
@@ -59,8 +60,6 @@ class SpectreEnergyInjectorBlockEntityRenderer(
             val green = 230
             val blue = 226
             val alpha = 255
-
-            val bufferBuilder = tesselator.begin(VertexFormat.Mode.TRIANGLES, DefaultVertexFormat.POSITION_COLOR)
 
             bufferBuilder.addVertex(poseStack.last().pose(), 0.0f, 0.0f, 0.0f).setColor(0, 0, 0, 255)
 
