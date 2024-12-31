@@ -24,9 +24,24 @@ class SpectreEnergyInjectorBlockEntityRenderer(
             poseStack: PoseStack,
             time: Float,
             vertexConsumer: VertexConsumer,
-            centerColor: Int = FastColor.ARGB32.colorFromFloat(0.8f, 0.5f, 0.5f, 0.5f),
-            outerColor: Int = FastColor.ARGB32.colorFromFloat(0f, 0f, 0.33f, 0.77f),
-            amountRays: Int = 15
+        ) {
+            renderRays(
+                poseStack = poseStack,
+                time = time,
+                vertexConsumer = vertexConsumer,
+                centerColor = FastColor.ARGB32.colorFromFloat(0.8f, 0.5f, 0.5f, 0.5f),
+                outerColor = FastColor.ARGB32.colorFromFloat(0f, 0f, 0.33f, 0.77f),
+                amountRays = 15
+            )
+        }
+
+        fun renderRays(
+            poseStack: PoseStack,
+            time: Float,
+            vertexConsumer: VertexConsumer,
+            centerColor: Int,
+            outerColor: Int,
+            amountRays: Int
         ) {
             poseStack.pushPose()
 
