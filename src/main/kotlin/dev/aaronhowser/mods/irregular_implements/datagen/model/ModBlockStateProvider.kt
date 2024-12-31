@@ -25,7 +25,7 @@ class ModBlockStateProvider(
 
     override fun registerStatesAndModels() {
         singleTextureBlocks()
-        singleTextureTransparentBlocks()
+        singleTextureTranslucentBlocks()
         crossBlocks()
         buildSingleFaces()
         rainbowLamp()
@@ -1158,16 +1158,17 @@ class ModBlockStateProvider(
         )
     }
 
-    private fun singleTextureTransparentBlocks() {
-        val singleTextureTransparentBlocks = listOf(
+    private fun singleTextureTranslucentBlocks() {
+        val singleTextureTranslucentBlocks = listOf(
             ModBlocks.BLOCK_OF_STICKS,
             ModBlocks.RETURNING_BLOCK_OF_STICKS,
             ModBlocks.LAPIS_GLASS,
             ModBlocks.QUARTZ_GLASS,
-            ModBlocks.SUPER_LUBRICANT_ICE
+            ModBlocks.SUPER_LUBRICANT_ICE,
+            ModBlocks.SPECTRE_BLOCK
         ).map { it.get() }
 
-        for (block in singleTextureTransparentBlocks) {
+        for (block in singleTextureTranslucentBlocks) {
             val model = models()
                 .cubeAll(name(block), blockTexture(block))
                 .renderType(RenderType.translucent().name)
