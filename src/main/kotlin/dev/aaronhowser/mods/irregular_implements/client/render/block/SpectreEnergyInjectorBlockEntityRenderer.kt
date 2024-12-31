@@ -32,7 +32,7 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val time = 10 + partialTick
+        val time = ((blockEntity.level?.gameTime ?: 0) % 200 + partialTick) / 200f
 
         poseStack.pushPose()
         poseStack.translate(0.5f, 0.6f, 0.5f)
