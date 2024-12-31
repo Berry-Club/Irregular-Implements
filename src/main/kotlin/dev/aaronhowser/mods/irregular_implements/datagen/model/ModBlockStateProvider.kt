@@ -61,7 +61,7 @@ class ModBlockStateProvider(
         val block = ModBlocks.SPECTRE_ENERGY_INJECTOR.get()
 
         val caseModel = models()
-            .withExistingParent(name(block) + "_case", "block/tinted_glass")
+            .cubeAll(name(block) + "_case", modLoc("block/spectre_energy_injector"))
             .renderType(RenderType.translucent().name)
 
         // Needs to be a separate model because if this was also translucent, the BER's rays would stop the pedestal from rendering

@@ -1,4 +1,7 @@
 {
-  "parent": "minecraft:block/tinted_glass",
-  "render_type": "minecraft:translucent"
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "all": "irregular_implements:block/spectre_energy_injector"
+  }
 }
