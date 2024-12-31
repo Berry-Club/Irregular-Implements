@@ -61,11 +61,11 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         val vector3f3 = Vector3f()
         val quaternionf = Quaternionf()
 
-        val k = Mth.floor(
+        val amountRays = Mth.floor(
             (time + time * time) / 2f * 60f
         )
 
-        for (l in 0 until k) {
+        for (l in 0 until amountRays) {
             quaternionf
                 .rotateXYZ(
                     randomSource.nextFloat() * (Math.PI * 2).toFloat(),
