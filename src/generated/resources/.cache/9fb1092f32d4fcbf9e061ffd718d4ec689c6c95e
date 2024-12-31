@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-27T02:22:06.8385537	Recipes
+// 1.21.1	2024-12-31T10:49:13.7616258	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -402,7 +402,7 @@ ecb8abfe6d3f4dc49c3d391439a168c96349c264 data/irregular_implements/recipe/spectr
 6ed41339c5cccffb3b1a686e1ae917e31122e7f1 data/irregular_implements/recipe/spectre_coil.json
 d88a671bc7328226cb4bea9025466fbb4d464ee1 data/irregular_implements/recipe/spectre_coil_ender.json
 f54a195e65a9b08f8fdaf536647a60a0738c3cf8 data/irregular_implements/recipe/spectre_coil_redstone.json
-8fb6d828ba66b59e7528792346b2218e2839965b data/irregular_implements/recipe/spectre_energy_injector.json
+0d199a1a4095ce80911e813aeffe6593a0f53b6f data/irregular_implements/recipe/spectre_energy_injector.json
 086ad28fd5d99478334d19e4557294fe94c80aa6 data/irregular_implements/recipe/spectre_helmet.json
 f617623b3982ab0ff57c71664ea0a1c1e02eb68f data/irregular_implements/recipe/spectre_illuminator.json
 0d78d1884b6090674e5dcb1f662e95a50080d743 data/irregular_implements/recipe/spectre_ingot.json

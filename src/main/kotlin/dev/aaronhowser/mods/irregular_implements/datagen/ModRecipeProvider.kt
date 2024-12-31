@@ -504,7 +504,7 @@ class ModRecipeProvider(
         ),
         shapedRecipe(
             ModBlocks.SPECTRE_ENERGY_INJECTOR,
-            "OLO,SBS,OBO",
+            "OLO,SBS,OSO",
             mapOf(
                 'O' to ing(Tags.Items.OBSIDIANS),
                 'L' to ing(ModBlocks.SPECTRE_LENS),
