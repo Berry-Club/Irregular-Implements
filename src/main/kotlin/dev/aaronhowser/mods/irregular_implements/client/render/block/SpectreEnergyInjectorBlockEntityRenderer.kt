@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
-import net.minecraft.util.FastColor
 import net.minecraft.util.RandomSource
 import org.joml.Quaternionf
 import org.joml.Vector3f
@@ -29,8 +28,8 @@ class SpectreEnergyInjectorBlockEntityRenderer(
                 poseStack = poseStack,
                 time = time,
                 vertexConsumer = vertexConsumer,
-                centerColor = FastColor.ARGB32.colorFromFloat(0.8f, 0.5f, 0.5f, 0.5f),
-                outerColor = FastColor.ARGB32.colorFromFloat(0f, 0f, 0.33f, 0.77f),
+                centerColor = 0xFF000000.toInt(),
+                outerColor = 0x002C6A70,
                 amountRays = 15
             )
         }
