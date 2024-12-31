@@ -45,10 +45,10 @@ class SpectreEnergyInjectorBlockEntityRenderer(
             poseStack.pushPose()
 
             val randomSource = RandomSource.create(432L)
-            val vector3f = Vector3f()
-            val vector3f1 = Vector3f()
-            val vector3f2 = Vector3f()
-            val vector3f3 = Vector3f()
+            val vec0 = Vector3f()
+            val vec1 = Vector3f()
+            val vec2 = Vector3f()
+            val vec3 = Vector3f()
             val quaternionf = Quaternionf()
 
             for (rayIndex in 0 until amountRays) {
@@ -69,23 +69,23 @@ class SpectreEnergyInjectorBlockEntityRenderer(
                 val rayLength = 0.325f
                 val rayWidth = 0.15f
 
-                vector3f1.set(-HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
-                vector3f2.set(HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
-                vector3f3.set(0.0F, rayLength, rayWidth)
+                vec1.set(-HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
+                vec2.set(HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
+                vec3.set(0.0F, rayLength, rayWidth)
 
                 val pose = poseStack.last()
 
-                vertexConsumer.addVertex(pose, vector3f).setColor(centerColor)
-                vertexConsumer.addVertex(pose, vector3f1).setColor(outerColor)
-                vertexConsumer.addVertex(pose, vector3f2).setColor(outerColor)
+                vertexConsumer.addVertex(pose, vec0).setColor(centerColor)
+                vertexConsumer.addVertex(pose, vec1).setColor(outerColor)
+                vertexConsumer.addVertex(pose, vec2).setColor(outerColor)
 
-                vertexConsumer.addVertex(pose, vector3f).setColor(centerColor)
-                vertexConsumer.addVertex(pose, vector3f2).setColor(outerColor)
-                vertexConsumer.addVertex(pose, vector3f3).setColor(outerColor)
+                vertexConsumer.addVertex(pose, vec0).setColor(centerColor)
+                vertexConsumer.addVertex(pose, vec2).setColor(outerColor)
+                vertexConsumer.addVertex(pose, vec3).setColor(outerColor)
 
-                vertexConsumer.addVertex(pose, vector3f).setColor(centerColor)
-                vertexConsumer.addVertex(pose, vector3f3).setColor(outerColor)
-                vertexConsumer.addVertex(pose, vector3f1).setColor(outerColor)
+                vertexConsumer.addVertex(pose, vec0).setColor(centerColor)
+                vertexConsumer.addVertex(pose, vec3).setColor(outerColor)
+                vertexConsumer.addVertex(pose, vec1).setColor(outerColor)
             }
 
             poseStack.popPose()
