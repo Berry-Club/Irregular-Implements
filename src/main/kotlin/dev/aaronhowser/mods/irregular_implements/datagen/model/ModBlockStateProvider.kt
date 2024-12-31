@@ -64,6 +64,7 @@ class ModBlockStateProvider(
             .withExistingParent(name(block) + "_case", "block/tinted_glass")
             .renderType(RenderType.translucent().name)
 
+        // Needs to be a separate model because if this was also translucent, the BER's rays would stop the pedestal from rendering
         val pedestalModel = models()
             .withExistingParent(name(block) + "_pedestal", "block/block")
             .texture("all", mcLoc("block/obsidian"))
