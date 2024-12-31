@@ -1,7 +1,14 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/spectre_energy_injector"
+  "multipart": [
+    {
+      "apply": {
+        "model": "irregular_implements:block/spectre_energy_injector_case"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/spectre_energy_injector_pedestal"
+      }
     }
-  }
+  ]
 }

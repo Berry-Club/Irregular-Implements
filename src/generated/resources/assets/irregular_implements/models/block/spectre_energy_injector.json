@@ -36,22 +36,22 @@
     {
       "faces": {
         "down": {
-          "texture": "#base"
+          "texture": "#pedestal"
         },
         "east": {
-          "texture": "#base"
+          "texture": "#pedestal"
         },
         "north": {
-          "texture": "#base"
+          "texture": "#pedestal"
         },
         "south": {
-          "texture": "#base"
+          "texture": "#pedestal"
         },
         "up": {
-          "texture": "#base"
+          "texture": "#pedestal"
         },
         "west": {
-          "texture": "#base"
+          "texture": "#pedestal"
         }
       },
       "from": [
@@ -68,8 +68,7 @@
   ],
   "render_type": "minecraft:translucent",
   "textures": {
-    "base": "minecraft:block/obsidian",
     "case": "minecraft:block/tinted_glass",
-    "particle": "minecraft:block/tinted_glass"
+    "pedestal": "minecraft:block/obsidian"
   }
 }

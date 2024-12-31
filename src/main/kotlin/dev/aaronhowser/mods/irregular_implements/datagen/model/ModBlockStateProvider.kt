@@ -60,12 +60,35 @@ class ModBlockStateProvider(
     private fun spectreEnergyInjector() {
         val block = ModBlocks.SPECTRE_ENERGY_INJECTOR.get()
 
-        val model = models()
-            .withExistingParent(name(block), "block/block")
+        val caseModel = models()
+            .withExistingParent(name(block) + "_case", "block/tinted_glass")
             .renderType(RenderType.translucent().name)
+
+        val pedestalModel = models()
+            .withExistingParent(name(block) + "_pedestal", "block/block")
+            .texture("all", mcLoc("block/obsidian"))
+            .element()
+            .from(1f, 0.1f, 1f)
+            .to(15f, 2f, 15f)
+            .textureAll("#all")
+            .end()
+
+        // Makes the blockstate, still need to make the item model
+        getMultipartBuilder(block)
+            .part()
+            .modelFile(caseModel)
+            .addModel()
+            .end()
+            .part()
+            .modelFile(pedestalModel)
+            .addModel()
+            .end()
+
+        val itemModel = models()
+            .withExistingParent(name(block), mcLoc("block/block"))
             .texture("case", mcLoc("block/tinted_glass"))
-            .texture("base", mcLoc("block/obsidian"))
-            .texture("particle", mcLoc("block/tinted_glass"))
+            .texture("pedestal", mcLoc("block/obsidian"))
+            .renderType(RenderType.translucent().name)
 
             .element()
             .from(0f, 0f, 0f)
@@ -76,10 +99,10 @@ class ModBlockStateProvider(
             .element()
             .from(1f, 0.1f, 1f)
             .to(15f, 2f, 15f)
-            .textureAll("#base")
+            .textureAll("#pedestal")
             .end()
 
-        simpleBlockWithItem(block, model)
+        simpleBlockItem(block, itemModel)
     }
 
     private fun diaphanousBlock() {
