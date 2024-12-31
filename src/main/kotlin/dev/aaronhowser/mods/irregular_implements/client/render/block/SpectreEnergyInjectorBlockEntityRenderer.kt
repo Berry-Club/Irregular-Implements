@@ -8,11 +8,9 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.util.FastColor
-import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import org.joml.Quaternionf
 import org.joml.Vector3f
-import kotlin.math.min
 import kotlin.math.sqrt
 
 class SpectreEnergyInjectorBlockEntityRenderer(
@@ -32,7 +30,7 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val time = ((blockEntity.level?.gameTime ?: 0) % 200 + partialTick) / 200f
+        val time = ((blockEntity.level?.gameTime ?: 0) + partialTick) / 200f
 
         poseStack.pushPose()
         poseStack.translate(0.5f, 0.6f, 0.5f)
@@ -47,10 +45,7 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         poseStack.pushPose()
 
         // 1 is fully transparent, 0 is fully opaque
-        val transparency = min(
-            if (time > 0.8f) (time - 0.8f) / 2 else 0f,
-            1f
-        )
+        val transparency = 0.2f
 
         val packedColor = FastColor.ARGB32.colorFromFloat(1.0f - transparency, 1.0f, 1.0f, 1.0f)
 
@@ -61,11 +56,9 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         val vector3f3 = Vector3f()
         val quaternionf = Quaternionf()
 
-        val amountRays = Mth.floor(
-            (time + time * time) / 2f * 60f
-        )
+        val amountRays = 15
 
-        for (l in 0 until amountRays) {
+        for (rayIndex in 0 until amountRays) {
             quaternionf
                 .rotateXYZ(
                     randomSource.nextFloat() * (Math.PI * 2).toFloat(),
@@ -80,24 +73,26 @@ class SpectreEnergyInjectorBlockEntityRenderer(
 
             poseStack.mulPose(quaternionf)
 
-            val f1 = randomSource.nextFloat() * 20.0f + 5.0f + transparency * 10.0f
-            val f2 = randomSource.nextFloat() * 2.0f + 1.0f + transparency * 2.0f
+            val rayLength = 0.325f
+            val rayWidth = 0.15f
 
-            vector3f1.set(-HALF_SQRT_3 * f2, f1, -0.5F * f2)
-            vector3f2.set(HALF_SQRT_3 * f2, f1, -0.5F * f2)
-            vector3f3.set(0.0F, f1, f2)
+            vector3f1.set(-HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
+            vector3f2.set(HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
+            vector3f3.set(0.0F, rayLength, rayWidth)
 
             val pose = poseStack.last()
 
             vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
-            vertexConsumer.addVertex(pose, vector3f1).setColor(16711935)
-            vertexConsumer.addVertex(pose, vector3f2).setColor(16711935)
+            vertexConsumer.addVertex(pose, vector3f1).setColor(0xFF00FF)
+            vertexConsumer.addVertex(pose, vector3f2).setColor(0xFF00FF)
+
             vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
-            vertexConsumer.addVertex(pose, vector3f2).setColor(16711935)
-            vertexConsumer.addVertex(pose, vector3f3).setColor(16711935)
+            vertexConsumer.addVertex(pose, vector3f2).setColor(0xFF00FF)
+            vertexConsumer.addVertex(pose, vector3f3).setColor(0xFF00FF)
+
             vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
-            vertexConsumer.addVertex(pose, vector3f3).setColor(16711935)
-            vertexConsumer.addVertex(pose, vector3f1).setColor(16711935)
+            vertexConsumer.addVertex(pose, vector3f3).setColor(0xFF00FF)
+            vertexConsumer.addVertex(pose, vector3f1).setColor(0xFF00FF)
         }
 
         poseStack.popPose()
