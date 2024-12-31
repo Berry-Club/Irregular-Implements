@@ -32,10 +32,15 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val time = (blockEntity.level?.gameTime ?: 0) + partialTick
+        val time = 10 + partialTick
+
+        poseStack.pushPose()
+        poseStack.translate(0.5f, 0.6f, 0.5f)
 
         renderRays(poseStack, time, bufferSource.getBuffer(RenderType.dragonRays()))
         renderRays(poseStack, time, bufferSource.getBuffer(RenderType.dragonRaysDepth()))
+
+        poseStack.popPose()
     }
 
     fun renderRays(poseStack: PoseStack, time: Float, vertexConsumer: VertexConsumer) {
