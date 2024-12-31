@@ -47,7 +47,7 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         // 1 is fully transparent, 0 is fully opaque
         val transparency = 0.2f
 
-        val packedColor = FastColor.ARGB32.colorFromFloat(1.0f - transparency, 1.0f, 1.0f, 1.0f)
+        val packedColor = FastColor.ARGB32.colorFromFloat(1.0f - transparency, 0.5f, 0.5f, 0.5f)
 
         val randomSource = RandomSource.create(432L)
         val vector3f = Vector3f()
@@ -81,18 +81,19 @@ class SpectreEnergyInjectorBlockEntityRenderer(
             vector3f3.set(0.0F, rayLength, rayWidth)
 
             val pose = poseStack.last()
+            val color = 0x002244
 
             vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
-            vertexConsumer.addVertex(pose, vector3f1).setColor(0xFF00FF)
-            vertexConsumer.addVertex(pose, vector3f2).setColor(0xFF00FF)
+            vertexConsumer.addVertex(pose, vector3f1).setColor(color)
+            vertexConsumer.addVertex(pose, vector3f2).setColor(color)
 
             vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
-            vertexConsumer.addVertex(pose, vector3f2).setColor(0xFF00FF)
-            vertexConsumer.addVertex(pose, vector3f3).setColor(0xFF00FF)
+            vertexConsumer.addVertex(pose, vector3f2).setColor(color)
+            vertexConsumer.addVertex(pose, vector3f3).setColor(color)
 
             vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
-            vertexConsumer.addVertex(pose, vector3f3).setColor(0xFF00FF)
-            vertexConsumer.addVertex(pose, vector3f1).setColor(0xFF00FF)
+            vertexConsumer.addVertex(pose, vector3f3).setColor(color)
+            vertexConsumer.addVertex(pose, vector3f1).setColor(color)
         }
 
         poseStack.popPose()
