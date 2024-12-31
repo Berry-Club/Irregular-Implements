@@ -23,10 +23,10 @@ class SpectreEnergyInjectorBlockEntityRenderer(
 
         val buffer = bufferSource.getBuffer(RenderType.endPortal())
 
-        buffer.addVertex(poseStack.last(), 0f, 0.25f, 0f)
-        buffer.addVertex(poseStack.last(), 0f, 0.25f, 0f)
-        buffer.addVertex(poseStack.last(), 1f, 0.25f, 1f)
-        buffer.addVertex(poseStack.last(), 1f, 0.25f, 0f)
+        buffer.addVertex(poseStack.last(), 0f, 0f, 0f)
+        buffer.addVertex(poseStack.last(), 0f, 0f, 0f)
+        buffer.addVertex(poseStack.last(), 1f, 0f, 1f)
+        buffer.addVertex(poseStack.last(), 1f, 1f, 0f)
 
         poseStack.popPose()
     }
