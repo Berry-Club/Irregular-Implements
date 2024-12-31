@@ -22,10 +22,6 @@ class SpectreEnergyInjectorBlock : Block(
         return Shapes.empty()
     }
 
-    override fun getRenderShape(state: BlockState): RenderShape {
-        return RenderShape.ENTITYBLOCK_ANIMATED
-    }
-
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return SpectreEnergyInjectorBlockEntity(pos, state)
     }

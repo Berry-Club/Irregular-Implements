@@ -54,6 +54,32 @@ class ModBlockStateProvider(
         onlineDetector()
         spectreLens()
         diaphanousBlock()
+        spectreEnergyInjector()
+    }
+
+    private fun spectreEnergyInjector() {
+        val block = ModBlocks.SPECTRE_ENERGY_INJECTOR.get()
+
+        val model = models()
+            .withExistingParent(name(block), "block/block")
+            .renderType(RenderType.translucent().name)
+            .texture("case", mcLoc("block/tinted_glass"))
+            .texture("base", mcLoc("block/obsidian"))
+            .texture("particle", mcLoc("block/tinted_glass"))
+
+            .element()
+            .from(0f, 0f, 0f)
+            .to(16f, 16f, 16f)
+            .textureAll("#case")
+            .end()
+
+            .element()
+            .from(1f, 0.1f, 1f)
+            .to(15f, 2f, 15f)
+            .textureAll("#base")
+            .end()
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun diaphanousBlock() {

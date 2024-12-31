@@ -1,0 +1,75 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#case"
+        },
+        "east": {
+          "texture": "#case"
+        },
+        "north": {
+          "texture": "#case"
+        },
+        "south": {
+          "texture": "#case"
+        },
+        "up": {
+          "texture": "#case"
+        },
+        "west": {
+          "texture": "#case"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#base"
+        },
+        "east": {
+          "texture": "#base"
+        },
+        "north": {
+          "texture": "#base"
+        },
+        "south": {
+          "texture": "#base"
+        },
+        "up": {
+          "texture": "#base"
+        },
+        "west": {
+          "texture": "#base"
+        }
+      },
+      "from": [
+        1,
+        0.1,
+        1
+      ],
+      "to": [
+        15,
+        2,
+        15
+      ]
+    }
+  ],
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "base": "minecraft:block/obsidian",
+    "case": "minecraft:block/tinted_glass",
+    "particle": "minecraft:block/tinted_glass"
+  }
+}
