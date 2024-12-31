@@ -46,12 +46,13 @@ class SpectreEnergyInjectorBlockEntityRenderer(
     fun renderRays(poseStack: PoseStack, time: Float, vertexConsumer: VertexConsumer) {
         poseStack.pushPose()
 
-        val f = min(
+        // 1 is fully transparent, 0 is fully opaque
+        val transparency = min(
             if (time > 0.8f) (time - 0.8f) / 2 else 0f,
             1f
         )
 
-        val i = FastColor.ARGB32.colorFromFloat(1.0f - f, 1.0f, 1.0f, 1.0f)
+        val packedColor = FastColor.ARGB32.colorFromFloat(1.0f - transparency, 1.0f, 1.0f, 1.0f)
 
         val randomSource = RandomSource.create(432L)
         val vector3f = Vector3f()
@@ -79,8 +80,8 @@ class SpectreEnergyInjectorBlockEntityRenderer(
 
             poseStack.mulPose(quaternionf)
 
-            val f1 = randomSource.nextFloat() * 20.0f + 5.0f + f * 10.0f
-            val f2 = randomSource.nextFloat() * 2.0f + 1.0f + f * 2.0f
+            val f1 = randomSource.nextFloat() * 20.0f + 5.0f + transparency * 10.0f
+            val f2 = randomSource.nextFloat() * 2.0f + 1.0f + transparency * 2.0f
 
             vector3f1.set(-HALF_SQRT_3 * f2, f1, -0.5F * f2)
             vector3f2.set(HALF_SQRT_3 * f2, f1, -0.5F * f2)
@@ -88,13 +89,13 @@ class SpectreEnergyInjectorBlockEntityRenderer(
 
             val pose = poseStack.last()
 
-            vertexConsumer.addVertex(pose, vector3f).setColor(i)
+            vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
             vertexConsumer.addVertex(pose, vector3f1).setColor(16711935)
             vertexConsumer.addVertex(pose, vector3f2).setColor(16711935)
-            vertexConsumer.addVertex(pose, vector3f).setColor(i)
+            vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
             vertexConsumer.addVertex(pose, vector3f2).setColor(16711935)
             vertexConsumer.addVertex(pose, vector3f3).setColor(16711935)
-            vertexConsumer.addVertex(pose, vector3f).setColor(i)
+            vertexConsumer.addVertex(pose, vector3f).setColor(packedColor)
             vertexConsumer.addVertex(pose, vector3f3).setColor(16711935)
             vertexConsumer.addVertex(pose, vector3f1).setColor(16711935)
         }
