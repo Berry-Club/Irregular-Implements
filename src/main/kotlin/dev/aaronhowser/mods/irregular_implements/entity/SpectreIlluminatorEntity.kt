@@ -13,10 +13,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.level.BlockAndTintGetter
-import net.minecraft.world.level.ChunkPos
-import net.minecraft.world.level.CommonLevelAccessor
-import net.minecraft.world.level.Level
+import net.minecraft.world.level.*
 import net.minecraft.world.phys.Vec3
 
 class SpectreIlluminatorEntity(
@@ -45,8 +42,11 @@ class SpectreIlluminatorEntity(
         }
 
         private fun updateLightingAt(level: Level, chunkPos: ChunkPos) {
-            for (section in level.getChunk(chunkPos.x, chunkPos.z).sections) {
-                section.getBlockState(0, 0, 0).updateNeighbourShapes(level, BlockPos.ZERO, 3)
+            for (dX in 0..15) for (dZ in 0..15) for (dY in level.minBuildHeight..level.maxBuildHeight) {
+                val blockPos = chunkPos.getBlockAt(dX, dY, dZ)
+
+                level.getBrightness(LightLayer.BLOCK, blockPos)
+                level.getBrightness(LightLayer.SKY, blockPos)
             }
         }
     }
