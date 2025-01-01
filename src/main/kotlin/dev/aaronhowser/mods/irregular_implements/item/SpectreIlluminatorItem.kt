@@ -14,12 +14,18 @@ class SpectreIlluminatorItem : Item(Properties()) {
         val level = context.level
         val clickedPos = context.clickedPos
 
+        val player = context.player
+
         if (IlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
-            context.player?.sendSystemMessage(
-                ModLanguageProvider.Messages.ILLUMINATOR_ALREADY_PRESENT
-                    .toComponent()
-                    .withStyle(ChatFormatting.RED)
-            )
+
+            if (!level.isClientSide) {
+                player?.sendSystemMessage(
+                    ModLanguageProvider.Messages.ILLUMINATOR_ALREADY_PRESENT
+                        .toComponent()
+                        .withStyle(ChatFormatting.RED)
+                )
+            }
+
             return InteractionResult.FAIL
         }
 
@@ -32,7 +38,7 @@ class SpectreIlluminatorItem : Item(Properties()) {
 
         level.addFreshEntity(entity)
 
-        context.itemInHand.consume(1, context.player)
+        context.itemInHand.consume(1, player)
 
         return InteractionResult.SUCCESS
     }

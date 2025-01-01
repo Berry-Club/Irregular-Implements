@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
@@ -28,8 +31,20 @@ class BlackoutPowderItem : Item(Properties()) {
 
         if (illuminators.isEmpty()) return InteractionResult.FAIL
 
+        val player = context.player
+
         for (illuminator in illuminators) {
+
             illuminator.discard()
+
+            if (!player?.hasInfiniteMaterials().isTrue) {
+                OtherUtil.dropStackAt(
+                    ModItems.SPECTRE_ILLUMINATOR.toStack(),
+                    illuminator.level(),
+                    clickedPos.relative(context.clickedFace).center
+                )
+            }
+
         }
 
         context.itemInHand.consume(1, context.player)

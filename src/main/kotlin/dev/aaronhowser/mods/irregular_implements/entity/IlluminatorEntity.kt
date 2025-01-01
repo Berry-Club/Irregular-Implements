@@ -8,8 +8,11 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
@@ -42,7 +45,22 @@ class IlluminatorEntity(
 
     //TODO:
     // - Slowly move to the center of the chunk floating to like a couple blocks above the surface
-    // - Punch it to break
+
+    override fun isPickable(): Boolean {
+        return true
+    }
+
+    override fun interact(player: Player, hand: InteractionHand): InteractionResult {
+        if (player.level().isClientSide) return InteractionResult.PASS
+
+        if (player.hasInfiniteMaterials()) {
+            this.discard()
+        } else {
+            this.kill()
+        }
+
+        return InteractionResult.SUCCESS
+    }
 
     override fun onAddedToLevel() {
         super.onAddedToLevel()
@@ -58,7 +76,9 @@ class IlluminatorEntity(
         val chunkPos = ChunkPos(this.blockPosition())
         illuminatedChunks[level()].remove(chunkPos.toLong())
 
-        OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
+        if (removalReason == RemovalReason.KILLED) {
+            OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
+        }
     }
 
     constructor(level: Level) : this(ModEntityTypes.ILLUMINATOR.get(), level)

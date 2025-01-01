@@ -31,8 +31,6 @@ object ModItems {
     val ENDER_LETTER = basic("ender_letter")
     val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val GOLDEN_EGG = basic("golden_egg")
-    val BLACKOUT_POWDER: DeferredItem<BlackoutPowderItem> =
-        register("blackout_powder") { BlackoutPowderItem() }
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
         register("emerald_compass") { EmeraldCompassItem() }
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
@@ -131,7 +129,10 @@ object ModItems {
         register("imbue_spectre") { ImbueItem(ModEffects.SPECTRE_IMBUE) }
 
     // Spectre
-    val SPECTRE_ILLUMINATOR = register("spectre_illuminator") { SpectreIlluminatorItem() }
+    val SPECTRE_ILLUMINATOR: DeferredItem<SpectreIlluminatorItem> =
+        register("spectre_illuminator") { SpectreIlluminatorItem() }
+    val BLACKOUT_POWDER: DeferredItem<BlackoutPowderItem> =
+        register("blackout_powder") { BlackoutPowderItem() }
     val SPECTRE_KEY = basic("spectre_key")
     val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
         register("spectre_anchor") { SpectreAnchorItem() }
