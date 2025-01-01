@@ -41,7 +41,6 @@ class IlluminatorEntity(
     }
 
     //TODO:
-    // - Fancy rendering
     // - Slowly move to the center of the chunk floating to like a couple blocks above the surface
     // - Punch it to break
 
