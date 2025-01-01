@@ -27,6 +27,7 @@ class SpectreIlluminatorEntity(
     companion object {
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
+        //FIXME: Only works after a block update in the chunk, and resets after relog
         @JvmStatic
         fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
             val level: Level = when (blockAndTintGetter) {
@@ -41,6 +42,12 @@ class SpectreIlluminatorEntity(
             val chunkPos = ChunkPos(blockPos)
 
             return illuminatedChunks[level].contains(chunkPos.toLong())
+        }
+
+        private fun updateLightingAt(level: Level, chunkPos: ChunkPos) {
+            for (section in level.getChunk(chunkPos.x, chunkPos.z).sections) {
+                section.getBlockState(0, 0, 0).updateNeighbourShapes(level, BlockPos.ZERO, 3)
+            }
         }
     }
 
@@ -66,6 +73,8 @@ class SpectreIlluminatorEntity(
         val chunkPos = ChunkPos(this.blockPosition())
 
         illuminatedChunks[level()].add(chunkPos.toLong())
+
+        updateLightingAt(level(), chunkPos)
     }
 
     override fun remove(reason: RemovalReason) {
@@ -73,6 +82,8 @@ class SpectreIlluminatorEntity(
 
         val chunkPos = ChunkPos(this.blockPosition())
         illuminatedChunks[level()].remove(chunkPos.toLong())
+
+        updateLightingAt(level(), chunkPos)
 
         if (removalReason == RemovalReason.KILLED) {
             OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
