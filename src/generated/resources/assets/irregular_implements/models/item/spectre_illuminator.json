@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/spectre_illuminator"
-  }
+  "parent": "minecraft:builtin/entity"
 }

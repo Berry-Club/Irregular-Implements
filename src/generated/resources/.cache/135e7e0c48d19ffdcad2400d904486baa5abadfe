@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-26T23:32:56.2547883	Item Models: irregular_implements
+// 1.21.1	2024-12-31T22:20:46.9726938	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -116,7 +116,7 @@ e4941ae6f65a39290b17ebff3228ced7c55c9869 assets/irregular_implements/models/item
 565ffbd738bc1d968556a85d97d54774745686c1 assets/irregular_implements/models/item/spectre_boots.json
 d93399e529ee2cc9229f255cc161f5b70bac9c7e assets/irregular_implements/models/item/spectre_chestplate.json
 8882b0eb33e5c0f8142c3c2aa9dd9dfd82f63abe assets/irregular_implements/models/item/spectre_helmet.json
-3f31bf6b81a029dcd12176ae887aa0bdb81b12ec assets/irregular_implements/models/item/spectre_illuminator.json
+e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/irregular_implements/models/item/spectre_illuminator.json
 dbf4717b3802ce4ea66912dcb57f1174dc275073 assets/irregular_implements/models/item/spectre_ingot.json
 16522694cd6381ab4f4da7fe51b82ad1e5037413 assets/irregular_implements/models/item/spectre_key.json
 ccbd52e0d4d14071252120b023a2dd55e1d2eb1a assets/irregular_implements/models/item/spectre_leggings.json

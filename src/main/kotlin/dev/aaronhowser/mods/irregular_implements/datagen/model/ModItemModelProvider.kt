@@ -36,7 +36,8 @@ class ModItemModelProvider(
 
     private fun blockEntityWithoutLevelRenderers() {
         val blockEntityWithoutLevelRenderers = listOf(
-            ModItems.DIAPHANOUS_BLOCK
+            ModItems.DIAPHANOUS_BLOCK,
+            ModItems.SPECTRE_ILLUMINATOR
         ).map { it.get() }
 
         for (item in blockEntityWithoutLevelRenderers) {
@@ -44,6 +45,8 @@ class ModItemModelProvider(
 
             getBuilder(name.toString())
                 .parent(ModelFile.UncheckedModelFile("builtin/entity"))
+
+            handledItems.add(item)
         }
     }
 
@@ -61,6 +64,9 @@ class ModItemModelProvider(
             .parent(ModelFile.UncheckedModelFile("item/generated"))
             .texture("layer0", "item/reinforced_ender_bucket/base")
             .texture("layer1", "item/reinforced_ender_bucket/fluid")
+
+        handledItems.add(enderBucket)
+        handledItems.add(reinforcedEnderBucket)
     }
 
     private fun diviningRod() {
@@ -70,6 +76,8 @@ class ModItemModelProvider(
             .parent(ModelFile.UncheckedModelFile("item/handheld"))
             .texture("layer0", "item/divining_rod")
             .texture("layer1", "item/divining_rod_overlay")
+
+        handledItems.add(item)
     }
 
     private fun redstoneActivator() {
@@ -96,6 +104,8 @@ class ModItemModelProvider(
             .predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.LONG.toFloat())
             .model(rightModel)
             .end()
+
+        handledItems.add(item)
     }
 
     private fun emeraldCompass() {
@@ -118,6 +128,7 @@ class ModItemModelProvider(
                 .end()
         }
 
+        handledItems.add(item)
     }
 
     private fun basicItems() {

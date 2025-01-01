@@ -9,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEner
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.IlluminatorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -190,6 +191,11 @@ object ClientModBusEvents {
         event.registerItem(
             DiaphanousBEWLR.clientItemExtensions,
             ModItems.DIAPHANOUS_BLOCK.get()
+        )
+
+        event.registerItem(
+            SpectreIlluminatorBEWLR.clientItemExtensions,
+            ModItems.SPECTRE_ILLUMINATOR.get()
         )
     }
 
