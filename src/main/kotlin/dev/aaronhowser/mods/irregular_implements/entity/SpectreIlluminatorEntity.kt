@@ -41,12 +41,13 @@ class SpectreIlluminatorEntity(
             return illuminatedChunks[level].contains(chunkPos.toLong())
         }
 
-        private fun updateLightingAt(level: Level, chunkPos: ChunkPos) {
+        private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
             for (dX in 0..15) for (dZ in 0..15) for (dY in level.minBuildHeight..level.maxBuildHeight) {
                 val blockPos = chunkPos.getBlockAt(dX, dY, dZ)
 
                 level.getBrightness(LightLayer.BLOCK, blockPos)
                 level.getBrightness(LightLayer.SKY, blockPos)
+                level.getRawBrightness(blockPos, 0)
             }
         }
     }
@@ -74,7 +75,7 @@ class SpectreIlluminatorEntity(
 
         illuminatedChunks[level()].add(chunkPos.toLong())
 
-        updateLightingAt(level(), chunkPos)
+        forceLightUpdates(level(), chunkPos)
     }
 
     override fun remove(reason: RemovalReason) {
@@ -83,7 +84,7 @@ class SpectreIlluminatorEntity(
         val chunkPos = ChunkPos(this.blockPosition())
         illuminatedChunks[level()].remove(chunkPos.toLong())
 
-        updateLightingAt(level(), chunkPos)
+        forceLightUpdates(level(), chunkPos)
 
         if (removalReason == RemovalReason.KILLED) {
             OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
