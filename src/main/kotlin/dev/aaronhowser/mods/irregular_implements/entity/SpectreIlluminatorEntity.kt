@@ -13,7 +13,11 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.level.*
+import net.minecraft.world.level.BlockAndTintGetter
+import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.CommonLevelAccessor
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.Vec3
 
 class SpectreIlluminatorEntity(
@@ -41,13 +45,17 @@ class SpectreIlluminatorEntity(
             return illuminatedChunks[level].contains(chunkPos.toLong())
         }
 
+        //FIXME: This works but is absolutely godawful
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
-            for (dX in 0..15) for (dZ in 0..15) for (dY in level.minBuildHeight..level.maxBuildHeight) {
-                val blockPos = chunkPos.getBlockAt(dX, dY, dZ)
+            for (y in level.minBuildHeight..level.maxBuildHeight) {
+                val blockPos = BlockPos(chunkPos.minBlockX, y, chunkPos.minBlockZ)
 
-                level.getBrightness(LightLayer.BLOCK, blockPos)
-                level.getBrightness(LightLayer.SKY, blockPos)
-                level.getRawBrightness(blockPos, 0)
+                if (level.getBlockEntity(blockPos) != null) continue
+
+                val state = level.getBlockState(blockPos)
+
+                level.setBlockAndUpdate(blockPos, Blocks.STONE.defaultBlockState())
+                level.setBlockAndUpdate(blockPos, state)
             }
         }
     }
@@ -57,7 +65,6 @@ class SpectreIlluminatorEntity(
     }
 
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
-        if (player.level().isClientSide) return InteractionResult.PASS
 
         if (player.hasInfiniteMaterials()) {
             this.discard()
