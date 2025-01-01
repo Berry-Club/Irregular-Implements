@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
+import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import net.minecraft.ChatFormatting
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
@@ -16,7 +16,7 @@ class SpectreIlluminatorItem : Item(Properties()) {
 
         val player = context.player
 
-        if (IlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
+        if (SpectreIlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
 
             if (!level.isClientSide) {
                 player?.sendSystemMessage(
@@ -33,7 +33,7 @@ class SpectreIlluminatorItem : Item(Properties()) {
 
         val spawnPos = clickedPos.relative(clickedFace).center
 
-        val entity = IlluminatorEntity(level)
+        val entity = SpectreIlluminatorEntity(level)
         entity.setPos(spawnPos.x, spawnPos.y, spawnPos.z)
 
         level.addFreshEntity(entity)

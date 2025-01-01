@@ -17,8 +17,9 @@ import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 
-class IlluminatorEntity(
+class SpectreIlluminatorEntity(
     entityType: EntityType<*>,
     level: Level
 ) : Entity(entityType, level) {
@@ -42,9 +43,6 @@ class IlluminatorEntity(
             return illuminatedChunks[level].contains(chunkPos.toLong())
         }
     }
-
-    //TODO:
-    // - Slowly move to the center of the chunk floating to like a couple blocks above the surface
 
     override fun isPickable(): Boolean {
         return true
@@ -81,7 +79,51 @@ class IlluminatorEntity(
         }
     }
 
-    constructor(level: Level) : this(ModEntityTypes.ILLUMINATOR.get(), level)
+    val destination: Vec3 by lazy {
+        val chunkPos = ChunkPos(this.blockPosition())
+
+        var highestBlock = level().minBuildHeight
+
+        yScan@
+        for (dY in level().minBuildHeight..level().maxBuildHeight) {
+
+            for (dX in 0..15) {
+                for (dZ in 0..15) {
+                    val blockPos = chunkPos.getBlockAt(dX, dY, dZ)
+                    val state = level().getBlockState(blockPos)
+
+                    if (!state.isAir) {
+                        highestBlock = dY
+                        continue@yScan
+                    }
+                }
+            }
+        }
+
+        Vec3(
+            chunkPos.middleBlockX.toDouble(),
+            highestBlock.toDouble() + 5,
+            chunkPos.middleBlockZ.toDouble()
+        )
+    }
+
+    override fun tick() {
+        super.tick()
+
+        if (this.position() == destination) return
+
+        val distance = this.position().distanceTo(destination)
+        if (distance < 0.1) {
+            this.setPos(destination)
+            return
+        }
+
+        val newPos = this.position().lerp(destination, 0.001)
+
+        this.setPos(newPos)
+    }
+
+    constructor(level: Level) : this(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), level)
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
     }

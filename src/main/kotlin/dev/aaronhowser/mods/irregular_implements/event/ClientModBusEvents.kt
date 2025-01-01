@@ -7,7 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRende
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.entity.IlluminatorEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.entity.SpectreIlluminatorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -144,7 +144,7 @@ object ClientModBusEvents {
     @SubscribeEvent
     fun onClientSetup(event: FMLClientSetupEvent) {
         EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
-        EntityRenderers.register(ModEntityTypes.ILLUMINATOR.get(), ::IlluminatorEntityRenderer)
+        EntityRenderers.register(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), ::SpectreIlluminatorEntityRenderer)
     }
 
     @SubscribeEvent

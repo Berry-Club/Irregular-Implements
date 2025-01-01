@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.entity.IlluminatorEntity
+import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -27,7 +27,7 @@ class BlackoutPowderItem : Item(Properties()) {
 
         val aabb = AABB(minX.toDouble(), minY.toDouble(), minZ.toDouble(), maxX.toDouble(), maxY.toDouble(), maxZ.toDouble())
 
-        val illuminators = level.getEntitiesOfClass(IlluminatorEntity::class.java, aabb)
+        val illuminators = level.getEntitiesOfClass(SpectreIlluminatorEntity::class.java, aabb)
 
         if (illuminators.isEmpty()) return InteractionResult.FAIL
 
