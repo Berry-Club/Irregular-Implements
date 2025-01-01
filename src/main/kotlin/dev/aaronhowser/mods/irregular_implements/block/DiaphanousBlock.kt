@@ -57,7 +57,7 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
             if (blockEntity != null && player != null) {
                 if (blockEntity.isInverted) return Shapes.block()
 
-                return if (player.isHolding { it.item is BlockItem && (it.item as BlockItem).block == ModBlocks.DIAPHANOUS_BLOCK.get() }) {
+                return if (player.isSecondaryUseActive || player.isHolding { it.item is BlockItem && (it.item as BlockItem).block == ModBlocks.DIAPHANOUS_BLOCK.get() }) {
                     Shapes.block()
                 } else {
                     Shapes.empty()

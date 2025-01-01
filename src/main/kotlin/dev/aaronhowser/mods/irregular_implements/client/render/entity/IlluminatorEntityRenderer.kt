@@ -33,7 +33,7 @@ class IlluminatorEntityRenderer(
         bufferSource: MultiBufferSource,
         packedLight: Int
     ) {
-        val time = (illuminatorEntity.tickCount + partialTick) / 400.0f
+        val time = (illuminatorEntity.tickCount + partialTick) / 400.0f //FIXME: For some reason this resets every 20 seconds
 
         val centerColor = 0xFF111111.toInt()
         val outerColor = 0x002C6A70
