@@ -23,24 +23,11 @@ class SpectreEnergyInjectorBlockEntityRenderer(
             poseStack: PoseStack,
             time: Float,
             vertexConsumer: VertexConsumer,
-        ) {
-            renderRays(
-                poseStack = poseStack,
-                time = time,
-                vertexConsumer = vertexConsumer,
-                centerColor = 0xFF000000.toInt(),
-                outerColor = 0x002C6A70,
-                amountRays = 15
-            )
-        }
-
-        fun renderRays(
-            poseStack: PoseStack,
-            time: Float,
-            vertexConsumer: VertexConsumer,
-            centerColor: Int,
-            outerColor: Int,
-            amountRays: Int
+            centerColor: Int = 0xFF000000.toInt(),
+            outerColor: Int = 0x002C6A70,
+            amountRays: Int = 15,
+            rayLength: Float = 0.325f,
+            rayWidth: Float = 0.15f
         ) {
             poseStack.pushPose()
 
@@ -65,9 +52,6 @@ class SpectreEnergyInjectorBlockEntityRenderer(
                     )
 
                 poseStack.mulPose(quaternionf)
-
-                val rayLength = 0.325f
-                val rayWidth = 0.15f
 
                 vec1.set(-HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
                 vec2.set(HALF_SQRT_3 * rayWidth, rayLength, -0.5F * rayWidth)
