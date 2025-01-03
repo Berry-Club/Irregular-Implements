@@ -104,18 +104,19 @@ class SpectreIlluminatorEntity(
         }
     }
 
-    val destination: Vec3 by lazy {
+    private val destination: Vec3 by lazy {
         val chunkPos = ChunkPos(this.blockPosition())
         val chunk = level.getChunk(chunkPos.x, chunkPos.z)
 
         var highestBlock = level().minBuildHeight
-
         for (dX in 0..15) for (dZ in 0..15) {
             val height = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, dX, dZ)
 
             if (height > highestBlock) {
                 highestBlock = height
             }
+
+            if (highestBlock >= level().maxBuildHeight) break
         }
 
         Vec3(
