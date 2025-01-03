@@ -17,7 +17,6 @@ import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.chunk.LevelChunkSection
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.phys.Vec3
 
@@ -51,18 +50,20 @@ class SpectreIlluminatorEntity(
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
             if (!level.isLoaded(chunkPos.worldPosition)) return
 
-            val chunk = level.getChunk(chunkPos.x, chunkPos.z)
+            val minX = chunkPos.minBlockX
+            val maxX = chunkPos.maxBlockX
+            val minZ = chunkPos.minBlockZ
+            val maxZ = chunkPos.maxBlockZ
+            val minY = level.minBuildHeight
+            val maxY = level.maxBuildHeight
 
-            for (sectionIndex in 0..chunk.sectionsCount) {
-                val minY = level.minBuildHeight + sectionIndex * LevelChunkSection.SECTION_SIZE
-                val minX = chunkPos.minBlockX
-                val minZ = chunkPos.minBlockZ
+            for (x in minX..maxX) for (z in minZ..maxZ) for (y in minY..maxY) {
+                val pos = BlockPos(x, y, z)
 
-                val blockPos = BlockPos(minX, minY, minZ)
-
-                level.lightEngine.updateSectionStatus(blockPos, false)
+                level.chunkSource.lightEngine.checkBlock(pos)
             }
         }
+
     }
 
     override fun isPickable(): Boolean {
