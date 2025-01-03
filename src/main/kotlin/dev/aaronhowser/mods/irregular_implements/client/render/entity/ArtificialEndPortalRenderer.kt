@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.resources.ResourceLocation
 import org.joml.Matrix4f
-import kotlin.math.min
 
 class ArtificialEndPortalRenderer(
     context: EntityRendererProvider.Context
@@ -25,15 +24,13 @@ class ArtificialEndPortalRenderer(
         bufferSource: MultiBufferSource,
         packedLight: Int
     ) {
-        val size = min(3.0, 3.0 / 115 * (portalEntity.actionTimer + partialTick - 85)).toFloat()
-
-        //FIXME: Make show up at size 0, for some reason it isn't showing until size like 1
-        if (size <= 0) return
+        val size = (3f / 115 * (portalEntity.actionTimer + partialTick - 85))
+            .coerceIn(0f, 3f)
 
         val radius = size / 2
 
-        val min = -radius - 0.5f
-        val max = radius + 0.5f
+        val min = -radius
+        val max = radius
 
         val pose = poseStack.last().pose()
         val consumer = bufferSource.getBuffer(RenderType.endPortal())

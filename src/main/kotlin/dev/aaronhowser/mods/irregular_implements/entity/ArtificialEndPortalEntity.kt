@@ -110,9 +110,9 @@ class ArtificialEndPortalEntity(
             }
         } else {
             if (this.tickCount % 40 == 0) {
-//                if (!isValidPosition(this.level(), this.blockPosition(), false)) {
-//                    this.kill()
-//                }
+                if (!isValidPosition(this.level(), this.blockPosition(), false)) {
+                    this.kill()
+                }
             }
         }
 
