@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
@@ -27,7 +28,7 @@ class SpectreIlluminatorEntity(
 ) : Entity(entityType, level) {
 
     companion object {
-        const val HEIGHT_ABOVE_MAX_BLOCK = 20
+        const val HEIGHT_ABOVE_MAX_BLOCK = 50
         const val MAX_VARIATION = 5.0
 
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
@@ -72,6 +73,10 @@ class SpectreIlluminatorEntity(
 
     override fun isPickable(): Boolean {
         return true
+    }
+
+    override fun getPickResult(): ItemStack? {
+        return ModItems.SPECTRE_ILLUMINATOR.toStack()
     }
 
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {

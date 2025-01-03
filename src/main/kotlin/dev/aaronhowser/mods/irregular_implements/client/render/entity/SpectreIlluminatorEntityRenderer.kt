@@ -17,10 +17,10 @@ class SpectreIlluminatorEntityRenderer(
     companion object {
         val TEXTURE = OtherUtil.modResource("no")
 
-        private const val TIME_TO_MAX_SIZE = 20 * 30
+        private const val TIME_TO_MAX_SIZE = 20 * 60
 
-        private const val LENGTH_START = 0.25f
-        private const val LENGTH_END = 1.5f
+        private const val LENGTH_START = 0.1f
+        private const val LENGTH_END = 2.25f
 
         private const val WIDTH_FACTOR = 0.35f
     }
@@ -33,12 +33,14 @@ class SpectreIlluminatorEntityRenderer(
         bufferSource: MultiBufferSource,
         packedLight: Int
     ) {
-        val time = (spectreIlluminatorEntity.tickCount + partialTick) / 400.0f //FIXME: For some reason this resets every 20 seconds
+        val time = (spectreIlluminatorEntity.tickCount + partialTick) / 400.0f
 
         val centerColor = 0xFF111111.toInt()
         val outerColor = 0x002C6A70
 
-        val rayLength = LENGTH_START + (LENGTH_END - LENGTH_START) * (spectreIlluminatorEntity.tickCount % TIME_TO_MAX_SIZE) / TIME_TO_MAX_SIZE
+        val percentGrown = (spectreIlluminatorEntity.tickCount + partialTick) / TIME_TO_MAX_SIZE.toFloat()
+
+        val rayLength = LENGTH_START + (LENGTH_END - LENGTH_START) * percentGrown
         val rayWidth = rayLength * WIDTH_FACTOR
 
         poseStack.pushPose()
