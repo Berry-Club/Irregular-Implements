@@ -7,6 +7,8 @@ import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -30,6 +32,11 @@ class SpectreIlluminatorEntity(
     companion object {
         const val HEIGHT_ABOVE_MAX_BLOCK = 50
         const val MAX_VARIATION = 5.0
+
+        const val TICKS_TO_MAX_SIZE = 20 * 60
+
+        val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(SpectreIlluminatorEntity::class.java, EntityDataSerializers.INT)
+        const val ACTION_TIMER_NBT = "ActionTimer"
 
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
@@ -119,6 +126,10 @@ class SpectreIlluminatorEntity(
     override fun tick() {
         super.tick()
 
+        if (this.actionTimer < TICKS_TO_MAX_SIZE) {
+            this.actionTimer++
+        }
+
         moveToDestination()
     }
 
@@ -164,12 +175,21 @@ class SpectreIlluminatorEntity(
 
     constructor(level: Level) : this(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), level)
 
+    var actionTimer: Int
+        get() = this.entityData.get(ACTION_TIMER)
+        private set(value) {
+            this.entityData.set(ACTION_TIMER, value)
+        }
+
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(ACTION_TIMER, 0)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
     }
 }

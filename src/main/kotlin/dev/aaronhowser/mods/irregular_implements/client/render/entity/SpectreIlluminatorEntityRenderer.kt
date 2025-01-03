@@ -17,8 +17,6 @@ class SpectreIlluminatorEntityRenderer(
     companion object {
         val TEXTURE = OtherUtil.modResource("no")
 
-        private const val TIME_TO_MAX_SIZE = 20 * 60
-
         private const val LENGTH_START = 0.1f
         private const val LENGTH_END = 2.25f
 
@@ -38,7 +36,7 @@ class SpectreIlluminatorEntityRenderer(
         val centerColor = 0xFF111111.toInt()
         val outerColor = 0x002C6A70
 
-        val percentGrown = (spectreIlluminatorEntity.tickCount + partialTick) / TIME_TO_MAX_SIZE.toFloat()
+        val percentGrown = (spectreIlluminatorEntity.actionTimer + partialTick) / SpectreIlluminatorEntity.TICKS_TO_MAX_SIZE
 
         val rayLength = LENGTH_START + (LENGTH_END - LENGTH_START) * percentGrown
         val rayWidth = rayLength * WIDTH_FACTOR
