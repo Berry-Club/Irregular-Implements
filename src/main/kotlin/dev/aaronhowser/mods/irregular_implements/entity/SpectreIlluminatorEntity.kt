@@ -155,7 +155,7 @@ class SpectreIlluminatorEntity(
 
         var highestBlock = level().minBuildHeight
         for (dX in 0..15) for (dZ in 0..15) {
-            val height = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, dX, dZ)
+            val height = chunk.getHeight(Heightmap.Types.WORLD_SURFACE, dX, dZ)
 
             if (height > highestBlock) {
                 highestBlock = height
