@@ -22,7 +22,7 @@ class BlackoutPowderItem : Item(Properties()) {
         val minY = level.minBuildHeight
         val minZ = chunkPos.minBlockZ
         val maxX = chunkPos.maxBlockX
-        val maxY = level.maxBuildHeight
+        val maxY = level.maxBuildHeight + SpectreIlluminatorEntity.HEIGHT_ABOVE_MAX_BLOCK * 3
         val maxZ = chunkPos.maxBlockZ
 
         val aabb = AABB(minX.toDouble(), minY.toDouble(), minZ.toDouble(), maxX.toDouble(), maxY.toDouble(), maxZ.toDouble())

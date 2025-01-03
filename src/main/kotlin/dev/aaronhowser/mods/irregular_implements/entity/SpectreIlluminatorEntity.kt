@@ -26,6 +26,8 @@ class SpectreIlluminatorEntity(
 ) : Entity(entityType, level) {
 
     companion object {
+        const val HEIGHT_ABOVE_MAX_BLOCK = 5
+
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
         //FIXME: Only works after a block update in the chunk, and resets after relog
@@ -121,7 +123,7 @@ class SpectreIlluminatorEntity(
 
         Vec3(
             chunkPos.middleBlockX.toDouble(),
-            highestBlock.toDouble() + 5,
+            highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK,
             chunkPos.middleBlockZ.toDouble()
         )
     }
