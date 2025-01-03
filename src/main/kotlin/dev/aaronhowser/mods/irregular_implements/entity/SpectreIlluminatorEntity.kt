@@ -18,6 +18,7 @@ import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.chunk.LevelChunkSection
+import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.phys.Vec3
 
 class SpectreIlluminatorEntity(
@@ -104,22 +105,15 @@ class SpectreIlluminatorEntity(
 
     val destination: Vec3 by lazy {
         val chunkPos = ChunkPos(this.blockPosition())
+        val chunk = level.getChunk(chunkPos.x, chunkPos.z)
 
         var highestBlock = level().minBuildHeight
 
-        yScan@
-        for (dY in level().minBuildHeight..level().maxBuildHeight) {
+        for (dX in 0..15) for (dZ in 0..15) {
+            val height = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, dX, dZ)
 
-            for (dX in 0..15) {
-                for (dZ in 0..15) {
-                    val blockPos = chunkPos.getBlockAt(dX, dY, dZ)
-                    val state = level().getBlockState(blockPos)
-
-                    if (!state.isAir) {
-                        highestBlock = dY
-                        continue@yScan
-                    }
-                }
+            if (height > highestBlock) {
+                highestBlock = height
             }
         }
 
