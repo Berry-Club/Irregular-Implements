@@ -28,6 +28,7 @@ class SpectreIlluminatorEntity(
 
     companion object {
         const val HEIGHT_ABOVE_MAX_BLOCK = 20
+        const val MAX_VARIATION = 5.0
 
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
@@ -48,6 +49,7 @@ class SpectreIlluminatorEntity(
         }
 
         //FIXME: For some reason it doesn't work super well in chunks that are mostly empty
+        //TODO: Study effect on lag, possibly only when the chunk loads the first time?
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
             if (!level.isLoaded(chunkPos.worldPosition)) return
 
@@ -148,9 +150,9 @@ class SpectreIlluminatorEntity(
 
         val random = Random(chunkPos.toLong())
 
-        val x = chunkPos.middleBlockX.toDouble() + random.nextDouble(-2.0, 2.0)
-        val y = highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK
-        val z = chunkPos.middleBlockZ.toDouble() + random.nextDouble(-2.0, 2.0)
+        val x = chunkPos.middleBlockX.toDouble() + random.nextDouble(-MAX_VARIATION, MAX_VARIATION)
+        val y = highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK + random.nextDouble(-MAX_VARIATION, 0.0)
+        val z = chunkPos.middleBlockZ.toDouble() + random.nextDouble(-MAX_VARIATION, MAX_VARIATION)
 
         destination = Vec3(x, y, z)
     }
