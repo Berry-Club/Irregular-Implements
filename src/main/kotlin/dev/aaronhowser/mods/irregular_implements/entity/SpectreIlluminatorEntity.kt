@@ -17,7 +17,7 @@ import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.chunk.LevelChunkSection
 import net.minecraft.world.phys.Vec3
 
 class SpectreIlluminatorEntity(
@@ -47,17 +47,19 @@ class SpectreIlluminatorEntity(
             return illuminatedChunks[level].contains(chunkPos.toLong())
         }
 
-        //FIXME: This works but is absolutely godawful
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
-            for (y in level.minBuildHeight..level.maxBuildHeight) {
-                val blockPos = BlockPos(chunkPos.minBlockX, y, chunkPos.minBlockZ)
+            if (!level.isLoaded(chunkPos.worldPosition)) return
 
-                if (level.getBlockEntity(blockPos) != null) continue
+            val chunk = level.getChunk(chunkPos.x, chunkPos.z)
 
-                val state = level.getBlockState(blockPos)
+            for (sectionIndex in 0..chunk.sectionsCount) {
+                val minY = level.minBuildHeight + sectionIndex * LevelChunkSection.SECTION_SIZE
+                val minX = chunkPos.minBlockX
+                val minZ = chunkPos.minBlockZ
 
-                level.setBlockAndUpdate(blockPos, Blocks.STONE.defaultBlockState())
-                level.setBlockAndUpdate(blockPos, state)
+                val blockPos = BlockPos(minX, minY, minZ)
+
+                level.lightEngine.updateSectionStatus(blockPos, false)
             }
         }
     }
