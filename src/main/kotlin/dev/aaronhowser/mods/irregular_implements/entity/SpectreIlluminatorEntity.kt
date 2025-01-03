@@ -19,6 +19,7 @@ import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.phys.Vec3
+import kotlin.random.Random
 
 class SpectreIlluminatorEntity(
     entityType: EntityType<*>,
@@ -30,7 +31,6 @@ class SpectreIlluminatorEntity(
 
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
-        //FIXME: Only works after a block update in the chunk, and resets after relog
         @JvmStatic
         fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
             val level: Level = when (blockAndTintGetter) {
@@ -47,6 +47,7 @@ class SpectreIlluminatorEntity(
             return illuminatedChunks[level].contains(chunkPos.toLong())
         }
 
+        //FIXME: For some reason it doesn't work super well in chunks that are mostly empty
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
             if (!level.isLoaded(chunkPos.worldPosition)) return
 
@@ -92,6 +93,7 @@ class SpectreIlluminatorEntity(
         forceLightUpdates(level(), chunkPos)
     }
 
+    //FIXME: Not being called on client from `/kill`?
     override fun remove(reason: RemovalReason) {
         super.remove(reason)
 
@@ -144,11 +146,13 @@ class SpectreIlluminatorEntity(
             if (highestBlock >= level().maxBuildHeight) break
         }
 
-        destination = Vec3(
-            chunkPos.middleBlockX.toDouble(),
-            highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK,
-            chunkPos.middleBlockZ.toDouble()
-        )
+        val random = Random(chunkPos.toLong())
+
+        val x = chunkPos.middleBlockX.toDouble() + random.nextDouble(-2.0, 2.0)
+        val y = highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK
+        val z = chunkPos.middleBlockZ.toDouble() + random.nextDouble(-2.0, 2.0)
+
+        destination = Vec3(x, y, z)
     }
 
     constructor(level: Level) : this(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), level)
