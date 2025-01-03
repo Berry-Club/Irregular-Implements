@@ -72,6 +72,8 @@ class ArtificialEndPortalEntity(
             return true
         }
 
+        const val MAX_ACTION_TIMER = 200
+
         val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
         const val ACTION_TIMER_NBT = "ActionTimer"
     }
@@ -91,7 +93,7 @@ class ArtificialEndPortalEntity(
     override fun tick() {
         super.tick()
 
-        if (this.actionTimer < 200) {
+        if (this.actionTimer < MAX_ACTION_TIMER) {
             actionTimer++
 
             if (this.level().isClientSide && this.actionTimer > 40) {

@@ -8,13 +8,17 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Mth
 import org.joml.Matrix4f
 
 class ArtificialEndPortalRenderer(
     context: EntityRendererProvider.Context
 ) : EntityRenderer<ArtificialEndPortalEntity>(context) {
 
-    companion object;
+    companion object {
+        const val HEIGHT_START = 0f
+        const val HEIGHT_END = 0.75
+    }
 
     override fun render(
         portalEntity: ArtificialEndPortalEntity,
@@ -35,8 +39,12 @@ class ArtificialEndPortalRenderer(
         val pose = poseStack.last().pose()
         val consumer = bufferSource.getBuffer(RenderType.endPortal())
 
-        renderFace(pose, consumer, min, max, 0.375f, 0.375f, min, min, max, max)
-        renderFace(pose, consumer, min, max, 0.75f, 0.75f, max, max, min, min)
+        val y = Mth.lerp(portalEntity.actionTimer.toDouble() / ArtificialEndPortalEntity.MAX_ACTION_TIMER, HEIGHT_START.toDouble(), HEIGHT_END).toFloat()
+
+        renderFace(pose, consumer, min, max, y, y, max, max, min, min)
+
+        // Aims downward
+        //renderFace(pose, consumer, min, max, 0.375f, 0.375f, min, min, max, max)
     }
 
     private fun renderFace(
