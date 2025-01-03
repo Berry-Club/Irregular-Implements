@@ -33,6 +33,7 @@ object ModEntityTypes {
                 MobCategory.MISC
             )
                 .sized(1f, 1f)
+                .clientTrackingRange(256)
                 .build("spectre_illuminator")
         })
 

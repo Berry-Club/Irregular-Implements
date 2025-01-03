@@ -22,6 +22,7 @@ import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.phys.Vec3
+import kotlin.math.pow
 import kotlin.random.Random
 
 class SpectreIlluminatorEntity(
@@ -87,7 +88,6 @@ class SpectreIlluminatorEntity(
     }
 
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
-
         if (player.hasInfiniteMaterials()) {
             this.discard()
         } else {
@@ -192,4 +192,9 @@ class SpectreIlluminatorEntity(
     override fun addAdditionalSaveData(compound: CompoundTag) {
         compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
     }
+
+    override fun shouldRenderAtSqrDistance(distance: Double): Boolean {
+        return distance < (64.0 * getViewScale()).pow(4)
+    }
+
 }
