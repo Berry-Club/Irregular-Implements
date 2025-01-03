@@ -50,10 +50,11 @@ class SpectreIlluminatorEntity(
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
             if (!level.isLoaded(chunkPos.worldPosition)) return
 
-            val minX = chunkPos.minBlockX
-            val maxX = chunkPos.maxBlockX
-            val minZ = chunkPos.minBlockZ
-            val maxZ = chunkPos.maxBlockZ
+            // +- 1 to also check edges
+            val minX = chunkPos.minBlockX - 1
+            val maxX = chunkPos.maxBlockX + 1
+            val minZ = chunkPos.minBlockZ - 1
+            val maxZ = chunkPos.maxBlockZ + 1
             val minY = level.minBuildHeight
             val maxY = level.maxBuildHeight
 
