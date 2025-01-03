@@ -8,7 +8,9 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Mth
 import org.joml.Matrix4f
+import kotlin.math.pow
 
 class ArtificialEndPortalRenderer(
     context: EntityRendererProvider.Context
@@ -33,8 +35,18 @@ class ArtificialEndPortalRenderer(
         val pose = poseStack.last().pose()
         val consumer = bufferSource.getBuffer(RenderType.endPortal())
 
-        renderFace(pose, consumer, min, max, 0.375f, 0.375f, min, min, max, max)
-        renderFace(pose, consumer, min, max, 0.75f, 0.75f, max, max, min, min)
+        val startY = 0f
+        val endY = 0.75f
+
+        val percentDone = (portalEntity.actionTimer).toFloat() / ArtificialEndPortalEntity.MAX_ACTION_TIMER
+
+        val y = Mth.lerp(
+            percentDone.pow(4),     // easeInQuart easing function
+            startY, endY
+        )
+
+        renderFace(pose, consumer, min, max, y, y, max, max, min, min)      // Upwards face
+        renderFace(pose, consumer, min, max, y, y, min, min, max, max)      // Downwards face
     }
 
     private fun renderFace(
