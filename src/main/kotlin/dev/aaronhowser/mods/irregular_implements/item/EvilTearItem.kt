@@ -2,59 +2,20 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.entity.ArtificialEndPortalEntity
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.EndRodBlock
-import net.neoforged.neoforge.common.Tags
 
 class EvilTearItem : Item(Properties()) {
 
     companion object {
 
-        //FIXME: This should spawn an entity with a fancy animation, not spawn 9 blocks
         private fun tryPlacePortal(level: Level, clickedPos: BlockPos): Boolean {
-            val blockState = level.getBlockState(clickedPos)
+            val centerPos = clickedPos.below(3)
 
-            if (
-                !blockState.`is`(Blocks.END_ROD)
-                || blockState.getValue(EndRodBlock.FACING) != Direction.DOWN
-                || !level.getBlockState(clickedPos.above()).`is`(Tags.Blocks.END_STONES)
-                || !level.getBlockState(clickedPos.below()).isAir
-            ) return false
-
-            val distanceToObsidianRing = 3
-
-            for (dY in 1..distanceToObsidianRing) {
-                val stateThere = level.getBlockState(clickedPos.below(dY))
-                if (!stateThere.isAir) return false
-            }
-
-            val centerPos = clickedPos.below(distanceToObsidianRing)
-
-            for (dX in -1..1) for (dZ in -1..1) {
-                val posThere = centerPos.offset(dX, 0, dZ)
-
-                val isAir = level.getBlockState(posThere).isAir
-                val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
-
-                if (!isAir || !isAboveEndStone) return false
-
-                if (dX != 0) {
-                    val posDx = posThere.offset(dX, 0, 0)
-                    val stateDx = level.getBlockState(posDx)
-                    if (!stateDx.`is`(Tags.Blocks.OBSIDIANS)) return false
-                }
-
-                if (dZ != 0) {
-                    val posDz = posThere.offset(0, 0, dZ)
-                    val stateDz = level.getBlockState(posDz)
-                    if (!stateDz.`is`(Tags.Blocks.OBSIDIANS)) return false
-                }
-            }
+            val isValidLocation = ArtificialEndPortalEntity.isValidPosition(level, centerPos, checkForOtherPortals = true)
+            if (!isValidLocation) return false
 
             val artificialEndPortalEntity = ArtificialEndPortalEntity(level, centerPos)
             level.addFreshEntity(artificialEndPortalEntity)
@@ -69,14 +30,12 @@ class EvilTearItem : Item(Properties()) {
 
         if (level.isClientSide) return InteractionResult.PASS
 
-        if (tryPlacePortal(level, clickedPos)) {
-            val usedStack = context.itemInHand
-            usedStack.consume(1, context.player)
+        if (!tryPlacePortal(level, clickedPos)) return InteractionResult.FAIL
 
-            return InteractionResult.SUCCESS
-        }
+        val usedStack = context.itemInHand
+        usedStack.consume(1, context.player)
 
-        return InteractionResult.FAIL
+        return InteractionResult.SUCCESS
     }
 
 }

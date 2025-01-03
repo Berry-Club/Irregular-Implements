@@ -26,30 +26,29 @@ class ArtificialEndPortalEntity(
 ) : Entity(entityType, level) {
 
     companion object {
-        private fun isValidPosition(
+        fun isValidPosition(
             level: Level,
-            entityPos: BlockPos,
+            entityCenterPos: BlockPos,
             checkForOtherPortals: Boolean
         ): Boolean {
 
-            //TODO: Does this detect itself?
             if (checkForOtherPortals) {
                 val entities = level.getEntitiesOfClass(
                     ArtificialEndPortalEntity::class.java,
-                    AABB.ofSize(entityPos.bottomCenter, 3.0, 1.0, 3.0)
+                    AABB.ofSize(entityCenterPos.bottomCenter, 3.0, 1.0, 3.0)
                 )
 
                 if (entities.isNotEmpty()) return false
             }
 
-            val endRodPos = entityPos.above(3)
+            val endRodPos = entityCenterPos.above(3)
             val endRodState = level.getBlockState(endRodPos)
             if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
 
             if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
 
             for (dX in -1..1) for (dZ in -1..1) {
-                val posThere = entityPos.offset(dX, 0, dZ)
+                val posThere = entityCenterPos.offset(dX, 0, dZ)
 
                 val isAir = level.getBlockState(posThere).isAir
                 val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
