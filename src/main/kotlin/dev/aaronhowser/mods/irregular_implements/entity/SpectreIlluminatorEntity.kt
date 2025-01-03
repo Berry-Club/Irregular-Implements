@@ -105,30 +105,16 @@ class SpectreIlluminatorEntity(
         }
     }
 
-    private val destination: Vec3 by lazy {
-        val chunkPos = ChunkPos(this.blockPosition())
-        val chunk = level.getChunk(chunkPos.x, chunkPos.z)
-
-        var highestBlock = level().minBuildHeight
-        for (dX in 0..15) for (dZ in 0..15) {
-            val height = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, dX, dZ)
-
-            if (height > highestBlock) {
-                highestBlock = height
-            }
-
-            if (highestBlock >= level().maxBuildHeight) break
-        }
-
-        Vec3(
-            chunkPos.middleBlockX.toDouble(),
-            highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK,
-            chunkPos.middleBlockZ.toDouble()
-        )
-    }
+    private var destination: Vec3 = Vec3.ZERO
 
     override fun tick() {
         super.tick()
+
+        moveToDestination()
+    }
+
+    private fun moveToDestination() {
+        if (destination == Vec3.ZERO || this.tickCount % (20 * 60) == 0) recalculateDestination()
 
         if (this.position() == destination) return
 
@@ -141,6 +127,28 @@ class SpectreIlluminatorEntity(
         val newPos = this.position().lerp(destination, 0.001)
 
         this.setPos(newPos)
+    }
+
+    private fun recalculateDestination() {
+        val chunkPos = ChunkPos(this.blockPosition())
+        val chunk = level().getChunk(chunkPos.x, chunkPos.z)
+
+        var highestBlock = level().minBuildHeight
+        for (dX in 0..15) for (dZ in 0..15) {
+            val height = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, dX, dZ)
+
+            if (height > highestBlock) {
+                highestBlock = height
+            }
+
+            if (highestBlock >= level().maxBuildHeight) break
+        }
+
+        destination = Vec3(
+            chunkPos.middleBlockX.toDouble(),
+            highestBlock.toDouble() + HEIGHT_ABOVE_MAX_BLOCK,
+            chunkPos.middleBlockZ.toDouble()
+        )
     }
 
     constructor(level: Level) : this(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), level)
