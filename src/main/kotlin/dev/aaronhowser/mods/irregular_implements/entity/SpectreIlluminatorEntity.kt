@@ -26,7 +26,7 @@ class SpectreIlluminatorEntity(
 ) : Entity(entityType, level) {
 
     companion object {
-        const val HEIGHT_ABOVE_MAX_BLOCK = 5
+        const val HEIGHT_ABOVE_MAX_BLOCK = 20
 
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
