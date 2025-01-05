@@ -464,6 +464,10 @@ class ModLanguageProvider(
         const val DOESNT_STOP_MESSAGE = "tooltip.irregular_implements.doesnt_stop_message"
         const val MESSAGE_REGEX = "tooltip.irregular_implements.message_regex"
 
+        const val COIL_TRANSFERS = "tooltip.irregular_implements.coil_transfers"
+        const val COIL_GENERATES = "tooltip.irregular_implements.coil_generates"
+        const val CHARGER_CHARGES = "tooltip.irregular_implements.charger_charges"
+
     }
 
     private fun addTooltips() {
@@ -496,6 +500,9 @@ class ModLanguageProvider(
         add(Tooltips.DOESNT_STOP_MESSAGE, "Doesn't stop message")
         add(Tooltips.MESSAGE_REGEX, "Message regex")
 
+        add(Tooltips.COIL_TRANSFERS, "Transfers %s RF/t")
+        add(Tooltips.COIL_GENERATES, "Generates %s RF/t")
+        add(Tooltips.CHARGER_CHARGES, "Charges %s RF/t")
     }
 
     object Info {
@@ -561,7 +568,7 @@ class ModLanguageProvider(
         addInfo(ModBlocks.SPECTRE_COIL_REDSTONE, "Outputs FE from the Spectre Energy Buffer, which is filled using Spectre Energy Injectors.\n\nHas a rate of 4,096 FE/t.")
         addInfo(ModBlocks.SPECTRE_COIL_ENDER, "Outputs FE from the Spectre Energy Buffer, which is filled using Spectre Energy Injectors.\n\nHas a rate of 20,480 FE/t.")
         addInfo(ModBlocks.SPECTRE_COIL_NUMBER, "Generates 128 FE/t for free, inserting it into the block it's placed on.")
-        addInfo(ModBlocks.SPECTRE_COIL_GENESIS, "Once every 10 seconds, tries to insert an infinite amount of FE into the block it's placed on.")
+        addInfo(ModBlocks.SPECTRE_COIL_GENESIS, "Generates an infinite amount of FE for free, inserting it into the block it's placed on.")
         addInfo(ModItems.ADVANCED_REDSTONE_REPEATER, "A Redstone Repeater that can have both its Step Up and Step Down delays configured.")
         addInfo(ModItems.ADVANCED_REDSTONE_TORCH, "A Redstone Torch that can have its Powered and Unpowered output strengths configured")
         addInfo(ModBlocks.SPECTRE_SAPLING, "Created by using Ectoplasm on a Sapling.\n\nGrows into a Spectre Tree, whose blocks have a chance of dropping Ectoplasm.")

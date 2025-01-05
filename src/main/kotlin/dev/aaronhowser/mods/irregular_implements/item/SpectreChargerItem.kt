@@ -1,9 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Unit
 import net.minecraft.world.InteractionHand
@@ -13,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.capabilities.Capabilities
 import java.awt.Color
@@ -85,7 +89,19 @@ class SpectreChargerItem private constructor(
         return InteractionResultHolder.success(usedStack)
     }
 
-    enum class Type(val color: Int, val amountGetter: Supplier<Int>) {
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        val amount = this.type.amountGetter.get()
+
+        val component = ModLanguageProvider.Tooltips.CHARGER_CHARGES
+            .toGrayComponent(String.format("%,d", amount))
+
+        tooltipComponents.add(component)
+    }
+
+    enum class Type(
+        val color: Int,
+        val amountGetter: Supplier<Int>
+    ) {
         BASIC(
             color = Color.CYAN.rgb,
             amountGetter = { 1024 }
