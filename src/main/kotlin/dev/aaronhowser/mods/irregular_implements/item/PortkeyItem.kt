@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.Unit
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
@@ -30,7 +31,7 @@ class PortkeyItem : Item(
             if (!itemStack.`is`(ModItems.PORTKEY)) return
 
             val locationComponent = itemStack.get(ModDataComponents.LOCATION) ?: return
-            if (!itemStack.get(ModDataComponents.ENABLED).isTrue) return
+            if (!itemStack.has(ModDataComponents.IS_ENABLED)) return
 
             val player = event.player
             val level = player.level() as? ServerLevel ?: return
@@ -80,12 +81,12 @@ class PortkeyItem : Item(
 
 
     override fun isFoil(stack: ItemStack): Boolean {
-        return stack.has(ModDataComponents.LOCATION) && !stack.get(ModDataComponents.ENABLED).isTrue
+        return stack.has(ModDataComponents.LOCATION) && !stack.has(ModDataComponents.IS_ENABLED)
     }
 
     override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
         if (entity.age == 20 * 5) {
-            stack.set(ModDataComponents.ENABLED, true)
+            stack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
 
             entity.setUnlimitedLifetime()
 

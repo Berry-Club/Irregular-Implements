@@ -136,11 +136,18 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
-    val ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Boolean>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("enabled") {
+    val IS_ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("is_enabled") {
             it
-                .persistent(Codec.BOOL)
-                .networkSynchronized(ByteBufCodecs.BOOL)
+                .persistent(Unit.CODEC)
+                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+        }
+
+    val IS_INVERTED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("is_inverted") {
+            it
+                .persistent(Unit.CODEC)
+                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
         }
 
     val BLOCK_TAG: DeferredHolder<DataComponentType<*>, DataComponentType<TagKey<Block>>> =
@@ -169,13 +176,6 @@ object ModDataComponents {
             it
                 .persistent(BuiltInRegistries.BLOCK.byNameCodec())
                 .networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
-        }
-
-    val IS_INVERTED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("is_inverted") {
-            it
-                .persistent(Unit.CODEC)
-                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
         }
 
 }
