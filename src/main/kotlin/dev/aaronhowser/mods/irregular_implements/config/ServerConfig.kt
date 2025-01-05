@@ -30,6 +30,8 @@ class ServerConfig(
 
         lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
 
+        lateinit var RAIN_SHIELD_CHUNK_RADIUS: ModConfigSpec.IntValue
+
         lateinit var SPECTRE_MAX_ENERGY: ModConfigSpec.IntValue
         lateinit var SPECTRE_BASIC_RATE: ModConfigSpec.IntValue
         lateinit var SPECTRE_REDSTONE_RATE: ModConfigSpec.IntValue
@@ -137,6 +139,10 @@ class ServerConfig(
         DIVINING_ROD_CHECK_RADIUS = builder
             .comment("The radius around the player to check for blocks with the Divining Rod")
             .defineInRange("diviningRodCheckRadius", 20, 1, 100)
+
+        RAIN_SHIELD_CHUNK_RADIUS = builder
+            .comment("What chunk radius should the Rain Shield have?")
+            .defineInRange("rainShieldChunkRadius", 5, 0, Int.MAX_VALUE)
     }
 
 }

@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.RainShieldChunks
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
-import dev.aaronhowser.mods.irregular_implements.config.CommonConfig
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.ChunkPos
@@ -42,7 +42,7 @@ class RainShieldBlockEntity(
             if (blockState.getValue(RainShieldBlock.ENABLED)) {
                 val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
 
-                val checkRadius = CommonConfig.RAIN_SHIELD_CHUNK_RADIUS.get()
+                val checkRadius = ServerConfig.RAIN_SHIELD_CHUNK_RADIUS.get()
                 val chunkX = chunkPos.x
                 val chunkZ = chunkPos.z
 
