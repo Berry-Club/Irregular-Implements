@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 import java.awt.Color
 
@@ -44,7 +45,7 @@ class SpectreCoilBlock private constructor(
     init {
         registerDefaultState(
             stateDefinition.any()
-                .setValue(FACING, Direction.NORTH)
+                .setValue(FACING, Direction.DOWN)
         )
     }
 
@@ -54,7 +55,7 @@ class SpectreCoilBlock private constructor(
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         return defaultBlockState()
-            .setValue(DirectionalBlock.FACING, context.nearestLookingDirection.opposite)
+            .setValue(DirectionalBlock.FACING, context.clickedFace.opposite)
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
