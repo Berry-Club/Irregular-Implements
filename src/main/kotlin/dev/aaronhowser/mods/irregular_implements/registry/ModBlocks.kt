@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.*
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.*
-import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -158,13 +157,15 @@ object ModBlocks {
         registerBlock("spectre_coil_number") { SpectreCoilBlock.NUMBER }
     val SPECTRE_COIL_GENESIS: DeferredBlock<SpectreCoilBlock> =
         registerBlock("spectre_coil_genesis") { SpectreCoilBlock.GENESIS }
-    val SPECTRE_PLANKS = basicBlock("spectre_planks")
     val SPECTRE_SAPLING = basicBlock("spectre_sapling")
-    val SPECTRE_LOG: DeferredBlock<SpectreLogBlock> =
-        registerBlock("spectre_log") { SpectreLogBlock() }
-    val STRIPPED_SPECTRE_LOG: DeferredBlock<RotatedPillarBlock> =
-        registerBlock("stripped_spectre_log") { RotatedPillarBlock(Properties.ofFullCopy(SPECTRE_LOG.get())) }
-    val SPECTRE_LEAVES = basicBlock("spectre_leaves")
+    val SPECTRE_LOG: DeferredBlock<FlammableRotatedPillarBlock> =
+        registerBlock("spectre_log") { SpectreTreeBlocks.SPECTRE_LOG }
+    val STRIPPED_SPECTRE_LOG: DeferredBlock<FlammableRotatedPillarBlock> =
+        registerBlock("stripped_spectre_log") { SpectreTreeBlocks.STRIPPED_SPECTRE_LOG }
+    val SPECTRE_LEAVES: DeferredBlock<LeavesBlock> =
+        registerBlock("spectre_leaves") { SpectreTreeBlocks.SPECTRE_LEAVES }
+    val SPECTRE_PLANKS: DeferredBlock<Block> =
+        registerBlock("spectre_planks") { SpectreTreeBlocks.SPECTRE_PLANKS }
 
     // Biome blocks
     val BIOME_COBBLESTONE = basicStoneBlock("biome_cobblestone")
