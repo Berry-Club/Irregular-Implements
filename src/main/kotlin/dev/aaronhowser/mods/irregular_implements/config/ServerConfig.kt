@@ -20,19 +20,15 @@ class ServerConfig(
         lateinit var BIOME_PAINTER_BLOCKS_ABOVE: ModConfigSpec.IntValue
 
         lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
+        lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
+        lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
+        lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
+        lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
+        lateinit var RAIN_SHIELD_CHUNK_RADIUS: ModConfigSpec.IntValue
 
         lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
 
-        lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
-
-        lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
-        lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
-
-        lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
-
-        lateinit var RAIN_SHIELD_CHUNK_RADIUS: ModConfigSpec.IntValue
-
-        lateinit var SPECTRE_MAX_ENERGY: ModConfigSpec.IntValue
+        lateinit var SPECTRE_BUFFER_CAPACITY: ModConfigSpec.IntValue
         lateinit var SPECTRE_BASIC_RATE: ModConfigSpec.IntValue
         lateinit var SPECTRE_REDSTONE_RATE: ModConfigSpec.IntValue
         lateinit var SPECTRE_ENDER_RATE: ModConfigSpec.IntValue
@@ -44,6 +40,7 @@ class ServerConfig(
         lateinit var SPECTRE_CHARGER_ENDER: ModConfigSpec.IntValue
         lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
 
+        const val SPECTRE_CATEGORY = "spectre"
     }
 
     init {
@@ -54,11 +51,11 @@ class ServerConfig(
     }
 
     private fun spectreConfigs() {
-        builder.push("spectre")
+        builder.push(SPECTRE_CATEGORY)
 
-        SPECTRE_MAX_ENERGY = builder
+        SPECTRE_BUFFER_CAPACITY = builder
             .comment("What is the maximum energy that a Spectre Energy network can store?")
-            .defineInRange("maxEnergy", 1_000_000, 1, Int.MAX_VALUE)
+            .defineInRange("capacity", 1_000_000, 1, Int.MAX_VALUE)
 
         SPECTRE_BASIC_RATE = builder
             .comment("How much energy should a Basic Spectre Coil transfer per tick?")

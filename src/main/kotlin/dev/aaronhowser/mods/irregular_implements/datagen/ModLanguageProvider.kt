@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -10,6 +12,7 @@ import net.minecraft.data.PackOutput
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.world.level.ItemLike
+import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue
 import net.neoforged.neoforge.common.data.LanguageProvider
 
 class ModLanguageProvider(
@@ -41,6 +44,59 @@ class ModLanguageProvider(
         addSubtitles()
         addMessages()
         addMisc()
+        addConfigs()
+    }
+
+    private fun addConfig(config: ConfigValue<*>, desc: String) {
+        val configString = StringBuilder()
+            .append(IrregularImplements.ID)
+            .append(".configuration.")
+            .append(config.path.last())
+            .toString()
+
+        add(configString, desc)
+    }
+
+    private fun addConfigCategory(category: String, desc: String) {
+        val categoryString = StringBuilder()
+            .append(IrregularImplements.ID)
+            .append(".configuration.")
+            .append(category)
+            .toString()
+
+        add(categoryString, desc)
+    }
+
+    private fun addConfigs() {
+        addConfig(ClientConfig.COLLAPSE_INVERTS_MOUSE, "Collapse Inverts Mouse")
+
+        addConfig(ServerConfig.BLOCK_DESTABILIZER_LIMIT, "Block Destabilizer Limit")
+        addConfig(ServerConfig.BIOME_PAINTER_HORIZONTAL_RADIUS, "Biome Painter Horizontal Radius")
+        addConfig(ServerConfig.BIOME_PAINTER_BLOCKS_ABOVE, "Biome Painter Blocks Above")
+        addConfig(ServerConfig.BIOME_PAINTER_BLOCKS_BELOW, "Biome Painter Blocks Below")
+
+        addConfig(ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID, "Block Mover Vaporizes Fluid")
+        addConfig(ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE, "Portable Ender Bridge Range")
+        addConfig(ServerConfig.SUMMONING_PENDULUM_CAPACITY, "Summoning Pendulum Capacity")
+        addConfig(ServerConfig.BLOCK_REPLACER_UNIQUE_BLOCKS, "Block Replacer Unique Blocks")
+        addConfig(ServerConfig.DIVINING_ROD_CHECK_RADIUS, "Divining Rod Check Radius")
+        addConfig(ServerConfig.RAIN_SHIELD_CHUNK_RADIUS, "Rain Shield Chunk Radius")
+
+        addConfig(ServerConfig.SPECTRE_IMBUE_CHANCE, "Spectre Imbue Chance")
+
+        addConfig(ServerConfig.SPECTRE_BUFFER_CAPACITY, "Spectre Buffer Capacity")
+        addConfig(ServerConfig.SPECTRE_BASIC_RATE, "Basic Coil Rate")
+        addConfig(ServerConfig.SPECTRE_REDSTONE_RATE, "Redstone Coil Rate")
+        addConfig(ServerConfig.SPECTRE_ENDER_RATE, "Ender Coil Rate")
+        addConfig(ServerConfig.SPECTRE_NUMBER_RATE, "Number Coil Rate")
+        addConfig(ServerConfig.SPECTRE_GENESIS_RATE, "Genesis Coil Rate")
+
+        addConfig(ServerConfig.SPECTRE_CHARGER_BASIC, "Basic Charger Rate")
+        addConfig(ServerConfig.SPECTRE_CHARGER_REDSTONE, "Redstone Charger Rate")
+        addConfig(ServerConfig.SPECTRE_CHARGER_ENDER, "Ender Charger Rate")
+        addConfig(ServerConfig.SPECTRE_CHARGER_GENESIS, "Genesis Charger Rate")
+
+        addConfigCategory(ServerConfig.SPECTRE_CATEGORY, "Spectre")
     }
 
     object Misc {

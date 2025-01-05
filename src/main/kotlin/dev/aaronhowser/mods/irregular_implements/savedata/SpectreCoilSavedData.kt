@@ -52,7 +52,7 @@ class SpectreCoilSavedData : SavedData() {
 
         //TODO: Config
         val MAX_ENERGY: Int
-            get() = ServerConfig.SPECTRE_MAX_ENERGY.get()
+            get() = ServerConfig.SPECTRE_BUFFER_CAPACITY.get()
     }
 
     private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
