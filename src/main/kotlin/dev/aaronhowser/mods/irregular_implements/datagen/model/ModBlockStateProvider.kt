@@ -71,27 +71,33 @@ class ModBlockStateProvider(
         val baseModelName = "block/spectre_coil"
         val baseItemModelName = "item/spectre_coil"
 
-        //TODO: Improve transformation for gui and dropped
         itemModels()
             .withExistingParent(baseItemModelName, modLoc(baseModelName))
             .transforms()
 
             .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
             .rotation(75f, 45f, 0f)
-            .translation(0f, 4.2f, 0f)
-            .scale(0.375f)
+            .scale(0.7f)
             .end()
 
             .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
             .rotation(0f, 45f, 0f)
-            .translation(0f, 4.2f, 0f)
-            .scale(0.4f)
+            .translation(0f, 8f, 0f)
             .end()
 
             .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
             .rotation(0f, 225f, 0f)
-            .translation(0f, 4.2f, 0f)
-            .scale(0.4f)
+            .translation(0f, 8f, 0f)
+            .end()
+
+            .transform(ItemDisplayContext.GUI)
+            .rotation(40f, 225f, 0f)
+            .translation(0f, 10.5f, 0f)
+            .scale(2.1875f)
+            .end()
+
+            .transform(ItemDisplayContext.GROUND)
+            .translation(0f, 4f, 0f)
             .end()
 
             .end()
