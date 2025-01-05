@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.data.worldgen.features.TreeFeatures
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BlockTags
@@ -22,6 +23,8 @@ object ModConfiguredFeatures {
 
     val LOTUS_BUSH_KEY: ResourceKey<ConfiguredFeature<*, *>> = registerKey("lotus_bush")
     val PITCHER_PLANT_KEY: ResourceKey<ConfiguredFeature<*, *>> = registerKey("pitcher_plant")
+
+    val SPECTRE_TREE_KEY: ResourceKey<ConfiguredFeature<*, *>> = registerKey("spectre_tree")
 
     fun bootstrap(context: BootstrapContext<ConfiguredFeature<*, *>>) {
         register(
@@ -43,6 +46,20 @@ object ModConfiguredFeatures {
                 ModBlocks.PITCHER_PLANT.get()
                     .defaultBlockState()
             )
+        )
+
+        register(
+            context,
+            SPECTRE_TREE_KEY,
+            Feature.TREE,
+            TreeFeatures.createStraightBlobTree(
+                ModBlocks.SPECTRE_LOG.get(),
+                ModBlocks.SPECTRE_LEAVES.get(),
+                4,
+                4,
+                3,
+                2
+            ).build()
         )
 
     }

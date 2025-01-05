@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModTreeGrowers
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -97,7 +98,7 @@ object SpectreTreeBlocks {
     }
 
     val SPECTRE_SAPLING = object : SaplingBlock(
-        TreeGrower.OAK, //FIXME
+        ModTreeGrowers.SPECTRE,
         Properties
             .ofFullCopy(Blocks.OAK_SAPLING)
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
