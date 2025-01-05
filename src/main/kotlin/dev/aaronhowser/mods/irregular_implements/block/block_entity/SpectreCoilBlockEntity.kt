@@ -143,7 +143,23 @@ class SpectreCoilBlockEntity(
             return
         }
 
+        val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
 
+        val rate = when (this.coilType) {
+            SpectreCoilBlock.Type.BASIC -> 1_024
+            SpectreCoilBlock.Type.REDSTONE -> 4_096
+            SpectreCoilBlock.Type.ENDER -> 20_480
+
+            else -> 0
+        }
+
+        val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
+        if (available <= 0) return
+
+        val sent = energyHandler.receiveEnergy(available, false)
+        if (sent <= 0) return
+
+        coil.extractEnergy(sent, false)
     }
 
     // Syncs with client
