@@ -105,11 +105,12 @@ data class BlockDataComponent(
         val fluidType = fluidState.fluidType
         val fluidStack = FluidStack(fluidState.type, FluidType.BUCKET_VOLUME)
 
+        //TODO: Test this
         var fluidPickup: BucketPickup? = null
-        if (fluidType.isVaporizedOnPlacement(level, posToPlaceIn, fluidStack)) {
+        if (ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID.get() && fluidType.isVaporizedOnPlacement(level, posToPlaceIn, fluidStack)) {
             val adjustedStateBlock = adjustedState.block
 
-            if (ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID.get() && adjustedStateBlock is BucketPickup) {
+            if (adjustedStateBlock is BucketPickup) {
                 fluidPickup = adjustedStateBlock
             } else {
                 return false
