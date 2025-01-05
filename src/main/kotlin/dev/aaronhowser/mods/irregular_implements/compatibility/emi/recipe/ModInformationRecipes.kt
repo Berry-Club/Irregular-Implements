@@ -123,6 +123,18 @@ object ModInformationRecipes {
             )
         )
 
+        recipes.add(
+            EmiInfoRecipe(
+                toEmiIngredients(
+                    ModItems.SPECTRE_CHARGER_BASIC,
+                    ModItems.SPECTRE_CHARGER_REDSTONE,
+                    ModItems.SPECTRE_CHARGER_ENDER,
+                ),
+                listOf(ModLanguageProvider.Info.SPECTRE_CHARGERS.toComponent()),
+                OtherUtil.modResource("/info/spectre_chargers")
+            )
+        )
+
         val registryAccess = ClientUtil.localPlayer?.registryAccess()
         if (registryAccess != null) {
             recipes.add(

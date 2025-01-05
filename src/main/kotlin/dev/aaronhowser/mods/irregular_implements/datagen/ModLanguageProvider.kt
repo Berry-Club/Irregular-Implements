@@ -185,6 +185,9 @@ class ModLanguageProvider(
         addItem(ModItems.SPECTRE_KEY, "Spectre Key")
         addItem(ModItems.SPECTRE_ANCHOR, "Spectre Anchor")
         addItem(ModItems.SPECTRE_CHARGER_BASIC, "Spectre Charger")
+        addItem(ModItems.SPECTRE_CHARGER_REDSTONE, "Redstone Spectre Charger")
+        addItem(ModItems.SPECTRE_CHARGER_ENDER, "Ender Spectre Charger")
+        addItem(ModItems.SPECTRE_CHARGER_GENESIS, "Genesis Spectre Charger")
         addItem(ModItems.SPECTRE_SWORD, "Spectre Sword")
         addItem(ModItems.SPECTRE_PICKAXE, "Spectre Pickaxe")
         addItem(ModItems.SPECTRE_AXE, "Spectre Axe")
@@ -299,10 +302,10 @@ class ModLanguageProvider(
         addBlock(ModBlocks.SPECTRE_LENS, "Spectre Lens")
         addBlock(ModBlocks.SPECTRE_ENERGY_INJECTOR, "Spectre Energy Injector")
         addBlock(ModBlocks.SPECTRE_COIL_BASIC, "Spectre Coil")
-        addBlock(ModBlocks.SPECTRE_COIL_REDSTONE, "Spectre Coil Redstone")
-        addBlock(ModBlocks.SPECTRE_COIL_ENDER, "Spectre Coil Ender")
-        addBlock(ModBlocks.SPECTRE_COIL_NUMBER, "Spectre Coil Number")
-        addBlock(ModBlocks.SPECTRE_COIL_GENESIS, "Spectre Coil Genesis")
+        addBlock(ModBlocks.SPECTRE_COIL_REDSTONE, "Redstone Spectre Coil")
+        addBlock(ModBlocks.SPECTRE_COIL_ENDER, "Ender Spectre Coil")
+        addBlock(ModBlocks.SPECTRE_COIL_NUMBER, "Spectre Coil Nr. 245")
+        addBlock(ModBlocks.SPECTRE_COIL_GENESIS, "Genesis Spectre Coil")
         addBlock(ModBlocks.SPECTRE_PLANKS, "Spectre Planks")
         addBlock(ModBlocks.SPECTRE_SAPLING, "Spectre Sapling")
         addBlock(ModBlocks.SPECTRE_LOG, "Spectre Wood")
@@ -500,6 +503,7 @@ class ModLanguageProvider(
         const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"
         const val LUBRICANT = "info.irregular_implements.lubricant"
         const val SPECTRE_ARMOR = "info.irregular_implements.spectre_armor"
+        const val SPECTRE_CHARGERS = "info.irregular_implements.spectre_chargers"
         const val MAGNETIC_ENCHANT = "info.irregular_implements.magnetic_enchant"
     }
 
@@ -635,7 +639,8 @@ class ModLanguageProvider(
         addInfo(ModItems.CHUNK_ANALYZER, "When used, shows you all the blocks and entities in the chunk you're in.")
         addInfo(ModItems.FLOO_POUCH, "???")
         addInfo(ModItems.SPECTRE_ILLUMINATOR, "When used, spawns a Spectre Illuminator that lights up the entire chunk.\n\nCan be removed either by clicking the Illuminator, or using Blackout Powder in the chunk.")
-        //TODO: Chargers
+        add(Info.SPECTRE_CHARGERS, "Charge items in your inventory using energy from your Spectre Energy Buffer.")
+        addInfo(ModItems.SPECTRE_CHARGER_GENESIS, "Charges items in your inventory with an infinite amount of energy.\n\nCreative only!")
         addInfo(ModItems.GRASS_SEEDS, "Can be planted on Dirt to grow Grass.")
         addInfo(ModItems.SPECTRE_KEY, "Use for 5 seconds to teleport to a private dimension.\n\nDo the same there to return.")
         addInfo(ModItems.SPECTRE_ANCHOR, "When crafted with an item, the item is kept after death.")
