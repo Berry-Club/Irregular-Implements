@@ -1,7 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModTreeGrowers
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModConfiguredFeatures
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.UseOnContext
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
 import net.neoforged.neoforge.common.ItemAbilities
 import net.neoforged.neoforge.common.ItemAbility
+import java.util.*
 
 // Made this class because it requires a lot of anon classes and those are gross
 // Who decided that flammability should work like this?
@@ -97,8 +99,15 @@ object SpectreTreeBlocks {
         }
     }
 
+    val SPECTRE_TREE_GROWER: TreeGrower = TreeGrower(
+        OtherUtil.modResource("spectre").toString(),
+        Optional.empty(),
+        Optional.of(ModConfiguredFeatures.SPECTRE_TREE_KEY),
+        Optional.empty()
+    )
+
     val SPECTRE_SAPLING = object : SaplingBlock(
-        ModTreeGrowers.SPECTRE,
+        SPECTRE_TREE_GROWER,
         Properties
             .ofFullCopy(Blocks.OAK_SAPLING)
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
