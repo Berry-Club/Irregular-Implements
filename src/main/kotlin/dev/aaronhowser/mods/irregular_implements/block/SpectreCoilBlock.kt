@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
@@ -26,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
+import net.neoforged.neoforge.capabilities.Capabilities
 import java.awt.Color
 import java.util.function.Supplier
 
@@ -95,7 +97,15 @@ class SpectreCoilBlock private constructor(
         val facing = state.getValue(DirectionalBlock.FACING)
         val onBlockPos = pos.relative(facing)
 
-        return level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
+        val canSupportCenter = level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
+
+        if (canSupportCenter) return true
+
+        val onBlockThatCanReceivePower = level is Level && level
+            .getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
+            ?.canReceive().isTrue
+
+        return onBlockThatCanReceivePower
     }
 
     enum class Type(
@@ -149,6 +159,24 @@ class SpectreCoilBlock private constructor(
         val blockEntity = level.getBlockEntity(pos) as? SpectreCoilBlockEntity ?: return
 
         blockEntity.ownerUuid = placer.uuid ?: return
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: Item.TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        val amount = this.type.amountGetter.get()
+        val amountString = String.format("%,d", amount)
+
+        val component = if (this.type.isGenerator) {
+            Component.literal("Generates $amountString FE/t")
+        } else {
+            Component.literal("Transfers $amountString FE/t from the Spectre network")
+        }
+
+        tooltipComponents.add(component)
     }
 
 }
