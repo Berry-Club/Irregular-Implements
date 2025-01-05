@@ -61,14 +61,14 @@ class ModBlockStateProvider(
 
     private fun spectreCoils() {
         val blocks = listOf(
-            ModBlocks.SPECTRE_COIL.get(),
+            ModBlocks.SPECTRE_COIL_BASIC.get(),
             ModBlocks.SPECTRE_COIL_REDSTONE.get(),
             ModBlocks.SPECTRE_COIL_ENDER.get(),
             ModBlocks.SPECTRE_COIL_NUMBER.get(),
             ModBlocks.SPECTRE_COIL_GENESIS.get()
         )
 
-        val baseModelName = "block/spectre_coil_base"
+        val baseModelName = "block/spectre_coil"
         val baseItemModelName = "item/spectre_coil"
 
         itemModels()

@@ -522,7 +522,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModBlocks.SPECTRE_COIL,
+            ModBlocks.SPECTRE_COIL_BASIC,
             "OSO,OIG,OSO",
             mapOf(
                 'O' to ing(Tags.Items.OBSIDIANS),
@@ -538,7 +538,7 @@ class ModRecipeProvider(
                 'B' to ing(Tags.Items.STORAGE_BLOCKS_REDSTONE),
                 'S' to ing(ModItems.SPECTRE_STRING),
                 'R' to ing(Tags.Items.DUSTS_REDSTONE),
-                'C' to ing(ModBlocks.SPECTRE_COIL)
+                'C' to ing(ModBlocks.SPECTRE_COIL_BASIC)
             )
         ),
         shapedRecipe(

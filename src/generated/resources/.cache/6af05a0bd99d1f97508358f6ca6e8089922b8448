@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-26T22:24:00.0638176	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-01-05T10:58:38.9779196	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 9eb871311b4810f0b570fce35e8570c5dc5d31d9 data/c/tags/block/dyed.json
 5ed28726c2a04a9324aaad89352be5777f70c52f data/c/tags/block/dyed/black.json
@@ -31,7 +31,7 @@ ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.jso
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/dirt.json
 a4e2f12519cae6d40951b85794fa24461a890c5e data/minecraft/tags/block/mineable/axe.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/mineable/hoe.json
-c6670f17ef487cc0c0aab45efd66b16b2256dd3b data/minecraft/tags/block/mineable/pickaxe.json
+473125a4ec5179f95fbe8cb972ec865177191263 data/minecraft/tags/block/mineable/pickaxe.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/mineable/shovel.json
 1702363b5a549dbe0f12831bf2a31d73c12c04fc data/minecraft/tags/block/saplings.json
 3645dbb9b45882943c3008d50363ee93ba0c6109 data/minecraft/tags/block/small_flowers.json

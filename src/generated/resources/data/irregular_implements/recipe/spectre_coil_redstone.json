@@ -6,7 +6,7 @@
       "tag": "c:storage_blocks/redstone"
     },
     "C": {
-      "item": "irregular_implements:spectre_coil"
+      "item": "irregular_implements:spectre_coil_basic"
     },
     "R": {
       "tag": "c:dusts/redstone"

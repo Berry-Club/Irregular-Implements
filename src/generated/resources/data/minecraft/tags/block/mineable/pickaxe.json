@@ -38,7 +38,7 @@
     "irregular_implements:advanced_redstone_interface",
     "irregular_implements:spectre_lens",
     "irregular_implements:spectre_energy_injector",
-    "irregular_implements:spectre_coil",
+    "irregular_implements:spectre_coil_basic",
     "irregular_implements:spectre_coil_redstone",
     "irregular_implements:spectre_coil_ender",
     "irregular_implements:spectre_coil_number",

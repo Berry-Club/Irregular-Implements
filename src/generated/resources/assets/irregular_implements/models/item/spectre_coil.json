@@ -1,5 +1,5 @@
 {
-  "parent": "irregular_implements:item/spectre_coil",
+  "parent": "irregular_implements:block/spectre_coil",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

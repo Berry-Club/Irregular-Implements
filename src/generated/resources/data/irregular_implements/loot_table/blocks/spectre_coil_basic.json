@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:spectre_coil"
+          "name": "irregular_implements:spectre_coil_basic"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:blocks/spectre_coil"
+  "random_sequence": "irregular_implements:blocks/spectre_coil_basic"
 }

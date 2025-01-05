@@ -34,7 +34,7 @@ class SpectreCoilBlock private constructor(
         var SHAPE_UP: VoxelShape = box(0.3125, 0.0, 0.3125, 0.6875, HEIGHT, 0.6875)
         var SHAPE_DOWN: VoxelShape = box(0.3125, 1.0f - HEIGHT, 0.3125, 0.6875, 1.0, 0.6875)
 
-        val NORMAL = SpectreCoilBlock(Type.NORMAL)
+        val BASIC = SpectreCoilBlock(Type.BASIC)
         val REDSTONE = SpectreCoilBlock(Type.REDSTONE)
         val ENDER = SpectreCoilBlock(Type.ENDER)
         val NUMBER = SpectreCoilBlock(Type.NUMBER)
@@ -70,7 +70,7 @@ class SpectreCoilBlock private constructor(
     }
 
     enum class Type(val id: String, val color: Int) {
-        NORMAL("normal", Color.CYAN.rgb),
+        BASIC("basic", Color.CYAN.rgb),
         REDSTONE("redstone", Color.RED.rgb),
         ENDER("ender", Color(200, 0, 210).rgb),
         NUMBER("number", Color.GREEN.rgb),

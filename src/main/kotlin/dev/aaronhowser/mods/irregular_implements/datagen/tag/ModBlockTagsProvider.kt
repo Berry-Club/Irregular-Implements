@@ -265,7 +265,7 @@ class ModBlockTagsProvider(
                 ModBlocks.ADVANCED_REDSTONE_INTERFACE.get(),
                 ModBlocks.SPECTRE_LENS.get(),
                 ModBlocks.SPECTRE_ENERGY_INJECTOR.get(),
-                ModBlocks.SPECTRE_COIL.get(),
+                ModBlocks.SPECTRE_COIL_BASIC.get(),
                 ModBlocks.SPECTRE_COIL_REDSTONE.get(),
                 ModBlocks.SPECTRE_COIL_ENDER.get(),
                 ModBlocks.SPECTRE_COIL_NUMBER.get(),

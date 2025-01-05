@@ -150,8 +150,8 @@ object ModBlocks {
         registerBlock("spectre_lens") { SpectreLensBlock() }
     val SPECTRE_ENERGY_INJECTOR: DeferredBlock<SpectreEnergyInjectorBlock> =
         registerBlock("spectre_energy_injector") { SpectreEnergyInjectorBlock() }
-    val SPECTRE_COIL: DeferredBlock<SpectreCoilBlock> =
-        registerBlock("spectre_coil") { SpectreCoilBlock.NORMAL }
+    val SPECTRE_COIL_BASIC: DeferredBlock<SpectreCoilBlock> =
+        registerBlock("spectre_coil_basic") { SpectreCoilBlock.BASIC }
     val SPECTRE_COIL_REDSTONE: DeferredBlock<SpectreCoilBlock> =
         registerBlock("spectre_coil_redstone") { SpectreCoilBlock.REDSTONE }
     val SPECTRE_COIL_ENDER: DeferredBlock<SpectreCoilBlock> =
