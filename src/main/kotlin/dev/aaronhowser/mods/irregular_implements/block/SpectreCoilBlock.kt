@@ -1,15 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.DirectionalBlock
-import net.minecraft.world.level.block.SupportType
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -24,7 +23,7 @@ class SpectreCoilBlock private constructor(
 ) : Block(
     Properties
         .ofFullCopy(Blocks.IRON_BLOCK)
-) {
+), EntityBlock {
 
     companion object {
         val FACING: DirectionProperty = BlockStateProperties.FACING
@@ -94,6 +93,10 @@ class SpectreCoilBlock private constructor(
         ENDER("ender", Color(200, 0, 210).rgb),
         NUMBER("number", Color.GREEN.rgb),
         GENESIS("genesis", Color.ORANGE.rgb),
+    }
+
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+        return SpectreCoilBlockEntity(pos, state, this.type)
     }
 
 }

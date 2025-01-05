@@ -61,6 +61,18 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val SPECTRE_COIL: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpectreCoilBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("spectre_coil", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> SpectreCoilBlockEntity(pos, state) },
+                ModBlocks.SPECTRE_COIL_BASIC.get(),
+                ModBlocks.SPECTRE_COIL_REDSTONE.get(),
+                ModBlocks.SPECTRE_COIL_ENDER.get(),
+                ModBlocks.SPECTRE_COIL_NUMBER.get(),
+                ModBlocks.SPECTRE_COIL_GENESIS.get()
+            ).build(null)
+        })
+
     val MOON_PHASE_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<MoonPhaseDetectorBlockEntity>> =
         BLOCK_ENTITY_REGISTRY.register("moon_phase_detector", Supplier {
             BlockEntityType.Builder.of(
