@@ -4,11 +4,9 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.*
 import net.minecraft.world.item.DyeColor
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.GrassBlock
-import net.minecraft.world.level.block.TransparentBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -162,7 +160,10 @@ object ModBlocks {
         registerBlock("spectre_coil_genesis") { SpectreCoilBlock.GENESIS }
     val SPECTRE_PLANKS = basicBlock("spectre_planks")
     val SPECTRE_SAPLING = basicBlock("spectre_sapling")
-    val SPECTRE_WOOD = basicBlock("spectre_wood")
+    val SPECTRE_LOG: DeferredBlock<SpectreLogBlock> =
+        registerBlock("spectre_log") { SpectreLogBlock() }
+    val STRIPPED_SPECTRE_LOG: DeferredBlock<RotatedPillarBlock> =
+        registerBlock("stripped_spectre_log") { RotatedPillarBlock(Properties.ofFullCopy(SPECTRE_LOG.get())) }
     val SPECTRE_LEAVES = basicBlock("spectre_leaves")
 
     // Biome blocks
@@ -239,7 +240,7 @@ object ModBlocks {
 
     private fun coloredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock> =
         registerBlock("colored_grass_${dyeColor.getName()}") {
-            GrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(dyeColor))
+            GrassBlock(Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(dyeColor))
         }
 
     val LUMINOUS_BLOCK_WHITE: DeferredBlock<Block> = basicStoneBlock("luminous_block_white")
@@ -320,23 +321,23 @@ object ModBlocks {
     // - Dyeing Machine: Too hard and nobody would use
     // - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
 
-    private fun blockWithProperties(name: String, properties: BlockBehaviour.Properties) =
+    private fun blockWithProperties(name: String, properties: Properties) =
         registerBlock(name) { Block(properties) }
 
     private fun basicBlock(name: String) =
-        blockWithProperties(name, BlockBehaviour.Properties.of())
+        blockWithProperties(name, Properties.of())
 
     private fun basicGlassBlock(name: String) =
-        registerBlock(name) { TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)) }
+        registerBlock(name) { TransparentBlock(Properties.ofFullCopy(Blocks.GLASS)) }
 
     private fun basicCopiedBlock(name: String, blockToCopy: Block) =
-        blockWithProperties(name, BlockBehaviour.Properties.ofFullCopy(blockToCopy))
+        blockWithProperties(name, Properties.ofFullCopy(blockToCopy))
 
     private fun basicStoneBlock(name: String) =
         basicCopiedBlock(name, Blocks.STONE)
 
     private fun coloredStone(name: String, color: DyeColor) =
-        blockWithProperties(name, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).mapColor(color))
+        blockWithProperties(name, Properties.ofFullCopy(Blocks.STONE).mapColor(color))
 
     private fun <T : Block> registerBlock(
         name: String,

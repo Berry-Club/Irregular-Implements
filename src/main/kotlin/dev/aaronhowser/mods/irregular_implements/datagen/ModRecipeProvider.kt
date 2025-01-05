@@ -1315,7 +1315,7 @@ class ModRecipeProvider(
         shapelessRecipe(
             ModBlocks.SPECTRE_PLANKS,
             4,
-            listOf(ing(ModBlocks.SPECTRE_WOOD))
+            listOf(ing(ModBlocks.SPECTRE_LOG))
         ),
         shapelessRecipe(
             ModItems.BEAN_STEW,

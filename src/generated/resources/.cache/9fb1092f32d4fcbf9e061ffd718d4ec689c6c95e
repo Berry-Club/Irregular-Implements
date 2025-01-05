@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-05T10:58:38.9835612	Recipes
+// 1.21.1	2025-01-05T13:39:45.9139932	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -411,7 +411,7 @@ ddbee49cc59e16dc8d4fbf1ad6325b652028a752 data/irregular_implements/recipe/spectr
 2fcf47ac830cef3ff9dcf4e6813f734b4a95ccc2 data/irregular_implements/recipe/spectre_leggings.json
 be8b88a4c9a154b11bc57c2801907a570054a223 data/irregular_implements/recipe/spectre_lens.json
 ed5fd481026624f810c13e3aaf5327a240faa930 data/irregular_implements/recipe/spectre_pickaxe.json
-b84e0d535dd9a13e06fd3a3687c97acda238b92f data/irregular_implements/recipe/spectre_planks.json
+694403d5798e4e8696c79003c78d6214edd59a4f data/irregular_implements/recipe/spectre_planks.json
 21e28fcc0e3643088dea8cbfb218278ef5cf6af4 data/irregular_implements/recipe/spectre_shovel.json
 ee2f69fafd14248157ec4a65f92c50cfde4f465d data/irregular_implements/recipe/spectre_string.json
 215bf4bbfd665dd6ef683b72d21e102353e10ca8 data/irregular_implements/recipe/spectre_sword.json

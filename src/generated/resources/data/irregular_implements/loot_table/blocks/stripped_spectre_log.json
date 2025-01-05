@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:spectre_wood"
+          "name": "irregular_implements:stripped_spectre_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:blocks/spectre_wood"
+  "random_sequence": "irregular_implements:blocks/stripped_spectre_log"
 }
