@@ -136,7 +136,14 @@ object ModItems {
     val SPECTRE_KEY = basic("spectre_key")
     val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
         register("spectre_anchor") { SpectreAnchorItem() }
-    val SPECTRE_CHARGER = basic("spectre_charger") //Same item for all tiers
+    val SPECTRE_CHARGER_BASIC: DeferredItem<SpectreChargerItem> =
+        register("spectre_charger_basic") { SpectreChargerItem.BASIC }
+    val SPECTRE_CHARGER_REDSTONE: DeferredItem<SpectreChargerItem> =
+        register("spectre_charger_redstone") { SpectreChargerItem.REDSTONE }
+    val SPECTRE_CHARGER_ENDER: DeferredItem<SpectreChargerItem> =
+        register("spectre_charger_ender") { SpectreChargerItem.ENDER }
+    val SPECTRE_CHARGER_GENESIS: DeferredItem<SpectreChargerItem> =
+        register("spectre_charger_genesis") { SpectreChargerItem.GENESIS }
     val SPECTRE_SWORD: DeferredItem<SwordItem> =
         register("spectre_sword") { ModToolItems.SPECTRE_SWORD }
     val SPECTRE_PICKAXE: DeferredItem<PickaxeItem> =

@@ -139,7 +139,7 @@ class ModItemModelProvider(
             ModItems.REDSTONE_ACTIVATOR,
             ModItems.SOUND_PATTERN,
             ModItems.SOUND_RECORDER,
-            ModItems.SPECTRE_CHARGER,
+            ModItems.SPECTRE_CHARGER_BASIC,
             ModItems.ADVANCED_REDSTONE_TORCH,
             ModItems.DIVINING_ROD
         )

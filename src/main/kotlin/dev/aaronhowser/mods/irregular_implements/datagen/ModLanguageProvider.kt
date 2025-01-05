@@ -184,7 +184,7 @@ class ModLanguageProvider(
         addItem(ModItems.SPECTRE_ILLUMINATOR, "Spectre Illuminator")
         addItem(ModItems.SPECTRE_KEY, "Spectre Key")
         addItem(ModItems.SPECTRE_ANCHOR, "Spectre Anchor")
-        addItem(ModItems.SPECTRE_CHARGER, "Spectre Charger")
+        addItem(ModItems.SPECTRE_CHARGER_BASIC, "Spectre Charger")
         addItem(ModItems.SPECTRE_SWORD, "Spectre Sword")
         addItem(ModItems.SPECTRE_PICKAXE, "Spectre Pickaxe")
         addItem(ModItems.SPECTRE_AXE, "Spectre Axe")

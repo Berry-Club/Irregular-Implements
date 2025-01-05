@@ -1060,7 +1060,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.SPECTRE_CHARGER,
+            ModItems.SPECTRE_CHARGER_BASIC,
             "BOS,OIO,SOB",
             mapOf(
                 'B' to ing(Items.IRON_BARS),

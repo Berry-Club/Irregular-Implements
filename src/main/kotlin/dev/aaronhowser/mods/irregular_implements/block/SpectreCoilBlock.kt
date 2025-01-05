@@ -32,7 +32,7 @@ import java.awt.Color
 import java.util.function.Supplier
 
 class SpectreCoilBlock private constructor(
-    val type: Type
+    private val type: Type
 ) : Block(
     Properties
         .ofFullCopy(Blocks.IRON_BLOCK)
