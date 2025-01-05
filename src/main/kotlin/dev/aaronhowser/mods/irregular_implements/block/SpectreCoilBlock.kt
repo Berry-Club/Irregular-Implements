@@ -4,9 +4,12 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.DirectionalBlock
+import net.minecraft.world.level.block.SupportType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -68,6 +71,21 @@ class SpectreCoilBlock private constructor(
             Direction.DOWN -> SHAPE_DOWN
             else -> Shapes.block()
         }
+    }
+
+    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+        return if (state.canSurvive(level, pos)) {
+            state
+        } else {
+            Blocks.AIR.defaultBlockState()
+        }
+    }
+
+    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+        val facing = state.getValue(DirectionalBlock.FACING)
+        val onBlockPos = pos.relative(facing)
+
+        return level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
     }
 
     enum class Type(val id: String, val color: Int) {

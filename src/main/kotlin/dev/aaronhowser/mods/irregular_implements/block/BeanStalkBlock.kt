@@ -107,7 +107,7 @@ class BeanStalkBlock(
 
     override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
         return if (state.canSurvive(level, pos)) {
-            super.updateShape(state, direction, neighborState, level, pos, neighborPos)
+            state
         } else {
             Blocks.AIR.defaultBlockState()
         }
