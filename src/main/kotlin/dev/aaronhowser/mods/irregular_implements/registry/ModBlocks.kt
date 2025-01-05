@@ -157,7 +157,8 @@ object ModBlocks {
         registerBlock("spectre_coil_number") { SpectreCoilBlock.NUMBER }
     val SPECTRE_COIL_GENESIS: DeferredBlock<SpectreCoilBlock> =
         registerBlock("spectre_coil_genesis") { SpectreCoilBlock.GENESIS }
-    val SPECTRE_SAPLING = basicBlock("spectre_sapling")
+    val SPECTRE_SAPLING: DeferredBlock<SaplingBlock> =
+        registerBlock("spectre_sapling") { SpectreTreeBlocks.SPECTRE_SAPLING }
     val SPECTRE_LOG: DeferredBlock<FlammableRotatedPillarBlock> =
         registerBlock("spectre_log") { SpectreTreeBlocks.SPECTRE_LOG }
     val STRIPPED_SPECTRE_LOG: DeferredBlock<FlammableRotatedPillarBlock> =

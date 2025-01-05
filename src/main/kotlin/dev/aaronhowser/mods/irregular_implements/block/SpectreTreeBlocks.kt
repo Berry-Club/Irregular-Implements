@@ -8,6 +8,8 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LeavesBlock
+import net.minecraft.world.level.block.SaplingBlock
+import net.minecraft.world.level.block.grower.TreeGrower
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
 import net.neoforged.neoforge.common.ItemAbilities
@@ -76,5 +78,12 @@ object SpectreTreeBlocks {
             return getFireSpreadSpeed(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction)
         }
     }
+
+    val SPECTRE_SAPLING = object : SaplingBlock(
+        TreeGrower.OAK, //FIXME
+        Properties
+            .ofFullCopy(Blocks.OAK_SAPLING)
+            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+    ) {}
 
 }

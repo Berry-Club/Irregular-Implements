@@ -18,7 +18,9 @@ import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 
 class ModBlockLootTablesSubProvider(
     provider: HolderLookup.Provider
@@ -42,6 +44,31 @@ class ModBlockLootTablesSubProvider(
 
         lotus()
         beanSprout()
+        spectreLeaves()
+    }
+
+    private fun spectreLeaves() {
+        add(ModBlocks.SPECTRE_LEAVES.get()) {
+            val enchantmentLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
+
+            createLeavesDrops(it, ModBlocks.SPECTRE_SAPLING.get(), *NORMAL_LEAVES_SAPLING_CHANCES)
+                .withPool(
+                    LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1f))
+                        .`when`(this.doesNotHaveSilkTouch())
+                        .add(
+                            this.applyExplosionCondition(
+                                ModBlocks.SPECTRE_LEAVES.get(),
+                                LootItem.lootTableItem(ModItems.ECTOPLASM.get())
+                            )
+                                .`when`(
+                                    BonusLevelTableCondition.bonusLevelFlatChance(
+                                        enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.005f, 0.0055555557f, 0.00625f, 0.008333334f, 0.025f
+                                    )
+                                )
+                        )
+                )
+        }
     }
 
     private fun beanSprout() {
@@ -109,8 +136,9 @@ class ModBlockLootTablesSubProvider(
     ).map { it.get() }.toSet()
 
     private val nonDropSelfBlocks: Set<Block> = noDropBlocks + dropsDirtWithoutSilkTouch + setOf(
-        ModBlocks.COMPRESSED_SLIME_BLOCK.get()
-    )
+        ModBlocks.COMPRESSED_SLIME_BLOCK,
+        ModBlocks.SPECTRE_LEAVES
+    ).map { it.get() }
 
     override fun getKnownBlocks(): List<Block> {
         return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }
