@@ -1,14 +1,22 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData
 import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -32,6 +40,24 @@ class SpectreEnergyInjectorBlock : Block(
         if (placer == null) return
         val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity ?: return
         blockEntity.ownerUuid = placer.uuid
+    }
+
+    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+        val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity
+        if (!level.isClientSide && blockEntity != null) {
+            val energyHandler = blockEntity.getEnergyHandler(null)
+            val energyStored = energyHandler?.energyStored ?: 0
+            val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilSavedData.MAX_ENERGY
+
+            val storedFormatted = String.format("%,d", energyStored)
+            val maxFormatted = String.format("%,d", maxEnergy)
+
+            val component = Component.literal("$storedFormatted FE / $maxFormatted FE")
+
+            player.sendSystemMessage(component)
+        }
+
+        return InteractionResult.SUCCESS
     }
 
 }
