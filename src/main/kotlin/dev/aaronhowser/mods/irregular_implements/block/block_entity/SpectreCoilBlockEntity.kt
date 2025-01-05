@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -71,13 +72,41 @@ class SpectreCoilBlockEntity(
         }
     }
 
-
+    /**
+     * Returns a fake energy handler that can't be interacted with, but knows how much energy exists.
+     * We do this to stop other mods from pulling from this, rather than energy being pushed out of it.
+     */
     fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
         if (direction != blockState.getValue(SpectreCoilBlock.FACING)) return null
 
         val level = this.level as? ServerLevel ?: return null
+        val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
 
+        return object : IEnergyStorage {
+            override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
+                return 0
+            }
 
+            override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
+                return 0
+            }
+
+            override fun getEnergyStored(): Int {
+                return coil.energyStored
+            }
+
+            override fun getMaxEnergyStored(): Int {
+                return coil.maxEnergyStored
+            }
+
+            override fun canExtract(): Boolean {
+                return false
+            }
+
+            override fun canReceive(): Boolean {
+                return false
+            }
+        }
     }
 
     // Syncs with client

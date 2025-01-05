@@ -28,6 +28,14 @@ object ModBusEvents {
         ) { spectreEnergyInjectorBE, direction ->
             spectreEnergyInjectorBE.getEnergyHandler(direction)
         }
+
+        event.registerBlockEntity(
+            Capabilities.EnergyStorage.BLOCK,
+            ModBlockEntities.SPECTRE_COIL.get()
+        ) { spectreCoilBE, direction ->
+            spectreCoilBE.getEnergyHandler(direction)
+        }
+
     }
 
 }
