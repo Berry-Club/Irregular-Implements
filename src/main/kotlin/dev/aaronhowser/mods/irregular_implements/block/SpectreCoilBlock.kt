@@ -1,11 +1,15 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -23,6 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 import java.awt.Color
+import java.util.function.Supplier
 
 class SpectreCoilBlock private constructor(
     val type: Type
@@ -93,12 +98,36 @@ class SpectreCoilBlock private constructor(
         return level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
     }
 
-    enum class Type(val color: Int) {
-        BASIC(Color.CYAN.rgb),
-        REDSTONE(Color.RED.rgb),
-        ENDER(Color(200, 0, 210).rgb),
-        NUMBER(Color.GREEN.rgb),
-        GENESIS(Color.ORANGE.rgb),
+    enum class Type(
+        val color: Int,
+        val amountGetter: Supplier<Int>,
+        val isGenerator: Boolean
+    ) {
+        BASIC(
+            color = Color.CYAN.rgb,
+            amountGetter = { ServerConfig.SPECTRE_BASIC_RATE.get() },
+            isGenerator = false
+        ),
+        REDSTONE(
+            color = Color.RED.rgb,
+            amountGetter = { ServerConfig.SPECTRE_REDSTONE_RATE.get() },
+            isGenerator = false
+        ),
+        ENDER(
+            color = Color(200, 0, 210).rgb,
+            amountGetter = { ServerConfig.SPECTRE_ENDER_RATE.get() },
+            isGenerator = false
+        ),
+        NUMBER(
+            color = Color.GREEN.rgb,
+            amountGetter = { ServerConfig.SPECTRE_NUMBER_RATE.get() },
+            isGenerator = true
+        ),
+        GENESIS(
+            color = Color.ORANGE.rgb,
+            amountGetter = { ServerConfig.SPECTRE_GENESIS_RATE.get() },
+            isGenerator = true
+        ),
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {

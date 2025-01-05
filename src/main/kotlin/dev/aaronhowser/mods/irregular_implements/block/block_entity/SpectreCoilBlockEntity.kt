@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
-import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
@@ -133,26 +132,14 @@ class SpectreCoilBlockEntity(
 
         if (energyHandler == null || !energyHandler.canReceive()) return
 
-        if (this.coilType == SpectreCoilBlock.Type.NUMBER || this.coilType == SpectreCoilBlock.Type.GENESIS) {
-            val amount = when (this.coilType) {
-                SpectreCoilBlock.Type.NUMBER -> ServerConfig.SPECTRE_NUMBER_RATE.get()
-                SpectreCoilBlock.Type.GENESIS -> ServerConfig.SPECTRE_GENESIS_RATE.get()
-                else -> 0
-            }
+        val rate = this.coilType.amountGetter.get()
 
-            energyHandler.receiveEnergy(amount, false)
+        if (this.coilType.isGenerator) {
+            energyHandler.receiveEnergy(rate, false)
             return
         }
 
         val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
-
-        val rate = when (this.coilType) {
-            SpectreCoilBlock.Type.BASIC -> ServerConfig.SPECTRE_BASIC_RATE.get()
-            SpectreCoilBlock.Type.REDSTONE -> ServerConfig.SPECTRE_REDSTONE_RATE.get()
-            SpectreCoilBlock.Type.ENDER -> ServerConfig.SPECTRE_ENDER_RATE.get()
-
-            else -> 0
-        }
 
         val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
         if (available <= 0) return
