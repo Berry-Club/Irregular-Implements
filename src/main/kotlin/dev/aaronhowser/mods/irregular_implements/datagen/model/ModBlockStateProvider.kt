@@ -903,10 +903,17 @@ class ModBlockStateProvider(
         ).map { it.get() }
 
         for (block in crossBlocks) {
+            val texture = blockTexture(block)
+
             val model = models()
-                .cross(name(block), blockTexture(block))
+                .cross(name(block), texture)
                 .renderType(RenderType.cutout().name)
-            simpleBlockWithItem(block, model)
+
+            simpleBlock(block, model)
+
+            this.itemModels()
+                .withExistingParent(name(block), "item/generated")
+                .texture("layer0", texture)
         }
     }
 
