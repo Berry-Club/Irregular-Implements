@@ -11,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
@@ -70,7 +71,39 @@ class ModBlockStateProvider(
         val model = models()
             .getExistingFile(modLoc("block/spectre_coil"))
 
+        val itemModel = itemModels()
+            .withExistingParent("spectre_coil", modLoc("block/spectre_coil"))
+            .transforms()
+
+            .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+            .rotation(0f, -90f, 55f)
+            .translation(0f, 4f, 0.5f)
+            .scale(0.85f)
+            .end()
+
+            .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
+            .rotation(0f, 90f, -55f)
+            .translation(0f, 4f, 0.5f)
+            .scale(0.85f)
+            .end()
+
+            .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+            .rotation(0f, -90f, 25f)
+            .translation(1.13f, 3.2f, 1.13f)
+            .scale(0.68f)
+            .end()
+
+            .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+            .rotation(0f, 90f, -25f)
+            .translation(1.13f, 3.2f, 1.13f)
+            .scale(0.68f)
+            .end()
+
+            .end()
+
         for (block in blocks) {
+//            simpleBlockItem(block, itemModel)
+
             getVariantBuilder(block)
                 .forAllStates {
                     val facing = it.getValue(SpectreCoilBlock.FACING)
