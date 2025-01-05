@@ -3,10 +3,10 @@
     {
       "apply": [
         {
-          "model": "minecraft:block/blaze_fire_floor0"
+          "model": "irregular_implements:block/blaze_fire_floor0"
         },
         {
-          "model": "minecraft:block/blaze_fire_floor1"
+          "model": "irregular_implements:block/blaze_fire_floor1"
         }
       ],
       "when": {

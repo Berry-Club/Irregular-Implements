@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.level.block.state.BlockState
 
-//FIXME: Broken model
 class BlazeFireBlock : FireBlock(
     Properties
         .ofFullCopy(Blocks.FIRE)
