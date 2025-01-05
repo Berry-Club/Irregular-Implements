@@ -13,8 +13,10 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
 
@@ -26,6 +28,17 @@ class SpectreCoilBlockEntity(
     companion object {
         const val OWNER_UUID_NBT = "OwnerUuid"
         const val COIL_TYPE_NBT = "CoilType"
+
+        fun tick(
+            level: Level,
+            blockPos: BlockPos,
+            blockState: BlockState,
+            blockEntity: SpectreCoilBlockEntity
+        ) {
+            if (level.isClientSide) return
+
+            blockEntity.tick()
+        }
     }
 
     constructor(pos: BlockPos, blockState: BlockState, coilType: SpectreCoilBlock.Type) : this(pos, blockState) {
@@ -107,6 +120,30 @@ class SpectreCoilBlockEntity(
                 return false
             }
         }
+    }
+
+    private fun tick() {
+        val level = level as? ServerLevel ?: return
+
+        val facing = this.blockState.getValue(SpectreCoilBlock.FACING)
+        val onBlockPos = this.blockPos.relative(facing)
+
+        val energyHandler = level.getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
+
+        if (energyHandler == null || !energyHandler.canReceive()) return
+
+        if (this.coilType == SpectreCoilBlock.Type.NUMBER || this.coilType == SpectreCoilBlock.Type.GENESIS) {
+            val amount = when (this.coilType) {
+                SpectreCoilBlock.Type.NUMBER -> 128
+                SpectreCoilBlock.Type.GENESIS -> 10000000
+                else -> 0
+            }
+
+            energyHandler.receiveEnergy(amount, false)
+            return
+        }
+
+
     }
 
     // Syncs with client

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.entity.LivingEntity
@@ -12,6 +13,8 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -100,6 +103,14 @@ class SpectreCoilBlock private constructor(
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return SpectreCoilBlockEntity(pos, state, this.type)
+    }
+
+    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+        return BaseEntityBlock.createTickerHelper(
+            blockEntityType,
+            ModBlockEntities.SPECTRE_COIL.get(),
+            SpectreCoilBlockEntity::tick
+        )
     }
 
     override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
