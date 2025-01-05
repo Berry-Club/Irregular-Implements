@@ -26,14 +26,14 @@ class SpectreCoilBlock private constructor(
     companion object {
         val FACING: DirectionProperty = BlockStateProperties.FACING
 
-        private const val HEIGHT = 0.09375
+        private const val HEIGHT = 1.5
 
-        var SHAPE_NORTH: VoxelShape = box(0.3125, 0.3125, 1.0 - HEIGHT, 0.6875, 0.6875, 1.0)
-        var SHAPE_SOUTH: VoxelShape = box(0.3125, 0.3125, 0.0, 0.6875, 0.6875, HEIGHT)
-        var SHAPE_WEST: VoxelShape = box(1.0 - HEIGHT, 0.3125, 0.3125, 1.0, 0.6875, 0.6875)
-        var SHAPE_EAST: VoxelShape = box(0.0, 0.3125, 0.3125, HEIGHT, 0.6875, 0.6875)
-        var SHAPE_UP: VoxelShape = box(0.3125, 0.0, 0.3125, 0.6875, HEIGHT, 0.6875)
-        var SHAPE_DOWN: VoxelShape = box(0.3125, 1.0f - HEIGHT, 0.3125, 0.6875, 1.0, 0.6875)
+        var SHAPE_NORTH: VoxelShape = box(5.0, 5.0, 0.0, 11.0, 11.0, HEIGHT)
+        var SHAPE_SOUTH: VoxelShape = box(5.0, 5.0, 16.0 - HEIGHT, 11.0, 11.0, 16.0)
+        var SHAPE_WEST: VoxelShape = box(0.0, 5.0, 5.0, HEIGHT, 11.0, 11.0)
+        var SHAPE_EAST: VoxelShape = box(16.0 - HEIGHT, 5.0, 5.0, 16.0, 11.0, 11.0)
+        var SHAPE_UP: VoxelShape = box(5.0, 16.0 - HEIGHT, 5.0, 11.0, 16.0, 11.0)
+        var SHAPE_DOWN: VoxelShape = box(5.0, 0.0, 5.0, 11.0, HEIGHT, 11.0)
 
         val BASIC = SpectreCoilBlock(Type.BASIC)
         val REDSTONE = SpectreCoilBlock(Type.REDSTONE)
@@ -66,7 +66,7 @@ class SpectreCoilBlock private constructor(
             Direction.EAST -> SHAPE_EAST
             Direction.UP -> SHAPE_UP
             Direction.DOWN -> SHAPE_DOWN
-            else -> SHAPE_NORTH
+            else -> Shapes.block()
         }
     }
 
