@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.tag
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderLookup
@@ -40,7 +41,21 @@ class ModItemTagsProvider(
         val HIDE_NAME_HELMET = create("hide_name_helmet")
     }
 
+    //TODO: Copy all block tags to item tags
+
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(ItemTags.LOGS_THAT_BURN)
+            .add(
+                ModBlocks.SPECTRE_LOG.asItem(),
+                ModBlocks.STRIPPED_SPECTRE_LOG.asItem(),
+                ModBlocks.SPECTRE_WOOD.asItem()
+            )
+
+        this.tag(ItemTags.PLANKS)
+            .add(
+                ModBlocks.SPECTRE_PLANKS.asItem()
+            )
 
         this.tag(ENCHANTABLE_MAGNETIC)
             .addTags(

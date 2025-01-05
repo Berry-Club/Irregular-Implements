@@ -19,6 +19,23 @@ import net.neoforged.neoforge.common.ItemAbility
 // Who decided that flammability should work like this?
 object SpectreTreeBlocks {
 
+    val SPECTRE_WOOD = object : Block(
+        Properties.ofFullCopy(Blocks.OAK_WOOD)
+            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+    ) {
+        override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+            return getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction) > 0
+        }
+
+        override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+            return getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
+        }
+
+        override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+            return getFireSpreadSpeed(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
+        }
+    }
+
     val SPECTRE_LOG = object : FlammableRotatedPillarBlock(
         Blocks.OAK_LOG,
         Properties

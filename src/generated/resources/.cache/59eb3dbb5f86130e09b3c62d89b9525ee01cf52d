@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-05T14:08:01.3062844	Loot Tables
+// 1.21.1	2025-01-05T16:17:12.9263468	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -147,6 +147,7 @@ cda535bb8a06e5bc2ca2e14c43ed8920fcd89dad data/irregular_implements/loot_table/bl
 69a1f32f2fce7ce464f8f05db435f8f6ce421700 data/irregular_implements/loot_table/blocks/spectre_log.json
 0c05939eee68b534370dc9f33151df68c56bbddd data/irregular_implements/loot_table/blocks/spectre_planks.json
 1d8cfcabc0da4133cd64ebe95f67aba77ee6779f data/irregular_implements/loot_table/blocks/spectre_sapling.json
+10f512f715e9ba0ffdcd260972b89229fbc81390 data/irregular_implements/loot_table/blocks/spectre_wood.json
 918d55d62d3874973556926d161038cec5d5a15d data/irregular_implements/loot_table/blocks/spruce_platform.json
 03e46cd9a5492d3dca3424557d3c67742af0a574 data/irregular_implements/loot_table/blocks/stained_bricks_black.json
 79fd8f34cab68270b1b6dbb418f56308aa206373 data/irregular_implements/loot_table/blocks/stained_bricks_blue.json

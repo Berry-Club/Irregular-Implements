@@ -73,6 +73,13 @@ class ModBlockStateProvider(
                 .cubeAll(name(ModBlocks.SPECTRE_LEAVES.get()), modLoc("block/spectre_leaves"))
                 .renderType(RenderType.cutout().name)
         )
+
+        simpleBlockWithItem(
+            ModBlocks.SPECTRE_WOOD.get(),
+            models()
+                .cubeAll(name(ModBlocks.SPECTRE_WOOD.get()), modLoc("block/spectre_log"))
+        )
+
     }
 
     private fun blockItem(block: Block) {

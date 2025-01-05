@@ -1336,6 +1336,16 @@ class ModRecipeProvider(
             listOf(ing(ModBlocks.SPECTRE_LOG))
         ),
         shapelessRecipe(
+            ModBlocks.SPECTRE_WOOD,
+            4,
+            listOf(
+                ing(ModBlocks.SPECTRE_LOG),
+                ing(ModBlocks.SPECTRE_LOG),
+                ing(ModBlocks.SPECTRE_LOG),
+                ing(ModBlocks.SPECTRE_LOG)
+            )
+        ),
+        shapelessRecipe(
             ModItems.BEAN_STEW,
             listOf(
                 ing(ModItems.BEAN),

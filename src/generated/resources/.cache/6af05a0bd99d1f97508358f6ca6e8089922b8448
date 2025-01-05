@@ -1,5 +1,6 @@
-// 1.21.1	2025-01-05T14:01:27.4025435	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-01-05T16:23:00.4639256	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
+77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
 9eb871311b4810f0b570fce35e8570c5dc5d31d9 data/c/tags/block/dyed.json
 5ed28726c2a04a9324aaad89352be5777f70c52f data/c/tags/block/dyed/black.json
 77b879843314be3e3698264b6e4cd6f7b61c87a8 data/c/tags/block/dyed/blue.json
@@ -19,20 +20,24 @@ fee0f0a57e12c2d86363bd9bfea41d892973b2c7 data/c/tags/block/dyed/red.json
 a2931841526ea0b8f10a3cddf5295de25073be4c data/c/tags/block/dyed/yellow.json
 6eaea810dd682a75f550450be7551f7732a32838 data/c/tags/block/glass_blocks.json
 becd867e8bcda7ccc4b3afd4cf8f0b3152a8069f data/c/tags/block/stones.json
+da740397a876a5b0aef7f82114a536007098d2f4 data/c/tags/block/stripped_woods.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_destabilizer_blacklist.json
 176956da2ca540b41940ab90ff1ba3684ffc12d8 data/irregular_implements/tags/block/block_mover_blacklist.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_replacer_blacklist.json
-77880b0497e73ea20331ee68bbe0e9065984ab28 data/irregular_implements/tags/block/crops/bean.json
 42feff80ecc6486ed11bba53612d77101cfbe694 data/irregular_implements/tags/block/diaphanous_block_blacklist.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/block/super_lubricated.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/animals_spawnable_on.json
 ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.json
-649b51279137e2e15aeb135fd50fea75ae36696b data/minecraft/tags/block/crops.json
+1e6a540e94d1a520c08f270578324410ce8cbe24 data/minecraft/tags/block/crops.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/dirt.json
+5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/leaves.json
+465e1934ba824f9215eb64e28f2b86d64294e60e data/minecraft/tags/block/logs_that_burn.json
 8cc83b8d42998f921920889a7578f15634bf68bb data/minecraft/tags/block/mineable/axe.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/mineable/hoe.json
 473125a4ec5179f95fbe8cb972ec865177191263 data/minecraft/tags/block/mineable/pickaxe.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/mineable/shovel.json
+3cde7ba1eb112818696cfbdefc6948bcbf28c3c2 data/minecraft/tags/block/planks.json
+5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/replaceable_by_trees.json
 1702363b5a549dbe0f12831bf2a31d73c12c04fc data/minecraft/tags/block/saplings.json
 3645dbb9b45882943c3008d50363ee93ba0c6109 data/minecraft/tags/block/small_flowers.json
 50710d3daa5e73d16a02070ee961f41684faa90d data/minecraft/tags/block/stone_bricks.json

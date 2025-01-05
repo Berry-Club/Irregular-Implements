@@ -364,8 +364,9 @@ class ModLanguageProvider(
         addBlock(ModBlocks.SPECTRE_COIL_GENESIS, "Genesis Spectre Coil")
         addBlock(ModBlocks.SPECTRE_PLANKS, "Spectre Planks")
         addBlock(ModBlocks.SPECTRE_SAPLING, "Spectre Sapling")
-        addBlock(ModBlocks.SPECTRE_LOG, "Spectre Wood")
-        addBlock(ModBlocks.STRIPPED_SPECTRE_LOG, "Stripped Spectre Wood")
+        addBlock(ModBlocks.SPECTRE_LOG, "Spectre Log")
+        addBlock(ModBlocks.STRIPPED_SPECTRE_LOG, "Stripped Spectre Log")
+        addBlock(ModBlocks.SPECTRE_WOOD, "Spectre Wood")
         addBlock(ModBlocks.SPECTRE_LEAVES, "Spectre Leaves")
 
         addBlock(ModBlocks.BIOME_COBBLESTONE, "Biome Cobblestone")

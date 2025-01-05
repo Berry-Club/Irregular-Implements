@@ -27,16 +27,48 @@ class ModBlockTagsProvider(
             return BlockTags.create(OtherUtil.modResource(id))
         }
 
+        private fun common(id: String): TagKey<Block> {
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
+        }
+
         @JvmStatic
         val SUPER_LUBRICATED = create("super_lubricated")
-        val C_CROPS_BEAN: TagKey<Block> = BlockTags.create(OtherUtil.modResource("crops/bean"))
+        val C_CROPS_BEAN = common("crops/bean")
         val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
         val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
         val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
         val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
+        val C_STRIPPED_WOODS = common("stripped_woods")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(BlockTags.REPLACEABLE_BY_TREES)
+            .add(
+                ModBlocks.SPECTRE_LEAVES.get()
+            )
+
+        this.tag(BlockTags.LEAVES)
+            .add(
+                ModBlocks.SPECTRE_LEAVES.get()
+            )
+
+        this.tag(C_STRIPPED_WOODS)
+            .add(
+                ModBlocks.STRIPPED_SPECTRE_LOG.get()
+            )
+
+        this.tag(BlockTags.LOGS_THAT_BURN)
+            .add(
+                ModBlocks.SPECTRE_LOG.get(),
+                ModBlocks.STRIPPED_SPECTRE_LOG.get(),
+                ModBlocks.SPECTRE_WOOD.get()
+            )
+
+        this.tag(BlockTags.PLANKS)
+            .add(
+                ModBlocks.SPECTRE_PLANKS.get()
+            )
 
         this.tag(DIAPHANOUS_BLOCK_BLACKLIST)
             .add(
@@ -186,8 +218,7 @@ class ModBlockTagsProvider(
 
         this.tag(BlockTags.CROPS)
             .add(
-                ModBlocks.LOTUS.get(),
-                ModBlocks.BEAN_SPROUT.get()
+                ModBlocks.LOTUS.get()
             )
             .addTag(C_CROPS_BEAN)
 
