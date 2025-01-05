@@ -71,6 +71,7 @@ class ModBlockStateProvider(
         val baseModelName = "block/spectre_coil"
         val baseItemModelName = "item/spectre_coil"
 
+        //TODO: Improve transformation for gui and dropped
         itemModels()
             .withExistingParent(baseItemModelName, modLoc(baseModelName))
             .transforms()
@@ -107,18 +108,20 @@ class ModBlockStateProvider(
                 .forAllStates {
                     val facing = it.getValue(SpectreCoilBlock.FACING)
 
+                    // Faces down by default
+
                     val yRotation = when (facing) {
-                        Direction.NORTH -> 0
-                        Direction.EAST -> 90
-                        Direction.SOUTH -> 180
-                        Direction.WEST -> 270
+                        Direction.NORTH -> 180
+                        Direction.EAST -> 270
+                        Direction.SOUTH -> 0
+                        Direction.WEST -> 90
                         else -> 0
                     }
 
                     val xRotation = when (facing) {
-                        Direction.UP -> 270
-                        Direction.DOWN -> 90
-                        else -> 0
+                        Direction.UP -> 180
+                        Direction.DOWN -> 0
+                        else -> 90
                     }
 
                     val model = models()
