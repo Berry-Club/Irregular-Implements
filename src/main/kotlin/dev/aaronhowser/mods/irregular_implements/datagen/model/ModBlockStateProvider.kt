@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.DirectionalBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
+import net.neoforged.neoforge.client.model.generators.ModelFile
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 
 class ModBlockStateProvider(
@@ -57,6 +58,28 @@ class ModBlockStateProvider(
         diaphanousBlock()
         spectreEnergyInjector()
         spectreCoils()
+        spectreLogs()
+    }
+
+    private fun spectreLogs() {
+        logBlock(ModBlocks.SPECTRE_LOG.get())
+        blockItem(ModBlocks.SPECTRE_LOG.get())
+
+        //FIXME: Need a stripped texture
+
+        simpleBlockWithItem(
+            ModBlocks.SPECTRE_LEAVES.get(),
+            models()
+                .cubeAll(name(ModBlocks.SPECTRE_LEAVES.get()), modLoc("block/spectre_leaves"))
+                .renderType(RenderType.cutout().name)
+        )
+    }
+
+    private fun blockItem(block: Block) {
+        simpleBlockItem(
+            block,
+            ModelFile.UncheckedModelFile(modLoc("block/" + name(block)))
+        )
     }
 
     private fun spectreCoils() {
