@@ -3,8 +3,11 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
@@ -87,16 +90,25 @@ class SpectreCoilBlock private constructor(
         return level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
     }
 
-    enum class Type(val id: String, val color: Int) {
-        BASIC("basic", Color.CYAN.rgb),
-        REDSTONE("redstone", Color.RED.rgb),
-        ENDER("ender", Color(200, 0, 210).rgb),
-        NUMBER("number", Color.GREEN.rgb),
-        GENESIS("genesis", Color.ORANGE.rgb),
+    enum class Type(val color: Int) {
+        BASIC(Color.CYAN.rgb),
+        REDSTONE(Color.RED.rgb),
+        ENDER(Color(200, 0, 210).rgb),
+        NUMBER(Color.GREEN.rgb),
+        GENESIS(Color.ORANGE.rgb),
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return SpectreCoilBlockEntity(pos, state, this.type)
+    }
+
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+        super.setPlacedBy(level, pos, state, placer, stack)
+
+        if (placer == null) return
+        val blockEntity = level.getBlockEntity(pos) as? SpectreCoilBlockEntity ?: return
+
+        blockEntity.ownerUuid = placer.uuid ?: return
     }
 
 }
