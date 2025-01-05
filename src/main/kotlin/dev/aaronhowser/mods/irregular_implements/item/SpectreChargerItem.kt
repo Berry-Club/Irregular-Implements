@@ -1,7 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.Unit
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
@@ -25,7 +29,11 @@ class SpectreChargerItem private constructor(
     }
 
     override fun inventoryTick(stack: ItemStack, level: Level, player: Entity, slotId: Int, isSelected: Boolean) {
-        if (level !is ServerLevel || player !is Player || level.gameTime % CHARGE_DELAY != 0L) return
+        if (level !is ServerLevel
+            || player !is Player
+            || level.gameTime % CHARGE_DELAY != 0L
+            || !stack.has(ModDataComponents.IS_ENABLED)
+        ) return
 
         val amountToCharge = this.type.amountGetter.get() * CHARGE_DELAY
 
@@ -46,6 +54,24 @@ class SpectreChargerItem private constructor(
             val sent = energyCapability.receiveEnergy(available, false)
             coil.extractEnergy(sent, false)
         }
+    }
+
+    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+        val usedStack = player.getItemInHand(usedHand)
+
+        if (!level.isClientSide) {
+            if (usedStack.has(ModDataComponents.IS_ENABLED)) {
+                usedStack.remove(ModDataComponents.IS_ENABLED)
+            } else {
+                usedStack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
+            }
+        }
+
+        return InteractionResultHolder.success(usedStack)
+    }
+
+    override fun isFoil(stack: ItemStack): Boolean {
+        return stack.has(ModDataComponents.IS_ENABLED)
     }
 
     enum class Type(val color: Int, val amountGetter: Supplier<Int>) {
