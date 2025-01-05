@@ -55,6 +55,48 @@ class ModBlockStateProvider(
         spectreLens()
         diaphanousBlock()
         spectreEnergyInjector()
+        spectreCoils()
+    }
+
+    private fun spectreCoils() {
+        val blocks = listOf(
+            ModBlocks.SPECTRE_COIL.get(),
+            ModBlocks.SPECTRE_COIL_REDSTONE.get(),
+            ModBlocks.SPECTRE_COIL_ENDER.get(),
+            ModBlocks.SPECTRE_COIL_NUMBER.get(),
+            ModBlocks.SPECTRE_COIL_GENESIS.get()
+        )
+
+        val model = models()
+            .getExistingFile(modLoc("block/spectre_coil"))
+
+        for (block in blocks) {
+            getVariantBuilder(block)
+                .forAllStates {
+                    val facing = it.getValue(SpectreCoilBlock.FACING)
+
+                    val yRotation = when (facing) {
+                        Direction.NORTH -> 0
+                        Direction.EAST -> 90
+                        Direction.SOUTH -> 180
+                        Direction.WEST -> 270
+                        else -> 0
+                    }
+
+                    val xRotation = when (facing) {
+                        Direction.UP -> 270
+                        Direction.DOWN -> 90
+                        else -> 0
+                    }
+
+                    ConfiguredModel
+                        .builder()
+                        .modelFile(model)
+                        .rotationY(yRotation)
+                        .rotationX(xRotation)
+                        .build()
+                }
+        }
     }
 
     private fun spectreEnergyInjector() {
