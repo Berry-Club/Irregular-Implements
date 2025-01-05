@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -104,19 +105,19 @@ class SpectreChargerItem private constructor(
     ) {
         BASIC(
             color = Color.CYAN.rgb,
-            amountGetter = { 1024 }
+            amountGetter = { ServerConfig.SPECTRE_CHARGER_BASIC.get() }
         ),
         REDSTONE(
             color = Color.RED.rgb,
-            amountGetter = { 4096 }
+            amountGetter = { ServerConfig.SPECTRE_CHARGER_REDSTONE.get() }
         ),
         ENDER(
             color = Color(200, 0, 210).rgb,
-            amountGetter = { 20480 }
+            amountGetter = { ServerConfig.SPECTRE_CHARGER_ENDER.get() }
         ),
         GENESIS(
             color = Color.ORANGE.rgb,
-            amountGetter = { Int.MAX_VALUE }
+            amountGetter = { ServerConfig.SPECTRE_CHARGER_GENESIS.get() }
         )
     }
 

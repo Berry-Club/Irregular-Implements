@@ -31,6 +31,7 @@ class BeanStalkBlock(
     companion object {
         val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
 
+        //TODO: Also make it so you go down faster
         @JvmStatic
         fun climbingFactor(livingEntity: LivingEntity): Float {
             val blockState = livingEntity.inBlockState

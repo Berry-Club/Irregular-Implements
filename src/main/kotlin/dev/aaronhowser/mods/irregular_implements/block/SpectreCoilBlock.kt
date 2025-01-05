@@ -110,6 +110,7 @@ class SpectreCoilBlock private constructor(
         return onBlockThatCanReceivePower
     }
 
+    //TODO: Implement color
     enum class Type(
         val color: Int,
         val amountGetter: Supplier<Int>,

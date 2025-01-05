@@ -37,6 +37,11 @@ class ServerConfig(
         lateinit var SPECTRE_NUMBER_RATE: ModConfigSpec.IntValue
         lateinit var SPECTRE_GENESIS_RATE: ModConfigSpec.IntValue
 
+        lateinit var SPECTRE_CHARGER_BASIC: ModConfigSpec.IntValue
+        lateinit var SPECTRE_CHARGER_REDSTONE: ModConfigSpec.IntValue
+        lateinit var SPECTRE_CHARGER_ENDER: ModConfigSpec.IntValue
+        lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
+
     }
 
     init {
@@ -72,6 +77,22 @@ class ServerConfig(
         SPECTRE_GENESIS_RATE = builder
             .comment("How much energy should a Genesis Spectre Coil generate per tick?")
             .defineInRange("genesisRate", 10_000_000, 1, Int.MAX_VALUE)
+
+        SPECTRE_CHARGER_BASIC = builder
+            .comment("How fast should the Basic Spectre Charger charge items?")
+            .defineInRange("chargerBasic", 1024, 1, Int.MAX_VALUE)
+
+        SPECTRE_CHARGER_REDSTONE = builder
+            .comment("How fast should the Redstone Spectre Charger charge items?")
+            .defineInRange("chargerRedstone", 4096, 1, Int.MAX_VALUE)
+
+        SPECTRE_CHARGER_ENDER = builder
+            .comment("How fast should the Ender Spectre Charger charge items?")
+            .defineInRange("chargerEnder", 20480, 1, Int.MAX_VALUE)
+
+        SPECTRE_CHARGER_GENESIS = builder
+            .comment("How fast should the Genesis Spectre Charger charge items?")
+            .defineInRange("chargerGenesis", Int.MAX_VALUE, 1, Int.MAX_VALUE)
 
         SPECTRE_IMBUE_CHANCE = builder
             .comment("What is the chance that the Spectre Imbue will cancel incoming damage?")
