@@ -58,7 +58,7 @@ class SpectreIlluminatorEntity(
             return illuminatedChunks[level].contains(chunkPos.toLong())
         }
 
-        //FIXME: For some reason it doesn't work super well in chunks that are mostly empty
+        //FIXME: For some reason it doesn't work super well in chunks that are mostly empty (possibly only effects superflat levels?)
         //TODO: Study effect on lag, possibly only when the chunk loads the first time?
         private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
             if (!level.isLoaded(chunkPos.worldPosition)) return

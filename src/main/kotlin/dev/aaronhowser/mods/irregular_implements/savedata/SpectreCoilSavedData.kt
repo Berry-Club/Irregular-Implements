@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.saveddata.SavedData
 import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
-import javax.swing.text.html.parser.Entity
 
 class SpectreCoilSavedData : SavedData() {
 
@@ -50,12 +49,13 @@ class SpectreCoilSavedData : SavedData() {
         const val UUID_NBT = "uuid"
         const val ENERGY_NBT = "energy"
 
+        //TODO: Config
         const val MAX_ENERGY = 1_000_000
     }
 
     private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
 
-    fun getStorage(ownerUuid: UUID): IEnergyStorage {
+    fun getEnergyInjector(ownerUuid: UUID): IEnergyStorage {
         return object : IEnergyStorage {
             override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
                 val currentEnergy = coilEntries.getOrDefault(ownerUuid, 0)
@@ -71,6 +71,34 @@ class SpectreCoilSavedData : SavedData() {
                 this@SpectreCoilSavedData.setDirty()
 
                 return newEnergy - currentEnergy
+            }
+
+            override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
+                return 0
+            }
+
+            override fun getEnergyStored(): Int {
+                return coilEntries.getOrDefault(ownerUuid, 0)
+            }
+
+            override fun getMaxEnergyStored(): Int {
+                return MAX_ENERGY
+            }
+
+            override fun canExtract(): Boolean {
+                return false
+            }
+
+            override fun canReceive(): Boolean {
+                return true
+            }
+        }
+    }
+
+    fun getCoil(ownerUuid: UUID): IEnergyStorage {
+        return object : IEnergyStorage {
+            override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
+                return 0
             }
 
             override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
@@ -102,14 +130,9 @@ class SpectreCoilSavedData : SavedData() {
             }
 
             override fun canReceive(): Boolean {
-                return true
+                return false
             }
-
         }
-    }
-
-    fun getStorage(ownerEntity: Entity): IEnergyStorage {
-        return getStorage(ownerEntity)
     }
 
     override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {

@@ -35,7 +35,7 @@ class SpectreEnergyInjectorBlockEntity(
     fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
         val level = this.level as? ServerLevel ?: return null
 
-        return level.spectreCoilSavedData.getStorage(this.ownerUuid)
+        return level.spectreCoilSavedData.getEnergyInjector(this.ownerUuid)
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

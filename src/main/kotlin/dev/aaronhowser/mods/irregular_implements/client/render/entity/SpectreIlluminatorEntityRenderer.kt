@@ -23,6 +23,7 @@ class SpectreIlluminatorEntityRenderer(
         private const val WIDTH_FACTOR = 0.35f
     }
 
+    //TODO: Render the wibbly item texture in the center (also do this for the BEWLR)
     override fun render(
         spectreIlluminatorEntity: SpectreIlluminatorEntity,
         entityYaw: Float,
