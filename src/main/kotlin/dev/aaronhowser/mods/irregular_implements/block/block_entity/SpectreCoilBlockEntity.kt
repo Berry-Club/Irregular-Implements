@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
@@ -134,8 +135,8 @@ class SpectreCoilBlockEntity(
 
         if (this.coilType == SpectreCoilBlock.Type.NUMBER || this.coilType == SpectreCoilBlock.Type.GENESIS) {
             val amount = when (this.coilType) {
-                SpectreCoilBlock.Type.NUMBER -> 128
-                SpectreCoilBlock.Type.GENESIS -> 10000000
+                SpectreCoilBlock.Type.NUMBER -> ServerConfig.SPECTRE_NUMBER_RATE.get()
+                SpectreCoilBlock.Type.GENESIS -> ServerConfig.SPECTRE_GENESIS_RATE.get()
                 else -> 0
             }
 
@@ -146,9 +147,9 @@ class SpectreCoilBlockEntity(
         val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
 
         val rate = when (this.coilType) {
-            SpectreCoilBlock.Type.BASIC -> 1_024
-            SpectreCoilBlock.Type.REDSTONE -> 4_096
-            SpectreCoilBlock.Type.ENDER -> 20_480
+            SpectreCoilBlock.Type.BASIC -> ServerConfig.SPECTRE_BASIC_RATE.get()
+            SpectreCoilBlock.Type.REDSTONE -> ServerConfig.SPECTRE_REDSTONE_RATE.get()
+            SpectreCoilBlock.Type.ENDER -> ServerConfig.SPECTRE_ENDER_RATE.get()
 
             else -> 0
         }

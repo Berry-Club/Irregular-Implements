@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.savedata
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
@@ -50,7 +51,8 @@ class SpectreCoilSavedData : SavedData() {
         const val ENERGY_NBT = "energy"
 
         //TODO: Config
-        const val MAX_ENERGY = 1_000_000
+        val MAX_ENERGY: Int
+            get() = ServerConfig.SPECTRE_MAX_ENERGY.get()
     }
 
     private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
