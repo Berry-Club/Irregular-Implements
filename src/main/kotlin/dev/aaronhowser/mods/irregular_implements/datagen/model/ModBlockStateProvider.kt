@@ -68,11 +68,11 @@ class ModBlockStateProvider(
             ModBlocks.SPECTRE_COIL_GENESIS.get()
         )
 
-        val model = models()
-            .getExistingFile(modLoc("block/spectre_coil"))
+        val baseModelName = "block/spectre_coil_base"
+        val baseItemModelName = "item/spectre_coil"
 
-        val itemModel = itemModels()
-            .withExistingParent("spectre_coil", modLoc("block/spectre_coil"))
+        itemModels()
+            .withExistingParent(baseItemModelName, modLoc(baseModelName))
             .transforms()
 
             .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
@@ -102,7 +102,12 @@ class ModBlockStateProvider(
             .end()
 
         for (block in blocks) {
-//            simpleBlockItem(block, itemModel)
+
+            itemModels()
+                .withExistingParent(
+                    name(block),
+                    modLoc(baseItemModelName)
+                )
 
             getVariantBuilder(block)
                 .forAllStates {
@@ -121,6 +126,9 @@ class ModBlockStateProvider(
                         Direction.DOWN -> 90
                         else -> 0
                     }
+
+                    val model = models()
+                        .getExistingFile(modLoc(baseModelName))
 
                     ConfiguredModel
                         .builder()
