@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "irregular_implements:spectre_charger_redstone"
+    },
+    "E": {
+      "tag": "c:ender_pearls"
+    },
+    "P": {
+      "item": "irregular_implements:stable_ender_pearl"
+    },
+    "S": {
+      "item": "irregular_implements:spectre_string"
+    }
+  },
+  "pattern": [
+    "PSE",
+    "SCS",
+    "ESP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:spectre_charger_ender"
+  }
+}

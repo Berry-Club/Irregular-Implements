@@ -75,8 +75,6 @@ class ModRecipeProvider(
     // Potions of Collapse
     // Crafting Tables
     // Imbues
-    // Weather Eggs
-    // Spectre Charger tiers
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -1060,16 +1058,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.SPECTRE_CHARGER_BASIC,
-            "BOS,OIO,SOB",
-            mapOf(
-                'B' to ing(Items.IRON_BARS),
-                'O' to ing(Tags.Items.OBSIDIANS),
-                'S' to ing(ModItems.SPECTRE_STRING),
-                'I' to ing(ModItems.SPECTRE_INGOT)
-            )
-        ),
-        shapedRecipe(
             ModItems.WEATHER_EGG_SUNNY,
             2,
             "OFO,SCS,OFO",
@@ -1276,6 +1264,36 @@ class ModRecipeProvider(
                 'W' to ing(Items.WITHER_SKELETON_SKULL),
                 'G' to ing(Items.GHAST_TEAR),
                 'E' to ing(Tags.Items.ENDER_PEARLS)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_CHARGER_BASIC,
+            "IOS,ONO,SOI",
+            mapOf(
+                'I' to ing(Items.IRON_BARS),
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'N' to ing(ModItems.SPECTRE_INGOT)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_CHARGER_REDSTONE,
+            "BSD,SCS,DSB",
+            mapOf(
+                'B' to ing(Tags.Items.STORAGE_BLOCKS_REDSTONE),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'D' to ing(Tags.Items.DUSTS_REDSTONE),
+                'C' to ing(ModItems.SPECTRE_CHARGER_BASIC)
+            )
+        ),
+        shapedRecipe(
+            ModItems.SPECTRE_CHARGER_ENDER,
+            "PSE,SCS,ESP",
+            mapOf(
+                'P' to ing(ModItems.STABLE_ENDER_PEARL),
+                'S' to ing(ModItems.SPECTRE_STRING),
+                'E' to ing(Tags.Items.ENDER_PEARLS),
+                'C' to ing(ModItems.SPECTRE_CHARGER_REDSTONE)
             )
         )
     )

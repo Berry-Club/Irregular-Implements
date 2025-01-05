@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "irregular_implements:spectre_charger"
+        "recipe": "irregular_implements:spectre_charger_ender"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "irregular_implements:spectre_charger"
+      "irregular_implements:spectre_charger_ender"
     ]
   }
 }

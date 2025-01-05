@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/redstone"
+    },
+    "C": {
+      "item": "irregular_implements:spectre_charger_basic"
+    },
+    "D": {
+      "tag": "c:dusts/redstone"
+    },
+    "S": {
+      "item": "irregular_implements:spectre_string"
+    }
+  },
+  "pattern": [
+    "BSD",
+    "SCS",
+    "DSB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:spectre_charger_redstone"
+  }
+}

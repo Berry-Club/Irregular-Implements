@@ -2,10 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
+    "I": {
       "item": "minecraft:iron_bars"
     },
-    "I": {
+    "N": {
       "item": "irregular_implements:spectre_ingot"
     },
     "O": {
@@ -16,12 +16,12 @@
     }
   },
   "pattern": [
-    "BOS",
-    "OIO",
-    "SOB"
+    "IOS",
+    "ONO",
+    "SOI"
   ],
   "result": {
     "count": 1,
-    "id": "irregular_implements:spectre_charger"
+    "id": "irregular_implements:spectre_charger_basic"
   }
 }

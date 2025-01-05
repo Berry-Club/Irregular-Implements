@@ -139,6 +139,18 @@ object ClientModBusEvents {
             RedstoneActivatorItem::getDurationFloat
         )
 
+        for (item in listOf(
+            ModItems.SPECTRE_CHARGER_BASIC.get(),
+            ModItems.SPECTRE_CHARGER_REDSTONE.get(),
+            ModItems.SPECTRE_CHARGER_ENDER.get(),
+            ModItems.SPECTRE_CHARGER_GENESIS.get()
+        )) {
+            ItemProperties.register(
+                item,
+                SpectreChargerItem.IS_ENABLED,
+                SpectreChargerItem::getEnabledForPredicate
+            )
+        }
     }
 
     @SubscribeEvent

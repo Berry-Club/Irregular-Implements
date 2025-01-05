@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.item.RedstoneActivatorItem
+import dev.aaronhowser.mods.irregular_implements.item.SpectreChargerItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -30,8 +31,43 @@ class ModItemModelProvider(
         diviningRod()
         buckets()
         blockEntityWithoutLevelRenderers()
+        spectreChargers()
 
         basicItems()
+    }
+
+    private fun spectreChargers() {
+
+        val glowTexture = modLoc("item/spectre_charger/glow")
+
+        val items = mapOf(
+            ModItems.SPECTRE_CHARGER_BASIC.get() to "basic",
+            ModItems.SPECTRE_CHARGER_REDSTONE.get() to "redstone",
+            ModItems.SPECTRE_CHARGER_ENDER.get() to "ender",
+            ModItems.SPECTRE_CHARGER_GENESIS.get() to "genesis"
+        )
+
+        for ((item, type) in items) {
+
+            val name = getName(item)
+            val baseTexture = modLoc("item/spectre_charger/$type")
+
+            val glowModel = getBuilder("${name}_glow")
+                .parent(ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", baseTexture)
+                .texture("layer1", glowTexture)
+
+            getBuilder(name.toString())
+                .parent(ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", baseTexture)
+
+                .override()
+                .predicate(SpectreChargerItem.IS_ENABLED, 1f)
+                .model(glowModel)
+                .end()
+
+            handledItems.add(item)
+        }
     }
 
     private fun blockEntityWithoutLevelRenderers() {
