@@ -23,7 +23,7 @@ import net.neoforged.neoforge.common.ItemAbilities
 object ModInteractionRecipes {
 
     fun getInteractionRecipes(): List<EmiWorldInteractionRecipe> {
-        return grassSeeds() + slime()
+        return grassSeeds() + slime() + otherRecipes()
     }
 
     private fun grassSeeds(): List<EmiWorldInteractionRecipe> {
@@ -64,7 +64,7 @@ object ModInteractionRecipes {
         return stack
     }
 
-    private fun slime(): MutableList<EmiWorldInteractionRecipe> {
+    private fun slime(): List<EmiWorldInteractionRecipe> {
         val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
 
         val slimeBlock = Items.SLIME_BLOCK.defaultInstance
@@ -120,6 +120,33 @@ object ModInteractionRecipes {
         recipes.add(recipeTwo)
         recipes.add(recipeThree)
         recipes.add(recipeFour)
+
+        return recipes
+    }
+
+    private fun otherRecipes(): List<EmiWorldInteractionRecipe> {
+        val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
+
+        val axes = BuiltInRegistries.ITEM
+            .filter { it.defaultInstance.canPerformAction(ItemAbilities.AXE_STRIP) }
+
+        val axesEmiIngredient = EmiIngredient.of(Ingredient.of(*axes.toTypedArray()))
+
+        for (emiStack in axesEmiIngredient.emiStacks) {
+            val damagedStack = emiStack.itemStack.copy()
+            damagedStack.damageValue = 1
+            emiStack.setRemainder(EmiStack.of(damagedStack))
+        }
+
+        val stripRecipe = EmiWorldInteractionRecipe
+            .builder()
+            .leftInput(ModBlocks.SPECTRE_LOG.emiIngredient)
+            .rightInput(axesEmiIngredient, true)
+            .output(EmiStack.of(ModBlocks.STRIPPED_SPECTRE_LOG.asItem()))
+            .id(OtherUtil.modResource("/interaction/spectre_log_stripping"))
+            .build()
+
+        recipes.add(stripRecipe)
 
         return recipes
     }

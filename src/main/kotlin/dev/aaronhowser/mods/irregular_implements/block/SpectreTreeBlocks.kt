@@ -45,8 +45,6 @@ object SpectreTreeBlocks {
             .ofFullCopy(Blocks.OAK_LOG)
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
     ) {
-
-        //TODO: Emi
         override fun getToolModifiedState(state: BlockState, context: UseOnContext, itemAbility: ItemAbility, simulate: Boolean): BlockState? {
             if (itemAbility != ItemAbilities.AXE_STRIP) return super.getToolModifiedState(state, context, itemAbility, simulate)
 
