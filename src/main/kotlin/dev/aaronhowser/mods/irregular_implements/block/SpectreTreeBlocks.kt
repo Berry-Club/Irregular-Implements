@@ -130,7 +130,7 @@ object SpectreTreeBlocks {
         usedStack.consume(1, event.entity)
 
         level.sendParticles(
-            ParticleTypes.HAPPY_VILLAGER,
+            ParticleTypes.SCULK_SOUL,
             pos.x + 0.5,
             pos.y + 0.5,
             pos.z + 0.5,
