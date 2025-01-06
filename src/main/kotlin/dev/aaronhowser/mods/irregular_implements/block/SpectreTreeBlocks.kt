@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModConfiguredFeatures
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -16,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
 import net.neoforged.neoforge.common.ItemAbilities
 import net.neoforged.neoforge.common.ItemAbility
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import java.util.*
 
 // Made this class because it requires a lot of anon classes and those are gross
@@ -110,5 +113,21 @@ object SpectreTreeBlocks {
             .ofFullCopy(Blocks.OAK_SAPLING)
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
     ) {}
+
+    fun convertSaplings(event: PlayerInteractEvent.RightClickBlock) {
+        val usedStack = event.itemStack
+        if (!usedStack.`is`(ModItems.ECTOPLASM)) return
+
+        val level = event.level
+        val pos = event.pos
+
+        val clickedState = level.getBlockState(pos)
+
+        if (clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) {
+            level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
+
+            usedStack.consume(1, event.entity)
+        }
+    }
 
 }

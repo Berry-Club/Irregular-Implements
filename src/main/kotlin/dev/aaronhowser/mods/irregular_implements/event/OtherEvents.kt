@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.CompressedSlimeBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
+import dev.aaronhowser.mods.irregular_implements.block.SpectreTreeBlocks
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -61,6 +62,8 @@ object OtherEvents {
         if (event.hand == InteractionHand.MAIN_HAND) {
             ContactLeverBlock.handleClickBlock(level, pos)
             ContactButtonBlock.handleClickBlock(level, pos)
+
+            SpectreTreeBlocks.convertSaplings(event)
         }
     }
 

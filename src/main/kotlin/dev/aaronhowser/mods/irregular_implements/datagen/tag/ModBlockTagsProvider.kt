@@ -39,9 +39,15 @@ class ModBlockTagsProvider(
         val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
         val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
         val C_STRIPPED_WOODS = common("stripped_woods")
+        val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(CONVERTS_TO_SPECTRE_SAPLING)
+            .add(
+                Blocks.OAK_SAPLING
+            )
 
         this.tag(BlockTags.REPLACEABLE_BY_TREES)
             .add(

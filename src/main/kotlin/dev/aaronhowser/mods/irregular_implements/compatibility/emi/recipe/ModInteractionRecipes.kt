@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -13,6 +14,7 @@ import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -147,6 +149,24 @@ object ModInteractionRecipes {
             .build()
 
         recipes.add(stripRecipe)
+
+        val convertsToSpectreSapling = BuiltInRegistries.ITEM
+            .filter { it is BlockItem && it.block.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING) }
+
+        if (convertsToSpectreSapling.isNotEmpty()) {
+            val saplingsEmiIngredient = EmiIngredient.of(Ingredient.of(*convertsToSpectreSapling.toTypedArray()))
+            val ectoplasmIngredient = ModItems.ECTOPLASM.emiIngredient
+
+            val spectreSaplingRecipe = EmiWorldInteractionRecipe
+                .builder()
+                .leftInput(saplingsEmiIngredient)
+                .rightInput(ectoplasmIngredient, false)
+                .output(EmiStack.of(ModBlocks.SPECTRE_SAPLING.asItem()))
+                .id(OtherUtil.modResource("/interaction/spectre_sapling_conversion"))
+                .build()
+
+            recipes.add(spectreSaplingRecipe)
+        }
 
         return recipes
     }
