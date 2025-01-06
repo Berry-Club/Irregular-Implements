@@ -7,6 +7,8 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
@@ -118,16 +120,26 @@ object SpectreTreeBlocks {
         val usedStack = event.itemStack
         if (!usedStack.`is`(ModItems.ECTOPLASM)) return
 
-        val level = event.level
+        val level = event.level as? ServerLevel ?: return
         val pos = event.pos
 
         val clickedState = level.getBlockState(pos)
+        if (!clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) return
 
-        if (clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) {
-            level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
+        level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
+        usedStack.consume(1, event.entity)
 
-            usedStack.consume(1, event.entity)
-        }
+        level.sendParticles(
+            ParticleTypes.HAPPY_VILLAGER,
+            pos.x + 0.5,
+            pos.y + 0.5,
+            pos.z + 0.5,
+            5,
+            0.25,
+            0.25,
+            0.25,
+            0.0
+        )
     }
 
 }

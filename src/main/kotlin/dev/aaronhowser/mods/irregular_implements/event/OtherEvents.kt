@@ -56,7 +56,11 @@ object OtherEvents {
 
     @SubscribeEvent
     fun onClickBlock(event: PlayerInteractEvent.RightClickBlock) {
+        if (event.isCanceled) return
+
         val level = event.level
+        if (level.isClientSide) return
+
         val pos = event.pos
 
         if (event.hand == InteractionHand.MAIN_HAND) {

@@ -45,8 +45,11 @@ class ModBlockTagsProvider(
     override fun addTags(provider: HolderLookup.Provider) {
 
         this.tag(CONVERTS_TO_SPECTRE_SAPLING)
-            .add(
-                Blocks.OAK_SAPLING
+            .addTag(
+                BlockTags.SAPLINGS
+            )
+            .remove(
+                ModBlocks.SPECTRE_SAPLING.get()
             )
 
         this.tag(BlockTags.REPLACEABLE_BY_TREES)
