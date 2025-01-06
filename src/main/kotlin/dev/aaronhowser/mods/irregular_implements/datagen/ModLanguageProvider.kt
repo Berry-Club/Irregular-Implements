@@ -102,11 +102,35 @@ class ModLanguageProvider(
     object Misc {
         const val MAGNETIC_NAME = "enchantment.irregular_implements.magnetic"
         const val MAGNETIC_DESC = "enchantment.irregular_implements.magnetic.desc"
+
+        const val MAGNETIC_TAG = "tag.item.irregular_implements.enchantable.magnetic"
+        const val GRASS_SEEDS_TAG = "tag.item.irregular_implements.grass_seeds"
+        const val HIDE_NAME_HELMET_TAG = "tag.item.irregular_implements.hide_name_helmet"
+        const val HIDE_POTION_HELMET_TAG = "tag.item.irregular_implements.hide_potion_helmet"
+        const val SUPER_LUBRICATED_TAG = "tag.item.irregular_implements.super_lubricated"
+
+        const val C_BEAN_TAG = "tag.item.c.crops.bean"
+        const val C_OBSIDIAN_RODS_TAG = "tag.item.c.rods.obsidian"
+
+        const val ALLOWS_LAVA_WALKING = "tag.fluid.irregular_implements.allows_lava_walking"
+        const val ALLOWS_WATER_WALKING = "tag.fluid.irregular_implements.allows_water_walking"
     }
 
     private fun addMisc() {
         add(Misc.MAGNETIC_NAME, "Magnetic")
         add(Misc.MAGNETIC_DESC, "Teleports fresh item drops towards you")
+
+        add(Misc.MAGNETIC_TAG, "Magnetic Enchantable")
+        add(Misc.GRASS_SEEDS_TAG, "Grass Seeds")
+        add(Misc.HIDE_NAME_HELMET_TAG, "Hides Name Helmet")
+        add(Misc.HIDE_POTION_HELMET_TAG, "Hides Potion Helmet")
+        add(Misc.SUPER_LUBRICATED_TAG, "Super Lubricated Boots")
+
+        add(Misc.C_BEAN_TAG, "Beans")
+        add(Misc.C_OBSIDIAN_RODS_TAG, "Obsidian Rods")
+
+        add(Misc.ALLOWS_WATER_WALKING, "Allows Water Walking")
+        add(Misc.ALLOWS_LAVA_WALKING, "Allows Lava Walking")
     }
 
     object Messages {
