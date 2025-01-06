@@ -13,7 +13,7 @@ object AnvilRecipes {
             ModItems.OBSIDIAN_SKULL.emiIngredient,
             Items.FIRE_CHARGE.emiIngredient,
             ModItems.OBSIDIAN_SKULL_RING.asItem(),
-            OtherUtil.modResource("obsidian_skull_ring")
+            OtherUtil.modResource("/anvil/obsidian_skull_ring")
         )
 
         val obsidianWaterWalkingSkullOne = EmiAnvilRecipe(
@@ -25,14 +25,14 @@ object AnvilRecipes {
                 )
             ),
             ModItems.OBSIDIAN_WATER_WALKING_BOOTS.asItem(),
-            OtherUtil.modResource("obsidian_water_walking_skull")
+            OtherUtil.modResource("/anvil/obsidian_water_walking_skull")
         )
 
         val lavaWaders = EmiAnvilRecipe(
             ModItems.OBSIDIAN_WATER_WALKING_BOOTS.emiIngredient,
             ModItems.LAVA_CHARM.emiIngredient,
             ModItems.LAVA_WADERS.asItem(),
-            OtherUtil.modResource("lava_waders")
+            OtherUtil.modResource("/anvil/lava_waders")
         )
 
         return listOf(
