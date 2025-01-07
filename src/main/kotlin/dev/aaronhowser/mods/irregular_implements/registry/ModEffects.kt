@@ -22,7 +22,7 @@ object ModEffects {
         EFFECT_REGISTRY.register("imbue_experience", Supplier { ImbueEffect(Color.YELLOW.rgb) })
     val WITHER_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
         EFFECT_REGISTRY.register("imbue_wither", Supplier { ImbueEffect(Color.BLACK.brighter().rgb) })
-    val SPECTRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
+    val SPECTRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =    //FIXME: No texture
         EFFECT_REGISTRY.register("imbue_spectre", Supplier { ImbueEffect(0xBFEFFF) })
 
     @JvmStatic

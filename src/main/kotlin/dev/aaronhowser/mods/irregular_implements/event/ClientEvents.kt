@@ -2,12 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
 import dev.aaronhowser.mods.irregular_implements.item.SpectreAnchorItem
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.EquipmentSlot
@@ -15,7 +12,6 @@ import net.minecraft.world.entity.LivingEntity
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
-import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent
 import net.neoforged.neoforge.client.event.RenderLivingEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
@@ -29,15 +25,6 @@ object ClientEvents {
     fun tooltipEvent(event: ItemTooltipEvent) {
         ModArmorItems.tooltip(event)
         SpectreAnchorItem.tooltip(event)
-    }
-
-    @SubscribeEvent
-    fun onPlayerTurn(event: CalculatePlayerTurnEvent) {
-        val player = ClientUtil.localPlayer ?: return
-
-        if (ClientConfig.COLLAPSE_INVERTS_MOUSE.get() && player.hasEffect(ModEffects.COLLAPSE_IMBUE)) {
-            event.mouseSensitivity *= -1.75
-        }
     }
 
     private var changedAlpha = false
