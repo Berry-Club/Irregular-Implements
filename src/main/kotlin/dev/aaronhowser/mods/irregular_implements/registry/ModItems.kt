@@ -54,7 +54,7 @@ object ModItems {
     val OBSIDIAN_ROD = basic("obsidian_rod")
     val BIOME_SENSOR = basic("biome_sensor")
     val PLATE_BASE = basic("plate_base")
-    val ECTOPLASM = basic("ectoplasm")  // use on sapling to make spectre sapling
+    val ECTOPLASM = basic("ectoplasm")
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
     val SPECTRE_INGOT = basic("spectre_ingot")
     val SPECTRE_STRING = basic("spectre_string")

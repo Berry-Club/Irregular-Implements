@@ -47,26 +47,17 @@ class FilterPlayerItem : Item(
         interactionTarget: LivingEntity,
         usedHand: InteractionHand
     ): InteractionResult {
-        if (interactionTarget !is Player) return InteractionResult.PASS
-        if (player.cooldowns.isOnCooldown(this)) return InteractionResult.PASS
+        if (interactionTarget !is Player) return InteractionResult.FAIL
 
         val usedStack = player.getItemInHand(usedHand)
         setPlayer(usedStack, interactionTarget)
-
-        player.cooldowns.addCooldown(this, 1)
 
         return InteractionResult.SUCCESS
     }
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
-        if (player.isClientSide) return InteractionResultHolder.pass(usedStack)
-
-        if (player.cooldowns.isOnCooldown(this)) return InteractionResultHolder.pass(usedStack)
-
         setPlayer(usedStack, player)
-
-        player.cooldowns.addCooldown(this, 1)
 
         return InteractionResultHolder.success(usedStack)
     }
