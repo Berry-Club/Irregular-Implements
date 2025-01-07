@@ -50,7 +50,6 @@ class SpectreCoilSavedData : SavedData() {
         const val UUID_NBT = "uuid"
         const val ENERGY_NBT = "energy"
 
-        //TODO: Config
         val MAX_ENERGY: Int
             get() = ServerConfig.SPECTRE_BUFFER_CAPACITY.get()
     }

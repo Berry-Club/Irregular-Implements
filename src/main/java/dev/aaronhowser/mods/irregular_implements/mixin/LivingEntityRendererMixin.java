@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntityRenderer.class)
 abstract public class LivingEntityRendererMixin<T extends LivingEntity> {
 
-    //TODO: Test this
     @Inject(
             method = "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;)Z",
             at = @At("HEAD"),
