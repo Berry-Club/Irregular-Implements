@@ -24,11 +24,11 @@ class FilterEntityItem : Item(
 
     companion object {
         fun getEntityType(stack: ItemStack): EntityType<*>? {
-            return stack.get(ModDataComponents.ENTITY_TYPE.get())
+            return stack.get(ModDataComponents.ENTITY_TYPE)
         }
 
         fun setEntityType(stack: ItemStack, entityType: EntityType<*>) {
-            stack.set(ModDataComponents.ENTITY_TYPE.get(), entityType)
+            stack.set(ModDataComponents.ENTITY_TYPE, entityType)
         }
     }
 

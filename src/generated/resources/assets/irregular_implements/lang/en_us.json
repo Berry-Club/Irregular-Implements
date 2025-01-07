@@ -511,6 +511,7 @@
   "tooltip.irregular_implements.forget_lazy_shape": "Forget Lazy Shape",
   "tooltip.irregular_implements.item_count": "%s x%d",
   "tooltip.irregular_implements.lazy": "Lazy",
+  "tooltip.irregular_implements.location_component": "%s, %dx %dy %dz",
   "tooltip.irregular_implements.lubricated": "Lubricated",
   "tooltip.irregular_implements.message_regex": "Message regex",
   "tooltip.irregular_implements.not_lazy": "Not Lazy",

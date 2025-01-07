@@ -116,6 +116,19 @@ object OtherUtil {
         }.withStyle(ChatFormatting.GRAY)
     }
 
+    fun getDimensionComponent(dimensionResourceKey: ResourceKey<Level>): Component {
+        val location = dimensionResourceKey.location()
+
+        val probableTranslationKey = "dimension.${location.namespace}.${location.path}"
+        val hasTranslation = I18n.exists(probableTranslationKey)
+
+        return if (hasTranslation) {
+            Component.translatable(probableTranslationKey)
+        } else {
+            Component.literal(location.toString())
+        }.withStyle(ChatFormatting.GRAY)
+    }
+
     fun flattenStacks(input: List<ItemStack>): List<ItemStack> {
         val output = mutableListOf<ItemStack>()
 

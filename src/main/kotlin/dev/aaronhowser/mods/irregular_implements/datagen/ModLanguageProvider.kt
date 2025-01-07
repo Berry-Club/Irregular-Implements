@@ -549,6 +549,7 @@ class ModLanguageProvider(
         const val COIL_GENERATES = "tooltip.irregular_implements.coil_generates"
         const val CHARGER_CHARGES = "tooltip.irregular_implements.charger_charges"
 
+        const val LOCATION_COMPONENT = "tooltip.irregular_implements.location_component"
     }
 
     private fun addTooltips() {
@@ -571,6 +572,7 @@ class ModLanguageProvider(
         add(Tooltips.VOID_STONE_REMOVE, "You can remove the %s by right-clicking the Stone into an empty slot")
         add(Tooltips.ANCHORED, "Anchored")
         add(Tooltips.ALL_ORES, "All Ores")
+        add(Tooltips.LOCATION_COMPONENT, "%s, %dx %dy %dz")
 
         add(Tooltips.LAZY, "Lazy")
         add(Tooltips.NOT_LAZY, "Not Lazy")
