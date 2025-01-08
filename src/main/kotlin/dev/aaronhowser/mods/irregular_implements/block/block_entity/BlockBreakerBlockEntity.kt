@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.Unbreakable
@@ -41,6 +42,24 @@ class BlockBreakerBlockEntity(
         const val IS_MINING_NBT = "IsMining"
         const val CAN_MINE_NBT = "CanMine"
         const val MINING_PROGRESS_NBT = "MiningProgress"
+
+        private fun getPick(level: Level, item: Item): ItemStack {
+            val stack = item.defaultInstance
+            stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
+
+            val enchantments = ItemEnchantments.Mutable(ItemEnchantments.EMPTY)
+            enchantments.set(
+                level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
+                1
+            )
+
+            EnchantmentHelper.setEnchantments(
+                stack,
+                enchantments.toImmutable()
+            )
+
+            return stack
+        }
 
         fun tick(
             level: Level,
@@ -76,26 +95,24 @@ class BlockBreakerBlockEntity(
         this.fakePlayer = WeakReference(FakePlayerFactory.get(level, breakerGameProfile))
         setChanged()
 
-        val unbreakableIronPick = Items.IRON_PICKAXE.defaultInstance
-        unbreakableIronPick.set(DataComponents.UNBREAKABLE, Unbreakable(true))
-
-        val enchantments = ItemEnchantments.Mutable(ItemEnchantments.EMPTY)
-        enchantments.set(
-            level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
-            1
-        )
-
-        EnchantmentHelper.setEnchantments(
-            unbreakableIronPick,
-            enchantments.toImmutable()
-        )
-
         this.fakePlayer?.get()?.let {
             it.isSilent = true
             it.setOnGround(true)
 
-            it.setItemInHand(InteractionHand.MAIN_HAND, unbreakableIronPick)
+            it.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE))
         }
+    }
+
+    fun upgrade() {
+        val level = level as? ServerLevel ?: return
+
+        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.DIAMOND_PICKAXE))
+    }
+
+    fun downgrade() {
+        val level = level as? ServerLevel ?: return
+
+        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE))
     }
 
     fun tick() {
