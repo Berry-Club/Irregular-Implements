@@ -22,7 +22,10 @@ object ItemCatcher {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     fun onEntityJoinLevel(event: EntityJoinLevelEvent) {
-        if (!catchingDrops || event.isCanceled || event.entity !is ItemEntity) return
+        if (!this.catchingDrops
+            || event.isCanceled
+            || event.entity !is ItemEntity
+        ) return
 
         caughtItemEntities.add(event.entity as ItemEntity)
     }
@@ -30,21 +33,25 @@ object ItemCatcher {
     @JvmStatic
     fun beforeDestroyBlock(player: ServerPlayer) {
         val usedItem = player.mainHandItem
-        if (usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) < 1) return
 
-        catchingDrops = true
+        val hasMagnetic = usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) > 0
+
+        this.catchingDrops = hasMagnetic
     }
 
     @JvmStatic
     fun afterDestroyBlock(player: ServerPlayer) {
-        if (!catchingDrops) return
+        if (!this.catchingDrops) return
 
-        for (itemEntity in caughtItemEntities) {
+        for (itemEntity in this.caughtItemEntities) {
             itemEntity.setNoPickUpDelay()
             itemEntity.playerTouch(player)
             itemEntity.target = player.uuid
             itemEntity.teleportTo(player.x, player.y, player.z)
         }
+
+        this.caughtItemEntities.clear()
+        this.catchingDrops = false
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -62,7 +69,9 @@ object ItemCatcher {
             itemEntity.target = killer.uuid
             itemEntity.teleportTo(killer.x, killer.y, killer.z)
         }
-    }
 
+        this.caughtItemEntities.clear()
+        this.catchingDrops = false
+    }
 
 }

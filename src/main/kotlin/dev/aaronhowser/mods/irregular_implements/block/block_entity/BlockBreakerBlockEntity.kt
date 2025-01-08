@@ -12,6 +12,7 @@ import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -117,7 +118,11 @@ class BlockBreakerBlockEntity(
 
             // If not done mining, continue mining then stop tick
             if (this.miningProgress < 1f) {
-                level.destroyBlockProgress(this.uuid.hashCode(), targetPos, (this.miningProgress * 10).toInt())
+                level.destroyBlockProgress(
+                    this.uuid.hashCode(),
+                    targetPos,
+                    Mth.ceil(this.miningProgress * 10)
+                )
                 return
             }
 
