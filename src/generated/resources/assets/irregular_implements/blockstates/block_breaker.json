@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "irregular_implements:block/block_breaker",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "irregular_implements:block/block_breaker",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "irregular_implements:block/block_breaker"
+    },
+    "facing=south": {
+      "model": "irregular_implements:block/block_breaker",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "irregular_implements:block/block_breaker",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "irregular_implements:block/block_breaker",
+      "y": 270
+    }
+  }
+}

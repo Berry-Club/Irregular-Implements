@@ -1183,6 +1183,11 @@ class ModBlockStateProvider(
             uniqueTexture = modLoc("block/sided_redstone_front"),
             otherTexture = modLoc("block/sided_redstone_side")
         )
+        oneUniqueFace(
+            ModBlocks.BLOCK_BREAKER.get(),
+            uniqueTexture = modLoc("block/block_breaker/front"),
+            otherTexture = modLoc("block/block_breaker/side")
+        )
     }
 
     private fun oneUniqueFace(
