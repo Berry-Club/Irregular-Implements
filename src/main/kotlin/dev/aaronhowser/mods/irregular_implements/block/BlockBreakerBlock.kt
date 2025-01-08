@@ -87,7 +87,7 @@ class BlockBreakerBlock : Block(
         val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return ItemInteractionResult.FAIL
 
         if (stack.`is`(ModItems.DIAMOND_BREAKER) && !state.getValue(IS_UPGRADED)) {
-            blockEntity.upgrade(stack)
+            blockEntity.upgrade(stack.copy())
             val newState = state.setValue(IS_UPGRADED, true)
             level.setBlockAndUpdate(pos, newState)
 

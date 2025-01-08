@@ -112,13 +112,13 @@ class BlockBreakerBlockEntity(
     }
 
 
-    fun upgrade(diamondBreakerStack: ItemStack) {
+    fun upgrade(insertedBreaker: ItemStack) {
         val level = level as? ServerLevel ?: return
 
-        val enchantments = diamondBreakerStack.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+        val enchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
         val pick = getPick(level, Items.DIAMOND_PICKAXE, defaultEnchantments = enchantments)
 
-        this.diamondBreaker = diamondBreakerStack
+        this.diamondBreaker = insertedBreaker
         setChanged()
 
         this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, pick)
