@@ -17,12 +17,12 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent
 )
 object ItemCatcher {
 
-    private var catchingDrops: Boolean = false
+    private var isCatchingDrops: Boolean = false
     private val caughtItemEntities: MutableList<ItemEntity> = mutableListOf()
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     fun onEntityJoinLevel(event: EntityJoinLevelEvent) {
-        if (!this.catchingDrops
+        if (!this.isCatchingDrops
             || event.isCanceled
             || event.entity !is ItemEntity
         ) return
@@ -36,12 +36,12 @@ object ItemCatcher {
 
         val hasMagnetic = usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) > 0
 
-        this.catchingDrops = hasMagnetic
+        this.isCatchingDrops = hasMagnetic
     }
 
     @JvmStatic
     fun afterDestroyBlock(player: ServerPlayer) {
-        if (!this.catchingDrops) return
+        if (!this.isCatchingDrops) return
 
         for (itemEntity in this.caughtItemEntities) {
             itemEntity.setNoPickUpDelay()
@@ -51,7 +51,7 @@ object ItemCatcher {
         }
 
         this.caughtItemEntities.clear()
-        this.catchingDrops = false
+        this.isCatchingDrops = false
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -71,7 +71,7 @@ object ItemCatcher {
         }
 
         this.caughtItemEntities.clear()
-        this.catchingDrops = false
+        this.isCatchingDrops = false
     }
 
 }
