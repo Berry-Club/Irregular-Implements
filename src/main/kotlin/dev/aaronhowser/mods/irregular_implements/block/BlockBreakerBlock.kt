@@ -90,12 +90,12 @@ class BlockBreakerBlock : Block(
 
         if (!stack.`is`(ModItems.DIAMOND_BREAKER) || state.getValue(IS_UPGRADED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
-        blockEntity.upgrade(stack.copy())
+        blockEntity.upgrade(stack.copyWithCount(1))
 
         val newState = state.setValue(IS_UPGRADED, true)
         level.setBlockAndUpdate(pos, newState)
 
-        stack.shrink(1)
+        stack.consume(1, player)
         return ItemInteractionResult.SUCCESS
     }
 
@@ -114,13 +114,15 @@ class BlockBreakerBlock : Block(
         return InteractionResult.SUCCESS
     }
 
-    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+    override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+        if (oldState.`is`(newState.block)) return
+
         val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
         if (blockEntity != null) {
             OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
         }
 
-        super.onRemove(state, level, pos, newState, movedByPiston)
+        super.onRemove(oldState, level, pos, newState, movedByPiston)
     }
 
 }
