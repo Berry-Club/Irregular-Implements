@@ -90,7 +90,8 @@ class BlockBreakerBlockEntity(
 
     private var fakePlayer: WeakReference<FakePlayer>? = null
 
-    private var diamondBreaker: ItemStack = ItemStack.EMPTY
+    var diamondBreaker: ItemStack = ItemStack.EMPTY
+        private set
 
     private fun initFakePlayer() {
         val level = level as? ServerLevel ?: return
