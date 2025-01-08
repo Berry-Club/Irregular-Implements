@@ -45,6 +45,16 @@ class ModItemTagsProvider(
 
     override fun addTags(provider: HolderLookup.Provider) {
 
+        this.tag(ItemTags.MINING_LOOT_ENCHANTABLE)
+            .add(
+                ModItems.DIAMOND_BREAKER.get()
+            )
+
+        this.tag(ItemTags.MINING_ENCHANTABLE)
+            .add(
+                ModItems.DIAMOND_BREAKER.get()
+            )
+
         this.tag(ItemTags.LOGS_THAT_BURN)
             .add(
                 ModBlocks.SPECTRE_LOG.asItem(),
@@ -105,8 +115,7 @@ class ModItemTagsProvider(
 
         this.tag(ItemTags.PICKAXES)
             .add(
-                ModItems.SPECTRE_PICKAXE.get(),
-                ModItems.DIAMOND_BREAKER.get()
+                ModItems.SPECTRE_PICKAXE.get()
             )
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
