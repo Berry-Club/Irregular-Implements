@@ -45,6 +45,14 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val BLOCK_BREAKER: DeferredHolder<BlockEntityType<*>, BlockEntityType<BlockBreakerBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("block_breaker", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> BlockBreakerBlockEntity(pos, state) },
+                ModBlocks.BLOCK_BREAKER.get()
+            ).build(null)
+        })
+
     val SPECTRE_LENS: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpectreLensBlockEntity>> =
         BLOCK_ENTITY_REGISTRY.register("spectre_lens", Supplier {
             BlockEntityType.Builder.of(
