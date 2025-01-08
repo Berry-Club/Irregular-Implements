@@ -5,9 +5,12 @@ import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.item.ItemStack
@@ -32,6 +35,11 @@ class BlockBreakerBlockEntity(
 
     companion object {
         val breakerGameProfile = GameProfile(UUID.nameUUIDFromBytes("IIBlockBreaker".toByteArray()), "IIBlockBreaker")
+
+        const val UUID_NBT = "UUID"
+        const val IS_MINING_NBT = "IsMining"
+        const val CAN_MINE_NBT = "CanMine"
+        const val MINING_PROGRESS_NBT = "MiningProgress"
 
         fun tick(
             level: Level,
@@ -148,6 +156,29 @@ class BlockBreakerBlockEntity(
 
         level.destroyBlockProgress(uuid.hashCode(), targetPos, -1)
         this.miningProgress = 0f
+    }
+
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+
+        val uuid = this.uuid
+        if (uuid != null) {
+            tag.putUUID(UUID_NBT, uuid)
+        }
+
+        tag.putBoolean(IS_MINING_NBT, this.isMining)
+        tag.putBoolean(CAN_MINE_NBT, this.canMine)
+        tag.putFloat(MINING_PROGRESS_NBT, this.miningProgress)
+    }
+
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+
+        this.uuid = tag.getUuidOrNull(UUID_NBT)
+
+        this.isMining = tag.getBoolean(IS_MINING_NBT)
+        this.canMine = tag.getBoolean(CAN_MINE_NBT)
+        this.miningProgress = tag.getFloat(MINING_PROGRESS_NBT)
     }
 
 }
