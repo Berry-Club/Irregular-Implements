@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-05T16:17:12.9303747	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2025-01-08T16:43:38.2704694	Tags for minecraft:item mod id irregular_implements
 e94f609f082a794ad96fb4008f986c0aa4ba38b5 data/curios/tags/item/ring.json
 996ecf49e1bfe2419630ebb12ec9338e2cb73fec data/c/tags/item/crops.json
 e1a2f90f364fa88dc3a75bde96655d5523d40d0b data/c/tags/item/crops/bean.json
@@ -19,7 +19,7 @@ beb33ae4db75051bd8a2bd8a95deec167541d0c1 data/minecraft/tags/item/chest_armor.js
 90f779bf3d607a3d76f5452c28884fa1631a3588 data/minecraft/tags/item/head_armor.json
 d8aa40a16b3782acbf239ca31bf712dcb93d96e0 data/minecraft/tags/item/leg_armor.json
 465e1934ba824f9215eb64e28f2b86d64294e60e data/minecraft/tags/item/logs_that_burn.json
-8c83e2a84c863e49469b7b860664eb967e86bf59 data/minecraft/tags/item/pickaxes.json
+73bd034b9a04efb2389ad00dea2f7051f696889e data/minecraft/tags/item/pickaxes.json
 3cde7ba1eb112818696cfbdefc6948bcbf28c3c2 data/minecraft/tags/item/planks.json
 b81ba30bcf9a101ea81e55e9f9b6c72f5b3ed0f9 data/minecraft/tags/item/shovels.json
 f24a294d5a5bc06b589128afc84ca3c2d64ec08b data/minecraft/tags/item/swords.json

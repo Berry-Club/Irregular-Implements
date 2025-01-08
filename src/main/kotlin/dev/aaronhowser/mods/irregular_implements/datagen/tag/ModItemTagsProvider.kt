@@ -105,7 +105,8 @@ class ModItemTagsProvider(
 
         this.tag(ItemTags.PICKAXES)
             .add(
-                ModItems.SPECTRE_PICKAXE.get()
+                ModItems.SPECTRE_PICKAXE.get(),
+                ModItems.DIAMOND_BREAKER.get()
             )
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)

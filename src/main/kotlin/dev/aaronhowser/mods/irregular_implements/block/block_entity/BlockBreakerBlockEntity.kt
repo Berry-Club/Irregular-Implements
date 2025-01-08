@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -42,12 +43,17 @@ class BlockBreakerBlockEntity(
         const val IS_MINING_NBT = "IsMining"
         const val CAN_MINE_NBT = "CanMine"
         const val MINING_PROGRESS_NBT = "MiningProgress"
+        const val DIAMOND_BREAKER_NBT = "DiamondBreaker"
 
-        private fun getPick(level: Level, item: Item): ItemStack {
+        private fun getPick(
+            level: Level,
+            item: Item,
+            defaultEnchantments: ItemEnchantments
+        ): ItemStack {
             val stack = item.defaultInstance
             stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
 
-            val enchantments = ItemEnchantments.Mutable(ItemEnchantments.EMPTY)
+            val enchantments = ItemEnchantments.Mutable(defaultEnchantments)
             enchantments.set(
                 level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
                 1
@@ -84,6 +90,8 @@ class BlockBreakerBlockEntity(
 
     private var fakePlayer: WeakReference<FakePlayer>? = null
 
+    private var diamondBreaker: ItemStack = ItemStack.EMPTY
+
     private fun initFakePlayer() {
         val level = level as? ServerLevel ?: return
 
@@ -99,20 +107,30 @@ class BlockBreakerBlockEntity(
             it.isSilent = true
             it.setOnGround(true)
 
-            it.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE))
+            it.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE, defaultEnchantments = ItemEnchantments.EMPTY))
         }
     }
 
-    fun upgrade() {
+
+    fun upgrade(diamondBreakerStack: ItemStack) {
         val level = level as? ServerLevel ?: return
 
-        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.DIAMOND_PICKAXE))
+        val enchantments = diamondBreakerStack.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+        val pick = getPick(level, Items.DIAMOND_PICKAXE, defaultEnchantments = enchantments)
+
+        this.diamondBreaker = diamondBreakerStack
+        setChanged()
+
+        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, pick)
     }
 
-    fun downgrade() {
+    fun downgrade(player: Player) {
         val level = level as? ServerLevel ?: return
 
-        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE))
+        OtherUtil.giveOrDropStack(this.diamondBreaker, player)
+        this.diamondBreaker = ItemStack.EMPTY
+
+        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE, defaultEnchantments = ItemEnchantments.EMPTY))
     }
 
     fun tick() {
@@ -220,6 +238,10 @@ class BlockBreakerBlockEntity(
         tag.putBoolean(IS_MINING_NBT, this.isMining)
         tag.putBoolean(CAN_MINE_NBT, this.canMine)
         tag.putFloat(MINING_PROGRESS_NBT, this.miningProgress)
+
+        if (!this.diamondBreaker.isEmpty) {
+            tag.put(DIAMOND_BREAKER_NBT, this.diamondBreaker.save(registries))
+        }
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -230,6 +252,11 @@ class BlockBreakerBlockEntity(
         this.isMining = tag.getBoolean(IS_MINING_NBT)
         this.canMine = tag.getBoolean(CAN_MINE_NBT)
         this.miningProgress = tag.getFloat(MINING_PROGRESS_NBT)
+
+        if (tag.contains(DIAMOND_BREAKER_NBT)) {
+            this.diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
+        }
+
     }
 
 }
