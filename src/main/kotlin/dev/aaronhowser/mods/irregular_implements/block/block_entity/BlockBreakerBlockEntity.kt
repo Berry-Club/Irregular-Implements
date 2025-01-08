@@ -91,12 +91,13 @@ class BlockBreakerBlockEntity(
 
     fun tick() {
         val level = level as? ServerLevel ?: return
-        val fakePlayer = this.fakePlayer?.get() ?: return
 
         if (!this.isFirstTick) {
             this.isFirstTick = true
             initFakePlayer()
         }
+
+        val fakePlayer = this.fakePlayer?.get() ?: return
 
         if (this.isMining) {
             val facing = blockState.getValue(BlockBreakerBlock.FACING)
