@@ -17,6 +17,7 @@ import java.util.*
 
 object ModEnchantments {
 
+    //FIXME: The item entity renders as moving towards the local player, rather than the player who's picking it up
     val MAGNETIC: ResourceKey<Enchantment> =
         ResourceKey.create(Registries.ENCHANTMENT, OtherUtil.modResource("magnetic"))
 

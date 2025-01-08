@@ -129,11 +129,16 @@ class BlockBreakerBlockEntity(
 
             fakePlayer.gameMode.destroyBlock(targetPos)
 
-            for (i in fakePlayer.inventory.items.indices) {
-                val stack = fakePlayer.inventory.items[i].copy()
-                if (stack.isEmpty) continue
+            val inventory = fakePlayer.inventory
 
-                fakePlayer.inventory.setItem(i, ItemStack.EMPTY)
+            for (i in inventory.items.indices) {
+                val stack = inventory.items[i].copy()
+
+                if (stack.isEmpty
+                    || ItemStack.isSameItemSameComponents(stack, inventory.getSelected())
+                ) continue
+
+                inventory.removeItemNoUpdate(i)
 
                 var remainder = stack.copy()
 
@@ -142,7 +147,7 @@ class BlockBreakerBlockEntity(
                 }
 
                 if (!remainder.isEmpty) {
-                    OtherUtil.dropStackAt(remainder.copy(), level, targetPos.center, instantPickup = false)
+                    OtherUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
                 }
             }
         }
@@ -156,6 +161,30 @@ class BlockBreakerBlockEntity(
 
         level.destroyBlockProgress(uuid.hashCode(), targetPos, -1)
         this.miningProgress = 0f
+    }
+
+    fun neighborChanged(state: BlockState, level: Level, pos: BlockPos) {
+        val targetPos = blockPos.relative(state.getValue(BlockBreakerBlock.FACING))
+        val targetState = level.getBlockState(targetPos)
+
+        this.canMine = level.getBestNeighborSignal(pos) <= 0
+
+        if (this.canMine) {
+            if (!targetState.isAir) {
+                if (!this.isMining) {
+                    this.isMining = true
+                    this.miningProgress = 0f
+                }
+            } else {
+                this.isMining = false
+                resetProgress()
+            }
+        } else {
+            if (this.isMining) {
+                this.isMining = false
+                resetProgress()
+            }
+        }
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

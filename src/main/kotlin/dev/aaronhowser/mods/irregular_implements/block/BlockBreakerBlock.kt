@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockBreakerBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -57,6 +56,13 @@ class BlockBreakerBlock : Block(
             ModBlockEntities.BLOCK_BREAKER.get(),
             BlockBreakerBlockEntity::tick
         )
+    }
+
+    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
+
+        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return
+        blockEntity.neighborChanged(state, level, pos)
     }
 
 }
