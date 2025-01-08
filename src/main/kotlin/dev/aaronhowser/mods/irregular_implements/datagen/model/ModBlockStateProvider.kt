@@ -59,6 +59,60 @@ class ModBlockStateProvider(
         spectreEnergyInjector()
         spectreCoils()
         spectreLogs()
+        blockBreaker()
+    }
+
+    private fun blockBreaker() {
+        val block = ModBlocks.BLOCK_BREAKER.get()
+        val name = name(block)
+
+        val front = modLoc("block/block_breaker/front")
+        val frontUpgraded = modLoc("block/block_breaker/front_upgraded")    //TODO: Improve this texture
+        val side = modLoc("block/block_breaker/side")
+
+        val model = models()
+            .orientable(name, side, front, side)
+
+        val modelUpgraded = models()
+            .orientable(name + "_upgraded", side, frontUpgraded, side)
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DirectionalBlock.FACING)
+                val isUpgraded = it.getValue(BlockBreakerBlock.IS_UPGRADED)
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(
+                        if (isUpgraded) modelUpgraded else model
+                    )
+                    .rotationY(yRotation)
+                    .rotationX(xRotation)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/$name"),
+                existingFileHelper
+            )
+        )
+
     }
 
     private fun spectreLogs() {
@@ -1182,11 +1236,6 @@ class ModBlockStateProvider(
             ModBlocks.SIDED_BLOCK_OF_REDSTONE.get(),
             uniqueTexture = modLoc("block/sided_redstone_front"),
             otherTexture = modLoc("block/sided_redstone_side")
-        )
-        oneUniqueFace(
-            ModBlocks.BLOCK_BREAKER.get(),
-            uniqueTexture = modLoc("block/block_breaker/front"),
-            otherTexture = modLoc("block/block_breaker/side")
         )
     }
 

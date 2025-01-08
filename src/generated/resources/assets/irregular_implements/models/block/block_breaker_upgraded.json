@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "irregular_implements:block/block_breaker/front_upgraded",
+    "side": "irregular_implements:block/block_breaker/side",
+    "top": "irregular_implements:block/block_breaker/side"
+  }
+}

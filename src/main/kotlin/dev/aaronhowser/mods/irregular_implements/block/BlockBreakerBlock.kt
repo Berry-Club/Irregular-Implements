@@ -38,11 +38,12 @@ class BlockBreakerBlock : Block(
         registerDefaultState(
             stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
+                .setValue(IS_UPGRADED, false)
         )
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING)
+        builder.add(FACING, IS_UPGRADED)
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
