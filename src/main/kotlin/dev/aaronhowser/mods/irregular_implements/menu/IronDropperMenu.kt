@@ -84,20 +84,32 @@ class IronDropperMenu(
         return dispenserContainer.stillValid(player)
     }
 
-    var shouldShootStraight: Boolean
+    val shouldShootStraight: Boolean
         get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
-        set(value) = containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
 
-    var shouldHaveEffects: Boolean
+    fun toggleShootStraight() {
+
+    }
+
+    val shouldHaveEffects: Boolean
         get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
-        set(value) = containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
 
-    var pickupDelay: Int
+    fun toggleShouldHaveEffects() {
+
+    }
+
+    val pickupDelay: Int
         get() = containerData.get(PICKUP_DELAY_INDEX)
-        set(value) = containerData.set(PICKUP_DELAY_INDEX, value)
 
-    var redstoneMode: IronDropperBlockEntity.RedstoneMode
+    fun incrementPickupDelay() {
+
+    }
+
+    val redstoneMode: IronDropperBlockEntity.RedstoneMode
         get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
-        set(value) = containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
+
+    fun incrementRedstoneMode() {
+
+    }
 
 }

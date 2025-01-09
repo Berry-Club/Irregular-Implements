@@ -44,7 +44,7 @@ class ChatDetectorScreen(
             spriteOff = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
             messageOn = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
             messageOff = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
-            currentState = this.chatDetectorBlockEntity.stopsMessage,   // On means it stops messages
+            currentStateGetter = { this.chatDetectorBlockEntity.stopsMessage },   // On means it stops messages
             onPress = ::pressToggleMessagePassButton,
             font = this.font
         )

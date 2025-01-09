@@ -41,8 +41,8 @@ class IronDropperScreen(
             spriteOff = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
             messageOn = Component.literal("Random"),
             messageOff = Component.literal("Forward"),
-            currentState = this.menu.shouldShootStraight,
-            onPress = { this.menu.shouldShootStraight = !this.menu.shouldShootStraight },
+            currentStateGetter = { this.menu.shouldShootStraight },
+            onPress = { this.menu.toggleShootStraight() },
             font = this.font
         )
 

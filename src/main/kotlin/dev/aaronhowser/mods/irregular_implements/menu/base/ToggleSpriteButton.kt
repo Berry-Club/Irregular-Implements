@@ -8,13 +8,14 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import java.util.function.Supplier
 
 class ToggleSpriteButton(
     x: Int = 0,
     y: Int = 0,
     width: Int,
     height: Int,
-    private var currentState: Boolean = false,
+    private val currentStateGetter: Supplier<Boolean>,
     private val messageOff: Component = Component.empty(),
     private val messageOn: Component = messageOff,
     private val spriteWidth: Int,
@@ -34,18 +35,13 @@ class ToggleSpriteButton(
     narration ?: DEFAULT_NARRATION
 ) {
 
-    override fun onPress() {
-        super.onPress()
-        this.currentState = !this.currentState
-    }
-
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
 
         val i = this.x + this.getWidth() / 2 - this.spriteWidth / 2
         val j = this.y + this.getHeight() / 2 - this.spriteHeight / 2
         guiGraphics.blitSprite(
-            if (this.currentState) this.spriteOn else this.spriteOff,
+            if (this.currentStateGetter.get()) this.spriteOn else this.spriteOff,
             i,
             j,
             this.spriteWidth,
@@ -73,7 +69,7 @@ class ToggleSpriteButton(
     }
 
     override fun getMessage(): Component {
-        return if (this.currentState) {
+        return if (this.currentStateGetter.get()) {
             this.messageOn
         } else {
             this.messageOff
