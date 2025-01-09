@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.menu.IronDropperMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
@@ -9,6 +10,8 @@ import net.minecraft.core.dispenser.BlockSource
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.DropperBlock.FACING
@@ -21,12 +24,25 @@ class IronDropperBlockEntity(
     pBlockState: BlockState
 ) : DispenserBlockEntity(ModBlockEntities.IRON_DROPPER.get(), pPos, pBlockState) {
 
-    override fun getDefaultName(): Component {
-        return ModBlocks.IRON_DROPPER.get().name
-    }
+    var shouldShootStraight = false
+        private set(value) {
+            field = value
+            setChanged()
+        }
+
+    var shouldHaveEffects = true
+        private set(value) {
+            field = value
+            setChanged()
+        }
+
+    var pickupDelay = 5
+        private set(value) {
+            field = value
+            setChanged()
+        }
 
     val dispenseBehavior = object : DefaultDispenseItemBehavior() {
-
         override fun playSound(blockSource: BlockSource) {
             if (this@IronDropperBlockEntity.shouldHaveEffects) super.playSound(blockSource)
         }
@@ -76,22 +92,12 @@ class IronDropperBlockEntity(
         }
     }
 
-    var shouldShootStraight = false
-        private set(value) {
-            field = value
-            setChanged()
-        }
+    override fun getDefaultName(): Component {
+        return ModBlocks.IRON_DROPPER.get().name
+    }
 
-    var shouldHaveEffects = true
-        private set(value) {
-            field = value
-            setChanged()
-        }
-
-    var pickupDelay = 5
-        private set(value) {
-            field = value
-            setChanged()
-        }
+    override fun createMenu(id: Int, playerInventory: Inventory): AbstractContainerMenu {
+        return IronDropperMenu(id, playerInventory, this)
+    }
 
 }
