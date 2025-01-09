@@ -16,8 +16,9 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerData
+import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.DropperBlock.FACING
@@ -31,6 +32,8 @@ class IronDropperBlockEntity(
 ) : DispenserBlockEntity(ModBlockEntities.IRON_DROPPER.get(), pPos, pBlockState) {
 
     companion object {
+        const val CONTAINER_DATA_SIZE = 4
+
         const val SHOOT_STRAIGHT_INDEX = 0
         const val SHOULD_HAVE_EFFECTS_INDEX = 1
         const val PICKUP_DELAY_INDEX = 2
@@ -81,7 +84,7 @@ class IronDropperBlockEntity(
         }
 
 
-    private val containerData = object : ContainerData {
+    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
 
         private var shootStraight = false
         private var haveEffects = true
@@ -105,10 +108,6 @@ class IronDropperBlockEntity(
                 PICKUP_DELAY_INDEX -> delay = value
                 REDSTONE_MODE_INDEX -> redstoneMode = value
             }
-        }
-
-        override fun getCount(): Int {
-            return 4
         }
     }
 
@@ -166,8 +165,8 @@ class IronDropperBlockEntity(
         return ModBlocks.IRON_DROPPER.get().name
     }
 
-    override fun createMenu(id: Int, playerInventory: Inventory): AbstractContainerMenu {
-        return IronDropperMenu(id, playerInventory, this)
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return IronDropperMenu(containerId, playerInventory, this, containerData)
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
