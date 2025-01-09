@@ -46,27 +46,21 @@ class IronDropperBlockEntity(
     }
 
     var shouldShootStraight: Boolean
-        get() {
-            return containerData.get(SHOOT_STRAIGHT_INDEX) != 0
-        }
+        get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
         private set(value) {
             containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
             setChanged()
         }
 
     var shouldHaveEffects: Boolean
-        get() {
-            return containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
-        }
+        get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
         private set(value) {
             containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
             setChanged()
         }
 
     var pickupDelay: Int
-        get() {
-            return containerData.get(PICKUP_DELAY_INDEX)
-        }
+        get() = containerData.get(PICKUP_DELAY_INDEX)
         private set(value) {
             containerData.set(PICKUP_DELAY_INDEX, value)
             setChanged()
@@ -75,9 +69,7 @@ class IronDropperBlockEntity(
     enum class RedstoneMode { PULSE, REPEAT, REPEAT_POWERED }
 
     var redstoneMode: RedstoneMode
-        get() {
-            return RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
-        }
+        get() = RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
         private set(value) {
             containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
             setChanged()

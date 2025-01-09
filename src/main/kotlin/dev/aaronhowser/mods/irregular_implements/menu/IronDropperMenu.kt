@@ -1,6 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.PICKUP_DELAY_INDEX
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.REDSTONE_MODE_INDEX
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOOT_STRAIGHT_INDEX
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOULD_HAVE_EFFECTS_INDEX
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -79,5 +83,21 @@ class IronDropperMenu(
     override fun stillValid(player: Player): Boolean {
         return dispenserContainer.stillValid(player)
     }
+
+    var shouldShootStraight: Boolean
+        get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
+        set(value) = containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
+
+    var shouldHaveEffects: Boolean
+        get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
+        set(value) = containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
+
+    var pickupDelay: Int
+        get() = containerData.get(PICKUP_DELAY_INDEX)
+        set(value) = containerData.set(PICKUP_DELAY_INDEX, value)
+
+    var redstoneMode: IronDropperBlockEntity.RedstoneMode
+        get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
+        set(value) = containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
 
 }
