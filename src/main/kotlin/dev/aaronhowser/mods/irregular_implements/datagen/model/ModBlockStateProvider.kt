@@ -14,6 +14,7 @@ import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
+import net.minecraft.world.level.block.DropperBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
@@ -60,6 +61,74 @@ class ModBlockStateProvider(
         spectreCoils()
         spectreLogs()
         blockBreaker()
+        ironDropper()
+    }
+
+    private fun ironDropper() {
+        val block = ModBlocks.IRON_DROPPER.get()
+
+        val frontHorizontal = modLoc("block/iron_dropper/front_horizontal")
+        val frontVertical = modLoc("block/iron_dropper/front_vertical")
+        val side = modLoc("block/iron_dropper/side")
+        val top = modLoc("block/iron_dropper/top")
+
+        val horizontalModel = models()
+            .orientable(
+                name(block) + "_horizontal",
+                side,
+                frontHorizontal,
+                top
+            )
+
+        val verticalModel = models()
+            .cubeBottomTop(
+                name(block) + "_vertical",
+                side,
+                top,
+                frontVertical
+            )
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DropperBlock.FACING)
+
+                if (Direction.Axis.Y.test(facing)) {
+                    val xRotation = when (facing) {
+                        Direction.UP -> 0
+                        Direction.DOWN -> 180
+                        else -> 0
+                    }
+
+                    ConfiguredModel
+                        .builder()
+                        .modelFile(verticalModel)
+                        .rotationX(xRotation)
+                        .build()
+                } else {
+
+                    val yRotation = when (facing) {
+                        Direction.NORTH -> 0
+                        Direction.EAST -> 90
+                        Direction.SOUTH -> 180
+                        Direction.WEST -> 270
+                        else -> 0
+                    }
+
+                    ConfiguredModel
+                        .builder()
+                        .modelFile(horizontalModel)
+                        .rotationY(yRotation)
+                        .build()
+                }
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/iron_dropper_horizontal"),
+                existingFileHelper
+            )
+        )
     }
 
     private fun blockBreaker() {
