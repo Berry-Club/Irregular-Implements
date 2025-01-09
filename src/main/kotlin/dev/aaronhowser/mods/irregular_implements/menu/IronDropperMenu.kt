@@ -43,6 +43,8 @@ class IronDropperMenu(
         for (l in 0..8) {
             this.addSlot(Slot(playerInventory, l, 8 + l * 18, 142))
         }
+
+        this.addDataSlots(containerData)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {

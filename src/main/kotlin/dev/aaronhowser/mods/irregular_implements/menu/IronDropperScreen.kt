@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.components.SpriteIconButton
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -15,6 +16,11 @@ class IronDropperScreen(
     companion object {
         private val texture = ResourceLocation.withDefaultNamespace("textures/gui/container/dispenser.png")
     }
+
+    private lateinit var shootModeButton: SpriteIconButton
+    private lateinit var toggleEffectButton: SpriteIconButton
+    private lateinit var delayButton: SpriteIconButton
+    private lateinit var redstoneModeButton: SpriteIconButton
 
     override fun init() {
         super.init()
