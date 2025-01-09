@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.packet
 
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -42,6 +43,12 @@ object ModPacketHandler {
             registrar,
             UpdateClientBlockDestabilizer.TYPE,
             UpdateClientBlockDestabilizer.STREAM_CODEC
+        )
+
+        toServer(
+            registrar,
+            ClientClickedIronDropperButton.TYPE,
+            ClientClickedIronDropperButton.STREAM_CODEC
         )
 
     }

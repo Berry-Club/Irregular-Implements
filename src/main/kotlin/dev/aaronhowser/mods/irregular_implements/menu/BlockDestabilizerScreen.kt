@@ -42,7 +42,7 @@ class BlockDestabilizerScreen(
             spriteOff = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
             messageOn = ModLanguageProvider.Tooltips.LAZY.toComponent(),
             messageOff = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
-            currentStateGetter = this.blockDestabilizerBlockEntity.isLazy,
+            currentStateGetter = { this.blockDestabilizerBlockEntity.isLazy },      //TODO: Update this to use a menu for containerdata
             onPress = ::pressToggleLazyButton,
             font = this.font
         )

@@ -5,6 +5,8 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperB
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.REDSTONE_MODE_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOOT_STRAIGHT_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOULD_HAVE_EFFECTS_INDEX
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -88,28 +90,48 @@ class IronDropperMenu(
         get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
 
     fun toggleShootStraight() {
-
+        ModPacketHandler.messageServer(
+            ClientClickedIronDropperButton(
+                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
+                buttonClicked = IronDropperScreen.SHOOT_MODE_BUTTON_ID
+            )
+        )
     }
 
     val shouldHaveEffects: Boolean
         get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
 
     fun toggleShouldHaveEffects() {
-
+        ModPacketHandler.messageServer(
+            ClientClickedIronDropperButton(
+                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
+                buttonClicked = IronDropperScreen.TOGGLE_EFFECT_BUTTON_ID
+            )
+        )
     }
 
     val pickupDelay: Int
         get() = containerData.get(PICKUP_DELAY_INDEX)
 
     fun incrementPickupDelay() {
-
+        ModPacketHandler.messageServer(
+            ClientClickedIronDropperButton(
+                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
+                buttonClicked = IronDropperScreen.DELAY_BUTTON_ID
+            )
+        )
     }
 
     val redstoneMode: IronDropperBlockEntity.RedstoneMode
         get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
 
     fun incrementRedstoneMode() {
-
+        ModPacketHandler.messageServer(
+            ClientClickedIronDropperButton(
+                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
+                buttonClicked = IronDropperScreen.REDSTONE_MODE_BUTTON_ID
+            )
+        )
     }
 
 }

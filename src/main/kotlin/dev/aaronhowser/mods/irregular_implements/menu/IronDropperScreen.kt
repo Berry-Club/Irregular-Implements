@@ -16,6 +16,11 @@ class IronDropperScreen(
 
     companion object {
         private val texture = ResourceLocation.withDefaultNamespace("textures/gui/container/dispenser.png")
+
+        const val SHOOT_MODE_BUTTON_ID = 0
+        const val TOGGLE_EFFECT_BUTTON_ID = 1
+        const val DELAY_BUTTON_ID = 2
+        const val REDSTONE_MODE_BUTTON_ID = 3
     }
 
     private val rightPos: Int
