@@ -5,13 +5,19 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.Position
 import net.minecraft.core.dispenser.BlockSource
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.DropperBlock.FACING
@@ -24,23 +30,87 @@ class IronDropperBlockEntity(
     pBlockState: BlockState
 ) : DispenserBlockEntity(ModBlockEntities.IRON_DROPPER.get(), pPos, pBlockState) {
 
-    var shouldShootStraight = false
+    companion object {
+        const val SHOOT_STRAIGHT_INDEX = 0
+        const val SHOULD_HAVE_EFFECTS_INDEX = 1
+        const val PICKUP_DELAY_INDEX = 2
+        const val REDSTONE_MODE_INDEX = 3
+
+        const val SHOOT_STRAIGHT_NBT = "ShootStraight"
+        const val SHOULD_HAVE_EFFECTS_NBT = "ShouldHaveEffects"
+        const val PICKUP_DELAY_NBT = "PickupDelay"
+        const val REDSTONE_MODE_NBT = "RedstoneMode"
+    }
+
+    var shouldShootStraight: Boolean
+        get() {
+            return containerData.get(SHOOT_STRAIGHT_INDEX) != 0
+        }
         private set(value) {
-            field = value
+            containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
             setChanged()
         }
 
-    var shouldHaveEffects = true
+    var shouldHaveEffects: Boolean
+        get() {
+            return containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
+        }
         private set(value) {
-            field = value
+            containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
             setChanged()
         }
 
-    var pickupDelay = 5
+    var pickupDelay: Int
+        get() {
+            return containerData.get(PICKUP_DELAY_INDEX)
+        }
         private set(value) {
-            field = value
+            containerData.set(PICKUP_DELAY_INDEX, value)
             setChanged()
         }
+
+    enum class RedstoneMode { PULSE, REPEAT, REPEAT_POWERED }
+
+    var redstoneMode: RedstoneMode
+        get() {
+            return RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
+        }
+        private set(value) {
+            containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
+            setChanged()
+        }
+
+
+    private val containerData = object : ContainerData {
+
+        private var shootStraight = false
+        private var haveEffects = true
+        private var delay = 5
+        private var redstoneMode = 0
+
+        override fun get(index: Int): Int {
+            return when (index) {
+                SHOOT_STRAIGHT_INDEX -> if (shootStraight) 1 else 0
+                SHOULD_HAVE_EFFECTS_INDEX -> if (haveEffects) 1 else 0
+                PICKUP_DELAY_INDEX -> delay
+                REDSTONE_MODE_INDEX -> redstoneMode
+                else -> 0
+            }
+        }
+
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                SHOOT_STRAIGHT_INDEX -> shootStraight = value != 0
+                SHOULD_HAVE_EFFECTS_INDEX -> haveEffects = value != 0
+                PICKUP_DELAY_INDEX -> delay = value
+                REDSTONE_MODE_INDEX -> redstoneMode = value
+            }
+        }
+
+        override fun getCount(): Int {
+            return 4
+        }
+    }
 
     val dispenseBehavior = object : DefaultDispenseItemBehavior() {
         override fun playSound(blockSource: BlockSource) {
@@ -99,5 +169,28 @@ class IronDropperBlockEntity(
     override fun createMenu(id: Int, playerInventory: Inventory): AbstractContainerMenu {
         return IronDropperMenu(id, playerInventory, this)
     }
+
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+
+        tag.putBoolean(SHOOT_STRAIGHT_NBT, this.shouldShootStraight)
+        tag.putBoolean(SHOULD_HAVE_EFFECTS_NBT, this.shouldHaveEffects)
+        tag.putInt(PICKUP_DELAY_NBT, this.pickupDelay)
+        tag.putInt(REDSTONE_MODE_NBT, this.redstoneMode.ordinal)
+    }
+
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+
+        this.shouldShootStraight = tag.getBoolean(SHOOT_STRAIGHT_NBT)
+        this.shouldHaveEffects = tag.getBoolean(SHOULD_HAVE_EFFECTS_NBT)
+        this.pickupDelay = tag.getInt(PICKUP_DELAY_NBT)
+        this.redstoneMode = RedstoneMode.entries[tag.getInt(REDSTONE_MODE_NBT)]
+    }
+
+    // Syncs with client
+    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
 
 }
