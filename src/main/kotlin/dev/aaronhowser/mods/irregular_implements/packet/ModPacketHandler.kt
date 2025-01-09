@@ -4,52 +4,44 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
+import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.codec.StreamCodec
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler
+import net.neoforged.neoforge.network.registration.PayloadRegistrar
 
 object ModPacketHandler {
 
     fun registerPayloads(event: RegisterPayloadHandlersEvent) {
         val registrar = event.registrar("1")
 
-        registrar.playToServer(
+        toServer(
+            registrar,
             ClientChangedChatDetector.TYPE,
-            ClientChangedChatDetector.STREAM_CODEC,
-            DirectionalPayloadHandler(
-                { packet, context -> packet.receiveMessage(context) },
-                { packet, context -> packet.receiveMessage(context) }
-            )
+            ClientChangedChatDetector.STREAM_CODEC
         )
 
-        registrar.playToClient(
+        toClient(
+            registrar,
             UpdateClientChatDetector.TYPE,
-            UpdateClientChatDetector.STREAM_CODEC,
-            DirectionalPayloadHandler(
-                { packet, context -> packet.receiveMessage(context) },
-                { packet, context -> packet.receiveMessage(context) }
-            )
+            UpdateClientChatDetector.STREAM_CODEC
         )
 
-        registrar.playToServer(
+        toServer(
+            registrar,
             ClientClickedBlockDestabilizerButton.TYPE,
-            ClientClickedBlockDestabilizerButton.STREAM_CODEC,
-            DirectionalPayloadHandler(
-                { packet, context -> packet.receiveMessage(context) },
-                { packet, context -> packet.receiveMessage(context) }
-            )
+            ClientClickedBlockDestabilizerButton.STREAM_CODEC
         )
 
-        registrar.playToClient(
+        toClient(
+            registrar,
             UpdateClientBlockDestabilizer.TYPE,
-            UpdateClientBlockDestabilizer.STREAM_CODEC,
-            DirectionalPayloadHandler(
-                { packet, context -> packet.receiveMessage(context) },
-                { packet, context -> packet.receiveMessage(context) }
-            )
+            UpdateClientBlockDestabilizer.STREAM_CODEC
         )
 
     }
@@ -73,6 +65,28 @@ object ModPacketHandler {
 
     fun messageServer(packet: IModPacket) {
         PacketDistributor.sendToServer(packet)
+    }
+
+    private fun <T : IModPacket> toClient(
+        registrar: PayloadRegistrar,
+        packetType: CustomPacketPayload.Type<T>,
+        streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>,
+    ) {
+        registrar.playToClient(
+            packetType,
+            streamCodec
+        ) { packet, context -> packet.receiveOnClient(context) }
+    }
+
+    private fun <T : IModPacket> toServer(
+        registrar: PayloadRegistrar,
+        packetType: CustomPacketPayload.Type<T>,
+        streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>
+    ) {
+        registrar.playToServer(
+            packetType,
+            streamCodec
+        ) { packet, context -> packet.receiveOnServer(context) }
     }
 
 }

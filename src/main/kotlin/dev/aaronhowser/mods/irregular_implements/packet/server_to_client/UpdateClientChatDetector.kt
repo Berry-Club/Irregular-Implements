@@ -13,7 +13,7 @@ class UpdateClientChatDetector(
     val regexString: String
 ) : IModPacket {
 
-    override fun receiveMessage(context: IPayloadContext) {
+    override fun receiveOnClient(context: IPayloadContext) {
         context.enqueueWork {
             Companion.regexString = this.regexString
             Companion.stopsMessage = this.stopsMessage

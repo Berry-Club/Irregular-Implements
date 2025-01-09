@@ -21,7 +21,7 @@ class ClientClickedBlockDestabilizerButton(
 
     enum class Button { TOGGLE_LAZY, SHOW_LAZY_SHAPE, RESET_LAZY_SHAPE }
 
-    override fun receiveMessage(context: IPayloadContext) {
+    override fun receiveOnServer(context: IPayloadContext) {
         context.enqueueWork {
             val player = context.player() as? ServerPlayer ?: return@enqueueWork
             val blockDestabilizerBlockEntity = player.level().getBlockEntity(blockPos) as? BlockDestabilizerBlockEntity

@@ -20,7 +20,7 @@ class ClientChangedChatDetector(
     val regexString: String
 ) : IModPacket {
 
-    override fun receiveMessage(context: IPayloadContext) {
+    override fun receiveOnServer(context: IPayloadContext) {
         context.enqueueWork {
             val player = context.player() as? ServerPlayer ?: return@enqueueWork
             val chatDetectorBlockEntity = player.level().getBlockEntity(blockPos) as? ChatDetectorBlockEntity

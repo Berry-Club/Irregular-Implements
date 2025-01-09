@@ -12,7 +12,7 @@ class UpdateClientBlockDestabilizer(
     val isLazy: Boolean
 ) : IModPacket {
 
-    override fun receiveMessage(context: IPayloadContext) {
+    override fun receiveOnClient(context: IPayloadContext) {
         context.enqueueWork {
             Companion.isLazy = this.isLazy
         }
