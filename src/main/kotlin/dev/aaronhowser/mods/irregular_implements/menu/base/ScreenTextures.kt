@@ -80,6 +80,49 @@ object ScreenTextures {
             const val RESET_LAZY_SHAPE_HEIGHT = 12
         }
 
+        object IronDropper {
+
+            val DIRECTION_FORWARD = OtherUtil.modResource("buttons/iron_dropper/direction_forward")
+            const val DIRECTION_FORWARD_WIDTH = 4
+            const val DIRECTION_FORWARD_HEIGHT = 4
+
+            val DIRECTION_RANDOM = OtherUtil.modResource("buttons/iron_dropper/direction_random")
+            const val DIRECTION_RANDOM_WIDTH = 8
+            const val DIRECTION_RANDOM_HEIGHT = 8
+
+            val EFFECT_PARTICLE = OtherUtil.modResource("buttons/iron_dropper/effect_particle")
+            const val EFFECT_PARTICLE_WIDTH = 14
+            const val EFFECT_PARTICLE_HEIGHT = 13
+
+            val EFFECT_SOUND = OtherUtil.modResource("buttons/iron_dropper/effect_sound")
+            const val EFFECT_SOUND_WIDTH = 5
+            const val EFFECT_SOUND_HEIGHT = 8
+
+            val PICKUP_FIVE = OtherUtil.modResource("buttons/iron_dropper/pickup_five")
+            const val PICKUP_FIVE_WIDTH = 10
+            const val PICKUP_FIVE_HEIGHT = 12
+
+            val PICKUP_TWENTY = OtherUtil.modResource("buttons/iron_dropper/pickup_twenty")
+            const val PICKUP_TWENTY_WIDTH = 13
+            const val PICKUP_TWENTY_HEIGHT = 9
+
+            val PICKUP_ZERO = OtherUtil.modResource("buttons/iron_dropper/pickup_zero")
+            const val PICKUP_ZERO_WIDTH = 8
+            const val PICKUP_ZERO_HEIGHT = 12
+
+            val REDSTONE_PULSE = OtherUtil.modResource("buttons/iron_dropper/redstone_pulse")
+            const val REDSTONE_PULSE_WIDTH = 8
+            const val REDSTONE_PULSE_HEIGHT = 8
+
+            val REDSTONE_REPEAT = OtherUtil.modResource("buttons/iron_dropper/redstone_repeat")
+            const val REDSTONE_REPEAT_WIDTH = 12
+            const val REDSTONE_REPEAT_HEIGHT = 14
+
+            val REDSTONE_REPEAT_POWERED = OtherUtil.modResource("buttons/iron_dropper/redstone_repeat_powered")
+            const val REDSTONE_REPEAT_POWERED_WIDTH = 12
+            const val REDSTONE_REPEAT_POWERED_HEIGHT = 14
+        }
+
     }
 
     //TODO: Check that all of these are actually used
