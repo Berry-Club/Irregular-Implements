@@ -45,60 +45,51 @@ class IronDropperBlockEntity(
         const val REDSTONE_MODE_NBT = "RedstoneMode"
     }
 
-    var shouldShootStraight: Boolean
-        get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
+    var shouldShootStraight: Boolean = false
         private set(value) {
-            containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
+            field = value
             setChanged()
         }
 
-    var shouldHaveEffects: Boolean
-        get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
+    var shouldHaveEffects: Boolean = true
         private set(value) {
-            containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
+            field = value
             setChanged()
         }
 
-    var pickupDelay: Int
-        get() = containerData.get(PICKUP_DELAY_INDEX)
+    var pickupDelay: Int = 0
         private set(value) {
-            containerData.set(PICKUP_DELAY_INDEX, value)
+            field = value
             setChanged()
         }
 
     enum class RedstoneMode { PULSE, REPEAT, REPEAT_POWERED }
 
-    var redstoneMode: RedstoneMode
-        get() = RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
+    var redstoneMode: RedstoneMode = RedstoneMode.PULSE
         private set(value) {
-            containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
+            field = value
             setChanged()
         }
 
 
     private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
 
-        private var shootStraight = false
-        private var haveEffects = true
-        private var delay = 5
-        private var redstoneMode = 0
-
         override fun get(index: Int): Int {
             return when (index) {
-                SHOOT_STRAIGHT_INDEX -> if (shootStraight) 1 else 0
-                SHOULD_HAVE_EFFECTS_INDEX -> if (haveEffects) 1 else 0
-                PICKUP_DELAY_INDEX -> delay
-                REDSTONE_MODE_INDEX -> redstoneMode
+                SHOOT_STRAIGHT_INDEX -> if (this@IronDropperBlockEntity.shouldShootStraight) 1 else 0
+                SHOULD_HAVE_EFFECTS_INDEX -> if (this@IronDropperBlockEntity.shouldHaveEffects) 1 else 0
+                PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay
+                REDSTONE_MODE_INDEX -> RedstoneMode.entries.indexOf(this@IronDropperBlockEntity.redstoneMode)
                 else -> 0
             }
         }
 
         override fun set(index: Int, value: Int) {
             when (index) {
-                SHOOT_STRAIGHT_INDEX -> shootStraight = value != 0
-                SHOULD_HAVE_EFFECTS_INDEX -> haveEffects = value != 0
-                PICKUP_DELAY_INDEX -> delay = value
-                REDSTONE_MODE_INDEX -> redstoneMode = value
+                SHOOT_STRAIGHT_INDEX -> this@IronDropperBlockEntity.shouldShootStraight = value != 0
+                SHOULD_HAVE_EFFECTS_INDEX -> this@IronDropperBlockEntity.shouldHaveEffects = value != 0
+                PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay = value
+                REDSTONE_MODE_INDEX -> this@IronDropperBlockEntity.redstoneMode = RedstoneMode.entries[value]
             }
         }
     }
