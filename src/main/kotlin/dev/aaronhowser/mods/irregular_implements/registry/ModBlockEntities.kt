@@ -113,4 +113,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val IRON_DROPPER: DeferredHolder<BlockEntityType<*>, BlockEntityType<IronDropperBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("iron_dropper", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> IronDropperBlockEntity(pos, state) },
+                ModBlocks.IRON_DROPPER.get()
+            ).build(null)
+        })
+
 }
