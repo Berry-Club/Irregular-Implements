@@ -11,10 +11,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.entity.SpectreIll
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.item.*
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.registry.*
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.renderer.BiomeColors
@@ -28,10 +25,7 @@ import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
-import net.neoforged.neoforge.client.event.EntityRenderersEvent
-import net.neoforged.neoforge.client.event.ModelEvent
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent
+import net.neoforged.neoforge.client.event.*
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 
@@ -209,6 +203,11 @@ object ClientModBusEvents {
             SpectreIlluminatorBEWLR.clientItemExtensions,
             ModItems.SPECTRE_ILLUMINATOR.get()
         )
+    }
+
+    @SubscribeEvent
+    fun onRegisterMenuScreens(event: RegisterMenuScreensEvent) {
+        ModMenuTypes.registerScreens(event)
     }
 
 }
