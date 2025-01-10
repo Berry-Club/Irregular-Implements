@@ -28,6 +28,9 @@ class IronDropperScreen(
     private lateinit var redstoneModeButton: MultiStateSpriteButton
 
     override fun init() {
+        this.imageWidth = ScreenTextures.Background.IronDropper.WIDTH
+        this.imageHeight = ScreenTextures.Background.IronDropper.HEIGHT
+
         super.init()
         this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
 
