@@ -71,16 +71,16 @@ class IronDropperScreen(
                 sprite = null
             )
             .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_HEIGHT
-            )
-            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
                 sprite = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE,
                 spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE_WIDTH,
                 spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_HEIGHT
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
