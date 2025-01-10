@@ -72,7 +72,9 @@ class ChatDetectorBlock : EntityBlock, Block(
         pHitResult: BlockHitResult
     ): InteractionResult {
         val blockEntity = pLevel.getBlockEntity(pPos) as? ChatDetectorBlockEntity ?: return InteractionResult.FAIL
+
         pPlayer.openMenu(blockEntity)
+        blockEntity.sendStringUpdate()
 
         return InteractionResult.SUCCESS
     }

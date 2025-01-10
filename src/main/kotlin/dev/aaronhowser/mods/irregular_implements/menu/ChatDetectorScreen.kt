@@ -7,7 +7,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -27,7 +26,8 @@ class ChatDetectorScreen(
         get() = this.topPos + this.imageHeight
 
     private lateinit var toggleMessagePassButton: MultiStateSpriteButton
-    private lateinit var regexStringEditBox: EditBox
+    lateinit var regexStringEditBox: EditBox
+        private set
 
     override fun init() {
         this.imageWidth = ScreenTextures.Background.ChatDetector.WIDTH

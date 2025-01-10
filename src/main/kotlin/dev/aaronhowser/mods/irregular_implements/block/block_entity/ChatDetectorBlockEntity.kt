@@ -86,7 +86,7 @@ class ChatDetectorBlockEntity(
             sendStringUpdate()
         }
 
-    private fun sendStringUpdate() {
+    fun sendStringUpdate() {
         val level = this.level as? ServerLevel ?: return
 
         ModPacketHandler.messageNearbyPlayers(

@@ -1,8 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
+import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
+import net.minecraft.client.Minecraft
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
@@ -14,6 +16,9 @@ class UpdateClientChatDetector(
 
     override fun receiveOnClient(context: IPayloadContext) {
         context.enqueueWork {
+            val screen = Minecraft.getInstance().screen as? ChatDetectorScreen ?: return@enqueueWork
+
+            screen.regexStringEditBox.value = regexString
         }
     }
 
