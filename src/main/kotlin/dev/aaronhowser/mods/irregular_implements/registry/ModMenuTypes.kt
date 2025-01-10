@@ -30,6 +30,11 @@ object ModMenuTypes {
             MenuType(::ChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val GLOBAL_CHAT_DETECTOR: DeferredHolder<MenuType<*>, MenuType<GlobalChatDetectorMenu>> =
+        MENU_TYPE_REGISTRY.register("global_chat_detector", Supplier {
+            MenuType(::GlobalChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)

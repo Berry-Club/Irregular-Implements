@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity.Companion.STOPS_MESSAGE_INDEX
+import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -16,6 +18,7 @@ import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -147,15 +150,30 @@ class GlobalChatDetectorBlockEntity(
 
     // Menu stuff
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-        TODO("Not yet implemented")
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return GlobalChatDetectorMenu(containerId, playerInventory, this.container, this.containerData)
     }
 
     override fun getDisplayName(): Component {
         return this.blockState.block.name
     }
 
-    // Container stuff
-
     private val container = SimpleContainer(9)
+
+    private val containerData = object : SimpleContainerData(1) {
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                STOPS_MESSAGE_INDEX -> this@GlobalChatDetectorBlockEntity.stopsMessage = value == 1
+                else -> error("Unknown index: $index")
+            }
+        }
+
+        override fun get(index: Int): Int {
+            return when (index) {
+                STOPS_MESSAGE_INDEX -> if (this@GlobalChatDetectorBlockEntity.stopsMessage) 1 else 0
+                else -> error("Unknown index: $index")
+            }
+        }
+    }
+
 }
