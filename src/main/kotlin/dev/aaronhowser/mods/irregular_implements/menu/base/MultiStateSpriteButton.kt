@@ -131,6 +131,12 @@ class MultiStateSpriteButton(
             return this
         }
 
+        fun size(size: Int): Builder {
+            this.width = size
+            this.height = size
+            return this
+        }
+
         fun currentStateGetter(currentStateGetter: Supplier<Int>): Builder {
             this.currentStateGetter = currentStateGetter
             return this

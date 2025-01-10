@@ -22,6 +22,14 @@ object ScreenTextures {
             const val CANVAS_SIZE = 256
         }
 
+        object IronDropper {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/iron_dropper.png")
+
+            const val WIDTH = 199
+            const val HEIGHT = 146
+            const val CANVAS_SIZE = 256
+        }
+
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
         val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")

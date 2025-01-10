@@ -9,7 +9,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class IronDropperScreen(
@@ -18,14 +17,10 @@ class IronDropperScreen(
     title: Component
 ) : AbstractContainerScreen<IronDropperMenu>(menu, playerInventory, title) {
 
-    companion object {
-        private val texture = ResourceLocation.withDefaultNamespace("textures/gui/container/dispenser.png")
-    }
-
     private val rightPos: Int
-        get() = this.leftPos + ScreenTextures.Background.ChatDetector.WIDTH
+        get() = this.leftPos + ScreenTextures.Background.IronDropper.WIDTH
     private val bottomPos: Int
-        get() = this.topPos + ScreenTextures.Background.ChatDetector.HEIGHT
+        get() = this.topPos + ScreenTextures.Background.IronDropper.HEIGHT
 
     private lateinit var shootModeButton: MultiStateSpriteButton
     private lateinit var toggleEffectButton: MultiStateSpriteButton
@@ -35,6 +30,9 @@ class IronDropperScreen(
     override fun init() {
         super.init()
         this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
+
+        val buttonSize = 20
+        val spaceBetween = 5
 
         this.shootModeButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
@@ -50,8 +48,7 @@ class IronDropperScreen(
                 spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD_HEIGHT
             )
             .size(
-                width = 20,
-                height = 20
+                size = buttonSize
             )
             .currentStateGetter(
                 currentStateGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
@@ -60,7 +57,7 @@ class IronDropperScreen(
                 onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
             )
             .location(
-                x = this.rightPos - 25,
+                x = this.rightPos - spaceBetween - buttonSize,
                 y = this.topPos + 5
             )
             .build()
@@ -89,8 +86,7 @@ class IronDropperScreen(
                 spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH_HEIGHT
             )
             .size(
-                width = 20,
-                height = 20
+                size = buttonSize
             )
             .currentStateGetter(
                 currentStateGetter = { this.menu.shouldHaveEffects.ordinal }
@@ -124,8 +120,7 @@ class IronDropperScreen(
                 spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_HEIGHT
             )
             .size(
-                width = 20,
-                height = 20
+                size = buttonSize
             )
             .currentStateGetter(
                 currentStateGetter = { this.menu.pickupDelay.ordinal }
@@ -159,8 +154,7 @@ class IronDropperScreen(
                 spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_HEIGHT
             )
             .size(
-                width = 20,
-                height = 20
+                size = buttonSize
             )
             .currentStateGetter(
                 currentStateGetter = { this.menu.redstoneMode.ordinal }
@@ -188,7 +182,16 @@ class IronDropperScreen(
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
         val i = (this.width - this.imageWidth) / 2
         val j = (this.height - this.imageHeight) / 2
-        guiGraphics.blit(texture, i, j, 0, 0, this.imageWidth, this.imageHeight)
+
+        guiGraphics.blit(
+            ScreenTextures.Background.IRON_DROPPER,
+            i,
+            j,
+            0,
+            0,
+            this.imageWidth,
+            this.imageHeight
+        )
     }
 
 }
