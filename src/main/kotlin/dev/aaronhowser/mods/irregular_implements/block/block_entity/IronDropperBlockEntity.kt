@@ -35,12 +35,12 @@ class IronDropperBlockEntity(
         const val CONTAINER_DATA_SIZE = 4
 
         const val SHOOT_STRAIGHT_INDEX = 0
-        const val SHOULD_HAVE_EFFECTS_INDEX = 1
+        const val EFFECTS_MODE_INDEX = 1
         const val PICKUP_DELAY_INDEX = 2
         const val REDSTONE_MODE_INDEX = 3
 
         const val SHOOT_STRAIGHT_NBT = "ShootStraight"
-        const val SHOULD_HAVE_EFFECTS_NBT = "ShouldHaveEffects"
+        const val EFFECTS_MODE_NBT = "EffectsMode"
         const val PICKUP_DELAY_NBT = "PickupDelay"
         const val REDSTONE_MODE_NBT = "RedstoneMode"
     }
@@ -51,7 +51,14 @@ class IronDropperBlockEntity(
             setChanged()
         }
 
-    var shouldHaveEffects: Boolean = true
+    enum class EffectsMode(val hasParticles: Boolean, val hasSound: Boolean) {
+        NONE(false, false),
+        PARTICLES(true, false),
+        SOUND(false, true),
+        BOTH(true, true)
+    }
+
+    var effectsMode: EffectsMode = EffectsMode.BOTH
         private set(value) {
             field = value
             setChanged()
@@ -76,7 +83,7 @@ class IronDropperBlockEntity(
         override fun get(index: Int): Int {
             return when (index) {
                 SHOOT_STRAIGHT_INDEX -> if (this@IronDropperBlockEntity.shouldShootStraight) 1 else 0
-                SHOULD_HAVE_EFFECTS_INDEX -> if (this@IronDropperBlockEntity.shouldHaveEffects) 1 else 0
+                EFFECTS_MODE_INDEX -> EffectsMode.entries.indexOf(this@IronDropperBlockEntity.effectsMode)
                 PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay
                 REDSTONE_MODE_INDEX -> RedstoneMode.entries.indexOf(this@IronDropperBlockEntity.redstoneMode)
                 else -> 0
@@ -86,7 +93,7 @@ class IronDropperBlockEntity(
         override fun set(index: Int, value: Int) {
             when (index) {
                 SHOOT_STRAIGHT_INDEX -> this@IronDropperBlockEntity.shouldShootStraight = value != 0
-                SHOULD_HAVE_EFFECTS_INDEX -> this@IronDropperBlockEntity.shouldHaveEffects = value != 0
+                EFFECTS_MODE_INDEX -> this@IronDropperBlockEntity.effectsMode = EffectsMode.entries[value]
                 PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay = value
                 REDSTONE_MODE_INDEX -> this@IronDropperBlockEntity.redstoneMode = RedstoneMode.entries[value]
             }
@@ -95,11 +102,11 @@ class IronDropperBlockEntity(
 
     val dispenseBehavior = object : DefaultDispenseItemBehavior() {
         override fun playSound(blockSource: BlockSource) {
-            if (this@IronDropperBlockEntity.shouldHaveEffects) super.playSound(blockSource)
+            if (this@IronDropperBlockEntity.effectsMode.hasSound) super.playSound(blockSource)
         }
 
         override fun playAnimation(blockSource: BlockSource, direction: Direction) {
-            if (this@IronDropperBlockEntity.shouldHaveEffects) super.playAnimation(blockSource, direction)
+            if (this@IronDropperBlockEntity.effectsMode.hasParticles) super.playAnimation(blockSource, direction)
         }
 
         override fun execute(blockSource: BlockSource, chosenStack: ItemStack): ItemStack {
@@ -155,7 +162,7 @@ class IronDropperBlockEntity(
         super.saveAdditional(tag, registries)
 
         tag.putBoolean(SHOOT_STRAIGHT_NBT, this.shouldShootStraight)
-        tag.putBoolean(SHOULD_HAVE_EFFECTS_NBT, this.shouldHaveEffects)
+        tag.putInt(EFFECTS_MODE_NBT, this.effectsMode.ordinal)
         tag.putInt(PICKUP_DELAY_NBT, this.pickupDelay)
         tag.putInt(REDSTONE_MODE_NBT, this.redstoneMode.ordinal)
     }
@@ -164,7 +171,7 @@ class IronDropperBlockEntity(
         super.loadAdditional(tag, registries)
 
         this.shouldShootStraight = tag.getBoolean(SHOOT_STRAIGHT_NBT)
-        this.shouldHaveEffects = tag.getBoolean(SHOULD_HAVE_EFFECTS_NBT)
+        this.effectsMode = EffectsMode.entries[tag.getInt(EFFECTS_MODE_NBT)]
         this.pickupDelay = tag.getInt(PICKUP_DELAY_NBT)
         this.redstoneMode = RedstoneMode.entries[tag.getInt(REDSTONE_MODE_NBT)]
     }
