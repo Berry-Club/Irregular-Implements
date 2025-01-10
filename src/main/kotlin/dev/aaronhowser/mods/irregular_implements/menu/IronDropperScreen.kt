@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
@@ -16,11 +18,6 @@ class IronDropperScreen(
 
     companion object {
         private val texture = ResourceLocation.withDefaultNamespace("textures/gui/container/dispenser.png")
-
-        const val SHOOT_MODE_BUTTON_ID = 0
-        const val TOGGLE_EFFECT_BUTTON_ID = 1
-        const val DELAY_BUTTON_ID = 2
-        const val REDSTONE_MODE_BUTTON_ID = 3
     }
 
     private val rightPos: Int
@@ -42,12 +39,12 @@ class IronDropperScreen(
             height = 20,
             spriteWidth = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_WIDTH,
             spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT,
-            spriteOn = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
-            spriteOff = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
-            messageOn = Component.literal("Random"),
-            messageOff = Component.literal("Forward"),
+            spriteOn = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
+            spriteOff = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
+            messageOn = Component.literal("Forward"),
+            messageOff = Component.literal("Randomize"),
             currentStateGetter = { this.menu.shouldShootStraight },
-            onPress = { this.menu.toggleShootStraight() },
+            onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) },
             font = this.font
         )
 

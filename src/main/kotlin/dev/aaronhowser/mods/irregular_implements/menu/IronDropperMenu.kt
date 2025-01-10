@@ -5,8 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperB
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.REDSTONE_MODE_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOOT_STRAIGHT_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOULD_HAVE_EFFECTS_INDEX
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -86,52 +84,49 @@ class IronDropperMenu(
         return dispenserContainer.stillValid(player)
     }
 
-    val shouldShootStraight: Boolean
+    var shouldShootStraight: Boolean
         get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
+        private set(value) = containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
 
-    fun toggleShootStraight() {
-        ModPacketHandler.messageServer(
-            ClientClickedIronDropperButton(
-                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
-                buttonClicked = IronDropperScreen.SHOOT_MODE_BUTTON_ID
-            )
-        )
-    }
-
-    val shouldHaveEffects: Boolean
+    var shouldHaveEffects: Boolean
         get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
+        private set(value) = containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
 
-    fun toggleShouldHaveEffects() {
-        ModPacketHandler.messageServer(
-            ClientClickedIronDropperButton(
-                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
-                buttonClicked = IronDropperScreen.TOGGLE_EFFECT_BUTTON_ID
-            )
-        )
-    }
-
-    val pickupDelay: Int
+    var pickupDelay: Int
         get() = containerData.get(PICKUP_DELAY_INDEX)
+        private set(value) = containerData.set(PICKUP_DELAY_INDEX, value)
 
-    fun incrementPickupDelay() {
-        ModPacketHandler.messageServer(
-            ClientClickedIronDropperButton(
-                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
-                buttonClicked = IronDropperScreen.DELAY_BUTTON_ID
-            )
-        )
+    var redstoneMode: IronDropperBlockEntity.RedstoneMode
+        get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
+        private set(value) = containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
+
+    // Only called from the server
+    fun handleButtonPressed(buttonId: Int) {
+        when (buttonId) {
+            SHOOT_MODE_BUTTON_ID -> this.shouldShootStraight = !this.shouldShootStraight
+
+            TOGGLE_EFFECT_BUTTON_ID -> this.shouldHaveEffects = !this.shouldHaveEffects
+
+            DELAY_BUTTON_ID -> this.pickupDelay = when (this.pickupDelay) {
+                0 -> 5
+                5 -> 20
+                20 -> 0
+                else -> 0
+            }
+
+            REDSTONE_MODE_BUTTON_ID -> this.redstoneMode = when (this.redstoneMode) {
+                IronDropperBlockEntity.RedstoneMode.PULSE -> IronDropperBlockEntity.RedstoneMode.REPEAT
+                IronDropperBlockEntity.RedstoneMode.REPEAT -> IronDropperBlockEntity.RedstoneMode.REPEAT_POWERED
+                IronDropperBlockEntity.RedstoneMode.REPEAT_POWERED -> IronDropperBlockEntity.RedstoneMode.PULSE
+            }
+        }
     }
 
-    val redstoneMode: IronDropperBlockEntity.RedstoneMode
-        get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
-
-    fun incrementRedstoneMode() {
-        ModPacketHandler.messageServer(
-            ClientClickedIronDropperButton(
-                blockPos = (dispenserContainer as IronDropperBlockEntity).blockPos,
-                buttonClicked = IronDropperScreen.REDSTONE_MODE_BUTTON_ID
-            )
-        )
+    companion object {
+        const val SHOOT_MODE_BUTTON_ID = 0
+        const val TOGGLE_EFFECT_BUTTON_ID = 1
+        const val DELAY_BUTTON_ID = 2
+        const val REDSTONE_MODE_BUTTON_ID = 3
     }
 
 }
