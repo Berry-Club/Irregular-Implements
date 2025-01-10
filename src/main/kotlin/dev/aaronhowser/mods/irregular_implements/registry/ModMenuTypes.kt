@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerMenu
-import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerScreen
-import dev.aaronhowser.mods.irregular_implements.menu.IronDropperMenu
-import dev.aaronhowser.mods.irregular_implements.menu.IronDropperScreen
+import dev.aaronhowser.mods.irregular_implements.menu.*
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.inventory.MenuType
@@ -26,6 +23,11 @@ object ModMenuTypes {
     val BLOCK_DESTABILIZER: DeferredHolder<MenuType<*>, MenuType<BlockDestabilizerMenu>> =
         MENU_TYPE_REGISTRY.register("block_destabilizer", Supplier {
             MenuType(::BlockDestabilizerMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
+    val CHAT_DETECTOR: DeferredHolder<MenuType<*>, MenuType<ChatDetectorMenu>> =
+        MENU_TYPE_REGISTRY.register("chat_detector", Supplier {
+            MenuType(::ChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
     fun registerScreens(event: RegisterMenuScreensEvent) {

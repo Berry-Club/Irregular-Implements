@@ -96,24 +96,6 @@ class BlockDestabilizerBlockEntity(
             setChanged()
         }
 
-    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
-        override fun get(index: Int): Int {
-            return when (index) {
-                LAZY_INDEX -> if (this@BlockDestabilizerBlockEntity.isLazy) 1 else 0
-                else -> 0
-            }
-        }
-
-        // The value is ignored
-        override fun set(index: Int, value: Int) {
-            when (index) {
-                LAZY_INDEX -> toggleLazy()
-                SHOW_LAZY_INDEX -> showLazyShape()
-                RESET_LAZY_INDEX -> resetLazyShape()
-            }
-        }
-    }
-
     private val lazyBlocks: HashSet<BlockPos> = hashSetOf()
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -339,6 +321,34 @@ class BlockDestabilizerBlockEntity(
         this.dropCounter++
     }
 
+    // Menu stuff
+
+    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+        override fun get(index: Int): Int {
+            return when (index) {
+                LAZY_INDEX -> if (this@BlockDestabilizerBlockEntity.isLazy) 1 else 0
+                else -> 0
+            }
+        }
+
+        // The value is ignored
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                LAZY_INDEX -> toggleLazy()
+                SHOW_LAZY_INDEX -> showLazyShape()
+                RESET_LAZY_INDEX -> resetLazyShape()
+            }
+        }
+    }
+
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return BlockDestabilizerMenu(containerId, this.containerData)
+    }
+
+    override fun getDisplayName(): Component {
+        return this.blockState.block.name
+    }
+
     // Buttons
 
     private fun toggleLazy() {
@@ -379,14 +389,6 @@ class BlockDestabilizerBlockEntity(
 
         removeLazyIndicators()
         this.lazyBlocks.clear()
-    }
-
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return BlockDestabilizerMenu(containerId, this.containerData)
-    }
-
-    override fun getDisplayName(): Component {
-        return this.blockState.block.name
     }
 
     // Syncs with client

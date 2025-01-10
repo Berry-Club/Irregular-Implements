@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.ChatDetectorBlock
+import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -11,7 +12,11 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -21,7 +26,7 @@ import java.util.*
 class ChatDetectorBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.CHAT_DETECTOR.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntities.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
     companion object {
         private val detectors: MutableSet<ChatDetectorBlockEntity> = mutableSetOf()
@@ -61,6 +66,9 @@ class ChatDetectorBlockEntity(
         const val OWNER_UUID_NBT = "OwnerUuid"
         const val STOPS_MESSAGE_NBT = "StopsMessage"
         const val MESSAGE_REGEX_NBT = "MessageRegex"
+
+        const val CONTAINER_DATA_SIZE = 1
+        const val STOPS_MESSAGE_INDEX = 0
     }
 
     // Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
@@ -128,6 +136,32 @@ class ChatDetectorBlockEntity(
     override fun onLoad() {
         super.onLoad()
         if (!this.level?.isClientSide.isTrue) detectors.add(this)
+    }
+
+    // Menu stuff
+
+    private val containerData = object : SimpleContainerData(1) {
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                STOPS_MESSAGE_INDEX -> this@ChatDetectorBlockEntity.stopsMessage = value == 1
+                else -> error("Unknown index: $index")
+            }
+        }
+
+        override fun get(index: Int): Int {
+            return when (index) {
+                STOPS_MESSAGE_INDEX -> if (this@ChatDetectorBlockEntity.stopsMessage) 1 else 0
+                else -> error("Unknown index: $index")
+            }
+        }
+    }
+
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return ChatDetectorMenu(containerId, this.containerData)
+    }
+
+    override fun getDisplayName(): Component {
+        return this.blockState.block.name
     }
 
     // Syncs with client
