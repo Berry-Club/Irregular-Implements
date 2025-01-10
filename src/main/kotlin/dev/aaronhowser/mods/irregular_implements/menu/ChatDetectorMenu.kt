@@ -44,8 +44,13 @@ class ChatDetectorMenu(
     private var currentRegexString: String = ""
     fun setRegex(regexString: String): Boolean {
         if (regexString == this.currentRegexString) return false
-
         this.currentRegexString = regexString
+
+        this.containerLevelAccess.execute { level, pos ->
+            val blockEntity = level.getBlockEntity(pos) as? ChatDetectorBlockEntity
+            blockEntity?.regexString = regexString
+        }
+
         return true
     }
 
