@@ -535,21 +535,29 @@ class ModLanguageProvider(
         const val VOID_STONE_REMOVE = "tooltip.irregular_implements.void_stone_remove"
         const val ANCHORED = "tooltip.irregular_implements.anchored"
         const val ALL_ORES = "tooltip.irregular_implements.all_ores"
-
         const val LAZY = "tooltip.irregular_implements.lazy"
         const val NOT_LAZY = "tooltip.irregular_implements.not_lazy"
         const val SHOW_LAZY_SHAPE = "tooltip.irregular_implements.show_lazy_shape"
         const val FORGET_LAZY_SHAPE = "tooltip.irregular_implements.forget_lazy_shape"
-
         const val STOPS_MESSAGE = "tooltip.irregular_implements.stops_message"
         const val DOESNT_STOP_MESSAGE = "tooltip.irregular_implements.doesnt_stop_message"
         const val MESSAGE_REGEX = "tooltip.irregular_implements.message_regex"
-
         const val COIL_TRANSFERS = "tooltip.irregular_implements.coil_transfers"
         const val COIL_GENERATES = "tooltip.irregular_implements.coil_generates"
         const val CHARGER_CHARGES = "tooltip.irregular_implements.charger_charges"
-
         const val LOCATION_COMPONENT = "tooltip.irregular_implements.location_component"
+        const val IRON_DROPPER_CONTINUOUS_POWERED = "tooltip.irregular_implements.iron_dropper_continuous_powered"
+        const val IRON_DROPPER_CONTINUOUS = "tooltip.irregular_implements.iron_dropper_continuous"
+        const val IRON_DROPPER_PULSE = "tooltip.irregular_implements.iron_dropper_pulse"
+        const val IRON_DROPPER_NO_DELAY = "tooltip.irregular_implements.iron_dropper_no_delay"
+        const val IRON_DROPPER_FIVE_DELAY = "tooltip.irregular_implements.iron_dropper_five_delay"
+        const val IRON_DROPPER_TWENTY_DELAY = "tooltip.irregular_implements.iron_dropper_twenty_delay"
+        const val IRON_DROPPER_EXACT_VELOCITY = "tooltip.irregular_implements.iron_dropper_exact_velocity"
+        const val IRON_DROPPER_RANDOM_VELOCITY = "tooltip.irregular_implements.iron_dropper_random_velocity"
+        const val IRON_DROPPER_NO_EFFECTS = "tooltip.irregular_implements.iron_dropper_no_effects"
+        const val IRON_DROPPER_ONLY_SOUND = "tooltip.irregular_implements.iron_dropper_only_sound"
+        const val IRON_DROPPER_ONLY_PARTICLES = "tooltip.irregular_implements.iron_dropper_only_particles"
+        const val IRON_DROPPER_BOTH_EFFECTS = "tooltip.irregular_implements.iron_dropper_both_effects"
     }
 
     private fun addTooltips() {
@@ -573,19 +581,28 @@ class ModLanguageProvider(
         add(Tooltips.ANCHORED, "Anchored")
         add(Tooltips.ALL_ORES, "All Ores")
         add(Tooltips.LOCATION_COMPONENT, "%s, %dx %dy %dz")
-
         add(Tooltips.LAZY, "Lazy")
         add(Tooltips.NOT_LAZY, "Not Lazy")
         add(Tooltips.SHOW_LAZY_SHAPE, "Show Lazy Shape")
         add(Tooltips.FORGET_LAZY_SHAPE, "Forget Lazy Shape")
-
         add(Tooltips.STOPS_MESSAGE, "Stops message")
         add(Tooltips.DOESNT_STOP_MESSAGE, "Doesn't stop message")
         add(Tooltips.MESSAGE_REGEX, "Message regex")
-
         add(Tooltips.COIL_TRANSFERS, "Transfers %s RF/t")
         add(Tooltips.COIL_GENERATES, "Generates %s RF/t")
         add(Tooltips.CHARGER_CHARGES, "Charges %s RF/t")
+        add(Tooltips.IRON_DROPPER_CONTINUOUS_POWERED, "Eject continuously while powered")
+        add(Tooltips.IRON_DROPPER_CONTINUOUS, "Eject continuously")
+        add(Tooltips.IRON_DROPPER_PULSE, "Eject when pulsed")
+        add(Tooltips.IRON_DROPPER_NO_DELAY, "No pickup delay")
+        add(Tooltips.IRON_DROPPER_FIVE_DELAY, "5 tick pickup delay")
+        add(Tooltips.IRON_DROPPER_TWENTY_DELAY, "20 tick pickup delay")
+        add(Tooltips.IRON_DROPPER_EXACT_VELOCITY, "Exact velocity")
+        add(Tooltips.IRON_DROPPER_RANDOM_VELOCITY, "Random velocity")
+        add(Tooltips.IRON_DROPPER_NO_EFFECTS, "No effects")
+        add(Tooltips.IRON_DROPPER_ONLY_SOUND, "Sound effects")
+        add(Tooltips.IRON_DROPPER_ONLY_PARTICLES, "Particle effects")
+        add(Tooltips.IRON_DROPPER_BOTH_EFFECTS, "Sound & particle effects")
     }
 
     object Info {
