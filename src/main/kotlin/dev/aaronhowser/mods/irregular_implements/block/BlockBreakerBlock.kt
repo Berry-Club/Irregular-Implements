@@ -73,7 +73,7 @@ class BlockBreakerBlock : Block(
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
 
         val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return
-        blockEntity.neighborChanged(state, level, pos)
+        blockEntity.neighborChanged(state, level)
     }
 
     override fun useItemOn(

@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -43,6 +44,15 @@ class IronDropperBlockEntity(
         const val EFFECTS_MODE_NBT = "EffectsMode"
         const val PICKUP_DELAY_NBT = "PickupDelay"
         const val REDSTONE_MODE_NBT = "RedstoneMode"
+
+        fun tick(
+            level: Level,
+            pos: BlockPos,
+            state: BlockState,
+            blockEntity: IronDropperBlockEntity
+        ) {
+            blockEntity.tick()
+        }
     }
 
     var shouldShootStraight: Boolean = false
@@ -183,6 +193,19 @@ class IronDropperBlockEntity(
 
             level.addFreshEntity(itemEntity)
         }
+    }
+
+    private fun tick() {
+        val level = this.level as? ServerLevel ?: return
+
+        val shouldDispense = level.gameTime % 4 == 0L && (
+                this.redstoneMode == RedstoneMode.CONTINUOUS ||
+                        (this.redstoneMode == RedstoneMode.CONTINUOUS_POWERED && level.hasNeighborSignal(this.worldPosition))
+                )
+
+        if (!shouldDispense) return
+
+        ModBlocks.IRON_DROPPER.get().dispenseFrom(level, this.blockState, this.worldPosition)
     }
 
     override fun getDefaultName(): Component {

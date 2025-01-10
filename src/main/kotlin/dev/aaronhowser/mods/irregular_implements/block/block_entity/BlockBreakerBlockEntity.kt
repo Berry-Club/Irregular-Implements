@@ -204,11 +204,11 @@ class BlockBreakerBlockEntity(
         this.miningProgress = 0f
     }
 
-    fun neighborChanged(state: BlockState, level: Level, pos: BlockPos) {
+    fun neighborChanged(state: BlockState, level: Level) {
         val targetPos = blockPos.relative(state.getValue(BlockBreakerBlock.FACING))
         val targetState = level.getBlockState(targetPos)
 
-        this.canMine = level.getBestNeighborSignal(pos) <= 0
+        this.canMine = !level.hasNeighborSignal(blockPos)
 
         if (this.canMine) {
             if (!targetState.isAir) {
