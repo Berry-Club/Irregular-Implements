@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -41,8 +43,8 @@ class IronDropperScreen(
             spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT,
             spriteOn = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
             spriteOff = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
-            messageOn = Component.literal("Forward"),
-            messageOff = Component.literal("Randomize"),
+            messageOn = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
+            messageOff = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
             currentStateGetter = { this.menu.shouldShootStraight },
             onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) },
             font = this.font
