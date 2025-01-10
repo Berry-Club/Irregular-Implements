@@ -139,9 +139,45 @@ class IronDropperScreen(
             )
             .build()
 
+        this.redstoneModeButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_HEIGHT
+            )
+            .size(
+                width = 20,
+                height = 20
+            )
+            .currentStateGetter(
+                currentStateGetter = { this.menu.redstoneMode.ordinal }
+            )
+            .onPress(
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
+            )
+            .location(
+                x = this.rightPos - 25,
+                y = this.topPos + 80
+            )
+            .build()
+
         this.addRenderableWidget(this.shootModeButton)
         this.addRenderableWidget(this.toggleEffectButton)
         this.addRenderableWidget(this.delayButton)
+        this.addRenderableWidget(this.redstoneModeButton)
     }
 
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

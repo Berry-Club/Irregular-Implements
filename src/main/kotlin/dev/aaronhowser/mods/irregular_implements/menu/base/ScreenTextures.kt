@@ -118,13 +118,13 @@ object ScreenTextures {
             const val REDSTONE_PULSE_WIDTH = 8
             const val REDSTONE_PULSE_HEIGHT = 8
 
-            val REDSTONE_REPEAT = OtherUtil.modResource("buttons/iron_dropper/redstone_repeat")
-            const val REDSTONE_REPEAT_WIDTH = 12
-            const val REDSTONE_REPEAT_HEIGHT = 14
+            val REDSTONE_CONTINUOUS = OtherUtil.modResource("buttons/iron_dropper/redstone_continuous")
+            const val REDSTONE_CONTINUOUS_WIDTH = 12
+            const val REDSTONE_CONTINUOUS_HEIGHT = 14
 
-            val REDSTONE_REPEAT_POWERED = OtherUtil.modResource("buttons/iron_dropper/redstone_repeat_powered")
-            const val REDSTONE_REPEAT_POWERED_WIDTH = 12
-            const val REDSTONE_REPEAT_POWERED_HEIGHT = 14
+            val REDSTONE_CONTINUOUS_POWERED = OtherUtil.modResource("buttons/iron_dropper/redstone_continuous_powered")
+            const val REDSTONE_CONTINUOUS_POWERED_WIDTH = 12
+            const val REDSTONE_CONTINUOUS_POWERED_HEIGHT = 14
         }
 
     }

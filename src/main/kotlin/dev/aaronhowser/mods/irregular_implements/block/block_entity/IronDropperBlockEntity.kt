@@ -95,14 +95,14 @@ class IronDropperBlockEntity(
 
     enum class RedstoneMode {
         PULSE,
-        REPEAT,
-        REPEAT_POWERED;
+        CONTINUOUS,
+        CONTINUOUS_POWERED;
 
         fun next(): RedstoneMode {
             return when (this) {
-                PULSE -> REPEAT
-                REPEAT -> REPEAT_POWERED
-                REPEAT_POWERED -> PULSE
+                PULSE -> CONTINUOUS
+                CONTINUOUS -> CONTINUOUS_POWERED
+                CONTINUOUS_POWERED -> PULSE
             }
         }
     }
