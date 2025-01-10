@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class ClientClickedIronDropperButton(
-    val buttonClicked: Int
+    private val buttonClicked: Int
 ) : IModPacket {
 
     override fun receiveOnServer(context: IPayloadContext) {

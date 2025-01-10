@@ -18,9 +18,9 @@ class IronDropperScreen(
 ) : AbstractContainerScreen<IronDropperMenu>(menu, playerInventory, title) {
 
     private val rightPos: Int
-        get() = this.leftPos + ScreenTextures.Background.IronDropper.WIDTH
+        get() = this.leftPos + this.imageWidth
     private val bottomPos: Int
-        get() = this.topPos + ScreenTextures.Background.IronDropper.HEIGHT
+        get() = this.topPos + this.imageHeight
 
     private lateinit var shootModeButton: MultiStateSpriteButton
     private lateinit var toggleEffectButton: MultiStateSpriteButton
@@ -31,7 +31,9 @@ class IronDropperScreen(
         this.imageWidth = ScreenTextures.Background.IronDropper.WIDTH
         this.imageHeight = ScreenTextures.Background.IronDropper.HEIGHT
 
-        super.init()
+        this.leftPos = (this.width - this.imageWidth) / 2
+        this.topPos = (this.height - this.imageHeight) / 2
+
         this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
 
         val buttonSize = 20

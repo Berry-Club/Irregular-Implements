@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -17,7 +17,7 @@ class ChatDetectorMenu(
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
                 containerId,
-                SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE)
+                SimpleContainerData(ChatDetectorBlockEntity.CONTAINER_DATA_SIZE)
             )
 
     init {
@@ -26,6 +26,16 @@ class ChatDetectorMenu(
 
     companion object {
         const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
+    }
+
+    var messagePassThrough: Boolean
+        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
+        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
+
+    fun handleButtonPressed(buttonId: Int) {
+        when (buttonId) {
+            TOGGLE_MESSAGE_PASS_BUTTON_ID -> messagePassThrough = !messagePassThrough
+        }
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {

@@ -77,19 +77,7 @@ class ChatDetectorBlock : EntityBlock, Block(
         pHitResult: BlockHitResult
     ): InteractionResult {
         val blockEntity = pLevel.getBlockEntity(pPos) as? ChatDetectorBlockEntity ?: return InteractionResult.FAIL
-
-        if (pLevel.isClientSide) {
-            val screen = ChatDetectorScreen(blockEntity)
-            Minecraft.getInstance().setScreen(screen)
-        } else {
-            ModPacketHandler.messagePlayer(
-                pPlayer as ServerPlayer,
-                UpdateClientChatDetector(
-                    blockEntity.stopsMessage,
-                    blockEntity.regexString
-                )
-            )
-        }
+        pPlayer.openMenu(blockEntity)
 
         return InteractionResult.SUCCESS
     }

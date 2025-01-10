@@ -24,8 +24,11 @@ class BlockDestabilizerScreen(
     private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
     override fun init() {
-        this.leftPos = (this.width - ScreenTextures.Background.BlockDestabilizer.WIDTH) / 2
-        this.topPos = (this.height - ScreenTextures.Background.BlockDestabilizer.HEIGHT) / 2
+        this.imageWidth = ScreenTextures.Background.BlockDestabilizer.WIDTH
+        this.imageHeight = ScreenTextures.Background.BlockDestabilizer.HEIGHT
+
+        this.leftPos = (this.width - this.imageWidth) / 2
+        this.topPos = (this.height - this.imageHeight) / 2
 
         this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
