@@ -36,7 +36,10 @@ class IronDropperBlock : DropperBlock(
         val slot = blockEntity.getRandomSlot(level.random)
 
         if (slot < 0) {
-            level.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0)
+            if (blockEntity.effectsMode.hasSound) {
+                level.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0)
+            }
+
             return
         }
 
