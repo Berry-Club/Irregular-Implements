@@ -18,7 +18,7 @@ class MultiStateSpriteButton(
     height: Int,
     private val amountStages: Int,
     private val currentStateGetter: Supplier<Int>,
-    private val sprites: List<ResourceLocation>,
+    private val sprites: List<ResourceLocation?>,
     private val messages: List<Component>,
     private val spriteWidth: Int,
     private val spriteHeight: Int,
@@ -48,13 +48,15 @@ class MultiStateSpriteButton(
 
         val sprite = sprites[currentStateGetter.get()]
 
-        guiGraphics.blitSprite(
-            sprite,
-            i,
-            j,
-            this.spriteWidth,
-            this.spriteHeight
-        )
+        if (sprite != null) {
+            guiGraphics.blitSprite(
+                sprite,
+                i,
+                j,
+                this.spriteWidth,
+                this.spriteHeight
+            )
+        }
 
         if (isMouseOver(mouseX.toDouble(), mouseY.toDouble())) {
             renderToolTip(guiGraphics, mouseX, mouseY)
@@ -92,7 +94,7 @@ class MultiStateSpriteButton(
     }
 
     class Builder(private val font: Font) {
-        private val sprites: MutableList<ResourceLocation> = mutableListOf()
+        private val sprites: MutableList<ResourceLocation?> = mutableListOf()
         private val messages: MutableList<Component> = mutableListOf()
 
         private var amountStages = 0
@@ -108,7 +110,7 @@ class MultiStateSpriteButton(
         private var onPress: OnPress = OnPress { }
 
 
-        fun addStage(sprite: ResourceLocation, message: Component): Builder {
+        fun addStage(sprite: ResourceLocation?, message: Component): Builder {
             sprites.add(sprite)
             messages.add(message)
             amountStages++
