@@ -84,7 +84,9 @@ class IronDropperScreen(
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
-                sprite = null
+                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH_HEIGHT
             )
             .size(
                 width = 20,

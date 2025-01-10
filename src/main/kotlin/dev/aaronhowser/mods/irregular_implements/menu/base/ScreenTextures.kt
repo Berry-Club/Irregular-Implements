@@ -98,6 +98,10 @@ object ScreenTextures {
             const val EFFECT_SOUND_WIDTH = 5
             const val EFFECT_SOUND_HEIGHT = 8
 
+            val EFFECT_BOTH = OtherUtil.modResource("buttons/iron_dropper/effect_both")
+            const val EFFECT_BOTH_WIDTH = 14
+            const val EFFECT_BOTH_HEIGHT = 13
+
             val PICKUP_FIVE = OtherUtil.modResource("buttons/iron_dropper/pickup_five")
             const val PICKUP_FIVE_WIDTH = 10
             const val PICKUP_FIVE_HEIGHT = 12
