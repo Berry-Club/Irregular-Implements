@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.client.gui.GuiGraphics
@@ -13,6 +14,7 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.inventory.ContainerLevelAccess
 
 class ChatDetectorScreen(
     menu: ChatDetectorMenu,
@@ -149,12 +151,16 @@ class ChatDetectorScreen(
         this.regexStringEditBox.value = string
         isChangingRegexString = false
 
-//        ModPacketHandler.messageServer(
-//            ClientChangedChatDetectorString(
-//                this.menu.blockPos,
-//                string
-//            )
-//        )
+        val a = this.menu.containerLevelAccess == ContainerLevelAccess.NULL
+
+        this.menu.containerLevelAccess.execute { level, blockPos ->
+            ModPacketHandler.messageServer(
+                ClientChangedChatDetectorString(
+                    blockPos,
+                    string
+                )
+            )
+        }
     }
 
 }

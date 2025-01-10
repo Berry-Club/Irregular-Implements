@@ -19,6 +19,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -175,7 +176,7 @@ class ChatDetectorBlockEntity(
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return ChatDetectorMenu(containerId, this.containerData)
+        return ChatDetectorMenu(containerId, this.containerData, ContainerLevelAccess.create(this.level!!, this.blockPos))
     }
 
     override fun getDisplayName(): Component {
