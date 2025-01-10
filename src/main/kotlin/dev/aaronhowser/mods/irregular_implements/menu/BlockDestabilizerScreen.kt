@@ -60,7 +60,7 @@ class BlockDestabilizerScreen(
             )
             .build()
 
-        showLazyShapeButton = ImprovedSpriteButton(
+        this.showLazyShapeButton = ImprovedSpriteButton(
             x = this.leftPos + 33,
             y = this.topPos + 7,
             width = 20,
@@ -73,7 +73,7 @@ class BlockDestabilizerScreen(
             font = this.font
         )
 
-        forgetLazyShapeButton = ImprovedSpriteButton(
+        this.forgetLazyShapeButton = ImprovedSpriteButton(
             x = this.leftPos + 58,
             y = this.topPos + 7,
             width = 20,
@@ -86,9 +86,9 @@ class BlockDestabilizerScreen(
             font = this.font
         )
 
-        this.addRenderableWidget(toggleLazyButton)
-        this.addRenderableWidget(showLazyShapeButton)
-        this.addRenderableWidget(forgetLazyShapeButton)
+        this.addRenderableWidget(this.toggleLazyButton)
+        this.addRenderableWidget(this.showLazyShapeButton)
+        this.addRenderableWidget(this.forgetLazyShapeButton)
     }
 
     // Rendering

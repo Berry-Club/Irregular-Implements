@@ -3,8 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.menu
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
@@ -35,28 +35,39 @@ class ChatDetectorScreen(
         this.leftPos = (this.width - ScreenTextures.Background.ChatDetector.WIDTH) / 2
         this.topPos = (this.height - ScreenTextures.Background.ChatDetector.HEIGHT) / 2
 
-        toggleMessagePassButton = ToggleSpriteButton(
-            width = 20,
-            height = 20,
-            spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
-            spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT,
-            spriteOn = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
-            spriteOff = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
-            messageOn = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
-            messageOff = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
-            currentStateGetter = { this.chatDetectorBlockEntity.stopsMessage },   // On means it stops messages      //TODO: Update this to use a menu for containerdata
-            onPress = ::pressToggleMessagePassButton,
-            font = this.font
-        )
+        this.toggleMessagePassButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                sprite = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
+                message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent()
+            )
+            .addStage(
+                sprite = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
+                message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent()
+            )
+            .size(
+                width = 20,
+                height = 20
+            )
+            .spriteDimensions(
+                width = ScreenTextures.Sprite.ChatDetector.WIDTH,
+                height = ScreenTextures.Sprite.ChatDetector.HEIGHT
+            )
+            .currentStateGetter(
+                currentStateGetter = { if (this.chatDetectorBlockEntity.stopsMessage) 0 else 1 }    // On means it stops messages      //TODO: Update this to use a menu for containerdata
+            )
+            .onPress(
+                onPress = ::pressToggleMessagePassButton
+            )
+            .build()
 
-        toggleMessagePassButton.setPosition(
-            this.rightPos - toggleMessagePassButton.width - 5,
+        this.toggleMessagePassButton.setPosition(
+            this.rightPos - this.toggleMessagePassButton.width - 5,
             this.topPos + 5
         )
 
         val width = this.rightPos - this.leftPos
 
-        regexStringEditBox = EditBox(
+        this.regexStringEditBox = EditBox(
             this.font,
             this.leftPos + 5,
             this.bottomPos - 5 - 20,
@@ -65,12 +76,12 @@ class ChatDetectorScreen(
             Component.literal(this.chatDetectorBlockEntity.regexString)
         )
 
-        regexStringEditBox.setResponder(::setRegexString)
-        regexStringEditBox.setMaxLength(10000)
-        regexStringEditBox.setHint(ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent())
+        this.regexStringEditBox.setResponder(::setRegexString)
+        this.regexStringEditBox.setMaxLength(10000)
+        this.regexStringEditBox.setHint(ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent())
 
-        addRenderableWidget(toggleMessagePassButton)
-        addRenderableWidget(regexStringEditBox)
+        addRenderableWidget(this.toggleMessagePassButton)
+        addRenderableWidget(this.regexStringEditBox)
     }
 
     // Rendering
