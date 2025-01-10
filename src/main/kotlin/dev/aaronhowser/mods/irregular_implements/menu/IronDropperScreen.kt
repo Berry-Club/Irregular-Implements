@@ -65,7 +65,45 @@ class IronDropperScreen(
             )
             .build()
 
+        this.toggleEffectButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                sprite = null,
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_EFFECTS.toComponent()
+            )
+            .addStage(
+                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND,
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent()
+            )
+            .addStage(
+                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE,
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent()
+            )
+            .addStage(
+                sprite = null,
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent()
+            )
+            .size(
+                width = 20,
+                height = 20
+            )
+            .spriteDimensions(
+                width = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_WIDTH,
+                height = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_HEIGHT
+            )
+            .currentStateGetter(
+                currentStateGetter = { this.menu.shouldHaveEffects.ordinal }
+            )
+            .onPress(
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.TOGGLE_EFFECT_BUTTON_ID)) }
+            )
+            .location(
+                x = this.rightPos - 25,
+                y = this.topPos + 30
+            )
+            .build()
+
         this.addRenderableWidget(this.shootModeButton)
+        this.addRenderableWidget(this.toggleEffectButton)
     }
 
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

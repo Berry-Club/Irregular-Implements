@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.EFFECTS_MODE_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.PICKUP_DELAY_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.REDSTONE_MODE_INDEX
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOOT_STRAIGHT_INDEX
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOULD_HAVE_EFFECTS_INDEX
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -88,9 +88,9 @@ class IronDropperMenu(
         get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
         private set(value) = containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
 
-    var shouldHaveEffects: Boolean
-        get() = containerData.get(SHOULD_HAVE_EFFECTS_INDEX) != 0
-        private set(value) = containerData.set(SHOULD_HAVE_EFFECTS_INDEX, if (value) 1 else 0)
+    var shouldHaveEffects: IronDropperBlockEntity.EffectsMode
+        get() = IronDropperBlockEntity.EffectsMode.entries[containerData.get(EFFECTS_MODE_INDEX)]
+        private set(value) = containerData.set(EFFECTS_MODE_INDEX, value.ordinal)
 
     var pickupDelay: Int
         get() = containerData.get(PICKUP_DELAY_INDEX)
@@ -105,7 +105,12 @@ class IronDropperMenu(
         when (buttonId) {
             SHOOT_MODE_BUTTON_ID -> this.shouldShootStraight = !this.shouldShootStraight
 
-            TOGGLE_EFFECT_BUTTON_ID -> this.shouldHaveEffects = !this.shouldHaveEffects
+            TOGGLE_EFFECT_BUTTON_ID -> this.shouldHaveEffects = when (this.shouldHaveEffects) {
+                IronDropperBlockEntity.EffectsMode.NONE -> IronDropperBlockEntity.EffectsMode.PARTICLES
+                IronDropperBlockEntity.EffectsMode.PARTICLES -> IronDropperBlockEntity.EffectsMode.SOUND
+                IronDropperBlockEntity.EffectsMode.SOUND -> IronDropperBlockEntity.EffectsMode.BOTH
+                IronDropperBlockEntity.EffectsMode.BOTH -> IronDropperBlockEntity.EffectsMode.NONE
+            }
 
             DELAY_BUTTON_ID -> this.pickupDelay = when (this.pickupDelay) {
                 0 -> 5
