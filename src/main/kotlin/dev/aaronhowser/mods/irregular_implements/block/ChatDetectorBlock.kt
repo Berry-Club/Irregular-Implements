@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class ChatDetectorBlock : EntityBlock, Block(
+open class ChatDetectorBlock : EntityBlock, Block(
     Properties
         .ofFullCopy(Blocks.DISPENSER)
 ) {

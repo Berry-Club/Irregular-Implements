@@ -97,6 +97,14 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val GLOBAL_CHAT_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<GlobalChatDetectorBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("global_chat_detector", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> GlobalChatDetectorBlockEntity(pos, state) },
+                ModBlocks.GLOBAL_CHAT_DETECTOR.get()
+            ).build(null)
+        })
+
     val ONLINE_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<OnlineDetectorBlockEntity>> =
         BLOCK_ENTITY_REGISTRY.register("online_detector", Supplier {
             BlockEntityType.Builder.of(
