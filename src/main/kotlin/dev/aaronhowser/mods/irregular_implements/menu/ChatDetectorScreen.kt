@@ -33,6 +33,9 @@ class ChatDetectorScreen(
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
 
+        this.titleLabelX = 10
+        this.titleLabelY = 10
+
         this.toggleMessagePassButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
@@ -84,19 +87,6 @@ class ChatDetectorScreen(
 
     // Rendering
 
-    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick)
-
-        guiGraphics.drawString(
-            this.font,
-            this.title,
-            this.leftPos + 10,
-            this.topPos + 10,
-            0x403030,
-            false
-        )
-    }
-
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
         guiGraphics.blit(
             ScreenTextures.Background.ChatDetector.BACKGROUND,
@@ -108,6 +98,17 @@ class ChatDetectorScreen(
             ScreenTextures.Background.ChatDetector.HEIGHT,
             ScreenTextures.Background.ChatDetector.CANVAS_SIZE,
             ScreenTextures.Background.ChatDetector.CANVAS_SIZE
+        )
+    }
+
+    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        guiGraphics.drawString(
+            this.font,
+            this.title,
+            this.titleLabelX,
+            this.titleLabelY,
+            4210752,
+            false
         )
     }
 

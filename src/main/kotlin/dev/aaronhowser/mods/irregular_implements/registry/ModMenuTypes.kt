@@ -33,6 +33,7 @@ object ModMenuTypes {
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
+        event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
     }
 
 }
