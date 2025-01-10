@@ -1,27 +1,22 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
-import kotlin.properties.Delegates
+import net.minecraft.world.entity.player.Inventory
 
 class BlockDestabilizerScreen(
-    private val blockDestabilizerBlockEntity: BlockDestabilizerBlockEntity,
-    title: Component = blockDestabilizerBlockEntity.blockState.block.name
-) : Screen(title) {
-
-    private var leftPos: Int by Delegates.notNull()
-    private var topPos: Int by Delegates.notNull()
+    menu: BlockDestabilizerMenu,
+    playerInventory: Inventory,
+    title: Component
+) : AbstractContainerScreen<BlockDestabilizerMenu>(menu, playerInventory, title) {
 
     private lateinit var toggleLazyButton: MultiStateSpriteButton
     private lateinit var showLazyShapeButton: ImprovedSpriteButton
@@ -49,7 +44,7 @@ class BlockDestabilizerScreen(
                 height = 20
             )
             .currentStateGetter(
-                currentStateGetter = { if (this.blockDestabilizerBlockEntity.isLazy) 0 else 1 }     //TODO: Update this to use a menu for containerdata
+                currentStateGetter = { 1 }     //TODO: Update this to use a menu for containerdata
             )
             .onPress(
                 onPress = ::pressToggleLazyButton
@@ -113,15 +108,19 @@ class BlockDestabilizerScreen(
         return false
     }
 
-    override fun tick() {
-        if (this.blockDestabilizerBlockEntity.isRemoved) {
-            onClose()
-        }
-
-        if (this.blockDestabilizerBlockEntity.isLazy != UpdateClientBlockDestabilizer.isLazy) {
-            this.blockDestabilizerBlockEntity.isLazy = UpdateClientBlockDestabilizer.isLazy
-        }
+    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
+        TODO("Not yet implemented")
     }
+
+//    override fun tick() {
+//        if (this.blockDestabilizerBlockEntity.isRemoved) {
+//            onClose()
+//        }
+//
+//        if (this.blockDestabilizerBlockEntity.isLazy != UpdateClientBlockDestabilizer.isLazy) {
+//            this.blockDestabilizerBlockEntity.isLazy = UpdateClientBlockDestabilizer.isLazy
+//        }
+//    }
 
     override fun onClose() {
         UpdateClientBlockDestabilizer.unset()
@@ -130,30 +129,13 @@ class BlockDestabilizerScreen(
     }
 
     private fun pressToggleLazyButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedBlockDestabilizerButton(
-                blockDestabilizerBlockEntity.blockPos,
-                ClientClickedBlockDestabilizerButton.Button.TOGGLE_LAZY
-            )
-        )
+
     }
 
     private fun pressShowLazyShapeButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedBlockDestabilizerButton(
-                blockDestabilizerBlockEntity.blockPos,
-                ClientClickedBlockDestabilizerButton.Button.SHOW_LAZY_SHAPE
-            )
-        )
     }
 
     private fun pressForgetLazyShapeButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedBlockDestabilizerButton(
-                blockDestabilizerBlockEntity.blockPos,
-                ClientClickedBlockDestabilizerButton.Button.RESET_LAZY_SHAPE
-            )
-        )
     }
 
 }

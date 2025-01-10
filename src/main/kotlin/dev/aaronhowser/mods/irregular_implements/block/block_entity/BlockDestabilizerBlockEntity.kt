@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
+import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
@@ -13,22 +14,28 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.LongTag
 import net.minecraft.nbt.Tag
+import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.item.FallingBlockEntity
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerData
+import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-//TODO: Menu
 class BlockDestabilizerBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.BLOCK_DESTABILIZER.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntities.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
 
     companion object {
         const val STATE_NBT = "state"
@@ -350,6 +357,24 @@ class BlockDestabilizerBlockEntity(
 
         removeLazyIndicators()
         this.lazyBlocks.clear()
+    }
+
+    private val containerData = object : SimpleContainerData(1) {
+        override fun get(index: Int): Int {
+            TODO("Not yet implemented")
+        }
+
+        override fun set(index: Int, value: Int) {
+            TODO("Not yet implemented")
+        }
+    }
+
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return BlockDestabilizerMenu(containerId, this.containerData)
+    }
+
+    override fun getDisplayName(): Component {
+        return this.blockState.block.name
     }
 
     // Syncs with client

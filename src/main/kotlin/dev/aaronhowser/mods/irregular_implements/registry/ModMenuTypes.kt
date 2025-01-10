@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerMenu
+import dev.aaronhowser.mods.irregular_implements.menu.BlockDestabilizerScreen
 import dev.aaronhowser.mods.irregular_implements.menu.IronDropperMenu
 import dev.aaronhowser.mods.irregular_implements.menu.IronDropperScreen
 import net.minecraft.core.registries.BuiltInRegistries
@@ -21,8 +23,14 @@ object ModMenuTypes {
             MenuType(::IronDropperMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val BLOCK_DESTABILIZER: DeferredHolder<MenuType<*>, MenuType<BlockDestabilizerMenu>> =
+        MENU_TYPE_REGISTRY.register("block_destabilizer", Supplier {
+            MenuType(::BlockDestabilizerMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
+        event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
     }
 
 }
