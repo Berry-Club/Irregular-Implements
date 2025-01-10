@@ -70,6 +70,7 @@ class ChatDetectorBlockEntity(
         const val OWNER_UUID_NBT = "OwnerUuid"
         const val STOPS_MESSAGE_NBT = "StopsMessage"
         const val MESSAGE_REGEX_NBT = "MessageRegex"
+        const val TIME_ON_NBT = "TimeOn"
 
         const val CONTAINER_DATA_SIZE = 1
         const val STOPS_MESSAGE_INDEX = 0
@@ -102,8 +103,12 @@ class ChatDetectorBlockEntity(
             field = value
             setChanged()
         }
-    private var timeOn = 0
 
+    private var timeOn = 0
+        set(value) {
+            field = value
+            setChanged()
+        }
 
     /**
      * @return true if the message should be stopped
@@ -137,11 +142,9 @@ class ChatDetectorBlockEntity(
         val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
         if (uuid != null) this.ownerUuid = uuid
 
-        val regex = tag.getString(MESSAGE_REGEX_NBT)
-        this.regexString = regex
-
-        val stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
-        this.stopsMessage = stopsMessage
+        this.regexString = tag.getString(MESSAGE_REGEX_NBT)
+        this.stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
+        this.timeOn = tag.getInt(TIME_ON_NBT)
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -150,6 +153,7 @@ class ChatDetectorBlockEntity(
         tag.putUUID(OWNER_UUID_NBT, ownerUuid)
         tag.putString(MESSAGE_REGEX_NBT, regexString)
         tag.putBoolean(STOPS_MESSAGE_NBT, stopsMessage)
+        tag.putInt(TIME_ON_NBT, timeOn)
     }
 
     override fun onLoad() {
