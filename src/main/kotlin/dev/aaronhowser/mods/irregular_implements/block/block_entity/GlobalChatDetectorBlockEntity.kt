@@ -10,7 +10,9 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
+import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -125,6 +127,8 @@ class GlobalChatDetectorBlockEntity(
 
         val stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
         this.stopsMessage = stopsMessage
+
+        ContainerHelper.loadAllItems(tag, this.container.items, registries)
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -132,12 +136,16 @@ class GlobalChatDetectorBlockEntity(
 
         tag.putString(MESSAGE_REGEX_NBT, regexString)
         tag.putBoolean(STOPS_MESSAGE_NBT, stopsMessage)
+
+        ContainerHelper.saveAllItems(tag, this.container.items, registries)
     }
 
     override fun onLoad() {
         super.onLoad()
         if (!this.level?.isClientSide.isTrue) globalDetectors.add(this)
     }
+
+    // Menu stuff
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
         TODO("Not yet implemented")
@@ -146,4 +154,8 @@ class GlobalChatDetectorBlockEntity(
     override fun getDisplayName(): Component {
         return this.blockState.block.name
     }
+
+    // Container stuff
+
+    private val container = SimpleContainer(9)
 }
