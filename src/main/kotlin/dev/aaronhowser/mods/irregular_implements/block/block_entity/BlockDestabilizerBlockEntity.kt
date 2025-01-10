@@ -50,6 +50,11 @@ class BlockDestabilizerBlockEntity(
         const val DROP_COUNTER_NBT = "drop_counter"
         const val TARGET_BLOCKS_SORTED_NBT = "target_blocks_sorted"
 
+        const val CONTAINER_DATA_SIZE = 3
+        const val LAZY_INDEX = 0
+        const val SHOW_LAZY_INDEX = 1
+        const val RESET_LAZY_INDEX = 2
+
         fun tick(
             level: Level,
             blockPos: BlockPos,
@@ -91,13 +96,21 @@ class BlockDestabilizerBlockEntity(
             setChanged()
         }
 
-    private val containerData = object : SimpleContainerData(1) {
+    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
         override fun get(index: Int): Int {
-            return if (this@BlockDestabilizerBlockEntity.isLazy) 1 else 0
+            return when (index) {
+                LAZY_INDEX -> if (this@BlockDestabilizerBlockEntity.isLazy) 1 else 0
+                else -> 0
+            }
         }
 
+        // The value is ignored
         override fun set(index: Int, value: Int) {
-            this@BlockDestabilizerBlockEntity.isLazy = value == 1
+            when (index) {
+                LAZY_INDEX -> toggleLazy()
+                SHOW_LAZY_INDEX -> showLazyShape()
+                RESET_LAZY_INDEX -> resetLazyShape()
+            }
         }
     }
 
@@ -328,14 +341,14 @@ class BlockDestabilizerBlockEntity(
 
     // Buttons
 
-    fun toggleLazy() {
+    private fun toggleLazy() {
         if (state != State.IDLE) return
 
         this.isLazy = !this.isLazy
     }
 
     private val lazyIndicatorDisplays: MutableList<IndicatorDisplayEntity> = mutableListOf()
-    fun showLazyShape(): Boolean {
+    private fun showLazyShape(): Boolean {
         if (removeLazyIndicators() || this.state != State.IDLE) return false
 
         val level = this.level ?: return false
@@ -361,7 +374,7 @@ class BlockDestabilizerBlockEntity(
         return anyAlive
     }
 
-    fun resetLazyShape() {
+    private fun resetLazyShape() {
         if (this.state != State.IDLE) return
 
         removeLazyIndicators()

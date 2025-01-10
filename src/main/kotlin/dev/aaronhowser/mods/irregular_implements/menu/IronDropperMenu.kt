@@ -1,10 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.EFFECTS_MODE_INDEX
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.PICKUP_DELAY_INDEX
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.REDSTONE_MODE_INDEX
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity.Companion.SHOOT_STRAIGHT_INDEX
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -85,20 +81,20 @@ class IronDropperMenu(
     }
 
     var shouldShootStraight: Boolean
-        get() = containerData.get(SHOOT_STRAIGHT_INDEX) != 0
-        private set(value) = containerData.set(SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
+        get() = containerData.get(IronDropperBlockEntity.SHOOT_STRAIGHT_INDEX) != 0
+        private set(value) = containerData.set(IronDropperBlockEntity.SHOOT_STRAIGHT_INDEX, if (value) 1 else 0)
 
     var shouldHaveEffects: IronDropperBlockEntity.EffectsMode
-        get() = IronDropperBlockEntity.EffectsMode.entries[containerData.get(EFFECTS_MODE_INDEX)]
-        private set(value) = containerData.set(EFFECTS_MODE_INDEX, value.ordinal)
+        get() = IronDropperBlockEntity.EffectsMode.entries[containerData.get(IronDropperBlockEntity.EFFECTS_MODE_INDEX)]
+        private set(value) = containerData.set(IronDropperBlockEntity.EFFECTS_MODE_INDEX, value.ordinal)
 
     var pickupDelay: IronDropperBlockEntity.PickupDelay
-        get() = IronDropperBlockEntity.PickupDelay.entries[containerData.get(PICKUP_DELAY_INDEX)]
-        private set(value) = containerData.set(PICKUP_DELAY_INDEX, value.ordinal)
+        get() = IronDropperBlockEntity.PickupDelay.entries[containerData.get(IronDropperBlockEntity.PICKUP_DELAY_INDEX)]
+        private set(value) = containerData.set(IronDropperBlockEntity.PICKUP_DELAY_INDEX, value.ordinal)
 
     var redstoneMode: IronDropperBlockEntity.RedstoneMode
-        get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
-        private set(value) = containerData.set(REDSTONE_MODE_INDEX, value.ordinal)
+        get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(IronDropperBlockEntity.REDSTONE_MODE_INDEX)]
+        private set(value) = containerData.set(IronDropperBlockEntity.REDSTONE_MODE_INDEX, value.ordinal)
 
     // Only called from the server
     fun handleButtonPressed(buttonId: Int) {

@@ -5,6 +5,8 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -43,7 +45,7 @@ class BlockDestabilizerScreen(
                 height = 20
             )
             .currentStateGetter(
-                currentStateGetter = { 1 }     //TODO: Update this to use a menu for containerdata
+                currentStateGetter = { if (this.menu.isLazy) 0 else 1 }
             )
             .onPress(
                 onPress = ::pressToggleLazyButton
@@ -111,23 +113,28 @@ class BlockDestabilizerScreen(
         return false
     }
 
-//    override fun tick() {
-//        if (this.blockDestabilizerBlockEntity.isRemoved) {
-//            onClose()
-//        }
-//
-//        if (this.blockDestabilizerBlockEntity.isLazy != UpdateClientBlockDestabilizer.isLazy) {
-//            this.blockDestabilizerBlockEntity.isLazy = UpdateClientBlockDestabilizer.isLazy
-//        }
-//    }
-
     private fun pressToggleLazyButton(button: Button) {
+        ModPacketHandler.messageServer(
+            ClientClickedBlockDestabilizerButton(
+                BlockDestabilizerMenu.TOGGLE_LAZY_BUTTON_ID
+            )
+        )
     }
 
     private fun pressShowLazyShapeButton(button: Button) {
+        ModPacketHandler.messageServer(
+            ClientClickedBlockDestabilizerButton(
+                BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID
+            )
+        )
     }
 
     private fun pressForgetLazyShapeButton(button: Button) {
+        ModPacketHandler.messageServer(
+            ClientClickedBlockDestabilizerButton(
+                BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID
+            )
+        )
     }
 
 }

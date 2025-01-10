@@ -35,7 +35,7 @@ class ClientClickedIronDropperButton(
 
         val STREAM_CODEC: StreamCodec<ByteBuf, ClientClickedIronDropperButton> =
             StreamCodec.composite(
-                ByteBufCodecs.INT, ClientClickedIronDropperButton::buttonClicked,
+                ByteBufCodecs.VAR_INT, ClientClickedIronDropperButton::buttonClicked,
                 ::ClientClickedIronDropperButton
             )
 

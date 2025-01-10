@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
@@ -15,6 +16,36 @@ class BlockDestabilizerMenu(
 ) : AbstractContainerMenu(ModMenuTypes.BLOCK_DESTABILIZER.get(), containerId) {
 
     constructor(containerId: Int, playerInventory: Inventory) : this(containerId, SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE))
+
+    companion object {
+        const val TOGGLE_LAZY_BUTTON_ID = 0
+        const val SHOW_LAZY_SHAPE_BUTTON_ID = 1
+        const val RESET_LAZY_SHAPE_BUTTON_ID = 2
+    }
+
+    val isLazy: Boolean
+        get() = containerData.get(BlockDestabilizerBlockEntity.LAZY_INDEX) == 1
+
+    private fun toggleLazy() {
+        containerData.set(BlockDestabilizerBlockEntity.LAZY_INDEX, 0)   // Toggles lazy no matter what value is passed
+    }
+
+    private fun showLazyShape() {
+        containerData.set(BlockDestabilizerBlockEntity.SHOW_LAZY_INDEX, 1)
+    }
+
+    private fun resetLazyShape() {
+        containerData.set(BlockDestabilizerBlockEntity.RESET_LAZY_INDEX, 0)
+    }
+
+    // Only called on server
+    fun handleButtonPressed(buttonId: Int) {
+        when (buttonId) {
+            TOGGLE_LAZY_BUTTON_ID -> toggleLazy()
+            SHOW_LAZY_SHAPE_BUTTON_ID -> showLazyShape()
+            RESET_LAZY_SHAPE_BUTTON_ID -> resetLazyShape()
+        }
+    }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
         return ItemStack.EMPTY
