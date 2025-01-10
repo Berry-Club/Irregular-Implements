@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -119,6 +120,24 @@ class ChatDetectorScreen(
 
     // Behavior
 
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        if (keyCode == 256) {
+            this.minecraft?.player?.closeContainer()
+        }
+
+        return if (!this.regexStringEditBox.keyPressed(keyCode, scanCode, modifiers) && !this.regexStringEditBox.canConsumeInput()) {
+            super.keyPressed(keyCode, scanCode, modifiers)
+        } else {
+            true
+        }
+    }
+
+    override fun resize(minecraft: Minecraft, width: Int, height: Int) {
+        val currentRegexString = this.regexStringEditBox.value
+        super.resize(minecraft, width, height)
+        this.regexStringEditBox.value = currentRegexString
+    }
+
     override fun isPauseScreen(): Boolean {
         return false
     }
@@ -130,7 +149,6 @@ class ChatDetectorScreen(
             )
         )
     }
-
 
     private fun setRegexString(string: String) {
         if (this.menu.setRegex(string)) {
