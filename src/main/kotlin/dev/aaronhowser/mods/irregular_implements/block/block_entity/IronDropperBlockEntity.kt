@@ -51,34 +51,17 @@ class IronDropperBlockEntity(
             setChanged()
         }
 
-    fun toggleShootStraight() {
-        this.shouldShootStraight = !this.shouldShootStraight
-    }
-
     var shouldHaveEffects: Boolean = true
         private set(value) {
             field = value
             setChanged()
         }
 
-    fun toggleShouldHaveEffects() {
-        this.shouldHaveEffects = !this.shouldHaveEffects
-    }
-
     var pickupDelay: Int = 0
         private set(value) {
             field = value
             setChanged()
         }
-
-    fun cyclePickupDelay() {
-        this.pickupDelay = when (this.pickupDelay) {
-            0 -> 5
-            5 -> 20
-            20 -> 0
-            else -> 0
-        }
-    }
 
     enum class RedstoneMode { PULSE, REPEAT, REPEAT_POWERED }
 
@@ -87,15 +70,6 @@ class IronDropperBlockEntity(
             field = value
             setChanged()
         }
-
-    fun cycleRedstoneMode() {
-        this.redstoneMode = when (this.redstoneMode) {
-            RedstoneMode.PULSE -> RedstoneMode.REPEAT
-            RedstoneMode.REPEAT -> RedstoneMode.REPEAT_POWERED
-            RedstoneMode.REPEAT_POWERED -> RedstoneMode.PULSE
-        }
-    }
-
 
     private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
 
