@@ -96,7 +96,7 @@ class IronDropperScreen(
                 currentStateGetter = { this.menu.shouldHaveEffects.ordinal }
             )
             .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.TOGGLE_EFFECT_BUTTON_ID)) }
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.EFFECTS_BUTTON_ID)) }
             )
             .location(
                 x = this.rightPos - 25,
@@ -104,8 +104,44 @@ class IronDropperScreen(
             )
             .build()
 
+        this.delayButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_HEIGHT
+            )
+            .size(
+                width = 20,
+                height = 20
+            )
+            .currentStateGetter(
+                currentStateGetter = { this.menu.pickupDelay.ordinal }
+            )
+            .onPress(
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.DELAY_BUTTON_ID)) }
+            )
+            .location(
+                x = this.rightPos - 25,
+                y = this.topPos + 55
+            )
+            .build()
+
         this.addRenderableWidget(this.shootModeButton)
         this.addRenderableWidget(this.toggleEffectButton)
+        this.addRenderableWidget(this.delayButton)
     }
 
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

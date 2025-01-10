@@ -55,7 +55,16 @@ class IronDropperBlockEntity(
         NONE(false, false),
         PARTICLES(true, false),
         SOUND(false, true),
-        BOTH(true, true)
+        BOTH(true, true);
+
+        fun next(): EffectsMode {
+            return when (this) {
+                NONE -> PARTICLES
+                PARTICLES -> SOUND
+                SOUND -> BOTH
+                BOTH -> NONE
+            }
+        }
     }
 
     var effectsMode: EffectsMode = EffectsMode.BOTH
@@ -64,13 +73,39 @@ class IronDropperBlockEntity(
             setChanged()
         }
 
-    var pickupDelay: Int = 0
+    enum class PickupDelay(val ticks: Int) {
+        ZERO(0),
+        FIVE(5),
+        TWENTY(20);
+
+        fun next(): PickupDelay {
+            return when (this) {
+                ZERO -> FIVE
+                FIVE -> TWENTY
+                TWENTY -> ZERO
+            }
+        }
+    }
+
+    var pickupDelay: PickupDelay = PickupDelay.TWENTY
         private set(value) {
             field = value
             setChanged()
         }
 
-    enum class RedstoneMode { PULSE, REPEAT, REPEAT_POWERED }
+    enum class RedstoneMode {
+        PULSE,
+        REPEAT,
+        REPEAT_POWERED;
+
+        fun next(): RedstoneMode {
+            return when (this) {
+                PULSE -> REPEAT
+                REPEAT -> REPEAT_POWERED
+                REPEAT_POWERED -> PULSE
+            }
+        }
+    }
 
     var redstoneMode: RedstoneMode = RedstoneMode.PULSE
         private set(value) {
@@ -84,7 +119,7 @@ class IronDropperBlockEntity(
             return when (index) {
                 SHOOT_STRAIGHT_INDEX -> if (this@IronDropperBlockEntity.shouldShootStraight) 1 else 0
                 EFFECTS_MODE_INDEX -> EffectsMode.entries.indexOf(this@IronDropperBlockEntity.effectsMode)
-                PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay
+                PICKUP_DELAY_INDEX -> PickupDelay.entries.indexOf(this@IronDropperBlockEntity.pickupDelay)
                 REDSTONE_MODE_INDEX -> RedstoneMode.entries.indexOf(this@IronDropperBlockEntity.redstoneMode)
                 else -> 0
             }
@@ -94,7 +129,7 @@ class IronDropperBlockEntity(
             when (index) {
                 SHOOT_STRAIGHT_INDEX -> this@IronDropperBlockEntity.shouldShootStraight = value != 0
                 EFFECTS_MODE_INDEX -> this@IronDropperBlockEntity.effectsMode = EffectsMode.entries[value]
-                PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay = value
+                PICKUP_DELAY_INDEX -> this@IronDropperBlockEntity.pickupDelay = PickupDelay.entries[value]
                 REDSTONE_MODE_INDEX -> this@IronDropperBlockEntity.redstoneMode = RedstoneMode.entries[value]
             }
         }
@@ -144,7 +179,7 @@ class IronDropperBlockEntity(
                 )
             }
 
-            itemEntity.setPickUpDelay(this@IronDropperBlockEntity.pickupDelay)
+            itemEntity.setPickUpDelay(this@IronDropperBlockEntity.pickupDelay.ticks)
 
             level.addFreshEntity(itemEntity)
         }
@@ -163,7 +198,7 @@ class IronDropperBlockEntity(
 
         tag.putBoolean(SHOOT_STRAIGHT_NBT, this.shouldShootStraight)
         tag.putInt(EFFECTS_MODE_NBT, this.effectsMode.ordinal)
-        tag.putInt(PICKUP_DELAY_NBT, this.pickupDelay)
+        tag.putInt(PICKUP_DELAY_NBT, this.pickupDelay.ordinal)
         tag.putInt(REDSTONE_MODE_NBT, this.redstoneMode.ordinal)
     }
 
@@ -172,7 +207,7 @@ class IronDropperBlockEntity(
 
         this.shouldShootStraight = tag.getBoolean(SHOOT_STRAIGHT_NBT)
         this.effectsMode = EffectsMode.entries[tag.getInt(EFFECTS_MODE_NBT)]
-        this.pickupDelay = tag.getInt(PICKUP_DELAY_NBT)
+        this.pickupDelay = PickupDelay.entries[tag.getInt(PICKUP_DELAY_NBT)]
         this.redstoneMode = RedstoneMode.entries[tag.getInt(REDSTONE_MODE_NBT)]
     }
 

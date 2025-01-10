@@ -92,9 +92,9 @@ class IronDropperMenu(
         get() = IronDropperBlockEntity.EffectsMode.entries[containerData.get(EFFECTS_MODE_INDEX)]
         private set(value) = containerData.set(EFFECTS_MODE_INDEX, value.ordinal)
 
-    var pickupDelay: Int
-        get() = containerData.get(PICKUP_DELAY_INDEX)
-        private set(value) = containerData.set(PICKUP_DELAY_INDEX, value)
+    var pickupDelay: IronDropperBlockEntity.PickupDelay
+        get() = IronDropperBlockEntity.PickupDelay.entries[containerData.get(PICKUP_DELAY_INDEX)]
+        private set(value) = containerData.set(PICKUP_DELAY_INDEX, value.ordinal)
 
     var redstoneMode: IronDropperBlockEntity.RedstoneMode
         get() = IronDropperBlockEntity.RedstoneMode.entries[containerData.get(REDSTONE_MODE_INDEX)]
@@ -104,34 +104,17 @@ class IronDropperMenu(
     fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
             SHOOT_MODE_BUTTON_ID -> this.shouldShootStraight = !this.shouldShootStraight
-
-            TOGGLE_EFFECT_BUTTON_ID -> this.shouldHaveEffects = when (this.shouldHaveEffects) {
-                IronDropperBlockEntity.EffectsMode.NONE -> IronDropperBlockEntity.EffectsMode.PARTICLES
-                IronDropperBlockEntity.EffectsMode.PARTICLES -> IronDropperBlockEntity.EffectsMode.SOUND
-                IronDropperBlockEntity.EffectsMode.SOUND -> IronDropperBlockEntity.EffectsMode.BOTH
-                IronDropperBlockEntity.EffectsMode.BOTH -> IronDropperBlockEntity.EffectsMode.NONE
-            }
-
-            DELAY_BUTTON_ID -> this.pickupDelay = when (this.pickupDelay) {
-                0 -> 5
-                5 -> 20
-                20 -> 0
-                else -> 0
-            }
-
-            REDSTONE_MODE_BUTTON_ID -> this.redstoneMode = when (this.redstoneMode) {
-                IronDropperBlockEntity.RedstoneMode.PULSE -> IronDropperBlockEntity.RedstoneMode.REPEAT
-                IronDropperBlockEntity.RedstoneMode.REPEAT -> IronDropperBlockEntity.RedstoneMode.REPEAT_POWERED
-                IronDropperBlockEntity.RedstoneMode.REPEAT_POWERED -> IronDropperBlockEntity.RedstoneMode.PULSE
-            }
+            EFFECTS_BUTTON_ID -> this.shouldHaveEffects = this.shouldHaveEffects.next()
+            DELAY_BUTTON_ID -> this.pickupDelay = this.pickupDelay.next()
+            REDSTONE_BUTTON_ID -> this.redstoneMode = this.redstoneMode.next()
         }
     }
 
     companion object {
         const val SHOOT_MODE_BUTTON_ID = 0
-        const val TOGGLE_EFFECT_BUTTON_ID = 1
+        const val EFFECTS_BUTTON_ID = 1
         const val DELAY_BUTTON_ID = 2
-        const val REDSTONE_MODE_BUTTON_ID = 3
+        const val REDSTONE_BUTTON_ID = 3
     }
 
 }
