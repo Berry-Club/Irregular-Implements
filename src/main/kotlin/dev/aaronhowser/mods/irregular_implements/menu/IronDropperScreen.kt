@@ -34,6 +34,80 @@ class IronDropperScreen(
         val buttonSize = 20
         val spaceBetween = 5
 
+        val rightButtonX = this.rightPos - spaceBetween - buttonSize - 2
+        val leftButtonX = rightButtonX - spaceBetween - buttonSize
+
+        val topButtonY = this.topPos + spaceBetween + buttonSize / 2 + spaceBetween
+        val bottomButtonY = topButtonY + buttonSize + spaceBetween
+
+        this.redstoneModeButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_HEIGHT
+            )
+            .size(
+                size = buttonSize
+            )
+            .currentStateGetter(
+                currentStateGetter = { this.menu.redstoneMode.ordinal }
+            )
+            .onPress(
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
+            )
+            .location(
+                x = leftButtonX,
+                y = topButtonY
+            )
+            .build()
+
+        this.delayButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_HEIGHT
+            )
+            .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
+                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY,
+                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_HEIGHT
+            )
+            .size(
+                size = buttonSize
+            )
+            .currentStateGetter(
+                currentStateGetter = { this.menu.pickupDelay.ordinal }
+            )
+            .onPress(
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.DELAY_BUTTON_ID)) }
+            )
+            .location(
+                x = rightButtonX,
+                y = topButtonY
+            )
+            .build()
+
         this.shootModeButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
@@ -57,8 +131,8 @@ class IronDropperScreen(
                 onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
             )
             .location(
-                x = this.rightPos - spaceBetween - buttonSize,
-                y = this.topPos + 5
+                x = leftButtonX,
+                y = bottomButtonY
             )
             .build()
 
@@ -95,76 +169,8 @@ class IronDropperScreen(
                 onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.EFFECTS_BUTTON_ID)) }
             )
             .location(
-                x = this.rightPos - 25,
-                y = this.topPos + 30
-            )
-            .build()
-
-        this.delayButton = MultiStateSpriteButton.Builder(this.font)
-            .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_HEIGHT
-            )
-            .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_HEIGHT
-            )
-            .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_HEIGHT
-            )
-            .size(
-                size = buttonSize
-            )
-            .currentStateGetter(
-                currentStateGetter = { this.menu.pickupDelay.ordinal }
-            )
-            .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.DELAY_BUTTON_ID)) }
-            )
-            .location(
-                x = this.rightPos - 25,
-                y = this.topPos + 55
-            )
-            .build()
-
-        this.redstoneModeButton = MultiStateSpriteButton.Builder(this.font)
-            .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_HEIGHT
-            )
-            .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_HEIGHT
-            )
-            .addStage(
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_HEIGHT
-            )
-            .size(
-                size = buttonSize
-            )
-            .currentStateGetter(
-                currentStateGetter = { this.menu.redstoneMode.ordinal }
-            )
-            .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
-            )
-            .location(
-                x = this.rightPos - 25,
-                y = this.topPos + 80
+                x = rightButtonX,
+                y = bottomButtonY
             )
             .build()
 
@@ -184,13 +190,13 @@ class IronDropperScreen(
         val j = (this.height - this.imageHeight) / 2
 
         guiGraphics.blit(
-            ScreenTextures.Background.IRON_DROPPER,
+            ScreenTextures.Background.IronDropper.BACKGROUND,
             i,
             j,
             0,
             0,
-            this.imageWidth,
-            this.imageHeight
+            ScreenTextures.Background.IronDropper.CANVAS_SIZE,
+            ScreenTextures.Background.IronDropper.CANVAS_SIZE,
         )
     }
 

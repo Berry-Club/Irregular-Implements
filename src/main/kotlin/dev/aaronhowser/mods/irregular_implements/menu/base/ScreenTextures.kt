@@ -25,8 +25,8 @@ object ScreenTextures {
         object IronDropper {
             val BACKGROUND = OtherUtil.modResource("textures/gui/iron_dropper.png")
 
-            const val WIDTH = 199
-            const val HEIGHT = 146
+            const val WIDTH = 176
+            const val HEIGHT = 166
             const val CANVAS_SIZE = 256
         }
 
@@ -46,7 +46,6 @@ object ScreenTextures {
         val IGNITER = OtherUtil.modResource("textures/gui/igniter.png")
         val IMBUING_STATION = OtherUtil.modResource("textures/gui/imbuing_station.png")
         val INVENTORY_TESTER = OtherUtil.modResource("textures/gui/inventory_tester.png")
-        val IRON_DROPPER = OtherUtil.modResource("textures/gui/iron_dropper.png")
         val ITEM_FILTER = OtherUtil.modResource("textures/gui/item_filter.png")
         val ITEM_PROJECTOR = OtherUtil.modResource("textures/gui/item_projector.png")
         val JEI_ANVIL = OtherUtil.modResource("textures/gui/jei_anvil.png")
