@@ -16,12 +16,8 @@ class MultiStateSpriteButton(
     y: Int = 0,
     width: Int,
     height: Int,
-    private val amountStages: Int,
+    private val stages: List<Stage>,
     private val currentStateGetter: Supplier<Int>,
-    private val sprites: List<ResourceLocation?>,
-    private val messages: List<Component>,
-    private val spriteWidth: Int,
-    private val spriteHeight: Int,
     private val font: Font,
     onPress: OnPress,
     narration: CreateNarration? = null
@@ -30,31 +26,32 @@ class MultiStateSpriteButton(
     y,
     width,
     height,
-    messages.first(),
+    stages.first().message,
     onPress,
     narration ?: DEFAULT_NARRATION
 ) {
 
-    init {
-        require(amountStages == sprites.size) { "Amount of sprites must match amount of stages" }
-        require(amountStages == messages.size) { "Amount of messages must match amount of stages" }
-    }
+    private val currentStage
+        get() = stages[currentStateGetter.get()]
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
 
-        val i = this.x + this.getWidth() / 2 - this.spriteWidth / 2
-        val j = this.y + this.getHeight() / 2 - this.spriteHeight / 2
-
-        val sprite = sprites[currentStateGetter.get()]
+        val sprite = currentStage.sprite
 
         if (sprite != null) {
+            val spriteWidth = currentStage.spriteWidth
+            val spriteHeight = currentStage.spriteHeight
+
+            val spriteLeft = this.x + this.getWidth() / 2 - spriteWidth / 2
+            val spriteTop = this.y + this.getHeight() / 2 - spriteHeight / 2
+
             guiGraphics.blitSprite(
                 sprite,
-                i,
-                j,
-                this.spriteWidth,
-                this.spriteHeight
+                spriteLeft,
+                spriteTop,
+                spriteWidth,
+                spriteHeight
             )
         }
 
@@ -79,7 +76,7 @@ class MultiStateSpriteButton(
     }
 
     override fun getMessage(): Component {
-        return messages[currentStateGetter.get()]
+        return currentStage.message
     }
 
     private fun baseRenderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
@@ -94,32 +91,31 @@ class MultiStateSpriteButton(
     }
 
     class Builder(private val font: Font) {
-        private val sprites: MutableList<ResourceLocation?> = mutableListOf()
-        private val messages: MutableList<Component> = mutableListOf()
-
-        private var amountStages = 0
 
         private var x: Int = 0
         private var y: Int = 0
         private var width: Int = 0
         private var height: Int = 0
-        private var spriteWidth: Int = 0
-        private var spriteHeight: Int = 0
 
         private var currentStateGetter: Supplier<Int> = Supplier { 0 }
         private var onPress: OnPress = OnPress { }
 
+        private val stages: MutableList<Stage> = mutableListOf()
 
-        fun addStage(sprite: ResourceLocation?, message: Component): Builder {
-            sprites.add(sprite)
-            messages.add(message)
-            amountStages++
-            return this
-        }
-
-        fun spriteDimensions(width: Int, height: Int): Builder {
-            spriteWidth = width
-            spriteHeight = height
+        fun addStage(
+            message: Component,
+            sprite: ResourceLocation?,
+            spriteWidth: Int = 0,
+            spriteHeight: Int = 0
+        ): Builder {
+            stages.add(
+                Stage(
+                    message = message,
+                    sprite = sprite,
+                    spriteWidth = spriteWidth,
+                    spriteHeight = spriteHeight
+                )
+            )
             return this
         }
 
@@ -147,20 +143,23 @@ class MultiStateSpriteButton(
 
         fun build(): MultiStateSpriteButton {
             return MultiStateSpriteButton(
-                x,
-                y,
-                width,
-                height,
-                amountStages,
-                currentStateGetter,
-                sprites,
-                messages,
-                spriteWidth,
-                spriteHeight,
-                font,
-                onPress
+                x = x,
+                y = y,
+                width = width,
+                height = height,
+                stages = stages,
+                currentStateGetter = currentStateGetter,
+                font = font,
+                onPress = onPress
             )
         }
     }
+
+    class Stage(
+        val message: Component,
+        val sprite: ResourceLocation?,
+        val spriteWidth: Int,
+        val spriteHeight: Int
+    )
 
 }

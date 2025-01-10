@@ -33,20 +33,20 @@ class BlockDestabilizerScreen(
 
         this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
+                message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
                 sprite = ScreenTextures.Sprite.BlockDestabilizer.LAZY,
-                message = ModLanguageProvider.Tooltips.LAZY.toComponent()
+                spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.LAZY_HEIGHT
             )
             .addStage(
+                message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
                 sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
-                message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent()
+                spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_HEIGHT
             )
             .size(
                 width = 20,
                 height = 20
-            )
-            .spriteDimensions(
-                width = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
-                height = ScreenTextures.Sprite.BlockDestabilizer.LAZY_HEIGHT
             )
             .currentStateGetter(
                 currentStateGetter = { if (this.blockDestabilizerBlockEntity.isLazy) 0 else 1 }     //TODO: Update this to use a menu for containerdata

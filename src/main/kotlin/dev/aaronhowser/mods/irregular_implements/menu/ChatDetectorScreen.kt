@@ -37,20 +37,20 @@ class ChatDetectorScreen(
 
         this.toggleMessagePassButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
+                message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
                 sprite = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
-                message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent()
+                spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
+                spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT
             )
             .addStage(
+                message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
                 sprite = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
-                message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent()
+                spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
+                spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT
             )
             .size(
                 width = 20,
                 height = 20
-            )
-            .spriteDimensions(
-                width = ScreenTextures.Sprite.ChatDetector.WIDTH,
-                height = ScreenTextures.Sprite.ChatDetector.HEIGHT
             )
             .currentStateGetter(
                 currentStateGetter = { if (this.chatDetectorBlockEntity.stopsMessage) 0 else 1 }    // On means it stops messages      //TODO: Update this to use a menu for containerdata

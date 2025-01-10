@@ -38,20 +38,20 @@ class IronDropperScreen(
 
         this.shootModeButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
                 sprite = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent()
+                spriteWidth = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT
             )
             .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
                 sprite = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent()
+                spriteWidth = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD_HEIGHT
             )
             .size(
                 width = 20,
                 height = 20
-            )
-            .spriteDimensions(
-                width = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_WIDTH,
-                height = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT
             )
             .currentStateGetter(
                 currentStateGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
@@ -67,28 +67,28 @@ class IronDropperScreen(
 
         this.toggleEffectButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
-                sprite = null,
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_EFFECTS.toComponent()
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_EFFECTS.toComponent(),
+                sprite = null
             )
             .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
                 sprite = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND,
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent()
+                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_HEIGHT
             )
             .addStage(
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
                 sprite = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE,
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent()
+                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE_WIDTH,
+                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE_HEIGHT
             )
             .addStage(
-                sprite = null,
-                message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent()
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
+                sprite = null
             )
             .size(
                 width = 20,
                 height = 20
-            )
-            .spriteDimensions(
-                width = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_WIDTH,
-                height = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_HEIGHT
             )
             .currentStateGetter(
                 currentStateGetter = { this.menu.shouldHaveEffects.ordinal }
