@@ -14,7 +14,6 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.inventory.ContainerLevelAccess
 
 class ChatDetectorScreen(
     menu: ChatDetectorMenu,
@@ -58,7 +57,7 @@ class ChatDetectorScreen(
                 height = 20
             )
             .currentStateGetter(
-                currentStateGetter = { if (this.menu.messagePassThrough) 0 else 1 }    // 1 means it stops messages
+                currentStateGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
             )
             .onPress(
                 onPress = ::pressToggleMessagePassButton
@@ -124,18 +123,6 @@ class ChatDetectorScreen(
         return false
     }
 
-    override fun containerTick() {
-        if (this.regexStringEditBox.value != UpdateClientChatDetector.regexString) {
-            this.regexStringEditBox.value = UpdateClientChatDetector.regexString
-        }
-    }
-
-    override fun onClose() {
-        UpdateClientChatDetector.unset()
-
-        super.onClose()
-    }
-
     private fun pressToggleMessagePassButton(button: Button) {
         ModPacketHandler.messageServer(
             ClientClickedChatDetectorButton(
@@ -144,19 +131,11 @@ class ChatDetectorScreen(
         )
     }
 
-    private var isChangingRegexString = false
+
     private fun setRegexString(string: String) {
-        if (isChangingRegexString) return
-        isChangingRegexString = true
-        this.regexStringEditBox.value = string
-        isChangingRegexString = false
-
-        val a = this.menu.containerLevelAccess == ContainerLevelAccess.NULL
-
-        this.menu.containerLevelAccess.execute { level, blockPos ->
+        if (this.menu.setRegex(string)) {
             ModPacketHandler.messageServer(
                 ClientChangedChatDetectorString(
-                    blockPos,
                     string
                 )
             )

@@ -31,14 +31,22 @@ class ChatDetectorMenu(
         const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
     }
 
-    var messagePassThrough: Boolean
-        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
-        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
+    var shouldMessageStop: Boolean
+        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 0
+        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 0 else 1)
 
     fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
-            TOGGLE_MESSAGE_PASS_BUTTON_ID -> messagePassThrough = !messagePassThrough
+            TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
         }
+    }
+
+    private var currentRegexString: String = ""
+    fun setRegex(regexString: String): Boolean {
+        if (regexString == this.currentRegexString) return false
+
+        this.currentRegexString = regexString
+        return true
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {

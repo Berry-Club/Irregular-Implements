@@ -14,7 +14,6 @@ class UpdateClientChatDetector(
 
     override fun receiveOnClient(context: IPayloadContext) {
         context.enqueueWork {
-            Companion.regexString = this.regexString
         }
     }
 
@@ -32,13 +31,6 @@ class UpdateClientChatDetector(
                 ByteBufCodecs.STRING_UTF8, UpdateClientChatDetector::regexString,
                 ::UpdateClientChatDetector
             )
-
-        var regexString: String = ""
-            private set
-
-        fun unset() {
-            regexString = ""
-        }
     }
 
 }
