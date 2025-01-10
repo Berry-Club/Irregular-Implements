@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.client.gui.GuiGraphics
@@ -134,6 +135,10 @@ class ChatDetectorScreen(
 //        }
 //    }
 
+    override fun containerTick() {
+
+    }
+
     override fun onClose() {
         UpdateClientChatDetector.unset()
 
@@ -148,20 +153,19 @@ class ChatDetectorScreen(
         )
     }
 
-    private var isChangingRegexString = false
+    var isChangingRegexString = false
     private fun setRegexString(string: String) {
         if (isChangingRegexString) return
         isChangingRegexString = true
         this.regexStringEditBox.value = string
         isChangingRegexString = false
 
-//        ModPacketHandler.messageServer(
-//            ClientChangedChatDetector(
-//                this.chatDetectorBlockEntity.blockPos,
-//                this.chatDetectorBlockEntity.stopsMessage,
-//                string
-//            )
-//        )
+        ModPacketHandler.messageServer(
+            ClientChangedChatDetectorString(
+                this.menu.blockPos,
+                string
+            )
+        )
     }
 
 }

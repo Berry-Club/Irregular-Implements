@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.ChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorMenu
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -12,6 +14,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -78,13 +81,28 @@ class ChatDetectorBlockEntity(
         set(value) {
             field = value
             setChanged()
+
+            sendStringUpdate()
         }
+
+    private fun sendStringUpdate() {
+        val level = this.level as? ServerLevel ?: return
+
+        ModPacketHandler.messageNearbyPlayers(
+            UpdateClientChatDetector(this.regexString),
+            level,
+            this.blockPos.center,
+            16.0
+        )
+    }
+
     var stopsMessage = false
         set(value) {
             field = value
             setChanged()
         }
     private var timeOn = 0
+
 
     /**
      * @return true if the message should be stopped
@@ -157,7 +175,7 @@ class ChatDetectorBlockEntity(
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return ChatDetectorMenu(containerId, this.containerData)
+        return ChatDetectorMenu(containerId, this.containerData, this.blockPos)
     }
 
     override fun getDisplayName(): Component {

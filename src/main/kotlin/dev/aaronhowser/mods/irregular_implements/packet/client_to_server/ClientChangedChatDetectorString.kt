@@ -2,8 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.BlockPos
@@ -14,9 +12,8 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class ClientChangedChatDetector(
+class ClientChangedChatDetectorString(
     val blockPos: BlockPos,
-    val stopsMessage: Boolean,
     val regexString: String
 ) : IModPacket {
 
@@ -30,26 +27,22 @@ class ClientChangedChatDetector(
             if (!player.canInteractWithBlock(blockPos, playerReach)) return@enqueueWork
 
             chatDetectorBlockEntity.regexString = regexString
-            chatDetectorBlockEntity.stopsMessage = stopsMessage
-
-            ModPacketHandler.messagePlayer(player, UpdateClientChatDetector(stopsMessage, regexString))
         }
     }
 
-    override fun type(): CustomPacketPayload.Type<ClientChangedChatDetector> {
+    override fun type(): CustomPacketPayload.Type<ClientChangedChatDetectorString> {
         return TYPE
     }
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<ClientChangedChatDetector> =
+        val TYPE: CustomPacketPayload.Type<ClientChangedChatDetectorString> =
             CustomPacketPayload.Type(OtherUtil.modResource("client_changed_chat_detector"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, ClientChangedChatDetector> =
+        val STREAM_CODEC: StreamCodec<ByteBuf, ClientChangedChatDetectorString> =
             StreamCodec.composite(
-                BlockPos.STREAM_CODEC, ClientChangedChatDetector::blockPos,
-                ByteBufCodecs.BOOL, ClientChangedChatDetector::stopsMessage,
-                ByteBufCodecs.STRING_UTF8, ClientChangedChatDetector::regexString,
-                ::ClientChangedChatDetector
+                BlockPos.STREAM_CODEC, ClientChangedChatDetectorString::blockPos,
+                ByteBufCodecs.STRING_UTF8, ClientChangedChatDetectorString::regexString,
+                ::ClientChangedChatDetectorString
             )
 
     }

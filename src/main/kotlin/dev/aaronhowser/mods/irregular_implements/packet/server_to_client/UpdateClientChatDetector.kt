@@ -9,14 +9,12 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class UpdateClientChatDetector(
-    val stopsMessage: Boolean,
     val regexString: String
 ) : IModPacket {
 
     override fun receiveOnClient(context: IPayloadContext) {
         context.enqueueWork {
             Companion.regexString = this.regexString
-            Companion.stopsMessage = this.stopsMessage
         }
     }
 
@@ -31,19 +29,15 @@ class UpdateClientChatDetector(
 
         val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientChatDetector> =
             StreamCodec.composite(
-                ByteBufCodecs.BOOL, UpdateClientChatDetector::stopsMessage,
                 ByteBufCodecs.STRING_UTF8, UpdateClientChatDetector::regexString,
                 ::UpdateClientChatDetector
             )
 
-        var stopsMessage: Boolean = false
-            private set
         var regexString: String = ""
             private set
 
         fun unset() {
             regexString = ""
-            stopsMessage = false
         }
     }
 

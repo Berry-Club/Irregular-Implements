@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet
 
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
@@ -13,7 +13,6 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
-import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler
 import net.neoforged.neoforge.network.registration.PayloadRegistrar
 
 object ModPacketHandler {
@@ -23,8 +22,8 @@ object ModPacketHandler {
 
         toServer(
             registrar,
-            ClientChangedChatDetector.TYPE,
-            ClientChangedChatDetector.STREAM_CODEC
+            ClientChangedChatDetectorString.TYPE,
+            ClientChangedChatDetectorString.STREAM_CODEC
         )
 
         toClient(
