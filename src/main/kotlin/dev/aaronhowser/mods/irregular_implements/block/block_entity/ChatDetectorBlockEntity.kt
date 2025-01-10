@@ -175,7 +175,7 @@ class ChatDetectorBlockEntity(
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return ChatDetectorMenu(containerId, this.containerData, this.blockPos)
+        return ChatDetectorMenu(containerId, this.containerData)
     }
 
     override fun getDisplayName(): Component {

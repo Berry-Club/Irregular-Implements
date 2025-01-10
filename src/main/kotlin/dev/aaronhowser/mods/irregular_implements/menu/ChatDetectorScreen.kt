@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.client.gui.GuiGraphics
@@ -71,21 +70,23 @@ class ChatDetectorScreen(
 
         val width = this.rightPos - this.leftPos
 
-//        this.regexStringEditBox = EditBox(
-//            this.font,
-//            this.leftPos + 5,
-//            this.bottomPos - 5 - 20,
-//            width - 5 - 5,
-//            20,
-//            Component.literal(this.chatDetectorBlockEntity.regexString)
-//        )
+        this.regexStringEditBox = EditBox(
+            this.font,
+            this.leftPos + 5,
+            this.bottomPos - 5 - 20,
+            width - 5 - 5,
+            20,
+            ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent()
+        )
 
-//        this.regexStringEditBox.setResponder(::setRegexString)
-//        this.regexStringEditBox.setMaxLength(10000)
-//        this.regexStringEditBox.setHint(ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent())
+        this.regexStringEditBox.setCanLoseFocus(false)
+        this.regexStringEditBox.setTextColor(-1)
+        this.regexStringEditBox.setTextColorUneditable(-1)
+        this.regexStringEditBox.setResponder(::setRegexString)
+        this.regexStringEditBox.setMaxLength(10000)
 
         addRenderableWidget(this.toggleMessagePassButton)
-//        addRenderableWidget(this.regexStringEditBox)
+        addRenderableWidget(this.regexStringEditBox)
     }
 
     // Rendering
@@ -121,22 +122,10 @@ class ChatDetectorScreen(
         return false
     }
 
-//    override fun tick() {
-//        if (this.chatDetectorBlockEntity.isRemoved) {
-//            onClose()
-//        }
-//
-//        if (this.regexStringEditBox.value != UpdateClientChatDetector.regexString) {
-//            this.regexStringEditBox.value = UpdateClientChatDetector.regexString
-//        }
-//
-//        if (this.chatDetectorBlockEntity.stopsMessage != UpdateClientChatDetector.stopsMessage) {
-//            this.chatDetectorBlockEntity.stopsMessage = UpdateClientChatDetector.stopsMessage
-//        }
-//    }
-
     override fun containerTick() {
-
+        if (this.regexStringEditBox.value != UpdateClientChatDetector.regexString) {
+            this.regexStringEditBox.value = UpdateClientChatDetector.regexString
+        }
     }
 
     override fun onClose() {
@@ -153,19 +142,19 @@ class ChatDetectorScreen(
         )
     }
 
-    var isChangingRegexString = false
+    private var isChangingRegexString = false
     private fun setRegexString(string: String) {
         if (isChangingRegexString) return
         isChangingRegexString = true
         this.regexStringEditBox.value = string
         isChangingRegexString = false
 
-        ModPacketHandler.messageServer(
-            ClientChangedChatDetectorString(
-                this.menu.blockPos,
-                string
-            )
-        )
+//        ModPacketHandler.messageServer(
+//            ClientChangedChatDetectorString(
+//                this.menu.blockPos,
+//                string
+//            )
+//        )
     }
 
 }

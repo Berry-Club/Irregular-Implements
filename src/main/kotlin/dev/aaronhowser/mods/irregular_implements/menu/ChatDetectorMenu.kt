@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -12,15 +11,13 @@ import net.minecraft.world.item.ItemStack
 
 class ChatDetectorMenu(
     containerId: Int,
-    private val containerData: ContainerData,
-    val blockPos: BlockPos
+    private val containerData: ContainerData
 ) : AbstractContainerMenu(ModMenuTypes.CHAT_DETECTOR.get(), containerId) {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
                 containerId,
-                SimpleContainerData(ChatDetectorBlockEntity.CONTAINER_DATA_SIZE),
-                BlockPos.ZERO
+                SimpleContainerData(ChatDetectorBlockEntity.CONTAINER_DATA_SIZE)
             )
 
     init {
