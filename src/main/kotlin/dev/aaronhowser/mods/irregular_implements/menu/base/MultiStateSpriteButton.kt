@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -29,7 +30,7 @@ class MultiStateSpriteButton(
     y,
     width,
     height,
-    messages.first,
+    messages.first(),
     onPress,
     narration ?: DEFAULT_NARRATION
 ) {
@@ -90,7 +91,7 @@ class MultiStateSpriteButton(
         this.renderString(guiGraphics, minecraft.font, i or (Mth.ceil(this.alpha * 255.0f) shl 24))
     }
 
-    class Builder {
+    class Builder(private val font: Font) {
         private val sprites: MutableList<ResourceLocation> = mutableListOf()
         private val messages: MutableList<Component> = mutableListOf()
 
@@ -102,6 +103,10 @@ class MultiStateSpriteButton(
         private var height: Int = 0
         private var spriteWidth: Int = 0
         private var spriteHeight: Int = 0
+
+        private var currentStateGetter: Supplier<Int> = Supplier { 0 }
+        private var onPress: OnPress = OnPress { }
+
 
         fun addStage(sprite: ResourceLocation, message: Component): Builder {
             sprites.add(sprite)
@@ -128,7 +133,17 @@ class MultiStateSpriteButton(
             return this
         }
 
-        fun build(currentStateGetter: Supplier<Int>, font: Font, onPress: OnPress): MultiStateSpriteButton {
+        fun currentStateGetter(currentStateGetter: Supplier<Int>): Builder {
+            this.currentStateGetter = currentStateGetter
+            return this
+        }
+
+        fun onPress(onPress: OnPress): Builder {
+            this.onPress = onPress
+            return this
+        }
+
+        fun build(): MultiStateSpriteButton {
             return MultiStateSpriteButton(
                 x,
                 y,

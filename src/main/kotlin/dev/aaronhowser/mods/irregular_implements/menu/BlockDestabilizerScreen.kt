@@ -4,8 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabi
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
@@ -31,21 +31,34 @@ class BlockDestabilizerScreen(
         this.leftPos = (this.width - ScreenTextures.Background.BlockDestabilizer.WIDTH) / 2
         this.topPos = (this.height - ScreenTextures.Background.BlockDestabilizer.HEIGHT) / 2
 
-        toggleLazyButton = ToggleSpriteButton(
-            x = this.leftPos + 7,
-            y = this.topPos + 7,
-            width = 20,
-            height = 20,
-            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
-            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.LAZY_HEIGHT,
-            spriteOn = ScreenTextures.Sprite.BlockDestabilizer.LAZY,
-            spriteOff = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
-            messageOn = ModLanguageProvider.Tooltips.LAZY.toComponent(),
-            messageOff = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
-            currentStateGetter = { this.blockDestabilizerBlockEntity.isLazy },      //TODO: Update this to use a menu for containerdata
-            onPress = ::pressToggleLazyButton,
-            font = this.font
-        )
+        this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                sprite = ScreenTextures.Sprite.BlockDestabilizer.LAZY,
+                message = ModLanguageProvider.Tooltips.LAZY.toComponent()
+            )
+            .addStage(
+                sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
+                message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent()
+            )
+            .size(
+                width = 20,
+                height = 20
+            )
+            .spriteDimensions(
+                width = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
+                height = ScreenTextures.Sprite.BlockDestabilizer.LAZY_HEIGHT
+            )
+            .currentStateGetter(
+                currentStateGetter = { if (this.blockDestabilizerBlockEntity.isLazy) 0 else 1 }     //TODO: Update this to use a menu for containerdata
+            )
+            .onPress(
+                onPress = ::pressToggleLazyButton
+            )
+            .location(
+                x = this.leftPos + 7,
+                y = this.topPos + 7
+            )
+            .build()
 
         showLazyShapeButton = ImprovedSpriteButton(
             x = this.leftPos + 33,
