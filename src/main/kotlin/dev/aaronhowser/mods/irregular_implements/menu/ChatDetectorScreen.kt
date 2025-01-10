@@ -4,6 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -139,13 +141,11 @@ class ChatDetectorScreen(
     }
 
     private fun pressToggleMessagePassButton(button: Button) {
-//        ModPacketHandler.messageServer(
-//            ClientChangedChatDetector(
-//                this.chatDetectorBlockEntity.blockPos,
-//                !this.chatDetectorBlockEntity.stopsMessage,
-//                regexStringEditBox.value
-//            )
-//        )
+        ModPacketHandler.messageServer(
+            ClientClickedChatDetectorButton(
+                ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
+            )
+        )
     }
 
     private var isChangingRegexString = false
