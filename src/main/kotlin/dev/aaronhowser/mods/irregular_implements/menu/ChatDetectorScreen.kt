@@ -28,7 +28,7 @@ class ChatDetectorScreen(
     private val bottomPos: Int
         get() = this.topPos + ScreenTextures.Background.ChatDetector.HEIGHT
 
-    private lateinit var toggleMessagePassButton: Button
+    private lateinit var toggleMessagePassButton: MultiStateSpriteButton
     private lateinit var regexStringEditBox: EditBox
 
     override fun init() {

@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.menu.base.ToggleSpriteButton
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
 import net.minecraft.client.gui.GuiGraphics
@@ -27,33 +27,43 @@ class IronDropperScreen(
     private val bottomPos: Int
         get() = this.topPos + ScreenTextures.Background.ChatDetector.HEIGHT
 
-    private lateinit var shootModeButton: ToggleSpriteButton
-    private lateinit var toggleEffectButton: ToggleSpriteButton
-    private lateinit var delayButton: ToggleSpriteButton
-    private lateinit var redstoneModeButton: ToggleSpriteButton
+    private lateinit var shootModeButton: MultiStateSpriteButton
+    private lateinit var toggleEffectButton: MultiStateSpriteButton
+    private lateinit var delayButton: MultiStateSpriteButton
+    private lateinit var redstoneModeButton: MultiStateSpriteButton
 
     override fun init() {
         super.init()
         this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
 
-        this.shootModeButton = ToggleSpriteButton(
-            width = 20,
-            height = 20,
-            spriteWidth = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_WIDTH,
-            spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT,
-            spriteOn = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
-            spriteOff = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
-            messageOn = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
-            messageOff = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
-            currentStateGetter = { this.menu.shouldShootStraight },
-            onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) },
-            font = this.font
-        )
-
-        this.shootModeButton.setPosition(
-            this.rightPos - this.shootModeButton.width - 5,
-            this.topPos + 5
-        )
+        this.shootModeButton = MultiStateSpriteButton.Builder(this.font)
+            .addStage(
+                sprite = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent()
+            )
+            .addStage(
+                sprite = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
+                message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent()
+            )
+            .size(
+                width = 20,
+                height = 20
+            )
+            .spriteDimensions(
+                width = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_WIDTH,
+                height = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT
+            )
+            .currentStateGetter(
+                currentStateGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
+            )
+            .onPress(
+                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
+            )
+            .location(
+                x = this.rightPos - 25,
+                y = this.topPos + 5
+            )
+            .build()
 
         this.addRenderableWidget(this.shootModeButton)
     }

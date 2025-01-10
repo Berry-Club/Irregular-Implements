@@ -23,9 +23,9 @@ class BlockDestabilizerScreen(
     private var leftPos: Int by Delegates.notNull()
     private var topPos: Int by Delegates.notNull()
 
-    private lateinit var toggleLazyButton: Button
-    private lateinit var showLazyShapeButton: Button
-    private lateinit var forgetLazyShapeButton: Button
+    private lateinit var toggleLazyButton: MultiStateSpriteButton
+    private lateinit var showLazyShapeButton: ImprovedSpriteButton
+    private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
     override fun init() {
         this.leftPos = (this.width - ScreenTextures.Background.BlockDestabilizer.WIDTH) / 2
