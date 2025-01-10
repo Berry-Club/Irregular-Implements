@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -88,7 +87,7 @@ class BlockDestabilizerScreen(
 
     // Rendering
 
-    override fun renderMenuBackground(guiGraphics: GuiGraphics) {
+    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
         guiGraphics.blit(
             ScreenTextures.Background.BlockDestabilizer.BACKGROUND,
             this.leftPos,
@@ -102,14 +101,14 @@ class BlockDestabilizerScreen(
         )
     }
 
+    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        // Do nothing
+    }
+
     // Behavior
 
     override fun isPauseScreen(): Boolean {
         return false
-    }
-
-    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        TODO("Not yet implemented")
     }
 
 //    override fun tick() {
@@ -122,14 +121,7 @@ class BlockDestabilizerScreen(
 //        }
 //    }
 
-    override fun onClose() {
-        UpdateClientBlockDestabilizer.unset()
-
-        super.onClose()
-    }
-
     private fun pressToggleLazyButton(button: Button) {
-
     }
 
     private fun pressShowLazyShapeButton(button: Button) {

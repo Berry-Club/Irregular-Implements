@@ -24,7 +24,6 @@ import net.minecraft.world.entity.item.FallingBlockEntity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -91,6 +90,16 @@ class BlockDestabilizerBlockEntity(
             field = value
             setChanged()
         }
+
+    private val containerData = object : SimpleContainerData(1) {
+        override fun get(index: Int): Int {
+            return if (this@BlockDestabilizerBlockEntity.isLazy) 1 else 0
+        }
+
+        override fun set(index: Int, value: Int) {
+            this@BlockDestabilizerBlockEntity.isLazy = value == 1
+        }
+    }
 
     private val lazyBlocks: HashSet<BlockPos> = hashSetOf()
 
@@ -357,16 +366,6 @@ class BlockDestabilizerBlockEntity(
 
         removeLazyIndicators()
         this.lazyBlocks.clear()
-    }
-
-    private val containerData = object : SimpleContainerData(1) {
-        override fun get(index: Int): Int {
-            TODO("Not yet implemented")
-        }
-
-        override fun set(index: Int, value: Int) {
-            TODO("Not yet implemented")
-        }
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {

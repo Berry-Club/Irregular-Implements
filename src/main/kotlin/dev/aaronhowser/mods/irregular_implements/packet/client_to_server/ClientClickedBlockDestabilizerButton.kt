@@ -2,8 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientBlockDestabilizer
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
@@ -33,11 +31,6 @@ class ClientClickedBlockDestabilizerButton(
             when (buttonClicked) {
                 Button.TOGGLE_LAZY -> {
                     blockDestabilizerBlockEntity.toggleLazy()
-
-                    ModPacketHandler.messagePlayer(
-                        player,
-                        UpdateClientBlockDestabilizer(blockDestabilizerBlockEntity.isLazy)
-                    )
                 }
 
                 Button.SHOW_LAZY_SHAPE -> blockDestabilizerBlockEntity.showLazyShape()  //TODO: Close screen if returns true
