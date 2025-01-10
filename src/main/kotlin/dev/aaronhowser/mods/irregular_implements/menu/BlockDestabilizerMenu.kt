@@ -15,7 +15,15 @@ class BlockDestabilizerMenu(
     private val containerData: ContainerData
 ) : AbstractContainerMenu(ModMenuTypes.BLOCK_DESTABILIZER.get(), containerId) {
 
-    constructor(containerId: Int, playerInventory: Inventory) : this(containerId, SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE))
+    constructor(containerId: Int, playerInventory: Inventory) :
+            this(
+                containerId,
+                SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE)
+            )
+
+    init {
+        this.addDataSlots(containerData)
+    }
 
     companion object {
         const val TOGGLE_LAZY_BUTTON_ID = 0

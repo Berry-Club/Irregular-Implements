@@ -19,7 +19,13 @@ class IronDropperMenu(
     private val containerData: ContainerData
 ) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId) {
 
-    constructor(containerId: Int, playerInventory: Inventory) : this(containerId, playerInventory, SimpleContainer(9), SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE))
+    constructor(containerId: Int, playerInventory: Inventory) :
+            this(
+                containerId,
+                playerInventory,
+                SimpleContainer(9),
+                SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE)
+            )
 
     init {
         checkContainerSize(dispenserContainer, 9)
