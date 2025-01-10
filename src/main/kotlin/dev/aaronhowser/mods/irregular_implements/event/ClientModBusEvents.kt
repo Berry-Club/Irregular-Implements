@@ -84,6 +84,11 @@ object ClientModBusEvents {
             ModItems.DIVINING_ROD.get()
         )
 
+        event.register(
+            BiomeCrystalItem::getItemColor,
+            ModItems.BIOME_CRYSTAL.get()
+        )
+
     }
 
     //TODO: Make Rainbow Lamp use this instead of unique textures

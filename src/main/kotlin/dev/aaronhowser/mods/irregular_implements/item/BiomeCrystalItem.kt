@@ -34,6 +34,12 @@ class BiomeCrystalItem : Item(
             return stack
         }
 
+        fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
+            val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
+
+            return (foliageColor or 0xFF000000.toInt())
+        }
+
     }
 
     override fun appendHoverText(
