@@ -32,8 +32,8 @@ class ChatDetectorMenu(
     }
 
     var shouldMessageStop: Boolean
-        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 0
-        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 0 else 1)
+        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
+        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
 
     fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
