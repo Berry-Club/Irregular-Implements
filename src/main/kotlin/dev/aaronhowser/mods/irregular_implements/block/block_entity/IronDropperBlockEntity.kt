@@ -21,8 +21,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.DispenserBlock
 import net.minecraft.world.level.block.DropperBlock.FACING
-import net.minecraft.world.level.block.DropperBlock.getDispensePosition
 import net.minecraft.world.level.block.entity.DispenserBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -102,16 +102,16 @@ class IronDropperBlockEntity(
             if (this@IronDropperBlockEntity.shouldHaveEffects) super.playAnimation(blockSource, direction)
         }
 
-        override fun execute(blockSource: BlockSource, item: ItemStack): ItemStack {
+        override fun execute(blockSource: BlockSource, chosenStack: ItemStack): ItemStack {
             val direction = blockSource.state().getValue(FACING)
-            val position = getDispensePosition(blockSource)
-            val stack = item.split(1)
+            val position = DispenserBlock.getDispensePosition(blockSource)
+            val stackToShoot = chosenStack.split(1)
 
             val speed = 6
 
-            shoot(blockSource.level, stack, speed, direction, position, this@IronDropperBlockEntity.shouldShootStraight)
+            shoot(blockSource.level, stackToShoot, speed, direction, position, this@IronDropperBlockEntity.shouldShootStraight)
 
-            return stack
+            return chosenStack
         }
 
         private fun shoot(level: Level, stack: ItemStack, speed: Int, facing: Direction, position: Position, shootForward: Boolean) {
