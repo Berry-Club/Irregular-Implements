@@ -1,8 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import com.mojang.datafixers.util.Pair
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -35,12 +39,19 @@ class GlobalChatDetectorMenu(
             val x = 8 + containerSlotIndex * 18
             val y = 40
 
-            this.addSlot(Slot(globalChatDetectorContainer, containerSlotIndex, x, y))
+            val slot = object : Slot(globalChatDetectorContainer, containerSlotIndex, x, y) {
+                override fun mayPlace(stack: ItemStack): Boolean {
+                    return stack.`is`(ModItems.ID_CARD) && stack.has(ModDataComponents.PLAYER)
+                }
+
+            }
+
+            this.addSlot(slot)
         }
 
         for (row in 0..2) {
             for (column in 0..8) {
-                val inventorySlotIndex = column + row * 9
+                val inventorySlotIndex = column + row * 9 + 9
 
                 val x = 8 + column * 18
                 val y = 75 + row * 18
@@ -87,7 +98,32 @@ class GlobalChatDetectorMenu(
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        return ItemStack.EMPTY
+        val slot = slots.getOrNull(index)
+
+        if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
+
+        val stackThere = slot.item
+        val copyStack = stackThere.copy()
+
+        if (index < 9) {
+            if (!this.moveItemStackTo(stackThere, 9, 45, true)) {
+                return ItemStack.EMPTY
+            }
+        } else if (!this.moveItemStackTo(stackThere, 0, 9, false)) {
+            return ItemStack.EMPTY
+        }
+
+        if (stackThere.isEmpty) {
+            slot.setByPlayer(ItemStack.EMPTY)
+        } else {
+            slot.setChanged()
+        }
+
+        if (stackThere.count == copyStack.count) return ItemStack.EMPTY
+
+        slot.onTake(player, stackThere)
+
+        return copyStack
     }
 
     override fun stillValid(player: Player): Boolean {
