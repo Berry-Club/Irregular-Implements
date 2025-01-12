@@ -6,7 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedBlockDestabilizerButton
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -118,7 +118,7 @@ class BlockDestabilizerScreen(
 
     private fun pressToggleLazyButton(button: Button) {
         ModPacketHandler.messageServer(
-            ClientClickedBlockDestabilizerButton(
+            ClientClickedMenuButton(
                 BlockDestabilizerMenu.TOGGLE_LAZY_BUTTON_ID
             )
         )
@@ -126,7 +126,7 @@ class BlockDestabilizerScreen(
 
     private fun pressShowLazyShapeButton(button: Button) {
         ModPacketHandler.messageServer(
-            ClientClickedBlockDestabilizerButton(
+            ClientClickedMenuButton(
                 BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID
             )
         )
@@ -134,7 +134,7 @@ class BlockDestabilizerScreen(
 
     private fun pressForgetLazyShapeButton(button: Button) {
         ModPacketHandler.messageServer(
-            ClientClickedBlockDestabilizerButton(
+            ClientClickedMenuButton(
                 BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID
             )
         )

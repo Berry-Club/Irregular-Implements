@@ -6,7 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButto
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedChatDetectorButton
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -144,7 +144,7 @@ class ChatDetectorScreen(
 
     private fun pressToggleMessagePassButton(button: Button) {
         ModPacketHandler.messageServer(
-            ClientClickedChatDetectorButton(
+            ClientClickedMenuButton(
                 ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
             )
         )

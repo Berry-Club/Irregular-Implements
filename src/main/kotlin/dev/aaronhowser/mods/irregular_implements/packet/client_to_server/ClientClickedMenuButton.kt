@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
-import dev.aaronhowser.mods.irregular_implements.menu.IronDropperMenu
+import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -10,35 +10,35 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.server.level.ServerPlayer
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-class ClientClickedIronDropperButton(
-    private val buttonClicked: Int
+class ClientClickedMenuButton(
+    private val buttonId: Int
 ) : IModPacket {
 
     override fun receiveOnServer(context: IPayloadContext) {
         context.enqueueWork {
             val player = context.player() as? ServerPlayer ?: return@enqueueWork
+            val playerMenu = player.containerMenu
 
-            val playerMenu = player.containerMenu as? IronDropperMenu ?: return@enqueueWork
             if (!playerMenu.stillValid(player)) return@enqueueWork
 
-            playerMenu.handleButtonPressed(buttonClicked)
+            if (playerMenu is MenuWithButtons) {
+                playerMenu.handleButtonPressed(buttonId)
+            }
         }
     }
 
-    override fun type(): CustomPacketPayload.Type<ClientClickedIronDropperButton> {
+    override fun type(): CustomPacketPayload.Type<ClientClickedMenuButton> {
         return TYPE
     }
 
     companion object {
-        val TYPE: CustomPacketPayload.Type<ClientClickedIronDropperButton> =
-            CustomPacketPayload.Type(OtherUtil.modResource("client_clicked_iron_dropper_button"))
+        val TYPE: CustomPacketPayload.Type<ClientClickedMenuButton> =
+            CustomPacketPayload.Type(OtherUtil.modResource("client_clicked_menu_button"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, ClientClickedIronDropperButton> =
+        val STREAM_CODEC: StreamCodec<ByteBuf, ClientClickedMenuButton> =
             StreamCodec.composite(
-                ByteBufCodecs.VAR_INT, ClientClickedIronDropperButton::buttonClicked,
-                ::ClientClickedIronDropperButton
+                ByteBufCodecs.VAR_INT, ClientClickedMenuButton::buttonId,
+                ::ClientClickedMenuButton
             )
-
     }
-
 }

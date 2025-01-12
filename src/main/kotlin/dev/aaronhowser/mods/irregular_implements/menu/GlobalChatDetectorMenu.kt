@@ -1,12 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import com.mojang.datafixers.util.Pair
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -20,7 +19,7 @@ class GlobalChatDetectorMenu(
     private val globalChatDetectorContainer: Container,
     private val containerData: ContainerData,
     private val containerLevelAccess: ContainerLevelAccess
-) : AbstractContainerMenu(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), containerId) {
+) : AbstractContainerMenu(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), containerId), MenuWithButtons {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -78,7 +77,7 @@ class GlobalChatDetectorMenu(
         get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
         set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
 
-    fun handleButtonPressed(buttonId: Int) {
+    override fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
             ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
         }

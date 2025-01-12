@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -13,7 +14,7 @@ import net.minecraft.world.item.ItemStack
 class BlockDestabilizerMenu(
     containerId: Int,
     private val containerData: ContainerData
-) : AbstractContainerMenu(ModMenuTypes.BLOCK_DESTABILIZER.get(), containerId) {
+) : AbstractContainerMenu(ModMenuTypes.BLOCK_DESTABILIZER.get(), containerId), MenuWithButtons {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -47,7 +48,7 @@ class BlockDestabilizerMenu(
     }
 
     // Only called on server
-    fun handleButtonPressed(buttonId: Int) {
+    override fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
             TOGGLE_LAZY_BUTTON_ID -> toggleLazy()
             SHOW_LAZY_SHAPE_BUTTON_ID -> showLazyShape()

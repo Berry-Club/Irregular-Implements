@@ -4,7 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
@@ -51,9 +56,12 @@ class GlobalChatDetectorScreen(
                 width = 20,
                 height = 20
             )
-//            .currentStateGetter(
-//                currentStateGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
-//            )
+            .currentStateGetter(
+                currentStateGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
+            )
+            .onPress(
+                onPress = ::pressToggleMessagePassButton
+            )
             .build()
 
         this.toggleMessagePassButton.setPosition(
@@ -83,6 +91,8 @@ class GlobalChatDetectorScreen(
 
     }
 
+    // Rendering
+
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         super.render(guiGraphics, mouseX, mouseY, partialTick)
         this.renderTooltip(guiGraphics, mouseX, mouseY)
@@ -101,4 +111,47 @@ class GlobalChatDetectorScreen(
             ScreenTextures.Background.GlobalChatDetector.CANVAS_SIZE
         )
     }
+
+    // Behavior
+
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        if (keyCode == 256) {
+            this.minecraft?.player?.closeContainer()
+        }
+
+        return if (!this.regexStringEditBox.keyPressed(keyCode, scanCode, modifiers) && !this.regexStringEditBox.canConsumeInput()) {
+            super.keyPressed(keyCode, scanCode, modifiers)
+        } else {
+            true
+        }
+    }
+
+    override fun resize(minecraft: Minecraft, width: Int, height: Int) {
+        val currentRegexString = this.regexStringEditBox.value
+        super.resize(minecraft, width, height)
+        this.regexStringEditBox.value = currentRegexString
+    }
+
+    override fun isPauseScreen(): Boolean {
+        return false
+    }
+
+    private fun pressToggleMessagePassButton(button: Button) {
+        ModPacketHandler.messageServer(
+            ClientClickedMenuButton(
+                ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
+            )
+        )
+    }
+
+    private fun setRegexString(string: String) {
+        if (this.menu.setRegex(string)) {
+            ModPacketHandler.messageServer(
+                ClientChangedChatDetectorString(
+                    string
+                )
+            )
+        }
+    }
+
 }

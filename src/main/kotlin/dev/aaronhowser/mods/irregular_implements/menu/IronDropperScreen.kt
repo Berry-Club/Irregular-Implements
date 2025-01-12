@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedIronDropperButton
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
@@ -71,7 +71,7 @@ class IronDropperScreen(
                 currentStateGetter = { this.menu.redstoneMode.ordinal }
             )
             .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
+                onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
             )
             .location(
                 x = leftButtonX,
@@ -105,7 +105,7 @@ class IronDropperScreen(
                 currentStateGetter = { this.menu.pickupDelay.ordinal }
             )
             .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.DELAY_BUTTON_ID)) }
+                onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.DELAY_BUTTON_ID)) }
             )
             .location(
                 x = rightButtonX,
@@ -133,7 +133,7 @@ class IronDropperScreen(
                 currentStateGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
             )
             .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
+                onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
             )
             .location(
                 x = leftButtonX,
@@ -171,7 +171,7 @@ class IronDropperScreen(
                 currentStateGetter = { this.menu.shouldHaveEffects.ordinal }
             )
             .onPress(
-                onPress = { ModPacketHandler.messageServer(ClientClickedIronDropperButton(IronDropperMenu.EFFECTS_BUTTON_ID)) }
+                onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.EFFECTS_BUTTON_ID)) }
             )
             .location(
                 x = rightButtonX,

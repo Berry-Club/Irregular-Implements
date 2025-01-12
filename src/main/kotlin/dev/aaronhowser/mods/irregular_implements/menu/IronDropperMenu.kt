@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -17,7 +18,7 @@ class IronDropperMenu(
     private val playerInventory: Inventory,
     private val dispenserContainer: Container,
     private val containerData: ContainerData
-) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId) {
+) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId), MenuWithButtons {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -114,7 +115,7 @@ class IronDropperMenu(
         private set(value) = containerData.set(IronDropperBlockEntity.REDSTONE_MODE_INDEX, value.ordinal)
 
     // Only called from the server
-    fun handleButtonPressed(buttonId: Int) {
+    override fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
             SHOOT_MODE_BUTTON_ID -> this.shouldShootStraight = !this.shouldShootStraight
             EFFECTS_BUTTON_ID -> this.shouldHaveEffects = this.shouldHaveEffects.next()
