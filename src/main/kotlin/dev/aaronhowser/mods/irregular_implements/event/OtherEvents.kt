@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
 import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.block.SpectreTreeBlocks
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -146,6 +147,7 @@ object OtherEvents {
     @SubscribeEvent
     fun onServerChat(event: ServerChatEvent) {
         ChatDetectorBlockEntity.processMessage(event)
+        GlobalChatDetectorBlockEntity.processMessage(event)
     }
 
 }

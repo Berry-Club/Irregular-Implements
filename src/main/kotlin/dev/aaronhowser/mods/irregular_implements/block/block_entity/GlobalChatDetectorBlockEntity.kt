@@ -6,6 +6,8 @@ import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -108,7 +110,14 @@ class GlobalChatDetectorBlockEntity(
 
         if (regex.containsMatchIn(messageString)) {
             pulse()
-            if (this.stopsMessage) return true
+            if (this.stopsMessage) {
+                for (item in this.container.items) {
+                    if (!item.`is`(ModItems.ID_CARD)) continue
+
+                    val playerUuid = item.get(ModDataComponents.PLAYER)?.uuid ?: continue
+                    if (playerUuid == player.uuid) return true
+                }
+            }
         }
 
         return false
