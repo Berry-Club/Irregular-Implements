@@ -14,6 +14,14 @@ object ScreenTextures {
             const val CANVAS_SIZE = 256
         }
 
+        object GlobalChatDetector {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/global_chat_detector.png")
+
+            const val WIDTH = 176
+            const val HEIGHT = 157
+            const val CANVAS_SIZE = 256
+        }
+
         object BlockDestabilizer {
             val BACKGROUND = OtherUtil.modResource("textures/gui/block_destabilizer.png")
 
@@ -42,7 +50,6 @@ object ScreenTextures {
         val EXTRACTION_PLATE = OtherUtil.modResource("textures/gui/extraction_plate.png")
         val FILTERED_REDIRECTOR_PLATE = OtherUtil.modResource("textures/gui/filtered_redirector_plate.png")
         val FILTERED_SUPER_LUBRICANT_PLATFORM = OtherUtil.modResource("textures/gui/filtered_super_lubricant_platform.png")
-        val GLOBAL_CHAT_DETECTOR = OtherUtil.modResource("textures/gui/global_chat_detector.png")
         val IGNITER = OtherUtil.modResource("textures/gui/igniter.png")
         val IMBUING_STATION = OtherUtil.modResource("textures/gui/imbuing_station.png")
         val INVENTORY_TESTER = OtherUtil.modResource("textures/gui/inventory_tester.png")

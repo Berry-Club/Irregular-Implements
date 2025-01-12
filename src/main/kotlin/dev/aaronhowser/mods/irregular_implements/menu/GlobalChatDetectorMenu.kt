@@ -7,10 +7,7 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.inventory.SimpleContainerData
+import net.minecraft.world.inventory.*
 import net.minecraft.world.item.ItemStack
 
 class GlobalChatDetectorMenu(
@@ -31,6 +28,23 @@ class GlobalChatDetectorMenu(
             )
 
     init {
+        checkContainerSize(globalChatDetectorContainer, 9)
+        globalChatDetectorContainer.startOpen(playerInventory.player)
+
+        for (l in 0..8) {
+            this.addSlot(Slot(globalChatDetectorContainer, l, 8 + l * 18, 17))
+        }
+
+        for (k in 0..2) {
+            for (i1 in 0..8) {
+                this.addSlot(Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18))
+            }
+        }
+
+        for (l in 0..8) {
+            this.addSlot(Slot(playerInventory, l, 8 + l * 18, 142))
+        }
+
         this.addDataSlots(containerData)
     }
 

@@ -1,9 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
@@ -12,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.phys.BlockHitResult
 
 class GlobalChatDetectorBlock : EntityBlock, Block(
     Properties
@@ -35,6 +40,21 @@ class GlobalChatDetectorBlock : EntityBlock, Block(
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return GlobalChatDetectorBlockEntity(pos, state)
+    }
+
+    override fun useWithoutItem(
+        pState: BlockState,
+        pLevel: Level,
+        pPos: BlockPos,
+        pPlayer: Player,
+        pHitResult: BlockHitResult
+    ): InteractionResult {
+        val blockEntity = pLevel.getBlockEntity(pPos) as? GlobalChatDetectorBlockEntity ?: return InteractionResult.FAIL
+
+        pPlayer.openMenu(blockEntity)
+        blockEntity.sendStringUpdate()
+
+        return InteractionResult.SUCCESS
     }
 
     override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
