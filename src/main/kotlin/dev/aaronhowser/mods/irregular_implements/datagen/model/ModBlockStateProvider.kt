@@ -54,6 +54,7 @@ class ModBlockStateProvider(
         moonPhaseDetector()
         shockAbsorber()
         chatDetector()
+        globalChatDetector()
         onlineDetector()
         spectreLens()
         diaphanousBlock()
@@ -416,6 +417,43 @@ class ModBlockStateProvider(
             block,
             ItemModelBuilder(
                 modLoc("block/online_detector_off"),
+                existingFileHelper
+            )
+        )
+    }
+
+    private fun globalChatDetector() {
+        val block = ModBlocks.GLOBAL_CHAT_DETECTOR.get()
+
+        val topTexture = modLoc("block/global_chat_detector/top")
+        val bottomTexture = modLoc("block/global_chat_detector/bottom")
+        val sideOffTexture = modLoc("block/global_chat_detector/side_off")
+        val sideOnTexture = modLoc("block/global_chat_detector/side_on")
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val isEnabled = it.getValue(ChatDetectorBlock.ENABLED)
+
+                val modelName = name(block) + if (isEnabled) "_on" else "_off"
+
+                val model = models()
+                    .cubeBottomTop(
+                        modelName,
+                        if (isEnabled) sideOnTexture else sideOffTexture,
+                        bottomTexture,
+                        topTexture
+                    )
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .build()
+            }
+
+        simpleBlockItem(
+            block,
+            ItemModelBuilder(
+                modLoc("block/global_chat_detector_off"),
                 existingFileHelper
             )
         )
