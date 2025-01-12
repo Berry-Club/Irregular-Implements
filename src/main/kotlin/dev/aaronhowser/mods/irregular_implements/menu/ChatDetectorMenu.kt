@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack
 class ChatDetectorMenu(
     containerId: Int,
     private val containerData: ContainerData,
-    val containerLevelAccess: ContainerLevelAccess
+    private val containerLevelAccess: ContainerLevelAccess
 ) : AbstractContainerMenu(ModMenuTypes.CHAT_DETECTOR.get(), containerId) {
 
     constructor(containerId: Int, playerInventory: Inventory) :
