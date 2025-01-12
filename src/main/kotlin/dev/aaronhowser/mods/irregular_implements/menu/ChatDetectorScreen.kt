@@ -70,13 +70,13 @@ class ChatDetectorScreen(
             this.topPos + 5
         )
 
-        val width = this.rightPos - this.leftPos
+        val screenWidth = this.rightPos - this.leftPos
 
         this.regexStringEditBox = EditBox(
             this.font,
             this.leftPos + 5,
             this.bottomPos - 5 - 20,
-            width - 5 - 5,
+            screenWidth - 5 - 5,
             20,
             ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent()
         )
