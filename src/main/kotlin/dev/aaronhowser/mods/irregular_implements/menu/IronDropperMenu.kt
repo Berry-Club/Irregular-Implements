@@ -32,22 +32,33 @@ class IronDropperMenu(
         dispenserContainer.startOpen(playerInventory.player)
 
         // Add the 9 slots of the dispenser
-        for (i in 0..2) {
-            for (j in 0..2) {
-                this.addSlot(Slot(dispenserContainer, j + i * 3, 62 + j * 18, 17 + i * 18))
+        for (row in 0..2) {
+            for (column in 0..2) {
+                val slotIndex = column + row * 3
+                val x = 62 + column * 18
+                val y = 17 + row * 18
+
+                this.addSlot(Slot(dispenserContainer, slotIndex, x, y))
             }
         }
 
         // Add the 27 slots of the player inventory
-        for (k in 0..2) {
-            for (i1 in 0..8) {
-                this.addSlot(Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18))
+        for (row in 0..2) {
+            for (column in 0..8) {
+                val slotIndex = column + row * 9 + 9
+                val x = 8 + column * 18
+                val y = 84 + row * 18
+
+                this.addSlot(Slot(playerInventory, slotIndex, x, y))
             }
         }
 
         // Add the 9 slots of the player hotbar
-        for (l in 0..8) {
-            this.addSlot(Slot(playerInventory, l, 8 + l * 18, 142))
+        for (hotbarIndex in 0..8) {
+            val x = 8 + hotbarIndex * 18
+            val y = 142
+
+            this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
         }
 
         this.addDataSlots(containerData)

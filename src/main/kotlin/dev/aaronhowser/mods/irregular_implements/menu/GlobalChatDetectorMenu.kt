@@ -31,18 +31,29 @@ class GlobalChatDetectorMenu(
         checkContainerSize(globalChatDetectorContainer, 9)
         globalChatDetectorContainer.startOpen(playerInventory.player)
 
-        for (l in 0..8) {
-            this.addSlot(Slot(globalChatDetectorContainer, l, 8 + l * 18, 17))
+        for (containerSlotIndex in 0..8) {
+            val x = 8 + containerSlotIndex * 18
+            val y = 40
+
+            this.addSlot(Slot(globalChatDetectorContainer, containerSlotIndex, x, y))
         }
 
-        for (k in 0..2) {
-            for (i1 in 0..8) {
-                this.addSlot(Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18))
+        for (row in 0..2) {
+            for (column in 0..8) {
+                val inventorySlotIndex = column + row * 9
+
+                val x = 8 + column * 18
+                val y = 75 + row * 18
+
+                this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
             }
         }
 
-        for (l in 0..8) {
-            this.addSlot(Slot(playerInventory, l, 8 + l * 18, 142))
+        for (hotbarSlotIndex in 0..8) {
+            val x = 8 + hotbarSlotIndex * 18
+            val y = 133
+
+            this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
         }
 
         this.addDataSlots(containerData)

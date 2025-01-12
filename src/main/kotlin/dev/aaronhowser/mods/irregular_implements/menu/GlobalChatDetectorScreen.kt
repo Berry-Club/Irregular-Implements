@@ -23,6 +23,8 @@ class GlobalChatDetectorScreen(
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
+
+        this.inventoryLabelY -= 8
     }
 
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
