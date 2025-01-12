@@ -61,7 +61,13 @@ class ChatDetectorScreen(
                 currentStateGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
             )
             .onPress(
-                onPress = ::pressToggleMessagePassButton
+                onPress = {
+                    ModPacketHandler.messageServer(
+                        ClientClickedMenuButton(
+                            ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
+                        )
+                    )
+                }
             )
             .build()
 
@@ -140,14 +146,6 @@ class ChatDetectorScreen(
 
     override fun isPauseScreen(): Boolean {
         return false
-    }
-
-    private fun pressToggleMessagePassButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedMenuButton(
-                ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
-            )
-        )
     }
 
     private fun setRegexString(string: String) {

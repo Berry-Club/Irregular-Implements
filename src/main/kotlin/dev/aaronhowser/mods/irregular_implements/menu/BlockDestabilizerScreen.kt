@@ -51,7 +51,13 @@ class BlockDestabilizerScreen(
                 currentStateGetter = { if (this.menu.isLazy) 0 else 1 }
             )
             .onPress(
-                onPress = ::pressToggleLazyButton
+                onPress = {
+                    ModPacketHandler.messageServer(
+                        ClientClickedMenuButton(
+                            BlockDestabilizerMenu.TOGGLE_LAZY_BUTTON_ID
+                        )
+                    )
+                }
             )
             .location(
                 x = this.leftPos + 7,
@@ -67,7 +73,13 @@ class BlockDestabilizerScreen(
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE_WIDTH,
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE_HEIGHT,
             sprite = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE,
-            onPress = ::pressShowLazyShapeButton,
+            onPress = {
+                ModPacketHandler.messageServer(
+                    ClientClickedMenuButton(
+                        BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID
+                    )
+                )
+            },
             message = ModLanguageProvider.Tooltips.SHOW_LAZY_SHAPE.toComponent(),
             font = this.font
         )
@@ -80,7 +92,13 @@ class BlockDestabilizerScreen(
             spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
             spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT,
             sprite = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
-            onPress = ::pressForgetLazyShapeButton,
+            onPress = {
+                ModPacketHandler.messageServer(
+                    ClientClickedMenuButton(
+                        BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID
+                    )
+                )
+            },
             message = ModLanguageProvider.Tooltips.FORGET_LAZY_SHAPE.toComponent(),
             font = this.font
         )
@@ -114,30 +132,6 @@ class BlockDestabilizerScreen(
 
     override fun isPauseScreen(): Boolean {
         return false
-    }
-
-    private fun pressToggleLazyButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedMenuButton(
-                BlockDestabilizerMenu.TOGGLE_LAZY_BUTTON_ID
-            )
-        )
-    }
-
-    private fun pressShowLazyShapeButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedMenuButton(
-                BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID
-            )
-        )
-    }
-
-    private fun pressForgetLazyShapeButton(button: Button) {
-        ModPacketHandler.messageServer(
-            ClientClickedMenuButton(
-                BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID
-            )
-        )
     }
 
 }
