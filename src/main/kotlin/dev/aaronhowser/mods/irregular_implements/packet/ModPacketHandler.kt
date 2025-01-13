@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.packet
 
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
@@ -26,8 +26,8 @@ object ModPacketHandler {
 
         toClient(
             registrar,
-            UpdateClientChatDetector.TYPE,
-            UpdateClientChatDetector.STREAM_CODEC
+            UpdateClientScreenString.TYPE,
+            UpdateClientScreenString.STREAM_CODEC
         )
 
         toServer(

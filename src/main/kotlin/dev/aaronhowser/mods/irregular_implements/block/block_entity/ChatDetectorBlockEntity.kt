@@ -2,8 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.ChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorMenu
+import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -91,7 +92,7 @@ class ChatDetectorBlockEntity(
         val level = this.level as? ServerLevel ?: return
 
         ModPacketHandler.messageNearbyPlayers(
-            UpdateClientChatDetector(this.regexString),
+            UpdateClientScreenString(GlobalChatDetectorMenu.REGEX_STRING_ID, this.regexString),
             level,
             this.blockPos.center,
             16.0

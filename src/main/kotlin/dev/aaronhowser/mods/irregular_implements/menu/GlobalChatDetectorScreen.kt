@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -18,7 +19,7 @@ class GlobalChatDetectorScreen(
     menu: GlobalChatDetectorMenu,
     playerInventory: Inventory,
     title: Component
-) : AbstractContainerScreen<GlobalChatDetectorMenu>(menu, playerInventory, title) {
+) : AbstractContainerScreen<GlobalChatDetectorMenu>(menu, playerInventory, title), ScreenWithStrings {
 
     private val rightPos: Int
         get() = this.leftPos + this.imageWidth
@@ -149,6 +150,12 @@ class GlobalChatDetectorScreen(
                     string
                 )
             )
+        }
+    }
+
+    override fun receivedString(stringId: Int, regexString: String) {
+        if (stringId == GlobalChatDetectorMenu.REGEX_STRING_ID) {
+            this.regexStringEditBox.value = regexString
         }
     }
 
