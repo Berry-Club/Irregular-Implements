@@ -14,7 +14,6 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
-import java.util.*
 
 class FilterPlayerItem : Item(
     Properties()
@@ -22,14 +21,6 @@ class FilterPlayerItem : Item(
 ) {
 
     companion object {
-        fun getPlayerName(stack: ItemStack): Component? {
-            return stack.get(ModDataComponents.PLAYER)?.name
-        }
-
-        fun getPlayerUuid(stack: ItemStack): UUID? {
-            return stack.get(ModDataComponents.PLAYER)?.uuid
-        }
-
         fun setPlayer(stack: ItemStack, player: Player) {
             stack.set(
                 ModDataComponents.PLAYER.get(),
@@ -60,14 +51,23 @@ class FilterPlayerItem : Item(
     }
 
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val playerName = getPlayerName(stack)
+        val dataComponent = stack.get(ModDataComponents.PLAYER) ?: return
 
-        if (playerName != null) {
-            val component = ModLanguageProvider.Tooltips.PLAYER_FILTER_PLAYER
-                .toGrayComponent(playerName)
+        val name = dataComponent.name
+        val uuid = dataComponent.uuid
 
-            tooltipComponents.add(component)
+        val component = ModLanguageProvider.Tooltips.PLAYER_FILTER_PLAYER
+            .toGrayComponent(name)
+
+        tooltipComponents.add(component)
+
+        if (tooltipFlag.hasShiftDown()) {
+            val uuidComponent = ModLanguageProvider.Tooltips.PLAYER_FILTER_UUID
+                .toGrayComponent(uuid.toString())
+
+            tooltipComponents.add(uuidComponent)
         }
+
     }
 
 }
