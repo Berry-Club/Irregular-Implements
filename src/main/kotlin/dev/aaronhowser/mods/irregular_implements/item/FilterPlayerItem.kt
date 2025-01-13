@@ -1,11 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -61,24 +59,15 @@ class FilterPlayerItem : Item(
         return InteractionResultHolder.success(usedStack)
     }
 
-    override fun getName(stack: ItemStack): Component {
-        val playerName = getPlayerName(stack)
-        return if (playerName != null) {
-            ModLanguageProvider.Items.PLAYER_FILTER_SET
-                .toComponent(playerName)
-        } else {
-            ModLanguageProvider.Items.PLAYER_FILTER_UNSET
-                .toComponent()
-        }
-    }
-
-    //TODO: Remove? Put in info recipe?
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        OtherUtil.moreInfoTooltip(
-            tooltipComponents,
-            tooltipFlag,
-            ModLanguageProvider.Tooltips.PLAYER_FILTER_CONTROLS.toGrayComponent()
-        )
+        val playerName = getPlayerName(stack)
+
+        if (playerName != null) {
+            val component = ModLanguageProvider.Tooltips.PLAYER_FILTER_PLAYER
+                .toGrayComponent(playerName)
+
+            tooltipComponents.add(component)
+        }
     }
 
 }

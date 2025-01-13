@@ -60,21 +60,6 @@ object OtherUtil {
         )
     }
 
-    fun moreInfoTooltip(
-        tooltipComponents: MutableList<Component>,
-        tooltipFlag: TooltipFlag,
-        vararg moreInfo: Component
-    ) {
-        if (!tooltipFlag.hasShiftDown()) {
-            tooltipComponents.add(
-                ModLanguageProvider.Tooltips.SHIFT_FOR_MORE
-                    .toGrayComponent()
-            )
-        } else {
-            tooltipComponents.addAll(moreInfo)
-        }
-    }
-
     fun <T> tagKeyStreamCodec(registry: ResourceKey<out Registry<T>>): StreamCodec<ByteBuf, TagKey<T>> {
         return ResourceLocation.STREAM_CODEC.map(
             { TagKey.create(registry, it) },

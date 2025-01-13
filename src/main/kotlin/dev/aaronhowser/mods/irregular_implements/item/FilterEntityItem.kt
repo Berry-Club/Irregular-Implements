@@ -1,10 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -49,24 +47,15 @@ class FilterEntityItem : Item(
         return InteractionResultHolder.success(usedStack)
     }
 
-    override fun getName(stack: ItemStack): Component {
-        val entityType = getEntityType(stack)
-        return if (entityType != null) {
-            ModLanguageProvider.Items.ENTITY_FILTER_SET
-                .toComponent(entityType.description)
-        } else {
-            ModLanguageProvider.Items.ENTITY_FILTER_UNSET
-                .toComponent()
-        }
-    }
-
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        OtherUtil.moreInfoTooltip(
-            tooltipComponents,
-            tooltipFlag,
-            ModLanguageProvider.Tooltips.ENTITY_FILTER_CONTROLS
-                .toGrayComponent()
-        )
+        val entityName = stack.get(ModDataComponents.ENTITY_TYPE)?.description
+
+        if (entityName != null) {
+            val component = ModLanguageProvider.Tooltips.ENTITY_FILTER_ENTITY
+                .toGrayComponent(entityName)
+
+            tooltipComponents.add(component)
+        }
     }
 
 }

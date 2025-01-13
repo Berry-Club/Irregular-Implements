@@ -177,29 +177,17 @@ class ModLanguageProvider(
 
     object Items {
         const val CREATIVE_TAB = "itemGroup.irregular_implements"
-
-        const val ENTITY_FILTER_UNSET = "item.irregular_implements.entity_filter.unset"
-        const val ENTITY_FILTER_SET = "item.irregular_implements.entity_filter.set"
-
-        const val PLAYER_FILTER_UNSET = "item.irregular_implements.player_filter.unset"
-        const val PLAYER_FILTER_SET = "item.irregular_implements.player_filter.set"
     }
 
     private fun addItems() {
 
-        add(Items.ENTITY_FILTER_UNSET, "Entity Filter")
-        add(Items.ENTITY_FILTER_SET, "Entity Filter (%s)")
-
-        add(Items.PLAYER_FILTER_UNSET, "ID Card")
-        add(Items.PLAYER_FILTER_SET, "ID Card (%s)")
-
         add(Items.CREATIVE_TAB, "Irregular Implements")
-
-        // Regular items
 
         addItem(ModItems.STABLE_ENDER_PEARL, "Stable Ender Pearl")
         addItem(ModItems.BIOME_CRYSTAL, "Biome Crystal")
         addItem(ModItems.LOCATION_FILTER, "Location Filter")
+        addItem(ModItems.ID_CARD, "ID Card")
+        addItem(ModItems.ENTITY_FILTER, "Entity Filter")
         addItem(ModItems.SUMMONING_PENDULUM, "Summoning Pendulum")
         addItem(ModItems.BEAN, "Bean")
         addItem(ModItems.LESSER_MAGIC_BEAN, "Lesser Magic Bean")
@@ -517,8 +505,8 @@ class ModLanguageProvider(
 
     object Tooltips {
         const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
-        const val ENTITY_FILTER_CONTROLS = "tooltip.irregular_implements.entity_filter_controls"
-        const val PLAYER_FILTER_CONTROLS = "tooltip.irregular_implements.player_filter_controls"
+        const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
+        const val PLAYER_FILTER_PLAYER = "tooltip.irregular_implements.player_filter_player"
         const val COMPRESSED_SLIME_AMOUNT = "tooltip.irregular_implements.compressed_slime_AMOUNT"
         const val LUBRICATED = "tooltip.irregular_implements.lubricated"
         const val WITH_BLOCK_ENTITY = "tooltip.irregular_implements.with_block_entity"
@@ -562,8 +550,8 @@ class ModLanguageProvider(
 
     private fun addTooltips() {
         add(Tooltips.SHIFT_FOR_MORE, "Hold SHIFT for more information")
-        add(Tooltips.ENTITY_FILTER_CONTROLS, "Set entity type by clicking an entity,\nor sneak click to set as Player")
-        add(Tooltips.PLAYER_FILTER_CONTROLS, "Set player by clicking")
+        add(Tooltips.ENTITY_FILTER_ENTITY, "Entity Type: %s")
+        add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
         add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
         add(Tooltips.LUBRICATED, "Lubricated")
         add(Tooltips.WITH_BLOCK_ENTITY, "%s with block entity")
