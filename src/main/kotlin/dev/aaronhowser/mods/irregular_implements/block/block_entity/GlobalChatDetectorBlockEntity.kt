@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity.Companion.STOPS_MESSAGE_INDEX
 import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientChatDetector
@@ -70,6 +69,9 @@ class GlobalChatDetectorBlockEntity(
 
         const val STOPS_MESSAGE_NBT = "StopsMessage"
         const val MESSAGE_REGEX_NBT = "MessageRegex"
+
+        const val CONTAINER_DATA_SIZE = 1
+        const val STOPS_MESSAGE_INDEX = 0
     }
 
     var regexString: String = ""
@@ -176,7 +178,7 @@ class GlobalChatDetectorBlockEntity(
 
     private val container = SimpleContainer(9)
 
-    private val containerData = object : SimpleContainerData(1) {
+    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
         override fun set(index: Int, value: Int) {
             when (index) {
                 STOPS_MESSAGE_INDEX -> this@GlobalChatDetectorBlockEntity.stopsMessage = value == 1

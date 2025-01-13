@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
@@ -77,8 +77,8 @@ class GlobalChatDetectorMenu(
     }
 
     var shouldMessageStop: Boolean
-        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
-        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
+        get() = containerData.get(GlobalChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
+        set(value) = containerData.set(GlobalChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
 
     override fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
@@ -96,7 +96,7 @@ class GlobalChatDetectorMenu(
         this.currentRegexString = regexString
 
         this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? ChatDetectorBlockEntity
+            val blockEntity = level.getBlockEntity(pos) as? GlobalChatDetectorBlockEntity
             blockEntity?.regexString = regexString
         }
 
