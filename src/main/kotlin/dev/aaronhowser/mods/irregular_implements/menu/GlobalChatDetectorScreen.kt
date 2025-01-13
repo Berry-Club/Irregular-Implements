@@ -5,11 +5,10 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedChatDetectorString
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
@@ -63,7 +62,7 @@ class GlobalChatDetectorScreen(
                 onPress = {
                     ModPacketHandler.messageServer(
                         ClientClickedMenuButton(
-                            ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
+                            GlobalChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
                         )
                     )
                 }
@@ -89,7 +88,7 @@ class GlobalChatDetectorScreen(
         this.regexStringEditBox.setCanLoseFocus(false)
         this.regexStringEditBox.setTextColor(-1)
         this.regexStringEditBox.setTextColorUneditable(-1)
-//        this.regexStringEditBox.setResponder(::setRegexString)
+        this.regexStringEditBox.setResponder(::setRegexString)
         this.regexStringEditBox.setMaxLength(10000)
 
         addRenderableWidget(this.toggleMessagePassButton)
@@ -145,7 +144,8 @@ class GlobalChatDetectorScreen(
     private fun setRegexString(string: String) {
         if (this.menu.setRegex(string)) {
             ModPacketHandler.messageServer(
-                ClientChangedChatDetectorString(
+                ClientChangedMenuString(
+                    GlobalChatDetectorMenu.REGEX_STRING_ID,
                     string
                 )
             )

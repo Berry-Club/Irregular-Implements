@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -15,7 +16,7 @@ class ChatDetectorMenu(
     containerId: Int,
     private val containerData: ContainerData,
     private val containerLevelAccess: ContainerLevelAccess
-) : AbstractContainerMenu(ModMenuTypes.CHAT_DETECTOR.get(), containerId), MenuWithButtons {
+) : AbstractContainerMenu(ModMenuTypes.CHAT_DETECTOR.get(), containerId), MenuWithButtons, MenuWithStrings {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -30,6 +31,8 @@ class ChatDetectorMenu(
 
     companion object {
         const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
+
+        const val REGEX_STRING_ID = 0
     }
 
     var shouldMessageStop: Boolean
@@ -40,6 +43,10 @@ class ChatDetectorMenu(
         when (buttonId) {
             TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
         }
+    }
+
+    override fun receiveString(stringId: Int, string: String) {
+        if (stringId == REGEX_STRING_ID) setRegex(string)
     }
 
     private var currentRegexString: String = ""

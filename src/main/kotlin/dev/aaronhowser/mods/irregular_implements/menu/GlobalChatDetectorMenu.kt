@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -19,7 +20,7 @@ class GlobalChatDetectorMenu(
     private val globalChatDetectorContainer: Container,
     private val containerData: ContainerData,
     private val containerLevelAccess: ContainerLevelAccess
-) : AbstractContainerMenu(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), containerId), MenuWithButtons {
+) : AbstractContainerMenu(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), containerId), MenuWithButtons, MenuWithStrings {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -71,6 +72,8 @@ class GlobalChatDetectorMenu(
 
     companion object {
         const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
+
+        const val REGEX_STRING_ID = 0
     }
 
     var shouldMessageStop: Boolean
@@ -79,8 +82,12 @@ class GlobalChatDetectorMenu(
 
     override fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {
-            ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
+            TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
         }
+    }
+
+    override fun receiveString(stringId: Int, string: String) {
+        if (stringId == REGEX_STRING_ID) setRegex(string)
     }
 
     private var currentRegexString: String = ""
