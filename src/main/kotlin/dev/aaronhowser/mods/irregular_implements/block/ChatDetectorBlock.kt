@@ -57,11 +57,7 @@ open class ChatDetectorBlock : EntityBlock, Block(
     }
 
     override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return if (level.isClientSide) {
-            null
-        } else {
-            BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.CHAT_DETECTOR.get(), ChatDetectorBlockEntity::tick)
-        }
+        return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.CHAT_DETECTOR.get(), ChatDetectorBlockEntity::tick)
     }
 
     override fun useWithoutItem(

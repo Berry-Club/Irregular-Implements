@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorScreen
+import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -16,9 +17,15 @@ class UpdateClientChatDetector(
 
     override fun receiveOnClient(context: IPayloadContext) {
         context.enqueueWork {
-            val screen = Minecraft.getInstance().screen as? ChatDetectorScreen ?: return@enqueueWork
+            val screen = Minecraft.getInstance().screen ?: return@enqueueWork
 
-            screen.regexStringEditBox.value = regexString
+            if (screen is ChatDetectorScreen) {
+                screen.regexStringEditBox.value = regexString
+            }
+
+            if (screen is GlobalChatDetectorScreen) {
+                screen.regexStringEditBox.value = regexString
+            }
         }
     }
 
