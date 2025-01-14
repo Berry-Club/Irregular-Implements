@@ -75,21 +75,6 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
         )
     }
 
-    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-        dropResources(state, level, pos)
-        level.removeBlockEntity(pos)
-    }
-
-    override fun getDrops(state: BlockState, params: LootParams.Builder): List<ItemStack> {
-        val blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY)
-
-        if (blockEntity is CustomCraftingTableBlockEntity) {
-            return blockEntity.renderedBlockState.getDrops(params)
-        }
-
-        return super.getDrops(state, params)
-    }
-
     override fun getCloneItemStack(state: BlockState, target: HitResult, level: LevelReader, pos: BlockPos, player: Player): ItemStack {
         val block = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
 
