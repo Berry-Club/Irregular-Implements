@@ -61,6 +61,7 @@ class ModRecipeProvider(
         applySpectreAnchor.save(recipeOutput, OtherUtil.modResource("apply_spectre_anchor"))
         setDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("set_diaphanous_block"))
         invertedDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("invert_diaphanous_block"))
+        customCraftingTable.save(recipeOutput, OtherUtil.modResource("custom_crafting_table"))
 
     }
 
@@ -70,10 +71,10 @@ class ModRecipeProvider(
     private val applySpectreAnchor = SpecialRecipeBuilder.special(::ApplySpectreAnchorRecipe)
     private val setDiaphanousBlock = SpecialRecipeBuilder.special(::SetDiaphanousBlockRecipe)
     private val invertedDiaphanousBlock = SpecialRecipeBuilder.special(::InvertDiaphanousBlockRecipe)
+    private val customCraftingTable = SpecialRecipeBuilder.special(::CustomCraftingTableRecipe)
 
     //TODO:
     // Potions of Collapse
-    // Crafting Tables
     // Imbues
     // Diamond Breaker
 

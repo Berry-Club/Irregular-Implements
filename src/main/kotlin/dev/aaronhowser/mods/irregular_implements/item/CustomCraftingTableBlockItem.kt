@@ -16,7 +16,7 @@ class CustomCraftingTableBlockItem : ItemNameBlockItem(
 
     companion object {
         fun ofBlock(block: Block): ItemStack {
-            val stack = ModItems.CUSTOM_CRAFTING_TABLE_BLOCK.toStack()
+            val stack = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
 
             stack.set(ModDataComponents.BLOCK, block)
 

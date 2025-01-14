@@ -31,6 +31,9 @@ object ModRecipeSerializers {
     val INVERT_DIAPHANOUS_BLOCK: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
         registerRecipeSerializer("invert_diaphanous_block") { SimpleCraftingRecipeSerializer(::InvertDiaphanousBlockRecipe) }
 
+    val CUSTOM_CRAFTING_TABLE: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+        registerRecipeSerializer("custom_crafting_table") { SimpleCraftingRecipeSerializer(::CustomCraftingTableRecipe) }
+
     private fun registerRecipeSerializer(
         name: String,
         factory: () -> RecipeSerializer<*>

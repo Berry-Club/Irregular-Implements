@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-05T16:17:12.9328914	Recipes
+// 1.21.1	2025-01-14T00:55:27.3335423	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -271,6 +271,7 @@ b7a975a0b4bb127701d080cbc1b08c80464132d1 data/irregular_implements/recipe/contac
 8b1e9543cd9ff4da5005ad1161ebdcee40d443c6 data/irregular_implements/recipe/contact_lever.json
 9558811cd79eea9f9e235bfbe0b9f23529af034f data/irregular_implements/recipe/corrector_plate.json
 c15b7316741f5513fc417957265db1208530b8f1 data/irregular_implements/recipe/crimson_platform.json
+1507bda1275a2ddf92d6f5fc36f5da1c69004d09 data/irregular_implements/recipe/custom_crafting_table.json
 041c922fcafd357f55e5deca1d75e56323dbc295 data/irregular_implements/recipe/dark_oak_platform.json
 225ceba3e375990338ffa708d760faa8733797e9 data/irregular_implements/recipe/diamond_breaker.json
 eac70c3d91f32f942d4cba40f92c8c2c536885c9 data/irregular_implements/recipe/diaphanous_block.json

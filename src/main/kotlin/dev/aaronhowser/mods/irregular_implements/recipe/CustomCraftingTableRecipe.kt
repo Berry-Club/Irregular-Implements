@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe
 
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
+import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem
@@ -49,6 +50,6 @@ class CustomCraftingTableRecipe(
     }
 
     override fun getSerializer(): RecipeSerializer<*> {
-        TODO("Not yet implemented")
+        return ModRecipeSerializers.CUSTOM_CRAFTING_TABLE.get()
     }
 }

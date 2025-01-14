@@ -48,8 +48,8 @@ object ModItems {
         register("divining_rod") { DiviningRodItem() }
     val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
         register("diaphanous_block") { DiaphanousBlockItem() }
-    val CUSTOM_CRAFTING_TABLE_BLOCK: DeferredItem<CustomCraftingTableBlockItem> =
-        register("custom_crafting_table_block") { CustomCraftingTableBlockItem() }
+    val CUSTOM_CRAFTING_TABLE: DeferredItem<CustomCraftingTableBlockItem> =
+        register("custom_crafting_table") { CustomCraftingTableBlockItem() }
 
     // Ingredients
     val TRANSFORMATION_CORE = basic("transformation_core")
