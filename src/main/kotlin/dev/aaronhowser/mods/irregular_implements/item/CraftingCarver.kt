@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
@@ -69,7 +70,18 @@ class CraftingCarver : Item(
         return if (tryReplaceWithCraftingTable(level, clickedPos)) {
             InteractionResult.SUCCESS
         } else {
-            InteractionResult.FAIL
+            InteractionResult.PASS
+        }
+    }
+
+    override fun onItemUseFirst(stack: ItemStack, context: UseOnContext): InteractionResult {
+        val level = context.level
+        val clickedPos = context.clickedPos
+
+        return if (tryRemoveCraftingTable(level, clickedPos)) {
+            InteractionResult.SUCCESS
+        } else {
+            InteractionResult.PASS
         }
     }
 
