@@ -34,8 +34,7 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
         val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
             ?: return super.getSoundType(state, level, pos, entity)
 
-        return blockEntity.renderedBlock
-            .defaultBlockState()
+        return blockEntity.renderedBlockState
             .getSoundType(level, pos, entity)
     }
 
@@ -47,7 +46,7 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
             player,
             LevelEvent.PARTICLES_DESTROY_BLOCK,
             pos,
-            getId(blockEntity.renderedBlock.defaultBlockState())
+            getId(blockEntity.renderedBlockState)
         )
     }
 

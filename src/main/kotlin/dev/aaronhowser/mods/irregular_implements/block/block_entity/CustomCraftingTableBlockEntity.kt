@@ -1,16 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtUtils
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -21,10 +19,10 @@ class CustomCraftingTableBlockEntity(
 ) : BlockEntity(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
 
     companion object {
-        const val BLOCK_NBT = "Block"
+        const val RENDERED_BLOCK_STATE = "RenderedBlockState"
     }
 
-    var renderedBlock: Block = Blocks.OAK_PLANKS
+    var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
         set(value) {
             field = value
             setChanged()
@@ -33,24 +31,20 @@ class CustomCraftingTableBlockEntity(
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
-        tag.putString(BLOCK_NBT, BuiltInRegistries.BLOCK.getKey(this.renderedBlock).toString())
+        val blockStateTag = NbtUtils.writeBlockState(renderedBlockState)
+        tag.put(RENDERED_BLOCK_STATE, blockStateTag)
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
 
-        val blockString = tag.getString(BLOCK_NBT)
-        val blockRl = ResourceLocation.tryParse(blockString)
+        val level = this.level ?: return
 
-        if (blockRl != null) {
-            val block = BuiltInRegistries.BLOCK.getOptional(blockRl)
-
-            if (block.isPresent) {
-                this.renderedBlock = block.get()
-            } else {
-                IrregularImplements.LOGGER.error("A Custom Crafting Table at ${blockPos.x} ${blockPos.y} ${blockPos.z} tried to load a block that doesn't exist: $blockString")
-            }
-        }
+        val blockStateTag = tag.getCompound(RENDERED_BLOCK_STATE)
+        renderedBlockState = NbtUtils.readBlockState(
+            level.holderLookup(Registries.BLOCK),
+            blockStateTag
+        )
     }
 
     // Syncs with client

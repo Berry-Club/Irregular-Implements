@@ -18,15 +18,12 @@ class CustomCraftingTableBlockEntityRenderer(
         packedLight: Int,
         packedOverlay: Int
     ) {
-
-        val blockToRender = blockEntity.renderedBlock
-
         poseStack.pushPose()
 
         poseStack.scale(0.999f, 0.999f, 0.999f)
 
         context.blockRenderDispatcher.renderSingleBlock(
-            blockToRender.defaultBlockState(),
+            blockEntity.renderedBlockState,
             poseStack,
             bufferSource,
             packedLight,
