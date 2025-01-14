@@ -9,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousB
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.SpectreIlluminatorEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -208,6 +209,11 @@ object ClientModBusEvents {
         event.registerItem(
             DiaphanousBEWLR.clientItemExtensions,
             ModItems.DIAPHANOUS_BLOCK.get()
+        )
+
+        event.registerItem(
+            CustomCraftingTableBEWLR.clientItemExtensions,
+            ModItems.CUSTOM_CRAFTING_TABLE.get()
         )
 
         event.registerItem(
