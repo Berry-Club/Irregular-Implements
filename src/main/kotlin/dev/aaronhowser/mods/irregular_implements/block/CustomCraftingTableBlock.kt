@@ -10,13 +10,17 @@ import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerLevelAccess
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.storage.loot.LootParams
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.HitResult
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -51,16 +55,6 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 
     // Stuff that uses the BE's rendered block state
 
-    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.onRemove(state, level, pos, newState, movedByPiston)
-
-        val blockRendered = blockEntity.renderedBlockState
-        dropResources(blockRendered, level, pos)
-
-        level.removeBlockEntity(pos)
-    }
-
     override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
         val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
             ?: return super.getSoundType(state, level, pos, entity)
@@ -81,5 +75,25 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
         )
     }
 
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+        dropResources(state, level, pos)
+        level.removeBlockEntity(pos)
+    }
+
+    override fun getDrops(state: BlockState, params: LootParams.Builder): List<ItemStack> {
+        val blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY)
+
+        if (blockEntity is CustomCraftingTableBlockEntity) {
+            return blockEntity.renderedBlockState.getDrops(params)
+        }
+
+        return super.getDrops(state, params)
+    }
+
+    override fun getCloneItemStack(state: BlockState, target: HitResult, level: LevelReader, pos: BlockPos, player: Player): ItemStack {
+        val block = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
+
+        return block.renderedBlockState.getCloneItemStack(target, level, pos, player)
+    }
 
 }
