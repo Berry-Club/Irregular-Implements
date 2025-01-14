@@ -1,16 +1,20 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
-import net.minecraft.world.item.ItemNameBlockItem
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.block.Block
 
-class CustomCraftingTableBlockItem : ItemNameBlockItem(
+class CustomCraftingTableBlockItem : BlockItem(
     ModBlocks.CUSTOM_CRAFTING_TABLE.get(), Properties()
 ) {
 
@@ -46,6 +50,17 @@ class CustomCraftingTableBlockItem : ItemNameBlockItem(
         }
 
         return result
+    }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        val block = stack.get(ModDataComponents.BLOCK)
+
+        if (block != null) {
+            val component = ModLanguageProvider.Tooltips.CUSTOM_CRAFTING_TABLE_BLOCK
+                .toGrayComponent(block.name)
+
+            tooltipComponents.add(component)
+        }
     }
 
 }

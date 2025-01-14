@@ -549,6 +549,7 @@ class ModLanguageProvider(
         const val IRON_DROPPER_ONLY_SOUND = "tooltip.irregular_implements.iron_dropper_only_sound"
         const val IRON_DROPPER_ONLY_PARTICLES = "tooltip.irregular_implements.iron_dropper_only_particles"
         const val IRON_DROPPER_BOTH_EFFECTS = "tooltip.irregular_implements.iron_dropper_both_effects"
+        const val CUSTOM_CRAFTING_TABLE_BLOCK = "tooltip.irregular_implements.custom_crafting_table_block"
     }
 
     private fun addTooltips() {
@@ -595,6 +596,7 @@ class ModLanguageProvider(
         add(Tooltips.IRON_DROPPER_ONLY_SOUND, "Sound effects")
         add(Tooltips.IRON_DROPPER_ONLY_PARTICLES, "Particle effects")
         add(Tooltips.IRON_DROPPER_BOTH_EFFECTS, "Sound & particle effects")
+        add(Tooltips.CUSTOM_CRAFTING_TABLE_BLOCK, "Block: %s")
     }
 
     object Info {

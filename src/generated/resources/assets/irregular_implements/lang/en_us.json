@@ -506,6 +506,7 @@
   "tooltip.irregular_implements.coil_generates": "Generates %s RF/t",
   "tooltip.irregular_implements.coil_transfers": "Transfers %s RF/t",
   "tooltip.irregular_implements.compressed_slime_AMOUNT": "Compression level %d",
+  "tooltip.irregular_implements.custom_crafting_table_block": "Block: %s",
   "tooltip.irregular_implements.doesnt_stop_message": "Doesn't stop message",
   "tooltip.irregular_implements.entity_filter_entity": "Entity Type: %s",
   "tooltip.irregular_implements.forget_lazy_shape": "Forget Lazy Shape",
