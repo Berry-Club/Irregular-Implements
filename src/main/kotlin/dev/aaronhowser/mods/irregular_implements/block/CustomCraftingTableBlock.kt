@@ -1,13 +1,22 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.CustomCraftingTableMenu
 import net.minecraft.core.BlockPos
+import net.minecraft.stats.Stats
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.SimpleMenuProvider
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -19,6 +28,25 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 
     override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
         return Shapes.empty()
+    }
+
+    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS
+        } else {
+            player.openMenu(state.getMenuProvider(level, pos))
+            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE)
+            return InteractionResult.CONSUME
+        }
+    }
+
+    override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
+        return SimpleMenuProvider(
+            { containerId, playerInventory, player ->
+                CustomCraftingTableMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
+            },
+            this.name
+        )
     }
 
 }
