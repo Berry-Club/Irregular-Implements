@@ -85,7 +85,7 @@ class ModBlockStateProvider(
                 side
             )
             .texture("particle", top)
-            .renderType(RenderType.cutout().name)
+            .renderType(RenderType.translucent().name)
 
         simpleBlockWithItem(block, model)
     }

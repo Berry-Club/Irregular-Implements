@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.block.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
@@ -189,6 +190,11 @@ object ClientModBusEvents {
         event.registerBlockEntityRenderer(
             ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(),
             ::SpectreEnergyInjectorBlockEntityRenderer
+        )
+
+        event.registerBlockEntityRenderer(
+            ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(),
+            ::CustomCraftingTableBlockEntityRenderer
         )
 
         event.registerEntityRenderer(

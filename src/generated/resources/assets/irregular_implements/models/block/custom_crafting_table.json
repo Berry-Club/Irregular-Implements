@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube",
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:translucent",
   "textures": {
     "down": "irregular_implements:block/custom_crafting_table/bottom",
     "east": "irregular_implements:block/custom_crafting_table/side",
