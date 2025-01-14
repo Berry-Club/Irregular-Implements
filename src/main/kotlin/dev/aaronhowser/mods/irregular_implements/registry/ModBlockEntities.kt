@@ -129,4 +129,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val CUSTOM_CRAFTING_TABLE: DeferredHolder<BlockEntityType<*>, BlockEntityType<CustomCraftingTableBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("custom_crafting_table", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> CustomCraftingTableBlockEntity(pos, state) },
+                ModBlocks.CUSTOM_CRAFTING_TABLE.get()
+            ).build(null)
+        })
+
 }

@@ -63,6 +63,31 @@ class ModBlockStateProvider(
         spectreLogs()
         blockBreaker()
         ironDropper()
+        customCraftingTable()
+    }
+
+    private fun customCraftingTable() {
+        val block = ModBlocks.CUSTOM_CRAFTING_TABLE.get()
+
+        val top = modLoc("block/custom_crafting_table/top")
+        val bottom = modLoc("block/custom_crafting_table/bottom")
+        val front = modLoc("block/custom_crafting_table/front")
+        val side = modLoc("block/custom_crafting_table/side")
+
+        val model = models()
+            .cube(
+                name(block),
+                bottom,
+                top,
+                front,
+                side,
+                side,
+                side
+            )
+            .texture("particle", top)
+            .renderType(RenderType.cutout().name)
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun ironDropper() {

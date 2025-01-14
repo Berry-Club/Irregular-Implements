@@ -75,6 +75,7 @@ class ModRecipeProvider(
     // Potions of Collapse
     // Crafting Tables
     // Imbues
+    // Diamond Breaker
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
