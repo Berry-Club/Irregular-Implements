@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.EntityBlock
 import net.neoforged.neoforge.common.Tags
 
+//TODO: EMI
 class CustomCraftingTableRecipe(
     craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
