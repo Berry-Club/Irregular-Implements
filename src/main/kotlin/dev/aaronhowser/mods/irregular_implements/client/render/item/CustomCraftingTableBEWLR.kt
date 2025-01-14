@@ -25,6 +25,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
         }
     }
 
+    //TODO: Render the crafting table part
     override fun renderByItem(
         stack: ItemStack,
         displayContext: ItemDisplayContext,

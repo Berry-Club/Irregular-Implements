@@ -32,6 +32,5 @@ class CustomCraftingTableBlockEntityRenderer(
         )
 
         poseStack.popPose()
-
     }
 }
