@@ -24,6 +24,7 @@ class CustomCraftingTableRecipe(
     }
 
     override fun matches(input: CraftingInput, level: Level): Boolean {
+        if (input.width() < 3 || input.height() < 3) return false
         if (!input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)) return false
 
         val plankStack = input.getItem(plankSlots.first())
