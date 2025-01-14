@@ -51,6 +51,16 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 
     // Stuff that uses the BE's rendered block state
 
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
+            ?: return super.onRemove(state, level, pos, newState, movedByPiston)
+
+        val blockRendered = blockEntity.renderedBlockState
+        dropResources(blockRendered, level, pos)
+
+        level.removeBlockEntity(pos)
+    }
+
     override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
         val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
             ?: return super.getSoundType(state, level, pos, entity)
