@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.ImageButton
@@ -32,21 +33,24 @@ class CustomCraftingTableScreen(
         recipeBookComponent.init(this.width, this.height, this.minecraft!!, this.widthTooNarrow, this.menu)
         this.leftPos = recipeBookComponent.updateScreenPosition(this.width, this.imageWidth)
 
-        val recipeButton = ImageButton(
-            this.leftPos + 5,
-            this.height / 2 - 49,
-            20,
-            18,
-            RecipeBookComponent.RECIPE_BUTTON_SPRITES
-        ) { button: Button ->
-            recipeBookComponent.toggleVisibility()
-            this.leftPos = recipeBookComponent.updateScreenPosition(this.width, this.imageWidth)
-            button.setPosition(this.leftPos + 5, this.height / 2 - 49)
+        if (!ClientConfig.HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON.get()) {
+            val recipeButton = ImageButton(
+                this.leftPos + 5,
+                this.height / 2 - 49,
+                20,
+                18,
+                RecipeBookComponent.RECIPE_BUTTON_SPRITES
+            ) { button: Button ->
+                recipeBookComponent.toggleVisibility()
+                this.leftPos = recipeBookComponent.updateScreenPosition(this.width, this.imageWidth)
+                button.setPosition(this.leftPos + 5, this.height / 2 - 49)
+            }
+
+            this.addRenderableWidget(recipeButton)
+
+            this.addWidget(this.recipeBookComponent)
         }
 
-        this.addRenderableWidget(recipeButton)
-
-        this.addWidget(this.recipeBookComponent)
         this.titleLabelX = 29
     }
 
