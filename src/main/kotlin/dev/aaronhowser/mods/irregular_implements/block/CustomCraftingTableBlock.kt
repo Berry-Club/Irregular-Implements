@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
+import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import dev.aaronhowser.mods.irregular_implements.menu.CustomCraftingTableMenu
 import net.minecraft.core.BlockPos
 import net.minecraft.stats.Stats
@@ -17,8 +18,6 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.storage.loot.LootParams
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.minecraft.world.phys.shapes.Shapes
@@ -59,8 +58,11 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
         val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
             ?: return super.getSoundType(state, level, pos, entity)
 
-        return blockEntity.renderedBlockState
-            .getSoundType(level, pos, entity)
+        // Failsafe
+        val renderedState = blockEntity.renderedBlockState
+        if (renderedState.`is`(this)) return SoundType.WOOD
+
+        return renderedState.getSoundType(level, pos, entity)
     }
 
     override fun spawnDestroyParticles(level: Level, player: Player, pos: BlockPos, state: BlockState) {
@@ -76,9 +78,9 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
     }
 
     override fun getCloneItemStack(state: BlockState, target: HitResult, level: LevelReader, pos: BlockPos, player: Player): ItemStack {
-        val block = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
+        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
 
-        return block.renderedBlockState.getCloneItemStack(target, level, pos, player)
+        return CustomCraftingTableBlockItem.ofBlock(blockEntity.renderedBlockState.block)
     }
 
 }
