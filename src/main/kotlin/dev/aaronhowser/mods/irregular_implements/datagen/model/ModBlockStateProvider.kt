@@ -87,7 +87,7 @@ class ModBlockStateProvider(
             .texture("particle", top)
             .renderType(RenderType.translucent().name)
 
-        simpleBlockWithItem(block, model)
+        simpleBlock(block, model)
     }
 
     private fun ironDropper() {

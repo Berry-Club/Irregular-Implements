@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-05T15:04:54.1609674	Item Models: irregular_implements
+// 1.21.1	2025-01-14T01:49:53.5869079	Item Models: irregular_implements
 5847a425ad160ceca89a9394ffba2de05ea6b7b4 assets/irregular_implements/models/item/advanced_redstone_repeater.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -12,6 +12,7 @@
 382ac8ab58c1429edd81e9d924456640c69cf852 assets/irregular_implements/models/item/block_replacer.json
 d8ab2c37c2bb391cba73e11c8e8fd457c739381b assets/irregular_implements/models/item/bottle_of_air.json
 9ffed579675236228264a6cf2263b5081955c97d assets/irregular_implements/models/item/chunk_analyzer.json
+e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/irregular_implements/models/item/custom_crafting_table.json
 b793288a9f130eddd1038a21365dac3c955dcdcc assets/irregular_implements/models/item/diamond_breaker.json
 e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/irregular_implements/models/item/diaphanous_block.json
 1750e1eaa9fd457c1dbb33284cff44b428f6068e assets/irregular_implements/models/item/divining_rod.json

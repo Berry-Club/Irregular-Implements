@@ -73,7 +73,8 @@ class ModItemModelProvider(
     private fun blockEntityWithoutLevelRenderers() {
         val blockEntityWithoutLevelRenderers = listOf(
             ModItems.DIAPHANOUS_BLOCK,
-            ModItems.SPECTRE_ILLUMINATOR
+            ModItems.SPECTRE_ILLUMINATOR,
+            ModItems.CUSTOM_CRAFTING_TABLE
         ).map { it.get() }
 
         for (item in blockEntityWithoutLevelRenderers) {
