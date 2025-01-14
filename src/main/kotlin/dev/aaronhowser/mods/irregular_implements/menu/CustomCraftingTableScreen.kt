@@ -101,7 +101,10 @@ class CustomCraftingTableScreen(
         return recipeBookComponent.hasClickedOutside(mouseX, mouseY, this.leftPos, this.topPos, this.imageWidth, this.imageHeight, mouseButton) && flag
     }
 
-    override fun slotClicked(slot: Slot, slotId: Int, mouseButton: Int, type: ClickType) {
+    // slot can be null, it just wasn't annotated as nullable in the super method
+    @Suppress("WRONG_NULLABILITY_FOR_JAVA_OVERRIDE")
+    override fun slotClicked(slot: Slot?, slotId: Int, mouseButton: Int, type: ClickType) {
+        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         super.slotClicked(slot, slotId, mouseButton, type)
         recipeBookComponent.slotClicked(slot)
     }
