@@ -302,6 +302,7 @@ class ModLanguageProvider(
     }
 
     private fun addBlocks() {
+        addBlock(ModBlocks.CUSTOM_CRAFTING_TABLE, "Custom Crafting Table")
         addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
         addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")
         addBlock(ModBlocks.ENDER_BRIDGE, "Ender Bridge")
