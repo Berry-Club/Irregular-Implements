@@ -48,8 +48,8 @@ object ModItems {
         register("divining_rod") { DiviningRodItem() }
     val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
         register("diaphanous_block") { DiaphanousBlockItem() }
-    val CRAFTING_SCRAPER: DeferredItem<CraftingScraper> =
-        register("crafting_scraper") { CraftingScraper() }
+    val CRAFTING_SCRAPER: DeferredItem<CraftingCarver> =
+        register("crafting_carver") { CraftingCarver() }
 
     // Ingredients
     val TRANSFORMATION_CORE = basic("transformation_core")

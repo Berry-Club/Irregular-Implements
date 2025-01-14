@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.CustomCraftingTableMenu
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.MenuProvider
@@ -13,13 +12,11 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
-import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -27,6 +24,10 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return CustomCraftingTableBlockEntity(pos, state)
+    }
+
+    override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
+        return Shapes.empty()
     }
 
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
@@ -50,21 +51,6 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 
     // Stuff that uses the BE's rendered block state
 
-    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.getCollisionShape(state, level, pos, context)
-
-        return blockEntity.renderedBlockState.getCollisionShape(level, pos, context)
-    }
-
-    override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
-        return Shapes.empty()
-    }
-
-    override fun hasDynamicShape(): Boolean {
-        return true
-    }
-
     override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
         val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
             ?: return super.getSoundType(state, level, pos, entity)
@@ -85,16 +71,5 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
         )
     }
 
-    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.updateShape(state, direction, neighborState, level, pos, neighborPos)
-
-        val newRenderedShape = blockEntity.renderedBlockState.updateShape(direction, neighborState, level, pos, neighborPos)
-        if (blockEntity.renderedBlockState != newRenderedShape) {
-            blockEntity.renderedBlockState = newRenderedShape
-        }
-
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos)
-    }
 
 }

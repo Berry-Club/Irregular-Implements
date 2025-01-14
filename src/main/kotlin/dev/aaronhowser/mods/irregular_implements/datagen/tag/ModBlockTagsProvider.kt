@@ -40,9 +40,17 @@ class ModBlockTagsProvider(
         val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
         val C_STRIPPED_WOODS = common("stripped_woods")
         val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
+        val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(CUSTOM_CRAFTING_TABLE_BLACKLIST)
+            .add(
+                Blocks.AIR,
+                Blocks.BEDROCK,
+                Blocks.BARRIER,
+            )
 
         this.tag(CONVERTS_TO_SPECTRE_SAPLING)
             .addTag(
