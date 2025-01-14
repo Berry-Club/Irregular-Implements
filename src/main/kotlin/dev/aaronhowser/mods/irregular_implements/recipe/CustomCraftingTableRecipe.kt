@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.recipe
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingBookCategory
@@ -28,7 +28,7 @@ class CustomCraftingTableRecipe(
 
         val plankStack = input.getItem(plankSlots.first())
 
-        val plankStackValid = plankStack.`is`(ItemTags.PLANKS)
+        val plankStackValid = plankStack.`is`(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
                 && plankStack.item is BlockItem
                 && (plankStack.item as BlockItem).block !is EntityBlock
 

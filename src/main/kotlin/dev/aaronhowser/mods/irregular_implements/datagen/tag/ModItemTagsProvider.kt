@@ -33,6 +33,7 @@ class ModItemTagsProvider(
         val C_RODS_OBSIDIAN = common("rods/obsidian")
         val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
         val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
+        val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -44,6 +45,9 @@ class ModItemTagsProvider(
     //TODO: Copy all block tags to item tags
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(CUSTOM_CRAFTING_TABLE_ITEMS)
+            .addTag(ItemTags.PLANKS)
 
         this.tag(ItemTags.MINING_LOOT_ENCHANTABLE)
             .add(
