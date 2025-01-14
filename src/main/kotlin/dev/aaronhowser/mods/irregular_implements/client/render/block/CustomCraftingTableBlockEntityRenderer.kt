@@ -21,6 +21,7 @@ class CustomCraftingTableBlockEntityRenderer(
         poseStack.pushPose()
 
         poseStack.scale(0.999f, 0.999f, 0.999f)
+        poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 
         context.blockRenderDispatcher.renderSingleBlock(
             blockEntity.renderedBlockState,
