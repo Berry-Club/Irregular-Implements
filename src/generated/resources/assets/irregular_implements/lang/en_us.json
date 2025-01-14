@@ -359,6 +359,7 @@
   "irregular_implements.configuration.diviningRodCheckRadius": "Divining Rod Check Radius",
   "irregular_implements.configuration.enderRate": "Ender Coil Rate",
   "irregular_implements.configuration.genesisRate": "Genesis Coil Rate",
+  "irregular_implements.configuration.hideCustomCraftingTableRecipeBookButton": "Hide Recipe Book Button In Custom Crafting Table",
   "irregular_implements.configuration.imbueProcChance": "Spectre Imbue Chance",
   "irregular_implements.configuration.numberRate": "Number Coil Rate",
   "irregular_implements.configuration.portableEnderBridgeRange": "Portable Ender Bridge Range",
