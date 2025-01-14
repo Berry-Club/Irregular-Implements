@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -28,8 +29,40 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
         return CustomCraftingTableBlockEntity(pos, state)
     }
 
+    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS
+        } else {
+            player.openMenu(state.getMenuProvider(level, pos))
+            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE)
+            return InteractionResult.CONSUME
+        }
+    }
+
+    override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
+        return SimpleMenuProvider(
+            { containerId, playerInventory, player ->
+                CustomCraftingTableMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
+            },
+            this.name
+        )
+    }
+
+    // Stuff that uses the BE's rendered block state
+
+    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
+            ?: return super.getCollisionShape(state, level, pos, context)
+
+        return blockEntity.renderedBlockState.getCollisionShape(level, pos, context)
+    }
+
     override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
         return Shapes.empty()
+    }
+
+    override fun hasDynamicShape(): Boolean {
+        return true
     }
 
     override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
@@ -49,25 +82,6 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
             LevelEvent.PARTICLES_DESTROY_BLOCK,
             pos,
             getId(blockEntity.renderedBlockState)
-        )
-    }
-
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS
-        } else {
-            player.openMenu(state.getMenuProvider(level, pos))
-            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE)
-            return InteractionResult.CONSUME
-        }
-    }
-
-    override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
-        return SimpleMenuProvider(
-            { containerId, playerInventory, player ->
-                CustomCraftingTableMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
-            },
-            this.name
         )
     }
 
