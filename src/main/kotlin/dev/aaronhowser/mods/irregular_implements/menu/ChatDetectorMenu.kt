@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -67,7 +68,7 @@ class ChatDetectorMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return true
+        return stillValid(this.containerLevelAccess, player, ModBlocks.CHAT_DETECTOR.get())
     }
 
 }

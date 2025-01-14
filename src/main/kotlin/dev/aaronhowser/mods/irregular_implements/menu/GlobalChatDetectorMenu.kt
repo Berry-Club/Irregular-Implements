@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDe
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -133,6 +134,6 @@ class GlobalChatDetectorMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return globalChatDetectorContainer.stillValid(player)
+        return stillValid(this.containerLevelAccess, player, ModBlocks.GLOBAL_CHAT_DETECTOR.get())
     }
 }
