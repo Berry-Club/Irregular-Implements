@@ -88,7 +88,7 @@ object ModBlocks {
     val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
         registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
     val CUSTOM_CRAFTING_TABLE: DeferredBlock<CustomCraftingTableBlock> =    // Maybe something along the lines of a Crafting Carver, which replaces a block with a Custom Crafting Table?
-        registerBlock("custom_crafting_table") { CustomCraftingTableBlock() }
+        registerBlockWithoutItem("custom_crafting_table") { CustomCraftingTableBlock() }
 
     // Glass
     val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
