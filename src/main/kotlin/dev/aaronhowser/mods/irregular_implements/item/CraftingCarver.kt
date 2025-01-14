@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCrafti
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
+import net.minecraft.tags.BlockTags
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -24,6 +25,9 @@ class CraftingCarver : Item(
             val stateThere = level.getBlockState(pos)
             if (stateThere.isAir
                 || stateThere.`is`(ModBlockTagsProvider.CUSTOM_CRAFTING_TABLE_BLACKLIST)
+                || stateThere.`is`(BlockTags.NEEDS_IRON_TOOL)
+                || stateThere.`is`(BlockTags.NEEDS_DIAMOND_TOOL)
+                || (stateThere.requiresCorrectToolForDrops() && stateThere.getDestroySpeed(level, pos) !in 0f..40f)
                 || !stateThere.isCollisionShapeFullBlock(level, pos)
             ) return false
 
