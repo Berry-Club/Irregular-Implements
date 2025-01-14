@@ -5,20 +5,23 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.player.StackedContents
-import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.inventory.RecipeBookMenu
-import net.minecraft.world.inventory.RecipeBookType
-import net.minecraft.world.inventory.Slot
+import net.minecraft.world.inventory.*
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingInput
 import net.minecraft.world.item.crafting.CraftingRecipe
 import net.minecraft.world.item.crafting.RecipeHolder
 
+// This class is pretty much a blind copy of CraftingMenu
 class CustomCraftingTableMenu(
     containerId: Int,
     private val playerInventory: Inventory,
     private val access: ContainerLevelAccess
 ) : RecipeBookMenu<CraftingInput, CraftingRecipe>(ModMenuTypes.CUSTOM_CRAFTING_TABLE.get(), containerId) {
+
+    private val craftSlots: CraftingContainer = TransientCraftingContainer(this, 3, 3)
+    private val resultSlots = ResultContainer()
+
+    private val player = playerInventory.player
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -27,75 +30,94 @@ class CustomCraftingTableMenu(
                 ContainerLevelAccess.NULL
             )
 
-    private fun handleCraftingSlot(player: Player, stackInSlot: ItemStack, itemStack: ItemStack, slot: Slot): Boolean {
-        access.execute { level, pos -> stackInSlot.item.onCraftedBy(stackInSlot, level, player) }
-
-        if (!this.moveItemStackTo(
-                stackInSlot,
-                10,
-                46,
-                true
+    init {
+        this.addSlot(
+            ResultSlot(
+                playerInventory.player,
+                this.craftSlots,
+                this.resultSlots,
+                0,
+                124,
+                35
             )
-        ) return false
+        )
 
-        slot.onQuickCraft(stackInSlot, itemStack)
+        for (row in 0..2) {
+            for (column in 0..2) {
+                val index = column + row * 3
+                val x = 30 + column * 18
+                val y = 17 + row * 18
 
-        return true
-    }
-
-    private fun handleInventorySlot(stackInSlot: ItemStack, index: Int): Boolean {
-        if (!this.moveItemStackTo(stackInSlot, 1, 10, false)) {
-            return if (index < 37) {
-                !this.moveItemStackTo(stackInSlot, 37, 46, false)
-            } else {
-                !this.moveItemStackTo(stackInSlot, 10, 37, false)
+                this.addSlot(Slot(this.craftSlots, index, x, y))
             }
         }
 
-        return true
-    }
+        for (row in 0..2) {
+            for (column in 0..8) {
+                val index = column + row * 9 + 9
+                val x = 8 + column * 18
+                val y = 84 + row * 18
 
-    private fun finalizeSlotState(
-        stackInSlot: ItemStack,
-        itemStack: ItemStack,
-        slot: Slot,
-        player: Player,
-        index: Int
-    ): ItemStack {
-
-        if (stackInSlot.isEmpty) {
-            slot.set(ItemStack.EMPTY)
-        } else {
-            slot.setChanged()
+                this.addSlot(Slot(playerInventory, index, x, y))
+            }
         }
 
-        if (stackInSlot.count == itemStack.count) return ItemStack.EMPTY
+        for (index in 0..8) {
+            val x = 8 + index * 18
+            val y = 142
 
-        slot.onTake(player, stackInSlot)
-        if (index == 0) {
-            player.drop(stackInSlot, false)
+            this.addSlot(Slot(playerInventory, index, x, y))
         }
-
-        return itemStack
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
         var itemstack = ItemStack.EMPTY
-
         val slot = slots.getOrNull(index)
 
-        if (slot == null || !slot.hasItem()) return itemstack
+        if (slot != null && slot.hasItem()) {
+            val itemstack1 = slot.item
+            itemstack = itemstack1.copy()
+            if (index == 0) {
+                access.execute { level, pos -> itemstack1.item.onCraftedBy(itemstack1, level, player) }
 
-        val stackInSlot = slot.item
-        itemstack = stackInSlot.copy()
+                if (!this.moveItemStackTo(itemstack1, 10, 46, true)) {
+                    return ItemStack.EMPTY
+                }
 
-        when (index) {
-            0 -> if (!handleCraftingSlot(player, stackInSlot, itemstack, slot)) return ItemStack.EMPTY
-            in 10..45 -> if (!handleInventorySlot(stackInSlot, index)) return ItemStack.EMPTY
-            else -> if (!this.moveItemStackTo(stackInSlot, 10, 46, false)) return ItemStack.EMPTY
+                slot.onQuickCraft(itemstack1, itemstack)
+            } else if (index in 10..45) {
+
+                if (!this.moveItemStackTo(itemstack1, 1, 10, false)) {
+                    if (index < 37) {
+                        if (!this.moveItemStackTo(itemstack1, 37, 46, false)) {
+                            return ItemStack.EMPTY
+                        }
+                    } else if (!this.moveItemStackTo(itemstack1, 10, 37, false)) {
+                        return ItemStack.EMPTY
+                    }
+                }
+
+            } else if (!this.moveItemStackTo(itemstack1, 10, 46, false)) {
+                return ItemStack.EMPTY
+            }
+
+            if (itemstack1.isEmpty) {
+                slot.setByPlayer(ItemStack.EMPTY)
+            } else {
+                slot.setChanged()
+            }
+
+            if (itemstack1.count == itemstack.count) {
+                return ItemStack.EMPTY
+            }
+
+            slot.onTake(player, itemstack1)
+            if (index == 0) {
+                player.drop(itemstack1, false)
+            }
         }
 
-        return finalizeSlotState(stackInSlot, itemstack, slot, player, index)
+        return itemstack
     }
 
     override fun stillValid(player: Player): Boolean {
@@ -103,39 +125,40 @@ class CustomCraftingTableMenu(
     }
 
     override fun fillCraftSlotsStackedContents(itemHelper: StackedContents) {
-        TODO("Not yet implemented")
+        this.craftSlots.fillStackedContents(itemHelper)
     }
 
     override fun clearCraftingContent() {
-        TODO("Not yet implemented")
+        this.craftSlots.clearContent()
+        this.resultSlots.clearContent()
     }
 
     override fun getResultSlotIndex(): Int {
-        TODO("Not yet implemented")
+        return 0
     }
 
     override fun getGridWidth(): Int {
-        TODO("Not yet implemented")
+        return this.craftSlots.width
     }
 
     override fun getGridHeight(): Int {
-        TODO("Not yet implemented")
+        return this.craftSlots.height
     }
 
     override fun getSize(): Int {
-        TODO("Not yet implemented")
+        return 10
     }
 
     override fun getRecipeBookType(): RecipeBookType {
-        TODO("Not yet implemented")
+        return RecipeBookType.CRAFTING
     }
 
     override fun shouldMoveToInventory(slotIndex: Int): Boolean {
-        TODO("Not yet implemented")
+        return slotIndex != this.resultSlotIndex
     }
 
     override fun recipeMatches(recipe: RecipeHolder<CraftingRecipe>): Boolean {
-        TODO("Not yet implemented")
+        return recipe.value().matches(craftSlots.asCraftInput(), this.player.level())
     }
 
 }

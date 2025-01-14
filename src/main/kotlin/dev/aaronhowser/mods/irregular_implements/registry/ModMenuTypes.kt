@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.menu.*
-import net.minecraft.client.gui.screens.inventory.CraftingScreen
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.inventory.MenuType
@@ -46,7 +45,7 @@ object ModMenuTypes {
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
         event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
         event.register(GLOBAL_CHAT_DETECTOR.get(), ::GlobalChatDetectorScreen)
-        event.register(CUSTOM_CRAFTING_TABLE.get(), ::CraftingScreen)
+        event.register(CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableScreen)
     }
 
 }
