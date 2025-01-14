@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.menu.*
+import net.minecraft.client.gui.screens.inventory.CraftingScreen
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.inventory.MenuType
@@ -35,11 +36,17 @@ object ModMenuTypes {
             MenuType(::GlobalChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val CUSTOM_CRAFTING_TABLE =
+        MENU_TYPE_REGISTRY.register("custom_crafting_table", Supplier {
+            MenuType(::CustomCraftingTableMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
         event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
         event.register(GLOBAL_CHAT_DETECTOR.get(), ::GlobalChatDetectorScreen)
+        event.register(CUSTOM_CRAFTING_TABLE.get(), ::CraftingScreen)
     }
 
 }
