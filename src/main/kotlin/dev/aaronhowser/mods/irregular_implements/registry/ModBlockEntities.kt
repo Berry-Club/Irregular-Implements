@@ -145,4 +145,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val NOTIFICATION_INTERFACE: DeferredHolder<BlockEntityType<*>, BlockEntityType<NotificationInterfaceBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("notification_interface", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> NotificationInterfaceBlockEntity(pos, state) },
+                ModBlocks.NOTIFICATION_INTERFACE.get()
+            ).build(null)
+        })
+
 }
