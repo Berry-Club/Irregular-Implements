@@ -70,15 +70,6 @@ class IgniterBlockEntity(
             setChanged()
         }
 
-    fun cycleMode() {
-        this.mode = when (this.mode) {
-            Mode.TOGGLE -> Mode.IGNITE
-            Mode.IGNITE -> Mode.KEEP_IGNITED
-            Mode.KEEP_IGNITED -> Mode.TOGGLE
-        }
-    }
-
-
     fun blockUpdated(isPowered: Boolean, wasEnabled: Boolean) {
         val level = this.level ?: return
 

@@ -21,6 +21,10 @@ class IgniterMenu(
                 SimpleContainerData(IgniterBlockEntity.CONTAINER_DATA_SIZE)
             )
 
+    companion object {
+        const val CYCLE_MODE_BUTTON_ID = 0
+    }
+
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
         return ItemStack.EMPTY
     }
@@ -29,7 +33,19 @@ class IgniterMenu(
         return true
     }
 
+    var mode: IgniterBlockEntity.Mode
+        get() = IgniterBlockEntity.Mode.entries[containerData.get(IgniterBlockEntity.MODE_INDEX)]
+        set(value) = containerData.set(IgniterBlockEntity.MODE_INDEX, value.ordinal)
+
     override fun handleButtonPressed(buttonId: Int) {
-        TODO("Not yet implemented")
+        if (buttonId != CYCLE_MODE_BUTTON_ID) return
+
+        val nextMode = when (mode) {
+            IgniterBlockEntity.Mode.KEEP_IGNITED -> IgniterBlockEntity.Mode.IGNITE
+            IgniterBlockEntity.Mode.IGNITE -> IgniterBlockEntity.Mode.TOGGLE
+            IgniterBlockEntity.Mode.TOGGLE -> IgniterBlockEntity.Mode.KEEP_IGNITED
+        }
+
+        this.mode = nextMode
     }
 }
