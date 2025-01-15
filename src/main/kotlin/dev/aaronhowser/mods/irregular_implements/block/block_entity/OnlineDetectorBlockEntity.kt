@@ -32,6 +32,10 @@ class OnlineDetectorBlockEntity(
         fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
             if (level !is ServerLevel || level.gameTime % 20 != 0L) return
 
+            checkPlayerOnline(level, pos, state, blockEntity)
+        }
+
+        private fun checkPlayerOnline(level: ServerLevel, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
             val username = blockEntity.username
             val playerOnline = level.server.playerList.getPlayerByName(username) != null
 
@@ -50,6 +54,16 @@ class OnlineDetectorBlockEntity(
         set(value) {
             field = value
             setChanged()
+
+            if (this.level is ServerLevel) {
+                checkPlayerOnline(
+                    this.level as ServerLevel,
+                    this.blockPos,
+                    this.blockState,
+                    this
+                )
+            }
+
             sendStringUpdate()
         }
 
