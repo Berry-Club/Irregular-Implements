@@ -17,6 +17,7 @@ class NotificationToast(
         private const val DISPLAY_TIME = 5000
     }
 
+    //FIXME: Vanishes instead of sliding out
     override fun render(
         guiGraphics: GuiGraphics,
         toastComponent: ToastComponent,
@@ -35,9 +36,11 @@ class NotificationToast(
 
         val font = toastComponent.minecraft.font
 
-        guiGraphics.drawString(font, this.title, 30, 12, -11534256, false)
-        guiGraphics.drawString(font, this.description, 30, 24, -16777216, false)
+        guiGraphics.drawString(font, this.title, 30, 7, 0xFFFCFC00.toInt(), false)
+        guiGraphics.drawString(font, this.description, 30, 18, 0xFFFCFCFC.toInt(), false)
 
-        return Toast.Visibility.SHOW
+        val shouldHide = timeSinceLastVisible.toFloat() >= DISPLAY_TIME * toastComponent.notificationDisplayTimeMultiplier
+
+        return if (shouldHide) Toast.Visibility.HIDE else Toast.Visibility.SHOW
     }
 }
