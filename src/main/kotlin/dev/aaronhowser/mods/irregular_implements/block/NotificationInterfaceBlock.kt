@@ -3,7 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.NotificationInterfaceBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -18,6 +20,15 @@ class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)
         return NotificationInterfaceBlockEntity(pos, state)
     }
 
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+        super.setPlacedBy(level, pos, state, placer, stack)
+
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is NotificationInterfaceBlockEntity && placer != null) {
+            blockEntity.ownerUuid = placer.uuid
+        }
+    }
+
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity is NotificationInterfaceBlockEntity) {
@@ -26,6 +37,16 @@ class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)
         }
 
         return InteractionResult.SUCCESS
+    }
+
+    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+        val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity ?: return
+
+        val isPowered = level.hasNeighborSignal(pos)
+
+        if (isPowered) {
+            blockEntity.notifyOwner()
+        }
     }
 
 }

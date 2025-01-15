@@ -30,7 +30,6 @@ class UpdateClientScreenString(
     }
 
     companion object {
-
         val TYPE: CustomPacketPayload.Type<UpdateClientScreenString> =
             CustomPacketPayload.Type(OtherUtil.modResource("update_client_screen_string"))
 

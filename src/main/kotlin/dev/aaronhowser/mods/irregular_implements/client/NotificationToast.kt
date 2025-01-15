@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack
 class NotificationToast(
     private val title: String,
     private val description: String,
-    private val icon: ItemStack
+    private val icon: ItemStack?
 ) : Toast {
 
     companion object {
@@ -24,7 +24,9 @@ class NotificationToast(
         timeSinceLastVisible: Long
     ): Toast.Visibility {
 
-        guiGraphics.renderFakeItem(icon, 8, 8)
+        if (this.icon != null) {
+            guiGraphics.renderFakeItem(this.icon, 8, 8)
+        }
 
         val font = toastComponent.minecraft.font
         val characters = font.split(Component.literal(title), 125)

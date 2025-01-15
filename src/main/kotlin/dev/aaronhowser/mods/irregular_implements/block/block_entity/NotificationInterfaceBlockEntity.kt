@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.menu.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
@@ -32,7 +34,7 @@ class NotificationInterfaceBlockEntity(
         const val OWNER_UUID_NBT = "OwnerUUID"
     }
 
-    private var ownerUuid: UUID = UUID.randomUUID()
+    var ownerUuid: UUID = UUID.randomUUID()
         set(value) {
             field = value
             setChanged()
@@ -82,6 +84,11 @@ class NotificationInterfaceBlockEntity(
     fun notifyOwner() {
         val level = this.level as? ServerLevel ?: return
         val owner = level.server.playerList.getPlayer(this.ownerUuid) ?: return
+
+        ModPacketHandler.messagePlayer(
+            owner,
+            SendClientToast(this.toastTitle, this.toastDescription, this.icon)
+        )
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

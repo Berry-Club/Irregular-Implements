@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.packet
 
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
@@ -36,6 +37,11 @@ object ModPacketHandler {
             ClientClickedMenuButton.STREAM_CODEC
         )
 
+        toClient(
+            registrar,
+            SendClientToast.TYPE,
+            SendClientToast.STREAM_CODEC
+        )
     }
 
     fun messageNearbyPlayers(packet: IModPacket, serverLevel: ServerLevel, origin: Vec3, radius: Double) {
