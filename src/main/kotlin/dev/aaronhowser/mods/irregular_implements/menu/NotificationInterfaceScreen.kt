@@ -32,10 +32,10 @@ class NotificationInterfaceScreen(
 
         this.titleEditBox = EditBox(
             this.font,
-            20,
-            40,
-            this.imageWidth - 40,
-            20,
+            this.leftPos + 34,
+            this.topPos + 15,
+            130,
+            15,
             Component.empty()
         )
 
@@ -43,10 +43,10 @@ class NotificationInterfaceScreen(
 
         this.descriptionEditBox = EditBox(
             this.font,
-            20,
-            20,
-            this.imageWidth - 40,
-            20,
+            this.leftPos + 34,
+            this.topPos + 18 + 22,
+            130,
+            15,
             Component.empty()
         )
 
