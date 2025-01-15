@@ -40,12 +40,18 @@ object ModMenuTypes {
             MenuType(::IgniterMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val VOID_STONE: DeferredHolder<MenuType<*>, MenuType<VoidStoneMenu>> =
+        MENU_TYPE_REGISTRY.register("void_stone", Supplier {
+            MenuType(::VoidStoneMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
         event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
         event.register(GLOBAL_CHAT_DETECTOR.get(), ::GlobalChatDetectorScreen)
         event.register(IGNITER.get(), ::IgniterScreen)
+        event.register(VOID_STONE.get(), ::VoidStoneScreen)
     }
 
 }

@@ -46,6 +46,14 @@ object ScreenTextures {
             const val CANVAS_SIZE = 256
         }
 
+        object VoidStone {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/void_stone.png")
+
+            const val WIDTH = 176
+            const val HEIGHT = 133
+            const val CANVAS_SIZE = 256
+        }
+
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
         val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")
@@ -69,7 +77,6 @@ object ScreenTextures {
         val POTION_VAPORIZER = OtherUtil.modResource("textures/gui/potion_vaporizer.png")
         val PROCESSING_PLATE = OtherUtil.modResource("textures/gui/processing_plate.png")
         val SOUND_RECORDER = OtherUtil.modResource("textures/gui/sound_recorder.png")
-        val VOID_STONE = OtherUtil.modResource("textures/gui/void_stone.png")
     }
 
     object Sprite {
