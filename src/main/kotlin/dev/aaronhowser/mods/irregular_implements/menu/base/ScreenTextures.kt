@@ -38,6 +38,14 @@ object ScreenTextures {
             const val CANVAS_SIZE = 256
         }
 
+        object Igniter {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/igniter.png")
+
+            const val WIDTH = 79
+            const val HEIGHT = 29
+            const val CANVAS_SIZE = 128
+        }
+
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
         val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")
@@ -50,7 +58,6 @@ object ScreenTextures {
         val EXTRACTION_PLATE = OtherUtil.modResource("textures/gui/extraction_plate.png")
         val FILTERED_REDIRECTOR_PLATE = OtherUtil.modResource("textures/gui/filtered_redirector_plate.png")
         val FILTERED_SUPER_LUBRICANT_PLATFORM = OtherUtil.modResource("textures/gui/filtered_super_lubricant_platform.png")
-        val IGNITER = OtherUtil.modResource("textures/gui/igniter.png")
         val IMBUING_STATION = OtherUtil.modResource("textures/gui/imbuing_station.png")
         val INVENTORY_TESTER = OtherUtil.modResource("textures/gui/inventory_tester.png")
         val ITEM_FILTER = OtherUtil.modResource("textures/gui/item_filter.png")

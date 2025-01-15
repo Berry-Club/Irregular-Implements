@@ -137,4 +137,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val IGNITER: DeferredHolder<BlockEntityType<*>, BlockEntityType<IgniterBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("igniter", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> IgniterBlockEntity(pos, state) },
+                ModBlocks.IGNITER.get()
+            ).build(null)
+        })
+
 }
