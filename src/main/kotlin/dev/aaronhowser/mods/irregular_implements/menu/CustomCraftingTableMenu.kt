@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import net.minecraft.core.BlockPos
+import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.player.StackedContents
@@ -10,6 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingInput
 import net.minecraft.world.item.crafting.CraftingRecipe
 import net.minecraft.world.item.crafting.RecipeHolder
+import net.minecraft.world.level.Level
 
 // This class is pretty much a blind copy of CraftingMenu
 class CustomCraftingTableMenu(
@@ -22,6 +25,8 @@ class CustomCraftingTableMenu(
     private val resultSlots = ResultContainer()
 
     private val player = playerInventory.player
+
+    private var isPlacingRecipe = false
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
@@ -68,6 +73,66 @@ class CustomCraftingTableMenu(
 
             this.addSlot(Slot(playerInventory, index, x, y))
         }
+    }
+
+    override fun slotsChanged(inventory: Container) {
+        if (!this.isPlacingRecipe) {
+            access.execute { level: Level, pos: BlockPos ->
+                CraftingMenu.slotChangedCraftingGrid(this, level, this.player, this.craftSlots, this.resultSlots, null)
+            }
+        }
+    }
+
+    override fun beginPlacingRecipe() {
+        this.isPlacingRecipe = true
+    }
+
+    override fun finishPlacingRecipe(recipe: RecipeHolder<CraftingRecipe>) {
+        this.isPlacingRecipe = false
+        access.execute { level: Level, pos: BlockPos ->
+            CraftingMenu.slotChangedCraftingGrid(this, level, this.player, this.craftSlots, this.resultSlots, recipe)
+        }
+    }
+
+    override fun stillValid(player: Player): Boolean {
+        return stillValid(this.access, player, ModBlocks.CUSTOM_CRAFTING_TABLE.get())
+    }
+
+    override fun fillCraftSlotsStackedContents(itemHelper: StackedContents) {
+        this.craftSlots.fillStackedContents(itemHelper)
+    }
+
+    override fun clearCraftingContent() {
+        this.craftSlots.clearContent()
+        this.resultSlots.clearContent()
+    }
+
+    override fun getResultSlotIndex(): Int {
+        return 0
+    }
+
+    override fun getGridWidth(): Int {
+        return this.craftSlots.width
+    }
+
+    override fun getGridHeight(): Int {
+        return this.craftSlots.height
+    }
+
+    override fun getSize(): Int {
+        return 10
+    }
+
+    override fun getRecipeBookType(): RecipeBookType {
+        return RecipeBookType.CRAFTING
+    }
+
+    override fun shouldMoveToInventory(slotIndex: Int): Boolean {
+        return slotIndex != this.resultSlotIndex
+    }
+
+    override fun recipeMatches(recipe: RecipeHolder<CraftingRecipe>): Boolean {
+        return recipe.value().matches(craftSlots.asCraftInput(), this.player.level())
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -118,47 +183,6 @@ class CustomCraftingTableMenu(
         }
 
         return itemstack
-    }
-
-    override fun stillValid(player: Player): Boolean {
-        return stillValid(this.access, player, ModBlocks.CUSTOM_CRAFTING_TABLE.get())
-    }
-
-    override fun fillCraftSlotsStackedContents(itemHelper: StackedContents) {
-        this.craftSlots.fillStackedContents(itemHelper)
-    }
-
-    override fun clearCraftingContent() {
-        this.craftSlots.clearContent()
-        this.resultSlots.clearContent()
-    }
-
-    override fun getResultSlotIndex(): Int {
-        return 0
-    }
-
-    override fun getGridWidth(): Int {
-        return this.craftSlots.width
-    }
-
-    override fun getGridHeight(): Int {
-        return this.craftSlots.height
-    }
-
-    override fun getSize(): Int {
-        return 10
-    }
-
-    override fun getRecipeBookType(): RecipeBookType {
-        return RecipeBookType.CRAFTING
-    }
-
-    override fun shouldMoveToInventory(slotIndex: Int): Boolean {
-        return slotIndex != this.resultSlotIndex
-    }
-
-    override fun recipeMatches(recipe: RecipeHolder<CraftingRecipe>): Boolean {
-        return recipe.value().matches(craftSlots.asCraftInput(), this.player.level())
     }
 
 }
