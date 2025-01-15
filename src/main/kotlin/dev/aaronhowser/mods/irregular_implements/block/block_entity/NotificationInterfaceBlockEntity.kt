@@ -13,6 +13,7 @@ import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -35,13 +36,13 @@ class NotificationInterfaceBlockEntity(
             setChanged()
         }
 
-    private var toastTitle: String = "Title"
+    var toastTitle: String = "Title"
         set(value) {
             field = value
             setChanged()
         }
 
-    private var toastDescription: String = "Description"
+    var toastDescription: String = "Description"
         set(value) {
             field = value
             setChanged()
@@ -82,7 +83,12 @@ class NotificationInterfaceBlockEntity(
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return NotificationInterfaceMenu(containerId, container)
+        return NotificationInterfaceMenu(
+            containerId,
+            playerInventory,
+            this.container,
+            ContainerLevelAccess.create(this.level!!, this.blockPos)
+        )
     }
 
     override fun getDisplayName(): Component {

@@ -91,6 +91,9 @@ class NotificationInterfaceScreen(
     }
 
     override fun receivedString(stringId: Int, string: String) {
-        TODO("Not yet implemented")
+        when (stringId) {
+            NotificationInterfaceMenu.TITLE_STRING_ID -> this.titleEditBox.value = string
+            NotificationInterfaceMenu.DESCRIPTION_STRING_ID -> this.descriptionEditBox.value = string
+        }
     }
 }

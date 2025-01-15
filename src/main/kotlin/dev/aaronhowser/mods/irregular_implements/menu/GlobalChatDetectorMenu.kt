@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack
 
 class GlobalChatDetectorMenu(
     containerId: Int,
-    private val playerInventory: Inventory,
+    playerInventory: Inventory,
     private val globalChatDetectorContainer: Container,
     private val containerData: ContainerData,
     private val containerLevelAccess: ContainerLevelAccess
