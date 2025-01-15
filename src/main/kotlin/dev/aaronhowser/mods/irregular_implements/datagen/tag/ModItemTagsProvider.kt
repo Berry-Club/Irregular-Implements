@@ -47,7 +47,10 @@ class ModItemTagsProvider(
     override fun addTags(provider: HolderLookup.Provider) {
 
         this.tag(CUSTOM_CRAFTING_TABLE_ITEMS)
-            .addTag(ItemTags.PLANKS)
+            .addTags(
+                ItemTags.PLANKS,
+                ItemTags.LOGS
+            )
 
         this.tag(ItemTags.MINING_LOOT_ENCHANTABLE)
             .add(
