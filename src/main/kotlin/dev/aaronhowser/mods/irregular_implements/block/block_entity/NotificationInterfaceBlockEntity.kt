@@ -2,7 +2,10 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.menu.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.MenuProvider
@@ -32,13 +35,13 @@ class NotificationInterfaceBlockEntity(
             setChanged()
         }
 
-    private var toastTitle: String = ""
+    private var toastTitle: String = "Title"
         set(value) {
             field = value
             setChanged()
         }
 
-    private var toastDescription: String = ""
+    private var toastDescription: String = "Description"
         set(value) {
             field = value
             setChanged()
@@ -55,7 +58,27 @@ class NotificationInterfaceBlockEntity(
 
     fun notifyOwner() {
         val level = this.level as? ServerLevel ?: return
-        val owner = level.server.playerList.getPlayer(ownerUuid) ?: return
+        val owner = level.server.playerList.getPlayer(this.ownerUuid) ?: return
+    }
+
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+
+        tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
+        tag.putString(TOAST_TITLE_NBT, this.toastTitle)
+        tag.putString(TOAST_DESCRIPTION_NBT, this.toastDescription)
+    }
+
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+
+        val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
+        if (uuid != null) {
+            this.ownerUuid = uuid
+        }
+
+        this.toastTitle = tag.getString(TOAST_TITLE_NBT)
+        this.toastDescription = tag.getString(TOAST_DESCRIPTION_NBT)
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
