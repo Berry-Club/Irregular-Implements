@@ -35,11 +35,17 @@ object ModMenuTypes {
             MenuType(::GlobalChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val IGNITER: DeferredHolder<MenuType<*>, MenuType<IgniterMenu>> =
+        MENU_TYPE_REGISTRY.register("igniter", Supplier {
+            MenuType(::IgniterMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
         event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
         event.register(GLOBAL_CHAT_DETECTOR.get(), ::GlobalChatDetectorScreen)
+        event.register(IGNITER.get(), ::IgniterScreen)
     }
 
 }
