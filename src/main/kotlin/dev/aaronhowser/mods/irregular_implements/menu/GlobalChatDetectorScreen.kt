@@ -43,11 +43,11 @@ class GlobalChatDetectorScreen(
         this.toggleMessagePassButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
-                sprite = ScreenTextures.Sprites.ChatDetector.MessageStop
+                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageStop
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
-                sprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
+                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
             )
             .size(
                 width = 20,

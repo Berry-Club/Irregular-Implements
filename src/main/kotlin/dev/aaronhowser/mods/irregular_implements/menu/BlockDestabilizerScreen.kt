@@ -35,11 +35,11 @@ class BlockDestabilizerScreen(
         this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
-                sprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
+                menuSprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
-                sprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
+                menuSprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
             )
             .size(
                 width = 20,
@@ -68,7 +68,7 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            sprite = ScreenTextures.Sprites.BlockDestabilizer.ShowLazyShape,
+            menuSprite = ScreenTextures.Sprites.BlockDestabilizer.ShowLazyShape,
             onPress = {
                 ModPacketHandler.messageServer(
                     ClientClickedMenuButton(
@@ -85,7 +85,7 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            sprite = ScreenTextures.Sprites.BlockDestabilizer.ResetLazyShape,
+            menuSprite = ScreenTextures.Sprites.BlockDestabilizer.ResetLazyShape,
             onPress = {
                 ModPacketHandler.messageServer(
                     ClientClickedMenuButton(

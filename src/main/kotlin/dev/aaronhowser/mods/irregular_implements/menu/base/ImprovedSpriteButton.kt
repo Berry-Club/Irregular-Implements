@@ -27,11 +27,11 @@ class ImprovedSpriteButton(
         y: Int,
         width: Int,
         height: Int,
-        sprite: ScreenTextures.Sprites.Sprite,
+        menuSprite: ScreenTextures.Sprites.MenuSprite,
         onPress: OnPress,
         message: Component = Component.empty(),
         font: Font
-    ) : this(x, y, width, height, sprite.width, sprite.height, sprite.texture, onPress, message, font)
+    ) : this(x, y, width, height, menuSprite.width, menuSprite.height, menuSprite.texture, onPress, message, font)
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)

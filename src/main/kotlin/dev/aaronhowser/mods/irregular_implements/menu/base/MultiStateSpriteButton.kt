@@ -104,13 +104,13 @@ class MultiStateSpriteButton(
 
         fun addStage(
             message: Component,
-            sprite: ScreenTextures.Sprites.Sprite
+            menuSprite: ScreenTextures.Sprites.MenuSprite
         ): Builder {
             addStage(
                 message = message,
-                sprite = sprite.texture,
-                spriteWidth = sprite.width,
-                spriteHeight = sprite.height
+                sprite = menuSprite.texture,
+                spriteWidth = menuSprite.width,
+                spriteHeight = menuSprite.height
             )
 
             return this
