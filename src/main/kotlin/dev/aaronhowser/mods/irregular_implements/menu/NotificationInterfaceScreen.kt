@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -27,6 +29,53 @@ class NotificationInterfaceScreen(
         this.topPos = (this.height - this.imageHeight) / 2
 
         this.inventoryLabelY = -1000
+
+        this.titleEditBox = EditBox(
+            this.font,
+            20,
+            40,
+            this.imageWidth - 40,
+            20,
+            Component.empty()
+        )
+
+        this.titleEditBox.setResponder(::setTitle)
+
+        this.descriptionEditBox = EditBox(
+            this.font,
+            20,
+            20,
+            this.imageWidth - 40,
+            20,
+            Component.empty()
+        )
+
+        this.descriptionEditBox.setResponder(::setDescription)
+
+        this.addRenderableWidget(this.titleEditBox)
+        this.addRenderableWidget(this.descriptionEditBox)
+    }
+
+    private fun setTitle(title: String) {
+        if (this.menu.setTitle(title)) {
+            ModPacketHandler.messageServer(
+                ClientChangedMenuString(
+                    NotificationInterfaceMenu.TITLE_STRING_ID,
+                    title
+                )
+            )
+        }
+    }
+
+    private fun setDescription(description: String) {
+        if (this.menu.setDescription(description)) {
+            ModPacketHandler.messageServer(
+                ClientChangedMenuString(
+                    NotificationInterfaceMenu.DESCRIPTION_STRING_ID,
+                    description
+                )
+            )
+        }
     }
 
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {

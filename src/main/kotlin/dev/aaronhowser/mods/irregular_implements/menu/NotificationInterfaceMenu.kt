@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.menu.base.GhostSlot
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class NotificationInterfaceMenu(
@@ -17,14 +17,18 @@ class NotificationInterfaceMenu(
         checkContainerSize(container, 1)
 
         this.addSlot(
-            Slot(
+            GhostSlot(
                 container,
                 0,
                 8,
                 31
             )
         )
+    }
 
+    companion object {
+        const val TITLE_STRING_ID = 0
+        const val DESCRIPTION_STRING_ID = 1
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -36,7 +40,14 @@ class NotificationInterfaceMenu(
     }
 
     override fun receiveString(stringId: Int, string: String) {
-        TODO("Not yet implemented")
+    }
+
+    fun setTitle(title: String): Boolean {
+        return true
+    }
+
+    fun setDescription(description: String): Boolean {
+        return true
     }
 
 }
