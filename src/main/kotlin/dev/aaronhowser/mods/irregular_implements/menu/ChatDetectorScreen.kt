@@ -105,14 +105,7 @@ class ChatDetectorScreen(
     }
 
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        guiGraphics.drawString(
-            this.font,
-            this.title,
-            this.titleLabelX,
-            this.titleLabelY,
-            4210752,
-            false
-        )
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
     }
 
     // Behavior
