@@ -104,6 +104,20 @@ class MultiStateSpriteButton(
 
         fun addStage(
             message: Component,
+            sprite: ScreenTextures.Sprites.Sprite
+        ): Builder {
+            addStage(
+                message = message,
+                sprite = sprite.texture,
+                spriteWidth = sprite.width,
+                spriteHeight = sprite.height
+            )
+
+            return this
+        }
+
+        fun addStage(
+            message: Component,
             sprite: ResourceLocation?,
             spriteWidth: Int = 0,
             spriteHeight: Int = 0

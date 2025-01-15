@@ -65,80 +65,43 @@ object ScreenTextures {
         val SOUND_RECORDER = OtherUtil.modResource("textures/gui/sound_recorder.png")
     }
 
-    object Sprite {
+    object Sprites {
+
+        abstract class Sprite(
+            path: String,
+            val width: Int,
+            val height: Int
+        ) {
+            val texture = OtherUtil.modResource(path)
+        }
 
         object ChatDetector {
-            val MESSAGE_CONTINUE = OtherUtil.modResource("buttons/chat_detector/message_continue")
-            val MESSAGE_STOP = OtherUtil.modResource("buttons/chat_detector/message_stop")
-
-            const val WIDTH = 13
-            const val HEIGHT = 12
+            object MessageContinue : Sprite("buttons/chat_detector/message_continue", 13, 12)
+            object MessageStop : Sprite("buttons/chat_detector/message_stop", 13, 12)
         }
 
         object BlockDestabilizer {
-            val LAZY = OtherUtil.modResource("buttons/block_destabilizer/lazy")
-            const val LAZY_WIDTH = 13
-            const val LAZY_HEIGHT = 13
-
-            val NOT_LAZY = OtherUtil.modResource("buttons/block_destabilizer/lazy_not")
-            const val NOT_LAZY_WIDTH = 13
-            const val NOT_LAZY_HEIGHT = 13
-
-            //TODO: Replace with an original texture
-            val SHOW_LAZY_SHAPE = OtherUtil.modResource("buttons/block_destabilizer/show_lazy_shape")
-            const val SHOW_LAZY_SHAPE_WIDTH = 16
-            const val SHOW_LAZY_SHAPE_HEIGHT = 16
-
-            val RESET_LAZY_SHAPE = OtherUtil.modResource("buttons/block_destabilizer/reset_lazy_shape")
-            const val RESET_LAZY_SHAPE_WIDTH = 15
-            const val RESET_LAZY_SHAPE_HEIGHT = 12
+            object Lazy : Sprite("buttons/block_destabilizer/lazy", 13, 13)
+            object NotLazy : Sprite("buttons/block_destabilizer/lazy_not", 13, 13)
+            object ShowLazyShape : Sprite("buttons/block_destabilizer/show_lazy_shape", 16, 16)            //TODO: Replace with an original texture
+            object ResetLazyShape : Sprite("buttons/block_destabilizer/reset_lazy_shape", 15, 12)
         }
 
         object IronDropper {
+            object DirectionForward : Sprite("buttons/iron_dropper/direction_forward", 4, 4)
+            object DirectionRandom : Sprite("buttons/iron_dropper/direction_random", 8, 8)
 
-            val DIRECTION_FORWARD = OtherUtil.modResource("buttons/iron_dropper/direction_forward")
-            const val DIRECTION_FORWARD_WIDTH = 4
-            const val DIRECTION_FORWARD_HEIGHT = 4
+            object EffectParticle : Sprite("buttons/iron_dropper/effect_particle", 14, 13)
+            object EffectSound : Sprite("buttons/iron_dropper/effect_sound", 5, 8)
+            object EffectBoth : Sprite("buttons/iron_dropper/effect_both", 14, 13)
 
-            val DIRECTION_RANDOM = OtherUtil.modResource("buttons/iron_dropper/direction_random")
-            const val DIRECTION_RANDOM_WIDTH = 8
-            const val DIRECTION_RANDOM_HEIGHT = 8
+            object PickupFive : Sprite("buttons/iron_dropper/pickup_five", 10, 12)
+            object PickupTwenty : Sprite("buttons/iron_dropper/pickup_twenty", 13, 9)
+            object PickupZero : Sprite("buttons/iron_dropper/pickup_zero", 8, 12)
 
-            val EFFECT_PARTICLE = OtherUtil.modResource("buttons/iron_dropper/effect_particle")
-            const val EFFECT_PARTICLE_WIDTH = 14
-            const val EFFECT_PARTICLE_HEIGHT = 13
-
-            val EFFECT_SOUND = OtherUtil.modResource("buttons/iron_dropper/effect_sound")
-            const val EFFECT_SOUND_WIDTH = 5
-            const val EFFECT_SOUND_HEIGHT = 8
-
-            val EFFECT_BOTH = OtherUtil.modResource("buttons/iron_dropper/effect_both")
-            const val EFFECT_BOTH_WIDTH = 14
-            const val EFFECT_BOTH_HEIGHT = 13
-
-            val PICKUP_FIVE = OtherUtil.modResource("buttons/iron_dropper/pickup_five")
-            const val PICKUP_FIVE_WIDTH = 10
-            const val PICKUP_FIVE_HEIGHT = 12
-
-            val PICKUP_TWENTY = OtherUtil.modResource("buttons/iron_dropper/pickup_twenty")
-            const val PICKUP_TWENTY_WIDTH = 13
-            const val PICKUP_TWENTY_HEIGHT = 9
-
-            val PICKUP_ZERO = OtherUtil.modResource("buttons/iron_dropper/pickup_zero")
-            const val PICKUP_ZERO_WIDTH = 8
-            const val PICKUP_ZERO_HEIGHT = 12
-
-            val REDSTONE_PULSE = OtherUtil.modResource("buttons/iron_dropper/redstone_pulse")
-            const val REDSTONE_PULSE_WIDTH = 8
-            const val REDSTONE_PULSE_HEIGHT = 8
-
-            val REDSTONE_CONTINUOUS = OtherUtil.modResource("buttons/iron_dropper/redstone_continuous")
-            const val REDSTONE_CONTINUOUS_WIDTH = 12
-            const val REDSTONE_CONTINUOUS_HEIGHT = 14
-
-            val REDSTONE_CONTINUOUS_POWERED = OtherUtil.modResource("buttons/iron_dropper/redstone_continuous_powered")
-            const val REDSTONE_CONTINUOUS_POWERED_WIDTH = 12
-            const val REDSTONE_CONTINUOUS_POWERED_HEIGHT = 14
+            object RedstonePulse : Sprite("buttons/iron_dropper/redstone_pulse", 8, 8)
+            object RedstoneContinuous : Sprite("buttons/iron_dropper/redstone_continuous", 12, 14)
+            object RedstoneContinuousPowered : Sprite("buttons/iron_dropper/redstone_continuous_powered", 12, 14)
         }
 
     }

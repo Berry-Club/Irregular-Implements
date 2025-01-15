@@ -22,6 +22,17 @@ class ImprovedSpriteButton(
     private val font: Font
 ) : Button(x, y, width, height, message, onPress, DEFAULT_NARRATION) {
 
+    constructor(
+        x: Int,
+        y: Int,
+        width: Int,
+        height: Int,
+        sprite: ScreenTextures.Sprites.Sprite,
+        onPress: OnPress,
+        message: Component = Component.empty(),
+        font: Font
+    ) : this(x, y, width, height, sprite.width, sprite.height, sprite.texture, onPress, message, font)
+
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
 

@@ -50,21 +50,15 @@ class IronDropperScreen(
         this.redstoneModeButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_PULSE_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.RedstonePulse
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_POWERED_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuousPowered
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.REDSTONE_CONTINUOUS_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuous
             )
             .size(
                 size = buttonSize
@@ -84,21 +78,15 @@ class IronDropperScreen(
         this.delayButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_ZERO_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.PickupZero
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_FIVE_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.PickupFive
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.PICKUP_TWENTY_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.PickupTwenty
             )
             .size(
                 size = buttonSize
@@ -118,15 +106,11 @@ class IronDropperScreen(
         this.shootModeButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_RANDOM_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.DirectionRandom
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.DIRECTION_FORWARD_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.DirectionForward
             )
             .size(
                 size = buttonSize
@@ -150,21 +134,15 @@ class IronDropperScreen(
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_PARTICLE_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.EffectParticle
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_SOUND_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.EffectSound
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
-                sprite = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH,
-                spriteWidth = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.IronDropper.EFFECT_BOTH_HEIGHT
+                sprite = ScreenTextures.Sprites.IronDropper.EffectBoth
             )
             .size(
                 size = buttonSize

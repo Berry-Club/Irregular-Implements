@@ -44,15 +44,11 @@ class ChatDetectorScreen(
         this.toggleMessagePassButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
-                sprite = ScreenTextures.Sprite.ChatDetector.MESSAGE_STOP,
-                spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
-                spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT
+                sprite = ScreenTextures.Sprites.ChatDetector.MessageStop
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
-                sprite = ScreenTextures.Sprite.ChatDetector.MESSAGE_CONTINUE,
-                spriteWidth = ScreenTextures.Sprite.ChatDetector.WIDTH,
-                spriteHeight = ScreenTextures.Sprite.ChatDetector.HEIGHT
+                sprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
             )
             .size(
                 width = 20,

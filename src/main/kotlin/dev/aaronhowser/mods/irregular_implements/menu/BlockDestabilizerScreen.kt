@@ -35,15 +35,11 @@ class BlockDestabilizerScreen(
         this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
-                sprite = ScreenTextures.Sprite.BlockDestabilizer.LAZY,
-                spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.LAZY_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.LAZY_HEIGHT
+                sprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
-                sprite = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY,
-                spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_WIDTH,
-                spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.NOT_LAZY_HEIGHT
+                sprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
             )
             .size(
                 width = 20,
@@ -72,9 +68,7 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE_WIDTH,
-            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE_HEIGHT,
-            sprite = ScreenTextures.Sprite.BlockDestabilizer.SHOW_LAZY_SHAPE,
+            sprite = ScreenTextures.Sprites.BlockDestabilizer.ShowLazyShape,
             onPress = {
                 ModPacketHandler.messageServer(
                     ClientClickedMenuButton(
@@ -91,9 +85,7 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            spriteWidth = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_WIDTH,
-            spriteHeight = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE_HEIGHT,
-            sprite = ScreenTextures.Sprite.BlockDestabilizer.RESET_LAZY_SHAPE,
+            sprite = ScreenTextures.Sprites.BlockDestabilizer.ResetLazyShape,
             onPress = {
                 ModPacketHandler.messageServer(
                     ClientClickedMenuButton(
