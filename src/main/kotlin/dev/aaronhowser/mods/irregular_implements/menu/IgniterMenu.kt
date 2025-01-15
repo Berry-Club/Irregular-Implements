@@ -40,7 +40,7 @@ class IgniterMenu(
     override fun handleButtonPressed(buttonId: Int) {
         if (buttonId != CYCLE_MODE_BUTTON_ID) return
 
-        val nextMode = when (mode) {
+        val nextMode = when (this.mode) {
             IgniterBlockEntity.Mode.KEEP_IGNITED -> IgniterBlockEntity.Mode.IGNITE
             IgniterBlockEntity.Mode.IGNITE -> IgniterBlockEntity.Mode.TOGGLE
             IgniterBlockEntity.Mode.TOGGLE -> IgniterBlockEntity.Mode.KEEP_IGNITED
