@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -23,9 +22,12 @@ class BlockDestabilizerScreen(
     private lateinit var showLazyShapeButton: ImprovedSpriteButton
     private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
+    private val background = ScreenTextures.Backgrounds.BlockDestabilizer
+
     override fun init() {
-        this.imageWidth = ScreenTextures.Background.BlockDestabilizer.WIDTH
-        this.imageHeight = ScreenTextures.Background.BlockDestabilizer.HEIGHT
+
+        this.imageWidth = background.width
+        this.imageHeight = background.height
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
@@ -111,16 +113,11 @@ class BlockDestabilizerScreen(
     // Rendering
 
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        guiGraphics.blit(
-            ScreenTextures.Background.BlockDestabilizer.BACKGROUND,
+        ScreenTextures.renderBackground(
+            guiGraphics,
+            this.background,
             this.leftPos,
-            this.topPos,
-            0f,
-            0f,
-            ScreenTextures.Background.BlockDestabilizer.WIDTH,
-            ScreenTextures.Background.BlockDestabilizer.HEIGHT,
-            ScreenTextures.Background.BlockDestabilizer.CANVAS_SIZE,
-            ScreenTextures.Background.BlockDestabilizer.CANVAS_SIZE
+            this.topPos
         )
     }
 

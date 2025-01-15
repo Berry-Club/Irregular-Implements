@@ -22,9 +22,11 @@ class IgniterScreen(
 
     private lateinit var changeModeButton: ChangingTextButton
 
+    private val background = ScreenTextures.Backgrounds.Igniter
+
     override fun init() {
-        this.imageWidth = ScreenTextures.Background.Igniter.WIDTH
-        this.imageHeight = ScreenTextures.Background.Igniter.HEIGHT
+        this.imageWidth = background.width
+        this.imageHeight = background.height
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
@@ -49,14 +51,10 @@ class IgniterScreen(
         val i = (this.width - this.imageWidth) / 2
         val j = (this.height - this.imageHeight) / 2
 
-        guiGraphics.blit(
-            ScreenTextures.Background.Igniter.BACKGROUND,
+        this.background.render(
+            guiGraphics,
             i,
-            j,
-            0,
-            0,
-            ScreenTextures.Background.Igniter.CANVAS_SIZE,
-            ScreenTextures.Background.Igniter.CANVAS_SIZE,
+            j
         )
     }
 

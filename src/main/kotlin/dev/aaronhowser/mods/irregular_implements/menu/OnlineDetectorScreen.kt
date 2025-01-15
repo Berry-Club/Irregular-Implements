@@ -24,9 +24,11 @@ class OnlineDetectorScreen(
 
     private lateinit var usernameEditBox: EditBox
 
+    private val background = ScreenTextures.Backgrounds.OnlineDetector
+
     override fun init() {
-        this.imageWidth = ScreenTextures.Background.OnlineDetector.WIDTH
-        this.imageHeight = ScreenTextures.Background.OnlineDetector.HEIGHT
+        this.imageWidth = background.width
+        this.imageHeight = background.height
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
@@ -51,16 +53,10 @@ class OnlineDetectorScreen(
     }
 
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        guiGraphics.blit(
-            ScreenTextures.Background.OnlineDetector.BACKGROUND,
+        this.background.render(
+            guiGraphics,
             this.leftPos,
-            this.topPos,
-            0f,
-            0f,
-            ScreenTextures.Background.OnlineDetector.WIDTH,
-            ScreenTextures.Background.OnlineDetector.HEIGHT,
-            ScreenTextures.Background.OnlineDetector.CANVAS_SIZE,
-            ScreenTextures.Background.OnlineDetector.CANVAS_SIZE
+            this.topPos
         )
     }
 

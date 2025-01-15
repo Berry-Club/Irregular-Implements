@@ -27,9 +27,11 @@ class IronDropperScreen(
     private lateinit var delayButton: MultiStateSpriteButton
     private lateinit var redstoneModeButton: MultiStateSpriteButton
 
+    private val background = ScreenTextures.Backgrounds.IronDropper
+
     override fun init() {
-        this.imageWidth = ScreenTextures.Background.IronDropper.WIDTH
-        this.imageHeight = ScreenTextures.Background.IronDropper.HEIGHT
+        this.imageWidth = background.width
+        this.imageHeight = background.height
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
@@ -190,18 +192,15 @@ class IronDropperScreen(
         this.renderTooltip(guiGraphics, mouseX, mouseY)
     }
 
+    //TODO: Are ij needed?
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
         val i = (this.width - this.imageWidth) / 2
         val j = (this.height - this.imageHeight) / 2
 
-        guiGraphics.blit(
-            ScreenTextures.Background.IronDropper.BACKGROUND,
+        this.background.render(
+            guiGraphics,
             i,
-            j,
-            0,
-            0,
-            ScreenTextures.Background.IronDropper.CANVAS_SIZE,
-            ScreenTextures.Background.IronDropper.CANVAS_SIZE,
+            j
         )
     }
 

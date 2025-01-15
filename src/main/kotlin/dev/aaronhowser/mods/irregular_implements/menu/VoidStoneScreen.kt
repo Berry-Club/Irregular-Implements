@@ -12,9 +12,11 @@ class VoidStoneScreen(
     title: Component
 ) : AbstractContainerScreen<VoidStoneMenu>(menu, playerInventory, title) {
 
+    private val background = ScreenTextures.Backgrounds.VoidStone
+
     override fun init() {
-        this.imageWidth = ScreenTextures.Background.VoidStone.WIDTH
-        this.imageHeight = ScreenTextures.Background.VoidStone.HEIGHT
+        this.imageWidth = background.width
+        this.imageHeight = background.height
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
@@ -29,14 +31,10 @@ class VoidStoneScreen(
         val i = (this.width - this.imageWidth) / 2
         val j = (this.height - this.imageHeight) / 2
 
-        guiGraphics.blit(
-            ScreenTextures.Background.VoidStone.BACKGROUND,
+        background.render(
+            guiGraphics,
             i,
-            j,
-            0,
-            0,
-            ScreenTextures.Background.VoidStone.CANVAS_SIZE,
-            ScreenTextures.Background.VoidStone.CANVAS_SIZE,
+            j
         )
     }
 

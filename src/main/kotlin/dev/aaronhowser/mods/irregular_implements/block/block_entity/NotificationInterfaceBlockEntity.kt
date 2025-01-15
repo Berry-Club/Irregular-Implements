@@ -53,10 +53,10 @@ class NotificationInterfaceBlockEntity(
             setChanged()
         }
 
-    fun notify() {
-        val level = this.level as? ServerLevel ?: return
-        val owner = level.server.playerList.getPlayer(ownerUuid) ?: return
-    }
+//    fun notify() {
+//        val level = this.level as? ServerLevel ?: return
+//        val owner = level.server.playerList.getPlayer(ownerUuid) ?: return
+//    }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
         return NotificationInterfaceMenu(containerId, container)

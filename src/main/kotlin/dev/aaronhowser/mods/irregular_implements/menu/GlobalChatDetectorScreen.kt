@@ -29,9 +29,11 @@ class GlobalChatDetectorScreen(
     private lateinit var toggleMessagePassButton: MultiStateSpriteButton
     private lateinit var regexStringEditBox: EditBox
 
+    private val background = ScreenTextures.Backgrounds.GlobalChatDetector
+
     override fun init() {
-        this.imageWidth = ScreenTextures.Background.GlobalChatDetector.WIDTH
-        this.imageHeight = ScreenTextures.Background.GlobalChatDetector.HEIGHT
+        this.imageWidth = background.width
+        this.imageHeight = background.height
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
@@ -104,16 +106,10 @@ class GlobalChatDetectorScreen(
     }
 
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        guiGraphics.blit(
-            ScreenTextures.Background.GlobalChatDetector.BACKGROUND,
+        this.background.render(
+            guiGraphics,
             this.leftPos,
-            this.topPos,
-            0f,
-            0f,
-            ScreenTextures.Background.GlobalChatDetector.WIDTH,
-            ScreenTextures.Background.GlobalChatDetector.HEIGHT,
-            ScreenTextures.Background.GlobalChatDetector.CANVAS_SIZE,
-            ScreenTextures.Background.GlobalChatDetector.CANVAS_SIZE
+            this.topPos
         )
     }
 

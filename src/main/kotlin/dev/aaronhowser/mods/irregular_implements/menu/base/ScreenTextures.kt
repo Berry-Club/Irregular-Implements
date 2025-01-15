@@ -1,66 +1,46 @@
 package dev.aaronhowser.mods.irregular_implements.menu.base
 
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.client.gui.GuiGraphics
 
 object ScreenTextures {
 
-    object Background {
+    fun renderBackground(guiGraphics: GuiGraphics, background: Backgrounds.Background, leftPos: Int, topPos: Int) {
+        guiGraphics.blit(
+            background.texture,
+            leftPos,
+            topPos,
+            0f,
+            0f,
+            background.width,
+            background.height,
+            background.canvasSize,
+            background.canvasSize
+        )
+    }
 
-        object ChatDetector {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/chat_detector.png")
+    object Backgrounds {
 
-            const val WIDTH = 137
-            const val HEIGHT = 54
-            const val CANVAS_SIZE = 256
+        abstract class Background(
+            path: String,
+            val width: Int,
+            val height: Int,
+            val canvasSize: Int
+        ) {
+            val texture = OtherUtil.modResource(path)
+
+            fun render(guiGraphics: GuiGraphics, leftPos: Int, topPos: Int) {
+                renderBackground(guiGraphics, this, leftPos, topPos)
+            }
         }
 
-        object GlobalChatDetector {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/global_chat_detector.png")
-
-            const val WIDTH = 176
-            const val HEIGHT = 157
-            const val CANVAS_SIZE = 256
-        }
-
-        object BlockDestabilizer {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/block_destabilizer.png")
-
-            const val WIDTH = 86
-            const val HEIGHT = 35
-            const val CANVAS_SIZE = 256
-        }
-
-        object IronDropper {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/iron_dropper.png")
-
-            const val WIDTH = 176
-            const val HEIGHT = 166
-            const val CANVAS_SIZE = 256
-        }
-
-        object Igniter {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/igniter.png")
-
-            const val WIDTH = 79
-            const val HEIGHT = 29
-            const val CANVAS_SIZE = 256
-        }
-
-        object VoidStone {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/void_stone.png")
-
-            const val WIDTH = 176
-            const val HEIGHT = 133
-            const val CANVAS_SIZE = 256
-        }
-
-        object OnlineDetector {
-            val BACKGROUND = OtherUtil.modResource("textures/gui/online_detector.png")
-
-            const val WIDTH = 137
-            const val HEIGHT = 52
-            const val CANVAS_SIZE = 256
-        }
+        object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54, 256)
+        object GlobalChatDetector : Background("textures/gui/global_chat_detector.png", 176, 157, 256)
+        object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35, 256)
+        object IronDropper : Background("textures/gui/iron_dropper.png", 176, 166, 256)
+        object Igniter : Background("textures/gui/igniter.png", 79, 29, 256)
+        object VoidStone : Background("textures/gui/void_stone.png", 176, 133, 256)
+        object OnlineDetector : Background("textures/gui/online_detector.png", 137, 52, 256)
 
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
@@ -78,9 +58,7 @@ object ScreenTextures {
         val INVENTORY_TESTER = OtherUtil.modResource("textures/gui/inventory_tester.png")
         val ITEM_FILTER = OtherUtil.modResource("textures/gui/item_filter.png")
         val ITEM_PROJECTOR = OtherUtil.modResource("textures/gui/item_projector.png")
-        val JEI_ANVIL = OtherUtil.modResource("textures/gui/jei_anvil.png")
         val NOTIFICATION_INTERFACE = OtherUtil.modResource("textures/gui/notification_interface.png")
-        val ONLINE_DETECTOR = OtherUtil.modResource("textures/gui/online_detector.png")
         val PORTABLE_SOUND_DAMPENER = OtherUtil.modResource("textures/gui/portable_sound_dampener.png")
         val POTION_VAPORIZER = OtherUtil.modResource("textures/gui/potion_vaporizer.png")
         val PROCESSING_PLATE = OtherUtil.modResource("textures/gui/processing_plate.png")
