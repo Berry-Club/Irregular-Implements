@@ -25,7 +25,7 @@ object ScreenTextures {
             path: String,
             val width: Int,
             val height: Int,
-            val canvasSize: Int
+            val canvasSize: Int = 256
         ) {
             val texture = OtherUtil.modResource(path)
 
@@ -34,35 +34,33 @@ object ScreenTextures {
             }
         }
 
-        object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54, 256)
-        object GlobalChatDetector : Background("textures/gui/global_chat_detector.png", 176, 157, 256)
-        object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35, 256)
-        object IronDropper : Background("textures/gui/iron_dropper.png", 176, 166, 256)
-        object Igniter : Background("textures/gui/igniter.png", 79, 29, 256)
-        object VoidStone : Background("textures/gui/void_stone.png", 176, 133, 256)
-        object OnlineDetector : Background("textures/gui/online_detector.png", 137, 52, 256)
-
-        val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
-        val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
-        val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")
-        val CHUNK_ANALYZER = OtherUtil.modResource("textures/gui/chunk_analyzer.png")
-        val CRAFTING_RECIPE = OtherUtil.modResource("textures/gui/crafting_recipe.png")
-        val DYEING_MACHINE = OtherUtil.modResource("textures/gui/dyeing_machine.png")
-        val ENDER_LETTER = OtherUtil.modResource("textures/gui/ender_letter.png")
-        val ENDER_MAILBOX = OtherUtil.modResource("textures/gui/ender_mailbox.png")
-        val ENTITY_DETECTOR = OtherUtil.modResource("textures/gui/entity_detector.png")
-        val EXTRACTION_PLATE = OtherUtil.modResource("textures/gui/extraction_plate.png")
-        val FILTERED_REDIRECTOR_PLATE = OtherUtil.modResource("textures/gui/filtered_redirector_plate.png")
-        val FILTERED_SUPER_LUBRICANT_PLATFORM = OtherUtil.modResource("textures/gui/filtered_super_lubricant_platform.png")
-        val IMBUING_STATION = OtherUtil.modResource("textures/gui/imbuing_station.png")
-        val INVENTORY_TESTER = OtherUtil.modResource("textures/gui/inventory_tester.png")
-        val ITEM_FILTER = OtherUtil.modResource("textures/gui/item_filter.png")
-        val ITEM_PROJECTOR = OtherUtil.modResource("textures/gui/item_projector.png")
-        val NOTIFICATION_INTERFACE = OtherUtil.modResource("textures/gui/notification_interface.png")
-        val PORTABLE_SOUND_DAMPENER = OtherUtil.modResource("textures/gui/portable_sound_dampener.png")
-        val POTION_VAPORIZER = OtherUtil.modResource("textures/gui/potion_vaporizer.png")
-        val PROCESSING_PLATE = OtherUtil.modResource("textures/gui/processing_plate.png")
-        val SOUND_RECORDER = OtherUtil.modResource("textures/gui/sound_recorder.png")
+        object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54)
+        object GlobalChatDetector : Background("textures/gui/global_chat_detector.png", 176, 157)
+        object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
+        object IronDropper : Background("textures/gui/iron_dropper.png", 176, 166)
+        object Igniter : Background("textures/gui/igniter.png", 79, 29)
+        object VoidStone : Background("textures/gui/void_stone.png", 176, 133)
+        object OnlineDetector : Background("textures/gui/online_detector.png", 137, 52)
+        object NotificationInterface : Background("textures/gui/notification_interface.png", 176, 146)
+        object SoundRecorder : Background("textures/gui/sound_recorder.png", 190, 187)
+        object PortableSoundDampener : Background("textures/gui/portable_sound_dampener.png", 176, 133)
+        object ProcessingPlate : Background("textures/gui/processing_plate.png", 121, 77)
+        object PotionVaporizer : Background("textures/gui/potion_vaporizer.png", 176, 166)
+        object ItemProjector : Background("textures/gui/item_projector.png", 176, 166)
+        object ItemFilter : Background("textures/gui/item_filter.png", 219, 133)
+        object InventoryTester : Background("textures/gui/inventory_tester.png", 176, 136)
+        object ImbuingStation : Background("textures/gui/imbuing_station.png", 176, 207)
+        object FilteredSuperLubricantPlatform : Background("textures/gui/filtered_super_lubricant_platform.png", 176, 129)
+        object FilteredRedirectorPlate : Background("textures/gui/filtered_redirector_plate.png", 176, 129)
+        object ExtractionPlate : Background("textures/gui/extraction_plate.png", 121, 42)
+        object EntityDetector : Background("textures/gui/entity_detector.png", 176, 204)
+        object EnderMailbox : Background("textures/gui/ender_mailbox.png", 176, 133)
+        object EnderLetter : Background("textures/gui/ender_letter.png", 176, 133)
+        object DyeingMachine : Background("textures/gui/dyeing_machine.png", 176, 141)
+        object ChunkAnalyzer : Background("textures/gui/chunk_analyzer.png", 190, 124)
+        object AnalogEmitter : Background("textures/gui/analog_emitter.png", 79, 50)
+        object AdvancedRedstoneRepeater : Background("textures/gui/advanced_redstone_repeater.png", 91, 56)
+        object AdvancedItemCollector : Background("textures/gui/advanced_item_collector.png", 176, 235)
     }
 
     object Sprites {
