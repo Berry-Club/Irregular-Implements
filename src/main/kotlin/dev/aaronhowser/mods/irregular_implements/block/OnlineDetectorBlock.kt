@@ -65,6 +65,7 @@ class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISP
         if (!level.isClientSide) {
             val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity ?: return InteractionResult.FAIL
             player.openMenu(blockEntity)
+            blockEntity.sendStringUpdate()
         }
 
         return InteractionResult.SUCCESS

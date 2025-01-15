@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.OnlineDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.OnlineDetectorMenu
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -48,7 +50,19 @@ class OnlineDetectorBlockEntity(
         set(value) {
             field = value
             setChanged()
+            sendStringUpdate()
         }
+
+    fun sendStringUpdate() {
+        val level = this.level as? ServerLevel ?: return
+
+        ModPacketHandler.messageNearbyPlayers(
+            UpdateClientScreenString(OnlineDetectorMenu.USERNAME_STRING_ID, this.username),
+            level,
+            this.blockPos.center,
+            16.0
+        )
+    }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)

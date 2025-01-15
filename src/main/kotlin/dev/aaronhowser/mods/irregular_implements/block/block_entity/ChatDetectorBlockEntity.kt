@@ -84,7 +84,6 @@ class ChatDetectorBlockEntity(
         set(value) {
             field = value
             setChanged()
-
             sendStringUpdate()
         }
 
@@ -181,6 +180,7 @@ class ChatDetectorBlockEntity(
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        sendStringUpdate()
         return ChatDetectorMenu(containerId, this.containerData, ContainerLevelAccess.create(this.level!!, this.blockPos))
     }
 

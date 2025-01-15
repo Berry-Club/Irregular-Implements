@@ -78,7 +78,6 @@ class GlobalChatDetectorBlockEntity(
         set(value) {
             field = value
             setChanged()
-
             sendStringUpdate()
         }
 
