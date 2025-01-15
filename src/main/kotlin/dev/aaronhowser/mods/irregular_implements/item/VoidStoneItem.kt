@@ -19,7 +19,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.level.Level
 
-//FIXME: Outdated info page
 class VoidStoneItem : Item(
     Properties()
         .stacksTo(1)
