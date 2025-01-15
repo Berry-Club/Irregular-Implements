@@ -15,14 +15,12 @@ import net.minecraft.world.item.ItemStack
 
 class OnlineDetectorMenu(
     containerId: Int,
-    private val containerData: ContainerData,
     private val containerLevelAccess: ContainerLevelAccess
 ) : AbstractContainerMenu(ModMenuTypes.ONLINE_DETECTOR.get(), containerId), MenuWithStrings {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
                 containerId,
-                SimpleContainerData(ChatDetectorBlockEntity.CONTAINER_DATA_SIZE),
                 ContainerLevelAccess.NULL
             )
 
