@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.menu.NotificationInterfaceMenu
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
@@ -40,13 +42,33 @@ class NotificationInterfaceBlockEntity(
         set(value) {
             field = value
             setChanged()
+            sendStringUpdate()
         }
 
     var toastDescription: String = "Description"
         set(value) {
             field = value
             setChanged()
+            sendStringUpdate()
         }
+
+    fun sendStringUpdate() {
+        val level = this.level as? ServerLevel ?: return
+
+        ModPacketHandler.messageNearbyPlayers(
+            UpdateClientScreenString(NotificationInterfaceMenu.TITLE_STRING_ID, this.toastTitle),
+            level,
+            this.blockPos.center,
+            16.0
+        )
+
+        ModPacketHandler.messageNearbyPlayers(
+            UpdateClientScreenString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, this.toastDescription),
+            level,
+            this.blockPos.center,
+            16.0
+        )
+    }
 
     private val container = SimpleContainer(1)
 

@@ -22,6 +22,7 @@ class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity is NotificationInterfaceBlockEntity) {
             player.openMenu(blockEntity)
+            blockEntity.sendStringUpdate()
         }
 
         return InteractionResult.SUCCESS
