@@ -45,6 +45,11 @@ object ModMenuTypes {
             MenuType(::VoidStoneMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val ONLINE_DETECTOR: DeferredHolder<MenuType<*>, MenuType<OnlineDetectorMenu>> =
+        MENU_TYPE_REGISTRY.register("online_detector", Supplier {
+            MenuType(::OnlineDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
