@@ -13,7 +13,7 @@ class VoidStoneMenu(
     containerId: Int,
     private val playerInventory: Inventory,
     private val container: Container,
-) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId) {
+) : AbstractContainerMenu(ModMenuTypes.VOID_STONE.get(), containerId) {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(
