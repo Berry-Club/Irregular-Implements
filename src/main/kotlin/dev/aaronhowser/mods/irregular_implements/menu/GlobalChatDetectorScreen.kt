@@ -27,8 +27,7 @@ class GlobalChatDetectorScreen(
         get() = this.topPos + this.imageHeight
 
     private lateinit var toggleMessagePassButton: MultiStateSpriteButton
-    lateinit var regexStringEditBox: EditBox
-        private set
+    private lateinit var regexStringEditBox: EditBox
 
     override fun init() {
         this.imageWidth = ScreenTextures.Background.GlobalChatDetector.WIDTH

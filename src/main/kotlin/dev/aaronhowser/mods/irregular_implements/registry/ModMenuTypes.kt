@@ -57,6 +57,7 @@ object ModMenuTypes {
         event.register(GLOBAL_CHAT_DETECTOR.get(), ::GlobalChatDetectorScreen)
         event.register(IGNITER.get(), ::IgniterScreen)
         event.register(VOID_STONE.get(), ::VoidStoneScreen)
+        event.register(ONLINE_DETECTOR.get(), ::OnlineDetectorScreen)
     }
 
 }

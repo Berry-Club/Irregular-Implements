@@ -4,6 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.OnlineDetect
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.DirectionProperty
+import net.minecraft.world.phys.BlockHitResult
 
 class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISPENSER)) {
 
@@ -55,6 +58,16 @@ class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISP
         } else {
             BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.ONLINE_DETECTOR.get(), OnlineDetectorBlockEntity::tick)
         }
+    }
+
+    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+
+        if (!level.isClientSide) {
+            val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity ?: return InteractionResult.FAIL
+            player.openMenu(blockEntity)
+        }
+
+        return InteractionResult.SUCCESS
     }
 
     override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {

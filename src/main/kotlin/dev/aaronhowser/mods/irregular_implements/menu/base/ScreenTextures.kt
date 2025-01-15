@@ -54,6 +54,14 @@ object ScreenTextures {
             const val CANVAS_SIZE = 256
         }
 
+        object OnlineDetector {
+            val BACKGROUND = OtherUtil.modResource("textures/gui/online_detector.png")
+
+            const val WIDTH = 137
+            const val HEIGHT = 52
+            const val CANVAS_SIZE = 256
+        }
+
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
         val ADVANCED_REDSTONE_REPEATER = OtherUtil.modResource("textures/gui/advanced_redstone_repeater.png")
         val ANALOG_EMITTER = OtherUtil.modResource("textures/gui/analog_emitter.png")
