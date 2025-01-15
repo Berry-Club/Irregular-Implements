@@ -87,6 +87,11 @@ class IgniterBlock(
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
         if (level.isClientSide) return InteractionResult.SUCCESS
 
+        val blockEntity = level.getBlockEntity(pos) as? IgniterBlockEntity
+            ?: return InteractionResult.SUCCESS
+
+        player.openMenu(blockEntity)
+
         return InteractionResult.SUCCESS
     }
 

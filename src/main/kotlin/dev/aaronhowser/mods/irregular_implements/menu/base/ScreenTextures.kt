@@ -43,7 +43,7 @@ object ScreenTextures {
 
             const val WIDTH = 79
             const val HEIGHT = 29
-            const val CANVAS_SIZE = 128
+            const val CANVAS_SIZE = 256
         }
 
         val ADVANCED_ITEM_COLLECTOR = OtherUtil.modResource("textures/gui/advanced_item_collector.png")
