@@ -13,7 +13,7 @@ class NotificationToast(
 ) : Toast {
 
     companion object {
-        private val BACKGROUND_SPRITE: ResourceLocation = ResourceLocation.withDefaultNamespace("toast/tutorial")
+        private val BACKGROUND_SPRITE: ResourceLocation = ResourceLocation.withDefaultNamespace("toast/advancement")
         private const val DISPLAY_TIME = 5000
     }
 
