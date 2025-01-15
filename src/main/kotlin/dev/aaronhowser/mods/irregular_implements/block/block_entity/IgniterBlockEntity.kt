@@ -4,6 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
+import net.minecraft.tags.BlockTags
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.DirectionalBlock.FACING
+import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.level.block.entity.DispenserBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -12,14 +18,41 @@ class IgniterBlockEntity(
     pBlockState: BlockState
 ) : DispenserBlockEntity(ModBlockEntities.IGNITER.get(), pPos, pBlockState) {
 
-    enum class Mode {
-        TOGGLE,         // Make fire when powered, extinguish when unpowered
-        IGNITE,         // Make fire when powered, do nothing when unpowered
-        KEEP_IGNITED    // Make fire when powered, make another fire if it goes out while powered
+    enum class Mode(val nameComponent: Component) {
+        TOGGLE(Component.literal("Toggle Fire")),         // Make fire when powered, extinguish when unpowered
+        IGNITE(Component.literal("Ignite")),         // Make fire when powered, do nothing when unpowered
+        KEEP_IGNITED(Component.literal("Keep Ignited"))    // Make fire when powered, make another fire if it goes out while powered
     }
 
     companion object {
         const val MODE_NBT = "Mode"
+
+        fun ignite(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
+            if (level.isClientSide) return
+
+            val facing = igniterState.getValue(FACING)
+            val targetPos = igniterPos.relative(facing)
+            val targetState = level.getBlockState(targetPos)
+
+            val canPlaceFire = targetState.canBeReplaced()
+            if (canPlaceFire) {
+                val fireState = (Blocks.FIRE as FireBlock).getStateForPlacement(level, targetPos)
+
+                level.setBlockAndUpdate(targetPos, fireState)
+            }
+        }
+
+        fun extinguish(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
+            if (level.isClientSide) return
+
+            val facing = igniterState.getValue(FACING)
+            val targetPos = igniterPos.relative(facing)
+            val targetState = level.getBlockState(targetPos)
+
+            if (targetState.`is`(BlockTags.FIRE)) {
+                level.removeBlock(targetPos, false)
+            }
+        }
     }
 
     var mode: Mode = Mode.TOGGLE
@@ -27,6 +60,30 @@ class IgniterBlockEntity(
             field = value
             setChanged()
         }
+
+    fun cycleMode() {
+        this.mode = when (this.mode) {
+            Mode.TOGGLE -> Mode.IGNITE
+            Mode.IGNITE -> Mode.KEEP_IGNITED
+            Mode.KEEP_IGNITED -> Mode.TOGGLE
+        }
+    }
+
+
+    fun blockUpdated(isPowered: Boolean, wasEnabled: Boolean) {
+        val level = this.level ?: return
+
+        val isTurningOn = isPowered && !wasEnabled
+        val isTurningOff = !isPowered && wasEnabled
+
+        when (this.mode) {
+            Mode.KEEP_IGNITED -> if (isPowered) ignite(level, this.blockPos, this.blockState)
+
+            Mode.IGNITE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState)
+
+            Mode.TOGGLE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState) else if (isTurningOff) extinguish(level, this.blockPos, this.blockState)
+        }
+    }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
