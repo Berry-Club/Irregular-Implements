@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "irregular_implements:block/notification_interface/bottom",
+    "particle": "irregular_implements:block/notification_interface/top",
+    "side": "irregular_implements:block/notification_interface/side",
+    "top": "irregular_implements:block/notification_interface/top"
+  }
+}

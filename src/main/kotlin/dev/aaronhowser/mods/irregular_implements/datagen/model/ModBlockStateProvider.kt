@@ -64,6 +64,26 @@ class ModBlockStateProvider(
         blockBreaker()
         ironDropper()
         customCraftingTable()
+        notificationInterface()
+    }
+
+    private fun notificationInterface() {
+        val block = ModBlocks.NOTIFICATION_INTERFACE.get()
+
+        val top = modLoc("block/notification_interface/top")
+        val bottom = modLoc("block/notification_interface/bottom")
+        val side = modLoc("block/notification_interface/side")
+
+        val model = models()
+            .cubeBottomTop(
+                name(block),
+                side,
+                bottom,
+                top
+            )
+            .texture("particle", top)
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun customCraftingTable() {
