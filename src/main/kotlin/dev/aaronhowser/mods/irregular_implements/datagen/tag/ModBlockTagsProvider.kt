@@ -424,6 +424,7 @@ class ModBlockTagsProvider(
                 ModBlocks.STRIPPED_SPECTRE_LOG.get(),
                 ModBlocks.BEAN_STALK.get(),
                 ModBlocks.LESSER_BEAN_STALK.get(),
+                ModBlocks.CUSTOM_CRAFTING_TABLE.get()
             )
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)

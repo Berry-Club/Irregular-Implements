@@ -32,7 +32,6 @@ class CustomCraftingTableRecipe(
 
         val plankStackValid = plankStack.`is`(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
                 && plankStack.item is BlockItem
-                && (plankStack.item as BlockItem).block !is EntityBlock
 
         if (!plankStackValid) return false
 

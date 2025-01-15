@@ -17,6 +17,7 @@
     "irregular_implements:spectre_log",
     "irregular_implements:stripped_spectre_log",
     "irregular_implements:bean_stalk",
-    "irregular_implements:lesser_bean_stalk"
+    "irregular_implements:lesser_bean_stalk",
+    "irregular_implements:custom_crafting_table"
   ]
 }
