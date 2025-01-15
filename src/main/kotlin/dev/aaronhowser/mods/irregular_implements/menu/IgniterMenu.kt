@@ -21,6 +21,10 @@ class IgniterMenu(
                 SimpleContainerData(IgniterBlockEntity.CONTAINER_DATA_SIZE)
             )
 
+    init {
+        this.addDataSlots(this.containerData)
+    }
+
     companion object {
         const val CYCLE_MODE_BUTTON_ID = 0
     }
