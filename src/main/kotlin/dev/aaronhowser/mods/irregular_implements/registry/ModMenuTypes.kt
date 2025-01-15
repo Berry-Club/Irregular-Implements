@@ -50,6 +50,11 @@ object ModMenuTypes {
             MenuType(::OnlineDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val NOTIFICATION_INTERFACE: DeferredHolder<MenuType<*>, MenuType<NotificationInterfaceMenu>> =
+        MENU_TYPE_REGISTRY.register("notification_interface", Supplier {
+            MenuType(::NotificationInterfaceMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
@@ -58,6 +63,7 @@ object ModMenuTypes {
         event.register(IGNITER.get(), ::IgniterScreen)
         event.register(VOID_STONE.get(), ::VoidStoneScreen)
         event.register(ONLINE_DETECTOR.get(), ::OnlineDetectorScreen)
+        event.register(NOTIFICATION_INTERFACE.get(), ::NotificationInterfaceScreen)
     }
 
 }

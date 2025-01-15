@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.menu.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
@@ -57,8 +58,8 @@ class NotificationInterfaceBlockEntity(
         val owner = level.server.playerList.getPlayer(ownerUuid) ?: return
     }
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-        TODO("Not yet implemented")
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return NotificationInterfaceMenu(containerId, container)
     }
 
     override fun getDisplayName(): Component {
