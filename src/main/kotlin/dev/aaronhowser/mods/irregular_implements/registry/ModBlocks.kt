@@ -87,6 +87,8 @@ object ModBlocks {
         registerBlockWithoutItem("bean_stalk") { BeanStalkBlock(isStrong = true) }
     val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
         registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
+
+    @JvmStatic
     val CUSTOM_CRAFTING_TABLE: DeferredBlock<CustomCraftingTableBlock> =
         registerBlockWithoutItem("custom_crafting_table") { CustomCraftingTableBlock() }
 

@@ -35,17 +35,11 @@ object ModMenuTypes {
             MenuType(::GlobalChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
-    val CUSTOM_CRAFTING_TABLE =
-        MENU_TYPE_REGISTRY.register("custom_crafting_table", Supplier {
-            MenuType(::CustomCraftingTableMenu, FeatureFlags.DEFAULT_FLAGS)
-        })
-
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
         event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
         event.register(GLOBAL_CHAT_DETECTOR.get(), ::GlobalChatDetectorScreen)
-        event.register(CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableScreen)
     }
 
 }

@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
-import dev.aaronhowser.mods.irregular_implements.menu.CustomCraftingTableMenu
 import net.minecraft.core.BlockPos
 import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionResult
@@ -11,6 +10,7 @@ import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerLevelAccess
+import net.minecraft.world.inventory.CraftingMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -46,7 +46,7 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
     override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
         return SimpleMenuProvider(
             { containerId, playerInventory, player ->
-                CustomCraftingTableMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
+                CraftingMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
             },
             this.name
         )

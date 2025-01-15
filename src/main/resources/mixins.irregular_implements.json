@@ -8,6 +8,7 @@
     "BlockAndTintGetterMixin",
     "BlockStateBaseMixin",
     "CombatTrackerMixin",
+    "CraftingMenuMixin",
     "FallLocationMixin",
     "FireMixin",
     "ItemEntityMixin",
