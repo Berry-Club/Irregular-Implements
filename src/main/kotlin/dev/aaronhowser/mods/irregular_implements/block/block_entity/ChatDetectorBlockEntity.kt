@@ -164,7 +164,7 @@ class ChatDetectorBlockEntity(
 
     // Menu stuff
 
-    private val containerData = object : SimpleContainerData(1) {
+    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
         override fun set(index: Int, value: Int) {
             when (index) {
                 STOPS_MESSAGE_INDEX -> this@ChatDetectorBlockEntity.stopsMessage = value == 1

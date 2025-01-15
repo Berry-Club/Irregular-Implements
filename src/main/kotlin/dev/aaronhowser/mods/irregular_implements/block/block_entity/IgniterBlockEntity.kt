@@ -1,22 +1,28 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.menu.IgniterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.BlockTags
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.DirectionalBlock.FACING
 import net.minecraft.world.level.block.FireBlock
-import net.minecraft.world.level.block.entity.DispenserBlockEntity
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class IgniterBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
-) : DispenserBlockEntity(ModBlockEntities.IGNITER.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntities.IGNITER.get(), pPos, pBlockState), MenuProvider {
 
     enum class Mode(val nameComponent: Component) {
         TOGGLE(Component.literal("Toggle Fire")),         // Make fire when powered, extinguish when unpowered
@@ -53,6 +59,9 @@ class IgniterBlockEntity(
                 level.removeBlock(targetPos, false)
             }
         }
+
+        const val CONTAINER_DATA_SIZE = 1
+        const val MODE_INDEX = 0
     }
 
     var mode: Mode = Mode.TOGGLE
@@ -95,6 +104,32 @@ class IgniterBlockEntity(
         super.loadAdditional(tag, registries)
 
         this.mode = Mode.entries[tag.getInt(MODE_NBT)]
+    }
+
+    // Menu stuff
+
+    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                MODE_INDEX -> this@IgniterBlockEntity.mode = Mode.entries.getOrNull(value) ?: Mode.TOGGLE
+                else -> error("Unknown index: $index")
+            }
+        }
+
+        override fun get(index: Int): Int {
+            return when (index) {
+                MODE_INDEX -> this@IgniterBlockEntity.mode.ordinal
+                else -> error("Unknown index: $index")
+            }
+        }
+    }
+
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return IgniterMenu(containerId, this.containerData)
+    }
+
+    override fun getDisplayName(): Component {
+        return this.blockState.block.name
     }
 
 }
