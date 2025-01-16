@@ -30,11 +30,13 @@ object MutatingRecipes {
             bootMap[boot] = lubricatedBoot
         }
 
-        val lubricateBuilder = MutatingEmiRecipe.Builder()
-        val cleanBuilder = MutatingEmiRecipe.Builder()
-
         val lubricantStack = ModItems.SUPER_LUBRICANT_TINCTURE.toStack()
         val waterStack = OtherUtil.getPotionStack(Potions.WATER)
+
+        val lubricateBuilder = MutatingEmiRecipe.Builder()
+            .actualInput(lubricantStack)
+        val cleanBuilder = MutatingEmiRecipe.Builder()
+            .actualInput(waterStack)
 
         for ((cleanBoot, lubedBoot) in bootMap) {
             lubricateBuilder.addStage(
