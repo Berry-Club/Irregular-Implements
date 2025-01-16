@@ -3,12 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -26,7 +23,7 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
     companion object {
         fun isValidBlock(block: Block, level: Level): Boolean {
             return block.defaultBlockState().renderShape == RenderShape.MODEL
-                    && block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //TODO: Does this crash if (0, 0, 0) is unloaded?
+                    && block.defaultBlockState().getCollisionShape(level, BlockPos.ZERO) != Shapes.empty()    //TODO: Does this crash if (0, 0, 0) is unloaded?
                     && !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
         }
     }
@@ -46,7 +43,11 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
     override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return Shapes.block()
 
-        return if (blockEntity.isInverted) Shapes.block() else Shapes.empty()
+        return if (blockEntity.isInverted) {
+            blockEntity.renderedBlockState.getCollisionShape(level, pos, context)
+        } else {
+            Shapes.empty()
+        }
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -58,7 +59,7 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
                 if (blockEntity.isInverted) return Shapes.block()
 
                 return if (player.isSecondaryUseActive || player.isHolding { it.item is BlockItem && (it.item as BlockItem).block == ModBlocks.DIAPHANOUS_BLOCK.get() }) {
-                    Shapes.block()
+                    blockEntity.renderedBlockState.getShape(level, pos, context)
                 } else {
                     Shapes.empty()
                 }
