@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.recipe.*
+import dev.aaronhowser.mods.irregular_implements.recipe.crafting.*
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer

@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.recipe
+package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

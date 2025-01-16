@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.recipe
+package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

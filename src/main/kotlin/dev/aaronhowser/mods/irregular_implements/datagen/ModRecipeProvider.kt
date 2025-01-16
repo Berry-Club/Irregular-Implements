@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.recipe.*
+import dev.aaronhowser.mods.irregular_implements.recipe.crafting.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
