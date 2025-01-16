@@ -17,7 +17,7 @@ class MutatingWithConstantEmiRecipe(
     private val mutatingInput: List<ItemStack>,
     private val constantStack: ItemStack,
     private val mutatingOutput: List<ItemStack>,
-    private val virtualInput: List<EmiIngredient>
+    private val virtualInput: List<ItemStack>
 ) : EmiRecipe {
 
     override fun getCategory(): EmiRecipeCategory {
@@ -30,7 +30,7 @@ class MutatingWithConstantEmiRecipe(
 
     override fun getInputs(): List<EmiIngredient> {
         if (this.virtualInput.isNotEmpty()) {
-            return virtualInput
+            return virtualInput.map { EmiIngredient.of(Ingredient.of(it)) }
         }
 
         return (mutatingInput + constantStack).map { EmiIngredient.of(Ingredient.of(it)) }

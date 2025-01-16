@@ -5,13 +5,11 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiRecipe
-import dev.emi.emi.api.stack.EmiIngredient
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
-import net.minecraft.world.item.crafting.Ingredient
 
 object MutatingRecipes {
 
@@ -19,41 +17,37 @@ object MutatingRecipes {
         return lubricateRecipes() + spectreAnchor()
     }
 
-    private fun lubricateRecipes(): List<MutatingEmiRecipe> {
-        val boots = BuiltInRegistries.ITEM
+    private fun lubricateRecipes(): List<MutatingWithConstantEmiRecipe> {
+        val cleanBoots = BuiltInRegistries.ITEM
             .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
             .map { it.defaultInstance }
-
-        val bootMap: MutableMap<ItemStack, ItemStack> = mutableMapOf()
-
-        for (boot in boots) {
-            val lubricatedBoot = boot.copy()
-            lubricatedBoot.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
-            bootMap[boot] = lubricatedBoot
-        }
 
         val lubricantStack = ModItems.SUPER_LUBRICANT_TINCTURE.toStack()
         val waterStack = OtherUtil.getPotionStack(Potions.WATER)
 
-        val lubricateBuilder = MutatingEmiRecipe.Builder()
-            .virtualInput(lubricantStack)
-        val cleanBuilder = MutatingEmiRecipe.Builder()
-            .virtualInput(waterStack)
+        val lubedBoots: MutableList<ItemStack> = mutableListOf()
 
-        for ((cleanBoot, lubedBoot) in bootMap) {
-            lubricateBuilder.addStage(
-                inputItems = listOf(cleanBoot, lubricantStack),
-                outputItem = lubedBoot
-            )
-
-            cleanBuilder.addStage(
-                inputItems = listOf(lubedBoot, waterStack),
-                outputItem = cleanBoot
-            )
+        for (boot in cleanBoots) {
+            val lubedBoot = boot.copy()
+            lubedBoot.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
+            lubedBoots.add(lubedBoot)
         }
 
-        val lubricateRecipe = lubricateBuilder.build(OtherUtil.modResource("/lubricate_boot"))
-        val cleanRecipe = cleanBuilder.build(OtherUtil.modResource("/clean_boot"))
+        val lubricateRecipe = MutatingWithConstantEmiRecipe(
+            id = OtherUtil.modResource("/lubricate_boot"),
+            mutatingInput = cleanBoots,
+            constantStack = lubricantStack,
+            mutatingOutput = lubedBoots,
+            virtualInput = listOf(lubricantStack)
+        )
+
+        val cleanRecipe = MutatingWithConstantEmiRecipe(
+            id = OtherUtil.modResource("/clean_boot"),
+            mutatingInput = lubedBoots,
+            constantStack = waterStack,
+            mutatingOutput = cleanBoots,
+            virtualInput = listOf(waterStack)
+        )
 
         return listOf(lubricateRecipe, cleanRecipe)
     }
@@ -79,7 +73,7 @@ object MutatingRecipes {
             mutatingInput = allItems,
             constantStack = anchorStack,
             mutatingOutput = anchoredItems,
-            virtualInput = listOf(EmiIngredient.of(Ingredient.of(anchorStack)))
+            virtualInput = listOf(anchorStack)
         )
 
         return recipe
