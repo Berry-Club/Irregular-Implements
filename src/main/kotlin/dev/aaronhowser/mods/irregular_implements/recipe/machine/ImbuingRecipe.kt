@@ -49,7 +49,7 @@ class ImbuingRecipe(
             if (!found) return false
         }
 
-        return outerItems.isEmpty()
+        return missingOuterItems.isEmpty()
     }
 
     override fun assemble(input: ImbuingInput, registries: HolderLookup.Provider): ItemStack {

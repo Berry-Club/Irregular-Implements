@@ -76,10 +76,10 @@ class ImbuingStationBlockEntity(
             return
         }
 
-        progress++
+        this.progress++
 
         if (progress >= MAX_PROGRESS) {
-            progress = 0
+            this.progress = 0
             craftItem()
         }
     }
@@ -104,6 +104,13 @@ class ImbuingStationBlockEntity(
         } else {
             stackInOutput.grow(outputStack.count)
         }
+
+        this.container.removeItem(TOP_SLOT_INDEX, 1)
+        this.container.removeItem(LEFT_SLOT_INDEX, 1)
+        this.container.removeItem(BOTTOM_SLOT_INDEX, 1)
+        this.container.removeItem(CENTER_SLOT_INDEX, 1)
+
+        this.progress = 0
     }
 
     private fun hasRecipe(): Boolean {
