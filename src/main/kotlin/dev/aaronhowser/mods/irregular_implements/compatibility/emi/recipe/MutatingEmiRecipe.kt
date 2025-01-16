@@ -14,32 +14,51 @@ import java.util.*
 
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
-    private val stages: List<Stage>,
+    private val recipePattern: String,
+    private val mutatingInput: List<ItemStack>,
+    private val patternKeys: Map<Char, PatternValue>,
     private val virtualInput: List<EmiIngredient>
 ) : EmiRecipe {
 
-    class Stage(
-        val inputItemGrid: List<ItemStack>,
-        val outputStack: ItemStack
-    )
+    init {
+        require(recipePattern.length == 9) { "Recipe pattern must be 9 characters long" }
+        require(patternKeys.size == recipePattern.groupBy { it }.size)
+    }
+
+    sealed interface PatternValue {
+        class IngredientValue(val ingredient: Ingredient) : PatternValue
+        data object EmptyValue : PatternValue
+        data object MutatingValue : PatternValue
+    }
 
     class Builder {
-        private val stages: MutableList<Stage> = mutableListOf()
+        private var recipePattern: String = ""
+        private val mutatingInput: MutableList<ItemStack> = mutableListOf()
+        private val patternKeys: MutableMap<Char, PatternValue> = mutableMapOf()
+        private val virtualInput: MutableList<EmiIngredient> = mutableListOf()
 
-        private val actualInputs: MutableList<EmiIngredient> = mutableListOf()
-
-        fun addStage(inputItems: List<ItemStack>, outputItem: ItemStack): Builder {
-            this.stages.add(Stage(inputItems, outputItem))
+        fun recipePattern(recipePattern: String): Builder {
+            this.recipePattern = recipePattern.filterNot { it.isWhitespace() || it == ',' }
             return this
         }
 
-        fun virtualInput(vararg input: ItemStack): Builder {
-            this.actualInputs.add(EmiIngredient.of(Ingredient.of(*input)))
+        fun mutatingInput(vararg input: ItemStack): Builder {
+            this.mutatingInput.addAll(input)
+            return this
+        }
+
+        fun patternKey(key: Char, patternValue: PatternValue): Builder {
+            this.patternKeys[key] = patternValue
+            return this
+        }
+
+        fun virtualInput(input: Ingredient): Builder {
+            this.virtualInput.add(EmiIngredient.of(input))
             return this
         }
 
         fun build(id: ResourceLocation): MutatingEmiRecipe {
-            return MutatingEmiRecipe(id, stages, actualInputs)
+            return MutatingEmiRecipe(id, recipePattern, mutatingInput, patternKeys, virtualInput)
         }
     }
 
@@ -52,13 +71,7 @@ class MutatingEmiRecipe(
     }
 
     override fun getInputs(): List<EmiIngredient> {
-        if (this.virtualInput.isNotEmpty()) {
-            return virtualInput
-        }
-
-        return stages.flatMap { stage ->
-            stage.inputItemGrid.map { EmiIngredient.of(Ingredient.of(it)) }
-        }
+        return virtualInput
     }
 
     override fun getOutputs(): List<EmiStack> {
@@ -87,12 +100,25 @@ class MutatingEmiRecipe(
             val x = i % 3 * 18
             val y = i / 3 * 18
 
-            widgets.addGeneratedSlot(
-                { random -> getInputStack(random, i) },
-                uniqueId,
-                x,
-                y
-            )
+            val patternChar = this.recipePattern.getOrNull(i) ?: continue
+            val patternValue = this.patternKeys.getOrDefault(patternChar, null) ?: continue
+
+            when (patternValue) {
+                is PatternValue.EmptyValue -> widgets.addSlot(x, y)
+
+                is PatternValue.IngredientValue -> widgets.addSlot(
+                    EmiIngredient.of(patternValue.ingredient),
+                    x,
+                    y
+                )
+
+                is PatternValue.MutatingValue -> widgets.addGeneratedSlot(
+                    { random -> getInputStack(random) },
+                    uniqueId,
+                    x,
+                    y
+                )
+            }
         }
 
         widgets.addGeneratedSlot(
@@ -105,17 +131,18 @@ class MutatingEmiRecipe(
             .recipeContext(this)
     }
 
-    private fun getInputStack(random: Random, index: Int): EmiStack {
-        val stage = stages[random.nextInt(stages.size)]
-        val stack = stage.inputItemGrid.getOrElse(index) { ItemStack.EMPTY }
+    private fun getInputStack(random: Random): EmiStack {
+        val randomIndex = random.nextInt(mutatingInput.size + 1)
+        val stack = this.mutatingInput.getOrNull(randomIndex) ?: ItemStack.EMPTY
 
         return EmiStack.of(stack)
     }
 
     private fun getOutputStack(random: Random): EmiStack {
-        val stage = stages[random.nextInt(stages.size)]
+        val randomIndex = random.nextInt(mutatingInput.size)
+        val stack = this.mutatingInput.getOrNull(randomIndex) ?: ItemStack.EMPTY
 
-        return EmiStack.of(stage.outputStack)
+        return EmiStack.of(stack)
     }
 
 }

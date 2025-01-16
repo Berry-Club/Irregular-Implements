@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -10,11 +11,13 @@ import net.minecraft.util.Unit
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
+import net.minecraft.world.item.crafting.Ingredient
+import net.neoforged.neoforge.common.Tags
 
 object MutatingRecipes {
 
     fun getRecipes(): List<EmiRecipe> {
-        return lubricateRecipes() + spectreAnchor()
+        return lubricateRecipes() + spectreAnchor() + customCraftingTable()
     }
 
     private fun lubricateRecipes(): List<MutatingWithConstantEmiRecipe> {
@@ -75,6 +78,25 @@ object MutatingRecipes {
             mutatingOutput = anchoredItems,
             virtualInput = listOf(anchorStack)
         )
+
+        return recipe
+    }
+
+    fun customCraftingTable(): MutatingEmiRecipe {
+
+        val validOuterItems = BuiltInRegistries.ITEM
+            .getTag(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
+            .get().toList().map { it.value().defaultInstance }
+
+        val innerIngredient = Ingredient.of(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+
+        val recipe = MutatingEmiRecipe.Builder()
+            .recipePattern("PPP,PCP,PPP")
+            .mutatingInput(*validOuterItems.toTypedArray())
+            .patternKey('P', MutatingEmiRecipe.PatternValue.MutatingValue)
+            .patternKey('C', MutatingEmiRecipe.PatternValue.IngredientValue(innerIngredient))
+            .virtualInput(innerIngredient)
+            .build(OtherUtil.modResource("/custom_crafting_table"))
 
         return recipe
     }
