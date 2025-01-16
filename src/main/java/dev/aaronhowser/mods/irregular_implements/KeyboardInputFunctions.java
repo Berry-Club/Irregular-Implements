@@ -13,7 +13,7 @@ public interface KeyboardInputFunctions {
 
         KeyboardInput input = (KeyboardInput) this;
 
-        if (player.hasEffect(ModEffects.getCOLLAPSE_IMBUE())) {
+        if (player.hasEffect(ModEffects.getCOLLAPSE())) {
             input.leftImpulse = -input.leftImpulse;
             input.forwardImpulse = -input.forwardImpulse;
         }
