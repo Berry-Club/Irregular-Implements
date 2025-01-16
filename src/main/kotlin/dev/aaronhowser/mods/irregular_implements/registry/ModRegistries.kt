@@ -16,6 +16,7 @@ object ModRegistries {
         ModSounds.SOUND_EVENT_REGISTRY,
         ModArmorMaterials.ARMOR_MATERIAL_REGISTRY,
         ModRecipeSerializers.RECIPE_SERIALIZERS_REGISTRY,
+        ModRecipeTypes.RECIPE_TYPES_REGISTRY,
         ModMenuTypes.MENU_TYPE_REGISTRY,
         ModAttachmentTypes.ATTACHMENT_TYPES_REGISTRY,
     )

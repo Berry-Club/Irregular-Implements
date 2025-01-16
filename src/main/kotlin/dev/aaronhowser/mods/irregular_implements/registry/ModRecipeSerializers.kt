@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.*
+import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingRecipe
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer
@@ -33,6 +34,9 @@ object ModRecipeSerializers {
 
     val CUSTOM_CRAFTING_TABLE: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
         registerRecipeSerializer("custom_crafting_table") { SimpleCraftingRecipeSerializer(::CustomCraftingTableRecipe) }
+
+    val IMBUING: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+        registerRecipeSerializer("imbuing") { ImbuingRecipe.Serializer() }
 
     private fun registerRecipeSerializer(
         name: String,
