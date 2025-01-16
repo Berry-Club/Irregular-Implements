@@ -20,7 +20,7 @@ class MutatingEmiRecipe(
 ) : EmiRecipe {
 
     class Stage(
-        val inputItem: ItemStack,
+        val inputIngredient: Ingredient,
         val outputItem: ItemStack
     )
 
@@ -34,8 +34,8 @@ class MutatingEmiRecipe(
             return this
         }
 
-        fun addStage(inputItem: ItemStack, outputItem: ItemStack): Builder {
-            this.stages.add(Stage(inputItem, outputItem))
+        fun addStage(inputIngredient: Ingredient, outputItem: ItemStack): Builder {
+            this.stages.add(Stage(inputIngredient, outputItem))
             return this
         }
 
@@ -59,7 +59,7 @@ class MutatingEmiRecipe(
         return id
     }
 
-    private val changingInputs = stages.map { it.inputItem }
+    private val changingIngredients = stages.map { it.inputIngredient }
     private val changingOutput = stages.map { it.outputItem }
 
     override fun getInputs(): List<EmiIngredient> {
@@ -70,9 +70,9 @@ class MutatingEmiRecipe(
         )
 
         if (this.includeAllIngredients) {
-            for (input in changingInputs) {
+            for (ingredient in changingIngredients) {
                 list.add(
-                    EmiIngredient.of(Ingredient.of(input))
+                    EmiIngredient.of(ingredient)
                 )
             }
         }
@@ -114,10 +114,10 @@ class MutatingEmiRecipe(
             .recipeContext(this)
     }
 
-    private fun getStartItem(random: Random): EmiStack {
+    private fun getStartItem(random: Random): EmiIngredient {
         val stage = stages[random.nextInt(stages.size)]
 
-        return EmiStack.of(stage.inputItem)
+        return EmiIngredient.of(stage.inputIngredient)
     }
 
     private fun getOutputItem(random: Random): EmiStack {
