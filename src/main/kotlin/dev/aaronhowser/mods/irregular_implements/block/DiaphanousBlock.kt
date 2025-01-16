@@ -3,12 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -21,7 +18,13 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock {
+class DiaphanousBlock : Block(
+    Properties
+        .ofFullCopy(Blocks.STONE)
+        .noOcclusion()
+        .isViewBlocking(::isSolid)
+        .isSuffocating(::isSolid)
+), EntityBlock {
 
     companion object {
         fun isValidBlock(block: Block, level: Level): Boolean {
@@ -29,6 +32,17 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
                     && block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //TODO: Does this crash if (0, 0, 0) is unloaded?
                     && !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
         }
+
+        fun isSolid(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+            val blockEntity = blockGetter.getBlockEntity(blockPos)
+
+            return if (blockEntity is DiaphanousBlockEntity) {
+                blockEntity.isInverted
+            } else {
+                false
+            }
+        }
+
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
