@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvide
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
-import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -22,8 +21,8 @@ class DiaphanousBlock : Block(
     Properties
         .ofFullCopy(Blocks.STONE)
         .noOcclusion()
-        .isViewBlocking(::isSolid)
-        .isSuffocating(::isSolid)
+        .isViewBlocking(::isUsuallySolid)
+        .isSuffocating(::isUsuallySolid)
 ), EntityBlock {
 
     companion object {
@@ -33,7 +32,7 @@ class DiaphanousBlock : Block(
                     && !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
         }
 
-        fun isSolid(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+        fun isUsuallySolid(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
             val blockEntity = blockGetter.getBlockEntity(blockPos)
 
             return if (blockEntity is DiaphanousBlockEntity) {
@@ -57,21 +56,25 @@ class DiaphanousBlock : Block(
         return Shapes.empty()
     }
 
-    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity ?: return Shapes.block()
-
-        return if (blockEntity.isInverted) Shapes.block() else Shapes.empty()
-    }
-
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         if (level is Level && level.isClientSide) {
             val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
             val player = ClientUtil.localPlayer
 
             if (blockEntity != null && player != null) {
-                if (blockEntity.isInverted) return Shapes.block()
 
-                return if (player.isSecondaryUseActive || player.isHolding { it.item is BlockItem && (it.item as BlockItem).block == ModBlocks.DIAPHANOUS_BLOCK.get() }) {
+                val distanceAllowed = 4.5
+                val closeEnough = player.eyePosition.closerThan(pos.center, distanceAllowed)
+
+                val canInteract = when (blockEntity.isInverted) {
+                    true -> closeEnough
+
+                    false -> !closeEnough
+                            || player.isSecondaryUseActive
+                            || player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
+                }
+
+                return if (canInteract) {
                     Shapes.block()
                 } else {
                     Shapes.empty()
@@ -81,6 +84,18 @@ class DiaphanousBlock : Block(
         }
 
         return Shapes.block()
+    }
+
+    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        return if (isUsuallySolid(state, level, pos)) Shapes.block() else Shapes.empty()
+    }
+
+    override fun getShadeBrightness(state: BlockState, level: BlockGetter, pos: BlockPos): Float {
+        return if (isUsuallySolid(state, level, pos)) 1f else 0f
+    }
+
+    override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
+        return isUsuallySolid(state, level, pos)
     }
 
 }
