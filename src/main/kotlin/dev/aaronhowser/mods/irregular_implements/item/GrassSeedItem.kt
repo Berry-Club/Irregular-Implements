@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.registries.DeferredItem
 
+// TODO: Remove info page, world interaction page makes it redundant
 class GrassSeedItem(
     val dyeColor: DyeColor?
 ) : Item(Properties()) {

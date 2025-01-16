@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-14T00:55:27.3335423	Recipes
+// 1.21.1	2025-01-15T18:08:49.2317599	Recipes
 4cc179aaa5d6015b3a7a8256fd28373c754da5bb data/irregular_implements/advancement/recipes/misc/acacia_platform.json
 f13ce37c4979e61a949bea54e774859ae4d1e95c data/irregular_implements/advancement/recipes/misc/accelerator_plate.json
 39af528bb8c93c0fc2a85cbb38a804dd2b33a98d data/irregular_implements/advancement/recipes/misc/advanced_item_collector.json
@@ -81,6 +81,7 @@ feebaefa640d5d1cd25a5778c438897f3e4c11e5 data/irregular_implements/advancement/r
 fd7ccc4e8fd4614d703724d34c78d94b96325b74 data/irregular_implements/advancement/recipes/misc/grass_seeds_white.json
 caa8d0168c8d0c4d557dfa68e2a1c74b249630c9 data/irregular_implements/advancement/recipes/misc/grass_seeds_yellow.json
 9d6f9f6cd040a055baa5186484ca3e9767ed47f2 data/irregular_implements/advancement/recipes/misc/id_card.json
+f60ce52248e368dfec773e8728fef33b96c7e2b7 data/irregular_implements/advancement/recipes/misc/igniter.json
 ba58bbec6c68fb5b87a7d9d7f341ba3fc330fd5e data/irregular_implements/advancement/recipes/misc/imbuing_station.json
 2bdc5c3bcee7ff920a2bbfdb9d38e8eeee3c2fcb data/irregular_implements/advancement/recipes/misc/inventory_rerouter.json
 1eba3988f2a64b845d83e8984b500115ad08c09c data/irregular_implements/advancement/recipes/misc/inventory_tester.json
@@ -316,6 +317,7 @@ a4f7c0517d8f5c2404dc0053f6cd8e5b213f470a data/irregular_implements/recipe/grass_
 ed1abcfa3a9fa73f04861aaedd056a418e437630 data/irregular_implements/recipe/grass_seeds_white.json
 0c6373006998d0441cf3568380267838838ae97e data/irregular_implements/recipe/grass_seeds_yellow.json
 5b9f7f94ea95b2d14d83be67449538ea4f877316 data/irregular_implements/recipe/id_card.json
+f6ea7bd2e249a476d277a9cef22a825f52de757a data/irregular_implements/recipe/igniter.json
 bf77c4d6662d7511949baeb5483afd3a57789e86 data/irregular_implements/recipe/imbuing_station.json
 c60e5608256b7c20a800285ddeb5b040f8da5d9b data/irregular_implements/recipe/inventory_rerouter.json
 556c559eb6b39fe7effeb722ac91da3eb055b79d data/irregular_implements/recipe/inventory_tester.json

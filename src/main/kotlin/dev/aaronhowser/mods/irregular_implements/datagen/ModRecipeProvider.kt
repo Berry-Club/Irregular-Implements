@@ -74,10 +74,17 @@ class ModRecipeProvider(
     private val customCraftingTable = SpecialRecipeBuilder.special(::CustomCraftingTableRecipe)
 
     //TODO:
-    // Potions of Collapse
     // Imbues
     // Diamond Breaker
-    // Igniter
+    // Precious Emerald
+    // Bottle of Air (just say how to get it)
+    // Lava Charm (dungeon loot)
+    // Magic Hood (dungeon loot)
+    // Water Walking Boots (loot in custom chest added to ocean monuments)
+    // Is the Inventory Tester supposed to craft 2?
+    // Energy Distributor
+    // Ender Energy Distributor
+    // Number Spectre Coil (dungeon loot?)
 
     private sealed class IngredientType {
         data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
@@ -1297,6 +1304,15 @@ class ModRecipeProvider(
                 'S' to ing(ModItems.SPECTRE_STRING),
                 'E' to ing(Tags.Items.ENDER_PEARLS),
                 'C' to ing(ModItems.SPECTRE_CHARGER_REDSTONE)
+            )
+        ),
+        shapedRecipe(
+            ModBlocks.IGNITER,
+            "NCC,NFC,NCC",
+            mapOf(
+                'N' to ing(Tags.Items.NETHERRACKS),
+                'C' to ing(Tags.Items.COBBLESTONES_NORMAL),
+                'F' to ing(Items.FLINT_AND_STEEL)
             )
         )
     )
