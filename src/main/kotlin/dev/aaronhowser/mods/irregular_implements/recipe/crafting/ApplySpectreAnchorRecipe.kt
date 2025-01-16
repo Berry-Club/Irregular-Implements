@@ -17,7 +17,7 @@ class ApplySpectreAnchorRecipe(
     companion object {
         val anchorIngredient: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
 
-        private fun isApplicable(itemStack: ItemStack): Boolean {
+        fun isApplicable(itemStack: ItemStack): Boolean {
             return !itemStack.isEmpty && !itemStack.has(ModDataComponents.ANCHORED) && !anchorIngredient.test(itemStack)
         }
     }

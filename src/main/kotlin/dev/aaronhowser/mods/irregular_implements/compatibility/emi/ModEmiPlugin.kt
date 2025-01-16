@@ -48,7 +48,7 @@ class ModEmiPlugin : EmiPlugin {
             registry.addRecipe(interactionRecipe)
         }
 
-        for (bootRecipe in LubricateBootRecipes.getRecipes()) {
+        for (bootRecipe in MutatingRecipes.getRecipes()) {
             registry.addRecipe(bootRecipe)
         }
 

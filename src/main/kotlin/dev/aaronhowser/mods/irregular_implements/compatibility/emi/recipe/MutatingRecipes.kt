@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -10,10 +11,10 @@ import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
 
-object LubricateBootRecipes {
+object MutatingRecipes {
 
     fun getRecipes(): List<EmiRecipe> {
-        return lubricateRecipes()
+        return lubricateRecipes() + spectreAnchor()
     }
 
     private fun lubricateRecipes(): List<MutatingEmiRecipe> {
@@ -51,6 +52,24 @@ object LubricateBootRecipes {
         val cleanRecipe = cleanBuilder.build(OtherUtil.modResource("/clean_boot"))
 
         return listOf(lubricateRecipe, cleanRecipe)
+    }
+
+    private fun spectreAnchor(): MutatingEmiRecipe {
+        val allItems = (BuiltInRegistries.ITEM).mapNotNull {
+            val stack = it.defaultInstance
+            if (ApplySpectreAnchorRecipe.isApplicable(stack)) stack else null
+        }
+
+        val builder = MutatingEmiRecipe.Builder()
+            .otherItem(ModItems.SPECTRE_ANCHOR.toStack())
+
+        for (item in allItems) {
+            val anchoredItem = item.copy()
+            anchoredItem.set(ModDataComponents.ANCHORED, Unit.INSTANCE)
+            builder.addStage(item, anchoredItem)
+        }
+
+        return builder.build(OtherUtil.modResource("/apply_spectre_anchor"))
     }
 
 }
