@@ -60,9 +60,10 @@ object MutatingRecipes {
             if (ApplySpectreAnchorRecipe.isApplicable(stack)) stack else null
         }
 
-        val builder = MutatingEmiRecipe.Builder()
-
         val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
+
+        val builder = MutatingEmiRecipe.Builder()
+            .actualInput(anchorStack)
 
         for (item in allItems) {
             val anchoredItem = item.copy()

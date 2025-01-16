@@ -9,12 +9,13 @@ import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.crafting.Ingredient
 import java.util.*
 
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
     private val stages: List<Stage>,
-    private val includeAllIngredients: Boolean
+    private val actualInputs: List<EmiIngredient>
 ) : EmiRecipe {
 
     class Stage(
@@ -24,20 +25,26 @@ class MutatingEmiRecipe(
 
     class Builder {
         private val stages: MutableList<Stage> = mutableListOf()
-        private var includeAllIngredients: Boolean = false
+
+        private val actualInputs: MutableList<EmiIngredient> = mutableListOf()
 
         fun addStage(inputItems: List<ItemStack>, outputItem: ItemStack): Builder {
             this.stages.add(Stage(inputItems, outputItem))
             return this
         }
 
-        fun includeAllIngredients(includeAllIngredients: Boolean): Builder {
-            this.includeAllIngredients = includeAllIngredients
+        fun actualInput(vararg input: ItemStack): Builder {
+            this.actualInputs.add(EmiIngredient.of(Ingredient.of(*input)))
+            return this
+        }
+
+        fun actualInput(vararg input: EmiIngredient): Builder {
+            this.actualInputs.addAll(input)
             return this
         }
 
         fun build(id: ResourceLocation): MutatingEmiRecipe {
-            return MutatingEmiRecipe(id, stages, includeAllIngredients)
+            return MutatingEmiRecipe(id, stages, actualInputs)
         }
     }
 
@@ -52,7 +59,13 @@ class MutatingEmiRecipe(
     }
 
     override fun getInputs(): List<EmiIngredient> {
-        return emptyList()
+        if (this.actualInputs.isNotEmpty()) {
+            return actualInputs
+        }
+
+        return stages.flatMap { stage ->
+            stage.inputItemGrid.map { EmiIngredient.of(Ingredient.of(it)) }
+        }
     }
 
     override fun getOutputs(): List<EmiStack> {
