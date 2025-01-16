@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import java.util.*
 
+//FIXME: mutating input and mutating output aren't lined up, and sometimes show as empty
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
     private val recipePattern: String,
@@ -108,7 +109,7 @@ class MutatingEmiRecipe(
             val x = i % 3 * 18
             val y = i / 3 * 18
 
-            val patternChar = this.recipePattern.getOrNull(i) ?: continue
+            val patternChar = this.recipePattern.getOrNull(i)
             val patternValue = this.patternKeys.getOrDefault(patternChar, PatternValue.EmptyValue)
 
             when (patternValue) {

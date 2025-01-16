@@ -21,7 +21,7 @@ object MutatingRecipes {
         return lubricateRecipes() + spectreAnchor() + customCraftingTable()
     }
 
-    private fun lubricateRecipes(): List<MutatingWithConstantEmiRecipe> {
+    private fun lubricateRecipes(): List<EmiRecipe> {
         val cleanBoots = BuiltInRegistries.ITEM
             .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
             .map { it.defaultInstance }
@@ -37,21 +37,23 @@ object MutatingRecipes {
             lubedBoots.add(lubedBoot)
         }
 
-        val lubricateRecipe = MutatingWithConstantEmiRecipe(
-            id = OtherUtil.modResource("/lubricate_boot"),
-            mutatingInput = cleanBoots,
-            constantStack = lubricantStack,
-            mutatingOutput = lubedBoots,
-            virtualInput = listOf(lubricantStack)
-        )
+        val lubricateRecipe = MutatingEmiRecipe.Builder()
+            .recipePattern("BL")
+            .mutatingInput(*cleanBoots.toTypedArray())
+            .patternKey('B', MutatingEmiRecipe.PatternValue.MutatingValue)
+            .patternKey('L', MutatingEmiRecipe.PatternValue.IngredientValue(Ingredient.of(lubricantStack)))
+            .mutatingOutput(*lubedBoots.toTypedArray())
+            .virtualInput(Ingredient.of(lubricantStack))
+            .build(OtherUtil.modResource("/lubricate_boot"))
 
-        val cleanRecipe = MutatingWithConstantEmiRecipe(
-            id = OtherUtil.modResource("/clean_boot"),
-            mutatingInput = lubedBoots,
-            constantStack = waterStack,
-            mutatingOutput = cleanBoots,
-            virtualInput = listOf(waterStack)
-        )
+        val cleanRecipe = MutatingEmiRecipe.Builder()
+            .recipePattern("BW")
+            .mutatingInput(*lubedBoots.toTypedArray())
+            .patternKey('B', MutatingEmiRecipe.PatternValue.MutatingValue)
+            .patternKey('W', MutatingEmiRecipe.PatternValue.IngredientValue(Ingredient.of(waterStack)))
+            .mutatingOutput(*cleanBoots.toTypedArray())
+            .virtualInput(Ingredient.of(waterStack))
+            .build(OtherUtil.modResource("/clean_boot"))
 
         return listOf(lubricateRecipe, cleanRecipe)
     }
