@@ -15,12 +15,12 @@ import java.util.*
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
     private val stages: List<Stage>,
-    private val actualInputs: List<EmiIngredient>
+    private val virtualInput: List<EmiIngredient>
 ) : EmiRecipe {
 
     class Stage(
         val inputItemGrid: List<ItemStack>,
-        val outputItem: ItemStack
+        val outputStack: ItemStack
     )
 
     class Builder {
@@ -33,13 +33,8 @@ class MutatingEmiRecipe(
             return this
         }
 
-        fun actualInput(vararg input: ItemStack): Builder {
+        fun virtualInput(vararg input: ItemStack): Builder {
             this.actualInputs.add(EmiIngredient.of(Ingredient.of(*input)))
-            return this
-        }
-
-        fun actualInput(vararg input: EmiIngredient): Builder {
-            this.actualInputs.addAll(input)
             return this
         }
 
@@ -47,8 +42,6 @@ class MutatingEmiRecipe(
             return MutatingEmiRecipe(id, stages, actualInputs)
         }
     }
-
-    private val uniqueId = Random().nextInt()
 
     override fun getCategory(): EmiRecipeCategory {
         return VanillaEmiRecipeCategories.CRAFTING
@@ -59,8 +52,8 @@ class MutatingEmiRecipe(
     }
 
     override fun getInputs(): List<EmiIngredient> {
-        if (this.actualInputs.isNotEmpty()) {
-            return actualInputs
+        if (this.virtualInput.isNotEmpty()) {
+            return virtualInput
         }
 
         return stages.flatMap { stage ->
@@ -83,6 +76,8 @@ class MutatingEmiRecipe(
     override fun supportsRecipeTree(): Boolean {
         return false
     }
+
+    private val uniqueId = Random().nextInt()
 
     override fun addWidgets(widgets: WidgetHolder) {
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 60, 18)
@@ -120,7 +115,7 @@ class MutatingEmiRecipe(
     private fun getOutputStack(random: Random): EmiStack {
         val stage = stages[random.nextInt(stages.size)]
 
-        return EmiStack.of(stage.outputItem)
+        return EmiStack.of(stage.outputStack)
     }
 
 }

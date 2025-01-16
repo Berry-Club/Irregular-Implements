@@ -34,9 +34,9 @@ object MutatingRecipes {
         val waterStack = OtherUtil.getPotionStack(Potions.WATER)
 
         val lubricateBuilder = MutatingEmiRecipe.Builder()
-            .actualInput(lubricantStack)
+            .virtualInput(lubricantStack)
         val cleanBuilder = MutatingEmiRecipe.Builder()
-            .actualInput(waterStack)
+            .virtualInput(waterStack)
 
         for ((cleanBoot, lubedBoot) in bootMap) {
             lubricateBuilder.addStage(
@@ -65,7 +65,7 @@ object MutatingRecipes {
         val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
 
         val builder = MutatingEmiRecipe.Builder()
-            .actualInput(anchorStack)
+            .virtualInput(anchorStack)
 
         for (item in allItems) {
             val anchoredItem = item.copy()
