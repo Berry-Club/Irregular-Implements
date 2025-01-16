@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.ImbuingStationBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -19,7 +20,7 @@ class ImbuingStationMenu(
             this(
                 containerId,
                 playerInventory,
-                SimpleContainer(5)
+                SimpleContainer(ImbuingStationBlockEntity.CONTAINER_SIZE)
             )
 
     init {
@@ -27,7 +28,7 @@ class ImbuingStationMenu(
 
         val topSlot = Slot(
             imbuingStationContainer,
-            0,
+            ImbuingStationBlockEntity.TOP_SLOT_INDEX,
             80,
             9
         )
@@ -35,7 +36,7 @@ class ImbuingStationMenu(
 
         val leftSlot = Slot(
             imbuingStationContainer,
-            1,
+            ImbuingStationBlockEntity.LEFT_SLOT_INDEX,
             35,
             54
         )
@@ -43,7 +44,7 @@ class ImbuingStationMenu(
 
         val middleSlot = Slot(
             imbuingStationContainer,
-            2,
+            ImbuingStationBlockEntity.CENTER_SLOT_INDEX,
             80,
             54
         )
@@ -51,7 +52,7 @@ class ImbuingStationMenu(
 
         val bottomSlot = Slot(
             imbuingStationContainer,
-            3,
+            ImbuingStationBlockEntity.BOTTOM_SLOT_INDEX,
             80,
             99
         )
@@ -59,7 +60,7 @@ class ImbuingStationMenu(
 
         val outputSlot = Slot(
             imbuingStationContainer,
-            4,
+            ImbuingStationBlockEntity.OUTPUT_SLOT_INDEX,
             125,
             54
         )
