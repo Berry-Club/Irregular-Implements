@@ -1,7 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.componentIngredient
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -34,7 +32,6 @@ object MutatingRecipes {
 
         val lubricateBuilder = MutatingEmiRecipe.Builder()
             .constantItem(ModItems.SUPER_LUBRICANT_TINCTURE.toStack())
-            .includeAllIngredients(true)
 
         val cleanBuilder = MutatingEmiRecipe.Builder()
             .constantItem(OtherUtil.getPotionStack(Potions.WATER))
@@ -42,12 +39,12 @@ object MutatingRecipes {
 
         for ((cleanBoot, lubedBoot) in bootMap) {
             lubricateBuilder.addStage(
-                cleanBoot.ingredient,
+                cleanBoot,
                 lubedBoot
             )
 
             cleanBuilder.addStage(
-                lubedBoot.componentIngredient,
+                lubedBoot,
                 cleanBoot
             )
         }
@@ -70,10 +67,7 @@ object MutatingRecipes {
         for (item in allItems) {
             val anchoredItem = item.copy()
             anchoredItem.set(ModDataComponents.ANCHORED, Unit.INSTANCE)
-            builder.addStage(
-                item.ingredient,
-                anchoredItem
-            )
+            builder.addStage(item, anchoredItem)
         }
 
         return builder.build(OtherUtil.modResource("/apply_spectre_anchor"))

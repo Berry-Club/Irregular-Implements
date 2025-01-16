@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi
 
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.*
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
@@ -9,14 +8,10 @@ import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.TagKey
-import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
-import net.neoforged.neoforge.common.crafting.DataComponentIngredient
 
 @EmiEntrypoint
 class ModEmiPlugin : EmiPlugin {
@@ -27,12 +22,6 @@ class ModEmiPlugin : EmiPlugin {
 
         val ItemLike.ingredient: Ingredient
             get() = Ingredient.of(this)
-
-        val ItemStack.ingredient: Ingredient
-            get() = Ingredient.of(this)
-
-        val ItemStack.componentIngredient: Ingredient
-            get() = DataComponentIngredient.of(false, this)
 
         val Ingredient.emiIngredient: EmiIngredient
             get() = EmiIngredient.of(this)
@@ -74,14 +63,6 @@ class ModEmiPlugin : EmiPlugin {
     }
 
     private fun setComparisons(registry: EmiRegistry) {
-
-        val boots = BuiltInRegistries.ITEM
-            .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
-            .map { it.defaultInstance }
-
-        for (boot in boots) {
-            registry.setDefaultComparison(EmiStack.of(boot), Comparison.compareData { it.get(ModDataComponents.LUBRICATED.get()) })
-        }
 
         registry.setDefaultComparison(EmiStack.of(ModItems.DIVINING_ROD), Comparison.compareComponents())
     }
