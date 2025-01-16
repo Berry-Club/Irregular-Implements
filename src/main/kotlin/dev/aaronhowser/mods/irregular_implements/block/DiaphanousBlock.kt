@@ -57,33 +57,29 @@ class DiaphanousBlock : Block(
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        if (level is Level && level.isClientSide) {
-            val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
-            val player = ClientUtil.localPlayer
+        if (level !is Level || level.isClientSide) return Shapes.block()
 
-            if (blockEntity != null && player != null) {
+        val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
+        val player = ClientUtil.localPlayer
 
-                val distanceAllowed = 4.5
-                val closeEnough = player.eyePosition.closerThan(pos.center, distanceAllowed)
+        if (blockEntity == null || player == null) return Shapes.block()
 
-                val canInteract = when (blockEntity.isInverted) {
-                    true -> closeEnough
+        val distanceAllowed = 4.5
+        val closeEnough = player.eyePosition.closerThan(pos.center, distanceAllowed)
 
-                    false -> !closeEnough
-                            || player.isSecondaryUseActive
-                            || player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
-                }
+        val canInteract = when (blockEntity.isInverted) {
+            true -> closeEnough
 
-                return if (canInteract) {
-                    Shapes.block()
-                } else {
-                    Shapes.empty()
-                }
-            }
-
+            false -> !closeEnough
+                    || player.isSecondaryUseActive
+                    || player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
         }
 
-        return Shapes.block()
+        return if (canInteract) {
+            Shapes.block()
+        } else {
+            Shapes.empty()
+        }
     }
 
     override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
