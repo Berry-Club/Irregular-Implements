@@ -22,8 +22,8 @@ class MutatingEmiRecipe(
 ) : EmiRecipe {
 
     init {
-        require(recipePattern.length == 9) { "Recipe pattern must be 9 characters long" }
-        require(mutatingInput.size == mutatingOutput.size) { "Input and output stacks must be the same size" }
+        require(recipePattern.length <= 9) { "Recipe pattern must be 9 characters long or less" }
+        require(mutatingInput.size == mutatingOutput.size) { "Input and output lists must be the same size" }
     }
 
     sealed interface PatternValue {
@@ -40,7 +40,7 @@ class MutatingEmiRecipe(
         private val mutatingOutput: MutableList<ItemStack> = mutableListOf()
 
         fun recipePattern(recipePattern: String): Builder {
-            this.recipePattern = recipePattern.filterNot { it.isWhitespace() || it == ',' }
+            this.recipePattern = recipePattern.filterNot { it == ',' }
             return this
         }
 
@@ -99,6 +99,7 @@ class MutatingEmiRecipe(
 
     private val uniqueId = Random().nextInt()
 
+    @Suppress("MoveVariableDeclarationIntoWhen")
     override fun addWidgets(widgets: WidgetHolder) {
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 60, 18)
         widgets.addTexture(EmiTexture.SHAPELESS, 97, 0)
@@ -108,7 +109,7 @@ class MutatingEmiRecipe(
             val y = i / 3 * 18
 
             val patternChar = this.recipePattern.getOrNull(i) ?: continue
-            val patternValue = this.patternKeys.getOrDefault(patternChar, null) ?: continue
+            val patternValue = this.patternKeys.getOrDefault(patternChar, PatternValue.EmptyValue)
 
             when (patternValue) {
                 is PatternValue.EmptyValue -> widgets.addSlot(x, y)
