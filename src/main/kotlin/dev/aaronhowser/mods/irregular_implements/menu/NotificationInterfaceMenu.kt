@@ -15,14 +15,12 @@ import net.minecraft.world.item.ItemStack
 
 class NotificationInterfaceMenu(
     containerId: Int,
-    playerInventory: Inventory,
     notificationInterfaceContainer: Container,
     private val containerLevelAccess: ContainerLevelAccess
 ) : AbstractContainerMenu(ModMenuTypes.NOTIFICATION_INTERFACE.get(), containerId), MenuWithStrings {
 
     constructor(containerId: Int, playerInventory: Inventory) : this(
         containerId,
-        playerInventory,
         SimpleContainer(1),
         ContainerLevelAccess.NULL
     )

@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.CraftingInput
 import net.minecraft.world.item.crafting.CustomRecipe
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.EntityBlock
 import net.neoforged.neoforge.common.Tags
 
 //TODO: EMI

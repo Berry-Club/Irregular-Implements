@@ -22,10 +22,9 @@ class ImbuingStationBlockEntity(
 
         const val TOP_SLOT_INDEX = 0
         const val LEFT_SLOT_INDEX = 1
-        const val RIGHT_SLOT_INDEX = 2
-        const val BOTTOM_SLOT_INDEX = 3
-        const val CENTER_SLOT_INDEX = 4
-        const val OUTPUT_SLOT_INDEX = 5
+        const val BOTTOM_SLOT_INDEX = 2
+        const val CENTER_SLOT_INDEX = 3
+        const val OUTPUT_SLOT_INDEX = 4
     }
 
     // Container stuff

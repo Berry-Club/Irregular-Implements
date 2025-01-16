@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack
 
 class ImbuingStationMenu(
     containerId: Int,
-    private val playerInventory: Inventory,
+    playerInventory: Inventory,
     private val imbuingStationContainer: Container
 ) : AbstractContainerMenu(ModMenuTypes.IMBUING_STATION.get(), containerId) {
 

@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack
 
 class IronDropperMenu(
     containerId: Int,
-    private val playerInventory: Inventory,
+    playerInventory: Inventory,
     private val dispenserContainer: Container,
     private val containerData: ContainerData
 ) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId), MenuWithButtons {
