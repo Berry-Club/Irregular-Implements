@@ -75,7 +75,6 @@ class ModRecipeProvider(
 
     //TODO:
     // Imbues
-    // Diamond Breaker
     // Bottle of Air (just say how to get it)
     // Lava Charm (dungeon loot)
     // Magic Hood (dungeon loot)
