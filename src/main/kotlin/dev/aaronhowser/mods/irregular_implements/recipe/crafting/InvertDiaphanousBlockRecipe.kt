@@ -18,7 +18,10 @@ class InvertDiaphanousBlockRecipe(
 ) : CustomRecipe(craftingCategory) {
 
     override fun matches(input: CraftingInput, level: Level): Boolean {
-        return input.items().count { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) } == 1
+        val stacks = input.items().filterNot { it.isEmpty }
+
+        return stacks.size == 1
+                && stacks.first().`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem())
     }
 
     override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
