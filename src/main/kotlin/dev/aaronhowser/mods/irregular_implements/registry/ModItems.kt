@@ -16,7 +16,6 @@ object ModItems {
 
     val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
         register("stable_ender_pearl") { StableEnderPearlItem() }
-    val PRECIOUS_EMERALD = basic("precious_emerald") //Click on a villager to start a "festival" in the village
     val EVIL_TEAR: DeferredItem<EvilTearItem> =
         register("evil_tear") { EvilTearItem() }
     val PORTKEY: DeferredItem<PortkeyItem> =
@@ -239,7 +238,7 @@ object ModItems {
     // - Golden Compass (redundant, use Lodestones)
     // - Runic Dust (obscure and difficult)
     // - Blood Stone (requires Blood Moon)
-
+    // - Precious Emerald (undocumented and weird)
 
     private fun basic(id: String): DeferredItem<Item> {
         return ITEM_REGISTRY.registerSimpleItem(id)

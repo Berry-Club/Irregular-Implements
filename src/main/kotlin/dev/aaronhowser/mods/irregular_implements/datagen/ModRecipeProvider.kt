@@ -76,12 +76,10 @@ class ModRecipeProvider(
     //TODO:
     // Imbues
     // Diamond Breaker
-    // Precious Emerald
     // Bottle of Air (just say how to get it)
     // Lava Charm (dungeon loot)
     // Magic Hood (dungeon loot)
     // Water Walking Boots (loot in custom chest added to ocean monuments)
-    // Is the Inventory Tester supposed to craft 2?
     // Energy Distributor
     // Ender Energy Distributor
     // Number Spectre Coil (dungeon loot?)
