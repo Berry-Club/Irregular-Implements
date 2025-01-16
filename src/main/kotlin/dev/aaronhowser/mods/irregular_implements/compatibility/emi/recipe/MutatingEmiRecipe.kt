@@ -14,7 +14,7 @@ import java.util.*
 
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
-    private val otherItem: ItemStack,
+    private val constantItem: ItemStack,
     private val stages: List<Stage>
 ) : EmiRecipe {
 
@@ -56,11 +56,15 @@ class MutatingEmiRecipe(
     private val changingOutput = stages.map { it.outputItem }
 
     override fun getInputs(): List<EmiIngredient> {
-        return (changingInputs + otherItem).map { EmiIngredient.of(Ingredient.of(it)) }
+        return listOf(
+            EmiIngredient.of(
+                Ingredient.of(constantItem)
+            )
+        )
     }
 
     override fun getOutputs(): List<EmiStack> {
-        return changingOutput.map { EmiStack.of(it) }
+        return emptyList()
     }
 
     override fun getDisplayWidth(): Int {
@@ -82,7 +86,7 @@ class MutatingEmiRecipe(
             when (i) {
                 0 -> widgets.addGeneratedSlot({ random -> getStartItem(random) }, uniqueId, x, y)
 
-                1 -> widgets.addSlot(EmiStack.of(otherItem), x, y)
+                1 -> widgets.addSlot(EmiStack.of(constantItem), x, y)
 
                 else -> widgets.addSlot(EmiStack.of(ItemStack.EMPTY), x, y)
             }
