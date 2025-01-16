@@ -79,4 +79,11 @@ object MutatingRecipes {
         return recipe
     }
 
+    //TODO
+    // CustomCraftingTableRecipe
+    // SetDiaph
+    // InvertDiaph
+
+    //TODO: Maybe consolidate both types into a new one? Could have a map of char to either an ingredient or a mutating stack, somehow? And then smartly check which one it is
+
 }
