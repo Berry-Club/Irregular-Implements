@@ -67,13 +67,9 @@ class DiaphanousBlock : Block(
         val distanceAllowed = 4.5
         val closeEnough = player.eyePosition.closerThan(pos.center, distanceAllowed)
 
-        val canInteract = when (blockEntity.isInverted) {
-            true -> closeEnough
-
-            false -> !closeEnough
-                    || player.isSecondaryUseActive
-                    || player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
-        }
+        val canInteract = (closeEnough == blockEntity.isInverted)
+                || player.isSecondaryUseActive
+                || player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
 
         return if (canInteract) {
             Shapes.block()
