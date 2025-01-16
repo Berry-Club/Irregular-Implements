@@ -55,6 +55,11 @@ object ModMenuTypes {
             MenuType(::NotificationInterfaceMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val IMBUING_STATION: DeferredHolder<MenuType<*>, MenuType<ImbuingStationMenu>> =
+        MENU_TYPE_REGISTRY.register("imbuing_station", Supplier {
+            MenuType(::ImbuingStationMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)

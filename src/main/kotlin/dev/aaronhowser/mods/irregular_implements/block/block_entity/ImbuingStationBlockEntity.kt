@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.menu.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.NonNullList
@@ -33,8 +34,8 @@ class ImbuingStationBlockEntity(
 
     // Menu stuff
 
-    override fun createMenu(containerId: Int, inventory: Inventory): AbstractContainerMenu {
-        TODO("Not yet implemented")
+    override fun createMenu(containerId: Int, playerInventory: Inventory): AbstractContainerMenu {
+        return ImbuingStationMenu(containerId, playerInventory, this)
     }
 
     override fun getDefaultName(): Component {
