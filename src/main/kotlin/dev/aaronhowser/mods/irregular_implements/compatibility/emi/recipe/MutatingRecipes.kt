@@ -9,6 +9,7 @@ import dev.emi.emi.api.recipe.EmiRecipe
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
 import net.minecraft.world.item.crafting.Ingredient
@@ -82,19 +83,44 @@ object MutatingRecipes {
         return recipe
     }
 
-    fun customCraftingTable(): MutatingEmiRecipe {
-
+    private fun customCraftingTable(): MutatingEmiRecipe {
         val validOuterItems = BuiltInRegistries.ITEM
             .getTag(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
             .get().toList().map { it.value().defaultInstance }
 
         val innerIngredient = Ingredient.of(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
 
+        val mutatingOutput: MutableList<ItemStack> = mutableListOf()
+
+        //TODO: Figure out why these aren't lined up
+        for (item in validOuterItems) {
+            val block = (item.item as BlockItem).block
+
+            val craftingTable = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
+            craftingTable.set(ModDataComponents.BLOCK, block)
+
+            mutatingOutput.add(craftingTable)
+        }
+
+        for (i in validOuterItems.indices) {
+
+            println(
+                """
+                
+                ${validOuterItems[i].item}
+                ${mutatingOutput[i].get(ModDataComponents.BLOCK)!!.name}
+                
+            """.trimIndent()
+            )
+
+        }
+
         val recipe = MutatingEmiRecipe.Builder()
             .recipePattern("PPP,PCP,PPP")
             .mutatingInput(*validOuterItems.toTypedArray())
             .patternKey('P', MutatingEmiRecipe.PatternValue.MutatingValue)
             .patternKey('C', MutatingEmiRecipe.PatternValue.IngredientValue(innerIngredient))
+            .mutatingOutput(*mutatingOutput.toTypedArray())
             .virtualInput(innerIngredient)
             .build(OtherUtil.modResource("/custom_crafting_table"))
 
@@ -102,7 +128,6 @@ object MutatingRecipes {
     }
 
     //TODO
-    // CustomCraftingTableRecipe
     // SetDiaph
     // InvertDiaph
 

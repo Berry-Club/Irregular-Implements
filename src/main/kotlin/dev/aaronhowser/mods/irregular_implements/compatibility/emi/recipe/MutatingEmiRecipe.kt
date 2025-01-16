@@ -17,12 +17,13 @@ class MutatingEmiRecipe(
     private val recipePattern: String,
     private val mutatingInput: List<ItemStack>,
     private val patternKeys: Map<Char, PatternValue>,
+    private val mutatingOutput: List<ItemStack>,
     private val virtualInput: List<EmiIngredient>
 ) : EmiRecipe {
 
     init {
         require(recipePattern.length == 9) { "Recipe pattern must be 9 characters long" }
-        require(patternKeys.size == recipePattern.groupBy { it }.size)
+        require(mutatingInput.size == mutatingOutput.size) { "Input and output stacks must be the same size" }
     }
 
     sealed interface PatternValue {
@@ -36,6 +37,7 @@ class MutatingEmiRecipe(
         private val mutatingInput: MutableList<ItemStack> = mutableListOf()
         private val patternKeys: MutableMap<Char, PatternValue> = mutableMapOf()
         private val virtualInput: MutableList<EmiIngredient> = mutableListOf()
+        private val mutatingOutput: MutableList<ItemStack> = mutableListOf()
 
         fun recipePattern(recipePattern: String): Builder {
             this.recipePattern = recipePattern.filterNot { it.isWhitespace() || it == ',' }
@@ -44,6 +46,11 @@ class MutatingEmiRecipe(
 
         fun mutatingInput(vararg input: ItemStack): Builder {
             this.mutatingInput.addAll(input)
+            return this
+        }
+
+        fun mutatingOutput(vararg output: ItemStack): Builder {
+            this.mutatingOutput.addAll(output)
             return this
         }
 
@@ -58,7 +65,7 @@ class MutatingEmiRecipe(
         }
 
         fun build(id: ResourceLocation): MutatingEmiRecipe {
-            return MutatingEmiRecipe(id, recipePattern, mutatingInput, patternKeys, virtualInput)
+            return MutatingEmiRecipe(id, recipePattern, mutatingInput, patternKeys, mutatingOutput, virtualInput)
         }
     }
 
@@ -139,8 +146,8 @@ class MutatingEmiRecipe(
     }
 
     private fun getOutputStack(random: Random): EmiStack {
-        val randomIndex = random.nextInt(mutatingInput.size)
-        val stack = this.mutatingInput.getOrNull(randomIndex) ?: ItemStack.EMPTY
+        val randomIndex = random.nextInt(mutatingOutput.size)
+        val stack = this.mutatingOutput.getOrNull(randomIndex) ?: ItemStack.EMPTY
 
         return EmiStack.of(stack)
     }
