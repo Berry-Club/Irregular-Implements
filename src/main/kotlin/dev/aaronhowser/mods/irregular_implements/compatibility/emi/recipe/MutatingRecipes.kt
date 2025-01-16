@@ -31,10 +31,11 @@ object MutatingRecipes {
         }
 
         val lubricateBuilder = MutatingEmiRecipe.Builder()
-            .otherItem(ModItems.SUPER_LUBRICANT_TINCTURE.toStack())
+            .constantItem(ModItems.SUPER_LUBRICANT_TINCTURE.toStack())
 
         val cleanBuilder = MutatingEmiRecipe.Builder()
-            .otherItem(OtherUtil.getPotionStack(Potions.WATER))
+            .constantItem(OtherUtil.getPotionStack(Potions.WATER))
+            .includeAllIngredients(true)
 
         for ((cleanBoot, lubedBoot) in bootMap) {
             lubricateBuilder.addStage(
@@ -61,7 +62,7 @@ object MutatingRecipes {
         }
 
         val builder = MutatingEmiRecipe.Builder()
-            .otherItem(ModItems.SPECTRE_ANCHOR.toStack())
+            .constantItem(ModItems.SPECTRE_ANCHOR.toStack())
 
         for (item in allItems) {
             val anchoredItem = item.copy()
