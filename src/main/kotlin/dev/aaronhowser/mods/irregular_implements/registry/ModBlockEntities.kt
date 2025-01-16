@@ -153,4 +153,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val IMBUING_STATION: DeferredHolder<BlockEntityType<*>, BlockEntityType<ImbuingStationBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("imbuing_station", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> ImbuingStationBlockEntity(pos, state) },
+                ModBlocks.IMBUING_STATION.get()
+            ).build(null)
+        })
+
 }

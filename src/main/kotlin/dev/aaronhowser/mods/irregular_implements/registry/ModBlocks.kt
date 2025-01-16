@@ -15,7 +15,8 @@ object ModBlocks {
 
     val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
         registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
-    val IMBUING_STATION = basicBlock("imbuing_station")
+    val IMBUING_STATION: DeferredBlock<ImbuingStationBlock> =
+        registerBlock("imbuing_station") { ImbuingStationBlock() }
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
