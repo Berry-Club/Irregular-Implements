@@ -14,6 +14,20 @@ class ImbuingStationScreen(
 
     private val background = ScreenTextures.Backgrounds.ImbuingStation
 
+    override fun init() {
+        this.imageWidth = background.width
+        this.imageHeight = background.height
+
+        this.leftPos = (this.width - this.imageWidth) / 2
+        this.topPos = (this.height - this.imageHeight) / 2
+
+        this.titleLabelX -= 4
+    }
+
+    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
+    }
+
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
         background.render(
             guiGraphics,
