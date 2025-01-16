@@ -40,13 +40,13 @@ object MutatingRecipes {
 
         for ((cleanBoot, lubedBoot) in bootMap) {
             lubricateBuilder.addStage(
-                listOf(cleanBoot, lubricantStack),
-                lubedBoot
+                inputItems = listOf(cleanBoot, lubricantStack),
+                outputItem = lubedBoot
             )
 
             cleanBuilder.addStage(
-                listOf(lubedBoot, waterStack),
-                cleanBoot
+                inputItems = listOf(lubedBoot, waterStack),
+                outputItem = cleanBoot
             )
         }
 
@@ -56,28 +56,31 @@ object MutatingRecipes {
         return listOf(lubricateRecipe, cleanRecipe)
     }
 
-    private fun spectreAnchor(): MutatingEmiRecipe {
+    private fun spectreAnchor(): MutatingWithConstantEmiRecipe {
         val allItems = (BuiltInRegistries.ITEM).mapNotNull {
             val stack = it.defaultInstance
             if (ApplySpectreAnchorRecipe.isApplicable(stack)) stack else null
         }
 
-        val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
-
-        val builder = MutatingEmiRecipe.Builder()
-            .virtualInput(anchorStack)
+        val anchoredItems: MutableList<ItemStack> = mutableListOf()
 
         for (item in allItems) {
             val anchoredItem = item.copy()
             anchoredItem.set(ModDataComponents.ANCHORED, Unit.INSTANCE)
-
-            builder.addStage(
-                listOf(item, anchorStack),
-                anchoredItem
-            )
+            anchoredItems.add(anchoredItem)
         }
 
-        return builder.build(OtherUtil.modResource("/apply_spectre_anchor"))
+        val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
+
+        val recipe = MutatingWithConstantEmiRecipe(
+            id = OtherUtil.modResource("/apply_spectre_anchor"),
+            mutatingInput = allItems,
+            constantStack = anchorStack,
+            mutatingOutput = anchoredItems,
+            virtualInput = emptyList()
+        )
+
+        return recipe
     }
 
 }
