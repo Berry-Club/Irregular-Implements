@@ -21,7 +21,7 @@ class ImbuingStationBlockEntity(
     private var items: NonNullList<ItemStack> = NonNullList.withSize(containerSize, ItemStack.EMPTY)
 
     override fun getContainerSize(): Int {
-        return 4
+        return 5
     }
 
     override fun getItems(): NonNullList<ItemStack> {
