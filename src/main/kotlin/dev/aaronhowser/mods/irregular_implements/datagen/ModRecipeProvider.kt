@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
@@ -49,11 +50,8 @@ class ModRecipeProvider(
             coloredThing.save(recipeOutput)
         }
 
-        populatedNamedRecipes()
-
-        for ((recipe, name) in recipesWithNames) {
-            recipe.save(recipeOutput, OtherUtil.modResource(name))
-        }
+        namedRecipes(recipeOutput)
+        imbuingRecipes(recipeOutput)
 
         lubricateBoot.save(recipeOutput, OtherUtil.modResource("lubricate_boot"))
         washBoot.save(recipeOutput, OtherUtil.modResource("wash_boot"))
@@ -1479,8 +1477,6 @@ class ModRecipeProvider(
         )
     }
 
-    private val recipesWithNames: MutableMap<RecipeBuilder, String> = mutableMapOf()
-
     private val dyeTags: Map<DyeColor, TagKey<Item>> = mapOf(
         DyeColor.WHITE to Tags.Items.DYES_WHITE,
         DyeColor.ORANGE to Tags.Items.DYES_ORANGE,
@@ -1573,8 +1569,7 @@ class ModRecipeProvider(
         }
     }
 
-    private fun populatedNamedRecipes() {
-
+    private fun namedRecipes(recipeOutput: RecipeOutput) {
         val spectreIngotRecipe = shapedRecipe(
             ModItems.SPECTRE_INGOT,
             "L,G,E",
@@ -1585,7 +1580,7 @@ class ModRecipeProvider(
             )
         )
 
-        recipesWithNames[spectreIngotRecipe] = "spectre_ingot_single"
+        spectreIngotRecipe.save(recipeOutput, OtherUtil.modResource("spectre_ingot_single"))
 
         val universalOreDiviningRod = shapedRecipe(
             DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES),
@@ -1603,7 +1598,94 @@ class ModRecipeProvider(
             )
         )
 
-        recipesWithNames[universalOreDiviningRod] = "universal_ore_divining_rod"
+        universalOreDiviningRod.save(recipeOutput, OtherUtil.modResource("universal_ore_divining_rod"))
+    }
+
+    private fun imbuingRecipes(recipeOutput: RecipeOutput) {
+
+        val mossyCobbleRecipe = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+                ing(Items.VINE).getIngredient(),
+                ing(Items.BONE_MEAL).getIngredient()
+            ),
+            centerIngredient = ing(Items.COBBLESTONE).getIngredient(),
+            outputStack = Items.MOSSY_COBBLESTONE.defaultInstance
+        )
+
+        mossyCobbleRecipe.save(recipeOutput, "imbuing/mossy_cobblestone")
+
+        val fireImbue = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(ItemTags.COALS).getIngredient(),
+                ing(Items.FLINT).getIngredient(),
+                ing(Items.BLAZE_POWDER).getIngredient()
+            ),
+            centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+            outputStack = ModItems.FIRE_IMBUE.toStack()
+        )
+
+        fireImbue.save(recipeOutput, "imbuing/fire_imbue")
+
+        val poisonImbue = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(Items.SPIDER_EYE).getIngredient(),
+                ing(Items.ROTTEN_FLESH).getIngredient(),
+                ing(Items.RED_MUSHROOM).getIngredient()
+            ),
+            centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+            outputStack = ModItems.POISON_IMBUE.toStack()
+        )
+
+        poisonImbue.save(recipeOutput, "imbuing/poison_imbue")
+
+        val experienceImbue = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(ModItems.LESSER_MAGIC_BEAN).getIngredient(),
+                ing(Tags.Items.GEMS_LAPIS).getIngredient(),
+                ing(Tags.Items.DUSTS_GLOWSTONE).getIngredient()
+            ),
+            centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+            outputStack = ModItems.EXPERIENCE_IMBUE.toStack()
+        )
+
+        experienceImbue.save(recipeOutput, "imbuing/experience_imbue")
+
+        val witherImbue = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(Items.WITHER_SKELETON_SKULL).getIngredient(),
+                ing(Items.NETHER_BRICK).getIngredient(),
+                ing(Items.GHAST_TEAR).getIngredient()
+            ),
+            centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+            outputStack = ModItems.WITHER_IMBUE.toStack()
+        )
+
+        witherImbue.save(recipeOutput, "imbuing/wither_imbue")
+
+        val collapseImbue = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(ModItems.SAKANADE_SPORES).getIngredient(),
+                ing(Items.VINE).getIngredient(),
+                ing(Tags.Items.SLIME_BALLS).getIngredient()
+            ),
+            centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+            outputStack = ModItems.COLLAPSE_IMBUE.toStack()
+        )
+
+        collapseImbue.save(recipeOutput, "imbuing/collapse_imbue")
+
+        val spectreImbue = ImbuingRecipeBuilder(
+            outerIngredients = listOf(
+                ing(ModItems.ECTOPLASM).getIngredient(),
+                ing(Tags.Items.STORAGE_BLOCKS_LAPIS).getIngredient(),
+                ing(Items.OXEYE_DAISY).getIngredient()
+            ),
+            centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+            outputStack = ModItems.SPECTRE_IMBUE.toStack()
+        )
+
+        spectreImbue.save(recipeOutput, "imbuing/spectre_imbue")
     }
 
 }
