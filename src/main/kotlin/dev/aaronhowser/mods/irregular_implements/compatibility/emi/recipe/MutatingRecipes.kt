@@ -5,11 +5,13 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiRecipe
+import dev.emi.emi.api.stack.EmiIngredient
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
+import net.minecraft.world.item.crafting.Ingredient
 
 object MutatingRecipes {
 
@@ -77,7 +79,7 @@ object MutatingRecipes {
             mutatingInput = allItems,
             constantStack = anchorStack,
             mutatingOutput = anchoredItems,
-            virtualInput = emptyList()
+            virtualInput = listOf(EmiIngredient.of(Ingredient.of(anchorStack)))
         )
 
         return recipe
