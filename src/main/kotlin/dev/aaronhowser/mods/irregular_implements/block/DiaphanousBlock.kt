@@ -69,17 +69,4 @@ class DiaphanousBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBlock 
         return Shapes.block()
     }
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
-        super.setPlacedBy(level, pos, state, placer, stack)
-
-        val blockToRender = stack.get(ModDataComponents.BLOCK)
-        val isInverted = stack.has(ModDataComponents.IS_INVERTED)
-        if (blockToRender != null) {
-            val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
-
-            blockEntity?.renderedBlock = blockToRender
-            blockEntity?.isInverted = isInverted
-        }
-    }
-
 }

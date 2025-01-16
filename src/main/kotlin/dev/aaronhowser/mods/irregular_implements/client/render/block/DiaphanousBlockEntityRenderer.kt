@@ -43,7 +43,7 @@ class DiaphanousBlockEntityRenderer(
 
         poseStack.pushPose()
 
-        val stateToRender = blockEntity.renderedBlock.defaultBlockState()
+        val stateToRender = blockEntity.renderedBlockState
         val model = context.blockRenderDispatcher.getBlockModel(stateToRender)
         val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
 

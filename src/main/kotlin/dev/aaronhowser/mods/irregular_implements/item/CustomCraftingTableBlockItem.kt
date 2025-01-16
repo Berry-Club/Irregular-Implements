@@ -35,17 +35,13 @@ class CustomCraftingTableBlockItem : BlockItem(
             return result
         }
 
-        val blockToRender = context.itemInHand.get(ModDataComponents.BLOCK)
+        val stateToRender = context.itemInHand.get(ModDataComponents.BLOCK)?.getStateForPlacement(context)
 
-        if (blockToRender != null) {
-            val stateToRender = blockToRender.getStateForPlacement(context)
+        if (stateToRender != null) {
+            val blockEntity = context.level.getBlockEntity(context.clickedPos)
 
-            if (stateToRender != null) {
-                val blockEntity = context.level.getBlockEntity(context.clickedPos)
-
-                if (blockEntity is CustomCraftingTableBlockEntity) {
-                    blockEntity.renderedBlockState = stateToRender
-                }
+            if (blockEntity is CustomCraftingTableBlockEntity) {
+                blockEntity.renderedBlockState = stateToRender
             }
         }
 

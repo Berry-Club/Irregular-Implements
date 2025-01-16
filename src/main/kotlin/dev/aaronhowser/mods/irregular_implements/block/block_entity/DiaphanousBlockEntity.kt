@@ -1,13 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.level.block.Block
+import net.minecraft.nbt.NbtUtils
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -18,17 +16,28 @@ class DiaphanousBlockEntity(
 ) : BlockEntity(ModBlockEntities.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
 
     companion object {
-        const val BLOCK_NBT = "Block"
+        const val RENDERED_BLOCK_STATE = "RenderedBlockState"
         const val IS_INVERTED_NBT = "IsInverted"
     }
 
-    var renderedBlock: Block = Blocks.STONE
+    var renderedBlockState: BlockState = Blocks.STONE.defaultBlockState()
+        set(value) {
+            field = value
+            setChanged()
+        }
+
     var isInverted: Boolean = false
+        set(value) {
+            field = value
+            setChanged()
+        }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
-        tag.putString(BLOCK_NBT, BuiltInRegistries.BLOCK.getKey(this.renderedBlock).toString())
+        val blockStateTag = NbtUtils.writeBlockState(this.renderedBlockState)
+        tag.put(RENDERED_BLOCK_STATE, blockStateTag)
+
         tag.putBoolean(IS_INVERTED_NBT, this.isInverted)
     }
 
@@ -37,18 +46,13 @@ class DiaphanousBlockEntity(
 
         this.isInverted = tag.getBoolean(IS_INVERTED_NBT)
 
-        val blockString = tag.getString(BLOCK_NBT)
-        val blockRl = ResourceLocation.tryParse(blockString)
+        val blockStateTag = tag.getCompound(RENDERED_BLOCK_STATE)
+        val readBlockState = NbtUtils.readBlockState(
+            registries.lookupOrThrow(Registries.BLOCK),
+            blockStateTag
+        )
 
-        if (blockRl != null) {
-            val block = BuiltInRegistries.BLOCK.getOptional(blockRl)
-
-            if (block.isPresent) {
-                this.renderedBlock = block.get()
-            } else {
-                IrregularImplements.LOGGER.error("A Diaphanous Block at ${blockPos.x} ${blockPos.y} ${blockPos.z} tried to load a block that doesn't exist: $blockString")
-            }
-        }
+        this.renderedBlockState = readBlockState
     }
 
 }
