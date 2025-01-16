@@ -12,7 +12,7 @@ class ImbuingStationMenu(
     containerId: Int,
     private val playerInventory: Inventory,
     private val imbuingStationContainer: Container
-) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId) {
+) : AbstractContainerMenu(ModMenuTypes.IMBUING_STATION.get(), containerId) {
 
     constructor(containerId: Int, playerInventory: Inventory) :
             this(

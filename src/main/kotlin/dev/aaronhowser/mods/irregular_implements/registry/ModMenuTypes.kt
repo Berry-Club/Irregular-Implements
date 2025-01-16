@@ -69,6 +69,7 @@ object ModMenuTypes {
         event.register(VOID_STONE.get(), ::VoidStoneScreen)
         event.register(ONLINE_DETECTOR.get(), ::OnlineDetectorScreen)
         event.register(NOTIFICATION_INTERFACE.get(), ::NotificationInterfaceScreen)
+        event.register(IMBUING_STATION.get(), ::ImbuingStationScreen)
     }
 
 }
