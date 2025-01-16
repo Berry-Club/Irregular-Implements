@@ -31,20 +31,19 @@ object MutatingRecipes {
         }
 
         val lubricateBuilder = MutatingEmiRecipe.Builder()
-            .constantItem(ModItems.SUPER_LUBRICANT_TINCTURE.toStack())
-
         val cleanBuilder = MutatingEmiRecipe.Builder()
-            .constantItem(OtherUtil.getPotionStack(Potions.WATER))
-            .includeAllIngredients(true)
+
+        val lubricantStack = ModItems.SUPER_LUBRICANT_TINCTURE.toStack()
+        val waterStack = OtherUtil.getPotionStack(Potions.WATER)
 
         for ((cleanBoot, lubedBoot) in bootMap) {
             lubricateBuilder.addStage(
-                cleanBoot,
+                listOf(cleanBoot, lubricantStack),
                 lubedBoot
             )
 
             cleanBuilder.addStage(
-                lubedBoot,
+                listOf(lubedBoot, waterStack),
                 cleanBoot
             )
         }
@@ -62,12 +61,17 @@ object MutatingRecipes {
         }
 
         val builder = MutatingEmiRecipe.Builder()
-            .constantItem(ModItems.SPECTRE_ANCHOR.toStack())
+
+        val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
 
         for (item in allItems) {
             val anchoredItem = item.copy()
             anchoredItem.set(ModDataComponents.ANCHORED, Unit.INSTANCE)
-            builder.addStage(item, anchoredItem)
+
+            builder.addStage(
+                listOf(item, anchorStack),
+                anchoredItem
+            )
         }
 
         return builder.build(OtherUtil.modResource("/apply_spectre_anchor"))

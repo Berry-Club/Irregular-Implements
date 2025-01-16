@@ -9,33 +9,25 @@ import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.crafting.Ingredient
 import java.util.*
 
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
-    private val constantItem: ItemStack,
     private val stages: List<Stage>,
     private val includeAllIngredients: Boolean
 ) : EmiRecipe {
 
     class Stage(
-        val inputItem: ItemStack,
+        val inputItemGrid: List<ItemStack>,
         val outputItem: ItemStack
     )
 
     class Builder {
         private val stages: MutableList<Stage> = mutableListOf()
-        private var constantItem: ItemStack = ItemStack.EMPTY
         private var includeAllIngredients: Boolean = false
 
-        fun constantItem(item: ItemStack): Builder {
-            this.constantItem = item
-            return this
-        }
-
-        fun addStage(inputItem: ItemStack, outputItem: ItemStack): Builder {
-            this.stages.add(Stage(inputItem, outputItem))
+        fun addStage(inputItems: List<ItemStack>, outputItem: ItemStack): Builder {
+            this.stages.add(Stage(inputItems, outputItem))
             return this
         }
 
@@ -45,7 +37,7 @@ class MutatingEmiRecipe(
         }
 
         fun build(id: ResourceLocation): MutatingEmiRecipe {
-            return MutatingEmiRecipe(id, constantItem, stages, includeAllIngredients)
+            return MutatingEmiRecipe(id, stages, includeAllIngredients)
         }
     }
 
@@ -59,25 +51,8 @@ class MutatingEmiRecipe(
         return id
     }
 
-    private val changingInputs = stages.map { it.inputItem }
-    private val changingOutput = stages.map { it.outputItem }
-
     override fun getInputs(): List<EmiIngredient> {
-        val list: MutableList<EmiIngredient> = mutableListOf()
-
-        list.add(
-            EmiIngredient.of(Ingredient.of(constantItem))
-        )
-
-        if (this.includeAllIngredients) {
-            for (input in changingInputs) {
-                list.add(
-                    EmiIngredient.of(Ingredient.of(input))
-                )
-            }
-        }
-
-        return list
+        return emptyList()
     }
 
     override fun getOutputs(): List<EmiStack> {
@@ -92,6 +67,10 @@ class MutatingEmiRecipe(
         return 54
     }
 
+    override fun supportsRecipeTree(): Boolean {
+        return false
+    }
+
     override fun addWidgets(widgets: WidgetHolder) {
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 60, 18)
         widgets.addTexture(EmiTexture.SHAPELESS, 97, 0)
@@ -100,27 +79,32 @@ class MutatingEmiRecipe(
             val x = i % 3 * 18
             val y = i / 3 * 18
 
-            when (i) {
-                0 -> widgets.addGeneratedSlot({ random -> getStartItem(random) }, uniqueId, x, y)
-
-                1 -> widgets.addSlot(EmiStack.of(constantItem), x, y)
-
-                else -> widgets.addSlot(EmiStack.of(ItemStack.EMPTY), x, y)
-            }
+            widgets.addGeneratedSlot(
+                { random -> getInputStack(random, i) },
+                uniqueId,
+                x,
+                y
+            )
         }
 
-        widgets.addGeneratedSlot({ random -> getOutputItem(random) }, uniqueId, 92, 14)
+        widgets.addGeneratedSlot(
+            { random -> getOutputStack(random) },
+            uniqueId,
+            92,
+            14
+        )
             .large(true)
             .recipeContext(this)
     }
 
-    private fun getStartItem(random: Random): EmiStack {
+    private fun getInputStack(random: Random, index: Int): EmiStack {
         val stage = stages[random.nextInt(stages.size)]
+        val stack = stage.inputItemGrid.getOrElse(index) { ItemStack.EMPTY }
 
-        return EmiStack.of(stage.inputItem)
+        return EmiStack.of(stack)
     }
 
-    private fun getOutputItem(random: Random): EmiStack {
+    private fun getOutputStack(random: Random): EmiStack {
         val stage = stages[random.nextInt(stages.size)]
 
         return EmiStack.of(stage.outputItem)
