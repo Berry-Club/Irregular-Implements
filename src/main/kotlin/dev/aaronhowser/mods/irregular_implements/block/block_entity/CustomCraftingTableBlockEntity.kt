@@ -31,20 +31,20 @@ class CustomCraftingTableBlockEntity(
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
-        val blockStateTag = NbtUtils.writeBlockState(renderedBlockState)
+        val blockStateTag = NbtUtils.writeBlockState(this.renderedBlockState)
         tag.put(RENDERED_BLOCK_STATE, blockStateTag)
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
 
-        val level = this.level ?: return
-
         val blockStateTag = tag.getCompound(RENDERED_BLOCK_STATE)
-        renderedBlockState = NbtUtils.readBlockState(
-            level.holderLookup(Registries.BLOCK),
+        val readBlockState = NbtUtils.readBlockState(
+            registries.lookupOrThrow(Registries.BLOCK),
             blockStateTag
         )
+
+        this.renderedBlockState = readBlockState
     }
 
     // Syncs with client
