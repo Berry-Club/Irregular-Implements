@@ -57,7 +57,7 @@ class DiaphanousBlock : Block(
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        if (level !is Level || level.isClientSide) return Shapes.block()
+        if (level !is Level || !level.isClientSide) return Shapes.block()
 
         val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
         val player = ClientUtil.localPlayer
