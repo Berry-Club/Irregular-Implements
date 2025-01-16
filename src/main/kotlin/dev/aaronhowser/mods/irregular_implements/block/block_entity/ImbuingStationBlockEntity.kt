@@ -3,7 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.menu.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -25,6 +28,18 @@ class ImbuingStationBlockEntity(
         const val BOTTOM_SLOT_INDEX = 2
         const val CENTER_SLOT_INDEX = 3
         const val OUTPUT_SLOT_INDEX = 4
+    }
+
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+
+        ContainerHelper.saveAllItems(tag, this.container.items, registries)
+    }
+
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+
+        ContainerHelper.loadAllItems(tag, this.container.items, registries)
     }
 
     // Container stuff
