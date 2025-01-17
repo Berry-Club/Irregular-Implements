@@ -17,7 +17,8 @@ class MutatingEmiRecipe private constructor(
     private val recipePattern: String,
     private val mutations: Map<ItemStack, ItemStack>,
     private val patternKeys: Map<Char, PatternValue>,
-    private val virtualInput: List<EmiIngredient>
+    private val virtualInput: List<EmiIngredient>,
+    private val virtualOutputs: List<ItemStack>
 ) : EmiRecipe {
 
     init {
@@ -38,6 +39,7 @@ class MutatingEmiRecipe private constructor(
         private val patternKeys: MutableMap<Char, PatternValue> = mutableMapOf()
         private val virtualInput: MutableList<EmiIngredient> = mutableListOf()
         private val mutations: MutableMap<ItemStack, ItemStack> = mutableMapOf()
+        private val virtualOutputs: MutableList<ItemStack> = mutableListOf()
 
         fun recipePattern(recipePattern: String): Builder {
             this.recipePattern = recipePattern.filterNot { it == ',' }
@@ -63,8 +65,13 @@ class MutatingEmiRecipe private constructor(
             return virtualInput(Ingredient.of(itemStack))
         }
 
+        fun virtualOutputs(vararg output: ItemStack): Builder {
+            this.virtualOutputs.addAll(output)
+            return this
+        }
+
         fun build(id: ResourceLocation): MutatingEmiRecipe {
-            return MutatingEmiRecipe(id, recipePattern, mutations, patternKeys, virtualInput)
+            return MutatingEmiRecipe(id, recipePattern, mutations, patternKeys, virtualInput, virtualOutputs)
         }
     }
 
@@ -81,7 +88,7 @@ class MutatingEmiRecipe private constructor(
     }
 
     override fun getOutputs(): List<EmiStack> {
-        return emptyList()
+        return virtualOutputs.map { EmiStack.of(it) }
     }
 
     override fun getDisplayWidth(): Int {
