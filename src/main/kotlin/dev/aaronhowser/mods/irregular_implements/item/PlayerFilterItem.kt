@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class FilterPlayerItem : Item(
+class PlayerFilterItem : Item(
     Properties()
         .stacksTo(1)
 ) {
