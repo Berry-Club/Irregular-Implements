@@ -18,7 +18,7 @@ import top.theillusivec4.curios.api.CuriosApi
 
 class SpectreAnchorItem : Item(
     Properties()
-        .component(ModDataComponents.ANCHORED, Unit.INSTANCE)
+        .component(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
 ) {
 
     companion object {
@@ -28,7 +28,7 @@ class SpectreAnchorItem : Item(
             val level = player.level()
             if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return
 
-            val anchoredItems = player.inventory.items.filter { it.has(ModDataComponents.ANCHORED) }.toMutableList()
+            val anchoredItems = player.inventory.items.filter { it.has(ModDataComponents.IS_ANCHORED) }.toMutableList()
             for (item in anchoredItems) {
                 player.inventory.removeItem(item)
             }
@@ -36,7 +36,7 @@ class SpectreAnchorItem : Item(
             CuriosApi.getCuriosInventory(player).ifPresent { inventory ->
                 for (slot in 0 until inventory.equippedCurios.slots) {
                     val stack = inventory.equippedCurios.getStackInSlot(slot)
-                    if (stack.has(ModDataComponents.ANCHORED)) {
+                    if (stack.has(ModDataComponents.IS_ANCHORED)) {
                         anchoredItems.add(stack)
                         inventory.equippedCurios.setStackInSlot(slot, ItemStack.EMPTY)
                     }
@@ -54,7 +54,7 @@ class SpectreAnchorItem : Item(
                 //TODO: Actually, should we?
                 if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
                     //TODO: Tell the player that the item was returned, and that the anchor was consumed
-                    item.remove(ModDataComponents.ANCHORED)
+                    item.remove(ModDataComponents.IS_ANCHORED)
                 }
 
                 OtherUtil.giveOrDropStack(item, player)
@@ -65,7 +65,7 @@ class SpectreAnchorItem : Item(
 
         fun tooltip(event: ItemTooltipEvent) {
             val stack = event.itemStack
-            if (!stack.has(ModDataComponents.ANCHORED)) return
+            if (!stack.has(ModDataComponents.IS_ANCHORED)) return
 
             event.toolTip.add(
                 ModLanguageProvider.Tooltips.ANCHORED
