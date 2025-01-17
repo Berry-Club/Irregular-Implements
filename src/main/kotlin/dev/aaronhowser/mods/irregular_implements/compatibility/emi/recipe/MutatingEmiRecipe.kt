@@ -12,46 +12,40 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import java.util.*
 
-//FIXME: mutating input and mutating output aren't lined up, and sometimes show as empty
 class MutatingEmiRecipe(
     private val id: ResourceLocation,
     private val recipePattern: String,
-    private val mutatingInput: List<ItemStack>,
+    private val mutations: Map<ItemStack, ItemStack>,
     private val patternKeys: Map<Char, PatternValue>,
-    private val mutatingOutput: List<ItemStack>,
     private val virtualInput: List<EmiIngredient>
 ) : EmiRecipe {
 
     init {
         require(recipePattern.length <= 9) { "Recipe pattern must be 9 characters long or less" }
-        require(mutatingInput.size == mutatingOutput.size) { "Input and output lists must be the same size" }
     }
 
     sealed interface PatternValue {
-        class IngredientValue(val ingredient: Ingredient) : PatternValue
+        class IngredientValue(val ingredient: Ingredient) : PatternValue {
+            constructor(stack: ItemStack) : this(Ingredient.of(stack))
+        }
+
         data object EmptyValue : PatternValue
         data object MutatingValue : PatternValue
     }
 
     class Builder {
         private var recipePattern: String = ""
-        private val mutatingInput: MutableList<ItemStack> = mutableListOf()
         private val patternKeys: MutableMap<Char, PatternValue> = mutableMapOf()
         private val virtualInput: MutableList<EmiIngredient> = mutableListOf()
-        private val mutatingOutput: MutableList<ItemStack> = mutableListOf()
+        private val mutations: MutableMap<ItemStack, ItemStack> = mutableMapOf()
 
         fun recipePattern(recipePattern: String): Builder {
             this.recipePattern = recipePattern.filterNot { it == ',' }
             return this
         }
 
-        fun mutatingInput(vararg input: ItemStack): Builder {
-            this.mutatingInput.addAll(input)
-            return this
-        }
-
-        fun mutatingOutput(vararg output: ItemStack): Builder {
-            this.mutatingOutput.addAll(output)
+        fun associations(mutations: Map<ItemStack, ItemStack>): Builder {
+            this.mutations.putAll(mutations)
             return this
         }
 
@@ -65,8 +59,12 @@ class MutatingEmiRecipe(
             return this
         }
 
+        fun virtualInput(itemStack: ItemStack): Builder {
+            return virtualInput(Ingredient.of(itemStack))
+        }
+
         fun build(id: ResourceLocation): MutatingEmiRecipe {
-            return MutatingEmiRecipe(id, recipePattern, mutatingInput, patternKeys, mutatingOutput, virtualInput)
+            return MutatingEmiRecipe(id, recipePattern, mutations, patternKeys, virtualInput)
         }
     }
 
@@ -122,7 +120,7 @@ class MutatingEmiRecipe(
                 )
 
                 is PatternValue.MutatingValue -> widgets.addGeneratedSlot(
-                    { random -> getInputStack(random) },
+                    { random -> getMutatingStack(random, isInput = true) },
                     uniqueId,
                     x,
                     y
@@ -131,7 +129,7 @@ class MutatingEmiRecipe(
         }
 
         widgets.addGeneratedSlot(
-            { random -> getOutputStack(random) },
+            { random -> getMutatingStack(random, isInput = false) },
             uniqueId,
             92,
             14
@@ -140,18 +138,11 @@ class MutatingEmiRecipe(
             .recipeContext(this)
     }
 
-    private fun getInputStack(random: Random): EmiStack {
-        val randomIndex = random.nextInt(mutatingInput.size + 1)
-        val stack = this.mutatingInput.getOrNull(randomIndex) ?: ItemStack.EMPTY
+    private fun getMutatingStack(random: Random, isInput: Boolean): EmiStack {
+        val randomIndex = random.nextInt(mutations.size)
+        val pair = mutations.entries.elementAt(randomIndex)
 
-        return EmiStack.of(stack)
-    }
-
-    private fun getOutputStack(random: Random): EmiStack {
-        val randomIndex = random.nextInt(mutatingOutput.size)
-        val stack = this.mutatingOutput.getOrNull(randomIndex) ?: ItemStack.EMPTY
-
-        return EmiStack.of(stack)
+        return EmiStack.of(if (isInput) pair.key else pair.value)
     }
 
 }

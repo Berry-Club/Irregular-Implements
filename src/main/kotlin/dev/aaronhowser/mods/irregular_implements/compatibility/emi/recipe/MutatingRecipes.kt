@@ -26,32 +26,31 @@ object MutatingRecipes {
             .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
             .map { it.defaultInstance }
 
-        val lubricantStack = ModItems.SUPER_LUBRICANT_TINCTURE.toStack()
-        val waterStack = OtherUtil.getPotionStack(Potions.WATER)
-
-        val lubedBoots: MutableList<ItemStack> = mutableListOf()
-
-        for (boot in cleanBoots) {
-            val lubedBoot = boot.copy()
+        val lubricating = cleanBoots.associateWith {
+            val lubedBoot = it.copy()
             lubedBoot.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
-            lubedBoots.add(lubedBoot)
+            lubedBoot
         }
+
+        val cleaning = lubricating.entries.associate { (k, v) -> v to k }
+
+        val lubricantStack = ModItems.SUPER_LUBRICANT_TINCTURE.toStack()
 
         val lubricateRecipe = MutatingEmiRecipe.Builder()
             .recipePattern("BL")
-            .mutatingInput(*cleanBoots.toTypedArray())
             .patternKey('B', MutatingEmiRecipe.PatternValue.MutatingValue)
-            .patternKey('L', MutatingEmiRecipe.PatternValue.IngredientValue(Ingredient.of(lubricantStack)))
-            .mutatingOutput(*lubedBoots.toTypedArray())
-            .virtualInput(Ingredient.of(lubricantStack))
+            .patternKey('L', MutatingEmiRecipe.PatternValue.IngredientValue(lubricantStack))
+            .associations(lubricating)
+            .virtualInput(lubricantStack)
             .build(OtherUtil.modResource("/lubricate_boot"))
+
+        val waterStack = OtherUtil.getPotionStack(Potions.WATER)
 
         val cleanRecipe = MutatingEmiRecipe.Builder()
             .recipePattern("BW")
-            .mutatingInput(*lubedBoots.toTypedArray())
             .patternKey('B', MutatingEmiRecipe.PatternValue.MutatingValue)
-            .patternKey('W', MutatingEmiRecipe.PatternValue.IngredientValue(Ingredient.of(waterStack)))
-            .mutatingOutput(*cleanBoots.toTypedArray())
+            .patternKey('W', MutatingEmiRecipe.PatternValue.IngredientValue(waterStack))
+            .associations(cleaning)
             .virtualInput(Ingredient.of(waterStack))
             .build(OtherUtil.modResource("/clean_boot"))
 
@@ -90,39 +89,22 @@ object MutatingRecipes {
             .getTag(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
             .get().toList().map { it.value().defaultInstance }
 
-        val innerIngredient = Ingredient.of(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
-
-        val mutatingOutput: MutableList<ItemStack> = mutableListOf()
-
-        //TODO: Figure out why these aren't lined up
-        for (item in validOuterItems) {
-            val block = (item.item as BlockItem).block
+        val associations = validOuterItems.associateWith {
+            val block = (it.item as BlockItem).block
 
             val craftingTable = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
             craftingTable.set(ModDataComponents.BLOCK, block)
 
-            mutatingOutput.add(craftingTable)
+            craftingTable
         }
 
-        for (i in validOuterItems.indices) {
-
-            println(
-                """
-                
-                ${validOuterItems[i].item}
-                ${mutatingOutput[i].get(ModDataComponents.BLOCK)!!.name}
-                
-            """.trimIndent()
-            )
-
-        }
+        val innerIngredient = Ingredient.of(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
 
         val recipe = MutatingEmiRecipe.Builder()
             .recipePattern("PPP,PCP,PPP")
-            .mutatingInput(*validOuterItems.toTypedArray())
             .patternKey('P', MutatingEmiRecipe.PatternValue.MutatingValue)
             .patternKey('C', MutatingEmiRecipe.PatternValue.IngredientValue(innerIngredient))
-            .mutatingOutput(*mutatingOutput.toTypedArray())
+            .associations(associations)
             .virtualInput(innerIngredient)
             .build(OtherUtil.modResource("/custom_crafting_table"))
 
