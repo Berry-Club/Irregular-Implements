@@ -109,7 +109,8 @@ object ModItems {
     // Filters
     val LOCATION_FILTER: DeferredItem<LocationFilterItem> =
         register("location_filter") { LocationFilterItem() }
-    val ITEM_FILTER = basic("item_filter")
+    val ITEM_FILTER: DeferredItem<ItemFilterItem> =
+        register("item_filter") { ItemFilterItem() }
     val ENTITY_FILTER: DeferredItem<EntityFilterItem> =
         register("entity_filter") { EntityFilterItem() }
     val ID_CARD: DeferredItem<PlayerFilterItem> =   //TODO: Rename to Player Filter?

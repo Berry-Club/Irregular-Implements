@@ -7,20 +7,20 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 
-sealed interface ItemFilterPredicate {
+sealed interface ItemFilterEntry {
 
     fun test(stack: ItemStack): Boolean
 
-    val codec: Codec<out ItemFilterPredicate>
+    val codec: Codec<out ItemFilterEntry>
 
     data class Tag(
         val tagKey: TagKey<Item>
-    ) : ItemFilterPredicate {
+    ) : ItemFilterEntry {
         override fun test(stack: ItemStack): Boolean {
             return stack.`is`(tagKey)
         }
 
-        override val codec: Codec<out ItemFilterPredicate> = CODEC
+        override val codec: Codec<out ItemFilterEntry> = CODEC
 
         companion object {
             val CODEC: Codec<Tag> =
@@ -31,17 +31,17 @@ sealed interface ItemFilterPredicate {
     data class Stack(
         val stack: ItemStack,
         val requireSameComponents: Boolean
-    ) : ItemFilterPredicate {
+    ) : ItemFilterEntry {
 
         override fun test(stack: ItemStack): Boolean {
-            if (requireSameComponents) {
+            if (this.requireSameComponents) {
                 return ItemStack.isSameItemSameComponents(this.stack, stack)
             }
 
             return ItemStack.isSameItem(this.stack, stack)
         }
 
-        override val codec: Codec<out ItemFilterPredicate> = CODEC
+        override val codec: Codec<out ItemFilterEntry> = CODEC
 
         fun toggleRequireSameComponents(): Stack {
             return copy(requireSameComponents = !this.requireSameComponents)
