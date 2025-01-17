@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import java.util.*
 
-class MutatingEmiRecipe(
+class MutatingEmiRecipe private constructor(
     private val id: ResourceLocation,
     private val recipePattern: String,
     private val mutations: Map<ItemStack, ItemStack>,
