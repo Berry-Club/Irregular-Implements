@@ -23,14 +23,14 @@ object MutatingRecipes {
     }
 
     private fun lubricateRecipes(): List<EmiRecipe> {
-        val cleanBoots = BuiltInRegistries.ITEM
-            .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
-            .map { it.defaultInstance }
+        val cleanBoots = BuiltInRegistries.ITEM.mapNotNull { item ->
+            item.takeIf { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }?.defaultInstance
+        }
 
-        val lubricating = cleanBoots.associateWith {
-            val lubedBoot = it.copy()
-            lubedBoot.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
-            lubedBoot
+        val lubricating = cleanBoots.associateWith { stack ->
+            stack.copy().apply {
+                set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
+            }
         }
 
         val cleaning = lubricating.entries.associate { (k, v) -> v to k }
@@ -59,15 +59,14 @@ object MutatingRecipes {
     }
 
     private fun spectreAnchor(): EmiRecipe {
-        val allStacks = (BuiltInRegistries.ITEM).mapNotNull {
-            val stack = it.defaultInstance
-            if (ApplySpectreAnchorRecipe.isApplicable(stack)) stack else null
+        val allStacks = (BuiltInRegistries.ITEM).mapNotNull { item ->
+            item.defaultInstance.takeIf { stack -> ApplySpectreAnchorRecipe.isApplicable(stack) }
         }
 
-        val associations = allStacks.associateWith {
-            val anchoredStack = it.copy()
-            anchoredStack.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
-            anchoredStack
+        val associations = allStacks.associateWith { stack ->
+            stack.copy().apply {
+                set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
+            }
         }
 
         val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
@@ -86,15 +85,15 @@ object MutatingRecipes {
     private fun customCraftingTable(): MutatingEmiRecipe {
         val validOuterItems = BuiltInRegistries.ITEM
             .getTag(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
-            .get().toList().map { it.value().defaultInstance }
+            .get()
+            .map { it.value().defaultInstance }
 
-        val associations = validOuterItems.associateWith {
-            val block = (it.item as BlockItem).block
+        val associations = validOuterItems.associateWith { stack ->
+            val block = (stack.item as BlockItem).block
 
-            val craftingTable = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
-            craftingTable.set(ModDataComponents.BLOCK, block)
-
-            craftingTable
+            ModItems.CUSTOM_CRAFTING_TABLE.toStack().apply {
+                set(ModDataComponents.BLOCK, block)
+            }
         }
 
         val craftingTableIngredient = Ingredient.of(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
@@ -114,18 +113,18 @@ object MutatingRecipes {
     private fun diaphanousRecipes(): List<MutatingEmiRecipe> {
         val level = ClientUtil.localPlayer?.level() ?: return emptyList()
 
-        val validBlockStacks = BuiltInRegistries.BLOCK.mapNotNull {
-            if (!DiaphanousBlock.isValidBlock(it, level)) return@mapNotNull null
+        val validBlockStacks = BuiltInRegistries.BLOCK.mapNotNull { block ->
+            if (!DiaphanousBlock.isValidBlock(block, level)) return@mapNotNull null
 
-            val stack = it.asItem().defaultInstance
-            if (stack.isEmpty) null else stack
+            block.asItem().defaultInstance.takeUnless { it.isEmpty }
         }
 
-        val setAssociations = validBlockStacks.associateWith {
-            val block = (it.item as? BlockItem)?.block
-            val diaphanousBlockItem = ModItems.DIAPHANOUS_BLOCK.toStack()
-            diaphanousBlockItem.set(ModDataComponents.BLOCK, block)
-            diaphanousBlockItem
+        val setAssociations = validBlockStacks.associateWith { stack ->
+            val block = (stack.item as? BlockItem)?.block
+
+            ModItems.DIAPHANOUS_BLOCK.toStack().apply {
+                set(ModDataComponents.BLOCK, block)
+            }
         }
 
         val defaultDiaphanousBlock = ModItems.DIAPHANOUS_BLOCK.toStack()
@@ -141,10 +140,10 @@ object MutatingRecipes {
             .virtualOutputs(defaultDiaphanousBlock)
             .build(OtherUtil.modResource("/set_diaphanous_block"))
 
-        val invertAssociations = setAssociations.values.associateWith {
-            val invertedStack = it.copy()
-            invertedStack.set(ModDataComponents.IS_INVERTED, Unit.INSTANCE)
-            invertedStack
+        val invertAssociations = setAssociations.values.associateWith { stack ->
+            stack.copy().apply {
+                set(ModDataComponents.IS_INVERTED, Unit.INSTANCE)
+            }
         }
 
         val invertRecipe = MutatingEmiRecipe.Builder()
@@ -155,11 +154,7 @@ object MutatingRecipes {
             .virtualOutputs(defaultDiaphanousBlock)
             .build(OtherUtil.modResource("/invert_diaphanous_block"))
 
-        val unInvertAssociations = invertAssociations.values.associateWith {
-            val unInvertedStack = it.copy()
-            unInvertedStack.remove(ModDataComponents.IS_INVERTED)
-            unInvertedStack
-        }
+        val unInvertAssociations = invertAssociations.entries.associate { (k, v) -> v to k }
 
         val unInvertRecipe = MutatingEmiRecipe.Builder()
             .recipePattern("D")
