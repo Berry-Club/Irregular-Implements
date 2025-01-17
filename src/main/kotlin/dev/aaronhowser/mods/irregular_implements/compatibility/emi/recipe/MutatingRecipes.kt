@@ -10,7 +10,6 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
 import net.minecraft.world.item.crafting.Ingredient
 import net.neoforged.neoforge.common.Tags
@@ -51,36 +50,33 @@ object MutatingRecipes {
             .patternKey('B', MutatingEmiRecipe.PatternValue.MutatingValue)
             .patternKey('W', MutatingEmiRecipe.PatternValue.IngredientValue(waterStack))
             .associations(cleaning)
-            .virtualInput(Ingredient.of(waterStack))
+            .virtualInput(waterStack)
             .build(OtherUtil.modResource("/clean_boot"))
 
         return listOf(lubricateRecipe, cleanRecipe)
     }
 
-    private fun spectreAnchor(): MutatingWithConstantEmiRecipe {
-        val allItems = (BuiltInRegistries.ITEM).mapNotNull {
+    private fun spectreAnchor(): EmiRecipe {
+        val allStacks = (BuiltInRegistries.ITEM).mapNotNull {
             val stack = it.defaultInstance
             if (ApplySpectreAnchorRecipe.isApplicable(stack)) stack else null
         }
 
-
-        val anchoredItems: MutableList<ItemStack> = mutableListOf()
-
-        for (item in allItems) {
-            val anchoredItem = item.copy()
-            anchoredItem.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
-            anchoredItems.add(anchoredItem)
+        val associations = allStacks.associateWith {
+            val anchoredStack = it.copy()
+            anchoredStack.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
+            anchoredStack
         }
 
         val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
 
-        val recipe = MutatingWithConstantEmiRecipe(
-            id = OtherUtil.modResource("/apply_spectre_anchor"),
-            mutatingInput = allItems,
-            constantStack = anchorStack,
-            mutatingOutput = anchoredItems,
-            virtualInput = listOf(anchorStack)
-        )
+        val recipe = MutatingEmiRecipe.Builder()
+            .recipePattern("IA")
+            .patternKey('I', MutatingEmiRecipe.PatternValue.MutatingValue)
+            .patternKey('A', MutatingEmiRecipe.PatternValue.IngredientValue(anchorStack))
+            .associations(associations)
+            .virtualInput(anchorStack)
+            .build(OtherUtil.modResource("/apply_spectre_anchor"))
 
         return recipe
     }
