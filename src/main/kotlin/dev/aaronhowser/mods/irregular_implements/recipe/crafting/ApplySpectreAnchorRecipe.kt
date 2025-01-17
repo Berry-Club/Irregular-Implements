@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -18,7 +19,9 @@ class ApplySpectreAnchorRecipe(
         val anchorIngredient: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
 
         fun isApplicable(itemStack: ItemStack): Boolean {
-            return !itemStack.isEmpty && !itemStack.has(ModDataComponents.ANCHORED) && !anchorIngredient.test(itemStack)
+            return !itemStack.isEmpty
+                    && !itemStack.`is`(ModItemTagsProvider.SPECTRE_ANCHOR_BLACKLIST)
+                    && !itemStack.has(ModDataComponents.IS_ANCHORED)
         }
     }
 
@@ -33,7 +36,7 @@ class ApplySpectreAnchorRecipe(
         val nonAnchor = input.items().first { isApplicable(it) }
 
         val result = nonAnchor.copyWithCount(1) //TODO: Figure out how to let you do entire stacks without duping
-        result.set(ModDataComponents.ANCHORED, Unit.INSTANCE)
+        result.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
 
         return result
     }

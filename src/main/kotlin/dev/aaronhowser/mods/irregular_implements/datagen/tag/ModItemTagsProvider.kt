@@ -34,6 +34,7 @@ class ModItemTagsProvider(
         val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
         val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
         val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
+        val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
 
         @JvmStatic
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -45,6 +46,11 @@ class ModItemTagsProvider(
     //TODO: Copy all block tags to item tags
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(SPECTRE_ANCHOR_BLACKLIST)
+            .add(
+                ModItems.SPECTRE_ANCHOR.get()
+            )
 
         this.tag(CUSTOM_CRAFTING_TABLE_ITEMS)
             .addTags(

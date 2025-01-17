@@ -63,11 +63,12 @@ object MutatingRecipes {
             if (ApplySpectreAnchorRecipe.isApplicable(stack)) stack else null
         }
 
+
         val anchoredItems: MutableList<ItemStack> = mutableListOf()
 
         for (item in allItems) {
             val anchoredItem = item.copy()
-            anchoredItem.set(ModDataComponents.ANCHORED, Unit.INSTANCE)
+            anchoredItem.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
             anchoredItems.add(anchoredItem)
         }
 
