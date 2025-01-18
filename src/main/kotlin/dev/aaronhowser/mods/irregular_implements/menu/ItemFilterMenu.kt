@@ -18,11 +18,12 @@ class ItemFilterMenu(
     playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.ITEM_FILTER.get(), containerId), MenuWithButtons {
 
-    val filterStack: ItemStack = if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
-        playerInventory.player.mainHandItem
-    } else {
-        playerInventory.player.offhandItem
-    }
+    private val filterStack: ItemStack =
+        if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
+            playerInventory.player.mainHandItem
+        } else {
+            playerInventory.player.offhandItem
+        }
 
     val filter: Set<ItemFilterEntryListDataComponent.FilterEntry>?
         get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)?.entries
