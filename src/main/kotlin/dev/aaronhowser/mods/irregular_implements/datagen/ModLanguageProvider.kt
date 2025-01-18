@@ -771,6 +771,7 @@ class ModLanguageProvider(
         addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
         addInfo(ModItems.DIAPHANOUS_BLOCK, "Looks like another block, but becomes transparent as you approach.\n\nCraft it with any block to set its appearance.\n\nCraft it by itself to invert it, so it starts transparent and becomes opaque.")
         addInfo(ModItems.EVIL_TEAR, "Can be used on a specific structure to make an Artificial End Portal.\n\nPlace an End Stone, and place an End Rod under it.\n\n4 blocks below it, build a 3x3 of End Stone, with a 5x5 ring of Obsidian one block above it.\n\nUse the Evil Tear on the End Rod to complete the structure.")
+        addInfo(ModItems.CUSTOM_CRAFTING_TABLE, "Works exactly like a vanilla Crafting Table, except it looks like the block it's made of.\n\nThis uses the item tag #irregular_implements:custom_crafting_table_items")
     }
 
     private fun addEffects() {

@@ -225,6 +225,7 @@
   "info.irregular_implements.contact_button": "Acts like a Button, but works when the block in front of it is clicked instead.",
   "info.irregular_implements.contact_lever": "Acts like a Lever, but works when the block in front of it is clicked instead.",
   "info.irregular_implements.corrector_plate": "Entities moving on the Plate are centered along the axis they're moving.\n\nFor example, if they're moving South, they're teleported to the middle of the North-South axis of the block.",
+  "info.irregular_implements.custom_crafting_table": "Works exactly like a vanilla Crafting Table, except it looks like the block it's made of.\n\nThis uses the item tag #irregular_implements:custom_crafting_table_items",
   "info.irregular_implements.diamond_breaker": "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.",
   "info.irregular_implements.diaphanous_block": "Looks like another block, but becomes transparent as you approach.\n\nCraft it with any block to set its appearance.\n\nCraft it by itself to invert it, so it starts transparent and becomes opaque.",
   "info.irregular_implements.directional_accelerator_plate": "Entities on this Plate are pushed slightly in the direction the Plate is facing.",
