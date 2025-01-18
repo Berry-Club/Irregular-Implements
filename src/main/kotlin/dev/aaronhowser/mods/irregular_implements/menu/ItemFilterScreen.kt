@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterEntryListDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -16,6 +17,7 @@ class ItemFilterScreen(
     private val background = ScreenTextures.Backgrounds.ItemFilter
 
     private val toggleTypeButtons: MutableSet<Button> = mutableSetOf()
+    private val toggleNeedsComponentButtons: MutableSet<Button> = mutableSetOf()
 
     override fun init() {
         this.imageWidth = background.width
@@ -29,30 +31,56 @@ class ItemFilterScreen(
         setButtons()
     }
 
-    fun setButtons() {
+    private fun setButtons() {
         this.toggleTypeButtons.clear()
+        this.toggleNeedsComponentButtons.clear()
 
         val filter = this.menu.filter ?: return
 
         for (index in 0 until 9) {
             val entry = filter.elementAtOrNull(index) ?: continue
 
-            val x = this.leftPos + 7 + index * 18
-            val y = this.topPos + 15
-
-            val width = 8
-            val height = 8
-
-            val button = Button.Builder(Component.empty(), { })
-                .bounds(
-                    x, y,
-                    width, height
-                )
-                .build()
-
-            this.toggleTypeButtons.add(button)
-            this.addRenderableWidget(button)
+            addToggleTypeButton(index, entry)
+            addToggleNeedsComponentButton(index, entry)
         }
+    }
+
+    private fun addToggleTypeButton(index: Int, entry: ItemFilterEntryListDataComponent.FilterEntry) {
+        val x = this.leftPos + 8 + index * 18
+        val y = this.topPos + 15
+
+        val width = if (entry is ItemFilterEntryListDataComponent.FilterEntry.ItemTag) 16 else 8
+        val height = 8
+
+        val button = Button.Builder(Component.empty(), { })
+            .bounds(
+                x, y,
+                width, height
+            )
+            .build()
+
+        this.toggleTypeButtons.add(button)
+        this.addRenderableWidget(button)
+    }
+
+    private fun addToggleNeedsComponentButton(index: Int, entry: ItemFilterEntryListDataComponent.FilterEntry) {
+        if (entry !is ItemFilterEntryListDataComponent.FilterEntry.SpecificItem) return
+
+        val x = this.leftPos + 8 + index * 18 + 9
+        val y = this.topPos + 15
+
+        val width = 8
+        val height = 8
+
+        val button = Button.Builder(Component.empty(), { })
+            .bounds(
+                x, y,
+                width, height
+            )
+            .build()
+
+        this.toggleNeedsComponentButtons.add(button)
+        this.addRenderableWidget(button)
     }
 
     // Render stuff
