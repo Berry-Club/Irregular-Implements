@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
@@ -158,7 +159,6 @@ class BlockBreakerBlockEntity(
             //FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
             this.miningProgress += targetState.getDestroyProgress(fakePlayer, level, targetPos)
 
-            // If not done mining, continue mining then stop tick
             if (this.miningProgress < 1f) {
                 level.destroyBlockProgress(
                     this.uuid.hashCode(),
@@ -168,34 +168,39 @@ class BlockBreakerBlockEntity(
                 return
             }
 
-            this.isMining = false
-            resetProgress()
+            mineBlock(facing, fakePlayer, targetPos, level)
+        }
+    }
 
-            val possibleInventoryPos = this.blockPos.relative(facing.opposite)
-            val inventoryHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
+    private fun mineBlock(facing: Direction, fakePlayer: FakePlayer, targetPos: BlockPos, level: ServerLevel) {
 
-            fakePlayer.gameMode.destroyBlock(targetPos)
+        this.isMining = false
+        resetProgress()
 
-            val inventory = fakePlayer.inventory
+        val possibleInventoryPos = this.blockPos.relative(facing.opposite)
+        val inventoryHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
 
-            for (i in inventory.items.indices) {
-                val stack = inventory.items[i].copy()
+        fakePlayer.gameMode.destroyBlock(targetPos)
 
-                if (stack.isEmpty
-                    || ItemStack.isSameItemSameComponents(stack, inventory.getSelected())
-                ) continue
+        val inventory = fakePlayer.inventory
 
-                inventory.removeItemNoUpdate(i)
+        for (i in inventory.items.indices) {
+            val stack = inventory.items[i].copy()
 
-                var remainder = stack.copy()
+            if (stack.isEmpty
+                || ItemStack.isSameItemSameComponents(stack, inventory.getSelected())
+            ) continue
 
-                if (inventoryHandler != null) {
-                    remainder = ItemHandlerHelper.insertItemStacked(inventoryHandler, remainder, false)
-                }
+            inventory.removeItemNoUpdate(i)
 
-                if (!remainder.isEmpty) {
-                    OtherUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
-                }
+            var remainder = stack.copy()
+
+            if (inventoryHandler != null) {
+                remainder = ItemHandlerHelper.insertItemStacked(inventoryHandler, remainder, false)
+            }
+
+            if (!remainder.isEmpty) {
+                OtherUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
             }
         }
     }
