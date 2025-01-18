@@ -12,9 +12,27 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.BlockHitResult
 
 class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
+
+    companion object {
+        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+    }
+
+    init {
+        registerDefaultState(
+            stateDefinition.any()
+                .setValue(ENABLED, false)
+        )
+    }
+
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        builder.add(ENABLED)
+    }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return NotificationInterfaceBlockEntity(pos, state)
@@ -43,9 +61,15 @@ class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)
         val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity ?: return
 
         val isPowered = level.hasNeighborSignal(pos)
+        val wasEnabled = state.getValue(ENABLED)
 
-        if (isPowered) {
-            blockEntity.notifyOwner()
+        if (isPowered != wasEnabled) {
+            val newState = state.setValue(ENABLED, isPowered)
+            level.setBlockAndUpdate(pos, newState)
+
+            if (isPowered) {
+                blockEntity.notifyOwner()
+            }
         }
     }
 
