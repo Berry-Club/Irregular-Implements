@@ -56,10 +56,9 @@ class BlockDestabilizerBlock(
             level.setBlockAndUpdate(pos, newState)
 
             if (powered) {
-                val blockEntity = level.getBlockEntity(pos)
-                if (blockEntity is BlockDestabilizerBlockEntity
-                    && blockEntity.state == BlockDestabilizerBlockEntity.State.IDLE
-                ) {
+                val blockEntity = level.getBlockEntity(pos) as? BlockDestabilizerBlockEntity ?: return
+
+                if (blockEntity.state == BlockDestabilizerBlockEntity.State.IDLE) {
                     blockEntity.initStart()
                 }
             }
@@ -73,12 +72,9 @@ class BlockDestabilizerBlock(
         pPlayer: Player,
         pHitResult: BlockHitResult
     ): InteractionResult {
-        val blockEntity = pLevel.getBlockEntity(pPos)
+        val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDestabilizerBlockEntity ?: return InteractionResult.FAIL
 
-        if (blockEntity is BlockDestabilizerBlockEntity) {
-            pPlayer.openMenu(blockEntity)
-        }
-
+        pPlayer.openMenu(blockEntity)
         return InteractionResult.SUCCESS
     }
 

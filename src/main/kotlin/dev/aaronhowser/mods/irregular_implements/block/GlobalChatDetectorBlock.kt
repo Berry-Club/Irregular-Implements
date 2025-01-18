@@ -56,12 +56,10 @@ class GlobalChatDetectorBlock : EntityBlock, Block(
         pPlayer: Player,
         pHitResult: BlockHitResult
     ): InteractionResult {
-        val blockEntity = pLevel.getBlockEntity(pPos)
+        val blockEntity = pLevel.getBlockEntity(pPos) as? GlobalChatDetectorBlockEntity ?: return InteractionResult.FAIL
 
-        if (blockEntity is GlobalChatDetectorBlockEntity) {
-            pPlayer.openMenu(blockEntity)
-            blockEntity.sendStringUpdate()
-        }
+        pPlayer.openMenu(blockEntity)
+        blockEntity.sendStringUpdate()
 
         return InteractionResult.SUCCESS
     }

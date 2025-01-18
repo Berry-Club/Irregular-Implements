@@ -67,12 +67,10 @@ open class ChatDetectorBlock : EntityBlock, Block(
         pPlayer: Player,
         pHitResult: BlockHitResult
     ): InteractionResult {
-        val blockEntity = pLevel.getBlockEntity(pPos)
+        val blockEntity = pLevel.getBlockEntity(pPos) as? ChatDetectorBlockEntity ?: return InteractionResult.FAIL
 
-        if (blockEntity is ChatDetectorBlockEntity) {
-            pPlayer.openMenu(blockEntity)
-            blockEntity.sendStringUpdate()
-        }
+        pPlayer.openMenu(blockEntity)
+        blockEntity.sendStringUpdate()
 
         return InteractionResult.SUCCESS
     }
