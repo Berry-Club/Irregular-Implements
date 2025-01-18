@@ -99,7 +99,7 @@ class ItemFilterMenu(
                 }
 
                 override fun mayPlace(stack: ItemStack): Boolean {
-                    this@ItemFilterMenu.filterContainer.addItem(stack)
+                    this@ItemFilterMenu.filterContainer.addItem(stack.copyWithCount(1))
 
                     return false
                 }
