@@ -11,6 +11,9 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
@@ -48,12 +51,12 @@ class BlockBreakerBlockEntity(
         private fun getPick(
             level: Level,
             item: Item,
-            defaultEnchantments: ItemEnchantments
+            withEnchantments: ItemEnchantments
         ): ItemStack {
             val stack = item.defaultInstance
             stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
 
-            val enchantments = ItemEnchantments.Mutable(defaultEnchantments)
+            val enchantments = ItemEnchantments.Mutable(withEnchantments)
             enchantments.set(
                 level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
                 1
@@ -108,21 +111,21 @@ class BlockBreakerBlockEntity(
             it.isSilent = true
             it.setOnGround(true)
 
-            it.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE, defaultEnchantments = ItemEnchantments.EMPTY))
+            it.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY))
         }
     }
 
-
     fun upgrade(insertedBreaker: ItemStack) {
         val level = level as? ServerLevel ?: return
+        val fakePlayer = this.fakePlayer?.get() ?: return
 
         val enchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
-        val pick = getPick(level, Items.DIAMOND_PICKAXE, defaultEnchantments = enchantments)
+        val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = enchantments)
 
         this.diamondBreaker = insertedBreaker
         setChanged()
 
-        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, pick)
+        fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pick)
     }
 
     fun downgrade(player: Player) {
@@ -131,7 +134,9 @@ class BlockBreakerBlockEntity(
         OtherUtil.giveOrDropStack(this.diamondBreaker, player)
         this.diamondBreaker = ItemStack.EMPTY
 
-        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE, defaultEnchantments = ItemEnchantments.EMPTY))
+        val basicPick = getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
+
+        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, basicPick)
     }
 
     fun tick() {
@@ -150,6 +155,7 @@ class BlockBreakerBlockEntity(
 
             val targetState = level.getBlockState(targetPos)
 
+            //FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
             this.miningProgress += targetState.getDestroyProgress(fakePlayer, level, targetPos)
 
             // If not done mining, continue mining then stop tick
@@ -257,7 +263,10 @@ class BlockBreakerBlockEntity(
         if (tag.contains(DIAMOND_BREAKER_NBT)) {
             this.diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
         }
-
     }
+
+    // Syncs with client
+    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }
