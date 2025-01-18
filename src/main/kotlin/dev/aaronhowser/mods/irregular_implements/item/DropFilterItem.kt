@@ -26,8 +26,8 @@ class DropFilterItem : Item(
 
     companion object {
 
-        fun stackIsFilter(stack: ItemStack): Boolean {
-            return stack.`is`(ModItems.ITEM_FILTER) || stack.`is`(ModItems.VOIDING_DROP_FILTER)
+        fun stackIsDropFilter(stack: ItemStack): Boolean {
+            return stack.`is`(ModItems.DROP_FILTER) || stack.`is`(ModItems.VOIDING_DROP_FILTER)
         }
 
         fun setFilter(stack: ItemStack) {
