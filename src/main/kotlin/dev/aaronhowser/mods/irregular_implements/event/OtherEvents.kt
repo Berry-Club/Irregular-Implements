@@ -146,6 +146,14 @@ object OtherEvents {
 
     @SubscribeEvent
     fun onServerChat(event: ServerChatEvent) {
+        val player = event.player
+        val heldItem = player.getItemInHand(InteractionHand.MAIN_HAND)
+
+        if (heldItem.`is`(ModItems.ITEM_FILTER)) {
+            ItemFilterItem.setTestingFilter(heldItem)
+            ItemFilterItem.testFilter(heldItem)
+        }
+
         ChatDetectorBlockEntity.processMessage(event)
         GlobalChatDetectorBlockEntity.processMessage(event)
     }

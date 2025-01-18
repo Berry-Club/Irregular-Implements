@@ -175,8 +175,8 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
         }
 
-    val ITEM_FILTER_ENTRY_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterEntryListDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("item_filter_entry_list") {
+    val ITEM_FILTER_ENTRIES: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterEntryListDataComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("item_filter_entries") {
             it
                 .persistent(ItemFilterEntryListDataComponent.CODEC)
                 .networkSynchronized(ItemFilterEntryListDataComponent.STREAM_CODEC)

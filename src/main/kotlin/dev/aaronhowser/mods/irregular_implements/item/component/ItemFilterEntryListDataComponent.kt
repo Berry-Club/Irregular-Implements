@@ -19,6 +19,8 @@ data class ItemFilterEntryListDataComponent(
     val entries: Set<FilterEntry>
 ) {
 
+    constructor(vararg entries: FilterEntry) : this(entries.toSet())
+
     fun test(testedStack: ItemStack): Boolean {
         return this.entries.any { filter ->
             filter.test(testedStack)
