@@ -65,6 +65,11 @@ object ModMenuTypes {
             MenuType(::ItemFilterMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val FILTERED_PLATFORM: DeferredHolder<MenuType<*>, MenuType<FilteredPlatformMenu>> =
+        MENU_TYPE_REGISTRY.register("filtered_platform", Supplier {
+            MenuType(::FilteredPlatformMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
