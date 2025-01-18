@@ -75,6 +75,7 @@ object ModMenuTypes {
         event.register(ONLINE_DETECTOR.get(), ::OnlineDetectorScreen)
         event.register(NOTIFICATION_INTERFACE.get(), ::NotificationInterfaceScreen)
         event.register(IMBUING_STATION.get(), ::ImbuingStationScreen)
+        event.register(ITEM_FILTER.get(), ::ItemFilterScreen)
     }
 
 }

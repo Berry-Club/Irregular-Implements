@@ -1,18 +1,27 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterEntryListDataComponent
+import dev.aaronhowser.mods.irregular_implements.menu.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.component.DataComponents
+import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.Unbreakable
+import net.minecraft.world.level.Level
 
 class ItemFilterItem : Item(
     Properties()
         .stacksTo(1)
-) {
+), MenuProvider {
 
     companion object {
 
@@ -66,6 +75,23 @@ class ItemFilterItem : Item(
             """.trimIndent()
             )
         }
+    }
+
+    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+        player.openMenu(this)
+
+        val usedStack = player.getItemInHand(usedHand)
+        return InteractionResultHolder.success(usedStack)
+    }
+
+    // Menu stuff
+
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return ItemFilterMenu(containerId, playerInventory)
+    }
+
+    override fun getDisplayName(): Component {
+        return this.defaultInstance.displayName
     }
 
 }
