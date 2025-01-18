@@ -4,7 +4,10 @@ import dev.aaronhowser.mods.irregular_implements.menu.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.Entity
@@ -32,6 +35,18 @@ class FilteredPlatformBlockEntity(
     }
 
     val container = SimpleContainer(1)
+
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+
+        ContainerHelper.saveAllItems(tag, this.container.items, registries)
+    }
+
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+
+        ContainerHelper.loadAllItems(tag, this.container.items, registries)
+    }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
         return FilteredPlatformMenu(containerId, playerInventory, this.container)
