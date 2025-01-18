@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterEntryListDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -15,6 +17,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.Unbreakable
 import net.minecraft.world.level.Level
 
@@ -83,6 +86,20 @@ class ItemFilterItem : Item(
         val usedStack = player.getItemInHand(usedHand)
         return InteractionResultHolder.success(usedStack)
     }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+        val filterEntries = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES)?.entries ?: return
+
+        for (entry in filterEntries) {
+            val itemName = entry.getDisplayStack().hoverName
+            val component = ModLanguageProvider.Tooltips.LIST_POINT
+                .toGrayComponent(itemName)
+
+            tooltipComponents.add(component)
+        }
+    }
+
+    // Menu stuff
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
         return ItemFilterMenu(containerId, playerInventory)

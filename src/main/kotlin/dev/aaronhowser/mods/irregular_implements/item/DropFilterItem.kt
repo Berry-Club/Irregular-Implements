@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.menu.DropFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.util.TriState
@@ -101,6 +104,23 @@ class DropFilterItem : Item(
         val usedStack = player.getItemInHand(usedHand)
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
+
+    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+
+        val container = stack.get(DataComponents.CONTAINER)
+        val firstStack = container?.nonEmptyItems()?.firstOrNull()
+        val filter = firstStack?.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+
+        for (entry in filter.entries) {
+            val itemName = entry.getDisplayStack().hoverName
+            val component = ModLanguageProvider.Tooltips.LIST_POINT
+                .toGrayComponent(itemName)
+
+            tooltipComponents.add(component)
+        }
+    }
+
+    // Menu stuff
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
         return DropFilterMenu(containerId, playerInventory)
