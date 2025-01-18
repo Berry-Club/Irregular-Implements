@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
+//TODO: Make buttons function
 class ItemFilterScreen(
     menu: ItemFilterMenu,
     playerInventory: Inventory,
@@ -18,6 +19,8 @@ class ItemFilterScreen(
 
     private val toggleTypeButtons: MutableSet<Button> = mutableSetOf()
     private val toggleNeedsComponentButtons: MutableSet<Button> = mutableSetOf()
+
+    private lateinit var invertBlacklistButton: Button
 
     override fun init() {
         this.imageWidth = background.width
@@ -43,6 +46,18 @@ class ItemFilterScreen(
             addToggleTypeButton(index, entry)
             addToggleNeedsComponentButton(index, entry)
         }
+
+        this.invertBlacklistButton = Button.Builder(Component.empty(), { })
+            .bounds(
+                this.leftPos + 8,
+                this.topPos + 5,
+                8,
+                8
+            )
+            .build()
+
+        this.addRenderableWidget(this.invertBlacklistButton)
+
     }
 
     private fun addToggleTypeButton(index: Int, entry: ItemFilterDataComponent.FilterEntry) {
