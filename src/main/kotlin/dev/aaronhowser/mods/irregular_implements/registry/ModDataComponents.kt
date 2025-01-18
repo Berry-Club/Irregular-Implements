@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.component.BiomePointsDataComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityDataComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
@@ -31,11 +31,11 @@ object ModDataComponents {
     val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
         DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.ID)
 
-    val LOCATION: DeferredHolder<DataComponentType<*>, DataComponentType<LocationItemComponent>> =
+    val LOCATION: DeferredHolder<DataComponentType<*>, DataComponentType<LocationDataComponent>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("location") {
             it
-                .persistent(LocationItemComponent.CODEC)
-                .networkSynchronized(LocationItemComponent.STREAM_CODEC)
+                .persistent(LocationDataComponent.CODEC)
+                .networkSynchronized(LocationDataComponent.STREAM_CODEC)
         }
 
     val ENTITY_TYPE: DeferredHolder<DataComponentType<*>, DataComponentType<EntityType<*>>> =
@@ -48,8 +48,8 @@ object ModDataComponents {
     val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("uuid") { builder ->
             builder
-                .persistent(EntityIdentifierItemComponent.UUID_CODEC)
-                .networkSynchronized(EntityIdentifierItemComponent.UUID_STREAM_CODEC)
+                .persistent(SpecificEntityDataComponent.UUID_CODEC)
+                .networkSynchronized(SpecificEntityDataComponent.UUID_STREAM_CODEC)
         }
 
     val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
@@ -59,18 +59,18 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.BIOME))
         }
 
-    val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<EntityIdentifierItemComponent>> =
+    val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("player") {
             it
-                .persistent(EntityIdentifierItemComponent.CODEC)
-                .networkSynchronized(EntityIdentifierItemComponent.STREAM_CODEC)
+                .persistent(SpecificEntityDataComponent.CODEC)
+                .networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
         }
 
-    val ENTITY_IDENTIFIER: DeferredHolder<DataComponentType<*>, DataComponentType<EntityIdentifierItemComponent>> =
+    val ENTITY_IDENTIFIER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("entity_identifier") {
             it
-                .persistent(EntityIdentifierItemComponent.CODEC)
-                .networkSynchronized(EntityIdentifierItemComponent.STREAM_CODEC)
+                .persistent(SpecificEntityDataComponent.CODEC)
+                .networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
         }
 
     val ENTITY_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<List<CustomData>>> =

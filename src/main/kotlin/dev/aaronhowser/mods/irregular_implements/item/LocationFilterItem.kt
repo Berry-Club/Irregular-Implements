@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.network.chat.Component
@@ -25,7 +25,7 @@ class LocationFilterItem : Item(
         val usedStack = context.itemInHand
         usedStack.set(
             ModDataComponents.LOCATION,
-            LocationItemComponent(context.level, context.clickedPos)
+            LocationDataComponent(context.level, context.clickedPos)
         )
 
         return InteractionResult.SUCCESS

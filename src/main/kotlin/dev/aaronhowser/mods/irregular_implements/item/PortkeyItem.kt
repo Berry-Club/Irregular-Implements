@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.server.level.ServerLevel
@@ -72,7 +72,7 @@ class PortkeyItem : Item(
 
         usedStack.set(
             ModDataComponents.LOCATION,
-            LocationItemComponent(level, posToTeleportTo)
+            LocationDataComponent(level, posToTeleportTo)
         )
 
         return InteractionResult.SUCCESS

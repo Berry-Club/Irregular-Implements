@@ -12,7 +12,7 @@ import net.minecraft.world.entity.Entity
 import net.neoforged.neoforge.common.util.NeoForgeExtraCodecs
 import java.util.*
 
-data class EntityIdentifierItemComponent(
+data class SpecificEntityDataComponent(
     val uuid: UUID,
     val name: Component
 ) {
@@ -31,21 +31,21 @@ data class EntityIdentifierItemComponent(
             { it.toString() }
         )
 
-        val CODEC: Codec<EntityIdentifierItemComponent> = RecordCodecBuilder.create { instance ->
+        val CODEC: Codec<SpecificEntityDataComponent> = RecordCodecBuilder.create { instance ->
             instance.group(
                 NeoForgeExtraCodecs
                     .aliasedFieldOf(UUID_CODEC, "uuid")
-                    .forGetter(EntityIdentifierItemComponent::uuid),
+                    .forGetter(SpecificEntityDataComponent::uuid),
                 NeoForgeExtraCodecs
                     .aliasedFieldOf(ComponentSerialization.CODEC, "name")
-                    .forGetter(EntityIdentifierItemComponent::name)
-            ).apply(instance, ::EntityIdentifierItemComponent)
+                    .forGetter(SpecificEntityDataComponent::name)
+            ).apply(instance, ::SpecificEntityDataComponent)
         }
 
-        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, EntityIdentifierItemComponent> = StreamCodec.composite(
-            UUID_STREAM_CODEC, EntityIdentifierItemComponent::uuid,
-            ComponentSerialization.STREAM_CODEC, EntityIdentifierItemComponent::name,
-            ::EntityIdentifierItemComponent
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SpecificEntityDataComponent> = StreamCodec.composite(
+            UUID_STREAM_CODEC, SpecificEntityDataComponent::uuid,
+            ComponentSerialization.STREAM_CODEC, SpecificEntityDataComponent::name,
+            ::SpecificEntityDataComponent
         )
 
     }

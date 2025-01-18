@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
@@ -24,7 +24,7 @@ class PlayerFilterItem : Item(
         fun setPlayer(stack: ItemStack, player: Player) {
             stack.set(
                 ModDataComponents.PLAYER.get(),
-                EntityIdentifierItemComponent(player)
+                SpecificEntityDataComponent(player)
             )
         }
     }

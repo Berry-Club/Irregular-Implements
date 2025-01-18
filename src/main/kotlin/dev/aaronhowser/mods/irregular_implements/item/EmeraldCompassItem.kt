@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.item.component.EntityIdentifierItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
@@ -66,7 +66,7 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
         if (interactionTarget !is Player) return InteractionResult.PASS
 
         val usedStack = player.getItemInHand(usedHand)
-        usedStack.set(ModDataComponents.ENTITY_IDENTIFIER, EntityIdentifierItemComponent(interactionTarget))
+        usedStack.set(ModDataComponents.ENTITY_IDENTIFIER, SpecificEntityDataComponent(interactionTarget))
 
         return InteractionResult.SUCCESS
     }

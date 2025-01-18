@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationItemComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
@@ -27,7 +27,7 @@ class RedstoneToolItem : Item(
         val usedStack = context.itemInHand
 
         if (clickedBlockEntity is RedstoneToolLinkable) {
-            val locationComponent = LocationItemComponent(level, clickedPos)
+            val locationComponent = LocationDataComponent(level, clickedPos)
             usedStack.set(ModDataComponents.LOCATION, locationComponent)
 
             player.displayClientMessage(
