@@ -91,7 +91,7 @@ class ItemFilterItem : Item(
     }
 
     override fun getDisplayName(): Component {
-        return this.defaultInstance.displayName
+        return this.defaultInstance.hoverName
     }
 
 }

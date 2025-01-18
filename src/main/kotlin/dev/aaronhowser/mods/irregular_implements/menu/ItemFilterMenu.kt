@@ -45,7 +45,7 @@ class ItemFilterMenu(
 
         for (index in 0 until 9) {
             val x = 8 + index * 18
-            val y = 17
+            val y = 18
 
             this.addSlot(Slot(filterContainer, index, x, y))
         }
@@ -55,7 +55,7 @@ class ItemFilterMenu(
             for (column in 0..8) {
                 val slotIndex = column + row * 9 + 9
                 val x = 8 + column * 18
-                val y = 84 + row * 18
+                val y = 51 + row * 18
 
                 this.addSlot(Slot(playerInventory, slotIndex, x, y))
             }
@@ -64,7 +64,7 @@ class ItemFilterMenu(
         // Add the 9 slots of the player hotbar
         for (hotbarIndex in 0..8) {
             val x = 8 + hotbarIndex * 18
-            val y = 142
+            val y = 109
 
             this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
         }

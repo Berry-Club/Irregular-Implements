@@ -12,8 +12,25 @@ class ItemFilterScreen(
     title: Component
 ) : AbstractContainerScreen<ItemFilterMenu>(menu, playerInventory, title) {
 
+    private val background = ScreenTextures.Backgrounds.ItemFilter
+
+    override fun init() {
+        this.imageWidth = background.width
+        this.imageHeight = background.height
+
+        this.inventoryLabelY -= 32
+
+        this.leftPos = (this.width - this.imageWidth) / 2
+        this.topPos = (this.height - this.imageHeight) / 2
+    }
+
+    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick)
+        this.renderTooltip(guiGraphics, mouseX, mouseY)
+    }
+
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        ScreenTextures.Backgrounds.ItemFilter.render(
+        this.background.render(
             guiGraphics,
             this.leftPos,
             this.topPos,
