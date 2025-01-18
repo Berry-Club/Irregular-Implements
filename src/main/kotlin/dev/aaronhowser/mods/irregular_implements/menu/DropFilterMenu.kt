@@ -1,8 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.item.DropFilterItem
-import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterEntryListDataComponent
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.core.NonNullList
 import net.minecraft.core.component.DataComponents
@@ -17,11 +16,11 @@ import net.minecraft.world.item.component.ItemContainerContents
 
 class DropFilterMenu(
     containerId: Int,
-    playerInventory: Inventory
+    private val playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.DROP_FILTER.get(), containerId) {
 
-    private val filterStack: ItemStack =
-        if (DropFilterItem.stackIsFilter(playerInventory.player.mainHandItem)) {
+    private val filterStack: ItemStack
+        get() = if (DropFilterItem.stackIsDropFilter(playerInventory.player.mainHandItem)) {
             playerInventory.player.mainHandItem
         } else {
             playerInventory.player.offhandItem
@@ -32,20 +31,16 @@ class DropFilterMenu(
     val container: ItemContainerContents?
         get() = filterStack.get(DataComponents.CONTAINER)
 
-    val filter: Set<ItemFilterEntryListDataComponent.FilterEntry>?
-        get() = container
-            ?.getStackInSlot(0)
-            ?.get(ModDataComponents.ITEM_FILTER_ENTRIES)
-            ?.entries
-
-    val filterContainer = object : SimpleContainer(9) {
+    val filterContainer = object : SimpleContainer(1) {
         override fun getItems(): NonNullList<ItemStack> {
-            val items = NonNullList.withSize(9, ItemStack.EMPTY)
-            val filter: Set<ItemFilterEntryListDataComponent.FilterEntry> = this@DropFilterMenu.filter ?: return items
+            val items = NonNullList.withSize(1, ItemStack.EMPTY)
 
-            for (index in 0 until 9) {
-                val entry = filter.elementAtOrNull(index) ?: continue
-                items[index] = entry.getDisplayStack()
+            val container = this@DropFilterMenu.container
+
+            if (container != null) {
+                for (i in 0 until container.slots) {
+                    items[i] = container.getStackInSlot(i)
+                }
             }
 
             return items
@@ -56,34 +51,30 @@ class DropFilterMenu(
         }
 
         override fun removeItem(index: Int, count: Int): ItemStack {
-            val filter = this@DropFilterMenu.filter ?: return ItemStack.EMPTY
-            val entry = filter.elementAtOrNull(index) ?: return ItemStack.EMPTY
 
-            val newFilter = filter.toMutableSet()
-            newFilter.remove(entry)
+            val container = container ?: return ItemStack.EMPTY
+
+            if (index !in 0 until container.slots) return ItemStack.EMPTY
+
+            val stack = container.getStackInSlot(index).copy()
 
             filterStack.set(
-                ModDataComponents.ITEM_FILTER_ENTRIES,
-                ItemFilterEntryListDataComponent(newFilter)
+                DataComponents.CONTAINER,
+                ItemContainerContents.EMPTY
             )
 
-            return ItemStack.EMPTY
+            return stack
         }
 
         override fun addItem(stack: ItemStack): ItemStack {
-            val filter = this@DropFilterMenu.filter ?: return stack
-
-            val newFilterEntry = ItemFilterEntryListDataComponent.FilterEntry.SpecificItem(stack, requireSameComponents = false)
-
-            val newFilter = filter.toMutableSet()
-            newFilter.add(newFilterEntry)
 
             filterStack.set(
-                ModDataComponents.ITEM_FILTER_ENTRIES,
-                ItemFilterEntryListDataComponent(newFilter)
+                DataComponents.CONTAINER,
+                ItemContainerContents.fromItems(listOf(stack))
             )
 
             return ItemStack.EMPTY
+
         }
     }
 
@@ -104,6 +95,8 @@ class DropFilterMenu(
             }
 
             override fun mayPlace(stack: ItemStack): Boolean {
+                if (!stack.`is`(ModItems.ITEM_FILTER)) return false
+
                 this@DropFilterMenu.filterContainer.addItem(stack.copyWithCount(1))
 
                 return false
