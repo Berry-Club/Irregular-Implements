@@ -61,6 +61,8 @@ object ScreenTextures {
         object AnalogEmitter : MenuBackground("textures/gui/analog_emitter.png", 79, 50)
         object AdvancedRedstoneRepeater : MenuBackground("textures/gui/advanced_redstone_repeater.png", 91, 56)
         object AdvancedItemCollector : MenuBackground("textures/gui/advanced_item_collector.png", 176, 235)
+        object DropFilter : MenuBackground("textures/gui/drop_filter.png", 176, 133)
+        object MagneticForce : MenuBackground("textures/gui/magnetic_force.png", 123, 135)
     }
 
     object Sprites {
