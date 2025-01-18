@@ -117,6 +117,7 @@ object OtherEvents {
 
     @SubscribeEvent
     fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
+        DropFilterItem.onPickupItem(event)
         PortkeyItem.pickUpPortkey(event)
     }
 

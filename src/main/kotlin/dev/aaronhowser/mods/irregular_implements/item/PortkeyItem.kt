@@ -24,6 +24,8 @@ class PortkeyItem : Item(
 
     companion object {
         fun pickUpPortkey(event: ItemEntityPickupEvent.Pre) {
+            if (event.canPickup().isFalse) return
+
             val itemEntity = event.itemEntity
             val itemStack = itemEntity.item
 

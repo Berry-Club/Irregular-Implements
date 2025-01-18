@@ -180,8 +180,10 @@ object ModItems {
         register("biome_capsule") { BiomeCapsuleItem() }
     val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
         register("biome_painter") { BiomePainterItem() }
-    val DROP_FILTER = basic("drop_filter")
-    val VOIDING_DROP_FILTER = basic("voiding_drop_filter")
+    val DROP_FILTER: DeferredItem<DropFilterItem> =
+        register("drop_filter") { DropFilterItem(isVoiding = false) }
+    val VOIDING_DROP_FILTER: DeferredItem<DropFilterItem> =
+        register("voiding_drop_filter") { DropFilterItem(isVoiding = true) }
     val VOID_STONE: DeferredItem<VoidStoneItem> =
         register("void_stone") { VoidStoneItem() }
     val WHITE_STONE: DeferredItem<WhiteStoneItem> =
