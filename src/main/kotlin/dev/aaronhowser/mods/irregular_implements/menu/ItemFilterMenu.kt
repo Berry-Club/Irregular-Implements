@@ -63,6 +63,22 @@ class ItemFilterMenu(
             return ItemStack.EMPTY
         }
 
+        override fun addItem(stack: ItemStack): ItemStack {
+            val filter = this@ItemFilterMenu.filter ?: return stack
+
+            val newFilterEntry = ItemFilterEntryListDataComponent.FilterEntry.SpecificItem(stack, requireSameComponents = false)
+
+            val newFilter = filter.toMutableSet()
+            newFilter.add(newFilterEntry)
+
+            filterStack.set(
+                ModDataComponents.ITEM_FILTER_ENTRIES,
+                ItemFilterEntryListDataComponent(newFilter)
+            )
+
+            return ItemStack.EMPTY
+        }
+
     }
 
     init {
@@ -71,18 +87,21 @@ class ItemFilterMenu(
             val x = 8 + index * 18
             val y = 18
 
-            val slot = object : Slot(filterContainer, index, x, y) {
+            val slot = object : Slot(this.filterContainer, index, x, y) {
 
                 override fun isFake(): Boolean {
                     return true
                 }
 
                 override fun mayPickup(player: Player): Boolean {
-                    return this.hasItem()
+                    this.container.removeItem(this.index, 1)
+                    return false
                 }
 
                 override fun mayPlace(stack: ItemStack): Boolean {
-                    return !this.hasItem()
+                    this@ItemFilterMenu.filterContainer.addItem(stack)
+
+                    return false
                 }
 
             }
