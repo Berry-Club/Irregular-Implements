@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterEntryListDataComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -45,11 +45,11 @@ class ItemFilterScreen(
         }
     }
 
-    private fun addToggleTypeButton(index: Int, entry: ItemFilterEntryListDataComponent.FilterEntry) {
+    private fun addToggleTypeButton(index: Int, entry: ItemFilterDataComponent.FilterEntry) {
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
-        val width = if (entry is ItemFilterEntryListDataComponent.FilterEntry.ItemTag) 16 else 8
+        val width = if (entry is ItemFilterDataComponent.FilterEntry.ItemTag) 16 else 8
         val height = 8
 
         val button = Button.Builder(Component.empty(), { })
@@ -63,8 +63,8 @@ class ItemFilterScreen(
         this.addRenderableWidget(button)
     }
 
-    private fun addToggleNeedsComponentButton(index: Int, entry: ItemFilterEntryListDataComponent.FilterEntry) {
-        if (entry !is ItemFilterEntryListDataComponent.FilterEntry.SpecificItem) return
+    private fun addToggleNeedsComponentButton(index: Int, entry: ItemFilterDataComponent.FilterEntry) {
+        if (entry !is ItemFilterDataComponent.FilterEntry.SpecificItem) return
 
         val x = this.leftPos + 8 + index * 18 + 9
         val y = this.topPos + 15

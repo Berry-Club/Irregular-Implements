@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterEntryListDataComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -28,13 +28,16 @@ class ItemFilterMenu(
 
     private var usingMainHand = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack
 
-    val filter: Set<ItemFilterEntryListDataComponent.FilterEntry>?
-        get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)?.entries
+    private val filterComponent: ItemFilterDataComponent?
+        get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)
+
+    val filter: Set<ItemFilterDataComponent.FilterEntry>?
+        get() = filterComponent?.entries
 
     val filterContainer = object : SimpleContainer(9) {
         override fun getItems(): NonNullList<ItemStack> {
             val items = NonNullList.withSize(9, ItemStack.EMPTY)
-            val filter: Set<ItemFilterEntryListDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return items
+            val filter: Set<ItemFilterDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return items
 
             for (index in 0 until 9) {
                 val entry = filter.elementAtOrNull(index) ?: continue
@@ -57,7 +60,7 @@ class ItemFilterMenu(
 
             filterStack.set(
                 ModDataComponents.ITEM_FILTER_ENTRIES,
-                ItemFilterEntryListDataComponent(newFilter)
+                ItemFilterDataComponent(newFilter, this@ItemFilterMenu.filterComponent!!.isBlacklist)
             )
 
             return ItemStack.EMPTY
@@ -66,14 +69,14 @@ class ItemFilterMenu(
         override fun addItem(stack: ItemStack): ItemStack {
             val filter = this@ItemFilterMenu.filter ?: return stack
 
-            val newFilterEntry = ItemFilterEntryListDataComponent.FilterEntry.SpecificItem(stack, requireSameComponents = false)
+            val newFilterEntry = ItemFilterDataComponent.FilterEntry.SpecificItem(stack, requireSameComponents = false)
 
             val newFilter = filter.toMutableSet()
             newFilter.add(newFilterEntry)
 
             filterStack.set(
                 ModDataComponents.ITEM_FILTER_ENTRIES,
-                ItemFilterEntryListDataComponent(newFilter)
+                ItemFilterDataComponent(newFilter, this@ItemFilterMenu.filterComponent!!.isBlacklist)
             )
 
             return ItemStack.EMPTY

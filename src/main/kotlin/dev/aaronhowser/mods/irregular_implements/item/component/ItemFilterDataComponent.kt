@@ -19,16 +19,25 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import kotlin.random.Random
 
-data class ItemFilterEntryListDataComponent(
-    val entries: Set<FilterEntry>
+data class ItemFilterDataComponent(
+    val entries: Set<FilterEntry>,
+    val isBlacklist: Boolean
 ) {
 
-    constructor(vararg entries: FilterEntry) : this(entries.toSet())
+    constructor(vararg entries: FilterEntry) : this(entries.toSet(), false)
+    constructor(eitherList: List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>, isBlacklist: Boolean) : this(
+        eitherList.map { either ->
+            either.map(
+                { it as FilterEntry },
+                { it as FilterEntry }
+            )
+        }.toSet(),
+        isBlacklist
+    )
 
     fun test(testedStack: ItemStack): Boolean {
-        return this.entries.any { filter ->
-            filter.test(testedStack)
-        }
+        val passes = this.entries.any { it.test(testedStack) }
+        return passes != this.isBlacklist
     }
 
     sealed interface FilterEntry {
@@ -173,30 +182,34 @@ data class ItemFilterEntryListDataComponent(
     }
 
     companion object {
-        val CODEC: Codec<ItemFilterEntryListDataComponent> =
-            Codec.either(FilterEntry.SpecificItem.CODEC, FilterEntry.ItemTag.CODEC)
-                .listOf()
-                .xmap(::fromList, this::toList)
 
-        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterEntryListDataComponent> =
-            ByteBufCodecs.either(FilterEntry.SpecificItem.STREAM_CODEC, FilterEntry.ItemTag.STREAM_CODEC)
-                .apply(ByteBufCodecs.list())
-                .map(::fromList, this::toList)
+        val CODEC: Codec<ItemFilterDataComponent> =
+            RecordCodecBuilder.create { instance ->
+                instance.group(
+                    Codec.either(
+                        FilterEntry.SpecificItem.CODEC,
+                        FilterEntry.ItemTag.CODEC
+                    )
+                        .listOf()
+                        .fieldOf("entries")
+                        .forGetter(::toList),
+                    Codec.BOOL
+                        .optionalFieldOf("is_blacklist", false)
+                        .forGetter(ItemFilterDataComponent::isBlacklist)
+                ).apply(instance) { eitherList: List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>, isBlacklist ->
+                    ItemFilterDataComponent(eitherList, isBlacklist)
+                }
+            }
 
-        private fun fromList(list: List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>): ItemFilterEntryListDataComponent {
-            return ItemFilterEntryListDataComponent(
-                list
-                    .map { either ->
-                        either.map(
-                            { left: FilterEntry.SpecificItem -> left },
-                            { right: FilterEntry.ItemTag -> right }
-                        )
-                    }
-                    .toSet()
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterDataComponent> =
+            StreamCodec.composite(
+                ByteBufCodecs.either(FilterEntry.SpecificItem.STREAM_CODEC, FilterEntry.ItemTag.STREAM_CODEC).apply(ByteBufCodecs.list()),
+                ::toList,
+                ByteBufCodecs.BOOL, ItemFilterDataComponent::isBlacklist,
+                ::ItemFilterDataComponent
             )
-        }
 
-        private fun toList(component: ItemFilterEntryListDataComponent): List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>> {
+        private fun toList(component: ItemFilterDataComponent): List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>> {
             return component.entries.map { entry ->
                 when (entry) {
                     is FilterEntry.SpecificItem -> Either.left(entry)

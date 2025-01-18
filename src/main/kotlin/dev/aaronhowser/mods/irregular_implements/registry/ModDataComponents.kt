@@ -175,11 +175,11 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
         }
 
-    val ITEM_FILTER_ENTRIES: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterEntryListDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("item_filter_entries") {
+    val ITEM_FILTER_ENTRIES: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterDataComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("item_filter") {
             it
-                .persistent(ItemFilterEntryListDataComponent.CODEC)
-                .networkSynchronized(ItemFilterEntryListDataComponent.STREAM_CODEC)
+                .persistent(ItemFilterDataComponent.CODEC)
+                .networkSynchronized(ItemFilterDataComponent.STREAM_CODEC)
         }
 
 }
