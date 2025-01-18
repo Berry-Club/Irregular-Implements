@@ -51,7 +51,7 @@ class DropFilterItem : Item(
             val voidingFilterStacks = player.inventory.items
                 .filter { it.`is`(ModItems.VOIDING_DROP_FILTER) }
             val filterStacks = player.inventory.items
-                .filter { it.`is`(ModItems.ITEM_FILTER) }
+                .filter { it.`is`(ModItems.DROP_FILTER) }
 
             if (voidingFilterStacks.isEmpty() && filterStacks.isEmpty()) return
 
@@ -59,8 +59,12 @@ class DropFilterItem : Item(
 
             for (voidingFilterStack in voidingFilterStacks) {
                 val container = voidingFilterStack.get(DataComponents.CONTAINER) ?: continue
-                val filter = container
-                    .getStackInSlot(0)
+
+                val storedFilterStack = container
+                    .nonEmptyItems()
+                    .firstOrNull() ?: continue
+
+                val filter = storedFilterStack
                     .get(ModDataComponents.ITEM_FILTER_ENTRIES)
                     ?: continue
 
@@ -73,8 +77,12 @@ class DropFilterItem : Item(
 
             for (filterStack in filterStacks) {
                 val container = filterStack.get(DataComponents.CONTAINER) ?: continue
-                val filter = container
-                    .getStackInSlot(0)
+
+                val storedFilterStack = container
+                    .nonEmptyItems()
+                    .firstOrNull() ?: continue
+
+                val filter = storedFilterStack
                     .get(ModDataComponents.ITEM_FILTER_ENTRIES)
                     ?: continue
 

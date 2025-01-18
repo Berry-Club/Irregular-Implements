@@ -37,11 +37,11 @@ class DropFilterMenu(
 
             val container = this@DropFilterMenu.container
 
-            if (container != null) {
-                for (i in 0 until container.slots) {
-                    items[i] = container.getStackInSlot(i)
+            container
+                ?.nonEmptyItems()
+                ?.forEachIndexed { index, stack ->
+                    items[index] = stack
                 }
-            }
 
             return items
         }
