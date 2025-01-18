@@ -18,7 +18,7 @@ class ItemFilterScreen(
         this.imageWidth = background.width
         this.imageHeight = background.height
 
-        this.inventoryLabelY -= 32
+        this.inventoryLabelY = this.imageHeight - 94
 
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
