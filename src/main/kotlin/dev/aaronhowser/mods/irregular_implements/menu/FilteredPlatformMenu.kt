@@ -57,7 +57,35 @@ class FilteredPlatformMenu(
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        TODO("Not yet implemented")
+        val slot = slots.getOrNull(index)
+
+        if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
+
+        val stackThere = slot.item
+        val copyStack = stackThere.copy()
+
+        // If the slot is in the platform container
+        if (index == 0) {
+            if (!this.moveItemStackTo(stackThere, 1, this.slots.size, true)) {
+                return ItemStack.EMPTY
+            }
+        } else {
+            if (this.moveItemStackTo(stackThere, 0, 1, false)) {
+                return ItemStack.EMPTY
+            }
+        }
+
+        if (stackThere.isEmpty) {
+            slot.setByPlayer(ItemStack.EMPTY)
+        } else {
+            slot.setChanged()
+        }
+
+        if (stackThere.count == copyStack.count) return ItemStack.EMPTY
+
+        slot.onTake(player, stackThere)
+
+        return ItemStack.EMPTY
     }
 
     override fun stillValid(player: Player): Boolean {
