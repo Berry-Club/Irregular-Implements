@@ -766,7 +766,7 @@ class ModLanguageProvider(
         addInfo(ModItems.WHITE_STONE, "Charges when held while under the fool moon. When fully charged, it will prevent your death once and discharges.\n\nCan be found in dungeon loot.")
         addInfo(ModItems.MAGNETIC_FORCE, "Single-use item that allows you to teleport to any player, if they accept, in a radius around you.\n\nThe radius is configurable.")
         addInfo(ModItems.BLOCK_MOVER, "Use on a block to pick it up, and use it again to place it.\n\nCan be used on blocks with Block Entities, like Chests and machines.")
-        addInfo(ModItems.DIAMOND_BREAKER, "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.")
+        addInfo(ModItems.DIAMOND_BREAKER, "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.\n\nCan also be enchanted!")
         addInfo(ModItems.BLOCK_REPLACER, "Stores up to 9 stacks of blocks. When used on a block, it gets replaced with a random stored block.\n\nSneak right-click to open its inventory.")
         addInfo(ModItems.PORTABLE_ENDER_BRIDGE, "Use while looking at an Ender Anchor to teleport to it.\n\nHas a configurable range, defaulting to 300. Requires direct line of sight.")
         addInfo(ModItems.DIAPHANOUS_BLOCK, "Looks like another block, but becomes transparent as you approach.\n\nCraft it with any block to set its appearance.\n\nCraft it by itself to invert it, so it starts transparent and becomes opaque.")
