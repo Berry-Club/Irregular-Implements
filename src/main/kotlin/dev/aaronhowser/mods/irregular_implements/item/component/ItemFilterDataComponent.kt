@@ -40,6 +40,10 @@ data class ItemFilterDataComponent(
         return passes != this.isBlacklist
     }
 
+    fun getAsInvertedBlacklist(): ItemFilterDataComponent {
+        return copy(isBlacklist = !this.isBlacklist)
+    }
+
     sealed interface FilterEntry {
 
         fun getDisplayStack(): ItemStack
