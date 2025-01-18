@@ -47,7 +47,7 @@ object ScreenTextures {
         object ProcessingPlate : MenuBackground("textures/gui/processing_plate.png", 121, 77)
         object PotionVaporizer : MenuBackground("textures/gui/potion_vaporizer.png", 176, 166)
         object ItemProjector : MenuBackground("textures/gui/item_projector.png", 176, 166)
-        object ItemFilter : MenuBackground("textures/gui/item_filter.png", 219, 133)
+        object ItemFilter : MenuBackground("textures/gui/item_filter.png", 176, 141)
         object InventoryTester : MenuBackground("textures/gui/inventory_tester.png", 176, 136)
         object ImbuingStation : MenuBackground("textures/gui/imbuing_station.png", 176, 207)
         object FilteredSuperLubricantPlatform : MenuBackground("textures/gui/filtered_super_lubricant_platform.png", 176, 129)

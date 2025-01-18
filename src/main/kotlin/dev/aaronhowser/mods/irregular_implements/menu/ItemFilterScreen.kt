@@ -38,7 +38,7 @@ class ItemFilterScreen(
             val entry = filter.elementAtOrNull(index) ?: continue
 
             val x = this.leftPos + 7 + index * 18
-            val y = this.topPos + 9
+            val y = this.topPos + 15
 
             val width = 8
             val height = 8
