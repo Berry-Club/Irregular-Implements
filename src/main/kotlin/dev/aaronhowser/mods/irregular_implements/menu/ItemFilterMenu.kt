@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.core.NonNullList
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -25,13 +26,15 @@ class ItemFilterMenu(
             playerInventory.player.offhandItem
         }
 
+    private var usingMainHand = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack
+
     val filter: Set<ItemFilterEntryListDataComponent.FilterEntry>?
         get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)?.entries
 
     val filterContainer = object : SimpleContainer(9) {
         override fun getItems(): NonNullList<ItemStack> {
             val items = NonNullList.withSize(9, ItemStack.EMPTY)
-            val filter: Set<ItemFilterEntryListDataComponent.FilterEntry> = filter ?: return items
+            val filter: Set<ItemFilterEntryListDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return items
 
             for (index in 0 until 9) {
                 val entry = filter.elementAtOrNull(index) ?: continue
@@ -45,6 +48,21 @@ class ItemFilterMenu(
             return getItems()[index]
         }
 
+        override fun removeItem(index: Int, count: Int): ItemStack {
+            val filter = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
+            val entry = filter.elementAtOrNull(index) ?: return ItemStack.EMPTY
+
+            val newFilter = filter.toMutableSet()
+            newFilter.remove(entry)
+
+            filterStack.set(
+                ModDataComponents.ITEM_FILTER_ENTRIES,
+                ItemFilterEntryListDataComponent(newFilter)
+            )
+
+            return ItemStack.EMPTY
+        }
+
     }
 
     init {
@@ -54,13 +72,19 @@ class ItemFilterMenu(
             val y = 18
 
             val slot = object : Slot(filterContainer, index, x, y) {
-                override fun mayPlace(stack: ItemStack): Boolean {
-                    return false
+
+                override fun isFake(): Boolean {
+                    return true
                 }
 
                 override fun mayPickup(player: Player): Boolean {
-                    return false
+                    return this.hasItem()
                 }
+
+                override fun mayPlace(stack: ItemStack): Boolean {
+                    return !this.hasItem()
+                }
+
             }
 
             this.addSlot(slot)
@@ -92,7 +116,9 @@ class ItemFilterMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return player.isHolding(ModItems.ITEM_FILTER.get())
+        return player.getItemInHand(
+            if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
+        ).`is`(ModItems.ITEM_FILTER)
     }
 
     override fun handleButtonPressed(buttonId: Int) {
