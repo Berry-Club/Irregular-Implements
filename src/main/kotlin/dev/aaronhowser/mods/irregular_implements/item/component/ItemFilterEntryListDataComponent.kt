@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import io.netty.buffer.ByteBuf
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -15,7 +16,7 @@ import net.minecraft.world.item.ItemStack
 import kotlin.random.Random
 
 data class ItemFilterEntryListDataComponent(
-    val entries: List<Either<SpecificItem, TagKey<Item>>>
+    val entries: List<Either<SpecificItemEntry, TagEntry>>
 ) {
 
     fun test(testedStack: ItemStack): Boolean {
@@ -28,8 +29,8 @@ data class ItemFilterEntryListDataComponent(
                 } else {
                     ItemStack.isSameItem(specificItem.stack, testedStack)
                 }
-            }.ifRight { tagKey ->
-                passes = testedStack.`is`(tagKey)
+            }.ifRight { tag ->
+                passes = testedStack.`is`(tag.tagKey)
             }
 
             if (passes) return true
@@ -38,28 +39,44 @@ data class ItemFilterEntryListDataComponent(
         return false
     }
 
-    data class SpecificItem(
+    data class TagEntry(
+        val tagKey: TagKey<Item>
+    ) {
+
+        val matchingItems = BuiltInRegistries.ITEM.getTag(tagKey).get().toList()
+
+        companion object {
+            val CODEC: Codec<TagEntry> =
+                TagKey.codec(Registries.ITEM).xmap(::TagEntry, TagEntry::tagKey)
+
+            val STREAM_CODEC: StreamCodec<ByteBuf, TagEntry> =
+                OtherUtil.tagKeyStreamCodec(Registries.ITEM)
+                    .map(::TagEntry, TagEntry::tagKey)
+        }
+    }
+
+    data class SpecificItemEntry(
         val stack: ItemStack,
         val requireSameComponents: Boolean
     ) {
         companion object {
-            val CODEC: Codec<SpecificItem> =
+            val CODEC: Codec<SpecificItemEntry> =
                 RecordCodecBuilder.create { instance ->
                     instance.group(
                         ItemStack.CODEC
                             .fieldOf("stack")
-                            .forGetter(SpecificItem::stack),
+                            .forGetter(SpecificItemEntry::stack),
                         Codec.BOOL
                             .fieldOf("require_same_components")
-                            .forGetter(SpecificItem::requireSameComponents)
-                    ).apply(instance, ::SpecificItem)
+                            .forGetter(SpecificItemEntry::requireSameComponents)
+                    ).apply(instance, ::SpecificItemEntry)
                 }
 
-            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SpecificItem> =
+            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SpecificItemEntry> =
                 StreamCodec.composite(
-                    ItemStack.STREAM_CODEC, SpecificItem::stack,
-                    ByteBufCodecs.BOOL, SpecificItem::requireSameComponents,
-                    ::SpecificItem
+                    ItemStack.STREAM_CODEC, SpecificItemEntry::stack,
+                    ByteBufCodecs.BOOL, SpecificItemEntry::requireSameComponents,
+                    ::SpecificItemEntry
                 )
         }
     }
@@ -68,20 +85,16 @@ data class ItemFilterEntryListDataComponent(
 
         private val random = Random(123L)
 
-        fun getDisplayStack(entry: Either<SpecificItem, TagKey<Item>>): ItemStack {
+        fun getDisplayStack(entry: Either<SpecificItemEntry, TagEntry>): ItemStack {
             var displayStack: ItemStack? = null
 
             entry.ifLeft { specificItem ->
                 displayStack = specificItem.stack
             }
 
-            entry.ifRight { tagKey ->
-
-                val allItemsWithTag = BuiltInRegistries.ITEM
-                    .getTag(tagKey).get().toList()
-
-                val randomIndex = random.nextInt(allItemsWithTag.size)
-                val randomItem = allItemsWithTag[randomIndex]
+            entry.ifRight { tag ->
+                val randomIndex = random.nextInt(tag.matchingItems.size)
+                val randomItem = tag.matchingItems[randomIndex]
 
                 displayStack = randomItem.value().defaultInstance
             }
@@ -90,12 +103,12 @@ data class ItemFilterEntryListDataComponent(
         }
 
         val CODEC: Codec<ItemFilterEntryListDataComponent> =
-            Codec.either(SpecificItem.CODEC, TagKey.codec(Registries.ITEM))
+            Codec.either(SpecificItemEntry.CODEC, TagEntry.CODEC)
                 .listOf()
                 .xmap(::ItemFilterEntryListDataComponent, ItemFilterEntryListDataComponent::entries)
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterEntryListDataComponent> =
-            ByteBufCodecs.either(SpecificItem.STREAM_CODEC, OtherUtil.tagKeyStreamCodec(Registries.ITEM))
+            ByteBufCodecs.either(SpecificItemEntry.STREAM_CODEC, TagEntry.STREAM_CODEC)
                 .apply(ByteBufCodecs.list())
                 .map(::ItemFilterEntryListDataComponent, ItemFilterEntryListDataComponent::entries)
     }
