@@ -5,9 +5,11 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
@@ -36,13 +38,29 @@ data class ItemFilterEntryListDataComponent(
             val tagKey: TagKey<Item>
         ) : FilterEntry {
 
-            val matchingItems = BuiltInRegistries.ITEM.getTag(tagKey).get().toList()
+            private val matchingItems = BuiltInRegistries.ITEM.getTag(tagKey).get().toList()
+
+            private var timeLastUpdated = 0L
+            private var displayStack: ItemStack? = null
 
             override fun getDisplayStack(): ItemStack {
-                val randomIndex = random.nextInt(matchingItems.size)
-                val randomItem = matchingItems[randomIndex]
 
-                return randomItem.value().defaultInstance
+                val time = System.currentTimeMillis() / 1000
+                if (displayStack == null || time > this.timeLastUpdated) {
+                    this.timeLastUpdated = time
+
+                    val randomIndex = random.nextInt(this.matchingItems.size)
+                    val randomItem = this.matchingItems[randomIndex]
+
+                    this.displayStack = randomItem.value().defaultInstance.apply {
+                        set(
+                            DataComponents.ITEM_NAME,
+                            Component.literal("Item Tag: ${tagKey.location}")
+                        )
+                    }
+                }
+
+                return this.displayStack ?: ItemStack.EMPTY
             }
 
             override fun test(stack: ItemStack): Boolean {
