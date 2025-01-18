@@ -52,7 +52,17 @@ class ItemFilterMenu(
             val x = 8 + index * 18
             val y = 18
 
-            this.addSlot(Slot(filterContainer, index, x, y))
+            val slot = object : Slot(filterContainer, index, x, y) {
+                override fun mayPlace(stack: ItemStack): Boolean {
+                    return false
+                }
+
+                override fun mayPickup(player: Player): Boolean {
+                    return false
+                }
+            }
+
+            this.addSlot(slot)
         }
 
         // Add the 27 slots of the player inventory
