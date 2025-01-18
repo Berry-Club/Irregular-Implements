@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack
 import kotlin.random.Random
 
 data class ItemFilterEntryListDataComponent(
-    val entries: List<FilterEntry>
+    val entries: Set<FilterEntry>
 ) {
 
     fun test(testedStack: ItemStack): Boolean {
@@ -100,7 +100,6 @@ data class ItemFilterEntryListDataComponent(
     }
 
     companion object {
-
         val CODEC: Codec<ItemFilterEntryListDataComponent> =
             Codec.either(FilterEntry.SpecificItem.CODEC, FilterEntry.ItemTag.CODEC)
                 .listOf()
@@ -112,12 +111,16 @@ data class ItemFilterEntryListDataComponent(
                 .map(::fromList, this::toList)
 
         private fun fromList(list: List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>): ItemFilterEntryListDataComponent {
-            return ItemFilterEntryListDataComponent(list.map { either ->
-                either.map(
-                    { left -> left },
-                    { right -> right }
-                )
-            })
+            return ItemFilterEntryListDataComponent(
+                list
+                    .map { either ->
+                        either.map(
+                            { left: FilterEntry.SpecificItem -> left },
+                            { right: FilterEntry.ItemTag -> right }
+                        )
+                    }
+                    .toSet()
+            )
         }
 
         private fun toList(component: ItemFilterEntryListDataComponent): List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>> {
@@ -128,7 +131,6 @@ data class ItemFilterEntryListDataComponent(
                 }
             }
         }
-
     }
 
 }
