@@ -117,7 +117,7 @@ object OtherEvents {
 
     @SubscribeEvent
     fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
-        DropFilterItem.onPickupItem(event)
+        DropFilterItem.beforePickupItem(event)
         PortkeyItem.pickUpPortkey(event)
     }
 
@@ -153,6 +153,10 @@ object OtherEvents {
         if (heldItem.`is`(ModItems.ITEM_FILTER)) {
             ItemFilterItem.setTestingFilter(heldItem)
             ItemFilterItem.testFilter(heldItem)
+        }
+
+        if (heldItem.`is`(ModItems.DROP_FILTER) || heldItem.`is`(ModItems.VOIDING_DROP_FILTER)) {
+            DropFilterItem.setFilter(heldItem)
         }
 
         ChatDetectorBlockEntity.processMessage(event)

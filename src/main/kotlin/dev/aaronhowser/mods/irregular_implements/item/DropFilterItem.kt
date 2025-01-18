@@ -9,9 +9,7 @@ import net.minecraft.world.item.component.ItemContainerContents
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
-class DropFilterItem(
-    private val isVoiding: Boolean
-) : Item(
+class DropFilterItem : Item(
     Properties()
         .stacksTo(1)
         .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
@@ -19,39 +17,53 @@ class DropFilterItem(
 
     companion object {
 
-        fun onPickupItem(event: ItemEntityPickupEvent.Pre) {
+        fun setFilter(stack: ItemStack) {
+            val filter = ModItems.ITEM_FILTER.toStack()
+            ItemFilterItem.setTestingFilter(filter)
+
+            stack.set(
+                DataComponents.CONTAINER,
+                ItemContainerContents.fromItems(listOf(filter))
+            )
+        }
+
+        fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
             if (event.canPickup().isFalse) return
+
+            val itemEntity = event.itemEntity
+            if (itemEntity.hasPickUpDelay()) return
 
             val player = event.player
 
-            val voidingFilters: MutableList<ItemStack> = mutableListOf()
-            val regularFilters: MutableList<ItemStack> = mutableListOf()
+            val voidingFilterStacks = player.inventory.items
+                .filter { it.`is`(ModItems.VOIDING_DROP_FILTER) }
+            val filterStacks = player.inventory.items
+                .filter { it.`is`(ModItems.ITEM_FILTER) }
 
-            for (stack in player.inventory.items) {
-                if (stack.`is`(ModItems.VOIDING_DROP_FILTER)) {
-                    voidingFilters.add(stack)
-                } else if (stack.`is`(ModItems.DROP_FILTER)) {
-                    regularFilters.add(stack)
-                }
-            }
+            if (voidingFilterStacks.isEmpty() && filterStacks.isEmpty()) return
 
-            if (voidingFilters.isEmpty() && regularFilters.isEmpty()) return
-
-            val itemEntity = event.itemEntity
             val stack = itemEntity.item
 
-            for (voidingFilter in voidingFilters) {
-                val filter = voidingFilter.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: continue
+            for (voidingFilterStack in voidingFilterStacks) {
+                val container = voidingFilterStack.get(DataComponents.CONTAINER) ?: continue
+                val filter = container
+                    .getStackInSlot(0)
+                    .get(ModDataComponents.ITEM_FILTER_ENTRIES)
+                    ?: continue
 
                 if (filter.test(stack)) {
-                    itemEntity.kill()
-                    event.setCanPickup(TriState.FALSE)
+                    player.take(itemEntity, 0)
+                    stack.count = 0
                     return
                 }
             }
 
-            for (regularFilter in regularFilters) {
-                val filter = regularFilter.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: continue
+            for (filterStack in filterStacks) {
+                val container = filterStack.get(DataComponents.CONTAINER) ?: continue
+                val filter = container
+                    .getStackInSlot(0)
+                    .get(ModDataComponents.ITEM_FILTER_ENTRIES)
+                    ?: continue
 
                 if (filter.test(stack)) {
                     event.setCanPickup(TriState.FALSE)
