@@ -22,6 +22,11 @@ class FilteredPlatformScreen(
         this.topPos = (this.height - this.imageHeight) / 2
     }
 
+    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick)
+        this.renderTooltip(guiGraphics, mouseX, mouseY)
+    }
+
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
         this.background.render(
             guiGraphics,
