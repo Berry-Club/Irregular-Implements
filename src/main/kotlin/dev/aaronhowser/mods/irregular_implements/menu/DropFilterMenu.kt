@@ -96,7 +96,6 @@ class DropFilterMenu(
 
         this.addSlot(filterSlot)
 
-
         // Add the 27 slots of the player inventory
         for (row in 0..2) {
             for (column in 0..8) {
@@ -118,7 +117,32 @@ class DropFilterMenu(
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        return ItemStack.EMPTY
+        val slot = slots.getOrNull(index)
+
+        if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
+
+        val stackThere = slot.item
+        val copyStack = stackThere.copy()
+
+        if (index == 0) {
+            if (!this.moveItemStackTo(stackThere, 1, 37, true)) {
+                return ItemStack.EMPTY
+            }
+        } else if (!this.moveItemStackTo(stackThere, 0, 1, false)) {
+            return ItemStack.EMPTY
+        }
+
+        if (stackThere.isEmpty) {
+            slot.setByPlayer(ItemStack.EMPTY)
+        } else {
+            slot.setChanged()
+        }
+
+        if (stackThere.count == copyStack.count) return ItemStack.EMPTY
+
+        slot.onTake(player, stackThere)
+
+        return copyStack
     }
 
     override fun stillValid(player: Player): Boolean {
