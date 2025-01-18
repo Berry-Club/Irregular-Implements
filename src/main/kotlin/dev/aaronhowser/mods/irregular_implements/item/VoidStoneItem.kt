@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.VoidStoneMenu
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
@@ -67,7 +68,7 @@ class VoidStoneItem : Item(
     }
 
     override fun getDisplayName(): Component {
-        return Component.translatable(this.descriptionId)
+        return this.descriptionId.toComponent()
     }
 
 }

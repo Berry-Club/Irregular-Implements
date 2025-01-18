@@ -60,6 +60,11 @@ object ModMenuTypes {
             MenuType(::ImbuingStationMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val ITEM_FILTER: DeferredHolder<MenuType<*>, MenuType<ItemFilterMenu>> =
+        MENU_TYPE_REGISTRY.register("item_filter", Supplier {
+            MenuType(::ItemFilterMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
