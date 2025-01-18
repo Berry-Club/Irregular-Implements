@@ -524,6 +524,7 @@
   "tooltip.irregular_implements.iron_dropper_random_velocity": "Random velocity",
   "tooltip.irregular_implements.iron_dropper_twenty_delay": "20 tick pickup delay",
   "tooltip.irregular_implements.item_count": "%s x%d",
+  "tooltip.irregular_implements.item_tag": "Item Tag: %s",
   "tooltip.irregular_implements.lazy": "Lazy",
   "tooltip.irregular_implements.location_component": "%s, %dx %dy %dz",
   "tooltip.irregular_implements.lubricated": "Lubricated",

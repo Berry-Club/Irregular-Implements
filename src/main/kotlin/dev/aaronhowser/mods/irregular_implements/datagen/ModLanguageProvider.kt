@@ -551,6 +551,7 @@ class ModLanguageProvider(
         const val IRON_DROPPER_BOTH_EFFECTS = "tooltip.irregular_implements.iron_dropper_both_effects"
         const val BLOCK = "tooltip.irregular_implements.block"
         const val DIAPHANOUS_INVERTED = "tooltip.irregular_implements.diaphanous_inverted"
+        const val ITEM_TAG = "tooltip.irregular_implements.item_tag"
     }
 
     private fun addTooltips() {
@@ -599,6 +600,7 @@ class ModLanguageProvider(
         add(Tooltips.IRON_DROPPER_BOTH_EFFECTS, "Sound & particle effects")
         add(Tooltips.BLOCK, "Block: %s")
         add(Tooltips.DIAPHANOUS_INVERTED, "Inverted")
+        add(Tooltips.ITEM_TAG, "Item Tag: %s")
     }
 
     object Info {

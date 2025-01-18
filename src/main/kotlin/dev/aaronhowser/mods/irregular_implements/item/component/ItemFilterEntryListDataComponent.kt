@@ -3,12 +3,13 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
-import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
@@ -38,7 +39,7 @@ data class ItemFilterEntryListDataComponent(
             val backupStack: ItemStack
         ) : FilterEntry {
 
-            private val matchingItems = BuiltInRegistries.ITEM.getTag(tagKey).get().toList()
+            private val matchingItems = BuiltInRegistries.ITEM.getTag(this.tagKey).get().toList()
 
             private var timeLastUpdated = 0L
             private var displayStack: ItemStack? = null
@@ -55,7 +56,8 @@ data class ItemFilterEntryListDataComponent(
                     this.displayStack = randomItem.value().defaultInstance.apply {
                         set(
                             DataComponents.ITEM_NAME,
-                            Component.literal("Item Tag: ${tagKey.location}")
+                            ModLanguageProvider.Tooltips.ITEM_TAG
+                                .toComponent(this@ItemTag.tagKey.location.toString())
                         )
                     }
                 }
@@ -64,7 +66,7 @@ data class ItemFilterEntryListDataComponent(
             }
 
             override fun test(stack: ItemStack): Boolean {
-                return stack.`is`(tagKey)
+                return stack.`is`(this.tagKey)
             }
 
             fun getAsSpecificItemEntry(): SpecificItem {
