@@ -39,6 +39,11 @@ class ItemFilterMenu(
 
             return items
         }
+
+        override fun getItem(index: Int): ItemStack {
+            return getItems()[index]
+        }
+
     }
 
     init {
