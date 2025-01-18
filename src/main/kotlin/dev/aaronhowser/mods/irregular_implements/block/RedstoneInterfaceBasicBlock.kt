@@ -21,13 +21,15 @@ class RedstoneInterfaceBasicBlock : EntityBlock, Block(
     override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
 
-        val blockEntity = level.getBlockEntity(pos) as? RedstoneInterfaceBasicBlockEntity ?: return
-        val linkedPos = blockEntity.linkedPos ?: return
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is RedstoneInterfaceBasicBlockEntity) {
+            val linkedPos = blockEntity.linkedPos ?: return
 
-        if (level.isLoaded(linkedPos)) {
-            val linkedState = level.getBlockState(linkedPos)
-            linkedState.handleNeighborChanged(level, linkedPos, this, pos, false)
-            level.updateNeighborsAt(linkedPos, linkedState.block)
+            if (level.isLoaded(linkedPos)) {
+                val linkedState = level.getBlockState(linkedPos)
+                linkedState.handleNeighborChanged(level, linkedPos, this, pos, false)
+                level.updateNeighborsAt(linkedPos, linkedState.block)
+            }
         }
     }
 

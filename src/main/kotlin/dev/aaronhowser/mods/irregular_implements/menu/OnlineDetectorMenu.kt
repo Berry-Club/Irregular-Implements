@@ -35,8 +35,11 @@ class OnlineDetectorMenu(
         this.currentUsername = username
 
         this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity
-            blockEntity?.username = username
+            val blockEntity = level.getBlockEntity(pos)
+
+            if (blockEntity is OnlineDetectorBlockEntity) {
+                blockEntity.username = username
+            }
         }
 
         return true

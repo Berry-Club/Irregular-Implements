@@ -62,8 +62,8 @@ class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISP
 
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 
-        if (!level.isClientSide) {
-            val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity ?: return InteractionResult.FAIL
+        val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity
+        if (blockEntity is OnlineDetectorBlockEntity) {
             player.openMenu(blockEntity)
             blockEntity.sendStringUpdate()
         }

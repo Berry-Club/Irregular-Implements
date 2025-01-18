@@ -64,8 +64,11 @@ class NotificationInterfaceMenu(
         this.title = newTitle
 
         this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity
-            blockEntity?.toastTitle = newTitle
+            val blockEntity = level.getBlockEntity(pos)
+
+            if (blockEntity is NotificationInterfaceBlockEntity) {
+                blockEntity.toastTitle = newTitle
+            }
         }
 
         return true
@@ -77,8 +80,10 @@ class NotificationInterfaceMenu(
         this.description = newDescription
 
         this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity
-            blockEntity?.toastDescription = newDescription
+            val blockEntity = level.getBlockEntity(pos)
+            if (blockEntity is NotificationInterfaceBlockEntity) {
+                blockEntity.toastDescription = newDescription
+            }
         }
 
         return true

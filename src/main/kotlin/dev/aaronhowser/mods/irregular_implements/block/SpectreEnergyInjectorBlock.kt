@@ -38,13 +38,16 @@ class SpectreEnergyInjectorBlock : Block(
         super.setPlacedBy(level, pos, state, placer, stack)
 
         if (placer == null) return
-        val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity ?: return
-        blockEntity.ownerUuid = placer.uuid
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is SpectreEnergyInjectorBlockEntity) {
+            blockEntity.ownerUuid = placer.uuid
+        }
     }
 
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity
-        if (!level.isClientSide && blockEntity != null) {
+        val blockEntity = level.getBlockEntity(pos)
+
+        if (!level.isClientSide && blockEntity is SpectreEnergyInjectorBlockEntity) {
             val energyHandler = blockEntity.getEnergyHandler(null)
             val energyStored = energyHandler?.energyStored ?: 0
             val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilSavedData.MAX_ENERGY

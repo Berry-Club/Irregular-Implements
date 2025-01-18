@@ -72,8 +72,10 @@ class BlockBreakerBlock : Block(
     override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
 
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return
-        blockEntity.neighborChanged(state, level)
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is BlockBreakerBlockEntity) {
+            blockEntity.neighborChanged(state, level)
+        }
     }
 
     override fun useItemOn(
@@ -105,8 +107,10 @@ class BlockBreakerBlock : Block(
             || !state.getValue(IS_UPGRADED)
         ) return InteractionResult.PASS
 
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return InteractionResult.FAIL
-        blockEntity.downgrade(player)
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is BlockBreakerBlockEntity) {
+            blockEntity.downgrade(player)
+        }
 
         val newState = state.setValue(IS_UPGRADED, false)
         level.setBlockAndUpdate(pos, newState)
@@ -117,8 +121,8 @@ class BlockBreakerBlock : Block(
     override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
         if (oldState.`is`(newState.block)) return
 
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
-        if (blockEntity != null) {
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is BlockBreakerBlockEntity) {
             OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
         }
 

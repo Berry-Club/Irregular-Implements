@@ -56,8 +56,11 @@ class ChatDetectorMenu(
         this.currentRegexString = regexString
 
         this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? ChatDetectorBlockEntity
-            blockEntity?.regexString = regexString
+            val blockEntity = level.getBlockEntity(pos)
+
+            if (blockEntity is ChatDetectorBlockEntity) {
+                blockEntity.regexString = regexString
+            }
         }
 
         return true

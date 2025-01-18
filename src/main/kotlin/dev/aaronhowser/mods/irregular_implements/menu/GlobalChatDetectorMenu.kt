@@ -97,8 +97,11 @@ class GlobalChatDetectorMenu(
         this.currentRegexString = regexString
 
         this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? GlobalChatDetectorBlockEntity
-            blockEntity?.regexString = regexString
+            val blockEntity = level.getBlockEntity(pos)
+
+            if (blockEntity is GlobalChatDetectorBlockEntity) {
+                blockEntity.regexString = regexString
+            }
         }
 
         return true

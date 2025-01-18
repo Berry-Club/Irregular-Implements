@@ -21,13 +21,18 @@ class RedstoneObserverBlock : EntityBlock, Block(
     }
 
     override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
-        val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-        val linkedPos = blockEntity.linkedPos ?: return 0
-        if (!level.isLoaded(linkedPos)) return 0
+        val blockEntity = level.getBlockEntity(pos)
 
-        return level
-            .getBlockState(linkedPos)
-            .getAnalogOutputSignal(level, linkedPos)
+        if (blockEntity is RedstoneObserverBlockEntity) {
+            val linkedPos = blockEntity.linkedPos ?: return 0
+            if (!level.isLoaded(linkedPos)) return 0
+
+            return level
+                .getBlockState(linkedPos)
+                .getAnalogOutputSignal(level, linkedPos)
+        }
+
+        return 0
     }
 
     override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {

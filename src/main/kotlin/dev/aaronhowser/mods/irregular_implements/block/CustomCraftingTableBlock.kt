@@ -55,32 +55,40 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
     // Stuff that uses the BE's rendered block state
 
     override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.getSoundType(state, level, pos, entity)
+        val blockEntity = level.getBlockEntity(pos)
 
-        // Failsafe
-        val renderedState = blockEntity.renderedBlockState
-        if (renderedState.`is`(this)) return SoundType.WOOD
+        if (blockEntity is CustomCraftingTableBlockEntity) {
+            // Failsafe
+            val renderedState = blockEntity.renderedBlockState
+            if (renderedState.`is`(this)) return SoundType.WOOD
 
-        return renderedState.getSoundType(level, pos, entity)
+            return renderedState.getSoundType(level, pos, entity)
+        }
+
+        return super.getSoundType(state, level, pos, entity)
     }
 
     override fun spawnDestroyParticles(level: Level, player: Player, pos: BlockPos, state: BlockState) {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.spawnDestroyParticles(level, player, pos, state)
+        val blockEntity = level.getBlockEntity(pos)
 
-        level.levelEvent(
-            player,
-            LevelEvent.PARTICLES_DESTROY_BLOCK,
-            pos,
-            getId(blockEntity.renderedBlockState)
-        )
+        if (blockEntity is CustomCraftingTableBlockEntity) {
+            level.levelEvent(
+                player,
+                LevelEvent.PARTICLES_DESTROY_BLOCK,
+                pos,
+                getId(blockEntity.renderedBlockState)
+            )
+        }
     }
 
     override fun getCloneItemStack(state: BlockState, target: HitResult, level: LevelReader, pos: BlockPos, player: Player): ItemStack {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
+        val blockEntity = level.getBlockEntity(pos)
 
-        return CustomCraftingTableBlockItem.ofBlock(blockEntity.renderedBlockState.block)
+        if (blockEntity is CustomCraftingTableBlockEntity) {
+            CustomCraftingTableBlockItem.ofBlock(blockEntity.renderedBlockState.block)
+        }
+
+        return super.getCloneItemStack(state, target, level, pos, player)
     }
 
 }
