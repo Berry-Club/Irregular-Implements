@@ -70,6 +70,11 @@ object ModMenuTypes {
             MenuType(::FilteredPlatformMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val DROP_FILTER: DeferredHolder<MenuType<*>, MenuType<DropFilterMenu>> =
+        MENU_TYPE_REGISTRY.register("drop_filter", Supplier {
+            MenuType(::DropFilterMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
@@ -82,6 +87,7 @@ object ModMenuTypes {
         event.register(IMBUING_STATION.get(), ::ImbuingStationScreen)
         event.register(ITEM_FILTER.get(), ::ItemFilterScreen)
         event.register(FILTERED_PLATFORM.get(), ::FilteredPlatformScreen)
+        event.register(DROP_FILTER.get(), ::DropFilterScreen)
     }
 
 }

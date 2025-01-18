@@ -84,8 +84,6 @@ class ItemFilterItem : Item(
         return InteractionResultHolder.success(usedStack)
     }
 
-    // Menu stuff
-
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
         return ItemFilterMenu(containerId, playerInventory)
     }
