@@ -52,7 +52,7 @@ class CustomCraftingTableBlockItem : BlockItem(
         val block = stack.get(ModDataComponents.BLOCK)
 
         if (block != null) {
-            val component = ModLanguageProvider.Tooltips.CUSTOM_CRAFTING_TABLE_BLOCK
+            val component = ModLanguageProvider.Tooltips.BLOCK
                 .toGrayComponent(block.name)
 
             tooltipComponents.add(component)
