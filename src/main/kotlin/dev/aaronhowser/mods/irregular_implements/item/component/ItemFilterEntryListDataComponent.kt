@@ -6,10 +6,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
@@ -53,11 +55,25 @@ data class ItemFilterEntryListDataComponent(
                     val randomIndex = random.nextInt(this.matchingItems.size)
                     val randomItem = this.matchingItems[randomIndex]
 
+                    val tagLocation = this.tagKey.location
+                    val possibleLangKey = StringBuilder()
+                        .append("tag.item.")
+                        .append(tagLocation.namespace)
+                        .append(".")
+                        .append(tagLocation.path)
+                        .toString()
+
+                    val tagKeyComponent = if (I18n.exists(possibleLangKey)) {
+                        Component.translatable(possibleLangKey)
+                    } else {
+                        Component.literal(tagLocation.toString())
+                    }
+
                     this.displayStack = randomItem.value().defaultInstance.apply {
                         set(
                             DataComponents.ITEM_NAME,
                             ModLanguageProvider.Tooltips.ITEM_TAG
-                                .toComponent(this@ItemTag.tagKey.location.toString())
+                                .toComponent(tagKeyComponent)
                         )
                     }
                 }
