@@ -2,10 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.component.BiomePointsDataComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.SpecificEntityDataComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
+import dev.aaronhowser.mods.irregular_implements.item.component.*
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
@@ -176,6 +173,13 @@ object ModDataComponents {
             it
                 .persistent(BuiltInRegistries.BLOCK.byNameCodec())
                 .networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
+        }
+
+    val ITEM_FILTER_ENTRY_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterEntryListDataComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("item_filter_entry_list") {
+            it
+                .persistent(ItemFilterEntryListDataComponent.CODEC)
+                .networkSynchronized(ItemFilterEntryListDataComponent.STREAM_CODEC)
         }
 
 }
