@@ -81,6 +81,7 @@ object ModMenuTypes {
         event.register(NOTIFICATION_INTERFACE.get(), ::NotificationInterfaceScreen)
         event.register(IMBUING_STATION.get(), ::ImbuingStationScreen)
         event.register(ITEM_FILTER.get(), ::ItemFilterScreen)
+        event.register(FILTERED_PLATFORM.get(), ::FilteredPlatformScreen)
     }
 
 }
