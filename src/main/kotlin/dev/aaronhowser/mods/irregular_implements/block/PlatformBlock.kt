@@ -1,11 +1,14 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.FilteredPlatformBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.EntityCollisionContext
@@ -14,9 +17,10 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class PlatformBlock(
     blockToCopy: Block,
+    private val hasEntity: Boolean = false
 ) : Block(
     Properties.ofFullCopy(blockToCopy)
-) {
+), EntityBlock {
 
     companion object {
         val SHAPE: VoxelShape = box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0)
@@ -33,14 +37,23 @@ class PlatformBlock(
         val BAMBOO = PlatformBlock(Blocks.BAMBOO_TRAPDOOR)
         val CHERRY = PlatformBlock(Blocks.CHERRY_TRAPDOOR)
         val SUPER_LUBE = PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get())
+        val FILTERED_SUPER_LUBE = PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get(), hasEntity = true)
     }
 
     override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return if (context.isAbove(Shapes.block(), pos, true) && !(context as? EntityCollisionContext)?.entity?.isDescending.isTrue) {
-            SHAPE
-        } else {
-            Shapes.empty()
-        }
+
+        val entity = (context as? EntityCollisionContext)?.entity
+
+        val shouldFall =
+            !context.isAbove(Shapes.block(), pos, true)
+                    || (
+                    entity != null && (
+                            entity.isDescending
+                                    || (level.getBlockEntity(pos) as? FilteredPlatformBlockEntity)?.shouldEntityFallThrough(entity).isTrue
+                            )
+                    )
+
+        return if (shouldFall) Shapes.empty() else SHAPE
     }
 
     override fun getInteractionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
@@ -49,6 +62,14 @@ class PlatformBlock(
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return SHAPE
+    }
+
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? {
+        return if (this.hasEntity) {
+            FilteredPlatformBlockEntity(pos, state)
+        } else {
+            null
+        }
     }
 
 }

@@ -119,7 +119,8 @@ object ModBlocks {
         basicStoneBlock("super_lubricant_stone")
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
-    val FILTERED_SUPER_LUBRICANT_PLATFORM = basicBlock("filtered_super_lubricant_platform")
+    val FILTERED_SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("filtered_super_lubricant_platform") { PlatformBlock.FILTERED_SUPER_LUBE }
 
     // Not above 1.7
     val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")

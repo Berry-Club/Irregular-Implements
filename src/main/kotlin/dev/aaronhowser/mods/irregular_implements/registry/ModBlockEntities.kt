@@ -162,4 +162,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val FILTERED_PLATFORM =
+        BLOCK_ENTITY_REGISTRY.register("filtered_platform", Supplier {
+            BlockEntityType.Builder.of(
+                { pos, state -> FilteredPlatformBlockEntity(pos, state) },
+                ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM.get()
+            ).build(null)
+        })
+
 }
