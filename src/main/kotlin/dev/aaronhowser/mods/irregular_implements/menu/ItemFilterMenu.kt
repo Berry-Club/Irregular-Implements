@@ -5,7 +5,8 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import net.minecraft.world.Container
+import net.minecraft.core.NonNullList
+import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -26,42 +27,21 @@ class ItemFilterMenu(
     val filter: Set<ItemFilterEntryListDataComponent.FilterEntry>?
         get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)?.entries
 
-    val filterContainer = object : Container {
+    val filterContainer = object : SimpleContainer(9) {
+        override fun getItems(): NonNullList<ItemStack> {
+            val items = NonNullList.withSize(9, ItemStack.EMPTY)
+            val filter: Set<ItemFilterEntryListDataComponent.FilterEntry> = filter ?: return items
+
+            for (index in 0 until 9) {
+                val entry = filter.elementAtOrNull(index) ?: continue
+                items[index] = entry.getDisplayStack()
+            }
+
+            return items
+        }
+
         override fun getItem(index: Int): ItemStack {
-            val filter = filter ?: return ItemStack.EMPTY
-            return filter.elementAtOrNull(index)?.getDisplayStack() ?: ItemStack.EMPTY
-        }
-
-        override fun clearContent() {
-            // Do nothing
-        }
-
-        override fun getContainerSize(): Int {
-            return 9
-        }
-
-        override fun isEmpty(): Boolean {
-            return filter.isNullOrEmpty()
-        }
-
-        override fun removeItem(slot: Int, amount: Int): ItemStack {
-            TODO("Not yet implemented")
-        }
-
-        override fun removeItemNoUpdate(slot: Int): ItemStack {
-            TODO("Not yet implemented")
-        }
-
-        override fun setItem(slot: Int, stack: ItemStack) {
-            TODO("Not yet implemented")
-        }
-
-        override fun setChanged() {
-            TODO("Not yet implemented")
-        }
-
-        override fun stillValid(player: Player): Boolean {
-            return player.isHolding(ModItems.ITEM_FILTER.get())
+            return getItems()[index]
         }
 
     }
@@ -101,7 +81,7 @@ class ItemFilterMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return this.filterContainer.stillValid(player)
+        return player.isHolding(ModItems.ITEM_FILTER.get())
     }
 
     override fun handleButtonPressed(buttonId: Int) {
