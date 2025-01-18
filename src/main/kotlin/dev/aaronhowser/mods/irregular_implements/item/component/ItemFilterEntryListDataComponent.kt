@@ -86,7 +86,7 @@ data class ItemFilterEntryListDataComponent(
                                 .fieldOf("stack")
                                 .forGetter(SpecificItem::stack),
                             Codec.BOOL
-                                .fieldOf("require_same_components")
+                                .optionalFieldOf("require_same_components", false)
                                 .forGetter(SpecificItem::requireSameComponents)
                         ).apply(instance, ::SpecificItem)
                     }
