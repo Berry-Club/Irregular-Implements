@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import io.netty.buffer.ByteBuf
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
@@ -35,7 +34,8 @@ data class ItemFilterEntryListDataComponent(
         fun test(stack: ItemStack): Boolean
 
         data class ItemTag(
-            val tagKey: TagKey<Item>
+            val tagKey: TagKey<Item>,
+            val backupStack: ItemStack
         ) : FilterEntry {
 
             private val matchingItems = BuiltInRegistries.ITEM.getTag(tagKey).get().toList()
@@ -67,15 +67,34 @@ data class ItemFilterEntryListDataComponent(
                 return stack.`is`(tagKey)
             }
 
+            fun getAsSpecificItemEntry(): SpecificItem {
+                return SpecificItem(
+                    this.backupStack,
+                    requireSameComponents = false
+                )
+            }
+
             companion object {
                 private val random = Random(123L)
 
                 val CODEC: Codec<ItemTag> =
-                    TagKey.codec(Registries.ITEM).xmap(::ItemTag, ItemTag::tagKey)
+                    RecordCodecBuilder.create { instance ->
+                        instance.group(
+                            TagKey.codec(Registries.ITEM)
+                                .fieldOf("tag_key")
+                                .forGetter(ItemTag::tagKey),
+                            ItemStack.CODEC
+                                .fieldOf("backup_stack")
+                                .forGetter(ItemTag::backupStack)
+                        ).apply(instance, ::ItemTag)
+                    }
 
-                val STREAM_CODEC: StreamCodec<ByteBuf, ItemTag> =
-                    OtherUtil.tagKeyStreamCodec(Registries.ITEM)
-                        .map(::ItemTag, ItemTag::tagKey)
+                val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemTag> =
+                    StreamCodec.composite(
+                        OtherUtil.tagKeyStreamCodec(Registries.ITEM), ItemTag::tagKey,
+                        ItemStack.STREAM_CODEC, ItemTag::backupStack,
+                        ::ItemTag
+                    )
             }
         }
 
