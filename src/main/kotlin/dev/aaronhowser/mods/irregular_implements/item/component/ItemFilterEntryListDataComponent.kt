@@ -67,7 +67,7 @@ data class ItemFilterEntryListDataComponent(
         ) : FilterEntry {
 
             override fun getDisplayStack(): ItemStack {
-                return stack.copy()
+                return this.stack.copy()
             }
 
             override fun test(stack: ItemStack): Boolean {
@@ -76,6 +76,22 @@ data class ItemFilterEntryListDataComponent(
                 } else {
                     ItemStack.isSameItem(this.stack, stack)
                 }
+            }
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (other !is SpecificItem) return false
+
+                if (!ItemStack.isSameItemSameComponents(this.stack, other.stack)) return false
+                if (this.requireSameComponents != other.requireSameComponents) return false
+
+                return true
+            }
+
+            override fun hashCode(): Int {
+                var result = this.stack.hashCode()
+                result = 31 * result + this.requireSameComponents.hashCode()
+                return result
             }
 
             companion object {
