@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -26,6 +27,14 @@ class FilteredPlatformMenu(
         checkContainerSize(platformContainer, 1)
 
         platformContainer.startOpen(playerInventory.player)
+
+        val platformSlot = object : Slot(platformContainer, 0, 80, 10) {
+            override fun mayPlace(stack: ItemStack): Boolean {
+                return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
+            }
+        }
+
+        this.addSlot(platformSlot)
 
         for (row in 0..2) {
             for (column in 0..8) {
