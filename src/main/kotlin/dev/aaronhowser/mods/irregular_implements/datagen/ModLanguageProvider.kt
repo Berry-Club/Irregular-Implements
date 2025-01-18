@@ -109,6 +109,8 @@ class ModLanguageProvider(
         const val HIDE_NAME_HELMET_TAG = "tag.item.irregular_implements.hide_name_helmet"
         const val HIDE_POTION_HELMET_TAG = "tag.item.irregular_implements.hide_potion_helmet"
         const val SUPER_LUBRICATED_TAG = "tag.item.irregular_implements.super_lubricated"
+        const val CUSTOM_CRAFTING_TABLE_ITEMS_TAG = "tag.item.irregular_implements.custom_crafting_table_items"
+        const val SPECTRE_ANCHOR_BLACKLIST_TAG = "tag.item.irregular_implements.spectre_anchor_blacklist"
 
         const val C_BEAN_TAG = "tag.item.c.crops.bean"
         const val C_OBSIDIAN_RODS_TAG = "tag.item.c.rods.obsidian"
@@ -126,6 +128,8 @@ class ModLanguageProvider(
         add(Misc.HIDE_NAME_HELMET_TAG, "Hides Name Helmet")
         add(Misc.HIDE_POTION_HELMET_TAG, "Hides Potion Helmet")
         add(Misc.SUPER_LUBRICATED_TAG, "Super Lubricated Boots")
+        add(Misc.CUSTOM_CRAFTING_TABLE_ITEMS_TAG, "Custom Crafting Table Items")
+        add(Misc.SPECTRE_ANCHOR_BLACKLIST_TAG, "Spectre Anchor Blacklist")
 
         add(Misc.C_BEAN_TAG, "Beans")
         add(Misc.C_OBSIDIAN_RODS_TAG, "Obsidian Rods")
