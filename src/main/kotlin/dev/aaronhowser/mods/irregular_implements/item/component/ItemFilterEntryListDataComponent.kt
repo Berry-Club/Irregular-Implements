@@ -53,7 +53,7 @@ data class ItemFilterEntryListDataComponent(
                     this.timeLastUpdated = time
 
                     val randomIndex = random.nextInt(this.matchingItems.size)
-                    val randomItem = this.matchingItems[randomIndex]
+                    val randomItem = this.matchingItems[randomIndex].value()
 
                     val tagLocation = this.tagKey.location
                     val possibleLangKey = StringBuilder()
@@ -69,7 +69,7 @@ data class ItemFilterEntryListDataComponent(
                         Component.literal(tagLocation.toString())
                     }
 
-                    this.displayStack = randomItem.value().defaultInstance.apply {
+                    this.displayStack = randomItem.defaultInstance.apply {
                         set(
                             DataComponents.ITEM_NAME,
                             ModLanguageProvider.Tooltips.ITEM_TAG
