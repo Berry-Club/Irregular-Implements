@@ -85,21 +85,12 @@ class DropFilterMenu(
 
         val filterSlot = object : Slot(this.filterContainer, 0, filterX, filterY) {
 
-            override fun isFake(): Boolean {
-                return true
-            }
-
-            override fun mayPickup(player: Player): Boolean {
-                this.container.removeItem(this.index, 1)
-                return false
-            }
-
             override fun mayPlace(stack: ItemStack): Boolean {
-                if (!stack.`is`(ModItems.ITEM_FILTER)) return false
+                return stack.`is`(ModItems.ITEM_FILTER)
+            }
 
-                this@DropFilterMenu.filterContainer.addItem(stack.copyWithCount(1))
-
-                return false
+            override fun set(stack: ItemStack) {
+                this@DropFilterMenu.filterContainer.addItem(stack)
             }
         }
 
