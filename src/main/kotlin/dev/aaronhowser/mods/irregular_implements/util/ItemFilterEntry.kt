@@ -11,16 +11,12 @@ sealed interface ItemFilterEntry {
 
     fun test(stack: ItemStack): Boolean
 
-    val codec: Codec<out ItemFilterEntry>
-
     data class Tag(
         val tagKey: TagKey<Item>
     ) : ItemFilterEntry {
         override fun test(stack: ItemStack): Boolean {
             return stack.`is`(tagKey)
         }
-
-        override val codec: Codec<out ItemFilterEntry> = CODEC
 
         companion object {
             val CODEC: Codec<Tag> =
@@ -40,8 +36,6 @@ sealed interface ItemFilterEntry {
 
             return ItemStack.isSameItem(this.stack, stack)
         }
-
-        override val codec: Codec<out ItemFilterEntry> = CODEC
 
         fun toggleRequireSameComponents(): Stack {
             return copy(requireSameComponents = !this.requireSameComponents)
