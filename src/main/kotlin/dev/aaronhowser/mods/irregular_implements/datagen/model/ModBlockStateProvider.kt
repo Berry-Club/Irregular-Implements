@@ -65,6 +65,26 @@ class ModBlockStateProvider(
         ironDropper()
         customCraftingTable()
         notificationInterface()
+        imbuingStation()
+    }
+
+    private fun imbuingStation() {
+        val block = ModBlocks.IMBUING_STATION.get()
+
+        val top = modLoc("block/imbuing_station/top")
+        val bottom = modLoc("block/imbuing_station/bottom")
+        val side = modLoc("block/imbuing_station/side")
+
+        val model = models()
+            .cubeBottomTop(
+                name(block),
+                side,
+                bottom,
+                top
+            )
+            .texture("particle", top)
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun notificationInterface() {
