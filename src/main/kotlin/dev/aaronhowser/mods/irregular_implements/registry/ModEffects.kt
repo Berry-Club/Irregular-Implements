@@ -32,7 +32,7 @@ object ModEffects {
     // Hitting someone while you have the Collapse Imbue gives them Collapse
     // Also you can get Collapse by touching Sakanade spores
 
-    @JvmStatic
+    @JvmField
     val COLLAPSE: DeferredHolder<MobEffect, CollapseEffect> =
         EFFECT_REGISTRY.register("collapse", Supplier { CollapseEffect() })
 

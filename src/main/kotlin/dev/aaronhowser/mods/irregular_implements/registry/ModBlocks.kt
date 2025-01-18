@@ -89,7 +89,7 @@ object ModBlocks {
     val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
         registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
 
-    @JvmStatic
+    @JvmField
     val CUSTOM_CRAFTING_TABLE: DeferredBlock<CustomCraftingTableBlock> =
         registerBlockWithoutItem("custom_crafting_table") { CustomCraftingTableBlock() }
 

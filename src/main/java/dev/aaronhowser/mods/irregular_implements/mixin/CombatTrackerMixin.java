@@ -27,7 +27,7 @@ abstract public class CombatTrackerMixin {
             )
     )
     private Component irregular_implements$addFallMessage(Component original, CombatEntry combatEntry) {
-        return (combatEntry.fallLocation() == ModArmorItems.getFLUID_BOOT_FALL())
+        return (combatEntry.fallLocation() == ModArmorItems.FLUID_BOOT_FALL)
                 ? ModArmorItems.fluidWalkingDeathMessage(this.mob)
                 : original;
     }

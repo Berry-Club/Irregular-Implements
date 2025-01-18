@@ -18,7 +18,7 @@ abstract public class LivingEntityRendererMixin<T extends LivingEntity> {
             cancellable = true
     )
     private void irregular_implements$shouldShowNameMixin(T entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.getHIDE_NAME_HELMET())) {
+        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.HIDE_NAME_HELMET)) {
             cir.setReturnValue(false);
         }
     }

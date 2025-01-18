@@ -22,10 +22,10 @@ class ModFluidTagsProvider(
             return FluidTags.create(OtherUtil.modResource(id))
         }
 
-        @JvmStatic
+        @JvmField
         val ALLOWS_WATER_WALKING = create("allows_water_walking")
 
-        @JvmStatic
+        @JvmField
         val ALLOWS_LAVA_WALKING = create("allows_lava_walking")
     }
 

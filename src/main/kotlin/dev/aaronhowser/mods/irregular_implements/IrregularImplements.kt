@@ -21,7 +21,7 @@ class IrregularImplements(
     companion object {
         const val ID = "irregular_implements"
 
-        @JvmStatic
+        @JvmField
         val LOGGER: Logger = LogManager.getLogger(ID)
     }
 

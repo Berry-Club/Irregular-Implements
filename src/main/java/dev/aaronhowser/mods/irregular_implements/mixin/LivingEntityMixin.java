@@ -45,7 +45,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             )
     )
     private List<ParticleOptions> irregular_implements$hideMobEffectParticles(List<ParticleOptions> original) {
-        return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.getHIDE_POTION_HELMET()))
+        return (this.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.HIDE_POTION_HELMET))
                 ? List.of()
                 : original;
     }

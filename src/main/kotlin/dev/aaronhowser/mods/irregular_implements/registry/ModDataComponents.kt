@@ -93,7 +93,7 @@ object ModDataComponents {
                 )
         }
 
-    @JvmStatic
+    @JvmField
     val LUBRICATED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("lubricated") {
             it

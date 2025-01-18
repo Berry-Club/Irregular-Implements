@@ -23,6 +23,6 @@ class CraftingMenuMixin {
             at = @At("RETURN")
     )
     private boolean stillValidCustomCraftingTable(boolean original, Player player) {
-        return original || AbstractContainerMenu.stillValid(access, player, ModBlocks.getCUSTOM_CRAFTING_TABLE().get());
+        return original || AbstractContainerMenu.stillValid(access, player, ModBlocks.CUSTOM_CRAFTING_TABLE.get());
     }
 }

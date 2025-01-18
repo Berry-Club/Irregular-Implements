@@ -31,7 +31,7 @@ class ModBlockTagsProvider(
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
         }
 
-        @JvmStatic
+        @JvmField
         val SUPER_LUBRICATED = create("super_lubricated")
         val C_CROPS_BEAN = common("crops/bean")
         val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")

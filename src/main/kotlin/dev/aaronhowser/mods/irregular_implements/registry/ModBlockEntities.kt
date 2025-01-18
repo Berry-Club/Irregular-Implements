@@ -8,6 +8,7 @@ import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object ModBlockEntities {
 
     val BLOCK_ENTITY_REGISTRY: DeferredRegister<BlockEntityType<*>> =

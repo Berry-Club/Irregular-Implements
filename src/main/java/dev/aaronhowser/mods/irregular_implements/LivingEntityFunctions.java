@@ -14,12 +14,12 @@ public interface LivingEntityFunctions {
 
         if (livingEntity
                 .getItemBySlot(EquipmentSlot.FEET)
-                .has(ModDataComponents.getLUBRICATED())
+                .has(ModDataComponents.LUBRICATED)
         ) return true;
 
         return livingEntity.level()
                 .getBlockState(livingEntity.getBlockPosBelowThatAffectsMyMovement())
-                .is(ModBlockTagsProvider.getSUPER_LUBRICATED());
+                .is(ModBlockTagsProvider.SUPER_LUBRICATED);
     }
 
 }

@@ -36,10 +36,10 @@ class ModItemTagsProvider(
         val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
         val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
 
-        @JvmStatic
+        @JvmField
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
 
-        @JvmStatic
+        @JvmField
         val HIDE_NAME_HELMET = create("hide_name_helmet")
     }
 

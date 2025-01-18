@@ -27,7 +27,7 @@ abstract public class MouseHandlerMixin {
         if (!ClientConfig.COLLAPSE_INVERTS_MOUSE.get()) return;
 
         var player = ClientUtil.getLocalPlayer();
-        if (player == null || !player.hasEffect(ModEffects.getCOLLAPSE())) return;
+        if (player == null || !player.hasEffect(ModEffects.COLLAPSE)) return;
 
         accumulatedDX = -accumulatedDX;
         accumulatedDY = -accumulatedDY;

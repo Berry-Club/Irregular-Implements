@@ -185,7 +185,7 @@ object ModArmorItems {
         }
     }
 
-    @JvmStatic
+    @JvmField
     val FLUID_BOOT_FALL = FallLocation("fluid_boot_fall")
 
     @JvmStatic
