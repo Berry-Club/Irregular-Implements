@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item.component
 
+import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -103,12 +104,31 @@ data class ItemFilterEntryListDataComponent(
         val CODEC: Codec<ItemFilterEntryListDataComponent> =
             Codec.either(FilterEntry.SpecificItem.CODEC, FilterEntry.ItemTag.CODEC)
                 .listOf()
-                .xmap(::ItemFilterEntryListDataComponent, ItemFilterEntryListDataComponent::entries)
+                .xmap(::fromList, this::toList)
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterEntryListDataComponent> =
             ByteBufCodecs.either(FilterEntry.SpecificItem.STREAM_CODEC, FilterEntry.ItemTag.STREAM_CODEC)
                 .apply(ByteBufCodecs.list())
-                .map(::ItemFilterEntryListDataComponent, ItemFilterEntryListDataComponent::entries)
+                .map(::fromList, this::toList)
+
+        private fun fromList(list: List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>): ItemFilterEntryListDataComponent {
+            return ItemFilterEntryListDataComponent(list.map { either ->
+                either.map(
+                    { left -> left },
+                    { right -> right }
+                )
+            })
+        }
+
+        private fun toList(component: ItemFilterEntryListDataComponent): List<Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>> {
+            return component.entries.map { entry ->
+                when (entry) {
+                    is FilterEntry.SpecificItem -> Either.left(entry)
+                    is FilterEntry.ItemTag -> Either.right(entry)
+                }
+            }
+        }
+
     }
 
 }
