@@ -501,6 +501,7 @@
   "tag.item.irregular_implements.super_lubricated": "Super Lubricated Boots",
   "tooltip.irregular_implements.all_ores": "All Ores",
   "tooltip.irregular_implements.anchored": "Anchored",
+  "tooltip.irregular_implements.blacklist": "Blacklist",
   "tooltip.irregular_implements.block": "Block: %s",
   "tooltip.irregular_implements.block_replacer_alt_for_list": "Hold ALT to see stored blocks",
   "tooltip.irregular_implements.block_replacer_loading": "Store blocks by right-clicking them on this stack",

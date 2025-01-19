@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
@@ -89,12 +91,21 @@ class ItemFilterItem : Item(
     }
 
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val filterEntries = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES)?.entries ?: return
+
+        val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+        val filterEntries = itemComponent.entries
 
         for (entry in filterEntries) {
             val itemName = entry.getDisplayStack().hoverName
             val component = ModLanguageProvider.Tooltips.LIST_POINT
                 .toGrayComponent(itemName)
+
+            tooltipComponents.add(component)
+        }
+
+        if (itemComponent.isBlacklist) {
+            val component = ModLanguageProvider.Tooltips.BLOCK
+                .toComponent().withStyle(ChatFormatting.RED)
 
             tooltipComponents.add(component)
         }
