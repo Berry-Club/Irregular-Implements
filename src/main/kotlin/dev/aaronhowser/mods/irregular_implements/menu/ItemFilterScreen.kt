@@ -50,7 +50,7 @@ class ItemFilterScreen(
         addToggleBlacklistButton()
 
         for (index in 0 until 9) {
-            val entry = filter.getOrDefault(index, null) ?: continue
+            val entry = filter.getOrNull(index) ?: continue
 
             addToggleTypeButton(index, entry)
             addToggleNeedsComponentButton(index, entry)
