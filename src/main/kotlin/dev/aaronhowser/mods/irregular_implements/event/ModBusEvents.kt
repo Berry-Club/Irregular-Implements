@@ -35,7 +35,6 @@ object ModBusEvents {
         ) { spectreCoilBE, direction ->
             spectreCoilBE.getEnergyHandler(direction)
         }
-
     }
 
 }

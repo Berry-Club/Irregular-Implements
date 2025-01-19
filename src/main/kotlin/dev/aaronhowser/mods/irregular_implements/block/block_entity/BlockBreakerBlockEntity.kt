@@ -18,6 +18,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -105,23 +106,31 @@ class BlockBreakerBlockEntity(
             setChanged()
         }
 
-        this.fakePlayer = WeakReference(FakePlayerFactory.get(level, breakerGameProfile))
+        val fakePlayer = FakePlayerFactory.get(level, breakerGameProfile)
+
+        fakePlayer.isSilent = true
+        fakePlayer.setOnGround(true)
+
+        val pickToUse = if (diamondBreaker.isEmpty) {
+            getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
+        } else {
+            val breakerEnchants = diamondBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+            getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchants)
+        }
+
+        fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pickToUse)
+
+        this.fakePlayer = WeakReference(fakePlayer)
         setChanged()
 
-        this.fakePlayer?.get()?.let {
-            it.isSilent = true
-            it.setOnGround(true)
-
-            it.setItemInHand(InteractionHand.MAIN_HAND, getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY))
-        }
     }
 
     fun upgrade(insertedBreaker: ItemStack) {
         val level = level as? ServerLevel ?: return
         val fakePlayer = this.fakePlayer?.get() ?: return
 
-        val enchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
-        val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = enchantments)
+        val breakerEnchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+        val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchantments)
 
         this.diamondBreaker = insertedBreaker
         setChanged()
@@ -157,7 +166,12 @@ class BlockBreakerBlockEntity(
             val targetState = level.getBlockState(targetPos)
 
             //FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
-            this.miningProgress += targetState.getDestroyProgress(fakePlayer, level, targetPos)
+
+            val destroyProgress = targetState.getDestroyProgress(fakePlayer, level, targetPos)
+
+            val digAttribute = fakePlayer.getAttribute(Attributes.MINING_EFFICIENCY)
+
+            this.miningProgress += destroyProgress
 
             if (this.miningProgress < 1f) {
                 level.destroyBlockProgress(
@@ -180,6 +194,7 @@ class BlockBreakerBlockEntity(
         val possibleInventoryPos = this.blockPos.relative(facing.opposite)
         val inventoryHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
 
+        // The Magnetic enchantment on the pick immediately teleports the item to the FakePlayer's inventory
         fakePlayer.gameMode.destroyBlock(targetPos)
 
         val inventory = fakePlayer.inventory
