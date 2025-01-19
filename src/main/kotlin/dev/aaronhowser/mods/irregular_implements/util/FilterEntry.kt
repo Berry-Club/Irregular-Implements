@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
+import net.minecraft.util.StringRepresentable
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
@@ -20,8 +21,23 @@ import kotlin.random.Random
 
 sealed interface FilterEntry {
 
+    enum class Type(val codec: Codec<out FilterEntry>) : StringRepresentable {
+        EMPTY(Empty.CODEC),
+        ITEM_TAG(ItemTag.CODEC),
+        SPECIFIC_ITEM(SpecificItem.CODEC);
+
+        override fun getSerializedName(): String {
+            return this.name.lowercase()
+        }
+
+        companion object {
+            val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { Type.entries.toTypedArray() }
+        }
+    }
+
     fun getDisplayStack(): ItemStack
     fun test(stack: ItemStack): Boolean
+    val type: Type
 
     data object Empty : FilterEntry {
         override fun getDisplayStack(): ItemStack {
@@ -31,6 +47,10 @@ sealed interface FilterEntry {
         override fun test(stack: ItemStack): Boolean {
             return false
         }
+
+        override val type: Type = Type.EMPTY
+
+        val CODEC: Codec<Empty> = Codec.unit(Empty)
     }
 
     data class ItemTag(
@@ -42,6 +62,8 @@ sealed interface FilterEntry {
 
         private var timeLastUpdated = 0L
         private var displayStack: ItemStack? = null
+
+        override val type: Type = Type.ITEM_TAG
 
         override fun getDisplayStack(): ItemStack {
 
@@ -118,17 +140,21 @@ sealed interface FilterEntry {
         val requireSameComponents: Boolean
     ) : FilterEntry {
 
-        override fun getDisplayStack(): ItemStack {
-            val displayStack = this.stack.copy()
+        override val type: Type = Type.SPECIFIC_ITEM
 
+        private val displayStack: ItemStack = this.stack.copy()
+
+        init {
             if (this.requireSameComponents) {
-                displayStack.set(
+                this.displayStack.set(
                     DataComponents.LORE,
                     ItemLore(listOf(Component.literal("Requires same components")))
                 )
             }
+        }
 
-            return displayStack
+        override fun getDisplayStack(): ItemStack {
+            return this.displayStack
         }
 
         override fun test(stack: ItemStack): Boolean {
