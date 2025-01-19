@@ -17,6 +17,7 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.ItemLore
 import kotlin.random.Random
 
 data class ItemFilterDataComponent(
@@ -139,7 +140,16 @@ data class ItemFilterDataComponent(
         ) : FilterEntry {
 
             override fun getDisplayStack(): ItemStack {
-                return this.stack.copy()
+                val displayStack = this.stack.copy()
+
+                if (this.requireSameComponents) {
+                    displayStack.set(
+                        DataComponents.LORE,
+                        ItemLore(listOf(Component.literal("Requires same components")))
+                    )
+                }
+
+                return displayStack
             }
 
             override fun test(stack: ItemStack): Boolean {

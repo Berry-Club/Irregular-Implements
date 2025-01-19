@@ -177,7 +177,21 @@ class ItemFilterMenu(
     }
 
     private fun toggleNeedsComponent(slotIndex: Int) {
+        val filter = this.filter ?: return
+        val entry = filter.elementAtOrNull(slotIndex) ?: return
 
+        if (entry !is ItemFilterDataComponent.FilterEntry.SpecificItem) return
+
+        val newEntry = entry.copy(requireSameComponents = !entry.requireSameComponents)
+
+        val newFilter = filter.toMutableSet()
+        newFilter.remove(entry)
+        newFilter.add(newEntry)
+
+        filterStack.set(
+            ModDataComponents.ITEM_FILTER_ENTRIES,
+            ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
+        )
     }
 
     companion object {
