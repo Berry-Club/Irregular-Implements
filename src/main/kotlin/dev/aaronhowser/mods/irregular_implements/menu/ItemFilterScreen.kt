@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -58,20 +58,25 @@ class ItemFilterScreen(
         val x = this.leftPos + this.imageWidth - 24
         val y = this.topPos + 5
 
-        val onPress = OnPress {
+        val onPress = {
             ModPacketHandler.messageServer(ClientClickedMenuButton(ItemFilterMenu.TOGGLE_BLACKLIST_BUTTON_ID))
         }
 
-        this.invertBlacklistButton = Button.Builder(
-            Component.empty(),
-            onPress
-        )
-            .bounds(
-                x,
-                y,
-                16,
-                16
+        this.invertBlacklistButton = MultiStateSpriteButton.Builder(this.font)
+            .location(x, y)
+            .size(16)
+            .addState(
+                message = Component.literal("Whitelist"),
+                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageStop
             )
+            .addState(
+                message = Component.literal("Blacklist"),
+                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
+            )
+            .currentStateGetter(
+                currentStateGetter = { if (this.menu.isBlacklist) 1 else 0 }
+            )
+            .onPress(onPress)
             .build()
 
         this.addRenderableWidget(this.invertBlacklistButton)

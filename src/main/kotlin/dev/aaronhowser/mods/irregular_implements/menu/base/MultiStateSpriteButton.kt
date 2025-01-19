@@ -161,6 +161,11 @@ class MultiStateSpriteButton(
             return this
         }
 
+        fun onPress(onPress: () -> Unit): Builder {
+            this.onPress = OnPress { onPress() }
+            return this
+        }
+
         fun build(): MultiStateSpriteButton {
             return MultiStateSpriteButton(
                 x = x,

@@ -17,15 +17,16 @@ import net.minecraft.world.item.ItemStack
 
 class ItemFilterMenu(
     containerId: Int,
-    playerInventory: Inventory
+    private val playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.ITEM_FILTER.get(), containerId), MenuWithButtons {
 
-    private val filterStack: ItemStack =
-        if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
-            playerInventory.player.mainHandItem
-        } else {
-            playerInventory.player.offhandItem
-        }
+    private val filterStack: ItemStack
+        get() =
+            if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
+                playerInventory.player.mainHandItem
+            } else {
+                playerInventory.player.offhandItem
+            }
 
     private var usingMainHand = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack
 
