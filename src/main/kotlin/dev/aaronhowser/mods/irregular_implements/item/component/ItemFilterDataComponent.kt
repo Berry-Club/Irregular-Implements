@@ -10,26 +10,12 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
 
 data class ItemFilterDataComponent(
-    private var _entries: NonNullList<FilterEntry>,
+    val entries: NonNullList<FilterEntry>,
     val isBlacklist: Boolean
 ) {
 
-    val entries: NonNullList<FilterEntry>
-        get() = _entries
-
-    init {
-        if (entries.size != 9) {
-
-            val newEntries = NonNullList.withSize<FilterEntry>(9, FilterEntry.Empty)
-            for (i in entries.indices) {
-                newEntries[i] = entries[i]
-            }
-
-            this._entries = newEntries
-        }
-    }
-
-    constructor(vararg entry: FilterEntry) : this(NonNullList.of<FilterEntry>(FilterEntry.Empty, *entry), false)
+    constructor(vararg filterEntry: FilterEntry, isBlacklist: Boolean) : this(NonNullList.of(FilterEntry.Empty, *filterEntry), isBlacklist)
+    constructor(vararg filterEntry: FilterEntry) : this(NonNullList.of(FilterEntry.Empty, *filterEntry), false)
 
     fun test(testedStack: ItemStack): Boolean {
         val passes = this.entries.any { it.test(testedStack) }
