@@ -29,9 +29,8 @@ class ModEntityTypeTagsProvider(
 
         this.tag(SUMMONING_PENDULUM_BLACKLIST)
             .add(
-                EntityType.PLAYER,
-
-                )
+                EntityType.PLAYER
+            )
 
     }
 
