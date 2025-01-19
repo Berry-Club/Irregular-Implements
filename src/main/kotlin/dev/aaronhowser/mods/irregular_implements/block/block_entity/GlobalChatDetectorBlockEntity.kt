@@ -53,7 +53,7 @@ class GlobalChatDetectorBlockEntity(
                     continue
                 }
 
-                if (detector.checkMessage(sender, message)) event.isCanceled = true
+                if (detector.processMessage(sender, message)) event.isCanceled = true
             }
         }
 
@@ -106,7 +106,7 @@ class GlobalChatDetectorBlockEntity(
     /**
      * @return true if the message should be stopped
      */
-    fun checkMessage(player: Player, message: Component): Boolean {
+    fun processMessage(player: Player, message: Component): Boolean {
         if (this.regexString.isEmpty()) return false
 
         val messageString = message.string

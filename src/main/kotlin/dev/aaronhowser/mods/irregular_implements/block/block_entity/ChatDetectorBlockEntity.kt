@@ -51,7 +51,7 @@ class ChatDetectorBlockEntity(
                     continue
                 }
 
-                if (detector.checkMessage(sender, message)) event.isCanceled = true
+                if (detector.processMessage(sender, message)) event.isCanceled = true
             }
         }
 
@@ -113,7 +113,7 @@ class ChatDetectorBlockEntity(
     /**
      * @return true if the message should be stopped
      */
-    fun checkMessage(player: Player, message: Component): Boolean {
+    fun processMessage(player: Player, message: Component): Boolean {
         if (this.regexString.isEmpty() || player.uuid != this.ownerUuid) return false
 
         val messageString = message.string
