@@ -238,18 +238,18 @@ data class ItemFilterDataComponent(
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterDataComponent> =
             StreamCodec.composite(
                 ByteBufCodecs.map(
+                    ::HashMap,
                     ByteBufCodecs.VAR_INT,
                     ByteBufCodecs.either(
                         FilterEntry.SpecificItem.STREAM_CODEC,
                         FilterEntry.ItemTag.STREAM_CODEC
                     )
                 ),
-                ItemFilterDataComponent::entries,
+                ::fromComponent,
                 ByteBufCodecs.BOOL,
                 ItemFilterDataComponent::isBlacklist,
-                ::ItemFilterDataComponent
+                ::toComponent
             )
-
 
     }
 
