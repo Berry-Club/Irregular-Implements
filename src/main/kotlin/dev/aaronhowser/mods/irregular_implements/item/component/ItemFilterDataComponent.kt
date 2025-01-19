@@ -214,18 +214,22 @@ data class ItemFilterDataComponent(
                     Codec.BOOL
                         .optionalFieldOf("is_blacklist", false)
                         .forGetter(ItemFilterDataComponent::isBlacklist)
-                ).apply(instance) { entries: Map<Int, Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>, isBlacklist: Boolean ->
-                    ItemFilterDataComponent(
-                        entries.mapValues { (_, entry) ->
-                            when (entry.left().isPresent) {
-                                true -> entry.left().get()
-                                false -> entry.right().get().getAsSpecificItemEntry()
-                            }
-                        },
-                        isBlacklist
-                    )
+                ).apply(instance, ::toComponent)
+            }
+
+        private fun toComponent(entries: Map<Int, Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>, isBlacklist: Boolean): ItemFilterDataComponent {
+            val newMap: Map<Int, FilterEntry> = entries.mapValues { (_, entry) ->
+                when (entry.left().isPresent) {
+                    true -> entry.left().get()
+                    false -> entry.right().get()
                 }
             }
+
+            return ItemFilterDataComponent(
+                newMap,
+                isBlacklist
+            )
+        }
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterDataComponent> =
             StreamCodec.composite(
