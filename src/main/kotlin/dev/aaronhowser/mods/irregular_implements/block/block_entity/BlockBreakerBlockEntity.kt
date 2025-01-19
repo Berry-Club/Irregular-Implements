@@ -289,14 +289,4 @@ class BlockBreakerBlockEntity(
     override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
     override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
-    class BreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
-
-        companion object {
-            fun get(level: ServerLevel, name: GameProfile): BreakerFakePlayer {
-                return BreakerFakePlayer(level, name)
-            }
-        }
-
-    }
-
 }
