@@ -173,6 +173,29 @@ class ItemFilterMenu(
     }
 
     private fun toggleType(slotIndex: Int) {
+        val filter = this.filter ?: return
+        val entry = filter.elementAtOrNull(slotIndex) ?: return
+
+        val newEntry = when (entry) {
+
+            // If it's an ItemTag, return a SpecificItem
+            is ItemFilterDataComponent.FilterEntry.ItemTag -> entry.getAsSpecificItemEntry()
+
+            // If it's a SpecificItem, return an ItemTag
+            is ItemFilterDataComponent.FilterEntry.SpecificItem -> ItemFilterDataComponent.FilterEntry.ItemTag(
+                entry.stack.tags.toList().random(),     //TODO: Let you choose which tag
+                entry.stack.copy()
+            )
+        }
+
+        val newFilter = filter.toMutableSet()
+        newFilter.remove(entry)
+        newFilter.add(newEntry)
+
+        filterStack.set(
+            ModDataComponents.ITEM_FILTER_ENTRIES,
+            ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
+        )
 
     }
 
