@@ -2,8 +2,11 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -40,24 +43,38 @@ class ItemFilterScreen(
 
         val filter = this.menu.filter ?: return
 
+        addToggleBlacklistButton()
+
         for (index in 0 until 9) {
             val entry = filter.elementAtOrNull(index) ?: continue
 
             addToggleTypeButton(index, entry)
             addToggleNeedsComponentButton(index, entry)
         }
+    }
 
-        this.invertBlacklistButton = Button.Builder(Component.empty(), { })
+    private fun addToggleBlacklistButton() {
+
+        val x = this.leftPos + this.imageWidth - 24
+        val y = this.topPos + 5
+
+        val onPress = OnPress {
+            ModPacketHandler.messageServer(ClientClickedMenuButton(ItemFilterMenu.TOGGLE_BLACKLIST_BUTTON_ID))
+        }
+
+        this.invertBlacklistButton = Button.Builder(
+            Component.empty(),
+            onPress
+        )
             .bounds(
-                this.leftPos + 8,
-                this.topPos + 5,
-                8,
-                8
+                x,
+                y,
+                16,
+                16
             )
             .build()
 
         this.addRenderableWidget(this.invertBlacklistButton)
-
     }
 
     private fun addToggleTypeButton(index: Int, entry: ItemFilterDataComponent.FilterEntry) {

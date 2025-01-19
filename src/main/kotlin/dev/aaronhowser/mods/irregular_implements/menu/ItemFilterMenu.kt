@@ -35,6 +35,19 @@ class ItemFilterMenu(
     val filter: Set<ItemFilterDataComponent.FilterEntry>?
         get() = filterComponent?.entries
 
+    var isBlacklist: Boolean
+        get() = filterComponent?.isBlacklist.isTrue
+        private set(value) {
+            if (value == this.isBlacklist) return
+
+            val filterComponent = this.filterComponent ?: return
+
+            filterStack.set(
+                ModDataComponents.ITEM_FILTER_ENTRIES,
+                filterComponent.copy(isBlacklist = value)
+            )
+        }
+
     val filterContainer = object : SimpleContainer(9) {
         override fun getItems(): NonNullList<ItemStack> {
             val items = NonNullList.withSize(9, ItemStack.EMPTY)
@@ -148,6 +161,17 @@ class ItemFilterMenu(
     }
 
     override fun handleButtonPressed(buttonId: Int) {
-        TODO("Not yet implemented")
+
+        when (buttonId) {
+            TOGGLE_BLACKLIST_BUTTON_ID -> this.isBlacklist = !this.isBlacklist
+        }
+
     }
+
+    companion object {
+
+        const val TOGGLE_BLACKLIST_BUTTON_ID = 0
+
+    }
+
 }
