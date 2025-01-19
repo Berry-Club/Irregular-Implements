@@ -22,7 +22,9 @@ import kotlin.random.Random
 
 sealed interface FilterEntry {
 
-    enum class Type(val codec: MapCodec<out FilterEntry>) : StringRepresentable {
+    enum class Type(
+        val codec: MapCodec<out FilterEntry>
+    ) : StringRepresentable {
         EMPTY(Empty.CODEC),
         ITEM_TAG(ItemTag.CODEC),
         SPECIFIC_ITEM(SpecificItem.CODEC);
@@ -67,6 +69,7 @@ sealed interface FilterEntry {
     ) : FilterEntry {
 
         private val matchingItems = BuiltInRegistries.ITEM.getTag(this.tagKey).get().toList()
+        private val displayStacks: MutableMap<Item, ItemStack> = mutableMapOf()
 
         private var timeLastUpdated = 0L
         private var displayStack: ItemStack? = null
@@ -82,26 +85,29 @@ sealed interface FilterEntry {
                 val randomIndex = random.nextInt(this.matchingItems.size)
                 val randomItem = this.matchingItems[randomIndex].value()
 
-                val tagLocation = this.tagKey.location
-                val possibleLangKey = StringBuilder()
-                    .append("tag.item.")
-                    .append(tagLocation.namespace)
-                    .append(".")
-                    .append(tagLocation.path)
-                    .toString()
+                this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
+                    val tagLocation = this.tagKey.location
+                    val possibleLangKey = StringBuilder()
+                        .append("tag.item.")
+                        .append(tagLocation.namespace)
+                        .append(".")
+                        .append(tagLocation.path)
+                        .toString()
 
-                val tagKeyComponent = if (I18n.exists(possibleLangKey)) {
-                    Component.translatable(possibleLangKey)
-                } else {
-                    Component.literal(tagLocation.toString())
-                }
+                    val tagKeyComponent = if (I18n.exists(possibleLangKey)) {
+                        Component.translatable(possibleLangKey)
+                    } else {
+                        Component.literal(tagLocation.toString())
+                    }
 
-                this.displayStack = randomItem.defaultInstance.apply {
-                    set(
+                    val stack = randomItem.defaultInstance
+                    stack.set(
                         DataComponents.ITEM_NAME,
                         ModLanguageProvider.Tooltips.ITEM_TAG
                             .toComponent(tagKeyComponent)
                     )
+
+                    stack
                 }
             }
 
