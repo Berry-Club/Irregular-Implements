@@ -163,17 +163,33 @@ class ItemFilterMenu(
     }
 
     override fun handleButtonPressed(buttonId: Int) {
-
         when (buttonId) {
             TOGGLE_BLACKLIST_BUTTON_ID -> this.isBlacklist = !this.isBlacklist
+
+            in 1..9 -> toggleType(buttonId - 1)
+
+            in 10..18 -> toggleNeedsComponent(buttonId - 10)
         }
+    }
+
+    private fun toggleType(slotIndex: Int) {
+
+    }
+
+    private fun toggleNeedsComponent(slotIndex: Int) {
 
     }
 
     companion object {
+        fun getToggleTypeButtonId(slotIndex: Int): Int {
+            return slotIndex + 1
+        }
+
+        fun getToggleNeedsComponentButtonId(slotIndex: Int): Int {
+            return slotIndex + 10
+        }
 
         const val TOGGLE_BLACKLIST_BUTTON_ID = 0
-
     }
 
 }

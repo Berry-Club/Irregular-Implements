@@ -9,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -91,7 +92,13 @@ class ItemFilterScreen(
         val width = if (entry is ItemFilterDataComponent.FilterEntry.ItemTag) 16 else 8
         val height = 8
 
-        val button = Button.Builder(Component.empty(), { })
+        val buttonId = ItemFilterMenu.getToggleTypeButtonId(index)
+
+        val onPress = OnPress {
+            ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
+        }
+
+        val button = Button.Builder(Component.empty(), onPress)
             .bounds(
                 x, y,
                 width, height
@@ -111,7 +118,12 @@ class ItemFilterScreen(
         val width = 8
         val height = 8
 
-        val button = Button.Builder(Component.empty(), { })
+        val buttonId = ItemFilterMenu.getToggleNeedsComponentButtonId(index)
+        val onPress = OnPress {
+            ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
+        }
+
+        val button = Button.Builder(Component.empty(), onPress)
             .bounds(
                 x, y,
                 width, height
