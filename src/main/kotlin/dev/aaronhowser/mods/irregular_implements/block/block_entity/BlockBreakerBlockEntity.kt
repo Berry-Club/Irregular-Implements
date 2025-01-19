@@ -18,7 +18,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
-import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -122,7 +121,6 @@ class BlockBreakerBlockEntity(
 
         this.fakePlayer = WeakReference(fakePlayer)
         setChanged()
-
     }
 
     fun upgrade(insertedBreaker: ItemStack) {
@@ -166,10 +164,7 @@ class BlockBreakerBlockEntity(
             val targetState = level.getBlockState(targetPos)
 
             //FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
-
             val destroyProgress = targetState.getDestroyProgress(fakePlayer, level, targetPos)
-
-            val digAttribute = fakePlayer.getAttribute(Attributes.MINING_EFFICIENCY)
 
             this.miningProgress += destroyProgress
 
@@ -288,5 +283,15 @@ class BlockBreakerBlockEntity(
     // Syncs with client
     override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
     override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+    class BreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
+
+        companion object {
+            fun get(level: ServerLevel, name: GameProfile): BreakerFakePlayer {
+                return BreakerFakePlayer(level, name)
+            }
+        }
+
+    }
 
 }
