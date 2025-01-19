@@ -34,7 +34,7 @@ class ItemFilterMenu(
     private val filterComponent: ItemFilterDataComponent?
         get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)
 
-    val filter: Set<ItemFilterDataComponent.FilterEntry>?
+    val filter: Map<Int, ItemFilterDataComponent.FilterEntry>?
         get() = filterComponent?.entries
 
     var isBlacklist: Boolean
@@ -53,10 +53,10 @@ class ItemFilterMenu(
     val filterContainer = object : SimpleContainer(9) {
         override fun getItems(): NonNullList<ItemStack> {
             val items = NonNullList.withSize(9, ItemStack.EMPTY)
-            val filter: Set<ItemFilterDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return items
+            val filter: Map<Int, ItemFilterDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return items
 
             for (index in 0 until 9) {
-                val entry = filter.elementAtOrNull(index) ?: continue
+                val entry = filter.getOrDefault(index, null) ?: continue
                 items[index] = entry.getDisplayStack()
             }
 
@@ -68,11 +68,11 @@ class ItemFilterMenu(
         }
 
         override fun removeItem(index: Int, count: Int): ItemStack {
-            val filter = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
-            val entry = filter.elementAtOrNull(index) ?: return ItemStack.EMPTY
+            val filter: Map<Int, ItemFilterDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
+            if (!filter.containsKey(index)) return ItemStack.EMPTY
 
-            val newFilter = filter.toMutableSet()
-            newFilter.remove(entry)
+            val newFilter = filter.toMutableMap()
+            newFilter.remove(index)
 
             filterStack.set(
                 ModDataComponents.ITEM_FILTER_ENTRIES,
@@ -82,29 +82,25 @@ class ItemFilterMenu(
             return ItemStack.EMPTY
         }
 
-        override fun addItem(addedStack: ItemStack): ItemStack {
-            val component = this@ItemFilterMenu.filterComponent ?: return addedStack
-            if (!component.canAddFilter(addedStack)) return addedStack
+        override fun setItem(index: Int, addedStack: ItemStack) {
+            val component = this@ItemFilterMenu.filterComponent ?: return
+            if (!component.canAddFilter(addedStack)) return
 
             val filter = component.entries
 
             val newFilterEntry = ItemFilterDataComponent.FilterEntry.SpecificItem(addedStack, requireSameComponents = false)
 
-            val newFilter = filter.toMutableSet()
-            newFilter.add(newFilterEntry)
+            val newFilter = filter.toMutableMap()
+            newFilter[index] = newFilterEntry
 
             filterStack.set(
                 ModDataComponents.ITEM_FILTER_ENTRIES,
                 ItemFilterDataComponent(newFilter, this@ItemFilterMenu.filterComponent!!.isBlacklist)
             )
-
-            return ItemStack.EMPTY
         }
-
     }
 
     init {
-
         for (index in 0 until 9) {
             val x = 8 + index * 18
             val y = 26
@@ -121,7 +117,12 @@ class ItemFilterMenu(
                 }
 
                 override fun mayPlace(stack: ItemStack): Boolean {
-                    this@ItemFilterMenu.filterContainer.addItem(stack.copyWithCount(1))
+                    if (!this.container.getItem(slotIndex).isEmpty) return false
+
+                    this.container.setItem(
+                        index,
+                        stack.copyWithCount(1)
+                    )
 
                     return false
                 }
@@ -174,7 +175,7 @@ class ItemFilterMenu(
 
     private fun toggleType(slotIndex: Int) {
         val filter = this.filter ?: return
-        val entry = filter.elementAtOrNull(slotIndex) ?: return
+        val entry = filter.getOrDefault(slotIndex, null) ?: return
 
         val newEntry = when (entry) {
 
@@ -188,9 +189,9 @@ class ItemFilterMenu(
             )
         }
 
-        val newFilter = filter.toMutableSet()
-        newFilter.remove(entry)
-        newFilter.add(newEntry)
+        val newFilter = filter.toMutableMap()
+        newFilter.remove(slotIndex)
+        newFilter[slotIndex] = newEntry
 
         filterStack.set(
             ModDataComponents.ITEM_FILTER_ENTRIES,
@@ -201,15 +202,15 @@ class ItemFilterMenu(
 
     private fun toggleNeedsComponent(slotIndex: Int) {
         val filter = this.filter ?: return
-        val entry = filter.elementAtOrNull(slotIndex) ?: return
+        val entry = filter.getOrDefault(slotIndex, null) ?: return
 
         if (entry !is ItemFilterDataComponent.FilterEntry.SpecificItem) return
 
         val newEntry = entry.copy(requireSameComponents = !entry.requireSameComponents)
 
-        val newFilter = filter.toMutableSet()
-        newFilter.remove(entry)
-        newFilter.add(newEntry)
+        val newFilter = filter.toMutableMap()
+        newFilter.remove(slotIndex)
+        newFilter[slotIndex] = newEntry
 
         filterStack.set(
             ModDataComponents.ITEM_FILTER_ENTRIES,
