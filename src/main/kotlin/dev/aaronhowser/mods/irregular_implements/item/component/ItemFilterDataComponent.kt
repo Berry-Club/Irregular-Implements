@@ -14,7 +14,8 @@ data class ItemFilterDataComponent(
     val isBlacklist: Boolean
 ) {
 
-    constructor() : this(NonNullList.withSize(9, FilterEntry.Empty), false)
+    constructor(vararg filterEntry: FilterEntry, isBlacklist: Boolean) : this(NonNullList.of(FilterEntry.Empty, *filterEntry), isBlacklist)
+    constructor(vararg filterEntry: FilterEntry) : this(NonNullList.of(FilterEntry.Empty, *filterEntry), false)
 
     fun test(testedStack: ItemStack): Boolean {
         val passes = this.entries.any { it.test(testedStack) }

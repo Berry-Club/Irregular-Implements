@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.DropFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
@@ -111,7 +112,9 @@ class DropFilterItem : Item(
         val firstStack = container?.nonEmptyItems()?.firstOrNull()
         val filter = firstStack?.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
 
-        for ((index, filterEntry) in filter.entries) {
+        for (filterEntry in filter.entries) {
+            if (filterEntry is FilterEntry.Empty) continue
+
             val itemName = filterEntry.getDisplayStack().hoverName
             val component = ModLanguageProvider.Tooltips.LIST_POINT
                 .toGrayComponent(itemName)
