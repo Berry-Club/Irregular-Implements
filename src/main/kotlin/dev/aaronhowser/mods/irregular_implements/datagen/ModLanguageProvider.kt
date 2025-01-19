@@ -557,6 +557,7 @@ class ModLanguageProvider(
         const val DIAPHANOUS_INVERTED = "tooltip.irregular_implements.diaphanous_inverted"
         const val ITEM_TAG = "tooltip.irregular_implements.item_tag"
         const val BLACKLIST = "tooltip.irregular_implements.blacklist"
+        const val WHITELIST = "tooltip.irregular_implements.whitelist"
     }
 
     private fun addTooltips() {
@@ -607,6 +608,7 @@ class ModLanguageProvider(
         add(Tooltips.DIAPHANOUS_INVERTED, "Inverted")
         add(Tooltips.ITEM_TAG, "Item Tag: %s")
         add(Tooltips.BLACKLIST, "Blacklist")
+        add(Tooltips.WHITELIST, "Whitelist")
     }
 
     object Info {

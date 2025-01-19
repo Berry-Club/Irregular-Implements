@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
@@ -66,11 +68,11 @@ class ItemFilterScreen(
             .location(x, y)
             .size(16)
             .addState(
-                message = Component.literal("Whitelist"),
+                message = ModLanguageProvider.Tooltips.WHITELIST.toComponent(),
                 menuSprite = ScreenTextures.Sprites.ItemFilter.Whitelist
             )
             .addState(
-                message = Component.literal("Blacklist"),
+                message = ModLanguageProvider.Tooltips.BLACKLIST.toComponent(),
                 menuSprite = ScreenTextures.Sprites.ItemFilter.Blacklist
             )
             .currentStateGetter(
