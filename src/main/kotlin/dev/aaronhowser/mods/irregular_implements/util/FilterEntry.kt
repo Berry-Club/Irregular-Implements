@@ -121,7 +121,7 @@ sealed interface FilterEntry {
                 RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
                         TagKey.codec(Registries.ITEM)
-                            .fieldOf("tag_key")
+                            .fieldOf("tag")
                             .forGetter(ItemTag::tagKey),
                         ItemStack.CODEC
                             .fieldOf("backup_stack")
