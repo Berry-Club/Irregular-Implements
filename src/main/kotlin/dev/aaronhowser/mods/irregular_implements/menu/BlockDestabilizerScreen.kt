@@ -33,11 +33,11 @@ class BlockDestabilizerScreen(
         this.topPos = (this.height - this.imageHeight) / 2
 
         this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
-            .addStage(
+            .addState(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
             )
-            .addStage(
+            .addState(
                 message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
             )

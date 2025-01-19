@@ -100,13 +100,13 @@ class MultiStateSpriteButton(
         private var currentStateGetter: Supplier<Int> = Supplier { 0 }
         private var onPress: OnPress = OnPress { }
 
-        private val stages: MutableList<Stage> = mutableListOf()
+        private val states: MutableList<Stage> = mutableListOf()
 
-        fun addStage(
+        fun addState(
             message: Component,
             menuSprite: ScreenTextures.Sprites.MenuSprite
         ): Builder {
-            addStage(
+            addState(
                 message = message,
                 sprite = menuSprite.texture,
                 spriteWidth = menuSprite.width,
@@ -116,13 +116,13 @@ class MultiStateSpriteButton(
             return this
         }
 
-        fun addStage(
+        fun addState(
             message: Component,
             sprite: ResourceLocation?,
             spriteWidth: Int = 0,
             spriteHeight: Int = 0
         ): Builder {
-            stages.add(
+            states.add(
                 Stage(
                     message = message,
                     sprite = sprite,
@@ -167,7 +167,7 @@ class MultiStateSpriteButton(
                 y = y,
                 width = width,
                 height = height,
-                stages = stages,
+                stages = states,
                 currentStateGetter = currentStateGetter,
                 font = font,
                 onPress = onPress
