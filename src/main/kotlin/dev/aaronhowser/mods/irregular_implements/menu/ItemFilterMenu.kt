@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.NonNullList
 import net.minecraft.world.InteractionHand
@@ -34,7 +35,7 @@ class ItemFilterMenu(
     private val filterComponent: ItemFilterDataComponent?
         get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)
 
-    val filter: Map<Int, ItemFilterDataComponent.FilterEntry>?
+    val filter: Map<Int, FilterEntry>?
         get() = filterComponent?.entries
 
     var isBlacklist: Boolean
@@ -53,7 +54,7 @@ class ItemFilterMenu(
     val filterContainer = object : SimpleContainer(9) {
         override fun getItems(): NonNullList<ItemStack> {
             val items = NonNullList.withSize(9, ItemStack.EMPTY)
-            val filter: Map<Int, ItemFilterDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return items
+            val filter: Map<Int, FilterEntry> = this@ItemFilterMenu.filter ?: return items
 
             for (index in 0 until 9) {
                 val entry = filter.getOrDefault(index, null) ?: continue
@@ -68,7 +69,7 @@ class ItemFilterMenu(
         }
 
         override fun removeItem(index: Int, count: Int): ItemStack {
-            val filter: Map<Int, ItemFilterDataComponent.FilterEntry> = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
+            val filter: Map<Int, FilterEntry> = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
             if (!filter.containsKey(index)) return ItemStack.EMPTY
 
             val newFilter = filter.toMutableMap()
@@ -88,7 +89,7 @@ class ItemFilterMenu(
 
             val filter = component.entries
 
-            val newFilterEntry = ItemFilterDataComponent.FilterEntry.SpecificItem(addedStack, requireSameComponents = false)
+            val newFilterEntry = FilterEntry.SpecificItem(addedStack, requireSameComponents = false)
 
             val newFilter = filter.toMutableMap()
             newFilter[index] = newFilterEntry
@@ -180,13 +181,15 @@ class ItemFilterMenu(
         val newEntry = when (entry) {
 
             // If it's an ItemTag, return a SpecificItem
-            is ItemFilterDataComponent.FilterEntry.ItemTag -> entry.getAsSpecificItemEntry()
+            is FilterEntry.ItemTag -> entry.getAsSpecificItemEntry()
 
             // If it's a SpecificItem, return an ItemTag
-            is ItemFilterDataComponent.FilterEntry.SpecificItem -> ItemFilterDataComponent.FilterEntry.ItemTag(
+            is FilterEntry.SpecificItem -> FilterEntry.ItemTag(
                 entry.stack.tags.toList().random(),     //TODO: Let you choose which tag
                 entry.stack.copy()
             )
+
+            else -> error("Unknown FilterEntry type: $entry")
         }
 
         val newFilter = filter.toMutableMap()
@@ -204,7 +207,7 @@ class ItemFilterMenu(
         val filter = this.filter ?: return
         val entry = filter.getOrDefault(slotIndex, null) ?: return
 
-        if (entry !is ItemFilterDataComponent.FilterEntry.SpecificItem) return
+        if (entry !is FilterEntry.SpecificItem) return
 
         val newEntry = entry.copy(requireSameComponents = !entry.requireSameComponents)
 

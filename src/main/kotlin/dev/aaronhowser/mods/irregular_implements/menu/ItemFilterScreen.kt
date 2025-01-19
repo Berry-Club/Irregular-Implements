@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButto
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
+import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.Button.OnPress
@@ -85,11 +86,11 @@ class ItemFilterScreen(
         this.addRenderableWidget(this.invertBlacklistButton)
     }
 
-    private fun addToggleTypeButton(index: Int, entry: ItemFilterDataComponent.FilterEntry) {
+    private fun addToggleTypeButton(index: Int, entry: FilterEntry) {
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
-        val width = if (entry is ItemFilterDataComponent.FilterEntry.ItemTag) 16 else 8
+        val width = if (entry is FilterEntry.ItemTag) 16 else 8
         val height = 8
 
         val buttonId = ItemFilterMenu.getToggleTypeButtonId(index)
@@ -109,8 +110,8 @@ class ItemFilterScreen(
         this.addRenderableWidget(button)
     }
 
-    private fun addToggleNeedsComponentButton(index: Int, entry: ItemFilterDataComponent.FilterEntry) {
-        if (entry !is ItemFilterDataComponent.FilterEntry.SpecificItem) return
+    private fun addToggleNeedsComponentButton(index: Int, entry: FilterEntry) {
+        if (entry !is FilterEntry.SpecificItem) return
 
         val x = this.leftPos + 8 + index * 18 + 9
         val y = this.topPos + 15

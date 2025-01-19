@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
@@ -32,12 +33,12 @@ class ItemFilterItem : Item(
     companion object {
 
         fun setTestingFilter(stack: ItemStack) {
-            val planksFilter = ItemFilterDataComponent.FilterEntry.ItemTag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
-            val stickFilter = ItemFilterDataComponent.FilterEntry.SpecificItem(Items.STICK.defaultInstance, requireSameComponents = false)
+            val planksFilter = FilterEntry.ItemTag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
+            val stickFilter = FilterEntry.SpecificItem(Items.STICK.defaultInstance, requireSameComponents = false)
 
             val unbreakableDiamond = Items.DIAMOND.defaultInstance
             unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
-            val diamondFilter = ItemFilterDataComponent.FilterEntry.SpecificItem(unbreakableDiamond, requireSameComponents = true)
+            val diamondFilter = FilterEntry.SpecificItem(unbreakableDiamond, requireSameComponents = true)
 
             val filter = mapOf(
                 0 to planksFilter,
