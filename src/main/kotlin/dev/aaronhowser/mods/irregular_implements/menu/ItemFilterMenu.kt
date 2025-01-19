@@ -73,7 +73,7 @@ class ItemFilterMenu(
             if (filter.size <= index) return ItemStack.EMPTY
 
             val newFilter = ItemFilterDataComponent.sanitizeEntries(filter.toTypedArray())
-            newFilter[index] = FilterEntry.Empty
+            newFilter[index] = FilterEntry.Empty(1)
 
             filterStack.set(
                 ModDataComponents.ITEM_FILTER_ENTRIES,
