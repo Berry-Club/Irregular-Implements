@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
 import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
@@ -21,7 +22,7 @@ import kotlin.random.Random
 
 sealed interface FilterEntry {
 
-    enum class Type(val codec: Codec<out FilterEntry>) : StringRepresentable {
+    enum class Type(val codec: MapCodec<out FilterEntry>) : StringRepresentable {
         EMPTY(Empty.CODEC),
         ITEM_TAG(ItemTag.CODEC),
         SPECIFIC_ITEM(SpecificItem.CODEC);
@@ -33,6 +34,10 @@ sealed interface FilterEntry {
         companion object {
             val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { Type.entries.toTypedArray() }
         }
+    }
+
+    companion object {
+        val CODEC = Type.CODEC.dispatch(FilterEntry::type, Type::codec)
     }
 
     fun getDisplayStack(): ItemStack
@@ -50,7 +55,7 @@ sealed interface FilterEntry {
 
         override val type: Type = Type.EMPTY
 
-        val CODEC: Codec<Empty> = Codec.unit(Empty)
+        val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
     }
 
     data class ItemTag(
@@ -114,8 +119,8 @@ sealed interface FilterEntry {
         companion object {
             private val random = Random(123L)
 
-            val CODEC: Codec<ItemTag> =
-                RecordCodecBuilder.create { instance ->
+            val CODEC: MapCodec<ItemTag> =
+                RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
                         TagKey.codec(Registries.ITEM)
                             .fieldOf("tag_key")
@@ -182,8 +187,8 @@ sealed interface FilterEntry {
         }
 
         companion object {
-            val CODEC: Codec<SpecificItem> =
-                RecordCodecBuilder.create { instance ->
+            val CODEC: MapCodec<SpecificItem> =
+                RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
                         ItemStack.CODEC
                             .fieldOf("stack")
