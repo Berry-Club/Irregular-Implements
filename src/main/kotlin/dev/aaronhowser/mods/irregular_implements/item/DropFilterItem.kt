@@ -111,8 +111,8 @@ class DropFilterItem : Item(
         val firstStack = container?.nonEmptyItems()?.firstOrNull()
         val filter = firstStack?.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
 
-        for (entry in filter.entries) {
-            val itemName = entry.getDisplayStack().hoverName
+        for ((index, filterEntry) in filter.entries) {
+            val itemName = filterEntry.getDisplayStack().hoverName
             val component = ModLanguageProvider.Tooltips.LIST_POINT
                 .toGrayComponent(itemName)
 

@@ -39,11 +39,13 @@ class ItemFilterItem : Item(
             unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
             val diamondFilter = ItemFilterDataComponent.FilterEntry.SpecificItem(unbreakableDiamond, requireSameComponents = true)
 
-            val component = ItemFilterDataComponent(
-                planksFilter,
-                stickFilter,
-                diamondFilter
+            val filter = mapOf(
+                0 to planksFilter,
+                1 to stickFilter,
+                2 to diamondFilter
             )
+
+            val component = ItemFilterDataComponent(filter, isBlacklist = false)
 
             stack.set(ModDataComponents.ITEM_FILTER_ENTRIES, component)
         }
@@ -100,8 +102,8 @@ class ItemFilterItem : Item(
             tooltipComponents.add(component)
         }
 
-        for (entry in itemComponent.entries) {
-            val itemName = entry.getDisplayStack().hoverName
+        for ((slotIndex, filterEntry) in itemComponent.entries) {
+            val itemName = filterEntry.getDisplayStack().hoverName
             val component = ModLanguageProvider.Tooltips.LIST_POINT
                 .toGrayComponent(itemName)
 

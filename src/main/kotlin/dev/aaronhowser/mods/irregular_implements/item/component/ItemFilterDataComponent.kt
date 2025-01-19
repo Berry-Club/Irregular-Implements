@@ -27,6 +27,8 @@ data class ItemFilterDataComponent(
     val isBlacklist: Boolean
 ) {
 
+    constructor() : this(emptyMap(), false)
+
     fun test(testedStack: ItemStack): Boolean {
         val passes = this.entries.any { it.value.test(testedStack) }
         return passes != this.isBlacklist
