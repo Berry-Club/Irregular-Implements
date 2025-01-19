@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.NonNullList
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
@@ -66,10 +67,13 @@ class ItemFilterMenu(
             return ItemStack.EMPTY
         }
 
-        override fun addItem(stack: ItemStack): ItemStack {
-            val filter = this@ItemFilterMenu.filter ?: return stack
+        override fun addItem(addedStack: ItemStack): ItemStack {
+            val component = this@ItemFilterMenu.filterComponent ?: return addedStack
+            if (!component.canAddFilter(addedStack)) return addedStack
 
-            val newFilterEntry = ItemFilterDataComponent.FilterEntry.SpecificItem(stack, requireSameComponents = false)
+            val filter = component.entries
+
+            val newFilterEntry = ItemFilterDataComponent.FilterEntry.SpecificItem(addedStack, requireSameComponents = false)
 
             val newFilter = filter.toMutableSet()
             newFilter.add(newFilterEntry)

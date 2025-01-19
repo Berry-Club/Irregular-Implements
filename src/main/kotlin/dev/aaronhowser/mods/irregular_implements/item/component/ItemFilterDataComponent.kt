@@ -40,8 +40,12 @@ data class ItemFilterDataComponent(
         return passes != this.isBlacklist
     }
 
-    fun getAsInvertedBlacklist(): ItemFilterDataComponent {
-        return copy(isBlacklist = !this.isBlacklist)
+    fun canAddFilter(stackToAdd: ItemStack): Boolean {
+        return this.entries.size < 9 && this.entries
+            .none {
+                it is FilterEntry.SpecificItem
+                        && ItemStack.isSameItemSameComponents(it.stack, stackToAdd)
+            }
     }
 
     sealed interface FilterEntry {
