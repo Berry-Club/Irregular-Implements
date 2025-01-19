@@ -14,7 +14,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
-import net.minecraft.util.StringRepresentable
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
@@ -22,22 +21,21 @@ import kotlin.random.Random
 
 sealed interface FilterEntry {
 
-    enum class Type(val codec: MapCodec<out FilterEntry>) : StringRepresentable {
+    enum class Type(val codec: MapCodec<out FilterEntry>) {
         EMPTY(Empty.CODEC),
         ITEM_TAG(ItemTag.CODEC),
         SPECIFIC_ITEM(SpecificItem.CODEC);
 
-        override fun getSerializedName(): String {
-            return this.name.lowercase()
-        }
-
         companion object {
-            val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { Type.entries.toTypedArray() }
+            val CODEC: Codec<Type> = Codec.STRING.xmap(
+                { string -> valueOf(string) },
+                { type -> type.name }
+            )
         }
     }
 
     companion object {
-        val CODEC = Type.CODEC.dispatch(FilterEntry::type, Type::codec)
+        val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(FilterEntry::type, Type::codec)
     }
 
     fun getDisplayStack(): ItemStack
