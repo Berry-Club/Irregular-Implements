@@ -20,6 +20,8 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 import kotlin.random.Random
 
+typealias EitherFilter = Either<ItemFilterDataComponent.FilterEntry.SpecificItem, ItemFilterDataComponent.FilterEntry.ItemTag>
+
 data class ItemFilterDataComponent(
     val entries: Map<Int, FilterEntry>,
     val isBlacklist: Boolean
@@ -203,21 +205,23 @@ data class ItemFilterDataComponent(
                         )
                     )
                         .fieldOf("entries")
-                        .forGetter { component ->
-                            component.entries.mapValues { (_, entry) ->
-                                when (entry) {
-                                    is FilterEntry.SpecificItem -> Either.left(entry)
-                                    is FilterEntry.ItemTag -> Either.right(entry)
-                                }
-                            }
-                        },
+                        .forGetter(::fromComponent),
                     Codec.BOOL
                         .optionalFieldOf("is_blacklist", false)
                         .forGetter(ItemFilterDataComponent::isBlacklist)
                 ).apply(instance, ::toComponent)
             }
 
-        private fun toComponent(entries: Map<Int, Either<FilterEntry.SpecificItem, FilterEntry.ItemTag>>, isBlacklist: Boolean): ItemFilterDataComponent {
+        private fun fromComponent(component: ItemFilterDataComponent): Map<Int, EitherFilter> {
+            return component.entries.mapValues { (_, entry) ->
+                when (entry) {
+                    is FilterEntry.SpecificItem -> Either.left(entry)
+                    is FilterEntry.ItemTag -> Either.right(entry)
+                }
+            }
+        }
+
+        private fun toComponent(entries: Map<Int, EitherFilter>, isBlacklist: Boolean): ItemFilterDataComponent {
             val newMap: Map<Int, FilterEntry> = entries.mapValues { (_, entry) ->
                 when (entry.left().isPresent) {
                     true -> entry.left().get()
