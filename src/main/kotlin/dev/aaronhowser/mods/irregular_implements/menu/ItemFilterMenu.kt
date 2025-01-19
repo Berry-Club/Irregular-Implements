@@ -72,7 +72,7 @@ class ItemFilterMenu(
             val filter = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
             if (filter.size <= index) return ItemStack.EMPTY
 
-            val newFilter = NonNullList.copyOf(filter)
+            val newFilter = ItemFilterDataComponent.sanitizeEntries(filter.toTypedArray())
             newFilter[index] = FilterEntry.Empty
 
             filterStack.set(
@@ -91,7 +91,7 @@ class ItemFilterMenu(
 
             val newFilterEntry = FilterEntry.SpecificItem(addedStack, requireSameComponents = false)
 
-            val newFilter = NonNullList.copyOf(filter)
+            val newFilter = ItemFilterDataComponent.sanitizeEntries(filter.toTypedArray())
             newFilter[index] = newFilterEntry
 
             filterStack.set(

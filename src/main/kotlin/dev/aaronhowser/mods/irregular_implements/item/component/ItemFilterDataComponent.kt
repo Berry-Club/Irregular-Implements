@@ -14,8 +14,7 @@ data class ItemFilterDataComponent(
     val isBlacklist: Boolean
 ) {
 
-    constructor(vararg filterEntry: FilterEntry, isBlacklist: Boolean) : this(NonNullList.of(FilterEntry.Empty, *filterEntry), isBlacklist)
-    constructor(vararg filterEntry: FilterEntry) : this(NonNullList.of(FilterEntry.Empty, *filterEntry), false)
+    constructor(vararg filterEntry: FilterEntry) : this(sanitizeEntries(filterEntry), false)
 
     fun test(testedStack: ItemStack): Boolean {
         val passes = this.entries.any { it.test(testedStack) }
@@ -31,6 +30,17 @@ data class ItemFilterDataComponent(
     }
 
     companion object {
+
+        fun sanitizeEntries(entries: Array<out FilterEntry>): NonNullList<FilterEntry> {
+            val sanitizedEntries = NonNullList.withSize<FilterEntry>(9, FilterEntry.Empty)
+
+            for (index in 0 until 9) {
+                val entry = entries.getOrNull(index) ?: continue
+                sanitizedEntries[index] = entry
+            }
+
+            return sanitizedEntries
+        }
 
         val CODEC: Codec<ItemFilterDataComponent> =
             RecordCodecBuilder.create { instance ->

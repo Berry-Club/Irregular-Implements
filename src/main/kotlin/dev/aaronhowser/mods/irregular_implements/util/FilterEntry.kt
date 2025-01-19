@@ -37,7 +37,10 @@ sealed interface FilterEntry {
     }
 
     companion object {
-        val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(FilterEntry::type, Type::codec)
+        val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(
+            FilterEntry::type,
+            Type::codec
+        )
     }
 
     fun getDisplayStack(): ItemStack
