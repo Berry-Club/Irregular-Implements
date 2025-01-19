@@ -91,21 +91,19 @@ class ItemFilterItem : Item(
     }
 
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-
         val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
-        val filterEntries = itemComponent.entries
 
-        for (entry in filterEntries) {
-            val itemName = entry.getDisplayStack().hoverName
-            val component = ModLanguageProvider.Tooltips.LIST_POINT
-                .toGrayComponent(itemName)
+        if (itemComponent.isBlacklist) {
+            val component = ModLanguageProvider.Tooltips.BLACKLIST
+                .toComponent().withStyle(ChatFormatting.RED, ChatFormatting.UNDERLINE)
 
             tooltipComponents.add(component)
         }
 
-        if (itemComponent.isBlacklist) {
-            val component = ModLanguageProvider.Tooltips.BLOCK
-                .toComponent().withStyle(ChatFormatting.RED)
+        for (entry in itemComponent.entries) {
+            val itemName = entry.getDisplayStack().hoverName
+            val component = ModLanguageProvider.Tooltips.LIST_POINT
+                .toGrayComponent(itemName)
 
             tooltipComponents.add(component)
         }
