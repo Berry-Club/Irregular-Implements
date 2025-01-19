@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level
 class ItemFilterItem : Item(
     Properties()
         .stacksTo(1)
+        .component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
 ), MenuProvider {
 
     companion object {
