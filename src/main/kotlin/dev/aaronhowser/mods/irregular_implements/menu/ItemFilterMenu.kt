@@ -20,6 +20,7 @@ class ItemFilterMenu(
     private val playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.ITEM_FILTER.get(), containerId), MenuWithButtons {
 
+    // Uses a getter because when it mutates it only does so on server, and doesn't mutate the one on the client's copy of the menu
     private val filterStack: ItemStack
         get() =
             if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {

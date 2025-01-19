@@ -67,11 +67,11 @@ class ItemFilterScreen(
             .size(16)
             .addState(
                 message = Component.literal("Whitelist"),
-                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageStop
+                menuSprite = ScreenTextures.Sprites.ItemFilter.Whitelist
             )
             .addState(
                 message = Component.literal("Blacklist"),
-                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
+                menuSprite = ScreenTextures.Sprites.ItemFilter.Blacklist
             )
             .currentStateGetter(
                 currentStateGetter = { if (this.menu.isBlacklist) 1 else 0 }

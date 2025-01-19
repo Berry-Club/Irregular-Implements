@@ -104,6 +104,11 @@ object ScreenTextures {
             object RedstoneContinuousPowered : MenuSprite("buttons/iron_dropper/redstone_continuous_powered", 12, 14)
         }
 
+        object ItemFilter {
+            object Whitelist : MenuSprite("buttons/item_filter/whitelist", 15, 12)
+            object Blacklist : MenuSprite("buttons/item_filter/blacklist", 15, 12)
+        }
+
     }
 
     //TODO: Check that all of these are actually used
