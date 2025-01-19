@@ -200,7 +200,7 @@ data class ItemFilterDataComponent(
             RecordCodecBuilder.create { instance ->
                 instance.group(
                     Codec.unboundedMap(
-                        Codec.INT,
+                        Codec.STRING,
                         Codec.either(
                             FilterEntry.SpecificItem.CODEC,
                             FilterEntry.ItemTag.CODEC
@@ -214,21 +214,40 @@ data class ItemFilterDataComponent(
                 ).apply(instance, ::toComponent)
             }
 
-        private fun fromComponent(component: ItemFilterDataComponent): Map<Int, EitherFilter> {
-            return component.entries.mapValues { (_, entry) ->
-                when (entry) {
-                    is FilterEntry.SpecificItem -> Either.left(entry)
-                    is FilterEntry.ItemTag -> Either.right(entry)
+        private fun fromComponent(
+            component: ItemFilterDataComponent
+        ): Map<String, EitherFilter> {
+            val newMap: MutableMap<String, EitherFilter> = mutableMapOf()
+
+            for ((int, filter) in component.entries) {
+                val key = int.toString()
+
+                val either: EitherFilter = when (filter) {
+                    is FilterEntry.SpecificItem -> Either.left(filter)
+                    is FilterEntry.ItemTag -> Either.right(filter)
                 }
+
+                newMap[key] = either
             }
+
+            return newMap
         }
 
-        private fun toComponent(entries: Map<Int, EitherFilter>, isBlacklist: Boolean): ItemFilterDataComponent {
-            val newMap: Map<Int, FilterEntry> = entries.mapValues { (_, entry) ->
-                when (entry.left().isPresent) {
-                    true -> entry.left().get()
-                    false -> entry.right().get()
-                }
+        private fun toComponent(
+            entries: Map<String, EitherFilter>,
+            isBlacklist: Boolean
+        ): ItemFilterDataComponent {
+            val newMap: MutableMap<Int, FilterEntry> = mutableMapOf()
+
+            for ((stringKey, either) in entries) {
+                val intKey = stringKey.toInt()
+
+                val filter = either.map(
+                    { left: FilterEntry.SpecificItem -> left },
+                    { right: FilterEntry.ItemTag -> right }
+                )
+
+                newMap[intKey] = filter
             }
 
             return ItemFilterDataComponent(
@@ -241,7 +260,7 @@ data class ItemFilterDataComponent(
             StreamCodec.composite(
                 ByteBufCodecs.map(
                     ::HashMap,
-                    ByteBufCodecs.VAR_INT,
+                    ByteBufCodecs.STRING_UTF8,
                     ByteBufCodecs.either(
                         FilterEntry.SpecificItem.STREAM_CODEC,
                         FilterEntry.ItemTag.STREAM_CODEC
