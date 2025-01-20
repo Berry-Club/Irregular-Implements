@@ -87,10 +87,12 @@ class ItemFilterScreen(
     }
 
     private fun addToggleTypeButton(index: Int, entry: FilterEntry) {
+        if (entry is FilterEntry.Empty) return
+
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
-        val width = if (entry is FilterEntry.ItemTag) 16 else 8
+        val width = if (entry is FilterEntry.Tag) 16 else 8
         val height = 8
 
         val buttonId = ItemFilterMenu.getToggleTypeButtonId(index)
@@ -111,7 +113,7 @@ class ItemFilterScreen(
     }
 
     private fun addToggleNeedsComponentButton(index: Int, entry: FilterEntry) {
-        if (entry !is FilterEntry.SpecificItem) return
+        if (entry !is FilterEntry.Item) return
 
         val x = this.leftPos + 8 + index * 18 + 9
         val y = this.topPos + 15

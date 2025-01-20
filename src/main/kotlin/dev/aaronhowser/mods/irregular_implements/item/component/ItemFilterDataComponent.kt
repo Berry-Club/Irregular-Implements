@@ -25,7 +25,7 @@ data class ItemFilterDataComponent(
         val nonEmpty = this.entries.filterNot { it is FilterEntry.Empty }
 
         return nonEmpty.size < 9 && nonEmpty.none {
-            it is FilterEntry.SpecificItem
+            it is FilterEntry.Item
                     && ItemStack.isSameItemSameComponents(it.stack, stackToAdd)
         }
     }

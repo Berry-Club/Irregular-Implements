@@ -28,8 +28,8 @@ sealed interface FilterEntry {
         val codec: MapCodec<out FilterEntry>
     ) : StringRepresentable {
         EMPTY("empty", Empty.CODEC),
-        ITEM_TAG("item_tag", ItemTag.CODEC),
-        SPECIFIC_ITEM("specific_item", SpecificItem.CODEC);
+        TAG("tag", Tag.CODEC),
+        ITEM("item", Item.CODEC);
 
         override fun getSerializedName(): String {
             return this.id
@@ -67,16 +67,16 @@ sealed interface FilterEntry {
         val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
     }
 
-    data class ItemTag(
-        val tagKey: TagKey<Item>,
+    data class Tag(
+        val tagKey: TagKey<net.minecraft.world.item.Item>,
         val backupStack: ItemStack
     ) : FilterEntry {
 
         override fun getType(): Type {
-            return Type.ITEM_TAG
+            return Type.TAG
         }
 
-        private val displayStacks: MutableMap<Item, ItemStack> = mutableMapOf()
+        private val displayStacks: MutableMap<net.minecraft.world.item.Item, ItemStack> = mutableMapOf()
         private var displayStack: ItemStack? = null
 
         private var timeLastUpdated = 0L
@@ -129,9 +129,9 @@ sealed interface FilterEntry {
             return stack.`is`(this.tagKey)
         }
 
-        fun getAsSpecificItemEntry(): SpecificItem {
-            return SpecificItem(
-                this.backupStack,
+        fun getAsSpecificItemEntry(): Item {
+            return Item(
+                backupStack,
                 requireSameComponents = false
             )
         }
@@ -139,34 +139,34 @@ sealed interface FilterEntry {
         companion object {
             private val random = Random(123L)
 
-            val CODEC: MapCodec<ItemTag> =
+            val CODEC: MapCodec<Tag> =
                 RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
                         TagKey.codec(Registries.ITEM)
                             .fieldOf("tag")
-                            .forGetter(ItemTag::tagKey),
+                            .forGetter(Tag::tagKey),
                         ItemStack.CODEC
                             .fieldOf("backup_stack")
-                            .forGetter(ItemTag::backupStack)
-                    ).apply(instance, ::ItemTag)
+                            .forGetter(Tag::backupStack)
+                    ).apply(instance, ::Tag)
                 }
 
-            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemTag> =
+            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Tag> =
                 StreamCodec.composite(
-                    OtherUtil.tagKeyStreamCodec(Registries.ITEM), ItemTag::tagKey,
-                    ItemStack.STREAM_CODEC, ItemTag::backupStack,
-                    ::ItemTag
+                    OtherUtil.tagKeyStreamCodec(Registries.ITEM), Tag::tagKey,
+                    ItemStack.STREAM_CODEC, Tag::backupStack,
+                    ::Tag
                 )
         }
     }
 
-    data class SpecificItem(
+    data class Item(
         val stack: ItemStack,
         val requireSameComponents: Boolean
     ) : FilterEntry {
 
         override fun getType(): Type {
-            return Type.SPECIFIC_ITEM
+            return Type.ITEM
         }
 
         private val displayStack: ItemStack = this.stack.copy()
@@ -194,7 +194,7 @@ sealed interface FilterEntry {
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
-            if (other !is SpecificItem) return false
+            if (other !is Item) return false
 
             if (!ItemStack.isSameItemSameComponents(this.stack, other.stack)) return false
             if (this.requireSameComponents != other.requireSameComponents) return false
@@ -209,23 +209,23 @@ sealed interface FilterEntry {
         }
 
         companion object {
-            val CODEC: MapCodec<SpecificItem> =
+            val CODEC: MapCodec<Item> =
                 RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
                         ItemStack.CODEC
                             .fieldOf("stack")
-                            .forGetter(SpecificItem::stack),
+                            .forGetter(Item::stack),
                         Codec.BOOL
                             .optionalFieldOf("require_same_components", false)
-                            .forGetter(SpecificItem::requireSameComponents)
-                    ).apply(instance, ::SpecificItem)
+                            .forGetter(Item::requireSameComponents)
+                    ).apply(instance, ::Item)
                 }
 
-            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SpecificItem> =
+            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Item> =
                 StreamCodec.composite(
-                    ItemStack.STREAM_CODEC, SpecificItem::stack,
-                    ByteBufCodecs.BOOL, SpecificItem::requireSameComponents,
-                    ::SpecificItem
+                    ItemStack.STREAM_CODEC, Item::stack,
+                    ByteBufCodecs.BOOL, Item::requireSameComponents,
+                    ::Item
                 )
         }
     }

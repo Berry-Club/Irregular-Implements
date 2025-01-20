@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.NonNullList
-import net.minecraft.core.registries.Registries
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -92,7 +91,7 @@ class ItemFilterMenu(
 
             val filter = component.entries
 
-            val newFilterEntry = FilterEntry.SpecificItem(addedStack, requireSameComponents = false)
+            val newFilterEntry = FilterEntry.Item(addedStack, requireSameComponents = false)
 
             val newFilter = ItemFilterDataComponent.sanitizeEntries(filter.toTypedArray())
             newFilter[index] = newFilterEntry
@@ -184,10 +183,10 @@ class ItemFilterMenu(
         val newEntry = when (entry) {
 
             // If it's an ItemTag, return a SpecificItem
-            is FilterEntry.ItemTag -> entry.getAsSpecificItemEntry()
+            is FilterEntry.Tag -> entry.getAsSpecificItemEntry()
 
             // If it's a SpecificItem, return an ItemTag
-            is FilterEntry.SpecificItem -> FilterEntry.ItemTag(
+            is FilterEntry.Item -> FilterEntry.Tag(
                 entry.stack.tags.toList().random(),     //TODO: Let you choose which tag
                 entry.stack.copy()
             )
@@ -208,7 +207,7 @@ class ItemFilterMenu(
         val filter = this.filter ?: return
         val entry = filter.getOrNull(slotIndex) ?: return
 
-        if (entry !is FilterEntry.SpecificItem) return
+        if (entry !is FilterEntry.Item) return
 
         val newEntry = entry.copy(requireSameComponents = !entry.requireSameComponents)
 

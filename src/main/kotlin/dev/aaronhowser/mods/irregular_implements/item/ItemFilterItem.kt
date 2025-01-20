@@ -33,12 +33,12 @@ class ItemFilterItem : Item(
     companion object {
 
         fun setTestingFilter(stack: ItemStack) {
-            val planksFilter = FilterEntry.ItemTag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
-            val stickFilter = FilterEntry.SpecificItem(Items.STICK.defaultInstance, requireSameComponents = false)
+            val planksFilter = FilterEntry.Tag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
+            val stickFilter = FilterEntry.Item(Items.STICK.defaultInstance, requireSameComponents = false)
 
             val unbreakableDiamond = Items.DIAMOND.defaultInstance
             unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
-            val diamondFilter = FilterEntry.SpecificItem(unbreakableDiamond, requireSameComponents = true)
+            val diamondFilter = FilterEntry.Item(unbreakableDiamond, requireSameComponents = true)
 
             val component = ItemFilterDataComponent(planksFilter, stickFilter, diamondFilter)
 
