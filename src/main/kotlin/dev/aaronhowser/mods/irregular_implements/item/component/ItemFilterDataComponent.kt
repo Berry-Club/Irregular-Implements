@@ -22,11 +22,12 @@ data class ItemFilterDataComponent(
     }
 
     fun canAddFilter(stackToAdd: ItemStack): Boolean {
-        return this.entries.size < 9 && this.entries
-            .none {
-                it is FilterEntry.SpecificItem
-                        && ItemStack.isSameItemSameComponents(it.stack, stackToAdd)
-            }
+        val nonEmpty = this.entries.filterNot { it is FilterEntry.Empty }
+
+        return nonEmpty.size < 9 && nonEmpty.none {
+            it is FilterEntry.SpecificItem
+                    && ItemStack.isSameItemSameComponents(it.stack, stackToAdd)
+        }
     }
 
     companion object {
