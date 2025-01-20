@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.NonNullList
+import net.minecraft.core.registries.Registries
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -20,6 +21,8 @@ class ItemFilterMenu(
     containerId: Int,
     private val playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.ITEM_FILTER.get(), containerId), MenuWithButtons {
+
+    private val holderLookup = this.playerInventory.player.level().registryAccess()
 
     // Uses a getter because when it mutates it only does so on server, and doesn't mutate the one on the client's copy of the menu
     private val filterStack: ItemStack
@@ -58,7 +61,7 @@ class ItemFilterMenu(
 
             for (index in 0 until 9) {
                 val entry = filter.getOrNull(index) ?: continue
-                items[index] = entry.getDisplayStack()
+                items[index] = entry.getDisplayStack(this@ItemFilterMenu.holderLookup)
             }
 
             return items

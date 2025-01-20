@@ -6,8 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import net.minecraft.client.resources.language.I18n
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.chat.Component
@@ -18,6 +18,7 @@ import net.minecraft.util.StringRepresentable
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
+import kotlin.jvm.optionals.getOrNull
 import kotlin.random.Random
 
 sealed interface FilterEntry {
@@ -46,12 +47,12 @@ sealed interface FilterEntry {
         )
     }
 
-    fun getDisplayStack(): ItemStack
+    fun getDisplayStack(registries: HolderLookup.Provider): ItemStack
     fun test(stack: ItemStack): Boolean
     fun getType(): Type
 
     data object Empty : FilterEntry {
-        override fun getDisplayStack(): ItemStack {
+        override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
             return ItemStack.EMPTY
         }
 
@@ -71,24 +72,29 @@ sealed interface FilterEntry {
         val backupStack: ItemStack
     ) : FilterEntry {
 
-        private val matchingItems = BuiltInRegistries.ITEM.getTag(this.tagKey).get().toList()
-        private val displayStacks: MutableMap<Item, ItemStack> = mutableMapOf()
-
-        private var timeLastUpdated = 0L
-        private var displayStack: ItemStack? = null
-
         override fun getType(): Type {
             return Type.ITEM_TAG
         }
 
-        override fun getDisplayStack(): ItemStack {
+        private val displayStacks: MutableMap<Item, ItemStack> = mutableMapOf()
+        private var displayStack: ItemStack? = null
+
+        private var timeLastUpdated = 0L
+
+        override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
 
             val time = System.currentTimeMillis() / 1000
             if (displayStack == null || time > this.timeLastUpdated) {
                 this.timeLastUpdated = time
 
-                val randomIndex = random.nextInt(this.matchingItems.size)
-                val randomItem = this.matchingItems[randomIndex].value()
+                val matchingItems = registries.lookupOrThrow(Registries.ITEM)
+                    .get(this.tagKey)
+                    .getOrNull()
+                    ?.toList()
+                    ?: return ItemStack.EMPTY
+
+                val randomIndex = random.nextInt(matchingItems.size)
+                val randomItem = matchingItems[randomIndex].value()
 
                 this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
                     val tagLocation = this.tagKey.location
@@ -174,7 +180,7 @@ sealed interface FilterEntry {
             }
         }
 
-        override fun getDisplayStack(): ItemStack {
+        override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
             return this.displayStack
         }
 

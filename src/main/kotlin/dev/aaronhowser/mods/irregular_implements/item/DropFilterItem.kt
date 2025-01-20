@@ -115,7 +115,8 @@ class DropFilterItem : Item(
         for (filterEntry in filter.entries) {
             if (filterEntry is FilterEntry.Empty) continue
 
-            val itemName = filterEntry.getDisplayStack().hoverName
+            val lookup = context.registries() ?: continue
+            val itemName = filterEntry.getDisplayStack(lookup).hoverName
             val component = ModLanguageProvider.Tooltips.LIST_POINT
                 .toGrayComponent(itemName)
 
