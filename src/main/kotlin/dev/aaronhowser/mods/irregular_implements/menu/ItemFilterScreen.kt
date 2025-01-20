@@ -100,12 +100,12 @@ class ItemFilterScreen(
             // Stage when the filter is an Item Filter
             .addStage(
                 message = Component.literal("Set to Tag Filter"),
-                color = 0xFF8D97FF.toInt()
+                color = 0xFF5969FF.toInt()
             )
             // Stages when the filter is a Tag Filter
             .addStage(
                 message = Component.literal("Set to Item Filter"),
-                color = 0xFF00796B.toInt()
+                color = 0xFF00B7A2.toInt()
             )
             .onPress(
                 onPress = {
@@ -141,12 +141,12 @@ class ItemFilterScreen(
             // Stage when the filter ignores components
             .addStage(
                 message = Component.literal("Set to require same components"),
-                color = 0xFFFF7043.toInt()
+                color = 0xFFFF5623.toInt()
             )
             // Stages when the filter requires same components
             .addStage(
                 message = Component.literal("Set to ignore components"),
-                color = 0xFF388E3C.toInt()
+                color = 0xFF37C63C.toInt()
             )
             .onPress(
                 onPress = {

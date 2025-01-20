@@ -33,7 +33,6 @@ class MultiStageColoredButton(
         get() = stages[currentStageGetter.get()]
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-
         val color = this.currentStage.color
 
         val red = (color shr 16 and 255) / 255.0f
