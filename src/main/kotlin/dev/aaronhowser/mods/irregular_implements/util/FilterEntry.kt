@@ -60,6 +60,7 @@ sealed interface FilterEntry {
 
         override val type: Type = Type.EMPTY
 
+        @JvmField
         val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
     }
 
@@ -128,6 +129,7 @@ sealed interface FilterEntry {
         companion object {
             private val random = Random(123L)
 
+            @JvmField
             val CODEC: MapCodec<ItemTag> =
                 RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
@@ -196,6 +198,8 @@ sealed interface FilterEntry {
         }
 
         companion object {
+
+            @JvmField
             val CODEC: MapCodec<SpecificItem> =
                 RecordCodecBuilder.mapCodec { instance ->
                     instance.group(
