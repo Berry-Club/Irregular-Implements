@@ -557,17 +557,17 @@ class ModLanguageProvider(
         const val IGNITER_TOGGLE = "tooltip.irregular_implements.igniter_toggle"
         const val IGNITER_IGNITE = "tooltip.irregular_implements.igniter_ignite"
         const val IGNITER_KEEP_IGNITED = "tooltip.irregular_implements.igniter_keep_ignited"
-        const val ITEM_FILTER_SET_TO_TAG = "tooltip.irregular_implements.item_filter_set_to_tag"
-        const val ITEM_FILTER_SET_TO_ITEM = "tooltip.irregular_implements.item_filter_set_to_item"
-        const val ITEM_FILTER_SET_IGNORE_COMPONENTS = "tooltip.irregular_implements.item_filter_set_ignore_components"
-        const val ITEM_FILTER_SET_REQUIRE_COMPONENTS = "tooltip.irregular_implements.item_filter_set_require_components"
+        const val ITEM_FILTER_ITEM = "tooltip.irregular_implements.item_filter_item"
+        const val ITEM_FILTER_TAG = "tooltip.irregular_implements.item_filter_tag"
+        const val ITEM_FILTER_REQUIRE_COMPONENTS = "tooltip.irregular_implements.item_filter_require_components"
+        const val ITEM_FILTER_IGNORE_COMPONENTS = "tooltip.irregular_implements.item_filter_ignore_components"
     }
 
     private fun addTooltips() {
-        add(Tooltips.ITEM_FILTER_SET_TO_TAG, "Set to Tag")
-        add(Tooltips.ITEM_FILTER_SET_TO_ITEM, "Set to Item")
-        add(Tooltips.ITEM_FILTER_SET_IGNORE_COMPONENTS, "Set to Ignore Components")
-        add(Tooltips.ITEM_FILTER_SET_REQUIRE_COMPONENTS, "Set to Require Components")
+        add(Tooltips.ITEM_FILTER_ITEM, "Item Filter")
+        add(Tooltips.ITEM_FILTER_TAG, "Tag Filter")
+        add(Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS, "Require Components")
+        add(Tooltips.ITEM_FILTER_IGNORE_COMPONENTS, "Ignore Components")
 
         add(Tooltips.SHIFT_FOR_MORE, "Hold SHIFT for more information")
         add(Tooltips.ENTITY_FILTER_ENTITY, "Entity Type: %s")

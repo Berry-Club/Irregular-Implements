@@ -102,11 +102,14 @@ class ItemFilterScreen(
             messagesGetter = {
                 val filterAtIndex = this.menu.filter?.getOrNull(index)
 
-                if (filterAtIndex is FilterEntry.Item) {
-                    listOf(ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_TAG.toComponent())
-                } else {
-                    listOf(ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_ITEM.toComponent())
-                }
+                listOf(
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_ITEM.toComponent().withStyle(
+                        if (filterAtIndex is FilterEntry.Item) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+                    ),
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_TAG.toComponent().withStyle(
+                        if (filterAtIndex is FilterEntry.Item) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
+                    )
+                )
             },
             colorGetter = {
                 val filterAtIndex = this.menu.filter?.getOrNull(index)
@@ -151,11 +154,12 @@ class ItemFilterScreen(
                 ) {
                     is FilterEntry.Item -> {
                         listOf(
-                            if (filterAtIndex.requireSameComponents) {
-                                ModLanguageProvider.Tooltips.ITEM_FILTER_SET_IGNORE_COMPONENTS.toComponent()
-                            } else {
-                                ModLanguageProvider.Tooltips.ITEM_FILTER_SET_REQUIRE_COMPONENTS.toComponent()
-                            }
+                            ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
+                                if (filterAtIndex.requireSameComponents) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+                            ),
+                            ModLanguageProvider.Tooltips.ITEM_FILTER_IGNORE_COMPONENTS.toComponent().withStyle(
+                                if (filterAtIndex.requireSameComponents) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
+                            )
                         )
                     }
 
