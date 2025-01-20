@@ -23,14 +23,15 @@ import kotlin.random.Random
 sealed interface FilterEntry {
 
     enum class Type(
+        val id: String,
         val codec: MapCodec<out FilterEntry>
     ) : StringRepresentable {
-        EMPTY(Empty.CODEC),
-        ITEM_TAG(ItemTag.CODEC),
-        SPECIFIC_ITEM(SpecificItem.CODEC);
+        EMPTY("empty", Empty.CODEC),
+        ITEM_TAG("item_tag", ItemTag.CODEC),
+        SPECIFIC_ITEM("specific_item", SpecificItem.CODEC);
 
         override fun getSerializedName(): String {
-            return this.name.lowercase()
+            return this.id
         }
 
         companion object {
