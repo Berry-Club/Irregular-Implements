@@ -123,7 +123,7 @@ class ItemFilterMenu(
             else -> return
         }
 
-        val newFilter = NonNullList.copyOf(filter)
+        val newFilter = filter.toMutableList()
         newFilter[slotIndex] = newEntry
 
         filterStack.set(
