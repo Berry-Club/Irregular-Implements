@@ -22,15 +22,6 @@ data class ItemFilterDataComponent(
         return passes != this.isBlacklist
     }
 
-    fun canAddFilter(stackToAdd: ItemStack): Boolean {
-        val nonEmpty = this.entries.filterNot { it is FilterEntry.Empty }
-
-        return nonEmpty.size < 9 && nonEmpty.none {
-            it is FilterEntry.Item
-                    && ItemStack.isSameItemSameComponents(it.stack, stackToAdd)
-        }
-    }
-
     companion object {
 
         fun sanitizeEntries(entries: List<FilterEntry>): NonNullList<FilterEntry> {
