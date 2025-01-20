@@ -84,7 +84,7 @@ class AnalogEmitterBlock(
             pos,
             SoundEvents.UI_BUTTON_CLICK.value(),
             SoundSource.BLOCKS,
-            1f,
+            0.15f,
             pitch
         )
 
