@@ -139,9 +139,37 @@ class ItemFilterMenu(
         val filter = this.filter ?: return
         val entry = filter.getOrNull(slotIndex) ?: return
 
-        if (entry !is FilterEntry.Item) return
+        if (entry is FilterEntry.Item) {
+            toggleNeedsComponents(slotIndex, filter, entry)
+        } else if (entry is FilterEntry.Tag) {
+            cycleTag(slotIndex, filter, entry)
+        }
 
+    }
+
+    private fun toggleNeedsComponents(slotIndex: Int, filter: NonNullList<FilterEntry>, entry: FilterEntry.Item) {
         val newEntry = entry.copy(requireSameComponents = !entry.requireSameComponents)
+
+        val newFilter = filter.toMutableList()
+        newFilter[slotIndex] = newEntry
+
+        filterStack.set(
+            ModDataComponents.ITEM_FILTER_ENTRIES,
+            ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
+        )
+    }
+
+    private fun cycleTag(slotIndex: Int, filter: NonNullList<FilterEntry>, entry: FilterEntry.Tag) {
+        val tag = entry.tagKey
+        val stack = entry.backupStack
+
+        val stackTags = stack.tags.toList()
+        val tagIndex = stackTags.indexOf(tag)
+
+        val nextTagIndex = (tagIndex + 1) % stackTags.size
+        val nextTag = stackTags[nextTagIndex]
+
+        val newEntry = entry.copy(tagKey = nextTag)
 
         val newFilter = filter.toMutableList()
         newFilter[slotIndex] = newEntry
