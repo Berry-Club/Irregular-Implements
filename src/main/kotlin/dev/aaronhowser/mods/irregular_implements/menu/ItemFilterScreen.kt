@@ -99,13 +99,13 @@ class ItemFilterScreen(
             y = y,
             width = width,
             height = height,
-            messageGetter = {
+            messagesGetter = {
                 val filterAtIndex = this.menu.filter?.getOrNull(index)
 
                 if (filterAtIndex is FilterEntry.Item) {
-                    ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_TAG.toComponent()
+                    listOf(ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_TAG.toComponent())
                 } else {
-                    ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_ITEM.toComponent()
+                    listOf(ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_ITEM.toComponent())
                 }
             },
             colorGetter = {
@@ -145,37 +145,33 @@ class ItemFilterScreen(
             y = y,
             width = width,
             height = height,
-            messageGetter = {
-                val filterAtIndex = this.menu.filter?.getOrNull(index)
-
-                if (filterAtIndex is FilterEntry.Item) {
-                    if (filterAtIndex.requireSameComponents) {
-                        ModLanguageProvider.Tooltips.ITEM_FILTER_SET_IGNORE_COMPONENTS.toComponent()
-                    } else {
-                        ModLanguageProvider.Tooltips.ITEM_FILTER_SET_REQUIRE_COMPONENTS.toComponent()
-                    }
-                } else if (filterAtIndex is FilterEntry.Tag) {
-                    val itemTags = filterAtIndex.backupStack.tags.toList()
-
-                    var component = Component.empty()
-
-                    for (tag in itemTags) {
-                        val tagComponent = tag.getComponent().withStyle(
-                            if (tag == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+            messagesGetter = {
+                when (
+                    val filterAtIndex = this.menu.filter?.getOrNull(index)
+                ) {
+                    is FilterEntry.Item -> {
+                        listOf(
+                            if (filterAtIndex.requireSameComponents) {
+                                ModLanguageProvider.Tooltips.ITEM_FILTER_SET_IGNORE_COMPONENTS.toComponent()
+                            } else {
+                                ModLanguageProvider.Tooltips.ITEM_FILTER_SET_REQUIRE_COMPONENTS.toComponent()
+                            }
                         )
+                    }
 
-                        component = if (component == Component.empty()) {
-                            tagComponent
-                        } else {
-                            component
-                                .append("\n")
-                                .append(tagComponent)
+                    is FilterEntry.Tag -> {
+                        val itemTags = filterAtIndex.backupStack.tags.toList()
+
+                        itemTags.map {
+                            it.getComponent().withStyle(
+                                if (it == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+                            )
                         }
                     }
 
-                    component
-                } else {
-                    Component.empty()
+                    else -> {
+                        listOf(Component.empty())
+                    }
                 }
             },
             colorGetter = {

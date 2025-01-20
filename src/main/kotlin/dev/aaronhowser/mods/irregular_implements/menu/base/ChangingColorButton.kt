@@ -12,7 +12,7 @@ class ChangingColorButton(
     y: Int = 0,
     width: Int,
     height: Int,
-    private val messageGetter: Supplier<Component>,
+    private val messagesGetter: Supplier<List<Component>>,
     private val colorGetter: Supplier<Int>,
     private val font: Font,
     onPress: OnPress,
@@ -22,7 +22,7 @@ class ChangingColorButton(
     y,
     width,
     height,
-    messageGetter.get(),
+    messagesGetter.get().firstOrNull() ?: Component.empty(),
     onPress,
     narration ?: DEFAULT_NARRATION
 ) {
@@ -46,18 +46,12 @@ class ChangingColorButton(
     }
 
     private fun renderToolTip(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (this.message == Component.empty()) return
-
         guiGraphics.renderComponentTooltip(
             font,
-            listOf(this.message),
+            messagesGetter.get(),
             mouseX,
             mouseY
         )
-    }
-
-    override fun getMessage(): Component {
-        return this.messageGetter.get()
     }
 
     class Stage(
