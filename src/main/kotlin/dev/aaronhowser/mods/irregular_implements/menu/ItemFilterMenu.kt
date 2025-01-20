@@ -140,7 +140,7 @@ class ItemFilterMenu(
 
         val newEntry = entry.copy(requireSameComponents = !entry.requireSameComponents)
 
-        val newFilter = NonNullList.copyOf(filter)
+        val newFilter = filter.toMutableList()
         newFilter[slotIndex] = newEntry
 
         filterStack.set(
