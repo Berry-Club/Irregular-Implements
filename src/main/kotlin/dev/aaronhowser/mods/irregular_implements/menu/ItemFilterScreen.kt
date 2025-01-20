@@ -100,7 +100,7 @@ class ItemFilterScreen(
             // Stage when the filter is an Item Filter
             .addStage(
                 message = Component.literal("Set to Tag Filter"),
-                color = 0xFF673AB7.toInt()
+                color = 0xFF8D97FF.toInt()
             )
             // Stages when the filter is a Tag Filter
             .addStage(
