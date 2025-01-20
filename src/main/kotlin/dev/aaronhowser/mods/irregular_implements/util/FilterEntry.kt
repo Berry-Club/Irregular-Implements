@@ -49,7 +49,7 @@ sealed interface FilterEntry {
     fun test(stack: ItemStack): Boolean
     val type: Type
 
-    data object Empty : FilterEntry {
+    class Empty private constructor() : FilterEntry {
         override fun getDisplayStack(): ItemStack {
             return ItemStack.EMPTY
         }
@@ -60,7 +60,10 @@ sealed interface FilterEntry {
 
         override val type: Type = Type.EMPTY
 
-        val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
+        companion object {
+            val INSTANCE = Empty()
+            val CODEC: MapCodec<Empty> = MapCodec.unit(INSTANCE)
+        }
     }
 
     data class ItemTag(
