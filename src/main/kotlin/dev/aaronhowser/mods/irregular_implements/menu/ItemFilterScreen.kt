@@ -10,6 +10,7 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry.Companion.isNullOrEmpty
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
+import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -154,10 +155,25 @@ class ItemFilterScreen(
                         ModLanguageProvider.Tooltips.ITEM_FILTER_SET_REQUIRE_COMPONENTS.toComponent()
                     }
                 } else if (filterAtIndex is FilterEntry.Tag) {
-                    val nextTag = filterAtIndex.getNextTag()
-                    val nextTagComponent = nextTag.getComponent()
+                    val itemTags = filterAtIndex.backupStack.tags.toList()
 
-                    ModLanguageProvider.Tooltips.ITEM_FILTER_CYCLE_TAG.toComponent(nextTagComponent)
+                    var component = Component.empty()
+
+                    for (tag in itemTags) {
+                        val tagComponent = tag.getComponent().withStyle(
+                            if (tag == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+                        )
+
+                        component = if (component == Component.empty()) {
+                            tagComponent
+                        } else {
+                            component
+                                .append("\n")
+                                .append(tagComponent)
+                        }
+                    }
+
+                    component
                 } else {
                     Component.empty()
                 }

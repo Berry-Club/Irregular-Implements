@@ -532,7 +532,6 @@
   "tooltip.irregular_implements.iron_dropper_random_velocity": "Random velocity",
   "tooltip.irregular_implements.iron_dropper_twenty_delay": "20 tick pickup delay",
   "tooltip.irregular_implements.item_count": "%s x%d",
-  "tooltip.irregular_implements.item_filter_cycle_tag": "Next tag: %s",
   "tooltip.irregular_implements.item_filter_set_ignore_components": "Set to Ignore Components",
   "tooltip.irregular_implements.item_filter_set_require_components": "Set to Require Components",
   "tooltip.irregular_implements.item_filter_set_to_item": "Set to Item",
