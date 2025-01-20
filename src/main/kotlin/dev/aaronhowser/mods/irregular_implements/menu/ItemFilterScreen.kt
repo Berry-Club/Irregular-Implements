@@ -154,11 +154,11 @@ class ItemFilterScreen(
                 ) {
                     is FilterEntry.Item -> {
                         listOf(
-                            ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
-                                if (filterAtIndex.requireSameComponents) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
-                            ),
                             ModLanguageProvider.Tooltips.ITEM_FILTER_IGNORE_COMPONENTS.toComponent().withStyle(
                                 if (filterAtIndex.requireSameComponents) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
+                            ),
+                            ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
+                                if (filterAtIndex.requireSameComponents) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
                             )
                         )
                     }
