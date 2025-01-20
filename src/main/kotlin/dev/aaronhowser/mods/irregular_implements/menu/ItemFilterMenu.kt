@@ -160,15 +160,8 @@ class ItemFilterMenu(
     }
 
     private fun cycleTag(slotIndex: Int, filter: NonNullList<FilterEntry>, entry: FilterEntry.Tag) {
-        val tag = entry.tagKey
-        val stack = entry.backupStack
 
-        val stackTags = stack.tags.toList()
-        val tagIndex = stackTags.indexOf(tag)
-
-        val nextTagIndex = (tagIndex + 1) % stackTags.size
-        val nextTag = stackTags[nextTagIndex]
-
+        val nextTag = entry.getNextTag()
         val newEntry = entry.copy(tagKey = nextTag)
 
         val newFilter = filter.toMutableList()

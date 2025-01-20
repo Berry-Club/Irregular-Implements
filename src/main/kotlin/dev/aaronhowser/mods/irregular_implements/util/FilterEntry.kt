@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import net.minecraft.client.resources.language.I18n
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
@@ -45,6 +45,8 @@ sealed interface FilterEntry {
             FilterEntry::getType,
             Type::codec
         )
+
+        fun FilterEntry?.isNullOrEmpty() = this == null || this == Empty
     }
 
     fun getDisplayStack(registries: HolderLookup.Provider): ItemStack
@@ -82,7 +84,6 @@ sealed interface FilterEntry {
         private var timeLastUpdated = 0L
 
         override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
-
             val time = System.currentTimeMillis() / 1000
             if (displayStack == null || time > this.timeLastUpdated) {
                 this.timeLastUpdated = time
@@ -97,19 +98,7 @@ sealed interface FilterEntry {
                 val randomItem = matchingItems[randomIndex].value()
 
                 this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
-                    val tagLocation = this.tagKey.location
-                    val possibleLangKey = StringBuilder()
-                        .append("tag.item.")
-                        .append(tagLocation.namespace)
-                        .append(".")
-                        .append(tagLocation.path)
-                        .toString()
-
-                    val tagKeyComponent = if (I18n.exists(possibleLangKey)) {
-                        Component.translatable(possibleLangKey)
-                    } else {
-                        Component.literal(tagLocation.toString())
-                    }
+                    val tagKeyComponent = this.tagKey.getComponent()
 
                     val stack = randomItem.defaultInstance
                     stack.set(
@@ -123,6 +112,14 @@ sealed interface FilterEntry {
             }
 
             return this.displayStack ?: ItemStack.EMPTY
+        }
+
+        fun getNextTag(): TagKey<net.minecraft.world.item.Item> {
+            val stackTags = this.backupStack.tags.toList()
+            val currentTagIndex = stackTags.indexOf(this.tagKey)
+
+            val nextTagIndex = (currentTagIndex + 1) % stackTags.size
+            return stackTags[nextTagIndex]
         }
 
         override fun test(stack: ItemStack): Boolean {

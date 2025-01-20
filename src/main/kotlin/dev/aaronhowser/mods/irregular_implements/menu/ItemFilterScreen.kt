@@ -8,6 +8,8 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
+import dev.aaronhowser.mods.irregular_implements.util.FilterEntry.Companion.isNullOrEmpty
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -86,10 +88,7 @@ class ItemFilterScreen(
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
-        // Specifically *now* because this doesn't update when the filter changes. That's why the one in the getter doesn't reference this variable
-        val filterAtIndexNow = this.menu.filter?.getOrNull(index)
-
-        val width = if (filterAtIndexNow is FilterEntry.Tag) 16 else 8
+        val width = 8
         val height = 8
 
         val buttonId = ItemFilterMenu.getLeftButtonId(index)
@@ -123,7 +122,7 @@ class ItemFilterScreen(
             }
         )
 
-        button.visible = filterAtIndexNow != null && filterAtIndexNow !is FilterEntry.Empty
+        button.visible = !this.menu.filter?.getOrNull(index).isNullOrEmpty()
 
         this.leftButtons.add(button)
         this.addRenderableWidget(button)
@@ -154,6 +153,11 @@ class ItemFilterScreen(
                     } else {
                         Component.literal("Set to require same components")
                     }
+                } else if (filterAtIndex is FilterEntry.Tag) {
+                    val nextTag = filterAtIndex.getNextTag()
+                    val nextTagComponent = nextTag.getComponent()
+
+                    Component.literal("Set to ").append(nextTagComponent)
                 } else {
                     Component.empty()
                 }
@@ -168,7 +172,7 @@ class ItemFilterScreen(
                         0xFFFF5623.toInt()
                     }
                 } else {
-                    0xFF000000.toInt()
+                    0xFF444444.toInt()
                 }
 
             },
@@ -178,7 +182,7 @@ class ItemFilterScreen(
             }
         )
 
-        button.visible = this.menu.filter?.getOrNull(index) is FilterEntry.Item
+        button.visible = !this.menu.filter?.getOrNull(index).isNullOrEmpty()
 
         this.rightButtons.add(button)
         this.addRenderableWidget(button)
@@ -190,18 +194,13 @@ class ItemFilterScreen(
         for (buttonIndex in this.leftButtons.indices) {
             val button = this.leftButtons.elementAtOrNull(buttonIndex) ?: continue
 
-            val entry = this.menu.filter?.getOrNull(buttonIndex)
-
-            button.visible = entry != null && entry !is FilterEntry.Empty
-
-            button.width = if (entry is FilterEntry.Tag) 16 else 8
+            button.visible = !this.menu.filter?.getOrNull(buttonIndex).isNullOrEmpty()
         }
 
         for (buttonIndex in this.rightButtons.indices) {
             val button = this.rightButtons.elementAtOrNull(buttonIndex) ?: continue
-            val entry = this.menu.filter?.getOrNull(buttonIndex)
 
-            button.visible = entry is FilterEntry.Item
+            button.visible = !this.menu.filter?.getOrNull(buttonIndex).isNullOrEmpty()
         }
     }
 
