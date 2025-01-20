@@ -15,9 +15,9 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.player.Inventory
 
-//TODO: Make buttons function
 class ItemFilterScreen(
     menu: ItemFilterMenu,
     playerInventory: Inventory,
@@ -179,18 +179,34 @@ class ItemFilterScreen(
                 }
             },
             colorGetter = {
-                val filterAtIndex = this.menu.filter?.getOrNull(index)
+                when (
+                    val filterAtIndex = this.menu.filter?.getOrNull(index)
+                ) {
 
-                if (filterAtIndex is FilterEntry.Item) {
-                    if (filterAtIndex.requireSameComponents) {
-                        0xFF37C63C.toInt()
-                    } else {
-                        0xFFFF5623.toInt()
+                    is FilterEntry.Item -> {
+                        if (filterAtIndex.requireSameComponents) {
+                            0xFF37C63C.toInt()
+                        } else {
+                            0xFFFF5623.toInt()
+                        }
                     }
-                } else {
-                    0xFF444444.toInt()
-                }
 
+                    is FilterEntry.Tag -> {
+                        val itemTags = filterAtIndex.backupStack.tags.toList()
+                        val currentTagIndex = itemTags.indexOf(filterAtIndex.tagKey)
+
+                        val rgb = Mth.hsvToArgb(
+                            (currentTagIndex.toFloat() / itemTags.size.toFloat()),
+                            1.0f,
+                            1.0f,
+                            0xFF
+                        )
+
+                        rgb
+                    }
+
+                    else -> 0x00000000
+                }
             },
             font = this.font,
             onPress = {
