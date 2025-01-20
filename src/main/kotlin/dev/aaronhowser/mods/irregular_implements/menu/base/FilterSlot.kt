@@ -35,13 +35,15 @@ open class FilterSlot(
     // Treating this as basically a button that removes this slot's entry from the filter component
     override fun mayPickup(player: Player): Boolean {
         val stackFilter = stackFilter ?: return false
-        val copy = NonNullList.copyOf(stackFilter)
+
+        val newFilter = stackFilter.toMutableList()
+        newFilter[this.index] = FilterEntry.Empty
 
         filterStack.get().set(
             ModDataComponents.ITEM_FILTER_ENTRIES,
             ItemFilterDataComponent(
-                copy,
-                stackComponent?.isBlacklist ?: false
+                *newFilter.toTypedArray(),
+                isBlacklist = stackComponent?.isBlacklist ?: false
             )
         )
 

@@ -15,6 +15,7 @@ data class ItemFilterDataComponent(
 ) {
 
     constructor(vararg filterEntry: FilterEntry) : this(sanitizeEntries(filterEntry), false)
+    constructor(vararg filterEntry: FilterEntry, isBlacklist: Boolean) : this(sanitizeEntries(filterEntry), isBlacklist)
 
     fun test(testedStack: ItemStack): Boolean {
         val passes = this.entries.any { it.test(testedStack) }
