@@ -60,25 +60,7 @@ class ItemFilterMenu(
             val x = 8 + index * 18
             val y = 26
 
-            val slot = object : FilterSlot(::filterStack, this.holderLookup, index, x, y) {
-
-//                override fun mayPickup(player: Player): Boolean {
-//                    this.container.removeItem(this.index, 1)
-//                    return false
-//                }
-//
-//                override fun mayPlace(stack: ItemStack): Boolean {
-//                    if (!this.container.getItem(slotIndex).isEmpty) return false
-//
-//                    this.container.setItem(
-//                        index,
-//                        stack.copyWithCount(1)
-//                    )
-//
-//                    return false
-//                }
-
-            }
+            val slot = FilterSlot(::filterStack, this.holderLookup, index, x, y)
 
             this.addSlot(slot)
         }
