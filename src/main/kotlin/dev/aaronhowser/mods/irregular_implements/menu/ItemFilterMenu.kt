@@ -116,10 +116,13 @@ class ItemFilterMenu(
             is FilterEntry.Tag -> entry.getAsSpecificItemEntry()
 
             // If it's a SpecificItem, return an ItemTag
-            is FilterEntry.Item -> FilterEntry.Tag(
-                entry.stack.tags.toList().random(),     //TODO: Let you choose which tag
-                entry.stack.copy()
-            )
+            is FilterEntry.Item -> {
+                val tag = entry.stack.tags.toList().firstOrNull() ?: return
+                FilterEntry.Tag(
+                    tag,
+                    entry.stack.copy()
+                )
+            }
 
             else -> return
         }
