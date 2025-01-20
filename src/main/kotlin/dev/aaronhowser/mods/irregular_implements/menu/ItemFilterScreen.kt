@@ -56,11 +56,6 @@ class ItemFilterScreen(
         }
     }
 
-    override fun containerTick() {
-        super.containerTick()
-        setButtons()
-    }
-
     private fun addToggleBlacklistButton() {
 
         val x = this.leftPos + this.imageWidth - 24

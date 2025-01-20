@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.FilterSlot
 import dev.aaronhowser.mods.irregular_implements.menu.base.ItemFilterContainer
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -54,84 +55,28 @@ class ItemFilterMenu(
             )
         }
 
-    val filterContainer = ItemFilterContainer(filterStack, holderLookup)
-
-//    val filterContainer = object : SimpleContainer(9) {
-//        override fun getItems(): NonNullList<ItemStack> {
-//            val items = NonNullList.withSize(9, ItemStack.EMPTY)
-//            val filter = this@ItemFilterMenu.filter ?: return items
-//
-//            for (index in 0 until 9) {
-//                val entry = filter.getOrNull(index) ?: continue
-//                items[index] = entry.getDisplayStack(this@ItemFilterMenu.holderLookup)
-//            }
-//
-//            return items
-//        }
-//
-//        override fun getItem(index: Int): ItemStack {
-//            return getItems()[index]
-//        }
-//
-//        override fun removeItem(index: Int, count: Int): ItemStack {
-//            val filter = this@ItemFilterMenu.filter ?: return ItemStack.EMPTY
-//            if (filter.size <= index) return ItemStack.EMPTY
-//
-//            val newFilter = ItemFilterDataComponent.sanitizeEntries(filter.toTypedArray())
-//            newFilter[index] = FilterEntry.Empty
-//
-//            filterStack.set(
-//                ModDataComponents.ITEM_FILTER_ENTRIES,
-//                ItemFilterDataComponent(newFilter, this@ItemFilterMenu.filterComponent!!.isBlacklist)
-//            )
-//
-//            return ItemStack.EMPTY
-//        }
-//
-//        override fun setItem(index: Int, addedStack: ItemStack) {
-//            val component = this@ItemFilterMenu.filterComponent ?: return
-//            if (!component.canAddFilter(addedStack)) return
-//
-//            val filter = component.entries
-//
-//            val newFilterEntry = FilterEntry.Item(addedStack, requireSameComponents = false)
-//
-//            val newFilter = ItemFilterDataComponent.sanitizeEntries(filter.toTypedArray())
-//            newFilter[index] = newFilterEntry
-//
-//            filterStack.set(
-//                ModDataComponents.ITEM_FILTER_ENTRIES,
-//                ItemFilterDataComponent(newFilter, this@ItemFilterMenu.filterComponent!!.isBlacklist)
-//            )
-//        }
-//    }
-
     init {
         for (index in 0 until 9) {
             val x = 8 + index * 18
             val y = 26
 
-            val slot = object : Slot(this.filterContainer, index, x, y) {
+            val slot = object : FilterSlot(::filterStack, this.holderLookup, index, x, y) {
 
-                override fun isFake(): Boolean {
-                    return true
-                }
-
-                override fun mayPickup(player: Player): Boolean {
-                    this.container.removeItem(this.index, 1)
-                    return false
-                }
-
-                override fun mayPlace(stack: ItemStack): Boolean {
-                    if (!this.container.getItem(slotIndex).isEmpty) return false
-
-                    this.container.setItem(
-                        index,
-                        stack.copyWithCount(1)
-                    )
-
-                    return false
-                }
+//                override fun mayPickup(player: Player): Boolean {
+//                    this.container.removeItem(this.index, 1)
+//                    return false
+//                }
+//
+//                override fun mayPlace(stack: ItemStack): Boolean {
+//                    if (!this.container.getItem(slotIndex).isEmpty) return false
+//
+//                    this.container.setItem(
+//                        index,
+//                        stack.copyWithCount(1)
+//                    )
+//
+//                    return false
+//                }
 
             }
 
