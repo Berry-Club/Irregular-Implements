@@ -1,17 +1,15 @@
 package dev.aaronhowser.mods.irregular_implements.menu.base
 
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.Minecraft
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton.Builder
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.Mth
 import java.util.function.Supplier
 
-class MultiStageSpriteButton(
+class MultiStageColoredButton(
     x: Int = 0,
     y: Int = 0,
     width: Int,
@@ -35,25 +33,18 @@ class MultiStageSpriteButton(
         get() = stages[currentStageGetter.get()]
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        baseRenderWidget(guiGraphics)
 
-        val sprite = currentStage.sprite
+        val color = this.currentStage.color
 
-        if (sprite != null) {
-            val spriteWidth = currentStage.spriteWidth
-            val spriteHeight = currentStage.spriteHeight
+        val red = (color shr 16 and 255) / 255.0f
+        val green = (color shr 8 and 255) / 255.0f
+        val blue = (color and 255) / 255.0f
 
-            val spriteLeft = this.x + this.getWidth() / 2 - spriteWidth / 2
-            val spriteTop = this.y + this.getHeight() / 2 - spriteHeight / 2
-
-            guiGraphics.blitSprite(
-                sprite,
-                spriteLeft,
-                spriteTop,
-                spriteWidth,
-                spriteHeight
-            )
-        }
+        guiGraphics.setColor(red, green, blue, this.alpha)
+        RenderSystem.enableBlend()
+        RenderSystem.enableDepthTest()
+        guiGraphics.blitSprite(SPRITES[this.active, this.isHovered], this.x, this.y, this.getWidth(), this.getHeight())
+        guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
 
         if (isMouseOver(mouseX.toDouble(), mouseY.toDouble())) {
             renderToolTip(guiGraphics, mouseX, mouseY)
@@ -71,20 +62,15 @@ class MultiStageSpriteButton(
         )
     }
 
-    override fun getMessage(): Component {
-        return currentStage.message
+    override fun renderString(guiGraphics: GuiGraphics, font: Font, color: Int) {
+        // Do nothing
     }
 
-    private fun baseRenderWidget(guiGraphics: GuiGraphics) {
-        guiGraphics.setColor(1.0f, 1.0f, 1.0f, this.alpha)
-        RenderSystem.enableBlend()
-        RenderSystem.enableDepthTest()
-        guiGraphics.blitSprite(SPRITES[this.active, this.isHovered], this.x, this.y, this.getWidth(), this.getHeight())
-        guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
+    override fun getMessage(): Component {
+        return this.currentStage.message
     }
 
     class Builder(private val font: Font) {
-
         private var x: Int = 0
         private var y: Int = 0
         private var width: Int = 0
@@ -97,30 +83,12 @@ class MultiStageSpriteButton(
 
         fun addStage(
             message: Component,
-            menuSprite: ScreenTextures.Sprites.MenuSprite
-        ): Builder {
-            addStage(
-                message = message,
-                sprite = menuSprite.texture,
-                spriteWidth = menuSprite.width,
-                spriteHeight = menuSprite.height
-            )
-
-            return this
-        }
-
-        fun addStage(
-            message: Component,
-            sprite: ResourceLocation?,
-            spriteWidth: Int = 0,
-            spriteHeight: Int = 0
+            color: Int
         ): Builder {
             stages.add(
                 Stage(
                     message = message,
-                    sprite = sprite,
-                    spriteWidth = spriteWidth,
-                    spriteHeight = spriteHeight
+                    color = color
                 )
             )
             return this
@@ -144,23 +112,18 @@ class MultiStageSpriteButton(
             return this
         }
 
-        fun currentStageGetter(currentStageGetter: Supplier<Int>): Builder {
-            this.currentStageGetter = currentStageGetter
-            return this
-        }
-
-        fun onPress(onPress: OnPress): Builder {
-            this.onPress = onPress
-            return this
-        }
-
         fun onPress(onPress: () -> Unit): Builder {
             this.onPress = OnPress { onPress() }
             return this
         }
 
-        fun build(): MultiStageSpriteButton {
-            return MultiStageSpriteButton(
+        fun currentStageGetter(currentStageGetter: Supplier<Int>): Builder {
+            this.currentStageGetter = currentStageGetter
+            return this
+        }
+
+        fun build(): MultiStageColoredButton {
+            return MultiStageColoredButton(
                 x = x,
                 y = y,
                 width = width,
@@ -175,9 +138,7 @@ class MultiStageSpriteButton(
 
     class Stage(
         val message: Component,
-        val sprite: ResourceLocation?,
-        val spriteWidth: Int,
-        val spriteHeight: Int
+        val color: Int
     )
 
 }

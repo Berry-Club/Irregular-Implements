@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageColoredButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -9,7 +10,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -86,25 +86,41 @@ class ItemFilterScreen(
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
-        val filterAtIndex = this.menu.filter?.getOrNull(index)
+        // Specifically *now* because this doesn't update when the filter changes. That's why the one in the getter doesn't reference this variable
+        val filterAtIndexNow = this.menu.filter?.getOrNull(index)
 
-        val width = if (filterAtIndex is FilterEntry.Tag) 16 else 8
+        val width = if (filterAtIndexNow is FilterEntry.Tag) 16 else 8
         val height = 8
 
         val buttonId = ItemFilterMenu.getToggleTypeButtonId(index)
 
-        val onPress = OnPress {
-            ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
-        }
-
-        val button = Button.Builder(Component.empty(), onPress)
-            .bounds(
-                x, y,
-                width, height
+        val button = MultiStageColoredButton.Builder(this.font)
+            .location(x, y)
+            .size(width, height)
+            // Stage when the filter is an Item Filter
+            .addStage(
+                message = Component.literal("Set to Tag Filter"),
+                color = 0xFF673AB7.toInt()
+            )
+            // Stages when the filter is a Tag Filter
+            .addStage(
+                message = Component.literal("Set to Item Filter"),
+                color = 0xFF00796B.toInt()
+            )
+            .onPress(
+                onPress = {
+                    ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
+                }
+            )
+            .currentStageGetter(
+                currentStageGetter = {
+                    val filterAtIndex = this.menu.filter?.getOrNull(index)
+                    if (filterAtIndex is FilterEntry.Tag) 1 else 0
+                }
             )
             .build()
 
-        button.visible = filterAtIndex != null && filterAtIndex !is FilterEntry.Empty
+        button.visible = filterAtIndexNow != null && filterAtIndexNow !is FilterEntry.Empty
 
         this.toggleTypeButtons.add(button)
         this.addRenderableWidget(button)
@@ -118,14 +134,30 @@ class ItemFilterScreen(
         val height = 8
 
         val buttonId = ItemFilterMenu.getToggleNeedsComponentButtonId(index)
-        val onPress = OnPress {
-            ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
-        }
 
-        val button = Button.Builder(Component.empty(), onPress)
-            .bounds(
-                x, y,
-                width, height
+        val button = MultiStageColoredButton.Builder(this.font)
+            .location(x, y)
+            .size(width, height)
+            // Stage when the filter ignores components
+            .addStage(
+                message = Component.literal("Set to require same components"),
+                color = 0xFFFF7043.toInt()
+            )
+            // Stages when the filter requires same components
+            .addStage(
+                message = Component.literal("Set to ignore components"),
+                color = 0xFF388E3C.toInt()
+            )
+            .onPress(
+                onPress = {
+                    ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
+                }
+            )
+            .currentStageGetter(
+                currentStageGetter = {
+                    val filterAtIndex = this.menu.filter?.getOrNull(index)
+                    if (filterAtIndex is FilterEntry.Item && filterAtIndex.requireSameComponents) 1 else 0
+                }
             )
             .build()
 
