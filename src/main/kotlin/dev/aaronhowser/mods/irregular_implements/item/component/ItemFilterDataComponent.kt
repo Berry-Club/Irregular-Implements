@@ -8,7 +8,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 
 data class ItemFilterDataComponent(
     val entries: NonNullList<FilterEntry>,
@@ -36,7 +35,7 @@ data class ItemFilterDataComponent(
             //FIXME: Crashes when I fill it out with Emptys for some reason??? Codec die??
             val sanitizedEntries = NonNullList.withSize<FilterEntry>(
                 9,
-                FilterEntry.SpecificItem(Items.OAK_PLANKS.defaultInstance, true)
+                FilterEntry.Empty()
             )
 
             for (index in 0 until 9) {
