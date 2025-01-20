@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -26,7 +26,7 @@ class ChatDetectorScreen(
     private val bottomPos: Int
         get() = this.topPos + this.imageHeight
 
-    private lateinit var toggleMessagePassButton: MultiStateSpriteButton
+    private lateinit var toggleMessagePassButton: MultiStageSpriteButton
     private lateinit var regexStringEditBox: EditBox
 
     private val background = ScreenTextures.Backgrounds.ChatDetector
@@ -41,12 +41,12 @@ class ChatDetectorScreen(
         this.titleLabelX = 10
         this.titleLabelY = 10
 
-        this.toggleMessagePassButton = MultiStateSpriteButton.Builder(this.font)
-            .addState(
+        this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
+            .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
                 menuSprite = ScreenTextures.Sprites.ChatDetector.MessageStop
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
                 menuSprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
             )
@@ -54,8 +54,8 @@ class ChatDetectorScreen(
                 width = 20,
                 height = 20
             )
-            .currentStateGetter(
-                currentStateGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
+            .currentStageGetter(
+                currentStageGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
             )
             .onPress(
                 onPress = {

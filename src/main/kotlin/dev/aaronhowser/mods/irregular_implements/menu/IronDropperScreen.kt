@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -22,10 +22,10 @@ class IronDropperScreen(
     private val bottomPos: Int
         get() = this.topPos + this.imageHeight
 
-    private lateinit var shootModeButton: MultiStateSpriteButton
-    private lateinit var toggleEffectButton: MultiStateSpriteButton
-    private lateinit var delayButton: MultiStateSpriteButton
-    private lateinit var redstoneModeButton: MultiStateSpriteButton
+    private lateinit var shootModeButton: MultiStageSpriteButton
+    private lateinit var toggleEffectButton: MultiStageSpriteButton
+    private lateinit var delayButton: MultiStageSpriteButton
+    private lateinit var redstoneModeButton: MultiStageSpriteButton
 
     private val background = ScreenTextures.Backgrounds.IronDropper
 
@@ -47,24 +47,24 @@ class IronDropperScreen(
         val topButtonY = this.topPos + spaceBetween + buttonSize / 2 + spaceBetween
         val bottomButtonY = topButtonY + buttonSize + spaceBetween
 
-        this.redstoneModeButton = MultiStateSpriteButton.Builder(this.font)
-            .addState(
+        this.redstoneModeButton = MultiStageSpriteButton.Builder(this.font)
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.RedstonePulse
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuousPowered
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuous
             )
             .size(
                 size = buttonSize
             )
-            .currentStateGetter(
-                currentStateGetter = { this.menu.redstoneMode.ordinal }
+            .currentStageGetter(
+                currentStageGetter = { this.menu.redstoneMode.ordinal }
             )
             .onPress(
                 onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
@@ -75,24 +75,24 @@ class IronDropperScreen(
             )
             .build()
 
-        this.delayButton = MultiStateSpriteButton.Builder(this.font)
-            .addState(
+        this.delayButton = MultiStageSpriteButton.Builder(this.font)
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.PickupZero
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.PickupFive
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.PickupTwenty
             )
             .size(
                 size = buttonSize
             )
-            .currentStateGetter(
-                currentStateGetter = { this.menu.pickupDelay.ordinal }
+            .currentStageGetter(
+                currentStageGetter = { this.menu.pickupDelay.ordinal }
             )
             .onPress(
                 onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.DELAY_BUTTON_ID)) }
@@ -103,20 +103,20 @@ class IronDropperScreen(
             )
             .build()
 
-        this.shootModeButton = MultiStateSpriteButton.Builder(this.font)
-            .addState(
+        this.shootModeButton = MultiStageSpriteButton.Builder(this.font)
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.DirectionRandom
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.DirectionForward
             )
             .size(
                 size = buttonSize
             )
-            .currentStateGetter(
-                currentStateGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
+            .currentStageGetter(
+                currentStageGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
             )
             .onPress(
                 onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
@@ -127,28 +127,28 @@ class IronDropperScreen(
             )
             .build()
 
-        this.toggleEffectButton = MultiStateSpriteButton.Builder(this.font)
-            .addState(
+        this.toggleEffectButton = MultiStageSpriteButton.Builder(this.font)
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_EFFECTS.toComponent(),
                 sprite = null
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.EffectParticle
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.EffectSound
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
                 menuSprite = ScreenTextures.Sprites.IronDropper.EffectBoth
             )
             .size(
                 size = buttonSize
             )
-            .currentStateGetter(
-                currentStateGetter = { this.menu.shouldHaveEffects.ordinal }
+            .currentStageGetter(
+                currentStageGetter = { this.menu.shouldHaveEffects.ordinal }
             )
             .onPress(
                 onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.EFFECTS_BUTTON_ID)) }

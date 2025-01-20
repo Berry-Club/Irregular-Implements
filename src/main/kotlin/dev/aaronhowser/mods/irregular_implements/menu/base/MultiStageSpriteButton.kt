@@ -11,13 +11,13 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import java.util.function.Supplier
 
-class MultiStateSpriteButton(
+class MultiStageSpriteButton(
     x: Int = 0,
     y: Int = 0,
     width: Int,
     height: Int,
     private val stages: List<Stage>,
-    private val currentStateGetter: Supplier<Int>,
+    private val currentStageGetter: Supplier<Int>,
     private val font: Font,
     onPress: OnPress,
     narration: CreateNarration? = null
@@ -32,7 +32,7 @@ class MultiStateSpriteButton(
 ) {
 
     private val currentStage
-        get() = stages[currentStateGetter.get()]
+        get() = stages[currentStageGetter.get()]
 
     override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
@@ -97,16 +97,16 @@ class MultiStateSpriteButton(
         private var width: Int = 0
         private var height: Int = 0
 
-        private var currentStateGetter: Supplier<Int> = Supplier { 0 }
+        private var currentStageGetter: Supplier<Int> = Supplier { 0 }
         private var onPress: OnPress = OnPress { }
 
-        private val states: MutableList<Stage> = mutableListOf()
+        private val stages: MutableList<Stage> = mutableListOf()
 
-        fun addState(
+        fun addStage(
             message: Component,
             menuSprite: ScreenTextures.Sprites.MenuSprite
         ): Builder {
-            addState(
+            addStage(
                 message = message,
                 sprite = menuSprite.texture,
                 spriteWidth = menuSprite.width,
@@ -116,13 +116,13 @@ class MultiStateSpriteButton(
             return this
         }
 
-        fun addState(
+        fun addStage(
             message: Component,
             sprite: ResourceLocation?,
             spriteWidth: Int = 0,
             spriteHeight: Int = 0
         ): Builder {
-            states.add(
+            stages.add(
                 Stage(
                     message = message,
                     sprite = sprite,
@@ -151,8 +151,8 @@ class MultiStateSpriteButton(
             return this
         }
 
-        fun currentStateGetter(currentStateGetter: Supplier<Int>): Builder {
-            this.currentStateGetter = currentStateGetter
+        fun currentStageGetter(currentStageGetter: Supplier<Int>): Builder {
+            this.currentStageGetter = currentStageGetter
             return this
         }
 
@@ -166,14 +166,14 @@ class MultiStateSpriteButton(
             return this
         }
 
-        fun build(): MultiStateSpriteButton {
-            return MultiStateSpriteButton(
+        fun build(): MultiStageSpriteButton {
+            return MultiStageSpriteButton(
                 x = x,
                 y = y,
                 width = width,
                 height = height,
-                stages = states,
-                currentStateGetter = currentStateGetter,
+                stages = stages,
+                currentStageGetter = currentStageGetter,
                 font = font,
                 onPress = onPress
             )

@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -40,19 +40,15 @@ class ItemFilterScreen(
         setButtons()
     }
 
-    fun setButtons() {
+    private fun setButtons() {
         this.toggleTypeButtons.clear()
         this.toggleNeedsComponentButtons.clear()
-
-        val filter = this.menu.filter ?: return
 
         addToggleBlacklistButton()
 
         for (index in 0 until 9) {
-            val entry = filter.getOrNull(index) ?: continue
-
-            addToggleTypeButton(index, entry)
-            addToggleNeedsComponentButton(index, entry)
+            addToggleTypeButton(index)
+            addToggleNeedsComponentButton(index)
         }
     }
 
@@ -65,19 +61,19 @@ class ItemFilterScreen(
             ModPacketHandler.messageServer(ClientClickedMenuButton(ItemFilterMenu.TOGGLE_BLACKLIST_BUTTON_ID))
         }
 
-        this.invertBlacklistButton = MultiStateSpriteButton.Builder(this.font)
+        this.invertBlacklistButton = MultiStageSpriteButton.Builder(this.font)
             .location(x, y)
             .size(16)
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.WHITELIST.toComponent(),
                 menuSprite = ScreenTextures.Sprites.ItemFilter.Whitelist
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.BLACKLIST.toComponent(),
                 menuSprite = ScreenTextures.Sprites.ItemFilter.Blacklist
             )
-            .currentStateGetter(
-                currentStateGetter = { if (this.menu.isBlacklist) 1 else 0 }
+            .currentStageGetter(
+                currentStageGetter = { if (this.menu.isBlacklist) 1 else 0 }
             )
             .onPress(onPress)
             .build()
@@ -85,13 +81,14 @@ class ItemFilterScreen(
         this.addRenderableWidget(this.invertBlacklistButton)
     }
 
-    private fun addToggleTypeButton(index: Int, entry: FilterEntry) {
-        if (entry is FilterEntry.Empty) return
+    private fun addToggleTypeButton(index: Int) {
 
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
-        val width = if (entry is FilterEntry.Tag) 16 else 8
+        val filterAtIndex = this.menu.filter?.getOrNull(index)
+
+        val width = if (filterAtIndex is FilterEntry.Tag) 16 else 8
         val height = 8
 
         val buttonId = ItemFilterMenu.getToggleTypeButtonId(index)
@@ -107,13 +104,13 @@ class ItemFilterScreen(
             )
             .build()
 
+        button.visible = filterAtIndex != null && filterAtIndex !is FilterEntry.Empty
+
         this.toggleTypeButtons.add(button)
         this.addRenderableWidget(button)
     }
 
-    private fun addToggleNeedsComponentButton(index: Int, entry: FilterEntry) {
-        if (entry !is FilterEntry.Item) return
-
+    private fun addToggleNeedsComponentButton(index: Int) {
         val x = this.leftPos + 8 + index * 18 + 9
         val y = this.topPos + 15
 
@@ -132,8 +129,31 @@ class ItemFilterScreen(
             )
             .build()
 
+        button.visible = this.menu.filter?.getOrNull(index) is FilterEntry.Item
+
         this.toggleNeedsComponentButtons.add(button)
         this.addRenderableWidget(button)
+    }
+
+    override fun containerTick() {
+        super.containerTick()
+
+        for (buttonIndex in this.toggleTypeButtons.indices) {
+            val button = this.toggleTypeButtons.elementAtOrNull(buttonIndex) ?: continue
+
+            val entry = this.menu.filter?.getOrNull(buttonIndex)
+
+            button.visible = entry != null && entry !is FilterEntry.Empty
+
+            button.width = if (entry is FilterEntry.Tag) 16 else 8
+        }
+
+        for (buttonIndex in this.toggleNeedsComponentButtons.indices) {
+            val button = this.toggleNeedsComponentButtons.elementAtOrNull(buttonIndex) ?: continue
+            val entry = this.menu.filter?.getOrNull(buttonIndex)
+
+            button.visible = entry is FilterEntry.Item
+        }
     }
 
     // Render stuff

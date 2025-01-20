@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
-import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -18,7 +18,7 @@ class BlockDestabilizerScreen(
     title: Component
 ) : AbstractContainerScreen<BlockDestabilizerMenu>(menu, playerInventory, title) {
 
-    private lateinit var toggleLazyButton: MultiStateSpriteButton
+    private lateinit var toggleLazyButton: MultiStageSpriteButton
     private lateinit var showLazyShapeButton: ImprovedSpriteButton
     private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
@@ -32,12 +32,12 @@ class BlockDestabilizerScreen(
         this.leftPos = (this.width - this.imageWidth) / 2
         this.topPos = (this.height - this.imageHeight) / 2
 
-        this.toggleLazyButton = MultiStateSpriteButton.Builder(this.font)
-            .addState(
+        this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
+            .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
             )
-            .addState(
+            .addStage(
                 message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
                 menuSprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
             )
@@ -45,8 +45,8 @@ class BlockDestabilizerScreen(
                 width = 20,
                 height = 20
             )
-            .currentStateGetter(
-                currentStateGetter = { if (this.menu.isLazy) 0 else 1 }
+            .currentStageGetter(
+                currentStageGetter = { if (this.menu.isLazy) 0 else 1 }
             )
             .onPress(
                 onPress = {
