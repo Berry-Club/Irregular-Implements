@@ -48,12 +48,21 @@ data class ItemFilterDataComponent(
                 instance.group(
                     NonNullList.codecOf(FilterEntry.CODEC)
                         .fieldOf("entries")
-                        .forGetter(ItemFilterDataComponent::entries),
+                        .forGetter(::trimNonNullList),
                     Codec.BOOL
                         .optionalFieldOf("is_blacklist", false)
                         .forGetter(ItemFilterDataComponent::isBlacklist)
                 ).apply(instance, ::ItemFilterDataComponent)
             }
+
+        private fun trimNonNullList(itemFilterDataComponent: ItemFilterDataComponent): NonNullList<FilterEntry> {
+            val array = itemFilterDataComponent.entries.toTypedArray()
+            val lastNonEmpty = array.indexOfLast { it !is FilterEntry.Empty }
+
+            val trimmedArray = array.take(lastNonEmpty + 1).toTypedArray()
+
+            return NonNullList.of(FilterEntry.Empty, *trimmedArray)
+        }
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterDataComponent> =
             StreamCodec.composite(
