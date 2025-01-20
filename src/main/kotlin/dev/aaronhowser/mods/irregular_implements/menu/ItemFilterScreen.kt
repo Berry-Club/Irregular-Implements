@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStateSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -41,7 +40,7 @@ class ItemFilterScreen(
         setButtons()
     }
 
-    private fun setButtons() {
+    fun setButtons() {
         this.toggleTypeButtons.clear()
         this.toggleNeedsComponentButtons.clear()
 
@@ -55,6 +54,11 @@ class ItemFilterScreen(
             addToggleTypeButton(index, entry)
             addToggleNeedsComponentButton(index, entry)
         }
+    }
+
+    override fun containerTick() {
+        super.containerTick()
+        setButtons()
     }
 
     private fun addToggleBlacklistButton() {
