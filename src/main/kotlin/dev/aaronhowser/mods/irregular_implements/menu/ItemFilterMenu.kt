@@ -99,13 +99,14 @@ class ItemFilterMenu(
         when (buttonId) {
             TOGGLE_BLACKLIST_BUTTON_ID -> this.isBlacklist = !this.isBlacklist
 
-            in 1..9 -> toggleType(buttonId - 1)
+            in 1..9 -> pressLeftButton(buttonId - 1)
 
-            in 10..18 -> toggleNeedsComponent(buttonId - 10)
+            in 10..18 -> pressRightButton(buttonId - 10)
         }
     }
 
-    private fun toggleType(slotIndex: Int) {
+    // Toggles between Item Filter and Tag Filter
+    private fun pressLeftButton(slotIndex: Int) {
         val filter = this.filter ?: return
         val entry = filter.getOrNull(slotIndex) ?: return
 
@@ -132,7 +133,9 @@ class ItemFilterMenu(
         )
     }
 
-    private fun toggleNeedsComponent(slotIndex: Int) {
+    // If it's an Item Filter, toggles between requiring the same components or not
+    // If it's a Tag Filter, cycles which Tag it's filtering
+    private fun pressRightButton(slotIndex: Int) {
         val filter = this.filter ?: return
         val entry = filter.getOrNull(slotIndex) ?: return
 
@@ -150,11 +153,14 @@ class ItemFilterMenu(
     }
 
     companion object {
-        fun getToggleTypeButtonId(slotIndex: Int): Int {
+        // Toggles between Item Filter and Tag Filter
+        fun getLeftButtonId(slotIndex: Int): Int {
             return slotIndex + 1
         }
 
-        fun getToggleNeedsComponentButtonId(slotIndex: Int): Int {
+        // If it's an Item Filter, toggles between requiring the same components or not
+        // If it's a Tag Filter, cycles which Tag it's filtering
+        fun getRightButtonId(slotIndex: Int): Int {
             return slotIndex + 10
         }
 

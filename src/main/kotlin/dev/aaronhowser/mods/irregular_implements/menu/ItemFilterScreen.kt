@@ -23,8 +23,8 @@ class ItemFilterScreen(
 
     private val background = ScreenTextures.Backgrounds.ItemFilter
 
-    private val toggleTypeButtons: MutableSet<Button> = mutableSetOf()
-    private val toggleNeedsComponentButtons: MutableSet<Button> = mutableSetOf()
+    private val leftButtons: MutableSet<Button> = mutableSetOf()
+    private val rightButtons: MutableSet<Button> = mutableSetOf()
 
     private lateinit var invertBlacklistButton: Button
 
@@ -41,14 +41,14 @@ class ItemFilterScreen(
     }
 
     private fun setButtons() {
-        this.toggleTypeButtons.clear()
-        this.toggleNeedsComponentButtons.clear()
+        this.leftButtons.clear()
+        this.rightButtons.clear()
 
         addToggleBlacklistButton()
 
         for (index in 0 until 9) {
-            addToggleTypeButton(index)
-            addToggleNeedsComponentButton(index)
+            addLeftButton(index)
+            addRightButtons(index)
         }
     }
 
@@ -81,8 +81,8 @@ class ItemFilterScreen(
         this.addRenderableWidget(this.invertBlacklistButton)
     }
 
-    private fun addToggleTypeButton(index: Int) {
-
+    // Toggles between Item Filter and Tag Filter
+    private fun addLeftButton(index: Int) {
         val x = this.leftPos + 8 + index * 18
         val y = this.topPos + 15
 
@@ -92,7 +92,7 @@ class ItemFilterScreen(
         val width = if (filterAtIndexNow is FilterEntry.Tag) 16 else 8
         val height = 8
 
-        val buttonId = ItemFilterMenu.getToggleTypeButtonId(index)
+        val buttonId = ItemFilterMenu.getLeftButtonId(index)
 
         val button = ChangingColorButton(
             x = x,
@@ -125,18 +125,20 @@ class ItemFilterScreen(
 
         button.visible = filterAtIndexNow != null && filterAtIndexNow !is FilterEntry.Empty
 
-        this.toggleTypeButtons.add(button)
+        this.leftButtons.add(button)
         this.addRenderableWidget(button)
     }
 
-    private fun addToggleNeedsComponentButton(index: Int) {
+    // If it's an Item Filter, toggles between requiring the same components or not
+    // If it's a Tag Filter, cycles which Tag it's filtering
+    private fun addRightButtons(index: Int) {
         val x = this.leftPos + 8 + index * 18 + 9
         val y = this.topPos + 15
 
         val width = 8
         val height = 8
 
-        val buttonId = ItemFilterMenu.getToggleNeedsComponentButtonId(index)
+        val buttonId = ItemFilterMenu.getRightButtonId(index)
 
         val button = ChangingColorButton(
             x = x,
@@ -178,15 +180,15 @@ class ItemFilterScreen(
 
         button.visible = this.menu.filter?.getOrNull(index) is FilterEntry.Item
 
-        this.toggleNeedsComponentButtons.add(button)
+        this.rightButtons.add(button)
         this.addRenderableWidget(button)
     }
 
     override fun containerTick() {
         super.containerTick()
 
-        for (buttonIndex in this.toggleTypeButtons.indices) {
-            val button = this.toggleTypeButtons.elementAtOrNull(buttonIndex) ?: continue
+        for (buttonIndex in this.leftButtons.indices) {
+            val button = this.leftButtons.elementAtOrNull(buttonIndex) ?: continue
 
             val entry = this.menu.filter?.getOrNull(buttonIndex)
 
@@ -195,8 +197,8 @@ class ItemFilterScreen(
             button.width = if (entry is FilterEntry.Tag) 16 else 8
         }
 
-        for (buttonIndex in this.toggleNeedsComponentButtons.indices) {
-            val button = this.toggleNeedsComponentButtons.elementAtOrNull(buttonIndex) ?: continue
+        for (buttonIndex in this.rightButtons.indices) {
+            val button = this.rightButtons.elementAtOrNull(buttonIndex) ?: continue
             val entry = this.menu.filter?.getOrNull(buttonIndex)
 
             button.visible = entry is FilterEntry.Item
