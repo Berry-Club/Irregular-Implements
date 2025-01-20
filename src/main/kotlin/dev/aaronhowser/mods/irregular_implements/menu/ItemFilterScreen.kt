@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.MutableComponent
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.player.Inventory
 
@@ -99,27 +100,8 @@ class ItemFilterScreen(
             y = y,
             width = width,
             height = height,
-            messagesGetter = {
-                val filterAtIndex = this.menu.filter?.getOrNull(index)
-
-                listOf(
-                    ModLanguageProvider.Tooltips.ITEM_FILTER_ITEM.toComponent().withStyle(
-                        if (filterAtIndex is FilterEntry.Item) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
-                    ),
-                    ModLanguageProvider.Tooltips.ITEM_FILTER_TAG.toComponent().withStyle(
-                        if (filterAtIndex is FilterEntry.Item) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
-                    )
-                )
-            },
-            colorGetter = {
-                val filterAtIndex = this.menu.filter?.getOrNull(index)
-
-                if (filterAtIndex is FilterEntry.Item) {
-                    0xFF5969FF.toInt()
-                } else {
-                    0xFF00B7A2.toInt()
-                }
-            },
+            messagesGetter = { leftMessageGetter(index) },
+            colorGetter = { leftColorGetter(index) },
             font = this.font,
             onPress = {
                 ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
@@ -130,6 +112,29 @@ class ItemFilterScreen(
 
         this.leftButtons.add(button)
         this.addRenderableWidget(button)
+    }
+
+    private fun leftMessageGetter(index: Int): List<MutableComponent> {
+        val filterAtIndex = this.menu.filter?.getOrNull(index)
+
+        return listOf(
+            ModLanguageProvider.Tooltips.ITEM_FILTER_ITEM.toComponent().withStyle(
+                if (filterAtIndex is FilterEntry.Item) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+            ),
+            ModLanguageProvider.Tooltips.ITEM_FILTER_TAG.toComponent().withStyle(
+                if (filterAtIndex is FilterEntry.Item) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
+            )
+        )
+    }
+
+    private fun leftColorGetter(index: Int): Int {
+        val filterAtIndex = this.menu.filter?.getOrNull(index)
+
+        return if (filterAtIndex is FilterEntry.Item) {
+            0xFF5969FF.toInt()
+        } else {
+            0xFF00B7A2.toInt()
+        }
     }
 
     // If it's an Item Filter, toggles between requiring the same components or not
@@ -148,66 +153,8 @@ class ItemFilterScreen(
             y = y,
             width = width,
             height = height,
-            messagesGetter = {
-                when (
-                    val filterAtIndex = this.menu.filter?.getOrNull(index)
-                ) {
-                    is FilterEntry.Item -> {
-                        listOf(
-                            ModLanguageProvider.Tooltips.ITEM_FILTER_IGNORE_COMPONENTS.toComponent().withStyle(
-                                if (filterAtIndex.requireSameComponents) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
-                            ),
-                            ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
-                                if (filterAtIndex.requireSameComponents) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
-                            )
-                        )
-                    }
-
-                    is FilterEntry.Tag -> {
-                        val itemTags = filterAtIndex.backupStack.tags.toList()
-
-                        itemTags.map {
-                            it.getComponent().withStyle(
-                                if (it == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
-                            )
-                        }
-                    }
-
-                    else -> {
-                        listOf(Component.empty())
-                    }
-                }
-            },
-            colorGetter = {
-                when (
-                    val filterAtIndex = this.menu.filter?.getOrNull(index)
-                ) {
-
-                    is FilterEntry.Item -> {
-                        if (filterAtIndex.requireSameComponents) {
-                            0xFF37C63C.toInt()
-                        } else {
-                            0xFFFF5623.toInt()
-                        }
-                    }
-
-                    is FilterEntry.Tag -> {
-                        val itemTags = filterAtIndex.backupStack.tags.toList()
-                        val currentTagIndex = itemTags.indexOf(filterAtIndex.tagKey)
-
-                        val rgb = Mth.hsvToArgb(
-                            (currentTagIndex.toFloat() / itemTags.size.toFloat()),
-                            1.0f,
-                            1.0f,
-                            0xFF
-                        )
-
-                        rgb
-                    }
-
-                    else -> 0x00000000
-                }
-            },
+            messagesGetter = { rightMessageGetter(index) },
+            colorGetter = { rightColorGetter(index) },
             font = this.font,
             onPress = {
                 ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
@@ -218,6 +165,67 @@ class ItemFilterScreen(
 
         this.rightButtons.add(button)
         this.addRenderableWidget(button)
+    }
+
+    private fun rightMessageGetter(index: Int): List<MutableComponent> {
+        return when (
+            val filterAtIndex = this.menu.filter?.getOrNull(index)
+        ) {
+            is FilterEntry.Item -> {
+                listOf(
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_IGNORE_COMPONENTS.toComponent().withStyle(
+                        if (filterAtIndex.requireSameComponents) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
+                    ),
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
+                        if (filterAtIndex.requireSameComponents) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+                    )
+                )
+            }
+
+            is FilterEntry.Tag -> {
+                val itemTags = filterAtIndex.backupStack.tags.toList()
+
+                itemTags.map {
+                    it.getComponent().withStyle(
+                        if (it == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+                    )
+                }
+            }
+
+            else -> {
+                listOf(Component.empty())
+            }
+        }
+    }
+
+    private fun rightColorGetter(index: Int): Int {
+        return when (
+            val filterAtIndex = this.menu.filter?.getOrNull(index)
+        ) {
+            is FilterEntry.Item -> {
+                if (filterAtIndex.requireSameComponents) {
+                    0xFF37C63C.toInt()
+                } else {
+                    0xFFFF5623.toInt()
+                }
+            }
+
+            is FilterEntry.Tag -> {
+                val itemTags = filterAtIndex.backupStack.tags.toList()
+                val currentTagIndex = itemTags.indexOf(filterAtIndex.tagKey)
+
+                val rgb = Mth.hsvToArgb(
+                    (currentTagIndex.toFloat() / itemTags.size.toFloat()),
+                    1.0f,
+                    1.0f,
+                    0xFF
+                )
+
+                rgb
+            }
+
+            else -> 0x00000000
+        }
     }
 
     override fun containerTick() {
