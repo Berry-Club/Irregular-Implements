@@ -102,9 +102,9 @@ class ItemFilterScreen(
                 val filterAtIndex = this.menu.filter?.getOrNull(index)
 
                 if (filterAtIndex is FilterEntry.Item) {
-                    Component.literal("Set to Tag Filter")
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_TAG.toComponent()
                 } else {
-                    Component.literal("Set to Item Filter")
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_SET_TO_ITEM.toComponent()
                 }
             },
             colorGetter = {
@@ -149,15 +149,15 @@ class ItemFilterScreen(
 
                 if (filterAtIndex is FilterEntry.Item) {
                     if (filterAtIndex.requireSameComponents) {
-                        Component.literal("Set to ignore components")
+                        ModLanguageProvider.Tooltips.ITEM_FILTER_SET_IGNORE_COMPONENTS.toComponent()
                     } else {
-                        Component.literal("Set to require same components")
+                        ModLanguageProvider.Tooltips.ITEM_FILTER_SET_REQUIRE_COMPONENTS.toComponent()
                     }
                 } else if (filterAtIndex is FilterEntry.Tag) {
                     val nextTag = filterAtIndex.getNextTag()
                     val nextTagComponent = nextTag.getComponent()
 
-                    Component.literal("Set to ").append(nextTagComponent)
+                    ModLanguageProvider.Tooltips.ITEM_FILTER_CYCLE_TAG.toComponent(nextTagComponent)
                 } else {
                     Component.empty()
                 }
