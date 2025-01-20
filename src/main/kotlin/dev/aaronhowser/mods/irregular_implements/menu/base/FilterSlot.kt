@@ -42,8 +42,8 @@ open class FilterSlot(
         filterStack.get().set(
             ModDataComponents.ITEM_FILTER_ENTRIES,
             ItemFilterDataComponent(
-                *newFilter.toTypedArray(),
-                isBlacklist = stackComponent?.isBlacklist ?: false
+                newFilter,
+                stackComponent?.isBlacklist ?: false
             )
         )
 

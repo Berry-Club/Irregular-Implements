@@ -40,7 +40,13 @@ class ItemFilterItem : Item(
             unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
             val diamondFilter = FilterEntry.Item(unbreakableDiamond, requireSameComponents = true)
 
-            val component = ItemFilterDataComponent(planksFilter, stickFilter, diamondFilter)
+            val component = ItemFilterDataComponent(
+                listOf(
+                    planksFilter,
+                    stickFilter,
+                    diamondFilter
+                )
+            )
 
             stack.set(ModDataComponents.ITEM_FILTER_ENTRIES, component)
         }

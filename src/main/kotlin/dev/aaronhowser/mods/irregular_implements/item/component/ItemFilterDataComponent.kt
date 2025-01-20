@@ -14,8 +14,8 @@ data class ItemFilterDataComponent(
     val isBlacklist: Boolean
 ) {
 
-    constructor(vararg filterEntry: FilterEntry) : this(sanitizeEntries(filterEntry), false)
-    constructor(vararg filterEntry: FilterEntry, isBlacklist: Boolean) : this(sanitizeEntries(filterEntry), isBlacklist)
+    constructor() : this(listOf(), false)
+    constructor(filterEntries: List<FilterEntry>, isBlacklist: Boolean = false) : this(sanitizeEntries(filterEntries), isBlacklist)
 
     fun test(testedStack: ItemStack): Boolean {
         val passes = this.entries.any { it.test(testedStack) }
@@ -33,7 +33,7 @@ data class ItemFilterDataComponent(
 
     companion object {
 
-        fun sanitizeEntries(entries: Array<out FilterEntry>): NonNullList<FilterEntry> {
+        fun sanitizeEntries(entries: List<FilterEntry>): NonNullList<FilterEntry> {
             val sanitizedEntries = NonNullList.withSize<FilterEntry>(9, FilterEntry.Empty)
 
             for (index in 0 until 9) {
