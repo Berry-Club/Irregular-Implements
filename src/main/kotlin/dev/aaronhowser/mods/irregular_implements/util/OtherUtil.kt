@@ -7,11 +7,9 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
-import net.minecraft.core.NonNullList
 import net.minecraft.core.Registry
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -63,13 +61,6 @@ object OtherUtil {
         return ResourceLocation.STREAM_CODEC.map(
             { TagKey.create(registry, it) },
             { it.location() }
-        )
-    }
-
-    fun <B : ByteBuf, V> nonNullListStreamCodec(streamCodec: StreamCodec<B, V>): StreamCodec<B, NonNullList<V>> {
-        return streamCodec.apply(ByteBufCodecs.list<B, V>()).map(
-            { NonNullList.copyOf(it) },
-            NonNullList<V>::toList
         )
     }
 
