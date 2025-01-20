@@ -40,14 +40,14 @@ sealed interface FilterEntry {
 
     companion object {
         val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(
-            FilterEntry::type,
+            FilterEntry::getType,
             Type::codec
         )
     }
 
     fun getDisplayStack(): ItemStack
     fun test(stack: ItemStack): Boolean
-    val type: Type
+    fun getType(): Type
 
     data object Empty : FilterEntry {
         override fun getDisplayStack(): ItemStack {
@@ -58,7 +58,9 @@ sealed interface FilterEntry {
             return false
         }
 
-        override val type: Type = Type.EMPTY
+        override fun getType(): Type {
+            return Type.EMPTY
+        }
 
         val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
     }
@@ -74,7 +76,9 @@ sealed interface FilterEntry {
         private var timeLastUpdated = 0L
         private var displayStack: ItemStack? = null
 
-        override val type: Type = Type.ITEM_TAG
+        override fun getType(): Type {
+            return Type.ITEM_TAG
+        }
 
         override fun getDisplayStack(): ItemStack {
 
@@ -154,7 +158,9 @@ sealed interface FilterEntry {
         val requireSameComponents: Boolean
     ) : FilterEntry {
 
-        override val type: Type = Type.SPECIFIC_ITEM
+        override fun getType(): Type {
+            return Type.SPECIFIC_ITEM
+        }
 
         private val displayStack: ItemStack = this.stack.copy()
 
