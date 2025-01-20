@@ -34,20 +34,51 @@ open class FilterSlot(
 
     // Treating this as basically a button that removes this slot's entry from the filter component
     override fun mayPickup(player: Player): Boolean {
-        val stackFilter = stackFilter ?: return false
+        val stackFilter = this.stackFilter ?: return false
 
         val newFilter = stackFilter.toMutableList()
         newFilter[this.index] = FilterEntry.Empty
 
-        filterStack.get().set(
+        this.filterStack.get().set(
             ModDataComponents.ITEM_FILTER_ENTRIES,
             ItemFilterDataComponent(
                 newFilter,
-                stackComponent?.isBlacklist ?: false
+                this.stackComponent?.isBlacklist ?: false
             )
         )
 
+        setChanged()
+
         return false
+    }
+
+    override fun safeInsert(stack: ItemStack): ItemStack {
+        if (stack.isEmpty) return stack
+        if (this.entryInThisSlot !is FilterEntry.Empty && this.entryInThisSlot != null) return stack
+
+        val oldFilter = stackFilter ?: return stack
+        val newFilter = ItemFilterDataComponent.sanitizeEntries(oldFilter).toMutableList()
+
+        newFilter[this.index] = FilterEntry.Item(
+            stack.copyWithCount(1),
+            requireSameComponents = false
+        )
+
+        this.filterStack.get().set(
+            ModDataComponents.ITEM_FILTER_ENTRIES,
+            ItemFilterDataComponent(
+                newFilter,
+                this.stackComponent?.isBlacklist ?: false
+            )
+        )
+
+        setChanged()
+
+        return stack
+    }
+
+    override fun setChanged() {
+        //TODO: Update the buttons in the screen
     }
 
     override fun remove(amount: Int): ItemStack {
@@ -60,6 +91,11 @@ open class FilterSlot(
 
     override fun isHighlightable(): Boolean {
         return true
+    }
+
+    // Not true, but if it's fake then mayPlace never runs
+    override fun isFake(): Boolean {
+        return false
     }
 
 }
