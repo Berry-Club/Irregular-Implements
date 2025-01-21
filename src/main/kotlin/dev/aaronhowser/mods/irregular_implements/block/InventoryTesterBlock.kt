@@ -84,4 +84,18 @@ class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), En
         return InventoryTesterBlockEntity(pos, state)
     }
 
+    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+        val blockEntity = level.getBlockEntity(pos)
+
+        if (blockEntity is InventoryTesterBlockEntity) {
+            return if (blockEntity.isEmittingRedstone) 15 else 0
+        }
+
+        return 0
+    }
+
+    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+        return getDirectSignal(state, level, pos, direction)
+    }
+
 }
