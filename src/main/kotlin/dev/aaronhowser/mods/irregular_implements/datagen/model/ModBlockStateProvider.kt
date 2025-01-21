@@ -66,6 +66,51 @@ class ModBlockStateProvider(
         customCraftingTable()
         notificationInterface()
         imbuingStation()
+        inventoryTester()
+    }
+
+    private fun inventoryTester() {
+        val block = ModBlocks.INVENTORY_TESTER.get()
+
+        val texture = modLoc("block/inventory_tester")
+
+        val model = models()
+            .withExistingParent(name(block), "block/thin_block")
+            .texture("texture", texture)
+            .texture("particle", texture)
+            .element()
+            .from(6f, 6f, 0f)
+            .to(10f, 10f, 1f)
+            .textureAll("#texture")
+            .end()
+
+        getVariantBuilder(block)
+            .forAllStates {
+                val facing = it.getValue(DirectionalBlock.FACING)
+
+                val yRotation = when (facing) {
+                    Direction.NORTH -> 0
+                    Direction.EAST -> 90
+                    Direction.SOUTH -> 180
+                    Direction.WEST -> 270
+                    else -> 0
+                }
+
+                val xRotation = when (facing) {
+                    Direction.UP -> 270
+                    Direction.DOWN -> 90
+                    else -> 0
+                }
+
+                ConfiguredModel
+                    .builder()
+                    .modelFile(model)
+                    .rotationY(yRotation)
+                    .rotationX(xRotation)
+                    .build()
+            }
+
+        simpleBlockItem(block, model)
     }
 
     private fun imbuingStation() {

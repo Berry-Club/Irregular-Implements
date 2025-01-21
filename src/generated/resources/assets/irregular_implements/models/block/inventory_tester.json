@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#texture"
+        },
+        "east": {
+          "texture": "#texture"
+        },
+        "north": {
+          "texture": "#texture"
+        },
+        "south": {
+          "texture": "#texture"
+        },
+        "up": {
+          "texture": "#texture"
+        },
+        "west": {
+          "texture": "#texture"
+        }
+      },
+      "from": [
+        6,
+        6,
+        0
+      ],
+      "to": [
+        10,
+        10,
+        1
+      ]
+    }
+  ],
+  "textures": {
+    "particle": "irregular_implements:block/inventory_tester",
+    "texture": "irregular_implements:block/inventory_tester"
+  }
+}
