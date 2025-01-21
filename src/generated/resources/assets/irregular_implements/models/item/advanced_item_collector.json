@@ -1,3 +1,65 @@
 {
-  "parent": "irregular_implements:block/advanced_item_collector"
+  "parent": "irregular_implements:block/advanced_item_collector",
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        8,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        8,
+        0
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        4,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        2.1875,
+        2.1875,
+        2.1875
+      ],
+      "translation": [
+        0,
+        10.5,
+        0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    }
+  }
 }
