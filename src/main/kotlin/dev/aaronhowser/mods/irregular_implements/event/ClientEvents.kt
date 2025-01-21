@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems
 import dev.aaronhowser.mods.irregular_implements.item.SpectreAnchorItem
+import dev.aaronhowser.mods.irregular_implements.menu.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.util.Mth
@@ -25,6 +26,7 @@ object ClientEvents {
     fun tooltipEvent(event: ItemTooltipEvent) {
         ModArmorItems.tooltip(event)
         SpectreAnchorItem.tooltip(event)
+        ItemFilterMenu.tooltip(event)
     }
 
     private var changedAlpha = false
