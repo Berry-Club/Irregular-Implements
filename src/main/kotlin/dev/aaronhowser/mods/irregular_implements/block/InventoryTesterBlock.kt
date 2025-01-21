@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.InventoryTesterBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
@@ -10,11 +11,10 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.DirectionalBlock
-import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -85,6 +85,10 @@ class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), En
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return InventoryTesterBlockEntity(pos, state)
+    }
+
+    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+        return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.INVENTORY_TESTER.get(), InventoryTesterBlockEntity::tick)
     }
 
     override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {

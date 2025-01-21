@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.SimpleContainerData
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
@@ -33,6 +34,15 @@ class InventoryTesterBlockEntity(
 
         const val CONTAINER_SIZE = 1
         const val CONTAINER_DATA_SIZE = 1
+
+        fun tick(
+            level: Level,
+            pos: BlockPos,
+            state: BlockState,
+            blockEntity: InventoryTesterBlockEntity
+        ) {
+            blockEntity.tick()
+        }
     }
 
     val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
@@ -65,7 +75,11 @@ class InventoryTesterBlockEntity(
         val level = level ?: return
 
         val item = this.container.getItem(0)
-        if (level.isClientSide || ++counter != 2 || item.isEmpty) return
+        if (level.isClientSide || item.isEmpty) return
+
+        // Only check every 5 ticks
+        if (++this.counter != 5) return
+        this.counter = 0
 
         val facing = this.blockState.getValue(InventoryTesterBlock.FACING)
         val onBlock = this.blockPos.relative(facing)
