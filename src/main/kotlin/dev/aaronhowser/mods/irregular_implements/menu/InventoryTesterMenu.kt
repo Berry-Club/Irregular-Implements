@@ -57,6 +57,8 @@ class InventoryTesterMenu(
 
             this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
         }
+
+        this.addDataSlots(containerData)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
