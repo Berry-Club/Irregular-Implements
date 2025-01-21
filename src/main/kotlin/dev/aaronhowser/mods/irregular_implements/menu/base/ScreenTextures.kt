@@ -27,35 +27,36 @@ object ScreenTextures {
             )
         }
 
-        data object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54)
-        data object GlobalChatDetector : Background("textures/gui/global_chat_detector.png", 176, 157)
-        data object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
-        data object IronDropper : Background("textures/gui/iron_dropper.png", 176, 166)
-        data object Igniter : Background("textures/gui/igniter.png", 79, 29)
-        data object VoidStone : Background("textures/gui/void_stone.png", 176, 133)
-        data object OnlineDetector : Background("textures/gui/online_detector.png", 137, 52)
-        data object NotificationInterface : Background("textures/gui/notification_interface.png", 176, 146)
-        data object SoundRecorder : Background("textures/gui/sound_recorder.png", 190, 187)
-        data object PortableSoundDampener : Background("textures/gui/portable_sound_dampener.png", 176, 133)
-        data object ProcessingPlate : Background("textures/gui/processing_plate.png", 121, 77)
-        data object PotionVaporizer : Background("textures/gui/potion_vaporizer.png", 176, 166)
-        data object ItemProjector : Background("textures/gui/item_projector.png", 176, 166)
-        data object ItemFilter : Background("textures/gui/item_filter.png", 176, 141)
-        data object InventoryTester : Background("textures/gui/inventory_tester.png", 176, 136)
-        data object ImbuingStation : Background("textures/gui/imbuing_station.png", 176, 207)
-        data object FilteredSuperLubricantPlatform : Background("textures/gui/filtered_super_lubricant_platform.png", 176, 129)
-        data object FilteredRedirectorPlate : Background("textures/gui/filtered_redirector_plate.png", 176, 129)
-        data object ExtractionPlate : Background("textures/gui/extraction_plate.png", 121, 42)
-        data object EntityDetector : Background("textures/gui/entity_detector.png", 176, 204)
-        data object EnderMailbox : Background("textures/gui/ender_mailbox.png", 176, 133)
-        data object EnderLetter : Background("textures/gui/ender_letter.png", 176, 133)
-        data object DyeingMachine : Background("textures/gui/dyeing_machine.png", 176, 141)
-        data object ChunkAnalyzer : Background("textures/gui/chunk_analyzer.png", 190, 124)
-        data object AnalogEmitter : Background("textures/gui/analog_emitter.png", 79, 50)
-        data object AdvancedRedstoneRepeater : Background("textures/gui/advanced_redstone_repeater.png", 91, 56)
         data object AdvancedItemCollector : Background("textures/gui/advanced_item_collector.png", 176, 235)
+        data object AdvancedRedstoneRepeater : Background("textures/gui/advanced_redstone_repeater.png", 91, 56)
+        data object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
+        data object AnalogEmitter : Background("textures/gui/analog_emitter.png", 79, 50)
+        data object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54)
+        data object ChunkAnalyzer : Background("textures/gui/chunk_analyzer.png", 190, 124)
         data object DropFilter : Background("textures/gui/drop_filter.png", 176, 133)
+        data object DyeingMachine : Background("textures/gui/dyeing_machine.png", 176, 141)
+        data object EnderLetter : Background("textures/gui/ender_letter.png", 176, 133)
+        data object EnderMailbox : Background("textures/gui/ender_mailbox.png", 176, 133)
+        data object EntityDetector : Background("textures/gui/entity_detector.png", 176, 204)
+        data object ExtractionPlate : Background("textures/gui/extraction_plate.png", 121, 42)
+        data object FilteredRedirectorPlate : Background("textures/gui/filtered_redirector_plate.png", 176, 129)
+        data object FilteredSuperLubricantPlatform : Background("textures/gui/filtered_super_lubricant_platform.png", 176, 129)
+        data object GlobalChatDetector : Background("textures/gui/global_chat_detector.png", 176, 157)
+        data object Igniter : Background("textures/gui/igniter.png", 79, 29)
+        data object IronDropper : Background("textures/gui/iron_dropper.png", 176, 166)
+        data object ImbuingStation : Background("textures/gui/imbuing_station.png", 176, 207)
+        data object InventoryTester : Background("textures/gui/inventory_tester.png", 176, 136)
+        data object ItemFilter : Background("textures/gui/item_filter.png", 176, 141)
+        data object ItemProjector : Background("textures/gui/item_projector.png", 176, 166)
         data object MagneticForce : Background("textures/gui/magnetic_force.png", 123, 135)
+        data object NotificationInterface : Background("textures/gui/notification_interface.png", 176, 146)
+        data object OnlineDetector : Background("textures/gui/online_detector.png", 137, 52)
+        data object PortableSoundDampener : Background("textures/gui/portable_sound_dampener.png", 176, 133)
+        data object PotionVaporizer : Background("textures/gui/potion_vaporizer.png", 176, 166)
+        data object ProcessingPlate : Background("textures/gui/processing_plate.png", 121, 77)
+        data object SoundRecorder : Background("textures/gui/sound_recorder.png", 190, 187)
+        data object VoidStone : Background("textures/gui/void_stone.png", 176, 133)
+
     }
 
     sealed class Sprite(
@@ -65,16 +66,16 @@ object ScreenTextures {
     ) {
         val texture = OtherUtil.modResource(path)
 
-        object ChatDetector {
-            data object MessageContinue : Sprite("buttons/chat_detector/message_continue", 13, 12)
-            data object MessageStop : Sprite("buttons/chat_detector/message_stop", 13, 12)
-        }
-
         object BlockDestabilizer {
             data object Lazy : Sprite("buttons/block_destabilizer/lazy", 13, 13)
             data object NotLazy : Sprite("buttons/block_destabilizer/lazy_not", 13, 13)
             data object ShowLazyShape : Sprite("buttons/block_destabilizer/show_lazy_shape", 16, 16)            //TODO: Replace with an original texture
             data object ResetLazyShape : Sprite("buttons/block_destabilizer/reset_lazy_shape", 15, 12)
+        }
+
+        object ChatDetector {
+            data object MessageContinue : Sprite("buttons/chat_detector/message_continue", 13, 12)
+            data object MessageStop : Sprite("buttons/chat_detector/message_stop", 13, 12)
         }
 
         object IronDropper {
