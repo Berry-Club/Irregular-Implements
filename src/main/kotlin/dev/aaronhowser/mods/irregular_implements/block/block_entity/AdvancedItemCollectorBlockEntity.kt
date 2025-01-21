@@ -28,23 +28,26 @@ class AdvancedItemCollectorBlockEntity(
         const val Z_RADIUS_NBT = "ZRadius"
 
         const val CONTAINER_DATA_SIZE = 3
+        const val X_RADIUS_INDEX = 0
+        const val Y_RADIUS_INDEX = 1
+        const val Z_RADIUS_INDEX = 2
     }
 
-    var xRadius: Double = 5.0
+    var xRadius: Int = 5
         set(value) {
-            field = value.coerceIn(0.0, 10.0)
+            field = value.coerceIn(0, 10)
             setChanged()
         }
 
-    var yRadius: Double = 5.0
+    var yRadius: Int = 5
         set(value) {
-            field = value.coerceIn(0.0, 10.0)
+            field = value.coerceIn(0, 10)
             setChanged()
         }
 
-    var zRadius: Double = 5.0
+    var zRadius: Int = 5
         set(value) {
-            field = value.coerceIn(0.0, 10.0)
+            field = value.coerceIn(0, 10)
             setChanged()
         }
 
@@ -58,32 +61,52 @@ class AdvancedItemCollectorBlockEntity(
         val pos = this.blockPos
         return AABB.ofSize(
             pos.center,
-            2 * this.xRadius,
-            2 * this.yRadius,
-            2 * this.zRadius
+            2 * this.xRadius.toDouble(),
+            2 * this.yRadius.toDouble(),
+            2 * this.zRadius.toDouble()
         )
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
-        tag.putDouble(X_RADIUS_NBT, this.xRadius)
-        tag.putDouble(Y_RADIUS_NBT, this.yRadius)
-        tag.putDouble(Z_RADIUS_NBT, this.zRadius)
+        tag.putInt(X_RADIUS_NBT, this.xRadius)
+        tag.putInt(Y_RADIUS_NBT, this.yRadius)
+        tag.putInt(Z_RADIUS_NBT, this.zRadius)
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
 
-        this.xRadius = tag.getDouble(X_RADIUS_NBT)
-        this.yRadius = tag.getDouble(Y_RADIUS_NBT)
-        this.zRadius = tag.getDouble(Z_RADIUS_NBT)
+        this.xRadius = tag.getInt(X_RADIUS_NBT)
+        this.yRadius = tag.getInt(Y_RADIUS_NBT)
+        this.zRadius = tag.getInt(Z_RADIUS_NBT)
     }
 
     // Menu stuff
 
     private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+        override fun set(index: Int, value: Int) {
+            when (index) {
+                X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius = value
 
+                Y_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.yRadius = value
+
+                Z_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.zRadius = value
+            }
+        }
+
+        override fun get(index: Int): Int {
+            return when (index) {
+                X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius
+
+                Y_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.yRadius
+
+                Z_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.zRadius
+
+                else -> error("Invalid index: $index")
+            }
+        }
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {

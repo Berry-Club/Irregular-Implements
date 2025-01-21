@@ -13,4 +13,8 @@ class AdvancedItemCollectorScreen(
 
     override val background: ScreenTextures.Background = ScreenTextures.Background.AdvancedItemCollector
 
+    override fun baseInit() {
+
+    }
+
 }
