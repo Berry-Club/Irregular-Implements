@@ -69,9 +69,7 @@ class InventoryTesterMenu(
 
     var isInverted: Boolean
         get() = this.containerData.get(0) != 0
-        private set(value) {
-            this.containerData.set(0, if (value) 1 else 0)
-        }
+        private set(value) = this.containerData.set(0, if (value) 1 else 0)
 
     override fun handleButtonPressed(buttonId: Int) {
         when (buttonId) {

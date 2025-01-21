@@ -45,19 +45,6 @@ class InventoryTesterBlockEntity(
         }
     }
 
-    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
-
-    val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
-
-        override fun get(index: Int): Int {
-            return if (invertSignal) 1 else 0
-        }
-
-        override fun set(index: Int, value: Int) {
-            invertSignal = value != 0
-        }
-    }
-
     private var invertSignal: Boolean = false
         set(value) {
             field = value
@@ -114,6 +101,20 @@ class InventoryTesterBlockEntity(
         ContainerHelper.loadAllItems(tag, this.container.items, registries)
         this.invertSignal = tag.getBoolean(INVERT_SIGNAL_NBT)
         this.isEmittingRedstone = tag.getBoolean(IS_EMITTING_REDSTONE_NBT)
+    }
+
+    // Menu stuff
+
+    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+
+    val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+        override fun get(index: Int): Int {
+            return if (invertSignal) 1 else 0
+        }
+
+        override fun set(index: Int, value: Int) {
+            invertSignal = value != 0
+        }
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
