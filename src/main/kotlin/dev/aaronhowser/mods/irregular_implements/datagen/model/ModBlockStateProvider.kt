@@ -74,13 +74,14 @@ class ModBlockStateProvider(
 
         val texture = modLoc("block/inventory_tester")
 
-        val model = models()
+        // Mode defaults to being on the bottom
+        val blockModel = models()
             .withExistingParent(name(block), "block/thin_block")
             .texture("texture", texture)
             .texture("particle", texture)
             .element()
-            .from(6f, 6f, 0f)
-            .to(10f, 10f, 1f)
+            .from(6f, 0f, 6f)
+            .to(10f, 1f, 10f)
             .textureAll("#texture")
             .end()
 
@@ -89,28 +90,28 @@ class ModBlockStateProvider(
                 val facing = it.getValue(DirectionalBlock.FACING)
 
                 val yRotation = when (facing) {
-                    Direction.NORTH -> 0
-                    Direction.EAST -> 90
-                    Direction.SOUTH -> 180
-                    Direction.WEST -> 270
+                    Direction.SOUTH -> 0
+                    Direction.WEST -> 90
+                    Direction.NORTH -> 180
+                    Direction.EAST -> 270
                     else -> 0
                 }
 
                 val xRotation = when (facing) {
-                    Direction.UP -> 270
-                    Direction.DOWN -> 90
-                    else -> 0
+                    Direction.UP -> 180
+                    Direction.DOWN -> 0
+                    else -> 90
                 }
 
                 ConfiguredModel
                     .builder()
-                    .modelFile(model)
+                    .modelFile(blockModel)
                     .rotationY(yRotation)
                     .rotationX(xRotation)
                     .build()
             }
 
-        simpleBlockItem(block, model)
+        simpleBlockItem(block, blockModel)
     }
 
     private fun imbuingStation() {

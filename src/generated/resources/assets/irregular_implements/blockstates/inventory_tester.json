@@ -1,27 +1,30 @@
 {
   "variants": {
     "facing=down": {
-      "model": "irregular_implements:block/inventory_tester",
-      "x": 90
+      "model": "irregular_implements:block/inventory_tester"
     },
     "facing=east": {
       "model": "irregular_implements:block/inventory_tester",
-      "y": 90
+      "x": 90,
+      "y": 270
     },
     "facing=north": {
-      "model": "irregular_implements:block/inventory_tester"
+      "model": "irregular_implements:block/inventory_tester",
+      "x": 90,
+      "y": 180
     },
     "facing=south": {
       "model": "irregular_implements:block/inventory_tester",
-      "y": 180
+      "x": 90
     },
     "facing=up": {
       "model": "irregular_implements:block/inventory_tester",
-      "x": 270
+      "x": 180
     },
     "facing=west": {
       "model": "irregular_implements:block/inventory_tester",
-      "y": 270
+      "x": 90,
+      "y": 90
     }
   }
 }
