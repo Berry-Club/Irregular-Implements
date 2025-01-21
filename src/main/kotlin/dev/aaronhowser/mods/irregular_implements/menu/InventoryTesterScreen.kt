@@ -23,6 +23,7 @@ class InventoryTesterScreen(
         this.inventoryLabelX = 35
         this.inventoryLabelY = this.imageHeight - 94
 
+        //TODO: Update placement and size
         this.invertButton = MultiStageSpriteButton.Builder(this.font)
             .size(20)
             .location(

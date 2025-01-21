@@ -8,15 +8,19 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.ItemHandlerHelper
 
 open class ItemCollectorBlockEntity(
+    blockEntity: BlockEntityType<out ItemCollectorBlockEntity>,
     pPos: BlockPos,
     pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.ITEM_COLLECTOR.get(), pPos, pBlockState) {
+) : BlockEntity(blockEntity, pPos, pBlockState) {
+
+    constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntities.ITEM_COLLECTOR.get(), pos, blockState)
 
     companion object {
         fun tick(
