@@ -561,6 +561,7 @@ class ModLanguageProvider(
         const val ITEM_FILTER_TAG = "tooltip.irregular_implements.item_filter_tag"
         const val ITEM_FILTER_REQUIRE_COMPONENTS = "tooltip.irregular_implements.item_filter_require_components"
         const val ITEM_FILTER_IGNORE_COMPONENTS = "tooltip.irregular_implements.item_filter_ignore_components"
+        const val ITEM_FILTER_REQUIRES_SAME_COMPONENTS = "tooltip.irregular_implements.item_filter_requires_same_components"
     }
 
     private fun addTooltips() {
@@ -568,6 +569,7 @@ class ModLanguageProvider(
         add(Tooltips.ITEM_FILTER_TAG, "Tag Filter")
         add(Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS, "Require Components")
         add(Tooltips.ITEM_FILTER_IGNORE_COMPONENTS, "Ignore Components")
+        add(Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS, "Requires same components")
 
         add(Tooltips.SHIFT_FOR_MORE, "Hold SHIFT for more information")
         add(Tooltips.ENTITY_FILTER_ENTITY, "Entity Type: %s")

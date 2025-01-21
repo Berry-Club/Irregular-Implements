@@ -6,11 +6,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
+import net.minecraft.ChatFormatting
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
-import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
@@ -170,9 +170,14 @@ sealed interface FilterEntry {
 
         init {
             if (this.requireSameComponents) {
+
+                //TODO: Maybe move this to the tooltip event rather than actually changing the item's lore?
+                val component = ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
+                    .toComponent().withStyle(ChatFormatting.RED)
+
                 this.displayStack.set(
                     DataComponents.LORE,
-                    ItemLore(listOf(Component.literal("Requires same components")))
+                    ItemLore(listOf(component))
                 )
             }
         }

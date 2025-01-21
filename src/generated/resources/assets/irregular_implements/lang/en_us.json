@@ -535,6 +535,7 @@
   "tooltip.irregular_implements.item_filter_ignore_components": "Ignore Components",
   "tooltip.irregular_implements.item_filter_item": "Item Filter",
   "tooltip.irregular_implements.item_filter_require_components": "Require Components",
+  "tooltip.irregular_implements.item_filter_requires_same_components": "Requires same components",
   "tooltip.irregular_implements.item_filter_tag": "Tag Filter",
   "tooltip.irregular_implements.item_tag": "Item Tag: %s",
   "tooltip.irregular_implements.lazy": "Lazy",
