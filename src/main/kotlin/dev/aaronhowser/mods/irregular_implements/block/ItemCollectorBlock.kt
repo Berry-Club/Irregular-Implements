@@ -87,7 +87,11 @@ class ItemCollectorBlock(
 
     override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
         return if (this.isAdvanced) {
-            null
+            BaseEntityBlock.createTickerHelper(
+                blockEntityType,
+                ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(),
+                ItemCollectorBlockEntity::tick
+            )
         } else {
             BaseEntityBlock.createTickerHelper(
                 blockEntityType,

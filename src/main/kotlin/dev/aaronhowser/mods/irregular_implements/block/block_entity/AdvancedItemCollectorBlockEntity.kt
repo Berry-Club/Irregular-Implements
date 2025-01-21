@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -35,6 +38,12 @@ class AdvancedItemCollectorBlockEntity(
             field = value.coerceIn(0.0, 10.0)
             setChanged()
         }
+
+    val container = ImprovedSimpleContainer(this, 1)
+
+    override fun getFilter(): ItemFilterDataComponent? {
+        return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER_ENTRIES)
+    }
 
     override fun getCollectionArea(): AABB {
         val pos = this.blockPos
