@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.NonInteractiveResultSlot
 import net.minecraft.world.item.ItemStack
 import java.util.function.Supplier
 
-open class FilterSlot(
+class ItemFilterSlot(
     private val filterStack: Supplier<ItemStack>,
     private val lookupProvider: HolderLookup.Provider,
     x: Int,
@@ -86,11 +86,6 @@ open class FilterSlot(
 
     override fun getSlotIndex(): Int {
         return 0
-    }
-
-    // Not true, but if it's fake then mayPlace never runs
-    override fun isFake(): Boolean {
-        return false
     }
 
 }

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.FilterSlot
+import dev.aaronhowser.mods.irregular_implements.menu.base.ItemFilterSlot
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -59,7 +59,7 @@ class ItemFilterMenu(
             val x = 8 + index * 18
             val y = 26
 
-            val slot = FilterSlot(::filterStack, this.holderLookup, x, y)
+            val slot = ItemFilterSlot(::filterStack, this.holderLookup, x, y)
 
             this.addSlot(slot)
         }
