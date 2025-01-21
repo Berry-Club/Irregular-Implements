@@ -74,12 +74,16 @@ class InventoryTesterBlockEntity(
     fun tick() {
         val level = level ?: return
 
-        val item = this.container.getItem(0)
-        if (level.isClientSide || item.isEmpty) return
+        if (level.isClientSide) return
 
         // Only check every 5 ticks
         if (++this.counter != 5) return
         this.counter = 0
+
+        val item = this.container.getItem(0)
+        if (item.isEmpty && this.isEmittingRedstone) {
+            this.isEmittingRedstone = false
+        }
 
         val facing = this.blockState.getValue(InventoryTesterBlock.FACING)
         val onBlock = this.blockPos.relative(facing)
