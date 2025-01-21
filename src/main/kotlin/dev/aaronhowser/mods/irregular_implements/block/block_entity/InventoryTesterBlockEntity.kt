@@ -10,12 +10,12 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
+import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
@@ -27,16 +27,11 @@ class InventoryTesterBlockEntity(
 ) : BlockEntity(ModBlockEntities.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider {
 
     companion object {
-        const val ITEMSTACK_NBT = "ItemStack"
         const val INVERT_SIGNAL_NBT = "InvertSignal"
         const val IS_EMITTING_REDSTONE_NBT = "IsEmittingRedstone"
     }
 
-    var itemStack: ItemStack = ItemStack.EMPTY
-        set(value) {
-            field = value
-            setChanged()
-        }
+    val container = SimpleContainer(1)
 
     var invertSignal: Boolean = false
         set(value) {
@@ -53,8 +48,8 @@ class InventoryTesterBlockEntity(
     private var counter: Int = 0
     fun tick() {
         val level = level ?: return
-        val item = this.itemStack
 
+        val item = this.container.getItem(0)
         if (level.isClientSide || ++counter != 2 || item.isEmpty) return
 
         val facing = this.blockState.getValue(InventoryTesterBlock.FACING)
@@ -69,16 +64,12 @@ class InventoryTesterBlockEntity(
             this.isEmittingRedstone = redstone
             level.updateNeighborsAt(this.blockPos, this.blockState.block)
         }
-
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
 
-        if (!this.itemStack.isEmpty) {
-            tag.put(ITEMSTACK_NBT, this.itemStack.save(registries))
-        }
-
+        ContainerHelper.saveAllItems(tag, this.container.items, registries)
         tag.putBoolean(INVERT_SIGNAL_NBT, this.invertSignal)
         tag.putBoolean(IS_EMITTING_REDSTONE_NBT, this.isEmittingRedstone)
     }
@@ -86,13 +77,13 @@ class InventoryTesterBlockEntity(
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
 
-        this.itemStack = ItemStack.parseOptional(registries, tag.getCompound(ITEMSTACK_NBT))
+        ContainerHelper.loadAllItems(tag, this.container.items, registries)
         this.invertSignal = tag.getBoolean(INVERT_SIGNAL_NBT)
         this.isEmittingRedstone = tag.getBoolean(IS_EMITTING_REDSTONE_NBT)
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return InventoryTesterMenu(containerId, playerInventory, ContainerLevelAccess.create(this.level!!, this.blockPos))
+        return InventoryTesterMenu(containerId, playerInventory, this.container)
     }
 
     override fun getDisplayName(): Component {

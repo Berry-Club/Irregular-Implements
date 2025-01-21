@@ -1,30 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.menu.base
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.InventoryTesterBlockEntity
+import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.inventory.NonInteractiveResultSlot
 import net.minecraft.world.item.ItemStack
 
 class InventoryTesterSlot(
-    private val containerLevelAccess: ContainerLevelAccess,
+    private val inventoryTesterContainer: Container,
     x: Int,
     y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
 
-    val blockEntity: InventoryTesterBlockEntity? = containerLevelAccess.evaluate { level, pos ->
-        val blockEntity = level.getBlockEntity(pos) as? InventoryTesterBlockEntity
-
-        println(blockEntity != null)
-
-        blockEntity
-        }.orElse(null)
-
     var stack: ItemStack
-        get() = blockEntity?.itemStack ?: ItemStack.EMPTY
+        get() = this.inventoryTesterContainer.getItem(0)
         set(value) {
-            blockEntity?.itemStack = value
+            this.inventoryTesterContainer.setItem(0, value)
         }
 
     override fun mayPickup(player: Player): Boolean {

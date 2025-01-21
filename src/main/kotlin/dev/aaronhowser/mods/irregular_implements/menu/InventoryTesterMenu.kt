@@ -2,25 +2,25 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.menu.base.InventoryTesterSlot
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import net.minecraft.world.Container
+import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class InventoryTesterMenu(
     containerId: Int,
     playerInventory: Inventory,
-    private val containerLevelAccess: ContainerLevelAccess
+    private val inventoryTesterContainer: Container
 ) : AbstractContainerMenu(ModMenuTypes.INVENTORY_TESTER.get(), containerId), MenuWithButtons {
 
-    constructor(containerId: Int, playerInventory: Inventory) : this(containerId, playerInventory, ContainerLevelAccess.NULL)
+    constructor(containerId: Int, playerInventory: Inventory) : this(containerId, playerInventory, SimpleContainer(1))
 
     init {
-        val slot = InventoryTesterSlot(this.containerLevelAccess, 64, 18)
+        val slot = InventoryTesterSlot(this.inventoryTesterContainer, 64, 18)
         this.addSlot(slot)
 
         // Add the 27 slots of the player inventory
@@ -48,7 +48,7 @@ class InventoryTesterMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return stillValid(this.containerLevelAccess, player, ModBlocks.INVENTORY_TESTER.get())
+        return this.inventoryTesterContainer.stillValid(player)
     }
 
     override fun handleButtonPressed(buttonId: Int) {
