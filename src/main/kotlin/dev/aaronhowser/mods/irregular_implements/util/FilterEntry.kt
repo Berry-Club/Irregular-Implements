@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
+import net.minecraft.ChatFormatting
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
@@ -16,6 +17,7 @@ import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.ItemLore
 import kotlin.jvm.optionals.getOrNull
 import kotlin.random.Random
 
@@ -165,6 +167,20 @@ sealed interface FilterEntry {
         }
 
         private val displayStack: ItemStack = this.stack.copy()
+
+        init {
+            if (this.requireSameComponents) {
+
+                //TODO: Maybe move this to the tooltip event rather than actually changing the item's lore?
+                val component = ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
+                    .toComponent().withStyle(ChatFormatting.RED)
+
+                this.displayStack.set(
+                    DataComponents.LORE,
+                    ItemLore(listOf(component))
+                )
+            }
+        }
 
         override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
             return this.displayStack

@@ -1,7 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.FilterSlot
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
@@ -10,16 +8,13 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
-import net.minecraft.ChatFormatting
 import net.minecraft.core.NonNullList
-import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
 class ItemFilterMenu(
     containerId: Int,
@@ -194,32 +189,6 @@ class ItemFilterMenu(
         }
 
         const val TOGGLE_BLACKLIST_BUTTON_ID = 0
-
-        fun tooltip(event: ItemTooltipEvent) {
-            val player = event.entity ?: return
-            val menu = player.containerMenu as? ItemFilterMenu ?: return
-
-            val hoveredStack = event.itemStack
-
-            for (index in 0 until 9) {
-                val entry = menu.filter?.getOrNull(index) ?: continue
-                if (entry !is FilterEntry.Item || !entry.requireSameComponents) continue
-                val entryStack = entry.stack
-                val hoveredSlot = menu.findSlot(index)
-                val stackInSlot = hoveredSlot.item
-
-                if (ItemStack.isSameItemSameComponents(entryStack, stackInSlot)) {
-
-                    val component = ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
-                        .toComponent().withStyle(ChatFormatting.RED)
-
-                    event.toolTip.add(1, component)
-                    return
-                }
-            }
-
-        }
-
     }
 
 }
