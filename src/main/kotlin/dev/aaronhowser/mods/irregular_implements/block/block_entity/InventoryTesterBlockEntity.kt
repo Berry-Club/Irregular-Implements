@@ -1,10 +1,17 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.InventoryTesterBlock
+import dev.aaronhowser.mods.irregular_implements.menu.InventoryTesterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -14,7 +21,7 @@ import net.neoforged.neoforge.items.ItemHandlerHelper
 class InventoryTesterBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.INVENTORY_TESTER.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntities.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider {
 
     companion object {
         const val ITEMSTACK_NBT = "ItemStack"
@@ -79,6 +86,14 @@ class InventoryTesterBlockEntity(
         this.itemStack = ItemStack.parseOptional(registries, tag.getCompound(ITEMSTACK_NBT))
         this.invertSignal = tag.getBoolean(INVERT_SIGNAL_NBT)
         this.isEmittingRedstone = tag.getBoolean(IS_EMITTING_REDSTONE_NBT)
+    }
+
+    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+        return InventoryTesterMenu(containerId, playerInventory, ContainerLevelAccess.create(this.level!!, this.blockPos))
+    }
+
+    override fun getDisplayName(): Component {
+        return this.blockState.block.name
     }
 
 }
