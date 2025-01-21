@@ -71,12 +71,7 @@ class NotificationInterfaceBlockEntity(
         )
     }
 
-    private val container = object : SimpleContainer(1) {
-        override fun setChanged() {
-            super.setChanged()
-            this@NotificationInterfaceBlockEntity.setChanged()
-        }
-    }
+    private val container = SimpleContainer(1)
 
     private var icon: ItemStack
         get() = container.getItem(0)

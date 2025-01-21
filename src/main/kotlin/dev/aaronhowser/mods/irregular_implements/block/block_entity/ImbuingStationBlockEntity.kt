@@ -62,12 +62,7 @@ class ImbuingStationBlockEntity(
 
     // Machine stuff
 
-    private val container = object : SimpleContainer(CONTAINER_SIZE) {
-        override fun setChanged() {
-            super.setChanged()
-            this@ImbuingStationBlockEntity.setChanged()
-        }
-    }
+    private val container = SimpleContainer(CONTAINER_SIZE)
 
     private var progress: Int = 0
         set(value) {

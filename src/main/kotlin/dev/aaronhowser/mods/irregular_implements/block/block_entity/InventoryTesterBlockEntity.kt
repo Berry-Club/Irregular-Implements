@@ -35,12 +35,7 @@ class InventoryTesterBlockEntity(
         const val CONTAINER_DATA_SIZE = 1
     }
 
-    val container = object : SimpleContainer(CONTAINER_SIZE) {
-        override fun setChanged() {
-            super.setChanged()
-            this@InventoryTesterBlockEntity.setChanged()
-        }
-    }
+    val container = SimpleContainer(CONTAINER_SIZE)
 
     val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
 
