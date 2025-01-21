@@ -49,8 +49,10 @@ object ModBlocks {
     val WATER_CHEST = basicBlock("water_chest")
 
     // Collectors
-    val ITEM_COLLECTOR = basicBlock("item_collector")
-    val ADVANCED_ITEM_COLLECTOR = basicBlock("advanced_item_collector")
+    val ITEM_COLLECTOR: DeferredBlock<ItemCollectorBlock> =
+        registerBlock("item_collector") { ItemCollectorBlock(isAdvanced = false) }
+    val ADVANCED_ITEM_COLLECTOR: DeferredBlock<ItemCollectorBlock> =
+        registerBlock("advanced_item_collector") { ItemCollectorBlock(isAdvanced = true) }
 
     // Redstone blocks
     val ANALOG_EMITTER: DeferredBlock<AnalogEmitterBlock> =

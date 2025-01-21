@@ -55,7 +55,7 @@ class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), En
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return when (state.getValue(DirectionalBlock.FACING)) {
+        return when (state.getValue(FACING)) {
             Direction.NORTH -> SHAPE_NORTH
             Direction.SOUTH -> SHAPE_SOUTH
             Direction.WEST -> SHAPE_WEST
