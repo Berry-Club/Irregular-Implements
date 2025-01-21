@@ -33,9 +33,7 @@ class AdvancedItemCollectorMenu(
         checkContainerSize(container, 1)
         container.startOpen(playerInventory.player)
 
-        val filterY = 100
-
-        val filterSlot = object : Slot(container, 0, 80, filterY) {
+        val filterSlot = object : Slot(container, 0, 80, 122) {
             override fun mayPlace(stack: ItemStack): Boolean {
                 return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
             }
