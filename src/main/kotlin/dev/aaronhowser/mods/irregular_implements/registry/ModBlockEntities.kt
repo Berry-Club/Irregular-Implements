@@ -178,4 +178,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val ITEM_COLLECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<ItemCollectorBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("item_collector", Supplier {
+            BlockEntityType.Builder.of(
+                ::ItemCollectorBlockEntity,
+                ModBlocks.ITEM_COLLECTOR.get()
+            ).build(null)
+        })
+
 }
