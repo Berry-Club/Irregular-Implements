@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -7,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -15,23 +15,13 @@ class OnlineDetectorScreen(
     menu: OnlineDetectorMenu,
     playerInventory: Inventory,
     title: Component
-) : AbstractContainerScreen<OnlineDetectorMenu>(menu, playerInventory, title), ScreenWithStrings {
-
-    private val rightPos: Int
-        get() = this.leftPos + this.imageWidth
-    private val bottomPos: Int
-        get() = this.topPos + this.imageHeight
+) : BaseScreen<OnlineDetectorMenu>(menu, playerInventory, title), ScreenWithStrings {
 
     private lateinit var usernameEditBox: EditBox
 
-    private val background = ScreenTextures.Background.OnlineDetector
+    override val background = ScreenTextures.Background.OnlineDetector
 
-    override fun init() {
-        this.imageWidth = background.width
-        this.imageHeight = background.height
-
-        this.leftPos = (this.width - this.imageWidth) / 2
-        this.topPos = (this.height - this.imageHeight) / 2
+    override fun addWidgets() {
 
         val editBoxHeight = 20
 
@@ -50,14 +40,6 @@ class OnlineDetectorScreen(
         this.usernameEditBox.setResponder(::setUsername)
 
         this.addRenderableWidget(this.usernameEditBox)
-    }
-
-    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        this.background.render(
-            guiGraphics,
-            this.leftPos,
-            this.topPos
-        )
     }
 
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
@@ -82,10 +64,6 @@ class OnlineDetectorScreen(
         val currentRegexString = this.usernameEditBox.value
         super.resize(minecraft, width, height)
         this.usernameEditBox.value = currentRegexString
-    }
-
-    override fun isPauseScreen(): Boolean {
-        return false
     }
 
     private fun setUsername(string: String) {

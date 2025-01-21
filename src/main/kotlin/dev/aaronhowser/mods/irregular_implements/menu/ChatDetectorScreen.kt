@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
@@ -11,7 +12,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -19,28 +19,19 @@ class ChatDetectorScreen(
     menu: ChatDetectorMenu,
     playerInventory: Inventory,
     title: Component
-) : AbstractContainerScreen<ChatDetectorMenu>(menu, playerInventory, title), ScreenWithStrings {
-
-    private val rightPos: Int
-        get() = this.leftPos + this.imageWidth
-    private val bottomPos: Int
-        get() = this.topPos + this.imageHeight
+) : BaseScreen<ChatDetectorMenu>(menu, playerInventory, title), ScreenWithStrings {
 
     private lateinit var toggleMessagePassButton: MultiStageSpriteButton
     private lateinit var regexStringEditBox: EditBox
 
-    private val background = ScreenTextures.Background.ChatDetector
+    override val background = ScreenTextures.Background.ChatDetector
 
-    override fun init() {
-        this.imageWidth = background.width
-        this.imageHeight = background.height
-
-        this.leftPos = (this.width - this.imageWidth) / 2
-        this.topPos = (this.height - this.imageHeight) / 2
-
+    override fun baseInit() {
         this.titleLabelX = 10
         this.titleLabelY = 10
+    }
 
+    override fun addWidgets() {
         this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
@@ -96,14 +87,6 @@ class ChatDetectorScreen(
 
     // Rendering
 
-    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        this.background.render(
-            guiGraphics,
-            this.leftPos,
-            this.topPos
-        )
-    }
-
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
     }
@@ -126,10 +109,6 @@ class ChatDetectorScreen(
         val currentRegexString = this.regexStringEditBox.value
         super.resize(minecraft, width, height)
         this.regexStringEditBox.value = currentRegexString
-    }
-
-    override fun isPauseScreen(): Boolean {
-        return false
     }
 
     private fun setRegexString(string: String) {

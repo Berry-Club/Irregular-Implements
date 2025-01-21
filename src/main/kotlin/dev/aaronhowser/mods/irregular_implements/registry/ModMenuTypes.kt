@@ -75,6 +75,11 @@ object ModMenuTypes {
             MenuType(::DropFilterMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val INVENTORY_TESTER: DeferredHolder<MenuType<*>, MenuType<InventoryTesterMenu>> =
+        MENU_TYPE_REGISTRY.register("inventory_tester", Supplier {
+            MenuType(::InventoryTesterMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)

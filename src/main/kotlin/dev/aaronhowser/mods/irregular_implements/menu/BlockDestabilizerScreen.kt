@@ -2,13 +2,13 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.base.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -16,22 +16,15 @@ class BlockDestabilizerScreen(
     menu: BlockDestabilizerMenu,
     playerInventory: Inventory,
     title: Component
-) : AbstractContainerScreen<BlockDestabilizerMenu>(menu, playerInventory, title) {
+) : BaseScreen<BlockDestabilizerMenu>(menu, playerInventory, title) {
 
     private lateinit var toggleLazyButton: MultiStageSpriteButton
     private lateinit var showLazyShapeButton: ImprovedSpriteButton
     private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
-    private val background = ScreenTextures.Background.BlockDestabilizer
+    override val background = ScreenTextures.Background.BlockDestabilizer
 
-    override fun init() {
-
-        this.imageWidth = background.width
-        this.imageHeight = background.height
-
-        this.leftPos = (this.width - this.imageWidth) / 2
-        this.topPos = (this.height - this.imageHeight) / 2
-
+    override fun addWidgets() {
         this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
@@ -102,24 +95,8 @@ class BlockDestabilizerScreen(
         this.addRenderableWidget(this.forgetLazyShapeButton)
     }
 
-    // Rendering
-
-    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        this.background.render(
-            guiGraphics,
-            this.leftPos,
-            this.topPos
-        )
-    }
-
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         // Do nothing
-    }
-
-    // Behavior
-
-    override fun isPauseScreen(): Boolean {
-        return false
     }
 
 }

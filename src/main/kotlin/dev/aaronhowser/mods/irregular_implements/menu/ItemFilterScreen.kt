@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.base.ChangingColorButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
@@ -13,7 +14,6 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.util.Mth
@@ -23,24 +23,20 @@ class ItemFilterScreen(
     menu: ItemFilterMenu,
     playerInventory: Inventory,
     title: Component
-) : AbstractContainerScreen<ItemFilterMenu>(menu, playerInventory, title) {
+) : BaseScreen<ItemFilterMenu>(menu, playerInventory, title) {
 
-    private val background = ScreenTextures.Background.ItemFilter
+    override val background = ScreenTextures.Background.ItemFilter
 
     private val leftButtons: MutableSet<Button> = mutableSetOf()
     private val rightButtons: MutableSet<Button> = mutableSetOf()
 
     private lateinit var invertBlacklistButton: Button
 
-    override fun init() {
-        this.imageWidth = background.width
-        this.imageHeight = background.height
-
+    override fun baseInit() {
         this.inventoryLabelY = this.imageHeight - 94
+    }
 
-        this.leftPos = (this.width - this.imageWidth) / 2
-        this.topPos = (this.height - this.imageHeight) / 2
-
+    override fun addWidgets() {
         setButtons()
     }
 
@@ -57,7 +53,6 @@ class ItemFilterScreen(
     }
 
     private fun addToggleBlacklistButton() {
-
         val x = this.leftPos + this.imageWidth - 24
         val y = this.topPos + 5
 
@@ -242,21 +237,6 @@ class ItemFilterScreen(
 
             button.visible = !this.menu.filter?.getOrNull(buttonIndex).isNullOrEmpty()
         }
-    }
-
-    // Render stuff
-
-    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick)
-        this.renderTooltip(guiGraphics, mouseX, mouseY)
-    }
-
-    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        this.background.render(
-            guiGraphics,
-            this.leftPos,
-            this.topPos,
-        )
     }
 
 }

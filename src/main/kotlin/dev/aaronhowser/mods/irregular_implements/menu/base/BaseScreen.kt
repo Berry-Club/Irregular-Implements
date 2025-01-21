@@ -12,7 +12,12 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
     title: Component
 ) : AbstractContainerScreen<M>(menu, playerInventory, title) {
 
-    abstract val background: ScreenTextures.Background
+    protected abstract val background: ScreenTextures.Background
+
+    protected val rightPos: Int
+        get() = this.leftPos + this.imageWidth
+    protected val bottomPos: Int
+        get() = this.topPos + this.imageHeight
 
     final override fun init() {
         this.imageWidth = background.width
@@ -22,6 +27,7 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
         this.topPos = (this.height - this.imageHeight) / 2
 
         baseInit()
+        addWidgets()
     }
 
     open fun addWidgets() {

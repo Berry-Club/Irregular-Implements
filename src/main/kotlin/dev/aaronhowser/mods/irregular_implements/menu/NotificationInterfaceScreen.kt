@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -14,21 +14,14 @@ class NotificationInterfaceScreen(
     menu: NotificationInterfaceMenu,
     playerInventory: Inventory,
     title: Component
-) : AbstractContainerScreen<NotificationInterfaceMenu>(menu, playerInventory, title), ScreenWithStrings {
+) : BaseScreen<NotificationInterfaceMenu>(menu, playerInventory, title), ScreenWithStrings {
 
     private lateinit var titleEditBox: EditBox
     private lateinit var descriptionEditBox: EditBox
 
-    private val background = ScreenTextures.Background.NotificationInterface
+    override val background = ScreenTextures.Background.NotificationInterface
 
-    override fun init() {
-        this.imageWidth = background.width
-        this.imageHeight = background.height
-
-        this.leftPos = (this.width - this.imageWidth) / 2
-        this.topPos = (this.height - this.imageHeight) / 2
-
-        this.inventoryLabelY = -1000
+    override fun addWidgets() {
 
         this.titleEditBox = EditBox(
             this.font,
@@ -76,14 +69,6 @@ class NotificationInterfaceScreen(
                 )
             )
         }
-    }
-
-    override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        background.render(
-            guiGraphics,
-            this.leftPos,
-            this.topPos
-        )
     }
 
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
