@@ -1,25 +1,23 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
-class SidedRedstoneBlock(
-    properties: Properties =
-        Properties
-            .ofFullCopy(Blocks.REDSTONE_BLOCK)
-            .isRedstoneConductor(Blocks::never)
-) : DirectionalBlock(properties) {
+class SidedRedstoneBlock : Block(
+    Properties
+        .ofFullCopy(Blocks.REDSTONE_BLOCK)
+        .isRedstoneConductor(Blocks::never)
+) {
 
     companion object {
-        private val CODEC = simpleCodec(::SidedRedstoneBlock)
+        private val FACING = BlockStateProperties.FACING
     }
 
     init {
@@ -29,7 +27,11 @@ class SidedRedstoneBlock(
         )
     }
 
-    override fun codec(): MapCodec<SidedRedstoneBlock> = CODEC
+    override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+        val facing = state.getValue(FACING)
+
+        return direction == facing.opposite
+    }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(FACING)
