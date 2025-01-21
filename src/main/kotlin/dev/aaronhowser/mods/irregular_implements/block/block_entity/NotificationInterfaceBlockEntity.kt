@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
@@ -71,7 +72,7 @@ class NotificationInterfaceBlockEntity(
         )
     }
 
-    private val container = SimpleContainer(1)
+    private val container = ImprovedSimpleContainer(this, 1)
 
     private var icon: ItemStack
         get() = container.getItem(0)

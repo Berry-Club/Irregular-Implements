@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.InventoryTesterBlock
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.InventoryTesterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -12,7 +13,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
-import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -35,7 +35,7 @@ class InventoryTesterBlockEntity(
         const val CONTAINER_DATA_SIZE = 1
     }
 
-    val container = SimpleContainer(CONTAINER_SIZE)
+    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
     val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
 

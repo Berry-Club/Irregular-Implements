@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
@@ -178,7 +179,7 @@ class GlobalChatDetectorBlockEntity(
         return this.blockState.block.name
     }
 
-    private val container = SimpleContainer(9)
+    private val container = ImprovedSimpleContainer(this, 9)
 
     private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
         override fun set(index: Int, value: Int) {

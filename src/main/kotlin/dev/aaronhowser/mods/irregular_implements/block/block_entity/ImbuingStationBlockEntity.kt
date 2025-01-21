@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingInput
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingRecipe
@@ -62,7 +63,7 @@ class ImbuingStationBlockEntity(
 
     // Machine stuff
 
-    private val container = SimpleContainer(CONTAINER_SIZE)
+    private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
     private var progress: Int = 0
         set(value) {
