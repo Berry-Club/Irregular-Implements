@@ -22,7 +22,7 @@ class IgniterScreen(
 
     private lateinit var changeModeButton: ChangingTextButton
 
-    private val background = ScreenTextures.Backgrounds.Igniter
+    private val background = ScreenTextures.Background.Igniter
 
     override fun init() {
         this.imageWidth = background.width

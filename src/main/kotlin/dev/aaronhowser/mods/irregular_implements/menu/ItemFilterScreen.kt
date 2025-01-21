@@ -25,7 +25,7 @@ class ItemFilterScreen(
     title: Component
 ) : AbstractContainerScreen<ItemFilterMenu>(menu, playerInventory, title) {
 
-    private val background = ScreenTextures.Backgrounds.ItemFilter
+    private val background = ScreenTextures.Background.ItemFilter
 
     private val leftButtons: MutableSet<Button> = mutableSetOf()
     private val rightButtons: MutableSet<Button> = mutableSetOf()
@@ -70,11 +70,11 @@ class ItemFilterScreen(
             .size(16)
             .addStage(
                 message = ModLanguageProvider.Tooltips.WHITELIST.toComponent(),
-                menuSprite = ScreenTextures.Sprites.ItemFilter.Whitelist
+                menuSprite = ScreenTextures.Sprite.ItemFilter.Whitelist
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.BLACKLIST.toComponent(),
-                menuSprite = ScreenTextures.Sprites.ItemFilter.Blacklist
+                menuSprite = ScreenTextures.Sprite.ItemFilter.Blacklist
             )
             .currentStageGetter(
                 currentStageGetter = { if (this.menu.isBlacklist) 1 else 0 }

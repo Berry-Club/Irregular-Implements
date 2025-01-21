@@ -22,7 +22,7 @@ class BlockDestabilizerScreen(
     private lateinit var showLazyShapeButton: ImprovedSpriteButton
     private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
-    private val background = ScreenTextures.Backgrounds.BlockDestabilizer
+    private val background = ScreenTextures.Background.BlockDestabilizer
 
     override fun init() {
 
@@ -35,11 +35,11 @@ class BlockDestabilizerScreen(
         this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
+                menuSprite = ScreenTextures.Sprite.BlockDestabilizer.Lazy
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
+                menuSprite = ScreenTextures.Sprite.BlockDestabilizer.NotLazy
             )
             .size(
                 width = 20,
@@ -68,7 +68,7 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            menuSprite = ScreenTextures.Sprites.BlockDestabilizer.ShowLazyShape,
+            menuSprite = ScreenTextures.Sprite.BlockDestabilizer.ShowLazyShape,
             onPress = {
                 ModPacketHandler.messageServer(
                     ClientClickedMenuButton(
@@ -85,7 +85,7 @@ class BlockDestabilizerScreen(
             y = this.topPos + 7,
             width = 20,
             height = 20,
-            menuSprite = ScreenTextures.Sprites.BlockDestabilizer.ResetLazyShape,
+            menuSprite = ScreenTextures.Sprite.BlockDestabilizer.ResetLazyShape,
             onPress = {
                 ModPacketHandler.messageServer(
                     ClientClickedMenuButton(
@@ -105,9 +105,8 @@ class BlockDestabilizerScreen(
     // Rendering
 
     override fun renderBg(guiGraphics: GuiGraphics, partialTick: Float, mouseX: Int, mouseY: Int) {
-        ScreenTextures.renderBackground(
+        this.background.render(
             guiGraphics,
-            this.background,
             this.leftPos,
             this.topPos
         )

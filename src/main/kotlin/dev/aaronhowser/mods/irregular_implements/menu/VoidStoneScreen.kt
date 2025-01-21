@@ -12,7 +12,7 @@ class VoidStoneScreen(
     title: Component
 ) : AbstractContainerScreen<VoidStoneMenu>(menu, playerInventory, title) {
 
-    private val background = ScreenTextures.Backgrounds.VoidStone
+    private val background = ScreenTextures.Background.VoidStone
 
     override fun init() {
         this.imageWidth = background.width

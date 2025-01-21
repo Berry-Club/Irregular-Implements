@@ -24,7 +24,7 @@ class OnlineDetectorScreen(
 
     private lateinit var usernameEditBox: EditBox
 
-    private val background = ScreenTextures.Backgrounds.OnlineDetector
+    private val background = ScreenTextures.Background.OnlineDetector
 
     override fun init() {
         this.imageWidth = background.width

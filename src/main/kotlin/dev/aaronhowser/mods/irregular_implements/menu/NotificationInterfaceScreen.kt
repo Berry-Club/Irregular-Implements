@@ -19,7 +19,7 @@ class NotificationInterfaceScreen(
     private lateinit var titleEditBox: EditBox
     private lateinit var descriptionEditBox: EditBox
 
-    private val background = ScreenTextures.Backgrounds.NotificationInterface
+    private val background = ScreenTextures.Background.NotificationInterface
 
     override fun init() {
         this.imageWidth = background.width

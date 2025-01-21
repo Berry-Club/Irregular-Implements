@@ -12,7 +12,7 @@ class DropFilterScreen(
     title: Component
 ) : AbstractContainerScreen<DropFilterMenu>(menu, playerInventory, title) {
 
-    private val background = ScreenTextures.Backgrounds.DropFilter
+    private val background = ScreenTextures.Background.DropFilter
 
     override fun init() {
         this.imageWidth = background.width

@@ -97,7 +97,7 @@ class MultiStageSpriteButton(
 
         fun addStage(
             message: Component,
-            menuSprite: ScreenTextures.Sprites.MenuSprite
+            menuSprite: ScreenTextures.Sprite
         ): Builder {
             addStage(
                 message = message,

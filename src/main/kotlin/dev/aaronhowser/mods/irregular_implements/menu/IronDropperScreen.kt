@@ -27,7 +27,7 @@ class IronDropperScreen(
     private lateinit var delayButton: MultiStageSpriteButton
     private lateinit var redstoneModeButton: MultiStageSpriteButton
 
-    private val background = ScreenTextures.Backgrounds.IronDropper
+    private val background = ScreenTextures.Background.IronDropper
 
     override fun init() {
         this.imageWidth = background.width
@@ -50,15 +50,15 @@ class IronDropperScreen(
         this.redstoneModeButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.RedstonePulse
+                menuSprite = ScreenTextures.Sprite.IronDropper.RedstonePulse
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuousPowered
+                menuSprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuousPowered
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuous
+                menuSprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuous
             )
             .size(
                 size = buttonSize
@@ -78,15 +78,15 @@ class IronDropperScreen(
         this.delayButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.PickupZero
+                menuSprite = ScreenTextures.Sprite.IronDropper.PickupZero
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.PickupFive
+                menuSprite = ScreenTextures.Sprite.IronDropper.PickupFive
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.PickupTwenty
+                menuSprite = ScreenTextures.Sprite.IronDropper.PickupTwenty
             )
             .size(
                 size = buttonSize
@@ -106,11 +106,11 @@ class IronDropperScreen(
         this.shootModeButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.DirectionRandom
+                menuSprite = ScreenTextures.Sprite.IronDropper.DirectionRandom
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.DirectionForward
+                menuSprite = ScreenTextures.Sprite.IronDropper.DirectionForward
             )
             .size(
                 size = buttonSize
@@ -134,15 +134,15 @@ class IronDropperScreen(
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.EffectParticle
+                menuSprite = ScreenTextures.Sprite.IronDropper.EffectParticle
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.EffectSound
+                menuSprite = ScreenTextures.Sprite.IronDropper.EffectSound
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
-                menuSprite = ScreenTextures.Sprites.IronDropper.EffectBoth
+                menuSprite = ScreenTextures.Sprite.IronDropper.EffectBoth
             )
             .size(
                 size = buttonSize

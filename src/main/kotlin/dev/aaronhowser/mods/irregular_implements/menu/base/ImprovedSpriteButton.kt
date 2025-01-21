@@ -27,7 +27,7 @@ class ImprovedSpriteButton(
         y: Int,
         width: Int,
         height: Int,
-        menuSprite: ScreenTextures.Sprites.MenuSprite,
+        menuSprite: ScreenTextures.Sprite,
         onPress: OnPress,
         message: Component = Component.empty(),
         font: Font

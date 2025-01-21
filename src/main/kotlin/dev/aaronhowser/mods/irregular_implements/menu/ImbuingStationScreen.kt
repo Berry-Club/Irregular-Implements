@@ -12,7 +12,7 @@ class ImbuingStationScreen(
     title: Component
 ) : AbstractContainerScreen<ImbuingStationMenu>(menu, playerInventory, title) {
 
-    private val background = ScreenTextures.Backgrounds.ImbuingStation
+    private val background = ScreenTextures.Background.ImbuingStation
 
     override fun init() {
         this.imageWidth = background.width

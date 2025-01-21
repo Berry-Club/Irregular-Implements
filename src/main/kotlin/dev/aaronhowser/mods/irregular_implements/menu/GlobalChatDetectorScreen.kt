@@ -29,7 +29,7 @@ class GlobalChatDetectorScreen(
     private lateinit var toggleMessagePassButton: MultiStageSpriteButton
     private lateinit var regexStringEditBox: EditBox
 
-    private val background = ScreenTextures.Backgrounds.GlobalChatDetector
+    private val background = ScreenTextures.Background.GlobalChatDetector
 
     override fun init() {
         this.imageWidth = background.width
@@ -43,11 +43,11 @@ class GlobalChatDetectorScreen(
         this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
-                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageStop
+                menuSprite = ScreenTextures.Sprite.ChatDetector.MessageStop
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
-                menuSprite = ScreenTextures.Sprites.ChatDetector.MessageContinue
+                menuSprite = ScreenTextures.Sprite.ChatDetector.MessageContinue
             )
             .size(
                 width = 20,

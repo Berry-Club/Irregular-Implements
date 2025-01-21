@@ -12,7 +12,7 @@ class FilteredPlatformScreen(
     title: Component
 ) : AbstractContainerScreen<FilteredPlatformMenu>(menu, playerInventory, title) {
 
-    private val background = ScreenTextures.Backgrounds.FilteredSuperLubricantPlatform
+    private val background = ScreenTextures.Background.FilteredSuperLubricantPlatform
 
     override fun init() {
         this.imageWidth = background.width
