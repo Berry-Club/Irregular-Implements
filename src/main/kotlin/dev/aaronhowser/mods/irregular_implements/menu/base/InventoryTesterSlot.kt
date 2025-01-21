@@ -8,14 +8,17 @@ import net.minecraft.world.inventory.NonInteractiveResultSlot
 import net.minecraft.world.item.ItemStack
 
 class InventoryTesterSlot(
-    containerLevelAccess: ContainerLevelAccess,
+    private val containerLevelAccess: ContainerLevelAccess,
     x: Int,
     y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
 
-    val blockEntity: InventoryTesterBlockEntity? =
-        containerLevelAccess.evaluate { level, pos ->
-            level.getBlockEntity(pos) as? InventoryTesterBlockEntity
+    val blockEntity: InventoryTesterBlockEntity? = containerLevelAccess.evaluate { level, pos ->
+        val blockEntity = level.getBlockEntity(pos) as? InventoryTesterBlockEntity
+
+        println(blockEntity != null)
+
+        blockEntity
         }.orElse(null)
 
     var stack: ItemStack
