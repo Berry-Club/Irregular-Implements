@@ -34,9 +34,7 @@ class ItemFilterScreen(
 
     override fun baseInit() {
         this.inventoryLabelY = this.imageHeight - 94
-    }
 
-    override fun addWidgets() {
         setButtons()
     }
 

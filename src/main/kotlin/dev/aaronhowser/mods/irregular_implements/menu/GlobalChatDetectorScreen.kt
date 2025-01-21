@@ -27,9 +27,6 @@ class GlobalChatDetectorScreen(
 
     override fun baseInit() {
         this.inventoryLabelY -= 8
-    }
-
-    override fun addWidgets() {
 
         this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(

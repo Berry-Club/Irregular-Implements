@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -21,8 +20,7 @@ class NotificationInterfaceScreen(
 
     override val background = ScreenTextures.Background.NotificationInterface
 
-    override fun addWidgets() {
-
+    override fun baseInit() {
         this.titleEditBox = EditBox(
             this.font,
             this.leftPos + 34,
@@ -71,9 +69,7 @@ class NotificationInterfaceScreen(
         }
     }
 
-    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
-    }
+    override var showInventoryLabel: Boolean = false
 
     override fun receivedString(stringId: Int, string: String) {
         when (stringId) {

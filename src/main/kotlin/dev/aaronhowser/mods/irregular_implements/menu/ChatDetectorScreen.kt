@@ -10,7 +10,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -29,9 +28,7 @@ class ChatDetectorScreen(
     override fun baseInit() {
         this.titleLabelX = 10
         this.titleLabelY = 10
-    }
 
-    override fun addWidgets() {
         this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
@@ -87,9 +84,7 @@ class ChatDetectorScreen(
 
     // Rendering
 
-    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
-    }
+    override var showInventoryLabel: Boolean = false
 
     // Behavior
 

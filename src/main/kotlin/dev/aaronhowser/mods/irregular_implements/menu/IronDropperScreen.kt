@@ -26,9 +26,6 @@ class IronDropperScreen(
 
     override fun baseInit() {
         this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
-    }
-
-    override fun addWidgets() {
 
         val buttonSize = 20
         val spaceBetween = 5

@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -21,8 +20,7 @@ class OnlineDetectorScreen(
 
     override val background = ScreenTextures.Background.OnlineDetector
 
-    override fun addWidgets() {
-
+    override fun baseInit() {
         val editBoxHeight = 20
 
         this.usernameEditBox = EditBox(
@@ -42,9 +40,7 @@ class OnlineDetectorScreen(
         this.addRenderableWidget(this.usernameEditBox)
     }
 
-    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
-    }
+    override var showInventoryLabel: Boolean = false
 
     // Behavior
 

@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.ChangingTextButton
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -19,7 +18,7 @@ class IgniterScreen(
 
     override val background = ScreenTextures.Background.Igniter
 
-    override fun addWidgets() {
+    override fun baseInit() {
         this.changeModeButton = ChangingTextButton(
             x = this.leftPos + 5,
             y = this.topPos + 5,
@@ -32,8 +31,7 @@ class IgniterScreen(
         this.addRenderableWidget(this.changeModeButton)
     }
 
-    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        // Do nothing
-    }
+    override var showInventoryLabel: Boolean = false
+    override var showTitleLabel: Boolean = false
 
 }

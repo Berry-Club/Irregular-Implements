@@ -27,11 +27,6 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
         this.topPos = (this.height - this.imageHeight) / 2
 
         baseInit()
-        addWidgets()
-    }
-
-    open fun addWidgets() {
-
     }
 
     open fun baseInit() {
@@ -40,6 +35,19 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
 
     override fun isPauseScreen(): Boolean {
         return false
+    }
+
+    protected open val showTitleLabel = true
+    protected open val showInventoryLabel = true
+
+    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        if (showTitleLabel) {
+            guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false)
+        }
+
+        if (showInventoryLabel) {
+            guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false)
+        }
     }
 
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

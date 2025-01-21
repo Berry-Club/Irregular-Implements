@@ -24,7 +24,7 @@ class BlockDestabilizerScreen(
 
     override val background = ScreenTextures.Background.BlockDestabilizer
 
-    override fun addWidgets() {
+    override fun baseInit() {
         this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
@@ -95,8 +95,7 @@ class BlockDestabilizerScreen(
         this.addRenderableWidget(this.forgetLazyShapeButton)
     }
 
-    override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        // Do nothing
-    }
+    override var showInventoryLabel: Boolean = false
+    override var showTitleLabel: Boolean = false
 
 }
