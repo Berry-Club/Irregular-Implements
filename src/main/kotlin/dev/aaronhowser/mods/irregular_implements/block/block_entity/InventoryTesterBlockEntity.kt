@@ -129,11 +129,4 @@ class InventoryTesterBlockEntity(
     override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
     override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
-    override fun setChanged() {
-        super.setChanged()
-
-        // WHY IS THIS NEEDED ONLY FOR THIS ONE SPECIFIC BLOCK ENTITY?
-        level?.sendBlockUpdated(this.blockPos, this.blockState, this.blockState, 1 or 2)
-    }
-
 }
