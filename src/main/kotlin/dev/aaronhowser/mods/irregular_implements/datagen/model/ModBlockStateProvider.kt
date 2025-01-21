@@ -119,7 +119,16 @@ class ModBlockStateProvider(
                     .build()
             }
 
-        simpleBlockItem(block, blockModel)
+
+        val itemModel = itemModels()
+            .simpleBlockItem(block)
+            .transforms()
+
+            .transform(ItemDisplayContext.GUI)
+            .rotation(30f, 225f, 0f)
+            .translation(0f, 10.5f, 0f)
+            .scale(2.18f)
+            .end()
     }
 
     private fun imbuingStation() {
