@@ -80,6 +80,11 @@ object ModMenuTypes {
             MenuType(::InventoryTesterMenu, FeatureFlags.DEFAULT_FLAGS)
         })
 
+    val ADVANCED_ITEM_COLLECTOR: DeferredHolder<MenuType<*>, MenuType<AdvancedItemCollectorMenu>> =
+        MENU_TYPE_REGISTRY.register("advanced_item_collector", Supplier {
+            MenuType(::AdvancedItemCollectorMenu, FeatureFlags.DEFAULT_FLAGS)
+        })
+
     fun registerScreens(event: RegisterMenuScreensEvent) {
         event.register(IRON_DROPPER.get(), ::IronDropperScreen)
         event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
@@ -94,6 +99,7 @@ object ModMenuTypes {
         event.register(FILTERED_PLATFORM.get(), ::FilteredPlatformScreen)
         event.register(DROP_FILTER.get(), ::DropFilterScreen)
         event.register(INVENTORY_TESTER.get(), ::InventoryTesterScreen)
+        event.register(ADVANCED_ITEM_COLLECTOR.get(), ::AdvancedItemCollectorScreen)
     }
 
 }
