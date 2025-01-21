@@ -45,6 +45,8 @@ class InventoryTesterBlockEntity(
         }
     }
 
+    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+
     private var invertSignal: Boolean = false
         set(value) {
             field = value
@@ -104,8 +106,6 @@ class InventoryTesterBlockEntity(
     }
 
     // Menu stuff
-
-    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
     val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
         override fun get(index: Int): Int {
