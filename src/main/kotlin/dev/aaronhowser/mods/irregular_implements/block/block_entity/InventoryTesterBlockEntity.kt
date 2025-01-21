@@ -68,6 +68,7 @@ class InventoryTesterBlockEntity(
         private set(value) {
             field = value
             setChanged()
+            level?.updateNeighborsAt(this.blockPos, this.blockState.block)
         }
 
     private var counter: Int = 0
@@ -81,8 +82,9 @@ class InventoryTesterBlockEntity(
         this.counter = 0
 
         val item = this.container.getItem(0)
-        if (item.isEmpty && this.isEmittingRedstone) {
-            this.isEmittingRedstone = false
+        if (item.isEmpty) {
+            if (this.isEmittingRedstone) this.isEmittingRedstone = false
+            return
         }
 
         val facing = this.blockState.getValue(InventoryTesterBlock.FACING)
@@ -95,7 +97,6 @@ class InventoryTesterBlockEntity(
 
         if (redstone != this.isEmittingRedstone) {
             this.isEmittingRedstone = redstone
-            level.updateNeighborsAt(this.blockPos, this.blockState.block)
         }
     }
 
