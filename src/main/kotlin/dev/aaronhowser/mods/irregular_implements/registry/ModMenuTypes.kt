@@ -93,6 +93,7 @@ object ModMenuTypes {
         event.register(ITEM_FILTER.get(), ::ItemFilterScreen)
         event.register(FILTERED_PLATFORM.get(), ::FilteredPlatformScreen)
         event.register(DROP_FILTER.get(), ::DropFilterScreen)
+        event.register(INVENTORY_TESTER.get(), ::InventoryTesterScreen)
     }
 
 }

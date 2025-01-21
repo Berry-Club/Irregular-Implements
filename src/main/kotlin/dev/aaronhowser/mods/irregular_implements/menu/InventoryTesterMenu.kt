@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.menu.base.InventoryTesterSlot
 import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -7,18 +8,43 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class InventoryTesterMenu(
     containerId: Int,
-    private val playerInventory: Inventory,
+    playerInventory: Inventory,
     private val containerLevelAccess: ContainerLevelAccess
 ) : AbstractContainerMenu(ModMenuTypes.INVENTORY_TESTER.get(), containerId), MenuWithButtons {
 
     constructor(containerId: Int, playerInventory: Inventory) : this(containerId, playerInventory, ContainerLevelAccess.NULL)
 
+    init {
+        val slot = InventoryTesterSlot(this.containerLevelAccess, 80, 35)
+        this.addSlot(slot)
+
+        // Add the 27 slots of the player inventory
+        for (row in 0..2) {
+            for (column in 0..8) {
+                val slotIndex = column + row * 9 + 9
+                val x = 8 + column * 18
+                val y = 59 + row * 18
+
+                this.addSlot(Slot(playerInventory, slotIndex, x, y))
+            }
+        }
+
+        // Add the 9 slots of the player hotbar
+        for (hotbarIndex in 0..8) {
+            val x = 8 + hotbarIndex * 18
+            val y = 117
+
+            this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
+        }
+    }
+
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        TODO("Not yet implemented")
+        return ItemStack.EMPTY
     }
 
     override fun stillValid(player: Player): Boolean {
