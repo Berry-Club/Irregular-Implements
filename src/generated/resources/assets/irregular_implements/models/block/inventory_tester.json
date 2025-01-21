@@ -7,19 +7,19 @@
           "texture": "#texture"
         },
         "east": {
-          "texture": "#texture"
+          "texture": "#side"
         },
         "north": {
-          "texture": "#texture"
+          "texture": "#side"
         },
         "south": {
-          "texture": "#texture"
+          "texture": "#side"
         },
         "up": {
           "texture": "#texture"
         },
         "west": {
-          "texture": "#texture"
+          "texture": "#side"
         }
       },
       "from": [
@@ -36,6 +36,7 @@
   ],
   "textures": {
     "particle": "irregular_implements:block/inventory_tester",
+    "side": "minecraft:block/smooth_stone",
     "texture": "irregular_implements:block/inventory_tester"
   }
 }

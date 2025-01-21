@@ -73,16 +73,24 @@ class ModBlockStateProvider(
         val block = ModBlocks.INVENTORY_TESTER.get()
 
         val texture = modLoc("block/inventory_tester")
+        val slabTexture = mcLoc("block/smooth_stone")
 
-        // Mode defaults to being on the bottom
+        // Model defaults to being on the bottom
         val blockModel = models()
             .withExistingParent(name(block), "block/thin_block")
             .texture("texture", texture)
+            .texture("side", slabTexture)
             .texture("particle", texture)
             .element()
             .from(6f, 0f, 6f)
             .to(10f, 1f, 10f)
-            .textureAll("#texture")
+            .allFaces { face, modelBuilder ->
+                if (face.axis.isVertical) {
+                    modelBuilder.texture("#texture")
+                } else {
+                    modelBuilder.texture("#side")
+                }
+            }
             .end()
 
         getVariantBuilder(block)
