@@ -67,6 +67,111 @@ class ModBlockStateProvider(
         notificationInterface()
         imbuingStation()
         inventoryTester()
+        itemCollectors()
+    }
+
+    private fun itemCollectors() {
+        val blocks = listOf(
+            ModBlocks.ITEM_COLLECTOR.get(),
+            ModBlocks.ADVANCED_ITEM_COLLECTOR.get()
+        )
+
+        for (block in blocks) {
+
+            val texture = if (block == ModBlocks.ITEM_COLLECTOR.get())
+                modLoc("block/item_collector")
+            else
+                modLoc("block/advanced_item_collector")
+
+            val model = models()
+                .withExistingParent(name(block), "block/block")
+                .texture("texture", texture)
+                .texture("particle", texture)
+
+                .element()
+                .from(6f, 0f, 6f)
+                .to(10f, 1f, 10f)
+                .allFaces { direction, modelBuilder ->
+                    if (direction.axis.isVertical) {
+                        modelBuilder.uvs(6f, 12f, 10f, 16f)
+                    } else {
+                        modelBuilder.uvs(6f, 15f, 10f, 16f)
+                    }
+
+                    modelBuilder.texture("#texture")
+                }
+                .end()
+
+                .element()
+                .from(6.5f, 1f, 6.5f)
+                .to(9.5f, 2f, 9.5f)
+                .allFaces { direction, modelBuilder ->
+                    if (direction == Direction.DOWN) {
+                        modelBuilder.uvs(9f, 15f, 7f, 14f)
+                    } else {
+                        modelBuilder.uvs(7f, 14f, 9f, 15f)
+                    }
+
+                    modelBuilder.texture("#texture")
+                }
+                .end()
+
+                .element()
+                .from(7.5f, 2f, 7.5f)
+                .to(8.5f, 4f, 8.5f)
+                .allFaces { direction, modelBuilder ->
+                    when (direction) {
+                        Direction.DOWN -> modelBuilder.uvs(7f, 13f, 6f, 12f)
+                        Direction.UP -> modelBuilder.uvs(6f, 12f, 7f, 13f)
+                        else -> modelBuilder.uvs(6f, 10f, 7f, 12f)
+                    }
+
+                    modelBuilder.texture("#texture")
+                }
+                .end()
+
+                .element()
+                .from(7.5f, 4f, 7.5f)
+                .to(8.5f, 5f, 8.5f)
+                .allFaces { direction, modelBuilder ->
+                    if (direction == Direction.DOWN) {
+                        modelBuilder.uvs(7f, 10f, 6f, 9f)
+                    } else {
+                        modelBuilder.uvs(6f, 9f, 7f, 10f)
+                    }
+
+                    modelBuilder.texture("#texture")
+                }
+                .end()
+
+            getVariantBuilder(block)
+                .forAllStates {
+                    val facing = it.getValue(ItemCollectorBlock.FACING)
+
+                    val yRotation = when (facing) {
+                        Direction.NORTH -> 0
+                        Direction.EAST -> 90
+                        Direction.SOUTH -> 180
+                        Direction.WEST -> 270
+                        else -> 0
+                    }
+
+                    val xRotation = when (facing) {
+                        Direction.UP -> 180
+                        Direction.DOWN -> 0
+                        else -> 90
+                    }
+
+                    ConfiguredModel
+                        .builder()
+                        .modelFile(model)
+                        .rotationY(yRotation)
+                        .rotationX(xRotation)
+                        .build()
+                }
+
+            simpleBlockItem(block, model)
+        }
     }
 
     private fun inventoryTester() {
