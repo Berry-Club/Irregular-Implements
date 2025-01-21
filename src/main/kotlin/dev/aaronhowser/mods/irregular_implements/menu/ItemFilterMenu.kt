@@ -59,7 +59,7 @@ class ItemFilterMenu(
             val x = 8 + index * 18
             val y = 26
 
-            val slot = FilterSlot(::filterStack, this.holderLookup, index, x, y)
+            val slot = FilterSlot(::filterStack, this.holderLookup, x, y)
 
             this.addSlot(slot)
         }
