@@ -13,4 +13,10 @@ class InventoryTesterScreen(
 
     override val background: ScreenTextures.Background = ScreenTextures.Background.InventoryTester
 
+    override fun baseInit() {
+        this.titleLabelX = 35
+        this.inventoryLabelX = 35
+        this.inventoryLabelY = this.imageHeight - 94
+    }
+
 }

@@ -20,7 +20,7 @@ class InventoryTesterMenu(
     constructor(containerId: Int, playerInventory: Inventory) : this(containerId, playerInventory, ContainerLevelAccess.NULL)
 
     init {
-        val slot = InventoryTesterSlot(this.containerLevelAccess, 80, 35)
+        val slot = InventoryTesterSlot(this.containerLevelAccess, 64, 18)
         this.addSlot(slot)
 
         // Add the 27 slots of the player inventory
@@ -28,7 +28,7 @@ class InventoryTesterMenu(
             for (column in 0..8) {
                 val slotIndex = column + row * 9 + 9
                 val x = 8 + column * 18
-                val y = 59 + row * 18
+                val y = 54 + row * 18
 
                 this.addSlot(Slot(playerInventory, slotIndex, x, y))
             }
@@ -37,7 +37,7 @@ class InventoryTesterMenu(
         // Add the 9 slots of the player hotbar
         for (hotbarIndex in 0..8) {
             val x = 8 + hotbarIndex * 18
-            val y = 117
+            val y = 112
 
             this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
         }
