@@ -12,7 +12,6 @@ import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry.Companion.isNullOrEmpty
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.ChatFormatting
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -63,11 +62,11 @@ class ItemFilterScreen(
             .size(16)
             .addStage(
                 message = ModLanguageProvider.Tooltips.WHITELIST.toComponent(),
-                menuSprite = ScreenTextures.Sprite.ItemFilter.Whitelist
+                sprite = ScreenTextures.Sprite.ItemFilter.Whitelist
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.BLACKLIST.toComponent(),
-                menuSprite = ScreenTextures.Sprite.ItemFilter.Blacklist
+                sprite = ScreenTextures.Sprite.ItemFilter.Blacklist
             )
             .currentStageGetter(
                 currentStageGetter = { if (this.menu.isBlacklist) 1 else 0 }

@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButto
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -28,11 +27,11 @@ class BlockDestabilizerScreen(
         this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
             .addStage(
                 message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
-                menuSprite = ScreenTextures.Sprite.BlockDestabilizer.Lazy
+                sprite = ScreenTextures.Sprite.BlockDestabilizer.Lazy
             )
             .addStage(
                 message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
-                menuSprite = ScreenTextures.Sprite.BlockDestabilizer.NotLazy
+                sprite = ScreenTextures.Sprite.BlockDestabilizer.NotLazy
             )
             .size(
                 width = 20,

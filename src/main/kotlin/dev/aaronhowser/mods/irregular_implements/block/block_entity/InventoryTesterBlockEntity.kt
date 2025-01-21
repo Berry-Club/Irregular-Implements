@@ -16,6 +16,7 @@ import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
@@ -29,11 +30,25 @@ class InventoryTesterBlockEntity(
     companion object {
         const val INVERT_SIGNAL_NBT = "InvertSignal"
         const val IS_EMITTING_REDSTONE_NBT = "IsEmittingRedstone"
+
+        const val CONTAINER_SIZE = 1
+        const val CONTAINER_DATA_SIZE = 1
     }
 
-    val container = SimpleContainer(1)
+    val container = SimpleContainer(CONTAINER_SIZE)
 
-    var invertSignal: Boolean = false
+    val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+
+        override fun get(index: Int): Int {
+            return if (invertSignal) 1 else 0
+        }
+
+        override fun set(index: Int, value: Int) {
+            invertSignal = value != 0
+        }
+    }
+
+    private var invertSignal: Boolean = false
         set(value) {
             field = value
             setChanged()
@@ -83,7 +98,7 @@ class InventoryTesterBlockEntity(
     }
 
     override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return InventoryTesterMenu(containerId, playerInventory, this.container)
+        return InventoryTesterMenu(containerId, playerInventory, this.container, this.containerData)
     }
 
     override fun getDisplayName(): Component {

@@ -1,14 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu.base
 
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.Button.OnPress
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.Mth
 import java.util.function.Supplier
 
 class MultiStageSpriteButton(
@@ -97,13 +95,13 @@ class MultiStageSpriteButton(
 
         fun addStage(
             message: Component,
-            menuSprite: ScreenTextures.Sprite
+            sprite: ScreenTextures.Sprite
         ): Builder {
             addStage(
                 message = message,
-                sprite = menuSprite.texture,
-                spriteWidth = menuSprite.width,
-                spriteHeight = menuSprite.height
+                sprite = sprite.texture,
+                spriteWidth = sprite.width,
+                spriteHeight = sprite.height
             )
 
             return this
