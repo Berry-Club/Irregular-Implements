@@ -6,16 +6,16 @@
     "facing=east": {
       "model": "irregular_implements:block/item_collector",
       "x": 90,
-      "y": 90
+      "y": 270
     },
     "facing=north": {
       "model": "irregular_implements:block/item_collector",
-      "x": 90
+      "x": 90,
+      "y": 180
     },
     "facing=south": {
       "model": "irregular_implements:block/item_collector",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "facing=up": {
       "model": "irregular_implements:block/item_collector",
@@ -24,7 +24,7 @@
     "facing=west": {
       "model": "irregular_implements:block/item_collector",
       "x": 90,
-      "y": 270
+      "y": 90
     }
   }
 }

@@ -149,10 +149,10 @@ class ModBlockStateProvider(
                     val facing = it.getValue(ItemCollectorBlock.FACING)
 
                     val yRotation = when (facing) {
-                        Direction.NORTH -> 0
-                        Direction.EAST -> 90
-                        Direction.SOUTH -> 180
-                        Direction.WEST -> 270
+                        Direction.SOUTH -> 0
+                        Direction.WEST -> 90
+                        Direction.NORTH -> 180
+                        Direction.EAST -> 270
                         else -> 0
                     }
 
