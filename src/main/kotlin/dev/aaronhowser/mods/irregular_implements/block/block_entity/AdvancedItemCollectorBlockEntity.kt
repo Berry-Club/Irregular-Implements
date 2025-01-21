@@ -27,6 +27,8 @@ class AdvancedItemCollectorBlockEntity(
         const val Y_RADIUS_NBT = "YRadius"
         const val Z_RADIUS_NBT = "ZRadius"
 
+        const val CONTAINER_SIZE = 1
+
         const val CONTAINER_DATA_SIZE = 3
         const val X_RADIUS_INDEX = 0
         const val Y_RADIUS_INDEX = 1
@@ -51,7 +53,7 @@ class AdvancedItemCollectorBlockEntity(
             setChanged()
         }
 
-    val container = ImprovedSimpleContainer(this, 1)
+    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
     override fun getFilter(): ItemFilterDataComponent? {
         return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER_ENTRIES)
