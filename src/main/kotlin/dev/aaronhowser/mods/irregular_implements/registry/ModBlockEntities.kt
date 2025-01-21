@@ -170,4 +170,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val INVENTORY_TESTER: DeferredHolder<BlockEntityType<*>, BlockEntityType<InventoryTesterBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("inventory_tester", Supplier {
+            BlockEntityType.Builder.of(
+                ::InventoryTesterBlockEntity,
+                ModBlocks.INVENTORY_TESTER.get()
+            ).build(null)
+        })
+
 }
