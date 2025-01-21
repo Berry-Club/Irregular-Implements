@@ -178,7 +178,12 @@ class GlobalChatDetectorBlockEntity(
         return this.blockState.block.name
     }
 
-    private val container = SimpleContainer(9)
+    private val container = object : SimpleContainer(9) {
+        override fun setChanged() {
+            super.setChanged()
+            this@GlobalChatDetectorBlockEntity.setChanged()
+        }
+    }
 
     private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
         override fun set(index: Int, value: Int) {

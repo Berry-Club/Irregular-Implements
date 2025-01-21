@@ -38,7 +38,12 @@ class FilteredPlatformBlockEntity(
         return filter.test(entity.item)
     }
 
-    val container = SimpleContainer(1)
+    val container = object : SimpleContainer(1) {
+        override fun setChanged() {
+            super.setChanged()
+            this@FilteredPlatformBlockEntity.setChanged()
+        }
+    }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
