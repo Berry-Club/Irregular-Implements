@@ -65,6 +65,7 @@ object EscapeRopeHandler {
             ) return true
 
             val limit = ServerConfig.ESCAPE_ROPE_MAX_BLOCKS.get()
+            val shouldSpawnIndicator = false    //TODO: Config
 
             // The more often it runs, the faster it is
             val maxRuns = ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
@@ -94,7 +95,9 @@ object EscapeRopeHandler {
                 }
 
                 //TODO: Make this clientside only
-                OtherUtil.spawnIndicatorBlockDisplay(level, nextPos)
+                if (shouldSpawnIndicator) {
+                    OtherUtil.spawnIndicatorBlockDisplay(level, nextPos)
+                }
 
                 val posIsEmpty = level.isLoaded(nextPos) && level.getBlockState(nextPos).getCollisionShape(level, nextPos).isEmpty
                 if (!posIsEmpty) {
