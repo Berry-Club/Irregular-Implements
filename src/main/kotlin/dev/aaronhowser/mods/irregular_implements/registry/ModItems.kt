@@ -28,13 +28,13 @@ object ModItems {
     val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
-    val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
     val GOLDEN_EGG = basic("golden_egg")
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
         register("emerald_compass") { EmeraldCompassItem() }
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
         register("blaze_and_steel") { BlazeAndSteelItem() }
-    val ESCAPE_ROPE = basic("escape_rope")
+    val ESCAPE_ROPE: DeferredItem<EscapeRopeItem> =
+        register("escape_rope") { EscapeRopeItem() }
     val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
         register("chunk_analyzer") { ChunkAnalyzerItem() }
     val LAVA_CHARM: DeferredItem<LavaCharmItem> =
@@ -61,6 +61,7 @@ object ModItems {
     val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
     val SPECTRE_INGOT = basic("spectre_ingot")
     val SPECTRE_STRING = basic("spectre_string")
+    val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
 
     // Bucket
     val ENDER_BUCKET: DeferredItem<EnderBucketItem> =

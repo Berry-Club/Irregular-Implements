@@ -12,6 +12,8 @@ import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.savedata.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.savedata.WorldInformationSavedData.Companion.worldInformationSavedData
+import dev.aaronhowser.mods.irregular_implements.util.EscapeRopeHandler
+import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntityType
@@ -32,11 +34,18 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
+import net.neoforged.neoforge.event.tick.ServerTickEvent
 
 @EventBusSubscriber(
     modid = IrregularImplements.ID
 )
 object OtherEvents {
+
+    @SubscribeEvent
+    fun afterServerTick(event: ServerTickEvent.Post) {
+        ServerScheduler.tick()
+        EscapeRopeHandler.tick()
+    }
 
     @SubscribeEvent
     fun afterEntityDamaged(event: LivingDamageEvent.Post) {
