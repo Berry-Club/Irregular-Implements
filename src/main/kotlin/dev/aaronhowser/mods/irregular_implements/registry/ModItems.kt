@@ -45,6 +45,8 @@ object ModItems {
         basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
     val DIVINING_ROD: DeferredItem<DiviningRodItem> =
         register("divining_rod") { DiviningRodItem() }
+
+    // Block items
     val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
         register("diaphanous_block") { DiaphanousBlockItem() }
     val CUSTOM_CRAFTING_TABLE: DeferredItem<CustomCraftingTableBlockItem> =
