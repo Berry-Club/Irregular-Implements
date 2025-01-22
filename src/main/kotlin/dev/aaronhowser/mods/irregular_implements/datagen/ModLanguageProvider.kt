@@ -82,6 +82,8 @@ class ModLanguageProvider(
         addConfig(ServerConfig.BLOCK_REPLACER_UNIQUE_BLOCKS, "Block Replacer Unique Blocks")
         addConfig(ServerConfig.DIVINING_ROD_CHECK_RADIUS, "Divining Rod Check Radius")
         addConfig(ServerConfig.RAIN_SHIELD_CHUNK_RADIUS, "Rain Shield Chunk Radius")
+        addConfig(ServerConfig.ESCAPE_ROPE_MAX_BLOCKS, "Escape Rope Max Blocks")
+        addConfig(ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK, "Escape Rope Blocks Per Tick")
 
         addConfig(ServerConfig.SPECTRE_IMBUE_CHANCE, "Spectre Imbue Chance")
 
@@ -762,7 +764,7 @@ class ModLanguageProvider(
         addInfo(ModItems.SUPER_LUBRICANT_TINCTURE, "Can be applied to any Boots to make you slide when wearing them.\n\nCan be washed with a Water Bottle after.")
         addInfo(ModItems.DIVINING_ROD, "When held in hand, highlights the corresponding ore if it's within 20 blocks of you.\n\nThis radius can be configured.")
         addInfo(ModItems.LOTUS_SEEDS, "Can be planted to grow Lotus Blossoms.\n\nLotus plants can be found in cold biomes.")
-        addInfo(ModItems.ESCAPE_ROPE, "Hold right-click to begin searching for the nearest location that can see the sky.\n\nRelease to teleport to that location, if found.")
+        addInfo(ModItems.ESCAPE_ROPE, "Hold right-click to begin searching for the nearest location that can see the sky.\n\nIf it finds one, it'll teleport you there.")
         addInfo(ModItems.WEATHER_EGG_SUNNY, "When thrown, spawns a cloud that changes the weather to clear.")
         addInfo(ModItems.WEATHER_EGG_RAINY, "When thrown, spawns a cloud that changes the weather to rain.")
         addInfo(ModItems.WEATHER_EGG_STORMY, "When thrown, spawns a cloud that changes the weather to a thunderstorm.")
