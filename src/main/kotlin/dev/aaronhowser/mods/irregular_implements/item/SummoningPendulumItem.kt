@@ -32,22 +32,22 @@ class SummoningPendulumItem : Item(
         interactionTarget: LivingEntity,
         usedHand: InteractionHand
     ): InteractionResult {
-        if (interactionTarget.type.`is`(ModEntityTypeTagsProvider.SUMMONING_PENDULUM_BLACKLIST)) return InteractionResult.PASS
+        if (player.level().isClientSide
+            || interactionTarget.type.`is`(ModEntityTypeTagsProvider.SUMMONING_PENDULUM_BLACKLIST)
+        ) return InteractionResult.PASS
 
         val usedStack = player.getItemInHand(usedHand)      // WHY IS THIS NECESSARY???
 
-        val currentEntityList = usedStack.get(ModDataComponents.ENTITY_LIST) ?: emptyList()
-        if (currentEntityList.size >= ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()) return InteractionResult.PASS
+        val entityList = usedStack.get(ModDataComponents.ENTITY_LIST)?.toMutableList() ?: mutableListOf()
+        if (entityList.size >= ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()) return InteractionResult.FAIL
 
         val entityNbt = CompoundTag()
         if (!interactionTarget.save(entityNbt)) return InteractionResult.FAIL
 
         val customData = CustomData.of(entityNbt)
-        val newEntityList = currentEntityList + customData
+        entityList.add(customData)
 
-        if (usedStack.set(ModDataComponents.ENTITY_LIST, newEntityList) == null) {
-            return InteractionResult.FAIL
-        }
+        usedStack.set(ModDataComponents.ENTITY_LIST, entityList)
 
         interactionTarget.remove(Entity.RemovalReason.DISCARDED)
 
