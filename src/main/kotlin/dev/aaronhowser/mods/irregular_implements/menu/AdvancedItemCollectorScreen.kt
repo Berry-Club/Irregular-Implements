@@ -1,9 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -26,7 +29,7 @@ class AdvancedItemCollectorScreen(
     override fun baseInit() {
 
         val lowerButtonLeft = this.guiLeft + 29
-        val raiseButtonLeft = this.guiLeft + 90 + 14 + 22
+        val raiseButtonLeft = this.guiLeft + 127
 
         val xButtonTop = this.guiTop + 20
         val yButtonTop = this.guiTop + 45
@@ -110,6 +113,56 @@ class AdvancedItemCollectorScreen(
         this.addRenderableWidget(this.buttonRaiseY)
         this.addRenderableWidget(this.buttonLowerZ)
         this.addRenderableWidget(this.buttonRaiseZ)
+    }
+
+    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick)
+        drawRadiusTexts(guiGraphics)
+    }
+
+    private fun drawRadiusTexts(guiGraphics: GuiGraphics) {
+
+        val middle = this.leftPos + this.imageWidth / 2
+
+        val xChars = ModLanguageProvider.Messages.ADVANCED_ITEM_COLLECTOR_X_RADIUS
+            .toComponent(this.menu.xRadius)
+            .visualOrderText
+
+        guiGraphics.drawString(
+            this.font,
+            xChars,
+            middle - font.width(xChars) / 2,
+            this.guiTop + 20 + 6,
+            0x404040,
+            false
+        )
+
+        val yChars = ModLanguageProvider.Messages.ADVANCED_ITEM_COLLECTOR_Y_RADIUS
+            .toComponent(this.menu.yRadius)
+            .visualOrderText
+
+        guiGraphics.drawString(
+            this.font,
+            yChars,
+            middle - font.width(yChars) / 2,
+            this.guiTop + 45 + 6,
+            0x404040,
+            false
+        )
+
+        val zChars = ModLanguageProvider.Messages.ADVANCED_ITEM_COLLECTOR_Z_RADIUS
+            .toComponent(this.menu.zRadius)
+            .visualOrderText
+
+        guiGraphics.drawString(
+            this.font,
+            zChars,
+            middle - font.width(zChars) / 2,
+            this.guiTop + 70 + 6,
+            0x404040,
+            false
+        )
+
     }
 
     override val showInventoryLabel: Boolean = false

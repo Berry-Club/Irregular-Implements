@@ -151,6 +151,9 @@ class ModLanguageProvider(
         const val FLUID_FALL_DEATH_GENERIC = "death.fell.accident.fluid_fall.generic"
         const val ILLUMINATOR_ALREADY_PRESENT = "message.irregular_implements.spectre_illuminator.already_present"
         const val FE_RATIO = "message.irregular_implements.fe_ratio"
+        const val ADVANCED_ITEM_COLLECTOR_X_RADIUS = "message.irregular_implements.advanced_item_collector.x_radius"
+        const val ADVANCED_ITEM_COLLECTOR_Y_RADIUS = "message.irregular_implements.advanced_item_collector.y_radius"
+        const val ADVANCED_ITEM_COLLECTOR_Z_RADIUS = "message.irregular_implements.advanced_item_collector.z_radius"
     }
 
     private fun addMessages() {
@@ -166,6 +169,9 @@ class ModLanguageProvider(
         add(Messages.FLUID_FALL_DEATH_GENERIC, "%s splattered against the surface of %s because they could walk on it")
         add(Messages.ILLUMINATOR_ALREADY_PRESENT, "This chunk already has a Spectre Illuminator!")
         add(Messages.FE_RATIO, "%s FE / %s FE")
+        add(Messages.ADVANCED_ITEM_COLLECTOR_X_RADIUS, "X Radius: %d")
+        add(Messages.ADVANCED_ITEM_COLLECTOR_Y_RADIUS, "Y Radius: %d")
+        add(Messages.ADVANCED_ITEM_COLLECTOR_Z_RADIUS, "Z Radius: %d")
     }
 
     object Subtitles {
