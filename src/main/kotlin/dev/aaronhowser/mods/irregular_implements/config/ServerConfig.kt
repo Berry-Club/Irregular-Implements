@@ -41,6 +41,9 @@ class ServerConfig(
         lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
 
         const val SPECTRE_CATEGORY = "spectre"
+
+        lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
+        lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
     }
 
     init {
@@ -48,6 +51,56 @@ class ServerConfig(
         spectreConfigs()
 
         builder.build()
+    }
+
+    private fun basicServerConfigs() {
+        BLOCK_DESTABILIZER_LIMIT = builder
+            .comment("How many blocks should the Block Destabilizer be able to drop?")
+            .defineInRange("blockDestabilizerLimit", 50, 1, Int.MAX_VALUE)
+
+        BIOME_PAINTER_HORIZONTAL_RADIUS = builder
+            .comment("What should be the horizontal radius of the Biome Painter?")
+            .defineInRange("biomePainterHorizontalRadius", 0, 0, Int.MAX_VALUE)
+
+        BIOME_PAINTER_BLOCKS_BELOW = builder
+            .comment("How many blocks below the clicked block should the Biome Painter change?")
+            .defineInRange("biomePainterBlocksBelow", 0, 0, Int.MAX_VALUE)
+
+        BIOME_PAINTER_BLOCKS_ABOVE = builder
+            .comment("How many blocks above the clicked block should the Biome Painter change?")
+            .defineInRange("biomePainterBlocksAbove", 0, 0, Int.MAX_VALUE)
+
+        BLOCK_MOVER_TRY_VAPORIZE_FLUID = builder
+            .comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")
+            .define("blockMoverTryVaporizeFluid", true)
+
+        PORTABLE_ENDER_BRIDGE_RANGE = builder
+            .comment("How far should the Portable Ender Bridge be able to look for an Ender Anchor?")
+            .defineInRange("portableEnderBridgeRange", 300, 1, Int.MAX_VALUE)
+
+        SUMMONING_PENDULUM_CAPACITY = builder
+            .comment("How many entities should the Summoning Pendulum be able to store?")
+            .defineInRange("summoningPendulumCapacity", 5, 1, Int.MAX_VALUE)
+
+        BLOCK_REPLACER_UNIQUE_BLOCKS = builder
+            .comment("How many unique blocks should the Block Replacer be able to store?")
+            .defineInRange("blockReplacerUniqueBlocks", 9, 1, Int.MAX_VALUE)
+
+        DIVINING_ROD_CHECK_RADIUS = builder
+            .comment("The radius around the player to check for blocks with the Divining Rod")
+            .defineInRange("diviningRodCheckRadius", 20, 1, 100)
+
+        RAIN_SHIELD_CHUNK_RADIUS = builder
+            .comment("What chunk radius should the Rain Shield have?")
+            .defineInRange("rainShieldChunkRadius", 5, 0, Int.MAX_VALUE)
+
+        ESCAPE_ROPE_MAX_BLOCKS = builder
+            .comment("How many blocks should the Escape Rope check before giving up?\n\n0 means no limit")
+            .defineInRange("escapeRopeMaxBlocks", 0, 0, Int.MAX_VALUE)
+
+        ESCAPE_ROPE_BLOCKS_PER_TICK = builder
+            .comment("How many blocks should the Escape Rope check each tick?")
+            .defineInRange("escapeRopeBlocksPerTick", 250, 1, Int.MAX_VALUE)
     }
 
     private fun spectreConfigs() {
@@ -98,48 +151,6 @@ class ServerConfig(
             .defineInRange("imbueProcChance", 0.1, 0.0, 1.0)
 
         builder.pop()
-    }
-
-    private fun basicServerConfigs() {
-        BLOCK_DESTABILIZER_LIMIT = builder
-            .comment("How many blocks should the Block Destabilizer be able to drop?")
-            .defineInRange("blockDestabilizerLimit", 50, 1, Int.MAX_VALUE)
-
-        BIOME_PAINTER_HORIZONTAL_RADIUS = builder
-            .comment("What should be the horizontal radius of the Biome Painter?")
-            .defineInRange("biomePainterHorizontalRadius", 0, 0, Int.MAX_VALUE)
-
-        BIOME_PAINTER_BLOCKS_BELOW = builder
-            .comment("How many blocks below the clicked block should the Biome Painter change?")
-            .defineInRange("biomePainterBlocksBelow", 0, 0, Int.MAX_VALUE)
-
-        BIOME_PAINTER_BLOCKS_ABOVE = builder
-            .comment("How many blocks above the clicked block should the Biome Painter change?")
-            .defineInRange("biomePainterBlocksAbove", 0, 0, Int.MAX_VALUE)
-
-        BLOCK_MOVER_TRY_VAPORIZE_FLUID = builder
-            .comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")
-            .define("blockMoverTryVaporizeFluid", true)
-
-        PORTABLE_ENDER_BRIDGE_RANGE = builder
-            .comment("How far should the Portable Ender Bridge be able to look for an Ender Anchor?")
-            .defineInRange("portableEnderBridgeRange", 300, 1, Int.MAX_VALUE)
-
-        SUMMONING_PENDULUM_CAPACITY = builder
-            .comment("How many entities should the Summoning Pendulum be able to store?")
-            .defineInRange("summoningPendulumCapacity", 5, 1, Int.MAX_VALUE)
-
-        BLOCK_REPLACER_UNIQUE_BLOCKS = builder
-            .comment("How many unique blocks should the Block Replacer be able to store?")
-            .defineInRange("blockReplacerUniqueBlocks", 9, 1, Int.MAX_VALUE)
-
-        DIVINING_ROD_CHECK_RADIUS = builder
-            .comment("The radius around the player to check for blocks with the Divining Rod")
-            .defineInRange("diviningRodCheckRadius", 20, 1, 100)
-
-        RAIN_SHIELD_CHUNK_RADIUS = builder
-            .comment("What chunk radius should the Rain Shield have?")
-            .defineInRange("rainShieldChunkRadius", 5, 0, Int.MAX_VALUE)
     }
 
 }

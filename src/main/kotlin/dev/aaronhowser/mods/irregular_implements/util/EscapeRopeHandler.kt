@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -33,6 +34,16 @@ object EscapeRopeHandler {
         }
     }
 
+    // Reverse because it searches by most recently added position first, so it has to add them in reverse order
+    private val directionPriority = arrayOf(
+        Direction.UP,
+        Direction.NORTH,
+        Direction.SOUTH,
+        Direction.WEST,
+        Direction.EAST,
+        Direction.DOWN
+    ).reversed()
+
     private class Task(
         val player: WeakReference<ServerPlayer>
     ) {
@@ -53,8 +64,11 @@ object EscapeRopeHandler {
                 || !usedItem.`is`(ModItems.ESCAPE_ROPE)
             ) return true
 
-            // Runs 4 times per tick so that it works 4 times faster
-            for (run in 0 until 4) {
+            val limit = ServerConfig.ESCAPE_ROPE_MAX_BLOCKS.get()
+
+            // The more often it runs, the faster it is
+            val maxRuns = ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
+            for (run in 0 until maxRuns) {
 
                 actualPlayer.displayClientMessage(
                     Component.literal("Checked ${this.alreadyChecked.size} blocks"),
@@ -62,7 +76,7 @@ object EscapeRopeHandler {
                 )
 
                 if (this.toCheck.isEmpty()
-//                    || this.alreadyChecked.size >= 1000
+                    || limit > 1 && this.alreadyChecked.size >= limit
                 ) {
                     actualPlayer.drop(usedItem, false)
                     actualPlayer.setItemInHand(actualPlayer.usedItemHand, ItemStack.EMPTY)
@@ -91,7 +105,7 @@ object EscapeRopeHandler {
                 if (!level.canSeeSky(nextPos)) {
                     this.alreadyChecked.add(nextPos)
 
-                    for (direction in Direction.entries) {
+                    for (direction in directionPriority) {
                         val offset = nextPos.relative(direction)
 
                         if (!this.alreadyChecked.contains(offset)) {
