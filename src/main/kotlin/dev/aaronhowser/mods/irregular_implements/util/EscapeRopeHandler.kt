@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -55,9 +56,16 @@ object EscapeRopeHandler {
             // Runs 4 times per tick so that it works 4 times faster
             for (run in 0 until 4) {
 
-                if (this.toCheck.isEmpty() || this.alreadyChecked.size >= 1000) {
+                actualPlayer.displayClientMessage(
+                    Component.literal("Checked ${this.alreadyChecked.size} blocks"),
+                    true
+                )
+
+                if (this.toCheck.isEmpty()
+//                    || this.alreadyChecked.size >= 1000
+                ) {
                     actualPlayer.drop(usedItem, false)
-                    actualPlayer.setItemInHand(actualPlayer.usedItemHand, ItemStack.EMPTY)  // is this required?
+                    actualPlayer.setItemInHand(actualPlayer.usedItemHand, ItemStack.EMPTY)
 
                     return true
                 }
@@ -70,6 +78,9 @@ object EscapeRopeHandler {
                 if (this.alreadyChecked.contains(nextPos)) {
                     return true
                 }
+
+                //TODO: Make this clientside only
+                OtherUtil.spawnIndicatorBlockDisplay(level, nextPos)
 
                 val posIsEmpty = level.isLoaded(nextPos) && level.getBlockState(nextPos).getCollisionShape(level, nextPos).isEmpty
                 if (!posIsEmpty) {
