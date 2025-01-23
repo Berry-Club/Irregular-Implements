@@ -194,12 +194,17 @@ class ItemsCategoryProvider(
             "summoning_pendulum"
         ) {
             override fun generatePages() {
-                spotlightPage(
+
+                textPage(
                     "Summoning Pendulum",
                     paragraphs(
-                        "Found in ${minor("dungeon chests")}, the ${major("Summoning Pendulum")} can be used to pick up and place entities.",
+                        "The ${major("Summoning Pendulum")} can be used to pick up and place entities.",
                         "Right-click an entity to pick it up, right-click the ground to place it down."
                     )
+                )
+
+                spotlightPage(
+                    "Found in ${minor("dungeon chests")}"
                 )
             }
         }
@@ -309,9 +314,15 @@ class ItemsCategoryProvider(
             "emerald_compass"
         ) {
             override fun generatePages() {
-                spotlightPage(
+                textPage(
                     "Emerald Compass",
-                    "The ${major("Emerald Compass")} can be combined with an ${item("ID Card", "id_card")} by crafting them together, and it will ${minor("point to the Card's player")} if they're online.",
+                    paragraphs(
+                        "The ${major("Emerald Compass")} can be used to locate players.",
+                    )
+                )
+
+                spotlightPage(
+                    "Craft it with an ${item("ID Card", "id_card")}, and it will point to the player the ID Card is set to.",
                 )
             }
         }
@@ -803,27 +814,27 @@ class ItemsCategoryProvider(
     }
 
     private fun idCard() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "ID Card",
+            ModItems.ID_CARD,
+            "id_card"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun imbues() {
