@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.categories
 
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase
-import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.entries.BaseEntryProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -57,6 +56,7 @@ class ItemsCategoryProvider(
         this.add(entry.generate())
     }
 
+    //TODO: Include a picture of the structure
     private fun evilTear() {
         val entry = object : BaseEntryProvider(
             realThis,
@@ -66,14 +66,16 @@ class ItemsCategoryProvider(
         ) {
             override fun generatePages() {
                 textPage(
-                    "",
+                    "Evil Tear",
                     paragraphs(
-
+                        "The ${major("Evil Tear")} allows you to create an ${minor("Artificial End Portal")}.",
+                        "Make a 3x3 platform of End Stone, and make a 5x5 ring of Obsidian one block above it.",
+                        "Five blocks above the center End Stone, place another End Stone, with an End Rod on its bottom."
                     )
                 )
 
                 spotlightPage(
-                    ""
+                    "Use an Evil Tear on the End Rod to open the portal."
                 )
             }
         }
@@ -90,14 +92,16 @@ class ItemsCategoryProvider(
         ) {
             override fun generatePages() {
                 textPage(
-                    "",
+                    "Portkey",
                     paragraphs(
-
+                        "The ${major("Portkey")} can be bound to a location and then ${minor("teleports anyone who picks it up")} after it's been dropped.",
+                        "Use it on a block to set its location. After dropping it, it'll activate after a short delay. You can tell it's active when it stops glowing."
                     )
                 )
 
+                // TODO: Either implement this or remove the text
                 spotlightPage(
-                    ""
+                    "You can craft the Portkey with any other item to ${minor("disguise it")}, making it look like that item."
                 )
             }
         }
