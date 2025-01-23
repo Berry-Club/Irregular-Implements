@@ -28,9 +28,6 @@ object ModBlocks {
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
     val PEACE_CANDLE = basicBlock("peace_candle")
-
-    /** [net.neoforged.neoforge.common.world.StructureModifier] */
-    val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
 
@@ -42,6 +39,9 @@ object ModBlocks {
     val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
         registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }   //TODO: Naturally generating
     val BEAN_POD = basicBlock("bean_pod")
+    val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
+
+    /** [net.neoforged.neoforge.common.world.StructureModifier] */
 
     // Loot blocks
     val NATURE_CORE = basicBlock("nature_core")
@@ -117,7 +117,8 @@ object ModBlocks {
         basicCopiedBlock("ender_anchor", Blocks.OBSIDIAN)
 
     // Lubricant
-    val SUPER_LUBRICANT_ICE: DeferredBlock<TransparentBlock> = basicGlassBlock("super_lubricant_ice")
+    val SUPER_LUBRICANT_ICE: DeferredBlock<TransparentBlock> =
+        basicGlassBlock("super_lubricant_ice")
     val SUPER_LUBRICANT_STONE: DeferredBlock<Block> =
         basicStoneBlock("super_lubricant_stone")
     val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
@@ -133,7 +134,8 @@ object ModBlocks {
     val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
         registerBlock("shock_absorber") { ShockAbsorberBlock() }
     val AUTO_PLACER = basicBlock("auto_placer")
-    val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Wtf does this do
+    val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Stores a Location Filter that's pointing at another Block Teleporter, then teleports the block there. Should make it require a redstone pulse.
+    val BLOCK_DETECTOR = basicBlock("block_detector")   // Stores a Block Filter (which doesn't exist now) and emits a redstone signal if the block STATE is in front of it
     val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
         registerBlock("moon_phase_detector") { MoonPhaseDetectorBlock() }
 
