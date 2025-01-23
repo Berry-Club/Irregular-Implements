@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Block
 import org.apache.commons.lang3.mutable.MutableInt
 import java.util.*
 
-//TODO: Either add entity support, or remove it from the info page
+//TODO: Either add entity support, or remove it from the info and book pages
 class ChunkAnalyzerItem : Item(
     Properties()
         .stacksTo(1)

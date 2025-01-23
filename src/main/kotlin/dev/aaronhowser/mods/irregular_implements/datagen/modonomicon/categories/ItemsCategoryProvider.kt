@@ -378,27 +378,28 @@ class ItemsCategoryProvider(
     }
 
     private fun chunkAnalyzer() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Chunk Analyzer",
+            ModItems.CHUNK_ANALYZER,
+            "chunk_analyzer"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Chunk Analyzer",
+                    paragraphs(
+                        "The ${major("Chunk Analyzer")} can be used to ${minor("analyze the contents of a chunk")}.",
+                        "Right-click it to open a menu, which lists all the blocks in the chunk, and their quantities."
+                    )
+                )
+
+                spotlightPage(
+                    "It will also list all the ${minor("entities")} in the chunk as well!"
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun lavaCharm() {

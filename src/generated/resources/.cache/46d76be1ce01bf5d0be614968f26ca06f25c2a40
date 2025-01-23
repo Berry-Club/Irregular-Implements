@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-23T13:18:49.1243818	Books: irregular_implements
+// 1.21.1	2025-01-23T13:28:29.9103043	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
@@ -6,10 +6,11 @@ fd78b1edf8ec4065e0c982bc979be6e1382f7b37 data/irregular_implements/modonomicon/b
 16ba18d7a3f95d434b9158aa9c0cc640e2e2fb6a data/irregular_implements/modonomicon/books/guide/entries/items/biome_crystal.json
 333b3a7c78fc700397a67f429ba61f4f414a6173 data/irregular_implements/modonomicon/books/guide/entries/items/blaze_and_steel.json
 12d594ad666ab7774656ba109b12a8ded8841731 data/irregular_implements/modonomicon/books/guide/entries/items/bottle_of_air.json
+2fc8edfb81a1a517c4cac764f08e4405933e6e47 data/irregular_implements/modonomicon/books/guide/entries/items/chunk_analyzer.json
 4045089d3b7eebddcd8c7a372e00103202407af5 data/irregular_implements/modonomicon/books/guide/entries/items/emerald_compass.json
 f76e6add138a7014aa0adc85d7147f4cea7e9141 data/irregular_implements/modonomicon/books/guide/entries/items/escape_rope.json
 b53ff33440cadd87fdf65c67fd5b5b0419846e1d data/irregular_implements/modonomicon/books/guide/entries/items/evil_tear.json
-c0f74f619d658794db039a3abc532f8fdc1eca7b data/irregular_implements/modonomicon/books/guide/entries/items/id_card.json
+b7eba7003d4c09189e9d48d4efead0fdc3a3dabb data/irregular_implements/modonomicon/books/guide/entries/items/id_card.json
 ed607b8fe76ac564235aa5d3e331fd1152e0ab44 data/irregular_implements/modonomicon/books/guide/entries/items/portkey.json
 198aa5191034e7d40aac89e35cf003b67c6416c6 data/irregular_implements/modonomicon/books/guide/entries/items/stable_ender_pearl.json
 ed628dfe269d4a78d855ed271dc6539da2275915 data/irregular_implements/modonomicon/books/guide/entries/items/summoning_pendulum.json
