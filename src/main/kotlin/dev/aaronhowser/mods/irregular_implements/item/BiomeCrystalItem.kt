@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.GrassColor
 import net.minecraft.world.level.biome.Biome
 
 class BiomeCrystalItem : Item(
@@ -35,7 +36,7 @@ class BiomeCrystalItem : Item(
         }
 
         fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
-            val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
+            val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: GrassColor.getDefaultColor()
 
             return (foliageColor or 0xFF000000.toInt())
         }
