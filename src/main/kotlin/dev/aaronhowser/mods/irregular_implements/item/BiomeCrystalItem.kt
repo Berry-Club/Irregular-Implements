@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -21,13 +22,12 @@ class BiomeCrystalItem : Item(
 
     companion object {
 
-        //TODO: Add a biome tag for blacklisting crystals from existing
         fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
             return registries
                 .lookupOrThrow(Registries.BIOME)
                 .listElements()
-                .map { getCrystal(it) }
                 .toList()
+                .mapNotNull { if (it.`is`(ModBiomeTagsProvider.BIOME_CRYSTAL_BLACKLIST)) null else getCrystal(it) }
         }
 
         fun getCrystal(biomeHolder: Holder<Biome>): ItemStack {
