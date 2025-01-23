@@ -153,6 +153,14 @@ abstract class BaseEntryProvider : EntryProvider {
     }
 
     fun spotlightPage(
+        title: String,
+        text: String
+    ): BookSpotlightPageModel {
+        val stack = this.icon.right().getOrNull() ?: error("No item stack for spotlight page")
+        return this.spotlightPage(stack, title, text)
+    }
+
+    fun spotlightPage(
         itemStack: ItemStack,
         text: String
     ): BookSpotlightPageModel {

@@ -145,15 +145,12 @@ class ItemsCategoryProvider(
             "summoning_pendulum"
         ) {
             override fun generatePages() {
-                textPage(
-                    "",
-                    paragraphs(
-
-                    )
-                )
-
                 spotlightPage(
-                    ""
+                    "Summoning Pendulum",
+                    paragraphs(
+                        "Found in ${minor("dungeon chests")}, the ${major("Summoning Pendulum")} can be used to pick up and place entities.",
+                        "Right-click an entity to pick it up, right-click the ground to place it down."
+                    )
                 )
             }
         }
