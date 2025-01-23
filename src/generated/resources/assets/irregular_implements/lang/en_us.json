@@ -185,6 +185,7 @@
   "block.irregular_implements.trigger_glass": "Trigger Glass",
   "block.irregular_implements.warped_platform": "Warped Platform",
   "block.irregular_implements.water_chest": "Water Chest",
+  "book.irregular_implements.guide.blocks.name": "Blocks",
   "book.irregular_implements.guide.items.name": "Items",
   "book.irregular_implements.guide.name": "Irregular Implements Instructional Index",
   "book.irregular_implements.guide.tooltip": "A guide to all things genetic",

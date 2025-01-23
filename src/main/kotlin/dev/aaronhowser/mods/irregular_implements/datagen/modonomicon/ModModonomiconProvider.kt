@@ -4,6 +4,7 @@ import com.klikli_dev.modonomicon.api.datagen.SingleBookSubProvider
 import com.klikli_dev.modonomicon.api.datagen.book.BookModel
 import com.klikli_dev.modonomicon.book.BookDisplayMode
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.categories.BlocksCategoryProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.categories.ItemsCategoryProvider
 import java.util.function.BiConsumer
 
@@ -22,7 +23,7 @@ class ModModonomiconProvider(
 
     override fun generateCategories() {
         this.add(ItemsCategoryProvider(this).generate())
-//        this.add(BlocksCategoryProvider(this).generate())
+        this.add(BlocksCategoryProvider(this).generate())
     }
 
     override fun bookName(): String {
