@@ -1,9 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModBlockLootTablesSubProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModModonomiconProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
@@ -28,8 +30,6 @@ object ModDataGen {
         val output: PackOutput = generator.packOutput
         val existingFileHelper: ExistingFileHelper = event.existingFileHelper
         val lookupProvider: CompletableFuture<HolderLookup.Provider> = event.lookupProvider
-
-        val languageProvider = generator.addProvider(event.includeClient(), ModLanguageProvider(output))
 
         val itemModelProvider = generator.addProvider(
             event.includeClient(),
@@ -95,6 +95,18 @@ object ModDataGen {
             event.includeServer(),
             ModCurioProvider(output, existingFileHelper, lookupProvider)
         )
+
+        val languageProvider = ModLanguageProvider(output)
+
+        val modonomiconBookProvider = generator.addProvider(
+            event.includeClient(),
+            NeoBookProvider.of(
+                event, lookupProvider, ModModonomiconProvider(languageProvider::add)
+            )
+        )
+
+        generator.addProvider(event.includeClient(), languageProvider)
+
 
     }
 

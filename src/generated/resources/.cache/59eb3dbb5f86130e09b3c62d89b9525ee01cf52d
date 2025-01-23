@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-14T00:57:30.5588977	Loot Tables
+// 1.21.1	2025-01-23T11:37:44.7829002	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -22,6 +22,7 @@ ed55cbdcacdcc3e6ff208db2bfe24342788c16c6 data/irregular_implements/loot_table/bl
 ca33a6e688adb77f18c2d3f4dff0c5ddcd8920ba data/irregular_implements/loot_table/blocks/blaze_fire.json
 18135ad495fb668cd9580140a7e7aef2fccf151f data/irregular_implements/loot_table/blocks/block_breaker.json
 5d5d02520be2983c760e4a5fbe3cf4e36d93b9eb data/irregular_implements/loot_table/blocks/block_destabilizer.json
+e185ba7cbcc2e8d1faf6cf6c9395ecf6d2389554 data/irregular_implements/loot_table/blocks/block_detector.json
 c55bd7a25836b23e6125010cad41d8408977a182 data/irregular_implements/loot_table/blocks/block_of_sticks.json
 6a6bc9c89e53cbbc90ad7f733a49314d360134cc data/irregular_implements/loot_table/blocks/block_teleporter.json
 f82c172b4d12d004adaa1005383950f07d32cc9e data/irregular_implements/loot_table/blocks/bouncy_plate.json
