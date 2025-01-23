@@ -89,8 +89,6 @@ class PortkeyItem : Item(
         if (entity.age == 20 * 5) {
             stack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
 
-            entity.setUnlimitedLifetime()
-
             entity.level().playSound(
                 null,
                 entity.blockPosition(),
@@ -100,6 +98,12 @@ class PortkeyItem : Item(
                 0.25f
             )
 
+            return super.onEntityItemUpdate(stack, entity)
+        }
+
+        // Reset the age, but in a way that minimizes the animation bugging out
+        if (entity.age >= 20 * 60 * 3) {
+            entity.age = 20 * 60
         }
 
         return super.onEntityItemUpdate(stack, entity)
