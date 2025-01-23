@@ -123,10 +123,6 @@ object ModBlocks {
         basicGlassBlock("super_lubricant_ice")
     val SUPER_LUBRICANT_STONE: DeferredBlock<Block> =
         basicStoneBlock("super_lubricant_stone")
-    val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
-    val FILTERED_SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
-        registerBlock("filtered_super_lubricant_platform") { PlatformBlock.FILTERED_SUPER_LUBE }
 
     // Not above 1.7
     val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")
@@ -151,7 +147,7 @@ object ModBlocks {
     val ENTITY_DETECTOR = basicBlock("entity_detector")
 
     // Interfaces
-    val PLAYER_INTERFACE = basicBlock("player_interface")
+    val PLAYER_INTERFACE = basicBlock("player_interface")   //TODO: 10/10 importance, find some way to allow this to be disabled arbitrarily. Maybe an event system? Specific KubeJS support?
     val NOTIFICATION_INTERFACE: DeferredBlock<NotificationInterfaceBlock> =
         registerBlock("notification_interface") { NotificationInterfaceBlock() }
     val BASIC_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBasicBlock> =
@@ -240,6 +236,10 @@ object ModBlocks {
         registerBlock("bamboo_platform") { PlatformBlock.BAMBOO }
     val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
         registerBlock("cherry_platform") { PlatformBlock.CHERRY }
+    val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
+    val FILTERED_SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
+        registerBlock("filtered_super_lubricant_platform") { PlatformBlock.FILTERED_SUPER_LUBE }
 
     // Colored blocks
     val COLORED_GRASS_WHITE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.WHITE)
