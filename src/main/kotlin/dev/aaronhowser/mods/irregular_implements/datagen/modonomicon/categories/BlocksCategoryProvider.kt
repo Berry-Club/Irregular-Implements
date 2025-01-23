@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.categories
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.entries.BaseEntryProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 
 class BlocksCategoryProvider(
@@ -263,27 +264,27 @@ class BlocksCategoryProvider(
     }
 
     private fun biomeRadar() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Biome Radar",
+            ModBlocks.BIOME_RADAR,
+            "biome_radar"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun inventoryRerouter() {

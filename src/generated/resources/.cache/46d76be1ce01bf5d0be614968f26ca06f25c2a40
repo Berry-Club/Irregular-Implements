@@ -1,7 +1,8 @@
-// 1.21.1	2025-01-23T12:51:09.1137978	Books: irregular_implements
+// 1.21.1	2025-01-23T13:12:55.4370143	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
+fd78b1edf8ec4065e0c982bc979be6e1382f7b37 data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_radar.json
 16ba18d7a3f95d434b9158aa9c0cc640e2e2fb6a data/irregular_implements/modonomicon/books/guide/entries/items/biome_crystal.json
 333b3a7c78fc700397a67f429ba61f4f414a6173 data/irregular_implements/modonomicon/books/guide/entries/items/blaze_and_steel.json
 12d594ad666ab7774656ba109b12a8ded8841731 data/irregular_implements/modonomicon/books/guide/entries/items/bottle_of_air.json
