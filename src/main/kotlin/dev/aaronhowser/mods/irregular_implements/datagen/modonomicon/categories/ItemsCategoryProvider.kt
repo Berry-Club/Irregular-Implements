@@ -27,7 +27,56 @@ class ItemsCategoryProvider(
         portkey()
         biomeCrystal()
         summoningPendulum()
-
+        lootGenerator()
+        bottleOfAir()
+        enderLetter()
+        goldenEgg()
+        emeraldCompass()
+        blazeAndSteel()
+        escapeRope()
+        chunkAnalyzer()
+        lavaCharm()
+        obsidianSkull()
+        obsidianSkullRing()
+        diviningRod()
+        luminousPowder()
+        enderBuckets()
+        sakanadeSpores()
+        lotus()
+        bean()
+        magicHood()
+        waterWalkingBoots()
+        lavaWaders()
+        spectreArmor()
+        weatherEggs()
+        locationFilter()
+        itemFilter()
+        entityFilter()
+        idCard()
+        imbues()
+        spectreIlluminator()
+        spectreKey()
+        spectreAnchor()
+        spectreChargers()
+        spectreTools()
+        redstoneTool()
+        redstoneActivator()
+        redstoneRemote()
+        floo()
+        soundPattern()
+        soundRecorder()
+        portableSoundDampener()
+        biomeCapsule()
+        biomePainter()
+        dropFilter()
+        voidStone()
+        whiteStone()
+        magneticForce()
+        portableEnderBridge()
+        blockMover()
+        diamondBreaker()
+        blockReplacer()
+        grassSeeds()
     }
 
     private fun stableEnderPearl() {
@@ -159,210 +208,1208 @@ class ItemsCategoryProvider(
     }
 
     private fun lootGenerator() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun bottleOfAir() {
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Bottle of Air",
+            ModItems.BOTTLE_OF_AIR,
+            "bottle_of_air"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Bottle of Air",
+                    "The ${major("Bottle of Air")} can be used underwater to refill your air supply."
+                )
 
+                spotlightPage(
+                    "These can be found in ${minor("Ocean Monuments")}"
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun enderLetter() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun goldenEgg() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun emeraldCompass() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun blazeAndSteel() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun escapeRope() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun chunkAnalyzer() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun lavaCharm() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun obsidianSkull() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun obsidianSkullRing() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun diviningRod() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun luminousPowder() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // Merge all bucket stuff
     private fun enderBuckets() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun sakanadeSpores() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // Merge all lotus stuff
     private fun lotus() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // Merge all bean stuff
     private fun bean() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun magicHood() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // And obsidian
     private fun waterWalkingBoots() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun lavaWaders() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun spectreArmor() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun weatherEggs() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun locationFilter() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun itemFilter() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun entityFilter() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun idCard() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun imbues() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // And blackout powder
     private fun spectreIlluminator() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun spectreKey() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun spectreAnchor() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun spectreChargers() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun spectreTools() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun redstoneTool() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // Merge remote?
     private fun redstoneActivator() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun redstoneRemote() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun floo() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun soundPattern() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun soundRecorder() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun portableSoundDampener() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun biomeCapsule() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun biomePainter() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     // include voiding
     private fun dropFilter() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun voidStone() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun whiteStone() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun magneticForce() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun portableEnderBridge() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun blockMover() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun diamondBreaker() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun blockReplacer() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
     private fun grassSeeds() {
-
+//        val entry = object : BaseEntryProvider(
+//            realThis,
+//            "",
+//            ,
+//            ""
+//        ) {
+//            override fun generatePages() {
+//                textPage(
+//                    "",
+//                    paragraphs(
+//                    )
+//                )
+//
+//                spotlightPage(
+//                    paragraphs(
+//                    )
+//                )
+//            }
+//        }
+//
+//        this.add(entry.generate())
     }
 
 }

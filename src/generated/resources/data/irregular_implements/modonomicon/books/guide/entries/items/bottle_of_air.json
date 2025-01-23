@@ -1,0 +1,41 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "items",
+  "description": "book.irregular_implements.guide.items.bottle_of_air.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:bottle_of_air"
+  },
+  "name": "book.irregular_implements.guide.items.bottle_of_air.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.items.bottle_of_air.page_0.text",
+      "title": "book.irregular_implements.guide.items.bottle_of_air.page_0.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:bottle_of_air"
+      },
+      "text": "book.irregular_implements.guide.items.bottle_of_air.page_1.text",
+      "title": "book.irregular_implements.guide.items.bottle_of_air.page_1.title"
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 5,
+  "x": 0,
+  "y": 0
+}

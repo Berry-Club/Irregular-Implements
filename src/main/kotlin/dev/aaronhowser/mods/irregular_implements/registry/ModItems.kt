@@ -25,7 +25,7 @@ object ModItems {
     val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
         register("summoning_pendulum") { SummoningPendulumItem() }
     val LOOT_GENERATOR = basic("loot_generator")
-    val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
+    val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =    //TODO: Add to Ocean Monument loot
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
     val GOLDEN_EGG = basic("golden_egg")

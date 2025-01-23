@@ -741,7 +741,7 @@ class ModLanguageProvider(
         addInfo(ModItems.WITHER_IMBUE, "Inflicts Wither II on entities you hit with melee attacks.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
         addInfo(ModItems.SPECTRE_IMBUE, "Gives you a configurable chance to fully negate damage.\n\nLasts 20 minutes, but you can only have one Imbuement at a time.")
         addInfo(ModItems.COLLAPSE_IMBUE, "Inverts your controls.\n\nWhy would you want this?")
-        addInfo(ModItems.BOTTLE_OF_AIR, "Refills your breath.")
+        addInfo(ModItems.BOTTLE_OF_AIR, "Refills your breath.\n\nCan be found in Ocean Monuments.")
         addInfo(ModItems.ENDER_LETTER, "Can be used to send items and messages to other players.\n\nType the name of the player at the top, and insert up to 9 items.\n\nClick an Ender Mailbox, and it will be inserted into their Ender Mailbox if it has room.")
         addInfo(ModItems.ENTITY_FILTER, "Allows you to filter by entity type. Do so by using it on an entity.")
         addInfo(ModItems.SAKANADE_SPORES, "Found on the bottom of huge brown mushrooms.")
