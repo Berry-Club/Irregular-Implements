@@ -23,15 +23,15 @@ class ItemsCategoryProvider(
 
     override fun generateEntries() {
 
-        this.add(stableEnderPearl())
-        this.add(evilTear())
-        this.add(portkey())
-        this.add(biomeCrystal())
-        this.add(summoningPendulum())
+        stableEnderPearl()
+        evilTear()
+        portkey()
+        biomeCrystal()
+        summoningPendulum()
 
     }
 
-    private fun stableEnderPearl(): BookEntryModel {
+    private fun stableEnderPearl() {
         val entry = object : BaseEntryProvider(
             realThis,
             "Stable Entry Pearl",
@@ -42,21 +42,22 @@ class ItemsCategoryProvider(
                 textPage(
                     "Stable Ender Pearl",
                     paragraphs(
-                        "Test 1"
+                        "The ${major("Stable Ender Pearl")} functions somewhat differently to a regular Ender Pearl.",
+                        "When right-clicked, instead of throwing the Pearl, it instead ${minor("binds the Pearl to you")}.",
+                        "When dropped, after a short delay, the Pearl will ${minor("teleport you to its location")}.",
                     )
                 )
 
                 spotlightPage(
-                    ModItems.STABLE_ENDER_PEARL,
-                    "Test"
+                    "If the Pearl has not been bound to anything, it will instead grab a random Entity within 10 blocks, and teleport that instead."
                 )
             }
         }
 
-        return entry.generate()
+        this.add(entry.generate())
     }
 
-    private fun evilTear(): BookEntryModel {
+    private fun evilTear() {
         val entry = object : BaseEntryProvider(
             realThis,
             "Evil Tear",
@@ -72,16 +73,15 @@ class ItemsCategoryProvider(
                 )
 
                 spotlightPage(
-                    ModItems.EVIL_TEAR,
                     ""
                 )
             }
         }
 
-        return entry.generate()
+        this.add(entry.generate())
     }
 
-    private fun portkey(): BookEntryModel {
+    private fun portkey() {
         val entry = object : BaseEntryProvider(
             realThis,
             "Portkey",
@@ -97,16 +97,15 @@ class ItemsCategoryProvider(
                 )
 
                 spotlightPage(
-                    ModItems.PORTKEY,
                     ""
                 )
             }
         }
 
-        return entry.generate()
+        this.add(entry.generate())
     }
 
-    private fun biomeCrystal(): BookEntryModel {
+    private fun biomeCrystal() {
         val entry = object : BaseEntryProvider(
             realThis,
             "Biome Crystal",
@@ -128,10 +127,10 @@ class ItemsCategoryProvider(
             }
         }
 
-        return entry.generate()
+        this.add(entry.generate())
     }
 
-    private fun summoningPendulum(): BookEntryModel {
+    private fun summoningPendulum() {
         val entry = object : BaseEntryProvider(
             realThis,
             "Summoning Pendulum",
@@ -147,13 +146,12 @@ class ItemsCategoryProvider(
                 )
 
                 spotlightPage(
-                    ModItems.SUMMONING_PENDULUM,
                     ""
                 )
             }
         }
 
-        return entry.generate()
+        this.add(entry.generate())
     }
 
     private fun lootGenerator() {

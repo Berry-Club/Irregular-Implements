@@ -12,6 +12,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
+import kotlin.jvm.optionals.getOrNull
 
 abstract class BaseEntryProvider : EntryProvider {
 
@@ -142,6 +143,13 @@ abstract class BaseEntryProvider : EntryProvider {
         text: String
     ): BookSpotlightPageModel {
         return this.spotlightPage(itemLike.asItem().defaultInstance, "", text)
+    }
+
+    fun spotlightPage(
+        text: String
+    ): BookSpotlightPageModel {
+        val stack = this.icon.right().getOrNull() ?: error("No item stack for spotlight page")
+        return this.spotlightPage(stack, "", text)
     }
 
     fun spotlightPage(
