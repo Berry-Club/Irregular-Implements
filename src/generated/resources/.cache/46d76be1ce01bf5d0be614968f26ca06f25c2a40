@@ -1,9 +1,12 @@
-// 1.21.1	2025-01-23T12:43:55.2423197	Books: irregular_implements
+// 1.21.1	2025-01-23T12:51:09.1137978	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
 16ba18d7a3f95d434b9158aa9c0cc640e2e2fb6a data/irregular_implements/modonomicon/books/guide/entries/items/biome_crystal.json
+333b3a7c78fc700397a67f429ba61f4f414a6173 data/irregular_implements/modonomicon/books/guide/entries/items/blaze_and_steel.json
 12d594ad666ab7774656ba109b12a8ded8841731 data/irregular_implements/modonomicon/books/guide/entries/items/bottle_of_air.json
+7b1791b538e09e3c025a3b6b0c83f8168a45ef59 data/irregular_implements/modonomicon/books/guide/entries/items/emerald_compass.json
+f76e6add138a7014aa0adc85d7147f4cea7e9141 data/irregular_implements/modonomicon/books/guide/entries/items/escape_rope.json
 b53ff33440cadd87fdf65c67fd5b5b0419846e1d data/irregular_implements/modonomicon/books/guide/entries/items/evil_tear.json
 ed607b8fe76ac564235aa5d3e331fd1152e0ab44 data/irregular_implements/modonomicon/books/guide/entries/items/portkey.json
 198aa5191034e7d40aac89e35cf003b67c6416c6 data/irregular_implements/modonomicon/books/guide/entries/items/stable_ender_pearl.json

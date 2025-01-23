@@ -302,75 +302,68 @@ class ItemsCategoryProvider(
     }
 
     private fun emeraldCompass() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Emerald Compass",
+            ModItems.EMERALD_COMPASS,
+            "emerald_compass"
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    "Emerald Compass",
+                    "The ${major("Emerald Compass")} can be combined with an ${item("ID Card", "id_card")} by crafting them together, and it will ${minor("point to the Card's player")} if they're online.",
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun blazeAndSteel() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Blaze and Steel",
+            ModItems.BLAZE_AND_STEEL,
+            "blaze_and_steel"
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    "Blaze and Steel",
+                    "The ${major("Blaze and Steel")} lights a ${minor("much more aggressive fire")}.",
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun escapeRope() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Escape Rope",
+            ModItems.ESCAPE_ROPE,
+            "escape_rope"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Escape Rope",
+                    paragraphs(
+                        "The ${major("Escape Rope")} can be used to ${minor("teleport you out of caves")} quickly.",
+                        "It does this by attempting to pathfind to anywhere that has a clear view of the sky.",
+                        "Hold right-click to continue the search, and it'll either succeed on its own or fail after enough time."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "On success, it will ${bad("damage the item")}, with a maximum of 20 uses.",
+                        "On fail, it'll simply be dropped out of your hands."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun chunkAnalyzer() {
