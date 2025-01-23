@@ -118,15 +118,18 @@ class ItemsCategoryProvider(
         ) {
             override fun generatePages() {
                 textPage(
-                    "",
+                    "Biome Crystal",
                     paragraphs(
-
+                        "Found in ${minor("dungeon chests")}, ${major("Biome Crystals")} are meant to be used in the ${block("Biome Radar", "biome_radar")} to locate specific biomes.",
                     )
                 )
 
                 spotlightPage(
                     ModItems.BIOME_CRYSTAL,
-                    ""
+                    paragraphs(
+                        "There's a Biome Crystal for almost every biome in the game.",
+                        "However, any biome with the tag ${bad("#irregular_implements:biome_crystal_blacklist")} are excluded."
+                    )
                 )
             }
         }

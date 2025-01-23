@@ -21,6 +21,7 @@ class BiomeCrystalItem : Item(
 
     companion object {
 
+        //TODO: Add a biome tag for blacklisting crystals from existing
         fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
             return registries
                 .lookupOrThrow(Registries.BIOME)

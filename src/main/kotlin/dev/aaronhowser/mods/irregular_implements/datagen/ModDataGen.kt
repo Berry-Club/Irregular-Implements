@@ -90,6 +90,10 @@ object ModDataGen {
             event.includeServer(),
             ModEnchantmentTagsProvider(output, dataPackProvider.registryProvider, existingFileHelper)
         )
+        val biomeTagProvider = generator.addProvider(
+            event.includeServer(),
+            ModBiomeTagsProvider(output, lookupProvider, existingFileHelper)
+        )
 
         val curioProvider = generator.addProvider(
             event.includeServer(),
