@@ -2,7 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.categories
 
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase
+import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.entries.BaseEntryProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 
 class ItemsCategoryProvider(
@@ -21,26 +23,137 @@ class ItemsCategoryProvider(
 
     override fun generateEntries() {
 
-    }
-
-    private fun stableEnderPearl() {
-
-    }
-
-    private fun evilTear() {
+        this.add(stableEnderPearl())
+        this.add(evilTear())
+        this.add(portkey())
+        this.add(biomeCrystal())
+        this.add(summoningPendulum())
 
     }
 
-    private fun portkey() {
+    private fun stableEnderPearl(): BookEntryModel {
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Stable Entry Pearl",
+            ModItems.STABLE_ENDER_PEARL,
+            "stable_ender_pearl"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Stable Ender Pearl",
+                    paragraphs(
+                        "Test 1"
+                    )
+                )
 
+                spotlightPage(
+                    ModItems.STABLE_ENDER_PEARL,
+                    "Test"
+                )
+            }
+        }
+
+        return entry.generate()
     }
 
-    private fun biomeCrystal() {
+    private fun evilTear(): BookEntryModel {
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Evil Tear",
+            ModItems.EVIL_TEAR,
+            "evil_tear"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
 
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.EVIL_TEAR,
+                    ""
+                )
+            }
+        }
+
+        return entry.generate()
     }
 
-    private fun summoningPendulum() {
+    private fun portkey(): BookEntryModel {
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Portkey",
+            ModItems.PORTKEY,
+            "portkey"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
 
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.PORTKEY,
+                    ""
+                )
+            }
+        }
+
+        return entry.generate()
+    }
+
+    private fun biomeCrystal(): BookEntryModel {
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Biome Crystal",
+            ModItems.BIOME_CRYSTAL,
+            "biome_crystal"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
+
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.BIOME_CRYSTAL,
+                    ""
+                )
+            }
+        }
+
+        return entry.generate()
+    }
+
+    private fun summoningPendulum(): BookEntryModel {
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Summoning Pendulum",
+            ModItems.SUMMONING_PENDULUM,
+            "summoning_pendulum"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
+
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.SUMMONING_PENDULUM,
+                    ""
+                )
+            }
+        }
+
+        return entry.generate()
     }
 
     private fun lootGenerator() {
