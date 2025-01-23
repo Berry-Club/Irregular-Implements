@@ -159,8 +159,6 @@ object ModItems {
         register("spectre_shovel") { ModToolItems.SPECTRE_SHOVEL }
 
     // Redstone
-    val ADVANCED_REDSTONE_REPEATER = basic("advanced_redstone_repeater")
-    val ADVANCED_REDSTONE_TORCH = basic("advanced_redstone_torch")
     val REDSTONE_TOOL: DeferredItem<RedstoneToolItem> =
         register("redstone_tool") { RedstoneToolItem() }
     val REDSTONE_ACTIVATOR: DeferredItem<RedstoneActivatorItem> =

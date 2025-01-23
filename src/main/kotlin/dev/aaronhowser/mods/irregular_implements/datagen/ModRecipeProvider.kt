@@ -555,7 +555,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.ADVANCED_REDSTONE_REPEATER,
+            ModBlocks.ADVANCED_REDSTONE_REPEATER,
             "TRT,ISI",
             mapOf(
                 'T' to ing(Items.REDSTONE_TORCH),
@@ -565,7 +565,7 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.ADVANCED_REDSTONE_TORCH,
+            ModBlocks.ADVANCED_REDSTONE_TORCH,
             " R ,RIR, S ",
             mapOf(
                 'R' to ing(Tags.Items.DUSTS_REDSTONE),

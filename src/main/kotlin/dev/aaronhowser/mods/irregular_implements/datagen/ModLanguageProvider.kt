@@ -274,8 +274,6 @@ class ModLanguageProvider(
         addItem(ModItems.SPECTRE_LEGGINGS, "Spectre Leggings")
         addItem(ModItems.SPECTRE_BOOTS, "Spectre Boots")
 
-        addItem(ModItems.ADVANCED_REDSTONE_REPEATER, "Advanced Redstone Repeater")
-        addItem(ModItems.ADVANCED_REDSTONE_TORCH, "Advanced Redstone Torch")
         addItem(ModItems.REDSTONE_TOOL, "Redstone Tool")
         addItem(ModItems.REDSTONE_ACTIVATOR, "Redstone Activator")
         addItem(ModItems.REDSTONE_REMOTE, "Redstone Remote")
@@ -311,6 +309,8 @@ class ModLanguageProvider(
     }
 
     private fun addBlocks() {
+        addBlock(ModBlocks.ADVANCED_REDSTONE_REPEATER, "Advanced Redstone Repeater")
+        addBlock(ModBlocks.ADVANCED_REDSTONE_TORCH, "Advanced Redstone Torch")
         addBlock(ModBlocks.CUSTOM_CRAFTING_TABLE, "Custom Crafting Table")
         addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
         addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")
@@ -696,8 +696,8 @@ class ModLanguageProvider(
         addInfo(ModBlocks.SPECTRE_COIL_ENDER, "Outputs FE from the Spectre Energy Buffer, which is filled using Spectre Energy Injectors.\n\nHas a rate of 20,480 FE/t.")
         addInfo(ModBlocks.SPECTRE_COIL_NUMBER, "Generates 128 FE/t for free, inserting it into the block it's placed on.")
         addInfo(ModBlocks.SPECTRE_COIL_GENESIS, "Generates an infinite amount of FE for free, inserting it into the block it's placed on.")
-        addInfo(ModItems.ADVANCED_REDSTONE_REPEATER, "A Redstone Repeater that can have both its Step Up and Step Down delays configured.")
-        addInfo(ModItems.ADVANCED_REDSTONE_TORCH, "A Redstone Torch that can have its Powered and Unpowered output strengths configured")
+        addInfo(ModBlocks.ADVANCED_REDSTONE_REPEATER, "A Redstone Repeater that can have both its Step Up and Step Down delays configured.")
+        addInfo(ModBlocks.ADVANCED_REDSTONE_TORCH, "A Redstone Torch that can have its Powered and Unpowered output strengths configured")
         addInfo(ModBlocks.SPECTRE_SAPLING, "Created by using Ectoplasm on a Sapling.\n\nGrows into a Spectre Tree, whose blocks have a chance of dropping Ectoplasm.")
         addInfo(ModBlocks.ITEM_COLLECTOR, "Collects items in a 3 block radius and inserts it into the inventory it's placed on.")
         addInfo(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Collects items in a configurable radius and inserts it into the inventory it's placed on.\n\nYou can also insert an Item Filter for more control.")
