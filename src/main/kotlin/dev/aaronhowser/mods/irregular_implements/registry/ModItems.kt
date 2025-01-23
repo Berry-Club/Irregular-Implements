@@ -196,7 +196,8 @@ object ModItems {
         register("portable_ender_bridge") { PortableEnderBridgeItem() }
     val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
         register("block_mover") { BlockMoverItem() }
-    val DIAMOND_BREAKER = basic("diamond_breaker")
+    val DIAMOND_BREAKER: DeferredItem<Item> =
+        basic("diamond_breaker")
     val BLOCK_REPLACER: DeferredItem<BlockReplacerItem> =
         register("block_replacer") { BlockReplacerItem() }
 
