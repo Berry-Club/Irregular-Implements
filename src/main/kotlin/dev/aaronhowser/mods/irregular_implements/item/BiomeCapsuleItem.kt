@@ -16,13 +16,11 @@ class BiomeCapsuleItem : Item(
 ) {
 
     companion object {
-
         fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
             val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
 
             return (foliageColor or 0xFF000000.toInt())
         }
-
     }
 
     override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
@@ -35,6 +33,7 @@ class BiomeCapsuleItem : Item(
 
         if (component.biome != biome) return super.onEntityItemUpdate(stack, entity)
 
+        //TODO: Max amount?
         stack.set(
             ModDataComponents.BIOME_POINTS,
             component.withMorePoints(1)
@@ -43,6 +42,7 @@ class BiomeCapsuleItem : Item(
         return super.onEntityItemUpdate(stack, entity)
     }
 
+    //TODO: Improve this
     override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
         val biomePointsComponent = stack.get(ModDataComponents.BIOME_POINTS) ?: return
 
@@ -51,7 +51,6 @@ class BiomeCapsuleItem : Item(
 
         tooltipComponents.add(biomeComponent)
         tooltipComponents.add(biomePoints.toString().toComponent())
-
     }
 
 }

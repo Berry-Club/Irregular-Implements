@@ -28,7 +28,6 @@ class BlockMoverItem : Item(
 ) {
 
     // TODO: Cooldown based on how the mining time of the block?
-    // TODO: Check for cancellation of events, and if the player is allowed to use the item
     override fun onItemUseFirst(stack: ItemStack, context: UseOnContext): InteractionResult {
         val player = context.player
         if (stack.isEmpty

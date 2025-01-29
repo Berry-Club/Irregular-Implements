@@ -1,0 +1,30 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "items",
+  "description": "book.irregular_implements.guide.items.void_stone.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:void_stone"
+  },
+  "name": "book.irregular_implements.guide.items.void_stone.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:void_stone"
+      },
+      "text": "book.irregular_implements.guide.items.void_stone.page_0.text",
+      "title": "book.irregular_implements.guide.items.void_stone.page_0.title"
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 22,
+  "x": 0,
+  "y": 0
+}

@@ -1131,96 +1131,99 @@ class ItemsCategoryProvider(
     }
 
     private fun biomeCapsule() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Biome Capsule",
+            ModItems.BIOME_CAPSULE,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Biome Capsule",
+                    paragraphs(
+                        "The ${major("Biome Capsule")} works with the ${item("Biome Painter", "biome_painter")} to ${minor("change the biome of an area")}.",
+                        "Throw a Biome Capsule on the ground, and it will start ${minor("generating Biome Points for the biome it's in")}, storing it in the Capsule."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun biomePainter() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Biome Painter AAAAAAAAAAAAAA",
+            ModItems.BIOME_PAINTER,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
-    // include voiding
     private fun dropFilter() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Drop Filter",
+            ModItems.DROP_FILTER,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModItems.DROP_FILTER.toStack(),
+                    "Drop Filter",
+                    paragraphs(
+                        "The ${major("Drop Filter")} can be used to ${minor("prevent certain items from being picked up")}.",
+                        "Use it to open its menu, and insert an ${item("Item Filter", "item_filter")}."
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.VOIDING_DROP_FILTER.toStack(),
+                    "Voiding Drop Filter",
+                    paragraphs(
+                        "The ${major("Voiding Drop Filter")} works similarly, but ${minor("destroys the items instead")}.",
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun voidStone() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Void Stone",
+            ModItems.VOID_STONE,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    paragraphs(
+                        "The ${major("Void Stone")} is essentially a portable trash can.",
+                        "Open its menu, and any items inserted will be deleted."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun whiteStone() {
@@ -1293,26 +1296,29 @@ class ItemsCategoryProvider(
     }
 
     private fun blockMover() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Block Mover",
+            ModItems.BLOCK_MOVER,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Block Mover",
+                    paragraphs(
+                        "The ${major("Block Mover")} can be used to ${minor("pick up and place blocks")}, including block entities!",
+                        "Right-click a block to pick it up, and right-click the ground to place it back down."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "Unbreakable blocks, as well as blocks that have the tag #irregular_implements:block_mover_blacklist, cannot be picked up."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun diamondBreaker() {
