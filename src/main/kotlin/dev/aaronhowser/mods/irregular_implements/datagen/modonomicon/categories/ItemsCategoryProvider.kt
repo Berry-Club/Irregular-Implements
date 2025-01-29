@@ -788,44 +788,37 @@ class ItemsCategoryProvider(
     }
 
     private fun entityFilter() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Entity Filter",
+            ModItems.ENTITY_FILTER,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    "Entity Filter",
+                    paragraphs(
+                        "${major("Entity Filters")} can be used to filter entities in several places.",
+                        "Use it on an entity to save its type to the Filter. Use it while not looking at an entity to set it to players."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun idCard() {
         val entry = object : BaseEntryProvider(
             realThis,
             "ID Card",
-            ModItems.ID_CARD,
-            "id_card"
+            ModItems.ID_CARD
         ) {
             override fun generatePages() {
-                textPage(
-                    "",
-                    paragraphs(
-                    )
-                )
-
                 spotlightPage(
+                    "ID Card",
                     paragraphs(
+                        "${major("ID Cards")} can be used to ${minor("identify players")}.",
+                        "Use it on a player to set it to them, or use it while not looking at a player to set it to you."
                     )
                 )
             }
@@ -905,26 +898,28 @@ class ItemsCategoryProvider(
     }
 
     private fun spectreAnchor() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Spectre Anchor",
+            ModItems.SPECTRE_ANCHOR,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Spectre Anchor",
+                    paragraphs(
+                        "${major("Spectre Anchors")} can be crafted with any item to anchor them to you, allowing them to ${minor("be kept on death")}."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "After the items are returned to you, ${bad("the Spectre Anchor is consumed")}.",
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun spectreChargers() {

@@ -24,7 +24,6 @@ class SpectreAnchorItem : Item(
     companion object {
 
         fun saveAnchoredItems(player: Player) {
-
             val level = player.level()
             if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return
 
@@ -51,7 +50,6 @@ class SpectreAnchorItem : Item(
             if (items.isEmpty()) return
 
             for (item in items) {
-                //TODO: Actually, should we?
                 if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
                     //TODO: Tell the player that the item was returned, and that the anchor was consumed
                     item.remove(ModDataComponents.IS_ANCHORED)

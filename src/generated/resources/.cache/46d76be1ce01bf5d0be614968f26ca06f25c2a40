@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-29T00:15:06.2635895	Books: irregular_implements
+// 1.21.1	2025-01-29T00:25:55.0926207	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
@@ -10,13 +10,15 @@ fd78b1edf8ec4065e0c982bc979be6e1382f7b37 data/irregular_implements/modonomicon/b
 e204fdf5d098bdaa967af2e8ab9053f8bde0f84d data/irregular_implements/modonomicon/books/guide/entries/items/divining_rod.json
 4045089d3b7eebddcd8c7a372e00103202407af5 data/irregular_implements/modonomicon/books/guide/entries/items/emerald_compass.json
 c4869f240338f516bc32a02e9ca9deaa44da72cc data/irregular_implements/modonomicon/books/guide/entries/items/ender_bucket.json
+cb26ca48ea34df04a8e0ebffdc5ed9eed670c487 data/irregular_implements/modonomicon/books/guide/entries/items/entity_filter.json
 f76e6add138a7014aa0adc85d7147f4cea7e9141 data/irregular_implements/modonomicon/books/guide/entries/items/escape_rope.json
 b53ff33440cadd87fdf65c67fd5b5b0419846e1d data/irregular_implements/modonomicon/books/guide/entries/items/evil_tear.json
-8fe50b5e4ae85356fc0488b505cd48bd65a8bc0b data/irregular_implements/modonomicon/books/guide/entries/items/id_card.json
+a9471ab080a50999d8939e698957dba6b4e5ec66 data/irregular_implements/modonomicon/books/guide/entries/items/id_card.json
 d63573f35bffe9dd8c03c4cbd5bbf551e2617480 data/irregular_implements/modonomicon/books/guide/entries/items/item_filter.json
 7fa22794a8c48baf35c06620337ee91c65d89ddc data/irregular_implements/modonomicon/books/guide/entries/items/location_filter.json
 ebe50a392b9bfb7cb75495cc449199e6a39bc971 data/irregular_implements/modonomicon/books/guide/entries/items/magic_hood.json
 ed607b8fe76ac564235aa5d3e331fd1152e0ab44 data/irregular_implements/modonomicon/books/guide/entries/items/portkey.json
+a532da05c140396e5c08b266d3074ff398545999 data/irregular_implements/modonomicon/books/guide/entries/items/spectre_anchor.json
 74186aaf8635e0d9a21eb63ed5b0ce45f6f1eb3e data/irregular_implements/modonomicon/books/guide/entries/items/spectre_chestplate.json
 198aa5191034e7d40aac89e35cf003b67c6416c6 data/irregular_implements/modonomicon/books/guide/entries/items/stable_ender_pearl.json
 ed628dfe269d4a78d855ed271dc6539da2275915 data/irregular_implements/modonomicon/books/guide/entries/items/summoning_pendulum.json
