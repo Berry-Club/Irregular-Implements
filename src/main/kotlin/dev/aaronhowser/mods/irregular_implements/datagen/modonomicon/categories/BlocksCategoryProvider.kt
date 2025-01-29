@@ -100,7 +100,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -124,7 +123,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -148,7 +146,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -172,7 +169,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -196,7 +192,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -216,27 +211,26 @@ class BlocksCategoryProvider(
     }
 
     private fun rainShield() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "",
+            ModBlocks.RAIN_SHIELD,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "",
+                    paragraphs(
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun compressedSlimeBlock() {
@@ -244,7 +238,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -292,7 +285,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -316,7 +308,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -340,7 +331,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -364,7 +354,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -388,7 +377,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -412,7 +400,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -436,7 +423,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -460,7 +446,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -484,7 +469,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -508,7 +492,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -532,7 +515,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -556,7 +538,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -580,7 +561,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -604,7 +584,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -628,7 +607,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -652,7 +630,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -676,7 +653,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -700,7 +676,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -724,7 +699,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -748,7 +722,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -772,7 +745,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -796,7 +768,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -821,7 +792,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -845,7 +815,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -869,7 +838,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -893,7 +861,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -917,7 +884,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -941,7 +907,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -966,7 +931,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -990,7 +954,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1014,7 +977,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1038,7 +1000,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1062,7 +1023,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1086,7 +1046,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1110,7 +1069,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1134,7 +1092,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1158,7 +1115,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1182,7 +1138,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1206,7 +1161,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1230,7 +1184,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1254,7 +1207,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1278,7 +1230,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1302,7 +1253,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1327,7 +1277,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1351,7 +1300,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1375,7 +1323,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1399,7 +1346,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1423,7 +1369,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1447,7 +1392,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1471,7 +1415,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1496,7 +1439,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1520,7 +1462,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1544,7 +1485,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1568,7 +1508,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1592,7 +1531,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1616,7 +1554,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1640,7 +1577,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1664,7 +1600,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1688,7 +1623,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1712,7 +1646,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1737,7 +1670,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1761,7 +1693,6 @@ class BlocksCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(

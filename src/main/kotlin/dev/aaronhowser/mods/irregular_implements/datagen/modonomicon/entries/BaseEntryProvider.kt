@@ -12,6 +12,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
+import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
 import kotlin.jvm.optionals.getOrNull
 
@@ -21,6 +22,12 @@ abstract class BaseEntryProvider : EntryProvider {
         parent: CategoryProviderBase?,
         name: String,
         icon: DeferredItem<*>
+    ) : this(parent, name, icon, icon.id.path)
+
+    constructor(
+        parent: CategoryProviderBase?,
+        name: String,
+        icon: DeferredBlock<*>
     ) : this(parent, name, icon, icon.id.path)
 
     constructor(

@@ -20,7 +20,7 @@ object ModBlocks {
     val FLUID_DISPLAY = basicBlock("fluid_display")
     val ENDER_MAILBOX = basicBlock("ender_mailbox")
     val POTION_VAPORIZER = basicBlock("potion_vaporizer")
-    val RAIN_SHIELD =
+    val RAIN_SHIELD: DeferredBlock<RainShieldBlock> =
         registerBlock("rain_shield") { RainShieldBlock() }
     val COMPRESSED_SLIME_BLOCK: DeferredBlock<CompressedSlimeBlock> =
         registerBlock("compressed_slime_block") { CompressedSlimeBlock() }
