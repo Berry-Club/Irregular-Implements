@@ -1,0 +1,43 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "items",
+  "description": "book.irregular_implements.guide.items.grass_seeds.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:grass_seeds"
+  },
+  "name": "book.irregular_implements.guide.items.grass_seeds.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:grass_seeds"
+      },
+      "text": "book.irregular_implements.guide.items.grass_seeds.page_0.text",
+      "title": "book.irregular_implements.guide.items.grass_seeds.page_0.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:grass_seeds_red"
+      },
+      "text": "book.irregular_implements.guide.items.grass_seeds.page_1.text",
+      "title": "book.irregular_implements.guide.items.grass_seeds.page_1.title"
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 24,
+  "x": 0,
+  "y": 0
+}

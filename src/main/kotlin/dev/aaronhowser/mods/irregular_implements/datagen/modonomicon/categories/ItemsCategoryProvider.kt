@@ -1368,26 +1368,31 @@ class ItemsCategoryProvider(
     }
 
     private fun grassSeeds() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Grass Seeds",
+            ModItems.GRASS_SEEDS,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModItems.GRASS_SEEDS.toStack(),
+                    "Grass Seeds",
+                    paragraphs(
+                        "${major("Grass Seeds")} can be used to ${minor("spread grass")}.",
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.GRASS_SEEDS_RED.toStack(),
+                    "Colored Grass Seeds",
+                    paragraphs(
+                        "There are also ${major("16 colored variants")}, which can be used to spread colored grass."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
 }
