@@ -1,8 +1,18 @@
-// 1.21.1	2025-01-29T00:37:04.7053681	Books: irregular_implements
+// 1.21.1	2025-01-29T00:54:42.5859405	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
-fd78b1edf8ec4065e0c982bc979be6e1382f7b37 data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_radar.json
+4dc514faac6cd8a5c8ce3dca08093035daf75ee7 data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_radar.json
+3bdc8fdf2eead4b2e3576b5d9c57533d1c1a9cff data/irregular_implements/modonomicon/books/guide/entries/blocks/contact_button.json
+69de1c82570784ba1f2a705998f040d95f159f45 data/irregular_implements/modonomicon/books/guide/entries/blocks/contact_lever.json
+db187e160716501130cadcaa21269685511621c0 data/irregular_implements/modonomicon/books/guide/entries/blocks/lapis_glass.json
+14dcee4d576abdd739cbd6864a5362badc1d14f0 data/irregular_implements/modonomicon/books/guide/entries/blocks/online_detector.json
+fb05cef3dac01481465d645c585056396a65c405 data/irregular_implements/modonomicon/books/guide/entries/blocks/pitcher_plant.json
+8869bae8625ea363a1a3223ac975625ed8f8b3d5 data/irregular_implements/modonomicon/books/guide/entries/blocks/quartz_glass.json
+2f95d1f0b16bff287011bee6c534be6554aaa73c data/irregular_implements/modonomicon/books/guide/entries/blocks/rainbow_lamp.json
+ba8b45c111788900d02ab40ad3b17a31c5cd5da9 data/irregular_implements/modonomicon/books/guide/entries/blocks/rain_shield.json
+ec0ec8eff9ba600f5669ee1ecf020f4a33730e79 data/irregular_implements/modonomicon/books/guide/entries/blocks/shock_absorber.json
+faa09db2d0ddc25e50e5945b78d4e3b5b4e75be4 data/irregular_implements/modonomicon/books/guide/entries/blocks/sided_redstone.json
 75bda675594a2655b547a92af090c5b446b882d8 data/irregular_implements/modonomicon/books/guide/entries/items/biome_capsule.json
 16ba18d7a3f95d434b9158aa9c0cc640e2e2fb6a data/irregular_implements/modonomicon/books/guide/entries/items/biome_crystal.json
 651eab24305187212843f3518c2e61d9dc18b710 data/irregular_implements/modonomicon/books/guide/entries/items/biome_painter.json

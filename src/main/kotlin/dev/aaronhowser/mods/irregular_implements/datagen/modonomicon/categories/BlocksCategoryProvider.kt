@@ -213,18 +213,21 @@ class BlocksCategoryProvider(
     private fun rainShield() {
         val entry = object : BaseEntryProvider(
             realThis,
-            "",
+            "Rain Shield",
             ModBlocks.RAIN_SHIELD,
         ) {
             override fun generatePages() {
                 textPage(
-                    "",
+                    "Rain Shield",
                     paragraphs(
+                        "The ${major("Rain Shield")} will ${minor("prevent rain in a 5 chunk radius")}.",
+                        "This radius can be changed in the server config."
                     )
                 )
 
                 spotlightPage(
                     paragraphs(
+                        "You can disable it by providing a redstone signal!"
                     )
                 )
             }
@@ -260,8 +263,7 @@ class BlocksCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Biome Radar",
-            ModBlocks.BIOME_RADAR,
-            "biome_radar"
+            ModBlocks.BIOME_RADAR
         ) {
             override fun generatePages() {
                 textPage(
@@ -396,26 +398,29 @@ class BlocksCategoryProvider(
     }
 
     private fun pitcherPlant() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Pitcher Plant",
+            ModBlocks.PITCHER_PLANT,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Pitcher Plant",
+                    paragraphs(
+                        "The ${major("Pitcher Plant")} is a flower that ${minor("acts as an infinite source of water")}.",
+                        "It also occasionally ${minor("fills adjacent tanks")} with water!"
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "It can be found in biomes with the tag ${minor("#c:is_wet/overworld")}, most notably Swamps and Jungles."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun glowingMushroom() {
@@ -534,49 +539,45 @@ class BlocksCategoryProvider(
     }
 
     private fun contactButton() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Contact Button",
+            ModBlocks.CONTACT_BUTTON,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.CONTACT_BUTTON.toStack(),
+                    "Contact Button",
+                    paragraphs(
+                        "The ${major("Contact Button")} acts like a Stone Button, but instead of clicking _it_, you click the block it's facing.",
+                        "That is, if the Contact Button is facing up, clicking the block above it will make it emit a redstone signal."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun contactLever() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Contact Lever",
+            ModBlocks.CONTACT_LEVER,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.CONTACT_LEVER.toStack(),
+                    "Contact Lever",
+                    paragraphs(
+                        "The ${major("Contact Lever")} acts like a Lever, but instead of clicking _it_, you click the block it's facing.",
+                        "That is, if the Contact Lever is facing up, clicking the block above it will toggle if it emits a redstone signal."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun ironDropper() {
@@ -718,26 +719,23 @@ class BlocksCategoryProvider(
     }
 
     private fun sidedBlockOfRedstone() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Sided Block of Redstone",
+            ModBlocks.SIDED_BLOCK_OF_REDSTONE,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.SIDED_BLOCK_OF_REDSTONE.toStack(),
+                    "Sided Block of Redstone",
+                    paragraphs(
+                        "The ${major("Sided Block of Redstone")} emits power from only one of its sides."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun advancedRedstoneRepeater() {
@@ -857,72 +855,63 @@ class BlocksCategoryProvider(
     }
 
     private fun lapisGlass() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Lapis Glass",
+            ModBlocks.LAPIS_GLASS,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.LAPIS_GLASS.toStack(),
+                    "Lapis Glass",
+                    paragraphs(
+                        "${major("Lapis Glass")} is a special type of glass that is solid for players, but ${minor("everything else will pass through")}.",
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun quartzGlass() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Quartz Glass",
+            ModBlocks.QUARTZ_GLASS,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.QUARTZ_GLASS.toStack(),
+                    "Quartz Glass",
+                    paragraphs(
+                        "${major("Quartz Glass")} is a special type of glass that ${minor("players pass through")}, but is solid for everything else."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun rainbowLamp() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Rainbow Lamp",
+            ModBlocks.RAINBOW_LAMP,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.RAINBOW_LAMP.toStack(),
+                    "Rainbow Lamp",
+                    paragraphs(
+                        "The ${major("Rainbow Lamp")} will be a different color for each possible redstone signal strength (0-15)."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     // Include anchor and other bridge
@@ -1019,26 +1008,24 @@ class BlocksCategoryProvider(
     }
 
     private fun shockAbsorber() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Shock Absorber",
+            ModBlocks.SHOCK_ABSORBER,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModBlocks.SHOCK_ABSORBER.toStack(),
+                    "Shock Absorber",
+                    paragraphs(
+                        "The ${major("Shock Absorber")} will ${minor("absorb fall damage")}.",
+                        "Additionally, the higher the fall, the greater a redstone signal it emits."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun autoPlacer() {
@@ -1134,26 +1121,28 @@ class BlocksCategoryProvider(
     }
 
     private fun onlineDetector() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Online Detector",
+            ModBlocks.ONLINE_DETECTOR,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Online Detector",
+                    paragraphs(
+                        "The ${major("Online Detector")} will emit a redstone signal when the set player is online."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "Right-click it to open its menu, where you can type the player's username."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun chatDetector() {

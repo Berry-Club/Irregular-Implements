@@ -2,12 +2,12 @@
   "background_u_index": 0,
   "background_v_index": 0,
   "category": "blocks",
-  "description": "book.irregular_implements.guide.blocks.biome_radar.description",
+  "description": "book.irregular_implements.guide.blocks.rain_shield.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "irregular_implements:biome_radar"
+    "item": "irregular_implements:rain_shield"
   },
-  "name": "book.irregular_implements.guide.blocks.biome_radar.name",
+  "name": "book.irregular_implements.guide.blocks.rain_shield.name",
   "pages": [
     {
       "type": "modonomicon:text",
@@ -16,8 +16,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.blocks.biome_radar.page_0.text",
-      "title": "book.irregular_implements.guide.blocks.biome_radar.page_0.title",
+      "text": "book.irregular_implements.guide.blocks.rain_shield.page_0.text",
+      "title": "book.irregular_implements.guide.blocks.rain_shield.page_0.title",
       "use_markdown_in_title": false
     },
     {
@@ -28,14 +28,14 @@
       },
       "item": {
         "count": 1,
-        "item": "irregular_implements:biome_radar"
+        "item": "irregular_implements:rain_shield"
       },
-      "text": "book.irregular_implements.guide.blocks.biome_radar.page_1.text",
-      "title": "book.irregular_implements.guide.blocks.biome_radar.page_1.title"
+      "text": "book.irregular_implements.guide.blocks.rain_shield.page_1.text",
+      "title": "book.irregular_implements.guide.blocks.rain_shield.page_1.title"
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 1,
+  "sort_number": 0,
   "x": 0,
   "y": 0
 }
