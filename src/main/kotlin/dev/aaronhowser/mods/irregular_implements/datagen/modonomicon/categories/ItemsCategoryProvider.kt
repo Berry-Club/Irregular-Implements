@@ -4,7 +4,9 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.entries.BaseEntryProvider
+import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.tags.BlockTags
 
 class ItemsCategoryProvider(
     parent: ModonomiconProviderBase
@@ -83,8 +85,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Stable Entry Pearl",
-            ModItems.STABLE_ENDER_PEARL,
-            "stable_ender_pearl"
+            ModItems.STABLE_ENDER_PEARL
         ) {
             override fun generatePages() {
                 textPage(
@@ -110,8 +111,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Evil Tear",
-            ModItems.EVIL_TEAR,
-            "evil_tear"
+            ModItems.EVIL_TEAR
         ) {
             override fun generatePages() {
                 textPage(
@@ -136,8 +136,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Portkey",
-            ModItems.PORTKEY,
-            "portkey"
+            ModItems.PORTKEY
         ) {
             override fun generatePages() {
                 textPage(
@@ -162,8 +161,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Biome Crystal",
-            ModItems.BIOME_CRYSTAL,
-            "biome_crystal"
+            ModItems.BIOME_CRYSTAL
         ) {
             override fun generatePages() {
                 textPage(
@@ -190,8 +188,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Summoning Pendulum",
-            ModItems.SUMMONING_PENDULUM,
-            "summoning_pendulum"
+            ModItems.SUMMONING_PENDULUM
         ) {
             override fun generatePages() {
 
@@ -240,8 +237,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Bottle of Air",
-            ModItems.BOTTLE_OF_AIR,
-            "bottle_of_air"
+            ModItems.BOTTLE_OF_AIR
         ) {
             override fun generatePages() {
                 textPage(
@@ -310,8 +306,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Emerald Compass",
-            ModItems.EMERALD_COMPASS,
-            "emerald_compass"
+            ModItems.EMERALD_COMPASS
         ) {
             override fun generatePages() {
                 textPage(
@@ -334,8 +329,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Blaze and Steel",
-            ModItems.BLAZE_AND_STEEL,
-            "blaze_and_steel"
+            ModItems.BLAZE_AND_STEEL
         ) {
             override fun generatePages() {
                 spotlightPage(
@@ -352,8 +346,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Escape Rope",
-            ModItems.ESCAPE_ROPE,
-            "escape_rope"
+            ModItems.ESCAPE_ROPE
         ) {
             override fun generatePages() {
                 textPage(
@@ -381,8 +374,7 @@ class ItemsCategoryProvider(
         val entry = object : BaseEntryProvider(
             realThis,
             "Chunk Analyzer",
-            ModItems.CHUNK_ANALYZER,
-            "chunk_analyzer"
+            ModItems.CHUNK_ANALYZER
         ) {
             override fun generatePages() {
                 textPage(
@@ -475,27 +467,30 @@ class ItemsCategoryProvider(
     }
 
     private fun diviningRod() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Divining Rod",
+            ModItems.DIVINING_ROD
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Divining Rod",
+                    paragraphs(
+                        "When held in your hand, the ${major("Divining Rod")} will ${minor("show you nearby ores through walls")}.",
+                        "It has a 20 block radius by default, though this can be configured."
+                    )
+                )
+
+                spotlightPage(
+                    DiviningRodItem.getRodForBlockTag(BlockTags.DIAMOND_ORES),
+                    paragraphs(
+                        "There is a Divining Rod for ${minor("each ore")}, as well as one that shows ${minor("all ores")}.",
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun luminousPowder() {
@@ -524,27 +519,32 @@ class ItemsCategoryProvider(
 
     // Merge all bucket stuff
     private fun enderBuckets() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Ender Buckets",
+            ModItems.ENDER_BUCKET
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    ModItems.ENDER_BUCKET.toStack(),
+                    "Ender Bucket",
+                    paragraphs(
+                        "The ${major("Ender Bucket")} can pick up fluids ${minor("when used on non-source blocks")}.",
+                        "It'll search for the nearest source block and pick that up instead."
+                    )
+                )
+
+                spotlightPage(
+                    ModItems.REINFORCED_ENDER_BUCKET.toStack(),
+                    "Reinforced Ender Bucket",
+                    paragraphs(
+                        "The ${major("Reinforced Ender Bucket")} works similarly, but ${minor("can hold 10 fluid sources")}!",
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun sakanadeSpores() {
