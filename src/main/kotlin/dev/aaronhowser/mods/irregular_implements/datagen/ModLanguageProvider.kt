@@ -723,7 +723,7 @@ class ModLanguageProvider(
 
         addInfo(ModItems.STABLE_ENDER_PEARL, "Use to bind to yourself.\n\nSeven seconds after being dropped, it teleports the bound entity to it. If no entity is bound, it grabs a random entity within 10 blocks instead.")
         addInfo(ModItems.BIOME_CRYSTAL, "Found in dungeon chests, can be inserted into a Biome Radar to locate a biome.")
-        addInfo(ModItems.LOCATION_FILTER, "An item representation of a position in the world.\n\nSet by either using it on a block, an entity, or empty space.")
+        addInfo(ModItems.LOCATION_FILTER, "An item representation of a position in the world.\n\nSet by either using it on a block.")
         addInfo(ModItems.SUMMONING_PENDULUM, "Found in dungeon chests, can be used to pick up and place entities.")
         addInfo(ModItems.LESSER_MAGIC_BEAN, "Can be planted on any block, and grows into a bean stalk.\n\nBean Stalk blocks can be climbed faster than Ladders.")
         addInfo(ModItems.MAGIC_BEAN, "Can be planted on any block, and grows a bean stalk that reaches the sky.\n\nThe top of the bean stalk has treasures.")

@@ -84,7 +84,7 @@ class ItemsCategoryProvider(
     private fun stableEnderPearl() {
         val entry = object : BaseEntryProvider(
             realThis,
-            "Stable Entry Pearl",
+            "Stable Ender Pearl",
             ModItems.STABLE_ENDER_PEARL
         ) {
             override fun generatePages() {
@@ -214,7 +214,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -259,7 +258,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -283,7 +281,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -399,7 +396,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -423,7 +419,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -447,7 +442,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -498,7 +492,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -552,7 +545,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -577,7 +569,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -602,7 +593,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -622,27 +612,28 @@ class ItemsCategoryProvider(
     }
 
     private fun magicHood() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Magic Hood",
+            ModItems.MAGIC_HOOD,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Magic Hood",
+                    paragraphs(
+                        "The ${major("Magic Hood")} disables your name plate and hides your potion particles."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "It can only be found in ${minor("dungeon chests")} and ${minor("blacksmith village buildings")}."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     // And obsidian
@@ -651,7 +642,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -675,7 +665,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -695,27 +684,28 @@ class ItemsCategoryProvider(
     }
 
     private fun spectreArmor() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Spectre Armor",
+            ModItems.SPECTRE_CHESTPLATE,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Spectre Armor",
+                    paragraphs(
+                        "${major("Spectre Armor")} is comparable to Diamond, but has ${minor("higher durability and enchantability.")}",
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "It also makes you slightly transparent!"
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun weatherEggs() {
@@ -723,7 +713,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -743,51 +732,59 @@ class ItemsCategoryProvider(
     }
 
     private fun locationFilter() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Location Filter",
+            ModItems.LOCATION_FILTER,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Location Filter",
+                    paragraphs(
+                        "The ${major("Location Filter")} is an item representation of a location in the world.",
+                        "Use it on a block to save its location to the Filter. Sneak right-click to clear it."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "Holding it in your hand will show the location you set!"
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun itemFilter() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//            ""
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Item Filter",
+            ModItems.ITEM_FILTER,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Item Filter",
+                    paragraphs(
+                        "${major("Item Filters")} can be used to filter items in several places.",
+                        "Use it to open its menu, which has 9 slots. Insert an item into a slot to add it to the filter.",
+                        "There are two buttons above each non-empty slot. The left button toggles if that slot filters by ${minor("Item")} or ${minor("Item Tag")}."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "The right button does one of two things.",
+                        "If the slot is filtering by Item, then it toggles if it requires the item to have the same ${minor("components")}.",
+                        "If the slot is filtering by Tag, then it cycles which tag it's filtering.",
+                        "Additionally, you can set the entire filter to be a ${minor("blacklist")} or ${minor("whitelist")} using the button on the top right."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun entityFilter() {
@@ -795,7 +792,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -843,7 +839,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -868,7 +863,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -892,7 +886,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -916,7 +909,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -940,7 +932,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -964,7 +955,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -988,7 +978,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1013,7 +1002,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1037,7 +1025,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1061,7 +1048,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1085,7 +1071,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1109,7 +1094,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1133,7 +1117,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1157,7 +1140,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1181,7 +1163,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1206,7 +1187,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1230,7 +1210,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1254,7 +1233,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1278,7 +1256,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1302,7 +1279,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1326,7 +1302,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1350,7 +1325,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1374,7 +1348,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
@@ -1398,7 +1371,6 @@ class ItemsCategoryProvider(
 //            realThis,
 //            "",
 //            ,
-//            ""
 //        ) {
 //            override fun generatePages() {
 //                textPage(
