@@ -37,8 +37,9 @@ class BiomeCrystalLootEntry(
     }
 
     override fun createItemStack(stackConsumer: Consumer<ItemStack>, lootContext: LootContext) {
-        for (biomeCrystal in BiomeCrystalItem.getAllCrystals(lootContext.level.registryAccess())) {
-            stackConsumer.accept(biomeCrystal)
-        }
+        val allCrystals = BiomeCrystalItem.getAllCrystals(lootContext.level.registryAccess())
+        val randomStack = allCrystals[lootContext.random.nextInt(allCrystals.size)]
+
+        stackConsumer.accept(randomStack)
     }
 }
