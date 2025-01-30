@@ -18,6 +18,7 @@ object LavaProtectionOverlayRenderer {
 
     fun tryRender(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
         val player = ClientUtil.localPlayer ?: return
+        if (player.isCreative || player.isSpectator) return
         val lavaProtector = LavaCharmItem.getFirstLavaProtector(player) ?: return
 
         val charge = lavaProtector.get(ModDataComponents.CHARGE) ?: return
