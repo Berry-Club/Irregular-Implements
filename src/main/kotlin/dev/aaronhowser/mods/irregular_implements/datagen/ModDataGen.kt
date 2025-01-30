@@ -2,8 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModBlockLootTablesSubProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModifierProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModLootTableProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModModonomiconProvider
@@ -11,8 +10,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.tag.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.PackOutput
-import net.minecraft.data.loot.LootTableProvider
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -48,17 +45,7 @@ object ModDataGen {
 
         val lootTableProvider = generator.addProvider(
             event.includeServer(),
-            LootTableProvider(
-                output,
-                setOf(),
-                listOf(
-                    LootTableProvider.SubProviderEntry(
-                        ::ModBlockLootTablesSubProvider,
-                        LootContextParamSets.BLOCK
-                    )
-                ),
-                lookupProvider
-            )
+            ModLootTableProvider(output, lookupProvider)
         )
 
         val soundDefinitionsProvider = generator.addProvider(
@@ -94,11 +81,6 @@ object ModDataGen {
         val biomeTagProvider = generator.addProvider(
             event.includeServer(),
             ModBiomeTagsProvider(output, lookupProvider, existingFileHelper)
-        )
-
-        val globalLootModifier = generator.addProvider(
-            event.includeServer(),
-            ModGlobalLootModifierProvider(output, lookupProvider)
         )
 
         val curioProvider = generator.addProvider(
