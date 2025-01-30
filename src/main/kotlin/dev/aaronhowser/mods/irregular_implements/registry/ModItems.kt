@@ -84,7 +84,7 @@ object ModItems {
         register("magic_bean") { ItemNameBlockItem(ModBlocks.BEAN_STALK.get(), Item.Properties().rarity(Rarity.RARE)) } //TODO: Add to dungeon loot
 
     // Armors
-    val MAGIC_HOOD: DeferredItem<ArmorItem> =   // TODO: Add to dungeon and blacksmith loot
+    val MAGIC_HOOD: DeferredItem<ArmorItem> =
         register("magic_hood") { ModArmorItems.MAGIC_HOOD }
     val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
         register("water_walking_boots") { ModArmorItems.WATER_WALKING_BOOTS }
