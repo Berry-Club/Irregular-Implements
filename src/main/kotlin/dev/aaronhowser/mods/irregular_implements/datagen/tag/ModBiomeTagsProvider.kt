@@ -37,7 +37,7 @@ class ModBiomeTagsProvider(
 
     override fun addTags(provider: HolderLookup.Provider) {
 
-        tag(BIOME_CRYSTAL_BLACKLIST)    // Empty by default
+        tag(BIOME_CRYSTAL_BLACKLIST)    // Empty by default (blacklist is empty by default)
         tag(NATURE_CORE_OAK)            // Empty by default (used as fallback)
 
         tag(NATURE_CORE_DARK_OAK)
