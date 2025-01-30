@@ -133,6 +133,13 @@ class ModChestLootSubprovider(
         val NUMBERED_COIL_END_CITY = createPoolRk("numbered_coil_end_city")
         private const val NUMBERED_COIL_END_CITY_CHANCE = 30
         private val numberedCoilEndCityPool = singleItemPool(ModBlocks.SPECTRE_COIL_NUMBER.asItem(), NUMBERED_COIL_END_CITY_CHANCE)
+
+        private const val BIOME_CRYSTAL_CHANCE = 20
+        val biomeCrystalPool: LootPool.Builder = LootPool.lootPool()
+            .setRolls(ConstantValue.exactly(1f))
+            .add(EmptyLootItem.emptyItem().setWeight(100 - BIOME_CRYSTAL_CHANCE))
+            .add(BiomeCrystalLootEntry.get().setWeight(BIOME_CRYSTAL_CHANCE))
+
     }
 
 }
