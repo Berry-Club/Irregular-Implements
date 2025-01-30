@@ -71,6 +71,11 @@ class ModChestLootSubprovider(
             LootTable.lootTable().withPool(numberedCoilMineshaftPool)
         )
 
+        output.accept(
+            NUMBERED_COIL_END_CITY,
+            LootTable.lootTable().withPool(numberedCoilEndCityPool)
+        )
+
         //TODO: Biome Crystals
 
     }
@@ -124,6 +129,10 @@ class ModChestLootSubprovider(
         val NUMBERED_COIL_MINESHAFT = createPoolRk("numbered_coil_mineshaft")
         private const val NUMBERED_COIL_MINESHAFT_CHANCE = 8
         private val numberedCoilMineshaftPool = singleItemPool(ModBlocks.SPECTRE_COIL_NUMBER.asItem(), NUMBERED_COIL_MINESHAFT_CHANCE)
+
+        val NUMBERED_COIL_END_CITY = createPoolRk("numbered_coil_end_city")
+        private const val NUMBERED_COIL_END_CITY_CHANCE = 30
+        private val numberedCoilEndCityPool = singleItemPool(ModBlocks.SPECTRE_COIL_NUMBER.asItem(), NUMBERED_COIL_END_CITY_CHANCE)
     }
 
 }

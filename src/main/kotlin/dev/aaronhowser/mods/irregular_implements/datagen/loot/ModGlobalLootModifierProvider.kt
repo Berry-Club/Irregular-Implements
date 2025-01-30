@@ -104,6 +104,14 @@ class ModGlobalLootModifierProvider(
             )
         )
 
+        add(
+            "numbered_coil_end_city",
+            AddTableLootModifier(
+                endCityTreasure,
+                ModChestLootSubprovider.NUMBERED_COIL_END_CITY
+            )
+        )
+
     }
 
 }
