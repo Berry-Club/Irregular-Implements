@@ -112,6 +112,22 @@ class ModGlobalLootModifierProvider(
             )
         )
 
+        val allChestLootTables = BuiltInLootTables.all().filter { it.location().path.startsWith("chests/") }
+        for (lootTable in allChestLootTables) {
+            val array = arrayOf(LootTableIdCondition.Builder(lootTable.location()).build())
+            val string = lootTable.location().path
+                .replace("chests/", "")
+                .replace('/', '_')
+
+            add(
+                "biome_crystal_$string",
+                AddTableLootModifier(
+                    array,
+                    ModChestLootSubprovider.BIOME_CRYSTAL
+                )
+            )
+        }
+
     }
 
 }

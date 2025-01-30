@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import java.util.function.Consumer
 
-class BiomeCrystalLootEntry private constructor(
+class BiomeCrystalLootEntry(
     weight: Int,
     quality: Int,
     conditions: MutableList<LootItemCondition>,
