@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModBlockLootTablesSubProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModifierProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModModonomiconProvider
@@ -93,6 +94,11 @@ object ModDataGen {
         val biomeTagProvider = generator.addProvider(
             event.includeServer(),
             ModBiomeTagsProvider(output, lookupProvider, existingFileHelper)
+        )
+
+        val globalLootModifier = generator.addProvider(
+            event.includeServer(),
+            ModGlobalLootModifierProvider(output, lookupProvider)
         )
 
         val curioProvider = generator.addProvider(
