@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModifierProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModLootTableProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
@@ -46,6 +47,11 @@ object ModDataGen {
         val lootTableProvider = generator.addProvider(
             event.includeServer(),
             ModLootTableProvider(output, lookupProvider)
+        )
+
+        val globalLootModifierProvider = generator.addProvider(
+            event.includeServer(),
+            ModGlobalLootModifierProvider(output, lookupProvider)
         )
 
         val soundDefinitionsProvider = generator.addProvider(
