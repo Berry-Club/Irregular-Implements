@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-30T11:41:48.9276866	Books: irregular_implements
+// 1.21.1	2025-01-30T12:17:22.3272728	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
@@ -8,6 +8,7 @@ ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/b
 69de1c82570784ba1f2a705998f040d95f159f45 data/irregular_implements/modonomicon/books/guide/entries/blocks/contact_lever.json
 98daa112a2a44b820b51a641ce3f08afdbda407c data/irregular_implements/modonomicon/books/guide/entries/blocks/global_chat_detector.json
 db187e160716501130cadcaa21269685511621c0 data/irregular_implements/modonomicon/books/guide/entries/blocks/lapis_glass.json
+16b0a92941a9dcf3e3b98a7f8423b9282d476182 data/irregular_implements/modonomicon/books/guide/entries/blocks/notification_interface.json
 14dcee4d576abdd739cbd6864a5362badc1d14f0 data/irregular_implements/modonomicon/books/guide/entries/blocks/online_detector.json
 fb05cef3dac01481465d645c585056396a65c405 data/irregular_implements/modonomicon/books/guide/entries/blocks/pitcher_plant.json
 8869bae8625ea363a1a3223ac975625ed8f8b3d5 data/irregular_implements/modonomicon/books/guide/entries/blocks/quartz_glass.json
@@ -15,6 +16,7 @@ fb05cef3dac01481465d645c585056396a65c405 data/irregular_implements/modonomicon/b
 ba8b45c111788900d02ab40ad3b17a31c5cd5da9 data/irregular_implements/modonomicon/books/guide/entries/blocks/rain_shield.json
 ec0ec8eff9ba600f5669ee1ecf020f4a33730e79 data/irregular_implements/modonomicon/books/guide/entries/blocks/shock_absorber.json
 faa09db2d0ddc25e50e5945b78d4e3b5b4e75be4 data/irregular_implements/modonomicon/books/guide/entries/blocks/sided_redstone.json
+06827044ffa7836aef25e087dd4096d3a23c96d5 data/irregular_implements/modonomicon/books/guide/entries/blocks/spectre_lens.json
 75bda675594a2655b547a92af090c5b446b882d8 data/irregular_implements/modonomicon/books/guide/entries/items/biome_capsule.json
 16ba18d7a3f95d434b9158aa9c0cc640e2e2fb6a data/irregular_implements/modonomicon/books/guide/entries/items/biome_crystal.json
 651eab24305187212843f3518c2e61d9dc18b710 data/irregular_implements/modonomicon/books/guide/entries/items/biome_painter.json
@@ -22,7 +24,7 @@ faa09db2d0ddc25e50e5945b78d4e3b5b4e75be4 data/irregular_implements/modonomicon/b
 b772036003b3708bfc08781dc520b8de2808b69a data/irregular_implements/modonomicon/books/guide/entries/items/block_mover.json
 12d594ad666ab7774656ba109b12a8ded8841731 data/irregular_implements/modonomicon/books/guide/entries/items/bottle_of_air.json
 2fc8edfb81a1a517c4cac764f08e4405933e6e47 data/irregular_implements/modonomicon/books/guide/entries/items/chunk_analyzer.json
-e204fdf5d098bdaa967af2e8ab9053f8bde0f84d data/irregular_implements/modonomicon/books/guide/entries/items/divining_rod.json
+20a6acddef8b5023a9e814116c50fa20b939865f data/irregular_implements/modonomicon/books/guide/entries/items/divining_rod.json
 2c0b170cc68d5175a28debcad2dfd788a02d9389 data/irregular_implements/modonomicon/books/guide/entries/items/drop_filter.json
 4045089d3b7eebddcd8c7a372e00103202407af5 data/irregular_implements/modonomicon/books/guide/entries/items/emerald_compass.json
 c4869f240338f516bc32a02e9ca9deaa44da72cc data/irregular_implements/modonomicon/books/guide/entries/items/ender_bucket.json

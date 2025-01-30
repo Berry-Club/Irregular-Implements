@@ -1247,26 +1247,29 @@ class BlocksCategoryProvider(
     }
 
     private fun notificationInterface() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Notification Interface",
+            ModBlocks.NOTIFICATION_INTERFACE,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Notification Interface",
+                    paragraphs(
+                        "When the ${major("Notification Interface")} receives a redstone signal, it will ${minor("display a notification toast")} in the top right of the owner's screen.",
+                        "Its menu has 2 text boxes, one for the title and one for the description."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "You can set the toast's icon by inserting an item into the slot on the left."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     // include both
@@ -1294,26 +1297,23 @@ class BlocksCategoryProvider(
     }
 
     private fun spectreLens() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Spectre Lens",
+            ModBlocks.SPECTRE_LENS,
+        ) {
+            override fun generatePages() {
+                spotlightPage(
+                    "Spectre Lens",
+                    paragraphs(
+                        "The ${major("Spectre Lens")} can be placed on Beacons to ${minor("allow them to effect you no matter the distance.")}",
+                        "However, you ${bad("must be in the same dimension")} as the Lens, and it must be loaded."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun spectreEnergyInjector() {

@@ -6,7 +6,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.entries.BaseEntryProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import net.minecraft.tags.BlockTags
+import net.neoforged.neoforge.common.Tags
 
 class ItemsCategoryProvider(
     parent: ModonomiconProviderBase
@@ -476,7 +476,7 @@ class ItemsCategoryProvider(
                 )
 
                 spotlightPage(
-                    DiviningRodItem.getRodForBlockTag(BlockTags.DIAMOND_ORES),
+                    DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_DIAMOND),
                     paragraphs(
                         "There is a Divining Rod for ${minor("each ore")}, as well as one that shows ${minor("all ores")}.",
                     )

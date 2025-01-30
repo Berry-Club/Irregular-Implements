@@ -24,7 +24,6 @@ class SpectreLensBlockEntity(
     companion object {
         const val OWNER_UUID_NBT = "OwnerUuid"
 
-        //TODO: Only allow one Lens per dimension
         @JvmStatic
         fun applyEffects(
             level: Level,

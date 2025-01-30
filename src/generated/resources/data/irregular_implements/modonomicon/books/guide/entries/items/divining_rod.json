@@ -28,7 +28,7 @@
       },
       "item": {
         "components": {
-          "irregular_implements:block_tag": "minecraft:diamond_ores"
+          "irregular_implements:block_tag": "c:ores/diamond"
         },
         "count": 1,
         "item": "irregular_implements:divining_rod"
