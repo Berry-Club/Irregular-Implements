@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.entries.BaseEntryProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import net.minecraft.world.item.crafting.Ingredient
 
 class BlocksCategoryProvider(
     parent: ModonomiconProviderBase
@@ -1386,26 +1387,45 @@ class BlocksCategoryProvider(
     }
 
     private fun biomeBlocks() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Biome Blocks",
+            ModBlocks.BIOME_STONE,
+            "biome_blocks"
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Biome Blocks",
+                    paragraphs(
+                        "${major("Biome Blocks")} are a set of building blocks that ${minor("tint themselves to match the biome")}."
+                    )
+                )
+
+                val ingredient = Ingredient.of(
+                    ModBlocks.BIOME_GLASS,
+                    ModBlocks.BIOME_STONE,
+                    ModBlocks.BIOME_COBBLESTONE,
+                    ModBlocks.BIOME_STONE_BRICKS,
+                    ModBlocks.BIOME_STONE_BRICKS_CHISELED,
+                    ModBlocks.BIOME_STONE_BRICKS_CRACKED
+                )
+
+                spotlightPage(
+                    ingredient,
+                    paragraphs(
+                        "There are 6 Biome blocks:" +
+                                "\n- ${major("Biome Glass")}" +
+                                "\n- ${major("Biome Stone")}" +
+                                "\n- ${major("Biome Cobblestone")}" +
+                                "\n- ${major("Biome Stone Bricks")}" +
+                                "\n- ${major("Chiseled Biome Stone Bricks")}" +
+                                "\n- ${major("Cracked Biome Stone Bricks")}"
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun processingPlate() {

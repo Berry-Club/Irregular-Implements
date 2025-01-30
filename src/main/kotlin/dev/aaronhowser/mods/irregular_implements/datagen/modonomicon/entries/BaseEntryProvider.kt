@@ -11,6 +11,7 @@ import com.mojang.datafixers.util.Pair
 import net.minecraft.ChatFormatting
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
@@ -192,6 +193,31 @@ abstract class BaseEntryProvider : EntryProvider {
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText())
                 .withItem(itemStack)
+        }
+
+        this.pageTitle(title)
+        this.pageText(text)
+
+        return page
+    }
+
+    fun spotlightPage(
+        ingredient: Ingredient,
+        text: String
+    ): BookSpotlightPageModel {
+        return this.spotlightPage(ingredient, "", text)
+    }
+
+    fun spotlightPage(
+        ingredient: Ingredient,
+        title: String,
+        text: String
+    ): BookSpotlightPageModel {
+        val page = this.page("page_${this.pageIndex++}") {
+            BookSpotlightPageModel.create()
+                .withTitle(this.context().pageTitle())
+                .withText(this.context().pageText())
+                .withItem(ingredient)
         }
 
         this.pageTitle(title)

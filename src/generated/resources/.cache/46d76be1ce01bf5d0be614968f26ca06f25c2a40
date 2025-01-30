@@ -1,7 +1,8 @@
-// 1.21.1	2025-01-30T12:17:22.3272728	Books: irregular_implements
+// 1.21.1	2025-01-30T12:24:50.358902	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
+f0d5dcba5ae2c5142d0cf4840848c6bdc8f43774 data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_blocks.json
 4dc514faac6cd8a5c8ce3dca08093035daf75ee7 data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_radar.json
 06faedb35c029a6337d1209ca2f4a6908ea6f687 data/irregular_implements/modonomicon/books/guide/entries/blocks/chat_detector.json
 3bdc8fdf2eead4b2e3576b5d9c57533d1c1a9cff data/irregular_implements/modonomicon/books/guide/entries/blocks/contact_button.json
