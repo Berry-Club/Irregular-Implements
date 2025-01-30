@@ -2,10 +2,14 @@
   "entries": [
     "irregular_implements:magic_hood_dungeon",
     "irregular_implements:lava_charm_nether",
+    "irregular_implements:slime_cube_jungle_temple",
     "irregular_implements:numbered_coil_dungeon",
     "irregular_implements:lava_charm_dungeon",
-    "irregular_implements:summoning_pendulum",
-    "irregular_implements:slime_cube"
+    "irregular_implements:summoning_pendulum_dungeon",
+    "irregular_implements:summoning_pendulum_stronghold",
+    "irregular_implements:magic_hood_weaponsmith",
+    "irregular_implements:numbered_coil_mineshaft",
+    "irregular_implements:slime_cube_dungeon"
   ],
   "replace": false
 }

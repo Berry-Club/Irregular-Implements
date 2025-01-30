@@ -41,10 +41,18 @@ class ModGlobalLootModifierProvider(
         )
 
         add(
-            "summoning_pendulum",
+            "summoning_pendulum_dungeon",
             AddTableLootModifier(
                 simpleDungeon,
-                ModChestLootSubprovider.SUMMONING_PENDULUM
+                ModChestLootSubprovider.SUMMONING_PENDULUM_DUNGEON
+            )
+        )
+
+        add(
+            "summoning_pendulum_stronghold",
+            AddTableLootModifier(
+                strongholdCorridor,
+                ModChestLootSubprovider.SUMMONING_PENDULUM_STRONGHOLD
             )
         )
 
@@ -57,10 +65,26 @@ class ModGlobalLootModifierProvider(
         )
 
         add(
-            "slime_cube",
+            "magic_hood_weaponsmith",
+            AddTableLootModifier(
+                villageWeaponsmith,
+                ModChestLootSubprovider.MAGIC_HOOD_WEAPONSMITH
+            )
+        )
+
+        add(
+            "slime_cube_dungeon",
             AddTableLootModifier(
                 simpleDungeon,
-                ModChestLootSubprovider.SLIME_CUBE
+                ModChestLootSubprovider.SLIME_CUBE_DUNGEON
+            )
+        )
+
+        add(
+            "slime_cube_jungle_temple",
+            AddTableLootModifier(
+                jungleTemple,
+                ModChestLootSubprovider.SLIME_CUBE_JUNGLE_TEMPLE
             )
         )
 
@@ -69,6 +93,14 @@ class ModGlobalLootModifierProvider(
             AddTableLootModifier(
                 simpleDungeon,
                 ModChestLootSubprovider.NUMBERED_COIL_DUNGEON
+            )
+        )
+
+        add(
+            "numbered_coil_mineshaft",
+            AddTableLootModifier(
+                abandonedMineshaft,
+                ModChestLootSubprovider.NUMBERED_COIL_MINESHAFT
             )
         )
 
