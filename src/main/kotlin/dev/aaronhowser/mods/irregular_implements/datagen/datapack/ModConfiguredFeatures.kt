@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
 import dev.aaronhowser.mods.irregular_implements.block.LotusBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModFeatures
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.Registries
@@ -21,10 +22,10 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 object ModConfiguredFeatures {
 
-    val LOTUS_BUSH_KEY: ResourceKey<ConfiguredFeature<*, *>> = registerKey("lotus_bush")
-    val PITCHER_PLANT_KEY: ResourceKey<ConfiguredFeature<*, *>> = registerKey("pitcher_plant")
-
-    val SPECTRE_TREE_KEY: ResourceKey<ConfiguredFeature<*, *>> = registerKey("spectre_tree")
+    val LOTUS_BUSH_KEY = registerKey("lotus_bush")
+    val PITCHER_PLANT_KEY = registerKey("pitcher_plant")
+    val SPECTRE_TREE_KEY = registerKey("spectre_tree")
+    val NATURE_CORE_KEY = registerKey("nature_core")
 
     fun bootstrap(context: BootstrapContext<ConfiguredFeature<*, *>>) {
         register(
@@ -60,6 +61,13 @@ object ModConfiguredFeatures {
                 3,
                 2
             ).build()
+        )
+
+        register(
+            context,
+            NATURE_CORE_KEY,
+            ModFeatures.NATURE_CORE.get(),
+            FeatureConfiguration.NONE
         )
 
     }
