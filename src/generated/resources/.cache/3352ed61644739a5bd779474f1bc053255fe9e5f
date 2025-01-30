@@ -1,1 +1,9 @@
-// 1.21.1	2025-01-23T12:33:30.5823538	Tags for minecraft:worldgen/biome mod id irregular_implements
+// 1.21.1	2025-01-30T16:41:56.8350945	Tags for minecraft:worldgen/biome mod id irregular_implements
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/irregular_implements/tags/worldgen/biome/biome_crystal_blacklist.json
+123a8c4cf362352d397dc85738c4e8bb2ef2dc40 data/irregular_implements/tags/worldgen/biome/nature_core_acacia.json
+ad41a205a2af421a343ed7b2b72e34818bf036db data/irregular_implements/tags/worldgen/biome/nature_core_birch.json
+5f176659fa27569cc678ddae4a306c2055a89a16 data/irregular_implements/tags/worldgen/biome/nature_core_dark_oak.json
+c3d4e55bd4ed5d178abb10df76626eccdab7c209 data/irregular_implements/tags/worldgen/biome/nature_core_jungle.json
+a8da2438bebdb3e6080fe1d0eccb1c3de5e5a129 data/irregular_implements/tags/worldgen/biome/nature_core_mangrove.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/irregular_implements/tags/worldgen/biome/nature_core_oak.json
+5694e82971984a2dead7658fffd5c5c8c410cb6a data/irregular_implements/tags/worldgen/biome/nature_core_spruce.json
