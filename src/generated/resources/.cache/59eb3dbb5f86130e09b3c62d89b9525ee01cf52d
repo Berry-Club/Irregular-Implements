@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-30T13:41:17.3700328	Loot Tables
+// 1.21.1	2025-01-30T13:50:48.6843451	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -193,3 +193,6 @@ becfe273494a12e10a8fe0a4c92a64cb3ca785c2 data/irregular_implements/loot_table/bl
 8b65a42fc062a4dd700c35e1e90bc38f21cfdccf data/irregular_implements/loot_table/blocks/warped_platform.json
 3dfb686511a464adf99ac171a38f6fa77d297cc4 data/irregular_implements/loot_table/blocks/water_chest.json
 e6ee5b12815391579c05071bdafca638bbcf6150 data/irregular_implements/loot_table/chest/lava_charm.json
+2153d3e67dc403a72f316f9ccd445edebb43bf67 data/irregular_implements/loot_table/chest/magic_hood.json
+ca74fb636769c190dc54588ff4319b974fdd0092 data/irregular_implements/loot_table/chest/slime_cube.json
+498a046daf6e1073163263a4d16091bae4fe4aed data/irregular_implements/loot_table/chest/summoning_pendulum.json

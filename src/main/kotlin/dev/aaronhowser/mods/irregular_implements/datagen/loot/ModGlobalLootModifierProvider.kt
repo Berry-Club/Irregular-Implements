@@ -20,7 +20,31 @@ class ModGlobalLootModifierProvider(
             "lava_charm",
             AddTableLootModifier(
                 arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build()),
-                ModChestLootSubprovider.LAVA_CHARM_POOL
+                ModChestLootSubprovider.LAVA_CHARM
+            )
+        )
+
+        add(
+            "summoning_pendulum",
+            AddTableLootModifier(
+                arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build()),
+                ModChestLootSubprovider.SUMMONING_PENDULUM
+            )
+        )
+
+        add(
+            "magic_hood",
+            AddTableLootModifier(
+                arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build()),
+                ModChestLootSubprovider.MAGIC_HOOD
+            )
+        )
+
+        add(
+            "slime_cube",
+            AddTableLootModifier(
+                arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build()),
+                ModChestLootSubprovider.SLIME_CUBE
             )
         )
 

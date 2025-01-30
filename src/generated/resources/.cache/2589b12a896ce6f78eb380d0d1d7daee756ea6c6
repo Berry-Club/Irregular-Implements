@@ -1,3 +1,6 @@
-// 1.21.1	2025-01-30T13:42:23.3479806	Global Loot Modifiers : irregular_implements
+// 1.21.1	2025-01-30T13:50:48.6899057	Global Loot Modifiers : irregular_implements
 84660ccf55fdb5af681b315f2148d1f4c3533bcd data/irregular_implements/loot_modifiers/lava_charm.json
-364826c8d8f6017ab6171d18fc75786c15221d81 data/neoforge/loot_modifiers/global_loot_modifiers.json
+b00a69170a56b4cf0a6b401462bf3f998f6ade6f data/irregular_implements/loot_modifiers/magic_hood.json
+61504d082ce2bbdefc6f750c7f4c76ab40ec9cc3 data/irregular_implements/loot_modifiers/slime_cube.json
+e04b1c30bc8c7b621ea57eb17fb1192e4d37e646 data/irregular_implements/loot_modifiers/summoning_pendulum.json
+a9f19eff1d8fb444327fdb8c8a54b1842bff58e1 data/neoforge/loot_modifiers/global_loot_modifiers.json

@@ -1,6 +1,9 @@
 {
   "entries": [
-    "irregular_implements:lava_charm"
+    "irregular_implements:magic_hood",
+    "irregular_implements:lava_charm",
+    "irregular_implements:summoning_pendulum",
+    "irregular_implements:slime_cube"
   ],
   "replace": false
 }
