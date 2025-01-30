@@ -1146,49 +1146,58 @@ class BlocksCategoryProvider(
     }
 
     private fun chatDetector() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Chat Detector",
+            ModBlocks.CHAT_DETECTOR,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Chat Detector",
+                    paragraphs(
+                        "The ${major("Chat Detector")} will emit a redstone pulse when the block's owner sends a specific chat message.",
+                        "Use the block to open its gui, where you can type a ${minor("regex pattern")} that will be tested on every message the owner sends.",
+                        "You don't have to do any fancy regex, though. The regex \"example\" will match any chat message that contains the word \"example\".",
+                        "Its owner is automatically set to the player who placed it."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "In its menu, you can also set it to ${minor("consume")} the message.",
+                        "If enabled, the message will not actually be sent to chat, but will still emit a redstone pulse."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun globalChatDetector() {
-//        val entry = object : BaseEntryProvider(
-//            realThis,
-//            "",
-//            ,
-//        ) {
-//            override fun generatePages() {
-//                textPage(
-//                    "",
-//                    paragraphs(
-//                    )
-//                )
-//
-//                spotlightPage(
-//                    paragraphs(
-//                    )
-//                )
-//            }
-//        }
-//
-//        this.add(entry.generate())
+        val entry = object : BaseEntryProvider(
+            realThis,
+            "Global Chat Detector",
+            ModBlocks.GLOBAL_CHAT_DETECTOR,
+        ) {
+            override fun generatePages() {
+                textPage(
+                    "Global Chat Detector",
+                    paragraphs(
+                        "The ${major("Global Chat Detector")} works like the ${block("Chat Detector", "chat_detector")}, but works for all players.",
+                        "In its menu, you can also supply up to 9 ${item("ID Cards", "id_card")}."
+                    )
+                )
+
+                spotlightPage(
+                    paragraphs(
+                        "If the GCD is set to consume messages, it will only consume messages sent from the players set by the ID Cards."
+                    )
+                )
+            }
+        }
+
+        this.add(entry.generate())
     }
 
     private fun entityDetector() {
