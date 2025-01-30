@@ -22,8 +22,13 @@ class ModChestLootSubprovider(
     override fun generate(output: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
 
         output.accept(
-            LAVA_CHARM,
-            LootTable.lootTable().withPool(lavaCharmPool)
+            LAVA_CHARM_DUNGEON,
+            LootTable.lootTable().withPool(lavaCharmDungeon)
+        )
+
+        output.accept(
+            LAVA_CHARM_NETHER,
+            LootTable.lootTable().withPool(lavaCharmNetherPool)
         )
 
         output.accept(
@@ -32,13 +37,23 @@ class ModChestLootSubprovider(
         )
 
         output.accept(
-            MAGIC_HOOD,
-            LootTable.lootTable().withPool(magicHoodPool)
+            MAGIC_HOOD_DUNGEON,
+            LootTable.lootTable().withPool(magicHoodDungeonPool)
         )
 
         output.accept(
             SLIME_CUBE,
             LootTable.lootTable().withPool(slimeCubePool)
+        )
+
+        output.accept(
+            NUMBERED_COIL_DUNGEON,
+            LootTable.lootTable().withPool(numberedCoilDungeonPool)
+        )
+
+        output.accept(
+            NUMBERED_COIL_MINESHAFT,
+            LootTable.lootTable().withPool(numberedCoilMineshaftPool)
         )
 
     }
@@ -53,21 +68,33 @@ class ModChestLootSubprovider(
             .add(EmptyLootItem.emptyItem().setWeight(100 - chance))
             .add(LootItem.lootTableItem(item).setWeight(chance))
 
-        val LAVA_CHARM = createPoolRk("lava_charm")
-        private const val LAVA_CHARM_CHANCE = 5
-        private val lavaCharmPool = singleItemPool(ModItems.LAVA_CHARM.get(), LAVA_CHARM_CHANCE)
+        val LAVA_CHARM_DUNGEON = createPoolRk("lava_charm_dungeon")
+        private const val LAVA_CHARM_DUNGEON_CHANCE = 5
+        private val lavaCharmDungeon = singleItemPool(ModItems.LAVA_CHARM.get(), LAVA_CHARM_DUNGEON_CHANCE)
+
+        val LAVA_CHARM_NETHER = createPoolRk("lava_charm_nether")
+        private const val LAVA_CHARM_NETHER_CHANCE = 30
+        private val lavaCharmNetherPool = singleItemPool(ModItems.LAVA_CHARM.get(), LAVA_CHARM_NETHER_CHANCE)
 
         val SUMMONING_PENDULUM = createPoolRk("summoning_pendulum")
         private const val SUMMONING_PENDULUM_CHANCE = 10
         private val summoningPendulumPool = singleItemPool(ModItems.SUMMONING_PENDULUM.get(), SUMMONING_PENDULUM_CHANCE)
 
-        val MAGIC_HOOD = createPoolRk("magic_hood")
-        private const val MAGIC_HOOD_CHANCE = 5
-        private val magicHoodPool = singleItemPool(ModItems.MAGIC_HOOD.get(), MAGIC_HOOD_CHANCE)
+        val MAGIC_HOOD_DUNGEON = createPoolRk("magic_hood_dungeon")
+        private const val MAGIC_HOOD_DUNGEON_CHANCE = 5
+        private val magicHoodDungeonPool = singleItemPool(ModItems.MAGIC_HOOD.get(), MAGIC_HOOD_DUNGEON_CHANCE)
 
         val SLIME_CUBE = createPoolRk("slime_cube")
         private const val SLIME_CUBE_CHANCE = 10
         private val slimeCubePool = singleItemPool(ModBlocks.SLIME_CUBE.asItem(), SLIME_CUBE_CHANCE)
+
+        val NUMBERED_COIL_DUNGEON = createPoolRk("numbered_coil_dungeon")
+        private const val NUMBERED_COIL_DUNGEON_CHANCE = 10
+        private val numberedCoilDungeonPool = singleItemPool(ModBlocks.SPECTRE_COIL_NUMBER.asItem(), NUMBERED_COIL_DUNGEON_CHANCE)
+
+        val NUMBERED_COIL_MINESHAFT = createPoolRk("numbered_coil_mineshaft")
+        private const val NUMBERED_COIL_MINESHAFT_CHANCE = 8
+        private val numberedCoilMineshaftPool = singleItemPool(ModBlocks.SPECTRE_COIL_NUMBER.asItem(), NUMBERED_COIL_MINESHAFT_CHANCE)
     }
 
 }

@@ -6,5 +6,5 @@
       "loot_table_id": "minecraft:chests/simple_dungeon"
     }
   ],
-  "table": "irregular_implements:chest/lava_charm"
+  "table": "irregular_implements:chest/numbered_coil_dungeon"
 }

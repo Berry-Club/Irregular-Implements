@@ -6,16 +6,16 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 95
+          "weight": 92
         },
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:magic_hood",
-          "weight": 5
+          "name": "irregular_implements:spectre_coil_number",
+          "weight": 8
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:chest/magic_hood"
+  "random_sequence": "irregular_implements:chest/numbered_coil_mineshaft"
 }

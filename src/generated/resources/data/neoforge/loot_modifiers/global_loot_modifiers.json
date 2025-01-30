@@ -1,7 +1,9 @@
 {
   "entries": [
-    "irregular_implements:magic_hood",
-    "irregular_implements:lava_charm",
+    "irregular_implements:magic_hood_dungeon",
+    "irregular_implements:lava_charm_nether",
+    "irregular_implements:numbered_coil_dungeon",
+    "irregular_implements:lava_charm_dungeon",
     "irregular_implements:summoning_pendulum",
     "irregular_implements:slime_cube"
   ],
