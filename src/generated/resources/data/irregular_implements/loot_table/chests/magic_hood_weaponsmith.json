@@ -6,16 +6,16 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 95
+          "weight": 85
         },
         {
           "type": "minecraft:item",
           "name": "irregular_implements:magic_hood",
-          "weight": 5
+          "weight": 15
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:chest/magic_hood_dungeon"
+  "random_sequence": "irregular_implements:chests/magic_hood_weaponsmith"
 }

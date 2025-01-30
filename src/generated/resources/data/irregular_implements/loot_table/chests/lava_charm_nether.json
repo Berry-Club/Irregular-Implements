@@ -6,16 +6,16 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 90
+          "weight": 70
         },
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:spectre_coil_number",
-          "weight": 10
+          "name": "irregular_implements:lava_charm",
+          "weight": 30
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:chest/numbered_coil_dungeon"
+  "random_sequence": "irregular_implements:chests/lava_charm_nether"
 }

@@ -71,11 +71,13 @@ class ModChestLootSubprovider(
             LootTable.lootTable().withPool(numberedCoilMineshaftPool)
         )
 
+        //TODO: Biome Crystals
+
     }
 
     companion object {
         private fun createPoolRk(name: String): ResourceKey<LootTable> {
-            return ResourceKey.create(Registries.LOOT_TABLE, OtherUtil.modResource("chest/$name"))
+            return ResourceKey.create(Registries.LOOT_TABLE, OtherUtil.modResource("chests/$name"))
         }
 
         private fun singleItemPool(item: Item, chance: Int) = LootPool.lootPool()

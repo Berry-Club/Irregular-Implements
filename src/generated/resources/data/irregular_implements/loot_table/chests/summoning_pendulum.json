@@ -6,16 +6,16 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 70
+          "weight": 90
         },
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:lava_charm",
-          "weight": 30
+          "name": "irregular_implements:summoning_pendulum",
+          "weight": 10
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:chest/lava_charm_nether"
+  "random_sequence": "irregular_implements:chests/summoning_pendulum"
 }

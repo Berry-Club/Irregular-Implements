@@ -10,12 +10,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:summoning_pendulum",
+          "name": "irregular_implements:slime_cube",
           "weight": 50
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:chest/summoning_pendulum_stronghold"
+  "random_sequence": "irregular_implements:chests/slime_cube_jungle_temple"
 }

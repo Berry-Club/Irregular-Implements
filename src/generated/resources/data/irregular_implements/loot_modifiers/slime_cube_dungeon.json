@@ -6,5 +6,5 @@
       "loot_table_id": "minecraft:chests/simple_dungeon"
     }
   ],
-  "table": "irregular_implements:chest/slime_cube_dungeon"
+  "table": "irregular_implements:chests/slime_cube_dungeon"
 }

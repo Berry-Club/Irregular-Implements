@@ -6,16 +6,16 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 50
+          "weight": 95
         },
         {
           "type": "minecraft:item",
-          "name": "irregular_implements:slime_cube",
-          "weight": 50
+          "name": "irregular_implements:lava_charm",
+          "weight": 5
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:chest/slime_cube_jungle_temple"
+  "random_sequence": "irregular_implements:chests/lava_charm_dungeon"
 }
