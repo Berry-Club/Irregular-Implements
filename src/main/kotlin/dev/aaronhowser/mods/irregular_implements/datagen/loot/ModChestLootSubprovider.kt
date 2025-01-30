@@ -11,11 +11,10 @@ import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
-import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class ChestLootSubProvider(
-    registries: CompletableFuture<HolderLookup.Provider>
+class ModChestLootSubprovider(
+    registries: HolderLookup.Provider
 ) : LootTableSubProvider {
 
     override fun generate(output: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {

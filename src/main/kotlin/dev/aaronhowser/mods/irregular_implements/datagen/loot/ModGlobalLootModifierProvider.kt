@@ -20,7 +20,7 @@ class ModGlobalLootModifierProvider(
             "lava_charm",
             AddTableLootModifier(
                 arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build()),
-                ChestLootSubProvider.LAVA_CHARM_POOL
+                ModChestLootSubprovider.LAVA_CHARM_POOL
             )
         )
 

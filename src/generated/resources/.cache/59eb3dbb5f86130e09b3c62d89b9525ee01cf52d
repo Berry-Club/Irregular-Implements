@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-23T11:51:35.8753765	Loot Tables
+// 1.21.1	2025-01-30T13:41:17.3700328	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -192,3 +192,4 @@ becfe273494a12e10a8fe0a4c92a64cb3ca785c2 data/irregular_implements/loot_table/bl
 3be3dd2d36a32717c5790fa10254b8837ab97318 data/irregular_implements/loot_table/blocks/trigger_glass.json
 8b65a42fc062a4dd700c35e1e90bc38f21cfdccf data/irregular_implements/loot_table/blocks/warped_platform.json
 3dfb686511a464adf99ac171a38f6fa77d297cc4 data/irregular_implements/loot_table/blocks/water_chest.json
+e6ee5b12815391579c05071bdafca638bbcf6150 data/irregular_implements/loot_table/chest/lava_charm.json
