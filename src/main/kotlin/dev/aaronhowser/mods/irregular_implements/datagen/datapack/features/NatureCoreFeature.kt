@@ -8,6 +8,7 @@ import net.minecraft.core.Holder
 import net.minecraft.world.RandomizableContainer
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.ChestBlock
 import net.minecraft.world.level.block.LeavesBlock
 import net.minecraft.world.level.block.RotatedPillarBlock
 import net.minecraft.world.level.block.state.BlockState
@@ -115,7 +116,14 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
                 continue
             }
 
-            level.setBlock(chestPos, Blocks.CHEST.defaultBlockState(), 1 or 3)
+            val vectorFromOrigin = chestPos.subtract(origin)
+            val directionFromOrigin = Direction.fromDelta(vectorFromOrigin.x, 0, vectorFromOrigin.z)
+
+            val chestState = ModBlocks.NATURE_CHEST.get()
+                .defaultBlockState()
+                .setValue(ChestBlock.FACING, directionFromOrigin ?: Direction.NORTH)
+
+            level.setBlock(chestPos, chestState, 1 or 2)
             RandomizableContainer.setBlockEntityLootTable(level, random, chestPos, ModChestLootSubprovider.NATURE_CORE)
             break
         }
