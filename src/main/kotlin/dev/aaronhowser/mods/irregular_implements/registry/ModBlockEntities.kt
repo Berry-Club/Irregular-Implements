@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.SpecialChestBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -194,18 +195,20 @@ object ModBlockEntities {
             ).build(null)
         })
 
-    val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<NatureChestBlockEntity>> =
+    @JvmField
+    val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.NatureBlockEntity>> =
         BLOCK_ENTITY_REGISTRY.register("nature_chest", Supplier {
             BlockEntityType.Builder.of(
-                ::NatureChestBlockEntity,
+                { pos, state -> SpecialChestBlock.NatureBlockEntity(pos, state) },
                 ModBlocks.NATURE_CHEST.get()
             ).build(null)
         })
 
-    val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<WaterChestBlockEntity>> =
+    @JvmField
+    val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.WaterBlockEntity>> =
         BLOCK_ENTITY_REGISTRY.register("water_chest", Supplier {
             BlockEntityType.Builder.of(
-                ::WaterChestBlockEntity,
+                { pos, state -> SpecialChestBlock.WaterBlockEntity(pos, state) },
                 ModBlocks.WATER_CHEST.get()
             ).build(null)
         })

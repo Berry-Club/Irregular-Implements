@@ -208,6 +208,11 @@ object ClientModBusEvents {
             ModBlockEntities.NATURE_CHEST.get(),
             ::ChestRenderer
         )
+
+        event.registerBlockEntityRenderer(
+            ModBlockEntities.WATER_CHEST.get(),
+            ::ChestRenderer
+        )
     }
 
     @SubscribeEvent
