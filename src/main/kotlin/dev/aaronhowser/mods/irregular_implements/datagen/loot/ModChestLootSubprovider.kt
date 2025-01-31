@@ -7,12 +7,16 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.LootTableSubProvider
 import net.minecraft.resources.ResourceKey
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
+import net.minecraft.world.level.storage.loot.entries.TagEntry
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.function.BiConsumer
 
 class ModChestLootSubprovider(
@@ -81,6 +85,86 @@ class ModChestLootSubprovider(
             LootTable.lootTable().withPool(biomeCrystalPool)
         )
 
+        output.accept(
+            NATURE_CORE,
+            LootTable.lootTable()
+                .withPool(
+                    singleItemPool(ModItems.MAGIC_BEAN.get(), 100)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2f, 3f)))
+                )
+                .withPool(
+                    singleItemPool(ModItems.BEAN.get(), 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    singleItemPool(Items.WHEAT, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    singleItemPool(Items.WHEAT_SEEDS, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    singleItemPool(Items.PUMPKIN_SEEDS, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2f, 17f)))
+                )
+                .withPool(
+                    singleItemPool(Items.MELON_SEEDS, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2f, 17f)))
+                )
+                .withPool(
+                    singleItemPool(Items.SUGAR_CANE, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    singleItemPool(Items.POTATO, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    singleItemPool(Items.CARROT, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    singleItemPool(Items.WHEAT, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            TagEntry.expandTag(ItemTags.SAPLINGS)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
+                                .setWeight(50)
+                        )
+                        .add(EmptyLootItem.emptyItem().setWeight(50))
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            TagEntry.expandTag(ItemTags.SAPLINGS)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
+                                .setWeight(50)
+                        )
+                        .add(EmptyLootItem.emptyItem().setWeight(50))
+                )
+                .withPool(
+                    singleItemPool(Items.VINE, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
+                )
+                .withPool(
+                    singleItemPool(Items.WHEAT, 50)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5f, 25f)))
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            TagEntry.expandTag(ItemTags.FLOWERS)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
+                                .setWeight(50)
+                        )
+                        .add(EmptyLootItem.emptyItem().setWeight(50))
+                )
+        )
+
     }
 
     companion object {
@@ -88,8 +172,9 @@ class ModChestLootSubprovider(
             return ResourceKey.create(Registries.LOOT_TABLE, OtherUtil.modResource("chests/$name"))
         }
 
+        val NATURE_CORE = createPoolRk("nature_core")
+
         private fun singleItemPool(item: Item, chance: Int) = LootPool.lootPool()
-            .setRolls(ConstantValue.exactly(1f))
             .add(EmptyLootItem.emptyItem().setWeight(100 - chance))
             .add(LootItem.lootTableItem(item).setWeight(chance))
 
@@ -140,7 +225,6 @@ class ModChestLootSubprovider(
         val BIOME_CRYSTAL = createPoolRk("biome_crystal")
         private const val BIOME_CRYSTAL_CHANCE = 20
         val biomeCrystalPool: LootPool.Builder = LootPool.lootPool()
-            .setRolls(ConstantValue.exactly(1f))
             .add(EmptyLootItem.emptyItem().setWeight(100 - BIOME_CRYSTAL_CHANCE))
             .add(BiomeCrystalLootEntry.get().setWeight(BIOME_CRYSTAL_CHANCE))
 
