@@ -35,6 +35,8 @@ class ModItemTagsProvider(
         val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
         val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
         val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
+        val NATURE_CORE_FLOWERS = create("nature_core_flowers")
+        val NATURE_CORE_SAPLINGS = create("nature_core_saplings")
 
         @JvmField
         val HIDE_POTION_HELMET = create("hide_potion_helmet")
@@ -46,6 +48,12 @@ class ModItemTagsProvider(
     //TODO: Copy all block tags to item tags
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        this.tag(NATURE_CORE_FLOWERS)
+            .addTag(ItemTags.FLOWERS)
+
+        this.tag(NATURE_CORE_SAPLINGS)
+            .addTag(ItemTags.SAPLINGS)
 
         this.tag(SPECTRE_ANCHOR_BLACKLIST)
             .add(

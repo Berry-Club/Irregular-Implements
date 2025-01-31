@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-30T20:04:42.8753748	Loot Tables
+// 1.21.1	2025-01-30T20:10:23.8754893	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -197,7 +197,7 @@ becfe273494a12e10a8fe0a4c92a64cb3ca785c2 data/irregular_implements/loot_table/bl
 2627f8b6f75701ab450171b822aa8dcbeead53ea data/irregular_implements/loot_table/chests/lava_charm_nether.json
 0b0e8ea81800bb108683cead3a1f4875eb88a9f6 data/irregular_implements/loot_table/chests/magic_hood_dungeon.json
 eb5122d4672084eb312feb1353c03b1b00221a57 data/irregular_implements/loot_table/chests/magic_hood_weaponsmith.json
-8193fb7c1bd943b7dbfe43a6872ac95e1f844610 data/irregular_implements/loot_table/chests/nature_core.json
+c320e3495f084cc6e0f3bf95bb80a21b6352537f data/irregular_implements/loot_table/chests/nature_core.json
 1e3c7d39d2aa4e0c67116acfe99c00396f4c67a1 data/irregular_implements/loot_table/chests/numbered_coil_dungeon.json
 4aa1fbfd724a4144d1b6d1d7969769195a6deddc data/irregular_implements/loot_table/chests/numbered_coil_end_city.json
 4e8dee65227b84d6d308b17185b80809a610daad data/irregular_implements/loot_table/chests/numbered_coil_mineshaft.json

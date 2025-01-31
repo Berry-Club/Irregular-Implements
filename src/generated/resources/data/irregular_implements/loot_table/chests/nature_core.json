@@ -278,7 +278,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:saplings",
+          "name": "irregular_implements:nature_core_saplings",
           "weight": 50
         },
         {
@@ -305,7 +305,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:saplings",
+          "name": "irregular_implements:nature_core_saplings",
           "weight": 50
         },
         {
@@ -384,7 +384,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:flowers",
+          "name": "irregular_implements:nature_core_flowers",
           "weight": 50
         },
         {

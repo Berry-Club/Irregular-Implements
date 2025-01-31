@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.loot
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -131,7 +132,7 @@ class ModChestLootSubprovider(
                 .withPool(
                     LootPool.lootPool()
                         .add(
-                            TagEntry.expandTag(ItemTags.SAPLINGS)
+                            TagEntry.expandTag(ModItemTagsProvider.NATURE_CORE_SAPLINGS)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
                                 .setWeight(50)
                         )
@@ -140,7 +141,7 @@ class ModChestLootSubprovider(
                 .withPool(
                     LootPool.lootPool()
                         .add(
-                            TagEntry.expandTag(ItemTags.SAPLINGS)
+                            TagEntry.expandTag(ModItemTagsProvider.NATURE_CORE_SAPLINGS)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
                                 .setWeight(50)
                         )
@@ -157,7 +158,7 @@ class ModChestLootSubprovider(
                 .withPool(
                     LootPool.lootPool()
                         .add(
-                            TagEntry.expandTag(ItemTags.FLOWERS)
+                            TagEntry.expandTag(ModItemTagsProvider.NATURE_CORE_FLOWERS)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 20f)))
                                 .setWeight(50)
                         )
