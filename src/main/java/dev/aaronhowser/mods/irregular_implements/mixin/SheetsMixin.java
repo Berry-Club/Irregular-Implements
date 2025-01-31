@@ -21,9 +21,6 @@ abstract class SheetsMixin {
     @Shadow
     @Final
     public static ResourceLocation CHEST_SHEET;
-    //FIXME No worky
-    @Unique
-    private static Material NATURE_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/nature_chest"));
 
     @Inject(
             method = "chooseMaterial(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/level/block/state/properties/ChestType;Z)Lnet/minecraft/client/resources/model/Material;",
@@ -35,6 +32,9 @@ abstract class SheetsMixin {
             cir.setReturnValue(NATURE_CHEST);
         }
     }
+
+    @Unique
+    private static Material NATURE_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/nature_chest"));
 
 
 }
