@@ -1,9 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack.features
 
+import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.Direction
 import net.minecraft.core.Holder
+import net.minecraft.world.RandomizableContainer
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LeavesBlock
@@ -113,6 +115,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
             }
 
             level.setBlock(chestPos, Blocks.CHEST.defaultBlockState(), 1 or 3)
+            RandomizableContainer.setBlockEntityLootTable(level, random, chestPos, ModChestLootSubprovider.NATURE_CORE)
             break
         }
 
