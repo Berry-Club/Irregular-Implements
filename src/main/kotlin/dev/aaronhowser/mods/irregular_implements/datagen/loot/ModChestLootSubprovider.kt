@@ -8,7 +8,6 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.LootTableSubProvider
 import net.minecraft.resources.ResourceKey
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
@@ -79,6 +78,11 @@ class ModChestLootSubprovider(
         output.accept(
             NUMBERED_COIL_END_CITY,
             LootTable.lootTable().withPool(numberedCoilEndCityPool)
+        )
+
+        output.accept(
+            MAGIC_BEAN_DUNGEON,
+            LootTable.lootTable().withPool(magicBeanDungeonPool)
         )
 
         output.accept(
@@ -222,6 +226,10 @@ class ModChestLootSubprovider(
         val NUMBERED_COIL_END_CITY = createPoolRk("numbered_coil_end_city")
         private const val NUMBERED_COIL_END_CITY_CHANCE = 30
         private val numberedCoilEndCityPool = singleItemPool(ModBlocks.SPECTRE_COIL_NUMBER.asItem(), NUMBERED_COIL_END_CITY_CHANCE)
+
+        val MAGIC_BEAN_DUNGEON = createPoolRk("magic_bean_dungeon")
+        private const val MAGIC_BEAN_DUNGEON_CHANCE = 10
+        private val magicBeanDungeonPool = singleItemPool(ModItems.MAGIC_BEAN.get(), MAGIC_BEAN_DUNGEON_CHANCE)
 
         val BIOME_CRYSTAL = createPoolRk("biome_crystal")
         private const val BIOME_CRYSTAL_CHANCE = 20

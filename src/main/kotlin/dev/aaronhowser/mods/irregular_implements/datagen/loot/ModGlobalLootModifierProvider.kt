@@ -112,6 +112,14 @@ class ModGlobalLootModifierProvider(
             )
         )
 
+        add(
+            "magic_bean_dungeon",
+            AddTableLootModifier(
+                strongholdCorridor,
+                ModChestLootSubprovider.MAGIC_BEAN_DUNGEON
+            )
+        )
+
         val allChestLootTables = BuiltInLootTables.all().filter { it.location().path.startsWith("chests/") }
         for (lootTable in allChestLootTables) {
             val array = arrayOf(LootTableIdCondition.Builder(lootTable.location()).build())
