@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.NatureChestBlockEntity;
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.WaterChestBlockEntity;
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
@@ -22,6 +23,12 @@ abstract class SheetsMixin {
     @Final
     public static ResourceLocation CHEST_SHEET;
 
+    @Unique
+    private static Material WATER_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/water_chest"));
+
+    @Unique
+    private static Material NATURE_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/nature_chest"));
+
     @Inject(
             method = "chooseMaterial(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/level/block/state/properties/ChestType;Z)Lnet/minecraft/client/resources/model/Material;",
             at = @At("HEAD"),
@@ -30,11 +37,8 @@ abstract class SheetsMixin {
     private static void irregular_implements$getChestTexture(BlockEntity blockEntity, ChestType chestType, boolean holiday, CallbackInfoReturnable<Material> cir) {
         if (blockEntity instanceof NatureChestBlockEntity) {
             cir.setReturnValue(NATURE_CHEST);
+        } else if (blockEntity instanceof WaterChestBlockEntity) {
+            cir.setReturnValue(WATER_CHEST);
         }
     }
-
-    @Unique
-    private static Material NATURE_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/nature_chest"));
-
-
 }

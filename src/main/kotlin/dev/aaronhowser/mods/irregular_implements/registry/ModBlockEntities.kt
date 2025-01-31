@@ -202,4 +202,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<WaterChestBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("water_chest", Supplier {
+            BlockEntityType.Builder.of(
+                ::WaterChestBlockEntity,
+                ModBlocks.WATER_CHEST.get()
+            ).build(null)
+        })
+
 }
