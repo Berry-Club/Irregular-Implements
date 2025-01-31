@@ -194,4 +194,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<NatureChestBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("nature_chest", Supplier {
+            BlockEntityType.Builder.of(
+                ::NatureChestBlockEntity,
+                ModBlocks.NATURE_CHEST.get()
+            ).build(null)
+        })
+
 }

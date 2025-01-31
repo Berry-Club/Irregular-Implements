@@ -45,7 +45,8 @@ object ModBlocks {
 
     // Loot blocks
     val NATURE_CORE = basicBlock("nature_core")
-    val NATURE_CHEST = basicBlock("nature_chest")
+    val NATURE_CHEST: DeferredBlock<NatureChestBlock> =
+        registerBlock("nature_chest") { NatureChestBlock() }
     val WATER_CHEST = basicBlock("water_chest")
 
     // Collectors
