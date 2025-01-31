@@ -34,6 +34,7 @@ import java.util.*
 
 object OtherUtil {
 
+    @JvmStatic
     fun modResource(path: String): ResourceLocation =
         ResourceLocation.fromNamespaceAndPath(IrregularImplements.ID, path)
 
