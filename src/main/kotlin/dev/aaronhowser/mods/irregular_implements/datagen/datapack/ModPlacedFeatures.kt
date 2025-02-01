@@ -49,7 +49,7 @@ object ModPlacedFeatures {
             NATURE_CORE,
             configuredFeatures.getOrThrow(ModConfiguredFeatures.NATURE_CORE),
             listOf(
-                RarityFilter.onAverageOnceEvery(500),
+                RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()

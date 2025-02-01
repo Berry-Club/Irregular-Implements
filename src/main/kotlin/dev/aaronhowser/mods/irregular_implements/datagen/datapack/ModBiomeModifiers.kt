@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.biome_modifiers.WeightedBiomeModifier
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderGetter
 import net.minecraft.core.HolderSet
@@ -46,10 +46,18 @@ object ModBiomeModifiers {
 
         context.register(
             NATURE_CORE,
-            BiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(ModBiomeTagsProvider.HAS_NATURE_CORE),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.NATURE_CORE)),
-                GenerationStep.Decoration.SURFACE_STRUCTURES
+            WeightedBiomeModifier(
+                pointsPerBiomeTag = mapOf(
+                    Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD to -8,
+                    Tags.Biomes.IS_SPARSE_VEGETATION_OVERWORLD to 4,
+                    Tags.Biomes.IS_WET_OVERWORLD to -4,
+                    Tags.Biomes.IS_DRY_OVERWORLD to 2,
+                    Tags.Biomes.IS_DEAD to 10,
+                    Tags.Biomes.IS_MAGICAL to -8
+                ),
+                startChance = 18,
+                placedFeature = placedFeatures.getOrThrow(ModPlacedFeatures.NATURE_CORE),
+                generationStep = GenerationStep.Decoration.SURFACE_STRUCTURES
             )
         )
 
