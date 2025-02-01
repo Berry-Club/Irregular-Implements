@@ -49,7 +49,10 @@ class ModBiomeTagsProvider(
                 NATURE_CORE_MANGROVE,
                 BiomeTags.IS_FOREST,
                 BiomeTags.IS_HILL,
-                BiomeTags.IS_MOUNTAIN
+                BiomeTags.IS_MOUNTAIN,
+                Tags.Biomes.IS_PLAINS,
+                Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD,
+                Tags.Biomes.IS_SPARSE_VEGETATION_OVERWORLD,
             )
             .remove(BiomeTags.IS_OCEAN)
             .remove(Biomes.ICE_SPIKES)
