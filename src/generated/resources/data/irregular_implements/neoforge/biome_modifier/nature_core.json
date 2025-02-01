@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#irregular_implements:has_nature_core",
+  "features": "irregular_implements:nature_core",
+  "step": "surface_structures"
+}

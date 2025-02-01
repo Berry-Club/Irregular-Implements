@@ -1,6 +1,7 @@
-// 1.21.1	2025-02-01T01:52:25.036463	Registries
+// 1.21.1	2025-02-01T01:57:05.0743603	Registries
 7ca20dc237fd59429cd8a5de336d63b4e726c0a9 data/irregular_implements/enchantment/magnetic.json
 fcc8bbfe43d69fd8c4afaefde6cebb9fc5109e78 data/irregular_implements/neoforge/biome_modifier/lotus_bush.json
+3c4942527be5e5798c3641325a48fbe47a8ccb54 data/irregular_implements/neoforge/biome_modifier/nature_core.json
 73b208e77ae52e11970eb166d719cfe969088cf3 data/irregular_implements/neoforge/biome_modifier/pitcher_plant.json
 a77077aca96055cd7b5fdba52e696cbe3186586b data/irregular_implements/worldgen/configured_feature/lotus_bush.json
 9e1e15b487eb62d5a351e5802a03d6ff89a40f32 data/irregular_implements/worldgen/configured_feature/nature_core.json
