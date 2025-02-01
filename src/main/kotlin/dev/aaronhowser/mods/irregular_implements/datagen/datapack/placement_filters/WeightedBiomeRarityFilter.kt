@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.datapack.placement_fil
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.registry.ModPlacementModifierTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
@@ -14,16 +15,23 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifierType
 
 data class WeightedBiomeRarityFilter(
     val pointsPerBiomeTag: Map<TagKey<Biome>, Int>,
+    val basePoints: Int
 ) : PlacementFilter() {
 
     companion object {
         val CODEC: MapCodec<WeightedBiomeRarityFilter> =
-            Codec.unboundedMap(
-                TagKey.codec(Registries.BIOME),
-                Codec.INT
-            )
-                .fieldOf("points_per_biome_tag")
-                .xmap(::WeightedBiomeRarityFilter, WeightedBiomeRarityFilter::pointsPerBiomeTag)
+            RecordCodecBuilder.mapCodec { instance ->
+                instance.group(
+                    Codec.unboundedMap(
+                        TagKey.codec(Registries.BIOME),
+                        Codec.INT
+                    )
+                        .fieldOf("points_per_biome_tag")
+                        .forGetter { it.pointsPerBiomeTag },
+                    Codec.INT.fieldOf("base_points")
+                        .forGetter { it.basePoints }
+                ).apply(instance, ::WeightedBiomeRarityFilter)
+            }
     }
 
     override fun type(): PlacementModifierType<*> {
