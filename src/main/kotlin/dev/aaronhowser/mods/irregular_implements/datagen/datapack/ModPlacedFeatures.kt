@@ -60,7 +60,8 @@ object ModPlacedFeatures {
                         Tags.Biomes.IS_DEAD to 10,
                         Tags.Biomes.IS_MAGICAL to -8
                     ),
-                    basePoints = 18
+                    basePoints = 30,
+                    chanceFactor = 18
                 ),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,

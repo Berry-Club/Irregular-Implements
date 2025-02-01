@@ -66,7 +66,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
         val origin = context.origin()
         val level = context.level()
 
-        if (!level.getFluidState(origin).isEmpty) return false
+        if (!level.getFluidState(origin.below()).isEmpty) return false
 
         val random = context.random()
         val biome = level.getBiome(origin)
@@ -135,8 +135,6 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
             RandomizableContainer.setBlockEntityLootTable(level, random, chestPos, ModChestLootSubprovider.NATURE_CORE)
             break
         }
-
-        println("Placed Nature Core at $origin")
 
         return true
     }

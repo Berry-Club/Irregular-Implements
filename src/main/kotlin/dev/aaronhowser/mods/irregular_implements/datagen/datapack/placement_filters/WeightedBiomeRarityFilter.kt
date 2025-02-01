@@ -15,7 +15,8 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifierType
 
 data class WeightedBiomeRarityFilter(
     val pointsPerBiomeTag: Map<TagKey<Biome>, Int>,
-    val basePoints: Int
+    val basePoints: Int,
+    val chanceFactor: Int
 ) : PlacementFilter() {
 
     companion object {
@@ -27,9 +28,13 @@ data class WeightedBiomeRarityFilter(
                         Codec.INT
                     )
                         .fieldOf("points_per_biome_tag")
-                        .forGetter { it.pointsPerBiomeTag },
-                    Codec.INT.fieldOf("base_points")
-                        .forGetter { it.basePoints }
+                        .forGetter(WeightedBiomeRarityFilter::pointsPerBiomeTag),
+                    Codec.INT
+                        .fieldOf("base_points")
+                        .forGetter(WeightedBiomeRarityFilter::basePoints),
+                    Codec.INT
+                        .fieldOf("chance_factor")
+                        .forGetter(WeightedBiomeRarityFilter::chanceFactor)
                 ).apply(instance, ::WeightedBiomeRarityFilter)
             }
     }
@@ -47,6 +52,6 @@ data class WeightedBiomeRarityFilter(
             if (biome.`is`(tag)) chanceMult += points
         }
 
-        return random.nextInt(chanceMult) == 0
+        return random.nextInt(this.chanceFactor * chanceMult) == 0
     }
 }

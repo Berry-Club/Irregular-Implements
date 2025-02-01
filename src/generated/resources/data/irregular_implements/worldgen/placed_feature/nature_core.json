@@ -3,7 +3,8 @@
   "placement": [
     {
       "type": "irregular_implements:weighted_biome_rarity",
-      "base_points": 18,
+      "base_points": 30,
+      "chance_factor": 18,
       "points_per_biome_tag": {
         "c:is_dead": 10,
         "c:is_dense_vegetation/overworld": -8,
