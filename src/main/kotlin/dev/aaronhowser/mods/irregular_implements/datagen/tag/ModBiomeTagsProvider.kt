@@ -26,6 +26,7 @@ class ModBiomeTagsProvider(
         }
 
         val BIOME_CRYSTAL_BLACKLIST = create("biome_crystal_blacklist")
+        val HAS_NATURE_CORE = create("has_nature_core")
         val NATURE_CORE_OAK = create("nature_core_oak")
         val NATURE_CORE_DARK_OAK = create("nature_core_dark_oak")
         val NATURE_CORE_BIRCH = create("nature_core_birch")
@@ -36,6 +37,22 @@ class ModBiomeTagsProvider(
     }
 
     override fun addTags(provider: HolderLookup.Provider) {
+
+        tag(HAS_NATURE_CORE)
+            .addTags(
+                NATURE_CORE_OAK,
+                NATURE_CORE_DARK_OAK,
+                NATURE_CORE_BIRCH,
+                NATURE_CORE_JUNGLE,
+                NATURE_CORE_ACACIA,
+                NATURE_CORE_SPRUCE,
+                NATURE_CORE_MANGROVE,
+                BiomeTags.IS_FOREST,
+                BiomeTags.IS_HILL,
+                BiomeTags.IS_MOUNTAIN
+            )
+            .remove(BiomeTags.IS_OCEAN)
+            .remove(Biomes.ICE_SPIKES)
 
         tag(BIOME_CRYSTAL_BLACKLIST)    // Empty by default (blacklist is empty by default)
         tag(NATURE_CORE_OAK)            // Empty by default (used as fallback)

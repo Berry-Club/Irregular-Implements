@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderGetter
 import net.minecraft.core.HolderSet
@@ -19,6 +20,7 @@ object ModBiomeModifiers {
 
     val LOTUS_BUSH = registerKey("lotus_bush")
     val PITCHER_PLANT = registerKey("pitcher_plant")
+    val NATURE_CORE = registerKey("nature_core")
 
     fun bootstrap(context: BootstrapContext<BiomeModifier>) {
         val placedFeatures: HolderGetter<PlacedFeature> = context.lookup(Registries.PLACED_FEATURE)
@@ -39,6 +41,15 @@ object ModBiomeModifiers {
                 biomes.getOrThrow(Tags.Biomes.IS_WET_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PITCHER_PLANT)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
+            )
+        )
+
+        context.register(
+            NATURE_CORE,
+            BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(ModBiomeTagsProvider.HAS_NATURE_CORE),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.NATURE_CORE)),
+                GenerationStep.Decoration.SURFACE_STRUCTURES
             )
         )
 
