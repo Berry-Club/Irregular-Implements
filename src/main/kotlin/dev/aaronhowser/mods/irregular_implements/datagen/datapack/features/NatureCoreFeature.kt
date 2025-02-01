@@ -65,8 +65,10 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
     override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration>): Boolean {
         val origin = context.origin()
         val level = context.level()
-        val random = context.random()
 
+        if (level.isEmptyBlock(origin) || !level.getFluidState(origin).isEmpty) return false
+
+        val random = context.random()
         val biome = level.getBiome(origin)
 
         val log = getLogFromBiome(biome)
@@ -106,7 +108,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
             val dZ = random.nextInt(chestPlaceRadius * 2) - chestPlaceRadius
 
             var chestPos = positionAbove.offset(dX, 0, dZ)
-            while (!level.isOutsideBuildHeight(chestPos) && level.isEmptyBlock(chestPos)) {
+            while (!level.isOutsideBuildHeight(chestPos) && !level.getFluidState(chestPos).isEmpty) {
                 chestPos = chestPos.below()
             }
 
