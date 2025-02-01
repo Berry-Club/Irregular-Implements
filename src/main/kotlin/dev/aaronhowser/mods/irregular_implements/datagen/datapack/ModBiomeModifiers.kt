@@ -17,27 +17,27 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries
 
 object ModBiomeModifiers {
 
-    val ADD_LOTUS_BUSH = registerKey("lotus_bush")
-    val ADD_PITCHER_PLANT = registerKey("pitcher_plant")
+    val LOTUS_BUSH = registerKey("lotus_bush")
+    val PITCHER_PLANT = registerKey("pitcher_plant")
 
     fun bootstrap(context: BootstrapContext<BiomeModifier>) {
         val placedFeatures: HolderGetter<PlacedFeature> = context.lookup(Registries.PLACED_FEATURE)
         val biomes: HolderGetter<Biome> = context.lookup(Registries.BIOME)
 
         context.register(
-            ADD_LOTUS_BUSH,
+            LOTUS_BUSH,
             BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LOTUS_BUSH_PLACEMENT_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LOTUS_BUSH)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         )
 
         context.register(
-            ADD_PITCHER_PLANT,
+            PITCHER_PLANT,
             BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_WET_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PITCHER_PLANT_PLACEMENT_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PITCHER_PLANT)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         )

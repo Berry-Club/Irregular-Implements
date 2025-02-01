@@ -105,7 +105,7 @@ object SpectreTreeBlocks {
     val SPECTRE_TREE_GROWER: TreeGrower = TreeGrower(
         OtherUtil.modResource("spectre").toString(),
         Optional.empty(),
-        Optional.of(ModConfiguredFeatures.SPECTRE_TREE_KEY),
+        Optional.of(ModConfiguredFeatures.SPECTRE_TREE),
         Optional.empty()
     )
 

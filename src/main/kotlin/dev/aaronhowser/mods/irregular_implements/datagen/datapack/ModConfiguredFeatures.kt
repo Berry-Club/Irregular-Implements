@@ -22,15 +22,15 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 object ModConfiguredFeatures {
 
-    val LOTUS_BUSH_KEY = registerKey("lotus_bush")
-    val PITCHER_PLANT_KEY = registerKey("pitcher_plant")
-    val SPECTRE_TREE_KEY = registerKey("spectre_tree")
-    val NATURE_CORE_KEY = registerKey("nature_core")
+    val LOTUS_BUSH = registerKey("lotus_bush")
+    val PITCHER_PLANT = registerKey("pitcher_plant")
+    val SPECTRE_TREE = registerKey("spectre_tree")
+    val NATURE_CORE = registerKey("nature_core")
 
     fun bootstrap(context: BootstrapContext<ConfiguredFeature<*, *>>) {
         register(
             context,
-            LOTUS_BUSH_KEY,
+            LOTUS_BUSH,
             Feature.RANDOM_PATCH,
             singleBlock(
                 ModBlocks.LOTUS.get()
@@ -41,7 +41,7 @@ object ModConfiguredFeatures {
 
         register(
             context,
-            PITCHER_PLANT_KEY,
+            PITCHER_PLANT,
             Feature.FLOWER,
             singleBlock(
                 ModBlocks.PITCHER_PLANT.get()
@@ -51,7 +51,7 @@ object ModConfiguredFeatures {
 
         register(
             context,
-            SPECTRE_TREE_KEY,
+            SPECTRE_TREE,
             Feature.TREE,
             TreeFeatures.createStraightBlobTree(
                 ModBlocks.SPECTRE_LOG.get(),
@@ -65,7 +65,7 @@ object ModConfiguredFeatures {
 
         register(
             context,
-            NATURE_CORE_KEY,
+            NATURE_CORE,
             ModFeatures.NATURE_CORE.get(),
             FeatureConfiguration.NONE
         )

@@ -13,16 +13,16 @@ import net.minecraft.world.level.levelgen.placement.*
 
 object ModPlacedFeatures {
 
-    val LOTUS_BUSH_PLACEMENT_KEY: ResourceKey<PlacedFeature> = registerKey("lotus_bush")
-    val PITCHER_PLANT_PLACEMENT_KEY: ResourceKey<PlacedFeature> = registerKey("pitcher_plant")
+    val LOTUS_BUSH: ResourceKey<PlacedFeature> = registerKey("lotus_bush")
+    val PITCHER_PLANT: ResourceKey<PlacedFeature> = registerKey("pitcher_plant")
 
     fun bootstrap(context: BootstrapContext<PlacedFeature>) {
         val configuredFeatures: HolderGetter<ConfiguredFeature<*, *>> = context.lookup(Registries.CONFIGURED_FEATURE)
 
         register(
             context,
-            LOTUS_BUSH_PLACEMENT_KEY,
-            configuredFeatures.getOrThrow(ModConfiguredFeatures.LOTUS_BUSH_KEY),
+            LOTUS_BUSH,
+            configuredFeatures.getOrThrow(ModConfiguredFeatures.LOTUS_BUSH),
             listOf(
                 RarityFilter.onAverageOnceEvery(288),
                 InSquarePlacement.spread(),
@@ -33,8 +33,8 @@ object ModPlacedFeatures {
 
         register(
             context,
-            PITCHER_PLANT_PLACEMENT_KEY,
-            configuredFeatures.getOrThrow(ModConfiguredFeatures.PITCHER_PLANT_KEY),
+            PITCHER_PLANT,
+            configuredFeatures.getOrThrow(ModConfiguredFeatures.PITCHER_PLANT),
             listOf(
                 RarityFilter.onAverageOnceEvery(10),
                 InSquarePlacement.spread(),
