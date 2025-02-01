@@ -20,7 +20,8 @@ object ModRegistries {
         ModMenuTypes.MENU_TYPE_REGISTRY,
         ModAttachmentTypes.ATTACHMENT_TYPES_REGISTRY,
         ModLootPoolEntryTypes.LOOT_POOL_ENTRY_TYPE_REGISTRY,
-        ModFeatures.FEATURE_REGISTRY
+        ModFeatures.FEATURE_REGISTRY,
+        ModPlacementModifierTypes.PLACEMENT_MODIFIER_TYPE_REGISTRY
     )
 
     fun register(modBus: IEventBus) {
