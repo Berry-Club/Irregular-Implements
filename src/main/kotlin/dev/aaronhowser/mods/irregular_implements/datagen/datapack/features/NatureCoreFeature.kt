@@ -66,7 +66,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
         val origin = context.origin()
         val level = context.level()
 
-        if (level.isEmptyBlock(origin) || !level.getFluidState(origin).isEmpty) return false
+        if (!level.getFluidState(origin).isEmpty) return false
 
         val random = context.random()
         val biome = level.getBiome(origin)
@@ -103,13 +103,19 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
         val chestPlaceRadius = 7
         var chestTries = 0
 
+        chestLoop@
         while (chestTries < chestPlaceRadius * chestPlaceRadius) {
             val dX = random.nextInt(chestPlaceRadius * 2) - chestPlaceRadius
             val dZ = random.nextInt(chestPlaceRadius * 2) - chestPlaceRadius
 
             var chestPos = positionAbove.offset(dX, 0, dZ)
-            while (!level.isOutsideBuildHeight(chestPos) && !level.getFluidState(chestPos).isEmpty) {
+
+            while (!level.isOutsideBuildHeight(chestPos) && level.isEmptyBlock(chestPos)) {
                 chestPos = chestPos.below()
+
+                if (!level.getFluidState(chestPos).isEmpty) {
+                    continue@chestLoop
+                }
             }
 
             chestPos = chestPos.above()
