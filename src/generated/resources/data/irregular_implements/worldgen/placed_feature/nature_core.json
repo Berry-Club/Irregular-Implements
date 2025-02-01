@@ -2,8 +2,16 @@
   "feature": "irregular_implements:nature_core",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 20
+      "type": "irregular_implements:weighted_biome_rarity",
+      "base_points": 18,
+      "points_per_biome_tag": {
+        "c:is_dead": 10,
+        "c:is_dense_vegetation/overworld": -8,
+        "c:is_dry/overworld": 2,
+        "c:is_magical": -8,
+        "c:is_sparse_vegetation/overworld": 4,
+        "c:is_wet/overworld": -4
+      }
     },
     {
       "type": "minecraft:in_square"

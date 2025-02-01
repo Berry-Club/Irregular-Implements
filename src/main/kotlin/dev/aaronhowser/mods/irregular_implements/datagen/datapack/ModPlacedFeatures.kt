@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.placement_filters.WeightedBiomeRarityFilter
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderGetter
@@ -9,6 +10,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.placement.*
+import net.neoforged.neoforge.common.Tags
 
 
 object ModPlacedFeatures {
@@ -49,7 +51,17 @@ object ModPlacedFeatures {
             NATURE_CORE,
             configuredFeatures.getOrThrow(ModConfiguredFeatures.NATURE_CORE),
             listOf(
-                RarityFilter.onAverageOnceEvery(20),
+                WeightedBiomeRarityFilter(
+                    pointsPerBiomeTag = mapOf(
+                        Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD to -8,
+                        Tags.Biomes.IS_SPARSE_VEGETATION_OVERWORLD to 4,
+                        Tags.Biomes.IS_WET_OVERWORLD to -4,
+                        Tags.Biomes.IS_DRY_OVERWORLD to 2,
+                        Tags.Biomes.IS_DEAD to 10,
+                        Tags.Biomes.IS_MAGICAL to -8
+                    ),
+                    basePoints = 18
+                ),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()

@@ -128,6 +128,8 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
             break
         }
 
+        println("Placed Nature Core at $origin")
+
         return true
     }
 

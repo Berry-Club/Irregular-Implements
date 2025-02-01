@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.biome_modifiers.WeightedBiomeModifier
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderGetter
 import net.minecraft.core.HolderSet
@@ -20,7 +19,6 @@ object ModBiomeModifiers {
 
     val LOTUS_BUSH = registerKey("lotus_bush")
     val PITCHER_PLANT = registerKey("pitcher_plant")
-    val NATURE_CORE = registerKey("nature_core")
 
     fun bootstrap(context: BootstrapContext<BiomeModifier>) {
         val placedFeatures: HolderGetter<PlacedFeature> = context.lookup(Registries.PLACED_FEATURE)
@@ -41,23 +39,6 @@ object ModBiomeModifiers {
                 biomes.getOrThrow(Tags.Biomes.IS_WET_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PITCHER_PLANT)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
-            )
-        )
-
-        context.register(
-            NATURE_CORE,
-            WeightedBiomeModifier(
-                pointsPerBiomeTag = mapOf(
-                    Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD to -8,
-                    Tags.Biomes.IS_SPARSE_VEGETATION_OVERWORLD to 4,
-                    Tags.Biomes.IS_WET_OVERWORLD to -4,
-                    Tags.Biomes.IS_DRY_OVERWORLD to 2,
-                    Tags.Biomes.IS_DEAD to 10,
-                    Tags.Biomes.IS_MAGICAL to -8
-                ),
-                startChance = 18,
-                placedFeature = placedFeatures.getOrThrow(ModPlacedFeatures.NATURE_CORE),
-                generationStep = GenerationStep.Decoration.SURFACE_STRUCTURES
             )
         )
 

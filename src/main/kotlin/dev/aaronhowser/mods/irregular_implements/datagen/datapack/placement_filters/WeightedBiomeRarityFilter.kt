@@ -39,6 +39,14 @@ data class WeightedBiomeRarityFilter(
     }
 
     override fun shouldPlace(context: PlacementContext, random: RandomSource, pos: BlockPos): Boolean {
-        TODO("Not yet implemented")
+        val biome = context.level.getBiome(pos)
+
+        var chanceMult = this.basePoints
+
+        for ((tag, points) in pointsPerBiomeTag) {
+            if (biome.`is`(tag)) chanceMult += points
+        }
+
+        return random.nextInt(chanceMult) == 0
     }
 }
