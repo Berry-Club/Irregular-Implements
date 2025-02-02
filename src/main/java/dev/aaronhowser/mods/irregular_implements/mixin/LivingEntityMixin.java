@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -26,6 +27,9 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
 
     @Shadow
     public abstract ItemStack getItemBySlot(EquipmentSlot slot);
+
+    @Unique
+    private LivingEntity irregular_implements$this = (LivingEntity) (Object) this;
 
     @Inject(
             method = "shouldDiscardFriction",
@@ -55,7 +59,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             constant = @Constant(doubleValue = 0.2)
     )
     private double irregular_implements$fasterOnStalk(double constant) {
-        return constant * BeanStalkBlock.climbingFactor((LivingEntity) (Object) this);
+        return constant * BeanStalkBlock.climbingFactor(irregular_implements$this);
     }
 
 }
