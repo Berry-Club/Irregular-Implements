@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.util.RandomSource
-import net.minecraft.world.level.ChunkPos
-import net.minecraft.world.level.StructureManager
+import net.minecraft.world.RandomizableContainer
 import net.minecraft.world.level.WorldGenLevel
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.ChestBlock
@@ -13,9 +13,9 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.entity.ChestBlockEntity
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPieces
+import net.minecraft.world.level.storage.loot.BuiltInLootTables
 
 class SpecialChestBlock private constructor(
     private val type: Type
@@ -33,16 +33,32 @@ class SpecialChestBlock private constructor(
         @JvmStatic
         fun addToOceanMonument(
             level: WorldGenLevel,
-            structureManager: StructureManager,
-            chunkGenerator: ChunkGenerator,
             randomSource: RandomSource,
-            boundingBox: BoundingBox,
-            chunkPos: ChunkPos,
-            blockPos: BlockPos,
+            box: BoundingBox,
             coreRoom: OceanMonumentPieces.OceanMonumentCoreRoom
         ) {
+            val randomPosition: Int = randomSource.nextInt(4)
+            val x = 6 + (randomPosition % 2) * 3
+            val z = 6 + (randomPosition / 2) * 3
+            val y = 1
 
+            coreRoom.placeBlock(
+                level,
+                ModBlocks.WATER_CHEST.get().defaultBlockState(),
+                x, y, z,
+                box
+            )
 
+            val chestPos = coreRoom.getWorldPos(x, y, z)
+
+            RandomizableContainer.setBlockEntityLootTable(
+                level,
+                randomSource,
+                chestPos,
+                BuiltInLootTables.JUNGLE_TEMPLE
+            )
+
+            println(chestPos)
         }
 
     }
