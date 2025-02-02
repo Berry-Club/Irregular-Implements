@@ -37,10 +37,9 @@ class SpecialChestBlock private constructor(
             box: BoundingBox,
             coreRoom: OceanMonumentPieces.OceanMonumentCoreRoom
         ) {
-            val randomPosition: Int = randomSource.nextInt(4)
-            val x = 6 + (randomPosition % 2) * 3
-            val z = 6 + (randomPosition / 2) * 3
+            val x = 6 + if (randomSource.nextBoolean()) 3 else 0
             val y = 1
+            val z = 6 + if (randomSource.nextBoolean()) 3 else 0
 
             coreRoom.placeBlock(
                 level,
