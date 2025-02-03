@@ -479,7 +479,7 @@
   "info.irregular_implements.floo_sign": "?????????????????????",
   "info.irregular_implements.fluid_display": "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.",
   "info.irregular_implements.global_chat_detector": "Emits a redstone pulse if any player sends a chat message containing the specified text.\n\nCan have a player whitelist using ID Cards.",
-  "info.irregular_implements.golden_egg": "Spawns a Chicken that lays Gold Ingots rather than Eggs.",
+  "info.irregular_implements.golden_egg": "Spawns a Chicken that lays Gold Ingots rather than Eggs.\n\nCan be found in Bean Pods, which can be found at the top of Bean Stalks grown from Magic Beans.",
   "info.irregular_implements.grass_seeds": "Can be planted on Dirt to grow Grass.",
   "info.irregular_implements.id_card": "Acts like an Entity Filter, but specifically for the player set.\n\nSet by using it in your hand.",
   "info.irregular_implements.igniter": "Sets or extinguishes the block on front of it, depending on the Redstone signal.\n\nCan be set to keep the fire lit.",

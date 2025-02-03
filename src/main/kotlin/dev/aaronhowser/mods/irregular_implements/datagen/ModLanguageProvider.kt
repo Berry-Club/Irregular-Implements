@@ -748,7 +748,7 @@ class ModLanguageProvider(
         addInfo(ModItems.ECTOPLASM, "Every time an entity dies, it has a chance of spawning a Spirit.\n\nSpirits can only be killed by magic, and they drop Ectoplasm.\n\nCan also be harvested from Spectre Trees.")
         addInfo(ModItems.LUMINOUS_POWDER, "Can be crafted onto enchanted items to make their glints glow in the dark.")
         addInfo(ModItems.LOTUS_BLOSSOM, "Grants experience when consumed.\n\nSneak to consume the entire stack.")
-        addInfo(ModItems.GOLDEN_EGG, "Spawns a Chicken that lays Gold Ingots rather than Eggs.")
+        addInfo(ModItems.GOLDEN_EGG, "Spawns a Chicken that lays Gold Ingots rather than Eggs.\n\nCan be found in Bean Pods, which can be found at the top of Bean Stalks grown from Magic Beans.")
         addInfo(ModItems.BLACKOUT_POWDER, "Removes the Spectre Illuminator in the chunk it's used in.")
         addInfo(ModItems.ITEM_FILTER, "Allows you to filter Item Stacks. Do so in its GUI.")
         addInfo(ModItems.REDSTONE_ACTIVATOR, "Using it on a block will give it a temporary Redstone signal.\n\nUse it on the air to change the duration.")

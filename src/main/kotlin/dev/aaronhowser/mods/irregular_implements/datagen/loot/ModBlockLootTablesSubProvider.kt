@@ -61,8 +61,15 @@ class ModBlockLootTablesSubProvider(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1f))
                         .add(
-                            LootItem.lootTableItem(ModBlocks.BEAN_POD.get())
+                            LootItem.lootTableItem(ModBlocks.BEAN_POD)
                                 .`when`(hasSilkTouch())
+                        )
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(ModItems.GOLDEN_EGG)
+                                .`when`(doesNotHaveSilkTouch())
                         )
                 )
                 .withPool(
