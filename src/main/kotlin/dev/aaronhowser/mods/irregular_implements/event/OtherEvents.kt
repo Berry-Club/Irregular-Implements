@@ -14,6 +14,7 @@ import dev.aaronhowser.mods.irregular_implements.savedata.RedstoneHandlerSavedDa
 import dev.aaronhowser.mods.irregular_implements.savedata.WorldInformationSavedData.Companion.worldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.util.EscapeRopeHandler
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
+import dev.aaronhowser.mods.irregular_implements.world.village.VillageAddition
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntityType
@@ -33,6 +34,7 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
 import net.neoforged.neoforge.event.tick.ServerTickEvent
 
@@ -170,6 +172,11 @@ object OtherEvents {
 
         ChatDetectorBlockEntity.processMessage(event)
         GlobalChatDetectorBlockEntity.processMessage(event)
+    }
+
+    @SubscribeEvent
+    fun onServerAboutToStart(event: ServerAboutToStartEvent) {
+        VillageAddition.addNewVillageBuildings(event)
     }
 
 }
