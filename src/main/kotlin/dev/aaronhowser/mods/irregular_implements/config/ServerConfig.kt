@@ -25,6 +25,7 @@ class ServerConfig(
         lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
         lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
         lateinit var RAIN_SHIELD_CHUNK_RADIUS: ModConfigSpec.IntValue
+        lateinit var PEACE_CANDLE_CHUNK_RADIUS: ModConfigSpec.IntValue
 
         lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
 
@@ -91,8 +92,12 @@ class ServerConfig(
             .defineInRange("diviningRodCheckRadius", 20, 1, 100)
 
         RAIN_SHIELD_CHUNK_RADIUS = builder
-            .comment("What chunk radius should the Rain Shield have?")
+            .comment("What chunk radius should the Rain Shield have? (0 means only the chunk the Rain Shield is in)")
             .defineInRange("rainShieldChunkRadius", 5, 0, Int.MAX_VALUE)
+
+        PEACE_CANDLE_CHUNK_RADIUS = builder
+            .comment("What chunk radius should the Peace Candle have? (0 means only the chunk the Peace Candle is in)")
+            .defineInRange("peaceCandleChunkRadius", 1, 0, Int.MAX_VALUE)
 
         ESCAPE_ROPE_MAX_BLOCKS = builder
             .comment("How many blocks should the Escape Rope check before giving up?\n\n0 means no limit")
