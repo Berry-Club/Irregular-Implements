@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-02T19:02:49.1436608	Loot Tables
+// 1.21.1	2025-02-03T00:28:34.3990795	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -134,6 +134,7 @@ b38d46d2ad4b0602df23f884fbc53f6ae2e3b486 data/irregular_implements/loot_table/bl
 2ee62278134747fed41d9d066c18cb373a7ceaf5 data/irregular_implements/loot_table/blocks/redstone_observer.json
 54faa40e11c825a99fc8d7e3ad2eaec5f63a2630 data/irregular_implements/loot_table/blocks/redstone_plate.json
 7be38ad70d6c5b10e1278ea7894b5c28f7d8798b data/irregular_implements/loot_table/blocks/returning_block_of_sticks.json
+17f114db925a453762e7854db7f550408c8a6071 data/irregular_implements/loot_table/blocks/sakanade.json
 7758e5ac4338c9031e049d025217b16a7ddf4078 data/irregular_implements/loot_table/blocks/shock_absorber.json
 2b07d5370e438b9e30b2a3cc421a744f0e8126eb data/irregular_implements/loot_table/blocks/sided_redstone.json
 ba2f48159057d405bd15dec91ae32fa7766c874f data/irregular_implements/loot_table/blocks/slime_cube.json

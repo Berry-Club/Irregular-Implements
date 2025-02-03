@@ -69,8 +69,28 @@ class ModBlockStateProvider(
         inventoryTester()
         itemCollectors()
         peaceCandle()
+        sakanade()
     }
 
+    private fun sakanade() {
+        val block = ModBlocks.SAKANADE.get()
+
+        val blockModel = models()
+            .withExistingParent(name(block), "block/thin_block")
+            .texture("texture", modLoc("block/sakanade"))
+            .texture("particle", modLoc("block/sakanade"))
+            .renderType(RenderType.cutout().name)
+
+            .element()
+            .from(0f, 15f, 0f)
+            .to(16f, 16f, 16f)
+            .textureAll("#texture")
+            .end()
+
+        simpleBlockWithItem(block, blockModel)
+    }
+
+    //TODO
     private fun peaceCandle() {
         val block = ModBlocks.PEACE_CANDLE.get()
 
