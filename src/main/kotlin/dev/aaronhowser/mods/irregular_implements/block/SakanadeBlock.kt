@@ -30,6 +30,7 @@ class SakanadeBlock : Block(
     Properties
         .ofFullCopy(Blocks.MOSS_CARPET)
         .isViewBlocking(Blocks::never)
+        .replaceable()
 ), IShearable {
 
     companion object {
@@ -193,6 +194,14 @@ class SakanadeBlock : Block(
         }
 
         return if (clickedThis) stateToPlace else null
+    }
+
+    override fun canBeReplaced(state: BlockState, useContext: BlockPlaceContext): Boolean {
+        val level = useContext.level
+        val clickedPos = useContext.clickedPos
+        val clickedState = level.getBlockState(clickedPos)
+
+        return if (clickedState.`is`(this)) countFaces(clickedState) < PROPERTY_BY_DIRECTION.size else super.canBeReplaced(state, useContext)
     }
 
     override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
