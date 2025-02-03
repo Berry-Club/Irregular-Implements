@@ -17,7 +17,9 @@ class SakanadeBlock : Block(Properties.ofFullCopy(Blocks.MOSS_CARPET)) {
             config: HugeMushroomFeatureConfiguration,
             mutablePos: BlockPos.MutableBlockPos
         ) {
-            if (level.getBlockState(mutablePos.below()).isEmpty) {
+            if (mutablePos.x == origin.x && mutablePos.z == origin.z) return
+
+            if (level.getBlockState(mutablePos.below()).canBeReplaced()) {
                 level.setBlock(
                     mutablePos.below(),
                     ModBlocks.SAKANADE.get().defaultBlockState(),
