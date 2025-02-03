@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubpro
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
 import net.minecraft.util.RandomSource
 import net.minecraft.world.RandomizableContainer
@@ -41,9 +42,16 @@ class SpecialChestBlock private constructor(
             val y = 1
             val z = 6 + if (randomSource.nextBoolean()) 3 else 0
 
+            val chestState = ModBlocks.WATER_CHEST.get().defaultBlockState()
+            chestState.setValue(
+                FACING,
+                if (z == 6) Direction.SOUTH else Direction.NORTH
+            )
+            chestState.setValue(WATERLOGGED, true)  //FIXME ???
+
             coreRoom.placeBlock(
                 level,
-                ModBlocks.WATER_CHEST.get().defaultBlockState(),
+                chestState,
                 x, y, z,
                 box
             )
@@ -57,7 +65,6 @@ class SpecialChestBlock private constructor(
                 ModChestLootSubprovider.OCEAN_MONUMENT_CHEST
             )
 
-            println(chestPos)
         }
 
     }
