@@ -177,12 +177,12 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 50
+          "weight": 20
         },
         {
           "type": "minecraft:item",
           "name": "irregular_implements:water_walking_boots",
-          "weight": 50
+          "weight": 80
         }
       ],
       "rolls": 1.0

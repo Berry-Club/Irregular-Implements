@@ -175,7 +175,7 @@ class ModChestLootSubprovider(
             OCEAN_MONUMENT_CHEST,
             VanillaChestLoot(registries)
                 .jungleTempleLootTable()
-                .withPool(singleItemPool(ModItems.WATER_WALKING_BOOTS.get(), 50))
+                .withPool(singleItemPool(ModItems.WATER_WALKING_BOOTS.get(), 80))
                 .withPool(
                     LootPool.lootPool()
                         .add(

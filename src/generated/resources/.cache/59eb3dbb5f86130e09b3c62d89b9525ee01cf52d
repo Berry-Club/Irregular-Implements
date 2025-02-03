@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-02T18:13:27.1631611	Loot Tables
+// 1.21.1	2025-02-02T19:02:49.1436608	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -202,7 +202,7 @@ c320e3495f084cc6e0f3bf95bb80a21b6352537f data/irregular_implements/loot_table/ch
 1e3c7d39d2aa4e0c67116acfe99c00396f4c67a1 data/irregular_implements/loot_table/chests/numbered_coil_dungeon.json
 4aa1fbfd724a4144d1b6d1d7969769195a6deddc data/irregular_implements/loot_table/chests/numbered_coil_end_city.json
 4e8dee65227b84d6d308b17185b80809a610daad data/irregular_implements/loot_table/chests/numbered_coil_mineshaft.json
-4f0094b40a31920ba27f80f958f16a950c548377 data/irregular_implements/loot_table/chests/ocean_monument_chest.json
+6f69db7c5574c903845300801224277ebede78b8 data/irregular_implements/loot_table/chests/ocean_monument_chest.json
 49b2ec7cd62409ad569171a8ff776ae477236f0e data/irregular_implements/loot_table/chests/slime_cube_dungeon.json
 ac940d0d2599863c9eb6b72df0f7e484d8963c1e data/irregular_implements/loot_table/chests/slime_cube_jungle_temple.json
 70d700cde64b93c64b27adca88642c2c83f5fa0c data/irregular_implements/loot_table/chests/summoning_pendulum.json
