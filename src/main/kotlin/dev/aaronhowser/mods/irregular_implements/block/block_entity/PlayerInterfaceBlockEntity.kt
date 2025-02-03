@@ -13,10 +13,10 @@ class PlayerInterfaceBlockEntity(
 
     companion object {
 
-        private var PLAYER_PREDICATE: (Player) -> Boolean = { true }
+        private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
 
         @JvmStatic
-        fun setPlayerPredicate(predicate: (Player) -> Boolean) {
+        fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
             PLAYER_PREDICATE = predicate
         }
 
