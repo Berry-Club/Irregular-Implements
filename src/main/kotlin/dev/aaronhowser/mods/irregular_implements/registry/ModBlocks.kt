@@ -34,7 +34,7 @@ object ModBlocks {
 
     // Plants
     val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
-        registerBlock("sakanade") { SakanadeBlock() }
+        registerBlock("sakanade_spores") { SakanadeBlock() }
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
     val LOTUS: DeferredBlock<LotusBlock> =

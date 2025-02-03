@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "irregular_implements:block/sakanade_down"
+        "model": "irregular_implements:block/sakanade_spores_down"
       },
       "when": {
         "down": "true"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/sakanade_up"
+        "model": "irregular_implements:block/sakanade_spores_up"
       },
       "when": {
         "up": "true"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/sakanade_north"
+        "model": "irregular_implements:block/sakanade_spores_north"
       },
       "when": {
         "north": "true"
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/sakanade_south"
+        "model": "irregular_implements:block/sakanade_spores_south"
       },
       "when": {
         "south": "true"
@@ -34,7 +34,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/sakanade_west"
+        "model": "irregular_implements:block/sakanade_spores_west"
       },
       "when": {
         "west": "true"
@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "irregular_implements:block/sakanade_east"
+        "model": "irregular_implements:block/sakanade_spores_east"
       },
       "when": {
         "east": "true"

@@ -37,7 +37,7 @@
                   ]
                 }
               ],
-              "name": "irregular_implements:sakanade"
+              "name": "irregular_implements:sakanade_spores"
             },
             {
               "type": "minecraft:item",
@@ -46,7 +46,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "irregular_implements:sakanade"
+              "name": "irregular_implements:sakanade_spores"
             }
           ]
         }
@@ -54,5 +54,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "irregular_implements:blocks/sakanade"
+  "random_sequence": "irregular_implements:blocks/sakanade_spores"
 }
