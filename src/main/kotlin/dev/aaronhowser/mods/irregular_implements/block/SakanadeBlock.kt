@@ -66,7 +66,6 @@ class SakanadeBlock : Block(
         val DOWN: BooleanProperty = BlockStateProperties.DOWN
 
         val PROPERTY_BY_DIRECTION: Map<Direction, BooleanProperty> = PipeBlock.PROPERTY_BY_DIRECTION
-            .filter { it.key != Direction.DOWN }
 
         private const val SHAPE_OFFSET = 1f
 
@@ -115,12 +114,22 @@ class SakanadeBlock : Block(
                 val property = PROPERTY_BY_DIRECTION[direction] ?: continue
 
                 if (oldState.getValue(property)) {
-                    val canSupport = isAcceptableNeighbour(level, pos, direction)
+                    val canSupport = canSupportAtFace(level, pos, direction)
                     state = state.setValue(property, canSupport)
                 }
             }
 
             return state
+        }
+
+        private fun canSupportAtFace(level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+            val relative = pos.relative(direction)
+            if (isAcceptableNeighbour(level, relative, direction)) return true
+
+            val property = PROPERTY_BY_DIRECTION[direction] ?: return false
+            val state = level.getBlockState(relative)
+
+            return state.getValue(property)
         }
     }
 
@@ -158,20 +167,23 @@ class SakanadeBlock : Block(
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val level = context.level
-        val pos = context.clickedPos
-        val clickedState = level.getBlockState(pos)
+        val clickedPos = context.clickedPos
 
+        val clickedState = level.getBlockState(clickedPos)
         val clickedThis = clickedState.`is`(this)
-        val state = if (clickedThis) clickedState else defaultBlockState()
+
+        val stateToPlace = if (clickedThis) clickedState else defaultBlockState()
 
         for (direction in context.nearestLookingDirections) {
             val property = PROPERTY_BY_DIRECTION[direction] ?: continue
             val alreadyHasProperty = clickedThis && clickedState.getValue(property)
 
-            if (!alreadyHasProperty && canSupport)
-
+            if (!alreadyHasProperty && isAcceptableNeighbour(level, clickedPos.relative(direction), direction)) {
+                return stateToPlace.setValue(property, true)
+            }
         }
 
+        return if (clickedThis) stateToPlace else null
     }
 
     override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
