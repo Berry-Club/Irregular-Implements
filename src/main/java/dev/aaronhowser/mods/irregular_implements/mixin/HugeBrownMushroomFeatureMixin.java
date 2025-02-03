@@ -16,7 +16,11 @@ public abstract class HugeBrownMushroomFeatureMixin {
 
     @Inject(
             method = "makeCap",
-            at = @At("TAIL")
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/levelgen/feature/HugeBrownMushroomFeature;setBlock(Lnet/minecraft/world/level/LevelWriter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+                    shift = At.Shift.AFTER
+            )
     )
     private void a(
             LevelAccessor level,
@@ -27,7 +31,7 @@ public abstract class HugeBrownMushroomFeatureMixin {
             HugeMushroomFeatureConfiguration config,
             CallbackInfo ci
     ) {
-        SakanadeBlock.addToMushroom(level, pos, config, treeHeight);
+        SakanadeBlock.addToMushroom(level, pos, config, mutablePos);
     }
 
 }

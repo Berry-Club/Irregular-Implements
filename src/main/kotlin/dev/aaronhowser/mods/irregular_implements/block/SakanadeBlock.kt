@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.HugeMushroomBlock
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration
 
 class SakanadeBlock : Block(Properties.ofFullCopy(Blocks.MOSS_CARPET)) {
@@ -16,24 +15,14 @@ class SakanadeBlock : Block(Properties.ofFullCopy(Blocks.MOSS_CARPET)) {
             level: LevelAccessor,
             origin: BlockPos,
             config: HugeMushroomFeatureConfiguration,
-            treeHeight: Int
+            mutablePos: BlockPos.MutableBlockPos
         ) {
-            val radius = config.foliageRadius
-
-            for (dX in -radius..radius) for (dZ in -radius..radius) {
-                val pos = origin.offset(dX, treeHeight, dZ)
-                val stateThere = level.getBlockState(pos)
-
-                if (!stateThere.`is`(Blocks.BROWN_MUSHROOM_BLOCK)) return
-
-                val connectsDown = stateThere.getValue(HugeMushroomBlock.DOWN)
-                if (!connectsDown) {
-                    level.setBlock(
-                        pos.below(),
-                        ModBlocks.SAKANADE.get().defaultBlockState(),
-                        1 or 2
-                    )
-                }
+            if (level.getBlockState(mutablePos.below()).isEmpty) {
+                level.setBlock(
+                    mutablePos.below(),
+                    ModBlocks.SAKANADE.get().defaultBlockState(),
+                    1 or 2
+                )
             }
         }
     }
