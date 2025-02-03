@@ -1,9 +1,9 @@
 {
   "entries": [
     "irregular_implements:biome_crystal_village_village_shepherd",
-    "irregular_implements:biome_crystal_trial_chambers_reward_ominous",
-    "irregular_implements:biome_crystal_shipwreck_treasure",
     "irregular_implements:biome_crystal_simple_dungeon",
+    "irregular_implements:biome_crystal_shipwreck_treasure",
+    "irregular_implements:biome_crystal_trial_chambers_reward_ominous",
     "irregular_implements:summoning_pendulum_stronghold",
     "irregular_implements:biome_crystal_nether_bridge",
     "irregular_implements:biome_crystal_trial_chambers_reward_ominous_rare",
@@ -44,8 +44,8 @@
     "irregular_implements:biome_crystal_village_village_fletcher",
     "irregular_implements:lava_charm_nether",
     "irregular_implements:slime_cube_jungle_temple",
-    "irregular_implements:biome_crystal_abandoned_mineshaft",
     "irregular_implements:biome_crystal_trial_chambers_reward_common",
+    "irregular_implements:biome_crystal_abandoned_mineshaft",
     "irregular_implements:summoning_pendulum_dungeon",
     "irregular_implements:biome_crystal_village_village_fisher",
     "irregular_implements:magic_hood_weaponsmith",

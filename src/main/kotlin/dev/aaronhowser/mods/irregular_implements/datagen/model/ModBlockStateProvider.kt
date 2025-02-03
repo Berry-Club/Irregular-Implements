@@ -68,6 +68,17 @@ class ModBlockStateProvider(
         imbuingStation()
         inventoryTester()
         itemCollectors()
+        peaceCandle()
+    }
+
+    private fun peaceCandle() {
+        val block = ModBlocks.PEACE_CANDLE.get()
+
+        val model = models()
+            .cross(name(block), modLoc("block/peace_candle/body"))
+            .renderType(RenderType.cutout().name)
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun itemCollectors() {

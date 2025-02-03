@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPieces
 
+//TODO Item Models
 class SpecialChestBlock private constructor(
     private val type: Type
 ) : ChestBlock(

@@ -27,7 +27,8 @@ object ModBlocks {
     val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
     val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
     val SLIME_CUBE = basicBlock("slime_cube")
-    val PEACE_CANDLE = basicBlock("peace_candle")
+    val PEACE_CANDLE: DeferredBlock<PeaceCandleBlock> =
+        registerBlock("peace_candle") { PeaceCandleBlock() }
     val SOUND_BOX = basicBlock("sound_box")
     val SOUND_DAMPENER = basicBlock("sound_dampener")
 
