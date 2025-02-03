@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
 
+// It disturbs me viscerally that it has to be done this way and not via datapacks or whatever
 object VillageAdditions {
 
     private val EMPTY_PROCESSOR_LIST_KEY: ResourceKey<StructureProcessorList> =
@@ -50,15 +51,66 @@ object VillageAdditions {
             templatePoolRegistry,
             processorListRegistry,
             ResourceLocation.withDefaultNamespace("village/plains/houses"),
-            OtherUtil.modResource("candle_temple/plains_1").toString(), 250
+            OtherUtil.modResource("candle_temple/plains_1").toString(),
+            2
         )
 
         addBuildingToPool(
             templatePoolRegistry,
             processorListRegistry,
             ResourceLocation.withDefaultNamespace("village/plains/houses"),
-            OtherUtil.modResource("candle_temple/plains_2").toString(), 250
+            OtherUtil.modResource("candle_temple/plains_2").toString(),
+            2
         )
+
+        addBuildingToPool(
+            templatePoolRegistry,
+            processorListRegistry,
+            ResourceLocation.withDefaultNamespace("village/desert/houses"),
+            OtherUtil.modResource("candle_temple/desert_1").toString(),
+            2
+        )
+
+        addBuildingToPool(
+            templatePoolRegistry,
+            processorListRegistry,
+            ResourceLocation.withDefaultNamespace("village/desert/houses"),
+            OtherUtil.modResource("candle_temple/desert_2").toString(),
+            2
+        )
+
+        addBuildingToPool(
+            templatePoolRegistry,
+            processorListRegistry,
+            ResourceLocation.withDefaultNamespace("village/savanna/houses"),
+            OtherUtil.modResource("candle_temple/savanna_1").toString(),
+            2
+        )
+
+        addBuildingToPool(
+            templatePoolRegistry,
+            processorListRegistry,
+            ResourceLocation.withDefaultNamespace("village/savanna/houses"),
+            OtherUtil.modResource("candle_temple/savanna_2").toString(),
+            2
+        )
+
+        addBuildingToPool(
+            templatePoolRegistry,
+            processorListRegistry,
+            ResourceLocation.withDefaultNamespace("village/snowy/houses"),
+            OtherUtil.modResource("candle_temple/snowy_1").toString(),
+            2
+        )
+
+        addBuildingToPool(
+            templatePoolRegistry,
+            processorListRegistry,
+            ResourceLocation.withDefaultNamespace("village/taiga/houses"),
+            OtherUtil.modResource("candle_temple/taiga_2").toString(),
+            2
+        )
+
     }
 
 }
