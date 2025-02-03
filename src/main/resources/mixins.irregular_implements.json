@@ -9,6 +9,7 @@
     "BlockStateBaseMixin",
     "CombatTrackerMixin",
     "CraftingMenuMixin",
+    "EntityMixin",
     "FallLocationMixin",
     "FireMixin",
     "HugeBrownMushroomFeatureMixin",
