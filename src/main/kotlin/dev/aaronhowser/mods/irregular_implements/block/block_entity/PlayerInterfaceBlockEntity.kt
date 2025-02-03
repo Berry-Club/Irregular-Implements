@@ -53,10 +53,13 @@ class PlayerInterfaceBlockEntity(
 
     var ownerUuid: UUID = UUID.randomUUID()
 
-    fun getItemHandler(direction: Direction?): ItemStackHandler? {
+    fun getPlayer(): Player? {
         val level = this.level as? ServerLevel ?: return null
-        val owner = level.server.playerList.getPlayer(ownerUuid) ?: return null
+        return level.server.playerList.getPlayer(ownerUuid)
+    }
 
+    fun getItemHandler(direction: Direction?): ItemStackHandler? {
+        val owner = getPlayer() ?: return null
         if (!PLAYER_PREDICATE.invoke(owner, this)) return null
 
         val section = InventorySection.fromDirection(direction)
