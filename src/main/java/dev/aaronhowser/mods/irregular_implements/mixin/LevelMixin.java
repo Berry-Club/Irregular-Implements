@@ -89,6 +89,49 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
         return this.irregular_implements$rainShieldChunks;
     }
 
+    //
+    //
+    //
+    // Peace Candle
+    //
+    //
+    //
+
+    @Unique
+    @Override
+    public boolean irregular_implements$chunkHasRainShield(long pos) {
+        return this.irregular_implements$rainShieldChunks.contains(pos);
+    }
+
+    @Unique
+    @Override
+    public boolean irregular_implements$addPeaceCandleChunk(long pos) {
+        return this.irregular_implements$peaceCandleChunks.add(pos);
+    }
+
+    @Unique
+    @Override
+    public boolean irregular_implements$removePeaceCandleChunk(long pos) {
+        return this.irregular_implements$peaceCandleChunks.remove(pos);
+    }
+
+    @Unique
+    @Override
+    public boolean irregular_implements$chunkHasPeaceCandle(long pos) {
+        return this.irregular_implements$peaceCandleChunks.contains(pos);
+    }
+
+    @Unique
+    @Override
+    public void irregular_implements$clearPeaceCandleChunks() {
+        this.irregular_implements$peaceCandleChunks.clear();
+    }
+
+    @Unique
+    @Override
+    public LongOpenHashSet irregular_implements$getPeaceCandleChunks() {
+        return this.irregular_implements$peaceCandleChunks;
+    }
 
     //
     //

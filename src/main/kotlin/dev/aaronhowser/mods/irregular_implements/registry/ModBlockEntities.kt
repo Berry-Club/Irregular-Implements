@@ -213,4 +213,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val PEACE_CANDLE: DeferredHolder<BlockEntityType<*>, BlockEntityType<PeaceCandleBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("peace_candle", Supplier {
+            BlockEntityType.Builder.of(
+                ::PeaceCandleBlockEntity,
+                ModBlocks.PEACE_CANDLE.get()
+            ).build(null)
+        })
+
 }

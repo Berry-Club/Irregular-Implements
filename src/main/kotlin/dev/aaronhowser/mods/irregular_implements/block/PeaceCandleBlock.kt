@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -22,6 +23,14 @@ class PeaceCandleBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)) {
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
         return canSupportCenter(level, pos.below(), Direction.UP)
+    }
+
+    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+        return if (state.canSurvive(level, pos)) {
+            state
+        } else {
+            Blocks.AIR.defaultBlockState()
+        }
     }
 
 }
