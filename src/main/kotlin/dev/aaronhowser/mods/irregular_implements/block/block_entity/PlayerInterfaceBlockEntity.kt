@@ -40,6 +40,8 @@ class PlayerInterfaceBlockEntity(
          *
          * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
          * ```
+         *
+         * @param predicate A predicate that takes in a [Player] and a [BlockEntity] and returns a [Boolean].
          */
         @JvmStatic
         fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
