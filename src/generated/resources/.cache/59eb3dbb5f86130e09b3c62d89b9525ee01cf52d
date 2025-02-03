@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-03T04:51:42.3729342	Loot Tables
+// 1.21.1	2025-02-03T04:54:11.0021462	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -10,7 +10,7 @@ bfcebefc9474779061b1249121116b71f4be387f data/irregular_implements/loot_table/bl
 7c49e5280996f349e44f8b9214c974067abdeeab data/irregular_implements/loot_table/blocks/auto_placer.json
 fde0ff5fffa7b6fbfb743ca8adb6624593aaaf98 data/irregular_implements/loot_table/blocks/bamboo_platform.json
 822a95d20dd1318c2c47c8cb0bbf0dfe8806474b data/irregular_implements/loot_table/blocks/basic_redstone_interface.json
-dae4fce543908b738632e99355fa6faac6936566 data/irregular_implements/loot_table/blocks/bean_pod.json
+c60d85b8f22b8b4ce94d15cc5ccc85fe136304ec data/irregular_implements/loot_table/blocks/bean_pod.json
 43d14ed507b8c7ec75ea65c552475441be16add2 data/irregular_implements/loot_table/blocks/bean_sprout.json
 34065cf20d99ba7f95409cb3325e40a91b09a1a2 data/irregular_implements/loot_table/blocks/bean_stalk.json
 1b78b4dbd88bd946a30fe404cf6b32f2d388cb4d data/irregular_implements/loot_table/blocks/biome_cobblestone.json

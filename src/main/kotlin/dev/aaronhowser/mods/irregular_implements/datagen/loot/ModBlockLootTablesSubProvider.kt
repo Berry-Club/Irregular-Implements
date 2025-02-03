@@ -74,6 +74,42 @@ class ModBlockLootTablesSubProvider(
                                 .`when`(doesNotHaveSilkTouch())
                         )
                 )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(Items.GOLD_INGOT)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(4f, 15f)))
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5f, 3))
+                                .`when`(doesNotHaveSilkTouch())
+                        )
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(Items.DIAMOND)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 5f)))
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5f, 3))
+                                .`when`(doesNotHaveSilkTouch())
+                        )
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(Items.IRON_INGOT)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0f, 2f)))
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5f, 3))
+                                .`when`(doesNotHaveSilkTouch())
+                        )
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(ModItems.BEAN)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(4f, 8f)))
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5f, 3))
+                                .`when`(doesNotHaveSilkTouch())
+                        )
+                )
         }
 
     }
