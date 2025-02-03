@@ -18,9 +18,11 @@ import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 
 class ModBlockLootTablesSubProvider(
     provider: HolderLookup.Provider
@@ -46,6 +48,34 @@ class ModBlockLootTablesSubProvider(
         beanSprout()
         spectreLeaves()
         sakanade()
+        beanPod()
+    }
+
+    private fun beanPod() {
+
+        val enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
+
+        add(ModBlocks.BEAN_POD.get()) {
+            LootTable.lootTable()
+                .withPool(
+                    LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1f))
+                        .add(
+                            LootItem.lootTableItem(ModBlocks.BEAN_POD.get())
+                                .`when`(hasSilkTouch())
+                        )
+                )
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(Items.IRON_INGOT)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8f, 20f)))
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5f, 3))
+                                .`when`(doesNotHaveSilkTouch())
+                        )
+                )
+        }
+
     }
 
     private fun sakanade() {
@@ -157,6 +187,7 @@ class ModBlockLootTablesSubProvider(
         add(ModBlocks.COMPRESSED_SLIME_BLOCK.get())
         add(ModBlocks.SPECTRE_LEAVES.get())
         add(ModBlocks.SAKANADE_SPORES.get())
+        add(ModBlocks.BEAN_POD.get())
     }
 
     override fun getKnownBlocks(): List<Block> {
