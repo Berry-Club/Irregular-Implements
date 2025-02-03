@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.LootTableSubProvider
+import net.minecraft.data.loot.packs.VanillaChestLoot
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -20,7 +21,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.function.BiConsumer
 
 class ModChestLootSubprovider(
-    registries: HolderLookup.Provider
+    private val registries: HolderLookup.Provider
 ) : LootTableSubProvider {
 
     override fun generate(output: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
@@ -170,6 +171,21 @@ class ModChestLootSubprovider(
                 )
         )
 
+        output.accept(
+            OCEAN_MONUMENT_CHEST,
+            VanillaChestLoot(registries)
+                .jungleTempleLootTable()
+                .withPool(singleItemPool(ModItems.WATER_WALKING_BOOTS.get(), 50))
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem
+                                .lootTableItem(ModItems.BOTTLE_OF_AIR)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8f, 24f)))
+                        )
+                )
+        )
+
     }
 
     companion object {
@@ -236,6 +252,8 @@ class ModChestLootSubprovider(
         val biomeCrystalPool: LootPool.Builder = LootPool.lootPool()
             .add(EmptyLootItem.emptyItem().setWeight(100 - BIOME_CRYSTAL_CHANCE))
             .add(BiomeCrystalLootEntry.get().setWeight(BIOME_CRYSTAL_CHANCE))
+
+        val OCEAN_MONUMENT_CHEST = createPoolRk("ocean_monument_chest")
 
     }
 

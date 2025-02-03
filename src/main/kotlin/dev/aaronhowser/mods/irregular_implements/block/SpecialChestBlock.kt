@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPieces
-import net.minecraft.world.level.storage.loot.BuiltInLootTables
 
 class SpecialChestBlock private constructor(
     private val type: Type
@@ -54,7 +54,7 @@ class SpecialChestBlock private constructor(
                 level,
                 randomSource,
                 chestPos,
-                BuiltInLootTables.JUNGLE_TEMPLE
+                ModChestLootSubprovider.OCEAN_MONUMENT_CHEST
             )
 
             println(chestPos)
