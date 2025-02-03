@@ -23,7 +23,7 @@ public class MoveControlMixin {
                     target = "Lnet/minecraft/world/entity/LivingEntity;getAttributeValue(Lnet/minecraft/core/Holder;)D"
             )
     )
-    private float invertStrafeSpeed(float f) {
+    private float irregular_implements$applyCollapse(float f) {
         return (this.mob.hasEffect(ModEffects.COLLAPSE)) ? -f : f;
     }
 
