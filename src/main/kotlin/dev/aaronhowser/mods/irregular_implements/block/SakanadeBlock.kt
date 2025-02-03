@@ -46,7 +46,7 @@ class SakanadeBlock : Block(
             if (level.getBlockState(mutablePos.below()).canBeReplaced()) {
                 level.setBlock(
                     mutablePos.below(),
-                    ModBlocks.SAKANADE.get().defaultBlockState(),
+                    ModBlocks.SAKANADE.get().defaultBlockState().setValue(UP, true),
                     1 or 2
                 )
             }
@@ -139,7 +139,7 @@ class SakanadeBlock : Block(
             val property = PROPERTY_BY_DIRECTION[direction] ?: return false
             val state = level.getBlockState(relative)
 
-            return state.getValue(property)
+            return state.`is`(ModBlocks.SAKANADE) && state.getValue(property)
         }
     }
 
