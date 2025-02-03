@@ -10,7 +10,9 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
-import net.neoforged.neoforge.items.ItemStackHandler
+import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.wrapper.PlayerArmorInvWrapper
+import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper
 import java.util.*
 
 //TODO: What if BER that makes the owner's head float above the block and look at you
@@ -53,12 +55,12 @@ class PlayerInterfaceBlockEntity(
 
     var ownerUuid: UUID = UUID.randomUUID()
 
-    fun getPlayer(): Player? {
+    private fun getPlayer(): Player? {
         val level = this.level as? ServerLevel ?: return null
         return level.server.playerList.getPlayer(ownerUuid)
     }
 
-    fun getItemHandler(direction: Direction?): ItemStackHandler? {
+    fun getItemHandler(direction: Direction?): IItemHandler? {
         val owner = getPlayer() ?: return null
         if (!PLAYER_PREDICATE.invoke(owner, this)) return null
 
@@ -70,23 +72,22 @@ class PlayerInterfaceBlockEntity(
             InventorySection.OFFHAND -> getOffhandHandler(owner)
             InventorySection.MAIN -> getMainHandler(owner)
         }
-
     }
 
-    private fun getHotbarHandler(owner: Player): ItemStackHandler {
-
+    private fun getHotbarHandler(owner: Player): IItemHandler {
+        return PlayerMainInvWrapper(owner.inventory)
     }
 
-    private fun getMainHandler(owner: Player): ItemStackHandler {
-
+    private fun getMainHandler(owner: Player): IItemHandler {
+        return PlayerMainInvWrapper(owner.inventory)
     }
 
-    private fun getOffhandHandler(owner: Player): ItemStackHandler {
-
+    private fun getOffhandHandler(owner: Player): IItemHandler {
+        return PlayerMainInvWrapper(owner.inventory)
     }
 
-    private fun getArmorHandler(owner: Player): ItemStackHandler {
-
+    private fun getArmorHandler(owner: Player): IItemHandler {
+        return PlayerArmorInvWrapper(owner.inventory)
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
