@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(CraftingMenu.class)
-class CraftingMenuMixin {
+public abstract class CraftingMenuMixin {
 
     @Shadow
     @Final

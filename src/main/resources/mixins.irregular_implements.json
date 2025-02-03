@@ -11,6 +11,7 @@
     "CraftingMenuMixin",
     "FallLocationMixin",
     "FireMixin",
+    "HugeBrownMushroomFeatureMixin",
     "ItemEntityMixin",
     "LevelMixin",
     "LivingEntityMixin",
