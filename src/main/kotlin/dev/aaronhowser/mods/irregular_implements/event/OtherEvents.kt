@@ -30,6 +30,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
+import net.neoforged.neoforge.event.entity.living.MobSpawnEvent
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
@@ -177,6 +178,11 @@ object OtherEvents {
     @SubscribeEvent
     fun onServerAboutToStart(event: ServerAboutToStartEvent) {
         VillageAdditions.addNewVillageBuildings(event)
+    }
+
+    @SubscribeEvent
+    fun onSpawnPlacementCheck(event: MobSpawnEvent.SpawnPlacementCheck) {
+
     }
 
 }

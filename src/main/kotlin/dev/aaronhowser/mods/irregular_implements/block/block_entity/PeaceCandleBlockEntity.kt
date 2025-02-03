@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.PeaceCandleChunks
-import dev.aaronhowser.mods.irregular_implements.RainShieldChunks
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -10,6 +9,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.event.entity.living.MobSpawnEvent
 
 class PeaceCandleBlockEntity(
     pPos: BlockPos,
@@ -17,13 +17,16 @@ class PeaceCandleBlockEntity(
 ) : BlockEntity(ModBlockEntities.PEACE_CANDLE.get(), pPos, pBlockState) {
 
     companion object {
-        @JvmStatic
         fun chunkIsPreventingMonsterSpawns(level: LevelReader, blockPos: BlockPos): Boolean {
             if (!level.isAreaLoaded(blockPos, 1)) return false
-            if (level !is RainShieldChunks) return false
+            if (level !is PeaceCandleChunks) return false
 
             val chunkPos = level.getChunk(blockPos).pos.toLong()
-            return level.`irregular_implements$chunkHasRainShield`(chunkPos)
+            return level.`irregular_implements$chunkProtectedByPeaceCandle`(chunkPos)
+        }
+
+        fun onSpawnPlacementCheck(event: MobSpawnEvent.SpawnPlacementCheck) {
+
         }
 
         fun tick(

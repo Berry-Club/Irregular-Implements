@@ -12,7 +12,7 @@ public interface RainShieldChunks {
         throw new IllegalStateException();
     }
 
-    default boolean irregular_implements$chunkHasRainShield(long chunkPosAsLong) {
+    default boolean irregular_implements$chunkProtectedByRainShield(long chunkPosAsLong) {
         throw new IllegalStateException();
     }
 

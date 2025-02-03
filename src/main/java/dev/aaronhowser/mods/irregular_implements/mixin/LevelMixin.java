@@ -99,7 +99,7 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
 
     @Unique
     @Override
-    public boolean irregular_implements$chunkHasRainShield(long pos) {
+    public boolean irregular_implements$chunkProtectedByRainShield(long pos) {
         return this.irregular_implements$rainShieldChunks.contains(pos);
     }
 
@@ -117,7 +117,7 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
 
     @Unique
     @Override
-    public boolean irregular_implements$chunkHasPeaceCandle(long pos) {
+    public boolean irregular_implements$chunkProtectedByPeaceCandle(long pos) {
         return this.irregular_implements$peaceCandleChunks.contains(pos);
     }
 

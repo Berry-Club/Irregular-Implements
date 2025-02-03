@@ -13,7 +13,7 @@ public interface PeaceCandleChunks {
         throw new IllegalStateException();
     }
 
-    default boolean irregular_implements$chunkHasPeaceCandle(long chunkPosAsLong) {
+    default boolean irregular_implements$chunkProtectedByPeaceCandle(long chunkPosAsLong) {
         throw new IllegalStateException();
     }
 

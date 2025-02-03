@@ -28,7 +28,7 @@ class RainShieldBlockEntity(
             if (level !is RainShieldChunks) return false
 
             val chunkPos = level.getChunk(blockPos).pos.toLong()
-            return level.`irregular_implements$chunkHasRainShield`(chunkPos)
+            return level.`irregular_implements$chunkProtectedByRainShield`(chunkPos)
         }
 
         fun tick(
