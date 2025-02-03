@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/vine",
-  "textures": {
-    "particle": "irregular_implements:block/sakanade",
-    "vine": "irregular_implements:block/sakanade"
-  }
-}

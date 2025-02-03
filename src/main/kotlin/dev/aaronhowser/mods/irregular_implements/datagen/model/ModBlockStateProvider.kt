@@ -81,11 +81,46 @@ class ModBlockStateProvider(
             .withExistingParent(name(block), "item/generated")
             .texture("layer0", texture)
 
-        val blockModel = models()
-            .withExistingParent(name(block), "block/vine")
-            .texture("vine", texture)
-            .texture("particle", texture)
+        var multiPartBuilder = getMultipartBuilder(block)
 
+        for (direction in Direction.entries) {
+
+            val shape = when (direction) {
+                Direction.UP -> SakanadeBlock.SHAPE_UP
+                Direction.DOWN -> SakanadeBlock.SHAPE_DOWN
+                Direction.NORTH -> SakanadeBlock.SHAPE_NORTH
+                Direction.SOUTH -> SakanadeBlock.SHAPE_SOUTH
+                Direction.WEST -> SakanadeBlock.SHAPE_WEST
+                Direction.EAST -> SakanadeBlock.SHAPE_EAST
+            }
+
+            val x1 = shape.min(Direction.Axis.X).toFloat() * 16f
+            val x2 = shape.max(Direction.Axis.X).toFloat() * 16f
+            val y1 = shape.min(Direction.Axis.Y).toFloat() * 16f
+            val y2 = shape.max(Direction.Axis.Y).toFloat() * 16f
+            val z1 = shape.min(Direction.Axis.Z).toFloat() * 16f
+            val z2 = shape.max(Direction.Axis.Z).toFloat() * 16f
+
+            val blockModel = models()
+                .withExistingParent(name(block) + "_" + direction.getName(), "block/block")
+                .renderType(RenderType.cutout().name)
+                .texture("texture", texture)
+                .texture("particle", texture)
+                .element()
+                .from(x1, y1, z1)
+                .to(x2, y2, z2)
+                .textureAll("#texture")
+                .end()
+
+            val property = SakanadeBlock.PROPERTY_BY_DIRECTION[direction] ?: continue
+
+            multiPartBuilder = multiPartBuilder
+                .part()
+                .modelFile(blockModel)
+                .addModel()
+                .condition(property, true)
+                .end()
+        }
 
     }
 
