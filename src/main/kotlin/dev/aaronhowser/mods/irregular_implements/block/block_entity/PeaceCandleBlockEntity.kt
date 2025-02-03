@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.PeaceCandleChunks
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
@@ -26,14 +27,21 @@ class PeaceCandleBlockEntity(
         }
 
         fun onSpawnPlacementCheck(event: MobSpawnEvent.SpawnPlacementCheck) {
+            if (event.spawnType != MobSpawnType.NATURAL
+                || event.result == MobSpawnEvent.SpawnPlacementCheck.Result.FAIL
+                || event.entityType.category.isFriendly
+            ) return
 
+            if (chunkIsPreventingMonsterSpawns(event.level, event.pos)) {
+                event.result = MobSpawnEvent.SpawnPlacementCheck.Result.FAIL
+            }
         }
 
         fun tick(
             level: Level,
             blockPos: BlockPos,
             blockState: BlockState,
-            blockEntity: RainShieldBlockEntity
+            blockEntity: PeaceCandleBlockEntity
         ) {
             if (level !is PeaceCandleChunks) return
 

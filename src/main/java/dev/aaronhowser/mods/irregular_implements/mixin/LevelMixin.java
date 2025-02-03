@@ -20,34 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Level.class)
 public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks, PoweredRedstoneInterfaces {
 
-    @Unique
-    LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
-
-    //
-    //
-    //
-    // Rain Shield
-    //
-    //
-    //
-
-    @Unique
-    LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
-
-    @Inject(
-            method = "isRainingAt",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
-            ),
-            cancellable = true
-    )
-    private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
-            cir.setReturnValue(false);
-        }
-    }
-
     @Inject(
             method = "tickBlockEntities",
             at = @At("HEAD")
@@ -64,6 +36,19 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
         // So no matter if the event is checked on Pre or Post, the set will always be empty when checked.
         // Doing it this way adds a single tick delay, but honestly that's fine.
     }
+
+    //
+    //
+    //
+    // Rain Shield
+    //
+    //
+    //
+
+    @Unique
+    LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
+    @Unique
+    LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
 
     @Unique
     @Override
@@ -96,6 +81,20 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
     //
     //
     //
+
+    @Inject(
+            method = "isRainingAt",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
+            ),
+            cancellable = true
+    )
+    private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
+            cir.setReturnValue(false);
+        }
+    }
 
     @Unique
     @Override

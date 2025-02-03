@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.PeaceCandleBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -53,8 +52,8 @@ class PeaceCandleBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)), EntityBl
     ): BlockEntityTicker<T>? {
         return BaseEntityBlock.createTickerHelper(
             blockEntityType,
-            ModBlockEntities.RAIN_SHIELD.get(),
-            RainShieldBlockEntity::tick
+            ModBlockEntities.PEACE_CANDLE.get(),
+            PeaceCandleBlockEntity::tick
         )
     }
 
