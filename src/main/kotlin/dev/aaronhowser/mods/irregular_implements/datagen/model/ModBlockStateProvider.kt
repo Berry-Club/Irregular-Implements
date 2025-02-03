@@ -75,19 +75,18 @@ class ModBlockStateProvider(
     private fun sakanade() {
         val block = ModBlocks.SAKANADE.get()
 
+        val texture = modLoc("block/sakanade")
+
+        val itemModel = itemModels()
+            .withExistingParent(name(block), "item/generated")
+            .texture("layer0", texture)
+
         val blockModel = models()
-            .withExistingParent(name(block), "block/thin_block")
-            .texture("texture", modLoc("block/sakanade"))
-            .texture("particle", modLoc("block/sakanade"))
-            .renderType(RenderType.cutout().name)
+            .withExistingParent(name(block), "block/vine")
+            .texture("vine", texture)
+            .texture("particle", texture)
 
-            .element()
-            .from(0f, 15f, 0f)
-            .to(16f, 16f, 16f)
-            .textureAll("#texture")
-            .end()
 
-        simpleBlockWithItem(block, blockModel)
     }
 
     //TODO

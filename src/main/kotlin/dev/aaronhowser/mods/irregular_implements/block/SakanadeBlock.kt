@@ -28,7 +28,7 @@ import net.neoforged.neoforge.common.IShearable
 
 class SakanadeBlock : Block(
     Properties
-        .ofFullCopy(Blocks.MOSS_CARPET)
+        .ofFullCopy(Blocks.VINE)
         .isViewBlocking(Blocks::never)
         .replaceable()
 ), IShearable {
