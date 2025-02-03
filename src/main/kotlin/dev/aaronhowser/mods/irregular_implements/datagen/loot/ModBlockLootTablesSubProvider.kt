@@ -28,15 +28,15 @@ class ModBlockLootTablesSubProvider(
 
     override fun generate() {
 
-        for (block in knownBlocks - nonDropSelfBlocks) {
+        for (block in this.knownBlocks - this.nonDropSelfBlocks) {
             dropSelf(block)
         }
 
-        for (block in noDropBlocks) {
+        for (block in this.noDropBlocks) {
             add(block, noDrop())
         }
 
-        for (block in dropsDirtWithoutSilkTouch) {
+        for (block in this.dropsDirtWithoutSilkTouch) {
             add(block) { createSingleItemTableWithSilkTouch(it, Items.DIRT) }
         }
 
@@ -45,6 +45,21 @@ class ModBlockLootTablesSubProvider(
         lotus()
         beanSprout()
         spectreLeaves()
+        sakanade()
+    }
+
+    private fun sakanade() {
+
+        add(ModBlocks.SAKANADE.get()) {
+            createSilkTouchOrShearsDispatchTable(
+                it,
+                applyExplosionCondition(
+                    ModItems.SAKANADE_SPORES.get(),
+                    LootItem.lootTableItem(ModItems.SAKANADE_SPORES.get())
+                )
+            )
+        }
+
     }
 
     private fun spectreLeaves() {
@@ -135,10 +150,14 @@ class ModBlockLootTablesSubProvider(
         ModBlocks.LESSER_BEAN_STALK
     ).map { it.get() }.toSet()
 
-    private val nonDropSelfBlocks: Set<Block> = noDropBlocks + dropsDirtWithoutSilkTouch + setOf(
-        ModBlocks.COMPRESSED_SLIME_BLOCK,
-        ModBlocks.SPECTRE_LEAVES
-    ).map { it.get() }
+    private val nonDropSelfBlocks: Set<Block> = buildSet {
+        addAll(dropsDirtWithoutSilkTouch)
+        addAll(noDropBlocks)
+
+        add(ModBlocks.COMPRESSED_SLIME_BLOCK.get())
+        add(ModBlocks.SPECTRE_LEAVES.get())
+        add(ModBlocks.SAKANADE.get())
+    }
 
     override fun getKnownBlocks(): List<Block> {
         return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }
