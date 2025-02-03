@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
+//TODO: Does automation work?
 class ImbuingStationBlockEntity(
     pPos: BlockPos,
     pBlockState: BlockState
