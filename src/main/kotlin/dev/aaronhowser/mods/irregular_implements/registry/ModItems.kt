@@ -69,8 +69,6 @@ object ModItems {
     val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
 
     // Plants
-    val SAKANADE_SPORES: DeferredItem<Item> =
-        basic("sakanade_spores")
     val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
         register("lotus_blossom") { LotusBlossomItem() }
     val LOTUS_SEEDS: DeferredItem<ItemNameBlockItem> =

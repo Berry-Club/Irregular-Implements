@@ -50,12 +50,12 @@ class ModBlockLootTablesSubProvider(
 
     private fun sakanade() {
 
-        add(ModBlocks.SAKANADE.get()) {
+        add(ModBlocks.SAKANADE_SPORES.get()) {
             createSilkTouchOrShearsDispatchTable(
                 it,
                 applyExplosionCondition(
-                    ModItems.SAKANADE_SPORES.get(),
-                    LootItem.lootTableItem(ModItems.SAKANADE_SPORES.get())
+                    ModBlocks.SAKANADE_SPORES.get(),
+                    LootItem.lootTableItem(ModBlocks.SAKANADE_SPORES.get())
                 )
             )
         }
@@ -156,7 +156,7 @@ class ModBlockLootTablesSubProvider(
 
         add(ModBlocks.COMPRESSED_SLIME_BLOCK.get())
         add(ModBlocks.SPECTRE_LEAVES.get())
-        add(ModBlocks.SAKANADE.get())
+        add(ModBlocks.SAKANADE_SPORES.get())
     }
 
     override fun getKnownBlocks(): List<Block> {

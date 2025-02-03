@@ -1665,7 +1665,7 @@ class ModRecipeProvider(
 
         val collapseImbue = ImbuingRecipeBuilder(
             outerIngredients = listOf(
-                ing(ModItems.SAKANADE_SPORES).getIngredient(),
+                ing(ModBlocks.SAKANADE_SPORES).getIngredient(),
                 ing(Items.VINE).getIngredient(),
                 ing(Tags.Items.SLIME_BALLS).getIngredient()
             ),

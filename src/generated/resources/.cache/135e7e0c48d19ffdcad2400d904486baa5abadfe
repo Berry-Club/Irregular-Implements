@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-23T11:51:35.8804512	Item Models: irregular_implements
+// 1.21.1	2025-02-03T02:55:48.5890375	Item Models: irregular_implements
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
 32497cef5506cab7a83f74333eb42f5a51bfe1e7 assets/irregular_implements/models/item/biome_capsule.json
@@ -109,7 +109,6 @@ e209a91eb52d35d8a2e9c3234a3b91ad336f705f assets/irregular_implements/models/item
 c299c97f1655718329d091dfd1414ba0ed860212 assets/irregular_implements/models/item/redstone_remote.json
 e688f830f67bf8d48fc0aa877fbcbb440ba19614 assets/irregular_implements/models/item/redstone_tool.json
 177f9ff03651be946ca7a68d5b2b52029c4fd21b assets/irregular_implements/models/item/reinforced_ender_bucket.json
-4128021949fd3acdd91ba499dc4ebe46147d0376 assets/irregular_implements/models/item/sakanade_spores.json
 e4941ae6f65a39290b17ebff3228ced7c55c9869 assets/irregular_implements/models/item/spectre_anchor.json
 7339accd7c27d2470bcb1a4703ea041cc367785c assets/irregular_implements/models/item/spectre_axe.json
 565ffbd738bc1d968556a85d97d54774745686c1 assets/irregular_implements/models/item/spectre_boots.json

@@ -73,7 +73,7 @@ class ModBlockStateProvider(
     }
 
     private fun sakanade() {
-        val block = ModBlocks.SAKANADE.get()
+        val block = ModBlocks.SAKANADE_SPORES.get()
 
         val texture = modLoc("block/sakanade")
 

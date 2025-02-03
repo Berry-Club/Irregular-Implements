@@ -46,7 +46,7 @@ class SakanadeBlock : Block(
             if (level.getBlockState(mutablePos.below()).canBeReplaced()) {
                 level.setBlock(
                     mutablePos.below(),
-                    ModBlocks.SAKANADE.get().defaultBlockState().setValue(UP, true),
+                    ModBlocks.SAKANADE_SPORES.get().defaultBlockState().setValue(UP, true),
                     1 or 2
                 )
             }
@@ -122,7 +122,7 @@ class SakanadeBlock : Block(
                     if (!flag) {
                         if (tempState == null) tempState = level.getBlockState(pos.above())
 
-                        flag = tempState!!.`is`(ModBlocks.SAKANADE) && tempState.getValue(property)
+                        flag = tempState!!.`is`(ModBlocks.SAKANADE_SPORES) && tempState.getValue(property)
                     }
 
                     blockState = blockState.setValue(property, flag)
@@ -139,7 +139,7 @@ class SakanadeBlock : Block(
             val property = PROPERTY_BY_DIRECTION[direction] ?: return false
             val state = level.getBlockState(relative)
 
-            return state.`is`(ModBlocks.SAKANADE) && state.getValue(property)
+            return state.`is`(ModBlocks.SAKANADE_SPORES) && state.getValue(property)
         }
     }
 

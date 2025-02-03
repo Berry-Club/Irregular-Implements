@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-15T20:38:49.1412467	Recipes
+// 1.21.1	2025-02-03T02:55:48.5865023	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
 29c1c86238aae7a307c3aae2ad5cc37f7d24a6ea data/irregular_implements/advancement/recipes/imbuing/imbuing/fire_imbue.json
@@ -325,7 +325,7 @@ ed1abcfa3a9fa73f04861aaedd056a418e437630 data/irregular_implements/recipe/grass_
 0c6373006998d0441cf3568380267838838ae97e data/irregular_implements/recipe/grass_seeds_yellow.json
 5b9f7f94ea95b2d14d83be67449538ea4f877316 data/irregular_implements/recipe/id_card.json
 f6ea7bd2e249a476d277a9cef22a825f52de757a data/irregular_implements/recipe/igniter.json
-b6e9c795d90c2ba025191fdfbf95cf699312714b data/irregular_implements/recipe/imbuing/imbuing/collapse_imbue.json
+33578aaafb5ebef19a75d0479f962710220c5927 data/irregular_implements/recipe/imbuing/imbuing/collapse_imbue.json
 29ae5665eb8991ec0f5f5f44d7687da8f234d1ca data/irregular_implements/recipe/imbuing/imbuing/experience_imbue.json
 e72d23781cefa201783d244aad5e6a510ebf82a4 data/irregular_implements/recipe/imbuing/imbuing/fire_imbue.json
 6a3b9a656a6e24f1d2b36ade42ce128dd377297e data/irregular_implements/recipe/imbuing/imbuing/mossy_cobblestone.json

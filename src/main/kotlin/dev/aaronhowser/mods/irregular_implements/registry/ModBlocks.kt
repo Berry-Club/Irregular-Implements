@@ -33,7 +33,7 @@ object ModBlocks {
     val SOUND_DAMPENER = basicBlock("sound_dampener")
 
     // Plants
-    val SAKANADE: DeferredBlock<SakanadeBlock> =
+    val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
         registerBlock("sakanade") { SakanadeBlock() }
     val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
         registerBlock("pitcher_plant") { PitcherPlantBlock() }
