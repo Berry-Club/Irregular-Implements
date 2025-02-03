@@ -34,13 +34,12 @@ class ImbueItem(
 
         livingEntity.addEffect(mobEffectInstance)
 
-        if (livingEntity is Player && !livingEntity.hasInfiniteMaterials()) {
-            stack.shrink(1)
-
-            val bottleStack = Items.GLASS_BOTTLE.defaultInstance
-            if (!livingEntity.addItem(bottleStack)) {
-                livingEntity.drop(bottleStack, false)
-            }
+        if (livingEntity is Player) {
+            ItemUtils.createFilledResult(
+                stack,
+                livingEntity,
+                Items.GLASS_BOTTLE.defaultInstance
+            )
         }
 
         return stack

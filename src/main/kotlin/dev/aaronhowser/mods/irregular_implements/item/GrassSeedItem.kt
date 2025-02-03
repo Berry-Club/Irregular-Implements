@@ -18,7 +18,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_P
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_RED
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_WHITE
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_YELLOW
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
@@ -57,10 +56,7 @@ class GrassSeedItem(
             SoundSource.BLOCKS
         )
 
-        if (!context.player?.hasInfiniteMaterials().isTrue) {
-            val usedStack = context.itemInHand
-            usedStack.shrink(1)
-        }
+        context.itemInHand.consume(1, context.player)
 
         return InteractionResult.SUCCESS
     }

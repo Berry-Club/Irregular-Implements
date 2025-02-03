@@ -32,14 +32,12 @@ class AirBottleItem : Item(
         livingEntity.airSupply = livingEntity.maxAirSupply
         livingEntity.gameEvent(GameEvent.DRINK)
 
-        if (livingEntity is Player && !livingEntity.hasInfiniteMaterials()) {
-            val bottleStack = Items.GLASS_BOTTLE.defaultInstance
-
-            if (!livingEntity.addItem(bottleStack)) {
-                livingEntity.drop(bottleStack, false)
-            }
-
-            stack.shrink(1)
+        if (livingEntity is Player) {
+            ItemUtils.createFilledResult(
+                stack,
+                livingEntity,
+                Items.GLASS_BOTTLE.defaultInstance
+            )
         }
 
         return stack
