@@ -744,7 +744,7 @@ class ModLanguageProvider(
         addInfo(ModItems.BOTTLE_OF_AIR, "Refills your breath.\n\nCan be found in Ocean Monuments.")
         addInfo(ModItems.ENDER_LETTER, "Can be used to send items and messages to other players.\n\nType the name of the player at the top, and insert up to 9 items.\n\nClick an Ender Mailbox, and it will be inserted into their Ender Mailbox if it has room.")
         addInfo(ModItems.ENTITY_FILTER, "Allows you to filter by entity type. Do so by using it on an entity.")
-        addInfo(ModBlocks.SAKANADE_SPORES, "Found on the bottom of huge brown mushrooms.\n\nTouching it inflicts you with Collapse for a short time, which inverts your controls.")
+        addInfo(ModBlocks.SAKANADE_SPORES, "Found on the bottom of huge brown mushrooms.\n\nTouching it inflicts you with Collapse for a short time, which inverts your controls.\n\nThis also inverts mobs' movement! They'll move the opposite direction they're trying to.")
         addInfo(ModItems.ECTOPLASM, "Every time an entity dies, it has a chance of spawning a Spirit.\n\nSpirits can only be killed by magic, and they drop Ectoplasm.\n\nCan also be harvested from Spectre Trees.")
         addInfo(ModItems.LUMINOUS_POWDER, "Can be crafted onto enchanted items to make their glints glow in the dark.")
         addInfo(ModItems.LOTUS_BLOSSOM, "Grants experience when consumed.\n\nSneak to consume the entire stack.")
