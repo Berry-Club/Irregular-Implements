@@ -48,6 +48,8 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
 
     @Unique
     LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
+
+
     @Unique
     LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
 
@@ -61,6 +63,20 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
     @Override
     public boolean irregular_implements$removeRainShieldChunk(long pos) {
         return this.irregular_implements$rainShieldChunks.remove(pos);
+    }
+
+    @Inject(
+            method = "isRainingAt",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
+            ),
+            cancellable = true
+    )
+    private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
+            cir.setReturnValue(false);
+        }
     }
 
     @Unique
@@ -82,20 +98,6 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
     //
     //
     //
-
-    @Inject(
-            method = "isRainingAt",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
-            ),
-            cancellable = true
-    )
-    private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
-            cir.setReturnValue(false);
-        }
-    }
 
     @Unique
     @Override
