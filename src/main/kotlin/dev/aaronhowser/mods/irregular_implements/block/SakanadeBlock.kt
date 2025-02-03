@@ -107,19 +107,28 @@ class SakanadeBlock : Block(
             )
         }
 
-        private fun getUpdatedState(oldState: BlockState, level: BlockGetter, pos: BlockPos): BlockState {
-            var state: BlockState = oldState
+        private fun getUpdatedState(state: BlockState, level: BlockGetter, pos: BlockPos): BlockState {
+
+            var blockState = state
+            var tempState: BlockState? = null
 
             for (direction in Direction.entries) {
                 val property = PROPERTY_BY_DIRECTION[direction] ?: continue
 
-                if (oldState.getValue(property)) {
-                    val canSupport = canSupportAtFace(level, pos, direction)
-                    state = state.setValue(property, canSupport)
+                if (state.getValue(property)) {
+                    var flag = canSupportAtFace(level, pos, direction)
+
+                    if (!flag) {
+                        if (tempState == null) tempState = level.getBlockState(pos.above())
+
+                        flag = tempState!!.`is`(ModBlocks.SAKANADE) && tempState.getValue(property)
+                    }
+
+                    blockState = blockState.setValue(property, flag)
                 }
             }
 
-            return state
+            return blockState
         }
 
         private fun canSupportAtFace(level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
