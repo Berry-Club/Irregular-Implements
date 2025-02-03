@@ -45,8 +45,6 @@ object ModBlocks {
         registerBlock("bean_pod") { Block(Properties.ofFullCopy(Blocks.POTATOES).strength(0.5f)) }
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
 
-    /** [net.neoforged.neoforge.common.world.StructureModifier] */
-
     // Loot blocks
     val NATURE_CORE = basicBlock("nature_core")
     val NATURE_CHEST: DeferredBlock<SpecialChestBlock> =
@@ -155,7 +153,8 @@ object ModBlocks {
     val ENTITY_DETECTOR = basicBlock("entity_detector")
 
     // Interfaces
-    val PLAYER_INTERFACE = basicBlock("player_interface")   //TODO: 10/10 importance, find some way to allow this to be disabled arbitrarily. Maybe an event system? Specific KubeJS support?
+    val PLAYER_INTERFACE: DeferredBlock<PlayerInterfaceBlock> =
+        registerBlock("player_interface") { PlayerInterfaceBlock() }   //TODO: 10/10 importance, find some way to allow this to be disabled arbitrarily. Maybe an event system? Specific KubeJS support?
     val NOTIFICATION_INTERFACE: DeferredBlock<NotificationInterfaceBlock> =
         registerBlock("notification_interface") { NotificationInterfaceBlock() }
     val BASIC_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBasicBlock> =

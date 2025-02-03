@@ -221,4 +221,12 @@ object ModBlockEntities {
             ).build(null)
         })
 
+    val PLAYER_INTERFACE: DeferredHolder<BlockEntityType<*>, BlockEntityType<PlayerInterfaceBlockEntity>> =
+        BLOCK_ENTITY_REGISTRY.register("player_interface", Supplier {
+            BlockEntityType.Builder.of(
+                ::PlayerInterfaceBlockEntity,
+                ModBlocks.PLAYER_INTERFACE.get()
+            ).build(null)
+        })
+
 }

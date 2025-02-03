@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ItemCollectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.AdvancedItemCollectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction

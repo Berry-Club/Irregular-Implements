@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import net.neoforged.fml.common.EventBusSubscriber
 
 object ServerScheduler {
 
