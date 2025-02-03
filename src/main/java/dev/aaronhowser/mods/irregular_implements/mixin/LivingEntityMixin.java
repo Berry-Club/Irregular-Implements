@@ -3,17 +3,13 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 import dev.aaronhowser.mods.irregular_implements.LivingEntityFunctions;
 import dev.aaronhowser.mods.irregular_implements.block.BeanStalkBlock;
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider;
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,9 +27,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
 
     @Shadow
     public abstract ItemStack getItemBySlot(EquipmentSlot slot);
-
-    @Shadow
-    public abstract boolean hasEffect(Holder<MobEffect> effect);
 
     @Unique
     private LivingEntity irregular_implements$this = (LivingEntity) (Object) this;
@@ -67,21 +60,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
     )
     private double irregular_implements$fasterOnStalk(double constant) {
         return constant * BeanStalkBlock.climbingFactor(irregular_implements$this);
-    }
-
-    @ModifyVariable(
-            method = "travel",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/LivingEntity;handleRelativeFrictionAndCalculateMovement(Lnet/minecraft/world/phys/Vec3;F)Lnet/minecraft/world/phys/Vec3;",
-                    ordinal = 0
-            ),
-            argsOnly = true
-    )
-    private Vec3 irregular_implements$invertMovementWithCollapse(Vec3 value) {
-        if (!this.hasEffect(ModEffects.COLLAPSE)) return value;
-
-        return new Vec3(-value.x(), value.y(), -value.z());
     }
 
 }

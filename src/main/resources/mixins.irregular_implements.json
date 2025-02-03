@@ -15,6 +15,7 @@
     "ItemEntityMixin",
     "LevelMixin",
     "LivingEntityMixin",
+    "MoveControlMixin",
     "OceanMonumentCoreRoomMixin",
     "ServerPlayerGameModeMixin",
     "SignalGetterMixin"
