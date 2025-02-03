@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.datagen.datapack.features
+package dev.aaronhowser.mods.irregular_implements.world.feature
 
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider

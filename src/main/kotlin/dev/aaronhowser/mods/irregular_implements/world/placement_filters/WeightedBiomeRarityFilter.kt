@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.datagen.datapack.placement_filters
+package dev.aaronhowser.mods.irregular_implements.world.placement_filters
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec

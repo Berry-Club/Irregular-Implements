@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.placement_filters.WeightedBiomeRarityFilter
+import dev.aaronhowser.mods.irregular_implements.world.placement_filters.WeightedBiomeRarityFilter
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderGetter
