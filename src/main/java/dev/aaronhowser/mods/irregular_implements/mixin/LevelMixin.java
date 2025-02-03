@@ -47,11 +47,10 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
     //
 
     @Unique
-    LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
-
+    LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
 
     @Unique
-    LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
+    LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
 
     @Unique
     @Override
@@ -63,6 +62,18 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
     @Override
     public boolean irregular_implements$removeRainShieldChunk(long pos) {
         return this.irregular_implements$rainShieldChunks.remove(pos);
+    }
+
+    @Unique
+    @Override
+    public void irregular_implements$clearRainShieldChunks() {
+        this.irregular_implements$rainShieldChunks.clear();
+    }
+
+    @Unique
+    @Override
+    public LongOpenHashSet irregular_implements$getRainShieldChunks() {
+        return this.irregular_implements$rainShieldChunks;
     }
 
     @Inject(
@@ -77,18 +88,6 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
         if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
             cir.setReturnValue(false);
         }
-    }
-
-    @Unique
-    @Override
-    public void irregular_implements$clearRainShieldChunks() {
-        this.irregular_implements$rainShieldChunks.clear();
-    }
-
-    @Unique
-    @Override
-    public LongOpenHashSet irregular_implements$getRainShieldChunks() {
-        return this.irregular_implements$rainShieldChunks;
     }
 
     //
@@ -119,12 +118,6 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
 
     @Unique
     @Override
-    public boolean irregular_implements$chunkProtectedByPeaceCandle(long pos) {
-        return this.irregular_implements$peaceCandleChunks.contains(pos);
-    }
-
-    @Unique
-    @Override
     public void irregular_implements$clearPeaceCandleChunks() {
         this.irregular_implements$peaceCandleChunks.clear();
     }
@@ -133,6 +126,12 @@ public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks,
     @Override
     public LongOpenHashSet irregular_implements$getPeaceCandleChunks() {
         return this.irregular_implements$peaceCandleChunks;
+    }
+
+    @Unique
+    @Override
+    public boolean irregular_implements$chunkProtectedByPeaceCandle(long pos) {
+        return this.irregular_implements$peaceCandleChunks.contains(pos);
     }
 
     //
