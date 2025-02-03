@@ -4,15 +4,15 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 
 public interface RainShieldChunks {
 
-    default boolean irregular_implements$addChunkPos(long chunkPosAsLong) {
+    default boolean irregular_implements$addRainShieldChunk(long chunkPosAsLong) {
         throw new IllegalStateException();
     }
 
-    default boolean irregular_implements$removeChunkPos(long chunkPosAsLong) {
+    default boolean irregular_implements$removeRainShieldChunk(long chunkPosAsLong) {
         throw new IllegalStateException();
     }
 
-    default boolean irregular_implements$chunkPosHasRainShields(long chunkPosAsLong) {
+    default boolean irregular_implements$chunkHasRainShield(long chunkPosAsLong) {
         throw new IllegalStateException();
     }
 

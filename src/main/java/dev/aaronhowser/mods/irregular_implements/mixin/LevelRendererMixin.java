@@ -30,7 +30,7 @@ public abstract class LevelRendererMixin {
     private Biome.Precipitation irregular_implements$getPrecipitationAt(Biome biome, BlockPos pos) {
         if (level instanceof RainShieldChunks l) {
             var chunkPos = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
-            if (l.irregular_implements$chunkPosHasRainShields(chunkPos)) {
+            if (l.irregular_implements$chunkHasRainShield(chunkPos)) {
                 return Biome.Precipitation.NONE;
             }
         }

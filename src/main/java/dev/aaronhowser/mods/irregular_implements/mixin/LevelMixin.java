@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
+import dev.aaronhowser.mods.irregular_implements.PeaceCandleChunks;
 import dev.aaronhowser.mods.irregular_implements.PoweredRedstoneInterfaces;
 import dev.aaronhowser.mods.irregular_implements.RainShieldChunks;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
@@ -17,7 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
-public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInterfaces {
+public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks, PoweredRedstoneInterfaces {
+
+    @Unique
+    LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
 
     //
     //
@@ -27,7 +31,6 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
     //
     //
 
-    // The Long is the chunk pos converted to long `ChunkPos.toLong()`
     @Unique
     LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
 
@@ -64,20 +67,14 @@ public abstract class LevelMixin implements RainShieldChunks, PoweredRedstoneInt
 
     @Unique
     @Override
-    public boolean irregular_implements$addChunkPos(long pos) {
+    public boolean irregular_implements$addRainShieldChunk(long pos) {
         return this.irregular_implements$rainShieldChunks.add(pos);
     }
 
     @Unique
     @Override
-    public boolean irregular_implements$removeChunkPos(long pos) {
+    public boolean irregular_implements$removeRainShieldChunk(long pos) {
         return this.irregular_implements$rainShieldChunks.remove(pos);
-    }
-
-    @Unique
-    @Override
-    public boolean irregular_implements$chunkPosHasRainShields(long pos) {
-        return this.irregular_implements$rainShieldChunks.contains(pos);
     }
 
     @Unique
