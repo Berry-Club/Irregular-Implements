@@ -41,7 +41,8 @@ object ModBlocks {
         registerBlockWithoutItem("lotus") { LotusBlock() }
     val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
         registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }   //TODO: Naturally generating
-    val BEAN_POD = basicBlock("bean_pod")
+    val BEAN_POD: DeferredBlock<Block> =
+        registerBlock("bean_pod") { Block(Properties.ofFullCopy(Blocks.POTATOES).strength(0.5f)) }
     val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
 
     /** [net.neoforged.neoforge.common.world.StructureModifier] */
