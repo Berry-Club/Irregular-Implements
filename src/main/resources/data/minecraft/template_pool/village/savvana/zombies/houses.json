@@ -228,6 +228,24 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
+        "location": "irregular_implements:candle_temple/savanna_1",
+        "processors": "minecraft:zombie_savanna",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "irregular_implements:candle_temple/savanna_2",
+        "processors": "minecraft:zombie_savanna",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "minecraft:village/savanna/houses/savanna_large_farm_1",
         "processors": "minecraft:zombie_savanna",
         "projection": "rigid"

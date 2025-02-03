@@ -237,6 +237,24 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
+        "location": "irregular_implements:candle_temple/plains_1",
+        "processors": "minecraft:zombie_plains",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "irregular_implements:candle_temple/plains_2",
+        "processors": "minecraft:zombie_plains",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "minecraft:village/plains/zombie/houses/plains_stable_1",
         "processors": "minecraft:zombie_plains",
         "projection": "rigid"

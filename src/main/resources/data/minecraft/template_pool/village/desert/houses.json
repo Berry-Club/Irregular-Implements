@@ -256,6 +256,28 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
+        "location": "irregular_implements:candle_temple/desert_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "irregular_implements:candle_temple/desert_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "minecraft:village/desert/houses/desert_large_farm_1",
         "processors": "minecraft:farm_desert",
         "projection": "rigid"
