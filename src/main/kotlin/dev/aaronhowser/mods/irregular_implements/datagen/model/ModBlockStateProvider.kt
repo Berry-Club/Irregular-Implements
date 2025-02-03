@@ -70,6 +70,29 @@ class ModBlockStateProvider(
         itemCollectors()
         peaceCandle()
         sakanade()
+        playerInterface()
+    }
+
+    private fun playerInterface() {
+        val block = ModBlocks.PLAYER_INTERFACE.get()
+
+        val textureTop = modLoc("block/player_interface/armor")
+        val textureBottom = modLoc("block/player_interface/hotbar")
+        val textureNorth = modLoc("block/player_interface/shield")
+        val textureOther = modLoc("block/player_interface/main")
+
+        val model = models()
+            .cube(
+                name(block),
+                textureBottom,
+                textureTop,
+                textureNorth,
+                textureOther,
+                textureOther,
+                textureOther
+            )
+
+        simpleBlockWithItem(block, model)
     }
 
     private fun sakanade() {
