@@ -7,12 +7,14 @@ import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.MultifaceBlock
 import net.minecraft.world.level.block.PipeBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -82,6 +84,44 @@ class SakanadeBlock : Block(
 
             return if (voxelShape.isEmpty) Shapes.block() else voxelShape
         }
+
+        private fun countFaces(state: BlockState): Int {
+            var count = 0
+
+            for (property in PROPERTY_BY_DIRECTION.entries) {
+                if (state.getValue(property.value)) count++
+            }
+
+            return count
+        }
+
+        private fun hasFaces(state: BlockState): Boolean {
+            return countFaces(state) > 0
+        }
+
+        fun isAcceptableNeighbour(blockReader: BlockGetter, neighborPos: BlockPos, attachedFace: Direction): Boolean {
+            return MultifaceBlock.canAttachTo(
+                blockReader,
+                attachedFace,
+                neighborPos,
+                blockReader.getBlockState(neighborPos)
+            )
+        }
+
+        private fun getUpdatedState(oldState: BlockState, level: BlockGetter, pos: BlockPos): BlockState {
+            var state: BlockState = oldState
+
+            for (direction in Direction.entries) {
+                val property = PROPERTY_BY_DIRECTION[direction] ?: continue
+
+                if (oldState.getValue(property)) {
+                    val canSupport = isAcceptableNeighbour(level, pos, direction)
+                    state = state.setValue(property, canSupport)
+                }
+            }
+
+            return state
+        }
     }
 
     init {
@@ -105,6 +145,33 @@ class SakanadeBlock : Block(
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return shapesCache[state] ?: calculateShape(state)
+    }
+
+    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+        return hasFaces(getUpdatedState(state, level, pos))
+    }
+
+    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+        val newState = getUpdatedState(state, level, pos)
+        return if (!hasFaces(newState)) Blocks.AIR.defaultBlockState() else newState
+    }
+
+    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+        val level = context.level
+        val pos = context.clickedPos
+        val clickedState = level.getBlockState(pos)
+
+        val clickedThis = clickedState.`is`(this)
+        val state = if (clickedThis) clickedState else defaultBlockState()
+
+        for (direction in context.nearestLookingDirections) {
+            val property = PROPERTY_BY_DIRECTION[direction] ?: continue
+            val alreadyHasProperty = clickedThis && clickedState.getValue(property)
+
+            if (!alreadyHasProperty && canSupport)
+
+        }
+
     }
 
     override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
