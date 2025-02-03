@@ -30,7 +30,17 @@ class PlayerInterfaceBlockEntity(
 
         private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
 
-        // Mostly intended to be called from KubeJS
+        /**
+         * Mostly meant to be called from KubeJS.
+         *
+         * Here's an example:
+         *
+         * ```js
+         * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
+         *
+         * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
+         * ```
+         */
         @JvmStatic
         fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
             PLAYER_PREDICATE = predicate
