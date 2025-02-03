@@ -7,12 +7,17 @@ import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.wrapper.InvWrapper
 import net.neoforged.neoforge.items.wrapper.PlayerArmorInvWrapper
-import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper
+import net.neoforged.neoforge.items.wrapper.PlayerOffhandInvWrapper
+import net.neoforged.neoforge.items.wrapper.RangedWrapper
 import java.util.*
 
 //TODO: What if BER that makes the owner's head float above the block and look at you
@@ -75,19 +80,42 @@ class PlayerInterfaceBlockEntity(
     }
 
     private fun getHotbarHandler(owner: Player): IItemHandler {
-        return PlayerMainInvWrapper(owner.inventory)
+        return LimitedInventoryWrapper(owner.inventory, 0, 9)
     }
 
     private fun getMainHandler(owner: Player): IItemHandler {
-        return PlayerMainInvWrapper(owner.inventory)
+        return LimitedInventoryWrapper(owner.inventory, 9, 9 * 3)
     }
 
     private fun getOffhandHandler(owner: Player): IItemHandler {
-        return PlayerMainInvWrapper(owner.inventory)
+        return PlayerOffhandInvWrapper(owner.inventory)
     }
 
     private fun getArmorHandler(owner: Player): IItemHandler {
         return PlayerArmorInvWrapper(owner.inventory)
+    }
+
+    private class LimitedInventoryWrapper(
+        private val inventory: Inventory,
+        minSlot: Int,
+        maxSlot: Int
+    ) : RangedWrapper(InvWrapper(inventory), minSlot, maxSlot) {
+        override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean): ItemStack {
+            val rest = super.insertItem(slot, stack, simulate)
+            if (rest.count != stack.count) {
+                val inSlot = getStackInSlot(slot)
+                if (!inSlot.isEmpty) {
+                    val player = inventory.player
+
+                    if (player.level().isClientSide) {
+                        inSlot.popTime = 5
+                    } else if (player is ServerPlayer) {
+                        player.containerMenu.broadcastChanges()
+                    }
+                }
+            }
+            return rest
+        }
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
