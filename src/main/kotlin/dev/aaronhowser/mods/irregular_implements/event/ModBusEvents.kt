@@ -35,6 +35,14 @@ object ModBusEvents {
         ) { spectreCoilBE, direction ->
             spectreCoilBE.getEnergyHandler(direction)
         }
+
+        event.registerBlockEntity(
+            Capabilities.ItemHandler.BLOCK,
+            ModBlockEntities.PLAYER_INTERFACE.get()
+        ) { playerInterfaceBE, direction ->
+            playerInterfaceBE.getItemHandler(direction)
+        }
+
     }
 
 }
