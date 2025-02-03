@@ -27,5 +27,4 @@ public class MoveControlMixin {
         return (this.mob.hasEffect(ModEffects.COLLAPSE)) ? -f : f;
     }
 
-
 }
