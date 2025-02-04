@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.block.CustomCraft
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.entity.GoldenChickenRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.SpectreIlluminatorEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
@@ -190,35 +191,14 @@ object ClientModBusEvents {
             ::DiaphanousBlockEntityRenderer
         )
 
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(),
-            ::SpectreEnergyInjectorBlockEntityRenderer
-        )
+        event.registerBlockEntityRenderer(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBlockEntityRenderer)
+        event.registerBlockEntityRenderer(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
+        event.registerBlockEntityRenderer(ModBlockEntities.NATURE_CHEST.get(), ::ChestRenderer)
+        event.registerBlockEntityRenderer(ModBlockEntities.WATER_CHEST.get(), ::ChestRenderer)
 
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(),
-            ::CustomCraftingTableBlockEntityRenderer
-        )
-
-        event.registerEntityRenderer(
-            ModEntityTypes.ARTIFICIAL_END_PORTAL.get(),
-            ::ArtificialEndPortalRenderer
-        )
-
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.NATURE_CHEST.get(),
-            ::ChestRenderer
-        )
-
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.WATER_CHEST.get(),
-            ::ChestRenderer
-        )
-
-        event.registerEntityRenderer(
-            ModEntityTypes.GOLDEN_EGG.get(),
-            ::ThrownItemRenderer
-        )
+        event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
+        event.registerEntityRenderer(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), ::ArtificialEndPortalRenderer)
+        event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), ::GoldenChickenRenderer)
     }
 
     @SubscribeEvent
