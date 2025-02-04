@@ -37,7 +37,10 @@
     "OWO"
   ],
   "result": {
+    "components": {
+      "irregular_implements:weather": "rainy"
+    },
     "count": 2,
-    "id": "irregular_implements:weather_egg_rainy"
+    "id": "irregular_implements:weather_egg"
   }
 }

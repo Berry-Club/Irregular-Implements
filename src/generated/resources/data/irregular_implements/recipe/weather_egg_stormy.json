@@ -21,7 +21,10 @@
     "OSO"
   ],
   "result": {
+    "components": {
+      "irregular_implements:weather": "stormy"
+    },
     "count": 2,
-    "id": "irregular_implements:weather_egg_stormy"
+    "id": "irregular_implements:weather_egg"
   }
 }

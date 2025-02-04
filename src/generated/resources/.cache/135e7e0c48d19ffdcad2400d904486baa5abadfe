@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-03T02:55:48.5890375	Item Models: irregular_implements
+// 1.21.1	2025-02-03T23:41:00.8460002	Item Models: irregular_implements
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
 32497cef5506cab7a83f74333eb42f5a51bfe1e7 assets/irregular_implements/models/item/biome_capsule.json
@@ -137,7 +137,8 @@ edc37240d7b3747ea811b41571953c45283ef5e2 assets/irregular_implements/models/item
 2af89dcee1dead0c5842d5bf89af10b6ab9bf1de assets/irregular_implements/models/item/voiding_drop_filter.json
 02a185b1d95eacdf2f314fb932d5c29fce722104 assets/irregular_implements/models/item/void_stone.json
 36bec370827934d92433be1d1857b7b19e613498 assets/irregular_implements/models/item/water_walking_boots.json
-36682ad712b8eb4d74ef5b510fddc0dcb3bb35ec assets/irregular_implements/models/item/weather_egg_rainy.json
-0d85958278f9bdb19ce6163ecb1273c800c22e03 assets/irregular_implements/models/item/weather_egg_stormy.json
-026ca514644f50aad36c1e61cf852ae351da95c8 assets/irregular_implements/models/item/weather_egg_sunny.json
+a551649b4e189902f01e385714357502f7e96534 assets/irregular_implements/models/item/weather_egg.json
+5d6aad5876ef29c95eaf8e0ab64894f427c95ee1 assets/irregular_implements/models/item/weather_egg_rainy.json
+fcb3e6f8844fc0556c5d0d8fbfa7ff2f285e1340 assets/irregular_implements/models/item/weather_egg_stormy.json
+be568baa09c37b40cad411ea8fbdb66e959f9009 assets/irregular_implements/models/item/weather_egg_sunny.json
 0a62c894aaf2e918d5ce49489c2a93d03074fed2 assets/irregular_implements/models/item/white_stone.json

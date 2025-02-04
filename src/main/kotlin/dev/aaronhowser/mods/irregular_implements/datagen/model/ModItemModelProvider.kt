@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.EmeraldCompassItem
-import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
-import dev.aaronhowser.mods.irregular_implements.item.RedstoneActivatorItem
-import dev.aaronhowser.mods.irregular_implements.item.SpectreChargerItem
+import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -32,12 +29,47 @@ class ModItemModelProvider(
         buckets()
         blockEntityWithoutLevelRenderers()
         spectreChargers()
+        weatherEggs()
 
         basicItems()
     }
 
-    private fun spectreChargers() {
+    private fun weatherEggs() {
+        val item = ModItems.WEATHER_EGG.get()
 
+        val sunnyModel = getBuilder("${getName(item)}_sunny")
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", "item/weather_egg/sunny")
+
+        val rainyModel = getBuilder("${getName(item)}_rainy")
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", "item/weather_egg/rainy")
+
+        val stormyModel = getBuilder("${getName(item)}_stormy")
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", "item/weather_egg/stormy")
+
+        getBuilder(getName(item).toString())
+
+            .override()
+            .predicate(WeatherEggItem.WEATHER, 0f)
+            .model(sunnyModel)
+            .end()
+
+            .override()
+            .predicate(WeatherEggItem.WEATHER, 1f)
+            .model(rainyModel)
+            .end()
+
+            .override()
+            .predicate(WeatherEggItem.WEATHER, 2f)
+            .model(stormyModel)
+            .end()
+
+        handledItems.add(item)
+    }
+
+    private fun spectreChargers() {
         val glowTexture = modLoc("item/spectre_charger/glow")
 
         val items = mapOf(

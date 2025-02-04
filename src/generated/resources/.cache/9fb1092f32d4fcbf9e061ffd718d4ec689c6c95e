@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-03T02:56:46.0490349	Recipes
+// 1.21.1	2025-02-03T23:41:00.8423897	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
 29c1c86238aae7a307c3aae2ad5cc37f7d24a6ea data/irregular_implements/advancement/recipes/imbuing/imbuing/fire_imbue.json
@@ -483,6 +483,6 @@ b4c8205a0bbb9226dad3c1bb96f9a174aa79ac49 data/irregular_implements/recipe/voidin
 30230af9dfd02f3f04d7d6ca9f1d9321f5072fc8 data/irregular_implements/recipe/void_stone.json
 05dca021d75fd34335eaef07326af70c9bab9a1c data/irregular_implements/recipe/warped_platform.json
 cf9a48f2bb098783c7950395886c38bb2a966c59 data/irregular_implements/recipe/wash_boot.json
-606616ababcccad676a713b12d468e73cd08837d data/irregular_implements/recipe/weather_egg_rainy.json
-51a7a3889f80951306f8bcbfa3ddc6da460d30c5 data/irregular_implements/recipe/weather_egg_stormy.json
-817280da7dcfc3a61735e47b100ee3bde16cf411 data/irregular_implements/recipe/weather_egg_sunny.json
+d0695b7d5d8141a7bae8235847542fe14d4809df data/irregular_implements/recipe/weather_egg_rainy.json
+1a46ba191dff2d0d3fcdfa1999181924da2181d9 data/irregular_implements/recipe/weather_egg_stormy.json
+d2fe76a0d2ec62851e860a3bb6a04d83b8def8aa data/irregular_implements/recipe/weather_egg_sunny.json
