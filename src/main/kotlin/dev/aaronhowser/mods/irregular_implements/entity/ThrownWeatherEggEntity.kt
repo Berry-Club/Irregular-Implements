@@ -2,12 +2,17 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.core.particles.ItemParticleOption
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.EntityHitResult
+import net.minecraft.world.phys.HitResult
 
 class ThrownWeatherEggEntity : ThrowableItemProjectile {
 
@@ -17,38 +22,40 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
 
     var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
 
-    private fun setSunny() {
-        val level = this.level() as? ServerLevel ?: return
-        level.setWeatherParameters(
-            ServerLevel.RAIN_DELAY.sample(level.random),
-            0,
-            false,
-            false
-        )
+    override fun onHit(result: HitResult) {
+        val level = this.level() as ServerLevel
+
+        val weatherCloud = WeatherCloudEntity(level, this.x, this.y, this.z, this.weather)
+        level.addFreshEntity(weatherCloud)
+
+        level().broadcastEntityEvent(this, 3.toByte())
+        this.discard()
     }
 
-    private fun setRainy() {
-        val level = this.level() as? ServerLevel ?: return
-        level.setWeatherParameters(
-            0,
-            ServerLevel.RAIN_DURATION.sample(level.random),
-            true,
-            false
-        )
+    override fun onHitEntity(result: EntityHitResult) {
+        super.onHitEntity(result)
+        result.entity.hurt(damageSources().thrown(this, this.owner), 0f)
     }
 
-    private fun setStormy() {
-        val level = this.level() as? ServerLevel ?: return
-        level.setWeatherParameters(
-            0,
-            ServerLevel.RAIN_DURATION.sample(level.random),
-            true,
-            true
-        )
+    override fun handleEntityEvent(id: Byte) {
+        if (id.toInt() == 3) {
+            for (i in 0..7) {
+                level()
+                    .addParticle(
+                        ItemParticleOption(ParticleTypes.ITEM, this.item),
+                        this.x,
+                        this.y,
+                        this.z,
+                        (this.random.nextDouble() - 0.5) * 0.08,
+                        (this.random.nextDouble() - 0.5) * 0.08,
+                        (this.random.nextDouble() - 0.5) * 0.08
+                    )
+            }
+        }
     }
 
     override fun getDefaultItem(): Item {
-        TODO("Not yet implemented")
+        return ModItems.WEATHER_EGG.get()
     }
 
 }

@@ -83,4 +83,15 @@ object ModEntityTypes {
                 .build("weather_egg")
         })
 
+    val WEATHER_CLOUD: DeferredHolder<EntityType<*>, EntityType<WeatherCloudEntity>> =
+        ENTITY_TYPE_REGISTRY.register("weather_cloud", Supplier {
+            EntityType.Builder.of(
+                ::WeatherCloudEntity,
+                MobCategory.MISC
+            )
+                .sized(1f, 1f)
+                .clientTrackingRange(256)
+                .build("weather_cloud")
+        })
+
 }
