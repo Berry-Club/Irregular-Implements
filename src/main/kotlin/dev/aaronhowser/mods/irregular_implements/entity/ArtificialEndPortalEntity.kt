@@ -20,10 +20,7 @@ import net.minecraft.world.level.block.EndRodBlock
 import net.minecraft.world.phys.AABB
 import net.neoforged.neoforge.common.Tags
 
-class ArtificialEndPortalEntity(
-    entityType: EntityType<*>,
-    level: Level
-) : Entity(entityType, level) {
+class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
 
     companion object {
         fun isValidPosition(
@@ -82,12 +79,8 @@ class ArtificialEndPortalEntity(
     }
 
     var actionTimer: Int
-        private set(value) {
-            this.entityData.set(ACTION_TIMER, value)
-        }
-        get() {
-            return this.entityData.get(ACTION_TIMER)
-        }
+        private set(value) = this.entityData.set(ACTION_TIMER, value)
+        get() = this.entityData.get(ACTION_TIMER)
 
     override fun tick() {
         super.tick()

@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.entity
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
@@ -19,18 +21,31 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
         this.weather = weather
     }
 
+    companion object {
+        val AGE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
+        const val AGE_NBT = "Age"
+    }
+
+    init {
+        this.noPhysics = true
+    }
+
+    var age: Int
+        private set(value) = this.entityData.set(AGE, value)
+        get() = this.entityData.get(AGE)
+
     var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        TODO("Not yet implemented")
+        builder.define(AGE, 0)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
-        TODO("Not yet implemented")
+        this.age = compound.getInt(AGE_NBT)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
-        TODO("Not yet implemented")
+        compound.putInt(AGE_NBT, this.age)
     }
 
 
