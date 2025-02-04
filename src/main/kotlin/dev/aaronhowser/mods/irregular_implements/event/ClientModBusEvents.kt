@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
+import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
@@ -212,6 +213,11 @@ object ClientModBusEvents {
         event.registerBlockEntityRenderer(
             ModBlockEntities.WATER_CHEST.get(),
             ::ChestRenderer
+        )
+
+        event.registerEntityRenderer(
+            ModEntityTypes.GOLDEN_EGG.get(),
+            ::ThrownItemRenderer
         )
     }
 

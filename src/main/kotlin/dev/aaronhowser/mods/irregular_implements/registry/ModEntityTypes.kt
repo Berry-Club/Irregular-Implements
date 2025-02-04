@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.entity.ArtificialEndPortalEntity
 import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
+import dev.aaronhowser.mods.irregular_implements.entity.ThrownGoldenEggEntity
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
@@ -45,6 +46,18 @@ object ModEntityTypes {
             )
                 .sized(3f, 0.25f)
                 .build("artificial_end_portal")
+        })
+
+    val GOLDEN_EGG: DeferredHolder<EntityType<*>, EntityType<ThrownGoldenEggEntity>> =
+        ENTITY_TYPE_REGISTRY.register("thrown_golden_egg", Supplier {
+            EntityType.Builder.of(
+                ::ThrownGoldenEggEntity,
+                MobCategory.MISC
+            )
+                .sized(0.25f, 0.25f)
+                .clientTrackingRange(4)
+                .updateInterval(10)
+                .build("thrown_golden_egg")
         })
 
 }

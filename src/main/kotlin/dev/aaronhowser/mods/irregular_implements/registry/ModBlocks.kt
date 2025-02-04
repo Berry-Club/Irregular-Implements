@@ -154,7 +154,7 @@ object ModBlocks {
 
     // Interfaces
     val PLAYER_INTERFACE: DeferredBlock<PlayerInterfaceBlock> =
-        registerBlock("player_interface") { PlayerInterfaceBlock() }   //TODO: 10/10 importance, find some way to allow this to be disabled arbitrarily. Maybe an event system? Specific KubeJS support?
+        registerBlock("player_interface") { PlayerInterfaceBlock() }
     val NOTIFICATION_INTERFACE: DeferredBlock<NotificationInterfaceBlock> =
         registerBlock("notification_interface") { NotificationInterfaceBlock() }
     val BASIC_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBasicBlock> =
