@@ -21,6 +21,10 @@ class ModLootTableProvider(
             SubProviderEntry(
                 ::ModChestLootSubprovider,
                 LootContextParamSets.CHEST
+            ),
+            SubProviderEntry(
+                ::ModMobLootSubprovider,
+                LootContextParamSets.ENTITY
             )
         )
 

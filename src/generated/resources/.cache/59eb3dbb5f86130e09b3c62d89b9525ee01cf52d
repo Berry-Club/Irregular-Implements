@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-03T05:01:38.3767129	Loot Tables
+// 1.21.1	2025-02-03T22:35:42.9712523	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -208,3 +208,4 @@ c320e3495f084cc6e0f3bf95bb80a21b6352537f data/irregular_implements/loot_table/ch
 ac940d0d2599863c9eb6b72df0f7e484d8963c1e data/irregular_implements/loot_table/chests/slime_cube_jungle_temple.json
 70d700cde64b93c64b27adca88642c2c83f5fa0c data/irregular_implements/loot_table/chests/summoning_pendulum.json
 c9e921cbdca5249adddbd965237f48b7fa13bbb4 data/irregular_implements/loot_table/chests/summoning_pendulum_stronghold.json
+2581ec8659ead38dca7d8988804feee6d2bfc15e data/irregular_implements/loot_table/entities/golden_chicken.json
