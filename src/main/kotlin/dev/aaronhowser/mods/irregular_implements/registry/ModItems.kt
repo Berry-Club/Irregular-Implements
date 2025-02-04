@@ -28,7 +28,8 @@ object ModItems {
     val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =    //TODO: Add to Ocean Monument loot
         register("bottle_of_air") { AirBottleItem() }
     val ENDER_LETTER = basic("ender_letter")
-    val GOLDEN_EGG = basic("golden_egg")
+    val GOLDEN_EGG: DeferredItem<GoldenEggItem> =
+        register("golden_egg") { GoldenEggItem() }
     val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
         register("emerald_compass") { EmeraldCompassItem() }
     val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =

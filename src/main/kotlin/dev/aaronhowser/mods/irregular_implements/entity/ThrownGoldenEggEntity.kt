@@ -5,16 +5,18 @@ import net.minecraft.core.particles.ItemParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
 import net.minecraft.world.phys.HitResult
 
-class ThrownGoldenEggEntity(
-    entityType: EntityType<ThrownGoldenEggEntity>,
-    level: Level
-) : ThrowableItemProjectile(entityType, level) {
+class ThrownGoldenEggEntity : ThrowableItemProjectile {
+
+    constructor(entityType: EntityType<ThrownGoldenEggEntity>, level: Level) : super(entityType, level)
+    constructor(level: Level, shooter: LivingEntity) : super(EntityType.EGG, shooter, level)
+    constructor(level: Level, x: Double, y: Double, z: Double) : super(EntityType.EGG, x, y, z, level)
 
     companion object {
         private val ZERO_SIZED_DIMENSIONS: EntityDimensions = EntityDimensions.fixed(0.0f, 0.0f)
