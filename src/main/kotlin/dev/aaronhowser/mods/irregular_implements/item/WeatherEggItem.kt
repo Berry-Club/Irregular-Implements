@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.StringRepresentable
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -8,12 +11,34 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-//TODO: Make it throw a projectile
-class WeatherEggItem private constructor(
-    private val weather: Weather
-) : Item(Properties()) {
+class WeatherEggItem : Item(
+    Properties()
+        .component(ModDataComponents.WEATHER, Weather.SUNNY)
+) {
 
-    enum class Weather { SUNNY, RAINY, STORMY }
+    enum class Weather(private val realName: String) : StringRepresentable {
+        SUNNY("sunny"),
+        RAINY("rainy"),
+        STORMY("stormy");
+
+        override fun getSerializedName(): String = realName
+    }
+
+    companion object {
+
+        fun fromWeather(weather: Weather): ItemStack {
+            val stack = ModItems.WEATHER_EGG.toStack()
+
+            stack.set(
+                ModDataComponents.WEATHER,
+                weather
+            )
+
+            return stack
+        }
+
+    }
+
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
@@ -27,50 +52,9 @@ class WeatherEggItem private constructor(
 
         if (currentWeather == this.weather) return InteractionResultHolder.fail(usedStack)
 
-        when (weather) {
-            Weather.SUNNY -> setSunny(level)
-            Weather.RAINY -> setRainy(level)
-            Weather.STORMY -> setStormy(level)
-        }
-
         usedStack.consume(1, player)
 
         return InteractionResultHolder.success(usedStack)
-    }
-
-    //TODO: Custom entities with fancy particles etc
-
-    companion object {
-        private fun setSunny(level: ServerLevel) {
-            level.setWeatherParameters(
-                ServerLevel.RAIN_DELAY.sample(level.random),
-                0,
-                false,
-                false
-            )
-        }
-
-        private fun setRainy(level: ServerLevel) {
-            level.setWeatherParameters(
-                0,
-                ServerLevel.RAIN_DURATION.sample(level.random),
-                true,
-                false
-            )
-        }
-
-        private fun setStormy(level: ServerLevel) {
-            level.setWeatherParameters(
-                0,
-                ServerLevel.RAIN_DURATION.sample(level.random),
-                true,
-                true
-            )
-        }
-
-        val SUNNY = WeatherEggItem(Weather.SUNNY)
-        val RAINY = WeatherEggItem(Weather.RAINY)
-        val STORMY = WeatherEggItem(Weather.STORMY)
     }
 
 }

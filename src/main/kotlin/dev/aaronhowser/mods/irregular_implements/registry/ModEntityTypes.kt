@@ -71,4 +71,16 @@ object ModEntityTypes {
                 .build("golden_chicken")
         })
 
+    val WEATHER_EGG =
+        ENTITY_TYPE_REGISTRY.register("weather_egg", Supplier {
+            EntityType.Builder.of(
+                ::ThrownWeatherEggEntity,
+                MobCategory.MISC
+            )
+                .sized(0.25f, 0.25f)
+                .clientTrackingRange(4)
+                .updateInterval(10)
+                .build("weather_egg")
+        })
+
 }

@@ -102,12 +102,8 @@ object ModItems {
         register("spectre_boots") { ModArmorItems.SPECTRE_BOOTS }
 
     // Weather Eggs
-    val WEATHER_EGG_SUNNY: DeferredItem<WeatherEggItem> =
-        register("weather_egg_sunny") { WeatherEggItem.SUNNY }
-    val WEATHER_EGG_RAINY: DeferredItem<WeatherEggItem> =
-        register("weather_egg_rainy") { WeatherEggItem.RAINY }
-    val WEATHER_EGG_STORMY: DeferredItem<WeatherEggItem> =
-        register("weather_egg_stormy") { WeatherEggItem.STORMY }
+    val WEATHER_EGG =
+        register("weather_egg") { WeatherEggItem() }
 
     // Filters
     val LOCATION_FILTER: DeferredItem<LocationFilterItem> =
