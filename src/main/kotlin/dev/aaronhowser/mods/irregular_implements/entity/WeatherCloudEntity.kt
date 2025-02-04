@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 
 class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
 
@@ -35,6 +36,34 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
         get() = this.entityData.get(AGE)
 
     var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
+
+    override fun tick() {
+        super.tick()
+
+        if (this.age >= 200) {
+            this.addDeltaMovement(Vec3(0.0, 0.001, 0.0))
+            this.deltaMovement = this.deltaMovement.scale(1.02)
+
+            if (this.position().y < this.level().maxBuildHeight) return
+
+            setWeather()
+            this.discard()
+            return
+        }
+
+
+    }
+
+    private fun setWeather() {
+        val duration = (300 + this.random.nextInt(600)) * 20
+        val level = this.level() as? ServerLevel ?: return
+
+        when (this.weather) {
+            WeatherEggItem.Weather.SUNNY -> level.setWeatherParameters(duration, 0, false, false)
+            WeatherEggItem.Weather.RAINY -> level.setWeatherParameters(0, duration, true, false)
+            WeatherEggItem.Weather.STORMY -> level.setWeatherParameters(0, duration, true, true)
+        }
+    }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(AGE, 0)
