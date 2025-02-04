@@ -32,13 +32,12 @@ class WeatherEggItem : Item(
     companion object {
         val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
 
-        fun getAngleFloat(
+        fun getWeatherFloat(
             stack: ItemStack,
             localLevel: ClientLevel?,
             holdingEntity: LivingEntity?,
             int: Int
         ): Float {
-
             val weather = stack.get(ModDataComponents.WEATHER) ?: return 0f
 
             return when (weather) {

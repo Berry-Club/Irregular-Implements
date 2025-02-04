@@ -155,6 +155,12 @@ object ClientModBusEvents {
                 SpectreChargerItem::getEnabledForPredicate
             )
         }
+
+        ItemProperties.register(
+            ModItems.WEATHER_EGG.get(),
+            WeatherEggItem.WEATHER,
+            WeatherEggItem::getWeatherFloat
+        )
     }
 
     @SubscribeEvent
