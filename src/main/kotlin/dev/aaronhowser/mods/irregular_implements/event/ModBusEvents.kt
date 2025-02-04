@@ -1,12 +1,15 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 
 @EventBusSubscriber(
@@ -42,7 +45,11 @@ object ModBusEvents {
         ) { playerInterfaceBE, direction ->
             playerInterfaceBE.getItemHandler(direction)
         }
+    }
 
+    @SubscribeEvent
+    fun entityAttributeEvent(event: EntityAttributeCreationEvent) {
+        event.put(ModEntityTypes.GOLDEN_CHICKEN.get(), GoldenChickenEntity.createAttributes())
     }
 
 }

@@ -1,13 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.entity.ArtificialEndPortalEntity
-import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
-import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
-import dev.aaronhowser.mods.irregular_implements.entity.ThrownGoldenEggEntity
+import dev.aaronhowser.mods.irregular_implements.entity.*
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
+import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
@@ -58,6 +56,19 @@ object ModEntityTypes {
                 .clientTrackingRange(4)
                 .updateInterval(10)
                 .build("thrown_golden_egg")
+        })
+
+    val GOLDEN_CHICKEN: DeferredHolder<EntityType<*>, EntityType<GoldenChickenEntity>> =
+        ENTITY_TYPE_REGISTRY.register("golden_chicken", Supplier {
+            EntityType.Builder.of(
+                ::GoldenChickenEntity,
+                MobCategory.CREATURE
+            )
+                .sized(0.4F, 0.7F)
+                .eyeHeight(0.644F)
+                .passengerAttachments(Vec3(0.0, 0.7, -0.1))
+                .clientTrackingRange(10)
+                .build("golden_chicken")
         })
 
 }
