@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.particles.ItemParticleOption
 import net.minecraft.core.particles.ParticleTypes
@@ -15,8 +16,8 @@ import net.minecraft.world.phys.HitResult
 class ThrownGoldenEggEntity : ThrowableItemProjectile {
 
     constructor(entityType: EntityType<ThrownGoldenEggEntity>, level: Level) : super(entityType, level)
-    constructor(level: Level, shooter: LivingEntity) : super(EntityType.EGG, shooter, level)
-    constructor(level: Level, x: Double, y: Double, z: Double) : super(EntityType.EGG, x, y, z, level)
+    constructor(level: Level, shooter: LivingEntity) : super(ModEntityTypes.GOLDEN_EGG.get(), shooter, level)
+    constructor(level: Level, x: Double, y: Double, z: Double) : super(ModEntityTypes.GOLDEN_EGG.get(), x, y, z, level)
 
     companion object {
         private val ZERO_SIZED_DIMENSIONS: EntityDimensions = EntityDimensions.fixed(0.0f, 0.0f)
