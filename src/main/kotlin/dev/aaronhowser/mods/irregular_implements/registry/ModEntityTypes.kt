@@ -71,7 +71,7 @@ object ModEntityTypes {
                 .build("golden_chicken")
         })
 
-    val WEATHER_EGG =
+    val WEATHER_EGG: DeferredHolder<EntityType<*>, EntityType<ThrownWeatherEggEntity>> =
         ENTITY_TYPE_REGISTRY.register("weather_egg", Supplier {
             EntityType.Builder.of(
                 ::ThrownWeatherEggEntity,

@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBui
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
+import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -60,7 +61,6 @@ class ModRecipeProvider(
         setDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("set_diaphanous_block"))
         invertedDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("invert_diaphanous_block"))
         customCraftingTable.save(recipeOutput, OtherUtil.modResource("custom_crafting_table"))
-
     }
 
     private val lubricateBoot = SpecialRecipeBuilder.special(::LubricateBootRecipe)
@@ -1063,39 +1063,6 @@ class ModRecipeProvider(
             )
         ),
         shapedRecipe(
-            ModItems.WEATHER_EGG_SUNNY,
-            2,
-            "OFO,SCS,OFO",
-            mapOf(
-                'O' to ing(Tags.Items.OBSIDIANS),
-                'F' to ing(Items.FEATHER),
-                'S' to ing(Items.SUNFLOWER),
-                'C' to ing(Items.FIRE_CHARGE),
-            )
-        ),
-        shapedRecipe(
-            ModItems.WEATHER_EGG_RAINY,
-            2,
-            "OWO,LCL,OWO",
-            mapOf(
-                'O' to ing(Tags.Items.OBSIDIANS),
-                'W' to ing(OtherUtil.getPotionStack(Potions.WATER)),
-                'L' to ing(Tags.Items.GEMS_LAPIS),
-                'C' to ing(Items.FIRE_CHARGE),
-            )
-        ),
-        shapedRecipe(
-            ModItems.WEATHER_EGG_STORMY,
-            2,
-            "OSO,LCL,OSO",
-            mapOf(
-                'O' to ing(Tags.Items.OBSIDIANS),
-                'S' to ing(Items.SUGAR),
-                'L' to ing(Tags.Items.GEMS_LAPIS),
-                'C' to ing(Items.FIRE_CHARGE),
-            )
-        ),
-        shapedRecipe(
             ModBlocks.SHOCK_ABSORBER,
             "WWW,WAW,DDD",
             mapOf(
@@ -1570,7 +1537,7 @@ class ModRecipeProvider(
     }
 
     private fun namedRecipes(recipeOutput: RecipeOutput) {
-        val spectreIngotRecipe = shapedRecipe(
+        shapedRecipe(
             ModItems.SPECTRE_INGOT,
             "L,G,E",
             mapOf(
@@ -1578,11 +1545,9 @@ class ModRecipeProvider(
                 'G' to ing(Tags.Items.INGOTS_GOLD),
                 'E' to ing(ModItems.ECTOPLASM)
             )
-        )
+        ).save(recipeOutput, OtherUtil.modResource("spectre_ingot_single"))
 
-        spectreIngotRecipe.save(recipeOutput, OtherUtil.modResource("spectre_ingot_single"))
-
-        val universalOreDiviningRod = shapedRecipe(
+        shapedRecipe(
             DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES),
             "CSD,ILE,GPR",
             mapOf(
@@ -1596,9 +1561,41 @@ class ModRecipeProvider(
                 'P' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_LAPIS)),
                 'R' to ing(DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_REDSTONE))
             )
-        )
+        ).save(recipeOutput, OtherUtil.modResource("universal_ore_divining_rod"))
 
-        universalOreDiviningRod.save(recipeOutput, OtherUtil.modResource("universal_ore_divining_rod"))
+        shapedRecipe(
+            WeatherEggItem.fromWeather(WeatherEggItem.Weather.SUNNY).copyWithCount(2),
+            "OFO,SCS,OFO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'F' to ing(Items.FEATHER),
+                'S' to ing(Items.SUNFLOWER),
+                'C' to ing(Items.FIRE_CHARGE),
+            )
+        ).save(recipeOutput, OtherUtil.modResource("weather_egg_sunny"))
+
+        shapedRecipe(
+            WeatherEggItem.fromWeather(WeatherEggItem.Weather.RAINY).copyWithCount(2),
+            "OWO,LCL,OWO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'W' to ing(OtherUtil.getPotionStack(Potions.WATER)),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'C' to ing(Items.FIRE_CHARGE),
+            )
+        ).save(recipeOutput, OtherUtil.modResource("weather_egg_rainy"))
+
+        shapedRecipe(
+            WeatherEggItem.fromWeather(WeatherEggItem.Weather.STORMY).copyWithCount(2),
+            "OSO,LCL,OSO",
+            mapOf(
+                'O' to ing(Tags.Items.OBSIDIANS),
+                'S' to ing(Items.SUGAR),
+                'L' to ing(Tags.Items.GEMS_LAPIS),
+                'C' to ing(Items.FIRE_CHARGE),
+            )
+        ).save(recipeOutput, OtherUtil.modResource("weather_egg_stormy"))
+
     }
 
     private fun imbuingRecipes(recipeOutput: RecipeOutput) {

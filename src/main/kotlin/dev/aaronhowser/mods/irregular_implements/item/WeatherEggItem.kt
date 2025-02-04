@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
+//TODO: information recipes
 class WeatherEggItem : Item(
     Properties()
         .component(ModDataComponents.WEATHER, Weather.SUNNY)
@@ -49,8 +50,6 @@ class WeatherEggItem : Item(
         } else {
             Weather.SUNNY
         }
-
-        if (currentWeather == this.weather) return InteractionResultHolder.fail(usedStack)
 
         usedStack.consume(1, player)
 

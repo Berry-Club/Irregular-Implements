@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level
 
 class ThrownWeatherEggEntity : ThrowableItemProjectile {
 
-    constructor(entityType: EntityType<ThrownGoldenEggEntity>, level: Level) : super(entityType, level)
+    constructor(entityType: EntityType<ThrownWeatherEggEntity>, level: Level) : super(entityType, level)
     constructor(level: Level, shooter: LivingEntity) : super(ModEntityTypes.WEATHER_EGG.get(), shooter, level)
     constructor(level: Level, x: Double, y: Double, z: Double) : super(ModEntityTypes.WEATHER_EGG.get(), x, y, z, level)
 

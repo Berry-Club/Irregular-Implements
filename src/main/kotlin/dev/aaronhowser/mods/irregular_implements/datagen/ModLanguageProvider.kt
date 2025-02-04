@@ -196,6 +196,10 @@ class ModLanguageProvider(
 
     object Items {
         const val CREATIVE_TAB = "itemGroup.irregular_implements"
+
+        const val WEATHER_EGG_SUNNY = "item.irregular_implements.weather_egg.sunny"
+        const val WEATHER_EGG_RAINY = "item.irregular_implements.weather_egg.rainy"
+        const val WEATHER_EGG_STORMY = "item.irregular_implements.weather_egg.stormy"
     }
 
     private fun addItems() {
@@ -235,9 +239,9 @@ class ModLanguageProvider(
         addItem(ModItems.PORTKEY, "Portkey")
         addItem(ModItems.LOTUS_SEEDS, "Lotus Seeds")
         addItem(ModItems.ESCAPE_ROPE, "Escape Rope")
-        addItem(ModItems.WEATHER_EGG_SUNNY, "Weather Egg (Sunny)")
-        addItem(ModItems.WEATHER_EGG_RAINY, "Weather Egg (Rainy)")
-        addItem(ModItems.WEATHER_EGG_STORMY, "Weather Egg (Stormy)")
+        add(Items.WEATHER_EGG_SUNNY, "Weather Egg (Sunny)")
+        add(Items.WEATHER_EGG_RAINY, "Weather Egg (Rainy)")
+        add(Items.WEATHER_EGG_STORMY, "Weather Egg (Stormy)")
         addItem(ModItems.ENDER_BUCKET, "Ender Bucket")
         addItem(ModItems.REINFORCED_ENDER_BUCKET, "Reinforced Ender Bucket")
         addItem(ModItems.CHUNK_ANALYZER, "Chunk Analyzer")
@@ -775,9 +779,6 @@ class ModLanguageProvider(
         addInfo(ModItems.DIVINING_ROD, "When held in hand, highlights the corresponding ore if it's within 20 blocks of you.\n\nThis radius can be configured.")
         addInfo(ModItems.LOTUS_SEEDS, "Can be planted to grow Lotus Blossoms.\n\nLotus plants can be found in cold biomes.")
         addInfo(ModItems.ESCAPE_ROPE, "Hold right-click to begin searching for the nearest location that can see the sky.\n\nIf it finds one, it'll teleport you there.")
-        addInfo(ModItems.WEATHER_EGG_SUNNY, "When thrown, spawns a cloud that changes the weather to clear.")
-        addInfo(ModItems.WEATHER_EGG_RAINY, "When thrown, spawns a cloud that changes the weather to rain.")
-        addInfo(ModItems.WEATHER_EGG_STORMY, "When thrown, spawns a cloud that changes the weather to a thunderstorm.")
         addInfo(ModItems.ENDER_BUCKET, "When used on a non-source fluid, it picks up the nearest source.")
         addInfo(ModItems.REINFORCED_ENDER_BUCKET, "Works like an Ender Bucket, but can hold 10 sources.\n\nIf sneaking, it will pick up as many sources as it can.")
         addInfo(ModItems.CHUNK_ANALYZER, "When used, shows you all the blocks and entities in the chunk you're in.")
