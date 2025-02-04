@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.EntityType
@@ -13,6 +14,8 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
     constructor(entityType: EntityType<ThrownWeatherEggEntity>, level: Level) : super(entityType, level)
     constructor(level: Level, shooter: LivingEntity) : super(ModEntityTypes.WEATHER_EGG.get(), shooter, level)
     constructor(level: Level, x: Double, y: Double, z: Double) : super(ModEntityTypes.WEATHER_EGG.get(), x, y, z, level)
+
+    var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
 
     private fun setSunny() {
         val level = this.level() as? ServerLevel ?: return

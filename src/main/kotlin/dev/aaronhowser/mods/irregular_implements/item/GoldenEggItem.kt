@@ -29,6 +29,7 @@ class GoldenEggItem : Item(Properties()), ProjectileItem {
             0.5f,
             0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f)
         )
+
         if (!level.isClientSide) {
             val thrownGoldenEgg = ThrownGoldenEggEntity(level, player)
             thrownGoldenEgg.item = usedStack
