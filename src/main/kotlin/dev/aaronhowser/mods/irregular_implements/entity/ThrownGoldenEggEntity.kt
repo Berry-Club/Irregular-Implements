@@ -28,7 +28,7 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
 
         if (level().isClientSide) return
 
-        if (this.random.nextInt(8) == 0) spawnGoldenChicken()
+        spawnGoldenChicken()
 
         level().broadcastEntityEvent(this, 3.toByte())
         discard()
@@ -39,7 +39,7 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
         if (this.random.nextInt(32) == 0) i = 4
 
         for (j in 0 until i) {
-            val chicken = EntityType.CHICKEN.create(level())
+            val chicken = ModEntityTypes.GOLDEN_CHICKEN.get().create(level())
             if (chicken != null) {
                 chicken.age = -24000
                 chicken.moveTo(this.x, this.y, this.z, this.yRot, 0.0f)
