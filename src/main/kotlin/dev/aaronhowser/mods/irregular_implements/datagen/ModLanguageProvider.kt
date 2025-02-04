@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
+import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.ChatFormatting
 import net.minecraft.core.registries.BuiltInRegistries
@@ -45,6 +46,15 @@ class ModLanguageProvider(
         addMessages()
         addMisc()
         addConfigs()
+        addEntityTypes()
+    }
+
+    private fun addEntityTypes() {
+        addEntityType(ModEntityTypes.SPECTRE_ILLUMINATOR, "Spectre Illuminator")
+        addEntityType(ModEntityTypes.INDICATOR_DISPLAY, "Indicator Display")
+        addEntityType(ModEntityTypes.ARTIFICIAL_END_PORTAL, "Artificial End Portal")
+        addEntityType(ModEntityTypes.GOLDEN_EGG, "Golden Egg")
+        addEntityType(ModEntityTypes.GOLDEN_CHICKEN, "Golden Chicken")
     }
 
     private fun addConfig(config: ConfigValue<*>, desc: String) {
