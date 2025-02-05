@@ -52,8 +52,8 @@ class WeatherEggItem : Item(
 
             return when (weather) {
                 Weather.SUNNY -> 0f
-                Weather.RAINY -> 0.5f
-                Weather.STORMY -> 1f
+                Weather.RAINY -> 1f
+                Weather.STORMY -> 2f
             }
         }
 
