@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.aaronhowser.mods.irregular_implements.client.render.RenderUtils
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
@@ -39,7 +40,7 @@ class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
 
         val time = (ClientUtil.localPlayer?.tickCount ?: 0) / 200f
 
-        SpectreEnergyInjectorBlockEntityRenderer.renderRays(
+        RenderUtils.renderRays(
             poseStack = poseStack,
             time = time,
             vertexConsumer = buffer.getBuffer(RenderType.dragonRays()),
