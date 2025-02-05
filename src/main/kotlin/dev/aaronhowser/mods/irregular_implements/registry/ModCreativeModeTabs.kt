@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
+import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.item.WhiteStoneItem
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.BlockItem
@@ -28,7 +29,8 @@ object ModCreativeModeTabs {
                 val itemsToSkip = setOf(
                     ModItems.BIOME_CRYSTAL.get(),
                     ModItems.WHITE_STONE.get(),
-                    ModItems.DIVINING_ROD.get()
+                    ModItems.DIVINING_ROD.get(),
+                    ModItems.WEATHER_EGG.get()
                 )
 
                 val regularItems: List<Item> = ModItems.ITEM_REGISTRY.entries.map { it.get() }
@@ -37,6 +39,10 @@ object ModCreativeModeTabs {
                 output.acceptAll(
                     (regularItems - itemsToSkip - blockItems).map { it.defaultInstance }
                 )
+
+                for (weather in WeatherEggItem.Weather.entries) {
+                    output.accept(WeatherEggItem.fromWeather(weather))
+                }
 
                 output.acceptAll(DiviningRodItem.getAllOreRods())
 
