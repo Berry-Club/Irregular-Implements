@@ -24,7 +24,7 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
     var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
 
     override fun onHit(result: HitResult) {
-        val level = this.level() as ServerLevel
+        val level = this.level() as? ServerLevel ?: return
 
         val currentWeather = if (level.isRaining) {
             if (level.isThundering) WeatherEggItem.Weather.STORMY else WeatherEggItem.Weather.RAINY
