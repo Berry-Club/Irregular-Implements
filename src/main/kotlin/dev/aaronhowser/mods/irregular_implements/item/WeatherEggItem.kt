@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -7,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.Direction
 import net.minecraft.core.Position
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -66,6 +69,14 @@ class WeatherEggItem : Item(
         }
     }
 
+    override fun getName(stack: ItemStack): Component {
+        val weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
+        return when (weather) {
+            Weather.SUNNY -> ModLanguageProvider.Items.WEATHER_EGG_SUNNY.toComponent()
+            Weather.RAINY -> ModLanguageProvider.Items.WEATHER_EGG_RAINY.toComponent()
+            Weather.STORMY -> ModLanguageProvider.Items.WEATHER_EGG_STORMY.toComponent()
+        }
+    }
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
