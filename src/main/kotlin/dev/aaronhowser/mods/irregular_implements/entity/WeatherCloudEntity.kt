@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.core.particles.DustParticleOptions
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -63,10 +64,72 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
     }
 
     private fun spawnParticles() {
+        val level = this.level()
+        if (!level.isClientSide) return
 
         if (this.weather == WeatherEggItem.Weather.SUNNY) {
             spawnNiceCloud()
             return
+        }
+
+        for (y in -1..1) {
+            var t = 0.0
+            while (t < Math.PI * 2) {
+                t += Math.PI / 5
+
+                var a = 0.25
+                var b = 0.35
+
+                a /= abs(y) * 0.5 + 1
+                b /= abs(y) * 0.5 + 1
+
+                val elX = a * cos(t)
+                val elZ = b * sin(t)
+
+                level.addParticle(
+                    ParticleTypes.SMOKE,
+                    true,
+                    this.x + elX,
+                    this.y + y.toFloat() / 8,
+                    this.z + elZ,
+                    0.0, 0.0, 0.0
+                )
+            }
+        }
+
+        val isRain = this.weather == WeatherEggItem.Weather.RAINY
+        val iterations = if (isRain) 2 else 1
+
+        for (i in 0 until iterations) {
+
+            val t = Math.PI * 2 * this.random.nextDouble()
+
+            var a = 0.25
+            var b = 0.35
+
+            a /= 1.5 + this.random.nextDouble()
+            b /= 1.5 + this.random.nextDouble()
+
+            val elX = a * cos(t)
+            val elZ = b * sin(t)
+
+            val particle = if (isRain) {
+                ParticleTypes.FISHING
+            } else {
+                val shade = (this.random.nextFloat() * 0.1 - 0.025).toInt()
+                val color = FastColor.ARGB32.color(255, shade, shade, shade)
+
+                DustParticleOptions(Vec3.fromRGB24(color).toVector3f(), 1.0F)
+            }
+
+            level.addParticle(
+                particle,
+                true,
+                this.x + elX,
+                this.y + 0.5,
+                this.z + elZ,
+                0.0, 0.0, 0.0
+            )
         }
 
     }
