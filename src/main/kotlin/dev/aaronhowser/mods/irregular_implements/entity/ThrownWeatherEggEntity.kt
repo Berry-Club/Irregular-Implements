@@ -41,6 +41,7 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
         }
 
         val weatherCloud = WeatherCloudEntity(level, this.x, this.y, this.z, this.weather)
+        weatherCloud.weather = this.weather
         level.addFreshEntity(weatherCloud)
 
         level().broadcastEntityEvent(this, 3.toByte())

@@ -31,7 +31,10 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 
     companion object {
         val AGE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
+        val WEATHER_TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
+
         const val AGE_NBT = "Age"
+        const val WEATHER_NBT = "Weather"
     }
 
     init {
@@ -42,7 +45,9 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
         private set(value) = this.entityData.set(AGE, value)
         get() = this.entityData.get(AGE)
 
-    var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
+    var weather: WeatherEggItem.Weather
+        set(value) = this.entityData.set(WEATHER_TYPE, value.ordinal)
+        get() = WeatherEggItem.Weather.entries[this.entityData.get(WEATHER_TYPE)]
 
     override fun tick() {
         super.tick()
@@ -87,7 +92,7 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
                 val elZ = b * sin(t)
 
                 level.addParticle(
-                    ParticleTypes.SMOKE,
+                    ParticleTypes.SMOKE,    //TODO: Just a colored particle instead of smoke
                     true,
                     this.x + elX,
                     this.y + y.toFloat() / 8,
@@ -182,15 +187,19 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(AGE, 0)
+        builder
+            .define(AGE, 0)
+            .define(WEATHER_TYPE, WeatherEggItem.Weather.SUNNY.ordinal)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         this.age = compound.getInt(AGE_NBT)
+        this.weather = WeatherEggItem.Weather.entries[compound.getInt(WEATHER_NBT)]
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         compound.putInt(AGE_NBT, this.age)
+        compound.putInt(WEATHER_NBT, this.weather.ordinal)
     }
 
 }
