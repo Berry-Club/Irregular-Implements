@@ -91,6 +91,7 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 
                 level.addParticle(
                     DustColorTransitionOptions.SCULK_TO_REDSTONE,
+                    true,
                     this.x + elX,
                     this.y + y.toFloat() / 8,
                     this.z + elZ,
