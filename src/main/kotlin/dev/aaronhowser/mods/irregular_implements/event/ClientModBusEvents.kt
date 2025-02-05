@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
+import net.minecraft.client.renderer.entity.NoopRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.world.item.DyeColor
@@ -206,6 +207,7 @@ object ClientModBusEvents {
         event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)
         event.registerEntityRenderer(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), ::ArtificialEndPortalRenderer)
         event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), ::GoldenChickenRenderer)
+        event.registerEntityRenderer(ModEntityTypes.WEATHER_CLOUD.get(), ::NoopRenderer)
     }
 
     @SubscribeEvent

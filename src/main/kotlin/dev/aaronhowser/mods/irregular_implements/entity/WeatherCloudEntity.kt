@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
+import net.minecraft.core.particles.DustColorTransitionOptions
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -88,8 +89,15 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
                 val elX = a * cos(t)
                 val elZ = b * sin(t)
 
-            }
+                level.addParticle(
+                    DustColorTransitionOptions.SCULK_TO_REDSTONE,
+                    this.x + elX,
+                    this.y + y.toFloat() / 8,
+                    this.z + elZ,
+                    0.0, 0.0, 0.0
+                )
 
+            }
         }
 
     }
