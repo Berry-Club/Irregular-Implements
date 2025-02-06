@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.client.render.RenderUtils
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.resources.ResourceLocation
