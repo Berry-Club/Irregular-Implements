@@ -32,7 +32,7 @@ class WeatherCloudRenderer(
     ) {
         if (spectreIlluminatorEntity.weather != WeatherEggItem.Weather.SUNNY) return
 
-        val time = (spectreIlluminatorEntity.tickCount + partialTick) / 400.0f
+        val time = (spectreIlluminatorEntity.tickCount + partialTick) / 200.0f
 
         val centerColor = 0xFFFFFF00.toInt()
         val outerColor = 0x00FF0000
@@ -41,9 +41,8 @@ class WeatherCloudRenderer(
         val rayWidth = 0.33f
 
         poseStack.pushPose()
-        poseStack.translate(0.0, 0.5, 0.0)
 
-        RenderUtils.renderRaysDoubleLayer(
+        RenderUtils.renderDragonRays(
             poseStack = poseStack,
             time = time,
             bufferSource = bufferSource,
