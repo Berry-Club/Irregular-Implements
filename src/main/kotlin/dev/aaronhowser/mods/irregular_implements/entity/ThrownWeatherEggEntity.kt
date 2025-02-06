@@ -26,19 +26,19 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
     override fun onHit(result: HitResult) {
         val level = this.level() as? ServerLevel ?: return
 
-        val currentWeather = if (level.isRaining) {
-            if (level.isThundering) WeatherEggItem.Weather.STORMY else WeatherEggItem.Weather.RAINY
-        } else {
-            WeatherEggItem.Weather.SUNNY
-        }
-
-        if (currentWeather == this.weather) {
-            val itemEntity = ItemEntity(level, this.x, this.y, this.z, this.item)
-            level.addFreshEntity(itemEntity)
-
-            this.discard()
-            return
-        }
+//        val currentWeather = if (level.isRaining) {
+//            if (level.isThundering) WeatherEggItem.Weather.STORMY else WeatherEggItem.Weather.RAINY
+//        } else {
+//            WeatherEggItem.Weather.SUNNY
+//        }
+//
+//        if (currentWeather == this.weather) {
+//            val itemEntity = ItemEntity(level, this.x, this.y, this.z, this.item)
+//            level.addFreshEntity(itemEntity)
+//
+//            this.discard()
+//            return
+//        }
 
         val weatherCloud = WeatherCloudEntity(level, this.x, this.y, this.z, this.weather)
         weatherCloud.weather = this.weather

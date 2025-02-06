@@ -35,7 +35,7 @@ class WeatherCloudRenderer(
 
         val time = (spectreIlluminatorEntity.tickCount + partialTick) / 400.0f
 
-        val centerColor = 0xFFFF0000.toInt()
+        val centerColor = 0xFFFFFF00.toInt()
         val outerColor = 0x00FF0000
 
         val rayLength = 1f
@@ -44,20 +44,10 @@ class WeatherCloudRenderer(
         poseStack.pushPose()
         poseStack.translate(0.0, 0.5, 0.0)
 
-        RenderUtils.renderRays(
+        RenderUtils.renderRaysDoubleLayer(
             poseStack = poseStack,
             time = time,
-            vertexConsumer = bufferSource.getBuffer(RenderType.dragonRays()),
-            centerColor = centerColor,
-            outerColor = outerColor,
-            rayLength = rayLength,
-            rayWidth = rayWidth
-        )
-
-        RenderUtils.renderRays(
-            poseStack = poseStack,
-            time = time,
-            vertexConsumer = bufferSource.getBuffer(RenderType.dragonRaysDepth()),
+            bufferSource = bufferSource,
             centerColor = centerColor,
             outerColor = outerColor,
             rayLength = rayLength,

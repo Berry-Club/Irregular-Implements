@@ -25,16 +25,10 @@ class SpectreEnergyInjectorBlockEntityRenderer(
         poseStack.pushPose()
         poseStack.translate(0.5f, 0.6f, 0.5f)
 
-        RenderUtils.renderRays(
+        RenderUtils.renderRaysDoubleLayer(
             poseStack = poseStack,
             time = time,
-            vertexConsumer = bufferSource.getBuffer(RenderType.dragonRays())
-        )
-
-        RenderUtils.renderRays(
-            poseStack = poseStack,
-            time = time,
-            vertexConsumer = bufferSource.getBuffer(RenderType.dragonRaysDepth())
+            bufferSource = bufferSource
         )
 
         poseStack.popPose()

@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
+import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.util.RandomSource
 import net.minecraft.world.phys.Vec3
@@ -13,6 +15,83 @@ import kotlin.math.sqrt
 object RenderUtils {
 
     private val HALF_SQRT_3: Float = (sqrt(3.0) / 2.0).toFloat()
+
+    fun renderRaysDoubleLayer(
+        poseStack: PoseStack,
+        time: Float,
+        bufferSource: MultiBufferSource,
+        centerColor: Int = 0xFF000000.toInt(),
+        outerColor: Int = 0x002C6A70,
+        amountRays: Int = 15,
+        rayLength: Float = 0.325f,
+        rayWidth: Float = 0.15f
+    ) {
+        renderDragonRays(
+            poseStack = poseStack,
+            time = time,
+            bufferSource = bufferSource,
+            centerColor = centerColor,
+            outerColor = outerColor,
+            amountRays = amountRays,
+            rayLength = rayLength,
+            rayWidth = rayWidth
+        )
+
+        renderDragonRaysDepth(
+            poseStack = poseStack,
+            time = time,
+            bufferSource = bufferSource,
+            centerColor = centerColor,
+            outerColor = outerColor,
+            amountRays = amountRays,
+            rayLength = rayLength,
+            rayWidth = rayWidth
+        )
+    }
+
+    fun renderDragonRays(
+        poseStack: PoseStack,
+        time: Float,
+        bufferSource: MultiBufferSource,
+        centerColor: Int = 0xFF000000.toInt(),
+        outerColor: Int = 0x002C6A70,
+        amountRays: Int = 15,
+        rayLength: Float = 0.325f,
+        rayWidth: Float = 0.15f
+    ) {
+        renderRays(
+            poseStack = poseStack,
+            time = time,
+            vertexConsumer = bufferSource.getBuffer(RenderType.dragonRays()),
+            centerColor = centerColor,
+            outerColor = outerColor,
+            amountRays = amountRays,
+            rayLength = rayLength,
+            rayWidth = rayWidth
+        )
+    }
+
+    fun renderDragonRaysDepth(
+        poseStack: PoseStack,
+        time: Float,
+        bufferSource: MultiBufferSource,
+        centerColor: Int = 0xFF000000.toInt(),
+        outerColor: Int = 0x002C6A70,
+        amountRays: Int = 15,
+        rayLength: Float = 0.325f,
+        rayWidth: Float = 0.15f
+    ) {
+        renderRays(
+            poseStack = poseStack,
+            time = time,
+            vertexConsumer = bufferSource.getBuffer(RenderType.dragonRaysDepth()),
+            centerColor = centerColor,
+            outerColor = outerColor,
+            amountRays = amountRays,
+            rayLength = rayLength,
+            rayWidth = rayWidth
+        )
+    }
 
     fun renderRays(
         poseStack: PoseStack,
