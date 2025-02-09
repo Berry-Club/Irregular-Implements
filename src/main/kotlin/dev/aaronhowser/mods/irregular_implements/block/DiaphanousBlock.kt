@@ -41,6 +41,8 @@ class DiaphanousBlock : Block(
             }
         }
 
+        private val SHAPE_EMPTY: VoxelShape = Shapes.empty()
+        private val SHAPE_FULL: VoxelShape = Shapes.block()
     }
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
@@ -52,7 +54,7 @@ class DiaphanousBlock : Block(
     }
 
     override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
-        return Shapes.empty()
+        return SHAPE_EMPTY
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -70,14 +72,14 @@ class DiaphanousBlock : Block(
                 || player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
 
         return if (canInteract) {
-            Shapes.block()
+            SHAPE_FULL
         } else {
-            Shapes.empty()
+            SHAPE_EMPTY
         }
     }
 
     override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return if (isUsuallySolid(state, level, pos)) Shapes.block() else Shapes.empty()
+        return if (isUsuallySolid(state, level, pos)) SHAPE_FULL else SHAPE_EMPTY
     }
 
     override fun getShadeBrightness(state: BlockState, level: BlockGetter, pos: BlockPos): Float {
