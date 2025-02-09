@@ -3,14 +3,15 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.EntityCollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -55,10 +56,9 @@ class DiaphanousBlock : Block(
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        if (level !is Level || !level.isClientSide) return Shapes.block()
-
+        if (context !is EntityCollisionContext) return Shapes.empty()
+        val player = context.entity as? Player
         val blockEntity = level.getBlockEntity(pos) as? DiaphanousBlockEntity
-        val player = ClientUtil.localPlayer
 
         if (blockEntity == null || player == null) return Shapes.block()
 
