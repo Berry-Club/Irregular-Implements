@@ -42,6 +42,7 @@ class SpectreIlluminatorEntity(
 
         private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
+        //TODO: Check if is RenderChunkRegion
         @JvmStatic
         fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
             val level: Level = when (blockAndTintGetter) {
