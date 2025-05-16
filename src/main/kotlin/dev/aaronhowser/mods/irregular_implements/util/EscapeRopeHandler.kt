@@ -34,6 +34,8 @@ object EscapeRopeHandler {
         }
     }
 
+    //TODO: Apparently block GETTING is async-safe. Maybe I should make this async so it can do multiple at once?
+
     // Reverse because it searches by most recently added position first, so it has to add them in reverse order
     private val directionPriority = arrayOf(
         Direction.UP,
