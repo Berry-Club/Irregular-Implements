@@ -28,9 +28,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
     @Shadow
     public abstract ItemStack getItemBySlot(EquipmentSlot slot);
 
-    @Unique
-    private LivingEntity irregular_implements$this = (LivingEntity) (Object) this;
-
     @Inject(
             method = "shouldDiscardFriction",
             at = @At("HEAD"),
@@ -59,7 +56,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
             constant = @Constant(doubleValue = 0.2)
     )
     private double irregular_implements$fasterOnStalk(double constant) {
-        return constant * BeanStalkBlock.climbingFactor(irregular_implements$this);
+        return constant * BeanStalkBlock.climbingFactor((LivingEntity) (Object) this);
     }
 
 }
