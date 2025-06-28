@@ -10,6 +10,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
@@ -78,24 +79,35 @@ object DiviningRodRenderer {
 		}
 	}
 
-	private var vertexBuffer: VertexBuffer? = null
-
 	@SubscribeEvent
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 
 		if (indicators.isEmpty()) return
 
-		refresh(event.poseStack)
 		render(event)
 	}
+	private fun render(event: RenderLevelStageEvent) {
+		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+		val poseStack = event.poseStack
 
-	private fun refresh(poseStack: PoseStack) {
-		vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
-		val vertexBuffer = vertexBuffer ?: return
+		RenderSystem.depthMask(false)
+		RenderSystem.enableBlend()
+		RenderSystem.defaultBlendFunc()
 
-		val tesselator = Tesselator.getInstance()
-		val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
+		poseStack.pushPose()
+
+		RenderSystem.setShader(GameRenderer::getPositionColorShader)
+		RenderSystem.applyModelViewMatrix()
+		RenderSystem.depthFunc(GL11.GL_ALWAYS)
+
+		poseStack.mulPose(event.modelViewMatrix)
+		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
+
+		val buffer = Minecraft.getInstance()
+			.renderBuffers()
+			.bufferSource()
+			.getBuffer(RenderType.debugQuads())
 
 		for (indicator in indicators) {
 			RenderUtils.renderCube(
@@ -111,42 +123,6 @@ object DiviningRodRenderer {
 			)
 		}
 
-		val build = buffer.build()
-		if (build == null) {
-			this.vertexBuffer = null
-		} else {
-			vertexBuffer.bind()
-			vertexBuffer.upload(build)
-			VertexBuffer.unbind()
-		}
-	}
-
-	private fun render(event: RenderLevelStageEvent) {
-		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
-		val poseStack = event.poseStack
-		val vertexBuffer = this.vertexBuffer ?: return
-
-		RenderSystem.depthMask(false)
-		RenderSystem.enableBlend()
-		RenderSystem.defaultBlendFunc()
-
-		poseStack.pushPose()
-
-		RenderSystem.setShader(GameRenderer::getPositionColorShader)
-		RenderSystem.applyModelViewMatrix()
-		RenderSystem.depthFunc(GL11.GL_ALWAYS)
-
-		poseStack.mulPose(event.modelViewMatrix)
-		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
-		vertexBuffer.bind()
-		vertexBuffer.drawWithShader(
-			poseStack.last().pose(),
-			event.projectionMatrix,
-			RenderSystem.getShader()!!
-		)
-
-		VertexBuffer.unbind()
 		RenderSystem.depthFunc(GL11.GL_LEQUAL)
 
 		poseStack.popPose()
