@@ -39,18 +39,13 @@ class DiaphanousBlockEntityRenderer(
 		val cosValue = cos(Mth.PI * clampedDistance / 25)
 		val baseAlpha = -0.5f * (cosValue - 1)
 
-		val alpha = if (blockEntity.isInverted) 1 - baseAlpha else baseAlpha
+		val diaphBlockAlpha = if (blockEntity.isInverted) 1 - baseAlpha else baseAlpha
 
 		poseStack.pushPose()
 
 		val stateToRender = blockEntity.renderedBlockState
 		val model = context.blockRenderDispatcher.getBlockModel(stateToRender)
 		val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
-
-		val color = Minecraft.getInstance().blockColors.getColor(stateToRender, level, blockEntity.blockPos, 1)
-		val red = ((color shr 16) and 0xFF) / 255f
-		val green = ((color shr 8) and 0xFF) / 255f
-		val blue = (color and 0xFF) / 255f
 
 		for (direction in Direction.entries) {
 			val posThere = blockEntity.blockPos.relative(direction)
@@ -72,10 +67,26 @@ class DiaphanousBlockEntityRenderer(
 			)
 
 			for (quad in quads) {
+
+				val tintIndex = quad.tintIndex
+
+				val color = if (tintIndex == -1) {
+					0xFFFFFFFF.toInt()
+				} else {
+					Minecraft.getInstance().blockColors.getColor(
+						stateToRender, level, blockEntity.blockPos, quad.tintIndex
+					)
+				}
+
+				val red = ((color shr 16) and 0xFF) / 255f
+				val green = ((color shr 8) and 0xFF) / 255f
+				val blue = (color and 0xFF) / 255f
+				val colorAlpha = ((color shr 24) and 0xFF) / 255f
+
 				vertexConsumer.putBulkData(
 					poseStack.last(),
 					quad,
-					red, green, blue, alpha,
+					red, green, blue, diaphBlockAlpha * colorAlpha,
 					packedLight, packedOverlay,
 					true
 				)
