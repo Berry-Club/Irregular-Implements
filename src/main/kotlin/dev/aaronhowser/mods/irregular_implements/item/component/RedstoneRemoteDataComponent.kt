@@ -13,6 +13,11 @@ data class RedstoneRemoteDataComponent(
 	val displayStacks: NonNullList<ItemStack>
 ) {
 
+	constructor(map: Map<ItemStack, ItemStack>) : this(
+		locationFilters = sanitizeList(map.keys.toList()),
+		displayStacks = sanitizeList(map.values.toList())
+	)
+
 	fun getPair(index: Int): Pair<ItemStack, ItemStack> {
 		val locationFilter = locationFilters.getOrNull(index) ?: ItemStack.EMPTY
 		val displayStack = displayStacks.getOrNull(index) ?: ItemStack.EMPTY
@@ -22,11 +27,11 @@ data class RedstoneRemoteDataComponent(
 
 	companion object {
 
-		fun sanitizeList(entries: List<ItemStack>): NonNullList<ItemStack> {
+		fun sanitizeList(list: List<ItemStack>): NonNullList<ItemStack> {
 			val sanitizedEntries = NonNullList.withSize(9, ItemStack.EMPTY)
 
 			for (index in 0 until 9) {
-				val entry = entries.getOrNull(index) ?: continue
+				val entry = list.getOrNull(index) ?: continue
 				sanitizedEntries[index] = entry
 			}
 
