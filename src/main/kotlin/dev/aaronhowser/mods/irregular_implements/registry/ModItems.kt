@@ -15,37 +15,37 @@ object ModItems {
 		DeferredRegister.createItems(IrregularImplements.ID)
 
 	val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
-		register("stable_ender_pearl") { StableEnderPearlItem() }
+		register("stable_ender_pearl", ::StableEnderPearlItem, StableEnderPearlItem.DEFAULT_PROPERTIES)
 	val EVIL_TEAR: DeferredItem<EvilTearItem> =
-		register("evil_tear") { EvilTearItem() }
+		register("evil_tear", ::EvilTearItem)
 	val PORTKEY: DeferredItem<PortkeyItem> =
-		register("portkey") { PortkeyItem() }
+		register("portkey", ::PortkeyItem, PortkeyItem.DEFAULT_PROPERTIES)
 	val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
-		register("biome_crystal") { BiomeCrystalItem() }
+		register("biome_crystal", ::BiomeCrystalItem, BiomeCrystalItem.DEFAULT_PROPERTIES)
 	val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
-		register("summoning_pendulum") { SummoningPendulumItem() }
+		register("summoning_pendulum", ::SummoningPendulumItem, SummoningPendulumItem.DEFAULT_PROPERTIES)
 	val LOOT_GENERATOR = basic("loot_generator")
 	val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =    //TODO: Add to Ocean Monument loot
-		register("bottle_of_air") { AirBottleItem() }
+		register("bottle_of_air", ::AirBottleItem, AirBottleItem.DEFAULT_PROPERTIES)
 	val ENDER_LETTER = basic("ender_letter")
 	val GOLDEN_EGG: DeferredItem<GoldenEggItem> =
-		register("golden_egg") { GoldenEggItem() }
+		register("golden_egg", ::GoldenEggItem)
 	val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
-		register("emerald_compass") { EmeraldCompassItem() }
+		register("emerald_compass", ::EmeraldCompassItem, EmeraldCompassItem.DEFAULT_PROPERTIES)
 	val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
-		register("blaze_and_steel") { BlazeAndSteelItem() }
+		register("blaze_and_steel", ::BlazeAndSteelItem, BlazeAndSteelItem.DEFAULT_PROPERTIES)
 	val ESCAPE_ROPE: DeferredItem<EscapeRopeItem> =
-		register("escape_rope") { EscapeRopeItem() }
+		register("escape_rope", ::EscapeRopeItem, EscapeRopeItem.DEFAULT_PROPERTIES)
 	val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
-		register("chunk_analyzer") { ChunkAnalyzerItem() }
+		register("chunk_analyzer", ::ChunkAnalyzerItem, ChunkAnalyzerItem.DEFAULT_PROPERTIES)
 	val LAVA_CHARM: DeferredItem<LavaCharmItem> =
-		register("lava_charm") { LavaCharmItem() } //TODO: Advancement joking about the ui bar
+		register("lava_charm", ::LavaCharmItem, LavaCharmItem.DEFAULT_PROPERTIES) //TODO: Advancement joking about the ui bar
 	val OBSIDIAN_SKULL: DeferredItem<Item> =
 		basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
 	val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
 		basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
 	val DIVINING_ROD: DeferredItem<DiviningRodItem> =
-		register("divining_rod") { DiviningRodItem() }
+		register("divining_rod", ::DiviningRodItem, DiviningRodItem.DEFAULT_PROPERTIES)
 
 	// Block items
 	val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
@@ -54,15 +54,15 @@ object ModItems {
 		register("custom_crafting_table") { CustomCraftingTableBlockItem() }
 
 	// Ingredients
-	val TRANSFORMATION_CORE = basic("transformation_core")
-	val OBSIDIAN_ROD = basic("obsidian_rod")
-	val BIOME_SENSOR = basic("biome_sensor")
-	val PLATE_BASE = basic("plate_base")
-	val ECTOPLASM = basic("ectoplasm")
-	val SUPER_LUBRICANT_TINCTURE = basic("super_lubricant_tincture")
-	val SPECTRE_INGOT = basic("spectre_ingot")
-	val SPECTRE_STRING = basic("spectre_string")
-	val LUMINOUS_POWDER = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
+	val TRANSFORMATION_CORE: DeferredItem<Item> = basic("transformation_core")
+	val OBSIDIAN_ROD: DeferredItem<Item> = basic("obsidian_rod")
+	val BIOME_SENSOR: DeferredItem<Item> = basic("biome_sensor")
+	val PLATE_BASE: DeferredItem<Item> = basic("plate_base")
+	val ECTOPLASM: DeferredItem<Item> = basic("ectoplasm")
+	val SUPER_LUBRICANT_TINCTURE: DeferredItem<Item> = basic("super_lubricant_tincture")
+	val SPECTRE_INGOT: DeferredItem<Item> = basic("spectre_ingot")
+	val SPECTRE_STRING: DeferredItem<Item> = basic("spectre_string")
+	val LUMINOUS_POWDER: DeferredItem<Item> = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
 
 	// Bucket
 	val ENDER_BUCKET: DeferredItem<EnderBucketItem> =
@@ -253,8 +253,12 @@ object ModItems {
 		return ITEM_REGISTRY.registerSimpleItem(id, Item.Properties().stacksTo(maxStackSize))
 	}
 
-	private fun <T : Item> register(id: String, itemBuilder: (Item.Properties) -> T): DeferredItem<T> {
-		return ITEM_REGISTRY.registerItem(id, itemBuilder)
+	private fun <I : Item> register(
+		id: String,
+		builder: (Item.Properties) -> I,
+		properties: Item.Properties = Item.Properties()
+	): DeferredItem<I> {
+		return ITEM_REGISTRY.registerItem(id) { builder(properties) }
 	}
 
 }

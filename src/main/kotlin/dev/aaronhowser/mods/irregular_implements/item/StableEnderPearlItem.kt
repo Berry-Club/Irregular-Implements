@@ -13,10 +13,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
 
-class StableEnderPearlItem : Item(
-	Properties()
-		.stacksTo(16)
-) {
+class StableEnderPearlItem(properties: Properties) : Item(properties) {
 
 	override fun use(
 		level: Level,
@@ -62,6 +59,10 @@ class StableEnderPearlItem : Item(
 
 		entity.discard()
 		return true
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(16)
 	}
 
 }

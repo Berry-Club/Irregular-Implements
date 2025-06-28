@@ -12,10 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 
-class EscapeRopeItem : Item(
-	Properties()
-		.durability(20)
-) {
+class EscapeRopeItem(properties: Properties) : Item(properties) {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		val usedStack = player.getItemInHand(usedHand)
@@ -42,6 +39,10 @@ class EscapeRopeItem : Item(
 		if (localPlayer.level().canSeeSky(localPlayer.blockPosition())) return false
 
 		return localPlayer.useItem == stack
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().durability(20)
 	}
 
 }

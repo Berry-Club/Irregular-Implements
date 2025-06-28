@@ -13,10 +13,7 @@ import org.apache.commons.lang3.mutable.MutableInt
 import java.util.*
 
 //TODO: Either add entity support, or remove it from the info and book pages
-class ChunkAnalyzerItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class ChunkAnalyzerItem(properties: Properties) : Item(properties) {
 
 	//TODO GUI
 
@@ -63,6 +60,10 @@ class ChunkAnalyzerItem : Item(
 		}
 
 		return InteractionResultHolder.success(usedStack)
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

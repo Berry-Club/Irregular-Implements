@@ -17,10 +17,7 @@ import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
 //TODO: Ability to hide it as other items
-class PortkeyItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class PortkeyItem(properties: Properties) : Item(properties) {
 
 	// ModDataComponents.ENABLED means that picking up the portkey will teleport the player to the location
 
@@ -82,6 +79,9 @@ class PortkeyItem : Item(
 	}
 
 	companion object {
+
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
 		fun pickUpPortkey(event: ItemEntityPickupEvent.Pre) {
 			if (event.canPickup().isFalse) return
 

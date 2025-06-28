@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ProjectileItem
 import net.minecraft.world.level.Level
 
-class GoldenEggItem : Item(Properties()), ProjectileItem {
+class GoldenEggItem(properties: Properties) : Item(properties), ProjectileItem {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		val usedStack = player.getItemInHand(usedHand)

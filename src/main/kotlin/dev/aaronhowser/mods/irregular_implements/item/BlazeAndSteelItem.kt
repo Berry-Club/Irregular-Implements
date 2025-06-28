@@ -15,10 +15,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.gameevent.GameEvent
 import net.neoforged.neoforge.common.ItemAbilities
 
-class BlazeAndSteelItem : FlintAndSteelItem(
-	Properties()
-		.durability(64)
-) {
+class BlazeAndSteelItem(properties: Properties) : FlintAndSteelItem(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val originalState = context.level.getBlockState(context.clickedPos)
@@ -88,4 +85,7 @@ class BlazeAndSteelItem : FlintAndSteelItem(
 		return InteractionResult.sidedSuccess(level.isClientSide())
 	}
 
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().durability(64)
+	}
 }

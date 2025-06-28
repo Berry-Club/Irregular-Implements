@@ -17,14 +17,7 @@ import top.theillusivec4.curios.api.CuriosApi
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.type.capability.ICurioItem
 
-class LavaCharmItem : Item(
-	Properties()
-		.stacksTo(1)
-		.rarity(Rarity.RARE)
-		.fireResistant()
-		.component(ModDataComponents.COOLDOWN, 0)
-		.component(ModDataComponents.CHARGE, MAX_CHARGE)
-), ICurioItem {
+class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 
 	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
 		charge(stack)
@@ -37,6 +30,14 @@ class LavaCharmItem : Item(
 	companion object {
 		const val MAX_CHARGE = 200
 		const val MAX_COOLDOWN = 40
+
+		val DEFAULT_PROPERTIES: Properties =
+			Properties()
+				.stacksTo(1)
+				.rarity(Rarity.RARE)
+				.fireResistant()
+				.component(ModDataComponents.COOLDOWN, 0)
+				.component(ModDataComponents.CHARGE, MAX_CHARGE)
 
 		fun charge(stack: ItemStack) {
 			val charge = stack.get(ModDataComponents.CHARGE) ?: 0

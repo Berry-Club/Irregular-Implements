@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import kotlin.math.atan2
 
-class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
+class EmeraldCompassItem(properties: Properties) : Item(properties) {
 
 	//TODO: Crafting recipe with ID Card
 	override fun interactLivingEntity(
@@ -41,6 +41,8 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES = Properties().stacksTo(1)
+
 		val ANGLE: ResourceLocation = OtherUtil.modResource("angle")
 
 		private const val DEFAULT = 0.52f

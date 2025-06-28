@@ -19,10 +19,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.common.Tags
 import kotlin.jvm.optionals.getOrNull
 
-class DiviningRodItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class DiviningRodItem(properties: Properties) : Item(properties) {
 
 	override fun appendHoverText(
 		stack: ItemStack,
@@ -42,6 +39,8 @@ class DiviningRodItem : Item(
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
 		fun getRodForItemTag(itemTag: TagKey<Item>): ItemStack {
 			val blockTag = TagKey.create(Registries.BLOCK, itemTag.location)
 			return getRodForBlockTag(blockTag)

@@ -8,10 +8,7 @@ import net.minecraft.world.item.*
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
-class AirBottleItem : Item(
-	Properties()
-		.stacksTo(16)
-) {
+class AirBottleItem(properties: Properties) : Item(properties) {
 
 	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 32
 	override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.DRINK
@@ -41,6 +38,10 @@ class AirBottleItem : Item(
 		}
 
 		return stack
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(16)
 	}
 
 }

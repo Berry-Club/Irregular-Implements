@@ -20,10 +20,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.item.context.UseOnContext
 
-class SummoningPendulumItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class SummoningPendulumItem(properties: Properties) : Item(properties) {
 
 	//FIXME: I should probably add a way to avoid NBT overflow or something
 	override fun interactLivingEntity(
@@ -137,6 +134,10 @@ class SummoningPendulumItem : Item(
 			}
 		}
 
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

@@ -15,10 +15,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.GrassColor
 import net.minecraft.world.level.biome.Biome
 
-class BiomeCrystalItem : Item(
-	Properties()
-		.rarity(Rarity.UNCOMMON)
-) {
+class BiomeCrystalItem(properties: Properties) : Item(properties) {
 
 	override fun appendHoverText(
 		stack: ItemStack,
@@ -34,6 +31,9 @@ class BiomeCrystalItem : Item(
 	}
 
 	companion object {
+
+		val DEFAULT_PROPERTIES: Properties = 	Properties().rarity(Rarity.UNCOMMON)
+
 		fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
 			return registries
 				.lookupOrThrow(Registries.BIOME)
