@@ -31,8 +31,9 @@ import net.neoforged.neoforge.registries.DeferredItem
 
 // TODO: Remove info page, world interaction page makes it redundant
 class GrassSeedItem(
-	val dyeColor: DyeColor?
-) : Item(Properties()) {
+	val dyeColor: DyeColor?,
+	properties: Properties
+) : Item(properties) {
 
 	val resultBlock: Block by lazy {
 		if (this.dyeColor == null) Blocks.GRASS_BLOCK else ModBlocks.getColoredGrass(dyeColor).get()

@@ -234,39 +234,39 @@ object ModItems {
 
 	// Colors
 	val GRASS_SEEDS: DeferredItem<GrassSeedItem> =
-		register("grass_seeds") { GrassSeedItem(dyeColor = null) }
+		grassSeed("grass_seeds", color = null)
 	val GRASS_SEEDS_WHITE: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_white") { GrassSeedItem(dyeColor = DyeColor.WHITE) }
+		grassSeed("grass_seeds_white", color = DyeColor.WHITE)
 	val GRASS_SEEDS_ORANGE: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_orange") { GrassSeedItem(dyeColor = DyeColor.ORANGE) }
+		grassSeed("grass_seeds_orange", color = DyeColor.ORANGE)
 	val GRASS_SEEDS_MAGENTA: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_magenta") { GrassSeedItem(dyeColor = DyeColor.MAGENTA) }
+		grassSeed("grass_seeds_magenta", color = DyeColor.MAGENTA)
 	val GRASS_SEEDS_LIGHT_BLUE: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_light_blue") { GrassSeedItem(dyeColor = DyeColor.LIGHT_BLUE) }
+		grassSeed("grass_seeds_light_blue", color = DyeColor.LIGHT_BLUE)
 	val GRASS_SEEDS_YELLOW: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_yellow") { GrassSeedItem(dyeColor = DyeColor.YELLOW) }
+		grassSeed("grass_seeds_yellow", color = DyeColor.YELLOW)
 	val GRASS_SEEDS_LIME: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_lime") { GrassSeedItem(dyeColor = DyeColor.LIME) }
+		grassSeed("grass_seeds_lime", color = DyeColor.LIME)
 	val GRASS_SEEDS_PINK: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_pink") { GrassSeedItem(dyeColor = DyeColor.PINK) }
+		grassSeed("grass_seeds_pink", color = DyeColor.PINK)
 	val GRASS_SEEDS_GRAY: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_gray") { GrassSeedItem(dyeColor = DyeColor.GRAY) }
+		grassSeed("grass_seeds_gray", color = DyeColor.GRAY)
 	val GRASS_SEEDS_LIGHT_GRAY: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_light_gray") { GrassSeedItem(dyeColor = DyeColor.LIGHT_GRAY) }
+		grassSeed("grass_seeds_light_gray", color = DyeColor.LIGHT_GRAY)
 	val GRASS_SEEDS_CYAN: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_cyan") { GrassSeedItem(dyeColor = DyeColor.CYAN) }
+		grassSeed("grass_seeds_cyan", color = DyeColor.CYAN)
 	val GRASS_SEEDS_PURPLE: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_purple") { GrassSeedItem(dyeColor = DyeColor.PURPLE) }
+		grassSeed("grass_seeds_purple", color = DyeColor.PURPLE)
 	val GRASS_SEEDS_BLUE: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_blue") { GrassSeedItem(dyeColor = DyeColor.BLUE) }
+		grassSeed("grass_seeds_blue", color = DyeColor.BLUE)
 	val GRASS_SEEDS_BROWN: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_brown") { GrassSeedItem(dyeColor = DyeColor.BROWN) }
+		grassSeed("grass_seeds_brown", color = DyeColor.BROWN)
 	val GRASS_SEEDS_GREEN: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_green") { GrassSeedItem(dyeColor = DyeColor.GREEN) }
+		grassSeed("grass_seeds_green", color = DyeColor.GREEN)
 	val GRASS_SEEDS_RED: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_red") { GrassSeedItem(dyeColor = DyeColor.RED) }
+		grassSeed("grass_seeds_red", color = DyeColor.RED)
 	val GRASS_SEEDS_BLACK: DeferredItem<GrassSeedItem> =
-		register("grass_seeds_black") { GrassSeedItem(dyeColor = DyeColor.BLACK) }
+		grassSeed("grass_seeds_black", color = DyeColor.BLACK)
 
 	// Removed items:
 	// - Time in a Bottle (Use the standalone one!)
@@ -314,6 +314,14 @@ object ModItems {
 		properties: Item.Properties = SpectreChargerItem.DEFAULT_PROPERTIES
 	): DeferredItem<SpectreChargerItem> {
 		return ITEM_REGISTRY.registerItem(id) { SpectreChargerItem(type, properties) }
+	}
+
+	private fun grassSeed(
+		id: String,
+		color: DyeColor?,
+		properties: Item.Properties = Item.Properties()
+	): DeferredItem<GrassSeedItem> {
+		return ITEM_REGISTRY.registerItem(id) { GrassSeedItem(color, properties) }
 	}
 
 }
