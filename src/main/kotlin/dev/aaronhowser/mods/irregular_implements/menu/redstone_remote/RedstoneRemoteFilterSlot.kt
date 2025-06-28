@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.HolderLookup
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.NonInteractiveResultSlot
@@ -21,10 +22,32 @@ class RedstoneRemoteFilterSlot(
 	val filterInThisSlot: ItemStack?
 		get() = stackComponent?.getPair(this.index)?.first
 
-	override fun getItem(): ItemStack {
-		return filterInThisSlot ?: ItemStack.EMPTY
+	override fun mayPlace(stack: ItemStack): Boolean {
+		if (filterInThisSlot != null) return false
+
+		return stack.`is`(ModItems.ITEM_FILTER) && stack.has(ModDataComponents.LOCATION)
 	}
 
+	override fun safeInsert(stack: ItemStack): ItemStack {
+		if (stack.isEmpty) return stack
+		if (filterInThisSlot != null) return stack
+
+		val oldComponent = stackComponent ?: return stack
+
+		val locations = oldComponent.locationFilters
+		locations[this.index] = stack
+
+		val newComponent = RedstoneRemoteDataComponent(
+			locationFilters = locations,
+			displayStacks = oldComponent.displayStacks,
+		)
+
+		redstoneRemoteStack.get().set(ModDataComponents.REDSTONE_REMOTE, newComponent)
+
+		return ItemStack.EMPTY
+	}
+
+	override fun getItem(): ItemStack = filterInThisSlot ?: ItemStack.EMPTY
 	override fun remove(amount: Int): ItemStack = ItemStack.EMPTY
 	override fun set(stack: ItemStack) {}
 	override fun isHighlightable(): Boolean = true
