@@ -16,10 +16,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
-class LocationFilterItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class LocationFilterItem(properties: Properties) : Item(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val usedStack = context.itemInHand
@@ -56,6 +53,10 @@ class LocationFilterItem : Item(
 
 			tooltipComponents.add(component)
 		}
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

@@ -26,10 +26,7 @@ import net.minecraft.world.item.ProjectileItem
 import net.minecraft.world.level.Level
 
 //TODO: information recipes
-class WeatherEggItem : Item(
-	Properties()
-		.component(ModDataComponents.WEATHER, Weather.SUNNY)
-), ProjectileItem {
+class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem {
 
 	enum class Weather(private val realName: String) : StringRepresentable {
 		SUNNY("sunny"),
@@ -85,6 +82,8 @@ class WeatherEggItem : Item(
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().component(ModDataComponents.WEATHER, Weather.SUNNY)
+
 		val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
 
 		fun getWeatherFloat(

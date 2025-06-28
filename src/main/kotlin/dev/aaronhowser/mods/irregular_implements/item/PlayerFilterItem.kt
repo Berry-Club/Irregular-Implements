@@ -15,10 +15,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class PlayerFilterItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class PlayerFilterItem(properties: Properties) : Item(properties) {
 
 	override fun interactLivingEntity(
 		stack: ItemStack,
@@ -61,6 +58,8 @@ class PlayerFilterItem : Item(
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
 		fun setPlayer(stack: ItemStack, player: Player) {
 			stack.set(
 				ModDataComponents.PLAYER.get(),

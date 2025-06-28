@@ -24,11 +24,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.Unbreakable
 import net.minecraft.world.level.Level
 
-class ItemFilterItem : Item(
-	Properties()
-		.stacksTo(1)
-		.component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
-), MenuProvider {
+class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		player.openMenu(this)
@@ -71,6 +67,12 @@ class ItemFilterItem : Item(
 
 
 	companion object {
+
+		val DEFAULT_PROPERTIES: Properties =
+			Properties()
+				.stacksTo(1)
+				.component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
+
 		fun setTestingFilter(stack: ItemStack) {
 			val planksFilter = FilterEntry.Tag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
 			val stickFilter = FilterEntry.Item(Items.STICK.defaultInstance, requireSameComponents = false)

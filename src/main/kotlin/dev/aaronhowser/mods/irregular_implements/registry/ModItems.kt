@@ -135,18 +135,18 @@ object ModItems {
 		)
 
 	// Weather Eggs
-	val WEATHER_EGG =
-		register("weather_egg") { WeatherEggItem() }
+	val WEATHER_EGG: DeferredItem<WeatherEggItem> =
+		register("weather_egg", ::WeatherEggItem, WeatherEggItem.DEFAULT_PROPERTIES)
 
 	// Filters
 	val LOCATION_FILTER: DeferredItem<LocationFilterItem> =
-		register("location_filter") { LocationFilterItem() }
+		register("location_filter", ::LocationFilterItem, LocationFilterItem.DEFAULT_PROPERTIES)
 	val ITEM_FILTER: DeferredItem<ItemFilterItem> =
-		register("item_filter") { ItemFilterItem() }
+		register("item_filter", ::ItemFilterItem, ItemFilterItem.DEFAULT_PROPERTIES)
 	val ENTITY_FILTER: DeferredItem<EntityFilterItem> =
-		register("entity_filter") { EntityFilterItem() }
+		register("entity_filter", ::EntityFilterItem, EntityFilterItem.DEFAULT_PROPERTIES)
 	val ID_CARD: DeferredItem<PlayerFilterItem> =   //TODO: Rename to Player Filter?
-		register("id_card") { PlayerFilterItem() }
+		register("id_card", ::PlayerFilterItem, PlayerFilterItem.DEFAULT_PROPERTIES)
 
 	// Imbues
 	val FIRE_IMBUE: DeferredItem<ImbueItem> =

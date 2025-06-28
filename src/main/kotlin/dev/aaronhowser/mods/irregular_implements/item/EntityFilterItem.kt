@@ -14,10 +14,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class EntityFilterItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class EntityFilterItem(properties: Properties) : Item(properties) {
 
 	override fun interactLivingEntity(
 		stack: ItemStack,
@@ -45,6 +42,10 @@ class EntityFilterItem : Item(
 
 			tooltipComponents.add(component)
 		}
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }
