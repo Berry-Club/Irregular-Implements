@@ -10,10 +10,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
-class BiomeCapsuleItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 
 	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
 		val onBlockPos = entity.blockPosBelowThatAffectsMyMovement
@@ -46,6 +43,8 @@ class BiomeCapsuleItem : Item(
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
 			val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
 

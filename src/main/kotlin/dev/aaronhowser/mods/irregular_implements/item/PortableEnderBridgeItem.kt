@@ -10,10 +10,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-class PortableEnderBridgeItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 
 	//TODO: Sounds, particles
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
@@ -35,6 +32,10 @@ class PortableEnderBridgeItem : Item(
 		player.teleportTo(pos.x + 0.5, pos.y + 1.0, pos.z + 0.5)
 
 		return InteractionResultHolder.success(usedStack)
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

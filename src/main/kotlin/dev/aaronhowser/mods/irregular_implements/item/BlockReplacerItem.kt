@@ -25,10 +25,7 @@ import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
 
 //FIXME: Outdated info page
-class BlockReplacerItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class BlockReplacerItem(properties: Properties) : Item(properties) {
 
 	// TODO: Cooldown based on how the mining time of the block? Or maybe based on the difference in mining time between the block placed and the block broken?
 	// TODO: Maybe add a mining level? Maybe like it uses the highest tier tool stored or something
@@ -243,6 +240,10 @@ class BlockReplacerItem : Item(
 				tooltipComponents.add(component)
 			}
 		}
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

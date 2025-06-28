@@ -22,10 +22,7 @@ import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 
-class BlockMoverItem : Item(
-	Properties()
-		.durability(99)
-) {
+class BlockMoverItem(properties: Properties) : Item(properties) {
 
 	// TODO: Cooldown based on how the mining time of the block?
 	override fun onItemUseFirst(stack: ItemStack, context: UseOnContext): InteractionResult {
@@ -67,6 +64,10 @@ class BlockMoverItem : Item(
 	}
 
 	companion object {
+
+		val DEFAULT_PROPERTIES: Properties = Properties().durability(99)
+
+		// This changes multiple times per tick, so it's treated as a field
 		private var blockMoverPreventingContainerDrops = false
 
 		fun handleEntityJoinLevel(event: EntityJoinLevelEvent) {

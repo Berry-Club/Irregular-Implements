@@ -20,10 +20,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.level.Level
 
-class VoidStoneItem : Item(
-	Properties()
-		.stacksTo(1)
-), MenuProvider {
+class VoidStoneItem(properties: Properties) : Item(properties), MenuProvider {
 
 	override fun overrideOtherStackedOnMe(
 		thisStack: ItemStack,
@@ -69,6 +66,10 @@ class VoidStoneItem : Item(
 
 	override fun getDisplayName(): Component {
 		return this.descriptionId.toComponent()
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

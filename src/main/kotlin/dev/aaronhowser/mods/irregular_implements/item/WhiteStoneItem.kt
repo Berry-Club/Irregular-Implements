@@ -22,12 +22,7 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import java.awt.Color
 
-class WhiteStoneItem : Item(
-	Properties()
-		.rarity(Rarity.UNCOMMON)
-		.stacksTo(1)
-		.component(ModDataComponents.CHARGE, 0)
-) {
+class WhiteStoneItem(properties: Properties) : Item(properties) {
 
 	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
 		if (level !is ServerLevel
@@ -100,6 +95,12 @@ class WhiteStoneItem : Item(
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties =
+			Properties()
+				.rarity(Rarity.UNCOMMON)
+				.stacksTo(1)
+				.component(ModDataComponents.CHARGE, 0)
+
 		const val MAX_CHARGE = 20 * 100
 
 		fun isChargedWhiteStone(itemStack: ItemStack): Boolean {

@@ -8,10 +8,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
 
-class BiomePainterItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class BiomePainterItem(properties: Properties) : Item(properties) {
 
 	//FIXME: Somehow making some blockpos immune to biome change??? maybe???
 	override fun useOn(context: UseOnContext): InteractionResult {
@@ -62,4 +59,9 @@ class BiomePainterItem : Item(
 
 		return InteractionResult.SUCCESS
 	}
+
+	companion object {
+		val DEFAULT_PROPERTIES = Properties().stacksTo(1)
+	}
+
 }

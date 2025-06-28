@@ -22,11 +22,7 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
-class DropFilterItem : Item(
-	Properties()
-		.stacksTo(1)
-		.component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
-), MenuProvider {
+class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		player.openMenu(this)
@@ -64,6 +60,12 @@ class DropFilterItem : Item(
 	}
 
 	companion object {
+
+		val DEFAULT_PROPERTIES: Properties =
+			Properties()
+				.stacksTo(1)
+				.component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+
 		fun stackIsDropFilter(stack: ItemStack): Boolean {
 			return stack.`is`(ModItems.DROP_FILTER) || stack.`is`(ModItems.VOIDING_DROP_FILTER)
 		}

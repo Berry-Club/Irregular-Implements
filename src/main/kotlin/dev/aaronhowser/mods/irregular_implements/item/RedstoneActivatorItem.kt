@@ -20,11 +20,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
-class RedstoneActivatorItem : Item(
-	Properties()
-		.stacksTo(1)
-		.component(ModDataComponents.DURATION, 20)
-) {
+class RedstoneActivatorItem(properties: Properties) : Item(properties) {
 
 	override fun use(
 		level: Level,
@@ -75,6 +71,11 @@ class RedstoneActivatorItem : Item(
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties =
+			Properties()
+				.stacksTo(1)
+				.component(ModDataComponents.DURATION, 20)
+
 		val DURATION = OtherUtil.modResource("duration")
 
 		const val SHORT = 2

@@ -191,9 +191,9 @@ object ModItems {
 
 	// Redstone
 	val REDSTONE_TOOL: DeferredItem<RedstoneToolItem> =
-		register("redstone_tool") { RedstoneToolItem() }
+		register("redstone_tool", ::RedstoneToolItem, RedstoneToolItem.DEFAULT_PROPERTIES)
 	val REDSTONE_ACTIVATOR: DeferredItem<RedstoneActivatorItem> =
-		register("redstone_activator") { RedstoneActivatorItem() }
+		register("redstone_activator", ::RedstoneActivatorItem, RedstoneActivatorItem.DEFAULT_PROPERTIES)
 	val REDSTONE_REMOTE = basic("redstone_remote")
 
 	// Floo
@@ -209,28 +209,28 @@ object ModItems {
 
 	// Not above 1.7
 	val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
-		register("biome_capsule") { BiomeCapsuleItem() }
+		register("biome_capsule", ::BiomeCapsuleItem, BiomeCapsuleItem.DEFAULT_PROPERTIES)
 	val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
-		register("biome_painter") { BiomePainterItem() }
+		register("biome_painter", ::BiomePainterItem, BiomePainterItem.DEFAULT_PROPERTIES)
 	val DROP_FILTER: DeferredItem<DropFilterItem> =
-		register("drop_filter") { DropFilterItem() }
+		register("drop_filter", ::DropFilterItem, DropFilterItem.DEFAULT_PROPERTIES)
 	val VOIDING_DROP_FILTER: DeferredItem<DropFilterItem> =
-		register("voiding_drop_filter") { DropFilterItem() }
+		register("voiding_drop_filter", ::DropFilterItem, DropFilterItem.DEFAULT_PROPERTIES)
 	val VOID_STONE: DeferredItem<VoidStoneItem> =
-		register("void_stone") { VoidStoneItem() }
+		register("void_stone", ::VoidStoneItem, VoidStoneItem.DEFAULT_PROPERTIES)
 	val WHITE_STONE: DeferredItem<WhiteStoneItem> =
-		register("white_stone") { WhiteStoneItem() }
+		register("white_stone", ::WhiteStoneItem, WhiteStoneItem.DEFAULT_PROPERTIES)
 	val MAGNETIC_FORCE = basic("magnetic_force")
 
 	// Not above 1.6.4
 	val PORTABLE_ENDER_BRIDGE: DeferredItem<PortableEnderBridgeItem> =
-		register("portable_ender_bridge") { PortableEnderBridgeItem() }
+		register("portable_ender_bridge", ::PortableEnderBridgeItem, PortableEnderBridgeItem.DEFAULT_PROPERTIES)
 	val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
-		register("block_mover") { BlockMoverItem() }
+		register("block_mover", ::BlockMoverItem, BlockMoverItem.DEFAULT_PROPERTIES)
 	val DIAMOND_BREAKER: DeferredItem<Item> =
 		basic("diamond_breaker")
 	val BLOCK_REPLACER: DeferredItem<BlockReplacerItem> =
-		register("block_replacer") { BlockReplacerItem() }
+		register("block_replacer", ::BlockReplacerItem, BlockReplacerItem.DEFAULT_PROPERTIES)
 
 	// Colors
 	val GRASS_SEEDS: DeferredItem<GrassSeedItem> =

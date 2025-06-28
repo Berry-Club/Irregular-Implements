@@ -10,10 +10,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
 
-class RedstoneToolItem : Item(
-	Properties()
-		.stacksTo(1)
-) {
+class RedstoneToolItem(properties: Properties) : Item(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val player = context.player ?: return InteractionResult.PASS
@@ -95,6 +92,11 @@ class RedstoneToolItem : Item(
 		)
 
 		return InteractionResult.SUCCESS
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
 	}
 
 }
