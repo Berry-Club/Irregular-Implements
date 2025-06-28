@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id 'java-library'
-    id 'idea'
-    id 'maven-publish'
+	id 'java-library'
+	id 'idea'
+	id 'maven-publish'
 	id 'net.neoforged.moddev' version '2.0.91'
 
-    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+	id 'org.jetbrains.kotlin.jvm' version '2.1.20'
 }
 
 version = mod_version
@@ -17,152 +17,150 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 compileKotlin.compilerOptions.jvmTarget = JvmTarget.JVM_21
 
 neoForge {
-    version = neo_version
+	version = neo_version
 
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
+	parchment {
+		mappingsVersion = project.parchment_mappings_version
+		minecraftVersion = project.parchment_minecraft_version
+	}
 
-    runs {
-        configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
+	runs {
+		configureEach {
+			systemProperty 'forge.logging.markers', 'REGISTRIES'
 
-            logLevel = org.slf4j.event.Level.DEBUG
-        }
+			logLevel = org.slf4j.event.Level.DEBUG
+		}
 
-        client {
-            client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-            programArguments.addAll '--username', '1aaron5', '--uuid', '13027fdbaac9491b9d93c7e2f791d846'
-        }
+		client {
+			client()
+			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+			programArguments.addAll '--username', '1aaron5', '--uuid', '13027fdbaac9491b9d93c7e2f791d846'
+		}
 
-        clientTwo {
-            client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-            programArguments.addAll '--username', 'PlayerTwo'
-        }
+		clientTwo {
+			client()
+			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+			programArguments.addAll '--username', 'PlayerTwo'
+		}
 
-        server {
-            server()
-            programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
+		server {
+			server()
+			programArgument '--nogui'
+			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+		}
 
-        gameTestServer {
-            type = "gameTestServer"
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
+		gameTestServer {
+			type = "gameTestServer"
+			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+		}
 
-        data {
-            data()
+		data {
+			data()
 
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-        }
-    }
+			programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+		}
+	}
 
-    mods {
-        "${mod_id}" {
-            sourceSet(sourceSets.main)
-        }
-    }
+	mods {
+		"${mod_id}" {
+			sourceSet(sourceSets.main)
+		}
+	}
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 configurations {
-    runtimeClasspath.extendsFrom localRuntime
+	runtimeClasspath.extendsFrom localRuntime
 }
 
 repositories {
-    mavenLocal()
+	mavenLocal()
 
-    maven {
-        name = 'Kotlin for Forge'
-        url = 'https://thedarkcolour.github.io/KotlinForForge/'
-        content { includeGroup "thedarkcolour" }
-    }
+	maven {
+		name = 'Kotlin for Forge'
+		url = 'https://thedarkcolour.github.io/KotlinForForge/'
+	}
 
-    // For EMI
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
+	// For EMI
+	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
 
-    // For Curios
-    repositories {
-        maven {
-            name = "Illusive Soulworks maven"
-            url = "https://maven.theillusivec4.top/"
-        }
-    }
+	// For Curios
+	repositories {
+		maven {
+			name = "Illusive Soulworks maven"
+			url = "https://maven.theillusivec4.top/"
+		}
+	}
 
-    // For Modonomicon
-    maven {
-        url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
-        content {
-            includeGroup "com.klikli_dev"
-        }
-    }
+	// For Modonomicon
+	maven {
+		url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
+		content {
+			includeGroup "com.klikli_dev"
+		}
+	}
 
 }
 
 dependencies {
-    compileOnly "thedarkcolour:kotlinforforge-neoforge:$kff_version"
+	implementation 'thedarkcolour:kotlinforforge-neoforge:5.8.0'
 
-    // EMI
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+	compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+	runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
-    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+	compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+	runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
-    implementation("com.klikli_dev:modonomicon-1.21.1-neoforge:${modonomicon_version}") { transitive = false }
+	implementation("com.klikli_dev:modonomicon-1.21.1-neoforge:${modonomicon_version}") { transitive = false }
 
 }
 
 tasks.withType(ProcessResources).configureEach {
-    var replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
-            neo_version_range      : neo_version_range,
-            loader_version_range   : loader_version_range,
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_license            : mod_license,
-            mod_version            : mod_version,
-            mod_authors            : mod_authors,
-            mod_description        : mod_description,
-            curios_version_range: curios_version_range,
-    ]
-    inputs.properties replaceProperties
+	var replaceProperties = [
+			minecraft_version      : minecraft_version,
+			minecraft_version_range: minecraft_version_range,
+			neo_version            : neo_version,
+			neo_version_range      : neo_version_range,
+			loader_version_range   : loader_version_range,
+			mod_id                 : mod_id,
+			mod_name               : mod_name,
+			mod_license            : mod_license,
+			mod_version            : mod_version,
+			mod_authors            : mod_authors,
+			mod_description        : mod_description,
+			curios_version_range   : curios_version_range,
+	]
+	inputs.properties replaceProperties
 
-    filesMatching(['META-INF/neoforge.mods.toml']) {
-        expand replaceProperties
-    }
+	filesMatching(['META-INF/neoforge.mods.toml']) {
+		expand replaceProperties
+	}
 }
 
 publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
-    }
+	publications {
+		register('mavenJava', MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		maven {
+			url "file://${project.projectDir}/repo"
+		}
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+	options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
 idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
-    }
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }
