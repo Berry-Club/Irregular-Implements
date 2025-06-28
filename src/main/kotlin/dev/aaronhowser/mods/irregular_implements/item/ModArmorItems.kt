@@ -4,7 +4,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModCurioProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
-import dev.aaronhowser.mods.irregular_implements.registry.ModArmorMaterials
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -18,7 +17,6 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.*
-import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.material.FluidState

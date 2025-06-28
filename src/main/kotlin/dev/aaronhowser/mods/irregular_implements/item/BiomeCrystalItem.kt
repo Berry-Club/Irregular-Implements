@@ -32,7 +32,7 @@ class BiomeCrystalItem(properties: Properties) : Item(properties) {
 
 	companion object {
 
-		val DEFAULT_PROPERTIES: Properties = 	Properties().rarity(Rarity.UNCOMMON)
+		val DEFAULT_PROPERTIES: Properties = Properties().rarity(Rarity.UNCOMMON)
 
 		fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
 			return registries
