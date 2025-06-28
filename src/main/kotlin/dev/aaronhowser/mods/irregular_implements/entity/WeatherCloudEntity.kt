@@ -44,9 +44,14 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 	override fun tick() {
 		super.tick()
 
-		if (this.age >= 200) {
-			this.addDeltaMovement(Vec3(0.0, 0.001, 0.0))
-			this.deltaMovement = this.deltaMovement.scale(1.02)
+		if (this.age < 200) {
+			this.deltaMovement = Vec3(0.0, 0.007, 0.0)
+		} else {
+			val dm = this.deltaMovement
+			var dy = dm.y + 0.001
+			dy *= 1.02
+
+			this.deltaMovement = Vec3(dm.x, dy, dm.z)
 
 			if (this.position().y >= this.level().maxBuildHeight) {
 				setWeather()
@@ -57,7 +62,10 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 
 		this.age++
 		this.move(MoverType.SELF, this.deltaMovement)
-		if (this.level().isClientSide) spawnParticles()
+
+		if (this.level().isClientSide) {
+			spawnParticles()
+		}
 	}
 
 	private fun spawnParticles() {
