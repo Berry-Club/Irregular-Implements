@@ -15,14 +15,6 @@ class BiomeCapsuleItem : Item(
 		.stacksTo(1)
 ) {
 
-	companion object {
-		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
-			val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
-
-			return (foliageColor or 0xFF000000.toInt())
-		}
-	}
-
 	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
 		val onBlockPos = entity.blockPosBelowThatAffectsMyMovement
 
@@ -51,6 +43,14 @@ class BiomeCapsuleItem : Item(
 
 		tooltipComponents.add(biomeComponent)
 		tooltipComponents.add(biomePoints.toString().toComponent())
+	}
+
+	companion object {
+		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
+			val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
+
+			return (foliageColor or 0xFF000000.toInt())
+		}
 	}
 
 }

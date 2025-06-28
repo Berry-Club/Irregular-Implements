@@ -9,21 +9,6 @@ import net.minecraft.world.level.Level
 
 class EvilTearItem : Item(Properties()) {
 
-	companion object {
-
-		private fun tryPlacePortal(level: Level, clickedPos: BlockPos): Boolean {
-			val centerPos = clickedPos.below(3)
-
-			val isValidLocation = ArtificialEndPortalEntity.isValidPosition(level, centerPos, checkForOtherPortals = true)
-			if (!isValidLocation) return false
-
-			val artificialEndPortalEntity = ArtificialEndPortalEntity(level, centerPos)
-			level.addFreshEntity(artificialEndPortalEntity)
-
-			return true
-		}
-	}
-
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val clickedPos = context.clickedPos
 		val level = context.level
@@ -36,6 +21,20 @@ class EvilTearItem : Item(Properties()) {
 		usedStack.consume(1, context.player)
 
 		return InteractionResult.SUCCESS
+	}
+
+	companion object {
+		private fun tryPlacePortal(level: Level, clickedPos: BlockPos): Boolean {
+			val centerPos = clickedPos.below(3)
+
+			val isValidLocation = ArtificialEndPortalEntity.isValidPosition(level, centerPos, checkForOtherPortals = true)
+			if (!isValidLocation) return false
+
+			val artificialEndPortalEntity = ArtificialEndPortalEntity(level, centerPos)
+			level.addFreshEntity(artificialEndPortalEntity)
+
+			return true
+		}
 	}
 
 }

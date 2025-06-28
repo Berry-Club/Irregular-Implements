@@ -26,36 +26,6 @@ class RedstoneActivatorItem : Item(
 		.component(ModDataComponents.DURATION, 20)
 ) {
 
-	companion object {
-		val DURATION = OtherUtil.modResource("duration")
-
-		const val SHORT = 2
-		const val MEDIUM = 20
-		const val LONG = 100
-
-		fun cycleDuration(stack: ItemStack) {
-			val currentDuration = stack.get(ModDataComponents.DURATION) ?: 0
-			val newDuration = when (currentDuration) {
-				SHORT -> MEDIUM
-				MEDIUM -> LONG
-				LONG -> SHORT
-				else -> MEDIUM
-			}
-
-			stack.set(ModDataComponents.DURATION, newDuration)
-		}
-
-		fun getDurationFloat(
-			stack: ItemStack,
-			localLevel: ClientLevel?,
-			holdingEntity: LivingEntity?,
-			int: Int
-		): Float {
-			return stack.get(ModDataComponents.DURATION)?.toFloat() ?: MEDIUM.toFloat()
-		}
-
-	}
-
 	override fun use(
 		level: Level,
 		player: Player,
@@ -102,6 +72,35 @@ class RedstoneActivatorItem : Item(
 			.toGrayComponent()
 
 		tooltipComponents.add(component)
+	}
+
+	companion object {
+		val DURATION = OtherUtil.modResource("duration")
+
+		const val SHORT = 2
+		const val MEDIUM = 20
+		const val LONG = 100
+
+		fun cycleDuration(stack: ItemStack) {
+			val currentDuration = stack.get(ModDataComponents.DURATION) ?: 0
+			val newDuration = when (currentDuration) {
+				SHORT -> MEDIUM
+				MEDIUM -> LONG
+				LONG -> SHORT
+				else -> MEDIUM
+			}
+
+			stack.set(ModDataComponents.DURATION, newDuration)
+		}
+
+		fun getDurationFloat(
+			stack: ItemStack,
+			localLevel: ClientLevel?,
+			holdingEntity: LivingEntity?,
+			int: Int
+		): Float {
+			return stack.get(ModDataComponents.DURATION)?.toFloat() ?: MEDIUM.toFloat()
+		}
 	}
 
 }

@@ -29,42 +29,6 @@ class WhiteStoneItem : Item(
 		.component(ModDataComponents.CHARGE, 0)
 ) {
 
-	companion object {
-		const val MAX_CHARGE = 20 * 100
-
-		fun isChargedWhiteStone(itemStack: ItemStack): Boolean {
-			return itemStack.`is`(ModItems.WHITE_STONE.get()) && itemStack.get(ModDataComponents.CHARGE.get()) == MAX_CHARGE
-		}
-
-		fun tryPreventDeath(event: LivingDeathEvent) {
-			if (event.isCanceled) return
-
-			val entity = event.entity
-
-			val whiteStone = if (entity is Player) {
-				entity.inventory.items.find { isChargedWhiteStone(it) } ?: return
-			} else {
-				entity.handSlots.find { isChargedWhiteStone(it) } ?: return
-			}
-
-			event.isCanceled = true
-			whiteStone.set(ModDataComponents.CHARGE, 0)
-
-			entity.level().playSound(
-				null,
-				entity.blockPosition(),
-				ModSounds.WHITE_STONE_ACTIVATE.get(),
-				entity.soundSource,
-			)
-
-			entity.addEffect(MobEffectInstance(MobEffects.REGENERATION, 10 * 20))
-			entity.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 10 * 20))
-			entity.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 10 * 20, 1))
-
-			entity.health = entity.maxHealth
-		}
-	}
-
 	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
 		if (level !is ServerLevel
 			|| level.moonPhase != 0
@@ -133,7 +97,43 @@ class WhiteStoneItem : Item(
 		if (charge < MAX_CHARGE) {
 			tooltipComponents.add(ModLanguageProvider.Tooltips.WHITE_STONE_FULL_MOON.toGrayComponent())
 		}
-
 	}
+
+	companion object {
+		const val MAX_CHARGE = 20 * 100
+
+		fun isChargedWhiteStone(itemStack: ItemStack): Boolean {
+			return itemStack.`is`(ModItems.WHITE_STONE.get()) && itemStack.get(ModDataComponents.CHARGE.get()) == MAX_CHARGE
+		}
+
+		fun tryPreventDeath(event: LivingDeathEvent) {
+			if (event.isCanceled) return
+
+			val entity = event.entity
+
+			val whiteStone = if (entity is Player) {
+				entity.inventory.items.find { isChargedWhiteStone(it) } ?: return
+			} else {
+				entity.handSlots.find { isChargedWhiteStone(it) } ?: return
+			}
+
+			event.isCanceled = true
+			whiteStone.set(ModDataComponents.CHARGE, 0)
+
+			entity.level().playSound(
+				null,
+				entity.blockPosition(),
+				ModSounds.WHITE_STONE_ACTIVATE.get(),
+				entity.soundSource,
+			)
+
+			entity.addEffect(MobEffectInstance(MobEffects.REGENERATION, 10 * 20))
+			entity.addEffect(MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 10 * 20))
+			entity.addEffect(MobEffectInstance(MobEffects.FIRE_RESISTANCE, 10 * 20, 1))
+
+			entity.health = entity.maxHealth
+		}
+	}
+
 
 }

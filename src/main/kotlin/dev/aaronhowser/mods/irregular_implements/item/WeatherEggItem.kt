@@ -39,36 +39,6 @@ class WeatherEggItem : Item(
 		override fun getSerializedName(): String = realName
 	}
 
-	companion object {
-		val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
-
-		fun getWeatherFloat(
-			stack: ItemStack,
-			localLevel: ClientLevel?,
-			holdingEntity: LivingEntity?,
-			int: Int
-		): Float {
-			val weather = stack.get(ModDataComponents.WEATHER) ?: return 0f
-
-			return when (weather) {
-				Weather.SUNNY -> 0f
-				Weather.RAINY -> 1f
-				Weather.STORMY -> 2f
-			}
-		}
-
-		fun fromWeather(weather: Weather): ItemStack {
-			val stack = ModItems.WEATHER_EGG.toStack()
-
-			stack.set(
-				ModDataComponents.WEATHER,
-				weather
-			)
-
-			return stack
-		}
-	}
-
 	override fun getName(stack: ItemStack): Component {
 		val weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
 		return when (weather) {
@@ -112,6 +82,36 @@ class WeatherEggItem : Item(
 		thrownWeatherEgg.weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
 
 		return thrownWeatherEgg
+	}
+
+	companion object {
+		val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
+
+		fun getWeatherFloat(
+			stack: ItemStack,
+			localLevel: ClientLevel?,
+			holdingEntity: LivingEntity?,
+			int: Int
+		): Float {
+			val weather = stack.get(ModDataComponents.WEATHER) ?: return 0f
+
+			return when (weather) {
+				Weather.SUNNY -> 0f
+				Weather.RAINY -> 1f
+				Weather.STORMY -> 2f
+			}
+		}
+
+		fun fromWeather(weather: Weather): ItemStack {
+			val stack = ModItems.WEATHER_EGG.toStack()
+
+			stack.set(
+				ModDataComponents.WEATHER,
+				weather
+			)
+
+			return stack
+		}
 	}
 
 }

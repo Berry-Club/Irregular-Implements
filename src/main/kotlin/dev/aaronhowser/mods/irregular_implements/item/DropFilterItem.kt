@@ -28,8 +28,42 @@ class DropFilterItem : Item(
 		.component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
 ), MenuProvider {
 
-	companion object {
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		player.openMenu(this)
 
+		val usedStack = player.getItemInHand(usedHand)
+		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+	}
+
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+
+		val container = stack.get(DataComponents.CONTAINER)
+		val firstStack = container?.nonEmptyItems()?.firstOrNull()
+		val filter = firstStack?.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+
+		for (filterEntry in filter.entries) {
+			if (filterEntry is FilterEntry.Empty) continue
+
+			val lookup = context.registries() ?: continue
+			val itemName = filterEntry.getDisplayStack(lookup).hoverName
+			val component = ModLanguageProvider.Tooltips.LIST_POINT
+				.toGrayComponent(itemName)
+
+			tooltipComponents.add(component)
+		}
+	}
+
+	// Menu stuff
+
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return DropFilterMenu(containerId, playerInventory)
+	}
+
+	override fun getDisplayName(): Component {
+		return this.defaultInstance.hoverName
+	}
+
+	companion object {
 		fun stackIsDropFilter(stack: ItemStack): Boolean {
 			return stack.`is`(ModItems.DROP_FILTER) || stack.`is`(ModItems.VOIDING_DROP_FILTER)
 		}
@@ -97,41 +131,6 @@ class DropFilterItem : Item(
 			}
 
 		}
-	}
-
-	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		player.openMenu(this)
-
-		val usedStack = player.getItemInHand(usedHand)
-		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
-	}
-
-	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-
-		val container = stack.get(DataComponents.CONTAINER)
-		val firstStack = container?.nonEmptyItems()?.firstOrNull()
-		val filter = firstStack?.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
-
-		for (filterEntry in filter.entries) {
-			if (filterEntry is FilterEntry.Empty) continue
-
-			val lookup = context.registries() ?: continue
-			val itemName = filterEntry.getDisplayStack(lookup).hoverName
-			val component = ModLanguageProvider.Tooltips.LIST_POINT
-				.toGrayComponent(itemName)
-
-			tooltipComponents.add(component)
-		}
-	}
-
-	// Menu stuff
-
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return DropFilterMenu(containerId, playerInventory)
-	}
-
-	override fun getDisplayName(): Component {
-		return this.defaultInstance.hoverName
 	}
 
 }

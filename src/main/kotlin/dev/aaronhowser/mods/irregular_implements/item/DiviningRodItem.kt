@@ -24,8 +24,24 @@ class DiviningRodItem : Item(
 		.stacksTo(1)
 ) {
 
-	companion object {
+	override fun appendHoverText(
+		stack: ItemStack,
+		context: TooltipContext,
+		tooltipComponents: MutableList<Component>,
+		tooltipFlag: TooltipFlag
+	) {
+		val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
 
+		val component = if (blockTag == Tags.Blocks.ORES) {
+			ModLanguageProvider.Tooltips.ALL_ORES.toGrayComponent()
+		} else {
+			getNameForBlockTag(blockTag)
+		}
+
+		tooltipComponents.add(component)
+	}
+
+	companion object {
 		fun getRodForItemTag(itemTag: TagKey<Item>): ItemStack {
 			val blockTag = TagKey.create(Registries.BLOCK, itemTag.location)
 			return getRodForBlockTag(blockTag)
@@ -126,23 +142,6 @@ class DiviningRodItem : Item(
 
 			return 0xFFFFFFFF.toInt()
 		}
-	}
-
-	override fun appendHoverText(
-		stack: ItemStack,
-		context: TooltipContext,
-		tooltipComponents: MutableList<Component>,
-		tooltipFlag: TooltipFlag
-	) {
-		val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
-
-		val component = if (blockTag == Tags.Blocks.ORES) {
-			ModLanguageProvider.Tooltips.ALL_ORES.toGrayComponent()
-		} else {
-			getNameForBlockTag(blockTag)
-		}
-
-		tooltipComponents.add(component)
 	}
 
 }

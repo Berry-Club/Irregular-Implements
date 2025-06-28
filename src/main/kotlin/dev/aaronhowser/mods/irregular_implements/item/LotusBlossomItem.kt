@@ -13,12 +13,6 @@ class LotusBlossomItem : Item(
 		.food(FOOD_PROPERTIES)
 ) {
 
-	companion object {
-		private val FOOD_PROPERTIES = FoodProperties.Builder()
-			.alwaysEdible()
-			.build()
-	}
-
 	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int {
 		return 10
 	}
@@ -42,6 +36,12 @@ class LotusBlossomItem : Item(
 		val remainder = stack.copy()
 		remainder.consume(amountToEat, livingEntity)
 		return remainder
+	}
+
+	companion object {
+		private val FOOD_PROPERTIES = FoodProperties.Builder()
+			.alwaysEdible()
+			.build()
 	}
 
 }

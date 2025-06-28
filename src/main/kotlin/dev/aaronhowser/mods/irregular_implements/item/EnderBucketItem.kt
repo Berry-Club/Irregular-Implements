@@ -30,8 +30,42 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler
 
 class EnderBucketItem : Item(Properties()) {
 
-	companion object {
+	override fun use(
+		level: Level,
+		player: Player,
+		usedHand: InteractionHand
+	): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
 
+		val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+
+		val blockHitResult = getPlayerPOVHitResult(
+			level,
+			player,
+			if (currentContents.isEmpty) ClipContext.Fluid.ANY else ClipContext.Fluid.NONE
+		)
+
+		if (blockHitResult.type != HitResult.Type.BLOCK) return InteractionResultHolder.pass(usedStack)
+
+		val clickedPos = blockHitResult.blockPos
+		val clickedFace = blockHitResult.direction
+
+		val blockPos = clickedPos.relative(clickedFace)
+
+		if (!level.mayInteract(player, clickedPos) || !player.mayUseItemAt(blockPos, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
+
+		return if (currentContents.isEmpty) {
+			tryFill(level, player, usedStack, clickedPos)
+		} else {
+			tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
+		}
+	}
+
+	override fun getMaxStackSize(stack: ItemStack): Int {
+		return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
+	}
+
+	companion object {
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
 			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
 
@@ -198,41 +232,6 @@ class EnderBucketItem : Item(Properties()) {
 			level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos)
 		}
 
-	}
-
-	override fun use(
-		level: Level,
-		player: Player,
-		usedHand: InteractionHand
-	): InteractionResultHolder<ItemStack> {
-		val usedStack = player.getItemInHand(usedHand)
-
-		val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
-
-		val blockHitResult = getPlayerPOVHitResult(
-			level,
-			player,
-			if (currentContents.isEmpty) ClipContext.Fluid.ANY else ClipContext.Fluid.NONE
-		)
-
-		if (blockHitResult.type != HitResult.Type.BLOCK) return InteractionResultHolder.pass(usedStack)
-
-		val clickedPos = blockHitResult.blockPos
-		val clickedFace = blockHitResult.direction
-
-		val blockPos = clickedPos.relative(clickedFace)
-
-		if (!level.mayInteract(player, clickedPos) || !player.mayUseItemAt(blockPos, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
-
-		return if (currentContents.isEmpty) {
-			tryFill(level, player, usedStack, clickedPos)
-		} else {
-			tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
-		}
-	}
-
-	override fun getMaxStackSize(stack: ItemStack): Int {
-		return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
 	}
 
 }

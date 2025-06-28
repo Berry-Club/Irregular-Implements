@@ -35,7 +35,7 @@ class GrassSeedItem(
 ) : Item(Properties()) {
 
 	val resultBlock: Block by lazy {
-		if (dyeColor == null) Blocks.GRASS_BLOCK else ModBlocks.getColoredGrass(dyeColor).get()
+		if (this.dyeColor == null) Blocks.GRASS_BLOCK else ModBlocks.getColoredGrass(dyeColor).get()
 	}
 
 	override fun useOn(context: UseOnContext): InteractionResult {

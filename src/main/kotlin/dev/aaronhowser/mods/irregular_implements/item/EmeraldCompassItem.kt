@@ -19,6 +19,27 @@ import kotlin.math.atan2
 
 class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
 
+	//TODO: Crafting recipe with ID Card
+	override fun interactLivingEntity(
+		stack: ItemStack,
+		player: Player,
+		interactionTarget: LivingEntity,
+		usedHand: InteractionHand
+	): InteractionResult {
+		if (interactionTarget !is Player) return InteractionResult.PASS
+
+		val usedStack = player.getItemInHand(usedHand)
+		usedStack.set(ModDataComponents.ENTITY_IDENTIFIER, SpecificEntityDataComponent(interactionTarget))
+
+		return InteractionResult.SUCCESS
+	}
+
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val component = stack.get(ModDataComponents.ENTITY_IDENTIFIER) ?: return
+
+		tooltipComponents.add(component.name)
+	}
+
 	companion object {
 		val ANGLE: ResourceLocation = OtherUtil.modResource("angle")
 
@@ -54,27 +75,6 @@ class EmeraldCompassItem : Item(Properties().stacksTo(1)) {
 		private fun getWrappedVisualRotationY(entity: Entity): Double {
 			return Mth.positiveModulo((entity.visualRotationYInDegrees / 360.0f).toDouble(), 1.0)
 		}
-	}
-
-	//TODO: Crafting recipe with ID Card
-	override fun interactLivingEntity(
-		stack: ItemStack,
-		player: Player,
-		interactionTarget: LivingEntity,
-		usedHand: InteractionHand
-	): InteractionResult {
-		if (interactionTarget !is Player) return InteractionResult.PASS
-
-		val usedStack = player.getItemInHand(usedHand)
-		usedStack.set(ModDataComponents.ENTITY_IDENTIFIER, SpecificEntityDataComponent(interactionTarget))
-
-		return InteractionResult.SUCCESS
-	}
-
-	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val component = stack.get(ModDataComponents.ENTITY_IDENTIFIER) ?: return
-
-		tooltipComponents.add(component.name)
 	}
 
 }

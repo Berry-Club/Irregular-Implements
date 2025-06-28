@@ -20,15 +20,6 @@ class PlayerFilterItem : Item(
 		.stacksTo(1)
 ) {
 
-	companion object {
-		fun setPlayer(stack: ItemStack, player: Player) {
-			stack.set(
-				ModDataComponents.PLAYER.get(),
-				SpecificEntityDataComponent(player)
-			)
-		}
-	}
-
 	override fun interactLivingEntity(
 		stack: ItemStack,
 		player: Player,
@@ -67,7 +58,15 @@ class PlayerFilterItem : Item(
 
 			tooltipComponents.add(uuidComponent)
 		}
+	}
 
+	companion object {
+		fun setPlayer(stack: ItemStack, player: Player) {
+			stack.set(
+				ModDataComponents.PLAYER.get(),
+				SpecificEntityDataComponent(player)
+			)
+		}
 	}
 
 }

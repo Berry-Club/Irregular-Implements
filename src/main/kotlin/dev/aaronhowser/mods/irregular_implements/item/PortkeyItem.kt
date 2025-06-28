@@ -7,10 +7,12 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Unit
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
@@ -21,43 +23,6 @@ class PortkeyItem : Item(
 ) {
 
 	// ModDataComponents.ENABLED means that picking up the portkey will teleport the player to the location
-
-	companion object {
-		fun pickUpPortkey(event: ItemEntityPickupEvent.Pre) {
-			if (event.canPickup().isFalse) return
-
-			val itemEntity = event.itemEntity
-			val itemStack = itemEntity.item
-
-			if (!itemStack.`is`(ModItems.PORTKEY)) return
-
-			val locationComponent = itemStack.get(ModDataComponents.LOCATION) ?: return
-			if (!itemStack.has(ModDataComponents.IS_ENABLED)) return
-
-			val player = event.player
-			val level = player.level() as? ServerLevel ?: return
-
-			if (level.dimension() != locationComponent.dimension) return
-
-			val teleportLocation = locationComponent.blockPos.bottomCenter
-
-			player.teleportTo(
-				teleportLocation.x,
-				teleportLocation.y,
-				teleportLocation.z,
-			)
-
-			level.playSound(
-				null,
-				player.blockPosition(),
-				SoundEvents.PLAYER_TELEPORT,
-				player.soundSource,
-			)
-
-			event.setCanPickup(TriState.FALSE)
-			itemEntity.discard()
-		}
-	}
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val level = context.level
@@ -110,5 +75,47 @@ class PortkeyItem : Item(
 	}
 
 	//TODO: Tooltip
+
+	//TODO: Something new instead of resetting the age, because that causes it to jitter
+	override fun createEntity(level: Level, location: Entity, stack: ItemStack): Entity? {
+		return super.createEntity(level, location, stack)
+	}
+
+	companion object {
+		fun pickUpPortkey(event: ItemEntityPickupEvent.Pre) {
+			if (event.canPickup().isFalse) return
+
+			val itemEntity = event.itemEntity
+			val itemStack = itemEntity.item
+
+			if (!itemStack.`is`(ModItems.PORTKEY)) return
+
+			val locationComponent = itemStack.get(ModDataComponents.LOCATION) ?: return
+			if (!itemStack.has(ModDataComponents.IS_ENABLED)) return
+
+			val player = event.player
+			val level = player.level() as? ServerLevel ?: return
+
+			if (level.dimension() != locationComponent.dimension) return
+
+			val teleportLocation = locationComponent.blockPos.bottomCenter
+
+			player.teleportTo(
+				teleportLocation.x,
+				teleportLocation.y,
+				teleportLocation.z,
+			)
+
+			level.playSound(
+				null,
+				player.blockPosition(),
+				SoundEvents.PLAYER_TELEPORT,
+				player.soundSource,
+			)
+
+			event.setCanPickup(TriState.FALSE)
+			itemEntity.discard()
+		}
+	}
 
 }

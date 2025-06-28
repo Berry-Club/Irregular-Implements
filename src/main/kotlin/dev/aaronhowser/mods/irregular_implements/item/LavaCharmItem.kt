@@ -26,6 +26,14 @@ class LavaCharmItem : Item(
 		.component(ModDataComponents.CHARGE, MAX_CHARGE)
 ), ICurioItem {
 
+	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
+		charge(stack)
+	}
+
+	override fun curioTick(slotContext: SlotContext, stack: ItemStack) {
+		charge(stack)
+	}
+
 	companion object {
 		const val MAX_CHARGE = 200
 		const val MAX_COOLDOWN = 40
@@ -97,14 +105,6 @@ class LavaCharmItem : Item(
 			return entity.handSlots.firstOrNull { isChargedLavaCharm(it) }
 		}
 
-	}
-
-	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-		charge(stack)
-	}
-
-	override fun curioTick(slotContext: SlotContext, stack: ItemStack) {
-		charge(stack)
 	}
 
 }

@@ -22,7 +22,6 @@ class SpectreAnchorItem : Item(
 ) {
 
 	companion object {
-
 		fun saveAnchoredItems(player: Player) {
 			val level = player.level()
 			if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return

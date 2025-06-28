@@ -18,16 +18,6 @@ class CustomCraftingTableBlockItem : BlockItem(
 	ModBlocks.CUSTOM_CRAFTING_TABLE.get(), Properties()
 ) {
 
-	companion object {
-		fun ofBlock(block: Block): ItemStack {
-			val stack = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
-
-			stack.set(ModDataComponents.BLOCK, block)
-
-			return stack
-		}
-	}
-
 	override fun place(context: BlockPlaceContext): InteractionResult {
 		val result = super.place(context)
 
@@ -56,6 +46,16 @@ class CustomCraftingTableBlockItem : BlockItem(
 				.toGrayComponent(block.name)
 
 			tooltipComponents.add(component)
+		}
+	}
+
+	companion object {
+		fun ofBlock(block: Block): ItemStack {
+			val stack = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
+
+			stack.set(ModDataComponents.BLOCK, block)
+
+			return stack
 		}
 	}
 

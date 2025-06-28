@@ -27,27 +27,6 @@ class SpectreChargerItem private constructor(
 	private val type: Type
 ) : Item(Properties().stacksTo(1)) {
 
-	companion object {
-		val BASIC = SpectreChargerItem(Type.BASIC)
-		val REDSTONE = SpectreChargerItem(Type.REDSTONE)
-		val ENDER = SpectreChargerItem(Type.ENDER)
-		val GENESIS = SpectreChargerItem(Type.GENESIS)
-
-		const val CHARGE_DELAY = 5
-
-		val IS_ENABLED = OtherUtil.modResource("is_enabled")
-
-		fun getEnabledForPredicate(
-			stack: ItemStack,
-			localLevel: ClientLevel?,
-			holdingEntity: LivingEntity?,
-			int: Int
-		): Float {
-			return if (stack.has(ModDataComponents.IS_ENABLED)) 1.0f else 0.0f
-		}
-
-	}
-
 	override fun inventoryTick(stack: ItemStack, level: Level, player: Entity, slotId: Int, isSelected: Boolean) {
 		if (level !is ServerLevel
 			|| player !is Player
@@ -119,6 +98,26 @@ class SpectreChargerItem private constructor(
 			color = Color.ORANGE.rgb,
 			amountGetter = { ServerConfig.SPECTRE_CHARGER_GENESIS.get() }
 		)
+	}
+
+	companion object {
+		val BASIC = SpectreChargerItem(Type.BASIC)
+		val REDSTONE = SpectreChargerItem(Type.REDSTONE)
+		val ENDER = SpectreChargerItem(Type.ENDER)
+		val GENESIS = SpectreChargerItem(Type.GENESIS)
+
+		const val CHARGE_DELAY = 5
+
+		val IS_ENABLED = OtherUtil.modResource("is_enabled")
+
+		fun getEnabledForPredicate(
+			stack: ItemStack,
+			localLevel: ClientLevel?,
+			holdingEntity: LivingEntity?,
+			int: Int
+		): Float {
+			return if (stack.has(ModDataComponents.IS_ENABLED)) 1.0f else 0.0f
+		}
 	}
 
 }

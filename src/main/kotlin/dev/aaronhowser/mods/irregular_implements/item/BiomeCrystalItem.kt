@@ -20,8 +20,20 @@ class BiomeCrystalItem : Item(
 		.rarity(Rarity.UNCOMMON)
 ) {
 
-	companion object {
+	override fun appendHoverText(
+		stack: ItemStack,
+		context: TooltipContext,
+		tooltipComponents: MutableList<Component>,
+		tooltipFlag: TooltipFlag
+	) {
+		val biomeHolder = stack.get(ModDataComponents.BIOME) ?: return
 
+		val component = OtherUtil.getBiomeComponent(biomeHolder)
+
+		tooltipComponents.add(component)
+	}
+
+	companion object {
 		fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
 			return registries
 				.lookupOrThrow(Registries.BIOME)
@@ -41,20 +53,6 @@ class BiomeCrystalItem : Item(
 
 			return (foliageColor or 0xFF000000.toInt())
 		}
-
-	}
-
-	override fun appendHoverText(
-		stack: ItemStack,
-		context: TooltipContext,
-		tooltipComponents: MutableList<Component>,
-		tooltipFlag: TooltipFlag
-	) {
-		val biomeHolder = stack.get(ModDataComponents.BIOME) ?: return
-
-		val component = OtherUtil.getBiomeComponent(biomeHolder)
-
-		tooltipComponents.add(component)
 	}
 
 }

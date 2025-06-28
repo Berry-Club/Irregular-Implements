@@ -30,8 +30,47 @@ class ItemFilterItem : Item(
 		.component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
 ), MenuProvider {
 
-	companion object {
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		player.openMenu(this)
 
+		val usedStack = player.getItemInHand(usedHand)
+		return InteractionResultHolder.success(usedStack)
+	}
+
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+
+		if (itemComponent.isBlacklist) {
+			val component = ModLanguageProvider.Tooltips.BLACKLIST
+				.toComponent().withStyle(ChatFormatting.RED, ChatFormatting.UNDERLINE)
+
+			tooltipComponents.add(component)
+		}
+
+		for (filterEntry in itemComponent.entries) {
+			if (filterEntry is FilterEntry.Empty) continue
+
+			val lookup = context.registries() ?: continue
+			val itemName = filterEntry.getDisplayStack(lookup).hoverName
+			val component = ModLanguageProvider.Tooltips.LIST_POINT
+				.toGrayComponent(itemName)
+
+			tooltipComponents.add(component)
+		}
+	}
+
+	// Menu stuff
+
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return ItemFilterMenu(containerId, playerInventory)
+	}
+
+	override fun getDisplayName(): Component {
+		return this.defaultInstance.hoverName
+	}
+
+
+	companion object {
 		fun setTestingFilter(stack: ItemStack) {
 			val planksFilter = FilterEntry.Tag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
 			val stickFilter = FilterEntry.Item(Items.STICK.defaultInstance, requireSameComponents = false)
@@ -84,45 +123,6 @@ class ItemFilterItem : Item(
             """.trimIndent()
 			)
 		}
-	}
-
-	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		player.openMenu(this)
-
-		val usedStack = player.getItemInHand(usedHand)
-		return InteractionResultHolder.success(usedStack)
-	}
-
-	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
-
-		if (itemComponent.isBlacklist) {
-			val component = ModLanguageProvider.Tooltips.BLACKLIST
-				.toComponent().withStyle(ChatFormatting.RED, ChatFormatting.UNDERLINE)
-
-			tooltipComponents.add(component)
-		}
-
-		for (filterEntry in itemComponent.entries) {
-			if (filterEntry is FilterEntry.Empty) continue
-
-			val lookup = context.registries() ?: continue
-			val itemName = filterEntry.getDisplayStack(lookup).hoverName
-			val component = ModLanguageProvider.Tooltips.LIST_POINT
-				.toGrayComponent(itemName)
-
-			tooltipComponents.add(component)
-		}
-	}
-
-	// Menu stuff
-
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return ItemFilterMenu(containerId, playerInventory)
-	}
-
-	override fun getDisplayName(): Component {
-		return this.defaultInstance.hoverName
 	}
 
 }
