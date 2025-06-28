@@ -7,10 +7,10 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 
-class RedstoneRemoteButtonsMenu(
+class RedstoneRemoteEditMenu(
 	containerId: Int,
 	private val playerInventory: Inventory
-) : AbstractContainerMenu(ModMenuTypes.REDSTONE_REMOTE_BUTTONS.get(), containerId), MenuWithButtons {
+) : AbstractContainerMenu(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), containerId), MenuWithButtons {
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		TODO("Not yet implemented")

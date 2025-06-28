@@ -85,14 +85,14 @@ object ModMenuTypes {
 			MenuType(::AdvancedItemCollectorMenu, FeatureFlags.DEFAULT_FLAGS)
 		})
 
-	val REDSTONE_REMOTE_INVENTORY: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteInventoryMenu>> =
-		MENU_TYPE_REGISTRY.register("redstone_remote_inventory", Supplier {
-			MenuType(::RedstoneRemoteInventoryMenu, FeatureFlags.DEFAULT_FLAGS)
+	val REDSTONE_REMOTE_EDIT: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteEditMenu>> =
+		MENU_TYPE_REGISTRY.register("redstone_remote_edit", Supplier {
+			MenuType(::RedstoneRemoteEditMenu, FeatureFlags.DEFAULT_FLAGS)
 		})
 
-	val REDSTONE_REMOTE_BUTTONS: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteButtonsMenu>> =
-		MENU_TYPE_REGISTRY.register("redstone_remote_buttons", Supplier {
-			MenuType(::RedstoneRemoteButtonsMenu, FeatureFlags.DEFAULT_FLAGS)
+	val REDSTONE_REMOTE_USE: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteUseMenu>> =
+		MENU_TYPE_REGISTRY.register("redstone_remote_use", Supplier {
+			MenuType(::RedstoneRemoteUseMenu, FeatureFlags.DEFAULT_FLAGS)
 		})
 
 	fun registerScreens(event: RegisterMenuScreensEvent) {
@@ -110,6 +110,8 @@ object ModMenuTypes {
 		event.register(DROP_FILTER.get(), ::DropFilterScreen)
 		event.register(INVENTORY_TESTER.get(), ::InventoryTesterScreen)
 		event.register(ADVANCED_ITEM_COLLECTOR.get(), ::AdvancedItemCollectorScreen)
+		event.register(REDSTONE_REMOTE_EDIT.get(), ::RedstoneRemoteEditScreen)
+		event.register(REDSTONE_REMOTE_USE.get(), ::RedstoneRemoteUseScreen)
 	}
 
 }

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteButtonsMenu
-import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteInventoryMenu
+import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteUseMenu
+import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteEditMenu
 import net.minecraft.network.chat.Component
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -13,9 +13,9 @@ class RedstoneRemoteItem(properties: Properties) : Item(properties), MenuProvide
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return if (player.isSecondaryUseActive) {
-			RedstoneRemoteInventoryMenu(containerId, playerInventory)
+			RedstoneRemoteEditMenu(containerId, playerInventory)
 		} else {
-			RedstoneRemoteButtonsMenu(containerId, playerInventory)
+			RedstoneRemoteUseMenu(containerId, playerInventory)
 		}
 	}
 
