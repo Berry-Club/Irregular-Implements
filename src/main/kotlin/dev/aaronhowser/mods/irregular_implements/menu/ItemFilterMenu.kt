@@ -32,7 +32,6 @@ class ItemFilterMenu(
 				playerInventory.player.offhandItem
 			}
 
-
 	private var usingMainHand = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack
 
 	private val filterComponent: ItemFilterDataComponent?
@@ -82,7 +81,6 @@ class ItemFilterMenu(
 
 			this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
 		}
-
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -90,9 +88,8 @@ class ItemFilterMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return player.getItemInHand(
-			if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
-		).`is`(ModItems.ITEM_FILTER)
+		val hand = if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
+		return player.getItemInHand(hand).`is`(ModItems.ITEM_FILTER)
 	}
 
 	override fun handleButtonPressed(buttonId: Int) {
