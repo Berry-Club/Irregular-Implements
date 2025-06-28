@@ -22,10 +22,6 @@ class TriggerGlassBlock : TransparentBlock(
 		.dynamicShape()
 ) {
 
-	companion object {
-		val NOT_SOLID: BooleanProperty = BooleanProperty.create("not_solid")
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -98,6 +94,10 @@ class TriggerGlassBlock : TransparentBlock(
 		if (adjacentBlockState.block != this) return super.skipRendering(state, adjacentBlockState, side)
 
 		return adjacentBlockState.getValue(NOT_SOLID) == state.getValue(NOT_SOLID)
+	}
+
+	companion object {
+		val NOT_SOLID: BooleanProperty = BooleanProperty.create("not_solid")
 	}
 
 }

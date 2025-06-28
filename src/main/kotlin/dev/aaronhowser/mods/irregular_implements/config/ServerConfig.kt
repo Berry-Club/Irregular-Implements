@@ -7,46 +7,6 @@ class ServerConfig(
 	private val builder: ModConfigSpec.Builder
 ) {
 
-	companion object {
-		private val configPair: Pair<ServerConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ServerConfig)
-
-		val CONFIG: ServerConfig = configPair.left
-		val CONFIG_SPEC: ModConfigSpec = configPair.right
-
-		lateinit var BLOCK_DESTABILIZER_LIMIT: ModConfigSpec.IntValue
-
-		lateinit var BIOME_PAINTER_HORIZONTAL_RADIUS: ModConfigSpec.IntValue
-		lateinit var BIOME_PAINTER_BLOCKS_BELOW: ModConfigSpec.IntValue
-		lateinit var BIOME_PAINTER_BLOCKS_ABOVE: ModConfigSpec.IntValue
-
-		lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
-		lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
-		lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
-		lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
-		lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
-		lateinit var RAIN_SHIELD_CHUNK_RADIUS: ModConfigSpec.IntValue
-		lateinit var PEACE_CANDLE_CHUNK_RADIUS: ModConfigSpec.IntValue
-
-		lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
-
-		lateinit var SPECTRE_BUFFER_CAPACITY: ModConfigSpec.IntValue
-		lateinit var SPECTRE_BASIC_RATE: ModConfigSpec.IntValue
-		lateinit var SPECTRE_REDSTONE_RATE: ModConfigSpec.IntValue
-		lateinit var SPECTRE_ENDER_RATE: ModConfigSpec.IntValue
-		lateinit var SPECTRE_NUMBER_RATE: ModConfigSpec.IntValue
-		lateinit var SPECTRE_GENESIS_RATE: ModConfigSpec.IntValue
-
-		lateinit var SPECTRE_CHARGER_BASIC: ModConfigSpec.IntValue
-		lateinit var SPECTRE_CHARGER_REDSTONE: ModConfigSpec.IntValue
-		lateinit var SPECTRE_CHARGER_ENDER: ModConfigSpec.IntValue
-		lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
-
-		const val SPECTRE_CATEGORY = "spectre"
-
-		lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
-		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
-	}
-
 	init {
 		basicServerConfigs()
 		spectreConfigs()
@@ -156,6 +116,46 @@ class ServerConfig(
 			.defineInRange("imbueProcChance", 0.1, 0.0, 1.0)
 
 		builder.pop()
+	}
+
+	companion object {
+		private val configPair: Pair<ServerConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ServerConfig)
+
+		val CONFIG: ServerConfig = configPair.left
+		val CONFIG_SPEC: ModConfigSpec = configPair.right
+
+		lateinit var BLOCK_DESTABILIZER_LIMIT: ModConfigSpec.IntValue
+
+		lateinit var BIOME_PAINTER_HORIZONTAL_RADIUS: ModConfigSpec.IntValue
+		lateinit var BIOME_PAINTER_BLOCKS_BELOW: ModConfigSpec.IntValue
+		lateinit var BIOME_PAINTER_BLOCKS_ABOVE: ModConfigSpec.IntValue
+
+		lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
+		lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
+		lateinit var SUMMONING_PENDULUM_CAPACITY: ModConfigSpec.IntValue
+		lateinit var BLOCK_REPLACER_UNIQUE_BLOCKS: ModConfigSpec.IntValue
+		lateinit var DIVINING_ROD_CHECK_RADIUS: ModConfigSpec.IntValue
+		lateinit var RAIN_SHIELD_CHUNK_RADIUS: ModConfigSpec.IntValue
+		lateinit var PEACE_CANDLE_CHUNK_RADIUS: ModConfigSpec.IntValue
+
+		lateinit var SPECTRE_IMBUE_CHANCE: ModConfigSpec.DoubleValue
+
+		lateinit var SPECTRE_BUFFER_CAPACITY: ModConfigSpec.IntValue
+		lateinit var SPECTRE_BASIC_RATE: ModConfigSpec.IntValue
+		lateinit var SPECTRE_REDSTONE_RATE: ModConfigSpec.IntValue
+		lateinit var SPECTRE_ENDER_RATE: ModConfigSpec.IntValue
+		lateinit var SPECTRE_NUMBER_RATE: ModConfigSpec.IntValue
+		lateinit var SPECTRE_GENESIS_RATE: ModConfigSpec.IntValue
+
+		lateinit var SPECTRE_CHARGER_BASIC: ModConfigSpec.IntValue
+		lateinit var SPECTRE_CHARGER_REDSTONE: ModConfigSpec.IntValue
+		lateinit var SPECTRE_CHARGER_ENDER: ModConfigSpec.IntValue
+		lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
+
+		const val SPECTRE_CATEGORY = "spectre"
+
+		lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
+		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
 	}
 
 }

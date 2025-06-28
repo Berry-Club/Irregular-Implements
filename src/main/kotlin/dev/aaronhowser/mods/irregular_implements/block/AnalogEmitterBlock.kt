@@ -29,12 +29,6 @@ class AnalogEmitterBlock(
 			.isRedstoneConductor(Blocks::never)
 ) : DirectionalBlock(properties) {
 
-	companion object {
-		private val CODEC = simpleCodec(::AnalogEmitterBlock)
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-		val POWER: IntegerProperty = BlockStateProperties.POWER
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -124,6 +118,12 @@ class AnalogEmitterBlock(
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	companion object {
+		private val CODEC = simpleCodec(::AnalogEmitterBlock)
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val POWER: IntegerProperty = BlockStateProperties.POWER
 	}
 
 }

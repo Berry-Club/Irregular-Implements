@@ -28,12 +28,6 @@ class FertilizedDirtBlock : FarmBlock(
 
 	//FIXME: Disallow crops from being placed on non-tilled fertilized dirt
 
-	companion object {
-		val TILLED: BooleanProperty = BooleanProperty.create("tilled")
-
-		val TILLED_SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 15.0, 16.0)
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -94,6 +88,11 @@ class FertilizedDirtBlock : FarmBlock(
 				cropState.randomTick(level, cropPos, random)
 			}
 		}
+	}
+
+	companion object {
+		val TILLED: BooleanProperty = BooleanProperty.create("tilled")
+		val TILLED_SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 15.0, 16.0)
 	}
 
 }

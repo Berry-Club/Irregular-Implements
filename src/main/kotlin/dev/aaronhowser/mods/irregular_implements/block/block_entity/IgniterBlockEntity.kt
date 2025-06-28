@@ -35,40 +35,6 @@ class IgniterBlockEntity(
 		KEEP_IGNITED(ModLanguageProvider.Tooltips.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
 	}
 
-	companion object {
-		const val MODE_NBT = "Mode"
-
-		fun ignite(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
-			if (level.isClientSide) return
-
-			val facing = igniterState.getValue(FACING)
-			val targetPos = igniterPos.relative(facing)
-			val targetState = level.getBlockState(targetPos)
-
-			val canPlaceFire = targetState.canBeReplaced()
-			if (canPlaceFire) {
-				val fireState = (Blocks.FIRE as FireBlock).getStateForPlacement(level, targetPos)
-
-				level.setBlockAndUpdate(targetPos, fireState)
-			}
-		}
-
-		fun extinguish(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
-			if (level.isClientSide) return
-
-			val facing = igniterState.getValue(FACING)
-			val targetPos = igniterPos.relative(facing)
-			val targetState = level.getBlockState(targetPos)
-
-			if (targetState.`is`(BlockTags.FIRE)) {
-				level.removeBlock(targetPos, false)
-			}
-		}
-
-		const val CONTAINER_DATA_SIZE = 1
-		const val MODE_INDEX = 0
-	}
-
 	var mode: Mode = Mode.TOGGLE
 		private set(value) {
 			field = value
@@ -131,5 +97,39 @@ class IgniterBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val MODE_NBT = "Mode"
+
+		fun ignite(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
+			if (level.isClientSide) return
+
+			val facing = igniterState.getValue(FACING)
+			val targetPos = igniterPos.relative(facing)
+			val targetState = level.getBlockState(targetPos)
+
+			val canPlaceFire = targetState.canBeReplaced()
+			if (canPlaceFire) {
+				val fireState = (Blocks.FIRE as FireBlock).getStateForPlacement(level, targetPos)
+
+				level.setBlockAndUpdate(targetPos, fireState)
+			}
+		}
+
+		fun extinguish(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
+			if (level.isClientSide) return
+
+			val facing = igniterState.getValue(FACING)
+			val targetPos = igniterPos.relative(facing)
+			val targetState = level.getBlockState(targetPos)
+
+			if (targetState.`is`(BlockTags.FIRE)) {
+				level.removeBlock(targetPos, false)
+			}
+		}
+
+		const val CONTAINER_DATA_SIZE = 1
+		const val MODE_INDEX = 0
+	}
 
 }

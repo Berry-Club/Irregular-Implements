@@ -21,10 +21,6 @@ class SpectreEnergyInjectorBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), pPos, pBlockState) {
 
-	companion object {
-		const val OWNER_UUID_NBT = "OwnerUuid"
-	}
-
 	// Initialized as random, but immediately set on place or load
 	var ownerUuid: UUID = UUID.randomUUID()
 		set(value) {
@@ -56,5 +52,9 @@ class SpectreEnergyInjectorBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val OWNER_UUID_NBT = "OwnerUuid"
+	}
 
 }

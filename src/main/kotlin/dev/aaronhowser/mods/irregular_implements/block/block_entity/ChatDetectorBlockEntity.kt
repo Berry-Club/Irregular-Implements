@@ -33,50 +33,6 @@ class ChatDetectorBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-		private val detectors: MutableSet<ChatDetectorBlockEntity> = mutableSetOf()
-
-		fun processMessage(event: ServerChatEvent) {
-			if (event.isCanceled) return
-
-			val message = event.message
-			val sender = event.player
-
-			val iterator = detectors.iterator()
-
-			while (iterator.hasNext()) {
-				val detector = iterator.next()
-				if (detector.isRemoved) {
-					iterator.remove()
-					continue
-				}
-
-				if (detector.processMessage(sender, message)) event.isCanceled = true
-			}
-		}
-
-		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: ChatDetectorBlockEntity) {
-			if (blockEntity.timeOn > 0) {
-				blockEntity.timeOn--
-
-				if (blockEntity.timeOn == 0) {
-					level.setBlockAndUpdate(
-						pos,
-						state.setValue(ChatDetectorBlock.ENABLED, false)
-					)
-				}
-			}
-		}
-
-		const val OWNER_UUID_NBT = "OwnerUuid"
-		const val STOPS_MESSAGE_NBT = "StopsMessage"
-		const val MESSAGE_REGEX_NBT = "MessageRegex"
-		const val TIME_ON_NBT = "TimeOn"
-
-		const val CONTAINER_DATA_SIZE = 1
-		const val STOPS_MESSAGE_INDEX = 0
-	}
-
 	// Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
 	var ownerUuid: UUID = UUID.randomUUID()
 
@@ -192,5 +148,48 @@ class ChatDetectorBlockEntity(
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
+	companion object {
+		private val detectors: MutableSet<ChatDetectorBlockEntity> = mutableSetOf()
+
+		fun processMessage(event: ServerChatEvent) {
+			if (event.isCanceled) return
+
+			val message = event.message
+			val sender = event.player
+
+			val iterator = detectors.iterator()
+
+			while (iterator.hasNext()) {
+				val detector = iterator.next()
+				if (detector.isRemoved) {
+					iterator.remove()
+					continue
+				}
+
+				if (detector.processMessage(sender, message)) event.isCanceled = true
+			}
+		}
+
+		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: ChatDetectorBlockEntity) {
+			if (blockEntity.timeOn > 0) {
+				blockEntity.timeOn--
+
+				if (blockEntity.timeOn == 0) {
+					level.setBlockAndUpdate(
+						pos,
+						state.setValue(ChatDetectorBlock.ENABLED, false)
+					)
+				}
+			}
+		}
+
+		const val OWNER_UUID_NBT = "OwnerUuid"
+		const val STOPS_MESSAGE_NBT = "StopsMessage"
+		const val MESSAGE_REGEX_NBT = "MessageRegex"
+		const val TIME_ON_NBT = "TimeOn"
+
+		const val CONTAINER_DATA_SIZE = 1
+		const val STOPS_MESSAGE_INDEX = 0
+	}
 
 }

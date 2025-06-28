@@ -22,17 +22,6 @@ open class ItemCollectorBlockEntity(
 
 	constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntities.ITEM_COLLECTOR.get(), pos, blockState)
 
-	companion object {
-		fun tick(
-			level: Level,
-			blockPos: BlockPos,
-			blockState: BlockState,
-			blockEntity: ItemCollectorBlockEntity
-		) {
-			blockEntity.tick()
-		}
-	}
-
 	protected fun tick() {
 		val level = this.level ?: return
 		if (level.isClientSide || level.gameTime % 5 != 0L) return
@@ -80,6 +69,18 @@ open class ItemCollectorBlockEntity(
 			2 * radius,
 			2 * radius
 		)
+	}
+
+
+	companion object {
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: ItemCollectorBlockEntity
+		) {
+			blockEntity.tick()
+		}
 	}
 
 }

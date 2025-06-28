@@ -15,16 +15,6 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().entityModels
 ) {
 
-	companion object {
-		val clientItemExtensions = object : IClientItemExtensions {
-			val BEWLR = CustomCraftingTableBEWLR()
-
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
-		}
-	}
-
 	//TODO: Render the crafting table part
 	override fun renderByItem(
 		stack: ItemStack,
@@ -55,6 +45,16 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		)
 
 		poseStack.popPose()
+	}
+
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = CustomCraftingTableBEWLR()
+
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
 	}
 
 }

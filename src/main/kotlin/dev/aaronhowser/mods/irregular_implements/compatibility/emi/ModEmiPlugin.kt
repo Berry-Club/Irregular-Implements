@@ -16,27 +16,6 @@ import net.minecraft.world.level.ItemLike
 @EmiEntrypoint
 class ModEmiPlugin : EmiPlugin {
 
-	companion object {
-		val ItemLike.emiStack: EmiStack
-			get() = EmiStack.of(this.asItem())
-
-		val ItemLike.ingredient: Ingredient
-			get() = Ingredient.of(this)
-
-		val Ingredient.emiIngredient: EmiIngredient
-			get() = EmiIngredient.of(this)
-
-		val ItemLike.emiIngredient: EmiIngredient
-			get() = EmiIngredient.of(this.ingredient)
-
-		val TagKey<Item>.ingredient: Ingredient
-			get() = Ingredient.of(this)
-
-		val TagKey<Item>.emiIngredient: EmiIngredient
-			get() = EmiIngredient.of(this)
-
-	}
-
 	override fun register(registry: EmiRegistry) {
 		setComparisons(registry)
 
@@ -63,8 +42,27 @@ class ModEmiPlugin : EmiPlugin {
 	}
 
 	private fun setComparisons(registry: EmiRegistry) {
-
 		registry.setDefaultComparison(EmiStack.of(ModItems.DIVINING_ROD), Comparison.compareComponents())
+	}
+
+	companion object {
+		val ItemLike.emiStack: EmiStack
+			get() = EmiStack.of(this.asItem())
+
+		val ItemLike.ingredient: Ingredient
+			get() = Ingredient.of(this)
+
+		val Ingredient.emiIngredient: EmiIngredient
+			get() = EmiIngredient.of(this)
+
+		val ItemLike.emiIngredient: EmiIngredient
+			get() = EmiIngredient.of(this.ingredient)
+
+		val TagKey<Item>.ingredient: Ingredient
+			get() = Ingredient.of(this)
+
+		val TagKey<Item>.emiIngredient: EmiIngredient
+			get() = EmiIngredient.of(this)
 	}
 
 }

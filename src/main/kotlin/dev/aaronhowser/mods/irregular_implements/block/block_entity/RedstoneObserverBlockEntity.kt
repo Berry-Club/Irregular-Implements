@@ -19,6 +19,54 @@ class RedstoneObserverBlockEntity(
 	pBlockState: BlockState
 ) : RedstoneToolLinkable, BlockEntity(ModBlockEntities.REDSTONE_OBSERVER.get(), pPos, pBlockState) {
 
+	override fun setRemoved() {
+		val level = this.level
+		if (level != null) {
+			removeObserver(level, this.blockPos)
+		}
+
+		super.setRemoved()
+	}
+
+	override var linkedPos: BlockPos? = null
+		set(value) {
+			val oldField = field
+			if (oldField != null) {
+				unlinkBlock(
+					level = this.level!!,
+					observerPos = this.blockPos,
+					targetPos = oldField
+				)
+			}
+
+			if (value != null) {
+				linkBlock(
+					level = this.level!!,
+					observerPos = this.blockPos,
+					targetPos = value
+				)
+			} else {
+				removeObserver(this.level!!, this.blockPos)
+			}
+
+			field = value
+			setChanged()
+		}
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+		this.saveToTag(tag)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+		this.loadFromTag(tag)
+	}
+
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
 	companion object {
 		private data class LevelPos(val level: Level, val pos: BlockPos)
 
@@ -70,53 +118,5 @@ class RedstoneObserverBlockEntity(
 		}
 
 	}
-
-	override fun setRemoved() {
-		val level = this.level
-		if (level != null) {
-			removeObserver(level, this.blockPos)
-		}
-
-		super.setRemoved()
-	}
-
-	override var linkedPos: BlockPos? = null
-		set(value) {
-			val oldField = field
-			if (oldField != null) {
-				unlinkBlock(
-					level = this.level!!,
-					observerPos = this.blockPos,
-					targetPos = oldField
-				)
-			}
-
-			if (value != null) {
-				linkBlock(
-					level = this.level!!,
-					observerPos = this.blockPos,
-					targetPos = value
-				)
-			} else {
-				removeObserver(this.level!!, this.blockPos)
-			}
-
-			field = value
-			setChanged()
-		}
-
-	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.saveAdditional(tag, registries)
-		this.saveToTag(tag)
-	}
-
-	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.loadAdditional(tag, registries)
-		this.loadFromTag(tag)
-	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

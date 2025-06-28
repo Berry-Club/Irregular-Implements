@@ -28,10 +28,6 @@ open class ChatDetectorBlock : EntityBlock, Block(
 		.ofFullCopy(Blocks.DISPENSER)
 ) {
 
-	companion object {
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -89,6 +85,10 @@ open class ChatDetectorBlock : EntityBlock, Block(
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 	}
 
 }

@@ -16,16 +16,6 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().entityModels
 ) {
 
-	companion object {
-		val clientItemExtensions = object : IClientItemExtensions {
-			val BEWLR = DiaphanousBEWLR()
-
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
-		}
-	}
-
 	override fun renderByItem(
 		stack: ItemStack,
 		displayContext: ItemDisplayContext,
@@ -59,6 +49,16 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 		)
 
 		poseStack.popPose()
+	}
+
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = DiaphanousBEWLR()
+
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
 	}
 
 }

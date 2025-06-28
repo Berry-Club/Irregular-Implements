@@ -19,10 +19,6 @@ import net.minecraft.world.phys.BlockHitResult
 
 class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
 
-	companion object {
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -71,6 +67,10 @@ class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)
 				blockEntity.notifyOwner()
 			}
 		}
+	}
+
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 	}
 
 }

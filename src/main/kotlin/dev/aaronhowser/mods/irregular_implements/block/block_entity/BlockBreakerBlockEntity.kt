@@ -40,49 +40,6 @@ class BlockBreakerBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.BLOCK_BREAKER.get(), pPos, pBlockState) {
 
-	companion object {
-		val breakerGameProfile = GameProfile(UUID.nameUUIDFromBytes("IIBlockBreaker".toByteArray()), "IIBlockBreaker")
-
-		const val UUID_NBT = "UUID"
-		const val IS_MINING_NBT = "IsMining"
-		const val CAN_MINE_NBT = "CanMine"
-		const val MINING_PROGRESS_NBT = "MiningProgress"
-		const val DIAMOND_BREAKER_NBT = "DiamondBreaker"
-
-		private fun getPick(
-			level: Level,
-			item: Item,
-			withEnchantments: ItemEnchantments
-		): ItemStack {
-			val stack = item.defaultInstance
-			stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
-
-			val enchantments = ItemEnchantments.Mutable(withEnchantments)
-			enchantments.set(
-				level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
-				1
-			)
-
-			EnchantmentHelper.setEnchantments(
-				stack,
-				enchantments.toImmutable()
-			)
-
-			return stack
-		}
-
-		fun tick(
-			level: Level,
-			blockPos: BlockPos,
-			blockState: BlockState,
-			blockEntity: BlockBreakerBlockEntity
-		) {
-			if (level.isClientSide) return
-
-			blockEntity.tick()
-		}
-	}
-
 	private var uuid: UUID? = null
 
 	private var isMining = false
@@ -285,13 +242,54 @@ class BlockBreakerBlockEntity(
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	class BreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
-
 		companion object {
 			fun get(level: ServerLevel, name: GameProfile): BreakerFakePlayer {
 				return BreakerFakePlayer(level, name)
 			}
 		}
+	}
 
+	companion object {
+		val breakerGameProfile = GameProfile(UUID.nameUUIDFromBytes("IIBlockBreaker".toByteArray()), "IIBlockBreaker")
+
+		const val UUID_NBT = "UUID"
+		const val IS_MINING_NBT = "IsMining"
+		const val CAN_MINE_NBT = "CanMine"
+		const val MINING_PROGRESS_NBT = "MiningProgress"
+		const val DIAMOND_BREAKER_NBT = "DiamondBreaker"
+
+		private fun getPick(
+			level: Level,
+			item: Item,
+			withEnchantments: ItemEnchantments
+		): ItemStack {
+			val stack = item.defaultInstance
+			stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
+
+			val enchantments = ItemEnchantments.Mutable(withEnchantments)
+			enchantments.set(
+				level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
+				1
+			)
+
+			EnchantmentHelper.setEnchantments(
+				stack,
+				enchantments.toImmutable()
+			)
+
+			return stack
+		}
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: BlockBreakerBlockEntity
+		) {
+			if (level.isClientSide) return
+
+			blockEntity.tick()
+		}
 	}
 
 }

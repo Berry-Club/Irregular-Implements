@@ -14,10 +14,6 @@ class WeatherCloudRenderer(
 	context: EntityRendererProvider.Context
 ) : EntityRenderer<WeatherCloudEntity>(context) {
 
-	companion object {
-		val TEXTURE = OtherUtil.modResource("naw")
-	}
-
 	override fun getTextureLocation(entity: WeatherCloudEntity): ResourceLocation {
 		return TEXTURE
 	}
@@ -55,6 +51,10 @@ class WeatherCloudRenderer(
 		poseStack.popPose()
 
 		super.render(spectreIlluminatorEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
+	}
+
+	companion object {
+		val TEXTURE = OtherUtil.modResource("naw")
 	}
 
 }

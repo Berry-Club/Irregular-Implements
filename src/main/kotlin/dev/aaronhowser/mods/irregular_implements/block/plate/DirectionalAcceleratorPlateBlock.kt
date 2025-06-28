@@ -15,10 +15,6 @@ import net.minecraft.world.phys.Vec3
 
 class DirectionalAcceleratorPlateBlock : BasePlateBlock() {
 
-	companion object {
-		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -41,6 +37,10 @@ class DirectionalAcceleratorPlateBlock : BasePlateBlock() {
 		val accelerationVector = direction.normal.toVec3().scale(0.1)
 
 		entity.push(accelerationVector)
+	}
+
+	companion object {
+		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
 	}
 
 }

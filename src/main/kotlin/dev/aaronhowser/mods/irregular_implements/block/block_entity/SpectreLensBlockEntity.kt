@@ -21,6 +21,30 @@ class SpectreLensBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.SPECTRE_LENS.get(), pPos, pBlockState) {
 
+	var owner: UUID? = null
+		set(value) {
+			field = value
+			setChanged()
+		}
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		if (owner != null) {
+			tag.putUUID(OWNER_UUID_NBT, owner!!)
+		}
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		owner = tag.getUuidOrNull(OWNER_UUID_NBT)
+	}
+
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
 	companion object {
 		const val OWNER_UUID_NBT = "OwnerUuid"
 
@@ -52,29 +76,5 @@ class SpectreLensBlockEntity(
 			}
 		}
 	}
-
-	var owner: UUID? = null
-		set(value) {
-			field = value
-			setChanged()
-		}
-
-	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.saveAdditional(tag, registries)
-
-		if (owner != null) {
-			tag.putUUID(OWNER_UUID_NBT, owner!!)
-		}
-	}
-
-	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.loadAdditional(tag, registries)
-
-		owner = tag.getUuidOrNull(OWNER_UUID_NBT)
-	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

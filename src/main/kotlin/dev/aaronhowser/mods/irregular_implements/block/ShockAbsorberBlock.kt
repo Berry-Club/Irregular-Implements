@@ -15,10 +15,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty
 
 class ShockAbsorberBlock : Block(Properties.of()) {
 
-	companion object {
-		val POWER: IntegerProperty = BlockStateProperties.POWER
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -50,5 +46,10 @@ class ShockAbsorberBlock : Block(Properties.of()) {
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return state.getValue(POWER)
 	}
+
+	companion object {
+		val POWER: IntegerProperty = BlockStateProperties.POWER
+	}
+
 
 }

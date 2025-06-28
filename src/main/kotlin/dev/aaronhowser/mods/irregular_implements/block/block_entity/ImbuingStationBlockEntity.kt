@@ -25,28 +25,6 @@ class ImbuingStationBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-		const val CONTAINER_SIZE = 5
-
-		const val TOP_SLOT_INDEX = 0
-		const val LEFT_SLOT_INDEX = 1
-		const val BOTTOM_SLOT_INDEX = 2
-		const val CENTER_SLOT_INDEX = 3
-		const val OUTPUT_SLOT_INDEX = 4
-
-		const val CRAFT_PROGRESS_NBT = "CraftProgress"
-		const val MAX_PROGRESS = 20 * 10
-
-		fun tick(
-			level: Level,
-			pos: BlockPos,
-			state: BlockState,
-			blockEntity: ImbuingStationBlockEntity
-		) {
-			blockEntity.tick()
-		}
-	}
-
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
@@ -148,4 +126,27 @@ class ImbuingStationBlockEntity(
 	override fun getDisplayName(): Component {
 		return this.blockState.block.name
 	}
+
+	companion object {
+		const val CONTAINER_SIZE = 5
+
+		const val TOP_SLOT_INDEX = 0
+		const val LEFT_SLOT_INDEX = 1
+		const val BOTTOM_SLOT_INDEX = 2
+		const val CENTER_SLOT_INDEX = 3
+		const val OUTPUT_SLOT_INDEX = 4
+
+		const val CRAFT_PROGRESS_NBT = "CraftProgress"
+		const val MAX_PROGRESS = 20 * 10
+
+		fun tick(
+			level: Level,
+			pos: BlockPos,
+			state: BlockState,
+			blockEntity: ImbuingStationBlockEntity
+		) {
+			blockEntity.tick()
+		}
+	}
+
 }

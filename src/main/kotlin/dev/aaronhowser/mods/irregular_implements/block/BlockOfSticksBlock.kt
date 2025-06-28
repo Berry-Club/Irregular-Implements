@@ -30,10 +30,6 @@ class BlockOfSticksBlock(
 		.noOcclusion()
 ) {
 
-	companion object {
-		val SHOULD_DROP: BooleanProperty = BooleanProperty.create("should_drop")
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -93,6 +89,10 @@ class BlockOfSticksBlock(
 
 		pLevel.destroyBlock(pPos, false)
 		super.tick(pState, pLevel, pPos, pRandom)
+	}
+
+	companion object {
+		val SHOULD_DROP: BooleanProperty = BooleanProperty.create("should_drop")
 	}
 
 }

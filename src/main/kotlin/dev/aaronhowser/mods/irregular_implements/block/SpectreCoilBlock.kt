@@ -40,25 +40,6 @@ class SpectreCoilBlock private constructor(
 		.ofFullCopy(Blocks.IRON_BLOCK)
 ), EntityBlock {
 
-	companion object {
-		val FACING: DirectionProperty = BlockStateProperties.FACING
-
-		private const val HEIGHT = 1.5
-
-		var SHAPE_NORTH: VoxelShape = box(5.0, 5.0, 0.0, 11.0, 11.0, HEIGHT)
-		var SHAPE_SOUTH: VoxelShape = box(5.0, 5.0, 16.0 - HEIGHT, 11.0, 11.0, 16.0)
-		var SHAPE_WEST: VoxelShape = box(0.0, 5.0, 5.0, HEIGHT, 11.0, 11.0)
-		var SHAPE_EAST: VoxelShape = box(16.0 - HEIGHT, 5.0, 5.0, 16.0, 11.0, 11.0)
-		var SHAPE_UP: VoxelShape = box(5.0, 16.0 - HEIGHT, 5.0, 11.0, 16.0, 11.0)
-		var SHAPE_DOWN: VoxelShape = box(5.0, 0.0, 5.0, 11.0, HEIGHT, 11.0)
-
-		val BASIC = SpectreCoilBlock(Type.BASIC)
-		val REDSTONE = SpectreCoilBlock(Type.REDSTONE)
-		val ENDER = SpectreCoilBlock(Type.ENDER)
-		val NUMBER = SpectreCoilBlock(Type.NUMBER)
-		val GENESIS = SpectreCoilBlock(Type.GENESIS)
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -179,6 +160,25 @@ class SpectreCoilBlock private constructor(
 		}.toGrayComponent(String.format("%,d", amount))
 
 		tooltipComponents.add(component)
+	}
+
+	companion object {
+		val FACING: DirectionProperty = BlockStateProperties.FACING
+
+		private const val HEIGHT = 1.5
+
+		var SHAPE_NORTH: VoxelShape = box(5.0, 5.0, 0.0, 11.0, 11.0, HEIGHT)
+		var SHAPE_SOUTH: VoxelShape = box(5.0, 5.0, 16.0 - HEIGHT, 11.0, 11.0, 16.0)
+		var SHAPE_WEST: VoxelShape = box(0.0, 5.0, 5.0, HEIGHT, 11.0, 11.0)
+		var SHAPE_EAST: VoxelShape = box(16.0 - HEIGHT, 5.0, 5.0, 16.0, 11.0, 11.0)
+		var SHAPE_UP: VoxelShape = box(5.0, 16.0 - HEIGHT, 5.0, 11.0, 16.0, 11.0)
+		var SHAPE_DOWN: VoxelShape = box(5.0, 0.0, 5.0, 11.0, HEIGHT, 11.0)
+
+		val BASIC = SpectreCoilBlock(Type.BASIC)
+		val REDSTONE = SpectreCoilBlock(Type.REDSTONE)
+		val ENDER = SpectreCoilBlock(Type.ENDER)
+		val NUMBER = SpectreCoilBlock(Type.NUMBER)
+		val GENESIS = SpectreCoilBlock(Type.GENESIS)
 	}
 
 }

@@ -19,6 +19,19 @@ abstract class RedstoneInterfaceBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(pBlockEntityType, pPos, pBlockState) {
 
+	override fun setRemoved() {
+		val level = this.level
+		if (level != null) {
+			removeInterface(level, this.blockPos)
+		}
+
+		super.setRemoved()
+	}
+
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
 	companion object {
 		private data class LevelPos(val level: Level, val pos: BlockPos)
 
@@ -69,18 +82,5 @@ abstract class RedstoneInterfaceBlockEntity(
 		}
 
 	}
-
-	override fun setRemoved() {
-		val level = this.level
-		if (level != null) {
-			removeInterface(level, this.blockPos)
-		}
-
-		super.setRemoved()
-	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

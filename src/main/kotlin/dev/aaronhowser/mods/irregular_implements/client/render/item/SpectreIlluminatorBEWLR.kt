@@ -15,16 +15,6 @@ class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().entityModels
 ) {
 
-	companion object {
-		val clientItemExtensions = object : IClientItemExtensions {
-			val BEWLR = SpectreIlluminatorBEWLR()
-
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
-		}
-	}
-
 	override fun renderByItem(
 		stack: ItemStack,
 		displayContext: ItemDisplayContext,
@@ -45,6 +35,16 @@ class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
 		)
 
 		poseStack.popPose()
+	}
+
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = SpectreIlluminatorBEWLR()
+
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
 	}
 
 }

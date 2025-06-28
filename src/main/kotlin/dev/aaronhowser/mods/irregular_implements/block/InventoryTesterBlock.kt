@@ -27,17 +27,6 @@ import net.neoforged.neoforge.capabilities.Capabilities
 
 class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
 
-	companion object {
-		val SHAPE_SOUTH: VoxelShape = box(6.0, 6.0, 15.0, 10.0, 10.0, 16.0)
-		val SHAPE_NORTH: VoxelShape = box(6.0, 6.0, 0.0, 10.0, 10.0, 1.0)
-		val SHAPE_EAST: VoxelShape = box(15.0, 6.0, 6.0, 16.0, 10.0, 10.0)
-		val SHAPE_WEST: VoxelShape = box(0.0, 6.0, 6.0, 1.0, 10.0, 10.0)
-		val SHAPE_DOWN: VoxelShape = box(6.0, 0.0, 6.0, 10.0, 1.0, 10.0)
-		val SHAPE_UP: VoxelShape = box(6.0, 15.0, 6.0, 10.0, 16.0, 10.0)
-
-		val FACING: DirectionProperty = BlockStateProperties.FACING
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -118,6 +107,17 @@ class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), En
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	companion object {
+		val SHAPE_SOUTH: VoxelShape = box(6.0, 6.0, 15.0, 10.0, 10.0, 16.0)
+		val SHAPE_NORTH: VoxelShape = box(6.0, 6.0, 0.0, 10.0, 10.0, 1.0)
+		val SHAPE_EAST: VoxelShape = box(15.0, 6.0, 6.0, 16.0, 10.0, 10.0)
+		val SHAPE_WEST: VoxelShape = box(0.0, 6.0, 6.0, 1.0, 10.0, 10.0)
+		val SHAPE_DOWN: VoxelShape = box(6.0, 0.0, 6.0, 10.0, 1.0, 10.0)
+		val SHAPE_UP: VoxelShape = box(6.0, 15.0, 6.0, 10.0, 16.0, 10.0)
+
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 	}
 
 }

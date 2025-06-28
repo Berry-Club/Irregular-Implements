@@ -12,11 +12,6 @@ class NotificationToast(
 	private val icon: ItemStack?
 ) : Toast {
 
-	companion object {
-		private val BACKGROUND_SPRITE: ResourceLocation = ResourceLocation.withDefaultNamespace("toast/advancement")
-		private const val DISPLAY_TIME = 5000
-	}
-
 	//FIXME: Vanishes instead of sliding out
 	override fun render(
 		guiGraphics: GuiGraphics,
@@ -43,4 +38,10 @@ class NotificationToast(
 
 		return if (shouldHide) Toast.Visibility.HIDE else Toast.Visibility.SHOW
 	}
+
+	companion object {
+		private val BACKGROUND_SPRITE: ResourceLocation = ResourceLocation.withDefaultNamespace("toast/advancement")
+		private const val DISPLAY_TIME = 5000
+	}
+
 }

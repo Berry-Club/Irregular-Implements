@@ -31,15 +31,6 @@ class LotusBlock(
 			.randomTicks()
 ) : BushBlock(properties), BonemealableBlock {
 
-	companion object {
-		val AGE: IntegerProperty = BlockStateProperties.AGE_3
-		const val MAXIMUM_AGE = 3
-
-		val SHAPE: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0)
-
-		val CODEC: MapCodec<LotusBlock> = simpleCodec(::LotusBlock)
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -100,4 +91,14 @@ class LotusBlock(
 		val newState = state.cycle(AGE)
 		level.setBlockAndUpdate(pos, newState)
 	}
+
+	companion object {
+		val AGE: IntegerProperty = BlockStateProperties.AGE_3
+		const val MAXIMUM_AGE = 3
+
+		val SHAPE: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0)
+
+		val CODEC: MapCodec<LotusBlock> = simpleCodec(::LotusBlock)
+	}
+
 }

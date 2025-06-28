@@ -36,41 +36,6 @@ class BlockDestabilizerBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-		const val STATE_NBT = "state"
-		const val LAZY_NBT = "lazy"
-
-		const val TARGET_STATE_BLOCK_NBT = "target_state_block"
-
-		const val LAZY_BLOCKS = "lazy_blocks"
-		const val ALREADY_CHECKED_NBT = "already_checked"
-		const val TO_CHECK_NBT = "to_check"
-		const val TARGET_BLOCKS_NBT = "target_blocks"
-
-		const val DROP_COUNTER_NBT = "drop_counter"
-		const val TARGET_BLOCKS_SORTED_NBT = "target_blocks_sorted"
-
-		const val CONTAINER_DATA_SIZE = 3
-		const val LAZY_INDEX = 0
-		const val SHOW_LAZY_INDEX = 1
-		const val RESET_LAZY_INDEX = 2
-
-		fun tick(
-			level: Level,
-			blockPos: BlockPos,
-			blockState: BlockState,
-			blockEntity: BlockDestabilizerBlockEntity
-		) {
-			if (level.isClientSide) return
-
-			if (blockEntity.state == State.SEARCHING) {
-				blockEntity.stepSearch()
-			} else if (blockEntity.state == State.DROPPING) {
-				blockEntity.dropNextBlock()
-			}
-		}
-	}
-
 	enum class State { IDLE, SEARCHING, DROPPING }
 
 	var state: State = State.IDLE
@@ -394,5 +359,40 @@ class BlockDestabilizerBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val STATE_NBT = "state"
+		const val LAZY_NBT = "lazy"
+
+		const val TARGET_STATE_BLOCK_NBT = "target_state_block"
+
+		const val LAZY_BLOCKS = "lazy_blocks"
+		const val ALREADY_CHECKED_NBT = "already_checked"
+		const val TO_CHECK_NBT = "to_check"
+		const val TARGET_BLOCKS_NBT = "target_blocks"
+
+		const val DROP_COUNTER_NBT = "drop_counter"
+		const val TARGET_BLOCKS_SORTED_NBT = "target_blocks_sorted"
+
+		const val CONTAINER_DATA_SIZE = 3
+		const val LAZY_INDEX = 0
+		const val SHOW_LAZY_INDEX = 1
+		const val RESET_LAZY_INDEX = 2
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: BlockDestabilizerBlockEntity
+		) {
+			if (level.isClientSide) return
+
+			if (blockEntity.state == State.SEARCHING) {
+				blockEntity.stepSearch()
+			} else if (blockEntity.state == State.DROPPING) {
+				blockEntity.dropNextBlock()
+			}
+		}
+	}
 
 }

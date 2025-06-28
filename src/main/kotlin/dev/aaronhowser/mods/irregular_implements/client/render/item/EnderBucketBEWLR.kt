@@ -10,20 +10,11 @@ import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
+//TODO
 class EnderBucketBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().blockEntityRenderDispatcher,
 	Minecraft.getInstance().entityModels
 ) {
-
-	companion object {
-		val clientItemExtensions = object : IClientItemExtensions {
-			val BEWLR = EnderBucketBEWLR()
-
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
-		}
-	}
 
 	override fun renderByItem(
 		stack: ItemStack,
@@ -41,6 +32,16 @@ class EnderBucketBEWLR : BlockEntityWithoutLevelRenderer(
 			val sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
 		}
 
+	}
+
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = EnderBucketBEWLR()
+
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
 	}
 
 }

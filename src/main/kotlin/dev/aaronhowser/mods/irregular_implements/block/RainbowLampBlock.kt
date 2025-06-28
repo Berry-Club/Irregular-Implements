@@ -16,10 +16,6 @@ class RainbowLampBlock : Block(
 		.lightLevel { 15 }
 ) {
 
-	companion object {
-		val COLOR: IntegerProperty = IntegerProperty.create("color", 0, 15)
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -49,6 +45,10 @@ class RainbowLampBlock : Block(
 		if (redstoneStrength in COLOR.possibleValues) {
 			level.setBlockAndUpdate(pos, state.setValue(COLOR, redstoneStrength))
 		}
+	}
+
+	companion object {
+		val COLOR: IntegerProperty = IntegerProperty.create("color", 0, 15)
 	}
 
 }

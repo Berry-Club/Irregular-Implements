@@ -27,29 +27,6 @@ class OnlineDetectorBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-
-		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
-			if (level !is ServerLevel || level.gameTime % 20 != 0L) return
-
-			checkPlayerOnline(level, pos, state, blockEntity)
-		}
-
-		private fun checkPlayerOnline(level: ServerLevel, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
-			val username = blockEntity.username
-			val playerOnline = level.server.playerList.getPlayerByName(username) != null
-
-			if (playerOnline != state.getValue(OnlineDetectorBlock.ENABLED)) {
-				level.setBlockAndUpdate(
-					pos,
-					state.setValue(OnlineDetectorBlock.ENABLED, playerOnline)
-				)
-			}
-		}
-
-		const val USERNAME_NBT = "Username"
-	}
-
 	var username: String = ""
 		set(value) {
 			field = value
@@ -101,5 +78,27 @@ class OnlineDetectorBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val USERNAME_NBT = "Username"
+
+		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
+			if (level !is ServerLevel || level.gameTime % 20 != 0L) return
+
+			checkPlayerOnline(level, pos, state, blockEntity)
+		}
+
+		private fun checkPlayerOnline(level: ServerLevel, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
+			val username = blockEntity.username
+			val playerOnline = level.server.playerList.getPlayerByName(username) != null
+
+			if (playerOnline != state.getValue(OnlineDetectorBlock.ENABLED)) {
+				level.setBlockAndUpdate(
+					pos,
+					state.setValue(OnlineDetectorBlock.ENABLED, playerOnline)
+				)
+			}
+		}
+	}
 
 }

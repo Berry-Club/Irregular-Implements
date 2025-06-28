@@ -22,10 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class SpectreLensBlock : EntityBlock, TransparentBlock(Properties.ofFullCopy(Blocks.GLASS)) {
 
-	companion object {
-		val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0)
-	}
-
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		return SHAPE
 	}
@@ -68,6 +64,10 @@ class SpectreLensBlock : EntityBlock, TransparentBlock(Properties.ofFullCopy(Blo
 					false
 				)
 			)
+	}
+
+	companion object {
+		val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0)
 	}
 
 }

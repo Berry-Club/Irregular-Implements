@@ -26,12 +26,6 @@ class IgniterBlock(
 	properties: Properties = Properties.ofFullCopy(Blocks.DISPENSER)
 ) : DirectionalBlock(properties), EntityBlock {
 
-	companion object {
-		val CODEC: MapCodec<IgniterBlock> = simpleCodec(::IgniterBlock)
-
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -97,6 +91,11 @@ class IgniterBlock(
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
 		return IgniterBlockEntity(pos, state)
+	}
+
+	companion object {
+		val CODEC: MapCodec<IgniterBlock> = simpleCodec(::IgniterBlock)
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 	}
 
 }

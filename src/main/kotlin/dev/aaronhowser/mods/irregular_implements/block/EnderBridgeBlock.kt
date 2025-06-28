@@ -33,6 +33,53 @@ class EnderBridgeBlock(
 		.ofFullCopy(Blocks.OBSIDIAN)
 ) : DirectionalBlock(properties) {
 
+	override fun codec(): MapCodec<EnderBridgeBlock> = CODEC
+
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.NORTH)
+				.setValue(ContactLeverBlock.ENABLED, false)
+		)
+	}
+
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING, ENABLED)
+	}
+
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
+
+	override fun neighborChanged(
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		block: Block,
+		fromPos: BlockPos,
+		isMoving: Boolean
+	) {
+		if (level !is ServerLevel) return
+
+		val isPowered = level.hasNeighborSignal(pos)
+		if (!isPowered) return
+		if (state.getValue(ENABLED)) return
+
+		val newState = state.setValue(ENABLED, true)
+		level.setBlockAndUpdate(pos, newState)
+
+		val direction = state.getValue(FACING)
+		searchForAnchor(
+			level = level,
+			blocksPerIteration = distancePerTick,
+			bridgePos = pos,
+			searchOrigin = pos.relative(direction),
+			direction = direction,
+			iterations = 0
+		)
+	}
+
 	companion object {
 		val CODEC: MapCodec<EnderBridgeBlock> = RecordCodecBuilder.mapCodec { instance ->
 			instance.group(
@@ -201,53 +248,6 @@ class EnderBridgeBlock(
 				SoundSource.BLOCKS
 			)
 		}
-	}
-
-	override fun codec(): MapCodec<EnderBridgeBlock> = CODEC
-
-	init {
-		registerDefaultState(
-			stateDefinition.any()
-				.setValue(FACING, Direction.NORTH)
-				.setValue(ContactLeverBlock.ENABLED, false)
-		)
-	}
-
-	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(FACING, ENABLED)
-	}
-
-	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-		return defaultBlockState()
-			.setValue(FACING, context.nearestLookingDirection.opposite)
-	}
-
-	override fun neighborChanged(
-		state: BlockState,
-		level: Level,
-		pos: BlockPos,
-		block: Block,
-		fromPos: BlockPos,
-		isMoving: Boolean
-	) {
-		if (level !is ServerLevel) return
-
-		val isPowered = level.hasNeighborSignal(pos)
-		if (!isPowered) return
-		if (state.getValue(ENABLED)) return
-
-		val newState = state.setValue(ENABLED, true)
-		level.setBlockAndUpdate(pos, newState)
-
-		val direction = state.getValue(FACING)
-		searchForAnchor(
-			level = level,
-			blocksPerIteration = distancePerTick,
-			bridgePos = pos,
-			searchOrigin = pos.relative(direction),
-			direction = direction,
-			iterations = 0
-		)
 	}
 
 }

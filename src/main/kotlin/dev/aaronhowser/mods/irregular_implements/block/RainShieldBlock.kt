@@ -25,10 +25,6 @@ class RainShieldBlock : EntityBlock, Block(
 		.strength(2f)
 ) {
 
-	companion object {
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -72,5 +68,8 @@ class RainShieldBlock : EntityBlock, Block(
 		)
 	}
 
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+	}
 
 }

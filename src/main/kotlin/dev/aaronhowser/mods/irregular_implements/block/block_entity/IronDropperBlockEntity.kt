@@ -32,29 +32,6 @@ class IronDropperBlockEntity(
 	pBlockState: BlockState
 ) : DispenserBlockEntity(ModBlockEntities.IRON_DROPPER.get(), pPos, pBlockState) {
 
-	companion object {
-		const val CONTAINER_DATA_SIZE = 4
-
-		const val SHOOT_STRAIGHT_INDEX = 0
-		const val EFFECTS_MODE_INDEX = 1
-		const val PICKUP_DELAY_INDEX = 2
-		const val REDSTONE_MODE_INDEX = 3
-
-		const val SHOOT_STRAIGHT_NBT = "ShootStraight"
-		const val EFFECTS_MODE_NBT = "EffectsMode"
-		const val PICKUP_DELAY_NBT = "PickupDelay"
-		const val REDSTONE_MODE_NBT = "RedstoneMode"
-
-		fun tick(
-			level: Level,
-			pos: BlockPos,
-			state: BlockState,
-			blockEntity: IronDropperBlockEntity
-		) {
-			blockEntity.tick()
-		}
-	}
-
 	var shouldShootStraight: Boolean = false
 		private set(value) {
 			field = value
@@ -238,5 +215,27 @@ class IronDropperBlockEntity(
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
+	companion object {
+		const val CONTAINER_DATA_SIZE = 4
+
+		const val SHOOT_STRAIGHT_INDEX = 0
+		const val EFFECTS_MODE_INDEX = 1
+		const val PICKUP_DELAY_INDEX = 2
+		const val REDSTONE_MODE_INDEX = 3
+
+		const val SHOOT_STRAIGHT_NBT = "ShootStraight"
+		const val EFFECTS_MODE_NBT = "EffectsMode"
+		const val PICKUP_DELAY_NBT = "PickupDelay"
+		const val REDSTONE_MODE_NBT = "RedstoneMode"
+
+		fun tick(
+			level: Level,
+			pos: BlockPos,
+			state: BlockState,
+			blockEntity: IronDropperBlockEntity
+		) {
+			blockEntity.tick()
+		}
+	}
 
 }

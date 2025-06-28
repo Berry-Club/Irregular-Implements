@@ -28,23 +28,6 @@ class InventoryTesterBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-		const val INVERT_SIGNAL_NBT = "InvertSignal"
-		const val IS_EMITTING_REDSTONE_NBT = "IsEmittingRedstone"
-
-		const val CONTAINER_SIZE = 1
-		const val CONTAINER_DATA_SIZE = 1
-
-		fun tick(
-			level: Level,
-			pos: BlockPos,
-			state: BlockState,
-			blockEntity: InventoryTesterBlockEntity
-		) {
-			blockEntity.tick()
-		}
-	}
-
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
 	private var invertSignal: Boolean = false
@@ -128,5 +111,23 @@ class InventoryTesterBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val INVERT_SIGNAL_NBT = "InvertSignal"
+		const val IS_EMITTING_REDSTONE_NBT = "IsEmittingRedstone"
+
+		const val CONTAINER_SIZE = 1
+		const val CONTAINER_DATA_SIZE = 1
+
+		fun tick(
+			level: Level,
+			pos: BlockPos,
+			state: BlockState,
+			blockEntity: InventoryTesterBlockEntity
+		) {
+			blockEntity.tick()
+		}
+	}
+
 
 }

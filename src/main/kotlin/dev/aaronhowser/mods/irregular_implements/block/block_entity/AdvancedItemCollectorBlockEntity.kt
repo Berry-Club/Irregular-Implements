@@ -22,19 +22,6 @@ class AdvancedItemCollectorBlockEntity(
 	pBlockState: BlockState
 ) : ItemCollectorBlockEntity(ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-		const val X_RADIUS_NBT = "XRadius"
-		const val Y_RADIUS_NBT = "YRadius"
-		const val Z_RADIUS_NBT = "ZRadius"
-
-		const val CONTAINER_SIZE = 1
-
-		const val CONTAINER_DATA_SIZE = 3
-		const val X_RADIUS_INDEX = 0
-		const val Y_RADIUS_INDEX = 1
-		const val Z_RADIUS_INDEX = 2
-	}
-
 	var xRadius: Int = 5
 		set(value) {
 			field = value.coerceIn(0, 10)
@@ -115,8 +102,19 @@ class AdvancedItemCollectorBlockEntity(
 		return AdvancedItemCollectorMenu(containerId, playerInventory, this.container, this.containerData)
 	}
 
-	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+	override fun getDisplayName(): Component = this.blockState.block.name
+
+	companion object {
+		const val X_RADIUS_NBT = "XRadius"
+		const val Y_RADIUS_NBT = "YRadius"
+		const val Z_RADIUS_NBT = "ZRadius"
+
+		const val CONTAINER_SIZE = 1
+
+		const val CONTAINER_DATA_SIZE = 3
+		const val X_RADIUS_INDEX = 0
+		const val Y_RADIUS_INDEX = 1
+		const val Z_RADIUS_INDEX = 2
 	}
 
 }

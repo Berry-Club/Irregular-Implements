@@ -18,10 +18,6 @@ class CustomCraftingTableBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
 
-	companion object {
-		const val RENDERED_BLOCK_STATE = "RenderedBlockState"
-	}
-
 	var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
 		set(value) {
 			field = value
@@ -50,5 +46,9 @@ class CustomCraftingTableBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val RENDERED_BLOCK_STATE = "RenderedBlockState"
+	}
 
 }

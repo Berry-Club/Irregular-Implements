@@ -15,10 +15,6 @@ class GoldenChickenRenderer(context: EntityRendererProvider.Context) : MobRender
 	0.3f
 ) {
 
-	companion object {
-		val TEXTURE = OtherUtil.modResource("textures/entity/golden_chicken.png")
-	}
-
 	override fun getTextureLocation(entity: GoldenChickenEntity): ResourceLocation {
 		return TEXTURE
 	}
@@ -27,6 +23,10 @@ class GoldenChickenRenderer(context: EntityRendererProvider.Context) : MobRender
 		val f = Mth.lerp(partialTick, livingBase.oFlap, livingBase.flap)
 		val f1 = Mth.lerp(partialTick, livingBase.oFlapSpeed, livingBase.flapSpeed)
 		return (Mth.sin(f) + 1.0f) * f1
+	}
+
+	companion object {
+		val TEXTURE = OtherUtil.modResource("textures/entity/golden_chicken.png")
 	}
 
 }

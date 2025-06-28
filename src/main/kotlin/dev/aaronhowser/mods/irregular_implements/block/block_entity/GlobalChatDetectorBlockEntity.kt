@@ -34,49 +34,6 @@ class GlobalChatDetectorBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-
-		private val globalDetectors: MutableSet<GlobalChatDetectorBlockEntity> = mutableSetOf()
-
-		fun processMessage(event: ServerChatEvent) {
-			if (event.isCanceled) return
-
-			val message = event.message
-			val sender = event.player
-
-			val iterator = globalDetectors.iterator()
-
-			while (iterator.hasNext()) {
-				val detector = iterator.next()
-				if (detector.isRemoved) {
-					iterator.remove()
-					continue
-				}
-
-				if (detector.processMessage(sender, message)) event.isCanceled = true
-			}
-		}
-
-		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: GlobalChatDetectorBlockEntity) {
-			if (blockEntity.timeOn > 0) {
-				blockEntity.timeOn--
-
-				if (blockEntity.timeOn == 0) {
-					level.setBlockAndUpdate(
-						pos,
-						state.setValue(GlobalChatDetectorBlock.ENABLED, false)
-					)
-				}
-			}
-		}
-
-		const val STOPS_MESSAGE_NBT = "StopsMessage"
-		const val MESSAGE_REGEX_NBT = "MessageRegex"
-
-		const val CONTAINER_DATA_SIZE = 1
-		const val STOPS_MESSAGE_INDEX = 0
-	}
-
 	var regexString: String = ""
 		set(value) {
 			field = value
@@ -199,5 +156,49 @@ class GlobalChatDetectorBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+
+	companion object {
+
+		private val globalDetectors: MutableSet<GlobalChatDetectorBlockEntity> = mutableSetOf()
+
+		fun processMessage(event: ServerChatEvent) {
+			if (event.isCanceled) return
+
+			val message = event.message
+			val sender = event.player
+
+			val iterator = globalDetectors.iterator()
+
+			while (iterator.hasNext()) {
+				val detector = iterator.next()
+				if (detector.isRemoved) {
+					iterator.remove()
+					continue
+				}
+
+				if (detector.processMessage(sender, message)) event.isCanceled = true
+			}
+		}
+
+		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: GlobalChatDetectorBlockEntity) {
+			if (blockEntity.timeOn > 0) {
+				blockEntity.timeOn--
+
+				if (blockEntity.timeOn == 0) {
+					level.setBlockAndUpdate(
+						pos,
+						state.setValue(GlobalChatDetectorBlock.ENABLED, false)
+					)
+				}
+			}
+		}
+
+		const val STOPS_MESSAGE_NBT = "StopsMessage"
+		const val MESSAGE_REGEX_NBT = "MessageRegex"
+
+		const val CONTAINER_DATA_SIZE = 1
+		const val STOPS_MESSAGE_INDEX = 0
+	}
 
 }

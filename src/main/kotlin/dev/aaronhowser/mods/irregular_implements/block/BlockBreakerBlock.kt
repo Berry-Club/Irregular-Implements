@@ -31,11 +31,6 @@ class BlockBreakerBlock : Block(
 	Properties.ofFullCopy(Blocks.DISPENSER)
 ), EntityBlock {
 
-	companion object {
-		val FACING: DirectionProperty = BlockStateProperties.FACING
-		val IS_UPGRADED: BooleanProperty = BooleanProperty.create("is_upgraded")
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -123,6 +118,11 @@ class BlockBreakerBlock : Block(
 		}
 
 		super.onRemove(oldState, level, pos, newState, movedByPiston)
+	}
+
+	companion object {
+		val FACING: DirectionProperty = BlockStateProperties.FACING
+		val IS_UPGRADED: BooleanProperty = BooleanProperty.create("is_upgraded")
 	}
 
 }

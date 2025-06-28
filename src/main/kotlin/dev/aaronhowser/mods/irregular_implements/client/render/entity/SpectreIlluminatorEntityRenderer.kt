@@ -13,15 +13,6 @@ class SpectreIlluminatorEntityRenderer(
 	context: EntityRendererProvider.Context
 ) : EntityRenderer<SpectreIlluminatorEntity>(context) {
 
-	companion object {
-		val TEXTURE = OtherUtil.modResource("no")
-
-		private const val LENGTH_START = 0.1f
-		private const val LENGTH_END = 2.25f
-
-		private const val WIDTH_FACTOR = 0.35f
-	}
-
 	//TODO: Render the wibbly item texture in the center (also do this for the BEWLR)
 	override fun render(
 		spectreIlluminatorEntity: SpectreIlluminatorEntity,
@@ -62,4 +53,14 @@ class SpectreIlluminatorEntityRenderer(
 	override fun getTextureLocation(entity: SpectreIlluminatorEntity): ResourceLocation {
 		return TEXTURE
 	}
+
+	companion object {
+		val TEXTURE = OtherUtil.modResource("no")
+
+		private const val LENGTH_START = 0.1f
+		private const val LENGTH_END = 2.25f
+
+		private const val WIDTH_FACTOR = 0.35f
+	}
+
 }

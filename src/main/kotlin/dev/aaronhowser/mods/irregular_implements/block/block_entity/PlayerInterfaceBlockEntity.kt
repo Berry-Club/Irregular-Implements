@@ -26,32 +26,6 @@ class PlayerInterfaceBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.PLAYER_INTERFACE.get(), pPos, pBlockState) {
 
-	companion object {
-
-		private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
-
-		/**
-		 * Mostly meant to be called from KubeJS.
-		 *
-		 * Here's an example:
-		 *
-		 * ```js
-		 * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
-		 *
-		 * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
-		 * ```
-		 *
-		 * @param predicate A predicate that takes in a [Player] and a [BlockEntity] and returns a [Boolean].
-		 */
-		@JvmStatic
-		fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
-			PLAYER_PREDICATE = predicate
-		}
-
-		const val OWNER_UUID_NBT = "OwnerUuid"
-
-	}
-
 	private enum class InventorySection {
 		ARMOR,
 		HOTBAR,
@@ -141,6 +115,30 @@ class PlayerInterfaceBlockEntity(
 		super.saveAdditional(tag, registries)
 
 		tag.putUUID(OWNER_UUID_NBT, ownerUuid)
+	}
+
+	companion object {
+		private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
+
+		/**
+		 * Mostly meant to be called from KubeJS.
+		 *
+		 * Here's an example:
+		 *
+		 * ```js
+		 * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
+		 *
+		 * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
+		 * ```
+		 *
+		 * @param predicate A predicate that takes in a [Player] and a [BlockEntity] and returns a [Boolean].
+		 */
+		@JvmStatic
+		fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
+			PLAYER_PREDICATE = predicate
+		}
+
+		const val OWNER_UUID_NBT = "OwnerUuid"
 	}
 
 }

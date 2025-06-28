@@ -33,6 +33,81 @@ class SakanadeBlock : Block(
 		.replaceable()
 ), IShearable {
 
+	init {
+		this.registerDefaultState(
+			this.stateDefinition
+				.any()
+				.setValue(NORTH, false)
+				.setValue(EAST, false)
+				.setValue(SOUTH, false)
+				.setValue(WEST, false)
+				.setValue(UP, false)
+				.setValue(DOWN, false)
+		)
+
+		shapesCache = stateDefinition.possibleStates.associateWith(::calculateShape)
+	}
+
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN)
+	}
+
+	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		return shapesCache[state] ?: calculateShape(state)
+	}
+
+	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+		return hasFaces(getUpdatedState(state, level, pos))
+	}
+
+	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+		val newState = getUpdatedState(state, level, pos)
+		return if (!hasFaces(newState)) Blocks.AIR.defaultBlockState() else newState
+	}
+
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		val level = context.level
+		val clickedPos = context.clickedPos
+
+		val clickedState = level.getBlockState(clickedPos)
+		val clickedThis = clickedState.`is`(this)
+
+		val stateToPlace = if (clickedThis) clickedState else defaultBlockState()
+
+		for (direction in context.nearestLookingDirections) {
+			val property = PROPERTY_BY_DIRECTION[direction] ?: continue
+			val alreadyHasProperty = clickedThis && clickedState.getValue(property)
+
+			if (!alreadyHasProperty && isAcceptableNeighbour(level, clickedPos.relative(direction), direction)) {
+				return stateToPlace.setValue(property, true)
+			}
+		}
+
+		return if (clickedThis) stateToPlace else null
+	}
+
+	override fun canBeReplaced(state: BlockState, useContext: BlockPlaceContext): Boolean {
+		val level = useContext.level
+		val clickedPos = useContext.clickedPos
+		val clickedState = level.getBlockState(clickedPos)
+
+		return if (clickedState.`is`(this)) countFaces(clickedState) < PROPERTY_BY_DIRECTION.size else super.canBeReplaced(state, useContext)
+	}
+
+	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
+		return true
+	}
+
+	override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		return Shapes.empty()
+	}
+
+	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+		if (entity is LivingEntity) {
+			entity.addEffect(MobEffectInstance(ModEffects.COLLAPSE, 20 * 8))
+		}
+	}
+
 	companion object {
 		@JvmStatic
 		fun addToMushroom(
@@ -140,81 +215,6 @@ class SakanadeBlock : Block(
 			val state = level.getBlockState(relative)
 
 			return state.`is`(ModBlocks.SAKANADE_SPORES) && state.getValue(property)
-		}
-	}
-
-	init {
-		this.registerDefaultState(
-			this.stateDefinition
-				.any()
-				.setValue(NORTH, false)
-				.setValue(EAST, false)
-				.setValue(SOUTH, false)
-				.setValue(WEST, false)
-				.setValue(UP, false)
-				.setValue(DOWN, false)
-		)
-
-		shapesCache = stateDefinition.possibleStates.associateWith(::calculateShape)
-	}
-
-	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN)
-	}
-
-	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-		return shapesCache[state] ?: calculateShape(state)
-	}
-
-	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-		return hasFaces(getUpdatedState(state, level, pos))
-	}
-
-	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
-		val newState = getUpdatedState(state, level, pos)
-		return if (!hasFaces(newState)) Blocks.AIR.defaultBlockState() else newState
-	}
-
-	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-		val level = context.level
-		val clickedPos = context.clickedPos
-
-		val clickedState = level.getBlockState(clickedPos)
-		val clickedThis = clickedState.`is`(this)
-
-		val stateToPlace = if (clickedThis) clickedState else defaultBlockState()
-
-		for (direction in context.nearestLookingDirections) {
-			val property = PROPERTY_BY_DIRECTION[direction] ?: continue
-			val alreadyHasProperty = clickedThis && clickedState.getValue(property)
-
-			if (!alreadyHasProperty && isAcceptableNeighbour(level, clickedPos.relative(direction), direction)) {
-				return stateToPlace.setValue(property, true)
-			}
-		}
-
-		return if (clickedThis) stateToPlace else null
-	}
-
-	override fun canBeReplaced(state: BlockState, useContext: BlockPlaceContext): Boolean {
-		val level = useContext.level
-		val clickedPos = useContext.clickedPos
-		val clickedState = level.getBlockState(clickedPos)
-
-		return if (clickedState.`is`(this)) countFaces(clickedState) < PROPERTY_BY_DIRECTION.size else super.canBeReplaced(state, useContext)
-	}
-
-	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
-		return true
-	}
-
-	override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-		return Shapes.empty()
-	}
-
-	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-		if (entity is LivingEntity) {
-			entity.addEffect(MobEffectInstance(ModEffects.COLLAPSE, 20 * 8))
 		}
 	}
 

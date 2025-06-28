@@ -25,11 +25,6 @@ import net.minecraft.world.phys.BlockHitResult
 
 class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISPENSER)) {
 
-	companion object {
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-		val HORIZONTAL_FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -85,6 +80,11 @@ class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISP
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val HORIZONTAL_FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
 	}
 
 }

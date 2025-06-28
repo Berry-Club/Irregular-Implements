@@ -11,17 +11,6 @@ import net.neoforged.neoforge.capabilities.Capabilities
 
 class CollectionPlateBlock : BasePlateBlock() {
 
-	companion object {
-		private val directions = setOf(
-			Direction.DOWN,
-			Direction.NORTH,
-			Direction.SOUTH,
-			Direction.WEST,
-			Direction.EAST,
-			Direction.UP
-		)
-	}
-
 	//TODO: Maybe make a plop sound on inserting items?
 	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
 		if (entity !is ItemEntity) return
@@ -50,6 +39,17 @@ class CollectionPlateBlock : BasePlateBlock() {
 		if (level !is Level) return false
 
 		return level.getCapability(Capabilities.ItemHandler.BLOCK, pos.below(), Direction.UP) != null
+	}
+
+	companion object {
+		private val directions = setOf(
+			Direction.DOWN,
+			Direction.NORTH,
+			Direction.SOUTH,
+			Direction.WEST,
+			Direction.EAST,
+			Direction.UP
+		)
 	}
 
 }

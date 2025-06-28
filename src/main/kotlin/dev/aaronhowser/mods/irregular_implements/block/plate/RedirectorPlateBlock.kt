@@ -17,12 +17,6 @@ import net.minecraft.world.phys.BlockHitResult
 
 class RedirectorPlateBlock : BasePlateBlock() {
 
-	companion object {
-		val ACTIVE_ONE: DirectionProperty = DirectionProperty.create("active_one", Direction.Plane.HORIZONTAL)
-		val ACTIVE_TWO: DirectionProperty = DirectionProperty.create("active_two", Direction.Plane.HORIZONTAL)
-	}
-
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -95,6 +89,11 @@ class RedirectorPlateBlock : BasePlateBlock() {
 
 		entity.teleportTo(moveToPos.x, entity.y, moveToPos.z)
 		entity.deltaMovement = outputMotion
+	}
+
+	companion object {
+		val ACTIVE_ONE: DirectionProperty = DirectionProperty.create("active_one", Direction.Plane.HORIZONTAL)
+		val ACTIVE_TWO: DirectionProperty = DirectionProperty.create("active_two", Direction.Plane.HORIZONTAL)
 	}
 
 }

@@ -17,10 +17,6 @@ abstract class BasePlateBlock(
 		Properties.ofFullCopy(Blocks.STONE_PRESSURE_PLATE)
 ) : Block(properties) {
 
-	companion object {
-		val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 0.5, 16.0)
-	}
-
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		return SHAPE
 	}
@@ -46,6 +42,10 @@ abstract class BasePlateBlock(
 		} else {
 			Blocks.AIR.defaultBlockState()
 		}
+	}
+
+	companion object {
+		val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 0.5, 16.0)
 	}
 
 }

@@ -18,11 +18,6 @@ class DiaphanousBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
 
-	companion object {
-		const val RENDERED_BLOCK_STATE = "RenderedBlockState"
-		const val IS_INVERTED_NBT = "IsInverted"
-	}
-
 	var renderedBlockState: BlockState = Blocks.STONE.defaultBlockState()
 		set(value) {
 			field = value
@@ -61,5 +56,10 @@ class DiaphanousBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val RENDERED_BLOCK_STATE = "RenderedBlockState"
+		const val IS_INVERTED_NBT = "IsInverted"
+	}
 
 }

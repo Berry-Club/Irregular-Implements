@@ -6,10 +6,6 @@ import net.minecraft.nbt.CompoundTag
 
 interface RedstoneToolLinkable {
 
-	companion object {
-		private const val LINKED_POS_NBT = "LinkedPos"
-	}
-
 	var linkedPos: BlockPos?
 
 	fun loadFromTag(tag: CompoundTag) {
@@ -25,6 +21,10 @@ interface RedstoneToolLinkable {
 		if (linkedPos != null) {
 			tag.putLong(LINKED_POS_NBT, linkedPos.asLong())
 		}
+	}
+
+	companion object {
+		private const val LINKED_POS_NBT = "LinkedPos"
 	}
 
 }

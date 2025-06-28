@@ -16,10 +16,6 @@ class SidedRedstoneBlock : Block(
 		.isRedstoneConductor(Blocks::never)
 ) {
 
-	companion object {
-		private val FACING = BlockStateProperties.FACING
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -48,6 +44,10 @@ class SidedRedstoneBlock : Block(
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	companion object {
+		private val FACING = BlockStateProperties.FACING
 	}
 
 }

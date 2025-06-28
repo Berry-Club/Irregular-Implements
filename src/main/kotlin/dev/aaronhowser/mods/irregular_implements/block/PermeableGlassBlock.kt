@@ -18,22 +18,8 @@ class PermeableGlassBlock private constructor(
 	properties: Properties
 ) : TransparentBlock(properties) {
 
-	val mobsPassThrough = !isSolidForMobsOnly
-	val playersPassThrough = isSolidForMobsOnly
-
-	companion object {
-
-		val LAPIS = PermeableGlassBlock(
-			isSolidForMobsOnly = false,
-			Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
-		)
-
-		val QUARTZ = PermeableGlassBlock(
-			isSolidForMobsOnly = true,
-			Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
-		)
-
-	}
+	val mobsPassThrough: Boolean = !isSolidForMobsOnly
+	val playersPassThrough: Boolean = isSolidForMobsOnly
 
 	override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		if (context !is EntityCollisionContext) return Shapes.block()
@@ -53,6 +39,18 @@ class PermeableGlassBlock private constructor(
 			PathComputationType.WATER -> false
 			PathComputationType.AIR -> mobsPassThrough
 		}
+	}
+
+	companion object {
+		val LAPIS = PermeableGlassBlock(
+			isSolidForMobsOnly = false,
+			Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
+		)
+
+		val QUARTZ = PermeableGlassBlock(
+			isSolidForMobsOnly = true,
+			Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
+		)
 	}
 
 }

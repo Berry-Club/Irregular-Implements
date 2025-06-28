@@ -21,10 +21,6 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class PeaceCandleBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)), EntityBlock {
 
-	companion object {
-		val SHAPE: VoxelShape = box(5.0, 0.0, 5.0, 11.0, 2.0, 11.0)
-	}
-
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		return SHAPE
 	}
@@ -55,6 +51,10 @@ class PeaceCandleBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)), EntityBl
 			ModBlockEntities.PEACE_CANDLE.get(),
 			PeaceCandleBlockEntity::tick
 		)
+	}
+
+	companion object {
+		val SHAPE: VoxelShape = box(5.0, 0.0, 5.0, 11.0, 2.0, 11.0)
 	}
 
 }

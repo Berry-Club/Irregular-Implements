@@ -26,24 +26,6 @@ class PlatformBlock(
 	Properties.ofFullCopy(blockToCopy)
 ), EntityBlock {
 
-	companion object {
-		val SHAPE: VoxelShape = box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0)
-
-		val OAK = PlatformBlock(Blocks.OAK_TRAPDOOR)
-		val SPRUCE = PlatformBlock(Blocks.SPRUCE_TRAPDOOR)
-		val BIRCH = PlatformBlock(Blocks.BIRCH_TRAPDOOR)
-		val JUNGLE = PlatformBlock(Blocks.JUNGLE_TRAPDOOR)
-		val ACACIA = PlatformBlock(Blocks.ACACIA_TRAPDOOR)
-		val DARK_OAK = PlatformBlock(Blocks.DARK_OAK_TRAPDOOR)
-		val CRIMSON = PlatformBlock(Blocks.CRIMSON_TRAPDOOR)
-		val WARPED = PlatformBlock(Blocks.WARPED_TRAPDOOR)
-		val MANGROVE = PlatformBlock(Blocks.MANGROVE_TRAPDOOR)
-		val BAMBOO = PlatformBlock(Blocks.BAMBOO_TRAPDOOR)
-		val CHERRY = PlatformBlock(Blocks.CHERRY_TRAPDOOR)
-		val SUPER_LUBE = PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get())
-		val FILTERED_SUPER_LUBE = PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get(), hasEntity = true)
-	}
-
 	override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 
 		val entity = (context as? EntityCollisionContext)?.entity
@@ -85,6 +67,24 @@ class PlatformBlock(
 		}
 
 		return super.useWithoutItem(state, level, pos, player, hitResult)
+	}
+
+	companion object {
+		val SHAPE: VoxelShape = box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0)
+
+		val OAK = PlatformBlock(Blocks.OAK_TRAPDOOR)
+		val SPRUCE = PlatformBlock(Blocks.SPRUCE_TRAPDOOR)
+		val BIRCH = PlatformBlock(Blocks.BIRCH_TRAPDOOR)
+		val JUNGLE = PlatformBlock(Blocks.JUNGLE_TRAPDOOR)
+		val ACACIA = PlatformBlock(Blocks.ACACIA_TRAPDOOR)
+		val DARK_OAK = PlatformBlock(Blocks.DARK_OAK_TRAPDOOR)
+		val CRIMSON = PlatformBlock(Blocks.CRIMSON_TRAPDOOR)
+		val WARPED = PlatformBlock(Blocks.WARPED_TRAPDOOR)
+		val MANGROVE = PlatformBlock(Blocks.MANGROVE_TRAPDOOR)
+		val BAMBOO = PlatformBlock(Blocks.BAMBOO_TRAPDOOR)
+		val CHERRY = PlatformBlock(Blocks.CHERRY_TRAPDOOR)
+		val SUPER_LUBE = PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get())
+		val FILTERED_SUPER_LUBE = PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get(), hasEntity = true)
 	}
 
 }

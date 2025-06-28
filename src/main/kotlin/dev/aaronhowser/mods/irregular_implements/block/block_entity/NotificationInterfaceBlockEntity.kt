@@ -27,12 +27,6 @@ class NotificationInterfaceBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.NOTIFICATION_INTERFACE.get(), pPos, pBlockState), MenuProvider {
 
-	companion object {
-		const val TOAST_TITLE_NBT = "ToastTitle"
-		const val TOAST_DESCRIPTION_NBT = "ToastDescription"
-		const val OWNER_UUID_NBT = "OwnerUUID"
-	}
-
 	var ownerUuid: UUID = UUID.randomUUID()
 		set(value) {
 			field = value
@@ -121,4 +115,11 @@ class NotificationInterfaceBlockEntity(
 	override fun getDisplayName(): Component {
 		return this.blockState.block.name
 	}
+
+	companion object {
+		const val TOAST_TITLE_NBT = "ToastTitle"
+		const val TOAST_DESCRIPTION_NBT = "ToastDescription"
+		const val OWNER_UUID_NBT = "OwnerUUID"
+	}
+
 }

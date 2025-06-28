@@ -12,8 +12,6 @@ data class DeathKeptItems(
 	companion object {
 		val CODEC: Codec<DeathKeptItems> =
 			ItemStack.CODEC.listOf().xmap(::DeathKeptItems, DeathKeptItems::stacks)
-
-
 	}
 
 }

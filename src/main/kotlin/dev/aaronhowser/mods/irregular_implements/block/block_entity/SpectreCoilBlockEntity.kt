@@ -25,22 +25,6 @@ class SpectreCoilBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.SPECTRE_COIL.get(), pPos, pBlockState) {
 
-	companion object {
-		const val OWNER_UUID_NBT = "OwnerUuid"
-		const val COIL_TYPE_NBT = "CoilType"
-
-		fun tick(
-			level: Level,
-			blockPos: BlockPos,
-			blockState: BlockState,
-			blockEntity: SpectreCoilBlockEntity
-		) {
-			if (level.isClientSide) return
-
-			blockEntity.tick()
-		}
-	}
-
 	constructor(pos: BlockPos, blockState: BlockState, coilType: SpectreCoilBlock.Type) : this(pos, blockState) {
 		this.coilType = coilType
 	}
@@ -153,5 +137,21 @@ class SpectreCoilBlockEntity(
 	// Syncs with client
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		const val OWNER_UUID_NBT = "OwnerUuid"
+		const val COIL_TYPE_NBT = "CoilType"
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: SpectreCoilBlockEntity
+		) {
+			if (level.isClientSide) return
+
+			blockEntity.tick()
+		}
+	}
 
 }

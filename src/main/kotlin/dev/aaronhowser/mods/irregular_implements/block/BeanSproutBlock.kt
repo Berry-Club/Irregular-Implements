@@ -31,16 +31,6 @@ class BeanSproutBlock(
 		.dynamicShape()
 ) : BushBlock(properties), BonemealableBlock {
 
-	companion object {
-		val CODEC: MapCodec<BeanSproutBlock> = simpleCodec(::BeanSproutBlock)
-
-		val SHAPE_SMALL: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
-		val SHAPE_BIG: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
-
-		val AGE: IntegerProperty = BlockStateProperties.AGE_7
-		const val MAXIMUM_AGE = 7
-	}
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
@@ -102,6 +92,16 @@ class BeanSproutBlock(
 	override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
 		val newState = state.cycle(AGE)
 		level.setBlockAndUpdate(pos, newState)
+	}
+
+	companion object {
+		val CODEC: MapCodec<BeanSproutBlock> = simpleCodec(::BeanSproutBlock)
+
+		val SHAPE_SMALL: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
+		val SHAPE_BIG: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
+
+		val AGE: IntegerProperty = BlockStateProperties.AGE_7
+		const val MAXIMUM_AGE = 7
 	}
 
 }

@@ -26,31 +26,6 @@ class DiaphanousBlock : Block(
 		.isSuffocating(::isUsuallySolid)
 ), EntityBlock {
 
-	companion object {
-		fun isValidBlock(block: Block, level: Level): Boolean {
-			return try {
-				block.defaultBlockState().renderShape == RenderShape.MODEL
-						&& block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //No idea if this would crash if BlockPos.ZERO is unloaded, but just in case
-						&& !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
-			} catch (e: Exception) {
-				false
-			}
-		}
-
-		fun isUsuallySolid(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
-			val blockEntity = blockGetter.getBlockEntity(blockPos)
-
-			return if (blockEntity is DiaphanousBlockEntity) {
-				blockEntity.isInverted
-			} else {
-				false
-			}
-		}
-
-		private val SHAPE_EMPTY: VoxelShape = Shapes.empty()
-		private val SHAPE_FULL: VoxelShape = Shapes.block()
-	}
-
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
 		return DiaphanousBlockEntity(pos, state)
 	}
@@ -94,6 +69,31 @@ class DiaphanousBlock : Block(
 
 	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
 		return isUsuallySolid(state, level, pos)
+	}
+
+	companion object {
+		fun isValidBlock(block: Block, level: Level): Boolean {
+			return try {
+				block.defaultBlockState().renderShape == RenderShape.MODEL
+						&& block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //No idea if this would crash if BlockPos.ZERO is unloaded, but just in case
+						&& !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
+			} catch (e: Exception) {
+				false
+			}
+		}
+
+		fun isUsuallySolid(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
+			val blockEntity = blockGetter.getBlockEntity(blockPos)
+
+			return if (blockEntity is DiaphanousBlockEntity) {
+				blockEntity.isInverted
+			} else {
+				false
+			}
+		}
+
+		private val SHAPE_EMPTY: VoxelShape = Shapes.empty()
+		private val SHAPE_FULL: VoxelShape = Shapes.block()
 	}
 
 }
