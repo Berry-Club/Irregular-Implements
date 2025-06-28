@@ -1,16 +1,16 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Holder
-import net.minecraft.util.Mth
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
+import java.util.function.Supplier
 
 object ModItems {
 
@@ -44,7 +44,7 @@ object ModItems {
 	val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
 		register("chunk_analyzer", ::ChunkAnalyzerItem, ChunkAnalyzerItem.DEFAULT_PROPERTIES)
 	val LAVA_CHARM: DeferredItem<LavaCharmItem> =
-		register("lava_charm", ::LavaCharmItem, LavaCharmItem.DEFAULT_PROPERTIES) //TODO: Advancement joking about the ui bar
+		register("lava_charm", ::LavaCharmItem) { LavaCharmItem.DEFAULT_PROPERTIES } //TODO: Advancement joking about the ui bar
 	val OBSIDIAN_SKULL: DeferredItem<Item> =
 		basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
 	val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
@@ -78,101 +78,64 @@ object ModItems {
 	val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
 		register("lotus_blossom", ::LotusBlossomItem, LotusBlossomItem.DEFAULT_PROPERTIES)
 	val LOTUS_SEEDS: DeferredItem<ItemNameBlockItem> =
-		registerItemNameBlockItem("lotus_seeds", ModBlocks.LOTUS.get(), Item.Properties())
+		registerItemNameBlockItem("lotus_seeds", ModBlocks.LOTUS)
 	val BEAN: DeferredItem<ItemNameBlockItem> =
-		registerItemNameBlockItem("bean", ModBlocks.BEAN_SPROUT.get(), Item.Properties())
+		registerItemNameBlockItem("bean", ModBlocks.BEAN_SPROUT)
 	val BEAN_STEW: DeferredItem<Item> =
 		basic("bean_stew", Item.Properties().stacksTo(1).food(Foods.stew(8).build()))
 	val LESSER_MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
-		registerItemNameBlockItem("lesser_magic_bean", ModBlocks.LESSER_BEAN_STALK.get(), Item.Properties())
+		registerItemNameBlockItem("lesser_magic_bean", ModBlocks.LESSER_BEAN_STALK)
 	val MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
-		registerItemNameBlockItem("magic_bean", ModBlocks.BEAN_STALK.get(), Item.Properties().rarity(Rarity.RARE))
+		registerItemNameBlockItem("magic_bean", ModBlocks.BEAN_STALK, Item.Properties().rarity(Rarity.RARE))
 
 	// Armors
 	val MAGIC_HOOD: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"magic_hood",
 			ModArmorMaterials.MAGIC, ArmorItem.Type.HELMET,
-			Item.Properties()
-				.durability(ArmorItem.Type.HELMET.getDurability(15))
-				.rarity(Rarity.RARE)
+			ModArmorItems.MAGIC_HOOD_PROPERTIES
 		)
 	val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"water_walking_boots",
 			ModArmorMaterials.WATER_WALKING, ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(ArmorItem.Type.BOOTS.getDurability(15))
-				.rarity(Rarity.RARE)
-				.component(
-					ModDataComponents.FLUID_TAGS,
-					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-				)
+			ModArmorItems.WATER_WALKING_BOOTS_PROPERTIES
 		)
 	val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"obsidian_water_walking_boots",
 			ModArmorMaterials.OBSIDIAN_WATER_WALKING, ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(ArmorItem.Type.BOOTS.getDurability(15))
-				.rarity(Rarity.RARE)
-				.fireResistant()
-				.component(
-					ModDataComponents.FLUID_TAGS,
-					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-				)
+			ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS_PROPERTIES
 		)
 	val LAVA_WADERS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"lava_waders",
 			ModArmorMaterials.LAVA_WADERS, ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(ArmorItem.Type.BOOTS.getDurability(15))
-				.rarity(Rarity.RARE)
-				.fireResistant()
-				.component(
-					ModDataComponents.FLUID_TAGS,
-					listOf(
-						ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
-						ModFluidTagsProvider.ALLOWS_WATER_WALKING
-					)
-				)
-				.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
-				.component(ModDataComponents.COOLDOWN, 0)
-
+			ModArmorItems.LAVA_WADERS_PROPERTIES
 		)
 	val SPECTRE_HELMET: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_helmet",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.HELMET,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
+			ModArmorItems.SPECTRE_HELMET_PROPERTIES
 		)
 	val SPECTRE_CHESTPLATE: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_chestplate",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.CHESTPLATE,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
+			ModArmorItems.SPECTRE_CHESTPLATE_PROPERTIES
 		)
 	val SPECTRE_LEGGINGS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_leggings",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.LEGGINGS,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
-
+			ModArmorItems.SPECTRE_LEGGINGS_PROPERTIES
 		)
 	val SPECTRE_BOOTS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_boots",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
+			ModArmorItems.SPECTRE_BOOTS_PROPERTIES
 		)
 
 	// Weather Eggs
@@ -335,8 +298,20 @@ object ModItems {
 		return ITEM_REGISTRY.registerItem(id) { builder(properties) }
 	}
 
-	private fun registerItemNameBlockItem(id: String, block: Block, properties: Item.Properties): DeferredItem<ItemNameBlockItem> {
-		return ITEM_REGISTRY.registerItem(id) { ItemNameBlockItem(block, properties) }
+	private fun <I : Item> register(
+		id: String,
+		builder: (Item.Properties) -> I,
+		properties: Supplier<Item.Properties>
+	): DeferredItem<I> {
+		return ITEM_REGISTRY.registerItem(id) { builder(properties.get()) }
+	}
+
+	private fun registerItemNameBlockItem(
+		id: String,
+		block: DeferredBlock<out Block>,
+		properties: Item.Properties = Item.Properties()
+	): DeferredItem<ItemNameBlockItem> {
+		return ITEM_REGISTRY.registerItem(id) { ItemNameBlockItem(block.get(), properties) }
 	}
 
 	private fun registerImbue(

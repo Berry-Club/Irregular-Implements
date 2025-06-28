@@ -28,8 +28,18 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import net.neoforged.neoforge.registries.DeferredItem
 import top.theillusivec4.curios.api.CuriosApi
+import java.util.function.Supplier
 
 object ModArmorItems {
+
+	fun registerArmorItem(
+		name: String,
+		material: Holder<ArmorMaterial>,
+		type: ArmorItem.Type,
+		properties: Supplier<Item.Properties>
+	): DeferredItem<ArmorItem> {
+		return ModItems.ITEM_REGISTRY.registerItem(name) { ArmorItem(material, type, properties.get()) }
+	}
 
 	fun registerArmorItem(
 		name: String,
@@ -39,6 +49,72 @@ object ModArmorItems {
 	): DeferredItem<ArmorItem> {
 		return ModItems.ITEM_REGISTRY.registerItem(name) { ArmorItem(material, type, properties) }
 	}
+
+	val MAGIC_HOOD_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(ArmorItem.Type.HELMET.getDurability(15))
+			.rarity(Rarity.RARE)
+
+	val WATER_WALKING_BOOTS_PROPERTIES: Supplier<Item.Properties> = Supplier {
+		Item.Properties()
+			.durability(ArmorItem.Type.BOOTS.getDurability(15))
+			.rarity(Rarity.RARE)
+			.component(
+				ModDataComponents.FLUID_TAGS,
+				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+			)
+	}
+
+	val OBSIDIAN_WATER_WALKING_BOOTS_PROPERTIES: Supplier<Item.Properties> = Supplier {
+		Item.Properties()
+			.durability(ArmorItem.Type.BOOTS.getDurability(15))
+			.rarity(Rarity.RARE)
+			.fireResistant()
+			.component(
+				ModDataComponents.FLUID_TAGS,
+				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+			)
+	}
+
+	val LAVA_WADERS_PROPERTIES: Supplier<Item.Properties> = Supplier {
+		Item.Properties()
+			.durability(ArmorItem.Type.BOOTS.getDurability(15))
+			.rarity(Rarity.RARE)
+			.fireResistant()
+			.component(
+				ModDataComponents.FLUID_TAGS,
+				listOf(
+					ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
+					ModFluidTagsProvider.ALLOWS_WATER_WALKING
+				)
+			)
+			.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
+			.component(ModDataComponents.COOLDOWN, 0)
+	}
+
+	val SPECTRE_HELMET_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
+
+
+	val SPECTRE_CHESTPLATE_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
+
+
+	val SPECTRE_LEGGINGS_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
+
+
+	val SPECTRE_BOOTS_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
+
 
 	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
 		if (livingEntity.isCrouching || livingEntity.isUnderWater) return false
