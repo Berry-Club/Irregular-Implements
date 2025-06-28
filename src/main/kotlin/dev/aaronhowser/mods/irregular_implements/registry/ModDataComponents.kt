@@ -91,6 +91,13 @@ object ModDataComponents {
 				)
 		}
 
+	val REDSTONE_REMOTE: DeferredHolder<DataComponentType<*>, DataComponentType<RedstoneRemoteDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("redstone_remote") {
+			it
+				.persistent(RedstoneRemoteDataComponent.CODEC)
+				.networkSynchronized(RedstoneRemoteDataComponent.STREAM_CODEC)
+		}
+
 	@JvmField
 	val LUBRICATED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
 		DATA_COMPONENT_REGISTRY.registerComponentType("lubricated") {

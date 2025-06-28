@@ -13,6 +13,8 @@ class RedstoneRemoteEditMenu(
 	private val playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), containerId) {
 
+	private val holderLookup = this.playerInventory.player.level().registryAccess()
+
 	// Uses a getter because when it mutates it only does so on server, and doesn't mutate the one on the client's copy of the menu
 	private val redstoneRemoteStack: ItemStack
 		get() =
