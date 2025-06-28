@@ -12,6 +12,8 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 
+//TODO: Quick move stack
+//TODO: Weirdness when putting items in sometimes
 class RedstoneRemoteUseMenu(
 	containerId: Int,
 	private val playerInventory: Inventory
