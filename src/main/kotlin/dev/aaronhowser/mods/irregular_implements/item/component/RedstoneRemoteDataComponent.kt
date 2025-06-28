@@ -76,11 +76,11 @@ data class RedstoneRemoteDataComponent(
 		val CODEC: Codec<RedstoneRemoteDataComponent> =
 			RecordCodecBuilder.create { instance ->
 				instance.group(
-					NonNullList.codecOf(ItemStack.CODEC)
-						.fieldOf("location_filters")
+					NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)
+						.fieldOf("locations")
 						.forGetter(::trimLocationFilters),
-					NonNullList.codecOf(ItemStack.CODEC)
-						.fieldOf("display_stacks")
+					NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)
+						.fieldOf("icons")
 						.forGetter(::trimDisplayStacks)
 				).apply(instance, ::RedstoneRemoteDataComponent)
 			}
@@ -109,8 +109,8 @@ data class RedstoneRemoteDataComponent(
 
 		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, RedstoneRemoteDataComponent> =
 			StreamCodec.composite(
-				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.CODEC)), RedstoneRemoteDataComponent::locationFilters,
-				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.CODEC)), RedstoneRemoteDataComponent::displayStacks,
+				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)), RedstoneRemoteDataComponent::locationFilters,
+				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)), RedstoneRemoteDataComponent::displayStacks,
 				::RedstoneRemoteDataComponent
 			)
 
