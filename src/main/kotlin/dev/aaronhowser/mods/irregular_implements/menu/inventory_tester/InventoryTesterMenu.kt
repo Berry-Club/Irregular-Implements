@@ -1,8 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.inventory_tester
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.InventoryTesterBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.base.InventoryTesterSlot
-import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer

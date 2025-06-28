@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
-import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithStrings
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf

@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu.base
+package dev.aaronhowser.mods.irregular_implements.menu
 
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen

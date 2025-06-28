@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu.base
+package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

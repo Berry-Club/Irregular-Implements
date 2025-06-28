@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container

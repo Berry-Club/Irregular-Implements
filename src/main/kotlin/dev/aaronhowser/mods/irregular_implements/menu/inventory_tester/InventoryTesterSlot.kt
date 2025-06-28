@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu.base
+package dev.aaronhowser.mods.irregular_implements.menu.inventory_tester
 
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Player
