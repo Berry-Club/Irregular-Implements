@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.irregular_implements.menu.base.RedstoneRemoteFilterSlot
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.InteractionHand
@@ -28,6 +29,16 @@ class RedstoneRemoteEditMenu(
 	private var usingMainHand: Boolean = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === redstoneRemoteStack
 
 	init {
+
+		for (index in 0 until 9) {
+			val x = 8 + index * 18
+			val y = 26
+
+			val slot = RedstoneRemoteFilterSlot(::redstoneRemoteStack, this.holderLookup, x, y)
+
+			this.addSlot(slot)
+		}
+
 		// Add the 27 slots of the player inventory
 		for (row in 0..2) {
 			for (column in 0..8) {

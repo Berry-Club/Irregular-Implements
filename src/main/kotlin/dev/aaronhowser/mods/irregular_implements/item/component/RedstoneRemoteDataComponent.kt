@@ -13,6 +13,8 @@ data class RedstoneRemoteDataComponent(
 	val displayStacks: NonNullList<ItemStack>
 ) {
 
+	constructor() : this(emptyMap())
+
 	constructor(map: Map<ItemStack, ItemStack>) : this(
 		locationFilters = sanitizeList(map.keys.toList()),
 		displayStacks = sanitizeList(map.values.toList())
