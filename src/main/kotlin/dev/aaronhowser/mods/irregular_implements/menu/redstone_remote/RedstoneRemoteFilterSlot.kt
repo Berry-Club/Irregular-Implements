@@ -29,7 +29,7 @@ class RedstoneRemoteFilterSlot(
 
 		val oldComponent = stackComponent ?: return stack
 
-		val locations = RedstoneRemoteDataComponent.sanitizeList(oldComponent.locationFilters)
+		val locations = oldComponent.locationFilters
 		locations[pairIndex] = stack
 
 		val newComponent = RedstoneRemoteDataComponent(
