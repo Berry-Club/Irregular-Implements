@@ -23,6 +23,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.Unbreakable
 import net.minecraft.world.level.Level
+import java.util.function.Supplier
 
 class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
@@ -68,10 +69,11 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 	companion object {
 
-		val DEFAULT_PROPERTIES: Properties =
+		val DEFAULT_PROPERTIES: Supplier<Properties> = Supplier {
 			Properties()
 				.stacksTo(1)
 				.component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
+		}
 
 		fun setTestingFilter(stack: ItemStack) {
 			val planksFilter = FilterEntry.Tag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)

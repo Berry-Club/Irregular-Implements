@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
+import java.util.function.Supplier
 
 class RedstoneActivatorItem(properties: Properties) : Item(properties) {
 
@@ -71,10 +72,12 @@ class RedstoneActivatorItem(properties: Properties) : Item(properties) {
 	}
 
 	companion object {
-		val DEFAULT_PROPERTIES: Properties =
-			Properties()
-				.stacksTo(1)
-				.component(ModDataComponents.DURATION, 20)
+		val DEFAULT_PROPERTIES: Supplier<Properties> =
+			Supplier {
+				Properties()
+					.stacksTo(1)
+					.component(ModDataComponents.DURATION, 20)
+			}
 
 		val DURATION = OtherUtil.modResource("duration")
 

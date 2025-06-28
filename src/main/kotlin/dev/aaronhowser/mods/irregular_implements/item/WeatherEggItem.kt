@@ -24,6 +24,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ProjectileItem
 import net.minecraft.world.level.Level
+import java.util.function.Supplier
 
 //TODO: information recipes
 class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem {
@@ -82,7 +83,9 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 	}
 
 	companion object {
-		val DEFAULT_PROPERTIES: Properties = Properties().component(ModDataComponents.WEATHER, Weather.SUNNY)
+		val DEFAULT_PROPERTIES: Supplier<Properties> = Supplier {
+			Properties().component(ModDataComponents.WEATHER, Weather.SUNNY)
+		}
 
 		val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
 

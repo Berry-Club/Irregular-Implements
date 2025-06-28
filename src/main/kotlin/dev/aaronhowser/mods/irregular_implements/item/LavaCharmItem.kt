@@ -16,6 +16,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import top.theillusivec4.curios.api.CuriosApi
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.type.capability.ICurioItem
+import java.util.function.Supplier
 
 class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 
@@ -31,13 +32,15 @@ class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 		const val MAX_CHARGE = 200
 		const val MAX_COOLDOWN = 40
 
-		val DEFAULT_PROPERTIES: Properties =
-			Properties()
-				.stacksTo(1)
-				.rarity(Rarity.RARE)
-				.fireResistant()
-				.component(ModDataComponents.COOLDOWN, 0)
-				.component(ModDataComponents.CHARGE, MAX_CHARGE)
+		val DEFAULT_PROPERTIES: Supplier<Properties> =
+			Supplier {
+				Properties()
+					.stacksTo(1)
+					.rarity(Rarity.RARE)
+					.fireResistant()
+					.component(ModDataComponents.COOLDOWN, 0)
+					.component(ModDataComponents.CHARGE, MAX_CHARGE)
+			}
 
 		fun charge(stack: ItemStack) {
 			val charge = stack.get(ModDataComponents.CHARGE) ?: 0

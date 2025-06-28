@@ -21,6 +21,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import java.awt.Color
+import java.util.function.Supplier
 
 class WhiteStoneItem(properties: Properties) : Item(properties) {
 
@@ -95,11 +96,13 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 	}
 
 	companion object {
-		val DEFAULT_PROPERTIES: Properties =
-			Properties()
-				.rarity(Rarity.UNCOMMON)
-				.stacksTo(1)
-				.component(ModDataComponents.CHARGE, 0)
+		val DEFAULT_PROPERTIES: Supplier<Properties> =
+			Supplier {
+				Properties()
+					.rarity(Rarity.UNCOMMON)
+					.stacksTo(1)
+					.component(ModDataComponents.CHARGE, 0)
+			}
 
 		const val MAX_CHARGE = 20 * 100
 

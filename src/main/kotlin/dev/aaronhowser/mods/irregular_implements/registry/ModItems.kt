@@ -44,7 +44,7 @@ object ModItems {
 	val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
 		register("chunk_analyzer", ::ChunkAnalyzerItem, ChunkAnalyzerItem.DEFAULT_PROPERTIES)
 	val LAVA_CHARM: DeferredItem<LavaCharmItem> =
-		register("lava_charm", ::LavaCharmItem) { LavaCharmItem.DEFAULT_PROPERTIES } //TODO: Advancement joking about the ui bar
+		register("lava_charm", ::LavaCharmItem, LavaCharmItem.DEFAULT_PROPERTIES) //TODO: Advancement joking about the ui bar
 	val OBSIDIAN_SKULL: DeferredItem<Item> =
 		basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
 	val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
