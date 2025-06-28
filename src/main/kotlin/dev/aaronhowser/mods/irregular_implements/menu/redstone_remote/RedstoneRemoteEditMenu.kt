@@ -27,20 +27,16 @@ class RedstoneRemoteEditMenu(
 
 	init {
 
-		for (index in 0 until 9) {
-			val x = 8 + index * 18
-			val y = 18
+		for (pairIndex in 0 until 9) {
+			val x = 8 + pairIndex * 18
 
-			val slot = RedstoneRemoteFilterSlot(::redstoneRemoteStack, x, y)
-			this.addSlot(slot)
-		}
+			val filterY = 18
+			val filterSlot = RedstoneRemoteFilterSlot(::redstoneRemoteStack, pairIndex, x, filterY)
+			this.addSlot(filterSlot)
 
-		for (index in 0 until 9) {
-			val x = 8 + index * 18
-			val y = 36
-
-			val slot = RedstoneRemoteDisplaySlot(::redstoneRemoteStack, x, y)
-			this.addSlot(slot)
+			val displayY = 36
+			val displaySlot = RedstoneRemoteDisplaySlot(::redstoneRemoteStack, pairIndex, x, displayY)
+			this.addSlot(displaySlot)
 		}
 
 		// Add the 27 slots of the player inventory

@@ -10,6 +10,7 @@ import java.util.function.Supplier
 
 class RedstoneRemoteFilterSlot(
 	private val redstoneRemoteStack: Supplier<ItemStack>,
+	private val pairIndex: Int,
 	x: Int,
 	y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
@@ -18,7 +19,7 @@ class RedstoneRemoteFilterSlot(
 		get() = redstoneRemoteStack.get().get(ModDataComponents.REDSTONE_REMOTE)
 
 	val filterInThisSlot: ItemStack?
-		get() = stackComponent?.getLocation(index)
+		get() = stackComponent?.getLocation(pairIndex)
 
 	override fun safeInsert(stack: ItemStack): ItemStack {
 		if (stack.isEmpty
@@ -28,8 +29,8 @@ class RedstoneRemoteFilterSlot(
 
 		val oldComponent = stackComponent ?: return stack
 
-		val locations = oldComponent.locationFilters
-		locations[this.index] = stack
+		val locations = RedstoneRemoteDataComponent.sanitizeList(oldComponent.locationFilters)
+		locations[pairIndex] = stack
 
 		val newComponent = RedstoneRemoteDataComponent(
 			locationFilters = locations,
