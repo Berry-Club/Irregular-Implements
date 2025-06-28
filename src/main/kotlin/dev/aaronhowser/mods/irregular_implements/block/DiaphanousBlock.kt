@@ -7,7 +7,10 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.RenderShape
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -25,10 +28,13 @@ class DiaphanousBlock : Block(
 
 	companion object {
 		fun isValidBlock(block: Block, level: Level): Boolean {
-			return block.defaultBlockState().renderShape == RenderShape.MODEL
-					&& block !is AirBlock
-					&& block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //TODO: Does this crash if (0, 0, 0) is unloaded?
-					&& !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
+			return try {
+				block.defaultBlockState().renderShape == RenderShape.MODEL
+						&& block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //No idea if this would crash if BlockPos.ZERO is unloaded, but just in case
+						&& !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
+			} catch (e: Exception) {
+				false
+			}
 		}
 
 		fun isUsuallySolid(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
