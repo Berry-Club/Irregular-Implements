@@ -20,6 +20,34 @@ data class RedstoneRemoteDataComponent(
 		displayStacks = sanitizeList(map.values.toList())
 	)
 
+	fun copyWithNewFilter(newFilter: ItemStack, index: Int): RedstoneRemoteDataComponent {
+		val newLocationFilters = NonNullList.withSize(9, ItemStack.EMPTY)
+		val newDisplayStacks = NonNullList.withSize(9, ItemStack.EMPTY)
+
+		for (i in 0 until 9) {
+			newLocationFilters[i] = getLocation(i).copy()
+			newDisplayStacks[i] = getDisplay(i).copy()
+		}
+
+		newLocationFilters[index] = newFilter
+
+		return RedstoneRemoteDataComponent(newLocationFilters, newDisplayStacks)
+	}
+
+	fun copyWithNewDisplay(newDisplay: ItemStack, index: Int): RedstoneRemoteDataComponent {
+		val newLocationFilters = NonNullList.withSize(9, ItemStack.EMPTY)
+		val newDisplayStacks = NonNullList.withSize(9, ItemStack.EMPTY)
+
+		for (i in 0 until 9) {
+			newLocationFilters[i] = locationFilters.getOrNull(i)?.copy() ?: ItemStack.EMPTY
+			newDisplayStacks[i] = displayStacks.getOrNull(i)?.copy() ?: ItemStack.EMPTY
+		}
+
+		newDisplayStacks[index] = newDisplay
+
+		return RedstoneRemoteDataComponent(newLocationFilters, newDisplayStacks)
+	}
+
 	fun getPair(index: Int): Pair<ItemStack, ItemStack> {
 		return Pair(getLocation(index), getDisplay(index))
 	}

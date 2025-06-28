@@ -24,18 +24,7 @@ class RedstoneRemoteDisplaySlot(
 		if (stack.isEmpty) return stack
 
 		val oldComponent = stackComponent ?: return stack
-
-		val displays = oldComponent.displayStacks
-		displays[pairIndex] = stack.copyWithCount(1)
-
-		for (i in displays.indices) {
-			displays[i] = displays[i].copy()
-		}
-
-		val newComponent = RedstoneRemoteDataComponent(
-			locationFilters = oldComponent.locationFilters,
-			displayStacks = displays,
-		)
+		val newComponent = oldComponent.copyWithNewDisplay(stack.copyWithCount(1), pairIndex)
 
 		redstoneRemoteStack.get().set(ModDataComponents.REDSTONE_REMOTE, newComponent)
 

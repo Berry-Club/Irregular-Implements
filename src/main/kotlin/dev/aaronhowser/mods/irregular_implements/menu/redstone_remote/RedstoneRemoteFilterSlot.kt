@@ -28,18 +28,7 @@ class RedstoneRemoteFilterSlot(
 		) return stack
 
 		val oldComponent = stackComponent ?: return stack
-
-		val locations = oldComponent.locationFilters
-		locations[pairIndex] = stack.copyWithCount(1)
-
-		for (i in locations.indices) {
-			locations[i] = locations[i].copy()
-		}
-
-		val newComponent = RedstoneRemoteDataComponent(
-			locationFilters = locations,
-			displayStacks = oldComponent.displayStacks,
-		)
+		val newComponent = oldComponent.copyWithNewFilter(stack, pairIndex)
 
 		redstoneRemoteStack.get().set(ModDataComponents.REDSTONE_REMOTE, newComponent)
 
