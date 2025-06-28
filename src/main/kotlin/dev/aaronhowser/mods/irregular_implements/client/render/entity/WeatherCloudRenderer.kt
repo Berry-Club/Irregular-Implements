@@ -14,9 +14,8 @@ class WeatherCloudRenderer(
 	context: EntityRendererProvider.Context
 ) : EntityRenderer<WeatherCloudEntity>(context) {
 
-	override fun getTextureLocation(entity: WeatherCloudEntity): ResourceLocation {
-		return TEXTURE
-	}
+	@Suppress("WRONG_NULLABILITY_FOR_JAVA_OVERRIDE")
+	override fun getTextureLocation(entity: WeatherCloudEntity): ResourceLocation? = null
 
 	override fun render(
 		spectreIlluminatorEntity: WeatherCloudEntity,
@@ -51,10 +50,6 @@ class WeatherCloudRenderer(
 		poseStack.popPose()
 
 		super.render(spectreIlluminatorEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
-	}
-
-	companion object {
-		val TEXTURE = OtherUtil.modResource("naw")
 	}
 
 }
