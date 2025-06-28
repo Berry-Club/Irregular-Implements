@@ -74,14 +74,15 @@ class DiaphanousBlockEntityRenderer(
 					0xFFFFFFFF.toInt()
 				} else {
 					Minecraft.getInstance().blockColors.getColor(
-						stateToRender, level, blockEntity.blockPos, quad.tintIndex
+						stateToRender, level, blockEntity.blockPos, tintIndex
 					)
 				}
 
 				val red = ((color shr 16) and 0xFF) / 255f
 				val green = ((color shr 8) and 0xFF) / 255f
 				val blue = (color and 0xFF) / 255f
-				val colorAlpha = ((color shr 24) and 0xFF) / 255f
+				var colorAlpha = ((color shr 24) and 0xFF) / 255f
+				if (colorAlpha == 0f) colorAlpha = 1f
 
 				vertexConsumer.putBulkData(
 					poseStack.last(),
