@@ -55,7 +55,7 @@ object ScreenTextures {
 		data object PotionVaporizer : Background("textures/gui/potion_vaporizer.png", 176, 166)
 		data object ProcessingPlate : Background("textures/gui/processing_plate.png", 121, 77)
 		data object RedstoneRemoteEdit : Background("textures/gui/redstone_remote/edit.png", 176, 150)
-		data object RedstoneRemoteUse : Background("textures/gui/redstone_remote/use.png", 187, 41)
+		data object RedstoneRemoteUse : Background("textures/gui/redstone_remote/use.png", 207, 41)
 		data object SoundRecorder : Background("textures/gui/sound_recorder.png", 190, 187)
 		data object VoidStone : Background("textures/gui/void_stone.png", 176, 133)
 

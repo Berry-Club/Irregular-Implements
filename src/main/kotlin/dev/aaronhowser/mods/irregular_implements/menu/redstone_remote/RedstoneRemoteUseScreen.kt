@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -30,12 +31,15 @@ class RedstoneRemoteUseScreen(
 			val (locationFilter, icon) = dataComponent.getPair(i)
 			if (locationFilter.isEmpty) continue
 
+			val component = locationFilter.get(DataComponents.CUSTOM_NAME) ?: Component.empty()
+
 			val button = ItemStackButton(
-				x = leftPos + 5 + (i * 20),
-				y = topPos + 17,
+				x = leftPos + 5 + (i * 22),
+				y = topPos + 16,
 				width = 20,
 				height = 20,
 				itemStack = icon,
+				message = component,
 				onPress = {
 					ModPacketHandler.messageServer(ClientClickedMenuButton(i))
 				},
