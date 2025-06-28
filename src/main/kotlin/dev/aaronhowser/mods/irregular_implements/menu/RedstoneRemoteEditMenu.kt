@@ -6,6 +6,7 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class RedstoneRemoteEditMenu(
@@ -25,6 +26,27 @@ class RedstoneRemoteEditMenu(
 			}
 
 	private var usingMainHand: Boolean = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === redstoneRemoteStack
+
+	init {
+		// Add the 27 slots of the player inventory
+		for (row in 0..2) {
+			for (column in 0..8) {
+				val slotIndex = column + row * 9 + 9
+				val x = 8 + column * 18
+				val y = 68 + row * 18
+
+				this.addSlot(Slot(playerInventory, slotIndex, x, y))
+			}
+		}
+
+		// Add the 9 slots of the player hotbar
+		for (hotbarIndex in 0..8) {
+			val x = 8 + hotbarIndex * 18
+			val y = 126
+
+			this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
+		}
+	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY

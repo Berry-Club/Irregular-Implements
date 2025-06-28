@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteUseMenu
+import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteEditMenu
+import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteUseMenu
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -12,6 +14,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import java.util.function.Supplier
 
 class RedstoneRemoteItem(properties: Properties) : Item(properties), MenuProvider {
 
@@ -33,7 +36,11 @@ class RedstoneRemoteItem(properties: Properties) : Item(properties), MenuProvide
 	override fun getDisplayName(): Component = this.defaultInstance.hoverName
 
 	companion object {
-		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+		val DEFAULT_PROPERTIES = Supplier {
+			Properties()
+				.stacksTo(1)
+				.component(ModDataComponents.REDSTONE_REMOTE, RedstoneRemoteDataComponent())
+		}
 	}
 
 }
