@@ -28,7 +28,9 @@ import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.Not
 import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.NotificationInterfaceScreen
 import dev.aaronhowser.mods.irregular_implements.menu.online_detector.OnlineDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.online_detector.OnlineDetectorScreen
+import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteEditMenu
 import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteEditScreen
+import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteUseMenu
 import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteUseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneMenu
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneScreen

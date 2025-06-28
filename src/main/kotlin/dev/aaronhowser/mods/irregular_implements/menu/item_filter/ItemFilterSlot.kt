@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu.base
+package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

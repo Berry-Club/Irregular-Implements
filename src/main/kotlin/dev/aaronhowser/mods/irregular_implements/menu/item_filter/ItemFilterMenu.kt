@@ -1,8 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.ItemFilterSlot
-import dev.aaronhowser.mods.irregular_implements.menu.base.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes

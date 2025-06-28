@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
-import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteEditMenu
-import dev.aaronhowser.mods.irregular_implements.menu.RedstoneRemoteUseMenu
+import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteEditMenu
+import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteUseMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand

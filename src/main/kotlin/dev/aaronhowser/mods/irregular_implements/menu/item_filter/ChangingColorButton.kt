@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu.base
+package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.Font

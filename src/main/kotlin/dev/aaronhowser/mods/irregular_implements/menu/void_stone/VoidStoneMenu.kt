@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.menu
+package dev.aaronhowser.mods.irregular_implements.menu.void_stone
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes

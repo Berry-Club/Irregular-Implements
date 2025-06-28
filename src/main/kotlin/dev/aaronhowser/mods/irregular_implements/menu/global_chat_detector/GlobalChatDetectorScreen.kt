@@ -2,10 +2,10 @@ package dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
-import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenWithStrings
+import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
+import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton

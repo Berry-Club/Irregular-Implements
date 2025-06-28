@@ -2,9 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.menu.base.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.base.MultiStageSpriteButton
-import dev.aaronhowser.mods.irregular_implements.menu.base.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
+import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.network.chat.Component
