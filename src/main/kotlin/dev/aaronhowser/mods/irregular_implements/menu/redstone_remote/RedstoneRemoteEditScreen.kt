@@ -13,5 +13,8 @@ class RedstoneRemoteEditScreen(
 
 	override val background: ScreenTextures.Background = ScreenTextures.Background.RedstoneRemoteEdit
 
+	override fun baseInit() {
+		this.inventoryLabelY = this.imageHeight - 94
+	}
 
 }

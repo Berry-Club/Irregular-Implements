@@ -13,5 +13,6 @@ class RedstoneRemoteUseScreen(
 
 	override val background: ScreenTextures.Background = ScreenTextures.Background.RedstoneRemoteUse
 
+	override val showInventoryLabel: Boolean = false
 
 }
