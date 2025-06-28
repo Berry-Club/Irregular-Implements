@@ -35,7 +35,6 @@ class RedstoneRemoteEditMenu(
 			val y = 26
 
 			val slot = RedstoneRemoteFilterSlot(::redstoneRemoteStack, this.holderLookup, x, y)
-
 			this.addSlot(slot)
 		}
 

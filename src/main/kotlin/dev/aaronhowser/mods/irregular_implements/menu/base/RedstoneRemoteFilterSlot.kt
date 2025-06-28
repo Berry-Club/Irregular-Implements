@@ -18,5 +18,16 @@ class RedstoneRemoteFilterSlot(
 	private val stackComponent: RedstoneRemoteDataComponent?
 		get() = redstoneRemoteStack.get().get(ModDataComponents.REDSTONE_REMOTE)
 
+	val filterInThisSlot: ItemStack?
+		get() = stackComponent?.getPair(this.index)?.first
+
+	override fun getItem(): ItemStack {
+		return filterInThisSlot ?: ItemStack.EMPTY
+	}
+
+	override fun remove(amount: Int): ItemStack = ItemStack.EMPTY
+	override fun set(stack: ItemStack) {}
+	override fun isHighlightable(): Boolean = true
+	override fun getSlotIndex(): Int = 0
 
 }

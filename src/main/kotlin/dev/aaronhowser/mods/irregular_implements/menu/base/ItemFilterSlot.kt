@@ -72,20 +72,9 @@ class ItemFilterSlot(
 		return entryInThisSlot?.getDisplayStack(lookupProvider) ?: ItemStack.EMPTY
 	}
 
-	override fun remove(amount: Int): ItemStack {
-		return ItemStack.EMPTY
-	}
-
-	override fun set(stack: ItemStack) {
-		// Do nothing
-	}
-
-	override fun isHighlightable(): Boolean {
-		return true
-	}
-
-	override fun getSlotIndex(): Int {
-		return 0
-	}
+	override fun remove(amount: Int): ItemStack = ItemStack.EMPTY
+	override fun set(stack: ItemStack) {}
+	override fun isHighlightable(): Boolean = true
+	override fun getSlotIndex(): Int = 0
 
 }
