@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
+import net.minecraft.core.Holder
+import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Block
@@ -150,17 +152,17 @@ object ModItems {
 
 	// Imbues
 	val FIRE_IMBUE: DeferredItem<ImbueItem> =
-		register("imbue_fire") { ImbueItem(ModEffects.FIRE_IMBUE) }
+		registerImbue("imbue_fire", ModEffects.FIRE_IMBUE)
 	val POISON_IMBUE: DeferredItem<ImbueItem> =
-		register("imbue_poison") { ImbueItem(ModEffects.POISON_IMBUE) }
+		registerImbue("imbue_poison", ModEffects.POISON_IMBUE)
 	val EXPERIENCE_IMBUE: DeferredItem<ImbueItem> =
-		register("imbue_experience") { ImbueItem(ModEffects.EXPERIENCE_IMBUE) }
+		registerImbue("imbue_experience", ModEffects.EXPERIENCE_IMBUE)
 	val WITHER_IMBUE: DeferredItem<ImbueItem> =
-		register("imbue_wither") { ImbueItem(ModEffects.WITHER_IMBUE) }
+		registerImbue("imbue_wither", ModEffects.WITHER_IMBUE)
 	val COLLAPSE_IMBUE: DeferredItem<ImbueItem> =
-		register("imbue_collapse") { ImbueItem(ModEffects.COLLAPSE_IMBUE) }
+		registerImbue("imbue_collapse", ModEffects.COLLAPSE_IMBUE)
 	val SPECTRE_IMBUE: DeferredItem<ImbueItem> =
-		register("imbue_spectre") { ImbueItem(ModEffects.SPECTRE_IMBUE) }
+		registerImbue("imbue_spectre", ModEffects.SPECTRE_IMBUE)
 
 	// Spectre
 	val SPECTRE_ILLUMINATOR: DeferredItem<SpectreIlluminatorItem> =
@@ -286,16 +288,24 @@ object ModItems {
 		return ITEM_REGISTRY.registerSimpleItem(id, Item.Properties().stacksTo(maxStackSize))
 	}
 
-	private fun registerItemNameBlockItem(id: String, block: Block, properties: Item.Properties): DeferredItem<ItemNameBlockItem> {
-		return ITEM_REGISTRY.registerItem(id) { ItemNameBlockItem(block, properties) }
-	}
-
 	private fun <I : Item> register(
 		id: String,
 		builder: (Item.Properties) -> I,
 		properties: Item.Properties = Item.Properties()
 	): DeferredItem<I> {
 		return ITEM_REGISTRY.registerItem(id) { builder(properties) }
+	}
+
+	private fun registerItemNameBlockItem(id: String, block: Block, properties: Item.Properties): DeferredItem<ItemNameBlockItem> {
+		return ITEM_REGISTRY.registerItem(id) { ItemNameBlockItem(block, properties) }
+	}
+
+	private fun registerImbue(
+		id: String,
+		mobEffect: Holder<MobEffect>,
+		properties: Item.Properties = ImbueItem.DEFAULT_PROPERTIES
+	): DeferredItem<ImbueItem> {
+		return ITEM_REGISTRY.registerItem(id) { ImbueItem(mobEffect, properties) }
 	}
 
 }

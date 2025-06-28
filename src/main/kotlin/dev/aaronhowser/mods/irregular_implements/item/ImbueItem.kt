@@ -12,11 +12,9 @@ import net.minecraft.world.item.*
 import net.minecraft.world.level.Level
 
 class ImbueItem(
-	val imbueHolder: Holder<MobEffect>
-) : Item(
-	Properties()
-		.stacksTo(1)
-) {
+	private val imbueHolder: Holder<MobEffect>,
+	properties: Properties
+) : Item(properties) {
 
 	override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.DRINK
 	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 32
@@ -43,6 +41,10 @@ class ImbueItem(
 		}
 
 		return stack
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }
