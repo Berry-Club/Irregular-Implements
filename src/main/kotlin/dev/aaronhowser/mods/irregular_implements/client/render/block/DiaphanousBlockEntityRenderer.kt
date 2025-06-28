@@ -47,6 +47,8 @@ class DiaphanousBlockEntityRenderer(
 		val model = context.blockRenderDispatcher.getBlockModel(stateToRender)
 		val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
 
+		val myState = blockEntity.blockState
+
 		for (direction in Direction.entries) {
 			val posThere = blockEntity.blockPos.relative(direction)
 
@@ -54,7 +56,7 @@ class DiaphanousBlockEntityRenderer(
 			val blockStateThere = level.getBlockState(posThere)
 
 			val shouldSkip = blockEntityThere?.isInverted == blockEntity.isInverted
-					|| blockStateThere.isCollisionShapeFullBlock(level, posThere)
+					|| blockStateThere.hidesNeighborFace(level, posThere, myState, direction.opposite)
 
 			if (shouldSkip) continue
 
