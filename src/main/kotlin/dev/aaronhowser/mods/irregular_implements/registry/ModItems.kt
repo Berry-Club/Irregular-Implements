@@ -1,8 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Holder
+import net.minecraft.util.Mth
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
@@ -91,49 +93,86 @@ object ModItems {
 		ModArmorItems.registerArmorItem(
 			"magic_hood",
 			ModArmorMaterials.MAGIC, ArmorItem.Type.HELMET,
-			ModArmorItems.MAGIC_HOOD_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(ArmorItem.Type.HELMET.getDurability(15))
+				.rarity(Rarity.RARE)
 		)
 	val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"water_walking_boots",
 			ModArmorMaterials.WATER_WALKING, ArmorItem.Type.BOOTS,
-			ModArmorItems.WATER_WALKING_BOOTS_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(ArmorItem.Type.BOOTS.getDurability(15))
+				.rarity(Rarity.RARE)
+				.component(
+					ModDataComponents.FLUID_TAGS,
+					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+				)
 		)
 	val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"obsidian_water_walking_boots",
 			ModArmorMaterials.OBSIDIAN_WATER_WALKING, ArmorItem.Type.BOOTS,
-			ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(ArmorItem.Type.BOOTS.getDurability(15))
+				.rarity(Rarity.RARE)
+				.fireResistant()
+				.component(
+					ModDataComponents.FLUID_TAGS,
+					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+				)
 		)
 	val LAVA_WADERS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"lava_waders",
 			ModArmorMaterials.LAVA_WADERS, ArmorItem.Type.BOOTS,
-			ModArmorItems.LAVA_WADERS_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(ArmorItem.Type.BOOTS.getDurability(15))
+				.rarity(Rarity.RARE)
+				.fireResistant()
+				.component(
+					ModDataComponents.FLUID_TAGS,
+					listOf(
+						ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
+						ModFluidTagsProvider.ALLOWS_WATER_WALKING
+					)
+				)
+				.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
+				.component(ModDataComponents.COOLDOWN, 0)
+
 		)
 	val SPECTRE_HELMET: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_helmet",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.HELMET,
-			ModArmorItems.SPECTRE_HELMET_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
 		)
 	val SPECTRE_CHESTPLATE: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_chestplate",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.CHESTPLATE,
-			ModArmorItems.SPECTRE_CHESTPLATE_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
 		)
 	val SPECTRE_LEGGINGS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_leggings",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.LEGGINGS,
-			ModArmorItems.SPECTRE_LEGGINGS_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
+
 		)
 	val SPECTRE_BOOTS: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_boots",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.BOOTS,
-			ModArmorItems.SPECTRE_BOOTS_DEFAULT_PROPERTIES
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
 		)
 
 	// Weather Eggs

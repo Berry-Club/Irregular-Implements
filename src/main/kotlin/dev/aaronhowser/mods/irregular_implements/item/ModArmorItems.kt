@@ -31,65 +31,6 @@ import top.theillusivec4.curios.api.CuriosApi
 
 object ModArmorItems {
 
-	val MAGIC_HOOD_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(ArmorItem.Type.HELMET.getDurability(15))
-			.rarity(Rarity.RARE)
-
-	val WATER_WALKING_BOOTS_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(ArmorItem.Type.BOOTS.getDurability(15))
-			.rarity(Rarity.RARE)
-			.component(
-				ModDataComponents.FLUID_TAGS,
-				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-			)
-
-	val OBSIDIAN_WATER_WALKING_BOOTS_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(ArmorItem.Type.BOOTS.getDurability(15))
-			.rarity(Rarity.RARE)
-			.fireResistant()
-			.component(
-				ModDataComponents.FLUID_TAGS,
-				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-			)
-
-	val LAVA_WADERS_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(ArmorItem.Type.BOOTS.getDurability(15))
-			.rarity(Rarity.RARE)
-			.fireResistant()
-			.component(
-				ModDataComponents.FLUID_TAGS,
-				listOf(
-					ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
-					ModFluidTagsProvider.ALLOWS_WATER_WALKING
-				)
-			)
-			.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
-			.component(ModDataComponents.COOLDOWN, 0)
-
-	val SPECTRE_HELMET_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
-			.rarity(Rarity.UNCOMMON)
-
-	val SPECTRE_CHESTPLATE_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
-			.rarity(Rarity.UNCOMMON)
-
-	val SPECTRE_LEGGINGS_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
-			.rarity(Rarity.UNCOMMON)
-
-	val SPECTRE_BOOTS_DEFAULT_PROPERTIES: Item.Properties =
-		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
-			.rarity(Rarity.UNCOMMON)
-
 	fun registerArmorItem(
 		name: String,
 		material: Holder<ArmorMaterial>,
