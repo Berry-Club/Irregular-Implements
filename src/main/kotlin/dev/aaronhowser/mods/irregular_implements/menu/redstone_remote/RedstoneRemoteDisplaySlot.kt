@@ -3,8 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.world.SimpleContainer
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.NonInteractiveResultSlot
 import net.minecraft.world.item.ItemStack
+import java.util.*
 import java.util.function.Supplier
 
 class RedstoneRemoteDisplaySlot(
@@ -20,15 +22,23 @@ class RedstoneRemoteDisplaySlot(
 	val displayStackInThisSlot: ItemStack?
 		get() = stackComponent?.getDisplay(pairIndex)
 
+	override fun mayPickup(player: Player): Boolean = true
+	override fun tryRemove(amount: Int, decrement: Int, player: Player): Optional<ItemStack> {
+		updateComponent(ItemStack.EMPTY)
+		return Optional.empty()
+	}
+
 	override fun safeInsert(stack: ItemStack): ItemStack {
 		if (stack.isEmpty) return stack
+		updateComponent(stack)
+		return stack
+	}
 
-		val oldComponent = stackComponent ?: return stack
-		val newComponent = oldComponent.copyWithNewDisplay(stack.copyWithCount(1), pairIndex)
-
+	private fun updateComponent(newFilter: ItemStack): Boolean {
+		val oldComponent = stackComponent ?: return false
+		val newComponent = oldComponent.copyWithNewDisplay(newFilter, pairIndex)
 		redstoneRemoteStack.get().set(ModDataComponents.REDSTONE_REMOTE, newComponent)
-
-		return ItemStack.EMPTY
+		return true
 	}
 
 	override fun getItem(): ItemStack = displayStackInThisSlot ?: ItemStack.EMPTY

@@ -4,8 +4,10 @@ import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDa
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.world.SimpleContainer
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.NonInteractiveResultSlot
 import net.minecraft.world.item.ItemStack
+import java.util.*
 import java.util.function.Supplier
 
 class RedstoneRemoteFilterSlot(
@@ -21,18 +23,32 @@ class RedstoneRemoteFilterSlot(
 	val filterInThisSlot: ItemStack?
 		get() = stackComponent?.getLocation(pairIndex)
 
+	override fun mayPickup(player: Player): Boolean = true
+	override fun tryRemove(amount: Int, decrement: Int, player: Player): Optional<ItemStack> {
+		val item = getItem()
+		if (item.isEmpty || !updateComponent(ItemStack.EMPTY)) {
+			return Optional.empty()
+		}
+
+		return Optional.of(item.copy())
+	}
+
 	override fun safeInsert(stack: ItemStack): ItemStack {
 		if (stack.isEmpty
 			|| !stack.has(ModDataComponents.LOCATION)
 			|| !filterInThisSlot?.isEmpty.isTrue
 		) return stack
 
-		val oldComponent = stackComponent ?: return stack
-		val newComponent = oldComponent.copyWithNewFilter(stack, pairIndex)
-
-		redstoneRemoteStack.get().set(ModDataComponents.REDSTONE_REMOTE, newComponent)
+		if (!updateComponent(stack)) return stack
 
 		return ItemStack.EMPTY
+	}
+
+	private fun updateComponent(newFilter: ItemStack): Boolean {
+		val oldComponent = stackComponent ?: return false
+		val newComponent = oldComponent.copyWithNewFilter(newFilter, pairIndex)
+		redstoneRemoteStack.get().set(ModDataComponents.REDSTONE_REMOTE, newComponent)
+		return true
 	}
 
 	override fun getItem(): ItemStack = filterInThisSlot ?: ItemStack.EMPTY
