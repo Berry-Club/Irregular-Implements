@@ -90,9 +90,11 @@ repositories {
     }
 
     // For Curios
-    maven {
-        name = "OctoStudios"
-        url = uri("https://maven.octo-studios.com/releases")
+    repositories {
+        maven {
+            name = "Illusive Soulworks maven"
+            url = "https://maven.theillusivec4.top/"
+        }
     }
 
     // For Modonomicon
