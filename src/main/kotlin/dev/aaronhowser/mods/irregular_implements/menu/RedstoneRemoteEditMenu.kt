@@ -32,7 +32,7 @@ class RedstoneRemoteEditMenu(
 
 		for (index in 0 until 9) {
 			val x = 8 + index * 18
-			val y = 26
+			val y = 18
 
 			val slot = RedstoneRemoteFilterSlot(::redstoneRemoteStack, this.holderLookup, x, y)
 			this.addSlot(slot)
