@@ -8,6 +8,7 @@ import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
+import net.minecraft.core.Vec3i
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -46,6 +47,10 @@ object OtherUtil {
 
 	fun getPotionStack(potion: Holder<Potion>): ItemStack {
 		return PotionContents.createItemStack(Items.POTION, potion)
+	}
+
+	fun Vec3i.toVec3(): Vec3 {
+		return Vec3(this.x.toDouble(), this.y.toDouble(), this.z.toDouble())
 	}
 
 	fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
