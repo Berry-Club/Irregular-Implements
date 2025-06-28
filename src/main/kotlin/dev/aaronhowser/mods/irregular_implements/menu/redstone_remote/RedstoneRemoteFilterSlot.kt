@@ -18,7 +18,7 @@ class RedstoneRemoteFilterSlot(
 		get() = redstoneRemoteStack.get().get(ModDataComponents.REDSTONE_REMOTE)
 
 	val filterInThisSlot: ItemStack?
-		get() = stackComponent?.getPair(this.index)?.first
+		get() = stackComponent?.getLocation(index)
 
 	override fun safeInsert(stack: ItemStack): ItemStack {
 		if (stack.isEmpty

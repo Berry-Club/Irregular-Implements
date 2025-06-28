@@ -21,10 +21,15 @@ data class RedstoneRemoteDataComponent(
 	)
 
 	fun getPair(index: Int): Pair<ItemStack, ItemStack> {
-		val locationFilter = locationFilters.getOrNull(index) ?: ItemStack.EMPTY
-		val displayStack = displayStacks.getOrNull(index) ?: ItemStack.EMPTY
+		return Pair(getLocation(index), getDisplay(index))
+	}
 
-		return Pair(locationFilter, displayStack)
+	fun getLocation(index: Int): ItemStack {
+		return locationFilters.getOrNull(index) ?: ItemStack.EMPTY
+	}
+
+	fun getDisplay(index: Int): ItemStack {
+		return displayStacks.getOrNull(index) ?: ItemStack.EMPTY
 	}
 
 	companion object {

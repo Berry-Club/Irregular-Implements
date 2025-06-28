@@ -17,7 +17,7 @@ class RedstoneRemoteDisplaySlot(
 		get() = redstoneRemoteStack.get().get(ModDataComponents.REDSTONE_REMOTE)
 
 	val displayStackInThisSlot: ItemStack?
-		get() = stackComponent?.getPair(this.index)?.second
+		get() = stackComponent?.getDisplay(index)
 
 	override fun safeInsert(stack: ItemStack): ItemStack {
 		if (stack.isEmpty) return stack
