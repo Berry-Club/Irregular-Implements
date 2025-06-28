@@ -1,399 +1,399 @@
 {
-  "type": "minecraft:chest",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 0
-        },
-        {
-          "type": "minecraft:item",
-          "name": "irregular_implements:magic_bean",
-          "weight": 100
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 3.0,
-            "min": 2.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "irregular_implements:bean",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:wheat",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:wheat_seeds",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:pumpkin_seeds",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 17.0,
-            "min": 2.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:melon_seeds",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 17.0,
-            "min": 2.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:sugar_cane",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:potato",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:carrot",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:wheat",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 20.0,
-            "min": 1.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:tag",
-          "expand": true,
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "irregular_implements:nature_core_saplings",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:tag",
-          "expand": true,
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "irregular_implements:nature_core_saplings",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:vine",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 20.0,
-            "min": 1.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:wheat",
-          "weight": 50
-        }
-      ],
-      "functions": [
-        {
-          "add": false,
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 25.0,
-            "min": 5.0
-          },
-          "function": "minecraft:set_count"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:tag",
-          "expand": true,
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "irregular_implements:nature_core_flowers",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        }
-      ],
-      "rolls": 1.0
-    }
-  ],
-  "random_sequence": "irregular_implements:chests/nature_core"
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 0
+				},
+				{
+					"type": "minecraft:item",
+					"name": "irregular_implements:magic_bean",
+					"weight": 100
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 3.0,
+						"min": 2.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "irregular_implements:bean",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:wheat",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:wheat_seeds",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:pumpkin_seeds",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 17.0,
+						"min": 2.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:melon_seeds",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 17.0,
+						"min": 2.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:sugar_cane",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:potato",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:carrot",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:wheat",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 20.0,
+						"min": 1.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:tag",
+					"expand": true,
+					"functions": [
+						{
+							"add": false,
+							"count": {
+								"type": "minecraft:uniform",
+								"max": 20.0,
+								"min": 1.0
+							},
+							"function": "minecraft:set_count"
+						}
+					],
+					"name": "irregular_implements:nature_core_saplings",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:tag",
+					"expand": true,
+					"functions": [
+						{
+							"add": false,
+							"count": {
+								"type": "minecraft:uniform",
+								"max": 20.0,
+								"min": 1.0
+							},
+							"function": "minecraft:set_count"
+						}
+					],
+					"name": "irregular_implements:nature_core_saplings",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:vine",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 20.0,
+						"min": 1.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:wheat",
+					"weight": 50
+				}
+			],
+			"functions": [
+				{
+					"add": false,
+					"count": {
+						"type": "minecraft:uniform",
+						"max": 25.0,
+						"min": 5.0
+					},
+					"function": "minecraft:set_count"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:tag",
+					"expand": true,
+					"functions": [
+						{
+							"add": false,
+							"count": {
+								"type": "minecraft:uniform",
+								"max": 20.0,
+								"min": 1.0
+							},
+							"function": "minecraft:set_count"
+						}
+					],
+					"name": "irregular_implements:nature_core_flowers",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "irregular_implements:chests/nature_core"
 }

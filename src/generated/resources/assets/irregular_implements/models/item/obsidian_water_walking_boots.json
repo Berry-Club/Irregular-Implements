@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/obsidian_water_walking_boots"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "irregular_implements:item/obsidian_water_walking_boots"
+	}
 }

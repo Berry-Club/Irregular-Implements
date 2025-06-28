@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "tag": "irregular_implements:grass_seeds"
-    },
-    {
-      "tag": "c:dyes/brown"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:grass_seeds_brown"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"tag": "irregular_implements:grass_seeds"
+		},
+		{
+			"tag": "c:dyes/brown"
+		}
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:grass_seeds_brown"
+	}
 }

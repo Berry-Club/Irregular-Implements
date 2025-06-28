@@ -1,22 +1,22 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "irregular_implements:spectre_log"
-    },
-    {
-      "item": "irregular_implements:spectre_log"
-    },
-    {
-      "item": "irregular_implements:spectre_log"
-    },
-    {
-      "item": "irregular_implements:spectre_log"
-    }
-  ],
-  "result": {
-    "count": 4,
-    "id": "irregular_implements:spectre_wood"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"item": "irregular_implements:spectre_log"
+		},
+		{
+			"item": "irregular_implements:spectre_log"
+		},
+		{
+			"item": "irregular_implements:spectre_log"
+		},
+		{
+			"item": "irregular_implements:spectre_log"
+		}
+	],
+	"result": {
+		"count": 4,
+		"id": "irregular_implements:spectre_wood"
+	}
 }

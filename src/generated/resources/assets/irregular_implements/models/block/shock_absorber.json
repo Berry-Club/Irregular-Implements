@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "irregular_implements:block/shock_absorber/bottom",
-    "side": "irregular_implements:block/shock_absorber/side",
-    "top": "irregular_implements:block/shock_absorber/top"
-  }
+	"parent": "minecraft:block/cube_bottom_top",
+	"textures": {
+		"bottom": "irregular_implements:block/shock_absorber/bottom",
+		"side": "irregular_implements:block/shock_absorber/side",
+		"top": "irregular_implements:block/shock_absorber/top"
+	}
 }

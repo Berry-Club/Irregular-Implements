@@ -10,14 +10,14 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(FallLocation.class)
 abstract public class FallLocationMixin {
 
-    @ModifyReturnValue(
-            method = "getCurrentFallLocation",
-            at = @At("RETURN")
-    )
-    private static FallLocation irregular_implements$fallOnWaterMessage(FallLocation original, LivingEntity entity) {
-        if (original != null) return original;
+	@ModifyReturnValue(
+			method = "getCurrentFallLocation",
+			at = @At("RETURN")
+	)
+	private static FallLocation irregular_implements$fallOnWaterMessage(FallLocation original, LivingEntity entity) {
+		if (original != null) return original;
 
-        return ModArmorItems.fluidWalkingFallLocation(entity);
-    }
+		return ModArmorItems.fluidWalkingFallLocation(entity);
+	}
 
 }

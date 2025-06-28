@@ -1,19 +1,19 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "tag": "c:dyes/black"
-    },
-    {
-      "tag": "c:obsidians"
-    },
-    {
-      "tag": "c:dyes/blue"
-    }
-  ],
-  "result": {
-    "count": 4,
-    "id": "irregular_implements:blackout_powder"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"tag": "c:dyes/black"
+		},
+		{
+			"tag": "c:obsidians"
+		},
+		{
+			"tag": "c:dyes/blue"
+		}
+	],
+	"result": {
+		"count": 4,
+		"id": "irregular_implements:blackout_powder"
+	}
 }

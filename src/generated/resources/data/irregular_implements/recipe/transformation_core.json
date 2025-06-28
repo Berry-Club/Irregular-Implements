@@ -1,37 +1,37 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "tag": "c:dyes/red"
-    },
-    {
-      "tag": "c:dyes/orange"
-    },
-    {
-      "tag": "c:dyes/yellow"
-    },
-    {
-      "tag": "c:dyes/green"
-    },
-    {
-      "tag": "c:dyes/cyan"
-    },
-    {
-      "tag": "c:dyes/purple"
-    },
-    {
-      "tag": "c:dyes/gray"
-    },
-    {
-      "tag": "c:dyes/lime"
-    },
-    {
-      "tag": "c:dyes/magenta"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:transformation_core"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"tag": "c:dyes/red"
+		},
+		{
+			"tag": "c:dyes/orange"
+		},
+		{
+			"tag": "c:dyes/yellow"
+		},
+		{
+			"tag": "c:dyes/green"
+		},
+		{
+			"tag": "c:dyes/cyan"
+		},
+		{
+			"tag": "c:dyes/purple"
+		},
+		{
+			"tag": "c:dyes/gray"
+		},
+		{
+			"tag": "c:dyes/lime"
+		},
+		{
+			"tag": "c:dyes/magenta"
+		}
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:transformation_core"
+	}
 }

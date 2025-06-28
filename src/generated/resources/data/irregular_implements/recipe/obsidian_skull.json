@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "tag": "c:rods/blaze"
-    },
-    "N": {
-      "tag": "c:nuggets/gold"
-    },
-    "O": {
-      "tag": "c:obsidians"
-    },
-    "W": {
-      "item": "minecraft:wither_skeleton_skull"
-    }
-  },
-  "pattern": [
-    "OBO",
-    "NWN",
-    "OBO"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:obsidian_skull"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"tag": "c:rods/blaze"
+		},
+		"N": {
+			"tag": "c:nuggets/gold"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"W": {
+			"item": "minecraft:wither_skeleton_skull"
+		}
+	},
+	"pattern": [
+		"OBO",
+		"NWN",
+		"OBO"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:obsidian_skull"
+	}
 }

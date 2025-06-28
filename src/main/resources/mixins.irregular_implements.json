@@ -1,33 +1,33 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "dev.aaronhowser.mods.irregular_implements.mixin",
-  "mixins": [
-    "BeaconBlockEntityMixin",
-    "BiomeMixin",
-    "BlockAndTintGetterMixin",
-    "BlockStateBaseMixin",
-    "CombatTrackerMixin",
-    "CraftingMenuMixin",
-    "FallLocationMixin",
-    "FireMixin",
-    "HugeBrownMushroomFeatureMixin",
-    "ItemEntityMixin",
-    "LevelMixin",
-    "LivingEntityMixin",
-    "MoveControlMixin",
-    "OceanMonumentCoreRoomMixin",
-    "ServerPlayerGameModeMixin",
-    "SignalGetterMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "client": [
-    "KeyboardInputMixin",
-    "LevelRendererMixin",
-    "LivingEntityRendererMixin",
-    "MouseHandlerMixin",
-    "SheetsMixin"
-  ]
+	"required": true,
+	"minVersion": "0.8",
+	"package": "dev.aaronhowser.mods.irregular_implements.mixin",
+	"mixins": [
+		"BeaconBlockEntityMixin",
+		"BiomeMixin",
+		"BlockAndTintGetterMixin",
+		"BlockStateBaseMixin",
+		"CombatTrackerMixin",
+		"CraftingMenuMixin",
+		"FallLocationMixin",
+		"FireMixin",
+		"HugeBrownMushroomFeatureMixin",
+		"ItemEntityMixin",
+		"LevelMixin",
+		"LivingEntityMixin",
+		"MoveControlMixin",
+		"OceanMonumentCoreRoomMixin",
+		"ServerPlayerGameModeMixin",
+		"SignalGetterMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"client": [
+		"KeyboardInputMixin",
+		"LevelRendererMixin",
+		"LivingEntityRendererMixin",
+		"MouseHandlerMixin",
+		"SheetsMixin"
+	]
 }

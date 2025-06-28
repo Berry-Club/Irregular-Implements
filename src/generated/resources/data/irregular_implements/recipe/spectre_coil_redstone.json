@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "tag": "c:storage_blocks/redstone"
-    },
-    "C": {
-      "item": "irregular_implements:spectre_coil_basic"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    },
-    "S": {
-      "item": "irregular_implements:spectre_string"
-    }
-  },
-  "pattern": [
-    "BSR",
-    "SCS",
-    "RSB"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:spectre_coil_redstone"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"tag": "c:storage_blocks/redstone"
+		},
+		"C": {
+			"item": "irregular_implements:spectre_coil_basic"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		},
+		"S": {
+			"item": "irregular_implements:spectre_string"
+		}
+	},
+	"pattern": [
+		"BSR",
+		"SCS",
+		"RSB"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_coil_redstone"
+	}
 }

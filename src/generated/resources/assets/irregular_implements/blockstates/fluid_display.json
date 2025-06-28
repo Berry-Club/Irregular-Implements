@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/fluid_display"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/fluid_display"
+		}
+	}
 }

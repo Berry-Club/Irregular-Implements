@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "E": {
-      "item": "irregular_implements:ectoplasm"
-    },
-    "G": {
-      "tag": "c:storage_blocks/gold"
-    },
-    "L": {
-      "tag": "c:storage_blocks/lapis"
-    }
-  },
-  "pattern": [
-    "ELE",
-    "EGE",
-    "EEE"
-  ],
-  "result": {
-    "count": 9,
-    "id": "irregular_implements:spectre_ingot"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"item": "irregular_implements:ectoplasm"
+		},
+		"G": {
+			"tag": "c:storage_blocks/gold"
+		},
+		"L": {
+			"tag": "c:storage_blocks/lapis"
+		}
+	},
+	"pattern": [
+		"ELE",
+		"EGE",
+		"EEE"
+	],
+	"result": {
+		"count": 9,
+		"id": "irregular_implements:spectre_ingot"
+	}
 }

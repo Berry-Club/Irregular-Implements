@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "item": "minecraft:diamond_pickaxe"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    }
-  },
-  "pattern": [
-    " I ",
-    "IDI",
-    " I "
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:diamond_breaker"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"D": {
+			"item": "minecraft:diamond_pickaxe"
+		},
+		"I": {
+			"tag": "c:ingots/iron"
+		}
+	},
+	"pattern": [
+		" I ",
+		"IDI",
+		" I "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:diamond_breaker"
+	}
 }

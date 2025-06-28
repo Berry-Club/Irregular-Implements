@@ -1,52 +1,52 @@
 {
-  "variants": {
-    "moisture=0,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=0,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=1,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=1,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=2,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=2,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=3,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=3,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=4,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=4,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=5,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=5,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=6,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=6,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    },
-    "moisture=7,tilled=false": {
-      "model": "irregular_implements:block/fertilized_dirt"
-    },
-    "moisture=7,tilled=true": {
-      "model": "irregular_implements:block/fertilized_dirt_tilled"
-    }
-  }
+	"variants": {
+		"moisture=0,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=0,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=1,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=1,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=2,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=2,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=3,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=3,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=4,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=4,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=5,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=5,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=6,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=6,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		},
+		"moisture=7,tilled=false": {
+			"model": "irregular_implements:block/fertilized_dirt"
+		},
+		"moisture=7,tilled=true": {
+			"model": "irregular_implements:block/fertilized_dirt_tilled"
+		}
+	}
 }

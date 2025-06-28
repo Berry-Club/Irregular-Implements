@@ -12,18 +12,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Biome.class)
 public abstract class BiomeMixin {
 
-    @Inject(
-            method = "shouldSnow",
-            at = @At(
-                    value = "RETURN",
-                    ordinal = 1
-            ),
-            cancellable = true
-    )
-    private void irregular_implements$shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (RainShieldBlockEntity.chunkIsProtectedFromRain(level, pos)) {
-            cir.setReturnValue(false);
-        }
-    }
+	@Inject(
+			method = "shouldSnow",
+			at = @At(
+					value = "RETURN",
+					ordinal = 1
+			),
+			cancellable = true
+	)
+	private void irregular_implements$shouldSnow(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		if (RainShieldBlockEntity.chunkIsProtectedFromRain(level, pos)) {
+			cir.setReturnValue(false);
+		}
+	}
 
 }

@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "F": {
-      "item": "irregular_implements:floo_powder"
-    },
-    "P": {
-      "item": "minecraft:paper"
-    }
-  },
-  "pattern": [
-    "FFF",
-    "FPF",
-    "FFF"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:floo_token"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"F": {
+			"item": "irregular_implements:floo_powder"
+		},
+		"P": {
+			"item": "minecraft:paper"
+		}
+	},
+	"pattern": [
+		"FFF",
+		"FPF",
+		"FFF"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:floo_token"
+	}
 }

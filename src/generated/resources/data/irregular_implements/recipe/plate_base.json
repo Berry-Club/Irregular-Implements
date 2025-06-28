@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "item": "minecraft:iron_bars"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    }
-  },
-  "pattern": [
-    "I I",
-    " B ",
-    "I I"
-  ],
-  "result": {
-    "count": 8,
-    "id": "irregular_implements:plate_base"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "minecraft:iron_bars"
+		},
+		"I": {
+			"tag": "c:ingots/iron"
+		}
+	},
+	"pattern": [
+		"I I",
+		" B ",
+		"I I"
+	],
+	"result": {
+		"count": 8,
+		"id": "irregular_implements:plate_base"
+	}
 }

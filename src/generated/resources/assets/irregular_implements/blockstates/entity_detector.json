@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/entity_detector"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/entity_detector"
+		}
+	}
 }

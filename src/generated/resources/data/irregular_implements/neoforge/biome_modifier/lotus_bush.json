@@ -1,6 +1,6 @@
 {
-  "type": "neoforge:add_features",
-  "biomes": "#c:is_cold/overworld",
-  "features": "irregular_implements:lotus_bush",
-  "step": "vegetal_decoration"
+	"type": "neoforge:add_features",
+	"biomes": "#c:is_cold/overworld",
+	"features": "irregular_implements:lotus_bush",
+	"step": "vegetal_decoration"
 }

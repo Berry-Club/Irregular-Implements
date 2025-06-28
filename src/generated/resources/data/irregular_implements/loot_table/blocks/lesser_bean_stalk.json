@@ -1,4 +1,4 @@
 {
-  "type": "minecraft:block",
-  "random_sequence": "irregular_implements:blocks/lesser_bean_stalk"
+	"type": "minecraft:block",
+	"random_sequence": "irregular_implements:blocks/lesser_bean_stalk"
 }

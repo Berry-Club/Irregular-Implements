@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/luminous_block_purple"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/luminous_block_purple"
+		}
+	}
 }

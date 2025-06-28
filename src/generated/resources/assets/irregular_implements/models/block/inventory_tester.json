@@ -1,42 +1,42 @@
 {
-  "parent": "minecraft:block/thin_block",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "texture": "#texture"
-        },
-        "east": {
-          "texture": "#side"
-        },
-        "north": {
-          "texture": "#side"
-        },
-        "south": {
-          "texture": "#side"
-        },
-        "up": {
-          "texture": "#texture"
-        },
-        "west": {
-          "texture": "#side"
-        }
-      },
-      "from": [
-        6,
-        0,
-        6
-      ],
-      "to": [
-        10,
-        1,
-        10
-      ]
-    }
-  ],
-  "textures": {
-    "particle": "irregular_implements:block/inventory_tester",
-    "side": "minecraft:block/smooth_stone",
-    "texture": "irregular_implements:block/inventory_tester"
-  }
+	"parent": "minecraft:block/thin_block",
+	"elements": [
+		{
+			"faces": {
+				"down": {
+					"texture": "#texture"
+				},
+				"east": {
+					"texture": "#side"
+				},
+				"north": {
+					"texture": "#side"
+				},
+				"south": {
+					"texture": "#side"
+				},
+				"up": {
+					"texture": "#texture"
+				},
+				"west": {
+					"texture": "#side"
+				}
+			},
+			"from": [
+				6,
+				0,
+				6
+			],
+			"to": [
+				10,
+				1,
+				10
+			]
+		}
+	],
+	"textures": {
+		"particle": "irregular_implements:block/inventory_tester",
+		"side": "minecraft:block/smooth_stone",
+		"texture": "irregular_implements:block/inventory_tester"
+	}
 }

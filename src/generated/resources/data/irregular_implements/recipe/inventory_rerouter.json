@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "item": "minecraft:iron_bars"
-    },
-    "H": {
-      "item": "minecraft:hopper"
-    },
-    "S": {
-      "tag": "c:stones"
-    }
-  },
-  "pattern": [
-    "SBS",
-    "BHB",
-    "SBS"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:inventory_rerouter"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "minecraft:iron_bars"
+		},
+		"H": {
+			"item": "minecraft:hopper"
+		},
+		"S": {
+			"tag": "c:stones"
+		}
+	},
+	"pattern": [
+		"SBS",
+		"BHB",
+		"SBS"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:inventory_rerouter"
+	}
 }

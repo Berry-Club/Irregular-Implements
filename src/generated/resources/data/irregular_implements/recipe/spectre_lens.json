@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "tag": "c:gems/diamond"
-    },
-    "E": {
-      "tag": "c:gems/emerald"
-    },
-    "G": {
-      "tag": "c:glass_blocks"
-    },
-    "S": {
-      "item": "irregular_implements:spectre_ingot"
-    }
-  },
-  "pattern": [
-    "SES",
-    "DGD",
-    "SES"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:spectre_lens"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"D": {
+			"tag": "c:gems/diamond"
+		},
+		"E": {
+			"tag": "c:gems/emerald"
+		},
+		"G": {
+			"tag": "c:glass_blocks"
+		},
+		"S": {
+			"item": "irregular_implements:spectre_ingot"
+		}
+	},
+	"pattern": [
+		"SES",
+		"DGD",
+		"SES"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_lens"
+	}
 }

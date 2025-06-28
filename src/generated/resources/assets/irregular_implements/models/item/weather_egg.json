@@ -1,22 +1,22 @@
 {
-  "overrides": [
-    {
-      "model": "irregular_implements:item/weather_egg_sunny",
-      "predicate": {
-        "irregular_implements:weather": 0.0
-      }
-    },
-    {
-      "model": "irregular_implements:item/weather_egg_rainy",
-      "predicate": {
-        "irregular_implements:weather": 1.0
-      }
-    },
-    {
-      "model": "irregular_implements:item/weather_egg_stormy",
-      "predicate": {
-        "irregular_implements:weather": 2.0
-      }
-    }
-  ]
+	"overrides": [
+		{
+			"model": "irregular_implements:item/weather_egg_sunny",
+			"predicate": {
+				"irregular_implements:weather": 0.0
+			}
+		},
+		{
+			"model": "irregular_implements:item/weather_egg_rainy",
+			"predicate": {
+				"irregular_implements:weather": 1.0
+			}
+		},
+		{
+			"model": "irregular_implements:item/weather_egg_stormy",
+			"predicate": {
+				"irregular_implements:weather": 2.0
+			}
+		}
+	]
 }

@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "tag": "c:dusts/redstone"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    }
-  },
-  "pattern": [
-    "III",
-    "I I",
-    "IDI"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:iron_dropper"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"D": {
+			"tag": "c:dusts/redstone"
+		},
+		"I": {
+			"tag": "c:ingots/iron"
+		}
+	},
+	"pattern": [
+		"III",
+		"I I",
+		"IDI"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:iron_dropper"
+	}
 }

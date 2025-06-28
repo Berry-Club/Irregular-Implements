@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "irregular_implements:item/spectre_sword"
-  }
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "irregular_implements:item/spectre_sword"
+	}
 }

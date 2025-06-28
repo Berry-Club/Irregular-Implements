@@ -1,10 +1,10 @@
 {
-  "variants": {
-    "not_solid=false": {
-      "model": "irregular_implements:block/trigger_glass"
-    },
-    "not_solid=true": {
-      "model": "irregular_implements:block/trigger_glass_triggered"
-    }
-  }
+	"variants": {
+		"not_solid=false": {
+			"model": "irregular_implements:block/trigger_glass"
+		},
+		"not_solid=true": {
+			"model": "irregular_implements:block/trigger_glass_triggered"
+		}
+	}
 }

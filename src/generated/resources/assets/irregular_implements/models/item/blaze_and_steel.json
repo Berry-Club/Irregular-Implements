@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/blaze_and_steel"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "irregular_implements:item/blaze_and_steel"
+	}
 }

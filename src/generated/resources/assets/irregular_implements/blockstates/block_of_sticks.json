@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/block_of_sticks"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/block_of_sticks"
+		}
+	}
 }

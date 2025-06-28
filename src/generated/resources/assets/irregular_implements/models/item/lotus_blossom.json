@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/lotus_blossom"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "irregular_implements:item/lotus_blossom"
+	}
 }

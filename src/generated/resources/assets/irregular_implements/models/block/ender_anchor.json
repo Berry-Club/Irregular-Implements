@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "irregular_implements:block/ender_anchor"
-  }
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "irregular_implements:block/ender_anchor"
+	}
 }

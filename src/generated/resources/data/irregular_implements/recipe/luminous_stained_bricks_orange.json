@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "irregular_implements:luminous_powder"
-    },
-    {
-      "item": "irregular_implements:stained_bricks_orange"
-    }
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:luminous_stained_bricks_orange"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"item": "irregular_implements:luminous_powder"
+		},
+		{
+			"item": "irregular_implements:stained_bricks_orange"
+		}
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:luminous_stained_bricks_orange"
+	}
 }

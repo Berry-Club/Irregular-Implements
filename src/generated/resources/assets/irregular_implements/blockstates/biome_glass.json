@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/biome_glass"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/biome_glass"
+		}
+	}
 }

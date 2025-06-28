@@ -1,10 +1,10 @@
 {
-  "type": "neoforge:add_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/end_city_treasure"
-    }
-  ],
-  "table": "irregular_implements:chests/numbered_coil_end_city"
+	"type": "neoforge:add_table",
+	"conditions": [
+		{
+			"condition": "neoforge:loot_table_id",
+			"loot_table_id": "minecraft:chests/end_city_treasure"
+		}
+	],
+	"table": "irregular_implements:chests/numbered_coil_end_city"
 }

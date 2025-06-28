@@ -9,15 +9,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(FireBlock.class)
 public abstract class FireMixin implements BetterFire {
 
-    @ModifyExpressionValue(
-            method = "tick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/block/FireBlock;getFireTickDelay(Lnet/minecraft/util/RandomSource;)I"
-            )
-    )
-    private int irregular_implements$replaceFireTickSpeed(int original) {
-        return (int) (original * irregular_implements$getTickDelayFactor());
-    }
+	@ModifyExpressionValue(
+			method = "tick",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/world/level/block/FireBlock;getFireTickDelay(Lnet/minecraft/util/RandomSource;)I"
+			)
+	)
+	private int irregular_implements$replaceFireTickSpeed(int original) {
+		return (int) (original * irregular_implements$getTickDelayFactor());
+	}
 
 }

@@ -1,8 +1,8 @@
 {
-  "values": [
-    "irregular_implements:super_lubricant_ice",
-    "irregular_implements:super_lubricant_stone",
-    "irregular_implements:super_lubricant_platform",
-    "irregular_implements:filtered_super_lubricant_platform"
-  ]
+	"values": [
+		"irregular_implements:super_lubricant_ice",
+		"irregular_implements:super_lubricant_stone",
+		"irregular_implements:super_lubricant_platform",
+		"irregular_implements:filtered_super_lubricant_platform"
+	]
 }

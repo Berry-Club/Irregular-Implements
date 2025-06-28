@@ -1,74 +1,74 @@
 {
-  "parent": "minecraft:block/block",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "texture": "#case"
-        },
-        "east": {
-          "texture": "#case"
-        },
-        "north": {
-          "texture": "#case"
-        },
-        "south": {
-          "texture": "#case"
-        },
-        "up": {
-          "texture": "#case"
-        },
-        "west": {
-          "texture": "#case"
-        }
-      },
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#pedestal"
-        },
-        "east": {
-          "texture": "#pedestal"
-        },
-        "north": {
-          "texture": "#pedestal"
-        },
-        "south": {
-          "texture": "#pedestal"
-        },
-        "up": {
-          "texture": "#pedestal"
-        },
-        "west": {
-          "texture": "#pedestal"
-        }
-      },
-      "from": [
-        1,
-        0.1,
-        1
-      ],
-      "to": [
-        15,
-        2,
-        15
-      ]
-    }
-  ],
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "case": "minecraft:block/tinted_glass",
-    "pedestal": "minecraft:block/obsidian"
-  }
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"faces": {
+				"down": {
+					"texture": "#case"
+				},
+				"east": {
+					"texture": "#case"
+				},
+				"north": {
+					"texture": "#case"
+				},
+				"south": {
+					"texture": "#case"
+				},
+				"up": {
+					"texture": "#case"
+				},
+				"west": {
+					"texture": "#case"
+				}
+			},
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				16,
+				16
+			]
+		},
+		{
+			"faces": {
+				"down": {
+					"texture": "#pedestal"
+				},
+				"east": {
+					"texture": "#pedestal"
+				},
+				"north": {
+					"texture": "#pedestal"
+				},
+				"south": {
+					"texture": "#pedestal"
+				},
+				"up": {
+					"texture": "#pedestal"
+				},
+				"west": {
+					"texture": "#pedestal"
+				}
+			},
+			"from": [
+				1,
+				0.1,
+				1
+			],
+			"to": [
+				15,
+				2,
+				15
+			]
+		}
+	],
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"case": "minecraft:block/tinted_glass",
+		"pedestal": "minecraft:block/obsidian"
+	}
 }

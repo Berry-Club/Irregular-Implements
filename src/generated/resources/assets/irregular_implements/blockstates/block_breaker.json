@@ -1,50 +1,50 @@
 {
-  "variants": {
-    "facing=down,is_upgraded=false": {
-      "model": "irregular_implements:block/block_breaker",
-      "x": 90
-    },
-    "facing=down,is_upgraded=true": {
-      "model": "irregular_implements:block/block_breaker_upgraded",
-      "x": 90
-    },
-    "facing=east,is_upgraded=false": {
-      "model": "irregular_implements:block/block_breaker",
-      "y": 90
-    },
-    "facing=east,is_upgraded=true": {
-      "model": "irregular_implements:block/block_breaker_upgraded",
-      "y": 90
-    },
-    "facing=north,is_upgraded=false": {
-      "model": "irregular_implements:block/block_breaker"
-    },
-    "facing=north,is_upgraded=true": {
-      "model": "irregular_implements:block/block_breaker_upgraded"
-    },
-    "facing=south,is_upgraded=false": {
-      "model": "irregular_implements:block/block_breaker",
-      "y": 180
-    },
-    "facing=south,is_upgraded=true": {
-      "model": "irregular_implements:block/block_breaker_upgraded",
-      "y": 180
-    },
-    "facing=up,is_upgraded=false": {
-      "model": "irregular_implements:block/block_breaker",
-      "x": 270
-    },
-    "facing=up,is_upgraded=true": {
-      "model": "irregular_implements:block/block_breaker_upgraded",
-      "x": 270
-    },
-    "facing=west,is_upgraded=false": {
-      "model": "irregular_implements:block/block_breaker",
-      "y": 270
-    },
-    "facing=west,is_upgraded=true": {
-      "model": "irregular_implements:block/block_breaker_upgraded",
-      "y": 270
-    }
-  }
+	"variants": {
+		"facing=down,is_upgraded=false": {
+			"model": "irregular_implements:block/block_breaker",
+			"x": 90
+		},
+		"facing=down,is_upgraded=true": {
+			"model": "irregular_implements:block/block_breaker_upgraded",
+			"x": 90
+		},
+		"facing=east,is_upgraded=false": {
+			"model": "irregular_implements:block/block_breaker",
+			"y": 90
+		},
+		"facing=east,is_upgraded=true": {
+			"model": "irregular_implements:block/block_breaker_upgraded",
+			"y": 90
+		},
+		"facing=north,is_upgraded=false": {
+			"model": "irregular_implements:block/block_breaker"
+		},
+		"facing=north,is_upgraded=true": {
+			"model": "irregular_implements:block/block_breaker_upgraded"
+		},
+		"facing=south,is_upgraded=false": {
+			"model": "irregular_implements:block/block_breaker",
+			"y": 180
+		},
+		"facing=south,is_upgraded=true": {
+			"model": "irregular_implements:block/block_breaker_upgraded",
+			"y": 180
+		},
+		"facing=up,is_upgraded=false": {
+			"model": "irregular_implements:block/block_breaker",
+			"x": 270
+		},
+		"facing=up,is_upgraded=true": {
+			"model": "irregular_implements:block/block_breaker_upgraded",
+			"x": 270
+		},
+		"facing=west,is_upgraded=false": {
+			"model": "irregular_implements:block/block_breaker",
+			"y": 270
+		},
+		"facing=west,is_upgraded=true": {
+			"model": "irregular_implements:block/block_breaker_upgraded",
+			"y": 270
+		}
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "irregular_implements:block/spectre_log_top",
-    "side": "irregular_implements:block/spectre_log"
-  }
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"end": "irregular_implements:block/spectre_log_top",
+		"side": "irregular_implements:block/spectre_log"
+	}
 }

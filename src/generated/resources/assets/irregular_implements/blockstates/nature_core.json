@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/nature_core"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/nature_core"
+		}
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/luminous_stained_bricks_light_gray"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/luminous_stained_bricks_light_gray"
+		}
+	}
 }

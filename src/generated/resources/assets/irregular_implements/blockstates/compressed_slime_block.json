@@ -1,13 +1,13 @@
 {
-  "variants": {
-    "compression_level=0": {
-      "model": "irregular_implements:block/compressed_slime_block_0"
-    },
-    "compression_level=1": {
-      "model": "irregular_implements:block/compressed_slime_block_1"
-    },
-    "compression_level=2": {
-      "model": "irregular_implements:block/compressed_slime_block_2"
-    }
-  }
+	"variants": {
+		"compression_level=0": {
+			"model": "irregular_implements:block/compressed_slime_block_0"
+		},
+		"compression_level=1": {
+			"model": "irregular_implements:block/compressed_slime_block_1"
+		},
+		"compression_level=2": {
+			"model": "irregular_implements:block/compressed_slime_block_2"
+		}
+	}
 }

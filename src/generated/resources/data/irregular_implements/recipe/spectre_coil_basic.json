@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "G": {
-      "tag": "c:glass_blocks"
-    },
-    "I": {
-      "item": "irregular_implements:spectre_ingot"
-    },
-    "O": {
-      "tag": "c:obsidians"
-    },
-    "S": {
-      "item": "irregular_implements:spectre_string"
-    }
-  },
-  "pattern": [
-    "OSO",
-    "OIG",
-    "OSO"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:spectre_coil_basic"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"G": {
+			"tag": "c:glass_blocks"
+		},
+		"I": {
+			"item": "irregular_implements:spectre_ingot"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"S": {
+			"item": "irregular_implements:spectre_string"
+		}
+	},
+	"pattern": [
+		"OSO",
+		"OIG",
+		"OSO"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_coil_basic"
+	}
 }

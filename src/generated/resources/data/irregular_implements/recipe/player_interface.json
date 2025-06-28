@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "E": {
-      "item": "minecraft:ender_chest"
-    },
-    "O": {
-      "tag": "c:obsidians"
-    },
-    "P": {
-      "item": "irregular_implements:stable_ender_pearl"
-    },
-    "S": {
-      "item": "minecraft:nether_star"
-    }
-  },
-  "pattern": [
-    "OEO",
-    "OSO",
-    "OPO"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:player_interface"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"item": "minecraft:ender_chest"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"P": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"S": {
+			"item": "minecraft:nether_star"
+		}
+	},
+	"pattern": [
+		"OEO",
+		"OSO",
+		"OPO"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:player_interface"
+	}
 }

@@ -1,28 +1,28 @@
 {
-  "variants": {
-    "age=0": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=1": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=2": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=3": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=4": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=5": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=6": {
-      "model": "irregular_implements:block/bean_sprout_small"
-    },
-    "age=7": {
-      "model": "irregular_implements:block/bean_sprout_big"
-    }
-  }
+	"variants": {
+		"age=0": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=1": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=2": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=3": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=4": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=5": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=6": {
+			"model": "irregular_implements:block/bean_sprout_small"
+		},
+		"age=7": {
+			"model": "irregular_implements:block/bean_sprout_big"
+		}
+	}
 }

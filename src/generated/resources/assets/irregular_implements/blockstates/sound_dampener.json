@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/sound_dampener"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/sound_dampener"
+		}
+	}
 }

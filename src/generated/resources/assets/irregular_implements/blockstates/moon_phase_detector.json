@@ -1,100 +1,100 @@
 {
-  "variants": {
-    "inverted=false,power=0": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=1": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=10": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=11": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=12": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=13": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=14": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=15": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=2": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=3": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=4": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=5": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=6": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=7": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=8": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=false,power=9": {
-      "model": "irregular_implements:block/moon_phase_detector"
-    },
-    "inverted=true,power=0": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=1": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=10": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=11": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=12": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=13": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=14": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=15": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=2": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=3": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=4": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=5": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=6": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=7": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=8": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    },
-    "inverted=true,power=9": {
-      "model": "irregular_implements:block/moon_phase_detector_inverted"
-    }
-  }
+	"variants": {
+		"inverted=false,power=0": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=1": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=10": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=11": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=12": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=13": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=14": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=15": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=2": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=3": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=4": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=5": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=6": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=7": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=8": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=false,power=9": {
+			"model": "irregular_implements:block/moon_phase_detector"
+		},
+		"inverted=true,power=0": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=1": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=10": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=11": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=12": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=13": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=14": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=15": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=2": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=3": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=4": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=5": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=6": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=7": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=8": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		},
+		"inverted=true,power=9": {
+			"model": "irregular_implements:block/moon_phase_detector_inverted"
+		}
+	}
 }

@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "E": {
-      "item": "irregular_implements:ectoplasm"
-    },
-    "G": {
-      "tag": "c:dusts/glowstone"
-    },
-    "I": {
-      "item": "irregular_implements:luminous_powder"
-    }
-  },
-  "pattern": [
-    "EGE",
-    "GIG",
-    "EGE"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:spectre_illuminator"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"item": "irregular_implements:ectoplasm"
+		},
+		"G": {
+			"tag": "c:dusts/glowstone"
+		},
+		"I": {
+			"item": "irregular_implements:luminous_powder"
+		}
+	},
+	"pattern": [
+		"EGE",
+		"GIG",
+		"EGE"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_illuminator"
+	}
 }

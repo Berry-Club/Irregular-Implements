@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "G": {
-      "tag": "c:glass_blocks"
-    },
-    "Q": {
-      "item": "minecraft:quartz_block"
-    }
-  },
-  "pattern": [
-    "GGG",
-    "GQG",
-    "GGG"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:quartz_glass"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"G": {
+			"tag": "c:glass_blocks"
+		},
+		"Q": {
+			"item": "minecraft:quartz_block"
+		}
+	},
+	"pattern": [
+		"GGG",
+		"GQG",
+		"GGG"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:quartz_glass"
+	}
 }

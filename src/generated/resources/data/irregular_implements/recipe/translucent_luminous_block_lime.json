@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "L": {
-      "item": "irregular_implements:luminous_block_lime"
-    },
-    "P": {
-      "tag": "c:glass_panes/colorless"
-    }
-  },
-  "pattern": [
-    " P ",
-    "PLP",
-    " P "
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:translucent_luminous_block_lime"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"L": {
+			"item": "irregular_implements:luminous_block_lime"
+		},
+		"P": {
+			"tag": "c:glass_panes/colorless"
+		}
+	},
+	"pattern": [
+		" P ",
+		"PLP",
+		" P "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:translucent_luminous_block_lime"
+	}
 }

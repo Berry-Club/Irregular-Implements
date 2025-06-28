@@ -1,9 +1,9 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "irregular_implements:block/imbuing_station/bottom",
-    "particle": "irregular_implements:block/imbuing_station/top",
-    "side": "irregular_implements:block/imbuing_station/side",
-    "top": "irregular_implements:block/imbuing_station/top"
-  }
+	"parent": "minecraft:block/cube_bottom_top",
+	"textures": {
+		"bottom": "irregular_implements:block/imbuing_station/bottom",
+		"particle": "irregular_implements:block/imbuing_station/top",
+		"side": "irregular_implements:block/imbuing_station/side",
+		"top": "irregular_implements:block/imbuing_station/top"
+	}
 }

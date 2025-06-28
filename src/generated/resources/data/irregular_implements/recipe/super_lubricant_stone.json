@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "L": {
-      "item": "irregular_implements:super_lubricant_tincture"
-    },
-    "S": {
-      "tag": "c:stones"
-    }
-  },
-  "pattern": [
-    "SSS",
-    "SLS",
-    "SSS"
-  ],
-  "result": {
-    "count": 8,
-    "id": "irregular_implements:super_lubricant_stone"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"L": {
+			"item": "irregular_implements:super_lubricant_tincture"
+		},
+		"S": {
+			"tag": "c:stones"
+		}
+	},
+	"pattern": [
+		"SSS",
+		"SLS",
+		"SSS"
+	],
+	"result": {
+		"count": 8,
+		"id": "irregular_implements:super_lubricant_stone"
+	}
 }

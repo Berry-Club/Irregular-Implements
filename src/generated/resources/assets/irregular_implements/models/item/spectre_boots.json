@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/spectre_boots"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "irregular_implements:item/spectre_boots"
+	}
 }

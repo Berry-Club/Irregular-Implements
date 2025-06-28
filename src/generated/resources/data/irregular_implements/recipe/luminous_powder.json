@@ -1,19 +1,19 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "tag": "c:dusts/glowstone"
-    },
-    {
-      "tag": "c:glass_blocks"
-    },
-    {
-      "item": "irregular_implements:glowing_mushroom"
-    }
-  ],
-  "result": {
-    "count": 4,
-    "id": "irregular_implements:luminous_powder"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"tag": "c:dusts/glowstone"
+		},
+		{
+			"tag": "c:glass_blocks"
+		},
+		{
+			"item": "irregular_implements:glowing_mushroom"
+		}
+	],
+	"result": {
+		"count": 4,
+		"id": "irregular_implements:luminous_powder"
+	}
 }

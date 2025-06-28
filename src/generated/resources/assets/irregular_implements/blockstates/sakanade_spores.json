@@ -1,52 +1,52 @@
 {
-  "multipart": [
-    {
-      "apply": {
-        "model": "irregular_implements:block/sakanade_spores_down"
-      },
-      "when": {
-        "down": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/sakanade_spores_up"
-      },
-      "when": {
-        "up": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/sakanade_spores_north"
-      },
-      "when": {
-        "north": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/sakanade_spores_south"
-      },
-      "when": {
-        "south": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/sakanade_spores_west"
-      },
-      "when": {
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/sakanade_spores_east"
-      },
-      "when": {
-        "east": "true"
-      }
-    }
-  ]
+	"multipart": [
+		{
+			"apply": {
+				"model": "irregular_implements:block/sakanade_spores_down"
+			},
+			"when": {
+				"down": "true"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/sakanade_spores_up"
+			},
+			"when": {
+				"up": "true"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/sakanade_spores_north"
+			},
+			"when": {
+				"north": "true"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/sakanade_spores_south"
+			},
+			"when": {
+				"south": "true"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/sakanade_spores_west"
+			},
+			"when": {
+				"west": "true"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/sakanade_spores_east"
+			},
+			"when": {
+				"east": "true"
+			}
+		}
+	]
 }

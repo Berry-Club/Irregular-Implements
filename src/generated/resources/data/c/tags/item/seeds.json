@@ -1,7 +1,7 @@
 {
-  "values": [
-    "#irregular_implements:grass_seeds",
-    "irregular_implements:lotus_seeds",
-    "irregular_implements:bean"
-  ]
+	"values": [
+		"#irregular_implements:grass_seeds",
+		"irregular_implements:lotus_seeds",
+		"irregular_implements:bean"
+	]
 }

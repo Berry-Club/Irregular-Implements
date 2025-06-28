@@ -13,24 +13,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MouseHandler.class)
 abstract public class MouseHandlerMixin {
 
-    @Shadow
-    private double accumulatedDX;
+	@Shadow
+	private double accumulatedDX;
 
-    @Shadow
-    private double accumulatedDY;
+	@Shadow
+	private double accumulatedDY;
 
-    @Inject(
-            method = "turnPlayer",
-            at = @At("HEAD")
-    )
-    private void tryInvert(double movementTime, CallbackInfo ci) {
-        if (!ClientConfig.COLLAPSE_INVERTS_MOUSE.get()) return;
+	@Inject(
+			method = "turnPlayer",
+			at = @At("HEAD")
+	)
+	private void tryInvert(double movementTime, CallbackInfo ci) {
+		if (!ClientConfig.COLLAPSE_INVERTS_MOUSE.get()) return;
 
-        var player = ClientUtil.getLocalPlayer();
-        if (player == null || !player.hasEffect(ModEffects.COLLAPSE)) return;
+		var player = ClientUtil.getLocalPlayer();
+		if (player == null || !player.hasEffect(ModEffects.COLLAPSE)) return;
 
-        accumulatedDX = -accumulatedDX;
-        accumulatedDY = -accumulatedDY;
-    }
+		accumulatedDX = -accumulatedDX;
+		accumulatedDY = -accumulatedDY;
+	}
 
 }

@@ -1,52 +1,52 @@
 {
-  "parent": "minecraft:block/block",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "cullface": "down",
-          "texture": "#all"
-        },
-        "east": {
-          "cullface": "east",
-          "texture": "#all"
-        },
-        "north": {
-          "cullface": "north",
-          "texture": "#all"
-        },
-        "south": {
-          "cullface": "south",
-          "texture": "#all"
-        },
-        "up": {
-          "cullface": "up",
-          "texture": "#all"
-        },
-        "west": {
-          "cullface": "west",
-          "texture": "#all"
-        }
-      },
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "neoforge_data": {
-        "ambient_occlusion": false,
-        "block_light": 15,
-        "sky_light": 15
-      },
-      "to": [
-        16,
-        16,
-        16
-      ]
-    }
-  ],
-  "textures": {
-    "all": "irregular_implements:block/luminous_block/black",
-    "particle": "irregular_implements:block/luminous_block/translucent/black"
-  }
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"faces": {
+				"down": {
+					"cullface": "down",
+					"texture": "#all"
+				},
+				"east": {
+					"cullface": "east",
+					"texture": "#all"
+				},
+				"north": {
+					"cullface": "north",
+					"texture": "#all"
+				},
+				"south": {
+					"cullface": "south",
+					"texture": "#all"
+				},
+				"up": {
+					"cullface": "up",
+					"texture": "#all"
+				},
+				"west": {
+					"cullface": "west",
+					"texture": "#all"
+				}
+			},
+			"from": [
+				0,
+				0,
+				0
+			],
+			"neoforge_data": {
+				"ambient_occlusion": false,
+				"block_light": 15,
+				"sky_light": 15
+			},
+			"to": [
+				16,
+				16,
+				16
+			]
+		}
+	],
+	"textures": {
+		"all": "irregular_implements:block/luminous_block/black",
+		"particle": "irregular_implements:block/luminous_block/translucent/black"
+	}
 }

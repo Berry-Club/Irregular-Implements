@@ -1,22 +1,22 @@
 {
-  "parent": "irregular_implements:block/inventory_tester",
-  "display": {
-    "gui": {
-      "rotation": [
-        30,
-        225,
-        0
-      ],
-      "scale": [
-        2.18,
-        2.18,
-        2.18
-      ],
-      "translation": [
-        0,
-        10.5,
-        0
-      ]
-    }
-  }
+	"parent": "irregular_implements:block/inventory_tester",
+	"display": {
+		"gui": {
+			"rotation": [
+				30,
+				225,
+				0
+			],
+			"scale": [
+				2.18,
+				2.18,
+				2.18
+			],
+			"translation": [
+				0,
+				10.5,
+				0
+			]
+		}
+	}
 }

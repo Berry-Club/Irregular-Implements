@@ -1,50 +1,50 @@
 {
-  "variants": {
-    "enabled=false,facing=down": {
-      "model": "irregular_implements:block/igniter",
-      "x": 90
-    },
-    "enabled=false,facing=east": {
-      "model": "irregular_implements:block/igniter",
-      "y": 90
-    },
-    "enabled=false,facing=north": {
-      "model": "irregular_implements:block/igniter"
-    },
-    "enabled=false,facing=south": {
-      "model": "irregular_implements:block/igniter",
-      "y": 180
-    },
-    "enabled=false,facing=up": {
-      "model": "irregular_implements:block/igniter",
-      "x": 270
-    },
-    "enabled=false,facing=west": {
-      "model": "irregular_implements:block/igniter",
-      "y": 270
-    },
-    "enabled=true,facing=down": {
-      "model": "irregular_implements:block/igniter",
-      "x": 90
-    },
-    "enabled=true,facing=east": {
-      "model": "irregular_implements:block/igniter",
-      "y": 90
-    },
-    "enabled=true,facing=north": {
-      "model": "irregular_implements:block/igniter"
-    },
-    "enabled=true,facing=south": {
-      "model": "irregular_implements:block/igniter",
-      "y": 180
-    },
-    "enabled=true,facing=up": {
-      "model": "irregular_implements:block/igniter",
-      "x": 270
-    },
-    "enabled=true,facing=west": {
-      "model": "irregular_implements:block/igniter",
-      "y": 270
-    }
-  }
+	"variants": {
+		"enabled=false,facing=down": {
+			"model": "irregular_implements:block/igniter",
+			"x": 90
+		},
+		"enabled=false,facing=east": {
+			"model": "irregular_implements:block/igniter",
+			"y": 90
+		},
+		"enabled=false,facing=north": {
+			"model": "irregular_implements:block/igniter"
+		},
+		"enabled=false,facing=south": {
+			"model": "irregular_implements:block/igniter",
+			"y": 180
+		},
+		"enabled=false,facing=up": {
+			"model": "irregular_implements:block/igniter",
+			"x": 270
+		},
+		"enabled=false,facing=west": {
+			"model": "irregular_implements:block/igniter",
+			"y": 270
+		},
+		"enabled=true,facing=down": {
+			"model": "irregular_implements:block/igniter",
+			"x": 90
+		},
+		"enabled=true,facing=east": {
+			"model": "irregular_implements:block/igniter",
+			"y": 90
+		},
+		"enabled=true,facing=north": {
+			"model": "irregular_implements:block/igniter"
+		},
+		"enabled=true,facing=south": {
+			"model": "irregular_implements:block/igniter",
+			"y": 180
+		},
+		"enabled=true,facing=up": {
+			"model": "irregular_implements:block/igniter",
+			"x": 270
+		},
+		"enabled=true,facing=west": {
+			"model": "irregular_implements:block/igniter",
+			"y": 270
+		}
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/biome_cobblestone"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/biome_cobblestone"
+		}
+	}
 }

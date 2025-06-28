@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    },
-    "T": {
-      "item": "minecraft:redstone_torch"
-    }
-  },
-  "pattern": [
-    "TIR",
-    "III",
-    "RIT"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:analog_emitter"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"I": {
+			"tag": "c:ingots/iron"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		},
+		"T": {
+			"item": "minecraft:redstone_torch"
+		}
+	},
+	"pattern": [
+		"TIR",
+		"III",
+		"RIT"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:analog_emitter"
+	}
 }

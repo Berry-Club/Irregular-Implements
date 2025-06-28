@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/daylight_detector",
-  "textures": {
-    "side": "irregular_implements:block/moon_phase_detector_side",
-    "top": "irregular_implements:block/moon_phase_detector_top"
-  }
+	"parent": "minecraft:block/daylight_detector",
+	"textures": {
+		"side": "irregular_implements:block/moon_phase_detector_side",
+		"top": "irregular_implements:block/moon_phase_detector_top"
+	}
 }

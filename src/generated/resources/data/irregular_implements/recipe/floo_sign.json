@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "P": {
-      "item": "irregular_implements:floo_powder"
-    },
-    "S": {
-      "tag": "minecraft:signs"
-    }
-  },
-  "pattern": [
-    "PPP",
-    "PSP",
-    "PPP"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:floo_sign"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"P": {
+			"item": "irregular_implements:floo_powder"
+		},
+		"S": {
+			"tag": "minecraft:signs"
+		}
+	},
+	"pattern": [
+		"PPP",
+		"PSP",
+		"PPP"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:floo_sign"
+	}
 }

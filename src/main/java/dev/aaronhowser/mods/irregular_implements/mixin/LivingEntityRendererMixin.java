@@ -12,15 +12,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntityRenderer.class)
 abstract public class LivingEntityRendererMixin<T extends LivingEntity> {
 
-    @Inject(
-            method = "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;)Z",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void irregular_implements$shouldShowNameMixin(T entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.HIDE_NAME_HELMET)) {
-            cir.setReturnValue(false);
-        }
-    }
+	@Inject(
+			method = "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;)Z",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	private void irregular_implements$shouldShowNameMixin(T entity, CallbackInfoReturnable<Boolean> cir) {
+		if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItemTagsProvider.HIDE_NAME_HELMET)) {
+			cir.setReturnValue(false);
+		}
+	}
 
 }

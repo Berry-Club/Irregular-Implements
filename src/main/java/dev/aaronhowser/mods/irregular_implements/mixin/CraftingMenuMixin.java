@@ -14,15 +14,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CraftingMenu.class)
 public abstract class CraftingMenuMixin {
 
-    @Shadow
-    @Final
-    private ContainerLevelAccess access;
+	@Shadow
+	@Final
+	private ContainerLevelAccess access;
 
-    @ModifyReturnValue(
-            method = "stillValid",
-            at = @At("RETURN")
-    )
-    private boolean stillValidCustomCraftingTable(boolean original, Player player) {
-        return original || AbstractContainerMenu.stillValid(access, player, ModBlocks.CUSTOM_CRAFTING_TABLE.get());
-    }
+	@ModifyReturnValue(
+			method = "stillValid",
+			at = @At("RETURN")
+	)
+	private boolean stillValidCustomCraftingTable(boolean original, Player player) {
+		return original || AbstractContainerMenu.stillValid(access, player, ModBlocks.CUSTOM_CRAFTING_TABLE.get());
+	}
 }

@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "P": {
-      "item": "irregular_implements:prismarine_ender_bridge"
-    },
-    "S": {
-      "tag": "c:rods/obsidian"
-    }
-  },
-  "pattern": [
-    "P",
-    "S",
-    "S"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:portable_ender_bridge"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"P": {
+			"item": "irregular_implements:prismarine_ender_bridge"
+		},
+		"S": {
+			"tag": "c:rods/obsidian"
+		}
+	},
+	"pattern": [
+		"P",
+		"S",
+		"S"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:portable_ender_bridge"
+	}
 }

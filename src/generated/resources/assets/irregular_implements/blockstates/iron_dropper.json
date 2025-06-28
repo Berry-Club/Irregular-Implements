@@ -1,48 +1,48 @@
 {
-  "variants": {
-    "facing=down,triggered=false": {
-      "model": "irregular_implements:block/iron_dropper_vertical",
-      "x": 180
-    },
-    "facing=down,triggered=true": {
-      "model": "irregular_implements:block/iron_dropper_vertical",
-      "x": 180
-    },
-    "facing=east,triggered=false": {
-      "model": "irregular_implements:block/iron_dropper_horizontal",
-      "y": 90
-    },
-    "facing=east,triggered=true": {
-      "model": "irregular_implements:block/iron_dropper_horizontal",
-      "y": 90
-    },
-    "facing=north,triggered=false": {
-      "model": "irregular_implements:block/iron_dropper_horizontal"
-    },
-    "facing=north,triggered=true": {
-      "model": "irregular_implements:block/iron_dropper_horizontal"
-    },
-    "facing=south,triggered=false": {
-      "model": "irregular_implements:block/iron_dropper_horizontal",
-      "y": 180
-    },
-    "facing=south,triggered=true": {
-      "model": "irregular_implements:block/iron_dropper_horizontal",
-      "y": 180
-    },
-    "facing=up,triggered=false": {
-      "model": "irregular_implements:block/iron_dropper_vertical"
-    },
-    "facing=up,triggered=true": {
-      "model": "irregular_implements:block/iron_dropper_vertical"
-    },
-    "facing=west,triggered=false": {
-      "model": "irregular_implements:block/iron_dropper_horizontal",
-      "y": 270
-    },
-    "facing=west,triggered=true": {
-      "model": "irregular_implements:block/iron_dropper_horizontal",
-      "y": 270
-    }
-  }
+	"variants": {
+		"facing=down,triggered=false": {
+			"model": "irregular_implements:block/iron_dropper_vertical",
+			"x": 180
+		},
+		"facing=down,triggered=true": {
+			"model": "irregular_implements:block/iron_dropper_vertical",
+			"x": 180
+		},
+		"facing=east,triggered=false": {
+			"model": "irregular_implements:block/iron_dropper_horizontal",
+			"y": 90
+		},
+		"facing=east,triggered=true": {
+			"model": "irregular_implements:block/iron_dropper_horizontal",
+			"y": 90
+		},
+		"facing=north,triggered=false": {
+			"model": "irregular_implements:block/iron_dropper_horizontal"
+		},
+		"facing=north,triggered=true": {
+			"model": "irregular_implements:block/iron_dropper_horizontal"
+		},
+		"facing=south,triggered=false": {
+			"model": "irregular_implements:block/iron_dropper_horizontal",
+			"y": 180
+		},
+		"facing=south,triggered=true": {
+			"model": "irregular_implements:block/iron_dropper_horizontal",
+			"y": 180
+		},
+		"facing=up,triggered=false": {
+			"model": "irregular_implements:block/iron_dropper_vertical"
+		},
+		"facing=up,triggered=true": {
+			"model": "irregular_implements:block/iron_dropper_vertical"
+		},
+		"facing=west,triggered=false": {
+			"model": "irregular_implements:block/iron_dropper_horizontal",
+			"y": 270
+		},
+		"facing=west,triggered=true": {
+			"model": "irregular_implements:block/iron_dropper_horizontal",
+			"y": 270
+		}
+	}
 }

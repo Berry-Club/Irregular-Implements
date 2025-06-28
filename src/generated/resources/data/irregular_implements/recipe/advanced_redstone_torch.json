@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    }
-  },
-  "pattern": [
-    " R ",
-    "RIR",
-    " S "
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:advanced_redstone_torch"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"I": {
+			"tag": "c:ingots/iron"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"pattern": [
+		" R ",
+		"RIR",
+		" S "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:advanced_redstone_torch"
+	}
 }

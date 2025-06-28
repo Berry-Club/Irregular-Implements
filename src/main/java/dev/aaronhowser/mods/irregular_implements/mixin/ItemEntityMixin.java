@@ -12,21 +12,21 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
 
-    public ItemEntityMixin(EntityType<?> entityType, Level level) {
-        super(entityType, level);
-    }
+	public ItemEntityMixin(EntityType<?> entityType, Level level) {
+		super(entityType, level);
+	}
 
-    @ModifyVariable(
-            method = "tick",
-            at = @At(
-                    value = "STORE",
-                    ordinal = 1
-            )
-    )
-    private float irregular_implements$replaceFriction(float original) {
-        return (this.level()
-                .getBlockState(getBlockPosBelowThatAffectsMyMovement())
-                .is(ModBlockTagsProvider.SUPER_LUBRICATED)
-        ) ? 1f : original;
-    }
+	@ModifyVariable(
+			method = "tick",
+			at = @At(
+					value = "STORE",
+					ordinal = 1
+			)
+	)
+	private float irregular_implements$replaceFriction(float original) {
+		return (this.level()
+				.getBlockState(getBlockPosBelowThatAffectsMyMovement())
+				.is(ModBlockTagsProvider.SUPER_LUBRICATED)
+		) ? 1f : original;
+	}
 }

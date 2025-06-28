@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/birch_platform"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/birch_platform"
+		}
+	}
 }

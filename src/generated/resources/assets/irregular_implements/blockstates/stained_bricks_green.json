@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/stained_bricks_green"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/stained_bricks_green"
+		}
+	}
 }

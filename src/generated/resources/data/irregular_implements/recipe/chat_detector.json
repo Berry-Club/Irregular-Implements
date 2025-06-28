@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "tag": "c:dyes/red"
-    },
-    "R": {
-      "item": "minecraft:repeater"
-    },
-    "S": {
-      "tag": "c:stones"
-    }
-  },
-  "pattern": [
-    "SRS",
-    "RDR",
-    "SRS"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:chat_detector"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"D": {
+			"tag": "c:dyes/red"
+		},
+		"R": {
+			"item": "minecraft:repeater"
+		},
+		"S": {
+			"tag": "c:stones"
+		}
+	},
+	"pattern": [
+		"SRS",
+		"RDR",
+		"SRS"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:chat_detector"
+	}
 }

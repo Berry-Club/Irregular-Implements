@@ -1,16 +1,16 @@
 {
-  "variants": {
-    "axis=x": {
-      "model": "irregular_implements:block/spectre_log_horizontal",
-      "x": 90,
-      "y": 90
-    },
-    "axis=y": {
-      "model": "irregular_implements:block/spectre_log"
-    },
-    "axis=z": {
-      "model": "irregular_implements:block/spectre_log_horizontal",
-      "x": 90
-    }
-  }
+	"variants": {
+		"axis=x": {
+			"model": "irregular_implements:block/spectre_log_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y": {
+			"model": "irregular_implements:block/spectre_log"
+		},
+		"axis=z": {
+			"model": "irregular_implements:block/spectre_log_horizontal",
+			"x": 90
+		}
+	}
 }

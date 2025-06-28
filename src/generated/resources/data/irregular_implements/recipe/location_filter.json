@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "M": {
-      "tag": "c:dyes/magenta"
-    },
-    "P": {
-      "item": "minecraft:paper"
-    }
-  },
-  "pattern": [
-    " M ",
-    "MPM",
-    " M "
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:location_filter"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"M": {
+			"tag": "c:dyes/magenta"
+		},
+		"P": {
+			"item": "minecraft:paper"
+		}
+	},
+	"pattern": [
+		" M ",
+		"MPM",
+		" M "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:location_filter"
+	}
 }

@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(KeyboardInput.class)
 abstract public class KeyboardInputMixin implements KeyboardInputFunctions {
 
-    @Inject(
-            method = "tick",
-            at = @At("TAIL")
-    )
-    private void irregular_implements$invertWhenCollapse(boolean isSneaking, float sneakingSpeedMultiplier, CallbackInfo ci) {
-        checkInvert();
-    }
+	@Inject(
+			method = "tick",
+			at = @At("TAIL")
+	)
+	private void irregular_implements$invertWhenCollapse(boolean isSneaking, float sneakingSpeedMultiplier, CallbackInfo ci) {
+		checkInvert();
+	}
 }

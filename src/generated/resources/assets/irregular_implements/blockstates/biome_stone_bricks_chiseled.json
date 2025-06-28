@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/biome_stone_bricks_chiseled"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/biome_stone_bricks_chiseled"
+		}
+	}
 }

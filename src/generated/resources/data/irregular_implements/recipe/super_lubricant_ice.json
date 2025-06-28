@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "item": "minecraft:water_bucket"
-    },
-    "I": {
-      "item": "minecraft:ice"
-    },
-    "S": {
-      "tag": "c:slimeballs"
-    }
-  },
-  "pattern": [
-    "S",
-    "I",
-    "B"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:super_lubricant_ice"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "minecraft:water_bucket"
+		},
+		"I": {
+			"item": "minecraft:ice"
+		},
+		"S": {
+			"tag": "c:slimeballs"
+		}
+	},
+	"pattern": [
+		"S",
+		"I",
+		"B"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:super_lubricant_ice"
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/peace_candle"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/peace_candle"
+		}
+	}
 }

@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:chest",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:empty",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "name": "irregular_implements:slime_cube",
-          "weight": 50
-        }
-      ],
-      "rolls": 1.0
-    }
-  ],
-  "random_sequence": "irregular_implements:chests/slime_cube_jungle_temple"
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:empty",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "irregular_implements:slime_cube",
+					"weight": 50
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "irregular_implements:chests/slime_cube_jungle_temple"
 }

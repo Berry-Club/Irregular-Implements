@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "item": "irregular_implements:plate_base"
-    },
-    "C": {
-      "item": "irregular_implements:collection_plate"
-    },
-    "E": {
-      "item": "irregular_implements:extraction_plate"
-    }
-  },
-  "pattern": [
-    "B B",
-    "E C",
-    "B B"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:processing_plate"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:plate_base"
+		},
+		"C": {
+			"item": "irregular_implements:collection_plate"
+		},
+		"E": {
+			"item": "irregular_implements:extraction_plate"
+		}
+	},
+	"pattern": [
+		"B B",
+		"E C",
+		"B B"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:processing_plate"
+	}
 }

@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "I": {
-      "item": "minecraft:iron_bars"
-    },
-    "N": {
-      "item": "irregular_implements:spectre_ingot"
-    },
-    "O": {
-      "tag": "c:obsidians"
-    },
-    "S": {
-      "item": "irregular_implements:spectre_string"
-    }
-  },
-  "pattern": [
-    "IOS",
-    "ONO",
-    "SOI"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:spectre_charger_basic"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"I": {
+			"item": "minecraft:iron_bars"
+		},
+		"N": {
+			"item": "irregular_implements:spectre_ingot"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"S": {
+			"item": "irregular_implements:spectre_string"
+		}
+	},
+	"pattern": [
+		"IOS",
+		"ONO",
+		"SOI"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_charger_basic"
+	}
 }

@@ -1,21 +1,21 @@
 {
-  "values": [
-    "irregular_implements:colored_grass_white",
-    "irregular_implements:colored_grass_orange",
-    "irregular_implements:colored_grass_magenta",
-    "irregular_implements:colored_grass_light_blue",
-    "irregular_implements:colored_grass_yellow",
-    "irregular_implements:colored_grass_lime",
-    "irregular_implements:colored_grass_pink",
-    "irregular_implements:colored_grass_gray",
-    "irregular_implements:colored_grass_light_gray",
-    "irregular_implements:colored_grass_cyan",
-    "irregular_implements:colored_grass_purple",
-    "irregular_implements:colored_grass_blue",
-    "irregular_implements:colored_grass_brown",
-    "irregular_implements:colored_grass_green",
-    "irregular_implements:colored_grass_red",
-    "irregular_implements:colored_grass_black",
-    "irregular_implements:fertilized_dirt"
-  ]
+	"values": [
+		"irregular_implements:colored_grass_white",
+		"irregular_implements:colored_grass_orange",
+		"irregular_implements:colored_grass_magenta",
+		"irregular_implements:colored_grass_light_blue",
+		"irregular_implements:colored_grass_yellow",
+		"irregular_implements:colored_grass_lime",
+		"irregular_implements:colored_grass_pink",
+		"irregular_implements:colored_grass_gray",
+		"irregular_implements:colored_grass_light_gray",
+		"irregular_implements:colored_grass_cyan",
+		"irregular_implements:colored_grass_purple",
+		"irregular_implements:colored_grass_blue",
+		"irregular_implements:colored_grass_brown",
+		"irregular_implements:colored_grass_green",
+		"irregular_implements:colored_grass_red",
+		"irregular_implements:colored_grass_black",
+		"irregular_implements:fertilized_dirt"
+	]
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/ender_anchor"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/ender_anchor"
+		}
+	}
 }

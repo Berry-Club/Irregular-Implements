@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "tag": "c:gems/diamond"
-    },
-    "E": {
-      "item": "irregular_implements:ectoplasm"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
-  },
-  "pattern": [
-    "ESE",
-    "SDS",
-    "ESE"
-  ],
-  "result": {
-    "count": 4,
-    "id": "irregular_implements:spectre_string"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"D": {
+			"tag": "c:gems/diamond"
+		},
+		"E": {
+			"item": "irregular_implements:ectoplasm"
+		},
+		"S": {
+			"tag": "c:strings"
+		}
+	},
+	"pattern": [
+		"ESE",
+		"SDS",
+		"ESE"
+	],
+	"result": {
+		"count": 4,
+		"id": "irregular_implements:spectre_string"
+	}
 }

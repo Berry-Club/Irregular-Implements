@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/redstone_observer"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/redstone_observer"
+		}
+	}
 }

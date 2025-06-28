@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/notification_interface"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/notification_interface"
+		}
+	}
 }

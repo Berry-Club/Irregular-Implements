@@ -1,10 +1,10 @@
 {
-  "variants": {
-    "enabled=false": {
-      "model": "irregular_implements:block/chat_detector_off"
-    },
-    "enabled=true": {
-      "model": "irregular_implements:block/chat_detector_on"
-    }
-  }
+	"variants": {
+		"enabled=false": {
+			"model": "irregular_implements:block/chat_detector_off"
+		},
+		"enabled=true": {
+			"model": "irregular_implements:block/chat_detector_on"
+		}
+	}
 }

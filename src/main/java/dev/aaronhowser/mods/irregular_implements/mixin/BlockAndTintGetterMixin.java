@@ -12,26 +12,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockAndTintGetter.class)
 public interface BlockAndTintGetterMixin {
 
-    @Inject(
-            method = "getBrightness",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    default void irregular_implements$getBrightness(LightLayer lightType, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
-        if (SpectreIlluminatorEntity.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
-            cir.setReturnValue(15);
-        }
-    }
+	@Inject(
+			method = "getBrightness",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	default void irregular_implements$getBrightness(LightLayer lightType, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
+		if (SpectreIlluminatorEntity.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
+			cir.setReturnValue(15);
+		}
+	}
 
-    @Inject(
-            method = "getRawBrightness",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    default void irregular_implements$getRawBrightness(BlockPos blockPos, int amount, CallbackInfoReturnable<Integer> cir) {
-        if (SpectreIlluminatorEntity.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
-            cir.setReturnValue(15);
-        }
-    }
+	@Inject(
+			method = "getRawBrightness",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	default void irregular_implements$getRawBrightness(BlockPos blockPos, int amount, CallbackInfoReturnable<Integer> cir) {
+		if (SpectreIlluminatorEntity.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
+			cir.setReturnValue(15);
+		}
+	}
 
 }

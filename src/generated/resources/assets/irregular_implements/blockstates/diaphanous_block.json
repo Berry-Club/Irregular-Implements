@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/diaphanous_block"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/diaphanous_block"
+		}
+	}
 }

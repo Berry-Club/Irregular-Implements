@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "irregular_implements:item/spectre_charger/redstone",
-    "layer1": "irregular_implements:item/spectre_charger/glow"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "irregular_implements:item/spectre_charger/redstone",
+		"layer1": "irregular_implements:item/spectre_charger/glow"
+	}
 }

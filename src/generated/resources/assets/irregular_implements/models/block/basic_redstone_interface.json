@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "irregular_implements:block/basic_redstone_interface"
-  }
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "irregular_implements:block/basic_redstone_interface"
+	}
 }

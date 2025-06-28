@@ -1,7 +1,7 @@
 {
-  "values": [
-    "minecraft:air",
-    "minecraft:bedrock",
-    "minecraft:barrier"
-  ]
+	"values": [
+		"minecraft:air",
+		"minecraft:bedrock",
+		"minecraft:barrier"
+	]
 }

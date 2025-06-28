@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/warped_platform"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/warped_platform"
+		}
+	}
 }

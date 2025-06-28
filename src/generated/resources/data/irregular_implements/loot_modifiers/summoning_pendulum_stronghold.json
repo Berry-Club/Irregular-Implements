@@ -1,10 +1,10 @@
 {
-  "type": "neoforge:add_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/stronghold_corridor"
-    }
-  ],
-  "table": "irregular_implements:chests/summoning_pendulum_stronghold"
+	"type": "neoforge:add_table",
+	"conditions": [
+		{
+			"condition": "neoforge:loot_table_id",
+			"loot_table_id": "minecraft:chests/stronghold_corridor"
+		}
+	],
+	"table": "irregular_implements:chests/summoning_pendulum_stronghold"
 }

@@ -13,32 +13,32 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty
 
 class DirectionalAcceleratorPlateBlock : BasePlateBlock() {
 
-    companion object {
-        val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
-    }
+	companion object {
+		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
+	}
 
-    init {
-        registerDefaultState(
-            defaultBlockState()
-                .setValue(FACING, Direction.NORTH)
-        )
-    }
+	init {
+		registerDefaultState(
+			defaultBlockState()
+				.setValue(FACING, Direction.NORTH)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(FACING, context.horizontalDirection)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.horizontalDirection)
+	}
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        val direction = state.getValue(FACING)
+	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+		val direction = state.getValue(FACING)
 
-        val accelerationVector = direction.normal.toVec3().scale(0.1)
+		val accelerationVector = direction.normal.toVec3().scale(0.1)
 
-        entity.push(accelerationVector)
-    }
+		entity.push(accelerationVector)
+	}
 
 }

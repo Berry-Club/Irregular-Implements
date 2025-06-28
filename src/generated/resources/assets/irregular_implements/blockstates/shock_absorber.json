@@ -1,52 +1,52 @@
 {
-  "variants": {
-    "power=0": {
-      "model": "irregular_implements:block/shock_absorber"
-    },
-    "power=1": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=10": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=11": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=12": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=13": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=14": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=15": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=2": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=3": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=4": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=5": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=6": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=7": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=8": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    },
-    "power=9": {
-      "model": "irregular_implements:block/shock_absorber_active"
-    }
-  }
+	"variants": {
+		"power=0": {
+			"model": "irregular_implements:block/shock_absorber"
+		},
+		"power=1": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=10": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=11": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=12": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=13": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=14": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=15": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=2": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=3": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=4": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=5": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=6": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=7": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=8": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		},
+		"power=9": {
+			"model": "irregular_implements:block/shock_absorber_active"
+		}
+	}
 }

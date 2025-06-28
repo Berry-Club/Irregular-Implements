@@ -7,16 +7,16 @@ import net.minecraft.client.player.LocalPlayer;
 
 public interface KeyboardInputFunctions {
 
-    default void checkInvert() {
-        LocalPlayer player = ClientUtil.getLocalPlayer();
-        if (player == null) return;
+	default void checkInvert() {
+		LocalPlayer player = ClientUtil.getLocalPlayer();
+		if (player == null) return;
 
-        KeyboardInput input = (KeyboardInput) this;
+		KeyboardInput input = (KeyboardInput) this;
 
-        if (player.hasEffect(ModEffects.COLLAPSE)) {
-            input.leftImpulse = -input.leftImpulse;
-            input.forwardImpulse = -input.forwardImpulse;
-        }
-    }
+		if (player.hasEffect(ModEffects.COLLAPSE)) {
+			input.leftImpulse = -input.leftImpulse;
+			input.forwardImpulse = -input.forwardImpulse;
+		}
+	}
 
 }

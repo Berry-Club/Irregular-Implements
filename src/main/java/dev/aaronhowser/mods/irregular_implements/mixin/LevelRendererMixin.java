@@ -16,26 +16,26 @@ import javax.annotation.Nullable;
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin {
 
-    @Shadow
-    @Nullable
-    private ClientLevel level;
+	@Shadow
+	@Nullable
+	private ClientLevel level;
 
-    @Redirect(
-            method = {"renderSnowAndRain", "tickRain"},
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/biome/Biome;getPrecipitationAt(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/biome/Biome$Precipitation;"
-            )
-    )
-    private Biome.Precipitation irregular_implements$getPrecipitationAt(Biome biome, BlockPos pos) {
-        if (level instanceof RainShieldChunks l) {
-            var chunkPos = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
-            if (l.irregular_implements$chunkProtectedByRainShield(chunkPos)) {
-                return Biome.Precipitation.NONE;
-            }
-        }
+	@Redirect(
+			method = {"renderSnowAndRain", "tickRain"},
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/world/level/biome/Biome;getPrecipitationAt(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/biome/Biome$Precipitation;"
+			)
+	)
+	private Biome.Precipitation irregular_implements$getPrecipitationAt(Biome biome, BlockPos pos) {
+		if (level instanceof RainShieldChunks l) {
+			var chunkPos = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
+			if (l.irregular_implements$chunkProtectedByRainShield(chunkPos)) {
+				return Biome.Precipitation.NONE;
+			}
+		}
 
-        return biome.getPrecipitationAt(pos);
-    }
+		return biome.getPrecipitationAt(pos);
+	}
 
 }

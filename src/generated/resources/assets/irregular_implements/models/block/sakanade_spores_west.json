@@ -1,42 +1,42 @@
 {
-  "parent": "minecraft:block/block",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "texture": "#texture"
-        },
-        "east": {
-          "texture": "#texture"
-        },
-        "north": {
-          "texture": "#texture"
-        },
-        "south": {
-          "texture": "#texture"
-        },
-        "up": {
-          "texture": "#texture"
-        },
-        "west": {
-          "texture": "#texture"
-        }
-      },
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        1,
-        16,
-        16
-      ]
-    }
-  ],
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "particle": "irregular_implements:block/sakanade",
-    "texture": "irregular_implements:block/sakanade"
-  }
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"faces": {
+				"down": {
+					"texture": "#texture"
+				},
+				"east": {
+					"texture": "#texture"
+				},
+				"north": {
+					"texture": "#texture"
+				},
+				"south": {
+					"texture": "#texture"
+				},
+				"up": {
+					"texture": "#texture"
+				},
+				"west": {
+					"texture": "#texture"
+				}
+			},
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				1,
+				16,
+				16
+			]
+		}
+	],
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "irregular_implements:block/sakanade",
+		"texture": "irregular_implements:block/sakanade"
+	}
 }

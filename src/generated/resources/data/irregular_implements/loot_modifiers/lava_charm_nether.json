@@ -1,10 +1,10 @@
 {
-  "type": "neoforge:add_table",
-  "conditions": [
-    {
-      "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:chests/nether_bridge"
-    }
-  ],
-  "table": "irregular_implements:chests/lava_charm_nether"
+	"type": "neoforge:add_table",
+	"conditions": [
+		{
+			"condition": "neoforge:loot_table_id",
+			"loot_table_id": "minecraft:chests/nether_bridge"
+		}
+	],
+	"table": "irregular_implements:chests/lava_charm_nether"
 }

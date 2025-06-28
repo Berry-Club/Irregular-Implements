@@ -1,48 +1,48 @@
 {
-  "multipart": [
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_active"
-      },
-      "when": {
-        "active_one": "north",
-        "active_two": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_active",
-        "y": 90
-      },
-      "when": {
-        "active_one": "east",
-        "active_two": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_active",
-        "y": 180
-      },
-      "when": {
-        "active_one": "south",
-        "active_two": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "irregular_implements:block/redirector_plate_active",
-        "y": 270
-      },
-      "when": {
-        "active_one": "west",
-        "active_two": "west"
-      }
-    }
-  ]
+	"multipart": [
+		{
+			"apply": {
+				"model": "irregular_implements:block/redirector_plate"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/redirector_plate_active"
+			},
+			"when": {
+				"active_one": "north",
+				"active_two": "north"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/redirector_plate_active",
+				"y": 90
+			},
+			"when": {
+				"active_one": "east",
+				"active_two": "east"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/redirector_plate_active",
+				"y": 180
+			},
+			"when": {
+				"active_one": "south",
+				"active_two": "south"
+			}
+		},
+		{
+			"apply": {
+				"model": "irregular_implements:block/redirector_plate_active",
+				"y": 270
+			},
+			"when": {
+				"active_one": "west",
+				"active_two": "west"
+			}
+		}
+	]
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/filtered_super_lubricant_platform"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/filtered_super_lubricant_platform"
+		}
+	}
 }

@@ -1,74 +1,74 @@
 {
-  "parent": "minecraft:block/block",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "texture": "#all"
-        },
-        "east": {
-          "texture": "#all"
-        },
-        "north": {
-          "texture": "#all"
-        },
-        "south": {
-          "texture": "#all"
-        },
-        "up": {
-          "texture": "#all"
-        },
-        "west": {
-          "texture": "#all"
-        }
-      },
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        4,
-        16
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#all"
-        },
-        "east": {
-          "texture": "#all"
-        },
-        "north": {
-          "texture": "#all"
-        },
-        "south": {
-          "texture": "#all"
-        },
-        "up": {
-          "texture": "#all"
-        },
-        "west": {
-          "texture": "#all"
-        }
-      },
-      "from": [
-        2,
-        1,
-        2
-      ],
-      "to": [
-        14,
-        3,
-        14
-      ]
-    }
-  ],
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "all": "minecraft:block/slime_block",
-    "particle": "minecraft:block/slime_block"
-  }
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"faces": {
+				"down": {
+					"texture": "#all"
+				},
+				"east": {
+					"texture": "#all"
+				},
+				"north": {
+					"texture": "#all"
+				},
+				"south": {
+					"texture": "#all"
+				},
+				"up": {
+					"texture": "#all"
+				},
+				"west": {
+					"texture": "#all"
+				}
+			},
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				4,
+				16
+			]
+		},
+		{
+			"faces": {
+				"down": {
+					"texture": "#all"
+				},
+				"east": {
+					"texture": "#all"
+				},
+				"north": {
+					"texture": "#all"
+				},
+				"south": {
+					"texture": "#all"
+				},
+				"up": {
+					"texture": "#all"
+				},
+				"west": {
+					"texture": "#all"
+				}
+			},
+			"from": [
+				2,
+				1,
+				2
+			],
+			"to": [
+				14,
+				3,
+				14
+			]
+		}
+	],
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"all": "minecraft:block/slime_block",
+		"particle": "minecraft:block/slime_block"
+	}
 }

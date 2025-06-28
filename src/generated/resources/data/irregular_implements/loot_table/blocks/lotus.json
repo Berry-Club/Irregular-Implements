@@ -1,40 +1,40 @@
 {
-  "type": "minecraft:block",
-  "functions": [
-    {
-      "function": "minecraft:explosion_decay"
-    }
-  ],
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "block": "irregular_implements:lotus",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "age": "3"
-          }
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "irregular_implements:lotus_blossom"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "irregular_implements:lotus_seeds"
-        }
-      ],
-      "rolls": 1.0
-    }
-  ],
-  "random_sequence": "irregular_implements:blocks/lotus"
+	"type": "minecraft:block",
+	"functions": [
+		{
+			"function": "minecraft:explosion_decay"
+		}
+	],
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"conditions": [
+				{
+					"block": "irregular_implements:lotus",
+					"condition": "minecraft:block_state_property",
+					"properties": {
+						"age": "3"
+					}
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "irregular_implements:lotus_blossom"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "irregular_implements:lotus_seeds"
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "irregular_implements:blocks/lotus"
 }

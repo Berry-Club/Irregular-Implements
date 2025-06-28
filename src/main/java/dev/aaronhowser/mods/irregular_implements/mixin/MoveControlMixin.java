@@ -12,19 +12,19 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(MoveControl.class)
 public class MoveControlMixin {
 
-    @Shadow
-    @Final
-    protected Mob mob;
+	@Shadow
+	@Final
+	protected Mob mob;
 
-    @ModifyVariable(
-            method = "tick",
-            at = @At(
-                    value = "STORE",
-                    target = "Lnet/minecraft/world/entity/LivingEntity;getAttributeValue(Lnet/minecraft/core/Holder;)D"
-            )
-    )
-    private float irregular_implements$applyCollapse(float f) {
-        return (this.mob.hasEffect(ModEffects.COLLAPSE)) ? -f : f;
-    }
+	@ModifyVariable(
+			method = "tick",
+			at = @At(
+					value = "STORE",
+					target = "Lnet/minecraft/world/entity/LivingEntity;getAttributeValue(Lnet/minecraft/core/Holder;)D"
+			)
+	)
+	private float irregular_implements$applyCollapse(float f) {
+		return (this.mob.hasEffect(ModEffects.COLLAPSE)) ? -f : f;
+	}
 
 }

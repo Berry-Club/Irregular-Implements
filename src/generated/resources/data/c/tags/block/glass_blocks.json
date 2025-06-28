@@ -1,24 +1,24 @@
 {
-  "values": [
-    "irregular_implements:biome_glass",
-    "irregular_implements:lapis_glass",
-    "irregular_implements:quartz_glass",
-    "irregular_implements:trigger_glass",
-    "irregular_implements:translucent_luminous_block_white",
-    "irregular_implements:translucent_luminous_block_orange",
-    "irregular_implements:translucent_luminous_block_magenta",
-    "irregular_implements:translucent_luminous_block_light_blue",
-    "irregular_implements:translucent_luminous_block_yellow",
-    "irregular_implements:translucent_luminous_block_lime",
-    "irregular_implements:translucent_luminous_block_pink",
-    "irregular_implements:translucent_luminous_block_gray",
-    "irregular_implements:translucent_luminous_block_light_gray",
-    "irregular_implements:translucent_luminous_block_cyan",
-    "irregular_implements:translucent_luminous_block_purple",
-    "irregular_implements:translucent_luminous_block_blue",
-    "irregular_implements:translucent_luminous_block_brown",
-    "irregular_implements:translucent_luminous_block_green",
-    "irregular_implements:translucent_luminous_block_red",
-    "irregular_implements:translucent_luminous_block_black"
-  ]
+	"values": [
+		"irregular_implements:biome_glass",
+		"irregular_implements:lapis_glass",
+		"irregular_implements:quartz_glass",
+		"irregular_implements:trigger_glass",
+		"irregular_implements:translucent_luminous_block_white",
+		"irregular_implements:translucent_luminous_block_orange",
+		"irregular_implements:translucent_luminous_block_magenta",
+		"irregular_implements:translucent_luminous_block_light_blue",
+		"irregular_implements:translucent_luminous_block_yellow",
+		"irregular_implements:translucent_luminous_block_lime",
+		"irregular_implements:translucent_luminous_block_pink",
+		"irregular_implements:translucent_luminous_block_gray",
+		"irregular_implements:translucent_luminous_block_light_gray",
+		"irregular_implements:translucent_luminous_block_cyan",
+		"irregular_implements:translucent_luminous_block_purple",
+		"irregular_implements:translucent_luminous_block_blue",
+		"irregular_implements:translucent_luminous_block_brown",
+		"irregular_implements:translucent_luminous_block_green",
+		"irregular_implements:translucent_luminous_block_red",
+		"irregular_implements:translucent_luminous_block_black"
+	]
 }

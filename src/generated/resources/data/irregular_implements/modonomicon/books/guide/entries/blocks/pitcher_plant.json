@@ -1,41 +1,41 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "blocks",
-  "description": "book.irregular_implements.guide.blocks.pitcher_plant.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "irregular_implements:pitcher_plant"
-  },
-  "name": "book.irregular_implements.guide.blocks.pitcher_plant.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.irregular_implements.guide.blocks.pitcher_plant.page_0.text",
-      "title": "book.irregular_implements.guide.blocks.pitcher_plant.page_0.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:spotlight",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "item": {
-        "count": 1,
-        "item": "irregular_implements:pitcher_plant"
-      },
-      "text": "book.irregular_implements.guide.blocks.pitcher_plant.page_1.text",
-      "title": "book.irregular_implements.guide.blocks.pitcher_plant.page_1.title"
-    }
-  ],
-  "show_when_any_parent_unlocked": false,
-  "sort_number": 2,
-  "x": 0,
-  "y": 0
+	"background_u_index": 0,
+	"background_v_index": 0,
+	"category": "blocks",
+	"description": "book.irregular_implements.guide.blocks.pitcher_plant.description",
+	"hide_while_locked": false,
+	"icon": {
+		"item": "irregular_implements:pitcher_plant"
+	},
+	"name": "book.irregular_implements.guide.blocks.pitcher_plant.name",
+	"pages": [
+		{
+			"type": "modonomicon:text",
+			"anchor": "",
+			"condition": {
+				"type": "modonomicon:none"
+			},
+			"show_title_separator": true,
+			"text": "book.irregular_implements.guide.blocks.pitcher_plant.page_0.text",
+			"title": "book.irregular_implements.guide.blocks.pitcher_plant.page_0.title",
+			"use_markdown_in_title": false
+		},
+		{
+			"type": "modonomicon:spotlight",
+			"anchor": "",
+			"condition": {
+				"type": "modonomicon:none"
+			},
+			"item": {
+				"count": 1,
+				"item": "irregular_implements:pitcher_plant"
+			},
+			"text": "book.irregular_implements.guide.blocks.pitcher_plant.page_1.text",
+			"title": "book.irregular_implements.guide.blocks.pitcher_plant.page_1.title"
+		}
+	],
+	"show_when_any_parent_unlocked": false,
+	"sort_number": 2,
+	"x": 0,
+	"y": 0
 }

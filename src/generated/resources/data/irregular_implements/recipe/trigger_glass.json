@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "G": {
-      "tag": "c:glass_blocks"
-    },
-    "L": {
-      "item": "irregular_implements:lapis_glass"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
-  },
-  "pattern": [
-    " L ",
-    "GRG",
-    " L "
-  ],
-  "result": {
-    "count": 4,
-    "id": "irregular_implements:trigger_glass"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"G": {
+			"tag": "c:glass_blocks"
+		},
+		"L": {
+			"item": "irregular_implements:lapis_glass"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		" L ",
+		"GRG",
+		" L "
+	],
+	"result": {
+		"count": 4,
+		"id": "irregular_implements:trigger_glass"
+	}
 }

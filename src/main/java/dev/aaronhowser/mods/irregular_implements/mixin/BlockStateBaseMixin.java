@@ -20,32 +20,32 @@ import javax.annotation.Nullable;
 @Mixin(BlockBehaviour.BlockStateBase.class)
 abstract public class BlockStateBaseMixin {
 
-    @Inject(
-            method = "handleNeighborChanged",
-            at = @At("HEAD")
-    )
-    private void irregular_implements$handleNeighborChanged(
-            Level level,
-            BlockPos pos,
-            Block block,
-            BlockPos fromPos,
-            boolean isMoving,
-            CallbackInfo ci
-    ) {
-        RedstoneObserverBlockEntity.updateObservers(level, pos);
-    }
+	@Inject(
+			method = "handleNeighborChanged",
+			at = @At("HEAD")
+	)
+	private void irregular_implements$handleNeighborChanged(
+			Level level,
+			BlockPos pos,
+			Block block,
+			BlockPos fromPos,
+			boolean isMoving,
+			CallbackInfo ci
+	) {
+		RedstoneObserverBlockEntity.updateObservers(level, pos);
+	}
 
-    @Inject(
-            method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void irregular_implements$getCollisionShape(BlockGetter level, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        @Nullable VoxelShape shape = ModArmorItems.checkCollisionShape(level, pos, context, cir.getReturnValue());
+	@Inject(
+			method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	private void irregular_implements$getCollisionShape(BlockGetter level, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
+		@Nullable VoxelShape shape = ModArmorItems.checkCollisionShape(level, pos, context, cir.getReturnValue());
 
-        if (shape != null) {
-            cir.setReturnValue(shape);
-        }
-    }
+		if (shape != null) {
+			cir.setReturnValue(shape);
+		}
+	}
 
 }

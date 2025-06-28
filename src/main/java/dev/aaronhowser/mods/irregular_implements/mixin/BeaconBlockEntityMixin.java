@@ -16,19 +16,19 @@ import javax.annotation.Nullable;
 @Mixin(BeaconBlockEntity.class)
 abstract public class BeaconBlockEntityMixin {
 
-    @Inject(
-            method = "applyEffects",
-            at = @At("HEAD")
-    )
-    private static void irregular_implements$spectreLens(
-            Level level,
-            BlockPos pos,
-            int beaconLevel,
-            @Nullable Holder<MobEffect> primaryEffect,
-            @Nullable Holder<MobEffect> secondaryEffect,
-            CallbackInfo ci
-    ) {
-        SpectreLensBlockEntity.applyEffects(level, pos, beaconLevel, primaryEffect, secondaryEffect);
-    }
+	@Inject(
+			method = "applyEffects",
+			at = @At("HEAD")
+	)
+	private static void irregular_implements$spectreLens(
+			Level level,
+			BlockPos pos,
+			int beaconLevel,
+			@Nullable Holder<MobEffect> primaryEffect,
+			@Nullable Holder<MobEffect> secondaryEffect,
+			CallbackInfo ci
+	) {
+		SpectreLensBlockEntity.applyEffects(level, pos, beaconLevel, primaryEffect, secondaryEffect);
+	}
 
 }

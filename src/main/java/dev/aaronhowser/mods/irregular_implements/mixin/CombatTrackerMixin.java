@@ -15,21 +15,21 @@ import org.spongepowered.asm.mixin.injection.At;
 abstract public class CombatTrackerMixin {
 
 
-    @Shadow
-    @Final
-    private LivingEntity mob;
+	@Shadow
+	@Final
+	private LivingEntity mob;
 
-    @ModifyReturnValue(
-            method = "getFallMessage",
-            at = @At(
-                    value = "RETURN",
-                    ordinal = 2
-            )
-    )
-    private Component irregular_implements$addFallMessage(Component original, CombatEntry combatEntry) {
-        return (combatEntry.fallLocation() == ModArmorItems.FLUID_BOOT_FALL)
-                ? ModArmorItems.fluidWalkingDeathMessage(this.mob)
-                : original;
-    }
+	@ModifyReturnValue(
+			method = "getFallMessage",
+			at = @At(
+					value = "RETURN",
+					ordinal = 2
+			)
+	)
+	private Component irregular_implements$addFallMessage(Component original, CombatEntry combatEntry) {
+		return (combatEntry.fallLocation() == ModArmorItems.FLUID_BOOT_FALL)
+				? ModArmorItems.fluidWalkingDeathMessage(this.mob)
+				: original;
+	}
 
 }

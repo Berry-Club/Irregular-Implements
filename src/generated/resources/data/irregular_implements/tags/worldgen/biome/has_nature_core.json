@@ -1,21 +1,21 @@
 {
-  "remove": [
-    "#minecraft:is_ocean",
-    "minecraft:ice_spikes"
-  ],
-  "values": [
-    "#irregular_implements:nature_core_oak",
-    "#irregular_implements:nature_core_dark_oak",
-    "#irregular_implements:nature_core_birch",
-    "#irregular_implements:nature_core_jungle",
-    "#irregular_implements:nature_core_acacia",
-    "#irregular_implements:nature_core_spruce",
-    "#irregular_implements:nature_core_mangrove",
-    "#minecraft:is_forest",
-    "#minecraft:is_hill",
-    "#minecraft:is_mountain",
-    "#c:is_plains",
-    "#c:is_dense_vegetation/overworld",
-    "#c:is_sparse_vegetation/overworld"
-  ]
+	"remove": [
+		"#minecraft:is_ocean",
+		"minecraft:ice_spikes"
+	],
+	"values": [
+		"#irregular_implements:nature_core_oak",
+		"#irregular_implements:nature_core_dark_oak",
+		"#irregular_implements:nature_core_birch",
+		"#irregular_implements:nature_core_jungle",
+		"#irregular_implements:nature_core_acacia",
+		"#irregular_implements:nature_core_spruce",
+		"#irregular_implements:nature_core_mangrove",
+		"#minecraft:is_forest",
+		"#minecraft:is_hill",
+		"#minecraft:is_mountain",
+		"#c:is_plains",
+		"#c:is_dense_vegetation/overworld",
+		"#c:is_sparse_vegetation/overworld"
+	]
 }

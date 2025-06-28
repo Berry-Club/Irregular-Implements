@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/super_lubricant_stone"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/super_lubricant_stone"
+		}
+	}
 }

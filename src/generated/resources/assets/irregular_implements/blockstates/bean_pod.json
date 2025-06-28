@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/bean_pod"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/bean_pod"
+		}
+	}
 }

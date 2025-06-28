@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "F": {
-      "item": "irregular_implements:floo_powder"
-    },
-    "L": {
-      "tag": "c:leathers"
-    }
-  },
-  "pattern": [
-    " L ",
-    "LFL",
-    "LLL"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:floo_pouch"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"F": {
+			"item": "irregular_implements:floo_powder"
+		},
+		"L": {
+			"tag": "c:leathers"
+		}
+	},
+	"pattern": [
+		" L ",
+		"LFL",
+		"LLL"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:floo_pouch"
+	}
 }

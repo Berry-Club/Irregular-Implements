@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "E": {
-      "tag": "c:end_stones"
-    },
-    "P": {
-      "item": "irregular_implements:stable_ender_pearl"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
-  },
-  "pattern": [
-    "EEE",
-    "ERP",
-    "EEE"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:ender_bridge"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"tag": "c:end_stones"
+		},
+		"P": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		"EEE",
+		"ERP",
+		"EEE"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:ender_bridge"
+	}
 }

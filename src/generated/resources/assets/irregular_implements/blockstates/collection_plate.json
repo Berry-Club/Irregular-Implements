@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/collection_plate"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/collection_plate"
+		}
+	}
 }

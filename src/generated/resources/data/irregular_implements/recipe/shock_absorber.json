@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "item": "minecraft:water_bucket"
-    },
-    "D": {
-      "tag": "minecraft:dirt"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
-  },
-  "pattern": [
-    "WWW",
-    "WAW",
-    "DDD"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:shock_absorber"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"A": {
+			"item": "minecraft:water_bucket"
+		},
+		"D": {
+			"tag": "minecraft:dirt"
+		},
+		"W": {
+			"tag": "minecraft:wool"
+		}
+	},
+	"pattern": [
+		"WWW",
+		"WAW",
+		"DDD"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:shock_absorber"
+	}
 }

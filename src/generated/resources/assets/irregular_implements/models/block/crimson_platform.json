@@ -1,41 +1,41 @@
 {
-  "parent": "minecraft:block/block",
-  "elements": [
-    {
-      "faces": {
-        "down": {
-          "texture": "#texture"
-        },
-        "east": {
-          "texture": "#texture"
-        },
-        "north": {
-          "texture": "#texture"
-        },
-        "south": {
-          "texture": "#texture"
-        },
-        "up": {
-          "texture": "#texture"
-        },
-        "west": {
-          "texture": "#texture"
-        }
-      },
-      "from": [
-        0,
-        15,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ]
-    }
-  ],
-  "textures": {
-    "particle": "minecraft:block/crimson_planks",
-    "texture": "minecraft:block/crimson_planks"
-  }
+	"parent": "minecraft:block/block",
+	"elements": [
+		{
+			"faces": {
+				"down": {
+					"texture": "#texture"
+				},
+				"east": {
+					"texture": "#texture"
+				},
+				"north": {
+					"texture": "#texture"
+				},
+				"south": {
+					"texture": "#texture"
+				},
+				"up": {
+					"texture": "#texture"
+				},
+				"west": {
+					"texture": "#texture"
+				}
+			},
+			"from": [
+				0,
+				15,
+				0
+			],
+			"to": [
+				16,
+				16,
+				16
+			]
+		}
+	],
+	"textures": {
+		"particle": "minecraft:block/crimson_planks",
+		"texture": "minecraft:block/crimson_planks"
+	}
 }

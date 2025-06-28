@@ -1,23 +1,23 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "tag": "c:gems/diamond"
-    },
-    "E": {
-      "item": "irregular_implements:stable_ender_pearl"
-    },
-    "G": {
-      "tag": "c:gunpowders"
-    }
-  },
-  "pattern": [
-    "GEG",
-    " D "
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:portkey"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"D": {
+			"tag": "c:gems/diamond"
+		},
+		"E": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"G": {
+			"tag": "c:gunpowders"
+		}
+	},
+	"pattern": [
+		"GEG",
+		" D "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:portkey"
+	}
 }

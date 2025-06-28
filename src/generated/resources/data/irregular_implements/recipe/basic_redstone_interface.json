@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "item": "irregular_implements:stable_ender_pearl"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
-  },
-  "pattern": [
-    "IRI",
-    "RPR",
-    "IRI"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:basic_redstone_interface"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"I": {
+			"tag": "c:ingots/iron"
+		},
+		"P": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		"IRI",
+		"RPR",
+		"IRI"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:basic_redstone_interface"
+	}
 }

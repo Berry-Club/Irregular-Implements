@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "all": "irregular_implements:block/trigger_glass_triggered"
-  }
+	"parent": "minecraft:block/cube_all",
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"all": "irregular_implements:block/trigger_glass_triggered"
+	}
 }

@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:block",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "irregular_implements:nature_chest"
-        }
-      ],
-      "rolls": 1.0
-    }
-  ],
-  "random_sequence": "irregular_implements:blocks/nature_chest"
+	"type": "minecraft:block",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "irregular_implements:nature_chest"
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "irregular_implements:blocks/nature_chest"
 }

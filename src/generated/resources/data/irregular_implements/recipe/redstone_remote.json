@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "O": {
-      "tag": "c:obsidians"
-    },
-    "P": {
-      "item": "irregular_implements:stable_ender_pearl"
-    },
-    "R": {
-      "item": "irregular_implements:redstone_activator"
-    }
-  },
-  "pattern": [
-    "RRR",
-    "OPO",
-    "OOO"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:redstone_remote"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"P": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"R": {
+			"item": "irregular_implements:redstone_activator"
+		}
+	},
+	"pattern": [
+		"RRR",
+		"OPO",
+		"OOO"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:redstone_remote"
+	}
 }

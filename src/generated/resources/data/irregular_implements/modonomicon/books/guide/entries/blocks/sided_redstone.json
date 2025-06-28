@@ -1,30 +1,30 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "blocks",
-  "description": "book.irregular_implements.guide.blocks.sided_redstone.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "irregular_implements:sided_redstone"
-  },
-  "name": "book.irregular_implements.guide.blocks.sided_redstone.name",
-  "pages": [
-    {
-      "type": "modonomicon:spotlight",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "item": {
-        "count": 1,
-        "item": "irregular_implements:sided_redstone"
-      },
-      "text": "book.irregular_implements.guide.blocks.sided_redstone.page_0.text",
-      "title": "book.irregular_implements.guide.blocks.sided_redstone.page_0.title"
-    }
-  ],
-  "show_when_any_parent_unlocked": false,
-  "sort_number": 5,
-  "x": 0,
-  "y": 0
+	"background_u_index": 0,
+	"background_v_index": 0,
+	"category": "blocks",
+	"description": "book.irregular_implements.guide.blocks.sided_redstone.description",
+	"hide_while_locked": false,
+	"icon": {
+		"item": "irregular_implements:sided_redstone"
+	},
+	"name": "book.irregular_implements.guide.blocks.sided_redstone.name",
+	"pages": [
+		{
+			"type": "modonomicon:spotlight",
+			"anchor": "",
+			"condition": {
+				"type": "modonomicon:none"
+			},
+			"item": {
+				"count": 1,
+				"item": "irregular_implements:sided_redstone"
+			},
+			"text": "book.irregular_implements.guide.blocks.sided_redstone.page_0.text",
+			"title": "book.irregular_implements.guide.blocks.sided_redstone.page_0.title"
+		}
+	],
+	"show_when_any_parent_unlocked": false,
+	"sort_number": 5,
+	"x": 0,
+	"y": 0
 }

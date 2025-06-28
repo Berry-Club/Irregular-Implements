@@ -1,6 +1,6 @@
 {
-  "type": "neoforge:add_features",
-  "biomes": "#c:is_wet/overworld",
-  "features": "irregular_implements:pitcher_plant",
-  "step": "vegetal_decoration"
+	"type": "neoforge:add_features",
+	"biomes": "#c:is_wet/overworld",
+	"features": "irregular_implements:pitcher_plant",
+	"step": "vegetal_decoration"
 }

@@ -1,17 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "S": {
-      "item": "irregular_implements:spectre_ingot"
-    }
-  },
-  "pattern": [
-    "S S",
-    "S S"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:spectre_boots"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"S": {
+			"item": "irregular_implements:spectre_ingot"
+		}
+	},
+	"pattern": [
+		"S S",
+		"S S"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_boots"
+	}
 }

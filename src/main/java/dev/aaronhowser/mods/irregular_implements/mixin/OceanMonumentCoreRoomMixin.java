@@ -17,26 +17,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(OceanMonumentPieces.OceanMonumentCoreRoom.class)
 abstract class OceanMonumentCoreRoomMixin {
 
-    //FIXME: Why does this run multiple times for the same room??
-    @Inject(method = "postProcess",
-            at = @At("TAIL")
-    )
-    private void irregular_implements$addOceanChest(
-            WorldGenLevel level,
-            StructureManager structureManager,
-            ChunkGenerator generator,
-            RandomSource random,
-            BoundingBox box,
-            ChunkPos chunkPos,
-            BlockPos pos,
-            CallbackInfo ci
-    ) {
-        SpecialChestBlock.addToOceanMonument(
-                level,
-                random,
-                box,
-                (OceanMonumentPieces.OceanMonumentCoreRoom) (Object) this
-        );
-    }
+	//FIXME: Why does this run multiple times for the same room??
+	@Inject(method = "postProcess",
+			at = @At("TAIL")
+	)
+	private void irregular_implements$addOceanChest(
+			WorldGenLevel level,
+			StructureManager structureManager,
+			ChunkGenerator generator,
+			RandomSource random,
+			BoundingBox box,
+			ChunkPos chunkPos,
+			BlockPos pos,
+			CallbackInfo ci
+	) {
+		SpecialChestBlock.addToOceanMonument(
+				level,
+				random,
+				box,
+				(OceanMonumentPieces.OceanMonumentCoreRoom) (Object) this
+		);
+	}
 
 }

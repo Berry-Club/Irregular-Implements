@@ -7,11 +7,11 @@ import javax.annotation.Nullable;
 
 public interface PoweredRedstoneInterfaces {
 
-    default int irregular_implements$getLinkedInterfacePower(
-            BlockPos blockPos,
-            @Nullable Direction direction
-    ) {
-        throw new IllegalStateException();
-    }
+	default int irregular_implements$getLinkedInterfacePower(
+			BlockPos blockPos,
+			@Nullable Direction direction
+	) {
+		throw new IllegalStateException();
+	}
 
 }

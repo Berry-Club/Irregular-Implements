@@ -7,19 +7,19 @@ import net.minecraft.world.entity.LivingEntity;
 
 public interface LivingEntityFunctions {
 
-    default boolean checkShouldDiscardFriction() {
-        LivingEntity livingEntity = (LivingEntity) this;
+	default boolean checkShouldDiscardFriction() {
+		LivingEntity livingEntity = (LivingEntity) this;
 
-        if (livingEntity.getDeltaMovement().lengthSqr() > 1f) return false;
+		if (livingEntity.getDeltaMovement().lengthSqr() > 1f) return false;
 
-        if (livingEntity
-                .getItemBySlot(EquipmentSlot.FEET)
-                .has(ModDataComponents.LUBRICATED)
-        ) return true;
+		if (livingEntity
+				.getItemBySlot(EquipmentSlot.FEET)
+				.has(ModDataComponents.LUBRICATED)
+		) return true;
 
-        return livingEntity.level()
-                .getBlockState(livingEntity.getBlockPosBelowThatAffectsMyMovement())
-                .is(ModBlockTagsProvider.SUPER_LUBRICATED);
-    }
+		return livingEntity.level()
+				.getBlockState(livingEntity.getBlockPosBelowThatAffectsMyMovement())
+				.is(ModBlockTagsProvider.SUPER_LUBRICATED);
+	}
 
 }

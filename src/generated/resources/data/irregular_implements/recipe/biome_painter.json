@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "O": {
-      "tag": "c:rods/obsidian"
-    },
-    "T": {
-      "item": "irregular_implements:transformation_core"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
-  },
-  "pattern": [
-    "T",
-    "W",
-    "O"
-  ],
-  "result": {
-    "count": 1,
-    "id": "irregular_implements:biome_painter"
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"O": {
+			"tag": "c:rods/obsidian"
+		},
+		"T": {
+			"item": "irregular_implements:transformation_core"
+		},
+		"W": {
+			"tag": "minecraft:wool"
+		}
+	},
+	"pattern": [
+		"T",
+		"W",
+		"O"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:biome_painter"
+	}
 }

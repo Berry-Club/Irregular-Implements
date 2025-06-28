@@ -14,24 +14,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HugeBrownMushroomFeature.class)
 public abstract class HugeBrownMushroomFeatureMixin {
 
-    @Inject(
-            method = "makeCap",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/levelgen/feature/HugeBrownMushroomFeature;setBlock(Lnet/minecraft/world/level/LevelWriter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
-                    shift = At.Shift.AFTER
-            )
-    )
-    private void a(
-            LevelAccessor level,
-            RandomSource random,
-            BlockPos pos,
-            int treeHeight,
-            BlockPos.MutableBlockPos mutablePos,
-            HugeMushroomFeatureConfiguration config,
-            CallbackInfo ci
-    ) {
-        SakanadeBlock.addToMushroom(level, pos, config, mutablePos);
-    }
+	@Inject(
+			method = "makeCap",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/world/level/levelgen/feature/HugeBrownMushroomFeature;setBlock(Lnet/minecraft/world/level/LevelWriter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+					shift = At.Shift.AFTER
+			)
+	)
+	private void a(
+			LevelAccessor level,
+			RandomSource random,
+			BlockPos pos,
+			int treeHeight,
+			BlockPos.MutableBlockPos mutablePos,
+			HugeMushroomFeatureConfiguration config,
+			CallbackInfo ci
+	) {
+		SakanadeBlock.addToMushroom(level, pos, config, mutablePos);
+	}
 
 }

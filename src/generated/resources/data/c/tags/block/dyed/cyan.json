@@ -1,9 +1,9 @@
 {
-  "values": [
-    "irregular_implements:colored_grass_cyan",
-    "irregular_implements:stained_bricks_cyan",
-    "irregular_implements:luminous_stained_bricks_cyan",
-    "irregular_implements:luminous_block_cyan",
-    "irregular_implements:translucent_luminous_block_cyan"
-  ]
+	"values": [
+		"irregular_implements:colored_grass_cyan",
+		"irregular_implements:stained_bricks_cyan",
+		"irregular_implements:luminous_stained_bricks_cyan",
+		"irregular_implements:luminous_block_cyan",
+		"irregular_implements:translucent_luminous_block_cyan"
+	]
 }

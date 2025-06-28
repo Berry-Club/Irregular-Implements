@@ -1,13 +1,13 @@
 {
-  "parent": "minecraft:block/cube",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "down": "irregular_implements:block/custom_crafting_table/bottom",
-    "east": "irregular_implements:block/custom_crafting_table/side",
-    "north": "irregular_implements:block/custom_crafting_table/front",
-    "particle": "irregular_implements:block/custom_crafting_table/top",
-    "south": "irregular_implements:block/custom_crafting_table/side",
-    "up": "irregular_implements:block/custom_crafting_table/top",
-    "west": "irregular_implements:block/custom_crafting_table/side"
-  }
+	"parent": "minecraft:block/cube",
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"down": "irregular_implements:block/custom_crafting_table/bottom",
+		"east": "irregular_implements:block/custom_crafting_table/side",
+		"north": "irregular_implements:block/custom_crafting_table/front",
+		"particle": "irregular_implements:block/custom_crafting_table/top",
+		"south": "irregular_implements:block/custom_crafting_table/side",
+		"up": "irregular_implements:block/custom_crafting_table/top",
+		"west": "irregular_implements:block/custom_crafting_table/side"
+	}
 }

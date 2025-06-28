@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:item/piston",
-  "textures": {
-    "bottom": "irregular_implements:block/igniter/back",
-    "side": "irregular_implements:block/igniter/side",
-    "top": "irregular_implements:block/igniter/front"
-  }
+	"parent": "minecraft:item/piston",
+	"textures": {
+		"bottom": "irregular_implements:block/igniter/back",
+		"side": "irregular_implements:block/igniter/side",
+		"top": "irregular_implements:block/igniter/front"
+	}
 }

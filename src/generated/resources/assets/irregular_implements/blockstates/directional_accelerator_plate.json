@@ -1,19 +1,19 @@
 {
-  "variants": {
-    "facing=east": {
-      "model": "irregular_implements:block/directional_accelerator_plate",
-      "y": 90
-    },
-    "facing=north": {
-      "model": "irregular_implements:block/directional_accelerator_plate"
-    },
-    "facing=south": {
-      "model": "irregular_implements:block/directional_accelerator_plate",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "irregular_implements:block/directional_accelerator_plate",
-      "y": 270
-    }
-  }
+	"variants": {
+		"facing=east": {
+			"model": "irregular_implements:block/directional_accelerator_plate",
+			"y": 90
+		},
+		"facing=north": {
+			"model": "irregular_implements:block/directional_accelerator_plate"
+		},
+		"facing=south": {
+			"model": "irregular_implements:block/directional_accelerator_plate",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "irregular_implements:block/directional_accelerator_plate",
+			"y": 270
+		}
+	}
 }

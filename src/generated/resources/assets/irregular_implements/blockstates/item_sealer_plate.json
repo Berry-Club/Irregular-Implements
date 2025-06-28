@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/item_sealer_plate"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/item_sealer_plate"
+		}
+	}
 }
