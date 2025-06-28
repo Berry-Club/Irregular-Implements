@@ -23,6 +23,19 @@ import kotlin.random.Random
 
 sealed interface FilterEntry {
 
+	fun getDisplayStack(registries: HolderLookup.Provider): ItemStack
+	fun test(stack: ItemStack): Boolean
+	fun getType(): Type
+
+	companion object {
+		val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(
+			FilterEntry::getType,
+			Type::codec
+		)
+
+		fun FilterEntry?.isNullOrEmpty() = this == null || this == Empty
+	}
+
 	enum class Type(
 		val id: String,
 		val codec: MapCodec<out FilterEntry>
@@ -39,19 +52,6 @@ sealed interface FilterEntry {
 			val CODEC: Codec<Type> = StringRepresentable.fromEnum(Type::values)
 		}
 	}
-
-	companion object {
-		val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(
-			FilterEntry::getType,
-			Type::codec
-		)
-
-		fun FilterEntry?.isNullOrEmpty() = this == null || this == Empty
-	}
-
-	fun getDisplayStack(registries: HolderLookup.Provider): ItemStack
-	fun test(stack: ItemStack): Boolean
-	fun getType(): Type
 
 	data object Empty : FilterEntry {
 		override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {

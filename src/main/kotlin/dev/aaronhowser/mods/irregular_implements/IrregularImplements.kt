@@ -18,6 +18,7 @@ import thedarkcolour.kotlinforforge.neoforge.forge.runWhenOn
 class IrregularImplements(
 	modContainer: ModContainer
 ) {
+
 	companion object {
 		const val ID = "irregular_implements"
 

@@ -18,27 +18,6 @@ class DiviningRodRecipe(
 	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-	companion object {
-		private val oreSlots = setOf(0, 2)
-		private val stickSlots = setOf(1, 3, 5, 6, 8)
-		private val eyeSlots = setOf(4)
-
-		private fun getOreTag(input: CraftingInput): TagKey<Item>? {
-			if (input.width() < 3 || input.height() < 3) return null
-
-			val topLeftStack = input.getItem(0)
-			val topRightStack = input.getItem(2)
-
-			return topLeftStack.tags
-				.filter { tag ->
-					tag.location.toString().startsWith("c:ores/")
-							&& topRightStack.`is`(tag)
-				}
-				.findFirst()
-				.getOrNull()
-		}
-	}
-
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		val oreTag = getOreTag(input) ?: return false
 		if (input.width() < 3 || input.height() < 3) return false
@@ -62,5 +41,26 @@ class DiviningRodRecipe(
 
 	override fun getSerializer(): RecipeSerializer<*> {
 		return ModRecipeSerializers.DIVINING_ROD.get()
+	}
+
+	companion object {
+		private val oreSlots = setOf(0, 2)
+		private val stickSlots = setOf(1, 3, 5, 6, 8)
+		private val eyeSlots = setOf(4)
+
+		private fun getOreTag(input: CraftingInput): TagKey<Item>? {
+			if (input.width() < 3 || input.height() < 3) return null
+
+			val topLeftStack = input.getItem(0)
+			val topRightStack = input.getItem(2)
+
+			return topLeftStack.tags
+				.filter { tag ->
+					tag.location.toString().startsWith("c:ores/")
+							&& topRightStack.`is`(tag)
+				}
+				.findFirst()
+				.getOrNull()
+		}
 	}
 }

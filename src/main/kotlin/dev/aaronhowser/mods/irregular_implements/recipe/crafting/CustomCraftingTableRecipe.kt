@@ -18,11 +18,6 @@ class CustomCraftingTableRecipe(
 	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-	companion object {
-		private const val CRAFTING_TABLE_SLOT = 4
-		private val plankSlots = (0..0).toSet() - CRAFTING_TABLE_SLOT
-	}
-
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		if (input.width() < 3 || input.height() < 3) return false
 		if (!input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)) return false
@@ -51,5 +46,10 @@ class CustomCraftingTableRecipe(
 
 	override fun getSerializer(): RecipeSerializer<*> {
 		return ModRecipeSerializers.CUSTOM_CRAFTING_TABLE.get()
+	}
+
+	companion object {
+		private const val CRAFTING_TABLE_SLOT = 4
+		private val plankSlots = (0..0).toSet() - CRAFTING_TABLE_SLOT
 	}
 }

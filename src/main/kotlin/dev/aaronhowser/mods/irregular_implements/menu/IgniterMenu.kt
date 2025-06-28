@@ -25,10 +25,6 @@ class IgniterMenu(
 		this.addDataSlots(this.containerData)
 	}
 
-	companion object {
-		const val CYCLE_MODE_BUTTON_ID = 0
-	}
-
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY
 	}
@@ -51,5 +47,9 @@ class IgniterMenu(
 		}
 
 		this.mode = nextMode
+	}
+
+	companion object {
+		const val CYCLE_MODE_BUTTON_ID = 0
 	}
 }

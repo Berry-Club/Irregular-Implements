@@ -26,12 +26,6 @@ class BlockDestabilizerMenu(
 		this.addDataSlots(containerData)
 	}
 
-	companion object {
-		const val TOGGLE_LAZY_BUTTON_ID = 0
-		const val SHOW_LAZY_SHAPE_BUTTON_ID = 1
-		const val RESET_LAZY_SHAPE_BUTTON_ID = 2
-	}
-
 	val isLazy: Boolean
 		get() = containerData.get(BlockDestabilizerBlockEntity.LAZY_INDEX) == 1
 
@@ -62,6 +56,12 @@ class BlockDestabilizerMenu(
 
 	override fun stillValid(player: Player): Boolean {
 		return true
+	}
+
+	companion object {
+		const val TOGGLE_LAZY_BUTTON_ID = 0
+		const val SHOW_LAZY_SHAPE_BUTTON_ID = 1
+		const val RESET_LAZY_SHAPE_BUTTON_ID = 2
 	}
 
 }

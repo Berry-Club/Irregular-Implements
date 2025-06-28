@@ -15,16 +15,6 @@ class ApplySpectreAnchorRecipe(
 	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-	companion object {
-		val anchorIngredient: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
-
-		fun isApplicable(itemStack: ItemStack): Boolean {
-			return !itemStack.isEmpty
-					&& !itemStack.`is`(ModItemTagsProvider.SPECTRE_ANCHOR_BLACKLIST)
-					&& !itemStack.has(ModDataComponents.IS_ANCHORED)
-		}
-	}
-
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		val amountAnchors = input.items().count { anchorIngredient.test(it) }
 		val amountNonAnchors = input.items().count { isApplicable(it) }
@@ -47,5 +37,15 @@ class ApplySpectreAnchorRecipe(
 
 	override fun getSerializer(): RecipeSerializer<*> {
 		return ModRecipeSerializers.APPLY_SPECTRE_ANCHOR.get()
+	}
+
+	companion object {
+		val anchorIngredient: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
+
+		fun isApplicable(itemStack: ItemStack): Boolean {
+			return !itemStack.isEmpty
+					&& !itemStack.`is`(ModItemTagsProvider.SPECTRE_ANCHOR_BLACKLIST)
+					&& !itemStack.has(ModDataComponents.IS_ANCHORED)
+		}
 	}
 }

@@ -38,11 +38,6 @@ class NotificationInterfaceMenu(
 		)
 	}
 
-	companion object {
-		const val TITLE_STRING_ID = 0
-		const val DESCRIPTION_STRING_ID = 1
-	}
-
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY
 	}
@@ -82,6 +77,11 @@ class NotificationInterfaceMenu(
 		}
 
 		return true
+	}
+
+	companion object {
+		const val TITLE_STRING_ID = 0
+		const val DESCRIPTION_STRING_ID = 1
 	}
 
 }

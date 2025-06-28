@@ -16,13 +16,7 @@ class LubricateBootRecipe(
 	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-	companion object {
-		val boots = BuiltInRegistries.ITEM
-			.filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
-			.map { it.defaultInstance }
-	}
-
-	val bootIngredient: Ingredient = Ingredient.of(*boots.toTypedArray())
+	val bootIngredient: Ingredient = Ingredient.of(*ALL_BOOTS.toTypedArray())
 	val lubeIngredient: Ingredient = ModItems.SUPER_LUBRICANT_TINCTURE.ingredient
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
@@ -78,5 +72,11 @@ class LubricateBootRecipe(
 
 	override fun getSerializer(): RecipeSerializer<*> {
 		return ModRecipeSerializers.LUBRICATE_BOOT.get()
+	}
+
+	companion object {
+		val ALL_BOOTS = BuiltInRegistries.ITEM
+			.filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
+			.map { it.defaultInstance }
 	}
 }

@@ -28,10 +28,6 @@ class InventoryTesterMenu(
 		SimpleContainerData(InventoryTesterBlockEntity.CONTAINER_DATA_SIZE)
 	)
 
-	companion object {
-		const val TOGGLE_INVERSION_BUTTON_ID = 0
-	}
-
 	init {
 		checkContainerDataCount(containerData, InventoryTesterBlockEntity.CONTAINER_DATA_SIZE)
 		checkContainerSize(container, InventoryTesterBlockEntity.CONTAINER_SIZE)
@@ -77,6 +73,10 @@ class InventoryTesterMenu(
 		when (buttonId) {
 			TOGGLE_INVERSION_BUTTON_ID -> this.isInverted = !this.isInverted
 		}
+	}
+
+	companion object {
+		const val TOGGLE_INVERSION_BUTTON_ID = 0
 	}
 
 }

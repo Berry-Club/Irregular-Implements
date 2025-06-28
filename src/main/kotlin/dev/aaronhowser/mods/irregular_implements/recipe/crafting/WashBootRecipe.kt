@@ -19,7 +19,7 @@ class WashBootRecipe(
 	val bootIngredient: Ingredient = DataComponentIngredient.of(
 		false,
 		DataComponentMap.builder().set(ModDataComponents.LUBRICATED, Unit.INSTANCE).build(),
-		*LubricateBootRecipe.boots.map { it.item }.toTypedArray()
+		*LubricateBootRecipe.ALL_BOOTS.map { it.item }.toTypedArray()
 	)
 	val waterIngredient: Ingredient = DataComponentIngredient.of(false, OtherUtil.getPotionStack(Potions.WATER))
 

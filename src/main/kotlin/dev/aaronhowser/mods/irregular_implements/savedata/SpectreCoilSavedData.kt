@@ -12,48 +12,6 @@ import java.util.*
 
 class SpectreCoilSavedData : SavedData() {
 
-	companion object {
-
-		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCoilSavedData {
-			val spectreCoilSavedData = SpectreCoilSavedData()
-
-			val listTag = tag.getList(COIL_ENTRIES_NBT, Tag.TAG_COMPOUND.toInt())
-
-			for (i in 0 until listTag.count()) {
-				val entryTag = listTag.getCompound(i)
-
-				val uuid = UUID.fromString(entryTag.getString(UUID_NBT))
-				val energy = entryTag.getInt(ENERGY_NBT)
-
-				spectreCoilSavedData.coilEntries[uuid] = energy
-			}
-
-			return spectreCoilSavedData
-		}
-
-		private fun get(level: ServerLevel): SpectreCoilSavedData {
-			require(level == level.server.overworld()) { "SpectreCoilSavedData can only be accessed on the overworld" }
-
-			return level.dataStorage.computeIfAbsent(
-				Factory(::SpectreCoilSavedData, ::load),
-				"spectre_coil"
-			)
-		}
-
-		val ServerLevel.spectreCoilSavedData: SpectreCoilSavedData
-			inline get() = this.server.spectreCoilSavedData
-
-		val MinecraftServer.spectreCoilSavedData: SpectreCoilSavedData
-			get() = get(this.overworld())
-
-		const val COIL_ENTRIES_NBT = "coil_entries"
-		const val UUID_NBT = "uuid"
-		const val ENERGY_NBT = "energy"
-
-		val MAX_ENERGY: Int
-			get() = ServerConfig.SPECTRE_BUFFER_CAPACITY.get()
-	}
-
 	private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
 
 	fun getEnergyInjector(ownerUuid: UUID): IEnergyStorage {
@@ -149,4 +107,46 @@ class SpectreCoilSavedData : SavedData() {
 
 		return tag
 	}
+
+	companion object {
+		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCoilSavedData {
+			val spectreCoilSavedData = SpectreCoilSavedData()
+
+			val listTag = tag.getList(COIL_ENTRIES_NBT, Tag.TAG_COMPOUND.toInt())
+
+			for (i in 0 until listTag.count()) {
+				val entryTag = listTag.getCompound(i)
+
+				val uuid = UUID.fromString(entryTag.getString(UUID_NBT))
+				val energy = entryTag.getInt(ENERGY_NBT)
+
+				spectreCoilSavedData.coilEntries[uuid] = energy
+			}
+
+			return spectreCoilSavedData
+		}
+
+		private fun get(level: ServerLevel): SpectreCoilSavedData {
+			require(level == level.server.overworld()) { "SpectreCoilSavedData can only be accessed on the overworld" }
+
+			return level.dataStorage.computeIfAbsent(
+				Factory(::SpectreCoilSavedData, ::load),
+				"spectre_coil"
+			)
+		}
+
+		val ServerLevel.spectreCoilSavedData: SpectreCoilSavedData
+			inline get() = this.server.spectreCoilSavedData
+
+		val MinecraftServer.spectreCoilSavedData: SpectreCoilSavedData
+			get() = get(this.overworld())
+
+		const val COIL_ENTRIES_NBT = "coil_entries"
+		const val UUID_NBT = "uuid"
+		const val ENERGY_NBT = "energy"
+
+		val MAX_ENERGY: Int
+			get() = ServerConfig.SPECTRE_BUFFER_CAPACITY.get()
+	}
+
 }

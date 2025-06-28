@@ -16,50 +16,6 @@ import net.minecraft.world.level.saveddata.SavedData
 
 class RedstoneHandlerSavedData : SavedData() {
 
-	companion object {
-		private const val TAG_SAVED_SIGNALS = "saved_signals"
-
-		private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
-			val redstoneHandlerSavedData = RedstoneHandlerSavedData()
-
-			val savedSignals = pTag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
-
-			for (i in savedSignals.indices) {
-				val signalTag = savedSignals.getCompound(i)
-				val signal = SavedSignal.fromTag(signalTag)
-
-				redstoneHandlerSavedData.signals.add(signal)
-			}
-
-			return redstoneHandlerSavedData
-		}
-
-		private fun get(level: ServerLevel): RedstoneHandlerSavedData {
-			require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
-
-			return level.dataStorage.computeIfAbsent(
-				Factory(::RedstoneHandlerSavedData, ::load),
-				"redstone_handler"
-			)
-		}
-
-		@JvmStatic
-		val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
-			inline get() = this.server.redstoneHandlerSavedData
-
-		val MinecraftServer.redstoneHandlerSavedData: RedstoneHandlerSavedData
-			get() = get(this.overworld())
-
-		fun tick(level: Level) {
-			if (level !is ServerLevel) return
-			level.redstoneHandlerSavedData.tick(level.server)
-		}
-
-		fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
-			level.redstoneHandlerSavedData.addSignal(level, blockPos, duration, strength)
-		}
-	}
-
 	private val signals: MutableSet<SavedSignal> = mutableSetOf()
 
 	private fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
@@ -136,6 +92,23 @@ class RedstoneHandlerSavedData : SavedData() {
 		val strength: Int,
 		val startTick: Long
 	) {
+
+		fun toTag(): CompoundTag {
+			val tag = CompoundTag()
+
+			tag.putLong(TAG_BLOCK_POS, blockPos)
+			tag.putString(TAG_DIMENSION, dimension.location().toString())
+			tag.putInt(TAG_DURATION, duration)
+			tag.putInt(TAG_STRENGTH, strength)
+			tag.putLong(TAG_START_TICK, startTick)
+
+			return tag
+		}
+
+		fun isExpired(currentTick: Long): Boolean {
+			return currentTick - startTick >= duration
+		}
+
 		companion object {
 			const val TAG_BLOCK_POS = "block_pos"
 			const val TAG_DIMENSION = "dimension"
@@ -153,21 +126,49 @@ class RedstoneHandlerSavedData : SavedData() {
 				return SavedSignal(blockPos, dimension, duration, strength, startTick)
 			}
 		}
+	}
 
-		fun toTag(): CompoundTag {
-			val tag = CompoundTag()
+	companion object {
+		private const val TAG_SAVED_SIGNALS = "saved_signals"
 
-			tag.putLong(TAG_BLOCK_POS, blockPos)
-			tag.putString(TAG_DIMENSION, dimension.location().toString())
-			tag.putInt(TAG_DURATION, duration)
-			tag.putInt(TAG_STRENGTH, strength)
-			tag.putLong(TAG_START_TICK, startTick)
+		private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
+			val redstoneHandlerSavedData = RedstoneHandlerSavedData()
 
-			return tag
+			val savedSignals = pTag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
+
+			for (i in savedSignals.indices) {
+				val signalTag = savedSignals.getCompound(i)
+				val signal = SavedSignal.fromTag(signalTag)
+
+				redstoneHandlerSavedData.signals.add(signal)
+			}
+
+			return redstoneHandlerSavedData
 		}
 
-		fun isExpired(currentTick: Long): Boolean {
-			return currentTick - startTick >= duration
+		private fun get(level: ServerLevel): RedstoneHandlerSavedData {
+			require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
+
+			return level.dataStorage.computeIfAbsent(
+				Factory(::RedstoneHandlerSavedData, ::load),
+				"redstone_handler"
+			)
+		}
+
+		@JvmStatic
+		val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
+			inline get() = this.server.redstoneHandlerSavedData
+
+		val MinecraftServer.redstoneHandlerSavedData: RedstoneHandlerSavedData
+			get() = get(this.overworld())
+
+		fun tick(level: Level) {
+			if (level !is ServerLevel) return
+			level.redstoneHandlerSavedData.tick(level.server)
+		}
+
+		fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+			level.redstoneHandlerSavedData.addSignal(level, blockPos, duration, strength)
 		}
 	}
 

@@ -19,6 +19,22 @@ data class WeightedBiomeRarityFilter(
 	val chanceFactor: Int
 ) : PlacementFilter() {
 
+	override fun type(): PlacementModifierType<*> {
+		return ModPlacementModifierTypes.WEIGHTED_BIOME_RARITY.get()
+	}
+
+	override fun shouldPlace(context: PlacementContext, random: RandomSource, pos: BlockPos): Boolean {
+		val biome = context.level.getBiome(pos)
+
+		var chanceMult = this.basePoints
+
+		for ((tag, points) in pointsPerBiomeTag) {
+			if (biome.`is`(tag)) chanceMult += points
+		}
+
+		return random.nextInt(this.chanceFactor * chanceMult) == 0
+	}
+
 	companion object {
 		val CODEC: MapCodec<WeightedBiomeRarityFilter> =
 			RecordCodecBuilder.mapCodec { instance ->
@@ -37,21 +53,5 @@ data class WeightedBiomeRarityFilter(
 						.forGetter(WeightedBiomeRarityFilter::chanceFactor)
 				).apply(instance, ::WeightedBiomeRarityFilter)
 			}
-	}
-
-	override fun type(): PlacementModifierType<*> {
-		return ModPlacementModifierTypes.WEIGHTED_BIOME_RARITY.get()
-	}
-
-	override fun shouldPlace(context: PlacementContext, random: RandomSource, pos: BlockPos): Boolean {
-		val biome = context.level.getBiome(pos)
-
-		var chanceMult = this.basePoints
-
-		for ((tag, points) in pointsPerBiomeTag) {
-			if (biome.`is`(tag)) chanceMult += points
-		}
-
-		return random.nextInt(this.chanceFactor * chanceMult) == 0
 	}
 }

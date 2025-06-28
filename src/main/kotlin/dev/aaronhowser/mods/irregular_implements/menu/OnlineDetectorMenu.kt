@@ -21,10 +21,6 @@ class OnlineDetectorMenu(
 				ContainerLevelAccess.NULL
 			)
 
-	companion object {
-		const val USERNAME_STRING_ID = 0
-	}
-
 	override fun receiveString(stringId: Int, string: String) {
 		if (stringId == USERNAME_STRING_ID) setUsername(string)
 	}
@@ -49,4 +45,9 @@ class OnlineDetectorMenu(
 	override fun stillValid(player: Player): Boolean {
 		return stillValid(containerLevelAccess, player, ModBlocks.ONLINE_DETECTOR.get())
 	}
+
+	companion object {
+		const val USERNAME_STRING_ID = 0
+	}
+
 }

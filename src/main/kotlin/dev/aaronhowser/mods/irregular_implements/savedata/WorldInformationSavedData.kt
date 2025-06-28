@@ -8,6 +8,18 @@ import net.minecraft.world.level.saveddata.SavedData
 
 class WorldInformationSavedData : SavedData() {
 
+	var enderDragonKilled: Boolean = false
+		set(value) {
+			field = value
+			setDirty()
+		}
+
+	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
+		tag.putBoolean(ENDER_DRAGON_KILLED, enderDragonKilled)
+
+		return tag
+	}
+
 	companion object {
 		private const val ENDER_DRAGON_KILLED = "ender_dragon_killed"
 
@@ -34,17 +46,5 @@ class WorldInformationSavedData : SavedData() {
 		val MinecraftServer.worldInformationSavedData: WorldInformationSavedData
 			get() = get(this.overworld())
 
-	}
-
-	var enderDragonKilled: Boolean = false
-		set(value) {
-			field = value
-			setDirty()
-		}
-
-	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
-		tag.putBoolean(ENDER_DRAGON_KILLED, enderDragonKilled)
-
-		return tag
 	}
 }
