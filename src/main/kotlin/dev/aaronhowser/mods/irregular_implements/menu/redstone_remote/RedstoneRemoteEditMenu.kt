@@ -35,6 +35,14 @@ class RedstoneRemoteEditMenu(
 			this.addSlot(slot)
 		}
 
+		for (index in 0 until 9) {
+			val x = 8 + index * 18
+			val y = 36
+
+			val slot = RedstoneRemoteDisplaySlot(::redstoneRemoteStack, x, y)
+			this.addSlot(slot)
+		}
+
 		// Add the 27 slots of the player inventory
 		for (row in 0..2) {
 			for (column in 0..8) {
