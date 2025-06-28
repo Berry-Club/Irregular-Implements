@@ -23,6 +23,20 @@ class ItemStackButton(
 	override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
 		baseRenderWidget(guiGraphics, mouseX, mouseY, partialTick)
 		renderItemStack(guiGraphics)
+		if (isMouseOver(mouseX.toDouble(), mouseY.toDouble())) {
+			renderToolTip(guiGraphics, mouseX, mouseY)
+		}
+	}
+
+	private fun renderToolTip(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+		if (this.message == Component.empty()) return
+
+		guiGraphics.renderComponentTooltip(
+			font,
+			listOf(this.message),
+			mouseX,
+			mouseY
+		)
 	}
 
 	private fun renderItemStack(guiGraphics: GuiGraphics) {
@@ -36,14 +50,11 @@ class ItemStackButton(
 	}
 
 	private fun baseRenderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-		val minecraft = Minecraft.getInstance()
 		guiGraphics.setColor(1.0f, 1.0f, 1.0f, this.alpha)
 		RenderSystem.enableBlend()
 		RenderSystem.enableDepthTest()
 		guiGraphics.blitSprite(SPRITES[this.active, this.isHovered], this.x, this.y, this.getWidth(), this.getHeight())
 		guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
-		val i = fgColor
-		this.renderString(guiGraphics, minecraft.font, i or (Mth.ceil(this.alpha * 255.0f) shl 24))
 	}
 
 }
