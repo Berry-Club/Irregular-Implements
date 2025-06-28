@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.menu.VoidStoneMenu
+import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneMenu
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents

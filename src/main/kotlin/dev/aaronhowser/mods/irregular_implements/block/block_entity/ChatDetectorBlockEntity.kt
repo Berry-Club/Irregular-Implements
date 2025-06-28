@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.ChatDetectorBlock
-import dev.aaronhowser.mods.irregular_implements.menu.ChatDetectorMenu
-import dev.aaronhowser.mods.irregular_implements.menu.GlobalChatDetectorMenu
+import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorMenu
+import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities

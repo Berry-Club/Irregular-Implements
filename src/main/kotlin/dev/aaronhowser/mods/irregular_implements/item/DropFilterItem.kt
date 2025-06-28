@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
-import dev.aaronhowser.mods.irregular_implements.menu.DropFilterMenu
+import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry

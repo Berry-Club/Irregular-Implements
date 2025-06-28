@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.menu.IronDropperMenu
+import dev.aaronhowser.mods.irregular_implements.menu.iron_dropper.IronDropperMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos

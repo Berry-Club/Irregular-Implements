@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
-import dev.aaronhowser.mods.irregular_implements.menu.ItemFilterMenu
+import dev.aaronhowser.mods.irregular_implements.menu.item_filter.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import net.minecraft.ChatFormatting

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
-import dev.aaronhowser.mods.irregular_implements.menu.NotificationInterfaceMenu
+import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
