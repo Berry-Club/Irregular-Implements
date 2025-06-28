@@ -69,23 +69,66 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 		}
 	}
 
+	private fun spawnParticles() {
+		if (!this.isClientSide) return
+
+		when (this.weather) {
+			WeatherEggItem.Weather.SUNNY -> spawnNiceCloud()
+			WeatherEggItem.Weather.RAINY -> spawnRainyCloud()
+			WeatherEggItem.Weather.STORMY -> spawnStormyCloud()
+		}
+	}
+
+	private fun spawnDefaultCloud() {
+		for (y in -1..1) {
+			var t = 0.0
+			while (t < Math.PI * 2) {
+				val yDouble = y.toDouble()
+
+				var a = 0.25
+				var b = 0.35
+
+				val divisor = abs(yDouble) * 0.5 + 1
+				a /= divisor
+				b /= divisor
+
+				val elX = a * cos(t)
+				val elZ = b * sin(t)
+
+				this.level().addParticle(
+					ParticleTypes.SMOKE,
+					true,
+					this.x + elX,
+					this.y + yDouble / 8.0,
+					this.z + elZ,
+					0.0,
+					-0.03,
+					0.0
+				)
+
+				t += Math.PI / 5
+			}
+		}
+	}
+
 	private fun spawnRainyCloud() {
 		spawnDefaultCloud()
 
 		for (i in 0 until 2) {
-			val t = Math.PI * 2 * Math.random()
+			val t = Math.PI * 2 * this.random.nextDouble()
 
 			var a = 0.25
 			var b = 0.35
 
-			a /= 1.5 + Math.random()
-			b /= 1.5 + Math.random()
+			a /= 1.5 + random.nextDouble()
+			b /= 1.5 + random.nextDouble()
 
 			val elX = a * cos(t)
 			val elZ = b * sin(t)
 
 			this.level().addParticle(
 				ParticleTypes.FISHING,
+				true,
 				this.x + elX,
 				this.y - 0.2,
 				this.z + elZ,
@@ -99,37 +142,28 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 	private fun spawnStormyCloud() {
 		spawnDefaultCloud()
 
-		val t = Math.PI * 2 * Math.random()
+		val t = Math.PI * 2 * random.nextDouble()
 
 		var a = 0.25
 		var b = 0.35
 
-		a /= 1.5 + Math.random()
-		b /= 1.5 + Math.random()
+		a /= 1.5 + random.nextDouble()
+		b /= 1.5 + random.nextDouble()
 
-		val elX = a * Math.cos(t)
-		val elZ = b * Math.sin(t)
+		val elX = a * cos(t)
+		val elZ = b * sin(t)
 
 		// Temporary fallback using smoke; replace with custom particle if needed
 		this.level().addParticle(
 			ParticleTypes.SMOKE,
+			true,
 			this.x + elX,
 			this.y,
 			this.z + elZ,
-			Math.random() * 0.1 - 0.05,
-			Math.random() * 0.2 - 0.1,
-			Math.random() * 0.1 - 0.05
+			random.nextDouble() * 0.1 - 0.05,
+			random.nextDouble() * 0.2 - 0.1,
+			random.nextDouble() * 0.1 - 0.05
 		)
-	}
-
-	private fun spawnParticles() {
-		if (!this.isClientSide) return
-
-		when (this.weather) {
-			WeatherEggItem.Weather.SUNNY -> spawnNiceCloud()
-			WeatherEggItem.Weather.RAINY -> spawnRainyCloud()
-			WeatherEggItem.Weather.STORMY -> spawnStormyCloud()
-		}
 	}
 
 	private fun spawnNiceCloud() {
@@ -162,37 +196,6 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 					0.0, 0.0, 0.0
 				)
 
-			}
-		}
-	}
-
-	private fun spawnDefaultCloud() {
-		for (y in -1..1) {
-			var t = 0.0
-			while (t < Math.PI * 2) {
-				val yDouble = y.toDouble()
-
-				var a = 0.25
-				var b = 0.35
-
-				val divisor = abs(yDouble) * 0.5 + 1
-				a /= divisor
-				b /= divisor
-
-				val elX = a * cos(t)
-				val elZ = b * sin(t)
-
-				this.level().addParticle(
-					ParticleTypes.SMOKE,
-					this.x + elX,
-					this.y + yDouble / 8.0,
-					this.z + elZ,
-					0.0,
-					-0.03,
-					0.0
-				)
-
-				t += Math.PI / 5
 			}
 		}
 	}
