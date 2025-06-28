@@ -20,24 +20,7 @@ class ModBiomeTagsProvider(
 	existingFileHelper: ExistingFileHelper
 ) : BiomeTagsProvider(pOutput, pProvider, IrregularImplements.ID, existingFileHelper) {
 
-	companion object {
-		private fun create(name: String): TagKey<Biome> {
-			return TagKey.create(Registries.BIOME, OtherUtil.modResource(name))
-		}
-
-		val BIOME_CRYSTAL_BLACKLIST = create("biome_crystal_blacklist")
-		val HAS_NATURE_CORE = create("has_nature_core")
-		val NATURE_CORE_OAK = create("nature_core_oak")
-		val NATURE_CORE_DARK_OAK = create("nature_core_dark_oak")
-		val NATURE_CORE_BIRCH = create("nature_core_birch")
-		val NATURE_CORE_JUNGLE = create("nature_core_jungle")
-		val NATURE_CORE_ACACIA = create("nature_core_acacia")
-		val NATURE_CORE_SPRUCE = create("nature_core_spruce")
-		val NATURE_CORE_MANGROVE = create("nature_core_mangrove")
-	}
-
 	override fun addTags(provider: HolderLookup.Provider) {
-
 		tag(HAS_NATURE_CORE)
 			.addTags(
 				NATURE_CORE_OAK,
@@ -84,7 +67,22 @@ class ModBiomeTagsProvider(
 			.add(
 				Biomes.MANGROVE_SWAMP
 			)
+	}
 
+	companion object {
+		private fun create(name: String): TagKey<Biome> {
+			return TagKey.create(Registries.BIOME, OtherUtil.modResource(name))
+		}
+
+		val BIOME_CRYSTAL_BLACKLIST = create("biome_crystal_blacklist")
+		val HAS_NATURE_CORE = create("has_nature_core")
+		val NATURE_CORE_OAK = create("nature_core_oak")
+		val NATURE_CORE_DARK_OAK = create("nature_core_dark_oak")
+		val NATURE_CORE_BIRCH = create("nature_core_birch")
+		val NATURE_CORE_JUNGLE = create("nature_core_jungle")
+		val NATURE_CORE_ACACIA = create("nature_core_acacia")
+		val NATURE_CORE_SPRUCE = create("nature_core_spruce")
+		val NATURE_CORE_MANGROVE = create("nature_core_mangrove")
 	}
 
 }

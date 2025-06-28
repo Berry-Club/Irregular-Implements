@@ -31,56 +31,6 @@ class SpectreIlluminatorEntity(
 	level: Level
 ) : Entity(entityType, level) {
 
-	companion object {
-		const val HEIGHT_ABOVE_MAX_BLOCK = 50
-		const val MAX_VARIATION = 5.0
-
-		const val TICKS_TO_MAX_SIZE = 20 * 60
-
-		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(SpectreIlluminatorEntity::class.java, EntityDataSerializers.INT)
-		const val ACTION_TIMER_NBT = "ActionTimer"
-
-		private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
-
-		//TODO: Check if is RenderChunkRegion
-		@JvmStatic
-		fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
-			val level: Level = when (blockAndTintGetter) {
-				is Level -> blockAndTintGetter
-
-				// If it's something that can be accessed on server, but isn't a Level, return false before it tries to load client-only class
-				is CommonLevelAccessor -> return false
-
-				else -> ClientUtil.levelFromBlockAndTintGetter(blockAndTintGetter) ?: return false
-			}
-
-			val chunkPos = ChunkPos(blockPos)
-
-			return illuminatedChunks[level].contains(chunkPos.toLong())
-		}
-
-		//FIXME: For some reason it doesn't work super well in chunks that are mostly empty (possibly only effects superflat levels?)
-		//TODO: Study effect on lag, possibly only when the chunk loads the first time?
-		private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
-			if (!level.isLoaded(chunkPos.worldPosition)) return
-
-			// +- 1 to also check edges
-			val minX = chunkPos.minBlockX - 1
-			val maxX = chunkPos.maxBlockX + 1
-			val minZ = chunkPos.minBlockZ - 1
-			val maxZ = chunkPos.maxBlockZ + 1
-			val minY = level.minBuildHeight
-			val maxY = level.maxBuildHeight
-
-			for (x in minX..maxX) for (z in minZ..maxZ) for (y in minY..maxY) {
-				val pos = BlockPos(x, y, z)
-
-				level.chunkSource.lightEngine.checkBlock(pos)
-			}
-		}
-
-	}
-
 	override fun isPickable(): Boolean {
 		return true
 	}
@@ -210,6 +160,56 @@ class SpectreIlluminatorEntity(
 
 	override fun shouldRenderAtSqrDistance(distance: Double): Boolean {
 		return distance < (64.0 * getViewScale()).pow(4)
+	}
+
+	companion object {
+		const val HEIGHT_ABOVE_MAX_BLOCK = 50
+		const val MAX_VARIATION = 5.0
+
+		const val TICKS_TO_MAX_SIZE = 20 * 60
+
+		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(SpectreIlluminatorEntity::class.java, EntityDataSerializers.INT)
+		const val ACTION_TIMER_NBT = "ActionTimer"
+
+		private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
+
+		//TODO: Check if is RenderChunkRegion
+		@JvmStatic
+		fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
+			val level: Level = when (blockAndTintGetter) {
+				is Level -> blockAndTintGetter
+
+				// If it's something that can be accessed on server, but isn't a Level, return false before it tries to load client-only class
+				is CommonLevelAccessor -> return false
+
+				else -> ClientUtil.levelFromBlockAndTintGetter(blockAndTintGetter) ?: return false
+			}
+
+			val chunkPos = ChunkPos(blockPos)
+
+			return illuminatedChunks[level].contains(chunkPos.toLong())
+		}
+
+		//FIXME: For some reason it doesn't work super well in chunks that are mostly empty (possibly only effects superflat levels?)
+		//TODO: Study effect on lag, possibly only when the chunk loads the first time?
+		private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
+			if (!level.isLoaded(chunkPos.worldPosition)) return
+
+			// +- 1 to also check edges
+			val minX = chunkPos.minBlockX - 1
+			val maxX = chunkPos.maxBlockX + 1
+			val minZ = chunkPos.minBlockZ - 1
+			val maxZ = chunkPos.maxBlockZ + 1
+			val minY = level.minBuildHeight
+			val maxY = level.maxBuildHeight
+
+			for (x in minX..maxX) for (z in minZ..maxZ) for (y in minY..maxY) {
+				val pos = BlockPos(x, y, z)
+
+				level.chunkSource.lightEngine.checkBlock(pos)
+			}
+		}
+
 	}
 
 }

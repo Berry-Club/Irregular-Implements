@@ -15,7 +15,6 @@ class ModGlobalLootModifierProvider(
 ) : GlobalLootModifierProvider(output, registries, IrregularImplements.ID) {
 
 	override fun start() {
-
 		val simpleDungeon = arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build())
 		val netherBridge = arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.NETHER_BRIDGE.location()).build())
 		val abandonedMineshaft = arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.ABANDONED_MINESHAFT.location()).build())

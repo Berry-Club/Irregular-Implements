@@ -25,7 +25,6 @@ class ModChestLootSubprovider(
 ) : LootTableSubProvider {
 
 	override fun generate(output: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
-
 		output.accept(
 			LAVA_CHARM_DUNGEON,
 			LootTable.lootTable().withPool(lavaCharmDungeon)

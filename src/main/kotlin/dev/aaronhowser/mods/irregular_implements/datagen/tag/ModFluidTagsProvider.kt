@@ -17,6 +17,14 @@ class ModFluidTagsProvider(
 	existingFileHelper: ExistingFileHelper?
 ) : FluidTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
 
+	override fun addTags(provider: HolderLookup.Provider) {
+		this.tag(ALLOWS_WATER_WALKING)
+			.addTag(FluidTags.WATER)
+
+		this.tag(ALLOWS_LAVA_WALKING)
+			.addTag(FluidTags.LAVA)
+	}
+
 	companion object {
 		private fun create(id: String): TagKey<Fluid> {
 			return FluidTags.create(OtherUtil.modResource(id))
@@ -27,15 +35,5 @@ class ModFluidTagsProvider(
 
 		@JvmField
 		val ALLOWS_LAVA_WALKING = create("allows_lava_walking")
-	}
-
-	override fun addTags(provider: HolderLookup.Provider) {
-
-		this.tag(ALLOWS_WATER_WALKING)
-			.addTag(FluidTags.WATER)
-
-		this.tag(ALLOWS_LAVA_WALKING)
-			.addTag(FluidTags.LAVA)
-
 	}
 }

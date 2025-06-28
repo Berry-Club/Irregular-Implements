@@ -29,7 +29,6 @@ class ModBlockLootTablesSubProvider(
 ) : BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags(), provider) {
 
 	override fun generate() {
-
 		for (block in this.knownBlocks - this.nonDropSelfBlocks) {
 			dropSelf(block)
 		}
@@ -52,7 +51,6 @@ class ModBlockLootTablesSubProvider(
 	}
 
 	private fun beanPod() {
-
 		val enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
 
 		add(ModBlocks.BEAN_POD.get()) {

@@ -22,27 +22,6 @@ class ModBlockTagsProvider(
 	existingFileHelper: ExistingFileHelper
 ) : BlockTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
 
-	companion object {
-		private fun create(id: String): TagKey<Block> {
-			return BlockTags.create(OtherUtil.modResource(id))
-		}
-
-		private fun common(id: String): TagKey<Block> {
-			return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
-		}
-
-		@JvmField
-		val SUPER_LUBRICATED = create("super_lubricated")
-		val C_CROPS_BEAN = common("crops/bean")
-		val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
-		val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
-		val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
-		val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
-		val C_STRIPPED_WOODS = common("stripped_woods")
-		val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
-		val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
-	}
-
 	override fun addTags(provider: HolderLookup.Provider) {
 
 		this.tag(CUSTOM_CRAFTING_TABLE_BLACKLIST)
@@ -464,6 +443,27 @@ class ModBlockTagsProvider(
 				)
 
 		}
+	}
+
+	companion object {
+		private fun create(id: String): TagKey<Block> {
+			return BlockTags.create(OtherUtil.modResource(id))
+		}
+
+		private fun common(id: String): TagKey<Block> {
+			return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
+		}
+
+		@JvmField
+		val SUPER_LUBRICATED = create("super_lubricated")
+		val C_CROPS_BEAN = common("crops/bean")
+		val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
+		val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
+		val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
+		val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
+		val C_STRIPPED_WOODS = common("stripped_woods")
+		val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
+		val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
 	}
 
 }

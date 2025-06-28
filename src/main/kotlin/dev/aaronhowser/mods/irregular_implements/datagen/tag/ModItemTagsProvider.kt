@@ -23,28 +23,6 @@ class ModItemTagsProvider(
 	existingFileHelper: ExistingFileHelper
 ) : ItemTagsProvider(pOutput, pLookupProvider, pBlockTags, IrregularImplements.ID, existingFileHelper) {
 
-	companion object {
-		private fun create(id: String): TagKey<Item> = ItemTags.create(OtherUtil.modResource(id))
-		private fun common(id: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
-
-		val GRASS_SEEDS = create("grass_seeds")
-		val SUPER_LUBRICATED_BLOCKS = create("super_lubricated")
-		val C_CROPS_BEAN = common("crops/bean")
-		val C_RODS_OBSIDIAN = common("rods/obsidian")
-		val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
-		val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
-		val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
-		val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
-		val NATURE_CORE_FLOWERS = create("nature_core_flowers")
-		val NATURE_CORE_SAPLINGS = create("nature_core_saplings")
-
-		@JvmField
-		val HIDE_POTION_HELMET = create("hide_potion_helmet")
-
-		@JvmField
-		val HIDE_NAME_HELMET = create("hide_name_helmet")
-	}
-
 	//TODO: Copy all block tags to item tags
 
 	override fun addTags(provider: HolderLookup.Provider) {
@@ -228,6 +206,28 @@ class ModItemTagsProvider(
 				ModItems.GRASS_SEEDS_RED.get(),
 				ModItems.GRASS_SEEDS_BLACK.get(),
 			)
-
 	}
+
+	companion object {
+		private fun create(id: String): TagKey<Item> = ItemTags.create(OtherUtil.modResource(id))
+		private fun common(id: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
+
+		val GRASS_SEEDS = create("grass_seeds")
+		val SUPER_LUBRICATED_BLOCKS = create("super_lubricated")
+		val C_CROPS_BEAN = common("crops/bean")
+		val C_RODS_OBSIDIAN = common("rods/obsidian")
+		val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
+		val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
+		val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
+		val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
+		val NATURE_CORE_FLOWERS = create("nature_core_flowers")
+		val NATURE_CORE_SAPLINGS = create("nature_core_saplings")
+
+		@JvmField
+		val HIDE_POTION_HELMET = create("hide_potion_helmet")
+
+		@JvmField
+		val HIDE_NAME_HELMET = create("hide_name_helmet")
+	}
+
 }

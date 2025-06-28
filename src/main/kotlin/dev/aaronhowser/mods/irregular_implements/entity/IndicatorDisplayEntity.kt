@@ -15,17 +15,6 @@ class IndicatorDisplayEntity(
 	level: Level
 ) : BlockDisplay(entityType, level) {
 
-	companion object {
-		private const val MAX_AGE_NBT = "MaxAge"
-
-		val defaultTransformation = Transformation(
-			null,
-			null,
-			Vector3f(0.5f, 0.5f, 0.5f),
-			null
-		)
-	}
-
 	constructor(
 		level: Level,
 		blockState: BlockState,
@@ -73,6 +62,17 @@ class IndicatorDisplayEntity(
 
 	public override fun setTransformation(transformation: Transformation) {
 		super.setTransformation(transformation)
+	}
+
+	companion object {
+		private const val MAX_AGE_NBT = "MaxAge"
+
+		val defaultTransformation = Transformation(
+			null,
+			null,
+			Vector3f(0.5f, 0.5f, 0.5f),
+			null
+		)
 	}
 
 }

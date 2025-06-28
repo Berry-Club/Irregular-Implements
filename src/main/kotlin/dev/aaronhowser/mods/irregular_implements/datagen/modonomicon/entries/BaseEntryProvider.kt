@@ -88,23 +88,6 @@ abstract class BaseEntryProvider : EntryProvider {
 		return ""
 	}
 
-	companion object {
-		fun coloredText(color: ChatFormatting, text: String): String {
-			val colorHexInt = color.color ?: error("Invalid color $color")
-			val colorString = String.format("%06X", 0xFFFFFF and colorHexInt)
-
-			return "[#](${colorString})$text[#]()"
-		}
-
-		fun major(text: String): String = coloredText(ChatFormatting.DARK_PURPLE, text)
-		fun minor(text: String): String = coloredText(ChatFormatting.DARK_AQUA, text)
-		fun bad(text: String): String = coloredText(ChatFormatting.RED, text)
-
-		fun paragraphs(vararg paragraphs: String): String {
-			return paragraphs.joinToString(separator = " \\\n  \\\n")
-		}
-	}
-
 	fun block(text: String, entryId: String): String {
 		return "[${text}](entry://blocks/${entryId})"
 	}
@@ -224,6 +207,23 @@ abstract class BaseEntryProvider : EntryProvider {
 		this.pageText(text)
 
 		return page
+	}
+
+	companion object {
+		fun coloredText(color: ChatFormatting, text: String): String {
+			val colorHexInt = color.color ?: error("Invalid color $color")
+			val colorString = String.format("%06X", 0xFFFFFF and colorHexInt)
+
+			return "[#](${colorString})$text[#]()"
+		}
+
+		fun major(text: String): String = coloredText(ChatFormatting.DARK_PURPLE, text)
+		fun minor(text: String): String = coloredText(ChatFormatting.DARK_AQUA, text)
+		fun bad(text: String): String = coloredText(ChatFormatting.RED, text)
+
+		fun paragraphs(vararg paragraphs: String): String {
+			return paragraphs.joinToString(separator = " \\\n  \\\n")
+		}
 	}
 
 }

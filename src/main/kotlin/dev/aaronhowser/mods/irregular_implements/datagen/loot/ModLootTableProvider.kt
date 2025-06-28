@@ -12,7 +12,6 @@ class ModLootTableProvider(
 ) : LootTableProvider(output, setOf(), subProviders, registries) {
 
 	companion object {
-
 		val subProviders = listOf(
 			SubProviderEntry(
 				::ModBlockLootTablesSubProvider,
@@ -27,7 +26,6 @@ class ModLootTableProvider(
 				LootContextParamSets.ENTITY
 			)
 		)
-
 	}
 
 }

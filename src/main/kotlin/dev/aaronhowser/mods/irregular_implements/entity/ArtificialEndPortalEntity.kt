@@ -22,58 +22,6 @@ import net.neoforged.neoforge.common.Tags
 
 class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
 
-	companion object {
-		fun isValidPosition(
-			level: Level,
-			entityCenterPos: BlockPos,
-			checkForOtherPortals: Boolean
-		): Boolean {
-
-			if (checkForOtherPortals) {
-				val entities = level.getEntitiesOfClass(
-					ArtificialEndPortalEntity::class.java,
-					AABB.ofSize(entityCenterPos.bottomCenter, 3.0, 1.0, 3.0)
-				)
-
-				if (entities.isNotEmpty()) return false
-			}
-
-			val endRodPos = entityCenterPos.above(3)
-			val endRodState = level.getBlockState(endRodPos)
-			if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
-
-			if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
-
-			for (dX in -1..1) for (dZ in -1..1) {
-				val posThere = entityCenterPos.offset(dX, 0, dZ)
-
-				val isAir = level.getBlockState(posThere).isAir
-				val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
-
-				if (!isAir || !isAboveEndStone) return false
-
-				if (dX != 0) {
-					val posDx = posThere.offset(dX, 0, 0)
-					val stateDx = level.getBlockState(posDx)
-					if (!stateDx.`is`(Tags.Blocks.OBSIDIANS)) return false
-				}
-
-				if (dZ != 0) {
-					val posDz = posThere.offset(0, 0, dZ)
-					val stateDz = level.getBlockState(posDz)
-					if (!stateDz.`is`(Tags.Blocks.OBSIDIANS)) return false
-				}
-			}
-
-			return true
-		}
-
-		const val MAX_ACTION_TIMER = 200
-
-		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
-		const val ACTION_TIMER_NBT = "ActionTimer"
-	}
-
 	constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
 		this.setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
 	}
@@ -167,5 +115,57 @@ class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entit
 
 	override fun addAdditionalSaveData(compound: CompoundTag) {
 		compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
+	}
+
+	companion object {
+		fun isValidPosition(
+			level: Level,
+			entityCenterPos: BlockPos,
+			checkForOtherPortals: Boolean
+		): Boolean {
+
+			if (checkForOtherPortals) {
+				val entities = level.getEntitiesOfClass(
+					ArtificialEndPortalEntity::class.java,
+					AABB.ofSize(entityCenterPos.bottomCenter, 3.0, 1.0, 3.0)
+				)
+
+				if (entities.isNotEmpty()) return false
+			}
+
+			val endRodPos = entityCenterPos.above(3)
+			val endRodState = level.getBlockState(endRodPos)
+			if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
+
+			if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
+
+			for (dX in -1..1) for (dZ in -1..1) {
+				val posThere = entityCenterPos.offset(dX, 0, dZ)
+
+				val isAir = level.getBlockState(posThere).isAir
+				val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
+
+				if (!isAir || !isAboveEndStone) return false
+
+				if (dX != 0) {
+					val posDx = posThere.offset(dX, 0, 0)
+					val stateDx = level.getBlockState(posDx)
+					if (!stateDx.`is`(Tags.Blocks.OBSIDIANS)) return false
+				}
+
+				if (dZ != 0) {
+					val posDz = posThere.offset(0, 0, dZ)
+					val stateDz = level.getBlockState(posDz)
+					if (!stateDz.`is`(Tags.Blocks.OBSIDIANS)) return false
+				}
+			}
+
+			return true
+		}
+
+		const val MAX_ACTION_TIMER = 200
+
+		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
+		const val ACTION_TIMER_NBT = "ActionTimer"
 	}
 }

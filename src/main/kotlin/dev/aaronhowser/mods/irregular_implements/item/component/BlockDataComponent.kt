@@ -32,25 +32,6 @@ data class BlockDataComponent(
 	constructor(provider: HolderLookup.Provider, blockState: BlockState, blockEntity: BlockEntity?) :
 			this(blockState, blockEntity?.saveWithFullMetadata(provider))
 
-	companion object {
-		val CODEC: Codec<BlockDataComponent> =
-			RecordCodecBuilder.create { instance ->
-				instance.group(
-					BlockState.CODEC.fieldOf("block_state")
-						.forGetter(BlockDataComponent::blockState),
-					CompoundTag.CODEC.optionalFieldOf("block_entity_nbt", null)
-						.forGetter(BlockDataComponent::blockEntityNbt)
-				).apply(instance, ::BlockDataComponent)
-			}
-
-		val STREAM_CODEC: StreamCodec<ByteBuf, BlockDataComponent> =
-			StreamCodec.composite(
-				ByteBufCodecs.idMapper(Block.BLOCK_STATE_REGISTRY), BlockDataComponent::blockState,
-				ByteBufCodecs.optional(ByteBufCodecs.TRUSTED_COMPOUND_TAG), { Optional.ofNullable(it.blockEntityNbt) },
-				{ state, tag -> BlockDataComponent(state, tag.orElse(null)) }
-			)
-	}
-
 	fun tryPlace(level: Level, posToPlaceIn: BlockPos, player: Player?): Boolean {
 
 		// Update the shape so double chests become single, etc
@@ -124,6 +105,26 @@ data class BlockDataComponent(
 		}
 
 		return true
+	}
+
+
+	companion object {
+		val CODEC: Codec<BlockDataComponent> =
+			RecordCodecBuilder.create { instance ->
+				instance.group(
+					BlockState.CODEC.fieldOf("block_state")
+						.forGetter(BlockDataComponent::blockState),
+					CompoundTag.CODEC.optionalFieldOf("block_entity_nbt", null)
+						.forGetter(BlockDataComponent::blockEntityNbt)
+				).apply(instance, ::BlockDataComponent)
+			}
+
+		val STREAM_CODEC: StreamCodec<ByteBuf, BlockDataComponent> =
+			StreamCodec.composite(
+				ByteBufCodecs.idMapper(Block.BLOCK_STATE_REGISTRY), BlockDataComponent::blockState,
+				ByteBufCodecs.optional(ByteBufCodecs.TRUSTED_COMPOUND_TAG), { Optional.ofNullable(it.blockEntityNbt) },
+				{ state, tag -> BlockDataComponent(state, tag.orElse(null)) }
+			)
 	}
 
 }

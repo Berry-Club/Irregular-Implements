@@ -14,7 +14,6 @@ class ModSoundDefinitionsProvider(
 ) : SoundDefinitionsProvider(output, IrregularImplements.ID, helper) {
 
 	override fun registerSounds() {
-
 		add(
 			ModSounds.FART,
 			SoundDefinition.definition()
@@ -63,7 +62,5 @@ class ModSoundDefinitionsProvider(
 					sound(OtherUtil.modResource("white_stone_activate"), SoundDefinition.SoundType.SOUND)
 				)
 		)
-
-
 	}
 }

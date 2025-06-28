@@ -14,6 +14,14 @@ data class BiomePointsDataComponent(
 	val points: Int
 ) {
 
+	fun withMorePoints(amount: Int): BiomePointsDataComponent {
+		return copy(points = points + amount)
+	}
+
+	fun withLessPoints(amount: Int): BiomePointsDataComponent {
+		return copy(points = points - amount)
+	}
+
 	companion object {
 		private val BIOME_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Holder<Biome>> =
 			ByteBufCodecs.holderRegistry(Registries.BIOME)
@@ -36,14 +44,6 @@ data class BiomePointsDataComponent(
 				ByteBufCodecs.VAR_INT, BiomePointsDataComponent::points,
 				::BiomePointsDataComponent
 			)
-	}
-
-	fun withMorePoints(amount: Int): BiomePointsDataComponent {
-		return copy(points = points + amount)
-	}
-
-	fun withLessPoints(amount: Int): BiomePointsDataComponent {
-		return copy(points = points - amount)
 	}
 
 }

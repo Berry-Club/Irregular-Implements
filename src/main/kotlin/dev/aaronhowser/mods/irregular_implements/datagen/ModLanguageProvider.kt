@@ -20,22 +20,6 @@ class ModLanguageProvider(
 	output: PackOutput
 ) : LanguageProvider(output, IrregularImplements.ID, "en_us") {
 
-	companion object {
-		fun String.toComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args)
-		fun String.toGrayComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args).withStyle(ChatFormatting.GRAY)
-
-		fun getInfoString(itemLike: ItemLike): String {
-			val location = BuiltInRegistries.ITEM.getKey(itemLike.asItem())
-
-			return StringBuilder()
-				.append("info.")
-				.append(location.namespace)
-				.append(".")
-				.append(location.path)
-				.toString()
-		}
-	}
-
 	override fun addTranslations() {
 		addTooltips()
 		addItems()
@@ -818,6 +802,22 @@ class ModLanguageProvider(
 		addEffect(ModEffects.COLLAPSE_IMBUE, "Collapse Imbue")
 		addEffect(ModEffects.SPECTRE_IMBUE, "Spectre Imbue")
 		addEffect(ModEffects.COLLAPSE, "Collapse")
+	}
+
+	companion object {
+		fun String.toComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args)
+		fun String.toGrayComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args).withStyle(ChatFormatting.GRAY)
+
+		fun getInfoString(itemLike: ItemLike): String {
+			val location = BuiltInRegistries.ITEM.getKey(itemLike.asItem())
+
+			return StringBuilder()
+				.append("info.")
+				.append(location.namespace)
+				.append(".")
+				.append(location.path)
+				.toString()
+		}
 	}
 
 }

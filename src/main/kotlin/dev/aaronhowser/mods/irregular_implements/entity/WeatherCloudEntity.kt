@@ -29,14 +29,6 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 		this.weather = weather
 	}
 
-	companion object {
-		val AGE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
-		val WEATHER_TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
-
-		const val AGE_NBT = "Age"
-		const val WEATHER_NBT = "Weather"
-	}
-
 	init {
 		this.noPhysics = true
 	}
@@ -202,4 +194,11 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 		compound.putInt(WEATHER_NBT, this.weather.ordinal)
 	}
 
+	companion object {
+		val AGE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
+		val WEATHER_TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(WeatherCloudEntity::class.java, EntityDataSerializers.INT)
+
+		const val AGE_NBT = "Age"
+		const val WEATHER_NBT = "Weather"
+	}
 }

@@ -23,7 +23,6 @@ class ItemsCategoryProvider(
 	}
 
 	override fun generateEntries() {
-
 		stableEnderPearl()
 		evilTear()
 		portkey()

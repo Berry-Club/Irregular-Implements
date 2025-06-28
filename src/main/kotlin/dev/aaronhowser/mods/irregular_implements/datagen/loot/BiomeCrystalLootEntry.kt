@@ -19,6 +19,17 @@ class BiomeCrystalLootEntry(
 	functions: MutableList<LootItemFunction>
 ) : LootPoolSingletonContainer(weight, quality, conditions, functions) {
 
+	override fun getType(): LootPoolEntryType {
+		return ModLootPoolEntryTypes.BIOME_CRYSTAL.get()
+	}
+
+	override fun createItemStack(stackConsumer: Consumer<ItemStack>, lootContext: LootContext) {
+		val allCrystals = BiomeCrystalItem.getAllCrystals(lootContext.level.registryAccess())
+		val randomStack = allCrystals[lootContext.random.nextInt(allCrystals.size)]
+
+		stackConsumer.accept(randomStack)
+	}
+
 	companion object {
 		fun get(): Builder<*> {
 			return simpleBuilder(::BiomeCrystalLootEntry)
@@ -29,17 +40,5 @@ class BiomeCrystalLootEntry(
 				singletonFields(instance)
 					.apply(instance, ::BiomeCrystalLootEntry)
 			}
-
-	}
-
-	override fun getType(): LootPoolEntryType {
-		return ModLootPoolEntryTypes.BIOME_CRYSTAL.get()
-	}
-
-	override fun createItemStack(stackConsumer: Consumer<ItemStack>, lootContext: LootContext) {
-		val allCrystals = BiomeCrystalItem.getAllCrystals(lootContext.level.registryAccess())
-		val randomStack = allCrystals[lootContext.random.nextInt(allCrystals.size)]
-
-		stackConsumer.accept(randomStack)
 	}
 }

@@ -27,17 +27,6 @@ class GoldenChickenEntity(
 	level: Level
 ) : Animal(entityType, level) {
 
-	companion object {
-		val BABY_DIMENSIONS: EntityDimensions = ModEntityTypes.GOLDEN_CHICKEN.get().dimensions.scale(0.5f).withEyeHeight(0.2975f)
-
-		fun createAttributes(): AttributeSupplier {
-			return createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 4.0)
-				.add(Attributes.MOVEMENT_SPEED, 0.25)
-				.build()
-		}
-	}
-
 	init {
 		this.setPathfindingMalus(PathType.WATER, 0.0f)
 	}
@@ -140,4 +129,14 @@ class GoldenChickenEntity(
 		}
 	}
 
+	companion object {
+		val BABY_DIMENSIONS: EntityDimensions = ModEntityTypes.GOLDEN_CHICKEN.get().dimensions.scale(0.5f).withEyeHeight(0.2975f)
+
+		fun createAttributes(): AttributeSupplier {
+			return createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 4.0)
+				.add(Attributes.MOVEMENT_SPEED, 0.25)
+				.build()
+		}
+	}
 }

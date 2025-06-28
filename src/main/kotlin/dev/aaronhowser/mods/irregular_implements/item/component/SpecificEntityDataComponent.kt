@@ -20,15 +20,14 @@ data class SpecificEntityDataComponent(
 	constructor(entity: Entity) : this(entity.uuid, entity.name)
 
 	companion object {
-
 		val UUID_CODEC: Codec<UUID> = Codec.STRING.xmap(
-			{ UUID.fromString(it) },
-			{ it.toString() }
+			UUID::fromString,
+			UUID::toString
 		)
 
 		val UUID_STREAM_CODEC: StreamCodec<ByteBuf, UUID> = ByteBufCodecs.STRING_UTF8.map(
-			{ UUID.fromString(it) },
-			{ it.toString() }
+			UUID::fromString,
+			UUID::toString
 		)
 
 		val CODEC: Codec<SpecificEntityDataComponent> = RecordCodecBuilder.create { instance ->

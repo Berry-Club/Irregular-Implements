@@ -19,10 +19,6 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
 	constructor(level: Level, shooter: LivingEntity) : super(ModEntityTypes.GOLDEN_EGG.get(), shooter, level)
 	constructor(level: Level, x: Double, y: Double, z: Double) : super(ModEntityTypes.GOLDEN_EGG.get(), x, y, z, level)
 
-	companion object {
-		private val ZERO_SIZED_DIMENSIONS: EntityDimensions = EntityDimensions.fixed(0.0f, 0.0f)
-	}
-
 	override fun onHit(result: HitResult) {
 		super.onHit(result)
 
@@ -75,6 +71,10 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
 
 	override fun getDefaultItem(): Item {
 		return ModItems.GOLDEN_EGG.get()
+	}
+
+	companion object {
+		private val ZERO_SIZED_DIMENSIONS: EntityDimensions = EntityDimensions.fixed(0.0f, 0.0f)
 	}
 
 }

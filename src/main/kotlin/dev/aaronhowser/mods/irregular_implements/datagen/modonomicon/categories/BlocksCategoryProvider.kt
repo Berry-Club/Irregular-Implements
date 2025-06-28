@@ -22,7 +22,6 @@ class BlocksCategoryProvider(
 	}
 
 	override fun generateEntries() {
-
 		fertilizedDirt()
 		imbuingStation()
 		fluidDisplay()

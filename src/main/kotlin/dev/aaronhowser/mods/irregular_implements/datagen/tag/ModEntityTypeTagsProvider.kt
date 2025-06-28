@@ -17,22 +17,20 @@ class ModEntityTypeTagsProvider(
 	existingFileHelper: ExistingFileHelper
 ) : EntityTypeTagsProvider(output, provider, IrregularImplements.ID, existingFileHelper) {
 
+	override fun addTags(provider: HolderLookup.Provider) {
+		this.tag(SUMMONING_PENDULUM_BLACKLIST)
+			.add(
+				EntityType.PLAYER,
+
+				)
+	}
+
 	companion object {
 		private fun create(id: String): TagKey<EntityType<*>> {
 			return TagKey.create(Registries.ENTITY_TYPE, OtherUtil.modResource(id))
 		}
 
 		val SUMMONING_PENDULUM_BLACKLIST = create("summoning_pendulum_blacklist")
-	}
-
-	override fun addTags(provider: HolderLookup.Provider) {
-
-		this.tag(SUMMONING_PENDULUM_BLACKLIST)
-			.add(
-				EntityType.PLAYER,
-
-				)
-
 	}
 
 }
