@@ -53,8 +53,14 @@ class DiaphanousBlockEntityRenderer(
 		val blue = (color and 0xFF) / 255f
 
 		for (direction in Direction.entries) {
-			val blockEntityThere = level.getBlockEntity(blockEntity.blockPos.relative(direction)) as? DiaphanousBlockEntity
+			val posThere = blockEntity.blockPos.relative(direction)
+
+			val blockEntityThere = level.getBlockEntity(posThere) as? DiaphanousBlockEntity
+			val blockStateThere = level.getBlockState(posThere)
+
 			val shouldSkip = blockEntityThere?.isInverted == blockEntity.isInverted
+					|| blockStateThere.isCollisionShapeFullBlock(level, posThere)
+
 			if (shouldSkip) continue
 
 			val quads = model.getQuads(
