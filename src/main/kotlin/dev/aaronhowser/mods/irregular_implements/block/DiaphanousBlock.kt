@@ -64,11 +64,11 @@ class DiaphanousBlock : Block(
 	}
 
 	override fun getShadeBrightness(state: BlockState, level: BlockGetter, pos: BlockPos): Float {
-		return if (isUsuallySolid(state, level, pos)) 1f else 0f
+		return 1f
 	}
 
 	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
-		return isUsuallySolid(state, level, pos)
+		return true
 	}
 
 	companion object {
