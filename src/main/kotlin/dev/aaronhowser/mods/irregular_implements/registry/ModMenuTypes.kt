@@ -85,6 +85,16 @@ object ModMenuTypes {
 			MenuType(::AdvancedItemCollectorMenu, FeatureFlags.DEFAULT_FLAGS)
 		})
 
+	val REDSTONE_REMOTE_INVENTORY: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteInventoryMenu>> =
+		MENU_TYPE_REGISTRY.register("redstone_remote_inventory", Supplier {
+			MenuType(::RedstoneRemoteInventoryMenu, FeatureFlags.DEFAULT_FLAGS)
+		})
+
+	val REDSTONE_REMOTE_BUTTONS: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteButtonsMenu>> =
+		MENU_TYPE_REGISTRY.register("redstone_remote_buttons", Supplier {
+			MenuType(::RedstoneRemoteButtonsMenu, FeatureFlags.DEFAULT_FLAGS)
+		})
+
 	fun registerScreens(event: RegisterMenuScreensEvent) {
 		event.register(IRON_DROPPER.get(), ::IronDropperScreen)
 		event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)

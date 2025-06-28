@@ -196,7 +196,8 @@ object ModItems {
 		register("redstone_tool", ::RedstoneToolItem, RedstoneToolItem.DEFAULT_PROPERTIES)
 	val REDSTONE_ACTIVATOR: DeferredItem<RedstoneActivatorItem> =
 		register("redstone_activator", ::RedstoneActivatorItem, RedstoneActivatorItem.DEFAULT_PROPERTIES)
-	val REDSTONE_REMOTE = basic("redstone_remote")
+	val REDSTONE_REMOTE: DeferredItem<RedstoneRemoteItem> =
+		register("redstone_remote", ::RedstoneRemoteItem, RedstoneRemoteItem.DEFAULT_PROPERTIES)
 
 	// Floo
 	val FLOO_POWDER = basic("floo_powder")
