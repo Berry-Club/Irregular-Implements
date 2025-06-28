@@ -28,7 +28,7 @@ import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.fluids.SimpleFluidContent
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 
-class EnderBucketItem : Item(Properties()) {
+class EnderBucketItem(properties: Properties) : Item(properties) {
 
 	override fun use(
 		level: Level,
@@ -66,6 +66,8 @@ class EnderBucketItem : Item(Properties()) {
 	}
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(16)
+
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
 			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
 

@@ -8,10 +8,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 
-class LotusBlossomItem : Item(
-	Properties()
-		.food(FOOD_PROPERTIES)
-) {
+class LotusBlossomItem(properties: Properties) : Item(properties) {
 
 	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int {
 		return 10
@@ -42,6 +39,8 @@ class LotusBlossomItem : Item(
 		private val FOOD_PROPERTIES = FoodProperties.Builder()
 			.alwaysEdible()
 			.build()
+
+		val DEFAULT_PROPERTIES: Properties = Properties().food(FOOD_PROPERTIES)
 	}
 
 }

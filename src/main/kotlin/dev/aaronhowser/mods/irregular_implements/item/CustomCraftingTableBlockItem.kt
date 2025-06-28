@@ -14,8 +14,8 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.block.Block
 
-class CustomCraftingTableBlockItem : BlockItem(
-	ModBlocks.CUSTOM_CRAFTING_TABLE.get(), Properties()
+class CustomCraftingTableBlockItem(properties: Properties) : BlockItem(
+	ModBlocks.CUSTOM_CRAFTING_TABLE.get(), properties,
 ) {
 
 	override fun place(context: BlockPlaceContext): InteractionResult {

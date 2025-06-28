@@ -9,17 +9,17 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Holder
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.FallLocation
-import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.*
+import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.level.BlockGetter
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -28,115 +28,77 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
+import net.neoforged.neoforge.registries.DeferredItem
 import top.theillusivec4.curios.api.CuriosApi
 
 object ModArmorItems {
 
-	// These are lazy so they don't freak out due
-	// to data components not being available yet when
-	// BlockStateBaseMixin calls FluidWalkingBoots#checkCollisionShape
+	val MAGIC_HOOD_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(ArmorItem.Type.HELMET.getDurability(15))
+			.rarity(Rarity.RARE)
 
-	val WATER_WALKING_BOOTS by lazy {
-		ArmorItem(
-			ModArmorMaterials.WATER_WALKING,
-			ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(ArmorItem.Type.BOOTS.getDurability(15))
-				.rarity(Rarity.RARE)
-				.component(
-					ModDataComponents.FLUID_TAGS,
-					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+	val WATER_WALKING_BOOTS_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(ArmorItem.Type.BOOTS.getDurability(15))
+			.rarity(Rarity.RARE)
+			.component(
+				ModDataComponents.FLUID_TAGS,
+				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+			)
+
+	val OBSIDIAN_WATER_WALKING_BOOTS_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(ArmorItem.Type.BOOTS.getDurability(15))
+			.rarity(Rarity.RARE)
+			.fireResistant()
+			.component(
+				ModDataComponents.FLUID_TAGS,
+				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+			)
+
+	val LAVA_WADERS_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(ArmorItem.Type.BOOTS.getDurability(15))
+			.rarity(Rarity.RARE)
+			.fireResistant()
+			.component(
+				ModDataComponents.FLUID_TAGS,
+				listOf(
+					ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
+					ModFluidTagsProvider.ALLOWS_WATER_WALKING
 				)
-		)
-	}
+			)
+			.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
+			.component(ModDataComponents.COOLDOWN, 0)
 
-	val OBSIDIAN_WATER_WALKING_BOOTS by lazy {
-		ArmorItem(
-			ModArmorMaterials.OBSIDIAN_WATER_WALKING,
-			ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(ArmorItem.Type.BOOTS.getDurability(15))
-				.rarity(Rarity.RARE)
-				.fireResistant()
-				.component(
-					ModDataComponents.FLUID_TAGS,
-					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-				)
-		)
-	}
+	val SPECTRE_HELMET_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
 
-	val LAVA_WADERS by lazy {
-		object : ArmorItem(
-			ModArmorMaterials.LAVA_WADERS,
-			Type.BOOTS,
-			Properties()
-				.durability(Type.BOOTS.getDurability(15))
-				.rarity(Rarity.RARE)
-				.fireResistant()
-				.component(
-					ModDataComponents.FLUID_TAGS,
-					listOf(
-						ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
-						ModFluidTagsProvider.ALLOWS_WATER_WALKING
-					)
-				)
-				.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
-				.component(ModDataComponents.COOLDOWN, 0)
-		) {
-			override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-				LavaCharmItem.charge(stack)
-			}
-		}
-	}
+	val SPECTRE_CHESTPLATE_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
 
-	val MAGIC_HOOD by lazy {
-		ArmorItem(
-			ModArmorMaterials.MAGIC,
-			ArmorItem.Type.HELMET,
-			Item.Properties()
-				.durability(ArmorItem.Type.HELMET.getDurability(15))
-				.rarity(Rarity.RARE)
-		)
-	}
+	val SPECTRE_LEGGINGS_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
 
-	val SPECTRE_HELMET by lazy {
-		ArmorItem(
-			ModArmorMaterials.SPECTRE,
-			ArmorItem.Type.HELMET,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
-		)
-	}
+	val SPECTRE_BOOTS_DEFAULT_PROPERTIES: Item.Properties =
+		Item.Properties()
+			.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
+			.rarity(Rarity.UNCOMMON)
 
-	val SPECTRE_CHESTPLATE by lazy {
-		ArmorItem(
-			ModArmorMaterials.SPECTRE,
-			ArmorItem.Type.CHESTPLATE,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
-		)
-	}
-
-	val SPECTRE_LEGGINGS by lazy {
-		ArmorItem(
-			ModArmorMaterials.SPECTRE,
-			ArmorItem.Type.LEGGINGS,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
-		)
-	}
-
-	val SPECTRE_BOOTS by lazy {
-		ArmorItem(
-			ModArmorMaterials.SPECTRE,
-			ArmorItem.Type.BOOTS,
-			Item.Properties()
-				.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
-				.rarity(Rarity.UNCOMMON)
-		)
+	fun registerArmorItem(
+		name: String,
+		material: Holder<ArmorMaterial>,
+		type: ArmorItem.Type,
+		properties: Item.Properties
+	): DeferredItem<ArmorItem> {
+		return ModItems.ITEM_REGISTRY.registerItem(name) { ArmorItem(material, type, properties) }
 	}
 
 	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {

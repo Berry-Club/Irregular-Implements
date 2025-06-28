@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.BlockPlaceContext
 
-class DiaphanousBlockItem : ItemNameBlockItem(
-	ModBlocks.DIAPHANOUS_BLOCK.get(), Properties()
+class DiaphanousBlockItem(properties: Properties) : ItemNameBlockItem(
+	ModBlocks.DIAPHANOUS_BLOCK.get(), properties
 ) {
 
 	override fun appendHoverText(
