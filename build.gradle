@@ -108,7 +108,7 @@ repositories {
 }
 
 dependencies {
-    implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
+    compileOnly "thedarkcolour:kotlinforforge-neoforge:$kff_version"
 
     // EMI
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"

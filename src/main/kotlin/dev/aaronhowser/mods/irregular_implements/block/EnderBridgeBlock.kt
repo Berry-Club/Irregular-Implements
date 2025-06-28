@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.AABB
-import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
 
 class EnderBridgeBlock(
     val distancePerTick: Int,
@@ -50,7 +49,7 @@ class EnderBridgeBlock(
         private fun getEntities(level: Level, bridgePos: BlockPos): List<Entity> {
             return level.getEntities(
                 null,
-                AABB.ofSize(bridgePos.above().toVec3(), 1.25, 2.5, 1.25)
+				AABB.ofSize(bridgePos.above().center, 1.25, 2.5, 1.25)
             )
         }
 
