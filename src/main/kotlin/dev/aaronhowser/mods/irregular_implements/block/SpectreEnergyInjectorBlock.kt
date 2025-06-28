@@ -22,44 +22,44 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 class SpectreEnergyInjectorBlock : Block(
-    Properties
-        .ofFullCopy(Blocks.IRON_BLOCK)
-        .sound(SoundType.GLASS)
+	Properties
+		.ofFullCopy(Blocks.IRON_BLOCK)
+		.sound(SoundType.GLASS)
 ), EntityBlock {
 
-    override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
-        return Shapes.empty()
-    }
+	override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
+		return Shapes.empty()
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return SpectreEnergyInjectorBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return SpectreEnergyInjectorBlockEntity(pos, state)
+	}
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
-        super.setPlacedBy(level, pos, state, placer, stack)
+	override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+		super.setPlacedBy(level, pos, state, placer, stack)
 
-        if (placer == null) return
-        val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity ?: return
-        blockEntity.ownerUuid = placer.uuid
-    }
+		if (placer == null) return
+		val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity ?: return
+		blockEntity.ownerUuid = placer.uuid
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity
-        if (!level.isClientSide && blockEntity != null) {
-            val energyHandler = blockEntity.getEnergyHandler(null)
-            val energyStored = energyHandler?.energyStored ?: 0
-            val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilSavedData.MAX_ENERGY
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity
+		if (!level.isClientSide && blockEntity != null) {
+			val energyHandler = blockEntity.getEnergyHandler(null)
+			val energyStored = energyHandler?.energyStored ?: 0
+			val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilSavedData.MAX_ENERGY
 
-            val storedFormatted = String.format("%,d", energyStored)
-            val maxFormatted = String.format("%,d", maxEnergy)
+			val storedFormatted = String.format("%,d", energyStored)
+			val maxFormatted = String.format("%,d", maxEnergy)
 
-            val component = ModLanguageProvider.Messages.FE_RATIO
-                .toComponent(storedFormatted, maxFormatted)
+			val component = ModLanguageProvider.Messages.FE_RATIO
+				.toComponent(storedFormatted, maxFormatted)
 
-            player.sendSystemMessage(component)
-        }
+			player.sendSystemMessage(component)
+		}
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
 }

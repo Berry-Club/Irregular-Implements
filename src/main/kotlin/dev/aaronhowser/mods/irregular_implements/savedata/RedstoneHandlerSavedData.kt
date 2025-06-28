@@ -16,159 +16,159 @@ import net.minecraft.world.level.saveddata.SavedData
 
 class RedstoneHandlerSavedData : SavedData() {
 
-    companion object {
-        private const val TAG_SAVED_SIGNALS = "saved_signals"
+	companion object {
+		private const val TAG_SAVED_SIGNALS = "saved_signals"
 
-        private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
-            val redstoneHandlerSavedData = RedstoneHandlerSavedData()
+		private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
+			val redstoneHandlerSavedData = RedstoneHandlerSavedData()
 
-            val savedSignals = pTag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
+			val savedSignals = pTag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
 
-            for (i in savedSignals.indices) {
-                val signalTag = savedSignals.getCompound(i)
-                val signal = SavedSignal.fromTag(signalTag)
+			for (i in savedSignals.indices) {
+				val signalTag = savedSignals.getCompound(i)
+				val signal = SavedSignal.fromTag(signalTag)
 
-                redstoneHandlerSavedData.signals.add(signal)
-            }
+				redstoneHandlerSavedData.signals.add(signal)
+			}
 
-            return redstoneHandlerSavedData
-        }
+			return redstoneHandlerSavedData
+		}
 
-        private fun get(level: ServerLevel): RedstoneHandlerSavedData {
-            require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
+		private fun get(level: ServerLevel): RedstoneHandlerSavedData {
+			require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
 
-            return level.dataStorage.computeIfAbsent(
-                Factory(::RedstoneHandlerSavedData, ::load),
-                "redstone_handler"
-            )
-        }
+			return level.dataStorage.computeIfAbsent(
+				Factory(::RedstoneHandlerSavedData, ::load),
+				"redstone_handler"
+			)
+		}
 
-        @JvmStatic
-        val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
-            inline get() = this.server.redstoneHandlerSavedData
+		@JvmStatic
+		val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
+			inline get() = this.server.redstoneHandlerSavedData
 
-        val MinecraftServer.redstoneHandlerSavedData: RedstoneHandlerSavedData
-            get() = get(this.overworld())
+		val MinecraftServer.redstoneHandlerSavedData: RedstoneHandlerSavedData
+			get() = get(this.overworld())
 
-        fun tick(level: Level) {
-            if (level !is ServerLevel) return
-            level.redstoneHandlerSavedData.tick(level.server)
-        }
+		fun tick(level: Level) {
+			if (level !is ServerLevel) return
+			level.redstoneHandlerSavedData.tick(level.server)
+		}
 
-        fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
-            level.redstoneHandlerSavedData.addSignal(level, blockPos, duration, strength)
-        }
-    }
+		fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+			level.redstoneHandlerSavedData.addSignal(level, blockPos, duration, strength)
+		}
+	}
 
-    private val signals: MutableSet<SavedSignal> = mutableSetOf()
+	private val signals: MutableSet<SavedSignal> = mutableSetOf()
 
-    private fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
-        signals.removeIf { it.blockPos == blockPos.asLong() && it.dimension == level.dimension() }
+	private fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+		signals.removeIf { it.blockPos == blockPos.asLong() && it.dimension == level.dimension() }
 
-        val signal = SavedSignal(blockPos.asLong(), level.dimension(), duration, strength, level.gameTime)
+		val signal = SavedSignal(blockPos.asLong(), level.dimension(), duration, strength, level.gameTime)
 
-        signals.add(signal)
-        updatePosition(level, blockPos)
+		signals.add(signal)
+		updatePosition(level, blockPos)
 
-        setDirty()
-    }
+		setDirty()
+	}
 
-    fun tick(server: MinecraftServer) {
-        val iterator = signals.iterator()
+	fun tick(server: MinecraftServer) {
+		val iterator = signals.iterator()
 
-        while (iterator.hasNext()) {
-            val signal = iterator.next()
-            val level = server.getLevel(signal.dimension)
+		while (iterator.hasNext()) {
+			val signal = iterator.next()
+			val level = server.getLevel(signal.dimension)
 
-            if (level == null) {
-                iterator.remove()
-                continue
-            }
+			if (level == null) {
+				iterator.remove()
+				continue
+			}
 
-            updatePosition(level, signal.blockPos)
+			updatePosition(level, signal.blockPos)
 
-            if (signal.isExpired(level.gameTime)) {
-                iterator.remove()
-                setDirty()
-            }
-        }
-    }
+			if (signal.isExpired(level.gameTime)) {
+				iterator.remove()
+				setDirty()
+			}
+		}
+	}
 
-    private fun updatePosition(level: ServerLevel, blockPos: BlockPos) {
-        val targetState = level.getBlockState(blockPos)
+	private fun updatePosition(level: ServerLevel, blockPos: BlockPos) {
+		val targetState = level.getBlockState(blockPos)
 
-        targetState.handleNeighborChanged(level, blockPos, Blocks.AIR, blockPos, false)
-        level.updateNeighborsAt(blockPos, targetState.block)
-    }
+		targetState.handleNeighborChanged(level, blockPos, Blocks.AIR, blockPos, false)
+		level.updateNeighborsAt(blockPos, targetState.block)
+	}
 
-    private fun updatePosition(level: ServerLevel, blockPos: Long) = updatePosition(level, BlockPos.of(blockPos))
+	private fun updatePosition(level: ServerLevel, blockPos: Long) = updatePosition(level, BlockPos.of(blockPos))
 
-    fun getStrongPower(level: ServerLevel, blockPos: BlockPos, facing: Direction): Int {
-        val pos = blockPos.relative(facing.opposite)
-        val dimension = level.dimension()
+	fun getStrongPower(level: ServerLevel, blockPos: BlockPos, facing: Direction): Int {
+		val pos = blockPos.relative(facing.opposite)
+		val dimension = level.dimension()
 
-        for (signal in signals) {
-            if (signal.isExpired(level.gameTime)) continue
-            if (signal.blockPos == pos.asLong() && signal.dimension == dimension) {
-                return signal.strength
-            }
-        }
+		for (signal in signals) {
+			if (signal.isExpired(level.gameTime)) continue
+			if (signal.blockPos == pos.asLong() && signal.dimension == dimension) {
+				return signal.strength
+			}
+		}
 
-        return 0
-    }
+		return 0
+	}
 
-    override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
-        val signalsTag = tag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
+	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
+		val signalsTag = tag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
 
-        for (signal in signals) {
-            signalsTag.add(signal.toTag())
-        }
+		for (signal in signals) {
+			signalsTag.add(signal.toTag())
+		}
 
-        tag.put(TAG_SAVED_SIGNALS, signalsTag)
+		tag.put(TAG_SAVED_SIGNALS, signalsTag)
 
-        return tag
-    }
+		return tag
+	}
 
-    data class SavedSignal(
-        val blockPos: Long,
-        val dimension: ResourceKey<Level>,
-        val duration: Int,
-        val strength: Int,
-        val startTick: Long
-    ) {
-        companion object {
-            const val TAG_BLOCK_POS = "block_pos"
-            const val TAG_DIMENSION = "dimension"
-            const val TAG_DURATION = "duration"
-            const val TAG_STRENGTH = "strength"
-            const val TAG_START_TICK = "start_tick"
+	data class SavedSignal(
+		val blockPos: Long,
+		val dimension: ResourceKey<Level>,
+		val duration: Int,
+		val strength: Int,
+		val startTick: Long
+	) {
+		companion object {
+			const val TAG_BLOCK_POS = "block_pos"
+			const val TAG_DIMENSION = "dimension"
+			const val TAG_DURATION = "duration"
+			const val TAG_STRENGTH = "strength"
+			const val TAG_START_TICK = "start_tick"
 
-            fun fromTag(tag: CompoundTag): SavedSignal {
-                val blockPos = tag.getLong(TAG_BLOCK_POS)
-                val dimension = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(tag.getString(TAG_DIMENSION)))
-                val duration = tag.getInt(TAG_DURATION)
-                val strength = tag.getInt(TAG_STRENGTH)
-                val startTick = tag.getLong(TAG_START_TICK)
+			fun fromTag(tag: CompoundTag): SavedSignal {
+				val blockPos = tag.getLong(TAG_BLOCK_POS)
+				val dimension = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(tag.getString(TAG_DIMENSION)))
+				val duration = tag.getInt(TAG_DURATION)
+				val strength = tag.getInt(TAG_STRENGTH)
+				val startTick = tag.getLong(TAG_START_TICK)
 
-                return SavedSignal(blockPos, dimension, duration, strength, startTick)
-            }
-        }
+				return SavedSignal(blockPos, dimension, duration, strength, startTick)
+			}
+		}
 
-        fun toTag(): CompoundTag {
-            val tag = CompoundTag()
+		fun toTag(): CompoundTag {
+			val tag = CompoundTag()
 
-            tag.putLong(TAG_BLOCK_POS, blockPos)
-            tag.putString(TAG_DIMENSION, dimension.location().toString())
-            tag.putInt(TAG_DURATION, duration)
-            tag.putInt(TAG_STRENGTH, strength)
-            tag.putLong(TAG_START_TICK, startTick)
+			tag.putLong(TAG_BLOCK_POS, blockPos)
+			tag.putString(TAG_DIMENSION, dimension.location().toString())
+			tag.putInt(TAG_DURATION, duration)
+			tag.putInt(TAG_STRENGTH, strength)
+			tag.putLong(TAG_START_TICK, startTick)
 
-            return tag
-        }
+			return tag
+		}
 
-        fun isExpired(currentTick: Long): Boolean {
-            return currentTick - startTick >= duration
-        }
-    }
+		fun isExpired(currentTick: Long): Boolean {
+			return currentTick - startTick >= duration
+		}
+	}
 
 }

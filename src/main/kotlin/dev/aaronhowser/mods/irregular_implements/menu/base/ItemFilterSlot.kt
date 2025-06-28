@@ -12,80 +12,80 @@ import net.minecraft.world.item.ItemStack
 import java.util.function.Supplier
 
 class ItemFilterSlot(
-    private val filterStack: Supplier<ItemStack>,
-    private val lookupProvider: HolderLookup.Provider,
-    x: Int,
-    y: Int
+	private val filterStack: Supplier<ItemStack>,
+	private val lookupProvider: HolderLookup.Provider,
+	x: Int,
+	y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
 
-    private val stackComponent: ItemFilterDataComponent?
-        get() = this.filterStack.get().get(ModDataComponents.ITEM_FILTER_ENTRIES)
+	private val stackComponent: ItemFilterDataComponent?
+		get() = this.filterStack.get().get(ModDataComponents.ITEM_FILTER_ENTRIES)
 
-    private val stackFilter: NonNullList<FilterEntry>?
-        get() = stackComponent?.entries
+	private val stackFilter: NonNullList<FilterEntry>?
+		get() = stackComponent?.entries
 
-    private val entryInThisSlot: FilterEntry?
-        get() = stackFilter?.getOrNull(this.index)
+	private val entryInThisSlot: FilterEntry?
+		get() = stackFilter?.getOrNull(this.index)
 
-    // Treating this as basically a button that removes this slot's entry from the filter component
-    override fun mayPickup(player: Player): Boolean {
-        val stackFilter = this.stackFilter ?: return false
+	// Treating this as basically a button that removes this slot's entry from the filter component
+	override fun mayPickup(player: Player): Boolean {
+		val stackFilter = this.stackFilter ?: return false
 
-        val newFilter = stackFilter.toMutableList()
-        newFilter[this.index] = FilterEntry.Empty
+		val newFilter = stackFilter.toMutableList()
+		newFilter[this.index] = FilterEntry.Empty
 
-        this.filterStack.get().set(
-            ModDataComponents.ITEM_FILTER_ENTRIES,
-            ItemFilterDataComponent(
-                newFilter,
-                this.stackComponent?.isBlacklist ?: false
-            )
-        )
+		this.filterStack.get().set(
+			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ItemFilterDataComponent(
+				newFilter,
+				this.stackComponent?.isBlacklist ?: false
+			)
+		)
 
-        return false
-    }
+		return false
+	}
 
-    override fun safeInsert(stack: ItemStack): ItemStack {
-        if (stack.isEmpty) return stack
-        if (this.entryInThisSlot !is FilterEntry.Empty && this.entryInThisSlot != null) return stack
+	override fun safeInsert(stack: ItemStack): ItemStack {
+		if (stack.isEmpty) return stack
+		if (this.entryInThisSlot !is FilterEntry.Empty && this.entryInThisSlot != null) return stack
 
-        val oldFilter = stackFilter ?: return stack
-        val newFilter = ItemFilterDataComponent.sanitizeEntries(oldFilter).toMutableList()
+		val oldFilter = stackFilter ?: return stack
+		val newFilter = ItemFilterDataComponent.sanitizeEntries(oldFilter).toMutableList()
 
-        newFilter[this.index] = FilterEntry.Item(
-            stack.copyWithCount(1),
-            requireSameComponents = false
-        )
+		newFilter[this.index] = FilterEntry.Item(
+			stack.copyWithCount(1),
+			requireSameComponents = false
+		)
 
-        this.filterStack.get().set(
-            ModDataComponents.ITEM_FILTER_ENTRIES,
-            ItemFilterDataComponent(
-                newFilter,
-                this.stackComponent?.isBlacklist ?: false
-            )
-        )
+		this.filterStack.get().set(
+			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ItemFilterDataComponent(
+				newFilter,
+				this.stackComponent?.isBlacklist ?: false
+			)
+		)
 
-        return stack
-    }
+		return stack
+	}
 
-    override fun getItem(): ItemStack {
-        return entryInThisSlot?.getDisplayStack(lookupProvider) ?: ItemStack.EMPTY
-    }
+	override fun getItem(): ItemStack {
+		return entryInThisSlot?.getDisplayStack(lookupProvider) ?: ItemStack.EMPTY
+	}
 
-    override fun remove(amount: Int): ItemStack {
-        return ItemStack.EMPTY
-    }
+	override fun remove(amount: Int): ItemStack {
+		return ItemStack.EMPTY
+	}
 
-    override fun set(stack: ItemStack) {
-        // Do nothing
-    }
+	override fun set(stack: ItemStack) {
+		// Do nothing
+	}
 
-    override fun isHighlightable(): Boolean {
-        return true
-    }
+	override fun isHighlightable(): Boolean {
+		return true
+	}
 
-    override fun getSlotIndex(): Int {
-        return 0
-    }
+	override fun getSlotIndex(): Int {
+		return 0
+	}
 
 }

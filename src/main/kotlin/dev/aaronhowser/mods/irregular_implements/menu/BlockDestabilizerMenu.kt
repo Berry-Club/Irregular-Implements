@@ -12,56 +12,56 @@ import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 
 class BlockDestabilizerMenu(
-    containerId: Int,
-    private val containerData: ContainerData
+	containerId: Int,
+	private val containerData: ContainerData
 ) : AbstractContainerMenu(ModMenuTypes.BLOCK_DESTABILIZER.get(), containerId), MenuWithButtons {
 
-    constructor(containerId: Int, playerInventory: Inventory) :
-            this(
-                containerId,
-                SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE)
-            )
+	constructor(containerId: Int, playerInventory: Inventory) :
+			this(
+				containerId,
+				SimpleContainerData(IronDropperBlockEntity.CONTAINER_DATA_SIZE)
+			)
 
-    init {
-        this.addDataSlots(containerData)
-    }
+	init {
+		this.addDataSlots(containerData)
+	}
 
-    companion object {
-        const val TOGGLE_LAZY_BUTTON_ID = 0
-        const val SHOW_LAZY_SHAPE_BUTTON_ID = 1
-        const val RESET_LAZY_SHAPE_BUTTON_ID = 2
-    }
+	companion object {
+		const val TOGGLE_LAZY_BUTTON_ID = 0
+		const val SHOW_LAZY_SHAPE_BUTTON_ID = 1
+		const val RESET_LAZY_SHAPE_BUTTON_ID = 2
+	}
 
-    val isLazy: Boolean
-        get() = containerData.get(BlockDestabilizerBlockEntity.LAZY_INDEX) == 1
+	val isLazy: Boolean
+		get() = containerData.get(BlockDestabilizerBlockEntity.LAZY_INDEX) == 1
 
-    private fun toggleLazy() {
-        containerData.set(BlockDestabilizerBlockEntity.LAZY_INDEX, 0)   // Toggles lazy no matter what value is passed
-    }
+	private fun toggleLazy() {
+		containerData.set(BlockDestabilizerBlockEntity.LAZY_INDEX, 0)   // Toggles lazy no matter what value is passed
+	}
 
-    private fun showLazyShape() {
-        containerData.set(BlockDestabilizerBlockEntity.SHOW_LAZY_INDEX, 1)
-    }
+	private fun showLazyShape() {
+		containerData.set(BlockDestabilizerBlockEntity.SHOW_LAZY_INDEX, 1)
+	}
 
-    private fun resetLazyShape() {
-        containerData.set(BlockDestabilizerBlockEntity.RESET_LAZY_INDEX, 0)
-    }
+	private fun resetLazyShape() {
+		containerData.set(BlockDestabilizerBlockEntity.RESET_LAZY_INDEX, 0)
+	}
 
-    // Only called on server
-    override fun handleButtonPressed(buttonId: Int) {
-        when (buttonId) {
-            TOGGLE_LAZY_BUTTON_ID -> toggleLazy()
-            SHOW_LAZY_SHAPE_BUTTON_ID -> showLazyShape()
-            RESET_LAZY_SHAPE_BUTTON_ID -> resetLazyShape()
-        }
-    }
+	// Only called on server
+	override fun handleButtonPressed(buttonId: Int) {
+		when (buttonId) {
+			TOGGLE_LAZY_BUTTON_ID -> toggleLazy()
+			SHOW_LAZY_SHAPE_BUTTON_ID -> showLazyShape()
+			RESET_LAZY_SHAPE_BUTTON_ID -> resetLazyShape()
+		}
+	}
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        return ItemStack.EMPTY
-    }
+	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+		return ItemStack.EMPTY
+	}
 
-    override fun stillValid(player: Player): Boolean {
-        return true
-    }
+	override fun stillValid(player: Player): Boolean {
+		return true
+	}
 
 }

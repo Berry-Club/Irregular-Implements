@@ -23,116 +23,116 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 
 class BlockMoverItem : Item(
-    Properties()
-        .durability(99)
+	Properties()
+		.durability(99)
 ) {
 
-    // TODO: Cooldown based on how the mining time of the block?
-    override fun onItemUseFirst(stack: ItemStack, context: UseOnContext): InteractionResult {
-        val player = context.player
-        if (stack.isEmpty
-            || player == null
-            || player.isSecondaryUseActive
-        ) return InteractionResult.PASS
+	// TODO: Cooldown based on how the mining time of the block?
+	override fun onItemUseFirst(stack: ItemStack, context: UseOnContext): InteractionResult {
+		val player = context.player
+		if (stack.isEmpty
+			|| player == null
+			|| player.isSecondaryUseActive
+		) return InteractionResult.PASS
 
-        val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA)
+		val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA)
 
-        val result = if (blockDataComponent == null) tryPickUpBlock(player, stack, context) else tryPlaceBlock(player, stack, context)
+		val result = if (blockDataComponent == null) tryPickUpBlock(player, stack, context) else tryPlaceBlock(player, stack, context)
 
-        // Damage the item when placing a block
-        if (blockDataComponent != null
-            && result.indicateItemUse()
-            && !player.hasInfiniteMaterials()
-        ) {
-            stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack))
-        }
+		// Damage the item when placing a block
+		if (blockDataComponent != null
+			&& result.indicateItemUse()
+			&& !player.hasInfiniteMaterials()
+		) {
+			stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack))
+		}
 
-        return result
-    }
+		return result
+	}
 
-    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA) ?: return
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA) ?: return
 
-        var blockName = blockDataComponent.blockState.block.name
-        if (blockName.style.isEmpty) blockName = blockName.withStyle(ChatFormatting.GRAY)
+		var blockName = blockDataComponent.blockState.block.name
+		if (blockName.style.isEmpty) blockName = blockName.withStyle(ChatFormatting.GRAY)
 
-        val component = if (blockDataComponent.blockEntityNbt == null) {
-            blockName
-        } else {
-            ModLanguageProvider.Tooltips.WITH_BLOCK_ENTITY
-                .toGrayComponent(blockName)
-        }
+		val component = if (blockDataComponent.blockEntityNbt == null) {
+			blockName
+		} else {
+			ModLanguageProvider.Tooltips.WITH_BLOCK_ENTITY
+				.toGrayComponent(blockName)
+		}
 
-        tooltipComponents.add(component)
-    }
+		tooltipComponents.add(component)
+	}
 
-    companion object {
-        private var blockMoverPreventingContainerDrops = false
+	companion object {
+		private var blockMoverPreventingContainerDrops = false
 
-        fun handleEntityJoinLevel(event: EntityJoinLevelEvent) {
-            val entity = event.entity
+		fun handleEntityJoinLevel(event: EntityJoinLevelEvent) {
+			val entity = event.entity
 
-            if (blockMoverPreventingContainerDrops && entity is ItemEntity || entity is ExperienceOrb) {
-                entity.discard()
-                event.isCanceled = true
-            }
-        }
+			if (blockMoverPreventingContainerDrops && entity is ItemEntity || entity is ExperienceOrb) {
+				entity.discard()
+				event.isCanceled = true
+			}
+		}
 
-        fun tryPickUpBlock(player: Player, stack: ItemStack, context: UseOnContext): InteractionResult {
-            val level = context.level
-            val clickedPos = context.clickedPos
-            val clickedState = level.getBlockState(clickedPos)
+		fun tryPickUpBlock(player: Player, stack: ItemStack, context: UseOnContext): InteractionResult {
+			val level = context.level
+			val clickedPos = context.clickedPos
+			val clickedState = level.getBlockState(clickedPos)
 
-            if (clickedState.isAir
-                || clickedState.getDestroySpeed(level, clickedPos) == -1f
-                || clickedState.`is`(ModBlockTagsProvider.BLOCK_MOVER_BLACKLIST)
-                || !level.mayInteract(player, clickedPos)
-                || !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
-                || NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
-            ) return InteractionResult.FAIL
+			if (clickedState.isAir
+				|| clickedState.getDestroySpeed(level, clickedPos) == -1f
+				|| clickedState.`is`(ModBlockTagsProvider.BLOCK_MOVER_BLACKLIST)
+				|| !level.mayInteract(player, clickedPos)
+				|| !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
+				|| NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
+			) return InteractionResult.FAIL
 
-            val blockEntity = level.getBlockEntity(clickedPos)
+			val blockEntity = level.getBlockEntity(clickedPos)
 
-            if (level.isClientSide) return InteractionResult.PASS
+			if (level.isClientSide) return InteractionResult.PASS
 
-            val blockDataComponent = BlockDataComponent(level.registryAccess(), clickedState, blockEntity)
-            stack.set(ModDataComponents.BLOCK_DATA, blockDataComponent)
+			val blockDataComponent = BlockDataComponent(level.registryAccess(), clickedState, blockEntity)
+			stack.set(ModDataComponents.BLOCK_DATA, blockDataComponent)
 
-            this.blockMoverPreventingContainerDrops = true
-            level.setBlockAndUpdate(clickedPos, Blocks.AIR.defaultBlockState())
-            this.blockMoverPreventingContainerDrops = false
+			this.blockMoverPreventingContainerDrops = true
+			level.setBlockAndUpdate(clickedPos, Blocks.AIR.defaultBlockState())
+			this.blockMoverPreventingContainerDrops = false
 
-            val soundType = clickedState.soundType
-            level.playSound(
-                null,
-                clickedPos,
-                soundType.breakSound,
-                SoundSource.BLOCKS,
-                (soundType.volume + 1.0f) / 2.0f,
-                soundType.pitch * 0.8f
-            )
+			val soundType = clickedState.soundType
+			level.playSound(
+				null,
+				clickedPos,
+				soundType.breakSound,
+				SoundSource.BLOCKS,
+				(soundType.volume + 1.0f) / 2.0f,
+				soundType.pitch * 0.8f
+			)
 
-            return InteractionResult.SUCCESS
-        }
+			return InteractionResult.SUCCESS
+		}
 
-        fun tryPlaceBlock(player: Player, stack: ItemStack, context: UseOnContext): InteractionResult {
-            val level = context.level as? ServerLevel ?: return InteractionResult.FAIL
-            val clickedPos = context.clickedPos
-            val clickedState = level.getBlockState(clickedPos)
+		fun tryPlaceBlock(player: Player, stack: ItemStack, context: UseOnContext): InteractionResult {
+			val level = context.level as? ServerLevel ?: return InteractionResult.FAIL
+			val clickedPos = context.clickedPos
+			val clickedState = level.getBlockState(clickedPos)
 
-            val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA) ?: return InteractionResult.FAIL
+			val blockDataComponent = stack.get(ModDataComponents.BLOCK_DATA) ?: return InteractionResult.FAIL
 
-            val posToPlaceBlock = if (clickedState.canBeReplaced()) clickedPos else clickedPos.relative(context.clickedFace)
+			val posToPlaceBlock = if (clickedState.canBeReplaced()) clickedPos else clickedPos.relative(context.clickedFace)
 
-            if (!level.mayInteract(player, clickedPos)
-                || !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
-                || !blockDataComponent.tryPlace(level, posToPlaceBlock, player)
-            ) return InteractionResult.FAIL
+			if (!level.mayInteract(player, clickedPos)
+				|| !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
+				|| !blockDataComponent.tryPlace(level, posToPlaceBlock, player)
+			) return InteractionResult.FAIL
 
-            stack.remove(ModDataComponents.BLOCK_DATA)
+			stack.remove(ModDataComponents.BLOCK_DATA)
 
-            return InteractionResult.SUCCESS
-        }
-    }
+			return InteractionResult.SUCCESS
+		}
+	}
 
 }

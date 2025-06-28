@@ -11,36 +11,36 @@ import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
 class EnderBucketBEWLR : BlockEntityWithoutLevelRenderer(
-    Minecraft.getInstance().blockEntityRenderDispatcher,
-    Minecraft.getInstance().entityModels
+	Minecraft.getInstance().blockEntityRenderDispatcher,
+	Minecraft.getInstance().entityModels
 ) {
 
-    companion object {
-        val clientItemExtensions = object : IClientItemExtensions {
-            val BEWLR = EnderBucketBEWLR()
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = EnderBucketBEWLR()
 
-            override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-                return BEWLR
-            }
-        }
-    }
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
+	}
 
-    override fun renderByItem(
-        stack: ItemStack,
-        displayContext: ItemDisplayContext,
-        poseStack: PoseStack,
-        buffer: MultiBufferSource,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
+	override fun renderByItem(
+		stack: ItemStack,
+		displayContext: ItemDisplayContext,
+		poseStack: PoseStack,
+		buffer: MultiBufferSource,
+		packedLight: Int,
+		packedOverlay: Int
+	) {
 
-        val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)
+		val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)
 
-        if (fluidContent != null) {
-            val fluid = fluidContent.fluid
-            val sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-        }
+		if (fluidContent != null) {
+			val fluid = fluidContent.fluid
+			val sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+		}
 
-    }
+	}
 
 }

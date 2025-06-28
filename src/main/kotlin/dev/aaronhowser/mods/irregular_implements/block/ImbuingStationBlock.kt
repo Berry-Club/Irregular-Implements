@@ -18,21 +18,21 @@ import net.minecraft.world.phys.BlockHitResult
 
 class ImbuingStationBlock : Block(Properties.ofFullCopy(Blocks.TERRACOTTA)), EntityBlock {
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        val blockEntity = level.getBlockEntity(pos)
-        if (blockEntity is ImbuingStationBlockEntity) {
-            player.openMenu(blockEntity)
-        }
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		val blockEntity = level.getBlockEntity(pos)
+		if (blockEntity is ImbuingStationBlockEntity) {
+			player.openMenu(blockEntity)
+		}
 
-        return InteractionResult.CONSUME
-    }
+		return InteractionResult.CONSUME
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return ImbuingStationBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return ImbuingStationBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IMBUING_STATION.get(), ImbuingStationBlockEntity::tick)
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IMBUING_STATION.get(), ImbuingStationBlockEntity::tick)
+	}
 
 }

@@ -10,16 +10,16 @@ import java.util.function.Supplier
 
 object ModAttachmentTypes {
 
-    val ATTACHMENT_TYPES_REGISTRY: DeferredRegister<AttachmentType<*>> =
-        DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, IrregularImplements.ID)
+	val ATTACHMENT_TYPES_REGISTRY: DeferredRegister<AttachmentType<*>> =
+		DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, IrregularImplements.ID)
 
-    val DEATH_KEPT_ITEMS: DeferredHolder<AttachmentType<*>, AttachmentType<DeathKeptItems>> =
-        ATTACHMENT_TYPES_REGISTRY.register("kept_inventory", Supplier {
-            AttachmentType
-                .builder(::DeathKeptItems)
-                .serialize(DeathKeptItems.CODEC)
-                .copyOnDeath()
-                .build()
-        })
+	val DEATH_KEPT_ITEMS: DeferredHolder<AttachmentType<*>, AttachmentType<DeathKeptItems>> =
+		ATTACHMENT_TYPES_REGISTRY.register("kept_inventory", Supplier {
+			AttachmentType
+				.builder(::DeathKeptItems)
+				.serialize(DeathKeptItems.CODEC)
+				.copyOnDeath()
+				.build()
+		})
 
 }

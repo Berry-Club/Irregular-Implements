@@ -17,45 +17,45 @@ import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
 class LocationFilterItem : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ) {
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val usedStack = context.itemInHand
-        usedStack.set(
-            ModDataComponents.LOCATION,
-            LocationDataComponent(context.level, context.clickedPos)
-        )
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val usedStack = context.itemInHand
+		usedStack.set(
+			ModDataComponents.LOCATION,
+			LocationDataComponent(context.level, context.clickedPos)
+		)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
 
-        if (level.isClientSide || !player.isSecondaryUseActive) return InteractionResultHolder.pass(usedStack)
+		if (level.isClientSide || !player.isSecondaryUseActive) return InteractionResultHolder.pass(usedStack)
 
-        usedStack.remove(ModDataComponents.LOCATION)
+		usedStack.remove(ModDataComponents.LOCATION)
 
-        return InteractionResultHolder.success(usedStack)
-    }
+		return InteractionResultHolder.success(usedStack)
+	}
 
-    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val location = stack.get(ModDataComponents.LOCATION)
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val location = stack.get(ModDataComponents.LOCATION)
 
-        if (location != null) {
-            val x = location.blockPos.x
-            val y = location.blockPos.y
-            val z = location.blockPos.z
+		if (location != null) {
+			val x = location.blockPos.x
+			val y = location.blockPos.y
+			val z = location.blockPos.z
 
-            val dimensionComponent = OtherUtil.getDimensionComponent(location.dimension)
+			val dimensionComponent = OtherUtil.getDimensionComponent(location.dimension)
 
-            val component = ModLanguageProvider.Tooltips.LOCATION_COMPONENT
-                .toGrayComponent(dimensionComponent, x, y, z)
+			val component = ModLanguageProvider.Tooltips.LOCATION_COMPONENT
+				.toGrayComponent(dimensionComponent, x, y, z)
 
-            tooltipComponents.add(component)
-        }
-    }
+			tooltipComponents.add(component)
+		}
+	}
 
 }

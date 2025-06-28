@@ -8,33 +8,33 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 
 class SpectreEnergyInjectorBlockEntityRenderer(
-    val context: BlockEntityRendererProvider.Context
+	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<SpectreEnergyInjectorBlockEntity> {
 
-    override fun render(
-        blockEntity: SpectreEnergyInjectorBlockEntity,
-        partialTick: Float,
-        poseStack: PoseStack,
-        bufferSource: MultiBufferSource,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        val time = ((blockEntity.level?.gameTime ?: 0) + partialTick) / 200f
+	override fun render(
+		blockEntity: SpectreEnergyInjectorBlockEntity,
+		partialTick: Float,
+		poseStack: PoseStack,
+		bufferSource: MultiBufferSource,
+		packedLight: Int,
+		packedOverlay: Int
+	) {
+		val time = ((blockEntity.level?.gameTime ?: 0) + partialTick) / 200f
 
-        poseStack.pushPose()
-        poseStack.translate(0.5f, 0.6f, 0.5f)
+		poseStack.pushPose()
+		poseStack.translate(0.5f, 0.6f, 0.5f)
 
-        RenderUtils.renderRaysDoubleLayer(
-            poseStack = poseStack,
-            time = time,
-            bufferSource = bufferSource
-        )
+		RenderUtils.renderRaysDoubleLayer(
+			poseStack = poseStack,
+			time = time,
+			bufferSource = bufferSource
+		)
 
-        poseStack.popPose()
-    }
+		poseStack.popPose()
+	}
 
-    override fun shouldRenderOffScreen(blockEntity: SpectreEnergyInjectorBlockEntity): Boolean {
-        return true
-    }
+	override fun shouldRenderOffScreen(blockEntity: SpectreEnergyInjectorBlockEntity): Boolean {
+		return true
+	}
 
 }

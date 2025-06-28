@@ -17,64 +17,64 @@ import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
 class SpectreLensBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.SPECTRE_LENS.get(), pPos, pBlockState) {
 
-    companion object {
-        const val OWNER_UUID_NBT = "OwnerUuid"
+	companion object {
+		const val OWNER_UUID_NBT = "OwnerUuid"
 
-        @JvmStatic
-        fun applyEffects(
-            level: Level,
-            pos: BlockPos,
-            beaconLevel: Int,
-            primaryEffect: Holder<MobEffect>?,
-            secondaryEffect: Holder<MobEffect>?
-        ) {
-            if (level.isClientSide || primaryEffect == null) return
+		@JvmStatic
+		fun applyEffects(
+			level: Level,
+			pos: BlockPos,
+			beaconLevel: Int,
+			primaryEffect: Holder<MobEffect>?,
+			secondaryEffect: Holder<MobEffect>?
+		) {
+			if (level.isClientSide || primaryEffect == null) return
 
-            val blockEntity = level.getBlockEntity(pos.above()) as? SpectreLensBlockEntity ?: return
-            val owner = blockEntity.owner ?: return
-            val player = level.getPlayerByUUID(owner) ?: return
+			val blockEntity = level.getBlockEntity(pos.above()) as? SpectreLensBlockEntity ?: return
+			val owner = blockEntity.owner ?: return
+			val player = level.getPlayerByUUID(owner) ?: return
 
-            val sameEffect = secondaryEffect != null && primaryEffect == secondaryEffect
+			val sameEffect = secondaryEffect != null && primaryEffect == secondaryEffect
 
-            val amplifier = if (beaconLevel >= 4 && sameEffect) 1 else 0
-            val duration = (9 + beaconLevel * 2) * 20
+			val amplifier = if (beaconLevel >= 4 && sameEffect) 1 else 0
+			val duration = (9 + beaconLevel * 2) * 20
 
-            val primaryEffectInstance = MobEffectInstance(primaryEffect, duration, amplifier, true, true)
-            player.addEffect(primaryEffectInstance)
+			val primaryEffectInstance = MobEffectInstance(primaryEffect, duration, amplifier, true, true)
+			player.addEffect(primaryEffectInstance)
 
-            if (beaconLevel >= 4 && secondaryEffect != null && !sameEffect) {
-                val secondaryEffectInstance = MobEffectInstance(secondaryEffect, duration, 0, true, true)
-                player.addEffect(secondaryEffectInstance)
-            }
-        }
-    }
+			if (beaconLevel >= 4 && secondaryEffect != null && !sameEffect) {
+				val secondaryEffectInstance = MobEffectInstance(secondaryEffect, duration, 0, true, true)
+				player.addEffect(secondaryEffectInstance)
+			}
+		}
+	}
 
-    var owner: UUID? = null
-        set(value) {
-            field = value
-            setChanged()
-        }
+	var owner: UUID? = null
+		set(value) {
+			field = value
+			setChanged()
+		}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        if (owner != null) {
-            tag.putUUID(OWNER_UUID_NBT, owner!!)
-        }
-    }
+		if (owner != null) {
+			tag.putUUID(OWNER_UUID_NBT, owner!!)
+		}
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        owner = tag.getUuidOrNull(OWNER_UUID_NBT)
-    }
+		owner = tag.getUuidOrNull(OWNER_UUID_NBT)
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

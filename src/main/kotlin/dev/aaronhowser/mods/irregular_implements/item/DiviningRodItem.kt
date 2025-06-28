@@ -20,129 +20,129 @@ import net.neoforged.neoforge.common.Tags
 import kotlin.jvm.optionals.getOrNull
 
 class DiviningRodItem : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ) {
 
-    companion object {
+	companion object {
 
-        fun getRodForItemTag(itemTag: TagKey<Item>): ItemStack {
-            val blockTag = TagKey.create(Registries.BLOCK, itemTag.location)
-            return getRodForBlockTag(blockTag)
-        }
+		fun getRodForItemTag(itemTag: TagKey<Item>): ItemStack {
+			val blockTag = TagKey.create(Registries.BLOCK, itemTag.location)
+			return getRodForBlockTag(blockTag)
+		}
 
-        fun getRodForBlockTag(blockTag: TagKey<Block>): ItemStack {
-            val stack = ModItems.DIVINING_ROD.toStack()
+		fun getRodForBlockTag(blockTag: TagKey<Block>): ItemStack {
+			val stack = ModItems.DIVINING_ROD.toStack()
 
-            stack.set(ModDataComponents.BLOCK_TAG, blockTag)
+			stack.set(ModDataComponents.BLOCK_TAG, blockTag)
 
-            return stack
-        }
+			return stack
+		}
 
-        fun getAllOreRods(): List<ItemStack> {
-            return getAllOreTags().map { getRodForBlockTag(it) }
-        }
+		fun getAllOreRods(): List<ItemStack> {
+			return getAllOreTags().map { getRodForBlockTag(it) }
+		}
 
-        fun getAllOreTags(): Set<TagKey<Block>> {
-            val oresTagKey = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores"))
-            val ores = BuiltInRegistries.BLOCK.getTag(oresTagKey).getOrNull() ?: return emptySet()
+		fun getAllOreTags(): Set<TagKey<Block>> {
+			val oresTagKey = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores"))
+			val ores = BuiltInRegistries.BLOCK.getTag(oresTagKey).getOrNull() ?: return emptySet()
 
-            val oreTags = mutableSetOf(oresTagKey)
+			val oreTags = mutableSetOf(oresTagKey)
 
-            for (ore in ores) {
-                for (tag in ore.tags()) {
-                    if (tag.location.namespace == "c" && tag.location.path.startsWith("ores/")) {
-                        oreTags.add(tag)
-                    }
-                }
-            }
+			for (ore in ores) {
+				for (tag in ore.tags()) {
+					if (tag.location.namespace == "c" && tag.location.path.startsWith("ores/")) {
+						oreTags.add(tag)
+					}
+				}
+			}
 
-            return oreTags
-        }
+			return oreTags
+		}
 
-        fun getNameForBlockTag(blockTag: TagKey<Block>): Component {
-            val firstBlock = getBlockForTag(blockTag)
+		fun getNameForBlockTag(blockTag: TagKey<Block>): Component {
+			val firstBlock = getBlockForTag(blockTag)
 
-            if (firstBlock == Blocks.AIR) return Component
-                .literal(blockTag.location.toString())
-                .withStyle(ChatFormatting.RED)
-                .withStyle(ChatFormatting.STRIKETHROUGH)
+			if (firstBlock == Blocks.AIR) return Component
+				.literal(blockTag.location.toString())
+				.withStyle(ChatFormatting.RED)
+				.withStyle(ChatFormatting.STRIKETHROUGH)
 
-            return firstBlock.name
-        }
+			return firstBlock.name
+		}
 
-        private val defaultBlockForTag: HashMap<TagKey<Block>, Block> = hashMapOf()
+		private val defaultBlockForTag: HashMap<TagKey<Block>, Block> = hashMapOf()
 
-        fun getBlockForTag(blockTag: TagKey<Block>): Block {
-            return defaultBlockForTag.computeIfAbsent(blockTag) {
-                BuiltInRegistries.BLOCK
-                    .getTag(blockTag)
-                    .getOrNull()
-                    ?.firstOrNull()
-                    ?.value()
-                    ?: Blocks.AIR
-            }
-        }
+		fun getBlockForTag(blockTag: TagKey<Block>): Block {
+			return defaultBlockForTag.computeIfAbsent(blockTag) {
+				BuiltInRegistries.BLOCK
+					.getTag(blockTag)
+					.getOrNull()
+					?.firstOrNull()
+					?.value()
+					?: Blocks.AIR
+			}
+		}
 
-        private fun oreTag(name: String) = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores/$name"))
+		private fun oreTag(name: String) = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores/$name"))
 
-        private val colorsPerTag = hashMapOf(
-            Tags.Blocks.ORES_COAL to 0x141414,
-            Tags.Blocks.ORES_IRON to 0xD3B09F,
-            Tags.Blocks.ORES_GOLD to 0xF6E950,
-            Tags.Blocks.ORES_LAPIS to 0x053096,
-            Tags.Blocks.ORES_REDSTONE to 0xD30101,
-            Tags.Blocks.ORES_EMERALD to 0x00DC00,
-            Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
-            Tags.Blocks.ORES_COPPER to 0xC6522B,
-            Tags.Blocks.ORES_QUARTZ to 0xDBCEBA,
-            Tags.Blocks.ORES_NETHERITE_SCRAP to 0xB76659,
-            oreTag("tin") to 0xAF9557,
-            oreTag("osmium") to 0x416FAF,
-            oreTag("uranium") to 0x5ED323,
-            oreTag("fluorite") to 0xC462C1,
-            oreTag("lead") to 0x5786CC
-        )
+		private val colorsPerTag = hashMapOf(
+			Tags.Blocks.ORES_COAL to 0x141414,
+			Tags.Blocks.ORES_IRON to 0xD3B09F,
+			Tags.Blocks.ORES_GOLD to 0xF6E950,
+			Tags.Blocks.ORES_LAPIS to 0x053096,
+			Tags.Blocks.ORES_REDSTONE to 0xD30101,
+			Tags.Blocks.ORES_EMERALD to 0x00DC00,
+			Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
+			Tags.Blocks.ORES_COPPER to 0xC6522B,
+			Tags.Blocks.ORES_QUARTZ to 0xDBCEBA,
+			Tags.Blocks.ORES_NETHERITE_SCRAP to 0xB76659,
+			oreTag("tin") to 0xAF9557,
+			oreTag("osmium") to 0x416FAF,
+			oreTag("uranium") to 0x5ED323,
+			oreTag("fluorite") to 0xC462C1,
+			oreTag("lead") to 0x5786CC
+		)
 
-        fun getOverlayColor(blockState: BlockState): Int {
-            for ((tag, color) in colorsPerTag) {
-                if (blockState.`is`(tag)) {
-                    return (50 shl 24) or color
-                }
-            }
+		fun getOverlayColor(blockState: BlockState): Int {
+			for ((tag, color) in colorsPerTag) {
+				if (blockState.`is`(tag)) {
+					return (50 shl 24) or color
+				}
+			}
 
-            return (50 shl 24) or 0xFFFFFF
-        }
+			return (50 shl 24) or 0xFFFFFF
+		}
 
-        fun getItemColor(itemStack: ItemStack, tintIndex: Int): Int {
-            if (tintIndex != 1) return 0xFFFFFFFF.toInt()
+		fun getItemColor(itemStack: ItemStack, tintIndex: Int): Int {
+			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
 
-            val blockTag = itemStack.get(ModDataComponents.BLOCK_TAG)
+			val blockTag = itemStack.get(ModDataComponents.BLOCK_TAG)
 
-            if (blockTag != null) {
-                val rgb = colorsPerTag[blockTag] ?: 0xFFFFFF
-                return (0xFF shl 24) or rgb
-            }
+			if (blockTag != null) {
+				val rgb = colorsPerTag[blockTag] ?: 0xFFFFFF
+				return (0xFF shl 24) or rgb
+			}
 
-            return 0xFFFFFFFF.toInt()
-        }
-    }
+			return 0xFFFFFFFF.toInt()
+		}
+	}
 
-    override fun appendHoverText(
-        stack: ItemStack,
-        context: TooltipContext,
-        tooltipComponents: MutableList<Component>,
-        tooltipFlag: TooltipFlag
-    ) {
-        val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
+	override fun appendHoverText(
+		stack: ItemStack,
+		context: TooltipContext,
+		tooltipComponents: MutableList<Component>,
+		tooltipFlag: TooltipFlag
+	) {
+		val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
 
-        val component = if (blockTag == Tags.Blocks.ORES) {
-            ModLanguageProvider.Tooltips.ALL_ORES.toGrayComponent()
-        } else {
-            getNameForBlockTag(blockTag)
-        }
+		val component = if (blockTag == Tags.Blocks.ORES) {
+			ModLanguageProvider.Tooltips.ALL_ORES.toGrayComponent()
+		} else {
+			getNameForBlockTag(blockTag)
+		}
 
-        tooltipComponents.add(component)
-    }
+		tooltipComponents.add(component)
+	}
 
 }

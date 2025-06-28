@@ -15,40 +15,40 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty
 
 class ShockAbsorberBlock : Block(Properties.of()) {
 
-    companion object {
-        val POWER: IntegerProperty = BlockStateProperties.POWER
-    }
+	companion object {
+		val POWER: IntegerProperty = BlockStateProperties.POWER
+	}
 
-    init {
-        registerDefaultState(
-            defaultBlockState()
-                .setValue(POWER, 0)
-        )
-    }
+	init {
+		registerDefaultState(
+			defaultBlockState()
+				.setValue(POWER, 0)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(POWER)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(POWER)
+	}
 
-    override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
-        val currentPower = state.getValue(POWER)
-        val newPower = fallDistance.toInt().coerceIn(0, 15)
-        if (currentPower >= newPower) return
+	override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
+		val currentPower = state.getValue(POWER)
+		val newPower = fallDistance.toInt().coerceIn(0, 15)
+		if (currentPower >= newPower) return
 
-        level.scheduleTick(pos, this, 20)
-        level.setBlockAndUpdate(pos, state.setValue(POWER, newPower))
-    }
+		level.scheduleTick(pos, this, 20)
+		level.setBlockAndUpdate(pos, state.setValue(POWER, newPower))
+	}
 
-    override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-        level.setBlockAndUpdate(pos, state.setValue(POWER, 0))
-    }
+	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
+		level.setBlockAndUpdate(pos, state.setValue(POWER, 0))
+	}
 
-    override fun isSignalSource(state: BlockState): Boolean {
-        return true
-    }
+	override fun isSignalSource(state: BlockState): Boolean {
+		return true
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return state.getValue(POWER)
-    }
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return state.getValue(POWER)
+	}
 
 }

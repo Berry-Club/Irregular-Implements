@@ -26,169 +26,169 @@ import java.util.*
 
 object ModDataComponents {
 
-    val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
-        DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.ID)
+	val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
+		DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.ID)
 
-    val LOCATION: DeferredHolder<DataComponentType<*>, DataComponentType<LocationDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("location") {
-            it
-                .persistent(LocationDataComponent.CODEC)
-                .networkSynchronized(LocationDataComponent.STREAM_CODEC)
-        }
+	val LOCATION: DeferredHolder<DataComponentType<*>, DataComponentType<LocationDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("location") {
+			it
+				.persistent(LocationDataComponent.CODEC)
+				.networkSynchronized(LocationDataComponent.STREAM_CODEC)
+		}
 
-    val ENTITY_TYPE: DeferredHolder<DataComponentType<*>, DataComponentType<EntityType<*>>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("entity_type") {
-            it
-                .persistent(BuiltInRegistries.ENTITY_TYPE.byNameCodec())
-                .networkSynchronized(ByteBufCodecs.registry(Registries.ENTITY_TYPE))
-        }
+	val ENTITY_TYPE: DeferredHolder<DataComponentType<*>, DataComponentType<EntityType<*>>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("entity_type") {
+			it
+				.persistent(BuiltInRegistries.ENTITY_TYPE.byNameCodec())
+				.networkSynchronized(ByteBufCodecs.registry(Registries.ENTITY_TYPE))
+		}
 
-    val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("uuid") { builder ->
-            builder
-                .persistent(SpecificEntityDataComponent.UUID_CODEC)
-                .networkSynchronized(SpecificEntityDataComponent.UUID_STREAM_CODEC)
-        }
+	val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("uuid") { builder ->
+			builder
+				.persistent(SpecificEntityDataComponent.UUID_CODEC)
+				.networkSynchronized(SpecificEntityDataComponent.UUID_STREAM_CODEC)
+		}
 
-    val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("biome") {
-            it
-                .persistent(Biome.CODEC)
-                .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.BIOME))
-        }
+	val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("biome") {
+			it
+				.persistent(Biome.CODEC)
+				.networkSynchronized(ByteBufCodecs.holderRegistry(Registries.BIOME))
+		}
 
-    val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("player") {
-            it
-                .persistent(SpecificEntityDataComponent.CODEC)
-                .networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
-        }
+	val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("player") {
+			it
+				.persistent(SpecificEntityDataComponent.CODEC)
+				.networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
+		}
 
-    val ENTITY_IDENTIFIER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("entity_identifier") {
-            it
-                .persistent(SpecificEntityDataComponent.CODEC)
-                .networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
-        }
+	val ENTITY_IDENTIFIER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("entity_identifier") {
+			it
+				.persistent(SpecificEntityDataComponent.CODEC)
+				.networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
+		}
 
-    val ENTITY_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<List<CustomData>>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("entity_list") {
-            it
-                .persistent(CustomData.CODEC_WITH_ID.listOf())
-                .networkSynchronized(CustomData.STREAM_CODEC.apply(ByteBufCodecs.list()))
-        }
+	val ENTITY_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<List<CustomData>>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("entity_list") {
+			it
+				.persistent(CustomData.CODEC_WITH_ID.listOf())
+				.networkSynchronized(CustomData.STREAM_CODEC.apply(ByteBufCodecs.list()))
+		}
 
-    val FLUID_TAGS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("fluid_tags") {
-            it
-                .persistent(
-                    TagKey.codec(Registries.FLUID)
-                        .listOf()
-                )
-                .networkSynchronized(
-                    OtherUtil.tagKeyStreamCodec(Registries.FLUID)
-                        .apply(ByteBufCodecs.list())
-                )
-        }
+	val FLUID_TAGS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("fluid_tags") {
+			it
+				.persistent(
+					TagKey.codec(Registries.FLUID)
+						.listOf()
+				)
+				.networkSynchronized(
+					OtherUtil.tagKeyStreamCodec(Registries.FLUID)
+						.apply(ByteBufCodecs.list())
+				)
+		}
 
-    @JvmField
-    val LUBRICATED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("lubricated") {
-            it
-                .persistent(Unit.CODEC)
-                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
-        }
+	@JvmField
+	val LUBRICATED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("lubricated") {
+			it
+				.persistent(Unit.CODEC)
+				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+		}
 
-    val DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("duration") {
-            it
-                .persistent(Codec.INT)
-                .networkSynchronized(ByteBufCodecs.VAR_INT)
-        }
+	val DURATION: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("duration") {
+			it
+				.persistent(Codec.INT)
+				.networkSynchronized(ByteBufCodecs.VAR_INT)
+		}
 
-    val BIOME_POINTS: DeferredHolder<DataComponentType<*>, DataComponentType<BiomePointsDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("biome_points") {
-            it
-                .persistent(BiomePointsDataComponent.CODEC)
-                .networkSynchronized(BiomePointsDataComponent.STREAM_CODEC)
-        }
+	val BIOME_POINTS: DeferredHolder<DataComponentType<*>, DataComponentType<BiomePointsDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("biome_points") {
+			it
+				.persistent(BiomePointsDataComponent.CODEC)
+				.networkSynchronized(BiomePointsDataComponent.STREAM_CODEC)
+		}
 
-    val BLOCK_DATA: DeferredHolder<DataComponentType<*>, DataComponentType<BlockDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("block_data") {
-            it
-                .persistent(BlockDataComponent.CODEC)
-                .networkSynchronized(BlockDataComponent.STREAM_CODEC)
-        }
+	val BLOCK_DATA: DeferredHolder<DataComponentType<*>, DataComponentType<BlockDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("block_data") {
+			it
+				.persistent(BlockDataComponent.CODEC)
+				.networkSynchronized(BlockDataComponent.STREAM_CODEC)
+		}
 
-    val CHARGE: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("charge") {
-            it
-                .persistent(Codec.INT)
-                .networkSynchronized(ByteBufCodecs.VAR_INT)
-        }
+	val CHARGE: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("charge") {
+			it
+				.persistent(Codec.INT)
+				.networkSynchronized(ByteBufCodecs.VAR_INT)
+		}
 
-    val COOLDOWN: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("cooldown") {
-            it
-                .persistent(Codec.INT)
-                .networkSynchronized(ByteBufCodecs.VAR_INT)
-        }
+	val COOLDOWN: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("cooldown") {
+			it
+				.persistent(Codec.INT)
+				.networkSynchronized(ByteBufCodecs.VAR_INT)
+		}
 
-    val IS_ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("is_enabled") {
-            it
-                .persistent(Unit.CODEC)
-                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
-        }
+	val IS_ENABLED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("is_enabled") {
+			it
+				.persistent(Unit.CODEC)
+				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+		}
 
-    val IS_INVERTED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("is_inverted") {
-            it
-                .persistent(Unit.CODEC)
-                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
-        }
+	val IS_INVERTED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("is_inverted") {
+			it
+				.persistent(Unit.CODEC)
+				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+		}
 
-    val BLOCK_TAG: DeferredHolder<DataComponentType<*>, DataComponentType<TagKey<Block>>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("block_tag") {
-            it
-                .persistent(TagKey.codec(Registries.BLOCK))
-                .networkSynchronized(OtherUtil.tagKeyStreamCodec(Registries.BLOCK))
-        }
+	val BLOCK_TAG: DeferredHolder<DataComponentType<*>, DataComponentType<TagKey<Block>>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("block_tag") {
+			it
+				.persistent(TagKey.codec(Registries.BLOCK))
+				.networkSynchronized(OtherUtil.tagKeyStreamCodec(Registries.BLOCK))
+		}
 
-    val IS_ANCHORED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("is_anchored") {
-            it
-                .persistent(Unit.CODEC)
-                .networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
-        }
+	val IS_ANCHORED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("is_anchored") {
+			it
+				.persistent(Unit.CODEC)
+				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+		}
 
-    val SIMPLE_FLUID_CONTENT: DeferredHolder<DataComponentType<*>, DataComponentType<SimpleFluidContent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("simple_fluid_content") {
-            it
-                .persistent(SimpleFluidContent.CODEC)
-                .networkSynchronized(SimpleFluidContent.STREAM_CODEC)
-        }
+	val SIMPLE_FLUID_CONTENT: DeferredHolder<DataComponentType<*>, DataComponentType<SimpleFluidContent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("simple_fluid_content") {
+			it
+				.persistent(SimpleFluidContent.CODEC)
+				.networkSynchronized(SimpleFluidContent.STREAM_CODEC)
+		}
 
-    val BLOCK: DeferredHolder<DataComponentType<*>, DataComponentType<Block>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("block") {
-            it
-                .persistent(BuiltInRegistries.BLOCK.byNameCodec())
-                .networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
-        }
+	val BLOCK: DeferredHolder<DataComponentType<*>, DataComponentType<Block>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("block") {
+			it
+				.persistent(BuiltInRegistries.BLOCK.byNameCodec())
+				.networkSynchronized(ByteBufCodecs.registry(Registries.BLOCK))
+		}
 
-    val ITEM_FILTER_ENTRIES: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterDataComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("item_filter") {
-            it
-                .persistent(ItemFilterDataComponent.CODEC)
-                .networkSynchronized(ItemFilterDataComponent.STREAM_CODEC)
-        }
+	val ITEM_FILTER_ENTRIES: DeferredHolder<DataComponentType<*>, DataComponentType<ItemFilterDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("item_filter") {
+			it
+				.persistent(ItemFilterDataComponent.CODEC)
+				.networkSynchronized(ItemFilterDataComponent.STREAM_CODEC)
+		}
 
-    val WEATHER: DeferredHolder<DataComponentType<*>, DataComponentType<WeatherEggItem.Weather>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("weather") {
-            val codec = StringRepresentable.fromEnum(WeatherEggItem.Weather::values)
-            it
-                .persistent(codec)
-                .networkSynchronized(ByteBufCodecs.fromCodec(codec))
-        }
+	val WEATHER: DeferredHolder<DataComponentType<*>, DataComponentType<WeatherEggItem.Weather>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("weather") {
+			val codec = StringRepresentable.fromEnum(WeatherEggItem.Weather::values)
+			it
+				.persistent(codec)
+				.networkSynchronized(ByteBufCodecs.fromCodec(codec))
+		}
 
 }

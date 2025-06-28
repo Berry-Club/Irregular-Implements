@@ -23,83 +23,83 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class OnlineDetectorBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
-    companion object {
+	companion object {
 
-        fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
-            if (level !is ServerLevel || level.gameTime % 20 != 0L) return
+		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
+			if (level !is ServerLevel || level.gameTime % 20 != 0L) return
 
-            checkPlayerOnline(level, pos, state, blockEntity)
-        }
+			checkPlayerOnline(level, pos, state, blockEntity)
+		}
 
-        private fun checkPlayerOnline(level: ServerLevel, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
-            val username = blockEntity.username
-            val playerOnline = level.server.playerList.getPlayerByName(username) != null
+		private fun checkPlayerOnline(level: ServerLevel, pos: BlockPos, state: BlockState, blockEntity: OnlineDetectorBlockEntity) {
+			val username = blockEntity.username
+			val playerOnline = level.server.playerList.getPlayerByName(username) != null
 
-            if (playerOnline != state.getValue(OnlineDetectorBlock.ENABLED)) {
-                level.setBlockAndUpdate(
-                    pos,
-                    state.setValue(OnlineDetectorBlock.ENABLED, playerOnline)
-                )
-            }
-        }
+			if (playerOnline != state.getValue(OnlineDetectorBlock.ENABLED)) {
+				level.setBlockAndUpdate(
+					pos,
+					state.setValue(OnlineDetectorBlock.ENABLED, playerOnline)
+				)
+			}
+		}
 
-        const val USERNAME_NBT = "Username"
-    }
+		const val USERNAME_NBT = "Username"
+	}
 
-    var username: String = ""
-        set(value) {
-            field = value
-            setChanged()
+	var username: String = ""
+		set(value) {
+			field = value
+			setChanged()
 
-            if (this.level is ServerLevel) {
-                checkPlayerOnline(
-                    this.level as ServerLevel,
-                    this.blockPos,
-                    this.blockState,
-                    this
-                )
-            }
+			if (this.level is ServerLevel) {
+				checkPlayerOnline(
+					this.level as ServerLevel,
+					this.blockPos,
+					this.blockState,
+					this
+				)
+			}
 
-            sendStringUpdate()
-        }
+			sendStringUpdate()
+		}
 
-    fun sendStringUpdate() {
-        val level = this.level as? ServerLevel ?: return
+	fun sendStringUpdate() {
+		val level = this.level as? ServerLevel ?: return
 
-        ModPacketHandler.messageNearbyPlayers(
-            UpdateClientScreenString(OnlineDetectorMenu.USERNAME_STRING_ID, this.username),
-            level,
-            this.blockPos.center,
-            16.0
-        )
-    }
+		ModPacketHandler.messageNearbyPlayers(
+			UpdateClientScreenString(OnlineDetectorMenu.USERNAME_STRING_ID, this.username),
+			level,
+			this.blockPos.center,
+			16.0
+		)
+	}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        tag.putString(USERNAME_NBT, this.username)
-    }
+		tag.putString(USERNAME_NBT, this.username)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        this.username = tag.getString(USERNAME_NBT)
-    }
+		this.username = tag.getString(USERNAME_NBT)
+	}
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return OnlineDetectorMenu(containerId, ContainerLevelAccess.create(level!!, blockPos))
-    }
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return OnlineDetectorMenu(containerId, ContainerLevelAccess.create(level!!, blockPos))
+	}
 
-    override fun getDisplayName(): Component {
-        return this.blockState.block.name
-    }
+	override fun getDisplayName(): Component {
+		return this.blockState.block.name
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

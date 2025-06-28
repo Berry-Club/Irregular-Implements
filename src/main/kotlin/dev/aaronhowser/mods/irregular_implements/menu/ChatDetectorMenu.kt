@@ -14,61 +14,61 @@ import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 
 class ChatDetectorMenu(
-    containerId: Int,
-    private val containerData: ContainerData,
-    private val containerLevelAccess: ContainerLevelAccess
+	containerId: Int,
+	private val containerData: ContainerData,
+	private val containerLevelAccess: ContainerLevelAccess
 ) : AbstractContainerMenu(ModMenuTypes.CHAT_DETECTOR.get(), containerId), MenuWithButtons, MenuWithStrings {
 
-    constructor(containerId: Int, playerInventory: Inventory) :
-            this(
-                containerId,
-                SimpleContainerData(ChatDetectorBlockEntity.CONTAINER_DATA_SIZE),
-                ContainerLevelAccess.NULL
-            )
+	constructor(containerId: Int, playerInventory: Inventory) :
+			this(
+				containerId,
+				SimpleContainerData(ChatDetectorBlockEntity.CONTAINER_DATA_SIZE),
+				ContainerLevelAccess.NULL
+			)
 
-    init {
-        this.addDataSlots(containerData)
-    }
+	init {
+		this.addDataSlots(containerData)
+	}
 
-    companion object {
-        const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
+	companion object {
+		const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
 
-        const val REGEX_STRING_ID = 0
-    }
+		const val REGEX_STRING_ID = 0
+	}
 
-    var shouldMessageStop: Boolean
-        get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
-        set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
+	var shouldMessageStop: Boolean
+		get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
+		set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
 
-    override fun handleButtonPressed(buttonId: Int) {
-        when (buttonId) {
-            TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
-        }
-    }
+	override fun handleButtonPressed(buttonId: Int) {
+		when (buttonId) {
+			TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
+		}
+	}
 
-    override fun receiveString(stringId: Int, string: String) {
-        if (stringId == REGEX_STRING_ID) setRegex(string)
-    }
+	override fun receiveString(stringId: Int, string: String) {
+		if (stringId == REGEX_STRING_ID) setRegex(string)
+	}
 
-    private var currentRegexString: String = ""
-    fun setRegex(regexString: String): Boolean {
-        if (regexString == this.currentRegexString) return false
-        this.currentRegexString = regexString
+	private var currentRegexString: String = ""
+	fun setRegex(regexString: String): Boolean {
+		if (regexString == this.currentRegexString) return false
+		this.currentRegexString = regexString
 
-        this.containerLevelAccess.execute { level, pos ->
-            val blockEntity = level.getBlockEntity(pos) as? ChatDetectorBlockEntity
-            blockEntity?.regexString = regexString
-        }
+		this.containerLevelAccess.execute { level, pos ->
+			val blockEntity = level.getBlockEntity(pos) as? ChatDetectorBlockEntity
+			blockEntity?.regexString = regexString
+		}
 
-        return true
-    }
+		return true
+	}
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        return ItemStack.EMPTY
-    }
+	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+		return ItemStack.EMPTY
+	}
 
-    override fun stillValid(player: Player): Boolean {
-        return stillValid(this.containerLevelAccess, player, ModBlocks.CHAT_DETECTOR.get())
-    }
+	override fun stillValid(player: Player): Boolean {
+		return stillValid(this.containerLevelAccess, player, ModBlocks.CHAT_DETECTOR.get())
+	}
 
 }

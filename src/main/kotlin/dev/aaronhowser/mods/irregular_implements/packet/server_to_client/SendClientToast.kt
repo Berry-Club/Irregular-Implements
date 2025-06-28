@@ -12,33 +12,33 @@ import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class SendClientToast(
-    val title: String,
-    val description: String,
-    val icon: ItemStack?
+	val title: String,
+	val description: String,
+	val icon: ItemStack?
 ) : IModPacket {
 
-    override fun receiveOnClient(context: IPayloadContext) {
-        context.enqueueWork {
-            val toast = NotificationToast(title, description, icon)
-            Minecraft.getInstance().toasts.addToast(toast)
-        }
-    }
+	override fun receiveOnClient(context: IPayloadContext) {
+		context.enqueueWork {
+			val toast = NotificationToast(title, description, icon)
+			Minecraft.getInstance().toasts.addToast(toast)
+		}
+	}
 
-    override fun type(): CustomPacketPayload.Type<SendClientToast> {
-        return TYPE
-    }
+	override fun type(): CustomPacketPayload.Type<SendClientToast> {
+		return TYPE
+	}
 
-    companion object {
-        val TYPE: CustomPacketPayload.Type<SendClientToast> =
-            CustomPacketPayload.Type(OtherUtil.modResource("send_client_toast"))
+	companion object {
+		val TYPE: CustomPacketPayload.Type<SendClientToast> =
+			CustomPacketPayload.Type(OtherUtil.modResource("send_client_toast"))
 
-        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SendClientToast> =
-            StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8, SendClientToast::title,
-                ByteBufCodecs.STRING_UTF8, SendClientToast::description,
-                ItemStack.OPTIONAL_STREAM_CODEC, SendClientToast::icon,
-                ::SendClientToast
-            )
-    }
+		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SendClientToast> =
+			StreamCodec.composite(
+				ByteBufCodecs.STRING_UTF8, SendClientToast::title,
+				ByteBufCodecs.STRING_UTF8, SendClientToast::description,
+				ItemStack.OPTIONAL_STREAM_CODEC, SendClientToast::icon,
+				::SendClientToast
+			)
+	}
 
 }

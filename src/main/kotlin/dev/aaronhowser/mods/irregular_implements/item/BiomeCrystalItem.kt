@@ -16,45 +16,45 @@ import net.minecraft.world.level.GrassColor
 import net.minecraft.world.level.biome.Biome
 
 class BiomeCrystalItem : Item(
-    Properties()
-        .rarity(Rarity.UNCOMMON)
+	Properties()
+		.rarity(Rarity.UNCOMMON)
 ) {
 
-    companion object {
+	companion object {
 
-        fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
-            return registries
-                .lookupOrThrow(Registries.BIOME)
-                .listElements()
-                .toList()
-                .mapNotNull { if (it.`is`(ModBiomeTagsProvider.BIOME_CRYSTAL_BLACKLIST)) null else getCrystal(it) }
-        }
+		fun getAllCrystals(registries: HolderLookup.Provider): List<ItemStack> {
+			return registries
+				.lookupOrThrow(Registries.BIOME)
+				.listElements()
+				.toList()
+				.mapNotNull { if (it.`is`(ModBiomeTagsProvider.BIOME_CRYSTAL_BLACKLIST)) null else getCrystal(it) }
+		}
 
-        fun getCrystal(biomeHolder: Holder<Biome>): ItemStack {
-            val stack = ModItems.BIOME_CRYSTAL.toStack()
-            stack.set(ModDataComponents.BIOME, biomeHolder)
-            return stack
-        }
+		fun getCrystal(biomeHolder: Holder<Biome>): ItemStack {
+			val stack = ModItems.BIOME_CRYSTAL.toStack()
+			stack.set(ModDataComponents.BIOME, biomeHolder)
+			return stack
+		}
 
-        fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
-            val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: GrassColor.getDefaultColor()
+		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
+			val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: GrassColor.getDefaultColor()
 
-            return (foliageColor or 0xFF000000.toInt())
-        }
+			return (foliageColor or 0xFF000000.toInt())
+		}
 
-    }
+	}
 
-    override fun appendHoverText(
-        stack: ItemStack,
-        context: TooltipContext,
-        tooltipComponents: MutableList<Component>,
-        tooltipFlag: TooltipFlag
-    ) {
-        val biomeHolder = stack.get(ModDataComponents.BIOME) ?: return
+	override fun appendHoverText(
+		stack: ItemStack,
+		context: TooltipContext,
+		tooltipComponents: MutableList<Component>,
+		tooltipFlag: TooltipFlag
+	) {
+		val biomeHolder = stack.get(ModDataComponents.BIOME) ?: return
 
-        val component = OtherUtil.getBiomeComponent(biomeHolder)
+		val component = OtherUtil.getBiomeComponent(biomeHolder)
 
-        tooltipComponents.add(component)
-    }
+		tooltipComponents.add(component)
+	}
 
 }

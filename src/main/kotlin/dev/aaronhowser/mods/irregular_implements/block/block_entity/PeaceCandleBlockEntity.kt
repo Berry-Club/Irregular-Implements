@@ -13,50 +13,50 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent
 
 class PeaceCandleBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.PEACE_CANDLE.get(), pPos, pBlockState) {
 
-    companion object {
-        fun chunkIsPreventingMonsterSpawns(level: LevelReader, blockPos: BlockPos): Boolean {
-            if (!level.isAreaLoaded(blockPos, 1)) return false
-            if (level !is PeaceCandleChunks) return false
+	companion object {
+		fun chunkIsPreventingMonsterSpawns(level: LevelReader, blockPos: BlockPos): Boolean {
+			if (!level.isAreaLoaded(blockPos, 1)) return false
+			if (level !is PeaceCandleChunks) return false
 
-            val chunkPos = level.getChunk(blockPos).pos.toLong()
-            return level.`irregular_implements$chunkProtectedByPeaceCandle`(chunkPos)
-        }
+			val chunkPos = level.getChunk(blockPos).pos.toLong()
+			return level.`irregular_implements$chunkProtectedByPeaceCandle`(chunkPos)
+		}
 
-        fun onSpawnPlacementCheck(event: MobSpawnEvent.SpawnPlacementCheck) {
-            if (event.spawnType != MobSpawnType.NATURAL
-                || event.result == MobSpawnEvent.SpawnPlacementCheck.Result.FAIL
-                || event.entityType.category.isFriendly
-            ) return
+		fun onSpawnPlacementCheck(event: MobSpawnEvent.SpawnPlacementCheck) {
+			if (event.spawnType != MobSpawnType.NATURAL
+				|| event.result == MobSpawnEvent.SpawnPlacementCheck.Result.FAIL
+				|| event.entityType.category.isFriendly
+			) return
 
-            if (chunkIsPreventingMonsterSpawns(event.level, event.pos)) {
-                event.result = MobSpawnEvent.SpawnPlacementCheck.Result.FAIL
-            }
-        }
+			if (chunkIsPreventingMonsterSpawns(event.level, event.pos)) {
+				event.result = MobSpawnEvent.SpawnPlacementCheck.Result.FAIL
+			}
+		}
 
-        fun tick(
-            level: Level,
-            blockPos: BlockPos,
-            blockState: BlockState,
-            blockEntity: PeaceCandleBlockEntity
-        ) {
-            if (level !is PeaceCandleChunks) return
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: PeaceCandleBlockEntity
+		) {
+			if (level !is PeaceCandleChunks) return
 
-            val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
+			val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
 
-            val checkRadius = ServerConfig.PEACE_CANDLE_CHUNK_RADIUS.get()
-            val chunkX = chunkPos.x
-            val chunkZ = chunkPos.z
+			val checkRadius = ServerConfig.PEACE_CANDLE_CHUNK_RADIUS.get()
+			val chunkX = chunkPos.x
+			val chunkZ = chunkPos.z
 
-            for (x in (chunkX - checkRadius)..(chunkX + checkRadius)) {
-                for (z in (chunkZ - checkRadius)..(chunkZ + checkRadius)) {
-                    level.`irregular_implements$addPeaceCandleChunk`(ChunkPos.asLong(x, z))
-                }
-            }
-        }
-    }
+			for (x in (chunkX - checkRadius)..(chunkX + checkRadius)) {
+				for (z in (chunkZ - checkRadius)..(chunkZ + checkRadius)) {
+					level.`irregular_implements$addPeaceCandleChunk`(ChunkPos.asLong(x, z))
+				}
+			}
+		}
+	}
 
 }

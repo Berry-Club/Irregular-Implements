@@ -30,209 +30,209 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler
 
 class EnderBucketItem : Item(Properties()) {
 
-    companion object {
+	companion object {
 
-        fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
-            if (tintIndex != 1) return 0xFFFFFFFF.toInt()
+		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
+			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
 
-            val fluid = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)?.fluid ?: return 0xFFFFFFFF.toInt()
+			val fluid = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)?.fluid ?: return 0xFFFFFFFF.toInt()
 
-            return 0xFFFFFFFF.toInt()
-        }
+			return 0xFFFFFFFF.toInt()
+		}
 
-        private fun tryFill(
-            level: Level,
-            player: Player,
-            usedStack: ItemStack,
-            blockPos: BlockPos
-        ): InteractionResultHolder<ItemStack> {
+		private fun tryFill(
+			level: Level,
+			player: Player,
+			usedStack: ItemStack,
+			blockPos: BlockPos
+		): InteractionResultHolder<ItemStack> {
 
-            val blockState = level.getBlockState(blockPos)
-            val block = blockState.block
+			val blockState = level.getBlockState(blockPos)
+			val block = blockState.block
 
-            if (block !is BucketPickup) return InteractionResultHolder.fail(usedStack)
+			if (block !is BucketPickup) return InteractionResultHolder.fail(usedStack)
 
-            val sourcePos = getNearestSource(level, blockPos, blockState.fluidState.fluidType)
-                ?: return InteractionResultHolder.fail(usedStack)
+			val sourcePos = getNearestSource(level, blockPos, blockState.fluidState.fluidType)
+				?: return InteractionResultHolder.fail(usedStack)
 
-            val sourceState = level.getBlockState(sourcePos)
-            val sourceBlock = sourceState.block as? BucketPickup
-                ?: return InteractionResultHolder.fail(usedStack)
+			val sourceState = level.getBlockState(sourcePos)
+			val sourceBlock = sourceState.block as? BucketPickup
+				?: return InteractionResultHolder.fail(usedStack)
 
-            val pickup = sourceBlock.pickupBlock(player, level, sourcePos, sourceState)
-            val pickupFluidStack = pickup.getCapability(Capabilities.FluidHandler.ITEM)
-            val fluidStack = pickupFluidStack?.drain(Int.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE)
+			val pickup = sourceBlock.pickupBlock(player, level, sourcePos, sourceState)
+			val pickupFluidStack = pickup.getCapability(Capabilities.FluidHandler.ITEM)
+			val fluidStack = pickupFluidStack?.drain(Int.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE)
 
-            if (pickup.isEmpty || fluidStack == null) return InteractionResultHolder.fail(usedStack)
+			if (pickup.isEmpty || fluidStack == null) return InteractionResultHolder.fail(usedStack)
 
-            sourceBlock.getPickupSound(sourceState).ifPresent {
-                player.playSound(it)
-            }
+			sourceBlock.getPickupSound(sourceState).ifPresent {
+				player.playSound(it)
+			}
 
-            level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
+			level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
-            val newStack = usedStack.copyWithCount(1)
-            newStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+			val newStack = usedStack.copyWithCount(1)
+			newStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
 
-            val resultStack = ItemUtils.createFilledResult(usedStack, player, newStack)
+			val resultStack = ItemUtils.createFilledResult(usedStack, player, newStack)
 
-            return InteractionResultHolder.sidedSuccess(resultStack, level.isClientSide)
-        }
+			return InteractionResultHolder.sidedSuccess(resultStack, level.isClientSide)
+		}
 
-        private fun getNearestSource(
-            level: Level,
-            blockPos: BlockPos,
-            fluidType: FluidType
-        ): BlockPos? {
+		private fun getNearestSource(
+			level: Level,
+			blockPos: BlockPos,
+			fluidType: FluidType
+		): BlockPos? {
 
-            val positionsToCheck: MutableList<BlockPos> = mutableListOf()
-            val checkedPositions: MutableList<BlockPos> = mutableListOf()
+			val positionsToCheck: MutableList<BlockPos> = mutableListOf()
+			val checkedPositions: MutableList<BlockPos> = mutableListOf()
 
-            positionsToCheck.add(blockPos)
+			positionsToCheck.add(blockPos)
 
-            while (positionsToCheck.isNotEmpty() && checkedPositions.size < 2000) {
-                val currentPos = positionsToCheck.removeAt(0)
-                checkedPositions.add(currentPos)
+			while (positionsToCheck.isNotEmpty() && checkedPositions.size < 2000) {
+				val currentPos = positionsToCheck.removeAt(0)
+				checkedPositions.add(currentPos)
 
-                if (!level.isLoaded(currentPos)) continue
+				if (!level.isLoaded(currentPos)) continue
 
-                val checkedFluidState = level.getFluidState(currentPos)
-                if (checkedFluidState.isSource && checkedFluidState.fluidType == fluidType) return currentPos
+				val checkedFluidState = level.getFluidState(currentPos)
+				if (checkedFluidState.isSource && checkedFluidState.fluidType == fluidType) return currentPos
 
-                for (direction in Direction.entries) {
-                    val nextPos = currentPos.relative(direction)
-                    if (!checkedPositions.contains(nextPos)) positionsToCheck.add(nextPos)
-                }
-            }
+				for (direction in Direction.entries) {
+					val nextPos = currentPos.relative(direction)
+					if (!checkedPositions.contains(nextPos)) positionsToCheck.add(nextPos)
+				}
+			}
 
-            return null
-        }
+			return null
+		}
 
-        private fun tryEmpty(
-            level: Level,
-            player: Player,
-            usedStack: ItemStack,
-            clickedPos: BlockPos,
-            relativePos: BlockPos,
-            blockHitResult: BlockHitResult
-        ): InteractionResultHolder<ItemStack> {
+		private fun tryEmpty(
+			level: Level,
+			player: Player,
+			usedStack: ItemStack,
+			clickedPos: BlockPos,
+			relativePos: BlockPos,
+			blockHitResult: BlockHitResult
+		): InteractionResultHolder<ItemStack> {
 
-            val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
-            val contentFluid = currentContents.fluid
+			val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+			val contentFluid = currentContents.fluid
 
-            val clickedState = level.getBlockState(clickedPos)
+			val clickedState = level.getBlockState(clickedPos)
 
-            val clickedStateCanContainFluid = (clickedState.block as? LiquidBlockContainer)
-                ?.canPlaceLiquid(player, level, clickedPos, clickedState, contentFluid)
-                .isTrue
+			val clickedStateCanContainFluid = (clickedState.block as? LiquidBlockContainer)
+				?.canPlaceLiquid(player, level, clickedPos, clickedState, contentFluid)
+				.isTrue
 
-            val posToPlace = if (clickedStateCanContainFluid) clickedPos else relativePos
+			val posToPlace = if (clickedStateCanContainFluid) clickedPos else relativePos
 
-            if (!attemptPlace(player, level, posToPlace, blockHitResult, usedStack)) return InteractionResultHolder.fail(usedStack)
+			if (!attemptPlace(player, level, posToPlace, blockHitResult, usedStack)) return InteractionResultHolder.fail(usedStack)
 
-            usedStack.remove(ModDataComponents.SIMPLE_FLUID_CONTENT)
+			usedStack.remove(ModDataComponents.SIMPLE_FLUID_CONTENT)
 
-            return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
-        }
+			return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+		}
 
-        //TL;DR BucketItem#emptyContents but kotlin
-        private fun attemptPlace(
-            player: Player,
-            level: Level,
-            blockPos: BlockPos,
-            blockHitResult: BlockHitResult?,
-            container: ItemStack
-        ): Boolean {
-            val fluidContent = container.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
-            val fluid = fluidContent.fluid
+		//TL;DR BucketItem#emptyContents but kotlin
+		private fun attemptPlace(
+			player: Player,
+			level: Level,
+			blockPos: BlockPos,
+			blockHitResult: BlockHitResult?,
+			container: ItemStack
+		): Boolean {
+			val fluidContent = container.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+			val fluid = fluidContent.fluid
 
-            if (fluid !is FlowingFluid) return false
+			if (fluid !is FlowingFluid) return false
 
-            val blockState = level.getBlockState(blockPos)
-            val block = blockState.block
-            val canBeReplaced = blockState.canBeReplaced(fluid)
+			val blockState = level.getBlockState(blockPos)
+			val block = blockState.block
+			val canBeReplaced = blockState.canBeReplaced(fluid)
 
-            val isPlaceable = if (!blockState.isAir && !canBeReplaced) {
-                (block as? LiquidBlockContainer)?.canPlaceLiquid(player, level, blockPos, blockState, fluid).isTrue
-            } else true
+			val isPlaceable = if (!blockState.isAir && !canBeReplaced) {
+				(block as? LiquidBlockContainer)?.canPlaceLiquid(player, level, blockPos, blockState, fluid).isTrue
+			} else true
 
-            if (!isPlaceable) {
-                return if (blockHitResult != null) {
-                    attemptPlace(player, level, blockPos.relative(blockHitResult.direction), null, container)
-                } else {
-                    false
-                }
-            }
+			if (!isPlaceable) {
+				return if (blockHitResult != null) {
+					attemptPlace(player, level, blockPos.relative(blockHitResult.direction), null, container)
+				} else {
+					false
+				}
+			}
 
-            val fluidStack = fluidContent.copy()
-            val fluidType = fluid.fluidType
+			val fluidStack = fluidContent.copy()
+			val fluidType = fluid.fluidType
 
-            if (fluidType.isVaporizedOnPlacement(level, blockPos, fluidStack)) {
-                fluidType.isVaporizedOnPlacement(level, blockPos, fluidStack)
-                return true
-            }
+			if (fluidType.isVaporizedOnPlacement(level, blockPos, fluidStack)) {
+				fluidType.isVaporizedOnPlacement(level, blockPos, fluidStack)
+				return true
+			}
 
-            if (block is LiquidBlockContainer && block.canPlaceLiquid(player, level, blockPos, blockState, fluid)) {
-                block.placeLiquid(level, blockPos, blockState, fluid.getSource(false))
-                playSound(fluid, player, level, blockPos)
+			if (block is LiquidBlockContainer && block.canPlaceLiquid(player, level, blockPos, blockState, fluid)) {
+				block.placeLiquid(level, blockPos, blockState, fluid.getSource(false))
+				playSound(fluid, player, level, blockPos)
 
-                return true
-            }
+				return true
+			}
 
-            if (!level.isClientSide && canBeReplaced && !blockState.liquid()) level.destroyBlock(blockPos, true)
+			if (!level.isClientSide && canBeReplaced && !blockState.liquid()) level.destroyBlock(blockPos, true)
 
-            return if (!level.setBlock(blockPos, fluid.defaultFluidState().createLegacyBlock(), 11) && !blockState.fluidState.isSource) {
-                false
-            } else {
-                playSound(fluid, player, level, blockPos)
-                true
-            }
+			return if (!level.setBlock(blockPos, fluid.defaultFluidState().createLegacyBlock(), 11) && !blockState.fluidState.isSource) {
+				false
+			} else {
+				playSound(fluid, player, level, blockPos)
+				true
+			}
 
-        }
+		}
 
-        private fun playSound(fluid: Fluid, player: Player, level: Level, blockPos: BlockPos) {
-            val soundEvent = fluid.fluidType.getSound(player, level, blockPos, SoundActions.BUCKET_EMPTY)
-                ?: if (fluid.`is`(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
+		private fun playSound(fluid: Fluid, player: Player, level: Level, blockPos: BlockPos) {
+			val soundEvent = fluid.fluidType.getSound(player, level, blockPos, SoundActions.BUCKET_EMPTY)
+				?: if (fluid.`is`(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
 
-            level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS)
-            level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos)
-        }
+			level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS)
+			level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos)
+		}
 
-    }
+	}
 
-    override fun use(
-        level: Level,
-        player: Player,
-        usedHand: InteractionHand
-    ): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
+	override fun use(
+		level: Level,
+		player: Player,
+		usedHand: InteractionHand
+	): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
 
-        val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+		val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
 
-        val blockHitResult = getPlayerPOVHitResult(
-            level,
-            player,
-            if (currentContents.isEmpty) ClipContext.Fluid.ANY else ClipContext.Fluid.NONE
-        )
+		val blockHitResult = getPlayerPOVHitResult(
+			level,
+			player,
+			if (currentContents.isEmpty) ClipContext.Fluid.ANY else ClipContext.Fluid.NONE
+		)
 
-        if (blockHitResult.type != HitResult.Type.BLOCK) return InteractionResultHolder.pass(usedStack)
+		if (blockHitResult.type != HitResult.Type.BLOCK) return InteractionResultHolder.pass(usedStack)
 
-        val clickedPos = blockHitResult.blockPos
-        val clickedFace = blockHitResult.direction
+		val clickedPos = blockHitResult.blockPos
+		val clickedFace = blockHitResult.direction
 
-        val blockPos = clickedPos.relative(clickedFace)
+		val blockPos = clickedPos.relative(clickedFace)
 
-        if (!level.mayInteract(player, clickedPos) || !player.mayUseItemAt(blockPos, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
+		if (!level.mayInteract(player, clickedPos) || !player.mayUseItemAt(blockPos, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
 
-        return if (currentContents.isEmpty) {
-            tryFill(level, player, usedStack, clickedPos)
-        } else {
-            tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
-        }
-    }
+		return if (currentContents.isEmpty) {
+			tryFill(level, player, usedStack, clickedPos)
+		} else {
+			tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
+		}
+	}
 
-    override fun getMaxStackSize(stack: ItemStack): Int {
-        return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
-    }
+	override fun getMaxStackSize(stack: ItemStack): Int {
+		return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
+	}
 
 }

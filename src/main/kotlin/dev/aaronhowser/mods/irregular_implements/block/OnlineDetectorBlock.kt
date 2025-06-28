@@ -25,66 +25,66 @@ import net.minecraft.world.phys.BlockHitResult
 
 class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISPENSER)) {
 
-    companion object {
-        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-        val HORIZONTAL_FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
-    }
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val HORIZONTAL_FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
+	}
 
-    init {
-        registerDefaultState(
-            defaultBlockState()
-                .setValue(ENABLED, false)
-                .setValue(HORIZONTAL_FACING, Direction.NORTH)
-        )
-    }
+	init {
+		registerDefaultState(
+			defaultBlockState()
+				.setValue(ENABLED, false)
+				.setValue(HORIZONTAL_FACING, Direction.NORTH)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(ENABLED, HORIZONTAL_FACING)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(ENABLED, HORIZONTAL_FACING)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(ENABLED, false)
-            .setValue(HORIZONTAL_FACING, context.horizontalDirection)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(ENABLED, false)
+			.setValue(HORIZONTAL_FACING, context.horizontalDirection)
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return OnlineDetectorBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return OnlineDetectorBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return if (level.isClientSide) {
-            null
-        } else {
-            BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.ONLINE_DETECTOR.get(), OnlineDetectorBlockEntity::tick)
-        }
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return if (level.isClientSide) {
+			null
+		} else {
+			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.ONLINE_DETECTOR.get(), OnlineDetectorBlockEntity::tick)
+		}
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 
-        if (!level.isClientSide) {
-            val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity ?: return InteractionResult.FAIL
-            player.openMenu(blockEntity)
-            blockEntity.sendStringUpdate()
-        }
+		if (!level.isClientSide) {
+			val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity ?: return InteractionResult.FAIL
+			player.openMenu(blockEntity)
+			blockEntity.sendStringUpdate()
+		}
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-        return true
-    }
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		return true
+	}
 
-    override fun isSignalSource(state: BlockState): Boolean {
-        return true
-    }
+	override fun isSignalSource(state: BlockState): Boolean {
+		return true
+	}
 
-    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return if (state.getValue(ENABLED)) 15 else 0
-    }
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(ENABLED)) 15 else 0
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return getDirectSignal(state, level, pos, direction)
-    }
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return getDirectSignal(state, level, pos, direction)
+	}
 
 }

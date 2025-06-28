@@ -21,137 +21,137 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
 
 class SpectreCoilBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.SPECTRE_COIL.get(), pPos, pBlockState) {
 
-    companion object {
-        const val OWNER_UUID_NBT = "OwnerUuid"
-        const val COIL_TYPE_NBT = "CoilType"
+	companion object {
+		const val OWNER_UUID_NBT = "OwnerUuid"
+		const val COIL_TYPE_NBT = "CoilType"
 
-        fun tick(
-            level: Level,
-            blockPos: BlockPos,
-            blockState: BlockState,
-            blockEntity: SpectreCoilBlockEntity
-        ) {
-            if (level.isClientSide) return
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: SpectreCoilBlockEntity
+		) {
+			if (level.isClientSide) return
 
-            blockEntity.tick()
-        }
-    }
+			blockEntity.tick()
+		}
+	}
 
-    constructor(pos: BlockPos, blockState: BlockState, coilType: SpectreCoilBlock.Type) : this(pos, blockState) {
-        this.coilType = coilType
-    }
+	constructor(pos: BlockPos, blockState: BlockState, coilType: SpectreCoilBlock.Type) : this(pos, blockState) {
+		this.coilType = coilType
+	}
 
-    private var coilType: SpectreCoilBlock.Type = SpectreCoilBlock.Type.BASIC
-        set(value) {
-            field = value
-            setChanged()
-        }
+	private var coilType: SpectreCoilBlock.Type = SpectreCoilBlock.Type.BASIC
+		set(value) {
+			field = value
+			setChanged()
+		}
 
-    var ownerUuid: UUID = UUID.randomUUID()
-        set(value) {
-            field = value
-            setChanged()
-        }
+	var ownerUuid: UUID = UUID.randomUUID()
+		set(value) {
+			field = value
+			setChanged()
+		}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
-        tag.putString(COIL_TYPE_NBT, this.coilType.name)
-    }
+		tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
+		tag.putString(COIL_TYPE_NBT, this.coilType.name)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
-        if (uuid != null) {
-            this.ownerUuid = uuid
-        }
+		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
+		if (uuid != null) {
+			this.ownerUuid = uuid
+		}
 
-        try {
-            val coilTypeString = tag.getString(COIL_TYPE_NBT)
-            val coilType = SpectreCoilBlock.Type.valueOf(coilTypeString)
+		try {
+			val coilTypeString = tag.getString(COIL_TYPE_NBT)
+			val coilType = SpectreCoilBlock.Type.valueOf(coilTypeString)
 
-            this.coilType = coilType
-        } catch (e: IllegalArgumentException) {
-            // Invalid coil type, default to basic
-            this.coilType = SpectreCoilBlock.Type.BASIC
+			this.coilType = coilType
+		} catch (e: IllegalArgumentException) {
+			// Invalid coil type, default to basic
+			this.coilType = SpectreCoilBlock.Type.BASIC
 
-            IrregularImplements.LOGGER.error(e)
-        }
-    }
+			IrregularImplements.LOGGER.error(e)
+		}
+	}
 
-    /**
-     * Returns a fake energy handler that can't be interacted with, but knows how much energy exists.
-     * We do this to stop other mods from pulling from this, rather than energy being pushed out of it.
-     */
-    fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
-        if (direction != blockState.getValue(SpectreCoilBlock.FACING)) return null
+	/**
+	 * Returns a fake energy handler that can't be interacted with, but knows how much energy exists.
+	 * We do this to stop other mods from pulling from this, rather than energy being pushed out of it.
+	 */
+	fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
+		if (direction != blockState.getValue(SpectreCoilBlock.FACING)) return null
 
-        val level = this.level as? ServerLevel ?: return null
-        val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
+		val level = this.level as? ServerLevel ?: return null
+		val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
 
-        return object : IEnergyStorage {
-            override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
-                return 0
-            }
+		return object : IEnergyStorage {
+			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
+				return 0
+			}
 
-            override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
-                return 0
-            }
+			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
+				return 0
+			}
 
-            override fun getEnergyStored(): Int {
-                return coil.energyStored
-            }
+			override fun getEnergyStored(): Int {
+				return coil.energyStored
+			}
 
-            override fun getMaxEnergyStored(): Int {
-                return coil.maxEnergyStored
-            }
+			override fun getMaxEnergyStored(): Int {
+				return coil.maxEnergyStored
+			}
 
-            override fun canExtract(): Boolean {
-                return false
-            }
+			override fun canExtract(): Boolean {
+				return false
+			}
 
-            override fun canReceive(): Boolean {
-                return false
-            }
-        }
-    }
+			override fun canReceive(): Boolean {
+				return false
+			}
+		}
+	}
 
-    private fun tick() {
-        val level = level as? ServerLevel ?: return
+	private fun tick() {
+		val level = level as? ServerLevel ?: return
 
-        val facing = this.blockState.getValue(SpectreCoilBlock.FACING)
-        val onBlockPos = this.blockPos.relative(facing)
+		val facing = this.blockState.getValue(SpectreCoilBlock.FACING)
+		val onBlockPos = this.blockPos.relative(facing)
 
-        val energyHandler = level.getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
+		val energyHandler = level.getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
 
-        if (energyHandler == null || !energyHandler.canReceive()) return
+		if (energyHandler == null || !energyHandler.canReceive()) return
 
-        val rate = this.coilType.amountGetter.get()
+		val rate = this.coilType.amountGetter.get()
 
-        if (this.coilType.isGenerator) {
-            energyHandler.receiveEnergy(rate, false)
-            return
-        }
+		if (this.coilType.isGenerator) {
+			energyHandler.receiveEnergy(rate, false)
+			return
+		}
 
-        val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
+		val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
 
-        val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
-        if (available <= 0) return
+		val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
+		if (available <= 0) return
 
-        val sent = energyHandler.receiveEnergy(available, false)
-        if (sent <= 0) return
+		val sent = energyHandler.receiveEnergy(available, false)
+		if (sent <= 0) return
 
-        coil.extractEnergy(sent, false)
-    }
+		coil.extractEnergy(sent, false)
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

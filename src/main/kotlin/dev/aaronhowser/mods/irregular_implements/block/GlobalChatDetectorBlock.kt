@@ -22,62 +22,62 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.BlockHitResult
 
 class GlobalChatDetectorBlock : EntityBlock, Block(
-    Properties
-        .ofFullCopy(Blocks.DISPENSER)
+	Properties
+		.ofFullCopy(Blocks.DISPENSER)
 ) {
 
-    companion object {
-        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-    }
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+	}
 
-    init {
-        registerDefaultState(
-            defaultBlockState()
-                .setValue(ENABLED, false)
-        )
-    }
+	init {
+		registerDefaultState(
+			defaultBlockState()
+				.setValue(ENABLED, false)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(ENABLED)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(ENABLED)
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return GlobalChatDetectorBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return GlobalChatDetectorBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorBlockEntity::tick)
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorBlockEntity::tick)
+	}
 
-    override fun useWithoutItem(
-        pState: BlockState,
-        pLevel: Level,
-        pPos: BlockPos,
-        pPlayer: Player,
-        pHitResult: BlockHitResult
-    ): InteractionResult {
-        val blockEntity = pLevel.getBlockEntity(pPos) as? GlobalChatDetectorBlockEntity ?: return InteractionResult.FAIL
+	override fun useWithoutItem(
+		pState: BlockState,
+		pLevel: Level,
+		pPos: BlockPos,
+		pPlayer: Player,
+		pHitResult: BlockHitResult
+	): InteractionResult {
+		val blockEntity = pLevel.getBlockEntity(pPos) as? GlobalChatDetectorBlockEntity ?: return InteractionResult.FAIL
 
-        pPlayer.openMenu(blockEntity)
-        blockEntity.sendStringUpdate()
+		pPlayer.openMenu(blockEntity)
+		blockEntity.sendStringUpdate()
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-        return true
-    }
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		return true
+	}
 
-    override fun isSignalSource(state: BlockState): Boolean {
-        return true
-    }
+	override fun isSignalSource(state: BlockState): Boolean {
+		return true
+	}
 
-    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return if (state.getValue(ENABLED)) 15 else 0
-    }
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(ENABLED)) 15 else 0
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return getDirectSignal(state, level, pos, direction)
-    }
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return getDirectSignal(state, level, pos, direction)
+	}
 
 }

@@ -16,99 +16,99 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
 //TODO: Ability to hide it as other items
 class PortkeyItem : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ) {
 
-    // ModDataComponents.ENABLED means that picking up the portkey will teleport the player to the location
+	// ModDataComponents.ENABLED means that picking up the portkey will teleport the player to the location
 
-    companion object {
-        fun pickUpPortkey(event: ItemEntityPickupEvent.Pre) {
-            if (event.canPickup().isFalse) return
+	companion object {
+		fun pickUpPortkey(event: ItemEntityPickupEvent.Pre) {
+			if (event.canPickup().isFalse) return
 
-            val itemEntity = event.itemEntity
-            val itemStack = itemEntity.item
+			val itemEntity = event.itemEntity
+			val itemStack = itemEntity.item
 
-            if (!itemStack.`is`(ModItems.PORTKEY)) return
+			if (!itemStack.`is`(ModItems.PORTKEY)) return
 
-            val locationComponent = itemStack.get(ModDataComponents.LOCATION) ?: return
-            if (!itemStack.has(ModDataComponents.IS_ENABLED)) return
+			val locationComponent = itemStack.get(ModDataComponents.LOCATION) ?: return
+			if (!itemStack.has(ModDataComponents.IS_ENABLED)) return
 
-            val player = event.player
-            val level = player.level() as? ServerLevel ?: return
+			val player = event.player
+			val level = player.level() as? ServerLevel ?: return
 
-            if (level.dimension() != locationComponent.dimension) return
+			if (level.dimension() != locationComponent.dimension) return
 
-            val teleportLocation = locationComponent.blockPos.bottomCenter
+			val teleportLocation = locationComponent.blockPos.bottomCenter
 
-            player.teleportTo(
-                teleportLocation.x,
-                teleportLocation.y,
-                teleportLocation.z,
-            )
+			player.teleportTo(
+				teleportLocation.x,
+				teleportLocation.y,
+				teleportLocation.z,
+			)
 
-            level.playSound(
-                null,
-                player.blockPosition(),
-                SoundEvents.PLAYER_TELEPORT,
-                player.soundSource,
-            )
+			level.playSound(
+				null,
+				player.blockPosition(),
+				SoundEvents.PLAYER_TELEPORT,
+				player.soundSource,
+			)
 
-            event.setCanPickup(TriState.FALSE)
-            itemEntity.discard()
-        }
-    }
+			event.setCanPickup(TriState.FALSE)
+			itemEntity.discard()
+		}
+	}
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val level = context.level
-        val clickedPos = context.clickedPos
-        val clickedFace = context.clickedFace
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val level = context.level
+		val clickedPos = context.clickedPos
+		val clickedFace = context.clickedFace
 
-        val posToTeleportTo = if (level.getBlockState(clickedPos).getCollisionShape(level, clickedPos).isEmpty) {
-            clickedPos
-        } else {
-            clickedPos.relative(clickedFace)
-        }
+		val posToTeleportTo = if (level.getBlockState(clickedPos).getCollisionShape(level, clickedPos).isEmpty) {
+			clickedPos
+		} else {
+			clickedPos.relative(clickedFace)
+		}
 
-        val usedStack = context.itemInHand
+		val usedStack = context.itemInHand
 
-        usedStack.set(
-            ModDataComponents.LOCATION,
-            LocationDataComponent(level, posToTeleportTo)
-        )
+		usedStack.set(
+			ModDataComponents.LOCATION,
+			LocationDataComponent(level, posToTeleportTo)
+		)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
 
-    override fun isFoil(stack: ItemStack): Boolean {
-        return stack.has(ModDataComponents.LOCATION) && !stack.has(ModDataComponents.IS_ENABLED)
-    }
+	override fun isFoil(stack: ItemStack): Boolean {
+		return stack.has(ModDataComponents.LOCATION) && !stack.has(ModDataComponents.IS_ENABLED)
+	}
 
-    override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-        if (entity.age == 20 * 5) {
-            stack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
+	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
+		if (entity.age == 20 * 5) {
+			stack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
 
-            entity.level().playSound(
-                null,
-                entity.blockPosition(),
-                SoundEvents.BELL_BLOCK,
-                entity.soundSource,
-                1f,
-                0.25f
-            )
+			entity.level().playSound(
+				null,
+				entity.blockPosition(),
+				SoundEvents.BELL_BLOCK,
+				entity.soundSource,
+				1f,
+				0.25f
+			)
 
-            return super.onEntityItemUpdate(stack, entity)
-        }
+			return super.onEntityItemUpdate(stack, entity)
+		}
 
-        // Reset the age, but in a way that minimizes the animation bugging out
-        if (entity.age >= 20 * 60 * 3) {
-            entity.age = 20 * 60
-        }
+		// Reset the age, but in a way that minimizes the animation bugging out
+		if (entity.age >= 20 * 60 * 3) {
+			entity.age = 20 * 60
+		}
 
-        return super.onEntityItemUpdate(stack, entity)
-    }
+		return super.onEntityItemUpdate(stack, entity)
+	}
 
-    //TODO: Tooltip
+	//TODO: Tooltip
 
 }

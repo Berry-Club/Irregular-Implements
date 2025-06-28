@@ -9,27 +9,27 @@ import net.minecraft.client.gui.GuiGraphics
 
 class BiomeSensorBlockEntity {
 
-    companion object {
-        val LAYER_NAME = OtherUtil.modResource("biome_sensor_gui_layer")
+	companion object {
+		val LAYER_NAME = OtherUtil.modResource("biome_sensor_gui_layer")
 
-        //TODO: Does this crash on servers?
-        fun tryRenderBiomeName(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-            val player = ClientUtil.localPlayer ?: return
-            if (!player.isHolding(ModItems.BIOME_SENSOR.get())) return
+		//TODO: Does this crash on servers?
+		fun tryRenderBiomeName(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
+			val player = ClientUtil.localPlayer ?: return
+			if (!player.isHolding(ModItems.BIOME_SENSOR.get())) return
 
-            val level = player.level()
-            val biome = level.getBiome(player.blockPosition())
+			val level = player.level()
+			val biome = level.getBiome(player.blockPosition())
 
-            val biomeName = OtherUtil.getBiomeComponent(biome)
+			val biomeName = OtherUtil.getBiomeComponent(biome)
 
-            guiGraphics.drawString(
-                Minecraft.getInstance().font,
-                biomeName.copy().withColor(biome.value().foliageColor),
-                guiGraphics.guiWidth() / 2 + 5,
-                guiGraphics.guiHeight() / 2 + 5,
-                0xFFFFFF
-            )
-        }
-    }
+			guiGraphics.drawString(
+				Minecraft.getInstance().font,
+				biomeName.copy().withColor(biome.value().foliageColor),
+				guiGraphics.guiWidth() / 2 + 5,
+				guiGraphics.guiHeight() / 2 + 5,
+				0xFFFFFF
+			)
+		}
+	}
 
 }

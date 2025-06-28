@@ -18,43 +18,43 @@ import java.util.function.Supplier
 
 object ModCreativeModeTabs {
 
-    val TABS_REGISTRY: DeferredRegister<CreativeModeTab> =
-        DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, IrregularImplements.ID)
+	val TABS_REGISTRY: DeferredRegister<CreativeModeTab> =
+		DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, IrregularImplements.ID)
 
-    val MOD_TAB: DeferredHolder<CreativeModeTab, CreativeModeTab> = TABS_REGISTRY.register("creative_tab", Supplier {
-        CreativeModeTab.builder()
-            .title(ModLanguageProvider.Items.CREATIVE_TAB.toComponent())
-            .icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
-            .displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
-                val itemsToSkip = setOf(
-                    ModItems.BIOME_CRYSTAL.get(),
-                    ModItems.WHITE_STONE.get(),
-                    ModItems.DIVINING_ROD.get(),
-                    ModItems.WEATHER_EGG.get()
-                )
+	val MOD_TAB: DeferredHolder<CreativeModeTab, CreativeModeTab> = TABS_REGISTRY.register("creative_tab", Supplier {
+		CreativeModeTab.builder()
+			.title(ModLanguageProvider.Items.CREATIVE_TAB.toComponent())
+			.icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
+			.displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
+				val itemsToSkip = setOf(
+					ModItems.BIOME_CRYSTAL.get(),
+					ModItems.WHITE_STONE.get(),
+					ModItems.DIVINING_ROD.get(),
+					ModItems.WEATHER_EGG.get()
+				)
 
-                val regularItems: List<Item> = ModItems.ITEM_REGISTRY.entries.map { it.get() }
-                val blockItems: Set<BlockItem> = regularItems.filterIsInstance<BlockItem>().toSet()
+				val regularItems: List<Item> = ModItems.ITEM_REGISTRY.entries.map { it.get() }
+				val blockItems: Set<BlockItem> = regularItems.filterIsInstance<BlockItem>().toSet()
 
-                output.acceptAll(
-                    (regularItems - itemsToSkip - blockItems).map { it.defaultInstance }
-                )
+				output.acceptAll(
+					(regularItems - itemsToSkip - blockItems).map { it.defaultInstance }
+				)
 
-                for (weather in WeatherEggItem.Weather.entries) {
-                    output.accept(WeatherEggItem.fromWeather(weather))
-                }
+				for (weather in WeatherEggItem.Weather.entries) {
+					output.accept(WeatherEggItem.fromWeather(weather))
+				}
 
-                output.acceptAll(DiviningRodItem.getAllOreRods())
+				output.acceptAll(DiviningRodItem.getAllOreRods())
 
-                output.accept(ModItems.WHITE_STONE)
-                output.accept(ModItems.WHITE_STONE.toStack().also { it.set(ModDataComponents.CHARGE, WhiteStoneItem.MAX_CHARGE) })
+				output.accept(ModItems.WHITE_STONE)
+				output.accept(ModItems.WHITE_STONE.toStack().also { it.set(ModDataComponents.CHARGE, WhiteStoneItem.MAX_CHARGE) })
 
-                output.acceptAll(blockItems.map { it.defaultInstance })
+				output.acceptAll(blockItems.map { it.defaultInstance })
 
-                output.acceptAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
+				output.acceptAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
 
-            }
-            .build()
-    })
+			}
+			.build()
+	})
 
 }

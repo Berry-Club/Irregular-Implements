@@ -31,58 +31,58 @@ import net.neoforged.neoforge.registries.DeferredItem
 
 // TODO: Remove info page, world interaction page makes it redundant
 class GrassSeedItem(
-    val dyeColor: DyeColor?
+	val dyeColor: DyeColor?
 ) : Item(Properties()) {
 
-    val resultBlock: Block by lazy {
-        if (dyeColor == null) Blocks.GRASS_BLOCK else ModBlocks.getColoredGrass(dyeColor).get()
-    }
+	val resultBlock: Block by lazy {
+		if (dyeColor == null) Blocks.GRASS_BLOCK else ModBlocks.getColoredGrass(dyeColor).get()
+	}
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val clickedPos = context.clickedPos
-        val level = context.level
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val clickedPos = context.clickedPos
+		val level = context.level
 
-        val clickedState = level.getBlockState(clickedPos)
-        if (
-            clickedState.`is`(resultBlock)
-            || !clickedState.`is`(BlockTags.DIRT)
-        ) return InteractionResult.PASS
+		val clickedState = level.getBlockState(clickedPos)
+		if (
+			clickedState.`is`(resultBlock)
+			|| !clickedState.`is`(BlockTags.DIRT)
+		) return InteractionResult.PASS
 
-        level.setBlockAndUpdate(clickedPos, resultBlock.defaultBlockState())
-        level.playSound(
-            null,
-            clickedPos,
-            SoundEvents.GRASS_BREAK,
-            SoundSource.BLOCKS
-        )
+		level.setBlockAndUpdate(clickedPos, resultBlock.defaultBlockState())
+		level.playSound(
+			null,
+			clickedPos,
+			SoundEvents.GRASS_BREAK,
+			SoundSource.BLOCKS
+		)
 
-        context.itemInHand.consume(1, context.player)
+		context.itemInHand.consume(1, context.player)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    companion object {
-        fun getFromColor(color: DyeColor?): DeferredItem<GrassSeedItem> {
-            return when (color) {
-                null -> GRASS_SEEDS
-                DyeColor.WHITE -> GRASS_SEEDS_WHITE
-                DyeColor.ORANGE -> GRASS_SEEDS_ORANGE
-                DyeColor.MAGENTA -> GRASS_SEEDS_MAGENTA
-                DyeColor.LIGHT_BLUE -> GRASS_SEEDS_LIGHT_BLUE
-                DyeColor.YELLOW -> GRASS_SEEDS_YELLOW
-                DyeColor.LIME -> GRASS_SEEDS_LIME
-                DyeColor.PINK -> GRASS_SEEDS_PINK
-                DyeColor.GRAY -> GRASS_SEEDS_GRAY
-                DyeColor.LIGHT_GRAY -> GRASS_SEEDS_LIGHT_GRAY
-                DyeColor.CYAN -> GRASS_SEEDS_CYAN
-                DyeColor.PURPLE -> GRASS_SEEDS_PURPLE
-                DyeColor.BLUE -> GRASS_SEEDS_BLUE
-                DyeColor.BROWN -> GRASS_SEEDS_BROWN
-                DyeColor.GREEN -> GRASS_SEEDS_GREEN
-                DyeColor.RED -> GRASS_SEEDS_RED
-                DyeColor.BLACK -> GRASS_SEEDS_BLACK
-            }
-        }
-    }
+	companion object {
+		fun getFromColor(color: DyeColor?): DeferredItem<GrassSeedItem> {
+			return when (color) {
+				null -> GRASS_SEEDS
+				DyeColor.WHITE -> GRASS_SEEDS_WHITE
+				DyeColor.ORANGE -> GRASS_SEEDS_ORANGE
+				DyeColor.MAGENTA -> GRASS_SEEDS_MAGENTA
+				DyeColor.LIGHT_BLUE -> GRASS_SEEDS_LIGHT_BLUE
+				DyeColor.YELLOW -> GRASS_SEEDS_YELLOW
+				DyeColor.LIME -> GRASS_SEEDS_LIME
+				DyeColor.PINK -> GRASS_SEEDS_PINK
+				DyeColor.GRAY -> GRASS_SEEDS_GRAY
+				DyeColor.LIGHT_GRAY -> GRASS_SEEDS_LIGHT_GRAY
+				DyeColor.CYAN -> GRASS_SEEDS_CYAN
+				DyeColor.PURPLE -> GRASS_SEEDS_PURPLE
+				DyeColor.BLUE -> GRASS_SEEDS_BLUE
+				DyeColor.BROWN -> GRASS_SEEDS_BROWN
+				DyeColor.GREEN -> GRASS_SEEDS_GREEN
+				DyeColor.RED -> GRASS_SEEDS_RED
+				DyeColor.BLACK -> GRASS_SEEDS_BLACK
+			}
+		}
+	}
 
 }

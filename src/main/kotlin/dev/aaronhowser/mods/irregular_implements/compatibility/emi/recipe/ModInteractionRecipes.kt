@@ -24,151 +24,151 @@ import net.neoforged.neoforge.common.ItemAbilities
 
 object ModInteractionRecipes {
 
-    fun getInteractionRecipes(): List<EmiWorldInteractionRecipe> {
-        return grassSeeds() + slime() + otherRecipes()
-    }
+	fun getInteractionRecipes(): List<EmiWorldInteractionRecipe> {
+		return grassSeeds() + slime() + otherRecipes()
+	}
 
-    private fun grassSeeds(): List<EmiWorldInteractionRecipe> {
-        val seeds = DyeColor.entries.map { GrassSeedItem.getFromColor(it) } + ModItems.GRASS_SEEDS
+	private fun grassSeeds(): List<EmiWorldInteractionRecipe> {
+		val seeds = DyeColor.entries.map { GrassSeedItem.getFromColor(it) } + ModItems.GRASS_SEEDS
 
-        return seeds.map { deferred ->
-            val seedItem = deferred.get()
+		return seeds.map { deferred ->
+			val seedItem = deferred.get()
 
-            val colorString = seedItem.dyeColor?.getName()
+			val colorString = seedItem.dyeColor?.getName()
 
-            val id = if (colorString == null) {
-                OtherUtil.modResource("/interaction/grass")
-            } else {
-                OtherUtil.modResource("/interaction/grass/$colorString")
-            }
+			val id = if (colorString == null) {
+				OtherUtil.modResource("/interaction/grass")
+			} else {
+				OtherUtil.modResource("/interaction/grass/$colorString")
+			}
 
-            EmiWorldInteractionRecipe
-                .builder()
-                .leftInput(ItemTags.DIRT.emiIngredient)
-                .rightInput(seedItem.emiIngredient, false)
-                .output(EmiStack.of(seedItem.resultBlock))
-                .id(id)
-                .build()
-        }
-    }
+			EmiWorldInteractionRecipe
+				.builder()
+				.leftInput(ItemTags.DIRT.emiIngredient)
+				.rightInput(seedItem.emiIngredient, false)
+				.output(EmiStack.of(seedItem.resultBlock))
+				.id(id)
+				.build()
+		}
+	}
 
-    private fun slimeStackWithLore(compressionLevel: Int): ItemStack {
-        val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
+	private fun slimeStackWithLore(compressionLevel: Int): ItemStack {
+		val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
 
-        val component = ModLanguageProvider.Tooltips.COMPRESSED_SLIME_AMOUNT
-            .toGrayComponent(compressionLevel)
-            .withStyle {
-                it.withUnderlined(true).withItalic(false)
-            }
+		val component = ModLanguageProvider.Tooltips.COMPRESSED_SLIME_AMOUNT
+			.toGrayComponent(compressionLevel)
+			.withStyle {
+				it.withUnderlined(true).withItalic(false)
+			}
 
-        stack.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))
+		stack.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))
 
-        return stack
-    }
+		return stack
+	}
 
-    private fun slime(): List<EmiWorldInteractionRecipe> {
-        val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
+	private fun slime(): List<EmiWorldInteractionRecipe> {
+		val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
 
-        val slimeBlock = Items.SLIME_BLOCK.defaultInstance
-        val compressedSlimeOne = slimeStackWithLore(1)
-        val compressedSlimeTwo = slimeStackWithLore(2)
-        val compressedSlimeThree = slimeStackWithLore(3)
+		val slimeBlock = Items.SLIME_BLOCK.defaultInstance
+		val compressedSlimeOne = slimeStackWithLore(1)
+		val compressedSlimeTwo = slimeStackWithLore(2)
+		val compressedSlimeThree = slimeStackWithLore(3)
 
-        val shovels = BuiltInRegistries.ITEM
-            .filter { it.defaultInstance.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) }
+		val shovels = BuiltInRegistries.ITEM
+			.filter { it.defaultInstance.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) }
 
-        val shovelsEmiIngredient = EmiIngredient.of(Ingredient.of(*shovels.toTypedArray()))
+		val shovelsEmiIngredient = EmiIngredient.of(Ingredient.of(*shovels.toTypedArray()))
 
-        for (emiStack in shovelsEmiIngredient.emiStacks) {
-            val damagedStack = emiStack.itemStack.copy()
-            damagedStack.damageValue = 1
-            emiStack.setRemainder(EmiStack.of(damagedStack))
-        }
+		for (emiStack in shovelsEmiIngredient.emiStacks) {
+			val damagedStack = emiStack.itemStack.copy()
+			damagedStack.damageValue = 1
+			emiStack.setRemainder(EmiStack.of(damagedStack))
+		}
 
 
-        val recipeOne = EmiWorldInteractionRecipe
-            .builder()
-            .leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
-            .rightInput(shovelsEmiIngredient, true)
-            .output(EmiStack.of(compressedSlimeOne))
-            .id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
-            .build()
+		val recipeOne = EmiWorldInteractionRecipe
+			.builder()
+			.leftInput(EmiIngredient.of(Ingredient.of(slimeBlock)))
+			.rightInput(shovelsEmiIngredient, true)
+			.output(EmiStack.of(compressedSlimeOne))
+			.id(OtherUtil.modResource("/interaction/slime/slime_to_compressed_one"))
+			.build()
 
-        val recipeTwo = EmiWorldInteractionRecipe
-            .builder()
-            .leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeOne)))
-            .rightInput(shovelsEmiIngredient, true)
-            .output(EmiStack.of(compressedSlimeTwo))
-            .id(OtherUtil.modResource("/interaction/slime/compressed_one_to_compressed_two"))
-            .build()
+		val recipeTwo = EmiWorldInteractionRecipe
+			.builder()
+			.leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeOne)))
+			.rightInput(shovelsEmiIngredient, true)
+			.output(EmiStack.of(compressedSlimeTwo))
+			.id(OtherUtil.modResource("/interaction/slime/compressed_one_to_compressed_two"))
+			.build()
 
-        val recipeThree = EmiWorldInteractionRecipe
-            .builder()
-            .leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeTwo)))
-            .rightInput(shovelsEmiIngredient, true)
-            .output(EmiStack.of(compressedSlimeThree))
-            .id(OtherUtil.modResource("/interaction/slime/compressed_two_to_compressed_three"))
-            .build()
+		val recipeThree = EmiWorldInteractionRecipe
+			.builder()
+			.leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeTwo)))
+			.rightInput(shovelsEmiIngredient, true)
+			.output(EmiStack.of(compressedSlimeThree))
+			.id(OtherUtil.modResource("/interaction/slime/compressed_two_to_compressed_three"))
+			.build()
 
-        val recipeFour = EmiWorldInteractionRecipe
-            .builder()
-            .leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeThree)))
-            .rightInput(shovelsEmiIngredient, true)
-            .output(EmiStack.of(slimeBlock))
-            .id(OtherUtil.modResource("/interaction/slime/compressed_three_to_slime"))
-            .build()
+		val recipeFour = EmiWorldInteractionRecipe
+			.builder()
+			.leftInput(EmiIngredient.of(Ingredient.of(compressedSlimeThree)))
+			.rightInput(shovelsEmiIngredient, true)
+			.output(EmiStack.of(slimeBlock))
+			.id(OtherUtil.modResource("/interaction/slime/compressed_three_to_slime"))
+			.build()
 
-        recipes.add(recipeOne)
-        recipes.add(recipeTwo)
-        recipes.add(recipeThree)
-        recipes.add(recipeFour)
+		recipes.add(recipeOne)
+		recipes.add(recipeTwo)
+		recipes.add(recipeThree)
+		recipes.add(recipeFour)
 
-        return recipes
-    }
+		return recipes
+	}
 
-    private fun otherRecipes(): List<EmiWorldInteractionRecipe> {
-        val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
+	private fun otherRecipes(): List<EmiWorldInteractionRecipe> {
+		val recipes: MutableList<EmiWorldInteractionRecipe> = mutableListOf()
 
-        val axes = BuiltInRegistries.ITEM
-            .filter { it.defaultInstance.canPerformAction(ItemAbilities.AXE_STRIP) }
+		val axes = BuiltInRegistries.ITEM
+			.filter { it.defaultInstance.canPerformAction(ItemAbilities.AXE_STRIP) }
 
-        val axesEmiIngredient = EmiIngredient.of(Ingredient.of(*axes.toTypedArray()))
+		val axesEmiIngredient = EmiIngredient.of(Ingredient.of(*axes.toTypedArray()))
 
-        for (emiStack in axesEmiIngredient.emiStacks) {
-            val damagedStack = emiStack.itemStack.copy()
-            damagedStack.damageValue = 1
-            emiStack.setRemainder(EmiStack.of(damagedStack))
-        }
+		for (emiStack in axesEmiIngredient.emiStacks) {
+			val damagedStack = emiStack.itemStack.copy()
+			damagedStack.damageValue = 1
+			emiStack.setRemainder(EmiStack.of(damagedStack))
+		}
 
-        val stripRecipe = EmiWorldInteractionRecipe
-            .builder()
-            .leftInput(ModBlocks.SPECTRE_LOG.emiIngredient)
-            .rightInput(axesEmiIngredient, true)
-            .output(EmiStack.of(ModBlocks.STRIPPED_SPECTRE_LOG.asItem()))
-            .id(OtherUtil.modResource("/interaction/spectre_log_stripping"))
-            .build()
+		val stripRecipe = EmiWorldInteractionRecipe
+			.builder()
+			.leftInput(ModBlocks.SPECTRE_LOG.emiIngredient)
+			.rightInput(axesEmiIngredient, true)
+			.output(EmiStack.of(ModBlocks.STRIPPED_SPECTRE_LOG.asItem()))
+			.id(OtherUtil.modResource("/interaction/spectre_log_stripping"))
+			.build()
 
-        recipes.add(stripRecipe)
+		recipes.add(stripRecipe)
 
-        val convertsToSpectreSapling = BuiltInRegistries.ITEM
-            .filter { it is BlockItem && it.block.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING) }
+		val convertsToSpectreSapling = BuiltInRegistries.ITEM
+			.filter { it is BlockItem && it.block.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING) }
 
-        if (convertsToSpectreSapling.isNotEmpty()) {
-            val saplingsEmiIngredient = EmiIngredient.of(Ingredient.of(*convertsToSpectreSapling.toTypedArray()))
-            val ectoplasmIngredient = ModItems.ECTOPLASM.emiIngredient
+		if (convertsToSpectreSapling.isNotEmpty()) {
+			val saplingsEmiIngredient = EmiIngredient.of(Ingredient.of(*convertsToSpectreSapling.toTypedArray()))
+			val ectoplasmIngredient = ModItems.ECTOPLASM.emiIngredient
 
-            val spectreSaplingRecipe = EmiWorldInteractionRecipe
-                .builder()
-                .leftInput(saplingsEmiIngredient)
-                .rightInput(ectoplasmIngredient, false)
-                .output(EmiStack.of(ModBlocks.SPECTRE_SAPLING.asItem()))
-                .id(OtherUtil.modResource("/interaction/spectre_sapling_conversion"))
-                .build()
+			val spectreSaplingRecipe = EmiWorldInteractionRecipe
+				.builder()
+				.leftInput(saplingsEmiIngredient)
+				.rightInput(ectoplasmIngredient, false)
+				.output(EmiStack.of(ModBlocks.SPECTRE_SAPLING.asItem()))
+				.id(OtherUtil.modResource("/interaction/spectre_sapling_conversion"))
+				.build()
 
-            recipes.add(spectreSaplingRecipe)
-        }
+			recipes.add(spectreSaplingRecipe)
+		}
 
-        return recipes
-    }
+		return recipes
+	}
 
 }

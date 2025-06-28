@@ -13,68 +13,68 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient
 
 class WashBootRecipe(
-    craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
+	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-    val bootIngredient: Ingredient = DataComponentIngredient.of(
-        false,
-        DataComponentMap.builder().set(ModDataComponents.LUBRICATED, Unit.INSTANCE).build(),
-        *LubricateBootRecipe.boots.map { it.item }.toTypedArray()
-    )
-    val waterIngredient: Ingredient = DataComponentIngredient.of(false, OtherUtil.getPotionStack(Potions.WATER))
+	val bootIngredient: Ingredient = DataComponentIngredient.of(
+		false,
+		DataComponentMap.builder().set(ModDataComponents.LUBRICATED, Unit.INSTANCE).build(),
+		*LubricateBootRecipe.boots.map { it.item }.toTypedArray()
+	)
+	val waterIngredient: Ingredient = DataComponentIngredient.of(false, OtherUtil.getPotionStack(Potions.WATER))
 
-    override fun matches(input: CraftingInput, level: Level): Boolean {
-        var bootStack: ItemStack? = null
-        var waterStack: ItemStack? = null
+	override fun matches(input: CraftingInput, level: Level): Boolean {
+		var bootStack: ItemStack? = null
+		var waterStack: ItemStack? = null
 
-        for (stack in input.items()) {
-            if (bootIngredient.test(stack)) {
-                if (bootStack != null) return false
-                bootStack = stack
-            }
+		for (stack in input.items()) {
+			if (bootIngredient.test(stack)) {
+				if (bootStack != null) return false
+				bootStack = stack
+			}
 
-            if (waterIngredient.test(stack)) {
-                if (waterStack != null) return false
-                waterStack = stack
-            }
+			if (waterIngredient.test(stack)) {
+				if (waterStack != null) return false
+				waterStack = stack
+			}
 
-            if (bootStack != null && waterStack != null) break
-        }
+			if (bootStack != null && waterStack != null) break
+		}
 
-        return bootStack != null && waterStack != null && bootStack.has(ModDataComponents.LUBRICATED)
-    }
+		return bootStack != null && waterStack != null && bootStack.has(ModDataComponents.LUBRICATED)
+	}
 
-    override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-        var bootStack: ItemStack? = null
-        var waterStack: ItemStack? = null
+	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
+		var bootStack: ItemStack? = null
+		var waterStack: ItemStack? = null
 
-        for (stack in input.items()) {
-            if (bootIngredient.test(stack)) {
-                if (bootStack != null) return ItemStack.EMPTY
-                bootStack = stack
-            }
+		for (stack in input.items()) {
+			if (bootIngredient.test(stack)) {
+				if (bootStack != null) return ItemStack.EMPTY
+				bootStack = stack
+			}
 
-            if (waterIngredient.test(stack)) {
-                if (waterStack != null) return ItemStack.EMPTY
-                waterStack = stack
-            }
+			if (waterIngredient.test(stack)) {
+				if (waterStack != null) return ItemStack.EMPTY
+				waterStack = stack
+			}
 
-            if (bootStack != null && waterStack != null) break
-        }
+			if (bootStack != null && waterStack != null) break
+		}
 
-        if (bootStack == null || waterStack == null) return ItemStack.EMPTY
+		if (bootStack == null || waterStack == null) return ItemStack.EMPTY
 
-        val newBootStack = bootStack.copy()
-        newBootStack.remove(ModDataComponents.LUBRICATED)
+		val newBootStack = bootStack.copy()
+		newBootStack.remove(ModDataComponents.LUBRICATED)
 
-        return newBootStack
-    }
+		return newBootStack
+	}
 
-    override fun canCraftInDimensions(width: Int, height: Int): Boolean {
-        return width * height >= 2
-    }
+	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
+		return width * height >= 2
+	}
 
-    override fun getSerializer(): RecipeSerializer<*> {
-        return ModRecipeSerializers.WASH_BOOT.get()
-    }
+	override fun getSerializer(): RecipeSerializer<*> {
+		return ModRecipeSerializers.WASH_BOOT.get()
+	}
 }

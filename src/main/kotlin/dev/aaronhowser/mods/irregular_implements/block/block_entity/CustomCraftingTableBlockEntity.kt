@@ -14,41 +14,41 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class CustomCraftingTableBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
 
-    companion object {
-        const val RENDERED_BLOCK_STATE = "RenderedBlockState"
-    }
+	companion object {
+		const val RENDERED_BLOCK_STATE = "RenderedBlockState"
+	}
 
-    var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
-        set(value) {
-            field = value
-            setChanged()
-        }
+	var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
+		set(value) {
+			field = value
+			setChanged()
+		}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        val blockStateTag = NbtUtils.writeBlockState(this.renderedBlockState)
-        tag.put(RENDERED_BLOCK_STATE, blockStateTag)
-    }
+		val blockStateTag = NbtUtils.writeBlockState(this.renderedBlockState)
+		tag.put(RENDERED_BLOCK_STATE, blockStateTag)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        val blockStateTag = tag.getCompound(RENDERED_BLOCK_STATE)
-        val readBlockState = NbtUtils.readBlockState(
-            registries.lookupOrThrow(Registries.BLOCK),
-            blockStateTag
-        )
+		val blockStateTag = tag.getCompound(RENDERED_BLOCK_STATE)
+		val readBlockState = NbtUtils.readBlockState(
+			registries.lookupOrThrow(Registries.BLOCK),
+			blockStateTag
+		)
 
-        this.renderedBlockState = readBlockState
-    }
+		this.renderedBlockState = readBlockState
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

@@ -12,35 +12,35 @@ import net.neoforged.neoforge.common.Tags
 
 object DiviningRodRecipes {
 
-    fun getRecipes(): MutableList<EmiCraftingRecipe> {
+	fun getRecipes(): MutableList<EmiCraftingRecipe> {
 
-        val allOreBlockTags = DiviningRodItem.getAllOreTags() - Tags.Blocks.ORES
-        val allOreItemTags = allOreBlockTags.map { TagKey.create(Registries.ITEM, it.location) }
+		val allOreBlockTags = DiviningRodItem.getAllOreTags() - Tags.Blocks.ORES
+		val allOreItemTags = allOreBlockTags.map { TagKey.create(Registries.ITEM, it.location) }
 
-        val stickIngredient = Items.STICK.emiIngredient
-        val eyeIngredient = Items.SPIDER_EYE.emiIngredient
-        val emptyIngredient = Items.AIR.emiIngredient
+		val stickIngredient = Items.STICK.emiIngredient
+		val eyeIngredient = Items.SPIDER_EYE.emiIngredient
+		val emptyIngredient = Items.AIR.emiIngredient
 
-        val recipes = mutableListOf<EmiCraftingRecipe>()
+		val recipes = mutableListOf<EmiCraftingRecipe>()
 
-        for (oreTag in allOreItemTags) {
-            val oreIngredient = oreTag.emiIngredient
+		for (oreTag in allOreItemTags) {
+			val oreIngredient = oreTag.emiIngredient
 
-            val shapedRecipe = EmiCraftingRecipe(
-                listOf(
-                    oreIngredient, stickIngredient, oreIngredient,
-                    stickIngredient, eyeIngredient, stickIngredient,
-                    stickIngredient, emptyIngredient, stickIngredient
-                ),
-                EmiStack.of(DiviningRodItem.getRodForItemTag(oreTag)),
-                OtherUtil.modResource("/divining_rod/${oreTag.location.toString().replace(':', '/')}")
-            )
+			val shapedRecipe = EmiCraftingRecipe(
+				listOf(
+					oreIngredient, stickIngredient, oreIngredient,
+					stickIngredient, eyeIngredient, stickIngredient,
+					stickIngredient, emptyIngredient, stickIngredient
+				),
+				EmiStack.of(DiviningRodItem.getRodForItemTag(oreTag)),
+				OtherUtil.modResource("/divining_rod/${oreTag.location.toString().replace(':', '/')}")
+			)
 
 
-            recipes.add(shapedRecipe)
-        }
+			recipes.add(shapedRecipe)
+		}
 
-        return recipes
-    }
+		return recipes
+	}
 
 }

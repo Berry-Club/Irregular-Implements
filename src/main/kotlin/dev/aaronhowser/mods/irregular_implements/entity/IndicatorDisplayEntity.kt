@@ -11,68 +11,68 @@ import net.minecraft.world.level.block.state.BlockState
 import org.joml.Vector3f
 
 class IndicatorDisplayEntity(
-    entityType: EntityType<*>,
-    level: Level
+	entityType: EntityType<*>,
+	level: Level
 ) : BlockDisplay(entityType, level) {
 
-    companion object {
-        private const val MAX_AGE_NBT = "MaxAge"
+	companion object {
+		private const val MAX_AGE_NBT = "MaxAge"
 
-        val defaultTransformation = Transformation(
-            null,
-            null,
-            Vector3f(0.5f, 0.5f, 0.5f),
-            null
-        )
-    }
+		val defaultTransformation = Transformation(
+			null,
+			null,
+			Vector3f(0.5f, 0.5f, 0.5f),
+			null
+		)
+	}
 
-    constructor(
-        level: Level,
-        blockState: BlockState,
-        glowColorOverride: Int,
-        maximumAge: Int,
-    ) : this(ModEntityTypes.INDICATOR_DISPLAY.get(), level) {
-        this.maximumAge = maximumAge
+	constructor(
+		level: Level,
+		blockState: BlockState,
+		glowColorOverride: Int,
+		maximumAge: Int,
+	) : this(ModEntityTypes.INDICATOR_DISPLAY.get(), level) {
+		this.maximumAge = maximumAge
 
-        setGlowingTag(true)
-        setGlowColorOverride(glowColorOverride)
+		setGlowingTag(true)
+		setGlowColorOverride(glowColorOverride)
 
-        setBlockState(blockState)
-        setTransformation(defaultTransformation)
-    }
+		setBlockState(blockState)
+		setTransformation(defaultTransformation)
+	}
 
-    private var maximumAge = 20
+	private var maximumAge = 20
 
-    override fun tick() {
-        super.tick()
+	override fun tick() {
+		super.tick()
 
-        if (!this.level().isClientSide.isTrue && this.tickCount >= maximumAge) {
-            kill()
-        }
-    }
+		if (!this.level().isClientSide.isTrue && this.tickCount >= maximumAge) {
+			kill()
+		}
+	}
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
+	override fun addAdditionalSaveData(compound: CompoundTag) {
+		super.addAdditionalSaveData(compound)
 
-        compound.putInt(MAX_AGE_NBT, maximumAge)
-    }
+		compound.putInt(MAX_AGE_NBT, maximumAge)
+	}
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
+	override fun readAdditionalSaveData(compound: CompoundTag) {
+		super.readAdditionalSaveData(compound)
 
-        maximumAge = compound.getInt(MAX_AGE_NBT)
-    }
+		maximumAge = compound.getInt(MAX_AGE_NBT)
+	}
 
-    public override fun setBlockState(blockState: BlockState) {
-        super.setBlockState(blockState)
-    }
+	public override fun setBlockState(blockState: BlockState) {
+		super.setBlockState(blockState)
+	}
 
-    public override fun setGlowColorOverride(glowColorOverride: Int) {
-        super.setGlowColorOverride(glowColorOverride)
-    }
+	public override fun setGlowColorOverride(glowColorOverride: Int) {
+		super.setGlowColorOverride(glowColorOverride)
+	}
 
-    public override fun setTransformation(transformation: Transformation) {
-        super.setTransformation(transformation)
-    }
+	public override fun setTransformation(transformation: Transformation) {
+		super.setTransformation(transformation)
+	}
 
 }

@@ -11,34 +11,34 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class UpdateClientScreenString(
-    val stringId: Int,
-    val regexString: String
+	val stringId: Int,
+	val regexString: String
 ) : IModPacket {
 
-    override fun receiveOnClient(context: IPayloadContext) {
-        context.enqueueWork {
-            val screen = Minecraft.getInstance().screen ?: return@enqueueWork
+	override fun receiveOnClient(context: IPayloadContext) {
+		context.enqueueWork {
+			val screen = Minecraft.getInstance().screen ?: return@enqueueWork
 
-            if (screen is ScreenWithStrings) {
-                screen.receivedString(stringId, regexString)
-            }
-        }
-    }
+			if (screen is ScreenWithStrings) {
+				screen.receivedString(stringId, regexString)
+			}
+		}
+	}
 
-    override fun type(): CustomPacketPayload.Type<UpdateClientScreenString> {
-        return TYPE
-    }
+	override fun type(): CustomPacketPayload.Type<UpdateClientScreenString> {
+		return TYPE
+	}
 
-    companion object {
-        val TYPE: CustomPacketPayload.Type<UpdateClientScreenString> =
-            CustomPacketPayload.Type(OtherUtil.modResource("update_client_screen_string"))
+	companion object {
+		val TYPE: CustomPacketPayload.Type<UpdateClientScreenString> =
+			CustomPacketPayload.Type(OtherUtil.modResource("update_client_screen_string"))
 
-        val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientScreenString> =
-            StreamCodec.composite(
-                ByteBufCodecs.VAR_INT, UpdateClientScreenString::stringId,
-                ByteBufCodecs.STRING_UTF8, UpdateClientScreenString::regexString,
-                ::UpdateClientScreenString
-            )
-    }
+		val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientScreenString> =
+			StreamCodec.composite(
+				ByteBufCodecs.VAR_INT, UpdateClientScreenString::stringId,
+				ByteBufCodecs.STRING_UTF8, UpdateClientScreenString::regexString,
+				::UpdateClientScreenString
+			)
+	}
 
 }

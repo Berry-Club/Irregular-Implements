@@ -13,70 +13,70 @@ import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.Level
 
 class LubricateBootRecipe(
-    craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
+	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-    companion object {
-        val boots = BuiltInRegistries.ITEM
-            .filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
-            .map { it.defaultInstance }
-    }
+	companion object {
+		val boots = BuiltInRegistries.ITEM
+			.filter { it is ArmorItem && it.type == ArmorItem.Type.BOOTS }
+			.map { it.defaultInstance }
+	}
 
-    val bootIngredient: Ingredient = Ingredient.of(*boots.toTypedArray())
-    val lubeIngredient: Ingredient = ModItems.SUPER_LUBRICANT_TINCTURE.ingredient
+	val bootIngredient: Ingredient = Ingredient.of(*boots.toTypedArray())
+	val lubeIngredient: Ingredient = ModItems.SUPER_LUBRICANT_TINCTURE.ingredient
 
-    override fun matches(input: CraftingInput, level: Level): Boolean {
-        var bootStack: ItemStack? = null
-        var lubeStack: ItemStack? = null
+	override fun matches(input: CraftingInput, level: Level): Boolean {
+		var bootStack: ItemStack? = null
+		var lubeStack: ItemStack? = null
 
-        for (stack in input.items()) {
-            if (bootIngredient.test(stack)) {
-                if (bootStack != null) return false
-                bootStack = stack
-            }
+		for (stack in input.items()) {
+			if (bootIngredient.test(stack)) {
+				if (bootStack != null) return false
+				bootStack = stack
+			}
 
-            if (lubeIngredient.test(stack)) {
-                if (lubeStack != null) return false
-                lubeStack = stack
-            }
+			if (lubeIngredient.test(stack)) {
+				if (lubeStack != null) return false
+				lubeStack = stack
+			}
 
-            if (bootStack != null && lubeStack != null) break
-        }
+			if (bootStack != null && lubeStack != null) break
+		}
 
-        return bootStack != null && lubeStack != null && !bootStack.has(ModDataComponents.LUBRICATED)
-    }
+		return bootStack != null && lubeStack != null && !bootStack.has(ModDataComponents.LUBRICATED)
+	}
 
-    override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-        var bootStack: ItemStack? = null
-        var lubeStack: ItemStack? = null
+	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
+		var bootStack: ItemStack? = null
+		var lubeStack: ItemStack? = null
 
-        for (stack in input.items()) {
-            if (bootIngredient.test(stack)) {
-                if (bootStack != null) return ItemStack.EMPTY
-                bootStack = stack
-            }
+		for (stack in input.items()) {
+			if (bootIngredient.test(stack)) {
+				if (bootStack != null) return ItemStack.EMPTY
+				bootStack = stack
+			}
 
-            if (lubeIngredient.test(stack)) {
-                if (lubeStack != null) return ItemStack.EMPTY
-                lubeStack = stack
-            }
+			if (lubeIngredient.test(stack)) {
+				if (lubeStack != null) return ItemStack.EMPTY
+				lubeStack = stack
+			}
 
-            if (bootStack != null && lubeStack != null) break
-        }
+			if (bootStack != null && lubeStack != null) break
+		}
 
-        if (bootStack == null || lubeStack == null) return ItemStack.EMPTY
+		if (bootStack == null || lubeStack == null) return ItemStack.EMPTY
 
-        val newBootStack = bootStack.copy()
-        newBootStack.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
+		val newBootStack = bootStack.copy()
+		newBootStack.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
 
-        return newBootStack
-    }
+		return newBootStack
+	}
 
-    override fun canCraftInDimensions(width: Int, height: Int): Boolean {
-        return width * height >= 2
-    }
+	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
+		return width * height >= 2
+	}
 
-    override fun getSerializer(): RecipeSerializer<*> {
-        return ModRecipeSerializers.LUBRICATE_BOOT.get()
-    }
+	override fun getSerializer(): RecipeSerializer<*> {
+		return ModRecipeSerializers.LUBRICATE_BOOT.get()
+	}
 }

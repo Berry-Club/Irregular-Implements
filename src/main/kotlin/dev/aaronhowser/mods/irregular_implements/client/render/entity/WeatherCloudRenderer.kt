@@ -11,50 +11,50 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.resources.ResourceLocation
 
 class WeatherCloudRenderer(
-    context: EntityRendererProvider.Context
+	context: EntityRendererProvider.Context
 ) : EntityRenderer<WeatherCloudEntity>(context) {
 
-    companion object {
-        val TEXTURE = OtherUtil.modResource("naw")
-    }
+	companion object {
+		val TEXTURE = OtherUtil.modResource("naw")
+	}
 
-    override fun getTextureLocation(entity: WeatherCloudEntity): ResourceLocation {
-        return TEXTURE
-    }
+	override fun getTextureLocation(entity: WeatherCloudEntity): ResourceLocation {
+		return TEXTURE
+	}
 
-    override fun render(
-        spectreIlluminatorEntity: WeatherCloudEntity,
-        entityYaw: Float,
-        partialTick: Float,
-        poseStack: PoseStack,
-        bufferSource: MultiBufferSource,
-        packedLight: Int
-    ) {
-        if (spectreIlluminatorEntity.weather != WeatherEggItem.Weather.SUNNY) return
+	override fun render(
+		spectreIlluminatorEntity: WeatherCloudEntity,
+		entityYaw: Float,
+		partialTick: Float,
+		poseStack: PoseStack,
+		bufferSource: MultiBufferSource,
+		packedLight: Int
+	) {
+		if (spectreIlluminatorEntity.weather != WeatherEggItem.Weather.SUNNY) return
 
-        val time = (spectreIlluminatorEntity.tickCount + partialTick) / 200.0f
+		val time = (spectreIlluminatorEntity.tickCount + partialTick) / 200.0f
 
-        val centerColor = 0xFFFFFF00.toInt()
-        val outerColor = 0x00FF0000
+		val centerColor = 0xFFFFFF00.toInt()
+		val outerColor = 0x00FF0000
 
-        val rayLength = 1f
-        val rayWidth = 0.33f
+		val rayLength = 1f
+		val rayWidth = 0.33f
 
-        poseStack.pushPose()
+		poseStack.pushPose()
 
-        RenderUtils.renderDragonRays(
-            poseStack = poseStack,
-            time = time,
-            bufferSource = bufferSource,
-            centerColor = centerColor,
-            outerColor = outerColor,
-            rayLength = rayLength,
-            rayWidth = rayWidth
-        )
+		RenderUtils.renderDragonRays(
+			poseStack = poseStack,
+			time = time,
+			bufferSource = bufferSource,
+			centerColor = centerColor,
+			outerColor = outerColor,
+			rayLength = rayLength,
+			rayWidth = rayWidth
+		)
 
-        poseStack.popPose()
+		poseStack.popPose()
 
-        super.render(spectreIlluminatorEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
-    }
+		super.render(spectreIlluminatorEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
+	}
 
 }

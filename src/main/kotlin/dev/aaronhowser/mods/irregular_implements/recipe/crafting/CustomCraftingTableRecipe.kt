@@ -15,41 +15,41 @@ import net.neoforged.neoforge.common.Tags
 
 //TODO: EMI
 class CustomCraftingTableRecipe(
-    craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
+	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-    companion object {
-        private const val CRAFTING_TABLE_SLOT = 4
-        private val plankSlots = (0..0).toSet() - CRAFTING_TABLE_SLOT
-    }
+	companion object {
+		private const val CRAFTING_TABLE_SLOT = 4
+		private val plankSlots = (0..0).toSet() - CRAFTING_TABLE_SLOT
+	}
 
-    override fun matches(input: CraftingInput, level: Level): Boolean {
-        if (input.width() < 3 || input.height() < 3) return false
-        if (!input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)) return false
+	override fun matches(input: CraftingInput, level: Level): Boolean {
+		if (input.width() < 3 || input.height() < 3) return false
+		if (!input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)) return false
 
-        val plankStack = input.getItem(plankSlots.first())
+		val plankStack = input.getItem(plankSlots.first())
 
-        val plankStackValid = plankStack.`is`(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
-                && plankStack.item is BlockItem
+		val plankStackValid = plankStack.`is`(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
+				&& plankStack.item is BlockItem
 
-        if (!plankStackValid) return false
+		if (!plankStackValid) return false
 
-        return plankSlots.all { input.getItem(it).`is`(plankStack.item) }
-    }
+		return plankSlots.all { input.getItem(it).`is`(plankStack.item) }
+	}
 
-    override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-        val plankStack = input.getItem(plankSlots.first())
+	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
+		val plankStack = input.getItem(plankSlots.first())
 
-        val block = (plankStack.item as? BlockItem)?.block ?: return ItemStack.EMPTY
+		val block = (plankStack.item as? BlockItem)?.block ?: return ItemStack.EMPTY
 
-        return CustomCraftingTableBlockItem.ofBlock(block)
-    }
+		return CustomCraftingTableBlockItem.ofBlock(block)
+	}
 
-    override fun canCraftInDimensions(width: Int, height: Int): Boolean {
-        return width >= 3 && height >= 3
-    }
+	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
+		return width >= 3 && height >= 3
+	}
 
-    override fun getSerializer(): RecipeSerializer<*> {
-        return ModRecipeSerializers.CUSTOM_CRAFTING_TABLE.get()
-    }
+	override fun getSerializer(): RecipeSerializer<*> {
+		return ModRecipeSerializers.CUSTOM_CRAFTING_TABLE.get()
+	}
 }

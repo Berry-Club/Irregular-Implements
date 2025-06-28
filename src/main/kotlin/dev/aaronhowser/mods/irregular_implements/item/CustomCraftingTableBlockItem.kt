@@ -15,48 +15,48 @@ import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.block.Block
 
 class CustomCraftingTableBlockItem : BlockItem(
-    ModBlocks.CUSTOM_CRAFTING_TABLE.get(), Properties()
+	ModBlocks.CUSTOM_CRAFTING_TABLE.get(), Properties()
 ) {
 
-    companion object {
-        fun ofBlock(block: Block): ItemStack {
-            val stack = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
+	companion object {
+		fun ofBlock(block: Block): ItemStack {
+			val stack = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
 
-            stack.set(ModDataComponents.BLOCK, block)
+			stack.set(ModDataComponents.BLOCK, block)
 
-            return stack
-        }
-    }
+			return stack
+		}
+	}
 
-    override fun place(context: BlockPlaceContext): InteractionResult {
-        val result = super.place(context)
+	override fun place(context: BlockPlaceContext): InteractionResult {
+		val result = super.place(context)
 
-        if (!result.consumesAction()) {
-            return result
-        }
+		if (!result.consumesAction()) {
+			return result
+		}
 
-        val stateToRender = context.itemInHand.get(ModDataComponents.BLOCK)?.getStateForPlacement(context)
+		val stateToRender = context.itemInHand.get(ModDataComponents.BLOCK)?.getStateForPlacement(context)
 
-        if (stateToRender != null) {
-            val blockEntity = context.level.getBlockEntity(context.clickedPos)
+		if (stateToRender != null) {
+			val blockEntity = context.level.getBlockEntity(context.clickedPos)
 
-            if (blockEntity is CustomCraftingTableBlockEntity) {
-                blockEntity.renderedBlockState = stateToRender
-            }
-        }
+			if (blockEntity is CustomCraftingTableBlockEntity) {
+				blockEntity.renderedBlockState = stateToRender
+			}
+		}
 
-        return result
-    }
+		return result
+	}
 
-    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val block = stack.get(ModDataComponents.BLOCK)
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val block = stack.get(ModDataComponents.BLOCK)
 
-        if (block != null) {
-            val component = ModLanguageProvider.Tooltips.BLOCK
-                .toGrayComponent(block.name)
+		if (block != null) {
+			val component = ModLanguageProvider.Tooltips.BLOCK
+				.toGrayComponent(block.name)
 
-            tooltipComponents.add(component)
-        }
-    }
+			tooltipComponents.add(component)
+		}
+	}
 
 }

@@ -13,65 +13,65 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent
 
 @EventBusSubscriber(
-    modid = IrregularImplements.ID
+	modid = IrregularImplements.ID
 )
 object ItemCatcher {
 
-    private var isCatchingDrops: Boolean = false
-    private val caughtItemEntities: MutableList<ItemEntity> = mutableListOf()
+	private var isCatchingDrops: Boolean = false
+	private val caughtItemEntities: MutableList<ItemEntity> = mutableListOf()
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    fun onEntityJoinLevel(event: EntityJoinLevelEvent) {
-        if (!this.isCatchingDrops
-            || event.isCanceled
-            || event.entity !is ItemEntity
-        ) return
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	fun onEntityJoinLevel(event: EntityJoinLevelEvent) {
+		if (!this.isCatchingDrops
+			|| event.isCanceled
+			|| event.entity !is ItemEntity
+		) return
 
-        caughtItemEntities.add(event.entity as ItemEntity)
-    }
+		caughtItemEntities.add(event.entity as ItemEntity)
+	}
 
-    @JvmStatic
-    fun beforeDestroyBlock(player: ServerPlayer) {
-        val usedItem = player.mainHandItem
+	@JvmStatic
+	fun beforeDestroyBlock(player: ServerPlayer) {
+		val usedItem = player.mainHandItem
 
-        val hasMagnetic = usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) > 0
+		val hasMagnetic = usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) > 0
 
-        this.isCatchingDrops = hasMagnetic
-    }
+		this.isCatchingDrops = hasMagnetic
+	}
 
-    @JvmStatic
-    fun afterDestroyBlock(player: ServerPlayer) {
-        if (!this.isCatchingDrops) return
+	@JvmStatic
+	fun afterDestroyBlock(player: ServerPlayer) {
+		if (!this.isCatchingDrops) return
 
-        for (itemEntity in this.caughtItemEntities) {
-            itemEntity.setNoPickUpDelay()
-            itemEntity.playerTouch(player)
-            itemEntity.target = player.uuid
-            itemEntity.teleportTo(player.x, player.y, player.z)
-        }
+		for (itemEntity in this.caughtItemEntities) {
+			itemEntity.setNoPickUpDelay()
+			itemEntity.playerTouch(player)
+			itemEntity.target = player.uuid
+			itemEntity.teleportTo(player.x, player.y, player.z)
+		}
 
-        this.caughtItemEntities.clear()
-        this.isCatchingDrops = false
-    }
+		this.caughtItemEntities.clear()
+		this.isCatchingDrops = false
+	}
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    fun onLivingDropItems(event: LivingDropsEvent) {
-        if (event.isCanceled || !event.source.isDirect) return
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	fun onLivingDropItems(event: LivingDropsEvent) {
+		if (event.isCanceled || !event.source.isDirect) return
 
-        val killer = event.source.entity as? LivingEntity ?: return
-        val usedItem = killer.mainHandItem
+		val killer = event.source.entity as? LivingEntity ?: return
+		val usedItem = killer.mainHandItem
 
-        if (usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, killer.registryAccess())) < 1) return
+		if (usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, killer.registryAccess())) < 1) return
 
-        for (itemEntity in event.drops) {
-            itemEntity.setNoPickUpDelay()
-            if (killer is Player) itemEntity.playerTouch(killer)
-            itemEntity.target = killer.uuid
-            itemEntity.teleportTo(killer.x, killer.y, killer.z)
-        }
+		for (itemEntity in event.drops) {
+			itemEntity.setNoPickUpDelay()
+			if (killer is Player) itemEntity.playerTouch(killer)
+			itemEntity.target = killer.uuid
+			itemEntity.teleportTo(killer.x, killer.y, killer.z)
+		}
 
-        this.caughtItemEntities.clear()
-        this.isCatchingDrops = false
-    }
+		this.caughtItemEntities.clear()
+		this.isCatchingDrops = false
+	}
 
 }

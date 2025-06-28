@@ -11,72 +11,72 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
 class OnlineDetectorScreen(
-    menu: OnlineDetectorMenu,
-    playerInventory: Inventory,
-    title: Component
+	menu: OnlineDetectorMenu,
+	playerInventory: Inventory,
+	title: Component
 ) : BaseScreen<OnlineDetectorMenu>(menu, playerInventory, title), ScreenWithStrings {
 
-    private lateinit var usernameEditBox: EditBox
+	private lateinit var usernameEditBox: EditBox
 
-    override val background = ScreenTextures.Background.OnlineDetector
+	override val background = ScreenTextures.Background.OnlineDetector
 
-    override fun baseInit() {
-        val editBoxHeight = 20
+	override fun baseInit() {
+		val editBoxHeight = 20
 
-        this.usernameEditBox = EditBox(
-            this.font,
-            this.leftPos + 5,
-            this.bottomPos - 5 - editBoxHeight,
-            this.imageWidth - 5 - 5,
-            editBoxHeight,
-            Component.empty()
-        )
+		this.usernameEditBox = EditBox(
+			this.font,
+			this.leftPos + 5,
+			this.bottomPos - 5 - editBoxHeight,
+			this.imageWidth - 5 - 5,
+			editBoxHeight,
+			Component.empty()
+		)
 
-        this.usernameEditBox.setCanLoseFocus(false)
-        this.usernameEditBox.setTextColor(-1)
-        this.usernameEditBox.setTextColorUneditable(-1)
-        this.usernameEditBox.setResponder(::setUsername)
+		this.usernameEditBox.setCanLoseFocus(false)
+		this.usernameEditBox.setTextColor(-1)
+		this.usernameEditBox.setTextColorUneditable(-1)
+		this.usernameEditBox.setResponder(::setUsername)
 
-        this.addRenderableWidget(this.usernameEditBox)
-    }
+		this.addRenderableWidget(this.usernameEditBox)
+	}
 
-    override var showInventoryLabel: Boolean = false
+	override var showInventoryLabel: Boolean = false
 
-    // Behavior
+	// Behavior
 
-    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
-        if (keyCode == 256) {
-            this.minecraft?.player?.closeContainer()
-        }
+	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+		if (keyCode == 256) {
+			this.minecraft?.player?.closeContainer()
+		}
 
-        return if (!this.usernameEditBox.keyPressed(keyCode, scanCode, modifiers) && !this.usernameEditBox.canConsumeInput()) {
-            super.keyPressed(keyCode, scanCode, modifiers)
-        } else {
-            true
-        }
-    }
+		return if (!this.usernameEditBox.keyPressed(keyCode, scanCode, modifiers) && !this.usernameEditBox.canConsumeInput()) {
+			super.keyPressed(keyCode, scanCode, modifiers)
+		} else {
+			true
+		}
+	}
 
-    override fun resize(minecraft: Minecraft, width: Int, height: Int) {
-        val currentRegexString = this.usernameEditBox.value
-        super.resize(minecraft, width, height)
-        this.usernameEditBox.value = currentRegexString
-    }
+	override fun resize(minecraft: Minecraft, width: Int, height: Int) {
+		val currentRegexString = this.usernameEditBox.value
+		super.resize(minecraft, width, height)
+		this.usernameEditBox.value = currentRegexString
+	}
 
-    private fun setUsername(string: String) {
-        if (this.menu.setUsername(string)) {
-            ModPacketHandler.messageServer(
-                ClientChangedMenuString(
-                    OnlineDetectorMenu.USERNAME_STRING_ID,
-                    string
-                )
-            )
-        }
-    }
+	private fun setUsername(string: String) {
+		if (this.menu.setUsername(string)) {
+			ModPacketHandler.messageServer(
+				ClientChangedMenuString(
+					OnlineDetectorMenu.USERNAME_STRING_ID,
+					string
+				)
+			)
+		}
+	}
 
-    override fun receivedString(stringId: Int, regexString: String) {
-        if (stringId == OnlineDetectorMenu.USERNAME_STRING_ID) {
-            this.usernameEditBox.value = regexString
-        }
-    }
+	override fun receivedString(stringId: Int, regexString: String) {
+		if (stringId == OnlineDetectorMenu.USERNAME_STRING_ID) {
+			this.usernameEditBox.value = regexString
+		}
+	}
 
 }

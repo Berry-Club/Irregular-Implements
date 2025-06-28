@@ -14,34 +14,34 @@ import net.minecraft.world.level.Level
 
 //TODO: EMI
 class InvertDiaphanousBlockRecipe(
-    craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
+	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-    override fun matches(input: CraftingInput, level: Level): Boolean {
-        val stacks = input.items().filterNot { it.isEmpty }
+	override fun matches(input: CraftingInput, level: Level): Boolean {
+		val stacks = input.items().filterNot { it.isEmpty }
 
-        return stacks.size == 1
-                && stacks.first().`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem())
-    }
+		return stacks.size == 1
+				&& stacks.first().`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem())
+	}
 
-    override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-        val inputStack = input.items().first { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
-        val output = inputStack.copyWithCount(1)
+	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
+		val inputStack = input.items().first { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
+		val output = inputStack.copyWithCount(1)
 
-        if (output.has(ModDataComponents.IS_INVERTED)) {
-            output.remove(ModDataComponents.IS_INVERTED)
-        } else {
-            output.set(ModDataComponents.IS_INVERTED, Unit.INSTANCE)
-        }
+		if (output.has(ModDataComponents.IS_INVERTED)) {
+			output.remove(ModDataComponents.IS_INVERTED)
+		} else {
+			output.set(ModDataComponents.IS_INVERTED, Unit.INSTANCE)
+		}
 
-        return output
-    }
+		return output
+	}
 
-    override fun canCraftInDimensions(width: Int, height: Int): Boolean {
-        return width * height >= 1
-    }
+	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
+		return width * height >= 1
+	}
 
-    override fun getSerializer(): RecipeSerializer<*> {
-        return ModRecipeSerializers.INVERT_DIAPHANOUS_BLOCK.get()
-    }
+	override fun getSerializer(): RecipeSerializer<*> {
+		return ModRecipeSerializers.INVERT_DIAPHANOUS_BLOCK.get()
+	}
 }

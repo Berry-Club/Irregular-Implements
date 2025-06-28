@@ -11,43 +11,43 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
 class SidedRedstoneBlock : Block(
-    Properties
-        .ofFullCopy(Blocks.REDSTONE_BLOCK)
-        .isRedstoneConductor(Blocks::never)
+	Properties
+		.ofFullCopy(Blocks.REDSTONE_BLOCK)
+		.isRedstoneConductor(Blocks::never)
 ) {
 
-    companion object {
-        private val FACING = BlockStateProperties.FACING
-    }
+	companion object {
+		private val FACING = BlockStateProperties.FACING
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(FACING, Direction.NORTH)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.NORTH)
+		)
+	}
 
-    override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-        val facing = state.getValue(FACING)
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		val facing = state.getValue(FACING)
 
-        return direction == facing.opposite
-    }
+		return direction == facing.opposite
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(FACING, context.nearestLookingDirection.opposite)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
 
-    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return if (state.getValue(FACING) == direction.opposite) 16 else 0
-    }
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(FACING) == direction.opposite) 16 else 0
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return getDirectSignal(state, level, pos, direction)
-    }
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return getDirectSignal(state, level, pos, direction)
+	}
 
 }

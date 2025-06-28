@@ -11,40 +11,40 @@ import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
 class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
-    Minecraft.getInstance().blockEntityRenderDispatcher,
-    Minecraft.getInstance().entityModels
+	Minecraft.getInstance().blockEntityRenderDispatcher,
+	Minecraft.getInstance().entityModels
 ) {
 
-    companion object {
-        val clientItemExtensions = object : IClientItemExtensions {
-            val BEWLR = SpectreIlluminatorBEWLR()
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = SpectreIlluminatorBEWLR()
 
-            override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-                return BEWLR
-            }
-        }
-    }
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
+	}
 
-    override fun renderByItem(
-        stack: ItemStack,
-        displayContext: ItemDisplayContext,
-        poseStack: PoseStack,
-        buffer: MultiBufferSource,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        poseStack.pushPose()
-        poseStack.translate(0.5, 0.5, 0.5)
+	override fun renderByItem(
+		stack: ItemStack,
+		displayContext: ItemDisplayContext,
+		poseStack: PoseStack,
+		buffer: MultiBufferSource,
+		packedLight: Int,
+		packedOverlay: Int
+	) {
+		poseStack.pushPose()
+		poseStack.translate(0.5, 0.5, 0.5)
 
-        val time = (ClientUtil.localPlayer?.tickCount ?: 0) / 200f
+		val time = (ClientUtil.localPlayer?.tickCount ?: 0) / 200f
 
-        RenderUtils.renderDragonRays(
-            poseStack = poseStack,
-            time = time,
-            bufferSource = buffer
-        )
+		RenderUtils.renderDragonRays(
+			poseStack = poseStack,
+			time = time,
+			bufferSource = buffer
+		)
 
-        poseStack.popPose()
-    }
+		poseStack.popPose()
+	}
 
 }

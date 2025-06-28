@@ -19,58 +19,58 @@ import net.minecraft.world.phys.BlockHitResult
 
 class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
 
-    companion object {
-        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-    }
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(ENABLED, false)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(ENABLED, false)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(ENABLED)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(ENABLED)
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return NotificationInterfaceBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return NotificationInterfaceBlockEntity(pos, state)
+	}
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
-        super.setPlacedBy(level, pos, state, placer, stack)
+	override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+		super.setPlacedBy(level, pos, state, placer, stack)
 
-        val blockEntity = level.getBlockEntity(pos)
-        if (blockEntity is NotificationInterfaceBlockEntity && placer != null) {
-            blockEntity.ownerUuid = placer.uuid
-        }
-    }
+		val blockEntity = level.getBlockEntity(pos)
+		if (blockEntity is NotificationInterfaceBlockEntity && placer != null) {
+			blockEntity.ownerUuid = placer.uuid
+		}
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        val blockEntity = level.getBlockEntity(pos)
-        if (blockEntity is NotificationInterfaceBlockEntity) {
-            player.openMenu(blockEntity)
-            blockEntity.sendStringUpdate()
-        }
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		val blockEntity = level.getBlockEntity(pos)
+		if (blockEntity is NotificationInterfaceBlockEntity) {
+			player.openMenu(blockEntity)
+			blockEntity.sendStringUpdate()
+		}
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
-        val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity ?: return
+	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+		val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity ?: return
 
-        val isPowered = level.hasNeighborSignal(pos)
-        val wasEnabled = state.getValue(ENABLED)
+		val isPowered = level.hasNeighborSignal(pos)
+		val wasEnabled = state.getValue(ENABLED)
 
-        if (isPowered != wasEnabled) {
-            val newState = state.setValue(ENABLED, isPowered)
-            level.setBlockAndUpdate(pos, newState)
+		if (isPowered != wasEnabled) {
+			val newState = state.setValue(ENABLED, isPowered)
+			level.setBlockAndUpdate(pos, newState)
 
-            if (isPowered) {
-                blockEntity.notifyOwner()
-            }
-        }
-    }
+			if (isPowered) {
+				blockEntity.notifyOwner()
+			}
+		}
+	}
 
 }

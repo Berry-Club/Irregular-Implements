@@ -9,33 +9,33 @@ import net.minecraft.world.level.Level
 
 class EvilTearItem : Item(Properties()) {
 
-    companion object {
+	companion object {
 
-        private fun tryPlacePortal(level: Level, clickedPos: BlockPos): Boolean {
-            val centerPos = clickedPos.below(3)
+		private fun tryPlacePortal(level: Level, clickedPos: BlockPos): Boolean {
+			val centerPos = clickedPos.below(3)
 
-            val isValidLocation = ArtificialEndPortalEntity.isValidPosition(level, centerPos, checkForOtherPortals = true)
-            if (!isValidLocation) return false
+			val isValidLocation = ArtificialEndPortalEntity.isValidPosition(level, centerPos, checkForOtherPortals = true)
+			if (!isValidLocation) return false
 
-            val artificialEndPortalEntity = ArtificialEndPortalEntity(level, centerPos)
-            level.addFreshEntity(artificialEndPortalEntity)
+			val artificialEndPortalEntity = ArtificialEndPortalEntity(level, centerPos)
+			level.addFreshEntity(artificialEndPortalEntity)
 
-            return true
-        }
-    }
+			return true
+		}
+	}
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val clickedPos = context.clickedPos
-        val level = context.level
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val clickedPos = context.clickedPos
+		val level = context.level
 
-        if (level.isClientSide) return InteractionResult.PASS
+		if (level.isClientSide) return InteractionResult.PASS
 
-        if (!tryPlacePortal(level, clickedPos)) return InteractionResult.FAIL
+		if (!tryPlacePortal(level, clickedPos)) return InteractionResult.FAIL
 
-        val usedStack = context.itemInHand
-        usedStack.consume(1, context.player)
+		val usedStack = context.itemInHand
+		usedStack.consume(1, context.player)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
 }

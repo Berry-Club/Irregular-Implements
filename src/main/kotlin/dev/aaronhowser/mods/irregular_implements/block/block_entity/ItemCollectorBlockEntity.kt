@@ -15,71 +15,71 @@ import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.ItemHandlerHelper
 
 open class ItemCollectorBlockEntity(
-    blockEntity: BlockEntityType<out ItemCollectorBlockEntity>,
-    pPos: BlockPos,
-    pBlockState: BlockState
+	blockEntity: BlockEntityType<out ItemCollectorBlockEntity>,
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(blockEntity, pPos, pBlockState) {
 
-    constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntities.ITEM_COLLECTOR.get(), pos, blockState)
+	constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntities.ITEM_COLLECTOR.get(), pos, blockState)
 
-    companion object {
-        fun tick(
-            level: Level,
-            blockPos: BlockPos,
-            blockState: BlockState,
-            blockEntity: ItemCollectorBlockEntity
-        ) {
-            blockEntity.tick()
-        }
-    }
+	companion object {
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: ItemCollectorBlockEntity
+		) {
+			blockEntity.tick()
+		}
+	}
 
-    protected fun tick() {
-        val level = this.level ?: return
-        if (level.isClientSide || level.gameTime % 5 != 0L) return
+	protected fun tick() {
+		val level = this.level ?: return
+		if (level.isClientSide || level.gameTime % 5 != 0L) return
 
-        val facing = this.blockState.getValue(ItemCollectorBlock.FACING)
-        val onPos = this.blockPos.relative(facing)
+		val facing = this.blockState.getValue(ItemCollectorBlock.FACING)
+		val onPos = this.blockPos.relative(facing)
 
-        val itemHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, onPos, facing.opposite) ?: return
+		val itemHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, onPos, facing.opposite) ?: return
 
-        val itemEntities = level.getEntitiesOfClass(
-            ItemEntity::class.java,
-            this.getCollectionArea(),
-        )
+		val itemEntities = level.getEntitiesOfClass(
+			ItemEntity::class.java,
+			this.getCollectionArea(),
+		)
 
-        val filter = this.getFilter()
+		val filter = this.getFilter()
 
-        for (itemEntity in itemEntities) {
-            if (itemEntity.target != null || itemEntity.hasPickUpDelay()) continue
+		for (itemEntity in itemEntities) {
+			if (itemEntity.target != null || itemEntity.hasPickUpDelay()) continue
 
-            val stack = itemEntity.item
-            if (filter != null && !filter.test(stack).isTrue) continue
+			val stack = itemEntity.item
+			if (filter != null && !filter.test(stack).isTrue) continue
 
-            val newStack = ItemHandlerHelper.insertItemStacked(itemHandler, stack, false)
+			val newStack = ItemHandlerHelper.insertItemStacked(itemHandler, stack, false)
 
-            if (newStack.isEmpty) {
-                itemEntity.discard()
-                continue
-            }
+			if (newStack.isEmpty) {
+				itemEntity.discard()
+				continue
+			}
 
-            itemEntity.item = newStack
-        }
+			itemEntity.item = newStack
+		}
 
-    }
+	}
 
-    open fun getFilter(): ItemFilterDataComponent? {
-        return null
-    }
+	open fun getFilter(): ItemFilterDataComponent? {
+		return null
+	}
 
-    open fun getCollectionArea(): AABB {
-        val pos = this.blockPos
-        val radius = 3.0
-        return AABB.ofSize(
-            pos.center,
-            2 * radius,
-            2 * radius,
-            2 * radius
-        )
-    }
+	open fun getCollectionArea(): AABB {
+		val pos = this.blockPos
+		val radius = 3.0
+		return AABB.ofSize(
+			pos.center,
+			2 * radius,
+			2 * radius,
+			2 * radius
+		)
+	}
 
 }

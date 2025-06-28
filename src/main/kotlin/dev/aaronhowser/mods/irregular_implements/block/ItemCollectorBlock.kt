@@ -30,91 +30,91 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.capabilities.Capabilities
 
 class ItemCollectorBlock(
-    private val isAdvanced: Boolean
+	private val isAdvanced: Boolean
 ) : Block(Properties.ofFullCopy(Blocks.HOPPER)), EntityBlock {
 
-    companion object {
+	companion object {
 
-        val SHAPE_SOUTH: VoxelShape = box(6.0, 6.0, 16.0 - 5.0, 10.0, 10.0, 16.0)
-        val SHAPE_NORTH: VoxelShape = box(6.0, 6.0, 0.0, 10.0, 10.0, 5.0)
-        val SHAPE_EAST: VoxelShape = box(16.0 - 5.0, 6.0, 6.0, 16.0, 10.0, 10.0)
-        val SHAPE_WEST: VoxelShape = box(0.0, 6.0, 6.0, 5.0, 10.0, 10.0)
-        val SHAPE_DOWN: VoxelShape = box(6.0, 0.0, 6.0, 10.0, 5.0, 10.0)
-        val SHAPE_UP: VoxelShape = box(6.0, 16.0 - 5.0, 6.0, 10.0, 16.0, 10.0)
+		val SHAPE_SOUTH: VoxelShape = box(6.0, 6.0, 16.0 - 5.0, 10.0, 10.0, 16.0)
+		val SHAPE_NORTH: VoxelShape = box(6.0, 6.0, 0.0, 10.0, 10.0, 5.0)
+		val SHAPE_EAST: VoxelShape = box(16.0 - 5.0, 6.0, 6.0, 16.0, 10.0, 10.0)
+		val SHAPE_WEST: VoxelShape = box(0.0, 6.0, 6.0, 5.0, 10.0, 10.0)
+		val SHAPE_DOWN: VoxelShape = box(6.0, 0.0, 6.0, 10.0, 5.0, 10.0)
+		val SHAPE_UP: VoxelShape = box(6.0, 16.0 - 5.0, 6.0, 10.0, 16.0, 10.0)
 
-        val FACING: DirectionProperty = BlockStateProperties.FACING
-    }
+		val FACING: DirectionProperty = BlockStateProperties.FACING
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(FACING, Direction.DOWN)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.DOWN)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(FACING, context.clickedFace.opposite)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.clickedFace.opposite)
+	}
 
-    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return when (state.getValue(FACING)) {
-            Direction.NORTH -> SHAPE_NORTH
-            Direction.SOUTH -> SHAPE_SOUTH
-            Direction.WEST -> SHAPE_WEST
-            Direction.EAST -> SHAPE_EAST
-            Direction.UP -> SHAPE_UP
-            Direction.DOWN -> SHAPE_DOWN
-            else -> Shapes.block()
-        }
-    }
+	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		return when (state.getValue(FACING)) {
+			Direction.NORTH -> SHAPE_NORTH
+			Direction.SOUTH -> SHAPE_SOUTH
+			Direction.WEST -> SHAPE_WEST
+			Direction.EAST -> SHAPE_EAST
+			Direction.UP -> SHAPE_UP
+			Direction.DOWN -> SHAPE_DOWN
+			else -> Shapes.block()
+		}
+	}
 
-    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-        val facing = state.getValue(FACING)
-        val onBlockPos = pos.relative(facing)
+	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+		val facing = state.getValue(FACING)
+		val onBlockPos = pos.relative(facing)
 
-        val itemHandler = (level as? Level)?.getCapability(Capabilities.ItemHandler.BLOCK, onBlockPos, facing.opposite)
+		val itemHandler = (level as? Level)?.getCapability(Capabilities.ItemHandler.BLOCK, onBlockPos, facing.opposite)
 
-        return itemHandler != null
-    }
+		return itemHandler != null
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        val blockEntity = level.getBlockEntity(pos)
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		val blockEntity = level.getBlockEntity(pos)
 
-        if (blockEntity is MenuProvider) {
-            player.openMenu(blockEntity)
-            return InteractionResult.SUCCESS
-        }
+		if (blockEntity is MenuProvider) {
+			player.openMenu(blockEntity)
+			return InteractionResult.SUCCESS
+		}
 
-        return InteractionResult.PASS
-    }
+		return InteractionResult.PASS
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return if (this.isAdvanced) {
-            AdvancedItemCollectorBlockEntity(pos, state)
-        } else {
-            ItemCollectorBlockEntity(pos, state)
-        }
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return if (this.isAdvanced) {
+			AdvancedItemCollectorBlockEntity(pos, state)
+		} else {
+			ItemCollectorBlockEntity(pos, state)
+		}
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return if (this.isAdvanced) {
-            BaseEntityBlock.createTickerHelper(
-                blockEntityType,
-                ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(),
-                ItemCollectorBlockEntity::tick
-            )
-        } else {
-            BaseEntityBlock.createTickerHelper(
-                blockEntityType,
-                ModBlockEntities.ITEM_COLLECTOR.get(),
-                ItemCollectorBlockEntity::tick
-            )
-        }
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return if (this.isAdvanced) {
+			BaseEntityBlock.createTickerHelper(
+				blockEntityType,
+				ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(),
+				ItemCollectorBlockEntity::tick
+			)
+		} else {
+			BaseEntityBlock.createTickerHelper(
+				blockEntityType,
+				ModBlockEntities.ITEM_COLLECTOR.get(),
+				ItemCollectorBlockEntity::tick
+			)
+		}
+	}
 
 }

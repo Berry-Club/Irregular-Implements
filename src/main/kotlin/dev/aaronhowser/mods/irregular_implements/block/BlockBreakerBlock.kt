@@ -28,101 +28,101 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
 
 class BlockBreakerBlock : Block(
-    Properties.ofFullCopy(Blocks.DISPENSER)
+	Properties.ofFullCopy(Blocks.DISPENSER)
 ), EntityBlock {
 
-    companion object {
-        val FACING: DirectionProperty = BlockStateProperties.FACING
-        val IS_UPGRADED: BooleanProperty = BooleanProperty.create("is_upgraded")
-    }
+	companion object {
+		val FACING: DirectionProperty = BlockStateProperties.FACING
+		val IS_UPGRADED: BooleanProperty = BooleanProperty.create("is_upgraded")
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(FACING, Direction.NORTH)
-                .setValue(IS_UPGRADED, false)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.NORTH)
+				.setValue(IS_UPGRADED, false)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING, IS_UPGRADED)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING, IS_UPGRADED)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(FACING, context.nearestLookingDirection.opposite)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return BlockBreakerBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return BlockBreakerBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(
-        level: Level,
-        state: BlockState,
-        blockEntityType: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(
-            blockEntityType,
-            ModBlockEntities.BLOCK_BREAKER.get(),
-            BlockBreakerBlockEntity::tick
-        )
-    }
+	override fun <T : BlockEntity?> getTicker(
+		level: Level,
+		state: BlockState,
+		blockEntityType: BlockEntityType<T>
+	): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(
+			blockEntityType,
+			ModBlockEntities.BLOCK_BREAKER.get(),
+			BlockBreakerBlockEntity::tick
+		)
+	}
 
-    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
+	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+		super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
 
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return
-        blockEntity.neighborChanged(state, level)
-    }
+		val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return
+		blockEntity.neighborChanged(state, level)
+	}
 
-    override fun useItemOn(
-        stack: ItemStack,
-        state: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        hand: InteractionHand,
-        hitResult: BlockHitResult
-    ): ItemInteractionResult {
-        if (level.isClientSide) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return ItemInteractionResult.FAIL
+	override fun useItemOn(
+		stack: ItemStack,
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hand: InteractionHand,
+		hitResult: BlockHitResult
+	): ItemInteractionResult {
+		if (level.isClientSide) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+		val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return ItemInteractionResult.FAIL
 
-        if (!stack.`is`(ModItems.DIAMOND_BREAKER) || state.getValue(IS_UPGRADED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+		if (!stack.`is`(ModItems.DIAMOND_BREAKER) || state.getValue(IS_UPGRADED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
-        blockEntity.upgrade(stack.copyWithCount(1))
+		blockEntity.upgrade(stack.copyWithCount(1))
 
-        val newState = state.setValue(IS_UPGRADED, true)
-        level.setBlockAndUpdate(pos, newState)
+		val newState = state.setValue(IS_UPGRADED, true)
+		level.setBlockAndUpdate(pos, newState)
 
-        stack.consume(1, player)
-        return ItemInteractionResult.SUCCESS
-    }
+		stack.consume(1, player)
+		return ItemInteractionResult.SUCCESS
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        if (level.isClientSide
-            || !player.isSecondaryUseActive
-            || !state.getValue(IS_UPGRADED)
-        ) return InteractionResult.PASS
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		if (level.isClientSide
+			|| !player.isSecondaryUseActive
+			|| !state.getValue(IS_UPGRADED)
+		) return InteractionResult.PASS
 
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return InteractionResult.FAIL
-        blockEntity.downgrade(player)
+		val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return InteractionResult.FAIL
+		blockEntity.downgrade(player)
 
-        val newState = state.setValue(IS_UPGRADED, false)
-        level.setBlockAndUpdate(pos, newState)
+		val newState = state.setValue(IS_UPGRADED, false)
+		level.setBlockAndUpdate(pos, newState)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-        if (oldState.`is`(newState.block)) return
+	override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		if (oldState.`is`(newState.block)) return
 
-        val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
-        if (blockEntity != null) {
-            OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
-        }
+		val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
+		if (blockEntity != null) {
+			OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
+		}
 
-        super.onRemove(oldState, level, pos, newState, movedByPiston)
-    }
+		super.onRemove(oldState, level, pos, newState, movedByPiston)
+	}
 
 }

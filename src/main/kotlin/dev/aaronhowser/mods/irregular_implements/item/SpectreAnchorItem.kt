@@ -17,61 +17,61 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import top.theillusivec4.curios.api.CuriosApi
 
 class SpectreAnchorItem : Item(
-    Properties()
-        .component(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
+	Properties()
+		.component(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
 ) {
 
-    companion object {
+	companion object {
 
-        fun saveAnchoredItems(player: Player) {
-            val level = player.level()
-            if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return
+		fun saveAnchoredItems(player: Player) {
+			val level = player.level()
+			if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return
 
-            val anchoredItems = player.inventory.items.filter { it.has(ModDataComponents.IS_ANCHORED) }.toMutableList()
-            for (item in anchoredItems) {
-                player.inventory.removeItem(item)
-            }
+			val anchoredItems = player.inventory.items.filter { it.has(ModDataComponents.IS_ANCHORED) }.toMutableList()
+			for (item in anchoredItems) {
+				player.inventory.removeItem(item)
+			}
 
-            CuriosApi.getCuriosInventory(player).ifPresent { inventory ->
-                for (slot in 0 until inventory.equippedCurios.slots) {
-                    val stack = inventory.equippedCurios.getStackInSlot(slot)
-                    if (stack.has(ModDataComponents.IS_ANCHORED)) {
-                        anchoredItems.add(stack)
-                        inventory.equippedCurios.setStackInSlot(slot, ItemStack.EMPTY)
-                    }
-                }
-            }
+			CuriosApi.getCuriosInventory(player).ifPresent { inventory ->
+				for (slot in 0 until inventory.equippedCurios.slots) {
+					val stack = inventory.equippedCurios.getStackInSlot(slot)
+					if (stack.has(ModDataComponents.IS_ANCHORED)) {
+						anchoredItems.add(stack)
+						inventory.equippedCurios.setStackInSlot(slot, ItemStack.EMPTY)
+					}
+				}
+			}
 
-            player.setData(ModAttachmentTypes.DEATH_KEPT_ITEMS, DeathKeptItems(anchoredItems))
-        }
+			player.setData(ModAttachmentTypes.DEATH_KEPT_ITEMS, DeathKeptItems(anchoredItems))
+		}
 
-        fun returnItems(player: Player) {
-            val items = player.getData(ModAttachmentTypes.DEATH_KEPT_ITEMS.get()).stacks
-            if (items.isEmpty()) return
+		fun returnItems(player: Player) {
+			val items = player.getData(ModAttachmentTypes.DEATH_KEPT_ITEMS.get()).stacks
+			if (items.isEmpty()) return
 
-            for (item in items) {
-                if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
-                    //TODO: Tell the player that the item was returned, and that the anchor was consumed
-                    item.remove(ModDataComponents.IS_ANCHORED)
-                }
+			for (item in items) {
+				if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
+					//TODO: Tell the player that the item was returned, and that the anchor was consumed
+					item.remove(ModDataComponents.IS_ANCHORED)
+				}
 
-                OtherUtil.giveOrDropStack(item, player)
-            }
+				OtherUtil.giveOrDropStack(item, player)
+			}
 
-            player.setData(ModAttachmentTypes.DEATH_KEPT_ITEMS, DeathKeptItems(emptyList()))
-        }
+			player.setData(ModAttachmentTypes.DEATH_KEPT_ITEMS, DeathKeptItems(emptyList()))
+		}
 
-        fun tooltip(event: ItemTooltipEvent) {
-            val stack = event.itemStack
-            if (!stack.has(ModDataComponents.IS_ANCHORED)) return
+		fun tooltip(event: ItemTooltipEvent) {
+			val stack = event.itemStack
+			if (!stack.has(ModDataComponents.IS_ANCHORED)) return
 
-            event.toolTip.add(
-                ModLanguageProvider.Tooltips.ANCHORED
-                    .toComponent()
-                    .withStyle(ChatFormatting.DARK_AQUA)
-            )
-        }
+			event.toolTip.add(
+				ModLanguageProvider.Tooltips.ANCHORED
+					.toComponent()
+					.withStyle(ChatFormatting.DARK_AQUA)
+			)
+		}
 
-    }
+	}
 
 }

@@ -12,44 +12,44 @@ import net.minecraft.world.phys.AABB
 
 class BlackoutPowderItem : Item(Properties()) {
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val level = context.level
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val level = context.level
 
-        val clickedPos = context.clickedPos
+		val clickedPos = context.clickedPos
 
-        val chunkPos = ChunkPos(clickedPos)
-        val minX = chunkPos.minBlockX
-        val minY = level.minBuildHeight
-        val minZ = chunkPos.minBlockZ
-        val maxX = chunkPos.maxBlockX
-        val maxY = level.maxBuildHeight + SpectreIlluminatorEntity.HEIGHT_ABOVE_MAX_BLOCK * 3
-        val maxZ = chunkPos.maxBlockZ
+		val chunkPos = ChunkPos(clickedPos)
+		val minX = chunkPos.minBlockX
+		val minY = level.minBuildHeight
+		val minZ = chunkPos.minBlockZ
+		val maxX = chunkPos.maxBlockX
+		val maxY = level.maxBuildHeight + SpectreIlluminatorEntity.HEIGHT_ABOVE_MAX_BLOCK * 3
+		val maxZ = chunkPos.maxBlockZ
 
-        val aabb = AABB(minX.toDouble(), minY.toDouble(), minZ.toDouble(), maxX.toDouble(), maxY.toDouble(), maxZ.toDouble())
+		val aabb = AABB(minX.toDouble(), minY.toDouble(), minZ.toDouble(), maxX.toDouble(), maxY.toDouble(), maxZ.toDouble())
 
-        val illuminators = level.getEntitiesOfClass(SpectreIlluminatorEntity::class.java, aabb)
+		val illuminators = level.getEntitiesOfClass(SpectreIlluminatorEntity::class.java, aabb)
 
-        if (illuminators.isEmpty()) return InteractionResult.FAIL
+		if (illuminators.isEmpty()) return InteractionResult.FAIL
 
-        val player = context.player
+		val player = context.player
 
-        for (illuminator in illuminators) {
+		for (illuminator in illuminators) {
 
-            illuminator.discard()
+			illuminator.discard()
 
-            if (!player?.hasInfiniteMaterials().isTrue) {
-                OtherUtil.dropStackAt(
-                    ModItems.SPECTRE_ILLUMINATOR.toStack(),
-                    illuminator.level(),
-                    clickedPos.relative(context.clickedFace).center
-                )
-            }
+			if (!player?.hasInfiniteMaterials().isTrue) {
+				OtherUtil.dropStackAt(
+					ModItems.SPECTRE_ILLUMINATOR.toStack(),
+					illuminator.level(),
+					clickedPos.relative(context.clickedFace).center
+				)
+			}
 
-        }
+		}
 
-        context.itemInHand.consume(1, context.player)
+		context.itemInHand.consume(1, context.player)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
 }

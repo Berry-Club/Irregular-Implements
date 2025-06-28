@@ -12,37 +12,37 @@ import net.minecraft.world.item.*
 import net.minecraft.world.level.Level
 
 class ImbueItem(
-    val imbueHolder: Holder<MobEffect>
+	val imbueHolder: Holder<MobEffect>
 ) : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ) {
 
-    override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.DRINK
-    override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 32
+	override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.DRINK
+	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 32
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        return ItemUtils.startUsingInstantly(level, player, usedHand)
-    }
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		return ItemUtils.startUsingInstantly(level, player, usedHand)
+	}
 
-    override fun finishUsingItem(stack: ItemStack, level: Level, livingEntity: LivingEntity): ItemStack {
-        val mobEffectInstance = MobEffectInstance(
-            imbueHolder,
-            SharedConstants.TICKS_PER_MINUTE * 20,
-            0
-        )
+	override fun finishUsingItem(stack: ItemStack, level: Level, livingEntity: LivingEntity): ItemStack {
+		val mobEffectInstance = MobEffectInstance(
+			imbueHolder,
+			SharedConstants.TICKS_PER_MINUTE * 20,
+			0
+		)
 
-        livingEntity.addEffect(mobEffectInstance)
+		livingEntity.addEffect(mobEffectInstance)
 
-        if (livingEntity is Player) {
-            ItemUtils.createFilledResult(
-                stack,
-                livingEntity,
-                Items.GLASS_BOTTLE.defaultInstance
-            )
-        }
+		if (livingEntity is Player) {
+			ItemUtils.createFilledResult(
+				stack,
+				livingEntity,
+				Items.GLASS_BOTTLE.defaultInstance
+			)
+		}
 
-        return stack
-    }
+		return stack
+	}
 
 }

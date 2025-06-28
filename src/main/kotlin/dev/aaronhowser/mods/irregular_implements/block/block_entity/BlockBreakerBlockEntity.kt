@@ -36,262 +36,262 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 class BlockBreakerBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.BLOCK_BREAKER.get(), pPos, pBlockState) {
 
-    companion object {
-        val breakerGameProfile = GameProfile(UUID.nameUUIDFromBytes("IIBlockBreaker".toByteArray()), "IIBlockBreaker")
+	companion object {
+		val breakerGameProfile = GameProfile(UUID.nameUUIDFromBytes("IIBlockBreaker".toByteArray()), "IIBlockBreaker")
 
-        const val UUID_NBT = "UUID"
-        const val IS_MINING_NBT = "IsMining"
-        const val CAN_MINE_NBT = "CanMine"
-        const val MINING_PROGRESS_NBT = "MiningProgress"
-        const val DIAMOND_BREAKER_NBT = "DiamondBreaker"
+		const val UUID_NBT = "UUID"
+		const val IS_MINING_NBT = "IsMining"
+		const val CAN_MINE_NBT = "CanMine"
+		const val MINING_PROGRESS_NBT = "MiningProgress"
+		const val DIAMOND_BREAKER_NBT = "DiamondBreaker"
 
-        private fun getPick(
-            level: Level,
-            item: Item,
-            withEnchantments: ItemEnchantments
-        ): ItemStack {
-            val stack = item.defaultInstance
-            stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
+		private fun getPick(
+			level: Level,
+			item: Item,
+			withEnchantments: ItemEnchantments
+		): ItemStack {
+			val stack = item.defaultInstance
+			stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
 
-            val enchantments = ItemEnchantments.Mutable(withEnchantments)
-            enchantments.set(
-                level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
-                1
-            )
+			val enchantments = ItemEnchantments.Mutable(withEnchantments)
+			enchantments.set(
+				level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
+				1
+			)
 
-            EnchantmentHelper.setEnchantments(
-                stack,
-                enchantments.toImmutable()
-            )
+			EnchantmentHelper.setEnchantments(
+				stack,
+				enchantments.toImmutable()
+			)
 
-            return stack
-        }
+			return stack
+		}
 
-        fun tick(
-            level: Level,
-            blockPos: BlockPos,
-            blockState: BlockState,
-            blockEntity: BlockBreakerBlockEntity
-        ) {
-            if (level.isClientSide) return
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: BlockBreakerBlockEntity
+		) {
+			if (level.isClientSide) return
 
-            blockEntity.tick()
-        }
-    }
+			blockEntity.tick()
+		}
+	}
 
-    private var uuid: UUID? = null
+	private var uuid: UUID? = null
 
-    private var isMining = false
-    private var canMine = false
+	private var isMining = false
+	private var canMine = false
 
-    private var miningProgress = 0f
+	private var miningProgress = 0f
 
-    private var isFirstTick = false
+	private var isFirstTick = false
 
-    private var fakePlayer: WeakReference<FakePlayer>? = null
+	private var fakePlayer: WeakReference<FakePlayer>? = null
 
-    var diamondBreaker: ItemStack = ItemStack.EMPTY
-        private set
+	var diamondBreaker: ItemStack = ItemStack.EMPTY
+		private set
 
-    private fun initFakePlayer() {
-        val level = level as? ServerLevel ?: return
+	private fun initFakePlayer() {
+		val level = level as? ServerLevel ?: return
 
-        if (this.uuid == null) {
-            this.uuid = UUID.randomUUID()
-            setChanged()
-        }
+		if (this.uuid == null) {
+			this.uuid = UUID.randomUUID()
+			setChanged()
+		}
 
-        val fakePlayer = FakePlayerFactory.get(level, breakerGameProfile)
+		val fakePlayer = FakePlayerFactory.get(level, breakerGameProfile)
 
-        fakePlayer.isSilent = true
-        fakePlayer.setOnGround(true)
+		fakePlayer.isSilent = true
+		fakePlayer.setOnGround(true)
 
-        val pickToUse = if (diamondBreaker.isEmpty) {
-            getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
-        } else {
-            val breakerEnchants = diamondBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
-            getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchants)
-        }
+		val pickToUse = if (diamondBreaker.isEmpty) {
+			getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
+		} else {
+			val breakerEnchants = diamondBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+			getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchants)
+		}
 
-        fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pickToUse)
+		fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pickToUse)
 
-        this.fakePlayer = WeakReference(fakePlayer)
-        setChanged()
-    }
+		this.fakePlayer = WeakReference(fakePlayer)
+		setChanged()
+	}
 
-    fun upgrade(insertedBreaker: ItemStack) {
-        val level = level as? ServerLevel ?: return
-        val fakePlayer = this.fakePlayer?.get() ?: return
+	fun upgrade(insertedBreaker: ItemStack) {
+		val level = level as? ServerLevel ?: return
+		val fakePlayer = this.fakePlayer?.get() ?: return
 
-        val breakerEnchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
-        val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchantments)
+		val breakerEnchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+		val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchantments)
 
-        this.diamondBreaker = insertedBreaker
-        setChanged()
+		this.diamondBreaker = insertedBreaker
+		setChanged()
 
-        fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pick)
-    }
+		fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pick)
+	}
 
-    fun downgrade(player: Player) {
-        val level = level as? ServerLevel ?: return
+	fun downgrade(player: Player) {
+		val level = level as? ServerLevel ?: return
 
-        OtherUtil.giveOrDropStack(this.diamondBreaker, player)
-        this.diamondBreaker = ItemStack.EMPTY
+		OtherUtil.giveOrDropStack(this.diamondBreaker, player)
+		this.diamondBreaker = ItemStack.EMPTY
 
-        val basicPick = getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
+		val basicPick = getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
 
-        this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, basicPick)
-    }
+		this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, basicPick)
+	}
 
-    fun tick() {
-        val level = level as? ServerLevel ?: return
+	fun tick() {
+		val level = level as? ServerLevel ?: return
 
-        if (!this.isFirstTick) {
-            this.isFirstTick = true
-            initFakePlayer()
-        }
+		if (!this.isFirstTick) {
+			this.isFirstTick = true
+			initFakePlayer()
+		}
 
-        val fakePlayer = this.fakePlayer?.get() ?: return
+		val fakePlayer = this.fakePlayer?.get() ?: return
 
-        if (this.isMining) {
-            val facing = blockState.getValue(BlockBreakerBlock.FACING)
-            val targetPos = blockPos.relative(facing)
+		if (this.isMining) {
+			val facing = blockState.getValue(BlockBreakerBlock.FACING)
+			val targetPos = blockPos.relative(facing)
 
-            val targetState = level.getBlockState(targetPos)
+			val targetState = level.getBlockState(targetPos)
 
-            //FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
-            val destroyProgress = targetState.getDestroyProgress(fakePlayer, level, targetPos)
+			//FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
+			val destroyProgress = targetState.getDestroyProgress(fakePlayer, level, targetPos)
 
-            this.miningProgress += destroyProgress
+			this.miningProgress += destroyProgress
 
-            if (this.miningProgress < 1f) {
-                level.destroyBlockProgress(
-                    this.uuid.hashCode(),
-                    targetPos,
-                    Mth.ceil(this.miningProgress * 10)
-                )
-                return
-            }
+			if (this.miningProgress < 1f) {
+				level.destroyBlockProgress(
+					this.uuid.hashCode(),
+					targetPos,
+					Mth.ceil(this.miningProgress * 10)
+				)
+				return
+			}
 
-            mineBlock(facing, fakePlayer, targetPos, level)
-        }
-    }
+			mineBlock(facing, fakePlayer, targetPos, level)
+		}
+	}
 
-    private fun mineBlock(facing: Direction, fakePlayer: FakePlayer, targetPos: BlockPos, level: ServerLevel) {
+	private fun mineBlock(facing: Direction, fakePlayer: FakePlayer, targetPos: BlockPos, level: ServerLevel) {
 
-        this.isMining = false
-        resetProgress()
+		this.isMining = false
+		resetProgress()
 
-        val possibleInventoryPos = this.blockPos.relative(facing.opposite)
-        val inventoryHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
+		val possibleInventoryPos = this.blockPos.relative(facing.opposite)
+		val inventoryHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
 
-        // The Magnetic enchantment on the pick immediately teleports the item to the FakePlayer's inventory
-        fakePlayer.gameMode.destroyBlock(targetPos)
+		// The Magnetic enchantment on the pick immediately teleports the item to the FakePlayer's inventory
+		fakePlayer.gameMode.destroyBlock(targetPos)
 
-        val inventory = fakePlayer.inventory
+		val inventory = fakePlayer.inventory
 
-        for (i in inventory.items.indices) {
-            val stack = inventory.items[i].copy()
+		for (i in inventory.items.indices) {
+			val stack = inventory.items[i].copy()
 
-            if (stack.isEmpty
-                || ItemStack.isSameItemSameComponents(stack, inventory.getSelected())
-            ) continue
+			if (stack.isEmpty
+				|| ItemStack.isSameItemSameComponents(stack, inventory.getSelected())
+			) continue
 
-            inventory.removeItemNoUpdate(i)
+			inventory.removeItemNoUpdate(i)
 
-            var remainder = stack.copy()
+			var remainder = stack.copy()
 
-            if (inventoryHandler != null) {
-                remainder = ItemHandlerHelper.insertItemStacked(inventoryHandler, remainder, false)
-            }
+			if (inventoryHandler != null) {
+				remainder = ItemHandlerHelper.insertItemStacked(inventoryHandler, remainder, false)
+			}
 
-            if (!remainder.isEmpty) {
-                OtherUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
-            }
-        }
-    }
+			if (!remainder.isEmpty) {
+				OtherUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
+			}
+		}
+	}
 
-    private fun resetProgress() {
-        val uuid = this.uuid ?: return
-        val level = level as? ServerLevel ?: return
+	private fun resetProgress() {
+		val uuid = this.uuid ?: return
+		val level = level as? ServerLevel ?: return
 
-        val targetPos = blockPos.relative(blockState.getValue(BlockBreakerBlock.FACING))
+		val targetPos = blockPos.relative(blockState.getValue(BlockBreakerBlock.FACING))
 
-        level.destroyBlockProgress(uuid.hashCode(), targetPos, -1)
-        this.miningProgress = 0f
-    }
+		level.destroyBlockProgress(uuid.hashCode(), targetPos, -1)
+		this.miningProgress = 0f
+	}
 
-    fun neighborChanged(state: BlockState, level: Level) {
-        val targetPos = blockPos.relative(state.getValue(BlockBreakerBlock.FACING))
-        val targetState = level.getBlockState(targetPos)
+	fun neighborChanged(state: BlockState, level: Level) {
+		val targetPos = blockPos.relative(state.getValue(BlockBreakerBlock.FACING))
+		val targetState = level.getBlockState(targetPos)
 
-        this.canMine = !level.hasNeighborSignal(blockPos)
+		this.canMine = !level.hasNeighborSignal(blockPos)
 
-        if (this.canMine) {
-            if (!targetState.isAir) {
-                if (!this.isMining) {
-                    this.isMining = true
-                    this.miningProgress = 0f
-                }
-            } else {
-                this.isMining = false
-                resetProgress()
-            }
-        } else {
-            if (this.isMining) {
-                this.isMining = false
-                resetProgress()
-            }
-        }
-    }
+		if (this.canMine) {
+			if (!targetState.isAir) {
+				if (!this.isMining) {
+					this.isMining = true
+					this.miningProgress = 0f
+				}
+			} else {
+				this.isMining = false
+				resetProgress()
+			}
+		} else {
+			if (this.isMining) {
+				this.isMining = false
+				resetProgress()
+			}
+		}
+	}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        val uuid = this.uuid
-        if (uuid != null) {
-            tag.putUUID(UUID_NBT, uuid)
-        }
+		val uuid = this.uuid
+		if (uuid != null) {
+			tag.putUUID(UUID_NBT, uuid)
+		}
 
-        tag.putBoolean(IS_MINING_NBT, this.isMining)
-        tag.putBoolean(CAN_MINE_NBT, this.canMine)
-        tag.putFloat(MINING_PROGRESS_NBT, this.miningProgress)
+		tag.putBoolean(IS_MINING_NBT, this.isMining)
+		tag.putBoolean(CAN_MINE_NBT, this.canMine)
+		tag.putFloat(MINING_PROGRESS_NBT, this.miningProgress)
 
-        if (!this.diamondBreaker.isEmpty) {
-            tag.put(DIAMOND_BREAKER_NBT, this.diamondBreaker.save(registries))
-        }
-    }
+		if (!this.diamondBreaker.isEmpty) {
+			tag.put(DIAMOND_BREAKER_NBT, this.diamondBreaker.save(registries))
+		}
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        this.uuid = tag.getUuidOrNull(UUID_NBT)
+		this.uuid = tag.getUuidOrNull(UUID_NBT)
 
-        this.isMining = tag.getBoolean(IS_MINING_NBT)
-        this.canMine = tag.getBoolean(CAN_MINE_NBT)
-        this.miningProgress = tag.getFloat(MINING_PROGRESS_NBT)
+		this.isMining = tag.getBoolean(IS_MINING_NBT)
+		this.canMine = tag.getBoolean(CAN_MINE_NBT)
+		this.miningProgress = tag.getFloat(MINING_PROGRESS_NBT)
 
-        if (tag.contains(DIAMOND_BREAKER_NBT)) {
-            this.diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
-        }
-    }
+		if (tag.contains(DIAMOND_BREAKER_NBT)) {
+			this.diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
+		}
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
-    class BreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
+	class BreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
 
-        companion object {
-            fun get(level: ServerLevel, name: GameProfile): BreakerFakePlayer {
-                return BreakerFakePlayer(level, name)
-            }
-        }
+		companion object {
+			fun get(level: ServerLevel, name: GameProfile): BreakerFakePlayer {
+				return BreakerFakePlayer(level, name)
+			}
+		}
 
-    }
+	}
 
 }

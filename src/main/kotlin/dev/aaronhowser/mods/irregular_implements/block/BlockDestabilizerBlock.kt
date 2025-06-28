@@ -20,81 +20,81 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.BlockHitResult
 
 class BlockDestabilizerBlock(
-    properties: Properties = Properties
-        .ofFullCopy(Blocks.DISPENSER)
+	properties: Properties = Properties
+		.ofFullCopy(Blocks.DISPENSER)
 ) : EntityBlock, DirectionalBlock(properties) {
 
-    companion object {
-        val CODEC: MapCodec<BlockDestabilizerBlock> = simpleCodec(::BlockDestabilizerBlock)
+	companion object {
+		val CODEC: MapCodec<BlockDestabilizerBlock> = simpleCodec(::BlockDestabilizerBlock)
 
-        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-    }
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(FACING, Direction.NORTH)
-                .setValue(ENABLED, false)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.NORTH)
+				.setValue(ENABLED, false)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING, ENABLED)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING, ENABLED)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(FACING, context.nearestLookingDirection.opposite)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
 
-    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
-        val powered = level.hasNeighborSignal(pos)
-        val currentlyEnabled = state.getValue(ENABLED)
+	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+		val powered = level.hasNeighborSignal(pos)
+		val currentlyEnabled = state.getValue(ENABLED)
 
-        if (powered != currentlyEnabled) {
-            val newState = state.setValue(ENABLED, powered)
-            level.setBlockAndUpdate(pos, newState)
+		if (powered != currentlyEnabled) {
+			val newState = state.setValue(ENABLED, powered)
+			level.setBlockAndUpdate(pos, newState)
 
-            if (powered) {
-                val blockEntity = level.getBlockEntity(pos) as? BlockDestabilizerBlockEntity ?: return
+			if (powered) {
+				val blockEntity = level.getBlockEntity(pos) as? BlockDestabilizerBlockEntity ?: return
 
-                if (blockEntity.state == BlockDestabilizerBlockEntity.State.IDLE) {
-                    blockEntity.initStart()
-                }
-            }
-        }
-    }
+				if (blockEntity.state == BlockDestabilizerBlockEntity.State.IDLE) {
+					blockEntity.initStart()
+				}
+			}
+		}
+	}
 
-    override fun useWithoutItem(
-        pState: BlockState,
-        pLevel: Level,
-        pPos: BlockPos,
-        pPlayer: Player,
-        pHitResult: BlockHitResult
-    ): InteractionResult {
-        val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDestabilizerBlockEntity ?: return InteractionResult.FAIL
+	override fun useWithoutItem(
+		pState: BlockState,
+		pLevel: Level,
+		pPos: BlockPos,
+		pPlayer: Player,
+		pHitResult: BlockHitResult
+	): InteractionResult {
+		val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDestabilizerBlockEntity ?: return InteractionResult.FAIL
 
-        pPlayer.openMenu(blockEntity)
-        return InteractionResult.SUCCESS
-    }
+		pPlayer.openMenu(blockEntity)
+		return InteractionResult.SUCCESS
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return BlockDestabilizerBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return BlockDestabilizerBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(
-        level: Level,
-        state: BlockState,
-        blockEntityType: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(
-            blockEntityType,
-            ModBlockEntities.BLOCK_DESTABILIZER.get(),
-            BlockDestabilizerBlockEntity::tick
-        )
-    }
+	override fun <T : BlockEntity?> getTicker(
+		level: Level,
+		state: BlockState,
+		blockEntityType: BlockEntityType<T>
+	): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(
+			blockEntityType,
+			ModBlockEntities.BLOCK_DESTABILIZER.get(),
+			BlockDestabilizerBlockEntity::tick
+		)
+	}
 
-    override fun codec(): MapCodec<BlockDestabilizerBlock> {
-        return CODEC
-    }
+	override fun codec(): MapCodec<BlockDestabilizerBlock> {
+		return CODEC
+	}
 }

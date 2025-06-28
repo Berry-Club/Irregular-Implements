@@ -8,17 +8,17 @@ import net.minecraft.world.phys.Vec3
 
 class BouncyPlateBlock : BasePlateBlock() {
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        if (entity.deltaMovement.y >= 1.0) return
+	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+		if (entity.deltaMovement.y >= 1.0) return
 
-        entity.deltaMovement = Vec3(
-            entity.deltaMovement.x,
-            1.0,
-            entity.deltaMovement.z
-        )
+		entity.deltaMovement = Vec3(
+			entity.deltaMovement.x,
+			1.0,
+			entity.deltaMovement.z
+		)
 
-        entity.resetFallDistance()
-        entity.setOnGround(false)
-    }
+		entity.resetFallDistance()
+		entity.setOnGround(false)
+	}
 
 }

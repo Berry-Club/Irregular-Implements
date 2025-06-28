@@ -17,37 +17,37 @@ import java.util.*
 
 object ModEnchantments {
 
-    //FIXME: The item entity renders as moving towards the local player, rather than the player who's picking it up
-    val MAGNETIC: ResourceKey<Enchantment> =
-        ResourceKey.create(Registries.ENCHANTMENT, OtherUtil.modResource("magnetic"))
+	//FIXME: The item entity renders as moving towards the local player, rather than the player who's picking it up
+	val MAGNETIC: ResourceKey<Enchantment> =
+		ResourceKey.create(Registries.ENCHANTMENT, OtherUtil.modResource("magnetic"))
 
-    fun getHolder(enchantment: ResourceKey<Enchantment>, registryAccess: RegistryAccess): Holder.Reference<Enchantment> {
-        return registryAccess.registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(enchantment)
-    }
+	fun getHolder(enchantment: ResourceKey<Enchantment>, registryAccess: RegistryAccess): Holder.Reference<Enchantment> {
+		return registryAccess.registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(enchantment)
+	}
 
-    fun bootstrap(context: BootstrapContext<Enchantment>) {
+	fun bootstrap(context: BootstrapContext<Enchantment>) {
 
-        context.register(
-            MAGNETIC,
-            Enchantment(
-                ModLanguageProvider.Misc.MAGNETIC_NAME.toComponent(),
-                Enchantment.EnchantmentDefinition(
-                    context.lookup(Registries.ITEM).getOrThrow(ModItemTagsProvider.ENCHANTABLE_MAGNETIC),
-                    Optional.empty(),
-                    1,
-                    1,
-                    Enchantment.Cost(15, 0),
-                    Enchantment.Cost(65, 0),
-                    2,
-                    listOf(EquipmentSlotGroup.HAND)
-                ),
-                HolderSet.empty(),
-                DataComponentMap
-                    .builder()
-                    .build()
-            )
-        )
+		context.register(
+			MAGNETIC,
+			Enchantment(
+				ModLanguageProvider.Misc.MAGNETIC_NAME.toComponent(),
+				Enchantment.EnchantmentDefinition(
+					context.lookup(Registries.ITEM).getOrThrow(ModItemTagsProvider.ENCHANTABLE_MAGNETIC),
+					Optional.empty(),
+					1,
+					1,
+					Enchantment.Cost(15, 0),
+					Enchantment.Cost(65, 0),
+					2,
+					listOf(EquipmentSlotGroup.HAND)
+				),
+				HolderSet.empty(),
+				DataComponentMap
+					.builder()
+					.build()
+			)
+		)
 
-    }
+	}
 
 }

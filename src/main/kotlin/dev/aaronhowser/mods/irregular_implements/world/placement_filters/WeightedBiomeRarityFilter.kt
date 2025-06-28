@@ -14,44 +14,44 @@ import net.minecraft.world.level.levelgen.placement.PlacementFilter
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType
 
 data class WeightedBiomeRarityFilter(
-    val pointsPerBiomeTag: Map<TagKey<Biome>, Int>,
-    val basePoints: Int,
-    val chanceFactor: Int
+	val pointsPerBiomeTag: Map<TagKey<Biome>, Int>,
+	val basePoints: Int,
+	val chanceFactor: Int
 ) : PlacementFilter() {
 
-    companion object {
-        val CODEC: MapCodec<WeightedBiomeRarityFilter> =
-            RecordCodecBuilder.mapCodec { instance ->
-                instance.group(
-                    Codec.unboundedMap(
-                        TagKey.codec(Registries.BIOME),
-                        Codec.INT
-                    )
-                        .fieldOf("points_per_biome_tag")
-                        .forGetter(WeightedBiomeRarityFilter::pointsPerBiomeTag),
-                    Codec.INT
-                        .fieldOf("base_points")
-                        .forGetter(WeightedBiomeRarityFilter::basePoints),
-                    Codec.INT
-                        .fieldOf("chance_factor")
-                        .forGetter(WeightedBiomeRarityFilter::chanceFactor)
-                ).apply(instance, ::WeightedBiomeRarityFilter)
-            }
-    }
+	companion object {
+		val CODEC: MapCodec<WeightedBiomeRarityFilter> =
+			RecordCodecBuilder.mapCodec { instance ->
+				instance.group(
+					Codec.unboundedMap(
+						TagKey.codec(Registries.BIOME),
+						Codec.INT
+					)
+						.fieldOf("points_per_biome_tag")
+						.forGetter(WeightedBiomeRarityFilter::pointsPerBiomeTag),
+					Codec.INT
+						.fieldOf("base_points")
+						.forGetter(WeightedBiomeRarityFilter::basePoints),
+					Codec.INT
+						.fieldOf("chance_factor")
+						.forGetter(WeightedBiomeRarityFilter::chanceFactor)
+				).apply(instance, ::WeightedBiomeRarityFilter)
+			}
+	}
 
-    override fun type(): PlacementModifierType<*> {
-        return ModPlacementModifierTypes.WEIGHTED_BIOME_RARITY.get()
-    }
+	override fun type(): PlacementModifierType<*> {
+		return ModPlacementModifierTypes.WEIGHTED_BIOME_RARITY.get()
+	}
 
-    override fun shouldPlace(context: PlacementContext, random: RandomSource, pos: BlockPos): Boolean {
-        val biome = context.level.getBiome(pos)
+	override fun shouldPlace(context: PlacementContext, random: RandomSource, pos: BlockPos): Boolean {
+		val biome = context.level.getBiome(pos)
 
-        var chanceMult = this.basePoints
+		var chanceMult = this.basePoints
 
-        for ((tag, points) in pointsPerBiomeTag) {
-            if (biome.`is`(tag)) chanceMult += points
-        }
+		for ((tag, points) in pointsPerBiomeTag) {
+			if (biome.`is`(tag)) chanceMult += points
+		}
 
-        return random.nextInt(this.chanceFactor * chanceMult) == 0
-    }
+		return random.nextInt(this.chanceFactor * chanceMult) == 0
+	}
 }

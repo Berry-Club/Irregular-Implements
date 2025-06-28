@@ -8,11 +8,11 @@ import net.minecraft.world.level.block.state.BlockState
 
 class ItemRejuvenatorPlate : BasePlateBlock() {
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        if (entity is ItemEntity) {
-            entity.lifespan = 20 * 60 * 4
-            entity.age = 0  //FIXME: Makes item animation reset every tick
-        }
-    }
+	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+		if (entity is ItemEntity) {
+			entity.lifespan = 20 * 60 * 4
+			entity.age = 0  //FIXME: Makes item animation reset every tick
+		}
+	}
 
 }

@@ -6,11 +6,11 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
 class VoidStoneScreen(
-    menu: VoidStoneMenu,
-    playerInventory: Inventory,
-    title: Component
+	menu: VoidStoneMenu,
+	playerInventory: Inventory,
+	title: Component
 ) : BaseScreen<VoidStoneMenu>(menu, playerInventory, title) {
 
-    override val background = ScreenTextures.Background.VoidStone
+	override val background = ScreenTextures.Background.VoidStone
 
 }

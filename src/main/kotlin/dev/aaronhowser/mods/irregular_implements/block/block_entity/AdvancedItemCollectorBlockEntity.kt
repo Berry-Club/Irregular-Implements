@@ -18,105 +18,105 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 
 class AdvancedItemCollectorBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : ItemCollectorBlockEntity(ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider {
 
-    companion object {
-        const val X_RADIUS_NBT = "XRadius"
-        const val Y_RADIUS_NBT = "YRadius"
-        const val Z_RADIUS_NBT = "ZRadius"
+	companion object {
+		const val X_RADIUS_NBT = "XRadius"
+		const val Y_RADIUS_NBT = "YRadius"
+		const val Z_RADIUS_NBT = "ZRadius"
 
-        const val CONTAINER_SIZE = 1
+		const val CONTAINER_SIZE = 1
 
-        const val CONTAINER_DATA_SIZE = 3
-        const val X_RADIUS_INDEX = 0
-        const val Y_RADIUS_INDEX = 1
-        const val Z_RADIUS_INDEX = 2
-    }
+		const val CONTAINER_DATA_SIZE = 3
+		const val X_RADIUS_INDEX = 0
+		const val Y_RADIUS_INDEX = 1
+		const val Z_RADIUS_INDEX = 2
+	}
 
-    var xRadius: Int = 5
-        set(value) {
-            field = value.coerceIn(0, 10)
-            setChanged()
-        }
+	var xRadius: Int = 5
+		set(value) {
+			field = value.coerceIn(0, 10)
+			setChanged()
+		}
 
-    var yRadius: Int = 5
-        set(value) {
-            field = value.coerceIn(0, 10)
-            setChanged()
-        }
+	var yRadius: Int = 5
+		set(value) {
+			field = value.coerceIn(0, 10)
+			setChanged()
+		}
 
-    var zRadius: Int = 5
-        set(value) {
-            field = value.coerceIn(0, 10)
-            setChanged()
-        }
+	var zRadius: Int = 5
+		set(value) {
+			field = value.coerceIn(0, 10)
+			setChanged()
+		}
 
-    val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
-    override fun getFilter(): ItemFilterDataComponent? {
-        return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER_ENTRIES)
-    }
+	override fun getFilter(): ItemFilterDataComponent? {
+		return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER_ENTRIES)
+	}
 
-    override fun getCollectionArea(): AABB {
-        val pos = this.blockPos
-        return AABB.ofSize(
-            pos.center,
-            2 * this.xRadius.toDouble(),
-            2 * this.yRadius.toDouble(),
-            2 * this.zRadius.toDouble()
-        )
-    }
+	override fun getCollectionArea(): AABB {
+		val pos = this.blockPos
+		return AABB.ofSize(
+			pos.center,
+			2 * this.xRadius.toDouble(),
+			2 * this.yRadius.toDouble(),
+			2 * this.zRadius.toDouble()
+		)
+	}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        tag.putInt(X_RADIUS_NBT, this.xRadius)
-        tag.putInt(Y_RADIUS_NBT, this.yRadius)
-        tag.putInt(Z_RADIUS_NBT, this.zRadius)
-    }
+		tag.putInt(X_RADIUS_NBT, this.xRadius)
+		tag.putInt(Y_RADIUS_NBT, this.yRadius)
+		tag.putInt(Z_RADIUS_NBT, this.zRadius)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        this.xRadius = tag.getInt(X_RADIUS_NBT)
-        this.yRadius = tag.getInt(Y_RADIUS_NBT)
-        this.zRadius = tag.getInt(Z_RADIUS_NBT)
-    }
+		this.xRadius = tag.getInt(X_RADIUS_NBT)
+		this.yRadius = tag.getInt(Y_RADIUS_NBT)
+		this.zRadius = tag.getInt(Z_RADIUS_NBT)
+	}
 
-    // Menu stuff
+	// Menu stuff
 
-    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
-        override fun set(index: Int, value: Int) {
-            when (index) {
-                X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius = value
+	private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+		override fun set(index: Int, value: Int) {
+			when (index) {
+				X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius = value
 
-                Y_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.yRadius = value
+				Y_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.yRadius = value
 
-                Z_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.zRadius = value
-            }
-        }
+				Z_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.zRadius = value
+			}
+		}
 
-        override fun get(index: Int): Int {
-            return when (index) {
-                X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius
+		override fun get(index: Int): Int {
+			return when (index) {
+				X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius
 
-                Y_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.yRadius
+				Y_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.yRadius
 
-                Z_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.zRadius
+				Z_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.zRadius
 
-                else -> error("Invalid index: $index")
-            }
-        }
-    }
+				else -> error("Invalid index: $index")
+			}
+		}
+	}
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return AdvancedItemCollectorMenu(containerId, playerInventory, this.container, this.containerData)
-    }
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return AdvancedItemCollectorMenu(containerId, playerInventory, this.container, this.containerData)
+	}
 
-    override fun getDisplayName(): Component {
-        return this.blockState.block.name
-    }
+	override fun getDisplayName(): Component {
+		return this.blockState.block.name
+	}
 
 }

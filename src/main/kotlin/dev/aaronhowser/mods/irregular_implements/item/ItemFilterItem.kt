@@ -25,55 +25,55 @@ import net.minecraft.world.item.component.Unbreakable
 import net.minecraft.world.level.Level
 
 class ItemFilterItem : Item(
-    Properties()
-        .stacksTo(1)
-        .component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
+	Properties()
+		.stacksTo(1)
+		.component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
 ), MenuProvider {
 
-    companion object {
+	companion object {
 
-        fun setTestingFilter(stack: ItemStack) {
-            val planksFilter = FilterEntry.Tag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
-            val stickFilter = FilterEntry.Item(Items.STICK.defaultInstance, requireSameComponents = false)
+		fun setTestingFilter(stack: ItemStack) {
+			val planksFilter = FilterEntry.Tag(ItemTags.PLANKS, Items.OAK_PLANKS.defaultInstance)
+			val stickFilter = FilterEntry.Item(Items.STICK.defaultInstance, requireSameComponents = false)
 
-            val unbreakableDiamond = Items.DIAMOND.defaultInstance
-            unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
-            val diamondFilter = FilterEntry.Item(unbreakableDiamond, requireSameComponents = true)
+			val unbreakableDiamond = Items.DIAMOND.defaultInstance
+			unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
+			val diamondFilter = FilterEntry.Item(unbreakableDiamond, requireSameComponents = true)
 
-            val component = ItemFilterDataComponent(
-                listOf(
-                    planksFilter,
-                    stickFilter,
-                    diamondFilter
-                )
-            )
+			val component = ItemFilterDataComponent(
+				listOf(
+					planksFilter,
+					stickFilter,
+					diamondFilter
+				)
+			)
 
-            stack.set(ModDataComponents.ITEM_FILTER_ENTRIES, component)
-        }
+			stack.set(ModDataComponents.ITEM_FILTER_ENTRIES, component)
+		}
 
-        fun testFilter(stack: ItemStack) {
-            val filter = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+		fun testFilter(stack: ItemStack) {
+			val filter = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
 
-            val oakPlanks = Items.OAK_PLANKS.defaultInstance
-            val birchPlanks = Items.BIRCH_PLANKS.defaultInstance
+			val oakPlanks = Items.OAK_PLANKS.defaultInstance
+			val birchPlanks = Items.BIRCH_PLANKS.defaultInstance
 
-            val stick = Items.STICK.defaultInstance
+			val stick = Items.STICK.defaultInstance
 
-            val diamond = Items.DIAMOND.defaultInstance
+			val diamond = Items.DIAMOND.defaultInstance
 
-            val unbreakableDiamond = Items.DIAMOND.defaultInstance
-            unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
+			val unbreakableDiamond = Items.DIAMOND.defaultInstance
+			unbreakableDiamond.set(DataComponents.UNBREAKABLE, Unbreakable(true))
 
-            val oakPass = filter.test(oakPlanks)
-            val birchPass = filter.test(birchPlanks)
+			val oakPass = filter.test(oakPlanks)
+			val birchPass = filter.test(birchPlanks)
 
-            val stickPass = filter.test(stick)
+			val stickPass = filter.test(stick)
 
-            val diamondPass = filter.test(diamond)
-            val unbreakableDiamondPass = filter.test(unbreakableDiamond)
+			val diamondPass = filter.test(diamond)
+			val unbreakableDiamondPass = filter.test(unbreakableDiamond)
 
-            println(
-                """
+			println(
+				"""
                 Oak Planks: $oakPass
                 Birch Planks: $birchPass
                 
@@ -82,47 +82,47 @@ class ItemFilterItem : Item(
                 Diamond: $diamondPass
                 Unbreakable Diamond: $unbreakableDiamondPass
             """.trimIndent()
-            )
-        }
-    }
+			)
+		}
+	}
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        player.openMenu(this)
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		player.openMenu(this)
 
-        val usedStack = player.getItemInHand(usedHand)
-        return InteractionResultHolder.success(usedStack)
-    }
+		val usedStack = player.getItemInHand(usedHand)
+		return InteractionResultHolder.success(usedStack)
+	}
 
-    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
 
-        if (itemComponent.isBlacklist) {
-            val component = ModLanguageProvider.Tooltips.BLACKLIST
-                .toComponent().withStyle(ChatFormatting.RED, ChatFormatting.UNDERLINE)
+		if (itemComponent.isBlacklist) {
+			val component = ModLanguageProvider.Tooltips.BLACKLIST
+				.toComponent().withStyle(ChatFormatting.RED, ChatFormatting.UNDERLINE)
 
-            tooltipComponents.add(component)
-        }
+			tooltipComponents.add(component)
+		}
 
-        for (filterEntry in itemComponent.entries) {
-            if (filterEntry is FilterEntry.Empty) continue
+		for (filterEntry in itemComponent.entries) {
+			if (filterEntry is FilterEntry.Empty) continue
 
-            val lookup = context.registries() ?: continue
-            val itemName = filterEntry.getDisplayStack(lookup).hoverName
-            val component = ModLanguageProvider.Tooltips.LIST_POINT
-                .toGrayComponent(itemName)
+			val lookup = context.registries() ?: continue
+			val itemName = filterEntry.getDisplayStack(lookup).hoverName
+			val component = ModLanguageProvider.Tooltips.LIST_POINT
+				.toGrayComponent(itemName)
 
-            tooltipComponents.add(component)
-        }
-    }
+			tooltipComponents.add(component)
+		}
+	}
 
-    // Menu stuff
+	// Menu stuff
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return ItemFilterMenu(containerId, playerInventory)
-    }
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return ItemFilterMenu(containerId, playerInventory)
+	}
 
-    override fun getDisplayName(): Component {
-        return this.defaultInstance.hoverName
-    }
+	override fun getDisplayName(): Component {
+		return this.defaultInstance.hoverName
+	}
 
 }

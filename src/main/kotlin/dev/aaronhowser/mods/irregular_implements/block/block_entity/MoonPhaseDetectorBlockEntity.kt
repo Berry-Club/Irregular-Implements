@@ -6,6 +6,6 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class MoonPhaseDetectorBlockEntity(
-    pos: BlockPos,
-    blockState: BlockState
+	pos: BlockPos,
+	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.MOON_PHASE_DETECTOR.get(), pos, blockState)

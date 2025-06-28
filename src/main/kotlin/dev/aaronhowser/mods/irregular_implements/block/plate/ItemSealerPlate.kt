@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState
 
 class ItemSealerPlate : BasePlateBlock() {
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        if (entity is ItemEntity) entity.setPickUpDelay(20 * 30)
-    }
+	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+		if (entity is ItemEntity) entity.setPickUpDelay(20 * 30)
+	}
 
 }

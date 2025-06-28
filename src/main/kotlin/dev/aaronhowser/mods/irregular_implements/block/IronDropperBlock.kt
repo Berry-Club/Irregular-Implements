@@ -18,56 +18,56 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.VanillaInventoryCodeHooks
 
 class IronDropperBlock : DropperBlock(
-    Properties.ofFullCopy(Blocks.DROPPER)
+	Properties.ofFullCopy(Blocks.DROPPER)
 ) {
 
-    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
-        return IronDropperBlockEntity(blockPos, blockState)
-    }
+	override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
+		return IronDropperBlockEntity(blockPos, blockState)
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IRON_DROPPER.get(), IronDropperBlockEntity::tick)
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IRON_DROPPER.get(), IronDropperBlockEntity::tick)
+	}
 
-    public override fun dispenseFrom(level: ServerLevel, state: BlockState, pos: BlockPos) {
-        val blockEntity = level.getBlockEntity(pos) as? IronDropperBlockEntity ?: return
+	public override fun dispenseFrom(level: ServerLevel, state: BlockState, pos: BlockPos) {
+		val blockEntity = level.getBlockEntity(pos) as? IronDropperBlockEntity ?: return
 
-        val blockSource = BlockSource(level, pos, state, blockEntity)
-        val slot = blockEntity.getRandomSlot(level.random)
+		val blockSource = BlockSource(level, pos, state, blockEntity)
+		val slot = blockEntity.getRandomSlot(level.random)
 
-        if (slot < 0) {
-            if (blockEntity.effectsMode.hasSound) {
-                level.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0)
-            }
+		if (slot < 0) {
+			if (blockEntity.effectsMode.hasSound) {
+				level.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0)
+			}
 
-            return
-        }
+			return
+		}
 
-        val stack = blockEntity.getItem(slot)
+		val stack = blockEntity.getItem(slot)
 
-        if (stack.isEmpty || !VanillaInventoryCodeHooks.dropperInsertHook(level, pos, blockEntity, slot, stack)) {
-            return
-        }
+		if (stack.isEmpty || !VanillaInventoryCodeHooks.dropperInsertHook(level, pos, blockEntity, slot, stack)) {
+			return
+		}
 
-        val direction = state.getValue(FACING)
+		val direction = state.getValue(FACING)
 
-        val container = HopperBlockEntity.getContainerAt(level, pos.relative(direction))
+		val container = HopperBlockEntity.getContainerAt(level, pos.relative(direction))
 
-        if (container == null) {
-            val remainder = blockEntity.dispenseBehavior.dispense(blockSource, stack)
-            blockEntity.setItem(slot, remainder)
-            return
-        }
+		if (container == null) {
+			val remainder = blockEntity.dispenseBehavior.dispense(blockSource, stack)
+			blockEntity.setItem(slot, remainder)
+			return
+		}
 
-        var stackToShoot = HopperBlockEntity.addItem(blockEntity, container, stack.copyWithCount(1), direction.opposite)
-        if (stackToShoot.isEmpty) {
-            stackToShoot = stack.copy()
-            stackToShoot.shrink(1)
-        } else {
-            stackToShoot = stack.copy()
-        }
+		var stackToShoot = HopperBlockEntity.addItem(blockEntity, container, stack.copyWithCount(1), direction.opposite)
+		if (stackToShoot.isEmpty) {
+			stackToShoot = stack.copy()
+			stackToShoot.shrink(1)
+		} else {
+			stackToShoot = stack.copy()
+		}
 
-        blockEntity.setItem(slot, stackToShoot)
-    }
+		blockEntity.setItem(slot, stackToShoot)
+	}
 
 }

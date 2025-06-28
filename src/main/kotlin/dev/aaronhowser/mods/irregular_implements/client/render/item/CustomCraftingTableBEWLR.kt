@@ -11,50 +11,50 @@ import net.minecraft.world.item.Items
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
 class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
-    Minecraft.getInstance().blockEntityRenderDispatcher,
-    Minecraft.getInstance().entityModels
+	Minecraft.getInstance().blockEntityRenderDispatcher,
+	Minecraft.getInstance().entityModels
 ) {
 
-    companion object {
-        val clientItemExtensions = object : IClientItemExtensions {
-            val BEWLR = CustomCraftingTableBEWLR()
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = CustomCraftingTableBEWLR()
 
-            override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-                return BEWLR
-            }
-        }
-    }
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
+	}
 
-    //TODO: Render the crafting table part
-    override fun renderByItem(
-        stack: ItemStack,
-        displayContext: ItemDisplayContext,
-        poseStack: PoseStack,
-        buffer: MultiBufferSource,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        poseStack.pushPose()
+	//TODO: Render the crafting table part
+	override fun renderByItem(
+		stack: ItemStack,
+		displayContext: ItemDisplayContext,
+		poseStack: PoseStack,
+		buffer: MultiBufferSource,
+		packedLight: Int,
+		packedOverlay: Int
+	) {
+		poseStack.pushPose()
 
-        poseStack.scale(0.999f, 0.999f, 0.999f)
-        poseStack.translate(0.0005f, 0.0005f, 0.0005f)
-        poseStack.translate(0.5, 0.5, 0.5)
+		poseStack.scale(0.999f, 0.999f, 0.999f)
+		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
+		poseStack.translate(0.5, 0.5, 0.5)
 
-        val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
-        val itemRenderer = Minecraft.getInstance().itemRenderer
+		val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
+		val itemRenderer = Minecraft.getInstance().itemRenderer
 
-        itemRenderer.renderStatic(
-            itemToRender.defaultInstance,
-            displayContext,
-            packedLight,
-            packedOverlay,
-            poseStack,
-            buffer,
-            null,
-            0,
-        )
+		itemRenderer.renderStatic(
+			itemToRender.defaultInstance,
+			displayContext,
+			packedLight,
+			packedOverlay,
+			poseStack,
+			buffer,
+			null,
+			0,
+		)
 
-        poseStack.popPose()
-    }
+		poseStack.popPose()
+	}
 
 }

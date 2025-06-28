@@ -13,43 +13,43 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 
 @EventBusSubscriber(
-    modid = IrregularImplements.ID,
-    bus = EventBusSubscriber.Bus.MOD
+	modid = IrregularImplements.ID,
+	bus = EventBusSubscriber.Bus.MOD
 )
 object ModBusEvents {
 
-    @SubscribeEvent
-    fun registerPayloads(event: RegisterPayloadHandlersEvent) {
-        ModPacketHandler.registerPayloads(event)
-    }
+	@SubscribeEvent
+	fun registerPayloads(event: RegisterPayloadHandlersEvent) {
+		ModPacketHandler.registerPayloads(event)
+	}
 
-    @SubscribeEvent
-    fun onRegisterCapabilities(event: RegisterCapabilitiesEvent) {
-        event.registerBlockEntity(
-            Capabilities.EnergyStorage.BLOCK,
-            ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get()
-        ) { spectreEnergyInjectorBE, direction ->
-            spectreEnergyInjectorBE.getEnergyHandler(direction)
-        }
+	@SubscribeEvent
+	fun onRegisterCapabilities(event: RegisterCapabilitiesEvent) {
+		event.registerBlockEntity(
+			Capabilities.EnergyStorage.BLOCK,
+			ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get()
+		) { spectreEnergyInjectorBE, direction ->
+			spectreEnergyInjectorBE.getEnergyHandler(direction)
+		}
 
-        event.registerBlockEntity(
-            Capabilities.EnergyStorage.BLOCK,
-            ModBlockEntities.SPECTRE_COIL.get()
-        ) { spectreCoilBE, direction ->
-            spectreCoilBE.getEnergyHandler(direction)
-        }
+		event.registerBlockEntity(
+			Capabilities.EnergyStorage.BLOCK,
+			ModBlockEntities.SPECTRE_COIL.get()
+		) { spectreCoilBE, direction ->
+			spectreCoilBE.getEnergyHandler(direction)
+		}
 
-        event.registerBlockEntity(
-            Capabilities.ItemHandler.BLOCK,
-            ModBlockEntities.PLAYER_INTERFACE.get()
-        ) { playerInterfaceBE, direction ->
-            playerInterfaceBE.getItemHandler(direction)
-        }
-    }
+		event.registerBlockEntity(
+			Capabilities.ItemHandler.BLOCK,
+			ModBlockEntities.PLAYER_INTERFACE.get()
+		) { playerInterfaceBE, direction ->
+			playerInterfaceBE.getItemHandler(direction)
+		}
+	}
 
-    @SubscribeEvent
-    fun entityAttributeEvent(event: EntityAttributeCreationEvent) {
-        event.put(ModEntityTypes.GOLDEN_CHICKEN.get(), GoldenChickenEntity.createAttributes())
-    }
+	@SubscribeEvent
+	fun entityAttributeEvent(event: EntityAttributeCreationEvent) {
+		event.put(ModEntityTypes.GOLDEN_CHICKEN.get(), GoldenChickenEntity.createAttributes())
+	}
 
 }

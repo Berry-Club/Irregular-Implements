@@ -10,61 +10,61 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
 
 data class ItemFilterDataComponent(
-    val entries: NonNullList<FilterEntry>,
-    val isBlacklist: Boolean
+	val entries: NonNullList<FilterEntry>,
+	val isBlacklist: Boolean
 ) {
 
-    constructor() : this(listOf(), false)
-    constructor(filterEntries: List<FilterEntry>, isBlacklist: Boolean = false) : this(sanitizeEntries(filterEntries), isBlacklist)
+	constructor() : this(listOf(), false)
+	constructor(filterEntries: List<FilterEntry>, isBlacklist: Boolean = false) : this(sanitizeEntries(filterEntries), isBlacklist)
 
-    fun test(testedStack: ItemStack): Boolean {
-        val passes = this.entries.any { it.test(testedStack) }
-        return passes != this.isBlacklist
-    }
+	fun test(testedStack: ItemStack): Boolean {
+		val passes = this.entries.any { it.test(testedStack) }
+		return passes != this.isBlacklist
+	}
 
-    companion object {
+	companion object {
 
-        fun sanitizeEntries(entries: List<FilterEntry>): NonNullList<FilterEntry> {
-            val sanitizedEntries = NonNullList.withSize<FilterEntry>(9, FilterEntry.Empty)
+		fun sanitizeEntries(entries: List<FilterEntry>): NonNullList<FilterEntry> {
+			val sanitizedEntries = NonNullList.withSize<FilterEntry>(9, FilterEntry.Empty)
 
-            for (index in 0 until 9) {
-                val entry = entries.getOrNull(index) ?: continue
-                sanitizedEntries[index] = entry
-            }
+			for (index in 0 until 9) {
+				val entry = entries.getOrNull(index) ?: continue
+				sanitizedEntries[index] = entry
+			}
 
-            return sanitizedEntries
-        }
+			return sanitizedEntries
+		}
 
-        val CODEC: Codec<ItemFilterDataComponent> =
-            RecordCodecBuilder.create { instance ->
-                instance.group(
-                    NonNullList.codecOf(FilterEntry.CODEC)
-                        .fieldOf("entries")
-                        .forGetter(::trimNonNullList),
-                    Codec.BOOL
-                        .optionalFieldOf("is_blacklist", false)
-                        .forGetter(ItemFilterDataComponent::isBlacklist)
-                ).apply(instance, ::ItemFilterDataComponent)
-            }
+		val CODEC: Codec<ItemFilterDataComponent> =
+			RecordCodecBuilder.create { instance ->
+				instance.group(
+					NonNullList.codecOf(FilterEntry.CODEC)
+						.fieldOf("entries")
+						.forGetter(::trimNonNullList),
+					Codec.BOOL
+						.optionalFieldOf("is_blacklist", false)
+						.forGetter(ItemFilterDataComponent::isBlacklist)
+				).apply(instance, ::ItemFilterDataComponent)
+			}
 
-        private fun trimNonNullList(itemFilterDataComponent: ItemFilterDataComponent): NonNullList<FilterEntry> {
-            val array = itemFilterDataComponent.entries.toTypedArray()
-            val lastNonEmpty = array.indexOfLast { it !is FilterEntry.Empty }
+		private fun trimNonNullList(itemFilterDataComponent: ItemFilterDataComponent): NonNullList<FilterEntry> {
+			val array = itemFilterDataComponent.entries.toTypedArray()
+			val lastNonEmpty = array.indexOfLast { it !is FilterEntry.Empty }
 
-            val trimmedArray = array.take(lastNonEmpty + 1).toTypedArray()
+			val trimmedArray = array.take(lastNonEmpty + 1).toTypedArray()
 
-            return NonNullList.of(FilterEntry.Empty, *trimmedArray)
-        }
+			return NonNullList.of(FilterEntry.Empty, *trimmedArray)
+		}
 
-        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterDataComponent> =
-            StreamCodec.composite(
-                ByteBufCodecs.fromCodec(NonNullList.codecOf(FilterEntry.CODEC)),    //TODO: Stop using fromCodec
-                ItemFilterDataComponent::entries,
-                ByteBufCodecs.BOOL,
-                ItemFilterDataComponent::isBlacklist,
-                ::ItemFilterDataComponent
-            )
+		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemFilterDataComponent> =
+			StreamCodec.composite(
+				ByteBufCodecs.fromCodec(NonNullList.codecOf(FilterEntry.CODEC)),    //TODO: Stop using fromCodec
+				ItemFilterDataComponent::entries,
+				ByteBufCodecs.BOOL,
+				ItemFilterDataComponent::isBlacklist,
+				::ItemFilterDataComponent
+			)
 
-    }
+	}
 
 }

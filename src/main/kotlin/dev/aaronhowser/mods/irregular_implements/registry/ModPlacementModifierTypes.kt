@@ -10,12 +10,12 @@ import java.util.function.Supplier
 
 object ModPlacementModifierTypes {
 
-    val PLACEMENT_MODIFIER_TYPE_REGISTRY: DeferredRegister<PlacementModifierType<*>> =
-        DeferredRegister.create(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE, IrregularImplements.ID)
+	val PLACEMENT_MODIFIER_TYPE_REGISTRY: DeferredRegister<PlacementModifierType<*>> =
+		DeferredRegister.create(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE, IrregularImplements.ID)
 
-    val WEIGHTED_BIOME_RARITY: DeferredHolder<PlacementModifierType<*>, PlacementModifierType<WeightedBiomeRarityFilter>> =
-        PLACEMENT_MODIFIER_TYPE_REGISTRY.register("weighted_biome_rarity", Supplier {
-            PlacementModifierType { WeightedBiomeRarityFilter.CODEC }
-        })
+	val WEIGHTED_BIOME_RARITY: DeferredHolder<PlacementModifierType<*>, PlacementModifierType<WeightedBiomeRarityFilter>> =
+		PLACEMENT_MODIFIER_TYPE_REGISTRY.register("weighted_biome_rarity", Supplier {
+			PlacementModifierType { WeightedBiomeRarityFilter.CODEC }
+		})
 
 }

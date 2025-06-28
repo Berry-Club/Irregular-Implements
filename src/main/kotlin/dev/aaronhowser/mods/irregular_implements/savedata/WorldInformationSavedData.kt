@@ -8,43 +8,43 @@ import net.minecraft.world.level.saveddata.SavedData
 
 class WorldInformationSavedData : SavedData() {
 
-    companion object {
-        private const val ENDER_DRAGON_KILLED = "ender_dragon_killed"
+	companion object {
+		private const val ENDER_DRAGON_KILLED = "ender_dragon_killed"
 
-        private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): WorldInformationSavedData {
-            val worldInformation = WorldInformationSavedData()
+		private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): WorldInformationSavedData {
+			val worldInformation = WorldInformationSavedData()
 
-            worldInformation.enderDragonKilled = pTag.getBoolean(ENDER_DRAGON_KILLED)
+			worldInformation.enderDragonKilled = pTag.getBoolean(ENDER_DRAGON_KILLED)
 
-            return worldInformation
-        }
+			return worldInformation
+		}
 
-        private fun get(level: ServerLevel): WorldInformationSavedData {
-            require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
+		private fun get(level: ServerLevel): WorldInformationSavedData {
+			require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
 
-            return level.dataStorage.computeIfAbsent(
-                Factory(::WorldInformationSavedData, ::load),
-                "redstone_handler"
-            )
-        }
+			return level.dataStorage.computeIfAbsent(
+				Factory(::WorldInformationSavedData, ::load),
+				"redstone_handler"
+			)
+		}
 
-        val ServerLevel.worldInformationSavedData: WorldInformationSavedData
-            inline get() = this.server.worldInformationSavedData
+		val ServerLevel.worldInformationSavedData: WorldInformationSavedData
+			inline get() = this.server.worldInformationSavedData
 
-        val MinecraftServer.worldInformationSavedData: WorldInformationSavedData
-            get() = get(this.overworld())
+		val MinecraftServer.worldInformationSavedData: WorldInformationSavedData
+			get() = get(this.overworld())
 
-    }
+	}
 
-    var enderDragonKilled: Boolean = false
-        set(value) {
-            field = value
-            setDirty()
-        }
+	var enderDragonKilled: Boolean = false
+		set(value) {
+			field = value
+			setDirty()
+		}
 
-    override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
-        tag.putBoolean(ENDER_DRAGON_KILLED, enderDragonKilled)
+	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
+		tag.putBoolean(ENDER_DRAGON_KILLED, enderDragonKilled)
 
-        return tag
-    }
+		return tag
+	}
 }

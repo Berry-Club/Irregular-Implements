@@ -22,150 +22,150 @@ import net.neoforged.neoforge.common.Tags
 
 class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
 
-    companion object {
-        fun isValidPosition(
-            level: Level,
-            entityCenterPos: BlockPos,
-            checkForOtherPortals: Boolean
-        ): Boolean {
+	companion object {
+		fun isValidPosition(
+			level: Level,
+			entityCenterPos: BlockPos,
+			checkForOtherPortals: Boolean
+		): Boolean {
 
-            if (checkForOtherPortals) {
-                val entities = level.getEntitiesOfClass(
-                    ArtificialEndPortalEntity::class.java,
-                    AABB.ofSize(entityCenterPos.bottomCenter, 3.0, 1.0, 3.0)
-                )
+			if (checkForOtherPortals) {
+				val entities = level.getEntitiesOfClass(
+					ArtificialEndPortalEntity::class.java,
+					AABB.ofSize(entityCenterPos.bottomCenter, 3.0, 1.0, 3.0)
+				)
 
-                if (entities.isNotEmpty()) return false
-            }
+				if (entities.isNotEmpty()) return false
+			}
 
-            val endRodPos = entityCenterPos.above(3)
-            val endRodState = level.getBlockState(endRodPos)
-            if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
+			val endRodPos = entityCenterPos.above(3)
+			val endRodState = level.getBlockState(endRodPos)
+			if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
 
-            if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
+			if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
 
-            for (dX in -1..1) for (dZ in -1..1) {
-                val posThere = entityCenterPos.offset(dX, 0, dZ)
+			for (dX in -1..1) for (dZ in -1..1) {
+				val posThere = entityCenterPos.offset(dX, 0, dZ)
 
-                val isAir = level.getBlockState(posThere).isAir
-                val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
+				val isAir = level.getBlockState(posThere).isAir
+				val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
 
-                if (!isAir || !isAboveEndStone) return false
+				if (!isAir || !isAboveEndStone) return false
 
-                if (dX != 0) {
-                    val posDx = posThere.offset(dX, 0, 0)
-                    val stateDx = level.getBlockState(posDx)
-                    if (!stateDx.`is`(Tags.Blocks.OBSIDIANS)) return false
-                }
+				if (dX != 0) {
+					val posDx = posThere.offset(dX, 0, 0)
+					val stateDx = level.getBlockState(posDx)
+					if (!stateDx.`is`(Tags.Blocks.OBSIDIANS)) return false
+				}
 
-                if (dZ != 0) {
-                    val posDz = posThere.offset(0, 0, dZ)
-                    val stateDz = level.getBlockState(posDz)
-                    if (!stateDz.`is`(Tags.Blocks.OBSIDIANS)) return false
-                }
-            }
+				if (dZ != 0) {
+					val posDz = posThere.offset(0, 0, dZ)
+					val stateDz = level.getBlockState(posDz)
+					if (!stateDz.`is`(Tags.Blocks.OBSIDIANS)) return false
+				}
+			}
 
-            return true
-        }
+			return true
+		}
 
-        const val MAX_ACTION_TIMER = 200
+		const val MAX_ACTION_TIMER = 200
 
-        val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
-        const val ACTION_TIMER_NBT = "ActionTimer"
-    }
+		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(ArtificialEndPortalEntity::class.java, EntityDataSerializers.INT)
+		const val ACTION_TIMER_NBT = "ActionTimer"
+	}
 
-    constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
-        this.setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
-    }
+	constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
+		this.setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
+	}
 
-    var actionTimer: Int
-        private set(value) = this.entityData.set(ACTION_TIMER, value)
-        get() = this.entityData.get(ACTION_TIMER)
+	var actionTimer: Int
+		private set(value) = this.entityData.set(ACTION_TIMER, value)
+		get() = this.entityData.get(ACTION_TIMER)
 
-    override fun tick() {
-        super.tick()
+	override fun tick() {
+		super.tick()
 
-        if (this.actionTimer < MAX_ACTION_TIMER) {
-            actionTimer++
+		if (this.actionTimer < MAX_ACTION_TIMER) {
+			actionTimer++
 
-            if (this.level().isClientSide && this.actionTimer > 40) {
-                spawnParticles()
-            }
-        }
+			if (this.level().isClientSide && this.actionTimer > 40) {
+				spawnParticles()
+			}
+		}
 
-        if (this.level().isClientSide) {
-            if (this.actionTimer == 85) {
-                this.level().playSound(
-                    null,
-                    this.blockPosition(),
-                    SoundEvents.PORTAL_TRAVEL,
-                    SoundSource.BLOCKS
-                )
-            }
-        } else {
-            if (this.tickCount % 40 == 0) {
-                if (!isValidPosition(this.level(), this.blockPosition(), false)) {
-                    this.kill()
-                }
-            }
-        }
+		if (this.level().isClientSide) {
+			if (this.actionTimer == 85) {
+				this.level().playSound(
+					null,
+					this.blockPosition(),
+					SoundEvents.PORTAL_TRAVEL,
+					SoundSource.BLOCKS
+				)
+			}
+		} else {
+			if (this.tickCount % 40 == 0) {
+				if (!isValidPosition(this.level(), this.blockPosition(), false)) {
+					this.kill()
+				}
+			}
+		}
 
-        if (this.actionTimer >= 200 && this.tickCount % 20 == 0) {
-            teleportEntitiesToEnd()
-        }
+		if (this.actionTimer >= 200 && this.tickCount % 20 == 0) {
+			teleportEntitiesToEnd()
+		}
 
-    }
+	}
 
-    private fun teleportEntitiesToEnd() {
-        val entities = this.level().getEntitiesOfClass(Entity::class.java, this.boundingBox)
+	private fun teleportEntitiesToEnd() {
+		val entities = this.level().getEntitiesOfClass(Entity::class.java, this.boundingBox)
 
-        for (entity in entities) {
-            if (entity is ArtificialEndPortalEntity) continue
+		for (entity in entities) {
+			if (entity is ArtificialEndPortalEntity) continue
 
-            entity.setAsInsidePortal(
-                Blocks.END_PORTAL as EndPortalBlock,
-                this.blockPosition()
-            )
-        }
-    }
+			entity.setAsInsidePortal(
+				Blocks.END_PORTAL as EndPortalBlock,
+				this.blockPosition()
+			)
+		}
+	}
 
-    override fun playerTouch(player: Player) {
-        if (this.actionTimer >= 200) {
-            player.setAsInsidePortal(
-                Blocks.END_PORTAL as EndPortalBlock,
-                this.blockPosition()
-            )
-        }
-    }
+	override fun playerTouch(player: Player) {
+		if (this.actionTimer >= 200) {
+			player.setAsInsidePortal(
+				Blocks.END_PORTAL as EndPortalBlock,
+				this.blockPosition()
+			)
+		}
+	}
 
-    //TODO: Color purple somehow, maybe need a custom particle type
-    private fun spawnParticles() {
-        for (i in 0..5) {
+	//TODO: Color purple somehow, maybe need a custom particle type
+	private fun spawnParticles() {
+		for (i in 0..5) {
 
-            val modX = this.random.nextFloat() * 0.05f - 0.025f
-            val modZ = this.random.nextFloat() * 0.05f - 0.025f
+			val modX = this.random.nextFloat() * 0.05f - 0.025f
+			val modZ = this.random.nextFloat() * 0.05f - 0.025f
 
-            level().addParticle(
-                ParticleTypes.ENCHANT,
-                this.x + modX,
-                this.y + 2,
-                this.z + modZ,
-                modX.toDouble() * 2,
-                1.0,
-                modZ.toDouble() * 2
-            )
-        }
-    }
+			level().addParticle(
+				ParticleTypes.ENCHANT,
+				this.x + modX,
+				this.y + 2,
+				this.z + modZ,
+				modX.toDouble() * 2,
+				1.0,
+				modZ.toDouble() * 2
+			)
+		}
+	}
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(ACTION_TIMER, 0)
-    }
+	override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+		builder.define(ACTION_TIMER, 0)
+	}
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
-    }
+	override fun readAdditionalSaveData(compound: CompoundTag) {
+		this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
+	}
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
-    }
+	override fun addAdditionalSaveData(compound: CompoundTag) {
+		compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
+	}
 }

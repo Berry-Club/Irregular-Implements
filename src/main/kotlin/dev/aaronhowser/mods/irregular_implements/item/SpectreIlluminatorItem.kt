@@ -10,37 +10,37 @@ import net.minecraft.world.item.context.UseOnContext
 
 class SpectreIlluminatorItem : Item(Properties()) {
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val level = context.level
-        val clickedPos = context.clickedPos
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val level = context.level
+		val clickedPos = context.clickedPos
 
-        val player = context.player
+		val player = context.player
 
-        if (SpectreIlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
+		if (SpectreIlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
 
-            if (!level.isClientSide) {
-                player?.sendSystemMessage(
-                    ModLanguageProvider.Messages.ILLUMINATOR_ALREADY_PRESENT
-                        .toComponent()
-                        .withStyle(ChatFormatting.RED)
-                )
-            }
+			if (!level.isClientSide) {
+				player?.sendSystemMessage(
+					ModLanguageProvider.Messages.ILLUMINATOR_ALREADY_PRESENT
+						.toComponent()
+						.withStyle(ChatFormatting.RED)
+				)
+			}
 
-            return InteractionResult.FAIL
-        }
+			return InteractionResult.FAIL
+		}
 
-        val clickedFace = context.clickedFace
+		val clickedFace = context.clickedFace
 
-        val spawnPos = clickedPos.relative(clickedFace).center
+		val spawnPos = clickedPos.relative(clickedFace).center
 
-        val entity = SpectreIlluminatorEntity(level)
-        entity.setPos(spawnPos.x, spawnPos.y, spawnPos.z)
+		val entity = SpectreIlluminatorEntity(level)
+		entity.setPos(spawnPos.x, spawnPos.y, spawnPos.z)
 
-        level.addFreshEntity(entity)
+		level.addFreshEntity(entity)
 
-        context.itemInHand.consume(1, player)
+		context.itemInHand.consume(1, player)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
 }

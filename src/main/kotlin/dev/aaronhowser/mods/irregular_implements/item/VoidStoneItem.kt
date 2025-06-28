@@ -21,54 +21,54 @@ import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.level.Level
 
 class VoidStoneItem : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ), MenuProvider {
 
-    override fun overrideOtherStackedOnMe(
-        thisStack: ItemStack,
-        other: ItemStack,
-        slot: Slot,
-        action: ClickAction,
-        player: Player,
-        access: SlotAccess
-    ): Boolean {
-        if (action != ClickAction.SECONDARY
-            || !slot.allowModification(player)
-            || other.isEmpty
-        ) return false
+	override fun overrideOtherStackedOnMe(
+		thisStack: ItemStack,
+		other: ItemStack,
+		slot: Slot,
+		action: ClickAction,
+		player: Player,
+		access: SlotAccess
+	): Boolean {
+		if (action != ClickAction.SECONDARY
+			|| !slot.allowModification(player)
+			|| other.isEmpty
+		) return false
 
-        thisStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(listOf(other.copy())))
+		thisStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(listOf(other.copy())))
 
-        other.count = 0
+		other.count = 0
 
-        player.level().playSound(
-            if (player.level().isClientSide) player else null,
-            player.blockPosition(),
-            SoundEvents.ENDERMAN_TELEPORT,
-            SoundSource.PLAYERS,
-            1f,
-            0.3f
-        )
+		player.level().playSound(
+			if (player.level().isClientSide) player else null,
+			player.blockPosition(),
+			SoundEvents.ENDERMAN_TELEPORT,
+			SoundSource.PLAYERS,
+			1f,
+			0.3f
+		)
 
-        return true
-    }
+		return true
+	}
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        player.openMenu(this)
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		player.openMenu(this)
 
-        val usedStack = player.getItemInHand(usedHand)
-        return InteractionResultHolder.success(usedStack)
-    }
+		val usedStack = player.getItemInHand(usedHand)
+		return InteractionResultHolder.success(usedStack)
+	}
 
-    // Menu stuff
+	// Menu stuff
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return VoidStoneMenu(containerId, playerInventory)
-    }
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return VoidStoneMenu(containerId, playerInventory)
+	}
 
-    override fun getDisplayName(): Component {
-        return this.descriptionId.toComponent()
-    }
+	override fun getDisplayName(): Component {
+		return this.descriptionId.toComponent()
+	}
 
 }

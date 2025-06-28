@@ -11,45 +11,45 @@ import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 
 class IgniterMenu(
-    containerId: Int,
-    private val containerData: ContainerData
+	containerId: Int,
+	private val containerData: ContainerData
 ) : AbstractContainerMenu(ModMenuTypes.IGNITER.get(), containerId), MenuWithButtons {
 
-    constructor(containerId: Int, playerInventory: Inventory) :
-            this(
-                containerId,
-                SimpleContainerData(IgniterBlockEntity.CONTAINER_DATA_SIZE)
-            )
+	constructor(containerId: Int, playerInventory: Inventory) :
+			this(
+				containerId,
+				SimpleContainerData(IgniterBlockEntity.CONTAINER_DATA_SIZE)
+			)
 
-    init {
-        this.addDataSlots(this.containerData)
-    }
+	init {
+		this.addDataSlots(this.containerData)
+	}
 
-    companion object {
-        const val CYCLE_MODE_BUTTON_ID = 0
-    }
+	companion object {
+		const val CYCLE_MODE_BUTTON_ID = 0
+	}
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        return ItemStack.EMPTY
-    }
+	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+		return ItemStack.EMPTY
+	}
 
-    override fun stillValid(player: Player): Boolean {
-        return true
-    }
+	override fun stillValid(player: Player): Boolean {
+		return true
+	}
 
-    var mode: IgniterBlockEntity.Mode
-        get() = IgniterBlockEntity.Mode.entries[containerData.get(IgniterBlockEntity.MODE_INDEX)]
-        set(value) = containerData.set(IgniterBlockEntity.MODE_INDEX, value.ordinal)
+	var mode: IgniterBlockEntity.Mode
+		get() = IgniterBlockEntity.Mode.entries[containerData.get(IgniterBlockEntity.MODE_INDEX)]
+		set(value) = containerData.set(IgniterBlockEntity.MODE_INDEX, value.ordinal)
 
-    override fun handleButtonPressed(buttonId: Int) {
-        if (buttonId != CYCLE_MODE_BUTTON_ID) return
+	override fun handleButtonPressed(buttonId: Int) {
+		if (buttonId != CYCLE_MODE_BUTTON_ID) return
 
-        val nextMode = when (this.mode) {
-            IgniterBlockEntity.Mode.KEEP_IGNITED -> IgniterBlockEntity.Mode.IGNITE
-            IgniterBlockEntity.Mode.IGNITE -> IgniterBlockEntity.Mode.TOGGLE
-            IgniterBlockEntity.Mode.TOGGLE -> IgniterBlockEntity.Mode.KEEP_IGNITED
-        }
+		val nextMode = when (this.mode) {
+			IgniterBlockEntity.Mode.KEEP_IGNITED -> IgniterBlockEntity.Mode.IGNITE
+			IgniterBlockEntity.Mode.IGNITE -> IgniterBlockEntity.Mode.TOGGLE
+			IgniterBlockEntity.Mode.TOGGLE -> IgniterBlockEntity.Mode.KEEP_IGNITED
+		}
 
-        this.mode = nextMode
-    }
+		this.mode = nextMode
+	}
 }

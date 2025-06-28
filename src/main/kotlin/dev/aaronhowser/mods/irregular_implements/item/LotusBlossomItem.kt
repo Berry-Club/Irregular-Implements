@@ -9,39 +9,39 @@ import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 
 class LotusBlossomItem : Item(
-    Properties()
-        .food(FOOD_PROPERTIES)
+	Properties()
+		.food(FOOD_PROPERTIES)
 ) {
 
-    companion object {
-        private val FOOD_PROPERTIES = FoodProperties.Builder()
-            .alwaysEdible()
-            .build()
-    }
+	companion object {
+		private val FOOD_PROPERTIES = FoodProperties.Builder()
+			.alwaysEdible()
+			.build()
+	}
 
-    override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int {
-        return 10
-    }
+	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int {
+		return 10
+	}
 
-    override fun getUseAnimation(stack: ItemStack): UseAnim {
-        return UseAnim.EAT
-    }
+	override fun getUseAnimation(stack: ItemStack): UseAnim {
+		return UseAnim.EAT
+	}
 
-    override fun finishUsingItem(stack: ItemStack, level: Level, livingEntity: LivingEntity): ItemStack {
-        val amountToEat = if (livingEntity.isShiftKeyDown) stack.count else 1
+	override fun finishUsingItem(stack: ItemStack, level: Level, livingEntity: LivingEntity): ItemStack {
+		val amountToEat = if (livingEntity.isShiftKeyDown) stack.count else 1
 
-        if (livingEntity is Player) {
-            var amountXp = 0
-            for (i in 0 until amountToEat) {
-                amountXp += 3 + level.random.nextInt(5) + level.random.nextInt(5)
-            }
+		if (livingEntity is Player) {
+			var amountXp = 0
+			for (i in 0 until amountToEat) {
+				amountXp += 3 + level.random.nextInt(5) + level.random.nextInt(5)
+			}
 
-            livingEntity.giveExperiencePoints(amountXp)
-        }
+			livingEntity.giveExperiencePoints(amountXp)
+		}
 
-        val remainder = stack.copy()
-        remainder.consume(amountToEat, livingEntity)
-        return remainder
-    }
+		val remainder = stack.copy()
+		remainder.consume(amountToEat, livingEntity)
+		return remainder
+	}
 
 }

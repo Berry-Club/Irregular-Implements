@@ -16,55 +16,55 @@ import net.minecraft.world.level.ItemLike
 @EmiEntrypoint
 class ModEmiPlugin : EmiPlugin {
 
-    companion object {
-        val ItemLike.emiStack: EmiStack
-            get() = EmiStack.of(this.asItem())
+	companion object {
+		val ItemLike.emiStack: EmiStack
+			get() = EmiStack.of(this.asItem())
 
-        val ItemLike.ingredient: Ingredient
-            get() = Ingredient.of(this)
+		val ItemLike.ingredient: Ingredient
+			get() = Ingredient.of(this)
 
-        val Ingredient.emiIngredient: EmiIngredient
-            get() = EmiIngredient.of(this)
+		val Ingredient.emiIngredient: EmiIngredient
+			get() = EmiIngredient.of(this)
 
-        val ItemLike.emiIngredient: EmiIngredient
-            get() = EmiIngredient.of(this.ingredient)
+		val ItemLike.emiIngredient: EmiIngredient
+			get() = EmiIngredient.of(this.ingredient)
 
-        val TagKey<Item>.ingredient: Ingredient
-            get() = Ingredient.of(this)
+		val TagKey<Item>.ingredient: Ingredient
+			get() = Ingredient.of(this)
 
-        val TagKey<Item>.emiIngredient: EmiIngredient
-            get() = EmiIngredient.of(this)
+		val TagKey<Item>.emiIngredient: EmiIngredient
+			get() = EmiIngredient.of(this)
 
-    }
+	}
 
-    override fun register(registry: EmiRegistry) {
-        setComparisons(registry)
+	override fun register(registry: EmiRegistry) {
+		setComparisons(registry)
 
-        for (infoRecipe in ModInformationRecipes.getInformationRecipes()) {
-            registry.addRecipe(infoRecipe)
-        }
+		for (infoRecipe in ModInformationRecipes.getInformationRecipes()) {
+			registry.addRecipe(infoRecipe)
+		}
 
-        for (interactionRecipe in ModInteractionRecipes.getInteractionRecipes()) {
-            registry.addRecipe(interactionRecipe)
-        }
+		for (interactionRecipe in ModInteractionRecipes.getInteractionRecipes()) {
+			registry.addRecipe(interactionRecipe)
+		}
 
-        for (bootRecipe in MutatingRecipes.getRecipes()) {
-            registry.addRecipe(bootRecipe)
-        }
+		for (bootRecipe in MutatingRecipes.getRecipes()) {
+			registry.addRecipe(bootRecipe)
+		}
 
-        for (diviningRodRecipe in DiviningRodRecipes.getRecipes()) {
-            registry.addRecipe(diviningRodRecipe)
-        }
+		for (diviningRodRecipe in DiviningRodRecipes.getRecipes()) {
+			registry.addRecipe(diviningRodRecipe)
+		}
 
-        for (anvilRecipe in AnvilRecipes.getRecipes()) {
-            registry.addRecipe(anvilRecipe)
-        }
+		for (anvilRecipe in AnvilRecipes.getRecipes()) {
+			registry.addRecipe(anvilRecipe)
+		}
 
-    }
+	}
 
-    private fun setComparisons(registry: EmiRegistry) {
+	private fun setComparisons(registry: EmiRegistry) {
 
-        registry.setDefaultComparison(EmiStack.of(ModItems.DIVINING_ROD), Comparison.compareComponents())
-    }
+		registry.setDefaultComparison(EmiStack.of(ModItems.DIVINING_ROD), Comparison.compareComponents())
+	}
 
 }

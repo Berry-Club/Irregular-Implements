@@ -27,119 +27,119 @@ import java.util.*
 // Who decided that flammability should work like this?
 object SpectreTreeBlocks {
 
-    val SPECTRE_WOOD = object : Block(
-        Properties.ofFullCopy(Blocks.OAK_WOOD)
-            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-    ) {
-        override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
-            return getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction) > 0
-        }
+	val SPECTRE_WOOD = object : Block(
+		Properties.ofFullCopy(Blocks.OAK_WOOD)
+			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+	) {
+		override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+			return getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction) > 0
+		}
 
-        override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-            return getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
-        }
+		override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+			return getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
+		}
 
-        override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-            return getFireSpreadSpeed(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
-        }
-    }
+		override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+			return getFireSpreadSpeed(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
+		}
+	}
 
-    val SPECTRE_LOG = object : FlammableRotatedPillarBlock(
-        Blocks.OAK_LOG,
-        Properties
-            .ofFullCopy(Blocks.OAK_LOG)
-            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-    ) {
-        override fun getToolModifiedState(state: BlockState, context: UseOnContext, itemAbility: ItemAbility, simulate: Boolean): BlockState? {
-            if (itemAbility != ItemAbilities.AXE_STRIP) return super.getToolModifiedState(state, context, itemAbility, simulate)
+	val SPECTRE_LOG = object : FlammableRotatedPillarBlock(
+		Blocks.OAK_LOG,
+		Properties
+			.ofFullCopy(Blocks.OAK_LOG)
+			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+	) {
+		override fun getToolModifiedState(state: BlockState, context: UseOnContext, itemAbility: ItemAbility, simulate: Boolean): BlockState? {
+			if (itemAbility != ItemAbilities.AXE_STRIP) return super.getToolModifiedState(state, context, itemAbility, simulate)
 
-            return ModBlocks.STRIPPED_SPECTRE_LOG.get()
-                .defaultBlockState()
-                .setValue(AXIS, state.getValue(AXIS))
-        }
-    }
+			return ModBlocks.STRIPPED_SPECTRE_LOG.get()
+				.defaultBlockState()
+				.setValue(AXIS, state.getValue(AXIS))
+		}
+	}
 
-    val STRIPPED_SPECTRE_LOG = object : FlammableRotatedPillarBlock(
-        Blocks.STRIPPED_OAK_LOG,
-        Properties
-            .ofFullCopy(Blocks.STRIPPED_OAK_LOG)
-            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-    ) {}
+	val STRIPPED_SPECTRE_LOG = object : FlammableRotatedPillarBlock(
+		Blocks.STRIPPED_OAK_LOG,
+		Properties
+			.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
+			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+	) {}
 
-    val SPECTRE_LEAVES = object : LeavesBlock(
-        Properties
-            .ofFullCopy(Blocks.OAK_LEAVES)
-            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-    ) {
-        override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
-            return getFlammability(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction) > 0
-        }
+	val SPECTRE_LEAVES = object : LeavesBlock(
+		Properties
+			.ofFullCopy(Blocks.OAK_LEAVES)
+			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+	) {
+		override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+			return getFlammability(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction) > 0
+		}
 
-        override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-            return getFlammability(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction)
-        }
+		override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+			return getFlammability(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction)
+		}
 
-        override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-            return getFireSpreadSpeed(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction)
-        }
-    }
+		override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+			return getFireSpreadSpeed(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction)
+		}
+	}
 
-    val SPECTRE_PLANKS = object : Block(
-        Properties
-            .ofFullCopy(Blocks.OAK_PLANKS)
-            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-    ) {
-        override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
-            return getFlammability(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction) > 0
-        }
+	val SPECTRE_PLANKS = object : Block(
+		Properties
+			.ofFullCopy(Blocks.OAK_PLANKS)
+			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+	) {
+		override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+			return getFlammability(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction) > 0
+		}
 
-        override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-            return getFlammability(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction)
-        }
+		override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+			return getFlammability(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction)
+		}
 
-        override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-            return getFireSpreadSpeed(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction)
-        }
-    }
+		override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+			return getFireSpreadSpeed(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction)
+		}
+	}
 
-    val SPECTRE_TREE_GROWER: TreeGrower = TreeGrower(
-        OtherUtil.modResource("spectre").toString(),
-        Optional.empty(),
-        Optional.of(ModConfiguredFeatures.SPECTRE_TREE),
-        Optional.empty()
-    )
+	val SPECTRE_TREE_GROWER: TreeGrower = TreeGrower(
+		OtherUtil.modResource("spectre").toString(),
+		Optional.empty(),
+		Optional.of(ModConfiguredFeatures.SPECTRE_TREE),
+		Optional.empty()
+	)
 
-    val SPECTRE_SAPLING = object : SaplingBlock(
-        SPECTRE_TREE_GROWER,
-        Properties
-            .ofFullCopy(Blocks.OAK_SAPLING)
-            .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-    ) {}
+	val SPECTRE_SAPLING = object : SaplingBlock(
+		SPECTRE_TREE_GROWER,
+		Properties
+			.ofFullCopy(Blocks.OAK_SAPLING)
+			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+	) {}
 
-    fun convertSaplings(event: PlayerInteractEvent.RightClickBlock) {
-        val usedStack = event.itemStack
-        if (!usedStack.`is`(ModItems.ECTOPLASM)) return
+	fun convertSaplings(event: PlayerInteractEvent.RightClickBlock) {
+		val usedStack = event.itemStack
+		if (!usedStack.`is`(ModItems.ECTOPLASM)) return
 
-        val level = event.level as? ServerLevel ?: return
-        val pos = event.pos
+		val level = event.level as? ServerLevel ?: return
+		val pos = event.pos
 
-        val clickedState = level.getBlockState(pos)
-        if (!clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) return
+		val clickedState = level.getBlockState(pos)
+		if (!clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) return
 
-        level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
-        usedStack.consume(1, event.entity)
+		level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
+		usedStack.consume(1, event.entity)
 
-        level.sendParticles(
-            ParticleTypes.SCULK_SOUL,
-            pos.x + 0.5,
-            pos.y + 0.5,
-            pos.z + 0.5,
-            5,
-            0.25,
-            0.25,
-            0.25,
-            0.0
-        )
-    }
+		level.sendParticles(
+			ParticleTypes.SCULK_SOUL,
+			pos.x + 0.5,
+			pos.y + 0.5,
+			pos.z + 0.5,
+			5,
+			0.25,
+			0.25,
+			0.25,
+			0.0
+		)
+	}
 
 }

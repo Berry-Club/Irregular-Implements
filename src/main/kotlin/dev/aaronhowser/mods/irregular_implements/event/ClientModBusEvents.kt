@@ -36,201 +36,201 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 
 @EventBusSubscriber(
-    modid = IrregularImplements.ID,
-    bus = EventBusSubscriber.Bus.MOD,
-    value = [Dist.CLIENT]
+	modid = IrregularImplements.ID,
+	bus = EventBusSubscriber.Bus.MOD,
+	value = [Dist.CLIENT]
 )
 object ClientModBusEvents {
 
-    private fun getItemColorFromDye(dyeColor: DyeColor): ItemColor {
-        return ItemColor { _, _ -> dyeColor.textureDiffuseColor }
-    }
+	private fun getItemColorFromDye(dyeColor: DyeColor): ItemColor {
+		return ItemColor { _, _ -> dyeColor.textureDiffuseColor }
+	}
 
-    private fun getLocalFoliageColor(stack: ItemStack, int: Int): Int {
-        val localPlayer = ClientUtil.localPlayer
-        val localFoliageColor = localPlayer?.level()
-            ?.getBiome(localPlayer.blockPosition())
-            ?.value()
-            ?.foliageColor
+	private fun getLocalFoliageColor(stack: ItemStack, int: Int): Int {
+		val localPlayer = ClientUtil.localPlayer
+		val localFoliageColor = localPlayer?.level()
+			?.getBiome(localPlayer.blockPosition())
+			?.value()
+			?.foliageColor
 
-        return localFoliageColor ?: GrassColor.getDefaultColor()
-    }
+		return localFoliageColor ?: GrassColor.getDefaultColor()
+	}
 
-    @SubscribeEvent
-    fun registerItemColors(event: RegisterColorHandlersEvent.Item) {
-        for (dyeColor in DyeColor.entries) {
-            val seedItem = GrassSeedItem.getFromColor(dyeColor).get()
-            val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
+	@SubscribeEvent
+	fun registerItemColors(event: RegisterColorHandlersEvent.Item) {
+		for (dyeColor in DyeColor.entries) {
+			val seedItem = GrassSeedItem.getFromColor(dyeColor).get()
+			val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
-            val colorFunction = getItemColorFromDye(dyeColor)
+			val colorFunction = getItemColorFromDye(dyeColor)
 
-            event.register(colorFunction, seedItem)
-            event.register(colorFunction, coloredGrassBlock)
-        }
+			event.register(colorFunction, seedItem)
+			event.register(colorFunction, coloredGrassBlock)
+		}
 
-        event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
+		event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
 
-        event.register(
-            ::getLocalFoliageColor,
-            ModBlocks.BIOME_GLASS.get(),
-            ModBlocks.BIOME_STONE.get(),
-            ModBlocks.BIOME_COBBLESTONE.get(),
-            ModBlocks.BIOME_STONE_BRICKS.get(),
-            ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
-            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
-        )
+		event.register(
+			::getLocalFoliageColor,
+			ModBlocks.BIOME_GLASS.get(),
+			ModBlocks.BIOME_STONE.get(),
+			ModBlocks.BIOME_COBBLESTONE.get(),
+			ModBlocks.BIOME_STONE_BRICKS.get(),
+			ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
+			ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
+		)
 
-        event.register(
-            BiomeCapsuleItem::getItemColor,
-            ModItems.BIOME_CAPSULE.get()
-        )
+		event.register(
+			BiomeCapsuleItem::getItemColor,
+			ModItems.BIOME_CAPSULE.get()
+		)
 
-        event.register(
-            DiviningRodItem::getItemColor,
-            ModItems.DIVINING_ROD.get()
-        )
+		event.register(
+			DiviningRodItem::getItemColor,
+			ModItems.DIVINING_ROD.get()
+		)
 
-        event.register(
-            BiomeCrystalItem::getItemColor,
-            ModItems.BIOME_CRYSTAL.get()
-        )
+		event.register(
+			BiomeCrystalItem::getItemColor,
+			ModItems.BIOME_CRYSTAL.get()
+		)
 
-    }
+	}
 
-    //TODO: Make Rainbow Lamp use this instead of unique textures
+	//TODO: Make Rainbow Lamp use this instead of unique textures
 
-    @SubscribeEvent
-    fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
-        for (dyeColor in DyeColor.entries) {
-            val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
+	@SubscribeEvent
+	fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
+		for (dyeColor in DyeColor.entries) {
+			val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
 
-            event.register(
-                { _, _, _, tintIndex ->
-                    if (tintIndex == 0) dyeColor.textureDiffuseColor else 0xFFFFFF
-                },
-                coloredGrassBlock
-            )
-        }
+			event.register(
+				{ _, _, _, tintIndex ->
+					if (tintIndex == 0) dyeColor.textureDiffuseColor else 0xFFFFFF
+				},
+				coloredGrassBlock
+			)
+		}
 
-        event.register(
-            { _, level, pos, _ ->
-                if (level == null || pos == null) {
-                    GrassColor.getDefaultColor()
-                } else {
-                    BiomeColors.getAverageGrassColor(level, pos)
-                }
-            },
-            ModBlocks.BIOME_GLASS.get(),
-            ModBlocks.BIOME_STONE.get(),
-            ModBlocks.BIOME_COBBLESTONE.get(),
-            ModBlocks.BIOME_STONE_BRICKS.get(),
-            ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
-            ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
-        )
-    }
+		event.register(
+			{ _, level, pos, _ ->
+				if (level == null || pos == null) {
+					GrassColor.getDefaultColor()
+				} else {
+					BiomeColors.getAverageGrassColor(level, pos)
+				}
+			},
+			ModBlocks.BIOME_GLASS.get(),
+			ModBlocks.BIOME_STONE.get(),
+			ModBlocks.BIOME_COBBLESTONE.get(),
+			ModBlocks.BIOME_STONE_BRICKS.get(),
+			ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
+			ModBlocks.BIOME_STONE_BRICKS_CRACKED.get()
+		)
+	}
 
-    @SubscribeEvent
-    fun onModelRegistry(event: ModelEvent.RegisterAdditional) {
+	@SubscribeEvent
+	fun onModelRegistry(event: ModelEvent.RegisterAdditional) {
 
-        ItemProperties.register(
-            ModItems.EMERALD_COMPASS.get(),
-            EmeraldCompassItem.ANGLE,
-            EmeraldCompassItem::getAngleFloat
-        )
+		ItemProperties.register(
+			ModItems.EMERALD_COMPASS.get(),
+			EmeraldCompassItem.ANGLE,
+			EmeraldCompassItem::getAngleFloat
+		)
 
-        ItemProperties.register(
-            ModItems.REDSTONE_ACTIVATOR.get(),
-            RedstoneActivatorItem.DURATION,
-            RedstoneActivatorItem::getDurationFloat
-        )
+		ItemProperties.register(
+			ModItems.REDSTONE_ACTIVATOR.get(),
+			RedstoneActivatorItem.DURATION,
+			RedstoneActivatorItem::getDurationFloat
+		)
 
-        for (item in listOf(
-            ModItems.SPECTRE_CHARGER_BASIC.get(),
-            ModItems.SPECTRE_CHARGER_REDSTONE.get(),
-            ModItems.SPECTRE_CHARGER_ENDER.get(),
-            ModItems.SPECTRE_CHARGER_GENESIS.get()
-        )) {
-            ItemProperties.register(
-                item,
-                SpectreChargerItem.IS_ENABLED,
-                SpectreChargerItem::getEnabledForPredicate
-            )
-        }
+		for (item in listOf(
+			ModItems.SPECTRE_CHARGER_BASIC.get(),
+			ModItems.SPECTRE_CHARGER_REDSTONE.get(),
+			ModItems.SPECTRE_CHARGER_ENDER.get(),
+			ModItems.SPECTRE_CHARGER_GENESIS.get()
+		)) {
+			ItemProperties.register(
+				item,
+				SpectreChargerItem.IS_ENABLED,
+				SpectreChargerItem::getEnabledForPredicate
+			)
+		}
 
-        ItemProperties.register(
-            ModItems.WEATHER_EGG.get(),
-            WeatherEggItem.WEATHER,
-            WeatherEggItem::getWeatherFloat
-        )
-    }
+		ItemProperties.register(
+			ModItems.WEATHER_EGG.get(),
+			WeatherEggItem.WEATHER,
+			WeatherEggItem::getWeatherFloat
+		)
+	}
 
-    @SubscribeEvent
-    fun onClientSetup(event: FMLClientSetupEvent) {
-        EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
-        EntityRenderers.register(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), ::SpectreIlluminatorEntityRenderer)
-    }
+	@SubscribeEvent
+	fun onClientSetup(event: FMLClientSetupEvent) {
+		EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
+		EntityRenderers.register(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), ::SpectreIlluminatorEntityRenderer)
+	}
 
-    @SubscribeEvent
-    fun registerGuiLayers(event: RegisterGuiLayersEvent) {
-        event.registerAbove(
-            VanillaGuiLayers.AIR_LEVEL,
-            LavaProtectionOverlayRenderer.LAYER_NAME,
-            LavaProtectionOverlayRenderer::tryRender
-        )
+	@SubscribeEvent
+	fun registerGuiLayers(event: RegisterGuiLayersEvent) {
+		event.registerAbove(
+			VanillaGuiLayers.AIR_LEVEL,
+			LavaProtectionOverlayRenderer.LAYER_NAME,
+			LavaProtectionOverlayRenderer::tryRender
+		)
 
-        event.registerAbove(
-            VanillaGuiLayers.CROSSHAIR,
-            RedstoneToolRenderer.LAYER_NAME,
-            RedstoneToolRenderer::tryRenderWireStrength
-        )
+		event.registerAbove(
+			VanillaGuiLayers.CROSSHAIR,
+			RedstoneToolRenderer.LAYER_NAME,
+			RedstoneToolRenderer::tryRenderWireStrength
+		)
 
-        event.registerAbove(
-            VanillaGuiLayers.CROSSHAIR,
-            BiomeSensorBlockEntity.LAYER_NAME,
-            BiomeSensorBlockEntity::tryRenderBiomeName
-        )
-    }
+		event.registerAbove(
+			VanillaGuiLayers.CROSSHAIR,
+			BiomeSensorBlockEntity.LAYER_NAME,
+			BiomeSensorBlockEntity::tryRenderBiomeName
+		)
+	}
 
-    @SubscribeEvent
-    fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
-        event.registerBlockEntityRenderer(
-            ModBlockEntities.DIAPHANOUS_BLOCK.get(),
-            ::DiaphanousBlockEntityRenderer
-        )
+	@SubscribeEvent
+	fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
+		event.registerBlockEntityRenderer(
+			ModBlockEntities.DIAPHANOUS_BLOCK.get(),
+			::DiaphanousBlockEntityRenderer
+		)
 
-        event.registerBlockEntityRenderer(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBlockEntityRenderer)
-        event.registerBlockEntityRenderer(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
-        event.registerBlockEntityRenderer(ModBlockEntities.NATURE_CHEST.get(), ::ChestRenderer)
-        event.registerBlockEntityRenderer(ModBlockEntities.WATER_CHEST.get(), ::ChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntities.NATURE_CHEST.get(), ::ChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntities.WATER_CHEST.get(), ::ChestRenderer)
 
-        event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
-        event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)
-        event.registerEntityRenderer(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), ::ArtificialEndPortalRenderer)
-        event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), ::GoldenChickenRenderer)
-        event.registerEntityRenderer(ModEntityTypes.WEATHER_CLOUD.get(), ::WeatherCloudRenderer)
-    }
+		event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
+		event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)
+		event.registerEntityRenderer(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), ::ArtificialEndPortalRenderer)
+		event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), ::GoldenChickenRenderer)
+		event.registerEntityRenderer(ModEntityTypes.WEATHER_CLOUD.get(), ::WeatherCloudRenderer)
+	}
 
-    @SubscribeEvent
-    fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
-        event.registerItem(
-            DiaphanousBEWLR.clientItemExtensions,
-            ModItems.DIAPHANOUS_BLOCK.get()
-        )
+	@SubscribeEvent
+	fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
+		event.registerItem(
+			DiaphanousBEWLR.clientItemExtensions,
+			ModItems.DIAPHANOUS_BLOCK.get()
+		)
 
-        event.registerItem(
-            CustomCraftingTableBEWLR.clientItemExtensions,
-            ModItems.CUSTOM_CRAFTING_TABLE.get()
-        )
+		event.registerItem(
+			CustomCraftingTableBEWLR.clientItemExtensions,
+			ModItems.CUSTOM_CRAFTING_TABLE.get()
+		)
 
-        event.registerItem(
-            SpectreIlluminatorBEWLR.clientItemExtensions,
-            ModItems.SPECTRE_ILLUMINATOR.get()
-        )
-    }
+		event.registerItem(
+			SpectreIlluminatorBEWLR.clientItemExtensions,
+			ModItems.SPECTRE_ILLUMINATOR.get()
+		)
+	}
 
-    @SubscribeEvent
-    fun onRegisterMenuScreens(event: RegisterMenuScreensEvent) {
-        ModMenuTypes.registerScreens(event)
-    }
+	@SubscribeEvent
+	fun onRegisterMenuScreens(event: RegisterMenuScreensEvent) {
+		ModMenuTypes.registerScreens(event)
+	}
 
 }

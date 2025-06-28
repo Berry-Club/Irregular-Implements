@@ -17,39 +17,39 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.stream.Stream
 
 class ModMobLootSubprovider(
-    registries: HolderLookup.Provider
+	registries: HolderLookup.Provider
 ) : EntityLootSubProvider(FeatureFlags.REGISTRY.allFlags(), registries) {
 
-    override fun generate() {
-        this.add(
-            ModEntityTypes.GOLDEN_CHICKEN.get(),
-            LootTable.lootTable()
-                .withPool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(
-                            LootItem.lootTableItem(Items.FEATHER)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f)))
-                        )
-                )
-                .withPool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(
-                            LootItem.lootTableItem(Items.CHICKEN)
-                                .apply(SmeltItemFunction.smelted().`when`(this.shouldSmeltLoot()))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f)))
-                        )
-                )
-        )
-    }
+	override fun generate() {
+		this.add(
+			ModEntityTypes.GOLDEN_CHICKEN.get(),
+			LootTable.lootTable()
+				.withPool(
+					LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1.0f))
+						.add(
+							LootItem.lootTableItem(Items.FEATHER)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f)))
+								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f)))
+						)
+				)
+				.withPool(
+					LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1.0f))
+						.add(
+							LootItem.lootTableItem(Items.CHICKEN)
+								.apply(SmeltItemFunction.smelted().`when`(this.shouldSmeltLoot()))
+								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f)))
+						)
+				)
+		)
+	}
 
-    @Suppress("UNCHECKED_CAST")
-    override fun getKnownEntityTypes(): Stream<EntityType<*>> {
-        return listOf(
-            ModEntityTypes.GOLDEN_CHICKEN.get()
-        ).stream() as Stream<EntityType<*>>
-    }
+	@Suppress("UNCHECKED_CAST")
+	override fun getKnownEntityTypes(): Stream<EntityType<*>> {
+		return listOf(
+			ModEntityTypes.GOLDEN_CHICKEN.get()
+		).stream() as Stream<EntityType<*>>
+	}
 
 }

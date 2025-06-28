@@ -25,62 +25,62 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TABLE)), EntityBlock {
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return CustomCraftingTableBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return CustomCraftingTableBlockEntity(pos, state)
+	}
 
-    override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
-        return Shapes.empty()
-    }
+	override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
+		return Shapes.empty()
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS
-        } else {
-            player.openMenu(state.getMenuProvider(level, pos))
-            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE)
-            return InteractionResult.CONSUME
-        }
-    }
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		if (level.isClientSide) {
+			return InteractionResult.SUCCESS
+		} else {
+			player.openMenu(state.getMenuProvider(level, pos))
+			player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE)
+			return InteractionResult.CONSUME
+		}
+	}
 
-    override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
-        return SimpleMenuProvider(
-            { containerId, playerInventory, player ->
-                CraftingMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
-            },
-            this.name
-        )
-    }
+	override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
+		return SimpleMenuProvider(
+			{ containerId, playerInventory, player ->
+				CraftingMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
+			},
+			this.name
+		)
+	}
 
-    // Stuff that uses the BE's rendered block state
+	// Stuff that uses the BE's rendered block state
 
-    override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.getSoundType(state, level, pos, entity)
+	override fun getSoundType(state: BlockState, level: LevelReader, pos: BlockPos, entity: Entity?): SoundType {
+		val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
+			?: return super.getSoundType(state, level, pos, entity)
 
-        // Failsafe
-        val renderedState = blockEntity.renderedBlockState
-        if (renderedState.`is`(this)) return SoundType.WOOD
+		// Failsafe
+		val renderedState = blockEntity.renderedBlockState
+		if (renderedState.`is`(this)) return SoundType.WOOD
 
-        return renderedState.getSoundType(level, pos, entity)
-    }
+		return renderedState.getSoundType(level, pos, entity)
+	}
 
-    override fun spawnDestroyParticles(level: Level, player: Player, pos: BlockPos, state: BlockState) {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
-            ?: return super.spawnDestroyParticles(level, player, pos, state)
+	override fun spawnDestroyParticles(level: Level, player: Player, pos: BlockPos, state: BlockState) {
+		val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity
+			?: return super.spawnDestroyParticles(level, player, pos, state)
 
-        level.levelEvent(
-            player,
-            LevelEvent.PARTICLES_DESTROY_BLOCK,
-            pos,
-            getId(blockEntity.renderedBlockState)
-        )
-    }
+		level.levelEvent(
+			player,
+			LevelEvent.PARTICLES_DESTROY_BLOCK,
+			pos,
+			getId(blockEntity.renderedBlockState)
+		)
+	}
 
-    override fun getCloneItemStack(state: BlockState, target: HitResult, level: LevelReader, pos: BlockPos, player: Player): ItemStack {
-        val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
+	override fun getCloneItemStack(state: BlockState, target: HitResult, level: LevelReader, pos: BlockPos, player: Player): ItemStack {
+		val blockEntity = level.getBlockEntity(pos) as? CustomCraftingTableBlockEntity ?: return ItemStack.EMPTY
 
-        return CustomCraftingTableBlockItem.ofBlock(blockEntity.renderedBlockState.block)
-    }
+		return CustomCraftingTableBlockItem.ofBlock(blockEntity.renderedBlockState.block)
+	}
 
 }

@@ -16,25 +16,25 @@ import thedarkcolour.kotlinforforge.neoforge.forge.runWhenOn
 
 @Mod(IrregularImplements.ID)
 class IrregularImplements(
-    modContainer: ModContainer
+	modContainer: ModContainer
 ) {
-    companion object {
-        const val ID = "irregular_implements"
+	companion object {
+		const val ID = "irregular_implements"
 
-        @JvmField
-        val LOGGER: Logger = LogManager.getLogger(ID)
-    }
+		@JvmField
+		val LOGGER: Logger = LogManager.getLogger(ID)
+	}
 
-    init {
-        ModRegistries.register(MOD_BUS)
+	init {
+		ModRegistries.register(MOD_BUS)
 
-        runWhenOn(Dist.CLIENT) {
-            val screenFactory = IConfigScreenFactory { container, screen -> ConfigurationScreen(container, screen) }
-            modContainer.registerExtensionPoint(IConfigScreenFactory::class.java, screenFactory)
-        }
+		runWhenOn(Dist.CLIENT) {
+			val screenFactory = IConfigScreenFactory { container, screen -> ConfigurationScreen(container, screen) }
+			modContainer.registerExtensionPoint(IConfigScreenFactory::class.java, screenFactory)
+		}
 
-        modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.CONFIG_SPEC)
-        modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.CONFIG_SPEC)
-    }
+		modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.CONFIG_SPEC)
+		modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.CONFIG_SPEC)
+	}
 
 }

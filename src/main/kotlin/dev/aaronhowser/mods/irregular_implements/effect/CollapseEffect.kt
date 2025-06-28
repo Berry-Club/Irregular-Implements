@@ -4,6 +4,6 @@ import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 
 class CollapseEffect : MobEffect(
-    MobEffectCategory.HARMFUL,
-    0x000000
+	MobEffectCategory.HARMFUL,
+	0x000000
 )

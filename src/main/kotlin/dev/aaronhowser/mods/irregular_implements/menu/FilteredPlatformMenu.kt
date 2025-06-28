@@ -11,85 +11,85 @@ import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class FilteredPlatformMenu(
-    containerId: Int,
-    playerInventory: Inventory,
-    private val platformContainer: Container
+	containerId: Int,
+	playerInventory: Inventory,
+	private val platformContainer: Container
 ) : AbstractContainerMenu(ModMenuTypes.FILTERED_PLATFORM.get(), containerId) {
 
-    constructor(containerId: Int, playerInventory: Inventory) :
-            this(
-                containerId,
-                playerInventory,
-                SimpleContainer(1)
-            )
+	constructor(containerId: Int, playerInventory: Inventory) :
+			this(
+				containerId,
+				playerInventory,
+				SimpleContainer(1)
+			)
 
-    init {
-        checkContainerSize(platformContainer, 1)
+	init {
+		checkContainerSize(platformContainer, 1)
 
-        platformContainer.startOpen(playerInventory.player)
+		platformContainer.startOpen(playerInventory.player)
 
-        val platformSlot = object : Slot(platformContainer, 0, 80, 10) {
-            override fun mayPlace(stack: ItemStack): Boolean {
-                return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
-            }
-        }
+		val platformSlot = object : Slot(platformContainer, 0, 80, 10) {
+			override fun mayPlace(stack: ItemStack): Boolean {
+				return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
+			}
+		}
 
-        this.addSlot(platformSlot)
+		this.addSlot(platformSlot)
 
-        for (row in 0..2) {
-            for (column in 0..8) {
-                val inventorySlotIndex = column + row * 9 + 9
+		for (row in 0..2) {
+			for (column in 0..8) {
+				val inventorySlotIndex = column + row * 9 + 9
 
-                val x = 8 + column * 18
-                val y = 47 + row * 18
+				val x = 8 + column * 18
+				val y = 47 + row * 18
 
-                this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
-            }
-        }
+				this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
+			}
+		}
 
-        for (hotbarSlotIndex in 0..8) {
-            val x = 8 + hotbarSlotIndex * 18
-            val y = 105
+		for (hotbarSlotIndex in 0..8) {
+			val x = 8 + hotbarSlotIndex * 18
+			val y = 105
 
-            this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
-        }
+			this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
+		}
 
-    }
+	}
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        val slot = slots.getOrNull(index)
+	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+		val slot = slots.getOrNull(index)
 
-        if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
+		if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
 
-        val stackThere = slot.item
-        val copyStack = stackThere.copy()
+		val stackThere = slot.item
+		val copyStack = stackThere.copy()
 
-        // If the slot is in the platform container
-        if (index == 0) {
-            if (!this.moveItemStackTo(stackThere, 1, this.slots.size, true)) {
-                return ItemStack.EMPTY
-            }
-        } else {
-            if (this.moveItemStackTo(stackThere, 0, 1, false)) {
-                return ItemStack.EMPTY
-            }
-        }
+		// If the slot is in the platform container
+		if (index == 0) {
+			if (!this.moveItemStackTo(stackThere, 1, this.slots.size, true)) {
+				return ItemStack.EMPTY
+			}
+		} else {
+			if (this.moveItemStackTo(stackThere, 0, 1, false)) {
+				return ItemStack.EMPTY
+			}
+		}
 
-        if (stackThere.isEmpty) {
-            slot.setByPlayer(ItemStack.EMPTY)
-        } else {
-            slot.setChanged()
-        }
+		if (stackThere.isEmpty) {
+			slot.setByPlayer(ItemStack.EMPTY)
+		} else {
+			slot.setChanged()
+		}
 
-        if (stackThere.count == copyStack.count) return ItemStack.EMPTY
+		if (stackThere.count == copyStack.count) return ItemStack.EMPTY
 
-        slot.onTake(player, stackThere)
+		slot.onTake(player, stackThere)
 
-        return ItemStack.EMPTY
-    }
+		return ItemStack.EMPTY
+	}
 
-    override fun stillValid(player: Player): Boolean {
-        return platformContainer.stillValid(player)
-    }
+	override fun stillValid(player: Player): Boolean {
+		return platformContainer.stillValid(player)
+	}
 
 }

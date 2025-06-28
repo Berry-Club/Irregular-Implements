@@ -34,151 +34,151 @@ import java.awt.Color
 import java.util.function.Supplier
 
 class SpectreCoilBlock private constructor(
-    private val type: Type
+	private val type: Type
 ) : Block(
-    Properties
-        .ofFullCopy(Blocks.IRON_BLOCK)
+	Properties
+		.ofFullCopy(Blocks.IRON_BLOCK)
 ), EntityBlock {
 
-    companion object {
-        val FACING: DirectionProperty = BlockStateProperties.FACING
+	companion object {
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 
-        private const val HEIGHT = 1.5
+		private const val HEIGHT = 1.5
 
-        var SHAPE_NORTH: VoxelShape = box(5.0, 5.0, 0.0, 11.0, 11.0, HEIGHT)
-        var SHAPE_SOUTH: VoxelShape = box(5.0, 5.0, 16.0 - HEIGHT, 11.0, 11.0, 16.0)
-        var SHAPE_WEST: VoxelShape = box(0.0, 5.0, 5.0, HEIGHT, 11.0, 11.0)
-        var SHAPE_EAST: VoxelShape = box(16.0 - HEIGHT, 5.0, 5.0, 16.0, 11.0, 11.0)
-        var SHAPE_UP: VoxelShape = box(5.0, 16.0 - HEIGHT, 5.0, 11.0, 16.0, 11.0)
-        var SHAPE_DOWN: VoxelShape = box(5.0, 0.0, 5.0, 11.0, HEIGHT, 11.0)
+		var SHAPE_NORTH: VoxelShape = box(5.0, 5.0, 0.0, 11.0, 11.0, HEIGHT)
+		var SHAPE_SOUTH: VoxelShape = box(5.0, 5.0, 16.0 - HEIGHT, 11.0, 11.0, 16.0)
+		var SHAPE_WEST: VoxelShape = box(0.0, 5.0, 5.0, HEIGHT, 11.0, 11.0)
+		var SHAPE_EAST: VoxelShape = box(16.0 - HEIGHT, 5.0, 5.0, 16.0, 11.0, 11.0)
+		var SHAPE_UP: VoxelShape = box(5.0, 16.0 - HEIGHT, 5.0, 11.0, 16.0, 11.0)
+		var SHAPE_DOWN: VoxelShape = box(5.0, 0.0, 5.0, 11.0, HEIGHT, 11.0)
 
-        val BASIC = SpectreCoilBlock(Type.BASIC)
-        val REDSTONE = SpectreCoilBlock(Type.REDSTONE)
-        val ENDER = SpectreCoilBlock(Type.ENDER)
-        val NUMBER = SpectreCoilBlock(Type.NUMBER)
-        val GENESIS = SpectreCoilBlock(Type.GENESIS)
-    }
+		val BASIC = SpectreCoilBlock(Type.BASIC)
+		val REDSTONE = SpectreCoilBlock(Type.REDSTONE)
+		val ENDER = SpectreCoilBlock(Type.ENDER)
+		val NUMBER = SpectreCoilBlock(Type.NUMBER)
+		val GENESIS = SpectreCoilBlock(Type.GENESIS)
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(FACING, Direction.DOWN)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.DOWN)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(DirectionalBlock.FACING)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(DirectionalBlock.FACING)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(DirectionalBlock.FACING, context.clickedFace.opposite)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(DirectionalBlock.FACING, context.clickedFace.opposite)
+	}
 
-    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return when (state.getValue(DirectionalBlock.FACING)) {
-            Direction.NORTH -> SHAPE_NORTH
-            Direction.SOUTH -> SHAPE_SOUTH
-            Direction.WEST -> SHAPE_WEST
-            Direction.EAST -> SHAPE_EAST
-            Direction.UP -> SHAPE_UP
-            Direction.DOWN -> SHAPE_DOWN
-            else -> Shapes.block()
-        }
-    }
+	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		return when (state.getValue(DirectionalBlock.FACING)) {
+			Direction.NORTH -> SHAPE_NORTH
+			Direction.SOUTH -> SHAPE_SOUTH
+			Direction.WEST -> SHAPE_WEST
+			Direction.EAST -> SHAPE_EAST
+			Direction.UP -> SHAPE_UP
+			Direction.DOWN -> SHAPE_DOWN
+			else -> Shapes.block()
+		}
+	}
 
-    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
-        return if (state.canSurvive(level, pos)) {
-            state
-        } else {
-            Blocks.AIR.defaultBlockState()
-        }
-    }
+	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+		return if (state.canSurvive(level, pos)) {
+			state
+		} else {
+			Blocks.AIR.defaultBlockState()
+		}
+	}
 
-    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-        val facing = state.getValue(DirectionalBlock.FACING)
-        val onBlockPos = pos.relative(facing)
+	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+		val facing = state.getValue(DirectionalBlock.FACING)
+		val onBlockPos = pos.relative(facing)
 
-        val canSupportCenter = level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
+		val canSupportCenter = level.getBlockState(onBlockPos).isFaceSturdy(level, onBlockPos, facing.opposite, SupportType.CENTER)
 
-        if (canSupportCenter) return true
+		if (canSupportCenter) return true
 
-        val onBlockThatCanReceivePower = level is Level && level
-            .getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
-            ?.canReceive().isTrue
+		val onBlockThatCanReceivePower = level is Level && level
+			.getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
+			?.canReceive().isTrue
 
-        return onBlockThatCanReceivePower
-    }
+		return onBlockThatCanReceivePower
+	}
 
-    //TODO: Implement color
-    enum class Type(
-        val color: Int,
-        val amountGetter: Supplier<Int>,
-        val isGenerator: Boolean
-    ) {
-        BASIC(
-            color = Color.CYAN.rgb,
-            amountGetter = { ServerConfig.SPECTRE_BASIC_RATE.get() },
-            isGenerator = false
-        ),
-        REDSTONE(
-            color = Color.RED.rgb,
-            amountGetter = { ServerConfig.SPECTRE_REDSTONE_RATE.get() },
-            isGenerator = false
-        ),
-        ENDER(
-            color = Color(200, 0, 210).rgb,
-            amountGetter = { ServerConfig.SPECTRE_ENDER_RATE.get() },
-            isGenerator = false
-        ),
-        NUMBER(
-            color = Color.GREEN.rgb,
-            amountGetter = { ServerConfig.SPECTRE_NUMBER_RATE.get() },
-            isGenerator = true
-        ),
-        GENESIS(
-            color = Color.ORANGE.rgb,
-            amountGetter = { ServerConfig.SPECTRE_GENESIS_RATE.get() },
-            isGenerator = true
-        ),
-    }
+	//TODO: Implement color
+	enum class Type(
+		val color: Int,
+		val amountGetter: Supplier<Int>,
+		val isGenerator: Boolean
+	) {
+		BASIC(
+			color = Color.CYAN.rgb,
+			amountGetter = { ServerConfig.SPECTRE_BASIC_RATE.get() },
+			isGenerator = false
+		),
+		REDSTONE(
+			color = Color.RED.rgb,
+			amountGetter = { ServerConfig.SPECTRE_REDSTONE_RATE.get() },
+			isGenerator = false
+		),
+		ENDER(
+			color = Color(200, 0, 210).rgb,
+			amountGetter = { ServerConfig.SPECTRE_ENDER_RATE.get() },
+			isGenerator = false
+		),
+		NUMBER(
+			color = Color.GREEN.rgb,
+			amountGetter = { ServerConfig.SPECTRE_NUMBER_RATE.get() },
+			isGenerator = true
+		),
+		GENESIS(
+			color = Color.ORANGE.rgb,
+			amountGetter = { ServerConfig.SPECTRE_GENESIS_RATE.get() },
+			isGenerator = true
+		),
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return SpectreCoilBlockEntity(pos, state, this.type)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return SpectreCoilBlockEntity(pos, state, this.type)
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(
-            blockEntityType,
-            ModBlockEntities.SPECTRE_COIL.get(),
-            SpectreCoilBlockEntity::tick
-        )
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(
+			blockEntityType,
+			ModBlockEntities.SPECTRE_COIL.get(),
+			SpectreCoilBlockEntity::tick
+		)
+	}
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
-        super.setPlacedBy(level, pos, state, placer, stack)
+	override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+		super.setPlacedBy(level, pos, state, placer, stack)
 
-        if (placer == null) return
-        val blockEntity = level.getBlockEntity(pos) as? SpectreCoilBlockEntity ?: return
+		if (placer == null) return
+		val blockEntity = level.getBlockEntity(pos) as? SpectreCoilBlockEntity ?: return
 
-        blockEntity.ownerUuid = placer.uuid ?: return
-    }
+		blockEntity.ownerUuid = placer.uuid ?: return
+	}
 
-    override fun appendHoverText(
-        stack: ItemStack,
-        context: Item.TooltipContext,
-        tooltipComponents: MutableList<Component>,
-        tooltipFlag: TooltipFlag
-    ) {
-        val amount = this.type.amountGetter.get()
+	override fun appendHoverText(
+		stack: ItemStack,
+		context: Item.TooltipContext,
+		tooltipComponents: MutableList<Component>,
+		tooltipFlag: TooltipFlag
+	) {
+		val amount = this.type.amountGetter.get()
 
-        val component = if (this.type.isGenerator) {
-            ModLanguageProvider.Tooltips.COIL_GENERATES
-        } else {
-            ModLanguageProvider.Tooltips.COIL_TRANSFERS
-        }.toGrayComponent(String.format("%,d", amount))
+		val component = if (this.type.isGenerator) {
+			ModLanguageProvider.Tooltips.COIL_GENERATES
+		} else {
+			ModLanguageProvider.Tooltips.COIL_TRANSFERS
+		}.toGrayComponent(String.format("%,d", amount))
 
-        tooltipComponents.add(component)
-    }
+		tooltipComponents.add(component)
+	}
 
 }

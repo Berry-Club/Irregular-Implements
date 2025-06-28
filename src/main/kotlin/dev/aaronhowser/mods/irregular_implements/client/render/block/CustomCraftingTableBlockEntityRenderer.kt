@@ -7,30 +7,30 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 
 class CustomCraftingTableBlockEntityRenderer(
-    val context: BlockEntityRendererProvider.Context
+	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<CustomCraftingTableBlockEntity> {
 
-    override fun render(
-        blockEntity: CustomCraftingTableBlockEntity,
-        partialTick: Float,
-        poseStack: PoseStack,
-        bufferSource: MultiBufferSource,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        poseStack.pushPose()
+	override fun render(
+		blockEntity: CustomCraftingTableBlockEntity,
+		partialTick: Float,
+		poseStack: PoseStack,
+		bufferSource: MultiBufferSource,
+		packedLight: Int,
+		packedOverlay: Int
+	) {
+		poseStack.pushPose()
 
-        poseStack.scale(0.999f, 0.999f, 0.999f)
-        poseStack.translate(0.0005f, 0.0005f, 0.0005f)
+		poseStack.scale(0.999f, 0.999f, 0.999f)
+		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 
-        context.blockRenderDispatcher.renderSingleBlock(
-            blockEntity.renderedBlockState,
-            poseStack,
-            bufferSource,
-            packedLight,
-            packedOverlay
-        )
+		context.blockRenderDispatcher.renderSingleBlock(
+			blockEntity.renderedBlockState,
+			poseStack,
+			bufferSource,
+			packedLight,
+			packedOverlay
+		)
 
-        poseStack.popPose()
-    }
+		poseStack.popPose()
+	}
 }

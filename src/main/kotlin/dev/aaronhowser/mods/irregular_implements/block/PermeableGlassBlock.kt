@@ -14,45 +14,45 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 //FIXME: Update texture
 class PermeableGlassBlock private constructor(
-    isSolidForMobsOnly: Boolean,
-    properties: Properties
+	isSolidForMobsOnly: Boolean,
+	properties: Properties
 ) : TransparentBlock(properties) {
 
-    val mobsPassThrough = !isSolidForMobsOnly
-    val playersPassThrough = isSolidForMobsOnly
+	val mobsPassThrough = !isSolidForMobsOnly
+	val playersPassThrough = isSolidForMobsOnly
 
-    companion object {
+	companion object {
 
-        val LAPIS = PermeableGlassBlock(
-            isSolidForMobsOnly = false,
-            Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
-        )
+		val LAPIS = PermeableGlassBlock(
+			isSolidForMobsOnly = false,
+			Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
+		)
 
-        val QUARTZ = PermeableGlassBlock(
-            isSolidForMobsOnly = true,
-            Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
-        )
+		val QUARTZ = PermeableGlassBlock(
+			isSolidForMobsOnly = true,
+			Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
+		)
 
-    }
+	}
 
-    override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        if (context !is EntityCollisionContext) return Shapes.block()
-        val entity = context.entity ?: return Shapes.block()
+	override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		if (context !is EntityCollisionContext) return Shapes.block()
+		val entity = context.entity ?: return Shapes.block()
 
-        return when {
-            entity is Player && playersPassThrough -> Shapes.empty()
-            entity !is Player && mobsPassThrough -> Shapes.empty()
-            else -> Shapes.block()
-        }
-    }
+		return when {
+			entity is Player && playersPassThrough -> Shapes.empty()
+			entity !is Player && mobsPassThrough -> Shapes.empty()
+			else -> Shapes.block()
+		}
+	}
 
-    //FIXME: Figure out why mobs won't pathfind through Lapis glass
-    override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
-        return when (pathComputationType) {
-            PathComputationType.LAND -> !mobsPassThrough
-            PathComputationType.WATER -> false
-            PathComputationType.AIR -> mobsPassThrough
-        }
-    }
+	//FIXME: Figure out why mobs won't pathfind through Lapis glass
+	override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
+		return when (pathComputationType) {
+			PathComputationType.LAND -> !mobsPassThrough
+			PathComputationType.WATER -> false
+			PathComputationType.AIR -> mobsPassThrough
+		}
+	}
 
 }

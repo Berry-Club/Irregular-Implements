@@ -25,111 +25,111 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class IgniterBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.IGNITER.get(), pPos, pBlockState), MenuProvider {
 
-    enum class Mode(val nameComponent: Component) {
-        TOGGLE(ModLanguageProvider.Tooltips.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered
-        IGNITE(ModLanguageProvider.Tooltips.IGNITER_IGNITE.toComponent()),         // Make fire when powered, do nothing when unpowered
-        KEEP_IGNITED(ModLanguageProvider.Tooltips.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
-    }
+	enum class Mode(val nameComponent: Component) {
+		TOGGLE(ModLanguageProvider.Tooltips.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered
+		IGNITE(ModLanguageProvider.Tooltips.IGNITER_IGNITE.toComponent()),         // Make fire when powered, do nothing when unpowered
+		KEEP_IGNITED(ModLanguageProvider.Tooltips.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
+	}
 
-    companion object {
-        const val MODE_NBT = "Mode"
+	companion object {
+		const val MODE_NBT = "Mode"
 
-        fun ignite(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
-            if (level.isClientSide) return
+		fun ignite(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
+			if (level.isClientSide) return
 
-            val facing = igniterState.getValue(FACING)
-            val targetPos = igniterPos.relative(facing)
-            val targetState = level.getBlockState(targetPos)
+			val facing = igniterState.getValue(FACING)
+			val targetPos = igniterPos.relative(facing)
+			val targetState = level.getBlockState(targetPos)
 
-            val canPlaceFire = targetState.canBeReplaced()
-            if (canPlaceFire) {
-                val fireState = (Blocks.FIRE as FireBlock).getStateForPlacement(level, targetPos)
+			val canPlaceFire = targetState.canBeReplaced()
+			if (canPlaceFire) {
+				val fireState = (Blocks.FIRE as FireBlock).getStateForPlacement(level, targetPos)
 
-                level.setBlockAndUpdate(targetPos, fireState)
-            }
-        }
+				level.setBlockAndUpdate(targetPos, fireState)
+			}
+		}
 
-        fun extinguish(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
-            if (level.isClientSide) return
+		fun extinguish(level: Level, igniterPos: BlockPos, igniterState: BlockState) {
+			if (level.isClientSide) return
 
-            val facing = igniterState.getValue(FACING)
-            val targetPos = igniterPos.relative(facing)
-            val targetState = level.getBlockState(targetPos)
+			val facing = igniterState.getValue(FACING)
+			val targetPos = igniterPos.relative(facing)
+			val targetState = level.getBlockState(targetPos)
 
-            if (targetState.`is`(BlockTags.FIRE)) {
-                level.removeBlock(targetPos, false)
-            }
-        }
+			if (targetState.`is`(BlockTags.FIRE)) {
+				level.removeBlock(targetPos, false)
+			}
+		}
 
-        const val CONTAINER_DATA_SIZE = 1
-        const val MODE_INDEX = 0
-    }
+		const val CONTAINER_DATA_SIZE = 1
+		const val MODE_INDEX = 0
+	}
 
-    var mode: Mode = Mode.TOGGLE
-        private set(value) {
-            field = value
-            setChanged()
-        }
+	var mode: Mode = Mode.TOGGLE
+		private set(value) {
+			field = value
+			setChanged()
+		}
 
-    fun blockUpdated(isPowered: Boolean, wasEnabled: Boolean) {
-        val level = this.level ?: return
+	fun blockUpdated(isPowered: Boolean, wasEnabled: Boolean) {
+		val level = this.level ?: return
 
-        val isTurningOn = isPowered && !wasEnabled
-        val isTurningOff = !isPowered && wasEnabled
+		val isTurningOn = isPowered && !wasEnabled
+		val isTurningOff = !isPowered && wasEnabled
 
-        when (this.mode) {
-            Mode.KEEP_IGNITED -> if (isPowered) ignite(level, this.blockPos, this.blockState)
+		when (this.mode) {
+			Mode.KEEP_IGNITED -> if (isPowered) ignite(level, this.blockPos, this.blockState)
 
-            Mode.IGNITE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState)
+			Mode.IGNITE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState)
 
-            Mode.TOGGLE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState) else if (isTurningOff) extinguish(level, this.blockPos, this.blockState)
-        }
-    }
+			Mode.TOGGLE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState) else if (isTurningOff) extinguish(level, this.blockPos, this.blockState)
+		}
+	}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        tag.putInt(MODE_NBT, this.mode.ordinal)
-    }
+		tag.putInt(MODE_NBT, this.mode.ordinal)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        this.mode = Mode.entries[tag.getInt(MODE_NBT)]
-    }
+		this.mode = Mode.entries[tag.getInt(MODE_NBT)]
+	}
 
-    // Menu stuff
+	// Menu stuff
 
-    private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
-        override fun set(index: Int, value: Int) {
-            when (index) {
-                MODE_INDEX -> this@IgniterBlockEntity.mode = Mode.entries.getOrNull(value) ?: Mode.TOGGLE
-                else -> error("Unknown index: $index")
-            }
-        }
+	private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+		override fun set(index: Int, value: Int) {
+			when (index) {
+				MODE_INDEX -> this@IgniterBlockEntity.mode = Mode.entries.getOrNull(value) ?: Mode.TOGGLE
+				else -> error("Unknown index: $index")
+			}
+		}
 
-        override fun get(index: Int): Int {
-            return when (index) {
-                MODE_INDEX -> this@IgniterBlockEntity.mode.ordinal
-                else -> error("Unknown index: $index")
-            }
-        }
-    }
+		override fun get(index: Int): Int {
+			return when (index) {
+				MODE_INDEX -> this@IgniterBlockEntity.mode.ordinal
+				else -> error("Unknown index: $index")
+			}
+		}
+	}
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return IgniterMenu(containerId, this.containerData)
-    }
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return IgniterMenu(containerId, this.containerData)
+	}
 
-    override fun getDisplayName(): Component {
-        return this.blockState.block.name
-    }
+	override fun getDisplayName(): Component {
+		return this.blockState.block.name
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

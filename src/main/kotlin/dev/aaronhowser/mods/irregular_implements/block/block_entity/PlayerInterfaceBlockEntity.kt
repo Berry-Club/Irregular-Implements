@@ -22,125 +22,125 @@ import java.util.*
 
 //TODO: What if BER that makes the owner's head float above the block and look at you
 class PlayerInterfaceBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.PLAYER_INTERFACE.get(), pPos, pBlockState) {
 
-    companion object {
+	companion object {
 
-        private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
+		private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
 
-        /**
-         * Mostly meant to be called from KubeJS.
-         *
-         * Here's an example:
-         *
-         * ```js
-         * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
-         *
-         * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
-         * ```
-         *
-         * @param predicate A predicate that takes in a [Player] and a [BlockEntity] and returns a [Boolean].
-         */
-        @JvmStatic
-        fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
-            PLAYER_PREDICATE = predicate
-        }
+		/**
+		 * Mostly meant to be called from KubeJS.
+		 *
+		 * Here's an example:
+		 *
+		 * ```js
+		 * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
+		 *
+		 * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
+		 * ```
+		 *
+		 * @param predicate A predicate that takes in a [Player] and a [BlockEntity] and returns a [Boolean].
+		 */
+		@JvmStatic
+		fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
+			PLAYER_PREDICATE = predicate
+		}
 
-        const val OWNER_UUID_NBT = "OwnerUuid"
+		const val OWNER_UUID_NBT = "OwnerUuid"
 
-    }
+	}
 
-    private enum class InventorySection {
-        ARMOR,
-        HOTBAR,
-        OFFHAND,
-        MAIN;
+	private enum class InventorySection {
+		ARMOR,
+		HOTBAR,
+		OFFHAND,
+		MAIN;
 
-        companion object {
-            fun fromDirection(direction: Direction?): InventorySection {
-                return when (direction) {
-                    Direction.UP -> ARMOR
-                    Direction.DOWN -> HOTBAR
-                    Direction.NORTH -> OFFHAND
-                    else -> MAIN
-                }
-            }
-        }
-    }
+		companion object {
+			fun fromDirection(direction: Direction?): InventorySection {
+				return when (direction) {
+					Direction.UP -> ARMOR
+					Direction.DOWN -> HOTBAR
+					Direction.NORTH -> OFFHAND
+					else -> MAIN
+				}
+			}
+		}
+	}
 
-    var ownerUuid: UUID = UUID.randomUUID()
+	var ownerUuid: UUID = UUID.randomUUID()
 
-    private fun getPlayer(): Player? {
-        val level = this.level as? ServerLevel ?: return null
-        return level.server.playerList.getPlayer(ownerUuid)
-    }
+	private fun getPlayer(): Player? {
+		val level = this.level as? ServerLevel ?: return null
+		return level.server.playerList.getPlayer(ownerUuid)
+	}
 
-    fun getItemHandler(direction: Direction?): IItemHandler? {
-        val owner = getPlayer() ?: return null
-        if (!PLAYER_PREDICATE.invoke(owner, this)) return null
+	fun getItemHandler(direction: Direction?): IItemHandler? {
+		val owner = getPlayer() ?: return null
+		if (!PLAYER_PREDICATE.invoke(owner, this)) return null
 
-        val section = InventorySection.fromDirection(direction)
+		val section = InventorySection.fromDirection(direction)
 
-        return when (section) {
-            InventorySection.ARMOR -> getArmorHandler(owner)
-            InventorySection.HOTBAR -> getHotbarHandler(owner)
-            InventorySection.OFFHAND -> getOffhandHandler(owner)
-            InventorySection.MAIN -> getMainHandler(owner)
-        }
-    }
+		return when (section) {
+			InventorySection.ARMOR -> getArmorHandler(owner)
+			InventorySection.HOTBAR -> getHotbarHandler(owner)
+			InventorySection.OFFHAND -> getOffhandHandler(owner)
+			InventorySection.MAIN -> getMainHandler(owner)
+		}
+	}
 
-    private fun getHotbarHandler(owner: Player): IItemHandler {
-        return LimitedInventoryWrapper(owner.inventory, 0, 9)
-    }
+	private fun getHotbarHandler(owner: Player): IItemHandler {
+		return LimitedInventoryWrapper(owner.inventory, 0, 9)
+	}
 
-    private fun getMainHandler(owner: Player): IItemHandler {
-        return LimitedInventoryWrapper(owner.inventory, 9, 9 * 3)
-    }
+	private fun getMainHandler(owner: Player): IItemHandler {
+		return LimitedInventoryWrapper(owner.inventory, 9, 9 * 3)
+	}
 
-    private fun getOffhandHandler(owner: Player): IItemHandler {
-        return PlayerOffhandInvWrapper(owner.inventory)
-    }
+	private fun getOffhandHandler(owner: Player): IItemHandler {
+		return PlayerOffhandInvWrapper(owner.inventory)
+	}
 
-    private fun getArmorHandler(owner: Player): IItemHandler {
-        return PlayerArmorInvWrapper(owner.inventory)
-    }
+	private fun getArmorHandler(owner: Player): IItemHandler {
+		return PlayerArmorInvWrapper(owner.inventory)
+	}
 
-    private class LimitedInventoryWrapper(
-        private val inventory: Inventory,
-        minSlot: Int,
-        maxSlot: Int
-    ) : RangedWrapper(InvWrapper(inventory), minSlot, maxSlot) {
-        override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean): ItemStack {
-            val rest = super.insertItem(slot, stack, simulate)
-            if (rest.count != stack.count) {
-                val inSlot = getStackInSlot(slot)
-                if (!inSlot.isEmpty) {
-                    val player = inventory.player
+	private class LimitedInventoryWrapper(
+		private val inventory: Inventory,
+		minSlot: Int,
+		maxSlot: Int
+	) : RangedWrapper(InvWrapper(inventory), minSlot, maxSlot) {
+		override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean): ItemStack {
+			val rest = super.insertItem(slot, stack, simulate)
+			if (rest.count != stack.count) {
+				val inSlot = getStackInSlot(slot)
+				if (!inSlot.isEmpty) {
+					val player = inventory.player
 
-                    if (player.level().isClientSide) {
-                        inSlot.popTime = 5
-                    } else if (player is ServerPlayer) {
-                        player.containerMenu.broadcastChanges()
-                    }
-                }
-            }
-            return rest
-        }
-    }
+					if (player.level().isClientSide) {
+						inSlot.popTime = 5
+					} else if (player is ServerPlayer) {
+						player.containerMenu.broadcastChanges()
+					}
+				}
+			}
+			return rest
+		}
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
-        if (uuid != null) this.ownerUuid = uuid
-    }
+		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
+		if (uuid != null) this.ownerUuid = uuid
+	}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        tag.putUUID(OWNER_UUID_NBT, ownerUuid)
-    }
+		tag.putUUID(OWNER_UUID_NBT, ownerUuid)
+	}
 
 }

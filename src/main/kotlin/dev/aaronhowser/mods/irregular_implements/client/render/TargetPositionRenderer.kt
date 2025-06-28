@@ -16,107 +16,107 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
 @EventBusSubscriber(
-    modid = IrregularImplements.ID,
-    value = [Dist.CLIENT]
+	modid = IrregularImplements.ID,
+	value = [Dist.CLIENT]
 )
 object TargetPositionRenderer {
 
-    private val positions: MutableList<BlockPos> = mutableListOf()
+	private val positions: MutableList<BlockPos> = mutableListOf()
 
-    @SubscribeEvent
-    fun afterClientTick(event: ClientTickEvent.Post) {
-        positions.clear()
+	@SubscribeEvent
+	fun afterClientTick(event: ClientTickEvent.Post) {
+		positions.clear()
 
-        val player = ClientUtil.localPlayer ?: return
+		val player = ClientUtil.localPlayer ?: return
 
-        val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.LOCATION)
-        val offHandItemLocation = player.offhandItem.get(ModDataComponents.LOCATION)
+		val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.LOCATION)
+		val offHandItemLocation = player.offhandItem.get(ModDataComponents.LOCATION)
 
-        val level = player.level()
+		val level = player.level()
 
-        if (mainHandItemLocation != null && mainHandItemLocation.dimension == level.dimension()) {
-            positions.add(mainHandItemLocation.blockPos)
-        }
+		if (mainHandItemLocation != null && mainHandItemLocation.dimension == level.dimension()) {
+			positions.add(mainHandItemLocation.blockPos)
+		}
 
-        if (offHandItemLocation != null && offHandItemLocation.dimension == level.dimension()) {
-            positions.add(offHandItemLocation.blockPos)
-        }
+		if (offHandItemLocation != null && offHandItemLocation.dimension == level.dimension()) {
+			positions.add(offHandItemLocation.blockPos)
+		}
 
-    }
+	}
 
-    private var vertexBuffer: VertexBuffer? = null
+	private var vertexBuffer: VertexBuffer? = null
 
-    @SubscribeEvent
-    fun onRenderLevel(event: RenderLevelStageEvent) {
-        if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
+	@SubscribeEvent
+	fun onRenderLevel(event: RenderLevelStageEvent) {
+		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 
-        refresh(event.poseStack)
-        render(event)
-    }
+		refresh(event.poseStack)
+		render(event)
+	}
 
-    private fun refresh(poseStack: PoseStack) {
-        vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
-        val vertexBuffer = vertexBuffer ?: return
+	private fun refresh(poseStack: PoseStack) {
+		vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
+		val vertexBuffer = vertexBuffer ?: return
 
-        val tesselator = Tesselator.getInstance()
-        val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
+		val tesselator = Tesselator.getInstance()
+		val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
 
-        for (position in positions) {
-            RenderUtils.renderCube(
-                poseStack,
-                buffer,
-                position.x,
-                position.y,
-                position.z,
-                1,
-                1,
-                1,
-                0x3200FF00  //TODO: Change color?
-            )
-        }
+		for (position in positions) {
+			RenderUtils.renderCube(
+				poseStack,
+				buffer,
+				position.x,
+				position.y,
+				position.z,
+				1,
+				1,
+				1,
+				0x3200FF00  //TODO: Change color?
+			)
+		}
 
-        val build = buffer.build()
-        if (build == null) {
-            this.vertexBuffer = null
-        } else {
-            vertexBuffer.bind()
-            vertexBuffer.upload(build)
-            VertexBuffer.unbind()
-        }
-    }
+		val build = buffer.build()
+		if (build == null) {
+			this.vertexBuffer = null
+		} else {
+			vertexBuffer.bind()
+			vertexBuffer.upload(build)
+			VertexBuffer.unbind()
+		}
+	}
 
-    private fun render(event: RenderLevelStageEvent) {
-        val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
-        val poseStack = event.poseStack
-        val vertexBuffer = this.vertexBuffer ?: return
+	private fun render(event: RenderLevelStageEvent) {
+		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+		val poseStack = event.poseStack
+		val vertexBuffer = this.vertexBuffer ?: return
 
-        RenderSystem.depthMask(false)
-        RenderSystem.enableBlend()
-        RenderSystem.defaultBlendFunc()
+		RenderSystem.depthMask(false)
+		RenderSystem.enableBlend()
+		RenderSystem.defaultBlendFunc()
 
-        poseStack.pushPose()
+		poseStack.pushPose()
 
-        RenderSystem.setShader(GameRenderer::getPositionColorShader)
-        RenderSystem.applyModelViewMatrix()
-        RenderSystem.depthFunc(GL11.GL_ALWAYS)
+		RenderSystem.setShader(GameRenderer::getPositionColorShader)
+		RenderSystem.applyModelViewMatrix()
+		RenderSystem.depthFunc(GL11.GL_ALWAYS)
 
-        poseStack.mulPose(event.modelViewMatrix)
-        poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
+		poseStack.mulPose(event.modelViewMatrix)
+		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-        vertexBuffer.bind()
-        vertexBuffer.drawWithShader(
-            poseStack.last().pose(),
-            event.projectionMatrix,
-            RenderSystem.getShader()!!
-        )
+		vertexBuffer.bind()
+		vertexBuffer.drawWithShader(
+			poseStack.last().pose(),
+			event.projectionMatrix,
+			RenderSystem.getShader()!!
+		)
 
-        VertexBuffer.unbind()
-        RenderSystem.depthFunc(GL11.GL_LEQUAL)
+		VertexBuffer.unbind()
+		RenderSystem.depthFunc(GL11.GL_LEQUAL)
 
-        poseStack.popPose()
-        RenderSystem.applyModelViewMatrix()
+		poseStack.popPose()
+		RenderSystem.applyModelViewMatrix()
 
-        RenderSystem.depthMask(true)
-    }
+		RenderSystem.depthMask(true)
+	}
 
 }

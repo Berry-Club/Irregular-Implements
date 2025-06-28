@@ -12,27 +12,27 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
 
 class ModEntityTypeTagsProvider(
-    output: PackOutput,
-    provider: CompletableFuture<HolderLookup.Provider>,
-    existingFileHelper: ExistingFileHelper
+	output: PackOutput,
+	provider: CompletableFuture<HolderLookup.Provider>,
+	existingFileHelper: ExistingFileHelper
 ) : EntityTypeTagsProvider(output, provider, IrregularImplements.ID, existingFileHelper) {
 
-    companion object {
-        private fun create(id: String): TagKey<EntityType<*>> {
-            return TagKey.create(Registries.ENTITY_TYPE, OtherUtil.modResource(id))
-        }
+	companion object {
+		private fun create(id: String): TagKey<EntityType<*>> {
+			return TagKey.create(Registries.ENTITY_TYPE, OtherUtil.modResource(id))
+		}
 
-        val SUMMONING_PENDULUM_BLACKLIST = create("summoning_pendulum_blacklist")
-    }
+		val SUMMONING_PENDULUM_BLACKLIST = create("summoning_pendulum_blacklist")
+	}
 
-    override fun addTags(provider: HolderLookup.Provider) {
+	override fun addTags(provider: HolderLookup.Provider) {
 
-        this.tag(SUMMONING_PENDULUM_BLACKLIST)
-            .add(
-                EntityType.PLAYER,
+		this.tag(SUMMONING_PENDULUM_BLACKLIST)
+			.add(
+				EntityType.PLAYER,
 
-                )
+				)
 
-    }
+	}
 
 }

@@ -6,17 +6,17 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
 class ImbuingStationScreen(
-    menu: ImbuingStationMenu,
-    playerInventory: Inventory,
-    title: Component
+	menu: ImbuingStationMenu,
+	playerInventory: Inventory,
+	title: Component
 ) : BaseScreen<ImbuingStationMenu>(menu, playerInventory, title) {
 
-    override val background = ScreenTextures.Background.ImbuingStation
+	override val background = ScreenTextures.Background.ImbuingStation
 
-    override fun baseInit() {
-        this.titleLabelX = 4
+	override fun baseInit() {
+		this.titleLabelX = 4
 
-        this.inventoryLabelY = this.imageHeight - 94
-    }
+		this.inventoryLabelY = this.imageHeight - 94
+	}
 
 }

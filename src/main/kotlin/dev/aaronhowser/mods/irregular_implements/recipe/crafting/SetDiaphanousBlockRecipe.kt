@@ -15,44 +15,44 @@ import net.minecraft.world.level.Level
 
 //TODO: Emi
 class SetDiaphanousBlockRecipe(
-    craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
+	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
 ) : CustomRecipe(craftingCategory) {
 
-    override fun matches(input: CraftingInput, level: Level): Boolean {
-        var diaphanousBlockStack: ItemStack? = null
-        var blockStack: ItemStack? = null
+	override fun matches(input: CraftingInput, level: Level): Boolean {
+		var diaphanousBlockStack: ItemStack? = null
+		var blockStack: ItemStack? = null
 
-        for (item in input.items()) {
-            if (item.isEmpty) continue
-            val blockItem = item.item as? BlockItem ?: continue
+		for (item in input.items()) {
+			if (item.isEmpty) continue
+			val blockItem = item.item as? BlockItem ?: continue
 
-            if (blockItem == ModBlocks.DIAPHANOUS_BLOCK.asItem()) {
-                if (diaphanousBlockStack != null) return false
-                diaphanousBlockStack = item
-            } else if (DiaphanousBlock.isValidBlock(blockItem.block, level)) {
-                if (blockStack != null) return false
-                blockStack = item
-            }
-        }
+			if (blockItem == ModBlocks.DIAPHANOUS_BLOCK.asItem()) {
+				if (diaphanousBlockStack != null) return false
+				diaphanousBlockStack = item
+			} else if (DiaphanousBlock.isValidBlock(blockItem.block, level)) {
+				if (blockStack != null) return false
+				blockStack = item
+			}
+		}
 
-        return diaphanousBlockStack != null && blockStack != null
-    }
+		return diaphanousBlockStack != null && blockStack != null
+	}
 
-    override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-        val diaphanousBlockStack = input.items().first { it.item == ModBlocks.DIAPHANOUS_BLOCK.asItem() }
-        val blockStack = input.items().first { !it.isEmpty && !it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) && it.item is BlockItem }
+	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
+		val diaphanousBlockStack = input.items().first { it.item == ModBlocks.DIAPHANOUS_BLOCK.asItem() }
+		val blockStack = input.items().first { !it.isEmpty && !it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) && it.item is BlockItem }
 
-        val output = diaphanousBlockStack.copyWithCount(1)
-        output.set(ModDataComponents.BLOCK, (blockStack.item as BlockItem).block)
+		val output = diaphanousBlockStack.copyWithCount(1)
+		output.set(ModDataComponents.BLOCK, (blockStack.item as BlockItem).block)
 
-        return output
-    }
+		return output
+	}
 
-    override fun canCraftInDimensions(width: Int, height: Int): Boolean {
-        return width * height >= 2
-    }
+	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
+		return width * height >= 2
+	}
 
-    override fun getSerializer(): RecipeSerializer<*> {
-        return ModRecipeSerializers.SET_DIAPHANOUS_BLOCK.get()
-    }
+	override fun getSerializer(): RecipeSerializer<*> {
+		return ModRecipeSerializers.SET_DIAPHANOUS_BLOCK.get()
+	}
 }

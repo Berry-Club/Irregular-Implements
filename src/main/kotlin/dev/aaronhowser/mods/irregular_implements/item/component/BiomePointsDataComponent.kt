@@ -10,40 +10,40 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.level.biome.Biome
 
 data class BiomePointsDataComponent(
-    val biome: Holder<Biome>,
-    val points: Int
+	val biome: Holder<Biome>,
+	val points: Int
 ) {
 
-    companion object {
-        private val BIOME_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Holder<Biome>> =
-            ByteBufCodecs.holderRegistry(Registries.BIOME)
+	companion object {
+		private val BIOME_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Holder<Biome>> =
+			ByteBufCodecs.holderRegistry(Registries.BIOME)
 
-        val CODEC: Codec<BiomePointsDataComponent> =
-            RecordCodecBuilder.create { instance ->
-                instance.group(
-                    Biome.CODEC
-                        .fieldOf("biome")
-                        .forGetter(BiomePointsDataComponent::biome),
-                    Codec.INT
-                        .fieldOf("points")
-                        .forGetter(BiomePointsDataComponent::points)
-                ).apply(instance, ::BiomePointsDataComponent)
-            }
+		val CODEC: Codec<BiomePointsDataComponent> =
+			RecordCodecBuilder.create { instance ->
+				instance.group(
+					Biome.CODEC
+						.fieldOf("biome")
+						.forGetter(BiomePointsDataComponent::biome),
+					Codec.INT
+						.fieldOf("points")
+						.forGetter(BiomePointsDataComponent::points)
+				).apply(instance, ::BiomePointsDataComponent)
+			}
 
-        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, BiomePointsDataComponent> =
-            StreamCodec.composite(
-                BIOME_STREAM_CODEC, BiomePointsDataComponent::biome,
-                ByteBufCodecs.VAR_INT, BiomePointsDataComponent::points,
-                ::BiomePointsDataComponent
-            )
-    }
+		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, BiomePointsDataComponent> =
+			StreamCodec.composite(
+				BIOME_STREAM_CODEC, BiomePointsDataComponent::biome,
+				ByteBufCodecs.VAR_INT, BiomePointsDataComponent::points,
+				::BiomePointsDataComponent
+			)
+	}
 
-    fun withMorePoints(amount: Int): BiomePointsDataComponent {
-        return copy(points = points + amount)
-    }
+	fun withMorePoints(amount: Int): BiomePointsDataComponent {
+		return copy(points = points + amount)
+	}
 
-    fun withLessPoints(amount: Int): BiomePointsDataComponent {
-        return copy(points = points - amount)
-    }
+	fun withLessPoints(amount: Int): BiomePointsDataComponent {
+		return copy(points = points - amount)
+	}
 
 }

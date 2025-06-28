@@ -7,40 +7,40 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 
 class NotificationToast(
-    private val title: String,
-    private val description: String,
-    private val icon: ItemStack?
+	private val title: String,
+	private val description: String,
+	private val icon: ItemStack?
 ) : Toast {
 
-    companion object {
-        private val BACKGROUND_SPRITE: ResourceLocation = ResourceLocation.withDefaultNamespace("toast/advancement")
-        private const val DISPLAY_TIME = 5000
-    }
+	companion object {
+		private val BACKGROUND_SPRITE: ResourceLocation = ResourceLocation.withDefaultNamespace("toast/advancement")
+		private const val DISPLAY_TIME = 5000
+	}
 
-    //FIXME: Vanishes instead of sliding out
-    override fun render(
-        guiGraphics: GuiGraphics,
-        toastComponent: ToastComponent,
-        timeSinceLastVisible: Long
-    ): Toast.Visibility {
+	//FIXME: Vanishes instead of sliding out
+	override fun render(
+		guiGraphics: GuiGraphics,
+		toastComponent: ToastComponent,
+		timeSinceLastVisible: Long
+	): Toast.Visibility {
 
-        if (timeSinceLastVisible > DISPLAY_TIME) {
-            return Toast.Visibility.HIDE
-        }
+		if (timeSinceLastVisible > DISPLAY_TIME) {
+			return Toast.Visibility.HIDE
+		}
 
-        guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height())
+		guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height())
 
-        if (this.icon != null) {
-            guiGraphics.renderFakeItem(this.icon, 8, 8)
-        }
+		if (this.icon != null) {
+			guiGraphics.renderFakeItem(this.icon, 8, 8)
+		}
 
-        val font = toastComponent.minecraft.font
+		val font = toastComponent.minecraft.font
 
-        guiGraphics.drawString(font, this.title, 30, 7, 0xFFFCFC00.toInt(), false)
-        guiGraphics.drawString(font, this.description, 30, 18, 0xFFFCFCFC.toInt(), false)
+		guiGraphics.drawString(font, this.title, 30, 7, 0xFFFCFC00.toInt(), false)
+		guiGraphics.drawString(font, this.description, 30, 18, 0xFFFCFCFC.toInt(), false)
 
-        val shouldHide = timeSinceLastVisible.toFloat() >= DISPLAY_TIME * toastComponent.notificationDisplayTimeMultiplier
+		val shouldHide = timeSinceLastVisible.toFloat() >= DISPLAY_TIME * toastComponent.notificationDisplayTimeMultiplier
 
-        return if (shouldHide) Toast.Visibility.HIDE else Toast.Visibility.SHOW
-    }
+		return if (shouldHide) Toast.Visibility.HIDE else Toast.Visibility.SHOW
+	}
 }

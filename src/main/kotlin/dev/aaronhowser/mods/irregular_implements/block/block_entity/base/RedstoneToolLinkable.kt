@@ -6,25 +6,25 @@ import net.minecraft.nbt.CompoundTag
 
 interface RedstoneToolLinkable {
 
-    companion object {
-        private const val LINKED_POS_NBT = "LinkedPos"
-    }
+	companion object {
+		private const val LINKED_POS_NBT = "LinkedPos"
+	}
 
-    var linkedPos: BlockPos?
+	var linkedPos: BlockPos?
 
-    fun loadFromTag(tag: CompoundTag) {
-        if (tag.contains(LINKED_POS_NBT)) {
-            ServerScheduler.scheduleTaskInTicks(1) {
-                linkedPos = BlockPos.of(tag.getLong(LINKED_POS_NBT))
-            }
-        }
-    }
+	fun loadFromTag(tag: CompoundTag) {
+		if (tag.contains(LINKED_POS_NBT)) {
+			ServerScheduler.scheduleTaskInTicks(1) {
+				linkedPos = BlockPos.of(tag.getLong(LINKED_POS_NBT))
+			}
+		}
+	}
 
-    fun saveToTag(tag: CompoundTag) {
-        val linkedPos = linkedPos
-        if (linkedPos != null) {
-            tag.putLong(LINKED_POS_NBT, linkedPos.asLong())
-        }
-    }
+	fun saveToTag(tag: CompoundTag) {
+		val linkedPos = linkedPos
+		if (linkedPos != null) {
+			tag.putLong(LINKED_POS_NBT, linkedPos.asLong())
+		}
+	}
 
 }

@@ -9,47 +9,47 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.level.block.state.BlockState
 
 class RedstoneInterfaceBasicBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : RedstoneToolLinkable, RedstoneInterfaceBlockEntity(
-    ModBlockEntities.REDSTONE_INTERFACE.get(),
-    pPos,
-    pBlockState
+	ModBlockEntities.REDSTONE_INTERFACE.get(),
+	pPos,
+	pBlockState
 ) {
 
-    override var linkedPos: BlockPos? = null
-        set(value) {
-            val oldField = field
-            if (oldField != null) {
-                unlinkBlock(
-                    level = this.level!!,
-                    interfacePos = this.blockPos,
-                    targetPos = oldField
-                )
-            }
+	override var linkedPos: BlockPos? = null
+		set(value) {
+			val oldField = field
+			if (oldField != null) {
+				unlinkBlock(
+					level = this.level!!,
+					interfacePos = this.blockPos,
+					targetPos = oldField
+				)
+			}
 
-            if (value != null) {
-                linkBlock(
-                    level = this.level!!,
-                    interfacePos = this.blockPos,
-                    targetPos = value
-                )
-            } else {
-                removeInterface(this.level!!, this.blockPos)
-            }
+			if (value != null) {
+				linkBlock(
+					level = this.level!!,
+					interfacePos = this.blockPos,
+					targetPos = value
+				)
+			} else {
+				removeInterface(this.level!!, this.blockPos)
+			}
 
-            field = value
-            setChanged()
-        }
+			field = value
+			setChanged()
+		}
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
-        this.saveToTag(tag)
-    }
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+		this.saveToTag(tag)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
-        this.loadFromTag(tag)
-    }
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+		this.loadFromTag(tag)
+	}
 
 }

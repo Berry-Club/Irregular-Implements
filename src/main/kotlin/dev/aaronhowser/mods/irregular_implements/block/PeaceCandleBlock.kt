@@ -21,40 +21,40 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class PeaceCandleBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)), EntityBlock {
 
-    companion object {
-        val SHAPE: VoxelShape = box(5.0, 0.0, 5.0, 11.0, 2.0, 11.0)
-    }
+	companion object {
+		val SHAPE: VoxelShape = box(5.0, 0.0, 5.0, 11.0, 2.0, 11.0)
+	}
 
-    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return SHAPE
-    }
+	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		return SHAPE
+	}
 
-    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-        return canSupportCenter(level, pos.below(), Direction.UP)
-    }
+	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+		return canSupportCenter(level, pos.below(), Direction.UP)
+	}
 
-    override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
-        return if (state.canSurvive(level, pos)) {
-            state
-        } else {
-            Blocks.AIR.defaultBlockState()
-        }
-    }
+	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
+		return if (state.canSurvive(level, pos)) {
+			state
+		} else {
+			Blocks.AIR.defaultBlockState()
+		}
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return PeaceCandleBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return PeaceCandleBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(
-        level: Level,
-        state: BlockState,
-        blockEntityType: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return BaseEntityBlock.createTickerHelper(
-            blockEntityType,
-            ModBlockEntities.PEACE_CANDLE.get(),
-            PeaceCandleBlockEntity::tick
-        )
-    }
+	override fun <T : BlockEntity?> getTicker(
+		level: Level,
+		state: BlockState,
+		blockEntityType: BlockEntityType<T>
+	): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(
+			blockEntityType,
+			ModBlockEntities.PEACE_CANDLE.get(),
+			PeaceCandleBlockEntity::tick
+		)
+	}
 
 }

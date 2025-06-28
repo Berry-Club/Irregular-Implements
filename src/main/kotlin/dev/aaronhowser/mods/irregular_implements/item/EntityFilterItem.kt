@@ -15,36 +15,36 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class EntityFilterItem : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ) {
 
-    override fun interactLivingEntity(
-        stack: ItemStack,
-        player: Player,
-        interactionTarget: LivingEntity,
-        usedHand: InteractionHand
-    ): InteractionResult {
-        val usedStack = player.getItemInHand(usedHand)
-        usedStack.set(ModDataComponents.ENTITY_TYPE, interactionTarget.type)
-        return InteractionResult.SUCCESS
-    }
+	override fun interactLivingEntity(
+		stack: ItemStack,
+		player: Player,
+		interactionTarget: LivingEntity,
+		usedHand: InteractionHand
+	): InteractionResult {
+		val usedStack = player.getItemInHand(usedHand)
+		usedStack.set(ModDataComponents.ENTITY_TYPE, interactionTarget.type)
+		return InteractionResult.SUCCESS
+	}
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
-        usedStack.set(ModDataComponents.ENTITY_TYPE, player.type)
-        return InteractionResultHolder.success(usedStack)
-    }
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
+		usedStack.set(ModDataComponents.ENTITY_TYPE, player.type)
+		return InteractionResultHolder.success(usedStack)
+	}
 
-    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val entityName = stack.get(ModDataComponents.ENTITY_TYPE)?.description
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val entityName = stack.get(ModDataComponents.ENTITY_TYPE)?.description
 
-        if (entityName != null) {
-            val component = ModLanguageProvider.Tooltips.ENTITY_FILTER_ENTITY
-                .toGrayComponent(entityName)
+		if (entityName != null) {
+			val component = ModLanguageProvider.Tooltips.ENTITY_FILTER_ENTITY
+				.toGrayComponent(entityName)
 
-            tooltipComponents.add(component)
-        }
-    }
+			tooltipComponents.add(component)
+		}
+	}
 
 }

@@ -23,107 +23,107 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty
 import net.minecraft.world.phys.BlockHitResult
 
 class AnalogEmitterBlock(
-    properties: Properties =
-        Properties
-            .ofFullCopy(Blocks.TARGET)
-            .isRedstoneConductor(Blocks::never)
+	properties: Properties =
+		Properties
+			.ofFullCopy(Blocks.TARGET)
+			.isRedstoneConductor(Blocks::never)
 ) : DirectionalBlock(properties) {
 
-    companion object {
-        private val CODEC = simpleCodec(::AnalogEmitterBlock)
-        val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-        val POWER: IntegerProperty = BlockStateProperties.POWER
-    }
+	companion object {
+		private val CODEC = simpleCodec(::AnalogEmitterBlock)
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val POWER: IntegerProperty = BlockStateProperties.POWER
+	}
 
-    init {
-        registerDefaultState(
-            defaultBlockState()
-                .setValue(FACING, Direction.NORTH)
-                .setValue(ENABLED, false)
-                .setValue(POWER, 0)
-        )
-    }
+	init {
+		registerDefaultState(
+			defaultBlockState()
+				.setValue(FACING, Direction.NORTH)
+				.setValue(ENABLED, false)
+				.setValue(POWER, 0)
+		)
+	}
 
-    override fun codec(): MapCodec<AnalogEmitterBlock> = CODEC
+	override fun codec(): MapCodec<AnalogEmitterBlock> = CODEC
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(FACING, ENABLED, POWER)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING, ENABLED, POWER)
+	}
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        return defaultBlockState()
-            .setValue(FACING, context.nearestLookingDirection.opposite)
-    }
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
 
-    //TODO: GUI?
-    override fun useWithoutItem(
-        oldState: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        hitResult: BlockHitResult
-    ): InteractionResult {
-        if (level.isClientSide) return InteractionResult.SUCCESS
-        if (!player.getItemInHand(player.usedItemHand).isEmpty) return InteractionResult.PASS
+	//TODO: GUI?
+	override fun useWithoutItem(
+		oldState: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hitResult: BlockHitResult
+	): InteractionResult {
+		if (level.isClientSide) return InteractionResult.SUCCESS
+		if (!player.getItemInHand(player.usedItemHand).isEmpty) return InteractionResult.PASS
 
-        var newPower = oldState.getValue(POWER) + if (player.isSecondaryUseActive) -1 else 1
-        newPower = newPower and 15
+		var newPower = oldState.getValue(POWER) + if (player.isSecondaryUseActive) -1 else 1
+		newPower = newPower and 15
 
-        val component = newPower.toString()
-            .toComponent()
-            .withStyle(ChatFormatting.RED)
+		val component = newPower.toString()
+			.toComponent()
+			.withStyle(ChatFormatting.RED)
 
-        player.displayClientMessage(component, true)
+		player.displayClientMessage(component, true)
 
-        val newState = oldState.setValue(POWER, newPower)
-        level.setBlockAndUpdate(pos, newState)
+		val newState = oldState.setValue(POWER, newPower)
+		level.setBlockAndUpdate(pos, newState)
 
-        val pitch = 0.5f + (newPower.toFloat() / 15f) * (2f - 0.5f)   // 0.5 to 5
-        level.playSound(
-            null,
-            pos,
-            SoundEvents.UI_BUTTON_CLICK.value(),
-            SoundSource.BLOCKS,
-            0.15f,
-            pitch
-        )
+		val pitch = 0.5f + (newPower.toFloat() / 15f) * (2f - 0.5f)   // 0.5 to 5
+		level.playSound(
+			null,
+			pos,
+			SoundEvents.UI_BUTTON_CLICK.value(),
+			SoundSource.BLOCKS,
+			0.15f,
+			pitch
+		)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-        return true
-    }
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		return true
+	}
 
-    override fun neighborChanged(
-        oldState: BlockState,
-        level: Level,
-        pos: BlockPos,
-        block: Block,
-        fromPos: BlockPos,
-        isMoving: Boolean
-    ) {
-        if (level.isClientSide) return
+	override fun neighborChanged(
+		oldState: BlockState,
+		level: Level,
+		pos: BlockPos,
+		block: Block,
+		fromPos: BlockPos,
+		isMoving: Boolean
+	) {
+		if (level.isClientSide) return
 
-        val facing = oldState.getValue(FACING)
-        val facingSideIsPowered = level.hasSignal(pos.relative(facing), facing.opposite)
+		val facing = oldState.getValue(FACING)
+		val facingSideIsPowered = level.hasSignal(pos.relative(facing), facing.opposite)
 
-        val newState = oldState.setValue(ENABLED, facingSideIsPowered)
-        level.setBlockAndUpdate(pos, newState)
-    }
+		val newState = oldState.setValue(ENABLED, facingSideIsPowered)
+		level.setBlockAndUpdate(pos, newState)
+	}
 
-    override fun isSignalSource(state: BlockState): Boolean {
-        return true
-    }
+	override fun isSignalSource(state: BlockState): Boolean {
+		return true
+	}
 
-    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        if (!state.getValue(ENABLED)) return 0
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		if (!state.getValue(ENABLED)) return 0
 
-        return state.getValue(POWER)
-    }
+		return state.getValue(POWER)
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return getDirectSignal(state, level, pos, direction)
-    }
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return getDirectSignal(state, level, pos, direction)
+	}
 
 }

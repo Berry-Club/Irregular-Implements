@@ -12,42 +12,42 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class RedstoneObserverBlock : EntityBlock, Block(
-    Properties
-        .ofFullCopy(Blocks.QUARTZ_BLOCK)
+	Properties
+		.ofFullCopy(Blocks.QUARTZ_BLOCK)
 ) {
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return RedstoneObserverBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return RedstoneObserverBlockEntity(pos, state)
+	}
 
-    override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
-        val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-        val linkedPos = blockEntity.linkedPos ?: return 0
-        if (!level.isLoaded(linkedPos)) return 0
+	override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
+		val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
+		val linkedPos = blockEntity.linkedPos ?: return 0
+		if (!level.isLoaded(linkedPos)) return 0
 
-        return level
-            .getBlockState(linkedPos)
-            .getAnalogOutputSignal(level, linkedPos)
-    }
+		return level
+			.getBlockState(linkedPos)
+			.getAnalogOutputSignal(level, linkedPos)
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-        val linkedPos = blockEntity.linkedPos ?: return 0
-        if (level is Level && !level.isLoaded(linkedPos)) return 0
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
+		val linkedPos = blockEntity.linkedPos ?: return 0
+		if (level is Level && !level.isLoaded(linkedPos)) return 0
 
-        return level
-            .getBlockState(linkedPos)
-            .getSignal(level, linkedPos, direction)
-    }
+		return level
+			.getBlockState(linkedPos)
+			.getSignal(level, linkedPos, direction)
+	}
 
-    override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-        val linkedPos = blockEntity.linkedPos ?: return 0
-        if (level is Level && !level.isLoaded(linkedPos)) return 0
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
+		val linkedPos = blockEntity.linkedPos ?: return 0
+		if (level is Level && !level.isLoaded(linkedPos)) return 0
 
-        return level
-            .getBlockState(linkedPos)
-            .getDirectSignal(level, linkedPos, direction)
-    }
+		return level
+			.getBlockState(linkedPos)
+			.getDirectSignal(level, linkedPos, direction)
+	}
 
 }

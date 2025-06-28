@@ -22,46 +22,46 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class FilteredPlatformBlockEntity(
-    pPos: BlockPos,
-    pBlockState: BlockState
+	pPos: BlockPos,
+	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
 
-    //FIXME: For some reason doesn't get called on client, which causes position desync (which fixes itself quickly)
-    fun entityPassesFilter(entity: Entity): Boolean {
-        if (entity !is ItemEntity) return false
+	//FIXME: For some reason doesn't get called on client, which causes position desync (which fixes itself quickly)
+	fun entityPassesFilter(entity: Entity): Boolean {
+		if (entity !is ItemEntity) return false
 
-        val filter = this.container
-            .getItem(0)
-            .get(ModDataComponents.ITEM_FILTER_ENTRIES)
-            ?: return false
+		val filter = this.container
+			.getItem(0)
+			.get(ModDataComponents.ITEM_FILTER_ENTRIES)
+			?: return false
 
-        return filter.test(entity.item)
-    }
+		return filter.test(entity.item)
+	}
 
-    val container = ImprovedSimpleContainer(this, 1)
+	val container = ImprovedSimpleContainer(this, 1)
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
 
-        ContainerHelper.saveAllItems(tag, this.container.items, registries)
-    }
+		ContainerHelper.saveAllItems(tag, this.container.items, registries)
+	}
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
 
-        ContainerHelper.loadAllItems(tag, this.container.items, registries)
-    }
+		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+	}
 
-    override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-        return FilteredPlatformMenu(containerId, playerInventory, this.container)
-    }
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return FilteredPlatformMenu(containerId, playerInventory, this.container)
+	}
 
-    override fun getDisplayName(): Component {
-        return this.blockState.block.name
-    }
+	override fun getDisplayName(): Component {
+		return this.blockState.block.name
+	}
 
-    // Syncs with client
-    override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-    override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

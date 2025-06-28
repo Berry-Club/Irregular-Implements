@@ -34,142 +34,142 @@ import java.util.*
 
 object OtherUtil {
 
-    @JvmStatic
-    fun modResource(path: String): ResourceLocation =
-        ResourceLocation.fromNamespaceAndPath(IrregularImplements.ID, path)
+	@JvmStatic
+	fun modResource(path: String): ResourceLocation =
+		ResourceLocation.fromNamespaceAndPath(IrregularImplements.ID, path)
 
-    val Boolean?.isTrue: Boolean
-        inline get() = this == true
+	val Boolean?.isTrue: Boolean
+		inline get() = this == true
 
-    val Entity.isClientSide: Boolean
-        get() = this.level().isClientSide
+	val Entity.isClientSide: Boolean
+		get() = this.level().isClientSide
 
-    fun getPotionStack(potion: Holder<Potion>): ItemStack {
-        return PotionContents.createItemStack(Items.POTION, potion)
-    }
+	fun getPotionStack(potion: Holder<Potion>): ItemStack {
+		return PotionContents.createItemStack(Items.POTION, potion)
+	}
 
-    fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
-        return level.clip(
-            ClipContext(
-                entity.eyePosition,
-                entity.eyePosition.add(entity.lookAngle.scale(range.toDouble())),
-                ClipContext.Block.OUTLINE,
-                ClipContext.Fluid.NONE,
-                entity
-            )
-        )
-    }
+	fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
+		return level.clip(
+			ClipContext(
+				entity.eyePosition,
+				entity.eyePosition.add(entity.lookAngle.scale(range.toDouble())),
+				ClipContext.Block.OUTLINE,
+				ClipContext.Fluid.NONE,
+				entity
+			)
+		)
+	}
 
-    fun <T> tagKeyStreamCodec(registry: ResourceKey<out Registry<T>>): StreamCodec<ByteBuf, TagKey<T>> {
-        return ResourceLocation.STREAM_CODEC.map(
-            { TagKey.create(registry, it) },
-            { it.location() }
-        )
-    }
+	fun <T> tagKeyStreamCodec(registry: ResourceKey<out Registry<T>>): StreamCodec<ByteBuf, TagKey<T>> {
+		return ResourceLocation.STREAM_CODEC.map(
+			{ TagKey.create(registry, it) },
+			{ it.location() }
+		)
+	}
 
-    fun spawnIndicatorBlockDisplay(
-        level: Level,
-        pos: BlockPos,
-        color: Int = 0xFFFFFF,
-        duration: Int = 5
-    ): IndicatorDisplayEntity? {
-        if (level.isClientSide) return null
+	fun spawnIndicatorBlockDisplay(
+		level: Level,
+		pos: BlockPos,
+		color: Int = 0xFFFFFF,
+		duration: Int = 5
+	): IndicatorDisplayEntity? {
+		if (level.isClientSide) return null
 
-        val indicatorDisplay = IndicatorDisplayEntity(
-            level,
-            Blocks.GLASS.defaultBlockState(),
-            color,
-            duration
-        )
+		val indicatorDisplay = IndicatorDisplayEntity(
+			level,
+			Blocks.GLASS.defaultBlockState(),
+			color,
+			duration
+		)
 
-        indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
-        level.addFreshEntity(indicatorDisplay)
+		indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
+		level.addFreshEntity(indicatorDisplay)
 
-        return indicatorDisplay
-    }
+		return indicatorDisplay
+	}
 
-    fun getBiomeComponent(biomeHolder: Holder<Biome>): Component {
-        val biomeKey = biomeHolder.key!!
+	fun getBiomeComponent(biomeHolder: Holder<Biome>): Component {
+		val biomeKey = biomeHolder.key!!
 
-        val probableTranslationKey = "biome.${biomeKey.location().namespace}.${biomeKey.location().path}"
-        val hasTranslation = I18n.exists(probableTranslationKey)
+		val probableTranslationKey = "biome.${biomeKey.location().namespace}.${biomeKey.location().path}"
+		val hasTranslation = I18n.exists(probableTranslationKey)
 
-        return if (hasTranslation) {
-            Component.translatable(probableTranslationKey)
-        } else {
-            Component.literal(biomeKey.location().toString())
-        }.withStyle(ChatFormatting.GRAY)
-    }
+		return if (hasTranslation) {
+			Component.translatable(probableTranslationKey)
+		} else {
+			Component.literal(biomeKey.location().toString())
+		}.withStyle(ChatFormatting.GRAY)
+	}
 
-    fun getDimensionComponent(dimensionResourceKey: ResourceKey<Level>): Component {
-        val location = dimensionResourceKey.location()
+	fun getDimensionComponent(dimensionResourceKey: ResourceKey<Level>): Component {
+		val location = dimensionResourceKey.location()
 
-        val probableTranslationKey = "dimension.${location.namespace}.${location.path}"
-        val hasTranslation = I18n.exists(probableTranslationKey)
+		val probableTranslationKey = "dimension.${location.namespace}.${location.path}"
+		val hasTranslation = I18n.exists(probableTranslationKey)
 
-        return if (hasTranslation) {
-            Component.translatable(probableTranslationKey)
-        } else {
-            Component.literal(location.toString())
-        }.withStyle(ChatFormatting.GRAY)
-    }
+		return if (hasTranslation) {
+			Component.translatable(probableTranslationKey)
+		} else {
+			Component.literal(location.toString())
+		}.withStyle(ChatFormatting.GRAY)
+	}
 
-    fun flattenStacks(input: List<ItemStack>): List<ItemStack> {
-        val output = mutableListOf<ItemStack>()
+	fun flattenStacks(input: List<ItemStack>): List<ItemStack> {
+		val output = mutableListOf<ItemStack>()
 
-        for (stack in input.filter { !it.isEmpty }.map { it.copy() }) {
-            val matchingStack = output.firstOrNull { ItemStack.isSameItemSameComponents(it, stack) }
+		for (stack in input.filter { !it.isEmpty }.map { it.copy() }) {
+			val matchingStack = output.firstOrNull { ItemStack.isSameItemSameComponents(it, stack) }
 
-            if (matchingStack != null) {
-                val amountToAdd = minOf(stack.count, matchingStack.maxStackSize - matchingStack.count)
+			if (matchingStack != null) {
+				val amountToAdd = minOf(stack.count, matchingStack.maxStackSize - matchingStack.count)
 
-                if (amountToAdd > 0) {
-                    matchingStack.grow(amountToAdd)
-                    stack.shrink(amountToAdd)
-                }
-            }
+				if (amountToAdd > 0) {
+					matchingStack.grow(amountToAdd)
+					stack.shrink(amountToAdd)
+				}
+			}
 
-            if (!stack.isEmpty) {
-                output.add(stack)
-            }
-        }
+			if (!stack.isEmpty) {
+				output.add(stack)
+			}
+		}
 
-        return output
-    }
+		return output
+	}
 
-    fun giveOrDropStack(itemStack: ItemStack, player: Player): Boolean {
-        return player.inventory.add(itemStack)
-                || dropStackAt(itemStack, player, true)
-    }
+	fun giveOrDropStack(itemStack: ItemStack, player: Player): Boolean {
+		return player.inventory.add(itemStack)
+				|| dropStackAt(itemStack, player, true)
+	}
 
-    fun dropStackAt(itemStack: ItemStack, entity: Entity, instantPickup: Boolean = false): Boolean {
-        return dropStackAt(itemStack, entity.level(), entity.position(), instantPickup)
-    }
+	fun dropStackAt(itemStack: ItemStack, entity: Entity, instantPickup: Boolean = false): Boolean {
+		return dropStackAt(itemStack, entity.level(), entity.position(), instantPickup)
+	}
 
-    fun dropStackAt(itemStack: ItemStack, level: Level, pos: Vec3, instantPickup: Boolean = false): Boolean {
-        val itemEntity = ItemEntity(level, pos.x, pos.y, pos.z, itemStack)
-        if (instantPickup) itemEntity.setNoPickUpDelay()
-        return level.addFreshEntity(itemEntity)
-    }
+	fun dropStackAt(itemStack: ItemStack, level: Level, pos: Vec3, instantPickup: Boolean = false): Boolean {
+		val itemEntity = ItemEntity(level, pos.x, pos.y, pos.z, itemStack)
+		if (instantPickup) itemEntity.setNoPickUpDelay()
+		return level.addFreshEntity(itemEntity)
+	}
 
-    fun CompoundTag.getUuidOrNull(key: String): UUID? {
-        return if (this.hasUUID(key)) this.getUUID(key) else null
-    }
+	fun CompoundTag.getUuidOrNull(key: String): UUID? {
+		return if (this.hasUUID(key)) this.getUUID(key) else null
+	}
 
-    fun TagKey<Item>.getComponent(): MutableComponent {
-        val tagLocation = this.location
-        val possibleLangKey = StringBuilder()
-            .append("tag.item.")
-            .append(tagLocation.namespace)
-            .append(".")
-            .append(tagLocation.path)
-            .toString()
+	fun TagKey<Item>.getComponent(): MutableComponent {
+		val tagLocation = this.location
+		val possibleLangKey = StringBuilder()
+			.append("tag.item.")
+			.append(tagLocation.namespace)
+			.append(".")
+			.append(tagLocation.path)
+			.toString()
 
-        return if (I18n.exists(possibleLangKey)) {
-            Component.translatable(possibleLangKey)
-        } else {
-            Component.literal(tagLocation.toString())
-        }
-    }
+		return if (I18n.exists(possibleLangKey)) {
+			Component.translatable(possibleLangKey)
+		} else {
+			Component.literal(tagLocation.toString())
+		}
+	}
 
 }

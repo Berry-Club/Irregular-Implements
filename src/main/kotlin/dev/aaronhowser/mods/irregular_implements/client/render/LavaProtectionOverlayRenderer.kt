@@ -11,51 +11,51 @@ import net.minecraft.util.Mth
 
 object LavaProtectionOverlayRenderer {
 
-    val LAYER_NAME = OtherUtil.modResource("lava_protection")
-    private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection")
+	val LAYER_NAME = OtherUtil.modResource("lava_protection")
+	private val SPRITE_LOCATION = OtherUtil.modResource("lava_protection")
 
-    private const val WIDTH = 9
+	private const val WIDTH = 9
 
-    fun tryRender(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-        val player = ClientUtil.localPlayer ?: return
-        if (player.isCreative || player.isSpectator) return
-        val lavaProtector = LavaCharmItem.getFirstLavaProtector(player) ?: return
+	fun tryRender(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
+		val player = ClientUtil.localPlayer ?: return
+		if (player.isCreative || player.isSpectator) return
+		val lavaProtector = LavaCharmItem.getFirstLavaProtector(player) ?: return
 
-        val charge = lavaProtector.get(ModDataComponents.CHARGE) ?: return
-        val maxCharge = LavaCharmItem.MAX_CHARGE
+		val charge = lavaProtector.get(ModDataComponents.CHARGE) ?: return
+		val maxCharge = LavaCharmItem.MAX_CHARGE
 
-        val percentCharged = charge.toFloat() / maxCharge.toFloat()
-        val amountSprites = Mth.ceil(percentCharged * 10f)
+		val percentCharged = charge.toFloat() / maxCharge.toFloat()
+		val amountSprites = Mth.ceil(percentCharged * 10f)
 
-        val rightPos = guiGraphics.guiWidth() / 2 + 91
-        val height = guiGraphics.guiHeight() - Minecraft.getInstance().gui.rightHeight
+		val rightPos = guiGraphics.guiWidth() / 2 + 91
+		val height = guiGraphics.guiHeight() - Minecraft.getInstance().gui.rightHeight
 
-        for (i in 0 until amountSprites) {
+		for (i in 0 until amountSprites) {
 
-            var x = rightPos - i * 8 - WIDTH
-            var uPos = 0
+			var x = rightPos - i * 8 - WIDTH
+			var uPos = 0
 
-            if (i == amountSprites - 1) {
-                val amountLeft = percentCharged * 10f - i
+			if (i == amountSprites - 1) {
+				val amountLeft = percentCharged * 10f - i
 
-                x += 8 - (amountLeft * 8).toInt()
-                uPos = 8 - (amountLeft * 8).toInt()
-            }
+				x += 8 - (amountLeft * 8).toInt()
+				uPos = 8 - (amountLeft * 8).toInt()
+			}
 
-            guiGraphics.blitSprite(
-                SPRITE_LOCATION,
-                WIDTH,
-                WIDTH,
-                uPos,
-                0,
-                x,
-                height,
-                WIDTH,
-                WIDTH
-            )
-        }
+			guiGraphics.blitSprite(
+				SPRITE_LOCATION,
+				WIDTH,
+				WIDTH,
+				uPos,
+				0,
+				x,
+				height,
+				WIDTH,
+				WIDTH
+			)
+		}
 
-        Minecraft.getInstance().gui.rightHeight += 10
-    }
+		Minecraft.getInstance().gui.rightHeight += 10
+	}
 
 }

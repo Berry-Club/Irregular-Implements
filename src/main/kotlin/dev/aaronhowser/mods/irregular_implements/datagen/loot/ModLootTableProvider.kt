@@ -7,27 +7,27 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 
 class ModLootTableProvider(
-    output: PackOutput,
-    registries: CompletableFuture<HolderLookup.Provider>
+	output: PackOutput,
+	registries: CompletableFuture<HolderLookup.Provider>
 ) : LootTableProvider(output, setOf(), subProviders, registries) {
 
-    companion object {
+	companion object {
 
-        val subProviders = listOf(
-            SubProviderEntry(
-                ::ModBlockLootTablesSubProvider,
-                LootContextParamSets.BLOCK
-            ),
-            SubProviderEntry(
-                ::ModChestLootSubprovider,
-                LootContextParamSets.CHEST
-            ),
-            SubProviderEntry(
-                ::ModMobLootSubprovider,
-                LootContextParamSets.ENTITY
-            )
-        )
+		val subProviders = listOf(
+			SubProviderEntry(
+				::ModBlockLootTablesSubProvider,
+				LootContextParamSets.BLOCK
+			),
+			SubProviderEntry(
+				::ModChestLootSubprovider,
+				LootContextParamSets.CHEST
+			),
+			SubProviderEntry(
+				::ModMobLootSubprovider,
+				LootContextParamSets.ENTITY
+			)
+		)
 
-    }
+	}
 
 }

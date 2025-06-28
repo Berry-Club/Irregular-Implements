@@ -24,140 +24,140 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
 @EventBusSubscriber(
-    modid = IrregularImplements.ID,
-    value = [Dist.CLIENT]
+	modid = IrregularImplements.ID,
+	value = [Dist.CLIENT]
 )
 object RedstoneToolRenderer {
 
-    private var mainBlockPos: BlockPos? = null
-    private var linkedBlockPos: BlockPos? = null
+	private var mainBlockPos: BlockPos? = null
+	private var linkedBlockPos: BlockPos? = null
 
-    @SubscribeEvent
-    fun afterClientTick(event: ClientTickEvent.Post) {
-        this.mainBlockPos = null
-        this.linkedBlockPos = null
+	@SubscribeEvent
+	fun afterClientTick(event: ClientTickEvent.Post) {
+		this.mainBlockPos = null
+		this.linkedBlockPos = null
 
-        val player = ClientUtil.localPlayer ?: return
+		val player = ClientUtil.localPlayer ?: return
 
-        val itemInHand = player.mainHandItem
-        if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
+		val itemInHand = player.mainHandItem
+		if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
 
-        val toolLocation = itemInHand.get(ModDataComponents.LOCATION) ?: return
-        if (toolLocation.dimension != player.level().dimension()) return
+		val toolLocation = itemInHand.get(ModDataComponents.LOCATION) ?: return
+		if (toolLocation.dimension != player.level().dimension()) return
 
-        val toolBlockPos = toolLocation.blockPos
-        this.mainBlockPos = toolBlockPos
+		val toolBlockPos = toolLocation.blockPos
+		this.mainBlockPos = toolBlockPos
 
-        val toolBlockEntity = player.level().getBlockEntity(toolLocation.blockPos) as? RedstoneToolLinkable ?: return
-        val linkedPos = toolBlockEntity.linkedPos ?: return
+		val toolBlockEntity = player.level().getBlockEntity(toolLocation.blockPos) as? RedstoneToolLinkable ?: return
+		val linkedPos = toolBlockEntity.linkedPos ?: return
 
-        this.linkedBlockPos = linkedPos
-    }
+		this.linkedBlockPos = linkedPos
+	}
 
-    private var vertexBuffer: VertexBuffer? = null
+	private var vertexBuffer: VertexBuffer? = null
 
-    private lateinit var cameraPos: Vec3
+	private lateinit var cameraPos: Vec3
 
-    @SubscribeEvent
-    fun onRenderLevel(event: RenderLevelStageEvent) {
-        if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
-        if (ClientUtil.localPlayer == null) return
-        if (this.mainBlockPos == null) return
+	@SubscribeEvent
+	fun onRenderLevel(event: RenderLevelStageEvent) {
+		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
+		if (ClientUtil.localPlayer == null) return
+		if (this.mainBlockPos == null) return
 
-        cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+		cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
 
-        refresh(event.poseStack)
-        render(event)
-    }
+		refresh(event.poseStack)
+		render(event)
+	}
 
-    private fun render(event: RenderLevelStageEvent) {
-        val poseStack = event.poseStack
-        val vertexBuffer = this.vertexBuffer ?: return
+	private fun render(event: RenderLevelStageEvent) {
+		val poseStack = event.poseStack
+		val vertexBuffer = this.vertexBuffer ?: return
 
-        RenderSystem.depthMask(false)
-        RenderSystem.enableBlend()
-        RenderSystem.defaultBlendFunc()
+		RenderSystem.depthMask(false)
+		RenderSystem.enableBlend()
+		RenderSystem.defaultBlendFunc()
 
-        poseStack.pushPose()
+		poseStack.pushPose()
 
-        RenderSystem.setShader(GameRenderer::getPositionColorShader)
-        RenderSystem.applyModelViewMatrix()
-        RenderSystem.depthFunc(GL11.GL_ALWAYS)
+		RenderSystem.setShader(GameRenderer::getPositionColorShader)
+		RenderSystem.applyModelViewMatrix()
+		RenderSystem.depthFunc(GL11.GL_ALWAYS)
 
-        poseStack.mulPose(event.modelViewMatrix)
-        poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
+		poseStack.mulPose(event.modelViewMatrix)
+		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-        vertexBuffer.bind()
-        vertexBuffer.drawWithShader(
-            poseStack.last().pose(),
-            event.projectionMatrix,
-            RenderSystem.getShader()!!
-        )
+		vertexBuffer.bind()
+		vertexBuffer.drawWithShader(
+			poseStack.last().pose(),
+			event.projectionMatrix,
+			RenderSystem.getShader()!!
+		)
 
-        VertexBuffer.unbind()
-        RenderSystem.depthFunc(GL11.GL_LEQUAL)
+		VertexBuffer.unbind()
+		RenderSystem.depthFunc(GL11.GL_LEQUAL)
 
-        poseStack.popPose()
-        RenderSystem.applyModelViewMatrix()
+		poseStack.popPose()
+		RenderSystem.applyModelViewMatrix()
 
-        RenderSystem.depthMask(true)
-    }
+		RenderSystem.depthMask(true)
+	}
 
-    //TODO: Make sure this is working
-    private fun refresh(poseStack: PoseStack) {
-        vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
+	//TODO: Make sure this is working
+	private fun refresh(poseStack: PoseStack) {
+		vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
 
-        val tesselator = Tesselator.getInstance()
-        val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
+		val tesselator = Tesselator.getInstance()
+		val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
 
-        val startColor = 0x66FF0000
-        val endColor = 0x660000FF
+		val startColor = 0x66FF0000
+		val endColor = 0x660000FF
 
-        if (mainBlockPos != null) {
-            RenderUtils.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45, startColor)
-        }
-        if (linkedBlockPos != null) {
-            RenderUtils.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45, endColor)
-        }
+		if (mainBlockPos != null) {
+			RenderUtils.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45, startColor)
+		}
+		if (linkedBlockPos != null) {
+			RenderUtils.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45, endColor)
+		}
 
-        if (mainBlockPos != null && linkedBlockPos != null) {
+		if (mainBlockPos != null && linkedBlockPos != null) {
 //            renderLine(poseStack.last(), buffer, mainBlockPos!!.center, linkedBlockPos!!.center, color)
-        }
+		}
 
-        val build = buffer.build()
-        if (build == null) {
-            vertexBuffer = null
-        } else {
-            vertexBuffer!!.bind()
-            vertexBuffer!!.upload(build)
-            VertexBuffer.unbind()
-        }
-    }
+		val build = buffer.build()
+		if (build == null) {
+			vertexBuffer = null
+		} else {
+			vertexBuffer!!.bind()
+			vertexBuffer!!.upload(build)
+			VertexBuffer.unbind()
+		}
+	}
 
-    val LAYER_NAME = OtherUtil.modResource("wire_strength")
+	val LAYER_NAME = OtherUtil.modResource("wire_strength")
 
-    fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-        val player = ClientUtil.localPlayer ?: return
-        if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
+	fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
+		val player = ClientUtil.localPlayer ?: return
+		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
 
-        val level = player.level()
+		val level = player.level()
 
-        val clipResult = OtherUtil.getPovResult(level, player, player.blockInteractionRange())
+		val clipResult = OtherUtil.getPovResult(level, player, player.blockInteractionRange())
 
-        val pos = clipResult.blockPos
-        val state = level.getBlockState(pos)
+		val pos = clipResult.blockPos
+		val state = level.getBlockState(pos)
 
-        if (!state.`is`(Blocks.REDSTONE_WIRE)) return
+		if (!state.`is`(Blocks.REDSTONE_WIRE)) return
 
-        val strength = state.getValue(RedStoneWireBlock.POWER)
+		val strength = state.getValue(RedStoneWireBlock.POWER)
 
-        guiGraphics.drawString(
-            Minecraft.getInstance().font,
-            strength.toString(),
-            guiGraphics.guiWidth() / 2 + 5,
-            guiGraphics.guiHeight() / 2 + 5,
-            0xFF0000
-        )
-    }
+		guiGraphics.drawString(
+			Minecraft.getInstance().font,
+			strength.toString(),
+			guiGraphics.guiWidth() / 2 + 5,
+			guiGraphics.guiHeight() / 2 + 5,
+			0xFF0000
+		)
+	}
 
 }

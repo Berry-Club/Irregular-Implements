@@ -25,79 +25,79 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 class MoonPhaseDetectorBlock : Block(
-    Properties
-        .ofFullCopy(Blocks.DAYLIGHT_DETECTOR)
+	Properties
+		.ofFullCopy(Blocks.DAYLIGHT_DETECTOR)
 ), EntityBlock {
 
-    companion object {
-        val POWER: IntegerProperty = BlockStateProperties.POWER
-        val INVERTED: BooleanProperty = BlockStateProperties.INVERTED
+	companion object {
+		val POWER: IntegerProperty = BlockStateProperties.POWER
+		val INVERTED: BooleanProperty = BlockStateProperties.INVERTED
 
-        val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0)
+		val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0)
 
-        fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: MoonPhaseDetectorBlockEntity) {
-            if (level.gameTime % 20 != 0L) return
+		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: MoonPhaseDetectorBlockEntity) {
+			if (level.gameTime % 20 != 0L) return
 
-            val moonPhase = level.moonPhase
+			val moonPhase = level.moonPhase
 
-            val isInverted = state.getValue(INVERTED)
+			val isInverted = state.getValue(INVERTED)
 
-            val power = if (isInverted) {
-                moonPhase * 2
-            } else {
-                14 - moonPhase * 2
-            }
+			val power = if (isInverted) {
+				moonPhase * 2
+			} else {
+				14 - moonPhase * 2
+			}
 
-            if (state.getValue(POWER) != power) {
-                val newState = state.setValue(POWER, power)
-                level.setBlockAndUpdate(pos, newState)
-            }
-        }
-    }
+			if (state.getValue(POWER) != power) {
+				val newState = state.setValue(POWER, power)
+				level.setBlockAndUpdate(pos, newState)
+			}
+		}
+	}
 
-    init {
-        registerDefaultState(
-            stateDefinition.any()
-                .setValue(POWER, 0)
-                .setValue(INVERTED, false)
-        )
-    }
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(POWER, 0)
+				.setValue(INVERTED, false)
+		)
+	}
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(POWER, INVERTED)
-    }
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(POWER, INVERTED)
+	}
 
-    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return SHAPE
-    }
+	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+		return SHAPE
+	}
 
-    override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-        return state.getValue(POWER)
-    }
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return state.getValue(POWER)
+	}
 
-    override fun isSignalSource(state: BlockState): Boolean {
-        return true
-    }
+	override fun isSignalSource(state: BlockState): Boolean {
+		return true
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return MoonPhaseDetectorBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return MoonPhaseDetectorBlockEntity(pos, state)
+	}
 
-    override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-        return if (level.isClientSide) {
-            null
-        } else {
-            BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.MOON_PHASE_DETECTOR.get(), MoonPhaseDetectorBlock::tick)
-        }
-    }
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return if (level.isClientSide) {
+			null
+		} else {
+			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.MOON_PHASE_DETECTOR.get(), MoonPhaseDetectorBlock::tick)
+		}
+	}
 
-    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-        if (level.isClientSide || !player.mayInteract(level, pos)) return InteractionResult.PASS
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		if (level.isClientSide || !player.mayInteract(level, pos)) return InteractionResult.PASS
 
-        val newState = state.cycle(INVERTED)
-        level.setBlockAndUpdate(pos, newState)
+		val newState = state.cycle(INVERTED)
+		level.setBlockAndUpdate(pos, newState)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
 }

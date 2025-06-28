@@ -27,91 +27,91 @@ import net.minecraft.world.level.Level
 
 //TODO: information recipes
 class WeatherEggItem : Item(
-    Properties()
-        .component(ModDataComponents.WEATHER, Weather.SUNNY)
+	Properties()
+		.component(ModDataComponents.WEATHER, Weather.SUNNY)
 ), ProjectileItem {
 
-    enum class Weather(private val realName: String) : StringRepresentable {
-        SUNNY("sunny"),
-        RAINY("rainy"),
-        STORMY("stormy");
+	enum class Weather(private val realName: String) : StringRepresentable {
+		SUNNY("sunny"),
+		RAINY("rainy"),
+		STORMY("stormy");
 
-        override fun getSerializedName(): String = realName
-    }
+		override fun getSerializedName(): String = realName
+	}
 
-    companion object {
-        val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
+	companion object {
+		val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
 
-        fun getWeatherFloat(
-            stack: ItemStack,
-            localLevel: ClientLevel?,
-            holdingEntity: LivingEntity?,
-            int: Int
-        ): Float {
-            val weather = stack.get(ModDataComponents.WEATHER) ?: return 0f
+		fun getWeatherFloat(
+			stack: ItemStack,
+			localLevel: ClientLevel?,
+			holdingEntity: LivingEntity?,
+			int: Int
+		): Float {
+			val weather = stack.get(ModDataComponents.WEATHER) ?: return 0f
 
-            return when (weather) {
-                Weather.SUNNY -> 0f
-                Weather.RAINY -> 1f
-                Weather.STORMY -> 2f
-            }
-        }
+			return when (weather) {
+				Weather.SUNNY -> 0f
+				Weather.RAINY -> 1f
+				Weather.STORMY -> 2f
+			}
+		}
 
-        fun fromWeather(weather: Weather): ItemStack {
-            val stack = ModItems.WEATHER_EGG.toStack()
+		fun fromWeather(weather: Weather): ItemStack {
+			val stack = ModItems.WEATHER_EGG.toStack()
 
-            stack.set(
-                ModDataComponents.WEATHER,
-                weather
-            )
+			stack.set(
+				ModDataComponents.WEATHER,
+				weather
+			)
 
-            return stack
-        }
-    }
+			return stack
+		}
+	}
 
-    override fun getName(stack: ItemStack): Component {
-        val weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
-        return when (weather) {
-            Weather.SUNNY -> ModLanguageProvider.Items.WEATHER_EGG_SUNNY.toComponent()
-            Weather.RAINY -> ModLanguageProvider.Items.WEATHER_EGG_RAINY.toComponent()
-            Weather.STORMY -> ModLanguageProvider.Items.WEATHER_EGG_STORMY.toComponent()
-        }
-    }
+	override fun getName(stack: ItemStack): Component {
+		val weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
+		return when (weather) {
+			Weather.SUNNY -> ModLanguageProvider.Items.WEATHER_EGG_SUNNY.toComponent()
+			Weather.RAINY -> ModLanguageProvider.Items.WEATHER_EGG_RAINY.toComponent()
+			Weather.STORMY -> ModLanguageProvider.Items.WEATHER_EGG_STORMY.toComponent()
+		}
+	}
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
-        level.playSound(
-            null,
-            player.x,
-            player.y,
-            player.z,
-            SoundEvents.EGG_THROW,
-            SoundSource.PLAYERS,
-            0.5f,
-            0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f)
-        )
+	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
+		level.playSound(
+			null,
+			player.x,
+			player.y,
+			player.z,
+			SoundEvents.EGG_THROW,
+			SoundSource.PLAYERS,
+			0.5f,
+			0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f)
+		)
 
-        if (!level.isClientSide) {
-            val thrownWeatherEgg = ThrownWeatherEggEntity(level, player)
+		if (!level.isClientSide) {
+			val thrownWeatherEgg = ThrownWeatherEggEntity(level, player)
 
-            thrownWeatherEgg.item = usedStack
-            thrownWeatherEgg.weather = usedStack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
-            thrownWeatherEgg.shootFromRotation(player, player.xRot, player.yRot, 0.0f, 1.5f, 1.0f)
+			thrownWeatherEgg.item = usedStack
+			thrownWeatherEgg.weather = usedStack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
+			thrownWeatherEgg.shootFromRotation(player, player.xRot, player.yRot, 0.0f, 1.5f, 1.0f)
 
-            level.addFreshEntity(thrownWeatherEgg)
-        }
+			level.addFreshEntity(thrownWeatherEgg)
+		}
 
-        player.awardStat(Stats.ITEM_USED[this])
-        usedStack.consume(1, player)
-        return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide())
-    }
+		player.awardStat(Stats.ITEM_USED[this])
+		usedStack.consume(1, player)
+		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide())
+	}
 
-    override fun asProjectile(level: Level, pos: Position, stack: ItemStack, direction: Direction): Projectile {
-        val thrownWeatherEgg = ThrownWeatherEggEntity(level, pos.x(), pos.y(), pos.z())
-        thrownWeatherEgg.item = stack
-        thrownWeatherEgg.weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
+	override fun asProjectile(level: Level, pos: Position, stack: ItemStack, direction: Direction): Projectile {
+		val thrownWeatherEgg = ThrownWeatherEggEntity(level, pos.x(), pos.y(), pos.z())
+		thrownWeatherEgg.item = stack
+		thrownWeatherEgg.weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
 
-        return thrownWeatherEgg
-    }
+		return thrownWeatherEgg
+	}
 
 }

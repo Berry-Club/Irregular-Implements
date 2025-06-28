@@ -32,227 +32,227 @@ import top.theillusivec4.curios.api.CuriosApi
 
 object ModArmorItems {
 
-    // These are lazy so they don't freak out due
-    // to data components not being available yet when
-    // BlockStateBaseMixin calls FluidWalkingBoots#checkCollisionShape
+	// These are lazy so they don't freak out due
+	// to data components not being available yet when
+	// BlockStateBaseMixin calls FluidWalkingBoots#checkCollisionShape
 
-    val WATER_WALKING_BOOTS by lazy {
-        ArmorItem(
-            ModArmorMaterials.WATER_WALKING,
-            ArmorItem.Type.BOOTS,
-            Item.Properties()
-                .durability(ArmorItem.Type.BOOTS.getDurability(15))
-                .rarity(Rarity.RARE)
-                .component(
-                    ModDataComponents.FLUID_TAGS,
-                    listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-                )
-        )
-    }
+	val WATER_WALKING_BOOTS by lazy {
+		ArmorItem(
+			ModArmorMaterials.WATER_WALKING,
+			ArmorItem.Type.BOOTS,
+			Item.Properties()
+				.durability(ArmorItem.Type.BOOTS.getDurability(15))
+				.rarity(Rarity.RARE)
+				.component(
+					ModDataComponents.FLUID_TAGS,
+					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+				)
+		)
+	}
 
-    val OBSIDIAN_WATER_WALKING_BOOTS by lazy {
-        ArmorItem(
-            ModArmorMaterials.OBSIDIAN_WATER_WALKING,
-            ArmorItem.Type.BOOTS,
-            Item.Properties()
-                .durability(ArmorItem.Type.BOOTS.getDurability(15))
-                .rarity(Rarity.RARE)
-                .fireResistant()
-                .component(
-                    ModDataComponents.FLUID_TAGS,
-                    listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
-                )
-        )
-    }
+	val OBSIDIAN_WATER_WALKING_BOOTS by lazy {
+		ArmorItem(
+			ModArmorMaterials.OBSIDIAN_WATER_WALKING,
+			ArmorItem.Type.BOOTS,
+			Item.Properties()
+				.durability(ArmorItem.Type.BOOTS.getDurability(15))
+				.rarity(Rarity.RARE)
+				.fireResistant()
+				.component(
+					ModDataComponents.FLUID_TAGS,
+					listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
+				)
+		)
+	}
 
-    val LAVA_WADERS by lazy {
-        object : ArmorItem(
-            ModArmorMaterials.LAVA_WADERS,
-            Type.BOOTS,
-            Properties()
-                .durability(Type.BOOTS.getDurability(15))
-                .rarity(Rarity.RARE)
-                .fireResistant()
-                .component(
-                    ModDataComponents.FLUID_TAGS,
-                    listOf(
-                        ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
-                        ModFluidTagsProvider.ALLOWS_WATER_WALKING
-                    )
-                )
-                .component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
-                .component(ModDataComponents.COOLDOWN, 0)
-        ) {
-            override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-                LavaCharmItem.charge(stack)
-            }
-        }
-    }
+	val LAVA_WADERS by lazy {
+		object : ArmorItem(
+			ModArmorMaterials.LAVA_WADERS,
+			Type.BOOTS,
+			Properties()
+				.durability(Type.BOOTS.getDurability(15))
+				.rarity(Rarity.RARE)
+				.fireResistant()
+				.component(
+					ModDataComponents.FLUID_TAGS,
+					listOf(
+						ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
+						ModFluidTagsProvider.ALLOWS_WATER_WALKING
+					)
+				)
+				.component(ModDataComponents.CHARGE, LavaCharmItem.MAX_CHARGE)
+				.component(ModDataComponents.COOLDOWN, 0)
+		) {
+			override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
+				LavaCharmItem.charge(stack)
+			}
+		}
+	}
 
-    val MAGIC_HOOD by lazy {
-        ArmorItem(
-            ModArmorMaterials.MAGIC,
-            ArmorItem.Type.HELMET,
-            Item.Properties()
-                .durability(ArmorItem.Type.HELMET.getDurability(15))
-                .rarity(Rarity.RARE)
-        )
-    }
+	val MAGIC_HOOD by lazy {
+		ArmorItem(
+			ModArmorMaterials.MAGIC,
+			ArmorItem.Type.HELMET,
+			Item.Properties()
+				.durability(ArmorItem.Type.HELMET.getDurability(15))
+				.rarity(Rarity.RARE)
+		)
+	}
 
-    val SPECTRE_HELMET by lazy {
-        ArmorItem(
-            ModArmorMaterials.SPECTRE,
-            ArmorItem.Type.HELMET,
-            Item.Properties()
-                .durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
-                .rarity(Rarity.UNCOMMON)
-        )
-    }
+	val SPECTRE_HELMET by lazy {
+		ArmorItem(
+			ModArmorMaterials.SPECTRE,
+			ArmorItem.Type.HELMET,
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
+		)
+	}
 
-    val SPECTRE_CHESTPLATE by lazy {
-        ArmorItem(
-            ModArmorMaterials.SPECTRE,
-            ArmorItem.Type.CHESTPLATE,
-            Item.Properties()
-                .durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
-                .rarity(Rarity.UNCOMMON)
-        )
-    }
+	val SPECTRE_CHESTPLATE by lazy {
+		ArmorItem(
+			ModArmorMaterials.SPECTRE,
+			ArmorItem.Type.CHESTPLATE,
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
+		)
+	}
 
-    val SPECTRE_LEGGINGS by lazy {
-        ArmorItem(
-            ModArmorMaterials.SPECTRE,
-            ArmorItem.Type.LEGGINGS,
-            Item.Properties()
-                .durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
-                .rarity(Rarity.UNCOMMON)
-        )
-    }
+	val SPECTRE_LEGGINGS by lazy {
+		ArmorItem(
+			ModArmorMaterials.SPECTRE,
+			ArmorItem.Type.LEGGINGS,
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
+		)
+	}
 
-    val SPECTRE_BOOTS by lazy {
-        ArmorItem(
-            ModArmorMaterials.SPECTRE,
-            ArmorItem.Type.BOOTS,
-            Item.Properties()
-                .durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
-                .rarity(Rarity.UNCOMMON)
-        )
-    }
+	val SPECTRE_BOOTS by lazy {
+		ArmorItem(
+			ModArmorMaterials.SPECTRE,
+			ArmorItem.Type.BOOTS,
+			Item.Properties()
+				.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
+				.rarity(Rarity.UNCOMMON)
+		)
+	}
 
-    fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
-        if (livingEntity.isCrouching || livingEntity.isUnderWater) return false
+	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
+		if (livingEntity.isCrouching || livingEntity.isUnderWater) return false
 
-        val footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET)
-        val fluidTags = footArmor.get(ModDataComponents.FLUID_TAGS) ?: return false
+		val footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET)
+		val fluidTags = footArmor.get(ModDataComponents.FLUID_TAGS) ?: return false
 
-        return fluidTags.any { fluidState.`is`(it) }
-    }
+		return fluidTags.any { fluidState.`is`(it) }
+	}
 
-    @JvmStatic
-    fun checkCollisionShape(
-        level: BlockGetter,
-        pos: BlockPos,
-        context: CollisionContext,
-        original: VoxelShape?
-    ): VoxelShape? {
-        if (context !is EntityCollisionContext) return null
+	@JvmStatic
+	fun checkCollisionShape(
+		level: BlockGetter,
+		pos: BlockPos,
+		context: CollisionContext,
+		original: VoxelShape?
+	): VoxelShape? {
+		if (context !is EntityCollisionContext) return null
 
-        val fluidState = level.getFluidState(pos)
-        val fluidHeight = fluidState.getHeight(level, pos)
-        if (fluidHeight <= 0) return null
+		val fluidState = level.getFluidState(pos)
+		val fluidHeight = fluidState.getHeight(level, pos)
+		if (fluidHeight <= 0) return null
 
-        val entity = context.entity as? LivingEntity ?: return null
-        if (!shouldEntityStandOnFluid(entity, fluidState)) return null
+		val entity = context.entity as? LivingEntity ?: return null
+		if (!shouldEntityStandOnFluid(entity, fluidState)) return null
 
-        val shape = FLUID_SHAPES.computeIfAbsent(fluidHeight) {
-            Block.box(0.0, 0.0, 0.0, 16.0, (it * 16).toDouble(), 16.0)
-        }
+		val shape = FLUID_SHAPES.computeIfAbsent(fluidHeight) {
+			Block.box(0.0, 0.0, 0.0, 16.0, (it * 16).toDouble(), 16.0)
+		}
 
-        if (!context.isAbove(shape, pos, true)) return null
+		if (!context.isAbove(shape, pos, true)) return null
 
-        return if (original == null) shape else Shapes.or(original, shape)
-    }
+		return if (original == null) shape else Shapes.or(original, shape)
+	}
 
-    private val FLUID_SHAPES: MutableMap<Float, VoxelShape> = HashMap()
+	private val FLUID_SHAPES: MutableMap<Float, VoxelShape> = HashMap()
 
-    fun tooltip(event: ItemTooltipEvent) {
-        if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
-            event.toolTip.add(
-                ModLanguageProvider.Tooltips.LUBRICATED
-                    .toComponent()
-                    .withColor(0xFCF4DD)
-            )
-        }
-    }
+	fun tooltip(event: ItemTooltipEvent) {
+		if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
+			event.toolTip.add(
+				ModLanguageProvider.Tooltips.LUBRICATED
+					.toComponent()
+					.withColor(0xFCF4DD)
+			)
+		}
+	}
 
-    @JvmField
-    val FLUID_BOOT_FALL = FallLocation("fluid_boot_fall")
+	@JvmField
+	val FLUID_BOOT_FALL = FallLocation("fluid_boot_fall")
 
-    @JvmStatic
-    fun fluidWalkingFallLocation(entity: LivingEntity): FallLocation? {
-        val fluidBelow = entity.level().getFluidState(entity.blockPosition())
-        if (!shouldEntityStandOnFluid(entity, fluidBelow)) return null
+	@JvmStatic
+	fun fluidWalkingFallLocation(entity: LivingEntity): FallLocation? {
+		val fluidBelow = entity.level().getFluidState(entity.blockPosition())
+		if (!shouldEntityStandOnFluid(entity, fluidBelow)) return null
 
-        return FLUID_BOOT_FALL
-    }
+		return FLUID_BOOT_FALL
+	}
 
-    @JvmStatic
-    fun fluidWalkingDeathMessage(entity: LivingEntity): Component {
-        val fluidBelow = entity.level().getFluidState(entity.blockPosition())
-        val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
+	@JvmStatic
+	fun fluidWalkingDeathMessage(entity: LivingEntity): Component {
+		val fluidBelow = entity.level().getFluidState(entity.blockPosition())
+		val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
-        val bootWasResponsible = bootArmor.get(ModDataComponents.FLUID_TAGS)?.any { fluidBelow.`is`(it) }.isTrue
-        return if (bootWasResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
-            entity.displayName ?: entity.name,
-            fluidBelow.fluidType.description,
-            bootArmor.displayName
-        ) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_GENERIC.toComponent(
-            entity.displayName ?: entity.name,
-            fluidBelow.fluidType.description,
-        )
-    }
+		val bootWasResponsible = bootArmor.get(ModDataComponents.FLUID_TAGS)?.any { fluidBelow.`is`(it) }.isTrue
+		return if (bootWasResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
+			entity.displayName ?: entity.name,
+			fluidBelow.fluidType.description,
+			bootArmor.displayName
+		) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_GENERIC.toComponent(
+			entity.displayName ?: entity.name,
+			fluidBelow.fluidType.description,
+		)
+	}
 
-    fun tryBlockFireDamage(event: LivingIncomingDamageEvent) {
-        if (event.isCanceled) return
+	fun tryBlockFireDamage(event: LivingIncomingDamageEvent) {
+		if (event.isCanceled) return
 
-        val target = event.entity
-        val damageSource = event.source
+		val target = event.entity
+		val damageSource = event.source
 
-        if (!damageSource.`is`(DamageTypeTags.IS_FIRE)) return
+		if (!damageSource.`is`(DamageTypeTags.IS_FIRE)) return
 
-        val amount = event.amount
-        val chance = (amount * amount * amount) / 100
+		val amount = event.amount
+		val chance = (amount * amount * amount) / 100
 
-        if (target.random.nextFloat() <= chance) return
+		if (target.random.nextFloat() <= chance) return
 
-        if (canBlockFireDamage(target)) event.isCanceled = true
-    }
+		if (canBlockFireDamage(target)) event.isCanceled = true
+	}
 
-    private fun canBlockFireDamage(entity: LivingEntity): Boolean {
+	private fun canBlockFireDamage(entity: LivingEntity): Boolean {
 
-        val footItem = entity.getItemBySlot(EquipmentSlot.FEET)
-        if (footItem.`is`(ModItems.LAVA_WADERS)
-            || footItem.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
-        ) return true
+		val footItem = entity.getItemBySlot(EquipmentSlot.FEET)
+		if (footItem.`is`(ModItems.LAVA_WADERS)
+			|| footItem.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
+		) return true
 
-        var goodCurio = false
-        CuriosApi.getCuriosInventory(entity).ifPresent { inventory ->
-            inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
-                for (i in 0 until ringSlotHandler.slots) {
-                    val stack = ringSlotHandler.stacks.getStackInSlot(i)
-                    if (stack.`is`(ModItems.OBSIDIAN_SKULL_RING)) {
-                        goodCurio = true
-                        break
-                    }
-                }
-            }
-        }
-        if (goodCurio) return true
+		var goodCurio = false
+		CuriosApi.getCuriosInventory(entity).ifPresent { inventory ->
+			inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
+				for (i in 0 until ringSlotHandler.slots) {
+					val stack = ringSlotHandler.stacks.getStackInSlot(i)
+					if (stack.`is`(ModItems.OBSIDIAN_SKULL_RING)) {
+						goodCurio = true
+						break
+					}
+				}
+			}
+		}
+		if (goodCurio) return true
 
-        if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true
+		if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true
 
-        return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }
-    }
+		return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }
+	}
 
 
 }

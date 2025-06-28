@@ -23,212 +23,212 @@ import kotlin.random.Random
 
 sealed interface FilterEntry {
 
-    enum class Type(
-        val id: String,
-        val codec: MapCodec<out FilterEntry>
-    ) : StringRepresentable {
-        EMPTY("empty", Empty.CODEC),
-        TAG("tag", Tag.CODEC),
-        ITEM("item", Item.CODEC);
+	enum class Type(
+		val id: String,
+		val codec: MapCodec<out FilterEntry>
+	) : StringRepresentable {
+		EMPTY("empty", Empty.CODEC),
+		TAG("tag", Tag.CODEC),
+		ITEM("item", Item.CODEC);
 
-        override fun getSerializedName(): String {
-            return this.id
-        }
+		override fun getSerializedName(): String {
+			return this.id
+		}
 
-        companion object {
-            val CODEC: Codec<Type> = StringRepresentable.fromEnum(Type::values)
-        }
-    }
+		companion object {
+			val CODEC: Codec<Type> = StringRepresentable.fromEnum(Type::values)
+		}
+	}
 
-    companion object {
-        val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(
-            FilterEntry::getType,
-            Type::codec
-        )
+	companion object {
+		val CODEC: Codec<FilterEntry> = Type.CODEC.dispatch(
+			FilterEntry::getType,
+			Type::codec
+		)
 
-        fun FilterEntry?.isNullOrEmpty() = this == null || this == Empty
-    }
+		fun FilterEntry?.isNullOrEmpty() = this == null || this == Empty
+	}
 
-    fun getDisplayStack(registries: HolderLookup.Provider): ItemStack
-    fun test(stack: ItemStack): Boolean
-    fun getType(): Type
+	fun getDisplayStack(registries: HolderLookup.Provider): ItemStack
+	fun test(stack: ItemStack): Boolean
+	fun getType(): Type
 
-    data object Empty : FilterEntry {
-        override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
-            return ItemStack.EMPTY
-        }
+	data object Empty : FilterEntry {
+		override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
+			return ItemStack.EMPTY
+		}
 
-        override fun test(stack: ItemStack): Boolean {
-            return false
-        }
+		override fun test(stack: ItemStack): Boolean {
+			return false
+		}
 
-        override fun getType(): Type {
-            return Type.EMPTY
-        }
+		override fun getType(): Type {
+			return Type.EMPTY
+		}
 
-        val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
-    }
+		val CODEC: MapCodec<Empty> = MapCodec.unit(Empty)
+	}
 
-    data class Tag(
-        val tagKey: TagKey<net.minecraft.world.item.Item>,
-        val backupStack: ItemStack
-    ) : FilterEntry {
+	data class Tag(
+		val tagKey: TagKey<net.minecraft.world.item.Item>,
+		val backupStack: ItemStack
+	) : FilterEntry {
 
-        override fun getType(): Type {
-            return Type.TAG
-        }
+		override fun getType(): Type {
+			return Type.TAG
+		}
 
-        private val displayStacks: MutableMap<net.minecraft.world.item.Item, ItemStack> = mutableMapOf()
-        private var displayStack: ItemStack? = null
+		private val displayStacks: MutableMap<net.minecraft.world.item.Item, ItemStack> = mutableMapOf()
+		private var displayStack: ItemStack? = null
 
-        private var timeLastUpdated = 0L
+		private var timeLastUpdated = 0L
 
-        override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
-            val time = System.currentTimeMillis() / 1000
-            if (displayStack == null || time > this.timeLastUpdated) {
-                this.timeLastUpdated = time
+		override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
+			val time = System.currentTimeMillis() / 1000
+			if (displayStack == null || time > this.timeLastUpdated) {
+				this.timeLastUpdated = time
 
-                val matchingItems = registries.lookupOrThrow(Registries.ITEM)
-                    .get(this.tagKey)
-                    .getOrNull()
-                    ?.toList()
-                    ?: return ItemStack.EMPTY
+				val matchingItems = registries.lookupOrThrow(Registries.ITEM)
+					.get(this.tagKey)
+					.getOrNull()
+					?.toList()
+					?: return ItemStack.EMPTY
 
-                val randomIndex = random.nextInt(matchingItems.size)
-                val randomItem = matchingItems[randomIndex].value()
+				val randomIndex = random.nextInt(matchingItems.size)
+				val randomItem = matchingItems[randomIndex].value()
 
-                this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
-                    val tagKeyComponent = this.tagKey.getComponent()
+				this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
+					val tagKeyComponent = this.tagKey.getComponent()
 
-                    val stack = randomItem.defaultInstance
-                    stack.set(
-                        DataComponents.ITEM_NAME,
-                        ModLanguageProvider.Tooltips.ITEM_TAG
-                            .toComponent(tagKeyComponent)
-                    )
+					val stack = randomItem.defaultInstance
+					stack.set(
+						DataComponents.ITEM_NAME,
+						ModLanguageProvider.Tooltips.ITEM_TAG
+							.toComponent(tagKeyComponent)
+					)
 
-                    stack
-                }
-            }
+					stack
+				}
+			}
 
-            return this.displayStack ?: ItemStack.EMPTY
-        }
+			return this.displayStack ?: ItemStack.EMPTY
+		}
 
-        fun getNextTag(): TagKey<net.minecraft.world.item.Item> {
-            val stackTags = this.backupStack.tags.toList()
-            val currentTagIndex = stackTags.indexOf(this.tagKey)
+		fun getNextTag(): TagKey<net.minecraft.world.item.Item> {
+			val stackTags = this.backupStack.tags.toList()
+			val currentTagIndex = stackTags.indexOf(this.tagKey)
 
-            val nextTagIndex = (currentTagIndex + 1) % stackTags.size
-            return stackTags[nextTagIndex]
-        }
+			val nextTagIndex = (currentTagIndex + 1) % stackTags.size
+			return stackTags[nextTagIndex]
+		}
 
-        override fun test(stack: ItemStack): Boolean {
-            return stack.`is`(this.tagKey)
-        }
+		override fun test(stack: ItemStack): Boolean {
+			return stack.`is`(this.tagKey)
+		}
 
-        fun getAsSpecificItemEntry(): Item {
-            return Item(
-                backupStack,
-                requireSameComponents = false
-            )
-        }
+		fun getAsSpecificItemEntry(): Item {
+			return Item(
+				backupStack,
+				requireSameComponents = false
+			)
+		}
 
-        companion object {
-            private val random = Random(123L)
+		companion object {
+			private val random = Random(123L)
 
-            val CODEC: MapCodec<Tag> =
-                RecordCodecBuilder.mapCodec { instance ->
-                    instance.group(
-                        TagKey.codec(Registries.ITEM)
-                            .fieldOf("tag")
-                            .forGetter(Tag::tagKey),
-                        ItemStack.CODEC
-                            .fieldOf("backup_stack")
-                            .forGetter(Tag::backupStack)
-                    ).apply(instance, ::Tag)
-                }
+			val CODEC: MapCodec<Tag> =
+				RecordCodecBuilder.mapCodec { instance ->
+					instance.group(
+						TagKey.codec(Registries.ITEM)
+							.fieldOf("tag")
+							.forGetter(Tag::tagKey),
+						ItemStack.CODEC
+							.fieldOf("backup_stack")
+							.forGetter(Tag::backupStack)
+					).apply(instance, ::Tag)
+				}
 
-            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Tag> =
-                StreamCodec.composite(
-                    OtherUtil.tagKeyStreamCodec(Registries.ITEM), Tag::tagKey,
-                    ItemStack.STREAM_CODEC, Tag::backupStack,
-                    ::Tag
-                )
-        }
-    }
+			val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Tag> =
+				StreamCodec.composite(
+					OtherUtil.tagKeyStreamCodec(Registries.ITEM), Tag::tagKey,
+					ItemStack.STREAM_CODEC, Tag::backupStack,
+					::Tag
+				)
+		}
+	}
 
-    data class Item(
-        val stack: ItemStack,
-        val requireSameComponents: Boolean
-    ) : FilterEntry {
+	data class Item(
+		val stack: ItemStack,
+		val requireSameComponents: Boolean
+	) : FilterEntry {
 
-        override fun getType(): Type {
-            return Type.ITEM
-        }
+		override fun getType(): Type {
+			return Type.ITEM
+		}
 
-        private val displayStack: ItemStack = this.stack.copy()
+		private val displayStack: ItemStack = this.stack.copy()
 
-        init {
-            if (this.requireSameComponents) {
+		init {
+			if (this.requireSameComponents) {
 
-                //TODO: Maybe move this to the tooltip event rather than actually changing the item's lore?
-                val component = ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
-                    .toComponent().withStyle(ChatFormatting.RED)
+				//TODO: Maybe move this to the tooltip event rather than actually changing the item's lore?
+				val component = ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
+					.toComponent().withStyle(ChatFormatting.RED)
 
-                this.displayStack.set(
-                    DataComponents.LORE,
-                    ItemLore(listOf(component))
-                )
-            }
-        }
+				this.displayStack.set(
+					DataComponents.LORE,
+					ItemLore(listOf(component))
+				)
+			}
+		}
 
-        override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
-            return this.displayStack
-        }
+		override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
+			return this.displayStack
+		}
 
-        override fun test(stack: ItemStack): Boolean {
-            return if (this.requireSameComponents) {
-                ItemStack.isSameItemSameComponents(this.stack, stack)
-            } else {
-                ItemStack.isSameItem(this.stack, stack)
-            }
-        }
+		override fun test(stack: ItemStack): Boolean {
+			return if (this.requireSameComponents) {
+				ItemStack.isSameItemSameComponents(this.stack, stack)
+			} else {
+				ItemStack.isSameItem(this.stack, stack)
+			}
+		}
 
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (other !is Item) return false
+		override fun equals(other: Any?): Boolean {
+			if (this === other) return true
+			if (other !is Item) return false
 
-            if (!ItemStack.isSameItemSameComponents(this.stack, other.stack)) return false
-            if (this.requireSameComponents != other.requireSameComponents) return false
+			if (!ItemStack.isSameItemSameComponents(this.stack, other.stack)) return false
+			if (this.requireSameComponents != other.requireSameComponents) return false
 
-            return true
-        }
+			return true
+		}
 
-        override fun hashCode(): Int {
-            var result = this.stack.hashCode()
-            result = 31 * result + this.requireSameComponents.hashCode()
-            return result
-        }
+		override fun hashCode(): Int {
+			var result = this.stack.hashCode()
+			result = 31 * result + this.requireSameComponents.hashCode()
+			return result
+		}
 
-        companion object {
-            val CODEC: MapCodec<Item> =
-                RecordCodecBuilder.mapCodec { instance ->
-                    instance.group(
-                        ItemStack.CODEC
-                            .fieldOf("stack")
-                            .forGetter(Item::stack),
-                        Codec.BOOL
-                            .optionalFieldOf("require_same_components", false)
-                            .forGetter(Item::requireSameComponents)
-                    ).apply(instance, ::Item)
-                }
+		companion object {
+			val CODEC: MapCodec<Item> =
+				RecordCodecBuilder.mapCodec { instance ->
+					instance.group(
+						ItemStack.CODEC
+							.fieldOf("stack")
+							.forGetter(Item::stack),
+						Codec.BOOL
+							.optionalFieldOf("require_same_components", false)
+							.forGetter(Item::requireSameComponents)
+					).apply(instance, ::Item)
+				}
 
-            val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Item> =
-                StreamCodec.composite(
-                    ItemStack.STREAM_CODEC, Item::stack,
-                    ByteBufCodecs.BOOL, Item::requireSameComponents,
-                    ::Item
-                )
-        }
-    }
+			val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Item> =
+				StreamCodec.composite(
+					ItemStack.STREAM_CODEC, Item::stack,
+					ByteBufCodecs.BOOL, Item::requireSameComponents,
+					::Item
+				)
+		}
+	}
 }

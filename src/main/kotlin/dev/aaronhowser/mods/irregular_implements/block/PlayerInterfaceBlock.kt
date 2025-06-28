@@ -13,18 +13,18 @@ import net.minecraft.world.level.block.state.BlockState
 
 class PlayerInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
-        super.setPlacedBy(level, pos, state, placer, stack)
+	override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+		super.setPlacedBy(level, pos, state, placer, stack)
 
-        val blockEntity = level.getBlockEntity(pos)
-        if (blockEntity is PlayerInterfaceBlockEntity && placer != null) {
-            blockEntity.ownerUuid = placer.uuid
-        }
+		val blockEntity = level.getBlockEntity(pos)
+		if (blockEntity is PlayerInterfaceBlockEntity && placer != null) {
+			blockEntity.ownerUuid = placer.uuid
+		}
 
-    }
+	}
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return PlayerInterfaceBlockEntity(pos, state)
-    }
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return PlayerInterfaceBlockEntity(pos, state)
+	}
 
 }

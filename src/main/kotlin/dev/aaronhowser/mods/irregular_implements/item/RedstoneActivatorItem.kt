@@ -21,87 +21,87 @@ import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
 class RedstoneActivatorItem : Item(
-    Properties()
-        .stacksTo(1)
-        .component(ModDataComponents.DURATION, 20)
+	Properties()
+		.stacksTo(1)
+		.component(ModDataComponents.DURATION, 20)
 ) {
 
-    companion object {
-        val DURATION = OtherUtil.modResource("duration")
+	companion object {
+		val DURATION = OtherUtil.modResource("duration")
 
-        const val SHORT = 2
-        const val MEDIUM = 20
-        const val LONG = 100
+		const val SHORT = 2
+		const val MEDIUM = 20
+		const val LONG = 100
 
-        fun cycleDuration(stack: ItemStack) {
-            val currentDuration = stack.get(ModDataComponents.DURATION) ?: 0
-            val newDuration = when (currentDuration) {
-                SHORT -> MEDIUM
-                MEDIUM -> LONG
-                LONG -> SHORT
-                else -> MEDIUM
-            }
+		fun cycleDuration(stack: ItemStack) {
+			val currentDuration = stack.get(ModDataComponents.DURATION) ?: 0
+			val newDuration = when (currentDuration) {
+				SHORT -> MEDIUM
+				MEDIUM -> LONG
+				LONG -> SHORT
+				else -> MEDIUM
+			}
 
-            stack.set(ModDataComponents.DURATION, newDuration)
-        }
+			stack.set(ModDataComponents.DURATION, newDuration)
+		}
 
-        fun getDurationFloat(
-            stack: ItemStack,
-            localLevel: ClientLevel?,
-            holdingEntity: LivingEntity?,
-            int: Int
-        ): Float {
-            return stack.get(ModDataComponents.DURATION)?.toFloat() ?: MEDIUM.toFloat()
-        }
+		fun getDurationFloat(
+			stack: ItemStack,
+			localLevel: ClientLevel?,
+			holdingEntity: LivingEntity?,
+			int: Int
+		): Float {
+			return stack.get(ModDataComponents.DURATION)?.toFloat() ?: MEDIUM.toFloat()
+		}
 
-    }
+	}
 
-    override fun use(
-        level: Level,
-        player: Player,
-        usedHand: InteractionHand
-    ): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
-        if (level.isClientSide) return InteractionResultHolder.pass(usedStack)
-        if (!player.isSecondaryUseActive) return InteractionResultHolder.pass(usedStack)
+	override fun use(
+		level: Level,
+		player: Player,
+		usedHand: InteractionHand
+	): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
+		if (level.isClientSide) return InteractionResultHolder.pass(usedStack)
+		if (!player.isSecondaryUseActive) return InteractionResultHolder.pass(usedStack)
 
-        cycleDuration(usedStack)
+		cycleDuration(usedStack)
 
-        val newDuration = usedStack.get(ModDataComponents.DURATION) ?: return InteractionResultHolder.fail(usedStack)
-        val component = newDuration.toString()
-            .toComponent()
-            .withStyle(ChatFormatting.RED)
+		val newDuration = usedStack.get(ModDataComponents.DURATION) ?: return InteractionResultHolder.fail(usedStack)
+		val component = newDuration.toString()
+			.toComponent()
+			.withStyle(ChatFormatting.RED)
 
-        player.displayClientMessage(component, true)
+		player.displayClientMessage(component, true)
 
-        return InteractionResultHolder.success(usedStack)
-    }
+		return InteractionResultHolder.success(usedStack)
+	}
 
-    override fun useOn(context: UseOnContext): InteractionResult {
-        val level = context.level as? ServerLevel ?: return InteractionResult.PASS
+	override fun useOn(context: UseOnContext): InteractionResult {
+		val level = context.level as? ServerLevel ?: return InteractionResult.PASS
 
-        val usedStack = context.itemInHand
-        val duration = usedStack.get(ModDataComponents.DURATION) ?: return InteractionResult.PASS
+		val usedStack = context.itemInHand
+		val duration = usedStack.get(ModDataComponents.DURATION) ?: return InteractionResult.PASS
 
-        val clickedPos = context.clickedPos
+		val clickedPos = context.clickedPos
 
-        RedstoneHandlerSavedData.addSignal(
-            level = level,
-            blockPos = clickedPos,
-            duration = duration,
-            strength = 15
-        )
+		RedstoneHandlerSavedData.addSignal(
+			level = level,
+			blockPos = clickedPos,
+			duration = duration,
+			strength = 15
+		)
 
-        return InteractionResult.SUCCESS
-    }
+		return InteractionResult.SUCCESS
+	}
 
-    override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-        val duration = stack.get(ModDataComponents.DURATION) ?: return
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val duration = stack.get(ModDataComponents.DURATION) ?: return
 
-        val component = "Duration: $duration"
-            .toGrayComponent()
+		val component = "Duration: $duration"
+			.toGrayComponent()
 
-        tooltipComponents.add(component)
-    }
+		tooltipComponents.add(component)
+	}
 
 }

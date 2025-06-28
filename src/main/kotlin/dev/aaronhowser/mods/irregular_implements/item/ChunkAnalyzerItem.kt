@@ -14,55 +14,55 @@ import java.util.*
 
 //TODO: Either add entity support, or remove it from the info and book pages
 class ChunkAnalyzerItem : Item(
-    Properties()
-        .stacksTo(1)
+	Properties()
+		.stacksTo(1)
 ) {
 
-    //TODO GUI
+	//TODO GUI
 
-    override fun use(
-        level: Level,
-        player: Player,
-        usedHand: InteractionHand
-    ): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
-        if (level.isClientSide) return InteractionResultHolder.sidedSuccess(usedStack, true)
+	override fun use(
+		level: Level,
+		player: Player,
+		usedHand: InteractionHand
+	): InteractionResultHolder<ItemStack> {
+		val usedStack = player.getItemInHand(usedHand)
+		if (level.isClientSide) return InteractionResultHolder.sidedSuccess(usedStack, true)
 
-        val chunk = level.getChunkAt(player.blockPosition())
+		val chunk = level.getChunkAt(player.blockPosition())
 
-        val blockStateCounts: IdentityHashMap<Block, MutableInt> = IdentityHashMap()
+		val blockStateCounts: IdentityHashMap<Block, MutableInt> = IdentityHashMap()
 
-        val minX = chunk.pos.minBlockX
-        val maxX = chunk.pos.maxBlockX
-        val minZ = chunk.pos.minBlockZ
-        val maxZ = chunk.pos.maxBlockZ
-        val minY = chunk.minBuildHeight
-        val maxY = chunk.maxBuildHeight
+		val minX = chunk.pos.minBlockX
+		val maxX = chunk.pos.maxBlockX
+		val minZ = chunk.pos.minBlockZ
+		val maxZ = chunk.pos.maxBlockZ
+		val minY = chunk.minBuildHeight
+		val maxY = chunk.maxBuildHeight
 
-        for (x in minX..maxX) {
-            for (z in minZ..maxZ) {
-                for (y in minY..maxY) {
-                    val blockState = chunk.getBlockState(BlockPos(x, y, z))
-                    if (blockState.isAir) continue
+		for (x in minX..maxX) {
+			for (z in minZ..maxZ) {
+				for (y in minY..maxY) {
+					val blockState = chunk.getBlockState(BlockPos(x, y, z))
+					if (blockState.isAir) continue
 
-                    blockStateCounts
-                        .computeIfAbsent(blockState.block) { MutableInt(0) }
-                        .increment()
-                }
-            }
-        }
+					blockStateCounts
+						.computeIfAbsent(blockState.block) { MutableInt(0) }
+						.increment()
+				}
+			}
+		}
 
-        for ((block, count) in blockStateCounts.entries.sortedByDescending { it.value }) {
+		for ((block, count) in blockStateCounts.entries.sortedByDescending { it.value }) {
 
-            player.sendSystemMessage(
-                Component.literal(
-                    "${block.name.string} x${count.value}"
-                )
-            )
+			player.sendSystemMessage(
+				Component.literal(
+					"${block.name.string} x${count.value}"
+				)
+			)
 
-        }
+		}
 
-        return InteractionResultHolder.success(usedStack)
-    }
+		return InteractionResultHolder.success(usedStack)
+	}
 
 }

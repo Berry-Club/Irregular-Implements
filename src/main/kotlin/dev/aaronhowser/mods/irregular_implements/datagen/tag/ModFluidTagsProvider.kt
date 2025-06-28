@@ -12,30 +12,30 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
 
 class ModFluidTagsProvider(
-    output: PackOutput,
-    lookupProvider: CompletableFuture<HolderLookup.Provider>,
-    existingFileHelper: ExistingFileHelper?
+	output: PackOutput,
+	lookupProvider: CompletableFuture<HolderLookup.Provider>,
+	existingFileHelper: ExistingFileHelper?
 ) : FluidTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
 
-    companion object {
-        private fun create(id: String): TagKey<Fluid> {
-            return FluidTags.create(OtherUtil.modResource(id))
-        }
+	companion object {
+		private fun create(id: String): TagKey<Fluid> {
+			return FluidTags.create(OtherUtil.modResource(id))
+		}
 
-        @JvmField
-        val ALLOWS_WATER_WALKING = create("allows_water_walking")
+		@JvmField
+		val ALLOWS_WATER_WALKING = create("allows_water_walking")
 
-        @JvmField
-        val ALLOWS_LAVA_WALKING = create("allows_lava_walking")
-    }
+		@JvmField
+		val ALLOWS_LAVA_WALKING = create("allows_lava_walking")
+	}
 
-    override fun addTags(provider: HolderLookup.Provider) {
+	override fun addTags(provider: HolderLookup.Provider) {
 
-        this.tag(ALLOWS_WATER_WALKING)
-            .addTag(FluidTags.WATER)
+		this.tag(ALLOWS_WATER_WALKING)
+			.addTag(FluidTags.WATER)
 
-        this.tag(ALLOWS_LAVA_WALKING)
-            .addTag(FluidTags.LAVA)
+		this.tag(ALLOWS_LAVA_WALKING)
+			.addTag(FluidTags.LAVA)
 
-    }
+	}
 }

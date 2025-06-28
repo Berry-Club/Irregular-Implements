@@ -12,53 +12,53 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 import kotlin.math.sin
 
 class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
-    Minecraft.getInstance().blockEntityRenderDispatcher,
-    Minecraft.getInstance().entityModels
+	Minecraft.getInstance().blockEntityRenderDispatcher,
+	Minecraft.getInstance().entityModels
 ) {
 
-    companion object {
-        val clientItemExtensions = object : IClientItemExtensions {
-            val BEWLR = DiaphanousBEWLR()
+	companion object {
+		val clientItemExtensions = object : IClientItemExtensions {
+			val BEWLR = DiaphanousBEWLR()
 
-            override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-                return BEWLR
-            }
-        }
-    }
+			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+				return BEWLR
+			}
+		}
+	}
 
-    override fun renderByItem(
-        stack: ItemStack,
-        displayContext: ItemDisplayContext,
-        poseStack: PoseStack,
-        buffer: MultiBufferSource,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        poseStack.pushPose()
+	override fun renderByItem(
+		stack: ItemStack,
+		displayContext: ItemDisplayContext,
+		poseStack: PoseStack,
+		buffer: MultiBufferSource,
+		packedLight: Int,
+		packedOverlay: Int
+	) {
+		poseStack.pushPose()
 
-        poseStack.translate(0.5, 0.5, 0.5)
+		poseStack.translate(0.5, 0.5, 0.5)
 
-        if (displayContext == ItemDisplayContext.GUI) {
-            val time = Minecraft.getInstance().level?.gameTime ?: 0
-            val modelScale = 0.9625f + 0.0375f * sin(time.toFloat() / 2.5f)
-            poseStack.scale(modelScale, modelScale, modelScale)
-        }
+		if (displayContext == ItemDisplayContext.GUI) {
+			val time = Minecraft.getInstance().level?.gameTime ?: 0
+			val modelScale = 0.9625f + 0.0375f * sin(time.toFloat() / 2.5f)
+			poseStack.scale(modelScale, modelScale, modelScale)
+		}
 
-        val blockToRender = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
-        val itemRenderer = Minecraft.getInstance().itemRenderer
+		val blockToRender = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
+		val itemRenderer = Minecraft.getInstance().itemRenderer
 
-        itemRenderer.renderStatic(
-            blockToRender.asItem().defaultInstance,
-            displayContext,
-            packedLight,
-            packedOverlay,
-            poseStack,
-            buffer,
-            null,
-            0,
-        )
+		itemRenderer.renderStatic(
+			blockToRender.asItem().defaultInstance,
+			displayContext,
+			packedLight,
+			packedOverlay,
+			poseStack,
+			buffer,
+			null,
+			0,
+		)
 
-        poseStack.popPose()
-    }
+		poseStack.popPose()
+	}
 
 }
