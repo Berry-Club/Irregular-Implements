@@ -10,7 +10,7 @@ import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.phys.AABB
 
-class BlackoutPowderItem : Item(Properties()) {
+class BlackoutPowderItem(properties: Properties) : Item(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val level = context.level

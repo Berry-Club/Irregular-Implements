@@ -16,12 +16,12 @@ import net.minecraft.world.level.GameRules
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import top.theillusivec4.curios.api.CuriosApi
 
-class SpectreAnchorItem : Item(
-	Properties()
-		.component(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
-) {
+class SpectreAnchorItem(properties: Properties) : Item(properties) {
 
 	companion object {
+		val DEFAULT_PROPERTIES: Properties =
+			Properties().component(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
+
 		fun saveAnchoredItems(player: Player) {
 			val level = player.level()
 			if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return

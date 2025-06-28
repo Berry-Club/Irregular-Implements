@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.*
 import net.neoforged.neoforge.common.SimpleTier
+import net.neoforged.neoforge.registries.DeferredItem
 
 object ModToolItems {
 
@@ -22,8 +23,39 @@ object ModToolItems {
 	private val BLOCK_RANGE_INCREASE_RL = OtherUtil.modResource("block_range_increase")
 	private val ENTITY_RANGE_INCREASE_RL = OtherUtil.modResource("entity_range_increase")
 
-	val SPECTRE_SWORD = SwordItem(
-		SPECTRE_TIER,
+	fun registerSword(
+		id: String,
+		tier: Tier,
+		properties: Item.Properties
+	): DeferredItem<SwordItem> {
+		return ModItems.ITEM_REGISTRY.registerItem(id) { SwordItem(tier, properties) }
+	}
+
+	fun registerPickaxe(
+		id: String,
+		tier: Tier,
+		properties: Item.Properties
+	): DeferredItem<PickaxeItem> {
+		return ModItems.ITEM_REGISTRY.registerItem(id) { PickaxeItem(tier, properties) }
+	}
+
+	fun registerShovel(
+		id: String,
+		tier: Tier,
+		properties: Item.Properties
+	): DeferredItem<ShovelItem> {
+		return ModItems.ITEM_REGISTRY.registerItem(id) { ShovelItem(tier, properties) }
+	}
+
+	fun registerAxe(
+		id: String,
+		tier: Tier,
+		properties: Item.Properties
+	): DeferredItem<AxeItem> {
+		return ModItems.ITEM_REGISTRY.registerItem(id) { AxeItem(tier, properties) }
+	}
+
+	val SPECTRE_SWORD_DEFAULT_PROPERTIES: Item.Properties =
 		Item
 			.Properties()
 			.attributes(
@@ -39,10 +71,8 @@ object ModToolItems {
 						EquipmentSlotGroup.HAND
 					)
 			)
-	)
 
-	val SPECTRE_PICKAXE = PickaxeItem(
-		SPECTRE_TIER,
+	val SPECTRE_PICKAXE_DEFAULT_PROPERTIES: Item.Properties =
 		Item
 			.Properties()
 			.attributes(
@@ -58,10 +88,8 @@ object ModToolItems {
 						EquipmentSlotGroup.HAND
 					)
 			)
-	)
 
-	val SPECTRE_SHOVEL = ShovelItem(
-		SPECTRE_TIER,
+	val SPECTRE_SHOVEL_DEFAULT_PROPERTIES: Item.Properties =
 		Item
 			.Properties()
 			.attributes(
@@ -77,10 +105,8 @@ object ModToolItems {
 						EquipmentSlotGroup.HAND
 					)
 			)
-	)
 
-	val SPECTRE_AXE = AxeItem(
-		SPECTRE_TIER,
+	val SPECTRE_AXE_DEFAULT_PROPERTIES: Item.Properties =
 		Item
 			.Properties()
 			.attributes(
@@ -96,6 +122,5 @@ object ModToolItems {
 						EquipmentSlotGroup.HAND
 					)
 			)
-	)
 
 }

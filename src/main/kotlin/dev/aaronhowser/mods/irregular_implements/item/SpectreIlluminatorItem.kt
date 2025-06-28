@@ -8,7 +8,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
 
-class SpectreIlluminatorItem : Item(Properties()) {
+class SpectreIlluminatorItem(properties: Properties) : Item(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val level = context.level

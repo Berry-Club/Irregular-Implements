@@ -23,9 +23,10 @@ import net.neoforged.neoforge.capabilities.Capabilities
 import java.awt.Color
 import java.util.function.Supplier
 
-class SpectreChargerItem private constructor(
-	private val type: Type
-) : Item(Properties().stacksTo(1)) {
+class SpectreChargerItem(
+	private val type: Type,
+	properties: Properties
+) : Item(properties) {
 
 	override fun inventoryTick(stack: ItemStack, level: Level, player: Entity, slotId: Int, isSelected: Boolean) {
 		if (level !is ServerLevel
@@ -101,10 +102,7 @@ class SpectreChargerItem private constructor(
 	}
 
 	companion object {
-		val BASIC = SpectreChargerItem(Type.BASIC)
-		val REDSTONE = SpectreChargerItem(Type.REDSTONE)
-		val ENDER = SpectreChargerItem(Type.ENDER)
-		val GENESIS = SpectreChargerItem(Type.GENESIS)
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 
 		const val CHARGE_DELAY = 5
 

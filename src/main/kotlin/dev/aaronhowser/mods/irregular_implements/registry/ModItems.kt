@@ -166,28 +166,28 @@ object ModItems {
 
 	// Spectre
 	val SPECTRE_ILLUMINATOR: DeferredItem<SpectreIlluminatorItem> =
-		register("spectre_illuminator") { SpectreIlluminatorItem() }
+		register("spectre_illuminator", ::SpectreIlluminatorItem)
 	val BLACKOUT_POWDER: DeferredItem<BlackoutPowderItem> =
-		register("blackout_powder") { BlackoutPowderItem() }
+		register("blackout_powder", ::BlackoutPowderItem)
 	val SPECTRE_KEY = basic("spectre_key")
 	val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
-		register("spectre_anchor") { SpectreAnchorItem() }
+		register("spectre_anchor", ::SpectreAnchorItem, SpectreAnchorItem.DEFAULT_PROPERTIES)
 	val SPECTRE_CHARGER_BASIC: DeferredItem<SpectreChargerItem> =
-		register("spectre_charger_basic") { SpectreChargerItem.BASIC }
+		registerSpectreCharger("spectre_charger_basic", SpectreChargerItem.Type.BASIC)
 	val SPECTRE_CHARGER_REDSTONE: DeferredItem<SpectreChargerItem> =
-		register("spectre_charger_redstone") { SpectreChargerItem.REDSTONE }
+		registerSpectreCharger("spectre_charger_redstone", SpectreChargerItem.Type.REDSTONE)
 	val SPECTRE_CHARGER_ENDER: DeferredItem<SpectreChargerItem> =
-		register("spectre_charger_ender") { SpectreChargerItem.ENDER }
+		registerSpectreCharger("spectre_charger_ender", SpectreChargerItem.Type.ENDER)
 	val SPECTRE_CHARGER_GENESIS: DeferredItem<SpectreChargerItem> =
-		register("spectre_charger_genesis") { SpectreChargerItem.GENESIS }
+		registerSpectreCharger("spectre_charger_genesis", SpectreChargerItem.Type.GENESIS)
 	val SPECTRE_SWORD: DeferredItem<SwordItem> =
-		register("spectre_sword") { ModToolItems.SPECTRE_SWORD }
+		ModToolItems.registerSword("spectre_sword", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_SWORD_DEFAULT_PROPERTIES)
 	val SPECTRE_PICKAXE: DeferredItem<PickaxeItem> =
-		register("spectre_pickaxe") { ModToolItems.SPECTRE_PICKAXE }
+		ModToolItems.registerPickaxe("spectre_pickaxe", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_PICKAXE_DEFAULT_PROPERTIES)
 	val SPECTRE_AXE: DeferredItem<AxeItem> =
-		register("spectre_axe") { ModToolItems.SPECTRE_AXE }
+		ModToolItems.registerAxe("spectre_axe", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_AXE_DEFAULT_PROPERTIES)
 	val SPECTRE_SHOVEL: DeferredItem<ShovelItem> =
-		register("spectre_shovel") { ModToolItems.SPECTRE_SHOVEL }
+		ModToolItems.registerShovel("spectre_shovel", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_SHOVEL_DEFAULT_PROPERTIES)
 
 	// Redstone
 	val REDSTONE_TOOL: DeferredItem<RedstoneToolItem> =
@@ -306,6 +306,14 @@ object ModItems {
 		properties: Item.Properties = ImbueItem.DEFAULT_PROPERTIES
 	): DeferredItem<ImbueItem> {
 		return ITEM_REGISTRY.registerItem(id) { ImbueItem(mobEffect, properties) }
+	}
+
+	private fun registerSpectreCharger(
+		id: String,
+		type: SpectreChargerItem.Type,
+		properties: Item.Properties = SpectreChargerItem.DEFAULT_PROPERTIES
+	): DeferredItem<SpectreChargerItem> {
+		return ITEM_REGISTRY.registerItem(id) { SpectreChargerItem(type, properties) }
 	}
 
 }
