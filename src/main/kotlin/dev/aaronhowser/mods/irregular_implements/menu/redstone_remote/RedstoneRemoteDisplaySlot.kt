@@ -26,7 +26,7 @@ class RedstoneRemoteDisplaySlot(
 		val oldComponent = stackComponent ?: return stack
 
 		val displays = oldComponent.displayStacks
-		displays[pairIndex] = stack
+		displays[pairIndex] = stack.copyWithCount(1)
 
 		val newComponent = RedstoneRemoteDataComponent(
 			locationFilters = oldComponent.locationFilters,
