@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.HolderLookup
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.NonInteractiveResultSlot
@@ -11,7 +11,6 @@ import java.util.function.Supplier
 
 class RedstoneRemoteFilterSlot(
 	private val redstoneRemoteStack: Supplier<ItemStack>,
-	private val lookupProvider: HolderLookup.Provider,
 	x: Int,
 	y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
@@ -22,15 +21,11 @@ class RedstoneRemoteFilterSlot(
 	val filterInThisSlot: ItemStack?
 		get() = stackComponent?.getPair(this.index)?.first
 
-	override fun mayPlace(stack: ItemStack): Boolean {
-		if (filterInThisSlot != null) return false
-
-		return stack.`is`(ModItems.ITEM_FILTER) && stack.has(ModDataComponents.LOCATION)
-	}
-
 	override fun safeInsert(stack: ItemStack): ItemStack {
-		if (stack.isEmpty) return stack
-		if (filterInThisSlot != null) return stack
+		if (stack.isEmpty
+			|| !stack.has(ModDataComponents.LOCATION)
+			|| !filterInThisSlot?.isEmpty.isTrue
+		) return stack
 
 		val oldComponent = stackComponent ?: return stack
 
