@@ -37,7 +37,8 @@ class FlooFireplace(
 			player.displayClientMessage(Component.literal("Could not find fireplace named '$target'"), true)
 			return false
 		} else if (fireplace == this) {
-			player.displayClientMessage(Component.literal("You are already at '$target'"), true)
+			val name = name ?: target
+			player.displayClientMessage(Component.literal("You are already at '$name'"), true)
 			return false
 		}
 
