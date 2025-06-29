@@ -29,7 +29,7 @@ class FlooNetworkSavedData : SavedData() {
 		connectedBricks: List<BlockPos>
 	): Boolean {
 		if (name.isNullOrBlank()) return false
-		if (fireplaces.any { connectedBricks.contains(it.blockPos) || it.name.lowercase() == name.lowercase() }) return false
+		if (fireplaces.any { connectedBricks.contains(it.masterBlockPos) || it.name.lowercase() == name.lowercase() }) return false
 
 		addFireplace(masterUuid, name, blockPos)
 
