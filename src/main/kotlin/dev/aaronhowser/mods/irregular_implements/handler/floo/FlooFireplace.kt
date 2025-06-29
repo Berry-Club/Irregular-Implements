@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
+import net.minecraft.server.level.ServerPlayer
 import java.util.*
 
 class FlooFireplace(
@@ -17,6 +19,24 @@ class FlooFireplace(
 		tag.putLong("blockPos", blockPos.asLong())
 
 		return tag
+	}
+
+	fun teleportFrom(player: ServerPlayer, destination: String): Boolean {
+
+		if (destination == name) {
+			player.sendSystemMessage(Component.literal("You are already at '$name'"))
+			return false
+		}
+
+		val data = FlooNetworkSavedData.get(player.serverLevel())
+		val fireplace = data.findFireplace(destination)
+
+		if (fireplace == null) {
+			player.sendSystemMessage(Component.literal("Could not find fireplace named '$destination'"))
+			return false
+		}
+
+		return true
 	}
 
 	companion object {

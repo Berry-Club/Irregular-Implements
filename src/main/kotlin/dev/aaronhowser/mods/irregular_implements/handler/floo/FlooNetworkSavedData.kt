@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.saveddata.SavedData
+import org.jline.utils.Levenshtein
 import java.util.*
 
 class FlooNetworkSavedData : SavedData() {
@@ -36,7 +37,7 @@ class FlooNetworkSavedData : SavedData() {
 	}
 
 	fun findFireplace(name: String): FlooFireplace? {
-
+		return fireplaces.minByOrNull { Levenshtein.distance(it.name.lowercase(), name.lowercase()) }
 	}
 
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
@@ -66,7 +67,7 @@ class FlooNetworkSavedData : SavedData() {
 			return data
 		}
 
-		private fun get(level: ServerLevel): FlooNetworkSavedData {
+		fun get(level: ServerLevel): FlooNetworkSavedData {
 			return level.dataStorage.computeIfAbsent(
 				Factory(::FlooNetworkSavedData, ::load),
 				"floo_network"
