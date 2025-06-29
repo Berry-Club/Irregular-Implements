@@ -54,6 +54,10 @@ class FlooNetworkSavedData : SavedData() {
 		return fireplaces.firstOrNull { it.masterUuid == flooBrickBlockEntity.uuid || it.masterUuid == flooBrickBlockEntity.masterUUID }
 	}
 
+	fun findFireplace(uuid: UUID): FlooFireplace? {
+		return fireplaces.firstOrNull { it.masterUuid == uuid }
+	}
+
 	fun removeFireplace(uuid: UUID) {
 		fireplaces.removeIf { it.masterUuid == uuid }
 		setDirty()

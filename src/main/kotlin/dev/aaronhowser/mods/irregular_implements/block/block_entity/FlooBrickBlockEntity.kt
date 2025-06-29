@@ -50,9 +50,9 @@ class FlooBrickBlockEntity(
 	}
 
 	fun blockBroken() {
-		val level = level ?: return
+		val level = level as? ServerLevel ?: return
 
-		if (isMaster && level is ServerLevel) {
+		if (isMaster) {
 			for (pos in children) {
 				level.setBlockAndUpdate(pos, Blocks.BRICKS.defaultBlockState())
 			}
@@ -64,6 +64,13 @@ class FlooBrickBlockEntity(
 				val network = FlooNetworkSavedData.get(level)
 				network.removeFireplace(uuid)
 			}
+		} else {
+			val master = masterUUID ?: return
+			val network = FlooNetworkSavedData.get(level)
+			val fireplace = network.findFireplace(master) ?: return
+
+			val be = level.getBlockEntity(fireplace.masterBlockPos) as? FlooBrickBlockEntity ?: return
+			be.blockBroken()
 		}
 	}
 
