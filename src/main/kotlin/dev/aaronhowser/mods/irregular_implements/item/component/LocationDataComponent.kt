@@ -13,11 +13,10 @@ import net.minecraft.world.level.Level
 
 data class LocationDataComponent(
 	val dimension: ResourceKey<Level>,
-	val blockPos: BlockPos,
-	val blockName: Component
+	val blockPos: BlockPos
 ) {
 
-	constructor(level: Level, blockPos: BlockPos) : this(level.dimension(), blockPos, level.getBlockState(blockPos).block.name)
+	constructor(level: Level, blockPos: BlockPos) : this(level.dimension(), blockPos)
 
 	companion object {
 		val CODEC: Codec<LocationDataComponent> =
@@ -28,10 +27,7 @@ data class LocationDataComponent(
 						.forGetter(LocationDataComponent::dimension),
 					BlockPos.CODEC
 						.fieldOf("block_pos")
-						.forGetter(LocationDataComponent::blockPos),
-					ComponentSerialization.CODEC
-						.fieldOf("block_name")
-						.forGetter(LocationDataComponent::blockName)
+						.forGetter(LocationDataComponent::blockPos)
 				).apply(instance, ::LocationDataComponent)
 			}
 
@@ -39,7 +35,6 @@ data class LocationDataComponent(
 			StreamCodec.composite(
 				ResourceKey.streamCodec(Registries.DIMENSION), LocationDataComponent::dimension,
 				BlockPos.STREAM_CODEC, LocationDataComponent::blockPos,
-				ComponentSerialization.STREAM_CODEC, LocationDataComponent::blockName,
 				::LocationDataComponent
 			)
 	}

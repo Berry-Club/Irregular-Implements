@@ -56,20 +56,11 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		}
 
 		val baseBlockPos = locationComponent.blockPos
-		val baseBlockName = locationComponent.blockName
-
-		if (!level.isLoaded(baseBlockPos)) {
-			player.displayClientMessage(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_UNLOADED
-					.toComponent(baseBlockName),
-				true
-			)
-
-			return InteractionResult.FAIL
-		}
-
+		val baseBlockName = level.getBlockState(baseBlockPos).block.name
 		val baseBlockEntity = level.getBlockEntity(baseBlockPos)
+
 		if (baseBlockEntity !is RedstoneToolLinkable) {
+
 			player.displayClientMessage(
 				ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_NOT_LINKABLE
 					.toComponent(baseBlockName, level.getBlockState(baseBlockPos).block.name),
