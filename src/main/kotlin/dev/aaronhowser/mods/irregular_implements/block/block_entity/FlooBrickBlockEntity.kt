@@ -8,6 +8,8 @@ import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.LongArrayTag
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.ServerChatEvent
@@ -22,7 +24,7 @@ class FlooBrickBlockEntity(
 	private var isMaster: Boolean = false
 
 	// Master properties
-	var uuid: UUID = UUID.randomUUID()
+	var uuid: UUID? = null
 		private set
 	var facing: Direction = Direction.NORTH
 		private set
@@ -47,13 +49,32 @@ class FlooBrickBlockEntity(
 		setChanged()
 	}
 
+	fun blockBroken() {
+		val level = level ?: return
+
+		if (isMaster && level is ServerLevel) {
+			for (pos in children) {
+				level.setBlockAndUpdate(pos, Blocks.BRICKS.defaultBlockState())
+			}
+
+			level.setBlockAndUpdate(worldPosition, Blocks.BRICKS.defaultBlockState())
+
+			val uuid = this.uuid
+			if (uuid != null) {
+				val network = FlooNetworkSavedData.get(level)
+				network.removeFireplace(uuid)
+			}
+		}
+	}
+
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
 		tag.putBoolean(IS_MASTER_TAG, isMaster)
 
 		if (isMaster) {
-			tag.putUUID(UUID_TAG, uuid)
+			val uuid = this.uuid
+			if (uuid != null) tag.putUUID(UUID_TAG, uuid)
 			tag.putInt(FACING_TAG, facing.ordinal)
 
 			val childrenList = LongArrayTag(children.map(BlockPos::asLong))

@@ -54,6 +54,11 @@ class FlooNetworkSavedData : SavedData() {
 		return fireplaces.firstOrNull { it.masterUuid == flooBrickBlockEntity.uuid || it.masterUuid == flooBrickBlockEntity.masterUUID }
 	}
 
+	fun removeFireplace(uuid: UUID) {
+		fireplaces.removeIf { it.masterUuid == uuid }
+		setDirty()
+	}
+
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
 		val fireplaceList = tag.getList(NBT_FIREPLACES, Tag.TAG_LIST.toInt())
 
