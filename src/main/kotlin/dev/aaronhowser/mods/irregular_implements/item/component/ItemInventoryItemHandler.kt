@@ -32,9 +32,9 @@ class ItemInventoryItemHandler<T>(
 	override fun getSlots(): Int = copiedStacks.size
 	override fun getStackInSlot(slot: Int): ItemStack = copiedStacks[slot]
 	override fun setStackInSlot(slot: Int, stack: ItemStack) {
-		validateSlotIndex(slot);
-		copiedStacks[slot] = stack;
-		onContentsChanged(slot);
+		validateSlotIndex(slot)
+		copiedStacks[slot] = stack
+		onContentsChanged(slot)
 	}
 
 	override fun insertItem(

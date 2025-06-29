@@ -1,12 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.network.chat.Component
-import net.minecraft.util.Mth
 import net.minecraft.world.item.ItemStack
 
 class ItemStackButton(

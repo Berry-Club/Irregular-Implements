@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
@@ -87,6 +86,7 @@ object DiviningRodRenderer {
 
 		render(event)
 	}
+
 	private fun render(event: RenderLevelStageEvent) {
 		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
 		val poseStack = event.poseStack

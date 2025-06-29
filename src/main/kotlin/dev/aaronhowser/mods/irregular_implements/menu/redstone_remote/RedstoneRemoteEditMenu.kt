@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.InteractionHand
