@@ -5,6 +5,7 @@ bin
 .metadata
 .classpath
 .project
+.kotlin/
 
 # idea
 out
