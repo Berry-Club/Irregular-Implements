@@ -17,7 +17,7 @@ class FlooNetworkSavedData : SavedData() {
 		setDirty()
 	}
 
-	fun addFireplace(masterUuid: UUID, name: String?, blockPos: BlockPos) {
+	fun addFireplace(masterUuid: UUID, name: String, blockPos: BlockPos) {
 		addFireplace(FlooFireplace(masterUuid, name, blockPos))
 	}
 
@@ -27,15 +27,16 @@ class FlooNetworkSavedData : SavedData() {
 		blockPos: BlockPos,
 		connectedBricks: List<BlockPos>
 	): Boolean {
-		for (fp in fireplaces) {
-			if (connectedBricks.contains(fp.blockPos)
-				|| fp.name != null && fp.name.lowercase() == name?.lowercase()
-			) return false
-		}
+		if (name.isNullOrBlank()) return false
+		if (fireplaces.any { connectedBricks.contains(it.blockPos) || it.name.lowercase() == name.lowercase() }) return false
 
 		addFireplace(masterUuid, name, blockPos)
 
 		return true
+	}
+
+	fun findFireplace(name: String): FlooFireplace? {
+
 	}
 
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
