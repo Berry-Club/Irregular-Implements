@@ -20,13 +20,13 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 			return InteractionResultHolder.pass(usedStack)
 		}
 
-		val currentFlooPowder = usedStack.get(ModDataComponents.FLOO_POWDER) ?: 0
+		val currentFlooPowder = usedStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0)
 		if (currentFlooPowder >= MAX_FLOO_POWDER) return InteractionResultHolder.fail(usedStack)
 
 		for (invStack in player.inventory.items) {
 			if (!invStack.`is`(ModItems.FLOO_POWDER)) continue
 
-			val newCurrentFlooPowder = usedStack.get(ModDataComponents.FLOO_POWDER) ?: 0
+			val newCurrentFlooPowder = usedStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0)
 
 			val toTransfer = minOf(MAX_FLOO_POWDER - newCurrentFlooPowder, invStack.count)
 			invStack.shrink(toTransfer)
@@ -37,7 +37,7 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 			if (newFlooPowder >= MAX_FLOO_POWDER) break
 		}
 
-		val newFlooPowder = usedStack.get(ModDataComponents.FLOO_POWDER) ?: 0
+		val newFlooPowder = usedStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0)
 		val pitch = Mth.lerp(
 			1f - newFlooPowder / MAX_FLOO_POWDER,
 			0.7f,

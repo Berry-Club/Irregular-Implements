@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
@@ -122,11 +123,12 @@ class FlooBrickBlockEntity(
 			val player = event.player
 
 			val isHoldingFlooPowder = player.isHolding(ModItems.FLOO_POWDER.get())
-			val hasFlooPouch = player.inventory.contains { it.`is`(ModItems.FLOO_POUCH) }
+
+			val flooPouchStack = player.inventory.items.firstOrNull { it.`is`(ModItems.FLOO_POUCH) }
 
 			if (!player.isCreative && !isHoldingFlooPowder) {
-				//TODO: Make it also check if the floo pouch has powder in it
-				if (!hasFlooPouch) return false
+				if (flooPouchStack == null) return false
+				if (flooPouchStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0) <= 0) return false
 			}
 
 			val level = player.serverLevel()
@@ -150,8 +152,9 @@ class FlooBrickBlockEntity(
 						}
 
 						flooPowderStack.shrink(1)
-					} else if (hasFlooPouch) {
-						//TODO: Implement floo pouch usage
+					} else if (flooPouchStack != null) {
+						val currentFlooPowder = flooPouchStack.getOrDefault(ModDataComponents.FLOO_POWDER, 1)
+						flooPouchStack.set(ModDataComponents.FLOO_POWDER, currentFlooPowder - 1)
 					}
 				}
 			}
