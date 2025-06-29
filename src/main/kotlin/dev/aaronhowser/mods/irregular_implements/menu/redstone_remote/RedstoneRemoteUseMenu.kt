@@ -1,8 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import dev.aaronhowser.mods.irregular_implements.savedata.RedstoneHandlerSavedData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
@@ -42,15 +44,15 @@ class RedstoneRemoteUseMenu(
 
 		println(buttonId)
 
-//		val remoteDataComponent = redstoneRemoteStack.get(ModDataComponents.REDSTONE_REMOTE) ?: return
-//		val locationFilterStack = remoteDataComponent.getLocation(buttonId)
-//		val location = locationFilterStack.get(ModDataComponents.LOCATION) ?: return
-//
-//		RedstoneHandlerSavedData.addSignal(
-//			level = level,
-//			blockPos = location.blockPos,
-//			duration = 20,
-//			strength = 15
-//		)
+		val remoteDataComponent = redstoneRemoteStack.get(ModDataComponents.REDSTONE_REMOTE) ?: return
+		val locationFilterStack = remoteDataComponent.getLocation(buttonId)
+		val location = locationFilterStack.get(ModDataComponents.LOCATION) ?: return
+
+		RedstoneHandlerSavedData.addSignal(
+			level = level,
+			blockPos = location.blockPos,
+			duration = 20,
+			strength = 15
+		)
 	}
 }
