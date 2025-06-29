@@ -229,4 +229,12 @@ object ModBlockEntities {
 			).build(null)
 		})
 
+	val FLOO_BRICK: DeferredHolder<BlockEntityType<*>, BlockEntityType<FlooBrickBlockEntity>> =
+		BLOCK_ENTITY_REGISTRY.register("floo_brick", Supplier {
+			BlockEntityType.Builder.of(
+				::FlooBrickBlockEntity,
+				ModBlocks.FLOO_BRICK.get()
+			).build(null)
+		})
+
 }
