@@ -42,15 +42,17 @@ class RedstoneRemoteUseMenu(
 	override fun handleButtonPressed(buttonId: Int) {
 		val level = playerInventory.player.level() as? ServerLevel ?: return
 
-		val remoteDataComponent = redstoneRemoteStack.get(ModDataComponents.REDSTONE_REMOTE) ?: return
-		val locationFilterStack = remoteDataComponent.getLocation(buttonId)
-		val location = locationFilterStack.get(ModDataComponents.LOCATION) ?: return
+		println(buttonId)
 
-		RedstoneHandlerSavedData.addSignal(
-			level = level,
-			blockPos = location.blockPos,
-			duration = 20,
-			strength = 15
-		)
+//		val remoteDataComponent = redstoneRemoteStack.get(ModDataComponents.REDSTONE_REMOTE) ?: return
+//		val locationFilterStack = remoteDataComponent.getLocation(buttonId)
+//		val location = locationFilterStack.get(ModDataComponents.LOCATION) ?: return
+//
+//		RedstoneHandlerSavedData.addSignal(
+//			level = level,
+//			blockPos = location.blockPos,
+//			duration = 20,
+//			strength = 15
+//		)
 	}
 }

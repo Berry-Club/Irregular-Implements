@@ -27,27 +27,27 @@ class RedstoneRemoteUseScreen(
 	private fun addButtons() {
 		val dataComponent = menu.redstoneRemoteStack.get(ModDataComponents.REDSTONE_REMOTE) ?: return
 
-		for (i in 0 until 9) {
-			val (locationFilter, icon) = dataComponent.getPair(i)
-			if (locationFilter.isEmpty) continue
-
-			val component = locationFilter.get(DataComponents.CUSTOM_NAME) ?: Component.empty()
-
-			val button = ItemStackButton(
-				x = leftPos + 5 + (i * 22),
-				y = topPos + 16,
-				width = 20,
-				height = 20,
-				itemStack = icon,
-				message = component,
-				onPress = {
-					ModPacketHandler.messageServer(ClientClickedMenuButton(i))
-				},
-				font = font
-			)
-
-			addRenderableWidget(button)
-		}
+//		for (i in 0 until 9) {
+//			val (locationFilter, icon) = dataComponent.getPair(i)
+//			if (locationFilter.isEmpty) continue
+//
+//			val component = locationFilter.get(DataComponents.CUSTOM_NAME) ?: Component.empty()
+//
+//			val button = ItemStackButton(
+//				x = leftPos + 5 + (i * 22),
+//				y = topPos + 16,
+//				width = 20,
+//				height = 20,
+//				itemStack = icon,
+//				message = component,
+//				onPress = {
+//					ModPacketHandler.messageServer(ClientClickedMenuButton(i))
+//				},
+//				font = font
+//			)
+//
+//			addRenderableWidget(button)
+//		}
 	}
 
 }

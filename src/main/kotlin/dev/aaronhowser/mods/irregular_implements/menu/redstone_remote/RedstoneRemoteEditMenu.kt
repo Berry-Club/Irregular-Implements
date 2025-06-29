@@ -1,19 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import net.minecraft.world.Container
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
+import net.neoforged.neoforge.capabilities.Capabilities
+import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.SlotItemHandler
 
 class RedstoneRemoteEditMenu(
 	containerId: Int,
-	private val playerInventory: Inventory,
-	private val container: Container
+	private val playerInventory: Inventory
 ) : AbstractContainerMenu(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), containerId) {
 
 	private fun getRedstoneRemoteStack(): ItemStack {
@@ -26,16 +28,26 @@ class RedstoneRemoteEditMenu(
 
 	private var usingMainHand: Boolean = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack()
 
+	private val itemHandler: IItemHandler? = getRedstoneRemoteStack().getCapability(Capabilities.ItemHandler.ITEM)
+
 	init {
 
-		for (pairIndex in 0 until 9) {
-			val x = 8 + pairIndex * 18
+		if (itemHandler != null) {
+			for (pairIndex in 0 until 9) {
+				val x = 8 + pairIndex * 18
 
-			val filterY = 18
-//			this.addSlot(filterSlot)
+				val filterY = 18
+				val filterSlot = object : SlotItemHandler(itemHandler, pairIndex, x, filterY) {
+					override fun mayPlace(stack: ItemStack): Boolean {
+						return stack.has(ModDataComponents.LOCATION)
+					}
+				}
+				this.addSlot(filterSlot)
 
-			val displayY = 36
-//			this.addSlot(displaySlot)
+				val displayY = 36
+				val displaySlot = SlotItemHandler(itemHandler, pairIndex + 9, x, displayY)
+				this.addSlot(displaySlot)
+			}
 		}
 
 		// Add the 27 slots of the player inventory
