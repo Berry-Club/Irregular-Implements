@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -27,24 +30,21 @@ object ModBusEvents {
 	fun onRegisterCapabilities(event: RegisterCapabilitiesEvent) {
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
-			ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get()
-		) { spectreEnergyInjectorBE, direction ->
-			spectreEnergyInjectorBE.getEnergyHandler(direction)
-		}
+			ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(),
+			SpectreEnergyInjectorBlockEntity::getCapability
+		)
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
-			ModBlockEntities.SPECTRE_COIL.get()
-		) { spectreCoilBE, direction ->
-			spectreCoilBE.getEnergyHandler(direction)
-		}
+			ModBlockEntities.SPECTRE_COIL.get(),
+			SpectreCoilBlockEntity::getCapability
+		)
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
-			ModBlockEntities.PLAYER_INTERFACE.get()
-		) { playerInterfaceBE, direction ->
-			playerInterfaceBE.getItemHandler(direction)
-		}
+			ModBlockEntities.PLAYER_INTERFACE.get(),
+			PlayerInterfaceBlockEntity::getCapability
+		)
 	}
 
 	@SubscribeEvent

@@ -55,6 +55,11 @@ class SpectreEnergyInjectorBlockEntity(
 
 	companion object {
 		const val OWNER_UUID_NBT = "OwnerUuid"
+
+		fun getCapability(spectreCoilBlockEntity: SpectreEnergyInjectorBlockEntity, direction: Direction?): IEnergyStorage? {
+			return spectreCoilBlockEntity.getEnergyHandler(direction)
+		}
+
 	}
 
 }

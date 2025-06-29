@@ -142,6 +142,10 @@ class SpectreCoilBlockEntity(
 		const val OWNER_UUID_NBT = "OwnerUuid"
 		const val COIL_TYPE_NBT = "CoilType"
 
+		fun getCapability(blockEntity: SpectreCoilBlockEntity, direction: Direction?): IEnergyStorage? {
+			return blockEntity.getEnergyHandler(direction)
+		}
+
 		fun tick(
 			level: Level,
 			blockPos: BlockPos,

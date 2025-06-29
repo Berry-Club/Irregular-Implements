@@ -118,6 +118,12 @@ class PlayerInterfaceBlockEntity(
 	}
 
 	companion object {
+		const val OWNER_UUID_NBT = "OwnerUuid"
+
+		fun getCapability(playerInterfaceBlockEntity: PlayerInterfaceBlockEntity, direction: Direction?): IItemHandler? {
+			return playerInterfaceBlockEntity.getItemHandler(direction)
+		}
+
 		private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
 
 		/**
@@ -137,8 +143,6 @@ class PlayerInterfaceBlockEntity(
 		fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
 			PLAYER_PREDICATE = predicate
 		}
-
-		const val OWNER_UUID_NBT = "OwnerUuid"
 	}
 
 }
