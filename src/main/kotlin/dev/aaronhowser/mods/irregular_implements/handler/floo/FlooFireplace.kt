@@ -46,7 +46,16 @@ class FlooFireplace(
 
 	fun teleportToThis(player: ServerPlayer): Boolean {
 		val level = player.serverLevel()
-		val be = level.getBlockEntity(this.masterBlockPos) as? FlooBrickBlockEntity ?: return false
+		val be = level.getBlockEntity(this.masterBlockPos) as? FlooBrickBlockEntity
+
+		if (be == null) {
+			player.displayClientMessage(Component.literal("The fireplace at ${this.masterBlockPos} is no longer valid"), true)
+
+			val network = FlooNetworkSavedData.get(level)
+			network.removeFireplace(this.masterUuid)
+
+			return false
+		}
 
 		val destination = this.masterBlockPos.above().bottomCenter
 
