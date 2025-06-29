@@ -71,6 +71,7 @@ class ModBlockStateProvider(
 		peaceCandle()
 		sakanade()
 		playerInterface()
+		flooBrick()
 	}
 
 	private fun playerInterface() {
@@ -642,6 +643,32 @@ class ModBlockStateProvider(
 						.build()
 				}
 		}
+	}
+
+	private fun flooBrick() {
+		val block = ModBlocks.FLOO_BRICK.get()
+
+		val baseTexture = modLoc("block/floo_brick/base")
+		val tintTexture = modLoc("block/floo_brick/tint")
+
+		val luminousModel = models()
+			.withExistingParent(name(block), mcLoc("block/block"))
+			.texture("base", baseTexture)
+			.texture("tint", tintTexture)
+			.texture("particle", baseTexture)
+			.renderType(RenderType.cutoutMipped().name)
+
+			.element()
+			.cube("#base")
+			.end()
+
+			.element()
+			.cube("#tint")
+			.ao(false)
+			.emissivity(15, 15)
+			.end()
+
+		simpleBlock(block, luminousModel)
 	}
 
 	private fun spectreEnergyInjector() {
