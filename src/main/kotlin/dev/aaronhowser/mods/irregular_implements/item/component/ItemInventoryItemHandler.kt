@@ -21,6 +21,22 @@ class ItemInventoryItemHandler<T>(
 		fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>)
 	}
 
+	val copiedStacks: NonNullList<ItemStack> = NonNullList.withSize(stacks.size, ItemStack.EMPTY)
+
+	init {
+		for (i in stacks.indices) {
+			copiedStacks[i] = stacks[i].copy()
+		}
+	}
+
+	override fun getSlots(): Int = copiedStacks.size
+	override fun getStackInSlot(slot: Int): ItemStack = copiedStacks[slot]
+	override fun setStackInSlot(slot: Int, stack: ItemStack) {
+		validateSlotIndex(slot);
+		copiedStacks[slot] = stack;
+		onContentsChanged(slot);
+	}
+
 	override fun insertItem(
 		slot: Int,
 		stack: ItemStack,
@@ -31,13 +47,13 @@ class ItemInventoryItemHandler<T>(
 
 		validateSlotIndex(slot)
 
-		val stackThere = this.stacks[slot]
+		val existing = getStackInSlot(slot)
 		var limit = getStackLimit(slot, stack)
 
-		if (!stackThere.isEmpty) {
-			if (!ItemStack.isSameItemSameComponents(stack, stackThere)) return stack
+		if (!existing.isEmpty) {
+			if (!ItemStack.isSameItemSameComponents(stack, existing)) return stack
 
-			limit -= stackThere.count
+			limit -= existing.count
 		}
 
 		if (limit <= 0) return stack
@@ -45,22 +61,47 @@ class ItemInventoryItemHandler<T>(
 		val reachedLimit = stack.count > limit
 
 		if (!simulate) {
-			val newStacks = NonNullList.copyOf(this.stacks)
-
-			if (stackThere.isEmpty) {
-				newStacks[slot] = if (reachedLimit) stack.copyWithCount(limit) else stack
+			if (existing.isEmpty) {
+				copiedStacks[slot] = if (reachedLimit) stack.copyWithCount(limit) else stack
 			} else {
-				stackThere.grow(if (reachedLimit) limit else stack.count)
-				newStacks[slot] = stackThere
+				existing.grow(if (reachedLimit) limit else stack.count)
 			}
 
+			onContentsChanged(slot)
 		}
 
+		return if (reachedLimit) stack.copyWithCount(stack.count - limit) else ItemStack.EMPTY
+	}
+
+	override fun extractItem(slot: Int, amount: Int, simulate: Boolean): ItemStack {
+		if (amount == 0) return ItemStack.EMPTY
+		validateSlotIndex(slot)
+
+		val existing = getStackInSlot(slot)
+		if (existing.isEmpty) return ItemStack.EMPTY
+
+		val toExtract = minOf(amount, existing.maxStackSize)
+
+		if (existing.count <= toExtract) {
+			if (!simulate) {
+				setStackInSlot(slot, ItemStack.EMPTY)
+				onContentsChanged(slot)
+				return existing
+			} else {
+				return existing.copy()
+			}
+		} else {
+			if (!simulate) {
+				copiedStacks[slot] = existing.copyWithCount(existing.count - toExtract)
+				onContentsChanged(slot)
+			}
+			return existing.copyWithCount(toExtract)
+		}
 	}
 
 	override fun onContentsChanged(slot: Int) {
 		super.onContentsChanged(slot)
-		dataComponent.setInventory(stack, this.stacks)
+		dataComponent.setInventory(stack, copiedStacks)
 	}
 
 }
