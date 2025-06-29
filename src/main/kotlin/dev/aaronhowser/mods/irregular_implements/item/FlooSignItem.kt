@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.block
+package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -7,11 +7,13 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.component.DataComponents
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 import java.util.*
@@ -32,6 +34,10 @@ class FlooSignItem(properties: Properties) : Item(properties) {
 		if (createFlooBricks(context.itemInHand, player, clickedPos)) return InteractionResult.SUCCESS
 
 		return InteractionResult.PASS
+	}
+
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		FlooPouchItem.fuckJkr(tooltipComponents)
 	}
 
 	companion object {

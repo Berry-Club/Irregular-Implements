@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
@@ -9,7 +10,10 @@ import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import java.time.LocalDate
+import java.time.Month
 
 class FlooPouchItem(properties: Properties) : Item(properties) {
 
@@ -63,6 +67,15 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 		return (13.0f * currentFlooPowder / MAX_FLOO_POWDER).toInt()
 	}
 
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val currentFlooPowder = stack.getOrDefault(ModDataComponents.FLOO_POWDER, 0)
+		tooltipComponents.add(
+			Component.literal("$currentFlooPowder / $MAX_FLOO_POWDER Floo Powder")
+		)
+
+		fuckJkr(tooltipComponents)
+	}
+
 	companion object {
 		const val MAX_FLOO_POWDER = 128
 
@@ -70,6 +83,13 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 			Properties()
 				.stacksTo(1)
 				.component(ModDataComponents.FLOO_POWDER, 0)
+		}
+
+		fun fuckJkr(tooltipComponents: MutableList<Component>) {
+			val now = LocalDate.now()
+			if (now.dayOfMonth == 31 && now.month == Month.JULY) {
+				tooltipComponents.add(Component.literal("Trans rights are human rights!"))
+			}
 		}
 	}
 

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.FlooSignItem
+import dev.aaronhowser.mods.irregular_implements.item.FlooSignItem
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Holder
 import net.minecraft.world.effect.MobEffect
