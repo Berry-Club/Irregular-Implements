@@ -43,7 +43,13 @@ class FlooNetworkSavedData : SavedData() {
 
 	fun findFireplace(name: String): FlooFireplace? {
 		val fireplacesWithNames = fireplaces.filter { !it.name.isNullOrBlank() }
-		return fireplacesWithNames.minByOrNull { Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
+
+		val maxDistance = 5
+
+		return fireplacesWithNames.map { it to Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
+			.filter { it.second <= maxDistance }
+			.minByOrNull { it.second }
+			?.first
 	}
 
 	fun findFireplace(flooBrickBlockEntity: FlooBrickBlockEntity): FlooFireplace? {
