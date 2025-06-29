@@ -104,8 +104,6 @@ class RedstoneHandlerSavedData : SavedData() {
 		}
 
 		private fun get(level: ServerLevel): RedstoneHandlerSavedData {
-			require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
-
 			return level.dataStorage.computeIfAbsent(
 				Factory(::RedstoneHandlerSavedData, Companion::load),
 				"redstone_handler"
@@ -114,10 +112,7 @@ class RedstoneHandlerSavedData : SavedData() {
 
 		@JvmStatic
 		val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
-			inline get() = this.server.redstoneHandlerSavedData
-
-		val MinecraftServer.redstoneHandlerSavedData: RedstoneHandlerSavedData
-			get() = get(this.overworld())
+			get() = get(this)
 
 		fun tick(level: Level) {
 			if (level !is ServerLevel) return
