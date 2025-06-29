@@ -5,21 +5,15 @@ import net.minecraft.nbt.CompoundTag
 import java.util.*
 
 class FlooFireplace(
-	var masterUuid: UUID,
-	var name: String,
-	var blockPos: BlockPos
+	val masterUuid: UUID,
+	val name: String?,
+	val blockPos: BlockPos
 ) {
-
-	constructor(tag: CompoundTag) : this(
-		masterUuid = tag.getUUID(NBT_MASTER_UUID),
-		name = tag.getString(NBT_NAME),
-		blockPos = BlockPos.of(tag.getLong(NBT_BLOCK_POS))
-	)
 
 	fun toTag(): CompoundTag {
 		val tag = CompoundTag()
 		tag.putUUID("masterUuid", masterUuid)
-		tag.putString("name", name)
+		if (name != null) tag.putString("name", name)
 		tag.putLong("blockPos", blockPos.asLong())
 
 		return tag
@@ -29,6 +23,15 @@ class FlooFireplace(
 		const val NBT_MASTER_UUID = "MasterUUID"
 		const val NBT_NAME = "Name"
 		const val NBT_BLOCK_POS = "BlockPos"
+
+		fun fromTag(tag: CompoundTag): FlooFireplace {
+			val uuid = tag.getUUID(NBT_MASTER_UUID)
+			val name = tag.getString(NBT_NAME).ifBlank { null }
+			val blockPos = BlockPos.of(tag.getLong(NBT_BLOCK_POS))
+
+			return FlooFireplace(uuid, name, blockPos)
+		}
+
 	}
 
 }

@@ -105,7 +105,7 @@ class RedstoneHandlerSavedData : SavedData() {
 
 		private fun get(level: ServerLevel): RedstoneHandlerSavedData {
 			return level.dataStorage.computeIfAbsent(
-				Factory(::RedstoneHandlerSavedData, Companion::load),
+				Factory(::RedstoneHandlerSavedData, ::load),
 				"redstone_handler"
 			)
 		}
