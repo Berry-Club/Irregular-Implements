@@ -46,15 +46,39 @@ object FireplacesCommand {
 							.executes { ctx ->
 								val source = ctx.source
 								val target = StringArgumentType.getString(ctx, FIREPLACE_NAME)
-								teleportTo(source, target)
+								teleportTo(source, target, levelRk = null)
 							}
+					)
+					.then(
+						Commands.argument(DIMENSION, ResourceLocationArgument.id())
+							.suggests(ModCommands.SUGGEST_LEVEL_RKS)
+							.then(
+								Commands.argument(FIREPLACE_NAME, StringArgumentType.greedyString())
+									.executes { ctx ->
+										val source = ctx.source
+										val target = StringArgumentType.getString(ctx, FIREPLACE_NAME)
+										val levelRl = ResourceLocationArgument.getId(ctx, DIMENSION)
+										val levelRk = ResourceKey.create(Registries.DIMENSION, levelRl)
+
+										teleportTo(source, target, levelRk)
+									}
+							)
 					)
 			)
 	}
 
-	private fun teleportTo(source: CommandSourceStack, target: String): Int {
+	private fun teleportTo(
+		source: CommandSourceStack,
+		target: String,
+		levelRk: ResourceKey<Level>?
+	): Int {
 		val player = source.playerOrException
-		val level = player.serverLevel()
+		val level = if (levelRk == null) player.serverLevel() else player.server.getLevel(levelRk)
+
+		if (level == null) {
+			source.sendFailure(Component.literal("Could not get level ${levelRk?.location()}"))
+			return 0
+		}
 
 		val network = FlooNetworkSavedData.get(level)
 		val fireplace = network.findFireplace(target)
