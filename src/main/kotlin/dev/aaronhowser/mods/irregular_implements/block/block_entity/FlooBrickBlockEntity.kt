@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
@@ -86,16 +87,19 @@ class FlooBrickBlockEntity(
 		const val CHILDREN_TAG = "Children"
 		const val MASTER_UUID_TAG = "MasterUUID"
 
-		fun processMessage(event: ServerChatEvent) {
+		fun processMessage(event: ServerChatEvent): Boolean {
 			val player = event.player
 			val level = player.serverLevel()
 
-			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return
-			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return
+			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return false
+			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return false
 
 			val message = event.message.string
+			val targetFireplace = FlooNetworkSavedData.get(level).findFireplace(message) ?: return false
 
+			targetFireplace.teleportTo(player)
 
+			return true
 		}
 
 	}

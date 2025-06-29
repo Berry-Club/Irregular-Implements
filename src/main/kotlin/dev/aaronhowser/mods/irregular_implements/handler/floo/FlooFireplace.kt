@@ -46,13 +46,18 @@ class FlooFireplace(
 			return false
 		}
 
-		val be = level.getBlockEntity(fireplace.masterBlockPos)
+		return teleportTo(player, target)
+	}
+
+	fun teleportTo(player: ServerPlayer, target: String): Boolean {
+		val level = player.serverLevel()
+		val be = level.getBlockEntity(this.masterBlockPos)
 		if (be !is FlooBrickBlockEntity) {
 			player.sendSystemMessage(Component.literal("The fireplace at '$target' is not properly constructed"))
 			return false
 		}
 
-		val destination = fireplace.getDestination(level)
+		val destination = this.getDestination(level)
 		if (destination == null) {
 			player.sendSystemMessage(Component.literal("The fireplace at '$target' is not properly constructed"))
 			return false
