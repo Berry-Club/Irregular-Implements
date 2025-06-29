@@ -28,6 +28,20 @@ class FlooBrickBlockEntity(
 	// Child properties
 	private var masterUUID: UUID? = null
 
+	fun setupMaster(uuid: UUID, facing: Direction, children: List<BlockPos>) {
+		this.isMaster = true
+		this.uuid = uuid
+		this.facing = facing
+		this.children = children
+		setChanged()
+	}
+
+	fun setupChild(masterUUID: UUID) {
+		this.isMaster = false
+		this.masterUUID = masterUUID
+		setChanged()
+	}
+
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
