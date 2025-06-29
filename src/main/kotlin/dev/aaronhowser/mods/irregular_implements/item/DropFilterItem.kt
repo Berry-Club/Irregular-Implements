@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
+//TODO: Test if this still works
 class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
@@ -68,16 +69,6 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 		fun stackIsDropFilter(stack: ItemStack): Boolean {
 			return stack.`is`(ModItems.DROP_FILTER) || stack.`is`(ModItems.VOIDING_DROP_FILTER)
-		}
-
-		fun setFilter(stack: ItemStack) {
-			val filter = ModItems.ITEM_FILTER.toStack()
-			ItemFilterItem.setTestingFilter(filter)
-
-			stack.set(
-				DataComponents.CONTAINER,
-				ItemContainerContents.fromItems(listOf(filter))
-			)
 		}
 
 		fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {

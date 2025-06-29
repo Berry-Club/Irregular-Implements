@@ -9,10 +9,10 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetector
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.PeaceCandleBlockEntity
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
+import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData.Companion.worldInformationSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
-import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData.Companion.worldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.util.EscapeRopeHandler
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions
@@ -156,18 +156,6 @@ object OtherEvents {
 
 	@SubscribeEvent
 	fun onServerChat(event: ServerChatEvent) {
-		val player = event.player
-		val heldItem = player.getItemInHand(InteractionHand.MAIN_HAND)
-
-		if (heldItem.`is`(ModItems.ITEM_FILTER)) {
-			ItemFilterItem.setTestingFilter(heldItem)
-			ItemFilterItem.testFilter(heldItem)
-		}
-
-		if (heldItem.`is`(ModItems.DROP_FILTER) || heldItem.`is`(ModItems.VOIDING_DROP_FILTER)) {
-			DropFilterItem.setFilter(heldItem)
-		}
-
 		ChatDetectorBlockEntity.processMessage(event)
 		GlobalChatDetectorBlockEntity.processMessage(event)
 	}
