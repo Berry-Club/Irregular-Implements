@@ -67,6 +67,11 @@ class FlooFireplace(
 		return true
 	}
 
+	/**
+	 * Ideally. this would return the center of the horizontally connected Floo Bricks.
+	 *
+	 * If that wouldn't be above a Floo Brick, it instead returns above the master block pos.
+	 */
 	fun getDestination(level: ServerLevel): Vec3? {
 		val be = getBlockEntity(level) ?: return null
 		val locations = be.children + masterBlockPos
@@ -78,7 +83,7 @@ class FlooFireplace(
 		val centerPos = Vec3(avgX, centers.first.y, avgZ)
 
 		val stateThere = level.getBlockState(BlockPos.containing(centerPos))
-		if (!stateThere.`is`(ModBlocks.FLOO_BRICK)) return locations.first().above().bottomCenter
+		if (!stateThere.`is`(ModBlocks.FLOO_BRICK)) return masterBlockPos.above().bottomCenter
 
 		return centerPos.add(0.0, 0.5, 0.0)
 	}
