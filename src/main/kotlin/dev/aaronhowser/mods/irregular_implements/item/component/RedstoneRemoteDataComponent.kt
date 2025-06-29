@@ -27,8 +27,7 @@ data class RedstoneRemoteDataComponent(
 	companion object {
 
 		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler? {
-			val component = stack.get(ModDataComponents.REDSTONE_REMOTE) ?: return null
-			return ItemInventoryItemHandler(stack, component)
+			return ItemInventoryItemHandler(stack, ModDataComponents.REDSTONE_REMOTE.get())
 		}
 
 		val CODEC: Codec<RedstoneRemoteDataComponent> =
@@ -36,20 +35,9 @@ data class RedstoneRemoteDataComponent(
 				instance.group(
 					NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)
 						.fieldOf("stacks")
-						.forGetter(::trimStacks),
+						.forGetter(RedstoneRemoteDataComponent::stacks),
 				).apply(instance, ::RedstoneRemoteDataComponent)
 			}
-
-		private fun trimStacks(
-			redstoneRemoteDataComponent: RedstoneRemoteDataComponent
-		): NonNullList<ItemStack> {
-			val array = redstoneRemoteDataComponent.stacks.toTypedArray()
-			val lastNonEmpty = array.indexOfLast { !it.isEmpty }
-
-			val trimmedArray = array.take(lastNonEmpty + 1).toTypedArray()
-
-			return NonNullList.of(ItemStack.EMPTY, *trimmedArray)
-		}
 
 		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, RedstoneRemoteDataComponent> =
 			StreamCodec.composite(

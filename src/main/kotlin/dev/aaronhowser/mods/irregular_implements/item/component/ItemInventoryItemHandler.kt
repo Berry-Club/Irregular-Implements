@@ -7,12 +7,12 @@ import net.neoforged.neoforge.items.ItemStackHandler
 
 class ItemInventoryItemHandler<T>(
 	val stack: ItemStack,
-	val dataComponent: T
-) : ItemStackHandler(dataComponent.getInventory())
+	val dataComponentType: DataComponentType<T>
+) : ItemStackHandler(stack.get(dataComponentType)?.getInventory() ?: NonNullList.create())
 		where T : ItemInventoryItemHandler.InventoryDataComponent {
 
 	init {
-		require(this.stack.has(dataComponent.getType())) { "ItemInventoryItemHandler created for stack that does not have the required data component" }
+		require(this.stack.has(dataComponentType)) { "ItemInventoryItemHandler created for stack that does not have the required data component" }
 	}
 
 	interface InventoryDataComponent {
@@ -21,7 +21,7 @@ class ItemInventoryItemHandler<T>(
 		fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>)
 	}
 
-	val copiedStacks: NonNullList<ItemStack> = NonNullList.withSize(stacks.size, ItemStack.EMPTY)
+	var copiedStacks: NonNullList<ItemStack> = NonNullList.withSize(stacks.size, ItemStack.EMPTY)
 
 	init {
 		for (i in stacks.indices) {
@@ -101,7 +101,7 @@ class ItemInventoryItemHandler<T>(
 
 	override fun onContentsChanged(slot: Int) {
 		super.onContentsChanged(slot)
-		dataComponent.setInventory(stack, copiedStacks)
+		stack.get(dataComponentType)?.setInventory(stack, copiedStacks)
 	}
 
 }
