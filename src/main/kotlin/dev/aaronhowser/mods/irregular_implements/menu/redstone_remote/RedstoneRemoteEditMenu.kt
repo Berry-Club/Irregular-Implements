@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import net.minecraft.world.Container
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -11,19 +12,19 @@ import net.minecraft.world.item.ItemStack
 
 class RedstoneRemoteEditMenu(
 	containerId: Int,
-	private val playerInventory: Inventory
+	private val playerInventory: Inventory,
+	private val container: Container
 ) : AbstractContainerMenu(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), containerId) {
 
-	// Uses a getter because when it mutates it only does so on server, and doesn't mutate the one on the client's copy of the menu
-	private val redstoneRemoteStack: ItemStack
-		get() =
-			if (playerInventory.player.mainHandItem.`is`(ModItems.REDSTONE_REMOTE.get())) {
-				playerInventory.player.mainHandItem
-			} else {
-				playerInventory.player.offhandItem
-			}
+	private fun getRedstoneRemoteStack(): ItemStack {
+		return if (playerInventory.player.mainHandItem.`is`(ModItems.REDSTONE_REMOTE.get())) {
+			playerInventory.player.mainHandItem
+		} else {
+			playerInventory.player.offhandItem
+		}
+	}
 
-	private var usingMainHand: Boolean = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === redstoneRemoteStack
+	private var usingMainHand: Boolean = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack()
 
 	init {
 
@@ -31,12 +32,10 @@ class RedstoneRemoteEditMenu(
 			val x = 8 + pairIndex * 18
 
 			val filterY = 18
-			val filterSlot = RedstoneRemoteFilterSlot(::redstoneRemoteStack, pairIndex, x, filterY)
-			this.addSlot(filterSlot)
+//			this.addSlot(filterSlot)
 
 			val displayY = 36
-			val displaySlot = RedstoneRemoteDisplaySlot(::redstoneRemoteStack, pairIndex, x, displayY)
-			this.addSlot(displaySlot)
+//			this.addSlot(displaySlot)
 		}
 
 		// Add the 27 slots of the player inventory

@@ -14,6 +14,8 @@ data class RedstoneRemoteDataComponent(
 	private val stacks: NonNullList<ItemStack>
 ) {
 
+	constructor() : this(NonNullList.withSize(18, ItemStack.EMPTY))
+
 	val handler: ItemStackHandler = ItemStackHandler(stacks)
 
 	companion object {
