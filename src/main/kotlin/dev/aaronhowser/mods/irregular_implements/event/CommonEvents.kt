@@ -163,6 +163,7 @@ object CommonEvents {
 
 	@SubscribeEvent
 	fun onServerChat(event: ServerChatEvent) {
+		FlooBrickBlockEntity.processMessage(event)
 		ChatDetectorBlockEntity.processMessage(event)
 		GlobalChatDetectorBlockEntity.processMessage(event)
 	}

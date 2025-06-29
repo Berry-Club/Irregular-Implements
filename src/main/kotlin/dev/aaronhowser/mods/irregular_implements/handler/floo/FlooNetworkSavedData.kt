@@ -18,7 +18,7 @@ class FlooNetworkSavedData : SavedData() {
 		setDirty()
 	}
 
-	fun addFireplace(masterUuid: UUID, name: String, blockPos: BlockPos) {
+	fun addFireplace(masterUuid: UUID, name: String?, blockPos: BlockPos) {
 		addFireplace(FlooFireplace(masterUuid, name, blockPos))
 	}
 
@@ -28,8 +28,12 @@ class FlooNetworkSavedData : SavedData() {
 		blockPos: BlockPos,
 		connectedBricks: List<BlockPos>
 	): Boolean {
-		if (name.isNullOrBlank()) return false
-		if (fireplaces.any { connectedBricks.contains(it.masterBlockPos) || it.name.lowercase() == name.lowercase() }) return false
+		for (fireplace in fireplaces) {
+			if (connectedBricks.contains(fireplace.masterBlockPos)) return false
+
+			val theirName = fireplace.name
+			if (theirName != null && theirName.lowercase() == name?.lowercase()) return false
+		}
 
 		addFireplace(masterUuid, name, blockPos)
 
@@ -37,7 +41,8 @@ class FlooNetworkSavedData : SavedData() {
 	}
 
 	fun findFireplace(name: String): FlooFireplace? {
-		return fireplaces.minByOrNull { Levenshtein.distance(it.name.lowercase(), name.lowercase()) }
+		val fireplacesWithNames = fireplaces.filter { !it.name.isNullOrBlank() }
+		return fireplacesWithNames.minByOrNull { Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
 	}
 
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {

@@ -9,7 +9,9 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.LongArrayTag
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.event.ServerChatEvent
 import java.util.*
+import kotlin.jvm.optionals.getOrNull
 
 class FlooBrickBlockEntity(
 	pos: BlockPos,
@@ -83,6 +85,19 @@ class FlooBrickBlockEntity(
 		const val FACING_TAG = "Facing"
 		const val CHILDREN_TAG = "Children"
 		const val MASTER_UUID_TAG = "MasterUUID"
+
+		fun processMessage(event: ServerChatEvent) {
+			val player = event.player
+			val level = player.serverLevel()
+
+			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return
+			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return
+
+			val message = event.message.string
+
+
+		}
+
 	}
 
 }

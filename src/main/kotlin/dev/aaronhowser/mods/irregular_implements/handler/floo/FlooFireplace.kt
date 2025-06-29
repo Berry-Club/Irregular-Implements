@@ -13,14 +13,14 @@ import java.util.*
 
 class FlooFireplace(
 	val masterUuid: UUID,
-	val name: String,
+	val name: String?,
 	val masterBlockPos: BlockPos
 ) {
 
 	fun toTag(): CompoundTag {
 		val tag = CompoundTag()
 		tag.putUUID(NBT_MASTER_UUID, masterUuid)
-		tag.putString(NBT_NAME, name)
+		if (name != null) tag.putString(NBT_NAME, name)
 		tag.putLong(NBT_BLOCK_POS, masterBlockPos.asLong())
 
 		return tag
@@ -96,7 +96,7 @@ class FlooFireplace(
 
 		fun fromTag(tag: CompoundTag): FlooFireplace {
 			val uuid = tag.getUUID(NBT_MASTER_UUID)
-			val name = tag.getString(NBT_NAME)
+			val name = tag.getString(NBT_NAME).ifBlank { null }
 			val blockPos = BlockPos.of(tag.getLong(NBT_BLOCK_POS))
 
 			return FlooFireplace(uuid, name, blockPos)
