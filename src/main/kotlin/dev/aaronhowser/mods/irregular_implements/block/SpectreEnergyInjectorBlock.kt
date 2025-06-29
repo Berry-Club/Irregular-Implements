@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity

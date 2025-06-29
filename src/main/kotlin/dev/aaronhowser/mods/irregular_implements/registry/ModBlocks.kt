@@ -340,7 +340,8 @@ object ModBlocks {
 	val LUMINOUS_STAINED_BRICKS_BLACK: DeferredBlock<Block> = coloredStone("luminous_stained_bricks_black", DyeColor.BLACK)
 
 	// Internal
-	val FLOO_BRICK = basicBlock("floo_brick")
+	val FLOO_BRICK: DeferredBlock<FlooBrickBlock> =
+		registerBlockWithoutItem("floo_brick", ::FlooBrickBlock)
 	val ANCIENT_BRICK = basicBlock("ancient_brick")
 
 	// Removed blocks:

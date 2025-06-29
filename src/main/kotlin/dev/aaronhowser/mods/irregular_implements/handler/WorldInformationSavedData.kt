@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.savedata
+package dev.aaronhowser.mods.irregular_implements.handler
 
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag

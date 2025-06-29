@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.savedata
+package dev.aaronhowser.mods.irregular_implements.handler
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.HolderLookup

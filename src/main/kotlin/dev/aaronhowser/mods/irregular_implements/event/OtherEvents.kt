@@ -11,8 +11,8 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.PeaceCandleB
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.savedata.RedstoneHandlerSavedData
-import dev.aaronhowser.mods.irregular_implements.savedata.WorldInformationSavedData.Companion.worldInformationSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData.Companion.worldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.util.EscapeRopeHandler
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions

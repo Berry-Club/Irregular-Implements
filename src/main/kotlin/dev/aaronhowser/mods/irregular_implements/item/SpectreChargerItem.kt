@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.network.chat.Component

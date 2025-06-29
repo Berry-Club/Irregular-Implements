@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
-import dev.aaronhowser.mods.irregular_implements.savedata.SpectreCoilSavedData.Companion.spectreCoilSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction

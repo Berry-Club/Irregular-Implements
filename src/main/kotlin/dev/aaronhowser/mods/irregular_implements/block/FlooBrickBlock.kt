@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -12,8 +13,8 @@ class FlooBrickBlock : Block(
 		.strength(2f, 10f)
 ), EntityBlock {
 
-	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? {
-		TODO("Not yet implemented")
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return FlooBrickBlockEntity(pos, state)
 	}
 
 }
