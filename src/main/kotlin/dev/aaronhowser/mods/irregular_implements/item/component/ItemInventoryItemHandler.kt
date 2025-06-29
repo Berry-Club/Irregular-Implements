@@ -5,7 +5,7 @@ import net.minecraft.core.component.DataComponentType
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.items.ItemStackHandler
 
-class ItemInventoryItemHandler<T>(
+open class ItemInventoryItemHandler<T>(
 	val stack: ItemStack,
 	val dataComponentType: DataComponentType<T>
 ) : ItemStackHandler(stack.get(dataComponentType)?.getInventory() ?: NonNullList.create())

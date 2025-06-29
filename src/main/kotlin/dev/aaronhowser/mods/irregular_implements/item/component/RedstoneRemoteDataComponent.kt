@@ -24,10 +24,19 @@ data class RedstoneRemoteDataComponent(
 		stack.set(getType(), RedstoneRemoteDataComponent(inventory))
 	}
 
+	fun getLocation(index: Int): ItemStack = stacks.getOrNull(index) ?: ItemStack.EMPTY
+	fun getDisplay(index: Int): ItemStack = stacks.getOrNull(index + 9) ?: ItemStack.EMPTY
+	fun getPair(index: Int): Pair<ItemStack, ItemStack> = getLocation(index) to getDisplay(index)
+
 	companion object {
 
-		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler? {
-			return ItemInventoryItemHandler(stack, ModDataComponents.REDSTONE_REMOTE.get())
+		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler {
+			return object : ItemInventoryItemHandler<RedstoneRemoteDataComponent>(stack, ModDataComponents.REDSTONE_REMOTE.get()) {
+				override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
+					if (slot < 9) return stack.has(ModDataComponents.LOCATION)
+					return true
+				}
+			}
 		}
 
 		val CODEC: Codec<RedstoneRemoteDataComponent> =
