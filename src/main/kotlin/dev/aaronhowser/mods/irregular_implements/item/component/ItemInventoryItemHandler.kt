@@ -101,7 +101,7 @@ class ItemInventoryItemHandler<T>(
 
 	override fun onContentsChanged(slot: Int) {
 		super.onContentsChanged(slot)
-		stack.get(dataComponentType)?.setInventory(stack, copiedStacks)
+		stack.get(dataComponentType)?.setInventory(stack, NonNullList.copyOf(copiedStacks))
 	}
 
 }
