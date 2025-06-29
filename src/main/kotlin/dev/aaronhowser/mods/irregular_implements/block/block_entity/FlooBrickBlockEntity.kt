@@ -20,8 +20,10 @@ class FlooBrickBlockEntity(
 
 	// Master properties
 	private var uuid: UUID = UUID.randomUUID()
-	private var facing: Direction = Direction.NORTH
-	private val children: MutableList<BlockPos> = mutableListOf()
+	var facing: Direction = Direction.NORTH
+		private set
+	var children: List<BlockPos> = listOf()
+		private set
 
 	// Child properties
 	private var masterUUID: UUID? = null
@@ -54,11 +56,7 @@ class FlooBrickBlockEntity(
 			val directionOrdinal = tag.getInt(FACING_TAG)
 			facing = Direction.entries[directionOrdinal]
 
-			children.clear()
-			val childrenList = tag.getLongArray(CHILDREN_TAG)
-			for (childLong in childrenList) {
-				children.add(BlockPos.of(childLong))
-			}
+			children = tag.getLongArray(CHILDREN_TAG).map(BlockPos::of)
 		} else {
 			masterUUID = tag.getUuidOrNull(MASTER_UUID_TAG)
 		}
