@@ -16,7 +16,13 @@ data class RedstoneRemoteDataComponent(
 
 	constructor() : this(NonNullList.withSize(18, ItemStack.EMPTY))
 
-	val handler: ItemStackHandler = ItemStackHandler(stacks)
+	val handler: ItemStackHandler = object : ItemStackHandler(stacks) {
+		override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
+			return if (slot < 9) {
+				stack.has(ModDataComponents.LOCATION)
+			} else true
+		}
+	}
 
 	companion object {
 

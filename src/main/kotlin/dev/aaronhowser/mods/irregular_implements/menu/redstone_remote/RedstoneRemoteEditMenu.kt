@@ -37,11 +37,7 @@ class RedstoneRemoteEditMenu(
 				val x = 8 + pairIndex * 18
 
 				val filterY = 18
-				val filterSlot = object : SlotItemHandler(itemHandler, pairIndex, x, filterY) {
-					override fun mayPlace(stack: ItemStack): Boolean {
-						return stack.has(ModDataComponents.LOCATION)
-					}
-				}
+				val filterSlot = SlotItemHandler(itemHandler, pairIndex, x, filterY)
 				this.addSlot(filterSlot)
 
 				val displayY = 36
