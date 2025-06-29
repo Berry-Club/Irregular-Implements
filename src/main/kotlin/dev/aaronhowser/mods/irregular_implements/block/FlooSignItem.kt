@@ -60,7 +60,7 @@ class FlooSignItem(properties: Properties) : Item(properties) {
 				val blockEntity = level.getBlockEntity(pos) as? FlooBrickBlockEntity ?: continue
 
 				if (pos == clickedPos) {
-					blockEntity.setupMaster(masterUuid, facing.opposite, blocksToConvert)
+					blockEntity.setupMaster(masterUuid, facing.opposite, blocksToConvert - clickedPos)
 				} else {
 					blockEntity.setupChild(masterUuid)
 				}
