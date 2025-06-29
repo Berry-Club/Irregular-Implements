@@ -46,10 +46,6 @@ class FlooNetworkSavedData : SavedData() {
 		return fireplacesWithNames.minByOrNull { Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
 	}
 
-	fun findFireplace(blockPos: BlockPos): FlooFireplace? {
-		return fireplaces.firstOrNull { it.masterBlockPos == blockPos }
-	}
-
 	fun findFireplace(flooBrickBlockEntity: FlooBrickBlockEntity): FlooFireplace? {
 		return fireplaces.firstOrNull { it.masterUuid == flooBrickBlockEntity.uuid || it.masterUuid == flooBrickBlockEntity.masterUUID }
 	}
