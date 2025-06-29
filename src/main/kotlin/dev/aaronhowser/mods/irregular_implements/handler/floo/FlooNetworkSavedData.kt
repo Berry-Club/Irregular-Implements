@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -43,6 +44,14 @@ class FlooNetworkSavedData : SavedData() {
 	fun findFireplace(name: String): FlooFireplace? {
 		val fireplacesWithNames = fireplaces.filter { !it.name.isNullOrBlank() }
 		return fireplacesWithNames.minByOrNull { Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
+	}
+
+	fun findFireplace(blockPos: BlockPos): FlooFireplace? {
+		return fireplaces.firstOrNull { it.masterBlockPos == blockPos }
+	}
+
+	fun findFireplace(flooBrickBlockEntity: FlooBrickBlockEntity): FlooFireplace? {
+		return fireplaces.firstOrNull { it.masterUuid == flooBrickBlockEntity.uuid || it.masterUuid == flooBrickBlockEntity.masterUUID }
 	}
 
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {

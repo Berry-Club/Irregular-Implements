@@ -22,14 +22,16 @@ class FlooBrickBlockEntity(
 	private var isMaster: Boolean = false
 
 	// Master properties
-	private var uuid: UUID = UUID.randomUUID()
+	var uuid: UUID = UUID.randomUUID()
+		private set
 	var facing: Direction = Direction.NORTH
 		private set
 	var children: List<BlockPos> = listOf()
 		private set
 
 	// Child properties
-	private var masterUUID: UUID? = null
+	var masterUUID: UUID? = null
+		private set
 
 	fun setupMaster(uuid: UUID, facing: Direction, children: List<BlockPos>) {
 		this.isMaster = true
@@ -94,12 +96,12 @@ class FlooBrickBlockEntity(
 			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return false
 			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return false
 
+			val standingOnFireplace = FlooNetworkSavedData.get(level)
+				.findFireplace(standingOnBE)
+				?: return false
+
 			val message = event.message.string
-			val targetFireplace = FlooNetworkSavedData.get(level).findFireplace(message) ?: return false
-
-			targetFireplace.teleportTo(player)
-
-			return true
+			return standingOnFireplace.teleportFromThis(player, message)
 		}
 
 	}

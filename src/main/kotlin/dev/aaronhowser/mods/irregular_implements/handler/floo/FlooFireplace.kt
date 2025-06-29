@@ -1,14 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.level.Level
-import net.minecraft.world.phys.Vec3
 import java.util.*
 
 class FlooFireplace(
@@ -30,38 +27,28 @@ class FlooFireplace(
 		return level.getBlockEntity(masterBlockPos) as? FlooBrickBlockEntity?
 	}
 
-	fun teleportFrom(player: ServerPlayer, target: String): Boolean {
-		if (target == name) {
-			player.sendSystemMessage(Component.literal("You are already at '$name'"))
-			return false
-		}
-
+	fun teleportFromThis(player: ServerPlayer, target: String): Boolean {
 		val level = player.serverLevel()
 
 		val data = FlooNetworkSavedData.get(level)
 		val fireplace = data.findFireplace(target)
 
 		if (fireplace == null) {
-			player.sendSystemMessage(Component.literal("Could not find fireplace named '$target'"))
+			player.displayClientMessage(Component.literal("Could not find fireplace named '$target'"), true)
+			return false
+		} else if (fireplace == this) {
+			player.displayClientMessage(Component.literal("You are already at '$target'"), true)
 			return false
 		}
 
-		return teleportTo(player, target)
+		return fireplace.teleportToThis(player)
 	}
 
-	fun teleportTo(player: ServerPlayer, target: String): Boolean {
+	fun teleportToThis(player: ServerPlayer): Boolean {
 		val level = player.serverLevel()
-		val be = level.getBlockEntity(this.masterBlockPos)
-		if (be !is FlooBrickBlockEntity) {
-			player.sendSystemMessage(Component.literal("The fireplace at '$target' is not properly constructed"))
-			return false
-		}
+		val be = level.getBlockEntity(this.masterBlockPos) as? FlooBrickBlockEntity ?: return false
 
-		val destination = this.getDestination(level)
-		if (destination == null) {
-			player.sendSystemMessage(Component.literal("The fireplace at '$target' is not properly constructed"))
-			return false
-		}
+		val destination = this.masterBlockPos.above().bottomCenter
 
 		player.teleportTo(
 			level,
@@ -70,28 +57,6 @@ class FlooFireplace(
 		)
 
 		return true
-	}
-
-	/**
-	 * Ideally. this would return the center of the horizontally connected Floo Bricks.
-	 *
-	 * If that wouldn't be above a Floo Brick, it instead returns above the master block pos.
-	 */
-	fun getDestination(level: ServerLevel): Vec3? {
-		val be = getBlockEntity(level) ?: return null
-		val locations = be.children + masterBlockPos
-
-		@Suppress("UsePropertyAccessSyntax")
-		val centers = locations.map(BlockPos::getCenter)
-		val avgX = centers.sumOf { it.x } / centers.size
-		val avgZ = centers.sumOf { it.z } / centers.size
-
-		val centerPos = Vec3(avgX, centers.first().y, avgZ)
-
-		val stateThere = level.getBlockState(BlockPos.containing(centerPos))
-		if (!stateThere.`is`(ModBlocks.FLOO_BRICK)) return masterBlockPos.above().bottomCenter
-
-		return centerPos.add(0.0, 0.5, 0.0)
 	}
 
 	companion object {
