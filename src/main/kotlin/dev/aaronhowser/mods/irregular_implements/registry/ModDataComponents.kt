@@ -198,4 +198,11 @@ object ModDataComponents {
 				.networkSynchronized(ByteBufCodecs.fromCodec(codec))
 		}
 
+	val FLOO_POWDER: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("floo_powder") {
+			it
+				.persistent(Codec.INT)
+				.networkSynchronized(ByteBufCodecs.VAR_INT)
+		}
+
 }

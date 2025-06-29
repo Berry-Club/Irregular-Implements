@@ -205,7 +205,8 @@ object ModItems {
 	val FLOO_SIGN: DeferredItem<FlooSignItem> =
 		register("floo_sign", ::FlooSignItem)
 	val FLOO_TOKEN = basic("floo_token")
-	val FLOO_POUCH = basic("floo_pouch")
+	val FLOO_POUCH: DeferredItem<FlooPouchItem> =
+		register("floo_pouch", ::FlooPouchItem, FlooPouchItem.DEFAULT_PROPERTIES)
 
 	// Sound
 	val SOUND_PATTERN = basic("sound_pattern")
