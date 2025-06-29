@@ -3,11 +3,11 @@ package dev.aaronhowser.mods.irregular_implements.handler.floo
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 import java.util.*
 
@@ -24,6 +24,10 @@ class FlooFireplace(
 		tag.putLong(NBT_BLOCK_POS, masterBlockPos.asLong())
 
 		return tag
+	}
+
+	fun getBlockEntity(level: Level): FlooBrickBlockEntity? {
+		return level.getBlockEntity(masterBlockPos) as? FlooBrickBlockEntity?
 	}
 
 	fun teleportFrom(player: ServerPlayer, target: String): Boolean {
@@ -57,15 +61,15 @@ class FlooFireplace(
 		player.teleportTo(
 			level,
 			destination.x, destination.y, destination.z,
-			be.
+			be.facing.toYRot(), 0f
 		)
 
 		return true
 	}
 
 	fun getDestination(level: ServerLevel): Vec3? {
-		val locations = collectBrickLocations(level)
-		if (locations.isEmpty()) return null
+		val be = getBlockEntity(level) ?: return null
+		val locations = be.children + masterBlockPos
 
 		val centers = locations.map(BlockPos::center)
 		val avgX = centers.sumOf { it.x } / centers.size
@@ -77,34 +81,6 @@ class FlooFireplace(
 		if (!stateThere.`is`(ModBlocks.FLOO_BRICK)) return locations.first().above().bottomCenter
 
 		return centerPos.add(0.0, 0.5, 0.0)
-	}
-
-	fun collectBrickLocations(level: ServerLevel): List<BlockPos> {
-		val toCheck = mutableSetOf(masterBlockPos)
-		val checked = mutableSetOf<BlockPos>()
-		val found = mutableSetOf<BlockPos>()
-
-		while (toCheck.isNotEmpty()) {
-			if (checked.size >= 1000) return found.toList()
-
-			val pos = toCheck.first()
-			val state = level.getBlockState(pos)
-
-			checked.add(pos)
-
-			if (state.`is`(ModBlocks.FLOO_BRICK)) {
-				found.add(pos)
-
-				for (dir in Direction.entries) {
-					if (dir.axis.isVertical) continue
-					val offset = pos.relative(dir)
-					if (offset in checked) continue
-					toCheck.add(offset)
-				}
-			}
-		}
-
-		return found.toList()
 	}
 
 	companion object {
