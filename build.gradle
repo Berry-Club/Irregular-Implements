@@ -123,7 +123,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'thedarkcolour:kotlinforforge-neoforge:5.8.0'
+	implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
 
 	compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
 	runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
