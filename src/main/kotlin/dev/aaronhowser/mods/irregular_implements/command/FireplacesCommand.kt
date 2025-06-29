@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.command
 
+import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.builder.ArgumentBuilder
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import net.minecraft.commands.CommandSourceStack
@@ -9,6 +10,8 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.Level
 
 object FireplacesCommand {
+
+	private const val FIREPLACE_NAME = "fireplace_name"
 
 	fun register(): ArgumentBuilder<CommandSourceStack, *> {
 		return Commands
@@ -21,6 +24,35 @@ object FireplacesCommand {
 						listFireplaces(source, levelRk)
 					}
 			)
+			.then(
+				Commands.literal("teleport-to")
+					.requires { it.hasPermission(2) }
+					.then(
+						Commands.argument(FIREPLACE_NAME, StringArgumentType.greedyString())
+							.executes { ctx ->
+								val source = ctx.source
+								val target = StringArgumentType.getString(ctx, FIREPLACE_NAME)
+								teleportTo(source, target)
+							}
+					)
+			)
+	}
+
+	private fun teleportTo(source: CommandSourceStack, target: String): Int {
+		val player = source.playerOrException
+		val level = player.serverLevel()
+
+		val network = FlooNetworkSavedData.get(level)
+		val fireplace = network.findFireplace(target)
+
+		if (fireplace == null) {
+			source.sendFailure(Component.literal("Could not find fireplace named '$target'"))
+			return 0
+		}
+
+		fireplace.teleportToThis(player)
+
+		return 1
 	}
 
 	private fun listFireplaces(source: CommandSourceStack, levelRk: ResourceKey<Level>): Int {
