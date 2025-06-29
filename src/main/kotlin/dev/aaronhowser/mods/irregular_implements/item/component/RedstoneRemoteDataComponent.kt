@@ -2,104 +2,39 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
+import net.neoforged.neoforge.items.ItemStackHandler
 
 data class RedstoneRemoteDataComponent(
-	val locationFilters: NonNullList<ItemStack>,
-	val displayStacks: NonNullList<ItemStack>
+	private val stacks: NonNullList<ItemStack>
 ) {
 
-	constructor() : this(emptyMap())
-
-	constructor(map: Map<ItemStack, ItemStack>) : this(
-		locationFilters = sanitizeList(map.keys.toList()),
-		displayStacks = sanitizeList(map.values.toList())
-	)
-
-	fun copyWithNewFilter(newFilter: ItemStack, index: Int): RedstoneRemoteDataComponent {
-		val newLocationFilters = NonNullList.withSize(9, ItemStack.EMPTY)
-		val newDisplayStacks = NonNullList.withSize(9, ItemStack.EMPTY)
-
-		for (i in 0 until 9) {
-			newLocationFilters[i] = getLocation(i).copy()
-			newDisplayStacks[i] = getDisplay(i).copy()
-		}
-
-		newLocationFilters[index] = newFilter
-
-		return RedstoneRemoteDataComponent(newLocationFilters, newDisplayStacks)
-	}
-
-	fun copyWithNewDisplay(newDisplay: ItemStack, index: Int): RedstoneRemoteDataComponent {
-		val newLocationFilters = NonNullList.withSize(9, ItemStack.EMPTY)
-		val newDisplayStacks = NonNullList.withSize(9, ItemStack.EMPTY)
-
-		for (i in 0 until 9) {
-			newLocationFilters[i] = locationFilters.getOrNull(i)?.copy() ?: ItemStack.EMPTY
-			newDisplayStacks[i] = displayStacks.getOrNull(i)?.copy() ?: ItemStack.EMPTY
-		}
-
-		newDisplayStacks[index] = newDisplay
-
-		return RedstoneRemoteDataComponent(newLocationFilters, newDisplayStacks)
-	}
-
-	fun getPair(index: Int): Pair<ItemStack, ItemStack> {
-		return Pair(getLocation(index), getDisplay(index))
-	}
-
-	fun getLocation(index: Int): ItemStack {
-		return locationFilters.getOrNull(index) ?: ItemStack.EMPTY
-	}
-
-	fun getDisplay(index: Int): ItemStack {
-		return displayStacks.getOrNull(index) ?: ItemStack.EMPTY
-	}
+	val handler: ItemStackHandler = ItemStackHandler(stacks)
 
 	companion object {
 
-		fun sanitizeList(list: List<ItemStack>): NonNullList<ItemStack> {
-			val sanitizedEntries = NonNullList.withSize(9, ItemStack.EMPTY)
-
-			for (index in 0 until 9) {
-				val entry = list.getOrNull(index) ?: continue
-				sanitizedEntries[index] = entry
-			}
-
-			return sanitizedEntries
+		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler? {
+			return stack.get(ModDataComponents.REDSTONE_REMOTE)?.handler
 		}
 
 		val CODEC: Codec<RedstoneRemoteDataComponent> =
 			RecordCodecBuilder.create { instance ->
 				instance.group(
 					NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)
-						.fieldOf("locations")
-						.forGetter(::trimLocationFilters),
-					NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)
-						.fieldOf("icons")
-						.forGetter(::trimDisplayStacks)
+						.fieldOf("stacks")
+						.forGetter(::trimStacks),
 				).apply(instance, ::RedstoneRemoteDataComponent)
 			}
 
-		private fun trimLocationFilters(
+		private fun trimStacks(
 			redstoneRemoteDataComponent: RedstoneRemoteDataComponent
 		): NonNullList<ItemStack> {
-			val array = redstoneRemoteDataComponent.locationFilters.toTypedArray()
-			val lastNonEmpty = array.indexOfLast { !it.isEmpty }
-
-			val trimmedArray = array.take(lastNonEmpty + 1).toTypedArray()
-
-			return NonNullList.of(ItemStack.EMPTY, *trimmedArray)
-		}
-
-		private fun trimDisplayStacks(
-			redstoneRemoteDataComponent: RedstoneRemoteDataComponent
-		): NonNullList<ItemStack> {
-			val array = redstoneRemoteDataComponent.displayStacks.toTypedArray()
+			val array = redstoneRemoteDataComponent.stacks.toTypedArray()
 			val lastNonEmpty = array.indexOfLast { !it.isEmpty }
 
 			val trimmedArray = array.take(lastNonEmpty + 1).toTypedArray()
@@ -109,8 +44,7 @@ data class RedstoneRemoteDataComponent(
 
 		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, RedstoneRemoteDataComponent> =
 			StreamCodec.composite(
-				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)), RedstoneRemoteDataComponent::locationFilters,
-				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)), RedstoneRemoteDataComponent::displayStacks,
+				ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC)), RedstoneRemoteDataComponent::stacks,
 				::RedstoneRemoteDataComponent
 			)
 

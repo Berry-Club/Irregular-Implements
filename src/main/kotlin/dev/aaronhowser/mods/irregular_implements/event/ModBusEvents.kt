@@ -5,9 +5,11 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterf
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
+import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.capabilities.Capabilities
@@ -44,6 +46,12 @@ object ModBusEvents {
 			Capabilities.ItemHandler.BLOCK,
 			ModBlockEntities.PLAYER_INTERFACE.get(),
 			PlayerInterfaceBlockEntity::getCapability
+		)
+
+		event.registerItem(
+			Capabilities.ItemHandler.ITEM,
+			RedstoneRemoteDataComponent::getCapability,
+			ModItems.REDSTONE_REMOTE.get()
 		)
 	}
 
