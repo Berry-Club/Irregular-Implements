@@ -46,7 +46,7 @@ class FlooSignItem(properties: Properties) : Item(properties) {
 
 			val masterUuid = UUID.randomUUID()
 
-			val canCreate = name == null || FlooNetworkSavedData.get(level).createFireplace(
+			val canCreate = FlooNetworkSavedData.get(level).createFireplace(
 				masterUuid = masterUuid,
 				name = name,
 				blockPos = clickedPos,
