@@ -65,6 +65,10 @@ class FlooFireplace(
 			be.facing.toYRot(), 0f
 		)
 
+		if (name != null) {
+			player.displayClientMessage(Component.literal("Teleported to '$name'"), true)
+		}
+
 		return true
 	}
 
