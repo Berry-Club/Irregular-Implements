@@ -21,7 +21,7 @@ class ItemInventoryItemHandler<T>(
 		fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>)
 	}
 
-	var copiedStacks: NonNullList<ItemStack> = NonNullList.withSize(stacks.size, ItemStack.EMPTY)
+	val copiedStacks: NonNullList<ItemStack> = NonNullList.withSize(stacks.size, ItemStack.EMPTY)
 
 	init {
 		for (i in stacks.indices) {
