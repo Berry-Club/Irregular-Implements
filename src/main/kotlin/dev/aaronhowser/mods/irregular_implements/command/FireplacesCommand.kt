@@ -5,6 +5,8 @@ import com.mojang.brigadier.builder.ArgumentBuilder
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
+import net.minecraft.commands.arguments.ResourceLocationArgument
+import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.Level
@@ -12,6 +14,7 @@ import net.minecraft.world.level.Level
 object FireplacesCommand {
 
 	private const val FIREPLACE_NAME = "fireplace_name"
+	private const val DIMENSION = "dimension"
 
 	fun register(): ArgumentBuilder<CommandSourceStack, *> {
 		return Commands
@@ -23,6 +26,17 @@ object FireplacesCommand {
 						val levelRk = source.level.dimension()
 						listFireplaces(source, levelRk)
 					}
+					.then(
+						Commands.argument(DIMENSION, ResourceLocationArgument.id())
+							.suggests(ModCommands.SUGGEST_LEVEL_RKS)
+							.executes { ctx ->
+								val source = ctx.source
+								val levelRl = ResourceLocationArgument.getId(ctx, DIMENSION)
+								val levelRk = ResourceKey.create(Registries.DIMENSION, levelRl)
+
+								listFireplaces(source, levelRk)
+							}
+					)
 			)
 			.then(
 				Commands.literal("teleport-to")
