@@ -23,7 +23,6 @@ class ModBlockTagsProvider(
 ) : BlockTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
-
 		this.tag(CUSTOM_CRAFTING_TABLE_BLACKLIST)
 			.add(
 				Blocks.AIR,
@@ -411,6 +410,11 @@ class ModBlockTagsProvider(
 				ModBlocks.SPECTRE_LEAVES.get()
 			)
 
+		this.tag(CONVERTS_TO_FLOO_BRICK)
+			.add(
+				Blocks.BRICKS
+			)
+
 	}
 
 	private fun colorTags() {
@@ -464,6 +468,7 @@ class ModBlockTagsProvider(
 		val C_STRIPPED_WOODS = common("stripped_woods")
 		val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
 		val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
+		val CONVERTS_TO_FLOO_BRICK = create("converts_to_floo_brick")
 	}
 
 }

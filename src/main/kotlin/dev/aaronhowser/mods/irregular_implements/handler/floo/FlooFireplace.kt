@@ -76,11 +76,12 @@ class FlooFireplace(
 		val be = getBlockEntity(level) ?: return null
 		val locations = be.children + masterBlockPos
 
-		val centers = locations.map(BlockPos::center)
+		@Suppress("UsePropertyAccessSyntax")
+		val centers = locations.map(BlockPos::getCenter)
 		val avgX = centers.sumOf { it.x } / centers.size
 		val avgZ = centers.sumOf { it.z } / centers.size
 
-		val centerPos = Vec3(avgX, centers.first.y, avgZ)
+		val centerPos = Vec3(avgX, centers.first().y, avgZ)
 
 		val stateThere = level.getBlockState(BlockPos.containing(centerPos))
 		if (!stateThere.`is`(ModBlocks.FLOO_BRICK)) return masterBlockPos.above().bottomCenter

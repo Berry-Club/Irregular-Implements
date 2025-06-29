@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-14T20:07:59.8151974	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-06-29T00:43:06.4504611	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -25,6 +25,7 @@ da740397a876a5b0aef7f82114a536007098d2f4 data/c/tags/block/stripped_woods.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_destabilizer_blacklist.json
 176956da2ca540b41940ab90ff1ba3684ffc12d8 data/irregular_implements/tags/block/block_mover_blacklist.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_replacer_blacklist.json
+78324d910f5cc8784b4ebcd3728d920fa0ab2e6d data/irregular_implements/tags/block/converts_to_floo_brick.json
 aaaec71341b3665b5da99261bcb506dec23dcede data/irregular_implements/tags/block/custom_crafting_table_blacklist.json
 42feff80ecc6486ed11bba53612d77101cfbe694 data/irregular_implements/tags/block/diaphanous_block_blacklist.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/block/super_lubricated.json

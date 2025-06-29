@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-03T22:35:42.9712523	Loot Tables
+// 1.21.1	2025-06-29T00:42:27.8064371	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -66,7 +66,7 @@ b9a9a817f58f53fa4e3becd4b95816d997ffc1c8 data/irregular_implements/loot_table/bl
 c78b31501341c164b2dd2d2e314173b7de7c05a9 data/irregular_implements/loot_table/blocks/fertilized_dirt.json
 b56d48ae8b7a3171c1d2f6137bff6aa4febdb237 data/irregular_implements/loot_table/blocks/filtered_redirector_plate.json
 ec93e9541030545ba6a01b2d245e40b0b4f589e6 data/irregular_implements/loot_table/blocks/filtered_super_lubricant_platform.json
-006b392298d32079a1d55f56414d2a200bc9cc97 data/irregular_implements/loot_table/blocks/floo_brick.json
+6e169d029a007790afdd2337972511d3c2b4e81e data/irregular_implements/loot_table/blocks/floo_brick.json
 df80f60cd7d6fe34326c51bfea768c81b382d131 data/irregular_implements/loot_table/blocks/fluid_display.json
 3a8d4b485d123c11760c5378e65a0eb21b4995bc data/irregular_implements/loot_table/blocks/global_chat_detector.json
 4cf9411c7cfec5bd39807737c445e3fe69c68853 data/irregular_implements/loot_table/blocks/glowing_mushroom.json
