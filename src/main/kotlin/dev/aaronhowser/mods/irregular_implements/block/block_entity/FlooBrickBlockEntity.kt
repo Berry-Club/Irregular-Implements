@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -119,8 +120,16 @@ class FlooBrickBlockEntity(
 
 		fun processMessage(event: ServerChatEvent): Boolean {
 			val player = event.player
-			val level = player.serverLevel()
 
+			val isHoldingFlooPowder = player.isHolding(ModItems.FLOO_POWDER.get())
+			val hasFlooPouch = player.inventory.contains { it.`is`(ModItems.FLOO_POUCH) }
+
+			if (!player.isCreative && !isHoldingFlooPowder) {
+				//TODO: Make it also check if the floo pouch has powder in it
+				if (!hasFlooPouch) return false
+			}
+
+			val level = player.serverLevel()
 			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return false
 			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return false
 
@@ -129,7 +138,25 @@ class FlooBrickBlockEntity(
 				?: return false
 
 			val message = event.message.string
-			return standingOnFireplace.teleportFromThis(player, message)
+			val success = standingOnFireplace.teleportFromThis(player, message)
+
+			if (success) {
+				if (!player.hasInfiniteMaterials()) {
+					if (isHoldingFlooPowder) {
+						val flooPowderStack = if (player.mainHandItem.`is`(ModItems.FLOO_POWDER.get())) {
+							player.mainHandItem
+						} else {
+							player.offhandItem
+						}
+
+						flooPowderStack.shrink(1)
+					} else if (hasFlooPouch) {
+						//TODO: Implement floo pouch usage
+					}
+				}
+			}
+
+			return success
 		}
 
 	}
