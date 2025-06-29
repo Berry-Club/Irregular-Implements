@@ -14,33 +14,33 @@ object ModBlocks {
 	val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
 
 	val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
-		registerBlock("fertilized_dirt") { FertilizedDirtBlock() }
+		registerBlock("fertilized_dirt", ::FertilizedDirtBlock)
 	val IMBUING_STATION: DeferredBlock<ImbuingStationBlock> =
-		registerBlock("imbuing_station") { ImbuingStationBlock() }
+		registerBlock("imbuing_station", ::ImbuingStationBlock)
 	val FLUID_DISPLAY = basicBlock("fluid_display")
 	val ENDER_MAILBOX = basicBlock("ender_mailbox")
 	val POTION_VAPORIZER = basicBlock("potion_vaporizer")
 	val RAIN_SHIELD: DeferredBlock<RainShieldBlock> =
-		registerBlock("rain_shield") { RainShieldBlock() }
+		registerBlock("rain_shield", ::RainShieldBlock)
 	val COMPRESSED_SLIME_BLOCK: DeferredBlock<CompressedSlimeBlock> =
-		registerBlock("compressed_slime_block") { CompressedSlimeBlock() }
+		registerBlock("compressed_slime_block", ::CompressedSlimeBlock)
 	val BIOME_RADAR = basicBlock("biome_radar")     // Custom canSurvive and onPlace that automatically does the antenna
 	val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
 	val SLIME_CUBE = basicBlock("slime_cube")
 	val PEACE_CANDLE: DeferredBlock<PeaceCandleBlock> =
-		registerBlock("peace_candle") { PeaceCandleBlock() }
+		registerBlock("peace_candle", ::PeaceCandleBlock)
 	val SOUND_BOX = basicBlock("sound_box")
 	val SOUND_DAMPENER = basicBlock("sound_dampener")
 
 	// Plants
 	val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
-		registerBlock("sakanade_spores") { SakanadeBlock() }
+		registerBlock("sakanade_spores", ::SakanadeBlock)
 	val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
-		registerBlock("pitcher_plant") { PitcherPlantBlock() }
+		registerBlock("pitcher_plant", ::PitcherPlantBlock)
 	val LOTUS: DeferredBlock<LotusBlock> =
-		registerBlockWithoutItem("lotus") { LotusBlock() }
+		registerBlockWithoutItem("lotus", ::LotusBlock)
 	val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
-		registerBlockWithoutItem("bean_sprout") { BeanSproutBlock() }   //TODO: Naturally generating
+		registerBlockWithoutItem("bean_sprout", ::BeanSproutBlock)   //TODO: Naturally generating
 	val BEAN_POD: DeferredBlock<Block> =
 		registerBlock("bean_pod") { Block(Properties.ofFullCopy(Blocks.POTATOES).strength(0.5f)) }
 	val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
@@ -62,25 +62,25 @@ object ModBlocks {
 
 	// Redstone blocks
 	val ANALOG_EMITTER: DeferredBlock<AnalogEmitterBlock> =
-		registerBlock("analog_emitter") { AnalogEmitterBlock() }
+		registerBlock("analog_emitter", ::AnalogEmitterBlock)
 	val CONTACT_BUTTON: DeferredBlock<ContactButtonBlock> =
-		registerBlock("contact_button") { ContactButtonBlock() }
+		registerBlock("contact_button", ::ContactButtonBlock)
 	val CONTACT_LEVER: DeferredBlock<ContactLeverBlock> =
-		registerBlock("contact_lever") { ContactLeverBlock() }
+		registerBlock("contact_lever", ::ContactLeverBlock)
 	val IRON_DROPPER: DeferredBlock<IronDropperBlock> =
-		registerBlock("iron_dropper") { IronDropperBlock() }
+		registerBlock("iron_dropper", ::IronDropperBlock)
 	val IGNITER: DeferredBlock<IgniterBlock> =
-		registerBlock("igniter") { IgniterBlock() }
+		registerBlock("igniter", ::IgniterBlock)
 	val INVENTORY_TESTER: DeferredBlock<InventoryTesterBlock> =
-		registerBlock("inventory_tester") { InventoryTesterBlock() }
+		registerBlock("inventory_tester", ::InventoryTesterBlock)
 	val BLOCK_DESTABILIZER: DeferredBlock<BlockDestabilizerBlock> =
-		registerBlock("block_destabilizer") { BlockDestabilizerBlock() }
+		registerBlock("block_destabilizer", ::BlockDestabilizerBlock)
 	val BLOCK_BREAKER: DeferredBlock<BlockBreakerBlock> =
-		registerBlock("block_breaker") { BlockBreakerBlock() }
+		registerBlock("block_breaker", ::BlockBreakerBlock)
 	val REDSTONE_OBSERVER: DeferredBlock<RedstoneObserverBlock> =
-		registerBlock("redstone_observer") { RedstoneObserverBlock() }
+		registerBlock("redstone_observer", ::RedstoneObserverBlock)
 	val SIDED_BLOCK_OF_REDSTONE =
-		registerBlock("sided_redstone") { SidedRedstoneBlock() }
+		registerBlock("sided_redstone", ::SidedRedstoneBlock)
 	val ADVANCED_REDSTONE_REPEATER = basicBlock("advanced_redstone_repeater")
 	val ADVANCED_REDSTONE_TORCH = basicBlock("advanced_redstone_torch")
 
@@ -92,21 +92,21 @@ object ModBlocks {
 
 	// No Item
 	val BLAZE_FIRE: DeferredBlock<BlazeFireBlock> =
-		registerBlockWithoutItem("blaze_fire") { BlazeFireBlock() }
+		registerBlockWithoutItem("blaze_fire", ::BlazeFireBlock)
 	val LESSER_BEAN_STALK: DeferredBlock<BeanStalkBlock> =
 		registerBlockWithoutItem("lesser_bean_stalk") { BeanStalkBlock(isStrong = false) }
 	val BEAN_STALK: DeferredBlock<BeanStalkBlock> =
 		registerBlockWithoutItem("bean_stalk") { BeanStalkBlock(isStrong = true) }
 	val DIAPHANOUS_BLOCK: DeferredBlock<DiaphanousBlock> =
-		registerBlockWithoutItem("diaphanous_block") { DiaphanousBlock() }
+		registerBlockWithoutItem("diaphanous_block", ::DiaphanousBlock)
 
 	@JvmField
 	val CUSTOM_CRAFTING_TABLE: DeferredBlock<CustomCraftingTableBlock> =
-		registerBlockWithoutItem("custom_crafting_table") { CustomCraftingTableBlock() }
+		registerBlockWithoutItem("custom_crafting_table", ::CustomCraftingTableBlock)
 
 	// Glass
 	val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
-		registerBlock("trigger_glass") { TriggerGlassBlock() }
+		registerBlock("trigger_glass", ::TriggerGlassBlock)
 	val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
 		registerBlock("lapis_glass") { PermeableGlassBlock.LAPIS }
 	val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
@@ -114,7 +114,7 @@ object ModBlocks {
 
 	// Lamp
 	val RAINBOW_LAMP =
-		registerBlock("rainbow_lamp") { RainbowLampBlock() }    //TODO: animate the item color
+		registerBlock("rainbow_lamp", ::RainbowLampBlock)    //TODO: animate the item color
 
 	// Ender Bridge
 	val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
@@ -136,37 +136,37 @@ object ModBlocks {
 
 	// Not above 1.6.4
 	val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
-		registerBlock("shock_absorber") { ShockAbsorberBlock() }
+		registerBlock("shock_absorber", ::ShockAbsorberBlock)
 	val AUTO_PLACER = basicBlock("auto_placer")
 	val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Stores a Location Filter that's pointing at another Block Teleporter, then teleports the block there. Should make it require a redstone pulse.
 	val BLOCK_DETECTOR = basicBlock("block_detector")   // Stores a Block Filter (which doesn't exist now) and emits a redstone signal if the block STATE is in front of it
 	val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
-		registerBlock("moon_phase_detector") { MoonPhaseDetectorBlock() }
+		registerBlock("moon_phase_detector", ::MoonPhaseDetectorBlock)
 
 	// Detectors
 	val ONLINE_DETECTOR: DeferredBlock<OnlineDetectorBlock> =
-		registerBlock("online_detector") { OnlineDetectorBlock() }
+		registerBlock("online_detector", ::OnlineDetectorBlock)
 	val CHAT_DETECTOR: DeferredBlock<ChatDetectorBlock> =
-		registerBlock("chat_detector") { ChatDetectorBlock() }
+		registerBlock("chat_detector", ::ChatDetectorBlock)
 	val GLOBAL_CHAT_DETECTOR: DeferredBlock<GlobalChatDetectorBlock> =
-		registerBlock("global_chat_detector") { GlobalChatDetectorBlock() }
+		registerBlock("global_chat_detector", ::GlobalChatDetectorBlock)
 	val ENTITY_DETECTOR = basicBlock("entity_detector")
 
 	// Interfaces
 	val PLAYER_INTERFACE: DeferredBlock<PlayerInterfaceBlock> =
-		registerBlock("player_interface") { PlayerInterfaceBlock() }
+		registerBlock("player_interface", ::PlayerInterfaceBlock)
 	val NOTIFICATION_INTERFACE: DeferredBlock<NotificationInterfaceBlock> =
-		registerBlock("notification_interface") { NotificationInterfaceBlock() }
+		registerBlock("notification_interface", ::NotificationInterfaceBlock)
 	val BASIC_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBasicBlock> =
-		registerBlock("basic_redstone_interface") { RedstoneInterfaceBasicBlock() }
+		registerBlock("basic_redstone_interface", ::RedstoneInterfaceBasicBlock)
 	val ADVANCED_REDSTONE_INTERFACE = basicBlock("advanced_redstone_interface")
 
 	// Spectre blocks
 	val SPECTRE_BLOCK = basicBlock("spectre_block")
 	val SPECTRE_LENS: DeferredBlock<SpectreLensBlock> =
-		registerBlock("spectre_lens") { SpectreLensBlock() }
+		registerBlock("spectre_lens", ::SpectreLensBlock)
 	val SPECTRE_ENERGY_INJECTOR: DeferredBlock<SpectreEnergyInjectorBlock> =
-		registerBlock("spectre_energy_injector") { SpectreEnergyInjectorBlock() }
+		registerBlock("spectre_energy_injector", ::SpectreEnergyInjectorBlock)
 	val SPECTRE_COIL_BASIC: DeferredBlock<SpectreCoilBlock> =
 		registerBlock("spectre_coil_basic") { SpectreCoilBlock.BASIC }
 	val SPECTRE_COIL_REDSTONE: DeferredBlock<SpectreCoilBlock> =
@@ -201,23 +201,23 @@ object ModBlocks {
 	// Plates
 	val PROCESSING_PLATE = basicBlock("processing_plate")
 	val REDIRECTOR_PLATE: DeferredBlock<RedirectorPlateBlock> =
-		registerBlock("redirector_plate") { RedirectorPlateBlock() }
+		registerBlock("redirector_plate", ::RedirectorPlateBlock)
 	val FILTERED_REDIRECTOR_PLATE = basicBlock("filtered_redirector_plate")
 	val REDSTONE_PLATE = basicBlock("redstone_plate")
 	val CORRECTOR_PLATE: DeferredBlock<CorrectorPlateBlock> =
-		registerBlock("corrector_plate") { CorrectorPlateBlock() }
+		registerBlock("corrector_plate", ::CorrectorPlateBlock)
 	val ITEM_SEALER_PLATE: DeferredBlock<ItemSealerPlate> =
-		registerBlock("item_sealer_plate") { ItemSealerPlate() }
+		registerBlock("item_sealer_plate", ::ItemSealerPlate)
 	val ITEM_REJUVENATOR_PLATE: DeferredBlock<ItemRejuvenatorPlate> =
-		registerBlock("item_rejuvenator_plate") { ItemRejuvenatorPlate() }
+		registerBlock("item_rejuvenator_plate", ::ItemRejuvenatorPlate)
 	val ACCELERATOR_PLATE: DeferredBlock<AcceleratorPlateBlock> =
-		registerBlock("accelerator_plate") { AcceleratorPlateBlock() }
+		registerBlock("accelerator_plate", ::AcceleratorPlateBlock)
 	val DIRECTIONAL_ACCELERATOR_PLATE: DeferredBlock<DirectionalAcceleratorPlateBlock> =
-		registerBlock("directional_accelerator_plate") { DirectionalAcceleratorPlateBlock() }
+		registerBlock("directional_accelerator_plate", ::DirectionalAcceleratorPlateBlock)
 	val BOUNCY_PLATE: DeferredBlock<BouncyPlateBlock> =
-		registerBlock("bouncy_plate") { BouncyPlateBlock() }
+		registerBlock("bouncy_plate", ::BouncyPlateBlock)
 	val COLLECTION_PLATE: DeferredBlock<CollectionPlateBlock> =
-		registerBlock("collection_plate") { CollectionPlateBlock() }
+		registerBlock("collection_plate", ::CollectionPlateBlock)
 	val EXTRACTION_PLATE = basicBlock("extraction_plate")
 
 	// Platform
