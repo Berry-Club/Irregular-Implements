@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.NonNullList
+import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
@@ -12,22 +13,22 @@ import net.neoforged.neoforge.items.ItemStackHandler
 
 data class RedstoneRemoteDataComponent(
 	private val stacks: NonNullList<ItemStack>
-) {
+) : ItemInventoryItemHandler.InventoryDataComponent {
 
 	constructor() : this(NonNullList.withSize(18, ItemStack.EMPTY))
 
-	val handler: ItemStackHandler = object : ItemStackHandler(stacks) {
-		override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-			return if (slot < 9) {
-				stack.has(ModDataComponents.LOCATION)
-			} else true
-		}
+	override fun getType(): DataComponentType<RedstoneRemoteDataComponent> = ModDataComponents.REDSTONE_REMOTE.get()
+
+	override fun getInventory(): NonNullList<ItemStack> = stacks
+	override fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>) {
+		stack.set(getType(), RedstoneRemoteDataComponent(inventory))
 	}
 
 	companion object {
 
 		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler? {
-			return stack.get(ModDataComponents.REDSTONE_REMOTE)?.handler
+			val component = stack.get(ModDataComponents.REDSTONE_REMOTE) ?: return null
+			return ItemInventoryItemHandler(stack, component)
 		}
 
 		val CODEC: Codec<RedstoneRemoteDataComponent> =
