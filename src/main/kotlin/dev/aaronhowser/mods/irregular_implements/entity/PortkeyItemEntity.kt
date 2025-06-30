@@ -6,7 +6,6 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class PortkeyItemEntity : ItemEntity {
@@ -16,13 +15,15 @@ class PortkeyItemEntity : ItemEntity {
 		level: Level
 	) : super(entityType, level)
 
-	constructor(
-		level: Level,
-		x: Double,
-		y: Double,
-		z: Double,
-		stack: ItemStack
-	) : super(level, x, y, z, stack)
+	constructor(itemEntity: ItemEntity) : super(
+		itemEntity.level(),
+		itemEntity.x,
+		itemEntity.y,
+		itemEntity.z,
+		itemEntity.item
+	) {
+		this.deltaMovement = itemEntity.deltaMovement
+	}
 
 	init {
 		lifespan = Int.MAX_VALUE

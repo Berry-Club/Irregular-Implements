@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -43,9 +44,9 @@ class PortkeyItem(properties: Properties) : Item(properties) {
 		return stack.has(ModDataComponents.LOCATION) && (override != null && !override)
 	}
 
-	override fun hasCustomEntity(stack: ItemStack): Boolean = true
+	override fun hasCustomEntity(stack: ItemStack): Boolean = stack.has(ModDataComponents.LOCATION)
 	override fun createEntity(level: Level, location: Entity, stack: ItemStack): Entity {
-		return PortkeyItemEntity(level, location.x, location.y, location.z, stack)
+		return if (location is ItemEntity) PortkeyItemEntity(location) else location
 	}
 
 	//TODO: Tooltip
