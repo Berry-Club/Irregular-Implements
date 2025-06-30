@@ -196,19 +196,19 @@ object ModBlockEntities {
 		})
 
 	@JvmField
-	val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.NatureBlockEntity>> =
+	val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.NatureChestBlockEntity>> =
 		BLOCK_ENTITY_REGISTRY.register("nature_chest", Supplier {
 			BlockEntityType.Builder.of(
-				{ pos, state -> SpecialChestBlock.NatureBlockEntity(pos, state) },
+				{ pos, state -> SpecialChestBlock.NatureChestBlockEntity(pos, state) },
 				ModBlocks.NATURE_CHEST.get()
 			).build(null)
 		})
 
 	@JvmField
-	val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.WaterBlockEntity>> =
+	val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.WaterChestBlockEntity>> =
 		BLOCK_ENTITY_REGISTRY.register("water_chest", Supplier {
 			BlockEntityType.Builder.of(
-				{ pos, state -> SpecialChestBlock.WaterBlockEntity(pos, state) },
+				{ pos, state -> SpecialChestBlock.WaterChestBlockEntity(pos, state) },
 				ModBlocks.WATER_CHEST.get()
 			).build(null)
 		})

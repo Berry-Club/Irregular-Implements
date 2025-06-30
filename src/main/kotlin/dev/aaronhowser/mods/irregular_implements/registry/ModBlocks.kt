@@ -49,8 +49,6 @@ object ModBlocks {
 	val NATURE_CORE = basicBlock("nature_core")
 	val NATURE_CHEST: DeferredBlock<SpecialChestBlock> =
 		registerBlock("nature_chest") { SpecialChestBlock.NATURE }
-
-	@JvmField
 	val WATER_CHEST: DeferredBlock<SpecialChestBlock> =
 		registerBlock("water_chest") { SpecialChestBlock.WATER }
 

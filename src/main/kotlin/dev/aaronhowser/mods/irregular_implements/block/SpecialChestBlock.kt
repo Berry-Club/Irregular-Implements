@@ -28,7 +28,7 @@ class SpecialChestBlock private constructor(
 	private enum class Type { NATURE, WATER }
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-		return if (type == Type.NATURE) NatureBlockEntity(pos, state) else WaterBlockEntity(pos, state)
+		return if (type == Type.NATURE) NatureChestBlockEntity(pos, state) else WaterChestBlockEntity(pos, state)
 	}
 
 	//TODO: Move to other package
@@ -38,8 +38,8 @@ class SpecialChestBlock private constructor(
 		}
 	}
 
-	class NatureBlockEntity(pos: BlockPos, blockState: BlockState) : SpecialChestBlockEntity(ModBlockEntities.NATURE_CHEST.get(), pos, blockState)
-	class WaterBlockEntity(pos: BlockPos, blockState: BlockState) : SpecialChestBlockEntity(ModBlockEntities.WATER_CHEST.get(), pos, blockState)
+	class NatureChestBlockEntity(pos: BlockPos, blockState: BlockState) : SpecialChestBlockEntity(ModBlockEntities.NATURE_CHEST.get(), pos, blockState)
+	class WaterChestBlockEntity(pos: BlockPos, blockState: BlockState) : SpecialChestBlockEntity(ModBlockEntities.WATER_CHEST.get(), pos, blockState)
 
 	companion object {
 		val NATURE = SpecialChestBlock(Type.NATURE)
