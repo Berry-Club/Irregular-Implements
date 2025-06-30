@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.packet
 
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.FlooParticlePacket
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -41,6 +42,12 @@ object ModPacketHandler {
 			registrar,
 			SendClientToast.TYPE,
 			SendClientToast.STREAM_CODEC
+		)
+
+		toClient(
+			registrar,
+			FlooParticlePacket.TYPE,
+			FlooParticlePacket.STREAM_CODEC
 		)
 	}
 

@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.FlooParticlePacket
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -42,7 +44,19 @@ class FlooFireplace(
 			return false
 		}
 
-		return fireplace.teleportToThis(player)
+		val success = fireplace.teleportToThis(player)
+
+		if (success) {
+			val myBe = this.getBlockEntity(level)
+			if (myBe != null) {
+				val bricks = myBe.children + myBe.blockPos
+				val packet = FlooParticlePacket(bricks)
+
+				ModPacketHandler.messageNearbyPlayers(packet, level, this.masterBlockPos.center, 64.0)
+			}
+		}
+
+		return success
 	}
 
 	fun teleportToThis(player: ServerPlayer): Boolean {
@@ -69,6 +83,12 @@ class FlooFireplace(
 		if (name != null) {
 			player.displayClientMessage(Component.literal("Teleported to '$name'"), true)
 		}
+
+		val bricks = be.children + be.blockPos
+		val packet = FlooParticlePacket(bricks)
+
+		ModPacketHandler.messageNearbyPlayers(packet, level, this.masterBlockPos.center, 64.0)
+
 
 		return true
 	}

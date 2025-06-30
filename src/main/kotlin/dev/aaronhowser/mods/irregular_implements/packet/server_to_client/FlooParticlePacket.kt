@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.BlockPos
@@ -15,8 +16,15 @@ class FlooParticlePacket(
 
 	override fun receiveOnClient(context: IPayloadContext) {
 		context.enqueueWork {
-			for (pos in positions) {
+			val level = context.player().level()
 
+			for (pos in positions) {
+				val spawnAt = pos.above().bottomCenter
+				level.addParticle(
+					ModParticleTypes.FLOO_FLAME.get(),
+					spawnAt.x, spawnAt.y, spawnAt.z,
+					0.0, 0.05, 0.0
+				)
 			}
 		}
 	}
