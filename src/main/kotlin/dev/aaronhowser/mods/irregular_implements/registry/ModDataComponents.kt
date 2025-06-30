@@ -206,11 +206,11 @@ object ModDataComponents {
 				.networkSynchronized(ByteBufCodecs.VAR_INT)
 		}
 
-	val PORTKEY_DISGUISE: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStack>> =
+	val PORTKEY_DISGUISE: DeferredHolder<DataComponentType<*>, DataComponentType<PortkeyDisguiseDataComponent>> =
 		DATA_COMPONENT_REGISTRY.registerComponentType("portkey_disguise") {
 			it
-				.persistent(ItemStack.CODEC)
-				.networkSynchronized(ItemStack.STREAM_CODEC)
+				.persistent(PortkeyDisguiseDataComponent.CODEC)
+				.networkSynchronized(PortkeyDisguiseDataComponent.STREAM_CODEC)
 		}
 
 }

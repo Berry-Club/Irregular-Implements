@@ -38,6 +38,9 @@ object ModRecipeSerializers {
 	val IMBUING: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
 		registerRecipeSerializer("imbuing") { ImbuingRecipe.Serializer() }
 
+	val SET_PORTKEY_DISGUISE: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+		registerRecipeSerializer("set_portkey_disguise") { SimpleCraftingRecipeSerializer(::SetPortkeyDisguiseRecipe) }
+
 	private fun registerRecipeSerializer(
 		name: String,
 		factory: () -> RecipeSerializer<*>

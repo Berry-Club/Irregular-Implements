@@ -60,6 +60,7 @@ class ModRecipeProvider(
 		setDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("set_diaphanous_block"))
 		invertedDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("invert_diaphanous_block"))
 		customCraftingTable.save(recipeOutput, OtherUtil.modResource("custom_crafting_table"))
+		setPortkeyDisguise.save(recipeOutput, OtherUtil.modResource("set_portkey_disguise"))
 	}
 
 	private val lubricateBoot = SpecialRecipeBuilder.special(::LubricateBootRecipe)
@@ -69,6 +70,7 @@ class ModRecipeProvider(
 	private val setDiaphanousBlock = SpecialRecipeBuilder.special(::SetDiaphanousBlockRecipe)
 	private val invertedDiaphanousBlock = SpecialRecipeBuilder.special(::InvertDiaphanousBlockRecipe)
 	private val customCraftingTable = SpecialRecipeBuilder.special(::CustomCraftingTableRecipe)
+	private val setPortkeyDisguise = SpecialRecipeBuilder.special(::SetPortkeyDisguiseRecipe)
 
 	//TODO:
 	// Imbues

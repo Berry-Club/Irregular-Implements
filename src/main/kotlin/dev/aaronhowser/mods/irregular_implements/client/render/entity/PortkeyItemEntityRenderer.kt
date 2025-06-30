@@ -30,7 +30,7 @@ class PortkeyItemEntityRenderer(context: EntityRendererProvider.Context) : ItemE
 
 		var itemstack = entity.item
 		val disguise = itemstack.get(ModDataComponents.PORTKEY_DISGUISE)
-		if (disguise != null) itemstack = disguise
+		if (disguise != null) itemstack = disguise.stack
 
 		random.setSeed(getSeedForItemStack(itemstack).toLong())
 		val bakedmodel = itemRenderer.getModel(itemstack, entity.level(), null, entity.id)
