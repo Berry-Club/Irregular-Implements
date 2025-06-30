@@ -19,27 +19,52 @@ import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPiec
 
 //TODO Item Models
 class SpecialChestBlock private constructor(
-	private val type: Type
+	private val chestType: Type
 ) : ChestBlock(
 	Properties.ofFullCopy(Blocks.CHEST),
-	{ if (type == Type.NATURE) ModBlockEntities.NATURE_CHEST.get() else ModBlockEntities.WATER_CHEST.get() }
+	{ if (chestType == Type.NATURE) ModBlockEntities.NATURE_CHEST.get() else ModBlockEntities.WATER_CHEST.get() }
 ) {
 
-	private enum class Type { NATURE, WATER }
-
-	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-		return if (type == Type.NATURE) NatureChestBlockEntity(pos, state) else WaterChestBlockEntity(pos, state)
+	private enum class Type {
+		NATURE, WATER
 	}
 
-	//TODO: Move to other package
-	abstract class SpecialChestBlockEntity(type: BlockEntityType<*>, pos: BlockPos, blockState: BlockState) : ChestBlockEntity(type, pos, blockState) {
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return when (this.chestType) {
+			Type.NATURE -> NatureChestBlockEntity(pos, state)
+			Type.WATER -> WaterChestBlockEntity(pos, state)
+		}
+	}
+
+	// TODO: Move to other package
+	abstract class SpecialChestBlockEntity(
+		type: BlockEntityType<*>,
+		pos: BlockPos,
+		state: BlockState
+	) : ChestBlockEntity(type, pos, state) {
+
 		override fun getDefaultName(): Component {
 			return this.blockState.block.name
 		}
 	}
 
-	class NatureChestBlockEntity(pos: BlockPos, blockState: BlockState) : SpecialChestBlockEntity(ModBlockEntities.NATURE_CHEST.get(), pos, blockState)
-	class WaterChestBlockEntity(pos: BlockPos, blockState: BlockState) : SpecialChestBlockEntity(ModBlockEntities.WATER_CHEST.get(), pos, blockState)
+	class NatureChestBlockEntity(
+		pos: BlockPos,
+		state: BlockState
+	) : SpecialChestBlockEntity(
+		ModBlockEntities.NATURE_CHEST.get(),
+		pos,
+		state
+	)
+
+	class WaterChestBlockEntity(
+		pos: BlockPos,
+		state: BlockState
+	) : SpecialChestBlockEntity(
+		ModBlockEntities.WATER_CHEST.get(),
+		pos,
+		state
+	)
 
 	companion object {
 		val NATURE = SpecialChestBlock(Type.NATURE)
@@ -48,8 +73,8 @@ class SpecialChestBlock private constructor(
 		@JvmStatic
 		fun addToOceanMonument(
 			level: WorldGenLevel,
-			randomSource: RandomSource,
-			box: BoundingBox,
+			random: RandomSource,
+			boundingBox: BoundingBox,
 			coreRoom: OceanMonumentPieces.OceanMonumentCoreRoom
 		) {
 			val x = 6
@@ -60,20 +85,17 @@ class SpecialChestBlock private constructor(
 				level,
 				ModBlocks.WATER_CHEST.get().defaultBlockState(),
 				x, y, z,
-				box
+				boundingBox
 			)
 
-			val chestPos = coreRoom.getWorldPos(x, y, z)
+			val chestPosition = coreRoom.getWorldPos(x, y, z)
 
 			RandomizableContainer.setBlockEntityLootTable(
 				level,
-				randomSource,
-				chestPos,
+				random,
+				chestPosition,
 				ModChestLootSubprovider.OCEAN_MONUMENT_CHEST
 			)
-
 		}
-
 	}
-
 }
