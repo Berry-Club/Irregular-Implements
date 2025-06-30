@@ -7,30 +7,28 @@ import net.minecraft.client.particle.ParticleProvider
 import net.minecraft.client.particle.SpriteSet
 import net.minecraft.core.particles.SimpleParticleType
 
-class ColoredAshParticle : BaseAshSmokeParticle {
+class ColoredAshParticle(
+	level: ClientLevel,
+	x: Double, y: Double, z: Double,
+	xSpeed: Double, ySpeed: Double, zSpeed: Double,
+	red: Float, green: Float, blue: Float,
+	quadSizeMultiplier: Float,
+	sprites: SpriteSet,
+	lifetime: Int,
+) : BaseAshSmokeParticle(
+	level,
+	x, y, z,
+	0.1f, -0.1f, 0.1f,
+	xSpeed, ySpeed, zSpeed,
+	quadSizeMultiplier,
+	sprites,
+	0f,
+	lifetime,
+	0.0125f,
+	false
+) {
 
-	// Because I hate how long it was lmao
-	@Suppress("ConvertSecondaryConstructorToPrimary")
-	constructor(
-		level: ClientLevel,
-		x: Double, y: Double, z: Double,
-		xSpeed: Double, ySpeed: Double, zSpeed: Double,
-		red: Float, green: Float, blue: Float,
-		quadSizeMultiplier: Float,
-		sprites: SpriteSet,
-		lifetime: Int,
-	) : super(
-		level,
-		x, y, z,
-		0.1f, -0.1f, 0.1f,
-		xSpeed, ySpeed, zSpeed,
-		quadSizeMultiplier,
-		sprites,
-		0f,
-		lifetime,
-		0.0125f,
-		false
-	) {
+	init {
 		this.rCol = red
 		this.gCol = green
 		this.bCol = blue
