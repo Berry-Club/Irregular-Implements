@@ -23,6 +23,7 @@ class PortkeyItemEntityRenderer(
 	private val itemRenderer: ItemRenderer = context.itemRenderer
 	private val random: RandomSource = RandomSource.create()
 
+	/** @see net.minecraft.client.renderer.entity.ItemEntityRenderer.render */
 	override fun render(
 		entity: PortkeyItemEntity,
 		entityYaw: Float,
