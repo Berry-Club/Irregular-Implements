@@ -45,8 +45,8 @@ class PortkeyItem(properties: Properties) : Item(properties) {
 	}
 
 	override fun hasCustomEntity(stack: ItemStack): Boolean = stack.has(ModDataComponents.LOCATION)
-	override fun createEntity(level: Level, location: Entity, stack: ItemStack): Entity {
-		return if (location is ItemEntity) PortkeyItemEntity(location) else location
+	override fun createEntity(level: Level, original: Entity, stack: ItemStack): Entity {
+		return if (original is ItemEntity) PortkeyItemEntity(original) else original
 	}
 
 	//TODO: Tooltip

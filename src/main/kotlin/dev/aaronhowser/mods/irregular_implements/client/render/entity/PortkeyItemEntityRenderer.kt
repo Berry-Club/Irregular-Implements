@@ -2,24 +2,27 @@ package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
+import dev.aaronhowser.mods.irregular_implements.entity.PortkeyItemEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.ItemEntityRenderer
 import net.minecraft.client.renderer.entity.ItemRenderer
+import net.minecraft.client.renderer.texture.TextureAtlas
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.ItemDisplayContext
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
-class PortkeyItemEntityRenderer(context: EntityRendererProvider.Context) : ItemEntityRenderer(context) {
+class PortkeyItemEntityRenderer(context: EntityRendererProvider.Context) : EntityRenderer<PortkeyItemEntity>(context) {
 
 	private val itemRenderer: ItemRenderer = context.itemRenderer
 	private val random: RandomSource = RandomSource.create()
 
 	override fun render(
-		entity: ItemEntity,
+		entity: PortkeyItemEntity,
 		entityYaw: Float,
 		partialTicks: Float,
 		poseStack: PoseStack,
@@ -32,7 +35,7 @@ class PortkeyItemEntityRenderer(context: EntityRendererProvider.Context) : ItemE
 		val disguise = itemstack.get(ModDataComponents.PORTKEY_DISGUISE)
 		if (disguise != null) itemstack = disguise.stack
 
-		random.setSeed(getSeedForItemStack(itemstack).toLong())
+		random.setSeed(ItemEntityRenderer.getSeedForItemStack(itemstack).toLong())
 		val bakedmodel = itemRenderer.getModel(itemstack, entity.level(), null, entity.id)
 		val flag = bakedmodel.isGui3d
 
@@ -45,10 +48,14 @@ class PortkeyItemEntityRenderer(context: EntityRendererProvider.Context) : ItemE
 
 		val f3 = entity.getSpin(partialTicks)
 		poseStack.mulPose(Axis.YP.rotation(f3))
-		renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, itemstack, bakedmodel, flag, this.random)
+		ItemEntityRenderer.renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, itemstack, bakedmodel, flag, this.random)
 
 		poseStack.popPose()
 		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
+	}
+
+	override fun getTextureLocation(entity: PortkeyItemEntity): ResourceLocation {
+		return TextureAtlas.LOCATION_BLOCKS
 	}
 
 }
