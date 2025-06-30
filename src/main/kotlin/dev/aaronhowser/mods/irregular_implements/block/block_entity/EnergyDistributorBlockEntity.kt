@@ -18,8 +18,8 @@ class EnergyDistributorBlockEntity(
 	@Suppress("UsePropertyAccessSyntax")
 	private val energyStorage: IEnergyStorage = object : IEnergyStorage {
 
-		fun extractableDestinations(): List<IEnergyStorage> = energyCache.filter(IEnergyStorage::canExtract)
-		fun insertableDestinations(): List<IEnergyStorage> = energyCache.filter(IEnergyStorage::canReceive)
+		fun extractableDestinations(): List<IEnergyStorage> = getCachedEnergyHandlers().filter(IEnergyStorage::canExtract)
+		fun insertableDestinations(): List<IEnergyStorage> = getCachedEnergyHandlers().filter(IEnergyStorage::canReceive)
 
 		override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
 			val destinations = insertableDestinations()
@@ -51,13 +51,23 @@ class EnergyDistributorBlockEntity(
 			return amountExtracted
 		}
 
-		override fun getEnergyStored(): Int = getDestinations().sumOf(IEnergyStorage::getEnergyStored)
-		override fun getMaxEnergyStored(): Int = getDestinations().sumOf(IEnergyStorage::getMaxEnergyStored)
-		override fun canExtract(): Boolean = getDestinations().any(IEnergyStorage::canExtract)
-		override fun canReceive(): Boolean = getDestinations().any(IEnergyStorage::canReceive)
+		override fun getEnergyStored(): Int = getCachedEnergyHandlers().sumOf(IEnergyStorage::getEnergyStored)
+		override fun getMaxEnergyStored(): Int = getCachedEnergyHandlers().sumOf(IEnergyStorage::getMaxEnergyStored)
+		override fun canExtract(): Boolean = getCachedEnergyHandlers().any(IEnergyStorage::canExtract)
+		override fun canReceive(): Boolean = getCachedEnergyHandlers().any(IEnergyStorage::canReceive)
 	}
 
-	private val energyCache: MutableList<IEnergyStorage> = mutableListOf()
+	private val energyCache: MutableList<BlockEntity> = mutableListOf()
+	private fun getCachedEnergyHandlers(): List<IEnergyStorage> {
+		val level = this.level ?: return emptyList()
+		val fromMyDirection = this.blockState.getValue(EnergyDistributorBlock.FACING).opposite
+
+		return energyCache
+			.asSequence()
+			.filterNot(BlockEntity::isRemoved)
+			.mapNotNull { level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, fromMyDirection) }
+			.toList()
+	}
 
 	fun tick() {
 		val tick = this.level?.gameTime ?: return
@@ -67,29 +77,28 @@ class EnergyDistributorBlockEntity(
 	}
 
 	private fun recalculateCache() {
-		energyCache.clear()
-		energyCache.addAll(getDestinations())
-	}
+		val level = this.level ?: return
 
-	private fun getDestinations(): List<IEnergyStorage> {
-		val level = this.level ?: return emptyList()
+		energyCache.clear()
 
 		val direction = blockState.getValue(EnergyDistributorBlock.FACING)
-		val list = mutableListOf<IEnergyStorage>()
+		val list = mutableListOf<BlockEntity>()
 
 		var checkedPos = this.worldPosition.relative(direction)
 
 		while (level.isLoaded(checkedPos) && list.size < 100) {
-			val energyStorageThere = level.getCapability(Capabilities.EnergyStorage.BLOCK, checkedPos, direction.opposite)
-			if (energyStorageThere != null) {
-				list.add(energyStorageThere)
+			val blockEntityThere = level.getBlockEntity(checkedPos) ?: break
+			val hasEnergyStorage = level.getCapability(Capabilities.EnergyStorage.BLOCK, checkedPos, direction.opposite) != null
+
+			if (hasEnergyStorage) {
+				list.add(blockEntityThere)
 				checkedPos = checkedPos.relative(direction)
 			} else {
 				break
 			}
 		}
 
-		return list
+		energyCache.addAll(list)
 	}
 
 	fun getEnergyHandler(direction: Direction?): IEnergyStorage {
