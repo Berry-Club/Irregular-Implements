@@ -15,6 +15,7 @@ class EnergyDistributorBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.ENERGY_DISTRIBUTOR.get(), pos, blockState) {
 
+	@Suppress("UsePropertyAccessSyntax")
 	private val energyStorage: IEnergyStorage = object : IEnergyStorage {
 
 		fun extractableDestinations(): List<IEnergyStorage> = energyCache.filter(IEnergyStorage::canExtract)
@@ -50,8 +51,8 @@ class EnergyDistributorBlockEntity(
 			return amountExtracted
 		}
 
-		override fun getEnergyStored(): Int = getDestinations().sumOf(IEnergyStorage::energyStored)
-		override fun getMaxEnergyStored(): Int = getDestinations().sumOf(IEnergyStorage::maxEnergyStored)
+		override fun getEnergyStored(): Int = getDestinations().sumOf(IEnergyStorage::getEnergyStored)
+		override fun getMaxEnergyStored(): Int = getDestinations().sumOf(IEnergyStorage::getMaxEnergyStored)
 		override fun canExtract(): Boolean = getDestinations().any(IEnergyStorage::canExtract)
 		override fun canReceive(): Boolean = getDestinations().any(IEnergyStorage::canReceive)
 	}
