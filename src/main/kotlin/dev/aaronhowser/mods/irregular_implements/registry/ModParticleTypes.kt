@@ -13,6 +13,7 @@ object ModParticleTypes {
 	val PARTICLE_TYPE_REGISTRY: DeferredRegister<ParticleType<*>> =
 		DeferredRegister.create(Registries.PARTICLE_TYPE, IrregularImplements.ID)
 
+	//TODO: Should probably make a new class with the custom tick etc
 	val FLOO_FLAME: DeferredHolder<ParticleType<*>, SimpleParticleType> =
 		PARTICLE_TYPE_REGISTRY.register("floo_flame", Supplier { SimpleParticleType(false) })
 
