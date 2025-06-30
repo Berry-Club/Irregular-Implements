@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.FlooParticlePacket
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.BurningFlooFireplacePacket
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -50,7 +50,7 @@ class FlooFireplace(
 			val myBe = this.getBlockEntity(level)
 			if (myBe != null) {
 				val bricks = myBe.children + myBe.blockPos
-				val packet = FlooParticlePacket(bricks)
+				val packet = BurningFlooFireplacePacket(bricks)
 
 				ModPacketHandler.messageNearbyPlayers(packet, level, this.masterBlockPos.center, 64.0)
 			}
@@ -85,7 +85,7 @@ class FlooFireplace(
 		}
 
 		val bricks = be.children + be.blockPos
-		val packet = FlooParticlePacket(bricks)
+		val packet = BurningFlooFireplacePacket(bricks)
 
 		ModPacketHandler.messageNearbyPlayers(packet, level, this.masterBlockPos.center, 64.0)
 

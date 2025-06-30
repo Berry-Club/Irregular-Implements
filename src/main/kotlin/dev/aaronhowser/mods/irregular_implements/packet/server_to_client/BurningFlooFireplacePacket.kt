@@ -12,7 +12,7 @@ import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 //FIXME: Floo particles don't work
-class FlooParticlePacket(
+class BurningFlooFireplacePacket(
 	val positions: List<BlockPos>
 ) : IModPacket {
 
@@ -43,18 +43,18 @@ class FlooParticlePacket(
 		}
 	}
 
-	override fun type(): CustomPacketPayload.Type<FlooParticlePacket> {
+	override fun type(): CustomPacketPayload.Type<BurningFlooFireplacePacket> {
 		return TYPE
 	}
 
 	companion object {
-		val TYPE: CustomPacketPayload.Type<FlooParticlePacket> =
-			CustomPacketPayload.Type(OtherUtil.modResource("floo_particle"))
+		val TYPE: CustomPacketPayload.Type<BurningFlooFireplacePacket> =
+			CustomPacketPayload.Type(OtherUtil.modResource("burning_floo_fireplace"))
 
-		val STREAM_CODEC: StreamCodec<ByteBuf, FlooParticlePacket> =
+		val STREAM_CODEC: StreamCodec<ByteBuf, BurningFlooFireplacePacket> =
 			StreamCodec.composite(
-				BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), FlooParticlePacket::positions,
-				::FlooParticlePacket
+				BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), BurningFlooFireplacePacket::positions,
+				::BurningFlooFireplacePacket
 			)
 
 	}
