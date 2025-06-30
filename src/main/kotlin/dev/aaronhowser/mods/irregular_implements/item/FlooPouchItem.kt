@@ -87,7 +87,9 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 
 		fun fuckJkr(tooltipComponents: MutableList<Component>) {
 			val now = LocalDate.now()
-			if (now.dayOfMonth == 31 && now.month == Month.JULY) {
+			if (now.month == Month.JUNE
+				|| (now.month == Month.JULY && now.dayOfMonth == 31)
+			) {
 				tooltipComponents.add(Component.literal("Trans rights are human rights!"))
 			}
 		}
