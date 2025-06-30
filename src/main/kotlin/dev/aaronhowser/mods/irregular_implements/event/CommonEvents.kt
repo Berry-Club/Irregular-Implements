@@ -212,6 +212,12 @@ object CommonEvents {
 			RedstoneRemoteDataComponent::getCapability,
 			ModItems.REDSTONE_REMOTE.get()
 		)
+
+		event.registerBlockEntity(
+			Capabilities.EnergyStorage.BLOCK,
+			ModBlockEntities.ENERGY_DISTRIBUTOR.get(),
+			EnergyDistributorBlockEntity::getCapability
+		)
 	}
 
 	@SubscribeEvent

@@ -242,7 +242,8 @@ object ModBlockEntities {
 			BlockEntityType.Builder.of(
 				::EnergyDistributorBlockEntity,
 				ModBlocks.ENERGY_DISTRIBUTOR.get()
-			).build(null)
+			)
+				.build(null)
 		})
 
 }
