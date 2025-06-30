@@ -15,7 +15,7 @@ object ModCommands {
 	fun register(dispatcher: CommandDispatcher<CommandSourceStack>) {
 		dispatcher.register(
 			Commands.literal("irregular-implements")
-				.then(FireplacesCommand.register())
+				.then(FireplaceCommand.register())
 		)
 
 	}

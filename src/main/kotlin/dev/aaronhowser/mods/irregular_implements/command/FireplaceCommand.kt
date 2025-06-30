@@ -2,23 +2,27 @@ package dev.aaronhowser.mods.irregular_implements.command
 
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.builder.ArgumentBuilder
+import com.mojang.brigadier.context.CommandContext
+import com.mojang.brigadier.suggestion.SuggestionProvider
+import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
+import net.minecraft.commands.SharedSuggestionProvider
 import net.minecraft.commands.arguments.ResourceLocationArgument
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.Level
 
-object FireplacesCommand {
+object FireplaceCommand {
 
 	private const val FIREPLACE_NAME = "fireplace_name"
 	private const val DIMENSION = "dimension"
 
 	fun register(): ArgumentBuilder<CommandSourceStack, *> {
 		return Commands
-			.literal("fireplaces")
+			.literal("fireplace")
 			.then(registerListCommand())
 			.then(registerTeleportCommand())
 	}
