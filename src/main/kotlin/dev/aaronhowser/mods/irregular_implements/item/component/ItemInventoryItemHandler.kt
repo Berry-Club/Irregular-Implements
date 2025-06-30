@@ -5,11 +5,13 @@ import net.minecraft.core.component.DataComponentType
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.items.ItemStackHandler
 
-open class ItemInventoryItemHandler<T>(
+open class ItemInventoryItemHandler<T : ItemInventoryItemHandler.InventoryDataComponent>(
 	val stack: ItemStack,
 	val dataComponentType: DataComponentType<T>
-) : ItemStackHandler(stack.get(dataComponentType)?.getInventory() ?: NonNullList.create())
-		where T : ItemInventoryItemHandler.InventoryDataComponent {
+) : ItemStackHandler(
+	stack.get(dataComponentType)?.getInventory()
+		?: NonNullList.create()
+) {
 
 	init {
 		require(this.stack.has(dataComponentType)) { "ItemInventoryItemHandler created for stack that does not have the required data component" }
