@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.SynchedEntityData
@@ -21,6 +23,38 @@ class TemporaryFlooFireplaceEntity(
 		level
 	) {
 		setPos(pos)
+	}
+
+	private var age = 0
+
+	override fun tick() {
+		super.tick()
+
+		age++
+
+		val level = this.level()
+
+		if (isClientSide && age > 7) {
+			for (i in 0 until 40) {
+				val iProgress = i.toDouble() / 40
+				val x = this.x - 1 + iProgress * 2
+
+				for (j in 0 until 40) {
+					val jProgress = j.toDouble() / 40
+					val z = this.z - 1 + jProgress * 2
+
+					level.addParticle(
+						ModParticleTypes.FLOO_FLAME.get(),
+						x, y, z,
+						0.0, level.random.nextDouble() * 0.1, 0.0
+					)
+				}
+			}
+		}
+
+		if (!isClientSide && age >= 20 * 30) {
+			discard()
+		}
 	}
 
 	override fun defineSynchedData(builder: SynchedEntityData.Builder) {}
