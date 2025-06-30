@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.item.FlooSignItem
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Holder
 import net.minecraft.world.effect.MobEffect
@@ -205,7 +204,8 @@ object ModItems {
 		basic("floo_powder")
 	val FLOO_SIGN: DeferredItem<FlooSignItem> =
 		register("floo_sign", ::FlooSignItem)
-	val FLOO_TOKEN = basic("floo_token")
+	val FLOO_TOKEN: DeferredItem<FlooTokenItem> =
+		register("floo_token", ::FlooTokenItem)
 	val FLOO_POUCH: DeferredItem<FlooPouchItem> =
 		register("floo_pouch", ::FlooPouchItem, FlooPouchItem.DEFAULT_PROPERTIES)
 

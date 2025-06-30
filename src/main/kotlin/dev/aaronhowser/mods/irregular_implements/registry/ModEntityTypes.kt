@@ -107,4 +107,17 @@ object ModEntityTypes {
 				.build("portkey_item")
 		})
 
+	val TEMPORARY_FLOO_FIREPLACE: DeferredHolder<EntityType<*>, EntityType<TemporaryFlooFireplaceEntity>> =
+		ENTITY_TYPE_REGISTRY.register("temporary_floo_fireplace", Supplier {
+			EntityType.Builder.of(
+				::TemporaryFlooFireplaceEntity,
+				MobCategory.MISC
+			)
+				.sized(2f, 2f)
+				.setTrackingRange(80)
+				.updateInterval(20)
+				.setShouldReceiveVelocityUpdates(false)
+				.build("temporary_floo_fireplace")
+		})
+
 }
