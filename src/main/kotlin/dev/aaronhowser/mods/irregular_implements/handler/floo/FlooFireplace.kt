@@ -77,7 +77,7 @@ class FlooFireplace(
 		player.teleportTo(
 			level,
 			destination.x, destination.y, destination.z,
-			be.facing.toYRot(), 0f
+			be.facing.toYRot(), player.xRot
 		)
 
 		if (name != null) {
