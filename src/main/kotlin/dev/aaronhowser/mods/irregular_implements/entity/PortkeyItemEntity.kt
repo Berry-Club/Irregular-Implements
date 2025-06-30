@@ -26,6 +26,7 @@ class PortkeyItemEntity : ItemEntity {
 
 	init {
 		lifespan = Int.MAX_VALUE
+		setPickUpDelay(40)
 	}
 
 	override fun tick() {
@@ -40,6 +41,8 @@ class PortkeyItemEntity : ItemEntity {
 				1f,
 				0.25f
 			)
+
+			this.item.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, false)
 		}
 	}
 
@@ -47,14 +50,6 @@ class PortkeyItemEntity : ItemEntity {
 		if (age <= PORTKEY_PICKUP_DELAY) return false
 		val stack = super.getItem()
 		return stack.has(ModDataComponents.LOCATION)
-	}
-
-	override fun getItem(): ItemStack {
-		val original = super.getItem()
-		if (!willTeleport()) return original
-		val copy = original.copy()
-		copy.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, false)
-		return copy
 	}
 
 	override fun playerTouch(entity: Player) {
@@ -72,9 +67,11 @@ class PortkeyItemEntity : ItemEntity {
 
 		val teleportLocation = locationComponent.blockPos.bottomCenter
 
-		level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_TELEPORT, entity.soundSource,)
-		entity.teleportTo(teleportLocation.x, teleportLocation.y, teleportLocation.z,)
-		level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_TELEPORT, entity.soundSource,)
+		level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_TELEPORT, entity.soundSource)
+		entity.teleportTo(teleportLocation.x, teleportLocation.y, teleportLocation.z)
+		level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_TELEPORT, entity.soundSource)
+
+		discard()
 	}
 
 	companion object {

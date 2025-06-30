@@ -136,7 +136,6 @@ object CommonEvents {
 	@SubscribeEvent
 	fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
 		DropFilterItem.beforePickupItem(event)
-		PortkeyItem.pickUpPortkey(event)
 	}
 
 	@SubscribeEvent
