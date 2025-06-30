@@ -129,7 +129,8 @@ object ModBlocks {
 		basicStoneBlock("super_lubricant_stone")
 
 	// Not above 1.7
-	val ENERGY_DISTRIBUTOR = basicBlock("energy_distributor")
+	val ENERGY_DISTRIBUTOR: DeferredBlock<EnergyDistributorBlock> =
+		registerBlock("energy_distributor", ::EnergyDistributorBlock)
 	val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
 
 	// Not above 1.6.4

@@ -237,4 +237,12 @@ object ModBlockEntities {
 			).build(null)
 		})
 
+	val ENERGY_DISTRIBUTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<EnergyDistributorBlockEntity>> =
+		BLOCK_ENTITY_REGISTRY.register("energy_distributor", Supplier {
+			BlockEntityType.Builder.of(
+				::EnergyDistributorBlockEntity,
+				ModBlocks.ENERGY_DISTRIBUTOR.get()
+			).build(null)
+		})
+
 }
