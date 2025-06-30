@@ -162,8 +162,6 @@ class FlooBrickBlockEntity(
 			}
 
 			event.isCanceled = true
-
-			return
 		}
 
 	}
