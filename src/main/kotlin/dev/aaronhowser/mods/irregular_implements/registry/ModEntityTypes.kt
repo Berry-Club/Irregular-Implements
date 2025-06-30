@@ -94,4 +94,17 @@ object ModEntityTypes {
 				.build("weather_cloud")
 		})
 
+	val PORTKEY_ITEM: DeferredHolder<EntityType<*>, EntityType<PortkeyItemEntity>> =
+		ENTITY_TYPE_REGISTRY.register("portkey_item", Supplier {
+			EntityType.Builder.of(
+				::PortkeyItemEntity,
+				MobCategory.MISC
+			)
+				.sized(0.25f, 0.25f)
+				.eyeHeight(0.2125f)
+				.clientTrackingRange(6)
+				.updateInterval(20)
+				.build("portkey_item")
+		})
+
 }

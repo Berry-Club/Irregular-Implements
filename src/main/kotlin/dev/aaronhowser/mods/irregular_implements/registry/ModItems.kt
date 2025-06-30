@@ -201,7 +201,8 @@ object ModItems {
 		register("redstone_remote", ::RedstoneRemoteItem, RedstoneRemoteItem.DEFAULT_PROPERTIES)
 
 	// Floo
-	val FLOO_POWDER = basic("floo_powder")
+	val FLOO_POWDER: DeferredItem<Item> =
+		basic("floo_powder")
 	val FLOO_SIGN: DeferredItem<FlooSignItem> =
 		register("floo_sign", ::FlooSignItem)
 	val FLOO_TOKEN = basic("floo_token")

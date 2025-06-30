@@ -1,14 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.entity.PortkeyItemEntity
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.util.Unit
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
@@ -18,8 +17,6 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
 //TODO: Ability to hide it as other items
 class PortkeyItem(properties: Properties) : Item(properties) {
-
-	// ModDataComponents.ENABLED means that picking up the portkey will teleport the player to the location
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val level = context.level
@@ -44,38 +41,14 @@ class PortkeyItem(properties: Properties) : Item(properties) {
 
 
 	override fun isFoil(stack: ItemStack): Boolean {
-		return stack.has(ModDataComponents.LOCATION) && !stack.has(ModDataComponents.IS_ENABLED)
-	}
-
-	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-		if (entity.age == 20 * 5) {
-			stack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
-
-			entity.level().playSound(
-				null,
-				entity.blockPosition(),
-				SoundEvents.BELL_BLOCK,
-				entity.soundSource,
-				1f,
-				0.25f
-			)
-
-			return super.onEntityItemUpdate(stack, entity)
-		}
-
-		// Reset the age, but in a way that minimizes the animation bugging out
-		if (entity.age >= 20 * 60 * 3) {
-			entity.age = 20 * 60
-		}
-
-		return super.onEntityItemUpdate(stack, entity)
+		return stack.has(ModDataComponents.LOCATION)
 	}
 
 	//TODO: Tooltip
 
-	//TODO: Something new instead of resetting the age, because that causes it to jitter
-	override fun createEntity(level: Level, location: Entity, stack: ItemStack): Entity? {
-		return super.createEntity(level, location, stack)
+	override fun hasCustomEntity(stack: ItemStack): Boolean = true
+	override fun createEntity(level: Level, location: Entity, stack: ItemStack): Entity {
+		return PortkeyItemEntity(level, location.x, location.y, location.z, stack)
 	}
 
 	companion object {

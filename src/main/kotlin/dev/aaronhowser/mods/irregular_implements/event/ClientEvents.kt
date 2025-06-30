@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
+import net.minecraft.client.renderer.entity.ItemEntityRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.util.Mth
@@ -173,6 +174,7 @@ object ClientEvents {
 	fun onClientSetup(event: FMLClientSetupEvent) {
 		EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
 		EntityRenderers.register(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), ::SpectreIlluminatorEntityRenderer)
+		EntityRenderers.register(ModEntityTypes.PORTKEY_ITEM.get(), ::ItemEntityRenderer)
 	}
 
 	@SubscribeEvent
