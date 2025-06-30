@@ -133,4 +133,14 @@ object FireplaceCommand {
 
 		return 1
 	}
+
+	//FIXME: When I put it in the command, it didn't work
+	val SUGGEST_FIREPLACES: SuggestionProvider<CommandSourceStack> =
+		SuggestionProvider { ctx: CommandContext<CommandSourceStack>, builder: SuggestionsBuilder ->
+			val level = ctx.source.level
+			val network = FlooNetworkSavedData.get(level)
+
+			val fireplaceNames = network.getFireplaces().mapNotNull { it.name }
+			SharedSuggestionProvider.suggest(fireplaceNames, builder)
+		}
 }
