@@ -105,6 +105,10 @@ object ModDataGen {
 
 		generator.addProvider(event.includeClient(), languageProvider)
 
+		val particleDescriptionProvider = generator.addProvider(
+			event.includeClient(),
+			ModParticleDescriptionProvider(output, existingFileHelper)
+		)
 
 	}
 
