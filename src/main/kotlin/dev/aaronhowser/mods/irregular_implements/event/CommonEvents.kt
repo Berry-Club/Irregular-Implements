@@ -9,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.command.ModCommands
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
+import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData.Companion.worldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -165,6 +166,7 @@ object CommonEvents {
 	@SubscribeEvent
 	fun onServerChat(event: ServerChatEvent) {
 		FlooBrickBlockEntity.processMessage(event)
+		TemporaryFlooFireplaceEntity.processMessage(event)
 		ChatDetectorBlockEntity.processMessage(event)
 		GlobalChatDetectorBlockEntity.processMessage(event)
 	}

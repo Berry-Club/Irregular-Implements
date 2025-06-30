@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
+import net.neoforged.neoforge.event.ServerChatEvent
 
 class TemporaryFlooFireplaceEntity(
 	entityType: EntityType<*>,
@@ -23,4 +24,11 @@ class TemporaryFlooFireplaceEntity(
 	override fun defineSynchedData(builder: SynchedEntityData.Builder) {}
 	override fun readAdditionalSaveData(compound: CompoundTag) {}
 	override fun addAdditionalSaveData(compound: CompoundTag) {}
+
+	companion object {
+		fun processMessage(event: ServerChatEvent) {
+			if (event.isCanceled) return
+		}
+	}
+
 }

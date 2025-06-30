@@ -119,7 +119,9 @@ class FlooBrickBlockEntity(
 		const val CHILDREN_TAG = "Children"
 		const val MASTER_UUID_TAG = "MasterUUID"
 
-		fun processMessage(event: ServerChatEvent): Boolean {
+		fun processMessage(event: ServerChatEvent) {
+			if (event.isCanceled) return
+
 			val player = event.player
 
 			val isHoldingFlooPowder = player.isHolding(ModItems.FLOO_POWDER.get())
@@ -127,17 +129,17 @@ class FlooBrickBlockEntity(
 			val flooPouchStack = player.inventory.items.firstOrNull { it.`is`(ModItems.FLOO_POUCH) }
 
 			if (!player.isCreative && !isHoldingFlooPowder) {
-				if (flooPouchStack == null) return false
-				if (flooPouchStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0) <= 0) return false
+				if (flooPouchStack == null) return
+				if (flooPouchStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0) <= 0) return
 			}
 
 			val level = player.serverLevel()
-			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return false
-			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return false
+			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return
+			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return
 
 			val standingOnFireplace = FlooNetworkSavedData.get(level)
 				.findFireplace(standingOnBE)
-				?: return false
+				?: return
 
 			val message = event.message.string
 			val success = standingOnFireplace.teleportFromThis(player, message)
@@ -159,7 +161,9 @@ class FlooBrickBlockEntity(
 				}
 			}
 
-			return success
+			event.isCanceled = true
+
+			return
 		}
 
 	}
