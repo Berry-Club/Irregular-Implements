@@ -15,6 +15,7 @@ import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Block
@@ -203,6 +204,13 @@ object ModDataComponents {
 			it
 				.persistent(Codec.INT)
 				.networkSynchronized(ByteBufCodecs.VAR_INT)
+		}
+
+	val PORTKEY_DISGUISE: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStack>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("portkey_disguise") {
+			it
+				.persistent(ItemStack.CODEC)
+				.networkSynchronized(ItemStack.STREAM_CODEC)
 		}
 
 }

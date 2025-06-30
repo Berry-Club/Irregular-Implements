@@ -8,10 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRende
 import dev.aaronhowser.mods.irregular_implements.client.render.block.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.entity.ArtificialEndPortalRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.entity.GoldenChickenRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.entity.SpectreIlluminatorEntityRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.entity.WeatherCloudRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
@@ -174,7 +171,7 @@ object ClientEvents {
 	fun onClientSetup(event: FMLClientSetupEvent) {
 		EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
 		EntityRenderers.register(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), ::SpectreIlluminatorEntityRenderer)
-		EntityRenderers.register(ModEntityTypes.PORTKEY_ITEM.get(), ::ItemEntityRenderer)
+		EntityRenderers.register(ModEntityTypes.PORTKEY_ITEM.get(), ::PortkeyItemEntityRenderer)
 	}
 
 	@SubscribeEvent
