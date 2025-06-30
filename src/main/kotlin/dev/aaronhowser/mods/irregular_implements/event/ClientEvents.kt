@@ -17,6 +17,8 @@ import dev.aaronhowser.mods.irregular_implements.registry.*
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
+import net.minecraft.client.particle.FlameParticle
+import net.minecraft.client.particle.SpriteSet
 import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
@@ -274,6 +276,11 @@ object ClientEvents {
 
 			changedAlpha = false
 		}
+	}
+
+	@SubscribeEvent
+	fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
+		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlameParticle::Provider)
 	}
 
 }
