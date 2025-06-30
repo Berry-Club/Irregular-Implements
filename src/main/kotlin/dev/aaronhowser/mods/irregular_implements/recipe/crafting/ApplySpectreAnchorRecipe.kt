@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.*
@@ -17,18 +18,32 @@ class ApplySpectreAnchorRecipe(
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		val amountAnchors = input.items().count { ANCHOR_INGREDIENT.test(it) }
-		val amountNonAnchors = input.items().count { isApplicable(it) }
+		val amountNonAnchors = input.items().count(::isApplicable)
 
 		return amountAnchors == 1 && amountNonAnchors == 1
 	}
 
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-		val nonAnchor = input.items().first { isApplicable(it) }
+		val nonAnchor = input.items().first(::isApplicable)
 
-		val result = nonAnchor.copyWithCount(1) //TODO: Figure out how to let you do entire stacks without duping
+		val result = nonAnchor.copyWithCount(1)
 		result.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
 
 		return result
+	}
+
+	override fun getRemainingItems(input: CraftingInput): NonNullList<ItemStack> {
+		val items = input.items().toMutableList()
+		for (i in items.indices) {
+			val stack = items[i]
+			if (ANCHOR_INGREDIENT.test(stack)) {
+				items[i] = ItemStack.EMPTY
+			} else {
+				items[i] = stack.copyWithCount(1)
+			}
+		}
+
+		return NonNullList.copyOf(items)
 	}
 
 	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
