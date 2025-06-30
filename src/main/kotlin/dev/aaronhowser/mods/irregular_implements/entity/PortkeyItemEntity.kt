@@ -73,6 +73,8 @@ class PortkeyItemEntity(
 		discard()
 	}
 
+	override fun copy(): ItemEntity = PortkeyItemEntity(this)
+
 	companion object {
 		const val PORTKEY_PICKUP_DELAY = 20 * 5
 	}
