@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
-import net.minecraft.core.component.DataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.item.ItemEntity
@@ -31,7 +31,7 @@ class PortkeyItemEntity(
 	override fun tick() {
 		super.tick()
 
-		if (age == 20 * 5) {
+		if (!isClientSide && age == 20 * 5) {
 			level().playSound(
 				null,
 				blockPosition(),
@@ -40,8 +40,6 @@ class PortkeyItemEntity(
 				1f,
 				0.25f
 			)
-
-			this.item.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, false)
 		}
 	}
 

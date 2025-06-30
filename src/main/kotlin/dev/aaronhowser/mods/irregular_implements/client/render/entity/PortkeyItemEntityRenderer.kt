@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.ItemEntityRenderer
 import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.client.renderer.texture.TextureAtlas
+import net.minecraft.core.component.DataComponents
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
@@ -34,16 +35,21 @@ class PortkeyItemEntityRenderer(
 	) {
 		poseStack.pushPose()
 
-		var itemstack = entity.item
-		val disguise = itemstack.get(ModDataComponents.PORTKEY_DISGUISE)
-		if (disguise != null) itemstack = disguise.stack
+		val portkeyStack = entity.item.copy()
+		val disguise = portkeyStack.get(ModDataComponents.PORTKEY_DISGUISE)
 
-		random.setSeed(ItemEntityRenderer.getSeedForItemStack(itemstack).toLong())
-		val bakedmodel = itemRenderer.getModel(itemstack, entity.level(), null, entity.id)
+		val renderStack = disguise?.stack?.copy() ?: portkeyStack
+
+		if (portkeyStack.has(ModDataComponents.LOCATION) && entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
+			renderStack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+		}
+
+		random.setSeed(ItemEntityRenderer.getSeedForItemStack(renderStack).toLong())
+		val bakedmodel = itemRenderer.getModel(renderStack, entity.level(), null, entity.id)
 		val flag = bakedmodel.isGui3d
 
 		val f = 0.25f
-		val shouldBob = IClientItemExtensions.of(itemstack).shouldBobAsEntity(itemstack)
+		val shouldBob = IClientItemExtensions.of(renderStack).shouldBobAsEntity(renderStack)
 
 		val f1 = if (shouldBob) Mth.sin((entity.getAge().toFloat() + partialTicks) / 10.0f + entity.bobOffs) * 0.1f + 0.1f else 0f
 		val f2 = bakedmodel.transforms.getTransform(ItemDisplayContext.GROUND).scale.y()
@@ -51,7 +57,7 @@ class PortkeyItemEntityRenderer(
 
 		val f3 = entity.getSpin(partialTicks)
 		poseStack.mulPose(Axis.YP.rotation(f3))
-		ItemEntityRenderer.renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, itemstack, bakedmodel, flag, this.random)
+		ItemEntityRenderer.renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, renderStack, bakedmodel, flag, this.random)
 
 		poseStack.popPose()
 		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)

@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.entity.PortkeyItemEntity
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
@@ -40,8 +39,7 @@ class PortkeyItem(properties: Properties) : Item(properties) {
 
 
 	override fun isFoil(stack: ItemStack): Boolean {
-		val override = stack.get(DataComponents.ENCHANTMENT_GLINT_OVERRIDE)
-		return stack.has(ModDataComponents.LOCATION) && (override != null && !override)
+		return stack.has(ModDataComponents.LOCATION) || super.isFoil(stack)
 	}
 
 	override fun hasCustomEntity(stack: ItemStack): Boolean = stack.has(ModDataComponents.LOCATION)
