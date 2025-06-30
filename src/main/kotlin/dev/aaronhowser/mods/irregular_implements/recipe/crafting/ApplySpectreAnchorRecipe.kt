@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -16,7 +16,7 @@ class ApplySpectreAnchorRecipe(
 ) : CustomRecipe(craftingCategory) {
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
-		val amountAnchors = input.items().count { anchorIngredient.test(it) }
+		val amountAnchors = input.items().count { ANCHOR_INGREDIENT.test(it) }
 		val amountNonAnchors = input.items().count { isApplicable(it) }
 
 		return amountAnchors == 1 && amountNonAnchors == 1
@@ -40,7 +40,7 @@ class ApplySpectreAnchorRecipe(
 	}
 
 	companion object {
-		val anchorIngredient: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
+		val ANCHOR_INGREDIENT: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
 
 		fun isApplicable(itemStack: ItemStack): Boolean {
 			return !itemStack.isEmpty

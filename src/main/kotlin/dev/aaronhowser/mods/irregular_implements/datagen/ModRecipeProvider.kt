@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.ingredient
 import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
@@ -1683,6 +1682,14 @@ class ModRecipeProvider(
 		)
 
 		spectreImbue.save(recipeOutput, "imbuing/spectre_imbue")
+	}
+
+	companion object {
+		val ItemLike.ingredient: Ingredient
+			get() = Ingredient.of(this)
+
+		val TagKey<Item>.ingredient: Ingredient
+			get() = Ingredient.of(this)
 	}
 
 }
