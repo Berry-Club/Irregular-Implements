@@ -16,7 +16,9 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.item.ItemDisplayContext
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
-class PortkeyItemEntityRenderer(context: EntityRendererProvider.Context) : EntityRenderer<PortkeyItemEntity>(context) {
+class PortkeyItemEntityRenderer(
+	context: EntityRendererProvider.Context
+) : EntityRenderer<PortkeyItemEntity>(context) {
 
 	private val itemRenderer: ItemRenderer = context.itemRenderer
 	private val random: RandomSource = RandomSource.create()

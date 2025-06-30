@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.core.component.DataComponents
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.entity.EntityType
@@ -8,20 +9,17 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 
-class PortkeyItemEntity : ItemEntity {
+class PortkeyItemEntity(
+	entityType: EntityType<PortkeyItemEntity>,
+	level: Level
+) : ItemEntity(entityType, level) {
 
-	constructor(
-		entityType: EntityType<PortkeyItemEntity>,
-		level: Level
-	) : super(entityType, level)
-
-	constructor(itemEntity: ItemEntity) : super(
-		itemEntity.level(),
-		itemEntity.x,
-		itemEntity.y,
-		itemEntity.z,
-		itemEntity.item
+	constructor(itemEntity: ItemEntity) : this(
+		ModEntityTypes.PORTKEY_ITEM.get(),
+		itemEntity.level()
 	) {
+		this.item = itemEntity.item
+		this.setPos(itemEntity.position())
 		this.deltaMovement = itemEntity.deltaMovement
 	}
 
