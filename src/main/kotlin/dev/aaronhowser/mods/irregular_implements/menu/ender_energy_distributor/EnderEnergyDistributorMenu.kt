@@ -14,7 +14,7 @@ class EnderEnergyDistributorMenu(
 	containerId: Int,
 	playerInventory: Inventory,
 	private val container: Container,
-) : AbstractContainerMenu(ModMenuTypes.ADVANCED_ITEM_COLLECTOR.get(), containerId) {
+) : AbstractContainerMenu(ModMenuTypes.ENDER_ENERGY_DISTRIBUTOR.get(), containerId) {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
