@@ -74,6 +74,7 @@ class ModBlockStateProvider(
 		playerInterface()
 		flooBrick()
 		enderEnergyDistributor()
+		slimeCube()
 	}
 
 	private fun enderEnergyDistributor() {
@@ -497,6 +498,51 @@ class ModBlockStateProvider(
 			block,
 			ItemModelBuilder(
 				modLoc("block/iron_dropper_horizontal"),
+				existingFileHelper
+			)
+		)
+	}
+
+	private fun slimeCube() {
+		val block = ModBlocks.SLIME_CUBE.get()
+		val green = modLoc("block/slime_cube/green")
+		val red = modLoc("block/slime_cube/red")
+
+		getVariantBuilder(block)
+			.forAllStates {
+				val powered = it.getValue(SlimeCubeBlock.POWERED)
+
+				val modelName = name(block) + if (powered) "_powered" else ""
+				val texture = if (powered) red else green
+
+				val model = models()
+					.withExistingParent(modelName, mcLoc("block/block"))
+					.texture("texture", texture)
+					.texture("inner", green)
+					.texture("particle", texture)
+
+					.element()
+					.from(6f, 6f, 6f)
+					.to(10f, 10f, 10f)
+					.textureAll("#texture")
+					.end()
+
+					.element()
+					.from(7f, 7f, 7f)
+					.to(9f, 9f, 9f)
+					.textureAll("#inner")
+					.end()
+
+				ConfiguredModel
+					.builder()
+					.modelFile(model)
+					.build()
+			}
+
+		simpleBlockItem(
+			block,
+			ItemModelBuilder(
+				modLoc("block/slime_cube"),
 				existingFileHelper
 			)
 		)
