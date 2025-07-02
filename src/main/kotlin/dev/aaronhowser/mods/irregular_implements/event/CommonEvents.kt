@@ -218,6 +218,12 @@ object CommonEvents {
 			ModBlockEntities.ENERGY_DISTRIBUTOR.get(),
 			EnergyDistributorBlockEntity::getCapability
 		)
+
+		event.registerBlockEntity(
+			Capabilities.EnergyStorage.BLOCK,
+			ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(),
+			EnderEnergyDistributorBlockEntity::getCapability
+		)
 	}
 
 	@SubscribeEvent
