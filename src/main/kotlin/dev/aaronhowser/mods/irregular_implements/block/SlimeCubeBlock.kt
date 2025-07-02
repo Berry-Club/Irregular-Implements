@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
@@ -32,6 +33,16 @@ class SlimeCubeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)), EntityB
 			.setValue(POWERED, context.level.hasNeighborSignal(context.clickedPos))
 	}
 
+	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+		val isPowered = level.hasNeighborSignal(pos)
+		val wasPowered = state.getValue(POWERED)
+
+		if (isPowered != wasPowered) {
+			val newState = state.setValue(POWERED, isPowered)
+			level.setBlockAndUpdate(pos, newState)
+		}
+	}
+
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		return SHAPE
 	}
@@ -42,7 +53,7 @@ class SlimeCubeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)), EntityB
 
 	companion object {
 		val POWERED: BooleanProperty = BlockStateProperties.POWERED
-		val SHAPE: VoxelShape = box(0.375, 0.375, 0.375, 0.625, 0.625, 0.625)
+		val SHAPE: VoxelShape = box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0)
 	}
 
 }
