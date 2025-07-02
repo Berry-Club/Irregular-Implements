@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.DropperBlock
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
@@ -72,6 +73,27 @@ class ModBlockStateProvider(
 		sakanade()
 		playerInterface()
 		flooBrick()
+		enderEnergyDistributor()
+	}
+
+	private fun enderEnergyDistributor() {
+		val block = ModBlocks.ENDER_ENERGY_DISTRIBUTOR.get()
+
+		val textureTop = modLoc("block/ender_energy_distributor/top")
+		val textureSides = modLoc("block/ender_energy_distributor/sides")
+
+		val model = models()
+			.cube(
+				name(block),
+				textureSides,
+				textureTop,
+				textureSides,
+				textureSides,
+				textureSides,
+				textureSides
+			)
+
+		simpleBlockWithItem(block, model)
 	}
 
 	private fun playerInterface() {
@@ -1718,6 +1740,11 @@ class ModBlockStateProvider(
 			uniqueTexture = modLoc("block/sided_redstone_front"),
 			otherTexture = modLoc("block/sided_redstone_side")
 		)
+		oneUniqueFace(
+			ModBlocks.ENERGY_DISTRIBUTOR.get(),
+			uniqueTexture = modLoc("block/energy_distributor/front"),
+			otherTexture = modLoc("block/energy_distributor/side")
+		)
 	}
 
 	private fun oneUniqueFace(
@@ -1729,7 +1756,7 @@ class ModBlockStateProvider(
 
 		getVariantBuilder(block)
 			.forAllStates {
-				val facing = it.getValue(DirectionalBlock.FACING)
+				val facing = it.getValue(BlockStateProperties.FACING)
 
 				val yRotation = when (facing) {
 					Direction.NORTH -> 0
