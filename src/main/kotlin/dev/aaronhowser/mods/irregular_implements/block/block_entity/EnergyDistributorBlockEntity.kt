@@ -15,7 +15,6 @@ class EnergyDistributorBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.ENERGY_DISTRIBUTOR.get(), pos, blockState) {
 
-	@Suppress("UsePropertyAccessSyntax")
 	private val energyStorage: IEnergyStorage = object : IEnergyStorage {
 
 		fun extractableDestinations(): List<IEnergyStorage> = getCachedEnergyHandlers().filter(IEnergyStorage::canExtract)
