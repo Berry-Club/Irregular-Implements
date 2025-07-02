@@ -32,7 +32,7 @@ class EnderEnergyDistributorMenu(
 				val inventorySlotIndex = column + row * 9 + 9
 
 				val x = 8 + column * 18
-				val y = 153 + row * 18
+				val y = 49 + row * 18
 
 				this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
 			}
@@ -40,7 +40,7 @@ class EnderEnergyDistributorMenu(
 
 		for (hotbarSlotIndex in 0..8) {
 			val x = 8 + hotbarSlotIndex * 18
-			val y = 211
+			val y = 107
 
 			this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
 		}
