@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.SlimeCubeBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
@@ -51,8 +52,8 @@ class SlimeCubeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)), EntityB
 		return SHAPE
 	}
 
-	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? {
-		return null
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return SlimeCubeBlockEntity(pos, state)
 	}
 
 	companion object {
