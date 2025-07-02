@@ -59,6 +59,10 @@
         7,
         7
       ],
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
       "to": [
         9,
         9,
@@ -66,6 +70,7 @@
       ]
     }
   ],
+  "render_type": "minecraft:translucent",
   "textures": {
     "inner": "irregular_implements:block/slime_cube/green",
     "particle": "irregular_implements:block/slime_cube/green",
