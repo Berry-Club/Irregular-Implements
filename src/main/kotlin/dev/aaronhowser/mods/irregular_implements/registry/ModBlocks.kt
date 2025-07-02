@@ -131,7 +131,8 @@ object ModBlocks {
 	// Not above 1.7
 	val ENERGY_DISTRIBUTOR: DeferredBlock<EnergyDistributorBlock> =
 		registerBlock("energy_distributor", ::EnergyDistributorBlock)
-	val ENDER_ENERGY_DISTRIBUTOR = basicBlock("ender_energy_distributor")
+	val ENDER_ENERGY_DISTRIBUTOR: DeferredBlock<EnderEnergyDistributorBlock> =
+		registerBlock("ender_energy_distributor", ::EnderEnergyDistributorBlock)
 
 	// Not above 1.6.4
 	val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
