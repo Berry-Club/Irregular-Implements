@@ -59,12 +59,15 @@ class EnergyDistributorBlockEntity(
 	private val energyCache: MutableList<BlockEntity> = mutableListOf()
 	private fun getCachedEnergyHandlers(): List<IEnergyStorage> {
 		val level = this.level ?: return emptyList()
-		val fromMyDirection = this.blockState.getValue(EnergyDistributorBlock.FACING).opposite
 
 		return energyCache
 			.asSequence()
 			.filterNot(BlockEntity::isRemoved)
-			.mapNotNull { level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, fromMyDirection) }
+			.mapNotNull {
+				DIRECTIONS_OR_NULL.firstNotNullOfOrNull { dir ->
+					level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, dir)
+				}
+			}
 			.toList()
 	}
 

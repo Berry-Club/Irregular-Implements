@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.block.EnergyDistributorBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
@@ -87,12 +86,15 @@ class EnderEnergyDistributorBlockEntity(
 	private val energyCache: MutableList<BlockEntity> = mutableListOf()
 	private fun getCachedEnergyHandlers(): List<IEnergyStorage> {
 		val level = this.level ?: return emptyList()
-		val fromMyDirection = this.blockState.getValue(EnergyDistributorBlock.FACING).opposite
 
 		return energyCache
 			.asSequence()
 			.filterNot(BlockEntity::isRemoved)
-			.mapNotNull { level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, fromMyDirection) }
+			.mapNotNull {
+				EnergyDistributorBlockEntity.DIRECTIONS_OR_NULL.firstNotNullOfOrNull { dir ->
+					level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, dir)
+				}
+			}
 			.toList()
 	}
 
