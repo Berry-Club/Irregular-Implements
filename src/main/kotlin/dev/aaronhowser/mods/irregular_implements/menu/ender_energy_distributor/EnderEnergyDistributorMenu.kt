@@ -3,13 +3,11 @@ package dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderEnergyDistributorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
@@ -62,7 +60,34 @@ class EnderEnergyDistributorMenu(
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		return ItemStack.EMPTY
+		val slot = slots.getOrNull(index)
+		if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
+
+		val stackThere = slot.item
+		val copyStack = stackThere.copy()
+
+		val blockMaxInvIndex = EnderEnergyDistributorBlockEntity.INVENTORY_SIZE
+		val playerInvMaxIndex = blockMaxInvIndex + 9 * 4
+
+		if (index < blockMaxInvIndex) {
+			if (!this.moveItemStackTo(stackThere, blockMaxInvIndex, playerInvMaxIndex, true)) {
+				return ItemStack.EMPTY
+			}
+		} else if (!this.moveItemStackTo(stackThere, 0, blockMaxInvIndex, false)) {
+			return ItemStack.EMPTY
+		}
+
+		if (stackThere.isEmpty) {
+			slot.setByPlayer(ItemStack.EMPTY)
+		} else {
+			slot.setChanged()
+		}
+
+		if (stackThere.count == copyStack.count) return ItemStack.EMPTY
+
+		slot.onTake(player, stackThere)
+
+		return copyStack
 	}
 
 	override fun stillValid(player: Player): Boolean = container.stillValid(player)
