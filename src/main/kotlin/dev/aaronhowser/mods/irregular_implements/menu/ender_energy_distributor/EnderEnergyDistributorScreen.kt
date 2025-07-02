@@ -10,5 +10,5 @@ class EnderEnergyDistributorScreen(
 	playerInventory: Inventory,
 	title: Component
 ) : BaseScreen<EnderEnergyDistributorMenu>(menu, playerInventory, title) {
-	override val background: ScreenTextures.Background = ScreenTextures.Background.EntityDetector
+	override val background: ScreenTextures.Background = ScreenTextures.Background.EnderEnergyDistributor
 }

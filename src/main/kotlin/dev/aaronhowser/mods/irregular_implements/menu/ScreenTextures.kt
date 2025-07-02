@@ -35,6 +35,7 @@ object ScreenTextures {
 		data object ChunkAnalyzer : Background("textures/gui/chunk_analyzer.png", 190, 124)
 		data object DropFilter : Background("textures/gui/drop_filter.png", 176, 133)
 		data object DyeingMachine : Background("textures/gui/dyeing_machine.png", 176, 141)
+		data object EnderEnergyDistributor : Background("textures/gui/ender_energy_distributor.png", 176, 130)
 		data object EnderLetter : Background("textures/gui/ender_letter.png", 176, 133)
 		data object EnderMailbox : Background("textures/gui/ender_mailbox.png", 176, 133)
 		data object EntityDetector : Background("textures/gui/entity_detector.png", 176, 204)
