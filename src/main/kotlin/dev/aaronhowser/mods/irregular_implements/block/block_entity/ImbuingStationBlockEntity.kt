@@ -1,29 +1,47 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.imbuing_station.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingInput
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.world.ContainerHelper
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 //TODO: Does automation work?
 class ImbuingStationBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BaseContainerBlockEntity(ModBlockEntities.IMBUING_STATION.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntities.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider {
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		tag.putInt(CRAFT_PROGRESS_NBT, this.progress)
+		ContainerHelper.saveAllItems(tag, this.container.items, registries)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		this.progress = tag.getInt(CRAFT_PROGRESS_NBT)
+		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+	}
 
 	// Machine stuff
+
+	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
 	private var progress: Int = 0
 		set(value) {
@@ -47,11 +65,11 @@ class ImbuingStationBlockEntity(
 	}
 
 	private fun craftItem() {
-		val topStack = getItem(TOP_SLOT_INDEX)
-		val leftStack = getItem(LEFT_SLOT_INDEX)
-		val bottomStack = getItem(BOTTOM_SLOT_INDEX)
+		val topStack = this.container.getItem(TOP_SLOT_INDEX)
+		val leftStack = this.container.getItem(LEFT_SLOT_INDEX)
+		val bottomStack = this.container.getItem(BOTTOM_SLOT_INDEX)
 
-		val centerStack = getItem(CENTER_SLOT_INDEX)
+		val centerStack = this.container.getItem(CENTER_SLOT_INDEX)
 		val outerStacks = listOf(topStack, leftStack, bottomStack)
 
 		val imbuingInput = ImbuingInput(outerStacks, centerStack)
@@ -59,35 +77,35 @@ class ImbuingStationBlockEntity(
 		val imbuingRecipe = ImbuingRecipe.getRecipe(this.level!!, imbuingInput) ?: return
 
 		val outputStack = imbuingRecipe.assemble(imbuingInput, this.level!!.registryAccess())
-		val stackInOutput = getItem(OUTPUT_SLOT_INDEX)
+		val stackInOutput = this.container.getItem(OUTPUT_SLOT_INDEX)
 
 		if (stackInOutput.isEmpty) {
-			setItem(OUTPUT_SLOT_INDEX, outputStack)
+			this.container.setItem(OUTPUT_SLOT_INDEX, outputStack)
 		} else {
 			stackInOutput.grow(outputStack.count)
 		}
 
-		removeItem(TOP_SLOT_INDEX, 1)
-		removeItem(LEFT_SLOT_INDEX, 1)
-		removeItem(BOTTOM_SLOT_INDEX, 1)
-		removeItem(CENTER_SLOT_INDEX, 1)
+		this.container.removeItem(TOP_SLOT_INDEX, 1)
+		this.container.removeItem(LEFT_SLOT_INDEX, 1)
+		this.container.removeItem(BOTTOM_SLOT_INDEX, 1)
+		this.container.removeItem(CENTER_SLOT_INDEX, 1)
 
 		this.progress = 0
 	}
 
 	private fun hasRecipe(): Boolean {
-		val topStack = getItem(TOP_SLOT_INDEX)
-		val leftStack = getItem(LEFT_SLOT_INDEX)
-		val bottomStack = getItem(BOTTOM_SLOT_INDEX)
+		val topStack = this.container.getItem(TOP_SLOT_INDEX)
+		val leftStack = this.container.getItem(LEFT_SLOT_INDEX)
+		val bottomStack = this.container.getItem(BOTTOM_SLOT_INDEX)
 
-		val centerStack = getItem(CENTER_SLOT_INDEX)
+		val centerStack = this.container.getItem(CENTER_SLOT_INDEX)
 		val outerStacks = listOf(topStack, leftStack, bottomStack)
 
 		val imbuingInput = ImbuingInput(outerStacks, centerStack)
 
 		val recipe = ImbuingRecipe.getRecipe(this.level!!, imbuingInput) ?: return false
 
-		val stackInOutput = getItem(OUTPUT_SLOT_INDEX)
+		val stackInOutput = this.container.getItem(OUTPUT_SLOT_INDEX)
 
 		if (stackInOutput.isEmpty) return true
 
@@ -101,37 +119,12 @@ class ImbuingStationBlockEntity(
 
 	// Menu stuff
 
-	override fun getDefaultName(): Component = this.blockState.block.name
-
-	override fun createMenu(containerId: Int, inventory: Inventory): AbstractContainerMenu {
-		return ImbuingStationMenu(containerId, inventory, this)
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return ImbuingStationMenu(containerId, playerInventory, this.container)
 	}
 
-	// Container stuff
-
-	private var items: NonNullList<ItemStack> = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY)
-
-	override fun getItems(): NonNullList<ItemStack> = items
-
-	override fun setItems(items: NonNullList<ItemStack>) {
-		this.items = items
-		setChanged()
-	}
-
-	override fun getContainerSize(): Int = CONTAINER_SIZE
-
-	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.saveAdditional(tag, registries)
-
-		tag.putInt(CRAFT_PROGRESS_NBT, this.progress)
-		ContainerHelper.saveAllItems(tag, this.items, registries)
-	}
-
-	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.loadAdditional(tag, registries)
-
-		this.progress = tag.getInt(CRAFT_PROGRESS_NBT)
-		ContainerHelper.loadAllItems(tag, this.items, registries)
+	override fun getDisplayName(): Component {
+		return this.blockState.block.name
 	}
 
 	companion object {
