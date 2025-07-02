@@ -43,6 +43,10 @@ class SlimeCubeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)), EntityB
 		}
 	}
 
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		super.onRemove(state, level, pos, newState, movedByPiston)
+	}
+
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		return SHAPE
 	}
