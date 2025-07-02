@@ -1,7 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.EnergyDistributorBlock
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.Level
@@ -14,6 +17,12 @@ class EnderEnergyDistributorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState) {
+
+	// Inventory stuff
+
+	private val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
+
+	// Energy stuff
 
 	private val energyStorage: IEnergyStorage = object : IEnergyStorage {
 
@@ -80,24 +89,24 @@ class EnderEnergyDistributorBlockEntity(
 
 		energyCache.clear()
 
-		val direction = blockState.getValue(EnergyDistributorBlock.FACING)
-		val list = mutableListOf<BlockEntity>()
+		val blockEntities = container.items
+			.asSequence()
 
-		var checkedPos = this.worldPosition.relative(direction)
+			.mapNotNull { it.get(ModDataComponents.LOCATION) }
+			.filter { it.dimension == level.dimension() }
+			.map(LocationDataComponent::blockPos)
 
-		while (level.isLoaded(checkedPos) && list.size < 100) {
-			val blockEntityThere = level.getBlockEntity(checkedPos) ?: break
-			val hasEnergyStorage = level.getCapability(Capabilities.EnergyStorage.BLOCK, checkedPos, direction.opposite) != null
-
-			if (hasEnergyStorage) {
-				list.add(blockEntityThere)
-				checkedPos = checkedPos.relative(direction)
-			} else {
-				break
+			.mapNotNull { level.getBlockEntity(it) }
+			.filterNot(BlockEntity::isRemoved)
+			.filter {
+				EnergyDistributorBlockEntity.DIRECTIONS_OR_NULL
+					.any { direction ->
+						level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, direction) != null
+					}
 			}
-		}
+			.toList()
 
-		energyCache.addAll(list)
+		energyCache.addAll(blockEntities)
 	}
 
 	fun getEnergyHandler(direction: Direction?): IEnergyStorage {
@@ -105,6 +114,8 @@ class EnderEnergyDistributorBlockEntity(
 	}
 
 	companion object {
+		const val INVENTORY_SIZE = 8
+
 		fun getCapability(energyDistributor: EnderEnergyDistributorBlockEntity, direction: Direction?): IEnergyStorage? {
 			return energyDistributor.getEnergyHandler(direction)
 		}

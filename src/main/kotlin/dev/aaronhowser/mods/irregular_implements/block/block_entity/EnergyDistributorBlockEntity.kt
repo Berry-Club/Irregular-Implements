@@ -85,12 +85,10 @@ class EnergyDistributorBlockEntity(
 
 		var checkedPos = this.worldPosition.relative(direction)
 
-		val directions = Direction.entries + null
-
 		while (level.isLoaded(checkedPos) && list.size < 100) {
 			val blockEntityThere = level.getBlockEntity(checkedPos) ?: break
 
-			val hasEnergyStorage = directions.any {
+			val hasEnergyStorage = DIRECTIONS_OR_NULL.any {
 				level.getCapability(Capabilities.EnergyStorage.BLOCK, checkedPos, it) != null
 			}
 
@@ -110,6 +108,8 @@ class EnergyDistributorBlockEntity(
 	}
 
 	companion object {
+		val DIRECTIONS_OR_NULL = Direction.entries + null
+
 		fun getCapability(energyDistributor: EnergyDistributorBlockEntity, direction: Direction?): IEnergyStorage? {
 			return energyDistributor.getEnergyHandler(direction)
 		}
