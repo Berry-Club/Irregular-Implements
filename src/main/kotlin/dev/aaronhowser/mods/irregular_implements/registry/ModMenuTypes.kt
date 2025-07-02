@@ -35,6 +35,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneMenu
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneScreen
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.flag.FeatureFlags
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
 import net.neoforged.neoforge.registries.DeferredHolder
@@ -47,84 +48,41 @@ object ModMenuTypes {
 		DeferredRegister.create(BuiltInRegistries.MENU, IrregularImplements.ID)
 
 	val IRON_DROPPER: DeferredHolder<MenuType<*>, MenuType<IronDropperMenu>> =
-		MENU_TYPE_REGISTRY.register("iron_dropper", Supplier {
-			MenuType(::IronDropperMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("iron_dropper", ::IronDropperMenu)
 	val BLOCK_DESTABILIZER: DeferredHolder<MenuType<*>, MenuType<BlockDestabilizerMenu>> =
-		MENU_TYPE_REGISTRY.register("block_destabilizer", Supplier {
-			MenuType(::BlockDestabilizerMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("block_destabilizer", ::BlockDestabilizerMenu)
 	val CHAT_DETECTOR: DeferredHolder<MenuType<*>, MenuType<ChatDetectorMenu>> =
-		MENU_TYPE_REGISTRY.register("chat_detector", Supplier {
-			MenuType(::ChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("chat_detector", ::ChatDetectorMenu)
 	val GLOBAL_CHAT_DETECTOR: DeferredHolder<MenuType<*>, MenuType<GlobalChatDetectorMenu>> =
-		MENU_TYPE_REGISTRY.register("global_chat_detector", Supplier {
-			MenuType(::GlobalChatDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("global_chat_detector", ::GlobalChatDetectorMenu)
 	val IGNITER: DeferredHolder<MenuType<*>, MenuType<IgniterMenu>> =
-		MENU_TYPE_REGISTRY.register("igniter", Supplier {
-			MenuType(::IgniterMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("igniter", ::IgniterMenu)
 	val VOID_STONE: DeferredHolder<MenuType<*>, MenuType<VoidStoneMenu>> =
-		MENU_TYPE_REGISTRY.register("void_stone", Supplier {
-			MenuType(::VoidStoneMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("void_stone", ::VoidStoneMenu)
 	val ONLINE_DETECTOR: DeferredHolder<MenuType<*>, MenuType<OnlineDetectorMenu>> =
-		MENU_TYPE_REGISTRY.register("online_detector", Supplier {
-			MenuType(::OnlineDetectorMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("online_detector", ::OnlineDetectorMenu)
 	val NOTIFICATION_INTERFACE: DeferredHolder<MenuType<*>, MenuType<NotificationInterfaceMenu>> =
-		MENU_TYPE_REGISTRY.register("notification_interface", Supplier {
-			MenuType(::NotificationInterfaceMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("notification_interface", ::NotificationInterfaceMenu)
 	val IMBUING_STATION: DeferredHolder<MenuType<*>, MenuType<ImbuingStationMenu>> =
-		MENU_TYPE_REGISTRY.register("imbuing_station", Supplier {
-			MenuType(::ImbuingStationMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("imbuing_station", ::ImbuingStationMenu)
 	val ITEM_FILTER: DeferredHolder<MenuType<*>, MenuType<ItemFilterMenu>> =
-		MENU_TYPE_REGISTRY.register("item_filter", Supplier {
-			MenuType(::ItemFilterMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("item_filter", ::ItemFilterMenu)
 	val FILTERED_PLATFORM: DeferredHolder<MenuType<*>, MenuType<FilteredPlatformMenu>> =
-		MENU_TYPE_REGISTRY.register("filtered_platform", Supplier {
-			MenuType(::FilteredPlatformMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("filtered_platform", ::FilteredPlatformMenu)
 	val DROP_FILTER: DeferredHolder<MenuType<*>, MenuType<DropFilterMenu>> =
-		MENU_TYPE_REGISTRY.register("drop_filter", Supplier {
-			MenuType(::DropFilterMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("drop_filter", ::DropFilterMenu)
 	val INVENTORY_TESTER: DeferredHolder<MenuType<*>, MenuType<InventoryTesterMenu>> =
-		MENU_TYPE_REGISTRY.register("inventory_tester", Supplier {
-			MenuType(::InventoryTesterMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("inventory_tester", ::InventoryTesterMenu)
 	val ADVANCED_ITEM_COLLECTOR: DeferredHolder<MenuType<*>, MenuType<AdvancedItemCollectorMenu>> =
-		MENU_TYPE_REGISTRY.register("advanced_item_collector", Supplier {
-			MenuType(::AdvancedItemCollectorMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("advanced_item_collector", ::AdvancedItemCollectorMenu)
 	val REDSTONE_REMOTE_EDIT: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteEditMenu>> =
-		MENU_TYPE_REGISTRY.register("redstone_remote_edit", Supplier {
-			MenuType(::RedstoneRemoteEditMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
-
+		register("redstone_remote_edit", ::RedstoneRemoteEditMenu)
 	val REDSTONE_REMOTE_USE: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteUseMenu>> =
-		MENU_TYPE_REGISTRY.register("redstone_remote_use", Supplier {
-			MenuType(::RedstoneRemoteUseMenu, FeatureFlags.DEFAULT_FLAGS)
-		})
+		register("redstone_remote_use", ::RedstoneRemoteUseMenu)
+
+	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
+		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
+	}
 
 	fun registerScreens(event: RegisterMenuScreensEvent) {
 		event.register(IRON_DROPPER.get(), ::IronDropperScreen)

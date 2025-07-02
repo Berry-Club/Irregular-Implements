@@ -7,6 +7,11 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -16,11 +21,24 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 class EnderEnergyDistributorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState), MenuProvider {
 
 	// Inventory stuff
 
 	private val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
+
+	override fun getDisplayName(): Component = blockState.block.name
+
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
+		TODO("Not yet implemented")
+	}
+
+	fun tick() {
+		val tick = this.level?.gameTime ?: return
+		if (tick % 20L == 0L) {
+			recalculateCache()
+		}
+	}
 
 	// Energy stuff
 
@@ -75,13 +93,6 @@ class EnderEnergyDistributorBlockEntity(
 			.filterNot(BlockEntity::isRemoved)
 			.mapNotNull { level.getCapability(Capabilities.EnergyStorage.BLOCK, it.blockPos, fromMyDirection) }
 			.toList()
-	}
-
-	fun tick() {
-		val tick = this.level?.gameTime ?: return
-		if (tick % 20L == 0L) {
-			recalculateCache()
-		}
 	}
 
 	private fun recalculateCache() {
