@@ -26,7 +26,9 @@ class DropFilterMenu(
 			playerInventory.player.offhandItem
 		}
 
-	private var usingMainHand = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack
+	private val hand: InteractionHand =
+		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack)
+			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 
 	val container: ItemContainerContents?
 		get() = filterStack.get(DataComponents.CONTAINER)
@@ -146,9 +148,7 @@ class DropFilterMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		val itemInHand = player.getItemInHand(
-			if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
-		)
+		val itemInHand = player.getItemInHand(hand)
 
 		return itemInHand === filterStack
 	}

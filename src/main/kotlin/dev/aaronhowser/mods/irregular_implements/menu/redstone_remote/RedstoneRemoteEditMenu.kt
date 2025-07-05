@@ -25,8 +25,9 @@ class RedstoneRemoteEditMenu(
 		}
 	}
 
-	private var usingMainHand: Boolean =
-		playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack()
+	private val hand: InteractionHand =
+		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack())
+			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 
 	private val itemHandler: IItemHandler? = getRedstoneRemoteStack().getCapability(Capabilities.ItemHandler.ITEM)
 
@@ -71,7 +72,6 @@ class RedstoneRemoteEditMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		val hand = if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 		return player.getItemInHand(hand).`is`(ModItems.REDSTONE_REMOTE)
 	}
 

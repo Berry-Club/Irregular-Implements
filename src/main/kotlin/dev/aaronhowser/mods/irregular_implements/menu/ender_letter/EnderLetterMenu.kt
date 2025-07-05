@@ -23,8 +23,9 @@ class EnderLetterMenu(
 		}
 	}
 
-	private var usingMainHand: Boolean =
-		playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getEnderLetterStack()
+	private val hand: InteractionHand =
+		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getEnderLetterStack())
+			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 
 	private val itemHandler: IItemHandler? = getEnderLetterStack().getCapability(Capabilities.ItemHandler.ITEM)
 
@@ -39,7 +40,6 @@ class EnderLetterMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		val hand = if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
-		return player.getItemInHand(hand).`is`(ModItems.REDSTONE_REMOTE)
+		return player.getItemInHand(hand).`is`(ModItems.ENDER_LETTER)
 	}
 }

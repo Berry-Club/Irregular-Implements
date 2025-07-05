@@ -23,18 +23,20 @@ class ItemFilterMenu(
 	private val holderLookup = this.playerInventory.player.level().registryAccess()
 
 	// Uses a getter because when it mutates it only does so on server, and doesn't mutate the one on the client's copy of the menu
-	private val filterStack: ItemStack
-		get() =
-			if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
-				playerInventory.player.mainHandItem
-			} else {
-				playerInventory.player.offhandItem
-			}
+	private fun getFilterStack(): ItemStack {
+		return if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
+			playerInventory.player.mainHandItem
+		} else {
+			playerInventory.player.offhandItem
+		}
+	}
 
-	private var usingMainHand = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack
+	private val hand: InteractionHand =
+		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getFilterStack())
+			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 
 	private val filterComponent: ItemFilterDataComponent?
-		get() = filterStack.get(ModDataComponents.ITEM_FILTER_ENTRIES)
+		get() = getFilterStack().get(ModDataComponents.ITEM_FILTER_ENTRIES)
 
 	val filter: NonNullList<FilterEntry>?
 		get() = filterComponent?.entries
@@ -46,7 +48,7 @@ class ItemFilterMenu(
 
 			val filterComponent = this.filterComponent ?: return
 
-			filterStack.set(
+			getFilterStack().set(
 				ModDataComponents.ITEM_FILTER_ENTRIES,
 				filterComponent.copy(isBlacklist = value)
 			)
@@ -57,7 +59,7 @@ class ItemFilterMenu(
 			val x = 8 + index * 18
 			val y = 26
 
-			val slot = ItemFilterSlot(::filterStack, this.holderLookup, x, y)
+			val slot = ItemFilterSlot(::getFilterStack, this.holderLookup, x, y)
 
 			this.addSlot(slot)
 		}
@@ -87,7 +89,6 @@ class ItemFilterMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		val hand = if (usingMainHand) InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 		return player.getItemInHand(hand).`is`(ModItems.ITEM_FILTER)
 	}
 
@@ -126,7 +127,7 @@ class ItemFilterMenu(
 		val newFilter = filter.toMutableList()
 		newFilter[slotIndex] = newEntry
 
-		filterStack.set(
+		getFilterStack().set(
 			ModDataComponents.ITEM_FILTER_ENTRIES,
 			ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
 		)
@@ -152,7 +153,7 @@ class ItemFilterMenu(
 		val newFilter = filter.toMutableList()
 		newFilter[slotIndex] = newEntry
 
-		filterStack.set(
+		getFilterStack().set(
 			ModDataComponents.ITEM_FILTER_ENTRIES,
 			ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
 		)
@@ -166,7 +167,7 @@ class ItemFilterMenu(
 		val newFilter = filter.toMutableList()
 		newFilter[slotIndex] = newEntry
 
-		filterStack.set(
+		getFilterStack().set(
 			ModDataComponents.ITEM_FILTER_ENTRIES,
 			ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
 		)
