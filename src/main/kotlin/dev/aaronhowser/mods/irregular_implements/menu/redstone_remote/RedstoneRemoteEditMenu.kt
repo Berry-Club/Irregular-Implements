@@ -25,7 +25,8 @@ class RedstoneRemoteEditMenu(
 		}
 	}
 
-	private var usingMainHand: Boolean = playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack()
+	private var usingMainHand: Boolean =
+		playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack()
 
 	private val itemHandler: IItemHandler? = getRedstoneRemoteStack().getCapability(Capabilities.ItemHandler.ITEM)
 

@@ -11,6 +11,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterMenu
 import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorScreen
+import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformScreen
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
@@ -83,6 +84,8 @@ object ModMenuTypes {
 		register("redstone_remote_use", ::RedstoneRemoteUseMenu)
 	val ENDER_ENERGY_DISTRIBUTOR: DeferredHolder<MenuType<*>, MenuType<EnderEnergyDistributorMenu>> =
 		register("ender_energy_distributor", ::EnderEnergyDistributorMenu)
+	val ENDER_LETTER: DeferredHolder<MenuType<*>, MenuType<EnderLetterMenu>> =
+		register("ender_letter", ::EnderLetterMenu)
 
 	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
 		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })

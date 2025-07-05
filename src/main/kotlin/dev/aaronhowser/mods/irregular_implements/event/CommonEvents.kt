@@ -13,6 +13,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEn
 import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData.Companion.worldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
+import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -223,6 +224,12 @@ object CommonEvents {
 			Capabilities.EnergyStorage.BLOCK,
 			ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(),
 			EnderEnergyDistributorBlockEntity::getCapability
+		)
+
+		event.registerItem(
+			Capabilities.ItemHandler.ITEM,
+			EnderLetterContentsDataComponent::getCapability,
+			ModItems.ENDER_LETTER.get(),
 		)
 	}
 
