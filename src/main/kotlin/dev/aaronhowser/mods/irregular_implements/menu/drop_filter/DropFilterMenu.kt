@@ -70,8 +70,9 @@ class DropFilterMenu(
 		}
 	}
 
-	init {
+	override val playerInventoryY: Int = 51
 
+	override fun addSlots() {
 		val filterX = 80
 		val filterY = 18
 
@@ -87,25 +88,6 @@ class DropFilterMenu(
 		}
 
 		this.addSlot(filterSlot)
-
-		// Add the 27 slots of the player inventory
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val slotIndex = column + row * 9 + 9
-				val x = 8 + column * 18
-				val y = 51 + row * 18
-
-				this.addSlot(Slot(playerInventory, slotIndex, x, y))
-			}
-		}
-
-		// Add the 9 slots of the player hotbar
-		for (hotbarIndex in 0..8) {
-			val x = 8 + hotbarIndex * 18
-			val y = 109
-
-			this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
-		}
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

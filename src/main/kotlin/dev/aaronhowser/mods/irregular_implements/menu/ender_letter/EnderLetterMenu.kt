@@ -21,10 +21,10 @@ class EnderLetterMenu(
 
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
-	init {
-		if (itemHandler != null) {
+	override val playerInventoryY: Int = 68
 
-		}
+	override fun addSlots() {
+
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

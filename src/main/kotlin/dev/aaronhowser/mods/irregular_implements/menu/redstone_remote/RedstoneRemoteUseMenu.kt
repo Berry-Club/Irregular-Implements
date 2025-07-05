@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 
 //TODO: Quick move stack
-//TODO: Weirdness when putting items in sometimes
 class RedstoneRemoteUseMenu(
 	containerId: Int,
 	playerInventory: Inventory
@@ -22,6 +21,10 @@ class RedstoneRemoteUseMenu(
 	containerId,
 	playerInventory
 ), MenuWithButtons {
+
+	// No slots in this menu, just buttons
+	override val playerInventoryY: Int = -1
+	override fun addSlots() {}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY

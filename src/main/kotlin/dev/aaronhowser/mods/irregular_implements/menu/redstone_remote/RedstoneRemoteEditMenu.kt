@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.IItemHandler
@@ -22,39 +21,22 @@ class RedstoneRemoteEditMenu(
 
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
-	init {
+	override val playerInventoryY: Int = 68
 
-		if (itemHandler != null) {
-			for (pairIndex in 0 until 9) {
-				val x = 8 + pairIndex * 18
+	override fun addSlots() {
+		if (itemHandler == null) return
 
-				val filterY = 18
-				val filterSlot = SlotItemHandler(itemHandler, pairIndex, x, filterY)
-				this.addSlot(filterSlot)
 
-				val displayY = 36
-				val displaySlot = SlotItemHandler(itemHandler, pairIndex + 9, x, displayY)
-				this.addSlot(displaySlot)
-			}
-		}
+		for (pairIndex in 0 until 9) {
+			val x = 8 + pairIndex * 18
 
-		// Add the 27 slots of the player inventory
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val slotIndex = column + row * 9 + 9
-				val x = 8 + column * 18
-				val y = 68 + row * 18
+			val filterY = 18
+			val filterSlot = SlotItemHandler(itemHandler, pairIndex, x, filterY)
+			this.addSlot(filterSlot)
 
-				this.addSlot(Slot(playerInventory, slotIndex, x, y))
-			}
-		}
-
-		// Add the 9 slots of the player hotbar
-		for (hotbarIndex in 0..8) {
-			val x = 8 + hotbarIndex * 18
-			val y = 126
-
-			this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
+			val displayY = 36
+			val displaySlot = SlotItemHandler(itemHandler, pairIndex + 9, x, displayY)
+			this.addSlot(displaySlot)
 		}
 	}
 
