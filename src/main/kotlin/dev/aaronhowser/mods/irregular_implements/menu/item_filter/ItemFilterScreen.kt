@@ -68,7 +68,7 @@ class ItemFilterScreen(
 				sprite = ScreenTextures.Sprite.ItemFilter.Blacklist
 			)
 			.currentStageGetter(
-				currentStageGetter = { if (this.menu.isBlacklist) 1 else 0 }
+				currentStageGetter = { if (this.menu.getIsBlacklist()) 1 else 0 }
 			)
 			.onPress(onPress)
 			.build()
@@ -99,14 +99,14 @@ class ItemFilterScreen(
 			}
 		)
 
-		button.visible = !this.menu.filter?.getOrNull(index).isNullOrEmpty()
+		button.visible = !this.menu.getFilter()?.getOrNull(index).isNullOrEmpty()
 
 		this.leftButtons.add(button)
 		this.addRenderableWidget(button)
 	}
 
 	private fun leftMessageGetter(index: Int): List<MutableComponent> {
-		val filterAtIndex = this.menu.filter?.getOrNull(index)
+		val filterAtIndex = this.menu.getFilter()?.getOrNull(index)
 
 		return listOf(
 			ModLanguageProvider.Tooltips.ITEM_FILTER_ITEM.toComponent().withStyle(
@@ -119,7 +119,7 @@ class ItemFilterScreen(
 	}
 
 	private fun leftColorGetter(index: Int): Int {
-		val filterAtIndex = this.menu.filter?.getOrNull(index)
+		val filterAtIndex = this.menu.getFilter()?.getOrNull(index)
 
 		return if (filterAtIndex is FilterEntry.Item) {
 			0xFF5969FF.toInt()
@@ -152,7 +152,7 @@ class ItemFilterScreen(
 			}
 		)
 
-		button.visible = !this.menu.filter?.getOrNull(index).isNullOrEmpty()
+		button.visible = !this.menu.getFilter()?.getOrNull(index).isNullOrEmpty()
 
 		this.rightButtons.add(button)
 		this.addRenderableWidget(button)
@@ -160,7 +160,7 @@ class ItemFilterScreen(
 
 	private fun rightMessageGetter(index: Int): List<MutableComponent> {
 		return when (
-			val filterAtIndex = this.menu.filter?.getOrNull(index)
+			val filterAtIndex = this.menu.getFilter()?.getOrNull(index)
 		) {
 			is FilterEntry.Item -> {
 				listOf(
@@ -191,7 +191,7 @@ class ItemFilterScreen(
 
 	private fun rightColorGetter(index: Int): Int {
 		return when (
-			val filterAtIndex = this.menu.filter?.getOrNull(index)
+			val filterAtIndex = this.menu.getFilter()?.getOrNull(index)
 		) {
 			is FilterEntry.Item -> {
 				if (filterAtIndex.requireSameComponents) {
@@ -225,13 +225,13 @@ class ItemFilterScreen(
 		for (buttonIndex in this.leftButtons.indices) {
 			val button = this.leftButtons.elementAtOrNull(buttonIndex) ?: continue
 
-			button.visible = !this.menu.filter?.getOrNull(buttonIndex).isNullOrEmpty()
+			button.visible = !this.menu.getFilter()?.getOrNull(buttonIndex).isNullOrEmpty()
 		}
 
 		for (buttonIndex in this.rightButtons.indices) {
 			val button = this.rightButtons.elementAtOrNull(buttonIndex) ?: continue
 
-			button.visible = !this.menu.filter?.getOrNull(buttonIndex).isNullOrEmpty()
+			button.visible = !this.menu.getFilter()?.getOrNull(buttonIndex).isNullOrEmpty()
 		}
 	}
 

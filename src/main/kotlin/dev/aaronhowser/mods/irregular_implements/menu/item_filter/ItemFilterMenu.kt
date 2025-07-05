@@ -1,65 +1,56 @@
 package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
+import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.NonNullList
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class ItemFilterMenu(
 	containerId: Int,
-	private val playerInventory: Inventory
-) : AbstractContainerMenu(ModMenuTypes.ITEM_FILTER.get(), containerId), MenuWithButtons {
+	playerInventory: Inventory
+) : HeldItemContainerMenu(
+	ModItems.ITEM_FILTER,
+	ModMenuTypes.ITEM_FILTER.get(),
+	containerId, playerInventory
+), MenuWithButtons {
 
 	private val holderLookup = this.playerInventory.player.level().registryAccess()
 
-	// Uses a getter because when it mutates it only does so on server, and doesn't mutate the one on the client's copy of the menu
-	private fun getFilterStack(): ItemStack {
-		return if (playerInventory.player.mainHandItem.`is`(ModItems.ITEM_FILTER.get())) {
-			playerInventory.player.mainHandItem
-		} else {
-			playerInventory.player.offhandItem
-		}
+	private fun getFilterComponent(): ItemFilterDataComponent? {
+		return getHeldItemStack().get(ModDataComponents.ITEM_FILTER_ENTRIES)
 	}
 
-	private val hand: InteractionHand =
-		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getFilterStack())
-			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
+	fun getFilter(): NonNullList<FilterEntry>? {
+		return getFilterComponent()?.entries
+	}
 
-	private val filterComponent: ItemFilterDataComponent?
-		get() = getFilterStack().get(ModDataComponents.ITEM_FILTER_ENTRIES)
+	fun getIsBlacklist(): Boolean = getFilterComponent()?.isBlacklist ?: false
 
-	val filter: NonNullList<FilterEntry>?
-		get() = filterComponent?.entries
+	private fun setIsBlacklist(value: Boolean) {
+		val filterComponent = getFilterComponent() ?: return
 
-	var isBlacklist: Boolean
-		get() = filterComponent?.isBlacklist.isTrue
-		private set(value) {
-			if (value == this.isBlacklist) return
+		if (value == filterComponent.isBlacklist) return
 
-			val filterComponent = this.filterComponent ?: return
-
-			getFilterStack().set(
-				ModDataComponents.ITEM_FILTER_ENTRIES,
-				filterComponent.copy(isBlacklist = value)
-			)
-		}
+		getHeldItemStack().set(
+			ModDataComponents.ITEM_FILTER_ENTRIES,
+			filterComponent.copy(isBlacklist = value)
+		)
+	}
 
 	init {
 		for (index in 0 until 9) {
 			val x = 8 + index * 18
 			val y = 26
 
-			val slot = ItemFilterSlot(::getFilterStack, this.holderLookup, x, y)
+			val slot = ItemFilterSlot(::getHeldItemStack, this.holderLookup, x, y)
 
 			this.addSlot(slot)
 		}
@@ -94,7 +85,7 @@ class ItemFilterMenu(
 
 	override fun handleButtonPressed(buttonId: Int) {
 		when (buttonId) {
-			TOGGLE_BLACKLIST_BUTTON_ID -> this.isBlacklist = !this.isBlacklist
+			TOGGLE_BLACKLIST_BUTTON_ID -> setIsBlacklist(!getIsBlacklist())
 
 			in 1..9 -> pressLeftButton(buttonId - 1)
 
@@ -104,7 +95,7 @@ class ItemFilterMenu(
 
 	// Toggles between Item Filter and Tag Filter
 	private fun pressLeftButton(slotIndex: Int) {
-		val filter = this.filter ?: return
+		val filter = this.getFilter() ?: return
 		val entry = filter.getOrNull(slotIndex) ?: return
 
 		val newEntry = when (entry) {
@@ -127,16 +118,16 @@ class ItemFilterMenu(
 		val newFilter = filter.toMutableList()
 		newFilter[slotIndex] = newEntry
 
-		getFilterStack().set(
+		getHeldItemStack().set(
 			ModDataComponents.ITEM_FILTER_ENTRIES,
-			ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
+			ItemFilterDataComponent(newFilter, getIsBlacklist())
 		)
 	}
 
 	// If it's an Item Filter, toggles between requiring the same components or not
 	// If it's a Tag Filter, cycles which Tag it's filtering
 	private fun pressRightButton(slotIndex: Int) {
-		val filter = this.filter ?: return
+		val filter = this.getFilter() ?: return
 		val entry = filter.getOrNull(slotIndex) ?: return
 
 		if (entry is FilterEntry.Item) {
@@ -153,9 +144,9 @@ class ItemFilterMenu(
 		val newFilter = filter.toMutableList()
 		newFilter[slotIndex] = newEntry
 
-		getFilterStack().set(
+		getHeldItemStack().set(
 			ModDataComponents.ITEM_FILTER_ENTRIES,
-			ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
+			ItemFilterDataComponent(newFilter, getIsBlacklist())
 		)
 	}
 
@@ -167,9 +158,9 @@ class ItemFilterMenu(
 		val newFilter = filter.toMutableList()
 		newFilter[slotIndex] = newEntry
 
-		getFilterStack().set(
+		getHeldItemStack().set(
 			ModDataComponents.ITEM_FILTER_ENTRIES,
-			ItemFilterDataComponent(newFilter, this.filterComponent!!.isBlacklist)
+			ItemFilterDataComponent(newFilter, getIsBlacklist())
 		)
 	}
 
