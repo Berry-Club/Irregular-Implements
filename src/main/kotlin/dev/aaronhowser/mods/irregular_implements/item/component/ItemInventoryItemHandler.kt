@@ -18,7 +18,6 @@ open class ItemInventoryItemHandler<T : ItemInventoryItemHandler.InventoryDataCo
 	}
 
 	interface InventoryDataComponent {
-		fun getType(): DataComponentType<*>
 		fun getInventory(): NonNullList<ItemStack>
 		fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>)
 	}

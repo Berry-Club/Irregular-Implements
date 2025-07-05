@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.NonNullList
-import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
@@ -29,16 +28,10 @@ data class EnderLetterContentsDataComponent(
 		Optional.ofNullable(recipient)
 	)
 
-	override fun getType(): DataComponentType<*> {
-		TODO("Not yet implemented")
-	}
-
-	override fun getInventory(): NonNullList<ItemStack> {
-		TODO("Not yet implemented")
-	}
+	override fun getInventory(): NonNullList<ItemStack> = stacks
 
 	override fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>) {
-		TODO("Not yet implemented")
+		stack.set(ModDataComponents.ENDER_LETTER_CONTENTS, this.copy(stacks = inventory))
 	}
 
 	companion object {

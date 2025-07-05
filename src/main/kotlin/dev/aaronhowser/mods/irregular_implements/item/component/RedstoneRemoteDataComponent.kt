@@ -5,9 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.NonNullList
-import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
-import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.items.ItemStackHandler
@@ -18,11 +16,10 @@ data class RedstoneRemoteDataComponent(
 
 	constructor() : this(NonNullList.withSize(18, ItemStack.EMPTY))
 
-	override fun getType(): DataComponentType<RedstoneRemoteDataComponent> = ModDataComponents.REDSTONE_REMOTE.get()
 
 	override fun getInventory(): NonNullList<ItemStack> = stacks
 	override fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>) {
-		stack.set(getType(), RedstoneRemoteDataComponent(inventory))
+		stack.set(ModDataComponents.REDSTONE_REMOTE, RedstoneRemoteDataComponent(inventory))
 	}
 
 	fun getLocation(index: Int): ItemStack = stacks.getOrNull(index) ?: ItemStack.EMPTY
