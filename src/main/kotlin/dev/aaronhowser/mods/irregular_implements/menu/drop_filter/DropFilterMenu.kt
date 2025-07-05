@@ -1,37 +1,29 @@
 package dev.aaronhowser.mods.irregular_implements.menu.drop_filter
 
-import dev.aaronhowser.mods.irregular_implements.item.DropFilterItem
+import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.core.NonNullList
 import net.minecraft.core.component.DataComponents
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemContainerContents
 
 class DropFilterMenu(
 	containerId: Int,
-	private val playerInventory: Inventory
-) : AbstractContainerMenu(ModMenuTypes.DROP_FILTER.get(), containerId) {
-
-	private val filterStack: ItemStack
-		get() = if (DropFilterItem.stackIsDropFilter(playerInventory.player.mainHandItem)) {
-			playerInventory.player.mainHandItem
-		} else {
-			playerInventory.player.offhandItem
-		}
-
-	private val hand: InteractionHand =
-		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === filterStack)
-			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
+	playerInventory: Inventory
+) : HeldItemContainerMenu(
+	ModItems.ITEM_FILTER,
+	ModMenuTypes.DROP_FILTER.get(),
+	containerId,
+	playerInventory
+) {
 
 	val container: ItemContainerContents?
-		get() = filterStack.get(DataComponents.CONTAINER)
+		get() = getHeldItemStack().get(DataComponents.CONTAINER)
 
 	val filterContainer = object : SimpleContainer(1) {
 		override fun getItems(): NonNullList<ItemStack> {
@@ -60,7 +52,7 @@ class DropFilterMenu(
 
 			val stack = container.getStackInSlot(index).copy()
 
-			filterStack.set(
+			getHeldItemStack().set(
 				DataComponents.CONTAINER,
 				ItemContainerContents.EMPTY
 			)
@@ -69,14 +61,12 @@ class DropFilterMenu(
 		}
 
 		override fun addItem(stack: ItemStack): ItemStack {
-
-			filterStack.set(
+			getHeldItemStack().set(
 				DataComponents.CONTAINER,
 				ItemContainerContents.fromItems(listOf(stack))
 			)
 
 			return ItemStack.EMPTY
-
 		}
 	}
 
@@ -145,11 +135,5 @@ class DropFilterMenu(
 		slot.onTake(player, stackThere)
 
 		return copyStack
-	}
-
-	override fun stillValid(player: Player): Boolean {
-		val itemInHand = player.getItemInHand(hand)
-
-		return itemInHand === filterStack
 	}
 }

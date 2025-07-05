@@ -1,11 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.capabilities.Capabilities
@@ -14,22 +13,14 @@ import net.neoforged.neoforge.items.SlotItemHandler
 
 class RedstoneRemoteEditMenu(
 	containerId: Int,
-	private val playerInventory: Inventory
-) : AbstractContainerMenu(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), containerId) {
+	playerInventory: Inventory
+) : HeldItemContainerMenu(
+	ModItems.REDSTONE_REMOTE,
+	ModMenuTypes.REDSTONE_REMOTE_EDIT.get(),
+	containerId, playerInventory
+) {
 
-	private fun getRedstoneRemoteStack(): ItemStack {
-		return if (playerInventory.player.mainHandItem.`is`(ModItems.REDSTONE_REMOTE.get())) {
-			playerInventory.player.mainHandItem
-		} else {
-			playerInventory.player.offhandItem
-		}
-	}
-
-	private val hand: InteractionHand =
-		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getRedstoneRemoteStack())
-			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
-
-	private val itemHandler: IItemHandler? = getRedstoneRemoteStack().getCapability(Capabilities.ItemHandler.ITEM)
+	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
 	init {
 

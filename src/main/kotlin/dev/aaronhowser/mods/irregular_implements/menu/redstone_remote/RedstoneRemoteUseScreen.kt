@@ -25,7 +25,7 @@ class RedstoneRemoteUseScreen(
 	}
 
 	private fun addButtons() {
-		val dataComponent = menu.getRedstoneRemoteStack().get(ModDataComponents.REDSTONE_REMOTE) ?: return
+		val dataComponent = menu.getHeldItemStack().get(ModDataComponents.REDSTONE_REMOTE) ?: return
 
 		for (i in 0 until 9) {
 			val (locationFilter, icon) = dataComponent.getPair(i)

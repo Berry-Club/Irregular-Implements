@@ -1,33 +1,25 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
+import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.IItemHandler
 
 class EnderLetterMenu(
 	containerId: Int,
-	private val playerInventory: Inventory
-) : AbstractContainerMenu(ModMenuTypes.ENDER_LETTER.get(), containerId) {
+	playerInventory: Inventory
+) : HeldItemContainerMenu(
+	ModItems.ENDER_LETTER,
+	ModMenuTypes.ENDER_LETTER.get(),
+	containerId,
+	playerInventory
+) {
 
-	private fun getEnderLetterStack(): ItemStack {
-		return if (playerInventory.player.mainHandItem.`is`(ModItems.ENDER_LETTER.get())) {
-			playerInventory.player.mainHandItem
-		} else {
-			playerInventory.player.offhandItem
-		}
-	}
-
-	private val hand: InteractionHand =
-		if (playerInventory.player.getItemInHand(InteractionHand.MAIN_HAND) === getEnderLetterStack())
-			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
-
-	private val itemHandler: IItemHandler? = getEnderLetterStack().getCapability(Capabilities.ItemHandler.ITEM)
+	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
 	init {
 		if (itemHandler != null) {
