@@ -47,8 +47,8 @@ object ModDataComponents {
 	val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
 		DATA_COMPONENT_REGISTRY.registerComponentType("uuid") { builder ->
 			builder
-				.persistent(SpecificEntityDataComponent.UUID_CODEC)
-				.networkSynchronized(SpecificEntityDataComponent.UUID_STREAM_CODEC)
+				.persistent(OtherUtil.UUID_CODEC)
+				.networkSynchronized(OtherUtil.UUID_STREAM_CODEC)
 		}
 
 	val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
