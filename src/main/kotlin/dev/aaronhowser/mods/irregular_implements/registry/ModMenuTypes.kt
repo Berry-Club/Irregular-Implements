@@ -12,6 +12,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterScre
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterMenu
+import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterScreen
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformScreen
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
@@ -109,6 +110,7 @@ object ModMenuTypes {
 		event.register(REDSTONE_REMOTE_EDIT.get(), ::RedstoneRemoteEditScreen)
 		event.register(REDSTONE_REMOTE_USE.get(), ::RedstoneRemoteUseScreen)
 		event.register(ENDER_ENERGY_DISTRIBUTOR.get(), ::EnderEnergyDistributorScreen)
+		event.register(ENDER_LETTER.get(), ::EnderLetterScreen)
 	}
 
 }

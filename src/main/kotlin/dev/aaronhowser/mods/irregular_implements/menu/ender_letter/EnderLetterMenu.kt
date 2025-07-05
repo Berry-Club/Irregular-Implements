@@ -28,6 +28,12 @@ class EnderLetterMenu(
 
 	private val itemHandler: IItemHandler? = getEnderLetterStack().getCapability(Capabilities.ItemHandler.ITEM)
 
+	init {
+		if (itemHandler != null) {
+
+		}
+	}
+
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY
 	}
