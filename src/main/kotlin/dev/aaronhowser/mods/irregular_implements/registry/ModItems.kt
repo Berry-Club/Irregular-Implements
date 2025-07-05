@@ -30,9 +30,10 @@ object ModItems {
 	val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
 		register("summoning_pendulum", ::SummoningPendulumItem, SummoningPendulumItem.DEFAULT_PROPERTIES)
 	val LOOT_GENERATOR = basic("loot_generator")
-	val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =    //TODO: Add to Ocean Monument loot
+	val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
 		register("bottle_of_air", ::AirBottleItem, AirBottleItem.DEFAULT_PROPERTIES)
-	val ENDER_LETTER = basic("ender_letter")
+	val ENDER_LETTER: DeferredItem<EnderLetterItem> =
+		register("ender_letter", ::EnderLetterItem, EnderLetterItem.DEFAULT_PROPERTIES)
 	val GOLDEN_EGG: DeferredItem<GoldenEggItem> =
 		register("golden_egg", ::GoldenEggItem)
 	val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =

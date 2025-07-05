@@ -14,7 +14,7 @@ data class RedstoneRemoteDataComponent(
 	private val stacks: NonNullList<ItemStack>
 ) : ItemInventoryItemHandler.InventoryDataComponent {
 
-	constructor() : this(NonNullList.withSize(18, ItemStack.EMPTY))
+	constructor() : this(NonNullList.withSize(HORIZONTAL_SLOT_COUNT * 2, ItemStack.EMPTY))
 
 
 	override fun getInventory(): NonNullList<ItemStack> = stacks
@@ -27,11 +27,12 @@ data class RedstoneRemoteDataComponent(
 	fun getPair(index: Int): Pair<ItemStack, ItemStack> = getLocation(index) to getDisplay(index)
 
 	companion object {
+		const val HORIZONTAL_SLOT_COUNT: Int = 8
 
 		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler {
 			return object : ItemInventoryItemHandler<RedstoneRemoteDataComponent>(stack, ModDataComponents.REDSTONE_REMOTE.get()) {
 				override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-					if (slot < 9) return stack.has(ModDataComponents.LOCATION)
+					if (slot <= HORIZONTAL_SLOT_COUNT) return stack.has(ModDataComponents.LOCATION)
 					return true
 				}
 			}

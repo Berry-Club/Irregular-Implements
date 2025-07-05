@@ -18,6 +18,12 @@ data class EnderLetterContentsDataComponent(
 	val recipient: Optional<String>
 ) : ItemInventoryItemHandler.InventoryDataComponent {
 
+	constructor() : this(
+		NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY),
+		Optional.empty(),
+		Optional.empty()
+	)
+
 	constructor(
 		stacks: NonNullList<ItemStack>,
 		sender: String?,
@@ -35,13 +41,10 @@ data class EnderLetterContentsDataComponent(
 	}
 
 	companion object {
+		const val INVENTORY_SIZE: Int = 9
+
 		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler {
-			return object : ItemInventoryItemHandler<EnderLetterContentsDataComponent>(stack, ModDataComponents.ENDER_LETTER_CONTENTS.get()) {
-				override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-					if (slot < 9) return !stack.has(ModDataComponents.ENDER_LETTER_CONTENTS)
-					return true
-				}
-			}
+			return ItemInventoryItemHandler(stack, ModDataComponents.ENDER_LETTER_CONTENTS.get())
 		}
 
 		val CODEC: Codec<EnderLetterContentsDataComponent> =
