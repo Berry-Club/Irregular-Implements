@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.PeaceCandleCarrier
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.level.ChunkPos
@@ -18,12 +19,14 @@ class PeaceCandleBlockEntity(
 ) : BlockEntity(ModBlockEntities.PEACE_CANDLE.get(), pPos, pBlockState) {
 
 	companion object {
+		fun PeaceCandleCarrier.getPeaceCandleChunks(): LongOpenHashSet = this.`irregular_implements$getPeaceCandleChunks`()
+
 		fun chunkIsPreventingMonsterSpawns(level: LevelReader, blockPos: BlockPos): Boolean {
 			if (!level.isAreaLoaded(blockPos, 1)) return false
 			if (level !is PeaceCandleCarrier) return false
 
 			val chunkPos = level.getChunk(blockPos).pos.toLong()
-			return level.`irregular_implements$chunkProtectedByPeaceCandle`(chunkPos)
+			return level.getPeaceCandleChunks().contains(chunkPos)
 		}
 
 		fun onSpawnPlacementCheck(event: MobSpawnEvent.SpawnPlacementCheck) {
@@ -53,7 +56,7 @@ class PeaceCandleBlockEntity(
 
 			for (x in (chunkX - checkRadius)..(chunkX + checkRadius)) {
 				for (z in (chunkZ - checkRadius)..(chunkZ + checkRadius)) {
-					level.`irregular_implements$addPeaceCandleChunk`(ChunkPos.asLong(x, z))
+					level.getPeaceCandleChunks().add(ChunkPos.asLong(x, z))
 				}
 			}
 		}

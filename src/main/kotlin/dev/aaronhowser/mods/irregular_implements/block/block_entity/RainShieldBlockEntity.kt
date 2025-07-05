@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
@@ -21,6 +22,7 @@ class RainShieldBlockEntity(
 ) : BlockEntity(ModBlockEntities.RAIN_SHIELD.get(), pPos, pBlockState) {
 
 	companion object {
+		fun RainShieldCarrier.getRainShieldChunks(): LongOpenHashSet = this.`irregular_implements$getRainShieldChunks`()
 
 		@JvmStatic
 		fun chunkIsProtectedFromRain(level: LevelReader, blockPos: BlockPos): Boolean {
@@ -28,7 +30,7 @@ class RainShieldBlockEntity(
 			if (level !is RainShieldCarrier) return false
 
 			val chunkPos = level.getChunk(blockPos).pos.toLong()
-			return level.`irregular_implements$chunkProtectedByRainShield`(chunkPos)
+			return level.getRainShieldChunks().contains(chunkPos)
 		}
 
 		fun tick(
@@ -48,7 +50,7 @@ class RainShieldBlockEntity(
 
 				for (x in (chunkX - checkRadius)..(chunkX + checkRadius)) {
 					for (z in (chunkZ - checkRadius)..(chunkZ + checkRadius)) {
-						level.`irregular_implements$addRainShieldChunk`(ChunkPos.asLong(x, z))
+						level.getRainShieldChunks().add(ChunkPos.asLong(x, z))
 					}
 				}
 			}

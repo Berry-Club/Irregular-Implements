@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.PeaceCandleCarrier;
-import dev.aaronhowser.mods.irregular_implements.RedstoneInterfaceCarrier;
 import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier;
+import dev.aaronhowser.mods.irregular_implements.RedstoneInterfaceCarrier;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
@@ -23,13 +23,6 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	@Unique
 	LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
 
-	//
-	//
-	//
-	// Rain Shield
-	//
-	//
-	//
 	@Unique
 	LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
 
@@ -38,8 +31,9 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 			at = @At("HEAD")
 	)
 	private void irregular_implements$tickBlockEntities(CallbackInfo ci) {
-		irregular_implements$clearRainShieldChunks();
-		irregular_implements$clearPeaceCandleChunks();
+
+		irregular_implements$getRainShieldChunks().clear();
+		irregular_implements$getPeaceCandleChunks().clear();
 
 		// Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.
 		// I was doing it on LevelTickEvent before, but neither Pre not Post worked. The order that it was going was:
@@ -49,24 +43,6 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 		// 4. LevelTickEvent.Post
 		// So no matter if the event is checked on Pre or Post, the set will always be empty when checked.
 		// Doing it this way adds a single tick delay, but honestly that's fine.
-	}
-
-	@Unique
-	@Override
-	public boolean irregular_implements$addRainShieldChunk(long pos) {
-		return this.irregular_implements$rainShieldChunks.add(pos);
-	}
-
-	@Unique
-	@Override
-	public boolean irregular_implements$removeRainShieldChunk(long pos) {
-		return this.irregular_implements$rainShieldChunks.remove(pos);
-	}
-
-	@Unique
-	@Override
-	public void irregular_implements$clearRainShieldChunks() {
-		this.irregular_implements$rainShieldChunks.clear();
 	}
 
 	@Unique
@@ -89,57 +65,11 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 		}
 	}
 
-	//
-	//
-	//
-	// Peace Candle
-	//
-	//
-	//
-
-	@Unique
-	@Override
-	public boolean irregular_implements$chunkProtectedByRainShield(long pos) {
-		return this.irregular_implements$rainShieldChunks.contains(pos);
-	}
-
-	@Unique
-	@Override
-	public boolean irregular_implements$addPeaceCandleChunk(long pos) {
-		return this.irregular_implements$peaceCandleChunks.add(pos);
-	}
-
-	@Unique
-	@Override
-	public boolean irregular_implements$removePeaceCandleChunk(long pos) {
-		return this.irregular_implements$peaceCandleChunks.remove(pos);
-	}
-
-	@Unique
-	@Override
-	public void irregular_implements$clearPeaceCandleChunks() {
-		this.irregular_implements$peaceCandleChunks.clear();
-	}
-
 	@Unique
 	@Override
 	public LongOpenHashSet irregular_implements$getPeaceCandleChunks() {
 		return this.irregular_implements$peaceCandleChunks;
 	}
-
-	@Unique
-	@Override
-	public boolean irregular_implements$chunkProtectedByPeaceCandle(long pos) {
-		return this.irregular_implements$peaceCandleChunks.contains(pos);
-	}
-
-	//
-	//
-	//
-	// Redstone Interfaces
-	//
-	//
-	//
 
 	@Override
 	public int irregular_implements$getLinkedInterfacePower(BlockPos blockPos, @Nullable Direction direction) {

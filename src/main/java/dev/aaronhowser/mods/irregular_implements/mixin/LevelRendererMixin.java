@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier;
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,9 +28,9 @@ public abstract class LevelRendererMixin {
 			)
 	)
 	private Biome.Precipitation irregular_implements$getPrecipitationAt(Biome biome, BlockPos pos) {
-		if (level instanceof RainShieldCarrier l) {
-			var chunkPos = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
-			if (l.irregular_implements$chunkProtectedByRainShield(chunkPos)) {
+
+		if (level instanceof LevelReader lr) {
+			if (RainShieldBlockEntity.chunkIsProtectedFromRain(lr, pos)) {
 				return Biome.Precipitation.NONE;
 			}
 		}
