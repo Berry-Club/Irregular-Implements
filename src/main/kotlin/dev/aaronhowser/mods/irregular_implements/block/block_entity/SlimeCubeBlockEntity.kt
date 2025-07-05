@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.Difficulty
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
@@ -18,31 +19,31 @@ class SlimeCubeBlockEntity(
 		super.onLoad()
 		val level = this.level ?: return
 
-		CUBES.computeIfAbsent(level) { mutableSetOf() }.add(this)
+		CUBES.computeIfAbsent(level.dimension()) { mutableSetOf() }.add(this)
 	}
 
 	override fun setRemoved() {
 		super.setRemoved()
 		val level = this.level ?: return
 
-		CUBES.computeIfAbsent(level) { mutableSetOf() }.remove(this)
+		CUBES.computeIfAbsent(level.dimension()) { mutableSetOf() }.remove(this)
 	}
 
 	override fun clearRemoved() {
 		super.clearRemoved()
 		val level = this.level ?: return
 
-		CUBES.computeIfAbsent(level) { mutableSetOf() }.add(this)
+		CUBES.computeIfAbsent(level.dimension()) { mutableSetOf() }.add(this)
 	}
 
 	companion object {
-		private val CUBES: MutableMap<Level, MutableSet<SlimeCubeBlockEntity>> = mutableMapOf()
+		private val CUBES: MutableMap<ResourceKey<Level>, MutableSet<SlimeCubeBlockEntity>> = mutableMapOf()
 
 		fun chunkHasCube(level: Level, pos: BlockPos, powered: Boolean): Boolean {
 			val chunkPos = ChunkPos(pos)
 
 			val cubesInThatChunk = CUBES
-				.getOrDefault(level, emptySet())
+				.getOrDefault(level.dimension(), emptySet())
 				.filter {
 					ChunkPos(it.worldPosition) == chunkPos
 				}
