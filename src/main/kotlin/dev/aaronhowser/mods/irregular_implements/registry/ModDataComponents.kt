@@ -214,4 +214,11 @@ object ModDataComponents {
 				.networkSynchronized(PortkeyDisguiseDataComponent.STREAM_CODEC)
 		}
 
+	val ENDER_LETTER_CONTENTS: DeferredHolder<DataComponentType<*>, DataComponentType<EnderLetterContentsDataComponent>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("ender_letter_contents") {
+			it
+				.persistent(EnderLetterContentsDataComponent.CODEC)
+				.networkSynchronized(EnderLetterContentsDataComponent.STREAM_CODEC)
+		}
+
 }

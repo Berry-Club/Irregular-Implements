@@ -8,6 +8,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.core.NonNullList
 import net.minecraft.core.Registry
 import net.minecraft.core.Vec3i
 import net.minecraft.nbt.CompoundTag
@@ -197,5 +198,8 @@ object OtherUtil {
 		UUID::fromString,
 		UUID::toString
 	)
+
+	val STACK_LIST_STREAM_CODEC: StreamCodec<ByteBuf, NonNullList<ItemStack>> =
+		ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC))
 
 }
