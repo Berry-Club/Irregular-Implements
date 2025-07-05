@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.RainShieldChunks;
+import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
@@ -28,7 +28,7 @@ public abstract class LevelRendererMixin {
 			)
 	)
 	private Biome.Precipitation irregular_implements$getPrecipitationAt(Biome biome, BlockPos pos) {
-		if (level instanceof RainShieldChunks l) {
+		if (level instanceof RainShieldCarrier l) {
 			var chunkPos = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
 			if (l.irregular_implements$chunkProtectedByRainShield(chunkPos)) {
 				return Biome.Precipitation.NONE;

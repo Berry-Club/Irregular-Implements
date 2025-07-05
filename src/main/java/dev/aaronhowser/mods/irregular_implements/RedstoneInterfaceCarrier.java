@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 
 import javax.annotation.Nullable;
 
-public interface PoweredRedstoneInterfaces {
+public interface RedstoneInterfaceCarrier {
 
 	default int irregular_implements$getLinkedInterfacePower(
 			BlockPos blockPos,

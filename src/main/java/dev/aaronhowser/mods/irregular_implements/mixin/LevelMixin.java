@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.PeaceCandleChunks;
-import dev.aaronhowser.mods.irregular_implements.PoweredRedstoneInterfaces;
-import dev.aaronhowser.mods.irregular_implements.RainShieldChunks;
+import dev.aaronhowser.mods.irregular_implements.PeaceCandleCarrier;
+import dev.aaronhowser.mods.irregular_implements.RedstoneInterfaceCarrier;
+import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
-public abstract class LevelMixin implements RainShieldChunks, PeaceCandleChunks, PoweredRedstoneInterfaces {
+public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrier, RedstoneInterfaceCarrier {
 
 	@Unique
 	LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();

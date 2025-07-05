@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import dev.aaronhowser.mods.irregular_implements.PoweredRedstoneInterfaces;
+import dev.aaronhowser.mods.irregular_implements.RedstoneInterfaceCarrier;
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,7 +36,7 @@ public interface SignalGetterMixin {
 
 		int signal = original;
 
-		if (this instanceof PoweredRedstoneInterfaces f) {
+		if (this instanceof RedstoneInterfaceCarrier f) {
 			signal = Math.max(signal, f.irregular_implements$getLinkedInterfacePower(pos, direction));
 		}
 

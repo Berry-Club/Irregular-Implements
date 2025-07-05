@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements;
 
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 
-public interface RainShieldChunks {
+public interface RainShieldCarrier {
 
 	default boolean irregular_implements$addRainShieldChunk(long chunkPosAsLong) {
 		throw new IllegalStateException();

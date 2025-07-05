@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements;
 
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 
-public interface PeaceCandleChunks {
+public interface PeaceCandleCarrier {
 
 
 	default boolean irregular_implements$addPeaceCandleChunk(long chunkPosAsLong) {

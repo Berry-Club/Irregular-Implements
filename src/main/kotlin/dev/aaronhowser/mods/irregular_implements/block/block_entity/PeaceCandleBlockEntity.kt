@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.PeaceCandleChunks
+import dev.aaronhowser.mods.irregular_implements.PeaceCandleCarrier
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -20,7 +20,7 @@ class PeaceCandleBlockEntity(
 	companion object {
 		fun chunkIsPreventingMonsterSpawns(level: LevelReader, blockPos: BlockPos): Boolean {
 			if (!level.isAreaLoaded(blockPos, 1)) return false
-			if (level !is PeaceCandleChunks) return false
+			if (level !is PeaceCandleCarrier) return false
 
 			val chunkPos = level.getChunk(blockPos).pos.toLong()
 			return level.`irregular_implements$chunkProtectedByPeaceCandle`(chunkPos)
@@ -43,7 +43,7 @@ class PeaceCandleBlockEntity(
 			blockState: BlockState,
 			blockEntity: PeaceCandleBlockEntity
 		) {
-			if (level !is PeaceCandleChunks) return
+			if (level !is PeaceCandleCarrier) return
 
 			val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
 

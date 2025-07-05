@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.RainShieldChunks
+import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -25,7 +25,7 @@ class RainShieldBlockEntity(
 		@JvmStatic
 		fun chunkIsProtectedFromRain(level: LevelReader, blockPos: BlockPos): Boolean {
 			if (!level.isAreaLoaded(blockPos, 1)) return false
-			if (level !is RainShieldChunks) return false
+			if (level !is RainShieldCarrier) return false
 
 			val chunkPos = level.getChunk(blockPos).pos.toLong()
 			return level.`irregular_implements$chunkProtectedByRainShield`(chunkPos)
@@ -37,7 +37,7 @@ class RainShieldBlockEntity(
 			blockState: BlockState,
 			blockEntity: RainShieldBlockEntity
 		) {
-			if (level !is RainShieldChunks) return
+			if (level !is RainShieldCarrier) return
 
 			if (blockState.getValue(RainShieldBlock.ENABLED)) {
 				val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
