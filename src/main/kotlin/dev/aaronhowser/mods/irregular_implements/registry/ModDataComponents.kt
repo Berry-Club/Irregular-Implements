@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.item.component.*
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.SpecificEntity
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
@@ -58,18 +59,18 @@ object ModDataComponents {
 				.networkSynchronized(ByteBufCodecs.holderRegistry(Registries.BIOME))
 		}
 
-	val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
+	val PLAYER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntity>> =
 		DATA_COMPONENT_REGISTRY.registerComponentType("player") {
 			it
-				.persistent(SpecificEntityDataComponent.CODEC)
-				.networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
+				.persistent(SpecificEntity.CODEC)
+				.networkSynchronized(SpecificEntity.STREAM_CODEC)
 		}
 
-	val ENTITY_IDENTIFIER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntityDataComponent>> =
+	val ENTITY_IDENTIFIER: DeferredHolder<DataComponentType<*>, DataComponentType<SpecificEntity>> =
 		DATA_COMPONENT_REGISTRY.registerComponentType("entity_identifier") {
 			it
-				.persistent(SpecificEntityDataComponent.CODEC)
-				.networkSynchronized(SpecificEntityDataComponent.STREAM_CODEC)
+				.persistent(SpecificEntity.CODEC)
+				.networkSynchronized(SpecificEntity.STREAM_CODEC)
 		}
 
 	val ENTITY_LIST: DeferredHolder<DataComponentType<*>, DataComponentType<List<CustomData>>> =

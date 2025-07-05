@@ -9,7 +9,7 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.entity.Entity
 import java.util.*
 
-class SpecificEntity(
+data class SpecificEntity(
 	val uuid: UUID,
 	val name: Component
 ) {
