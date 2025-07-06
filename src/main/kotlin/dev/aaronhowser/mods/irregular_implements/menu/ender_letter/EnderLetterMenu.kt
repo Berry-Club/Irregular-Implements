@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
+import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -8,6 +9,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.SlotItemHandler
 
 class EnderLetterMenu(
 	containerId: Int,
@@ -23,11 +25,19 @@ class EnderLetterMenu(
 
 	init {
 		addSlots()
-		addPlayerInventorySlots(68)
+		addPlayerInventorySlots(51)
 	}
 
 	override fun addSlots() {
+		if (itemHandler == null) return
 
+		val y = 18
+
+		for (i in 0 until EnderLetterContentsDataComponent.INVENTORY_SIZE) {
+			val x = 8 + i * 18
+			val slot = SlotItemHandler(itemHandler, i, x, y)
+			this.addSlot(slot)
+		}
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

@@ -13,4 +13,8 @@ class EnderLetterScreen(
 
 	override val background: ScreenTextures.Background = ScreenTextures.Background.EnderLetter
 
+	override fun baseInit() {
+		this.inventoryLabelY = this.imageHeight - 94
+	}
+
 }
