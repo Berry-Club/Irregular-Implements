@@ -18,12 +18,12 @@ class BlazeFireBlock : FireBlock(
 		return 0.1f
 	}
 
-	@Suppress("OVERRIDE_DEPRECATION")
+	@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 	override fun getIgniteOdds(state: BlockState): Int {
 		return super.getIgniteOdds(state) * 3
 	}
 
-	@Suppress("OVERRIDE_DEPRECATION")
+	@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 	override fun getBurnOdds(state: BlockState): Int {
 		return super.getBurnOdds(state) * 3
 	}

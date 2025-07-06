@@ -23,12 +23,13 @@ class CustomCraftingTableBlockEntityRenderer(
 		poseStack.scale(0.999f, 0.999f, 0.999f)
 		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 
+		@Suppress("DEPRECATION")
 		context.blockRenderDispatcher.renderSingleBlock(
 			blockEntity.renderedBlockState,
 			poseStack,
 			bufferSource,
 			packedLight,
-			packedOverlay
+			packedOverlay,
 		)
 
 		poseStack.popPose()
