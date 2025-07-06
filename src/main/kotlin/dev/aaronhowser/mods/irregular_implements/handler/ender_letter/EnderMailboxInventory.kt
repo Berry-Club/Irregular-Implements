@@ -30,6 +30,7 @@ class EnderMailboxInventory(
 
 		if (!simulate) {
 			enderLetters[slot] = stack
+			enderLetterHandler.setDirty()
 		}
 
 		return ItemStack.EMPTY
@@ -43,6 +44,7 @@ class EnderMailboxInventory(
 
 		if (!simulate) {
 			enderLetters[slot] = ItemStack.EMPTY
+			enderLetterHandler.setDirty()
 		}
 
 		return existing

@@ -16,6 +16,8 @@ class EnderLetterHandler : SavedData() {
 		val listTag = tag.getList(LIST_NBT, Tag.TAG_COMPOUND.toInt())
 
 		for ((uuid, inventory) in inventories) {
+			if (!inventory.hasItems()) continue
+
 			val invTag = CompoundTag()
 			invTag.putUUID(OWNER_UUID_NBT, uuid)
 			invTag.put(INVENTORY_NBT, inventory.saveAsTag(registries))
