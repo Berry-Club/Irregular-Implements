@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.igniter.IgniterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -30,9 +30,9 @@ class IgniterBlockEntity(
 ) : BlockEntity(ModBlockEntities.IGNITER.get(), pPos, pBlockState), MenuProvider {
 
 	enum class Mode(val nameComponent: Component) {
-		TOGGLE(ModLanguageProvider.Tooltips.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered
-		IGNITE(ModLanguageProvider.Tooltips.IGNITER_IGNITE.toComponent()),         // Make fire when powered, do nothing when unpowered
-		KEEP_IGNITED(ModLanguageProvider.Tooltips.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
+		TOGGLE(ModTooltipLang.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered
+		IGNITE(ModTooltipLang.IGNITER_IGNITE.toComponent()),         // Make fire when powered, do nothing when unpowered
+		KEEP_IGNITED(ModTooltipLang.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
 	}
 
 	var mode: Mode = Mode.TOGGLE

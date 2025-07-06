@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -42,7 +42,7 @@ class CustomCraftingTableBlockItem(properties: Properties) : BlockItem(
 		val block = stack.get(ModDataComponents.BLOCK)
 
 		if (block != null) {
-			val component = ModLanguageProvider.Tooltips.BLOCK
+			val component = ModTooltipLang.BLOCK
 				.toGrayComponent(block.name)
 
 			tooltipComponents.add(component)

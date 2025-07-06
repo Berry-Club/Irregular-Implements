@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -48,7 +48,7 @@ class LocationFilterItem(properties: Properties) : Item(properties) {
 
 			val dimensionComponent = OtherUtil.getDimensionComponent(location.dimension)
 
-			val component = ModLanguageProvider.Tooltips.LOCATION_COMPONENT
+			val component = ModTooltipLang.LOCATION_COMPONENT
 				.toGrayComponent(dimensionComponent, x, y, z)
 
 			tooltipComponents.add(component)

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
@@ -60,11 +60,11 @@ class ItemFilterScreen(
 			.location(x, y)
 			.size(16)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.WHITELIST.toComponent(),
+				message = ModTooltipLang.WHITELIST.toComponent(),
 				sprite = ScreenTextures.Sprite.ItemFilter.Whitelist
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.BLACKLIST.toComponent(),
+				message = ModTooltipLang.BLACKLIST.toComponent(),
 				sprite = ScreenTextures.Sprite.ItemFilter.Blacklist
 			)
 			.currentStageGetter(
@@ -109,10 +109,10 @@ class ItemFilterScreen(
 		val filterAtIndex = this.menu.getFilter()?.getOrNull(index)
 
 		return listOf(
-			ModLanguageProvider.Tooltips.ITEM_FILTER_ITEM.toComponent().withStyle(
+			ModTooltipLang.ITEM_FILTER_ITEM.toComponent().withStyle(
 				if (filterAtIndex is FilterEntry.Item) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
 			),
-			ModLanguageProvider.Tooltips.ITEM_FILTER_TAG.toComponent().withStyle(
+			ModTooltipLang.ITEM_FILTER_TAG.toComponent().withStyle(
 				if (filterAtIndex is FilterEntry.Item) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
 			)
 		)
@@ -164,10 +164,10 @@ class ItemFilterScreen(
 		) {
 			is FilterEntry.Item -> {
 				listOf(
-					ModLanguageProvider.Tooltips.ITEM_FILTER_IGNORE_COMPONENTS.toComponent().withStyle(
+					ModTooltipLang.ITEM_FILTER_IGNORE_COMPONENTS.toComponent().withStyle(
 						if (filterAtIndex.requireSameComponents) ChatFormatting.DARK_GRAY else ChatFormatting.GRAY
 					),
-					ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
+					ModTooltipLang.ITEM_FILTER_REQUIRE_COMPONENTS.toComponent().withStyle(
 						if (filterAtIndex.requireSameComponents) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
 					)
 				)

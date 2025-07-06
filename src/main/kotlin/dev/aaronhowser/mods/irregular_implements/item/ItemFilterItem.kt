@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.item_filter.ItemFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -35,7 +35,7 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 		val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
 
 		if (itemComponent.isBlacklist) {
-			val component = ModLanguageProvider.Tooltips.BLACKLIST
+			val component = ModTooltipLang.BLACKLIST
 				.toComponent().withStyle(ChatFormatting.RED, ChatFormatting.UNDERLINE)
 
 			tooltipComponents.add(component)
@@ -46,7 +46,7 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 			val lookup = context.registries() ?: continue
 			val itemName = filterEntry.getDisplayStack(lookup).hoverName
-			val component = ModLanguageProvider.Tooltips.LIST_POINT
+			val component = ModTooltipLang.LIST_POINT
 				.toGrayComponent(itemName)
 
 			tooltipComponents.add(component)

@@ -3,8 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.util
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.core.HolderLookup
@@ -15,7 +15,6 @@ import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 import kotlin.jvm.optionals.getOrNull
@@ -103,7 +102,7 @@ sealed interface FilterEntry {
 					val stack = randomItem.defaultInstance
 					stack.set(
 						DataComponents.ITEM_NAME,
-						ModLanguageProvider.Tooltips.ITEM_TAG
+						ModTooltipLang.ITEM_TAG
 							.toComponent(tagKeyComponent)
 					)
 
@@ -172,7 +171,7 @@ sealed interface FilterEntry {
 			if (this.requireSameComponents) {
 
 				//TODO: Maybe move this to the tooltip event rather than actually changing the item's lore?
-				val component = ModLanguageProvider.Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
+				val component = ModTooltipLang.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
 					.toComponent().withStyle(ChatFormatting.RED)
 
 				this.displayStack.set(

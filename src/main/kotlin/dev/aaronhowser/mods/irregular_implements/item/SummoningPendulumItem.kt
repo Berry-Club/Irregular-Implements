@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.registries.Registries
@@ -105,7 +105,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 		val capacity = ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()
 
 		tooltipComponents.add(
-			ModLanguageProvider.Tooltips.SUMMONING_PENDULUM_FRACTION
+			ModTooltipLang.SUMMONING_PENDULUM_FRACTION
 				.toGrayComponent(amount, capacity)
 		)
 
@@ -128,7 +128,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 				}
 
 				tooltipComponents.add(
-					ModLanguageProvider.Tooltips.LIST_POINT
+					ModTooltipLang.LIST_POINT
 						.toGrayComponent(entityName)
 				)
 			}

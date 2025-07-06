@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.SpecificEntity
 import net.minecraft.network.chat.Component
@@ -44,13 +44,13 @@ class PlayerFilterItem(properties: Properties) : Item(properties) {
 		val name = dataComponent.name
 		val uuid = dataComponent.uuid
 
-		val component = ModLanguageProvider.Tooltips.PLAYER_FILTER_PLAYER
+		val component = ModTooltipLang.PLAYER_FILTER_PLAYER
 			.toGrayComponent(name)
 
 		tooltipComponents.add(component)
 
 		if (tooltipFlag.hasShiftDown()) {
-			val uuidComponent = ModLanguageProvider.Tooltips.PLAYER_FILTER_UUID
+			val uuidComponent = ModTooltipLang.PLAYER_FILTER_UUID
 				.toGrayComponent(uuid.toString())
 
 			tooltipComponents.add(uuidComponent)

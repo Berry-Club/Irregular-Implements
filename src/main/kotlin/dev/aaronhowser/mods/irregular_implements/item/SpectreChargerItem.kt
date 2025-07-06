@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -73,7 +73,7 @@ class SpectreChargerItem(
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
 		val amount = this.type.amountGetter.get()
 
-		val component = ModLanguageProvider.Tooltips.CHARGER_CHARGES
+		val component = ModTooltipLang.CHARGER_CHARGES
 			.toGrayComponent(String.format("%,d", amount))
 
 		tooltipComponents.add(component)

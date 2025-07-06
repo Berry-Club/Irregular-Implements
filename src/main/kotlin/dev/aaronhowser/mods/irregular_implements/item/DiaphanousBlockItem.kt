@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.network.chat.Component
@@ -25,7 +25,7 @@ class DiaphanousBlockItem(properties: Properties) : ItemNameBlockItem(
 
 		val block = stack.get(ModDataComponents.BLOCK)
 		if (block != null) {
-			val component = ModLanguageProvider.Tooltips.BLOCK
+			val component = ModTooltipLang.BLOCK
 				.toGrayComponent(block.name)
 
 			tooltipComponents.add(component)
@@ -33,7 +33,7 @@ class DiaphanousBlockItem(properties: Properties) : ItemNameBlockItem(
 
 		val isInverted = stack.has(ModDataComponents.IS_INVERTED)
 		if (isInverted) {
-			val component = ModLanguageProvider.Tooltips.DIAPHANOUS_INVERTED.toGrayComponent()
+			val component = ModTooltipLang.DIAPHANOUS_INVERTED.toGrayComponent()
 			tooltipComponents.add(component)
 		}
 	}

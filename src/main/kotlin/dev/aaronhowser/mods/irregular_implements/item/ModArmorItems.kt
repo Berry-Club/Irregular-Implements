@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.datagen.ModCurioProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -155,7 +156,7 @@ object ModArmorItems {
 	fun tooltip(event: ItemTooltipEvent) {
 		if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
 			event.toolTip.add(
-				ModLanguageProvider.Tooltips.LUBRICATED
+				ModTooltipLang.LUBRICATED
 					.toComponent()
 					.withColor(0xFCF4DD)
 			)

@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -55,7 +55,7 @@ object ModInteractionRecipes {
 	private fun slimeStackWithLore(compressionLevel: Int): ItemStack {
 		val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
 
-		val component = ModLanguageProvider.Tooltips.COMPRESSED_SLIME_AMOUNT
+		val component = ModTooltipLang.COMPRESSED_SLIME_AMOUNT
 			.toGrayComponent(compressionLevel)
 			.withStyle {
 				it.withUnderlined(true).withItalic(false)

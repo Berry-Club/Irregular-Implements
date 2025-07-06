@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.attachment.DeathKeptItems
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModAttachmentTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -67,7 +67,7 @@ class SpectreAnchorItem(properties: Properties) : Item(properties) {
 			if (!stack.has(ModDataComponents.IS_ANCHORED)) return
 
 			event.toolTip.add(
-				ModLanguageProvider.Tooltips.ANCHORED
+				ModTooltipLang.ANCHORED
 					.toComponent()
 					.withStyle(ChatFormatting.DARK_AQUA)
 			)

@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreCoilBlockEntity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
@@ -154,9 +154,9 @@ class SpectreCoilBlock private constructor(
 		val amount = this.type.amountGetter.get()
 
 		val component = if (this.type.isGenerator) {
-			ModLanguageProvider.Tooltips.COIL_GENERATES
+			ModTooltipLang.COIL_GENERATES
 		} else {
-			ModLanguageProvider.Tooltips.COIL_TRANSFERS
+			ModTooltipLang.COIL_TRANSFERS
 		}.toGrayComponent(String.format("%,d", amount))
 
 		tooltipComponents.add(component)

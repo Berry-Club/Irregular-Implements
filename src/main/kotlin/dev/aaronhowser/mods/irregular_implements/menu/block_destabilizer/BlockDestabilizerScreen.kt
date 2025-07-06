@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
@@ -26,11 +26,11 @@ class BlockDestabilizerScreen(
 	override fun baseInit() {
 		this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.LAZY.toComponent(),
+				message = ModTooltipLang.LAZY.toComponent(),
 				sprite = ScreenTextures.Sprite.BlockDestabilizer.Lazy
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.NOT_LAZY.toComponent(),
+				message = ModTooltipLang.NOT_LAZY.toComponent(),
 				sprite = ScreenTextures.Sprite.BlockDestabilizer.NotLazy
 			)
 			.size(
@@ -68,7 +68,7 @@ class BlockDestabilizerScreen(
 					)
 				)
 			},
-			message = ModLanguageProvider.Tooltips.SHOW_LAZY_SHAPE.toComponent(),
+			message = ModTooltipLang.SHOW_LAZY_SHAPE.toComponent(),
 			font = this.font
 		)
 
@@ -85,7 +85,7 @@ class BlockDestabilizerScreen(
 					)
 				)
 			},
-			message = ModLanguageProvider.Tooltips.FORGET_LAZY_SHAPE.toComponent(),
+			message = ModTooltipLang.FORGET_LAZY_SHAPE.toComponent(),
 			font = this.font
 		)
 

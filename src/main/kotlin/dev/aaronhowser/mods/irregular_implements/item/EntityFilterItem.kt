@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
@@ -37,7 +37,7 @@ class EntityFilterItem(properties: Properties) : Item(properties) {
 		val entityName = stack.get(ModDataComponents.ENTITY_TYPE)?.description
 
 		if (entityName != null) {
-			val component = ModLanguageProvider.Tooltips.ENTITY_FILTER_ENTITY
+			val component = ModTooltipLang.ENTITY_FILTER_ENTITY
 				.toGrayComponent(entityName)
 
 			tooltipComponents.add(component)

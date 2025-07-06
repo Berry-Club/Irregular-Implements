@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -43,7 +43,7 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 			val lookup = context.registries() ?: continue
 			val itemName = filterEntry.getDisplayStack(lookup).hoverName
-			val component = ModLanguageProvider.Tooltips.LIST_POINT
+			val component = ModTooltipLang.LIST_POINT
 				.toGrayComponent(itemName)
 
 			tooltipComponents.add(component)

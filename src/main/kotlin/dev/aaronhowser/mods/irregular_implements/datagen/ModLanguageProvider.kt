@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
@@ -21,7 +22,7 @@ class ModLanguageProvider(
 ) : LanguageProvider(output, IrregularImplements.ID, "en_us") {
 
 	override fun addTranslations() {
-		addTooltips()
+		ModTooltipLang.add(this)
 		addItems()
 		addBlocks()
 		addInfo()
@@ -541,128 +542,6 @@ class ModLanguageProvider(
 		addBlock(ModBlocks.BAMBOO_PLATFORM, "Bamboo Platform")
 		addBlock(ModBlocks.CHERRY_PLATFORM, "Cherry Platform")
 
-	}
-
-	object Tooltips {
-		const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
-		const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"
-		const val PLAYER_FILTER_PLAYER = "tooltip.irregular_implements.player_filter_player"
-		const val PLAYER_FILTER_UUID = "tooltip.irregular_implements.player_filter_uuid"
-		const val COMPRESSED_SLIME_AMOUNT = "tooltip.irregular_implements.compressed_slime_AMOUNT"
-		const val LUBRICATED = "tooltip.irregular_implements.lubricated"
-		const val WITH_BLOCK_ENTITY = "tooltip.irregular_implements.with_block_entity"
-		const val CHARGE = "tooltip.irregular_implements.charge"
-		const val WHITE_STONE_FULL_MOON = "tooltip.irregular_implements.white_stone_full_moon"
-		const val SUMMONING_PENDULUM_FRACTION = "tooltip.irregular_implements.summoning_pendulum_fraction"
-		const val LIST_POINT = "tooltip.irregular_implements.summoning_pendulum_list_each"
-		const val BLOCK_REPLACER_LOADING = "tooltip.irregular_implements.block_replacer_loading"
-		const val BLOCK_REPLACER_UNLOADING = "tooltip.irregular_implements.block_replacer_unloading"
-		const val BLOCK_REPLACER_ALT_FOR_LIST = "tooltip.irregular_implements.block_replacer_alt_for_list"
-		const val ITEM_COUNT = "tooltip.irregular_implements.item_count"
-		const val VOID_STONE_INSERT = "tooltip.irregular_implements.void_stone_insert"
-		const val VOID_STONE_HOLDING = "tooltip.irregular_implements.void_stone_holding"
-		const val VOID_STONE_REMOVE = "tooltip.irregular_implements.void_stone_remove"
-		const val ANCHORED = "tooltip.irregular_implements.anchored"
-		const val ALL_ORES = "tooltip.irregular_implements.all_ores"
-		const val LAZY = "tooltip.irregular_implements.lazy"
-		const val NOT_LAZY = "tooltip.irregular_implements.not_lazy"
-		const val SHOW_LAZY_SHAPE = "tooltip.irregular_implements.show_lazy_shape"
-		const val FORGET_LAZY_SHAPE = "tooltip.irregular_implements.forget_lazy_shape"
-		const val STOPS_MESSAGE = "tooltip.irregular_implements.stops_message"
-		const val DOESNT_STOP_MESSAGE = "tooltip.irregular_implements.doesnt_stop_message"
-		const val MESSAGE_REGEX = "tooltip.irregular_implements.message_regex"
-		const val COIL_TRANSFERS = "tooltip.irregular_implements.coil_transfers"
-		const val COIL_GENERATES = "tooltip.irregular_implements.coil_generates"
-		const val CHARGER_CHARGES = "tooltip.irregular_implements.charger_charges"
-		const val LOCATION_COMPONENT = "tooltip.irregular_implements.location_component"
-		const val IRON_DROPPER_CONTINUOUS_POWERED = "tooltip.irregular_implements.iron_dropper_continuous_powered"
-		const val IRON_DROPPER_CONTINUOUS = "tooltip.irregular_implements.iron_dropper_continuous"
-		const val IRON_DROPPER_PULSE = "tooltip.irregular_implements.iron_dropper_pulse"
-		const val IRON_DROPPER_NO_DELAY = "tooltip.irregular_implements.iron_dropper_no_delay"
-		const val IRON_DROPPER_FIVE_DELAY = "tooltip.irregular_implements.iron_dropper_five_delay"
-		const val IRON_DROPPER_TWENTY_DELAY = "tooltip.irregular_implements.iron_dropper_twenty_delay"
-		const val IRON_DROPPER_EXACT_VELOCITY = "tooltip.irregular_implements.iron_dropper_exact_velocity"
-		const val IRON_DROPPER_RANDOM_VELOCITY = "tooltip.irregular_implements.iron_dropper_random_velocity"
-		const val IRON_DROPPER_NO_EFFECTS = "tooltip.irregular_implements.iron_dropper_no_effects"
-		const val IRON_DROPPER_ONLY_SOUND = "tooltip.irregular_implements.iron_dropper_only_sound"
-		const val IRON_DROPPER_ONLY_PARTICLES = "tooltip.irregular_implements.iron_dropper_only_particles"
-		const val IRON_DROPPER_BOTH_EFFECTS = "tooltip.irregular_implements.iron_dropper_both_effects"
-		const val BLOCK = "tooltip.irregular_implements.block"
-		const val DIAPHANOUS_INVERTED = "tooltip.irregular_implements.diaphanous_inverted"
-		const val ITEM_TAG = "tooltip.irregular_implements.item_tag"
-		const val BLACKLIST = "tooltip.irregular_implements.blacklist"
-		const val WHITELIST = "tooltip.irregular_implements.whitelist"
-		const val IGNITER_TOGGLE = "tooltip.irregular_implements.igniter_toggle"
-		const val IGNITER_IGNITE = "tooltip.irregular_implements.igniter_ignite"
-		const val IGNITER_KEEP_IGNITED = "tooltip.irregular_implements.igniter_keep_ignited"
-		const val ITEM_FILTER_ITEM = "tooltip.irregular_implements.item_filter_item"
-		const val ITEM_FILTER_TAG = "tooltip.irregular_implements.item_filter_tag"
-		const val ITEM_FILTER_REQUIRE_COMPONENTS = "tooltip.irregular_implements.item_filter_require_components"
-		const val ITEM_FILTER_IGNORE_COMPONENTS = "tooltip.irregular_implements.item_filter_ignore_components"
-		const val ITEM_FILTER_REQUIRES_SAME_COMPONENTS = "tooltip.irregular_implements.item_filter_requires_same_components"
-		const val FLOO_POUCH_AMOUNT = "tooltip.irregular_implements.floo_pouch.amount"
-		const val TRANS_RIGHTS = "tooltip.irregular_implements.trans_rights"
-	}
-
-	private fun addTooltips() {
-		add(Tooltips.ITEM_FILTER_ITEM, "Item Filter")
-		add(Tooltips.ITEM_FILTER_TAG, "Tag Filter")
-		add(Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS, "Require Components")
-		add(Tooltips.ITEM_FILTER_IGNORE_COMPONENTS, "Ignore Components")
-		add(Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS, "Requires same components")
-		add(Tooltips.SHIFT_FOR_MORE, "Hold SHIFT for more information")
-		add(Tooltips.ENTITY_FILTER_ENTITY, "Entity Type: %s")
-		add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
-		add(Tooltips.PLAYER_FILTER_UUID, "Player UUID: %s")
-		add(Tooltips.COMPRESSED_SLIME_AMOUNT, "Compression level %d")
-		add(Tooltips.LUBRICATED, "Lubricated")
-		add(Tooltips.WITH_BLOCK_ENTITY, "%s with block entity")
-		add(Tooltips.CHARGE, "Charge: %d%%")
-		add(Tooltips.WHITE_STONE_FULL_MOON, "Charge under the full moon")
-		add(Tooltips.SUMMONING_PENDULUM_FRACTION, "Stored: %d/%d")
-		add(Tooltips.LIST_POINT, "• %s")
-		add(Tooltips.BLOCK_REPLACER_LOADING, "Store blocks by right-clicking them on this stack")
-		add(Tooltips.BLOCK_REPLACER_UNLOADING, "Remove blocks by right-clicking this stack on empty slots")
-		add(Tooltips.BLOCK_REPLACER_ALT_FOR_LIST, "Hold ALT to see stored blocks")
-		add(Tooltips.ITEM_COUNT, "%s x%d")
-		add(Tooltips.VOID_STONE_INSERT, "Store items by right-clicking them on this stack")
-		add(Tooltips.VOID_STONE_HOLDING, "Currently holding %s, inserting another will void and replace it")
-		add(Tooltips.VOID_STONE_REMOVE, "You can remove the %s by right-clicking the Stone into an empty slot")
-		add(Tooltips.ANCHORED, "Anchored")
-		add(Tooltips.ALL_ORES, "All Ores")
-		add(Tooltips.LOCATION_COMPONENT, "%s, %dx %dy %dz")
-		add(Tooltips.LAZY, "Lazy")
-		add(Tooltips.NOT_LAZY, "Not Lazy")
-		add(Tooltips.SHOW_LAZY_SHAPE, "Show Lazy Shape")
-		add(Tooltips.FORGET_LAZY_SHAPE, "Forget Lazy Shape")
-		add(Tooltips.STOPS_MESSAGE, "Stops message")
-		add(Tooltips.DOESNT_STOP_MESSAGE, "Doesn't stop message")
-		add(Tooltips.MESSAGE_REGEX, "Message regex")
-		add(Tooltips.COIL_TRANSFERS, "Transfers %s RF/t")
-		add(Tooltips.COIL_GENERATES, "Generates %s RF/t")
-		add(Tooltips.CHARGER_CHARGES, "Charges %s RF/t")
-		add(Tooltips.IRON_DROPPER_CONTINUOUS_POWERED, "Eject continuously while powered")
-		add(Tooltips.IRON_DROPPER_CONTINUOUS, "Eject continuously")
-		add(Tooltips.IRON_DROPPER_PULSE, "Eject when pulsed")
-		add(Tooltips.IRON_DROPPER_NO_DELAY, "No pickup delay")
-		add(Tooltips.IRON_DROPPER_FIVE_DELAY, "5 tick pickup delay")
-		add(Tooltips.IRON_DROPPER_TWENTY_DELAY, "20 tick pickup delay")
-		add(Tooltips.IRON_DROPPER_EXACT_VELOCITY, "Exact velocity")
-		add(Tooltips.IRON_DROPPER_RANDOM_VELOCITY, "Random velocity")
-		add(Tooltips.IRON_DROPPER_NO_EFFECTS, "No effects")
-		add(Tooltips.IRON_DROPPER_ONLY_SOUND, "Sound effects")
-		add(Tooltips.IRON_DROPPER_ONLY_PARTICLES, "Particle effects")
-		add(Tooltips.IRON_DROPPER_BOTH_EFFECTS, "Sound & particle effects")
-		add(Tooltips.BLOCK, "Block: %s")
-		add(Tooltips.DIAPHANOUS_INVERTED, "Inverted")
-		add(Tooltips.ITEM_TAG, "Item Tag: %s")
-		add(Tooltips.BLACKLIST, "Blacklist")
-		add(Tooltips.WHITELIST, "Whitelist")
-		add(Tooltips.IGNITER_TOGGLE, "Toggle")
-		add(Tooltips.IGNITER_IGNITE, "Ignite")
-		add(Tooltips.IGNITER_KEEP_IGNITED, "Keep ignited")
-		add(Tooltips.FLOO_POUCH_AMOUNT, "%d / %d Floo Powder")
-		add(Tooltips.TRANS_RIGHTS, "Trans rights are human rights!")
 	}
 
 	object Info {

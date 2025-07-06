@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
@@ -36,7 +36,7 @@ class EnderLetterScreen(
 			topPos + 5,
 			boxWidth,
 			10,
-			ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent()
+			ModTooltipLang.MESSAGE_REGEX.toComponent()
 		)
 
 		recipientEditBox.setResponder(::setRecipientString)

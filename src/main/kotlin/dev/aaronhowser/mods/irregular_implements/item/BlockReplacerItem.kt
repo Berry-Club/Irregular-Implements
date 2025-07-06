@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.component.DataComponents
@@ -208,11 +208,11 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 	) {
 
 		if (!tooltipFlag.hasShiftDown()) {
-			val controlsComponent = ModLanguageProvider.Tooltips.SHIFT_FOR_MORE.toGrayComponent()
+			val controlsComponent = ModTooltipLang.SHIFT_FOR_MORE.toGrayComponent()
 			tooltipComponents.add(controlsComponent)
 		} else {
-			val loadingComponent = ModLanguageProvider.Tooltips.BLOCK_REPLACER_LOADING.toGrayComponent()
-			val unloadingComponent = ModLanguageProvider.Tooltips.BLOCK_REPLACER_UNLOADING.toGrayComponent()
+			val loadingComponent = ModTooltipLang.BLOCK_REPLACER_LOADING.toGrayComponent()
+			val unloadingComponent = ModTooltipLang.BLOCK_REPLACER_UNLOADING.toGrayComponent()
 
 			tooltipComponents.add(loadingComponent)
 			tooltipComponents.add(unloadingComponent)
@@ -221,7 +221,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 		val storedStacks = stack.get(DataComponents.CONTAINER)?.nonEmptyItems()?.toList() ?: return
 
 		if (!tooltipFlag.hasAltDown()) {
-			val altComponent = ModLanguageProvider.Tooltips.BLOCK_REPLACER_ALT_FOR_LIST.toGrayComponent()
+			val altComponent = ModTooltipLang.BLOCK_REPLACER_ALT_FOR_LIST.toGrayComponent()
 			tooltipComponents.add(altComponent)
 		} else {
 			val map = mutableMapOf<Item, Int>()
@@ -234,7 +234,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			for ((item, count) in map) {
 				val itemComponent = item.defaultInstance.displayName
 
-				val component = ModLanguageProvider.Tooltips.ITEM_COUNT
+				val component = ModTooltipLang.ITEM_COUNT
 					.toGrayComponent(itemComponent, count)
 
 				tooltipComponents.add(component)

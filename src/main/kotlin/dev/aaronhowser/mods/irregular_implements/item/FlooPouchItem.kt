@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.network.chat.Component
@@ -72,7 +72,7 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
 		val currentFlooPowder = stack.getOrDefault(ModDataComponents.FLOO_POWDER, 0)
 		tooltipComponents.add(
-			ModLanguageProvider.Tooltips.FLOO_POUCH_AMOUNT.toComponent(currentFlooPowder, MAX_FLOO_POWDER)
+			ModTooltipLang.FLOO_POUCH_AMOUNT.toComponent(currentFlooPowder, MAX_FLOO_POWDER)
 		)
 
 		fuckJkr(tooltipComponents)
@@ -92,7 +92,7 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 			if ((now.month == Month.JULY && now.dayOfMonth == 31)
 			) {
 				tooltipComponents.add(
-					ModLanguageProvider.Tooltips.TRANS_RIGHTS.toComponent()
+					ModTooltipLang.TRANS_RIGHTS.toComponent()
 				)
 			}
 		}

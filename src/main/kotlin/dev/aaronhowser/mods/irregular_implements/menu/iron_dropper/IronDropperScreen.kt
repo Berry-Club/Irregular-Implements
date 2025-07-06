@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
@@ -37,15 +37,15 @@ class IronDropperScreen(
 
 		this.redstoneModeButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_PULSE.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_PULSE.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.RedstonePulse
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuousPowered
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_CONTINUOUS.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_CONTINUOUS.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuous
 			)
 			.size(
@@ -65,15 +65,15 @@ class IronDropperScreen(
 
 		this.delayButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_DELAY.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_NO_DELAY.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.PickupZero
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_FIVE_DELAY.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_FIVE_DELAY.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.PickupFive
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_TWENTY_DELAY.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_TWENTY_DELAY.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.PickupTwenty
 			)
 			.size(
@@ -93,11 +93,11 @@ class IronDropperScreen(
 
 		this.shootModeButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.DirectionRandom
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.DirectionForward
 			)
 			.size(
@@ -117,19 +117,19 @@ class IronDropperScreen(
 
 		this.toggleEffectButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_NO_EFFECTS.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_NO_EFFECTS.toComponent(),
 				sprite = null
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.EffectParticle
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_ONLY_SOUND.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_ONLY_SOUND.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.EffectSound
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
+				message = ModTooltipLang.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
 				sprite = ScreenTextures.Sprite.IronDropper.EffectBoth
 			)
 			.size(

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.chat_detector
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
@@ -31,11 +31,11 @@ class ChatDetectorScreen(
 
 		this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.STOPS_MESSAGE.toComponent(),
+				message = ModTooltipLang.STOPS_MESSAGE.toComponent(),
 				sprite = ScreenTextures.Sprite.ChatDetector.MessageStop
 			)
 			.addStage(
-				message = ModLanguageProvider.Tooltips.DOESNT_STOP_MESSAGE.toComponent(),
+				message = ModTooltipLang.DOESNT_STOP_MESSAGE.toComponent(),
 				sprite = ScreenTextures.Sprite.ChatDetector.MessageContinue
 			)
 			.size(
@@ -69,7 +69,7 @@ class ChatDetectorScreen(
 			this.bottomPos - 5 - 20,
 			screenWidth - 5 - 5,
 			20,
-			ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent()
+			ModTooltipLang.MESSAGE_REGEX.toComponent()
 		)
 
 		this.regexStringEditBox.setCanLoseFocus(false)
