@@ -176,7 +176,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			val recipient = level.server.playerList.getPlayerByName(recipientName)
 
 			if (recipient == null) {
-				player.status(Component.literal("The recipient '$recipientName' is not online!"))
+				player.status(ModLanguageProvider.Messages.ENDER_LETTER_NO_RECIPIENT.toComponent(recipientName))
 				return false
 			}
 
@@ -184,7 +184,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			val inventory = handler.getOrCreateInventory(recipient)
 
 			if (!inventory.hasRoom()) {
-				player.status(Component.literal("The recipient '$recipientName' has no room for your letter!"))
+				player.status(ModLanguageProvider.Messages.ENDER_LETTER_RECIPIENT_NO_ROOM.toComponent(recipientName))
 				return false
 			}
 

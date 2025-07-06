@@ -154,6 +154,8 @@ class ModLanguageProvider(
 		const val ENDER_LETTER_EMPTY = "message.irregular_implements.ender_letter.empty"
 		const val ENDER_LETTER_ALREADY_SENT = "message.irregular_implements.ender_letter.already_sent"
 		const val ENDER_LETTER_NO_RECIPIENT = "message.irregular_implements.ender_letter.no_recipient"
+		const val ENDER_LETTER_RECIPIENT_NOT_ONLINE = "message.irregular_implements.ender_letter.recipient_not_online"
+		const val ENDER_LETTER_RECIPIENT_NO_ROOM = "message.irregular_implements.ender_letter.recipient_no_room"
 	}
 
 	private fun addMessages() {
@@ -176,6 +178,8 @@ class ModLanguageProvider(
 		add(Messages.ENDER_LETTER_EMPTY, "Your letter is empty!")
 		add(Messages.ENDER_LETTER_ALREADY_SENT, "This letter has already been sent! You can't send it again.")
 		add(Messages.ENDER_LETTER_NO_RECIPIENT, "This letter has no recipient")
+		add(Messages.ENDER_LETTER_RECIPIENT_NOT_ONLINE, "%s of this letter is not online")
+		add(Messages.ENDER_LETTER_RECIPIENT_NO_ROOM, "%s has no room for your letter")
 	}
 
 	object Subtitles {
