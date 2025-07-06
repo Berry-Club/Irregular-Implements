@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
@@ -23,7 +24,7 @@ object ModCreativeModeTabs {
 
 	val MOD_TAB: DeferredHolder<CreativeModeTab, CreativeModeTab> = TABS_REGISTRY.register("creative_tab", Supplier {
 		CreativeModeTab.builder()
-			.title(ModLanguageProvider.Items.CREATIVE_TAB.toComponent())
+			.title(ModItemLang.CREATIVE_TAB.toComponent())
 			.icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
 			.displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
 				val itemsToSkip = setOf(

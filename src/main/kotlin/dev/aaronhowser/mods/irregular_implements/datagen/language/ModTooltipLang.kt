@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.language
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 
-object ModTooltipComponents {
+object ModTooltipLang {
 
 		const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
 		const val ENTITY_FILTER_ENTITY = "tooltip.irregular_implements.entity_filter_entity"

@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -40,9 +41,9 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 	override fun getName(stack: ItemStack): Component {
 		val weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
 		return when (weather) {
-			Weather.SUNNY -> ModLanguageProvider.Items.WEATHER_EGG_SUNNY.toComponent()
-			Weather.RAINY -> ModLanguageProvider.Items.WEATHER_EGG_RAINY.toComponent()
-			Weather.STORMY -> ModLanguageProvider.Items.WEATHER_EGG_STORMY.toComponent()
+			Weather.SUNNY -> ModItemLang.WEATHER_EGG_SUNNY.toComponent()
+			Weather.RAINY -> ModItemLang.WEATHER_EGG_RAINY.toComponent()
+			Weather.STORMY -> ModItemLang.WEATHER_EGG_STORMY.toComponent()
 		}
 	}
 
