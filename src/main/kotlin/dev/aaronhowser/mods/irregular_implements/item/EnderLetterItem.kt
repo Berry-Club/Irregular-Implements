@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -47,13 +49,13 @@ class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
 
 		if (recipient != null) {
 			tooltipComponents.add(
-				Component.literal("To: $recipient")
+				ModTooltipLang.ENDER_LETTER_TO.toComponent(recipient)
 			)
 		}
 
 		if (sender != null) {
 			tooltipComponents.add(
-				Component.literal("From: $sender")
+				ModTooltipLang.ENDER_LETTER_FROM.toComponent(sender)
 			)
 		}
 	}

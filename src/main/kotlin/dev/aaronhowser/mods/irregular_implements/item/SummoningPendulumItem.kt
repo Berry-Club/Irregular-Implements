@@ -113,7 +113,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 			for (customData in customDataList) {
 				val entityNbt = customData.copyTag()
 
-				val entityName: Component = if (entityNbt.contains("CustomName")) {
+				val entityName = if (entityNbt.contains("CustomName")) {
 					val customName = entityNbt.getString("CustomName")
 					Component.literal(customName)
 				} else {

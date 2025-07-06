@@ -1,11 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -75,7 +76,7 @@ object EscapeRopeHandler {
 			for (run in 0 until maxRuns) {
 
 				actualPlayer.status(
-					Component.literal("Checked ${this.alreadyChecked.size} blocks")
+					ModMessageLang.ESCAPE_ROPE_HANDLER_PROGRESS.toComponent(alreadyChecked.size)
 				)
 
 				if (this.toCheck.isEmpty()

@@ -147,7 +147,7 @@ class ModBlockStateProvider(
 			val z2 = shape.max(Direction.Axis.Z).toFloat() * 16f
 
 			val blockModel = models()
-				.withExistingParent(name(block) + "_" + direction.name, "block/block")
+				.withExistingParent(name(block) + "_" + direction.getName(), "block/block")
 				.renderType(RenderType.cutout().name)
 				.texture("texture", texture)
 				.texture("particle", texture)
@@ -1371,7 +1371,7 @@ class ModBlockStateProvider(
 		getVariantBuilder(block)
 			.forAllStates {
 				val facing = it.getValue(DirectionalBlock.FACING)
-				val modelName = name(block) + "_" + facing.name.lowercase()
+				val modelName = name(block) + "_" + facing.getName().lowercase()
 
 				val xRotation = when (facing) {
 					Direction.UP -> 270

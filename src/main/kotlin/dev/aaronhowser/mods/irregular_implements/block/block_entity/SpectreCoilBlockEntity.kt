@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -45,7 +44,7 @@ class SpectreCoilBlockEntity(
 		super.saveAdditional(tag, registries)
 
 		tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
-		tag.putString(COIL_TYPE_NBT, this.coilType.name)
+		tag.putInt(COIL_TYPE_NBT, this.coilType.ordinal)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -56,17 +55,12 @@ class SpectreCoilBlockEntity(
 			this.ownerUuid = uuid
 		}
 
-		try {
-			val coilTypeString = tag.getString(COIL_TYPE_NBT)
-			val coilType = SpectreCoilBlock.Type.valueOf(coilTypeString)
-
+		val coilTypeOrdinal = tag.getInt(COIL_TYPE_NBT)
+		val coilType = SpectreCoilBlock.Type.entries.getOrNull(coilTypeOrdinal)
+		if (coilType != null) {
 			this.coilType = coilType
-		} catch (e: IllegalArgumentException) {
-			// Invalid coil type, default to basic
-			this.coilType = SpectreCoilBlock.Type.BASIC
-
-			IrregularImplements.LOGGER.error(e)
 		}
+
 	}
 
 	/**

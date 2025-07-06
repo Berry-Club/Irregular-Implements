@@ -62,6 +62,10 @@ object ModTooltipLang {
 	const val ITEM_FILTER_REQUIRES_SAME_COMPONENTS = "tooltip.irregular_implements.item_filter_requires_same_components"
 	const val FLOO_POUCH_AMOUNT = "tooltip.irregular_implements.floo_pouch.amount"
 	const val TRANS_RIGHTS = "tooltip.irregular_implements.trans_rights"
+	const val ENDER_LETTER_TO = "tooltip.irregular_implements.ender_letter_to"
+	const val ENDER_LETTER_FROM = "tooltip.irregular_implements.ender_letter_from"
+	const val INVENTORY_TESTER_INVERTED = "tooltip.irregular_implements.inventory_tester_inverted"
+	const val INVENTORY_TESTER_UNINVERTED = "tooltip.irregular_implements.inventory_tester_uninverted"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.add(ITEM_FILTER_ITEM, "Item Filter")
@@ -122,6 +126,10 @@ object ModTooltipLang {
 		provider.add(IGNITER_KEEP_IGNITED, "Keep ignited")
 		provider.add(FLOO_POUCH_AMOUNT, "%d / %d Floo Powder")
 		provider.add(TRANS_RIGHTS, "Trans rights are human rights!")
+		provider.add(ENDER_LETTER_TO, "To: %s")
+		provider.add(ENDER_LETTER_FROM, "From: %s")
+		provider.add(INVENTORY_TESTER_INVERTED, "Inverted")
+		provider.add(INVENTORY_TESTER_UNINVERTED, "Uninverted")
 	}
 
 }

@@ -35,6 +35,7 @@ object ModMessageLang {
 	const val FIREPLACE_ALREADY_AT = "message.irregular_implements.floo_brick.already_at"
 	const val FIREPLACE_NO_LONGER_VALID = "message.irregular_implements.floo_brick.no_longer_valid"
 	const val FIREPLACE_TELEPORTED = "message.irregular_implements.floo_brick.teleported"
+	const val ESCAPE_ROPE_HANDLER_PROGRESS = "message.irregular_implements.escape_rope_handler.progress"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.add(ENDER_BRIDGE_ITERATIONS, "Ender Bridge stopped searching after %d blocks.")
@@ -68,6 +69,7 @@ object ModMessageLang {
 		provider.add(FIREPLACE_ALREADY_AT, "You are already at %s.")
 		provider.add(FIREPLACE_NO_LONGER_VALID, "The fireplace at %d %d %d is no longer valid.")
 		provider.add(FIREPLACE_TELEPORTED, "Teleported to %s.")
+		provider.add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %d blocks")
 	}
 
 }
