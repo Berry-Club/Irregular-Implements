@@ -45,7 +45,6 @@ class DropFilterMenu(
 		}
 
 		override fun removeItem(index: Int, count: Int): ItemStack {
-
 			val container = container ?: return ItemStack.EMPTY
 
 			if (index !in 0 until container.slots) return ItemStack.EMPTY

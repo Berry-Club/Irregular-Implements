@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.EnderMailboxBlock
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
-import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderMailboxContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox.EnderMailboxMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -67,10 +66,7 @@ class EnderMailboxBlockEntity(
 	override fun getDisplayName(): Component = blockState.block.name
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-		if (player !is ServerPlayer) return null
-		val container = EnderMailboxContainer(player, worldPosition)
-
-		return EnderMailboxMenu(containerId, playerInventory, container)
+		return EnderMailboxMenu(containerId, playerInventory)
 	}
 
 	companion object {
