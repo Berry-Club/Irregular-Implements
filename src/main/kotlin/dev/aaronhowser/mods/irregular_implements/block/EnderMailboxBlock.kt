@@ -144,7 +144,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			}
 
 			val handler = EnderLetterHandler.get(level)
-			val inventory = handler.getInventory(recipient)
+			val inventory = handler.getOrCreateInventory(recipient)
 
 			if (!inventory.hasRoom()) {
 				player.displayClientMessage(Component.literal("The recipient '$recipientName' has no room for your letter!"), true)

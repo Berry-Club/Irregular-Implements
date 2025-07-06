@@ -30,13 +30,12 @@ class EnderLetterHandler : SavedData() {
 		return tag
 	}
 
-	fun getInventory(uuid: UUID): EnderMailboxInventory {
-		return inventories.getOrPut(uuid) {
-			EnderMailboxInventory(this)
-		}
+	fun getOrCreateInventory(owner: Entity): EnderMailboxInventory = getOrCreateInventory(owner.uuid)
+	fun getOrCreateInventory(uuid: UUID): EnderMailboxInventory {
+		return inventories.getOrPut(uuid) { EnderMailboxInventory(this) }
 	}
 
-	fun getInventory(owner: Entity): EnderMailboxInventory = getInventory(owner.uuid)
+	fun getInventory(uuid: UUID): EnderMailboxInventory? = inventories[uuid]
 
 	companion object {
 		const val LIST_NBT = "EnderLetterInventories"
