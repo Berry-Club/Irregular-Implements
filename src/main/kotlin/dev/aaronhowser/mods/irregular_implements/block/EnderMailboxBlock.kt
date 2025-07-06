@@ -36,6 +36,7 @@ import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.items.ItemHandlerHelper
+import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
 class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
@@ -156,6 +157,12 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 				return false
 			}
 
+			val senderName = component.sender.getOrNull()
+			if (senderName != null) {
+				Component.literal("This letter has already been received! You can't send it again!")
+				return false
+			}
+
 			val recipientName = component.recipient.getOrNull()
 			if (recipientName == null) {
 				player.displayClientMessage(Component.literal("This letter has no recipient!"), true)
@@ -178,7 +185,13 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 				return false
 			}
 
-			ItemHandlerHelper.insertItem(inventory, stack.copy(), false)
+			val newLetter = stack.copy()
+			newLetter.set(
+				ModDataComponents.ENDER_LETTER_CONTENTS,
+				component.copy(sender = Optional.of(player.name.string))
+			)
+
+			ItemHandlerHelper.insertItem(inventory, newLetter, false)
 			return true
 		}
 	}
