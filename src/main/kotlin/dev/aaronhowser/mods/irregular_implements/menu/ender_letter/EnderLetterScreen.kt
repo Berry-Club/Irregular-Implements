@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.player.Inventory
 
 class EnderLetterScreen(
@@ -24,14 +25,18 @@ class EnderLetterScreen(
 
 		val screenWidth = this.rightPos - this.leftPos
 
+		val boxWidth = Mth.ceil(screenWidth * 0.5)
+
 		recipientEditBox = EditBox(
 			this.font,
-			this.leftPos + 5,
-			this.bottomPos - 5 - 20,
-			screenWidth - 5 - 5,
-			20,
+			rightPos - boxWidth - 7,
+			topPos + 5,
+			boxWidth,
+			10,
 			ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent()
 		)
+
+		addRenderableWidget(recipientEditBox)
 	}
 
 	override fun receivedString(stringId: Int, string: String) {
