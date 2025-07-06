@@ -150,6 +150,10 @@ class ModLanguageProvider(
 		const val ADVANCED_ITEM_COLLECTOR_X_RADIUS = "message.irregular_implements.advanced_item_collector.x_radius"
 		const val ADVANCED_ITEM_COLLECTOR_Y_RADIUS = "message.irregular_implements.advanced_item_collector.y_radius"
 		const val ADVANCED_ITEM_COLLECTOR_Z_RADIUS = "message.irregular_implements.advanced_item_collector.z_radius"
+		const val ENDER_MAILBOX_NOT_OWNER = "message.irregular_implements.ender_mailbox.not_owner"
+		const val ENDER_LETTER_EMPTY = "message.irregular_implements.ender_letter.empty"
+		const val ENDER_LETTER_ALREADY_SENT = "message.irregular_implements.ender_letter.already_sent"
+		const val ENDER_LETTER_NO_RECIPIENT = "message.irregular_implements.ender_letter.no_recipient"
 	}
 
 	private fun addMessages() {
@@ -168,6 +172,10 @@ class ModLanguageProvider(
 		add(Messages.ADVANCED_ITEM_COLLECTOR_X_RADIUS, "X Radius: %d")
 		add(Messages.ADVANCED_ITEM_COLLECTOR_Y_RADIUS, "Y Radius: %d")
 		add(Messages.ADVANCED_ITEM_COLLECTOR_Z_RADIUS, "Z Radius: %d")
+		add(Messages.ENDER_MAILBOX_NOT_OWNER, "You are not the owner of this Ender Mailbox.")
+		add(Messages.ENDER_LETTER_EMPTY, "Your letter is empty!")
+		add(Messages.ENDER_LETTER_ALREADY_SENT, "This letter has already been sent! You can't send it again.")
+		add(Messages.ENDER_LETTER_NO_RECIPIENT, "This letter has no recipient")
 	}
 
 	object Subtitles {

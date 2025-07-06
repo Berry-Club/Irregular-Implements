@@ -6,11 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.core.BlockPos
-import net.minecraft.core.Holder
-import net.minecraft.core.NonNullList
-import net.minecraft.core.Registry
-import net.minecraft.core.Vec3i
+import net.minecraft.core.*
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -201,5 +197,7 @@ object OtherUtil {
 
 	val STACK_LIST_STREAM_CODEC: StreamCodec<ByteBuf, NonNullList<ItemStack>> =
 		ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC))
+
+	fun Player.status(message: Component) = this.displayClientMessage(message, true)
 
 }

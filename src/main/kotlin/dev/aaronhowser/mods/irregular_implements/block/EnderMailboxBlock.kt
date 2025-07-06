@@ -1,10 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
@@ -123,7 +126,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			player.openMenu(blockEntity)
 			return InteractionResult.SUCCESS
 		} else {
-			player.displayClientMessage(Component.literal("This mailbox does not belong to you!"), true)
+			player.displayClientMessage(ModLanguageProvider.Messages.ENDER_MAILBOX_NOT_OWNER.toComponent(), true)
 			return InteractionResult.PASS
 		}
 	}
@@ -153,19 +156,19 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			for (i in items.indices) {
 				if (!items[i].isEmpty) break
 
-				player.displayClientMessage(Component.literal("Your letter is empty!"), true)
+				player.status(ModLanguageProvider.Messages.ENDER_LETTER_EMPTY.toComponent())
 				return false
 			}
 
 			val senderName = component.sender.getOrNull()
 			if (senderName != null) {
-				Component.literal("This letter has already been received! You can't send it again!")
+				player.status(ModLanguageProvider.Messages.ENDER_LETTER_ALREADY_SENT.toComponent())
 				return false
 			}
 
 			val recipientName = component.recipient.getOrNull()
 			if (recipientName == null) {
-				player.displayClientMessage(Component.literal("This letter has no recipient!"), true)
+				player.status(ModLanguageProvider.Messages.ENDER_LETTER_NO_RECIPIENT.toComponent())
 				return false
 			}
 
