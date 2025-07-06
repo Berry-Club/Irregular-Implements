@@ -1,10 +1,20 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
+import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.ItemInteractionResult
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
@@ -16,8 +26,11 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.DirectionProperty
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
+import net.neoforged.neoforge.items.ItemHandlerHelper
+import kotlin.jvm.optionals.getOrNull
 
 class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
 
@@ -64,12 +77,62 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 		}
 	}
 
+	override fun useItemOn(
+		stack: ItemStack,
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hand: InteractionHand,
+		hitResult: BlockHitResult
+	): ItemInteractionResult {
+		if (!stack.`is`(ModItems.ENDER_LETTER) || level.isClientSide) return super.useItemOn(stack, state, level, pos, player, hand, hitResult)
+
+		if (sendLetter(player, stack)) {
+			stack.shrink(1)
+			return ItemInteractionResult.SUCCESS
+		} else {
+			return ItemInteractionResult.FAIL
+		}
+	}
+
 	companion object {
 		val IS_FLAG_RAISED: BooleanProperty = BooleanProperty.create("is_flag_raised")
 		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
 
 		val SHAPE_NS: VoxelShape = box(5.0, 0.0, 1.0, 11.0, 22.0, 15.0)
 		val SHAPE_EW: VoxelShape = box(1.0, 0.0, 5.0, 15.0, 22.0, 11.0)
+
+		fun sendLetter(
+			player: Player,
+			stack: ItemStack
+		): Boolean {
+			val component = stack.get(ModDataComponents.ENDER_LETTER_CONTENTS) ?: return false
+			val recipientName = component.recipient.getOrNull()
+			if (recipientName == null) {
+				player.displayClientMessage(Component.literal("This letter has no recipient!"), true)
+				return false
+			}
+
+			val level = player.level() as? ServerLevel ?: return false
+			val recipient = level.server.playerList.getPlayerByName(recipientName)
+
+			if (recipient == null) {
+				player.displayClientMessage(Component.literal("The recipient '$recipientName' is not online!"), true)
+				return false
+			}
+
+			val handler = EnderLetterHandler.get(level)
+			val inventory = handler.getInventory(recipient)
+
+			if (!inventory.hasRoom()) {
+				player.displayClientMessage(Component.literal("The recipient '$recipientName' has no room for your letter!"), true)
+				return false
+			}
+
+			ItemHandlerHelper.insertItem(inventory, stack.copy(), false)
+			return true
+		}
 	}
 
 }
