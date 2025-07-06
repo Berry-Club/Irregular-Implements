@@ -55,7 +55,9 @@ class EnderLetterHandler : SavedData() {
 				val inventoryTag = tag.getCompound(INVENTORY_NBT)
 
 				val inventory = EnderMailboxInventory.loadFromTag(handler, inventoryTag, provider)
-				handler.inventories[uuid] = inventory
+				if (inventory.hasItems()) {
+					handler.inventories[uuid] = inventory
+				}
 			}
 
 			return handler
