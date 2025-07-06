@@ -24,20 +24,18 @@ data class EnderLetterContentsDataComponent(
 		Optional.empty()
 	)
 
-	constructor(
-		stacks: NonNullList<ItemStack>,
-		sender: String?,
-		recipient: String?
-	) : this(
-		stacks,
-		Optional.ofNullable(sender),
-		Optional.ofNullable(recipient)
-	)
+	val hasBeenReceived = sender.isPresent
 
 	override fun getInventory(): NonNullList<ItemStack> = stacks
 
 	override fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>) {
-		stack.set(ModDataComponents.ENDER_LETTER_CONTENTS, this.copy(stacks = inventory))
+		val newComponent = this.copy(stacks = inventory)
+
+		if (hasBeenReceived && inventory.all(ItemStack::isEmpty)) {
+			stack.shrink(1)
+		} else {
+			stack.set(ModDataComponents.ENDER_LETTER_CONTENTS, newComponent)
+		}
 	}
 
 	companion object {
