@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -126,7 +127,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			player.openMenu(blockEntity)
 			return InteractionResult.SUCCESS
 		} else {
-			player.status(ModLanguageProvider.Messages.ENDER_MAILBOX_NOT_OWNER.toComponent())
+			player.status(ModMessageLang.ENDER_MAILBOX_NOT_OWNER.toComponent())
 			return InteractionResult.PASS
 		}
 	}
@@ -156,19 +157,19 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			for (i in items.indices) {
 				if (!items[i].isEmpty) break
 
-				player.status(ModLanguageProvider.Messages.ENDER_LETTER_EMPTY.toComponent())
+				player.status(ModMessageLang.ENDER_LETTER_EMPTY.toComponent())
 				return false
 			}
 
 			val senderName = component.sender.getOrNull()
 			if (senderName != null) {
-				player.status(ModLanguageProvider.Messages.ENDER_LETTER_ALREADY_SENT.toComponent())
+				player.status(ModMessageLang.ENDER_LETTER_ALREADY_SENT.toComponent())
 				return false
 			}
 
 			val recipientName = component.recipient.getOrNull()
 			if (recipientName == null) {
-				player.status(ModLanguageProvider.Messages.ENDER_LETTER_NO_RECIPIENT.toComponent())
+				player.status(ModMessageLang.ENDER_LETTER_NO_RECIPIENT.toComponent())
 				return false
 			}
 
@@ -176,7 +177,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			val recipient = level.server.playerList.getPlayerByName(recipientName)
 
 			if (recipient == null) {
-				player.status(ModLanguageProvider.Messages.ENDER_LETTER_NO_RECIPIENT.toComponent(recipientName))
+				player.status(ModMessageLang.ENDER_LETTER_NO_RECIPIENT.toComponent(recipientName))
 				return false
 			}
 
@@ -184,7 +185,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			val inventory = handler.getOrCreateInventory(recipient)
 
 			if (!inventory.hasRoom()) {
-				player.status(ModLanguageProvider.Messages.ENDER_LETTER_RECIPIENT_NO_ROOM.toComponent(recipientName))
+				player.status(ModMessageLang.ENDER_LETTER_RECIPIENT_NO_ROOM.toComponent(recipientName))
 				return false
 			}
 

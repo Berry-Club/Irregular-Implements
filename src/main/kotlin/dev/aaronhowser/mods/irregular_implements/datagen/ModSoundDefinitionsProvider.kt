@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModSubtitleLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.data.PackOutput
@@ -20,7 +21,7 @@ class ModSoundDefinitionsProvider(
 				.with(
 					sound(OtherUtil.modResource("fart"), SoundDefinition.SoundType.SOUND)
 				)
-				.subtitle(ModLanguageProvider.Subtitles.FART)
+				.subtitle(ModSubtitleLang.FART)
 		)
 
 		add(

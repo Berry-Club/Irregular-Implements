@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.handler.floo
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.BurningFlooFireplacePacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
@@ -38,11 +39,11 @@ class FlooFireplace(
 		val fireplace = data.findFireplace(target)
 
 		if (fireplace == null) {
-			player.status(ModLanguageProvider.Messages.FIREPLACE_NOT_FOUND.toComponent(target))
+			player.status(ModMessageLang.FIREPLACE_NOT_FOUND.toComponent(target))
 			return false
 		} else if (fireplace == this) {
 			val name = name ?: target
-			player.status(ModLanguageProvider.Messages.FIREPLACE_ALREADY_AT.toComponent(name))
+			player.status(ModMessageLang.FIREPLACE_ALREADY_AT.toComponent(name))
 			return false
 		}
 
@@ -67,7 +68,7 @@ class FlooFireplace(
 
 		if (be == null) {
 			player.status(
-				ModLanguageProvider.Messages.FIREPLACE_NO_LONGER_VALID.toComponent(
+				ModMessageLang.FIREPLACE_NO_LONGER_VALID.toComponent(
 					masterBlockPos.x, masterBlockPos.y, masterBlockPos.z
 				)
 			)
@@ -87,7 +88,7 @@ class FlooFireplace(
 		)
 
 		if (name != null) {
-			player.status(ModLanguageProvider.Messages.FIREPLACE_TELEPORTED.toComponent(name))
+			player.status(ModMessageLang.FIREPLACE_TELEPORTED.toComponent(name))
 		}
 
 		val bricks = be.children + be.blockPos

@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
@@ -29,7 +30,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 			usedStack.set(ModDataComponents.LOCATION, locationComponent)
 
 			player.status(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_SET
+				ModMessageLang.REDSTONE_TOOL_BASE_SET
 					.toComponent(clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z)
 			)
 
@@ -39,7 +40,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		val locationComponent = usedStack.get(ModDataComponents.LOCATION)
 		if (locationComponent == null) {
 			player.status(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_INVALID_BASE_BLOCK.toComponent()
+				ModMessageLang.REDSTONE_TOOL_INVALID_BASE_BLOCK.toComponent()
 			)
 
 			return InteractionResult.FAIL
@@ -47,7 +48,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 
 		if (level.dimension() != locationComponent.dimension) {
 			player.status(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_WRONG_DIMENSION.toComponent()
+				ModMessageLang.REDSTONE_TOOL_WRONG_DIMENSION.toComponent()
 			)
 
 			return InteractionResult.FAIL
@@ -60,7 +61,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		if (baseBlockEntity !is RedstoneToolLinkable) {
 
 			player.status(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_NOT_LINKABLE
+				ModMessageLang.REDSTONE_TOOL_BASE_NOT_LINKABLE
 					.toComponent(baseBlockName, level.getBlockState(baseBlockPos).block.name)
 			)
 
@@ -71,7 +72,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		baseBlockEntity.linkedPos = clickedPos
 
 		player.status(
-			ModLanguageProvider.Messages.REDSTONE_TOOL_LINKED
+			ModMessageLang.REDSTONE_TOOL_LINKED
 				.toComponent(
 					clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z,
 					baseBlockName, baseBlockPos.x, baseBlockPos.y, baseBlockPos.z

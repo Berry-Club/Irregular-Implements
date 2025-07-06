@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionResult
@@ -53,7 +54,7 @@ class SpectreEnergyInjectorBlock : Block(
 			val storedFormatted = String.format("%,d", energyStored)
 			val maxFormatted = String.format("%,d", maxEnergy)
 
-			val component = ModLanguageProvider.Messages.FE_RATIO
+			val component = ModMessageLang.FE_RATIO
 				.toComponent(storedFormatted, maxFormatted)
 
 			player.sendSystemMessage(component)

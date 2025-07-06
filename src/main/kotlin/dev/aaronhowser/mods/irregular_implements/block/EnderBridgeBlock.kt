@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
@@ -119,7 +120,7 @@ class EnderBridgeBlock(
 			if (iterations >= MAX_ITERATIONS) {
 				turnOffBridge(level, bridgePos, bridgeFailed = true)
 
-				val component = ModLanguageProvider.Messages.ENDER_BRIDGE_ITERATIONS
+				val component = ModMessageLang.ENDER_BRIDGE_ITERATIONS
 					.toComponent(iterations * blocksPerIteration)
 
 				for (entity in getEntities(level, bridgePos)) {
@@ -182,7 +183,7 @@ class EnderBridgeBlock(
 
 					val blockName = state.block.name
 
-					val component = ModLanguageProvider.Messages.ENDER_BRIDGE_HIT_BLOCK
+					val component = ModMessageLang.ENDER_BRIDGE_HIT_BLOCK
 						.toComponent(blockName, pos.x, pos.y, pos.z)
 
 					for (entity in getEntities(level, bridgePos)) {

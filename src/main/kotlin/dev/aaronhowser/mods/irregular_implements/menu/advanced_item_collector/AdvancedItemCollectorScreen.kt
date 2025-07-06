@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
@@ -124,7 +125,7 @@ class AdvancedItemCollectorScreen(
 
 		val middle = this.leftPos + this.imageWidth / 2
 
-		val xChars = ModLanguageProvider.Messages.ADVANCED_ITEM_COLLECTOR_X_RADIUS
+		val xChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_X_RADIUS
 			.toComponent(this.menu.xRadius)
 			.visualOrderText
 
@@ -137,7 +138,7 @@ class AdvancedItemCollectorScreen(
 			false
 		)
 
-		val yChars = ModLanguageProvider.Messages.ADVANCED_ITEM_COLLECTOR_Y_RADIUS
+		val yChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_Y_RADIUS
 			.toComponent(this.menu.yRadius)
 			.visualOrderText
 
@@ -150,7 +151,7 @@ class AdvancedItemCollectorScreen(
 			false
 		)
 
-		val zChars = ModLanguageProvider.Messages.ADVANCED_ITEM_COLLECTOR_Z_RADIUS
+		val zChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_Z_RADIUS
 			.toComponent(this.menu.zRadius)
 			.visualOrderText
 

@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import net.minecraft.ChatFormatting
 import net.minecraft.world.InteractionResult
@@ -20,7 +21,7 @@ class SpectreIlluminatorItem(properties: Properties) : Item(properties) {
 
 			if (!level.isClientSide) {
 				player?.sendSystemMessage(
-					ModLanguageProvider.Messages.ILLUMINATOR_ALREADY_PRESENT
+					ModMessageLang.ILLUMINATOR_ALREADY_PRESENT
 						.toComponent()
 						.withStyle(ChatFormatting.RED)
 				)

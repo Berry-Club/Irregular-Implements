@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModCurioProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -180,14 +180,18 @@ object ModArmorItems {
 		val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
 		val bootWasResponsible = bootArmor.get(ModDataComponents.FLUID_TAGS)?.any { fluidBelow.`is`(it) }.isTrue
-		return if (bootWasResponsible) ModLanguageProvider.Messages.FLUID_FALL_DEATH_BOOT.toComponent(
-			entity.displayName ?: entity.name,
-			fluidBelow.fluidType.description,
-			bootArmor.displayName
-		) else ModLanguageProvider.Messages.FLUID_FALL_DEATH_GENERIC.toComponent(
-			entity.displayName ?: entity.name,
-			fluidBelow.fluidType.description,
-		)
+		return if (bootWasResponsible) {
+			ModMessageLang.FLUID_FALL_DEATH_BOOT.toComponent(
+				entity.displayName ?: entity.name,
+				fluidBelow.fluidType.description,
+				bootArmor.displayName
+			)
+		} else {
+			ModMessageLang.FLUID_FALL_DEATH_GENERIC.toComponent(
+				entity.displayName ?: entity.name,
+				fluidBelow.fluidType.description,
+			)
+		}
 	}
 
 	fun tryBlockFireDamage(event: LivingIncomingDamageEvent) {
