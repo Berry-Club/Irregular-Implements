@@ -13,6 +13,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.E
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterMenu
 import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterScreen
+import dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox.EnderMailboxMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformScreen
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
@@ -87,6 +88,8 @@ object ModMenuTypes {
 		register("ender_energy_distributor", ::EnderEnergyDistributorMenu)
 	val ENDER_LETTER: DeferredHolder<MenuType<*>, MenuType<EnderLetterMenu>> =
 		register("ender_letter", ::EnderLetterMenu)
+	val ENDER_MAILBOX: DeferredHolder<MenuType<*>, MenuType<EnderMailboxMenu>> =
+		register("ender_mailbox", ::EnderMailboxMenu)
 
 	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
 		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
