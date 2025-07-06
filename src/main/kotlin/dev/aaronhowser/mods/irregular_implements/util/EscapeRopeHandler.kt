@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
@@ -73,9 +74,8 @@ object EscapeRopeHandler {
 			val maxRuns = ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
 			for (run in 0 until maxRuns) {
 
-				actualPlayer.displayClientMessage(
-					Component.literal("Checked ${this.alreadyChecked.size} blocks"),
-					true
+				actualPlayer.status(
+					Component.literal("Checked ${this.alreadyChecked.size} blocks")
 				)
 
 				if (this.toCheck.isEmpty()

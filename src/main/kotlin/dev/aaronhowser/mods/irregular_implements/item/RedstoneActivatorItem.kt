@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.ChatFormatting
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.network.chat.Component
@@ -39,7 +40,7 @@ class RedstoneActivatorItem(properties: Properties) : Item(properties) {
 			.toComponent()
 			.withStyle(ChatFormatting.RED)
 
-		player.displayClientMessage(component, true)
+		player.status(component)
 
 		return InteractionResultHolder.success(usedStack)
 	}

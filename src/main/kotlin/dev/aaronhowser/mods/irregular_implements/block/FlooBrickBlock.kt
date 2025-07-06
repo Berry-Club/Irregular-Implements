@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -40,7 +41,7 @@ class FlooBrickBlock : Block(
 		val uuid = blockEntity.uuid ?: blockEntity.masterUUID
 
 		if (uuid == null) {
-			player.displayClientMessage(Component.literal("Nameless fireplace"), true)
+			player.status(Component.literal("Nameless fireplace"))
 			return InteractionResult.SUCCESS_NO_ITEM_USED
 		}
 
@@ -48,11 +49,11 @@ class FlooBrickBlock : Block(
 		val fireplace = network.findFireplace(uuid)
 
 		if (fireplace == null) {
-			player.displayClientMessage(Component.literal("Orphaned fireplace"), true)
+			player.status(Component.literal("Orphaned fireplace"))
 			return InteractionResult.SUCCESS_NO_ITEM_USED
 		}
 
-		player.displayClientMessage(Component.literal("Fireplace: ${fireplace.name ?: "<unnamed>"}"), true)
+		player.status(Component.literal("Fireplace: ${fireplace.name ?: "<unnamed>"}"))
 
 		return InteractionResult.SUCCESS_NO_ITEM_USED
 	}

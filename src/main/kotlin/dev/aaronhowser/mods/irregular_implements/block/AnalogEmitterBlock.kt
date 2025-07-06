@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -67,7 +68,7 @@ class AnalogEmitterBlock(
 			.toComponent()
 			.withStyle(ChatFormatting.RED)
 
-		player.displayClientMessage(component, true)
+		player.status(component)
 
 		val newState = oldState.setValue(POWER, newPower)
 		level.setBlockAndUpdate(pos, newState)

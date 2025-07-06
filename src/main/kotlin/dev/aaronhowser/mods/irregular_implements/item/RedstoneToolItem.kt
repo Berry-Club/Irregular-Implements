@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
@@ -27,10 +28,9 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 			val locationComponent = LocationDataComponent(level, clickedPos)
 			usedStack.set(ModDataComponents.LOCATION, locationComponent)
 
-			player.displayClientMessage(
+			player.status(
 				ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_SET
-					.toComponent(clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z),
-				true
+					.toComponent(clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z)
 			)
 
 			return InteractionResult.SUCCESS
@@ -38,18 +38,16 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 
 		val locationComponent = usedStack.get(ModDataComponents.LOCATION)
 		if (locationComponent == null) {
-			player.displayClientMessage(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_INVALID_BASE_BLOCK.toComponent(),
-				true
+			player.status(
+				ModLanguageProvider.Messages.REDSTONE_TOOL_INVALID_BASE_BLOCK.toComponent()
 			)
 
 			return InteractionResult.FAIL
 		}
 
 		if (level.dimension() != locationComponent.dimension) {
-			player.displayClientMessage(
-				ModLanguageProvider.Messages.REDSTONE_TOOL_WRONG_DIMENSION.toComponent(),
-				true
+			player.status(
+				ModLanguageProvider.Messages.REDSTONE_TOOL_WRONG_DIMENSION.toComponent()
 			)
 
 			return InteractionResult.FAIL
@@ -61,10 +59,9 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 
 		if (baseBlockEntity !is RedstoneToolLinkable) {
 
-			player.displayClientMessage(
+			player.status(
 				ModLanguageProvider.Messages.REDSTONE_TOOL_BASE_NOT_LINKABLE
-					.toComponent(baseBlockName, level.getBlockState(baseBlockPos).block.name),
-				true
+					.toComponent(baseBlockName, level.getBlockState(baseBlockPos).block.name)
 			)
 
 			return InteractionResult.FAIL
@@ -73,13 +70,12 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		//FIXME: Not updating on client?
 		baseBlockEntity.linkedPos = clickedPos
 
-		player.displayClientMessage(
+		player.status(
 			ModLanguageProvider.Messages.REDSTONE_TOOL_LINKED
 				.toComponent(
 					clickedBlockName, clickedPos.x, clickedPos.y, clickedPos.z,
 					baseBlockName, baseBlockPos.x, baseBlockPos.y, baseBlockPos.z
-				),
-			true
+				)
 		)
 
 		return InteractionResult.SUCCESS

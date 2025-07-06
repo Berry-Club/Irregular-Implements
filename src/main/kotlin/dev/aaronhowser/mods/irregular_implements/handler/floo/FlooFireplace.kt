@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.handler.floo
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.BurningFlooFireplacePacket
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -36,11 +37,11 @@ class FlooFireplace(
 		val fireplace = data.findFireplace(target)
 
 		if (fireplace == null) {
-			player.displayClientMessage(Component.literal("Could not find fireplace named '$target'"), true)
+			player.status(Component.literal("Could not find fireplace named '$target'"))
 			return false
 		} else if (fireplace == this) {
 			val name = name ?: target
-			player.displayClientMessage(Component.literal("You are already at '$name'"), true)
+			player.status(Component.literal("You are already at '$name'"))
 			return false
 		}
 
@@ -64,7 +65,7 @@ class FlooFireplace(
 		val be = level.getBlockEntity(this.masterBlockPos) as? FlooBrickBlockEntity
 
 		if (be == null) {
-			player.displayClientMessage(Component.literal("The fireplace at ${this.masterBlockPos} is no longer valid"), true)
+			player.status(Component.literal("The fireplace at ${this.masterBlockPos} is no longer valid"))
 
 			val network = FlooNetworkSavedData.get(level)
 			network.removeFireplace(this.masterUuid)
@@ -81,7 +82,7 @@ class FlooFireplace(
 		)
 
 		if (name != null) {
-			player.displayClientMessage(Component.literal("Teleported to '$name'"), true)
+			player.status(Component.literal("Teleported to '$name'"))
 		}
 
 		val bricks = be.children + be.blockPos

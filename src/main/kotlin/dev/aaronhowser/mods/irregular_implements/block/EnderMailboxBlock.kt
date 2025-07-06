@@ -126,7 +126,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			player.openMenu(blockEntity)
 			return InteractionResult.SUCCESS
 		} else {
-			player.displayClientMessage(ModLanguageProvider.Messages.ENDER_MAILBOX_NOT_OWNER.toComponent(), true)
+			player.status(ModLanguageProvider.Messages.ENDER_MAILBOX_NOT_OWNER.toComponent())
 			return InteractionResult.PASS
 		}
 	}
@@ -176,7 +176,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			val recipient = level.server.playerList.getPlayerByName(recipientName)
 
 			if (recipient == null) {
-				player.displayClientMessage(Component.literal("The recipient '$recipientName' is not online!"), true)
+				player.status(Component.literal("The recipient '$recipientName' is not online!"))
 				return false
 			}
 
@@ -184,7 +184,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			val inventory = handler.getOrCreateInventory(recipient)
 
 			if (!inventory.hasRoom()) {
-				player.displayClientMessage(Component.literal("The recipient '$recipientName' has no room for your letter!"), true)
+				player.status(Component.literal("The recipient '$recipientName' has no room for your letter!"))
 				return false
 			}
 
