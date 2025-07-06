@@ -16,10 +16,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.DropperBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder
-import net.neoforged.neoforge.client.model.generators.ModelFile
+import net.neoforged.neoforge.client.model.generators.*
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 
 class ModBlockStateProvider(
@@ -75,6 +72,7 @@ class ModBlockStateProvider(
 		flooBrick()
 		enderEnergyDistributor()
 		slimeCube()
+		enderMailbox()
 	}
 
 	private fun enderEnergyDistributor() {
@@ -169,6 +167,100 @@ class ModBlockStateProvider(
 				.end()
 		}
 
+	}
+
+	private fun enderMailbox() {
+		val block = ModBlocks.ENDER_MAILBOX.get()
+
+		val woodTexture = mcLoc("block/oak_planks")
+		val redstoneTexture = mcLoc("block/redstone_block")
+		val mailboxBodyTexture = modLoc("block/ender_mailbox_body")
+
+		fun getBaseModel(name: String): BlockModelBuilder {
+			return models()
+				.withExistingParent(name, "block/block")
+				.texture("post", woodTexture)
+				.texture("body", mailboxBodyTexture)
+				.texture("particle", mailboxBodyTexture)
+
+				.element()
+				.from(6f, 0f, 6f)
+				.to(10f, 16f, 10f)
+				.textureAll("#post")
+				.end()
+
+				.element()
+				.from(5f, 15f, 1f)
+				.to(11f, 22f, 15f)
+				.textureAll("#body")
+				.end()
+		}
+
+		getVariantBuilder(block)
+			.forAllStates {
+
+				val facing = it.getValue(EnderMailboxBlock.FACING)
+				val isFlagRaised = it.getValue(EnderMailboxBlock.IS_FLAG_RAISED)
+
+				val yRotation = when (facing) {
+					Direction.SOUTH -> 0
+					Direction.WEST -> 90
+					Direction.NORTH -> 180
+					Direction.EAST -> 270
+					else -> 0
+				}
+
+				val name = if (isFlagRaised) {
+					"ender_mailbox_flag_raised"
+				} else {
+					"ender_mailbox"
+				}
+
+				val model = getBaseModel(name)
+
+				if (isFlagRaised) {
+					model
+						.element()
+						.from(4f, 23f, 4f)
+						.to(5f, 25f, 5f)
+						.textureAll("#flag")
+						.end()
+
+						.element()
+						.from(4f, 19f, 3f)
+						.to(5f, 25f, 4f)
+						.textureAll("#flag")
+						.end()
+				} else {
+					model
+						.element()
+						.from(4f, 18f, 7f)
+						.to(5f, 19f, 9f)
+						.textureAll("#flag")
+						.end()
+
+						.element()
+						.from(4f, 19f, 3f)
+						.to(5f, 20f, 9f)
+						.textureAll("#flag")
+						.end()
+				}
+					.texture("flag", redstoneTexture)
+
+				ConfiguredModel
+					.builder()
+					.modelFile(model)
+					.rotationY(yRotation)
+					.build()
+			}
+
+		simpleBlockItem(
+			block,
+			ItemModelBuilder(
+				modLoc("block/ender_mailbox_flag_raised"),
+				existingFileHelper
+			)
+		)
 	}
 
 	//TODO

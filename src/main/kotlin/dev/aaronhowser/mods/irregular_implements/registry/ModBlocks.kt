@@ -18,7 +18,8 @@ object ModBlocks {
 	val IMBUING_STATION: DeferredBlock<ImbuingStationBlock> =
 		registerBlock("imbuing_station", ::ImbuingStationBlock)
 	val FLUID_DISPLAY = basicBlock("fluid_display")
-	val ENDER_MAILBOX = basicBlock("ender_mailbox")
+	val ENDER_MAILBOX: DeferredBlock<EnderMailboxBlock> =
+		registerBlock("ender_mailbox", ::EnderMailboxBlock)
 	val POTION_VAPORIZER = basicBlock("potion_vaporizer")
 	val RAIN_SHIELD: DeferredBlock<RainShieldBlock> =
 		registerBlock("rain_shield", ::RainShieldBlock)

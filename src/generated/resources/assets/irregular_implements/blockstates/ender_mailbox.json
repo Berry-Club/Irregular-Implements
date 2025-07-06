@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,is_flag_raised=false": {
+      "model": "irregular_implements:block/ender_mailbox",
+      "y": 270
+    },
+    "facing=east,is_flag_raised=true": {
+      "model": "irregular_implements:block/ender_mailbox_flag_raised",
+      "y": 270
+    },
+    "facing=north,is_flag_raised=false": {
+      "model": "irregular_implements:block/ender_mailbox",
+      "y": 180
+    },
+    "facing=north,is_flag_raised=true": {
+      "model": "irregular_implements:block/ender_mailbox_flag_raised",
+      "y": 180
+    },
+    "facing=south,is_flag_raised=false": {
+      "model": "irregular_implements:block/ender_mailbox"
+    },
+    "facing=south,is_flag_raised=true": {
+      "model": "irregular_implements:block/ender_mailbox_flag_raised"
+    },
+    "facing=west,is_flag_raised=false": {
+      "model": "irregular_implements:block/ender_mailbox",
+      "y": 90
+    },
+    "facing=west,is_flag_raised=true": {
+      "model": "irregular_implements:block/ender_mailbox_flag_raised",
+      "y": 90
+    }
+  }
+}
