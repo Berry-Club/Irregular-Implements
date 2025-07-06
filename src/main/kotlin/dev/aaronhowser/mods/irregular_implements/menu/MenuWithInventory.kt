@@ -13,10 +13,10 @@ abstract class MenuWithInventory(
 
 	protected open fun addPlayerInventorySlots(playerInventoryY: Int) {
 		// Add the 27 slots of the player inventory
-		for (row in 0..2) {
+		for (row in 0 until 3) {
 			val y = playerInventoryY + row * 18
 
-			for (column in 0..8) {
+			for (column in 0 until 9) {
 				val slotIndex = column + row * 9 + 9
 				val x = 8 + column * 18
 
