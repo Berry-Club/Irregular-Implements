@@ -20,13 +20,13 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)) {
 		)
 	}
 
-	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
 		builder.add(IS_FLAG_RAISED, FACING)
 	}
 
-	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState {
 		return defaultBlockState()
-			.setValue(FACING, context.nearestLookingDirection.opposite)
+			.setValue(FACING, context.nearestLookingDirections.first { it.axis.isHorizontal })
 	}
 
 	companion object {

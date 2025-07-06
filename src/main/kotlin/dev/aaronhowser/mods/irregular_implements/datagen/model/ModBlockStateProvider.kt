@@ -186,13 +186,32 @@ class ModBlockStateProvider(
 				.element()
 				.from(6f, 0f, 6f)
 				.to(10f, 16f, 10f)
-				.textureAll("#post")
+				.allFaces { dir, fb ->
+					when (dir) {
+						Direction.DOWN -> fb.uvs(9f, 9f, 7f, 7f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+						Direction.UP -> fb.uvs(7f, 7f, 9f, 9f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+						else -> fb.uvs(7f, 8f, 9f, 16f)
+					}
+
+					fb.texture("#post")
+				}
 				.end()
 
 				.element()
 				.from(5f, 15f, 1f)
 				.to(11f, 22f, 15f)
-				.textureAll("#body")
+				.allFaces { dir, fb ->
+					when (dir) {
+						Direction.DOWN -> fb.uvs(9.5f, 11.5f, 6.5f, 4.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+						Direction.UP -> fb.uvs(6.5f, 4.5f, 9.5f, 11.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+						Direction.NORTH -> fb.uvs(6.5f, 5f, 9.5f, 8.5f)
+						Direction.SOUTH -> fb.uvs(6.5f, 5f, 9.5f, 8.5f)
+						Direction.WEST -> fb.uvs(4.5f, 5f, 11.5f, 8.5f)
+						Direction.EAST -> fb.uvs(4.5f, 5f, 11.5f, 8.5f)
+					}
+
+					fb.texture("#body")
+				}
 				.end()
 		}
 
