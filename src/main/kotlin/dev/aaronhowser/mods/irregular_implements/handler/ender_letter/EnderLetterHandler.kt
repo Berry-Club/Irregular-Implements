@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.handler.ender_letter
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.level.saveddata.SavedData
 import java.util.*
 
@@ -26,6 +28,14 @@ class EnderLetterHandler : SavedData() {
 		return tag
 	}
 
+	fun getInventory(uuid: UUID): EnderMailboxInventory {
+		return inventories.getOrPut(uuid) {
+			EnderMailboxInventory(this)
+		}
+	}
+
+	fun getInventory(owner: Entity): EnderMailboxInventory = getInventory(owner.uuid)
+
 	companion object {
 		const val LIST_NBT = "EnderLetterInventories"
 		const val OWNER_UUID_NBT = "OwnerUUID"
@@ -48,6 +58,19 @@ class EnderLetterHandler : SavedData() {
 
 			return handler
 		}
+
+		fun get(level: ServerLevel): EnderLetterHandler {
+			if (level != level.server.overworld()) {
+				return get(level.server.overworld())
+			}
+
+			return level.dataStorage.computeIfAbsent(
+				Factory(::EnderLetterHandler, ::load),
+				"ender_letter_inventories"
+			)
+		}
+
+
 	}
 
 }

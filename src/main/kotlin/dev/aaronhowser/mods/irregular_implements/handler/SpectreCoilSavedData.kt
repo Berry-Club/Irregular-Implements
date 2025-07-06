@@ -127,7 +127,9 @@ class SpectreCoilSavedData : SavedData() {
 		}
 
 		private fun get(level: ServerLevel): SpectreCoilSavedData {
-			require(level == level.server.overworld()) { "SpectreCoilSavedData can only be accessed on the overworld" }
+			if (level != level.server.overworld()) {
+				return get(level.server.overworld())
+			}
 
 			return level.dataStorage.computeIfAbsent(
 				Factory(::SpectreCoilSavedData, ::load),

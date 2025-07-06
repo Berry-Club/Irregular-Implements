@@ -21,6 +21,8 @@ class EnderMailboxBlockEntity(
 		val level = level as? ServerLevel ?: return
 		if (level.gameTime % 20 != 0L) return
 
+		val
+
 		val wasFlagUp = blockState.getValue(EnderMailboxBlock.IS_FLAG_RAISED)
 		val shouldFlagBeUp = true
 
