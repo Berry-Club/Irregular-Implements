@@ -6,8 +6,13 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -16,9 +21,10 @@ import java.util.*
 class EnderMailboxBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENDER_MAILBOX.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntities.ENDER_MAILBOX.get(), pos, blockState), MenuProvider {
 
-	private var ownerUuid: UUID = UUID.randomUUID()
+	var ownerUuid: UUID = UUID.randomUUID()
+		private set
 
 	fun setOwner(owner: Entity) {
 		ownerUuid = owner.uuid
@@ -53,6 +59,12 @@ class EnderMailboxBlockEntity(
 		if (tag.contains(OWNER_NBT)) {
 			ownerUuid = tag.getUUID(OWNER_NBT)
 		}
+	}
+
+	override fun getDisplayName(): Component = blockState.block.name
+
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
+		TODO("Not yet implemented")
 	}
 
 	companion object {

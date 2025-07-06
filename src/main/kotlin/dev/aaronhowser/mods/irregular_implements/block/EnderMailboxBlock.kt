@@ -10,6 +10,7 @@ import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
@@ -109,6 +110,18 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			return ItemInteractionResult.SUCCESS
 		} else {
 			return ItemInteractionResult.CONSUME
+		}
+	}
+
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		val blockEntity = level.getBlockEntity(pos) as? EnderMailboxBlockEntity ?: return InteractionResult.PASS
+
+		if (blockEntity.ownerUuid == player.uuid) {
+			player.openMenu(blockEntity)
+			return InteractionResult.SUCCESS
+		} else {
+			player.displayClientMessage(Component.literal("This mailbox does not belong to you!"), true)
+			return InteractionResult.PASS
 		}
 	}
 
