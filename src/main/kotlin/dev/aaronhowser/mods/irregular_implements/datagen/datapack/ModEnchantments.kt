@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMiscLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
@@ -30,7 +30,7 @@ object ModEnchantments {
 		context.register(
 			MAGNETIC,
 			Enchantment(
-				ModLanguageProvider.Misc.MAGNETIC_NAME.toComponent(),
+				ModMiscLang.MAGNETIC_NAME.toComponent(),
 				Enchantment.EnchantmentDefinition(
 					context.lookup(Registries.ITEM).getOrThrow(ModItemTagsProvider.ENCHANTABLE_MAGNETIC),
 					Optional.empty(),
