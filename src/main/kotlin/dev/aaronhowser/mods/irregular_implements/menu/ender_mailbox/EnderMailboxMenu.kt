@@ -25,17 +25,19 @@ class EnderMailboxMenu(
 	)
 
 	init {
-
 		addSlots()
-		addPlayerInventorySlots(49)
+		addPlayerInventorySlots(51)
 	}
 
 	override fun addSlots() {
-		val y = 0
+		val y = 18
 		for (i in 0 until 9) {
 			val x = 8 + i * 18
 
-			val slot = Slot(enderMailboxContainer, i, x, y)
+			val slot = object : Slot(enderMailboxContainer, i, x, y) {
+				override fun mayPlace(stack: ItemStack): Boolean = false
+			}
+
 			addSlot(slot)
 		}
 	}
@@ -44,5 +46,5 @@ class EnderMailboxMenu(
 		return ItemStack.EMPTY
 	}
 
-	override fun stillValid(player: Player): Boolean = true
+	override fun stillValid(player: Player): Boolean = enderMailboxContainer.stillValid(player)
 }

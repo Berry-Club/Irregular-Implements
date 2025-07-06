@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.EnderMailboxBlock
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
+import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderMailboxContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox.EnderMailboxMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -9,7 +10,6 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Inventory
@@ -66,7 +66,7 @@ class EnderMailboxBlockEntity(
 	override fun getDisplayName(): Component = blockState.block.name
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-		return EnderMailboxMenu(containerId, playerInventory)
+		return EnderMailboxMenu(containerId, playerInventory, EnderMailboxContainer(player, worldPosition))
 	}
 
 	companion object {
