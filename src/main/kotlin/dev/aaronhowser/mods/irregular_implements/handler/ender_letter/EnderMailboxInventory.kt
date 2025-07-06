@@ -1,7 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.handler.ender_letter
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.items.IItemHandler
 
@@ -49,8 +52,22 @@ class EnderMailboxInventory(
 		return stack.`is`(ModItems.ENDER_LETTER)
 	}
 
+	fun saveAsTag(registry: HolderLookup.Provider): CompoundTag {
+		val tag = CompoundTag()
+		ContainerHelper.saveAllItems(tag, enderLetters, registry)
+		return tag
+	}
+
 	companion object {
 		const val INVENTORY_SIZE = 9
+
+		fun loadFromTag(handler: EnderLetterHandler, tag: CompoundTag, registry: HolderLookup.Provider): EnderMailboxInventory {
+			val inventory = EnderMailboxInventory(handler)
+
+			ContainerHelper.loadAllItems(tag, inventory.enderLetters, registry)
+
+			return inventory
+		}
 	}
 
 }
