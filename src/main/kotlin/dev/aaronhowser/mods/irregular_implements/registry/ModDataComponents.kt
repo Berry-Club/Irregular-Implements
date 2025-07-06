@@ -16,7 +16,6 @@ import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Block

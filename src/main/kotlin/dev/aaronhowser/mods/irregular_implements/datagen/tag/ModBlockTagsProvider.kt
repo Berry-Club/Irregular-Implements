@@ -435,7 +435,7 @@ class ModBlockTagsProvider(
 					translucentLuminousBlock
 				)
 
-			val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.getName()))
+			val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.name))
 
 			this.tag(coloredTag)
 				.add(

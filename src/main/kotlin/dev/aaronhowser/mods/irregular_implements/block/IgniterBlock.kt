@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.BlockHitResult
-import java.util.*
 
 class IgniterBlock(
 	properties: Properties = Properties.ofFullCopy(Blocks.DISPENSER)

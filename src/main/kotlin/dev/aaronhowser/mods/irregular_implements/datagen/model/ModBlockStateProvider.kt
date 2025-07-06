@@ -122,7 +122,7 @@ class ModBlockStateProvider(
 
 		val texture = modLoc("block/sakanade")
 
-		val itemModel = itemModels()
+		itemModels()
 			.withExistingParent(name(block), "item/generated")
 			.texture("layer0", texture)
 
@@ -147,7 +147,7 @@ class ModBlockStateProvider(
 			val z2 = shape.max(Direction.Axis.Z).toFloat() * 16f
 
 			val blockModel = models()
-				.withExistingParent(name(block) + "_" + direction.getName(), "block/block")
+				.withExistingParent(name(block) + "_" + direction.name, "block/block")
 				.renderType(RenderType.cutout().name)
 				.texture("texture", texture)
 				.texture("particle", texture)
@@ -437,7 +437,7 @@ class ModBlockStateProvider(
 						.build()
 				}
 
-			val itemModel = itemModels()
+			itemModels()
 				.simpleBlockItem(block)
 				.transforms()
 
@@ -518,7 +518,7 @@ class ModBlockStateProvider(
 			}
 
 
-		val itemModel = itemModels()
+		itemModels()
 			.simpleBlockItem(block)
 			.transforms()
 
@@ -1180,7 +1180,7 @@ class ModBlockStateProvider(
 			.renderType(RenderType.cutout().name)
 
 		//TODO: Figure out how to get this on the inactive sides
-		val inactiveModel = models()
+		models()
 			.pressurePlate(name(block) + "_inactive", inactiveTexture)
 			.renderType(RenderType.cutout().name)
 

@@ -269,7 +269,7 @@ object ModBlocks {
 	val COLORED_GRASS_BLACK: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.BLACK)
 
 	private fun coloredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock> =
-		registerBlock("colored_grass_${dyeColor.getName()}") {
+		registerBlock("colored_grass_${dyeColor.name}") {
 			GrassBlock(Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(dyeColor))
 		}
 

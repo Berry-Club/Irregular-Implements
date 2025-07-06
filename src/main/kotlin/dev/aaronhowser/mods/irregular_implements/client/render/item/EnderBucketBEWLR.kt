@@ -28,8 +28,8 @@ class EnderBucketBEWLR : BlockEntityWithoutLevelRenderer(
 		val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)
 
 		if (fluidContent != null) {
-			val fluid = fluidContent.fluid
-			val sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+			fluidContent.fluid
+			Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
 		}
 
 	}

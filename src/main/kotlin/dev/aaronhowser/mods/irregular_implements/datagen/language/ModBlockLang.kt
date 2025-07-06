@@ -210,5 +210,5 @@ object ModBlockLang {
 		provider.addBlock(ModBlocks.CHERRY_PLATFORM, "Cherry Platform")
 
 	}
-	
+
 }

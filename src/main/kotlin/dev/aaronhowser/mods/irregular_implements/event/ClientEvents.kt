@@ -18,7 +18,6 @@ import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.particle.FlameParticle
-import net.minecraft.client.particle.SpriteSet
 import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer

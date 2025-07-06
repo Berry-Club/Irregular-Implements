@@ -48,7 +48,6 @@ class PortkeyItemEntityRenderer(
 		val bakedmodel = itemRenderer.getModel(renderStack, entity.level(), null, entity.id)
 		val flag = bakedmodel.isGui3d
 
-		val f = 0.25f
 		val shouldBob = IClientItemExtensions.of(renderStack).shouldBobAsEntity(renderStack)
 
 		val f1 = if (shouldBob) Mth.sin((entity.getAge().toFloat() + partialTicks) / 10.0f + entity.bobOffs) * 0.1f + 0.1f else 0f

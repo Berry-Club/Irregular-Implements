@@ -1467,7 +1467,7 @@ class ModRecipeProvider(
 	private fun coloredThings(): List<RecipeBuilder> {
 		return buildList {
 			for (color in DyeColor.entries) {
-				val colorString = color.getName()
+				color.name
 
 				val dyeTag = dyeTags[color]!!
 

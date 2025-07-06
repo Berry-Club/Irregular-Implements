@@ -26,7 +26,7 @@ class IronDropperBlock : DropperBlock(
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IRON_DROPPER.get(), IronDropperBlockEntity::tick)
+		return createTickerHelper(blockEntityType, ModBlockEntities.IRON_DROPPER.get(), IronDropperBlockEntity::tick)
 	}
 
 	public override fun dispenseFrom(level: ServerLevel, state: BlockState, pos: BlockPos) {

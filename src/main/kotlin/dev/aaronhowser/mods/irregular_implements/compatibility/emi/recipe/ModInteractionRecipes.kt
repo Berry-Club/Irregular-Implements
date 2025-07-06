@@ -34,7 +34,7 @@ object ModInteractionRecipes {
 		return seeds.map { deferred ->
 			val seedItem = deferred.get()
 
-			val colorString = seedItem.dyeColor?.getName()
+			val colorString = seedItem.dyeColor?.name
 
 			val id = if (colorString == null) {
 				OtherUtil.modResource("/interaction/grass")

@@ -72,7 +72,7 @@ class BeanSproutBlock(
 
 		val added = player.inventory.add(stack)
 		if (!added) {
-			Block.popResource(level, pos, stack)
+			popResource(level, pos, stack)
 		}
 
 		val newState = state.setValue(AGE, 0)
