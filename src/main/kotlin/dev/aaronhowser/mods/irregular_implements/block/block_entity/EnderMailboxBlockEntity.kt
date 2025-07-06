@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -18,6 +19,11 @@ class EnderMailboxBlockEntity(
 ) : BlockEntity(ModBlockEntities.ENDER_MAILBOX.get(), pos, blockState) {
 
 	private var ownerUuid: UUID = UUID.randomUUID()
+
+	fun setOwner(owner: Entity) {
+		ownerUuid = owner.uuid
+		setChanged()
+	}
 
 	fun tick() {
 		val level = level as? ServerLevel ?: return

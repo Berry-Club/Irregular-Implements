@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -78,6 +79,17 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			Direction.NORTH, Direction.SOUTH -> SHAPE_NS
 			Direction.EAST, Direction.WEST -> SHAPE_EW
 			else -> SHAPE_NS
+		}
+	}
+
+	override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+		super.setPlacedBy(level, pos, state, placer, stack)
+
+		if (placer is Player) {
+			val blockEntity = level.getBlockEntity(pos)
+			if (blockEntity is EnderMailboxBlockEntity) {
+				blockEntity.setOwner(placer)
+			}
 		}
 	}
 
