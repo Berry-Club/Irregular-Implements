@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.language.*
-import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.ChatFormatting
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -25,15 +24,7 @@ class ModLanguageProvider(
 		ModMessageLang.add(this)
 		ModMiscLang.add(this)
 		ModConfigLang.add(this)
-		addEntityTypes()
-	}
-
-	private fun addEntityTypes() {
-		addEntityType(ModEntityTypes.SPECTRE_ILLUMINATOR, "Spectre Illuminator")
-		addEntityType(ModEntityTypes.INDICATOR_DISPLAY, "Indicator Display")
-		addEntityType(ModEntityTypes.ARTIFICIAL_END_PORTAL, "Artificial End Portal")
-		addEntityType(ModEntityTypes.GOLDEN_EGG, "Golden Egg")
-		addEntityType(ModEntityTypes.GOLDEN_CHICKEN, "Golden Chicken")
+		ModEntityTypeLang.add(this)
 	}
 
 	companion object {
