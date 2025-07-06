@@ -12,7 +12,9 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import kotlin.jvm.optionals.getOrNull
 
 class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
 
@@ -32,6 +34,29 @@ class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	override fun getDisplayName(): Component = this.defaultInstance.hoverName
+
+	override fun isFoil(stack: ItemStack): Boolean {
+		return super.isFoil(stack) || stack.get(ModDataComponents.ENDER_LETTER_CONTENTS)?.sender?.getOrNull() != null
+	}
+
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val contents = stack.get(ModDataComponents.ENDER_LETTER_CONTENTS)
+
+		val recipient = contents?.recipient?.getOrNull()
+		val sender = contents?.sender?.getOrNull()
+
+		if (recipient != null) {
+			tooltipComponents.add(
+				Component.literal("To: $recipient")
+			)
+		}
+
+		if (sender != null) {
+			tooltipComponents.add(
+				Component.literal("From: $sender")
+			)
+		}
+	}
 
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
