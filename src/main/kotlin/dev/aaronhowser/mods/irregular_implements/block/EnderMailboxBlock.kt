@@ -114,6 +114,8 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 	}
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		if (level.isClientSide) return InteractionResult.PASS
+
 		val blockEntity = level.getBlockEntity(pos) as? EnderMailboxBlockEntity ?: return InteractionResult.PASS
 
 		if (blockEntity.ownerUuid == player.uuid) {
