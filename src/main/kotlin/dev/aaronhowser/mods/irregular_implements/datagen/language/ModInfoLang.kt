@@ -160,7 +160,7 @@ object ModInfoLang {
 		addInfo(ModItems.VOID_STONE, "In its menu, has a slot that immediately deletes whatever is inserted.")
 		addInfo(ModItems.DROP_FILTER, "Filters out items that match the contained Item Filters from entering your inventory.")
 		addInfo(ModItems.VOIDING_DROP_FILTER, "Works like the Drop Filter, but deletes the items instead of preventing them from entering your inventory.")
-		addInfo(ModItems.WHITE_STONE, "Charges when held while under the fool moon. When fully charged, it will prevent your death once and discharges.\n\nCan be found in dungeon loot.")
+		addInfo(ModItems.WHITE_STONE, "Charges when held while under the full moon. When fully charged, it will prevent your death once and discharges.\n\nCan be found in dungeon loot.")
 		addInfo(ModItems.MAGNETIC_FORCE, "Single-use item that allows you to teleport to any player, if they accept, in a radius around you.\n\nThe radius is configurable.")
 		addInfo(ModItems.BLOCK_MOVER, "Use on a block to pick it up, and use it again to place it.\n\nCan be used on blocks with Block Entities, like Chests and machines.")
 		addInfo(ModItems.DIAMOND_BREAKER, "Apply to a Block Breaker to increase its mining level to equivalent to a Diamond Pickaxe.\n\nCan also be enchanted!")
