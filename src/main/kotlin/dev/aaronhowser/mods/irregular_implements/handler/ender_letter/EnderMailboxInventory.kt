@@ -14,6 +14,10 @@ class EnderMailboxInventory(
 
 	val enderLetters: NonNullList<ItemStack> = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY)
 
+	fun hasItems(): Boolean {
+		return enderLetters.any { !it.isEmpty }
+	}
+
 	override fun getStackInSlot(slot: Int): ItemStack {
 		return if (slot in 0 until INVENTORY_SIZE) {
 			enderLetters[slot]

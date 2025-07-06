@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.EnderMailboxBlock
+import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -21,8 +22,11 @@ class EnderMailboxBlockEntity(
 		val level = level as? ServerLevel ?: return
 		if (level.gameTime % 20 != 0L) return
 
+		val handler = EnderLetterHandler.get(level)
+		val inventory = handler.getInventory(owner)
+
 		val wasFlagUp = blockState.getValue(EnderMailboxBlock.IS_FLAG_RAISED)
-		val shouldFlagBeUp = true
+		val shouldFlagBeUp = inventory.hasItems()
 
 		if (wasFlagUp != shouldFlagBeUp) {
 			val newState = blockState.setValue(EnderMailboxBlock.IS_FLAG_RAISED, shouldFlagBeUp)
