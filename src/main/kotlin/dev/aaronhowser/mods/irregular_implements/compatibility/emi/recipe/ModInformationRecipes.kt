@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModInfoLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -82,7 +83,7 @@ object ModInformationRecipes {
 					ModBlocks.SUPER_LUBRICANT_PLATFORM,
 					ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM
 				),
-				listOf(ModLanguageProvider.Info.PLATFORM.toComponent()),
+				listOf(ModInfoLang.PLATFORM.toComponent()),
 				OtherUtil.modResource("/info/platform")
 			)
 		)
@@ -97,7 +98,7 @@ object ModInformationRecipes {
 					ModBlocks.BIOME_STONE,
 					ModBlocks.BIOME_COBBLESTONE
 				),
-				listOf(ModLanguageProvider.Info.BIOME_BLOCKS.toComponent()),
+				listOf(ModInfoLang.BIOME_BLOCKS.toComponent()),
 				OtherUtil.modResource("/info/biome_blocks")
 			)
 		)
@@ -105,7 +106,7 @@ object ModInformationRecipes {
 		recipes.add(
 			EmiInfoRecipe(
 				listOf(ModItemTagsProvider.SUPER_LUBRICATED_BLOCKS.emiIngredient),
-				listOf(ModLanguageProvider.Info.LUBRICANT.toComponent()),
+				listOf(ModInfoLang.LUBRICANT.toComponent()),
 				OtherUtil.modResource("/info/lubricated_blocks")
 			)
 		)
@@ -118,7 +119,7 @@ object ModInformationRecipes {
 					ModItems.SPECTRE_LEGGINGS,
 					ModItems.SPECTRE_BOOTS
 				),
-				listOf(ModLanguageProvider.Info.SPECTRE_ARMOR.toComponent()),
+				listOf(ModInfoLang.SPECTRE_ARMOR.toComponent()),
 				OtherUtil.modResource("/info/spectre_armor")
 			)
 		)
@@ -130,7 +131,7 @@ object ModInformationRecipes {
 					ModItems.SPECTRE_CHARGER_REDSTONE,
 					ModItems.SPECTRE_CHARGER_ENDER,
 				),
-				listOf(ModLanguageProvider.Info.SPECTRE_CHARGERS.toComponent()),
+				listOf(ModInfoLang.SPECTRE_CHARGERS.toComponent()),
 				OtherUtil.modResource("/info/spectre_chargers")
 			)
 		)
@@ -152,7 +153,7 @@ object ModInformationRecipes {
 							),
 						)
 					),
-					listOf(ModLanguageProvider.Info.MAGNETIC_ENCHANT.toComponent()),
+					listOf(ModInfoLang.MAGNETIC_ENCHANT.toComponent()),
 					OtherUtil.modResource("/info/magnetic")
 				)
 			)
