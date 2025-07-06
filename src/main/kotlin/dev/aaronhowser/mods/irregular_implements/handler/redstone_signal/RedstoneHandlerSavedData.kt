@@ -103,6 +103,7 @@ class RedstoneHandlerSavedData : SavedData() {
 			return redstoneHandlerSavedData
 		}
 
+		@JvmStatic
 		fun get(level: ServerLevel): RedstoneHandlerSavedData {
 			if (level != level.server.overworld()) {
 				return get(level.server.overworld())

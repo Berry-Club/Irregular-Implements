@@ -41,7 +41,7 @@ public interface SignalGetterMixin {
 		}
 
 		if (this instanceof ServerLevel sl) {
-			signal = Math.max(signal, RedstoneHandlerSavedData.getRedstoneHandlerSavedData(sl).getStrongPower(sl, pos, direction));
+			signal = Math.max(signal, RedstoneHandlerSavedData.get(sl).getStrongPower(sl, pos, direction));
 		}
 
 		return signal;
