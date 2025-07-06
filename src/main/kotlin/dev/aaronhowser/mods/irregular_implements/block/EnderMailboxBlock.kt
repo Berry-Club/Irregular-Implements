@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
@@ -17,10 +18,13 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -96,6 +100,14 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 		}
 	}
 
+	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
+		return BaseEntityBlock.createTickerHelper(
+			blockEntityType,
+			ModBlockEntities.ENDER_MAILBOX.get(),
+			EnderMailboxBlockEntity::tick
+		)
+	}
+
 	companion object {
 		val IS_FLAG_RAISED: BooleanProperty = BooleanProperty.create("is_flag_raised")
 		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
@@ -108,6 +120,15 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			stack: ItemStack
 		): Boolean {
 			val component = stack.get(ModDataComponents.ENDER_LETTER_CONTENTS) ?: return false
+
+			val items = component.stacks
+			for (i in items.indices) {
+				if (!items[i].isEmpty) break
+
+				player.displayClientMessage(Component.literal("Your letter is empty!"), true)
+				return false
+			}
+
 			val recipientName = component.recipient.getOrNull()
 			if (recipientName == null) {
 				player.displayClientMessage(Component.literal("This letter has no recipient!"), true)

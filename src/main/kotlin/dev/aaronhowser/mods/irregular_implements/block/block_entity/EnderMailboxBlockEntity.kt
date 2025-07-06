@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
@@ -32,7 +33,6 @@ class EnderMailboxBlockEntity(
 			val newState = blockState.setValue(EnderMailboxBlock.IS_FLAG_RAISED, shouldFlagBeUp)
 			level.setBlockAndUpdate(worldPosition, newState)
 		}
-
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -51,6 +51,15 @@ class EnderMailboxBlockEntity(
 
 	companion object {
 		const val OWNER_NBT = "Owner"
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: EnderMailboxBlockEntity
+		) {
+			blockEntity.tick()
+		}
 	}
 
 }

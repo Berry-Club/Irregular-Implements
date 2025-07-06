@@ -13,7 +13,7 @@ import net.neoforged.neoforge.items.ItemStackHandler
 import java.util.*
 
 data class EnderLetterContentsDataComponent(
-	private val stacks: NonNullList<ItemStack>,
+	val stacks: NonNullList<ItemStack>,
 	val sender: Optional<String>,
 	val recipient: Optional<String>
 ) : ItemInventoryItemHandler.InventoryDataComponent {
