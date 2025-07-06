@@ -59,14 +59,15 @@ class EnderLetterMenu(
 		}
 	}
 
-	fun setNewRecipient(recipient: String) {
-		if (recipient == recipientName) return
+	fun setNewRecipient(recipient: String): Boolean {
+		if (recipient == recipientName) return false
 		this.recipientName = recipient
 
-		val oldComponent = getHeldItemStack().get(ModDataComponents.ENDER_LETTER_CONTENTS) ?: return
+		val oldComponent = getHeldItemStack().get(ModDataComponents.ENDER_LETTER_CONTENTS) ?: return false
 		val newComponent = oldComponent.copy(recipient = Optional.of(recipient))
 
 		getHeldItemStack().set(ModDataComponents.ENDER_LETTER_CONTENTS, newComponent)
+		return true
 	}
 
 	companion object {

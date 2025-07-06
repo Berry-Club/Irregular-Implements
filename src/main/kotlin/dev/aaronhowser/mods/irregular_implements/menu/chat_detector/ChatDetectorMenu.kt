@@ -30,12 +30,6 @@ class ChatDetectorMenu(
 		this.addDataSlots(containerData)
 	}
 
-	companion object {
-		const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
-
-		const val REGEX_STRING_ID = 0
-	}
-
 	var shouldMessageStop: Boolean
 		get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
 		set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
@@ -69,6 +63,12 @@ class ChatDetectorMenu(
 
 	override fun stillValid(player: Player): Boolean {
 		return stillValid(this.containerLevelAccess, player, ModBlocks.CHAT_DETECTOR.get())
+	}
+
+	companion object {
+		const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
+
+		const val REGEX_STRING_ID = 0
 	}
 
 }

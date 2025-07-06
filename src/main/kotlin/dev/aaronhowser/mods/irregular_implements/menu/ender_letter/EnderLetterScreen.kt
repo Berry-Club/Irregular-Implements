@@ -5,6 +5,9 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.util.Mth
@@ -36,7 +39,38 @@ class EnderLetterScreen(
 			ModLanguageProvider.Tooltips.MESSAGE_REGEX.toComponent()
 		)
 
+		recipientEditBox.setResponder(::setRecipientString)
+
 		addRenderableWidget(recipientEditBox)
+	}
+
+	private fun setRecipientString(newString: String) {
+		if (this.menu.setNewRecipient(newString)) {
+			ModPacketHandler.messageServer(
+				ClientChangedMenuString(
+					EnderLetterMenu.RECIPIENT_STRING_ID,
+					newString
+				)
+			)
+		}
+	}
+
+	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+		if (keyCode == 256) {
+			this.minecraft?.player?.closeContainer()
+		}
+
+		return if (!recipientEditBox.keyPressed(keyCode, scanCode, modifiers) && !recipientEditBox.canConsumeInput()) {
+			super.keyPressed(keyCode, scanCode, modifiers)
+		} else {
+			true
+		}
+	}
+
+	override fun resize(minecraft: Minecraft, width: Int, height: Int) {
+		val currentRegexString = recipientEditBox.value
+		super.resize(minecraft, width, height)
+		recipientEditBox.value = currentRegexString
 	}
 
 	override fun receivedString(stringId: Int, string: String) {
