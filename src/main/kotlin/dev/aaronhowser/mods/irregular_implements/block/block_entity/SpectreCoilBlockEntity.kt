@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
-import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData.Companion.spectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -77,7 +77,7 @@ class SpectreCoilBlockEntity(
 		if (direction != blockState.getValue(SpectreCoilBlock.FACING)) return null
 
 		val level = this.level as? ServerLevel ?: return null
-		val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
+		val coil = SpectreCoilSavedData.get(level).getCoil(this.ownerUuid)
 
 		return object : IEnergyStorage {
 			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
@@ -123,7 +123,7 @@ class SpectreCoilBlockEntity(
 			return
 		}
 
-		val coil = level.spectreCoilSavedData.getCoil(this.ownerUuid)
+		val coil = SpectreCoilSavedData.get(level).getCoil(this.ownerUuid)
 
 		val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
 		if (available <= 0) return

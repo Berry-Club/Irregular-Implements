@@ -18,7 +18,7 @@ class RedstoneHandlerSavedData : SavedData() {
 
 	private val signals: MutableSet<SavedSignal> = mutableSetOf()
 
-	private fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
+	fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
 		signals.removeIf { it.blockPos == blockPos.asLong() && it.dimension == level.dimension() }
 
 		val signal = SavedSignal(blockPos.asLong(), level.dimension(), duration, strength, level.gameTime)
@@ -103,24 +103,24 @@ class RedstoneHandlerSavedData : SavedData() {
 			return redstoneHandlerSavedData
 		}
 
-		private fun get(level: ServerLevel): RedstoneHandlerSavedData {
+		fun get(level: ServerLevel): RedstoneHandlerSavedData {
+			if (level != level.server.overworld()) {
+				return get(level.server.overworld())
+			}
+
 			return level.dataStorage.computeIfAbsent(
 				Factory(::RedstoneHandlerSavedData, ::load),
 				"redstone_handler"
 			)
 		}
 
-		@JvmStatic
-		val ServerLevel.redstoneHandlerSavedData: RedstoneHandlerSavedData
-			get() = get(this)
-
 		fun tick(level: Level) {
 			if (level !is ServerLevel) return
-			level.redstoneHandlerSavedData.tick(level.server)
+			get(level).tick(level.server)
 		}
 
 		fun addSignal(level: ServerLevel, blockPos: BlockPos, duration: Int, strength: Int) {
-			level.redstoneHandlerSavedData.addSignal(level, blockPos, duration, strength)
+			get(level).addSignal(level, blockPos, duration, strength)
 		}
 	}
 

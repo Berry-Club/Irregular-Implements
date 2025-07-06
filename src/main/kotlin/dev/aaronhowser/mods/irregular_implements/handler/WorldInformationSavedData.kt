@@ -31,20 +31,16 @@ class WorldInformationSavedData : SavedData() {
 			return worldInformation
 		}
 
-		private fun get(level: ServerLevel): WorldInformationSavedData {
-			require(level == level.server.overworld()) { "RedstoneSignalSavedData can only be accessed on the overworld" }
+		fun get(level: ServerLevel): WorldInformationSavedData {
+			if (level != level.server.overworld()) {
+				return get(level.server.overworld())
+			}
 
 			return level.dataStorage.computeIfAbsent(
 				Factory(::WorldInformationSavedData, ::load),
 				"redstone_handler"
 			)
 		}
-
-		val ServerLevel.worldInformationSavedData: WorldInformationSavedData
-			inline get() = this.server.worldInformationSavedData
-
-		val MinecraftServer.worldInformationSavedData: WorldInformationSavedData
-			get() = get(this.overworld())
 
 	}
 }

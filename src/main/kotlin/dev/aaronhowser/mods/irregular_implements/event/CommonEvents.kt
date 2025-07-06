@@ -10,7 +10,7 @@ import dev.aaronhowser.mods.irregular_implements.command.ModCommands
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
-import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData.Companion.worldInformationSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
@@ -118,7 +118,7 @@ object CommonEvents {
 	fun onLivingDeathLowPriority(event: LivingDeathEvent) {
 		if (!event.isCanceled && event.entity.type == EntityType.ENDER_DRAGON) {
 			val level = event.entity.level() as? ServerLevel ?: return
-			level.worldInformationSavedData.enderDragonKilled = true
+			WorldInformationSavedData.get(level).enderDragonKilled = true
 		}
 	}
 

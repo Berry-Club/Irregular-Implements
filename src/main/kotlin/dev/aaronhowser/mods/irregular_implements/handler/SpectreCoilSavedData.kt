@@ -126,7 +126,7 @@ class SpectreCoilSavedData : SavedData() {
 			return spectreCoilSavedData
 		}
 
-		private fun get(level: ServerLevel): SpectreCoilSavedData {
+		fun get(level: ServerLevel): SpectreCoilSavedData {
 			if (level != level.server.overworld()) {
 				return get(level.server.overworld())
 			}
@@ -136,12 +136,6 @@ class SpectreCoilSavedData : SavedData() {
 				"spectre_coil"
 			)
 		}
-
-		val ServerLevel.spectreCoilSavedData: SpectreCoilSavedData
-			inline get() = this.server.spectreCoilSavedData
-
-		val MinecraftServer.spectreCoilSavedData: SpectreCoilSavedData
-			get() = get(this.overworld())
 
 		const val COIL_ENTRIES_NBT = "coil_entries"
 		const val UUID_NBT = "uuid"
