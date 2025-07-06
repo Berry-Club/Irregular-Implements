@@ -98,6 +98,8 @@ object ModBlockEntities {
 		register("ender_energy_distributor", ::EnderEnergyDistributorBlockEntity, ModBlocks.ENDER_ENERGY_DISTRIBUTOR)
 	val SLIME_CUBE: DeferredHolder<BlockEntityType<*>, BlockEntityType<SlimeCubeBlockEntity>> =
 		register("slime_cube", ::SlimeCubeBlockEntity, ModBlocks.SLIME_CUBE)
+	val ENDER_MAILBOX: DeferredHolder<BlockEntityType<*>, BlockEntityType<EnderMailboxBlockEntity>> =
+		register("ender_mailbox", ::EnderMailboxBlockEntity, ModBlocks.ENDER_MAILBOX)
 
 	private fun <T : BlockEntity> register(
 		name: String,

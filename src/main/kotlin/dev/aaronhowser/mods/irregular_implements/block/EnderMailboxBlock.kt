@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -8,6 +9,8 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -16,7 +19,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)) {
+class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
 
 	init {
 		registerDefaultState(
@@ -24,6 +27,10 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)) {
 				.setValue(IS_FLAG_RAISED, false)
 				.setValue(FACING, Direction.NORTH)
 		)
+	}
+
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return EnderMailboxBlockEntity(pos, state)
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
