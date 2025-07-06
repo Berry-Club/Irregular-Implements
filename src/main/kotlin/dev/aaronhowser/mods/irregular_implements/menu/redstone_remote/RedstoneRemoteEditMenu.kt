@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -21,13 +22,15 @@ class RedstoneRemoteEditMenu(
 
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
-	override val playerInventoryY: Int = 68
+	init {
+		addSlots()
+		addPlayerInventorySlots(68)
+	}
 
 	override fun addSlots() {
 		if (itemHandler == null) return
 
-
-		for (pairIndex in 0 until 9) {
+		for (pairIndex in 0 until RedstoneRemoteDataComponent.HORIZONTAL_SLOT_COUNT) {
 			val x = 8 + pairIndex * 18
 
 			val filterY = 18

@@ -27,7 +27,7 @@ data class RedstoneRemoteDataComponent(
 	fun getPair(index: Int): Pair<ItemStack, ItemStack> = getLocation(index) to getDisplay(index)
 
 	companion object {
-		const val HORIZONTAL_SLOT_COUNT: Int = 8
+		const val HORIZONTAL_SLOT_COUNT: Int = 9
 
 		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler {
 			return object : ItemInventoryItemHandler<RedstoneRemoteDataComponent>(stack, ModDataComponents.REDSTONE_REMOTE.get()) {

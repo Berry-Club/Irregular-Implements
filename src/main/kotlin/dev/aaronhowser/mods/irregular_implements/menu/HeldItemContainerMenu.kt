@@ -24,15 +24,7 @@ abstract class HeldItemContainerMenu(
 		playerInventory: Inventory
 	) : this(deferredItem.get(), menuType, containerId, playerInventory)
 
-	abstract val playerInventoryY: Int
-	open val playerHotbarY = playerInventoryY + 58
-
-	init {
-		addPlayerInventorySlots()
-		addSlots()
-	}
-
-	private fun addPlayerInventorySlots() {
+	protected open fun addPlayerInventorySlots(playerInventoryY: Int) {
 		// Add the 27 slots of the player inventory
 		for (row in 0..2) {
 			val y = playerInventoryY + row * 18
@@ -44,6 +36,8 @@ abstract class HeldItemContainerMenu(
 				this.addSlot(Slot(playerInventory, slotIndex, x, y))
 			}
 		}
+
+		val playerHotbarY = playerInventoryY + 58
 
 		// Add the 9 slots of the player hotbar
 		for (hotbarIndex in 0..8) {

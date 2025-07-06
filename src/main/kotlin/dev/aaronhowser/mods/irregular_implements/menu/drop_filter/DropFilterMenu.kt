@@ -16,7 +16,7 @@ class DropFilterMenu(
 	containerId: Int,
 	playerInventory: Inventory
 ) : HeldItemContainerMenu(
-	ModItems.ITEM_FILTER,
+	ModItems.DROP_FILTER,
 	ModMenuTypes.DROP_FILTER.get(),
 	containerId,
 	playerInventory
@@ -70,7 +70,10 @@ class DropFilterMenu(
 		}
 	}
 
-	override val playerInventoryY: Int = 51
+	init {
+		addSlots()
+		addPlayerInventorySlots(51)
+	}
 
 	override fun addSlots() {
 		val filterX = 80

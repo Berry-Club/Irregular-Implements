@@ -21,6 +21,11 @@ class ItemFilterMenu(
 	containerId, playerInventory
 ), MenuWithButtons {
 
+	init {
+		addSlots()
+		addPlayerInventorySlots(59)
+	}
+
 	private val holderLookup = this.playerInventory.player.level().registryAccess()
 
 	private fun getFilterComponent(): ItemFilterDataComponent? {
@@ -43,8 +48,6 @@ class ItemFilterMenu(
 			filterComponent.copy(isBlacklist = value)
 		)
 	}
-
-	override val playerInventoryY: Int = 59
 
 	override fun addSlots() {
 		for (index in 0 until 9) {
