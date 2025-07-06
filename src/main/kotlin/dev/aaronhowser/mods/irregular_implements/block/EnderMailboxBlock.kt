@@ -86,13 +86,13 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 		hand: InteractionHand,
 		hitResult: BlockHitResult
 	): ItemInteractionResult {
-		if (!stack.`is`(ModItems.ENDER_LETTER) || level.isClientSide) return super.useItemOn(stack, state, level, pos, player, hand, hitResult)
+		if (!stack.`is`(ModItems.ENDER_LETTER)) return super.useItemOn(stack, state, level, pos, player, hand, hitResult)
 
 		if (sendLetter(player, stack)) {
 			stack.shrink(1)
 			return ItemInteractionResult.SUCCESS
 		} else {
-			return ItemInteractionResult.FAIL
+			return ItemInteractionResult.CONSUME
 		}
 	}
 
