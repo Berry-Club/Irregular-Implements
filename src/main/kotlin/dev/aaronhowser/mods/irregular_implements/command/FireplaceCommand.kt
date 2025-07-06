@@ -5,6 +5,8 @@ import com.mojang.brigadier.builder.ArgumentBuilder
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.suggestion.SuggestionProvider
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
@@ -90,7 +92,7 @@ object FireplaceCommand {
 		}
 
 		if (level == null) {
-			source.sendFailure(Component.literal("Could not get level ${levelRk?.location()}"))
+			source.sendFailure(ModLanguageProvider.Messages.COMMAND_LEVEL_NOT_FOUND.toComponent(levelRk?.location() ?: "null"))
 			return 0
 		}
 
@@ -98,7 +100,7 @@ object FireplaceCommand {
 		val fireplace = network.findFireplace(target)
 
 		if (fireplace == null) {
-			source.sendFailure(Component.literal("Could not find fireplace named '$target'"))
+			source.sendFailure(ModLanguageProvider.Messages.FIREPLACE_NOT_FOUND.toComponent(target))
 			return 0
 		}
 
@@ -111,7 +113,7 @@ object FireplaceCommand {
 		val level = source.server.getLevel(levelRk)
 
 		if (level == null) {
-			source.sendFailure(Component.literal("Could not get level ${levelRk.location()}"))
+			source.sendFailure(ModLanguageProvider.Messages.COMMAND_LEVEL_NOT_FOUND.toComponent(levelRk.location()))
 			return 0
 		}
 
@@ -119,11 +121,17 @@ object FireplaceCommand {
 		val fireplaces = network.getFireplaces()
 
 		val message = {
-			val component = Component.literal("Fireplaces in ${levelRk.location()}: ${fireplaces.size}")
+			val component = ModLanguageProvider.Messages.FIREPLACES_IN_DIMENSION
+				.toComponent(levelRk.location().toString(), fireplaces.size)
 
 			for (fireplace in fireplaces) {
 				val name = fireplace.name ?: "<unnamed>"
-				component.append(Component.literal("\n- $name at ${fireplace.masterBlockPos}"))
+				val pos = fireplace.masterBlockPos
+
+				component.append(
+					ModLanguageProvider.Messages.FIREPLACE_LIST_ENTRY
+						.toComponent(name, pos.x, pos.y, pos.z)
+				)
 			}
 
 			component

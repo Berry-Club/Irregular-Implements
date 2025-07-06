@@ -1,10 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
@@ -41,7 +42,7 @@ class FlooBrickBlock : Block(
 		val uuid = blockEntity.uuid ?: blockEntity.masterUUID
 
 		if (uuid == null) {
-			player.status(Component.literal("Nameless fireplace"))
+			player.status(ModLanguageProvider.Messages.FIREPLACE_NO_NAME.toComponent())
 			return InteractionResult.SUCCESS_NO_ITEM_USED
 		}
 
@@ -49,11 +50,18 @@ class FlooBrickBlock : Block(
 		val fireplace = network.findFireplace(uuid)
 
 		if (fireplace == null) {
-			player.status(Component.literal("Orphaned fireplace"))
+			player.status(ModLanguageProvider.Messages.FIREPLACE_BROKEN.toComponent())
 			return InteractionResult.SUCCESS_NO_ITEM_USED
 		}
 
-		player.status(Component.literal("Fireplace: ${fireplace.name ?: "<unnamed>"}"))
+		val name = fireplace.name
+		val component = if (name == null) {
+			ModLanguageProvider.Messages.FIREPLACE_NO_NAME.toComponent()
+		} else {
+			ModLanguageProvider.Messages.FIREPLACE_NAME.toComponent(name)
+		}
+
+		player.status(component)
 
 		return InteractionResult.SUCCESS_NO_ITEM_USED
 	}

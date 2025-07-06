@@ -156,6 +156,13 @@ class ModLanguageProvider(
 		const val ENDER_LETTER_NO_RECIPIENT = "message.irregular_implements.ender_letter.no_recipient"
 		const val ENDER_LETTER_RECIPIENT_NOT_ONLINE = "message.irregular_implements.ender_letter.recipient_not_online"
 		const val ENDER_LETTER_RECIPIENT_NO_ROOM = "message.irregular_implements.ender_letter.recipient_no_room"
+		const val FIREPLACE_NO_NAME = "message.irregular_implements.floo_brick.no_name"
+		const val FIREPLACE_NAME = "message.irregular_implements.floo_brick.name"
+		const val FIREPLACE_BROKEN = "message.irregular_implements.floo_brick.broken"
+		const val COMMAND_LEVEL_NOT_FOUND = "message.irregular_implements.command.level_not_found"
+		const val FIREPLACE_NOT_FOUND = "message.irregular_implements.floo_brick.not_found"
+		const val FIREPLACES_IN_DIMENSION = "message.irregular_implements.floo_brick.fireplaces_in_dimension"
+		const val FIREPLACE_LIST_ENTRY = "message.irregular_implements.floo_brick.list_entry"
 	}
 
 	private fun addMessages() {
@@ -180,6 +187,13 @@ class ModLanguageProvider(
 		add(Messages.ENDER_LETTER_NO_RECIPIENT, "This letter has no recipient")
 		add(Messages.ENDER_LETTER_RECIPIENT_NOT_ONLINE, "%s of this letter is not online")
 		add(Messages.ENDER_LETTER_RECIPIENT_NO_ROOM, "%s has no room for your letter")
+		add(Messages.FIREPLACE_NO_NAME, "Nameless fireplace")
+		add(Messages.FIREPLACE_NAME, "Fireplace: %s")
+		add(Messages.FIREPLACE_BROKEN, "Bugged fireplace; please break and replace it.")
+		add(Messages.COMMAND_LEVEL_NOT_FOUND, "Could not find level \"%s\"")
+		add(Messages.FIREPLACE_NOT_FOUND, "Could not find fireplace named \"%s\"")
+		add(Messages.FIREPLACES_IN_DIMENSION, "Fireplaces in %s: %d")
+		add(Messages.FIREPLACE_LIST_ENTRY, "- %s at %d %d %d")
 	}
 
 	object Subtitles {
