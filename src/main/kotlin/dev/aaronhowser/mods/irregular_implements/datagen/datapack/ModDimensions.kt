@@ -8,26 +8,26 @@ import net.minecraft.tags.BlockTags
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biomes
-import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes
 import net.minecraft.world.level.dimension.DimensionType
 import net.minecraft.world.level.dimension.LevelStem
 import net.minecraft.world.level.levelgen.FlatLevelSource
-import net.minecraft.world.level.levelgen.flat.FlatLayerInfo
 import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorSettings
 import java.util.*
 
 
 object ModDimensions {
 
+	val SPECTRE_RL = OtherUtil.modResource("spectre")
+
 	val SPECTRE_STEM_KEY: ResourceKey<LevelStem> =
-		ResourceKey.create(Registries.LEVEL_STEM, OtherUtil.modResource("spectre"))
+		ResourceKey.create(Registries.LEVEL_STEM, SPECTRE_RL)
 
 	val SPECTRE_LEVEL_KEY: ResourceKey<Level> =
-		ResourceKey.create(Registries.DIMENSION, OtherUtil.modResource("spectre"))
+		ResourceKey.create(Registries.DIMENSION, SPECTRE_RL)
 
 	val SPECTRE_DIM_TYPE_KEY: ResourceKey<DimensionType> =
-		ResourceKey.create(Registries.DIMENSION_TYPE, OtherUtil.modResource("spectre"))
+		ResourceKey.create(Registries.DIMENSION_TYPE, SPECTRE_RL)
 
 	fun bootstrapType(context: BootstrapContext<DimensionType>) {
 		context.register(
