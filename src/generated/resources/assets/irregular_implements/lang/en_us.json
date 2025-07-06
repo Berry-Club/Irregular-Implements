@@ -575,7 +575,7 @@
   "info.irregular_implements.void_stone": "In its menu, has a slot that immediately deletes whatever is inserted.",
   "info.irregular_implements.voiding_drop_filter": "Works like the Drop Filter, but deletes the items instead of preventing them from entering your inventory.",
   "info.irregular_implements.water_walking_boots": "Allows you to walk on water when not sneaking.",
-  "info.irregular_implements.white_stone": "Charges when held while under the fool moon. When fully charged, it will prevent your death once and discharges.\n\nCan be found in dungeon loot.",
+  "info.irregular_implements.white_stone": "Charges when held while under the full moon. When fully charged, it will prevent your death once and discharges.\n\nCan be found in dungeon loot.",
   "irregular_implements.configuration.basicRate": "Basic Coil Rate",
   "irregular_implements.configuration.biomePainterBlocksAbove": "Biome Painter Blocks Above",
   "irregular_implements.configuration.biomePainterBlocksBelow": "Biome Painter Blocks Below",

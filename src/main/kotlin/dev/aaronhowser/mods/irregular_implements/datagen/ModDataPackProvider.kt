@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModBiomeModifiers
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModConfiguredFeatures
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
-import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModPlacedFeatures
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
@@ -24,6 +21,8 @@ class ModDataPackProvider(
 			.add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
 			.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
+			.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
+			.add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem)
 	}
 
 }
