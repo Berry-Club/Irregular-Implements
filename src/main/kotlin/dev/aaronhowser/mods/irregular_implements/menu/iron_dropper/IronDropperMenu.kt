@@ -2,12 +2,12 @@ package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.inventory.Slot
@@ -18,7 +18,7 @@ class IronDropperMenu(
 	playerInventory: Inventory,
 	private val dispenserContainer: Container,
 	private val containerData: ContainerData
-) : AbstractContainerMenu(ModMenuTypes.IRON_DROPPER.get(), containerId), MenuWithButtons {
+) : MenuWithInventory(ModMenuTypes.IRON_DROPPER.get(), containerId, playerInventory), MenuWithButtons {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
@@ -32,7 +32,13 @@ class IronDropperMenu(
 		checkContainerSize(dispenserContainer, 9)
 		dispenserContainer.startOpen(playerInventory.player)
 
-		// Add the 9 slots of the dispenser
+		addSlots()
+		addPlayerInventorySlots(84)
+
+		this.addDataSlots(containerData)
+	}
+
+	override fun addSlots() {
 		for (row in 0..2) {
 			for (column in 0..2) {
 				val slotIndex = column + row * 3
@@ -42,27 +48,6 @@ class IronDropperMenu(
 				this.addSlot(Slot(dispenserContainer, slotIndex, x, y))
 			}
 		}
-
-		// Add the 27 slots of the player inventory
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val slotIndex = column + row * 9 + 9
-				val x = 8 + column * 18
-				val y = 84 + row * 18
-
-				this.addSlot(Slot(playerInventory, slotIndex, x, y))
-			}
-		}
-
-		// Add the 9 slots of the player hotbar
-		for (hotbarIndex in 0..8) {
-			val x = 8 + hotbarIndex * 18
-			val y = 142
-
-			this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
-		}
-
-		this.addDataSlots(containerData)
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -21,7 +22,7 @@ class GlobalChatDetectorMenu(
 	private val globalChatDetectorContainer: Container,
 	private val containerData: ContainerData,
 	private val containerLevelAccess: ContainerLevelAccess
-) : AbstractContainerMenu(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), containerId), MenuWithButtons, MenuWithStrings {
+) : MenuWithInventory(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), containerId, playerInventory), MenuWithButtons, MenuWithStrings {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
@@ -36,6 +37,13 @@ class GlobalChatDetectorMenu(
 		checkContainerSize(globalChatDetectorContainer, 9)
 		globalChatDetectorContainer.startOpen(playerInventory.player)
 
+		addSlots()
+		addPlayerInventorySlots(75)
+
+		this.addDataSlots(containerData)
+	}
+
+	override fun addSlots() {
 		for (containerSlotIndex in 0..8) {
 			val x = 8 + containerSlotIndex * 18
 			val y = 40
@@ -44,37 +52,10 @@ class GlobalChatDetectorMenu(
 				override fun mayPlace(stack: ItemStack): Boolean {
 					return stack.`is`(ModItems.ID_CARD) && stack.has(ModDataComponents.PLAYER)
 				}
-
 			}
 
 			this.addSlot(slot)
 		}
-
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val inventorySlotIndex = column + row * 9 + 9
-
-				val x = 8 + column * 18
-				val y = 75 + row * 18
-
-				this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
-			}
-		}
-
-		for (hotbarSlotIndex in 0..8) {
-			val x = 8 + hotbarSlotIndex * 18
-			val y = 133
-
-			this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
-		}
-
-		this.addDataSlots(containerData)
-	}
-
-	companion object {
-		const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
-
-		const val REGEX_STRING_ID = 0
 	}
 
 	var shouldMessageStop: Boolean
@@ -135,5 +116,11 @@ class GlobalChatDetectorMenu(
 
 	override fun stillValid(player: Player): Boolean {
 		return stillValid(this.containerLevelAccess, player, ModBlocks.GLOBAL_CHAT_DETECTOR.get())
+	}
+
+	companion object {
+		const val TOGGLE_MESSAGE_PASS_BUTTON_ID = 0
+
+		const val REGEX_STRING_ID = 0
 	}
 }

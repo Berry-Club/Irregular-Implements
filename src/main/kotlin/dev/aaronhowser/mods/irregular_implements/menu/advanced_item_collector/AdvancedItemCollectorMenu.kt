@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -8,7 +9,6 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.inventory.Slot
@@ -19,7 +19,7 @@ class AdvancedItemCollectorMenu(
 	playerInventory: Inventory,
 	private val container: Container,
 	private val containerData: ContainerData
-) : AbstractContainerMenu(ModMenuTypes.ADVANCED_ITEM_COLLECTOR.get(), containerId), MenuWithButtons {
+) : MenuWithInventory(ModMenuTypes.ADVANCED_ITEM_COLLECTOR.get(), containerId, playerInventory), MenuWithButtons {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
@@ -33,6 +33,13 @@ class AdvancedItemCollectorMenu(
 		checkContainerSize(container, 1)
 		container.startOpen(playerInventory.player)
 
+		addPlayerInventorySlots(153)
+		addSlots()
+
+		this.addDataSlots(this.containerData)
+	}
+
+	override fun addSlots() {
 		val filterSlot = object : Slot(container, 0, 80, 122) {
 			override fun mayPlace(stack: ItemStack): Boolean {
 				return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
@@ -40,26 +47,6 @@ class AdvancedItemCollectorMenu(
 		}
 
 		this.addSlot(filterSlot)
-
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val inventorySlotIndex = column + row * 9 + 9
-
-				val x = 8 + column * 18
-				val y = 153 + row * 18
-
-				this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
-			}
-		}
-
-		for (hotbarSlotIndex in 0..8) {
-			val x = 8 + hotbarSlotIndex * 18
-			val y = 211
-
-			this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
-		}
-
-		this.addDataSlots(this.containerData)
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

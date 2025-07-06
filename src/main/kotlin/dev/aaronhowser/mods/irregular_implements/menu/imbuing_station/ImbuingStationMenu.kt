@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu.imbuing_station
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ImbuingStationBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
@@ -14,7 +14,7 @@ class ImbuingStationMenu(
 	containerId: Int,
 	playerInventory: Inventory,
 	private val imbuingStationContainer: Container
-) : AbstractContainerMenu(ModMenuTypes.IMBUING_STATION.get(), containerId) {
+) : MenuWithInventory(ModMenuTypes.IMBUING_STATION.get(), containerId, playerInventory) {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
@@ -26,6 +26,11 @@ class ImbuingStationMenu(
 	init {
 		checkContainerSize(imbuingStationContainer, 4)
 
+		addSlots()
+		addPlayerInventorySlots(126)
+	}
+
+	override fun addSlots() {
 		val topSlot = Slot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.TOP_SLOT_INDEX,
@@ -65,26 +70,6 @@ class ImbuingStationMenu(
 			54
 		)
 		this.addSlot(outputSlot)
-
-		// Add the 27 slots of the player inventory
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val slotIndex = column + row * 9 + 9
-				val x = 8 + column * 18
-				val y = 126 + row * 18
-
-				this.addSlot(Slot(playerInventory, slotIndex, x, y))
-			}
-		}
-
-		// Add the 9 slots of the player hotbar
-		for (hotbarIndex in 0..8) {
-			val x = 8 + hotbarIndex * 18
-			val y = 184
-
-			this.addSlot(Slot(playerInventory, hotbarIndex, x, y))
-		}
-
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

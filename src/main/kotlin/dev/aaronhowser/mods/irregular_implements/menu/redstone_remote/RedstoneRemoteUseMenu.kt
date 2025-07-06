@@ -23,9 +23,6 @@ class RedstoneRemoteUseMenu(
 	playerInventory
 ), MenuWithButtons {
 
-	// No slots in this menu, just buttons
-	override fun addSlots() {}
-
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY
 	}

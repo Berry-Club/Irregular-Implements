@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu.filtered_platform
 
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
@@ -14,7 +14,7 @@ class FilteredPlatformMenu(
 	containerId: Int,
 	playerInventory: Inventory,
 	private val platformContainer: Container
-) : AbstractContainerMenu(ModMenuTypes.FILTERED_PLATFORM.get(), containerId) {
+) : MenuWithInventory(ModMenuTypes.FILTERED_PLATFORM.get(), containerId, playerInventory) {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
@@ -28,6 +28,11 @@ class FilteredPlatformMenu(
 
 		platformContainer.startOpen(playerInventory.player)
 
+		addSlots()
+		addPlayerInventorySlots(47)
+	}
+
+	override fun addSlots() {
 		val platformSlot = object : Slot(platformContainer, 0, 80, 10) {
 			override fun mayPlace(stack: ItemStack): Boolean {
 				return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
@@ -35,25 +40,6 @@ class FilteredPlatformMenu(
 		}
 
 		this.addSlot(platformSlot)
-
-		for (row in 0..2) {
-			for (column in 0..8) {
-				val inventorySlotIndex = column + row * 9 + 9
-
-				val x = 8 + column * 18
-				val y = 47 + row * 18
-
-				this.addSlot(Slot(playerInventory, inventorySlotIndex, x, y))
-			}
-		}
-
-		for (hotbarSlotIndex in 0..8) {
-			val x = 8 + hotbarSlotIndex * 18
-			val y = 105
-
-			this.addSlot(Slot(playerInventory, hotbarSlotIndex, x, y))
-		}
-
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
