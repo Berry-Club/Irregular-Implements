@@ -1,12 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
@@ -80,7 +81,9 @@ class TemporaryFlooFireplaceEntity(
 			val destination = network.findFireplace(message)
 
 			if (destination == null) {
-				player.status(Component.literal("Fireplace not found"),)
+				player.status(
+					ModLanguageProvider.Messages.FIREPLACE_NOT_FOUND.toComponent(message)
+				)
 
 				return
 			}

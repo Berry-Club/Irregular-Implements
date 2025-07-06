@@ -1,12 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.BurningFlooFireplacePacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.level.Level
 import java.util.*
@@ -37,11 +38,11 @@ class FlooFireplace(
 		val fireplace = data.findFireplace(target)
 
 		if (fireplace == null) {
-			player.status(Component.literal("Could not find fireplace named '$target'"))
+			player.status(ModLanguageProvider.Messages.FIREPLACE_NOT_FOUND.toComponent(target))
 			return false
 		} else if (fireplace == this) {
 			val name = name ?: target
-			player.status(Component.literal("You are already at '$name'"))
+			player.status(ModLanguageProvider.Messages.FIREPLACE_ALREADY_AT.toComponent(name))
 			return false
 		}
 
@@ -65,7 +66,11 @@ class FlooFireplace(
 		val be = level.getBlockEntity(this.masterBlockPos) as? FlooBrickBlockEntity
 
 		if (be == null) {
-			player.status(Component.literal("The fireplace at ${this.masterBlockPos} is no longer valid"))
+			player.status(
+				ModLanguageProvider.Messages.FIREPLACE_NO_LONGER_VALID.toComponent(
+					masterBlockPos.x, masterBlockPos.y, masterBlockPos.z
+				)
+			)
 
 			val network = FlooNetworkSavedData.get(level)
 			network.removeFireplace(this.masterUuid)
@@ -82,7 +87,7 @@ class FlooFireplace(
 		)
 
 		if (name != null) {
-			player.status(Component.literal("Teleported to '$name'"))
+			player.status(ModLanguageProvider.Messages.FIREPLACE_TELEPORTED.toComponent(name))
 		}
 
 		val bricks = be.children + be.blockPos

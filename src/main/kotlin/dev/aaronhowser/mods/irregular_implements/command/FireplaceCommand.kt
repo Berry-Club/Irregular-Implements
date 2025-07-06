@@ -13,7 +13,6 @@ import net.minecraft.commands.Commands
 import net.minecraft.commands.SharedSuggestionProvider
 import net.minecraft.commands.arguments.ResourceLocationArgument
 import net.minecraft.core.registries.Registries
-import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.Level
 
@@ -128,6 +127,7 @@ object FireplaceCommand {
 				val name = fireplace.name ?: "<unnamed>"
 				val pos = fireplace.masterBlockPos
 
+				component.append("\n")
 				component.append(
 					ModLanguageProvider.Messages.FIREPLACE_LIST_ENTRY
 						.toComponent(name, pos.x, pos.y, pos.z)

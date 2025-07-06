@@ -163,6 +163,9 @@ class ModLanguageProvider(
 		const val FIREPLACE_NOT_FOUND = "message.irregular_implements.floo_brick.not_found"
 		const val FIREPLACES_IN_DIMENSION = "message.irregular_implements.floo_brick.fireplaces_in_dimension"
 		const val FIREPLACE_LIST_ENTRY = "message.irregular_implements.floo_brick.list_entry"
+		const val FIREPLACE_ALREADY_AT = "message.irregular_implements.floo_brick.already_at"
+		const val FIREPLACE_NO_LONGER_VALID = "message.irregular_implements.floo_brick.no_longer_valid"
+		const val FIREPLACE_TELEPORTED = "message.irregular_implements.floo_brick.teleported"
 	}
 
 	private fun addMessages() {
@@ -193,7 +196,10 @@ class ModLanguageProvider(
 		add(Messages.COMMAND_LEVEL_NOT_FOUND, "Could not find level \"%s\"")
 		add(Messages.FIREPLACE_NOT_FOUND, "Could not find fireplace named \"%s\"")
 		add(Messages.FIREPLACES_IN_DIMENSION, "Fireplaces in %s: %d")
-		add(Messages.FIREPLACE_LIST_ENTRY, "- %s at %d %d %d")
+		add(Messages.FIREPLACE_LIST_ENTRY, "- \"%s\" at %d %d %d")
+		add(Messages.FIREPLACE_ALREADY_AT, "You are already at %s.")
+		add(Messages.FIREPLACE_NO_LONGER_VALID, "The fireplace at %d %d %d is no longer valid.")
+		add(Messages.FIREPLACE_TELEPORTED, "Teleported to %s.")
 	}
 
 	object Subtitles {
@@ -594,6 +600,8 @@ class ModLanguageProvider(
 		const val ITEM_FILTER_REQUIRE_COMPONENTS = "tooltip.irregular_implements.item_filter_require_components"
 		const val ITEM_FILTER_IGNORE_COMPONENTS = "tooltip.irregular_implements.item_filter_ignore_components"
 		const val ITEM_FILTER_REQUIRES_SAME_COMPONENTS = "tooltip.irregular_implements.item_filter_requires_same_components"
+		const val FLOO_POUCH_AMOUNT = "tooltip.irregular_implements.floo_pouch.amount"
+		const val TRANS_RIGHTS = "tooltip.irregular_implements.trans_rights"
 	}
 
 	private fun addTooltips() {
@@ -602,7 +610,6 @@ class ModLanguageProvider(
 		add(Tooltips.ITEM_FILTER_REQUIRE_COMPONENTS, "Require Components")
 		add(Tooltips.ITEM_FILTER_IGNORE_COMPONENTS, "Ignore Components")
 		add(Tooltips.ITEM_FILTER_REQUIRES_SAME_COMPONENTS, "Requires same components")
-
 		add(Tooltips.SHIFT_FOR_MORE, "Hold SHIFT for more information")
 		add(Tooltips.ENTITY_FILTER_ENTITY, "Entity Type: %s")
 		add(Tooltips.PLAYER_FILTER_PLAYER, "Player: %s")
@@ -654,6 +661,8 @@ class ModLanguageProvider(
 		add(Tooltips.IGNITER_TOGGLE, "Toggle")
 		add(Tooltips.IGNITER_IGNITE, "Ignite")
 		add(Tooltips.IGNITER_KEEP_IGNITED, "Keep ignited")
+		add(Tooltips.FLOO_POUCH_AMOUNT, "%d / %d Floo Powder")
+		add(Tooltips.TRANS_RIGHTS, "Trans rights are human rights!")
 	}
 
 	object Info {
