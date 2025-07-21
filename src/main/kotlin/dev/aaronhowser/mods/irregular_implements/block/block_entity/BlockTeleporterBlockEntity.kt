@@ -48,9 +48,7 @@ class BlockTeleporterBlockEntity(
 		val direction = blockState.getValue(BlockTeleporterBlock.FACING)
 		val pos = worldPosition.relative(direction)
 
-		if (!level.getBlockState(pos).canBeReplaced()
-			|| !stateToPlace.canSurvive(level, pos)
-		) return false
+		if (!stateToPlace.canSurvive(level, pos)) return false
 
 		return level.setBlockAndUpdate(pos, stateToPlace)
 	}
