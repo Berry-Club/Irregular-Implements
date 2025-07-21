@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
@@ -23,6 +24,28 @@ class BlockTeleporterBlockEntity(
 ) : BlockEntity(ModBlockEntities.BLOCK_TELEPORTER.get(), pos, blockState), MenuProvider {
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+
+	fun swapBlocks(): Boolean {
+		val stateToSend = getMyTargetBlockState() ?: return false
+		val stateToReceive = getLinkedBlockTeleporter()?.getMyTargetBlockState() ?: return false
+
+		if (!placeBlockState(stateToSend)) return false
+		if (!getLinkedBlockTeleporter()?.placeBlockState(stateToReceive).isTrue) {
+			// If we can't place the target block state, revert our own placement
+			placeBlockState(stateToSend)
+			return false
+		}
+
+		return true
+	}
+
+	private fun placeBlockState(stateToPlace: BlockState): Boolean {
+		val level = level ?: return false
+		val direction = blockState.getValue(BlockTeleporterBlock.FACING)
+		val pos = worldPosition.relative(direction)
+
+		return level.setBlockAndUpdate(pos, stateToPlace)
+	}
 
 	fun getMyTargetBlockState(): BlockState? {
 		val level = level ?: return null
