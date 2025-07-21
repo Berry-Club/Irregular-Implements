@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.Ad
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerScreen
 import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
+import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterScreen
 import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterMenu
@@ -119,6 +120,7 @@ object ModMenuTypes {
 		event.register(ENDER_ENERGY_DISTRIBUTOR.get(), ::EnderEnergyDistributorScreen)
 		event.register(ENDER_LETTER.get(), ::EnderLetterScreen)
 		event.register(ENDER_MAILBOX.get(), ::EnderMailboxScreen)
+		event.register(BLOCK_TELEPORTER.get(), ::BlockTeleporterScreen)
 	}
 
 }
