@@ -206,8 +206,8 @@ class ModItemModelProvider(
 			ModItems.ENDER_BUCKET,
 			ModItems.REINFORCED_ENDER_BUCKET,
 			ModItems.REDSTONE_ACTIVATOR,
-			ModItems.SOUND_PATTERN,
-			ModItems.SOUND_RECORDER,
+//			ModItems.SOUND_PATTERN,
+//			ModItems.SOUND_RECORDER,
 			ModItems.SPECTRE_CHARGER_BASIC,
 			ModItems.DIVINING_ROD
 		)

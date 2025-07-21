@@ -31,8 +31,6 @@ object ModBlocks {
 		registerBlock("slime_cube", ::SlimeCubeBlock)
 	val PEACE_CANDLE: DeferredBlock<PeaceCandleBlock> =
 		registerBlock("peace_candle", ::PeaceCandleBlock)
-	val SOUND_BOX = basicBlock("sound_box")
-	val SOUND_DAMPENER = basicBlock("sound_dampener")
 
 	// Plants
 	val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
@@ -351,6 +349,8 @@ object ModBlocks {
 	// - Custom Crafting Table: Too hard and nobody would use
 	// - Dyeing Machine: Too hard and nobody would use
 	// - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
+	// - Sound Dampener: Just use Super Sound Muffler instead
+	// - Sound Box: I just don't wanna
 
 	private fun blockWithProperties(name: String, properties: Properties) =
 		registerBlock(name) { Block(properties) }

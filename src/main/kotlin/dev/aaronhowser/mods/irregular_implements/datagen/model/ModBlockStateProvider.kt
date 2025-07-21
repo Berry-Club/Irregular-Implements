@@ -2069,7 +2069,7 @@ class ModBlockStateProvider(
 		val singleTextureBlocks = listOf(
 			ModBlocks.SUPER_LUBRICANT_STONE,
 			ModBlocks.SPECTRE_PLANKS,
-			ModBlocks.SOUND_DAMPENER,
+//			ModBlocks.SOUND_DAMPENER,
 			ModBlocks.REDSTONE_OBSERVER,
 			ModBlocks.ENTITY_DETECTOR,
 			ModBlocks.BEAN_POD,

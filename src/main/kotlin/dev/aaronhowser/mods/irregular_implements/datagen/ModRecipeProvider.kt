@@ -471,23 +471,23 @@ class ModRecipeProvider(
 				'D' to ing(Tags.Items.GEMS_DIAMOND)
 			)
 		),
-		shapedRecipe(
-			ModBlocks.SOUND_BOX,
-			"PPP,PLP,PPP",
-			mapOf(
-				'P' to ing(ItemTags.PLANKS),
-				'L' to ing(Tags.Items.GEMS_LAPIS)
-			)
-		),
-		shapedRecipe(
-			ModBlocks.SOUND_DAMPENER,
-			"PWP,WSW,PWP",
-			mapOf(
-				'P' to ing(ItemTags.PLANKS),
-				'W' to ing(ItemTags.WOOL),
-				'S' to ing(ModItems.PORTABLE_SOUND_DAMPENER)
-			)
-		),
+//		shapedRecipe(
+//			ModBlocks.SOUND_BOX,
+//			"PPP,PLP,PPP",
+//			mapOf(
+//				'P' to ing(ItemTags.PLANKS),
+//				'L' to ing(Tags.Items.GEMS_LAPIS)
+//			)
+//		),
+//		shapedRecipe(
+//			ModBlocks.SOUND_DAMPENER,
+//			"PWP,WSW,PWP",
+//			mapOf(
+//				'P' to ing(ItemTags.PLANKS),
+//				'W' to ing(ItemTags.WOOL),
+//				'S' to ing(ModItems.PORTABLE_SOUND_DAMPENER)
+//			)
+//		),
 		shapedRecipe(
 			ModBlocks.SIDED_BLOCK_OF_REDSTONE,
 			"GGR,GGR,GGR",
@@ -933,34 +933,34 @@ class ModRecipeProvider(
 				'D' to ing(Tags.Items.GEMS_DIAMOND)
 			)
 		),
-		shapedRecipe(
-			ModItems.SOUND_PATTERN,
-			"S,P,L",
-			mapOf(
-				'S' to ing(Tags.Items.STRINGS),
-				'P' to ing(Items.PAPER),
-				'L' to ing(Tags.Items.GEMS_LAPIS)
-			)
-		),
-		shapedRecipe(
-			ModItems.SOUND_RECORDER,
-			"BGG,ILI,III",
-			mapOf(
-				'B' to ing(Items.IRON_BARS),
-				'G' to ing(Tags.Items.GLASS_BLOCKS),
-				'I' to ing(Tags.Items.INGOTS_IRON),
-				'L' to ing(Tags.Items.GEMS_LAPIS)
-			)
-		),
-		shapedRecipe(
-			ModItems.PORTABLE_SOUND_DAMPENER,
-			"ISI,SLS,ISI",
-			mapOf(
-				'I' to ing(Tags.Items.INGOTS_IRON),
-				'S' to ing(Tags.Items.STRINGS),
-				'L' to ing(Tags.Items.GEMS_LAPIS)
-			)
-		),
+//		shapedRecipe(
+//			ModItems.SOUND_PATTERN,
+//			"S,P,L",
+//			mapOf(
+//				'S' to ing(Tags.Items.STRINGS),
+//				'P' to ing(Items.PAPER),
+//				'L' to ing(Tags.Items.GEMS_LAPIS)
+//			)
+//		),
+//		shapedRecipe(
+//			ModItems.SOUND_RECORDER,
+//			"BGG,ILI,III",
+//			mapOf(
+//				'B' to ing(Items.IRON_BARS),
+//				'G' to ing(Tags.Items.GLASS_BLOCKS),
+//				'I' to ing(Tags.Items.INGOTS_IRON),
+//				'L' to ing(Tags.Items.GEMS_LAPIS)
+//			)
+//		),
+//		shapedRecipe(
+//			ModItems.PORTABLE_SOUND_DAMPENER,
+//			"ISI,SLS,ISI",
+//			mapOf(
+//				'I' to ing(Tags.Items.INGOTS_IRON),
+//				'S' to ing(Tags.Items.STRINGS),
+//				'L' to ing(Tags.Items.GEMS_LAPIS)
+//			)
+//		),
 		shapedRecipe(
 			ModItems.ESCAPE_ROPE,
 			"SGP,GSG,PGS",
