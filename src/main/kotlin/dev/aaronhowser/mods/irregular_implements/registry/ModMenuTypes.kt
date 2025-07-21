@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.Ad
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerScreen
+import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
 import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterMenu
@@ -91,6 +92,8 @@ object ModMenuTypes {
 		register("ender_letter", ::EnderLetterMenu)
 	val ENDER_MAILBOX: DeferredHolder<MenuType<*>, MenuType<EnderMailboxMenu>> =
 		register("ender_mailbox", ::EnderMailboxMenu)
+	val BLOCK_TELEPORTER: DeferredHolder<MenuType<*>, MenuType<BlockTeleporterMenu>> =
+		register("block_teleporter", ::BlockTeleporterMenu)
 
 	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
 		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
