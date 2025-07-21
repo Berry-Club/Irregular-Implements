@@ -66,6 +66,10 @@ class ServerConfig(
 		ESCAPE_ROPE_BLOCKS_PER_TICK = builder
 			.comment("How many blocks should the Escape Rope check each tick?")
 			.defineInRange("escapeRopeBlocksPerTick", 250, 1, Int.MAX_VALUE)
+
+		BLOCK_TELEPORTER_CROSS_DIMENSION = builder
+			.comment("Should the Block Teleporter be able to teleport blocks across dimensions?")
+			.define("blockTeleporterCrossDimension", false)
 	}
 
 	private fun spectreConfigs() {
@@ -156,6 +160,8 @@ class ServerConfig(
 
 		lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
 		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
+
+		lateinit var BLOCK_TELEPORTER_CROSS_DIMENSION: ModConfigSpec.BooleanValue
 	}
 
 }
