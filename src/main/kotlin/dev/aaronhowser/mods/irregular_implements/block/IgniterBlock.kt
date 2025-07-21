@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IgniterBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -19,11 +18,10 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class IgniterBlock(
-	properties: Properties = Properties.ofFullCopy(Blocks.DISPENSER)
-) : DirectionalBlock(properties), EntityBlock {
+class IgniterBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
 
 	init {
 		registerDefaultState(
@@ -31,10 +29,6 @@ class IgniterBlock(
 				.setValue(FACING, Direction.NORTH)
 				.setValue(ENABLED, false)
 		)
-	}
-
-	override fun codec(): MapCodec<IgniterBlock> {
-		return CODEC
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
@@ -93,8 +87,8 @@ class IgniterBlock(
 	}
 
 	companion object {
-		val CODEC: MapCodec<IgniterBlock> = simpleCodec(::IgniterBlock)
 		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val FACING: DirectionProperty = DirectionalBlock.FACING
 	}
 
 }

@@ -138,7 +138,9 @@ object ModBlocks {
 	val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
 		registerBlock("shock_absorber", ::ShockAbsorberBlock)
 	val AUTO_PLACER = basicBlock("auto_placer")
-	val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Stores a Location Filter that's pointing at another Block Teleporter, then teleports the block there. Should make it require a redstone pulse.
+	// Stores a Location Filter that's pointing at another Block Teleporter, then teleports the block there. Should make it require a redstone pulse.
+	val BLOCK_TELEPORTER: DeferredBlock<BlockTeleporterBlock> =
+		registerBlock("block_teleporter", ::BlockTeleporterBlock)
 	val BLOCK_DETECTOR = basicBlock("block_detector")   // Stores a Block Filter (which doesn't exist now) and emits a redstone signal if the block STATE is in front of it
 	val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
 		registerBlock("moon_phase_detector", ::MoonPhaseDetectorBlock)
