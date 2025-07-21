@@ -43,6 +43,7 @@ class BlockTeleporterBlockEntity(
 		return true
 	}
 
+	//TODO Figure out why this returns false
 	private fun placeBlockState(stateToPlace: BlockState): Boolean {
 		val level = level ?: return false
 		val direction = blockState.getValue(BlockTeleporterBlock.FACING)
