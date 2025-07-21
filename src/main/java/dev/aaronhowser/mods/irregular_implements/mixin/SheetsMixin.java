@@ -23,10 +23,10 @@ abstract class SheetsMixin {
 	public static ResourceLocation CHEST_SHEET;
 
 	@Unique
-	private static Material WATER_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/water_chest"));
+	private static final Material WATER_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/water_chest"));
 
 	@Unique
-	private static Material NATURE_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/nature_chest"));
+	private static final Material NATURE_CHEST = new Material(CHEST_SHEET, OtherUtil.modResource("entity/chest/nature_chest"));
 
 	@Inject(
 			method = "chooseMaterial(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/level/block/state/properties/ChestType;Z)Lnet/minecraft/client/resources/model/Material;",

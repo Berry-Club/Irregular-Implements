@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "irregular_implements:block/ender_energy_distributor"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "irregular_implements:block/ender_energy_distributor"
+		}
+	}
 }

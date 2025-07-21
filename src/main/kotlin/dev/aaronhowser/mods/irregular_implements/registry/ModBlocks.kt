@@ -138,6 +138,7 @@ object ModBlocks {
 	val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
 		registerBlock("shock_absorber", ::ShockAbsorberBlock)
 	val AUTO_PLACER = basicBlock("auto_placer")
+
 	// Stores a Location Filter that's pointing at another Block Teleporter, then teleports the block there. Should make it require a redstone pulse.
 	val BLOCK_TELEPORTER: DeferredBlock<BlockTeleporterBlock> =
 		registerBlock("block_teleporter", ::BlockTeleporterBlock)

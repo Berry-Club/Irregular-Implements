@@ -1,11 +1,11 @@
 {
-  "parent": "minecraft:block/cube",
-  "textures": {
-    "down": "irregular_implements:block/ender_energy_distributor/sides",
-    "east": "irregular_implements:block/ender_energy_distributor/sides",
-    "north": "irregular_implements:block/ender_energy_distributor/sides",
-    "south": "irregular_implements:block/ender_energy_distributor/sides",
-    "up": "irregular_implements:block/ender_energy_distributor/top",
-    "west": "irregular_implements:block/ender_energy_distributor/sides"
-  }
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"down": "irregular_implements:block/ender_energy_distributor/sides",
+		"east": "irregular_implements:block/ender_energy_distributor/sides",
+		"north": "irregular_implements:block/ender_energy_distributor/sides",
+		"south": "irregular_implements:block/ender_energy_distributor/sides",
+		"up": "irregular_implements:block/ender_energy_distributor/top",
+		"west": "irregular_implements:block/ender_energy_distributor/sides"
+	}
 }
