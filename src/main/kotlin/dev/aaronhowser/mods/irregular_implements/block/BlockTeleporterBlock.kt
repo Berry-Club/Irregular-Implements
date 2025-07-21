@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
 
@@ -23,6 +24,7 @@ class BlockTeleporterBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Ent
 		registerDefaultState(
 			stateDefinition.any()
 				.setValue(FACING, Direction.NORTH)
+				.setValue(TRIGGERED, false)
 		)
 	}
 
@@ -32,7 +34,7 @@ class BlockTeleporterBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Ent
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(FACING)
+		builder.add(FACING, TRIGGERED)
 	}
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
@@ -52,8 +54,25 @@ class BlockTeleporterBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Ent
 		return InteractionResult.SUCCESS
 	}
 
+	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+		val isPowered = level.hasNeighborSignal(pos)
+		val wasPowered = state.getValue(TRIGGERED)
+
+		if (isPowered && !wasPowered) {
+			val be = level.getBlockEntity(pos) as? BlockTeleporterBlockEntity
+			be?.swapBlocks()
+
+			val newState = state.setValue(TRIGGERED, true)
+			level.setBlockAndUpdate(pos, newState)
+		} else if (!isPowered && wasPowered) {
+			val newState = state.setValue(TRIGGERED, false)
+			level.setBlockAndUpdate(pos, newState)
+		}
+	}
+
 	companion object {
 		val FACING: DirectionProperty = BlockStateProperties.FACING
+		val TRIGGERED: BooleanProperty = BlockStateProperties.TRIGGERED
 	}
 
 }

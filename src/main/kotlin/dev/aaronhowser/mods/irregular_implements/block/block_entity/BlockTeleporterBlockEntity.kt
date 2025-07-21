@@ -25,6 +25,8 @@ class BlockTeleporterBlockEntity(
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
 	fun swapBlocks(): Boolean {
+		if (level?.isClientSide.isTrue) return false
+
 		val stateToSend = getMyTargetBlockState() ?: return false
 		val stateToReceive = getLinkedBlockTeleporter()?.getMyTargetBlockState() ?: return false
 
