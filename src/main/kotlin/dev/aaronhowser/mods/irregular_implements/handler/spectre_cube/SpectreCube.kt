@@ -1,12 +1,15 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.ContainerListener
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
@@ -53,6 +56,44 @@ class SpectreCube(
 		tag.putLong(SPAWN_BLOCK_NBT, spawnBlock.asLong())
 
 		return tag
+	}
+
+	fun generate(level: Level) {
+		if (level !is ServerLevel) return
+
+		val cornerOne = BlockPos(position * 16, 0, 0)
+		val cornerTwo = cornerOne.offset(15, height + 1, 15)
+
+		generateCube(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.get().defaultBlockState())
+		generateCube(
+			level,
+			cornerOne.offset(7, 0, 7),
+			cornerOne.offset(8, 0, 8),
+			ModBlocks.SPECTRE_CORE.get().defaultBlockState()
+		)
+	}
+
+	fun increaseHeight(amountToAdd: Int): Int {
+		val level = handler.spectreLevel ?: return 0
+
+		val maxToAdd = level.maxBuildHeight - (height + 1)
+		val newHeight = (height + amountToAdd).coerceAtMost(height + maxToAdd)
+
+		if (newHeight == height) return 0
+
+		val delta = newHeight - height
+		changeHeight(level, newHeight)
+		return delta
+	}
+
+	private fun changeHeight(level: Level, newHeight: Int) {
+		val corner = BlockPos(position * 16, 0, 0)
+		generateCube(
+			level,
+			corner,
+			corner.offset(15, height + 1, 15),
+			Blocks.AIR.defaultBlockState()
+		)
 	}
 
 	companion object {
