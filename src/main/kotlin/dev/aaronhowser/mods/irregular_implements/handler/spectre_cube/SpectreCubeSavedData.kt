@@ -1,9 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.saveddata.SavedData
 import java.util.*
 
@@ -12,12 +14,14 @@ class SpectreCubeSavedData : SavedData() {
 	private val cubes: MutableMap<UUID, SpectreCube> = mutableMapOf()
 	private var positionCounter: Int = 0
 
+	var spectreLevel: Level? = null
+
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
 		val listTag = tag.getList(CUBES_NBT, Tag.TAG_COMPOUND.toInt())
 
 		for ((uuid, cube) in cubes) {
 			val cubeTag = CompoundTag()
-			cube.save(cubeTag)
+//			cube.save(cubeTag)
 			cubeTag.putUUID("uuid", uuid)
 			listTag.add(cubeTag)
 		}
@@ -48,10 +52,14 @@ class SpectreCubeSavedData : SavedData() {
 				return get(level.server.overworld())
 			}
 
-			return level.dataStorage.computeIfAbsent(
+			val savedData = level.dataStorage.computeIfAbsent(
 				Factory(::SpectreCubeSavedData, ::load),
 				"spectre_cube"
 			)
+
+			savedData.spectreLevel = level.server.getLevel(ModDimensions.SPECTRE_LEVEL_KEY)
+
+			return savedData
 		}
 	}
 
