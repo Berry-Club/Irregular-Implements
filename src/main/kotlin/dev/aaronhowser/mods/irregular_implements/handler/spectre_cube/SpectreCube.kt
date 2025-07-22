@@ -1,15 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.world.Container
-import net.minecraft.world.ContainerListener
-import net.minecraft.world.SimpleContainer
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
@@ -27,13 +23,7 @@ class SpectreCube(
 
 	private var spawnBlock: BlockPos = BlockPos(8, 0, 8)
 
-	constructor(handler: SpectreCubeSavedData, owner: UUID, position: Int) : this(handler) {
-		this.owner = owner
-		this.position = position
-		this.spawnBlock = BlockPos(position * 16 + 8, 0, 8)
-	}
-
-	fun saveToTag(): CompoundTag {
+	fun toTag(): CompoundTag {
 		val tag = CompoundTag()
 
 		val owner = this@SpectreCube.owner
@@ -124,7 +114,7 @@ class SpectreCube(
 			}
 		}
 
-		private fun fromTag(handler: SpectreCubeSavedData, tag: CompoundTag) {
+		fun fromTag(handler: SpectreCubeSavedData, tag: CompoundTag): SpectreCube {
 			val cube = SpectreCube(handler)
 			cube.owner = tag.getUuidOrNull(OWNER_NBT)
 			cube.height = tag.getInt(HEIGHT_NBT)
@@ -139,6 +129,8 @@ class SpectreCube(
 					cube.guests.add(guestUuid)
 				}
 			}
+
+			return cube
 		}
 
 	}

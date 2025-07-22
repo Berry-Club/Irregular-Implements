@@ -22,7 +22,7 @@ class SpectreCubeSavedData : SavedData() {
 		for ((uuid, cube) in cubes) {
 			val cubeTag = CompoundTag()
 			cubeTag.putUUID(UUID_NBT, uuid)
-			cubeTag.put(CUBE_NBT, cube.toTag(registries))
+			cubeTag.put(CUBE_NBT, cube.toTag())
 			listTag.add(cubeTag)
 		}
 
@@ -43,8 +43,8 @@ class SpectreCubeSavedData : SavedData() {
 
 			val listTag = tag.getList(CUBES_NBT, Tag.TAG_COMPOUND.toInt())
 			for (i in listTag.indices) {
-				val cube = SpectreCube.fromTag(data, listTag.getCompound(i), provider)
-				val uuid = cube.owner
+				val cube = SpectreCube.fromTag(data, listTag.getCompound(i))
+				val uuid = cube.owner ?: continue
 				data.cubes[uuid] = cube
 			}
 
