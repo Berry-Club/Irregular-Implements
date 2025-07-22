@@ -28,6 +28,7 @@ class BlockTeleporterBlockEntity(
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
+	//TODO: Sound on either succeed or fail
 	fun swapBlocks(): Boolean {
 		if (level?.isClientSide.isTrue) return false
 
