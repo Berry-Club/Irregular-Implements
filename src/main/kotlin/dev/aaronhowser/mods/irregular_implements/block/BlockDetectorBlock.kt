@@ -25,7 +25,7 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 		registerDefaultState(
 			stateDefinition.any()
 				.setValue(FACING, Direction.NORTH)
-				.setValue(BlockStateProperties.POWERED, false)
+				.setValue(TRIGGERED, false)
 		)
 	}
 
@@ -35,7 +35,7 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(FACING)
+		builder.add(FACING, TRIGGERED)
 	}
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {

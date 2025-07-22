@@ -141,7 +141,8 @@ object ModBlocks {
 
 	val BLOCK_TELEPORTER: DeferredBlock<BlockTeleporterBlock> =
 		registerBlock("block_teleporter", ::BlockTeleporterBlock)
-	val BLOCK_DETECTOR = basicBlock("block_detector")   // Stores a Block Filter (which doesn't exist now) and emits a redstone signal if the block STATE is in front of it
+	val BLOCK_DETECTOR: DeferredBlock<BlockDetectorBlock> =
+		registerBlock("block_detector", ::BlockDetectorBlock)
 	val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
 		registerBlock("moon_phase_detector", ::MoonPhaseDetectorBlock)
 
