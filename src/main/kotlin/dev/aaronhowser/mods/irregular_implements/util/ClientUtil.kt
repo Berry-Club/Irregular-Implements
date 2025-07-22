@@ -10,10 +10,16 @@ import net.neoforged.fml.loading.FMLEnvironment
 object ClientUtil {
 
 	@JvmStatic
+	val localLevel: Level?
+		get() {
+			if (!FMLEnvironment.dist.isClient) return null
+			return Minecraft.getInstance().level
+		}
+
+	@JvmStatic
 	val localPlayer: Player?
 		get() {
 			if (!FMLEnvironment.dist.isClient) return null
-
 			return Minecraft.getInstance().player
 		}
 
