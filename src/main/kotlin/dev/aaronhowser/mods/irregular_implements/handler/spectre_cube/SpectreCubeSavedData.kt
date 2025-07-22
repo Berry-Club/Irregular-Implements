@@ -86,7 +86,7 @@ class SpectreCubeSavedData : SavedData() {
 		val position = chunk.pos.x
 
 		for (cube in cubes.values) {
-			if (cube.position / 16 != position) continue
+			if (cube.position != position) continue
 
 			if (pos.y <= 0
 				|| pos.y > cube.height + 1
