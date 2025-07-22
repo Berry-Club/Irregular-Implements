@@ -58,6 +58,10 @@ class BlockTeleporterBlockEntity(
 		val level = level ?: return null
 		val direction = blockState.getValue(BlockTeleporterBlock.FACING)
 		val targetPos = worldPosition.relative(direction)
+
+		// Disallow block entities from being teleported
+		if (level.getBlockEntity(targetPos) != null) return null
+
 		return level.getBlockState(targetPos)
 	}
 
