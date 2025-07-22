@@ -88,7 +88,7 @@ class SpectreCubeSavedData : SavedData() {
 		for (cube in cubes.values) {
 			if (cube.position != position) continue
 
-			if (pos.y <= 0
+			if (pos.y < 0
 				|| pos.y > cube.height + 1
 				|| pos.x < position * 16
 				|| pos.x >= position * 16 + 15
