@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockTeleporterBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -24,6 +26,7 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 		registerDefaultState(
 			stateDefinition.any()
 				.setValue(FACING, Direction.NORTH)
+				.setValue(BlockStateProperties.POWERED, false)
 		)
 	}
 
@@ -37,7 +40,7 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 	}
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-		return BlockTeleporterBlockEntity(pos, state)
+		return BlockDetectorBlockEntity(pos, state)
 	}
 
 	override fun useWithoutItem(
@@ -47,18 +50,29 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 		pPlayer: Player,
 		pHitResult: BlockHitResult
 	): InteractionResult {
-		val blockEntity = pLevel.getBlockEntity(pPos) as? BlockTeleporterBlockEntity
+		val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDetectorBlockEntity
 			?: return InteractionResult.FAIL
 		pPlayer.openMenu(blockEntity)
 		return InteractionResult.SUCCESS
 	}
 
 	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
+		val be = level.getBlockEntity(pos) as? BlockDetectorBlockEntity
+			?: return
 
+		val isDetectingBlock = be.isBlockDetected()
+		val wasDetectingBlock = state.getValue(TRIGGERED)
+
+		if (isDetectingBlock && !wasDetectingBlock) {
+			level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, true))
+		} else if (!isDetectingBlock && wasDetectingBlock) {
+			level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, false))
+		}
 	}
 
 	companion object {
 		val FACING: DirectionProperty = BlockStateProperties.FACING
+		val TRIGGERED: BooleanProperty = BlockStateProperties.TRIGGERED
 	}
 
 }
