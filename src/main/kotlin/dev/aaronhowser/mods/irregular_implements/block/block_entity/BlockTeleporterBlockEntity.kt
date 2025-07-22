@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.BlockTeleporterBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -61,7 +62,10 @@ class BlockTeleporterBlockEntity(
 		// Disallow block entities from being teleported
 		if (level.getBlockEntity(targetPos) != null) return null
 
-		return level.getBlockState(targetPos)
+		val targetState = level.getBlockState(targetPos)
+		if (targetState.`is`(ModBlockTagsProvider.EXCLUDED_FROM_BLOCK_TELEPORTER)) return null
+
+		return targetState
 	}
 
 	fun getLinkedBlockTeleporter(): BlockTeleporterBlockEntity? {
