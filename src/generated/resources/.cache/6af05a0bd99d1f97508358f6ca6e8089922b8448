@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-29T00:43:06.4504611	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-07-21T19:09:55.9746917	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -28,6 +28,7 @@ c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/bl
 78324d910f5cc8784b4ebcd3728d920fa0ab2e6d data/irregular_implements/tags/block/converts_to_floo_brick.json
 aaaec71341b3665b5da99261bcb506dec23dcede data/irregular_implements/tags/block/custom_crafting_table_blacklist.json
 42feff80ecc6486ed11bba53612d77101cfbe694 data/irregular_implements/tags/block/diaphanous_block_blacklist.json
+6c3e077db63fa9b78ff114edada8a94e3495f7a1 data/irregular_implements/tags/block/excluded_from_block_teleporter.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/block/super_lubricated.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/animals_spawnable_on.json
 ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.json
@@ -37,7 +38,7 @@ ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/dirt.json
 465e1934ba824f9215eb64e28f2b86d64294e60e data/minecraft/tags/block/logs_that_burn.json
 31b72a43b0a93dd393227b36d4680168e0045364 data/minecraft/tags/block/mineable/axe.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/mineable/hoe.json
-473125a4ec5179f95fbe8cb972ec865177191263 data/minecraft/tags/block/mineable/pickaxe.json
+f9ecaf3bb29a0382622eb0fe05d92762a20f9178 data/minecraft/tags/block/mineable/pickaxe.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/mineable/shovel.json
 3cde7ba1eb112818696cfbdefc6948bcbf28c3c2 data/minecraft/tags/block/planks.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/replaceable_by_trees.json

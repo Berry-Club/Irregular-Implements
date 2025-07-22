@@ -271,8 +271,8 @@ class ModBlockTagsProvider(
 				ModBlocks.IGNITER.get(),
 				ModBlocks.INVENTORY_REROUTER.get(),
 				ModBlocks.PEACE_CANDLE.get(),
-				ModBlocks.SOUND_BOX.get(),
-				ModBlocks.SOUND_DAMPENER.get(),
+//				ModBlocks.SOUND_BOX.get(),
+//				ModBlocks.SOUND_DAMPENER.get(),
 				ModBlocks.SIDED_BLOCK_OF_REDSTONE.get(),
 				ModBlocks.ITEM_COLLECTOR.get(),
 				ModBlocks.ADVANCED_ITEM_COLLECTOR.get(),
@@ -415,6 +415,13 @@ class ModBlockTagsProvider(
 				Blocks.BRICKS
 			)
 
+		this.tag(EXCLUDED_FROM_BLOCK_TELEPORTER)
+			.add(
+				Blocks.BEDROCK,
+				Blocks.BARRIER,
+				Blocks.END_PORTAL_FRAME,
+			)
+
 	}
 
 	private fun colorTags() {
@@ -469,6 +476,7 @@ class ModBlockTagsProvider(
 		val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
 		val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
 		val CONVERTS_TO_FLOO_BRICK = create("converts_to_floo_brick")
+		val EXCLUDED_FROM_BLOCK_TELEPORTER = create("excluded_from_block_teleporter")
 	}
 
 }

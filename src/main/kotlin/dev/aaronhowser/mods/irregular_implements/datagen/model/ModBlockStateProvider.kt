@@ -1948,6 +1948,11 @@ class ModBlockStateProvider(
 			uniqueTexture = modLoc("block/energy_distributor/front"),
 			otherTexture = modLoc("block/energy_distributor/side")
 		)
+		oneUniqueFace(
+			ModBlocks.BLOCK_TELEPORTER.get(),
+			uniqueTexture = modLoc("block/block_teleporter/front"),
+			otherTexture = modLoc("block/block_teleporter/side")
+		)
 	}
 
 	private fun oneUniqueFace(
@@ -2069,7 +2074,7 @@ class ModBlockStateProvider(
 		val singleTextureBlocks = listOf(
 			ModBlocks.SUPER_LUBRICANT_STONE,
 			ModBlocks.SPECTRE_PLANKS,
-			ModBlocks.SOUND_DAMPENER,
+//			ModBlocks.SOUND_DAMPENER,
 			ModBlocks.REDSTONE_OBSERVER,
 			ModBlocks.ENTITY_DETECTOR,
 			ModBlocks.BEAN_POD,

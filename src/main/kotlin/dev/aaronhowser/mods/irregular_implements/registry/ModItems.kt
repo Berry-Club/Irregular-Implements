@@ -210,11 +210,6 @@ object ModItems {
 	val FLOO_POUCH: DeferredItem<FlooPouchItem> =
 		register("floo_pouch", ::FlooPouchItem, FlooPouchItem.DEFAULT_PROPERTIES)
 
-	// Sound
-	val SOUND_PATTERN = basic("sound_pattern")
-	val SOUND_RECORDER = basic("sound_recorder")
-	val PORTABLE_SOUND_DAMPENER = basic("portable_sound_dampener")
-
 	// Not above 1.7
 	val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
 		register("biome_capsule", ::BiomeCapsuleItem, BiomeCapsuleItem.DEFAULT_PROPERTIES)
@@ -283,6 +278,7 @@ object ModItems {
 	// - Runic Dust (obscure and difficult)
 	// - Blood Stone (requires Blood Moon)
 	// - Precious Emerald (undocumented and weird)
+	// - Sound Pattern, Recorder, Dampener (just use Super Sound Muffler)
 
 	private fun basic(id: String): DeferredItem<Item> {
 		return ITEM_REGISTRY.registerSimpleItem(id)

@@ -29,8 +29,10 @@ object ScreenTextures {
 
 		data object AdvancedItemCollector : Background("textures/gui/advanced_item_collector.png", 176, 235)
 		data object AdvancedRedstoneRepeater : Background("textures/gui/advanced_redstone_repeater.png", 91, 56)
-		data object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
 		data object AnalogEmitter : Background("textures/gui/analog_emitter.png", 79, 50)
+		data object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
+		data object BlockTeleporter : Background("textures/gui/block_teleporter.png", 176, 133)
+		data object BlockDetector : Background("textures/gui/block_detector.png", 176, 133)
 		data object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54)
 		data object ChunkAnalyzer : Background("textures/gui/chunk_analyzer.png", 190, 124)
 		data object DropFilter : Background("textures/gui/drop_filter.png", 176, 133)

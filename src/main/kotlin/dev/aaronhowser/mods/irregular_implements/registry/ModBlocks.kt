@@ -31,8 +31,6 @@ object ModBlocks {
 		registerBlock("slime_cube", ::SlimeCubeBlock)
 	val PEACE_CANDLE: DeferredBlock<PeaceCandleBlock> =
 		registerBlock("peace_candle", ::PeaceCandleBlock)
-	val SOUND_BOX = basicBlock("sound_box")
-	val SOUND_DAMPENER = basicBlock("sound_dampener")
 
 	// Plants
 	val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
@@ -140,7 +138,9 @@ object ModBlocks {
 	val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
 		registerBlock("shock_absorber", ::ShockAbsorberBlock)
 	val AUTO_PLACER = basicBlock("auto_placer")
-	val BLOCK_TELEPORTER = basicBlock("block_teleporter")   // Stores a Location Filter that's pointing at another Block Teleporter, then teleports the block there. Should make it require a redstone pulse.
+
+	val BLOCK_TELEPORTER: DeferredBlock<BlockTeleporterBlock> =
+		registerBlock("block_teleporter", ::BlockTeleporterBlock)
 	val BLOCK_DETECTOR = basicBlock("block_detector")   // Stores a Block Filter (which doesn't exist now) and emits a redstone signal if the block STATE is in front of it
 	val MOON_PHASE_DETECTOR: DeferredBlock<MoonPhaseDetectorBlock> =
 		registerBlock("moon_phase_detector", ::MoonPhaseDetectorBlock)
@@ -351,6 +351,8 @@ object ModBlocks {
 	// - Custom Crafting Table: Too hard and nobody would use
 	// - Dyeing Machine: Too hard and nobody would use
 	// - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
+	// - Sound Dampener: Just use Super Sound Muffler instead
+	// - Sound Box: I just don't wanna
 
 	private fun blockWithProperties(name: String, properties: Properties) =
 		registerBlock(name) { Block(properties) }
