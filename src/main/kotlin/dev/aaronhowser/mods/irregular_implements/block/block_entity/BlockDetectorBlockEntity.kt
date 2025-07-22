@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Improve
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
+import dev.aaronhowser.mods.irregular_implements.menu.block_detector.BlockDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -42,7 +43,7 @@ class BlockDetectorBlockEntity(
 	override fun getDisplayName(): Component = blockState.block.name
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-		return BlockTeleporterMenu(containerId, playerInventory, container)
+		return BlockDetectorMenu(containerId, playerInventory, container)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

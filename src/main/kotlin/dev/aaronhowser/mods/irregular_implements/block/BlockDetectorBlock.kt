@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -68,6 +69,19 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 		} else if (!isDetectingBlock && wasDetectingBlock) {
 			level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, false))
 		}
+	}
+
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		val facing = state.getValue(FACING)
+		return direction != facing
+	}
+
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(TRIGGERED)) 15 else 0
+	}
+
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return getDirectSignal(state, level, pos, direction)
 	}
 
 	companion object {
