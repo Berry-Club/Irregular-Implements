@@ -111,7 +111,7 @@ object MutatingRecipes {
 	}
 
 	private fun diaphanousRecipes(): List<MutatingEmiRecipe> {
-		val level = ClientUtil.localPlayer?.level() ?: return emptyList()
+		val level = ClientUtil.localLevel ?: return emptyList()
 
 		val validBlockStacks = BuiltInRegistries.BLOCK.mapNotNull { block ->
 			if (!DiaphanousBlock.isValidBlock(block, level)) return@mapNotNull null

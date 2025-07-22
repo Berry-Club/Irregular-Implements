@@ -200,4 +200,20 @@ object OtherUtil {
 
 	fun Player.status(message: Component) = this.displayClientMessage(message, true)
 
+	fun BlockPos.toTag(): CompoundTag {
+		val tag = CompoundTag()
+		tag.putInt("x", this.x)
+		tag.putInt("y", this.y)
+		tag.putInt("z", this.z)
+		return tag
+	}
+
+	fun CompoundTag.toBlockPos(): BlockPos {
+		return BlockPos(
+			this.getInt("x"),
+			this.getInt("y"),
+			this.getInt("z")
+		)
+	}
+
 }
