@@ -1,77 +1,108 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
-import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.world.Container
-import net.minecraft.world.ContainerHelper
+import net.minecraft.nbt.Tag
 import net.minecraft.world.ContainerListener
 import net.minecraft.world.SimpleContainer
-import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
 class SpectreCube(
 	val handler: SpectreCubeSavedData
 ) : ContainerListener {
 
-	var owner: UUID = UUID(0L, 0L)
-	var cubeIndex: Int = Int.MIN_VALUE
-	var height: Int = 2
-	var spawnPos: BlockPos = BlockPos.ZERO
+	var owner: UUID? = null
+	val guests: MutableList<UUID> = mutableListOf()
 
-	val inventory: SimpleContainer = SimpleContainer(11)
+	var height = 2
+	var position = 0
+
+	private val cubeInventory = SimpleContainer(11)
+	private var spawnBlock: BlockPos = BlockPos(8, 0, 8)
 
 	init {
-		inventory.addListener(this)
+		cubeInventory.addListener(this)
 	}
 
-	constructor(handler: SpectreCubeSavedData, owner: UUID, cubeIndex: Int) : this(handler) {
+	constructor(handler: SpectreCubeSavedData, owner: UUID, position: Int) : this(handler) {
 		this.owner = owner
-		this.cubeIndex = cubeIndex
-
-		this.spawnPos = getPosFromCubeIndex(cubeIndex)
+		this.position = position
+		this.spawnBlock = BlockPos(position * 16 + 8, 0, 8)
 	}
 
-	override fun containerChanged(container: Container) {
-
-	}
-
-	fun toTag(provider: HolderLookup.Provider): CompoundTag {
+	fun saveToTag(): CompoundTag {
 		val tag = CompoundTag()
-		tag.putUUID(OWNER, owner)
-		tag.putInt(CUBE_INDEX, cubeIndex)
-		tag.putInt(HEIGHT, height)
 
-		ContainerHelper.saveAllItems(tag, inventory.items, provider)
+		val owner = this@SpectreCube.owner
+		if (owner != null) tag.putUUID(OWNER_NBT, owner)
+
+		tag.putInt(HEIGHT_NBT, height)
+		tag.putInt(POSITION_NBT, position)
+
+		val guestList = tag.getList(GUESTS_NBT, Tag.TAG_COMPOUND.toInt())
+		for (guest in guests) {
+			val guestTag = CompoundTag()
+			guestTag.putUUID(UUID_NBT, guest)
+			guestList.add(guestTag)
+		}
+		tag.put(GUESTS_NBT, guestList)
+
+		tag.putLong(SPAWN_BLOCK_NBT, spawnBlock.asLong())
 
 		return tag
 	}
 
 	companion object {
-		const val OWNER = "owner"
-		const val CUBE_INDEX = "cube_index"
-		const val HEIGHT = "height"
+		const val OWNER_NBT = "owner"
+		const val GUESTS_NBT = "guests"
+		const val UUID_NBT = "uuid"
+		const val HEIGHT_NBT = "height"
+		const val POSITION_NBT = "position"
+		const val SPAWN_BLOCK_NBT = "spawn_block"
 
-		private val CACHED_SPIRAL_POINTS: MutableList<ChunkPos> = mutableListOf()
+		private fun generateCube(
+			level: Level,
+			cornerOne: BlockPos,
+			cornerTwo: BlockPos,
+			state: BlockState
+		) {
+			val minX = minOf(cornerOne.x, cornerTwo.x)
+			val minY = minOf(cornerOne.y, cornerTwo.y)
+			val minZ = minOf(cornerOne.z, cornerTwo.z)
+			val maxX = maxOf(cornerOne.x, cornerTwo.x)
+			val maxY = maxOf(cornerOne.y, cornerTwo.y)
+			val maxZ = maxOf(cornerOne.z, cornerTwo.z)
 
-		fun getPosFromCubeIndex(cubeIndex: Int): BlockPos {
-			return BlockPos(cubeIndex * 16 + 8, 0, 8)
+			for (x in minX..maxX) for (y in minY..maxY) for (z in minZ..maxZ) {
+				if (x in setOf(minX, maxX) || y in setOf(minY, maxY) || z in setOf(minZ, maxZ)) {
+					level.setBlockAndUpdate(
+						BlockPos(x, y, z),
+						state
+					)
+				}
+			}
 		}
 
-		fun fromTag(handler: SpectreCubeSavedData, tag: CompoundTag, provider: HolderLookup.Provider): SpectreCube {
-			val uuid = tag.getUUID(OWNER)
-			val index = tag.getInt(CUBE_INDEX)
-			val height = tag.getInt(HEIGHT)
+		private fun fromTag(handler: SpectreCubeSavedData, tag: CompoundTag) {
+			val cube = SpectreCube(handler)
+			cube.owner = tag.getUuidOrNull(OWNER_NBT)
+			cube.height = tag.getInt(HEIGHT_NBT)
+			cube.position = tag.getInt(POSITION_NBT)
+			cube.spawnBlock = BlockPos.of(tag.getLong(SPAWN_BLOCK_NBT))
 
-			val cube = SpectreCube(handler, uuid, index)
-			cube.height = height
-			cube.spawnPos = getPosFromCubeIndex(index)
-
-			ContainerHelper.loadAllItems(tag, cube.inventory.items, provider)
-
-			return cube
+			val guestList = tag.getList(GUESTS_NBT, Tag.TAG_COMPOUND.toInt())
+			for (i in guestList.indices) {
+				val guestTag = guestList.getCompound(i)
+				val guestUuid = guestTag.getUuidOrNull(UUID_NBT)
+				if (guestUuid != null) {
+					cube.guests.add(guestUuid)
+				}
+			}
 		}
+
 	}
 
 }
