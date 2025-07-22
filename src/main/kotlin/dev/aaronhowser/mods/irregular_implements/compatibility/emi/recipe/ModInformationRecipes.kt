@@ -35,7 +35,7 @@ object ModInformationRecipes {
 			for (itemLike: ItemLike in items) {
 				val item = itemLike.asItem()
 
-				val infoString = ModInfoLang.getInfoString(item)
+				val infoString = ModInfoLang .getInfoString(item)
 
 				if (!I18n.exists(infoString)) {
 					IrregularImplements.LOGGER.debug("No info string for item: $infoString")

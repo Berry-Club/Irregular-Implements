@@ -165,8 +165,10 @@ object ModBlocks {
 	val ADVANCED_REDSTONE_INTERFACE = basicBlock("advanced_redstone_interface")
 
 	// Spectre blocks
-	val SPECTRE_BLOCK = basicBlock("spectre_block")
-	val SPECTRE_CORE = basicBlock("spectre_core")
+	val SPECTRE_BLOCK: DeferredBlock<Block> =
+		basicCopiedBlock("spectre_block", Blocks.BEDROCK)
+	val SPECTRE_CORE: DeferredBlock<SpectreCoreBlock> =
+		registerBlock("spectre_core", ::SpectreCoreBlock)
 	val SPECTRE_LENS: DeferredBlock<SpectreLensBlock> =
 		registerBlock("spectre_lens", ::SpectreLensBlock)
 	val SPECTRE_ENERGY_INJECTOR: DeferredBlock<SpectreEnergyInjectorBlock> =
