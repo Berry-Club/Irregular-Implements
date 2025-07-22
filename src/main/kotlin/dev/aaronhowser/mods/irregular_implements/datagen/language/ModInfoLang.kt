@@ -1,12 +1,23 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.getInfoString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.ItemLike
 
 object ModInfoLang {
+
+	fun getInfoString(itemLike: ItemLike): String {
+		val location = BuiltInRegistries.ITEM.getKey(itemLike.asItem())
+
+		return StringBuilder()
+			.append("info.")
+			.append(location.namespace)
+			.append(".")
+			.append(location.path)
+			.toString()
+	}
 
 	const val PLATFORM = "info.irregular_implements.platform"
 	const val BIOME_BLOCKS = "info.irregular_implements.biome_blocks"

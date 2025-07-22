@@ -22,19 +22,21 @@ object ModMiscLang {
 	const val ALLOWS_WATER_WALKING = "tag.fluid.irregular_implements.allows_water_walking"
 
 	fun add(provider: ModLanguageProvider) {
-		provider.add(MAGNETIC_NAME, "Magnetic")
-		provider.add(MAGNETIC_DESC, "Teleports fresh item drops towards you")
-		provider.add(MAGNETIC_TAG, "Magnetic Enchantable")
-		provider.add(GRASS_SEEDS_TAG, "Grass Seeds")
-		provider.add(HIDE_NAME_HELMET_TAG, "Hides Name Helmet")
-		provider.add(HIDE_POTION_HELMET_TAG, "Hides Potion Helmet")
-		provider.add(SUPER_LUBRICATED_TAG, "Super Lubricated Boots")
-		provider.add(CUSTOM_CRAFTING_TABLE_ITEMS_TAG, "Custom Crafting Table Items")
-		provider.add(SPECTRE_ANCHOR_BLACKLIST_TAG, "Spectre Anchor Blacklist")
-		provider.add(C_BEAN_TAG, "Beans")
-		provider.add(C_OBSIDIAN_RODS_TAG, "Obsidian Rods")
-		provider.add(ALLOWS_WATER_WALKING, "Allows Water Walking")
-		provider.add(ALLOWS_LAVA_WALKING, "Allows Lava Walking")
+		provider.apply {
+			add(MAGNETIC_NAME, "Magnetic")
+			add(MAGNETIC_DESC, "Teleports fresh item drops towards you")
+			add(MAGNETIC_TAG, "Magnetic Enchantable")
+			add(GRASS_SEEDS_TAG, "Grass Seeds")
+			add(HIDE_NAME_HELMET_TAG, "Hides Name Helmet")
+			add(HIDE_POTION_HELMET_TAG, "Hides Potion Helmet")
+			add(SUPER_LUBRICATED_TAG, "Super Lubricated Boots")
+			add(CUSTOM_CRAFTING_TABLE_ITEMS_TAG, "Custom Crafting Table Items")
+			add(SPECTRE_ANCHOR_BLACKLIST_TAG, "Spectre Anchor Blacklist")
+			add(C_BEAN_TAG, "Beans")
+			add(C_OBSIDIAN_RODS_TAG, "Obsidian Rods")
+			add(ALLOWS_WATER_WALKING, "Allows Water Walking")
+			add(ALLOWS_LAVA_WALKING, "Allows Lava Walking")
+		}
 	}
 
 }

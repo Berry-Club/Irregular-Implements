@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.DropperBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.neoforged.neoforge.client.model.generators.*
 import net.neoforged.neoforge.common.data.ExistingFileHelper
+import net.neoforged.neoforge.registries.DeferredBlock
 
 class ModBlockStateProvider(
 	output: PackOutput,
@@ -2058,8 +2059,9 @@ class ModBlockStateProvider(
 			ModBlocks.LAPIS_GLASS,
 			ModBlocks.QUARTZ_GLASS,
 			ModBlocks.SUPER_LUBRICANT_ICE,
-			ModBlocks.SPECTRE_BLOCK
-		).map { it.get() }
+			ModBlocks.SPECTRE_BLOCK,
+			ModBlocks.SPECTRE_CORE
+		).map(DeferredBlock<*>::get)
 
 		for (block in singleTextureTranslucentBlocks) {
 			val model = models()

@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-21T17:18:13.931909	Loot Tables
+// 1.21.1	2025-07-22T17:54:10.6960826	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -144,6 +144,7 @@ dedb1abc8657c74f2314d49a4b693543592653c8 data/irregular_implements/loot_table/bl
 0221a5f595632d91f1c815bedb08e9db09faeef9 data/irregular_implements/loot_table/blocks/spectre_coil_genesis.json
 61a769bb23122909545a69cdfbb4dbf689cb0190 data/irregular_implements/loot_table/blocks/spectre_coil_number.json
 e8b3cb1d5e2fbaec3f3f9f4d38baf47705d23b75 data/irregular_implements/loot_table/blocks/spectre_coil_redstone.json
+582504284b87b6f5f04a20e897e7c9d2a2b003dc data/irregular_implements/loot_table/blocks/spectre_core.json
 d31a3009bc7ec291db0fa68ea860d8b41f25138e data/irregular_implements/loot_table/blocks/spectre_energy_injector.json
 bf535466a04af066c4a1bebdb7c18a1fbab4dc12 data/irregular_implements/loot_table/blocks/spectre_leaves.json
 cda535bb8a06e5bc2ca2e14c43ed8920fcd89dad data/irregular_implements/loot_table/blocks/spectre_lens.json
