@@ -104,10 +104,10 @@ class SpectreCubeSavedData : SavedData() {
 		if (player.isCreative) return
 
 		val pos = player.blockPosition()
-		val cube = getSpectreCubeFromBlockPos(player.serverLevel(), pos) ?: return
+		val cube = getSpectreCubeFromBlockPos(player.serverLevel(), pos)
 		val playerUuid = player.uuid
 
-		if (cube.owner == playerUuid) return
+		if (cube != null && cube.owner == playerUuid) return
 
 		val playersCube = cubes[playerUuid]
 		if (playersCube == null) {

@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
+import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.LivingEntity
@@ -24,6 +26,20 @@ class SpectreKeyItem(properties: Properties) : Item(properties) {
 		player.startUsingItem(usedHand)
 		val usedStack = player.getItemInHand(usedHand)
 		return InteractionResultHolder.success(usedStack)
+	}
+
+	override fun finishUsingItem(stack: ItemStack, level: Level, livingEntity: LivingEntity): ItemStack {
+		if (livingEntity !is ServerPlayer) return stack
+
+		val handler = SpectreCubeSavedData.get(livingEntity.serverLevel())
+
+		if (level.dimension() == ModDimensions.SPECTRE_LEVEL_KEY) {
+			handler.teleportPlayerBack(livingEntity)
+		} else {
+			handler.teleportPlayerToSpectreCube(livingEntity)
+		}
+
+		return stack
 	}
 
 }
