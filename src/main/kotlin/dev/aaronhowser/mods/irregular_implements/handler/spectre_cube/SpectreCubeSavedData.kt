@@ -3,11 +3,13 @@ package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
+import net.minecraft.resources.ResourceKey
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.saveddata.SavedData
 import java.util.*
@@ -63,7 +65,16 @@ class SpectreCubeSavedData : SavedData() {
 	}
 
 	private fun generateSpectreCube(uuid: UUID): SpectreCube {
+		val cube = SpectreCube(this, uuid, positionCounter)
+		increaseNextPosition()
+		cube.generate(spectreLevel!!)
+		cubes[uuid] = cube
+		setDirty()
+		return cube
+	}
 
+	private fun increaseNextPosition() {
+		positionCounter += 16
 	}
 
 	fun getSpectreCubeFromBlockPos(level: Level, pos: BlockPos): SpectreCube? {
@@ -108,8 +119,22 @@ class SpectreCubeSavedData : SavedData() {
 		player.teleportTo(spawn.x + 0.5, spawn.y + 1.0, spawn.z + 0.5)
 	}
 
-	fun teleportPlayerBack(player: Player) {
+	fun teleportPlayerBack(player: ServerPlayer) {
+		val pData = player.persistentData
+		if (!pData.contains(PLAYER_SPECTRE_INFO)) return
 
+		val tag = pData.getCompound(PLAYER_SPECTRE_INFO)
+		val fromX = tag.getDouble(FROM_X)
+		val fromY = tag.getDouble(FROM_Y)
+		val fromZ = tag.getDouble(FROM_Z)
+		val fromDimension = tag.getString(FROM_DIMENSION)
+
+		val dimRl = ResourceLocation.parse(fromDimension)
+		val dimRk = ResourceKey.create(Registries.DIMENSION, dimRl)
+
+		val level = player.server.getLevel(dimRk) ?: return
+
+		player.teleportTo(level, fromX, fromY, fromZ, player.yRot, player.xRot)
 	}
 
 	companion object {

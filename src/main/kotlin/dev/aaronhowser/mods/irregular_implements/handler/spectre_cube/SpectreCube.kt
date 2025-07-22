@@ -24,6 +24,12 @@ class SpectreCube(
 	private var spawnPos: BlockPos = BlockPos(8, 0, 8)
 	fun getSpawnPos(): BlockPos = spawnPos
 
+	constructor(handler: SpectreCubeSavedData, owner: UUID, position: Int) : this(handler) {
+		this.owner = owner
+		this.position = position
+		this.spawnPos = BlockPos(position * 16 + 8, 0, 8)
+	}
+
 	fun toTag(): CompoundTag {
 		val tag = CompoundTag()
 
