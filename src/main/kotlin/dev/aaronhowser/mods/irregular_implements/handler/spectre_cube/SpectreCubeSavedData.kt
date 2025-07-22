@@ -35,6 +35,37 @@ class SpectreCubeSavedData : SavedData() {
 		return tag
 	}
 
+	fun teleportPlayerToSpectreCube(player: ServerPlayer) {
+		val spectreLevel = this@SpectreCubeSavedData.spectreLevel as? ServerLevel ?: return
+
+		val pData = player.persistentData
+
+		val tag = CompoundTag()
+		tag.putDouble(FROM_X, player.x)
+		tag.putDouble(FROM_Y, player.y)
+		tag.putDouble(FROM_Z, player.z)
+		tag.putString(FROM_DIMENSION, player.level().dimension().location().toString())
+
+		pData.put(PLAYER_SPECTRE_INFO, tag)
+
+		val uuid = player.uuid
+		val cube = cubes[uuid] ?: generateSpectreCube(uuid)
+		val spawnPos = cube.getSpawnPos()
+
+		player.teleportTo(
+			spectreLevel,
+			spawnPos.x + 0.5,
+			spawnPos.y + 1.0,
+			spawnPos.z + 0.5,
+			player.yRot,
+			player.xRot
+		)
+	}
+
+	private fun generateSpectreCube(uuid: UUID): SpectreCube {
+
+	}
+
 	fun getSpectreCubeFromBlockPos(level: Level, pos: BlockPos): SpectreCube? {
 		if (level.dimension() != ModDimensions.SPECTRE_LEVEL_KEY) return null
 
@@ -86,6 +117,12 @@ class SpectreCubeSavedData : SavedData() {
 		const val CUBE_NBT = "cube"
 		const val UUID_NBT = "uuid"
 		const val POSITION_COUNTER_NBT = "position_counter"
+
+		const val PLAYER_SPECTRE_INFO = "ii_spectre_cube_info"
+		const val FROM_X = "from_x"
+		const val FROM_Y = "from_y"
+		const val FROM_Z = "from_z"
+		const val FROM_DIMENSION = "from_dimension"
 
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCubeSavedData {
 			val data = SpectreCubeSavedData()
