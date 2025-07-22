@@ -17,6 +17,7 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
+//TODO: Texture
 class BlockDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
