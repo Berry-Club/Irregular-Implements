@@ -12,6 +12,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.*
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
@@ -19,6 +20,7 @@ import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.particle.FlameParticle
 import net.minecraft.client.renderer.BiomeColors
+import net.minecraft.client.renderer.DimensionSpecialEffects
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
@@ -31,6 +33,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.GrassColor
+import net.minecraft.world.phys.Vec3
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -280,6 +283,24 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
 		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlameParticle::Provider)
+	}
+
+	//FIXME: Not working at all
+	@SubscribeEvent
+	fun registerDimensionSpecialEffects(event: RegisterDimensionSpecialEffectsEvent) {
+		event.register(
+			ModDimensions.SPECTRE_RL,
+			object : DimensionSpecialEffects(
+				Float.NaN,
+				false,
+				SkyType.NONE,
+				true,
+				true
+			) {
+				override fun getBrightnessDependentFogColor(fogColor: Vec3, brightness: Float): Vec3 = fogColor.scale(0.15)
+				override fun isFoggyAt(x: Int, y: Int): Boolean = true
+			}
+		)
 	}
 
 }
