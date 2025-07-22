@@ -33,8 +33,8 @@ class BlockTeleporterBlockEntity(
 		val stateToSend = getMyTargetBlockState() ?: return false
 		val stateToReceive = getLinkedBlockTeleporter()?.getMyTargetBlockState() ?: return false
 
-		if (!placeBlockState(stateToSend)) return false
-		if (!getLinkedBlockTeleporter()?.placeBlockState(stateToReceive).isTrue) {
+		if (!placeBlockState(stateToReceive)) return false
+		if (!getLinkedBlockTeleporter()?.placeBlockState(stateToSend).isTrue) {
 			// If we can't place the target block state, revert our own placement
 			placeBlockState(stateToSend)
 			return false
@@ -43,7 +43,6 @@ class BlockTeleporterBlockEntity(
 		return true
 	}
 
-	//TODO Figure out why this returns false
 	private fun placeBlockState(stateToPlace: BlockState): Boolean {
 		val level = level ?: return false
 		val direction = blockState.getValue(BlockTeleporterBlock.FACING)
