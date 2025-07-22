@@ -7,11 +7,13 @@ import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
 import dev.aaronhowser.mods.irregular_implements.block.SpectreTreeBlocks
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.command.ModCommands
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
@@ -23,6 +25,7 @@ import dev.aaronhowser.mods.irregular_implements.util.EscapeRopeHandler
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
@@ -44,6 +47,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
+import net.neoforged.neoforge.event.tick.PlayerTickEvent
 import net.neoforged.neoforge.event.tick.ServerTickEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 
@@ -241,6 +245,17 @@ object CommonEvents {
 	@SubscribeEvent
 	fun onRegisterCommandsEvent(event: RegisterCommandsEvent) {
 		ModCommands.register(event.dispatcher)
+	}
+
+	@SubscribeEvent
+	fun beforePlayerTick(event: PlayerTickEvent.Pre) {
+		val player = event.entity
+
+		if (player is ServerPlayer && player.level().dimension() == ModDimensions.SPECTRE_LEVEL_KEY) {
+			val handler = SpectreCubeSavedData.get(player.serverLevel())
+			handler.verifyPosition(player)
+		}
+
 	}
 
 }
