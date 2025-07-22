@@ -21,7 +21,8 @@ class SpectreCube(
 	var height = 2
 	var position = 0
 
-	private var spawnBlock: BlockPos = BlockPos(8, 0, 8)
+	private var spawnPos: BlockPos = BlockPos(8, 0, 8)
+	fun getSpawnPos(): BlockPos = spawnPos
 
 	fun toTag(): CompoundTag {
 		val tag = CompoundTag()
@@ -40,7 +41,7 @@ class SpectreCube(
 		}
 		tag.put(GUESTS_NBT, guestList)
 
-		tag.putLong(SPAWN_BLOCK_NBT, spawnBlock.asLong())
+		tag.putLong(SPAWN_BLOCK_NBT, spawnPos.asLong())
 
 		return tag
 	}
@@ -119,7 +120,7 @@ class SpectreCube(
 			cube.owner = tag.getUuidOrNull(OWNER_NBT)
 			cube.height = tag.getInt(HEIGHT_NBT)
 			cube.position = tag.getInt(POSITION_NBT)
-			cube.spawnBlock = BlockPos.of(tag.getLong(SPAWN_BLOCK_NBT))
+			cube.spawnPos = BlockPos.of(tag.getLong(SPAWN_BLOCK_NBT))
 
 			val guestList = tag.getList(GUESTS_NBT, Tag.TAG_COMPOUND.toInt())
 			for (i in guestList.indices) {

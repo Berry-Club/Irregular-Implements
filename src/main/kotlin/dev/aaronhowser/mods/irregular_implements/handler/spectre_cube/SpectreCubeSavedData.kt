@@ -6,6 +6,8 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.saveddata.SavedData
 import java.util.*
@@ -54,6 +56,29 @@ class SpectreCubeSavedData : SavedData() {
 		}
 
 		return null
+	}
+
+	fun verifyPosition(player: ServerPlayer) {
+		if (player.isCreative) return
+
+		val pos = player.blockPosition()
+		val cube = getSpectreCubeFromBlockPos(player.serverLevel(), pos) ?: return
+		val playerUuid = player.uuid
+
+		if (cube.owner == playerUuid) return
+
+		val playersCube = cubes[playerUuid]
+		if (playersCube == null) {
+			teleportPlayerBack(player)
+			return
+		}
+
+		val spawn = playersCube.getSpawnPos()
+		player.teleportTo(spawn.x + 0.5, spawn.y + 1.0, spawn.z + 0.5)
+	}
+
+	fun teleportPlayerBack(player: Player) {
+
 	}
 
 	companion object {
