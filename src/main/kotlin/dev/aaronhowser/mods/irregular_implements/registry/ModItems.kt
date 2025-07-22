@@ -172,7 +172,8 @@ object ModItems {
 		register("spectre_illuminator", ::SpectreIlluminatorItem)
 	val BLACKOUT_POWDER: DeferredItem<BlackoutPowderItem> =
 		register("blackout_powder", ::BlackoutPowderItem)
-	val SPECTRE_KEY = basic("spectre_key")
+	val SPECTRE_KEY: DeferredItem<SpectreKeyItem> =
+		register("spectre_key", ::SpectreKeyItem)
 	val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
 		register("spectre_anchor", ::SpectreAnchorItem, SpectreAnchorItem.DEFAULT_PROPERTIES)
 	val SPECTRE_CHARGER_BASIC: DeferredItem<SpectreChargerItem> =

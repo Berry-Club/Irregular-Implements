@@ -3,12 +3,12 @@ package dev.aaronhowser.mods.irregular_implements;
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil;
 import net.minecraft.client.player.KeyboardInput;
-import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.player.Player;
 
 public interface KeyboardInputFunctions {
 
 	default void checkInvert() {
-		LocalPlayer player = ClientUtil.getLocalPlayer();
+		Player player = ClientUtil.getLocalPlayer();
 		if (player == null) return;
 
 		KeyboardInput input = (KeyboardInput) this;
