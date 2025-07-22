@@ -120,4 +120,6 @@ object ModEntityTypes {
 				.build("temporary_floo_fireplace")
 		})
 
+	//TODO : Spirit entity
+
 }
