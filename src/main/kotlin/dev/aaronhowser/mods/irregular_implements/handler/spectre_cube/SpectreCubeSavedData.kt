@@ -21,8 +21,8 @@ class SpectreCubeSavedData : SavedData() {
 
 		for ((uuid, cube) in cubes) {
 			val cubeTag = CompoundTag()
-//			cube.save(cubeTag)
-			cubeTag.putUUID("uuid", uuid)
+			cubeTag.putUUID(UUID_NBT, uuid)
+			cubeTag.put(CUBE_NBT, cube.toTag(registries))
 			listTag.add(cubeTag)
 		}
 
@@ -34,15 +34,21 @@ class SpectreCubeSavedData : SavedData() {
 
 	companion object {
 		const val CUBES_NBT = "cubes"
+		const val CUBE_NBT = "cube"
+		const val UUID_NBT = "uuid"
 		const val POSITION_COUNTER_NBT = "position_counter"
 
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCubeSavedData {
 			val data = SpectreCubeSavedData()
 
 			val listTag = tag.getList(CUBES_NBT, Tag.TAG_COMPOUND.toInt())
+			for (i in listTag.indices) {
+				val cube = SpectreCube.fromTag(data, listTag.getCompound(i), provider)
+				val uuid = cube.owner
+				data.cubes[uuid] = cube
+			}
 
-			val positionCounter = tag.getInt(POSITION_COUNTER_NBT)
-			data.positionCounter = positionCounter
+			data.positionCounter = tag.getInt(POSITION_COUNTER_NBT)
 
 			return data
 		}
