@@ -1,11 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerListener
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.level.Level
@@ -15,7 +17,7 @@ import java.util.*
 
 class SpectreCube(
 	val handler: SpectreCubeSavedData
-) : ContainerListener {
+) {
 
 	var owner: UUID? = null
 	val guests: MutableList<UUID> = mutableListOf()
@@ -23,12 +25,7 @@ class SpectreCube(
 	var height = 2
 	var position = 0
 
-	private val cubeInventory = SimpleContainer(11)
 	private var spawnBlock: BlockPos = BlockPos(8, 0, 8)
-
-	init {
-		cubeInventory.addListener(this)
-	}
 
 	constructor(handler: SpectreCubeSavedData, owner: UUID, position: Int) : this(handler) {
 		this.owner = owner
