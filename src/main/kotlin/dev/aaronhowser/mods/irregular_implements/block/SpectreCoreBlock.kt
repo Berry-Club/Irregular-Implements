@@ -35,7 +35,7 @@ class SpectreCoreBlock : Block(Properties.ofFullCopy(Blocks.BEDROCK)) {
 			val cube = handler.getSpectreCubeFromBlockPos(level, pos)
 			val amount = cube?.increaseHeight(stack.count) ?: 0
 
-			stack.shrink(amount)
+			stack.consume(amount, player)
 		} else if (stack.isEmpty && hand == InteractionHand.MAIN_HAND) {
 			handler.teleportPlayerBack(player as ServerPlayer)
 		}
