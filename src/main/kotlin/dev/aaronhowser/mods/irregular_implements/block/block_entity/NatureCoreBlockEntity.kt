@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.StructureSchematics
+import dev.aaronhowser.mods.irregular_implements.world.feature.NatureCoreFeature
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
@@ -141,7 +143,21 @@ class NatureCoreBlockEntity(
 	}
 
 	private fun rebuild() {
+		val level = level as? ServerLevel ?: return
+		val biome = level.getBiome(blockPos)
 
+		val log = NatureCoreFeature.getLogFromBiome(biome)
+		val leaves = NatureCoreFeature.getLeavesFromBiome(biome)
+
+		val schematic = StructureSchematics.getNatureCore(log, leaves)
+
+		val (offset, state) = schematic.entries.randomOrNull() ?: return
+		if (offset == BlockPos.ZERO) return
+
+		val pos = blockPos.offset(offset)
+		if (level.isOutsideBuildHeight(pos) || !level.isEmptyBlock(pos)) return
+
+		level.setBlockAndUpdate(pos, state)
 	}
 
 }

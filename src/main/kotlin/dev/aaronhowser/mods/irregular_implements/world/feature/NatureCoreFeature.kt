@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.util.BlockSchematics
+import dev.aaronhowser.mods.irregular_implements.util.StructureSchematics
 import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.world.RandomizableContainer
@@ -32,7 +32,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 		val log = getLogFromBiome(biome)
 		val leaves = getLeavesFromBiome(biome)
 
-		val core = BlockSchematics.getNatureCore(log, leaves)
+		val core = StructureSchematics.getNatureCore(log, leaves)
 
 		for ((offset, state) in core) {
 			val pos = origin.offset(offset)
@@ -86,7 +86,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 	}
 
 	companion object {
-		private fun getLogFromBiome(biome: Holder<Biome>): BlockState {
+		fun getLogFromBiome(biome: Holder<Biome>): BlockState {
 			return when {
 				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LOG
 
@@ -105,7 +105,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 			}.defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y)
 		}
 
-		private fun getLeavesFromBiome(biome: Holder<Biome>): BlockState {
+		fun getLeavesFromBiome(biome: Holder<Biome>): BlockState {
 			return when {
 				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LEAVES
 

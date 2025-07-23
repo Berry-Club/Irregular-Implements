@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.state.BlockState
 
-object BlockSchematics {
+object StructureSchematics {
 
 	fun getNatureCore(log: BlockState, leaves: BlockState): Map<BlockPos, BlockState> {
 		val positionedBlocks = mutableMapOf<BlockPos, BlockState>()
