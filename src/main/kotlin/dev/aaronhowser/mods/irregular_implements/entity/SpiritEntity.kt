@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl
 import net.minecraft.world.entity.ai.goal.FloatGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 
 class SpiritEntity(
 	entityType: EntityType<out FlyingMob>,
@@ -37,6 +38,7 @@ class SpiritEntity(
 	override fun tick() {
 		super.tick()
 		ageAndDie()
+		spawnParticles()
 	}
 
 	private fun spawnParticles() {
@@ -60,6 +62,7 @@ class SpiritEntity(
 		super.aiStep()
 
 		if (spawnPosition == null) spawnPosition = blockPosition()
+		val spawnPos = spawnPosition ?: return
 
 		changePosCounter++
 
@@ -67,19 +70,20 @@ class SpiritEntity(
 			changePosCounter = 0
 
 			var tries = 0
-			var newTarget: BlockPos? = null
+			var newTarget: Vec3? = null
 
 			while (newTarget == null && tries < 10) {
 				tries++
 
-				val modX = this.random.nextInt(5) - 2
-				val modY = this.random.nextInt(3)
-				val modZ = this.random.nextInt(5) - 2
+				val modX = random.nextRange(-5.0, 5.0)
+				val modY = random.nextRange(-5.0, 5.0)
+				val modZ = random.nextRange(-5.0, 5.0)
 
-				val modPos = this.spawnPosition!!.offset(modX, modY, modZ)
+				val modVec = spawnPos.center.add(modX, modZ, modY)
+				val modPos = BlockPos.containing(modVec)
 
 				if (this.level().getBlockState(modPos).isAir) {
-					newTarget = modPos
+					newTarget = modVec
 				}
 			}
 
@@ -88,7 +92,7 @@ class SpiritEntity(
 					newTarget.x + 0.5,
 					newTarget.y + 0.5,
 					newTarget.z + 0.5,
-					0.02
+					1.0
 				)
 			}
 		}
@@ -97,7 +101,7 @@ class SpiritEntity(
 	private fun ageAndDie() {
 		age++
 		if (age > ServerConfig.SPIRIT_MAX_AGE.get()) {
-			kill()
+//			kill()
 		}
 	}
 
@@ -124,6 +128,7 @@ class SpiritEntity(
 		fun createAttributes(): AttributeSupplier {
 			return createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 1.0)
+				.add(Attributes.FLYING_SPEED, 1.0)
 				.build()
 		}
 	}
