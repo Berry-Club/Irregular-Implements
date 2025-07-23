@@ -104,6 +104,8 @@ object ModBlockEntities {
 		register("block_teleporter", ::BlockTeleporterBlockEntity, ModBlocks.BLOCK_TELEPORTER)
 	val BLOCK_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<BlockDetectorBlockEntity>> =
 		register("block_detector", ::BlockDetectorBlockEntity, ModBlocks.BLOCK_DETECTOR)
+	val NATURE_CORE: DeferredHolder<BlockEntityType<*>, BlockEntityType<NatureCoreBlockEntity>> =
+		register("nature_core", ::NatureCoreBlockEntity, ModBlocks.NATURE_CORE)
 
 	private fun <T : BlockEntity> register(
 		name: String,

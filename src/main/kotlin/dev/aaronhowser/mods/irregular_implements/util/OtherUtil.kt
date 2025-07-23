@@ -225,12 +225,7 @@ object OtherUtil {
 		)
 	}
 
-	fun RandomSource.nextRange(min: Float, max: Float): Float {
-		return Mth.lerp(nextFloat(), min, max)
-	}
-
-	fun RandomSource.nextRange(min: Double, max: Double): Double {
-		return Mth.lerp(nextDouble(), min, max)
-	}
+	fun RandomSource.nextRange(min: Float, max: Float): Float = Mth.lerp(nextFloat(), min, max)
+	fun RandomSource.nextRange(min: Double, max: Double): Double = Mth.lerp(nextDouble(), min, max)
 
 }
