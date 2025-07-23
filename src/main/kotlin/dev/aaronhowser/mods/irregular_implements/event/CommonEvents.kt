@@ -213,6 +213,12 @@ object CommonEvents {
 			PlayerInterfaceBlockEntity::getCapability
 		)
 
+		event.registerBlockEntity(
+			Capabilities.ItemHandler.BLOCK,
+			ModBlockEntities.IMBUING_STATION.get(),
+			ImbuingStationBlockEntity::getCapability
+		)
+
 		event.registerItem(
 			Capabilities.ItemHandler.ITEM,
 			RedstoneRemoteDataComponent::getCapability,

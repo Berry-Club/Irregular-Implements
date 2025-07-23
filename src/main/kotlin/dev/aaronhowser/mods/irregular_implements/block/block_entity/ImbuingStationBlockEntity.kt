@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingInput
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -18,6 +19,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.wrapper.InvWrapper
+import net.neoforged.neoforge.items.wrapper.RangedWrapper
 
 //TODO: Does automation work?
 class ImbuingStationBlockEntity(
@@ -42,6 +46,16 @@ class ImbuingStationBlockEntity(
 	// Machine stuff
 
 	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val invWrapper = InvWrapper(container)
+
+	fun getItemHandler(direction: Direction?): IItemHandler? {
+		return when (direction) {
+			Direction.UP -> RangedWrapper(invWrapper, CENTER_SLOT_INDEX, CENTER_SLOT_INDEX + 1)
+			Direction.DOWN, null -> RangedWrapper(invWrapper, OUTPUT_SLOT_INDEX, OUTPUT_SLOT_INDEX + 1)
+
+			else -> RangedWrapper(invWrapper, MIN_OUTER_INDEX, MAX_OUTER_INDEX + 1)
+		}
+	}
 
 	private var progress: Int = 0
 		set(value) {
@@ -136,6 +150,9 @@ class ImbuingStationBlockEntity(
 		const val CENTER_SLOT_INDEX = 3
 		const val OUTPUT_SLOT_INDEX = 4
 
+		val MIN_OUTER_INDEX = minOf(TOP_SLOT_INDEX, LEFT_SLOT_INDEX, BOTTOM_SLOT_INDEX)
+		val MAX_OUTER_INDEX = maxOf(TOP_SLOT_INDEX, LEFT_SLOT_INDEX, BOTTOM_SLOT_INDEX)
+
 		const val CRAFT_PROGRESS_NBT = "CraftProgress"
 		const val MAX_PROGRESS = 20 * 10
 
@@ -147,6 +164,11 @@ class ImbuingStationBlockEntity(
 		) {
 			blockEntity.tick()
 		}
+
+		fun getCapability(imbuingStation: ImbuingStationBlockEntity, direction: Direction?): IItemHandler? {
+			return imbuingStation.getItemHandler(direction)
+		}
+
 	}
 
 }
