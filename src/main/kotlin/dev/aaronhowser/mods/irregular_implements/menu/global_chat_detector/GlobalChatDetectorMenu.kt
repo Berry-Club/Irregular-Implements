@@ -53,7 +53,7 @@ class GlobalChatDetectorMenu(
 
 			val slot = object : Slot(globalChatDetectorContainer, containerSlotIndex, x, y) {
 				override fun mayPlace(stack: ItemStack): Boolean {
-					return stack.`is`(ModItems.ID_CARD) && stack.has(ModDataComponents.PLAYER)
+					return stack.`is`(ModItems.PLAYER_FILTER) && stack.has(ModDataComponents.PLAYER)
 				}
 			}
 

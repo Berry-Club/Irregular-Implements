@@ -1370,7 +1370,7 @@ class ModRecipeProvider(
 			)
 		),
 		shapelessRecipe(
-			ModItems.ID_CARD,
+			ModItems.PLAYER_FILTER,
 			listOf(
 				ing(Items.INK_SAC),
 				ing(Items.PAPER)

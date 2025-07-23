@@ -313,7 +313,7 @@ class ItemsCategoryProvider(
 				)
 
 				spotlightPage(
-					"Craft it with an ${item("ID Card", "id_card")}, and it will point to the player the ID Card is set to.",
+					"Craft it with a ${item("Player Filter", "player_filter")}, and it will point to the player the Player Filter is set to.",
 				)
 			}
 		}
@@ -809,14 +809,14 @@ class ItemsCategoryProvider(
 	private fun idCard() {
 		val entry = object : BaseEntryProvider(
 			realThis,
-			"ID Card",
-			ModItems.ID_CARD
+			"Player Filter",
+			ModItems.PLAYER_FILTER
 		) {
 			override fun generatePages() {
 				spotlightPage(
-					"ID Card",
+					"Player Filter",
 					paragraphs(
-						"${major("ID Cards")} can be used to ${minor("identify players")}.",
+						"${major("Player Filter")} can be used to ${minor("identify players")}.",
 						"Use it on a player to set it to them, or use it while not looking at a player to set it to you."
 					)
 				)

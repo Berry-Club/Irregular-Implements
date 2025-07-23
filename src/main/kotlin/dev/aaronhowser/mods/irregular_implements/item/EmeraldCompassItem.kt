@@ -19,7 +19,7 @@ import kotlin.math.atan2
 
 class EmeraldCompassItem(properties: Properties) : Item(properties) {
 
-	//TODO: Crafting recipe with ID Card
+	//TODO: Crafting recipe with Player Filter
 	override fun interactLivingEntity(
 		stack: ItemStack,
 		player: Player,

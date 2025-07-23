@@ -150,8 +150,8 @@ object ModItems {
 		register("item_filter", ::ItemFilterItem, ItemFilterItem.DEFAULT_PROPERTIES)
 	val ENTITY_FILTER: DeferredItem<EntityFilterItem> =
 		register("entity_filter", ::EntityFilterItem, EntityFilterItem.DEFAULT_PROPERTIES)
-	val ID_CARD: DeferredItem<PlayerFilterItem> =   //TODO: Rename to Player Filter?
-		register("id_card", ::PlayerFilterItem, PlayerFilterItem.DEFAULT_PROPERTIES)
+	val PLAYER_FILTER: DeferredItem<PlayerFilterItem> =   //TODO: Rename to Player Filter?
+		register("player_filter", ::PlayerFilterItem, PlayerFilterItem.DEFAULT_PROPERTIES)
 
 	// Imbues
 	val FIRE_IMBUE: DeferredItem<ImbueItem> =

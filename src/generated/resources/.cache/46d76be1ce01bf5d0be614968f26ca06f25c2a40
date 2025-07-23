@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-30T12:24:50.358902	Books: irregular_implements
+// 1.21.1	2025-07-23T15:05:49.4640403	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
@@ -33,10 +33,10 @@ cb26ca48ea34df04a8e0ebffdc5ed9eed670c487 data/irregular_implements/modonomicon/b
 f76e6add138a7014aa0adc85d7147f4cea7e9141 data/irregular_implements/modonomicon/books/guide/entries/items/escape_rope.json
 b53ff33440cadd87fdf65c67fd5b5b0419846e1d data/irregular_implements/modonomicon/books/guide/entries/items/evil_tear.json
 34aca3e35aec5def1dbbf7121b6feb236b5accfb data/irregular_implements/modonomicon/books/guide/entries/items/grass_seeds.json
-a9471ab080a50999d8939e698957dba6b4e5ec66 data/irregular_implements/modonomicon/books/guide/entries/items/id_card.json
 d63573f35bffe9dd8c03c4cbd5bbf551e2617480 data/irregular_implements/modonomicon/books/guide/entries/items/item_filter.json
 7fa22794a8c48baf35c06620337ee91c65d89ddc data/irregular_implements/modonomicon/books/guide/entries/items/location_filter.json
 ebe50a392b9bfb7cb75495cc449199e6a39bc971 data/irregular_implements/modonomicon/books/guide/entries/items/magic_hood.json
+a1be2975620759fa2c9fe82e9f62ea5624d72bce data/irregular_implements/modonomicon/books/guide/entries/items/player_filter.json
 ed607b8fe76ac564235aa5d3e331fd1152e0ab44 data/irregular_implements/modonomicon/books/guide/entries/items/portkey.json
 a532da05c140396e5c08b266d3074ff398545999 data/irregular_implements/modonomicon/books/guide/entries/items/spectre_anchor.json
 74186aaf8635e0d9a21eb63ed5b0ce45f6f1eb3e data/irregular_implements/modonomicon/books/guide/entries/items/spectre_chestplate.json

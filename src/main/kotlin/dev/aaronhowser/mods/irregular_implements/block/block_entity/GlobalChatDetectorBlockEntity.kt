@@ -73,7 +73,7 @@ class GlobalChatDetectorBlockEntity(
 			pulse()
 			if (this.stopsMessage) {
 				for (item in this.container.items) {
-					if (!item.`is`(ModItems.ID_CARD)) continue
+					if (!item.`is`(ModItems.PLAYER_FILTER)) continue
 
 					val playerUuid = item.get(ModDataComponents.PLAYER)?.uuid ?: continue
 					if (playerUuid == player.uuid) return true

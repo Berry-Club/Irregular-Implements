@@ -17,7 +17,7 @@ object ModItemLang {
 			addItem(ModItems.STABLE_ENDER_PEARL, "Stable Ender Pearl")
 			addItem(ModItems.BIOME_CRYSTAL, "Biome Crystal")
 			addItem(ModItems.LOCATION_FILTER, "Location Filter")
-			addItem(ModItems.ID_CARD, "ID Card")
+			addItem(ModItems.PLAYER_FILTER, "Player Filter")
 			addItem(ModItems.ENTITY_FILTER, "Entity Filter")
 			addItem(ModItems.SUMMONING_PENDULUM, "Summoning Pendulum")
 			addItem(ModItems.BEAN, "Bean")
