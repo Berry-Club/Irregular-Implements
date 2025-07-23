@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.attachment.DeathKeptItems
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModAttachmentTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -52,7 +53,7 @@ class SpectreAnchorItem(properties: Properties) : Item(properties) {
 
 			for (item in items) {
 				if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
-					//TODO: Tell the player that the item was returned, and that the anchor was consumed
+					player.sendSystemMessage(ModMessageLang.ANCHOR_USED.toComponent(item.displayName))
 					item.remove(ModDataComponents.IS_ANCHORED)
 				}
 

@@ -285,7 +285,6 @@ object ClientEvents {
 		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlameParticle::Provider)
 	}
 
-	//FIXME: Not working at all
 	@SubscribeEvent
 	fun registerDimensionSpecialEffects(event: RegisterDimensionSpecialEffectsEvent) {
 		event.register(

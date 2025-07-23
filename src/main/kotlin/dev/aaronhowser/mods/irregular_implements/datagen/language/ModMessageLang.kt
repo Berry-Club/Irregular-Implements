@@ -36,6 +36,7 @@ object ModMessageLang {
 	const val FIREPLACE_NO_LONGER_VALID = "message.irregular_implements.floo_brick.no_longer_valid"
 	const val FIREPLACE_TELEPORTED = "message.irregular_implements.floo_brick.teleported"
 	const val ESCAPE_ROPE_HANDLER_PROGRESS = "message.irregular_implements.escape_rope_handler.progress"
+	const val ANCHOR_USED = "message.irregular_implements.anchor.used"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -71,6 +72,7 @@ object ModMessageLang {
 			add(FIREPLACE_NO_LONGER_VALID, "The fireplace at %d %d %d is no longer valid.")
 			add(FIREPLACE_TELEPORTED, "Teleported to %s.")
 			add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %d blocks")
+			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed.")
 		}
 	}
 
