@@ -15,6 +15,8 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
+import net.minecraft.util.Mth
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
@@ -37,6 +39,7 @@ object OtherUtil {
 
 	@Suppress("UsePropertyAccessSyntax")
 	fun DyeColor.getDyeName(): String = this.getName()
+
 	@Suppress("UsePropertyAccessSyntax")
 	fun Direction.getDirectionName(): String = this.getName()
 
@@ -220,6 +223,14 @@ object OtherUtil {
 			this.getInt("y"),
 			this.getInt("z")
 		)
+	}
+
+	fun RandomSource.nextRange(min: Float, max: Float): Float {
+		return Mth.lerp(nextFloat(), min, max)
+	}
+
+	fun RandomSource.nextRange(min: Double, max: Double): Double {
+		return Mth.lerp(nextDouble(), min, max)
 	}
 
 }
