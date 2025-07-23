@@ -45,7 +45,7 @@ object ModDimensions {
 				256,
 				256,
 				BlockTags.INFINIBURN_OVERWORLD,
-				BuiltinDimensionTypes.OVERWORLD_EFFECTS,
+				SPECTRE_RL,
 				1f,
 				DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
 			)
