@@ -33,7 +33,7 @@ neoForge {
 			logLevel = org.slf4j.event.Level.DEBUG
 		}
 
-		client {
+		"Client-One" {
 			client()
 			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
 
@@ -44,7 +44,7 @@ neoForge {
 			gameDirectory = file 'runs/client'
 		}
 
-		clientTwo {
+		"Client-Two" {
 			client()
 			systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
 
