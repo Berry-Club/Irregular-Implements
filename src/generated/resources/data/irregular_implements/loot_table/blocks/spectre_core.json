@@ -1,4 +1,4 @@
 {
-  "type": "minecraft:block",
-  "random_sequence": "irregular_implements:blocks/spectre_core"
+	"type": "minecraft:block",
+	"random_sequence": "irregular_implements:blocks/spectre_core"
 }

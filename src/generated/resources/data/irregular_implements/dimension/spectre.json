@@ -1,12 +1,12 @@
 {
-  "type": "irregular_implements:spectre",
-  "generator": {
-    "type": "minecraft:flat",
-    "settings": {
-      "biome": "irregular_implements:spectral",
-      "features": false,
-      "lakes": false,
-      "layers": []
-    }
-  }
+	"type": "irregular_implements:spectre",
+	"generator": {
+		"type": "minecraft:flat",
+		"settings": {
+			"biome": "irregular_implements:spectral",
+			"features": false,
+			"lakes": false,
+			"layers": []
+		}
+	}
 }
