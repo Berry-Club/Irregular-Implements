@@ -28,10 +28,14 @@ class SpiritEntityRenderer(
 	}
 
 	override fun render(entity: SpiritEntity, entityYaw: Float, partialTicks: Float, poseStack: PoseStack, buffer: MultiBufferSource, packedLight: Int) {
+		poseStack.pushPose()
+
 		val scale = 0.5f
 		poseStack.scale(scale, scale, scale)
 
 		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
+
+		poseStack.popPose()
 	}
 
 	override fun getBlockLightLevel(entity: SpiritEntity, pos: BlockPos): Int = 15
