@@ -216,6 +216,7 @@ object ClientEvents {
 		event.registerEntityRenderer(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), ::ArtificialEndPortalRenderer)
 		event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), ::GoldenChickenRenderer)
 		event.registerEntityRenderer(ModEntityTypes.WEATHER_CLOUD.get(), ::WeatherCloudRenderer)
+		event.registerEntityRenderer(ModEntityTypes.SPIRIT.get(), ::SpiritEntityRenderer)
 	}
 
 	@SubscribeEvent

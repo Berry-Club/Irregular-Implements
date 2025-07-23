@@ -1,13 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.FlyingMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.FlyingMoveControl
 import net.minecraft.world.level.Level
 
 class SpiritEntity(
@@ -16,8 +16,10 @@ class SpiritEntity(
 ) : FlyingMob(entityType, level) {
 
 	var age: Int = 0
-	var changePositionCounter: Int = 0
-	var spawnPosition: BlockPos = this.blockPosition()
+
+	init {
+		moveControl = FlyingMoveControl(this, 20, true)
+	}
 
 	override fun tick() {
 		super.tick()

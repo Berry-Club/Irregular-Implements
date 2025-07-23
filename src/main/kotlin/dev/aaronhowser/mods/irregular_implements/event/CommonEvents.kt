@@ -10,6 +10,7 @@ import dev.aaronhowser.mods.irregular_implements.command.ModCommands
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
 import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
+import dev.aaronhowser.mods.irregular_implements.entity.SpiritEntity
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
@@ -240,6 +241,7 @@ object CommonEvents {
 	@SubscribeEvent
 	fun entityAttributeEvent(event: EntityAttributeCreationEvent) {
 		event.put(ModEntityTypes.GOLDEN_CHICKEN.get(), GoldenChickenEntity.createAttributes())
+		event.put(ModEntityTypes.SPIRIT.get(), SpiritEntity.createAttributes())
 	}
 
 	@SubscribeEvent
