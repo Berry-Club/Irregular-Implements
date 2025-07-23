@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.world.feature
 
+import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -44,12 +45,14 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 		val chestPlaceRadius = 7
 		var chestTries = 0
 
+		var chestPos = positionAbove
+
 		chestLoop@
 		while (chestTries < chestPlaceRadius * chestPlaceRadius) {
 			val dX = random.nextInt(chestPlaceRadius * 2) - chestPlaceRadius
 			val dZ = random.nextInt(chestPlaceRadius * 2) - chestPlaceRadius
 
-			var chestPos = positionAbove.offset(dX, 0, dZ)
+			chestPos = positionAbove.offset(dX, 0, dZ)
 
 			while (!level.isOutsideBuildHeight(chestPos) && level.isEmptyBlock(chestPos)) {
 				chestPos = chestPos.below()
@@ -76,6 +79,8 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 			RandomizableContainer.setBlockEntityLootTable(level, random, chestPos, ModChestLootSubprovider.NATURE_CORE)
 			break
 		}
+
+		IrregularImplements.LOGGER.debug("Placed Nature Core at $origin, with its chest at $chestPos")
 
 		return true
 	}
