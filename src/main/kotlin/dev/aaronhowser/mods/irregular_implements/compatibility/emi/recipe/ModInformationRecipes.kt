@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModInfoLang
@@ -35,7 +34,7 @@ object ModInformationRecipes {
 			for (itemLike: ItemLike in items) {
 				val item = itemLike.asItem()
 
-				val infoString = ModInfoLang .getInfoString(item)
+				val infoString = ModInfoLang.getInfoString(item)
 
 				if (!I18n.exists(infoString)) {
 					IrregularImplements.LOGGER.debug("No info string for item: $infoString")

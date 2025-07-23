@@ -130,7 +130,7 @@ object ModTooltipLang {
 			add(ENDER_LETTER_TO, "To: %s")
 			add(ENDER_LETTER_FROM, "From: %s")
 			add(INVENTORY_TESTER_INVERTED, "Inverted")
-			add(INVENTORY_TESTER_UNINVERTED, "Uninverted")	
+			add(INVENTORY_TESTER_UNINVERTED, "Uninverted")
 		}
 	}
 
