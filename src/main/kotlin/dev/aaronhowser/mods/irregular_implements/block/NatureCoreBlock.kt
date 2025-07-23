@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
-class NatureCoreBlock : Block(Properties.ofFullCopy(Blocks.OAK_LOG)), EntityBlock {
+class NatureCoreBlock : Block(Properties.ofFullCopy(Blocks.OAK_WOOD)), EntityBlock {
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
 		return NatureCoreBlockEntity(pos, state)
