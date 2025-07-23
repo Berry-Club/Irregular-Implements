@@ -91,10 +91,15 @@ class SpectreCube(
 		handler.setDirty()
 	}
 
-	fun getOriginX(): Int = (cubeIndex * 16 * 16)
-	fun getOriginPos(): BlockPos = BlockPos(getOriginX(), 0, 0)
+	fun getOriginPos(): BlockPos = getCubeOriginPos(cubeIndex)
 
 	companion object {
+
+		fun getCubeOriginPos(cubeIndex: Int): BlockPos {
+			val x = cubeIndex * 16 * 16
+			return BlockPos(x, 0, 0)
+		}
+
 		const val OWNER_NBT = "owner"
 		const val GUESTS_NBT = "guests"
 		const val UUID_NBT = "uuid"

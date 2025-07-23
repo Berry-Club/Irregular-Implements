@@ -84,7 +84,7 @@ class SpectreCubeSavedData : SavedData() {
 		for (cube in cubes.values) {
 			if (cube.cubeIndex != cubeIndex) continue
 
-			val cubeOriginX = cube.getOriginX()
+			val cubeOriginX = cube.getOriginPos().x
 
 			if (pos.y < 0
 				|| pos.y > cube.interiorHeight + 1
