@@ -117,9 +117,9 @@ class ChatDetectorScreen(
 		}
 	}
 
-	override fun receivedString(stringId: Int, string: String) {
+	override fun receivedString(stringId: Int, stringReceived: String) {
 		if (stringId == ChatDetectorMenu.REGEX_STRING_ID) {
-			this.regexStringEditBox.value = string
+			this.regexStringEditBox.value = stringReceived
 		}
 	}
 

@@ -71,10 +71,10 @@ class NotificationInterfaceScreen(
 
 	override var showInventoryLabel: Boolean = false
 
-	override fun receivedString(stringId: Int, string: String) {
+	override fun receivedString(stringId: Int, stringReceived: String) {
 		when (stringId) {
-			NotificationInterfaceMenu.TITLE_STRING_ID -> this.titleEditBox.value = string
-			NotificationInterfaceMenu.DESCRIPTION_STRING_ID -> this.descriptionEditBox.value = string
+			NotificationInterfaceMenu.TITLE_STRING_ID -> this.titleEditBox.value = stringReceived
+			NotificationInterfaceMenu.DESCRIPTION_STRING_ID -> this.descriptionEditBox.value = stringReceived
 		}
 	}
 }

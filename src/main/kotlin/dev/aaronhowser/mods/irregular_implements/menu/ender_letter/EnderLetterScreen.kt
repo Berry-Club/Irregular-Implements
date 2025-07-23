@@ -73,9 +73,9 @@ class EnderLetterScreen(
 		recipientEditBox.value = currentRegexString
 	}
 
-	override fun receivedString(stringId: Int, string: String) {
+	override fun receivedString(stringId: Int, stringReceived: String) {
 		when (stringId) {
-			EnderLetterMenu.RECIPIENT_STRING_ID -> recipientEditBox.value = string
+			EnderLetterMenu.RECIPIENT_STRING_ID -> recipientEditBox.value = stringReceived
 		}
 	}
 

@@ -21,8 +21,8 @@ class OnlineDetectorMenu(
 				ContainerLevelAccess.NULL
 			)
 
-	override fun receiveString(stringId: Int, string: String) {
-		if (stringId == USERNAME_STRING_ID) setUsername(string)
+	override fun receiveString(stringId: Int, stringReceived: String) {
+		if (stringId == USERNAME_STRING_ID) setUsername(stringReceived)
 	}
 
 	private var currentUsername: String = ""

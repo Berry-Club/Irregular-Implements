@@ -96,7 +96,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			}
 		}
 
-		val originalStateSoundType = clickedState.soundType
+		val originalStateSoundType = clickedState.getSoundType(level, clickedPos, player)
 		level.playSound(
 			null,
 			clickedPos,

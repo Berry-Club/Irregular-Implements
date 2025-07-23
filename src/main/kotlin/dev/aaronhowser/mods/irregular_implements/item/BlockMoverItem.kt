@@ -103,7 +103,7 @@ class BlockMoverItem(properties: Properties) : Item(properties) {
 			level.setBlockAndUpdate(clickedPos, Blocks.AIR.defaultBlockState())
 			this.blockMoverPreventingContainerDrops = false
 
-			val soundType = clickedState.soundType
+			val soundType = clickedState.getSoundType(level, clickedPos, player)
 			level.playSound(
 				null,
 				clickedPos,

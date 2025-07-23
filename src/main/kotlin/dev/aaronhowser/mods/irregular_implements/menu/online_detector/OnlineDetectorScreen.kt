@@ -73,9 +73,9 @@ class OnlineDetectorScreen(
 		}
 	}
 
-	override fun receivedString(stringId: Int, regexString: String) {
+	override fun receivedString(stringId: Int, stringReceived: String) {
 		if (stringId == OnlineDetectorMenu.USERNAME_STRING_ID) {
-			this.usernameEditBox.value = regexString
+			this.usernameEditBox.value = stringReceived
 		}
 	}
 

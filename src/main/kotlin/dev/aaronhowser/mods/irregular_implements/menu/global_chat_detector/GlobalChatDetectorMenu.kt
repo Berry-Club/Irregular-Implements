@@ -71,8 +71,8 @@ class GlobalChatDetectorMenu(
 		}
 	}
 
-	override fun receiveString(stringId: Int, string: String) {
-		if (stringId == REGEX_STRING_ID) setRegex(string)
+	override fun receiveString(stringId: Int, stringReceived: String) {
+		if (stringId == REGEX_STRING_ID) setRegex(stringReceived)
 	}
 
 	private var currentRegexString: String = ""

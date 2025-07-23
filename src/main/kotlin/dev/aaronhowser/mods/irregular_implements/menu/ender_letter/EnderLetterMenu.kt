@@ -75,9 +75,9 @@ class EnderLetterMenu(
 
 	private var recipientName: String = ""
 
-	override fun receiveString(stringId: Int, string: String) {
+	override fun receiveString(stringId: Int, stringReceived: String) {
 		when (stringId) {
-			RECIPIENT_STRING_ID -> setNewRecipient(string)
+			RECIPIENT_STRING_ID -> setNewRecipient(stringReceived)
 		}
 	}
 

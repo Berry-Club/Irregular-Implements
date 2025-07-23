@@ -112,9 +112,9 @@ class GlobalChatDetectorScreen(
 		}
 	}
 
-	override fun receivedString(stringId: Int, regexString: String) {
+	override fun receivedString(stringId: Int, stringReceived: String) {
 		if (stringId == GlobalChatDetectorMenu.REGEX_STRING_ID) {
-			this.regexStringEditBox.value = regexString
+			this.regexStringEditBox.value = stringReceived
 		}
 	}
 

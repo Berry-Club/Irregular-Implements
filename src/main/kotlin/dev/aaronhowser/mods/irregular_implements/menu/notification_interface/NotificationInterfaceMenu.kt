@@ -46,10 +46,10 @@ class NotificationInterfaceMenu(
 		return stillValid(containerLevelAccess, player, ModBlocks.NOTIFICATION_INTERFACE.get())
 	}
 
-	override fun receiveString(stringId: Int, string: String) {
+	override fun receiveString(stringId: Int, stringReceived: String) {
 		when (stringId) {
-			TITLE_STRING_ID -> setTitle(string)
-			DESCRIPTION_STRING_ID -> setDescription(string)
+			TITLE_STRING_ID -> setTitle(stringReceived)
+			DESCRIPTION_STRING_ID -> setDescription(stringReceived)
 		}
 	}
 

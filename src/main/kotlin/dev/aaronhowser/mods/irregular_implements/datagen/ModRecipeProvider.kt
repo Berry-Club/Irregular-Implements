@@ -124,8 +124,6 @@ class ModRecipeProvider(
 				is IngredientType.TagKeyIng -> temp.define(definition.key, ing.getIngredient())
 				is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.getIngredient())
 				is IngredientType.ItemStackIng -> temp.define(definition.key, ing.getIngredient())
-
-				else -> error("Unknown ingredient type")
 			}
 		}
 
@@ -151,8 +149,6 @@ class ModRecipeProvider(
 				is IngredientType.TagKeyIng -> temp.define(definition.key, ing.getIngredient())
 				is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.getIngredient())
 				is IngredientType.ItemStackIng -> temp.define(definition.key, ing.getIngredient())
-
-				else -> error("Unknown ingredient type")
 			}
 		}
 
@@ -349,7 +345,7 @@ class ModRecipeProvider(
 			ModBlocks.SUPER_LUBRICANT_ICE,
 			"S,I,B",
 			mapOf(
-				'S' to ing(Tags.Items.SLIMEBALLS),
+				'S' to ing(Tags.Items.SLIME_BALLS),
 				'I' to ing(Items.ICE),
 				'B' to ing(Items.WATER_BUCKET)
 			)
@@ -410,7 +406,7 @@ class ModRecipeProvider(
 			ModBlocks.SLIME_CUBE,
 			" S ,SWS, S ",
 			mapOf(
-				'S' to ing(Tags.Items.SLIMEBALLS),
+				'S' to ing(Tags.Items.SLIME_BALLS),
 				'W' to ing(Items.NETHER_STAR)
 			)
 		),
@@ -755,7 +751,7 @@ class ModRecipeProvider(
 			"B B, S ,B B",
 			mapOf(
 				'B' to ing(ModItems.PLATE_BASE),
-				'S' to ing(Tags.Items.SLIMEBALLS)
+				'S' to ing(Tags.Items.SLIME_BALLS)
 			)
 		),
 		shapedRecipe(
