@@ -403,7 +403,10 @@ class ModBlockTagsProvider(
 				ModBlocks.STRIPPED_SPECTRE_LOG.get(),
 				ModBlocks.BEAN_STALK.get(),
 				ModBlocks.LESSER_BEAN_STALK.get(),
-				ModBlocks.CUSTOM_CRAFTING_TABLE.get()
+				ModBlocks.CUSTOM_CRAFTING_TABLE.get(),
+				ModBlocks.NATURE_CORE.get(),
+				ModBlocks.NATURE_CHEST.get(),
+				ModBlocks.WATER_CHEST.get()
 			)
 
 		this.tag(BlockTags.MINEABLE_WITH_HOE)
@@ -425,6 +428,65 @@ class ModBlockTagsProvider(
 
 		this.tag(NATURE_CORE_POSSIBLE_SAPLINGS)
 			.addTag(BlockTags.SAPLINGS)
+
+		this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
+			.add(
+				ModBlocks.PLAYER_INTERFACE.get(),
+				ModBlocks.ENDER_ANCHOR.get(),
+				ModBlocks.BLOCK_DESTABILIZER.get(),
+				ModBlocks.SPECTRE_ENERGY_INJECTOR.get(),
+				ModBlocks.SPECTRE_COIL_BASIC.get(),
+				ModBlocks.SPECTRE_COIL_NUMBER.get(),
+				ModBlocks.SPECTRE_COIL_GENESIS.get(),
+				ModBlocks.SPECTRE_COIL_ENDER.get(),
+				ModBlocks.SPECTRE_COIL_REDSTONE.get(),
+				ModBlocks.ITEM_COLLECTOR.get(),
+				ModBlocks.ADVANCED_ITEM_COLLECTOR.get(),
+				ModBlocks.ADVANCED_REDSTONE_INTERFACE.get(),
+				ModBlocks.NATURE_CORE.get(),
+				ModBlocks.BLOCK_TELEPORTER.get()
+			)
+
+		this.tag(BlockTags.NEEDS_IRON_TOOL)
+			.add(
+				ModBlocks.IMBUING_STATION.get(),
+				ModBlocks.ENDER_MAILBOX.get(),
+				ModBlocks.SLIME_CUBE.get(),
+				ModBlocks.PEACE_CANDLE.get(),
+				ModBlocks.SIDED_BLOCK_OF_REDSTONE.get(),
+				ModBlocks.ENDER_BRIDGE.get(),
+				ModBlocks.PRISMARINE_ENDER_BRIDGE.get(),
+				ModBlocks.ENERGY_DISTRIBUTOR.get(),
+				ModBlocks.ENDER_ENERGY_DISTRIBUTOR.get(),
+				ModBlocks.BASIC_REDSTONE_INTERFACE.get(),
+				ModBlocks.ADVANCED_REDSTONE_INTERFACE.get()
+			)
+
+		this.tag(BlockTags.NEEDS_STONE_TOOL)
+			.add(
+				ModBlocks.FLUID_DISPLAY.get(),
+				ModBlocks.POTION_VAPORIZER.get(),
+				ModBlocks.RAIN_SHIELD.get(),
+				ModBlocks.BIOME_RADAR.get(),
+				ModBlocks.INVENTORY_REROUTER.get(),
+				ModBlocks.ANALOG_EMITTER.get(),
+				ModBlocks.CONTACT_LEVER.get(),
+				ModBlocks.CONTACT_BUTTON.get(),
+				ModBlocks.IRON_DROPPER.get(),
+				ModBlocks.IGNITER.get(),
+				ModBlocks.INVENTORY_TESTER.get(),
+				ModBlocks.BLOCK_BREAKER.get(),
+				ModBlocks.REDSTONE_OBSERVER.get(),
+				ModBlocks.SHOCK_ABSORBER.get(),
+				ModBlocks.AUTO_PLACER.get(),
+				ModBlocks.BLOCK_DETECTOR.get(),
+				ModBlocks.MOON_PHASE_DETECTOR.get(),
+				ModBlocks.ONLINE_DETECTOR.get(),
+				ModBlocks.ENTITY_DETECTOR.get(),
+				ModBlocks.CHAT_DETECTOR.get(),
+				ModBlocks.GLOBAL_CHAT_DETECTOR.get(),
+				ModBlocks.NOTIFICATION_INTERFACE.get()
+			)
 
 	}
 

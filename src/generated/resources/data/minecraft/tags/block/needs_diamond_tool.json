@@ -1,0 +1,18 @@
+{
+  "values": [
+    "irregular_implements:player_interface",
+    "irregular_implements:ender_anchor",
+    "irregular_implements:block_destabilizer",
+    "irregular_implements:spectre_energy_injector",
+    "irregular_implements:spectre_coil_basic",
+    "irregular_implements:spectre_coil_number",
+    "irregular_implements:spectre_coil_genesis",
+    "irregular_implements:spectre_coil_ender",
+    "irregular_implements:spectre_coil_redstone",
+    "irregular_implements:item_collector",
+    "irregular_implements:advanced_item_collector",
+    "irregular_implements:advanced_redstone_interface",
+    "irregular_implements:nature_core",
+    "irregular_implements:block_teleporter"
+  ]
+}

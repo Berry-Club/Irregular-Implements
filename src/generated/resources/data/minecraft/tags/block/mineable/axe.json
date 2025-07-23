@@ -1,23 +1,26 @@
 {
-	"values": [
-		"irregular_implements:block_of_sticks",
-		"irregular_implements:returning_block_of_sticks",
-		"irregular_implements:oak_platform",
-		"irregular_implements:spruce_platform",
-		"irregular_implements:birch_platform",
-		"irregular_implements:jungle_platform",
-		"irregular_implements:acacia_platform",
-		"irregular_implements:dark_oak_platform",
-		"irregular_implements:crimson_platform",
-		"irregular_implements:warped_platform",
-		"irregular_implements:mangrove_platform",
-		"irregular_implements:bamboo_platform",
-		"irregular_implements:cherry_platform",
-		"irregular_implements:spectre_planks",
-		"irregular_implements:spectre_log",
-		"irregular_implements:stripped_spectre_log",
-		"irregular_implements:bean_stalk",
-		"irregular_implements:lesser_bean_stalk",
-		"irregular_implements:custom_crafting_table"
-	]
+  "values": [
+    "irregular_implements:block_of_sticks",
+    "irregular_implements:returning_block_of_sticks",
+    "irregular_implements:oak_platform",
+    "irregular_implements:spruce_platform",
+    "irregular_implements:birch_platform",
+    "irregular_implements:jungle_platform",
+    "irregular_implements:acacia_platform",
+    "irregular_implements:dark_oak_platform",
+    "irregular_implements:crimson_platform",
+    "irregular_implements:warped_platform",
+    "irregular_implements:mangrove_platform",
+    "irregular_implements:bamboo_platform",
+    "irregular_implements:cherry_platform",
+    "irregular_implements:spectre_planks",
+    "irregular_implements:spectre_log",
+    "irregular_implements:stripped_spectre_log",
+    "irregular_implements:bean_stalk",
+    "irregular_implements:lesser_bean_stalk",
+    "irregular_implements:custom_crafting_table",
+    "irregular_implements:nature_core",
+    "irregular_implements:nature_chest",
+    "irregular_implements:water_chest"
+  ]
 }

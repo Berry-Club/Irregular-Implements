@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-23T15:55:41.5740562	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-07-23T16:45:16.4034798	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -37,10 +37,13 @@ ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.jso
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/dirt.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/leaves.json
 465e1934ba824f9215eb64e28f2b86d64294e60e data/minecraft/tags/block/logs_that_burn.json
-31b72a43b0a93dd393227b36d4680168e0045364 data/minecraft/tags/block/mineable/axe.json
+f7e8f3838b1e97bc8e5fae5445f9278a26559dc2 data/minecraft/tags/block/mineable/axe.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/mineable/hoe.json
 f9ecaf3bb29a0382622eb0fe05d92762a20f9178 data/minecraft/tags/block/mineable/pickaxe.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/mineable/shovel.json
+300f3007b1ad8c5535880094beed109d00eb4d7d data/minecraft/tags/block/needs_diamond_tool.json
+d9329c933b78c8093b30537332647e8ad9029958 data/minecraft/tags/block/needs_iron_tool.json
+a12ea004970ce7fc9e844db120157e3b3eca0511 data/minecraft/tags/block/needs_stone_tool.json
 3cde7ba1eb112818696cfbdefc6948bcbf28c3c2 data/minecraft/tags/block/planks.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/replaceable_by_trees.json
 1702363b5a549dbe0f12831bf2a31d73c12c04fc data/minecraft/tags/block/saplings.json

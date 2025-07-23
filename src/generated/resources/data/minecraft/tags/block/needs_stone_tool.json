@@ -1,0 +1,26 @@
+{
+  "values": [
+    "irregular_implements:fluid_display",
+    "irregular_implements:potion_vaporizer",
+    "irregular_implements:rain_shield",
+    "irregular_implements:biome_radar",
+    "irregular_implements:inventory_rerouter",
+    "irregular_implements:analog_emitter",
+    "irregular_implements:contact_lever",
+    "irregular_implements:contact_button",
+    "irregular_implements:iron_dropper",
+    "irregular_implements:igniter",
+    "irregular_implements:inventory_tester",
+    "irregular_implements:block_breaker",
+    "irregular_implements:redstone_observer",
+    "irregular_implements:shock_absorber",
+    "irregular_implements:auto_placer",
+    "irregular_implements:block_detector",
+    "irregular_implements:moon_phase_detector",
+    "irregular_implements:online_detector",
+    "irregular_implements:entity_detector",
+    "irregular_implements:chat_detector",
+    "irregular_implements:global_chat_detector",
+    "irregular_implements:notification_interface"
+  ]
+}
