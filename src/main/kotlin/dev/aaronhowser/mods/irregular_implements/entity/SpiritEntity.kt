@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 
+//TODO: They only move a little bit and then stop
 class SpiritEntity(
 	entityType: EntityType<out FlyingMob>,
 	level: Level
