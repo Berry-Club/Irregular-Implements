@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.*
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getDyeName
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
@@ -273,7 +274,7 @@ object ModBlocks {
 	val COLORED_GRASS_BLACK: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.BLACK)
 
 	private fun coloredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock> =
-		registerBlock("colored_grass_${dyeColor.getName()}") {
+		registerBlock("colored_grass_${dyeColor.getDyeName()}") {
 			GrassBlock(Properties.ofFullCopy(Blocks.GRASS_BLOCK).mapColor(dyeColor))
 		}
 

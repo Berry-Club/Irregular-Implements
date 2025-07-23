@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -33,6 +34,11 @@ import net.minecraft.world.phys.Vec3
 import java.util.*
 
 object OtherUtil {
+
+	@Suppress("UsePropertyAccessSyntax")
+	fun DyeColor.getDyeName(): String = this.getName()
+	@Suppress("UsePropertyAccessSyntax")
+	fun Direction.getDirectionName(): String = this.getName()
 
 	@JvmStatic
 	fun modResource(path: String): ResourceLocation =

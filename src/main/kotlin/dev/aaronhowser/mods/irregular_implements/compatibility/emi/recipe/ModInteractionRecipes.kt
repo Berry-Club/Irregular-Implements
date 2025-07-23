@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getDyeName
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
@@ -34,8 +35,7 @@ object ModInteractionRecipes {
 		return seeds.map { deferred ->
 			val seedItem = deferred.get()
 
-			@Suppress("UsePropertyAccessSyntax")
-			val colorString = seedItem.dyeColor?.getName()
+			val colorString = seedItem.dyeColor?.getDyeName()
 
 			val id = if (colorString == null) {
 				OtherUtil.modResource("/interaction/grass")

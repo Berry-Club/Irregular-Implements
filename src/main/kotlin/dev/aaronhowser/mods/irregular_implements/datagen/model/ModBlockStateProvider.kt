@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.block.plate.RedirectorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getDirectionName
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
@@ -148,7 +149,7 @@ class ModBlockStateProvider(
 			val z2 = shape.max(Direction.Axis.Z).toFloat() * 16f
 
 			val blockModel = models()
-				.withExistingParent(name(block) + "_" + direction.getName(), "block/block")
+				.withExistingParent(name(block) + "_" + direction.getDirectionName(), "block/block")
 				.renderType(RenderType.cutout().name)
 				.texture("texture", texture)
 				.texture("particle", texture)
@@ -1372,7 +1373,7 @@ class ModBlockStateProvider(
 		getVariantBuilder(block)
 			.forAllStates {
 				val facing = it.getValue(DirectionalBlock.FACING)
-				val modelName = name(block) + "_" + facing.getName().lowercase()
+				val modelName = name(block) + "_" + facing.getDirectionName().lowercase()
 
 				val xRotation = when (facing) {
 					Direction.UP -> 270
