@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.event
 import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.CustomCraftingTableBlockEntityRenderer
@@ -20,7 +21,6 @@ import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.particle.FlameParticle
 import net.minecraft.client.renderer.BiomeColors
-import net.minecraft.client.renderer.DimensionSpecialEffects
 import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
@@ -33,7 +33,6 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.GrassColor
-import net.minecraft.world.phys.Vec3
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -290,16 +289,7 @@ object ClientEvents {
 	fun registerDimensionSpecialEffects(event: RegisterDimensionSpecialEffectsEvent) {
 		event.register(
 			ModDimensions.SPECTRE_RL,
-			object : DimensionSpecialEffects(
-				Float.NaN,
-				false,
-				SkyType.NONE,
-				true,
-				true
-			) {
-				override fun getBrightnessDependentFogColor(fogColor: Vec3, brightness: Float): Vec3 = fogColor.scale(0.15)
-				override fun isFoggyAt(x: Int, y: Int): Boolean = true
-			}
+			SpectreSpecialEffects()
 		)
 	}
 
