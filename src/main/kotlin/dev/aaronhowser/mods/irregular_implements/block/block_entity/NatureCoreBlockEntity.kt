@@ -1,18 +1,25 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.BlockTags
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
+import net.minecraft.world.level.block.LevelEvent
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 import kotlin.jvm.optionals.getOrNull
+import kotlin.math.cos
 
 class NatureCoreBlockEntity(
 	pos: BlockPos,
@@ -99,7 +106,38 @@ class NatureCoreBlockEntity(
 	}
 
 	private fun growTrees() {
+		val level = level as? ServerLevel ?: return
 
+		val radius = level.random.nextInt(20) + 10
+		val rads = level.random.nextDouble() * Mth.TWO_PI
+
+		val x = Mth.floor(blockPos.x + radius * cos(rads))
+		val z = Mth.floor(blockPos.z + radius * cos(rads))
+		val y = blockPos.y + 10
+
+		val pos = BlockPos(x, y, z).mutable()
+
+		do {
+			pos.move(Direction.DOWN)
+		} while (level.isInWorldBounds(pos) && level.isEmptyBlock(pos))
+
+		pos.move(Direction.UP)
+
+
+		val saplings = BuiltInRegistries.BLOCK
+			.filter { it.defaultBlockState().`is`(ModBlockTagsProvider.NATURE_CORE_POSSIBLE_SAPLINGS) }
+
+		val randomSapling = saplings.randomOrNull()?.defaultBlockState() ?: return
+
+		if (randomSapling.canSurvive(level, pos)) {
+			level.levelEvent(
+				null,
+				LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH,
+				pos,
+				Block.getId(randomSapling)
+			)
+			level.setBlockAndUpdate(pos, randomSapling)
+		}
 	}
 
 	private fun rebuild() {

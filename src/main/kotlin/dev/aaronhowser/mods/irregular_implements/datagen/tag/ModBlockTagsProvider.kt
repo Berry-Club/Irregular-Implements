@@ -423,6 +423,9 @@ class ModBlockTagsProvider(
 				Blocks.END_PORTAL_FRAME,
 			)
 
+		this.tag(NATURE_CORE_POSSIBLE_SAPLINGS)
+			.addTag(BlockTags.SAPLINGS)
+
 	}
 
 	private fun colorTags() {
@@ -478,6 +481,7 @@ class ModBlockTagsProvider(
 		val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
 		val CONVERTS_TO_FLOO_BRICK = create("converts_to_floo_brick")
 		val EXCLUDED_FROM_BLOCK_TELEPORTER = create("excluded_from_block_teleporter")
+		val NATURE_CORE_POSSIBLE_SAPLINGS = create("nature_core_possible_saplings")
 	}
 
 }
