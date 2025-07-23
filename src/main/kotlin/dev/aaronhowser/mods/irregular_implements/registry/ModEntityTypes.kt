@@ -110,6 +110,14 @@ object ModEntityTypes {
 			setShouldReceiveVelocityUpdates(false)
 		}
 
+	val SPIRIT =
+		registerEntityType(
+			"spirit",
+			MobCategory.MISC,
+			0.25f, 0.25f,
+			::SpiritEntity
+		)
+
 	fun <T : Entity> registerEntityType(
 		name: String,
 		category: MobCategory,
