@@ -119,6 +119,10 @@ class ServerConfig(
 			.comment("What is the chance that the Spectre Imbue will cancel incoming damage?")
 			.defineInRange("imbueProcChance", 0.1, 0.0, 1.0)
 
+		SPIRIT_MAX_AGE = builder
+			.comment("How long should a Spirit last before it despawns? (in ticks)")
+			.defineInRange("spiritMaxAge", 20 * 20, 1, Int.MAX_VALUE)
+
 		builder.pop()
 	}
 
@@ -162,6 +166,8 @@ class ServerConfig(
 		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
 
 		lateinit var BLOCK_TELEPORTER_CROSS_DIMENSION: ModConfigSpec.BooleanValue
+
+		lateinit var SPIRIT_MAX_AGE: ModConfigSpec.IntValue
 	}
 
 }

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.entity.EntityType
@@ -21,7 +22,7 @@ class SpiritEntity(
 		super.tick()
 
 		age++
-		if (age > MAX_AGE) {
+		if (age > ServerConfig.SPIRIT_MAX_AGE.get()) {
 			kill()
 		}
 	}
