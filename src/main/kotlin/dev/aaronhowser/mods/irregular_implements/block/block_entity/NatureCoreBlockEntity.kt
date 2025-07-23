@@ -8,6 +8,7 @@ import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
@@ -79,7 +80,22 @@ class NatureCoreBlockEntity(
 	}
 
 	private fun boneMealCrops() {
+		val level = level as? ServerLevel ?: return
 
+		val x = blockPos.x + level.random.nextInt(11) - 5
+		val y = blockPos.y + level.random.nextInt(4) - 3
+		val z = blockPos.z + level.random.nextInt(11) - 5
+
+		val pos = BlockPos(x, y, z)
+
+		val state = level.getBlockState(pos)
+		val block = state.block
+
+		if (block is BonemealableBlock) {
+			if (block.isValidBonemealTarget(level, pos, state) && block.isBonemealSuccess(level, level.random, pos, state)) {
+				block.performBonemeal(level, level.random, pos, state)
+			}
+		}
 	}
 
 	private fun growTrees() {
