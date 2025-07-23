@@ -8,6 +8,8 @@ import net.minecraft.world.entity.FlyingMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.FlyingMoveControl
+import net.minecraft.world.entity.ai.goal.FloatGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.level.Level
 
 class SpiritEntity(
@@ -19,6 +21,11 @@ class SpiritEntity(
 
 	init {
 		moveControl = FlyingMoveControl(this, 20, true)
+	}
+
+	override fun registerGoals() {
+		goalSelector.addGoal(0, RandomLookAroundGoal(this))
+		goalSelector.addGoal(9, FloatGoal(this))
 	}
 
 	override fun tick() {
