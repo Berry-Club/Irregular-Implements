@@ -110,16 +110,22 @@ class PlayerInterfaceBlockEntity(
 
 		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
 		if (uuid != null) this.ownerUuid = uuid
+
+		if (tag.contains(OWNER_HEAD_NBT)) {
+			ownerHead = ItemStack.parseOptional(registries, tag.getCompound(OWNER_HEAD_NBT))
+		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
 		tag.putUUID(OWNER_UUID_NBT, ownerUuid)
+		tag.put(OWNER_HEAD_NBT, ownerHead.saveOptional(registries))
 	}
 
 	companion object {
 		const val OWNER_UUID_NBT = "OwnerUuid"
+		const val OWNER_HEAD_NBT = "OwnerHead"
 
 		fun getCapability(playerInterfaceBlockEntity: PlayerInterfaceBlockEntity, direction: Direction?): IItemHandler? {
 			return playerInterfaceBlockEntity.getItemHandler(direction)
