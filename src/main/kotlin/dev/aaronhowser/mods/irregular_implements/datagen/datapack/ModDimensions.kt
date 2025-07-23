@@ -63,7 +63,7 @@ object ModDimensions {
 				.withBiomeAndLayers(
 					listOf(),
 					Optional.empty(),
-					biomeRegistry.get(Biomes.THE_VOID).get()
+					biomeRegistry.get(ModBiomes.SPECTRAL_BIOME_RK).get()
 				)
 
 		val flatLevelSource = FlatLevelSource(flatLevelGenSettings)
