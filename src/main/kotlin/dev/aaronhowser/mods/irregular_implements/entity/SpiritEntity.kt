@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.FlyingMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -40,10 +41,12 @@ class SpiritEntity(
 	override fun knockback(strength: Double, x: Double, z: Double) {}
 	override fun canBeCollidedWith(): Boolean = false
 	override fun isPushable(): Boolean = false
+	override fun doPush(entity: Entity) {}
+	override fun pushEntities() {}
+	override fun isIgnoringBlockTriggers(): Boolean = true
 
 	companion object {
 		const val AGE_NBT = "Age"
-		const val MAX_AGE = 20 * 20
 
 		fun createAttributes(): AttributeSupplier {
 			return createMobAttributes()
