@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import com.mojang.blaze3d.systems.RenderSystem
-import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -11,17 +10,11 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
-import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
-import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
-@EventBusSubscriber(
-	modid = IrregularImplements.ID,
-	value = [Dist.CLIENT]
-)
 object DiviningRodRenderer {
 
 	private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
@@ -29,9 +22,7 @@ object DiviningRodRenderer {
 	private val indicators: MutableList<Indicator> = mutableListOf()
 
 	//TODO: Probably laggy, maybe make it only check once a second?
-	@SubscribeEvent
 	fun afterClientTick(event: ClientTickEvent.Post) {
-
 		val iterator = indicators.iterator()
 		while (iterator.hasNext()) {
 			val indicator = iterator.next()
@@ -78,7 +69,6 @@ object DiviningRodRenderer {
 		}
 	}
 
-	@SubscribeEvent
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 

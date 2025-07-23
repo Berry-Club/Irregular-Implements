@@ -11,7 +11,6 @@ import org.joml.Quaternionf
 import org.joml.Vector3f
 import kotlin.math.sqrt
 
-
 object RenderUtils {
 
 	private val HALF_SQRT_3: Float = (sqrt(3.0) / 2.0).toFloat()

@@ -15,15 +15,10 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
-@EventBusSubscriber(
-	modid = IrregularImplements.ID,
-	value = [Dist.CLIENT]
-)
 object TargetPositionRenderer {
 
 	private val positions: MutableList<BlockPos> = mutableListOf()
 
-	@SubscribeEvent
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		positions.clear()
 
@@ -46,7 +41,6 @@ object TargetPositionRenderer {
 
 	private var vertexBuffer: VertexBuffer? = null
 
-	@SubscribeEvent
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 

@@ -23,16 +23,11 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
-@EventBusSubscriber(
-	modid = IrregularImplements.ID,
-	value = [Dist.CLIENT]
-)
 object RedstoneToolRenderer {
 
 	private var mainBlockPos: BlockPos? = null
 	private var linkedBlockPos: BlockPos? = null
 
-	@SubscribeEvent
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		this.mainBlockPos = null
 		this.linkedBlockPos = null
@@ -58,7 +53,6 @@ object RedstoneToolRenderer {
 
 	private lateinit var cameraPos: Vec3
 
-	@SubscribeEvent
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 		if (ClientUtil.localPlayer == null) return

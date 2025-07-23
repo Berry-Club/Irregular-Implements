@@ -4,8 +4,10 @@ import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
+import dev.aaronhowser.mods.irregular_implements.client.render.DiviningRodRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOverlayRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.TargetPositionRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.PlayerInterfaceBlockEntityRenderer
@@ -290,6 +292,20 @@ object ClientEvents {
 			ModDimensions.SPECTRE_RL,
 			SpectreSpecialEffects()
 		)
+	}
+
+	@SubscribeEvent
+	fun afterClientTick(event: ClientTickEvent.Post) {
+		DiviningRodRenderer.afterClientTick(event)
+		RedstoneToolRenderer.afterClientTick(event)
+		TargetPositionRenderer.afterClientTick(event)
+	}
+
+	@SubscribeEvent
+	fun onRenderLevel(event: RenderLevelStageEvent) {
+		DiviningRodRenderer.onRenderLevel(event)
+		RedstoneToolRenderer.onRenderLevel(event)
+		TargetPositionRenderer.onRenderLevel(event)
 	}
 
 }

@@ -20,7 +20,6 @@ import net.neoforged.neoforge.items.wrapper.PlayerOffhandInvWrapper
 import net.neoforged.neoforge.items.wrapper.RangedWrapper
 import java.util.*
 
-//TODO: What if BER that makes the owner's head float above the block and look at you
 class PlayerInterfaceBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
