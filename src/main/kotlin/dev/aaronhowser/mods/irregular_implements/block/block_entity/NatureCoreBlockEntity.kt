@@ -13,6 +13,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
@@ -158,6 +159,17 @@ class NatureCoreBlockEntity(
 		if (level.isOutsideBuildHeight(pos) || !level.isEmptyBlock(pos)) return
 
 		level.setBlockAndUpdate(pos, state)
+	}
+
+	companion object {
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: NatureCoreBlockEntity
+		) {
+			blockEntity.tick()
+		}
 	}
 
 }

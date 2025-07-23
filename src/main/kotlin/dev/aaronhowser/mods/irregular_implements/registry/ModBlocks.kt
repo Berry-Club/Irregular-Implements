@@ -34,6 +34,8 @@ object ModBlocks {
 		registerBlock("peace_candle", ::PeaceCandleBlock)
 
 	// Plants
+	val NATURE_CORE: DeferredBlock<NatureCoreBlock> =
+		registerBlock("nature_core", ::NatureCoreBlock)
 	val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
 		registerBlock("sakanade_spores", ::SakanadeBlock)
 	val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
@@ -47,7 +49,6 @@ object ModBlocks {
 	val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
 
 	// Loot blocks
-	val NATURE_CORE = basicBlock("nature_core")
 	val NATURE_CHEST: DeferredBlock<SpecialChestBlock> =
 		registerBlock("nature_chest") { SpecialChestBlock.NATURE }
 	val WATER_CHEST: DeferredBlock<SpecialChestBlock> =
