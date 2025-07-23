@@ -10,11 +10,11 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
-import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 import org.lwjgl.opengl.GL11
 
+//FIXME: The projection matrix or whatever is broken
 object DiviningRodRenderer {
 
 	private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
