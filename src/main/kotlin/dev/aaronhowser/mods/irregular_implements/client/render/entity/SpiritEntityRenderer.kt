@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.MobRenderer
 import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.entity.layers.RenderLayer
+import net.minecraft.core.BlockPos
 import net.minecraft.resources.ResourceLocation
 
 class SpiritEntityRenderer(
@@ -25,6 +26,16 @@ class SpiritEntityRenderer(
 	init {
 		addLayer(SpiritGelLayer(this, context.modelSet))
 	}
+
+	override fun render(entity: SpiritEntity, entityYaw: Float, partialTicks: Float, poseStack: PoseStack, buffer: MultiBufferSource, packedLight: Int) {
+		val scale = 0.5f
+		poseStack.scale(scale, scale, scale)
+
+		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
+	}
+
+	override fun getBlockLightLevel(entity: SpiritEntity, pos: BlockPos): Int = 15
+	override fun getSkyLightLevel(entity: SpiritEntity, pos: BlockPos): Int = 15
 
 	override fun getTextureLocation(entity: SpiritEntity): ResourceLocation {
 		return TEXTURE
