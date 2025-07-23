@@ -36,7 +36,7 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 
 			if (dY == 0) {
 				if (dX == 0 && dZ == 0) {
-					level.setBlock(offsetPos, natureCore, 1 or 3)
+					level.setBlock(offsetPos, ModBlocks.NATURE_CORE.get().defaultBlockState(), 1 or 3)
 				} else if (dX == 0 || dZ == 0) {
 					level.setBlock(offsetPos, leaves, 1 or 3)
 				} else {
@@ -96,8 +96,6 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 	}
 
 	companion object {
-		private val natureCore: BlockState = ModBlocks.NATURE_CORE.get().defaultBlockState()
-
 		private fun getLogFromBiome(biome: Holder<Biome>): BlockState {
 			return when {
 				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LOG

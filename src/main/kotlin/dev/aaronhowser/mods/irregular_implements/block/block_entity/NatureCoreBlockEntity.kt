@@ -32,7 +32,7 @@ class NatureCoreBlockEntity(
 		if (random.nextInt(40) == 0) replaceSand()
 		if (random.nextInt(400) == 0) spawnAnimals()
 		if (random.nextInt(100) == 0) boneMealCrops()
-		if (random.nextInt(600) == 0) growTrees()
+		if (random.nextInt(600) == 0) plantSaplings()
 		if (random.nextInt(600) == 0) rebuild()
 	}
 
@@ -105,7 +105,7 @@ class NatureCoreBlockEntity(
 		}
 	}
 
-	private fun growTrees() {
+	private fun plantSaplings() {
 		val level = level as? ServerLevel ?: return
 
 		val radius = level.random.nextInt(20) + 10
