@@ -32,6 +32,7 @@ class PlayerInterfaceBlockEntityRenderer(
 		if (skull.isEmpty) return
 
 		val profile = skull.get(DataComponents.PROFILE) ?: return
+		val model = skullModels[SkullBlock.Types.PLAYER] ?: return
 
 		poseStack.pushPose()
 
@@ -55,8 +56,6 @@ class PlayerInterfaceBlockEntityRenderer(
 		}
 
 		poseStack.translate(0f, 1.1f, 0f)
-
-		val model = skullModels[SkullBlock.Types.PLAYER] ?: return
 
 		SkullBlockRenderer.renderSkull(
 			null,
