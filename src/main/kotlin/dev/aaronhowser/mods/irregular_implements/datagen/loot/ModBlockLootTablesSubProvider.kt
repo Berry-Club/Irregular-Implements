@@ -222,8 +222,8 @@ class ModBlockLootTablesSubProvider(
 		ModBlocks.LOTUS,
 		ModBlocks.BEAN_STALK,
 		ModBlocks.LESSER_BEAN_STALK,
-		ModBlocks.SPECTRE_CORE,
-		ModBlocks.SPECTRE_BLOCK
+		ModBlocks.SPECTRE_BLOCK,
+		ModBlocks.SPECTRE_CORE
 	).map { it.get() }.toSet()
 
 	private val nonDropSelfBlocks: Set<Block> = buildSet {

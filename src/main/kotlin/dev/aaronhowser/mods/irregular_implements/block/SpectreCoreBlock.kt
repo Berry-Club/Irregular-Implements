@@ -16,7 +16,11 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
 
-class SpectreCoreBlock : Block(Properties.ofFullCopy(Blocks.BEDROCK)) {
+class SpectreCoreBlock : Block(
+	Properties.of()
+		.strength(-1.0f, 3600000.0f)
+		.isValidSpawn(Blocks::never)
+) {
 
 	override fun useItemOn(
 		stack: ItemStack,

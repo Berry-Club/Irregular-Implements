@@ -167,8 +167,13 @@ object ModBlocks {
 
 	// Spectre blocks
 	val SPECTRE_BLOCK: DeferredBlock<Block> =
-		basicCopiedBlock("spectre_block", Blocks.BEDROCK)
-	val SPECTRE_CORE: DeferredBlock<SpectreCoreBlock> =
+		blockWithProperties(
+			"spectre_block",
+			Properties.of()
+				.strength(-1.0f, 3600000.0f)
+				.isValidSpawn(Blocks::never)
+		)
+	val SPECTRE_CORE: DeferredBlock<Block> =
 		registerBlock("spectre_core", ::SpectreCoreBlock)
 	val SPECTRE_LENS: DeferredBlock<SpectreLensBlock> =
 		registerBlock("spectre_lens", ::SpectreLensBlock)
