@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.LavaProtectionOve
 import dev.aaronhowser.mods.irregular_implements.client.render.RedstoneToolRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.DiaphanousBlockEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.block.PlayerInterfaceBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
@@ -201,15 +202,12 @@ object ClientEvents {
 
 	@SubscribeEvent
 	fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
-		event.registerBlockEntityRenderer(
-			ModBlockEntities.DIAPHANOUS_BLOCK.get(),
-			::DiaphanousBlockEntityRenderer
-		)
-
+		event.registerBlockEntityRenderer(ModBlockEntities.DIAPHANOUS_BLOCK.get(), ::DiaphanousBlockEntityRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBlockEntityRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntities.NATURE_CHEST.get(), ::ChestRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntities.WATER_CHEST.get(), ::ChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntities.PLAYER_INTERFACE.get(), ::PlayerInterfaceBlockEntityRenderer)
 
 		event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
 		event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)

@@ -45,6 +45,7 @@ class PlayerInterfaceBlockEntity(
 	}
 
 	var ownerUuid: UUID = UUID.randomUUID()
+	var ownerHead: ItemStack = ItemStack.EMPTY
 
 	private fun getPlayer(): Player? {
 		val level = this.level as? ServerLevel ?: return null

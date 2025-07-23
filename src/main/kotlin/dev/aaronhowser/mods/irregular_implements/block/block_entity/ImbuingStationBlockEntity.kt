@@ -23,7 +23,6 @@ import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.items.wrapper.InvWrapper
 import net.neoforged.neoforge.items.wrapper.RangedWrapper
 
-//TODO: Does automation work?
 class ImbuingStationBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
