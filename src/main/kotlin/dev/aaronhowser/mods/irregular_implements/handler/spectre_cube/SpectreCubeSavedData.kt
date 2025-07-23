@@ -83,15 +83,15 @@ class SpectreCubeSavedData : SavedData() {
 		if (pos.z > 16 || pos.z < 0) return null
 
 		val chunk = level.getChunkAt(pos)
-		val position = chunk.pos.x
+		val cubeIndex = chunk.pos.x
 
 		for (cube in cubes.values) {
-			if (cube.position != position) continue
+			if (cube.cubeIndex != cubeIndex) continue
 
 			if (pos.y < 0
-				|| pos.y > cube.height + 1
-				|| pos.x < position * 16
-				|| pos.x >= position * 16 + 15
+				|| pos.y > cube.interiorHeight + 1
+				|| pos.x < cubeIndex * 16
+				|| pos.x >= cubeIndex * 16 + 15
 			) return null
 
 			return cube

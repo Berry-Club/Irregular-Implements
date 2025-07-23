@@ -18,15 +18,15 @@ class SpectreCube(
 	var owner: UUID? = null
 	val guests: MutableList<UUID> = mutableListOf()
 
-	var height = 2
-	var position = 0
+	var interiorHeight = 2
+	var cubeIndex = 0
 
 	private var spawnPos: BlockPos = BlockPos(8, 0, 8)
 	fun getSpawnPos(): BlockPos = spawnPos
 
 	constructor(handler: SpectreCubeSavedData, owner: UUID, position: Int) : this(handler) {
 		this.owner = owner
-		this.position = position
+		this.cubeIndex = position
 		this.spawnPos = BlockPos(position * 16 + 8, 0, 8)
 	}
 
@@ -36,8 +36,8 @@ class SpectreCube(
 		val owner = this@SpectreCube.owner
 		if (owner != null) tag.putUUID(OWNER_NBT, owner)
 
-		tag.putInt(HEIGHT_NBT, height)
-		tag.putInt(POSITION_NBT, position)
+		tag.putInt(INTERIOR_HEIGHT_NBT, interiorHeight)
+		tag.putInt(INDEX_NBT, cubeIndex)
 
 		val guestList = tag.getList(GUESTS_NBT, Tag.TAG_COMPOUND.toInt())
 		for (guest in guests) {
@@ -56,7 +56,7 @@ class SpectreCube(
 		if (level !is ServerLevel) return
 
 		val cornerOne = getOriginPos()
-		val cornerTwo = cornerOne.offset(15, height + 1, 15)
+		val cornerTwo = cornerOne.offset(15, interiorHeight + 1, 15)
 
 		generateCubeShell(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.get().defaultBlockState())
 		generateCubeShell(
@@ -70,35 +70,35 @@ class SpectreCube(
 	fun increaseHeight(amountToAdd: Int): Int {
 		val level = handler.spectreLevel ?: return 0
 
-		val maxToAdd = level.maxBuildHeight - (height + 1)
-		val newHeight = (height + amountToAdd).coerceAtMost(height + maxToAdd)
+		val maxToAdd = level.maxBuildHeight - (interiorHeight + 1)
+		val newHeight = (interiorHeight + amountToAdd).coerceAtMost(interiorHeight + maxToAdd)
 
-		if (newHeight == height) return 0
+		if (newHeight == interiorHeight) return 0
 
-		val delta = newHeight - height
+		val delta = newHeight - interiorHeight
 		changeHeight(level, newHeight)
 		return delta
 	}
 
 	private fun changeHeight(level: Level, newHeight: Int) {
 		val cornerOne = getOriginPos()
-		val cornerTwo = cornerOne.offset(15, height + 1, 15)
+		val cornerTwo = cornerOne.offset(15, interiorHeight + 1, 15)
 
 		generateCubeShell(level, cornerOne, cornerTwo, Blocks.AIR.defaultBlockState())
-		height = newHeight
+		interiorHeight = newHeight
 		generate(level)
 
 		handler.setDirty()
 	}
 
-	fun getOriginPos(): BlockPos = BlockPos(position * 16, 0, 0)
+	fun getOriginPos(): BlockPos = BlockPos(cubeIndex * 16, 0, 0)
 
 	companion object {
 		const val OWNER_NBT = "owner"
 		const val GUESTS_NBT = "guests"
 		const val UUID_NBT = "uuid"
-		const val HEIGHT_NBT = "height"
-		const val POSITION_NBT = "position"
+		const val INTERIOR_HEIGHT_NBT = "interior_height"
+		const val INDEX_NBT = "index"
 		const val SPAWN_BLOCK_NBT = "spawn_block"
 
 		private fun generateCubeShell(
@@ -127,8 +127,8 @@ class SpectreCube(
 		fun fromTag(handler: SpectreCubeSavedData, tag: CompoundTag): SpectreCube {
 			val cube = SpectreCube(handler)
 			cube.owner = tag.getUuidOrNull(OWNER_NBT)
-			cube.height = tag.getInt(HEIGHT_NBT)
-			cube.position = tag.getInt(POSITION_NBT)
+			cube.interiorHeight = tag.getInt(INTERIOR_HEIGHT_NBT)
+			cube.cubeIndex = tag.getInt(INDEX_NBT)
 			cube.spawnPos = BlockPos.of(tag.getLong(SPAWN_BLOCK_NBT))
 
 			val guestList = tag.getList(GUESTS_NBT, Tag.TAG_COMPOUND.toInt())
