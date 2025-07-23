@@ -14,6 +14,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.FlyingMoveControl
 import net.minecraft.world.entity.ai.goal.FloatGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 
@@ -96,6 +98,14 @@ class SpiritEntity(
 				)
 			}
 		}
+	}
+
+	override fun createNavigation(level: Level): PathNavigation {
+		val flyingNavigation = FlyingPathNavigation(this, level)
+		flyingNavigation.setCanOpenDoors(false)
+		flyingNavigation.setCanFloat(true)
+		flyingNavigation.setCanPassDoors(false)
+		return flyingNavigation
 	}
 
 	private fun ageAndDie() {
