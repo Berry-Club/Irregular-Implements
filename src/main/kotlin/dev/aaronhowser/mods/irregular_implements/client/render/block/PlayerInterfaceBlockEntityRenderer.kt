@@ -30,7 +30,7 @@ class PlayerInterfaceBlockEntityRenderer(
 		val profile = skull.get(DataComponents.PROFILE) ?: return
 
 		poseStack.pushPose()
-		poseStack.translate(0f, 1.5f, 0f)
+		poseStack.translate(0f, 1.1f, 0f)
 
 		val model = skullModels[SkullBlock.Types.PLAYER] ?: return
 
@@ -40,7 +40,7 @@ class PlayerInterfaceBlockEntityRenderer(
 			0f,
 			poseStack,
 			bufferSource,
-			packedLight,
+			0xFFFFFF,
 			model,
 			SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, profile)
 		)
