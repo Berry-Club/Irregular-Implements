@@ -99,7 +99,7 @@ class SpectreCubeSavedData : SavedData() {
 	}
 
 	fun verifyPosition(player: ServerPlayer) {
-		if (player.isCreative) return
+		if (player.isCreative || player.isSpectator) return
 
 		val pos = player.blockPosition()
 		val cube = getSpectreCubeFromBlockPos(player.serverLevel(), pos)
