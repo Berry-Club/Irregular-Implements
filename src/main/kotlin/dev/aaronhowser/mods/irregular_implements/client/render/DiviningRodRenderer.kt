@@ -74,10 +74,6 @@ object DiviningRodRenderer {
 
 		if (indicators.isEmpty()) return
 
-		render(event)
-	}
-
-	private fun render(event: RenderLevelStageEvent) {
 		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
 		val poseStack = event.poseStack
 
