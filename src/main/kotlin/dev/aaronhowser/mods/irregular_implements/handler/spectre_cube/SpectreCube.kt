@@ -24,10 +24,10 @@ class SpectreCube(
 	private var spawnPos: BlockPos = BlockPos(8, 0, 8)
 	fun getSpawnPos(): BlockPos = spawnPos
 
-	constructor(handler: SpectreCubeSavedData, owner: UUID, position: Int) : this(handler) {
+	constructor(handler: SpectreCubeSavedData, owner: UUID, cubeIndex: Int) : this(handler) {
 		this.owner = owner
-		this.cubeIndex = position
-		this.spawnPos = BlockPos(position * 16 + 8, 0, 8)
+		this.cubeIndex = cubeIndex
+		this.spawnPos = getOriginPos().offset(8, 0, 8)
 	}
 
 	fun toTag(): CompoundTag {
@@ -91,7 +91,8 @@ class SpectreCube(
 		handler.setDirty()
 	}
 
-	fun getOriginPos(): BlockPos = BlockPos(cubeIndex * 16, 0, 0)
+	fun getOriginX(): Int = (cubeIndex * 16 * 16)
+	fun getOriginPos(): BlockPos = BlockPos(getOriginX(), 0, 0)
 
 	companion object {
 		const val OWNER_NBT = "owner"

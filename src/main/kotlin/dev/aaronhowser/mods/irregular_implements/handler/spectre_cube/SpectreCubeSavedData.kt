@@ -66,15 +66,11 @@ class SpectreCubeSavedData : SavedData() {
 
 	private fun generateSpectreCube(uuid: UUID): SpectreCube {
 		val cube = SpectreCube(this, uuid, positionCounter)
-		increaseNextPosition()
+		positionCounter++
 		cube.generate(spectreLevel!!)
 		cubes[uuid] = cube
 		setDirty()
 		return cube
-	}
-
-	private fun increaseNextPosition() {
-		positionCounter += 16
 	}
 
 	fun getSpectreCubeFromBlockPos(level: Level, pos: BlockPos): SpectreCube? {
@@ -88,10 +84,12 @@ class SpectreCubeSavedData : SavedData() {
 		for (cube in cubes.values) {
 			if (cube.cubeIndex != cubeIndex) continue
 
+			val cubeOriginX = cube.getOriginX()
+
 			if (pos.y < 0
 				|| pos.y > cube.interiorHeight + 1
-				|| pos.x < cubeIndex * 16
-				|| pos.x >= cubeIndex * 16 + 15
+				|| pos.x < cubeOriginX
+				|| pos.x >= cubeOriginX + 15
 			) return null
 
 			return cube
