@@ -70,7 +70,7 @@ class SpectreCube(
 	fun increaseHeight(amountToAdd: Int): Int {
 		val level = handler.spectreLevel ?: return 0
 
-		val maxToAdd = level.maxBuildHeight - (interiorHeight + 1)
+		val maxToAdd = level.maxBuildHeight - (interiorHeight + 2)
 		val newHeight = (interiorHeight + amountToAdd).coerceAtMost(interiorHeight + maxToAdd)
 
 		if (newHeight == interiorHeight) return 0
