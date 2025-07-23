@@ -37,7 +37,6 @@ object OtherUtil {
 
 	@Suppress("UsePropertyAccessSyntax")
 	fun DyeColor.getDyeName(): String = this.getName()
-
 	@Suppress("UsePropertyAccessSyntax")
 	fun Direction.getDirectionName(): String = this.getName()
 

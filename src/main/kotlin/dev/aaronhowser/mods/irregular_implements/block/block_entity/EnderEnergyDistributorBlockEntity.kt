@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.energy.IEnergyStorage
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")    // ???? complains about it being `Direction?` instead of `@Nullable Direction`
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")	// ???? complains about it being `Direction?` instead of `@Nullable Direction`
 class EnderEnergyDistributorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState

@@ -1,21 +1,21 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"category": "misc",
-	"key": {
-		"S": {
-			"tag": "c:slimeballs"
-		},
-		"W": {
-			"item": "minecraft:nether_star"
-		}
-	},
-	"pattern": [
-		" S ",
-		"SWS",
-		" S "
-	],
-	"result": {
-		"count": 1,
-		"id": "irregular_implements:slime_cube"
-	}
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "c:slime_balls"
+    },
+    "W": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SWS",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:slime_cube"
+  }
 }

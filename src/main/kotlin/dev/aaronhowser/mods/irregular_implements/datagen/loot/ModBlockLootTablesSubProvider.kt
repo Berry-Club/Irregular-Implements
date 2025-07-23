@@ -29,6 +29,7 @@ class ModBlockLootTablesSubProvider(
 ) : BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags(), provider) {
 
 	override fun generate() {
+
 		for (block in this.knownBlocks - this.nonDropSelfBlocks) {
 			dropSelf(block)
 		}
@@ -209,7 +210,9 @@ class ModBlockLootTablesSubProvider(
 	}
 
 	private val dropsDirtWithoutSilkTouch = buildList {
-		addAll(DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() })
+		for (dyeColor in DyeColor.entries) {
+			add(ModBlocks.getColoredGrass(dyeColor).get())
+		}
 
 		add(ModBlocks.FERTILIZED_DIRT.get())
 	}
@@ -218,7 +221,9 @@ class ModBlockLootTablesSubProvider(
 		ModBlocks.BLAZE_FIRE,
 		ModBlocks.LOTUS,
 		ModBlocks.BEAN_STALK,
-		ModBlocks.LESSER_BEAN_STALK
+		ModBlocks.LESSER_BEAN_STALK,
+		ModBlocks.SPECTRE_CORE,
+		ModBlocks.SPECTRE_BLOCK
 	).map { it.get() }.toSet()
 
 	private val nonDropSelfBlocks: Set<Block> = buildSet {
@@ -233,6 +238,22 @@ class ModBlockLootTablesSubProvider(
 
 	override fun getKnownBlocks(): List<Block> {
 		return ModBlocks.BLOCK_REGISTRY.entries.map { it.get() }
+	}
+
+	var noEmpty = true
+
+	override fun add(block: Block, builder: LootTable.Builder) {
+
+		println("Adding block ${block.name.string}")
+		val wasNoEmpty = noEmpty
+
+		super.add(block, builder)
+
+		val hasEmpty = this.map.toString().contains("minecraft:empty")
+		if (hasEmpty && wasNoEmpty) {
+			println("Here!!! It was ${block.name.string}")
+			noEmpty = false
+		}
 	}
 
 }
