@@ -55,11 +55,11 @@ class SpectreCube(
 	fun generate(level: Level) {
 		if (level !is ServerLevel) return
 
-		val cornerOne = BlockPos(position * 16, 0, 0)
+		val cornerOne = getOriginPos()
 		val cornerTwo = cornerOne.offset(15, height + 1, 15)
 
-		generateCube(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.get().defaultBlockState())
-		generateCube(
+		generateCubeShell(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.get().defaultBlockState())
+		generateCubeShell(
 			level,
 			cornerOne.offset(7, 0, 7),
 			cornerOne.offset(8, 0, 8),
@@ -81,14 +81,17 @@ class SpectreCube(
 	}
 
 	private fun changeHeight(level: Level, newHeight: Int) {
-		val corner = BlockPos(position * 16, 0, 0)
-		generateCube(
-			level,
-			corner,
-			corner.offset(15, height + 1, 15),
-			Blocks.AIR.defaultBlockState()
-		)
+		val cornerOne = getOriginPos()
+		val cornerTwo = cornerOne.offset(15, height + 1, 15)
+
+		generateCubeShell(level, cornerOne, cornerTwo, Blocks.AIR.defaultBlockState())
+		height = newHeight
+		generate(level)
+
+		handler.setDirty()
 	}
+
+	fun getOriginPos(): BlockPos = BlockPos(position * 16, 0, 0)
 
 	companion object {
 		const val OWNER_NBT = "owner"
@@ -98,7 +101,7 @@ class SpectreCube(
 		const val POSITION_NBT = "position"
 		const val SPAWN_BLOCK_NBT = "spawn_block"
 
-		private fun generateCube(
+		private fun generateCubeShell(
 			level: Level,
 			cornerOne: BlockPos,
 			cornerTwo: BlockPos,
