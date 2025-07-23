@@ -28,10 +28,6 @@ object ModEffects {
 	val COLLAPSE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
 		EFFECT_REGISTRY.register("imbue_collapse", Supplier { ImbueEffect(Color.PINK.rgb) })
 
-	//TODO:
-	// Hitting someone while you have the Collapse Imbue gives them Collapse
-	// Also you can get Collapse by touching Sakanade spores
-
 	@JvmField
 	val COLLAPSE: DeferredHolder<MobEffect, CollapseEffect> =
 		EFFECT_REGISTRY.register("collapse", Supplier { CollapseEffect() })
