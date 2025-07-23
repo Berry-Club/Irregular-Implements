@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.world.feature
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.util.BlockSchematics
 import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.world.RandomizableContainer
@@ -30,28 +31,12 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 		val log = getLogFromBiome(biome)
 		val leaves = getLeavesFromBiome(biome)
 
-		for (dX in -1..1) for (dY in -1..1) for (dZ in -1..1) {
+		val core = BlockSchematics.getNatureCore(log, leaves)
 
-			val offsetPos = origin.offset(dX, dY, dZ)
+		for ((offset, state) in core) {
+			val pos = origin.offset(offset)
 
-			if (dY == 0) {
-				if (dX == 0 && dZ == 0) {
-					level.setBlock(offsetPos, ModBlocks.NATURE_CORE.get().defaultBlockState(), 1 or 3)
-				} else if (dX == 0 || dZ == 0) {
-					level.setBlock(offsetPos, leaves, 1 or 3)
-				} else {
-					level.setBlock(offsetPos, log, 1 or 3)
-				}
-
-				continue
-			}
-
-			if ((dX == 0 || dZ == 0) && dX != dZ) {
-				level.setBlock(offsetPos, log, 1 or 3)
-			} else {
-				level.setBlock(offsetPos, leaves, 1 or 3)
-			}
-
+			level.setBlock(pos, state, 1 or 2)
 		}
 
 		val positionAbove = origin.above(4)
