@@ -23,6 +23,7 @@ class ModDataPackProvider(
 			.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
 			.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
 			.add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem)
+			.add(Registries.BIOME, ModBiomes::bootstrap)
 	}
 
 }
