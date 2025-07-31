@@ -22,7 +22,7 @@ import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.EscapeRopeHandler
+import dev.aaronhowser.mods.irregular_implements.handler.EscapeRopeHandler
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions
 import net.minecraft.server.level.ServerLevel
