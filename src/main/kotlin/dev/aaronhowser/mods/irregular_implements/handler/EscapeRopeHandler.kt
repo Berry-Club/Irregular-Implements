@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 import java.lang.ref.WeakReference
 
 object EscapeRopeHandler {
@@ -20,10 +21,7 @@ object EscapeRopeHandler {
 
 	fun addTask(player: ServerPlayer) {
 		if (this.runningTasks.any { it.player.get() == player }) return
-
 		val task = Task(WeakReference(player))
-		task.toCheck.add(player.blockPosition())
-
 		this.runningTasks.add(task)
 	}
 
@@ -52,120 +50,127 @@ object EscapeRopeHandler {
 	private class Task(
 		val player: WeakReference<ServerPlayer>
 	) {
-		val toCheck: ArrayList<BlockPos> = ArrayList()
-		val alreadyChecked: HashSet<BlockPos> = HashSet()
+		private val toCheck: ArrayList<BlockPos> = ArrayList()
+		private val alreadyChecked: HashSet<BlockPos> = HashSet()
 
-		val levelAtStart = player.get()?.level()
+		private val levelAtStart = this.player.get()?.level()
+
+		init {
+			val actualPlayer = this.player.get()
+			if (actualPlayer != null) toCheck.add(actualPlayer.blockPosition())
+		}
 
 		/**
-		 * @return true is the task is done
+		 * @return true if the task is done
 		 */
 		fun tick(): Boolean {
-			val actualPlayer = player.get() ?: return true
+			val actualPlayer = this.player.get() ?: return true
 			val level = actualPlayer.level()
 			val usedItem = actualPlayer.useItem
 
-			if (level != levelAtStart
-				|| !usedItem.`is`(ModItems.ESCAPE_ROPE)
-			) return true
+			if (level != this.levelAtStart || !usedItem.`is`(ModItems.ESCAPE_ROPE)) return true
 
-			val limit = ServerConfig.Companion.ESCAPE_ROPE_MAX_BLOCKS.get()
-			val shouldSpawnIndicator = false    //TODO: Config
+			val limit = ServerConfig.ESCAPE_ROPE_MAX_BLOCKS.get()
+			val maxRuns = ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
+			val shouldSpawnIndicator = false // TODO: Config
 
-			// The more often it runs, the faster it is
-			val maxRuns = ServerConfig.Companion.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
 			for (run in 0 until maxRuns) {
-
 				actualPlayer.status(
 					ModMessageLang.ESCAPE_ROPE_HANDLER_PROGRESS.toComponent(alreadyChecked.size)
 				)
 
-				if (this.toCheck.isEmpty()
-					|| limit > 1 && this.alreadyChecked.size >= limit
-				) {
-					actualPlayer.drop(usedItem, false)
-					actualPlayer.setItemInHand(actualPlayer.usedItemHand, ItemStack.EMPTY)
-
+				if (toCheck.isEmpty() || (limit > 1 && alreadyChecked.size >= limit)) {
+					actualPlayer.drop(usedItem, true)
 					return true
 				}
 
-				var nextPos = this.toCheck.removeLast()
-				while (this.alreadyChecked.contains(nextPos) && this.toCheck.isNotEmpty()) {
-					nextPos = this.toCheck.removeLast()
-				}
-
-				if (this.alreadyChecked.contains(nextPos)) {
-					return true
-				}
-
-				//TODO: Make this clientside only
+				val nextPos = getNextPositionToCheck() ?: return true
 				if (shouldSpawnIndicator) {
 					OtherUtil.spawnIndicatorBlockDisplay(level, nextPos)
 				}
 
-				val posIsEmpty = level.isLoaded(nextPos) && level.getBlockState(nextPos).getCollisionShape(level, nextPos).isEmpty
-				if (!posIsEmpty) {
-					this.alreadyChecked.add(nextPos)
+				if (!isEmptySpace(level, nextPos)) {
+					alreadyChecked.add(nextPos)
 					continue
 				}
 
 				if (!level.canSeeSky(nextPos)) {
-					this.alreadyChecked.add(nextPos)
-
-					for (direction in directionPriority) {
-						val offset = nextPos.relative(direction)
-
-						if (!this.alreadyChecked.contains(offset)) {
-							this.toCheck.add(offset)
-						}
-					}
-
+					expandSearchFrom(nextPos)
 					continue
 				}
 
-				level.playSound(null, actualPlayer.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.5f, 1f)
-
-				var foundGround = false
-
-				groundSearch@
-				for (y in nextPos.y downTo level.minBuildHeight) {
-					val possibleTeleportPos = BlockPos(nextPos.x, y, nextPos.z)
-					val stateThere = level.getBlockState(possibleTeleportPos)
-
-					val canStandOn = stateThere.isFaceSturdy(level, possibleTeleportPos, Direction.UP)
-							|| stateThere.isCollisionShapeFullBlock(level, possibleTeleportPos)
-
-					if (canStandOn) {
-						actualPlayer.teleportTo(
-							possibleTeleportPos.x + 0.5,
-							possibleTeleportPos.y + 1.0,
-							possibleTeleportPos.z + 0.5
-						)
-
-						foundGround = true
-						break@groundSearch
-					}
-				}
-
-				if (!foundGround) {
-					actualPlayer.teleportTo(
-						nextPos.x + 0.5,
-						nextPos.y + 1.0,
-						nextPos.z + 0.5
-					)
-				}
-
-				actualPlayer.stopUsingItem()
-
-				level.playSound(null, actualPlayer.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.5f, 1f)
-
-				usedItem.hurtAndBreak(1, actualPlayer, actualPlayer.getEquipmentSlotForItem(usedItem))
+				teleportPlayerToSurface(level, actualPlayer, usedItem, nextPos)
 				return true
 			}
 
 			return false
 		}
 
+		private fun getNextPositionToCheck(): BlockPos? {
+			while (toCheck.isNotEmpty()) {
+				val pos = toCheck.removeLast()
+				if (!alreadyChecked.contains(pos)) {
+					return pos
+				}
+			}
+			return null
+		}
+
+		private fun isEmptySpace(level: Level, pos: BlockPos): Boolean {
+			return level.isLoaded(pos) &&
+					level.getBlockState(pos).getCollisionShape(level, pos).isEmpty
+		}
+
+		private fun expandSearchFrom(pos: BlockPos) {
+			alreadyChecked.add(pos)
+
+			for (direction in directionPriority) {
+				val offset = pos.relative(direction)
+				if (!alreadyChecked.contains(offset)) {
+					toCheck.add(offset)
+				}
+			}
+		}
+
+		private fun teleportPlayerToSurface(
+			level: Level,
+			player: ServerPlayer,
+			item: ItemStack,
+			targetPos: BlockPos
+		) {
+			level.playSound(null, player.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.5f, 1f)
+
+			val teleportPos = findGroundBelow(level, targetPos) ?: targetPos.above()
+
+			player.teleportTo(
+				teleportPos.x + 0.5,
+				teleportPos.y.toDouble(),
+				teleportPos.z + 0.5
+			)
+
+			player.stopUsingItem()
+			level.playSound(null, player.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.5f, 1f)
+			item.hurtAndBreak(1, player, player.getEquipmentSlotForItem(item))
+		}
+
+		private fun findGroundBelow(level: Level, pos: BlockPos): BlockPos? {
+			val mutable = pos.mutable()
+
+			for (y in pos.y downTo level.minBuildHeight) {
+				mutable.setY(y)
+				val state = level.getBlockState(mutable)
+
+				val canStand = state.isFaceSturdy(level, mutable, Direction.UP)
+						|| state.isCollisionShapeFullBlock(level, mutable)
+
+				if (canStand) {
+					return mutable.above().immutable()
+				}
+			}
+
+			return null
+		}
 	}
+
 
 }
