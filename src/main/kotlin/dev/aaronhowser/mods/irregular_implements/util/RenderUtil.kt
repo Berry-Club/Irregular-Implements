@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.client.render
+package dev.aaronhowser.mods.irregular_implements.util
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
@@ -11,7 +11,7 @@ import org.joml.Quaternionf
 import org.joml.Vector3f
 import kotlin.math.sqrt
 
-object RenderUtils {
+object RenderUtil {
 
 	private val HALF_SQRT_3: Float = (sqrt(3.0) / 2.0).toFloat()
 

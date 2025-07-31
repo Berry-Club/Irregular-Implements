@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
@@ -104,10 +105,10 @@ object RedstoneToolRenderer {
 		val endColor = 0x660000FF
 
 		if (mainBlockPos != null) {
-			RenderUtils.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45, startColor)
+			RenderUtil.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45, startColor)
 		}
 		if (linkedBlockPos != null) {
-			RenderUtils.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45, endColor)
+			RenderUtil.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45, endColor)
 		}
 
 		if (mainBlockPos != null && linkedBlockPos != null) {

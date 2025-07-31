@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.RenderType
@@ -96,7 +97,7 @@ object DiviningRodRenderer {
 			.getBuffer(RenderType.debugQuads())
 
 		for (indicator in indicators) {
-			RenderUtils.renderCube(
+			RenderUtil.renderCube(
 				poseStack,
 				buffer,
 				indicator.target.x,

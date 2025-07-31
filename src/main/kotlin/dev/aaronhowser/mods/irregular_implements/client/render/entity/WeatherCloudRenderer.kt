@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.irregular_implements.client.render.RenderUtils
+import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import dev.aaronhowser.mods.irregular_implements.entity.WeatherCloudEntity
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import net.minecraft.client.renderer.MultiBufferSource
@@ -36,7 +36,7 @@ class WeatherCloudRenderer(
 
 		poseStack.pushPose()
 
-		RenderUtils.renderDragonRays(
+		RenderUtil.renderDragonRays(
 			poseStack = poseStack,
 			time = time,
 			bufferSource = bufferSource,
