@@ -18,6 +18,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBE
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
+import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
 import dev.aaronhowser.mods.irregular_implements.registry.*
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
@@ -282,15 +283,12 @@ object ClientEvents {
 
 	@SubscribeEvent
 	fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
-		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlameParticle::Provider)
+		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlooFlameParticle::Provider)
 	}
 
 	@SubscribeEvent
 	fun registerDimensionSpecialEffects(event: RegisterDimensionSpecialEffectsEvent) {
-		event.register(
-			ModDimensions.SPECTRE_RL,
-			SpectreSpecialEffects()
-		)
+		event.register(ModDimensions.SPECTRE_RL, SpectreSpecialEffects())
 	}
 
 	@SubscribeEvent
