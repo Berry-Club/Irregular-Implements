@@ -100,12 +100,12 @@ object DiviningRodRenderer {
 			RenderUtil.renderCube(
 				poseStack,
 				buffer,
-				indicator.target.x,
-				indicator.target.y,
-				indicator.target.z,
-				1,
-				1,
-				1,
+				indicator.target.x.toFloat(),
+				indicator.target.y.toFloat(),
+				indicator.target.z.toFloat(),
+				1f,
+				1f,
+				1f,
 				indicator.color
 			)
 		}

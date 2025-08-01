@@ -56,12 +56,12 @@ object TargetPositionRenderer {
 			RenderUtil.renderCube(
 				poseStack,
 				buffer,
-				position.x,
-				position.y,
-				position.z,
-				1,
-				1,
-				1,
+				position.x.toFloat(),
+				position.y.toFloat(),
+				position.z.toFloat(),
+				1f,
+				1f,
+				1f,
 				0x3200FF00
 			)
 		}

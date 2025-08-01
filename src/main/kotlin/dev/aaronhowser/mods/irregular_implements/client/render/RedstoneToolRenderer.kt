@@ -105,10 +105,10 @@ object RedstoneToolRenderer {
 		val endColor = 0x660000FF
 
 		if (mainBlockPos != null) {
-			RenderUtil.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45, startColor)
+			RenderUtil.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45f, startColor)
 		}
 		if (linkedBlockPos != null) {
-			RenderUtil.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45, endColor)
+			RenderUtil.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45f, endColor)
 		}
 
 		if (mainBlockPos != null && linkedBlockPos != null) {
