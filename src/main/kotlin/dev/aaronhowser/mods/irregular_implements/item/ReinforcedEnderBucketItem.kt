@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -42,17 +43,37 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 
 		if (blockHitResult.type != HitResult.Type.BLOCK) return InteractionResultHolder.pass(usedStack)
 
-		val clickedPos = blockHitResult.blockPos
+		val hitPos = blockHitResult.blockPos
 		val clickedFace = blockHitResult.direction
 
-		val blockPos = clickedPos.relative(clickedFace)
+		val posToCheck = if (currentContents.isEmpty) hitPos else hitPos.relative(clickedFace)
 
-		if (!level.mayInteract(player, clickedPos) || !player.mayUseItemAt(blockPos, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
+		if (!level.mayInteract(player, hitPos) || !player.mayUseItemAt(posToCheck, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
 
-		return if (currentContents.isEmpty) {
-			tryFill(level, player, usedStack, clickedPos)
+		var clickedFluid = level.getFluidState(posToCheck)
+		if (clickedFluid.isEmpty) {
+			clickedFluid = level.getFluidState(posToCheck)
+		}
+
+		if (currentContents.fluidType == clickedFluid.fluidType) {
+			val success = tryFill(level, player, usedStack, posToCheck)
+			return if (success) {
+				InteractionResultHolder.success(usedStack)
+			} else {
+				InteractionResultHolder.fail(usedStack)
+			}
+		}
+
+		val success = if (currentContents.isEmpty) {
+			tryFill(level, player, usedStack, posToCheck)
 		} else {
-			tryEmpty(level, player, usedStack, clickedPos, blockPos, blockHitResult)
+			tryEmpty(level, player, usedStack, hitPos, clickedFace, blockHitResult)
+		}
+
+		return if (success) {
+			InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+		} else {
+			InteractionResultHolder.pass(usedStack)
 		}
 	}
 
@@ -78,30 +99,32 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 			player: Player,
 			usedStack: ItemStack,
 			blockPos: BlockPos
-		): InteractionResultHolder<ItemStack> {
+		): Boolean {
+			if (level.isClientSide) return false
+
 			val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
 
 			if (currentContents.amount + 1000 > MAX_FLUID_AMOUNT) {
-				return InteractionResultHolder.fail(usedStack)
+				return false
 			}
 
 			val blockState = level.getBlockState(blockPos)
 			val block = blockState.block
 
-			if (block !is BucketPickup) return InteractionResultHolder.fail(usedStack)
+			if (block !is BucketPickup) return false
 
 			val sourcePos = EnderBucketItem.getNearestSource(level, blockPos, blockState.fluidState.fluidType)
-				?: return InteractionResultHolder.fail(usedStack)
+				?: return false
 
 			val sourceState = level.getBlockState(sourcePos)
 			val sourceBlock = sourceState.block as? BucketPickup
-				?: return InteractionResultHolder.fail(usedStack)
+				?: return false
 
 			val pickup = sourceBlock.pickupBlock(player, level, sourcePos, sourceState)
 			val pickupFluidStack = pickup.getCapability(Capabilities.FluidHandler.ITEM)
 			val fluidStack = pickupFluidStack?.drain(Int.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE)
 
-			if (pickup.isEmpty || fluidStack == null) return InteractionResultHolder.fail(usedStack)
+			if (pickup.isEmpty || fluidStack == null) return false
 
 			var newContents: FluidStack
 
@@ -116,10 +139,9 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 
 			level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
-			newContents.amount += fluidStack.amount
 			usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(newContents))
 
-			return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+			return true
 		}
 
 		private fun tryEmpty(
@@ -127,9 +149,11 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 			player: Player,
 			usedStack: ItemStack,
 			clickedPos: BlockPos,
-			relativePos: BlockPos,
+			clickedFace: Direction,
 			blockHitResult: BlockHitResult
-		): InteractionResultHolder<ItemStack> {
+		): Boolean {
+			if (level.isClientSide) return false
+
 			val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
 
 			val contentFluid = currentContents.fluid
@@ -140,16 +164,16 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 				?.canPlaceLiquid(player, level, clickedPos, clickedState, contentFluid)
 				.isTrue
 
-			val posToPlace = if (clickedStateCanContainFluid) clickedPos else relativePos
+			val posToPlace = if (clickedStateCanContainFluid) clickedPos else clickedPos.relative(clickedFace)
 
-			if (!attemptPlace(player, level, posToPlace, blockHitResult, usedStack)) return InteractionResultHolder.fail(usedStack)
+			if (!attemptPlace(player, level, posToPlace, blockHitResult, usedStack)) return false
 
 			val newContents = currentContents.copy()
 			newContents.amount -= 1000
 
 			usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(newContents))
 
-			return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+			return true
 		}
 
 		//TL;DR BucketItem#emptyContents but kotlin
