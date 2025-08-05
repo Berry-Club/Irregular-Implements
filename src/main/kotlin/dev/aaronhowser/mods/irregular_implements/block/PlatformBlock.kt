@@ -26,21 +26,30 @@ class PlatformBlock(
 	Properties.ofFullCopy(blockToCopy)
 ), EntityBlock {
 
-	override fun getCollisionShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-
+	override fun getCollisionShape(
+		state: BlockState,
+		level: BlockGetter,
+		pos: BlockPos,
+		context: CollisionContext
+	): VoxelShape {
 		val entity = (context as? EntityCollisionContext)?.entity
+
+		val entityPassesFilter = (level.getBlockEntity(pos) as? FilteredPlatformBlockEntity)
+			?.entityPassesFilter(entity)
+			.isTrue
 
 		val shouldFall =
 			!context.isAbove(Shapes.block(), pos, true)
 					|| (
 					entity != null && (
 							entity.isDescending
-									|| (level.getBlockEntity(pos) as? FilteredPlatformBlockEntity)?.entityPassesFilter(entity).isTrue
+									|| entityPassesFilter
 							)
 					)
 
 		return if (shouldFall) Shapes.empty() else SHAPE
 	}
+
 
 	override fun getInteractionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape {
 		return SHAPE

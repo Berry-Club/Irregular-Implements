@@ -27,7 +27,7 @@ class FilteredPlatformBlockEntity(
 ) : BlockEntity(ModBlockEntities.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
 
 	//FIXME: For some reason doesn't get called on client, which causes position desync (which fixes itself quickly)
-	fun entityPassesFilter(entity: Entity): Boolean {
+	fun entityPassesFilter(entity: Entity?): Boolean {
 		if (entity !is ItemEntity) return false
 
 		val filter = this.container
