@@ -243,6 +243,12 @@ object RenderUtil {
 		var totalBlue = 0
 		var totalPixels = 0
 
+		// There's some bullfuckery going on here, and I blame Mojang
+		// Putting `lava_still.png` into https://matkl.github.io/average-color/ returns `rgb(212, 90, 18)`
+		// However, putting that image through `getPixelRGBA` and then averaging it all out returns `rgb(255, 18, 90)`
+		// I have no god damn idea why it's doing that, but the simplest fix for me is to just accept that r is super wrong and then flip b and g
+		// So instead of an rgba like it should be giving, i'm treating it as an rbga
+
 		for (x in 0 until width) for (y in 0 until height) {
 			val color = nativeImage.getPixelRGBA(x, y)
 
@@ -250,8 +256,8 @@ object RenderUtil {
 			if (a <= 0) continue
 
 			val r = (color shr 24) and 0xFF
-			val g = (color shr 16) and 0xFF
-			val b = (color shr 8) and 0xFF
+			val b = (color shr 16) and 0xFF
+			val g = (color shr 8) and 0xFF
 
 			totalRed += r
 			totalGreen += g
