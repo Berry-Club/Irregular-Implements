@@ -97,7 +97,6 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			usedStack: ItemStack,
 			blockPos: BlockPos
 		): InteractionResultHolder<ItemStack> {
-
 			val blockState = level.getBlockState(blockPos)
 			val block = blockState.block
 
@@ -135,7 +134,6 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			blockPos: BlockPos,
 			fluidType: FluidType
 		): BlockPos? {
-
 			val positionsToCheck: MutableList<BlockPos> = mutableListOf()
 			val checkedPositions: MutableList<BlockPos> = mutableListOf()
 
@@ -152,7 +150,12 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 				for (direction in Direction.entries) {
 					val nextPos = currentPos.relative(direction)
-					if (!checkedPositions.contains(nextPos)) positionsToCheck.add(nextPos)
+					if (!checkedPositions.contains(nextPos)) {
+						val fluidThere = level.getFluidState(nextPos)
+						if (!fluidThere.isEmpty) {
+							positionsToCheck.add(nextPos)
+						}
+					}
 				}
 			}
 
