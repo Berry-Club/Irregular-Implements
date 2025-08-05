@@ -47,13 +47,11 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		poseStack.popPose()
 	}
 
-	companion object {
-		val CLIENT_ITEM_EXTENSIONS = object : IClientItemExtensions {
-			val BEWLR = CustomCraftingTableBEWLR()
+	object ClientItemExtensions : IClientItemExtensions {
+		val BEWLR = CustomCraftingTableBEWLR()
 
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
+		override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+			return BEWLR
 		}
 	}
 

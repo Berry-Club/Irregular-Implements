@@ -88,15 +88,15 @@ class EnderBucketBEWLR : BlockEntityWithoutLevelRenderer(
 	}
 
 	companion object {
-		val CLIENT_ITEM_EXTENSIONS = object : IClientItemExtensions {
-			val BEWLR = EnderBucketBEWLR()
-
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
-		}
-
 		val TEXTURE_LOCATION = OtherUtil.modResource("textures/item/ender_bucket.png")
+	}
+
+	object ClientItemExtensions : IClientItemExtensions {
+		val BEWLR = EnderBucketBEWLR()
+
+		override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+			return BEWLR
+		}
 	}
 
 }

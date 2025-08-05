@@ -51,13 +51,11 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 		poseStack.popPose()
 	}
 
-	companion object {
-		val CLIENT_ITEM_EXTENSIONS = object : IClientItemExtensions {
-			val BEWLR = DiaphanousBEWLR()
+	object ClientItemExtensions : IClientItemExtensions {
+		val BEWLR = DiaphanousBEWLR()
 
-			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-				return BEWLR
-			}
+		override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
+			return BEWLR
 		}
 	}
 

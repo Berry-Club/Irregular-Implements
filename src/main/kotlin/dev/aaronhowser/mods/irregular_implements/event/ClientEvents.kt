@@ -224,22 +224,22 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
 		event.registerItem(
-			DiaphanousBEWLR.CLIENT_ITEM_EXTENSIONS,
+			DiaphanousBEWLR.ClientItemExtensions,
 			ModItems.DIAPHANOUS_BLOCK.get()
 		)
 
 		event.registerItem(
-			CustomCraftingTableBEWLR.CLIENT_ITEM_EXTENSIONS,
+			CustomCraftingTableBEWLR.ClientItemExtensions,
 			ModItems.CUSTOM_CRAFTING_TABLE.get()
 		)
 
 		event.registerItem(
-			SpectreIlluminatorBEWLR.CLIENT_ITEM_EXTENSIONS,
+			SpectreIlluminatorBEWLR.ClientItemExtensions,
 			ModItems.SPECTRE_ILLUMINATOR.get()
 		)
 
 		event.registerItem(
-			EnderBucketBEWLR.CLIENT_ITEM_EXTENSIONS,
+			EnderBucketBEWLR.ClientItemExtensions,
 			ModItems.ENDER_BUCKET.get()
 		)
 	}
