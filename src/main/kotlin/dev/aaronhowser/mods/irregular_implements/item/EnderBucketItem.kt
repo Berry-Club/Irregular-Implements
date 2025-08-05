@@ -92,16 +92,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			if (fluidContent.isEmpty) return 0xFFFFFFFF.toInt()
 			val fluidStack = fluidContent.copy()
 
-			val clientExt = IClientFluidTypeExtensions.of(fluidContent.fluid)
-			val tintColor = clientExt.getTintColor(fluidStack)
-
-			if (tintColor != -1) return tintColor
-
-			val sprite = Minecraft.getInstance()
-				.getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-				.apply(clientExt.getStillTexture(fluidStack))
-
-			return RenderUtil.getSpriteAverageColor(sprite)
+			return RenderUtil.getColorFromFluid(fluidStack)
 		}
 
 		private fun tryFill(

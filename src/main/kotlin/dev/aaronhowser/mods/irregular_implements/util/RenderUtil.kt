@@ -2,12 +2,16 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
+import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.util.RandomSource
+import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.phys.Vec3
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
+import net.neoforged.neoforge.fluids.FluidStack
 import org.joml.Quaternionf
 import org.joml.Vector3f
 import kotlin.math.sqrt
@@ -226,6 +230,19 @@ object RenderUtil {
 		}
 
 		poseStack.popPose()
+	}
+
+	fun getColorFromFluid(fluidStack: FluidStack): Int {
+		val clientExt = IClientFluidTypeExtensions.of(fluidStack.fluid)
+		val tintColor = clientExt.getTintColor(fluidStack)
+
+		if (tintColor != -1) return tintColor
+
+		val sprite = Minecraft.getInstance()
+			.getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+			.apply(clientExt.getStillTexture(fluidStack))
+
+		return RenderUtil.getSpriteAverageColor(sprite)
 	}
 
 	private val SPRITE_AVERAGE_COLOR_CACHE: MutableMap<TextureAtlasSprite, Int> = mutableMapOf()

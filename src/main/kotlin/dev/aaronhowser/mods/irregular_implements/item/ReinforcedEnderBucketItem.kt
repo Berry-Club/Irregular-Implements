@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
@@ -88,6 +89,24 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 		val mb = fluidStack.amount
 
 		tooltipComponents.add(fluidName.copy().append(" $mb mB"))
+	}
+
+	override fun isBarVisible(stack: ItemStack): Boolean {
+		return true
+	}
+
+	override fun getBarWidth(stack: ItemStack): Int {
+		val heldAmount = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)?.amount ?: 0
+		val percent = heldAmount / MAX_FLUID_AMOUNT.toFloat()
+
+		return (percent * 13).toInt()
+	}
+
+	override fun getBarColor(stack: ItemStack): Int {
+		val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+		if (fluidContent.isEmpty) return 0xFF000000.toInt()
+
+		return RenderUtil.getColorFromFluid(fluidContent.copy())
 	}
 
 	companion object {
