@@ -52,7 +52,7 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 	}
 
 	companion object {
-		val clientItemExtensions = object : IClientItemExtensions {
+		val CLIENT_ITEM_EXTENSIONS = object : IClientItemExtensions {
 			val BEWLR = DiaphanousBEWLR()
 
 			override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {

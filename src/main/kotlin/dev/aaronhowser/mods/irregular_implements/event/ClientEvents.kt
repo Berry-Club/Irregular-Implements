@@ -15,6 +15,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEner
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.item.EnderBucketBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -223,18 +224,23 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerClientExtensions(event: RegisterClientExtensionsEvent) {
 		event.registerItem(
-			DiaphanousBEWLR.clientItemExtensions,
+			DiaphanousBEWLR.CLIENT_ITEM_EXTENSIONS,
 			ModItems.DIAPHANOUS_BLOCK.get()
 		)
 
 		event.registerItem(
-			CustomCraftingTableBEWLR.clientItemExtensions,
+			CustomCraftingTableBEWLR.CLIENT_ITEM_EXTENSIONS,
 			ModItems.CUSTOM_CRAFTING_TABLE.get()
 		)
 
 		event.registerItem(
-			SpectreIlluminatorBEWLR.clientItemExtensions,
+			SpectreIlluminatorBEWLR.CLIENT_ITEM_EXTENSIONS,
 			ModItems.SPECTRE_ILLUMINATOR.get()
+		)
+
+		event.registerItem(
+			EnderBucketBEWLR.CLIENT_ITEM_EXTENSIONS,
+			ModItems.ENDER_BUCKET.get()
 		)
 	}
 
