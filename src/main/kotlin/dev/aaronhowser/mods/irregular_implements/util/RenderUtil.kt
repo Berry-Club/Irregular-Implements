@@ -242,14 +242,14 @@ object RenderUtil {
 			.getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
 			.apply(clientExt.getStillTexture(fluidStack))
 
-		return RenderUtil.getSpriteAverageColor(sprite)
+		return getSpriteAverageColor(sprite)
 	}
 
 	private val SPRITE_AVERAGE_COLOR_CACHE: MutableMap<TextureAtlasSprite, Int> = mutableMapOf()
 
 	fun getSpriteAverageColor(sprite: TextureAtlasSprite): Int {
 		val cachedColor = SPRITE_AVERAGE_COLOR_CACHE[sprite]
-//		if (cachedColor != null) return cachedColor
+		if (cachedColor != null) return cachedColor
 
 		val nativeImage = sprite.contents().originalImage
 		val width = nativeImage.width
