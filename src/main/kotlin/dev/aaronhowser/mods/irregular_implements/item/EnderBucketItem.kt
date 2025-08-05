@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.FluidTags
@@ -16,6 +17,7 @@ import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ItemUtils
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BucketPickup
@@ -67,6 +69,17 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 	override fun getMaxStackSize(stack: ItemStack): Int {
 		return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
+	}
+
+	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+		val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+		if (fluidContent.isEmpty) return
+
+		val fluidStack = fluidContent.copy()
+		val fluidType = fluidStack.fluidType
+		val fluidName = fluidType.getDescription(fluidStack)
+
+		tooltipComponents.add(fluidName)
 	}
 
 	companion object {
