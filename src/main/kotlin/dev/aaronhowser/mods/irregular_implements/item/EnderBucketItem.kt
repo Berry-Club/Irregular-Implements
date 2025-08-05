@@ -180,7 +180,9 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			container: ItemStack
 		): Boolean {
 			val fluidContent = container.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
-			val fluid = fluidContent.fluid
+
+			val fluidStack = fluidContent.copy()
+			val fluid = fluidStack.fluid
 
 			if (fluid !is FlowingFluid) return false
 
@@ -200,7 +202,6 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 				}
 			}
 
-			val fluidStack = fluidContent.copy()
 			val fluidType = fluid.fluidType
 
 			if (fluidType.isVaporizedOnPlacement(level, blockPos, fluidStack)) {
@@ -210,7 +211,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 			if (block is LiquidBlockContainer && block.canPlaceLiquid(player, level, blockPos, blockState, fluid)) {
 				block.placeLiquid(level, blockPos, blockState, fluid.getSource(false))
-				playSound(fluid, player, level, blockPos)
+				playSound(fluidStack, player, level, blockPos)
 
 				return true
 			}
@@ -220,15 +221,15 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			return if (!level.setBlock(blockPos, fluid.defaultFluidState().createLegacyBlock(), 11) && !blockState.fluidState.isSource) {
 				false
 			} else {
-				playSound(fluid, player, level, blockPos)
+				playSound(fluidStack, player, level, blockPos)
 				true
 			}
 
 		}
 
-		private fun playSound(fluid: Fluid, player: Player, level: Level, blockPos: BlockPos) {
-			val soundEvent = fluid.fluidType.getSound(player, level, blockPos, SoundActions.BUCKET_EMPTY)
-				?: if (fluid.`is`(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
+		private fun playSound(fluidStack: FluidStack, player: Player, level: Level, blockPos: BlockPos) {
+			val soundEvent = fluidStack.fluidType.getSound(player, level, blockPos, SoundActions.BUCKET_EMPTY)
+				?: if (fluidStack.`is`(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
 
 			level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS)
 			level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos)
