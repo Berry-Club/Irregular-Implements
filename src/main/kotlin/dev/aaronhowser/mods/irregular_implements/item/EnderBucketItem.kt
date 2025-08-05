@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
+import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
@@ -10,6 +12,7 @@ import net.minecraft.tags.FluidTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ItemUtils
@@ -19,11 +22,12 @@ import net.minecraft.world.level.block.BucketPickup
 import net.minecraft.world.level.block.LiquidBlockContainer
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.level.material.FlowingFluid
-import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.neoforged.neoforge.capabilities.Capabilities
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
 import net.neoforged.neoforge.common.SoundActions
+import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.fluids.SimpleFluidContent
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
@@ -71,9 +75,20 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
 			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
 
-			stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT)?.fluid ?: return 0xFFFFFFFF.toInt()
+			val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+			if (fluidContent.isEmpty) return 0xFFFFFFFF.toInt()
+			val fluidStack = fluidContent.copy()
 
-			return 0xFFFFFFFF.toInt()
+			val clientExt = IClientFluidTypeExtensions.of(fluidContent.fluid)
+			val tintColor = clientExt.getTintColor(fluidStack)
+
+			if (tintColor != -1) return tintColor
+
+			val sprite = Minecraft.getInstance()
+				.getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+				.apply(clientExt.getStillTexture(fluidStack))
+
+			return RenderUtil.getSpriteAverageColor(sprite)
 		}
 
 		private fun tryFill(

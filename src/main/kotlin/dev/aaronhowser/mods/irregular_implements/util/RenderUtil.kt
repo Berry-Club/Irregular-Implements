@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.util.RandomSource
 import net.minecraft.world.phys.Vec3
 import org.joml.Quaternionf
@@ -225,6 +226,48 @@ object RenderUtil {
 		}
 
 		poseStack.popPose()
+	}
+
+	private val SPRITE_AVERAGE_COLOR_CACHE: MutableMap<TextureAtlasSprite, Int> = mutableMapOf()
+
+	fun getSpriteAverageColor(sprite: TextureAtlasSprite): Int {
+		val cachedColor = SPRITE_AVERAGE_COLOR_CACHE[sprite]
+//		if (cachedColor != null) return cachedColor
+
+		val nativeImage = sprite.contents().originalImage
+		val width = nativeImage.width
+		val height = nativeImage.height
+
+		var totalRed = 0
+		var totalGreen = 0
+		var totalBlue = 0
+		var totalPixels = 0
+
+		for (x in 0 until width) for (y in 0 until height) {
+			val color = nativeImage.getPixelRGBA(x, y)
+
+			val a = color and 0xFF
+			if (a <= 0) continue
+
+			val r = (color shr 24) and 0xFF
+			val g = (color shr 16) and 0xFF
+			val b = (color shr 8) and 0xFF
+
+			totalRed += r
+			totalGreen += g
+			totalBlue += b
+			totalPixels++
+		}
+
+		if (totalPixels == 0) return 0xFFFFFFFF.toInt()
+
+		val averageRed = (totalRed / totalPixels).coerceIn(0, 255)
+		val averageGreen = (totalGreen / totalPixels).coerceIn(0, 255)
+		val averageBlue = (totalBlue / totalPixels).coerceIn(0, 255)
+
+		val averageColor = (0xFF shl 24) or (averageRed shl 16) or (averageGreen shl 8) or averageBlue
+		SPRITE_AVERAGE_COLOR_CACHE[sprite] = averageColor
+		return averageColor
 	}
 
 }

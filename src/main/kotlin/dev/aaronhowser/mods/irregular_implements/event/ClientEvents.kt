@@ -15,7 +15,6 @@ import dev.aaronhowser.mods.irregular_implements.client.render.block.SpectreEner
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.item.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBEWLR
-import dev.aaronhowser.mods.irregular_implements.client.render.item.EnderBucketBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -104,6 +103,12 @@ object ClientEvents {
 		event.register(
 			BiomeCrystalItem::getItemColor,
 			ModItems.BIOME_CRYSTAL.get()
+		)
+
+		event.register(
+			EnderBucketItem::getItemColor,
+			ModItems.ENDER_BUCKET.get(),
+			ModItems.REINFORCED_ENDER_BUCKET.get()
 		)
 
 	}
@@ -236,11 +241,6 @@ object ClientEvents {
 		event.registerItem(
 			SpectreIlluminatorBEWLR.ClientItemExtensions,
 			ModItems.SPECTRE_ILLUMINATOR.get()
-		)
-
-		event.registerItem(
-			EnderBucketBEWLR.ClientItemExtensions,
-			ModItems.ENDER_BUCKET.get()
 		)
 	}
 
