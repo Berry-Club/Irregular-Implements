@@ -26,8 +26,6 @@ class ItemFilterMenu(
 		addPlayerInventorySlots(59)
 	}
 
-	private val holderLookup = this.playerInventory.player.level().registryAccess()
-
 	private fun getFilterComponent(): ItemFilterDataComponent? {
 		return getHeldItemStack().get(ModDataComponents.ITEM_FILTER_ENTRIES)
 	}
@@ -50,11 +48,13 @@ class ItemFilterMenu(
 	}
 
 	override fun addSlots() {
+		val holderLookup = this.playerInventory.player.registryAccess()
+
 		for (index in 0 until 9) {
 			val x = 8 + index * 18
 			val y = 26
 
-			val slot = ItemFilterSlot(::getHeldItemStack, this.holderLookup, x, y)
+			val slot = ItemFilterSlot(::getHeldItemStack, holderLookup, x, y)
 
 			this.addSlot(slot)
 		}
