@@ -60,8 +60,9 @@ class SpectreCoilBlockEntity(
 		if (coilType != null) {
 			this.coilType = coilType
 		}
-
 	}
+
+	private var cachedEnergyHandler: IEnergyStorage? = null
 
 	/**
 	 * Returns a fake energy handler that can't be interacted with, but knows how much energy exists.
@@ -70,10 +71,12 @@ class SpectreCoilBlockEntity(
 	fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
 		if (direction != blockState.getValue(SpectreCoilBlock.FACING)) return null
 
+		if (cachedEnergyHandler != null) return cachedEnergyHandler
+
 		val level = this.level as? ServerLevel ?: return null
 		val coil = SpectreCoilSavedData.get(level).getCoil(this.ownerUuid)
 
-		return object : IEnergyStorage {
+		cachedEnergyHandler = object : IEnergyStorage {
 			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
 				return 0
 			}
@@ -98,6 +101,8 @@ class SpectreCoilBlockEntity(
 				return false
 			}
 		}
+
+		return cachedEnergyHandler
 	}
 
 	private fun tick() {
