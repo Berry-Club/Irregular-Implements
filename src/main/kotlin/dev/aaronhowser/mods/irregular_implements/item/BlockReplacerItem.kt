@@ -106,7 +106,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			originalStateSoundType.pitch * 0.8f
 		)
 
-		val newStateSoundType = stateToPlace.soundType
+		val newStateSoundType = stateToPlace.getSoundType(level, clickedPos, player)
 		level.playSound(
 			null,
 			clickedPos,
