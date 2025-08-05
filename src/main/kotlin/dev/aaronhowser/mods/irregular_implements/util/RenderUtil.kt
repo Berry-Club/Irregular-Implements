@@ -261,9 +261,9 @@ object RenderUtil {
 
 		if (totalPixels == 0) return 0xFFFFFFFF.toInt()
 
-		val averageRed = (totalRed / totalPixels).coerceIn(0, 255)
-		val averageGreen = (totalGreen / totalPixels).coerceIn(0, 255)
-		val averageBlue = (totalBlue / totalPixels).coerceIn(0, 255)
+		val averageRed = totalRed / totalPixels
+		val averageGreen = totalGreen / totalPixels
+		val averageBlue = totalBlue / totalPixels
 
 		val averageColor = (0xFF shl 24) or (averageRed shl 16) or (averageGreen shl 8) or averageBlue
 		SPRITE_AVERAGE_COLOR_CACHE[sprite] = averageColor
