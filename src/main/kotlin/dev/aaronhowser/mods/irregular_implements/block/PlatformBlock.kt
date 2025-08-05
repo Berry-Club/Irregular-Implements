@@ -38,16 +38,12 @@ class PlatformBlock(
 			?.entityPassesFilter(entity)
 			.isTrue
 
-		val shouldFall =
-			!context.isAbove(Shapes.block(), pos, true)
-					|| (
-					entity != null && (
-							entity.isDescending
-									|| entityPassesFilter
-							)
-					)
+		val isBelow = !context.isAbove(Shapes.block(), pos, true)
+		val isDescendingOrPassesFilter = entityPassesFilter || entity?.isDescending.isTrue
 
-		return if (shouldFall) Shapes.empty() else SHAPE
+		val shouldPassThrough = isBelow || isDescendingOrPassesFilter
+
+		return if (shouldPassThrough) Shapes.empty() else SHAPE
 	}
 
 
