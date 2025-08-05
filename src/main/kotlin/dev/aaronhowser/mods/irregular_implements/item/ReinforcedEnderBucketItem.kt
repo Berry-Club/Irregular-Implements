@@ -2,21 +2,13 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
-import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
-import net.minecraft.sounds.SoundEvents
-import net.minecraft.sounds.SoundSource
-import net.minecraft.tags.FluidTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.ItemUtils
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
@@ -27,14 +19,11 @@ import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.neoforged.neoforge.capabilities.Capabilities
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
-import net.neoforged.neoforge.common.SoundActions
 import net.neoforged.neoforge.fluids.FluidStack
-import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.fluids.SimpleFluidContent
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 
-class EnderBucketItem(properties: Properties) : Item(properties) {
+class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 
 	override fun use(
 		level: Level,
@@ -67,10 +56,6 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 		}
 	}
 
-	override fun getMaxStackSize(stack: ItemStack): Int {
-		return if (stack.has(ModDataComponents.SIMPLE_FLUID_CONTENT)) 1 else 16
-	}
-
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
 		val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
 		if (fluidContent.isEmpty) return
@@ -79,30 +64,14 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 		val fluidType = fluidStack.fluidType
 		val fluidName = fluidType.getDescription(fluidStack)
 
-		tooltipComponents.add(fluidName)
+		val mb = fluidStack.amount
+
+		tooltipComponents.add(fluidName.copy().append(" $mb mB"))
 	}
 
 	companion object {
-		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(16)
-
-		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
-			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
-
-			val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
-			if (fluidContent.isEmpty) return 0xFFFFFFFF.toInt()
-			val fluidStack = fluidContent.copy()
-
-			val clientExt = IClientFluidTypeExtensions.of(fluidContent.fluid)
-			val tintColor = clientExt.getTintColor(fluidStack)
-
-			if (tintColor != -1) return tintColor
-
-			val sprite = Minecraft.getInstance()
-				.getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-				.apply(clientExt.getStillTexture(fluidStack))
-
-			return RenderUtil.getSpriteAverageColor(sprite)
-		}
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+		const val MAX_FLUID_AMOUNT: Int = 16 * 1000
 
 		private fun tryFill(
 			level: Level,
@@ -110,12 +79,18 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			usedStack: ItemStack,
 			blockPos: BlockPos
 		): InteractionResultHolder<ItemStack> {
+			val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+
+			if (currentContents.amount + 1000 > MAX_FLUID_AMOUNT) {
+				return InteractionResultHolder.fail(usedStack)
+			}
+
 			val blockState = level.getBlockState(blockPos)
 			val block = blockState.block
 
 			if (block !is BucketPickup) return InteractionResultHolder.fail(usedStack)
 
-			val sourcePos = getNearestSource(level, blockPos, blockState.fluidState.fluidType)
+			val sourcePos = EnderBucketItem.getNearestSource(level, blockPos, blockState.fluidState.fluidType)
 				?: return InteractionResultHolder.fail(usedStack)
 
 			val sourceState = level.getBlockState(sourcePos)
@@ -128,51 +103,23 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 			if (pickup.isEmpty || fluidStack == null) return InteractionResultHolder.fail(usedStack)
 
-			sourceBlock.getPickupSound(sourceState).ifPresent {
-				player.playSound(it)
+			var newContents: FluidStack
+
+			if (currentContents.isEmpty) {
+				newContents = fluidStack.copy()
+			} else {
+				newContents = currentContents.copy()
+				newContents.amount += fluidStack.amount
 			}
+
+			sourceBlock.getPickupSound(sourceState).ifPresent(player::playSound)
 
 			level.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos)
 
-			val newStack = usedStack.copyWithCount(1)
-			newStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(fluidStack))
+			newContents.amount += fluidStack.amount
+			usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(newContents))
 
-			val resultStack = ItemUtils.createFilledResult(usedStack, player, newStack)
-
-			return InteractionResultHolder.sidedSuccess(resultStack, level.isClientSide)
-		}
-
-		fun getNearestSource(
-			level: Level,
-			blockPos: BlockPos,
-			fluidType: FluidType
-		): BlockPos? {
-			val positionsToCheck: MutableList<BlockPos> = mutableListOf()
-			val checkedPositions: MutableList<BlockPos> = mutableListOf()
-
-			positionsToCheck.add(blockPos)
-
-			while (positionsToCheck.isNotEmpty() && checkedPositions.size < 2000) {
-				val currentPos = positionsToCheck.removeAt(0)
-				checkedPositions.add(currentPos)
-
-				if (!level.isLoaded(currentPos)) continue
-
-				val checkedFluidState = level.getFluidState(currentPos)
-				if (checkedFluidState.isSource && checkedFluidState.fluidType == fluidType) return currentPos
-
-				for (direction in Direction.entries) {
-					val nextPos = currentPos.relative(direction)
-					if (!checkedPositions.contains(nextPos)) {
-						val fluidThere = level.getFluidState(nextPos)
-						if (!fluidThere.isEmpty) {
-							positionsToCheck.add(nextPos)
-						}
-					}
-				}
-			}
-
-			return null
+			return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
 		}
 
 		private fun tryEmpty(
@@ -184,6 +131,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			blockHitResult: BlockHitResult
 		): InteractionResultHolder<ItemStack> {
 			val currentContents = usedStack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+
 			val contentFluid = currentContents.fluid
 
 			val clickedState = level.getBlockState(clickedPos)
@@ -196,7 +144,10 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 			if (!attemptPlace(player, level, posToPlace, blockHitResult, usedStack)) return InteractionResultHolder.fail(usedStack)
 
-			usedStack.remove(ModDataComponents.SIMPLE_FLUID_CONTENT)
+			val newContents = currentContents.copy()
+			newContents.amount -= 1000
+
+			usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(newContents))
 
 			return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
 		}
@@ -212,6 +163,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			val fluidContent = container.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
 
 			val fluidStack = fluidContent.copy()
+			if (fluidStack.amount < 1000) return false
 			val fluid = fluidStack.fluid
 
 			if (fluid !is FlowingFluid) return false
@@ -240,7 +192,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 			if (block is LiquidBlockContainer && block.canPlaceLiquid(player, level, blockPos, blockState, fluid)) {
 				block.placeLiquid(level, blockPos, blockState, fluid.getSource(false))
-				playSound(fluidStack, player, level, blockPos)
+				EnderBucketItem.playSound(fluidStack, player, level, blockPos)
 
 				return true
 			}
@@ -250,17 +202,9 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			return if (!level.setBlock(blockPos, fluid.defaultFluidState().createLegacyBlock(), 11) && !blockState.fluidState.isSource) {
 				false
 			} else {
-				playSound(fluidStack, player, level, blockPos)
+				EnderBucketItem.playSound(fluidStack, player, level, blockPos)
 				true
 			}
-		}
-
-		fun playSound(fluidStack: FluidStack, player: Player, level: Level, blockPos: BlockPos) {
-			val soundEvent = fluidStack.fluidType.getSound(player, level, blockPos, SoundActions.BUCKET_EMPTY)
-				?: if (fluidStack.`is`(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
-
-			level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS)
-			level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos)
 		}
 
 	}

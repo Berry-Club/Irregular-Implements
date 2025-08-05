@@ -73,7 +73,8 @@ object ModItems {
 	// Bucket
 	val ENDER_BUCKET: DeferredItem<EnderBucketItem> =
 		register("ender_bucket", ::EnderBucketItem, EnderBucketItem.DEFAULT_PROPERTIES)
-	val REINFORCED_ENDER_BUCKET = basic("reinforced_ender_bucket")
+	val REINFORCED_ENDER_BUCKET: DeferredItem<ReinforcedEnderBucketItem> =
+		register("reinforced_ender_bucket", ::ReinforcedEnderBucketItem, ReinforcedEnderBucketItem.DEFAULT_PROPERTIES)
 
 	// Plants
 	val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
