@@ -13,6 +13,7 @@ class SpectreCoilSavedData : SavedData() {
 
 	private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
 	private val energyInjectors: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
+	private val coils: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
 
 	fun getEnergyInjector(ownerUuid: UUID): IEnergyStorage {
 		val existing = energyInjectors[ownerUuid]
@@ -62,7 +63,10 @@ class SpectreCoilSavedData : SavedData() {
 	}
 
 	fun getCoil(ownerUuid: UUID): IEnergyStorage {
-		return object : IEnergyStorage {
+		val existing = coils[ownerUuid]
+		if (existing != null) return existing
+
+		val new = object : IEnergyStorage {
 			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
 				return 0
 			}
@@ -99,6 +103,9 @@ class SpectreCoilSavedData : SavedData() {
 				return false
 			}
 		}
+
+		coils[ownerUuid] = new
+		return new
 	}
 
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
