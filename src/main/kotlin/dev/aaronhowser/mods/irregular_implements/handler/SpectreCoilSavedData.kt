@@ -12,9 +12,13 @@ import java.util.*
 class SpectreCoilSavedData : SavedData() {
 
 	private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
+	private val energyInjectors: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
 
 	fun getEnergyInjector(ownerUuid: UUID): IEnergyStorage {
-		return object : IEnergyStorage {
+		val existing = energyInjectors[ownerUuid]
+		if (existing != null) return existing
+
+		val new = object : IEnergyStorage {
 			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
 				val currentEnergy = coilEntries.getOrDefault(ownerUuid, 0)
 				val newEnergy = minOf(
@@ -51,6 +55,10 @@ class SpectreCoilSavedData : SavedData() {
 				return true
 			}
 		}
+
+		energyInjectors[ownerUuid] = new
+
+		return new
 	}
 
 	fun getCoil(ownerUuid: UUID): IEnergyStorage {
