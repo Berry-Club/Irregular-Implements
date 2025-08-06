@@ -224,7 +224,6 @@ object ModItems {
 		register("void_stone", ::VoidStoneItem, VoidStoneItem.DEFAULT_PROPERTIES)
 	val WHITE_STONE: DeferredItem<WhiteStoneItem> =
 		register("white_stone", ::WhiteStoneItem, WhiteStoneItem.DEFAULT_PROPERTIES)
-	val MAGNETIC_FORCE = basic("magnetic_force")
 
 	// Not above 1.6.4
 	val PORTABLE_ENDER_BRIDGE: DeferredItem<PortableEnderBridgeItem> =
@@ -281,6 +280,7 @@ object ModItems {
 	// - Precious Emerald (undocumented and weird)
 	// - Sound Pattern, Recorder, Dampener (just use Super Sound Muffler)
 	// - Loot Generator (don't care)
+	// - Magnetic Force (don't care, obscure, arguably OP)
 
 	private fun basic(id: String): DeferredItem<Item> {
 		return ITEM_REGISTRY.registerSimpleItem(id)

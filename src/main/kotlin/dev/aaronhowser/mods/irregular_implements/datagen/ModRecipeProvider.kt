@@ -1116,15 +1116,6 @@ class ModRecipeProvider(
 			)
 		),
 		shapedRecipe(
-			ModItems.MAGNETIC_FORCE,
-			"E,M,P",
-			mapOf(
-				'E' to ing(Tags.Items.ENDER_PEARLS),
-				'M' to ing(Tags.Items.GEMS_EMERALD),
-				'P' to ing(Items.PAPER),
-			)
-		),
-		shapedRecipe(
 			ModItems.PORTABLE_ENDER_BRIDGE,
 			"P,S,S",
 			mapOf(

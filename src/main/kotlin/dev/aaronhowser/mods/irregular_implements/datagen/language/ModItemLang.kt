@@ -62,7 +62,6 @@ object ModItemLang {
 			addItem(ModItems.VOIDING_DROP_FILTER, "Voiding Drop Filter")
 			addItem(ModItems.VOID_STONE, "Void Stone")
 			addItem(ModItems.WHITE_STONE, "White Stone")
-			addItem(ModItems.MAGNETIC_FORCE, "Magnetic Force")
 			addItem(ModItems.PORTABLE_ENDER_BRIDGE, "Portable Ender Bridge")
 			addItem(ModItems.DIAMOND_BREAKER, "Diamond Breaker")
 			addItem(ModItems.BLOCK_REPLACER, "Block Replacer")
