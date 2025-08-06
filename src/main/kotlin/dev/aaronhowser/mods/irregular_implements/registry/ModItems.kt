@@ -67,7 +67,7 @@ object ModItems {
 	val SUPER_LUBRICANT_TINCTURE: DeferredItem<Item> = basic("super_lubricant_tincture")
 	val SPECTRE_INGOT: DeferredItem<Item> = basic("spectre_ingot")
 	val SPECTRE_STRING: DeferredItem<Item> = basic("spectre_string")
-	val LUMINOUS_POWDER: DeferredItem<Item> = basic("luminous_powder")  //TODO: Craft with item to make enchant glint emissive
+	val LUMINOUS_POWDER: DeferredItem<Item> = basic("luminous_powder")
 
 	// Bucket
 	val ENDER_BUCKET: DeferredItem<EnderBucketItem> =

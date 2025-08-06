@@ -132,7 +132,7 @@ object ModInfoLang {
 		addInfo(ModItems.ENTITY_FILTER, "Allows you to filter by entity type. Do so by using it on an entity.")
 		addInfo(ModBlocks.SAKANADE_SPORES, "Found on the bottom of huge brown mushrooms.\n\nTouching it inflicts you with Collapse for a short time, which inverts your controls.\n\nThis also inverts mobs' movement! They'll move the opposite direction they're trying to.")
 		addInfo(ModItems.ECTOPLASM, "Every time an entity dies, it has a chance of spawning a Spirit.\n\nSpirits can only be killed by magic, and they drop Ectoplasm.\n\nCan also be harvested from Spectre Trees.")
-		addInfo(ModItems.LUMINOUS_POWDER, "Can be crafted onto enchanted items to make their glints glow in the dark.")
+		addInfo(ModItems.LUMINOUS_POWDER, "Can be crafted onto items to make them glow in the dark.")
 		addInfo(ModItems.LOTUS_BLOSSOM, "Grants experience when consumed.\n\nSneak to consume the entire stack.")
 		addInfo(ModItems.GOLDEN_EGG, "Spawns a Chicken that lays Gold Ingots rather than Eggs.\n\nCan be found in Bean Pods, which can be found at the top of Bean Stalks grown from Magic Beans.")
 		addInfo(ModItems.BLACKOUT_POWDER, "Removes the Spectre Illuminator in the chunk it's used in.")
