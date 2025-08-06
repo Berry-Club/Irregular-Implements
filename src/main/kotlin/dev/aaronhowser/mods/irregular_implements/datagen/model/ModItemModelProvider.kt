@@ -119,25 +119,6 @@ class ModItemModelProvider(
 		}
 	}
 
-	private fun buckets() {
-		val enderBucket = ModItems.ENDER_BUCKET.get()
-
-		getBuilder(getName(enderBucket).toString())
-			.parent(ModelFile.UncheckedModelFile("item/generated"))
-			.texture("layer0", "item/ender_bucket/base")
-			.texture("layer1", "item/ender_bucket/fluid")
-
-		val reinforcedEnderBucket = ModItems.REINFORCED_ENDER_BUCKET.get()
-
-		getBuilder(getName(reinforcedEnderBucket).toString())
-			.parent(ModelFile.UncheckedModelFile("item/generated"))
-			.texture("layer0", "item/reinforced_ender_bucket/base")
-			.texture("layer1", "item/reinforced_ender_bucket/fluid")
-
-		handledItems.add(enderBucket)
-		handledItems.add(reinforcedEnderBucket)
-	}
-
 	private fun diviningRod() {
 		val item = ModItems.DIVINING_ROD.get()
 
@@ -200,14 +181,51 @@ class ModItemModelProvider(
 		handledItems.add(item)
 	}
 
+	private fun buckets() {
+		val enderBucket = ModItems.ENDER_BUCKET.get()
+		val enderBucketName = getName(enderBucket).toString()
+
+		val enderBaseModel = getBuilder(enderBucketName)
+			.parent(ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", "item/ender_bucket/base")
+
+		val enderFluidModel = getBuilder(enderBucketName + "_fluid")
+			.parent(enderBaseModel)
+			.texture("layer1", "item/ender_bucket/fluid")
+
+		enderBaseModel
+			.override()
+			.predicate(EnderBucketItem.HAS_FLUID, 1f)
+			.model(enderFluidModel)
+			.end()
+
+		val reinforcedEnderBucket = ModItems.REINFORCED_ENDER_BUCKET.get()
+		val reinforcedEnderBucketName = getName(reinforcedEnderBucket).toString()
+
+		val reinforcedBaseModel = getBuilder(reinforcedEnderBucketName)
+			.parent(ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", "item/reinforced_ender_bucket/base")
+
+		val reinforcedFluidModel = getBuilder(reinforcedEnderBucketName + "_fluid")
+			.parent(reinforcedBaseModel)
+			.texture("layer1", "item/reinforced_ender_bucket/fluid")
+
+		reinforcedBaseModel
+			.override()
+			.predicate(EnderBucketItem.HAS_FLUID, 1f)
+			.model(reinforcedFluidModel)
+			.end()
+
+		handledItems.add(enderBucket)
+		handledItems.add(reinforcedEnderBucket)
+	}
+
 	private fun basicItems() {
 		val complexModels = listOf(
 			ModItems.EMERALD_COMPASS,
 			ModItems.ENDER_BUCKET,
 			ModItems.REINFORCED_ENDER_BUCKET,
 			ModItems.REDSTONE_ACTIVATOR,
-//			ModItems.SOUND_PATTERN,
-//			ModItems.SOUND_RECORDER,
 			ModItems.SPECTRE_CHARGER_BASIC,
 			ModItems.DIVINING_ROD
 		)

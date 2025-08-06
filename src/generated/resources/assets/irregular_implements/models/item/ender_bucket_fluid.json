@@ -1,0 +1,6 @@
+{
+  "parent": "irregular_implements:item/ender_bucket",
+  "textures": {
+    "layer1": "irregular_implements:item/ender_bucket/fluid"
+  }
+}
