@@ -220,4 +220,12 @@ object ModDataComponents {
 				.networkSynchronized(EnderLetterContentsDataComponent.STREAM_CODEC)
 		}
 
+	@JvmField
+	val HAS_LUMINOUS_POWDER: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
+		DATA_COMPONENT_REGISTRY.registerComponentType("has_luminous_powder") {
+			it
+				.persistent(Unit.CODEC)
+				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE))
+		}
+
 }
