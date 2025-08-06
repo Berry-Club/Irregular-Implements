@@ -25,7 +25,6 @@ object ModItemLang {
 			addItem(ModItems.MAGIC_BEAN, "Magic Bean")
 			addItem(ModItems.BEAN_STEW, "Bean Stew")
 			addItem(ModItems.WATER_WALKING_BOOTS, "Water Walking Boots")
-			addItem(ModItems.LOOT_GENERATOR, "Loot Generator")
 			addItem(ModItems.LAVA_CHARM, "Lava Charm")
 			addItem(ModItems.LAVA_WADERS, "Lava Waders")
 			addItem(ModItems.OBSIDIAN_SKULL, "Obsidian Skull")

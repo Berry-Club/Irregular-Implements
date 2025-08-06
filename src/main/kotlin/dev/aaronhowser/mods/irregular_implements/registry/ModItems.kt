@@ -29,7 +29,6 @@ object ModItems {
 		register("biome_crystal", ::BiomeCrystalItem, BiomeCrystalItem.DEFAULT_PROPERTIES)
 	val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
 		register("summoning_pendulum", ::SummoningPendulumItem, SummoningPendulumItem.DEFAULT_PROPERTIES)
-	val LOOT_GENERATOR = basic("loot_generator")
 	val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
 		register("bottle_of_air", ::AirBottleItem, AirBottleItem.DEFAULT_PROPERTIES)
 	val ENDER_LETTER: DeferredItem<EnderLetterItem> =
@@ -281,6 +280,7 @@ object ModItems {
 	// - Blood Stone (requires Blood Moon)
 	// - Precious Emerald (undocumented and weird)
 	// - Sound Pattern, Recorder, Dampener (just use Super Sound Muffler)
+	// - Loot Generator (don't care)
 
 	private fun basic(id: String): DeferredItem<Item> {
 		return ITEM_REGISTRY.registerSimpleItem(id)
