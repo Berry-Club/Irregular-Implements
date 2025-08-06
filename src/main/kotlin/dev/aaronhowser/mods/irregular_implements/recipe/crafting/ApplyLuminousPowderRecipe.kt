@@ -15,17 +15,17 @@ class ApplyLuminousPowderRecipe(
 ) : CustomRecipe(craftingCategory) {
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
-		val amountAnchors = input.items().count { LUMINOUS_POWDER_INGREDIENT.test(it) }
-		val amountNonAnchors = input.items().count(::isApplicable)
+		val amountLuminousPowder = input.items().count { LUMINOUS_POWDER_INGREDIENT.test(it) }
+		val amountNonLuminousPowders = input.items().count(::isApplicable)
 
-		return amountAnchors == 1 && amountNonAnchors == 1
+		return amountLuminousPowder == 1 && amountNonLuminousPowders == 1
 	}
 
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
 		val nonAnchor = input.items().first(::isApplicable)
 
 		val result = nonAnchor.copyWithCount(1)
-		result.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
+		result.set(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE)
 
 		return result
 	}

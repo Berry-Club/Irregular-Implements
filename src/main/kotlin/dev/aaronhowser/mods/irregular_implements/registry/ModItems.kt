@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Holder
+import net.minecraft.util.Unit
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
@@ -67,7 +68,7 @@ object ModItems {
 	val SUPER_LUBRICANT_TINCTURE: DeferredItem<Item> = basic("super_lubricant_tincture")
 	val SPECTRE_INGOT: DeferredItem<Item> = basic("spectre_ingot")
 	val SPECTRE_STRING: DeferredItem<Item> = basic("spectre_string")
-	val LUMINOUS_POWDER: DeferredItem<Item> = basic("luminous_powder")
+	val LUMINOUS_POWDER: DeferredItem<Item> = basicWithProperties("luminous_powder") { Item.Properties().component(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE) }
 
 	// Bucket
 	val ENDER_BUCKET: DeferredItem<EnderBucketItem> =
@@ -290,8 +291,8 @@ object ModItems {
 		return ITEM_REGISTRY.registerSimpleItem(id, properties)
 	}
 
-	private fun basic(id: String, maxStackSize: Int): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerSimpleItem(id, Item.Properties().stacksTo(maxStackSize))
+	private fun basicWithProperties(id: String, properties: Supplier<Item.Properties>): DeferredItem<Item> {
+		return ITEM_REGISTRY.registerItem(id) { Item(properties.get()) }
 	}
 
 	private fun <I : Item> register(
