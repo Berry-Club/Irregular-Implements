@@ -23,6 +23,7 @@ object ModTooltipLang {
 	const val VOID_STONE_HOLDING = "tooltip.irregular_implements.void_stone_holding"
 	const val VOID_STONE_REMOVE = "tooltip.irregular_implements.void_stone_remove"
 	const val ANCHORED = "tooltip.irregular_implements.anchored"
+	const val HAS_LUMINOUS_POWDER = "tooltip.irregular_implements.has_luminous_powder"
 	const val ALL_ORES = "tooltip.irregular_implements.all_ores"
 	const val LAZY = "tooltip.irregular_implements.lazy"
 	const val NOT_LAZY = "tooltip.irregular_implements.not_lazy"
@@ -93,6 +94,7 @@ object ModTooltipLang {
 			add(VOID_STONE_HOLDING, "Currently holding %s, inserting another will void and replace it")
 			add(VOID_STONE_REMOVE, "You can remove the %s by right-clicking the Stone into an empty slot")
 			add(ANCHORED, "Anchored")
+			add(HAS_LUMINOUS_POWDER, "Luminous Powder applied")
 			add(ALL_ORES, "All Ores")
 			add(LOCATION_COMPONENT, "%s, %dx %dy %dz")
 			add(LAZY, "Lazy")

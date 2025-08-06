@@ -153,7 +153,7 @@ object ModArmorItems {
 
 	private val FLUID_SHAPES: MutableMap<Float, VoxelShape> = HashMap()
 
-	fun tooltip(event: ItemTooltipEvent) {
+	fun lubricatedTooltip(event: ItemTooltipEvent) {
 		if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
 			event.toolTip.add(
 				ModTooltipLang.LUBRICATED

@@ -20,6 +20,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.particle.CubeParticle
 import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
+import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.*
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.client.color.item.ItemColor
@@ -260,8 +261,9 @@ object ClientEvents {
 
 	@SubscribeEvent
 	fun tooltipEvent(event: ItemTooltipEvent) {
-		ModArmorItems.tooltip(event)
+		ModArmorItems.lubricatedTooltip(event)
 		SpectreAnchorItem.tooltip(event)
+		ApplyLuminousPowderRecipe.tooltip(event)
 	}
 
 	private var changedAlpha = false

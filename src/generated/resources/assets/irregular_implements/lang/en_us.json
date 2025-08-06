@@ -759,6 +759,7 @@
   "tooltip.irregular_implements.entity_filter_entity": "Entity Type: %s",
   "tooltip.irregular_implements.floo_pouch.amount": "%d / %d Floo Powder",
   "tooltip.irregular_implements.forget_lazy_shape": "Forget Lazy Shape",
+  "tooltip.irregular_implements.has_luminous_powder": "Luminous Powder applied",
   "tooltip.irregular_implements.igniter_ignite": "Ignite",
   "tooltip.irregular_implements.igniter_keep_ignited": "Keep ignited",
   "tooltip.irregular_implements.igniter_toggle": "Toggle",

@@ -1,14 +1,18 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
+import net.minecraft.ChatFormatting
 import net.minecraft.core.HolderLookup
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.Level
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
 class ApplyLuminousPowderRecipe(
 	craftingCategory: CraftingBookCategory = CraftingBookCategory.MISC
@@ -43,6 +47,17 @@ class ApplyLuminousPowderRecipe(
 
 		fun isApplicable(itemStack: ItemStack): Boolean {
 			return !itemStack.isEmpty && !itemStack.has(ModDataComponents.HAS_LUMINOUS_POWDER)
+		}
+
+		fun tooltip(event: ItemTooltipEvent) {
+			val stack = event.itemStack
+			if (!stack.has(ModDataComponents.HAS_LUMINOUS_POWDER)) return
+
+			event.toolTip.add(
+				ModTooltipLang.HAS_LUMINOUS_POWDER
+					.toComponent()
+					.withStyle(ChatFormatting.YELLOW)
+			)
 		}
 	}
 }
