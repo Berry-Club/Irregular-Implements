@@ -51,22 +51,24 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 
 		if (!level.mayInteract(player, hitPos) || !player.mayUseItemAt(posToCheck, clickedFace, usedStack)) return InteractionResultHolder.fail(usedStack)
 
-		var clickedFluid = level.getFluidState(posToCheck)
-		if (clickedFluid.isEmpty) {
-			clickedFluid = level.getFluidState(posToCheck)
-		}
+		if (!player.isSecondaryUseActive) {
+			var clickedFluid = level.getFluidState(posToCheck)
+			if (clickedFluid.isEmpty) {
+				clickedFluid = level.getFluidState(posToCheck)
+			}
 
-		if (currentContents.fluidType == clickedFluid.fluidType) {
-			val success = tryFill(level, player, usedStack, posToCheck)
-			return if (success) {
-				InteractionResultHolder.success(usedStack)
-			} else {
-				InteractionResultHolder.fail(usedStack)
+			if (currentContents.fluidType == clickedFluid.fluidType) {
+				val success = tryFill(level, player, usedStack, posToCheck)
+				return if (success) {
+					InteractionResultHolder.success(usedStack)
+				} else {
+					InteractionResultHolder.fail(usedStack)
+				}
 			}
 		}
 
-		val success = if (currentContents.isEmpty) {
-			tryFill(level, player, usedStack, posToCheck)
+		val success = if (currentContents.isEmpty && !player.isSecondaryUseActive) {
+			tryFill(level, player, usedStack, posToCheck) || tryEmpty(level, player, usedStack, hitPos, clickedFace, blockHitResult)
 		} else {
 			tryEmpty(level, player, usedStack, hitPos, clickedFace, blockHitResult)
 		}
