@@ -15,31 +15,38 @@ object ModRecipeSerializers {
 		DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, IrregularImplements.ID)
 
 	val LUBRICATE_BOOT: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("lubricate_boot") { SimpleCraftingRecipeSerializer(::LubricateBootRecipe) }
+		simple("lubricate_boot", ::LubricateBootRecipe)
 
 	val WASH_BOOT: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("wash_boot") { SimpleCraftingRecipeSerializer(::WashBootRecipe) }
+		simple("wash_boot", ::WashBootRecipe)
 
 	val DIVINING_ROD: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("divining_rod") { SimpleCraftingRecipeSerializer(::DiviningRodRecipe) }
+		simple("divining_rod", ::DiviningRodRecipe)
 
 	val APPLY_SPECTRE_ANCHOR: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("apply_spectre_anchor") { SimpleCraftingRecipeSerializer(::ApplySpectreAnchorRecipe) }
+		simple("apply_spectre_anchor", ::ApplySpectreAnchorRecipe)
 
 	val SET_DIAPHANOUS_BLOCK: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("set_diaphanous_block") { SimpleCraftingRecipeSerializer(::SetDiaphanousBlockRecipe) }
+		simple("set_diaphanous_block", ::SetDiaphanousBlockRecipe)
 
 	val INVERT_DIAPHANOUS_BLOCK: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("invert_diaphanous_block") { SimpleCraftingRecipeSerializer(::InvertDiaphanousBlockRecipe) }
+		simple("invert_diaphanous_block", ::InvertDiaphanousBlockRecipe)
 
 	val CUSTOM_CRAFTING_TABLE: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("custom_crafting_table") { SimpleCraftingRecipeSerializer(::CustomCraftingTableRecipe) }
+		simple("custom_crafting_table", ::CustomCraftingTableRecipe)
 
 	val IMBUING: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("imbuing") { ImbuingRecipe.Serializer() }
+		registerRecipeSerializer("imbuing", ImbuingRecipe::Serializer)
 
 	val SET_PORTKEY_DISGUISE: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
-		registerRecipeSerializer("set_portkey_disguise") { SimpleCraftingRecipeSerializer(::SetPortkeyDisguiseRecipe) }
+		simple("set_portkey_disguise", ::SetPortkeyDisguiseRecipe)
+
+	val APPLY_LUMINOUS_POWDER: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+		simple("apply_luminous_powder", ::ApplyLuminousPowderRecipe)
+
+	private fun simple(name: String, factory: SimpleCraftingRecipeSerializer.Factory<*>): DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> {
+		return registerRecipeSerializer(name) { SimpleCraftingRecipeSerializer(factory) }
+	}
 
 	private fun registerRecipeSerializer(
 		name: String,

@@ -35,7 +35,7 @@ class ApplyLuminousPowderRecipe(
 	}
 
 	override fun getSerializer(): RecipeSerializer<*> {
-		return ModRecipeSerializers.APPLY_SPECTRE_ANCHOR.get()
+		return ModRecipeSerializers.APPLY_LUMINOUS_POWDER.get()
 	}
 
 	companion object {
