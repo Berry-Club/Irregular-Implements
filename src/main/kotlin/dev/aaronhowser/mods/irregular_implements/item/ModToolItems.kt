@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.world.entity.EquipmentSlotGroup
@@ -18,7 +18,7 @@ object ModToolItems {
 		Tiers.DIAMOND.speed,
 		Tiers.DIAMOND.attackDamageBonus,
 		Tiers.GOLD.enchantmentValue
-	) { ModItems.SPECTRE_INGOT.ingredient }
+	) { ModItems.SPECTRE_INGOT.asIngredient() }
 
 	private val BLOCK_RANGE_INCREASE_RL = OtherUtil.modResource("block_range_increase")
 	private val ENTITY_RANGE_INCREASE_RL = OtherUtil.modResource("entity_range_increase")

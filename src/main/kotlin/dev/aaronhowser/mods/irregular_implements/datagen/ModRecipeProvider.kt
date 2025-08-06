@@ -90,8 +90,8 @@ class ModRecipeProvider(
 
 		fun getIngredient(): Ingredient {
 			return when (this) {
-				is TagKeyIng -> tagKey.ingredient
-				is ItemLikeIng -> item.ingredient
+				is TagKeyIng -> tagKey.asIngredient()
+				is ItemLikeIng -> item.asIngredient()
 				is ItemStackIng -> if (itemStack.isComponentsPatchEmpty) {
 					Ingredient.of(itemStack)
 				} else {
@@ -1675,11 +1675,8 @@ class ModRecipeProvider(
 	}
 
 	companion object {
-		val ItemLike.ingredient: Ingredient
-			get() = Ingredient.of(this)
-
-		val TagKey<Item>.ingredient: Ingredient
-			get() = Ingredient.of(this)
+		fun ItemLike.asIngredient(): Ingredient = Ingredient.of(this)
+		fun TagKey<Item>.asIngredient(): Ingredient = Ingredient.of(this)
 	}
 
 }

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.item.component.PortkeyDisguiseDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -53,7 +53,7 @@ class SetPortkeyDisguiseRecipe(
 	}
 
 	companion object {
-		val PORTKEY_INGREDIENT: Ingredient = ModItems.PORTKEY.ingredient
+		val PORTKEY_INGREDIENT: Ingredient = ModItems.PORTKEY.asIngredient()
 
 		fun isApplicable(itemStack: ItemStack): Boolean {
 			return !itemStack.isEmpty && !itemStack.`is`(ModItems.PORTKEY)

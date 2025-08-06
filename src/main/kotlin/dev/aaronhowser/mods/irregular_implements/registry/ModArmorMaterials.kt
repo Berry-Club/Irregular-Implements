@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
@@ -121,12 +121,12 @@ object ModArmorMaterials {
 		}
 
 		fun repair(tag: TagKey<Item>): Builder {
-			repairIngredient = Supplier { tag.ingredient }
+			repairIngredient = Supplier { tag.asIngredient() }
 			return this
 		}
 
 		fun repair(itemHolder: Holder<Item>): Builder {
-			repairIngredient = Supplier { itemHolder.value().ingredient }
+			repairIngredient = Supplier { itemHolder.value().asIngredient() }
 			return this
 		}
 

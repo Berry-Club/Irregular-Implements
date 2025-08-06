@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi
 
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.*
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
@@ -47,17 +47,10 @@ class ModEmiPlugin : EmiPlugin {
 	}
 
 	companion object {
-		val ItemLike.emiStack: EmiStack
-			get() = EmiStack.of(this.asItem())
-
-		val Ingredient.emiIngredient: EmiIngredient
-			get() = EmiIngredient.of(this)
-
-		val ItemLike.emiIngredient: EmiIngredient
-			get() = EmiIngredient.of(this.ingredient)
-
-		val TagKey<Item>.emiIngredient: EmiIngredient
-			get() = EmiIngredient.of(this)
+		fun ItemLike.asEmiStack(): EmiStack = EmiStack.of(this.asItem())
+		fun Ingredient.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this)
+		fun ItemLike.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this.asIngredient())
+		fun TagKey<Item>.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this)
 	}
 
 }

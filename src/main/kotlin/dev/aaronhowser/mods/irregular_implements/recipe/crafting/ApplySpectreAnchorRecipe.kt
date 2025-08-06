@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -40,7 +40,7 @@ class ApplySpectreAnchorRecipe(
 	}
 
 	companion object {
-		val ANCHOR_INGREDIENT: Ingredient = ModItems.SPECTRE_ANCHOR.ingredient
+		val ANCHOR_INGREDIENT: Ingredient = ModItems.SPECTRE_ANCHOR.asIngredient()
 
 		fun isApplicable(itemStack: ItemStack): Boolean {
 			return !itemStack.isEmpty

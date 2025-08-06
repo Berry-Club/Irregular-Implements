@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -45,8 +45,8 @@ object ModInteractionRecipes {
 
 			EmiWorldInteractionRecipe
 				.builder()
-				.leftInput(ItemTags.DIRT.emiIngredient)
-				.rightInput(seedItem.emiIngredient, false)
+				.leftInput(ItemTags.DIRT.asEmiIngredient())
+				.rightInput(seedItem.asEmiIngredient(), false)
 				.output(EmiStack.of(seedItem.resultBlock))
 				.id(id)
 				.build()
@@ -143,7 +143,7 @@ object ModInteractionRecipes {
 
 		val stripRecipe = EmiWorldInteractionRecipe
 			.builder()
-			.leftInput(ModBlocks.SPECTRE_LOG.emiIngredient)
+			.leftInput(ModBlocks.SPECTRE_LOG.asEmiIngredient())
 			.rightInput(axesEmiIngredient, true)
 			.output(EmiStack.of(ModBlocks.STRIPPED_SPECTRE_LOG.asItem()))
 			.id(OtherUtil.modResource("/interaction/spectre_log_stripping"))
@@ -156,7 +156,7 @@ object ModInteractionRecipes {
 
 		if (convertsToSpectreSapling.isNotEmpty()) {
 			val saplingsEmiIngredient = EmiIngredient.of(Ingredient.of(*convertsToSpectreSapling.toTypedArray()))
-			val ectoplasmIngredient = ModItems.ECTOPLASM.emiIngredient
+			val ectoplasmIngredient = ModItems.ECTOPLASM.asEmiIngredient()
 
 			val spectreSaplingRecipe = EmiWorldInteractionRecipe
 				.builder()

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiStack
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiStack
 import dev.emi.emi.api.recipe.EmiRecipe
 import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories
@@ -32,7 +32,7 @@ class EmiAnvilRecipe(
 	}
 
 	override fun getOutputs(): List<EmiStack> {
-		return listOf(result.emiStack)
+		return listOf(result.asEmiStack())
 	}
 
 	override fun supportsRecipeTree(): Boolean {
@@ -56,7 +56,7 @@ class EmiAnvilRecipe(
 		//FIXME: fix only the first one showing (implement the random somewhere?)
 		widgets.addGeneratedSlot({ baseItem.emiStacks.first() }, randomInt, 0, 0)
 		widgets.addGeneratedSlot({ resource.emiStacks.first() }, randomInt, 49, 0)
-		widgets.addGeneratedSlot({ result.emiStack }, randomInt, 107, 0).recipeContext(this)
+		widgets.addGeneratedSlot({ result.asEmiStack() }, randomInt, 107, 0).recipeContext(this)
 
 	}
 

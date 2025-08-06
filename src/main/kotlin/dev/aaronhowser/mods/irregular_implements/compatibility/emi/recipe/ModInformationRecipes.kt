@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModInfoLang
@@ -45,7 +45,7 @@ object ModInformationRecipes {
 
 				val recipe = EmiInfoRecipe(
 					listOf(
-						item.emiIngredient
+						item.asEmiIngredient()
 					),
 					listOf(infoString.toComponent()),
 					OtherUtil.modResource("/info/$id")
@@ -58,7 +58,7 @@ object ModInformationRecipes {
 	}
 
 	private fun toEmiIngredients(vararg itemLikes: ItemLike): List<EmiIngredient> {
-		return itemLikes.map { it.emiIngredient }
+		return itemLikes.map { it.asEmiIngredient() }
 	}
 
 	private fun complexRecipes(): List<EmiInfoRecipe> {
@@ -104,7 +104,7 @@ object ModInformationRecipes {
 
 		recipes.add(
 			EmiInfoRecipe(
-				listOf(ModItemTagsProvider.SUPER_LUBRICATED_BLOCKS.emiIngredient),
+				listOf(ModItemTagsProvider.SUPER_LUBRICATED_BLOCKS.asEmiIngredient()),
 				listOf(ModInfoLang.LUBRICANT.toComponent()),
 				OtherUtil.modResource("/info/lubricated_blocks")
 			)

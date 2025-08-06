@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.ingredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -17,7 +17,7 @@ class LubricateBootRecipe(
 ) : CustomRecipe(craftingCategory) {
 
 	val bootIngredient: Ingredient = Ingredient.of(*ALL_BOOTS.toTypedArray())
-	val lubeIngredient: Ingredient = ModItems.SUPER_LUBRICANT_TINCTURE.ingredient
+	val lubeIngredient: Ingredient = ModItems.SUPER_LUBRICANT_TINCTURE.asIngredient()
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		var bootStack: ItemStack? = null

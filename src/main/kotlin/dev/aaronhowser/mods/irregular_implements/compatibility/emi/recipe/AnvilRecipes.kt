@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.emiIngredient
+import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.stack.EmiIngredient
@@ -10,18 +10,18 @@ object AnvilRecipes {
 
 	fun getRecipes(): List<EmiAnvilRecipe> {
 		val obsidianSkullRing = EmiAnvilRecipe(
-			ModItems.OBSIDIAN_SKULL.emiIngredient,
-			Items.FIRE_CHARGE.emiIngredient,
+			ModItems.OBSIDIAN_SKULL.asEmiIngredient(),
+			Items.FIRE_CHARGE.asEmiIngredient(),
 			ModItems.OBSIDIAN_SKULL_RING.asItem(),
 			OtherUtil.modResource("/anvil/obsidian_skull_ring")
 		)
 
 		val obsidianWaterWalkingSkullOne = EmiAnvilRecipe(
-			ModItems.WATER_WALKING_BOOTS.emiIngredient,
+			ModItems.WATER_WALKING_BOOTS.asEmiIngredient(),
 			EmiIngredient.of(
 				listOf(
-					ModItems.OBSIDIAN_SKULL.emiIngredient,
-					ModItems.OBSIDIAN_SKULL_RING.emiIngredient
+					ModItems.OBSIDIAN_SKULL.asEmiIngredient(),
+					ModItems.OBSIDIAN_SKULL_RING.asEmiIngredient()
 				)
 			),
 			ModItems.OBSIDIAN_WATER_WALKING_BOOTS.asItem(),
@@ -29,8 +29,8 @@ object AnvilRecipes {
 		)
 
 		val lavaWaders = EmiAnvilRecipe(
-			ModItems.OBSIDIAN_WATER_WALKING_BOOTS.emiIngredient,
-			ModItems.LAVA_CHARM.emiIngredient,
+			ModItems.OBSIDIAN_WATER_WALKING_BOOTS.asEmiIngredient(),
+			ModItems.LAVA_CHARM.asEmiIngredient(),
 			ModItems.LAVA_WADERS.asItem(),
 			OtherUtil.modResource("/anvil/lava_waders")
 		)
