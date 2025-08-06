@@ -178,6 +178,15 @@ object ClientEvents {
 			WeatherEggItem.WEATHER,
 			WeatherEggItem::getWeatherFloat
 		)
+
+		for (bucket in listOf(ModItems.ENDER_BUCKET.get(), ModItems.REINFORCED_ENDER_BUCKET.get())) {
+			ItemProperties.register(
+				bucket,
+				EnderBucketItem.HAS_FLUID,
+				EnderBucketItem::getHasFluidPredicate
+			)
+		}
+
 	}
 
 	@SubscribeEvent

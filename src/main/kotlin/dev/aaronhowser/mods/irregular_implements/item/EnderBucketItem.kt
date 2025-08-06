@@ -1,19 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
-import net.minecraft.client.Minecraft
+import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.FluidTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ItemUtils
@@ -27,7 +29,6 @@ import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.neoforged.neoforge.capabilities.Capabilities
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
 import net.neoforged.neoforge.common.SoundActions
 import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.FluidType
@@ -84,6 +85,17 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(16)
+
+		val HAS_FLUID: ResourceLocation = OtherUtil.modResource("has_fluid")
+		fun getHasFluidPredicate(
+			stack: ItemStack,
+			localLevel: ClientLevel?,
+			holdingEntity: LivingEntity?,
+			int: Int
+		): Float {
+			val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
+			return if (fluidContent.isEmpty) 0f else 1f
+		}
 
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
 			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
@@ -143,7 +155,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 			positionsToCheck.add(blockPos)
 
-			while (positionsToCheck.isNotEmpty() && checkedPositions.size < 2000) {
+			while (positionsToCheck.isNotEmpty() && checkedPositions.size < 2_000) {
 				val currentPos = positionsToCheck.removeAt(0)
 				checkedPositions.add(currentPos)
 
@@ -154,7 +166,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 				for (direction in Direction.entries) {
 					val nextPos = currentPos.relative(direction)
-					if (!checkedPositions.contains(nextPos)) {
+					if (!checkedPositions.contains(nextPos) && !positionsToCheck.contains(nextPos)) {
 						val fluidThere = level.getFluidState(nextPos)
 						if (!fluidThere.isEmpty) {
 							positionsToCheck.add(nextPos)
