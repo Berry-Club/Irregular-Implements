@@ -192,8 +192,11 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 
 			val newContents = currentContents.copy()
 			newContents.amount -= 1000
-
-			usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(newContents))
+			if (newContents.amount > 0) {
+				usedStack.set(ModDataComponents.SIMPLE_FLUID_CONTENT, SimpleFluidContent.copyOf(newContents))
+			} else {
+				usedStack.remove(ModDataComponents.SIMPLE_FLUID_CONTENT)
+			}
 
 			return true
 		}
