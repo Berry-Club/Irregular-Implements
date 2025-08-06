@@ -51,27 +51,13 @@ class ModRecipeProvider(
 			coloredThing.save(recipeOutput)
 		}
 
+		for ((recipe, name) in specialRecipes) {
+			recipe.save(recipeOutput, OtherUtil.modResource("$name"))
+		}
+
 		namedRecipes(recipeOutput)
 		imbuingRecipes(recipeOutput)
-
-		lubricateBoot.save(recipeOutput, OtherUtil.modResource("lubricate_boot"))
-		washBoot.save(recipeOutput, OtherUtil.modResource("wash_boot"))
-		diviningRod.save(recipeOutput, OtherUtil.modResource("divining_rod"))
-		applySpectreAnchor.save(recipeOutput, OtherUtil.modResource("apply_spectre_anchor"))
-		setDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("set_diaphanous_block"))
-		invertedDiaphanousBlock.save(recipeOutput, OtherUtil.modResource("invert_diaphanous_block"))
-		customCraftingTable.save(recipeOutput, OtherUtil.modResource("custom_crafting_table"))
-		setPortkeyDisguise.save(recipeOutput, OtherUtil.modResource("set_portkey_disguise"))
 	}
-
-	private val lubricateBoot = SpecialRecipeBuilder.special(::LubricateBootRecipe)
-	private val washBoot = SpecialRecipeBuilder.special(::WashBootRecipe)
-	private val diviningRod = SpecialRecipeBuilder.special(::DiviningRodRecipe)
-	private val applySpectreAnchor = SpecialRecipeBuilder.special(::ApplySpectreAnchorRecipe)
-	private val setDiaphanousBlock = SpecialRecipeBuilder.special(::SetDiaphanousBlockRecipe)
-	private val invertedDiaphanousBlock = SpecialRecipeBuilder.special(::InvertDiaphanousBlockRecipe)
-	private val customCraftingTable = SpecialRecipeBuilder.special(::CustomCraftingTableRecipe)
-	private val setPortkeyDisguise = SpecialRecipeBuilder.special(::SetPortkeyDisguiseRecipe)
 
 	//TODO:
 	// Imbues
@@ -1673,6 +1659,18 @@ class ModRecipeProvider(
 
 		spectreImbue.save(recipeOutput, "imbuing/spectre_imbue")
 	}
+
+	private val specialRecipes = mapOf(
+		SpecialRecipeBuilder.special(::LubricateBootRecipe) to "lubricate_boot",
+		SpecialRecipeBuilder.special(::WashBootRecipe) to "wash_boot",
+		SpecialRecipeBuilder.special(::DiviningRodRecipe) to "divining_rod",
+		SpecialRecipeBuilder.special(::ApplySpectreAnchorRecipe) to "apply_spectre_anchor",
+		SpecialRecipeBuilder.special(::ApplyLuminousPowderRecipe) to "apply_luminous_powder",
+		SpecialRecipeBuilder.special(::SetDiaphanousBlockRecipe) to "set_diaphanous_block",
+		SpecialRecipeBuilder.special(::InvertDiaphanousBlockRecipe) to "invert_diaphanous_block",
+		SpecialRecipeBuilder.special(::CustomCraftingTableRecipe) to "custom_crafting_table",
+		SpecialRecipeBuilder.special(::SetPortkeyDisguiseRecipe) to "set_portkey_disguise",
+	)
 
 	companion object {
 		fun ItemLike.asIngredient(): Ingredient = Ingredient.of(this)

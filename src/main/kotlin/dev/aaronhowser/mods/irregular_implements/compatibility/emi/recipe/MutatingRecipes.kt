@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
+import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -19,7 +20,7 @@ import net.neoforged.neoforge.common.Tags
 object MutatingRecipes {
 
 	fun getRecipes(): List<EmiRecipe> {
-		return lubricateRecipes() + spectreAnchor() + customCraftingTable() + diaphanousRecipes()
+		return lubricateRecipes() + spectreAnchor() + customCraftingTable() + diaphanousRecipes() + luminousPowder()
 	}
 
 	private fun lubricateRecipes(): List<EmiRecipe> {
@@ -78,6 +79,30 @@ object MutatingRecipes {
 			.associations(associations)
 			.virtualInput(anchorStack)
 			.build(OtherUtil.modResource("/apply_spectre_anchor"))
+
+		return recipe
+	}
+
+	private fun luminousPowder(): EmiRecipe {
+		val allStacks = BuiltInRegistries.ITEM.mapNotNull { item ->
+			item.defaultInstance.takeIf { stack -> ApplyLuminousPowderRecipe.isApplicable(stack) }
+		}
+
+		val associations = allStacks.associateWith { stack ->
+			stack.copy().apply {
+				set(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE)
+			}
+		}
+
+		val luminousPowderStack = ModItems.LUMINOUS_POWDER.toStack()
+
+		val recipe = MutatingEmiRecipe.Builder()
+			.recipePattern("IL")
+			.patternKey('I', MutatingEmiRecipe.PatternValue.MutatingValue)
+			.patternKey('L', MutatingEmiRecipe.PatternValue.IngredientValue(luminousPowderStack))
+			.associations(associations)
+			.virtualInput(luminousPowderStack)
+			.build(OtherUtil.modResource("/apply_luminous_powder"))
 
 		return recipe
 	}
