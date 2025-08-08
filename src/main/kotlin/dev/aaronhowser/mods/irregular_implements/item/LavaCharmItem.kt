@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModCurioProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.world.damagesource.DamageTypes
@@ -17,6 +16,7 @@ import top.theillusivec4.curios.api.CuriosApi
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.type.capability.ICurioItem
 import java.util.function.Supplier
+import kotlin.jvm.optionals.getOrNull
 
 class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 
@@ -85,28 +85,24 @@ class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 				return footArmor
 			}
 
-			if (entity is Player) {
-				var curioProtector: ItemStack? = null
+			val curioProtector = CuriosApi.getCuriosInventory(entity)
+				.getOrNull()
+				?.findFirstCurio(::isChargedLavaCharm)
+				?.getOrNull()
+				?.stack
 
-				CuriosApi.getCuriosInventory(entity).ifPresent { inventory ->
-					inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
-						for (i in 0 until ringSlotHandler.slots) {
-							val stack = ringSlotHandler.stacks.getStackInSlot(i)
-							if (isChargedLavaCharm(stack)) {
-								curioProtector = stack
-								break
-							}
-						}
-					}
-				}
-
-				if (curioProtector != null) return curioProtector
-
-				val inventoryCharm = entity.inventory.items.firstOrNull { isChargedLavaCharm(it) }
-				if (inventoryCharm != null) return inventoryCharm
+			if (curioProtector != null) {
+				return curioProtector
 			}
 
-			return entity.handSlots.firstOrNull { isChargedLavaCharm(it) }
+			if (entity is Player) {
+				val inventoryCharm = entity.inventory.items.firstOrNull(::isChargedLavaCharm)
+				if (inventoryCharm != null) {
+					return inventoryCharm
+				}
+			}
+
+			return entity.handSlots.firstOrNull(::isChargedLavaCharm)
 		}
 
 	}

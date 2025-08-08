@@ -27,9 +27,15 @@ class SpectreAnchorItem(properties: Properties) : Item(properties) {
 
 		fun saveAnchoredItems(player: Player) {
 			val level = player.level()
-			if (level.isClientSide || level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY) || level.levelData.isHardcore) return
+			if (level.isClientSide
+				|| level.gameRules.getBoolean(GameRules.RULE_KEEPINVENTORY)
+				|| level.levelData.isHardcore
+			) return
 
-			val anchoredItems = player.inventory.items.filter { it.has(ModDataComponents.IS_ANCHORED) }.toMutableList()
+			val anchoredItems = player.inventory.items
+				.filter { it.has(ModDataComponents.IS_ANCHORED) }
+				.toMutableList()
+
 			for (item in anchoredItems) {
 				player.inventory.removeItem(item)
 			}
