@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -28,7 +27,9 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import net.neoforged.neoforge.registries.DeferredItem
+import top.theillusivec4.curios.api.CuriosApi
 import java.util.function.Supplier
+import kotlin.jvm.optionals.getOrNull
 
 object ModArmorItems {
 
@@ -215,7 +216,13 @@ object ModArmorItems {
 			|| footItem.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
 		) return true
 
-		if (OtherUtil.playerHasCurio(entity, ModItems.OBSIDIAN_SKULL_RING.get())) return true
+		val hasObsidianSkullRing =
+			CuriosApi.getCuriosInventory(entity)
+				.getOrNull()
+				?.isEquipped(ModItems.OBSIDIAN_SKULL.get())
+				.isTrue
+
+		if (hasObsidianSkullRing) return true
 		if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true
 
 		return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }
