@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModCurioProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -28,7 +28,6 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import net.neoforged.neoforge.registries.DeferredItem
-import top.theillusivec4.curios.api.CuriosApi
 import java.util.function.Supplier
 
 object ModArmorItems {
@@ -211,26 +210,12 @@ object ModArmorItems {
 	}
 
 	private fun canBlockFireDamage(entity: LivingEntity): Boolean {
-
 		val footItem = entity.getItemBySlot(EquipmentSlot.FEET)
 		if (footItem.`is`(ModItems.LAVA_WADERS)
 			|| footItem.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
 		) return true
 
-		var goodCurio = false
-		CuriosApi.getCuriosInventory(entity).ifPresent { inventory ->
-			inventory.getStacksHandler(ModCurioProvider.RING_SLOT).ifPresent { ringSlotHandler ->
-				for (i in 0 until ringSlotHandler.slots) {
-					val stack = ringSlotHandler.stacks.getStackInSlot(i)
-					if (stack.`is`(ModItems.OBSIDIAN_SKULL_RING)) {
-						goodCurio = true
-						break
-					}
-				}
-			}
-		}
-		if (goodCurio) return true
-
+		if (OtherUtil.playerHasCurio(entity, ModItems.OBSIDIAN_SKULL_RING.get())) return true
 		if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true
 
 		return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }

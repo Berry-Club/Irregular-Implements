@@ -33,7 +33,9 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
+import top.theillusivec4.curios.api.CuriosApi
 import java.util.*
+import kotlin.jvm.optionals.getOrNull
 
 object OtherUtil {
 
@@ -227,5 +229,11 @@ object OtherUtil {
 
 	fun RandomSource.nextRange(min: Float, max: Float): Float = Mth.lerp(nextFloat(), min, max)
 	fun RandomSource.nextRange(min: Double, max: Double): Double = Mth.lerp(nextDouble(), min, max)
+
+	fun playerHasCurio(entity: LivingEntity, item: Item): Boolean {
+		return CuriosApi.getCuriosInventory(entity)
+			.getOrNull()
+			?.isEquipped(item) ?: false
+	}
 
 }
