@@ -236,5 +236,11 @@ object ModArmorItems {
 		return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }
 	}
 
+	fun isWearingFullSpectreArmor(entity: LivingEntity): Boolean {
+		return entity.getItemBySlot(EquipmentSlot.HEAD).`is`(ModItems.SPECTRE_HELMET.get())
+				&& entity.getItemBySlot(EquipmentSlot.CHEST).`is`(ModItems.SPECTRE_CHESTPLATE.get())
+				&& entity.getItemBySlot(EquipmentSlot.LEGS).`is`(ModItems.SPECTRE_LEGGINGS.get())
+				&& entity.getItemBySlot(EquipmentSlot.FEET).`is`(ModItems.SPECTRE_BOOTS.get())
+	}
 
 }

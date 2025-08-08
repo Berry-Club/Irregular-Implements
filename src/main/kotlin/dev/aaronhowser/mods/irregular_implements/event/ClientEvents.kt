@@ -33,7 +33,6 @@ import net.minecraft.client.renderer.entity.NoopRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.util.Mth
-import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
@@ -266,35 +265,30 @@ object ClientEvents {
 		ApplyLuminousPowderRecipe.tooltip(event)
 	}
 
-	private var changedAlpha = false
+	private var isAlphaChanged = false
 
 	@SubscribeEvent
 	fun beforeRenderLiving(event: RenderLivingEvent.Pre<LivingEntity, HumanoidModel<LivingEntity>>) {
 		val entity = event.entity
 
-		val wearingFullSpectreArmor = entity.getItemBySlot(EquipmentSlot.HEAD).`is`(ModItems.SPECTRE_HELMET.get())
-				&& entity.getItemBySlot(EquipmentSlot.CHEST).`is`(ModItems.SPECTRE_CHESTPLATE.get())
-				&& entity.getItemBySlot(EquipmentSlot.LEGS).`is`(ModItems.SPECTRE_LEGGINGS.get())
-				&& entity.getItemBySlot(EquipmentSlot.FEET).`is`(ModItems.SPECTRE_BOOTS.get())
-
-		if (wearingFullSpectreArmor) {
+		if (ModArmorItems.isWearingFullSpectreArmor(entity)) {
 			val alpha = Mth.sin(entity.tickCount.toFloat() * 0.025f) * 0.1f + 0.5f
 
 			RenderSystem.enableBlend()
 			RenderSystem.defaultBlendFunc()
 			RenderSystem.setShaderColor(1f, 1f, 1f, alpha)
 
-			changedAlpha = true
+			isAlphaChanged = true
 		}
 	}
 
 	@SubscribeEvent
 	fun afterRenderLiving(event: RenderLivingEvent.Post<LivingEntity, HumanoidModel<LivingEntity>>) {
-		if (changedAlpha) {
+		if (isAlphaChanged) {
 			RenderSystem.disableBlend()
 			RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
 
-			changedAlpha = false
+			isAlphaChanged = false
 		}
 	}
 
