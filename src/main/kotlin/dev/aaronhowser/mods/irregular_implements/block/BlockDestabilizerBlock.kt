@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDestabilizerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
@@ -9,7 +8,10 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.BaseEntityBlock
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -17,18 +19,13 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class BlockDestabilizerBlock(
-	properties: Properties = Properties
+class BlockDestabilizerBlock : EntityBlock, Block(
+	Properties
 		.ofFullCopy(Blocks.DISPENSER)
-) : EntityBlock, DirectionalBlock(properties) {
-
-	companion object {
-		val CODEC: MapCodec<BlockDestabilizerBlock> = simpleCodec(::BlockDestabilizerBlock)
-
-		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-	}
+) {
 
 	init {
 		registerDefaultState(
@@ -94,7 +91,8 @@ class BlockDestabilizerBlock(
 		)
 	}
 
-	override fun codec(): MapCodec<BlockDestabilizerBlock> {
-		return CODEC
+	companion object {
+		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 	}
 }

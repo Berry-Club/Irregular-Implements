@@ -1,8 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.Codec
-import com.mojang.serialization.MapCodec
-import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -20,20 +17,19 @@ import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.AABB
 
 class EnderBridgeBlock(
-	val distancePerTick: Int,
-	properties: Properties = Properties
+	val distancePerTick: Int
+) : Block(
+	Properties
 		.ofFullCopy(Blocks.OBSIDIAN)
-) : DirectionalBlock(properties) {
-
-	override fun codec(): MapCodec<EnderBridgeBlock> = CODEC
+) {
 
 	init {
 		registerDefaultState(
@@ -81,16 +77,8 @@ class EnderBridgeBlock(
 	}
 
 	companion object {
-		val CODEC: MapCodec<EnderBridgeBlock> = RecordCodecBuilder.mapCodec { instance ->
-			instance.group(
-				Codec.INT
-					.fieldOf("distance_per_tick")
-					.forGetter(EnderBridgeBlock::distancePerTick),
-				propertiesCodec()
-			).apply(instance, ::EnderBridgeBlock)
-		}
-
 		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
 
 		//FIXME: Sometimes doesn't grab players that are stepping on it
 		private fun getEntities(level: Level, bridgePos: BlockPos): List<Entity> {

@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.ChatFormatting
@@ -20,15 +19,15 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.level.block.state.properties.IntegerProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class AnalogEmitterBlock(
-	properties: Properties =
-		Properties
-			.ofFullCopy(Blocks.TARGET)
-			.isRedstoneConductor(Blocks::never)
-) : DirectionalBlock(properties) {
+class AnalogEmitterBlock : Block(
+	Properties
+		.ofFullCopy(Blocks.TARGET)
+		.isRedstoneConductor(Blocks::never)
+) {
 
 	init {
 		registerDefaultState(
@@ -38,8 +37,6 @@ class AnalogEmitterBlock(
 				.setValue(POWER, 0)
 		)
 	}
-
-	override fun codec(): MapCodec<AnalogEmitterBlock> = CODEC
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
 		builder.add(FACING, ENABLED, POWER)
@@ -122,7 +119,7 @@ class AnalogEmitterBlock(
 	}
 
 	companion object {
-		private val CODEC = simpleCodec(::AnalogEmitterBlock)
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
 		val POWER: IntegerProperty = BlockStateProperties.POWER
 	}

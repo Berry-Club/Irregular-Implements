@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -13,22 +12,61 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 
-class ContactButtonBlock(
-	properties: Properties =
-		Properties
-			.ofFullCopy(Blocks.STONE)
-) : DirectionalBlock(properties) {
+class ContactButtonBlock : Block(
+	Properties
+		.ofFullCopy(Blocks.STONE)
+) {
+
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.NORTH)
+				.setValue(ENABLED, false)
+		)
+	}
+
+	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
+		val newState = state.setValue(ENABLED, false)
+		level.setBlockAndUpdate(pos, newState)
+
+		level.playSound(
+			null,
+			pos,
+			SoundEvents.STONE_BUTTON_CLICK_OFF,
+			SoundSource.BLOCKS,
+		)
+	}
+
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING, ENABLED)
+	}
+
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
+
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(ENABLED)) 15 else 0
+	}
+
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(ENABLED)) 15 else 0
+	}
+
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		return direction != state.getValue(FACING).opposite
+	}
 
 	companion object {
-		val CODEC: MapCodec<ContactButtonBlock> = simpleCodec(::ContactButtonBlock)
-
 		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 
 		fun handleClickBlock(
 			level: Level,
@@ -67,47 +105,5 @@ class ContactButtonBlock(
 		}
 	}
 
-	init {
-		registerDefaultState(
-			stateDefinition.any()
-				.setValue(FACING, Direction.NORTH)
-				.setValue(ENABLED, false)
-		)
-	}
-
-	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-		val newState = state.setValue(ENABLED, false)
-		level.setBlockAndUpdate(pos, newState)
-
-		level.playSound(
-			null,
-			pos,
-			SoundEvents.STONE_BUTTON_CLICK_OFF,
-			SoundSource.BLOCKS,
-		)
-	}
-
-	override fun codec(): MapCodec<ContactButtonBlock> = CODEC
-
-	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(FACING, ENABLED)
-	}
-
-	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-		return defaultBlockState()
-			.setValue(FACING, context.nearestLookingDirection.opposite)
-	}
-
-	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		return if (state.getValue(ENABLED)) 15 else 0
-	}
-
-	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		return if (state.getValue(ENABLED)) 15 else 0
-	}
-
-	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-		return direction != state.getValue(FACING).opposite
-	}
 
 }

@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -11,22 +10,49 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 
-class ContactLeverBlock(
-	properties: Properties =
-		Properties
-			.ofFullCopy(Blocks.STONE)
-) : DirectionalBlock(properties) {
+class ContactLeverBlock : Block(
+	Properties
+		.ofFullCopy(Blocks.STONE)
+) {
+
+	init {
+		registerDefaultState(
+			stateDefinition.any()
+				.setValue(FACING, Direction.NORTH)
+				.setValue(ENABLED, false)
+		)
+	}
+
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+		builder.add(FACING, ENABLED)
+	}
+
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return defaultBlockState()
+			.setValue(FACING, context.nearestLookingDirection.opposite)
+	}
+
+	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(ENABLED)) 15 else 0
+	}
+
+	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
+		return if (state.getValue(ENABLED)) 15 else 0
+	}
+
+	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+		return direction != state.getValue(FACING).opposite
+	}
 
 	companion object {
-		val CODEC: MapCodec<ContactLeverBlock> = simpleCodec(::ContactLeverBlock)
-
 		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 
 		fun handleClickBlock(
 			level: Level,
@@ -62,37 +88,6 @@ class ContactLeverBlock(
 				if (newState.getValue(ENABLED)) 0.6f else 0.5f
 			)
 		}
-	}
-
-	init {
-		registerDefaultState(
-			stateDefinition.any()
-				.setValue(FACING, Direction.NORTH)
-				.setValue(ENABLED, false)
-		)
-	}
-
-	override fun codec(): MapCodec<ContactLeverBlock> = CODEC
-
-	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(FACING, ENABLED)
-	}
-
-	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-		return defaultBlockState()
-			.setValue(FACING, context.nearestLookingDirection.opposite)
-	}
-
-	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		return if (state.getValue(ENABLED)) 15 else 0
-	}
-
-	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		return if (state.getValue(ENABLED)) 15 else 0
-	}
-
-	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-		return direction != state.getValue(FACING).opposite
 	}
 
 }
