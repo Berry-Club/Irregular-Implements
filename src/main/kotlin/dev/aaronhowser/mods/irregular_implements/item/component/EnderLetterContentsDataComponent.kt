@@ -60,7 +60,7 @@ data class EnderLetterContentsDataComponent(
 				).apply(instance, ::EnderLetterContentsDataComponent)
 			}
 
-		val STREAM_CODEC: StreamCodec<ByteBuf?, EnderLetterContentsDataComponent?> =
+		val STREAM_CODEC: StreamCodec<ByteBuf, EnderLetterContentsDataComponent> =
 			StreamCodec.composite(
 				OtherUtil.STACK_LIST_STREAM_CODEC, EnderLetterContentsDataComponent::stacks,
 				ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs::optional), EnderLetterContentsDataComponent::sender,

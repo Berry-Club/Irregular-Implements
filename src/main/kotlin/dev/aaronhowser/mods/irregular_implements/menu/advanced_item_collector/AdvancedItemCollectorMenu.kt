@@ -42,7 +42,7 @@ class AdvancedItemCollectorMenu(
 	override fun addSlots() {
 		val filterSlot = object : Slot(container, 0, 80, 122) {
 			override fun mayPlace(stack: ItemStack): Boolean {
-				return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
+				return stack.has(ModDataComponents.ITEM_FILTER)
 			}
 		}
 

@@ -6,10 +6,13 @@ import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import io.netty.buffer.ByteBuf
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.Direction
 import net.minecraft.core.Position
 import net.minecraft.network.chat.Component
+import net.minecraft.network.codec.ByteBufCodecs
+import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -35,6 +38,11 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 		STORMY("stormy");
 
 		override fun getSerializedName(): String = realName
+
+		companion object {
+			val CODEC: StringRepresentable.EnumCodec<Weather> = StringRepresentable.fromEnum(Weather::values)
+			val STREAM_CODEC: StreamCodec<ByteBuf, Weather> = ByteBufCodecs.fromCodec(CODEC)
+		}
 	}
 
 	override fun getName(stack: ItemStack): Component {

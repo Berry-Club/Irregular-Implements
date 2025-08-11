@@ -36,7 +36,7 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 		val container = stack.get(DataComponents.CONTAINER)
 		val firstStack = container?.nonEmptyItems()?.firstOrNull()
-		val filter = firstStack?.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+		val filter = firstStack?.get(ModDataComponents.ITEM_FILTER) ?: return
 
 		for (filterEntry in filter.entries) {
 			if (filterEntry is FilterEntry.Empty) continue
@@ -96,7 +96,7 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 					.firstOrNull() ?: continue
 
 				val filter = storedFilterStack
-					.get(ModDataComponents.ITEM_FILTER_ENTRIES)
+					.get(ModDataComponents.ITEM_FILTER)
 					?: continue
 
 				if (filter.test(stack)) {
@@ -114,7 +114,7 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 					.firstOrNull() ?: continue
 
 				val filter = storedFilterStack
-					.get(ModDataComponents.ITEM_FILTER_ENTRIES)
+					.get(ModDataComponents.ITEM_FILTER)
 					?: continue
 
 				if (filter.test(stack)) {

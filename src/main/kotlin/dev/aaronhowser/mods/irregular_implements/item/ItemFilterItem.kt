@@ -32,7 +32,7 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val itemComponent = stack.get(ModDataComponents.ITEM_FILTER_ENTRIES) ?: return
+		val itemComponent = stack.get(ModDataComponents.ITEM_FILTER) ?: return
 
 		if (itemComponent.isBlacklist) {
 			val component = ModTooltipLang.BLACKLIST
@@ -69,7 +69,7 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 		val DEFAULT_PROPERTIES: Supplier<Properties> = Supplier {
 			Properties()
 				.stacksTo(1)
-				.component(ModDataComponents.ITEM_FILTER_ENTRIES, ItemFilterDataComponent())
+				.component(ModDataComponents.ITEM_FILTER, ItemFilterDataComponent())
 		}
 	}
 

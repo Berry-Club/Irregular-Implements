@@ -19,7 +19,7 @@ class ItemFilterSlot(
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
 
 	private val stackComponent: ItemFilterDataComponent?
-		get() = this.filterStack.get().get(ModDataComponents.ITEM_FILTER_ENTRIES)
+		get() = this.filterStack.get().get(ModDataComponents.ITEM_FILTER)
 
 	private val stackFilter: NonNullList<FilterEntry>?
 		get() = stackComponent?.entries
@@ -35,7 +35,7 @@ class ItemFilterSlot(
 		newFilter[this.index] = FilterEntry.Empty
 
 		this.filterStack.get().set(
-			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(
 				newFilter,
 				this.stackComponent?.isBlacklist ?: false
@@ -58,7 +58,7 @@ class ItemFilterSlot(
 		)
 
 		this.filterStack.get().set(
-			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(
 				newFilter,
 				this.stackComponent?.isBlacklist ?: false

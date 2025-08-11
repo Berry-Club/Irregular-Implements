@@ -43,7 +43,7 @@ class AdvancedItemCollectorBlockEntity(
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
 	override fun getFilter(): ItemFilterDataComponent? {
-		return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER_ENTRIES)
+		return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER)
 	}
 
 	override fun getCollectionArea(): AABB {

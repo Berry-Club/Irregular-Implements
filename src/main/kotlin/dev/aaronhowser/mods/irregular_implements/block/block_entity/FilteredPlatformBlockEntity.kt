@@ -32,7 +32,7 @@ class FilteredPlatformBlockEntity(
 
 		val filter = this.container
 			.getItem(0)
-			.get(ModDataComponents.ITEM_FILTER_ENTRIES)
+			.get(ModDataComponents.ITEM_FILTER)
 			?: return false
 
 		return filter.test(entity.item)

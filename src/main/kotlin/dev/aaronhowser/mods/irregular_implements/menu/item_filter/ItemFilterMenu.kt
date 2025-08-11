@@ -27,7 +27,7 @@ class ItemFilterMenu(
 	}
 
 	private fun getFilterComponent(): ItemFilterDataComponent? {
-		return getHeldItemStack().get(ModDataComponents.ITEM_FILTER_ENTRIES)
+		return getHeldItemStack().get(ModDataComponents.ITEM_FILTER)
 	}
 
 	fun getFilter(): NonNullList<FilterEntry>? {
@@ -42,7 +42,7 @@ class ItemFilterMenu(
 		if (value == filterComponent.isBlacklist) return
 
 		getHeldItemStack().set(
-			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ModDataComponents.ITEM_FILTER,
 			filterComponent.copy(isBlacklist = value)
 		)
 	}
@@ -105,7 +105,7 @@ class ItemFilterMenu(
 		newFilter[slotIndex] = newEntry
 
 		getHeldItemStack().set(
-			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(newFilter, getIsBlacklist())
 		)
 	}
@@ -131,7 +131,7 @@ class ItemFilterMenu(
 		newFilter[slotIndex] = newEntry
 
 		getHeldItemStack().set(
-			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(newFilter, getIsBlacklist())
 		)
 	}
@@ -145,7 +145,7 @@ class ItemFilterMenu(
 		newFilter[slotIndex] = newEntry
 
 		getHeldItemStack().set(
-			ModDataComponents.ITEM_FILTER_ENTRIES,
+			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(newFilter, getIsBlacklist())
 		)
 	}

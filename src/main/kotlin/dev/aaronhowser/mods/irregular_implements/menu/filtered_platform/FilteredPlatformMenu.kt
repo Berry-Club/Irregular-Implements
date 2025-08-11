@@ -35,7 +35,7 @@ class FilteredPlatformMenu(
 	override fun addSlots() {
 		val platformSlot = object : Slot(platformContainer, 0, 80, 10) {
 			override fun mayPlace(stack: ItemStack): Boolean {
-				return stack.has(ModDataComponents.ITEM_FILTER_ENTRIES)
+				return stack.has(ModDataComponents.ITEM_FILTER)
 			}
 		}
 
