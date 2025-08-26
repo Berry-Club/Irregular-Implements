@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
-import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
@@ -12,17 +12,15 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class ClientChangedMenuString(
 	val stringId: Int,
-	val string: String
-) : IModPacket {
+	val newString: String
+) : ModPacket() {
 
-	override fun receiveOnServer(context: IPayloadContext) {
-		context.enqueueWork {
-			val player = context.player() as? ServerPlayer ?: return@enqueueWork
-			val playerMenu = player.containerMenu
+	override fun handleOnServer(context: IPayloadContext) {
+		val player = context.player() as? ServerPlayer ?: return
+		val playerMenu = player.containerMenu
 
-			if (playerMenu is MenuWithStrings) {
-				playerMenu.receiveString(stringId, string)
-			}
+		if (playerMenu is MenuWithStrings) {
+			playerMenu.receiveString(stringId, newString)
 		}
 	}
 
@@ -37,7 +35,7 @@ class ClientChangedMenuString(
 		val STREAM_CODEC: StreamCodec<ByteBuf, ClientChangedMenuString> =
 			StreamCodec.composite(
 				ByteBufCodecs.VAR_INT, ClientChangedMenuString::stringId,
-				ByteBufCodecs.STRING_UTF8, ClientChangedMenuString::string,
+				ByteBufCodecs.STRING_UTF8, ClientChangedMenuString::newString,
 				::ClientChangedMenuString
 			)
 

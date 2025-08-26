@@ -58,7 +58,7 @@ object ModPacketHandler {
 		)
 	}
 
-	fun messageNearbyPlayers(packet: IModPacket, serverLevel: ServerLevel, origin: Vec3, radius: Double) {
+	fun messageNearbyPlayers(packet: ModPacket, serverLevel: ServerLevel, origin: Vec3, radius: Double) {
 		for (player in serverLevel.players()) {
 			val distance = player.distanceToSqr(origin.x(), origin.y(), origin.z())
 			if (distance < radius * radius) {
@@ -67,19 +67,19 @@ object ModPacketHandler {
 		}
 	}
 
-	fun messagePlayer(player: ServerPlayer, packet: IModPacket) {
+	fun messagePlayer(player: ServerPlayer, packet: ModPacket) {
 		PacketDistributor.sendToPlayer(player, packet)
 	}
 
-	fun messageAllPlayers(packet: IModPacket) {
+	fun messageAllPlayers(packet: ModPacket) {
 		PacketDistributor.sendToAllPlayers(packet)
 	}
 
-	fun messageServer(packet: IModPacket) {
+	fun messageServer(packet: ModPacket) {
 		PacketDistributor.sendToServer(packet)
 	}
 
-	private fun <T : IModPacket> toClient(
+	private fun <T : ModPacket> toClient(
 		registrar: PayloadRegistrar,
 		packetType: CustomPacketPayload.Type<T>,
 		streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>,
@@ -90,7 +90,7 @@ object ModPacketHandler {
 		) { packet, context -> packet.receiveOnClient(context) }
 	}
 
-	private fun <T : IModPacket> toServer(
+	private fun <T : ModPacket> toServer(
 		registrar: PayloadRegistrar,
 		packetType: CustomPacketPayload.Type<T>,
 		streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>

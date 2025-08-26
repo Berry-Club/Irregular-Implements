@@ -157,7 +157,6 @@ class GlobalChatDetectorBlockEntity(
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
-
 	companion object {
 
 		private val globalDetectors: MutableSet<GlobalChatDetectorBlockEntity> = mutableSetOf()

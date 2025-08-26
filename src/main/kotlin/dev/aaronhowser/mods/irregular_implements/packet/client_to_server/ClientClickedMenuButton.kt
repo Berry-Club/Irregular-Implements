@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
-import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
@@ -12,18 +12,16 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class ClientClickedMenuButton(
 	private val buttonId: Int
-) : IModPacket {
+) : ModPacket() {
 
-	override fun receiveOnServer(context: IPayloadContext) {
-		context.enqueueWork {
-			val player = context.player() as? ServerPlayer ?: return@enqueueWork
-			val playerMenu = player.containerMenu
+	override fun handleOnServer(context: IPayloadContext) {
+		val player = context.player() as? ServerPlayer ?: return
+		val playerMenu = player.containerMenu
 
-			if (!playerMenu.stillValid(player)) return@enqueueWork
+		if (!playerMenu.stillValid(player)) return
 
-			if (playerMenu is MenuWithButtons) {
-				playerMenu.handleButtonPressed(buttonId)
-			}
+		if (playerMenu is MenuWithButtons) {
+			playerMenu.handleButtonPressed(buttonId)
 		}
 	}
 

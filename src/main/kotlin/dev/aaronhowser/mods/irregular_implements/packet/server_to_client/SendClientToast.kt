@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.irregular_implements.client.NotificationToast
-import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -15,13 +15,11 @@ class SendClientToast(
 	val title: String,
 	val description: String,
 	val icon: ItemStack?
-) : IModPacket {
+) : ModPacket() {
 
-	override fun receiveOnClient(context: IPayloadContext) {
-		context.enqueueWork {
-			val toast = NotificationToast(title, description, icon)
-			Minecraft.getInstance().toasts.addToast(toast)
-		}
+	override fun handleOnClient(context: IPayloadContext) {
+		val toast = NotificationToast(title, description, icon)
+		Minecraft.getInstance().toasts.addToast(toast)
 	}
 
 	override fun type(): CustomPacketPayload.Type<SendClientToast> {

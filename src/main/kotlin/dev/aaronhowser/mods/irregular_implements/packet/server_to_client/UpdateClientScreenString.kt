@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
-import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft
@@ -12,16 +12,14 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class UpdateClientScreenString(
 	val stringId: Int,
-	val regexString: String
-) : IModPacket {
+	val newString: String
+) : ModPacket() {
 
-	override fun receiveOnClient(context: IPayloadContext) {
-		context.enqueueWork {
-			val screen = Minecraft.getInstance().screen ?: return@enqueueWork
+	override fun handleOnClient(context: IPayloadContext) {
+		val screen = Minecraft.getInstance().screen ?: return
 
-			if (screen is ScreenWithStrings) {
-				screen.receivedString(stringId, regexString)
-			}
+		if (screen is ScreenWithStrings) {
+			screen.receivedString(stringId, newString)
 		}
 	}
 
@@ -36,7 +34,7 @@ class UpdateClientScreenString(
 		val STREAM_CODEC: StreamCodec<ByteBuf, UpdateClientScreenString> =
 			StreamCodec.composite(
 				ByteBufCodecs.VAR_INT, UpdateClientScreenString::stringId,
-				ByteBufCodecs.STRING_UTF8, UpdateClientScreenString::regexString,
+				ByteBufCodecs.STRING_UTF8, UpdateClientScreenString::newString,
 				::UpdateClientScreenString
 			)
 	}

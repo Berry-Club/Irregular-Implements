@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
-import dev.aaronhowser.mods.irregular_implements.packet.IModPacket
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -13,30 +13,28 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class BurningFlooFireplacePacket(
 	val positions: List<BlockPos>
-) : IModPacket {
+) : ModPacket() {
 
-	override fun receiveOnClient(context: IPayloadContext) {
-		context.enqueueWork {
-			val level = context.player().level()
+	override fun handleOnClient(context: IPayloadContext) {
+		val level = context.player().level()
 
-			for (pos in positions) {
-				for (i in 0 until 25) {
-					val iProgress = i.toDouble() / 25
-					for (j in 0 until 25) {
-						val jProgress = j.toDouble() / 25
+		for (pos in positions) {
+			for (i in 0 until 25) {
+				val iProgress = i.toDouble() / 25
+				for (j in 0 until 25) {
+					val jProgress = j.toDouble() / 25
 
-						val spawnAt = Vec3(
-							pos.x + jProgress,
-							pos.y + 1.1,
-							pos.z + iProgress
-						)
+					val spawnAt = Vec3(
+						pos.x + jProgress,
+						pos.y + 1.1,
+						pos.z + iProgress
+					)
 
-						level.addParticle(
-							ModParticleTypes.FLOO_FLAME.get(),
-							spawnAt.x, spawnAt.y, spawnAt.z,
-							0.0, 0.01, 0.0
-						)
-					}
+					level.addParticle(
+						ModParticleTypes.FLOO_FLAME.get(),
+						spawnAt.x, spawnAt.y, spawnAt.z,
+						0.0, 0.01, 0.0
+					)
 				}
 			}
 		}
