@@ -185,7 +185,6 @@ object RenderUtil {
 		height: Float,
 		color: Int
 	) {
-
 		val posX = posX
 		val posY = posY
 		val posZ = posZ
@@ -221,15 +220,37 @@ object RenderUtil {
 		for (face in faces) {
 			for (vertexIndex in face) {
 				val vertex = vertices[vertexIndex]
-				vertexConsumer.addVertex(pose.pose(), vertex.x, vertex.y, vertex.z)
-					.setColor(color)
-					.setUv(0f, 0f)
-					.setOverlay(OverlayTexture.NO_OVERLAY)
-					.setNormal(pose, 0f, 1f, 0f)
+				addVertex(
+					pose,
+					vertexConsumer,
+					color,
+					vertex.x, vertex.y, vertex.z,
+					0f, 0f
+				)
 			}
 		}
 
 		poseStack.popPose()
+	}
+
+	fun addVertex(
+		pose: PoseStack.Pose,
+		consumer: VertexConsumer,
+		color: Int,
+		x: Float, y: Float, z: Float,
+		u: Float, v: Float,
+		normalX: Float = 0f,
+		normalY: Float = 1f,
+		normalZ: Float = 0f,
+		light: Int = 15728880,
+		overlay: Int = OverlayTexture.NO_OVERLAY,
+	) {
+		consumer.addVertex(pose.pose(), x, y, z)
+			.setColor(color)
+			.setUv(u, v)
+			.setOverlay(overlay)
+			.setLight(light)
+			.setNormal(pose, normalX, normalY, normalZ)
 	}
 
 	fun getColorFromFluid(fluidStack: FluidStack): Int {
