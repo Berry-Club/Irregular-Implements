@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -8,12 +7,10 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
-import org.lwjgl.opengl.GL11
 
 //FIXME: The projection matrix or whatever is broken
 object DiviningRodRenderer {
@@ -78,17 +75,8 @@ object DiviningRodRenderer {
 		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
 		val poseStack = event.poseStack
 
-		RenderSystem.depthMask(false)
-		RenderSystem.enableBlend()
-		RenderSystem.defaultBlendFunc()
-
 		poseStack.pushPose()
 
-		RenderSystem.setShader(GameRenderer::getPositionColorShader)
-		RenderSystem.applyModelViewMatrix()
-		RenderSystem.depthFunc(GL11.GL_ALWAYS)
-
-		poseStack.mulPose(event.modelViewMatrix)
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
 		val buffer = Minecraft.getInstance()
@@ -110,12 +98,7 @@ object DiviningRodRenderer {
 			)
 		}
 
-		RenderSystem.depthFunc(GL11.GL_LEQUAL)
-
 		poseStack.popPose()
-		RenderSystem.applyModelViewMatrix()
-
-		RenderSystem.depthMask(true)
 	}
 
 }
