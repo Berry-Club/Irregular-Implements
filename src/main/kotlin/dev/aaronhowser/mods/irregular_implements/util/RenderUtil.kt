@@ -253,6 +253,26 @@ object RenderUtil {
 			.setNormal(pose, normalX, normalY, normalZ)
 	}
 
+	fun addVertex(
+		pose: PoseStack.Pose,
+		consumer: VertexConsumer,
+		color: Int,
+		x: Float, y: Float, z: Float,
+		u: Float, v: Float,
+		u1: Int, v1: Int,
+		u2: Int, v2: Int,
+		normalX: Float = 0f,
+		normalY: Float = 1f,
+		normalZ: Float = 0f,
+	) {
+		consumer.addVertex(pose.pose(), x, y, z)
+			.setColor(color)
+			.setUv(u, v)
+			.setUv1(u1, v1)
+			.setUv2(u2, v2)
+			.setNormal(pose, normalX, normalY, normalZ)
+	}
+
 	fun getColorFromFluid(fluidStack: FluidStack): Int {
 		val clientExt = IClientFluidTypeExtensions.of(fluidStack.fluid)
 		val tintColor = clientExt.getTintColor(fluidStack)
