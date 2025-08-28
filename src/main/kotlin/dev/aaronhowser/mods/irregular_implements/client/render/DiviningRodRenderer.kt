@@ -41,7 +41,10 @@ object DiviningRodRenderer {
 		val offHandTag = if (offHandItem.`is`(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.BLOCK_TAG) else null
 		val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.BLOCK_TAG) else null
 
-		if (offHandTag == null && mainHandTag == null) return
+		if (offHandTag == null && mainHandTag == null) {
+			indicators.clear()
+			return
+		}
 
 		val radius = ServerConfig.DIVINING_ROD_CHECK_RADIUS.get()
 
