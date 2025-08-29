@@ -77,7 +77,7 @@ object TargetPositionRenderer {
 	}
 
 	private fun render(event: RenderLevelStageEvent) {
-		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+		val cameraPos = event.camera.position
 		val poseStack = event.poseStack
 		val vertexBuffer = this.vertexBuffer ?: return
 

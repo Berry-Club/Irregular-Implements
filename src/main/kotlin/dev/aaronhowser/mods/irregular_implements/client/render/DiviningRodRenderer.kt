@@ -12,14 +12,12 @@ import net.minecraft.core.BlockPos
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 
-//FIXME: The projection matrix or whatever is broken
 object DiviningRodRenderer {
 
 	private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
 
 	private val indicators: MutableList<Indicator> = mutableListOf()
 
-	//TODO: Probably laggy, maybe make it only check once a second?
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		val iterator = indicators.iterator()
 		while (iterator.hasNext()) {
@@ -79,7 +77,7 @@ object DiviningRodRenderer {
 
 		if (indicators.isEmpty()) return
 
-		val cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+		val cameraPos = event.camera.position
 		val poseStack = event.poseStack
 
 		poseStack.pushPose()
