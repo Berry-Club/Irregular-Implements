@@ -6,12 +6,16 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.util.Mth
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import java.lang.ref.WeakReference
@@ -77,10 +81,14 @@ object EscapeRopeHandler {
 
 			for (run in 0 until maxRuns) {
 
-				val sizeString = String.format("%,d", alreadyChecked.size)
+				val progressToMaxColor = Mth.clamp(alreadyChecked.size, 0, 100_000).toFloat() / 100_000f
+				val color = OtherUtil.lerpColor(
+					progressToMaxColor, DyeColor.LIME.textColor, DyeColor.RED.textColor)
+
+				val sizeComponent = Component.literal(String.format("%,d", alreadyChecked.size)).withColor(color)
 
 				player.status(
-					ModMessageLang.ESCAPE_ROPE_HANDLER_PROGRESS.toComponent(sizeString)
+					ModMessageLang.ESCAPE_ROPE_HANDLER_PROGRESS.toComponent(sizeComponent)
 				)
 
 				if (toCheck.isEmpty() || (limit > 1 && alreadyChecked.size >= limit)) {

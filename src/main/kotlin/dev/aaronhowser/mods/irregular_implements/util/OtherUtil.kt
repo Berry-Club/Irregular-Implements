@@ -186,23 +186,23 @@ object OtherUtil {
 
 	fun Player.status(message: Component) = this.displayClientMessage(message, true)
 
-	fun BlockPos.toTag(): CompoundTag {
-		val tag = CompoundTag()
-		tag.putInt("x", this.x)
-		tag.putInt("y", this.y)
-		tag.putInt("z", this.z)
-		return tag
-	}
-
-	fun CompoundTag.toBlockPos(): BlockPos {
-		return BlockPos(
-			this.getInt("x"),
-			this.getInt("y"),
-			this.getInt("z")
-		)
-	}
-
 	fun RandomSource.nextRange(min: Float, max: Float): Float = Mth.lerp(nextFloat(), min, max)
 	fun RandomSource.nextRange(min: Double, max: Double): Double = Mth.lerp(nextDouble(), min, max)
+
+	fun lerpColor(progress: Float, start: Int, end: Int): Int {
+		val startR = (start shr 16) and 0xFF
+		val startG = (start shr 8) and 0xFF
+		val startB = start and 0xFF
+
+		val endR = (end shr 16) and 0xFF
+		val endG = (end shr 8) and 0xFF
+		val endB = end and 0xFF
+
+		val r = Mth.lerp(progress, startR.toFloat(), endR.toFloat()).toInt()
+		val g = Mth.lerp(progress, startG.toFloat(), endG.toFloat()).toInt()
+		val b = Mth.lerp(progress, startB.toFloat(), endB.toFloat()).toInt()
+
+		return (r shl 16) or (g shl 8) or b
+	}
 
 }
