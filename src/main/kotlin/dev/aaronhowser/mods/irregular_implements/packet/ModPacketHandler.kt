@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.packet
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.*
+import net.minecraft.core.BlockPos
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
@@ -65,6 +66,10 @@ object ModPacketHandler {
 			RemoveIndicatorsPacket.TYPE,
 			RemoveIndicatorsPacket.STREAM_CODEC
 		)
+	}
+
+	fun messageNearbyPlayers(packet: ModPacket, serverLevel: ServerLevel, origin: BlockPos, radius: Double) {
+		messageNearbyPlayers(packet, serverLevel, origin.center, radius)
 	}
 
 	fun messageNearbyPlayers(packet: ModPacket, serverLevel: ServerLevel, origin: Vec3, radius: Double) {

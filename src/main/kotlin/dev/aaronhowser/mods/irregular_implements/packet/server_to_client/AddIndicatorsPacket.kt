@@ -15,14 +15,14 @@ class AddIndicatorsPacket(
 	val positions: List<BlockPos>,
 	val durationTicks: Int,
 	val color: Int,
-	val dimensions: Vec3
+	val dimensions: Vec3 = Vec3(1.0, 1.0, 1.0)
 ) : ModPacket() {
 
 	constructor(
 		position: BlockPos,
 		durationTicks: Int,
 		color: Int,
-		dimensions: Vec3
+		dimensions: Vec3 = Vec3(1.0, 1.0, 1.0)
 	) : this(listOf(position), durationTicks, color, dimensions)
 
 	override fun handleOnClient(context: IPayloadContext) {

@@ -3,8 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.handler
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -13,7 +14,6 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import net.minecraft.world.phys.Vec3
 import java.lang.ref.WeakReference
 
 object EscapeRopeHandler {
@@ -90,7 +90,8 @@ object EscapeRopeHandler {
 
 				val nextPos = getNextPositionToCheck() ?: return true
 				if (shouldSpawnIndicator) {
-					OtherUtil.sendIndicatorCube(player, nextPos, 0x08FFFFFF, 20, Vec3(1.0, 1.0, 1.0))
+					val packet = AddIndicatorsPacket(nextPos, 20, 0x08FFFFFF)
+					ModPacketHandler.messagePlayer(player, packet)
 				}
 
 				if (!isEmptySpace(level, nextPos)) {

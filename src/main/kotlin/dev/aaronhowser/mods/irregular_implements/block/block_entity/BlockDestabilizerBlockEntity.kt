@@ -4,9 +4,9 @@ import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RemoveIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -244,10 +244,9 @@ class BlockDestabilizerBlockEntity(
 		}
 
 		val color = if (shouldAdd) 0x00FF00 else 0xFF0000
-		val nearbyPlayers = level.players().filter { it.blockPosition().closerThan(this.blockPos, 16.0) }
-		for (player in nearbyPlayers) {
-			OtherUtil.sendIndicatorCube(player, nextPos, color, 5)
-		}
+
+		val packet = AddIndicatorsPacket(nextPos, 5, color)
+		ModPacketHandler.messageNearbyPlayers(packet, level, this.blockPos, 32.0)
 	}
 
 	// Runs once if it's done searching, or if it's in lazy and it has a lazy shape
@@ -328,16 +327,12 @@ class BlockDestabilizerBlockEntity(
 	}
 
 	private fun showLazyShape(): Boolean {
-		if (removeLazyIndicators() || this.state != State.IDLE) return false
+		if (this.state != State.IDLE) return false
 
 		val level = this.level as? ServerLevel ?: return false
 
-		for (blockPos in this.lazyBlocks) {
-			val playersNearby = level.players().filter { it.blockPosition().closerThan(this.blockPos, 16.0) }
-			for (player in playersNearby) {
-				OtherUtil.sendIndicatorCube(player, blockPos, 0x0000FF, 20 * 15)
-			}
-		}
+		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
+		ModPacketHandler.messageNearbyPlayers(packet, level, this.blockPos, 32.0)
 
 		return true
 	}
@@ -346,13 +341,9 @@ class BlockDestabilizerBlockEntity(
 		if (this.lazyBlocks.isEmpty()) return false
 
 		val level = this.level as? ServerLevel ?: return false
-		val nearbyPlayers = level.players().filter { it.blockPosition().closerThan(this.blockPos, 32.0) }
-		if (nearbyPlayers.isEmpty()) return false
 
 		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
-		for (player in nearbyPlayers) {
-			ModPacketHandler.messagePlayer(player, packet)
-		}
+		ModPacketHandler.messageNearbyPlayers(packet, level, this.blockPos, 32.0)
 
 		return true
 	}
