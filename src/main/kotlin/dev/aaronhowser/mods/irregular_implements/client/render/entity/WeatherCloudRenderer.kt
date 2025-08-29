@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import dev.aaronhowser.mods.irregular_implements.entity.WeatherCloudEntity
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
+import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider

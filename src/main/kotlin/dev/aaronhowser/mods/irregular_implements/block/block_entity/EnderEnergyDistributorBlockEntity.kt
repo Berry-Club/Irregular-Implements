@@ -131,7 +131,7 @@ class EnderEnergyDistributorBlockEntity(
 	companion object {
 		const val INVENTORY_SIZE = 8
 
-		fun getCapability(energyDistributor: EnderEnergyDistributorBlockEntity, direction: Direction?): IEnergyStorage? {
+		fun getCapability(energyDistributor: EnderEnergyDistributorBlockEntity, direction: Direction?): IEnergyStorage {
 			return energyDistributor.getEnergyHandler(direction)
 		}
 

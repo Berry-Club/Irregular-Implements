@@ -96,7 +96,7 @@ class BlockTeleporterBlockEntity(
 
 	override fun getDisplayName(): Component = blockState.block.name
 
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return BlockTeleporterMenu(containerId, playerInventory, container)
 	}
 

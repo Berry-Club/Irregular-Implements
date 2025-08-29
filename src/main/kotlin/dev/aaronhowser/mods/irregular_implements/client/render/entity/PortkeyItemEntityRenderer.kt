@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.ItemEntityRenderer
 import net.minecraft.client.renderer.entity.ItemRenderer
-import net.minecraft.client.renderer.texture.TextureAtlas
 import net.minecraft.core.component.DataComponents
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth

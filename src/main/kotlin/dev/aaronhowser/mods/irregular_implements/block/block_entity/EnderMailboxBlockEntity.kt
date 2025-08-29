@@ -65,7 +65,7 @@ class EnderMailboxBlockEntity(
 
 	override fun getDisplayName(): Component = blockState.block.name
 
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return EnderMailboxMenu(containerId, playerInventory, EnderMailboxContainer(player, worldPosition))
 	}
 

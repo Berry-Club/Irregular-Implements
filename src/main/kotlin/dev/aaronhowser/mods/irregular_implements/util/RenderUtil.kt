@@ -245,6 +245,7 @@ object RenderUtil {
 		poseStack.popPose()
 	}
 
+	/** @param length is used as height for UP and DOWN faces */
 	fun renderFace(
 		poseStack: PoseStack,
 		vertexConsumer: VertexConsumer,

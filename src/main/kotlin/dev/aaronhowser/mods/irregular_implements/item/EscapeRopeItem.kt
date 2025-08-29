@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.handler.EscapeRopeHandler
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
