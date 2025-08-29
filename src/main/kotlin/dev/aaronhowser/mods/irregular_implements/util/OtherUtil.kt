@@ -2,7 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RenderCubePacket
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
@@ -14,6 +15,7 @@ import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
@@ -80,25 +82,15 @@ object OtherUtil {
 		)
 	}
 
-	fun spawnIndicatorBlockDisplay(
-		level: Level,
+	fun sendIndicatorCube(
+		player: ServerPlayer,
 		pos: BlockPos,
-		color: Int = 0xFFFFFF,
-		duration: Int = 5
-	): IndicatorDisplayEntity? {
-		if (level.isClientSide) return null
-
-		val indicatorDisplay = IndicatorDisplayEntity(
-			level,
-			Blocks.GLASS.defaultBlockState(),
-			color,
-			duration
-		)
-
-		indicatorDisplay.setPos(pos.x + 0.25, pos.y + 0.25, pos.z + 0.25)
-		level.addFreshEntity(indicatorDisplay)
-
-		return indicatorDisplay
+		color: Int = 0x66FFFFFF.toInt(),
+		duration: Int = 5,
+		dimensions: Vec3 = Vec3(1.0, 1.0, 1.0)
+	) {
+		val packet = RenderCubePacket(pos, duration, color, dimensions)
+		ModPacketHandler.messagePlayer(player, packet)
 	}
 
 	fun getBiomeComponent(biomeHolder: Holder<Biome>): Component {

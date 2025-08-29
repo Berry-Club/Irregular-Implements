@@ -16,14 +16,6 @@ object ModEntityTypes {
 	val ENTITY_TYPE_REGISTRY: DeferredRegister<EntityType<*>> =
 		DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, IrregularImplements.ID)
 
-	val INDICATOR_DISPLAY: DeferredHolder<EntityType<*>, EntityType<IndicatorDisplayEntity>> =
-		registerEntityType(
-			"indicator_display",
-			MobCategory.MISC,
-			1f, 1f,
-			::IndicatorDisplayEntity
-		)
-
 	val SPECTRE_ILLUMINATOR: DeferredHolder<EntityType<*>, EntityType<SpectreIlluminatorEntity>> =
 		registerEntityType(
 			"spectre_illuminator",

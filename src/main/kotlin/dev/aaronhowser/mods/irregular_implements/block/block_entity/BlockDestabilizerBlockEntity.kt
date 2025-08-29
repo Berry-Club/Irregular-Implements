@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
-import dev.aaronhowser.mods.irregular_implements.entity.IndicatorDisplayEntity
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -19,6 +18,7 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.item.FallingBlockEntity
 import net.minecraft.world.entity.player.Inventory
@@ -226,7 +226,7 @@ class BlockDestabilizerBlockEntity(
 
 		this.alreadyChecked.add(nextPos)
 
-		val level = this.level ?: return
+		val level = this.level as? ServerLevel ?: return
 		val checkedState = level.getBlockState(nextPos)
 
 		val shouldAdd = checkedState.block == this.targetBlock
@@ -242,7 +242,10 @@ class BlockDestabilizerBlockEntity(
 		}
 
 		val color = if (shouldAdd) 0x00FF00 else 0xFF0000
-		OtherUtil.spawnIndicatorBlockDisplay(level, nextPos, color, 5)
+		val nearbyPlayers = level.players().filter { it.blockPosition().closerThan(this.blockPos, 16.0) }
+		for (player in nearbyPlayers) {
+			OtherUtil.sendIndicatorCube(player, nextPos, color, 5)
+		}
 	}
 
 	// Runs once if it's done searching, or if it's in lazy and it has a lazy shape
@@ -322,31 +325,24 @@ class BlockDestabilizerBlockEntity(
 		this.isLazy = !this.isLazy
 	}
 
-	private val lazyIndicatorDisplays: MutableList<IndicatorDisplayEntity> = mutableListOf()
 	private fun showLazyShape(): Boolean {
 		if (removeLazyIndicators() || this.state != State.IDLE) return false
 
-		val level = this.level ?: return false
+		val level = this.level as? ServerLevel ?: return false
 
 		for (blockPos in this.lazyBlocks) {
-			val indicator = OtherUtil.spawnIndicatorBlockDisplay(level, blockPos, 0x0000FF, 20 * 15)
-			if (indicator != null) lazyIndicatorDisplays.add(indicator)
+			val playersNearby = level.players().filter { it.blockPosition().closerThan(this.blockPos, 16.0) }
+			for (player in playersNearby) {
+				OtherUtil.sendIndicatorCube(player, blockPos, 0x0000FF, 20 * 15)
+			}
 		}
 
 		return true
 	}
 
 	private fun removeLazyIndicators(): Boolean {
-		var anyAlive = false
-
-		for (indicator in this.lazyIndicatorDisplays) {
-			if (indicator.isAlive) anyAlive = true
-			indicator.discard()
-		}
-
-		lazyIndicatorDisplays.clear()
-
-		return anyAlive
+		// TODO
+		return false
 	}
 
 	private fun resetLazyShape() {

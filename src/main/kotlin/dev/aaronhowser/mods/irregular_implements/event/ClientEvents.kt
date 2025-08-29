@@ -188,7 +188,6 @@ object ClientEvents {
 
 	@SubscribeEvent
 	fun onClientSetup(event: FMLClientSetupEvent) {
-		EntityRenderers.register(ModEntityTypes.INDICATOR_DISPLAY.get(), ::BlockDisplayRenderer)
 		EntityRenderers.register(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), ::SpectreIlluminatorEntityRenderer)
 		EntityRenderers.register(ModEntityTypes.PORTKEY_ITEM.get(), ::PortkeyItemEntityRenderer)
 		EntityRenderers.register(ModEntityTypes.TEMPORARY_FLOO_FIREPLACE.get(), ::NoopRenderer)

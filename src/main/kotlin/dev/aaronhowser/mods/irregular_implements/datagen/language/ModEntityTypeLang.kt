@@ -8,7 +8,6 @@ object ModEntityTypeLang {
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
 			addEntityType(ModEntityTypes.SPECTRE_ILLUMINATOR, "Spectre Illuminator")
-			addEntityType(ModEntityTypes.INDICATOR_DISPLAY, "Indicator Display")
 			addEntityType(ModEntityTypes.ARTIFICIAL_END_PORTAL, "Artificial End Portal")
 			addEntityType(ModEntityTypes.GOLDEN_EGG, "Golden Egg")
 			addEntityType(ModEntityTypes.GOLDEN_CHICKEN, "Golden Chicken")
