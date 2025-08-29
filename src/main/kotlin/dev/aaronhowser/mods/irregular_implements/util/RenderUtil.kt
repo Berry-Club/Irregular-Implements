@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
+import net.minecraft.core.Direction
 import net.minecraft.util.RandomSource
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.phys.Vec3
@@ -173,7 +174,6 @@ object RenderUtil {
 		)
 	}
 
-	@Suppress("NAME_SHADOWING")
 	fun renderCube(
 		poseStack: PoseStack,
 		vertexConsumer: VertexConsumer,
@@ -188,39 +188,131 @@ object RenderUtil {
 		poseStack.pushPose()
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
+		renderFace(
+			poseStack,
+			vertexConsumer,
+			0f, 0f, 0f,
+			width, length,
+			color,
+			Direction.DOWN
+		)
+
+		renderFace(
+			poseStack,
+			vertexConsumer,
+			0f, height, 0f,
+			width, length,
+			color,
+			Direction.UP
+		)
+
+		renderFace(
+			poseStack,
+			vertexConsumer,
+			0f, 0f, 0f,
+			width, height,
+			color,
+			Direction.NORTH
+		)
+
+		renderFace(
+			poseStack,
+			vertexConsumer,
+			0f, 0f, length,
+			width, height,
+			color,
+			Direction.SOUTH
+		)
+
+		renderFace(
+			poseStack,
+			vertexConsumer,
+			0f, 0f, 0f,
+			length, height,
+			color,
+			Direction.WEST
+		)
+
+		renderFace(
+			poseStack,
+			vertexConsumer,
+			width, 0f, 0f,
+			length, height,
+			color,
+			Direction.EAST
+		)
+
+		poseStack.popPose()
+	}
+
+	fun renderFace(
+		poseStack: PoseStack,
+		vertexConsumer: VertexConsumer,
+		posX: Number,
+		posY: Number,
+		posZ: Number,
+		width: Float,
+		length: Float,
+		color: Int,
+		direction: Direction
+	) {
+		poseStack.pushPose()
+		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
+
 		val pose = poseStack.last()
 
-		val vertices = arrayOf(
-			Vector3f(0f, 0f, 0f),
-			Vector3f(0f, height, 0f),
-			Vector3f(width, height, 0f),
-			Vector3f(width, 0f, 0f),
-			Vector3f(width, height, length),
-			Vector3f(width, 0f, length),
-			Vector3f(0f, height, length),
-			Vector3f(0f, 0f, length)
-		)
+		val vertices = when (direction) {
+			Direction.UP -> listOf(
+				Vector3f(0f, 0f, 0f),
+				Vector3f(width, 0f, 0f),
+				Vector3f(width, 0f, length),
+				Vector3f(0f, 0f, length)
+			)
 
-		val faces = listOf(
-			listOf(0, 1, 2, 3),  // Front
-			listOf(3, 2, 4, 5),  // Right
-			listOf(5, 4, 6, 7),  // Back
-			listOf(7, 6, 1, 0),  // Left
-			listOf(1, 6, 4, 2),  // Top
-			listOf(7, 0, 3, 5)   // Bottom
-		)
+			Direction.DOWN -> listOf(
+				Vector3f(0f, 0f, 0f),
+				Vector3f(0f, 0f, length),
+				Vector3f(width, 0f, length),
+				Vector3f(width, 0f, 0f)
+			)
 
-		for (face in faces) {
-			for (vertexIndex in face) {
-				val vertex = vertices[vertexIndex]
-				addVertex(
-					pose,
-					vertexConsumer,
-					color,
-					vertex.x, vertex.y, vertex.z,
-					0f, 0f
-				)
-			}
+			Direction.NORTH -> listOf(
+				Vector3f(0f, 0f, 0f),
+				Vector3f(width, 0f, 0f),
+				Vector3f(width, length, 0f),
+				Vector3f(0f, length, 0f)
+			)
+
+			Direction.SOUTH -> listOf(
+				Vector3f(0f, 0f, 0f),
+				Vector3f(0f, length, 0f),
+				Vector3f(width, length, 0f),
+				Vector3f(width, 0f, 0f)
+			)
+
+			Direction.EAST -> listOf(
+				Vector3f(0f, 0f, 0f),
+				Vector3f(0f, length, 0f),
+				Vector3f(0f, length, width),
+				Vector3f(0f, 0f, width)
+			)
+
+			Direction.WEST -> listOf(
+				Vector3f(0f, 0f, 0f),
+				Vector3f(0f, 0f, width),
+				Vector3f(0f, length, width),
+				Vector3f(0f, length, 0f)
+			)
+		}
+
+		for (vertex in vertices) {
+			addVertex(
+				pose,
+				vertexConsumer,
+				color,
+				vertex.x, vertex.y, vertex.z,
+				0f, 0f
+			)
 		}
 
 		poseStack.popPose()
