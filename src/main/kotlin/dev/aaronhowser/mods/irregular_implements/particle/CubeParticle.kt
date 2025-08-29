@@ -20,17 +20,25 @@ class CubeParticle(
 	zSpeed: Double
 ) : Particle(level, x, y, z, xSpeed, ySpeed, zSpeed) {
 
+	//FIXME: For some reason, the particle kind of floats away?
 	override fun render(buffer: VertexConsumer, camera: Camera, partialTicks: Float) {
+		val poseStack = PoseStack()
+
+		poseStack.pushPose()
+		poseStack.translate(-camera.position.x, -camera.position.y, -camera.position.z)
+
 		RenderUtil.renderCube(
-			PoseStack(),
+			poseStack,
 			x - 0.5,
 			y - 0.5,
 			z - 0.5,
 			1f,
 			1f,
 			1f,
-			0xFFFFFFFF.toInt()
+			0x66FFFFFF
 		)
+
+		poseStack.popPose()
 	}
 
 	override fun getRenderType(): ParticleRenderType = ParticleRenderType.CUSTOM
