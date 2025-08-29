@@ -1,7 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -11,14 +9,12 @@ import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.RedStoneWireBlock
-import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
-import org.lwjgl.opengl.GL11
 
 object RedstoneToolRenderer {
 
@@ -46,83 +42,44 @@ object RedstoneToolRenderer {
 		this.linkedBlockPos = linkedPos
 	}
 
-	private var vertexBuffer: VertexBuffer? = null
-
-	private lateinit var cameraPos: Vec3
-
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
-		if (ClientUtil.localPlayer == null) return
-		if (this.mainBlockPos == null) return
 
-		cameraPos = Minecraft.getInstance().entityRenderDispatcher.camera.position
+		val mainPos = this.mainBlockPos ?: return
+		val linkedPos = this.linkedBlockPos
 
-		refresh(event.poseStack)
-		render(event)
-	}
-
-	private fun render(event: RenderLevelStageEvent) {
+		val cameraPos = event.camera.position
 		val poseStack = event.poseStack
-		val vertexBuffer = this.vertexBuffer ?: return
-
-		RenderSystem.depthMask(false)
-		RenderSystem.enableBlend()
-		RenderSystem.defaultBlendFunc()
 
 		poseStack.pushPose()
-
-		RenderSystem.setShader(GameRenderer::getPositionColorShader)
-		RenderSystem.applyModelViewMatrix()
-		RenderSystem.depthFunc(GL11.GL_ALWAYS)
 
 		poseStack.mulPose(event.modelViewMatrix)
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		vertexBuffer.bind()
-		vertexBuffer.drawWithShader(
-			poseStack.last().pose(),
-			event.projectionMatrix,
-			RenderSystem.getShader()!!
+		val buffer = Minecraft.getInstance()
+			.renderBuffers()
+			.bufferSource()
+			.getBuffer(RenderType.debugQuads())
+
+		RenderUtil.renderCube(
+			poseStack,
+			buffer,
+			mainPos.center,
+			0.9f,
+			0x32FF0000
 		)
 
-		VertexBuffer.unbind()
-		RenderSystem.depthFunc(GL11.GL_LEQUAL)
+		if (linkedPos != null) {
+			RenderUtil.renderCube(
+				poseStack,
+				buffer,
+				linkedPos.center,
+				0.9f,
+				0x320000FF
+			)
+		}
 
 		poseStack.popPose()
-		RenderSystem.applyModelViewMatrix()
-
-		RenderSystem.depthMask(true)
-	}
-
-	//TODO: Make sure this is working
-	private fun refresh(poseStack: PoseStack) {
-		vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
-
-		val tesselator = Tesselator.getInstance()
-		val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
-
-		val startColor = 0x66FF0000
-		val endColor = 0x660000FF
-
-		if (mainBlockPos != null) {
-			RenderUtil.renderCube(poseStack, buffer, mainBlockPos!!.center, 0.45f, startColor)
-		}
-		if (linkedBlockPos != null) {
-			RenderUtil.renderCube(poseStack, buffer, linkedBlockPos!!.center, 0.45f, endColor)
-		}
-
-		if (mainBlockPos != null && linkedBlockPos != null) {
-//            renderLine(poseStack.last(), buffer, mainBlockPos!!.center, linkedBlockPos!!.center, color)
-		}
-
-		val build = buffer.build()
-		if (build == null) {
-			vertexBuffer = null
-		} else {
-			vertexBuffer!!.bind()
-			vertexBuffer!!.upload(build)
-			VertexBuffer.unbind()
-		}
 	}
 
 	val LAYER_NAME = OtherUtil.modResource("wire_strength")
