@@ -3,17 +3,18 @@ package dev.aaronhowser.mods.irregular_implements.handler
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RenderCubePacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.network.protocol.game.ClientboundLevelParticlesPacket
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 import java.lang.ref.WeakReference
 
 object EscapeRopeHandler {
@@ -87,18 +88,8 @@ object EscapeRopeHandler {
 
 				val nextPos = getNextPositionToCheck() ?: return true
 				if (shouldSpawnIndicator) {
-					val packet = ClientboundLevelParticlesPacket(
-						ModParticleTypes.CUBE.get(),
-						true,
-						nextPos.x.toDouble(),
-						nextPos.y.toDouble(),
-						nextPos.z.toDouble(),
-						0f, 0f, 0f,
-						0f,
-						1
-					)
-
-					player.connection.send(packet)
+					val packet = RenderCubePacket(nextPos, 20, 0x66FFFFFF, Vec3(1.0, 1.0, 1.0))
+					ModPacketHandler.messagePlayer(player, packet)
 				}
 
 				if (!isEmptySpace(level, nextPos)) {
