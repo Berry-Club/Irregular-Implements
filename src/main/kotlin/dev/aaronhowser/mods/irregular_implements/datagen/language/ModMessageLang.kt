@@ -71,7 +71,7 @@ object ModMessageLang {
 			add(FIREPLACE_ALREADY_AT, "You are already at %s.")
 			add(FIREPLACE_NO_LONGER_VALID, "The fireplace at %d %d %d is no longer valid.")
 			add(FIREPLACE_TELEPORTED, "Teleported to %s.")
-			add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %d blocks")
+			add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %s blocks")
 			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed.")
 		}
 	}

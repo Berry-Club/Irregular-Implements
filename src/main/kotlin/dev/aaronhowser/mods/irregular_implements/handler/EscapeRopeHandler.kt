@@ -76,8 +76,11 @@ object EscapeRopeHandler {
 			val shouldSpawnIndicator = true // TODO: Config
 
 			for (run in 0 until maxRuns) {
+
+				val sizeString = String.format("%,d", alreadyChecked.size)
+
 				player.status(
-					ModMessageLang.ESCAPE_ROPE_HANDLER_PROGRESS.toComponent(alreadyChecked.size)
+					ModMessageLang.ESCAPE_ROPE_HANDLER_PROGRESS.toComponent(sizeString)
 				)
 
 				if (toCheck.isEmpty() || (limit > 1 && alreadyChecked.size >= limit)) {

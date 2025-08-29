@@ -709,7 +709,7 @@
   "message.irregular_implements.ender_letter.recipient_no_room": "%s has no room for your letter",
   "message.irregular_implements.ender_letter.recipient_not_online": "%s of this letter is not online",
   "message.irregular_implements.ender_mailbox.not_owner": "You are not the owner of this Ender Mailbox.",
-  "message.irregular_implements.escape_rope_handler.progress": "Checked %d blocks",
+  "message.irregular_implements.escape_rope_handler.progress": "Checked %s blocks",
   "message.irregular_implements.fe_ratio": "%s FE / %s FE",
   "message.irregular_implements.floo_brick.already_at": "You are already at %s.",
   "message.irregular_implements.floo_brick.broken": "Bugged fireplace; please break and replace it.",
