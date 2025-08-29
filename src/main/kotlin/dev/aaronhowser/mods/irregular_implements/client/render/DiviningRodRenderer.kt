@@ -48,8 +48,12 @@ object DiviningRodRenderer {
 
 		val radius = ServerConfig.DIVINING_ROD_CHECK_RADIUS.get()
 
-		for (dX in -radius..radius) for (dY in -radius..radius) for (dZ in -radius..radius) {
-			val checkedPos = playerPos.offset(dX, dY, dZ)
+		val positions = BlockPos.betweenClosedStream(
+			playerPos.offset(-radius, -radius, -radius),
+			playerPos.offset(radius, radius, radius)
+		)
+
+		for (checkedPos in positions) {
 			if (!level.isLoaded(checkedPos)) continue
 
 			val checkedState = level.getBlockState(checkedPos)
@@ -61,7 +65,7 @@ object DiviningRodRenderer {
 			if (indicators.any { it.target == checkedPos }) continue
 
 			val indicator = Indicator(
-				checkedPos,
+				checkedPos.immutable(),
 				160,
 				DiviningRodItem.getOverlayColor(checkedState)
 			)
@@ -91,12 +95,8 @@ object DiviningRodRenderer {
 			RenderUtil.renderCube(
 				poseStack,
 				buffer,
-				indicator.target.x,
-				indicator.target.y,
-				indicator.target.z,
-				1f,
-				1f,
-				1f,
+				indicator.target.center,
+				0.99f,
 				indicator.color
 			)
 		}
