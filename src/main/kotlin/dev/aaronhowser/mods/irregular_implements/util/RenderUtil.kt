@@ -263,31 +263,31 @@ object RenderUtil {
 
 		val vertices = when (direction) {
 			Direction.UP -> listOf(
-				Vector3f(0f, 0f, 0f),
-				Vector3f(width, 0f, 0f),
+				Vector3f(0f, 0f, length),
 				Vector3f(width, 0f, length),
-				Vector3f(0f, 0f, length)
+				Vector3f(width, 0f, 0f),
+				Vector3f(0f, 0f, 0f)
 			)
 
 			Direction.DOWN -> listOf(
-				Vector3f(0f, 0f, 0f),
-				Vector3f(0f, 0f, length),
+				Vector3f(width, 0f, 0f),
 				Vector3f(width, 0f, length),
-				Vector3f(width, 0f, 0f)
+				Vector3f(0f, 0f, length),
+				Vector3f(0f, 0f, 0f)
 			)
 
 			Direction.NORTH -> listOf(
-				Vector3f(0f, 0f, 0f),
-				Vector3f(width, 0f, 0f),
+				Vector3f(0f, length, 0f),
 				Vector3f(width, length, 0f),
-				Vector3f(0f, length, 0f)
+				Vector3f(width, 0f, 0f),
+				Vector3f(0f, 0f, 0f)
 			)
 
 			Direction.SOUTH -> listOf(
-				Vector3f(0f, 0f, 0f),
-				Vector3f(0f, length, 0f),
+				Vector3f(width, 0f, 0f),
 				Vector3f(width, length, 0f),
-				Vector3f(width, 0f, 0f)
+				Vector3f(0f, length, 0f),
+				Vector3f(0f, 0f, 0f)
 			)
 
 			Direction.EAST -> listOf(
