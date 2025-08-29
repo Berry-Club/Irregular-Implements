@@ -10,15 +10,19 @@ import net.minecraft.client.particle.ParticleProvider
 import net.minecraft.client.particle.ParticleRenderType
 import net.minecraft.core.particles.SimpleParticleType
 
+//TODO: Doesn't render in front of blocks, which makes sense I guess
 class CubeParticle(
 	level: ClientLevel,
 	x: Double,
 	y: Double,
 	z: Double,
-	xSpeed: Double,
-	ySpeed: Double,
-	zSpeed: Double
-) : Particle(level, x, y, z, xSpeed, ySpeed, zSpeed) {
+) : Particle(level, x, y, z, 0.0, 0.0, 0.0) {
+
+	init {
+		this.xd = 0.0
+		this.yd = 0.0
+		this.zd = 0.0
+	}
 
 	//FIXME: For some reason, the particle kind of floats away?
 	override fun render(buffer: VertexConsumer, camera: Camera, partialTicks: Float) {
@@ -54,7 +58,7 @@ class CubeParticle(
 			ySpeed: Double,
 			zSpeed: Double
 		): Particle {
-			return CubeParticle(level, x, y, z, xSpeed, ySpeed, zSpeed)
+			return CubeParticle(level, x, y, z)
 		}
 	}
 
