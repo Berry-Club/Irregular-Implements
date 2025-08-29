@@ -91,9 +91,9 @@ object DiviningRodRenderer {
 			RenderUtil.renderCube(
 				poseStack,
 				buffer,
-				indicator.target.x.toFloat(),
-				indicator.target.y.toFloat(),
-				indicator.target.z.toFloat(),
+				indicator.target.x,
+				indicator.target.y,
+				indicator.target.z,
 				1f,
 				1f,
 				1f,

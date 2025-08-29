@@ -24,9 +24,9 @@ class CubeParticle(
 		RenderUtil.renderCube(
 			PoseStack(),
 			buffer,
-			x.toFloat() - 0.5f,
-			y.toFloat() - 0.5f,
-			z.toFloat() - 0.5f,
+			x - 0.5,
+			y - 0.5,
+			z - 0.5,
 			1f,
 			1f,
 			1f,

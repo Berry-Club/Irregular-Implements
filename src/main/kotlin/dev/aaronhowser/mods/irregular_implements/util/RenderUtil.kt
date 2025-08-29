@@ -163,9 +163,9 @@ object RenderUtil {
 		renderCube(
 			poseStack,
 			vertexConsumer,
-			center.x.toFloat() - width / 2,
-			center.y.toFloat() - width / 2,
-			center.z.toFloat() - width / 2,
+			center.x - width / 2,
+			center.y - width / 2,
+			center.z - width / 2,
 			width,
 			width,
 			width,
@@ -177,21 +177,14 @@ object RenderUtil {
 	fun renderCube(
 		poseStack: PoseStack,
 		vertexConsumer: VertexConsumer,
-		posX: Float,
-		posY: Float,
-		posZ: Float,
+		posX: Number,
+		posY: Number,
+		posZ: Number,
 		width: Float,
 		length: Float,
 		height: Float,
 		color: Int
 	) {
-		val posX = posX
-		val posY = posY
-		val posZ = posZ
-		val width = width
-		val length = length
-		val height = height
-
 		poseStack.pushPose()
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
