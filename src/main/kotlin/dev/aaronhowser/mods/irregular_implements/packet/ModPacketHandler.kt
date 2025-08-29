@@ -59,6 +59,12 @@ object ModPacketHandler {
 			RenderCubePacket.TYPE,
 			RenderCubePacket.STREAM_CODEC
 		)
+
+		toClient(
+			registrar,
+			RemoveIndicatorsPacket.TYPE,
+			RemoveIndicatorsPacket.STREAM_CODEC
+		)
 	}
 
 	fun messageNearbyPlayers(packet: ModPacket, serverLevel: ServerLevel, origin: Vec3, radius: Double) {

@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
+import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RemoveIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
@@ -61,7 +63,7 @@ class BlockDestabilizerBlockEntity(
 			setChanged()
 		}
 
-	private val lazyBlocks: HashSet<BlockPos> = hashSetOf()
+	private val lazyBlocks: MutableSet<BlockPos> = mutableSetOf()
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
@@ -341,8 +343,18 @@ class BlockDestabilizerBlockEntity(
 	}
 
 	private fun removeLazyIndicators(): Boolean {
-		// TODO
-		return false
+		if (this.lazyBlocks.isEmpty()) return false
+
+		val level = this.level as? ServerLevel ?: return false
+		val nearbyPlayers = level.players().filter { it.blockPosition().closerThan(this.blockPos, 32.0) }
+		if (nearbyPlayers.isEmpty()) return false
+
+		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
+		for (player in nearbyPlayers) {
+			ModPacketHandler.messagePlayer(player, packet)
+		}
+
+		return true
 	}
 
 	private fun resetLazyShape() {

@@ -15,6 +15,10 @@ object CubeIndicatorRenderer {
 		indicators.add(Indicator(target, duration, color))
 	}
 
+	fun removeIndicatorsAt(target: BlockPos) {
+		indicators.removeIf { it.target == target }
+	}
+
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		val iterator = CubeIndicatorRenderer.indicators.iterator()
 		while (iterator.hasNext()) {
