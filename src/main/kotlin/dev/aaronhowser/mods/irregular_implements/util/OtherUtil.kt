@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RenderCubePacket
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
@@ -32,7 +32,6 @@ import net.minecraft.world.item.alchemy.PotionContents
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
-import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
 import java.util.*
@@ -89,7 +88,7 @@ object OtherUtil {
 		duration: Int = 5,
 		dimensions: Vec3 = Vec3(1.0, 1.0, 1.0)
 	) {
-		val packet = RenderCubePacket(pos, duration, color, dimensions)
+		val packet = AddIndicatorsPacket(pos, duration, color, dimensions)
 		ModPacketHandler.messagePlayer(player, packet)
 	}
 

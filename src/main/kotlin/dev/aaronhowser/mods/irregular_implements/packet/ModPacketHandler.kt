@@ -56,8 +56,8 @@ object ModPacketHandler {
 
 		toClient(
 			registrar,
-			RenderCubePacket.TYPE,
-			RenderCubePacket.STREAM_CODEC
+			AddIndicatorsPacket.TYPE,
+			AddIndicatorsPacket.STREAM_CODEC
 		)
 
 		toClient(

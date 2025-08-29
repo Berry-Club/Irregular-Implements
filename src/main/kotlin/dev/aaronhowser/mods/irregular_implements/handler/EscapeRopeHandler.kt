@@ -3,9 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.handler
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RenderCubePacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -88,8 +87,7 @@ object EscapeRopeHandler {
 
 				val nextPos = getNextPositionToCheck() ?: return true
 				if (shouldSpawnIndicator) {
-					val packet = RenderCubePacket(nextPos, 20, 0x66FFFFFF, Vec3(1.0, 1.0, 1.0))
-					ModPacketHandler.messagePlayer(player, packet)
+					OtherUtil.sendIndicatorCube(player, nextPos, 0x08FFFFFF, 20, Vec3(1.0, 1.0, 1.0))
 				}
 
 				if (!isEmptySpace(level, nextPos)) {
