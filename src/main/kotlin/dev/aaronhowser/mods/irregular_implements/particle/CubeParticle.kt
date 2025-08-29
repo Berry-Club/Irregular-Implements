@@ -23,7 +23,6 @@ class CubeParticle(
 	override fun render(buffer: VertexConsumer, camera: Camera, partialTicks: Float) {
 		RenderUtil.renderCube(
 			PoseStack(),
-			buffer,
 			x - 0.5,
 			y - 0.5,
 			z - 0.5,

@@ -42,15 +42,9 @@ object TargetPositionRenderer {
 
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		val buffer = Minecraft.getInstance()
-			.renderBuffers()
-			.bufferSource()
-			.getBuffer(RenderType.debugQuads())
-
 		for (position in positions) {
 			RenderUtil.renderCube(
 				poseStack,
-				buffer,
 				position.center,
 				0.9f,
 				0x3200FF00

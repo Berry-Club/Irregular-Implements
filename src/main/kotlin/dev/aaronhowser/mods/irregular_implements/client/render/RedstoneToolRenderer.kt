@@ -56,14 +56,8 @@ object RedstoneToolRenderer {
 		poseStack.mulPose(event.modelViewMatrix)
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		val buffer = Minecraft.getInstance()
-			.renderBuffers()
-			.bufferSource()
-			.getBuffer(RenderType.debugQuads())
-
 		RenderUtil.renderCube(
 			poseStack,
-			buffer,
 			mainPos.center,
 			0.9f,
 			0x32FF0000
@@ -72,7 +66,6 @@ object RedstoneToolRenderer {
 		if (linkedPos != null) {
 			RenderUtil.renderCube(
 				poseStack,
-				buffer,
 				linkedPos.center,
 				0.9f,
 				0x320000FF

@@ -84,15 +84,9 @@ object DiviningRodRenderer {
 
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		val buffer = Minecraft.getInstance()
-			.renderBuffers()
-			.bufferSource()
-			.getBuffer(RenderType.debugQuads())
-
 		for (indicator in indicators) {
 			RenderUtil.renderCube(
 				poseStack,
-				buffer,
 				indicator.target.center,
 				0.99f,
 				indicator.color

@@ -156,14 +156,12 @@ object RenderUtil {
 
 	fun renderCube(
 		poseStack: PoseStack,
-		vertexConsumer: VertexConsumer,
 		center: Vec3,
 		width: Float,
 		color: Int
 	) {
 		renderCube(
 			poseStack,
-			vertexConsumer,
 			center.x - width / 2,
 			center.y - width / 2,
 			center.z - width / 2,
@@ -176,7 +174,6 @@ object RenderUtil {
 
 	fun renderCube(
 		poseStack: PoseStack,
-		vertexConsumer: VertexConsumer,
 		posX: Number,
 		posY: Number,
 		posZ: Number,
@@ -185,6 +182,11 @@ object RenderUtil {
 		height: Float,
 		color: Int
 	) {
+		val vertexConsumer = Minecraft.getInstance()
+			.renderBuffers()
+			.bufferSource()
+			.getBuffer(RenderType.debugQuads())
+
 		poseStack.pushPose()
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
