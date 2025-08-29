@@ -1,16 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.vertex.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
-import org.lwjgl.opengl.GL11
 
 object TargetPositionRenderer {
 
@@ -33,81 +30,34 @@ object TargetPositionRenderer {
 		if (offHandItemLocation != null && offHandItemLocation.dimension == level.dimension()) {
 			positions.add(offHandItemLocation.blockPos)
 		}
-
 	}
-
-	private var vertexBuffer: VertexBuffer? = null
 
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 
-		refresh(event.poseStack)
-		render(event)
-	}
+		val cameraPos = event.camera.position
+		val poseStack = event.poseStack
 
-	private fun refresh(poseStack: PoseStack) {
-		vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
-		val vertexBuffer = vertexBuffer ?: return
+		poseStack.pushPose()
 
-		val tesselator = Tesselator.getInstance()
-		val buffer = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR)
+		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
+
+		val buffer = Minecraft.getInstance()
+			.renderBuffers()
+			.bufferSource()
+			.getBuffer(RenderType.debugQuads())
 
 		for (position in positions) {
 			RenderUtil.renderCube(
 				poseStack,
 				buffer,
-				position.x,
-				position.y,
-				position.z,
-				1f,
-				1f,
-				1f,
+				position.center,
+				0.9f,
 				0x3200FF00
 			)
 		}
 
-		val build = buffer.build()
-		if (build == null) {
-			this.vertexBuffer = null
-		} else {
-			vertexBuffer.bind()
-			vertexBuffer.upload(build)
-			VertexBuffer.unbind()
-		}
-	}
-
-	private fun render(event: RenderLevelStageEvent) {
-		val cameraPos = event.camera.position
-		val poseStack = event.poseStack
-		val vertexBuffer = this.vertexBuffer ?: return
-
-		RenderSystem.depthMask(false)
-		RenderSystem.enableBlend()
-		RenderSystem.defaultBlendFunc()
-
-		poseStack.pushPose()
-
-		RenderSystem.setShader(GameRenderer::getPositionColorShader)
-		RenderSystem.applyModelViewMatrix()
-		RenderSystem.depthFunc(GL11.GL_ALWAYS)
-
-		poseStack.mulPose(event.modelViewMatrix)
-		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
-		vertexBuffer.bind()
-		vertexBuffer.drawWithShader(
-			poseStack.last().pose(),
-			event.projectionMatrix,
-			RenderSystem.getShader()!!
-		)
-
-		VertexBuffer.unbind()
-		RenderSystem.depthFunc(GL11.GL_LEQUAL)
-
 		poseStack.popPose()
-		RenderSystem.applyModelViewMatrix()
-
-		RenderSystem.depthMask(true)
 	}
 
 }
