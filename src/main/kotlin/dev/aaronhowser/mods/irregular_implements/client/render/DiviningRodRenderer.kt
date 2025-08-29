@@ -5,30 +5,12 @@ import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
 import net.neoforged.neoforge.client.event.ClientTickEvent
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 
 object DiviningRodRenderer {
 
-	private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
-
-	private val indicators: MutableList<Indicator> = mutableListOf()
-
 	fun afterClientTick(event: ClientTickEvent.Post) {
-		val iterator = indicators.iterator()
-		while (iterator.hasNext()) {
-			val indicator = iterator.next()
-			indicator.duration--
-
-			if (indicator.duration <= 0) {
-				iterator.remove()
-			}
-		}
-
 		val player = ClientUtil.localPlayer ?: return
 		val playerPos = player.blockPosition()
 		val level = player.level()
@@ -40,7 +22,6 @@ object DiviningRodRenderer {
 		val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.BLOCK_TAG) else null
 
 		if (offHandTag == null && mainHandTag == null) {
-			indicators.clear()
 			return
 		}
 
@@ -60,40 +41,12 @@ object DiviningRodRenderer {
 			val matchesMainHand = mainHandTag != null && checkedState.`is`(mainHandTag)
 
 			if (!matchesOffHand && !matchesMainHand) continue
-			if (indicators.any { it.target == checkedPos }) continue
 
-			val indicator = Indicator(
-				checkedPos.immutable(),
-				160,
+			CubeIndicatorRenderer.addIndicator(
+				checkedPos,
+				1,
 				DiviningRodItem.getOverlayColor(checkedState)
 			)
-
-			indicators.add(indicator)
 		}
 	}
-
-	fun onRenderLevel(event: RenderLevelStageEvent) {
-		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
-
-		if (indicators.isEmpty()) return
-
-		val cameraPos = event.camera.position
-		val poseStack = event.poseStack
-
-		poseStack.pushPose()
-
-		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
-		for (indicator in indicators) {
-			RenderUtil.renderCube(
-				poseStack,
-				indicator.target.center,
-				0.99f,
-				indicator.color
-			)
-		}
-
-		poseStack.popPose()
-	}
-
 }
