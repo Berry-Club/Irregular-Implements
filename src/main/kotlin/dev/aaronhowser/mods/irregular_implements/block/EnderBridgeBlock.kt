@@ -78,13 +78,13 @@ class EnderBridgeBlock(
 
 	companion object {
 		val ENABLED: BooleanProperty = BlockStateProperties.ENABLED
-		val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
+		val FACING: DirectionProperty = BlockStateProperties.FACING
 
 		//FIXME: Sometimes doesn't grab players that are stepping on it
 		private fun getEntities(level: Level, bridgePos: BlockPos): List<Entity> {
 			return level.getEntities(
 				null,
-				AABB.ofSize(bridgePos.above().center, 1.25, 2.5, 1.25)
+				AABB.ofSize(bridgePos.center, 1.25, 2.5, 1.25)
 			)
 		}
 

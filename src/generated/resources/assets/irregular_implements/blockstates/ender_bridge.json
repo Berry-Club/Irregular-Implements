@@ -1,50 +1,50 @@
 {
-	"variants": {
-		"enabled=false,facing=down": {
-			"model": "irregular_implements:block/ender_bridge_off",
-			"x": 90
-		},
-		"enabled=false,facing=east": {
-			"model": "irregular_implements:block/ender_bridge_off",
-			"y": 90
-		},
-		"enabled=false,facing=north": {
-			"model": "irregular_implements:block/ender_bridge_off"
-		},
-		"enabled=false,facing=south": {
-			"model": "irregular_implements:block/ender_bridge_off",
-			"y": 180
-		},
-		"enabled=false,facing=up": {
-			"model": "irregular_implements:block/ender_bridge_off",
-			"x": 270
-		},
-		"enabled=false,facing=west": {
-			"model": "irregular_implements:block/ender_bridge_off",
-			"y": 270
-		},
-		"enabled=true,facing=down": {
-			"model": "irregular_implements:block/ender_bridge_on",
-			"x": 90
-		},
-		"enabled=true,facing=east": {
-			"model": "irregular_implements:block/ender_bridge_on",
-			"y": 90
-		},
-		"enabled=true,facing=north": {
-			"model": "irregular_implements:block/ender_bridge_on"
-		},
-		"enabled=true,facing=south": {
-			"model": "irregular_implements:block/ender_bridge_on",
-			"y": 180
-		},
-		"enabled=true,facing=up": {
-			"model": "irregular_implements:block/ender_bridge_on",
-			"x": 270
-		},
-		"enabled=true,facing=west": {
-			"model": "irregular_implements:block/ender_bridge_on",
-			"y": 270
-		}
-	}
+  "variants": {
+    "enabled=false,facing=down": {
+      "model": "irregular_implements:block/ender_bridge_off",
+      "x": 90
+    },
+    "enabled=false,facing=east": {
+      "model": "irregular_implements:block/ender_bridge_off",
+      "y": 90
+    },
+    "enabled=false,facing=north": {
+      "model": "irregular_implements:block/ender_bridge_off"
+    },
+    "enabled=false,facing=south": {
+      "model": "irregular_implements:block/ender_bridge_off",
+      "y": 180
+    },
+    "enabled=false,facing=up": {
+      "model": "irregular_implements:block/ender_bridge_off",
+      "x": 270
+    },
+    "enabled=false,facing=west": {
+      "model": "irregular_implements:block/ender_bridge_off",
+      "y": 270
+    },
+    "enabled=true,facing=down": {
+      "model": "irregular_implements:block/ender_bridge_on",
+      "x": 90
+    },
+    "enabled=true,facing=east": {
+      "model": "irregular_implements:block/ender_bridge_on",
+      "y": 90
+    },
+    "enabled=true,facing=north": {
+      "model": "irregular_implements:block/ender_bridge_on"
+    },
+    "enabled=true,facing=south": {
+      "model": "irregular_implements:block/ender_bridge_on",
+      "y": 180
+    },
+    "enabled=true,facing=up": {
+      "model": "irregular_implements:block/ender_bridge_on",
+      "x": 270
+    },
+    "enabled=true,facing=west": {
+      "model": "irregular_implements:block/ender_bridge_on",
+      "y": 270
+    }
+  }
 }

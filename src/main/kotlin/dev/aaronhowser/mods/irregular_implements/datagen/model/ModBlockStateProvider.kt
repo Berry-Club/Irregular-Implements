@@ -1560,7 +1560,7 @@ class ModBlockStateProvider(
 
 			getVariantBuilder(enderBridge)
 				.forAllStates {
-					val facing = it.getValue(DirectionalBlock.FACING)
+					val facing = it.getValue(EnderBridgeBlock.FACING)
 					val enabled = it.getValue(EnderBridgeBlock.ENABLED)
 
 					val yRotation = when (facing) {
