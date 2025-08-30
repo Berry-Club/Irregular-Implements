@@ -8,6 +8,7 @@ import net.minecraft.core.Holder
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -65,8 +66,8 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 			return null
 		}
 
-		fun getBiomeToPaint(playerInventory: Inventory, excludedBiome: Holder<Biome>? = null): Holder<Biome>? {
-			return getFirstNonEmptyCapsule(playerInventory, excludedBiome)
+		fun getBiomeToPaint(player: Player): Holder<Biome>? {
+			return getFirstNonEmptyCapsule(player.inventory)
 				?.get(ModDataComponents.BIOME_POINTS)
 				?.biome
 		}

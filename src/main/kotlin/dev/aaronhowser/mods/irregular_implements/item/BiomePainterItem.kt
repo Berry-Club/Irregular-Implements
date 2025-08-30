@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.AABB
 import kotlin.jvm.optionals.getOrNull
 
@@ -68,7 +69,11 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 		val stack = player.getItemInHand(usedHand)
 
 		if (level.isClientSide) {
-			val biome = BiomeCapsuleItem.getBiomeToPaint(player.inventory)
+			val biomeToPaint = BiomeCapsuleItem.getBiomeToPaint(player) ?: return InteractionResultHolder.pass(stack)
+			val positions = Positions.getPositions(player, biomeToPaint)
+			val targetPos = positions.targetedUnmatchingPosition ?: return InteractionResultHolder.pass(stack)
+
+			level.setBlockAndUpdate(targetPos, Blocks.STONE.defaultBlockState())
 		}
 
 		return InteractionResultHolder.pass(stack)
@@ -85,27 +90,27 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 	}
 
 	data class Positions(
-		val correctBiomePositions: Set<BlockPos>,
-		val incorrectBiomePositions: Set<BlockPos>,
-		val targetedIncorrectBiomePosition: BlockPos?,
+		val matchingPositions: Set<BlockPos>,
+		val unmatchingPositions: Set<BlockPos>,
+		val targetedUnmatchingPosition: BlockPos?,
 	) {
-		val unselectedIncorrectBiomePositions: Set<BlockPos> =
-			if (targetedIncorrectBiomePosition != null) {
-				incorrectBiomePositions - targetedIncorrectBiomePosition
+		val untargetedUnmatchingPositions: Set<BlockPos> =
+			if (targetedUnmatchingPosition != null) {
+				unmatchingPositions - targetedUnmatchingPosition
 			} else {
-				incorrectBiomePositions
+				unmatchingPositions
 			}
 
 		companion object {
-			fun getPositions(player: Player, biome: Holder<Biome>): Positions {
+			fun getPositions(player: Player, matchingBiome: Holder<Biome>): Positions {
 				val level = player.level()
 				val playerPos = player.blockPosition()
 
 				val horizontalRadius = 10
 				val verticalRadius = 5
 
-				val goodPositions = mutableSetOf<BlockPos>()
-				val badPositions = mutableSetOf<BlockPos>()
+				val matchingPositions = mutableSetOf<BlockPos>()
+				val unmatchingPositions = mutableSetOf<BlockPos>()
 
 				val toCheck = arrayListOf(playerPos)
 
@@ -115,17 +120,17 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 
 					val biomeAtPos = level.getBiome(pos)
 
-					if (biomeAtPos != biome) {
-						badPositions.add(pos)
+					if (biomeAtPos != matchingBiome) {
+						unmatchingPositions.add(pos)
 						continue
 					}
 
-					goodPositions.add(pos)
+					matchingPositions.add(pos)
 
 					for (direction in Direction.entries) {
 						val offset = pos.relative(direction)
 
-						if (offset in goodPositions || offset in badPositions) continue
+						if (offset in matchingPositions || offset in unmatchingPositions) continue
 
 						val dy = offset.y - playerPos.y
 						if (dy < -verticalRadius || dy > verticalRadius) continue
@@ -140,12 +145,12 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 					}
 				}
 
-				val targetedIncorrectBiomePosition = getTargetedPos(player, badPositions)
+				val targetedIncorrectBiomePosition = getTargetedPos(player, unmatchingPositions)
 
 				return Positions(
-					correctBiomePositions = goodPositions,
-					incorrectBiomePositions = badPositions,
-					targetedIncorrectBiomePosition = targetedIncorrectBiomePosition,
+					matchingPositions = matchingPositions,
+					unmatchingPositions = unmatchingPositions,
+					targetedUnmatchingPosition = targetedIncorrectBiomePosition,
 				)
 			}
 

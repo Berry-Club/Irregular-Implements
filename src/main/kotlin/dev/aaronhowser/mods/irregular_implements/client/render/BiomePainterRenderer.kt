@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCapsuleItem
 import dev.aaronhowser.mods.irregular_implements.item.BiomePainterItem
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
@@ -19,12 +18,12 @@ object BiomePainterRenderer {
 	fun indicatePositions(player: Entity) {
 		if (player !is Player || !player.isClientSide) return
 
-		val paintingBiome = BiomeCapsuleItem.getBiomeToPaint(player.inventory)?: return
+		val paintingBiome = BiomeCapsuleItem.getBiomeToPaint(player) ?: return
 		val positions = BiomePainterItem.Positions.getPositions(player, paintingBiome)
 
-		val goodPositions = positions.correctBiomePositions
-		val badPositions = positions.unselectedIncorrectBiomePositions
-		val targetPos = positions.targetedIncorrectBiomePosition
+		val goodPositions = positions.matchingPositions
+		val badPositions = positions.untargetedUnmatchingPositions
+		val targetPos = positions.targetedUnmatchingPosition
 
 		// Duration is 2 because CubeIndicatorRenderer.afterClientTick is called AFTER this runs,
 		// so the Indicators added here would lose 1 tick immediately
