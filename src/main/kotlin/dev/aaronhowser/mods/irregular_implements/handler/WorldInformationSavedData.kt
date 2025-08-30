@@ -3,7 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.handler
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.saveddata.SavedData
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 
 class WorldInformationSavedData : SavedData() {
 
@@ -39,6 +41,15 @@ class WorldInformationSavedData : SavedData() {
 				Factory(::WorldInformationSavedData, ::load),
 				"world_information"
 			)
+		}
+
+		fun trySaveEnderDragonKilled(event: LivingDeathEvent) {
+			if (event.isCanceled) return
+			val entity = event.entity
+			if (entity.type != EntityType.ENDER_DRAGON) return
+
+			val level = event.entity.level() as? ServerLevel ?: return
+			get(level).enderDragonKilled = true
 		}
 
 	}

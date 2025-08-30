@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
+import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
@@ -11,6 +12,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.FlyingMob
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.FlyingMoveControl
@@ -147,7 +149,13 @@ class SpiritEntity(
 		}
 
 		fun trySpawn(event: LivingDeathEvent) {
+			if (event.isCanceled) return
+			val entity = event.entity
+			val level = entity.level() as? ServerLevel ?: return
 
+			if (level.random.nextDouble() < getSpawnChance(level)) {
+				ModEntityTypes.SPIRIT.get().spawn(level, entity.blockPosition(), MobSpawnType.TRIGGERED)
+			}
 		}
 
 		fun getSpawnChance(level: ServerLevel): Double {

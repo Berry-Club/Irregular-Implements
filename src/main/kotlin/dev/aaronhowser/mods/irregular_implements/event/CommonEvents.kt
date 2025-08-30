@@ -25,10 +25,8 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
-import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
 import net.neoforged.bus.api.EventPriority
@@ -121,10 +119,8 @@ object CommonEvents {
 		priority = EventPriority.LOWEST
 	)
 	fun onLivingDeathLowPriority(event: LivingDeathEvent) {
-		if (!event.isCanceled && event.entity.type == EntityType.ENDER_DRAGON) {
-			val level = event.entity.level() as? ServerLevel ?: return
-			WorldInformationSavedData.get(level).enderDragonKilled = true
-		}
+		WorldInformationSavedData.trySaveEnderDragonKilled(event)
+		SpiritEntity.trySpawn(event)
 	}
 
 	@SubscribeEvent(
