@@ -401,7 +401,7 @@ class BlocksCategoryProvider(
 		val entry = object : BaseEntryProvider(
 			realThis,
 			"Pitcher Plant",
-			ModBlocks.PITCHERER_PLANT,
+			ModBlocks.PITCHER_PLANT,
 		) {
 			override fun generatePages() {
 				textPage(

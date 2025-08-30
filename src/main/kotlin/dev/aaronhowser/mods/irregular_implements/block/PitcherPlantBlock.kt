@@ -24,8 +24,8 @@ import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import java.util.*
 
-//TODO: Advancement joking about the name
-class PitchererPlantBlock : FlowerBlock(
+//TODO: Rename? Vanilla already has a Pitcher Plant now
+class PitcherPlantBlock : FlowerBlock(
 	MobEffects.WATER_BREATHING,
 	5f,
 	Properties.ofFullCopy(Blocks.RED_TULIP)

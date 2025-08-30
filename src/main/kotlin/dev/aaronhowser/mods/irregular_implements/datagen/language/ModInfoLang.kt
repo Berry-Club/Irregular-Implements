@@ -46,7 +46,7 @@ object ModInfoLang {
 		addInfo(ModBlocks.ANALOG_EMITTER, "Emits a Redstone signal with a configurable strength when the front face is powered.")
 		addInfo(ModBlocks.FLUID_DISPLAY, "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.")
 		addInfo(ModBlocks.ENDER_MAILBOX, "Allows players to send and receive Ender Letters.")
-		addInfo(ModBlocks.PITCHERER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
+		addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
 		provider.add(PLATFORM, "Only solid to non-sneaking entities.")
 		addInfo(ModBlocks.ENTITY_DETECTOR, "Emits a Redstone signal if a configured entity is within a configured range.")
 		addInfo(ModBlocks.QUARTZ_GLASS, "Solid for everything but players.")

@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-30T13:46:08.2279434	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-07-23T16:45:16.4034798	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -47,7 +47,7 @@ a12ea004970ce7fc9e844db120157e3b3eca0511 data/minecraft/tags/block/needs_stone_t
 3cde7ba1eb112818696cfbdefc6948bcbf28c3c2 data/minecraft/tags/block/planks.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/replaceable_by_trees.json
 1702363b5a549dbe0f12831bf2a31d73c12c04fc data/minecraft/tags/block/saplings.json
-aa54493da36a77f21aafe522133c663739d2b23c data/minecraft/tags/block/small_flowers.json
+3645dbb9b45882943c3008d50363ee93ba0c6109 data/minecraft/tags/block/small_flowers.json
 50710d3daa5e73d16a02070ee961f41684faa90d data/minecraft/tags/block/stone_bricks.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/valid_spawn.json
 2f034915209b69d048236ca221906e3d9b02a00a data/minecraft/tags/block/wither_immune.json
