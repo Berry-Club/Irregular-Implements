@@ -1670,6 +1670,7 @@ class ModRecipeProvider(
 		SpecialRecipeBuilder.special(::InvertDiaphanousBlockRecipe) to "invert_diaphanous_block",
 		SpecialRecipeBuilder.special(::CustomCraftingTableRecipe) to "custom_crafting_table",
 		SpecialRecipeBuilder.special(::SetPortkeyDisguiseRecipe) to "set_portkey_disguise",
+		SpecialRecipeBuilder.special(::SetEmeraldCompassPlayerRecipe) to "set_emerald_compass_player",
 	)
 
 	companion object {

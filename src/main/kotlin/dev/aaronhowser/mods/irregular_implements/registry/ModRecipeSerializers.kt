@@ -44,6 +44,9 @@ object ModRecipeSerializers {
 	val APPLY_LUMINOUS_POWDER: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
 		simple("apply_luminous_powder", ::ApplyLuminousPowderRecipe)
 
+	val SET_EMERALD_COMPASS_PLAYER: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+		simple("set_emerald_compass_player", ::SetEmeraldCompassPlayerRecipe)
+
 	private fun simple(name: String, factory: SimpleCraftingRecipeSerializer.Factory<*>): DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> {
 		return registerRecipeSerializer(name) { SimpleCraftingRecipeSerializer(factory) }
 	}

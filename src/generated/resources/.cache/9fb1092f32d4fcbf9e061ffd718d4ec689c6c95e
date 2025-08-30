@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-05T23:32:04.1704389	Recipes
+// 1.21.1	2025-08-30T11:43:30.0970951	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
 29c1c86238aae7a307c3aae2ad5cc37f7d24a6ea data/irregular_implements/advancement/recipes/imbuing/imbuing/fire_imbue.json
@@ -400,6 +400,7 @@ e46100a9e395b243178cdf14b7712c372ebae295 data/irregular_implements/recipe/redsto
 d1c082fecea6d457e7c149a13bed473f2810131b data/irregular_implements/recipe/reinforced_ender_bucket.json
 0fa928a24fef61cb0d79f0b822ea1d35f35f0758 data/irregular_implements/recipe/returning_block_of_sticks.json
 26fce538e3bf50f0d584f526541f609ffc5d8348 data/irregular_implements/recipe/set_diaphanous_block.json
+7fe871d2e10cf259fb79a13a3496c17ec576fc6a data/irregular_implements/recipe/set_emerald_compass_player.json
 99022aa2f8f32e52a0f6c7fc9aae84731cab40f9 data/irregular_implements/recipe/set_portkey_disguise.json
 e8ce8a85e02c2d13119e03c59f67deae47681ce2 data/irregular_implements/recipe/shock_absorber.json
 de1ca4c31bdd627c8ca2a0cd41c3b77385eb3ec3 data/irregular_implements/recipe/sided_redstone.json
