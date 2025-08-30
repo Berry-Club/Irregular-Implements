@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingBookCategory
 import net.minecraft.world.item.crafting.CraftingInput
@@ -37,6 +38,20 @@ class SetEmeraldCompassPlayerRecipe(
 		result.set(ModDataComponents.ENTITY_IDENTIFIER, entityIdentifier)
 
 		return result
+	}
+
+	override fun getRemainingItems(input: CraftingInput): NonNullList<ItemStack?> {
+		val items = input.items().toMutableList()
+		for (i in items.indices) {
+			val stack = items[i]
+			if (PLAYER_FILTER_INGREDIENT.test(stack)) {
+				items[i] = stack.copy()
+			} else {
+				items[i] = ItemStack.EMPTY
+			}
+		}
+
+		return NonNullList.copyOf(items)
 	}
 
 	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
