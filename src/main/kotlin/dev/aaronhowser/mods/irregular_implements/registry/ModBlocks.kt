@@ -138,7 +138,8 @@ object ModBlocks {
 	// Not above 1.6.4
 	val SHOCK_ABSORBER: DeferredBlock<ShockAbsorberBlock> =
 		registerBlock("shock_absorber", ::ShockAbsorberBlock)
-	val AUTO_PLACER = basicBlock("auto_placer")
+	val AUTO_PLACER: DeferredBlock<AutoPlacerBlock> =
+		registerBlock("auto_placer", ::AutoPlacerBlock)
 
 	val BLOCK_TELEPORTER: DeferredBlock<BlockTeleporterBlock> =
 		registerBlock("block_teleporter", ::BlockTeleporterBlock)
