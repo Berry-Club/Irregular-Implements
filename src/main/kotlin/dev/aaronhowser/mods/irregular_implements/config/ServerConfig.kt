@@ -112,6 +112,18 @@ class ServerConfig(
 			.comment("How long should a Spirit last before it despawns? (in ticks)")
 			.defineInRange("spiritMaxAge", 20 * 20, 1, Int.MAX_VALUE)
 
+		SPIRIT_BASE_SPAWN_CHANCE = builder
+			.comment("What is the base chance of a Spirit spawning when an entity dies?")
+			.defineInRange("spiritBaseSpawnChance", 0.01, 0.0, 1.0)
+
+		SPIRIT_SPAWN_DRAGON_KILLED_BONUS = builder
+			.comment("How much is the Spirit spawn chance increased if the Ender Dragon has been killed?")
+			.defineInRange("spiritSpawnDragonKilledBonus", 0.07, 0.0, 1.0)
+
+		SPIRIT_SPAWN_FULL_MOON_BONUS = builder
+			.comment("How much is the Spirit spawn chance increased if it's a full moon?")
+			.defineInRange("spiritSpawnFullMoonBonus", 0.02, 0.0, 1.0)
+
 		builder.pop()
 	}
 
@@ -176,6 +188,9 @@ class ServerConfig(
 		lateinit var BLOCK_TELEPORTER_CROSS_DIMENSION: ModConfigSpec.BooleanValue
 
 		lateinit var SPIRIT_MAX_AGE: ModConfigSpec.IntValue
+		lateinit var SPIRIT_BASE_SPAWN_CHANCE: ModConfigSpec.DoubleValue
+		lateinit var SPIRIT_SPAWN_DRAGON_KILLED_BONUS: ModConfigSpec.DoubleValue
+		lateinit var SPIRIT_SPAWN_FULL_MOON_BONUS: ModConfigSpec.DoubleValue
 	}
 
 }

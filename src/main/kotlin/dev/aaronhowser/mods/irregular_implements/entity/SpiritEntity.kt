@@ -1,11 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.FlyingMob
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 
 //TODO: They only move a little bit and then stop
 class SpiritEntity(
@@ -141,6 +144,24 @@ class SpiritEntity(
 				.add(Attributes.MAX_HEALTH, 1.0)
 				.add(Attributes.FLYING_SPEED, 1.0)
 				.build()
+		}
+
+		fun trySpawn(event: LivingDeathEvent) {
+
+		}
+
+		fun getSpawnChance(level: ServerLevel): Double {
+			var chance = ServerConfig.SPIRIT_BASE_SPAWN_CHANCE.get()
+
+			val savedData = WorldInformationSavedData.get(level)
+			if (savedData.enderDragonKilled) chance += ServerConfig.SPIRIT_SPAWN_DRAGON_KILLED_BONUS.get()
+
+			val moonPhase = level.moonPhase
+			val distToFull = minOf(moonPhase, 8 - moonPhase)
+			val percentToFull = 1 - distToFull / 4.0
+			chance += (percentToFull * ServerConfig.SPIRIT_SPAWN_FULL_MOON_BONUS.get())
+
+			return chance.coerceIn(0.0, 1.0)
 		}
 	}
 
