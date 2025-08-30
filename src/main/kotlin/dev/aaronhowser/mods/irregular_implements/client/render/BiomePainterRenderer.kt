@@ -14,6 +14,12 @@ import kotlin.jvm.optionals.getOrNull
 
 object BiomePainterRenderer {
 
+	data class BiomePainterPositions(
+		val correctBiomePositions: Set<BlockPos>,
+		val incorrectBiomePositions: Set<BlockPos>,
+		val targetedIncorrectBiomePosition: BlockPos?,
+	)
+
 	const val CORRECT_BIOME_CUBE_SIZE = 0.05f
 	const val INCORRECT_BIOME_CUBE_SIZE = 0.35f
 
@@ -29,7 +35,11 @@ object BiomePainterRenderer {
 			?.biome
 			?: return
 
-		val (goodPositions, badPositions) = getPositions(player, paintingBiome)
+		val positions = getPositions(player, paintingBiome)
+
+		val goodPositions = positions.correctBiomePositions
+		val badPositions = positions.incorrectBiomePositions.toMutableSet()
+		val targetedIncorrectBiomePosition = positions.targetedIncorrectBiomePosition
 
 		// Duration is 2 because CubeIndicatorRenderer.afterClientTick is called AFTER this runs,
 		// so the Indicators added here would lose 1 tick immediately
@@ -38,10 +48,9 @@ object BiomePainterRenderer {
 			CubeIndicatorRenderer.addIndicator(pos, 2, CORRECT_BIOME_CUBE_COLOR, CORRECT_BIOME_CUBE_SIZE)
 		}
 
-		val targetedPos = getTargetedPos(player, badPositions)
-		if (targetedPos != null) {
-			badPositions.remove(targetedPos)
-			CubeIndicatorRenderer.addIndicator(targetedPos, 2, SELECTED_INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
+		if (targetedIncorrectBiomePosition != null) {
+			badPositions.remove(targetedIncorrectBiomePosition)
+			CubeIndicatorRenderer.addIndicator(targetedIncorrectBiomePosition, 2, SELECTED_INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
 		}
 
 		for (pos in badPositions) {
@@ -49,28 +58,7 @@ object BiomePainterRenderer {
 		}
 	}
 
-	private fun getTargetedPos(player: Player, positions: Set<BlockPos>): BlockPos? {
-		val eyePos = player.eyePosition
-		val lookVec = player.lookAngle.normalize()
-		val endPos = eyePos.add(lookVec.scale(20.0))
-
-		var closestHit: Pair<Double, BlockPos>? = null
-
-		for (pos in positions) {
-			val aabb = AABB(pos)
-
-			val hitPos = aabb.clip(eyePos, endPos).getOrNull() ?: continue
-			val distSqr = eyePos.distanceToSqr(hitPos)
-
-			if (closestHit == null || distSqr < closestHit.first) {
-				closestHit = Pair(distSqr, pos)
-			}
-		}
-
-		return closestHit?.second
-	}
-
-	private fun getPositions(player: Player, biome: Holder<Biome>): Pair<Set<BlockPos>, MutableSet<BlockPos>> {
+	private fun getPositions(player: Player, biome: Holder<Biome>): BiomePainterPositions {
 		val level = player.level()
 		val playerPos = player.blockPosition()
 
@@ -113,6 +101,33 @@ object BiomePainterRenderer {
 			}
 		}
 
-		return Pair(goodPositions, badPositions)
+		val targetedIncorrectBiomePosition = getTargetedPos(player, badPositions)
+
+		return BiomePainterPositions(
+			correctBiomePositions = goodPositions,
+			incorrectBiomePositions = badPositions,
+			targetedIncorrectBiomePosition = targetedIncorrectBiomePosition,
+		)
+	}
+
+	private fun getTargetedPos(player: Player, positions: Set<BlockPos>): BlockPos? {
+		val eyePos = player.eyePosition
+		val lookVec = player.lookAngle.normalize()
+		val endPos = eyePos.add(lookVec.scale(20.0))
+
+		var closestHit: Pair<Double, BlockPos>? = null
+
+		for (pos in positions) {
+			val aabb = AABB(pos)
+
+			val hitPos = aabb.clip(eyePos, endPos).getOrNull() ?: continue
+			val distSqr = eyePos.distanceToSqr(hitPos)
+
+			if (closestHit == null || distSqr < closestHit.first) {
+				closestHit = Pair(distSqr, pos)
+			}
+		}
+
+		return closestHit?.second
 	}
 }
