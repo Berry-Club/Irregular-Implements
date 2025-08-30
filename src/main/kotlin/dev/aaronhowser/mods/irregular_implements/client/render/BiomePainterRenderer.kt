@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.neoforged.neoforge.client.event.ClientTickEvent
 
 object BiomePainterRenderer {
@@ -20,8 +21,8 @@ object BiomePainterRenderer {
 
 		val level = player.level()
 
-		val horizontalRadius = 15
-		val verticalRadius = 5
+		val horizontalRadius = 10
+		val verticalRadius = 3
 
 		val goodColor = 0x6622AA00
 		val badColor = 0x66AA2200
@@ -36,7 +37,14 @@ object BiomePainterRenderer {
 			if (biomeAtPos == paintingBiome) {
 				CubeIndicatorRenderer.addIndicator(pos.immutable(), 1, goodColor, 0.03f)
 			} else {
-				CubeIndicatorRenderer.addIndicator(pos.immutable(), 1, badColor, 0.2f)
+				val adjacentIsGood = Direction.entries.any { dir ->
+					val neighborPos = pos.relative(dir)
+					level.getBiome(neighborPos) == paintingBiome
+				}
+
+				if (adjacentIsGood) {
+					CubeIndicatorRenderer.addIndicator(pos.immutable(), 1, badColor, 0.1f)
+				}
 			}
 		}
 	}
