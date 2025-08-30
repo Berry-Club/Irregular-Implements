@@ -37,6 +37,7 @@ object ModMessageLang {
 	const val FIREPLACE_TELEPORTED = "message.irregular_implements.floo_brick.teleported"
 	const val ESCAPE_ROPE_HANDLER_PROGRESS = "message.irregular_implements.escape_rope_handler.progress"
 	const val ANCHOR_USED = "message.irregular_implements.anchor.used"
+	const val BIOME_PAINTER_AMOUNT_CHANGED = "message.irregular_implements.biome_painter.amount_changed"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -73,6 +74,7 @@ object ModMessageLang {
 			add(FIREPLACE_TELEPORTED, "Teleported to %s.")
 			add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %s blocks")
 			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed.")
+			add(BIOME_PAINTER_AMOUNT_CHANGED, "Changed %d blocks to %s.")
 		}
 	}
 

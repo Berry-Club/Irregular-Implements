@@ -2,14 +2,16 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.client.render.BiomePainterRenderer
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.PaintBiomePacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
-import net.minecraft.network.chat.Component
 import net.minecraft.server.commands.FillBiomeCommand
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -65,11 +67,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				.getOrNull()
 				?: return
 
-			val firstCapsule = BiomeCapsuleItem.getFirstCapsuleWithBiome(player.inventory, biomeToPlace)
-			if (firstCapsule == null) {
-				player.status(Component.literal("No biome capsules with that biome found!"))
-				return
-			}
+			val firstCapsule = BiomeCapsuleItem.getFirstCapsuleWithBiome(player.inventory, biomeToPlace) ?: return
 
 			val component = firstCapsule.get(ModDataComponents.BIOME_POINTS) ?: return
 
@@ -88,10 +86,6 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 			)
 
 			val amountChanged = result.left().orElse(0)
-			if (amountChanged == 0) {
-				player.status(Component.literal("No biomes changed!"))
-				return
-			}
 
 			if (!player.hasInfiniteMaterials()) {
 				if (amountChanged < points) {
@@ -101,7 +95,13 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				}
 			}
 
-			player.status(Component.literal("Changed $amountChanged blocks to ${biomeRk.location()}."))
+			player.status(
+				ModMessageLang.BIOME_PAINTER_AMOUNT_CHANGED
+					.toComponent(
+						amountChanged,
+						OtherUtil.getBiomeComponent(biomeToPlace)
+					)
+			)
 		}
 	}
 

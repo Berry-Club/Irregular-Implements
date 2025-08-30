@@ -706,6 +706,7 @@
   "message.irregular_implements.advanced_item_collector.y_radius": "Y Radius: %d",
   "message.irregular_implements.advanced_item_collector.z_radius": "Z Radius: %d",
   "message.irregular_implements.anchor.used": "%s was retained through death, but its Spectre Anchor was consumed.",
+  "message.irregular_implements.biome_painter.amount_changed": "Changed %d blocks to %s.",
   "message.irregular_implements.command.level_not_found": "Could not find level \"%s\"",
   "message.irregular_implements.ender_bridge.hit_block": "Ender Bridge stopped searching because it hit a %s at %d %d %d.",
   "message.irregular_implements.ender_bridge.iterations": "Ender Bridge stopped searching after %d blocks.",
