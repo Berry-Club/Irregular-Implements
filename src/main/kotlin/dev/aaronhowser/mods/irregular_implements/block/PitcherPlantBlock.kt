@@ -24,7 +24,7 @@ import net.neoforged.neoforge.fluids.FluidStack
 import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import java.util.*
 
-//TODO: Rename? Vanilla already has a Pitcher Plant now
+//TODO: Advancement "Pitcherer Plant"
 class PitcherPlantBlock : FlowerBlock(
 	MobEffects.WATER_BREATHING,
 	5f,
