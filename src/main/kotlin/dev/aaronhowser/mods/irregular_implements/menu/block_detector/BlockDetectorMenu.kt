@@ -30,6 +30,8 @@ class BlockDetectorMenu(
 	}
 
 	override fun addSlots() {
+
+		//TODO: Add a block outline to the slot background
 		val slot = object : Slot(blockDetectorContainer, 0, 80, 18) {
 			override fun mayPlace(stack: ItemStack): Boolean {
 				return stack.item is BlockItem

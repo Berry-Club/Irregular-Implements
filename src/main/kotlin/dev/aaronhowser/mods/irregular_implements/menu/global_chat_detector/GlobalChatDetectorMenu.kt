@@ -51,6 +51,7 @@ class GlobalChatDetectorMenu(
 			val x = 8 + containerSlotIndex * 18
 			val y = 40
 
+			//TODO: Add a Player Filter outline to the slot background
 			val slot = object : Slot(globalChatDetectorContainer, containerSlotIndex, x, y) {
 				override fun mayPlace(stack: ItemStack): Boolean {
 					return stack.`is`(ModItems.PLAYER_FILTER) && stack.has(ModDataComponents.PLAYER)

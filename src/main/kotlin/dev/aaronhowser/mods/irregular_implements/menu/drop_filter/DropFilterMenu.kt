@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.drop_filter
 
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.core.NonNullList
@@ -80,8 +81,9 @@ class DropFilterMenu(
 
 		val filterSlot = object : Slot(this.filterContainer, 0, filterX, filterY) {
 
+			//TODO: Add an Item Filter outline to the slot background
 			override fun mayPlace(stack: ItemStack): Boolean {
-				return stack.`is`(ModItems.ITEM_FILTER)
+				return stack.has(ModDataComponents.ITEM_FILTER)
 			}
 
 			override fun set(stack: ItemStack) {

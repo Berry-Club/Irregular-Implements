@@ -36,6 +36,7 @@ class EnderEnergyDistributorMenu(
 		for (i in 0 until EnderEnergyDistributorBlockEntity.INVENTORY_SIZE) {
 			val x = 17 + (i % 9) * 18
 
+			//TODO: Add an Item Filter outline to the slot background
 			val slot = object : Slot(container, i, x, 18) {
 				override fun mayPlace(stack: ItemStack): Boolean {
 					return stack.has(ModDataComponents.LOCATION)

@@ -22,7 +22,6 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
-//TODO: Test if this still works
 class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
