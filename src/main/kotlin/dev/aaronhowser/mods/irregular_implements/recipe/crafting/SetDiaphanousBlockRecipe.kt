@@ -3,8 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingBookCategory
@@ -46,6 +48,21 @@ class SetDiaphanousBlockRecipe(
 		output.set(ModDataComponents.BLOCK, (blockStack.item as BlockItem).block)
 
 		return output
+	}
+
+	override fun getRemainingItems(input: CraftingInput): NonNullList<ItemStack?> {
+		val items = input.items().toMutableList()
+		for (i in items.indices) {
+			val stack = items[i]
+
+			if (stack.`is`(ModItems.DIAPHANOUS_BLOCK)) {
+				items[i] = ItemStack.EMPTY
+			} else {
+				items[i] = stack.copyWithCount(1)
+			}
+		}
+
+		return NonNullList.copyOf(items)
 	}
 
 	override fun canCraftInDimensions(width: Int, height: Int): Boolean {

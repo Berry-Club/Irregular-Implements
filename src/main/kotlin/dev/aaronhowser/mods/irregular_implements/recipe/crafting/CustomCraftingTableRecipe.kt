@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -20,24 +21,23 @@ class CustomCraftingTableRecipe(
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		if (input.width() < 3 || input.height() < 3) return false
-		if (!input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)) return false
 
-		val plankStack = input.getItem(plankSlots.first())
+		val centerIsCraftingTable = input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+		if (!centerIsCraftingTable) return false
 
-		val plankStackValid = plankStack.`is`(ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS)
-				&& plankStack.item is BlockItem
+		val baseStack = input.getItem(BASE_SLOTS.first())
 
+		val plankStackValid = BASE_INGREDIENT.test(baseStack) && baseStack.item is BlockItem
 		if (!plankStackValid) return false
 
-		return plankSlots.all { input.getItem(it).`is`(plankStack.item) }
+		return BASE_SLOTS.all { input.getItem(it).`is`(baseStack.item) }
 	}
 
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-		val plankStack = input.getItem(plankSlots.first())
+		val baseStack = input.getItem(BASE_SLOTS.first())
+		val baseBlock = (baseStack.item as? BlockItem)?.block ?: return ItemStack.EMPTY
 
-		val block = (plankStack.item as? BlockItem)?.block ?: return ItemStack.EMPTY
-
-		return CustomCraftingTableBlockItem.ofBlock(block)
+		return CustomCraftingTableBlockItem.ofBlock(baseBlock)
 	}
 
 	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
@@ -50,6 +50,8 @@ class CustomCraftingTableRecipe(
 
 	companion object {
 		private const val CRAFTING_TABLE_SLOT = 4
-		private val plankSlots = (0..0).toSet() - CRAFTING_TABLE_SLOT
+		private val BASE_SLOTS = (0..8).toSet() - CRAFTING_TABLE_SLOT
+
+		private val BASE_INGREDIENT = ModItemTagsProvider.CUSTOM_CRAFTING_TABLE_ITEMS.asIngredient()
 	}
 }

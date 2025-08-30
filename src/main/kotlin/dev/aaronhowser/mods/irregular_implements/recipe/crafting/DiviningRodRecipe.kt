@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
@@ -7,11 +8,9 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.crafting.CraftingBookCategory
-import net.minecraft.world.item.crafting.CraftingInput
-import net.minecraft.world.item.crafting.CustomRecipe
-import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.Level
+import net.neoforged.neoforge.common.Tags
 import kotlin.jvm.optionals.getOrNull
 
 class DiviningRodRecipe(
@@ -22,9 +21,9 @@ class DiviningRodRecipe(
 		val oreTag = getOreTag(input) ?: return false
 		if (input.width() < 3 || input.height() < 3) return false
 
-		val oresMatch = oreSlots.all { input.getItem(it).`is`(oreTag) }
-		val sticksMatch = stickSlots.all { input.getItem(it).`is`(Items.STICK) }
-		val eyeMatch = eyeSlots.all { input.getItem(it).`is`(Items.SPIDER_EYE) }
+		val oresMatch = ORE_SLOTS.all { input.getItem(it).`is`(oreTag) }
+		val sticksMatch = STICK_SLOTS.all { STICKS_INGREDIENT.test(input.getItem(it)) }
+		val eyeMatch = EYE_SLOTS.all { EYE_INGREDIENT.test(input.getItem(it)) }
 
 		return oresMatch && sticksMatch && eyeMatch
 	}
@@ -44,9 +43,12 @@ class DiviningRodRecipe(
 	}
 
 	companion object {
-		private val oreSlots = setOf(0, 2)
-		private val stickSlots = setOf(1, 3, 5, 6, 8)
-		private val eyeSlots = setOf(4)
+		private val ORE_SLOTS: Set<Int> = setOf(0, 2)
+		private val STICK_SLOTS: Set<Int> = setOf(1, 3, 5, 6, 8)
+		private val EYE_SLOTS: Set<Int> = setOf(4)
+
+		val STICKS_INGREDIENT: Ingredient = Tags.Items.RODS_WOODEN.asIngredient()
+		val EYE_INGREDIENT: Ingredient = Items.SPIDER_EYE.asIngredient()
 
 		private fun getOreTag(input: CraftingInput): TagKey<Item>? {
 			if (input.width() < 3 || input.height() < 3) return null
