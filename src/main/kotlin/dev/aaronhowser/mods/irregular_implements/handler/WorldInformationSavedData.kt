@@ -37,7 +37,7 @@ class WorldInformationSavedData : SavedData() {
 
 			return level.dataStorage.computeIfAbsent(
 				Factory(::WorldInformationSavedData, ::load),
-				"redstone_handler"
+				"world_information"
 			)
 		}
 
