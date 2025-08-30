@@ -72,7 +72,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 
 			val component = firstCapsule.get(ModDataComponents.BIOME_POINTS) ?: return
 
-			var points = component.points
+			var points = if (player.hasInfiniteMaterials()) 9999 else component.points
 
 			val result = FillBiomeCommand.fill(
 				level,
