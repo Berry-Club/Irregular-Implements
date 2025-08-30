@@ -18,14 +18,21 @@ object BiomePainterRenderer {
 		val correctBiomePositions: Set<BlockPos>,
 		val incorrectBiomePositions: Set<BlockPos>,
 		val targetedIncorrectBiomePosition: BlockPos?,
-	)
+	) {
+		val unselectedIncorrectBiomePositions: Set<BlockPos> =
+			if (targetedIncorrectBiomePosition != null) {
+				incorrectBiomePositions - targetedIncorrectBiomePosition
+			} else {
+				incorrectBiomePositions
+			}
+	}
 
 	const val CORRECT_BIOME_CUBE_SIZE = 0.05f
 	const val INCORRECT_BIOME_CUBE_SIZE = 0.35f
 
 	const val CORRECT_BIOME_CUBE_COLOR = 0x6622AA00
 	const val INCORRECT_BIOME_CUBE_COLOR = 0x66AA2200
-	const val SELECTED_INCORRECT_BIOME_CUBE_COLOR = 0x662222
+	const val SELECTED_INCORRECT_BIOME_CUBE_COLOR = 0x662222AA
 
 	fun renderCubes(player: Entity) {
 		if (player !is Player || !player.isClientSide) return
@@ -38,8 +45,8 @@ object BiomePainterRenderer {
 		val positions = getPositions(player, paintingBiome)
 
 		val goodPositions = positions.correctBiomePositions
-		val badPositions = positions.incorrectBiomePositions.toMutableSet()
-		val targetedIncorrectBiomePosition = positions.targetedIncorrectBiomePosition
+		val badPositions = positions.unselectedIncorrectBiomePositions
+		val targetPos = positions.targetedIncorrectBiomePosition
 
 		// Duration is 2 because CubeIndicatorRenderer.afterClientTick is called AFTER this runs,
 		// so the Indicators added here would lose 1 tick immediately
@@ -48,13 +55,12 @@ object BiomePainterRenderer {
 			CubeIndicatorRenderer.addIndicator(pos, 2, CORRECT_BIOME_CUBE_COLOR, CORRECT_BIOME_CUBE_SIZE)
 		}
 
-		if (targetedIncorrectBiomePosition != null) {
-			badPositions.remove(targetedIncorrectBiomePosition)
-			CubeIndicatorRenderer.addIndicator(targetedIncorrectBiomePosition, 2, SELECTED_INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
-		}
-
 		for (pos in badPositions) {
 			CubeIndicatorRenderer.addIndicator(pos, 2, INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
+		}
+
+		if (targetPos != null) {
+			CubeIndicatorRenderer.addIndicator(targetPos, 2, SELECTED_INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
 		}
 	}
 
