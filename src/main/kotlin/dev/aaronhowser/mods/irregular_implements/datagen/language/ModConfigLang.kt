@@ -33,6 +33,12 @@ object ModConfigLang {
 		addConfig(ClientConfig.COLLAPSE_INVERTS_MOUSE, "Collapse Inverts Mouse")
 		addConfig(ClientConfig.HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON, "Hide Recipe Book Button In Custom Crafting Table")
 
+		addConfig(ClientConfig.BIOME_PAINTER_CORRECT_BIOME_CUBE_SIZE, "Biome Painter Correct Biome Cube Size")
+		addConfig(ClientConfig.BIOME_PAINTER_INCORRECT_BIOME_CUBE_SIZE, "Biome Painter Incorrect Biome Cube Size")
+		addConfig(ClientConfig.BIOME_PAINTER_CORRECT_BIOME_CUBE_COLOR, "Biome Painter Correct Biome Cube Color")
+		addConfig(ClientConfig.BIOME_PAINTER_INCORRECT_BIOME_CUBE_COLOR, "Biome Painter Incorrect Biome Cube Color")
+		addConfig(ClientConfig.BIOME_PAINTER_SELECTED_INCORRECT_BIOME_CUBE_COLOR, "Biome Painter Selected Incorrect Biome Cube Color")
+
 		addConfig(ServerConfig.BLOCK_DESTABILIZER_LIMIT, "Block Destabilizer Limit")
 
 		addConfig(ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID, "Block Mover Vaporizes Fluid")
