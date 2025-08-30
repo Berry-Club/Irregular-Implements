@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpecialChestBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -31,40 +32,10 @@ class SpecialChestBlock private constructor(
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
 		return when (this.chestType) {
-			Type.NATURE -> NatureChestBlockEntity(pos, state)
-			Type.WATER -> WaterChestBlockEntity(pos, state)
+			Type.NATURE -> SpecialChestBlockEntity.NatureChestBlockEntity(pos, state)
+			Type.WATER -> SpecialChestBlockEntity.WaterChestBlockEntity(pos, state)
 		}
 	}
-
-	// TODO: Move to other package
-	abstract class SpecialChestBlockEntity(
-		type: BlockEntityType<*>,
-		pos: BlockPos,
-		state: BlockState
-	) : ChestBlockEntity(type, pos, state) {
-
-		override fun getDefaultName(): Component {
-			return this.blockState.block.name
-		}
-	}
-
-	class NatureChestBlockEntity(
-		pos: BlockPos,
-		state: BlockState
-	) : SpecialChestBlockEntity(
-		ModBlockEntities.NATURE_CHEST.get(),
-		pos,
-		state
-	)
-
-	class WaterChestBlockEntity(
-		pos: BlockPos,
-		state: BlockState
-	) : SpecialChestBlockEntity(
-		ModBlockEntities.WATER_CHEST.get(),
-		pos,
-		state
-	)
 
 	companion object {
 		val NATURE = SpecialChestBlock(Type.NATURE)

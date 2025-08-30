@@ -71,18 +71,18 @@ object ModBlockEntities {
 		register("advanced_item_collector", ::AdvancedItemCollectorBlockEntity, ModBlocks.ADVANCED_ITEM_COLLECTOR)
 
 	@JvmField
-	val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.NatureChestBlockEntity>> =
+	val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlockEntity.NatureChestBlockEntity>> =
 		register(
 			"nature_chest",
-			{ pos, state -> SpecialChestBlock.NatureChestBlockEntity(pos, state) },
+			{ pos, state -> SpecialChestBlockEntity.NatureChestBlockEntity(pos, state) },
 			ModBlocks.NATURE_CHEST
 		)
 
 	@JvmField
-	val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlock.WaterChestBlockEntity>> =
+	val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlockEntity.WaterChestBlockEntity>> =
 		register(
 			"water_chest",
-			{ pos, state -> SpecialChestBlock.WaterChestBlockEntity(pos, state) },
+			{ pos, state -> SpecialChestBlockEntity.WaterChestBlockEntity(pos, state) },
 			ModBlocks.WATER_CHEST
 		)
 

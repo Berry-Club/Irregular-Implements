@@ -25,7 +25,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import java.util.*
 
 //TODO: Rename? Vanilla already has a Pitcher Plant now
-//TODO: Maybe it could also count as a tank that contains infinite water, like the Sink?
 class PitcherPlantBlock : FlowerBlock(
 	MobEffects.WATER_BREATHING,
 	5f,
