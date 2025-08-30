@@ -1,20 +1,21 @@
-package dev.aaronhowser.mods.irregular_implements.client.render.item
+package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
-class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
+class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().blockEntityRenderDispatcher,
 	Minecraft.getInstance().entityModels
 ) {
 
+	//TODO: Render the crafting table part
 	override fun renderByItem(
 		stack: ItemStack,
 		displayContext: ItemDisplayContext,
@@ -24,21 +25,30 @@ class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
 		packedOverlay: Int
 	) {
 		poseStack.pushPose()
+
+		poseStack.scale(0.999f, 0.999f, 0.999f)
+		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 		poseStack.translate(0.5, 0.5, 0.5)
 
-		val time = (ClientUtil.localPlayer?.tickCount ?: 0) / 200f
+		val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
+		val itemRenderer = Minecraft.getInstance().itemRenderer
 
-		RenderUtil.renderDragonRays(
-			poseStack = poseStack,
-			time = time,
-			bufferSource = buffer
+		itemRenderer.renderStatic(
+			itemToRender.defaultInstance,
+			displayContext,
+			packedLight,
+			packedOverlay,
+			poseStack,
+			buffer,
+			null,
+			0,
 		)
 
 		poseStack.popPose()
 	}
 
 	object ClientItemExtensions : IClientItemExtensions {
-		val BEWLR = SpectreIlluminatorBEWLR()
+		val BEWLR = CustomCraftingTableBEWLR()
 
 		override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
 			return BEWLR

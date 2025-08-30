@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.client.render.item
+package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -7,15 +7,15 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
+import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
+import kotlin.math.sin
 
-class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
+class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().blockEntityRenderDispatcher,
 	Minecraft.getInstance().entityModels
 ) {
 
-	//TODO: Render the crafting table part
 	override fun renderByItem(
 		stack: ItemStack,
 		displayContext: ItemDisplayContext,
@@ -26,15 +26,19 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	) {
 		poseStack.pushPose()
 
-		poseStack.scale(0.999f, 0.999f, 0.999f)
-		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 		poseStack.translate(0.5, 0.5, 0.5)
 
-		val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
+		if (displayContext == ItemDisplayContext.GUI) {
+			val time = Minecraft.getInstance().level?.gameTime ?: 0
+			val modelScale = 0.9625f + 0.0375f * sin(time.toFloat() / 2.5f)
+			poseStack.scale(modelScale, modelScale, modelScale)
+		}
+
+		val blockToRender = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
 		val itemRenderer = Minecraft.getInstance().itemRenderer
 
 		itemRenderer.renderStatic(
-			itemToRender.defaultInstance,
+			blockToRender.asItem().defaultInstance,
 			displayContext,
 			packedLight,
 			packedOverlay,
@@ -48,7 +52,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	}
 
 	object ClientItemExtensions : IClientItemExtensions {
-		val BEWLR = CustomCraftingTableBEWLR()
+		val BEWLR = DiaphanousBEWLR()
 
 		override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
 			return BEWLR

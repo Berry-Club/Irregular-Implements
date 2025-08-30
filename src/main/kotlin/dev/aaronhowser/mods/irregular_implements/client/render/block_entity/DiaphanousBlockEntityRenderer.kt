@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.irregular_implements.client.render.block
+package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
