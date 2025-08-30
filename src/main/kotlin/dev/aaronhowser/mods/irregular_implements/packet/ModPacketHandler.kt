@@ -74,8 +74,7 @@ object ModPacketHandler {
 
 	fun messageNearbyPlayers(packet: CustomPacketPayload, serverLevel: ServerLevel, origin: Vec3, radius: Double) {
 		for (player in serverLevel.players()) {
-			val distance = player.distanceToSqr(origin.x(), origin.y(), origin.z())
-			if (distance < radius * radius) {
+			if (player.position().closerThan(origin, radius)) {
 				messagePlayer(player, packet)
 			}
 		}
