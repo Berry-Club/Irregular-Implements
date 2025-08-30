@@ -5,14 +5,14 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
+import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.DiaphanousBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.PlayerInterfaceBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.SpectreEnergyInjectorBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
-import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
-import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.DiaphanousBEWLR
-import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
@@ -302,6 +302,7 @@ object ClientEvents {
 		DiviningRodRenderer.afterClientTick(event)
 		RedstoneToolRenderer.afterClientTick(event)
 		TargetPositionRenderer.afterClientTick(event)
+		BiomePainterRenderer.afterClientTick(event)
 	}
 
 	@SubscribeEvent

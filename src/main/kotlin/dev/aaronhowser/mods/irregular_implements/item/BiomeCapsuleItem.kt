@@ -4,11 +4,14 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.item.component.BiomePointsDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.core.Holder
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.biome.Biome
 
 class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 
@@ -22,7 +25,6 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 
 		if (component.biome != biome) return super.onEntityItemUpdate(stack, entity)
 
-		//TODO: Max amount?
 		stack.set(
 			ModDataComponents.BIOME_POINTS,
 			component.withMorePoints(1)
@@ -49,6 +51,18 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 			val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
 
 			return (foliageColor or 0xFF000000.toInt())
+		}
+
+		fun getFirstNonEmptyCapsule(playerInventory: Inventory, excludeBiome: Holder<Biome>? = null): ItemStack? {
+			val stacks = playerInventory.items
+
+			for (stack in stacks) {
+				val component = stack.get(ModDataComponents.BIOME_POINTS) ?: continue
+				if (component.points <= 0 || component.biome == excludeBiome) continue
+				return stack
+			}
+
+			return null
 		}
 	}
 

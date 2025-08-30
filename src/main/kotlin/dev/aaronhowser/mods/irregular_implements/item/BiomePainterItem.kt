@@ -17,15 +17,9 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 		val level = context.level as? ServerLevel ?: return InteractionResult.PASS
 		val clickedPos = context.clickedPos
 
-		val clickedBiome = level.getBiome(clickedPos)
+		val firstNonEmptyCapsule = BiomeCapsuleItem.getFirstNonEmptyCapsule(player.inventory)
+		val component = firstNonEmptyCapsule?.get(ModDataComponents.BIOME_POINTS) ?: return InteractionResult.FAIL
 
-		val firstNonEmptyCapsule = player.inventory.items.find {
-			val component = it.get(ModDataComponents.BIOME_POINTS) ?: return@find false
-
-			return@find component.biome != clickedBiome && component.points > 0
-		} ?: return InteractionResult.FAIL
-
-		val component = firstNonEmptyCapsule.get(ModDataComponents.BIOME_POINTS)!!
 		val biomeToPlace = component.biome
 		val points = component.points
 
@@ -49,10 +43,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 		if (amountChanged == 0) return InteractionResult.FAIL
 
 		if (amountChanged < points) {
-			firstNonEmptyCapsule.set(
-				ModDataComponents.BIOME_POINTS,
-				component.withLessPoints(amountChanged)
-			)
+			firstNonEmptyCapsule.set(ModDataComponents.BIOME_POINTS, component.withLessPoints(amountChanged))
 		} else {
 			firstNonEmptyCapsule.remove(ModDataComponents.BIOME_POINTS)
 		}
@@ -61,7 +52,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 	}
 
 	companion object {
-		val DEFAULT_PROPERTIES = Properties().stacksTo(1)
+		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 	}
 
 }

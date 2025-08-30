@@ -7,12 +7,12 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 
 object CubeIndicatorRenderer {
 
-	private class Indicator(val target: BlockPos, var duration: Int, val color: Int)
+	private class Indicator(val target: BlockPos, var duration: Int, val color: Int, val size: Float)
 
 	private val indicators: MutableList<Indicator> = mutableListOf()
 
-	fun addIndicator(target: BlockPos, duration: Int, color: Int) {
-		indicators.add(Indicator(target, duration, color))
+	fun addIndicator(target: BlockPos, duration: Int, color: Int, size: Float = 0.99f) {
+		indicators.add(Indicator(target, duration, color, size))
 	}
 
 	fun removeIndicatorsAt(target: BlockPos) {
@@ -47,7 +47,7 @@ object CubeIndicatorRenderer {
 			RenderUtil.renderCube(
 				poseStack,
 				indicator.target.center,
-				0.99f,
+				indicator.size,
 				indicator.color
 			)
 		}
