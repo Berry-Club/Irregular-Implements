@@ -22,6 +22,7 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.phys.AABB
 import net.neoforged.neoforge.network.handling.IPayloadContext
 import kotlin.jvm.optionals.getOrNull
+import kotlin.math.abs
 
 class BiomePainterItem(properties: Properties) : Item(properties) {
 
@@ -56,6 +57,8 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 			val level = player.serverLevel()
 
 			val blockPos = packet.blockPos
+			val biomeThere = level.getBiome(blockPos)
+			player.displayClientMessage(Component.literal("Biome there: ${biomeThere.key?.location()}"), false)
 
 			val biomeRk = packet.biomeRk
 
@@ -85,7 +88,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				val pos = mutable.immutable()
 
 				val biomeThere = level.getBiome(pos)
-				if (!biomeThere.`is`(biomeToPlace) && points-- > 0) continue
+				if (biomeThere.`is`(biomeToPlace) || points-- < 0) continue
 
 				val result = FillBiomeCommand.fill(
 					level,
@@ -99,6 +102,11 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				result.ifLeft {
 					amountChanged++
 				}
+
+				val newBiomeThere = level.getBiome(pos)
+				player.sendSystemMessage(
+					Component.literal("It is now ${newBiomeThere.key?.location()}.")
+				)
 			}
 
 			if (amountChanged == 0) {
@@ -135,8 +143,8 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				val level = player.level()
 				val playerPos = player.blockPosition()
 
-				val horizontalRadius = 10
-				val verticalRadius = 5
+				val horizontalRadius = 3
+				val verticalRadius = 3
 
 				val matchingPositions = mutableSetOf<BlockPos>()
 				val unmatchingPositions = mutableSetOf<BlockPos>()
@@ -168,13 +176,18 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 						val dz = offset.z - playerPos.z
 
 						val hDistSqr = dx * dx + dz * dz
-						if (hDistSqr > horizontalRadius * horizontalRadius) continue
+						if (abs(hDistSqr) > horizontalRadius * horizontalRadius) continue
 
 						toCheck.add(offset)
 					}
 				}
 
 				val targetedIncorrectBiomePosition = getTargetedPos(player, unmatchingPositions)
+
+				if (targetedIncorrectBiomePosition != null) {
+					val biomeThere = level.getBiome(targetedIncorrectBiomePosition)
+//					println(biomeThere.key?.location().toString())
+				}
 
 				return Positions(
 					matchingPositions = matchingPositions,
