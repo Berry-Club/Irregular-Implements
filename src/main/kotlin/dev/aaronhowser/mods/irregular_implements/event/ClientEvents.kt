@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeSensorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.client.render.BiomeSensorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
@@ -205,8 +205,8 @@ object ClientEvents {
 
 		event.registerAbove(
 			VanillaGuiLayers.CROSSHAIR,
-			BiomeSensorBlockEntity.LAYER_NAME,
-			BiomeSensorBlockEntity::tryRenderBiomeName
+			BiomeSensorRenderer.LAYER_NAME,
+			BiomeSensorRenderer::tryRenderBiomeName
 		)
 	}
 
