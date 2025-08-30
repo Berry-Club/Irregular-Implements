@@ -38,7 +38,11 @@ class PortkeyItemEntityRenderer(
 		val portkeyStack = entity.item.copy()
 		val disguise = portkeyStack.get(ModDataComponents.PORTKEY_DISGUISE)
 
-		val renderStack = disguise?.stack?.copy() ?: portkeyStack
+		val renderStack = if (disguise == null || entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
+			portkeyStack
+		} else {
+			disguise.stack.copy()
+		}
 
 		if (portkeyStack.has(ModDataComponents.LOCATION) && entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
 			renderStack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
