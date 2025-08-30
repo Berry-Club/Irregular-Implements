@@ -71,6 +71,10 @@ class ServerConfig(
 		PITCHER_PLANT_USE_FILL_AMOUNT = builder
 			.comment("How much fluid should the Pitcher Plant fill a container clicked onto it?")
 			.defineInRange("pitcherPlantUseFillAmount", 1000 * 100, 1, Int.MAX_VALUE)
+
+		PITCHER_PLANT_PIPE_DRAIN_RATE = builder
+			.comment("How much fluid should the Pitcher Plant allow to be drained by pipes per tick?")
+			.defineInRange("pitcherPlantPipeDrainRate", 1000 * 100, 1, Int.MAX_VALUE)
 	}
 
 	private fun spectreConfigs() {
@@ -207,6 +211,7 @@ class ServerConfig(
 		lateinit var PITCHER_PLANT_TICK_FILL_AMOUNT: ModConfigSpec.IntValue
 		lateinit var PITCHER_PLANT_BONE_MEAL_FILL_AMOUNT: ModConfigSpec.IntValue
 		lateinit var PITCHER_PLANT_USE_FILL_AMOUNT: ModConfigSpec.IntValue
+		lateinit var PITCHER_PLANT_PIPE_DRAIN_RATE: ModConfigSpec.IntValue
 	}
 
 }

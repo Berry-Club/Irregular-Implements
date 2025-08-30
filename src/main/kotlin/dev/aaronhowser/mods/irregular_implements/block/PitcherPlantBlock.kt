@@ -14,10 +14,8 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BonemealableBlock
-import net.minecraft.world.level.block.BucketPickup
-import net.minecraft.world.level.block.FlowerBlock
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.BlockHitResult
@@ -109,6 +107,33 @@ class PitcherPlantBlock : FlowerBlock(
 
 				val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, amount), IFluidHandler.FluidAction.SIMULATE)
 				fluidCap.fill(FluidStack(Fluids.WATER, amountThatFits), IFluidHandler.FluidAction.EXECUTE)
+			}
+		}
+
+		fun getCapability(level: Level, pos: BlockPos, state: BlockState, entity: BlockEntity?, direction: Direction): IFluidHandler {
+			return INFINITE_WATER_HANDLER
+		}
+
+		val INFINITE_WATER_HANDLER = object : IFluidHandler {
+			override fun getTanks(): Int = 1
+			override fun getFluidInTank(tank: Int): FluidStack = FluidStack(Fluids.WATER, Int.MAX_VALUE)
+			override fun getTankCapacity(tank: Int): Int = Int.MAX_VALUE
+			override fun isFluidValid(tank: Int, stack: FluidStack): Boolean = stack.`is`(Fluids.WATER)
+			override fun fill(resource: FluidStack, action: IFluidHandler.FluidAction): Int = 0
+
+			override fun drain(resource: FluidStack, action: IFluidHandler.FluidAction): FluidStack {
+				val configMax = ServerConfig.PITCHER_PLANT_PIPE_DRAIN_RATE.get()
+
+				return if (resource.`is`(Fluids.WATER)) {
+					FluidStack(Fluids.WATER, minOf(resource.amount, configMax))
+				} else {
+					FluidStack.EMPTY
+				}
+			}
+
+			override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction): FluidStack {
+				val configMax = ServerConfig.PITCHER_PLANT_PIPE_DRAIN_RATE.get()
+				return FluidStack(Fluids.WATER, minOf(maxDrain, configMax))
 			}
 		}
 	}

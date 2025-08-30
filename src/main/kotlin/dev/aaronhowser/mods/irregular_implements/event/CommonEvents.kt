@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.CompressedSlimeBlock
-import dev.aaronhowser.mods.irregular_implements.block.ContactButtonBlock
-import dev.aaronhowser.mods.irregular_implements.block.ContactLeverBlock
-import dev.aaronhowser.mods.irregular_implements.block.SpectreTreeBlocks
+import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.command.ModCommands
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
@@ -21,14 +18,20 @@ import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterConte
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -48,6 +51,7 @@ import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
 import net.neoforged.neoforge.event.tick.PlayerTickEvent
 import net.neoforged.neoforge.event.tick.ServerTickEvent
+import net.neoforged.neoforge.fluids.capability.IFluidHandler
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 
 @EventBusSubscriber(
@@ -237,6 +241,12 @@ object CommonEvents {
 			Capabilities.ItemHandler.ITEM,
 			EnderLetterContentsDataComponent::getCapability,
 			ModItems.ENDER_LETTER.get(),
+		)
+
+		event.registerBlock(
+			Capabilities.FluidHandler.BLOCK,
+			PitcherPlantBlock::getCapability,
+			ModBlocks.PITCHER_PLANT.get()
 		)
 	}
 
