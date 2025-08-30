@@ -29,6 +29,8 @@ class FlooTokenItem(properties: Properties) : Item(properties) {
 			return false
 		}
 
+		level as ServerLevel
+
 		if (entity.age >= 100 && entity.onGround()) {
 			val otherFireplaces = level.getEntitiesOfClass(
 				TemporaryFlooFireplaceEntity::class.java,
@@ -37,7 +39,7 @@ class FlooTokenItem(properties: Properties) : Item(properties) {
 
 			if (otherFireplaces.isEmpty()) {
 				val packet = FlooTokenActivatedPacket(entity.position())
-				ModPacketHandler.messageNearbyPlayers(packet, level as ServerLevel, entity.position(), 32.0)
+				packet.messageNearbyPlayers(level, entity.position(), 32.0)
 
 				val tempFireplace = TemporaryFlooFireplaceEntity(level, entity.position())
 				level.addFreshEntity(tempFireplace)

@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.NotificationInterfaceMenu
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -50,19 +49,11 @@ class NotificationInterfaceBlockEntity(
 	fun sendStringUpdate() {
 		val level = this.level as? ServerLevel ?: return
 
-		ModPacketHandler.messageNearbyPlayers(
-			UpdateClientScreenString(NotificationInterfaceMenu.TITLE_STRING_ID, this.toastTitle),
-			level,
-			this.blockPos.center,
-			16.0
-		)
+		val titlePacket = UpdateClientScreenString(NotificationInterfaceMenu.TITLE_STRING_ID, this.toastTitle)
+		titlePacket.messageNearbyPlayers(level, this.blockPos.center, 16.0)
 
-		ModPacketHandler.messageNearbyPlayers(
-			UpdateClientScreenString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, this.toastDescription),
-			level,
-			this.blockPos.center,
-			16.0
-		)
+		val descriptionPacket = UpdateClientScreenString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, this.toastDescription)
+		descriptionPacket.messageNearbyPlayers(level, this.blockPos.center, 16.0)
 	}
 
 	private val container = ImprovedSimpleContainer(this, 1)

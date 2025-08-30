@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.handler.floo
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.BurningFlooFireplacePacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
@@ -53,8 +52,7 @@ class FlooFireplace(
 			if (myBe != null) {
 				val bricks = myBe.children + myBe.blockPos
 				val packet = BurningFlooFireplacePacket(bricks)
-
-				ModPacketHandler.messageNearbyPlayers(packet, level, this.masterBlockPos.center, 64.0)
+				packet.messageNearbyPlayers(level, this.masterBlockPos.center, 64.0)
 			}
 		}
 
@@ -92,9 +90,7 @@ class FlooFireplace(
 
 		val bricks = be.children + be.blockPos
 		val packet = BurningFlooFireplacePacket(bricks)
-
-		ModPacketHandler.messageNearbyPlayers(packet, level, this.masterBlockPos.center, 64.0)
-
+		packet.messageNearbyPlayers(level, this.masterBlockPos.center, 64.0)
 
 		return true
 	}

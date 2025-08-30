@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RemoveIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -246,7 +245,7 @@ class BlockDestabilizerBlockEntity(
 		val color = if (shouldAdd) 0x00FF00 else 0xFF0000
 
 		val packet = AddIndicatorsPacket(nextPos, 5, color)
-		ModPacketHandler.messageNearbyPlayers(packet, level, this.blockPos, 32.0)
+		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
 	}
 
 	// Runs once if it's done searching, or if it's in lazy and it has a lazy shape
@@ -332,7 +331,7 @@ class BlockDestabilizerBlockEntity(
 		val level = this.level as? ServerLevel ?: return false
 
 		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
-		ModPacketHandler.messageNearbyPlayers(packet, level, this.blockPos, 32.0)
+		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
 
 		return true
 	}
@@ -343,7 +342,7 @@ class BlockDestabilizerBlockEntity(
 		val level = this.level as? ServerLevel ?: return false
 
 		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
-		ModPacketHandler.messageNearbyPlayers(packet, level, this.blockPos, 32.0)
+		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
 
 		return true
 	}

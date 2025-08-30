@@ -8,6 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
@@ -67,24 +68,28 @@ object ModPacketHandler {
 		)
 	}
 
-	fun messageNearbyPlayers(packet: ModPacket, serverLevel: ServerLevel, origin: BlockPos, radius: Double) {
+	fun messageNearbyPlayers(packet: CustomPacketPayload, serverLevel: ServerLevel, origin: BlockPos, radius: Double) {
 		messageNearbyPlayers(packet, serverLevel, origin.center, radius)
 	}
 
-	fun messageNearbyPlayers(packet: ModPacket, serverLevel: ServerLevel, origin: Vec3, radius: Double) {
+	fun messageNearbyPlayers(packet: CustomPacketPayload, serverLevel: ServerLevel, origin: Vec3, radius: Double) {
 		for (player in serverLevel.players()) {
 			val distance = player.distanceToSqr(origin.x(), origin.y(), origin.z())
 			if (distance < radius * radius) {
-				packet.messagePlayer(player)
+				messagePlayer(player, packet)
 			}
 		}
 	}
 
-	fun messageAllPlayers(packet: ModPacket) {
+	fun messagePlayer(player: ServerPlayer, packet: CustomPacketPayload) {
+		PacketDistributor.sendToPlayer(player, packet)
+	}
+
+	fun messageAllPlayers(packet: CustomPacketPayload) {
 		PacketDistributor.sendToAllPlayers(packet)
 	}
 
-	fun messageServer(packet: ModPacket) {
+	fun messageServer(packet: CustomPacketPayload) {
 		PacketDistributor.sendToServer(packet)
 	}
 
