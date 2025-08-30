@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.config
 
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModConfigLang
 import net.neoforged.neoforge.common.ModConfigSpec
 import org.apache.commons.lang3.tuple.Pair
 
@@ -16,12 +15,10 @@ class ClientConfig(
 	private fun clientConfigs() {
 		COLLAPSE_INVERTS_MOUSE = builder
 			.comment("Should the Collapse Imbue invert the player's mouse sensitivity?")
-			.translation(ModConfigLang.ClientLang.COLLAPSE_INVERTS_MOUSE)
 			.define("collapseInvertsMouse", true)
 
 		HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON = builder
 			.comment("Should the recipe book button be hidden in the Custom Crafting Table screen?")
-			.translation(ModConfigLang.ClientLang.HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON)
 			.define("hideCustomCraftingTableRecipeBookButton", false)
 	}
 

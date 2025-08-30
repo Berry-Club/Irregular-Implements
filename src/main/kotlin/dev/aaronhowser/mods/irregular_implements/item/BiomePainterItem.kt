@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.ThisWillDoNothing
 import dev.aaronhowser.mods.irregular_implements.client.render.BiomePainterRenderer
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.PaintBiomePacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -10,6 +9,7 @@ import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
+import net.minecraft.server.commands.FillBiomeCommand
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -75,15 +75,16 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 			var points = if (player.hasInfiniteMaterials()) 9999 else component.points
 
 			//FIXME: Sometimes doesn't actually change the biome?????
-			val result = ThisWillDoNothing.fill(
+			val result = FillBiomeCommand.fill(
 				level,
 				blockPos.offset(-1, -1, -1),
 				blockPos.offset(1, 1, 1),
 				biomeToPlace,
-				{ biomeThere -> true }
+				{ biomeThere -> biomeThere != biomeToPlace && points-- > 0 },
+				{ _ -> }
 			)
 
-			val amountChanged = result
+			val amountChanged = result.left().orElse(0)
 			if (amountChanged == 0) {
 				player.status(Component.literal("No biomes changed!"))
 				return
