@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.Vec3
 
 class BlockDestabilizerBlockEntity(
 	pPos: BlockPos,
@@ -330,7 +331,7 @@ class BlockDestabilizerBlockEntity(
 
 		val level = this.level as? ServerLevel ?: return false
 
-		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
+		val packet = AddIndicatorsPacket(this.lazyBlocks.toList(), 20 * 10, 0x33FFFFFF, dimensions = Vec3(0.99, 0.99, 0.99))
 		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
 
 		return true
