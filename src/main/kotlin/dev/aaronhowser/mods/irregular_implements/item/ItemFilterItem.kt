@@ -21,7 +21,6 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import java.util.function.Supplier
 
-//TODO: Test if this still works
 class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {

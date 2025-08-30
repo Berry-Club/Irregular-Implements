@@ -35,7 +35,7 @@ class SetEmeraldCompassPlayerRecipe(
 
 		val result = emeraldCompass.copyWithCount(1)
 		val entityIdentifier = playerFilter.get(ModDataComponents.PLAYER) ?: return ItemStack.EMPTY
-		result.set(ModDataComponents.ENTITY_IDENTIFIER, entityIdentifier)
+		result.set(ModDataComponents.PLAYER, entityIdentifier)
 
 		return result
 	}
