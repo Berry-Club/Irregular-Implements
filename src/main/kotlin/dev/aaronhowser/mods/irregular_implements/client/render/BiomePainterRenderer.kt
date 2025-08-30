@@ -9,8 +9,17 @@ import net.minecraft.core.Holder
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.phys.AABB
+import kotlin.jvm.optionals.getOrNull
 
 object BiomePainterRenderer {
+
+	const val CORRECT_BIOME_CUBE_SIZE = 0.05f
+	const val INCORRECT_BIOME_CUBE_SIZE = 0.35f
+
+	const val CORRECT_BIOME_CUBE_COLOR = 0x6622AA00
+	const val INCORRECT_BIOME_CUBE_COLOR = 0x66AA2200
+	const val SELECTED_INCORRECT_BIOME_CUBE_COLOR = 0x662222
 
 	fun renderCubes(player: Entity) {
 		if (player !is Player || !player.isClientSide) return
@@ -20,24 +29,48 @@ object BiomePainterRenderer {
 			?.biome
 			?: return
 
-		val goodColor = 0x6622AA00
-		val badColor = 0x66AA2200
-
 		val (goodPositions, badPositions) = getPositions(player, paintingBiome)
 
 		// Duration is 2 because CubeIndicatorRenderer.afterClientTick is called AFTER this runs,
 		// so the Indicators added here would lose 1 tick immediately
 
 		for (pos in goodPositions) {
-			CubeIndicatorRenderer.addIndicator(pos, 2, goodColor, size = 0.05f)
+			CubeIndicatorRenderer.addIndicator(pos, 2, CORRECT_BIOME_CUBE_COLOR, CORRECT_BIOME_CUBE_SIZE)
+		}
+
+		val targetedPos = getTargetedPos(player, badPositions)
+		if (targetedPos != null) {
+			badPositions.remove(targetedPos)
+			CubeIndicatorRenderer.addIndicator(targetedPos, 2, SELECTED_INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
 		}
 
 		for (pos in badPositions) {
-			CubeIndicatorRenderer.addIndicator(pos, 2, badColor, size = 0.35f)
+			CubeIndicatorRenderer.addIndicator(pos, 2, INCORRECT_BIOME_CUBE_COLOR, INCORRECT_BIOME_CUBE_SIZE)
 		}
 	}
 
-	private fun getPositions(player: Player, biome: Holder<Biome>): Pair<Set<BlockPos>, Set<BlockPos>> {
+	private fun getTargetedPos(player: Player, positions: Set<BlockPos>): BlockPos? {
+		val eyePos = player.eyePosition
+		val lookVec = player.lookAngle.normalize()
+		val endPos = eyePos.add(lookVec.scale(20.0))
+
+		var closestHit: Pair<Double, BlockPos>? = null
+
+		for (pos in positions) {
+			val aabb = AABB(pos)
+
+			val hitPos = aabb.clip(eyePos, endPos).getOrNull() ?: continue
+			val distSqr = eyePos.distanceToSqr(hitPos)
+
+			if (closestHit == null || distSqr < closestHit.first) {
+				closestHit = Pair(distSqr, pos)
+			}
+		}
+
+		return closestHit?.second
+	}
+
+	private fun getPositions(player: Player, biome: Holder<Biome>): Pair<Set<BlockPos>, MutableSet<BlockPos>> {
 		val level = player.level()
 		val playerPos = player.blockPosition()
 
