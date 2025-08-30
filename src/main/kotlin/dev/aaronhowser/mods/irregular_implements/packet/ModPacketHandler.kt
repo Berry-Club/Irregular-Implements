@@ -8,7 +8,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
@@ -76,13 +75,9 @@ object ModPacketHandler {
 		for (player in serverLevel.players()) {
 			val distance = player.distanceToSqr(origin.x(), origin.y(), origin.z())
 			if (distance < radius * radius) {
-				messagePlayer(player, packet)
+				packet.messagePlayer(player)
 			}
 		}
-	}
-
-	fun messagePlayer(player: ServerPlayer, packet: ModPacket) {
-		PacketDistributor.sendToPlayer(player, packet)
 	}
 
 	fun messageAllPlayers(packet: ModPacket) {

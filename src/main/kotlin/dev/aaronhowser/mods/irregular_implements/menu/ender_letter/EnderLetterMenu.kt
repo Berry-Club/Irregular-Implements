@@ -44,10 +44,8 @@ class EnderLetterMenu(
 
 			if (recipient != null) {
 				ServerScheduler.scheduleTaskInTicks(1) {
-					ModPacketHandler.messagePlayer(
-						player,
-						UpdateClientScreenString(RECIPIENT_STRING_ID, recipient)
-					)
+					val packet = UpdateClientScreenString(RECIPIENT_STRING_ID, recipient)
+					packet.messagePlayer(player)
 				}
 			}
 		}

@@ -99,7 +99,7 @@ object EscapeRopeHandler {
 				val nextPos = getNextPositionToCheck() ?: return true
 				if (shouldSpawnIndicator) {
 					val packet = AddIndicatorsPacket(nextPos, 20, 0x08FFFFFF)
-					ModPacketHandler.messagePlayer(player, packet)
+					packet.messagePlayer(player)
 				}
 
 				if (!isEmptySpace(level, nextPos)) {

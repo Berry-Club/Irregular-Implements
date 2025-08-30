@@ -78,10 +78,8 @@ class NotificationInterfaceBlockEntity(
 		val level = this.level as? ServerLevel ?: return
 		val owner = level.server.playerList.getPlayer(this.ownerUuid) ?: return
 
-		ModPacketHandler.messagePlayer(
-			owner,
-			SendClientToast(this.toastTitle, this.toastDescription, this.icon)
-		)
+		val packet = SendClientToast(this.toastTitle, this.toastDescription, this.icon)
+		packet.messagePlayer(owner)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

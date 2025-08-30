@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.packet
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
+import net.minecraft.server.level.ServerPlayer
+import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 abstract class ModPacket : CustomPacketPayload {
@@ -24,5 +26,9 @@ abstract class ModPacket : CustomPacketPayload {
 			handleOnServer(context)
 		}
 	}
+
+	fun messagePlayer(player: ServerPlayer) = PacketDistributor.sendToPlayer(player, this)
+	fun messageAllPlayers() = ModPacketHandler.messageAllPlayers(this)
+	fun messageServer() = ModPacketHandler.messageServer(this)
 
 }
