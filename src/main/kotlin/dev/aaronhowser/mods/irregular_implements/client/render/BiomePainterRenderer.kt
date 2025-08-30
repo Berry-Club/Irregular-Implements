@@ -6,6 +6,9 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.Holder
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.biome.Biome
 import net.neoforged.neoforge.client.event.ClientTickEvent
 
 object BiomePainterRenderer {
@@ -19,34 +22,64 @@ object BiomePainterRenderer {
 			?.biome
 			?: return
 
-		val level = player.level()
-
-		val horizontalRadius = 10
-		val verticalRadius = 3
-
 		val goodColor = 0x6622AA00
 		val badColor = 0x66AA2200
 
-		val iterator = BlockPos.betweenClosed(
-			player.blockPosition().offset(-horizontalRadius, -verticalRadius, -horizontalRadius),
-			player.blockPosition().offset(horizontalRadius, verticalRadius, horizontalRadius)
-		)
+		val (goodPositions, badPositions) = getPositions(player, paintingBiome)
 
-		for (pos in iterator) {
+		for (pos in goodPositions) {
+			CubeIndicatorRenderer.addIndicator(pos, 1, goodColor, size = 0.05f)
+		}
+
+		for (pos in badPositions) {
+			CubeIndicatorRenderer.addIndicator(pos, 1, badColor, size = 0.35f)
+		}
+	}
+
+	private fun getPositions(player: Player, biome: Holder<Biome>): Pair<Set<BlockPos>, Set<BlockPos>> {
+		val level = player.level()
+		val playerPos = player.blockPosition()
+
+		val horizontalRadius = 10
+		val verticalRadius = 5
+
+		val goodPositions = mutableSetOf<BlockPos>()
+		val badPositions = mutableSetOf<BlockPos>()
+
+		val toCheck = arrayListOf(playerPos)
+
+		while (toCheck.isNotEmpty()) {
+			val pos = toCheck.removeLast()
+			if (!level.isLoaded(pos)) continue
+
 			val biomeAtPos = level.getBiome(pos)
-			if (biomeAtPos == paintingBiome) {
-				CubeIndicatorRenderer.addIndicator(pos.immutable(), 1, goodColor, 0.03f)
-			} else {
-				val adjacentIsGood = Direction.entries.any { dir ->
-					val neighborPos = pos.relative(dir)
-					level.getBiome(neighborPos) == paintingBiome
-				}
 
-				if (adjacentIsGood) {
-					CubeIndicatorRenderer.addIndicator(pos.immutable(), 1, badColor, 0.1f)
-				}
+			if (biomeAtPos != biome) {
+				badPositions.add(pos)
+				continue
+			}
+
+			goodPositions.add(pos)
+
+			for (direction in Direction.entries) {
+				val offset = pos.relative(direction)
+
+				if (offset in goodPositions || offset in badPositions) continue
+
+				val dy = offset.y - playerPos.y
+				if (dy < -verticalRadius || dy > verticalRadius) continue
+
+				val dx = offset.x - playerPos.x
+				val dz = offset.z - playerPos.z
+
+				val hDistSqr = dx * dx + dz * dz
+				if (hDistSqr > horizontalRadius * horizontalRadius) continue
+
+				toCheck.add(offset)
 			}
 		}
+
+		return Pair(goodPositions, badPositions)
 	}
 
 }
