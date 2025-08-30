@@ -56,6 +56,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 			val level = player.serverLevel()
 
 			val blockPos = packet.blockPos
+
 			val biomeRk = packet.biomeRk
 
 			val biomeToPlace = level.registryAccess()
@@ -72,18 +73,34 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 
 			val component = firstCapsule.get(ModDataComponents.BIOME_POINTS) ?: return
 
-			var points = component.points
+			var points = if (player.hasInfiniteMaterials()) 99999 else component.points
+			var amountChanged = 0
 
-			val result = FillBiomeCommand.fill(
-				level,
-				blockPos.offset(-1, -1, -1),
-				blockPos.offset(1, 1, 1),
-				biomeToPlace,
-				{ biomeThere -> biomeThere != biomeToPlace && points-- > 0 },
-				{ _ -> }
+			val iterator = BlockPos.betweenClosed(
+				blockPos.offset(0, 0, 0),
+				blockPos.offset(0, 0, 0)
 			)
 
-			val amountChanged = result.left().orElse(0)
+			for (mutable in iterator) {
+				val pos = mutable.immutable()
+
+				val biomeThere = level.getBiome(pos)
+				if (!biomeThere.`is`(biomeToPlace) && points-- > 0) continue
+
+				val result = FillBiomeCommand.fill(
+					level,
+					pos,
+					pos,
+					biomeToPlace,
+					{ _ -> true },
+					{ _ -> }
+				)
+
+				result.ifLeft {
+					amountChanged++
+				}
+			}
+
 			if (amountChanged == 0) {
 				player.status(Component.literal("No biomes changed!"))
 				return
