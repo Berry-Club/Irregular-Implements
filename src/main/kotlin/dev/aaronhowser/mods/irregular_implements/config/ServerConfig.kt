@@ -73,7 +73,7 @@ class ServerConfig(
 	}
 
 	private fun spectreConfigs() {
-		builder.push(SPECTRE_CATEGORY)
+		builder.push("Spectre Category")
 
 		SPECTRE_BUFFER_CAPACITY = builder
 			.comment("What is the maximum energy that a Spectre Energy network can store?")
@@ -159,8 +159,6 @@ class ServerConfig(
 		lateinit var SPECTRE_CHARGER_REDSTONE: ModConfigSpec.IntValue
 		lateinit var SPECTRE_CHARGER_ENDER: ModConfigSpec.IntValue
 		lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
-
-		const val SPECTRE_CATEGORY = "spectre"
 
 		lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
 		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
