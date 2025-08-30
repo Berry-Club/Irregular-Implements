@@ -221,7 +221,7 @@ class ModBlockTagsProvider(
 		this.tag(BlockTags.SMALL_FLOWERS)
 			.add(
 				ModBlocks.LOTUS.get(),
-				ModBlocks.PITCHER_PLANT.get()
+				ModBlocks.PITCHERER_PLANT.get()
 			)
 
 		this.tag(SUPER_LUBRICATED)

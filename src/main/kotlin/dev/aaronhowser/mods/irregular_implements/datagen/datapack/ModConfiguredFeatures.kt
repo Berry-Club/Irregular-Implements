@@ -44,7 +44,7 @@ object ModConfiguredFeatures {
 			PITCHER_PLANT,
 			Feature.FLOWER,
 			singleBlock(
-				ModBlocks.PITCHER_PLANT.get()
+				ModBlocks.PITCHERER_PLANT.get()
 					.defaultBlockState()
 			)
 		)

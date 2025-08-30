@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-23T09:13:11.0575498	Loot Tables
+// 1.21.1	2025-08-30T13:46:08.2244293	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -122,7 +122,7 @@ ee1c84c9f9ac42dbea9969611573190ec924988c data/irregular_implements/loot_table/bl
 e436c0a47856a907882a8613e2230d2d7aba8a6b data/irregular_implements/loot_table/blocks/oak_platform.json
 2909a3ad79bd3a1fbd8b1dc25ee3d5ff9e1e057c data/irregular_implements/loot_table/blocks/online_detector.json
 e377e12c281e05e1a09e48acad62a410928e9746 data/irregular_implements/loot_table/blocks/peace_candle.json
-a4b5921bacccbf5d2deb88515f52cc1a9a788f37 data/irregular_implements/loot_table/blocks/pitcher_plant.json
+0dffe5e95626da75e43d0f72053caa5c104f317d data/irregular_implements/loot_table/blocks/pitcherer_plant.json
 c8de1ae3b9352496bf7e62f5f1e21929cad53a1e data/irregular_implements/loot_table/blocks/player_interface.json
 0f58bb00b50bf677b297e0eed6215118baee25aa data/irregular_implements/loot_table/blocks/potion_vaporizer.json
 95d69e0f36f9dac1a3b8ec11570f824e3997045c data/irregular_implements/loot_table/blocks/prismarine_ender_bridge.json

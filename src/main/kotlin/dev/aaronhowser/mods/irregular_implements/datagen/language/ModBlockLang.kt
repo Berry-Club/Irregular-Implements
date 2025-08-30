@@ -22,7 +22,7 @@ object ModBlockLang {
 			addBlock(ModBlocks.ANALOG_EMITTER, "Analog Emitter")
 			addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
 			addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
-			addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
+			addBlock(ModBlocks.PITCHERER_PLANT, "Pitcherer Plant")
 			addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")
 			addBlock(ModBlocks.POTION_VAPORIZER, "Potion Vaporizer")
 			addBlock(ModBlocks.CONTACT_BUTTON, "Contact Button")

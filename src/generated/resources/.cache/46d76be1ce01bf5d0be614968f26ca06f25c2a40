@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-23T15:05:49.4640403	Books: irregular_implements
+// 1.21.1	2025-08-30T13:46:08.225431	Books: irregular_implements
 e27a6ba55d9b3398286da06626879bcac1599639 data/irregular_implements/modonomicon/books/guide/book.json
 e6fd3a493e9253f02b6058fabfc8a315c25b683a data/irregular_implements/modonomicon/books/guide/categories/blocks.json
 ce606f860654aa778ef5c98ccdbacc08b190589f data/irregular_implements/modonomicon/books/guide/categories/items.json
@@ -11,7 +11,7 @@ f0d5dcba5ae2c5142d0cf4840848c6bdc8f43774 data/irregular_implements/modonomicon/b
 db187e160716501130cadcaa21269685511621c0 data/irregular_implements/modonomicon/books/guide/entries/blocks/lapis_glass.json
 16b0a92941a9dcf3e3b98a7f8423b9282d476182 data/irregular_implements/modonomicon/books/guide/entries/blocks/notification_interface.json
 14dcee4d576abdd739cbd6864a5362badc1d14f0 data/irregular_implements/modonomicon/books/guide/entries/blocks/online_detector.json
-fb05cef3dac01481465d645c585056396a65c405 data/irregular_implements/modonomicon/books/guide/entries/blocks/pitcher_plant.json
+51c9eba77e113889fcbb34ca419b1c00e622717f data/irregular_implements/modonomicon/books/guide/entries/blocks/pitcherer_plant.json
 8869bae8625ea363a1a3223ac975625ed8f8b3d5 data/irregular_implements/modonomicon/books/guide/entries/blocks/quartz_glass.json
 2f95d1f0b16bff287011bee6c534be6554aaa73c data/irregular_implements/modonomicon/books/guide/entries/blocks/rainbow_lamp.json
 ba8b45c111788900d02ab40ad3b17a31c5cd5da9 data/irregular_implements/modonomicon/books/guide/entries/blocks/rain_shield.json

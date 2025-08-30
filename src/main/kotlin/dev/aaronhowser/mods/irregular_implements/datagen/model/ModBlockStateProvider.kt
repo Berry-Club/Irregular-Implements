@@ -1660,7 +1660,7 @@ class ModBlockStateProvider(
 
 	private fun crossBlocks() {
 		val crossBlocks = listOf(
-			ModBlocks.PITCHER_PLANT,
+			ModBlocks.PITCHERER_PLANT,
 			ModBlocks.SPECTRE_SAPLING
 		).map { it.get() }
 

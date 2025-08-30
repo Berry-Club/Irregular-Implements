@@ -38,8 +38,8 @@ object ModBlocks {
 		registerBlock("nature_core", ::NatureCoreBlock)
 	val SAKANADE_SPORES: DeferredBlock<SakanadeBlock> =
 		registerBlock("sakanade_spores", ::SakanadeBlock)
-	val PITCHER_PLANT: DeferredBlock<PitcherPlantBlock> =
-		registerBlock("pitcher_plant", ::PitcherPlantBlock)
+	val PITCHERER_PLANT: DeferredBlock<PitchererPlantBlock> =
+		registerBlock("pitcherer_plant", ::PitchererPlantBlock)
 	val LOTUS: DeferredBlock<LotusBlock> =
 		registerBlockWithoutItem("lotus", ::LotusBlock)
 	val BEAN_SPROUT: DeferredBlock<BeanSproutBlock> =
