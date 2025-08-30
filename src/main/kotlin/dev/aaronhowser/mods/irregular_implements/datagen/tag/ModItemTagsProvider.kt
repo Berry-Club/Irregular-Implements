@@ -206,6 +206,11 @@ class ModItemTagsProvider(
 				ModItems.GRASS_SEEDS_RED.get(),
 				ModItems.GRASS_SEEDS_BLACK.get(),
 			)
+
+		this.tag(DAMAGES_SPIRITS)
+			.add(
+				ModItems.SPECTRE_SWORD.get()
+			)
 	}
 
 	companion object {
@@ -222,6 +227,7 @@ class ModItemTagsProvider(
 		val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
 		val NATURE_CORE_FLOWERS = create("nature_core_flowers")
 		val NATURE_CORE_SAPLINGS = create("nature_core_saplings")
+		val DAMAGES_SPIRITS = create("damages_spirits")
 
 		@JvmField
 		val HIDE_POTION_HELMET = create("hide_potion_helmet")

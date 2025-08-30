@@ -1,14 +1,17 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.FlyingMob
@@ -22,6 +25,7 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 
 //TODO: They only move a little bit and then stop
@@ -36,6 +40,15 @@ class SpiritEntity(
 
 	init {
 		moveControl = FlyingMoveControl(this, 20, true)
+	}
+
+	override fun isInvulnerableTo(source: DamageSource): Boolean {
+		if (super.isInvulnerableTo(source)) return true
+
+		val usedSpecialWeapon = source.weaponItem?.`is`(ModItemTagsProvider.DAMAGES_SPIRITS).isTrue
+		val usedMagic = source.`is`(Tags.DamageTypes.IS_MAGIC)
+
+		return !usedSpecialWeapon && !usedMagic
 	}
 
 	override fun registerGoals() {
