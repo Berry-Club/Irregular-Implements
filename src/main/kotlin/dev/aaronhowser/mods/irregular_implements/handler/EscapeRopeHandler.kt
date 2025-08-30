@@ -39,8 +39,6 @@ object EscapeRopeHandler {
 		}
 	}
 
-	//TODO: Apparently block GETTING is async-safe. Maybe I should make this async so it can do multiple at once?
-
 	// Reverse because it searches by most recently added position first, so it has to add them in reverse order
 	private val directionPriority = arrayOf(
 		Direction.UP,
@@ -76,10 +74,11 @@ object EscapeRopeHandler {
 
 			val limit = ServerConfig.ESCAPE_ROPE_MAX_BLOCKS.get()
 			val maxRuns = ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
-			val shouldSpawnIndicator = true // TODO: Config
+			val shouldSpawnIndicator = true
+
+			val positionsToIndicate = mutableSetOf<BlockPos>()
 
 			for (run in 0 until maxRuns) {
-
 				val progressToMaxColor = Mth.clamp(alreadyChecked.size, 0, 100_000).toFloat() / 100_000f
 				val color = OtherUtil.lerpColor(progressToMaxColor, DyeColor.LIME.textColor, DyeColor.RED.textColor)
 
@@ -96,8 +95,7 @@ object EscapeRopeHandler {
 
 				val nextPos = getNextPositionToCheck() ?: return true
 				if (shouldSpawnIndicator) {
-					val packet = AddIndicatorsPacket(nextPos, 20, 0x08FFFFFF)
-					packet.messagePlayer(player)
+					positionsToIndicate.add(nextPos)
 				}
 
 				if (!isEmptySpace(level, nextPos)) {
@@ -113,6 +111,9 @@ object EscapeRopeHandler {
 				teleportPlayerToSurface(level, player, usedItem, nextPos)
 				return true
 			}
+
+			val packet = AddIndicatorsPacket(positionsToIndicate.toList(), 20, 0x08FFFFFF)
+			packet.messagePlayer(player)
 
 			return false
 		}
