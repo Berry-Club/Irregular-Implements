@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -41,18 +42,7 @@ class PitcherPlantBlock : FlowerBlock(
 		pos: BlockPos,
 		random: RandomSource
 	) {
-		for (direction in Direction.entries) {
-			val offsetPos = pos.relative(direction)
-
-			val fluidCap = level.getCapability(
-				Capabilities.FluidHandler.BLOCK,
-				offsetPos,
-				direction.opposite
-			) ?: continue
-
-			val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, 1000 * 100), IFluidHandler.FluidAction.SIMULATE)
-			fluidCap.fill(FluidStack(Fluids.WATER, amountThatFits), IFluidHandler.FluidAction.EXECUTE)
-		}
+		fillAdjacentTanks(level, pos, ServerConfig.PITCHER_PLANT_TICK_FILL_AMOUNT.get())
 	}
 
 	override fun useItemOn(
@@ -69,7 +59,7 @@ class PitcherPlantBlock : FlowerBlock(
 		val usedStack = player.getItemInHand(hand)
 		val fluidCap = usedStack.getCapability(Capabilities.FluidHandler.ITEM) ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
-		val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, 1000 * 100), IFluidHandler.FluidAction.SIMULATE)
+		val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, ServerConfig.PITCHER_PLANT_USE_FILL_AMOUNT.get()), IFluidHandler.FluidAction.SIMULATE)
 		fluidCap.fill(FluidStack(Fluids.WATER, amountThatFits), IFluidHandler.FluidAction.EXECUTE)
 
 		return ItemInteractionResult.SUCCESS
@@ -94,7 +84,7 @@ class PitcherPlantBlock : FlowerBlock(
 
 			val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, 1), IFluidHandler.FluidAction.SIMULATE)
 
-			amountThatFits > 0
+			return@any amountThatFits > 0
 		}
 	}
 
@@ -103,7 +93,24 @@ class PitcherPlantBlock : FlowerBlock(
 	}
 
 	override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-		randomTick(state, level, pos, random)
+		fillAdjacentTanks(level, pos, ServerConfig.PITCHER_PLANT_BONE_MEAL_FILL_AMOUNT.get())
+	}
+
+	companion object {
+		fun fillAdjacentTanks(level: Level, pos: BlockPos, amount: Int) {
+			for (direction in Direction.entries) {
+				val offsetPos = pos.relative(direction)
+
+				val fluidCap = level.getCapability(
+					Capabilities.FluidHandler.BLOCK,
+					offsetPos,
+					direction.opposite
+				) ?: continue
+
+				val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, amount), IFluidHandler.FluidAction.SIMULATE)
+				fluidCap.fill(FluidStack(Fluids.WATER, amountThatFits), IFluidHandler.FluidAction.EXECUTE)
+			}
+		}
 	}
 
 }

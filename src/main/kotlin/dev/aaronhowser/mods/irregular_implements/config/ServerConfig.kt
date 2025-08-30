@@ -59,6 +59,18 @@ class ServerConfig(
 		BLOCK_TELEPORTER_CROSS_DIMENSION = builder
 			.comment("Should the Block Teleporter be able to teleport blocks across dimensions?")
 			.define("blockTeleporterCrossDimension", false)
+
+		PITCHER_PLANT_TICK_FILL_AMOUNT = builder
+			.comment("How much fluid should the Pitcher Plant fill adjacent tanks on a random tick?")
+			.defineInRange("pitcherPlantTickFillAmount", 1000 * 100, 0, Int.MAX_VALUE)
+
+		PITCHER_PLANT_BONE_MEAL_FILL_AMOUNT = builder
+			.comment("How much fluid should the Pitcher Plant fill adjacent tanks when bone mealed?")
+			.defineInRange("pitcherPlantBoneMealFillAmount", 1000 * 100, 0, Int.MAX_VALUE)
+
+		PITCHER_PLANT_USE_FILL_AMOUNT = builder
+			.comment("How much fluid should the Pitcher Plant fill a container clicked onto it?")
+			.defineInRange("pitcherPlantUseFillAmount", 1000 * 100, 1, Int.MAX_VALUE)
 	}
 
 	private fun spectreConfigs() {
@@ -191,6 +203,10 @@ class ServerConfig(
 		lateinit var SPIRIT_BASE_SPAWN_CHANCE: ModConfigSpec.DoubleValue
 		lateinit var SPIRIT_SPAWN_DRAGON_KILLED_BONUS: ModConfigSpec.DoubleValue
 		lateinit var SPIRIT_SPAWN_FULL_MOON_BONUS: ModConfigSpec.DoubleValue
+
+		lateinit var PITCHER_PLANT_TICK_FILL_AMOUNT: ModConfigSpec.IntValue
+		lateinit var PITCHER_PLANT_BONE_MEAL_FILL_AMOUNT: ModConfigSpec.IntValue
+		lateinit var PITCHER_PLANT_USE_FILL_AMOUNT: ModConfigSpec.IntValue
 	}
 
 }

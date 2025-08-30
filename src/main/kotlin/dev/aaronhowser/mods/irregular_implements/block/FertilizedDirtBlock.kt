@@ -26,8 +26,6 @@ class FertilizedDirtBlock : Block(
 		.dynamicShape()
 ) {
 
-	//FIXME: Disallow crops from being placed on non-tilled fertilized dirt
-
 	init {
 		registerDefaultState(
 			stateDefinition.any()
