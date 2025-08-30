@@ -259,7 +259,6 @@ class ModBlockTagsProvider(
 				ModBlocks.ENDER_ANCHOR.get(),
 				ModBlocks.IMBUING_STATION.get(),
 				ModBlocks.ANALOG_EMITTER.get(),
-				ModBlocks.FLUID_DISPLAY.get(),
 				ModBlocks.ENDER_MAILBOX.get(),
 				ModBlocks.POTION_VAPORIZER.get(),
 				ModBlocks.CONTACT_BUTTON.get(),
@@ -464,7 +463,6 @@ class ModBlockTagsProvider(
 
 		this.tag(BlockTags.NEEDS_STONE_TOOL)
 			.add(
-				ModBlocks.FLUID_DISPLAY.get(),
 				ModBlocks.POTION_VAPORIZER.get(),
 				ModBlocks.RAIN_SHIELD.get(),
 				ModBlocks.BIOME_RADAR.get(),

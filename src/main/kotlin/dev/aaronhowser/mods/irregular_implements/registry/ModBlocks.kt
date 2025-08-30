@@ -18,7 +18,6 @@ object ModBlocks {
 		registerBlock("fertilized_dirt", ::FertilizedDirtBlock)
 	val IMBUING_STATION: DeferredBlock<ImbuingStationBlock> =
 		registerBlock("imbuing_station", ::ImbuingStationBlock)
-	val FLUID_DISPLAY = basicBlock("fluid_display")
 	val ENDER_MAILBOX: DeferredBlock<EnderMailboxBlock> =
 		registerBlock("ender_mailbox", ::EnderMailboxBlock)
 	val POTION_VAPORIZER = basicBlock("potion_vaporizer")
@@ -364,6 +363,7 @@ object ModBlocks {
 	// - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
 	// - Sound Dampener: Just use Super Sound Muffler instead
 	// - Sound Box: I just don't wanna
+	// - Fluid Display: I don't wanna (rendering is scary :( )
 
 	private fun blockWithProperties(name: String, properties: Properties) =
 		registerBlock(name) { Block(properties) }

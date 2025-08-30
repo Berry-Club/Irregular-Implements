@@ -44,7 +44,6 @@ object ModInfoLang {
 		addInfo(ModBlocks.BEAN_POD, "Found at the top of a grown Magic Bean.\n\nContains loot!")
 		addInfo(ModBlocks.SPECTRE_BLOCK, "An indestructible block that spawns in the Spectre Dimension.")
 		addInfo(ModBlocks.ANALOG_EMITTER, "Emits a Redstone signal with a configurable strength when the front face is powered.")
-		addInfo(ModBlocks.FLUID_DISPLAY, "A solid block that uses the texture of a fluid.\n\nSet the fluid by clicking it with a filled Bucket or fluid container.\n\nRight-click to toggle between still and flowing, and sneak right-click to rotate it.")
 		addInfo(ModBlocks.ENDER_MAILBOX, "Allows players to send and receive Ender Letters.")
 		addInfo(ModBlocks.PITCHER_PLANT, "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.")
 		provider.add(PLATFORM, "Only solid to non-sneaking entities.")

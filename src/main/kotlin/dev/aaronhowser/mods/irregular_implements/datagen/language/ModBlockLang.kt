@@ -20,7 +20,6 @@ object ModBlockLang {
 			addBlock(ModBlocks.NATURE_CHEST, "Nature Chest")
 			addBlock(ModBlocks.WATER_CHEST, "Water Chest")
 			addBlock(ModBlocks.ANALOG_EMITTER, "Analog Emitter")
-			addBlock(ModBlocks.FLUID_DISPLAY, "Fluid Display")
 			addBlock(ModBlocks.ENDER_MAILBOX, "Ender Mailbox")
 			addBlock(ModBlocks.PITCHER_PLANT, "Pitcher Plant")
 			addBlock(ModBlocks.QUARTZ_GLASS, "Quartz Glass")

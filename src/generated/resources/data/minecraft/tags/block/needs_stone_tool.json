@@ -1,6 +1,5 @@
 {
   "values": [
-    "irregular_implements:fluid_display",
     "irregular_implements:potion_vaporizer",
     "irregular_implements:rain_shield",
     "irregular_implements:biome_radar",

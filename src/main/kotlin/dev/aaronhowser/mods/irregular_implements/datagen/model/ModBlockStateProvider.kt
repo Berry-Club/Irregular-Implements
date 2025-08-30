@@ -2082,7 +2082,6 @@ class ModBlockStateProvider(
 			ModBlocks.ENTITY_DETECTOR,
 			ModBlocks.BEAN_POD,
 			ModBlocks.ENDER_ANCHOR,
-			ModBlocks.FLUID_DISPLAY,
 			ModBlocks.NATURE_CORE,
 			ModBlocks.BASIC_REDSTONE_INTERFACE,
 			ModBlocks.ADVANCED_REDSTONE_INTERFACE

@@ -246,14 +246,6 @@ class ModRecipeProvider(
 			)
 		),
 		shapedRecipe(
-			ModBlocks.FLUID_DISPLAY,
-			"GGG,GBG,GGG",
-			mapOf(
-				'G' to ing(Tags.Items.GLASS_BLOCKS),
-				'B' to ing(Items.GLASS_BOTTLE)
-			)
-		),
-		shapedRecipe(
 			ModBlocks.ENDER_MAILBOX,
 			"EHE,III, F ",
 			mapOf(
