@@ -24,7 +24,6 @@ import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.blockentity.ChestRenderer
-import net.minecraft.client.renderer.entity.DisplayRenderer.BlockDisplayRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.entity.NoopRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer

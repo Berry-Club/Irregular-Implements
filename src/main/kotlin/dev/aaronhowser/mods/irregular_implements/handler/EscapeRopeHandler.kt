@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.handler
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -82,8 +81,7 @@ object EscapeRopeHandler {
 			for (run in 0 until maxRuns) {
 
 				val progressToMaxColor = Mth.clamp(alreadyChecked.size, 0, 100_000).toFloat() / 100_000f
-				val color = OtherUtil.lerpColor(
-					progressToMaxColor, DyeColor.LIME.textColor, DyeColor.RED.textColor)
+				val color = OtherUtil.lerpColor(progressToMaxColor, DyeColor.LIME.textColor, DyeColor.RED.textColor)
 
 				val sizeComponent = Component.literal(String.format("%,d", alreadyChecked.size)).withColor(color)
 

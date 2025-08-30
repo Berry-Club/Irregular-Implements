@@ -9,7 +9,6 @@ import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.RedStoneWireBlock

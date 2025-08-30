@@ -20,7 +20,7 @@ object CubeIndicatorRenderer {
 	}
 
 	fun afterClientTick(event: ClientTickEvent.Post) {
-		val iterator = CubeIndicatorRenderer.indicators.iterator()
+		val iterator = indicators.iterator()
 		while (iterator.hasNext()) {
 			val indicator = iterator.next()
 			indicator.duration--
