@@ -259,7 +259,6 @@ object CommonEvents {
 			val handler = SpectreCubeSavedData.get(player.serverLevel())
 			handler.verifyPosition(player)
 		}
-
 	}
 
 }
