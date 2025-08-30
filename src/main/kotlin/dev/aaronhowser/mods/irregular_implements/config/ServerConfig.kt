@@ -19,17 +19,9 @@ class ServerConfig(
 			.comment("How many blocks should the Block Destabilizer be able to drop?")
 			.defineInRange("blockDestabilizerLimit", 50, 1, Int.MAX_VALUE)
 
-		BIOME_PAINTER_HORIZONTAL_RADIUS = builder
-			.comment("What should be the horizontal radius of the Biome Painter?")
-			.defineInRange("biomePainterHorizontalRadius", 0, 0, Int.MAX_VALUE)
-
-		BIOME_PAINTER_BLOCKS_BELOW = builder
-			.comment("How many blocks below the clicked block should the Biome Painter change?")
-			.defineInRange("biomePainterBlocksBelow", 0, 0, Int.MAX_VALUE)
-
-		BIOME_PAINTER_BLOCKS_ABOVE = builder
-			.comment("How many blocks above the clicked block should the Biome Painter change?")
-			.defineInRange("biomePainterBlocksAbove", 0, 0, Int.MAX_VALUE)
+		BIOME_PAINTER_RADIUS = builder
+			.comment("The radius that the Biome Painter will affect. 0 is just the targeted block, 1 is a 3x3x3 area, etc.")
+			.defineInRange("biomePainterRadius", 0, 0, 100)
 
 		BLOCK_MOVER_TRY_VAPORIZE_FLUID = builder
 			.comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")
@@ -134,9 +126,7 @@ class ServerConfig(
 
 		lateinit var BLOCK_DESTABILIZER_LIMIT: ModConfigSpec.IntValue
 
-		lateinit var BIOME_PAINTER_HORIZONTAL_RADIUS: ModConfigSpec.IntValue
-		lateinit var BIOME_PAINTER_BLOCKS_BELOW: ModConfigSpec.IntValue
-		lateinit var BIOME_PAINTER_BLOCKS_ABOVE: ModConfigSpec.IntValue
+		lateinit var BIOME_PAINTER_RADIUS: ModConfigSpec.IntValue
 
 		lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
 		lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue

@@ -34,9 +34,7 @@ object ModConfigLang {
 		addConfig(ClientConfig.HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON, "Hide Recipe Book Button In Custom Crafting Table")
 
 		addConfig(ServerConfig.BLOCK_DESTABILIZER_LIMIT, "Block Destabilizer Limit")
-		addConfig(ServerConfig.BIOME_PAINTER_HORIZONTAL_RADIUS, "Biome Painter Horizontal Radius")
-		addConfig(ServerConfig.BIOME_PAINTER_BLOCKS_ABOVE, "Biome Painter Blocks Above")
-		addConfig(ServerConfig.BIOME_PAINTER_BLOCKS_BELOW, "Biome Painter Blocks Below")
+		addConfig(ServerConfig.BIOME_PAINTER_RADIUS, "Biome Painter Radius")
 
 		addConfig(ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID, "Block Mover Vaporizes Fluid")
 		addConfig(ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE, "Portable Ender Bridge Range")

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.client.render.BiomePainterRenderer
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.PaintBiomePacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
@@ -74,11 +75,13 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 
 			var points = if (player.hasInfiniteMaterials()) 9999 else component.points
 
+			val radius = ServerConfig.BIOME_PAINTER_RADIUS.get()
+
 			//FIXME: Sometimes doesn't actually change the biome?????
 			val result = FillBiomeCommand.fill(
 				level,
-				blockPos.offset(-1, -1, -1),
-				blockPos.offset(1, 1, 1),
+				blockPos.offset(-radius, -radius, -radius),
+				blockPos.offset(radius, radius, radius),
 				biomeToPlace,
 				{ biomeThere -> biomeThere != biomeToPlace && points-- > 0 },
 				{ _ -> }
