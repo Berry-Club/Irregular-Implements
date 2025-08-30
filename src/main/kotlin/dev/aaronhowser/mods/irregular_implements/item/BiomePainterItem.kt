@@ -74,6 +74,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 
 			var points = if (player.hasInfiniteMaterials()) 9999 else component.points
 
+			//FIXME: Sometimes doesn't actually change the biome?????
 			val result = FillBiomeCommand.fill(
 				level,
 				blockPos.offset(-1, -1, -1),
