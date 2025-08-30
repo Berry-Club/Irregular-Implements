@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
+import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
@@ -20,6 +21,8 @@ object CubeIndicatorRenderer {
 	}
 
 	fun afterClientTick(event: ClientTickEvent.Post) {
+		if (Minecraft.getInstance().isPaused) return
+
 		val iterator = indicators.iterator()
 		while (iterator.hasNext()) {
 			val indicator = iterator.next()
