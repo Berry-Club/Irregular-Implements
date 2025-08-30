@@ -125,7 +125,4 @@ object ModEntityTypes {
 		})
 	}
 
-
-	//TODO : Spirit entity
-
 }
