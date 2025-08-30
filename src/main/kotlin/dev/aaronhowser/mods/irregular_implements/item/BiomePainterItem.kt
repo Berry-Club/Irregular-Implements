@@ -122,8 +122,8 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				val level = player.level()
 				val playerPos = player.blockPosition()
 
-				val horizontalRadius = 10
-				val verticalRadius = 5
+				val horizontalRadius = ServerConfig.BIOME_PAINTER_VIEW_HORIZONTAL_RADIUS.get()
+				val verticalRadius = ServerConfig.BIOME_PAINTER_VIEW_VERTICAL_RADIUS.get()
 
 				val matchingPositions = mutableSetOf<BlockPos>()
 				val unmatchingPositions = mutableSetOf<BlockPos>()

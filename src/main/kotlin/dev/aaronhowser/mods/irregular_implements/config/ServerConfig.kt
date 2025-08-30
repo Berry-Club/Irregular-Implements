@@ -9,6 +9,7 @@ class ServerConfig(
 
 	init {
 		basicServerConfigs()
+		biomePainter()
 		spectreConfigs()
 
 		builder.build()
@@ -18,10 +19,6 @@ class ServerConfig(
 		BLOCK_DESTABILIZER_LIMIT = builder
 			.comment("How many blocks should the Block Destabilizer be able to drop?")
 			.defineInRange("blockDestabilizerLimit", 50, 1, Int.MAX_VALUE)
-
-		BIOME_PAINTER_RADIUS = builder
-			.comment("The radius that the Biome Painter will affect. 0 is just the targeted block, 1 is a 3x3x3 area, etc.")
-			.defineInRange("biomePainterRadius", 0, 0, 100)
 
 		BLOCK_MOVER_TRY_VAPORIZE_FLUID = builder
 			.comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")
@@ -118,6 +115,24 @@ class ServerConfig(
 		builder.pop()
 	}
 
+	private fun biomePainter() {
+		builder.push(BIOME_PAINTER_CATEGORY)
+
+		BIOME_PAINTER_RADIUS = builder
+			.comment("The radius that the Biome Painter will affect. 0 is just the targeted block, 1 is a 3x3x3 area, etc.")
+			.defineInRange("biomePainterRadius", 0, 0, 100)
+
+		BIOME_PAINTER_VIEW_HORIZONTAL_RADIUS = builder
+			.comment("The horizontal that you can see and paint biomes from.")
+			.defineInRange("biomePainterViewHorizontalRadius", 10, 1, 100)
+
+		BIOME_PAINTER_VIEW_VERTICAL_RADIUS = builder
+			.comment("The vertical that you can see and paint biomes from.")
+			.defineInRange("biomePainterViewVerticalRadius", 5, 1, 100)
+
+		builder.pop()
+	}
+
 	companion object {
 		private val configPair: Pair<ServerConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ServerConfig)
 
@@ -127,6 +142,8 @@ class ServerConfig(
 		lateinit var BLOCK_DESTABILIZER_LIMIT: ModConfigSpec.IntValue
 
 		lateinit var BIOME_PAINTER_RADIUS: ModConfigSpec.IntValue
+		lateinit var BIOME_PAINTER_VIEW_HORIZONTAL_RADIUS: ModConfigSpec.IntValue
+		lateinit var BIOME_PAINTER_VIEW_VERTICAL_RADIUS: ModConfigSpec.IntValue
 
 		lateinit var BLOCK_MOVER_TRY_VAPORIZE_FLUID: ModConfigSpec.BooleanValue
 		lateinit var PORTABLE_ENDER_BRIDGE_RANGE: ModConfigSpec.IntValue
@@ -151,6 +168,7 @@ class ServerConfig(
 		lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
 
 		const val SPECTRE_CATEGORY = "spectre"
+		const val BIOME_PAINTER_CATEGORY = "biome_painter"
 
 		lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
 		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue

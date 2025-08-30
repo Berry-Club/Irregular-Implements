@@ -34,7 +34,6 @@ object ModConfigLang {
 		addConfig(ClientConfig.HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON, "Hide Recipe Book Button In Custom Crafting Table")
 
 		addConfig(ServerConfig.BLOCK_DESTABILIZER_LIMIT, "Block Destabilizer Limit")
-		addConfig(ServerConfig.BIOME_PAINTER_RADIUS, "Biome Painter Radius")
 
 		addConfig(ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID, "Block Mover Vaporizes Fluid")
 		addConfig(ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE, "Portable Ender Bridge Range")
@@ -59,7 +58,12 @@ object ModConfigLang {
 		addConfig(ServerConfig.SPECTRE_CHARGER_ENDER, "Ender Charger Rate")
 		addConfig(ServerConfig.SPECTRE_CHARGER_GENESIS, "Genesis Charger Rate")
 
+		addConfig(ServerConfig.BIOME_PAINTER_RADIUS, "Biome Painter Radius")
+		addConfig(ServerConfig.BIOME_PAINTER_VIEW_HORIZONTAL_RADIUS, "Biome Painter View Horizontal Radius")
+		addConfig(ServerConfig.BIOME_PAINTER_VIEW_VERTICAL_RADIUS, "Biome Painter View Vertical Radius")
+
 		addConfigCategory(ServerConfig.SPECTRE_CATEGORY, "Spectre")
+		addConfigCategory(ServerConfig.BIOME_PAINTER_CATEGORY, "Biome Painter")
 	}
 
 }
