@@ -302,7 +302,6 @@ object ClientEvents {
 		DiviningRodRenderer.afterClientTick(event)
 		RedstoneToolRenderer.afterClientTick(event)
 		TargetPositionRenderer.afterClientTick(event)
-		BiomePainterRenderer.afterClientTick(event)
 	}
 
 	@SubscribeEvent
