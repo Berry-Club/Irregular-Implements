@@ -64,6 +64,24 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 
 			return null
 		}
+
+		fun getBiomeToPaint(playerInventory: Inventory, excludedBiome: Holder<Biome>? = null): Holder<Biome>? {
+			return getFirstNonEmptyCapsule(playerInventory, excludedBiome)
+				?.get(ModDataComponents.BIOME_POINTS)
+				?.biome
+		}
+
+		fun getFirstCapsuleWithBiome(playerInventory: Inventory, biome: Holder<Biome>): ItemStack? {
+			val stacks = playerInventory.items
+
+			for (stack in stacks) {
+				val component = stack.get(ModDataComponents.BIOME_POINTS) ?: continue
+				if (component.points <= 0 || component.biome != biome) continue
+				return stack
+			}
+
+			return null
+		}
 	}
 
 }
