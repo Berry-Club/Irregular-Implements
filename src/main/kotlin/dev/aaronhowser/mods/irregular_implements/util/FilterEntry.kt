@@ -169,8 +169,6 @@ sealed interface FilterEntry {
 
 		init {
 			if (this.requireSameComponents) {
-
-				//TODO: Maybe move this to the tooltip event rather than actually changing the item's lore?
 				val component = ModTooltipLang.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
 					.toComponent().withStyle(ChatFormatting.RED)
 

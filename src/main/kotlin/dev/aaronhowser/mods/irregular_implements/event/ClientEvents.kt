@@ -15,7 +15,6 @@ import dev.aaronhowser.mods.irregular_implements.client.render.item.DiaphanousBE
 import dev.aaronhowser.mods.irregular_implements.client.render.item.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
-import dev.aaronhowser.mods.irregular_implements.particle.CubeParticle
 import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.*
@@ -290,7 +289,6 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
 		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlooFlameParticle::Provider)
-		event.registerSpecial(ModParticleTypes.CUBE.get(), CubeParticle.Provider)
 	}
 
 	@SubscribeEvent

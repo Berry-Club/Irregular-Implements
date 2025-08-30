@@ -17,7 +17,4 @@ object ModParticleTypes {
 	val FLOO_FLAME: DeferredHolder<ParticleType<*>, SimpleParticleType> =
 		PARTICLE_TYPE_REGISTRY.register("floo_flame", Supplier { SimpleParticleType(true) })
 
-	val CUBE: DeferredHolder<ParticleType<*>, SimpleParticleType> =
-		PARTICLE_TYPE_REGISTRY.register("cube", Supplier { SimpleParticleType(true) })
-
 }
