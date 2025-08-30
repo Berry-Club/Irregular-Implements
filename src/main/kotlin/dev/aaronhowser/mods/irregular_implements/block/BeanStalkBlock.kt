@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
@@ -111,10 +111,9 @@ class BeanStalkBlock(
 	companion object {
 		val SHAPE: VoxelShape = box(6.4, 0.0, 6.4, 9.6, 16.0, 9.6)
 
-		//TODO: Also make it so you go down faster
 		@JvmStatic
-		fun climbingFactor(livingEntity: LivingEntity): Float {
-			val blockState = livingEntity.inBlockState
+		fun climbingFactor(entity: Entity): Float {
+			val blockState = entity.inBlockState
 
 			return when {
 				blockState.`is`(ModBlocks.BEAN_STALK.get()) -> 3f

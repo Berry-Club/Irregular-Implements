@@ -46,7 +46,6 @@ class AnalogEmitterBlock : Block(
 			.setValue(FACING, context.nearestLookingDirection.opposite)
 	}
 
-	//TODO: GUI?
 	override fun useWithoutItem(
 		oldState: BlockState,
 		level: Level,

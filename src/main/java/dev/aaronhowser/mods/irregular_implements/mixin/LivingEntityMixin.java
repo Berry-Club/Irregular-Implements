@@ -58,4 +58,12 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityFu
 		return constant * BeanStalkBlock.climbingFactor((LivingEntity) (Object) this);
 	}
 
+	@ModifyConstant(
+			method = "handleOnClimbable",
+			constant = @Constant(doubleValue = -0.15000000596046448)
+	)
+	private double irregular_implements$climbFaster(double constant) {
+		return constant * BeanStalkBlock.climbingFactor((LivingEntity) (Object) this);
+	}
+
 }
