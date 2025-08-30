@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -42,11 +41,8 @@ class BlockDestabilizerScreen(
 			)
 			.onPress(
 				onPress = {
-					ModPacketHandler.messageServer(
-						ClientClickedMenuButton(
-							BlockDestabilizerMenu.TOGGLE_LAZY_BUTTON_ID
-						)
-					)
+					val packet = ClientClickedMenuButton(BlockDestabilizerMenu.TOGGLE_LAZY_BUTTON_ID)
+					packet.messageServer()
 				}
 			)
 			.location(
@@ -62,11 +58,8 @@ class BlockDestabilizerScreen(
 			height = 20,
 			menuSprite = ScreenTextures.Sprite.BlockDestabilizer.ShowLazyShape,
 			onPress = {
-				ModPacketHandler.messageServer(
-					ClientClickedMenuButton(
-						BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID
-					)
-				)
+				val packet = ClientClickedMenuButton(BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID)
+				packet.messageServer()
 			},
 			message = ModTooltipLang.SHOW_LAZY_SHAPE.toComponent(),
 			font = this.font
@@ -79,11 +72,8 @@ class BlockDestabilizerScreen(
 			height = 20,
 			menuSprite = ScreenTextures.Sprite.BlockDestabilizer.ResetLazyShape,
 			onPress = {
-				ModPacketHandler.messageServer(
-					ClientClickedMenuButton(
-						BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID
-					)
-				)
+				val packet = ClientClickedMenuButton(BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID)
+				packet.messageServer()
 			},
 			message = ModTooltipLang.FORGET_LAZY_SHAPE.toComponent(),
 			font = this.font

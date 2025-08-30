@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -44,7 +43,10 @@ class InventoryTesterScreen(
 				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }
 			)
 			.onPress(
-				onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(InventoryTesterMenu.TOGGLE_INVERSION_BUTTON_ID)) }
+				onPress = {
+					val packet = ClientClickedMenuButton(InventoryTesterMenu.TOGGLE_INVERSION_BUTTON_ID)
+					packet.messageServer()
+				}
 			)
 			.build()
 

@@ -4,7 +4,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -39,7 +38,10 @@ class AdvancedItemCollectorScreen(
 
 		this.buttonLowerX = Button.Builder(
 			Component.literal("-X")
-		) { ModPacketHandler.messageServer(ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_X_BUTTON_ID)) }
+		) {
+			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_X_BUTTON_ID)
+			packet.messageServer()
+		}
 			.bounds(
 				lowerButtonLeft,
 				xButtonTop,
@@ -50,7 +52,10 @@ class AdvancedItemCollectorScreen(
 
 		this.buttonRaiseX = Button.Builder(
 			Component.literal("+X")
-		) { ModPacketHandler.messageServer(ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_X_BUTTON_ID)) }
+		) {
+			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_X_BUTTON_ID)
+			packet.messageServer()
+		}
 			.bounds(
 				raiseButtonLeft,
 				xButtonTop,
@@ -62,7 +67,10 @@ class AdvancedItemCollectorScreen(
 
 		this.buttonLowerY = Button.Builder(
 			Component.literal("-Y")
-		) { ModPacketHandler.messageServer(ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Y_BUTTON_ID)) }
+		) {
+			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Y_BUTTON_ID)
+			packet.messageServer()
+		}
 			.bounds(
 				lowerButtonLeft,
 				yButtonTop,
@@ -74,7 +82,10 @@ class AdvancedItemCollectorScreen(
 
 		this.buttonRaiseY = Button.Builder(
 			Component.literal("+Y")
-		) { ModPacketHandler.messageServer(ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Y_BUTTON_ID)) }
+		) {
+			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Y_BUTTON_ID)
+			packet.messageServer()
+		}
 			.bounds(
 				raiseButtonLeft,
 				yButtonTop,
@@ -86,7 +97,10 @@ class AdvancedItemCollectorScreen(
 
 		this.buttonLowerZ = Button.Builder(
 			Component.literal("-Z")
-		) { ModPacketHandler.messageServer(ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Z_BUTTON_ID)) }
+		) {
+			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Z_BUTTON_ID)
+			packet.messageServer()
+		}
 			.bounds(
 				lowerButtonLeft,
 				zButtonsTop,
@@ -98,7 +112,10 @@ class AdvancedItemCollectorScreen(
 
 		this.buttonRaiseZ = Button.Builder(
 			Component.literal("-X")
-		) { ModPacketHandler.messageServer(ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Z_BUTTON_ID)) }
+		) {
+			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Z_BUTTON_ID)
+			packet.messageServer()
+		}
 			.bounds(
 				raiseButtonLeft,
 				zButtonsTop,

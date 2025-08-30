@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
@@ -49,23 +48,15 @@ class NotificationInterfaceScreen(
 
 	private fun setTitle(title: String) {
 		if (this.menu.setTitle(title)) {
-			ModPacketHandler.messageServer(
-				ClientChangedMenuString(
-					NotificationInterfaceMenu.TITLE_STRING_ID,
-					title
-				)
-			)
+			val packet = ClientChangedMenuString(NotificationInterfaceMenu.TITLE_STRING_ID, title)
+			packet.messageServer()
 		}
 	}
 
 	private fun setDescription(description: String) {
 		if (this.menu.setDescription(description)) {
-			ModPacketHandler.messageServer(
-				ClientChangedMenuString(
-					NotificationInterfaceMenu.DESCRIPTION_STRING_ID,
-					description
-				)
-			)
+			val packet = ClientChangedMenuString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, description)
+			packet.messageServer()
 		}
 	}
 

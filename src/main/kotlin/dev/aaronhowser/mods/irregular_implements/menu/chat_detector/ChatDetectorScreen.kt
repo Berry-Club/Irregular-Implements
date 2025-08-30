@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.Minecraft
@@ -47,11 +46,8 @@ class ChatDetectorScreen(
 			)
 			.onPress(
 				onPress = {
-					ModPacketHandler.messageServer(
-						ClientClickedMenuButton(
-							ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID
-						)
-					)
+					val packet = ClientClickedMenuButton(ChatDetectorMenu.TOGGLE_MESSAGE_PASS_BUTTON_ID)
+					packet.messageServer()
 				}
 			)
 			.build()
@@ -108,12 +104,8 @@ class ChatDetectorScreen(
 
 	private fun setRegexString(string: String) {
 		if (this.menu.setRegex(string)) {
-			ModPacketHandler.messageServer(
-				ClientChangedMenuString(
-					ChatDetectorMenu.REGEX_STRING_ID,
-					string
-				)
-			)
+			val packet = ClientChangedMenuString(ChatDetectorMenu.REGEX_STRING_ID, string)
+			packet.messageServer()
 		}
 	}
 

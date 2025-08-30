@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry.Companion.isNullOrEmpty
@@ -53,7 +52,8 @@ class ItemFilterScreen(
 		val y = this.topPos + 5
 
 		val onPress = {
-			ModPacketHandler.messageServer(ClientClickedMenuButton(ItemFilterMenu.TOGGLE_BLACKLIST_BUTTON_ID))
+			val packet = ClientClickedMenuButton(ItemFilterMenu.TOGGLE_BLACKLIST_BUTTON_ID)
+			packet.messageServer()
 		}
 
 		this.invertBlacklistButton = MultiStageSpriteButton.Builder(this.font)
@@ -95,7 +95,8 @@ class ItemFilterScreen(
 			colorGetter = { leftColorGetter(index) },
 			font = this.font,
 			onPress = {
-				ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
+				val packet = ClientClickedMenuButton(buttonId)
+				packet.messageServer()
 			}
 		)
 
@@ -148,7 +149,8 @@ class ItemFilterScreen(
 			colorGetter = { rightColorGetter(index) },
 			font = this.font,
 			onPress = {
-				ModPacketHandler.messageServer(ClientClickedMenuButton(buttonId))
+				val packet = ClientClickedMenuButton(buttonId)
+				packet.messageServer()
 			}
 		)
 

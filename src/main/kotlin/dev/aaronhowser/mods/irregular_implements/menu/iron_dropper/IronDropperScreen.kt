@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -55,7 +54,10 @@ class IronDropperScreen(
 				currentStageGetter = { this.menu.redstoneMode.ordinal }
 			)
 			.onPress(
-				onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.REDSTONE_BUTTON_ID)) }
+				onPress = {
+					val packet = ClientClickedMenuButton(IronDropperMenu.REDSTONE_BUTTON_ID)
+					packet.messageServer()
+				}
 			)
 			.location(
 				x = leftButtonX,
@@ -83,7 +85,10 @@ class IronDropperScreen(
 				currentStageGetter = { this.menu.pickupDelay.ordinal }
 			)
 			.onPress(
-				onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.DELAY_BUTTON_ID)) }
+				onPress = {
+					val packet = ClientClickedMenuButton(IronDropperMenu.DELAY_BUTTON_ID)
+					packet.messageServer()
+				}
 			)
 			.location(
 				x = rightButtonX,
@@ -107,7 +112,10 @@ class IronDropperScreen(
 				currentStageGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
 			)
 			.onPress(
-				onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)) }
+				onPress = {
+					val packet = ClientClickedMenuButton(IronDropperMenu.SHOOT_MODE_BUTTON_ID)
+					packet.messageServer()
+				}
 			)
 			.location(
 				x = leftButtonX,
@@ -139,7 +147,10 @@ class IronDropperScreen(
 				currentStageGetter = { this.menu.shouldHaveEffects.ordinal }
 			)
 			.onPress(
-				onPress = { ModPacketHandler.messageServer(ClientClickedMenuButton(IronDropperMenu.EFFECTS_BUTTON_ID)) }
+				onPress = {
+					val packet = ClientClickedMenuButton(IronDropperMenu.EFFECTS_BUTTON_ID)
+					packet.messageServer()
+				}
 			)
 			.location(
 				x = rightButtonX,
