@@ -1,8 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.entity.PortkeyItemEntity
 import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
@@ -13,7 +16,6 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
-//TODO: Ability to hide it as other items
 class PortkeyItem(properties: Properties) : Item(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
@@ -47,8 +49,28 @@ class PortkeyItem(properties: Properties) : Item(properties) {
 		return if (original is ItemEntity) PortkeyItemEntity(original) else original
 	}
 
-	//TODO: Tooltip
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
+
+		val target = stack.get(ModDataComponents.LOCATION)
+		if (target != null) {
+			tooltipComponents.add(
+				ModTooltipLang.PORTKEY_DESTINATION
+					.toGrayComponent(
+						OtherUtil.getDimensionComponent(target.dimension),
+						target.blockPos.x,
+						target.blockPos.y,
+						target.blockPos.z
+					)
+			)
+		}
+
+		val disguise = stack.get(ModDataComponents.PORTKEY_DISGUISE)
+		if (disguise != null) {
+			tooltipComponents.add(
+				ModTooltipLang.PORTKEY_DISGUISE.toGrayComponent(disguise.stack.displayName)
+			)
+		}
+
 		FlooPouchItem.fuckJkr(tooltipComponents)
 	}
 

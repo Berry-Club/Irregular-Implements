@@ -797,6 +797,8 @@
   "tooltip.irregular_implements.not_lazy": "Not Lazy",
   "tooltip.irregular_implements.player_filter_player": "Player: %s",
   "tooltip.irregular_implements.player_filter_uuid": "Player UUID: %s",
+  "tooltip.irregular_implements.portkey_destination": "%s: %d, %d, %d",
+  "tooltip.irregular_implements.portkey_disguise": "Disguised as: %s",
   "tooltip.irregular_implements.shift_for_more": "Hold SHIFT for more information",
   "tooltip.irregular_implements.show_lazy_shape": "Show Lazy Shape",
   "tooltip.irregular_implements.stops_message": "Stops message",

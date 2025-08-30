@@ -67,6 +67,8 @@ object ModTooltipLang {
 	const val ENDER_LETTER_FROM = "tooltip.irregular_implements.ender_letter_from"
 	const val INVENTORY_TESTER_INVERTED = "tooltip.irregular_implements.inventory_tester_inverted"
 	const val INVENTORY_TESTER_UNINVERTED = "tooltip.irregular_implements.inventory_tester_uninverted"
+	const val PORTKEY_DESTINATION = "tooltip.irregular_implements.portkey_destination"
+	const val PORTKEY_DISGUISE = "tooltip.irregular_implements.portkey_disguise"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -133,6 +135,8 @@ object ModTooltipLang {
 			add(ENDER_LETTER_FROM, "From: %s")
 			add(INVENTORY_TESTER_INVERTED, "Inverted")
 			add(INVENTORY_TESTER_UNINVERTED, "Uninverted")
+			add(PORTKEY_DESTINATION, "%s: %d, %d, %d")
+			add(PORTKEY_DISGUISE, "Disguised as: %s")
 		}
 	}
 
