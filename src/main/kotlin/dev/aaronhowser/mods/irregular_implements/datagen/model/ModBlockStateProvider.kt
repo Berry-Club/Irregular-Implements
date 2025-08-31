@@ -75,6 +75,52 @@ class ModBlockStateProvider(
 		enderEnergyDistributor()
 		slimeCube()
 		enderMailbox()
+		autoPlacer()
+	}
+
+	private fun autoPlacer() {
+		val block = ModBlocks.AUTO_PLACER.get()
+
+		val front = modLoc("block/auto_placer_front")
+		val top = mcLoc("block/furnace_top")
+		val side = mcLoc("block/furnace_side")
+
+		val model = models()
+			.orientable(name(block), side, front, top)
+
+		getVariantBuilder(block)
+			.forAllStates {
+				val facing = it.getValue(AutoPlacerBlock.FACING)
+
+				val yRotation = when (facing) {
+					Direction.NORTH -> 0
+					Direction.EAST -> 90
+					Direction.SOUTH -> 180
+					Direction.WEST -> 270
+					else -> 0
+				}
+
+				val xRotation = when (facing) {
+					Direction.UP -> 270
+					Direction.DOWN -> 90
+					else -> 0
+				}
+
+				ConfiguredModel
+					.builder()
+					.modelFile(model)
+					.rotationY(yRotation)
+					.rotationX(xRotation)
+					.build()
+			}
+
+		simpleBlockItem(
+			block,
+			ItemModelBuilder(
+				modLoc("block/auto_placer"),
+				existingFileHelper
+			)
+		)
 	}
 
 	private fun enderEnergyDistributor() {
