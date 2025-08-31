@@ -14,6 +14,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.level.block.SkullBlock
 import kotlin.math.atan2
 
+//TODO: Is this supposed to be attached to the Online Detector instead?
 class PlayerInterfaceBlockEntityRenderer(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<PlayerInterfaceBlockEntity> {
