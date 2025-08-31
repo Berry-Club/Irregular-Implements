@@ -1,6 +1,6 @@
-package dev.aaronhowser.mods.irregular_implements.menu.block_detector
+package dev.aaronhowser.mods.irregular_implements.menu.auto_placer
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.AutoPlacerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
@@ -11,17 +11,17 @@ import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 
-class BlockDetectorMenu(
+class AutoPlacerMenu(
 	containerId: Int,
 	playerInventory: Inventory,
-	val blockDetectorContainer: Container
-) : MenuWithInventory(ModMenuTypes.BLOCK_DETECTOR.get(), containerId, playerInventory) {
+	val autoPlacerContainer: Container
+) : MenuWithInventory(ModMenuTypes.AUTO_PLACER.get(), containerId, playerInventory) {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
 				containerId,
 				playerInventory,
-				SimpleContainer(BlockDetectorBlockEntity.CONTAINER_SIZE),
+				SimpleContainer(AutoPlacerBlockEntity.CONTAINER_SIZE),
 			)
 
 	init {
@@ -30,7 +30,7 @@ class BlockDetectorMenu(
 	}
 
 	override fun addSlots() {
-		val slot = object : Slot(blockDetectorContainer, 0, 80, 18) {
+		val slot = object : Slot(autoPlacerContainer, 0, 80, 18) {
 			override fun mayPlace(stack: ItemStack): Boolean {
 				return stack.item is BlockItem
 			}
@@ -45,6 +45,7 @@ class BlockDetectorMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return blockDetectorContainer.stillValid(player)
+		return autoPlacerContainer.stillValid(player)
 	}
+
 }

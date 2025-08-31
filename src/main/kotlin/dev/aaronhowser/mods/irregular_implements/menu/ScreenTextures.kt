@@ -30,6 +30,7 @@ object ScreenTextures {
 		data object AdvancedItemCollector : Background("textures/gui/advanced_item_collector.png", 176, 235)
 		data object AdvancedRedstoneRepeater : Background("textures/gui/advanced_redstone_repeater.png", 91, 56)
 		data object AnalogEmitter : Background("textures/gui/analog_emitter.png", 79, 50)
+		data object AutoPlacer : Background("textures/gui/auto_placer.png", 177, 159)
 		data object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
 		data object BlockTeleporter : Background("textures/gui/block_teleporter.png", 176, 133)
 		data object BlockDetector : Background("textures/gui/block_detector.png", 176, 133)

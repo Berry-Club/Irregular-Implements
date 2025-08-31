@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -27,8 +28,8 @@ class AutoPlacerBlockEntity(
 
 	fun getItemHandler(): IItemHandler = invWrapper
 
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu? {
-		TODO("Not yet implemented")
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return AutoPlacerMenu(containerId, playerInventory, container)
 	}
 
 	override fun getDisplayName(): Component {
@@ -48,7 +49,7 @@ class AutoPlacerBlockEntity(
 	}
 
 	companion object {
-		const val CONTAINER_SIZE = 9
+		const val CONTAINER_SIZE = 1
 
 		fun getCapability(autoPlacer: AutoPlacerBlockEntity, direction: Direction?): IItemHandler {
 			return autoPlacer.getItemHandler()
