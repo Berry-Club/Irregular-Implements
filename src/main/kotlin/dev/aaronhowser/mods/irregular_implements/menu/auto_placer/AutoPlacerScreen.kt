@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
+//TODO: A way to toggle between place on pulse and place while powered
 class AutoPlacerScreen(
 	menu: AutoPlacerMenu,
 	playerInventory: Inventory,
