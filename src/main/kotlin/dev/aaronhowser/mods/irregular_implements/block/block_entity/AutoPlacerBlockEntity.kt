@@ -40,12 +40,20 @@ class AutoPlacerBlockEntity(
 
 	private var fakePlayer: WeakReference<FakePlayer>? = null
 
+	enum class Mode { ON_PULSE, WHILE_POWERED }
+
+	private var mode: Mode = Mode.ON_PULSE
+		set(value) {
+			field = value
+			setChanged()
+		}
+
 	fun tick() {
 		if (fakePlayer?.get() == null) {
 			initFakePlayer()
 		}
 
-		if (level?.hasNeighborSignal(worldPosition).isTrue) {
+		if (mode == Mode.WHILE_POWERED && level?.hasNeighborSignal(worldPosition).isTrue) {
 			placeBlock()
 		}
 	}
@@ -98,12 +106,19 @@ class AutoPlacerBlockEntity(
 		super.saveAdditional(tag, registries)
 
 		ContainerHelper.saveAllItems(tag, this.container.items, registries)
+
+		tag.putInt(MODE_NBT, if (mode == Mode.ON_PULSE) 0 else 1)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
 		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+
+		if (tag.contains(MODE_NBT)) {
+			val modeInt = tag.getInt(MODE_NBT)
+			mode = if (modeInt == 0) Mode.ON_PULSE else Mode.WHILE_POWERED
+		}
 	}
 
 	class AutoPlacerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
@@ -119,6 +134,7 @@ class AutoPlacerBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 1
+		const val MODE_NBT = "Mode"
 
 		fun getCapability(autoPlacer: AutoPlacerBlockEntity, direction: Direction?): IItemHandler {
 			return autoPlacer.getItemHandler()
