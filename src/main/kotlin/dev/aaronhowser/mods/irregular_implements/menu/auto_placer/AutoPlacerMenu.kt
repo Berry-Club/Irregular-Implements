@@ -26,11 +26,11 @@ class AutoPlacerMenu(
 
 	init {
 		addSlots()
-		addPlayerInventorySlots(51)
+		addPlayerInventorySlots(51 + 16 + 16 + 1)
 	}
 
 	override fun addSlots() {
-		val slot = object : Slot(autoPlacerContainer, 0, 80, 18) {
+		val slot = object : Slot(autoPlacerContainer, 0, 80, 35) {
 			override fun mayPlace(stack: ItemStack): Boolean {
 				return stack.item is BlockItem
 			}
