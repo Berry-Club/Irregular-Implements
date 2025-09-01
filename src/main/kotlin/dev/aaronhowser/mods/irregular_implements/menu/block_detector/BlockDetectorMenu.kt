@@ -1,13 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.menu.block_detector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 
@@ -30,12 +30,7 @@ class BlockDetectorMenu(
 	}
 
 	override fun addSlots() {
-		val slot = object : Slot(blockDetectorContainer, 0, 80, 18) {
-			override fun mayPlace(stack: ItemStack): Boolean {
-				return stack.item is BlockItem
-			}
-		}
-
+		val slot = FilteredSlot(blockDetectorContainer, 0, 80, 18) { it.item is BlockItem }
 		addSlot(slot)
 	}
 

@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.inventory.SimpleContainerData
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class GlobalChatDetectorMenu(
@@ -52,12 +52,9 @@ class GlobalChatDetectorMenu(
 			val y = 40
 
 			//TODO: Add a Player Filter outline to the slot background
-			val slot = object : Slot(globalChatDetectorContainer, containerSlotIndex, x, y) {
-				override fun mayPlace(stack: ItemStack): Boolean {
-					return stack.`is`(ModItems.PLAYER_FILTER) && stack.has(ModDataComponents.PLAYER)
-				}
+			val slot = FilteredSlot(globalChatDetectorContainer, containerSlotIndex, x, y) { stack ->
+				stack.`is`(ModItems.PLAYER_FILTER) && stack.has(ModDataComponents.PLAYER)
 			}
-
 			this.addSlot(slot)
 		}
 	}

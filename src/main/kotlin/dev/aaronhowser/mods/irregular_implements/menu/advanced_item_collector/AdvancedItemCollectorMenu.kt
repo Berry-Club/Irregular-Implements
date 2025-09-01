@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -11,7 +12,6 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class AdvancedItemCollectorMenu(
@@ -40,15 +40,9 @@ class AdvancedItemCollectorMenu(
 	}
 
 	override fun addSlots() {
-
 		//TODO: Add an Item Filter outline to the slot background
-		val filterSlot = object : Slot(container, 0, 80, 122) {
-			override fun mayPlace(stack: ItemStack): Boolean {
-				return stack.has(ModDataComponents.ITEM_FILTER)
-			}
-		}
-
-		this.addSlot(filterSlot)
+		val slot = FilteredSlot(container, 0, 80, 35) { it.has(ModDataComponents.ITEM_FILTER) }
+		this.addSlot(slot)
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {

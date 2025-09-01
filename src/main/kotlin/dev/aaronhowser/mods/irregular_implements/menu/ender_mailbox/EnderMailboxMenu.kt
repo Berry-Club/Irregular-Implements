@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox
 
+import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
@@ -34,10 +35,7 @@ class EnderMailboxMenu(
 		for (i in 0 until 9) {
 			val x = 8 + i * 18
 
-			val slot = object : Slot(enderMailboxContainer, i, x, y) {
-				override fun mayPlace(stack: ItemStack): Boolean = false
-			}
-
+			val slot = FilteredSlot(enderMailboxContainer, i, x, y) { false }
 			addSlot(slot)
 		}
 	}

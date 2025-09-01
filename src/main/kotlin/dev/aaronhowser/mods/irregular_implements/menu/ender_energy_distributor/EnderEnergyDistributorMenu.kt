@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderEnergyDistributorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -37,12 +38,7 @@ class EnderEnergyDistributorMenu(
 			val x = 17 + (i % 9) * 18
 
 			//TODO: Add an Item Filter outline to the slot background
-			val slot = object : Slot(container, i, x, 18) {
-				override fun mayPlace(stack: ItemStack): Boolean {
-					return stack.has(ModDataComponents.LOCATION)
-				}
-			}
-
+			val slot = FilteredSlot(container, i, x, 18) { it.has(ModDataComponents.LOCATION) }
 			this.addSlot(slot)
 		}
 	}
