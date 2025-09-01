@@ -123,6 +123,7 @@
     "irregular_implements:luminous_stained_bricks_black",
     "irregular_implements:slime_cube",
     "irregular_implements:inventory_tester",
-    "irregular_implements:block_destabilizer"
+    "irregular_implements:block_destabilizer",
+    "irregular_implements:auto_placer"
   ]
 }

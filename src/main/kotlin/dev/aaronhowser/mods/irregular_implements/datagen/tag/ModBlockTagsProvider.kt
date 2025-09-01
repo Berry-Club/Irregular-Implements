@@ -379,7 +379,8 @@ class ModBlockTagsProvider(
 				ModBlocks.LUMINOUS_STAINED_BRICKS_BLACK.get(),
 				ModBlocks.SLIME_CUBE.get(),
 				ModBlocks.INVENTORY_TESTER.get(),
-				ModBlocks.BLOCK_DESTABILIZER.get()
+				ModBlocks.BLOCK_DESTABILIZER.get(),
+				ModBlocks.AUTO_PLACER.get()
 			)
 
 		this.tag(BlockTags.MINEABLE_WITH_AXE)
@@ -483,7 +484,8 @@ class ModBlockTagsProvider(
 				ModBlocks.ENTITY_DETECTOR.get(),
 				ModBlocks.CHAT_DETECTOR.get(),
 				ModBlocks.GLOBAL_CHAT_DETECTOR.get(),
-				ModBlocks.NOTIFICATION_INTERFACE.get()
+				ModBlocks.NOTIFICATION_INTERFACE.get(),
+				ModBlocks.AUTO_PLACER.get()
 			)
 
 	}

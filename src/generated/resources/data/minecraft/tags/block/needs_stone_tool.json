@@ -20,6 +20,7 @@
     "irregular_implements:entity_detector",
     "irregular_implements:chat_detector",
     "irregular_implements:global_chat_detector",
-    "irregular_implements:notification_interface"
+    "irregular_implements:notification_interface",
+    "irregular_implements:auto_placer"
   ]
 }
