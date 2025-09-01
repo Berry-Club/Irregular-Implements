@@ -62,7 +62,7 @@ class BlockBreakerBlockEntity(
 			setChanged()
 		}
 
-		val fakePlayer = FakePlayerFactory.get(level, breakerGameProfile)
+		val fakePlayer = FakePlayerFactory.get(level, BlockBreakerFakePlayer.GAME_PROFILE)
 
 		fakePlayer.isSilent = true
 		fakePlayer.setOnGround(true)
@@ -241,17 +241,18 @@ class BlockBreakerBlockEntity(
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
-	class BreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
+	class BlockBreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
 		companion object {
-			fun get(level: ServerLevel, name: GameProfile): BreakerFakePlayer {
-				return BreakerFakePlayer(level, name)
+			fun get(level: ServerLevel, name: GameProfile): BlockBreakerFakePlayer {
+				return BlockBreakerFakePlayer(level, name)
 			}
+
+			private const val NAME = "IrregularImplementsBlockBreaker"
+			val GAME_PROFILE = GameProfile(UUID.nameUUIDFromBytes(NAME.toByteArray()), NAME)
 		}
 	}
 
 	companion object {
-		val breakerGameProfile = GameProfile(UUID.nameUUIDFromBytes("IIBlockBreaker".toByteArray()), "IIBlockBreaker")
-
 		const val UUID_NBT = "UUID"
 		const val IS_MINING_NBT = "IsMining"
 		const val CAN_MINE_NBT = "CanMine"
