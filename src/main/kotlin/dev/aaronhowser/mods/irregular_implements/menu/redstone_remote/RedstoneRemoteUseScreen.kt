@@ -15,7 +15,7 @@ class RedstoneRemoteUseScreen(
 	title: Component
 ) : BaseScreen<RedstoneRemoteUseMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.RedstoneRemoteUse
+	override val background: ScreenTextures.Background = ScreenTextures.Background.REDSTONE_REMOTE_USE
 
 	override val showInventoryLabel: Boolean = false
 

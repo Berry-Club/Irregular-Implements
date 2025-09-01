@@ -17,7 +17,7 @@ class OnlineDetectorScreen(
 
 	private lateinit var usernameEditBox: EditBox
 
-	override val background = ScreenTextures.Background.OnlineDetector
+	override val background = ScreenTextures.Background.ONLINE_DETECTOR
 
 	override fun baseInit() {
 		val editBoxHeight = 20

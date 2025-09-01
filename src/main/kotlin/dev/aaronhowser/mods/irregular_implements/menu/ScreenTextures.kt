@@ -5,12 +5,50 @@ import net.minecraft.client.gui.GuiGraphics
 
 object ScreenTextures {
 
-	sealed class Background(
+	enum class Background(
 		path: String,
 		val width: Int,
 		val height: Int,
 		private val canvasSize: Int = 256
 	) {
+		ADVANCED_ITEM_COLLECTOR("textures/gui/advanced_item_collector.png", 176, 235),
+		ADVANCED_REDSTONE_REPEATER("textures/gui/advanced_redstone_repeater.png", 91, 56),
+		ANALOG_EMITTER("textures/gui/analog_emitter.png", 79, 50),
+		AUTO_PLACER("textures/gui/auto_placer.png", 175, 165),
+		BLOCK_DESTABILIZER("textures/gui/block_destabilizer.png", 86, 35),
+		BLOCK_TELEPORTER("textures/gui/block_teleporter.png", 176, 133),
+		BLOCK_DETECTOR("textures/gui/block_detector.png", 176, 133),
+		CHAT_DETECTOR("textures/gui/chat_detector.png", 137, 54),
+		CHUNK_ANALYZER("textures/gui/chunk_analyzer.png", 190, 124),
+		DROP_FILTER("textures/gui/drop_filter.png", 176, 133),
+		DYEING_MACHINE("textures/gui/dyeing_machine.png", 176, 141),
+		ENDER_ENERGY_DISTRIBUTOR("textures/gui/ender_energy_distributor.png", 176, 130),
+		ENDER_LETTER("textures/gui/ender_letter.png", 176, 133),
+		ENDER_MAILBOX("textures/gui/ender_mailbox.png", 176, 133),
+		ENTITY_DETECTOR("textures/gui/entity_detector.png", 176, 204),
+		EXTRACTION_PLATE("textures/gui/extraction_plate.png", 121, 42),
+		FILTERED_REDIRECTOR_PLATE("textures/gui/filtered_redirector_plate.png", 176, 129),
+		FILTERED_SUPER_LUBRICANT_PLATFORM("textures/gui/filtered_super_lubricant_platform.png", 176, 129),
+		GLOBAL_CHAT_DETECTOR("textures/gui/global_chat_detector.png", 176, 157),
+		IGNITER("textures/gui/igniter.png", 79, 29),
+		IRON_DROPPER("textures/gui/iron_dropper.png", 176, 166),
+		IMBUING_STATION("textures/gui/imbuing_station.png", 176, 207),
+		INVENTORY_TESTER("textures/gui/inventory_tester.png", 176, 136),
+		ITEM_FILTER("textures/gui/item_filter.png", 176, 141),
+		ITEM_PROJECTOR("textures/gui/item_projector.png", 176, 166),
+		MAGNETIC_FORCE("textures/gui/magnetic_force.png", 123, 135),
+		NOTIFICATION_INTERFACE("textures/gui/notification_interface.png", 176, 146),
+		ONLINE_DETECTOR("textures/gui/online_detector.png", 137, 52),
+		PORTABLE_SOUND_DAMPENER("textures/gui/portable_sound_dampener.png", 176, 133),
+		POTION_VAPORIZER("textures/gui/potion_vaporizer.png", 176, 166),
+		PROCESSING_PLATE("textures/gui/processing_plate.png", 121, 77),
+		REDSTONE_REMOTE_EDIT("textures/gui/redstone_remote/edit.png", 176, 150),
+		REDSTONE_REMOTE_USE("textures/gui/redstone_remote/use.png", 207, 41),
+		SOUND_RECORDER("textures/gui/sound_recorder.png", 190, 187),
+		VOID_STONE("textures/gui/void_stone.png", 176, 133)
+
+		;
+
 		private val texture = OtherUtil.modResource(path)
 
 		fun render(guiGraphics: GuiGraphics, leftPos: Int, topPos: Int) {
@@ -26,42 +64,6 @@ object ScreenTextures {
 				this.canvasSize
 			)
 		}
-
-		data object AdvancedItemCollector : Background("textures/gui/advanced_item_collector.png", 176, 235)
-		data object AdvancedRedstoneRepeater : Background("textures/gui/advanced_redstone_repeater.png", 91, 56)
-		data object AnalogEmitter : Background("textures/gui/analog_emitter.png", 79, 50)
-		data object AutoPlacer : Background("textures/gui/auto_placer.png", 175, 165)
-		data object BlockDestabilizer : Background("textures/gui/block_destabilizer.png", 86, 35)
-		data object BlockTeleporter : Background("textures/gui/block_teleporter.png", 176, 133)
-		data object BlockDetector : Background("textures/gui/block_detector.png", 176, 133)
-		data object ChatDetector : Background("textures/gui/chat_detector.png", 137, 54)
-		data object ChunkAnalyzer : Background("textures/gui/chunk_analyzer.png", 190, 124)
-		data object DropFilter : Background("textures/gui/drop_filter.png", 176, 133)
-		data object DyeingMachine : Background("textures/gui/dyeing_machine.png", 176, 141)
-		data object EnderEnergyDistributor : Background("textures/gui/ender_energy_distributor.png", 176, 130)
-		data object EnderLetter : Background("textures/gui/ender_letter.png", 176, 133)
-		data object EnderMailbox : Background("textures/gui/ender_mailbox.png", 176, 133)
-		data object EntityDetector : Background("textures/gui/entity_detector.png", 176, 204)
-		data object ExtractionPlate : Background("textures/gui/extraction_plate.png", 121, 42)
-		data object FilteredRedirectorPlate : Background("textures/gui/filtered_redirector_plate.png", 176, 129)
-		data object FilteredSuperLubricantPlatform : Background("textures/gui/filtered_super_lubricant_platform.png", 176, 129)
-		data object GlobalChatDetector : Background("textures/gui/global_chat_detector.png", 176, 157)
-		data object Igniter : Background("textures/gui/igniter.png", 79, 29)
-		data object IronDropper : Background("textures/gui/iron_dropper.png", 176, 166)
-		data object ImbuingStation : Background("textures/gui/imbuing_station.png", 176, 207)
-		data object InventoryTester : Background("textures/gui/inventory_tester.png", 176, 136)
-		data object ItemFilter : Background("textures/gui/item_filter.png", 176, 141)
-		data object ItemProjector : Background("textures/gui/item_projector.png", 176, 166)
-		data object MagneticForce : Background("textures/gui/magnetic_force.png", 123, 135)
-		data object NotificationInterface : Background("textures/gui/notification_interface.png", 176, 146)
-		data object OnlineDetector : Background("textures/gui/online_detector.png", 137, 52)
-		data object PortableSoundDampener : Background("textures/gui/portable_sound_dampener.png", 176, 133)
-		data object PotionVaporizer : Background("textures/gui/potion_vaporizer.png", 176, 166)
-		data object ProcessingPlate : Background("textures/gui/processing_plate.png", 121, 77)
-		data object RedstoneRemoteEdit : Background("textures/gui/redstone_remote/edit.png", 176, 150)
-		data object RedstoneRemoteUse : Background("textures/gui/redstone_remote/use.png", 207, 41)
-		data object SoundRecorder : Background("textures/gui/sound_recorder.png", 190, 187)
-		data object VoidStone : Background("textures/gui/void_stone.png", 176, 133)
 
 	}
 

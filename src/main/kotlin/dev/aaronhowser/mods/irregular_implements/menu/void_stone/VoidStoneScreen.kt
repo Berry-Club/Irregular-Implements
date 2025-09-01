@@ -11,6 +11,6 @@ class VoidStoneScreen(
 	title: Component
 ) : BaseScreen<VoidStoneMenu>(menu, playerInventory, title) {
 
-	override val background = ScreenTextures.Background.VoidStone
+	override val background = ScreenTextures.Background.VOID_STONE
 
 }

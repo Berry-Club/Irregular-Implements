@@ -22,7 +22,7 @@ class GlobalChatDetectorScreen(
 	private lateinit var toggleMessagePassButton: MultiStageSpriteButton
 	private lateinit var regexStringEditBox: EditBox
 
-	override val background = ScreenTextures.Background.GlobalChatDetector
+	override val background = ScreenTextures.Background.GLOBAL_CHAT_DETECTOR
 
 	override fun baseInit() {
 		this.inventoryLabelY -= 8

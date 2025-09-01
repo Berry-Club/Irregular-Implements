@@ -11,7 +11,7 @@ class BlockTeleporterScreen(
 	title: Component
 ) : BaseScreen<BlockTeleporterMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.BlockTeleporter
+	override val background: ScreenTextures.Background = ScreenTextures.Background.BLOCK_TELEPORTER
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94
