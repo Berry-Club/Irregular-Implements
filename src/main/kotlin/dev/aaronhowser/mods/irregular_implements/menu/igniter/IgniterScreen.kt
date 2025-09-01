@@ -15,7 +15,7 @@ class IgniterScreen(
 
 	private lateinit var changeModeButton: ChangingTextButton
 
-	override val background = ScreenTextures.Background.IGNITER
+	override val background = ScreenTextures.Background.Igniter
 
 	override fun baseInit() {
 		this.changeModeButton = ChangingTextButton(

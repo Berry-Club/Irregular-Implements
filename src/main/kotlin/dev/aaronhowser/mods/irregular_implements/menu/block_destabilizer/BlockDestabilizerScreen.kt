@@ -20,7 +20,7 @@ class BlockDestabilizerScreen(
 	private lateinit var showLazyShapeButton: ImprovedSpriteButton
 	private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
-	override val background = ScreenTextures.Background.BLOCK_DESTABILIZER
+	override val background = ScreenTextures.Background.BlockDestabilizer
 
 	override fun baseInit() {
 		this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)

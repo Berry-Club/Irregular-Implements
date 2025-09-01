@@ -22,7 +22,7 @@ class ItemFilterScreen(
 	title: Component
 ) : BaseScreen<ItemFilterMenu>(menu, playerInventory, title) {
 
-	override val background = ScreenTextures.Background.ITEM_FILTER
+	override val background = ScreenTextures.Background.ItemFilter
 
 	private val leftButtons: MutableSet<Button> = mutableSetOf()
 	private val rightButtons: MutableSet<Button> = mutableSetOf()

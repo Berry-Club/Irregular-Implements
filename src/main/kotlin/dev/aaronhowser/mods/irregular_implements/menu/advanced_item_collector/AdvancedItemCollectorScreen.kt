@@ -16,7 +16,7 @@ class AdvancedItemCollectorScreen(
 	title: Component
 ) : BaseScreen<AdvancedItemCollectorMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.ADVANCED_ITEM_COLLECTOR
+	override val background: ScreenTextures.Background = ScreenTextures.Background.AdvancedItemCollector
 
 	private lateinit var buttonLowerX: Button
 	private lateinit var buttonRaiseX: Button

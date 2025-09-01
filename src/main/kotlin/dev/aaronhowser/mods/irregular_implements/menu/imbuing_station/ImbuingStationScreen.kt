@@ -11,7 +11,7 @@ class ImbuingStationScreen(
 	title: Component
 ) : BaseScreen<ImbuingStationMenu>(menu, playerInventory, title) {
 
-	override val background = ScreenTextures.Background.IMBUING_STATION
+	override val background = ScreenTextures.Background.ImbuingStation
 
 	override fun baseInit() {
 		this.titleLabelX = 4

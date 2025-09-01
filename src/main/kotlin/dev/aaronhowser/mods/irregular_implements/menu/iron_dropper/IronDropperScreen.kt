@@ -20,7 +20,7 @@ class IronDropperScreen(
 	private lateinit var delayButton: MultiStageSpriteButton
 	private lateinit var redstoneModeButton: MultiStageSpriteButton
 
-	override val background = ScreenTextures.Background.IRON_DROPPER
+	override val background = ScreenTextures.Background.IronDropper
 
 	override fun baseInit() {
 		this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
