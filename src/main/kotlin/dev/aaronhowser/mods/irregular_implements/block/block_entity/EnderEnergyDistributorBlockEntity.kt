@@ -26,7 +26,7 @@ class EnderEnergyDistributorBlockEntity(
 
 	// Inventory stuff
 
-	private val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
+	val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
 
 	override fun getDisplayName(): Component = blockState.block.name
 

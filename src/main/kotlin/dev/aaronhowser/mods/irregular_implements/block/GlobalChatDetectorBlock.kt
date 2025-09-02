@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDe
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
@@ -74,6 +75,14 @@ class GlobalChatDetectorBlock : EntityBlock, Block(
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		val be = level.getBlockEntity(pos)
+		if (be is GlobalChatDetectorBlockEntity) {
+			Containers.dropContents(level, pos, be.container)
+		}
+		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	companion object {

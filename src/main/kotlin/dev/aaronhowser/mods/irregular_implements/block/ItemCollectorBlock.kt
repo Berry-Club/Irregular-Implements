@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.AutoPlacerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ItemCollectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Player
@@ -87,6 +89,14 @@ class ItemCollectorBlock(
 		} else {
 			ItemCollectorBlockEntity(pos, state)
 		}
+	}
+
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		val be = level.getBlockEntity(pos)
+		if (be is AdvancedItemCollectorBlockEntity) {
+			Containers.dropContents(level, pos, be.container)
+		}
+		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {

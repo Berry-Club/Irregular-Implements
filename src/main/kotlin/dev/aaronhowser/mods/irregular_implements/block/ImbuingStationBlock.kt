@@ -1,8 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ImbuingStationBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -33,6 +35,14 @@ class ImbuingStationBlock : Block(Properties.ofFullCopy(Blocks.TERRACOTTA)), Ent
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
 		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IMBUING_STATION.get(), ImbuingStationBlockEntity::tick)
+	}
+
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		val be = level.getBlockEntity(pos)
+		if (be is ImbuingStationBlockEntity) {
+			Containers.dropContents(level, pos, be.container)
+		}
+		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 }

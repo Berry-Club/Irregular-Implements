@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.FilteredPlat
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
@@ -72,6 +73,14 @@ class PlatformBlock(
 		}
 
 		return super.useWithoutItem(state, level, pos, player, hitResult)
+	}
+
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		val be = level.getBlockEntity(pos)
+		if (be is FilteredPlatformBlockEntity) {
+			Containers.dropContents(level, pos, be.container)
+		}
+		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	companion object {

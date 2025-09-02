@@ -130,7 +130,7 @@ class GlobalChatDetectorBlockEntity(
 		return this.blockState.block.name
 	}
 
-	private val container = ImprovedSimpleContainer(this, 9)
+	val container = ImprovedSimpleContainer(this, 9)
 
 	private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
 		override fun set(index: Int, value: Int) {

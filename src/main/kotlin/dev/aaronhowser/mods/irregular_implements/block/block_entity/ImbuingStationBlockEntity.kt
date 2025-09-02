@@ -44,7 +44,7 @@ class ImbuingStationBlockEntity(
 
 	// Machine stuff
 
-	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 	private val invWrapper = InvWrapper(container)
 
 	fun getItemHandler(direction: Direction?): IItemHandler? {
