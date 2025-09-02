@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
-import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -174,8 +173,7 @@ class SpiritEntity(
 		fun getSpawnChance(level: ServerLevel): Double {
 			var chance = ServerConfig.SPIRIT_BASE_SPAWN_CHANCE.get()
 
-			val savedData = WorldInformationSavedData.get(level)
-			if (savedData.enderDragonKilled) chance += ServerConfig.SPIRIT_SPAWN_DRAGON_KILLED_BONUS.get()
+			if (level.server.worldData.endDragonFightData().previouslyKilled) chance += ServerConfig.SPIRIT_SPAWN_DRAGON_KILLED_BONUS.get()
 
 			val moonPhase = level.moonPhase
 			val distToFull = minOf(moonPhase, 8 - moonPhase)

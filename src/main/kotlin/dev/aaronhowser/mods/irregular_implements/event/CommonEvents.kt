@@ -10,7 +10,6 @@ import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.entity.SpiritEntity
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.handler.EscapeRopeHandler
-import dev.aaronhowser.mods.irregular_implements.handler.WorldInformationSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -117,7 +116,6 @@ object CommonEvents {
 		priority = EventPriority.LOWEST
 	)
 	fun onLivingDeathLowPriority(event: LivingDeathEvent) {
-		WorldInformationSavedData.trySaveEnderDragonKilled(event)
 		SpiritEntity.trySpawn(event)
 	}
 
