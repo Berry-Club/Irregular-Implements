@@ -35,7 +35,7 @@ class AutoPlacerBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider {
 
-	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 	private val invWrapper = InvWrapper(container)
 
 	private var fakePlayer: WeakReference<FakePlayer>? = null
