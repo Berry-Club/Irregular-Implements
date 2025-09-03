@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.neoforged.neoforge.client.model.generators.*
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import net.neoforged.neoforge.registries.DeferredBlock
+import org.joml.Vector3f
 
 class ModBlockStateProvider(
 	output: PackOutput,
@@ -1845,10 +1846,52 @@ class ModBlockStateProvider(
 		val base = modLoc("block/glowing_mushroom/base")
 		val glow = modLoc("block/glowing_mushroom/glow")
 
+		fun cross(
+			baseModel: BlockModelBuilder,
+			from: Vector3f,
+			to: Vector3f,
+			vararg directions: Direction
+		) {
+			// Just a copy of "blook/cross.json" with emissive added
+			baseModel.element()
+				.from(from.x, from.y, from.z)
+				.to(to.x, to.y, to.z)
+				.shade(false)
+				.emissivity(15, 15)
+				.allFaces { face, builder ->
+					if (face in directions) {
+						builder
+							.uvs(0f, 0f, 16f, 16f)
+							.texture("#glow")
+					}
+				}
+				.rotation()
+				.origin(8f, 8f, 8f)
+				.axis(Direction.Axis.Y)
+				.angle(45f)
+				.rescale(true)
+				.end()
+				.end()
+		}
+
 		val blockModel = models()
 			.cross(name(block), base)
 			.texture("glow", glow)
 			.renderType(RenderType.cutout().name)
+
+		cross(
+			blockModel,
+			from = Vector3f(0.8f, 0f, 8f),
+			to = Vector3f(15.2f, 16f, 8f),
+			Direction.NORTH, Direction.SOUTH
+		)
+
+		cross(
+			blockModel,
+			from = Vector3f(8f, 0f, 0.8f),
+			to = Vector3f(8f, 16f, 15.2f),
+			Direction.EAST, Direction.WEST
+		)
 
 		simpleBlock(block, blockModel)
 

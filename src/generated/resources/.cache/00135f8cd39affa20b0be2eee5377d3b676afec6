@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-03T13:30:06.4308157	Block States: irregular_implements
+// 1.21.1	2025-09-03T14:42:17.3700427	Block States: irregular_implements
 1c29572310303db674c5bbef1a5f51c49a200c42 assets/irregular_implements/blockstates/acacia_platform.json
 121014afa3830c821a53dfa8a59c8786aef65387 assets/irregular_implements/blockstates/accelerator_plate.json
 91576adf20366019de766b4c00bbc3a48e5db780 assets/irregular_implements/blockstates/advanced_item_collector.json
@@ -252,7 +252,7 @@ b6cba20f7207df201726f30445677982bd31727a assets/irregular_implements/models/bloc
 2db03acaa5366bed6616c6006337d842106d13ec assets/irregular_implements/models/block/floo_brick.json
 587e38b983ec87e22b81be414d3295c3b0208fb3 assets/irregular_implements/models/block/global_chat_detector_off.json
 fbee8ed55b25d45933ee058bdae6ede5d7a37047 assets/irregular_implements/models/block/global_chat_detector_on.json
-70be9b93af44d32c990e6e80302f12e2d2c79807 assets/irregular_implements/models/block/glowing_mushroom.json
+6d910f8cd9540e546e21ea2d691ecab2a879cdbb assets/irregular_implements/models/block/glowing_mushroom.json
 b29cc6255111f9d5c06a5ba809b6d7697b12b99d assets/irregular_implements/models/block/igniter.json
 7ad3d635e2c38952719f5b4aa77cccb26e5d4b22 assets/irregular_implements/models/block/imbuing_station.json
 71485c5c2a98fe551c3138f34723a31bfee67e0e assets/irregular_implements/models/block/inventory_tester.json
