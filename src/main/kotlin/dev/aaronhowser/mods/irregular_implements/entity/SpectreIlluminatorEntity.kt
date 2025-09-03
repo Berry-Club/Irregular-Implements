@@ -203,10 +203,11 @@ class SpectreIlluminatorEntity(
 			val minY = level.minBuildHeight
 			val maxY = level.maxBuildHeight
 
-			for (x in minX..maxX) for (z in minZ..maxZ) for (y in minY..maxY) {
-				val pos = BlockPos(x, y, z)
+			// TODO: Make sure this works when using betweenClosed
+			val iterable = BlockPos.betweenClosed(minX, minY, minZ, maxX, maxY, maxZ)
 
-				level.chunkSource.lightEngine.checkBlock(pos)
+			for (pos in iterable) {
+				level.chunkSource.lightEngine.checkBlock(pos.mutable())
 			}
 		}
 
