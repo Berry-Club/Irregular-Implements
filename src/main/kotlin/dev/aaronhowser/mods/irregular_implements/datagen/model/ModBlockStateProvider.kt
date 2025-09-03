@@ -76,6 +76,7 @@ class ModBlockStateProvider(
 		slimeCube()
 		enderMailbox()
 		autoPlacer()
+		glowingMushroom()
 	}
 
 	private fun autoPlacer() {
@@ -1835,13 +1836,31 @@ class ModBlockStateProvider(
 
 			simpleBlockWithItem(block, model)
 		}
+	}
 
+	//TODO: Glow
+	private fun glowingMushroom() {
+		val block = ModBlocks.GLOWING_MUSHROOM.get()
+
+		val base = modLoc("block/glowing_mushroom/base")
+		val glow = modLoc("block/glowing_mushroom/glow")
+
+		val blockModel = models()
+			.cross(name(block), base)
+			.texture("glow", glow)
+			.renderType(RenderType.cutout().name)
+
+		simpleBlock(block, blockModel)
+
+		val combined = modLoc("block/glowing_mushroom/combined")
+
+		this.itemModels()
+			.withExistingParent(name(block), "item/generated")
+			.texture("layer0", combined)
 	}
 
 	private fun luminousBlocks() {
-
 		for (color in DyeColor.entries) {
-
 			val opaqueBlock = ModBlocks.getLuminousBlock(color).get()
 			val translucentBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
 
@@ -1873,14 +1892,11 @@ class ModBlockStateProvider(
 
 			simpleBlockWithItem(opaqueBlock, opaqueModel)
 			simpleBlockWithItem(translucentBlock, translucentModel)
-
 		}
 	}
 
 	private fun stainedBricks() {
-
 		for (color in DyeColor.entries) {
-
 			val regular = ModBlocks.getStainedBrick(color).get()
 			val luminous = ModBlocks.getStainedBrickLuminous(color).get()
 
@@ -1911,7 +1927,6 @@ class ModBlockStateProvider(
 			simpleBlockWithItem(regular, regularModel)
 			simpleBlockWithItem(luminous, luminousModel)
 		}
-
 	}
 
 	private fun platforms() {

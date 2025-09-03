@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "cross": "irregular_implements:block/glowing_mushroom/base",
+    "glow": "irregular_implements:block/glowing_mushroom/glow"
+  }
+}
