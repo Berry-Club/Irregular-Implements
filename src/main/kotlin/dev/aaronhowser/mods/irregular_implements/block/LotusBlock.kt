@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
@@ -13,7 +12,6 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
-import net.minecraft.world.level.block.BushBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -24,12 +22,11 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.common.CommonHooks
 
-class LotusBlock(
-	properties: Properties =
-		Properties
-			.ofFullCopy(Blocks.SWEET_BERRY_BUSH)
-			.randomTicks()
-) : BushBlock(properties), BonemealableBlock {
+class LotusBlock : NoCodecBushBlock(
+	Properties
+		.ofFullCopy(Blocks.SWEET_BERRY_BUSH)
+		.randomTicks()
+), BonemealableBlock {
 
 	init {
 		registerDefaultState(
@@ -40,10 +37,6 @@ class LotusBlock(
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
 		builder.add(AGE)
-	}
-
-	override fun codec(): MapCodec<LotusBlock> {
-		return CODEC
 	}
 
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -97,8 +90,6 @@ class LotusBlock(
 		const val MAXIMUM_AGE = 3
 
 		val SHAPE: VoxelShape = box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0)
-
-		val CODEC: MapCodec<LotusBlock> = simpleCodec(::LotusBlock)
 	}
 
 }
