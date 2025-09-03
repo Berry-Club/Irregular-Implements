@@ -19,6 +19,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
+import net.neoforged.neoforge.common.Tags
 
 object ModConfiguredFeatures {
 
@@ -26,13 +27,14 @@ object ModConfiguredFeatures {
 	val PITCHER_PLANT = registerKey("pitcher_plant")
 	val SPECTRE_TREE = registerKey("spectre_tree")
 	val NATURE_CORE = registerKey("nature_core")
+	val GLOWING_MUSHROOM = registerKey("glowing_mushroom")
 
 	fun bootstrap(context: BootstrapContext<ConfiguredFeature<*, *>>) {
 		register(
 			context,
 			LOTUS_BUSH,
 			Feature.RANDOM_PATCH,
-			singleBlock(
+			singleBlockAboveDirt(
 				ModBlocks.LOTUS.get()
 					.defaultBlockState()
 					.setValue(LotusBlock.AGE, LotusBlock.MAXIMUM_AGE)
@@ -43,7 +45,7 @@ object ModConfiguredFeatures {
 			context,
 			PITCHER_PLANT,
 			Feature.FLOWER,
-			singleBlock(
+			singleBlockAboveDirt(
 				ModBlocks.PITCHER_PLANT.get()
 					.defaultBlockState()
 			)
@@ -70,9 +72,29 @@ object ModConfiguredFeatures {
 			FeatureConfiguration.NONE
 		)
 
+		register(
+			context,
+			GLOWING_MUSHROOM,
+			Feature.RANDOM_PATCH,
+			RandomPatchConfiguration(
+				64,
+				0,
+				0,
+				PlacementUtils.filtered(
+					Feature.SIMPLE_BLOCK,
+					SimpleBlockConfiguration(
+						BlockStateProvider.simple(ModBlocks.GLOWING_MUSHROOM.get())
+					),
+					BlockPredicate.allOf(
+						BlockPredicate.ONLY_IN_AIR_PREDICATE,
+						BlockPredicate.matchesTag(Direction.DOWN.normal, Tags.Blocks.STONES)
+					)
+				)
+			)
+		)
 	}
 
-	private fun singleBlock(stateToPlace: BlockState): RandomPatchConfiguration {
+	private fun singleBlockAboveDirt(stateToPlace: BlockState): RandomPatchConfiguration {
 		return RandomPatchConfiguration(
 			96,
 			0,

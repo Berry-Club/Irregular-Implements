@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
+import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.placement.*
 import net.neoforged.neoforge.common.Tags
@@ -18,6 +19,7 @@ object ModPlacedFeatures {
 	val LOTUS_BUSH: ResourceKey<PlacedFeature> = registerKey("lotus_bush")
 	val PITCHER_PLANT: ResourceKey<PlacedFeature> = registerKey("pitcher_plant")
 	val NATURE_CORE: ResourceKey<PlacedFeature> = registerKey("nature_core")
+	val GLOWING_MUSHROOM: ResourceKey<PlacedFeature> = registerKey("glowing_mushroom")
 
 	fun bootstrap(context: BootstrapContext<PlacedFeature>) {
 		val configuredFeatures: HolderGetter<ConfiguredFeature<*, *>> = context.lookup(Registries.CONFIGURED_FEATURE)
@@ -42,6 +44,18 @@ object ModPlacedFeatures {
 				RarityFilter.onAverageOnceEvery(10),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+				BiomeFilter.biome()
+			)
+		)
+
+		register(
+			context,
+			GLOWING_MUSHROOM,
+			configuredFeatures.getOrThrow(ModConfiguredFeatures.GLOWING_MUSHROOM),
+			listOf(
+				RarityFilter.onAverageOnceEvery(24),
+				InSquarePlacement.spread(),
+				HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top()),
 				BiomeFilter.biome()
 			)
 		)
