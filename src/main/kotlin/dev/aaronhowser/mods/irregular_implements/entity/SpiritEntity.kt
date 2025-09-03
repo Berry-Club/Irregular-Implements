@@ -166,14 +166,17 @@ class SpiritEntity(
 			val level = entity.level() as? ServerLevel ?: return
 
 			if (level.random.nextDouble() < getSpawnChance(level)) {
-				ModEntityTypes.SPIRIT.get().spawn(level, entity.blockPosition(), MobSpawnType.TRIGGERED)
+				ModEntityTypes.SPIRIT.get()
+					.spawn(level, entity.blockPosition(), MobSpawnType.TRIGGERED)
 			}
 		}
 
 		fun getSpawnChance(level: ServerLevel): Double {
 			var chance = ServerConfig.SPIRIT_BASE_SPAWN_CHANCE.get()
 
-			if (level.server.worldData.endDragonFightData().previouslyKilled) chance += ServerConfig.SPIRIT_SPAWN_DRAGON_KILLED_BONUS.get()
+			if (level.server.worldData.endDragonFightData().previouslyKilled) {
+				chance += ServerConfig.SPIRIT_SPAWN_DRAGON_KILLED_BONUS.get()
+			}
 
 			val moonPhase = level.moonPhase
 			val distToFull = minOf(moonPhase, 8 - moonPhase)
