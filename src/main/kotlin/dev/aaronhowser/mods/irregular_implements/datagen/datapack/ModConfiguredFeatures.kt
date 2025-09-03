@@ -34,7 +34,7 @@ object ModConfiguredFeatures {
 			context,
 			LOTUS_BUSH,
 			Feature.RANDOM_PATCH,
-			singleBlockAboveDirt(
+			singleBlock(
 				ModBlocks.LOTUS.get()
 					.defaultBlockState()
 					.setValue(LotusBlock.AGE, LotusBlock.MAXIMUM_AGE)
@@ -45,7 +45,7 @@ object ModConfiguredFeatures {
 			context,
 			PITCHER_PLANT,
 			Feature.FLOWER,
-			singleBlockAboveDirt(
+			singleBlock(
 				ModBlocks.PITCHER_PLANT.get()
 					.defaultBlockState()
 			)
@@ -94,7 +94,7 @@ object ModConfiguredFeatures {
 		)
 	}
 
-	private fun singleBlockAboveDirt(stateToPlace: BlockState): RandomPatchConfiguration {
+	private fun singleBlock(stateToPlace: BlockState): RandomPatchConfiguration {
 		return RandomPatchConfiguration(
 			96,
 			0,

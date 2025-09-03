@@ -53,7 +53,7 @@ object ModPlacedFeatures {
 			GLOWING_MUSHROOM,
 			configuredFeatures.getOrThrow(ModConfiguredFeatures.GLOWING_MUSHROOM),
 			listOf(
-				RarityFilter.onAverageOnceEvery(24),
+				RarityFilter.onAverageOnceEvery(1),
 				InSquarePlacement.spread(),
 				HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top()),
 				BiomeFilter.biome()
