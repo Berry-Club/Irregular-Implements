@@ -207,7 +207,7 @@ class SpectreIlluminatorEntity(
 			val iterable = BlockPos.betweenClosed(minX, minY, minZ, maxX, maxY, maxZ)
 
 			for (pos in iterable) {
-				level.chunkSource.lightEngine.checkBlock(pos.mutable())
+				level.chunkSource.lightEngine.checkBlock(pos.immutable())
 			}
 		}
 
