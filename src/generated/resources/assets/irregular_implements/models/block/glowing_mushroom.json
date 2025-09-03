@@ -1,14 +1,92 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/block",
   "elements": [
     {
       "faces": {
-        "down": {
-          "texture": "minecraft:missingno"
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
         },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        0.8,
+        0,
+        8
+      ],
+      "rotation": {
+        "angle": 45.0,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "shade": false,
+      "to": [
+        15.2,
+        16,
+        8
+      ]
+    },
+    {
+      "faces": {
         "east": {
-          "texture": "minecraft:missingno"
+          "texture": "#base",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
         },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        8,
+        0,
+        0.8
+      ],
+      "rotation": {
+        "angle": 45.0,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "shade": false,
+      "to": [
+        8,
+        16,
+        15.2
+      ]
+    },
+    {
+      "faces": {
         "north": {
           "texture": "#glow",
           "uv": [
@@ -26,12 +104,6 @@
             16.0,
             16.0
           ]
-        },
-        "up": {
-          "texture": "minecraft:missingno"
-        },
-        "west": {
-          "texture": "minecraft:missingno"
         }
       },
       "from": [
@@ -50,8 +122,7 @@
           8,
           8,
           8
-        ],
-        "rescale": true
+        ]
       },
       "shade": false,
       "to": [
@@ -62,9 +133,6 @@
     },
     {
       "faces": {
-        "down": {
-          "texture": "minecraft:missingno"
-        },
         "east": {
           "texture": "#glow",
           "uv": [
@@ -73,15 +141,6 @@
             16.0,
             16.0
           ]
-        },
-        "north": {
-          "texture": "minecraft:missingno"
-        },
-        "south": {
-          "texture": "minecraft:missingno"
-        },
-        "up": {
-          "texture": "minecraft:missingno"
         },
         "west": {
           "texture": "#glow",
@@ -109,8 +168,7 @@
           8,
           8,
           8
-        ],
-        "rescale": true
+        ]
       },
       "shade": false,
       "to": [
@@ -120,9 +178,9 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
-    "cross": "irregular_implements:block/glowing_mushroom/base",
+    "base": "irregular_implements:block/glowing_mushroom/base",
     "glow": "irregular_implements:block/glowing_mushroom/glow"
   }
 }

@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.neoforged.neoforge.client.model.generators.*
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import net.neoforged.neoforge.registries.DeferredBlock
-import org.joml.Vector3f
 
 class ModBlockStateProvider(
 	output: PackOutput,
@@ -201,9 +200,9 @@ class ModBlockStateProvider(
 				.renderType(RenderType.cutout().name)
 				.texture("texture", texture)
 				.texture("particle", texture)
+
 				.element()
-				.from(x1, y1, z1)
-				.to(x2, y2, z2)
+				.from(x1, y1, z1).to(x2, y2, z2)
 				.textureAll("#texture")
 				.end()
 
@@ -234,8 +233,7 @@ class ModBlockStateProvider(
 				.texture("particle", mailboxBodyTexture)
 
 				.element()
-				.from(6f, 0f, 6f)
-				.to(10f, 16f, 10f)
+				.from(6f, 0f, 6f).to(10f, 16f, 10f)
 				.allFaces { dir, fb ->
 					when (dir) {
 						Direction.DOWN -> fb.uvs(9f, 9f, 7f, 7f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
@@ -248,8 +246,7 @@ class ModBlockStateProvider(
 				.end()
 
 				.element()
-				.from(5f, 15f, 1f)
-				.to(11f, 22f, 15f)
+				.from(5f, 15f, 1f).to(11f, 22f, 15f)
 				.allFaces { dir, fb ->
 					when (dir) {
 						Direction.DOWN -> fb.uvs(9.5f, 11.5f, 6.5f, 4.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
@@ -290,8 +287,7 @@ class ModBlockStateProvider(
 				if (isFlagRaised) {
 					model
 						.element()
-						.from(4f, 23f, 4f)
-						.to(5f, 25f, 5f)
+						.from(4f, 23f, 4f).to(5f, 25f, 5f)
 						.allFaces { dir, fb ->
 							when (dir) {
 								Direction.DOWN -> fb.uvs(6.5f, 10f, 6f, 9.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
@@ -307,8 +303,7 @@ class ModBlockStateProvider(
 						.end()
 
 						.element()
-						.from(4f, 19f, 3f)
-						.to(5f, 25f, 4f)
+						.from(4f, 19f, 3f).to(5f, 25f, 4f)
 						.allFaces { dir, fb ->
 							when (dir) {
 								Direction.DOWN -> fb.uvs(6.5f, 10.5f, 6f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
@@ -325,8 +320,7 @@ class ModBlockStateProvider(
 				} else {
 					model
 						.element()
-						.from(4f, 18f, 7f)
-						.to(5f, 19f, 9f)
+						.from(4f, 18f, 7f).to(5f, 19f, 9f)
 						.allFaces { dir, fb ->
 							when (dir) {
 								Direction.DOWN -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
@@ -342,8 +336,7 @@ class ModBlockStateProvider(
 						.end()
 
 						.element()
-						.from(4f, 19f, 3f)
-						.to(5f, 20f, 9f)
+						.from(4f, 19f, 3f).to(5f, 20f, 9f)
 						.allFaces { dir, fb ->
 							when (dir) {
 								Direction.DOWN -> fb.uvs(6f, 3.5f, 6.5f, 6.5f)
@@ -406,8 +399,7 @@ class ModBlockStateProvider(
 				.texture("particle", texture)
 
 				.element()
-				.from(6f, 0f, 6f)
-				.to(10f, 1f, 10f)
+				.from(6f, 0f, 6f).to(10f, 1f, 10f)
 				.allFaces { direction, modelBuilder ->
 					if (direction.axis.isVertical) {
 						modelBuilder.uvs(6f, 12f, 10f, 16f)
@@ -420,8 +412,7 @@ class ModBlockStateProvider(
 				.end()
 
 				.element()
-				.from(6.5f, 1f, 6.5f)
-				.to(9.5f, 2f, 9.5f)
+				.from(6.5f, 1f, 6.5f).to(9.5f, 2f, 9.5f)
 				.allFaces { direction, modelBuilder ->
 					if (direction == Direction.DOWN) {
 						modelBuilder.uvs(9f, 15f, 7f, 14f)
@@ -434,8 +425,7 @@ class ModBlockStateProvider(
 				.end()
 
 				.element()
-				.from(7.5f, 2f, 7.5f)
-				.to(8.5f, 4f, 8.5f)
+				.from(7.5f, 2f, 7.5f).to(8.5f, 4f, 8.5f)
 				.allFaces { direction, modelBuilder ->
 					when (direction) {
 						Direction.DOWN -> modelBuilder.uvs(7f, 13f, 6f, 12f)
@@ -448,8 +438,7 @@ class ModBlockStateProvider(
 				.end()
 
 				.element()
-				.from(7.5f, 4f, 7.5f)
-				.to(8.5f, 5f, 8.5f)
+				.from(7.5f, 4f, 7.5f).to(8.5f, 5f, 8.5f)
 				.allFaces { direction, modelBuilder ->
 					if (direction == Direction.DOWN) {
 						modelBuilder.uvs(7f, 10f, 6f, 9f)
@@ -530,8 +519,7 @@ class ModBlockStateProvider(
 			.texture("side", slabTexture)
 			.texture("particle", texture)
 			.element()
-			.from(6f, 0f, 6f)
-			.to(10f, 1f, 10f)
+			.from(6f, 0f, 6f).to(10f, 1f, 10f)
 			.allFaces { face, modelBuilder ->
 				if (face.axis.isVertical) {
 					modelBuilder.texture("#texture")
@@ -919,14 +907,12 @@ class ModBlockStateProvider(
 					.texture("particle", texture)
 
 					.element()
-					.from(6f, 6f, 6f)
-					.to(10f, 10f, 10f)
+					.from(6f, 6f, 6f).to(10f, 10f, 10f)
 					.textureAll("#texture")
 					.end()
 
 					.element()
-					.from(7f, 7f, 7f)
-					.to(9f, 9f, 9f)
+					.from(7f, 7f, 7f).to(9f, 9f, 9f)
 					.textureAll("#inner")
 					.emissivity(15, 15)
 					.end()
@@ -958,8 +944,7 @@ class ModBlockStateProvider(
 			.withExistingParent(name(block) + "_pedestal", "block/block")
 			.texture("all", mcLoc("block/obsidian"))
 			.element()
-			.from(1f, 0.1f, 1f)
-			.to(15f, 2f, 15f)
+			.from(1f, 0.1f, 1f).to(15f, 2f, 15f)
 			.textureAll("#all")
 			.end()
 
@@ -981,14 +966,12 @@ class ModBlockStateProvider(
 			.renderType(RenderType.translucent().name)
 
 			.element()
-			.from(0f, 0f, 0f)
-			.to(16f, 16f, 16f)
+			.from(0f, 0f, 0f).to(16f, 16f, 16f)
 			.textureAll("#case")
 			.end()
 
 			.element()
-			.from(1f, 0.1f, 1f)
-			.to(15f, 2f, 15f)
+			.from(1f, 0.1f, 1f).to(15f, 2f, 15f)
 			.textureAll("#pedestal")
 			.end()
 
@@ -1015,8 +998,7 @@ class ModBlockStateProvider(
 			.texture("texture", texture)
 			.texture("particle", texture)
 			.element()
-			.from(0f, 0f, 0f)
-			.to(16f, 1f, 16f)
+			.from(0f, 0f, 0f).to(16f, 1f, 16f)
 			.textureAll("#texture")
 			.end()
 			.renderType(RenderType.translucent().name)
@@ -1446,14 +1428,12 @@ class ModBlockStateProvider(
 					.renderType(RenderType.cutout().name)
 
 					.element()
-					.from(0f, 0f, 0f)
-					.to(16f, 16f, 16f)
+					.from(0f, 0f, 0f).to(16f, 16f, 16f)
 					.textureAll("#all")
 					.end()
 
 					.element()
-					.from(-0.01f, -0.01f, -0.01f)
-					.to(16.01f, 16.01f, 16.01f)
+					.from(-0.01f, -0.01f, -0.01f).to(16.01f, 16.01f, 16.01f)
 					.emissivity(15, 15)
 
 					.face(Direction.NORTH)
@@ -1527,14 +1507,12 @@ class ModBlockStateProvider(
 					.renderType(RenderType.translucent().name)
 
 					.element()
-					.from(0f, 0f, 0f)
-					.to(16f, height, 16f)
+					.from(0f, 0f, 0f).to(16f, height, 16f)
 					.textureAll("#all")
 					.end()
 
 					.element()
-					.from(2f, innerBottom, 2f)
-					.to(14f, innerTop, 14f)
+					.from(2f, innerBottom, 2f).to(14f, innerTop, 14f)
 					.textureAll("#all")
 					.end()
 
@@ -1570,8 +1548,7 @@ class ModBlockStateProvider(
 						.texture("particle", texture)
 
 						.element()
-						.from(0f, 0f, 0f)
-						.to(16f, 15f, 16f)
+						.from(0f, 0f, 0f).to(16f, 15f, 16f)
 						.textureAll("#texture")
 						.end()
 				} else {
@@ -1690,8 +1667,7 @@ class ModBlockStateProvider(
 				.texture("particle", texture)
 
 				.element()
-				.from(0f, 0f, 0f)
-				.to(16f, 16f, 16f)
+				.from(0f, 0f, 0f).to(16f, 16f, 16f)
 				.allFaces { _, faceBuilder ->
 					faceBuilder.tintindex(0)
 				}
@@ -1839,59 +1815,54 @@ class ModBlockStateProvider(
 		}
 	}
 
-	//TODO: Glow
 	private fun glowingMushroom() {
 		val block = ModBlocks.GLOWING_MUSHROOM.get()
 
 		val base = modLoc("block/glowing_mushroom/base")
 		val glow = modLoc("block/glowing_mushroom/glow")
 
-		fun cross(
-			baseModel: BlockModelBuilder,
-			from: Vector3f,
-			to: Vector3f,
-			vararg directions: Direction
-		) {
-			// Just a copy of "blook/cross.json" with emissive added
-			baseModel.element()
-				.from(from.x, from.y, from.z)
-				.to(to.x, to.y, to.z)
-				.shade(false)
-				.emissivity(15, 15)
-				.allFaces { face, builder ->
-					if (face in directions) {
-						builder
-							.uvs(0f, 0f, 16f, 16f)
-							.texture("#glow")
-					}
-				}
-				.rotation()
-				.origin(8f, 8f, 8f)
-				.axis(Direction.Axis.Y)
-				.angle(45f)
-				.rescale(true)
-				.end()
-				.end()
-		}
-
-		val blockModel = models()
-			.cross(name(block), base)
+		val blockModel = models().withExistingParent(name(block), "block/block")
+			.texture("base", base)
 			.texture("glow", glow)
-			.renderType(RenderType.cutout().name)
+			.renderType(RenderType.cutoutMipped().name)
 
-		cross(
-			blockModel,
-			from = Vector3f(0.8f, 0f, 8f),
-			to = Vector3f(15.2f, 16f, 8f),
-			Direction.NORTH, Direction.SOUTH
-		)
+			// Base north/south
+			.element()
+			.from(0.8f, 0f, 8f).to(15.2f, 16f, 8f)
+			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+			.shade(false)
+			.face(Direction.NORTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+			.face(Direction.SOUTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+			.end()
 
-		cross(
-			blockModel,
-			from = Vector3f(8f, 0f, 0.8f),
-			to = Vector3f(8f, 16f, 15.2f),
-			Direction.EAST, Direction.WEST
-		)
+			// Base east/west
+			.element()
+			.from(8f, 0f, 0.8f).to(8f, 16f, 15.2f)
+			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+			.shade(false)
+			.face(Direction.EAST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+			.face(Direction.WEST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+			.end()
+
+			// Glow north/south
+			.element()
+			.from(0.8f, 0f, 8f).to(15.2f, 16f, 8f)
+			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+			.shade(false)
+			.emissivity(15, 15)
+			.face(Direction.NORTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+			.face(Direction.SOUTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+			.end()
+
+			// Glow east/west
+			.element()
+			.from(8f, 0f, 0.8f).to(8f, 16f, 15.2f)
+			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+			.shade(false)
+			.emissivity(15, 15)
+			.face(Direction.EAST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+			.face(Direction.WEST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+			.end()
 
 		simpleBlock(block, blockModel)
 
@@ -1998,8 +1969,7 @@ class ModBlockStateProvider(
 				.texture("particle", texture)
 
 				.element()
-				.from(0f, 15f, 0f)
-				.to(16f, 16f, 16f)
+				.from(0f, 15f, 0f).to(16f, 16f, 16f)
 				.textureAll("#texture")
 				.end()
 
