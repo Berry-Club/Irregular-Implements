@@ -15,7 +15,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 // Because fuck block codecs, they don't serialize so like why
 abstract class NoCodecBushBlock(properties: Properties) : Block(properties) {
 
-	protected open fun mayPlaceOn(state: BlockState, level: BlockGetter?, pos: BlockPos?): Boolean {
+	protected open fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
 		return state.`is`(BlockTags.DIRT) || state.getBlock() is FarmBlock
 	}
 

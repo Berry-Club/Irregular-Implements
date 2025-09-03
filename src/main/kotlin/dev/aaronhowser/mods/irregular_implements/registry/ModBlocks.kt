@@ -45,7 +45,8 @@ object ModBlocks {
 		registerBlockWithoutItem("bean_sprout", ::BeanSproutBlock)   //TODO: Naturally generating
 	val BEAN_POD: DeferredBlock<Block> =
 		registerBlock("bean_pod") { Block(Properties.ofFullCopy(Blocks.POTATOES).strength(0.5f)) }
-	val GLOWING_MUSHROOM = basicBlock("glowing_mushroom")
+	val GLOWING_MUSHROOM: DeferredBlock<GlowingMushroomBlock> =
+		registerBlock("glowing_mushroom", ::GlowingMushroomBlock)
 
 	// Loot blocks
 	val NATURE_CHEST: DeferredBlock<SpecialChestBlock> =
