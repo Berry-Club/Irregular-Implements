@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.data.worldgen.features.TreeFeatures
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
@@ -19,7 +20,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
-import net.neoforged.neoforge.common.Tags
 
 object ModConfiguredFeatures {
 
@@ -76,20 +76,9 @@ object ModConfiguredFeatures {
 			context,
 			GLOWING_MUSHROOM,
 			Feature.RANDOM_PATCH,
-			RandomPatchConfiguration(
-				64,
-				0,
-				0,
-				PlacementUtils.filtered(
-					Feature.SIMPLE_BLOCK,
-					SimpleBlockConfiguration(
-						BlockStateProvider.simple(ModBlocks.GLOWING_MUSHROOM.get())
-					),
-					BlockPredicate.allOf(
-						BlockPredicate.ONLY_IN_AIR_PREDICATE,
-						BlockPredicate.matchesTag(Direction.DOWN.normal, Tags.Blocks.STONES)
-					)
-				)
+			FeatureUtils.simplePatchConfiguration(
+				Feature.SIMPLE_BLOCK,
+				SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.GLOWING_MUSHROOM.get()))
 			)
 		)
 	}

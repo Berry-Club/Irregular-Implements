@@ -8,7 +8,6 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.placement.*
 import net.neoforged.neoforge.common.Tags
@@ -53,9 +52,9 @@ object ModPlacedFeatures {
 			GLOWING_MUSHROOM,
 			configuredFeatures.getOrThrow(ModConfiguredFeatures.GLOWING_MUSHROOM),
 			listOf(
-				RarityFilter.onAverageOnceEvery(1),
+				RarityFilter.onAverageOnceEvery(16),
 				InSquarePlacement.spread(),
-				HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top()),
+				PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
 				BiomeFilter.biome()
 			)
 		)
