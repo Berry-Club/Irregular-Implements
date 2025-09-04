@@ -8,8 +8,10 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.resources.ResourceKey
+import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.placement.*
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
 import net.neoforged.neoforge.common.Tags
 
 
@@ -54,7 +56,7 @@ object ModPlacedFeatures {
 			listOf(
 				RarityFilter.onAverageOnceEvery(16),
 				InSquarePlacement.spread(),
-				PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+				HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(64)),
 				BiomeFilter.biome()
 			)
 		)
