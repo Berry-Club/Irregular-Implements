@@ -33,7 +33,7 @@ class DiaphanousBlockEntityRenderer(
 		val level = blockEntity.level ?: return
 
 		val player = ClientUtil.localPlayer ?: return
-		val distance = player.distanceToSqr(blockEntity.blockPos.center)
+		val distance = player.getPosition(partialTick).distanceToSqr(blockEntity.blockPos.center)
 
 		val clampedDistance = (distance - 8).coerceIn(0.0, 25.0).toFloat()
 		val cosValue = cos(Mth.PI * clampedDistance / 25)
@@ -68,14 +68,15 @@ class DiaphanousBlockEntityRenderer(
 				null
 			)
 
-			for (quad in quads) {
+			val blockColors = Minecraft.getInstance().blockColors
 
+			for (quad in quads) {
 				val tintIndex = quad.tintIndex
 
 				val color = if (tintIndex == -1) {
 					0xFFFFFFFF.toInt()
 				} else {
-					Minecraft.getInstance().blockColors.getColor(
+					blockColors.getColor(
 						stateToRender, level, blockEntity.blockPos, tintIndex
 					)
 				}
