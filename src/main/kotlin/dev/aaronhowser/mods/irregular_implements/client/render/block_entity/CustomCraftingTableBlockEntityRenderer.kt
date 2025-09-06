@@ -23,8 +23,6 @@ class CustomCraftingTableBlockEntityRenderer(
 	) {
 		poseStack.pushPose()
 
-		poseStack.translate(0f, 0.1f, 0f)
-
 		RenderUtil.renderTexturedCube(
 			poseStack,
 			RenderType.translucent(),
@@ -40,13 +38,13 @@ class CustomCraftingTableBlockEntityRenderer(
 		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 
 		@Suppress("DEPRECATION")
-		context.blockRenderDispatcher.renderSingleBlock(
-			blockEntity.renderedBlockState,
-			poseStack,
-			bufferSource,
-			packedLight,
-			packedOverlay,
-		)
+//		context.blockRenderDispatcher.renderSingleBlock(
+//			blockEntity.renderedBlockState,
+//			poseStack,
+//			bufferSource,
+//			packedLight,
+//			packedOverlay,
+//		)
 
 		poseStack.popPose()
 	}

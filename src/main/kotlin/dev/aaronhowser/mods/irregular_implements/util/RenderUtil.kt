@@ -191,80 +191,22 @@ object RenderUtil {
 		poseStack.pushPose()
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
-		renderCube(
-			poseStack,
-			vertexConsumer,
-			width,
-			length,
-			height,
-			color
-		)
+		for (direction in Direction.entries) {
+			val pose = poseStack.last()
+			val vertices = getVertices(direction, width, if (direction.axis.isVertical) length else height)
+
+			for (vertex in vertices) {
+				addVertex(
+					pose,
+					vertexConsumer,
+					color,
+					vertex.x, vertex.y, vertex.z,
+					0f, 0f
+				)
+			}
+		}
 
 		poseStack.popPose()
-	}
-
-	/** Assumes that the posestack is already translated to where it needs to be */
-	fun renderCube(
-		poseStack: PoseStack,
-		vertexConsumer: VertexConsumer,
-		width: Float,
-		length: Float,
-		height: Float,
-		color: Int
-	) {
-		renderFace(
-			poseStack,
-			vertexConsumer,
-			0f, 0f, 0f,
-			width, length,
-			color,
-			Direction.DOWN
-		)
-
-		renderFace(
-			poseStack,
-			vertexConsumer,
-			0f, height, 0f,
-			width, length,
-			color,
-			Direction.UP
-		)
-
-		renderFace(
-			poseStack,
-			vertexConsumer,
-			0f, 0f, 0f,
-			width, height,
-			color,
-			Direction.NORTH
-		)
-
-		renderFace(
-			poseStack,
-			vertexConsumer,
-			0f, 0f, length,
-			width, height,
-			color,
-			Direction.SOUTH
-		)
-
-		renderFace(
-			poseStack,
-			vertexConsumer,
-			0f, 0f, 0f,
-			length, height,
-			color,
-			Direction.WEST
-		)
-
-		renderFace(
-			poseStack,
-			vertexConsumer,
-			width, 0f, 0f,
-			length, height,
-			color,
-			Direction.EAST
-		)
 	}
 
 	fun renderTexturedCube(
@@ -303,8 +245,6 @@ object RenderUtil {
 		val pose = poseStack.last()
 
 		for ((direction, sprite) in map) {
-			if (direction == Direction.UP) continue
-
 			poseStack.pushPose()
 
 			when (direction) {
@@ -335,44 +275,14 @@ object RenderUtil {
 
 	}
 
-	fun renderFace(
-		poseStack: PoseStack,
-		vertexConsumer: VertexConsumer,
-		posX: Number,
-		posY: Number,
-		posZ: Number,
-		width: Float,
-		length: Float,
-		color: Int,
-		direction: Direction
-	) {
-		poseStack.pushPose()
-		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
-
-		val pose = poseStack.last()
-		val vertices = getVertices(direction, width, length)
-
-		for (vertex in vertices) {
-			addVertex(
-				pose,
-				vertexConsumer,
-				color,
-				vertex.x, vertex.y, vertex.z,
-				0f, 0f
-			)
-		}
-
-		poseStack.popPose()
-	}
-
 	/** @param length is used as height for UP and DOWN faces */
 	fun getVertices(direction: Direction, width: Float, length: Float): List<Vector3f> {
 		return when (direction) {
 			Direction.UP -> listOf(
-				Vector3f(0f, 0f, length),
-				Vector3f(width, 0f, length),
-				Vector3f(width, 0f, 0f),
-				Vector3f(0f, 0f, 0f)
+				Vector3f(0f, 1f, length),
+				Vector3f(width, 1f, length),
+				Vector3f(width, 1f, 0f),
+				Vector3f(0f, 1f, 0f)
 			)
 
 			Direction.DOWN -> listOf(
@@ -390,17 +300,17 @@ object RenderUtil {
 			)
 
 			Direction.SOUTH -> listOf(
-				Vector3f(width, 0f, 0f),
-				Vector3f(width, length, 0f),
-				Vector3f(0f, length, 0f),
-				Vector3f(0f, 0f, 0f)
+				Vector3f(width, 0f, 1f),
+				Vector3f(width, length, 1f),
+				Vector3f(0f, length, 1f),
+				Vector3f(0f, 0f, 1f)
 			)
 
 			Direction.EAST -> listOf(
-				Vector3f(0f, 0f, 0f),
-				Vector3f(0f, length, 0f),
-				Vector3f(0f, length, width),
-				Vector3f(0f, 0f, width)
+				Vector3f(1f, 0f, 0f),
+				Vector3f(1f, length, 0f),
+				Vector3f(1f, length, width),
+				Vector3f(1f, 0f, width)
 			)
 
 			Direction.WEST -> listOf(
