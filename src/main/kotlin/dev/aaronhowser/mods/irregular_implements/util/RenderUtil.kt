@@ -278,9 +278,9 @@ object RenderUtil {
 		return when (direction) {
 			Direction.UP -> listOf(topSouthWest, topSouthEast, topNorthEast, topNorthWest)
 			Direction.DOWN -> listOf(bottomNorthWest, bottomNorthEast, bottomSouthEast, bottomSouthWest)
-			Direction.NORTH -> listOf(topNorthWest, topNorthEast, bottomNorthEast, bottomNorthWest)
+			Direction.NORTH -> listOf(bottomNorthEast, bottomNorthWest, topNorthWest, topNorthEast)
 			Direction.SOUTH -> listOf(bottomSouthWest, bottomSouthEast, topSouthEast, topSouthWest)
-			Direction.EAST -> listOf(topNorthEast, topSouthEast, bottomSouthEast, bottomNorthEast)
+			Direction.EAST -> listOf(bottomSouthEast, bottomNorthEast, topNorthEast, topSouthEast)
 			Direction.WEST -> listOf(bottomNorthWest, bottomSouthWest, topSouthWest, topNorthWest)
 		}
 	}

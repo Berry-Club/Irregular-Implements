@@ -27,7 +27,7 @@ class CustomCraftingTableBlockEntityRenderer(
 			poseStack,
 			RenderType.translucent(),
 			TOP, BOTTOM,
-			FRONT, FRONT, FRONT, FRONT,
+			SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
 		)
 
 		poseStack.popPose()
@@ -52,8 +52,8 @@ class CustomCraftingTableBlockEntityRenderer(
 	companion object {
 		val BOTTOM = OtherUtil.modResource("block/custom_crafting_table/bottom")
 		val TOP = OtherUtil.modResource("block/custom_crafting_table/top")
-		val FRONT = OtherUtil.modResource("block/custom_crafting_table/front")
-		val SIDE = OtherUtil.modResource("block/custom_crafting_table/side")
+		val SAW_AND_HAMMER = OtherUtil.modResource("block/custom_crafting_table/saw_and_hammer")
+		val SCISSORS = OtherUtil.modResource("block/custom_crafting_table/scissors")
 	}
 
 }
