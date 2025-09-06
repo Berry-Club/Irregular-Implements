@@ -190,6 +190,27 @@ object RenderUtil {
 		poseStack.pushPose()
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
+		renderCube(
+			poseStack,
+			vertexConsumer,
+			width,
+			length,
+			height,
+			color
+		)
+
+		poseStack.popPose()
+	}
+
+	/** Assumes that the posestack is already translated to where it needs to be */
+	fun renderCube(
+		poseStack: PoseStack,
+		vertexConsumer: VertexConsumer,
+		width: Float,
+		length: Float,
+		height: Float,
+		color: Int
+	) {
 		renderFace(
 			poseStack,
 			vertexConsumer,
@@ -243,8 +264,6 @@ object RenderUtil {
 			color,
 			Direction.EAST
 		)
-
-		poseStack.popPose()
 	}
 
 	/** @param length is used as height for UP and DOWN faces */
