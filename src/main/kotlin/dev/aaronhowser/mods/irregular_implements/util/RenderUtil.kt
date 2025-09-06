@@ -279,10 +279,10 @@ object RenderUtil {
 	fun getVertices(direction: Direction, width: Float, length: Float): List<Vector3f> {
 		return when (direction) {
 			Direction.UP -> listOf(
-				Vector3f(0f, 1f, length),
-				Vector3f(width, 1f, length),
-				Vector3f(width, 1f, 0f),
-				Vector3f(0f, 1f, 0f)
+				Vector3f(0f, length, length),
+				Vector3f(width, length, length),
+				Vector3f(width, length, 0f),
+				Vector3f(0f, length, 0f)
 			)
 
 			Direction.DOWN -> listOf(
@@ -300,17 +300,17 @@ object RenderUtil {
 			)
 
 			Direction.SOUTH -> listOf(
-				Vector3f(width, 0f, 1f),
-				Vector3f(width, length, 1f),
-				Vector3f(0f, length, 1f),
-				Vector3f(0f, 0f, 1f)
+				Vector3f(width, 0f, width),
+				Vector3f(width, length, width),
+				Vector3f(0f, length, width),
+				Vector3f(0f, 0f, width)
 			)
 
 			Direction.EAST -> listOf(
-				Vector3f(1f, 0f, 0f),
-				Vector3f(1f, length, 0f),
-				Vector3f(1f, length, width),
-				Vector3f(1f, 0f, width)
+				Vector3f(width, 0f, 0f),
+				Vector3f(width, length, 0f),
+				Vector3f(width, length, width),
+				Vector3f(width, 0f, width)
 			)
 
 			Direction.WEST -> listOf(
