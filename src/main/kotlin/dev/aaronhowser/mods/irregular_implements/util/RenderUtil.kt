@@ -303,6 +303,18 @@ object RenderUtil {
 		val pose = poseStack.last()
 
 		for ((direction, sprite) in map) {
+			if (direction == Direction.UP) continue
+
+			poseStack.pushPose()
+
+			when (direction) {
+				Direction.UP -> poseStack.translate(0f, 1f, 0f)
+				Direction.SOUTH -> poseStack.translate(0f, 0f, 1f)
+				Direction.EAST -> poseStack.translate(1f, 0f, 0f)
+
+				else -> {}
+			}
+
 			val vertices = getVertices(direction, 1f, 1f)
 
 			for ((index, vector) in vertices.withIndex()) {
@@ -317,6 +329,8 @@ object RenderUtil {
 					u, v
 				)
 			}
+
+			poseStack.popPose()
 		}
 
 	}
