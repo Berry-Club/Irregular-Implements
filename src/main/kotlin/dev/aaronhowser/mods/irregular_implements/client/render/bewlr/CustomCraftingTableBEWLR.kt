@@ -32,7 +32,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	) {
 		val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
 
-		renderCraftingTable(poseStack, displayContext, itemToRender)
+		renderCraftingTableOverlay(poseStack, displayContext, itemToRender)
 
 		renderBaseItem(
 			poseStack,
@@ -45,7 +45,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	}
 
 	//TODO: It's translated incorrectly
-	private fun renderCraftingTable(
+	private fun renderCraftingTableOverlay(
 		poseStack: PoseStack,
 		displayContext: ItemDisplayContext,
 		itemToRender: Item
