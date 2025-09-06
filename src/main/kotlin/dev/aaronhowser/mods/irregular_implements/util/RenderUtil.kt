@@ -154,13 +154,13 @@ object RenderUtil {
 		poseStack.popPose()
 	}
 
-	fun renderCube(
+	fun renderDebugCube(
 		poseStack: PoseStack,
 		center: Vec3,
 		width: Float,
 		color: Int
 	) {
-		renderCube(
+		renderDebugCube(
 			poseStack,
 			center.x - width / 2,
 			center.y - width / 2,
@@ -172,7 +172,7 @@ object RenderUtil {
 		)
 	}
 
-	fun renderCube(
+	fun renderDebugCube(
 		poseStack: PoseStack,
 		posX: Number,
 		posY: Number,

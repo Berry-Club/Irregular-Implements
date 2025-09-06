@@ -55,7 +55,7 @@ object RedstoneToolRenderer {
 		poseStack.mulPose(event.modelViewMatrix)
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		RenderUtil.renderCube(
+		RenderUtil.renderDebugCube(
 			poseStack,
 			mainPos.center,
 			0.9f,
@@ -63,7 +63,7 @@ object RedstoneToolRenderer {
 		)
 
 		if (linkedPos != null) {
-			RenderUtil.renderCube(
+			RenderUtil.renderDebugCube(
 				poseStack,
 				linkedPos.center,
 				0.9f,
