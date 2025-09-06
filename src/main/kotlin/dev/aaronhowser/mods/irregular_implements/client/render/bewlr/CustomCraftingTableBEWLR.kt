@@ -22,7 +22,6 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().entityModels
 ) {
 
-	//TODO: Render the crafting table part
 	override fun renderByItem(
 		stack: ItemStack,
 		displayContext: ItemDisplayContext,
@@ -31,7 +30,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		renderCraftingTable(poseStack)
+		renderCraftingTable(poseStack, displayContext)
 
 		renderBaseItem(
 			poseStack,
@@ -43,8 +42,10 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		)
 	}
 
+	//TODO: Use the displayContext or whatever to modify the pose stack
 	private fun renderCraftingTable(
-		poseStack: PoseStack
+		poseStack: PoseStack,
+		displayContext: ItemDisplayContext
 	) {
 		poseStack.pushPose()
 
