@@ -30,24 +30,35 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		renderCraftingTable(poseStack, displayContext)
+		val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
+
+		renderCraftingTable(poseStack, displayContext, itemToRender)
 
 		renderBaseItem(
 			poseStack,
 			buffer,
 			displayContext,
-			itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS,
+			itemToRender,
 			packedLight,
 			packedOverlay,
 		)
 	}
 
-	//TODO: Use the displayContext or whatever to modify the pose stack
+	//TODO: It's translated incorrectly
 	private fun renderCraftingTable(
 		poseStack: PoseStack,
-		displayContext: ItemDisplayContext
+		displayContext: ItemDisplayContext,
+		itemToRender: Item
 	) {
 		poseStack.pushPose()
+
+		val itemTransform = Minecraft.getInstance()
+			.itemRenderer
+			.getModel(itemToRender.defaultInstance, null, null, 0)
+			.transforms
+			.getTransform(displayContext)
+
+		itemTransform.apply(false, poseStack)
 
 		RenderUtil.renderTexturedCube(
 			poseStack,
