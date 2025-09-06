@@ -245,6 +245,8 @@ object RenderUtil {
 		val pose = poseStack.last()
 
 		for ((direction, sprite) in map) {
+			if (direction == Direction.DOWN) continue
+
 			val vertices = getVertices(direction, 1f, 1f)
 
 			for ((index, vector) in vertices.withIndex()) {

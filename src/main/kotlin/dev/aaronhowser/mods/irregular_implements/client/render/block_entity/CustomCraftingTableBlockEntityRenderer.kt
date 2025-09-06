@@ -13,6 +13,7 @@ class CustomCraftingTableBlockEntityRenderer(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<CustomCraftingTableBlockEntity> {
 
+	//FIXME: Either allow it to be translucent or make the top texture not have translucency
 	override fun render(
 		blockEntity: CustomCraftingTableBlockEntity,
 		partialTick: Float,
@@ -21,16 +22,12 @@ class CustomCraftingTableBlockEntityRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		poseStack.pushPose()
-
 		RenderUtil.renderTexturedCube(
 			poseStack,
-			RenderType.translucent(),
+			RenderType.cutout(),
 			TOP, BOTTOM,
 			SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
 		)
-
-		poseStack.popPose()
 
 		poseStack.pushPose()
 
@@ -38,13 +35,13 @@ class CustomCraftingTableBlockEntityRenderer(
 		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 
 		@Suppress("DEPRECATION")
-//		context.blockRenderDispatcher.renderSingleBlock(
-//			blockEntity.renderedBlockState,
-//			poseStack,
-//			bufferSource,
-//			packedLight,
-//			packedOverlay,
-//		)
+		context.blockRenderDispatcher.renderSingleBlock(
+			blockEntity.renderedBlockState,
+			poseStack,
+			bufferSource,
+			packedLight,
+			packedOverlay,
+		)
 
 		poseStack.popPose()
 	}
