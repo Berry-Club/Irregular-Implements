@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.core.Direction
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.RandomSource
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.phys.Vec3
@@ -266,7 +267,60 @@ object RenderUtil {
 		)
 	}
 
-	/** @param length is used as height for UP and DOWN faces */
+	fun renderTexturedCube(
+		poseStack: PoseStack,
+		renderType: RenderType,
+		topTextureLocation: ResourceLocation,
+		bottomTextureLocation: ResourceLocation,
+		northTextureLocation: ResourceLocation,
+		southTextureLocation: ResourceLocation,
+		eastTextureLocation: ResourceLocation,
+		westTextureLocation: ResourceLocation,
+	) {
+		val textureAtlas = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+
+		val topSprite = textureAtlas.apply(topTextureLocation)
+		val bottomSprite = textureAtlas.apply(bottomTextureLocation)
+		val westSprite = textureAtlas.apply(westTextureLocation)
+		val eastSprite = textureAtlas.apply(eastTextureLocation)
+		val northSprite = textureAtlas.apply(northTextureLocation)
+		val southSprite = textureAtlas.apply(southTextureLocation)
+
+		val map = mapOf(
+			Direction.UP to topSprite,
+			Direction.DOWN to bottomSprite,
+			Direction.WEST to westSprite,
+			Direction.EAST to eastSprite,
+			Direction.NORTH to northSprite,
+			Direction.SOUTH to southSprite,
+		)
+
+		val vertexConsumer = Minecraft.getInstance()
+			.renderBuffers()
+			.bufferSource()
+			.getBuffer(renderType)
+
+		val pose = poseStack.last()
+
+		for ((direction, sprite) in map) {
+			val vertices = getVertices(direction, 1f, 1f)
+
+			for ((index, vector) in vertices.withIndex()) {
+				val u = if (index == 0 || index == 3) sprite.u0 else sprite.u1
+				val v = if (index == 0 || index == 1) sprite.v1 else sprite.v0
+
+				addVertex(
+					pose,
+					vertexConsumer,
+					0xFFFFFFFF.toInt(),
+					vector.x, vector.y, vector.z,
+					u, v
+				)
+			}
+		}
+
+	}
+
 	fun renderFace(
 		poseStack: PoseStack,
 		vertexConsumer: VertexConsumer,
@@ -282,8 +336,24 @@ object RenderUtil {
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
 
 		val pose = poseStack.last()
+		val vertices = getVertices(direction, width, length)
 
-		val vertices = when (direction) {
+		for (vertex in vertices) {
+			addVertex(
+				pose,
+				vertexConsumer,
+				color,
+				vertex.x, vertex.y, vertex.z,
+				0f, 0f
+			)
+		}
+
+		poseStack.popPose()
+	}
+
+	/** @param length is used as height for UP and DOWN faces */
+	fun getVertices(direction: Direction, width: Float, length: Float): List<Vector3f> {
+		return when (direction) {
 			Direction.UP -> listOf(
 				Vector3f(0f, 0f, length),
 				Vector3f(width, 0f, length),
@@ -326,18 +396,6 @@ object RenderUtil {
 				Vector3f(0f, length, 0f)
 			)
 		}
-
-		for (vertex in vertices) {
-			addVertex(
-				pose,
-				vertexConsumer,
-				color,
-				vertex.x, vertex.y, vertex.z,
-				0f, 0f
-			)
-		}
-
-		poseStack.popPose()
 	}
 
 	fun addVertex(

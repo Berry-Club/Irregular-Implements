@@ -33,6 +33,10 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 		return Shapes.empty()
 	}
 
+	override fun getRenderShape(state: BlockState): RenderShape {
+		return RenderShape.ENTITYBLOCK_ANIMATED
+	}
+
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 		if (level.isClientSide) {
 			return InteractionResult.SUCCESS
