@@ -277,48 +277,23 @@ object RenderUtil {
 
 	/** @param length is used as height for UP and DOWN faces */
 	fun getVertices(direction: Direction, width: Float, length: Float): List<Vector3f> {
+		val bottomNorthWest = Vector3f(0f, 0f, 0f)
+		val bottomNorthEast = Vector3f(width, 0f, 0f)
+		val bottomSouthWest = Vector3f(0f, 0f, width)
+		val bottomSouthEast = Vector3f(width, 0f, width)
+
+		val topNorthWest = Vector3f(0f, length, 0f)
+		val topNorthEast = Vector3f(width, length, 0f)
+		val topSouthWest = Vector3f(0f, length, width)
+		val topSouthEast = Vector3f(width, length, width)
+
 		return when (direction) {
-			Direction.UP -> listOf(
-				Vector3f(0f, length, length),
-				Vector3f(width, length, length),
-				Vector3f(width, length, 0f),
-				Vector3f(0f, length, 0f)
-			)
-
-			Direction.DOWN -> listOf(
-				Vector3f(width, 0f, 0f),
-				Vector3f(width, 0f, length),
-				Vector3f(0f, 0f, length),
-				Vector3f(0f, 0f, 0f)
-			)
-
-			Direction.NORTH -> listOf(
-				Vector3f(0f, length, 0f),
-				Vector3f(width, length, 0f),
-				Vector3f(width, 0f, 0f),
-				Vector3f(0f, 0f, 0f)
-			)
-
-			Direction.SOUTH -> listOf(
-				Vector3f(width, 0f, width),
-				Vector3f(width, length, width),
-				Vector3f(0f, length, width),
-				Vector3f(0f, 0f, width)
-			)
-
-			Direction.EAST -> listOf(
-				Vector3f(width, 0f, 0f),
-				Vector3f(width, length, 0f),
-				Vector3f(width, length, width),
-				Vector3f(width, 0f, width)
-			)
-
-			Direction.WEST -> listOf(
-				Vector3f(0f, 0f, 0f),
-				Vector3f(0f, 0f, width),
-				Vector3f(0f, length, width),
-				Vector3f(0f, length, 0f)
-			)
+			Direction.UP -> listOf(topSouthWest, topSouthEast, topNorthEast, topNorthWest)
+			Direction.DOWN -> listOf(bottomNorthWest, bottomNorthEast, bottomSouthEast, bottomSouthWest)
+			Direction.NORTH -> listOf(topNorthWest, topNorthEast, bottomNorthEast, bottomNorthWest)
+			Direction.SOUTH -> listOf(bottomSouthWest, bottomSouthEast, topSouthEast, topSouthWest)
+			Direction.EAST -> listOf(topNorthEast, topSouthEast, bottomSouthEast, bottomNorthEast)
+			Direction.WEST -> listOf(bottomNorthWest, bottomSouthWest, topSouthWest, topNorthWest)
 		}
 	}
 

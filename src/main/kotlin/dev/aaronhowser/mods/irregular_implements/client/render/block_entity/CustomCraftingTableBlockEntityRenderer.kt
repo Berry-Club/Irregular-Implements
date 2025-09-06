@@ -27,7 +27,7 @@ class CustomCraftingTableBlockEntityRenderer(
 			poseStack,
 			RenderType.translucent(),
 			TOP, BOTTOM,
-			FRONT, SIDE, SIDE, SIDE,
+			FRONT, FRONT, FRONT, FRONT,
 		)
 
 		poseStack.popPose()
