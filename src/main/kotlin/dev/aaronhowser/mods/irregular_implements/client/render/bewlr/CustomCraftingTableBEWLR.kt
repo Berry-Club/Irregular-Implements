@@ -50,13 +50,13 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		displayContext: ItemDisplayContext,
 		itemToRender: Item
 	) {
-		poseStack.pushPose()
-
 		val itemTransform = Minecraft.getInstance()
 			.itemRenderer
 			.getModel(itemToRender.defaultInstance, null, null, 0)
 			.transforms
 			.getTransform(displayContext)
+
+		poseStack.pushPose()
 
 		itemTransform.apply(false, poseStack)
 
