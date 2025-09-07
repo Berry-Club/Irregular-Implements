@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
+import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 
 class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
@@ -30,7 +30,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		val itemToRender = stack.get(ModDataComponents.BLOCK)?.asItem() ?: Items.OAK_PLANKS
+		val itemToRender = stack.getOrDefault(ModDataComponents.BLOCK, Blocks.OAK_PLANKS).asItem()
 
 		renderCraftingTableOverlay(poseStack, displayContext, itemToRender)
 
