@@ -10,6 +10,7 @@ object BetterFakePlayerFactory {
 
 	private data class FakePlayerKey(val level: ServerLevel, val username: GameProfile)
 
+	@JvmStatic
 	fun get(level: ServerLevel, username: GameProfile, create: () -> FakePlayer): FakePlayer {
 		val key = FakePlayerKey(level, username)
 		return fakePlayers.getOrPut(key, create)
