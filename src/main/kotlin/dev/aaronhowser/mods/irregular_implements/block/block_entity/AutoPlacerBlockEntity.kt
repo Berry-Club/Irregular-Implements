@@ -61,7 +61,7 @@ class AutoPlacerBlockEntity(
 	private fun initFakePlayer() {
 		val level = level as? ServerLevel ?: return
 
-		val fakePlayer = FakePlayerFactory.get(level, AutoPlacerFakePlayer.GAME_PROFILE)
+		val fakePlayer = FakePlayerFactory.get(level, FAKE_PLAYER_PROFILE)
 		fakePlayer.isSilent = true
 		fakePlayer.setOnGround(true)
 
@@ -121,20 +121,12 @@ class AutoPlacerBlockEntity(
 		}
 	}
 
-	class AutoPlacerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
-		companion object {
-			fun get(level: ServerLevel, name: GameProfile): AutoPlacerFakePlayer {
-				return AutoPlacerFakePlayer(level, name)
-			}
-
-			private const val NAME = "IrregularImplementsAutoPlacer"
-			val GAME_PROFILE = GameProfile(UUID.nameUUIDFromBytes(NAME.toByteArray()), NAME)
-		}
-	}
-
 	companion object {
 		const val CONTAINER_SIZE = 1
 		const val MODE_NBT = "Mode"
+
+		private const val FAKE_PLAYER_NAME = "IrregularImplementsAutoPlacer"
+		val FAKE_PLAYER_PROFILE = GameProfile(UUID.nameUUIDFromBytes(FAKE_PLAYER_NAME.toByteArray()), FAKE_PLAYER_NAME)
 
 		fun getCapability(autoPlacer: AutoPlacerBlockEntity, direction: Direction?): IItemHandler {
 			return autoPlacer.getItemHandler()
