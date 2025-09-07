@@ -44,7 +44,7 @@ object ItemCatcher {
 	fun afterDestroyBlock(player: ServerPlayer) {
 		if (!this.isCatchingDrops) return
 
-		for (itemEntity in this.caughtItemEntities) {
+		for (itemEntity in this.caughtItemEntities.toList()) {
 			teleportTo(itemEntity, player)
 		}
 

@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
@@ -18,6 +19,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -30,7 +32,6 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.common.util.FakePlayer
-import net.neoforged.neoforge.common.util.FakePlayerFactory
 import net.neoforged.neoforge.items.ItemHandlerHelper
 import java.lang.ref.WeakReference
 import java.util.*
@@ -63,7 +64,9 @@ class BlockBreakerBlockEntity(
 			setChanged()
 		}
 
-		val fakePlayer = FakePlayerFactory.get(level, BlockBreakerFakePlayer.GAME_PROFILE)
+		val fakePlayer = BetterFakePlayerFactory.get(level, BlockBreakerFakePlayer.GAME_PROFILE) {
+			BlockBreakerFakePlayer(level, BlockBreakerFakePlayer.GAME_PROFILE)
+		}
 
 		fakePlayer.isSilent = true
 		fakePlayer.setOnGround(true)
@@ -242,12 +245,13 @@ class BlockBreakerBlockEntity(
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
-	class BlockBreakerFakePlayer private constructor(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
-		companion object {
-			fun get(level: ServerLevel, name: GameProfile): BlockBreakerFakePlayer {
-				return BlockBreakerFakePlayer(level, name)
-			}
+	class BlockBreakerFakePlayer(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
 
+		override fun take(entity: Entity, quantity: Int) {
+			// Super would try to send a packet to everyone nearby, which is bad
+		}
+
+		companion object {
 			private const val NAME = "IrregularImplementsBlockBreaker"
 			val GAME_PROFILE = GameProfile(UUID.nameUUIDFromBytes(NAME.toByteArray()), NAME)
 		}
