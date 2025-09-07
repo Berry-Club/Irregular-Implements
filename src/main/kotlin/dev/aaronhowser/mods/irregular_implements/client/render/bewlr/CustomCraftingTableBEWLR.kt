@@ -54,15 +54,12 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		val itemTransform = Minecraft.getInstance()
-			.itemRenderer
-			.getModel(itemToRender, null, null, 0)
-			.transforms
-			.getTransform(displayContext)
-
 		poseStack.pushPose()
 
-		itemTransform.apply(false, poseStack)
+		Minecraft.getInstance()
+			.itemRenderer
+			.getModel(itemToRender, null, null, 0)
+			.applyTransform(displayContext, poseStack, false)
 
 		RenderUtil.renderTexturedCube(
 			poseStack,
