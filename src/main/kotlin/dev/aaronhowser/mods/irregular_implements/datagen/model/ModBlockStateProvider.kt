@@ -77,6 +77,54 @@ class ModBlockStateProvider(
 		enderMailbox()
 		autoPlacer()
 		glowingMushroom()
+		blockDetector()
+	}
+
+	private fun blockDetector() {
+		val block = ModBlocks.BLOCK_DETECTOR.get()
+
+		val frontOff = modLoc("block/block_detector/front")
+		val frontOn = modLoc("block/block_detector/front_on")
+		val top = mcLoc("block/furnace_top")
+		val side = mcLoc("block/furnace_side")
+
+		getVariantBuilder(block)
+			.forAllStates {
+				val facing = it.getValue(BlockDetectorBlock.FACING)
+				val triggered = it.getValue(BlockDetectorBlock.TRIGGERED)
+
+				val model = models()
+					.orientable(name(block), side, if (triggered) frontOn else frontOff, top)
+
+				val yRotation = when (facing) {
+					Direction.NORTH -> 0
+					Direction.EAST -> 90
+					Direction.SOUTH -> 180
+					Direction.WEST -> 270
+					else -> 0
+				}
+
+				val xRotation = when (facing) {
+					Direction.UP -> 270
+					Direction.DOWN -> 90
+					else -> 0
+				}
+
+				ConfiguredModel
+					.builder()
+					.modelFile(model)
+					.rotationY(yRotation)
+					.rotationX(xRotation)
+					.build()
+			}
+
+		simpleBlockItem(
+			block,
+			ItemModelBuilder(
+				modLoc("block/block_detector"),
+				existingFileHelper
+			)
+		)
 	}
 
 	private fun autoPlacer() {

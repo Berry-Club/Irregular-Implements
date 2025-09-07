@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock
+import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock.Companion.TRIGGERED
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.block_detector.BlockDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -17,13 +18,17 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-//TODO: Texture
 class BlockDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.BLOCK_DETECTOR.get(), pos, blockState), MenuProvider {
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+		override fun setChanged() {
+			super.setChanged()
+			checkAndUpdate()
+		}
+	}
 
 	fun isBlockDetected(): Boolean {
 		val targetPos = blockPos.relative(blockState.getValue(BlockDetectorBlock.FACING))
@@ -31,6 +36,19 @@ class BlockDetectorBlockEntity(
 		val containedBlock = (container.items.firstOrNull()?.item as? BlockItem)?.block
 
 		return blockThere != null && blockThere == containedBlock
+	}
+
+	fun checkAndUpdate() {
+		val level = level ?: return
+
+		val isDetectingBlock = isBlockDetected()
+		val wasDetectingBlock = blockState.getValue(TRIGGERED)
+
+		if (isDetectingBlock && !wasDetectingBlock) {
+			level.setBlockAndUpdate(blockPos, blockState.setValue(TRIGGERED, true))
+		} else if (!isDetectingBlock && wasDetectingBlock) {
+			level.setBlockAndUpdate(blockPos, blockState.setValue(TRIGGERED, false))
+		}
 	}
 
 	override fun getDisplayName(): Component = blockState.block.name

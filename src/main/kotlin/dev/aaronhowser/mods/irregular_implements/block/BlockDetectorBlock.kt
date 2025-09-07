@@ -57,17 +57,8 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 	}
 
 	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
-		val be = level.getBlockEntity(pos) as? BlockDetectorBlockEntity
-			?: return
-
-		val isDetectingBlock = be.isBlockDetected()
-		val wasDetectingBlock = state.getValue(TRIGGERED)
-
-		if (isDetectingBlock && !wasDetectingBlock) {
-			level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, true))
-		} else if (!isDetectingBlock && wasDetectingBlock) {
-			level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, false))
-		}
+		val be = level.getBlockEntity(pos) as? BlockDetectorBlockEntity ?: return
+		be.checkAndUpdate()
 	}
 
 	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
@@ -84,10 +75,13 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		val be = level.getBlockEntity(pos)
-		if (be is BlockDetectorBlockEntity) {
-			Containers.dropContents(level, pos, be.container)
+		if (!newState.`is`(state.block)) {
+			val be = level.getBlockEntity(pos)
+			if (be is BlockDetectorBlockEntity) {
+				Containers.dropContents(level, pos, be.container)
+			}
 		}
+
 		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
