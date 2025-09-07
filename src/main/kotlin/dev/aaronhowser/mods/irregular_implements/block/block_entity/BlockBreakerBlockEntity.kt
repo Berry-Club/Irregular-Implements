@@ -265,59 +265,44 @@ class BlockBreakerBlockEntity(
 		}
 
 		private fun getMiningEfficiency(): Double {
-			val miningEfficiencyAttributeModifiers = getMiningEfficiencyAttributeModifiers()
+			val modifiers = getMiningEfficiencyAttributeModifiers()
 
-			var value = 0.0
+			val baseIncrease = modifiers
+				.filter { it.operation == AttributeModifier.Operation.ADD_VALUE }
+				.sumOf { it.amount }
 
-			val baseIncrease = miningEfficiencyAttributeModifiers.filter { it.operation == AttributeModifier.Operation.ADD_VALUE }
-			for (modifier in baseIncrease) {
-				value += modifier.amount
-			}
+			val multipliedBase = modifiers
+				.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_BASE }
+				.fold(baseIncrease) { acc, modifier -> acc * modifier.amount }
 
-			val increasedBase = value
+			val multipliedTotal = modifiers
+				.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL }
+				.fold(multipliedBase) { acc, modifier -> acc * (1.0 + modifier.amount) }
 
-			val multipliedBase = miningEfficiencyAttributeModifiers.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_BASE }
-			for (modifier in multipliedBase) {
-				value = increasedBase * modifier.amount
-			}
-
-			val multipliedTotal = miningEfficiencyAttributeModifiers.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL }
-			for (modifier in multipliedTotal) {
-				value *= (1.0 + modifier.amount)
-			}
-
-			return value
+			return multipliedTotal
 		}
 
 		private fun getMiningEfficiencyAttributeModifiers(): List<AttributeModifier> {
-			val list = mutableListOf<AttributeModifier>()
-
 			val heldStack = this.mainHandItem
-			if (heldStack.isEmpty) return list
+			if (heldStack.isEmpty) return emptyList()
 
-			val enchants = heldStack.getAllEnchantments(registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
-			for ((enchantHolder, level) in enchants.entrySet()) {
-				val enchantment = enchantHolder.value()
-				val attributeEffects = enchantment.effects()
-					.get(EnchantmentEffectComponents.ATTRIBUTES)
-					?: continue
-
-				val attributeModifiers = attributeEffects
-					.filter { it.attribute.`is`(Attributes.MINING_EFFICIENCY) }
-					.map { it.getModifier(level, EquipmentSlot.MAINHAND) }
-
-				list.addAll(attributeModifiers)
-			}
-
-			for (stackModifier in heldStack.attributeModifiers.modifiers) {
-				if (stackModifier.slot.test(EquipmentSlot.MAINHAND)
-					&& stackModifier.attribute.`is`(Attributes.MINING_EFFICIENCY)
-				) {
-					list.add(stackModifier.modifier)
+			val enchantmentModifiers = heldStack.getAllEnchantments(
+				registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
+			)
+				.entrySet()
+				.flatMap { (enchantHolder, level) ->
+					enchantHolder.value().effects()
+						.get(EnchantmentEffectComponents.ATTRIBUTES)
+						?.filter { it.attribute.`is`(Attributes.MINING_EFFICIENCY) }
+						?.map { it.getModifier(level, EquipmentSlot.MAINHAND) }
+						?: emptyList()
 				}
-			}
 
-			return list
+			val stackModifiers = heldStack.attributeModifiers.modifiers
+				.filter { it.slot.test(EquipmentSlot.MAINHAND) && it.attribute.`is`(Attributes.MINING_EFFICIENCY) }
+				.map { it.modifier }
+
+			return enchantmentModifiers + stackModifiers
 		}
 
 		companion object {
