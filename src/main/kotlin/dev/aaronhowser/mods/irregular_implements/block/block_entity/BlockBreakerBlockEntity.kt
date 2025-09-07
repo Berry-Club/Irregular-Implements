@@ -7,9 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
-import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
-import net.minecraft.core.HolderLookup
+import net.minecraft.core.*
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
@@ -21,6 +19,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
@@ -36,6 +35,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.common.util.FakePlayer
+import net.neoforged.neoforge.event.EventHooks
 import net.neoforged.neoforge.items.ItemHandlerHelper
 import java.lang.ref.WeakReference
 import java.util.*
@@ -258,55 +258,70 @@ class BlockBreakerBlockEntity(
 			var f = this.inventory.getDestroySpeed(state)
 
 			if (f > 1f) {
-				f += getMiningEfficiency().toFloat()
+				f += getStackAttributeValue(this.mainHandItem, Attributes.MINING_EFFICIENCY, registryAccess(), 0f).toFloat()
 			}
+
+			f *= getStackAttributeValue(this.mainHandItem, Attributes.BLOCK_BREAK_SPEED, registryAccess(), 1f).toFloat()
+
+			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+			f = EventHooks.getBreakSpeed(this, state, f, pos)
 
 			return f
 		}
 
-		private fun getMiningEfficiency(): Double {
-			val modifiers = getMiningEfficiencyAttributeModifiers()
-
-			val baseIncrease = modifiers
-				.filter { it.operation == AttributeModifier.Operation.ADD_VALUE }
-				.sumOf { it.amount }
-
-			val multipliedBase = modifiers
-				.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_BASE }
-				.fold(baseIncrease) { acc, modifier -> acc * modifier.amount }
-
-			val multipliedTotal = modifiers
-				.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL }
-				.fold(multipliedBase) { acc, modifier -> acc * (1.0 + modifier.amount) }
-
-			return multipliedTotal
-		}
-
-		private fun getMiningEfficiencyAttributeModifiers(): List<AttributeModifier> {
-			val heldStack = this.mainHandItem
-			if (heldStack.isEmpty) return emptyList()
-
-			val enchantmentModifiers = heldStack.getAllEnchantments(
-				registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
-			)
-				.entrySet()
-				.flatMap { (enchantHolder, level) ->
-					enchantHolder.value().effects()
-						.get(EnchantmentEffectComponents.ATTRIBUTES)
-						?.filter { it.attribute.`is`(Attributes.MINING_EFFICIENCY) }
-						?.map { it.getModifier(level, EquipmentSlot.MAINHAND) }
-						?: emptyList()
-				}
-
-			val stackModifiers = heldStack.attributeModifiers.modifiers
-				.filter { it.slot.test(EquipmentSlot.MAINHAND) && it.attribute.`is`(Attributes.MINING_EFFICIENCY) }
-				.map { it.modifier }
-
-			return enchantmentModifiers + stackModifiers
-		}
-
 		companion object {
 			const val NAME = "IrregularImplementsBlockBreaker"
+
+			private fun getStackAttributeValue(
+				itemStack: ItemStack,
+				attribute: Holder<Attribute>,
+				registryAccess: RegistryAccess,
+				baseValue: Float
+			): Double {
+				val modifiers = getModifiersForAttribute(attribute, itemStack, registryAccess)
+
+				val baseIncrease = modifiers
+					.filter { it.operation == AttributeModifier.Operation.ADD_VALUE }
+					.sumOf { it.amount }
+
+				val increasedBase = baseValue + baseIncrease
+
+				val multipliedBase = modifiers
+					.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_BASE }
+					.fold(increasedBase) { acc, modifier -> acc * modifier.amount }
+
+				val multipliedTotal = modifiers
+					.filter { it.operation == AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL }
+					.fold(multipliedBase) { acc, modifier -> acc * (1.0 + modifier.amount) }
+
+				return multipliedTotal
+			}
+
+			private fun getModifiersForAttribute(
+				attribute: Holder<Attribute>,
+				itemStack: ItemStack,
+				registryAccess: RegistryAccess,
+			): List<AttributeModifier> {
+				if (itemStack.isEmpty) return emptyList()
+
+				val enchantmentModifiers = itemStack.getAllEnchantments(
+					registryAccess.lookupOrThrow(Registries.ENCHANTMENT)
+				)
+					.entrySet()
+					.flatMap { (enchantHolder, level) ->
+						enchantHolder.value().effects()
+							.get(EnchantmentEffectComponents.ATTRIBUTES)
+							?.filter { it.attribute.`is`(attribute) }
+							?.map { it.getModifier(level, EquipmentSlot.MAINHAND) }
+							?: emptyList()
+					}
+
+				val stackModifiers = itemStack.attributeModifiers.modifiers
+					.filter { it.slot.test(EquipmentSlot.MAINHAND) && it.attribute.`is`(attribute) }
+					.map { it.modifier }
+
+				return enchantmentModifiers + stackModifiers
+			}
 		}
 	}
 
