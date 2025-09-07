@@ -43,8 +43,8 @@ class BlockBreakerBlockEntity(
 
 	private var uuid: UUID? = null
 
-	private var isMining = false
-	private var canMine = false
+	private var isMining = true
+	private var canMine = true
 
 	private var miningProgress = 0f
 
@@ -148,7 +148,7 @@ class BlockBreakerBlockEntity(
 		resetProgress()
 
 		val possibleInventoryPos = this.blockPos.relative(facing.opposite)
-		val inventoryHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
+		val inventoryBehind = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
 
 		// The Magnetic enchantment on the pick immediately teleports the item to the FakePlayer's inventory
 		fakePlayer.gameMode.destroyBlock(targetPos)
@@ -166,8 +166,8 @@ class BlockBreakerBlockEntity(
 
 			var remainder = stack.copy()
 
-			if (inventoryHandler != null) {
-				remainder = ItemHandlerHelper.insertItemStacked(inventoryHandler, remainder, false)
+			if (inventoryBehind != null) {
+				remainder = ItemHandlerHelper.insertItemStacked(inventoryBehind, remainder, false)
 			}
 
 			if (!remainder.isEmpty) {
