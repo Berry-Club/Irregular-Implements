@@ -20,6 +20,9 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.ai.attributes.AttributeModifier
+import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -33,6 +36,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.common.util.FakePlayer
 import net.neoforged.neoforge.items.ItemHandlerHelper
+import org.apache.commons.lang3.mutable.MutableDouble
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -143,7 +147,6 @@ class BlockBreakerBlockEntity(
 	}
 
 	private fun mineBlock(facing: Direction, fakePlayer: FakePlayer, targetPos: BlockPos, level: ServerLevel) {
-
 		this.isMining = false
 		resetProgress()
 
@@ -249,6 +252,48 @@ class BlockBreakerBlockEntity(
 
 		override fun take(entity: Entity, quantity: Int) {
 			// Super would try to send a packet to everyone nearby, which is bad
+		}
+
+		override fun getDigSpeed(state: BlockState, pos: BlockPos?): Float {
+			var f = this.inventory.getDestroySpeed(state)
+
+			if (f > 1f) {
+
+			}
+
+			return f
+		}
+
+		private fun applyMiningEfficiency(mutableDouble: MutableDouble) {
+			val heldStack = this.mainHandItem
+			val attributeModifiers = heldStack.attributeModifiers
+
+			val miningEfficiencyAttributes = attributeModifiers.modifiers
+				.filter {
+					it.slot.test(EquipmentSlot.MAINHAND)
+							&& it.attribute.`is`(Attributes.MINING_EFFICIENCY)
+				}.groupBy { it.modifier.operation }
+
+			var base = mutableDouble.toDouble()
+
+			val baseIncrease = miningEfficiencyAttributes.getOrDefault(AttributeModifier.Operation.ADD_VALUE, emptyList())
+			for (modifier in baseIncrease) {
+				base += modifier.modifier.amount
+			}
+
+			val increasedBase = base
+
+			val multipliedBase = miningEfficiencyAttributes.getOrDefault(AttributeModifier.Operation.ADD_MULTIPLIED_BASE, emptyList())
+			for (modifier in multipliedBase) {
+				val newValue = increasedBase * modifier.modifier.amount
+				mutableDouble.setValue(newValue)
+			}
+
+			val multipliedTotal = miningEfficiencyAttributes.getOrDefault(AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, emptyList())
+			for (modifier in multipliedTotal) {
+				val newValue = mutableDouble.toDouble() * (1.0 + modifier.modifier.amount)
+				mutableDouble.setValue(newValue)
+			}
 		}
 
 		companion object {
