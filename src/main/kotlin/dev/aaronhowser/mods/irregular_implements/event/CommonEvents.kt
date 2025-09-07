@@ -20,8 +20,10 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.world.village.VillageAdditions
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
@@ -41,6 +43,7 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
+import net.neoforged.neoforge.event.level.LevelEvent
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
 import net.neoforged.neoforge.event.tick.PlayerTickEvent
@@ -266,6 +269,14 @@ object CommonEvents {
 		if (player is ServerPlayer && player.level().dimension() == ModDimensions.SPECTRE_LEVEL_KEY) {
 			val handler = SpectreCubeSavedData.get(player.serverLevel())
 			handler.verifyPosition(player)
+		}
+	}
+
+	@SubscribeEvent
+	fun onLevelUnload(event: LevelEvent.Unload) {
+		val level = event.level
+		if (level is ServerLevel) {
+			BetterFakePlayerFactory.unloadLevel(level)
 		}
 	}
 

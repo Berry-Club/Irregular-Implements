@@ -15,4 +15,8 @@ object BetterFakePlayerFactory {
 		return fakePlayers.getOrPut(key, create)
 	}
 
+	fun unloadLevel(level: ServerLevel) {
+		fakePlayers.entries.removeIf { it.key.level == level }
+	}
+
 }
