@@ -34,7 +34,8 @@ object ItemCatcher {
 	fun beforeDestroyBlock(player: ServerPlayer) {
 		val usedItem = player.mainHandItem
 
-		val hasMagnetic = usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())) > 0
+		val magnetEnchant = ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())
+		val hasMagnetic = usedItem.getEnchantmentLevel(magnetEnchant) > 0
 
 		this.isCatchingDrops = hasMagnetic
 	}
@@ -46,8 +47,8 @@ object ItemCatcher {
 		for (itemEntity in this.caughtItemEntities) {
 			itemEntity.setNoPickUpDelay()
 			itemEntity.playerTouch(player)
-			itemEntity.target = player.uuid
-			itemEntity.teleportTo(player.x, player.y, player.z)
+//			itemEntity.target = player.uuid
+//			itemEntity.teleportTo(player.x, player.y, player.z)
 		}
 
 		this.caughtItemEntities.clear()
@@ -61,7 +62,8 @@ object ItemCatcher {
 		val killer = event.source.entity as? LivingEntity ?: return
 		val usedItem = killer.mainHandItem
 
-		if (usedItem.getEnchantmentLevel(ModEnchantments.getHolder(ModEnchantments.MAGNETIC, killer.registryAccess())) < 1) return
+		val magnetEnchant = ModEnchantments.getHolder(ModEnchantments.MAGNETIC, killer.registryAccess())
+		if (usedItem.getEnchantmentLevel(magnetEnchant) < 1) return
 
 		for (itemEntity in event.drops) {
 			itemEntity.setNoPickUpDelay()

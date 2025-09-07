@@ -269,7 +269,7 @@ class BlockBreakerBlockEntity(
 
 			val enchantments = ItemEnchantments.Mutable(withEnchantments)
 			enchantments.set(
-				level.registryAccess().registry(Registries.ENCHANTMENT).get().getHolderOrThrow(ModEnchantments.MAGNETIC),
+				ModEnchantments.getHolder(ModEnchantments.MAGNETIC, level.registryAccess()),
 				1
 			)
 

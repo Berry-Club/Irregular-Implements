@@ -18,15 +18,18 @@ import java.util.*
 object ModEnchantments {
 
 	//FIXME: The item entity renders as moving towards the local player, rather than the player who's picking it up
-	val MAGNETIC: ResourceKey<Enchantment> =
-		ResourceKey.create(Registries.ENCHANTMENT, OtherUtil.modResource("magnetic"))
+	val MAGNETIC: ResourceKey<Enchantment> = ResourceKey.create(
+		Registries.ENCHANTMENT,
+		OtherUtil.modResource("magnetic")
+	)
 
-	fun getHolder(enchantment: ResourceKey<Enchantment>, registryAccess: RegistryAccess): Holder.Reference<Enchantment> {
-		return registryAccess.registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(enchantment)
+	fun getHolder(enchantmentRk: ResourceKey<Enchantment>, registryAccess: RegistryAccess): Holder.Reference<Enchantment> {
+		return registryAccess
+			.registryOrThrow(Registries.ENCHANTMENT)
+			.getHolderOrThrow(enchantmentRk)
 	}
 
 	fun bootstrap(context: BootstrapContext<Enchantment>) {
-
 		context.register(
 			MAGNETIC,
 			Enchantment(
@@ -47,7 +50,6 @@ object ModEnchantments {
 					.build()
 			)
 		)
-
 	}
 
 }
