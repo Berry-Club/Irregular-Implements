@@ -45,10 +45,7 @@ object ItemCatcher {
 		if (!this.isCatchingDrops) return
 
 		for (itemEntity in this.caughtItemEntities) {
-			itemEntity.setNoPickUpDelay()
-			itemEntity.playerTouch(player)
-//			itemEntity.target = player.uuid
-//			itemEntity.teleportTo(player.x, player.y, player.z)
+			teleportTo(itemEntity, player)
 		}
 
 		this.caughtItemEntities.clear()
@@ -66,14 +63,21 @@ object ItemCatcher {
 		if (usedItem.getEnchantmentLevel(magnetEnchant) < 1) return
 
 		for (itemEntity in event.drops) {
-			itemEntity.setNoPickUpDelay()
-			if (killer is Player) itemEntity.playerTouch(killer)
-			itemEntity.target = killer.uuid
-			itemEntity.teleportTo(killer.x, killer.y, killer.z)
+			teleportTo(itemEntity, killer)
 		}
 
 		this.caughtItemEntities.clear()
 		this.isCatchingDrops = false
+	}
+
+	private fun teleportTo(itemEntity: ItemEntity, magneticEntity: LivingEntity) {
+		itemEntity.setNoPickUpDelay()
+		if (magneticEntity is Player) itemEntity.playerTouch(magneticEntity)
+
+		if (!itemEntity.item.isEmpty) {
+			itemEntity.target = magneticEntity.uuid
+			itemEntity.teleportTo(magneticEntity.x, magneticEntity.y, magneticEntity.z)
+		}
 	}
 
 }
