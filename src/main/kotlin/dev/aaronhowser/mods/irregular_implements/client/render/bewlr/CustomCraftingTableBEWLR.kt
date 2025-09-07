@@ -82,7 +82,10 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	) {
 		poseStack.pushPose()
 
+		poseStack.translate(-0.5, -0.5, -0.5)
 		poseStack.scale(0.999f, 0.999f, 0.999f)
+		poseStack.translate(0.5, 0.5, 0.5)
+
 		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 		poseStack.translate(0.5, 0.5, 0.5)
 
