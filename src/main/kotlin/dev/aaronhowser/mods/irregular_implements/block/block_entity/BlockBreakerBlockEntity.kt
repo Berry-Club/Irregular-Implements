@@ -36,7 +36,6 @@ import net.neoforged.neoforge.items.ItemHandlerHelper
 import java.lang.ref.WeakReference
 import java.util.*
 
-//FIXME: ClientboundTakeItemEntityPacket defaults to being picked up by the local player, since it can't see the FakePlayer
 class BlockBreakerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
@@ -64,8 +63,9 @@ class BlockBreakerBlockEntity(
 			setChanged()
 		}
 
-		val fakePlayer = BetterFakePlayerFactory.get(level, BlockBreakerFakePlayer.GAME_PROFILE) {
-			BlockBreakerFakePlayer(level, BlockBreakerFakePlayer.GAME_PROFILE)
+		val gameProfile = GameProfile(this.uuid, BlockBreakerFakePlayer.NAME)
+		val fakePlayer = BetterFakePlayerFactory.get(level, gameProfile) {
+			BlockBreakerFakePlayer(level, gameProfile)
 		}
 
 		fakePlayer.isSilent = true
@@ -252,8 +252,7 @@ class BlockBreakerBlockEntity(
 		}
 
 		companion object {
-			private const val NAME = "IrregularImplementsBlockBreaker"
-			val GAME_PROFILE = GameProfile(UUID.nameUUIDFromBytes(NAME.toByteArray()), NAME)
+			const val NAME = "IrregularImplementsBlockBreaker"
 		}
 	}
 

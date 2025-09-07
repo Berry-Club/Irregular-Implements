@@ -38,6 +38,7 @@ class AutoPlacerBlockEntity(
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 	private val invWrapper = InvWrapper(container)
 
+	private var uuid: UUID? = null
 	private var fakePlayer: WeakReference<FakePlayer>? = null
 
 	enum class Mode { ON_PULSE, WHILE_POWERED }
@@ -61,7 +62,14 @@ class AutoPlacerBlockEntity(
 	private fun initFakePlayer() {
 		val level = level as? ServerLevel ?: return
 
-		val fakePlayer = FakePlayerFactory.get(level, FAKE_PLAYER_PROFILE)
+		if (this.uuid == null) {
+			this.uuid = UUID.randomUUID()
+			setChanged()
+		}
+
+		val gameProfile = GameProfile(this.uuid, FAKE_PLAYER_NAME)
+		val fakePlayer = FakePlayerFactory.get(level, gameProfile)
+
 		fakePlayer.isSilent = true
 		fakePlayer.setOnGround(true)
 
@@ -126,7 +134,6 @@ class AutoPlacerBlockEntity(
 		const val MODE_NBT = "Mode"
 
 		private const val FAKE_PLAYER_NAME = "IrregularImplementsAutoPlacer"
-		val FAKE_PLAYER_PROFILE = GameProfile(UUID.nameUUIDFromBytes(FAKE_PLAYER_NAME.toByteArray()), FAKE_PLAYER_NAME)
 
 		fun getCapability(autoPlacer: AutoPlacerBlockEntity, direction: Direction?): IItemHandler {
 			return autoPlacer.getItemHandler()
