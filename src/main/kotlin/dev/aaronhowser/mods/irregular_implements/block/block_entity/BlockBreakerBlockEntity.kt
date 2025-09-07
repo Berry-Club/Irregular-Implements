@@ -254,6 +254,10 @@ class BlockBreakerBlockEntity(
 			// Super would try to send a packet to everyone nearby, which is bad
 		}
 
+		// FakePlayer doesn't normally have access to Mining Efficiency and Block Break Speed attributes
+		// so we have to manually apply them here
+		// Block Breakers don't get potion effects, so we don't need to worry about that
+		// Same for being under water or in the air, etc
 		override fun getDigSpeed(state: BlockState, pos: BlockPos?): Float {
 			var f = this.inventory.getDestroySpeed(state)
 
