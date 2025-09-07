@@ -42,7 +42,7 @@ class AutoPlacerBlockEntity(
 
 	enum class Mode { ON_PULSE, WHILE_POWERED }
 
-	private var mode: Mode = Mode.ON_PULSE
+	private var mode: Mode = Mode.WHILE_POWERED
 		set(value) {
 			field = value
 			setChanged()
@@ -70,6 +70,9 @@ class AutoPlacerBlockEntity(
 	}
 
 	fun placeBlock() {
+		val stackToPlace = container.getItem(0)
+		if (stackToPlace.isEmpty) return
+
 		val level = this.level ?: return
 
 		val direction = this.blockState.getValue(AutoPlacerBlock.FACING)
@@ -77,9 +80,6 @@ class AutoPlacerBlockEntity(
 
 		val blockThere = level.getBlockState(targetPos)
 		if (!blockThere.canBeReplaced()) return
-
-		val stackToPlace = container.getItem(0)
-		if (stackToPlace.isEmpty) return
 
 		val fakePlayer = this.fakePlayer?.get() ?: return
 		fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, stackToPlace)
