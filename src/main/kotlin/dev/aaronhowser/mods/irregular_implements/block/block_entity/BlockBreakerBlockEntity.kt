@@ -35,6 +35,7 @@ import net.neoforged.neoforge.items.ItemHandlerHelper
 import java.lang.ref.WeakReference
 import java.util.*
 
+//FIXME: ClientboundTakeItemEntityPacket defaults to being picked up by the local player, since it can't see the FakePlayer
 class BlockBreakerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
