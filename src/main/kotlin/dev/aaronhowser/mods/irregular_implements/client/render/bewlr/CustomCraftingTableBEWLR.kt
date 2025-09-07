@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Blocks
@@ -30,7 +29,10 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		val itemToRender = stack.getOrDefault(ModDataComponents.BLOCK, Blocks.OAK_PLANKS).asItem()
+		val itemToRender = stack
+			.getOrDefault(ModDataComponents.BLOCK, Blocks.OAK_PLANKS)
+			.asItem()
+			.defaultInstance
 
 		renderCraftingTableOverlay(poseStack, displayContext, itemToRender)
 
@@ -48,11 +50,11 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	private fun renderCraftingTableOverlay(
 		poseStack: PoseStack,
 		displayContext: ItemDisplayContext,
-		itemToRender: Item
+		itemToRender: ItemStack
 	) {
 		val itemTransform = Minecraft.getInstance()
 			.itemRenderer
-			.getModel(itemToRender.defaultInstance, null, null, 0)
+			.getModel(itemToRender, null, null, 0)
 			.transforms
 			.getTransform(displayContext)
 
@@ -74,7 +76,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		poseStack: PoseStack,
 		buffer: MultiBufferSource,
 		displayContext: ItemDisplayContext,
-		itemToRender: Item,
+		itemToRender: ItemStack,
 		packedLight: Int,
 		packedOverlay: Int,
 	) {
@@ -84,18 +86,17 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 		poseStack.translate(0.5, 0.5, 0.5)
 
-		val itemRenderer = Minecraft.getInstance().itemRenderer
-
-		itemRenderer.renderStatic(
-			itemToRender.defaultInstance,
-			displayContext,
-			packedLight,
-			packedOverlay,
-			poseStack,
-			buffer,
-			null,
-			0,
-		)
+		Minecraft.getInstance().itemRenderer
+			.renderStatic(
+				itemToRender,
+				displayContext,
+				packedLight,
+				packedOverlay,
+				poseStack,
+				buffer,
+				null,
+				0,
+			)
 
 		poseStack.popPose()
 	}
