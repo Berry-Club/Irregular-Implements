@@ -607,24 +607,11 @@ class ModBlockStateProvider(
 
 	private fun customCraftingTable() {
 		val block = ModBlocks.CUSTOM_CRAFTING_TABLE.get()
-
 		val top = modLoc("block/custom_crafting_table/top")
-		val bottom = modLoc("block/custom_crafting_table/bottom")
-		val front = modLoc("block/custom_crafting_table/front")
-		val side = modLoc("block/custom_crafting_table/side")
 
+		//Never actually gets loaded, just need it for the particles and block state
 		val model = models()
-			.cube(
-				name(block),
-				bottom,
-				top,
-				front,
-				side,
-				side,
-				side
-			)
-			.texture("particle", top)
-			.renderType(RenderType.translucent().name)
+			.cubeAll(name(block), top)
 
 		simpleBlock(block, model)
 	}

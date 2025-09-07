@@ -89,7 +89,8 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 		poseStack.translate(0.5, 0.5, 0.5)
 
-		Minecraft.getInstance().itemRenderer
+		Minecraft.getInstance()
+			.itemRenderer
 			.renderStatic(
 				itemToRender,
 				displayContext,

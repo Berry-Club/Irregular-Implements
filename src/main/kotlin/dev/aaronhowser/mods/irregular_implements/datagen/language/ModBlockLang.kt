@@ -68,6 +68,7 @@ object ModBlockLang {
 			addBlock(ModBlocks.CHAT_DETECTOR, "Chat Detector")
 			addBlock(ModBlocks.GLOBAL_CHAT_DETECTOR, "Global Chat Detector")
 			addBlock(ModBlocks.ENTITY_DETECTOR, "Entity Detector")
+			addBlock(ModBlocks.BLOCK_DETECTOR, "Block Detector")
 
 			addBlock(ModBlocks.PLAYER_INTERFACE, "Player Interface")
 			addBlock(ModBlocks.NOTIFICATION_INTERFACE, "Notification Interface")
