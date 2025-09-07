@@ -34,7 +34,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 			.asItem()
 			.defaultInstance
 
-		renderCraftingTableOverlay(poseStack, displayContext, itemToRender)
+		renderCraftingTableOverlay(poseStack, displayContext, itemToRender, packedLight, packedOverlay)
 
 		renderBaseItem(
 			poseStack,
@@ -50,7 +50,9 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	private fun renderCraftingTableOverlay(
 		poseStack: PoseStack,
 		displayContext: ItemDisplayContext,
-		itemToRender: ItemStack
+		itemToRender: ItemStack,
+		packedLight: Int,
+		packedOverlay: Int
 	) {
 		val itemTransform = Minecraft.getInstance()
 			.itemRenderer
@@ -67,6 +69,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 			RenderType.cutout(),
 			TOP, BOTTOM,
 			SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
+			packedLight, packedOverlay
 		)
 
 		poseStack.popPose()

@@ -27,6 +27,7 @@ class CustomCraftingTableBlockEntityRenderer(
 			RenderType.cutout(),
 			TOP, BOTTOM,
 			SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
+			packedLight, packedOverlay
 		)
 
 		poseStack.pushPose()

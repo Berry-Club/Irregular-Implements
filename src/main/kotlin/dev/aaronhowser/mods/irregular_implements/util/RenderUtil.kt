@@ -218,6 +218,8 @@ object RenderUtil {
 		southTextureLocation: ResourceLocation,
 		eastTextureLocation: ResourceLocation,
 		westTextureLocation: ResourceLocation,
+		light: Int = 0xF000F0,
+		overlay: Int = OverlayTexture.NO_OVERLAY
 	) {
 		val textureAtlas = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
 
@@ -258,7 +260,9 @@ object RenderUtil {
 					vertexConsumer,
 					0xFFFFFFFF.toInt(),
 					vector.x, vector.y, vector.z,
-					u, v
+					u, v,
+					light = light,
+					overlay = overlay
 				)
 			}
 		}
