@@ -21,7 +21,7 @@ class BiomeRadarBlockEntity(
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
 
-	fun checkAntenna() {
+	private fun updateAntenna() {
 		val level = level ?: return
 
 		antennaValid = ANTENNA_RELATIVE_POSITIONS.all { relPos ->
@@ -32,12 +32,28 @@ class BiomeRadarBlockEntity(
 		}
 	}
 
-	fun serverTick() {
+	private fun checkAntenna() {
+		val wasValid = antennaValid
+		updateAntenna()
+		val isValid = antennaValid
 
+		// Do something?
+	}
+
+	fun serverTick() {
+		val level = level ?: return
+
+		if (level.gameTime % 20 == 0L) {
+			checkAntenna()
+		}
 	}
 
 	fun clientTick() {
+		val level = level ?: return
 
+		if (level.gameTime % 3 != 0L) return
+
+		// spawn particles
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
