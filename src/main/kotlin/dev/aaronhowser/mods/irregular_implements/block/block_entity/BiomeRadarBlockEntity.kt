@@ -26,10 +26,12 @@ class BiomeRadarBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.BIOME_RADAR.get(), pos, blockState) {
 
+	enum class Stage { NOT_SEARCHING, SEARCHING, DONE }
+
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
-
 	private var biomeStack: ItemStack = ItemStack.EMPTY
+	private var stage: Stage = Stage.NOT_SEARCHING
 
 	fun getBiomeStack(): ItemStack = biomeStack.copy()
 	fun setBiomeStack(stack: ItemStack) {
@@ -94,7 +96,7 @@ class BiomeRadarBlockEntity(
 		if (!antennaValid) return
 
 		val level = level ?: return
-		if (level.gameTime % 3 != 0L) return
+		if (level.gameTime % 2 != 0L) return
 
 		val particlePositions = PARTICLE_POINTS.map { it.offset(blockPos).bottomCenter.add(0.0, 0.2, 0.0) }
 
@@ -119,24 +121,27 @@ class BiomeRadarBlockEntity(
 
 		antennaValid = tag.getBoolean(ANTENNA_VALID_NBT)
 
-		if (tag.contains(BIOME_POS_NBT)) {
-			biomePos = BlockPos.of(tag.getLong(BIOME_POS_NBT))
+		biomePos = if (tag.contains(BIOME_POS_NBT)) {
+			BlockPos.of(tag.getLong(BIOME_POS_NBT))
+		} else {
+			null
 		}
 
 		biomeStack = ItemStack.parseOptional(registries, tag.getCompound(BIOME_STACK_NBT))
+		stage = Stage.entries[tag.getInt(STAGE_NBT)]
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
 		tag.putBoolean(ANTENNA_VALID_NBT, antennaValid)
+		tag.put(BIOME_STACK_NBT, biomeStack.saveOptional(registries))
+		tag.putInt(STAGE_NBT, stage.ordinal)
 
 		val bp = biomePos
 		if (bp != null) {
 			tag.putLong(BIOME_POS_NBT, bp.asLong())
 		}
-
-		tag.put(BIOME_STACK_NBT, biomeStack.saveOptional(registries))
 	}
 
 	// Syncs with client
@@ -147,6 +152,7 @@ class BiomeRadarBlockEntity(
 		private const val ANTENNA_VALID_NBT = "AntennaValid"
 		private const val BIOME_POS_NBT = "BiomePos"
 		private const val BIOME_STACK_NBT = "BiomeStack"
+		private const val STAGE_NBT = "Stage"
 
 		val ANTENNA_RELATIVE_POSITIONS: List<BlockPos> =
 			listOf(
