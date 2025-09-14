@@ -4,7 +4,10 @@ import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -16,6 +19,7 @@ class BiomeRadarBlockEntity(
 ) : BlockEntity(ModBlockEntities.BIOME_RADAR.get(), pos, blockState) {
 
 	private var antennaValid: Boolean = false
+	private var biomePos: BlockPos? = null
 
 	fun checkAntenna() {
 		val level = level ?: return
@@ -28,7 +32,38 @@ class BiomeRadarBlockEntity(
 		}
 	}
 
+	fun serverTick() {
+
+	}
+
+	fun clientTick() {
+
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		antennaValid = tag.getBoolean(ANTENNA_VALID_NBT)
+		if (tag.contains(BIOME_POS_NBT)) {
+			biomePos = BlockPos.of(tag.getLong(BIOME_POS_NBT))
+		}
+	}
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		tag.putBoolean(ANTENNA_VALID_NBT, antennaValid)
+
+		val bp = biomePos
+		if (bp != null) {
+			tag.putLong(BIOME_POS_NBT, bp.asLong())
+		}
+	}
+
 	companion object {
+		private const val ANTENNA_VALID_NBT = "AntennaValid"
+		private const val BIOME_POS_NBT = "BiomePos"
+
 		val ANTENNA_RELATIVE_POSITIONS = listOf(
 			BlockPos(0, 1, 0),
 			BlockPos(0, 2, 0),
@@ -56,6 +91,19 @@ class BiomeRadarBlockEntity(
 				32,
 				64
 			)?.first
+		}
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: BiomeRadarBlockEntity
+		) {
+			if (level.isClientSide) {
+				blockEntity.clientTick()
+			} else {
+				blockEntity.serverTick()
+			}
 		}
 	}
 
