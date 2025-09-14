@@ -18,6 +18,8 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -35,8 +37,12 @@ class AutoPlacerBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntities.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider {
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
-	private val invWrapper = InvWrapper(container)
+	val container: ImprovedSimpleContainer = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+		override fun canAddItem(stack: ItemStack): Boolean {
+			return super.canAddItem(stack) && stack.item is BlockItem
+		}
+	}
+	private val invWrapper: InvWrapper = InvWrapper(container)
 
 	private var uuid: UUID? = null
 	private var fakePlayer: WeakReference<FakePlayer>? = null

@@ -3,12 +3,14 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
@@ -25,7 +27,11 @@ class BiomeRadarBlockEntity(
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
 
-	val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	val container: ImprovedSimpleContainer = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+		override fun canAddItem(stack: ItemStack): Boolean {
+			return super.canAddItem(stack) && stack.has(ModDataComponents.BIOME)
+		}
+	}
 	private val invWrapper: InvWrapper = InvWrapper(container)
 
 	fun getItemHandler(): IItemHandler = invWrapper
