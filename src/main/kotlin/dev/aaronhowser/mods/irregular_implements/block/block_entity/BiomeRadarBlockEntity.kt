@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
@@ -206,9 +207,9 @@ class BiomeRadarBlockEntity(
 			return level.findClosestBiome3d(
 				Predicate { it.`is`(targetBiome) },
 				searchFrom,
-				6400,
-				32,
-				64
+				ServerConfig.BIOME_RADAR_SEARCH_RADIUS.get(),
+				ServerConfig.BIOME_RADAR_HORIZONTAL_STEP.get(),
+				ServerConfig.BIOME_RADAR_VERTICAL_STEP.get()
 			)?.first
 		}
 

@@ -11,6 +11,7 @@ class ServerConfig(
 		basicServerConfigs()
 		biomePainter()
 		spectreConfigs()
+		biomeRadar()
 
 		builder.build()
 	}
@@ -161,11 +162,33 @@ class ServerConfig(
 		builder.pop()
 	}
 
+	private fun biomeRadar() {
+		builder.push(BIOME_RADAR_CATEGORY)
+
+		BIOME_RADAR_SEARCH_RADIUS = builder
+			.comment("The radius that the Biome Radar will search for the selected biome.")
+			.defineInRange("biomeRadarSearchRadius", 6400, 1, 10000)
+
+		BIOME_RADAR_HORIZONTAL_STEP = builder
+			.comment("The horizontal step size that the Biome Radar will use when searching.")
+			.defineInRange("biomeRadarHorizontalStep", 32, 1, 100)
+
+		BIOME_RADAR_VERTICAL_STEP = builder
+			.comment("The vertical step size that the Biome Radar will use when searching.")
+			.defineInRange("biomeRadarVerticalStep", 64, 1, 100)
+
+		builder.pop()
+	}
+
 	companion object {
 		private val configPair: Pair<ServerConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ServerConfig)
 
 		val CONFIG: ServerConfig = configPair.left
 		val CONFIG_SPEC: ModConfigSpec = configPair.right
+
+		const val SPECTRE_CATEGORY = "spectre"
+		const val BIOME_PAINTER_CATEGORY = "biome_painter"
+		const val BIOME_RADAR_CATEGORY = "biome_radar"
 
 		lateinit var BLOCK_DESTABILIZER_LIMIT: ModConfigSpec.IntValue
 
@@ -195,9 +218,6 @@ class ServerConfig(
 		lateinit var SPECTRE_CHARGER_ENDER: ModConfigSpec.IntValue
 		lateinit var SPECTRE_CHARGER_GENESIS: ModConfigSpec.IntValue
 
-		const val SPECTRE_CATEGORY = "spectre"
-		const val BIOME_PAINTER_CATEGORY = "biome_painter"
-
 		lateinit var ESCAPE_ROPE_MAX_BLOCKS: ModConfigSpec.IntValue
 		lateinit var ESCAPE_ROPE_BLOCKS_PER_TICK: ModConfigSpec.IntValue
 
@@ -212,6 +232,10 @@ class ServerConfig(
 		lateinit var PITCHER_PLANT_BONE_MEAL_FILL_AMOUNT: ModConfigSpec.IntValue
 		lateinit var PITCHER_PLANT_USE_FILL_AMOUNT: ModConfigSpec.IntValue
 		lateinit var PITCHER_PLANT_PIPE_DRAIN_RATE: ModConfigSpec.IntValue
+
+		lateinit var BIOME_RADAR_SEARCH_RADIUS: ModConfigSpec.IntValue
+		lateinit var BIOME_RADAR_HORIZONTAL_STEP: ModConfigSpec.IntValue
+		lateinit var BIOME_RADAR_VERTICAL_STEP: ModConfigSpec.IntValue
 	}
 
 }
