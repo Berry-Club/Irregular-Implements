@@ -1,11 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -16,8 +13,6 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
-import net.neoforged.neoforge.items.IItemHandler
-import net.neoforged.neoforge.items.wrapper.InvWrapper
 
 class BiomeRadarBlockEntity(
 	pos: BlockPos,
@@ -27,14 +22,7 @@ class BiomeRadarBlockEntity(
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
 
-	val container: ImprovedSimpleContainer = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
-		override fun canAddItem(stack: ItemStack): Boolean {
-			return super.canAddItem(stack) && stack.has(ModDataComponents.BIOME)
-		}
-	}
-	private val invWrapper: InvWrapper = InvWrapper(container)
-
-	fun getItemHandler(): IItemHandler = invWrapper
+	private var biomeStack: ItemStack = ItemStack.EMPTY
 
 	private fun updateAntenna() {
 		val level = level ?: return
@@ -77,8 +65,13 @@ class BiomeRadarBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		antennaValid = tag.getBoolean(ANTENNA_VALID_NBT)
+
 		if (tag.contains(BIOME_POS_NBT)) {
 			biomePos = BlockPos.of(tag.getLong(BIOME_POS_NBT))
+		}
+
+		if (tag.contains(BIOME_STACK_NBT)) {
+			biomeStack = ItemStack.parseOptional(registries, tag.getCompound(BIOME_STACK_NBT))
 		}
 	}
 
@@ -91,12 +84,16 @@ class BiomeRadarBlockEntity(
 		if (bp != null) {
 			tag.putLong(BIOME_POS_NBT, bp.asLong())
 		}
+
+		if (!biomeStack.isEmpty) {
+			tag.put(BIOME_STACK_NBT, biomeStack.save(registries))
+		}
 	}
 
 	companion object {
 		private const val ANTENNA_VALID_NBT = "AntennaValid"
 		private const val BIOME_POS_NBT = "BiomePos"
-		const val CONTAINER_SIZE = 1
+		private const val BIOME_STACK_NBT = "BiomeStack"
 
 		val ANTENNA_RELATIVE_POSITIONS = listOf(
 			BlockPos(0, 1, 0),
@@ -140,9 +137,6 @@ class BiomeRadarBlockEntity(
 			}
 		}
 
-		fun getCapability(autoPlacer: BiomeRadarBlockEntity, direction: Direction?): IItemHandler {
-			return autoPlacer.getItemHandler()
-		}
 	}
 
 }

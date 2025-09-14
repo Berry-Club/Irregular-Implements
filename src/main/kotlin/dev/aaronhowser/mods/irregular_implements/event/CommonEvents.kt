@@ -250,11 +250,6 @@ object CommonEvents {
 			AutoPlacerBlockEntity::getCapability,
 		)
 
-		event.registerBlockEntity(
-			Capabilities.ItemHandler.BLOCK,
-			ModBlockEntities.BIOME_RADAR.get(),
-			BiomeRadarBlockEntity::getCapability,
-		)
 	}
 
 	@SubscribeEvent
