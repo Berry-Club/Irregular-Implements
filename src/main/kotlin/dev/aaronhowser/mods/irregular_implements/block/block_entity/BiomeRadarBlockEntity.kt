@@ -48,6 +48,8 @@ class BiomeRadarBlockEntity(
 
 		if (isValid == wasValid) return
 
+		setChanged()
+
 		// Do something?
 	}
 

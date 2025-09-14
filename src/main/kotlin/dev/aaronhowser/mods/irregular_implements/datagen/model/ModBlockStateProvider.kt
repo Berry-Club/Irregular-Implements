@@ -78,6 +78,7 @@ class ModBlockStateProvider(
 		autoPlacer()
 		glowingMushroom()
 		blockDetector()
+		biomeRadar()
 	}
 
 	private fun blockDetector() {
@@ -965,6 +966,104 @@ class ModBlockStateProvider(
 				existingFileHelper
 			)
 		)
+	}
+
+	private fun biomeRadar() {
+		val block = ModBlocks.BIOME_RADAR.get()
+
+		val model = models()
+			.withExistingParent(name(block), mcLoc("block/block"))
+			.renderType(RenderType.cutout().name)
+			.texture("particle", mcLoc("block/iron_block"))
+			.texture("texture", mcLoc("block/iron_block"))
+			.texture("glass", mcLoc("block/glass"))
+			.texture("top", modLoc("block/biome_radar_top"))
+
+			.element()
+			.from(0f, 14f, 0f).to(16f, 16f, 16f)
+			.face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
+			.face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#top").end()
+			.face(Direction.NORTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+			.face(Direction.SOUTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+			.face(Direction.WEST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+			.face(Direction.EAST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+			.end()
+
+			.element()
+			.from(0f, 0f, 0f).to(16f, 2f, 16f)
+			.face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
+			.face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#texture").end()
+			.face(Direction.NORTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+			.face(Direction.SOUTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+			.face(Direction.WEST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+			.face(Direction.EAST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+			.end()
+
+			.element()
+			.from(0f, 2f, 0f).to(2f, 14f, 2f)
+			.face(Direction.DOWN).uvs(16f, 2f, 14f, 0f).texture("#texture").end()
+			.face(Direction.UP).uvs(0f, 0f, 2f, 2f).texture("#texture").end()
+			.face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.end()
+
+			.element()
+			.from(14f, 2f, 0f).to(16f, 14f, 2f)
+			.face(Direction.DOWN).uvs(2f, 2f, 0f, 0f).texture("#texture").end()
+			.face(Direction.UP).uvs(14f, 0f, 16f, 2f).texture("#texture").end()
+			.face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.end()
+
+			.element()
+			.from(0f, 2f, 14f).to(2f, 14f, 16f)
+			.face(Direction.DOWN).uvs(16f, 16f, 14f, 14f).texture("#texture").end()
+			.face(Direction.UP).uvs(0f, 14f, 2f, 16f).texture("#texture").end()
+			.face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.end()
+
+			.element()
+			.from(14f, 2f, 14f).to(16f, 14f, 16f)
+			.face(Direction.DOWN).uvs(2f, 16f, 0f, 14f).texture("#texture").end()
+			.face(Direction.UP).uvs(14f, 14f, 16f, 16f).texture("#texture").end()
+			.face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			.face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			.end()
+
+			.element()
+			.from(0.00625f, 2f, 2f).to(0.00625f, 14f, 14f)
+			.face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.end()
+
+			.element()
+			.from(15.99375f, 2f, 2f).to(15.99375f, 14f, 14f)
+			.face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.end()
+
+			.element()
+			.from(2f, 2f, 0.00625f).to(14f, 14f, 0.00625f)
+			.face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.end()
+
+			.element()
+			.from(2f, 2f, 15.99375f).to(14f, 14f, 15.99375f)
+			.face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			.end()
+
+		simpleBlockWithItem(block, model)
 	}
 
 	private fun spectreEnergyInjector() {
