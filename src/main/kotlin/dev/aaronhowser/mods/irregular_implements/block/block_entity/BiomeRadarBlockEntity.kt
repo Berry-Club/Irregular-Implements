@@ -26,40 +26,20 @@ class BiomeRadarBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.BIOME_RADAR.get(), pos, blockState) {
 
-	enum class Stage { NOT_SEARCHING, SEARCHING, DONE }
-
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
 	private var biomeStack: ItemStack = ItemStack.EMPTY
-	private var stage: Stage = Stage.NOT_SEARCHING
+
+	private var flameProgress: Double = 0.0
 
 	fun getBiomeStack(): ItemStack = biomeStack.copy()
 	fun setBiomeStack(stack: ItemStack) {
 		biomeStack = stack.copy()
-		setChanged()
-		checkAntenna()
 
+		searchForBiome()
+
+		setChanged()
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
-
-		updateBiomePosition()
-	}
-
-	private fun updateBiomePosition() {
-		val level = level as? ServerLevel ?: return
-
-		val targetBiomeKey = biomeStack.get(ModDataComponents.BIOME)?.key
-
-		val pos = if (targetBiomeKey == null) {
-			null
-		} else {
-			locateBiome(targetBiomeKey, blockPos, level)
-		}
-
-		if (pos == biomePos) return
-
-		biomePos = pos
-		setChanged()
-		level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
 	private fun updateAntenna() {
@@ -80,11 +60,15 @@ class BiomeRadarBlockEntity(
 
 		if (isValid == wasValid) return
 
+		if (!isValid) {
+			biomePos = null
+		}
+
 		setChanged()
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
-	fun serverTick() {
+	private fun serverTick() {
 		val level = level ?: return
 
 		if (level.gameTime % 20 == 0L) {
@@ -92,11 +76,34 @@ class BiomeRadarBlockEntity(
 		}
 	}
 
-	fun clientTick() {
+	private fun clientTick() {
 		if (!antennaValid) return
+		updateFlameProgress()
+		spawnParticles()
+	}
 
+	private fun updateFlameProgress() {
+		if (antennaValid) {
+			val bp = biomePos
+			if (bp != null) {
+				if (flameProgress < 1.0) {
+					flameProgress += FLAME_PROGRESS_PER_TICK
+					if (flameProgress > 1.0) flameProgress = 1.0
+				}
+			} else {
+				if (flameProgress > 0.0) {
+					flameProgress -= FLAME_PROGRESS_PER_TICK
+					if (flameProgress < 0.0) flameProgress = 0.0
+				}
+			}
+		} else {
+			flameProgress = 0.0
+		}
+	}
+
+	private fun spawnParticles() {
 		val level = level ?: return
-		if (level.gameTime % 2 != 0L) return
+		if (level.gameTime % 3 != 0L) return
 
 		val particlePositions = PARTICLE_POINTS.map { it.offset(blockPos).bottomCenter.add(0.0, 0.2, 0.0) }
 
@@ -104,16 +111,34 @@ class BiomeRadarBlockEntity(
 		val direction = if (biomePos == null) {
 			Vec3.ZERO
 		} else {
-			this.blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03)
+			this.blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03).scale(flameProgress)
 		}
 
 		for (pos in particlePositions) {
 			level.addParticle(
 				ModParticleTypes.FLOO_FLAME.get(),
 				pos.x, pos.y, pos.z,
-				direction.x, 0.1, direction.z
+				direction.x, 0.05, direction.z
 			)
 		}
+	}
+
+	private fun searchForBiome() {
+		val level = level as? ServerLevel ?: return
+
+		val targetBiomeKey = biomeStack.get(ModDataComponents.BIOME)?.key
+
+		val pos = if (targetBiomeKey == null) {
+			null
+		} else {
+			locateBiome(targetBiomeKey, blockPos, level)
+		}
+
+		if (pos == biomePos) return
+
+		biomePos = pos
+		setChanged()
+		level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -128,7 +153,6 @@ class BiomeRadarBlockEntity(
 		}
 
 		biomeStack = ItemStack.parseOptional(registries, tag.getCompound(BIOME_STACK_NBT))
-		stage = Stage.entries[tag.getInt(STAGE_NBT)]
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -136,7 +160,6 @@ class BiomeRadarBlockEntity(
 
 		tag.putBoolean(ANTENNA_VALID_NBT, antennaValid)
 		tag.put(BIOME_STACK_NBT, biomeStack.saveOptional(registries))
-		tag.putInt(STAGE_NBT, stage.ordinal)
 
 		val bp = biomePos
 		if (bp != null) {
@@ -152,7 +175,8 @@ class BiomeRadarBlockEntity(
 		private const val ANTENNA_VALID_NBT = "AntennaValid"
 		private const val BIOME_POS_NBT = "BiomePos"
 		private const val BIOME_STACK_NBT = "BiomeStack"
-		private const val STAGE_NBT = "Stage"
+
+		private const val FLAME_PROGRESS_PER_TICK = 1f / 100f
 
 		val ANTENNA_RELATIVE_POSITIONS: List<BlockPos> =
 			listOf(
