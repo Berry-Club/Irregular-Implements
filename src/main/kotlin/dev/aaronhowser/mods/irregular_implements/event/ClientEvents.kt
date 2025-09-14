@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.*
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpectreIlluminatorBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.BiomeRadarBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.DiaphanousBlockEntityRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.PlayerInterfaceBlockEntityRenderer
@@ -218,6 +219,7 @@ object ClientEvents {
 		event.registerBlockEntityRenderer(ModBlockEntities.NATURE_CHEST.get(), ::ChestRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntities.WATER_CHEST.get(), ::ChestRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntities.PLAYER_INTERFACE.get(), ::PlayerInterfaceBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntities.BIOME_RADAR.get(), ::BiomeRadarBlockEntityRenderer)
 
 		event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
 		event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)

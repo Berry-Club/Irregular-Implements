@@ -19,7 +19,7 @@ class PlayerInterfaceBlockEntityRenderer(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<PlayerInterfaceBlockEntity> {
 
-	private val skullModels: MutableMap<SkullBlock.Type, SkullModelBase> = SkullBlockRenderer.createSkullRenderers(context.modelSet)
+	private val skullModels: Map<SkullBlock.Type, SkullModelBase> = SkullBlockRenderer.createSkullRenderers(context.modelSet)
 
 	override fun render(
 		blockEntity: PlayerInterfaceBlockEntity,

@@ -3,9 +3,12 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
@@ -28,6 +31,7 @@ class BiomeRadarBlockEntity(
 	fun setBiomeStack(stack: ItemStack) {
 		biomeStack = stack.copy()
 		setChanged()
+		checkAntenna()
 	}
 
 	private fun updateAntenna() {
@@ -98,6 +102,10 @@ class BiomeRadarBlockEntity(
 		}
 	}
 
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
 	companion object {
 		private const val ANTENNA_VALID_NBT = "AntennaValid"
 		private const val BIOME_POS_NBT = "BiomePos"
@@ -119,7 +127,7 @@ class BiomeRadarBlockEntity(
 		)
 
 		fun locateBiome(
-			targetBiome: Holder<Biome>,
+			targetBiome: ResourceKey<Biome>,
 			searchFrom: BlockPos,
 			level: ServerLevel
 		): BlockPos? {
