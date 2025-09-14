@@ -24,6 +24,12 @@ class BiomeRadarBlockEntity(
 
 	private var biomeStack: ItemStack = ItemStack.EMPTY
 
+	fun getBiomeStack(): ItemStack = biomeStack.copy()
+	fun setBiomeStack(stack: ItemStack) {
+		biomeStack = stack.copy()
+		setChanged()
+	}
+
 	private fun updateAntenna() {
 		val level = level ?: return
 
