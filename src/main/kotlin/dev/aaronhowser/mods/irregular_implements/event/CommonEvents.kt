@@ -249,6 +249,12 @@ object CommonEvents {
 			ModBlockEntities.AUTO_PLACER.get(),
 			AutoPlacerBlockEntity::getCapability,
 		)
+
+		event.registerBlockEntity(
+			Capabilities.ItemHandler.BLOCK,
+			ModBlockEntities.BIOME_RADAR.get(),
+			BiomeRadarBlockEntity::getCapability,
+		)
 	}
 
 	@SubscribeEvent

@@ -1,8 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -12,6 +14,8 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.wrapper.InvWrapper
 
 class BiomeRadarBlockEntity(
 	pos: BlockPos,
@@ -20,6 +24,11 @@ class BiomeRadarBlockEntity(
 
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
+
+	val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val invWrapper: InvWrapper = InvWrapper(container)
+
+	fun getItemHandler(): IItemHandler = invWrapper
 
 	private fun updateAntenna() {
 		val level = level ?: return
@@ -36,6 +45,8 @@ class BiomeRadarBlockEntity(
 		val wasValid = antennaValid
 		updateAntenna()
 		val isValid = antennaValid
+
+		if (isValid == wasValid) return
 
 		// Do something?
 	}
@@ -79,6 +90,7 @@ class BiomeRadarBlockEntity(
 	companion object {
 		private const val ANTENNA_VALID_NBT = "AntennaValid"
 		private const val BIOME_POS_NBT = "BiomePos"
+		const val CONTAINER_SIZE = 1
 
 		val ANTENNA_RELATIVE_POSITIONS = listOf(
 			BlockPos(0, 1, 0),
@@ -120,6 +132,10 @@ class BiomeRadarBlockEntity(
 			} else {
 				blockEntity.serverTick()
 			}
+		}
+
+		fun getCapability(autoPlacer: BiomeRadarBlockEntity, direction: Direction?): IItemHandler {
+			return autoPlacer.getItemHandler()
 		}
 	}
 
