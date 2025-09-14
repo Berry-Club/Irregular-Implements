@@ -73,7 +73,8 @@ class BiomeRadarBlockEntity(
 
 		if (level.gameTime % 3 != 0L) return
 
-		// spawn particles
+		val particlePositions = PARTICLE_POINTS.map { it.offset(blockPos) }
+
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -110,20 +111,31 @@ class BiomeRadarBlockEntity(
 		private const val BIOME_POS_NBT = "BiomePos"
 		private const val BIOME_STACK_NBT = "BiomeStack"
 
-		val ANTENNA_RELATIVE_POSITIONS = listOf(
-			BlockPos(0, 1, 0),
-			BlockPos(0, 2, 0),
+		val ANTENNA_RELATIVE_POSITIONS: List<BlockPos> =
+			listOf(
+				BlockPos(0, 1, 0),
+				BlockPos(0, 2, 0),
 
-			BlockPos(1, 2, 0),
-			BlockPos(-1, 2, 0),
-			BlockPos(0, 2, 1),
-			BlockPos(0, 2, -1),
+				BlockPos(1, 2, 0),
+				BlockPos(-1, 2, 0),
+				BlockPos(0, 2, 1),
+				BlockPos(0, 2, -1),
 
-			BlockPos(1, 3, 0),
-			BlockPos(-1, 3, 0),
-			BlockPos(0, 3, 1),
-			BlockPos(0, 3, -1),
-		)
+				BlockPos(1, 3, 0),
+				BlockPos(-1, 3, 0),
+				BlockPos(0, 3, 1),
+				BlockPos(0, 3, -1),
+			)
+
+		val PARTICLE_POINTS: List<BlockPos> =
+			listOf(
+				BlockPos(1, 4, 0),
+				BlockPos(-1, 4, 0),
+				BlockPos(0, 4, 1),
+				BlockPos(0, 4, -1),
+
+				BlockPos(0, 6, 0)
+			)
 
 		fun locateBiome(
 			targetBiome: ResourceKey<Biome>,
