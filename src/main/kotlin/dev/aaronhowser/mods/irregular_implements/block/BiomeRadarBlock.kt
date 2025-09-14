@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
@@ -20,9 +21,18 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.Shapes
+import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.items.ItemHandlerHelper
 
-class BiomeRadarBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
+class BiomeRadarBlock : Block(
+	Properties
+		.ofFullCopy(Blocks.IRON_BLOCK)
+		.noOcclusion()
+		.isViewBlocking(Blocks::never)
+		.isSuffocating(Blocks::never)
+), EntityBlock {
 
 	override fun useItemOn(
 		clickedStack: ItemStack,
@@ -80,5 +90,9 @@ class BiomeRadarBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityB
 			BiomeRadarBlockEntity::tick
 		)
 	}
+
+	override fun getShadeBrightness(state: BlockState, level: BlockGetter, pos: BlockPos): Float = 1f
+	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean = true
+	override fun getVisualShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape = Shapes.empty()
 
 }
