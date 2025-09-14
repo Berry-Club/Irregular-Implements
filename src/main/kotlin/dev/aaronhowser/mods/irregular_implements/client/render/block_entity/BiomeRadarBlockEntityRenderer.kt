@@ -12,6 +12,7 @@ class BiomeRadarBlockEntityRenderer(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<BiomeRadarBlockEntity> {
 
+	//FIXME: packedLight is being received as 0 for some reason?
 	override fun render(
 		blockEntity: BiomeRadarBlockEntity,
 		partialTick: Float,
@@ -37,7 +38,7 @@ class BiomeRadarBlockEntityRenderer(
 		context.itemRenderer.renderStatic(
 			stack,
 			ItemDisplayContext.FIXED,
-			packedLight,
+			15728880,
 			packedOverlay,
 			poseStack,
 			bufferSource,
