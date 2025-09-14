@@ -30,6 +30,7 @@ class BiomeRadarBlockEntity(
 	private var biomePos: BlockPos? = null
 	private var biomeStack: ItemStack = ItemStack.EMPTY
 
+	// Client only
 	private var flameProgress: Double = 0.0
 
 	fun getBiomeStack(): ItemStack = biomeStack.copy()
@@ -83,21 +84,15 @@ class BiomeRadarBlockEntity(
 	}
 
 	private fun updateFlameProgress() {
-		if (antennaValid) {
-			val bp = biomePos
-			if (bp != null) {
-				if (flameProgress < 1.0) {
-					flameProgress += FLAME_PROGRESS_PER_TICK
-					if (flameProgress > 1.0) flameProgress = 1.0
-				}
-			} else {
-				if (flameProgress > 0.0) {
-					flameProgress -= FLAME_PROGRESS_PER_TICK
-					if (flameProgress < 0.0) flameProgress = 0.0
-				}
-			}
-		} else {
+		if (!antennaValid) {
 			flameProgress = 0.0
+			return
+		}
+
+		flameProgress = if (biomePos != null) {
+			(flameProgress + FLAME_PROGRESS_PER_TICK).coerceAtMost(1.0)
+		} else {
+			(flameProgress - FLAME_PROGRESS_PER_TICK).coerceAtLeast(0.0)
 		}
 	}
 
