@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -37,6 +38,26 @@ class BiomeRadarBlockEntity(
 		checkAntenna()
 
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
+
+		updateBiomePosition()
+	}
+
+	private fun updateBiomePosition() {
+		val level = level as? ServerLevel ?: return
+
+		val targetBiomeKey = biomeStack.get(ModDataComponents.BIOME)?.key
+
+		val pos = if (targetBiomeKey == null) {
+			null
+		} else {
+			locateBiome(targetBiomeKey, blockPos, level)
+		}
+
+		if (pos == biomePos) return
+
+		biomePos = pos
+		setChanged()
+		level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
 	private fun updateAntenna() {
@@ -59,8 +80,6 @@ class BiomeRadarBlockEntity(
 
 		setChanged()
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
-
-		// Do something?
 	}
 
 	fun serverTick() {
@@ -83,14 +102,14 @@ class BiomeRadarBlockEntity(
 		val direction = if (biomePos == null) {
 			Vec3.ZERO
 		} else {
-			this.blockPos.center.vectorTo(biomePos.center).normalize()
+			this.blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03)
 		}
 
 		for (pos in particlePositions) {
 			level.addParticle(
 				ModParticleTypes.FLOO_FLAME.get(),
 				pos.x, pos.y, pos.z,
-				direction.x * 0.04, 0.1, direction.z
+				direction.x, 0.1, direction.z
 			)
 		}
 	}
