@@ -55,10 +55,6 @@ object OtherUtil {
 		return PotionContents.createItemStack(Items.POTION, potion)
 	}
 
-	fun Vec3i.toVec3(): Vec3 {
-		return Vec3(this.x.toDouble(), this.y.toDouble(), this.z.toDouble())
-	}
-
 	fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
 		return level.clip(
 			ClipContext(
