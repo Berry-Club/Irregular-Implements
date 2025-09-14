@@ -25,7 +25,7 @@ object DiviningRodRenderer {
 			return
 		}
 
-		val radius = ServerConfig.DIVINING_ROD_CHECK_RADIUS.get()
+		val radius = ServerConfig.CONFIG.diviningRodCheckRadius.get()
 
 		val positions = BlockPos.betweenClosedStream(
 			playerPos.offset(-radius, -radius, -radius),

@@ -73,7 +73,7 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 
 			var points = if (player.hasInfiniteMaterials()) 9999 else component.points
 
-			val radius = ServerConfig.BIOME_PAINTER_RADIUS.get()
+			val radius = ServerConfig.CONFIG.biomePainterRadius.get()
 
 			//FIXME: Sometimes doesn't actually change the biome?????
 			val result = FillBiomeCommand.fill(
@@ -122,8 +122,8 @@ class BiomePainterItem(properties: Properties) : Item(properties) {
 				val level = player.level()
 				val playerPos = player.blockPosition()
 
-				val horizontalRadius = ServerConfig.BIOME_PAINTER_VIEW_HORIZONTAL_RADIUS.get()
-				val verticalRadius = ServerConfig.BIOME_PAINTER_VIEW_VERTICAL_RADIUS.get()
+				val horizontalRadius = ServerConfig.CONFIG.biomePainterViewHorizontalRadius.get()
+				val verticalRadius = ServerConfig.CONFIG.biomePainterViewVerticalRadius.get()
 
 				val matchingPositions = mutableSetOf<BlockPos>()
 				val unmatchingPositions = mutableSetOf<BlockPos>()

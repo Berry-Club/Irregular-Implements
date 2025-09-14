@@ -217,7 +217,7 @@ class BlockDestabilizerBlockEntity(
 
 	// Runs every tick if `this.state` is `SEARCHING`
 	private fun stepSearch() {
-		val doneSearching = this.toCheck.isEmpty() || this.targetBlockPositions.count() >= ServerConfig.BLOCK_DESTABILIZER_LIMIT.get()
+		val doneSearching = this.toCheck.isEmpty() || this.targetBlockPositions.count() >= ServerConfig.CONFIG.blockDestabilizerLimit.get()
 		if (doneSearching) {
 			initDrop()
 			return

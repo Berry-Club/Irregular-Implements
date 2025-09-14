@@ -99,27 +99,27 @@ class SpectreCoilBlock private constructor(
 	) {
 		BASIC(
 			color = Color.CYAN.rgb,
-			amountGetter = { ServerConfig.SPECTRE_BASIC_RATE.get() },
+			amountGetter = { ServerConfig.CONFIG.spectreBasicRate.get() },
 			isGenerator = false
 		),
 		REDSTONE(
 			color = Color.RED.rgb,
-			amountGetter = { ServerConfig.SPECTRE_REDSTONE_RATE.get() },
+			amountGetter = { ServerConfig.CONFIG.spectreRedstoneRate.get() },
 			isGenerator = false
 		),
 		ENDER(
 			color = Color(200, 0, 210).rgb,
-			amountGetter = { ServerConfig.SPECTRE_ENDER_RATE.get() },
+			amountGetter = { ServerConfig.CONFIG.spectreEnderRate.get() },
 			isGenerator = false
 		),
 		NUMBER(
 			color = Color.GREEN.rgb,
-			amountGetter = { ServerConfig.SPECTRE_NUMBER_RATE.get() },
+			amountGetter = { ServerConfig.CONFIG.spectreNumberRate.get() },
 			isGenerator = true
 		),
 		GENESIS(
 			color = Color.ORANGE.rgb,
-			amountGetter = { ServerConfig.SPECTRE_GENESIS_RATE.get() },
+			amountGetter = { ServerConfig.CONFIG.spectreGenesisRate.get() },
 			isGenerator = true
 		),
 	}

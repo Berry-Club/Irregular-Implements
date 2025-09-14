@@ -44,7 +44,7 @@ class RainShieldBlockEntity(
 			if (blockState.getValue(RainShieldBlock.ENABLED)) {
 				val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
 
-				val checkRadius = ServerConfig.RAIN_SHIELD_CHUNK_RADIUS.get()
+				val checkRadius = ServerConfig.CONFIG.rainShieldChunkRadius.get()
 				val chunkX = chunkPos.x
 				val chunkZ = chunkPos.z
 

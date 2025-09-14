@@ -50,7 +50,7 @@ class PeaceCandleBlockEntity(
 
 			val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
 
-			val checkRadius = ServerConfig.PEACE_CANDLE_CHUNK_RADIUS.get()
+			val checkRadius = ServerConfig.CONFIG.peaceCandleChunkRadius.get()
 			val chunkX = chunkPos.x
 			val chunkZ = chunkPos.z
 

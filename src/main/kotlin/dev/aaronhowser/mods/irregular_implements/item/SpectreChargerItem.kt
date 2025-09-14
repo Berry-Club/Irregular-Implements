@@ -85,19 +85,19 @@ class SpectreChargerItem(
 	) {
 		BASIC(
 			color = Color.CYAN.rgb,
-			amountGetter = { ServerConfig.SPECTRE_CHARGER_BASIC.get() }
+			amountGetter = { ServerConfig.CONFIG.spectreChargerBasic.get() }
 		),
 		REDSTONE(
 			color = Color.RED.rgb,
-			amountGetter = { ServerConfig.SPECTRE_CHARGER_REDSTONE.get() }
+			amountGetter = { ServerConfig.CONFIG.specterChargerRedstone.get() }
 		),
 		ENDER(
 			color = Color(200, 0, 210).rgb,
-			amountGetter = { ServerConfig.SPECTRE_CHARGER_ENDER.get() }
+			amountGetter = { ServerConfig.CONFIG.spectreChargerEnder.get() }
 		),
 		GENESIS(
 			color = Color.ORANGE.rgb,
-			amountGetter = { ServerConfig.SPECTRE_CHARGER_GENESIS.get() }
+			amountGetter = { ServerConfig.CONFIG.spectreChargerGenesis.get() }
 		)
 	}
 

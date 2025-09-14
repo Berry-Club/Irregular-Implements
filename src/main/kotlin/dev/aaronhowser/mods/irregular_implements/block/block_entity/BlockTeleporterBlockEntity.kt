@@ -77,7 +77,7 @@ class BlockTeleporterBlockEntity(
 		val targetLevel = if (myLevel.dimension() == targetLevelDim) {
 			myLevel
 		} else {
-			if (!ServerConfig.BLOCK_TELEPORTER_CROSS_DIMENSION.get()) {
+			if (!ServerConfig.CONFIG.blockTeleporterCrossDimension.get()) {
 				null
 			} else {
 				myLevel.server?.getLevel(targetLevelDim)

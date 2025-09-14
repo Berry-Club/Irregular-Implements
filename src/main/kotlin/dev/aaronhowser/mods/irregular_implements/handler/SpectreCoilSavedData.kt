@@ -156,7 +156,7 @@ class SpectreCoilSavedData : SavedData() {
 		const val ENERGY_NBT = "energy"
 
 		val MAX_ENERGY: Int
-			get() = ServerConfig.SPECTRE_BUFFER_CAPACITY.get()
+			get() = ServerConfig.CONFIG.spectreBufferCapacity.get()
 	}
 
 }

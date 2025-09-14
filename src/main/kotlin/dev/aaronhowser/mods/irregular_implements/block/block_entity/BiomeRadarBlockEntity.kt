@@ -207,9 +207,9 @@ class BiomeRadarBlockEntity(
 			return level.findClosestBiome3d(
 				Predicate { it.`is`(targetBiome) },
 				searchFrom,
-				ServerConfig.BIOME_RADAR_SEARCH_RADIUS.get(),
-				ServerConfig.BIOME_RADAR_HORIZONTAL_STEP.get(),
-				ServerConfig.BIOME_RADAR_VERTICAL_STEP.get()
+				ServerConfig.CONFIG.biomeRadarSearchRadius.get(),
+				ServerConfig.CONFIG.biomeRadarHorizontalStep.get(),
+				ServerConfig.CONFIG.biomeRadarVerticalStep.get()
 			)?.first
 		}
 

@@ -146,7 +146,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 		val currentContents = thisStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(listOf())
 		val storedStacks = currentContents.nonEmptyItems().toList()
 
-		val mayInsert = storedStacks.any { it.item == other.item } || storedStacks.size + 1 <= ServerConfig.BLOCK_REPLACER_UNIQUE_BLOCKS.get()
+		val mayInsert = storedStacks.any { it.item == other.item } || storedStacks.size + 1 <= ServerConfig.CONFIG.blockReplacerUniqueBlocks.get()
 		if (!mayInsert) return false
 
 		val newContents = OtherUtil.flattenStacks(storedStacks + other.copy())

@@ -17,7 +17,7 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 		val usedStack = player.getItemInHand(usedHand)
 		if (level.isClientSide) return InteractionResultHolder.pass(usedStack)
 
-		val clipResult = OtherUtil.getPovResult(level, player, ServerConfig.PORTABLE_ENDER_BRIDGE_RANGE.get())
+		val clipResult = OtherUtil.getPovResult(level, player, ServerConfig.CONFIG.portableEnderBridgeRange.get())
 
 		val pos = clipResult.blockPos
 		val state = level.getBlockState(pos)

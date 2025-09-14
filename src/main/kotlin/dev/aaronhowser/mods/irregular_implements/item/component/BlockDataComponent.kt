@@ -88,7 +88,7 @@ data class BlockDataComponent(
 
 		//TODO: Test this
 		var fluidPickup: BucketPickup? = null
-		if (ServerConfig.BLOCK_MOVER_TRY_VAPORIZE_FLUID.get() && fluidType.isVaporizedOnPlacement(level, posToPlaceIn, fluidStack)) {
+		if (ServerConfig.CONFIG.blockMoverTryVaporizeFluid.get() && fluidType.isVaporizedOnPlacement(level, posToPlaceIn, fluidStack)) {
 			val adjustedStateBlock = adjustedState.block
 
 			if (adjustedStateBlock is BucketPickup) {

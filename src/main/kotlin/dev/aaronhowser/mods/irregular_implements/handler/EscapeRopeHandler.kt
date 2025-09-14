@@ -72,8 +72,8 @@ object EscapeRopeHandler {
 
 			if (level != this.levelAtStart || !usedItem.`is`(ModItems.ESCAPE_ROPE)) return true
 
-			val limit = ServerConfig.ESCAPE_ROPE_MAX_BLOCKS.get()
-			val maxRuns = ServerConfig.ESCAPE_ROPE_BLOCKS_PER_TICK.get()
+			val limit = ServerConfig.CONFIG.escapeRopeMaxBlocks.get()
+			val maxRuns = ServerConfig.CONFIG.escapeRopeBlocksPerTick.get()
 			val shouldSpawnIndicator = true
 
 			val positionsToIndicate = mutableSetOf<BlockPos>()

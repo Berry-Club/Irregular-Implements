@@ -39,7 +39,7 @@ class PitcherPlantBlock : FlowerBlock(
 		pos: BlockPos,
 		random: RandomSource
 	) {
-		fillAdjacentTanks(level, pos, ServerConfig.PITCHER_PLANT_TICK_FILL_AMOUNT.get())
+		fillAdjacentTanks(level, pos, ServerConfig.CONFIG.pitcherPlantTickFillAmount.get())
 	}
 
 	override fun useItemOn(
@@ -56,7 +56,7 @@ class PitcherPlantBlock : FlowerBlock(
 		val usedStack = player.getItemInHand(hand)
 		val fluidCap = usedStack.getCapability(Capabilities.FluidHandler.ITEM) ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
-		val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, ServerConfig.PITCHER_PLANT_USE_FILL_AMOUNT.get()), IFluidHandler.FluidAction.SIMULATE)
+		val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, ServerConfig.CONFIG.pitcherPlantUseFillAmount.get()), IFluidHandler.FluidAction.SIMULATE)
 		fluidCap.fill(FluidStack(Fluids.WATER, amountThatFits), IFluidHandler.FluidAction.EXECUTE)
 
 		return ItemInteractionResult.SUCCESS
@@ -90,7 +90,7 @@ class PitcherPlantBlock : FlowerBlock(
 	}
 
 	override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-		fillAdjacentTanks(level, pos, ServerConfig.PITCHER_PLANT_BONE_MEAL_FILL_AMOUNT.get())
+		fillAdjacentTanks(level, pos, ServerConfig.CONFIG.pitcherPlantBoneMealFillAmount.get())
 	}
 
 	companion object {
@@ -121,7 +121,7 @@ class PitcherPlantBlock : FlowerBlock(
 			override fun fill(resource: FluidStack, action: IFluidHandler.FluidAction): Int = 0
 
 			override fun drain(resource: FluidStack, action: IFluidHandler.FluidAction): FluidStack {
-				val configMax = ServerConfig.PITCHER_PLANT_PIPE_DRAIN_RATE.get()
+				val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
 
 				return if (resource.`is`(Fluids.WATER)) {
 					FluidStack(Fluids.WATER, minOf(resource.amount, configMax))
@@ -131,7 +131,7 @@ class PitcherPlantBlock : FlowerBlock(
 			}
 
 			override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction): FluidStack {
-				val configMax = ServerConfig.PITCHER_PLANT_PIPE_DRAIN_RATE.get()
+				val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
 				return FluidStack(Fluids.WATER, minOf(maxDrain, configMax))
 			}
 		}

@@ -128,7 +128,7 @@ class SpiritEntity(
 
 	private fun ageAndDie() {
 		age++
-		if (age > ServerConfig.SPIRIT_MAX_AGE.get()) {
+		if (age > ServerConfig.CONFIG.spiritMaxAge.get()) {
 //			kill()
 		}
 	}
@@ -172,16 +172,16 @@ class SpiritEntity(
 		}
 
 		fun getSpawnChance(level: ServerLevel): Double {
-			var chance = ServerConfig.SPIRIT_BASE_SPAWN_CHANCE.get()
+			var chance = ServerConfig.CONFIG.spiritBaseSpawnChance.get()
 
 			if (level.server.worldData.endDragonFightData().previouslyKilled) {
-				chance += ServerConfig.SPIRIT_SPAWN_DRAGON_KILLED_BONUS.get()
+				chance += ServerConfig.CONFIG.spiritSpawnChanceDragonKilledBonus.get()
 			}
 
 			val moonPhase = level.moonPhase
 			val distToFull = minOf(moonPhase, 8 - moonPhase)
 			val percentToFull = 1 - distToFull / 4.0
-			chance += (percentToFull * ServerConfig.SPIRIT_SPAWN_FULL_MOON_BONUS.get())
+			chance += (percentToFull * ServerConfig.CONFIG.spiritSpawnFullMoonBonus.get())
 
 			return chance.coerceIn(0.0, 1.0)
 		}

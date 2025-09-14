@@ -70,7 +70,7 @@ class ImbueEffect(
 			) return
 
 			if (entity.hasEffect(ModEffects.SPECTRE_IMBUE)
-				&& entity.random.nextFloat() <= ServerConfig.SPECTRE_IMBUE_CHANCE.get()
+				&& entity.random.nextFloat() <= ServerConfig.CONFIG.spectreImbueChance.get()
 			) {
 				event.isCanceled = true
 				entity.invulnerableTime = 20

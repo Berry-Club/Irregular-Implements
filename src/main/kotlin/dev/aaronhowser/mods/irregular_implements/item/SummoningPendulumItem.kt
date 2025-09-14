@@ -36,7 +36,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 		val usedStack = player.getItemInHand(usedHand)      // WHY IS THIS NECESSARY???
 
 		val entityList = usedStack.get(ModDataComponents.ENTITY_LIST)?.toMutableList() ?: mutableListOf()
-		if (entityList.size >= ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()) return InteractionResult.FAIL
+		if (entityList.size >= ServerConfig.CONFIG.summoningPendulumCapacity.get()) return InteractionResult.FAIL
 
 		val entityNbt = CompoundTag()
 		if (!interactionTarget.save(entityNbt)) return InteractionResult.FAIL
@@ -102,7 +102,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 		val customDataList: List<CustomData> = stack.get(ModDataComponents.ENTITY_LIST) ?: emptyList()
 
 		val amount = customDataList.size
-		val capacity = ServerConfig.SUMMONING_PENDULUM_CAPACITY.get()
+		val capacity = ServerConfig.CONFIG.summoningPendulumCapacity.get()
 
 		tooltipComponents.add(
 			ModTooltipLang.SUMMONING_PENDULUM_FRACTION
