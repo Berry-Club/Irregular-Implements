@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -32,6 +33,8 @@ class BiomeRadarBlockEntity(
 		biomeStack = stack.copy()
 		setChanged()
 		checkAntenna()
+
+		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
 	private fun updateAntenna() {
@@ -82,9 +85,7 @@ class BiomeRadarBlockEntity(
 			biomePos = BlockPos.of(tag.getLong(BIOME_POS_NBT))
 		}
 
-		if (tag.contains(BIOME_STACK_NBT)) {
-			biomeStack = ItemStack.parseOptional(registries, tag.getCompound(BIOME_STACK_NBT))
-		}
+		biomeStack = ItemStack.parseOptional(registries, tag.getCompound(BIOME_STACK_NBT))
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -97,9 +98,7 @@ class BiomeRadarBlockEntity(
 			tag.putLong(BIOME_POS_NBT, bp.asLong())
 		}
 
-		if (!biomeStack.isEmpty) {
-			tag.put(BIOME_STACK_NBT, biomeStack.save(registries))
-		}
+		tag.put(BIOME_STACK_NBT, biomeStack.saveOptional(registries))
 	}
 
 	// Syncs with client
