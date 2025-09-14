@@ -64,7 +64,7 @@ class BiomeRadarBlock : Block(
 		if (!clickedStack.has(ModDataComponents.BIOME)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
 		blockEntity.setBiomeStack(clickedStack.copyWithCount(1))
-		clickedStack.consume(1, player)
+		clickedStack.shrink(1)
 
 		level.playSound(
 			null,
