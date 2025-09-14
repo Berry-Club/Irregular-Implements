@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.Vec3
 
 class BiomeRadarBlockEntity(
 	pos: BlockPos,
@@ -56,6 +58,7 @@ class BiomeRadarBlockEntity(
 		if (isValid == wasValid) return
 
 		setChanged()
+		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 
 		// Do something?
 	}
@@ -69,12 +72,27 @@ class BiomeRadarBlockEntity(
 	}
 
 	fun clientTick() {
-		val level = level ?: return
+		if (!antennaValid) return
 
+		val level = level ?: return
 		if (level.gameTime % 3 != 0L) return
 
-		val particlePositions = PARTICLE_POINTS.map { it.offset(blockPos) }
+		val particlePositions = PARTICLE_POINTS.map { it.offset(blockPos).bottomCenter.add(0.0, 0.2, 0.0) }
 
+		val biomePos = biomePos
+		val direction = if (biomePos == null) {
+			Vec3.ZERO
+		} else {
+			this.blockPos.center.vectorTo(biomePos.center).normalize()
+		}
+
+		for (pos in particlePositions) {
+			level.addParticle(
+				ModParticleTypes.FLOO_FLAME.get(),
+				pos.x, pos.y, pos.z,
+				direction.x * 0.04, 0.1, direction.z
+			)
+		}
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -133,8 +151,6 @@ class BiomeRadarBlockEntity(
 				BlockPos(-1, 4, 0),
 				BlockPos(0, 4, 1),
 				BlockPos(0, 4, -1),
-
-				BlockPos(0, 6, 0)
 			)
 
 		fun locateBiome(

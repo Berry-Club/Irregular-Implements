@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.FlooTokenActivatedPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.item.ItemEntity
@@ -21,7 +22,7 @@ class FlooTokenItem(properties: Properties) : Item(properties) {
 				level.addParticle(
 					ModParticleTypes.FLOO_FLAME.get(),
 					entity.x, entity.y, entity.z,
-					0.0, level.random.nextDouble() * 0.5 + 0.1, 0.0
+					0.0, level.random.nextRange(0.1, 0.6), 0.0
 				)
 			}
 
