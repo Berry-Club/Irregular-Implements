@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
@@ -75,7 +76,16 @@ class BiomeRadarBlock : Block(
 		return ItemInteractionResult.SUCCESS
 	}
 
-	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? {
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		val be = level.getBlockEntity(pos)
+		if (be is BiomeRadarBlockEntity) {
+			Containers.dropItemStack(level, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5, be.getBiomeStack())
+		}
+
+		super.onRemove(state, level, pos, newState, movedByPiston)
+	}
+
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
 		return BiomeRadarBlockEntity(pos, state)
 	}
 
