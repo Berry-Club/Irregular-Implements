@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.block.SpecialChestBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -108,6 +107,8 @@ object ModBlockEntities {
 		register("nature_core", ::NatureCoreBlockEntity, ModBlocks.NATURE_CORE)
 	val AUTO_PLACER: DeferredHolder<BlockEntityType<*>, BlockEntityType<AutoPlacerBlockEntity>> =
 		register("auto_placer", ::AutoPlacerBlockEntity, ModBlocks.AUTO_PLACER)
+	val BIOME_RADAR: DeferredHolder<BlockEntityType<*>, BlockEntityType<BiomeRadarBlockEntity>> =
+		register("biome_radar", ::BiomeRadarBlockEntity, ModBlocks.BIOME_RADAR)
 
 	private fun <T : BlockEntity> register(
 		name: String,
