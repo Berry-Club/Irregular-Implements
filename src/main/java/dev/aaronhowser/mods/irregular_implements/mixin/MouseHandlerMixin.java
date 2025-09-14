@@ -24,7 +24,7 @@ abstract public class MouseHandlerMixin {
 			at = @At("HEAD")
 	)
 	private void tryInvert(double movementTime, CallbackInfo ci) {
-		if (!ClientConfig.COLLAPSE_INVERTS_MOUSE.get()) return;
+		if (!ClientConfig.CONFIG.collapseInvertsMouse.get()) return;
 
 		var player = ClientUtil.getLocalPlayer();
 		if (player == null || !player.hasEffect(ModEffects.COLLAPSE)) return;

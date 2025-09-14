@@ -30,14 +30,14 @@ object ModConfigLang {
 			provider.add(configString, desc)
 		}
 
-		addConfig(ClientConfig.COLLAPSE_INVERTS_MOUSE, "Collapse Inverts Mouse")
-		addConfig(ClientConfig.HIDE_CUSTOM_CRAFTING_TABLE_RECIPE_BOOK_BUTTON, "Hide Recipe Book Button In Custom Crafting Table")
+		addConfig(ClientConfig.CONFIG.collapseInvertsMouse, "Collapse Inverts Mouse")
+		addConfig(ClientConfig.CONFIG.hideCustomCraftingTableRecipeButton, "Hide Recipe Book Button In Custom Crafting Table")
 
-		addConfig(ClientConfig.BIOME_PAINTER_CORRECT_BIOME_CUBE_SIZE, "Biome Painter Correct Biome Cube Size")
-		addConfig(ClientConfig.BIOME_PAINTER_INCORRECT_BIOME_CUBE_SIZE, "Biome Painter Incorrect Biome Cube Size")
-		addConfig(ClientConfig.BIOME_PAINTER_CORRECT_BIOME_CUBE_COLOR, "Biome Painter Correct Biome Cube Color")
-		addConfig(ClientConfig.BIOME_PAINTER_INCORRECT_BIOME_CUBE_COLOR, "Biome Painter Incorrect Biome Cube Color")
-		addConfig(ClientConfig.BIOME_PAINTER_SELECTED_INCORRECT_BIOME_CUBE_COLOR, "Biome Painter Selected Incorrect Biome Cube Color")
+		addConfig(ClientConfig.CONFIG.biomePainterCorrectBiomeCubeSize, "Biome Painter Correct Biome Cube Size")
+		addConfig(ClientConfig.CONFIG.biomePainterIncorrectBiomeCubeSize, "Biome Painter Incorrect Biome Cube Size")
+		addConfig(ClientConfig.CONFIG.biomePainterCorrectBiomeCubeColor, "Biome Painter Correct Biome Cube Color")
+		addConfig(ClientConfig.CONFIG.biomePainterIncorrectBiomeCubeColor, "Biome Painter Incorrect Biome Cube Color")
+		addConfig(ClientConfig.CONFIG.biomePainterSelectedIncorrectBiomeCubeColor, "Biome Painter Selected Incorrect Biome Cube Color")
 
 		addConfig(ServerConfig.CONFIG.blockDestabilizerLimit, "Block Destabilizer Limit")
 

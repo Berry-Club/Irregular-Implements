@@ -22,12 +22,12 @@ object BiomePainterRenderer {
 		// Duration is 2 because CubeIndicatorRenderer.afterClientTick is called AFTER this runs,
 		// so the Indicators added here would lose 1 tick immediately
 
-		val correctBiomeColor = ClientConfig.BIOME_PAINTER_CORRECT_BIOME_CUBE_COLOR.get()
-		val incorrectBiomeColor = ClientConfig.BIOME_PAINTER_INCORRECT_BIOME_CUBE_COLOR.get()
-		val selectedColor = ClientConfig.BIOME_PAINTER_SELECTED_INCORRECT_BIOME_CUBE_COLOR.get()
+		val correctBiomeColor = ClientConfig.CONFIG.biomePainterCorrectBiomeCubeColor.get()
+		val incorrectBiomeColor = ClientConfig.CONFIG.biomePainterIncorrectBiomeCubeColor.get()
+		val selectedColor = ClientConfig.CONFIG.biomePainterSelectedIncorrectBiomeCubeColor.get()
 
-		val correctSize = ClientConfig.BIOME_PAINTER_CORRECT_BIOME_CUBE_SIZE.get().toFloat()
-		val incorrectSize = ClientConfig.BIOME_PAINTER_INCORRECT_BIOME_CUBE_SIZE.get().toFloat()
+		val correctSize = ClientConfig.CONFIG.biomePainterCorrectBiomeCubeSize.get().toFloat()
+		val incorrectSize = ClientConfig.CONFIG.biomePainterIncorrectBiomeCubeSize.get().toFloat()
 
 		for (pos in goodPositions) {
 			CubeIndicatorRenderer.addIndicator(pos, 2, correctBiomeColor, correctSize)
