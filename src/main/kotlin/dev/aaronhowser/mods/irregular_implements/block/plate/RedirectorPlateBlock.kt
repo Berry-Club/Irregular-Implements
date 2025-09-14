@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.plate
 
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.toVec3
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.util.Mth
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
-import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
 
 class RedirectorPlateBlock : BasePlateBlock() {
 
