@@ -3,7 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeRadarBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
+import net.minecraft.core.GlobalPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.Containers
@@ -44,8 +46,21 @@ class BiomeRadarBlock : Block(
 		hand: InteractionHand,
 		hitResult: BlockHitResult
 	): ItemInteractionResult {
-		if (level.isClientSide || hand == InteractionHand.OFF_HAND) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 		val blockEntity = level.getBlockEntity(pos) as? BiomeRadarBlockEntity ?: return ItemInteractionResult.FAIL
+
+		if (clickedStack.`is`(ModItems.LOCATION_FILTER)) {
+			val biomePos = blockEntity.getBiomePos() ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+			clickedStack.set(ModDataComponents.GLOBAL_POS, GlobalPos(level.dimension(), biomePos))
+
+			level.playSound(
+				null,
+				pos,
+				SoundEvents.BELL_BLOCK,
+				SoundSource.BLOCKS,
+			)
+
+			return ItemInteractionResult.SUCCESS
+		}
 
 		val storedStack = blockEntity.getBiomeStack()
 

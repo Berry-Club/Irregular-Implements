@@ -44,6 +44,8 @@ class BiomeRadarBlockEntity(
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
+	fun getBiomePos(): BlockPos? = biomePos
+
 	private fun updateAntenna() {
 		val level = level ?: return
 
