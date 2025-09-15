@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.GlobalPos
 import net.minecraft.network.chat.Component
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -107,9 +107,9 @@ class EnderEnergyDistributorBlockEntity(
 		val blockEntities = container.items
 			.asSequence()
 
-			.mapNotNull { it.get(ModDataComponents.LOCATION) }
+			.mapNotNull { it.get(ModDataComponents.GLOBAL_POS) }
 			.filter { it.dimension == level.dimension() }
-			.map(LocationDataComponent::blockPos)
+			.map(GlobalPos::pos)
 
 			.mapNotNull { level.getBlockEntity(it) }
 			.filterNot(BlockEntity::isRemoved)

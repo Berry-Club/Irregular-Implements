@@ -9,17 +9,17 @@ object TargetPositionRenderer {
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
 
-		val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.LOCATION)
-		val offHandItemLocation = player.offhandItem.get(ModDataComponents.LOCATION)
+		val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.GLOBAL_POS)
+		val offHandItemLocation = player.offhandItem.get(ModDataComponents.GLOBAL_POS)
 
 		val level = player.level()
 
 		if (mainHandItemLocation != null && mainHandItemLocation.dimension == level.dimension()) {
-			CubeIndicatorRenderer.addIndicator(mainHandItemLocation.blockPos, 1, 0x3200FF00)
+			CubeIndicatorRenderer.addIndicator(mainHandItemLocation.pos, 1, 0x3200FF00)
 		}
 
 		if (offHandItemLocation != null && offHandItemLocation.dimension == level.dimension()) {
-			CubeIndicatorRenderer.addIndicator(offHandItemLocation.blockPos, 1, 0x3200FF00)
+			CubeIndicatorRenderer.addIndicator(offHandItemLocation.pos, 1, 0x3200FF00)
 		}
 	}
 

@@ -31,11 +31,11 @@ class RedstoneRemoteUseMenu(
 
 		val remoteDataComponent = getHeldItemStack().get(ModDataComponents.REDSTONE_REMOTE) ?: return
 		val locationFilterStack = remoteDataComponent.getLocation(buttonId)
-		val location = locationFilterStack.get(ModDataComponents.LOCATION) ?: return
+		val location = locationFilterStack.get(ModDataComponents.GLOBAL_POS) ?: return
 
 		RedstoneHandlerSavedData.addSignal(
 			level = level,
-			blockPos = location.blockPos,
+			blockPos = location.pos,
 			duration = 20,
 			strength = 15
 		)

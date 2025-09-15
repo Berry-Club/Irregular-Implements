@@ -9,7 +9,6 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class EnderEnergyDistributorMenu(
@@ -38,7 +37,7 @@ class EnderEnergyDistributorMenu(
 			val x = 17 + (i % 9) * 18
 
 			//TODO: Add an Item Filter outline to the slot background
-			val slot = FilteredSlot(container, i, x, 18) { it.has(ModDataComponents.LOCATION) }
+			val slot = FilteredSlot(container, i, x, 18) { it.has(ModDataComponents.GLOBAL_POS) }
 			this.addSlot(slot)
 		}
 	}

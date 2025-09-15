@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.item.component.*
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.SpecificEntity
+import net.minecraft.core.GlobalPos
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
@@ -30,8 +31,8 @@ object ModDataComponents {
 	val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
 		DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.ID)
 
-	val LOCATION: DeferredHolder<DataComponentType<*>, DataComponentType<LocationDataComponent>> =
-		register("location", LocationDataComponent.CODEC, LocationDataComponent.STREAM_CODEC)
+	val GLOBAL_POS: DeferredHolder<DataComponentType<*>, DataComponentType<GlobalPos>> =
+		register("global_pos", GlobalPos.CODEC, GlobalPos.STREAM_CODEC)
 
 	val ENTITY_TYPE: DeferredHolder<DataComponentType<*>, DataComponentType<EntityType<*>>> =
 		register(

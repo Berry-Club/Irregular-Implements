@@ -3,9 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
+import net.minecraft.core.GlobalPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
@@ -25,8 +25,8 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		val usedStack = context.itemInHand
 
 		if (clickedBlockEntity is RedstoneToolLinkable) {
-			val locationComponent = LocationDataComponent(level, clickedPos)
-			usedStack.set(ModDataComponents.LOCATION, locationComponent)
+			val locationComponent = GlobalPos(level.dimension(), clickedPos)
+			usedStack.set(ModDataComponents.GLOBAL_POS, locationComponent)
 
 			player.status(
 				ModMessageLang.REDSTONE_TOOL_BASE_SET
@@ -36,7 +36,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 			return InteractionResult.SUCCESS
 		}
 
-		val locationComponent = usedStack.get(ModDataComponents.LOCATION)
+		val locationComponent = usedStack.get(ModDataComponents.GLOBAL_POS)
 		if (locationComponent == null) {
 			player.status(
 				ModMessageLang.REDSTONE_TOOL_INVALID_BASE_BLOCK.toComponent()
@@ -53,7 +53,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 			return InteractionResult.FAIL
 		}
 
-		val baseBlockPos = locationComponent.blockPos
+		val baseBlockPos = locationComponent.pos
 		val baseBlockName = level.getBlockState(baseBlockPos).block.name
 		val baseBlockEntity = level.getBlockEntity(baseBlockPos)
 

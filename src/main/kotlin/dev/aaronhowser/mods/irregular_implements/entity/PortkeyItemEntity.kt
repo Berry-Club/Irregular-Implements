@@ -46,7 +46,7 @@ class PortkeyItemEntity(
 	private fun willTeleport(): Boolean {
 		if (age <= PORTKEY_PICKUP_DELAY) return false
 		val stack = super.getItem()
-		return stack.has(ModDataComponents.LOCATION)
+		return stack.has(ModDataComponents.GLOBAL_POS)
 	}
 
 	override fun playerTouch(entity: Player) {
@@ -56,13 +56,13 @@ class PortkeyItemEntity(
 		}
 
 		val stack = super.getItem()
-		val locationComponent = stack.get(ModDataComponents.LOCATION) ?: return
+		val locationComponent = stack.get(ModDataComponents.GLOBAL_POS) ?: return
 
 		val level = entity.level()
 
 		if (level.dimension() != locationComponent.dimension) return
 
-		val teleportLocation = locationComponent.blockPos.bottomCenter
+		val teleportLocation = locationComponent.pos.bottomCenter
 
 		level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_TELEPORT, entity.soundSource)
 		entity.teleportTo(teleportLocation.x, teleportLocation.y, teleportLocation.z)

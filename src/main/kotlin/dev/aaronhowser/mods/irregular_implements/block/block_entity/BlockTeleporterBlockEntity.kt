@@ -4,12 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.block.BlockTeleporterBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
+import net.minecraft.core.GlobalPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -84,14 +84,14 @@ class BlockTeleporterBlockEntity(
 			}
 		} ?: return null
 
-		val targetPos = locationData.blockPos
+		val targetPos = locationData.pos
 		return targetLevel.getBlockEntity(targetPos) as? BlockTeleporterBlockEntity
 	}
 
-	fun getLinkedLocation(): LocationDataComponent? {
+	fun getLinkedLocation(): GlobalPos? {
 		return container.items
 			.firstOrNull()
-			?.get(ModDataComponents.LOCATION)
+			?.get(ModDataComponents.GLOBAL_POS)
 	}
 
 	override fun getDisplayName(): Component = blockState.block.name

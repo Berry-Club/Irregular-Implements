@@ -2,9 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
-import dev.aaronhowser.mods.irregular_implements.item.component.LocationDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.core.GlobalPos
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -21,8 +21,8 @@ class LocationFilterItem(properties: Properties) : Item(properties) {
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val usedStack = context.itemInHand
 		usedStack.set(
-			ModDataComponents.LOCATION,
-			LocationDataComponent(context.level, context.clickedPos)
+			ModDataComponents.GLOBAL_POS,
+			GlobalPos(context.level.dimension(), context.clickedPos)
 		)
 
 		return InteractionResult.SUCCESS
@@ -33,18 +33,18 @@ class LocationFilterItem(properties: Properties) : Item(properties) {
 
 		if (level.isClientSide || !player.isSecondaryUseActive) return InteractionResultHolder.pass(usedStack)
 
-		usedStack.remove(ModDataComponents.LOCATION)
+		usedStack.remove(ModDataComponents.GLOBAL_POS)
 
 		return InteractionResultHolder.success(usedStack)
 	}
 
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val location = stack.get(ModDataComponents.LOCATION)
+		val location = stack.get(ModDataComponents.GLOBAL_POS)
 
 		if (location != null) {
-			val x = location.blockPos.x
-			val y = location.blockPos.y
-			val z = location.blockPos.z
+			val x = location.pos.x
+			val y = location.pos.y
+			val z = location.pos.z
 
 			val dimensionComponent = OtherUtil.getDimensionComponent(location.dimension)
 

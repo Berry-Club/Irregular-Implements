@@ -29,13 +29,13 @@ object RedstoneToolRenderer {
 		val itemInHand = player.mainHandItem
 		if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
 
-		val toolLocation = itemInHand.get(ModDataComponents.LOCATION) ?: return
+		val toolLocation = itemInHand.get(ModDataComponents.GLOBAL_POS) ?: return
 		if (toolLocation.dimension != player.level().dimension()) return
 
-		val toolBlockPos = toolLocation.blockPos
+		val toolBlockPos = toolLocation.pos
 		this.mainBlockPos = toolBlockPos
 
-		val toolBlockEntity = player.level().getBlockEntity(toolLocation.blockPos) as? RedstoneToolLinkable ?: return
+		val toolBlockEntity = player.level().getBlockEntity(toolLocation.pos) as? RedstoneToolLinkable ?: return
 		val linkedPos = toolBlockEntity.linkedPos ?: return
 
 		this.linkedBlockPos = linkedPos

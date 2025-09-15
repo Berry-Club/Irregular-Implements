@@ -44,7 +44,7 @@ class PortkeyItemEntityRenderer(
 			disguise.stack.copy()
 		}
 
-		if (portkeyStack.has(ModDataComponents.LOCATION) && entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
+		if (portkeyStack.has(ModDataComponents.GLOBAL_POS) && entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
 			renderStack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
 		}
 

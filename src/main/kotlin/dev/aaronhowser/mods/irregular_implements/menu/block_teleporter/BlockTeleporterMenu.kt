@@ -31,7 +31,7 @@ class BlockTeleporterMenu(
 
 	override fun addSlots() {
 		//TODO: Add a Location Filter outline to the slot background
-		val slot = FilteredSlot(blockTeleporterContainer, 0, 80, 18) { it.has(ModDataComponents.LOCATION) }
+		val slot = FilteredSlot(blockTeleporterContainer, 0, 80, 18) { it.has(ModDataComponents.GLOBAL_POS) }
 		addSlot(slot)
 	}
 
