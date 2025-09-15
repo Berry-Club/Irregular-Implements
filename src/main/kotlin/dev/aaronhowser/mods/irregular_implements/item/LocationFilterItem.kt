@@ -39,20 +39,18 @@ class LocationFilterItem(properties: Properties) : Item(properties) {
 	}
 
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val location = stack.get(ModDataComponents.GLOBAL_POS)
+		val location = stack.get(ModDataComponents.GLOBAL_POS) ?: return
 
-		if (location != null) {
-			val x = location.pos.x
-			val y = location.pos.y
-			val z = location.pos.z
+		val x = location.pos.x
+		val y = location.pos.y
+		val z = location.pos.z
 
-			val dimensionComponent = OtherUtil.getDimensionComponent(location.dimension)
+		val dimensionComponent = OtherUtil.getDimensionComponent(location.dimension)
 
-			val component = ModTooltipLang.LOCATION_COMPONENT
-				.toGrayComponent(dimensionComponent, x, y, z)
+		val component = ModTooltipLang.LOCATION_COMPONENT
+			.toGrayComponent(dimensionComponent, x, y, z)
 
-			tooltipComponents.add(component)
-		}
+		tooltipComponents.add(component)
 	}
 
 	companion object {
