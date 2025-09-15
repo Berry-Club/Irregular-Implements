@@ -157,6 +157,14 @@ object ClientEvents {
 		)
 
 		ItemProperties.register(
+			ModItems.GOLDEN_COMPASS.get(),
+			GoldenCompassItem.ANGLE,
+			CompassItemPropertyFunction { level, stack, holder ->
+				return@CompassItemPropertyFunction stack.get(ModDataComponents.GLOBAL_POS)
+			}
+		)
+
+		ItemProperties.register(
 			ModItems.REDSTONE_ACTIVATOR.get(),
 			RedstoneActivatorItem.DURATION,
 			RedstoneActivatorItem::getDurationFloat
