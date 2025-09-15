@@ -122,6 +122,24 @@ class BiomeRadarBlockEntity(
 		}
 	}
 
+	private val biomeCache: MutableMap<ResourceKey<Biome>, BlockPos?> = mutableMapOf()
+
+	fun locateBiome(
+		targetBiome: ResourceKey<Biome>,
+		searchFrom: BlockPos,
+		level: ServerLevel
+	): BlockPos? {
+		return biomeCache.getOrPut(targetBiome) {
+			level.findClosestBiome3d(
+				Predicate { it.`is`(targetBiome) },
+				searchFrom,
+				ServerConfig.CONFIG.biomeRadarSearchRadius.get(),
+				ServerConfig.CONFIG.biomeRadarHorizontalStep.get(),
+				ServerConfig.CONFIG.biomeRadarVerticalStep.get()
+			)?.first
+		}
+	}
+
 	private fun searchForBiome() {
 		val level = level as? ServerLevel ?: return
 
@@ -200,20 +218,6 @@ class BiomeRadarBlockEntity(
 				BlockPos(0, 4, 1),
 				BlockPos(0, 4, -1),
 			)
-
-		fun locateBiome(
-			targetBiome: ResourceKey<Biome>,
-			searchFrom: BlockPos,
-			level: ServerLevel
-		): BlockPos? {
-			return level.findClosestBiome3d(
-				Predicate { it.`is`(targetBiome) },
-				searchFrom,
-				ServerConfig.CONFIG.biomeRadarSearchRadius.get(),
-				ServerConfig.CONFIG.biomeRadarHorizontalStep.get(),
-				ServerConfig.CONFIG.biomeRadarVerticalStep.get()
-			)?.first
-		}
 
 		fun tick(
 			level: Level,
