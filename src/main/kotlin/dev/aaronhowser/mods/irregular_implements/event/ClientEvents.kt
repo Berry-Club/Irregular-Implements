@@ -145,8 +145,7 @@ object ClientEvents {
 			CompassItemPropertyFunction { level, stack, holder ->
 				val component = stack.get(ModDataComponents.PLAYER) ?: return@CompassItemPropertyFunction null
 
-				val uuid = component.uuid
-				val targetPlayer = level.getPlayerByUUID(uuid)
+				val targetPlayer = level.getPlayerByUUID(component.uuid)
 
 				if (targetPlayer != null) {
 					if (targetPlayer === holder) return@CompassItemPropertyFunction null

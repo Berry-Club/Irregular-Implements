@@ -166,7 +166,9 @@ class ModItemModelProvider(
 			.texture("layer0", "item/emerald_compass/emerald_compass_00")
 
 		for (i in 0 until 31) {
-			val number = i.toString().padStart(2, '0')
+			val wrapped = (i + 16) % 32
+
+			val number = wrapped.toString().padStart(2, '0')
 			val model = getBuilder("${getName(item)}_$number")
 				.parent(baseModel)
 				.texture("layer0", "item/emerald_compass/emerald_compass_$number")
