@@ -42,6 +42,7 @@ object ModItemLang {
 			addItem(ModItems.BLACKOUT_POWDER, "Blackout Powder")
 			addItem(ModItems.ITEM_FILTER, "Item Filter")
 			addItem(ModItems.EMERALD_COMPASS, "Emerald Compass")
+			addItem(ModItems.GOLDEN_COMPASS, "Golden Compass")
 			addItem(ModItems.BLAZE_AND_STEEL, "Blaze and Steel")
 			addItem(ModItems.PORTKEY, "Portkey")
 			addItem(ModItems.LOTUS_SEEDS, "Lotus Seeds")

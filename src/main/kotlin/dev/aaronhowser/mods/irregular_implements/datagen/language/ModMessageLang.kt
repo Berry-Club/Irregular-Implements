@@ -38,6 +38,7 @@ object ModMessageLang {
 	const val ESCAPE_ROPE_HANDLER_PROGRESS = "message.irregular_implements.escape_rope_handler.progress"
 	const val ANCHOR_USED = "message.irregular_implements.anchor.used"
 	const val BIOME_PAINTER_AMOUNT_CHANGED = "message.irregular_implements.biome_painter.amount_changed"
+	const val BIOME_RADAR_FILTER_SET = "message.irregular_implements.biome_radar.filter_set"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -75,6 +76,7 @@ object ModMessageLang {
 			add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %s blocks")
 			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed.")
 			add(BIOME_PAINTER_AMOUNT_CHANGED, "Changed %d blocks to %s.")
+			add(BIOME_RADAR_FILTER_SET, "Location Filter set.")
 		}
 	}
 

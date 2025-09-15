@@ -1,9 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeRadarBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.status
 import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
 import net.minecraft.sounds.SoundEvents
@@ -58,6 +61,8 @@ class BiomeRadarBlock : Block(
 				SoundEvents.BELL_BLOCK,
 				SoundSource.BLOCKS,
 			)
+
+			player.status(ModMessageLang.BIOME_RADAR_FILTER_SET.toComponent())
 
 			return ItemInteractionResult.SUCCESS
 		}
