@@ -2,17 +2,12 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.client.render.BiomeSensorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpectreIlluminatorBEWLR
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.BiomeRadarBlockEntityRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.DiaphanousBlockEntityRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.PlayerInterfaceBlockEntityRenderer
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.SpectreEnergyInjectorBlockEntityRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -27,7 +22,9 @@ import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.entity.NoopRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
+import net.minecraft.client.renderer.item.CompassItemPropertyFunction
 import net.minecraft.client.renderer.item.ItemProperties
+import net.minecraft.core.GlobalPos
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.DyeColor
@@ -145,7 +142,15 @@ object ClientEvents {
 		ItemProperties.register(
 			ModItems.EMERALD_COMPASS.get(),
 			EmeraldCompassItem.ANGLE,
-			EmeraldCompassItem::getAngleFloat
+			CompassItemPropertyFunction { level, stack, holder ->
+				val component = stack.get(ModDataComponents.PLAYER) ?: return@CompassItemPropertyFunction null
+
+				val uuid = component.uuid
+				val targetPlayer = level.getPlayerByUUID(uuid) ?: return@CompassItemPropertyFunction null
+				if (targetPlayer === holder) return@CompassItemPropertyFunction null
+
+				return@CompassItemPropertyFunction GlobalPos(targetPlayer.level().dimension(), targetPlayer.blockPosition())
+			}
 		)
 
 		ItemProperties.register(
