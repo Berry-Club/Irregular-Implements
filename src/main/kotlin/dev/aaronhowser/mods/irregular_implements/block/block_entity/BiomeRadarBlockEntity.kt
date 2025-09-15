@@ -124,7 +124,7 @@ class BiomeRadarBlockEntity(
 
 	private val biomeCache: MutableMap<ResourceKey<Biome>, BlockPos?> = mutableMapOf()
 
-	fun locateBiome(
+	private fun locateBiome(
 		targetBiome: ResourceKey<Biome>,
 		searchFrom: BlockPos,
 		level: ServerLevel
