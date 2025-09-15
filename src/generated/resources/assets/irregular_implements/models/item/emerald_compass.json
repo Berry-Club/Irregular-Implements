@@ -1,194 +1,194 @@
 {
-	"parent": "minecraft:item/handheld",
-	"overrides": [
-		{
-			"model": "irregular_implements:item/emerald_compass_00",
-			"predicate": {
-				"irregular_implements:angle": 0.0
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_01",
-			"predicate": {
-				"irregular_implements:angle": 0.032258064
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_02",
-			"predicate": {
-				"irregular_implements:angle": 0.06451613
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_03",
-			"predicate": {
-				"irregular_implements:angle": 0.09677419
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_04",
-			"predicate": {
-				"irregular_implements:angle": 0.12903225
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_05",
-			"predicate": {
-				"irregular_implements:angle": 0.16129032
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_06",
-			"predicate": {
-				"irregular_implements:angle": 0.19354838
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_07",
-			"predicate": {
-				"irregular_implements:angle": 0.22580644
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_08",
-			"predicate": {
-				"irregular_implements:angle": 0.2580645
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_09",
-			"predicate": {
-				"irregular_implements:angle": 0.29032257
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_10",
-			"predicate": {
-				"irregular_implements:angle": 0.32258064
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_11",
-			"predicate": {
-				"irregular_implements:angle": 0.3548387
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_12",
-			"predicate": {
-				"irregular_implements:angle": 0.38709676
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_13",
-			"predicate": {
-				"irregular_implements:angle": 0.41935483
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_14",
-			"predicate": {
-				"irregular_implements:angle": 0.4516129
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_15",
-			"predicate": {
-				"irregular_implements:angle": 0.48387095
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_16",
-			"predicate": {
-				"irregular_implements:angle": 0.516129
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_17",
-			"predicate": {
-				"irregular_implements:angle": 0.5483871
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_18",
-			"predicate": {
-				"irregular_implements:angle": 0.58064514
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_19",
-			"predicate": {
-				"irregular_implements:angle": 0.61290324
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_20",
-			"predicate": {
-				"irregular_implements:angle": 0.6451613
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_21",
-			"predicate": {
-				"irregular_implements:angle": 0.67741936
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_22",
-			"predicate": {
-				"irregular_implements:angle": 0.7096774
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_23",
-			"predicate": {
-				"irregular_implements:angle": 0.7419355
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_24",
-			"predicate": {
-				"irregular_implements:angle": 0.7741935
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_25",
-			"predicate": {
-				"irregular_implements:angle": 0.8064516
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_26",
-			"predicate": {
-				"irregular_implements:angle": 0.83870965
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_27",
-			"predicate": {
-				"irregular_implements:angle": 0.87096775
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_28",
-			"predicate": {
-				"irregular_implements:angle": 0.9032258
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_29",
-			"predicate": {
-				"irregular_implements:angle": 0.9354839
-			}
-		},
-		{
-			"model": "irregular_implements:item/emerald_compass_30",
-			"predicate": {
-				"irregular_implements:angle": 0.9677419
-			}
-		}
-	],
-	"textures": {
-		"layer0": "irregular_implements:item/emerald_compass/emerald_compass_00"
-	}
+  "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "irregular_implements:item/emerald_compass_00",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.0
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_01",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.032258064
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_02",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.06451613
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_03",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.09677419
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_04",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.12903225
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_05",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.16129032
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_06",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.19354838
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_07",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.22580644
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_08",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.2580645
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_09",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.29032257
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_10",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.32258064
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_11",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.3548387
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_12",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.38709676
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_13",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.41935483
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_14",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.4516129
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_15",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.48387095
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_16",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.516129
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_17",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.5483871
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_18",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.58064514
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_19",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.61290324
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_20",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.6451613
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_21",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.67741936
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_22",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.7096774
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_23",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.7419355
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_24",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.7741935
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_25",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.8064516
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_26",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.83870965
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_27",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.87096775
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_28",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.9032258
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_29",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.9354839
+      }
+    },
+    {
+      "model": "irregular_implements:item/emerald_compass_30",
+      "predicate": {
+        "irregular_implements:emerald_compass_angle": 0.9677419
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "irregular_implements:item/emerald_compass/emerald_compass_00"
+  }
 }

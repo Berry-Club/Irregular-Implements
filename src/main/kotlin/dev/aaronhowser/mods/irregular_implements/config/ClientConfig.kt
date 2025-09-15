@@ -62,6 +62,7 @@ class ClientConfig(
 	companion object {
 		private val configPair: Pair<ClientConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ClientConfig)
 
+		@JvmField
 		val CONFIG: ClientConfig = configPair.left
 		val CONFIG_SPEC: ModConfigSpec = configPair.right
 	}

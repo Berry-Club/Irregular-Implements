@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-05T20:15:49.8586937	Item Models: irregular_implements
+// 1.21.1	2025-09-15T05:30:39.0668264	Item Models: irregular_implements
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
 32497cef5506cab7a83f74333eb42f5a51bfe1e7 assets/irregular_implements/models/item/biome_capsule.json
@@ -17,7 +17,7 @@ e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/irregular_implements/models/item
 1750e1eaa9fd457c1dbb33284cff44b428f6068e assets/irregular_implements/models/item/divining_rod.json
 df8c898d0979d52b67b3131fff7bba8066c48e2b assets/irregular_implements/models/item/drop_filter.json
 9ffcf9e483589537056ff43e357cca7e66a90bf2 assets/irregular_implements/models/item/ectoplasm.json
-1387d5d6a5bae38c3daa2ad83294b2938acaeec0 assets/irregular_implements/models/item/emerald_compass.json
+53d1e23f236344593738bc04826dda520ae4a8af assets/irregular_implements/models/item/emerald_compass.json
 f21dd465670385233a79eb953f1e41333919cf63 assets/irregular_implements/models/item/emerald_compass_00.json
 1a4d527b23c17e257b903d96306205053b4c0026 assets/irregular_implements/models/item/emerald_compass_01.json
 55ceaa0331255a022f2f7a62ed236b0f0a28b10b assets/irregular_implements/models/item/emerald_compass_02.json

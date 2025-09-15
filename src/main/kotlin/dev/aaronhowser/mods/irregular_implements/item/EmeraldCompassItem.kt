@@ -57,8 +57,7 @@ class EmeraldCompassItem(properties: Properties) : Item(properties) {
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 
-		val ANGLE: ResourceLocation = OtherUtil.modResource("angle")
-
+		val ANGLE: ResourceLocation = OtherUtil.modResource("emerald_compass_angle")
 		private const val DEFAULT = 0.52f
 
 		//FIXME: 0.5 is slightly left rather than straight forward
