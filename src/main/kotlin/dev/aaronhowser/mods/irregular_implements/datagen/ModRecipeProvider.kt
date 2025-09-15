@@ -1663,6 +1663,7 @@ class ModRecipeProvider(
 		SpecialRecipeBuilder.special(::CustomCraftingTableRecipe) to "custom_crafting_table",
 		SpecialRecipeBuilder.special(::SetPortkeyDisguiseRecipe) to "set_portkey_disguise",
 		SpecialRecipeBuilder.special(::SetEmeraldCompassPlayerRecipe) to "set_emerald_compass_player",
+		SpecialRecipeBuilder.special(::SetGoldenCompassPositionRecipe) to "set_golden_compass_position",
 	)
 
 	companion object {

@@ -47,6 +47,9 @@ object ModRecipeSerializers {
 	val SET_EMERALD_COMPASS_PLAYER: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
 		simple("set_emerald_compass_player", ::SetEmeraldCompassPlayerRecipe)
 
+	val SET_GOLDEN_COMPASS_POSITION: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
+		simple("set_golden_compass_position", ::SetGoldenCompassPositionRecipe)
+
 	private fun simple(name: String, factory: SimpleCraftingRecipeSerializer.Factory<*>): DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> {
 		return registerRecipeSerializer(name) { SimpleCraftingRecipeSerializer(factory) }
 	}
