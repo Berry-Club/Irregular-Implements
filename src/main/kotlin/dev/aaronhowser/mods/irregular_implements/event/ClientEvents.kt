@@ -146,10 +146,14 @@ object ClientEvents {
 				val component = stack.get(ModDataComponents.PLAYER) ?: return@CompassItemPropertyFunction null
 
 				val uuid = component.uuid
-				val targetPlayer = level.getPlayerByUUID(uuid) ?: return@CompassItemPropertyFunction null
-				if (targetPlayer === holder) return@CompassItemPropertyFunction null
+				val targetPlayer = level.getPlayerByUUID(uuid)
 
-				return@CompassItemPropertyFunction GlobalPos(targetPlayer.level().dimension(), targetPlayer.blockPosition())
+				if (targetPlayer != null) {
+					if (targetPlayer === holder) return@CompassItemPropertyFunction null
+					return@CompassItemPropertyFunction GlobalPos(targetPlayer.level().dimension(), targetPlayer.blockPosition())
+				}
+
+				return@CompassItemPropertyFunction stack.get(ModDataComponents.GLOBAL_POS)
 			}
 		)
 
