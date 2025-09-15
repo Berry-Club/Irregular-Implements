@@ -38,6 +38,8 @@ object ModItems {
 		register("golden_egg", ::GoldenEggItem)
 	val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
 		register("emerald_compass", ::EmeraldCompassItem, EmeraldCompassItem.DEFAULT_PROPERTIES)
+	val GOLDEN_COMPASS: DeferredItem<GoldenCompassItem> =
+		register("golden_compass", ::GoldenCompassItem, GoldenCompassItem.DEFAULT_PROPERTIES)
 	val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
 		register("blaze_and_steel", ::BlazeAndSteelItem, BlazeAndSteelItem.DEFAULT_PROPERTIES)
 	val ESCAPE_ROPE: DeferredItem<EscapeRopeItem> =

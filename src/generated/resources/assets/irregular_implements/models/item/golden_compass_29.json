@@ -1,0 +1,6 @@
+{
+  "parent": "irregular_implements:item/golden_compass",
+  "textures": {
+    "layer0": "irregular_implements:item/golden_compass/golden_compass_29"
+  }
+}

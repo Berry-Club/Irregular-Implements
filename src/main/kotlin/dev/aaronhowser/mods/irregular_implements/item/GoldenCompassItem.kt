@@ -8,9 +8,7 @@ class GoldenCompassItem(properties: Properties) : Item(properties) {
 
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
-
-		val ANGLE: ResourceLocation = OtherUtil.modResource("golden_compass_angle")
-		private const val DEFAULT = 0.52f
+		val ANGLE: ResourceLocation = OtherUtil.modResource("angle")
 	}
 
 }

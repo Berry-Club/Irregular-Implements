@@ -24,6 +24,7 @@ class ModItemModelProvider(
 		coloredItems()
 		handheldItems()
 		emeraldCompass()
+		goldenCompass()
 		redstoneActivator()
 		diviningRod()
 		buckets()
@@ -176,6 +177,31 @@ class ModItemModelProvider(
 			baseModel
 				.override()
 				.predicate(EmeraldCompassItem.ANGLE, i.toFloat() / 31)
+				.model(model)
+				.end()
+		}
+
+		handledItems.add(item)
+	}
+
+	private fun goldenCompass() {
+		val item = ModItems.GOLDEN_COMPASS.get()
+
+		val baseModel = getBuilder(getName(item).toString())
+			.parent(ModelFile.UncheckedModelFile("item/handheld"))
+			.texture("layer0", "item/golden_compass/golden_compass_00")
+
+		for (i in 0 until 31) {
+			val wrapped = (i + 16) % 32
+
+			val number = wrapped.toString().padStart(2, '0')
+			val model = getBuilder("${getName(item)}_$number")
+				.parent(baseModel)
+				.texture("layer0", "item/golden_compass/golden_compass_$number")
+
+			baseModel
+				.override()
+				.predicate(GoldenCompassItem.ANGLE, i.toFloat() / 31)
 				.model(model)
 				.end()
 		}
