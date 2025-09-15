@@ -892,6 +892,14 @@ class ModRecipeProvider(
 			)
 		),
 		shapedRecipe(
+			ModItems.GOLDEN_COMPASS,
+			" G ,GCG, G ",
+			mapOf(
+				'G' to ing(Tags.Items.INGOTS_GOLD),
+				'C' to ing(Items.COMPASS)
+			)
+		),
+		shapedRecipe(
 			ModItems.FLOO_TOKEN,
 			"FFF,FPF,FFF",
 			mapOf(

@@ -74,9 +74,9 @@ object ModMessageLang {
 			add(FIREPLACE_NO_LONGER_VALID, "The fireplace at %d %d %d is no longer valid.")
 			add(FIREPLACE_TELEPORTED, "Teleported to %s.")
 			add(ESCAPE_ROPE_HANDLER_PROGRESS, "Checked %s blocks")
-			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed.")
-			add(BIOME_PAINTER_AMOUNT_CHANGED, "Changed %d blocks to %s.")
-			add(BIOME_RADAR_FILTER_SET, "Location Filter set.")
+			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed")
+			add(BIOME_PAINTER_AMOUNT_CHANGED, "Changed %d blocks to %s")
+			add(BIOME_RADAR_FILTER_SET, "Location Filter set")
 		}
 	}
 

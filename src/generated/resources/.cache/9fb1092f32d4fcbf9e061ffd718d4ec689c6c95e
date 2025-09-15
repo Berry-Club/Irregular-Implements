@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-15T07:20:23.9347782	Recipes
+// 1.21.1	2025-09-15T07:59:39.3291482	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
 29c1c86238aae7a307c3aae2ad5cc37f7d24a6ea data/irregular_implements/advancement/recipes/imbuing/imbuing/fire_imbue.json
@@ -69,6 +69,7 @@ bb27aef875052d0708a4c9bd93c31a50a907267b data/irregular_implements/advancement/r
 d701beb71e0f7f2685b877420ea0d0a6d8e639ee data/irregular_implements/advancement/recipes/misc/floo_sign.json
 b86d313877fee64d58e1bee21f1d5eb4cf8a77af data/irregular_implements/advancement/recipes/misc/floo_token.json
 20f0b744de9fffd70122ec8793f09a1194d615f7 data/irregular_implements/advancement/recipes/misc/global_chat_detector.json
+4c9b9f03ea0576f44136eaa0e1e452d2ad14c63d data/irregular_implements/advancement/recipes/misc/golden_compass.json
 99d8cfe8a5270dbf55acd7f04e43e82c5844fb2a data/irregular_implements/advancement/recipes/misc/grass_seeds.json
 6c89268501c0e43159c04178dfcb5f184c4332c4 data/irregular_implements/advancement/recipes/misc/grass_seeds_black.json
 1d94d3ff570ff2e1bfd56167634ea2cf13950b7e data/irregular_implements/advancement/recipes/misc/grass_seeds_blue.json
@@ -299,6 +300,7 @@ f6851b4c28969bd9cfbf0c9f71c6e463431b9655 data/irregular_implements/recipe/floo_p
 17cf986360f03813877b6bd42df1f9252f51ce38 data/irregular_implements/recipe/floo_sign.json
 941aed21078fddf73c1f8696edbde58703e6cbe4 data/irregular_implements/recipe/floo_token.json
 161ef828a66dd78cd5241218a70864611aee49b3 data/irregular_implements/recipe/global_chat_detector.json
+822ee0085f90cb4a2b6f8a4153754a0dc0251ca3 data/irregular_implements/recipe/golden_compass.json
 f15f3178c7c4b3ba1914a2fda68283bb769e74eb data/irregular_implements/recipe/grass_seeds.json
 25123b1a11a57607fb9bfbed3a79c3aa7f1d70f4 data/irregular_implements/recipe/grass_seeds_black.json
 8bb2bdac906c8a95be5252ee6c777c7f07bb9b47 data/irregular_implements/recipe/grass_seeds_blue.json
