@@ -277,7 +277,6 @@ object ModItems {
 	// Removed items:
 	// - Time in a Bottle (Use the standalone one!)
 	// - Eclipsed Clock (requires TIAB)
-	// - Golden Compass (redundant, use Lodestones)
 	// - Runic Dust (obscure and difficult)
 	// - Blood Stone (requires Blood Moon)
 	// - Precious Emerald (undocumented and weird)
