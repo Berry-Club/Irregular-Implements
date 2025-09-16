@@ -14,7 +14,11 @@ class AirBottleItem(properties: Properties) : Item(properties) {
 	override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.DRINK
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		return ItemUtils.startUsingInstantly(level, player, usedHand)
+		return if (player.airSupply < player.maxAirSupply) {
+			ItemUtils.startUsingInstantly(level, player, usedHand)
+		} else {
+			InteractionResultHolder.fail(player.getItemInHand(usedHand))
+		}
 	}
 
 	override fun finishUsingItem(
@@ -30,11 +34,15 @@ class AirBottleItem(properties: Properties) : Item(properties) {
 		livingEntity.gameEvent(GameEvent.DRINK)
 
 		if (livingEntity is Player) {
-			ItemUtils.createFilledResult(
+			val bottle = ItemUtils.createFilledResult(
 				stack,
 				livingEntity,
 				Items.GLASS_BOTTLE.defaultInstance
 			)
+
+			livingEntity.cooldowns.addCooldown(Items.GLASS_BOTTLE, 20)
+
+			return bottle
 		}
 
 		return stack
