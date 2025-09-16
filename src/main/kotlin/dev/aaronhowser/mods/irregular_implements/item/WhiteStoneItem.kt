@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent
 import java.awt.Color
 import java.util.function.Supplier
@@ -29,18 +30,21 @@ import java.util.function.Supplier
 class WhiteStoneItem(properties: Properties) : Item(properties) {
 
 	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-		tryCharge(level, stack, entity.blockPosition().above(2))
+		tryCharge(level, stack, entity.eyePosition)
 	}
 
 	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-		val charged = tryCharge(entity.level(), stack, entity.blockPosition())
+		val charged = tryCharge(entity.level(), stack, entity.eyePosition.add(0.0, 1.0, 0.0))
 
 		entity.isNoGravity = charged
 		if (charged) {
 			val motion = entity.deltaMovement
+
+			val newDy = Mth.lerp(0.1, motion.y, 0.0)
+
 			entity.setDeltaMovement(
 				motion.x * 0.95,
-				motion.y + 0.001,
+				newDy,
 				motion.z * 0.95
 			)
 
@@ -96,11 +100,11 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 
 		const val MAX_CHARGE = 20 * 100
 
-		fun tryCharge(level: Level, stack: ItemStack, blockPos: BlockPos): Boolean {
+		fun tryCharge(level: Level, stack: ItemStack, pos: Vec3): Boolean {
 			if (level.moonPhase != 0
 				|| level.dayTime !in 14000..23000
 				|| isChargedWhiteStone(stack)
-				|| !level.canSeeSky(blockPos)
+				|| !level.canSeeSky(BlockPos.containing(pos))
 			) return false
 
 			val currentCharge = stack.getOrDefault(ModDataComponents.CHARGE.get(), 0)
@@ -111,9 +115,9 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 			if (level is ServerLevel) {
 				level.sendParticles(
 					ParticleTypes.ENCHANT,
-					blockPos.center.x,
-					blockPos.center.y,
-					blockPos.center.z,
+					pos.x,
+					pos.y,
+					pos.z,
 					1,
 					0.0,
 					0.0,
@@ -124,7 +128,7 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 				if (newCharge == MAX_CHARGE) {
 					level.playSound(
 						null,
-						blockPos,
+						BlockPos.containing(pos),
 						SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
 						SoundSource.PLAYERS,
 					)
