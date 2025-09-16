@@ -14,11 +14,9 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.Mth
 import net.minecraft.util.random.WeightedRandomList
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.animal.Animal
-import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -28,7 +26,6 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.AABB
-import net.minecraft.world.phys.BlockHitResult
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.cos
 
@@ -190,20 +187,7 @@ class NatureCoreBlockEntity(
 
 		val saplings = BuiltInRegistries.BLOCK
 			.filter {
-				val context = BlockPlaceContext(
-					level,
-					null,
-					InteractionHand.MAIN_HAND,
-					it.asItem().defaultInstance,
-					BlockHitResult(
-						pos.center,
-						Direction.DOWN,
-						pos,
-						false
-					)
-				)
-
-				val state = it.getStateForPlacement(context) ?: return@filter false
+				val state = it.defaultBlockState()
 
 				state.`is`(ModBlockTagsProvider.NATURE_CORE_POSSIBLE_SAPLINGS)
 						&& !state.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
