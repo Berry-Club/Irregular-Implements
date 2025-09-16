@@ -184,7 +184,7 @@ idea {
 unifiedPublishing {
 	project {
 		releaseType = "beta"
-		gameVersions = [minecraft_version]
+		gameVersions = [project.minecraft_version]
 		gameLoaders = ["neoforge"]
 
 		mainPublication jar
@@ -198,14 +198,14 @@ unifiedPublishing {
 		if (ENV.CURSEFORGE_KEY) {
 			curseforge {
 				token = ENV.CURSEFORGE_KEY
-				id = curseforge_id
+				id = project.curseforge_id
 			}
 		}
 
 		if (ENV.MODRINTH_KEY) {
 			modrinth {
 				token = ENV.MODRINTH_KEY
-				projectId = modrinth_id
+				id = project.modrinth_id
 			}
 		}
 
