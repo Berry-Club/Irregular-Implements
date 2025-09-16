@@ -21,6 +21,9 @@ class ServerConfig(
 	lateinit var rainShieldChunkRadius: ModConfigSpec.IntValue
 	lateinit var peaceCandleChunkRadius: ModConfigSpec.IntValue
 
+	lateinit var natureCoreReplaceRadius: ModConfigSpec.IntValue
+	lateinit var natureCoreAnimalRadius: ModConfigSpec.DoubleValue
+
 	lateinit var spectreImbueChance: ModConfigSpec.DoubleValue
 
 	lateinit var spectreBufferCapacity: ModConfigSpec.IntValue
@@ -95,6 +98,10 @@ class ServerConfig(
 		peaceCandleChunkRadius = builder
 			.comment("What chunk radius should the Peace Candle have? (0 means only the chunk the Peace Candle is in)")
 			.defineInRange("peaceCandleChunkRadius", 1, 0, Int.MAX_VALUE)
+
+		natureCoreReplaceRadius = builder
+			.comment("What radius should the Nature Core replace blocks in?")
+			.defineInRange("natureCoreReplaceRadius", 8, 1, Int.MAX_VALUE)
 
 		escapeRopeMaxBlocks = builder
 			.comment("How many blocks should the Escape Rope check before giving up?\n\n0 means no limit")

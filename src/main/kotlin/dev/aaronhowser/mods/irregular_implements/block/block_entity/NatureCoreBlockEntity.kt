@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import dev.aaronhowser.mods.irregular_implements.util.StructureSchematics
 import dev.aaronhowser.mods.irregular_implements.world.feature.NatureCoreFeature
 import net.minecraft.core.BlockPos
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.LevelEvent
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.AABB
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.cos
@@ -43,11 +46,13 @@ class NatureCoreBlockEntity(
 		val level = level ?: return
 		val random = level.random
 
-		val x = blockPos.x + random.nextInt(11) - 5
-		val y = blockPos.y + random.nextInt(4) - 3
-		val z = blockPos.z + random.nextInt(11) - 5
+		val radius = ServerConfig.CONFIG.natureCoreReplaceRadius.get()
 
-		val pos = BlockPos(x, y, z)
+		val pos = this.blockPos.offset(
+			blockPos.x + random.nextRange(-radius, radius + 1),
+			blockPos.y + random.nextRange(-radius, radius + 1),
+			blockPos.z + random.nextRange(-radius, radius + 1)
+		)
 
 		val stateThere = level.getBlockState(pos)
 		if (stateThere.`is`(BlockTags.SAND) && !stateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE_SAND)) {
@@ -60,25 +65,43 @@ class NatureCoreBlockEntity(
 
 	private fun spawnAnimals() {
 		val level = level as? ServerLevel ?: return
+
+		val radius = ServerConfig.CONFIG.natureCoreAnimalRadius.get()
+
 		val animalsNearby = level.getEntitiesOfClass(
 			Animal::class.java,
-			AABB(blockPos).inflate(5.0, 5.0, 5.0)
+			AABB(blockPos).inflate(radius, radius, radius)
 		)
 
 		if (animalsNearby.size > 2) return
 
+		val radCeil = Mth.ceil(radius)
+
 		var pos: BlockPos
 		do {
-			pos = BlockPos(
-				blockPos.x + level.random.nextInt(11) - 5,
-				blockPos.y + level.random.nextInt(5) - 2,
-				blockPos.z + level.random.nextInt(11) - 5
+			pos = this.blockPos.offset(
+				level.random.nextRange(-radCeil, radCeil + 1),
+				level.random.nextRange(-radCeil, radCeil + 1),
+				level.random.nextRange(-radCeil, radCeil + 1)
 			)
-		} while (!level.isEmptyBlock(pos))
+
+			val fluidStateThere = level.getFluidState(pos)
+			val blockStateThere = level.getBlockState(pos)
+		} while (
+			!blockStateThere.getCollisionShape(level, pos).isEmpty ||
+			(!fluidStateThere.isEmpty && !fluidStateThere.`is`(Fluids.WATER))
+		)
+
+		val isUnderWater = level.getFluidState(pos).`is`(Fluids.WATER)
+		val mobCategory = if (isUnderWater) {
+			if (level.random.nextBoolean()) MobCategory.WATER_AMBIENT else MobCategory.WATER_CREATURE
+		} else {
+			MobCategory.CREATURE
+		}
 
 		val entitiesThatCanSpawnHere = level.getBiome(pos)
 			.value()
-			.mobSettings.getMobs(MobCategory.CREATURE)
+			.mobSettings.getMobs(mobCategory)
 
 		val randomEntityType = entitiesThatCanSpawnHere
 			.getRandom(level.random)

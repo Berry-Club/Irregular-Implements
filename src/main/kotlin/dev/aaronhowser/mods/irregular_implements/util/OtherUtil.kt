@@ -188,6 +188,7 @@ object OtherUtil {
 
 	fun RandomSource.nextRange(min: Float, max: Float): Float = Mth.lerp(nextFloat(), min, max)
 	fun RandomSource.nextRange(min: Double, max: Double): Double = Mth.lerp(nextDouble(), min, max)
+	fun RandomSource.nextRange(min: Int, max: Int): Int = nextInt(max - min) + min
 
 	fun lerpColor(progress: Float, start: Int, end: Int): Int {
 		val startR = (start shr 16) and 0xFF

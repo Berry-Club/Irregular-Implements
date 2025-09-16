@@ -6,6 +6,8 @@
 - The Escape Rope can no longer be used while the player can see the sky
 - The Bottle of Air can no longer be used while the player has full breath
 - Added a tag `#irregular_implements:nature_core_immune_sand` for Sand blocks that should not be turned into Grass/Dirt
+- The radii that the Nature Core can change blocks, spawn saplings, or spawn animals are now configurable
+- The Nature Core now tries to spawn fish in water blocks
 
 # 1.0.0
 
