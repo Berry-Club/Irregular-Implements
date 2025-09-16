@@ -10,6 +10,10 @@
 - The Nature Core now tries to spawn fish in water blocks
 - The Nature Core now tries up to 50 times to locate a valid position to do its actions
 
+### Fixed
+
+- Fixed a crash when lighting Spectre trees on fire
+
 # 1.0.0
 
 ## Added
