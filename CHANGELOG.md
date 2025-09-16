@@ -8,6 +8,7 @@
 - Added a tag `#irregular_implements:nature_core_immune_sand` for Sand blocks that should not be turned into Grass/Dirt
 - The radii that the Nature Core can change blocks, spawn saplings, or spawn animals are now configurable
 - The Nature Core now tries to spawn fish in water blocks
+- The Nature Core now tries up to 50 times to locate a valid position to do its actions
 
 # 1.0.0
 
