@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubpro
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
-import net.minecraft.network.chat.Component
 import net.minecraft.util.RandomSource
 import net.minecraft.world.RandomizableContainer
 import net.minecraft.world.level.WorldGenLevel
@@ -17,17 +16,19 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPieces
+import java.util.function.Supplier
 
 //TODO Item Models
 class SpecialChestBlock private constructor(
-	private val chestType: Type
+	private val chestType: Type,
 ) : ChestBlock(
 	Properties.ofFullCopy(Blocks.CHEST),
-	{ if (chestType == Type.NATURE) ModBlockEntities.NATURE_CHEST.get() else ModBlockEntities.WATER_CHEST.get() }
+	chestType.blockEntityType
 ) {
 
-	private enum class Type {
-		NATURE, WATER
+	private enum class Type(val blockEntityType: Supplier<BlockEntityType<out ChestBlockEntity>>) {
+		NATURE({ ModBlockEntities.NATURE_CHEST.get() }),
+		WATER({ ModBlockEntities.WATER_CHEST.get() })
 	}
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
