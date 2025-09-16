@@ -13,6 +13,7 @@
 - The radii that the Nature Core can change blocks, spawn saplings, or spawn animals are now configurable
 - The Nature Core now tries to spawn fish in water blocks
 - The Nature Core now tries up to 50 times to locate a valid position to do its actions
+- The Nature Core now only ticks on the server
 
 ### Fixed
 

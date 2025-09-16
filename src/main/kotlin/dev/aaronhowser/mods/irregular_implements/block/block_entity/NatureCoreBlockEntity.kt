@@ -37,7 +37,7 @@ class NatureCoreBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.NATURE_CORE.get(), pos, blockState) {
 
-	fun tick() {
+	private fun tick() {
 		val random = level?.random ?: return
 
 		if (random.nextInt(40) == 0) replaceSand()
@@ -250,6 +250,7 @@ class NatureCoreBlockEntity(
 			blockState: BlockState,
 			blockEntity: NatureCoreBlockEntity
 		) {
+			if (level.isClientSide) return
 			blockEntity.tick()
 		}
 	}
