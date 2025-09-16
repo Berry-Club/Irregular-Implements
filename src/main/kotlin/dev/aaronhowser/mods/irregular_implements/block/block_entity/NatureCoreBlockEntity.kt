@@ -190,7 +190,6 @@ class NatureCoreBlockEntity(
 				val state = it.defaultBlockState()
 
 				state.`is`(ModBlockTagsProvider.NATURE_CORE_POSSIBLE_SAPLINGS)
-						&& !state.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
 						&& state.canSurvive(level, pos)
 			}
 

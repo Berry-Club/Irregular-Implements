@@ -7,7 +7,6 @@
 - The Bottle of Air can no longer be used while the player has full breath
 - Added `#irregular_implements:nature_core_immune`, which is both a block tag and entity type tag
   - Prevents Sand blocks from being turned into Grass/Dirt
-  - Prevents Saplings from being planted
   - Prevents crops from being bonemealed
   - Prevents entity types from being spawned (keeping in mind that it only *tries* to spawn mobs that can generate in that biome naturally)
 - The radii that the Nature Core can change blocks, spawn saplings, or spawn animals are now configurable
