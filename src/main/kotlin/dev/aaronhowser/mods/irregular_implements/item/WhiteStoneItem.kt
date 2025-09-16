@@ -5,14 +5,17 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
+import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.util.Mth
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -26,38 +29,12 @@ import java.util.function.Supplier
 class WhiteStoneItem(properties: Properties) : Item(properties) {
 
 	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-		if (level !is ServerLevel
-			|| level.moonPhase != 0
-			|| level.dayTime !in 14000..23000
-			|| isChargedWhiteStone(stack)
-			|| !level.canSeeSky(entity.blockPosition())
-		) return
+		tryCharge(level, stack, entity.blockPosition().above())
+	}
 
-		val currentCharge = stack.get(ModDataComponents.CHARGE.get()) ?: 0
-		val newCharge = currentCharge + 1
-
-		stack.set(ModDataComponents.CHARGE, newCharge)
-
-		level.sendParticles(
-			ParticleTypes.ENCHANT,
-			entity.eyePosition.x,
-			entity.eyePosition.y,
-			entity.eyePosition.z,
-			1,
-			0.0,
-			0.0,
-			0.0,
-			Mth.lerp(newCharge / MAX_CHARGE.toDouble(), 3.0, 2.25)
-		)
-
-		if (newCharge == MAX_CHARGE) {
-			level.playSound(
-				null,
-				entity.blockPosition(),
-				SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
-				entity.soundSource,
-			)
-		}
+	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
+		tryCharge(entity.level(), stack, entity.blockPosition())
+		return false
 	}
 
 	override fun isFoil(stack: ItemStack): Boolean {
@@ -105,6 +82,41 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 			}
 
 		const val MAX_CHARGE = 20 * 100
+
+		fun tryCharge(level: Level, stack: ItemStack, blockPos: BlockPos) {
+			if (level !is ServerLevel
+				|| level.moonPhase != 0
+				|| level.dayTime !in 14000..23000
+				|| isChargedWhiteStone(stack)
+				|| !level.canSeeSky(blockPos)
+			) return
+
+			val currentCharge = stack.getOrDefault(ModDataComponents.CHARGE.get(), 0)
+			val newCharge = currentCharge + 1
+
+			stack.set(ModDataComponents.CHARGE, newCharge)
+
+			level.sendParticles(
+				ParticleTypes.ENCHANT,
+				blockPos.center.x,
+				blockPos.center.y,
+				blockPos.center.z,
+				1,
+				0.0,
+				0.0,
+				0.0,
+				Mth.lerp(newCharge / MAX_CHARGE.toDouble(), 3.0, 2.25)
+			)
+
+			if (newCharge == MAX_CHARGE) {
+				level.playSound(
+					null,
+					blockPos,
+					SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
+					SoundSource.PLAYERS,
+				)
+			}
+		}
 
 		fun isChargedWhiteStone(itemStack: ItemStack): Boolean {
 			return itemStack.`is`(ModItems.WHITE_STONE.get()) && itemStack.get(ModDataComponents.CHARGE.get()) == MAX_CHARGE
