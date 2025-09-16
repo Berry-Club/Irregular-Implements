@@ -12,9 +12,11 @@ plugins {
 def ENV = System.getenv()
 def isLocal = !ENV.containsKey("GITHUB_RUN_NUMBER")
 
+def archiveName = "${mod_id.replace("_", "-")}-${minecraft_version}"
+
 version = "${mod_version}-${isLocal ? "local.${Instant.now().epochSecond}" : "build.${ENV.GITHUB_RUN_NUMBER}"}"
 group = project.mod_group_id
-base.archivesName = "${mod_id}-${minecraft_version}-neoforge"
+base.archivesName = archiveName
 
 println("Building version: ${version}")
 
@@ -163,7 +165,7 @@ tasks.withType(ProcessResources).configureEach {
 publishing {
 	publications {
 		mavenNeoForge(MavenPublication) {
-			artifactId = base.archivesName
+			artifactId = archiveName
 			from components.java
 		}
 	}
