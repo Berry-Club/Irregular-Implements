@@ -79,6 +79,20 @@ class ModBlockStateProvider(
 		glowingMushroom()
 		blockDetector()
 		biomeRadar()
+		rainShield()
+	}
+
+	private fun rainShield() {
+		val block = ModBlocks.RAIN_SHIELD.get()
+
+		val texture = modLoc("block/rain_shield")
+
+		val model = models()
+			.withExistingParent(name(block), "block/end_rod")
+			.texture("end_rod", texture)
+			.texture("particle", texture)
+
+		simpleBlockWithItem(block, model)
 	}
 
 	private fun blockDetector() {

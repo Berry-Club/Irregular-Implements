@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/end_rod",
+  "textures": {
+    "end_rod": "irregular_implements:block/rain_shield",
+    "particle": "irregular_implements:block/rain_shield"
+  }
+}
