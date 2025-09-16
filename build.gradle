@@ -202,6 +202,7 @@ java {
 
 unifiedPublishing {
 	project {
+		displayName = "${project.mod_name} ${project.minecraft_version} ${project.version}"
 		releaseType = "beta"
 		gameVersions = [project.minecraft_version]
 		gameLoaders = ["neoforge"]
