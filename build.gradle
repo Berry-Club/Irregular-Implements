@@ -211,7 +211,7 @@ unifiedPublishing {
 			}
 		}
 
-		if (ENV.MODRINTH_KEY) {
+		if (ENV.MODRINTH_TOKEN) {
 			modrinth {
 				token = ENV.MODRINTH_KEY
 				id = project.modrinth_id
