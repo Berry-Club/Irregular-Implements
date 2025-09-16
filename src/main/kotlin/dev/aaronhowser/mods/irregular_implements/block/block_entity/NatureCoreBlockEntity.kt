@@ -191,20 +191,20 @@ class NatureCoreBlockEntity(
 
 				state.`is`(ModBlockTagsProvider.NATURE_CORE_POSSIBLE_SAPLINGS)
 						&& !state.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
+						&& state.canSurvive(level, pos)
 			}
 
 		val index = level.random.nextInt(saplings.size)
 		val randomSapling = saplings.getOrNull(index)?.defaultBlockState() ?: return
 
-		if (randomSapling.canSurvive(level, pos)) {
-			level.levelEvent(
-				null,
-				LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH,
-				pos,
-				Block.getId(randomSapling)
-			)
-			level.setBlockAndUpdate(pos, randomSapling)
-		}
+		level.levelEvent(
+			null,
+			LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH,
+			pos,
+			Block.getId(randomSapling)
+		)
+
+		level.setBlockAndUpdate(pos, randomSapling)
 	}
 
 	private fun rebuild() {
