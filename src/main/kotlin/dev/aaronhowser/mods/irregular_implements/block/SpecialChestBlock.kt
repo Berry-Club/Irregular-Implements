@@ -26,9 +26,13 @@ class SpecialChestBlock private constructor(
 	chestType.blockEntityType
 ) {
 
-	private enum class Type(val blockEntityType: Supplier<BlockEntityType<out ChestBlockEntity>>) {
+	enum class Type(val blockEntityType: Supplier<BlockEntityType<out ChestBlockEntity>>) {
 		NATURE({ ModBlockEntities.NATURE_CHEST.get() }),
 		WATER({ ModBlockEntities.WATER_CHEST.get() })
+
+		;
+
+		val block = SpecialChestBlock(this)
 	}
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
@@ -39,8 +43,6 @@ class SpecialChestBlock private constructor(
 	}
 
 	companion object {
-		val NATURE = SpecialChestBlock(Type.NATURE)
-		val WATER = SpecialChestBlock(Type.WATER)
 
 		@JvmStatic
 		fun addToOceanMonument(

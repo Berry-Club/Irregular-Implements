@@ -51,9 +51,9 @@ object ModBlocks {
 
 	// Loot blocks
 	val NATURE_CHEST: DeferredBlock<SpecialChestBlock> =
-		registerBlock("nature_chest") { SpecialChestBlock.NATURE }
+		registerBlock("nature_chest") { SpecialChestBlock.Type.NATURE.block }
 	val WATER_CHEST: DeferredBlock<SpecialChestBlock> =
-		registerBlock("water_chest") { SpecialChestBlock.WATER }
+		registerBlock("water_chest") { SpecialChestBlock.Type.WATER.block }
 
 	// Collectors
 	val ITEM_COLLECTOR: DeferredBlock<ItemCollectorBlock> =
