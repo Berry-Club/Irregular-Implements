@@ -195,6 +195,11 @@ idea {
 	}
 }
 
+java {
+	withSourcesJar()
+	withJavadocJar()
+}
+
 unifiedPublishing {
 	project {
 		releaseType = "beta"
