@@ -44,15 +44,24 @@ class NatureCoreBlockEntity(
 
 	private fun replaceSand() {
 		val level = level ?: return
-		val random = level.random
 
 		val radius = ServerConfig.CONFIG.natureCoreReplaceSandRadius.get()
 
-		val pos = this.blockPos.offset(
-			blockPos.x + random.nextRange(-radius, radius + 1),
-			blockPos.y + random.nextRange(-radius, radius + 1),
-			blockPos.z + random.nextRange(-radius, radius + 1)
-		)
+		var attempts = 0
+		var pos: BlockPos
+		do {
+			pos = this.blockPos.offset(
+				level.random.nextRange(-radius, radius + 1),
+				level.random.nextRange(-radius, radius + 1),
+				level.random.nextRange(-radius, radius + 1)
+			)
+
+			val blockStateThere = level.getBlockState(pos)
+			attempts++
+
+			val foundSand = blockStateThere.`is`(BlockTags.SAND)
+					&& !blockStateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE_SAND)
+		} while (foundSand && attempts < 50)
 
 		val stateThere = level.getBlockState(pos)
 		if (stateThere.`is`(BlockTags.SAND) && !stateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE_SAND)) {
@@ -77,6 +86,7 @@ class NatureCoreBlockEntity(
 
 		val radCeil = Mth.ceil(radius)
 
+		var attempts = 0
 		var pos: BlockPos
 		do {
 			pos = this.blockPos.offset(
@@ -87,10 +97,11 @@ class NatureCoreBlockEntity(
 
 			val fluidStateThere = level.getFluidState(pos)
 			val blockStateThere = level.getBlockState(pos)
-		} while (
-			!blockStateThere.getCollisionShape(level, pos).isEmpty ||
-			(!fluidStateThere.isEmpty && !fluidStateThere.`is`(Fluids.WATER))
-		)
+			attempts++
+
+			val foundValidSpot = !blockStateThere.getCollisionShape(level, pos).isEmpty
+					|| !fluidStateThere.isEmpty && !fluidStateThere.`is`(Fluids.WATER)
+		} while (foundValidSpot && attempts < 50)
 
 		val isUnderWater = level.getFluidState(pos).`is`(Fluids.WATER)
 		val mobCategory = if (isUnderWater) {
@@ -117,20 +128,28 @@ class NatureCoreBlockEntity(
 
 		val radius = ServerConfig.CONFIG.natureCoreBoneMealCropRadius.get()
 
-		val pos = this.blockPos.offset(
-			level.random.nextRange(-radius, radius + 1),
-			level.random.nextRange(-radius, radius + 1),
-			level.random.nextRange(-radius, radius + 1),
-		)
+		var attempts = 0
+		var pos: BlockPos
+		do {
+			pos = this.blockPos.offset(
+				level.random.nextRange(-radius, radius + 1),
+				level.random.nextRange(-radius, radius + 1),
+				level.random.nextRange(-radius, radius + 1)
+			)
+
+			val blockStateThere = level.getBlockState(pos)
+			attempts++
+
+			val blockThere = blockStateThere.block
+			val foundBonemealableBlock = blockThere is BonemealableBlock
+					&& blockThere.isValidBonemealTarget(level, pos, blockStateThere)
+					&& blockThere.isBonemealSuccess(level, level.random, pos, blockStateThere)
+		} while (foundBonemealableBlock && attempts < 50)
 
 		val state = level.getBlockState(pos)
-		val block = state.block
+		val block = state.block as? BonemealableBlock ?: return
 
-		if (block is BonemealableBlock) {
-			if (block.isValidBonemealTarget(level, pos, state) && block.isBonemealSuccess(level, level.random, pos, state)) {
-				block.performBonemeal(level, level.random, pos, state)
-			}
-		}
+		block.performBonemeal(level, level.random, pos, state)
 	}
 
 	private fun plantSaplings() {
