@@ -194,6 +194,8 @@ class NatureCoreBlockEntity(
 						&& state.canSurvive(level, pos)
 			}
 
+		if (saplings.isEmpty()) return
+
 		val index = level.random.nextInt(saplings.size)
 		val randomSapling = saplings.getOrNull(index)?.defaultBlockState() ?: return
 
@@ -215,6 +217,7 @@ class NatureCoreBlockEntity(
 		val leaves = NatureCoreFeature.getLeavesFromBiome(biome)
 
 		val schematic = StructureSchematics.getNatureCore(log, leaves)
+		if (schematic.entries.isEmpty()) return
 
 		val index = level.random.nextInt(schematic.entries.size)
 		val (offset, state) = schematic.entries.elementAtOrNull(index) ?: return
