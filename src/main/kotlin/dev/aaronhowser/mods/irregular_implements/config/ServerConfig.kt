@@ -103,7 +103,7 @@ class ServerConfig(
 
 		natureCoreReplaceSandRadius = builder
 			.comment("What radius should the Nature Core replace blocks in?")
-			.defineInRange("natureCoreReplaceRadius", 8, 1, Int.MAX_VALUE)
+			.defineInRange("natureCoreReplaceRadius", 10, 1, Int.MAX_VALUE)
 
 		natureCorePlantSaplingRadius = builder
 			.comment("What is the maximum radius that the Nature Core can plant saplings in?")
@@ -111,11 +111,11 @@ class ServerConfig(
 
 		natureCoreBoneMealCropRadius = builder
 			.comment("What radius should the Nature Core apply bone meal to crops in?")
-			.defineInRange("natureCoreBoneMealCropRadius", 4, 1, Int.MAX_VALUE)
+			.defineInRange("natureCoreBoneMealCropRadius", 25, 1, Int.MAX_VALUE)
 
 		natureCoreSpawnAnimalRadius = builder
 			.comment("What radius should the Nature Core spawn animals in?")
-			.defineInRange("natureCoreSpawnAnimalRadius", 8.0, 1.0, 32.0)
+			.defineInRange("natureCoreSpawnAnimalRadius", 8.0, 1.0, 128.0)
 
 		escapeRopeMaxBlocks = builder
 			.comment("How many blocks should the Escape Rope check before giving up?\n\n0 means no limit")
