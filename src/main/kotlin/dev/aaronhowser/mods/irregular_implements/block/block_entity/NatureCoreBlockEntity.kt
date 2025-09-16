@@ -50,7 +50,7 @@ class NatureCoreBlockEntity(
 		val pos = BlockPos(x, y, z)
 
 		val stateThere = level.getBlockState(pos)
-		if (stateThere.`is`(BlockTags.SAND)) {
+		if (stateThere.`is`(BlockTags.SAND) && !stateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE_SAND)) {
 			val belowAir = level.isEmptyBlock(pos.above())
 			val place = if (belowAir) Blocks.GRASS_BLOCK else Blocks.DIRT
 
