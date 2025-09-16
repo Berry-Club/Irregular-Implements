@@ -58,6 +58,7 @@ object ModBlockLang {
 			addBlock(ModBlocks.BLOCK_TELEPORTER, "Block Teleporter")
 			addBlock(ModBlocks.DIAPHANOUS_BLOCK, "Diaphanous Block")
 			addBlock(ModBlocks.SAKANADE_SPORES, "Sakanade Spores")
+			addBlock(ModBlocks.BLAZE_FIRE, "Blaze Fire")
 
 			addBlock(ModBlocks.SUPER_LUBRICANT_ICE, "Super Lubricant Ice")
 			addBlock(ModBlocks.SUPER_LUBRICANT_PLATFORM, "Super Lubricant Platform")

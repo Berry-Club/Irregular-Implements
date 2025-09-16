@@ -193,6 +193,10 @@ unifiedPublishing {
 			depends {
 				curseforge = modrinth = "kotlin-for-forge"
 			}
+			optional {
+				curseforge = "modonomicon"
+				modrinth = "modonomicon"
+			}
 		}
 
 		if (ENV.CURSEFORGE_KEY) {

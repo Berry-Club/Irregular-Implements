@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.level.block.state.BlockState
 
+//FIXME: Always uses the "down" block state
 class BlazeFireBlock : FireBlock(
 	Properties
 		.ofFullCopy(Blocks.FIRE)
@@ -36,6 +37,7 @@ class BlazeFireBlock : FireBlock(
 		return super.getFireSpreadSpeed(state, level, pos, direction) * 3
 	}
 
+	//FIXME: Probably shouldn't be using Blocks.FIRE
 	override fun getStateWithAge(level: LevelAccessor, pos: BlockPos, age: Int): BlockState {
 		val possibleState = super.getStateWithAge(level, pos, age)
 
