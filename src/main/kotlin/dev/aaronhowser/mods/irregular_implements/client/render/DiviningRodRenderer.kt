@@ -43,7 +43,7 @@ object DiviningRodRenderer {
 			if (!matchesOffHand && !matchesMainHand) continue
 
 			CubeIndicatorRenderer.addIndicator(
-				checkedPos,
+				checkedPos.immutable(),
 				1,
 				DiviningRodItem.getOverlayColor(checkedState)
 			)

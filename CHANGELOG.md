@@ -20,6 +20,7 @@
 ### Fixed
 
 - Fixed a crash when lighting Spectre trees on fire
+- Fixed the Divining Rod not actually rendering anything
 
 # 1.0.0
 
