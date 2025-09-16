@@ -1,5 +1,9 @@
 # 1.1.0
 
+### Added
+
+- Gave the Rain Shield a model
+
 ### Changed
 
 - The White Stone can now charge when dropped as an item, and it floats
