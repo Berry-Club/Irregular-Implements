@@ -78,12 +78,14 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		fun getNameForBlockTag(blockTag: TagKey<Block>): Component {
 			val firstBlock = getBlockForTag(blockTag)
 
-			if (firstBlock == Blocks.AIR) return Component
-				.literal(blockTag.location.toString())
-				.withStyle(ChatFormatting.RED)
-				.withStyle(ChatFormatting.STRIKETHROUGH)
-
-			return firstBlock.name
+			return if (firstBlock == Blocks.AIR) {
+				return Component
+					.literal(blockTag.location.toString())
+					.withStyle(ChatFormatting.RED)
+					.withStyle(ChatFormatting.STRIKETHROUGH)
+			} else {
+				firstBlock.name.withStyle(ChatFormatting.GRAY)
+			}
 		}
 
 		private val defaultBlockForTag: HashMap<TagKey<Block>, Block> = hashMapOf()
