@@ -22,7 +22,6 @@ class DiaphanousBlockItem(properties: Properties) : ItemNameBlockItem(
 		tooltipComponents: MutableList<Component>,
 		tooltipFlag: TooltipFlag
 	) {
-
 		val block = stack.get(ModDataComponents.BLOCK)
 		if (block != null) {
 			val component = ModTooltipLang.BLOCK

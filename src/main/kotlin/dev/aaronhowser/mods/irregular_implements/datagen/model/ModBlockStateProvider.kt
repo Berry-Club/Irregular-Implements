@@ -80,6 +80,7 @@ class ModBlockStateProvider(
 		blockDetector()
 		biomeRadar()
 		rainShield()
+		specialChests()
 	}
 
 	private fun rainShield() {
@@ -1124,6 +1125,21 @@ class ModBlockStateProvider(
 			.end()
 
 		simpleBlockItem(block, itemModel)
+	}
+
+	private fun specialChests() {
+		val blocks = listOf(
+			ModBlocks.WATER_CHEST.get(),
+			ModBlocks.NATURE_CHEST.get()
+		)
+
+		for (block in blocks) {
+			//Never actually gets loaded, just need it for the particles and block state
+			val model = models()
+				.withExistingParent(name(block), mcLoc("block/chest"))
+
+			simpleBlock(block, model)
+		}
 	}
 
 	private fun diaphanousBlock() {

@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
@@ -105,10 +106,12 @@ class ModItemModelProvider(
 
 	private fun blockEntityWithoutLevelRenderers() {
 		val blockEntityWithoutLevelRenderers = listOf(
-			ModItems.DIAPHANOUS_BLOCK,
-			ModItems.SPECTRE_ILLUMINATOR,
-			ModItems.CUSTOM_CRAFTING_TABLE
-		).map { it.get() }
+			ModItems.DIAPHANOUS_BLOCK.get(),
+			ModItems.SPECTRE_ILLUMINATOR.get(),
+			ModItems.CUSTOM_CRAFTING_TABLE.get(),
+			ModBlocks.WATER_CHEST.asItem(),
+			ModBlocks.NATURE_CHEST.asItem()
+		)
 
 		for (item in blockEntityWithoutLevelRenderers) {
 			val name = getName(item)

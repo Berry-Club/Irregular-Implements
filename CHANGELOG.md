@@ -1,11 +1,9 @@
 # 1.1.0
 
-### Added
-
-- Gave the Rain Shield a model and shape
-
 ### Changed
 
+- Gave the Rain Shield a model and shape
+- Gave the Water Chest and Nature Chest item models
 - The White Stone can now charge when dropped as an item, and it floats
 - The Escape Rope can no longer be used while the player can see the sky
 - The Bottle of Air can no longer be used while the player has full breath

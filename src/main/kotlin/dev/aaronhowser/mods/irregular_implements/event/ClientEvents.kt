@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.DiaphanousBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpecialChestBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
@@ -260,6 +261,12 @@ object ClientEvents {
 		event.registerItem(
 			SpectreIlluminatorBEWLR.ClientItemExtensions,
 			ModItems.SPECTRE_ILLUMINATOR.get()
+		)
+
+		event.registerItem(
+			SpecialChestBEWLR.ClientItemExtensions,
+			ModBlocks.NATURE_CHEST.get().asItem(),
+			ModBlocks.WATER_CHEST.get().asItem()
 		)
 	}
 
