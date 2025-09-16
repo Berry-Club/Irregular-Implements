@@ -32,8 +32,23 @@ class ModItemModelProvider(
 		blockEntityWithoutLevelRenderers()
 		spectreChargers()
 		weatherEggs()
+		specialChests()
 
 		basicItems()
+	}
+
+	private fun specialChests() {
+		val blockItems = listOf(
+			ModBlocks.WATER_CHEST.asItem(),
+			ModBlocks.NATURE_CHEST.asItem()
+		)
+
+		for (item in blockItems) {
+			getBuilder(getName(item).toString())
+				.parent(ModelFile.UncheckedModelFile("item/chest"))
+
+			handledItems.add(item)
+		}
 	}
 
 	private fun weatherEggs() {
@@ -108,9 +123,7 @@ class ModItemModelProvider(
 		val blockEntityWithoutLevelRenderers = listOf(
 			ModItems.DIAPHANOUS_BLOCK.get(),
 			ModItems.SPECTRE_ILLUMINATOR.get(),
-			ModItems.CUSTOM_CRAFTING_TABLE.get(),
-			ModBlocks.WATER_CHEST.asItem(),
-			ModBlocks.NATURE_CHEST.asItem()
+			ModItems.CUSTOM_CRAFTING_TABLE.get()
 		)
 
 		for (item in blockEntityWithoutLevelRenderers) {

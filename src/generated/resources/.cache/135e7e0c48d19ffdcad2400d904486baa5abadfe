@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-16T07:39:23.3344139	Item Models: irregular_implements
+// 1.21.1	2025-09-16T07:46:38.9648971	Item Models: irregular_implements
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
 32497cef5506cab7a83f74333eb42f5a51bfe1e7 assets/irregular_implements/models/item/biome_capsule.json
@@ -125,7 +125,7 @@ b59732801ab7d4c0e69648601fc074770ee8b854 assets/irregular_implements/models/item
 6e4492bf31ca73cc7ad2c8cfd4b6c0904b1b1053 assets/irregular_implements/models/item/luminous_powder.json
 f48a738fdc5fe310ff6501102ce4aadf45066d09 assets/irregular_implements/models/item/magic_bean.json
 f5bc71aba2ccebe5ac0de4744720dc347a688201 assets/irregular_implements/models/item/magic_hood.json
-e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/irregular_implements/models/item/nature_chest.json
+f6caba399494a58683561699d72ad1cc86e3d339 assets/irregular_implements/models/item/nature_chest.json
 e35bed2bf8cc9e703e4f6555397d7d73f48f7b14 assets/irregular_implements/models/item/obsidian_rod.json
 fe80fd9289947dd37d8d441684099133f2056c20 assets/irregular_implements/models/item/obsidian_skull.json
 7e08bf54251f08e60adb11cd8118beefdbbc0b3d assets/irregular_implements/models/item/obsidian_skull_ring.json
@@ -168,7 +168,7 @@ c4edc9c5a1986b42e5e0dc6d8e6311e37dbf3b88 assets/irregular_implements/models/item
 edc37240d7b3747ea811b41571953c45283ef5e2 assets/irregular_implements/models/item/transformation_core.json
 2af89dcee1dead0c5842d5bf89af10b6ab9bf1de assets/irregular_implements/models/item/voiding_drop_filter.json
 02a185b1d95eacdf2f314fb932d5c29fce722104 assets/irregular_implements/models/item/void_stone.json
-e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/irregular_implements/models/item/water_chest.json
+f6caba399494a58683561699d72ad1cc86e3d339 assets/irregular_implements/models/item/water_chest.json
 36bec370827934d92433be1d1857b7b19e613498 assets/irregular_implements/models/item/water_walking_boots.json
 a551649b4e189902f01e385714357502f7e96534 assets/irregular_implements/models/item/weather_egg.json
 5d6aad5876ef29c95eaf8e0ab64894f427c95ee1 assets/irregular_implements/models/item/weather_egg_rainy.json
