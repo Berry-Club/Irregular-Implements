@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-16T05:38:46.8685346	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-09-16T07:02:18.4461479	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -30,7 +30,7 @@ aaaec71341b3665b5da99261bcb506dec23dcede data/irregular_implements/tags/block/cu
 42feff80ecc6486ed11bba53612d77101cfbe694 data/irregular_implements/tags/block/diaphanous_block_blacklist.json
 6c3e077db63fa9b78ff114edada8a94e3495f7a1 data/irregular_implements/tags/block/excluded_from_block_teleporter.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/irregular_implements/tags/block/nature_core_immune.json
-347d7db9633b91359c616fd62d97385b7de8bc73 data/irregular_implements/tags/block/nature_core_possible_saplings.json
+56a63aaec14309f946835ba03e8a7349f61b377d data/irregular_implements/tags/block/nature_core_possible_saplings.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/block/super_lubricated.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/animals_spawnable_on.json
 ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.json

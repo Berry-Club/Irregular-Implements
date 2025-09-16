@@ -428,6 +428,7 @@ class ModBlockTagsProvider(
 
 		this.tag(NATURE_CORE_POSSIBLE_SAPLINGS)
 			.addTag(BlockTags.SAPLINGS)
+			.remove(ModBlocks.SPECTRE_SAPLING.get())
 
 		this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
 			.add(
