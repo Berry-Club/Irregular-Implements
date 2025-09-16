@@ -9,15 +9,18 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.ItemUtils
 import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 
 class EscapeRopeItem(properties: Properties) : Item(properties) {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		val usedStack = player.getItemInHand(usedHand)
-		player.startUsingItem(usedHand)
-		return InteractionResultHolder.consume(usedStack)
+		return if (!level.canSeeSky(player.blockPosition())) {
+			ItemUtils.startUsingInstantly(level, player, usedHand)
+		} else {
+			InteractionResultHolder.fail(player.getItemInHand(usedHand))
+		}
 	}
 
 	override fun onUseTick(level: Level, livingEntity: LivingEntity, stack: ItemStack, remainingUseDuration: Int) {
