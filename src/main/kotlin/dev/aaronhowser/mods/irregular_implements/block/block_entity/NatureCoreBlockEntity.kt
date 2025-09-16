@@ -46,7 +46,7 @@ class NatureCoreBlockEntity(
 		val level = level ?: return
 		val random = level.random
 
-		val radius = ServerConfig.CONFIG.natureCoreReplaceRadius.get()
+		val radius = ServerConfig.CONFIG.natureCoreReplaceSandRadius.get()
 
 		val pos = this.blockPos.offset(
 			blockPos.x + random.nextRange(-radius, radius + 1),
@@ -66,7 +66,7 @@ class NatureCoreBlockEntity(
 	private fun spawnAnimals() {
 		val level = level as? ServerLevel ?: return
 
-		val radius = ServerConfig.CONFIG.natureCoreAnimalRadius.get()
+		val radius = ServerConfig.CONFIG.natureCoreSpawnAnimalRadius.get()
 
 		val animalsNearby = level.getEntitiesOfClass(
 			Animal::class.java,
@@ -115,11 +115,13 @@ class NatureCoreBlockEntity(
 	private fun boneMealCrops() {
 		val level = level as? ServerLevel ?: return
 
-		val x = blockPos.x + level.random.nextInt(11) - 5
-		val y = blockPos.y + level.random.nextInt(4) - 3
-		val z = blockPos.z + level.random.nextInt(11) - 5
+		val radius = ServerConfig.CONFIG.natureCoreBoneMealCropRadius.get()
 
-		val pos = BlockPos(x, y, z)
+		val pos = this.blockPos.offset(
+			level.random.nextRange(-radius, radius + 1),
+			level.random.nextRange(-radius, radius + 1),
+			level.random.nextRange(-radius, radius + 1),
+		)
 
 		val state = level.getBlockState(pos)
 		val block = state.block
@@ -134,7 +136,9 @@ class NatureCoreBlockEntity(
 	private fun plantSaplings() {
 		val level = level as? ServerLevel ?: return
 
-		val radius = level.random.nextInt(20) + 10
+		val maxRadius = ServerConfig.CONFIG.natureCorePlantSaplingRadius.get()
+
+		val radius = Mth.lerp(level.random.nextDouble(), 10.0, maxRadius.toDouble()).toInt()
 		val rads = level.random.nextDouble() * Mth.TWO_PI
 
 		val x = Mth.floor(blockPos.x + radius * cos(rads))

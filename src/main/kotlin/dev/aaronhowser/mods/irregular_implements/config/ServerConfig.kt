@@ -21,8 +21,10 @@ class ServerConfig(
 	lateinit var rainShieldChunkRadius: ModConfigSpec.IntValue
 	lateinit var peaceCandleChunkRadius: ModConfigSpec.IntValue
 
-	lateinit var natureCoreReplaceRadius: ModConfigSpec.IntValue
-	lateinit var natureCoreAnimalRadius: ModConfigSpec.DoubleValue
+	lateinit var natureCoreReplaceSandRadius: ModConfigSpec.IntValue
+	lateinit var natureCorePlantSaplingRadius: ModConfigSpec.IntValue
+	lateinit var natureCoreBoneMealCropRadius: ModConfigSpec.IntValue
+	lateinit var natureCoreSpawnAnimalRadius: ModConfigSpec.DoubleValue
 
 	lateinit var spectreImbueChance: ModConfigSpec.DoubleValue
 
@@ -99,9 +101,21 @@ class ServerConfig(
 			.comment("What chunk radius should the Peace Candle have? (0 means only the chunk the Peace Candle is in)")
 			.defineInRange("peaceCandleChunkRadius", 1, 0, Int.MAX_VALUE)
 
-		natureCoreReplaceRadius = builder
+		natureCoreReplaceSandRadius = builder
 			.comment("What radius should the Nature Core replace blocks in?")
 			.defineInRange("natureCoreReplaceRadius", 8, 1, Int.MAX_VALUE)
+
+		natureCorePlantSaplingRadius = builder
+			.comment("What is the maximum radius that the Nature Core can plant saplings in?")
+			.defineInRange("natureCorePlantSaplingRadius", 16, 1, Int.MAX_VALUE)
+
+		natureCoreBoneMealCropRadius = builder
+			.comment("What radius should the Nature Core apply bone meal to crops in?")
+			.defineInRange("natureCoreBoneMealCropRadius", 4, 1, Int.MAX_VALUE)
+
+		natureCoreSpawnAnimalRadius = builder
+			.comment("What radius should the Nature Core spawn animals in?")
+			.defineInRange("natureCoreSpawnAnimalRadius", 8.0, 1.0, 32.0)
 
 		escapeRopeMaxBlocks = builder
 			.comment("How many blocks should the Escape Rope check before giving up?\n\n0 means no limit")
