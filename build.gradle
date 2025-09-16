@@ -188,6 +188,7 @@ unifiedPublishing {
 		gameLoaders = ["neoforge"]
 
 		// test
+		// test 2
 
 		changelog = "https://github.com/aaronhowser1/Irregular-Implements/blob/master/CHANGELOG.md#" + project.mod_version.toString().replace(".", "")
 
