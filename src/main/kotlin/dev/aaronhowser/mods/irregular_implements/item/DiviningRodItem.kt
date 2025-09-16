@@ -101,9 +101,25 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 			}
 		}
 
-		private fun oreTag(name: String) = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores/$name"))
+		private fun oreTag(name: String): TagKey<Block> =
+			TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores/$name"))
 
-		private val colorsPerTag = hashMapOf(
+		/**
+		 * Can be added to using KubeJS.
+		 *
+		 * Here's an example:
+		 * ```js
+		 * const $DiviningRodItem = Java.loadClass('dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem')
+		 * const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+		 *
+		 * $DiviningRodItem.COLORS_PER_TAG.put(
+		 * 		$ResourceLocation.fromNamespaceAndPath('c', 'ores/mythril'),
+		 * 		0xFF00FF
+		 * )
+		 * ```
+		 */
+		@JvmField
+		val COLORS_PER_TAG = mutableMapOf(
 			Tags.Blocks.ORES_COAL to 0x141414,
 			Tags.Blocks.ORES_IRON to 0xD3B09F,
 			Tags.Blocks.ORES_GOLD to 0xF6E950,
@@ -122,7 +138,7 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		)
 
 		fun getOverlayColor(blockState: BlockState): Int {
-			for ((tag, color) in colorsPerTag) {
+			for ((tag, color) in COLORS_PER_TAG) {
 				if (blockState.`is`(tag)) {
 					return (50 shl 24) or color
 				}
@@ -137,7 +153,7 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 			val blockTag = itemStack.get(ModDataComponents.BLOCK_TAG)
 
 			if (blockTag != null) {
-				val rgb = colorsPerTag[blockTag] ?: 0xFFFFFF
+				val rgb = COLORS_PER_TAG[blockTag] ?: 0xFFFFFF
 				return (0xFF shl 24) or rgb
 			}
 
