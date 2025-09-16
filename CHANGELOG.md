@@ -2,7 +2,7 @@
 
 ### Added
 
-- Gave the Rain Shield a model
+- Gave the Rain Shield a model and shape
 
 ### Changed
 
