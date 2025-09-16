@@ -29,11 +29,24 @@ import java.util.function.Supplier
 class WhiteStoneItem(properties: Properties) : Item(properties) {
 
 	override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
-		tryCharge(level, stack, entity.blockPosition().above())
+		tryCharge(level, stack, entity.blockPosition().above(2))
 	}
 
 	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-		tryCharge(entity.level(), stack, entity.blockPosition())
+		val charged = tryCharge(entity.level(), stack, entity.blockPosition())
+
+		entity.isNoGravity = charged
+		if (charged) {
+			val motion = entity.deltaMovement
+			entity.setDeltaMovement(
+				motion.x * 0.95,
+				motion.y + 0.001,
+				motion.z * 0.95
+			)
+
+			entity.lifespan = Int.MAX_VALUE
+		}
+
 		return false
 	}
 
@@ -83,39 +96,42 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 
 		const val MAX_CHARGE = 20 * 100
 
-		fun tryCharge(level: Level, stack: ItemStack, blockPos: BlockPos) {
-			if (level !is ServerLevel
-				|| level.moonPhase != 0
+		fun tryCharge(level: Level, stack: ItemStack, blockPos: BlockPos): Boolean {
+			if (level.moonPhase != 0
 				|| level.dayTime !in 14000..23000
 				|| isChargedWhiteStone(stack)
 				|| !level.canSeeSky(blockPos)
-			) return
+			) return false
 
 			val currentCharge = stack.getOrDefault(ModDataComponents.CHARGE.get(), 0)
 			val newCharge = currentCharge + 1
 
 			stack.set(ModDataComponents.CHARGE, newCharge)
 
-			level.sendParticles(
-				ParticleTypes.ENCHANT,
-				blockPos.center.x,
-				blockPos.center.y,
-				blockPos.center.z,
-				1,
-				0.0,
-				0.0,
-				0.0,
-				Mth.lerp(newCharge / MAX_CHARGE.toDouble(), 3.0, 2.25)
-			)
-
-			if (newCharge == MAX_CHARGE) {
-				level.playSound(
-					null,
-					blockPos,
-					SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
-					SoundSource.PLAYERS,
+			if (level is ServerLevel) {
+				level.sendParticles(
+					ParticleTypes.ENCHANT,
+					blockPos.center.x,
+					blockPos.center.y,
+					blockPos.center.z,
+					1,
+					0.0,
+					0.0,
+					0.0,
+					Mth.lerp(newCharge / MAX_CHARGE.toDouble(), 3.0, 2.25)
 				)
+
+				if (newCharge == MAX_CHARGE) {
+					level.playSound(
+						null,
+						blockPos,
+						SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
+						SoundSource.PLAYERS,
+					)
+				}
 			}
+
+			return true
 		}
 
 		fun isChargedWhiteStone(itemStack: ItemStack): Boolean {
