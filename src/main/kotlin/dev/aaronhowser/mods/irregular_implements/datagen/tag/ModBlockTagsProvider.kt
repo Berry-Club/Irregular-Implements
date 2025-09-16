@@ -488,6 +488,8 @@ class ModBlockTagsProvider(
 				ModBlocks.AUTO_PLACER.get()
 			)
 
+		this.tag(NATURE_CORE_IMMUNE)
+
 	}
 
 	private fun colorTags() {
@@ -544,7 +546,7 @@ class ModBlockTagsProvider(
 		val CONVERTS_TO_FLOO_BRICK = create("converts_to_floo_brick")
 		val EXCLUDED_FROM_BLOCK_TELEPORTER = create("excluded_from_block_teleporter")
 		val NATURE_CORE_POSSIBLE_SAPLINGS = create("nature_core_possible_saplings")
-		val NATURE_CORE_IMMUNE_SAND = create("nature_core_immune_sand")
+		val NATURE_CORE_IMMUNE = create("nature_core_immune")
 	}
 
 }

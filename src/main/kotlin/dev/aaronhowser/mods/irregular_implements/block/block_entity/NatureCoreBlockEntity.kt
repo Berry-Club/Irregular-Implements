@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import dev.aaronhowser.mods.irregular_implements.util.StructureSchematics
@@ -12,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.Mth
+import net.minecraft.util.random.WeightedRandomList
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.animal.Animal
@@ -60,11 +62,11 @@ class NatureCoreBlockEntity(
 			attempts++
 
 			val foundSand = blockStateThere.`is`(BlockTags.SAND)
-					&& !blockStateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE_SAND)
+					&& !blockStateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
 		} while (foundSand && attempts < 50)
 
 		val stateThere = level.getBlockState(pos)
-		if (stateThere.`is`(BlockTags.SAND) && !stateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE_SAND)) {
+		if (stateThere.`is`(BlockTags.SAND) && !stateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)) {
 			val belowAir = level.isEmptyBlock(pos.above())
 			val place = if (belowAir) Blocks.GRASS_BLOCK else Blocks.DIRT
 
@@ -114,7 +116,17 @@ class NatureCoreBlockEntity(
 			.value()
 			.mobSettings.getMobs(mobCategory)
 
-		val randomEntityType = entitiesThatCanSpawnHere
+		val filtered = entitiesThatCanSpawnHere
+			.unwrap()
+			.filterNot {
+				it.type.`is`(ModEntityTypeTagsProvider.NATURE_CORE_IMMUNE)
+			}
+
+		if (filtered.isEmpty()) return
+
+		val newWeightedList = WeightedRandomList.create(filtered)
+
+		val randomEntityType = newWeightedList
 			.getRandom(level.random)
 			.getOrNull()
 			?.type

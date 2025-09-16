@@ -20,9 +20,10 @@ class ModEntityTypeTagsProvider(
 	override fun addTags(provider: HolderLookup.Provider) {
 		this.tag(SUMMONING_PENDULUM_BLACKLIST)
 			.add(
-				EntityType.PLAYER,
+				EntityType.PLAYER
+			)
 
-				)
+		tag(NATURE_CORE_IMMUNE)
 	}
 
 	companion object {
@@ -31,6 +32,7 @@ class ModEntityTypeTagsProvider(
 		}
 
 		val SUMMONING_PENDULUM_BLACKLIST = create("summoning_pendulum_blacklist")
+		val NATURE_CORE_IMMUNE = create("nature_core_immune")
 	}
 
 }
