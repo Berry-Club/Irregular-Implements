@@ -67,13 +67,12 @@ class BlockMoverItem(properties: Properties) : Item(properties) {
 
 		val DEFAULT_PROPERTIES: Properties = Properties().durability(99)
 
-		// This changes multiple times per tick, so it's treated as a field
 		private var blockMoverPreventingContainerDrops = false
 
 		fun handleEntityJoinLevel(event: EntityJoinLevelEvent) {
 			val entity = event.entity
 
-			if (blockMoverPreventingContainerDrops && entity is ItemEntity || entity is ExperienceOrb) {
+			if (blockMoverPreventingContainerDrops && (entity is ItemEntity || entity is ExperienceOrb)) {
 				entity.discard()
 				event.isCanceled = true
 			}
