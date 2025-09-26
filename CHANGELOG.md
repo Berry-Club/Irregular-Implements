@@ -1,3 +1,9 @@
+# 1.1.1
+
+### Fixed
+
+- Fixed experience orbs never dropping
+
 # 1.1.0
 
 ### Changed
