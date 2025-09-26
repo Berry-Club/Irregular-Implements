@@ -24,6 +24,12 @@ class ModEntityTypeTagsProvider(
 			)
 
 		tag(NATURE_CORE_IMMUNE)
+
+		tag(NOT_DROPPED_WHEN_MOVING_BLOCKS)
+			.add(
+				EntityType.ITEM,
+				EntityType.EXPERIENCE_ORB
+			)
 	}
 
 	companion object {
@@ -33,6 +39,7 @@ class ModEntityTypeTagsProvider(
 
 		val SUMMONING_PENDULUM_BLACKLIST = create("summoning_pendulum_blacklist")
 		val NATURE_CORE_IMMUNE = create("nature_core_immune")
+		val NOT_DROPPED_WHEN_MOVING_BLOCKS = create("not_dropped_when_moving_blocks")
 	}
 
 }

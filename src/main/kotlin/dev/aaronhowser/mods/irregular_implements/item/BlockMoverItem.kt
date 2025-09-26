@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.component.BlockDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.ChatFormatting
@@ -72,7 +73,7 @@ class BlockMoverItem(properties: Properties) : Item(properties) {
 		fun handleEntityJoinLevel(event: EntityJoinLevelEvent) {
 			val entity = event.entity
 
-			if (blockMoverPreventingContainerDrops && (entity is ItemEntity || entity is ExperienceOrb)) {
+			if (blockMoverPreventingContainerDrops && entity.type.`is`(ModEntityTypeTagsProvider.NOT_DROPPED_WHEN_MOVING_BLOCKS)) {
 				entity.discard()
 				event.isCanceled = true
 			}
