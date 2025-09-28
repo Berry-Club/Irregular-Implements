@@ -1,5 +1,9 @@
 # 1.2.0
 
+### Added
+
+- `/ii notify <player> <title> <body> <item>` command to send a toast notification to a player
+
 ### Changed
 
 - Commands can now be accessed either through `/irregular_implements` or `/ii`
