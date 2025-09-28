@@ -39,6 +39,13 @@ object ModMessageLang {
 	const val ANCHOR_USED = "message.irregular_implements.anchor.used"
 	const val BIOME_PAINTER_AMOUNT_CHANGED = "message.irregular_implements.biome_painter.amount_changed"
 	const val BIOME_RADAR_FILTER_SET = "message.irregular_implements.biome_radar.filter_set"
+	const val ENTITY_DETECTOR_ALL = "message.irregular_implements.entity_detector.filter.all"
+	const val ENTITY_DETECTOR_LIVING = "message.irregular_implements.entity_detector.filter.living"
+	const val ENTITY_DETECTOR_ANIMAL = "message.irregular_implements.entity_detector.filter.animal"
+	const val ENTITY_DETECTOR_MONSTER = "message.irregular_implements.entity_detector.filter.monster"
+	const val ENTITY_DETECTOR_PLAYER = "message.irregular_implements.entity_detector.filter.player"
+	const val ENTITY_DETECTOR_ITEM = "message.irregular_implements.entity_detector.filter.item"
+	const val ENTITY_DETECTOR_CUSTOM = "message.irregular_implements.entity_detector.filter.custom"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -77,6 +84,13 @@ object ModMessageLang {
 			add(ANCHOR_USED, "%s was retained through death, but its Spectre Anchor was consumed")
 			add(BIOME_PAINTER_AMOUNT_CHANGED, "Changed %d blocks to %s")
 			add(BIOME_RADAR_FILTER_SET, "Location Filter set")
+			add(ENTITY_DETECTOR_ALL, "All Entities")
+			add(ENTITY_DETECTOR_LIVING, "Living Entities")
+			add(ENTITY_DETECTOR_ANIMAL, "Animals")
+			add(ENTITY_DETECTOR_MONSTER, "Monsters")
+			add(ENTITY_DETECTOR_PLAYER, "Players")
+			add(ENTITY_DETECTOR_ITEM, "Items")
+			add(ENTITY_DETECTOR_CUSTOM, "Custom")
 		}
 	}
 

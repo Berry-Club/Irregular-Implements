@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -170,13 +171,13 @@ class EntityDetectorBlockEntity(
 		val entityClass: Class<out Entity>?,
 		val unlocalizedName: String
 	) {
-		ALL(Entity::class.java, "all"),
-		LIVING(LivingEntity::class.java, "living"),
-		ANIMAL(Animal::class.java, "animal"),
-		MONSTER(Monster::class.java, "monster"),
-		PLAYER(Player::class.java, "player"),
-		ITEM(ItemEntity::class.java, "item"),
-		CUSTOM(null, "custom")
+		ALL(Entity::class.java, ModMessageLang.ENTITY_DETECTOR_ALL),
+		LIVING(LivingEntity::class.java, ModMessageLang.ENTITY_DETECTOR_LIVING),
+		ANIMAL(Animal::class.java, ModMessageLang.ENTITY_DETECTOR_ANIMAL),
+		MONSTER(Monster::class.java, ModMessageLang.ENTITY_DETECTOR_MONSTER),
+		PLAYER(Player::class.java, ModMessageLang.ENTITY_DETECTOR_PLAYER),
+		ITEM(ItemEntity::class.java, ModMessageLang.ENTITY_DETECTOR_ITEM),
+		CUSTOM(null, ModMessageLang.ENTITY_DETECTOR_CUSTOM)
 
 		;
 
