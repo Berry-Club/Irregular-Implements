@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownGoldenEggEntity
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.Direction
 import net.minecraft.core.Position
 import net.minecraft.sounds.SoundEvents
@@ -30,7 +31,7 @@ class GoldenEggItem(properties: Properties) : Item(properties), ProjectileItem {
 			0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f)
 		)
 
-		if (!level.isClientSide) {
+		if (level.isServerSide) {
 			val thrownGoldenEgg = ThrownGoldenEggEntity(level, player)
 			thrownGoldenEgg.item = usedStack
 			thrownGoldenEgg.shootFromRotation(player, player.xRot, player.yRot, 0.0f, 1.5f, 1.0f)

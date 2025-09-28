@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.ChatFormatting
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
@@ -18,7 +19,7 @@ class SpectreIlluminatorItem(properties: Properties) : Item(properties) {
 
 		if (SpectreIlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
 
-			if (!level.isClientSide) {
+			if (level.isServerSide) {
 				player?.sendSystemMessage(
 					ModMessageLang.ILLUMINATOR_ALREADY_PRESENT
 						.toComponent()

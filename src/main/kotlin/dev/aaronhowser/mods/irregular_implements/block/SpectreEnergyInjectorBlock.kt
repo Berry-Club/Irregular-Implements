@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnerg
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
@@ -45,7 +46,7 @@ class SpectreEnergyInjectorBlock : Block(
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 		val blockEntity = level.getBlockEntity(pos) as? SpectreEnergyInjectorBlockEntity
-		if (!level.isClientSide && blockEntity != null) {
+		if (level.isServerSide && blockEntity != null) {
 			val energyHandler = blockEntity.getEnergyHandler(null)
 			val energyStored = energyHandler?.energyStored ?: 0
 			val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilSavedData.MAX_ENERGY

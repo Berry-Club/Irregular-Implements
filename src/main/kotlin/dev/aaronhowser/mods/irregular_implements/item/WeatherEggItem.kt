@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.Direction
@@ -67,7 +68,7 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 			0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f)
 		)
 
-		if (!level.isClientSide) {
+		if (level.isServerSide) {
 			val thrownWeatherEgg = ThrownWeatherEggEntity(level, player)
 
 			thrownWeatherEgg.item = usedStack

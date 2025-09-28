@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.OnlineDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
@@ -57,7 +58,7 @@ class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISP
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 
-		if (!level.isClientSide) {
+		if (level.isServerSide) {
 			val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity ?: return InteractionResult.FAIL
 			player.openMenu(blockEntity)
 			blockEntity.sendStringUpdate()

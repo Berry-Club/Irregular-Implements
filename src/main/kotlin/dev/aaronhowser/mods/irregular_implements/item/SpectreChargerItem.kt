@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -59,7 +60,7 @@ class SpectreChargerItem(
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		val usedStack = player.getItemInHand(usedHand)
 
-		if (!level.isClientSide) {
+		if (level.isServerSide) {
 			if (usedStack.has(ModDataComponents.IS_ENABLED)) {
 				usedStack.remove(ModDataComponents.IS_ENABLED)
 			} else {

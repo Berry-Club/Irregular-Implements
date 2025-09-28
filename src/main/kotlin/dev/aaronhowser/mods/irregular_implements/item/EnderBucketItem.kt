@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.multiplayer.ClientLevel
@@ -248,7 +249,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 				return true
 			}
 
-			if (!level.isClientSide && canBeReplaced && !blockState.liquid()) level.destroyBlock(blockPos, true)
+			if (level.isServerSide && canBeReplaced && !blockState.liquid()) level.destroyBlock(blockPos, true)
 
 			return if (!level.setBlock(blockPos, fluid.defaultFluidState().createLegacyBlock(), 11) && !blockState.fluidState.isSource) {
 				false

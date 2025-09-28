@@ -51,6 +51,9 @@ object OtherUtil {
 	val Entity.isClientSide: Boolean
 		get() = this.level().isClientSide
 
+	val Level.isServerSide: Boolean
+		get() = !this.isClientSide
+
 	fun getPotionStack(potion: Holder<Potion>): ItemStack {
 		return PotionContents.createItemStack(Items.POTION, potion)
 	}
