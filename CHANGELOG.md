@@ -1,3 +1,9 @@
+# 1.3.0
+
+### Changed
+
+- The notify command now accepts a `players` argument instead of `player`
+
 # 1.2.0
 
 ### Added

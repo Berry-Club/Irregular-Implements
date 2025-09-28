@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack
 
 object NotifyCommand {
 
-	private const val PLAYER = "player"
+	private const val PLAYERS = "players"
 	private const val TITLE = "title"
 	private const val BODY = "body"
 	private const val ITEM = "item"
@@ -23,7 +23,7 @@ object NotifyCommand {
 		return Commands
 			.literal("notify")
 			.then(
-				Commands.argument(PLAYER, EntityArgument.player())
+				Commands.argument(PLAYERS, EntityArgument.players())
 					.then(
 						Commands.argument(TITLE, StringArgumentType.string())
 							.then(
@@ -33,12 +33,12 @@ object NotifyCommand {
 											.executes {
 												val source = it.source
 
-												val target = EntityArgument.getPlayer(it, PLAYER)
+												val targets = EntityArgument.getPlayers(it, PLAYERS)
 												val title = StringArgumentType.getString(it, TITLE)
 												val body = StringArgumentType.getString(it, BODY)
 												val item = ItemArgument.getItem(it, ITEM).createItemStack(1, false)
 
-												notify(source, target, title, body, item)
+												notify(source, targets, title, body, item)
 											})
 							)
 					)
@@ -47,13 +47,16 @@ object NotifyCommand {
 
 	private fun notify(
 		source: CommandSourceStack,
-		target: ServerPlayer,
+		targets: Collection<ServerPlayer>,
 		title: String,
 		body: String,
 		item: ItemStack
 	): Int {
 		val packet = SendClientToast(title, body, item)
-		packet.messagePlayer(target)
+
+		for (target in targets) {
+			packet.messagePlayer(target)
+		}
 
 		source.sendSuccess(
 			{ Component.literal("Toast send to player!") },
