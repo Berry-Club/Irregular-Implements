@@ -4,6 +4,11 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.animal.Animal
@@ -61,6 +66,10 @@ class EntityDetectorBlockEntity(
 		filter = Filter.entries[nextOrdinal]
 		setChanged()
 	}
+
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		fun tick(
