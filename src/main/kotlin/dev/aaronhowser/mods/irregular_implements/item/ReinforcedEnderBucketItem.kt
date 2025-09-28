@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.core.BlockPos

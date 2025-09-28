@@ -39,7 +39,7 @@ class AutoPlacerBlock : Block(
 
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
 		return defaultBlockState()
-			.setValue(BlockBreakerBlock.Companion.FACING, context.nearestLookingDirection.opposite)
+			.setValue(BlockBreakerBlock.FACING, context.nearestLookingDirection.opposite)
 	}
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {

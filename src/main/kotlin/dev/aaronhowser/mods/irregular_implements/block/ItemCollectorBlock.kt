@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.AutoPlacerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ItemCollectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos

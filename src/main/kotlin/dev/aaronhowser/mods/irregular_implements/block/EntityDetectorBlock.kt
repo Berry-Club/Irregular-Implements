@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EntityDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.ImbuingStationBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
