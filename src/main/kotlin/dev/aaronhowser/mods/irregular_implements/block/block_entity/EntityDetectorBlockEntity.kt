@@ -123,11 +123,13 @@ class EntityDetectorBlockEntity(
 
 		override fun set(index: Int, value: Int) {
 			when (index) {
-				X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius = value
-				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius = value
-				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius = value
+				X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius = value.coerceIn(0, 16)
+				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius = value.coerceIn(0, 16)
+				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius = value.coerceIn(0, 16)
 				INVERTED_INDEX -> this@EntityDetectorBlockEntity.isInverted = (value != 0)
 			}
+
+			setChanged()
 		}
 
 		override fun getCount(): Int = CONTAINER_DATA_SIZE
