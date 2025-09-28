@@ -21,6 +21,7 @@ import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -106,6 +107,20 @@ class EntityDetectorBlockEntity(
 		ContainerHelper.loadAllItems(tag, container.items, registries)
 	}
 
+	// Menu stuff
+
+	private val containerData = object : ContainerData {
+
+		override fun get(index: Int): Int {
+			TODO("Not yet implemented")
+		}
+
+		override fun set(index: Int, value: Int) {
+		}
+
+		override fun getCount(): Int = CONTAINER_DATA_SIZE
+	}
+
 	override fun getDisplayName(): Component = this.blockState.block.name
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
@@ -114,6 +129,7 @@ class EntityDetectorBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 1
+		const val CONTAINER_DATA_SIZE = 5
 		private const val X_RADIUS_NBT = "XRadius"
 		private const val Y_RADIUS_NBT = "YRadius"
 		private const val Z_RADIUS_NBT = "ZRadius"

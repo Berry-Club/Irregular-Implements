@@ -16,7 +16,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.SimpleContainerData
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -90,7 +90,7 @@ class InventoryTesterBlockEntity(
 
 	// Menu stuff
 
-	val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+	val containerData = object : ContainerData {
 		override fun get(index: Int): Int {
 			return if (invertSignal) 1 else 0
 		}
@@ -98,6 +98,8 @@ class InventoryTesterBlockEntity(
 		override fun set(index: Int, value: Int) {
 			invertSignal = value != 0
 		}
+
+		override fun getCount(): Int = CONTAINER_DATA_SIZE
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {

@@ -19,7 +19,7 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.SimpleContainerData
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.DispenserBlock
@@ -100,8 +100,7 @@ class IronDropperBlockEntity(
 			setChanged()
 		}
 
-	private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
-
+	private val containerData = object : ContainerData {
 		override fun get(index: Int): Int {
 			return when (index) {
 				SHOOT_STRAIGHT_INDEX -> if (this@IronDropperBlockEntity.shouldShootStraight) 1 else 0
@@ -120,6 +119,8 @@ class IronDropperBlockEntity(
 				REDSTONE_MODE_INDEX -> this@IronDropperBlockEntity.redstoneMode = RedstoneMode.entries[value]
 			}
 		}
+
+		override fun getCount(): Int = CONTAINER_DATA_SIZE
 	}
 
 	val dispenseBehavior = object : DefaultDispenseItemBehavior() {

@@ -13,7 +13,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.SimpleContainerData
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 
@@ -74,7 +74,7 @@ class AdvancedItemCollectorBlockEntity(
 
 	// Menu stuff
 
-	private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+	private val containerData = object : ContainerData {
 		override fun set(index: Int, value: Int) {
 			when (index) {
 				X_RADIUS_INDEX -> this@AdvancedItemCollectorBlockEntity.xRadius = value
@@ -96,6 +96,8 @@ class AdvancedItemCollectorBlockEntity(
 				else -> error("Invalid index: $index")
 			}
 		}
+
+		override fun getCount(): Int = CONTAINER_DATA_SIZE
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {

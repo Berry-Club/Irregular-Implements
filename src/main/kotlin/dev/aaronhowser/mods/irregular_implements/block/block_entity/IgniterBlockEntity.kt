@@ -16,7 +16,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.SimpleContainerData
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.DirectionalBlock.FACING
@@ -70,7 +70,7 @@ class IgniterBlockEntity(
 
 	// Menu stuff
 
-	private val containerData = object : SimpleContainerData(CONTAINER_DATA_SIZE) {
+	private val containerData = object : ContainerData {
 		override fun set(index: Int, value: Int) {
 			when (index) {
 				MODE_INDEX -> this@IgniterBlockEntity.mode = Mode.entries.getOrNull(value) ?: Mode.TOGGLE
@@ -84,6 +84,8 @@ class IgniterBlockEntity(
 				else -> error("Unknown index: $index")
 			}
 		}
+
+		override fun getCount(): Int = CONTAINER_DATA_SIZE
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
