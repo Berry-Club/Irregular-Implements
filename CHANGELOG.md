@@ -3,6 +3,7 @@
 ### Changed
 
 - Commands can now be accessed either through `/irregular_implements` or `/ii`
+- Renamed `/ii fireplace teleport-to` to just `/ii fireplace teleport`
 
 ### Fixed
 
