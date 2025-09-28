@@ -22,14 +22,20 @@ class EntityDetectorBlockEntity(
 ) : BlockEntity(ModBlockEntities.ENTITY_DETECTOR.get(), pos, blockState) {
 
 	var filter: Filter = Filter.ALL
+		private set
 
 	var xRadius: Int = 1
+		private set
 	var yRadius: Int = 1
+		private set
 	var zRadius: Int = 1
+		private set
 
 	var inverted: Boolean = false
+		private set
 
 	var isActive: Boolean = false
+		private set
 
 	fun tick() {
 		val level = level ?: return
