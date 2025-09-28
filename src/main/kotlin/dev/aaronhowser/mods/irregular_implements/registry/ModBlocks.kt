@@ -157,7 +157,8 @@ object ModBlocks {
 		registerBlock("chat_detector", ::ChatDetectorBlock)
 	val GLOBAL_CHAT_DETECTOR: DeferredBlock<GlobalChatDetectorBlock> =
 		registerBlock("global_chat_detector", ::GlobalChatDetectorBlock)
-	val ENTITY_DETECTOR = basicBlock("entity_detector")
+	val ENTITY_DETECTOR: DeferredBlock<EntityDetectorBlock> =
+		registerBlock("entity_detector", ::EntityDetectorBlock)
 
 	// Interfaces
 	val PLAYER_INTERFACE: DeferredBlock<PlayerInterfaceBlock> =

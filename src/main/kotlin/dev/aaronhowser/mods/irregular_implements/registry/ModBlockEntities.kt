@@ -109,6 +109,8 @@ object ModBlockEntities {
 		register("auto_placer", ::AutoPlacerBlockEntity, ModBlocks.AUTO_PLACER)
 	val BIOME_RADAR: DeferredHolder<BlockEntityType<*>, BlockEntityType<BiomeRadarBlockEntity>> =
 		register("biome_radar", ::BiomeRadarBlockEntity, ModBlocks.BIOME_RADAR)
+	val ENTITY_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<EntityDetectorBlockEntity>> =
+		register("entity_detector", ::EntityDetectorBlockEntity, ModBlocks.ENTITY_DETECTOR)
 
 	private fun <T : BlockEntity> register(
 		name: String,
