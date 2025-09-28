@@ -2,7 +2,7 @@
 
 ### Fixed
 
-- Fixed experience orbs never dropping
+- Fixed experience orbs never dropping ([#3](https://github.com/Berry-Club/Irregular-Implements/issues/3))
   - When moving blocks with the Block Mover, the game thinks the block was broken normally, and tries to spawn the item and xp
   - I did the logic wrong, though, which is fixed
   - While I was at it, I made it use the entity type tag `#irregular_implementsnot_dropped_when_moving_blocks` just in case some mod adds some funky whatever that happens on block breaking
