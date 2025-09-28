@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -88,6 +89,8 @@ class EntityDetectorBlockEntity(
 		tag.putInt(FILTER_NBT, filter.ordinal)
 		tag.putBoolean(INVERTED_NBT, inverted)
 		tag.putBoolean(ACTIVE_NBT, isActive)
+
+		ContainerHelper.saveAllItems(tag, container.items, registries)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -99,6 +102,8 @@ class EntityDetectorBlockEntity(
 		filter = Filter.entries[tag.getInt(FILTER_NBT).coerceIn(0, Filter.entries.size - 1)]
 		inverted = tag.getBoolean(INVERTED_NBT)
 		isActive = tag.getBoolean(ACTIVE_NBT)
+
+		ContainerHelper.loadAllItems(tag, container.items, registries)
 	}
 
 	override fun getDisplayName(): Component = this.blockState.block.name
