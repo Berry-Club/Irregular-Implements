@@ -1,4 +1,8 @@
-# 1.1.1
+# 1.2.0
+
+### Changed
+
+- Commands can now be accessed either through `/irregular_implements` or `/ii`
 
 ### Fixed
 

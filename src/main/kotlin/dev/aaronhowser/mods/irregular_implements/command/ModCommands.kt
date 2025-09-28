@@ -13,10 +13,13 @@ import net.minecraft.world.level.Level
 object ModCommands {
 
 	fun register(dispatcher: CommandDispatcher<CommandSourceStack>) {
-		dispatcher.register(
+
+		val root = dispatcher.register(
 			Commands.literal("irregular-implements")
 				.then(FireplaceCommand.register())
 		)
+
+		dispatcher.register(Commands.literal("ii").redirect(root))
 
 	}
 
