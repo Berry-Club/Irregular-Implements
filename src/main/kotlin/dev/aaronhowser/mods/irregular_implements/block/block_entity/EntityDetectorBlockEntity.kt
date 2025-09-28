@@ -71,7 +71,36 @@ class EntityDetectorBlockEntity(
 	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		tag.putInt(X_RADIUS_NBT, xRadius)
+		tag.putInt(Y_RADIUS_NBT, yRadius)
+		tag.putInt(Z_RADIUS_NBT, zRadius)
+		tag.putInt(FILTER_NBT, filter.ordinal)
+		tag.putBoolean(INVERTED_NBT, inverted)
+		tag.putBoolean(ACTIVE_NBT, isActive)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		xRadius = tag.getInt(X_RADIUS_NBT)
+		yRadius = tag.getInt(Y_RADIUS_NBT)
+		zRadius = tag.getInt(Z_RADIUS_NBT)
+		filter = Filter.entries[tag.getInt(FILTER_NBT).coerceIn(0, Filter.entries.size - 1)]
+		inverted = tag.getBoolean(INVERTED_NBT)
+		isActive = tag.getBoolean(ACTIVE_NBT)
+	}
+
 	companion object {
+		private const val X_RADIUS_NBT = "XRadius"
+		private const val Y_RADIUS_NBT = "YRadius"
+		private const val Z_RADIUS_NBT = "ZRadius"
+		private const val FILTER_NBT = "Filter"
+		private const val INVERTED_NBT = "Inverted"
+		private const val ACTIVE_NBT = "Active"
+
 		fun tick(
 			level: Level,
 			pos: BlockPos,
