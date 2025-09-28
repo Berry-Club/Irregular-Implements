@@ -21,24 +21,38 @@ class EntityDetectorBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntities.ENTITY_DETECTOR.get(), pos, blockState) {
 
-	private var filter: Filter = Filter.ALL
+	var filter: Filter = Filter.ALL
 
-	private var xRadius: Int = 0
-	private var yRadius: Int = 0
-	private var zRadius: Int = 0
+	var xRadius: Int = 1
+	var yRadius: Int = 1
+	var zRadius: Int = 1
 
-	private var inverted: Boolean = false
+	var inverted: Boolean = false
 
+	var isActive: Boolean = false
 
 	fun tick() {
 		val level = level ?: return
 
-		val entities = level.getEntities(
+		val filterFoundEntities = level.getEntities(
 			null,
 			AABB(blockPos).inflate(xRadius.toDouble(), yRadius.toDouble(), zRadius.toDouble()),
 			filter.predicate(ItemStack.EMPTY)
-		)
+		).isNotEmpty()
 
+		val shouldBePowered = if (inverted) !filterFoundEntities else filterFoundEntities
+		if (isActive == shouldBePowered) return
+
+		isActive = shouldBePowered
+		setChanged()
+
+		level.updateNeighborsAt(blockPos, blockState.block)
+	}
+
+	fun cycleFilter() {
+		val nextOrdinal = (filter.ordinal + 1) % Filter.entries.size
+		filter = Filter.entries[nextOrdinal]
+		setChanged()
 	}
 
 	companion object {
