@@ -24,8 +24,6 @@ object ClientUtil {
 		}
 
 	fun levelFromBlockAndTintGetter(blockAndTintGetter: BlockAndTintGetter): Level? {
-
-
 		return (blockAndTintGetter as? RenderChunkRegion)?.level
 	}
 
