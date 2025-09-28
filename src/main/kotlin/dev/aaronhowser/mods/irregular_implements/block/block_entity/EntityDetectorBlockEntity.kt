@@ -33,6 +33,7 @@ class EntityDetectorBlockEntity(
 
 	fun tick() {
 		val level = level ?: return
+		if (level.gameTime % 10 != 0L) return
 
 		val filterFoundEntities = level.getEntities(
 			null,
