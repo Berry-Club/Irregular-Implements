@@ -141,7 +141,7 @@ class EntityDetectorBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 1
-		const val CONTAINER_DATA_SIZE = 5
+		const val CONTAINER_DATA_SIZE = 4
 		private const val X_RADIUS_NBT = "XRadius"
 		private const val Y_RADIUS_NBT = "YRadius"
 		private const val Z_RADIUS_NBT = "ZRadius"

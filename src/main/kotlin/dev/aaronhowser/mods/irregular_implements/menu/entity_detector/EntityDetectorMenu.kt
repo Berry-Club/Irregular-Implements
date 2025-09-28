@@ -19,7 +19,7 @@ class EntityDetectorMenu(
 	playerInventory: Inventory,
 	private val container: Container,
 	private val containerData: ContainerData
-) : MenuWithInventory(ModMenuTypes.ADVANCED_ITEM_COLLECTOR.get(), containerId, playerInventory), MenuWithButtons {
+) : MenuWithInventory(ModMenuTypes.ENTITY_DETECTOR.get(), containerId, playerInventory), MenuWithButtons {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
@@ -30,12 +30,13 @@ class EntityDetectorMenu(
 			)
 
 	init {
-		checkContainerSize(container, 1)
+		checkContainerSize(container, EntityDetectorBlockEntity.CONTAINER_SIZE)
 		container.startOpen(playerInventory.player)
 
 		addPlayerInventorySlots(153)
 		addSlots()
 
+		checkContainerDataCount(containerData, EntityDetectorBlockEntity.CONTAINER_DATA_SIZE)
 		this.addDataSlots(this.containerData)
 	}
 
