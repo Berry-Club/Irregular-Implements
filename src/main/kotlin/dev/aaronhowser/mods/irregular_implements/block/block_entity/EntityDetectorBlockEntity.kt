@@ -6,15 +6,19 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.monster.Monster
+import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -24,7 +28,7 @@ import net.minecraft.world.phys.AABB
 class EntityDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENTITY_DETECTOR.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntities.ENTITY_DETECTOR.get(), pos, blockState), MenuProvider {
 
 	var filter: Filter = Filter.ALL
 		private set
@@ -91,6 +95,12 @@ class EntityDetectorBlockEntity(
 		filter = Filter.entries[tag.getInt(FILTER_NBT).coerceIn(0, Filter.entries.size - 1)]
 		inverted = tag.getBoolean(INVERTED_NBT)
 		isActive = tag.getBoolean(ACTIVE_NBT)
+	}
+
+	override fun getDisplayName(): Component = this.blockState.block.name
+
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		TODO("Not yet implemented")
 	}
 
 	companion object {

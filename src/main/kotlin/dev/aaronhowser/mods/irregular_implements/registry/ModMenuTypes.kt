@@ -21,6 +21,8 @@ import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterMe
 import dev.aaronhowser.mods.irregular_implements.menu.ender_letter.EnderLetterScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox.EnderMailboxMenu
 import dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox.EnderMailboxScreen
+import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
+import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformScreen
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
@@ -103,6 +105,8 @@ object ModMenuTypes {
 		register("block_detector", ::BlockDetectorMenu)
 	val AUTO_PLACER: DeferredHolder<MenuType<*>, MenuType<AutoPlacerMenu>> =
 		register("auto_placer", ::AutoPlacerMenu)
+	val ENTITY_DETECTOR: DeferredHolder<MenuType<*>, MenuType<EntityDetectorMenu>> =
+		register("entity_detector", ::EntityDetectorMenu)
 
 	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
 		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
@@ -131,6 +135,7 @@ object ModMenuTypes {
 		event.register(BLOCK_TELEPORTER.get(), ::BlockTeleporterScreen)
 		event.register(BLOCK_DETECTOR.get(), ::BlockDetectorScreen)
 		event.register(AUTO_PLACER.get(), ::AutoPlacerScreen)
+		event.register(ENTITY_DETECTOR.get(), ::EntityDetectorScreen)
 	}
 
 }
