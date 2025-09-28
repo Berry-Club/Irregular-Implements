@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.EntityDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
@@ -25,8 +25,8 @@ class EntityDetectorMenu(
 			this(
 				containerId,
 				playerInventory,
-				SimpleContainer(AdvancedItemCollectorBlockEntity.CONTAINER_SIZE),
-				SimpleContainerData(AdvancedItemCollectorBlockEntity.CONTAINER_DATA_SIZE)
+				SimpleContainer(EntityDetectorBlockEntity.CONTAINER_SIZE),
+				SimpleContainerData(EntityDetectorBlockEntity.CONTAINER_DATA_SIZE)
 			)
 
 	init {
@@ -40,8 +40,7 @@ class EntityDetectorMenu(
 	}
 
 	override fun addSlots() {
-		//TODO: Add an Item Filter outline to the slot background
-		val slot = FilteredSlot(container, 0, 80, 35) { it.has(ModDataComponents.ITEM_FILTER) }
+		val slot = FilteredSlot(container, 0, 80, 35) { it.has(ModDataComponents.ENTITY_TYPE) }
 		this.addSlot(slot)
 	}
 
@@ -54,16 +53,20 @@ class EntityDetectorMenu(
 	}
 
 	var xRadius: Int
-		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.X_RADIUS_INDEX)
-		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.X_RADIUS_INDEX, value)
+		get() = this.containerData.get(EntityDetectorBlockEntity.X_RADIUS_INDEX)
+		private set(value) = this.containerData.set(EntityDetectorBlockEntity.X_RADIUS_INDEX, value)
 
 	var yRadius: Int
-		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.Y_RADIUS_INDEX)
-		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.Y_RADIUS_INDEX, value)
+		get() = this.containerData.get(EntityDetectorBlockEntity.Y_RADIUS_INDEX)
+		private set(value) = this.containerData.set(EntityDetectorBlockEntity.Y_RADIUS_INDEX, value)
 
 	var zRadius: Int
-		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX)
-		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX, value)
+		get() = this.containerData.get(EntityDetectorBlockEntity.Z_RADIUS_INDEX)
+		private set(value) = this.containerData.set(EntityDetectorBlockEntity.Z_RADIUS_INDEX, value)
+
+	var isInverted: Boolean
+		get() = this.containerData.get(EntityDetectorBlockEntity.INVERTED_INDEX) != 0
+		private set(value) = this.containerData.set(EntityDetectorBlockEntity.INVERTED_INDEX, if (value) 1 else 0)
 
 	override fun handleButtonPressed(buttonId: Int) {
 		when (buttonId) {
@@ -75,6 +78,8 @@ class EntityDetectorMenu(
 
 			LOWER_Z_BUTTON_ID -> zRadius--
 			RAISE_Z_BUTTON_ID -> zRadius++
+
+			TOGGLE_INVERTED_BUTTON_ID -> isInverted = !isInverted
 		}
 	}
 
@@ -85,6 +90,7 @@ class EntityDetectorMenu(
 		const val RAISE_Y_BUTTON_ID = 3
 		const val LOWER_Z_BUTTON_ID = 4
 		const val RAISE_Z_BUTTON_ID = 5
+		const val TOGGLE_INVERTED_BUTTON_ID = 6
 	}
 
 }

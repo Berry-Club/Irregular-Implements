@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
@@ -135,7 +136,7 @@ class EntityDetectorBlockEntity(
 	override fun getDisplayName(): Component = this.blockState.block.name
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		TODO("Not yet implemented")
+		return EntityDetectorMenu(containerId, playerInventory, container, containerData)
 	}
 
 	companion object {

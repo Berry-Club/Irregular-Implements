@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
+import dev.aaronhowser.mods.irregular_implements.menu.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
@@ -24,6 +25,7 @@ class EntityDetectorScreen(
 	private lateinit var buttonRaiseY: Button
 	private lateinit var buttonLowerZ: Button
 	private lateinit var buttonRaiseZ: Button
+	private lateinit var buttonToggleInversion: Button
 
 	override fun baseInit() {
 
@@ -130,6 +132,7 @@ class EntityDetectorScreen(
 		this.addRenderableWidget(this.buttonRaiseY)
 		this.addRenderableWidget(this.buttonLowerZ)
 		this.addRenderableWidget(this.buttonRaiseZ)
+//		this.addRenderableWidget(this.buttonToggleInversion)
 	}
 
 	override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
@@ -141,7 +144,7 @@ class EntityDetectorScreen(
 
 		val middle = this.leftPos + this.imageWidth / 2
 
-		val xChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_X_RADIUS
+		val xChars = ModMessageLang.X_RADIUS
 			.toComponent(this.menu.xRadius)
 			.visualOrderText
 
@@ -154,7 +157,7 @@ class EntityDetectorScreen(
 			false
 		)
 
-		val yChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_Y_RADIUS
+		val yChars = ModMessageLang.Y_RADIUS
 			.toComponent(this.menu.yRadius)
 			.visualOrderText
 
@@ -167,7 +170,7 @@ class EntityDetectorScreen(
 			false
 		)
 
-		val zChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_Z_RADIUS
+		val zChars = ModMessageLang.Z_RADIUS
 			.toComponent(this.menu.zRadius)
 			.visualOrderText
 

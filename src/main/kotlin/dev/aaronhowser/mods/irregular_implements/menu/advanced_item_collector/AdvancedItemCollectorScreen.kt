@@ -141,7 +141,7 @@ class AdvancedItemCollectorScreen(
 
 		val middle = this.leftPos + this.imageWidth / 2
 
-		val xChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_X_RADIUS
+		val xChars = ModMessageLang.X_RADIUS
 			.toComponent(this.menu.xRadius)
 			.visualOrderText
 
@@ -154,7 +154,7 @@ class AdvancedItemCollectorScreen(
 			false
 		)
 
-		val yChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_Y_RADIUS
+		val yChars = ModMessageLang.Y_RADIUS
 			.toComponent(this.menu.yRadius)
 			.visualOrderText
 
@@ -167,7 +167,7 @@ class AdvancedItemCollectorScreen(
 			false
 		)
 
-		val zChars = ModMessageLang.ADVANCED_ITEM_COLLECTOR_Z_RADIUS
+		val zChars = ModMessageLang.Z_RADIUS
 			.toComponent(this.menu.zRadius)
 			.visualOrderText
 
