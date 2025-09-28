@@ -16,7 +16,6 @@ data class RedstoneRemoteDataComponent(
 
 	constructor() : this(NonNullList.withSize(HORIZONTAL_SLOT_COUNT * 2, ItemStack.EMPTY))
 
-
 	override fun getInventory(): NonNullList<ItemStack> = stacks
 	override fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>) {
 		stack.set(ModDataComponents.REDSTONE_REMOTE, RedstoneRemoteDataComponent(inventory))

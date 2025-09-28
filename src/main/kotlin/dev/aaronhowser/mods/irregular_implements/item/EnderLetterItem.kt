@@ -61,7 +61,11 @@ class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	companion object {
-		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+		val DEFAULT_PROPERTIES: () -> Properties = {
+			Properties()
+				.stacksTo(1)
+				.component(ModDataComponents.ENDER_LETTER_CONTENTS, EnderLetterContentsDataComponent())
+		}
 	}
 
 }
