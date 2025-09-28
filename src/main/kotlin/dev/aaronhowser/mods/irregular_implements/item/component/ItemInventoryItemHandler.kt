@@ -13,10 +13,6 @@ open class ItemInventoryItemHandler<T : ItemInventoryItemHandler.InventoryDataCo
 		?: NonNullList.create()
 ) {
 
-	init {
-		require(this.stack.has(dataComponentType)) { "ItemInventoryItemHandler created for stack that does not have the required data component" }
-	}
-
 	interface InventoryDataComponent {
 		fun getInventory(): NonNullList<ItemStack>
 		fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>)
