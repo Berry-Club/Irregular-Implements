@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.suggestion.SuggestionProvider
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
+import net.minecraft.commands.CommandBuildContext
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
 import net.minecraft.commands.SharedSuggestionProvider
@@ -12,15 +13,17 @@ import net.minecraft.world.level.Level
 
 object ModCommands {
 
-	fun register(dispatcher: CommandDispatcher<CommandSourceStack>) {
-
+	fun register(
+		dispatcher: CommandDispatcher<CommandSourceStack>,
+		buildContext: CommandBuildContext
+	) {
 		val root = dispatcher.register(
 			Commands.literal("irregular-implements")
 				.then(FireplaceCommand.register())
+				.then(NotifyCommand.register(buildContext))
 		)
 
 		dispatcher.register(Commands.literal("ii").redirect(root))
-
 	}
 
 	val SUGGEST_LEVEL_RKS: SuggestionProvider<CommandSourceStack> =

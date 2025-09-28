@@ -24,11 +24,11 @@ object FireplaceCommand {
 	fun register(): ArgumentBuilder<CommandSourceStack, *> {
 		return Commands
 			.literal("fireplace")
-			.then(registerListCommand())
-			.then(registerTeleportCommand())
+			.then(createListCommand())
+			.then(createTeleportCommand())
 	}
 
-	private fun registerListCommand(): ArgumentBuilder<CommandSourceStack, *> {
+	private fun createListCommand(): ArgumentBuilder<CommandSourceStack, *> {
 		return Commands.literal("list")
 			.executes { ctx ->
 				val source = ctx.source
@@ -49,8 +49,8 @@ object FireplaceCommand {
 			)
 	}
 
-	private fun registerTeleportCommand(): ArgumentBuilder<CommandSourceStack, *> {
-		return Commands.literal("teleport-to")
+	private fun createTeleportCommand(): ArgumentBuilder<CommandSourceStack, *> {
+		return Commands.literal("teleport")
 			.requires { it.hasPermission(2) }
 			.then(
 				Commands.argument(FIREPLACE_NAME, StringArgumentType.greedyString())
