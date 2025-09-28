@@ -43,7 +43,7 @@ class EntityDetectorBlockEntity(
 	var zRadius: Int = 1
 		private set
 
-	var inverted: Boolean = false
+	var isInverted: Boolean = false
 		private set
 
 	var isActive: Boolean = false
@@ -62,7 +62,7 @@ class EntityDetectorBlockEntity(
 			.getEntities(null, getFilterArea(), filter.predicate(getFilterStack()))
 			.isNotEmpty()
 
-		val shouldBePowered = if (inverted) !filterFoundEntities else filterFoundEntities
+		val shouldBePowered = if (isInverted) !filterFoundEntities else filterFoundEntities
 		if (isActive == shouldBePowered) return
 
 		isActive = shouldBePowered
@@ -88,7 +88,7 @@ class EntityDetectorBlockEntity(
 		tag.putInt(Y_RADIUS_NBT, yRadius)
 		tag.putInt(Z_RADIUS_NBT, zRadius)
 		tag.putInt(FILTER_NBT, filter.ordinal)
-		tag.putBoolean(INVERTED_NBT, inverted)
+		tag.putBoolean(INVERTED_NBT, isInverted)
 		tag.putBoolean(ACTIVE_NBT, isActive)
 
 		ContainerHelper.saveAllItems(tag, container.items, registries)
@@ -101,7 +101,7 @@ class EntityDetectorBlockEntity(
 		yRadius = tag.getInt(Y_RADIUS_NBT)
 		zRadius = tag.getInt(Z_RADIUS_NBT)
 		filter = Filter.entries[tag.getInt(FILTER_NBT).coerceIn(0, Filter.entries.size - 1)]
-		inverted = tag.getBoolean(INVERTED_NBT)
+		isInverted = tag.getBoolean(INVERTED_NBT)
 		isActive = tag.getBoolean(ACTIVE_NBT)
 
 		ContainerHelper.loadAllItems(tag, container.items, registries)
@@ -110,12 +110,23 @@ class EntityDetectorBlockEntity(
 	// Menu stuff
 
 	private val containerData = object : ContainerData {
-
 		override fun get(index: Int): Int {
-			TODO("Not yet implemented")
+			return when (index) {
+				X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius
+				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius
+				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius
+				INVERTED_INDEX -> if (this@EntityDetectorBlockEntity.isInverted) 1 else 0
+				else -> 0
+			}
 		}
 
 		override fun set(index: Int, value: Int) {
+			when (index) {
+				X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius = value
+				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius = value
+				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius = value
+				INVERTED_INDEX -> this@EntityDetectorBlockEntity.isInverted = (value != 0)
+			}
 		}
 
 		override fun getCount(): Int = CONTAINER_DATA_SIZE
@@ -136,6 +147,11 @@ class EntityDetectorBlockEntity(
 		private const val FILTER_NBT = "Filter"
 		private const val INVERTED_NBT = "Inverted"
 		private const val ACTIVE_NBT = "Active"
+
+		const val X_RADIUS_INDEX = 0
+		const val Y_RADIUS_INDEX = 1
+		const val Z_RADIUS_INDEX = 2
+		const val INVERTED_INDEX = 3
 
 		fun tick(
 			level: Level,
