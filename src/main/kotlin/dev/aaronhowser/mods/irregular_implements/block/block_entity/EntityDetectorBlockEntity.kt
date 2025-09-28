@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
@@ -46,15 +47,18 @@ class EntityDetectorBlockEntity(
 	var isActive: Boolean = false
 		private set
 
+	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+
+	fun getFilterStack(): ItemStack = container.getItem(0)
+	fun getFilterArea(): AABB = AABB(blockPos).inflate(xRadius.toDouble(), yRadius.toDouble(), zRadius.toDouble())
+
 	fun tick() {
 		val level = level ?: return
 		if (level.gameTime % 10 != 0L) return
 
-		val filterFoundEntities = level.getEntities(
-			null,
-			AABB(blockPos).inflate(xRadius.toDouble(), yRadius.toDouble(), zRadius.toDouble()),
-			filter.predicate(ItemStack.EMPTY)
-		).isNotEmpty()
+		val filterFoundEntities = level
+			.getEntities(null, getFilterArea(), filter.predicate(getFilterStack()))
+			.isNotEmpty()
 
 		val shouldBePowered = if (inverted) !filterFoundEntities else filterFoundEntities
 		if (isActive == shouldBePowered) return
@@ -104,6 +108,7 @@ class EntityDetectorBlockEntity(
 	}
 
 	companion object {
+		const val CONTAINER_SIZE = 1
 		private const val X_RADIUS_NBT = "XRadius"
 		private const val Y_RADIUS_NBT = "YRadius"
 		private const val Z_RADIUS_NBT = "ZRadius"
