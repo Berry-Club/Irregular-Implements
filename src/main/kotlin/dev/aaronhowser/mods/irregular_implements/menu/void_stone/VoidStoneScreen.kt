@@ -13,4 +13,8 @@ class VoidStoneScreen(
 
 	override val background = ScreenTextures.Background.VoidStone
 
+	override fun baseInit() {
+		this.inventoryLabelY = this.imageHeight - 94
+	}
+
 }
