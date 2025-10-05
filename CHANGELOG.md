@@ -3,6 +3,7 @@
 ### Changed
 
 - The notify command now accepts a `players` argument instead of `player`
+- Updated the mod logo
 
 # 1.2.0
 
