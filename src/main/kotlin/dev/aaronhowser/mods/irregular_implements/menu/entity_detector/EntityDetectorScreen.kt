@@ -113,7 +113,7 @@ class EntityDetectorScreen(
 
 
 		this.buttonRaiseZ = Button.Builder(
-			Component.literal("-X")
+			Component.literal("+Z")
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_Z_BUTTON_ID)
 			packet.messageServer()

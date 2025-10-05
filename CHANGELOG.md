@@ -5,6 +5,10 @@
 - The notify command now accepts a `players` argument instead of `player`
 - Updated the mod logo
 
+### Fixed
+
+- Fixed the Advanced Item Collector's screen saying `-X` instead of `+Z`
+
 # 1.2.0
 
 ### Added

@@ -111,7 +111,7 @@ class AdvancedItemCollectorScreen(
 
 
 		this.buttonRaiseZ = Button.Builder(
-			Component.literal("-X")
+			Component.literal("-Z")
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Z_BUTTON_ID)
 			packet.messageServer()
