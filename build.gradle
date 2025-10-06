@@ -222,8 +222,7 @@ unifiedPublishing {
 			}
 
 			optional {
-				curseforge = "modonomicon"
-				modrinth = "modonomicon"
+				curseforge = modrinth = "modonomicon"
 			}
 		}
 
