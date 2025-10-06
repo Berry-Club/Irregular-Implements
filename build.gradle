@@ -212,9 +212,15 @@ unifiedPublishing {
 		mainPublication jar
 
 		relations {
+
 			depends {
 				curseforge = modrinth = "kotlin-for-forge"
 			}
+
+			depends {
+				curseforge = modrinth = "curios"
+			}
+
 			optional {
 				curseforge = "modonomicon"
 				modrinth = "modonomicon"
