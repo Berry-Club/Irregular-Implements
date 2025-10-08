@@ -493,6 +493,11 @@ class ModBlockTagsProvider(
 
 		this.tag(NATURE_CORE_IMMUNE)
 
+		this.tag(GRASS_SEEDS_COMPATIBLE)
+			.addTag(
+				BlockTags.DIRT
+			)
+
 	}
 
 	private fun colorTags() {
@@ -524,7 +529,7 @@ class ModBlockTagsProvider(
 	}
 
 	companion object {
-		private fun create(id: String): TagKey<Block> {
+		private fun modTag(id: String): TagKey<Block> {
 			return BlockTags.create(OtherUtil.modResource(id))
 		}
 
@@ -533,19 +538,20 @@ class ModBlockTagsProvider(
 		}
 
 		@JvmField
-		val SUPER_LUBRICATED = create("super_lubricated")
+		val SUPER_LUBRICATED = modTag("super_lubricated")
 		val C_CROPS_BEAN = common("crops/bean")
-		val BLOCK_MOVER_BLACKLIST = create("block_mover_blacklist")
-		val BLOCK_REPLACER_BLACKLIST = create("block_replacer_blacklist")
-		val BLOCK_DESTABILIZER_BLACKLIST = create("block_destabilizer_blacklist")
-		val DIAPHANOUS_BLOCK_BLACKLIST = create("diaphanous_block_blacklist")
+		val BLOCK_MOVER_BLACKLIST = modTag("block_mover_blacklist")
+		val BLOCK_REPLACER_BLACKLIST = modTag("block_replacer_blacklist")
+		val BLOCK_DESTABILIZER_BLACKLIST = modTag("block_destabilizer_blacklist")
+		val DIAPHANOUS_BLOCK_BLACKLIST = modTag("diaphanous_block_blacklist")
 		val C_STRIPPED_WOODS = common("stripped_woods")
 		val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
-		val CUSTOM_CRAFTING_TABLE_BLACKLIST = create("custom_crafting_table_blacklist")
-		val CONVERTS_TO_FLOO_BRICK = create("converts_to_floo_brick")
-		val EXCLUDED_FROM_BLOCK_TELEPORTER = create("excluded_from_block_teleporter")
-		val NATURE_CORE_POSSIBLE_SAPLINGS = create("nature_core_possible_saplings")
-		val NATURE_CORE_IMMUNE = create("nature_core_immune")
+		val CUSTOM_CRAFTING_TABLE_BLACKLIST = modTag("custom_crafting_table_blacklist")
+		val CONVERTS_TO_FLOO_BRICK = modTag("converts_to_floo_brick")
+		val EXCLUDED_FROM_BLOCK_TELEPORTER = modTag("excluded_from_block_teleporter")
+		val NATURE_CORE_POSSIBLE_SAPLINGS = modTag("nature_core_possible_saplings")
+		val NATURE_CORE_IMMUNE = modTag("nature_core_immune")
+		val GRASS_SEEDS_COMPATIBLE = modTag("grass_seeds_compatible")
 	}
 
 }

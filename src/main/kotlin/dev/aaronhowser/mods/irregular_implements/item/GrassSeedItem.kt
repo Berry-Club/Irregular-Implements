@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.sounds.SoundEvents
@@ -33,7 +34,7 @@ class GrassSeedItem(
 		val clickedState = level.getBlockState(clickedPos)
 		if (
 			clickedState.`is`(resultBlock)
-			|| !clickedState.`is`(BlockTags.DIRT)
+			|| !clickedState.`is`(ModBlockTagsProvider.GRASS_SEEDS_COMPATIBLE)
 		) return InteractionResult.PASS
 
 		level.setBlockAndUpdate(clickedPos, resultBlock.defaultBlockState())
