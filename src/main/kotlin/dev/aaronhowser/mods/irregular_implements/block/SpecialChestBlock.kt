@@ -5,8 +5,11 @@ import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubpro
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.util.RandomSource
 import net.minecraft.world.RandomizableContainer
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.WorldGenLevel
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.ChestBlock
@@ -14,8 +17,10 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.entity.ChestBlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.ChestType
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPieces
+import net.minecraft.world.level.material.Fluids
 import java.util.function.Supplier
 
 //TODO Item Models
@@ -40,6 +45,18 @@ class SpecialChestBlock private constructor(
 			Type.NATURE -> SpecialChestBlockEntity.NatureChestBlockEntity(pos, state)
 			Type.WATER -> SpecialChestBlockEntity.WaterChestBlockEntity(pos, state)
 		}
+	}
+
+	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
+		return super.getStateForPlacement(context)?.setValue(TYPE, ChestType.SINGLE)
+	}
+
+	override fun updateShape(state: BlockState, facing: Direction, facingState: BlockState, level: LevelAccessor, currentPos: BlockPos, facingPos: BlockPos): BlockState {
+		if (state.getValue(WATERLOGGED)) {
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
+		}
+
+		return state
 	}
 
 	companion object {
