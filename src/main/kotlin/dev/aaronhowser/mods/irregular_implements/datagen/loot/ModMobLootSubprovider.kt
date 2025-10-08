@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.loot
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.EntityLootSubProvider
 import net.minecraft.world.entity.EntityType
@@ -12,6 +13,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.stream.Stream
@@ -43,12 +45,32 @@ class ModMobLootSubprovider(
 						)
 				)
 		)
+
+		this.add(
+			ModEntityTypes.SPIRIT.get(),
+			LootTable.lootTable()
+				.withPool(
+					LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1f))
+						.add(
+							LootItem.lootTableItem(ModItems.ECTOPLASM)
+								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))
+						)
+						.add(
+							LootItem.lootTableItem(ModItems.ECTOPLASM)
+								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))
+								.`when`(LootItemRandomChanceCondition.randomChance(0.2f))
+						)
+				)
+		)
+
 	}
 
 	@Suppress("UNCHECKED_CAST")
 	override fun getKnownEntityTypes(): Stream<EntityType<*>> {
 		return listOf(
-			ModEntityTypes.GOLDEN_CHICKEN.get()
+			ModEntityTypes.GOLDEN_CHICKEN.get(),
+			ModEntityTypes.SPIRIT.get()
 		).stream() as Stream<EntityType<*>>
 	}
 

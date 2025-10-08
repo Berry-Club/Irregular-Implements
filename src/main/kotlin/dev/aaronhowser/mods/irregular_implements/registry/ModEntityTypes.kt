@@ -105,7 +105,7 @@ object ModEntityTypes {
 	val SPIRIT =
 		registerEntityType(
 			"spirit",
-			MobCategory.MISC,
+			MobCategory.CREATURE,
 			0.25f, 0.25f,
 			::SpiritEntity
 		)
