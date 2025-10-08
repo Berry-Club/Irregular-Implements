@@ -11,6 +11,8 @@ object ModEntityTypeLang {
 			addEntityType(ModEntityTypes.ARTIFICIAL_END_PORTAL, "Artificial End Portal")
 			addEntityType(ModEntityTypes.GOLDEN_EGG, "Golden Egg")
 			addEntityType(ModEntityTypes.GOLDEN_CHICKEN, "Golden Chicken")
+			addEntityType(ModEntityTypes.WEATHER_EGG, "Weather Egg")
+			addEntityType(ModEntityTypes.SPIRIT, "Spirit")
 		}
 	}
 
