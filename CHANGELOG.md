@@ -7,7 +7,8 @@
 - Spirits now correctly drop 1-2 Ectoplasm (#8)
 - Spirits are now part of the Creature MobCategory instead of MISC
 - Spirits die after 20 seconds, though this timer stops if they have a custom name (#9)
-- Grass Seeds can now be used blocks that have the block tag `#irregular_implements:grass_seeds_compatible` instead of using the block tag `#minecraft:dirt
+- Grass Seeds must now be used blocks that have the block tag `#irregular_implements:grass_seeds_compatible` instead of using the block tag `#minecraft:dirt` (#6)
+  - That tag contains the dirt tag, but now can configure it more if you like
 
 ### Fixed
 
