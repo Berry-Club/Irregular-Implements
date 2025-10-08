@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.DamageTypeTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
@@ -43,6 +44,7 @@ class SpiritEntity(
 
 	override fun isInvulnerableTo(source: DamageSource): Boolean {
 		if (super.isInvulnerableTo(source)) return true
+		if (source.`is`(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false
 
 		val usedSpecialWeapon = source.weaponItem?.`is`(ModItemTagsProvider.DAMAGES_SPIRITS).isTrue
 		val usedEnchantedWeapon = source.weaponItem?.isEnchanted.isTrue

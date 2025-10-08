@@ -14,6 +14,7 @@
 - Fixed the Void Stone's screen having the inventory label in the wrong place
 - Allowed enchanted items to damage Spirits
 - Added some missing localization
+- Spirits can now be damaged by damage types with the `#minecraft:bypasses_invulnerability` tag
 
 # 1.2.0
 
