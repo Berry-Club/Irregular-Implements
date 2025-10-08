@@ -4,7 +4,7 @@
 
 - The notify command now accepts a `players` argument instead of `player`
 - Updated the mod logo
-- Spirits now drop 1-2 Ectoplasm
+- Spirits now correctly drop 1-2 Ectoplasm (#8)
 - Spirits are now part of the Creature MobCategory instead of MISC
 
 ### Fixed
