@@ -1969,7 +1969,7 @@ class ModBlockStateProvider(
 
 	private fun coloredGrass() {
 		for (color in DyeColor.entries) {
-			val block = ModBlocks.getColoredGrass(color).get()
+			val block = ModBlocks.getColoredGrass(color)?.get() ?: continue
 
 			val model = models()
 				.withExistingParent(name(block), mcLoc("block/grass_block"))
@@ -2039,71 +2039,82 @@ class ModBlockStateProvider(
 
 	private fun luminousBlocks() {
 		for (color in DyeColor.entries) {
-			val opaqueBlock = ModBlocks.getLuminousBlock(color).get()
-			val translucentBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
-
 			val opaqueTexture = modLoc("block/luminous_block/$color")
 			val translucentTexture = modLoc("block/luminous_block/translucent/$color")
 
-			val opaqueModel = models()
-				.withExistingParent(name(opaqueBlock), mcLoc("block/block"))
-				.texture("all", opaqueTexture)
-				.texture("particle", translucentTexture)
+			val opaqueBlock = ModBlocks.getLuminousBlock(color)?.get()
+			if (opaqueBlock != null) {
+				val opaqueModel = models()
+					.withExistingParent(name(opaqueBlock), mcLoc("block/block"))
+					.texture("all", opaqueTexture)
+					.texture("particle", translucentTexture)
 
-				.element()
-				.cube("#all")
-				.ao(false)
-				.emissivity(15, 15)
-				.end()
+					.element()
+					.cube("#all")
+					.ao(false)
+					.emissivity(15, 15)
+					.end()
 
-			val translucentModel = models()
-				.withExistingParent(name(translucentBlock), "block/block")
-				.renderType(RenderType.translucent().name)
-				.texture("all", translucentTexture)
-				.texture("particle", translucentTexture)
+				simpleBlockWithItem(opaqueBlock, opaqueModel)
+			}
 
-				.element()
-				.cube("#all")
-				.ao(false)
-				.emissivity(15, 15)
-				.end()
+			val translucentBlock = ModBlocks.getLuminousBlockTranslucent(color)?.get()
+			if (translucentBlock != null) {
+				val translucentModel = models()
+					.withExistingParent(name(translucentBlock), "block/block")
+					.renderType(RenderType.translucent().name)
+					.texture("all", translucentTexture)
+					.texture("particle", translucentTexture)
 
-			simpleBlockWithItem(opaqueBlock, opaqueModel)
-			simpleBlockWithItem(translucentBlock, translucentModel)
+					.element()
+					.cube("#all")
+					.ao(false)
+					.emissivity(15, 15)
+					.end()
+
+				simpleBlockWithItem(translucentBlock, translucentModel)
+			}
 		}
 	}
 
 	private fun stainedBricks() {
 		for (color in DyeColor.entries) {
-			val regular = ModBlocks.getStainedBrick(color).get()
-			val luminous = ModBlocks.getStainedBrickLuminous(color).get()
+			val regular = ModBlocks.getStainedBrick(color)?.get()
 
-			val regularTexture = modLoc("block/stained_bricks/$color")
-			val luminousBaseTexture = modLoc("block/luminous_stained_brick/base/$color")
-			val luminousTintTexture = modLoc("block/luminous_stained_brick/tint/$color")
+			if (regular != null) {
+				val regularTexture = modLoc("block/stained_bricks/$color")
 
-			val regularModel = models()
-				.cubeAll(name(regular), regularTexture)
+				val regularModel = models()
+					.cubeAll(name(regular), regularTexture)
 
-			val luminousModel = models()
-				.withExistingParent(name(luminous), mcLoc("block/block"))
-				.texture("base", luminousBaseTexture)
-				.texture("tint", luminousTintTexture)
-				.texture("particle", luminousTintTexture)
-				.renderType(RenderType.cutoutMipped().name)
+				simpleBlockWithItem(regular, regularModel)
+			}
 
-				.element()
-				.cube("#base")
-				.end()
+			val luminous = ModBlocks.getStainedBrickLuminous(color)?.get()
 
-				.element()
-				.cube("#tint")
-				.ao(false)
-				.emissivity(15, 15)
-				.end()
+			if (luminous != null) {
+				val luminousBaseTexture = modLoc("block/luminous_stained_brick/base/$color")
+				val luminousTintTexture = modLoc("block/luminous_stained_brick/tint/$color")
 
-			simpleBlockWithItem(regular, regularModel)
-			simpleBlockWithItem(luminous, luminousModel)
+				val luminousModel = models()
+					.withExistingParent(name(luminous), mcLoc("block/block"))
+					.texture("base", luminousBaseTexture)
+					.texture("tint", luminousTintTexture)
+					.texture("particle", luminousTintTexture)
+					.renderType(RenderType.cutoutMipped().name)
+
+					.element()
+					.cube("#base")
+					.end()
+
+					.element()
+					.cube("#tint")
+					.ao(false)
+					.emissivity(15, 15)
+					.end()
+
+				simpleBlockWithItem(luminous, luminousModel)
+			}
 		}
 	}
 

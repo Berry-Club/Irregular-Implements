@@ -63,13 +63,18 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerItemColors(event: RegisterColorHandlersEvent.Item) {
 		for (dyeColor in DyeColor.entries) {
-			val seedItem = GrassSeedItem.getFromColor(dyeColor).get()
-			val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
+			val seedItem = GrassSeedItem.getFromColor(dyeColor)?.get()
+			val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor)?.get()
 
 			val colorFunction = getItemColorFromDye(dyeColor)
 
-			event.register(colorFunction, seedItem)
-			event.register(colorFunction, coloredGrassBlock)
+			if (seedItem != null) {
+				event.register(colorFunction, seedItem)
+			}
+
+			if (coloredGrassBlock != null) {
+				event.register(colorFunction, coloredGrassBlock)
+			}
 		}
 
 		event.register(getItemColorFromDye(DyeColor.LIME), ModItems.GRASS_SEEDS)
@@ -110,14 +115,16 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
 		for (dyeColor in DyeColor.entries) {
-			val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor).get()
+			val coloredGrassBlock = ModBlocks.getColoredGrass(dyeColor)?.get()
 
-			event.register(
-				{ _, _, _, tintIndex ->
-					if (tintIndex == 0) dyeColor.textureDiffuseColor else 0xFFFFFF
-				},
-				coloredGrassBlock
-			)
+			if (coloredGrassBlock != null) {
+				event.register(
+					{ _, _, _, tintIndex ->
+						if (tintIndex == 0) dyeColor.textureDiffuseColor else 0xFFFFFF
+					},
+					coloredGrassBlock
+				)
+			}
 		}
 
 		event.register(

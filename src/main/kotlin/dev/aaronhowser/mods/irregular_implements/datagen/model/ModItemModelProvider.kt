@@ -314,7 +314,7 @@ class ModItemModelProvider(
 	private fun coloredItems() {
 		for (color in DyeColor.entries) {
 
-			val grassSeeds = GrassSeedItem.getFromColor(color).get()
+			val grassSeeds = GrassSeedItem.getFromColor(color)?.get() ?: continue
 
 			getBuilder(getName(grassSeeds).toString())
 				.parent(ModelFile.UncheckedModelFile("item/generated"))

@@ -211,7 +211,8 @@ class ModBlockLootTablesSubProvider(
 
 	private val dropsDirtWithoutSilkTouch = buildList {
 		for (dyeColor in DyeColor.entries) {
-			add(ModBlocks.getColoredGrass(dyeColor).get())
+			val coloredGrass = ModBlocks.getColoredGrass(dyeColor)?.get() ?: continue
+			add(coloredGrass)
 		}
 
 		add(ModBlocks.FERTILIZED_DIRT.get())

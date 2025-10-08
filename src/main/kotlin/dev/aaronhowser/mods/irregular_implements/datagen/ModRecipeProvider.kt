@@ -1445,68 +1445,77 @@ class ModRecipeProvider(
 
 				val dyeTag = dyeTags[color]!!
 
-				val luminous = ModBlocks.getLuminousBlock(color).get()
-				val transLuminous = ModBlocks.getLuminousBlockTranslucent(color).get()
+				val luminous = ModBlocks.getLuminousBlock(color)?.get()
+				val transLuminous = ModBlocks.getLuminousBlockTranslucent(color)?.get()
 
-				val stainedBrick = ModBlocks.getStainedBrick(color).get()
-				val transBrick = ModBlocks.getStainedBrickLuminous(color).get()
+				val stainedBrick = ModBlocks.getStainedBrick(color)?.get()
+				val transBrick = ModBlocks.getStainedBrickLuminous(color)?.get()
 
 				val grassSeeds = GrassSeedItem.getFromColor(color)
 
-				add(
-					shapedRecipe(
-						luminous,
-						"LD,LL",
-						mapOf(
-							'L' to ing(ModItems.LUMINOUS_POWDER),
-							'D' to ing(dyeTag)
+				if (luminous != null) {
+					add(
+						shapedRecipe(
+							luminous,
+							"LD,LL",
+							mapOf(
+								'L' to ing(ModItems.LUMINOUS_POWDER),
+								'D' to ing(dyeTag)
+							)
 						)
 					)
-				)
 
-				add(
-					shapedRecipe(
-						transLuminous,
-						" P ,PLP, P ",
-						mapOf(
-							'P' to ing(Tags.Items.GLASS_PANES_COLORLESS),
-							'L' to ing(luminous)
+					if (transLuminous != null) {
+						add(
+							shapedRecipe(
+								transLuminous,
+								" P ,PLP, P ",
+								mapOf(
+									'P' to ing(Tags.Items.GLASS_PANES_COLORLESS),
+									'L' to ing(luminous)
+								)
+							)
+						)
+					}
+				}
+
+				if (stainedBrick != null) {
+					add(
+						shapedRecipe(
+							stainedBrick,
+							8,
+							"BBB,BDB,BBB",
+							mapOf(
+								'B' to ing(Items.BRICKS),
+								'D' to ing(dyeTag)
+							)
 						)
 					)
-				)
 
-				add(
-					shapedRecipe(
-						stainedBrick,
-						8,
-						"BBB,BDB,BBB",
-						mapOf(
-							'B' to ing(Items.BRICKS),
-							'D' to ing(dyeTag)
+					if (transBrick != null) {
+						add(
+							shapelessRecipe(
+								transBrick,
+								listOf(
+									ing(ModItems.LUMINOUS_POWDER),
+									ing(stainedBrick)
+								)
+							)
+						)
+					}
+				}
+
+				if (grassSeeds != null) {
+					add(
+						shapelessRecipe(
+							grassSeeds,
+							listOf(
+								ing(ModItemTagsProvider.GRASS_SEEDS),
+								ing(dyeTag)
+							)
 						)
 					)
-				)
-
-				add(
-					shapelessRecipe(
-						transBrick,
-						listOf(
-							ing(ModItems.LUMINOUS_POWDER),
-							ing(stainedBrick)
-						)
-					)
-				)
-
-				add(
-					shapelessRecipe(
-						grassSeeds,
-						listOf(
-							ing(ModItemTagsProvider.GRASS_SEEDS),
-							ing(dyeTag)
-						)
-					)
-				)
-
+				}
 			}
 		}
 	}

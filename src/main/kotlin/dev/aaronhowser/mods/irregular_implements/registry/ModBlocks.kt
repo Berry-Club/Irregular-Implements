@@ -402,7 +402,8 @@ object ModBlocks {
 		return BLOCK_REGISTRY.register(name, supplier)
 	}
 
-	fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock> {
+	@Suppress("REDUNDANT_ELSE_IN_WHEN")
+	fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock>? {
 		return when (dyeColor) {
 			DyeColor.WHITE -> COLORED_GRASS_WHITE
 			DyeColor.ORANGE -> COLORED_GRASS_ORANGE
@@ -420,10 +421,12 @@ object ModBlocks {
 			DyeColor.GREEN -> COLORED_GRASS_GREEN
 			DyeColor.RED -> COLORED_GRASS_RED
 			DyeColor.BLACK -> COLORED_GRASS_BLACK
+			else -> null
 		}
 	}
 
-	fun getLuminousBlock(dyeColor: DyeColor): DeferredBlock<Block> {
+	@Suppress("REDUNDANT_ELSE_IN_WHEN")
+	fun getLuminousBlock(dyeColor: DyeColor): DeferredBlock<Block>? {
 		return when (dyeColor) {
 			DyeColor.WHITE -> LUMINOUS_BLOCK_WHITE
 			DyeColor.ORANGE -> LUMINOUS_BLOCK_ORANGE
@@ -441,10 +444,12 @@ object ModBlocks {
 			DyeColor.GREEN -> LUMINOUS_BLOCK_GREEN
 			DyeColor.RED -> LUMINOUS_BLOCK_RED
 			DyeColor.BLACK -> LUMINOUS_BLOCK_BLACK
+			else -> null
 		}
 	}
 
-	fun getLuminousBlockTranslucent(dyeColor: DyeColor): DeferredBlock<TransparentBlock> {
+	@Suppress("REDUNDANT_ELSE_IN_WHEN")
+	fun getLuminousBlockTranslucent(dyeColor: DyeColor): DeferredBlock<TransparentBlock>? {
 		return when (dyeColor) {
 			DyeColor.WHITE -> TRANSLUCENT_LUMINOUS_BLOCK_WHITE
 			DyeColor.ORANGE -> TRANSLUCENT_LUMINOUS_BLOCK_ORANGE
@@ -462,10 +467,12 @@ object ModBlocks {
 			DyeColor.GREEN -> TRANSLUCENT_LUMINOUS_BLOCK_GREEN
 			DyeColor.RED -> TRANSLUCENT_LUMINOUS_BLOCK_RED
 			DyeColor.BLACK -> TRANSLUCENT_LUMINOUS_BLOCK_BLACK
+			else -> null
 		}
 	}
 
-	fun getStainedBrick(dyeColor: DyeColor): DeferredBlock<Block> {
+	@Suppress("REDUNDANT_ELSE_IN_WHEN")
+	fun getStainedBrick(dyeColor: DyeColor): DeferredBlock<Block>? {
 		return when (dyeColor) {
 			DyeColor.WHITE -> STAINED_BRICKS_WHITE
 			DyeColor.ORANGE -> STAINED_BRICKS_ORANGE
@@ -483,10 +490,12 @@ object ModBlocks {
 			DyeColor.GREEN -> STAINED_BRICKS_GREEN
 			DyeColor.RED -> STAINED_BRICKS_RED
 			DyeColor.BLACK -> STAINED_BRICKS_BLACK
+			else -> null
 		}
 	}
 
-	fun getStainedBrickLuminous(dyeColor: DyeColor): DeferredBlock<Block> {
+	@Suppress("REDUNDANT_ELSE_IN_WHEN")
+	fun getStainedBrickLuminous(dyeColor: DyeColor): DeferredBlock<Block>? {
 		return when (dyeColor) {
 			DyeColor.WHITE -> LUMINOUS_STAINED_BRICKS_WHITE
 			DyeColor.ORANGE -> LUMINOUS_STAINED_BRICKS_ORANGE
@@ -504,6 +513,7 @@ object ModBlocks {
 			DyeColor.GREEN -> LUMINOUS_STAINED_BRICKS_GREEN
 			DyeColor.RED -> LUMINOUS_STAINED_BRICKS_RED
 			DyeColor.BLACK -> LUMINOUS_STAINED_BRICKS_BLACK
+			else -> null
 		}
 	}
 

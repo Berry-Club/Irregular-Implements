@@ -232,7 +232,9 @@ class ModBlockTagsProvider(
 				ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM.get()
 			)
 
-		val coloredGrassBlocks = DyeColor.entries.map { ModBlocks.getColoredGrass(it).get() }.toTypedArray()
+		val coloredGrassBlocks = DyeColor.entries
+			.mapNotNull { ModBlocks.getColoredGrass(it)?.get() }
+			.toTypedArray()
 
 		this.tag(BlockTags.DIRT)
 			.add(
@@ -496,31 +498,27 @@ class ModBlockTagsProvider(
 	private fun colorTags() {
 
 		for (color in DyeColor.entries) {
-			val coloredGrass = ModBlocks.getColoredGrass(color).get()
-			val stainedBrick = ModBlocks.getStainedBrick(color).get()
-			val luminousStainedBrick = ModBlocks.getStainedBrickLuminous(color).get()
-			val luminousBlock = ModBlocks.getLuminousBlock(color).get()
-			val translucentLuminousBlock = ModBlocks.getLuminousBlockTranslucent(color).get()
+			val coloredGrass = ModBlocks.getColoredGrass(color)?.get()
+			val stainedBrick = ModBlocks.getStainedBrick(color)?.get()
+			val luminousStainedBrick = ModBlocks.getStainedBrickLuminous(color)?.get()
+			val luminousBlock = ModBlocks.getLuminousBlock(color)?.get()
+			val translucentLuminousBlock = ModBlocks.getLuminousBlockTranslucent(color)?.get()
+
+			val notNull = listOfNotNull(
+				coloredGrass,
+				stainedBrick,
+				luminousStainedBrick,
+				luminousBlock,
+				translucentLuminousBlock
+			).toTypedArray()
 
 			this.tag(Tags.Blocks.DYED)
-				.add(
-					coloredGrass,
-					stainedBrick,
-					luminousStainedBrick,
-					luminousBlock,
-					translucentLuminousBlock
-				)
+				.add(*notNull)
 
 			val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.getDyeName()))
 
 			this.tag(coloredTag)
-				.add(
-					coloredGrass,
-					stainedBrick,
-					luminousStainedBrick,
-					luminousBlock,
-					translucentLuminousBlock
-				)
+				.add(*notNull)
 
 		}
 	}
