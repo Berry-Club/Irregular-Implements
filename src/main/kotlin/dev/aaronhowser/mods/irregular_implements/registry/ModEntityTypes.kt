@@ -102,6 +102,7 @@ object ModEntityTypes {
 			setShouldReceiveVelocityUpdates(false)
 		}
 
+	// TODO: Spawn Egg
 	val SPIRIT =
 		registerEntityType(
 			"spirit",

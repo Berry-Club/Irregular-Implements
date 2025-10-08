@@ -11,6 +11,7 @@
 
 - Fixed the Advanced Item Collector's screen saying `-X` instead of `+Z`
 - Fixed the Void Stone's screen having the inventory label in the wrong place
+- Allowed enchanted items to damage Spirits
 
 # 1.2.0
 

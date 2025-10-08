@@ -45,9 +45,10 @@ class SpiritEntity(
 		if (super.isInvulnerableTo(source)) return true
 
 		val usedSpecialWeapon = source.weaponItem?.`is`(ModItemTagsProvider.DAMAGES_SPIRITS).isTrue
+		val usedEnchantedWeapon = source.weaponItem?.isEnchanted.isTrue
 		val usedMagic = source.`is`(Tags.DamageTypes.IS_MAGIC)
 
-		return !usedSpecialWeapon && !usedMagic
+		return !usedSpecialWeapon && !usedEnchantedWeapon && !usedMagic
 	}
 
 	override fun registerGoals() {
