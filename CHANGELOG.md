@@ -6,6 +6,7 @@
 - Updated the mod logo
 - Spirits now correctly drop 1-2 Ectoplasm (#8)
 - Spirits are now part of the Creature MobCategory instead of MISC
+- Spirits die after 20 seconds, though this timer stops if they have a custom name
 
 ### Fixed
 

@@ -128,9 +128,11 @@ class SpiritEntity(
 	}
 
 	private fun ageAndDie() {
+		if (this.hasCustomName()) return
 		age++
+
 		if (age > ServerConfig.CONFIG.spiritMaxAge.get()) {
-//			kill()
+			kill()
 		}
 	}
 
