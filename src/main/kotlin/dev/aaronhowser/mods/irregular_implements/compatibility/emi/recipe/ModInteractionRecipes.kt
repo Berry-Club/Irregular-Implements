@@ -30,7 +30,7 @@ object ModInteractionRecipes {
 	}
 
 	private fun grassSeeds(): List<EmiWorldInteractionRecipe> {
-		val seeds = GrassSeedItem.getAllSeeds()
+		val seeds = DyeColor.entries.map { GrassSeedItem.getFromColor(it) } + ModItems.GRASS_SEEDS
 
 		return seeds.map { deferred ->
 			val seedItem = deferred.get()

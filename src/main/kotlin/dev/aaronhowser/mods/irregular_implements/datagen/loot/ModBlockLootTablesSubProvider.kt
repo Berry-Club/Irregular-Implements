@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.datagen.loot
 
 import dev.aaronhowser.mods.irregular_implements.block.BeanSproutBlock
 import dev.aaronhowser.mods.irregular_implements.block.LotusBlock
-import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.advancements.critereon.StatePropertiesPredicate
@@ -10,6 +9,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.Block
@@ -210,8 +210,7 @@ class ModBlockLootTablesSubProvider(
 	}
 
 	private val dropsDirtWithoutSilkTouch = buildList {
-
-		for (dyeColor in GrassSeedItem.getAllColoredSeeds().mapNotNull { it.get().dyeColor }) {
+		for (dyeColor in DyeColor.entries) {
 			add(ModBlocks.getColoredGrass(dyeColor).get())
 		}
 

@@ -1,7 +1,23 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_BLACK
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_BLUE
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_BROWN
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_CYAN
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_GRAY
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_GREEN
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_LIGHT_BLUE
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_LIGHT_GRAY
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_LIME
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_MAGENTA
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_ORANGE
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_PINK
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_PURPLE
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_RED
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_WHITE
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems.GRASS_SEEDS_YELLOW
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
@@ -46,37 +62,25 @@ class GrassSeedItem(
 	}
 
 	companion object {
-
-		fun getAllColoredSeeds(): List<DeferredItem<GrassSeedItem>> {
-			return listOf(
-				ModItems.GRASS_SEEDS_WHITE,
-				ModItems.GRASS_SEEDS_ORANGE,
-				ModItems.GRASS_SEEDS_MAGENTA,
-				ModItems.GRASS_SEEDS_LIGHT_BLUE,
-				ModItems.GRASS_SEEDS_YELLOW,
-				ModItems.GRASS_SEEDS_LIME,
-				ModItems.GRASS_SEEDS_PINK,
-				ModItems.GRASS_SEEDS_GRAY,
-				ModItems.GRASS_SEEDS_LIGHT_GRAY,
-				ModItems.GRASS_SEEDS_CYAN,
-				ModItems.GRASS_SEEDS_PURPLE,
-				ModItems.GRASS_SEEDS_BLUE,
-				ModItems.GRASS_SEEDS_BROWN,
-				ModItems.GRASS_SEEDS_GREEN,
-				ModItems.GRASS_SEEDS_RED,
-				ModItems.GRASS_SEEDS_BLACK
-			)
-		}
-
-		fun getAllSeeds(): List<DeferredItem<GrassSeedItem>> {
-			return getAllColoredSeeds() + ModItems.GRASS_SEEDS
-		}
-
-		fun getFromColor(color: DyeColor?): DeferredItem<GrassSeedItem>? {
-			return if (color == null) {
-				ModItems.GRASS_SEEDS
-			} else {
-				getAllColoredSeeds().firstOrNull { it.get().dyeColor == color }
+		fun getFromColor(color: DyeColor?): DeferredItem<GrassSeedItem> {
+			return when (color) {
+				null -> GRASS_SEEDS
+				DyeColor.WHITE -> GRASS_SEEDS_WHITE
+				DyeColor.ORANGE -> GRASS_SEEDS_ORANGE
+				DyeColor.MAGENTA -> GRASS_SEEDS_MAGENTA
+				DyeColor.LIGHT_BLUE -> GRASS_SEEDS_LIGHT_BLUE
+				DyeColor.YELLOW -> GRASS_SEEDS_YELLOW
+				DyeColor.LIME -> GRASS_SEEDS_LIME
+				DyeColor.PINK -> GRASS_SEEDS_PINK
+				DyeColor.GRAY -> GRASS_SEEDS_GRAY
+				DyeColor.LIGHT_GRAY -> GRASS_SEEDS_LIGHT_GRAY
+				DyeColor.CYAN -> GRASS_SEEDS_CYAN
+				DyeColor.PURPLE -> GRASS_SEEDS_PURPLE
+				DyeColor.BLUE -> GRASS_SEEDS_BLUE
+				DyeColor.BROWN -> GRASS_SEEDS_BROWN
+				DyeColor.GREEN -> GRASS_SEEDS_GREEN
+				DyeColor.RED -> GRASS_SEEDS_RED
+				DyeColor.BLACK -> GRASS_SEEDS_BLACK
 			}
 		}
 	}
