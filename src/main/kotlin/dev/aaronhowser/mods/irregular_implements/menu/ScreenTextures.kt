@@ -41,7 +41,7 @@ object ScreenTextures {
 		data object EnderEnergyDistributor : Background("textures/gui/ender_energy_distributor.png", 176, 130)
 		data object EnderLetter : Background("textures/gui/ender_letter.png", 176, 133)
 		data object EnderMailbox : Background("textures/gui/ender_mailbox.png", 176, 133)
-		data object EntityDetector : Background("textures/gui/entity_detector.png", 176, 204)
+		data object EntityDetector : Background("textures/gui/entity_detector.png", 176, 235)
 		data object ExtractionPlate : Background("textures/gui/extraction_plate.png", 121, 42)
 		data object FilteredRedirectorPlate : Background("textures/gui/filtered_redirector_plate.png", 176, 129)
 		data object FilteredSuperLubricantPlatform : Background("textures/gui/filtered_super_lubricant_platform.png", 176, 129)
