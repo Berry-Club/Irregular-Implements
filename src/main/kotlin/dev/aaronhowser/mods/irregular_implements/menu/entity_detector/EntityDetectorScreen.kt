@@ -39,7 +39,7 @@ class EntityDetectorScreen(
 		this.titleLabelX = 24
 
 		this.buttonLowerX = Button.Builder(
-			Component.literal("-X")
+			ModMessageLang.MINUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.LOWER_X_BUTTON_ID)
 			packet.messageServer()
@@ -53,7 +53,7 @@ class EntityDetectorScreen(
 			.build()
 
 		this.buttonRaiseX = Button.Builder(
-			Component.literal("+X")
+			ModMessageLang.PLUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_X_BUTTON_ID)
 			packet.messageServer()
@@ -68,7 +68,7 @@ class EntityDetectorScreen(
 
 
 		this.buttonLowerY = Button.Builder(
-			Component.literal("-Y")
+			ModMessageLang.MINUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.LOWER_Y_BUTTON_ID)
 			packet.messageServer()
@@ -83,7 +83,7 @@ class EntityDetectorScreen(
 
 
 		this.buttonRaiseY = Button.Builder(
-			Component.literal("+Y")
+			ModMessageLang.PLUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_Y_BUTTON_ID)
 			packet.messageServer()
@@ -98,7 +98,7 @@ class EntityDetectorScreen(
 
 
 		this.buttonLowerZ = Button.Builder(
-			Component.literal("-Z")
+			ModMessageLang.MINUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.LOWER_Z_BUTTON_ID)
 			packet.messageServer()
@@ -113,7 +113,7 @@ class EntityDetectorScreen(
 
 
 		this.buttonRaiseZ = Button.Builder(
-			Component.literal("+Z")
+			ModMessageLang.PLUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_Z_BUTTON_ID)
 			packet.messageServer()

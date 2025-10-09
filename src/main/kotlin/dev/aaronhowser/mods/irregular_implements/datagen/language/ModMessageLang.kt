@@ -46,6 +46,12 @@ object ModMessageLang {
 	const val ENTITY_DETECTOR_PLAYER = "message.irregular_implements.entity_detector.filter.player"
 	const val ENTITY_DETECTOR_ITEM = "message.irregular_implements.entity_detector.filter.item"
 	const val ENTITY_DETECTOR_CUSTOM = "message.irregular_implements.entity_detector.filter.custom"
+	const val PLUS_X = "message.irregular_implements.button.plus_x"
+	const val MINUS_X = "message.irregular_implements.button.minus_x"
+	const val PLUS_Y = "message.irregular_implements.button.plus_y"
+	const val MINUS_Y = "message.irregular_implements.button.minus_y"
+	const val PLUS_Z = "message.irregular_implements.button.plus_z"
+	const val MINUS_Z = "message.irregular_implements.button.minus_z"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -91,6 +97,12 @@ object ModMessageLang {
 			add(ENTITY_DETECTOR_PLAYER, "Players")
 			add(ENTITY_DETECTOR_ITEM, "Items")
 			add(ENTITY_DETECTOR_CUSTOM, "Custom")
+			add(PLUS_X, "+X")
+			add(MINUS_X, "-X")
+			add(PLUS_Y, "+Y")
+			add(MINUS_Y, "-Y")
+			add(PLUS_Z, "+Z")
+			add(MINUS_Z, "-Z")
 		}
 	}
 

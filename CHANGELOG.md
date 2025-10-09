@@ -14,6 +14,7 @@
 - Grass Seeds must now be used blocks that have the block tag `#irregular_implements:grass_seeds_compatible` instead of using the block tag `#minecraft:dirt` (#6)
   - That tag contains the dirt tag, but now can configure it more if you like
 - Nature and Water Chests no longer double up when placed adjacent to each other (#5)
+- Localized `+X` etc buttons
 
 ### Fixed
 

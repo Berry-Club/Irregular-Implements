@@ -37,7 +37,7 @@ class AdvancedItemCollectorScreen(
 		this.titleLabelX = 26
 
 		this.buttonLowerX = Button.Builder(
-			Component.literal("-X")
+			ModMessageLang.MINUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_X_BUTTON_ID)
 			packet.messageServer()
@@ -51,7 +51,7 @@ class AdvancedItemCollectorScreen(
 			.build()
 
 		this.buttonRaiseX = Button.Builder(
-			Component.literal("+X")
+			ModMessageLang.PLUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_X_BUTTON_ID)
 			packet.messageServer()
@@ -66,7 +66,7 @@ class AdvancedItemCollectorScreen(
 
 
 		this.buttonLowerY = Button.Builder(
-			Component.literal("-Y")
+			ModMessageLang.MINUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Y_BUTTON_ID)
 			packet.messageServer()
@@ -81,7 +81,7 @@ class AdvancedItemCollectorScreen(
 
 
 		this.buttonRaiseY = Button.Builder(
-			Component.literal("+Y")
+			ModMessageLang.PLUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Y_BUTTON_ID)
 			packet.messageServer()
@@ -96,7 +96,7 @@ class AdvancedItemCollectorScreen(
 
 
 		this.buttonLowerZ = Button.Builder(
-			Component.literal("-Z")
+			ModMessageLang.MINUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Z_BUTTON_ID)
 			packet.messageServer()
@@ -111,7 +111,7 @@ class AdvancedItemCollectorScreen(
 
 
 		this.buttonRaiseZ = Button.Builder(
-			Component.literal("-Z")
+			ModMessageLang.PLUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Z_BUTTON_ID)
 			packet.messageServer()
