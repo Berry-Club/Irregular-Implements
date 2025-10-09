@@ -30,13 +30,13 @@ class EntityDetectorScreen(
 	override fun baseInit() {
 
 		val lowerButtonLeft = this.guiLeft + 29
-		val raiseButtonLeft = this.guiLeft + 127
+		val raiseButtonLeft = this.guiLeft + 126
 
 		val xButtonTop = this.guiTop + 20
 		val yButtonTop = this.guiTop + 45
 		val zButtonsTop = this.guiTop + 70
 
-		this.titleLabelX = 26
+		this.titleLabelX = 24
 
 		this.buttonLowerX = Button.Builder(
 			Component.literal("-X")
