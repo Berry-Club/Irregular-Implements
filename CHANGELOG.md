@@ -1,4 +1,8 @@
-# 1.2.1
+# 1.3.0
+
+### Added
+
+- Entity Detector
 
 ### Changed
 
