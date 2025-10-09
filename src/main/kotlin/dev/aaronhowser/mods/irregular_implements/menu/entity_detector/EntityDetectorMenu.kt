@@ -41,7 +41,7 @@ class EntityDetectorMenu(
 	}
 
 	override fun addSlots() {
-		val slot = FilteredSlot(container, 0, 77, 122) { it.has(ModDataComponents.ENTITY_TYPE) }
+		val slot = FilteredSlot(container, 0, 80, 122) { it.has(ModDataComponents.ENTITY_TYPE) }
 		this.addSlot(slot)
 	}
 
