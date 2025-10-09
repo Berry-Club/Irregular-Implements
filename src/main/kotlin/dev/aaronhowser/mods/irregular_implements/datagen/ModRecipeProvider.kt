@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
@@ -1443,7 +1444,11 @@ class ModRecipeProvider(
 			for (color in DyeColor.entries) {
 				color.getDyeName()
 
-				val dyeTag = dyeTags[color]!!
+				val dyeTag = dyeTags[color]
+				if (dyeTag == null) {
+					IrregularImplements.LOGGER.warn("No dye tag for color $color")
+					continue
+				}
 
 				val luminous = ModBlocks.getLuminousBlock(color)?.get()
 				val transLuminous = ModBlocks.getLuminousBlockTranslucent(color)?.get()
