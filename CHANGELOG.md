@@ -24,6 +24,7 @@
 - Added some missing localization
 - Spirits can now be damaged by damage types with the `#minecraft:bypasses_invulnerability` tag
 - Fixed a crash when using a mod that adds more enum values to DyeColor (#7)
+- Fixed the Redstone Tool cubes rendering in wildly the wrong place
 
 # 1.2.0
 

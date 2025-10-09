@@ -337,7 +337,6 @@ object ClientEvents {
 	@SubscribeEvent
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		CubeIndicatorRenderer.onRenderLevel(event)
-		RedstoneToolRenderer.onRenderLevel(event)
 	}
 
 }

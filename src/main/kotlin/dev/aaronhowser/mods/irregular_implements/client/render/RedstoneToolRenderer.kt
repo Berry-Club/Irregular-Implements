@@ -17,13 +17,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 
 object RedstoneToolRenderer {
 
-	private var mainBlockPos: BlockPos? = null
-	private var linkedBlockPos: BlockPos? = null
-
 	fun afterClientTick(event: ClientTickEvent.Post) {
-		this.mainBlockPos = null
-		this.linkedBlockPos = null
-
 		val player = ClientUtil.localPlayer ?: return
 
 		val itemInHand = player.mainHandItem
@@ -33,45 +27,25 @@ object RedstoneToolRenderer {
 		if (toolLocation.dimension != player.level().dimension()) return
 
 		val toolBlockPos = toolLocation.pos
-		this.mainBlockPos = toolBlockPos
 
-		val toolBlockEntity = player.level().getBlockEntity(toolLocation.pos) as? RedstoneToolLinkable ?: return
-		val linkedPos = toolBlockEntity.linkedPos ?: return
-
-		this.linkedBlockPos = linkedPos
-	}
-
-	fun onRenderLevel(event: RenderLevelStageEvent) {
-		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
-
-		val mainPos = this.mainBlockPos ?: return
-		val linkedPos = this.linkedBlockPos
-
-		val cameraPos = event.camera.position
-		val poseStack = event.poseStack
-
-		poseStack.pushPose()
-
-		poseStack.mulPose(event.modelViewMatrix)
-		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
-		RenderUtil.renderDebugCube(
-			poseStack,
-			mainPos.center,
-			0.9f,
+		CubeIndicatorRenderer.addIndicator(
+			toolBlockPos,
+			1,
 			0x32FF0000
 		)
 
-		if (linkedPos != null) {
-			RenderUtil.renderDebugCube(
-				poseStack,
-				linkedPos.center,
-				0.9f,
-				0x320000FF
-			)
+		val toolBlockEntity = player.level().getBlockEntity(toolLocation.pos) as? RedstoneToolLinkable
+		if (toolBlockEntity != null) {
+			val linkedPos = toolBlockEntity.linkedPos
+			if (linkedPos != null) {
+				CubeIndicatorRenderer.addIndicator(
+					linkedPos,
+					1,
+					0x32FF0000
+				)
+			}
 		}
 
-		poseStack.popPose()
 	}
 
 	val LAYER_NAME = OtherUtil.modResource("wire_strength")
