@@ -65,8 +65,8 @@ object ModTooltipLang {
 	const val TRANS_RIGHTS = "tooltip.irregular_implements.trans_rights"
 	const val ENDER_LETTER_TO = "tooltip.irregular_implements.ender_letter_to"
 	const val ENDER_LETTER_FROM = "tooltip.irregular_implements.ender_letter_from"
-	const val INVENTORY_TESTER_INVERTED = "tooltip.irregular_implements.inventory_tester_inverted"
-	const val INVENTORY_TESTER_UNINVERTED = "tooltip.irregular_implements.inventory_tester_uninverted"
+	const val INVERTED = "tooltip.irregular_implements.inverted"
+	const val UNINVERTED = "tooltip.irregular_implements.uninverted"
 	const val PORTKEY_DESTINATION = "tooltip.irregular_implements.portkey_destination"
 	const val PORTKEY_DISGUISE = "tooltip.irregular_implements.portkey_disguise"
 
@@ -133,8 +133,8 @@ object ModTooltipLang {
 			add(TRANS_RIGHTS, "Trans rights are human rights!")
 			add(ENDER_LETTER_TO, "To: %s")
 			add(ENDER_LETTER_FROM, "From: %s")
-			add(INVENTORY_TESTER_INVERTED, "Inverted")
-			add(INVENTORY_TESTER_UNINVERTED, "Uninverted")
+			add(INVERTED, "Inverted")
+			add(UNINVERTED, "Uninverted")
 			add(PORTKEY_DESTINATION, "%s: %d, %d, %d")
 			add(PORTKEY_DISGUISE, "Disguised as: %s")
 		}

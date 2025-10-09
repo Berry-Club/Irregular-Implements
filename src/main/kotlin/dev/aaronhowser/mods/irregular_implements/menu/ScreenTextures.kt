@@ -106,10 +106,8 @@ object ScreenTextures {
 			data object Blacklist : Sprite("buttons/item_filter/blacklist", 15, 12)
 		}
 
-		object InventoryTester {
-			data object Inverted : Sprite("buttons/inventory_tester/inverted", 4, 11)
-			data object Uninverted : Sprite("buttons/inventory_tester/uninverted", 4, 11)
-		}
+		data object Inverted : Sprite("buttons/inventory_tester/inverted", 4, 11)
+		data object Uninverted : Sprite("buttons/inventory_tester/uninverted", 4, 11)
 	}
 
 	//TODO: Check that all of these are actually used

@@ -32,12 +32,12 @@ class InventoryTesterScreen(
 				y = this.topPos + 18
 			)
 			.addStage(
-				message = ModTooltipLang.INVENTORY_TESTER_UNINVERTED.toComponent(),
-				sprite = ScreenTextures.Sprite.InventoryTester.Uninverted
+				message = ModTooltipLang.UNINVERTED.toComponent(),
+				sprite = ScreenTextures.Sprite.Uninverted
 			)
 			.addStage(
-				message = ModTooltipLang.INVENTORY_TESTER_INVERTED.toComponent(),
-				sprite = ScreenTextures.Sprite.InventoryTester.Inverted
+				message = ModTooltipLang.INVERTED.toComponent(),
+				sprite = ScreenTextures.Sprite.Inverted
 			)
 			.currentStageGetter(
 				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }
