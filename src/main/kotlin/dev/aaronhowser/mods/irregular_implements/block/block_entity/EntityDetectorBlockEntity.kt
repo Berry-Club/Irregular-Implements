@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
@@ -186,6 +187,8 @@ class EntityDetectorBlockEntity(
 		CUSTOM(null, ModMessageLang.ENTITY_DETECTOR_CUSTOM)
 
 		;
+
+		val component = unlocalizedName.toComponent()
 
 		fun predicate(filterStack: ItemStack): (Entity) -> Boolean {
 			return { entity ->

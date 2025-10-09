@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
+import dev.aaronhowser.mods.irregular_implements.menu.ChangingTextButton
 import dev.aaronhowser.mods.irregular_implements.menu.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -25,6 +26,7 @@ class EntityDetectorScreen(
 	private lateinit var buttonRaiseY: Button
 	private lateinit var buttonLowerZ: Button
 	private lateinit var buttonRaiseZ: Button
+	private lateinit var buttonFilterType: Button
 	private lateinit var buttonToggleInversion: Button
 
 	override fun baseInit() {
@@ -133,8 +135,23 @@ class EntityDetectorScreen(
 		this.addRenderableWidget(this.buttonLowerZ)
 		this.addRenderableWidget(this.buttonRaiseZ)
 
+		val bottomButtonY = this.topPos + 95
 
+		this.buttonFilterType = ChangingTextButton(
+			x = lowerButtonLeft,
+			y = bottomButtonY,
+			height = 20,
+			width = 90,
+			messageGetter = {
+				this.menu.getFilter().component
+			},
+			onPress = {
+				val packet = ClientClickedMenuButton(EntityDetectorMenu.CYCLE_FILTER_BUTTON_ID)
+				packet.messageServer()
+			}
+		)
 
+		this.addRenderableWidget(this.buttonFilterType)
 	}
 
 	override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
