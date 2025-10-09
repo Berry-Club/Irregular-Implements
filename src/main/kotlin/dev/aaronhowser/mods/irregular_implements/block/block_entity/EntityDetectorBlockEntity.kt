@@ -118,6 +118,7 @@ class EntityDetectorBlockEntity(
 				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius
 				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius
 				INVERTED_INDEX -> if (this@EntityDetectorBlockEntity.isInverted) 1 else 0
+				FILTER_ORDINAL_INDEX -> this@EntityDetectorBlockEntity.filter.ordinal
 				else -> 0
 			}
 		}
@@ -128,6 +129,10 @@ class EntityDetectorBlockEntity(
 				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius = value.coerceIn(0, 16)
 				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius = value.coerceIn(0, 16)
 				INVERTED_INDEX -> this@EntityDetectorBlockEntity.isInverted = (value != 0)
+				FILTER_ORDINAL_INDEX -> {
+					val ordinal = value.coerceIn(0, Filter.entries.size - 1)
+					this@EntityDetectorBlockEntity.filter = Filter.entries[ordinal]
+				}
 			}
 
 			setChanged()
@@ -144,7 +149,7 @@ class EntityDetectorBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 1
-		const val CONTAINER_DATA_SIZE = 4
+		const val CONTAINER_DATA_SIZE = 5
 		private const val X_RADIUS_NBT = "XRadius"
 		private const val Y_RADIUS_NBT = "YRadius"
 		private const val Z_RADIUS_NBT = "ZRadius"
@@ -156,6 +161,7 @@ class EntityDetectorBlockEntity(
 		const val Y_RADIUS_INDEX = 1
 		const val Z_RADIUS_INDEX = 2
 		const val INVERTED_INDEX = 3
+		const val FILTER_ORDINAL_INDEX = 4
 
 		fun tick(
 			level: Level,

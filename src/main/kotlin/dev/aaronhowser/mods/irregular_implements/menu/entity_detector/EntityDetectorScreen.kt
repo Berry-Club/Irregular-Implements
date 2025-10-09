@@ -132,7 +132,9 @@ class EntityDetectorScreen(
 		this.addRenderableWidget(this.buttonRaiseY)
 		this.addRenderableWidget(this.buttonLowerZ)
 		this.addRenderableWidget(this.buttonRaiseZ)
-//		this.addRenderableWidget(this.buttonToggleInversion)
+
+
+
 	}
 
 	override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

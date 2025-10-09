@@ -69,6 +69,15 @@ class EntityDetectorMenu(
 		get() = this.containerData.get(EntityDetectorBlockEntity.INVERTED_INDEX) != 0
 		private set(value) = this.containerData.set(EntityDetectorBlockEntity.INVERTED_INDEX, if (value) 1 else 0)
 
+	var filterOrdinal: Int
+		get() = this.containerData.get(EntityDetectorBlockEntity.FILTER_ORDINAL_INDEX)
+		private set(value) = this.containerData.set(EntityDetectorBlockEntity.FILTER_ORDINAL_INDEX, value)
+
+	fun getFilter(): EntityDetectorBlockEntity.Filter {
+		val ordinal = filterOrdinal.coerceIn(0, EntityDetectorBlockEntity.Filter.entries.size - 1)
+		return EntityDetectorBlockEntity.Filter.entries[ordinal]
+	}
+
 	override fun handleButtonPressed(buttonId: Int) {
 		when (buttonId) {
 			LOWER_X_BUTTON_ID -> xRadius--
@@ -81,6 +90,11 @@ class EntityDetectorMenu(
 			RAISE_Z_BUTTON_ID -> zRadius++
 
 			TOGGLE_INVERTED_BUTTON_ID -> isInverted = !isInverted
+
+			CYCLE_FILTER_BUTTON_ID -> {
+				val nextOrdinal = (filterOrdinal + 1) % EntityDetectorBlockEntity.Filter.entries.size
+				filterOrdinal = nextOrdinal
+			}
 		}
 	}
 
@@ -92,6 +106,7 @@ class EntityDetectorMenu(
 		const val LOWER_Z_BUTTON_ID = 4
 		const val RAISE_Z_BUTTON_ID = 5
 		const val TOGGLE_INVERTED_BUTTON_ID = 6
+		const val CYCLE_FILTER_BUTTON_ID = 7
 	}
 
 }
