@@ -2,9 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ChangingTextButton
-import dev.aaronhowser.mods.irregular_implements.menu.ImprovedSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -153,10 +153,32 @@ class EntityDetectorScreen(
 		)
 
 		this.buttonToggleInversion = MultiStageSpriteButton.Builder(font)
-
+			.size(20)
+			.location(
+				x = rightPos - 29 - 20,
+				y = bottomButtonY
+			)
+			.addStage(
+				message = ModTooltipLang.UNINVERTED.toComponent(),
+				sprite = ScreenTextures.Sprite.Uninverted
+			)
+			.addStage(
+				message = ModTooltipLang.INVERTED.toComponent(),
+				sprite = ScreenTextures.Sprite.Inverted
+			)
+			.currentStageGetter(
+				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }
+			)
+			.onPress(
+				onPress = {
+					val packet = ClientClickedMenuButton(EntityDetectorMenu.TOGGLE_INVERTED_BUTTON_ID)
+					packet.messageServer()
+				}
+			)
 			.build()
 
 		this.addRenderableWidget(this.buttonFilterType)
+		this.addRenderableWidget(this.buttonToggleInversion)
 	}
 
 	override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
