@@ -111,10 +111,13 @@ class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), En
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		val be = level.getBlockEntity(pos)
-		if (be is InventoryTesterBlockEntity) {
-			Containers.dropContents(level, pos, be.container)
+		if (!state.`is`(newState.block)) {
+			val be = level.getBlockEntity(pos)
+			if (be is InventoryTesterBlockEntity) {
+				Containers.dropContents(level, pos, be.container)
+			}
 		}
+
 		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 

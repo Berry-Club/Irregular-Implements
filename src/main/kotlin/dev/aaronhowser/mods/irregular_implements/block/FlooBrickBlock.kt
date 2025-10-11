@@ -27,10 +27,10 @@ class FlooBrickBlock : Block(
 	}
 
 	override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (oldState.`is`(newState.block)) return
-
-		val blockEntity = level.getBlockEntity(pos)
-		if (blockEntity is FlooBrickBlockEntity) blockEntity.blockBroken()
+		if (!oldState.`is`(newState.block)) {
+			val blockEntity = level.getBlockEntity(pos)
+			if (blockEntity is FlooBrickBlockEntity) blockEntity.blockBroken()
+		}
 
 		super.onRemove(oldState, level, pos, newState, movedByPiston)
 	}

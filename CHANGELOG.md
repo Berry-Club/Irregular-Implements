@@ -1,3 +1,10 @@
+# 1.3.1
+
+### Fixed
+
+- Fixed several blocks emptying their inventory when its block state changes (#14)
+  - This was a problem with the Global Chat Detector, Auto Placer, Biome Radar, Ender Energy Distributor, Imbuing Station, and Filteed Platform
+
 # 1.3.0
 
 ### Added

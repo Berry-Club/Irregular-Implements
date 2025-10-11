@@ -110,11 +110,11 @@ class BlockBreakerBlock : Block(
 	}
 
 	override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (oldState.`is`(newState.block)) return
-
-		val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
-		if (blockEntity != null) {
-			OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
+		if (!oldState.`is`(newState.block)) {
+			val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
+			if (blockEntity != null) {
+				OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
+			}
 		}
 
 		super.onRemove(oldState, level, pos, newState, movedByPiston)

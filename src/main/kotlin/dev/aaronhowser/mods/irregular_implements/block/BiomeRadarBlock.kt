@@ -97,9 +97,11 @@ class BiomeRadarBlock : Block(
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		val be = level.getBlockEntity(pos)
-		if (be is BiomeRadarBlockEntity) {
-			Containers.dropItemStack(level, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5, be.getBiomeStack())
+		if (!state.`is`(newState.block)) {
+			val be = level.getBlockEntity(pos)
+			if (be is BiomeRadarBlockEntity) {
+				Containers.dropItemStack(level, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5, be.getBiomeStack())
+			}
 		}
 
 		super.onRemove(state, level, pos, newState, movedByPiston)

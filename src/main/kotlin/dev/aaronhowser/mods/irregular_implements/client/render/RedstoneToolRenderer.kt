@@ -45,7 +45,6 @@ object RedstoneToolRenderer {
 				)
 			}
 		}
-
 	}
 
 	val LAYER_NAME = OtherUtil.modResource("wire_strength")
