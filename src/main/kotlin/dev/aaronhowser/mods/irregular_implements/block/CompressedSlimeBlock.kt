@@ -21,25 +21,6 @@ import net.neoforged.neoforge.event.level.BlockEvent
 
 class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 
-	companion object {
-
-		val SHAPE_0: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 8.0, 15.99)
-		val SHAPE_1: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 4.0, 15.99)
-		val SHAPE_2: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 2.0, 15.99)
-
-		val COMPRESSION_LEVEL: IntegerProperty = IntegerProperty.create("compression_level", 0, 2)
-
-		fun modifySlimeBlock(event: BlockEvent.BlockToolModificationEvent) {
-			val ability = event.itemAbility
-			if (ability != ItemAbilities.SHOVEL_FLATTEN) return
-
-			val clickedState = event.state
-			if (clickedState.block != Blocks.SLIME_BLOCK) return
-
-			event.finalState = ModBlocks.COMPRESSED_SLIME_BLOCK.get().defaultBlockState()
-		}
-	}
-
 	init {
 		registerDefaultState(
 			defaultBlockState()
@@ -93,6 +74,24 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 				0.0
 			)
 		)
+	}
+
+	companion object {
+		val SHAPE_0: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 8.0, 15.99)
+		val SHAPE_1: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 4.0, 15.99)
+		val SHAPE_2: VoxelShape = box(0.01, 0.0, 0.01, 15.99, 2.0, 15.99)
+
+		val COMPRESSION_LEVEL: IntegerProperty = IntegerProperty.create("compression_level", 0, 2)
+
+		fun modifySlimeBlock(event: BlockEvent.BlockToolModificationEvent) {
+			val ability = event.itemAbility
+			if (ability != ItemAbilities.SHOVEL_FLATTEN) return
+
+			val clickedState = event.state
+			if (clickedState.block != Blocks.SLIME_BLOCK) return
+
+			event.finalState = ModBlocks.COMPRESSED_SLIME_BLOCK.get().defaultBlockState()
+		}
 	}
 
 }
