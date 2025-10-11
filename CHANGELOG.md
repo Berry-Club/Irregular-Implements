@@ -1,3 +1,9 @@
+# 1.3.2
+
+### Changed
+
+- Added the Forest and Flower Forest to the biome tag `#irregular_implements:nature_core_oak`
+
 # 1.3.1
 
 ### Changed
