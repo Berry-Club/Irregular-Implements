@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
+import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
@@ -67,16 +69,19 @@ class SpectreCube(
 		)
 	}
 
-	fun increaseHeight(amountToAdd: Int): Int {
-		val level = handler.spectreLevel ?: return 0
+	fun increaseHeight(amountToAdd: Int, spectreLevel: ServerLevel): Int {
+		if (spectreLevel.dimension() != ModDimensions.SPECTRE_LEVEL_KEY) {
+			IrregularImplements.LOGGER.error("Tried to increase height of Spectre Cube in wrong dimension: ${spectreLevel.dimension().location()}")
+			return 0
+		}
 
-		val maxToAdd = level.maxBuildHeight - (interiorHeight + 2)
+		val maxToAdd = spectreLevel.maxBuildHeight - (interiorHeight + 2)
 		val newHeight = (interiorHeight + amountToAdd).coerceAtMost(interiorHeight + maxToAdd)
 
 		if (newHeight == interiorHeight) return 0
 
 		val delta = newHeight - interiorHeight
-		changeHeight(level, newHeight)
+		changeHeight(spectreLevel, newHeight)
 		return delta
 	}
 

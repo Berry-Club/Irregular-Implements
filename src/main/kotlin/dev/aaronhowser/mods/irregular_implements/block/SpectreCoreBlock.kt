@@ -37,9 +37,15 @@ class SpectreCoreBlock : Block(
 
 		if (stack.`is`(ModItems.ECTOPLASM)) {
 			val cube = handler.getSpectreCubeFromBlockPos(level, pos)
-			val amount = cube?.increaseHeight(stack.count) ?: 0
 
-			stack.consume(amount, player)
+			if (cube != null) {
+				val amount = cube.increaseHeight(
+					stack.count,
+					SpectreCubeSavedData.getSpectreLevel(level)
+				)
+
+				stack.consume(amount, player)
+			}
 		} else if (stack.isEmpty && hand == InteractionHand.MAIN_HAND) {
 			handler.teleportPlayerBack(player as ServerPlayer)
 		}

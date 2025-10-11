@@ -19,8 +19,6 @@ class SpectreCubeSavedData : SavedData() {
 	private val cubes: MutableMap<UUID, SpectreCube> = mutableMapOf()
 	private var positionCounter: Int = 0
 
-	var spectreLevel: Level? = null
-
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
 		val listTag = tag.getList(CUBES_NBT, Tag.TAG_COMPOUND.toInt())
 
@@ -38,7 +36,7 @@ class SpectreCubeSavedData : SavedData() {
 	}
 
 	fun teleportPlayerToSpectreCube(player: ServerPlayer) {
-		val spectreLevel = this@SpectreCubeSavedData.spectreLevel as? ServerLevel ?: return
+		val spectreLevel = getSpectreLevel(player.serverLevel())
 
 		val pData = player.persistentData
 
@@ -54,7 +52,7 @@ class SpectreCubeSavedData : SavedData() {
 		var cube = cubes[uuid]
 
 		if (cube == null) {
-			cube = generateSpectreCube(uuid)
+			cube = generateSpectreCube(uuid, spectreLevel)
 		}
 
 		val spawnPos = cube.getSpawnPos()
@@ -69,12 +67,14 @@ class SpectreCubeSavedData : SavedData() {
 		)
 	}
 
-	private fun generateSpectreCube(uuid: UUID): SpectreCube {
+	private fun generateSpectreCube(uuid: UUID, spectreLevel: ServerLevel): SpectreCube {
 		val cube = SpectreCube(this, uuid, positionCounter)
+
 		positionCounter++
-		cube.generate(spectreLevel!!)
+		cube.generate(spectreLevel)
 		cubes[uuid] = cube
 		setDirty()
+
 		return cube
 	}
 
@@ -178,9 +178,11 @@ class SpectreCubeSavedData : SavedData() {
 				"spectre_cube"
 			)
 
-			savedData.spectreLevel = level.server.getLevel(ModDimensions.SPECTRE_LEVEL_KEY)
-
 			return savedData
+		}
+
+		fun getSpectreLevel(level: ServerLevel): ServerLevel {
+			return level.server.getLevel(ModDimensions.SPECTRE_LEVEL_KEY) ?: throw IllegalStateException("Spectre dimension not found")
 		}
 	}
 
