@@ -12,6 +12,7 @@
   - But when loading, I was treating it as a list of cube tags. `SpectreCube.fromTag()` couldn't read the above json, so it assumed that there was no Cube.
 - Fixed several blocks emptying their inventory when its block state changes (#14)
   - This was a problem with the Global Chat Detector, Auto Placer, Biome Radar, Ender Energy Distributor, Imbuing Station, and Filteed Platform
+- If the BlockToolModificationEvent is canceled, Slime Blocks will not be turned into Compressed Slime
 
 # 1.3.0
 

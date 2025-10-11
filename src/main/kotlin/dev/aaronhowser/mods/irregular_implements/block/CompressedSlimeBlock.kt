@@ -84,6 +84,8 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 		val COMPRESSION_LEVEL: IntegerProperty = IntegerProperty.create("compression_level", 0, 2)
 
 		fun modifySlimeBlock(event: BlockEvent.BlockToolModificationEvent) {
+			if (event.isCanceled) return
+
 			val ability = event.itemAbility
 			if (ability != ItemAbilities.SHOVEL_FLATTEN) return
 
