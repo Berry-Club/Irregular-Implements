@@ -1,5 +1,9 @@
 # 1.3.1
 
+### Changed
+
+- The Returning Block of Sticks now has no pickup delay when it expires and teleports to the nearest player (#13)
+
 ### Fixed
 
 - Fixed several blocks emptying their inventory when its block state changes (#14)

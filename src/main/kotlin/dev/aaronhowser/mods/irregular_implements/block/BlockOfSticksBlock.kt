@@ -4,7 +4,9 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -44,7 +46,7 @@ class BlockOfSticksBlock(
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
 		return defaultBlockState().setValue(
 			SHOULD_DROP,
-			!context.player?.hasInfiniteMaterials().isTrue  // Only drop if placed by a player with infinite materials
+			context.player?.hasInfiniteMaterials().isTrue.not()  // Only drop if placed by a player with infinite materials
 		)
 	}
 
@@ -61,34 +63,47 @@ class BlockOfSticksBlock(
 
 	override fun tick(
 		pState: BlockState,
-		pLevel: ServerLevel,
-		pPos: BlockPos,
-		pRandom: RandomSource
+		level: ServerLevel,
+		pos: BlockPos,
+		random: RandomSource
 	) {
 		val shouldDrop = pState.getValue(SHOULD_DROP)
 
 		if (!this.returning) {
-			pLevel.destroyBlock(pPos, shouldDrop)
-			return super.tick(pState, pLevel, pPos, pRandom)
+			level.destroyBlock(pos, shouldDrop)
+			return super.tick(pState, level, pos, random)
 		}
 
 		if (shouldDrop) {
-			val nearestPlayer = pLevel.getNearestPlayer(
-				pPos.x.toDouble(),
-				pPos.y.toDouble(),
-				pPos.z.toDouble(),
-				100.0,
-				false   // "Should exclude creative players" == false
-			)
+			if (!level.isClientSide
+				&& level.gameRules.getBoolean(GameRules.RULE_DOBLOCKDROPS)
+				&& !level.restoringBlockSnapshots
+			) {
+				val nearestPlayer = level.getNearestPlayer(
+					pos.x.toDouble(),
+					pos.y.toDouble(),
+					pos.z.toDouble(),
+					100.0,
+					false   // "Should exclude creative players" == false
+				)
 
-			val drops = getDrops(pState, pLevel, pPos, null)
-			for (drop in drops) {
-				popResource(pLevel, nearestPlayer?.blockPosition() ?: pPos, drop)
+				val dropPos = nearestPlayer?.position() ?: pos.center
+
+				val drops = getDrops(pState, level, pos, null)
+				for (drop in drops) {
+					val itemEntity = ItemEntity(level, dropPos.x, dropPos.y, dropPos.z, drop)
+					itemEntity.setNoPickUpDelay()
+					level.addFreshEntity(itemEntity)
+
+					if (nearestPlayer != null) {
+						itemEntity.playerTouch(nearestPlayer)
+					}
+				}
 			}
 		}
 
-		pLevel.destroyBlock(pPos, false)
-		super.tick(pState, pLevel, pPos, pRandom)
+		level.destroyBlock(pos, false)
+		super.tick(pState, level, pos, random)
 	}
 
 	companion object {
