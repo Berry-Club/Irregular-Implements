@@ -51,7 +51,12 @@ class SpectreCubeSavedData : SavedData() {
 		pData.put(PLAYER_SPECTRE_INFO, tag)
 
 		val uuid = player.uuid
-		val cube = cubes[uuid] ?: generateSpectreCube(uuid)
+		var cube = cubes[uuid]
+
+		if (cube == null) {
+			cube = generateSpectreCube(uuid)
+		}
+
 		val spawnPos = cube.getSpawnPos()
 
 		player.teleportTo(
@@ -76,7 +81,7 @@ class SpectreCubeSavedData : SavedData() {
 	fun getSpectreCubeFromBlockPos(level: Level, pos: BlockPos): SpectreCube? {
 		if (level.dimension() != ModDimensions.SPECTRE_LEVEL_KEY) return null
 
-		if (pos.z > 16 || pos.z < 0) return null
+		if (pos.z !in 0..16) return null
 
 		val chunk = level.getChunkAt(pos)
 		val cubeIndex = chunk.pos.x
@@ -152,7 +157,8 @@ class SpectreCubeSavedData : SavedData() {
 
 			val listTag = tag.getList(CUBES_NBT, Tag.TAG_COMPOUND.toInt())
 			for (i in listTag.indices) {
-				val cube = SpectreCube.fromTag(data, listTag.getCompound(i))
+				val cubeTag = listTag.getCompound(i)
+				val cube = SpectreCube.fromTag(data, cubeTag)
 				val uuid = cube.owner ?: continue
 				data.cubes[uuid] = cube
 			}
