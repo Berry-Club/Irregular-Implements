@@ -3,6 +3,7 @@
 ### Changed
 
 - The Returning Block of Sticks now has no pickup delay when it expires and teleports to the nearest player (#13)
+- Compressed Slime now fully negates any downward movement an entity may have, before the upwards movement is applied
 
 ### Fixed
 

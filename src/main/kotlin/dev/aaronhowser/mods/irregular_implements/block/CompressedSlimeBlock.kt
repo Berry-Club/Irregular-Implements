@@ -65,6 +65,11 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
 		val compression = state.getValue(COMPRESSION_LEVEL)
 
+		val oldMovement = entity.deltaMovement
+		if (oldMovement.y < 0) {
+			entity.setDeltaMovement(oldMovement.x, 0.0, oldMovement.z)
+		}
+
 		entity.setOnGround(false)
 		entity.resetFallDistance()
 		entity.addDeltaMovement(
