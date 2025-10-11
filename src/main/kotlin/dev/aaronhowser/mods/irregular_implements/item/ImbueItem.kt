@@ -32,12 +32,21 @@ class ImbueItem(
 
 		livingEntity.addEffect(mobEffectInstance)
 
-		if (livingEntity is Player) {
-			ItemUtils.createFilledResult(
-				stack,
-				livingEntity,
-				Items.GLASS_BOTTLE.defaultInstance
-			)
+		val player = livingEntity as? Player
+
+		if (player != null) {
+			stack.consume(1, player)
+		}
+
+		if (player == null || !player.hasInfiniteMaterials()) {
+			if (stack.isEmpty) {
+				return Items.GLASS_BOTTLE.defaultInstance
+			}
+
+			@Suppress("IfThenToSafeAccess")
+			if (player != null) {
+				player.inventory.add(Items.GLASS_BOTTLE.defaultInstance)
+			}
 		}
 
 		return stack
