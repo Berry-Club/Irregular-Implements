@@ -11,6 +11,8 @@
   - So the way it knows which Spectre Cube is yours is that there's a map of Player UUID to Spectre Cube
   - I was saving a compound tag of `{owner:uuid, cube:{cube tag}}`, which makes sense
   - But when loading, I was treating it as a list of cube tags. `SpectreCube.fromTag()` couldn't read the above json, so it assumed that there was no Cube.
+  - Honestly, if you've been using the Spectre Key, you might want to delete the old data from your world.
+    - Teleport to your old ones and get everything you want to keep out, then delete `/data/spectre_cube.dat` and `/dimensions/irregular_implements/spectre` from your world folder (while the game is off, obviously)
 - Fixed several blocks emptying their inventory when its block state changes (#14)
   - This was a problem with the Global Chat Detector, Auto Placer, Biome Radar, Ender Energy Distributor, Imbuing Station, and Filteed Platform
 - If the BlockToolModificationEvent is canceled, Slime Blocks will not be turned into Compressed Slime
