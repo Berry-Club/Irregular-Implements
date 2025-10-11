@@ -50,12 +50,14 @@ class NatureCoreBlockEntity(
 		val radius = ServerConfig.CONFIG.natureCoreReplaceSandRadius.get()
 
 		var attempts = 0
-		var pos: BlockPos
+		val pos = this.blockPos.mutable()
 		do {
-			pos = this.blockPos.offset(
-				level.random.nextRange(-radius, radius + 1),
-				level.random.nextRange(-radius, radius + 1),
-				level.random.nextRange(-radius, radius + 1)
+			pos.set(
+				this.blockPos.offset(
+					level.random.nextRange(-radius, radius + 1),
+					level.random.nextRange(-radius, radius + 1),
+					level.random.nextRange(-radius, radius + 1)
+				)
 			)
 
 			val blockStateThere = level.getBlockState(pos)
