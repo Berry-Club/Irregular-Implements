@@ -7,6 +7,9 @@
 ### Fixed
 
 - Fixed the Spectre Key sending you to a new Cube every time you reloaded the save (#10)
+  - So the way it knows which Spectre Cube is yours is that there's a map of Player UUID to Spectre Cube
+  - I was saving a compound tag of `{owner:uuid, cube:{cube tag}}`, which makes sense
+  - But when loading, I was treating it as a list of cube tags. `SpectreCube.fromTag()` couldn't read the above json, so it assumed that there was no Cube.
 - Fixed several blocks emptying their inventory when its block state changes (#14)
   - This was a problem with the Global Chat Detector, Auto Placer, Biome Radar, Ender Energy Distributor, Imbuing Station, and Filteed Platform
 
