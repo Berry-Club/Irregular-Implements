@@ -6,6 +6,7 @@
 
 ### Fixed
 
+- Fixed the Spectre Key sending you to a new Cube every time you reloaded the save (#10)
 - Fixed several blocks emptying their inventory when its block state changes (#14)
   - This was a problem with the Global Chat Detector, Auto Placer, Biome Radar, Ender Energy Distributor, Imbuing Station, and Filteed Platform
 

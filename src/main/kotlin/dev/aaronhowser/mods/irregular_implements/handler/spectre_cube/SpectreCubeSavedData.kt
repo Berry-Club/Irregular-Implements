@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
@@ -157,10 +158,13 @@ class SpectreCubeSavedData : SavedData() {
 
 			val listTag = tag.getList(CUBES_NBT, Tag.TAG_COMPOUND.toInt())
 			for (i in listTag.indices) {
-				val cubeTag = listTag.getCompound(i)
+				val ownerAndCubeTag = listTag.getCompound(i)
+
+				val ownerTag = ownerAndCubeTag.getUuidOrNull(UUID_NBT) ?: continue
+				val cubeTag = ownerAndCubeTag.getCompound(CUBE_NBT)
 				val cube = SpectreCube.fromTag(data, cubeTag)
-				val uuid = cube.owner ?: continue
-				data.cubes[uuid] = cube
+
+				data.cubes[ownerTag] = cube
 			}
 
 			data.positionCounter = tag.getInt(POSITION_COUNTER_NBT)
