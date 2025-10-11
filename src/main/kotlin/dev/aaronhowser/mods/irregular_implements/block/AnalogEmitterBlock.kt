@@ -107,7 +107,7 @@ class AnalogEmitterBlock : Block(
 	}
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		if (!state.getValue(ENABLED)) return 0
+		if (!state.getValue(ENABLED) || direction == state.getValue(FACING)) return 0
 
 		return state.getValue(POWER)
 	}

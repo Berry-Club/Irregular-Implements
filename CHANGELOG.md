@@ -14,6 +14,7 @@
 - Fixed several blocks emptying their inventory when its block state changes (#14)
   - This was a problem with the Global Chat Detector, Auto Placer, Biome Radar, Ender Energy Distributor, Imbuing Station, and Filteed Platform
 - If the BlockToolModificationEvent is canceled, Slime Blocks will not be turned into Compressed Slime
+- Fixed the Analog Emitter outputting a signal out of its input face (#11)
 
 # 1.3.0
 
