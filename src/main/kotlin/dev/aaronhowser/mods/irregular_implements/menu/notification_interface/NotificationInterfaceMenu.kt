@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.NotificationInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.GhostSlot
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -9,24 +10,27 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.item.ItemStack
 
 class NotificationInterfaceMenu(
 	containerId: Int,
+	playerInventory: Inventory,
 	notificationInterfaceContainer: Container,
 	private val containerLevelAccess: ContainerLevelAccess
-) : AbstractContainerMenu(ModMenuTypes.NOTIFICATION_INTERFACE.get(), containerId), MenuWithStrings {
+) : MenuWithInventory(ModMenuTypes.NOTIFICATION_INTERFACE.get(), containerId, playerInventory), MenuWithStrings {
 
 	constructor(containerId: Int, playerInventory: Inventory) : this(
 		containerId,
+		playerInventory,
 		SimpleContainer(1),
 		ContainerLevelAccess.NULL
 	)
 
 	init {
 		checkContainerSize(notificationInterfaceContainer, 1)
+
+		addPlayerInventorySlots(64)
 
 		this.addSlot(
 			GhostSlot(

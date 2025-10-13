@@ -4,6 +4,10 @@
 
 - Added the Forest and Flower Forest to the biome tag `#irregular_implements:nature_core_oak`
 
+### Fixed
+
+- Notification Interface not having player inventory slots
+
 # 1.3.1
 
 ### Changed

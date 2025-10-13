@@ -96,6 +96,7 @@ class NotificationInterfaceBlockEntity(
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return NotificationInterfaceMenu(
 			containerId,
+			playerInventory,
 			this.container,
 			ContainerLevelAccess.create(this.level!!, this.blockPos)
 		)
