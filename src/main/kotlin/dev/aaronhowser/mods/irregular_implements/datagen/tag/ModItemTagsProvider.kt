@@ -211,6 +211,11 @@ class ModItemTagsProvider(
 			.add(
 				ModItems.SPECTRE_SWORD.get()
 			)
+
+		this.tag(BREWABLE_AS_GLOWSTONE)
+			.add(
+				ModBlocks.GLOWING_MUSHROOM.asItem()
+			)
 	}
 
 	companion object {
@@ -234,6 +239,9 @@ class ModItemTagsProvider(
 
 		@JvmField
 		val HIDE_NAME_HELMET = create("hide_name_helmet")
+
+		@JvmField
+		val BREWABLE_AS_GLOWSTONE = create("breweable_as_glowstone")
 	}
 
 }
