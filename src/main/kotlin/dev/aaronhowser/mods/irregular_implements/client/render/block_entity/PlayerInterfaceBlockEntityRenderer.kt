@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
@@ -29,6 +30,9 @@ class PlayerInterfaceBlockEntityRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
+		val spaceAbove = blockEntity.level?.isEmptyBlock(blockEntity.blockPos.above()).isTrue
+		if (!spaceAbove) return
+
 		val skull = blockEntity.ownerHead
 		if (skull.isEmpty) return
 
