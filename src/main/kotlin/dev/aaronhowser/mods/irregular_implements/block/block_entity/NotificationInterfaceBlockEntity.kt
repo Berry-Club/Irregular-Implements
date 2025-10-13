@@ -57,13 +57,8 @@ class NotificationInterfaceBlockEntity(
 	}
 
 	private val container = ImprovedSimpleContainer(this, 1)
-
-	private var icon: ItemStack
-		get() = container.getItem(0)
-		set(value) {
-			container.setItem(0, value)
-			setChanged()
-		}
+	val icon: ItemStack
+		get() = this.container.getItem(0)
 
 	fun notifyOwner() {
 		val level = this.level as? ServerLevel ?: return
