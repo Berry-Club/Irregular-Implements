@@ -9,6 +9,7 @@
 
 - Notification Interface not having player inventory slots
 - Notification Interface wasn't saving the icon item
+- Couldn't type the letter `E` in the Notification Interface text boxes
 
 # 1.3.1
 
