@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider;
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -11,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
+// Surely there's a better way to do this?
 @Mixin(BrewingRecipe.class)
 public abstract class BrewingRecipeMixin {
 
@@ -26,7 +26,7 @@ public abstract class BrewingRecipeMixin {
 			return true;
 		}
 
-		return this.getIngredient().test(Items.GLOWSTONE.getDefaultInstance()) && ingredient.is(ModItemTagsProvider.BREWABLE_AS_GLOWSTONE);
+		return this.getIngredient().test(Items.GLOWSTONE_DUST.getDefaultInstance()) && ingredient.is(ModItemTagsProvider.BREWABLE_AS_GLOWSTONE);
 	}
 
 }
