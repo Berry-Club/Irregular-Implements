@@ -63,6 +63,18 @@ class NotificationInterfaceScreen(
 			return true
 		}
 
+		if (keyCode == GLFW.GLFW_KEY_TAB) {
+			if (titleEditBox.isFocused) {
+				titleEditBox.isFocused = false
+				descriptionEditBox.isFocused = true
+			} else if (descriptionEditBox.isFocused) {
+				descriptionEditBox.isFocused = false
+				titleEditBox.isFocused = true
+			}
+
+			return true
+		}
+
 		if (titleEditBox.keyPressed(keyCode, scanCode, modifiers) || titleEditBox.canConsumeInput()) {
 			return true
 		}
