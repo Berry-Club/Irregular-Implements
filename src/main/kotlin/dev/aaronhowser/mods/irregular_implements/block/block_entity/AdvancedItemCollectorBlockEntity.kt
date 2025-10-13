@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -62,6 +63,8 @@ class AdvancedItemCollectorBlockEntity(
 		tag.putInt(X_RADIUS_NBT, this.xRadius)
 		tag.putInt(Y_RADIUS_NBT, this.yRadius)
 		tag.putInt(Z_RADIUS_NBT, this.zRadius)
+
+		ContainerHelper.saveAllItems(tag, this.container.items, registries)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -70,6 +73,8 @@ class AdvancedItemCollectorBlockEntity(
 		this.xRadius = tag.getInt(X_RADIUS_NBT)
 		this.yRadius = tag.getInt(Y_RADIUS_NBT)
 		this.zRadius = tag.getInt(Z_RADIUS_NBT)
+
+		ContainerHelper.loadAllItems(tag, this.container.items, registries)
 	}
 
 	// Menu stuff

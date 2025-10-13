@@ -53,7 +53,6 @@ open class ItemCollectorBlockEntity(
 
 			itemEntity.item = newStack
 		}
-
 	}
 
 	open fun getFilter(): ItemFilterDataComponent? {

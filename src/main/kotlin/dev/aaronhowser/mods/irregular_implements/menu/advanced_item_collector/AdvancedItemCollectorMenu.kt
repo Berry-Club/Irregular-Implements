@@ -40,8 +40,7 @@ class AdvancedItemCollectorMenu(
 	}
 
 	override fun addSlots() {
-		//TODO: Add an Item Filter outline to the slot background
-		val slot = FilteredSlot(container, 0, 80, 35) { it.has(ModDataComponents.ITEM_FILTER) }
+		val slot = FilteredSlot(container, 0, 80, 122) { it.has(ModDataComponents.ITEM_FILTER) }
 		this.addSlot(slot)
 	}
 

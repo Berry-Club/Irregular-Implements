@@ -14,6 +14,8 @@
 - Unable to type the letter E in Notification Interface text fields (#22)
 - Broken particle effect when mining the Player Interface (#24)
 - Lava Waders now properly recharge (#30)
+- The Advanced Item Collector now properly saves its inventory
+- The Advanced Item Collector's GUI now has the Filter slot in the right location (#19)
 
 # 1.3.1
 
