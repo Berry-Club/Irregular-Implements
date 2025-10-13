@@ -1,11 +1,12 @@
 {
-	"parent": "minecraft:block/cube",
-	"textures": {
-		"down": "irregular_implements:block/player_interface/hotbar",
-		"east": "irregular_implements:block/player_interface/main",
-		"north": "irregular_implements:block/player_interface/shield",
-		"south": "irregular_implements:block/player_interface/main",
-		"up": "irregular_implements:block/player_interface/armor",
-		"west": "irregular_implements:block/player_interface/main"
-	}
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "irregular_implements:block/player_interface/hotbar",
+    "east": "irregular_implements:block/player_interface/main",
+    "north": "irregular_implements:block/player_interface/shield",
+    "particle": "irregular_implements:block/player_interface/armor",
+    "south": "irregular_implements:block/player_interface/main",
+    "up": "irregular_implements:block/player_interface/armor",
+    "west": "irregular_implements:block/player_interface/main"
+  }
 }

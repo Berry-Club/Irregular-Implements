@@ -226,6 +226,7 @@ class ModBlockStateProvider(
 				textureOther,
 				textureOther
 			)
+			.texture("particle", textureTop)
 
 		simpleBlockWithItem(block, model)
 	}
