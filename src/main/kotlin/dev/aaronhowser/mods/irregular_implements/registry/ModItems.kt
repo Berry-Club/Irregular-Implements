@@ -5,8 +5,10 @@ import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Holder
 import net.minecraft.util.Unit
 import net.minecraft.world.effect.MobEffect
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
@@ -112,11 +114,17 @@ object ModItems {
 			ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS_PROPERTIES
 		)
 	val LAVA_WADERS: DeferredItem<ArmorItem> =
-		ModArmorItems.registerArmorItem(
-			"lava_waders",
-			ModArmorMaterials.LAVA_WADERS, ArmorItem.Type.BOOTS,
-			ModArmorItems.LAVA_WADERS_PROPERTIES
-		)
+		ITEM_REGISTRY.registerItem("lava_waders") {
+			object : ArmorItem(
+				ModArmorMaterials.LAVA_WADERS,
+				Type.BOOTS,
+				ModArmorItems.LAVA_WADERS_PROPERTIES.get()
+			) {
+				override fun inventoryTick(stack: ItemStack, level: Level, entity: Entity, slotId: Int, isSelected: Boolean) {
+					LavaCharmItem.charge(stack)
+				}
+			}
+		}
 	val SPECTRE_HELMET: DeferredItem<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_helmet",
