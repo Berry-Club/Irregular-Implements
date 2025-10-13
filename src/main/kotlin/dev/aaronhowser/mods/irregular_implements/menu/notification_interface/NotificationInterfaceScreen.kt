@@ -20,7 +20,7 @@ class NotificationInterfaceScreen(
 	override val background = ScreenTextures.Background.NotificationInterface
 
 	override fun baseInit() {
-		this.titleEditBox = EditBox(
+		val title = EditBox(
 			this.font,
 			this.leftPos + 34,
 			this.topPos + 15,
@@ -29,9 +29,11 @@ class NotificationInterfaceScreen(
 			Component.empty()
 		)
 
-		this.titleEditBox.setResponder(::setTitle)
+		title.setResponder(::setTitle)
 
-		this.descriptionEditBox = EditBox(
+		this.titleEditBox = title
+
+		val description = EditBox(
 			this.font,
 			this.leftPos + 34,
 			this.topPos + 18 + 22,
@@ -40,10 +42,32 @@ class NotificationInterfaceScreen(
 			Component.empty()
 		)
 
-		this.descriptionEditBox.setResponder(::setDescription)
+		description.setResponder(::setDescription)
+
+		this.descriptionEditBox = description
 
 		this.addRenderableWidget(this.titleEditBox)
 		this.addRenderableWidget(this.descriptionEditBox)
+	}
+
+	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+		if (scanCode == 256) {
+			minecraft?.player?.closeContainer()
+		}
+
+		if (titleEditBox.isFocused) {
+			if (titleEditBox.canConsumeInput() && titleEditBox.keyPressed(keyCode, scanCode, modifiers)) {
+				return true
+			}
+		}
+
+		if (descriptionEditBox.isFocused) {
+			if (descriptionEditBox.canConsumeInput() && descriptionEditBox.keyPressed(keyCode, scanCode, modifiers)) {
+				return true
+			}
+		}
+
+		return super.keyPressed(keyCode, scanCode, modifiers)
 	}
 
 	private fun setTitle(title: String) {
