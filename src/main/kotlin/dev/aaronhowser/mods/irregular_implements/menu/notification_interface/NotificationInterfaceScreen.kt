@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
@@ -31,7 +32,7 @@ class NotificationInterfaceScreen(
 			Component.empty()
 		)
 
-		title.setHint(ModMessageLang.NOTIFICATION_INTERFACE_TITLE.toComponent())
+		title.setHint(ModMessageLang.NOTIFICATION_INTERFACE_TITLE.toGrayComponent())
 
 		title.setResponder(::setTitle)
 
@@ -46,7 +47,7 @@ class NotificationInterfaceScreen(
 			Component.empty()
 		)
 
-		description.setHint(ModMessageLang.NOTIFICATION_INTERFACE_DESCRIPTION.toComponent())
+		description.setHint(ModMessageLang.NOTIFICATION_INTERFACE_DESCRIPTION.toGrayComponent())
 
 		description.setResponder(::setDescription)
 
@@ -54,26 +55,6 @@ class NotificationInterfaceScreen(
 
 		this.addRenderableWidget(this.titleEditBox)
 		this.addRenderableWidget(this.descriptionEditBox)
-	}
-
-	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
-		if (scanCode == 256) {
-			minecraft?.player?.closeContainer()
-		}
-
-		if (titleEditBox.isFocused) {
-			if (titleEditBox.canConsumeInput() && titleEditBox.keyPressed(keyCode, scanCode, modifiers)) {
-				return true
-			}
-		}
-
-		if (descriptionEditBox.isFocused) {
-			if (descriptionEditBox.canConsumeInput() && descriptionEditBox.keyPressed(keyCode, scanCode, modifiers)) {
-				return true
-			}
-		}
-
-		return super.keyPressed(keyCode, scanCode, modifiers)
 	}
 
 	private fun setTitle(title: String) {
