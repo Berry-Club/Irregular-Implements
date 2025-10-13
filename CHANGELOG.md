@@ -8,6 +8,7 @@
 ### Fixed
 
 - Notification Interface not having player inventory slots
+- Notification Interface wasn't saving the icon item
 
 # 1.3.1
 
