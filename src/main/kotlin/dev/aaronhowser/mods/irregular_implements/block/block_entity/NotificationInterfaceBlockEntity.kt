@@ -11,6 +11,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -74,6 +75,10 @@ class NotificationInterfaceBlockEntity(
 		tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
 		tag.putString(TOAST_TITLE_NBT, this.toastTitle)
 		tag.putString(TOAST_DESCRIPTION_NBT, this.toastDescription)
+
+		if (!this.container.isEmpty) {
+			ContainerHelper.saveAllItems(tag, this.container.items, registries)
+		}
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -86,6 +91,8 @@ class NotificationInterfaceBlockEntity(
 
 		this.toastTitle = tag.getString(TOAST_TITLE_NBT)
 		this.toastDescription = tag.getString(TOAST_DESCRIPTION_NBT)
+
+		ContainerHelper.loadAllItems(tag, this.container.items, registries)
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
