@@ -3,8 +3,10 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.ItemCollectorBlock
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -42,16 +44,28 @@ open class ItemCollectorBlockEntity(
 			if (itemEntity.target != null || itemEntity.hasPickUpDelay()) continue
 
 			val stack = itemEntity.item
-			if (filter != null && !filter.test(stack).isTrue) continue
+			if (filter != null && !filter.test(stack)) continue
 
+			val oldCount = stack.count
 			val newStack = ItemHandlerHelper.insertItemStacked(itemHandler, stack, false)
+			val newCount = newStack.count
+
+			if (oldCount == newCount) continue
+
+			level.playSound(
+				null,
+				this.blockPos,
+				SoundEvents.ITEM_PICKUP,
+				SoundSource.BLOCKS,
+				0.2f,
+				level.random.nextRange(0.6f, 3.4f)
+			)
 
 			if (newStack.isEmpty) {
 				itemEntity.discard()
-				continue
+			} else {
+				itemEntity.item = newStack
 			}
-
-			itemEntity.item = newStack
 		}
 	}
 

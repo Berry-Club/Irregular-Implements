@@ -6,6 +6,7 @@
 - The Notification Interface now defaults to having no text in the title and description
 - The Player Interface no longer renders the owner's skull above itself if there's a block there
 - Glowing Mushrooms can now be used in _most_ brewing recipes that would use Glowstone (#29)
+- Item Collectors now make a sound when picking up items
 
 ### Fixed
 
