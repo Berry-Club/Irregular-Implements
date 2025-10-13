@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -10,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientC
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
+import org.lwjgl.glfw.GLFW
 
 class NotificationInterfaceScreen(
 	menu: NotificationInterfaceMenu,
@@ -55,6 +55,23 @@ class NotificationInterfaceScreen(
 
 		this.addRenderableWidget(this.titleEditBox)
 		this.addRenderableWidget(this.descriptionEditBox)
+	}
+
+	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+		if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
+			minecraft?.player?.closeContainer()
+			return true
+		}
+
+		if (titleEditBox.keyPressed(keyCode, scanCode, modifiers) || titleEditBox.canConsumeInput()) {
+			return true
+		}
+
+		if (descriptionEditBox.keyPressed(keyCode, scanCode, modifiers) || descriptionEditBox.canConsumeInput()) {
+			return true
+		}
+
+		return super.keyPressed(keyCode, scanCode, modifiers)
 	}
 
 	private fun setTitle(title: String) {
