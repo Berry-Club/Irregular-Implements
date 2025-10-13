@@ -57,7 +57,7 @@ class NotificationInterfaceBlockEntity(
 		descriptionPacket.messageNearbyPlayers(level, this.blockPos.center, 16.0)
 	}
 
-	private val container = ImprovedSimpleContainer(this, 1)
+	val container = ImprovedSimpleContainer(this, 1)
 	val icon: ItemStack
 		get() = this.container.getItem(0)
 
