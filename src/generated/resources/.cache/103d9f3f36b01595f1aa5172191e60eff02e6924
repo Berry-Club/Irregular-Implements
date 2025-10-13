@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-13T17:09:05.2107813	Registries
+// 1.21.1	2025-10-13T17:10:31.7888546	Registries
 bbdc53b7ad45b5243cd23b1c26f07b51c4963a9c data/irregular_implements/dimension/spectre.json
 c35318937886eeba5276286bcbe84813b8c15231 data/irregular_implements/dimension_type/spectre.json
 7ca20dc237fd59429cd8a5de336d63b4e726c0a9 data/irregular_implements/enchantment/magnetic.json
@@ -13,6 +13,6 @@ a77077aca96055cd7b5fdba52e696cbe3186586b data/irregular_implements/worldgen/conf
 ad993321b4d6b700bf8c0c4c13e791b52bad5bfb data/irregular_implements/worldgen/configured_feature/pitcher_plant.json
 c307cc36eeff73c057619f4c45bea0618e53f7b0 data/irregular_implements/worldgen/configured_feature/spectre_tree.json
 63fda9397fbe80f7be84a64647d6b017db05dd2b data/irregular_implements/worldgen/placed_feature/glowing_mushroom.json
-eb07936e88b4fcdb9844ff46f37fe68b03746975 data/irregular_implements/worldgen/placed_feature/lotus_bush.json
+8333c3c8c126ebc813b58c3049c293dd48be3f49 data/irregular_implements/worldgen/placed_feature/lotus_bush.json
 974b09c1b94371305c2ed43165d305339a4679e9 data/irregular_implements/worldgen/placed_feature/nature_core.json
 1d91b81a9ecdc5afbc6d4e49d0e435b5729b4a2a data/irregular_implements/worldgen/placed_feature/pitcher_plant.json

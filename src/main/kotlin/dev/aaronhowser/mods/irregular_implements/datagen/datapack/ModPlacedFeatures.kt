@@ -29,7 +29,7 @@ object ModPlacedFeatures {
 			LOTUS_BUSH,
 			configuredFeatures.getOrThrow(ModConfiguredFeatures.LOTUS_BUSH),
 			listOf(
-				RarityFilter.onAverageOnceEvery(35),
+				RarityFilter.onAverageOnceEvery(50),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
 				BiomeFilter.biome()

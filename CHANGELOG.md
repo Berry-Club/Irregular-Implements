@@ -7,8 +7,8 @@
 - The Player Interface no longer renders the owner's skull above itself if there's a block there
 - Glowing Mushrooms can now be used in _most_ brewing recipes that would use Glowstone (#29)
 - Item Collectors now make a sound when picking up items
-- Made Lotuses about 7 times more likely to spawn 
-  - 1 in 35 instead of 1 in 288
+- Made Lotuses about 6 times more likely to spawn 
+  - 1 in 50 instead of 1 in 288
   - For reference, Sweet Berries have a 1 in 32 chance to spawn
 
 ### Fixed
