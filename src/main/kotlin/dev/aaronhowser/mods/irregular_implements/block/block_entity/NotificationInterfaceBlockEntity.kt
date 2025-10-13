@@ -32,14 +32,14 @@ class NotificationInterfaceBlockEntity(
 			setChanged()
 		}
 
-	var toastTitle: String = "Title"
+	var toastTitle: String = ""
 		set(value) {
 			field = value
 			setChanged()
 			sendStringUpdate()
 		}
 
-	var toastDescription: String = "Description"
+	var toastDescription: String = ""
 		set(value) {
 			field = value
 			setChanged()

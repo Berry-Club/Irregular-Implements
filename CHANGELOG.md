@@ -3,6 +3,7 @@
 ### Changed
 
 - Added the Forest and Flower Forest to the biome tag `#irregular_implements:nature_core_oak`
+- The Notification Interface now defaults to having no text in the title and description
 
 ### Fixed
 

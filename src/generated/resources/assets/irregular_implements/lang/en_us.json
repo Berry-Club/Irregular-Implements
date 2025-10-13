@@ -741,6 +741,8 @@
   "message.irregular_implements.floo_brick.no_name": "Nameless fireplace",
   "message.irregular_implements.floo_brick.not_found": "Could not find fireplace named \"%s\"",
   "message.irregular_implements.floo_brick.teleported": "Teleported to %s.",
+  "message.irregular_implements.notification_interface.description": "Description",
+  "message.irregular_implements.notification_interface.title": "Title",
   "message.irregular_implements.redstone_tool.base_block_set": "Redstone Tool linked to the %s at %d %d %d.",
   "message.irregular_implements.redstone_tool.base_not_linkable": "Cannot link as base %s was replaced with a %s.",
   "message.irregular_implements.redstone_tool.linked": "Linked the %s at %d %d %d to the %s at %d %d %d.",

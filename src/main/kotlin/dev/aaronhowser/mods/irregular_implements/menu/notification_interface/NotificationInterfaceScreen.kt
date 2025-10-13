@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
@@ -29,6 +31,8 @@ class NotificationInterfaceScreen(
 			Component.empty()
 		)
 
+		title.setHint(ModMessageLang.NOTIFICATION_INTERFACE_TITLE.toComponent())
+
 		title.setResponder(::setTitle)
 
 		this.titleEditBox = title
@@ -41,6 +45,8 @@ class NotificationInterfaceScreen(
 			15,
 			Component.empty()
 		)
+
+		description.setHint(ModMessageLang.NOTIFICATION_INTERFACE_DESCRIPTION.toComponent())
 
 		description.setResponder(::setDescription)
 
