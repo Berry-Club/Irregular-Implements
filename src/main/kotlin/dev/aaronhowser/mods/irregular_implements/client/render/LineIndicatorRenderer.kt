@@ -28,7 +28,6 @@ object LineIndicatorRenderer {
 	}
 
 	fun collectIndicators(event: ClientTickEvent.Post) {
-		RedstoneToolRenderer.addLineIndicators(event)
 	}
 
 	private fun tickIndicators() {
@@ -57,12 +56,12 @@ object LineIndicatorRenderer {
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
 		for (indicator in lineIndicators) {
-			RenderUtil.renderLine(
-				poseStack,
-				indicator.start,
-				indicator.end,
-				indicator.color
-			)
+//			RenderUtil.renderDebugCube(
+//				poseStack,
+//				indicator.target.center,
+//				indicator.size,
+//				indicator.color
+//			)
 		}
 
 		poseStack.popPose()

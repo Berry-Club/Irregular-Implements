@@ -48,31 +48,6 @@ object RedstoneToolRenderer {
 		}
 	}
 
-	fun addLineIndicators(event: ClientTickEvent.Post) {
-		val player = ClientUtil.localPlayer ?: return
-
-		val itemInHand = player.mainHandItem
-		if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
-
-		val toolLocation = itemInHand.get(ModDataComponents.GLOBAL_POS) ?: return
-		if (toolLocation.dimension != player.level().dimension()) return
-
-		val toolBlockPos = toolLocation.pos
-
-		val toolBlockEntity = player.level().getBlockEntity(toolBlockPos) as? RedstoneToolLinkable ?: return
-
-		val linkedPos = toolBlockEntity.getLinkedPos()
-
-		if (linkedPos != null) {
-			LineIndicatorRenderer.addIndicator(
-				toolBlockPos.center,
-				linkedPos.center,
-				1,
-				0x8000FFFF.toInt(),
-			)
-		}
-	}
-
 	fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
 		val player = ClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return

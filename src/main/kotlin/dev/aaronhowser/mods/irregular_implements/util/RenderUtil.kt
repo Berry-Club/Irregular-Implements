@@ -155,53 +155,6 @@ object RenderUtil {
 		poseStack.popPose()
 	}
 
-	fun renderLine(
-		poseStack: PoseStack,
-		start: Vec3,
-		end: Vec3,
-		color: Int,
-	) {
-		val bufferSource = Minecraft.getInstance()
-			.renderBuffers()
-			.bufferSource()
-
-		val vertexConsumer = bufferSource.getBuffer(RenderType.lines())
-
-		poseStack.pushPose()
-
-		val pose = poseStack.last()
-
-		var lengthX = (end.x - start.x)
-		var lengthY = (end.y - start.y)
-		var lengthZ = (end.z - start.z)
-		val length = sqrt(lengthX * lengthX + lengthY * lengthY + lengthZ * lengthZ)
-
-		lengthX /= length
-		lengthY /= length
-		lengthZ /= length
-
-		vertexConsumer.addVertex(
-			pose,
-			start.x.toFloat(),
-			start.y.toFloat(),
-			start.z.toFloat()
-		)
-			.setColor(color)
-			.setNormal(lengthX.toFloat(), lengthY.toFloat(), lengthZ.toFloat())
-
-		vertexConsumer.addVertex(
-			pose,
-			end.x.toFloat(),
-			end.y.toFloat(),
-			end.z.toFloat()
-		)
-			.setColor(color)
-			.setNormal(lengthX.toFloat(), lengthY.toFloat(), lengthZ.toFloat())
-
-		poseStack.popPose()
-		bufferSource.endBatch(RenderType.lines())
-	}
-
 	fun renderDebugCube(
 		poseStack: PoseStack,
 		center: Vec3,
