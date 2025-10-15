@@ -8,7 +8,6 @@ object ModBlockLang {
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
 			addBlock(ModBlocks.ADVANCED_REDSTONE_REPEATER, "Advanced Redstone Repeater")
-			addBlock(ModBlocks.ADVANCED_REDSTONE_TORCH, "Advanced Redstone Torch")
 			addBlock(ModBlocks.CUSTOM_CRAFTING_TABLE, "Custom Crafting Table")
 			addBlock(ModBlocks.FERTILIZED_DIRT, "Fertilized Dirt")
 			addBlock(ModBlocks.LAPIS_GLASS, "Lapis Glass")

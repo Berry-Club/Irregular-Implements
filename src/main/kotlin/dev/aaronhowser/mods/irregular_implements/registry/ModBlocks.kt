@@ -83,7 +83,10 @@ object ModBlocks {
 	val SIDED_BLOCK_OF_REDSTONE =
 		registerBlock("sided_redstone", ::SidedRedstoneBlock)
 	val ADVANCED_REDSTONE_REPEATER = basicBlock("advanced_redstone_repeater")
-	val ADVANCED_REDSTONE_TORCH = basicBlock("advanced_redstone_torch")
+	val ADVANCED_REDSTONE_TORCH: DeferredBlock<AdvancedRedstoneTorchBlock> =
+		registerBlockWithoutItem("advanced_redstone_torch", ::AdvancedRedstoneTorchBlock)
+	val ADVANCED_REDSTONE_WALL_TORCH: DeferredBlock<AdvancedRedstoneWallTorchBlock> =
+		registerBlockWithoutItem("advanced_redstone_wall_torch", ::AdvancedRedstoneWallTorchBlock)
 
 	// Sticks
 	val BLOCK_OF_STICKS: DeferredBlock<BlockOfSticksBlock> =

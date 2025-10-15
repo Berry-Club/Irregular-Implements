@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
+import net.minecraft.core.Direction
 import net.minecraft.core.Holder
 import net.minecraft.util.Unit
 import net.minecraft.world.effect.MobEffect
@@ -211,6 +212,18 @@ object ModItems {
 		register("redstone_activator", ::RedstoneActivatorItem, RedstoneActivatorItem.DEFAULT_PROPERTIES)
 	val REDSTONE_REMOTE: DeferredItem<RedstoneRemoteItem> =
 		register("redstone_remote", ::RedstoneRemoteItem, RedstoneRemoteItem.DEFAULT_PROPERTIES)
+	val ADVANCED_REDSTONE_TORCH =
+		register(
+			"advanced_redstone_torch",
+			{
+				StandingAndWallBlockItem(
+					ModBlocks.ADVANCED_REDSTONE_TORCH.get(),
+					ModBlocks.ADVANCED_REDSTONE_WALL_TORCH.get(),
+					Item.Properties(),
+					Direction.DOWN
+				)
+			}
+		)
 
 	// Floo
 	val FLOO_POWDER: DeferredItem<Item> =

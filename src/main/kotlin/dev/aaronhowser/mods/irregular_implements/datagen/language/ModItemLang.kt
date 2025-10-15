@@ -94,6 +94,7 @@ object ModItemLang {
 			addItem(ModItems.REDSTONE_TOOL, "Redstone Tool")
 			addItem(ModItems.REDSTONE_ACTIVATOR, "Redstone Activator")
 			addItem(ModItems.REDSTONE_REMOTE, "Redstone Remote")
+			addItem(ModItems.ADVANCED_REDSTONE_TORCH, "Advanced Redstone Torch")
 			addItem(ModItems.SUPER_LUBRICANT_TINCTURE, "Super Lubricant Tincture")
 			addItem(ModItems.FLOO_POWDER, "Floo Powder")
 			addItem(ModItems.FLOO_SIGN, "Floo Sign")

@@ -82,7 +82,7 @@ object ModInfoLang {
 		addInfo(ModBlocks.SPECTRE_COIL_NUMBER, "Generates 128 FE/t for free, inserting it into the block it's placed on.")
 		addInfo(ModBlocks.SPECTRE_COIL_GENESIS, "Generates an infinite amount of FE for free, inserting it into the block it's placed on.")
 		addInfo(ModBlocks.ADVANCED_REDSTONE_REPEATER, "A Redstone Repeater that can have both its Step Up and Step Down delays configured.")
-		addInfo(ModBlocks.ADVANCED_REDSTONE_TORCH, "A Redstone Torch that can have its Powered and Unpowered output strengths configured")
+		addInfo(ModItems.ADVANCED_REDSTONE_TORCH, "A Redstone Torch that can have its Powered and Unpowered output strengths configured")
 		addInfo(ModBlocks.SPECTRE_SAPLING, "Created by using Ectoplasm on a Sapling.\n\nGrows into a Spectre Tree, whose blocks have a chance of dropping Ectoplasm.")
 		addInfo(ModBlocks.ITEM_COLLECTOR, "Collects items in a 3 block radius and inserts it into the inventory it's placed on.")
 		addInfo(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Collects items in a configurable radius and inserts it into the inventory it's placed on.\n\nYou can also insert an Item Filter for more control.")

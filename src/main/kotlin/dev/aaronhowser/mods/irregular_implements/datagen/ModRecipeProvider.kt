@@ -542,7 +542,7 @@ class ModRecipeProvider(
 			)
 		),
 		shapedRecipe(
-			ModBlocks.ADVANCED_REDSTONE_TORCH,
+			ModItems.ADVANCED_REDSTONE_TORCH,
 			" R ,RIR, S ",
 			mapOf(
 				'R' to ing(Tags.Items.DUSTS_REDSTONE),
