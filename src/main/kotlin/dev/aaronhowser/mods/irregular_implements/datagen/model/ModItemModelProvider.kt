@@ -33,8 +33,21 @@ class ModItemModelProvider(
 		spectreChargers()
 		weatherEggs()
 		specialChests()
+		advancedRedstoneTorch()
 
 		basicItems()
+	}
+
+	private fun advancedRedstoneTorch() {
+		val item = ModItems.ADVANCED_REDSTONE_TORCH.get()
+
+		val texture = modLoc("block/advanced_redstone_torch/red")
+
+		getBuilder(getName(item).toString())
+			.parent(ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", texture)
+
+		handledItems.add(item)
 	}
 
 	private fun specialChests() {
