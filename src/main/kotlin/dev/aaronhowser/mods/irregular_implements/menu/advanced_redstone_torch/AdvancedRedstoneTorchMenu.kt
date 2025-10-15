@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack
 class AdvancedRedstoneTorchMenu(
 	containerId: Int,
 	private val containerData: ContainerData
-) : AbstractContainerMenu(ModMenuTypes.BLOCK_DESTABILIZER.get(), containerId), MenuWithButtons {
+) : AbstractContainerMenu(ModMenuTypes.ADVANCED_REDSTONE_TORCH.get(), containerId), MenuWithButtons {
 
 	constructor(containerId: Int, playerInventory: Inventory) :
 			this(
