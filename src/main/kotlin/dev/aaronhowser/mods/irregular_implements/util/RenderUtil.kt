@@ -197,7 +197,41 @@ object RenderUtil {
 		poseStack.popPose()
 	}
 
-	fun renderDebugCube(
+	fun renderLineThroughWalls(
+		poseStack: PoseStack,
+		start: Vec3,
+		end: Vec3,
+		color: Int
+	) {
+		val vertexConsumer = Minecraft.getInstance()
+			.renderBuffers()
+			.bufferSource()
+			.getBuffer(LINES_THROUGH_WALL_RENDER_TYPE)
+
+		poseStack.pushPose()
+
+		val pose = poseStack.last()
+
+		addVertex(
+			pose,
+			vertexConsumer,
+			color,
+			start.x.toFloat(), start.y.toFloat(), start.z.toFloat(),
+			0f, 0f
+		)
+
+		addVertex(
+			pose,
+			vertexConsumer,
+			color,
+			end.x.toFloat(), end.y.toFloat(), end.z.toFloat(),
+			0f, 0f
+		)
+
+		poseStack.popPose()
+	}
+
+	fun renderCubeThroughWalls(
 		poseStack: PoseStack,
 		center: Vec3,
 		width: Float,
