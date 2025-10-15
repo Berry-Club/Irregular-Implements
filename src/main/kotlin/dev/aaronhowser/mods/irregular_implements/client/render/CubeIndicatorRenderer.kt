@@ -47,7 +47,7 @@ object CubeIndicatorRenderer {
 	}
 
 	fun onRenderLevel(event: RenderLevelStageEvent) {
-		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
+		if (event.stage != RenderLevelStageEvent.Stage.AFTER_WEATHER) return
 
 		if (cubeIndicators.isEmpty()) return
 
