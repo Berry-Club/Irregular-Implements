@@ -705,6 +705,8 @@
   "item.irregular_implements.weather_egg.sunny": "Weather Egg (Sunny)",
   "item.irregular_implements.white_stone": "White Stone",
   "itemGroup.irregular_implements": "Irregular Implements",
+  "message.irregular_implements.advanced_redstone_torch.green_strength": "Green Strength",
+  "message.irregular_implements.advanced_redstone_torch.red_strength": "Red Strength",
   "message.irregular_implements.anchor.used": "%s was retained through death, but its Spectre Anchor was consumed",
   "message.irregular_implements.biome_painter.amount_changed": "Changed %d blocks to %s",
   "message.irregular_implements.biome_radar.filter_set": "Location Filter set",

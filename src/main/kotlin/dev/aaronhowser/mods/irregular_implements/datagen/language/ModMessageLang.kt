@@ -54,6 +54,8 @@ object ModMessageLang {
 	const val MINUS_Z = "message.irregular_implements.button.minus_z"
 	const val NOTIFICATION_INTERFACE_TITLE = "message.irregular_implements.notification_interface.title"
 	const val NOTIFICATION_INTERFACE_DESCRIPTION = "message.irregular_implements.notification_interface.description"
+	const val GREEN_STRENGTH = "message.irregular_implements.advanced_redstone_torch.green_strength"
+	const val RED_STRENGTH = "message.irregular_implements.advanced_redstone_torch.red_strength"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -107,6 +109,8 @@ object ModMessageLang {
 			add(MINUS_Z, "-Z")
 			add(NOTIFICATION_INTERFACE_TITLE, "Title")
 			add(NOTIFICATION_INTERFACE_DESCRIPTION, "Description")
+			add(GREEN_STRENGTH, "Green Strength")
+			add(RED_STRENGTH, "Red Strength")
 		}
 	}
 
