@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_torch
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedRedstoneTorchBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Player
@@ -15,8 +16,36 @@ class AdvancedRedstoneTorchMenu(
 	override fun quickMoveStack(player: Player, index: Int): ItemStack = ItemStack.EMPTY
 	override fun stillValid(player: Player): Boolean = true
 
-	override fun handleButtonPressed(buttonId: Int) {
+	var strengthGreen: Int
+		get() = containerData.get(AdvancedRedstoneTorchBlockEntity.STRENGTH_GREEN_INDEX)
+		set(value) = containerData.set(AdvancedRedstoneTorchBlockEntity.STRENGTH_GREEN_INDEX, value)
 
+	var strengthRed: Int
+		get() = containerData.get(AdvancedRedstoneTorchBlockEntity.STRENGTH_RED_INDEX)
+		set(value) = containerData.set(AdvancedRedstoneTorchBlockEntity.STRENGTH_RED_INDEX, value)
+
+	override fun handleButtonPressed(buttonId: Int) {
+		when (buttonId) {
+			DECREASE_GREEN_POWER_BUTTON_ID -> {
+				val newStrength = if (strengthGreen == 0) 15 else (strengthGreen - 1)
+				strengthGreen = newStrength
+			}
+
+			INCREASE_GREEN_POWER_BUTTON_ID -> {
+				val newStrength = (strengthGreen + 1) % 16
+				strengthGreen = newStrength
+			}
+
+			DECREASE_RED_POWER_BUTTON_ID -> {
+				val newStrength = if (strengthRed == 0) 15 else (strengthRed - 1)
+				strengthRed = newStrength
+			}
+
+			INCREASE_RED_POWER_BUTTON_ID -> {
+				val newStrength = (strengthRed + 1) % 16
+				strengthRed = newStrength
+			}
+		}
 	}
 
 	companion object {

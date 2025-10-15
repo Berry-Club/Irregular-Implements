@@ -21,16 +21,16 @@ class AdvancedRedstoneTorchBlockEntity(
 	private val containerData = object : ContainerData {
 		override fun get(index: Int): Int {
 			return when (index) {
-				STRENGTH_LIT_INDEX -> strengthGreen
-				STRENGTH_UNLIT_INDEX -> strengthRed
+				STRENGTH_GREEN_INDEX -> strengthGreen
+				STRENGTH_RED_INDEX -> strengthRed
 				else -> 0
 			}
 		}
 
 		override fun set(index: Int, value: Int) {
 			when (index) {
-				STRENGTH_LIT_INDEX -> strengthGreen = value.coerceIn(0, 15)
-				STRENGTH_UNLIT_INDEX -> strengthRed = value.coerceIn(0, 15)
+				STRENGTH_GREEN_INDEX -> strengthGreen = value.coerceIn(0, 15)
+				STRENGTH_RED_INDEX -> strengthRed = value.coerceIn(0, 15)
 			}
 
 			setChanged()
@@ -54,8 +54,8 @@ class AdvancedRedstoneTorchBlockEntity(
 	}
 
 	companion object {
-		const val STRENGTH_LIT_INDEX = 0
-		const val STRENGTH_UNLIT_INDEX = 1
+		const val STRENGTH_GREEN_INDEX = 0
+		const val STRENGTH_RED_INDEX = 1
 		const val CONTAINER_DATA_SIZE = 2
 
 		const val STRENGTH_GREEN_NBT = "StrengthGreen"
