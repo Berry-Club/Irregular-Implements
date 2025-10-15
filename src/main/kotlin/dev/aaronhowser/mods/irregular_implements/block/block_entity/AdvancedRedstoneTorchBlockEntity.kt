@@ -23,7 +23,8 @@ class AdvancedRedstoneTorchBlockEntity(
 	private var strengthGreen: Int = 15
 	private var strengthRed: Int = 4
 
-	fun getStrength(isLit: Boolean): Int = if (isLit) strengthGreen else strengthRed
+	/** isLit == is NOT powered */
+	fun getStrength(isLit: Boolean): Int = if (isLit) strengthRed else strengthGreen
 
 	private val containerData = object : ContainerData {
 		override fun get(index: Int): Int {
