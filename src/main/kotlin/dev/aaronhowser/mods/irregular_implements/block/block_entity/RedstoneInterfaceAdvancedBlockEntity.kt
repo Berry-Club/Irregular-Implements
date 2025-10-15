@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Improve
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
+import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_interface.AdvancedRedstoneInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -13,7 +14,12 @@ import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.LongArrayTag
+import net.minecraft.network.chat.Component
 import net.minecraft.world.ContainerHelper
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.IItemHandler
@@ -22,7 +28,7 @@ import net.neoforged.neoforge.items.wrapper.InvWrapper
 class RedstoneInterfaceAdvancedBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState) {
+) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState), MenuProvider {
 
 	private val linkedPositions: MutableList<BlockPos> = mutableListOf()
 
@@ -143,6 +149,14 @@ class RedstoneInterfaceAdvancedBlockEntity(
 				linkedPositions.add(BlockPos.of(long))
 			}
 		}
+	}
+
+	override fun getDisplayName(): Component {
+		return this.blockState.block.name
+	}
+
+	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
+		return AdvancedRedstoneInterfaceMenu(containerId, playerInventory, this.container)
 	}
 
 	companion object {

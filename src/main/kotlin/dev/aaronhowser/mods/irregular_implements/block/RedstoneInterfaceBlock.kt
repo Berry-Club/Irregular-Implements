@@ -5,6 +5,9 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInte
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
 import net.minecraft.world.level.block.Block
@@ -14,6 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.BlockHitResult
 
 class RedstoneInterfaceBlock(
 	val isAdvanced: Boolean
@@ -37,6 +41,16 @@ class RedstoneInterfaceBlock(
 		if (blockEntity is RedstoneInterfaceBlockEntity) {
 			blockEntity.updateTargets()
 		}
+	}
+
+	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+		val blockEntity = level.getBlockEntity(pos)
+		if (blockEntity is MenuProvider) {
+			player.openMenu(blockEntity)
+			return InteractionResult.sidedSuccess(level.isClientSide)
+		}
+
+		return super.useWithoutItem(state, level, pos, player, hitResult)
 	}
 
 	override fun <T : BlockEntity?> getTicker(
