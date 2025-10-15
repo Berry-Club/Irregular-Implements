@@ -12,6 +12,7 @@
 	- For example, the Redstone Interface would have a red cube, and the block it's linked to would have a blue cube
 - When holding a Redstone Tool, a line connects linkable blocks to what they're linked to
 	- For example, connecting between a Redstone Interface and the block it's sending a signal to
+- When holding a Redstone Tool, you can now see the link for every linkable block, rather than just the one the tool is linked to
 
 ### Fixed
 
