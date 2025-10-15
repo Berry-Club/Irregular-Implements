@@ -22,24 +22,58 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	pBlockState: BlockState
 ) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState) {
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val linkedPositions: MutableList<BlockPos> = mutableListOf()
+
+	val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+		override fun setChanged() {
+			super.setChanged()
+			updateLinkedPositions(this)
+		}
+	}
+
 	private val invWrapper = InvWrapper(container)
 
-	fun getLinkedPositions(): List<BlockPos> {
-		val positions = mutableListOf<BlockPos>()
+	private fun updateLinkedPositions(container: ImprovedSimpleContainer) {
+		val level = this.level ?: return
+
+		val newList = mutableListOf<BlockPos>()
 
 		for (stack in container.items) {
 			val pos = stack.get(ModDataComponents.GLOBAL_POS) ?: continue
-			if (pos.dimension == this.level?.dimension()) {
-				positions.add(pos.pos)
+			if (pos.dimension == this@RedstoneInterfaceAdvancedBlockEntity.level?.dimension()) {
+				newList.add(pos.pos)
 			}
 		}
 
-		return positions
+		val added = newList.filterNot { linkedPositions.contains(it) }
+		val removed = linkedPositions.filterNot { newList.contains(it) }
+
+		linkedPositions.clear()
+		linkedPositions.addAll(newList)
+
+		for (pos in added) {
+			linkBlock(
+				level = level,
+				interfacePos = this.blockPos,
+				targetPos = pos
+			)
+
+			updatePos(pos)
+		}
+
+		for (pos in removed) {
+			unlinkBlock(
+				level = level,
+				interfacePos = this.blockPos,
+				targetPos = pos
+			)
+
+			updatePos(pos)
+		}
 	}
 
 	override fun updateTargets() {
-		val positions = getLinkedPositions()
+		val positions = linkedPositions
 		for (pos in positions) {
 			updatePos(pos)
 		}
@@ -52,7 +86,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		val player = ClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
 
-		val links = getLinkedPositions()
+		val links = linkedPositions
 
 		if (links.isEmpty()) return
 
@@ -92,6 +126,12 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		ContainerHelper.loadAllItems(tag, container.items, registries)
+	}
+
+	override fun setChanged() {
+
+
+		super.setChanged()
 	}
 
 	companion object {

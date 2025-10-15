@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import org.antlr.v4.runtime.misc.MultiMap
 
-abstract class RedstoneInterfaceBlockEntity(
+abstract class  RedstoneInterfaceBlockEntity(
 	blockEntityType: BlockEntityType<*>,
 	pos: BlockPos,
 	blockState: BlockState
@@ -72,8 +72,10 @@ abstract class RedstoneInterfaceBlockEntity(
 		fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
 			val levelPos = LevelPos(level, targetPos)
 
-			linkedPositions[levelPos]?.remove(interfacePos)
-			if (linkedPositions[levelPos]?.isEmpty().isTrue) {
+			val interfaces = linkedPositions[levelPos] ?: return
+
+			interfaces.remove(interfacePos)
+			if (interfaces.isEmpty().isTrue) {
 				linkedPositions.remove(levelPos)
 			}
 		}
