@@ -9,7 +9,9 @@ import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-class RedstoneInterfaceBasicBlock : EntityBlock, Block(
+class RedstoneInterfaceBlock(
+	val isAdvanced: Boolean
+) : EntityBlock, Block(
 	Properties
 		.ofFullCopy(Blocks.IRON_BLOCK)
 ) {

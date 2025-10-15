@@ -165,9 +165,10 @@ object ModBlocks {
 		registerBlock("player_interface", ::PlayerInterfaceBlock)
 	val NOTIFICATION_INTERFACE: DeferredBlock<NotificationInterfaceBlock> =
 		registerBlock("notification_interface", ::NotificationInterfaceBlock)
-	val BASIC_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBasicBlock> =
-		registerBlock("basic_redstone_interface", ::RedstoneInterfaceBasicBlock)
-	val ADVANCED_REDSTONE_INTERFACE = basicBlock("advanced_redstone_interface")
+	val BASIC_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBlock> =
+		registerBlock("basic_redstone_interface") { RedstoneInterfaceBlock(isAdvanced = false) }
+	val ADVANCED_REDSTONE_INTERFACE: DeferredBlock<RedstoneInterfaceBlock> =
+		registerBlock("advanced_redstone_interface") { RedstoneInterfaceBlock(isAdvanced = true) }
 
 	// Spectre blocks
 	val SPECTRE_BLOCK: DeferredBlock<Block> =
