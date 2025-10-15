@@ -10,6 +10,9 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.ContainerHelper
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.items.wrapper.InvWrapper
@@ -78,6 +81,18 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	}
 
 	fun getItemHandler(direction: Direction?): IItemHandler = invWrapper
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		ContainerHelper.saveAllItems(tag, container.items, registries)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		ContainerHelper.loadAllItems(tag, container.items, registries)
+	}
 
 	companion object {
 		const val CONTAINER_SIZE = 9
