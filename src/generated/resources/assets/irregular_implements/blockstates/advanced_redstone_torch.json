@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "irregular_implements:block/advanced_redstone_torch_off"
+    },
+    "lit=true": {
+      "model": "irregular_implements:block/advanced_redstone_torch_on"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,lit=false": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_off"
+    },
+    "facing=east,lit=true": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_on"
+    },
+    "facing=north,lit=false": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_off",
+      "y": 270
+    },
+    "facing=north,lit=true": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_on",
+      "y": 270
+    },
+    "facing=south,lit=false": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_off",
+      "y": 90
+    },
+    "facing=south,lit=true": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_on",
+      "y": 90
+    },
+    "facing=west,lit=false": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_off",
+      "y": 180
+    },
+    "facing=west,lit=true": {
+      "model": "irregular_implements:block/advanced_redstone_wall_torch_on",
+      "y": 180
+    }
+  }
+}

@@ -16,6 +16,8 @@ import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.DropperBlock
+import net.minecraft.world.level.block.RedstoneTorchBlock
+import net.minecraft.world.level.block.RedstoneWallTorchBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.neoforged.neoforge.client.model.generators.*
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -81,6 +83,53 @@ class ModBlockStateProvider(
 		biomeRadar()
 		rainShield()
 		specialChests()
+		advancedRedstoneTorch()
+	}
+
+	private fun advancedRedstoneTorch() {
+		val standing = ModBlocks.ADVANCED_REDSTONE_TORCH.get()
+		val wall = ModBlocks.ADVANCED_REDSTONE_WALL_TORCH.get()
+
+		val red = modLoc("block/advanced_redstone_torch/red")
+		val green = modLoc("block/advanced_redstone_torch/green")
+
+		getVariantBuilder(standing)
+			.forAllStates {
+				val isLit = it.getValue(RedstoneTorchBlock.LIT)
+
+				val name = name(standing) + if (isLit) "_on" else "_off"
+				val model = models()
+					.torch(name, if (isLit) red else green)
+					.renderType(RenderType.cutout().name)
+
+				ConfiguredModel.builder()
+					.modelFile(model)
+					.build()
+			}
+
+		getVariantBuilder(wall)
+			.forAllStates {
+				val isLit = it.getValue(RedstoneWallTorchBlock.LIT)
+				val facing = it.getValue(RedstoneWallTorchBlock.FACING)
+
+				val name = name(wall) + if (isLit) "_on" else "_off"
+				val model = models()
+					.torchWall(name, if (isLit) red else green)
+					.renderType(RenderType.cutout().name)
+
+				val yRotation = when (facing) {
+					Direction.NORTH -> 270
+					Direction.EAST -> 0
+					Direction.SOUTH -> 90
+					Direction.WEST -> 180
+					else -> 0
+				}
+
+				ConfiguredModel.builder()
+					.modelFile(model)
+					.rotationY(yRotation)
+					.build()
+			}
 	}
 
 	private fun rainShield() {
