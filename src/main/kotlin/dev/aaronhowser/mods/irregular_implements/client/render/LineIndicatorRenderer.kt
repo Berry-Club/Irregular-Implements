@@ -1,7 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.LevelRenderer
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
@@ -28,6 +29,7 @@ object LineIndicatorRenderer {
 	}
 
 	fun collectIndicators(event: ClientTickEvent.Post) {
+		RedstoneToolRenderer.addLineIndicators(event)
 	}
 
 	private fun tickIndicators() {
@@ -55,13 +57,23 @@ object LineIndicatorRenderer {
 
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
+		val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
+		val vertexConsumer = bufferSource.getBuffer(RenderType.lines())
+
 		for (indicator in lineIndicators) {
-//			RenderUtil.renderDebugCube(
-//				poseStack,
-//				indicator.target.center,
-//				indicator.size,
-//				indicator.color
-//			)
+
+			//TODO
+
+			LevelRenderer.renderLineBox(
+				poseStack,
+				vertexConsumer,
+				indicator.start.x, indicator.start.y, indicator.start.z,
+				indicator.end.x, indicator.end.y, indicator.end.z,
+				0.9f, 0.9f, 0.9f,
+				1f,
+				0.5f, 0.5f, 0.5f
+			)
+
 		}
 
 		poseStack.popPose()
