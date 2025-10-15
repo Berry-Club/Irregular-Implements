@@ -13,6 +13,10 @@ import net.minecraft.world.level.block.state.BlockState
 class AdvancedRedstoneTorchBlock : RedstoneTorchBlock(Properties.ofFullCopy(Blocks.REDSTONE_TORCH)), EntityBlock {
 
 	override fun getSignal(blockState: BlockState, blockAccess: BlockGetter, pos: BlockPos, side: Direction): Int {
+		if (side == Direction.DOWN) {
+			return 0
+		}
+
 		val blockEntity = blockAccess.getBlockEntity(pos)
 		if (blockEntity is AdvancedRedstoneTorchBlockEntity) {
 			val isLit = blockState.getValue(LIT)
