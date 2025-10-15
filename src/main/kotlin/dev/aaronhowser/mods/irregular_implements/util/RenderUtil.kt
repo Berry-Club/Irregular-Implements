@@ -1,13 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import com.mojang.blaze3d.vertex.VertexFormat
-import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderStateShard.*
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
@@ -25,21 +21,6 @@ import kotlin.math.sqrt
 object RenderUtil {
 
 	private val HALF_SQRT_3: Float = (sqrt(3.0) / 2.0).toFloat()
-
-	@Suppress("INACCESSIBLE_TYPE", "INFERRED_INVISIBLE_RETURN_TYPE_WARNING")
-	private val TEST_RENDER_TYPE: RenderType = RenderType.create(
-		"${IrregularImplements.ID}:test",
-		DefaultVertexFormat.POSITION_COLOR,
-		VertexFormat.Mode.QUADS,
-		1536,
-		false,
-		true,
-		RenderType.CompositeState.builder()
-			.setShaderState(POSITION_COLOR_SHADER)
-			.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-			.setCullState(NO_CULL)
-			.createCompositeState(false)
-	)
 
 	fun renderRaysDoubleLayer(
 		poseStack: PoseStack,
@@ -205,7 +186,7 @@ object RenderUtil {
 		val vertexConsumer = Minecraft.getInstance()
 			.renderBuffers()
 			.bufferSource()
-			.getBuffer(TEST_RENDER_TYPE)
+			.getBuffer(RenderType.debugQuads())
 
 		poseStack.pushPose()
 		poseStack.translate(posX.toDouble(), posY.toDouble(), posZ.toDouble())
