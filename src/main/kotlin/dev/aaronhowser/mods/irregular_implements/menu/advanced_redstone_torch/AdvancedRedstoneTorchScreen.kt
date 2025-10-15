@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.network.chat.Component
@@ -26,6 +27,56 @@ class AdvancedRedstoneTorchScreen(
 
 	override fun baseInit() {
 
+		val decreaseComponent = Component.literal("-")
+		val increaseComponent = Component.literal("+")
+
+		val leftX = this.guiLeft + 5
+		val rightX = this.rightPos - 5
+
+		val greenY = this.guiTop + 16
+		val redY = this.guiTop + 39
+
+		this.decreaseGreenStrengthButton = Button.Builder(
+			decreaseComponent
+		) {
+			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.DECREASE_GREEN_POWER_BUTTON_ID)
+			packet.messageServer()
+		}
+			.bounds(leftX, greenY, 10, 10)
+			.build()
+
+		this.increaseGreenStrengthButton = Button.Builder(
+			increaseComponent
+		) {
+			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.INCREASE_GREEN_POWER_BUTTON_ID)
+			packet.messageServer()
+		}
+			.bounds(rightX - 10, greenY, 10, 10)
+			.build()
+
+		this.decreaseRedStrengthButton = Button.Builder(
+			decreaseComponent
+		) {
+			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.DECREASE_RED_POWER_BUTTON_ID)
+			packet.messageServer()
+		}
+			.bounds(leftX, redY, 10, 10)
+			.build()
+
+		this.increaseRedStrengthButton = Button.Builder(
+			increaseComponent
+		) {
+			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.INCREASE_RED_POWER_BUTTON_ID)
+			packet.messageServer()
+		}
+			.bounds(rightX - 10, redY, 10, 10)
+			.build()
+
+		addRenderableWidget(decreaseGreenStrengthButton)
+		addRenderableWidget(increaseGreenStrengthButton)
+		addRenderableWidget(decreaseRedStrengthButton)
+		addRenderableWidget(increaseRedStrengthButton)
+
 	}
 
 	override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
@@ -41,7 +92,7 @@ class AdvancedRedstoneTorchScreen(
 			font,
 			greenStrengthText,
 			centerX - font.width(greenStrengthText) / 2,
-			10,
+			7,
 			4210752,
 			false
 		)
@@ -50,7 +101,7 @@ class AdvancedRedstoneTorchScreen(
 			font,
 			greenStrength,
 			centerX - font.width(greenStrength) / 2,
-			20,
+			18,
 			4210752,
 			false
 		)
