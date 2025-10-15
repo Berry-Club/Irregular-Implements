@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
@@ -16,6 +17,12 @@ abstract class RedstoneInterfaceBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
 ) : BlockEntity(pBlockEntityType, pPos, pBlockState) {
+
+	override fun setChanged() {
+		super.setChanged()
+
+		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
+	}
 
 	override fun setRemoved() {
 		val level = this.level

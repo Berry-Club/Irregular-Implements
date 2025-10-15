@@ -8,6 +8,7 @@
 ### Fixed
 
 - The Redstone Tool would show an indicator on the linked block twice
+- Redstone-Tool-linkable blocks now properly update on the client when their linked position changes
 
 # 1.4.0
 
