@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 
 object DiviningRodRenderer {
 
-	fun addIndicators(event: ClientTickEvent.Post) {
+	fun addCubeIndicators(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
 		val playerPos = player.blockPosition()
 		val level = player.level()

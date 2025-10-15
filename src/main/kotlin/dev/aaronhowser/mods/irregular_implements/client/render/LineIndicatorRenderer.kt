@@ -2,22 +2,22 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
-import net.minecraft.core.BlockPos
+import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 
-object CubeIndicatorRenderer {
+object LineIndicatorRenderer {
 
-	private class CubeIndicator(val target: BlockPos, var ticksLeft: Int, val color: Int, val size: Float)
+	private class LineIndicator(val start: Vec3, val end: Vec3, var ticksLeft: Int, val color: Int)
 
-	private val cubeIndicators: MutableList<CubeIndicator> = mutableListOf()
+	private val lineIndicators: MutableList<LineIndicator> = mutableListOf()
 
-	fun addIndicator(target: BlockPos, duration: Int, color: Int, size: Float = 0.99f) {
-		cubeIndicators.add(CubeIndicator(target, duration, color, size))
+	fun addIndicator(start: Vec3, end: Vec3, duration: Int, color: Int) {
+		lineIndicators.add(LineIndicator(start, end, duration, color))
 	}
 
-	fun removeIndicatorsAt(target: BlockPos) {
-		cubeIndicators.removeIf { it.target == target }
+	fun removeIndicators(start: Vec3, end: Vec3) {
+		lineIndicators.removeIf { it.start == start && it.end == end }
 	}
 
 	fun afterClientTick(event: ClientTickEvent.Post) {
@@ -28,13 +28,10 @@ object CubeIndicatorRenderer {
 	}
 
 	fun collectIndicators(event: ClientTickEvent.Post) {
-		RedstoneToolRenderer.addCubeIndicators(event)
-		DiviningRodRenderer.addCubeIndicators(event)
-		TargetPositionRenderer.addCubeIndicators(event)
 	}
 
 	private fun tickIndicators() {
-		val iterator = cubeIndicators.iterator()
+		val iterator = lineIndicators.iterator()
 
 		while (iterator.hasNext()) {
 			val indicator = iterator.next()
@@ -49,7 +46,7 @@ object CubeIndicatorRenderer {
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		if (event.stage != RenderLevelStageEvent.Stage.AFTER_LEVEL) return
 
-		if (cubeIndicators.isEmpty()) return
+		if (lineIndicators.isEmpty()) return
 
 		val cameraPos = event.camera.position
 		val poseStack = event.poseStack
@@ -58,13 +55,13 @@ object CubeIndicatorRenderer {
 
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		for (indicator in cubeIndicators) {
-			RenderUtil.renderDebugCube(
-				poseStack,
-				indicator.target.center,
-				indicator.size,
-				indicator.color
-			)
+		for (indicator in lineIndicators) {
+//			RenderUtil.renderDebugCube(
+//				poseStack,
+//				indicator.target.center,
+//				indicator.size,
+//				indicator.color
+//			)
 		}
 
 		poseStack.popPose()

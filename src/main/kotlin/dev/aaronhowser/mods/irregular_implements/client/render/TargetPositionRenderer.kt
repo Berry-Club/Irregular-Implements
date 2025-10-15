@@ -8,7 +8,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 
 object TargetPositionRenderer {
 
-	fun addIndicators(event: ClientTickEvent.Post) {
+	fun addCubeIndicators(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
 
 		fun addIndicator(stack: ItemStack) {

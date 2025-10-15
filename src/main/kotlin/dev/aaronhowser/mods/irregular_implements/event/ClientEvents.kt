@@ -329,11 +329,13 @@ object ClientEvents {
 	@SubscribeEvent
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		CubeIndicatorRenderer.afterClientTick(event)
+		LineIndicatorRenderer.afterClientTick(event)
 	}
 
 	@SubscribeEvent
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		CubeIndicatorRenderer.onRenderLevel(event)
+		LineIndicatorRenderer.onRenderLevel(event)
 	}
 
 }
