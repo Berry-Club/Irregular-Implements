@@ -5,10 +5,12 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.RedstoneTorchBlock
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-class AdvancedRedstoneTorchBlock : RedstoneTorchBlock(Properties.ofFullCopy(Blocks.REDSTONE_TORCH)) {
+class AdvancedRedstoneTorchBlock : RedstoneTorchBlock(Properties.ofFullCopy(Blocks.REDSTONE_TORCH)), EntityBlock {
 
 	override fun getSignal(blockState: BlockState, blockAccess: BlockGetter, pos: BlockPos, side: Direction): Int {
 		val blockEntity = blockAccess.getBlockEntity(pos)
@@ -18,6 +20,10 @@ class AdvancedRedstoneTorchBlock : RedstoneTorchBlock(Properties.ofFullCopy(Bloc
 		}
 
 		return super.getSignal(blockState, blockAccess, pos, side)
+	}
+
+	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+		return AdvancedRedstoneTorchBlockEntity(pos, state)
 	}
 
 }
