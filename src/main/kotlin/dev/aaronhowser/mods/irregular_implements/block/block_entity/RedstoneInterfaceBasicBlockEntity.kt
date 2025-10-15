@@ -2,7 +2,10 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
+import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -54,6 +57,24 @@ class RedstoneInterfaceBasicBlockEntity(
 	override fun updateTargets() {
 		val pos = this.linkedPos ?: return
 		updatePos(pos)
+	}
+
+	override fun clientTick() {
+		val level = this.level ?: return
+		if (!level.isClientSide) return
+
+		val player = ClientUtil.localPlayer ?: return
+		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
+
+		val pos = this.linkedPos
+		if (pos != null) {
+			LineIndicatorRenderer.addIndicator(
+				start = this.blockPos.center,
+				end = pos.center,
+				duration = 2,
+				color = 0xFFFF0000.toInt()
+			)
+		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

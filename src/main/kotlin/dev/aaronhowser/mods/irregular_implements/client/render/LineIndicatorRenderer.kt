@@ -28,7 +28,7 @@ object LineIndicatorRenderer {
 	}
 
 	fun collectIndicators(event: ClientTickEvent.Post) {
-		RedstoneToolRenderer.addLineIndicators(event)
+		// Called in RedstoneInterfaceBasicBlockEntity instead
 	}
 
 	private fun tickIndicators() {

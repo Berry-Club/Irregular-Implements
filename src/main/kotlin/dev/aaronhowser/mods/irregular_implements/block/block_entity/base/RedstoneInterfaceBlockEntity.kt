@@ -22,6 +22,8 @@ abstract class RedstoneInterfaceBlockEntity(
 
 	abstract fun updateTargets()
 
+	open fun clientTick() {}
+
 	fun updatePos(pos: BlockPos) {
 		val level = this.level ?: return
 
@@ -97,6 +99,17 @@ abstract class RedstoneInterfaceBlockEntity(
 						iterator.remove()
 					}
 				}
+			}
+		}
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: RedstoneInterfaceBlockEntity
+		) {
+			if (level.isClientSide) {
+				blockEntity.clientTick()
 			}
 		}
 	}
