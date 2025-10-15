@@ -224,7 +224,7 @@ object ClientEvents {
 
 		event.registerAbove(
 			VanillaGuiLayers.CROSSHAIR,
-			RedstoneToolRenderer.LAYER_NAME,
+			RedstoneToolRenderer.WIRE_STRENGTH_UI_LAYER,
 			RedstoneToolRenderer::tryRenderWireStrength
 		)
 

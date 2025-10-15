@@ -5,17 +5,16 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.RedStoneWireBlock
 import net.neoforged.neoforge.client.event.ClientTickEvent
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent
 
 object RedstoneToolRenderer {
+
+	val WIRE_STRENGTH_UI_LAYER = OtherUtil.modResource("wire_strength")
 
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
@@ -46,8 +45,6 @@ object RedstoneToolRenderer {
 			}
 		}
 	}
-
-	val LAYER_NAME = OtherUtil.modResource("wire_strength")
 
 	fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
 		val player = ClientUtil.localPlayer ?: return
