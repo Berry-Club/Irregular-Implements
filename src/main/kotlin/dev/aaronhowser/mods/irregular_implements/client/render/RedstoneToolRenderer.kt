@@ -16,7 +16,7 @@ object RedstoneToolRenderer {
 
 	val WIRE_STRENGTH_UI_LAYER = OtherUtil.modResource("wire_strength")
 
-	fun afterClientTick(event: ClientTickEvent.Post) {
+	fun addIndicators(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
 
 		val itemInHand = player.mainHandItem

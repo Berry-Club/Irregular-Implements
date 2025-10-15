@@ -6,7 +6,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 
 object TargetPositionRenderer {
 
-	fun afterClientTick(event: ClientTickEvent.Post) {
+	fun addIndicators(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
 
 		val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.GLOBAL_POS)

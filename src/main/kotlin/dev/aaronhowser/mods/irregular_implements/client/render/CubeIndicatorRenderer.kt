@@ -23,7 +23,19 @@ object CubeIndicatorRenderer {
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		if (Minecraft.getInstance().isPaused) return
 
+		collectIndicators(event)
+		tickIndicators()
+	}
+
+	fun collectIndicators(event: ClientTickEvent.Post) {
+		RedstoneToolRenderer.addIndicators(event)
+		DiviningRodRenderer.addIndicators(event)
+		TargetPositionRenderer.addIndicators(event)
+	}
+
+	private fun tickIndicators() {
 		val iterator = indicators.iterator()
+
 		while (iterator.hasNext()) {
 			val indicator = iterator.next()
 			indicator.duration--

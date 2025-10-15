@@ -329,9 +329,6 @@ object ClientEvents {
 	@SubscribeEvent
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		CubeIndicatorRenderer.afterClientTick(event)
-		DiviningRodRenderer.afterClientTick(event)
-		RedstoneToolRenderer.afterClientTick(event)
-		TargetPositionRenderer.afterClientTick(event)
 	}
 
 	@SubscribeEvent
