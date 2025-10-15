@@ -41,7 +41,7 @@ object RedstoneToolRenderer {
 				CubeIndicatorRenderer.addIndicator(
 					linkedPos,
 					1,
-					0x32FF0000
+					0x320000FF
 				)
 			}
 		}

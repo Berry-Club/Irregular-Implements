@@ -1,3 +1,10 @@
+# 1.4.1
+
+### Changed
+
+- When holding a Redstone Tool, linked positions show as blue instead of red now
+  - That is, the block the Tool is linked to is still red. Blocks that the linked blook is linked to are blue
+
 # 1.4.0
 
 ### Changed
