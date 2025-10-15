@@ -24,11 +24,7 @@ object CubeIndicatorRenderer {
 		if (Minecraft.getInstance().isPaused) return
 
 		tickIndicators()
-		collectIndicators(event)
-	}
 
-	fun collectIndicators(event: ClientTickEvent.Post) {
-		RedstoneToolRenderer.addCubeIndicators(event)
 		DiviningRodRenderer.addCubeIndicators(event)
 		TargetPositionRenderer.addCubeIndicators(event)
 	}

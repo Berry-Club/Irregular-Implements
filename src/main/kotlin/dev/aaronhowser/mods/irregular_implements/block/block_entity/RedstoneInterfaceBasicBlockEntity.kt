@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
+import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -66,13 +67,27 @@ class RedstoneInterfaceBasicBlockEntity(
 		val player = ClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
 
-		val pos = this.linkedPos
-		if (pos != null) {
+		CubeIndicatorRenderer.addIndicator(
+			this.blockPos,
+			2,
+			0x32FF0000,
+			size = 0.5f
+		)
+
+		val targetPos = this.linkedPos
+		if (targetPos != null) {
 			LineIndicatorRenderer.addIndicator(
 				start = this.blockPos.center,
-				end = pos.center,
+				end = targetPos.center,
 				duration = 2,
 				color = 0xFFFF0000.toInt()
+			)
+
+			CubeIndicatorRenderer.addIndicator(
+				target = targetPos,
+				duration = 2,
+				color = 0x320000FF,
+				size = 0.5f
 			)
 		}
 	}

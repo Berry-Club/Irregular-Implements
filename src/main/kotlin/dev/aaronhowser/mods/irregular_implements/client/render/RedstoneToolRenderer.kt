@@ -16,63 +16,6 @@ object RedstoneToolRenderer {
 
 	val WIRE_STRENGTH_UI_LAYER = OtherUtil.modResource("wire_strength")
 
-	fun addCubeIndicators(event: ClientTickEvent.Post) {
-		val player = ClientUtil.localPlayer ?: return
-
-		val itemInHand = player.mainHandItem
-		if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
-
-		val toolLocation = itemInHand.get(ModDataComponents.GLOBAL_POS) ?: return
-		if (toolLocation.dimension != player.level().dimension()) return
-
-		val toolBlockPos = toolLocation.pos
-
-		CubeIndicatorRenderer.addIndicator(
-			toolBlockPos,
-			1,
-			0x32FF0000,
-			size = 0.5f
-		)
-
-		val toolBlockEntity = player.level().getBlockEntity(toolLocation.pos) as? RedstoneToolLinkable
-		if (toolBlockEntity != null) {
-			val linkedPos = toolBlockEntity.getLinkedPos()
-			if (linkedPos != null) {
-				CubeIndicatorRenderer.addIndicator(
-					linkedPos,
-					1,
-					0x320000FF,
-					size = 0.5f
-				)
-			}
-		}
-	}
-
-	fun addLineIndicators(event: ClientTickEvent.Post) {
-		val player = ClientUtil.localPlayer ?: return
-
-		val itemInHand = player.mainHandItem
-		if (!itemInHand.`is`(ModItems.REDSTONE_TOOL)) return
-
-		val toolLocation = itemInHand.get(ModDataComponents.GLOBAL_POS) ?: return
-		if (toolLocation.dimension != player.level().dimension()) return
-
-		val toolBlockPos = toolLocation.pos
-
-		val toolBlockEntity = player.level().getBlockEntity(toolBlockPos) as? RedstoneToolLinkable ?: return
-
-		val linkedPos = toolBlockEntity.getLinkedPos()
-
-		if (linkedPos != null) {
-			LineIndicatorRenderer.addIndicator(
-				toolBlockPos.center,
-				linkedPos.center,
-				1,
-				0x66FF0000.toInt(),
-			)
-		}
-	}
-
 	fun tryRenderWireStrength(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
 		val player = ClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
