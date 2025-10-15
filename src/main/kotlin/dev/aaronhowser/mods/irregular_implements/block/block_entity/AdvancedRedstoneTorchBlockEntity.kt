@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_torch.AdvancedRedstoneTorchMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -43,6 +44,15 @@ class AdvancedRedstoneTorchBlockEntity(
 		}
 
 		override fun getCount(): Int = CONTAINER_DATA_SIZE
+	}
+
+	override fun setChanged() {
+		super.setChanged()
+
+		level?.updateNeighborsAt(worldPosition, blockState.block)
+		for (dir in Direction.entries) {
+			level?.updateNeighborsAt(worldPosition.relative(dir), blockState.block)
+		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
