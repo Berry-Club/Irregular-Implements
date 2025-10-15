@@ -114,7 +114,7 @@ class EnergyDistributorBlockEntity(
 	companion object {
 		val DIRECTIONS_OR_NULL = Direction.entries + null
 
-		fun getCapability(energyDistributor: EnergyDistributorBlockEntity, direction: Direction?): IEnergyStorage {
+		fun getEnergyCapability(energyDistributor: EnergyDistributorBlockEntity, direction: Direction?): IEnergyStorage {
 			return energyDistributor.getEnergyHandler(direction)
 		}
 

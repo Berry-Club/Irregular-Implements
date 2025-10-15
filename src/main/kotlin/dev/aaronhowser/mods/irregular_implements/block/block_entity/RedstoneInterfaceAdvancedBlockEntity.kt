@@ -9,7 +9,10 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.items.wrapper.InvWrapper
 
 class RedstoneInterfaceAdvancedBlockEntity(
 	pPos: BlockPos,
@@ -17,6 +20,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 ) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState) {
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val invWrapper = InvWrapper(container)
 
 	fun getLinkedPositions(): List<BlockPos> {
 		val positions = mutableListOf<BlockPos>()
@@ -73,8 +77,17 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		}
 	}
 
+	fun getItemHandler(direction: Direction?): IItemHandler = invWrapper
+
 	companion object {
 		const val CONTAINER_SIZE = 9
+
+		fun getItemCapability(
+			advancedRedstoneInterface: RedstoneInterfaceAdvancedBlockEntity,
+			direction: Direction?
+		): IItemHandler {
+			return advancedRedstoneInterface.getItemHandler(direction)
+		}
 	}
 
 }

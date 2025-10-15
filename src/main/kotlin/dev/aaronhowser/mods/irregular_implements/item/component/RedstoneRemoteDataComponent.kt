@@ -28,7 +28,7 @@ data class RedstoneRemoteDataComponent(
 	companion object {
 		const val HORIZONTAL_SLOT_COUNT: Int = 9
 
-		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler {
+		fun getItmeCapability(stack: ItemStack, any: Any?): ItemStackHandler {
 			return object : ItemInventoryItemHandler<RedstoneRemoteDataComponent>(stack, ModDataComponents.REDSTONE_REMOTE.get()) {
 				override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
 					if (slot <= HORIZONTAL_SLOT_COUNT) return stack.has(ModDataComponents.GLOBAL_POS)

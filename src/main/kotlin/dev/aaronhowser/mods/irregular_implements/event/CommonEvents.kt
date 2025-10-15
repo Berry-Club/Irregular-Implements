@@ -193,61 +193,67 @@ object CommonEvents {
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
 			ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(),
-			SpectreEnergyInjectorBlockEntity::getCapability
+			SpectreEnergyInjectorBlockEntity::getEnergyCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
 			ModBlockEntityTypes.SPECTRE_COIL.get(),
-			SpectreCoilBlockEntity::getCapability
+			SpectreCoilBlockEntity::getEnergyCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
 			ModBlockEntityTypes.PLAYER_INTERFACE.get(),
-			PlayerInterfaceBlockEntity::getCapability
+			PlayerInterfaceBlockEntity::getItemCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
 			ModBlockEntityTypes.IMBUING_STATION.get(),
-			ImbuingStationBlockEntity::getCapability
+			ImbuingStationBlockEntity::getItemCapability
 		)
 
 		event.registerItem(
 			Capabilities.ItemHandler.ITEM,
-			RedstoneRemoteDataComponent::getCapability,
+			RedstoneRemoteDataComponent::getItmeCapability,
 			ModItems.REDSTONE_REMOTE.get()
 		)
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
 			ModBlockEntityTypes.ENERGY_DISTRIBUTOR.get(),
-			EnergyDistributorBlockEntity::getCapability
+			EnergyDistributorBlockEntity::getEnergyCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
 			ModBlockEntityTypes.ENDER_ENERGY_DISTRIBUTOR.get(),
-			EnderEnergyDistributorBlockEntity::getCapability
+			EnderEnergyDistributorBlockEntity::getEnergyCapability
 		)
 
 		event.registerItem(
 			Capabilities.ItemHandler.ITEM,
-			EnderLetterContentsDataComponent::getCapability,
+			EnderLetterContentsDataComponent::getItemCapability,
 			ModItems.ENDER_LETTER.get(),
 		)
 
 		event.registerBlock(
 			Capabilities.FluidHandler.BLOCK,
-			PitcherPlantBlock::getCapability,
+			PitcherPlantBlock::getFluidCapability,
 			ModBlocks.PITCHER_PLANT.get()
 		)
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
 			ModBlockEntityTypes.AUTO_PLACER.get(),
-			AutoPlacerBlockEntity::getCapability,
+			AutoPlacerBlockEntity::getItemCapability,
+		)
+
+		event.registerBlockEntity(
+			Capabilities.ItemHandler.BLOCK,
+			ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(),
+			RedstoneInterfaceAdvancedBlockEntity::getItemCapability,
 		)
 
 	}

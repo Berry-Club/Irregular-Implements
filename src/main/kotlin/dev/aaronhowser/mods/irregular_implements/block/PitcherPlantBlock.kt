@@ -112,7 +112,7 @@ class PitcherPlantBlock : FlowerBlock(
 			}
 		}
 
-		fun getCapability(level: Level, pos: BlockPos, state: BlockState, entity: BlockEntity?, direction: Direction): IFluidHandler {
+		fun getFluidCapability(level: Level, pos: BlockPos, state: BlockState, entity: BlockEntity?, direction: Direction): IFluidHandler {
 			return INFINITE_WATER_HANDLER
 		}
 

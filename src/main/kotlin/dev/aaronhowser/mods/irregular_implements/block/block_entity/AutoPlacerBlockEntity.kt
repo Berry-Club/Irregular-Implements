@@ -141,7 +141,7 @@ class AutoPlacerBlockEntity(
 
 		private const val FAKE_PLAYER_NAME = "IrregularImplementsAutoPlacer"
 
-		fun getCapability(autoPlacer: AutoPlacerBlockEntity, direction: Direction?): IItemHandler {
+		fun getItemCapability(autoPlacer: AutoPlacerBlockEntity, direction: Direction?): IItemHandler {
 			return autoPlacer.getItemHandler()
 		}
 

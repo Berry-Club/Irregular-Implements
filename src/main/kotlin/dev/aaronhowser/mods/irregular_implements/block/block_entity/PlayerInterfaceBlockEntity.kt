@@ -133,7 +133,7 @@ class PlayerInterfaceBlockEntity(
 		const val OWNER_UUID_NBT = "OwnerUuid"
 		const val OWNER_HEAD_NBT = "OwnerHead"
 
-		fun getCapability(playerInterfaceBlockEntity: PlayerInterfaceBlockEntity, direction: Direction?): IItemHandler? {
+		fun getItemCapability(playerInterfaceBlockEntity: PlayerInterfaceBlockEntity, direction: Direction?): IItemHandler? {
 			return playerInterfaceBlockEntity.getItemHandler(direction)
 		}
 

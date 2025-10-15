@@ -41,7 +41,7 @@ data class EnderLetterContentsDataComponent(
 	companion object {
 		const val INVENTORY_SIZE: Int = 9
 
-		fun getCapability(stack: ItemStack, any: Any?): ItemStackHandler {
+		fun getItemCapability(stack: ItemStack, any: Any?): ItemStackHandler {
 			return ItemInventoryItemHandler(stack, ModDataComponents.ENDER_LETTER_CONTENTS.get())
 		}
 

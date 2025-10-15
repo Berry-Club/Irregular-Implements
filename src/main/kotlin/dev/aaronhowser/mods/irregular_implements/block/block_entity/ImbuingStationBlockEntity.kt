@@ -164,7 +164,7 @@ class ImbuingStationBlockEntity(
 			blockEntity.tick()
 		}
 
-		fun getCapability(imbuingStation: ImbuingStationBlockEntity, direction: Direction?): IItemHandler? {
+		fun getItemCapability(imbuingStation: ImbuingStationBlockEntity, direction: Direction?): IItemHandler? {
 			return imbuingStation.getItemHandler(direction)
 		}
 
