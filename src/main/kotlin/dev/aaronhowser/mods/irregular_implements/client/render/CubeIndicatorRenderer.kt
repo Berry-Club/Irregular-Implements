@@ -59,7 +59,7 @@ object CubeIndicatorRenderer {
 		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
 		for (indicator in cubeIndicators) {
-			RenderUtil.renderDebugCube(
+			RenderUtil.renderCubeThroughWalls(
 				poseStack,
 				indicator.target.center,
 				indicator.size,

@@ -68,7 +68,7 @@ object RedstoneToolRenderer {
 				toolBlockPos.center,
 				linkedPos.center,
 				1,
-				0x8000FFFF.toInt(),
+				0x66FF0000.toInt(),
 			)
 		}
 	}

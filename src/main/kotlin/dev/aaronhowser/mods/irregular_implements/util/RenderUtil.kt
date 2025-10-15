@@ -203,7 +203,7 @@ object RenderUtil {
 		width: Float,
 		color: Int
 	) {
-		renderDebugCube(
+		renderCubeThroughWalls(
 			poseStack,
 			center.x - width / 2,
 			center.y - width / 2,
@@ -215,7 +215,7 @@ object RenderUtil {
 		)
 	}
 
-	fun renderDebugCube(
+	fun renderCubeThroughWalls(
 		poseStack: PoseStack,
 		posX: Number,
 		posY: Number,
