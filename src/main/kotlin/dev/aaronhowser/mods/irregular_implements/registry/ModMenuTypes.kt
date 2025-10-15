@@ -5,6 +5,8 @@ import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.Ad
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_interface.AdvancedRedstoneInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_interface.AdvancedRedstoneInterfaceScreen
+import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_torch.AdvancedRedstoneTorchMenu
+import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_torch.AdvancedRedstoneTorchScreen
 import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerMenu
 import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerScreen
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
@@ -111,6 +113,8 @@ object ModMenuTypes {
 		register("entity_detector", ::EntityDetectorMenu)
 	val ADVANCED_REDSTONE_INTERFACE: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneInterfaceMenu>> =
 		register("advanced_redstone_interface", ::AdvancedRedstoneInterfaceMenu)
+	val ADVANCED_REDSTONE_TORCH: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneTorchMenu>> =
+		register("advanced_redstone_torch", ::AdvancedRedstoneTorchMenu)
 
 	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
 		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
@@ -141,6 +145,7 @@ object ModMenuTypes {
 		event.register(AUTO_PLACER.get(), ::AutoPlacerScreen)
 		event.register(ENTITY_DETECTOR.get(), ::EntityDetectorScreen)
 		event.register(ADVANCED_REDSTONE_INTERFACE.get(), ::AdvancedRedstoneInterfaceScreen)
+		event.register(ADVANCED_REDSTONE_TORCH.get(), ::AdvancedRedstoneTorchScreen)
 	}
 
 }
