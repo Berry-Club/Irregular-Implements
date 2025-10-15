@@ -113,6 +113,12 @@ object ModBlockEntityTypes {
 		register("biome_radar", ::BiomeRadarBlockEntity, ModBlocks.BIOME_RADAR)
 	val ENTITY_DETECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<EntityDetectorBlockEntity>> =
 		register("entity_detector", ::EntityDetectorBlockEntity, ModBlocks.ENTITY_DETECTOR)
+	val ADVANCED_REDSTONE_TORCH: DeferredHolder<BlockEntityType<*>, BlockEntityType<AdvancedRedstoneTorchBlockEntity>> =
+		register(
+			"advanced_redstone_torch",
+			::AdvancedRedstoneTorchBlockEntity,
+			ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_REDSTONE_WALL_TORCH
+		)
 
 	private fun <T : BlockEntity> register(
 		name: String,
