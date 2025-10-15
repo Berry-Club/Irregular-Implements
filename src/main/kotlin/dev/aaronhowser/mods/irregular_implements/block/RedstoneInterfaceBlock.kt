@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceAdvancedBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceBasicBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
@@ -17,15 +19,19 @@ class RedstoneInterfaceBlock(
 ) {
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-		return RedstoneInterfaceBasicBlockEntity(pos, state)
+		return if (isAdvanced) {
+			RedstoneInterfaceAdvancedBlockEntity(pos, state)
+		} else {
+			RedstoneInterfaceBasicBlockEntity(pos, state)
+		}
 	}
 
 	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, neighborBlock: Block, neighborPos: BlockPos, movedByPiston: Boolean) {
 		super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
 
 		val blockEntity = level.getBlockEntity(pos)
-		if (blockEntity is RedstoneInterfaceBasicBlockEntity) {
-			blockEntity.updateTarget()
+		if (blockEntity is RedstoneInterfaceBlockEntity) {
+			blockEntity.updateTargets()
 		}
 	}
 

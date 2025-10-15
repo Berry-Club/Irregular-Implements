@@ -51,19 +51,9 @@ class RedstoneInterfaceBasicBlockEntity(
 		setChanged()
 	}
 
-	fun updateTarget() {
+	override fun updateTargets() {
 		val pos = this.linkedPos ?: return
 		updatePos(pos)
-	}
-
-	fun updatePos(pos: BlockPos) {
-		val level = this.level ?: return
-
-		if (level.isLoaded(pos)) {
-			val linkedState = level.getBlockState(pos)
-			linkedState.handleNeighborChanged(level, pos, this.blockState.block, pos, false)
-			level.updateNeighborsAt(pos, linkedState.block)
-		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

@@ -20,6 +20,18 @@ abstract class RedstoneInterfaceBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(blockEntityType, pos, blockState) {
 
+	abstract fun updateTargets()
+
+	fun updatePos(pos: BlockPos) {
+		val level = this.level ?: return
+
+		if (level.isLoaded(pos)) {
+			val linkedState = level.getBlockState(pos)
+			linkedState.handleNeighborChanged(level, pos, this.blockState.block, pos, false)
+			level.updateNeighborsAt(pos, linkedState.block)
+		}
+	}
+
 	override fun setChanged() {
 		super.setChanged()
 

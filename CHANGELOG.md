@@ -1,5 +1,9 @@
 # 1.5.0
 
+### Added
+
+- Advanced Redstone Interface
+
 ### Changed
 
 - Renamed the Basic Redstone Interface block entity id from `redstone_interface` to `basic_redstone_interface`
