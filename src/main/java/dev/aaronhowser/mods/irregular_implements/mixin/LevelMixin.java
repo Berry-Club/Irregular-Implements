@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier;
 import dev.aaronhowser.mods.irregular_implements.RedstoneInterfaceCarrier;
 import dev.aaronhowser.mods.irregular_implements.SlimeCubeCarrier;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
-import dev.aaronhowser.mods.irregular_implements.handler.WirelessRedstoneHandler;
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -82,7 +82,7 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 
 	@Override
 	public int irregular_implements$getLinkedInterfacePower(BlockPos blockPos, @Nullable Direction direction) {
-		return WirelessRedstoneHandler
+		return RedstoneInterfaceBlockEntity
 				.getLinkedPower(
 						(Level) (Object) this,
 						direction == null

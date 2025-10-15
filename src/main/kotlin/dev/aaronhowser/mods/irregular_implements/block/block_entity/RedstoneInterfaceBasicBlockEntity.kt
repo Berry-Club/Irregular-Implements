@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
-import dev.aaronhowser.mods.irregular_implements.handler.WirelessRedstoneHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -27,7 +26,7 @@ class RedstoneInterfaceBasicBlockEntity(
 
 		val oldPos = linkedPos
 		if (oldPos != null) {
-			WirelessRedstoneHandler.unlinkBlock(
+			unlinkBlock(
 				level = level,
 				interfacePos = this.blockPos,
 				targetPos = oldPos
@@ -37,7 +36,7 @@ class RedstoneInterfaceBasicBlockEntity(
 		}
 
 		if (pos != null) {
-			WirelessRedstoneHandler.linkBlock(
+			linkBlock(
 				level = level,
 				interfacePos = this.blockPos,
 				targetPos = pos
@@ -45,7 +44,7 @@ class RedstoneInterfaceBasicBlockEntity(
 
 			updatePos(pos)
 		} else {
-			WirelessRedstoneHandler.removeInterface(level, this.blockPos)
+			removeInterface(level, this.blockPos)
 		}
 
 		linkedPos = pos
