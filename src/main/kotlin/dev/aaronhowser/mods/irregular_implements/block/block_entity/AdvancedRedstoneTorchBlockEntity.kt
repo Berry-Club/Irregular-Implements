@@ -13,24 +13,24 @@ class AdvancedRedstoneTorchBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_TORCH.get(), pos, blockState) {
 
-	private var strengthLit: Int = 15
-	private var strengthUnlit: Int = 4
+	private var strengthGreen: Int = 15
+	private var strengthRed: Int = 4
 
-	fun getStrength(isLit: Boolean): Int = if (isLit) strengthLit else strengthUnlit
+	fun getStrength(isLit: Boolean): Int = if (isLit) strengthGreen else strengthRed
 
 	private val containerData = object : ContainerData {
 		override fun get(index: Int): Int {
 			return when (index) {
-				STRENGTH_LIT_INDEX -> strengthLit
-				STRENGTH_UNLIT_INDEX -> strengthUnlit
+				STRENGTH_LIT_INDEX -> strengthGreen
+				STRENGTH_UNLIT_INDEX -> strengthRed
 				else -> 0
 			}
 		}
 
 		override fun set(index: Int, value: Int) {
 			when (index) {
-				STRENGTH_LIT_INDEX -> strengthLit = value.coerceIn(0, 15)
-				STRENGTH_UNLIT_INDEX -> strengthUnlit = value.coerceIn(0, 15)
+				STRENGTH_LIT_INDEX -> strengthGreen = value.coerceIn(0, 15)
+				STRENGTH_UNLIT_INDEX -> strengthRed = value.coerceIn(0, 15)
 			}
 
 			setChanged()
@@ -42,15 +42,15 @@ class AdvancedRedstoneTorchBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putInt(STRENGTH_LIT_NBT, strengthLit)
-		tag.putInt(STRENGTH_UNLIT_NBT, strengthUnlit)
+		tag.putInt(STRENGTH_GREEN_NBT, strengthGreen)
+		tag.putInt(STRENGTH_RED_NBT, strengthRed)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		strengthLit = tag.getInt(STRENGTH_LIT_NBT).coerceIn(0, 15)
-		strengthUnlit = tag.getInt(STRENGTH_UNLIT_NBT).coerceIn(0, 15)
+		strengthGreen = tag.getInt(STRENGTH_GREEN_NBT).coerceIn(0, 15)
+		strengthRed = tag.getInt(STRENGTH_RED_NBT).coerceIn(0, 15)
 	}
 
 	companion object {
@@ -58,8 +58,8 @@ class AdvancedRedstoneTorchBlockEntity(
 		const val STRENGTH_UNLIT_INDEX = 1
 		const val CONTAINER_DATA_SIZE = 2
 
-		const val STRENGTH_LIT_NBT = "StrengthLit"
-		const val STRENGTH_UNLIT_NBT = "StrengthUnlit"
+		const val STRENGTH_GREEN_NBT = "StrengthGreen"
+		const val STRENGTH_RED_NBT = "StrengthRed"
 	}
 
 }
