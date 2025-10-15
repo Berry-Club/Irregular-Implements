@@ -14,6 +14,10 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
 
 	protected abstract val background: ScreenTextures.Background
 
+	override fun isPauseScreen(): Boolean = false
+	protected open val showTitleLabel = true
+	protected open val showInventoryLabel = true
+
 	protected val rightPos: Int
 		get() = this.leftPos + this.imageWidth
 	protected val bottomPos: Int
@@ -29,16 +33,7 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
 		baseInit()
 	}
 
-	open fun baseInit() {
-
-	}
-
-	override fun isPauseScreen(): Boolean {
-		return false
-	}
-
-	protected open val showTitleLabel = true
-	protected open val showInventoryLabel = true
+	open fun baseInit() {}
 
 	override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
 		if (showTitleLabel) {
