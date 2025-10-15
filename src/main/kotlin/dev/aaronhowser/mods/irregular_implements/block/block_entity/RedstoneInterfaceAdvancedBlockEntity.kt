@@ -12,7 +12,9 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.LongArrayTag
 import net.minecraft.world.ContainerHelper
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.items.wrapper.InvWrapper
@@ -70,6 +72,8 @@ class RedstoneInterfaceAdvancedBlockEntity(
 
 			updatePos(pos)
 		}
+
+		level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
 	override fun updateTargets() {
@@ -119,6 +123,11 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
+		if (linkedPositions.isNotEmpty()) {
+			val longArrayTag = LongArrayTag(linkedPositions.map(BlockPos::asLong))
+			tag.put(LINKS_NBT, longArrayTag)
+		}
+
 		ContainerHelper.saveAllItems(tag, container.items, registries)
 	}
 
@@ -126,15 +135,19 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		ContainerHelper.loadAllItems(tag, container.items, registries)
-	}
 
-	override fun setChanged() {
-
-
-		super.setChanged()
+		linkedPositions.clear()
+		if (tag.contains(LINKS_NBT)) {
+			val longArrayTag = tag.getLongArray(LINKS_NBT)
+			for (long in longArrayTag) {
+				linkedPositions.add(BlockPos.of(long))
+			}
+		}
 	}
 
 	companion object {
+		const val LINKS_NBT = "Links"
+
 		const val CONTAINER_SIZE = 9
 
 		fun getItemCapability(
