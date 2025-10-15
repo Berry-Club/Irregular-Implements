@@ -4,6 +4,8 @@
 
 - When holding a Redstone Tool, linked positions show as blue instead of red now
   - That is, the block the Tool is linked to is still red. Blocks that the linked blook is linked to are blue
+- When holding a Redstone Tool, a line links the linked block to the block it's linked to
+  - For example, connecting betwen a Redstone Interface and the block it's sending a signal to
 
 ### Fixed
 

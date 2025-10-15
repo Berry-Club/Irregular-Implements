@@ -15,7 +15,7 @@ object ModRenderTypes {
 			"${IrregularImplements.ID}:line_through_wall",
 			DefaultVertexFormat.POSITION_COLOR_NORMAL,
 			VertexFormat.Mode.LINES,
-			256,
+			1536,
 			true,
 			false,
 			RenderType.CompositeState.builder()

@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.aaronhowser.mods.irregular_implements.client.render.ModRenderTypes
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderStateShard.*
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
@@ -18,7 +17,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.fluids.FluidStack
 import org.joml.Quaternionf
 import org.joml.Vector3f
-import java.util.*
 import kotlin.math.sqrt
 
 object RenderUtil {
@@ -169,16 +167,21 @@ object RenderUtil {
 			.bufferSource()
 			.getBuffer(ModRenderTypes.linesThroughWalls())
 
-		poseStack.pushPose()
-
 		val pose = poseStack.last()
+
+		val normalVec = start.vectorTo(end).normalize()
+
+		poseStack.pushPose()
 
 		addVertex(
 			pose,
 			vertexConsumer,
 			color,
 			start.x.toFloat(), start.y.toFloat(), start.z.toFloat(),
-			0f, 0f
+			0f, 0f,
+			normalX = normalVec.x.toFloat(),
+			normalY = normalVec.y.toFloat(),
+			normalZ = normalVec.z.toFloat()
 		)
 
 		addVertex(
@@ -186,7 +189,10 @@ object RenderUtil {
 			vertexConsumer,
 			color,
 			end.x.toFloat(), end.y.toFloat(), end.z.toFloat(),
-			0f, 0f
+			0f, 0f,
+			normalX = normalVec.x.toFloat(),
+			normalY = normalVec.y.toFloat(),
+			normalZ = normalVec.z.toFloat()
 		)
 
 		poseStack.popPose()
