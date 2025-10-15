@@ -68,7 +68,7 @@ class RedstoneToolItem(properties: Properties) : Item(properties) {
 		}
 
 		//FIXME: Not updating on client?
-		baseBlockEntity.linkedPos = clickedPos
+		baseBlockEntity.setLinkedPos(clickedPos)
 
 		player.status(
 			ModMessageLang.REDSTONE_TOOL_LINKED

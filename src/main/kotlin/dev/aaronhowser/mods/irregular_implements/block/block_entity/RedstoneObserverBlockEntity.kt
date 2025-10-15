@@ -28,30 +28,33 @@ class RedstoneObserverBlockEntity(
 		super.setRemoved()
 	}
 
-	override var linkedPos: BlockPos? = null
-		set(value) {
-			val oldField = field
-			if (oldField != null) {
-				unlinkBlock(
-					level = this.level!!,
-					observerPos = this.blockPos,
-					targetPos = oldField
-				)
-			}
+	private var linkedPos: BlockPos? = null
 
-			if (value != null) {
-				linkBlock(
-					level = this.level!!,
-					observerPos = this.blockPos,
-					targetPos = value
-				)
-			} else {
-				removeObserver(this.level!!, this.blockPos)
-			}
+	override fun getLinkedPos(): BlockPos? = linkedPos
 
-			field = value
-			setChanged()
+	override fun setLinkedPos(pos: BlockPos?) {
+		val oldPos = linkedPos
+		if (oldPos != null) {
+			unlinkBlock(
+				level = this.level!!,
+				observerPos = this.blockPos,
+				targetPos = oldPos
+			)
 		}
+
+		if (pos != null) {
+			linkBlock(
+				level = this.level!!,
+				observerPos = this.blockPos,
+				targetPos = pos
+			)
+		} else {
+			removeObserver(this.level!!, this.blockPos)
+		}
+
+		linkedPos = pos
+		setChanged()
+	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)

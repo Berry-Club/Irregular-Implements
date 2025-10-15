@@ -22,7 +22,7 @@ class RedstoneInterfaceBasicBlock : EntityBlock, Block(
 		super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston)
 
 		val blockEntity = level.getBlockEntity(pos) as? RedstoneInterfaceBasicBlockEntity ?: return
-		val linkedPos = blockEntity.linkedPos ?: return
+		val linkedPos = blockEntity.getLinkedPos() ?: return
 
 		if (level.isLoaded(linkedPos)) {
 			val linkedState = level.getBlockState(linkedPos)

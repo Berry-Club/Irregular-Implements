@@ -23,7 +23,7 @@ class RedstoneObserverBlock : EntityBlock, Block(
 
 	override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
 		val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		val linkedPos = blockEntity.linkedPos ?: return 0
+		val linkedPos = blockEntity.getLinkedPos() ?: return 0
 		if (!level.isLoaded(linkedPos)) return 0
 
 		return level
@@ -33,7 +33,7 @@ class RedstoneObserverBlock : EntityBlock, Block(
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		val linkedPos = blockEntity.linkedPos ?: return 0
+		val linkedPos = blockEntity.getLinkedPos() ?: return 0
 		if (level is Level && !level.isLoaded(linkedPos)) return 0
 
 		return level
@@ -43,7 +43,7 @@ class RedstoneObserverBlock : EntityBlock, Block(
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		val blockEntity = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		val linkedPos = blockEntity.linkedPos ?: return 0
+		val linkedPos = blockEntity.getLinkedPos() ?: return 0
 		if (level is Level && !level.isLoaded(linkedPos)) return 0
 
 		return level

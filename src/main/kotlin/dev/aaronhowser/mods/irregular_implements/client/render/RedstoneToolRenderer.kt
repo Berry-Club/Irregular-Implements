@@ -36,7 +36,7 @@ object RedstoneToolRenderer {
 
 		val toolBlockEntity = player.level().getBlockEntity(toolLocation.pos) as? RedstoneToolLinkable
 		if (toolBlockEntity != null) {
-			val linkedPos = toolBlockEntity.linkedPos
+			val linkedPos = toolBlockEntity.getLinkedPos()
 			if (linkedPos != null) {
 				CubeIndicatorRenderer.addIndicator(
 					linkedPos,
