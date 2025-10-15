@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.particles.DustParticleOptions
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
@@ -113,9 +114,17 @@ class BiomeRadarBlockEntity(
 			this.blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03).scale(flameProgress)
 		}
 
+		val colorInt = if (biomePos == null) {
+			0x333333
+		} else {
+			getBiomeStack().get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0x00FF00
+		}
+
+		val colorVec = Vec3.fromRGB24(colorInt).toVector3f()
+
 		for (pos in particlePositions) {
 			level.addParticle(
-				ModParticleTypes.FLOO_FLAME.get(),
+				DustParticleOptions(colorVec, 2f),
 				pos.x, pos.y, pos.z,
 				direction.x, 0.05, direction.z
 			)
