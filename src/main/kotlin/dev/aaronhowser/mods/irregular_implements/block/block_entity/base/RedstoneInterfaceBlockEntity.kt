@@ -13,8 +13,6 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import org.antlr.v4.runtime.misc.MultiMap
-import kotlin.collections.component1
-import kotlin.collections.component2
 
 abstract class RedstoneInterfaceBlockEntity(
 	pBlockEntityType: BlockEntityType<*>,

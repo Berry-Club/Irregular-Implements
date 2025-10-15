@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 
 public interface SlimeCubeCarrier {
 
-	@SuppressWarnings("unused")	// it lies, it's called in SlimeCubeBlockEntity
+	@SuppressWarnings("unused")    // it lies, it's called in SlimeCubeBlockEntity
 	default LongOpenHashSet irregular_implements$getSlimeCubePositions() {
 		throw new IllegalStateException();
 	}

@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
-import net.minecraft.tags.BlockTags
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item

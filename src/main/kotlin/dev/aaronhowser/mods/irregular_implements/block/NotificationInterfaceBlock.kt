@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.AutoPlacerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.NotificationInterfaceBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
