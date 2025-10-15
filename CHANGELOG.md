@@ -3,6 +3,7 @@
 ### Added
 
 - Advanced Redstone Interface
+- Advanced Redstone Torch
 
 ### Changed
 
