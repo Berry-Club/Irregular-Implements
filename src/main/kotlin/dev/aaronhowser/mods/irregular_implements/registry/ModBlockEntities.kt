@@ -18,8 +18,10 @@ object ModBlockEntities {
 
 	val RAIN_SHIELD: DeferredHolder<BlockEntityType<*>, BlockEntityType<RainShieldBlockEntity>> =
 		register("rain_shield", ::RainShieldBlockEntity, ModBlocks.RAIN_SHIELD)
-	val REDSTONE_INTERFACE: DeferredHolder<BlockEntityType<*>, BlockEntityType<RedstoneInterfaceBasicBlockEntity>> =
-		register("redstone_interface", ::RedstoneInterfaceBasicBlockEntity, ModBlocks.BASIC_REDSTONE_INTERFACE)
+	val BASIC_REDSTONE_INTERFACE: DeferredHolder<BlockEntityType<*>, BlockEntityType<RedstoneInterfaceBasicBlockEntity>> =
+		register("basic_redstone_interface", ::RedstoneInterfaceBasicBlockEntity, ModBlocks.BASIC_REDSTONE_INTERFACE)
+	val ADVANCED_REDSTONE_INTERFACE: DeferredHolder<BlockEntityType<*>, BlockEntityType<RedstoneInterfaceAdvancedBlockEntity>> =
+		register("advanced_redstone_interface", ::RedstoneInterfaceAdvancedBlockEntity, ModBlocks.ADVANCED_REDSTONE_INTERFACE)
 	val REDSTONE_OBSERVER: DeferredHolder<BlockEntityType<*>, BlockEntityType<RedstoneObserverBlockEntity>> =
 		register("redstone_observer", ::RedstoneObserverBlockEntity, ModBlocks.REDSTONE_OBSERVER)
 	val BLOCK_DESTABILIZER: DeferredHolder<BlockEntityType<*>, BlockEntityType<BlockDestabilizerBlockEntity>> =

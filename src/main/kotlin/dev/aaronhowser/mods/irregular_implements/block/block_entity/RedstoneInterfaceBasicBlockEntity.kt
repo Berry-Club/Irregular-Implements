@@ -12,7 +12,7 @@ class RedstoneInterfaceBasicBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
 ) : RedstoneInterfaceBlockEntity(
-	ModBlockEntities.REDSTONE_INTERFACE.get(),
+	ModBlockEntities.BASIC_REDSTONE_INTERFACE.get(),
 	pPos,
 	pBlockState
 ), RedstoneToolLinkable {

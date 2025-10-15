@@ -15,10 +15,10 @@ import net.minecraft.world.level.block.state.BlockState
 import org.antlr.v4.runtime.misc.MultiMap
 
 abstract class RedstoneInterfaceBlockEntity(
-	pBlockEntityType: BlockEntityType<*>,
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(pBlockEntityType, pPos, pBlockState) {
+	blockEntityType: BlockEntityType<*>,
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(blockEntityType, pos, blockState) {
 
 	override fun setChanged() {
 		super.setChanged()

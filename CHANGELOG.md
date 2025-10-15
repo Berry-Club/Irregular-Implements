@@ -2,6 +2,8 @@
 
 ### Changed
 
+- Renamed the Basic Redstone Interface block entity id from `redstone_interface` to `basic_redstone_interface`
+  - This is a breaking change, any existing Redstone Interfaces will have their data lost
 - When holding a Redstone Tool, linked positions show as blue instead of red now
   - That is, the block the Tool is linked to is still red. Blocks that the linked blook is linked to are blue
 - When holding a Redstone Tool, a line links the linked block to the block it's linked to
