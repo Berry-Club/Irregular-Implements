@@ -1,7 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
+import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
+import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -55,6 +59,38 @@ class RedstoneObserverBlockEntity(
 
 		linkedPos = pos
 		setChanged()
+	}
+
+	fun clientTick() {
+		val level = this.level ?: return
+		if (!level.isClientSide) return
+
+		val player = ClientUtil.localPlayer ?: return
+		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
+
+		CubeIndicatorRenderer.addIndicator(
+			this.blockPos,
+			2,
+			0x32FF0000,
+			size = 0.5f
+		)
+
+		val targetPos = this.linkedPos
+		if (targetPos != null) {
+			LineIndicatorRenderer.addIndicator(
+				start = this.blockPos.center,
+				end = targetPos.center,
+				duration = 2,
+				color = 0xFFFF0000.toInt()
+			)
+
+			CubeIndicatorRenderer.addIndicator(
+				target = targetPos,
+				duration = 2,
+				color = 0x320000FF,
+				size = 0.5f
+			)
+		}
 	}
 
 	override fun setChanged() {
@@ -127,6 +163,16 @@ class RedstoneObserverBlockEntity(
 			}
 		}
 
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: RedstoneObserverBlockEntity
+		) {
+			if (level.isClientSide) {
+				blockEntity.clientTick()
+			}
+		}
 	}
 
 }
