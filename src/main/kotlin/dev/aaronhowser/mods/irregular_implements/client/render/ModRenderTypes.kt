@@ -3,17 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.VertexFormat
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import net.minecraft.client.renderer.RenderStateShard.COLOR_WRITE
-import net.minecraft.client.renderer.RenderStateShard.ITEM_ENTITY_TARGET
-import net.minecraft.client.renderer.RenderStateShard.LineStateShard
-import net.minecraft.client.renderer.RenderStateShard.NO_CULL
-import net.minecraft.client.renderer.RenderStateShard.NO_DEPTH_TEST
-import net.minecraft.client.renderer.RenderStateShard.POSITION_COLOR_SHADER
-import net.minecraft.client.renderer.RenderStateShard.RENDERTYPE_LINES_SHADER
-import net.minecraft.client.renderer.RenderStateShard.TRANSLUCENT_TRANSPARENCY
-import net.minecraft.client.renderer.RenderStateShard.VIEW_OFFSET_Z_LAYERING
+import net.minecraft.client.renderer.RenderStateShard.*
 import net.minecraft.client.renderer.RenderType
-import java.util.OptionalDouble
+import java.util.*
 
 object ModRenderTypes {
 
@@ -39,7 +31,7 @@ object ModRenderTypes {
 		)
 
 	@Suppress("INFERRED_INVISIBLE_RETURN_TYPE_WARNING")
-	val QUADS_THROUGH_WALL_RENDER_TYPE: RenderType =
+	val QUADS_THROUGH_WALL_RENDER_TYPE: RenderType.CompositeRenderType =
 		RenderType.create(
 			"${IrregularImplements.ID}:quads_through_wall",
 			DefaultVertexFormat.POSITION_COLOR,
@@ -56,7 +48,7 @@ object ModRenderTypes {
 				.createCompositeState(false)
 		)
 
-	fun linesThroughWalls() = LINES_THROUGH_WALL_RENDER_TYPE
-	fun quadsThroughWalls() = QUADS_THROUGH_WALL_RENDER_TYPE
+	fun linesThroughWalls(): RenderType = LINES_THROUGH_WALL_RENDER_TYPE
+	fun quadsThroughWalls(): RenderType = QUADS_THROUGH_WALL_RENDER_TYPE
 
 }
