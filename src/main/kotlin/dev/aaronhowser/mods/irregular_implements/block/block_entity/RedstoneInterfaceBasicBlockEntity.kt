@@ -23,27 +23,48 @@ class RedstoneInterfaceBasicBlockEntity(
 	override fun getLinkedPos(): BlockPos? = linkedPos
 
 	override fun setLinkedPos(pos: BlockPos?) {
-		val oldField = linkedPos
-		if (oldField != null) {
+		val level = this.level ?: return
+
+		val oldPos = linkedPos
+		if (oldPos != null) {
 			WirelessRedstoneHandler.unlinkBlock(
-				level = this.level!!,
+				level = level,
 				interfacePos = this.blockPos,
-				targetPos = oldField
+				targetPos = oldPos
 			)
+
+			updatePos(oldPos)
 		}
 
 		if (pos != null) {
 			WirelessRedstoneHandler.linkBlock(
-				level = this.level!!,
+				level = level,
 				interfacePos = this.blockPos,
 				targetPos = pos
 			)
+
+			updatePos(pos)
 		} else {
-			WirelessRedstoneHandler.removeInterface(this.level!!, this.blockPos)
+			WirelessRedstoneHandler.removeInterface(level, this.blockPos)
 		}
 
 		linkedPos = pos
 		setChanged()
+	}
+
+	fun updateTarget() {
+		val pos = this.linkedPos ?: return
+		updatePos(pos)
+	}
+
+	fun updatePos(pos: BlockPos) {
+		val level = this.level ?: return
+
+		if (level.isLoaded(pos)) {
+			val linkedState = level.getBlockState(pos)
+			linkedState.handleNeighborChanged(level, pos, this.blockState.block, pos, false)
+			level.updateNeighborsAt(pos, linkedState.block)
+		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
