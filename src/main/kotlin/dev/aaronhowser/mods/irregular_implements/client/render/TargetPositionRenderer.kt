@@ -1,7 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.event.ClientTickEvent
 
 object TargetPositionRenderer {
@@ -9,18 +11,17 @@ object TargetPositionRenderer {
 	fun addIndicators(event: ClientTickEvent.Post) {
 		val player = ClientUtil.localPlayer ?: return
 
-		val mainHandItemLocation = player.mainHandItem.get(ModDataComponents.GLOBAL_POS)
-		val offHandItemLocation = player.offhandItem.get(ModDataComponents.GLOBAL_POS)
+		fun addIndicator(stack: ItemStack) {
+			if (stack.`is`(ModItems.REDSTONE_TOOL)) return
 
-		val level = player.level()
+			val globalPos = stack.get(ModDataComponents.GLOBAL_POS) ?: return
+			if (globalPos.dimension != player.level().dimension()) return
 
-		if (mainHandItemLocation != null && mainHandItemLocation.dimension == level.dimension()) {
-			CubeIndicatorRenderer.addIndicator(mainHandItemLocation.pos, 1, 0x3200FF00)
+			CubeIndicatorRenderer.addIndicator(globalPos.pos, 1, 0x3200FF00)
 		}
 
-		if (offHandItemLocation != null && offHandItemLocation.dimension == level.dimension()) {
-			CubeIndicatorRenderer.addIndicator(offHandItemLocation.pos, 1, 0x3200FF00)
-		}
+		addIndicator(player.mainHandItem)
+		addIndicator(player.offhandItem)
 	}
 
 }

@@ -30,7 +30,8 @@ object RedstoneToolRenderer {
 		CubeIndicatorRenderer.addIndicator(
 			toolBlockPos,
 			1,
-			0x32FF0000
+			0x32FF0000,
+			size = 0.5f
 		)
 
 		val toolBlockEntity = player.level().getBlockEntity(toolLocation.pos) as? RedstoneToolLinkable
@@ -40,7 +41,8 @@ object RedstoneToolRenderer {
 				CubeIndicatorRenderer.addIndicator(
 					linkedPos,
 					1,
-					0x320000FF
+					0x320000FF,
+					size = 0.5f
 				)
 			}
 		}
