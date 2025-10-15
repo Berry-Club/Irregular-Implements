@@ -23,8 +23,8 @@ object CubeIndicatorRenderer {
 	fun afterClientTick(event: ClientTickEvent.Post) {
 		if (Minecraft.getInstance().isPaused) return
 
-		collectIndicators(event)
 		tickIndicators()
+		collectIndicators(event)
 	}
 
 	fun collectIndicators(event: ClientTickEvent.Post) {
