@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import java.util.Optional
 
 class SlimeCubeBlockEntity(
 	pos: BlockPos,
@@ -58,13 +59,13 @@ class SlimeCubeBlockEntity(
 		}
 
 		@JvmStatic
-		fun slimeCubeResult(level: LevelAccessor, pos: BlockPos): Boolean? {
-			if (level !is Level || level.difficulty == Difficulty.PEACEFUL) return null
+		fun slimeCubeResult(level: LevelAccessor, pos: BlockPos): Optional<Boolean> {
+			if (level !is Level || level.difficulty == Difficulty.PEACEFUL) return Optional.empty()
 
-			if (chunkHasCube(level, pos, powered = true)) return false
-			if (chunkHasCube(level, pos, powered = false)) return true
+			if (chunkHasCube(level, pos, powered = true)) return Optional.of(false)
+			if (chunkHasCube(level, pos, powered = false)) return Optional.of(true)
 
-			return null
+			return Optional.empty()
 		}
 	}
 }

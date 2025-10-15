@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import javax.annotation.Nullable;
+import java.util.Optional;
 
 @Mixin(Slime.class)
 public abstract class SlimeMixin {
@@ -30,10 +30,8 @@ public abstract class SlimeMixin {
 			RandomSource random,
 			CallbackInfoReturnable<Boolean> cir
 	) {
-		@Nullable Boolean slimeCubeResult = SlimeCubeBlockEntity.slimeCubeResult(level, pos);
-		if (slimeCubeResult != null) {
-			cir.setReturnValue(slimeCubeResult);
-		}
+		Optional<Boolean> slimeCubeResult = SlimeCubeBlockEntity.slimeCubeResult(level, pos);
+		slimeCubeResult.ifPresent(cir::setReturnValue);
 	}
 
 }

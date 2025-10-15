@@ -63,7 +63,7 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 			),
 			cancellable = true
 	)
-	private void irregular_implements$isRainingAt(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+	private void irregular_implements$rainShieldStopsRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
 		if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
 			cir.setReturnValue(false);
 		}
