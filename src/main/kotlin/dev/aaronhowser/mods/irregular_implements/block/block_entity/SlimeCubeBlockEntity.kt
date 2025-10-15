@@ -60,10 +60,10 @@ class SlimeCubeBlockEntity(
 
 		@JvmStatic
 		fun slimeCubeResult(level: LevelAccessor, pos: BlockPos): Optional<Boolean> {
-			if (level !is Level || level.difficulty == Difficulty.PEACEFUL) return Optional.empty()
-
-			if (chunkHasCube(level, pos, powered = true)) return Optional.of(false)
-			if (chunkHasCube(level, pos, powered = false)) return Optional.of(true)
+			if (level is Level && level.difficulty != Difficulty.PEACEFUL) {
+				if (chunkHasCube(level, pos, powered = true)) return Optional.of(false)
+				if (chunkHasCube(level, pos, powered = false)) return Optional.of(true)
+			}
 
 			return Optional.empty()
 		}
