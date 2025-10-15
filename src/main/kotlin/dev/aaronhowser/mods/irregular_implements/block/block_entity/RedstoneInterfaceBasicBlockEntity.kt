@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Redston
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import net.minecraft.core.BlockPos
@@ -16,7 +16,7 @@ class RedstoneInterfaceBasicBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
 ) : RedstoneInterfaceBlockEntity(
-	ModBlockEntities.BASIC_REDSTONE_INTERFACE.get(),
+	ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get(),
 	pPos,
 	pBlockState
 ), RedstoneToolLinkable {

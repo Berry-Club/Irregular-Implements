@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpecialChestBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -32,8 +32,8 @@ class SpecialChestBlock private constructor(
 ) {
 
 	enum class Type(val blockEntityType: Supplier<BlockEntityType<out ChestBlockEntity>>) {
-		NATURE({ ModBlockEntities.NATURE_CHEST.get() }),
-		WATER({ ModBlockEntities.WATER_CHEST.get() })
+		NATURE({ ModBlockEntityTypes.NATURE_CHEST.get() }),
+		WATER({ ModBlockEntityTypes.WATER_CHEST.get() })
 
 		;
 

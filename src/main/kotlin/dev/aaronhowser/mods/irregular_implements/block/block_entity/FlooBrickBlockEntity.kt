@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
@@ -21,7 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 class FlooBrickBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.FLOO_BRICK.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntityTypes.FLOO_BRICK.get(), pos, blockState) {
 
 	private var isMaster: Boolean = false
 

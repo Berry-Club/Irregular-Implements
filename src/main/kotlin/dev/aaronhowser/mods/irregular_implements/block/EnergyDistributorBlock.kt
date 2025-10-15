@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnergyDistributorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -44,7 +44,7 @@ class EnergyDistributorBlock : Block(
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
 		return BaseEntityBlock.createTickerHelper(
 			blockEntityType,
-			ModBlockEntities.ENERGY_DISTRIBUTOR.get(),
+			ModBlockEntityTypes.ENERGY_DISTRIBUTOR.get(),
 			EnergyDistributorBlockEntity::tick
 		)
 	}

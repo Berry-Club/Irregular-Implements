@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.EnergyDistributorBlock
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.Level
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 class EnergyDistributorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENERGY_DISTRIBUTOR.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntityTypes.ENERGY_DISTRIBUTOR.get(), pos, blockState) {
 
 	private val energyStorage: IEnergyStorage = object : IEnergyStorage {
 

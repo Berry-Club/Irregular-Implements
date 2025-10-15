@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState
 class FilteredPlatformBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
 
 	//FIXME: Container is empty on client, which causes position desync (which fixes itself quickly)
 	fun entityPassesFilter(entity: Entity?): Boolean {

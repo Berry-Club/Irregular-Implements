@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -17,6 +17,6 @@ abstract class SpecialChestBlockEntity(
 		return this.blockState.block.name
 	}
 
-	class NatureChestBlockEntity(pos: BlockPos, state: BlockState) : SpecialChestBlockEntity(ModBlockEntities.NATURE_CHEST.get(), pos, state)
-	class WaterChestBlockEntity(pos: BlockPos, state: BlockState) : SpecialChestBlockEntity(ModBlockEntities.WATER_CHEST.get(), pos, state)
+	class NatureChestBlockEntity(pos: BlockPos, state: BlockState) : SpecialChestBlockEntity(ModBlockEntityTypes.NATURE_CHEST.get(), pos, state)
+	class WaterChestBlockEntity(pos: BlockPos, state: BlockState) : SpecialChestBlockEntity(ModBlockEntityTypes.WATER_CHEST.get(), pos, state)
 }

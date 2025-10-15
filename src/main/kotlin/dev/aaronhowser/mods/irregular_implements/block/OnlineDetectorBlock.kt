@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.OnlineDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -52,7 +52,7 @@ class OnlineDetectorBlock : EntityBlock, Block(Properties.ofFullCopy(Blocks.DISP
 		return if (level.isClientSide) {
 			null
 		} else {
-			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.ONLINE_DETECTOR.get(), OnlineDetectorBlockEntity::tick)
+			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntityTypes.ONLINE_DETECTOR.get(), OnlineDetectorBlockEntity::tick)
 		}
 	}
 

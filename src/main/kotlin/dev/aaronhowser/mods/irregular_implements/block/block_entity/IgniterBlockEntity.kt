@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.igniter.IgniterMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState
 class IgniterBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.IGNITER.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.IGNITER.get(), pPos, pBlockState), MenuProvider {
 
 	enum class Mode(val nameComponent: Component) {
 		TOGGLE(ModTooltipLang.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered

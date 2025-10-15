@@ -4,7 +4,7 @@ import com.mojang.authlib.GameProfile
 import dev.aaronhowser.mods.irregular_implements.block.AutoPlacerBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -35,7 +35,7 @@ import java.util.*
 class AutoPlacerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider {
 
 	val container: ImprovedSimpleContainer = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
 		override fun canAddItem(stack: ItemStack): Boolean {

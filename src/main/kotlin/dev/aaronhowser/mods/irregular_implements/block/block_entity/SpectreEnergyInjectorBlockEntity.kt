@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -19,7 +19,7 @@ import java.util.*
 class SpectreEnergyInjectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), pPos, pBlockState) {
 
 	// Initialized as random, but immediately set on place or load
 	var ownerUuid: UUID = UUID.randomUUID()

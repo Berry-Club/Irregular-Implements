@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Improve
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
@@ -34,7 +34,7 @@ import net.minecraft.world.phys.AABB
 class EntityDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENTITY_DETECTOR.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.ENTITY_DETECTOR.get(), pos, blockState), MenuProvider {
 
 	var filter: Filter = Filter.ALL
 		private set

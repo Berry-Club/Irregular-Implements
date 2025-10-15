@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -67,7 +67,7 @@ class RainShieldBlock : EntityBlock, Block(
 	): BlockEntityTicker<T>? {
 		return BaseEntityBlock.createTickerHelper(
 			blockEntityType,
-			ModBlockEntities.RAIN_SHIELD.get(),
+			ModBlockEntityTypes.RAIN_SHIELD.get(),
 			RainShieldBlockEntity::tick
 		)
 	}

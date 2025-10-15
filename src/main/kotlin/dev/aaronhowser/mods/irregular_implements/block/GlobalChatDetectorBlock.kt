@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.GlobalChatDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.Containers
@@ -43,7 +43,7 @@ class GlobalChatDetectorBlock : EntityBlock, Block(
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorBlockEntity::tick)
+		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorBlockEntity::tick)
 	}
 
 	override fun useWithoutItem(

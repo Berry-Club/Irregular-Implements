@@ -1,9 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneObserverBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity.Companion.tick
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -65,7 +63,7 @@ class RedstoneObserverBlock : EntityBlock, Block(
 
 		return BaseEntityBlock.createTickerHelper(
 			blockEntityType,
-			ModBlockEntities.REDSTONE_OBSERVER.get(),
+			ModBlockEntityTypes.REDSTONE_OBSERVER.get(),
 			RedstoneObserverBlockEntity::tick
 		)
 	}

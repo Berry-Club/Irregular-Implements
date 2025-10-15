@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.SlimeCubeCarrier
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Difficulty
@@ -15,7 +15,7 @@ import java.util.*
 class SlimeCubeBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.SLIME_CUBE.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntityTypes.SLIME_CUBE.get(), pos, blockState) {
 
 	override fun onLoad() {
 		super.onLoad()

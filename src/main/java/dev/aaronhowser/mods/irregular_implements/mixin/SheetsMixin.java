@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities;
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes;
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
@@ -36,9 +36,9 @@ abstract class SheetsMixin {
 	private static void irregular_implements$getChestTexture(BlockEntity blockEntity, ChestType chestType, boolean holiday, CallbackInfoReturnable<Material> cir) {
 
 		var type = blockEntity.getType();
-		if (type == ModBlockEntities.NATURE_CHEST.get()) {
+		if (type == ModBlockEntityTypes.NATURE_CHEST.get()) {
 			cir.setReturnValue(NATURE_CHEST);
-		} else if (type == ModBlockEntities.WATER_CHEST.get()) {
+		} else if (type == ModBlockEntityTypes.WATER_CHEST.get()) {
 			cir.setReturnValue(WATER_CHEST);
 		}
 

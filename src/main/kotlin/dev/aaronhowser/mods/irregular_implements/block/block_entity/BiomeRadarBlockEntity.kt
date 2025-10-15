@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import net.minecraft.core.BlockPos
@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3
 class BiomeRadarBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.BIOME_RADAR.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState) {
 
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null

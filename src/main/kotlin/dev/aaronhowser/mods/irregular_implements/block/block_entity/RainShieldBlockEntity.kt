@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.ChunkPos
@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState
 class RainShieldBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.RAIN_SHIELD.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntityTypes.RAIN_SHIELD.get(), pPos, pBlockState) {
 
 	companion object {
 		fun RainShieldCarrier.getRainShieldChunks(): LongOpenHashSet = this.`irregular_implements$getRainShieldChunks`()

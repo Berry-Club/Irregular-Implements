@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.InventoryTesterBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.inventory_tester.InventoryTesterMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -26,7 +26,7 @@ import net.neoforged.neoforge.items.ItemHandlerHelper
 class InventoryTesterBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider {
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 

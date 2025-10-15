@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.EnderMailboxBlock
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderMailboxContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ender_mailbox.EnderMailboxMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -23,7 +23,7 @@ import java.util.*
 class EnderMailboxBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENDER_MAILBOX.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.ENDER_MAILBOX.get(), pos, blockState), MenuProvider {
 
 	var ownerUuid: UUID = UUID.randomUUID()
 		private set

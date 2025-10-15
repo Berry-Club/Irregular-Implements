@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.ItemCollectorBlock
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
@@ -22,7 +22,7 @@ open class ItemCollectorBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(blockEntity, pPos, pBlockState) {
 
-	constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntities.ITEM_COLLECTOR.get(), pos, blockState)
+	constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntityTypes.ITEM_COLLECTOR.get(), pos, blockState)
 
 	protected fun tick() {
 		val level = this.level ?: return

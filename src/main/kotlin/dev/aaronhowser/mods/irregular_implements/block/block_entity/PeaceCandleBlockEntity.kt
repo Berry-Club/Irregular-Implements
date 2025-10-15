@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.PeaceCandleCarrier
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.MobSpawnType
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.entity.living.MobSpawnEvent
 class PeaceCandleBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.PEACE_CANDLE.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntityTypes.PEACE_CANDLE.get(), pPos, pBlockState) {
 
 	companion object {
 		fun PeaceCandleCarrier.getPeaceCandleChunks(): LongOpenHashSet = this.`irregular_implements$getPeaceCandleChunks`()

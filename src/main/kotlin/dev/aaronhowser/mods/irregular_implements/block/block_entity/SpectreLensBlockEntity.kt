@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -19,7 +19,7 @@ import java.util.*
 class SpectreLensBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.SPECTRE_LENS.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntityTypes.SPECTRE_LENS.get(), pPos, pBlockState) {
 
 	var owner: UUID? = null
 		set(value) {

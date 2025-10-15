@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EntityDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
@@ -45,7 +45,7 @@ class EntityDetectorBlock : Block(Properties.ofFullCopy(Blocks.STONE)), EntityBl
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.ENTITY_DETECTOR.get(), EntityDetectorBlockEntity::tick)
+		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorBlockEntity::tick)
 	}
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {

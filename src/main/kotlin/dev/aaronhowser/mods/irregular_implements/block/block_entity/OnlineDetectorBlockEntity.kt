@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.OnlineDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.online_detector.OnlineDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState
 class OnlineDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
 	var username: String = ""
 		set(value) {

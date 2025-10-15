@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock.Companion.TRIGGERED
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.block_detector.BlockDetectorMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState
 class BlockDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.BLOCK_DETECTOR.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.BLOCK_DETECTOR.get(), pos, blockState), MenuProvider {
 
 	val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
 		override fun setChanged() {

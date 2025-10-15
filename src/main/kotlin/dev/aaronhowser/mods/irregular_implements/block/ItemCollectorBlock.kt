@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedItemCollectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ItemCollectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.Containers
@@ -105,13 +105,13 @@ class ItemCollectorBlock(
 		return if (this.isAdvanced) {
 			BaseEntityBlock.createTickerHelper(
 				blockEntityType,
-				ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(),
+				ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(),
 				ItemCollectorBlockEntity::tick
 			)
 		} else {
 			BaseEntityBlock.createTickerHelper(
 				blockEntityType,
-				ModBlockEntities.ITEM_COLLECTOR.get(),
+				ModBlockEntityTypes.ITEM_COLLECTOR.get(),
 				ItemCollectorBlockEntity::tick
 			)
 		}

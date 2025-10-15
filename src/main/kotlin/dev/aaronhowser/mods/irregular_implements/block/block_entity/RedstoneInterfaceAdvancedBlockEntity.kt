@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.state.BlockState
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState
 class RedstoneInterfaceAdvancedBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : RedstoneInterfaceBlockEntity(ModBlockEntities.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState) {
+) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState) {
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 

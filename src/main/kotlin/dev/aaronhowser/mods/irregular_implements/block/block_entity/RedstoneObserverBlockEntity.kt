@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -22,7 +22,7 @@ import org.antlr.v4.runtime.misc.MultiMap
 class RedstoneObserverBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : RedstoneToolLinkable, BlockEntity(ModBlockEntities.REDSTONE_OBSERVER.get(), pPos, pBlockState) {
+) : RedstoneToolLinkable, BlockEntity(ModBlockEntityTypes.REDSTONE_OBSERVER.get(), pPos, pBlockState) {
 
 	override fun setRemoved() {
 		val level = this.level

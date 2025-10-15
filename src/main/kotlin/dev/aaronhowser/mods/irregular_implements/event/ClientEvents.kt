@@ -237,13 +237,13 @@ object ClientEvents {
 
 	@SubscribeEvent
 	fun registerEntityRenderer(event: EntityRenderersEvent.RegisterRenderers) {
-		event.registerBlockEntityRenderer(ModBlockEntities.DIAPHANOUS_BLOCK.get(), ::DiaphanousBlockEntityRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBlockEntityRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntities.NATURE_CHEST.get(), ::ChestRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntities.WATER_CHEST.get(), ::ChestRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntities.PLAYER_INTERFACE.get(), ::PlayerInterfaceBlockEntityRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntities.BIOME_RADAR.get(), ::BiomeRadarBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), ::DiaphanousBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.NATURE_CHEST.get(), ::ChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.WATER_CHEST.get(), ::ChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.PLAYER_INTERFACE.get(), ::PlayerInterfaceBlockEntityRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.BIOME_RADAR.get(), ::BiomeRadarBlockEntityRenderer)
 
 		event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
 		event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)

@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvide
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.AddIndicatorsPacket
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.RemoveIndicatorsPacket
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -36,7 +36,7 @@ import net.minecraft.world.phys.Vec3
 class BlockDestabilizerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
 
 	enum class State { IDLE, SEARCHING, DROPPING }
 

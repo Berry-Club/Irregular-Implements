@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Improve
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState
 class BlockTeleporterBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.BLOCK_TELEPORTER.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.BLOCK_TELEPORTER.get(), pos, blockState), MenuProvider {
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 

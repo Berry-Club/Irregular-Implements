@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceAdvancedBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceBasicBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
@@ -45,9 +45,9 @@ class RedstoneInterfaceBlock(
 		blockEntityType: BlockEntityType<T>
 	): BlockEntityTicker<T>? {
 		val type = if (isAdvanced) {
-			ModBlockEntities.ADVANCED_REDSTONE_INTERFACE.get()
+			ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get()
 		} else {
-			ModBlockEntities.BASIC_REDSTONE_INTERFACE.get()
+			ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get()
 		}
 
 		return BaseEntityBlock.createTickerHelper(

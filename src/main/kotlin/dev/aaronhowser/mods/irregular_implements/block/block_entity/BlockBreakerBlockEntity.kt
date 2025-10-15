@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import com.mojang.authlib.GameProfile
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
@@ -43,7 +43,7 @@ import java.util.*
 class BlockBreakerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.BLOCK_BREAKER.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pPos, pBlockState) {
 
 	private var uuid: UUID? = null
 

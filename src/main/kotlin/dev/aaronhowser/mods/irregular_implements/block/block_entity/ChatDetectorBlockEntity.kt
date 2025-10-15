@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.ChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
@@ -30,7 +30,7 @@ import java.util.*
 class ChatDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
 	// Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
 	var ownerUuid: UUID = UUID.randomUUID()

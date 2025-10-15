@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -22,7 +22,7 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 class EnderEnergyDistributorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState), MenuProvider {
 
 	// Inventory stuff
 

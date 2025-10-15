@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorMenu
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -21,7 +21,7 @@ import net.minecraft.world.phys.AABB
 class AdvancedItemCollectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : ItemCollectorBlockEntity(ModBlockEntities.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider {
+) : ItemCollectorBlockEntity(ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider {
 
 	var xRadius: Int = 5
 		set(value) {

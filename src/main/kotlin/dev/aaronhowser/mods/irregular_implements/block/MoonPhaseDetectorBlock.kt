@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.MoonPhaseDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionResult
@@ -61,7 +61,7 @@ class MoonPhaseDetectorBlock : Block(
 		return if (level.isClientSide) {
 			null
 		} else {
-			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.MOON_PHASE_DETECTOR.get(), MoonPhaseDetectorBlock::tick)
+			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntityTypes.MOON_PHASE_DETECTOR.get(), MoonPhaseDetectorBlock::tick)
 		}
 	}
 

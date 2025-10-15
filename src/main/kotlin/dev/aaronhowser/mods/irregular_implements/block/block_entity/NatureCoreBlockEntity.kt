@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import dev.aaronhowser.mods.irregular_implements.util.StructureSchematics
 import dev.aaronhowser.mods.irregular_implements.world.feature.NatureCoreFeature
@@ -32,7 +32,7 @@ import kotlin.math.cos
 class NatureCoreBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntities.NATURE_CORE.get(), pos, blockState) {
+) : BlockEntity(ModBlockEntityTypes.NATURE_CORE.get(), pos, blockState) {
 
 	private fun tick() {
 		val random = level?.random ?: return

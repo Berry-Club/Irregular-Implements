@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ImbuingStationBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
@@ -33,7 +33,7 @@ class ImbuingStationBlock : Block(Properties.ofFullCopy(Blocks.TERRACOTTA)), Ent
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.IMBUING_STATION.get(), ImbuingStationBlockEntity::tick)
+		return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntityTypes.IMBUING_STATION.get(), ImbuingStationBlockEntity::tick)
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {

@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Improve
 import dev.aaronhowser.mods.irregular_implements.menu.imbuing_station.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingInput
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingRecipe
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -26,7 +26,7 @@ import net.neoforged.neoforge.items.wrapper.RangedWrapper
 class ImbuingStationBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider {
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState
 class CustomCraftingTableBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
+) : BlockEntity(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
 
 	var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
 		set(value) {

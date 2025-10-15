@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Improve
 import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -25,7 +25,7 @@ import java.util.*
 class NotificationInterfaceBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.NOTIFICATION_INTERFACE.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.NOTIFICATION_INTERFACE.get(), pPos, pBlockState), MenuProvider {
 
 	var ownerUuid: UUID = UUID.randomUUID()
 		set(value) {

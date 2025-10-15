@@ -16,7 +16,7 @@ import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -192,25 +192,25 @@ object CommonEvents {
 	fun onRegisterCapabilities(event: RegisterCapabilitiesEvent) {
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
-			ModBlockEntities.SPECTRE_ENERGY_INJECTOR.get(),
+			ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(),
 			SpectreEnergyInjectorBlockEntity::getCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
-			ModBlockEntities.SPECTRE_COIL.get(),
+			ModBlockEntityTypes.SPECTRE_COIL.get(),
 			SpectreCoilBlockEntity::getCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
-			ModBlockEntities.PLAYER_INTERFACE.get(),
+			ModBlockEntityTypes.PLAYER_INTERFACE.get(),
 			PlayerInterfaceBlockEntity::getCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
-			ModBlockEntities.IMBUING_STATION.get(),
+			ModBlockEntityTypes.IMBUING_STATION.get(),
 			ImbuingStationBlockEntity::getCapability
 		)
 
@@ -222,13 +222,13 @@ object CommonEvents {
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
-			ModBlockEntities.ENERGY_DISTRIBUTOR.get(),
+			ModBlockEntityTypes.ENERGY_DISTRIBUTOR.get(),
 			EnergyDistributorBlockEntity::getCapability
 		)
 
 		event.registerBlockEntity(
 			Capabilities.EnergyStorage.BLOCK,
-			ModBlockEntities.ENDER_ENERGY_DISTRIBUTOR.get(),
+			ModBlockEntityTypes.ENDER_ENERGY_DISTRIBUTOR.get(),
 			EnderEnergyDistributorBlockEntity::getCapability
 		)
 
@@ -246,7 +246,7 @@ object CommonEvents {
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
-			ModBlockEntities.AUTO_PLACER.get(),
+			ModBlockEntityTypes.AUTO_PLACER.get(),
 			AutoPlacerBlockEntity::getCapability,
 		)
 

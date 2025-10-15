@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
@@ -31,7 +31,7 @@ import net.neoforged.neoforge.event.ServerChatEvent
 class GlobalChatDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntities.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
 	var regexString: String = ""
 		set(value) {

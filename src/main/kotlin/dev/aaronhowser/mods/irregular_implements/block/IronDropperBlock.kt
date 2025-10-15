@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntities
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.dispenser.BlockSource
 import net.minecraft.server.level.ServerLevel
@@ -25,7 +25,7 @@ class IronDropperBlock : DropperBlock(
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-		return createTickerHelper(blockEntityType, ModBlockEntities.IRON_DROPPER.get(), IronDropperBlockEntity::tick)
+		return createTickerHelper(blockEntityType, ModBlockEntityTypes.IRON_DROPPER.get(), IronDropperBlockEntity::tick)
 	}
 
 	public override fun dispenseFrom(level: ServerLevel, state: BlockState, pos: BlockPos) {
