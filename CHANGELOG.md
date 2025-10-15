@@ -7,11 +7,11 @@
 ### Changed
 
 - Renamed the Basic Redstone Interface block entity id from `redstone_interface` to `basic_redstone_interface`
-  - This is a breaking change, any existing Redstone Interfaces will have their data lost
+	- This is a breaking change, any existing Redstone Interfaces will have their data lost
 - When holding a Redstone Tool, linked positions show as blue instead of red now
-  - That is, the block the Tool is linked to is still red. Blocks that the linked blook is linked to are blue
-- When holding a Redstone Tool, a line links the linked block to the block it's linked to
-  - For example, connecting betwen a Redstone Interface and the block it's sending a signal to
+	- For example, the Redstone Interface would have a red cube, and the block it's linked to would have a blue cube
+- When holding a Redstone Tool, a line connects linkable blocks to what they're linked to
+	- For example, connecting between a Redstone Interface and the block it's sending a signal to
 
 ### Fixed
 
@@ -29,9 +29,9 @@
 - The Player Interface no longer renders the owner's skull above itself if there's a block there
 - Glowing Mushrooms can now be used in _most_ brewing recipes that would use Glowstone (#29)
 - Item Collectors now make a sound when picking up items
-- Made Lotuses about 6 times more likely to spawn 
-  - 1 in 50 instead of 1 in 288
-  - For reference, Sweet Berries have a 1 in 32 chance to spawn
+- Made Lotuses about 6 times more likely to spawn
+	- 1 in 50 instead of 1 in 288
+	- For reference, Sweet Berries have a 1 in 32 chance to spawn
 
 ### Fixed
 
