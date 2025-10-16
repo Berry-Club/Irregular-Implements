@@ -59,13 +59,31 @@ class ServerConfig(
 	lateinit var biomeRadarHorizontalStep: ModConfigSpec.IntValue
 	lateinit var biomeRadarVerticalStep: ModConfigSpec.IntValue
 
+	lateinit var triggerGlassRange: ModConfigSpec.IntValue
+	lateinit var triggerGlassDuration: ModConfigSpec.IntValue
+
 	init {
 		basicServerConfigs()
 		biomePainter()
 		spectreConfigs()
 		biomeRadar()
+		triggerGlass()
 
 		builder.build()
+	}
+
+	private fun triggerGlass() {
+		builder.push(TRIGGER_GLASS_CATEGORY)
+
+		triggerGlassRange = builder
+			.comment("How far should the Trigger Glass effect propagate? (in blocks)")
+			.defineInRange("triggerGlassRange", 20, 1, Int.MAX_VALUE)
+
+		triggerGlassDuration = builder
+			.comment("How long should the Trigger Glass remain non-solid? (in ticks)")
+			.defineInRange("triggerGlassDuration", 20 * 3, 1, Int.MAX_VALUE)
+
+		builder.pop()
 	}
 
 	private fun basicServerConfigs() {
@@ -257,6 +275,7 @@ class ServerConfig(
 		const val SPECTRE_CATEGORY = "spectre"
 		const val BIOME_PAINTER_CATEGORY = "biome_painter"
 		const val BIOME_RADAR_CATEGORY = "biome_radar"
+		const val TRIGGER_GLASS_CATEGORY = "trigger_glass"
 	}
 
 }

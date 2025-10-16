@@ -23,7 +23,6 @@ import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPiec
 import net.minecraft.world.level.material.Fluids
 import java.util.function.Supplier
 
-//TODO Item Models
 class SpecialChestBlock private constructor(
 	private val chestType: Type,
 ) : ChestBlock(

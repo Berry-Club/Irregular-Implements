@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -66,14 +67,14 @@ class TriggerGlassBlock : TransparentBlock(
 		pos: BlockPos,
 		recursions: Int
 	) {
-		if (recursions >= 20) return        //TODO: Configurable range
+		if (recursions >= ServerConfig.CONFIG.triggerGlassRange.get()) return
 
 		val state = level.getBlockState(pos)
 		if (state.block != this) return
 		if (state.getValue(NOT_SOLID)) return
 
 		level.setBlockAndUpdate(pos, state.setValue(NOT_SOLID, true))
-		level.scheduleTick(pos, this, 20 * 3)   //TODO: configurable duration
+		level.scheduleTick(pos, this, ServerConfig.CONFIG.triggerGlassDuration.get())
 
 		for (direction in Direction.entries) {
 			val offset = pos.relative(direction)

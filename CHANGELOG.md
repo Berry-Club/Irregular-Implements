@@ -15,6 +15,7 @@
 	- For example, connecting between a Redstone Interface and the block it's sending a signal to
 - When holding a Redstone Tool, you can now see the link for every linkable block, rather than just the one the tool is linked to
 - Added a new Colored Flame particle, used by the Biome Radar
+- The duration that Trigger Glass stays triggered, as well as how far it propagates, are now configurable
 
 ### Fixed
 
