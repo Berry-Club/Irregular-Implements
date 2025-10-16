@@ -14,6 +14,7 @@ class ModParticleDescriptionProvider(
 	override fun addDescriptions() {
 
 		sprite(ModParticleTypes.FLOO_FLAME.get(), OtherUtil.modResource("floo"))
+		sprite(ModParticleTypes.COLORED_FLAME.get(), OtherUtil.modResource("colored_flame"))
 
 	}
 

@@ -14,6 +14,7 @@
 - When holding a Redstone Tool, a line connects linkable blocks to what they're linked to
 	- For example, connecting between a Redstone Interface and the block it's sending a signal to
 - When holding a Redstone Tool, you can now see the link for every linkable block, rather than just the one the tool is linked to
+- Added a new Colored Flame particle, used by the Biome Radar
 
 ### Fixed
 

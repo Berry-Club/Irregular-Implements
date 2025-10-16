@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticleOptions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
@@ -124,7 +125,7 @@ class BiomeRadarBlockEntity(
 
 		for (pos in particlePositions) {
 			level.addParticle(
-				DustParticleOptions(colorVec, 2f),
+				ColoredFlameParticleOptions(colorVec),
 				pos.x, pos.y, pos.z,
 				direction.x, 0.05, direction.z
 			)

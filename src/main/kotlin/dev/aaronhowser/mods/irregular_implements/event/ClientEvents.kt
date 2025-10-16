@@ -12,6 +12,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.item.*
+import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticle
 import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.*
@@ -319,6 +320,7 @@ object ClientEvents {
 	@SubscribeEvent
 	fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
 		event.registerSpriteSet(ModParticleTypes.FLOO_FLAME.get(), FlooFlameParticle::Provider)
+		event.registerSpriteSet(ModParticleTypes.COLORED_FLAME.get(), ColoredFlameParticle::Provider)
 	}
 
 	@SubscribeEvent
