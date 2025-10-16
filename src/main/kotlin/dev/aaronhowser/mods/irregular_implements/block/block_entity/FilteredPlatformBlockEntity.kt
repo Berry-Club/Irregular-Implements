@@ -18,6 +18,7 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -26,7 +27,6 @@ class FilteredPlatformBlockEntity(
 	pBlockState: BlockState
 ) : BlockEntity(ModBlockEntityTypes.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
 
-	//FIXME: Container is empty on client, which causes position desync (which fixes itself quickly)
 	fun entityPassesFilter(entity: Entity?): Boolean {
 		if (entity !is ItemEntity) return false
 
@@ -50,6 +50,12 @@ class FilteredPlatformBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+	}
+
+	override fun setChanged() {
+		super.setChanged()
+
+		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {

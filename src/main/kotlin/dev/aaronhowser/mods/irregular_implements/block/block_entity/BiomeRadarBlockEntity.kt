@@ -101,7 +101,6 @@ class BiomeRadarBlockEntity(
 		}
 	}
 
-	//FIXME: Make it use a colored smoke particle, using the searched biome's color (maybe fire color for empty, and gray for not found?)
 	private fun spawnParticles() {
 		val level = level ?: return
 		if (level.gameTime % 3 != 0L) return
