@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.DamageTypeTags
+import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.FallLocation
 import net.minecraft.world.entity.EquipmentSlot
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.*
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.EntityCollisionContext
@@ -61,7 +63,7 @@ object ModArmorItems {
 			.durability(ArmorItem.Type.BOOTS.getDurability(15))
 			.rarity(Rarity.RARE)
 			.component(
-				ModDataComponents.FLUID_TAGS,
+				ModDataComponents.CAN_STAND_ON_FLUIDS,
 				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
 			)
 	}
@@ -72,7 +74,7 @@ object ModArmorItems {
 			.rarity(Rarity.RARE)
 			.fireResistant()
 			.component(
-				ModDataComponents.FLUID_TAGS,
+				ModDataComponents.CAN_STAND_ON_FLUIDS,
 				listOf(ModFluidTagsProvider.ALLOWS_WATER_WALKING)
 			)
 	}
@@ -83,7 +85,7 @@ object ModArmorItems {
 			.rarity(Rarity.RARE)
 			.fireResistant()
 			.component(
-				ModDataComponents.FLUID_TAGS,
+				ModDataComponents.CAN_STAND_ON_FLUIDS,
 				listOf(
 					ModFluidTagsProvider.ALLOWS_LAVA_WALKING,
 					ModFluidTagsProvider.ALLOWS_WATER_WALKING
@@ -120,8 +122,17 @@ object ModArmorItems {
 	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
 		if (livingEntity.isCrouching || livingEntity.isUnderWater) return false
 
+		val fluidTags = mutableListOf<TagKey<Fluid>>()
+
 		val footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET)
-		val fluidTags = footArmor.get(ModDataComponents.FLUID_TAGS) ?: return false
+		fluidTags.addAll(footArmor.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList()))
+
+		CuriosApi.getCuriosInventory(livingEntity).ifPresent {
+			for (slot in 0 until it.equippedCurios.slots) {
+				val stack = it.equippedCurios.getStackInSlot(slot)
+				fluidTags.addAll(stack.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList()))
+			}
+		}
 
 		return fluidTags.any { fluidState.`is`(it) }
 	}
@@ -179,7 +190,10 @@ object ModArmorItems {
 		val fluidBelow = entity.level().getFluidState(entity.blockPosition())
 		val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
 
-		val bootWasResponsible = bootArmor.get(ModDataComponents.FLUID_TAGS)?.any { fluidBelow.`is`(it) }.isTrue
+		val bootWasResponsible = bootArmor
+			.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList())
+			.any { fluidBelow.`is`(it) }
+
 		return if (bootWasResponsible) {
 			ModMessageLang.FLUID_FALL_DEATH_BOOT.toComponent(
 				entity.displayName ?: entity.name,

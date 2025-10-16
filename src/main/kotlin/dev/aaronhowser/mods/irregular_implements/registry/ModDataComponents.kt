@@ -64,9 +64,9 @@ object ModDataComponents {
 			CustomData.STREAM_CODEC.apply(ByteBufCodecs.list())
 		)
 
-	val FLUID_TAGS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
+	val CAN_STAND_ON_FLUIDS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
 		register(
-			"fluid_tags",
+			"can_stand_on_fluids",
 			TagKey.codec(Registries.FLUID).listOf(),
 			OtherUtil.tagKeyStreamCodec(Registries.FLUID).apply(ByteBufCodecs.list())
 		)
