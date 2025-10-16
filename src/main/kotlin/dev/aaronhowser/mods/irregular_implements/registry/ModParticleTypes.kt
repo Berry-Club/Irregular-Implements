@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticleOptions
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.core.particles.SimpleParticleType
@@ -19,6 +20,14 @@ object ModParticleTypes {
 
 	val FLOO_FLAME: DeferredHolder<ParticleType<*>, SimpleParticleType> =
 		simple("floo_flame")
+
+	val COLORED_FLAME: DeferredHolder<ParticleType<*>, out ParticleType<ColoredFlameParticleOptions>> =
+		register(
+			"colored_flame",
+			false,
+			{ ColoredFlameParticleOptions.CODEC },
+			{ ColoredFlameParticleOptions.STREAM_CODEC }
+		)
 
 	fun simple(name: String): DeferredHolder<ParticleType<*>, SimpleParticleType> {
 		return PARTICLE_TYPE_REGISTRY.register(name, Supplier { SimpleParticleType(true) })
