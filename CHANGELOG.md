@@ -3,7 +3,7 @@
 ### Changed
 
 - Renamed the item tag `#irregular_implements:fluid_tags` to `#irregular_implements:can_stand_on_fluids`, since that's what it's used for
-- The function to see if you can stand on a fluid now checks every curio slot in addition to 
+- The function to see if you can stand on a fluid now checks for the Curios `feet` slot
 
 ### Added
 
