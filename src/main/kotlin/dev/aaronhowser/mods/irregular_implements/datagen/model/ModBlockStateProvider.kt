@@ -2050,6 +2050,7 @@ class ModBlockStateProvider(
 		val blockModel = models().withExistingParent(name(block), "block/block")
 			.texture("base", base)
 			.texture("glow", glow)
+			.texture("particle", glow)
 			.renderType(RenderType.cutoutMipped().name)
 
 			// Base north/south

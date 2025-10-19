@@ -1,10 +1,15 @@
-# 1.5.0
+# 1.5.1
 
 ### Changed
 
 - Renamed the item tag `#irregular_implements:fluid_tags` to `#irregular_implements:can_stand_on_fluids`, since that's what it's used for
 - The function to see if you can stand on a fluid now checks for the Curios `feet` slot
-- Made Spectre tree blocks translucent (#34)
+
+### Fixed
+
+- Added mining particles to Glowing Mushrooms (#32)
+
+# 1.5.0
 
 ### Added
 
