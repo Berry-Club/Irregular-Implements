@@ -13,11 +13,7 @@ import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.ItemDisplayContext
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.DirectionalBlock
-import net.minecraft.world.level.block.DropperBlock
-import net.minecraft.world.level.block.RedstoneTorchBlock
-import net.minecraft.world.level.block.RedstoneWallTorchBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.neoforged.neoforge.client.model.generators.*
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -851,22 +847,35 @@ class ModBlockStateProvider(
 	}
 
 	private fun spectreLogs() {
-		logBlock(ModBlocks.SPECTRE_LOG.get())
+		val logBlock = ModBlocks.SPECTRE_LOG.get()
+		axisBlockWithRenderType(logBlock, RenderType.translucent().name)
+
 		blockItem(ModBlocks.SPECTRE_LOG.get())
 
 		//FIXME: Need a stripped texture
 
-		simpleBlockWithItem(
-			ModBlocks.SPECTRE_LEAVES.get(),
-			models()
-				.cubeAll(name(ModBlocks.SPECTRE_LEAVES.get()), modLoc("block/spectre_leaves"))
-				.renderType(RenderType.cutout().name)
-		)
+		val leavesBlock = ModBlocks.SPECTRE_LEAVES.get()
 
 		simpleBlockWithItem(
-			ModBlocks.SPECTRE_WOOD.get(),
+			leavesBlock,
 			models()
-				.cubeAll(name(ModBlocks.SPECTRE_WOOD.get()), modLoc("block/spectre_log"))
+				.cubeAll(
+					name(leavesBlock),
+					modLoc("block/spectre_leaves")
+				)
+				.renderType(RenderType.translucent().name)
+		)
+
+		val woodBlock = ModBlocks.SPECTRE_WOOD.get()
+
+		simpleBlockWithItem(
+			woodBlock,
+			models()
+				.cubeAll(
+					name(woodBlock),
+					modLoc("block/spectre_log_side")
+				)
+				.renderType(RenderType.translucent().name)
 		)
 
 	}
@@ -2360,7 +2369,8 @@ class ModBlockStateProvider(
 			ModBlocks.QUARTZ_GLASS,
 			ModBlocks.SUPER_LUBRICANT_ICE,
 			ModBlocks.SPECTRE_BLOCK,
-			ModBlocks.SPECTRE_CORE
+			ModBlocks.SPECTRE_CORE,
+			ModBlocks.SPECTRE_PLANKS,
 		).map(DeferredBlock<*>::get)
 
 		for (block in singleTextureTranslucentBlocks) {
@@ -2375,7 +2385,6 @@ class ModBlockStateProvider(
 	private fun singleTextureBlocks() {
 		val singleTextureBlocks = listOf(
 			ModBlocks.SUPER_LUBRICANT_STONE,
-			ModBlocks.SPECTRE_PLANKS,
 //			ModBlocks.SOUND_DAMPENER,
 			ModBlocks.REDSTONE_OBSERVER,
 			ModBlocks.ENTITY_DETECTOR,

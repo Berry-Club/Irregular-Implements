@@ -43,6 +43,14 @@ object SpectreTreeBlocks {
 			override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 				return super.getFireSpreadSpeed(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction)
 			}
+
+			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
+				return if (adjacentBlockState.`is`(this)) {
+					true
+				} else {
+					super.skipRendering(state, adjacentBlockState, side)
+				}
+			}
 		}
 
 	val SPECTRE_LOG: FlammableRotatedPillarBlock =
@@ -59,6 +67,14 @@ object SpectreTreeBlocks {
 					.defaultBlockState()
 					.setValue(AXIS, state.getValue(AXIS))
 			}
+
+			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
+				return if (adjacentBlockState.`is`(this)) {
+					true
+				} else {
+					super.skipRendering(state, adjacentBlockState, side)
+				}
+			}
 		}
 
 	val STRIPPED_SPECTRE_LOG: FlammableRotatedPillarBlock =
@@ -67,7 +83,17 @@ object SpectreTreeBlocks {
 			Properties
 				.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
 				.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-		) {}
+		) {
+
+			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
+				return if (adjacentBlockState.`is`(this)) {
+					true
+				} else {
+					super.skipRendering(state, adjacentBlockState, side)
+				}
+			}
+
+		}
 
 	val SPECTRE_LEAVES: LeavesBlock =
 		object : LeavesBlock(
@@ -104,6 +130,14 @@ object SpectreTreeBlocks {
 
 			override fun getFireSpreadSpeed(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 				return super.getFireSpreadSpeed(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction)
+			}
+
+			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
+				return if (adjacentBlockState.`is`(this)) {
+					true
+				} else {
+					super.skipRendering(state, adjacentBlockState, side)
+				}
 			}
 		}
 

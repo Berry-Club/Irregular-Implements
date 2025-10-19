@@ -1,7 +1,8 @@
 {
-	"parent": "minecraft:block/cube_column_horizontal",
-	"textures": {
-		"end": "irregular_implements:block/spectre_log_top",
-		"side": "irregular_implements:block/spectre_log"
-	}
+  "parent": "minecraft:block/cube_column_horizontal",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "end": "irregular_implements:block/spectre_log_end",
+    "side": "irregular_implements:block/spectre_log_side"
+  }
 }
