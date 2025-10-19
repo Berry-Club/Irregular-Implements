@@ -16,8 +16,12 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LeavesBlock
 import net.minecraft.world.level.block.SaplingBlock
 import net.minecraft.world.level.block.grower.TreeGrower
+import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.Shapes
+import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.common.ItemAbilities
 import net.neoforged.neoforge.common.ItemAbility
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
@@ -31,6 +35,7 @@ object SpectreTreeBlocks {
 		object : Block(
 			Properties.ofFullCopy(Blocks.OAK_WOOD)
 				.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+				.noOcclusion()
 		) {
 			override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
 				return super.getFlammability(Blocks.OAK_WOOD.defaultBlockState(), level, pos, direction) > 0
@@ -45,12 +50,9 @@ object SpectreTreeBlocks {
 			}
 
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return if (adjacentBlockState.`is`(this)) {
-					true
-				} else {
-					super.skipRendering(state, adjacentBlockState, side)
-				}
+				return adjacentBlockState.`is`(this)
 			}
+
 		}
 
 	val SPECTRE_LOG: FlammableRotatedPillarBlock =
@@ -59,6 +61,7 @@ object SpectreTreeBlocks {
 			Properties
 				.ofFullCopy(Blocks.OAK_LOG)
 				.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+				.noOcclusion()
 		) {
 			override fun getToolModifiedState(state: BlockState, context: UseOnContext, itemAbility: ItemAbility, simulate: Boolean): BlockState? {
 				if (itemAbility != ItemAbilities.AXE_STRIP) return super.getToolModifiedState(state, context, itemAbility, simulate)
@@ -69,12 +72,9 @@ object SpectreTreeBlocks {
 			}
 
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return if (adjacentBlockState.`is`(this)) {
-					true
-				} else {
-					super.skipRendering(state, adjacentBlockState, side)
-				}
+				return adjacentBlockState.`is`(this)
 			}
+
 		}
 
 	val STRIPPED_SPECTRE_LOG: FlammableRotatedPillarBlock =
@@ -83,14 +83,11 @@ object SpectreTreeBlocks {
 			Properties
 				.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
 				.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+				.noOcclusion()
 		) {
 
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return if (adjacentBlockState.`is`(this)) {
-					true
-				} else {
-					super.skipRendering(state, adjacentBlockState, side)
-				}
+				return adjacentBlockState.`is`(this)
 			}
 
 		}
@@ -100,6 +97,7 @@ object SpectreTreeBlocks {
 			Properties
 				.ofFullCopy(Blocks.OAK_LEAVES)
 				.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+				.noOcclusion()
 		) {
 			override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
 				return super.getFlammability(Blocks.OAK_LEAVES.defaultBlockState(), level, pos, direction) > 0
@@ -119,6 +117,7 @@ object SpectreTreeBlocks {
 			Properties
 				.ofFullCopy(Blocks.OAK_PLANKS)
 				.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+				.noOcclusion()
 		) {
 			override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
 				return super.getFlammability(Blocks.OAK_PLANKS.defaultBlockState(), level, pos, direction) > 0
@@ -133,11 +132,7 @@ object SpectreTreeBlocks {
 			}
 
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return if (adjacentBlockState.`is`(this)) {
-					true
-				} else {
-					super.skipRendering(state, adjacentBlockState, side)
-				}
+				return adjacentBlockState.`is`(this)
 			}
 		}
 
@@ -148,12 +143,13 @@ object SpectreTreeBlocks {
 		Optional.empty()
 	)
 
-	val SPECTRE_SAPLING = object : SaplingBlock(
+	val SPECTRE_SAPLING = SaplingBlock(
 		SPECTRE_TREE_GROWER,
-		Properties
+		BlockBehaviour.Properties
 			.ofFullCopy(Blocks.OAK_SAPLING)
 			.mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-	) {}
+			.noOcclusion()
+	)
 
 	fun convertSaplings(event: PlayerInteractEvent.RightClickBlock) {
 		val usedStack = event.itemStack
