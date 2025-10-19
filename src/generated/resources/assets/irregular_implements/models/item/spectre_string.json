@@ -1,7 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "layer0": "irregular_implements:item/spectre_string"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "irregular_implements:item/spectre_string"
+	}
 }

@@ -888,7 +888,6 @@ class ModBlockStateProvider(
 		this.itemModels()
 			.withExistingParent(name(saplingBlock), "item/generated")
 			.texture("layer0", saplingTexture)
-			.renderType(RenderType.translucent().name)
 	}
 
 	private fun spectreCoils() {
