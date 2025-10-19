@@ -1,7 +1,7 @@
 {
-	"parent": "minecraft:block/cross",
-	"render_type": "minecraft:cutout",
-	"textures": {
-		"cross": "irregular_implements:block/spectre_sapling"
-	}
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "cross": "irregular_implements:block/spectre_sapling"
+  }
 }

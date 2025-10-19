@@ -58,7 +58,7 @@ class ModBlockStateProvider(
 		diaphanousBlock()
 		spectreEnergyInjector()
 		spectreCoils()
-		spectreLogs()
+		spectreBlocks()
 		blockBreaker()
 		ironDropper()
 		customCraftingTable()
@@ -846,45 +846,48 @@ class ModBlockStateProvider(
 
 	}
 
-	private fun spectreLogs() {
+	private fun spectreBlocks() {
 		val logBlock = ModBlocks.SPECTRE_LOG.get()
 		axisBlockWithRenderType(logBlock, RenderType.translucent().name)
 
-		blockItem(ModBlocks.SPECTRE_LOG.get())
+		simpleBlockItem(
+			logBlock,
+			ModelFile.UncheckedModelFile(modLoc("block/" + name(logBlock)))
+		)
 
 		//FIXME: Need a stripped texture
 
 		val leavesBlock = ModBlocks.SPECTRE_LEAVES.get()
+		val leavesModel = models()
+			.cubeAll(
+				name(leavesBlock),
+				modLoc("block/spectre_leaves")
+			)
+			.renderType(RenderType.translucent().name)
 
-		simpleBlockWithItem(
-			leavesBlock,
-			models()
-				.cubeAll(
-					name(leavesBlock),
-					modLoc("block/spectre_leaves")
-				)
-				.renderType(RenderType.translucent().name)
-		)
+		simpleBlockWithItem(leavesBlock, leavesModel)
 
 		val woodBlock = ModBlocks.SPECTRE_WOOD.get()
+		val woodModel = models()
+			.cubeAll(
+				name(woodBlock),
+				modLoc("block/spectre_log_side")
+			)
+			.renderType(RenderType.translucent().name)
 
-		simpleBlockWithItem(
-			woodBlock,
-			models()
-				.cubeAll(
-					name(woodBlock),
-					modLoc("block/spectre_log_side")
-				)
-				.renderType(RenderType.translucent().name)
-		)
+		simpleBlockWithItem(woodBlock, woodModel)
 
-	}
+		val saplingBlock = ModBlocks.SPECTRE_SAPLING.get()
+		val saplingTexture = modLoc("block/spectre_sapling")
+		val saplingModel = models()
+			.cross(name(saplingBlock), saplingTexture)
+			.renderType(RenderType.translucent().name)
 
-	private fun blockItem(block: Block) {
-		simpleBlockItem(
-			block,
-			ModelFile.UncheckedModelFile(modLoc("block/" + name(block)))
-		)
+		simpleBlock(saplingBlock, saplingModel)
+
+		this.itemModels()
+			.withExistingParent(name(saplingBlock), "item/generated")
+			.texture("layer0", saplingTexture)
 	}
 
 	private fun spectreCoils() {
@@ -1908,7 +1911,6 @@ class ModBlockStateProvider(
 	private fun crossBlocks() {
 		val crossBlocks = listOf(
 			ModBlocks.PITCHER_PLANT,
-			ModBlocks.SPECTRE_SAPLING
 		).map { it.get() }
 
 		for (block in crossBlocks) {
