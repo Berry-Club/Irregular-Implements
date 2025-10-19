@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
@@ -34,8 +35,29 @@ class ModItemModelProvider(
 		weatherEggs()
 		specialChests()
 		advancedRedstoneTorch()
+		translucentItems()
 
 		basicItems()
+	}
+
+	private fun translucentItems() {
+		val translucentItems = listOf(
+			ModItems.SPECTRE_INGOT.get(),
+			ModItems.SPECTRE_STRING.get(),
+			ModItems.SPECTRE_KEY.get(),
+			ModItems.SPECTRE_ANCHOR.get()
+		)
+
+		for (item in translucentItems) {
+			val name = getName(item)
+
+			getBuilder(name.toString())
+				.parent(ModelFile.UncheckedModelFile("item/generated"))
+				.texture("layer0", "item/${name.path}")
+				.renderType(RenderType.translucent().name)
+
+			handledItems.add(item)
+		}
 	}
 
 	private fun advancedRedstoneTorch() {
