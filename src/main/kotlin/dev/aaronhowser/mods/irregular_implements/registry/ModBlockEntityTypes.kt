@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -119,6 +120,13 @@ object ModBlockEntityTypes {
 			::AdvancedRedstoneTorchBlockEntity,
 			ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_REDSTONE_WALL_TORCH
 		)
+
+	init {
+		BLOCK_ENTITY_REGISTRY.addAlias(
+			OtherUtil.modResource("redstone_interface"),
+			OtherUtil.modResource("basic_redstone_interface")
+		)
+	}
 
 	private fun <T : BlockEntity> register(
 		name: String,
