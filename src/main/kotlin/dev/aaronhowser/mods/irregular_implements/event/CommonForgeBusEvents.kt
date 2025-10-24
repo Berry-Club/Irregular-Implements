@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.command.ModCommands
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
-import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.entity.SpiritEntity
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.handler.EscapeRopeHandler
@@ -18,7 +17,6 @@ import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDa
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacketHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
@@ -28,44 +26,51 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
-import net.neoforged.bus.api.EventPriority
-import net.neoforged.bus.api.SubscribeEvent
-import net.neoforged.fml.common.EventBusSubscriber
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
+import net.minecraftforge.event.AnvilUpdateEvent
+import net.minecraftforge.event.RegisterCommandsEvent
+import net.minecraftforge.event.ServerChatEvent
+import net.minecraftforge.event.TickEvent
+import net.minecraftforge.event.entity.EntityJoinLevelEvent
+import net.minecraftforge.event.entity.living.LivingDamageEvent
+import net.minecraftforge.event.entity.living.LivingDeathEvent
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent
+import net.minecraftforge.event.entity.living.MobSpawnEvent
+import net.minecraftforge.event.entity.player.PlayerEvent
+import net.minecraftforge.event.entity.player.PlayerInteractEvent
+import net.minecraftforge.event.level.BlockEvent
+import net.minecraftforge.event.level.LevelEvent
+import net.minecraftforge.event.server.ServerAboutToStartEvent
+import net.minecraftforge.eventbus.api.EventPriority
+import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus
 import net.neoforged.neoforge.capabilities.Capabilities
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent
-import net.neoforged.neoforge.event.AnvilUpdateEvent
-import net.neoforged.neoforge.event.RegisterCommandsEvent
-import net.neoforged.neoforge.event.ServerChatEvent
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.living.*
-import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
-import net.neoforged.neoforge.event.entity.player.PlayerEvent
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
-import net.neoforged.neoforge.event.level.BlockEvent
 import net.neoforged.neoforge.event.level.LevelEvent
-import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
-import net.neoforged.neoforge.event.tick.LevelTickEvent
-import net.neoforged.neoforge.event.tick.PlayerTickEvent
-import net.neoforged.neoforge.event.tick.ServerTickEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 
-@EventBusSubscriber(
-	modid = IrregularImplements.ID
+@Mod.EventBusSubscriber(
+	modid = IrregularImplements.ID,
+	bus = Bus.FORGE
 )
-object CommonEvents {
+object CommonForgeBusEvents {
 
 	@SubscribeEvent
-	fun afterServerTick(event: ServerTickEvent.Post) {
+	fun afterServerTick(event: TickEvent.ServerTickEvent) {
+		if (event.phase != TickEvent.Phase.END) return
+
 		ServerScheduler.tick()
 		EscapeRopeHandler.tick()
 	}
 
+	//TODO: Make sure this works
 	@SubscribeEvent
-	fun afterEntityDamaged(event: LivingDamageEvent.Post) {
+	fun afterEntityDamaged(event: LivingDamageEvent) {
 		ImbueEffect.handleAttackImbues(event)
 	}
 
+	// TODO: Make this work
 	@SubscribeEvent
 	fun onLivingIncomingDamage(event: LivingIncomingDamageEvent) {
 		ImbueEffect.handleDamageImbue(event)
@@ -101,7 +106,9 @@ object CommonEvents {
 	}
 
 	@SubscribeEvent
-	fun onLevelTick(event: LevelTickEvent.Post) {
+	fun onLevelTick(event: TickEvent.LevelTickEvent) {
+		if (event.phase != TickEvent.Phase.END) return
+
 		RedstoneHandlerSavedData.tick(event.level)
 	}
 
@@ -136,7 +143,7 @@ object CommonEvents {
 	}
 
 	@SubscribeEvent
-	fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
+	fun beforePickupItem(event: PlayerEvent.ItemPickupEvent) {
 		DropFilterItem.beforePickupItem(event)
 	}
 
@@ -259,19 +266,15 @@ object CommonEvents {
 	}
 
 	@SubscribeEvent
-	fun entityAttributeEvent(event: EntityAttributeCreationEvent) {
-		event.put(ModEntityTypes.GOLDEN_CHICKEN.get(), GoldenChickenEntity.createAttributes())
-		event.put(ModEntityTypes.SPIRIT.get(), SpiritEntity.createAttributes())
-	}
-
-	@SubscribeEvent
 	fun onRegisterCommandsEvent(event: RegisterCommandsEvent) {
 		ModCommands.register(event.dispatcher, event.buildContext)
 	}
 
 	@SubscribeEvent
-	fun beforePlayerTick(event: PlayerTickEvent.Pre) {
-		val player = event.entity
+	fun beforePlayerTick(event: TickEvent.PlayerTickEvent) {
+		if (event.phase != TickEvent.Phase.START) return
+
+		val player = event.player
 
 		if (player is ServerPlayer && player.level().dimension() == ModDimensions.SPECTRE_LEVEL_KEY) {
 			val handler = SpectreCubeSavedData.get(player.serverLevel())
