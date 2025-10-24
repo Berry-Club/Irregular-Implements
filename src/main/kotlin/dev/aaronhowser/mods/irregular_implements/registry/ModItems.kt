@@ -11,110 +11,110 @@ import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
-import net.neoforged.neoforge.registries.DeferredBlock
-import net.neoforged.neoforge.registries.DeferredItem
-import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.ForgeRegistries
+import net.minecraftforge.registries.RegistryObject
 import java.util.function.Supplier
 
 object ModItems {
 
 	//TODO: Check rarity for all items
 
-	val ITEM_REGISTRY: DeferredRegister.Items =
-		DeferredRegister.createItems(IrregularImplements.ID)
+	val ITEM_REGISTRY: DeferredRegister<Item> =
+		DeferredRegister.create(ForgeRegistries.ITEMS, IrregularImplements.ID)
 
-	val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
+	val STABLE_ENDER_PEARL: RegistryObject<StableEnderPearlItem> =
 		register("stable_ender_pearl", ::StableEnderPearlItem, StableEnderPearlItem.DEFAULT_PROPERTIES)
-	val EVIL_TEAR: DeferredItem<EvilTearItem> =
+	val EVIL_TEAR: RegistryObject<EvilTearItem> =
 		register("evil_tear", ::EvilTearItem)
-	val PORTKEY: DeferredItem<PortkeyItem> =
+	val PORTKEY: RegistryObject<PortkeyItem> =
 		register("portkey", ::PortkeyItem, PortkeyItem.DEFAULT_PROPERTIES)
-	val BIOME_CRYSTAL: DeferredItem<BiomeCrystalItem> =
+	val BIOME_CRYSTAL: RegistryObject<BiomeCrystalItem> =
 		register("biome_crystal", ::BiomeCrystalItem, BiomeCrystalItem.DEFAULT_PROPERTIES)
-	val SUMMONING_PENDULUM: DeferredItem<SummoningPendulumItem> =
+	val SUMMONING_PENDULUM: RegistryObject<SummoningPendulumItem> =
 		register("summoning_pendulum", ::SummoningPendulumItem, SummoningPendulumItem.DEFAULT_PROPERTIES)
-	val BOTTLE_OF_AIR: DeferredItem<AirBottleItem> =
+	val BOTTLE_OF_AIR: RegistryObject<AirBottleItem> =
 		register("bottle_of_air", ::AirBottleItem, AirBottleItem.DEFAULT_PROPERTIES)
-	val ENDER_LETTER: DeferredItem<EnderLetterItem> =
+	val ENDER_LETTER: RegistryObject<EnderLetterItem> =
 		register("ender_letter", ::EnderLetterItem, EnderLetterItem.DEFAULT_PROPERTIES)
-	val GOLDEN_EGG: DeferredItem<GoldenEggItem> =
+	val GOLDEN_EGG: RegistryObject<GoldenEggItem> =
 		register("golden_egg", ::GoldenEggItem)
-	val EMERALD_COMPASS: DeferredItem<EmeraldCompassItem> =
+	val EMERALD_COMPASS: RegistryObject<EmeraldCompassItem> =
 		register("emerald_compass", ::EmeraldCompassItem, EmeraldCompassItem.DEFAULT_PROPERTIES)
-	val GOLDEN_COMPASS: DeferredItem<GoldenCompassItem> =
+	val GOLDEN_COMPASS: RegistryObject<GoldenCompassItem> =
 		register("golden_compass", ::GoldenCompassItem, GoldenCompassItem.DEFAULT_PROPERTIES)
-	val BLAZE_AND_STEEL: DeferredItem<BlazeAndSteelItem> =
+	val BLAZE_AND_STEEL: RegistryObject<BlazeAndSteelItem> =
 		register("blaze_and_steel", ::BlazeAndSteelItem, BlazeAndSteelItem.DEFAULT_PROPERTIES)
-	val ESCAPE_ROPE: DeferredItem<EscapeRopeItem> =
+	val ESCAPE_ROPE: RegistryObject<EscapeRopeItem> =
 		register("escape_rope", ::EscapeRopeItem, EscapeRopeItem.DEFAULT_PROPERTIES)
-	val CHUNK_ANALYZER: DeferredItem<ChunkAnalyzerItem> =
+	val CHUNK_ANALYZER: RegistryObject<ChunkAnalyzerItem> =
 		register("chunk_analyzer", ::ChunkAnalyzerItem, ChunkAnalyzerItem.DEFAULT_PROPERTIES)
-	val LAVA_CHARM: DeferredItem<LavaCharmItem> =
+	val LAVA_CHARM: RegistryObject<LavaCharmItem> =
 		register("lava_charm", ::LavaCharmItem, LavaCharmItem.DEFAULT_PROPERTIES) //TODO: Advancement joking about the ui bar
-	val OBSIDIAN_SKULL: DeferredItem<Item> =
-		basic("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
-	val OBSIDIAN_SKULL_RING: DeferredItem<Item> =
-		basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
-	val DIVINING_ROD: DeferredItem<DiviningRodItem> =
+	val OBSIDIAN_SKULL: RegistryObject<Item> =
+		basicWithProperties("obsidian_skull", Item.Properties().stacksTo(1).fireResistant())
+	val OBSIDIAN_SKULL_RING: RegistryObject<Item> =
+		basicWithProperties("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
+	val DIVINING_ROD: RegistryObject<DiviningRodItem> =
 		register("divining_rod", ::DiviningRodItem, DiviningRodItem.DEFAULT_PROPERTIES)
 
 	// Block items
-	val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
+	val DIAPHANOUS_BLOCK: RegistryObject<DiaphanousBlockItem> =
 		register("diaphanous_block", ::DiaphanousBlockItem)
-	val CUSTOM_CRAFTING_TABLE: DeferredItem<CustomCraftingTableBlockItem> =
+	val CUSTOM_CRAFTING_TABLE: RegistryObject<CustomCraftingTableBlockItem> =
 		register("custom_crafting_table", ::CustomCraftingTableBlockItem)
 
 	// Ingredients
-	val TRANSFORMATION_CORE: DeferredItem<Item> = basic("transformation_core")
-	val OBSIDIAN_ROD: DeferredItem<Item> = basic("obsidian_rod")
-	val BIOME_SENSOR: DeferredItem<Item> = basic("biome_sensor")
-	val PLATE_BASE: DeferredItem<Item> = basic("plate_base")
-	val ECTOPLASM: DeferredItem<Item> = basic("ectoplasm")
-	val SUPER_LUBRICANT_TINCTURE: DeferredItem<Item> = basic("super_lubricant_tincture")
-	val SPECTRE_INGOT: DeferredItem<Item> = basic("spectre_ingot")
-	val SPECTRE_STRING: DeferredItem<Item> = basic("spectre_string")
-	val LUMINOUS_POWDER: DeferredItem<Item> = basicWithProperties("luminous_powder") { Item.Properties().component(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE) }
+	val TRANSFORMATION_CORE: RegistryObject<Item> = basic("transformation_core")
+	val OBSIDIAN_ROD: RegistryObject<Item> = basic("obsidian_rod")
+	val BIOME_SENSOR: RegistryObject<Item> = basic("biome_sensor")
+	val PLATE_BASE: RegistryObject<Item> = basic("plate_base")
+	val ECTOPLASM: RegistryObject<Item> = basic("ectoplasm")
+	val SUPER_LUBRICANT_TINCTURE: RegistryObject<Item> = basic("super_lubricant_tincture")
+	val SPECTRE_INGOT: RegistryObject<Item> = basic("spectre_ingot")
+	val SPECTRE_STRING: RegistryObject<Item> = basic("spectre_string")
+	val LUMINOUS_POWDER: RegistryObject<Item> = basicWithProperties("luminous_powder") { Item.Properties().component(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE) }
 
 	// Bucket
-	val ENDER_BUCKET: DeferredItem<EnderBucketItem> =
+	val ENDER_BUCKET: RegistryObject<EnderBucketItem> =
 		register("ender_bucket", ::EnderBucketItem, EnderBucketItem.DEFAULT_PROPERTIES)
-	val REINFORCED_ENDER_BUCKET: DeferredItem<ReinforcedEnderBucketItem> =
+	val REINFORCED_ENDER_BUCKET: RegistryObject<ReinforcedEnderBucketItem> =
 		register("reinforced_ender_bucket", ::ReinforcedEnderBucketItem, ReinforcedEnderBucketItem.DEFAULT_PROPERTIES)
 
 	// Plants
-	val LOTUS_BLOSSOM: DeferredItem<LotusBlossomItem> =
+	val LOTUS_BLOSSOM: RegistryObject<LotusBlossomItem> =
 		register("lotus_blossom", ::LotusBlossomItem, LotusBlossomItem.DEFAULT_PROPERTIES)
-	val LOTUS_SEEDS: DeferredItem<ItemNameBlockItem> =
+	val LOTUS_SEEDS: RegistryObject<ItemNameBlockItem> =
 		registerItemNameBlockItem("lotus_seeds", ModBlocks.LOTUS)
-	val BEAN: DeferredItem<ItemNameBlockItem> =
+	val BEAN: RegistryObject<ItemNameBlockItem> =
 		registerItemNameBlockItem("bean", ModBlocks.BEAN_SPROUT)
-	val BEAN_STEW: DeferredItem<Item> =
-		basic("bean_stew", Item.Properties().stacksTo(1).food(Foods.stew(8).build()))
-	val LESSER_MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
+	val BEAN_STEW: RegistryObject<Item> =
+		basicWithProperties("bean_stew", Item.Properties().stacksTo(1).food(Foods.stew(8).build()))
+	val LESSER_MAGIC_BEAN: RegistryObject<ItemNameBlockItem> =
 		registerItemNameBlockItem("lesser_magic_bean", ModBlocks.LESSER_BEAN_STALK)
-	val MAGIC_BEAN: DeferredItem<ItemNameBlockItem> =
+	val MAGIC_BEAN: RegistryObject<ItemNameBlockItem> =
 		registerItemNameBlockItem("magic_bean", ModBlocks.BEAN_STALK, Item.Properties().rarity(Rarity.RARE))
 
 	// Armors
-	val MAGIC_HOOD: DeferredItem<ArmorItem> =
+	val MAGIC_HOOD: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"magic_hood",
 			ModArmorMaterials.MAGIC, ArmorItem.Type.HELMET,
 			ModArmorItems.MAGIC_HOOD_PROPERTIES
 		)
-	val WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
+	val WATER_WALKING_BOOTS: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"water_walking_boots",
 			ModArmorMaterials.WATER_WALKING, ArmorItem.Type.BOOTS,
 			ModArmorItems.WATER_WALKING_BOOTS_PROPERTIES
 		)
-	val OBSIDIAN_WATER_WALKING_BOOTS: DeferredItem<ArmorItem> =
+	val OBSIDIAN_WATER_WALKING_BOOTS: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"obsidian_water_walking_boots",
 			ModArmorMaterials.OBSIDIAN_WATER_WALKING, ArmorItem.Type.BOOTS,
 			ModArmorItems.OBSIDIAN_WATER_WALKING_BOOTS_PROPERTIES
 		)
-	val LAVA_WADERS: DeferredItem<ArmorItem> =
+	val LAVA_WADERS: RegistryObject<ArmorItem> =
 		ITEM_REGISTRY.registerItem("lava_waders") {
 			object : ArmorItem(
 				ModArmorMaterials.LAVA_WADERS,
@@ -126,25 +126,25 @@ object ModItems {
 				}
 			}
 		}
-	val SPECTRE_HELMET: DeferredItem<ArmorItem> =
+	val SPECTRE_HELMET: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_helmet",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.HELMET,
 			ModArmorItems.SPECTRE_HELMET_PROPERTIES
 		)
-	val SPECTRE_CHESTPLATE: DeferredItem<ArmorItem> =
+	val SPECTRE_CHESTPLATE: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_chestplate",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.CHESTPLATE,
 			ModArmorItems.SPECTRE_CHESTPLATE_PROPERTIES
 		)
-	val SPECTRE_LEGGINGS: DeferredItem<ArmorItem> =
+	val SPECTRE_LEGGINGS: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_leggings",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.LEGGINGS,
 			ModArmorItems.SPECTRE_LEGGINGS_PROPERTIES
 		)
-	val SPECTRE_BOOTS: DeferredItem<ArmorItem> =
+	val SPECTRE_BOOTS: RegistryObject<ArmorItem> =
 		ModArmorItems.registerArmorItem(
 			"spectre_boots",
 			ModArmorMaterials.SPECTRE, ArmorItem.Type.BOOTS,
@@ -152,65 +152,65 @@ object ModItems {
 		)
 
 	// Weather Eggs
-	val WEATHER_EGG: DeferredItem<WeatherEggItem> =
+	val WEATHER_EGG: RegistryObject<WeatherEggItem> =
 		register("weather_egg", ::WeatherEggItem, WeatherEggItem.DEFAULT_PROPERTIES)
 
 	// Filters
-	val LOCATION_FILTER: DeferredItem<LocationFilterItem> =
+	val LOCATION_FILTER: RegistryObject<LocationFilterItem> =
 		register("location_filter", ::LocationFilterItem, LocationFilterItem.DEFAULT_PROPERTIES)
-	val ITEM_FILTER: DeferredItem<ItemFilterItem> =
+	val ITEM_FILTER: RegistryObject<ItemFilterItem> =
 		register("item_filter", ::ItemFilterItem, ItemFilterItem.DEFAULT_PROPERTIES)
-	val ENTITY_FILTER: DeferredItem<EntityFilterItem> =
+	val ENTITY_FILTER: RegistryObject<EntityFilterItem> =
 		register("entity_filter", ::EntityFilterItem, EntityFilterItem.DEFAULT_PROPERTIES)
-	val PLAYER_FILTER: DeferredItem<PlayerFilterItem> =   //TODO: Rename to Player Filter?
+	val PLAYER_FILTER: RegistryObject<PlayerFilterItem> =   //TODO: Rename to Player Filter?
 		register("player_filter", ::PlayerFilterItem, PlayerFilterItem.DEFAULT_PROPERTIES)
 
 	// Imbues
-	val FIRE_IMBUE: DeferredItem<ImbueItem> =
+	val FIRE_IMBUE: RegistryObject<ImbueItem> =
 		registerImbue("imbue_fire", ModEffects.FIRE_IMBUE)
-	val POISON_IMBUE: DeferredItem<ImbueItem> =
+	val POISON_IMBUE: RegistryObject<ImbueItem> =
 		registerImbue("imbue_poison", ModEffects.POISON_IMBUE)
-	val EXPERIENCE_IMBUE: DeferredItem<ImbueItem> =
+	val EXPERIENCE_IMBUE: RegistryObject<ImbueItem> =
 		registerImbue("imbue_experience", ModEffects.EXPERIENCE_IMBUE)
-	val WITHER_IMBUE: DeferredItem<ImbueItem> =
+	val WITHER_IMBUE: RegistryObject<ImbueItem> =
 		registerImbue("imbue_wither", ModEffects.WITHER_IMBUE)
-	val COLLAPSE_IMBUE: DeferredItem<ImbueItem> =
+	val COLLAPSE_IMBUE: RegistryObject<ImbueItem> =
 		registerImbue("imbue_collapse", ModEffects.COLLAPSE_IMBUE)
-	val SPECTRE_IMBUE: DeferredItem<ImbueItem> =
+	val SPECTRE_IMBUE: RegistryObject<ImbueItem> =
 		registerImbue("imbue_spectre", ModEffects.SPECTRE_IMBUE)
 
 	// Spectre
-	val SPECTRE_ILLUMINATOR: DeferredItem<SpectreIlluminatorItem> =
+	val SPECTRE_ILLUMINATOR: RegistryObject<SpectreIlluminatorItem> =
 		register("spectre_illuminator", ::SpectreIlluminatorItem)
-	val BLACKOUT_POWDER: DeferredItem<BlackoutPowderItem> =
+	val BLACKOUT_POWDER: RegistryObject<BlackoutPowderItem> =
 		register("blackout_powder", ::BlackoutPowderItem)
-	val SPECTRE_KEY: DeferredItem<SpectreKeyItem> =
+	val SPECTRE_KEY: RegistryObject<SpectreKeyItem> =
 		register("spectre_key", ::SpectreKeyItem)
-	val SPECTRE_ANCHOR: DeferredItem<SpectreAnchorItem> =
+	val SPECTRE_ANCHOR: RegistryObject<SpectreAnchorItem> =
 		register("spectre_anchor", ::SpectreAnchorItem, SpectreAnchorItem.DEFAULT_PROPERTIES)
-	val SPECTRE_CHARGER_BASIC: DeferredItem<SpectreChargerItem> =
+	val SPECTRE_CHARGER_BASIC: RegistryObject<SpectreChargerItem> =
 		registerSpectreCharger("spectre_charger_basic", SpectreChargerItem.Type.BASIC)
-	val SPECTRE_CHARGER_REDSTONE: DeferredItem<SpectreChargerItem> =
+	val SPECTRE_CHARGER_REDSTONE: RegistryObject<SpectreChargerItem> =
 		registerSpectreCharger("spectre_charger_redstone", SpectreChargerItem.Type.REDSTONE)
-	val SPECTRE_CHARGER_ENDER: DeferredItem<SpectreChargerItem> =
+	val SPECTRE_CHARGER_ENDER: RegistryObject<SpectreChargerItem> =
 		registerSpectreCharger("spectre_charger_ender", SpectreChargerItem.Type.ENDER)
-	val SPECTRE_CHARGER_GENESIS: DeferredItem<SpectreChargerItem> =
+	val SPECTRE_CHARGER_GENESIS: RegistryObject<SpectreChargerItem> =
 		registerSpectreCharger("spectre_charger_genesis", SpectreChargerItem.Type.GENESIS)
-	val SPECTRE_SWORD: DeferredItem<SwordItem> =
+	val SPECTRE_SWORD: RegistryObject<SwordItem> =
 		ModToolItems.registerSword("spectre_sword", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_SWORD_DEFAULT_PROPERTIES)
-	val SPECTRE_PICKAXE: DeferredItem<PickaxeItem> =
+	val SPECTRE_PICKAXE: RegistryObject<PickaxeItem> =
 		ModToolItems.registerPickaxe("spectre_pickaxe", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_PICKAXE_DEFAULT_PROPERTIES)
-	val SPECTRE_AXE: DeferredItem<AxeItem> =
+	val SPECTRE_AXE: RegistryObject<AxeItem> =
 		ModToolItems.registerAxe("spectre_axe", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_AXE_DEFAULT_PROPERTIES)
-	val SPECTRE_SHOVEL: DeferredItem<ShovelItem> =
+	val SPECTRE_SHOVEL: RegistryObject<ShovelItem> =
 		ModToolItems.registerShovel("spectre_shovel", ModToolItems.SPECTRE_TIER, ModToolItems.SPECTRE_SHOVEL_DEFAULT_PROPERTIES)
 
 	// Redstone
-	val REDSTONE_TOOL: DeferredItem<RedstoneToolItem> =
+	val REDSTONE_TOOL: RegistryObject<RedstoneToolItem> =
 		register("redstone_tool", ::RedstoneToolItem, RedstoneToolItem.DEFAULT_PROPERTIES)
-	val REDSTONE_ACTIVATOR: DeferredItem<RedstoneActivatorItem> =
+	val REDSTONE_ACTIVATOR: RegistryObject<RedstoneActivatorItem> =
 		register("redstone_activator", ::RedstoneActivatorItem, RedstoneActivatorItem.DEFAULT_PROPERTIES)
-	val REDSTONE_REMOTE: DeferredItem<RedstoneRemoteItem> =
+	val REDSTONE_REMOTE: RegistryObject<RedstoneRemoteItem> =
 		register("redstone_remote", ::RedstoneRemoteItem, RedstoneRemoteItem.DEFAULT_PROPERTIES)
 	val ADVANCED_REDSTONE_TORCH =
 		register(
@@ -226,73 +226,73 @@ object ModItems {
 		)
 
 	// Floo
-	val FLOO_POWDER: DeferredItem<Item> =
+	val FLOO_POWDER: RegistryObject<Item> =
 		basic("floo_powder")
-	val FLOO_SIGN: DeferredItem<FlooSignItem> =
+	val FLOO_SIGN: RegistryObject<FlooSignItem> =
 		register("floo_sign", ::FlooSignItem)
-	val FLOO_TOKEN: DeferredItem<FlooTokenItem> =
+	val FLOO_TOKEN: RegistryObject<FlooTokenItem> =
 		register("floo_token", ::FlooTokenItem)
-	val FLOO_POUCH: DeferredItem<FlooPouchItem> =
+	val FLOO_POUCH: RegistryObject<FlooPouchItem> =
 		register("floo_pouch", ::FlooPouchItem, FlooPouchItem.DEFAULT_PROPERTIES)
 
 	// Not above 1.7
-	val BIOME_CAPSULE: DeferredItem<BiomeCapsuleItem> =
+	val BIOME_CAPSULE: RegistryObject<BiomeCapsuleItem> =
 		register("biome_capsule", ::BiomeCapsuleItem, BiomeCapsuleItem.DEFAULT_PROPERTIES)
-	val BIOME_PAINTER: DeferredItem<BiomePainterItem> =
+	val BIOME_PAINTER: RegistryObject<BiomePainterItem> =
 		register("biome_painter", ::BiomePainterItem, BiomePainterItem.DEFAULT_PROPERTIES)
-	val DROP_FILTER: DeferredItem<DropFilterItem> =
+	val DROP_FILTER: RegistryObject<DropFilterItem> =
 		register("drop_filter", ::DropFilterItem, DropFilterItem.DEFAULT_PROPERTIES)
-	val VOIDING_DROP_FILTER: DeferredItem<DropFilterItem> =
+	val VOIDING_DROP_FILTER: RegistryObject<DropFilterItem> =
 		register("voiding_drop_filter", ::DropFilterItem, DropFilterItem.DEFAULT_PROPERTIES)
-	val VOID_STONE: DeferredItem<VoidStoneItem> =
+	val VOID_STONE: RegistryObject<VoidStoneItem> =
 		register("void_stone", ::VoidStoneItem, VoidStoneItem.DEFAULT_PROPERTIES)
-	val WHITE_STONE: DeferredItem<WhiteStoneItem> =
+	val WHITE_STONE: RegistryObject<WhiteStoneItem> =
 		register("white_stone", ::WhiteStoneItem, WhiteStoneItem.DEFAULT_PROPERTIES)
 
 	// Not above 1.6.4
-	val PORTABLE_ENDER_BRIDGE: DeferredItem<PortableEnderBridgeItem> =
+	val PORTABLE_ENDER_BRIDGE: RegistryObject<PortableEnderBridgeItem> =
 		register("portable_ender_bridge", ::PortableEnderBridgeItem, PortableEnderBridgeItem.DEFAULT_PROPERTIES)
-	val BLOCK_MOVER: DeferredItem<BlockMoverItem> =
+	val BLOCK_MOVER: RegistryObject<BlockMoverItem> =
 		register("block_mover", ::BlockMoverItem, BlockMoverItem.DEFAULT_PROPERTIES)
-	val DIAMOND_BREAKER: DeferredItem<Item> =
+	val DIAMOND_BREAKER: RegistryObject<Item> =
 		basic("diamond_breaker")
-	val BLOCK_REPLACER: DeferredItem<BlockReplacerItem> =
+	val BLOCK_REPLACER: RegistryObject<BlockReplacerItem> =
 		register("block_replacer", ::BlockReplacerItem, BlockReplacerItem.DEFAULT_PROPERTIES)
 
 	// Colors
-	val GRASS_SEEDS: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds", color = null)
-	val GRASS_SEEDS_WHITE: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_WHITE: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_white", color = DyeColor.WHITE)
-	val GRASS_SEEDS_ORANGE: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_ORANGE: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_orange", color = DyeColor.ORANGE)
-	val GRASS_SEEDS_MAGENTA: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_MAGENTA: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_magenta", color = DyeColor.MAGENTA)
-	val GRASS_SEEDS_LIGHT_BLUE: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_LIGHT_BLUE: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_light_blue", color = DyeColor.LIGHT_BLUE)
-	val GRASS_SEEDS_YELLOW: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_YELLOW: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_yellow", color = DyeColor.YELLOW)
-	val GRASS_SEEDS_LIME: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_LIME: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_lime", color = DyeColor.LIME)
-	val GRASS_SEEDS_PINK: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_PINK: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_pink", color = DyeColor.PINK)
-	val GRASS_SEEDS_GRAY: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_GRAY: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_gray", color = DyeColor.GRAY)
-	val GRASS_SEEDS_LIGHT_GRAY: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_LIGHT_GRAY: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_light_gray", color = DyeColor.LIGHT_GRAY)
-	val GRASS_SEEDS_CYAN: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_CYAN: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_cyan", color = DyeColor.CYAN)
-	val GRASS_SEEDS_PURPLE: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_PURPLE: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_purple", color = DyeColor.PURPLE)
-	val GRASS_SEEDS_BLUE: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_BLUE: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_blue", color = DyeColor.BLUE)
-	val GRASS_SEEDS_BROWN: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_BROWN: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_brown", color = DyeColor.BROWN)
-	val GRASS_SEEDS_GREEN: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_GREEN: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_green", color = DyeColor.GREEN)
-	val GRASS_SEEDS_RED: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_RED: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_red", color = DyeColor.RED)
-	val GRASS_SEEDS_BLACK: DeferredItem<GrassSeedItem> =
+	val GRASS_SEEDS_BLACK: RegistryObject<GrassSeedItem> =
 		grassSeed("grass_seeds_black", color = DyeColor.BLACK)
 
 	// Removed items:
@@ -305,64 +305,64 @@ object ModItems {
 	// - Loot Generator (don't care)
 	// - Magnetic Force (don't care, obscure, arguably OP)
 
-	private fun basic(id: String): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerSimpleItem(id)
+	private fun basic(id: String): RegistryObject<Item> {
+		return ITEM_REGISTRY.register(id) { Item(Item.Properties()) }
 	}
 
-	private fun basic(id: String, properties: Item.Properties): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerSimpleItem(id, properties)
+	private fun basicWithProperties(id: String, properties: Item.Properties): RegistryObject<Item> {
+		return ITEM_REGISTRY.register(id) { Item(properties) }
 	}
 
-	private fun basicWithProperties(id: String, properties: Supplier<Item.Properties>): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerItem(id) { Item(properties.get()) }
+	private fun basicWithProperties(id: String, properties: Supplier<Item.Properties>): RegistryObject<Item> {
+		return ITEM_REGISTRY.register(id) { Item(properties.get()) }
 	}
 
 	private fun <I : Item> register(
 		id: String,
 		builder: (Item.Properties) -> I,
 		properties: Item.Properties = Item.Properties()
-	): DeferredItem<I> {
-		return ITEM_REGISTRY.registerItem(id) { builder(properties) }
+	): RegistryObject<I> {
+		return ITEM_REGISTRY.register(id) { builder(properties) }
 	}
 
 	private fun <I : Item> register(
 		id: String,
 		builder: (Item.Properties) -> I,
 		properties: Supplier<Item.Properties>
-	): DeferredItem<I> {
-		return ITEM_REGISTRY.registerItem(id) { builder(properties.get()) }
+	): RegistryObject<I> {
+		return ITEM_REGISTRY.register(id) { builder(properties.get()) }
 	}
 
 	private fun registerItemNameBlockItem(
 		id: String,
-		block: DeferredBlock<out Block>,
+		block: RegistryObject<out Block>,
 		properties: Item.Properties = Item.Properties()
-	): DeferredItem<ItemNameBlockItem> {
-		return ITEM_REGISTRY.registerItem(id) { ItemNameBlockItem(block.get(), properties) }
+	): RegistryObject<ItemNameBlockItem> {
+		return ITEM_REGISTRY.register(id) { ItemNameBlockItem(block.get(), properties) }
 	}
 
 	private fun registerImbue(
 		id: String,
 		mobEffect: Holder<MobEffect>,
 		properties: Item.Properties = ImbueItem.DEFAULT_PROPERTIES
-	): DeferredItem<ImbueItem> {
-		return ITEM_REGISTRY.registerItem(id) { ImbueItem(mobEffect, properties) }
+	): RegistryObject<ImbueItem> {
+		return ITEM_REGISTRY.register(id) { ImbueItem(mobEffect, properties) }
 	}
 
 	private fun registerSpectreCharger(
 		id: String,
 		type: SpectreChargerItem.Type,
 		properties: Item.Properties = SpectreChargerItem.DEFAULT_PROPERTIES
-	): DeferredItem<SpectreChargerItem> {
-		return ITEM_REGISTRY.registerItem(id) { SpectreChargerItem(type, properties) }
+	): RegistryObject<SpectreChargerItem> {
+		return ITEM_REGISTRY.register(id) { SpectreChargerItem(type, properties) }
 	}
 
 	private fun grassSeed(
 		id: String,
 		color: DyeColor?,
 		properties: Item.Properties = Item.Properties()
-	): DeferredItem<GrassSeedItem> {
-		return ITEM_REGISTRY.registerItem(id) { GrassSeedItem(color, properties) }
+	): RegistryObject<GrassSeedItem> {
+		return ITEM_REGISTRY.register(id) { GrassSeedItem(color, properties) }
 	}
 
 }
