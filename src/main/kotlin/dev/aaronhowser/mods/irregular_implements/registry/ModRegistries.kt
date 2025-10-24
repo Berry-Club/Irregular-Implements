@@ -1,12 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraftforge.eventbus.api.IEventBus
+import net.minecraftforge.registries.DeferredRegister
+
 
 object ModRegistries {
 
 	private val registries: List<DeferredRegister<*>> = listOf(
-		ModDataComponents.DATA_COMPONENT_REGISTRY,
+//		ModDataComponents.DATA_COMPONENT_REGISTRY,
 		ModItems.ITEM_REGISTRY,
 		ModBlocks.BLOCK_REGISTRY,
 		ModBlockEntityTypes.BLOCK_ENTITY_REGISTRY,

@@ -1,66 +1,66 @@
 package dev.aaronhowser.mods.irregular_implements.config
 
-import net.neoforged.neoforge.common.ModConfigSpec
+import net.minecraftforge.common.ForgeConfigSpec
 import org.apache.commons.lang3.tuple.Pair
 
 class ServerConfig(
-	private val builder: ModConfigSpec.Builder
+	private val builder: ForgeConfigSpec.Builder
 ) {
 
-	lateinit var blockDestabilizerLimit: ModConfigSpec.IntValue
+	lateinit var blockDestabilizerLimit: ForgeConfigSpec.IntValue
 
-	lateinit var biomePainterRadius: ModConfigSpec.IntValue
-	lateinit var biomePainterViewHorizontalRadius: ModConfigSpec.IntValue
-	lateinit var biomePainterViewVerticalRadius: ModConfigSpec.IntValue
+	lateinit var biomePainterRadius: ForgeConfigSpec.IntValue
+	lateinit var biomePainterViewHorizontalRadius: ForgeConfigSpec.IntValue
+	lateinit var biomePainterViewVerticalRadius: ForgeConfigSpec.IntValue
 
-	lateinit var blockMoverTryVaporizeFluid: ModConfigSpec.BooleanValue
-	lateinit var portableEnderBridgeRange: ModConfigSpec.IntValue
-	lateinit var summoningPendulumCapacity: ModConfigSpec.IntValue
-	lateinit var blockReplacerUniqueBlocks: ModConfigSpec.IntValue
-	lateinit var diviningRodCheckRadius: ModConfigSpec.IntValue
-	lateinit var rainShieldChunkRadius: ModConfigSpec.IntValue
-	lateinit var peaceCandleChunkRadius: ModConfigSpec.IntValue
+	lateinit var blockMoverTryVaporizeFluid: ForgeConfigSpec.BooleanValue
+	lateinit var portableEnderBridgeRange: ForgeConfigSpec.IntValue
+	lateinit var summoningPendulumCapacity: ForgeConfigSpec.IntValue
+	lateinit var blockReplacerUniqueBlocks: ForgeConfigSpec.IntValue
+	lateinit var diviningRodCheckRadius: ForgeConfigSpec.IntValue
+	lateinit var rainShieldChunkRadius: ForgeConfigSpec.IntValue
+	lateinit var peaceCandleChunkRadius: ForgeConfigSpec.IntValue
 
-	lateinit var natureCoreReplaceSandRadius: ModConfigSpec.IntValue
-	lateinit var natureCorePlantSaplingRadius: ModConfigSpec.IntValue
-	lateinit var natureCoreBoneMealCropRadius: ModConfigSpec.IntValue
-	lateinit var natureCoreSpawnAnimalRadius: ModConfigSpec.DoubleValue
+	lateinit var natureCoreReplaceSandRadius: ForgeConfigSpec.IntValue
+	lateinit var natureCorePlantSaplingRadius: ForgeConfigSpec.IntValue
+	lateinit var natureCoreBoneMealCropRadius: ForgeConfigSpec.IntValue
+	lateinit var natureCoreSpawnAnimalRadius: ForgeConfigSpec.DoubleValue
 
-	lateinit var spectreImbueChance: ModConfigSpec.DoubleValue
+	lateinit var spectreImbueChance: ForgeConfigSpec.DoubleValue
 
-	lateinit var spectreBufferCapacity: ModConfigSpec.IntValue
-	lateinit var spectreBasicRate: ModConfigSpec.IntValue
-	lateinit var spectreRedstoneRate: ModConfigSpec.IntValue
-	lateinit var spectreEnderRate: ModConfigSpec.IntValue
-	lateinit var spectreNumberRate: ModConfigSpec.IntValue
-	lateinit var spectreGenesisRate: ModConfigSpec.IntValue
+	lateinit var spectreBufferCapacity: ForgeConfigSpec.IntValue
+	lateinit var spectreBasicRate: ForgeConfigSpec.IntValue
+	lateinit var spectreRedstoneRate: ForgeConfigSpec.IntValue
+	lateinit var spectreEnderRate: ForgeConfigSpec.IntValue
+	lateinit var spectreNumberRate: ForgeConfigSpec.IntValue
+	lateinit var spectreGenesisRate: ForgeConfigSpec.IntValue
 
-	lateinit var spectreChargerBasic: ModConfigSpec.IntValue
-	lateinit var specterChargerRedstone: ModConfigSpec.IntValue
-	lateinit var spectreChargerEnder: ModConfigSpec.IntValue
-	lateinit var spectreChargerGenesis: ModConfigSpec.IntValue
+	lateinit var spectreChargerBasic: ForgeConfigSpec.IntValue
+	lateinit var specterChargerRedstone: ForgeConfigSpec.IntValue
+	lateinit var spectreChargerEnder: ForgeConfigSpec.IntValue
+	lateinit var spectreChargerGenesis: ForgeConfigSpec.IntValue
 
-	lateinit var escapeRopeMaxBlocks: ModConfigSpec.IntValue
-	lateinit var escapeRopeBlocksPerTick: ModConfigSpec.IntValue
+	lateinit var escapeRopeMaxBlocks: ForgeConfigSpec.IntValue
+	lateinit var escapeRopeBlocksPerTick: ForgeConfigSpec.IntValue
 
-	lateinit var blockTeleporterCrossDimension: ModConfigSpec.BooleanValue
+	lateinit var blockTeleporterCrossDimension: ForgeConfigSpec.BooleanValue
 
-	lateinit var spiritMaxAge: ModConfigSpec.IntValue
-	lateinit var spiritBaseSpawnChance: ModConfigSpec.DoubleValue
-	lateinit var spiritSpawnChanceDragonKilledBonus: ModConfigSpec.DoubleValue
-	lateinit var spiritSpawnFullMoonBonus: ModConfigSpec.DoubleValue
+	lateinit var spiritMaxAge: ForgeConfigSpec.IntValue
+	lateinit var spiritBaseSpawnChance: ForgeConfigSpec.DoubleValue
+	lateinit var spiritSpawnChanceDragonKilledBonus: ForgeConfigSpec.DoubleValue
+	lateinit var spiritSpawnFullMoonBonus: ForgeConfigSpec.DoubleValue
 
-	lateinit var pitcherPlantTickFillAmount: ModConfigSpec.IntValue
-	lateinit var pitcherPlantBoneMealFillAmount: ModConfigSpec.IntValue
-	lateinit var pitcherPlantUseFillAmount: ModConfigSpec.IntValue
-	lateinit var pitcherPlantPipeDrainRate: ModConfigSpec.IntValue
+	lateinit var pitcherPlantTickFillAmount: ForgeConfigSpec.IntValue
+	lateinit var pitcherPlantBoneMealFillAmount: ForgeConfigSpec.IntValue
+	lateinit var pitcherPlantUseFillAmount: ForgeConfigSpec.IntValue
+	lateinit var pitcherPlantPipeDrainRate: ForgeConfigSpec.IntValue
 
-	lateinit var biomeRadarSearchRadius: ModConfigSpec.IntValue
-	lateinit var biomeRadarHorizontalStep: ModConfigSpec.IntValue
-	lateinit var biomeRadarVerticalStep: ModConfigSpec.IntValue
+	lateinit var biomeRadarSearchRadius: ForgeConfigSpec.IntValue
+	lateinit var biomeRadarHorizontalStep: ForgeConfigSpec.IntValue
+	lateinit var biomeRadarVerticalStep: ForgeConfigSpec.IntValue
 
-	lateinit var triggerGlassRange: ModConfigSpec.IntValue
-	lateinit var triggerGlassDuration: ModConfigSpec.IntValue
+	lateinit var triggerGlassRange: ForgeConfigSpec.IntValue
+	lateinit var triggerGlassDuration: ForgeConfigSpec.IntValue
 
 	init {
 		basicServerConfigs()
@@ -267,10 +267,10 @@ class ServerConfig(
 	}
 
 	companion object {
-		private val configPair: Pair<ServerConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ServerConfig)
+		private val configPair: Pair<ServerConfig, ForgeConfigSpec> = ForgeConfigSpec.Builder().configure(::ServerConfig)
 
 		val CONFIG: ServerConfig = configPair.left
-		val CONFIG_SPEC: ModConfigSpec = configPair.right
+		val CONFIG_SPEC: ForgeConfigSpec = configPair.right
 
 		const val SPECTRE_CATEGORY = "spectre"
 		const val BIOME_PAINTER_CATEGORY = "biome_painter"
