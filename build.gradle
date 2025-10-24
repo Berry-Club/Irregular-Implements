@@ -9,33 +9,55 @@ plugins {
 	//id 'org.jetbrains.kotlin.plugin.serialization' version '2.0.0'
 }
 
-version = mod_version
-group = mod_group_id
+def ENV = System.getenv()
+def isLocal = !ENV.containsKey("GITHUB_RUN_NUMBER")
 
-base {
-	archivesName = mod_id
-}
+version = "${mod_version}-${isLocal ? "local.${Instant.now().epochSecond}" : "build.${ENV.GITHUB_RUN_NUMBER}"}"
+group = project.mod_group_id
+
+def archiveName = "${mod_id.replace("_", "-")}-${minecraft_version}"
+base.archivesName = archiveName
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println("Java: ${System.getProperty('java.version')}, JVM: ${System.getProperty('java.vm.version')} (${System.getProperty('java.vendor')}), Arch: ${System.getProperty('os.arch')}")
 
 minecraft {
-	// Change to your preferred mappings
 	mappings channel: mapping_channel, version: mapping_version
-	// Add your AccessTransformer
-	// accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
 	runs {
 		// REQUIRED for processResources to work in dev
 		copyIdeResources = true
 
-		client {
-			workingDirectory project.file('run')
+		"Client-One" {
+			workingDirectory project.file('runs/client')
 
 			property 'forge.logging.markers', 'REGISTRIES'
 			property 'forge.logging.console.level', 'debug'
 			property 'forge.enabledGameTestNamespaces', mod_id
+
+			if (ENV.MC_CLIENT_ARGS) {
+				args ENV.MC_CLIENT_ARGS.tokenize()
+			}
+
+			mods {
+				"$mod_id" {
+					source sourceSets.main
+				}
+			}
+		}
+
+		"Client-Two" {
+			workingDirectory project.file('runs/client')
+
+			property 'forge.logging.markers', 'REGISTRIES'
+			property 'forge.logging.console.level', 'debug'
+			property 'forge.enabledGameTestNamespaces', mod_id
+
+			if (ENV.MC_CLIENT_2_ARGS) {
+				args ENV.MC_CLIENT_2_ARGS.tokenize()
+			}
 
 			mods {
 				"$mod_id" {
@@ -45,7 +67,7 @@ minecraft {
 		}
 
 		server {
-			workingDirectory project.file('run/server')
+			workingDirectory project.file('runs/server')
 
 			property 'forge.logging.markers', 'REGISTRIES'
 			property 'forge.logging.console.level', 'debug'
@@ -59,7 +81,7 @@ minecraft {
 		}
 
 		gameTestServer {
-			workingDirectory project.file('run/server')
+			workingDirectory project.file('runs/server')
 
 			property 'forge.logging.markers', 'REGISTRIES'
 			property 'forge.logging.console.level', 'debug'
