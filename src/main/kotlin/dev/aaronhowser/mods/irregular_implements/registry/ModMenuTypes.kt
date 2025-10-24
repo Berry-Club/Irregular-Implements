@@ -51,75 +51,75 @@ import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRe
 import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRemoteUseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneMenu
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneScreen
-import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
-import net.neoforged.neoforge.registries.DeferredHolder
-import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.RegistryObject
 import java.util.function.Supplier
 
 object ModMenuTypes {
 
 	val MENU_TYPE_REGISTRY: DeferredRegister<MenuType<*>> =
-		DeferredRegister.create(BuiltInRegistries.MENU, IrregularImplements.ID)
+		DeferredRegister.create(Registries.MENU, IrregularImplements.ID)
 
-	val IRON_DROPPER: DeferredHolder<MenuType<*>, MenuType<IronDropperMenu>> =
+	val IRON_DROPPER: RegistryObject<MenuType<*>, MenuType<IronDropperMenu>> =
 		register("iron_dropper", ::IronDropperMenu)
-	val BLOCK_DESTABILIZER: DeferredHolder<MenuType<*>, MenuType<BlockDestabilizerMenu>> =
+	val BLOCK_DESTABILIZER: RegistryObject<MenuType<BlockDestabilizerMenu>> =
 		register("block_destabilizer", ::BlockDestabilizerMenu)
-	val CHAT_DETECTOR: DeferredHolder<MenuType<*>, MenuType<ChatDetectorMenu>> =
+	val CHAT_DETECTOR: RegistryObject<MenuType<ChatDetectorMenu>> =
 		register("chat_detector", ::ChatDetectorMenu)
-	val GLOBAL_CHAT_DETECTOR: DeferredHolder<MenuType<*>, MenuType<GlobalChatDetectorMenu>> =
+	val GLOBAL_CHAT_DETECTOR: RegistryObject<MenuType<GlobalChatDetectorMenu>> =
 		register("global_chat_detector", ::GlobalChatDetectorMenu)
-	val IGNITER: DeferredHolder<MenuType<*>, MenuType<IgniterMenu>> =
+	val IGNITER: RegistryObject<MenuType<IgniterMenu>> =
 		register("igniter", ::IgniterMenu)
-	val VOID_STONE: DeferredHolder<MenuType<*>, MenuType<VoidStoneMenu>> =
+	val VOID_STONE: RegistryObject<MenuType<VoidStoneMenu>> =
 		register("void_stone", ::VoidStoneMenu)
-	val ONLINE_DETECTOR: DeferredHolder<MenuType<*>, MenuType<OnlineDetectorMenu>> =
+	val ONLINE_DETECTOR: RegistryObject<MenuType<OnlineDetectorMenu>> =
 		register("online_detector", ::OnlineDetectorMenu)
-	val NOTIFICATION_INTERFACE: DeferredHolder<MenuType<*>, MenuType<NotificationInterfaceMenu>> =
+	val NOTIFICATION_INTERFACE: RegistryObject<MenuType<NotificationInterfaceMenu>> =
 		register("notification_interface", ::NotificationInterfaceMenu)
-	val IMBUING_STATION: DeferredHolder<MenuType<*>, MenuType<ImbuingStationMenu>> =
+	val IMBUING_STATION: RegistryObject<MenuType<ImbuingStationMenu>> =
 		register("imbuing_station", ::ImbuingStationMenu)
-	val ITEM_FILTER: DeferredHolder<MenuType<*>, MenuType<ItemFilterMenu>> =
+	val ITEM_FILTER: RegistryObject<MenuType<ItemFilterMenu>> =
 		register("item_filter", ::ItemFilterMenu)
-	val FILTERED_PLATFORM: DeferredHolder<MenuType<*>, MenuType<FilteredPlatformMenu>> =
+	val FILTERED_PLATFORM: RegistryObject<MenuType<FilteredPlatformMenu>> =
 		register("filtered_platform", ::FilteredPlatformMenu)
-	val DROP_FILTER: DeferredHolder<MenuType<*>, MenuType<DropFilterMenu>> =
+	val DROP_FILTER: RegistryObject<MenuType<DropFilterMenu>> =
 		register("drop_filter", ::DropFilterMenu)
-	val INVENTORY_TESTER: DeferredHolder<MenuType<*>, MenuType<InventoryTesterMenu>> =
+	val INVENTORY_TESTER: RegistryObject<MenuType<InventoryTesterMenu>> =
 		register("inventory_tester", ::InventoryTesterMenu)
-	val ADVANCED_ITEM_COLLECTOR: DeferredHolder<MenuType<*>, MenuType<AdvancedItemCollectorMenu>> =
+	val ADVANCED_ITEM_COLLECTOR: RegistryObject<MenuType<AdvancedItemCollectorMenu>> =
 		register("advanced_item_collector", ::AdvancedItemCollectorMenu)
-	val REDSTONE_REMOTE_EDIT: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteEditMenu>> =
+	val REDSTONE_REMOTE_EDIT: RegistryObject<MenuType<RedstoneRemoteEditMenu>> =
 		register("redstone_remote_edit", ::RedstoneRemoteEditMenu)
-	val REDSTONE_REMOTE_USE: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteUseMenu>> =
+	val REDSTONE_REMOTE_USE: RegistryObject<MenuType<RedstoneRemoteUseMenu>> =
 		register("redstone_remote_use", ::RedstoneRemoteUseMenu)
-	val ENDER_ENERGY_DISTRIBUTOR: DeferredHolder<MenuType<*>, MenuType<EnderEnergyDistributorMenu>> =
+	val ENDER_ENERGY_DISTRIBUTOR: RegistryObject<MenuType<EnderEnergyDistributorMenu>> =
 		register("ender_energy_distributor", ::EnderEnergyDistributorMenu)
-	val ENDER_LETTER: DeferredHolder<MenuType<*>, MenuType<EnderLetterMenu>> =
+	val ENDER_LETTER: RegistryObject<MenuType<EnderLetterMenu>> =
 		register("ender_letter", ::EnderLetterMenu)
-	val ENDER_MAILBOX: DeferredHolder<MenuType<*>, MenuType<EnderMailboxMenu>> =
+	val ENDER_MAILBOX: RegistryObject<MenuType<EnderMailboxMenu>> =
 		register("ender_mailbox", ::EnderMailboxMenu)
-	val BLOCK_TELEPORTER: DeferredHolder<MenuType<*>, MenuType<BlockTeleporterMenu>> =
+	val BLOCK_TELEPORTER: RegistryObject<MenuType<BlockTeleporterMenu>> =
 		register("block_teleporter", ::BlockTeleporterMenu)
-	val BLOCK_DETECTOR: DeferredHolder<MenuType<*>, MenuType<BlockDetectorMenu>> =
+	val BLOCK_DETECTOR: RegistryObject<MenuType<BlockDetectorMenu>> =
 		register("block_detector", ::BlockDetectorMenu)
-	val AUTO_PLACER: DeferredHolder<MenuType<*>, MenuType<AutoPlacerMenu>> =
+	val AUTO_PLACER: RegistryObject<MenuType<AutoPlacerMenu>> =
 		register("auto_placer", ::AutoPlacerMenu)
-	val ENTITY_DETECTOR: DeferredHolder<MenuType<*>, MenuType<EntityDetectorMenu>> =
+	val ENTITY_DETECTOR: RegistryObject<MenuType<EntityDetectorMenu>> =
 		register("entity_detector", ::EntityDetectorMenu)
-	val ADVANCED_REDSTONE_INTERFACE: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneInterfaceMenu>> =
+	val ADVANCED_REDSTONE_INTERFACE: RegistryObject<MenuType<AdvancedRedstoneInterfaceMenu>> =
 		register("advanced_redstone_interface", ::AdvancedRedstoneInterfaceMenu)
-	val ADVANCED_REDSTONE_TORCH: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneTorchMenu>> =
+	val ADVANCED_REDSTONE_TORCH: RegistryObject<MenuType<AdvancedRedstoneTorchMenu>> =
 		register("advanced_redstone_torch", ::AdvancedRedstoneTorchMenu)
 
-	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
+	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): RegistryObject<MenuType<T>> {
 		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
 	}
 
+	//TODO
 	fun registerScreens(event: RegisterMenuScreensEvent) {
 		event.register(IRON_DROPPER.get(), ::IronDropperScreen)
 		event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
