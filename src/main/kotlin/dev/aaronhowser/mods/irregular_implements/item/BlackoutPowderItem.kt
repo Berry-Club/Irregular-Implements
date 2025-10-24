@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.toStack
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
@@ -37,7 +38,7 @@ class BlackoutPowderItem(properties: Properties) : Item(properties) {
 
 			illuminator.discard()
 
-			if (!player?.hasInfiniteMaterials().isTrue) {
+			if (!player?.isCreative.isTrue) {
 				OtherUtil.dropStackAt(
 					ModItems.SPECTRE_ILLUMINATOR.toStack(),
 					illuminator.level(),
@@ -47,7 +48,9 @@ class BlackoutPowderItem(properties: Properties) : Item(properties) {
 
 		}
 
-		context.itemInHand.consume(1, context.player)
+		if (!player?.isCreative.isTrue) {
+			context.itemInHand.shrink(1)
+		}
 
 		return InteractionResult.SUCCESS
 	}

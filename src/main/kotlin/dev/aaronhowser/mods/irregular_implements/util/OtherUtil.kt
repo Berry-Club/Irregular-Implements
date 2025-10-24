@@ -31,6 +31,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
+import net.minecraftforge.registries.RegistryObject
 import java.util.*
 
 object OtherUtil {
@@ -208,5 +209,7 @@ object OtherUtil {
 
 		return (r shl 16) or (g shl 8) or b
 	}
+
+	fun RegistryObject<out Item>.toStack(): ItemStack = this.get().defaultInstance
 
 }
