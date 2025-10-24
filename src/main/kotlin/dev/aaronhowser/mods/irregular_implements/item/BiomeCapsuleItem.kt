@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.BiomePointsDataComponent
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.network.chat.Component
@@ -12,6 +11,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 
 class BiomeCapsuleItem(properties: Properties) : Item(properties) {
@@ -35,21 +35,24 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 	}
 
 	//TODO: Improve this
-	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val biomePointsComponent = stack.get(ModDataComponents.BIOME_POINTS) ?: return
+	override fun appendHoverText(pStack: ItemStack, pLevel: Level?, pTooltipComponents: MutableList<Component>, pIsAdvanced: TooltipFlag) {
+		val component = BiomePointsDataComponent.getFromStack(pStack) ?: return
 
-		val biomeComponent = OtherUtil.getBiomeComponent(biomePointsComponent.biome)
-		val biomePoints = biomePointsComponent.points
+		val biomeComponent = OtherUtil.getBiomeComponent(component.biome)
+		val biomePoints = component.points
 
-		tooltipComponents.add(biomeComponent)
-		tooltipComponents.add(biomePoints.toString().toComponent())
+		pTooltipComponents.add(biomeComponent)
+		pTooltipComponents.add(biomePoints.toString().toComponent())
 	}
 
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
-			val foliageColor = stack.get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
+			val component = BiomePointsDataComponent.getFromStack(stack)
+			val biome = component?.biome
+
+			val foliageColor = biome?.value()?.foliageColor ?: 0xFFFFFFFF.toInt()
 
 			return (foliageColor or 0xFF000000.toInt())
 		}
@@ -58,7 +61,7 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 			val stacks = playerInventory.items
 
 			for (stack in stacks) {
-				val component = stack.get(ModDataComponents.BIOME_POINTS) ?: continue
+				val component = BiomePointsDataComponent.getFromStack(stack) ?: continue
 				if (component.points <= 0 || component.biome == excludeBiome) continue
 				return stack
 			}
@@ -67,16 +70,16 @@ class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 		}
 
 		fun getBiomeToPaint(player: Player): Holder<Biome>? {
-			return getFirstNonEmptyCapsule(player.inventory)
-				?.get(ModDataComponents.BIOME_POINTS)
-				?.biome
+			val stack = getFirstNonEmptyCapsule(player.inventory) ?: return null
+			val component = BiomePointsDataComponent.getFromStack(stack) ?: return null
+			return component.biome
 		}
 
 		fun getFirstCapsuleWithBiome(playerInventory: Inventory, biome: Holder<Biome>): ItemStack? {
 			val stacks = playerInventory.items
 
 			for (stack in stacks) {
-				val component = stack.get(ModDataComponents.BIOME_POINTS) ?: continue
+				val component = BiomePointsDataComponent.getFromStack(stack) ?: continue
 				if (component.points <= 0 || component.biome != biome) continue
 				return stack
 			}
