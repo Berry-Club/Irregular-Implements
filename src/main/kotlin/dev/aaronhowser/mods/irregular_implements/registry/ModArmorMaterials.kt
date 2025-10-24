@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Compa
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
@@ -13,6 +14,7 @@ import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.ArmorMaterials
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
+import net.minecraftforge.registries.DeferredRegister
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -22,7 +24,7 @@ import java.util.function.Supplier
 object ModArmorMaterials {
 
 	val ARMOR_MATERIAL_REGISTRY: DeferredRegister<ArmorMaterial> =
-		DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, IrregularImplements.ID)
+		DeferredRegister.create(Registries.ARMOR_MATERIAL, IrregularImplements.ID)
 
 	val WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
 		register(
