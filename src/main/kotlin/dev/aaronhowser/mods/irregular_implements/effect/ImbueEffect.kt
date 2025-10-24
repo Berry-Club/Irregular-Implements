@@ -10,6 +10,8 @@ import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.LivingEntity
+import net.minecraftforge.event.entity.living.LivingDamageEvent
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
@@ -80,7 +82,7 @@ class ImbueEffect(
 		fun handleXpImbue(event: LivingExperienceDropEvent) {
 			val attacker = event.attackingPlayer ?: return
 
-			if (attacker.hasEffect(ModEffects.EXPERIENCE_IMBUE)) {
+			if (attacker.hasEffect(ModEffects.EXPERIENCE_IMBUE.get())) {
 				event.droppedExperience = Mth.ceil(event.droppedExperience * 1.5f)
 			}
 		}

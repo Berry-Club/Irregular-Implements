@@ -3,11 +3,12 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.core.Holder
-import net.minecraft.core.registries.Registries
-import net.minecraft.network.RegistryFriendlyByteBuf
-import net.minecraft.network.codec.ByteBufCodecs
-import net.minecraft.network.codec.StreamCodec
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtOps
+import net.minecraft.nbt.Tag
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.biome.Biome
+import kotlin.jvm.optionals.getOrNull
 
 data class BiomePointsDataComponent(
 	val biome: Holder<Biome>,
@@ -22,9 +23,13 @@ data class BiomePointsDataComponent(
 		return copy(points = points - amount)
 	}
 
+	fun save(): Tag {
+		val dataResult = CODEC.encodeStart(NbtOps.INSTANCE, this)
+		return dataResult.result().get()
+	}
+
 	companion object {
-		private val BIOME_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Holder<Biome>> =
-			ByteBufCodecs.holderRegistry(Registries.BIOME)
+		const val NAME = "biome_points_data"
 
 		val CODEC: Codec<BiomePointsDataComponent> =
 			RecordCodecBuilder.create { instance ->
@@ -38,12 +43,17 @@ data class BiomePointsDataComponent(
 				).apply(instance, ::BiomePointsDataComponent)
 			}
 
-		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, BiomePointsDataComponent> =
-			StreamCodec.composite(
-				BIOME_STREAM_CODEC, BiomePointsDataComponent::biome,
-				ByteBufCodecs.VAR_INT, BiomePointsDataComponent::points,
-				::BiomePointsDataComponent
-			)
+		fun load(tag: CompoundTag): BiomePointsDataComponent? {
+			val dataResult = CODEC.parse(NbtOps.INSTANCE, tag)
+			return dataResult.result().getOrNull()
+		}
+
+		fun getFromStack(itemStack: ItemStack): BiomePointsDataComponent? {
+			val tag = itemStack.tag ?: return null
+			if (!tag.contains(NAME, Tag.TAG_COMPOUND.toInt())) return null
+
+			return load(tag.getCompound(NAME))
+		}
 	}
 
 }

@@ -10,7 +10,7 @@ import net.minecraft.world.level.gameevent.GameEvent
 
 class AirBottleItem(properties: Properties) : Item(properties) {
 
-	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 32
+	override fun getUseDuration(stack: ItemStack): Int = 32
 	override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.DRINK
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {

@@ -17,18 +17,18 @@ import net.minecraft.world.level.biome.Biome
 class BiomeCapsuleItem(properties: Properties) : Item(properties) {
 
 	override fun onEntityItemUpdate(stack: ItemStack, entity: ItemEntity): Boolean {
-		val onBlockPos = entity.blockPosBelowThatAffectsMyMovement
+		val onBlockPos = entity.getOnPos(0.999f)
 
 		if (entity.level().getBlockState(onBlockPos).isAir) return super.onEntityItemUpdate(stack, entity)
 
 		val biome = entity.level().getBiome(onBlockPos)
-		val component = stack.get(ModDataComponents.BIOME_POINTS) ?: BiomePointsDataComponent(biome, 0)
+		val component = BiomePointsDataComponent.getFromStack(stack) ?: BiomePointsDataComponent(biome, 0)
 
 		if (component.biome != biome) return super.onEntityItemUpdate(stack, entity)
 
-		stack.set(
-			ModDataComponents.BIOME_POINTS,
-			component.withMorePoints(1)
+		stack.tag?.put(
+			BiomePointsDataComponent.NAME,
+			component.withMorePoints(1).save()
 		)
 
 		return super.onEntityItemUpdate(stack, entity)
