@@ -2,21 +2,21 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.entity.*
-import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.phys.Vec3
-import net.neoforged.neoforge.registries.DeferredHolder
-import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.RegistryObject
 import java.util.function.Supplier
 
 object ModEntityTypes {
 
 	val ENTITY_TYPE_REGISTRY: DeferredRegister<EntityType<*>> =
-		DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, IrregularImplements.ID)
+		DeferredRegister.create(Registries.ENTITY_TYPE, IrregularImplements.ID)
 
-	val SPECTRE_ILLUMINATOR: DeferredHolder<EntityType<*>, EntityType<SpectreIlluminatorEntity>> =
+	val SPECTRE_ILLUMINATOR: RegistryObject<EntityType<SpectreIlluminatorEntity>> =
 		registerEntityType(
 			"spectre_illuminator",
 			MobCategory.MISC,
@@ -26,7 +26,7 @@ object ModEntityTypes {
 			clientTrackingRange(256)
 		}
 
-	val ARTIFICIAL_END_PORTAL: DeferredHolder<EntityType<*>, EntityType<ArtificialEndPortalEntity>> =
+	val ARTIFICIAL_END_PORTAL: RegistryObject<EntityType<ArtificialEndPortalEntity>> =
 		registerEntityType(
 			"artificial_end_portal",
 			MobCategory.MISC,
@@ -34,7 +34,7 @@ object ModEntityTypes {
 			::ArtificialEndPortalEntity
 		)
 
-	val GOLDEN_EGG: DeferredHolder<EntityType<*>, EntityType<ThrownGoldenEggEntity>> =
+	val GOLDEN_EGG: RegistryObject<EntityType<ThrownGoldenEggEntity>> =
 		registerEntityType(
 			"thrown_golden_egg",
 			MobCategory.MISC,
@@ -45,19 +45,20 @@ object ModEntityTypes {
 			updateInterval(10)
 		}
 
-	val GOLDEN_CHICKEN: DeferredHolder<EntityType<*>, EntityType<GoldenChickenEntity>> =
+	val GOLDEN_CHICKEN: RegistryObject<EntityType<GoldenChickenEntity>> =
 		registerEntityType(
 			"golden_chicken",
 			MobCategory.CREATURE,
 			0.4f, 0.7f,
 			::GoldenChickenEntity
 		) {
-			eyeHeight(0.644f)
-			passengerAttachments(Vec3(0.0, 0.7, -0.1))
+//			eyeHeight(0.644f)
+//			passengerAttachments(Vec3(0.0, 0.7, -0.1))
+			// TODO
 			clientTrackingRange(10)
 		}
 
-	val WEATHER_EGG: DeferredHolder<EntityType<*>, EntityType<ThrownWeatherEggEntity>> =
+	val WEATHER_EGG: RegistryObject<EntityType<ThrownWeatherEggEntity>> =
 		registerEntityType(
 			"thrown_weather_egg",
 			MobCategory.MISC,
@@ -68,7 +69,7 @@ object ModEntityTypes {
 			updateInterval(10)
 		}
 
-	val WEATHER_CLOUD: DeferredHolder<EntityType<*>, EntityType<WeatherCloudEntity>> =
+	val WEATHER_CLOUD: RegistryObject<EntityType<WeatherCloudEntity>> =
 		registerEntityType(
 			"weather_cloud",
 			MobCategory.MISC,
@@ -78,19 +79,19 @@ object ModEntityTypes {
 			clientTrackingRange(256)
 		}
 
-	val PORTKEY_ITEM: DeferredHolder<EntityType<*>, EntityType<PortkeyItemEntity>> =
+	val PORTKEY_ITEM: RegistryObject<EntityType<PortkeyItemEntity>> =
 		registerEntityType(
 			"portkey_item",
 			MobCategory.MISC,
 			0.25f, 0.25f,
 			::PortkeyItemEntity
 		) {
-			eyeHeight(0.2125f)
+//			eyeHeight(0.2125f)
 			clientTrackingRange(6)
 			updateInterval(20)
 		}
 
-	val TEMPORARY_FLOO_FIREPLACE: DeferredHolder<EntityType<*>, EntityType<TemporaryFlooFireplaceEntity>> =
+	val TEMPORARY_FLOO_FIREPLACE: RegistryObject<EntityType<TemporaryFlooFireplaceEntity>> =
 		registerEntityType(
 			"temporary_floo_fireplace",
 			MobCategory.MISC,
@@ -117,7 +118,7 @@ object ModEntityTypes {
 		width: Float, height: Float,
 		entityFactory: EntityType.EntityFactory<T>,
 		builderModifier: EntityType.Builder<T>.() -> Unit = {}
-	): DeferredHolder<EntityType<*>, EntityType<T>> {
+	): RegistryObject<EntityType<T>> {
 		return ENTITY_TYPE_REGISTRY.register(name, Supplier {
 			EntityType.Builder.of(entityFactory, category)
 				.sized(width, height)
