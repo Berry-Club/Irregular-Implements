@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.TransparentBlock
+import net.minecraft.world.level.block.GlassBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 class PermeableGlassBlock private constructor(
 	isSolidForMobsOnly: Boolean,
 	properties: Properties
-) : TransparentBlock(properties) {
+) : GlassBlock(properties) {
 
 	val mobsPassThrough: Boolean = !isSolidForMobsOnly
 	val playersPassThrough: Boolean = isSolidForMobsOnly
@@ -44,12 +44,12 @@ class PermeableGlassBlock private constructor(
 	companion object {
 		val LAPIS = PermeableGlassBlock(
 			isSolidForMobsOnly = false,
-			Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
+			Properties.copy(Blocks.BLUE_STAINED_GLASS)
 		)
 
 		val QUARTZ = PermeableGlassBlock(
 			isSolidForMobsOnly = true,
-			Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
+			Properties.copy(Blocks.LIGHT_GRAY_STAINED_GLASS)
 		)
 	}
 

@@ -13,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.GlassBlock
 import net.minecraft.world.level.block.TransparentBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -20,7 +21,7 @@ import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class SpectreLensBlock : EntityBlock, TransparentBlock(Properties.ofFullCopy(Blocks.GLASS)) {
+class SpectreLensBlock : EntityBlock, GlassBlock(Properties.copy(Blocks.GLASS)) {
 
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
 		return SHAPE
