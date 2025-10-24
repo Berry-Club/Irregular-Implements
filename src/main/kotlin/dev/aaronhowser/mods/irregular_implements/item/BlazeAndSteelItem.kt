@@ -13,6 +13,7 @@ import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.block.BaseFireBlock
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraftforge.common.ToolAction
 import net.neoforged.neoforge.common.ItemAbilities
 
 class BlazeAndSteelItem(properties: Properties) : FlintAndSteelItem(properties) {
