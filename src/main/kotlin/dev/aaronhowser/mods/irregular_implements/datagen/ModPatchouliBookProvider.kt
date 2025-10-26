@@ -160,6 +160,23 @@ class ModPatchouliBookProvider(
 				.build()
 		)
 
+		add(
+			ModItems.PORTKEY,
+			"Portkey",
+			TextPage.basicTextPage(
+				"Portkey",
+				doubleSpacedLines(
+					"${major("Portkeys")} will instantly teleport the player to a set location when they're picked up off the ground.",
+					"To set the location, ${minor("click the Portkey on the ground")}, which will make it start glowing. Throw it on the ground and it will activate after several seconds, which will make it stop glowing.",
+					"The only limit is that it cannot cross dimensions. The Portkey is also ${bad("consumed upon use")}."
+				)
+			),
+			SpotlightPage.basicPage(
+				ModItems.PORTKEY,
+				"Additionally, you can ${minor("craft the Portkey with any other item")} to disguise it. The dropped item will look like the disguise rather than the Portkey itself."
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
@@ -202,11 +219,11 @@ class ModPatchouliBookProvider(
 	}
 
 	private fun major(text: String): String {
-		return "${GOLD}$text$RESET"
+		return "${LIGHT_PURPLE}$text$RESET"
 	}
 
 	private fun minor(text: String): String {
-		return "${GRAY}$text$RESET"
+		return "${DARK_AQUA}$text$RESET"
 	}
 
 	private fun good(text: String): String {

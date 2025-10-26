@@ -43,14 +43,14 @@ class PortkeyItemEntity(
 		}
 	}
 
-	private fun willTeleport(): Boolean {
+	private fun shouldTeleport(): Boolean {
 		if (age <= PORTKEY_PICKUP_DELAY) return false
 		val stack = super.getItem()
 		return stack.has(ModDataComponents.GLOBAL_POS)
 	}
 
 	override fun playerTouch(entity: Player) {
-		if (!willTeleport()) {
+		if (!shouldTeleport()) {
 			super.playerTouch(entity)
 			return
 		}
