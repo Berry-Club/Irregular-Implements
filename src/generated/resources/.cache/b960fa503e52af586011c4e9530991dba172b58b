@@ -1,8 +1,10 @@
-// 1.21.1	2025-10-26T01:48:12.5691228	Patchouli Book: guide
+// 1.21.1	2025-10-26T01:55:55.9767847	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
 e705ba7322b241299e14d08c878f2b643c597cac assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/spectre_log.json
+6516bbd1089b74cb8a95b9b46e127d9346b27745 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/bottle_of_air.json
 9b17d41a25ef88eb6dc45e055ccacda00559f06a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
+381661dac3f862da52198d715b9a8bb8fb828baf assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_egg.json
 cc78deefb221e0b70d306b6cc5f3fb0f3060fb6e assets/irregular_implements/patchouli_books/guide/en_us/entries/items/portkey.json
 7c0b88e54f8f13fb8959afac741f993e200089ac assets/irregular_implements/patchouli_books/guide/en_us/entries/items/stable_ender_pearl.json
 8b69d58f54a38d23f4b740471445d18d20ad529e data/irregular_implements/patchouli_books/guide/book.json

@@ -177,6 +177,37 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.BOTTLE_OF_AIR,
+			"Bottle of Air",
+			SpotlightPage.basicPage(
+				ModItems.BOTTLE_OF_AIR,
+				"Bottle of Air",
+				doubleSpacedLines(
+					"The ${major("Bottle of Air")} can be \"drunk\" to refill your air supply while underwater.",
+					"It can be found in ${minor("Ocean Monuments")}."
+				)
+			)
+		)
+
+		add(
+			ModItems.GOLDEN_EGG,
+			"Golden Egg",
+			SpotlightPage.basicPage(
+				ModItems.GOLDEN_EGG,
+				"Golden Egg",
+				doubleSpacedLines(
+					"The ${major("Golden Egg")} spawns a Chicken that ${minor("lays Golden Ingots")} instead of Eggs.",
+					StringBuilder()
+						.append("They can be found in ")
+						.append(internalLink("blocks/bean_pod", "Bean Pods"))
+						.append(", which can be found at the top of planted ")
+						.append(internalLink("items/magic_bean", "Magic Beans"))
+						.toString()
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
