@@ -67,10 +67,10 @@ class ModPatchouliBookProvider(
 
 		add(
 			ModItems.SPECTRE_KEY,
-			TextPage.builder()
-				.title("Spectre Key")
-				.text("Testttt")
-				.build(),
+			TextPage.basicTextPage(
+				"Spectre Key",
+				"Test!"
+			),
 			SpotlightPage.builder()
 				.item(ModItems.SPECTRE_KEY)
 				.build()

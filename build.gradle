@@ -147,7 +147,7 @@ dependencies {
 
 	implementation("com.klikli_dev:modonomicon-1.21.1-neoforge:${modonomicon_version}") { transitive = false }
 
-	implementation "dev.aaronhowser.mods:patchoulidatagen-1.21.1:1.0.0-build.2"
+	implementation "dev.aaronhowser.mods:patchoulidatagen-${pdg_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {
