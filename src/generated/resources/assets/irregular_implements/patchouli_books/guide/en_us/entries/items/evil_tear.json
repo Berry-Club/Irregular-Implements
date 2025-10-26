@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A tear dropped by malevolent spirits.",
+      "text": "The $(6)Evil Tear$() can be used to make an $(7)Artificial End Portal$().$(br2)Make the structure shown on the opposite page and then $(7)use the Evil Tear on the End Rod$() to activate it.$(br2)A portal will grow below it, and it will function exactly like a normal End Portal.",
       "title": "Evil Tear"
     },
     {

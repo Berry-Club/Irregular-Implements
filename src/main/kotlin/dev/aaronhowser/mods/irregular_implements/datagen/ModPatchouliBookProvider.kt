@@ -78,8 +78,8 @@ class ModPatchouliBookProvider(
 			TextPage.basicTextPage(
 				"Stable Ender Pearl",
 				doubleSpacedLines(
-					"Use to bind yourself to the Pearl.",
-					"After seven seconds of existing as an item entity, the Pearl will teleport the bound player to its location."
+					"Use to bind yourself to the ${major("Stable Ender Pearl")}.",
+					"After seven seconds of existing as an item entity, the Pearl will ${minor("teleport the bound player to its location")}."
 				)
 			),
 			SpotlightPage.basicPage(
@@ -96,7 +96,11 @@ class ModPatchouliBookProvider(
 			"Evil Tear",
 			TextPage.basicTextPage(
 				"Evil Tear",
-				"A tear dropped by malevolent spirits."
+				doubleSpacedLines(
+					"The ${major("Evil Tear")} can be used to make an ${minor("Artificial End Portal")}.",
+					"Make the structure shown on the opposite page and then ${minor("use the Evil Tear on the End Rod")} to activate it.",
+					"A portal will grow below it, and it will function exactly like a normal End Portal."
+				)
 			),
 			MultiblockPage.builder()
 				.name("Artificial End Portal")
@@ -195,7 +199,22 @@ class ModPatchouliBookProvider(
 				"A log block infused with otherworldly energy."
 			)
 		)
+	}
 
+	private fun major(text: String): String {
+		return "${GOLD}$text$RESET"
+	}
+
+	private fun minor(text: String): String {
+		return "${GRAY}$text$RESET"
+	}
+
+	private fun good(text: String): String {
+		return "${GREEN}$text$RESET"
+	}
+
+	private fun bad(text: String): String {
+		return "${RED}$text$RESET"
 	}
 
 }
