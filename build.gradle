@@ -126,6 +126,14 @@ repositories {
 		}
 	}
 
+	// For Patchouli DataGen
+	maven {
+		url "https://maven.latvian.dev/releases"
+		content {
+			includeGroup "dev.aaronhowser.mods"
+		}
+	}
+
 }
 
 dependencies {
@@ -139,6 +147,7 @@ dependencies {
 
 	implementation("com.klikli_dev:modonomicon-1.21.1-neoforge:${modonomicon_version}") { transitive = false }
 
+	implementation "dev.aaronhowser.mods:patchoulidatagen-1.21.1:1.0.0-build.2"
 }
 
 tasks.withType(ProcessResources).configureEach {
