@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Use to bind yourself to the Pearl.$(br)After seven seconds of existing as an item entity, the Pearl will teleport the bound player to its location.",
+      "text": "Use to bind yourself to the Pearl.$(br2)After seven seconds of existing as an item entity, the Pearl will teleport the bound player to its location.",
       "title": "Stable Ender Pearl"
     },
     {

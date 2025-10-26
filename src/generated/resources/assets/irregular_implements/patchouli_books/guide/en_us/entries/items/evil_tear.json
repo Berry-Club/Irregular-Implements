@@ -1,0 +1,68 @@
+{
+  "category": "irregular_implements:items",
+  "icon": "irregular_implements:evil_tear",
+  "name": "Evil Tear",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A tear dropped by malevolent spirits.",
+      "title": "Evil Tear"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "B": "#c:obsidians",
+          "E": "#c:end_stones",
+          "R": "minecraft:end_rod[facing=down]"
+        },
+        "pattern": [
+          [
+            "     ",
+            "     ",
+            "  E  ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "  R  ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     "
+          ],
+          [
+            "BBBBB",
+            "B   B",
+            "B 0 B",
+            "B   B",
+            "BBBBB"
+          ],
+          [
+            "     ",
+            " EEE ",
+            " EEE ",
+            " EEE ",
+            "     "
+          ]
+        ],
+        "symmetrical": true
+      },
+      "name": "Artificial End Portal"
+    }
+  ]
+}

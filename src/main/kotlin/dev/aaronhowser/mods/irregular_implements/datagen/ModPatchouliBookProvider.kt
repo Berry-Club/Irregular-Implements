@@ -8,11 +8,17 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.multiblock.PatchouliMultiblock
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
+import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EndRodBlock
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
 import java.util.function.Consumer
@@ -71,7 +77,7 @@ class ModPatchouliBookProvider(
 			"Stable Ender Pearl",
 			TextPage.basicTextPage(
 				"Stable Ender Pearl",
-				lines(
+				doubleSpacedLines(
 					"Use to bind yourself to the Pearl.",
 					"After seven seconds of existing as an item entity, the Pearl will teleport the bound player to its location."
 				)
@@ -83,6 +89,71 @@ class ModPatchouliBookProvider(
 					"It has to be loaded though, and you must be in the same dimension!"
 				)
 			)
+		)
+
+		add(
+			ModItems.EVIL_TEAR,
+			"Evil Tear",
+			TextPage.basicTextPage(
+				"Evil Tear",
+				"A tear dropped by malevolent spirits."
+			),
+			MultiblockPage.builder()
+				.name("Artificial End Portal")
+				.multiblock(
+					"Artificial End Portal",
+					PatchouliMultiblock.builder()
+						.setSymmetrical()
+						.pattern(
+							arrayOf(
+								"     ",
+								"     ",
+								"  E  ",
+								"     ",
+								"     ",
+							),
+							arrayOf(
+								"     ",
+								"     ",
+								"  R  ",
+								"     ",
+								"     ",
+							),
+							arrayOf(
+								"     ",
+								"     ",
+								"     ",
+								"     ",
+								"     ",
+							),
+							arrayOf(
+								"     ",
+								"     ",
+								"     ",
+								"     ",
+								"     ",
+							),
+							arrayOf(
+								"BBBBB",
+								"B   B",
+								"B 0 B",
+								"B   B",
+								"BBBBB"
+							),
+							arrayOf(
+								"     ",
+								" EEE ",
+								" EEE ",
+								" EEE ",
+								"     ",
+							)
+						)
+						.map('B', Tags.Blocks.OBSIDIANS)
+						.map('E', Tags.Blocks.END_STONES)
+						.map('R', Blocks.END_ROD, EndRodBlock.FACING, Direction.DOWN)
+						.build()
+				)
+				.build()
 		)
 
 	}
