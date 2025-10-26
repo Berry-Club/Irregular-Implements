@@ -2,5 +2,6 @@
   "creative_tab": "irregular_implements:creative_tab",
   "landing_text": "Welcome to the Irregular Implements!",
   "name": "Irregular Implements Instructional Index",
+  "show_progress": false,
   "use_resource_pack": true
 }
