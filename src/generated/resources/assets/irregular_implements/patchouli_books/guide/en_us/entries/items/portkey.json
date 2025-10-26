@@ -11,6 +11,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "irregular_implements:portkey",
+      "link_recipe": true,
       "text": "Additionally, you can $(3)craft the Portkey with any other item$() to disguise it. The dropped item will look like the disguise rather than the Portkey itself."
     }
   ]

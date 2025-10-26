@@ -14,6 +14,7 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
+import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
 import net.minecraft.world.level.block.Blocks
@@ -82,7 +83,7 @@ class ModPatchouliBookProvider(
 					"After seven seconds of existing as an item entity, the Pearl will ${minor("teleport the bound player to its location")}."
 				)
 			),
-			SpotlightPage.basicPage(
+			SpotlightPage.linkedPage(
 				ModItems.STABLE_ENDER_PEARL,
 				doubleSpacedLines(
 					"You don't have to drop it yourself! It'll still teleport you if it's dropped in any other way.",
@@ -94,7 +95,8 @@ class ModPatchouliBookProvider(
 		add(
 			ModItems.EVIL_TEAR,
 			"Evil Tear",
-			TextPage.basicTextPage(
+			SpotlightPage.linkedPage(
+				ModItems.EVIL_TEAR,
 				"Evil Tear",
 				doubleSpacedLines(
 					"The ${major("Evil Tear")} can be used to make an ${minor("Artificial End Portal")}.",
@@ -171,7 +173,7 @@ class ModPatchouliBookProvider(
 					"The only limit is that it cannot cross dimensions. The Portkey is also ${bad("consumed upon use")}."
 				)
 			),
-			SpotlightPage.basicPage(
+			SpotlightPage.linkedPage(
 				ModItems.PORTKEY,
 				"Additionally, you can ${minor("craft the Portkey with any other item")} to disguise it. The dropped item will look like the disguise rather than the Portkey itself."
 			)
@@ -180,7 +182,7 @@ class ModPatchouliBookProvider(
 		add(
 			ModItems.BOTTLE_OF_AIR,
 			"Bottle of Air",
-			SpotlightPage.basicPage(
+			SpotlightPage.linkedPage(
 				ModItems.BOTTLE_OF_AIR,
 				"Bottle of Air",
 				doubleSpacedLines(
@@ -193,7 +195,7 @@ class ModPatchouliBookProvider(
 		add(
 			ModItems.GOLDEN_EGG,
 			"Golden Egg",
-			SpotlightPage.basicPage(
+			SpotlightPage.linkedPage(
 				ModItems.GOLDEN_EGG,
 				"Golden Egg",
 				doubleSpacedLines(
@@ -250,19 +252,19 @@ class ModPatchouliBookProvider(
 	}
 
 	private fun major(text: String): String {
-		return "${LIGHT_PURPLE}$text$RESET"
+		return colored(TextColor.LIGHT_PURPLE, text)
 	}
 
 	private fun minor(text: String): String {
-		return "${DARK_AQUA}$text$RESET"
+		return colored(TextColor.DARK_AQUA, text)
 	}
 
 	private fun good(text: String): String {
-		return "${GREEN}$text$RESET"
+		return colored(TextColor.GREEN, text)
 	}
 
 	private fun bad(text: String): String {
-		return "${RED}$text$RESET"
+		return colored(TextColor.RED, text)
 	}
 
 }

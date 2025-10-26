@@ -11,6 +11,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "irregular_implements:stable_ender_pearl",
+      "link_recipe": true,
       "text": "You don't have to drop it yourself! It'll still teleport you if it's dropped in any other way.$(br2)It has to be loaded though, and you must be in the same dimension!"
     }
   ]
