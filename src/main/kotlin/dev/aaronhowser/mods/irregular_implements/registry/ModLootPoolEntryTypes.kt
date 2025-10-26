@@ -11,7 +11,7 @@ import java.util.function.Supplier
 object ModLootPoolEntryTypes {
 
 	val LOOT_POOL_ENTRY_TYPE_REGISTRY: DeferredRegister<LootPoolEntryType> =
-		DeferredRegister.create(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, IrregularImplements.MOD_ID)
 
 	val BIOME_CRYSTAL: DeferredHolder<LootPoolEntryType, LootPoolEntryType> =
 		LOOT_POOL_ENTRY_TYPE_REGISTRY.register("biome_crystal", Supplier { LootPoolEntryType(BiomeCrystalLootEntry.CODEC) })

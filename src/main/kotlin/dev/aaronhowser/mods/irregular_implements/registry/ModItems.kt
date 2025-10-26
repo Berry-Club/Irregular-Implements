@@ -21,7 +21,7 @@ object ModItems {
 	//TODO: Check rarity for all items
 
 	val ITEM_REGISTRY: DeferredRegister.Items =
-		DeferredRegister.createItems(IrregularImplements.ID)
+		DeferredRegister.createItems(IrregularImplements.MOD_ID)
 
 	val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
 		register("stable_ender_pearl", ::StableEnderPearlItem, StableEnderPearlItem.DEFAULT_PROPERTIES)

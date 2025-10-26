@@ -12,7 +12,7 @@ import net.neoforged.neoforge.common.data.SoundDefinitionsProvider
 class ModSoundDefinitionsProvider(
 	output: PackOutput,
 	helper: ExistingFileHelper
-) : SoundDefinitionsProvider(output, IrregularImplements.ID, helper) {
+) : SoundDefinitionsProvider(output, IrregularImplements.MOD_ID, helper) {
 
 	override fun registerSounds() {
 		add(

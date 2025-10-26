@@ -10,7 +10,7 @@ import java.util.function.BiConsumer
 
 class ModModonomiconProvider(
 	defaultLang: BiConsumer<String, String>,
-) : SingleBookSubProvider("guide", IrregularImplements.ID, defaultLang) {
+) : SingleBookSubProvider("guide", IrregularImplements.MOD_ID, defaultLang) {
 
 	override fun additionalSetup(book: BookModel): BookModel {
 		return book

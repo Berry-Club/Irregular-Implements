@@ -21,7 +21,7 @@ class ModBlockTagsProvider(
 	output: PackOutput,
 	lookupProvider: CompletableFuture<HolderLookup.Provider>,
 	existingFileHelper: ExistingFileHelper
-) : BlockTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
+) : BlockTagsProvider(output, lookupProvider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
 		this.tag(CUSTOM_CRAFTING_TABLE_BLACKLIST)

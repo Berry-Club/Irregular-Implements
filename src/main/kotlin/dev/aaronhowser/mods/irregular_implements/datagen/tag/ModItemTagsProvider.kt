@@ -21,7 +21,7 @@ class ModItemTagsProvider(
 	pLookupProvider: CompletableFuture<HolderLookup.Provider>,
 	pBlockTags: CompletableFuture<TagLookup<Block>>,
 	existingFileHelper: ExistingFileHelper
-) : ItemTagsProvider(pOutput, pLookupProvider, pBlockTags, IrregularImplements.ID, existingFileHelper) {
+) : ItemTagsProvider(pOutput, pLookupProvider, pBlockTags, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	//TODO: Copy all block tags to item tags
 

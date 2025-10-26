@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.data.LanguageProvider
 
 class ModLanguageProvider(
 	output: PackOutput
-) : LanguageProvider(output, IrregularImplements.ID, "en_us") {
+) : LanguageProvider(output, IrregularImplements.MOD_ID, "en_us") {
 
 	override fun addTranslations() {
 		ModTooltipLang.add(this)

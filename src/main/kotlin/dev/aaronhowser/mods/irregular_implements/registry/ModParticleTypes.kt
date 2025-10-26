@@ -16,7 +16,7 @@ import java.util.function.Supplier
 object ModParticleTypes {
 
 	val PARTICLE_TYPE_REGISTRY: DeferredRegister<ParticleType<*>> =
-		DeferredRegister.create(Registries.PARTICLE_TYPE, IrregularImplements.ID)
+		DeferredRegister.create(Registries.PARTICLE_TYPE, IrregularImplements.MOD_ID)
 
 	val FLOO_FLAME: DeferredHolder<ParticleType<*>, SimpleParticleType> =
 		simple("floo_flame")

@@ -22,7 +22,7 @@ import java.util.function.Supplier
 object ModArmorMaterials {
 
 	val ARMOR_MATERIAL_REGISTRY: DeferredRegister<ArmorMaterial> =
-		DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, IrregularImplements.MOD_ID)
 
 	val WATER_WALKING: DeferredHolder<ArmorMaterial, ArmorMaterial> =
 		register(

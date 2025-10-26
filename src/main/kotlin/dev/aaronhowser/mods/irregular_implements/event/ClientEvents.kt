@@ -42,7 +42,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 
 @EventBusSubscriber(
-	modid = IrregularImplements.ID,
+	modid = IrregularImplements.MOD_ID,
 	value = [Dist.CLIENT]
 )
 object ClientEvents {

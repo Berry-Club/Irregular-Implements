@@ -12,7 +12,7 @@ object ModConfigLang {
 
 		fun addConfigCategory(category: String, desc: String) {
 			val categoryString = StringBuilder()
-				.append(IrregularImplements.ID)
+				.append(IrregularImplements.MOD_ID)
 				.append(".configuration.")
 				.append(category)
 				.toString()
@@ -22,7 +22,7 @@ object ModConfigLang {
 
 		fun addConfig(config: ConfigValue<*>, desc: String) {
 			val configString = StringBuilder()
-				.append(IrregularImplements.ID)
+				.append(IrregularImplements.MOD_ID)
 				.append(".configuration.")
 				.append(config.path.last())
 				.toString()

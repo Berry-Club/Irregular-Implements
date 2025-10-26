@@ -15,7 +15,7 @@ class ModFluidTagsProvider(
 	output: PackOutput,
 	lookupProvider: CompletableFuture<HolderLookup.Provider>,
 	existingFileHelper: ExistingFileHelper?
-) : FluidTagsProvider(output, lookupProvider, IrregularImplements.ID, existingFileHelper) {
+) : FluidTagsProvider(output, lookupProvider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
 		this.tag(ALLOWS_WATER_WALKING)

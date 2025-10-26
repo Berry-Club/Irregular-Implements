@@ -63,7 +63,7 @@ import java.util.function.Supplier
 object ModMenuTypes {
 
 	val MENU_TYPE_REGISTRY: DeferredRegister<MenuType<*>> =
-		DeferredRegister.create(BuiltInRegistries.MENU, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.MENU, IrregularImplements.MOD_ID)
 
 	val IRON_DROPPER: DeferredHolder<MenuType<*>, MenuType<IronDropperMenu>> =
 		register("iron_dropper", ::IronDropperMenu)

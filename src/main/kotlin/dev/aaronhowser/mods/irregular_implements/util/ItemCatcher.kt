@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent
 
 @EventBusSubscriber(
-	modid = IrregularImplements.ID
+	modid = IrregularImplements.MOD_ID
 )
 object ItemCatcher {
 

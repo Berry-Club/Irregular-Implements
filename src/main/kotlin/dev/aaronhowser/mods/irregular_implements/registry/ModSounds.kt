@@ -11,7 +11,7 @@ import java.util.function.Supplier
 object ModSounds {
 
 	val SOUND_EVENT_REGISTRY: DeferredRegister<SoundEvent> =
-		DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, IrregularImplements.MOD_ID)
 
 	val FART: DeferredHolder<SoundEvent, SoundEvent> =
 		SOUND_EVENT_REGISTRY.register("fart", Supplier {

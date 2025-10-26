@@ -12,7 +12,7 @@ import java.util.function.Supplier
 object ModRecipeTypes {
 
 	val RECIPE_TYPES_REGISTRY: DeferredRegister<RecipeType<*>> =
-		DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, IrregularImplements.MOD_ID)
 
 	val IMBUING: DeferredHolder<RecipeType<*>, RecipeType<ImbuingRecipe>> =
 		registerRecipeType("imbuing")

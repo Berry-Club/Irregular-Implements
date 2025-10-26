@@ -43,7 +43,7 @@ object OtherUtil {
 
 	@JvmStatic
 	fun modResource(path: String): ResourceLocation =
-		ResourceLocation.fromNamespaceAndPath(IrregularImplements.ID, path)
+		ResourceLocation.fromNamespaceAndPath(IrregularImplements.MOD_ID, path)
 
 	val Boolean?.isTrue: Boolean
 		inline get() = this == true

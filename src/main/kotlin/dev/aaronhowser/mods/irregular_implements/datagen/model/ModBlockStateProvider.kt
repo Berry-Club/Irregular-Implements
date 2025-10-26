@@ -22,7 +22,7 @@ import net.neoforged.neoforge.registries.DeferredBlock
 class ModBlockStateProvider(
 	output: PackOutput,
 	private val existingFileHelper: ExistingFileHelper
-) : BlockStateProvider(output, IrregularImplements.ID, existingFileHelper) {
+) : BlockStateProvider(output, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun registerStatesAndModels() {
 		singleTextureBlocks()

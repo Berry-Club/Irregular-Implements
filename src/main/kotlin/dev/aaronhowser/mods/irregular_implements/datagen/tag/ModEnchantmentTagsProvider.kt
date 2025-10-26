@@ -13,7 +13,7 @@ class ModEnchantmentTagsProvider(
 	pOutput: PackOutput,
 	pProvider: CompletableFuture<HolderLookup.Provider>,
 	existingFileHelper: ExistingFileHelper
-) : EnchantmentTagsProvider(pOutput, pProvider, IrregularImplements.ID, existingFileHelper) {
+) : EnchantmentTagsProvider(pOutput, pProvider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(p0: HolderLookup.Provider) {
 		this.tag(EnchantmentTags.NON_TREASURE)

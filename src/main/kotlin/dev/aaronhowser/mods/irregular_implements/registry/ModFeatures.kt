@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 object ModFeatures {
 
 	val FEATURE_REGISTRY: DeferredRegister<Feature<*>> =
-		DeferredRegister.create(BuiltInRegistries.FEATURE, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.FEATURE, IrregularImplements.MOD_ID)
 
 	val NATURE_CORE: DeferredHolder<Feature<*>, NatureCoreFeature> =
 		FEATURE_REGISTRY.register("nature_core", ::NatureCoreFeature)

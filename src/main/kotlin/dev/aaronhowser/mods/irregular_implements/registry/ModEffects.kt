@@ -13,7 +13,7 @@ import java.util.function.Supplier
 object ModEffects {
 
 	val EFFECT_REGISTRY: DeferredRegister<MobEffect> =
-		DeferredRegister.create(Registries.MOB_EFFECT, IrregularImplements.ID)
+		DeferredRegister.create(Registries.MOB_EFFECT, IrregularImplements.MOD_ID)
 
 	val FIRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
 		EFFECT_REGISTRY.register("imbue_fire", Supplier { ImbueEffect(Color.ORANGE.rgb) })

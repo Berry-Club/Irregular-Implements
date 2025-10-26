@@ -12,7 +12,7 @@ object ModRenderTypes {
 	@Suppress("INFERRED_INVISIBLE_RETURN_TYPE_WARNING")
 	val LINES_THROUGH_WALL_RENDER_TYPE: RenderType.CompositeRenderType =
 		RenderType.create(
-			"${IrregularImplements.ID}:line_through_wall",
+			"${IrregularImplements.MOD_ID}:line_through_wall",
 			DefaultVertexFormat.POSITION_COLOR_NORMAL,
 			VertexFormat.Mode.LINES,
 			1536,
@@ -33,7 +33,7 @@ object ModRenderTypes {
 	@Suppress("INFERRED_INVISIBLE_RETURN_TYPE_WARNING")
 	val QUADS_THROUGH_WALL_RENDER_TYPE: RenderType.CompositeRenderType =
 		RenderType.create(
-			"${IrregularImplements.ID}:quads_through_wall",
+			"${IrregularImplements.MOD_ID}:quads_through_wall",
 			DefaultVertexFormat.POSITION_COLOR,
 			VertexFormat.Mode.QUADS,
 			1536,

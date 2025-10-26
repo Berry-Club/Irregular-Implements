@@ -14,7 +14,7 @@ import java.util.function.Supplier
 object ModEntityTypes {
 
 	val ENTITY_TYPE_REGISTRY: DeferredRegister<EntityType<*>> =
-		DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, IrregularImplements.MOD_ID)
 
 	val SPECTRE_ILLUMINATOR: DeferredHolder<EntityType<*>, EntityType<SpectreIlluminatorEntity>> =
 		registerEntityType(

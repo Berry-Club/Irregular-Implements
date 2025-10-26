@@ -15,7 +15,7 @@ import java.util.function.Supplier
 object ModBlockEntityTypes {
 
 	val BLOCK_ENTITY_REGISTRY: DeferredRegister<BlockEntityType<*>> =
-		DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, IrregularImplements.MOD_ID)
 
 	val RAIN_SHIELD: DeferredHolder<BlockEntityType<*>, BlockEntityType<RainShieldBlockEntity>> =
 		register("rain_shield", ::RainShieldBlockEntity, ModBlocks.RAIN_SHIELD)

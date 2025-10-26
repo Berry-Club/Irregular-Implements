@@ -19,7 +19,7 @@ import java.util.function.Supplier
 object ModCreativeModeTabs {
 
 	val TABS_REGISTRY: DeferredRegister<CreativeModeTab> =
-		DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, IrregularImplements.MOD_ID)
 
 	val MOD_TAB: DeferredHolder<CreativeModeTab, CreativeModeTab> = TABS_REGISTRY.register("creative_tab", Supplier {
 		CreativeModeTab.builder()

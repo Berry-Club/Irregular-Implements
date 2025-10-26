@@ -14,16 +14,16 @@ import org.apache.logging.log4j.Logger
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runWhenOn
 
-@Mod(IrregularImplements.ID)
+@Mod(IrregularImplements.MOD_ID)
 class IrregularImplements(
 	modContainer: ModContainer
 ) {
 
 	companion object {
-		const val ID = "irregular_implements"
+		const val MOD_ID = "irregular_implements"
 
 		@JvmField
-		val LOGGER: Logger = LogManager.getLogger(ID)
+		val LOGGER: Logger = LogManager.getLogger(MOD_ID)
 	}
 
 	init {

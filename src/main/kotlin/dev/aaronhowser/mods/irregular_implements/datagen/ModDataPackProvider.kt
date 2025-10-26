@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture
 class ModDataPackProvider(
 	output: PackOutput,
 	registries: CompletableFuture<HolderLookup.Provider>
-) : DatapackBuiltinEntriesProvider(output, registries, BUILDER, setOf(IrregularImplements.ID)) {
+) : DatapackBuiltinEntriesProvider(output, registries, BUILDER, setOf(IrregularImplements.MOD_ID)) {
 
 	companion object {
 		val BUILDER: RegistrySetBuilder = RegistrySetBuilder()

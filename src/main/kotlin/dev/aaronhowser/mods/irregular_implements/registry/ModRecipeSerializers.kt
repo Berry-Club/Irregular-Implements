@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 object ModRecipeSerializers {
 
 	val RECIPE_SERIALIZERS_REGISTRY: DeferredRegister<RecipeSerializer<*>> =
-		DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, IrregularImplements.ID)
+		DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, IrregularImplements.MOD_ID)
 
 	val LUBRICATE_BOOT: DeferredHolder<RecipeSerializer<*>, RecipeSerializer<*>> =
 		simple("lubricate_boot", ::LubricateBootRecipe)

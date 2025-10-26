@@ -18,7 +18,7 @@ class ModBiomeTagsProvider(
 	pOutput: PackOutput,
 	pProvider: CompletableFuture<HolderLookup.Provider>,
 	existingFileHelper: ExistingFileHelper
-) : BiomeTagsProvider(pOutput, pProvider, IrregularImplements.ID, existingFileHelper) {
+) : BiomeTagsProvider(pOutput, pProvider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
 		tag(HAS_NATURE_CORE)

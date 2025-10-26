@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture
 class ModGlobalLootModifierProvider(
 	output: PackOutput,
 	registries: CompletableFuture<HolderLookup.Provider>
-) : GlobalLootModifierProvider(output, registries, IrregularImplements.ID) {
+) : GlobalLootModifierProvider(output, registries, IrregularImplements.MOD_ID) {
 
 	override fun start() {
 		val simpleDungeon = arrayOf(LootTableIdCondition.Builder(BuiltInLootTables.SIMPLE_DUNGEON.location()).build())

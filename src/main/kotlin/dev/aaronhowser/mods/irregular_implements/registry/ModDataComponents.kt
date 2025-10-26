@@ -29,7 +29,7 @@ import java.util.*
 object ModDataComponents {
 
 	val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
-		DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.ID)
+		DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.MOD_ID)
 
 	val GLOBAL_POS: DeferredHolder<DataComponentType<*>, DataComponentType<GlobalPos>> =
 		register("global_pos", GlobalPos.CODEC, GlobalPos.STREAM_CODEC)

@@ -17,7 +17,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper
 class ModItemModelProvider(
 	output: PackOutput,
 	existingFileHelper: ExistingFileHelper
-) : ItemModelProvider(output, IrregularImplements.ID, existingFileHelper) {
+) : ItemModelProvider(output, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	private val handledItems: MutableSet<Item> = mutableSetOf()
 

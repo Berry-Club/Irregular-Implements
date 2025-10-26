@@ -51,7 +51,7 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 
 @EventBusSubscriber(
-	modid = IrregularImplements.ID
+	modid = IrregularImplements.MOD_ID
 )
 object CommonEvents {
 

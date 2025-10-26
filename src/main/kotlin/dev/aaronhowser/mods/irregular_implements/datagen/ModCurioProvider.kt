@@ -11,7 +11,7 @@ class ModCurioProvider(
 	output: PackOutput,
 	fileHelper: ExistingFileHelper,
 	registries: CompletableFuture<HolderLookup.Provider>
-) : CuriosDataProvider(IrregularImplements.ID, output, fileHelper, registries) {
+) : CuriosDataProvider(IrregularImplements.MOD_ID, output, fileHelper, registries) {
 
 	override fun generate(registries: HolderLookup.Provider, fileHelper: ExistingFileHelper) {
 		this.createEntities(PLAYERS_RULE)

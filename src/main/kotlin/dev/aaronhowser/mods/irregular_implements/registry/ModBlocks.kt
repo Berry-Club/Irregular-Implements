@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModBlocks {
 
-	val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.ID)
+	val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.MOD_ID)
 
 	val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
 		registerBlock("fertilized_dirt", ::FertilizedDirtBlock)
