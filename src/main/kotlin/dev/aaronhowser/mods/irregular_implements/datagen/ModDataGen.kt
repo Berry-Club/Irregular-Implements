@@ -107,6 +107,16 @@ object ModDataGen {
 			ModParticleDescriptionProvider(output, existingFileHelper)
 		)
 
+		val patchouliBook = ModPatchouliBookProvider(
+			generator,
+			"guide"
+		)
+
+		generator.addProvider(
+			event.includeClient(),
+			patchouliBook
+		)
+
 	}
 
 }
