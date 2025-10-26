@@ -12,7 +12,6 @@ import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
-import net.minecraft.client.resources.language.I18n
 import net.minecraft.data.DataGenerator
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
@@ -68,15 +67,22 @@ class ModPatchouliBookProvider(
 		}
 
 		add(
-			ModItems.SPECTRE_KEY,
-			"Spectre Key",
+			ModItems.STABLE_ENDER_PEARL,
+			"Stable Ender Pearl",
 			TextPage.basicTextPage(
-				"Spectre Key",
-				"Test!"
+				"Stable Ender Pearl",
+				lines(
+					"Use to bind yourself to the Pearl.",
+					"After seven seconds of existing as an item entity, the Pearl will teleport the bound player to its location."
+				)
 			),
-			SpotlightPage.builder()
-				.item(ModItems.SPECTRE_KEY)
-				.build()
+			SpotlightPage.basicPage(
+				ModItems.STABLE_ENDER_PEARL,
+				doubleSpacedLines(
+					"You don't have to drop it yourself! It'll still teleport you if it's dropped in any other way.",
+					"It has to be loaded though, and you must be in the same dimension!"
+				)
+			)
 		)
 
 	}
