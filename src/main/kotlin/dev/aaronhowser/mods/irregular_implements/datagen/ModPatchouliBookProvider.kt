@@ -8,10 +8,13 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
+import net.minecraft.client.resources.language.I18n
 import net.minecraft.data.DataGenerator
+import net.neoforged.neoforge.registries.DeferredItem
 import java.util.function.Consumer
 
 class ModPatchouliBookProvider(
@@ -44,24 +47,34 @@ class ModPatchouliBookProvider(
 			)
 			.save(consumer, "items")
 
-		PatchouliBookEntry.builder()
-			.category(category)
-			.display(
-				entryName = "Stable Ender Pearl",
-				icon = ModItems.STABLE_ENDER_PEARL
-			)
-			.addPage(
-				TextPage.builder()
-					.title("Stable Ender Pearl")
-					.text("Test")
-					.build()
-			)
-			.addPage(
-				SpotlightPage.builder()
-					.item(ModItems.STABLE_ENDER_PEARL)
-					.build()
-			)
-			.save(consumer, "stable_ender_pearl")
+		fun add(
+			item: DeferredItem<*>,
+			vararg pages: AbstractPage
+		): PatchouliBookEntry {
+			val builder = PatchouliBookEntry.builder()
+				.category(category)
+				.display(
+					entryName = I18n.get(item.value().descriptionId),
+					icon = item
+				)
+
+			for (page in pages) {
+				builder.addPage(page)
+			}
+
+			return builder.save(consumer, item.key!!.location().path)
+		}
+
+		add(
+			ModItems.SPECTRE_KEY,
+			TextPage.builder()
+				.title("Spectre Key")
+				.text("Testttt")
+				.build(),
+			SpotlightPage.builder()
+				.item(ModItems.SPECTRE_KEY)
+				.build()
+		)
 
 	}
 

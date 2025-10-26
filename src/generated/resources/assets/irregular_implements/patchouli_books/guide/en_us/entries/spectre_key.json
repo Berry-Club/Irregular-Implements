@@ -1,0 +1,16 @@
+{
+  "category": "irregular_implements:items",
+  "icon": "irregular_implements:spectre_key",
+  "name": "item.irregular_implements.spectre_key",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Testttt",
+      "title": "Spectre Key"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "irregular_implements:spectre_key"
+    }
+  ]
+}
