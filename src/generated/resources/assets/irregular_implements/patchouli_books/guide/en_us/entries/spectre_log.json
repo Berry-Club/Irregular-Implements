@@ -1,7 +1,7 @@
 {
   "category": "irregular_implements:blocks",
   "icon": "irregular_implements:spectre_log",
-  "name": "block.irregular_implements.spectre_log",
+  "name": "Spectre Log",
   "pages": [
     {
       "type": "patchouli:text",

@@ -50,12 +50,13 @@ class ModPatchouliBookProvider(
 
 		fun add(
 			item: DeferredItem<*>,
+			name: String,
 			vararg pages: AbstractPage
 		): PatchouliBookEntry {
 			val builder = PatchouliBookEntry.builder()
 				.category(category)
 				.display(
-					entryName = I18n.get(item.value().descriptionId),
+					entryName = name,
 					icon = item
 				)
 
@@ -68,6 +69,7 @@ class ModPatchouliBookProvider(
 
 		add(
 			ModItems.SPECTRE_KEY,
+			"Spectre Key",
 			TextPage.basicTextPage(
 				"Spectre Key",
 				"Test!"
@@ -91,12 +93,13 @@ class ModPatchouliBookProvider(
 
 		fun add(
 			block: DeferredBlock<*>,
+			name: String,
 			vararg pages: AbstractPage
 		): PatchouliBookEntry {
 			val builder = PatchouliBookEntry.builder()
 				.category(category)
 				.display(
-					entryName = I18n.get(block.value().descriptionId),
+					entryName = name,
 					icon = block
 				)
 
@@ -109,6 +112,7 @@ class ModPatchouliBookProvider(
 
 		add(
 			ModBlocks.SPECTRE_LOG,
+			"Spectre Log",
 			TextPage.basicTextPage(
 				"Spectre Log",
 				"A log block infused with otherworldly energy."
