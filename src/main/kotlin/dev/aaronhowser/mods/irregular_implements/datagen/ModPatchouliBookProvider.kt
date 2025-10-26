@@ -14,6 +14,7 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.data.DataGenerator
+import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
 import java.util.function.Consumer
 
@@ -79,7 +80,7 @@ class ModPatchouliBookProvider(
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
-		val blocksCategory = PatchouliBookCategory.builder()
+		val category = PatchouliBookCategory.builder()
 			.book(book)
 			.setDisplay(
 				name = "Blocks",
@@ -87,6 +88,33 @@ class ModPatchouliBookProvider(
 				icon = ModBlocks.PLAYER_INTERFACE
 			)
 			.save(consumer, "blocks")
+
+		fun add(
+			block: DeferredBlock<*>,
+			vararg pages: AbstractPage
+		): PatchouliBookEntry {
+			val builder = PatchouliBookEntry.builder()
+				.category(category)
+				.display(
+					entryName = I18n.get(block.value().descriptionId),
+					icon = block
+				)
+
+			for (page in pages) {
+				builder.addPage(page)
+			}
+
+			return builder.save(consumer, block.key!!.location().path)
+		}
+
+		add(
+			ModBlocks.SPECTRE_LOG,
+			TextPage.basicTextPage(
+				"Spectre Log",
+				"A log block infused with otherworldly energy."
+			)
+		)
+
 	}
 
 }

@@ -1,0 +1,12 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:spectre_log",
+  "name": "block.irregular_implements.spectre_log",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A log block infused with otherworldly energy.",
+      "title": "Spectre Log"
+    }
+  ]
+}
