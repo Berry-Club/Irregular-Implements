@@ -16,7 +16,7 @@ import kotlin.math.acos
 
 class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 
-	//TODO: Sounds, particles
+	//TODO: particles
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		val usedStack = player.getItemInHand(usedHand)
 
