@@ -24,7 +24,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 
 	//FIXME: I should probably add a way to avoid NBT overflow or something
 	override fun interactLivingEntity(
-		stackIgnoreIgnoreIgnore: ItemStack,     // Why the hell is this not the actual stack? Why do I have to make a usedStack?
+		usedStack: ItemStack,     // Why the hell is this not the actual stack? Why do I have to make a usedStack?
 		player: Player,
 		interactionTarget: LivingEntity,
 		usedHand: InteractionHand
@@ -33,9 +33,10 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 			|| interactionTarget.type.`is`(ModEntityTypeTagsProvider.SUMMONING_PENDULUM_BLACKLIST)
 		) return InteractionResult.PASS
 
-		val usedStack = player.getItemInHand(usedHand)      // WHY IS THIS NECESSARY???
+		val entityList = usedStack
+			.getOrDefault(ModDataComponents.ENTITY_LIST, emptyList())
+			.toMutableList()
 
-		val entityList = usedStack.get(ModDataComponents.ENTITY_LIST)?.toMutableList() ?: mutableListOf()
 		if (entityList.size >= ServerConfig.CONFIG.summoningPendulumCapacity.get()) return InteractionResult.FAIL
 
 		val entityNbt = CompoundTag()
