@@ -658,6 +658,32 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.DROP_FILTER,
+			"Drop Filter",
+			SpotlightPage.linkedPage(
+				ModItems.DROP_FILTER,
+				doubleSpacedLines(
+					"The ${major("Drop Filter")} can hold an ${internalLink("items/item_filter", "Item Filter")}, and prevents any items matching the Filter from entering your inventory."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.VOIDING_DROP_FILTER,
+				doubleSpacedLines(
+					"The ${major("Voiding Drop Filter")} works the same way, but instead ${bad("deletes any matching items")}."
+				)
+			)
+		)
+
+		add(
+			ModItems.VOID_STONE,
+			"Void Stone",
+			SpotlightPage.linkedPage(
+				ModItems.VOID_STONE,
+				"The ${major("Void Stone")} will ${minor("delete any item")} insert into its menu.",
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
