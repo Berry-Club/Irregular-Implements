@@ -72,8 +72,7 @@ class EnderAnchorBlockEntity(
 			blockEntity: EnderAnchorBlockEntity
 		) {
 			if (level is EnderAnchorCarrier) {
-				val chunkPos = level.getChunk(pos).pos.toLong()
-				level.getEnderAnchorPositions().add(chunkPos)
+				level.getEnderAnchorPositions().add(pos.asLong())
 			}
 
 			if (level.isClientSide) {
