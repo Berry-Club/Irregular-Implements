@@ -13,6 +13,7 @@
 - The Biome Painter now defaults to having a radius of 2 instead of 0
   - Now it has a default volume of 5x5x5 instead of 1x1x1
 - When holding a Portable Ender Bridge, Ender Anchors now glow through blocks
+- The Portable Ender Bridge now lets you teleport to Ender Anchors even if there's a block in the way
 
 ### Fixed
 
