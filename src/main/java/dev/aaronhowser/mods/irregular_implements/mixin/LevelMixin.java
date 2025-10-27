@@ -19,10 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
-public abstract class LevelMixin implements PeaceCandleCarrier, RedstoneInterfaceCarrier, SlimeCubeCarrier {
+public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrier, RedstoneInterfaceCarrier, SlimeCubeCarrier {
 
 	@Unique
 	LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
+
+	@Unique
+	LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
 
 	@Unique
 	LongOpenHashSet irregularImplements$slimeCubePositions = new LongOpenHashSet();
@@ -32,6 +35,8 @@ public abstract class LevelMixin implements PeaceCandleCarrier, RedstoneInterfac
 			at = @At("HEAD")
 	)
 	private void irregular_implements$tickBlockEntities(CallbackInfo ci) {
+
+		irregular_implements$getRainShieldChunks().clear();
 		irregular_implements$getPeaceCandleChunks().clear();
 
 		// Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.
@@ -42,6 +47,26 @@ public abstract class LevelMixin implements PeaceCandleCarrier, RedstoneInterfac
 		// 4. LevelTickEvent.Post
 		// So no matter if the event is checked on Pre or Post, the set will always be empty when checked.
 		// Doing it this way adds a single tick delay, but honestly that's fine.
+	}
+
+	@Unique
+	@Override
+	public LongOpenHashSet irregular_implements$getRainShieldChunks() {
+		return this.irregular_implements$rainShieldChunks;
+	}
+
+	@Inject(
+			method = "isRainingAt",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
+			),
+			cancellable = true
+	)
+	private void irregular_implements$rainShieldStopsRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
+			cir.setReturnValue(false);
+		}
 	}
 
 	@Unique
