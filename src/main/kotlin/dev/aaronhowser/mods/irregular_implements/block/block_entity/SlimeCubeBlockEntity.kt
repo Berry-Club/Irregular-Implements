@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.SlimeCubeCarrier
+import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
@@ -21,7 +23,7 @@ class SlimeCubeBlockEntity(
 		super.onLoad()
 		val level = this.level
 		if (level is SlimeCubeCarrier) {
-			level.getSlimePositions().add(this.worldPosition.asLong())
+			level.getSlimeCubePositions().add(this.worldPosition.asLong())
 		}
 	}
 
@@ -29,7 +31,7 @@ class SlimeCubeBlockEntity(
 		super.setRemoved()
 		val level = this.level
 		if (level is SlimeCubeCarrier) {
-			level.getSlimePositions().remove(this.worldPosition.asLong())
+			level.getSlimeCubePositions().remove(this.worldPosition.asLong())
 		}
 	}
 
@@ -37,19 +39,19 @@ class SlimeCubeBlockEntity(
 		super.clearRemoved()
 		val level = this.level
 		if (level is SlimeCubeCarrier) {
-			level.getSlimePositions().add(this.worldPosition.asLong())
+			level.getSlimeCubePositions().add(this.worldPosition.asLong())
 		}
 	}
 
 	companion object {
-		fun SlimeCubeCarrier.getSlimePositions(): LongOpenHashSet = this.`irregular_implements$getSlimeCubePositions`()
+		fun SlimeCubeCarrier.getSlimeCubePositions(): LongOpenHashSet = this.`irregular_implements$getSlimeCubePositions`()
 
 		fun chunkHasCube(level: Level, pos: BlockPos, powered: Boolean): Boolean {
 			if (level !is SlimeCubeCarrier) return false
 
 			val chunkPos = ChunkPos(pos)
 
-			val cubesInThatChunk = level.getSlimePositions()
+			val cubesInThatChunk = level.getSlimeCubePositions()
 				.map(BlockPos::of)
 				.filter { ChunkPos(it) == chunkPos }
 
@@ -66,6 +68,29 @@ class SlimeCubeBlockEntity(
 			}
 
 			return Optional.empty()
+		}
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: SlimeCubeBlockEntity
+		) {
+			if (level !is SlimeCubeCarrier) return
+
+			if (blockState.getValue(RainShieldBlock.ENABLED)) {
+				val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
+
+				val checkRadius = ServerConfig.CONFIG.rainShieldChunkRadius.get()
+				val chunkX = chunkPos.x
+				val chunkZ = chunkPos.z
+
+				for (x in (chunkX - checkRadius)..(chunkX + checkRadius)) {
+					for (z in (chunkZ - checkRadius)..(chunkZ + checkRadius)) {
+						level.getSlimeCubePositions().add(ChunkPos.asLong(x, z))
+					}
+				}
+			}
 		}
 	}
 }

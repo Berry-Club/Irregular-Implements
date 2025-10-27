@@ -38,6 +38,8 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 
 		irregular_implements$getRainShieldChunks().clear();
 		irregular_implements$getPeaceCandleChunks().clear();
+		irregular_implements$getSlimeCubePositions().clear();
+		irregular_implements$getEnderBridges().clear();
 
 		// Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.
 		// I was doing it on LevelTickEvent before, but neither Pre not Post worked. The order that it was going was:
