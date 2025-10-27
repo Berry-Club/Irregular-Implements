@@ -1,17 +1,15 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
+import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModSounds
 import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
-import net.minecraft.util.Mth
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
@@ -48,6 +46,7 @@ class EnderBridgeBlock(
 			.setValue(FACING, context.nearestLookingDirection.opposite)
 	}
 
+	//TODO: Bring back particles
 	override fun neighborChanged(
 		state: BlockState,
 		level: Level,
@@ -56,24 +55,65 @@ class EnderBridgeBlock(
 		fromPos: BlockPos,
 		isMoving: Boolean
 	) {
-		if (level !is ServerLevel) return
+		if (level !is ServerLevel || level !is EnderAnchorCarrier) return
 
 		val isPowered = level.hasNeighborSignal(pos)
-		if (!isPowered) return
-		if (state.getValue(ENABLED)) return
+		val wasPowered = state.getValue(ENABLED)
 
-		val newState = state.setValue(ENABLED, true)
+		if (isPowered == wasPowered) return
+		val newState = state.setValue(ENABLED, isPowered)
 		level.setBlockAndUpdate(pos, newState)
 
+		if (!isPowered) return
+
 		val direction = state.getValue(FACING)
-		searchForAnchor(
-			level = level,
-			blocksPerIteration = distancePerTick,
-			bridgePos = pos,
-			searchOrigin = pos.relative(direction),
-			direction = direction,
-			iterations = 0
-		)
+
+		val anchors = level.getEnderAnchorPositions()
+
+		val anchorsOnAxis = anchors.filter { anchorPos ->
+			when (direction.axis) {
+				Direction.Axis.X -> anchorPos.z == pos.z && anchorPos.y == pos.y
+				Direction.Axis.Z -> anchorPos.x == pos.x && anchorPos.y == pos.y
+				Direction.Axis.Y -> anchorPos.x == pos.x && anchorPos.z == pos.z
+			}
+		}
+
+		var closestAnchor: BlockPos? = null
+		var closestDistance = Int.MAX_VALUE
+
+		for (anchorPos in anchorsOnAxis) {
+			val distance = when (direction) {
+				Direction.NORTH -> pos.z - anchorPos.z
+				Direction.SOUTH -> anchorPos.z - pos.z
+				Direction.WEST -> pos.x - anchorPos.x
+				Direction.EAST -> anchorPos.x - pos.x
+				Direction.UP -> anchorPos.y - pos.y
+				Direction.DOWN -> pos.y - anchorPos.y
+			}
+
+			if (distance < 0) continue // Anchor is behind the bridge
+			if (distance < closestDistance) {
+				closestDistance = distance
+				closestAnchor = anchorPos
+			}
+		}
+
+		val tickDuration = if (closestAnchor == null) {
+			20 * 5
+		} else {
+			closestDistance / distancePerTick
+		}
+
+		ServerScheduler.scheduleTaskInTicks(tickDuration) {
+			if (level.getBlockState(pos).getValue(ENABLED)) {
+				if (closestAnchor != null && level.getBlockState(closestAnchor).`is`(ModBlocks.ENDER_ANCHOR)) {
+					foundAnchor(level, pos, closestAnchor)
+				} else {
+					turnOffBridge(level, pos, bridgeFailed = true)
+				}
+			}
+		}
+
 	}
 
 	companion object {
@@ -86,111 +126,6 @@ class EnderBridgeBlock(
 				null,
 				AABB.ofSize(bridgePos.center, 1.25, 2.5, 1.25)
 			)
-		}
-
-		//TODO: Config
-		private const val MAX_ITERATIONS = Int.MAX_VALUE
-
-		/**
-		 * Searches for an anchor block in the given direction.
-		 * Searches through unloaded chunks and non-full blocks.
-		 * Only stops searching if it reaches the maximum iterations, or if it's found an Anchor.
-		 */
-		fun searchForAnchor(
-			level: ServerLevel,
-			blocksPerIteration: Int,
-			bridgePos: BlockPos,
-			searchOrigin: BlockPos,
-			direction: Direction,
-			iterations: Int
-		) {
-			if (iterations >= MAX_ITERATIONS) {
-				turnOffBridge(level, bridgePos, bridgeFailed = true)
-
-				val component = ModMessageLang.ENDER_BRIDGE_ITERATIONS
-					.toComponent(iterations * blocksPerIteration)
-
-				for (entity in getEntities(level, bridgePos)) {
-					entity.sendSystemMessage(component)
-				}
-
-				return
-			}
-
-			val players = level.players()
-
-			for (i in 0 until blocksPerIteration) {
-				val pos = searchOrigin.relative(direction, i)
-				if (!level.isLoaded(pos)) continue
-
-				if (iterations % 4 == 0) {
-					val particleCount = (1 + Mth.ceil(iterations.toDouble() / 20)).coerceIn(1, 100)
-					val particleSpeed = (0.5 + iterations / 30.0).coerceIn(0.5, 3.0)
-
-					for (player in players) {
-						level.sendParticles(
-							ParticleTypes.PORTAL,
-							bridgePos.x + 0.5,
-							bridgePos.y + 2.0,
-							bridgePos.z + 0.5,
-							particleCount,
-							0.0,
-							0.0,
-							0.0,
-							particleSpeed
-						)
-					}
-				}
-
-				val state = level.getBlockState(pos)
-				if (state.`is`(ModBlocks.ENDER_ANCHOR)) {
-
-					//TODO: Particles not spawning?
-					val particleCount = (1 + Mth.ceil(iterations.toDouble() / 20)).coerceIn(10, 100)
-					for (player in players) {
-						level.sendParticles(
-							ParticleTypes.REVERSE_PORTAL,
-							pos.x + 0.5,
-							pos.y + 1.5,
-							pos.z + 0.5,
-							particleCount,
-							0.0,
-							0.0,
-							0.0,
-							0.5
-						)
-					}
-
-					foundAnchor(level, bridgePos, pos)
-					return
-				}
-
-				if (state.isCollisionShapeFullBlock(level, pos)) {
-					turnOffBridge(level, bridgePos, bridgeFailed = true)
-
-					val blockName = state.block.name
-
-					val component = ModMessageLang.ENDER_BRIDGE_HIT_BLOCK
-						.toComponent(blockName, pos.x, pos.y, pos.z)
-
-					for (entity in getEntities(level, bridgePos)) {
-						entity.sendSystemMessage(component)
-					}
-
-					return
-				}
-			}
-
-			ServerScheduler.scheduleTaskInTicks(1) {
-				searchForAnchor(
-					level = level,
-					blocksPerIteration = blocksPerIteration,
-					bridgePos = bridgePos,
-					searchOrigin = searchOrigin.relative(direction),
-					direction = direction,
-					iterations = iterations + blocksPerIteration
-				)
-			}
 		}
 
 		private fun foundAnchor(

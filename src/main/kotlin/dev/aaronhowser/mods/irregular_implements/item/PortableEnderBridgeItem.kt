@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositionLongs
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositions
 import net.minecraft.core.BlockPos
-import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -24,7 +24,7 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 			return InteractionResultHolder.pass(usedStack)
 		}
 
-		val enderBridgeLocations = level.getEnderAnchorPositions().map(BlockPos::of)
+		val enderBridgeLocations = level.getEnderAnchorPositions()
 
 		if (enderBridgeLocations.isEmpty()) {
 			return InteractionResultHolder.pass(usedStack)

@@ -16,6 +16,11 @@
 - When holding a Portable Ender Bridge, Ender Anchors now glow through blocks
 - The Portable Ender Bridge now lets you teleport to Ender Anchors even if there's a block in the way
 - The Portable Ender Bridge makes a sound when used
+- The Ender Bridge now successfully doesn't work if it doesn't work, instead of searching for an infinite distance
+  - Previously it would literally just check every (loaded) block that's in front of it, infinitely
+  - Now that Anchors have a Block Entity, I can just search if any of those are in front of it instead
+  - If there aren't, the Bridge stops "searching" after 5 seconds
+  - If there are, it waits for (distance in blocks / Bridge search speed) ticks and then teleports you
 
 ### Fixed
 
