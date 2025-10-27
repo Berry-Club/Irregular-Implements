@@ -361,6 +361,63 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.LOTUS_BLOSSOM,
+			"Lotus Blossom",
+			SpotlightPage.linkedPage(
+				ModItems.LOTUS_BLOSSOM,
+				"Lotus Blossom",
+				doubleSpacedLines(
+					"${major("Lotus Blossoms")} can be eaten to give the player a handful of experience.",
+					"If you eat them while sneaking, you'll consume the entire stack at once."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.LOTUS_SEEDS,
+				"Lotus Seeds",
+				doubleSpacedLines(
+					"Lotus Blossoms can be farmed with ${major("Lotus Seeds")}, which are planted on any dirt/grass blocks.",
+					"You can find naturally occurring Lotus plants in ${minor("cold biomes")}."
+				)
+			)
+		)
+
+		add(
+			ModItems.MAGIC_HOOD,
+			"Magic Hood",
+			SpotlightPage.linkedPage(
+				ModItems.MAGIC_HOOD,
+				"Magic Hood",
+				doubleSpacedLines(
+					"The ${major("Magic Hood")}, when worn, will disable your nameplate and hide your potion particles.",
+					"It can be found in dungeons and blacksmith chests."
+				)
+			)
+		)
+
+		add(
+			ModItems.WATER_WALKING_BOOTS,
+			"Water Walking Boots",
+			SpotlightPage.linkedPage(
+				ModItems.WATER_WALKING_BOOTS,
+				"Water Walking Boots",
+				doubleSpacedLines(
+					"The ${major("Water Walking Boots")} allow you to ${minor("walk on water")} when worn.",
+					"They do not work while sneaking, or when you're already under water.",
+					"Do note that being able to $(o)stand$() on water means you're also able to ${bad("land")} on it as well!"
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.OBSIDIAN_WATER_WALKING_BOOTS,
+				"Obsidian Water Walking Boots",
+				doubleSpacedLines(
+					"The ${major("Obsidian Water Walking Boots")} combines the effects of the Water Walking Boots and the ${internalLink("items/obsidian_skull", "Obsidian Skull")}.",
+					"Get it by combining the two in an Anvil.",
+					"Remember that the Obsidian Skull does ${bad("not let you walk on lava")}! For that, you'll need the ${internalLink("items/lava_waders", "Lava Waders")}.",
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
