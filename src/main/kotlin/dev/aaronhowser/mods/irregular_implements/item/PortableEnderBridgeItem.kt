@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -15,7 +16,12 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 	//TODO: Sounds, particles
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		val usedStack = player.getItemInHand(usedHand)
-		if (level.isClientSide) return InteractionResultHolder.pass(usedStack)
+
+		if (level.isClientSide) {
+
+		}
+
+		if (level !is ServerLevel) return InteractionResultHolder.pass(usedStack)
 
 		val clipResult = OtherUtil.getPovResult(level, player, ServerConfig.CONFIG.portableEnderBridgeRange.get())
 

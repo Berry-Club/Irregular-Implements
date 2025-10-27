@@ -1,9 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.PeaceCandleCarrier;
-import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier;
-import dev.aaronhowser.mods.irregular_implements.RedstoneInterfaceCarrier;
-import dev.aaronhowser.mods.irregular_implements.SlimeCubeCarrier;
+import dev.aaronhowser.mods.irregular_implements.*;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RainShieldBlockEntity;
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
@@ -19,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
-public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrier, RedstoneInterfaceCarrier, SlimeCubeCarrier {
+public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrier, RedstoneInterfaceCarrier, SlimeCubeCarrier, EnderBridgeCarrier {
 
 	@Unique
 	LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
@@ -29,6 +26,9 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 
 	@Unique
 	LongOpenHashSet irregularImplements$slimeCubePositions = new LongOpenHashSet();
+
+	@Unique
+	LongOpenHashSet irregular_implements$enderBridges = new LongOpenHashSet();
 
 	@Inject(
 			method = "tickBlockEntities",
@@ -80,6 +80,11 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	@Override
 	public LongOpenHashSet irregular_implements$getSlimeCubePositions() {
 		return this.irregularImplements$slimeCubePositions;
+	}
+
+	@Unique
+	public LongOpenHashSet irregular_implements$getEnderBridges() {
+		return this.irregular_implements$enderBridges;
 	}
 
 	@Override
