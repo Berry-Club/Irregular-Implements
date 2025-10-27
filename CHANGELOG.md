@@ -20,6 +20,7 @@
 - The Escape Rope no longer duplicates itself
 - Fixed the Obsidian Skull Ring not doing anything
   - It was looking for an Obsidian Skull in curio slots instead of the Ring
+- Fixed the Biome Capsule not using its saved biome for its color
 
 # 1.5.0
 
