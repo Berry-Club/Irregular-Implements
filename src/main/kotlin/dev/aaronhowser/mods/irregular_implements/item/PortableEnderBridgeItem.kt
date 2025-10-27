@@ -38,8 +38,6 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 			val radianAngle = acos(dot)
 			val degreeAngle = Math.toDegrees(radianAngle)
 
-			player.sendSystemMessage(Component.literal("$degreeAngle"))
-
 			if (degreeAngle < 5.0) {
 				targetBridges.add(anchorPos)
 			}
