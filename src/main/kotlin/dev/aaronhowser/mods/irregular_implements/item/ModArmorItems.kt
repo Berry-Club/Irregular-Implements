@@ -120,12 +120,25 @@ object ModArmorItems {
 
 
 	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
-		if (livingEntity.isCrouching || livingEntity.isUnderWater) return false
+		val fluidsEntityCanStandOn = getFluidsEntityCanStandOn(livingEntity)
+		return fluidsEntityCanStandOn.any { fluidState.`is`(it) }
+	}
 
-		val fluidTags = mutableListOf<TagKey<Fluid>>()
+	fun getFluidsEntityCanStandOn(livingEntity: LivingEntity): Set<TagKey<Fluid>> {
+		if (livingEntity.isCrouching || livingEntity.isUnderWater) return emptySet()
 
-		val footArmor = livingEntity.getItemBySlot(EquipmentSlot.FEET)
-		fluidTags.addAll(footArmor.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList()))
+		val fluidTags = mutableSetOf<TagKey<Fluid>>()
+
+		val bodySlots = EquipmentSlot.entries - EquipmentSlot.MAINHAND - EquipmentSlot.OFFHAND
+		for (slot in bodySlots) {
+			val armorItem = livingEntity.getItemBySlot(slot)
+			fluidTags.addAll(
+				armorItem.getOrDefault(
+					ModDataComponents.CAN_STAND_ON_FLUIDS,
+					emptyList()
+				)
+			)
+		}
 
 		CuriosApi.getCuriosInventory(livingEntity).ifPresent {
 			for (slot in 0 until it.equippedCurios.slots) {
@@ -134,7 +147,7 @@ object ModArmorItems {
 			}
 		}
 
-		return fluidTags.any { fluidState.`is`(it) }
+		return fluidTags
 	}
 
 	@JvmStatic
