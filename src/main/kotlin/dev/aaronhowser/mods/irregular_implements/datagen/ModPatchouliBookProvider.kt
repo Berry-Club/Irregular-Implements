@@ -550,7 +550,7 @@ class ModPatchouliBookProvider(
 			),
 			SpotlightPage.linkedPage(
 				ModItems.BLACKOUT_POWDER,
-				"This can be undone either by right-clicking the entity, or using a $${major("Blackout Powder")} anywhere in the chunk."
+				"This can be undone either by right-clicking the entity, or using a ${major("Blackout Powder")} anywhere in the chunk."
 			)
 		)
 
@@ -570,6 +570,90 @@ class ModPatchouliBookProvider(
 					"The room has a floor of 16x16 blocks, and starts out only 2 blocks tall.",
 					"You can expand it vertically by using ${internalLink("items/ectoplasm", "Ectoplasm")} on the Spectre Core blocks.",
 					"Each Ectoplasm increases the room's height by 1 block, and it will use the entire stack when clicked."
+				)
+			)
+		)
+
+		add(
+			ModItems.SPECTRE_ANCHOR,
+			"Spectre Anchor",
+			SpotlightPage.linkedPage(
+				ModItems.SPECTRE_ANCHOR,
+				doubleSpacedLines(
+					"The ${major("Spectre Anchor")} can be crafted with an item to ${minor("allow you to retain it after death")}.",
+					"After this, the anchor is removed from the item."
+				)
+			)
+		)
+
+		add(
+			ModItems.SPECTRE_SWORD,
+			"Spectre Tools",
+			SpotlightPage.linkedPage(
+				ModItems.SPECTRE_SWORD,
+				doubleSpacedLines(
+					"The ${major("Spectre Sword")} is comparable to a Diamond Sword, with higher durability and enchantability.",
+					"It increases your entity interaction range by 3 blocks, and can be used to kill Spirits."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.SPECTRE_PICKAXE,
+				doubleSpacedLines(
+					"The ${major("Spectre Pickaxe, Axe, and Shovel")} are each comparable to their Diamond counterpart, with higher durability and enchantability.",
+					"Each of them increases your block interaction range by 3 blocks."
+				)
+			)
+		)
+
+		add(
+			ModItems.REDSTONE_ACTIVATOR,
+			"Redstone Activator",
+			TextPage.basicTextPage(
+				"Redstone Activator",
+				"Using the ${major("Redstone Activator")} will power it for a short duration."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.REDSTONE_ACTIVATOR,
+				doubleSpacedLines(
+					"Sneak right-click it to change the duration between 2, 20, and 100 ticks."
+				)
+			)
+		)
+
+		add(
+			ModItems.REDSTONE_REMOTE,
+			"Redstone Remote",
+			TextPage.basicTextPage(
+				"Redstone Remote",
+				doubleSpacedLines(
+					"The ${major("Redstone Remote")} acts like the ${internalLink("items/redstone_activator", "Redstone Activator")}, but instead powers up to 9 selectable locations.",
+					"Sneak right-click to open its GUI. Place a filled ${internalLink("items/location_filter", "Location Filter")} in one of the top slots to add it. You can optionally place any item in the slot below it to add an icon to the location button."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.REDSTONE_REMOTE,
+				doubleSpacedLines(
+					"Use while not sneaking to access the location buttons. Clicking one will power that location for a short duration."
+				)
+			)
+		)
+
+		add(
+			ModItems.BIOME_PAINTER,
+			"Biome Painter",
+			SpotlightPage.linkedPage(
+				ModItems.BIOME_CAPSULE,
+				doubleSpacedLines(
+					"The ${major("Biome Capsule")} allows you to capture a biome from the world.",
+					"Throw it on the ground, and if the Capsule has no biome it will be set to the biome at that location.",
+					"As it sits in that biome, it will gain points. Hover over it in the inventory to see it current amount."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.BIOME_PAINTER,
+				doubleSpacedLines(
+					"The ${major("Biome Painter")} allows you to change the biome in a radius around the selected block.",
+					"While held, it will show you the nearby blocks that $(o)aren't$() the same as the first filled Biome Capsule in your inventory. Using the Painter on those blocks will change the biome there."
 				)
 			)
 		)

@@ -13,7 +13,7 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:blackout_powder",
       "link_recipe": true,
-      "text": "This can be undone either by right-clicking the entity, or using a $$(d)Blackout Powder$() anywhere in the chunk."
+      "text": "This can be undone either by right-clicking the entity, or using a $(d)Blackout Powder$() anywhere in the chunk."
     }
   ]
 }
