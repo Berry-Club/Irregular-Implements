@@ -235,7 +235,7 @@ class ServerConfig(
 
 		biomePainterRadius = builder
 			.comment("The radius that the Biome Painter will affect. 0 is just the targeted block, 1 is a 3x3x3 area, etc.")
-			.defineInRange("biomePainterRadius", 0, 0, 100)
+			.defineInRange("biomePainterRadius", 2, 0, 100)
 
 		biomePainterViewHorizontalRadius = builder
 			.comment("The horizontal that you can see and paint biomes from.")

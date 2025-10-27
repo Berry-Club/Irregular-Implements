@@ -10,6 +10,8 @@
 - Renamed the item tag `#irregular_implements:fluid_tags` to `#irregular_implements:can_stand_on_fluids`, since that's what it's used for
 - The function to see if you can stand on a fluid now checks for the `#irregular_implements:can_stand_on_fluids` tag in all armor and curio slots, rather than just feet
 	- Currently no non-footwear items are in that tag, but now you can add them yourself
+- The Biome Painter now defaults to having a radius of 2 instead of 0
+  - Now it has a default volume of 5x5x5 instead of 1x1x1
 
 ### Fixed
 
