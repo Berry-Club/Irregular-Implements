@@ -89,7 +89,11 @@ object EscapeRopeHandler {
 				)
 
 				if (toCheck.isEmpty() || (limit > 1 && alreadyChecked.size >= limit)) {
-					player.drop(usedItem, true)
+					val dropped = player.drop(usedItem, true) != null
+					if (dropped) {
+						player.stopUsingItem()
+						player.setItemInHand(player.usedItemHand, ItemStack.EMPTY)
+					}
 					return true
 				}
 

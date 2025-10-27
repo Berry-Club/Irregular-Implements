@@ -262,6 +262,19 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.ESCAPE_ROPE,
+			"Escape Rope",
+			TextPage.basicTextPage(
+				"Escape Rope",
+				doubleSpacedLines(
+					"The ${major("Escape Rope")} can be used to quickly get out of caves.",
+					"Hold right-click while in a cave, and it will quickly search for ${minor("the nearest location that can see the sky")}, and then teleport you there.",
+					"If it can't find a valid location, it will be dropped at your feet."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
