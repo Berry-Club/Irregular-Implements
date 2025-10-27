@@ -58,15 +58,11 @@ class MoonPhaseDetectorBlock : Block(
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
-		return if (level.isClientSide) {
-			null
-		} else {
-			BaseEntityBlock.createTickerHelper(
-				blockEntityType,
-				ModBlockEntityTypes.MOON_PHASE_DETECTOR.get(),
-				MoonPhaseDetectorBlockEntity::tick
-			)
-		}
+		return BaseEntityBlock.createTickerHelper(
+			blockEntityType,
+			ModBlockEntityTypes.MOON_PHASE_DETECTOR.get(),
+			MoonPhaseDetectorBlockEntity::tick
+		)
 	}
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
