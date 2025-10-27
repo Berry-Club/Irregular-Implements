@@ -1,4 +1,9 @@
-# 1.5.1
+# 1.6.0
+
+### Added
+
+- Patchouli documentation
+  - I had to update a Patchouli DataGen mod from 1.19 for this lol
 
 ### Changed
 
