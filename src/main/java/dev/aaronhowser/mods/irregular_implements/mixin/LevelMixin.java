@@ -57,20 +57,6 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 		return this.irregular_implements$rainShieldChunks;
 	}
 
-	@Inject(
-			method = "isRainingAt",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
-			),
-			cancellable = true
-	)
-	private void irregular_implements$rainShieldStopsRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
-			cir.setReturnValue(false);
-		}
-	}
-
 	@Unique
 	@Override
 	public LongOpenHashSet irregular_implements$getPeaceCandleChunks() {
@@ -85,6 +71,20 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	@Unique
 	public LongOpenHashSet irregular_implements$getEnderBridges() {
 		return this.irregular_implements$enderBridges;
+	}
+
+	@Inject(
+			method = "isRainingAt",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/world/level/Level;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;"
+			),
+			cancellable = true
+	)
+	private void irregular_implements$rainShieldStopsRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		if (RainShieldBlockEntity.chunkIsProtectedFromRain((Level) (Object) this, pos)) {
+			cir.setReturnValue(false);
+		}
 	}
 
 	@Override
