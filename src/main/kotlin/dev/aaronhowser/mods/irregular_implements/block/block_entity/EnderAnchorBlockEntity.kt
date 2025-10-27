@@ -11,6 +11,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import kotlin.math.cos
 import kotlin.math.sin
 
 class EnderAnchorBlockEntity(
@@ -25,6 +26,13 @@ class EnderAnchorBlockEntity(
 
 		val localPlayer = ClientUtil.localPlayer ?: return
 		if (!localPlayer.isHolding(ModItems.PORTABLE_ENDER_BRIDGE.get())) return
+
+		val distance = localPlayer.eyePosition.distanceTo(blockPos.center)
+		val distanceToMaxSize = 100.0
+		val percentage = (distance / distanceToMaxSize).coerceIn(0.0, 1.0)
+
+		val easeInOutSine = -(cos(Mth.PI * percentage) - 1) / 2
+		val scale = Mth.lerp(easeInOutSine, 0.8, 5.0)
 
 		val colorOne = 0xFF14173E
 		val colorTwo = 0xFF383993
@@ -58,7 +66,8 @@ class EnderAnchorBlockEntity(
 		CubeIndicatorRenderer.addIndicator(
 			blockPos,
 			2,
-			color
+			color,
+			scale.toFloat()
 		)
 	}
 
