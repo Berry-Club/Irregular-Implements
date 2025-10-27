@@ -538,6 +538,42 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.SPECTRE_ILLUMINATOR,
+			"Spectre Illuminator",
+			SpotlightPage.linkedPage(
+				ModItems.SPECTRE_ILLUMINATOR,
+				doubleSpacedLines(
+					"The ${major("Spectre Illuminator")} can be used to ${minor("light up an entire chunk")}.",
+					"It will place an entity down that slowly floats upwards, until it's a certain distance above the highest block in the chunk."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.BLACKOUT_POWDER,
+				"This can be undone either by right-clicking the entity, or using a $${major("Blackout Powder")} anywhere in the chunk."
+			)
+		)
+
+		add(
+			ModItems.SPECTRE_KEY,
+			"Spectre Key",
+			TextPage.basicTextPage(
+				"Spectre Key",
+				doubleSpacedLines(
+					"The ${major("Spectre Key")} can be used to ${minor("teleport to a private room in another dimension")}, unique to each player.",
+					"Once there, you can build and store items safely, and they'll remain there any time you return. Leave by either using the Key again, or clicking one of the Spectre Core blocks on the room's floor."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.SPECTRE_KEY,
+				doubleSpacedLines(
+					"The room has a floor of 16x16 blocks, and starts out only 2 blocks tall.",
+					"You can expand it vertically by using ${internalLink("items/ectoplasm", "Ectoplasm")} on the Spectre Core blocks.",
+					"Each Ectoplasm increases the room's height by 1 block, and it will use the entire stack when clicked."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {

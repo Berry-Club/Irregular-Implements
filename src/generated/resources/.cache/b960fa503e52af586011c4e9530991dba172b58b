@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-26T22:26:00.3931849	Patchouli Book: guide
+// 1.21.1	2025-10-26T23:35:11.906684	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
 e705ba7322b241299e14d08c878f2b643c597cac assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/spectre_log.json
@@ -22,6 +22,8 @@ d59f687a2c35f3f03c7392bd697496760d894abe assets/irregular_implements/patchouli_b
 a2f07f9a005264e20b7bf842f980083643fd9745 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/obsidian_skull.json
 099889f97e8eb14a909ed35602b2f50ca9271728 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/player_filter.json
 6efa5fec438376fa97ec93123c892eab5530ca22 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/portkey.json
+2547f849870145898ccdf6433588f30bd85e7979 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_illuminator.json
+aad5c06e2627cc12887ecd30b00b21bf68a534b3 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_key.json
 8ca490de50a130c42df2828a8392e10883c47823 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/stable_ender_pearl.json
 7d482892528f106f6c7fb576d55a12ad28f1ccca assets/irregular_implements/patchouli_books/guide/en_us/entries/items/super_lubricant_tincture.json
 39d9d94f020431d75d90d589a5bdcae200dc083f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/water_walking_boots.json
