@@ -61,7 +61,11 @@ class MoonPhaseDetectorBlock : Block(
 		return if (level.isClientSide) {
 			null
 		} else {
-			BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntityTypes.MOON_PHASE_DETECTOR.get(), MoonPhaseDetectorBlock::tick)
+			BaseEntityBlock.createTickerHelper(
+				blockEntityType,
+				ModBlockEntityTypes.MOON_PHASE_DETECTOR.get(),
+				MoonPhaseDetectorBlockEntity::tick
+			)
 		}
 	}
 
@@ -79,25 +83,6 @@ class MoonPhaseDetectorBlock : Block(
 		val INVERTED: BooleanProperty = BlockStateProperties.INVERTED
 
 		val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0)
-
-		fun tick(level: Level, pos: BlockPos, state: BlockState, blockEntity: MoonPhaseDetectorBlockEntity) {
-			if (level.gameTime % 20 != 0L) return
-
-			val moonPhase = level.moonPhase
-
-			val isInverted = state.getValue(INVERTED)
-
-			val power = if (isInverted) {
-				moonPhase * 2
-			} else {
-				14 - moonPhase * 2
-			}
-
-			if (state.getValue(POWER) != power) {
-				val newState = state.setValue(POWER, power)
-				level.setBlockAndUpdate(pos, newState)
-			}
-		}
 	}
 
 }
