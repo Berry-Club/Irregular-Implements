@@ -211,11 +211,6 @@ class ModItemTagsProvider(
 			.add(
 				ModItems.SPECTRE_SWORD.get()
 			)
-
-		this.tag(PREVENTS_SOME_MOB_INTERACTION)
-			.add(
-				ModItems.SUMMONING_PENDULUM.get()
-			)
 	}
 
 	companion object {
@@ -233,7 +228,6 @@ class ModItemTagsProvider(
 		val NATURE_CORE_FLOWERS = create("nature_core_flowers")
 		val NATURE_CORE_SAPLINGS = create("nature_core_saplings")
 		val DAMAGES_SPIRITS = create("damages_spirits")
-		val PREVENTS_SOME_MOB_INTERACTION: TagKey<Item> = create("prevents_some_mob_interaction")
 
 		@JvmField
 		val HIDE_POTION_HELMET = create("hide_potion_helmet")

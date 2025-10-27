@@ -30,17 +30,6 @@ class ModEntityTypeTagsProvider(
 				EntityType.ITEM,
 				EntityType.EXPERIENCE_ORB
 			)
-
-		tag(ALLOWS_PREVENTING_INTERACTION)
-			.add(
-				EntityType.VILLAGER,
-				EntityType.WANDERING_TRADER,
-				EntityType.HORSE,
-				EntityType.DONKEY,
-				EntityType.MULE,
-				EntityType.LLAMA,
-				EntityType.TRADER_LLAMA
-			)
 	}
 
 	companion object {
@@ -51,7 +40,6 @@ class ModEntityTypeTagsProvider(
 		val SUMMONING_PENDULUM_BLACKLIST = create("summoning_pendulum_blacklist")
 		val NATURE_CORE_IMMUNE = create("nature_core_immune")
 		val NOT_DROPPED_WHEN_MOVING_BLOCKS = create("not_dropped_when_moving_blocks")
-		val ALLOWS_PREVENTING_INTERACTION = create("allows_preventing_interaction")
 	}
 
 }

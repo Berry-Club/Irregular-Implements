@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-27T02:14:45.3886833	Tags for minecraft:item mod id irregular_implements
+// 1.21.1	2025-10-13T16:19:56.6703234	Tags for minecraft:item mod id irregular_implements
 e94f609f082a794ad96fb4008f986c0aa4ba38b5 data/curios/tags/item/ring.json
 996ecf49e1bfe2419630ebb12ec9338e2cb73fec data/c/tags/item/crops.json
 e1a2f90f364fa88dc3a75bde96655d5523d40d0b data/c/tags/item/crops/bean.json
@@ -15,7 +15,6 @@ f24a294d5a5bc06b589128afc84ca3c2d64ec08b data/irregular_implements/tags/item/dam
 27129810700cab73bf23b754952138832a8a45b2 data/irregular_implements/tags/item/hide_potion_helmet.json
 a72c613d8786fc7756573ffec9c22f7ed2973d9e data/irregular_implements/tags/item/nature_core_flowers.json
 347d7db9633b91359c616fd62d97385b7de8bc73 data/irregular_implements/tags/item/nature_core_saplings.json
-ff46b26e4d65e9222531c120716a7e132dd3befc data/irregular_implements/tags/item/prevents_some_mob_interaction.json
 4c72127fa4caa4ec77c002762b37686d723472b4 data/irregular_implements/tags/item/spectre_anchor_blacklist.json
 56b06c86273d978ec4445a59d131e4f35425d6f3 data/irregular_implements/tags/item/super_lubricated.json
 04b36322b6251d1c992152b543ec475e6cccb412 data/minecraft/tags/item/axes.json
