@@ -238,6 +238,10 @@ unifiedPublishing {
 			optional {
 				curseforge = modrinth = "modonomicon"
 			}
+
+			optional {
+				curseforge = modrinth = "patchouli"
+			}
 		}
 
 		if (ENV.CURSEFORGE_KEY) {
