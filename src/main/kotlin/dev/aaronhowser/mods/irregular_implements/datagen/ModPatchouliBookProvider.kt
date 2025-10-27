@@ -210,6 +210,58 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.EMERALD_COMPASS,
+			"Emerald Compass",
+			TextPage.basicTextPage(
+				"Emerald Compass",
+				doubleSpacedLines(
+					"The ${major("Emerald Compass")} can be linked to a player, and  ${minor("aims towards them")}.",
+					"Of course, it only works if the player is logged in, and is in the same dimension as you."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.EMERALD_COMPASS,
+				doubleSpacedLines(
+					"You can link the Compass to a player in two ways.",
+					"First is to simply right-click them while holding the Compass.",
+					"The other is to craft the Compass with a set ${internalLink("items/player_filter", "Player Filter")}."
+				)
+			)
+		)
+
+		add(
+			ModItems.GOLDEN_COMPASS,
+			"Golden Compass",
+			TextPage.basicTextPage(
+				"Golden Compass",
+				doubleSpacedLines(
+					"The ${major("Golden Compass")} can be linked to a specific location, and ${minor("aims towards it")}.",
+					"Of course, it only works if you're in the same dimension as the location.",
+					"Is this functionally identical to simply using a Lodestone? Maybe!"
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.GOLDEN_COMPASS,
+				doubleSpacedLines(
+					"To link the Compass to a location, craft it together with a set ${internalLink("items/location_filter", "Location Filter")}.",
+					"There are some other ways as well, such as using it on a ${internalLink("blocks/biome_radar", "Biome Radar")} to link it to the located biome."
+				)
+			)
+		)
+
+		add(
+			ModItems.BLAZE_AND_STEEL,
+			"Blaze and Steel",
+			SpotlightPage.linkedPage(
+				ModItems.BLAZE_AND_STEEL,
+				"Blaze and Steel",
+				doubleSpacedLines(
+					"The ${major("Blaze and Steel")} functions similarly to Flint and Steel, but the fire it lights is much more aggressive."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
