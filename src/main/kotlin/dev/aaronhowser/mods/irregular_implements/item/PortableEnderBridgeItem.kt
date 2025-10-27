@@ -4,6 +4,8 @@ import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositions
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -55,7 +57,21 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 			return InteractionResultHolder.fail(usedStack)
 		}
 
+		level.playSound(
+			null,
+			player.blockPosition(),
+			SoundEvents.ENDERMAN_TELEPORT,
+			SoundSource.BLOCKS
+		)
+
 		player.teleportTo(nearest.x + 0.5, nearest.y + 1.0, nearest.z + 0.5)
+
+		level.playSound(
+			null,
+			nearest.above(),
+			SoundEvents.ENDERMAN_TELEPORT,
+			SoundSource.BLOCKS
+		)
 
 		return InteractionResultHolder.success(usedStack)
 	}
