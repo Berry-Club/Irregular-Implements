@@ -126,7 +126,7 @@ object ModBlocks {
 	val PRISMARINE_ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
 		registerBlock("prismarine_ender_bridge") { EnderBridgeBlock(distancePerTick = 2) }
 	val ENDER_ANCHOR: DeferredBlock<Block> =
-		basicCopiedBlock("ender_anchor", Blocks.OBSIDIAN)
+		registerBlock("ender_anchor", ::EnderAnchorBlock)
 
 	// Lubricant
 	val SUPER_LUBRICANT_ICE: DeferredBlock<TransparentBlock> =

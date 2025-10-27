@@ -120,6 +120,8 @@ object ModBlockEntityTypes {
 			::AdvancedRedstoneTorchBlockEntity,
 			ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_REDSTONE_WALL_TORCH
 		)
+	val ENDER_ANCHOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<EnderAnchorBlockEntity>> =
+		register("ender_anchor", ::EnderAnchorBlockEntity, ModBlocks.ENDER_ANCHOR)
 
 	init {
 		BLOCK_ENTITY_REGISTRY.addAlias(
