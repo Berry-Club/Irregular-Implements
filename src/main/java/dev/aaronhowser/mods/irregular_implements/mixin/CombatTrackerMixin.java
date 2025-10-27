@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.aaronhowser.mods.irregular_implements.handler.FluidWalkingHandler;
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.CombatEntry;
@@ -27,8 +28,8 @@ abstract public class CombatTrackerMixin {
 			)
 	)
 	private Component irregular_implements$addFallMessage(Component original, CombatEntry combatEntry) {
-		return (combatEntry.fallLocation() == ModArmorItems.FLUID_BOOT_FALL)
-				? ModArmorItems.fluidWalkingDeathMessage(this.mob)
+		return (combatEntry.fallLocation() == FluidWalkingHandler.FLUID_BOOT_FALL)
+				? FluidWalkingHandler.fluidWalkingDeathMessage(this.mob)
 				: original;
 	}
 

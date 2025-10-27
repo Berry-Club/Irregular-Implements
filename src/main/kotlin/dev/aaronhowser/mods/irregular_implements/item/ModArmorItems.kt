@@ -118,105 +118,12 @@ object ModArmorItems {
 			.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
 			.rarity(Rarity.UNCOMMON)
 
-
-	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
-		val fluidsEntityCanStandOn = getFluidsEntityCanStandOn(livingEntity)
-		return fluidsEntityCanStandOn.any { fluidState.`is`(it) }
-	}
-
-	fun getFluidsEntityCanStandOn(livingEntity: LivingEntity): Set<TagKey<Fluid>> {
-		if (livingEntity.isCrouching || livingEntity.isUnderWater) return emptySet()
-
-		val fluidTags = mutableSetOf<TagKey<Fluid>>()
-
-		val bodySlots = EquipmentSlot.entries - EquipmentSlot.MAINHAND - EquipmentSlot.OFFHAND
-		for (slot in bodySlots) {
-			val armorItem = livingEntity.getItemBySlot(slot)
-			fluidTags.addAll(
-				armorItem.getOrDefault(
-					ModDataComponents.CAN_STAND_ON_FLUIDS,
-					emptyList()
-				)
-			)
-		}
-
-		CuriosApi.getCuriosInventory(livingEntity).ifPresent {
-			for (slot in 0 until it.equippedCurios.slots) {
-				val stack = it.equippedCurios.getStackInSlot(slot)
-				fluidTags.addAll(stack.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList()))
-			}
-		}
-
-		return fluidTags
-	}
-
-	@JvmStatic
-	fun checkCollisionShape(
-		level: BlockGetter,
-		pos: BlockPos,
-		context: CollisionContext,
-		original: VoxelShape?
-	): VoxelShape? {
-		if (context !is EntityCollisionContext) return null
-
-		val fluidState = level.getFluidState(pos)
-		val fluidHeight = fluidState.getHeight(level, pos)
-		if (fluidHeight <= 0) return null
-
-		val entity = context.entity as? LivingEntity ?: return null
-		if (!shouldEntityStandOnFluid(entity, fluidState)) return null
-
-		val shape = FLUID_SHAPES.computeIfAbsent(fluidHeight) {
-			Block.box(0.0, 0.0, 0.0, 16.0, (it * 16).toDouble(), 16.0)
-		}
-
-		if (!context.isAbove(shape, pos, true)) return null
-
-		return if (original == null) shape else Shapes.or(original, shape)
-	}
-
-	private val FLUID_SHAPES: MutableMap<Float, VoxelShape> = HashMap()
-
 	fun lubricatedTooltip(event: ItemTooltipEvent) {
 		if (event.itemStack.has(ModDataComponents.LUBRICATED)) {
 			event.toolTip.add(
 				ModTooltipLang.LUBRICATED
 					.toComponent()
 					.withColor(0xFCF4DD)
-			)
-		}
-	}
-
-	@JvmField
-	val FLUID_BOOT_FALL = FallLocation("fluid_boot_fall")
-
-	@JvmStatic
-	fun fluidWalkingFallLocation(entity: LivingEntity): FallLocation? {
-		val fluidBelow = entity.level().getFluidState(entity.blockPosition())
-		if (!shouldEntityStandOnFluid(entity, fluidBelow)) return null
-
-		return FLUID_BOOT_FALL
-	}
-
-	@JvmStatic
-	fun fluidWalkingDeathMessage(entity: LivingEntity): Component {
-		val fluidBelow = entity.level().getFluidState(entity.blockPosition())
-		val bootArmor = entity.getItemBySlot(EquipmentSlot.FEET)
-
-		val bootWasResponsible = bootArmor
-			.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList())
-			.any { fluidBelow.`is`(it) }
-
-		return if (bootWasResponsible) {
-			ModMessageLang.FLUID_FALL_DEATH_BOOT.toComponent(
-				entity.displayName ?: entity.name,
-				fluidBelow.fluidType.description,
-				bootArmor.displayName
-			)
-		} else {
-			ModMessageLang.FLUID_FALL_DEATH_GENERIC.toComponent(
-				entity.displayName ?: entity.name,
-				fluidBelow.fluidType.description,
 			)
 		}
 	}

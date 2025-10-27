@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import dev.aaronhowser.mods.irregular_implements.handler.FluidWalkingHandler;
 import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems;
 import net.minecraft.world.damagesource.FallLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +18,7 @@ abstract public class FallLocationMixin {
 	private static FallLocation irregular_implements$fallOnWaterMessage(FallLocation original, LivingEntity entity) {
 		if (original != null) return original;
 
-		return ModArmorItems.fluidWalkingFallLocation(entity);
+		return FluidWalkingHandler.fluidWalkingFallLocation(entity);
 	}
 
 }
