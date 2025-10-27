@@ -325,6 +325,42 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.SUPER_LUBRICANT_TINCTURE,
+			"Super Lubricant Tincture",
+			TextPage.basicTextPage(
+				"Super Lubricant Tincture",
+				doubleSpacedLines(
+					"The ${major("Super Lubricant Tincture")} can be crafted with any boot item to make them ${minor("completely negate friction")} when worn.",
+					"That means if you start moving, you won't stop!"
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.SUPER_LUBRICANT_TINCTURE,
+				"You can craft Lubricated boots with a Water Bottle to wash the lubricant off."
+			)
+		)
+
+		add(
+			ModItems.ENDER_BUCKET,
+			"Ender Bucket",
+			SpotlightPage.linkedPage(
+				ModItems.ENDER_BUCKET,
+				"Ender Bucket",
+				doubleSpacedLines(
+					"The ${major("Ender Bucket")} can be used to pick up fluids from a distance.",
+					"If you use an empty bucket on a non-source fluid block, it will search for the nearest source block and pick that up instead."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.REINFORCED_ENDER_BUCKET,
+				"Reinforced Ender Bucket",
+				doubleSpacedLines(
+					"The ${major("Reinforced Ender Bucket")} works the same way, but it can ${minor("hold 10 buckets worth of fluid")} at a time."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {

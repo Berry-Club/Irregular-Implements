@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-26T21:40:25.5016961	Patchouli Book: guide
+// 1.21.1	2025-10-26T21:46:33.1988481	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
 e705ba7322b241299e14d08c878f2b643c597cac assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/spectre_log.json
@@ -6,6 +6,7 @@ e705ba7322b241299e14d08c878f2b643c597cac assets/irregular_implements/patchouli_b
 0c68147d0ce66fceaf293ba7ad83daba07afdf7b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/bottle_of_air.json
 8f9aca54c4298c052878ed35ac536ca49d28f3c6 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/chunk_analyzer.json
 14de3f47eeffce7ea85559c1216b45bd56b5e196 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/emerald_compass.json
+1cf992606339adc3e06163eed0fbe646e234dd1b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_bucket.json
 8c60cb6040b41f101d008068496e833d174ea1cc assets/irregular_implements/patchouli_books/guide/en_us/entries/items/escape_rope.json
 a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
 d57c5fca0ce198e4dd90134b51e33abec6bd32fb assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
@@ -14,4 +15,5 @@ ecafe792afa48469caf62354a9db47fb0a118e73 assets/irregular_implements/patchouli_b
 a2f07f9a005264e20b7bf842f980083643fd9745 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/obsidian_skull.json
 6efa5fec438376fa97ec93123c892eab5530ca22 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/portkey.json
 8ca490de50a130c42df2828a8392e10883c47823 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/stable_ender_pearl.json
+7d482892528f106f6c7fb576d55a12ad28f1ccca assets/irregular_implements/patchouli_books/guide/en_us/entries/items/super_lubricant_tincture.json
 8b69d58f54a38d23f4b740471445d18d20ad529e data/irregular_implements/patchouli_books/guide/book.json
