@@ -445,6 +445,27 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.ITEM_FILTER,
+			"Item Filter",
+			TextPage.basicTextPage(
+				"Item Filter",
+				doubleSpacedLines(
+					"The ${major("Item Filter")} has a list of up to 9 items, which can act as either a blacklist or a whitelist for certain things.",
+					"Use the Filter to open it, and place items in the slots to add them to the list.",
+					"The button on the far right of the gui lets you ${minor("toggle between blacklist and whitelist mode")} for the entire Filter."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.ITEM_FILTER,
+				doubleSpacedLines(
+					"Above each filled slot is 2 buttons. The left button allows you to ${minor("toggle if the slot is an Item Filter or a Tag Filter")}.",
+					"The right button changes depending on the above. If the slot is an Item Filter, it allows you to ${minor("toggle if it requires it to match the data components")}.",
+					"If it's a Tag Filter, it allows you to ${minor("cycle the tag")}. For example, putting in an Iron Ingot and setting it to be a Tag Filter, you can cycle between it being \"Beacon Payments\", \"Ingots\", \"Trim Materials\", etc.",
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
