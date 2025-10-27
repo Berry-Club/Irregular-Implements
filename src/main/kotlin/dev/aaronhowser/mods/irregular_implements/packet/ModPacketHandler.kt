@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.packet
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.PaintBiomePacket
+import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.TeleportToEnderBridgePacket
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.*
 import net.minecraft.core.BlockPos
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -72,6 +73,12 @@ object ModPacketHandler {
 			registrar,
 			PaintBiomePacket.TYPE,
 			PaintBiomePacket.STREAM_CODEC
+		)
+
+		toServer(
+			registrar,
+			TeleportToEnderBridgePacket.TYPE,
+			TeleportToEnderBridgePacket.STREAM_CODEC
 		)
 	}
 

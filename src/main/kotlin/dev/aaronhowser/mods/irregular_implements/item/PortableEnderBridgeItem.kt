@@ -30,7 +30,7 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 			return InteractionResultHolder.pass(usedStack)
 		}
 
-		var targetBridges = mutableSetOf<BlockPos>()
+		val targetBridges = mutableSetOf<BlockPos>()
 
 		for (anchorPos in enderBridgeLocations) {
 			val deltaVec = player.eyePosition.vectorTo(anchorPos.center)
