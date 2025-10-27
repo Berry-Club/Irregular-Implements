@@ -16,6 +16,8 @@
 - Added mining particles to Glowing Mushrooms (#32)
 - Added an alias to ModBlockEntityTypes for `redstone_interface` -> `basic_redstone_interface` to prevent data loss, so 1.5.0 is no longer a breaking change
 - The Escape Rope no longer duplicates itself
+- Fixed the Obsidian Skull Ring not doing anything
+  - It was looking for an Obsidian Skull in curio slots instead of the Ring
 
 # 1.5.0
 

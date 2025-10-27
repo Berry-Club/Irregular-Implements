@@ -153,7 +153,7 @@ object ModArmorItems {
 		val hasObsidianSkullRing =
 			CuriosApi.getCuriosInventory(entity)
 				.getOrNull()
-				?.isEquipped(ModItems.OBSIDIAN_SKULL.get())
+				?.isEquipped(ModItems.OBSIDIAN_SKULL_RING.get())
 				.isTrue
 
 		if (hasObsidianSkullRing) return true

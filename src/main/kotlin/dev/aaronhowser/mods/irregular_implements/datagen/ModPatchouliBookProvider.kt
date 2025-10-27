@@ -288,6 +288,43 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.LAVA_CHARM,
+			"Lava Charm",
+			TextPage.basicTextPage(
+				"Lava Charm",
+				doubleSpacedLines(
+					"The ${major("Lava Charm")} adds a temporary lava shield, visible above your armor bar.",
+					"While the shield is full, you will be ${good("completely immune to lava damage")}. However, it does ${bad("not protect you from fire")}!",
+					"Lava will still light you on fire, and you will still take damage from that!. Maybe invest in an ${internalLink("items/obsidian_skull", "Obsidian Skull")} as well?"
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.LAVA_CHARM,
+				"Lava Charms can be found rarely in ${minor("dungeon chests")} and more commonly in ${minor("Nether Fortress chests")}."
+			)
+		)
+
+		add(
+			ModItems.OBSIDIAN_SKULL,
+			"Obsidian Skull",
+			SpotlightPage.linkedPage(
+				ModItems.OBSIDIAN_SKULL,
+				"Obsidian Skull",
+				doubleSpacedLines(
+					"The ${major("Obsidian Skull")} has a chance of ${minor("negating fire damage")} when held in the player's inventory.",
+					"The more damage that would have been taken, the higher the chance of negation. The exact formula is ${colored(TextColor.DARK_RED, "(amount^3)/100")}.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.OBSIDIAN_SKULL_RING,
+				"Obsidian Skull Ring",
+				doubleSpacedLines(
+					"You can also craft the ${major("Obsidian Skull Ring")}, which can be worn in the Curio's ring slot!"
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
