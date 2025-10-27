@@ -275,6 +275,19 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.CHUNK_ANALYZER,
+			"Chunk Analyzer",
+			SpotlightPage.linkedPage(
+				ModItems.CHUNK_ANALYZER,
+				"Chunk Analyzer",
+				doubleSpacedLines(
+					"The ${major("Chunk Analyzer")} can be used to analyze the current chunk you're in.",
+					"USe it to see a list of ${minor("every block and their counts")} in the chunk."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {

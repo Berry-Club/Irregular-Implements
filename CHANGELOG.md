@@ -8,7 +8,8 @@
 ### Changed
 
 - Renamed the item tag `#irregular_implements:fluid_tags` to `#irregular_implements:can_stand_on_fluids`, since that's what it's used for
-- The function to see if you can stand on a fluid now checks for the Curios `feet` slot
+- The function to see if you can stand on a fluid now checks for the `#irregular_implements:can_stand_on_fluids` tag in all armor and curio slots, rather than just feet
+	- Currently no non-footwear items are in that tag, but now you can add them yourself
 
 ### Fixed
 

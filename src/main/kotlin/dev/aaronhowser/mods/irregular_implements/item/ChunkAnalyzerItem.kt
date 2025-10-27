@@ -59,6 +59,8 @@ class ChunkAnalyzerItem(properties: Properties) : Item(properties) {
 
 		}
 
+		player.cooldowns.addCooldown(this, 20)
+
 		return InteractionResultHolder.success(usedStack)
 	}
 
