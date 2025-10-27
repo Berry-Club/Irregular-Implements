@@ -83,8 +83,11 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 		val entity = entityType.create(level) ?: return InteractionResult.FAIL
 
 		val newEntityList = component.dropLast(1)
-		if (stack.set(ModDataComponents.ENTITY_LIST, newEntityList) == null) {
-			return InteractionResult.FAIL
+
+		if (newEntityList.isEmpty()) {
+			stack.remove(ModDataComponents.ENTITY_LIST)
+		} else {
+			stack.set(ModDataComponents.ENTITY_LIST, newEntityList)
 		}
 
 		entityData.loadInto(entity)

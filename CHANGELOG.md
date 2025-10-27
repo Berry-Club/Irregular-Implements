@@ -23,6 +23,7 @@
   - If there aren't, the Bridge stops "searching" after 5 seconds
   - If there are, it waits for (distance in blocks / Bridge search speed) ticks and then teleports you
 - Ender Bridges now work if there's a block between it and the targeted Anchor
+- Upon emptying the Summoning Pendulum, it removes the data component entirely instead of just setting it to an empty entity nbt list
 
 ### Fixed
 
