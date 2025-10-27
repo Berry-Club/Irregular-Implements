@@ -1,4 +1,5 @@
-// 1.21.1	2025-09-26T10:53:41.4877572	Tags for minecraft:entity_type mod id irregular_implements
+// 1.21.1	2025-10-27T02:14:45.3911847	Tags for minecraft:entity_type mod id irregular_implements
+19846c9cd994bcc4316f76433d24d0e39ab35d95 data/irregular_implements/tags/entity_type/allows_preventing_interaction.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/irregular_implements/tags/entity_type/nature_core_immune.json
 c922a1dd9635b859b5ef273b97b42a7112d348c9 data/irregular_implements/tags/entity_type/not_dropped_when_moving_blocks.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/irregular_implements/tags/entity_type/summoning_pendulum_blacklist.json
