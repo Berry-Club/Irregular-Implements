@@ -21,6 +21,7 @@
   - Now that Anchors have a Block Entity, I can just search if any of those are in front of it instead
   - If there aren't, the Bridge stops "searching" after 5 seconds
   - If there are, it waits for (distance in blocks / Bridge search speed) ticks and then teleports you
+- Ender Bridges now work if there's a block between it and the targeted Anchor
 
 ### Fixed
 
