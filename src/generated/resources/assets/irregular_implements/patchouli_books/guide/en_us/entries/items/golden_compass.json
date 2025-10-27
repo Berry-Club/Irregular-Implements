@@ -12,7 +12,7 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:golden_compass",
       "link_recipe": true,
-      "text": "To link the Compass to a location, craft it together with a set $(l:items/location_filter)Location Filter$(/l).$(br2)There are some other ways as well, such as using it on a $(l:blocks/biome_radar)Biome Radar$(/l) to link it to the located biome."
+      "text": "To link the Compass to a location, craft it together with a set $(l:items/location_filter)Location Filter$(/l)."
     }
   ]
 }

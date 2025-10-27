@@ -244,8 +244,7 @@ class ModPatchouliBookProvider(
 			SpotlightPage.linkedPage(
 				ModItems.GOLDEN_COMPASS,
 				doubleSpacedLines(
-					"To link the Compass to a location, craft it together with a set ${internalLink("items/location_filter", "Location Filter")}.",
-					"There are some other ways as well, such as using it on a ${internalLink("blocks/biome_radar", "Biome Radar")} to link it to the located biome."
+					"To link the Compass to a location, craft it together with a set ${internalLink("items/location_filter", "Location Filter")}."
 				)
 			)
 		)
@@ -415,6 +414,34 @@ class ModPatchouliBookProvider(
 					"Get it by combining the two in an Anvil.",
 					"Remember that the Obsidian Skull does ${bad("not let you walk on lava")}! For that, you'll need the ${internalLink("items/lava_waders", "Lava Waders")}.",
 				)
+			)
+		)
+
+		add(
+			ModItems.LAVA_WADERS,
+			"Lava Waders",
+			SpotlightPage.linkedPage(
+				ModItems.LAVA_WADERS,
+				"Lava Waders",
+				doubleSpacedLines(
+					"The ${major("Lava Waders")} combines the effects of the ${internalLink("items/water_walking_boots", "Water Walking Boots")} and the ${internalLink("items/lava_charm", "Lava Charm")}, allowing you to ${minor("walk on both lava and water")}!",
+				)
+			)
+		)
+
+		add(
+			ModItems.LOCATION_FILTER,
+			"Location Filter",
+			TextPage.basicTextPage(
+				"Location Filter",
+				doubleSpacedLines(
+					"The ${major("Location Filter")} allows you to ${minor("set a location")}, which is used by various items and blocks.",
+					"Set the location by using it on the block you want to set it to."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.LOCATION_FILTER,
+				"There are some other ways as well, such as using it on a ${internalLink("blocks/biome_radar", "Biome Radar")} to link it to the located biome."
 			)
 		)
 

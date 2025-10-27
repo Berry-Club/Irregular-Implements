@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-26T21:56:40.1912456	Patchouli Book: guide
+// 1.21.1	2025-10-26T22:03:48.1473099	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
 e705ba7322b241299e14d08c878f2b643c597cac assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/spectre_log.json
@@ -9,9 +9,11 @@ e705ba7322b241299e14d08c878f2b643c597cac assets/irregular_implements/patchouli_b
 1cf992606339adc3e06163eed0fbe646e234dd1b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_bucket.json
 8c60cb6040b41f101d008068496e833d174ea1cc assets/irregular_implements/patchouli_books/guide/en_us/entries/items/escape_rope.json
 a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
-d57c5fca0ce198e4dd90134b51e33abec6bd32fb assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
+3deb8b2a9a3184f7a46cb2a31b57295c485d4c4f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
 4d78411fad6fe8f0948c9129dbf0786d5ef94c68 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_egg.json
 ecafe792afa48469caf62354a9db47fb0a118e73 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_charm.json
+c2404c261c7a58c79078be397b188b63a408a917 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_waders.json
+709bc0b4349210d227d73ea3d76a208a16d3dbd5 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/location_filter.json
 4c9e6d9df12ec70b7997fe5ccef189ac2dcde727 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lotus_blossom.json
 d59f687a2c35f3f03c7392bd697496760d894abe assets/irregular_implements/patchouli_books/guide/en_us/entries/items/magic_hood.json
 a2f07f9a005264e20b7bf842f980083643fd9745 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/obsidian_skull.json
