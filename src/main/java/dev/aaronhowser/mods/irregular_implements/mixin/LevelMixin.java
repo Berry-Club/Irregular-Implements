@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Level.class)
-public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrier, RedstoneInterfaceCarrier, SlimeCubeCarrier, EnderBridgeCarrier {
+public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrier, RedstoneInterfaceCarrier, SlimeCubeCarrier, EnderAnchorCarrier {
 
 	@Unique
 	LongOpenHashSet irregular_implements$peaceCandleChunks = new LongOpenHashSet();
@@ -28,7 +28,7 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	LongOpenHashSet irregularImplements$slimeCubePositions = new LongOpenHashSet();
 
 	@Unique
-	LongOpenHashSet irregular_implements$enderBridges = new LongOpenHashSet();
+	LongOpenHashSet irregular_implements$enderAnchorPositions = new LongOpenHashSet();
 
 	@Inject(
 			method = "tickBlockEntities",
@@ -39,7 +39,7 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 		irregular_implements$getRainShieldChunks().clear();
 		irregular_implements$getPeaceCandleChunks().clear();
 		irregular_implements$getSlimeCubePositions().clear();
-		irregular_implements$getEnderBridges().clear();
+		irregular_implements$getEnderAnchorPositions().clear();
 
 		// Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.
 		// I was doing it on LevelTickEvent before, but neither Pre not Post worked. The order that it was going was:
@@ -69,8 +69,8 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	}
 
 	@Unique
-	public LongOpenHashSet irregular_implements$getEnderBridges() {
-		return this.irregular_implements$enderBridges;
+	public LongOpenHashSet irregular_implements$getEnderAnchorPositions() {
+		return this.irregular_implements$enderAnchorPositions;
 	}
 
 	@Inject(

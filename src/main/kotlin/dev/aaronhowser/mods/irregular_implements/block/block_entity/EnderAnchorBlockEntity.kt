@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.EnderBridgeCarrier
+import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -63,7 +63,7 @@ class EnderAnchorBlockEntity(
 	}
 
 	companion object {
-		fun EnderBridgeCarrier.getEnderBridgeAnchorLocations(): LongOpenHashSet = this.`irregular_implements$getEnderBridges`()
+		fun EnderAnchorCarrier.getEnderAnchorPositions(): LongOpenHashSet = this.`irregular_implements$getEnderAnchorPositions`()
 
 		fun tick(
 			level: Level,
@@ -71,9 +71,9 @@ class EnderAnchorBlockEntity(
 			state: BlockState,
 			blockEntity: EnderAnchorBlockEntity
 		) {
-			if (level is EnderBridgeCarrier) {
+			if (level is EnderAnchorCarrier) {
 				val chunkPos = level.getChunk(pos).pos.toLong()
-				level.getEnderBridgeAnchorLocations().add(chunkPos)
+				level.getEnderAnchorPositions().add(chunkPos)
 			}
 
 			if (level.isClientSide) {
