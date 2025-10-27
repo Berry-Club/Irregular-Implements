@@ -466,6 +466,78 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.ENTITY_FILTER,
+			"Entity Filter",
+			TextPage.basicTextPage(
+				"Entity Filter",
+				doubleSpacedLines(
+					"The ${major("Entity Filter")} allows you to ${minor("filter based on entity type")} for various items and blocks.",
+					"To set it, simply use the Filter on the entity you want to filter."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.ENTITY_FILTER,
+				"Using it while sneaking will set it to the entity type Player."
+			)
+		)
+
+		add(
+			ModItems.PLAYER_FILTER,
+			"Player Filter",
+			TextPage.basicTextPage(
+				"The ${major("Player Filter")} allows you to ${minor("filter based on a specific player")}.",
+				"To set it, use the Filter on the player you want to filter."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.PLAYER_FILTER,
+				"Using it while sneaking will set it to yourself."
+			)
+		)
+
+		add(
+			ModItems.FIRE_IMBUE,
+			"Imbues",
+			TextPage.basicTextPage(
+				"Imbues",
+				doubleSpacedLines(
+					"${major("Imbues")} can be crafted in the ${internalLink("blocks/imbuing_station", "Imbuing Station")} and act similarly to potions.",
+					"When you drink an Imbue, you will be given a unique buff for ${minor("20 minutes")}. However, you can ${bad("only have one Imbue effect at a time")}."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.FIRE_IMBUE,
+				"The ${major("Fire Imbue")} will light your opponent on fire when you strike them."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.POISON_IMBUE,
+				"The ${major("Poison Imbue")} will inflict Poison II on your opponent when you strike them."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.WITHER_IMBUE,
+				"The ${major("Wither Imbue")} will inflict Wither II on your opponent when you strike them."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.EXPERIENCE_IMBUE,
+				"The ${major("Experience Imbue")} will increase the experience dropped by slain mobs by 50%."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.SPECTRE_IMBUE,
+				doubleSpacedLines(
+					"The ${major("Spectre Imbue")} will give you a ${minor("chance to completely negate incoming damage")}.",
+					"The default chance is 10%, but this can be configured."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.COLLAPSE_IMBUE,
+				doubleSpacedLines(
+					"The ${major("Collapse Imbue")} will inflict the Collapse effect on your opponent when you strike them.",
+					"For players, the Collapse effect inverts their movement and mouse controls.",
+					"For mobs, it confuses their pathfinding, causing them to move erratically."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
