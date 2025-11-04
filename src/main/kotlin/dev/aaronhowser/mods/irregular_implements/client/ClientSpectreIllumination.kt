@@ -15,7 +15,15 @@ object ClientSpectreIllumination {
 		return illuminatedChunks.contains(chunkPosLong)
 	}
 
+	fun isChunkIlluminated(chunkPos: ChunkPos): Boolean {
+		val chunkPosLong = chunkPos.toLong()
+		return illuminatedChunks.contains(chunkPosLong)
+	}
+
 	fun setChunkIlluminated(chunkPos: ChunkPos, newValue: Boolean) {
+		val oldValue = isChunkIlluminated(chunkPos)
+		if (oldValue == newValue) return
+
 		val chunkPosLong = chunkPos.toLong()
 		if (newValue) {
 			illuminatedChunks.add(chunkPosLong)
