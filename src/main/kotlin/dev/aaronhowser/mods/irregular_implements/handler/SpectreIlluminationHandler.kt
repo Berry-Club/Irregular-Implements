@@ -11,6 +11,7 @@ import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.saveddata.SavedData
+import net.neoforged.fml.loading.FMLEnvironment
 
 class SpectreIlluminationHandler : SavedData() {
 
@@ -66,7 +67,7 @@ class SpectreIlluminationHandler : SavedData() {
 			val isClientSide: Boolean = if (blockAndTintGetter is Level) {
 				blockAndTintGetter.isClientSide
 			} else {
-				false
+				!FMLEnvironment.dist.isDedicatedServer
 			}
 
 			return if (isClientSide) {

@@ -18,7 +18,7 @@ class UpdateSpectreIlluminationPacket(
 
 	companion object {
 		val TYPE: CustomPacketPayload.Type<UpdateSpectreIlluminationPacket> =
-			CustomPacketPayload.Type(OtherUtil.modResource("update_client_screen_string"))
+			CustomPacketPayload.Type(OtherUtil.modResource("update_spectre_illumination"))
 
 		val STREAM_CODEC: StreamCodec<ByteBuf, UpdateSpectreIlluminationPacket> =
 			StreamCodec.composite(
