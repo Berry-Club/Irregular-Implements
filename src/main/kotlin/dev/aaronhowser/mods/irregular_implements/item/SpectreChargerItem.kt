@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.capabilities.Capabilities
+import top.theillusivec4.curios.api.CuriosApi
 import java.awt.Color
 import java.util.function.Supplier
 
@@ -40,7 +41,16 @@ class SpectreChargerItem(
 
 		val coil = SpectreCoilHandler.get(level).getCoil(player.uuid)
 
-		for (inventoryStack in player.inventory.items) {
+		val stacks = player.inventory.compartments.flatten().toMutableList()
+
+		CuriosApi.getCuriosInventory(player).ifPresent { curioHandler ->
+			for (slot in 0 until curioHandler.equippedCurios.slots) {
+				val stack = curioHandler.equippedCurios.getStackInSlot(slot)
+				stacks.add(stack)
+			}
+		}
+
+		for (inventoryStack in stacks) {
 			val energyCapability = inventoryStack.getCapability(Capabilities.EnergyStorage.ITEM)
 			if (energyCapability == null || !energyCapability.canReceive()) continue
 

@@ -35,6 +35,7 @@
 - Fixed the Obsidian Skull Ring not doing anything
   - It was looking for an Obsidian Skull in curio slots instead of the Ring
 - Fixed the Biome Capsule not using its saved biome for its color
+- Spectre Chargers should now charge the entire inventory, including armor, the offhand, and Curio slots (#35)
 
 # 1.5.0
 
