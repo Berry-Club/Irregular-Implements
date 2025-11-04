@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
-import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -11,6 +10,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
@@ -66,24 +66,23 @@ class SpectreIlluminatorEntity(
 	override fun onAddedToLevel() {
 		super.onAddedToLevel()
 
-		val chunkPos = ChunkPos(this.blockPosition())
-
-		illuminatedChunks[level()].add(chunkPos.toLong())
-
-		SpectreIlluminationHandler.forceLightUpdates(level(), chunkPos)
+		val level = level()
+		if (level is ServerLevel) {
+			SpectreIlluminationHandler.setChunkIlluminated(level, blockPosition(), true)
+		}
 	}
 
 	//FIXME: Not being called on client from `/kill`?
 	override fun remove(reason: RemovalReason) {
 		super.remove(reason)
 
-		val chunkPos = ChunkPos(this.blockPosition())
-		illuminatedChunks[level()].remove(chunkPos.toLong())
+		val level = level()
+		if (level is ServerLevel) {
+			SpectreIlluminationHandler.setChunkIlluminated(level, blockPosition(), false)
 
-		SpectreIlluminationHandler.forceLightUpdates(level(), chunkPos)
-
-		if (removalReason == RemovalReason.KILLED) {
-			OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
+			if (removalReason == RemovalReason.KILLED) {
+				OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
+			}
 		}
 	}
 
@@ -171,8 +170,6 @@ class SpectreIlluminatorEntity(
 
 		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(SpectreIlluminatorEntity::class.java, EntityDataSerializers.INT)
 		const val ACTION_TIMER_NBT = "ActionTimer"
-
-		private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
 		@JvmStatic
 		fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
