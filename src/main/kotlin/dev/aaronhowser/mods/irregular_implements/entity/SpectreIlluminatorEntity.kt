@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
 import com.google.common.collect.HashMultimap
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
@@ -69,7 +70,7 @@ class SpectreIlluminatorEntity(
 
 		illuminatedChunks[level()].add(chunkPos.toLong())
 
-		forceLightUpdates(level(), chunkPos)
+		SpectreIlluminationHandler.forceLightUpdates(level(), chunkPos)
 	}
 
 	//FIXME: Not being called on client from `/kill`?
@@ -79,7 +80,7 @@ class SpectreIlluminatorEntity(
 		val chunkPos = ChunkPos(this.blockPosition())
 		illuminatedChunks[level()].remove(chunkPos.toLong())
 
-		forceLightUpdates(level(), chunkPos)
+		SpectreIlluminationHandler.forceLightUpdates(level(), chunkPos)
 
 		if (removalReason == RemovalReason.KILLED) {
 			OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
@@ -187,26 +188,6 @@ class SpectreIlluminatorEntity(
 			val chunkPos = ChunkPos(blockPos)
 
 			return illuminatedChunks[level].contains(chunkPos.toLong())
-		}
-
-		//FIXME: For some reason it doesn't work super well in chunks that are mostly empty (possibly only effects superflat levels?)
-		//TODO: Study effect on lag, possibly only when the chunk loads the first time?
-		private fun forceLightUpdates(level: Level, chunkPos: ChunkPos) {
-			if (!level.isLoaded(chunkPos.worldPosition)) return
-
-			// +- 1 to also check edges
-			val minX = chunkPos.minBlockX - 1
-			val maxX = chunkPos.maxBlockX + 1
-			val minZ = chunkPos.minBlockZ - 1
-			val maxZ = chunkPos.maxBlockZ + 1
-			val minY = level.minBuildHeight
-			val maxY = level.maxBuildHeight
-
-			val iterable = BlockPos.betweenClosed(minX, minY, minZ, maxX, maxY, maxZ)
-
-			for (pos in iterable) {
-				level.chunkSource.lightEngine.checkBlock(pos.immutable())
-			}
 		}
 
 	}
