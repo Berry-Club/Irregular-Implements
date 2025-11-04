@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.entity
 import com.google.common.collect.HashMultimap
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.phys.Vec3
@@ -64,8 +66,8 @@ class SpectreIlluminatorEntity(
 		super.onAddedToLevel()
 
 		val chunkPos = ChunkPos(this.blockPosition())
-		val btg = level() as BlockAndTintGetter
-		illuminatedChunks[btg].add(chunkPos.toLong())
+
+		illuminatedChunks[level()].add(chunkPos.toLong())
 
 		forceLightUpdates(level(), chunkPos)
 	}
@@ -75,8 +77,7 @@ class SpectreIlluminatorEntity(
 		super.remove(reason)
 
 		val chunkPos = ChunkPos(this.blockPosition())
-		val btg = level() as BlockAndTintGetter
-		illuminatedChunks[btg].remove(chunkPos.toLong())
+		illuminatedChunks[level()].remove(chunkPos.toLong())
 
 		forceLightUpdates(level(), chunkPos)
 
@@ -170,12 +171,22 @@ class SpectreIlluminatorEntity(
 		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(SpectreIlluminatorEntity::class.java, EntityDataSerializers.INT)
 		const val ACTION_TIMER_NBT = "ActionTimer"
 
-		private val illuminatedChunks: HashMultimap<BlockAndTintGetter, Long> = HashMultimap.create()
+		private val illuminatedChunks: HashMultimap<Level, Long> = HashMultimap.create()
 
 		@JvmStatic
 		fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
-			val chunkPosLong = ChunkPos.asLong(blockPos)
-			return illuminatedChunks[blockAndTintGetter].contains(chunkPosLong)
+			val level: Level = when (blockAndTintGetter) {
+				is Level -> blockAndTintGetter
+
+				// If it's something that can be accessed on server, but isn't a Level, return false before it tries to load client-only class
+				is CommonLevelAccessor -> return false
+
+				else -> ClientUtil.levelFromBlockAndTintGetter(blockAndTintGetter) ?: return false
+			}
+
+			val chunkPos = ChunkPos(blockPos)
+
+			return illuminatedChunks[level].contains(chunkPos.toLong())
 		}
 
 		//FIXME: For some reason it doesn't work super well in chunks that are mostly empty (possibly only effects superflat levels?)
