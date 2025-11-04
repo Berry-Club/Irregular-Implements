@@ -5,6 +5,8 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -15,17 +17,14 @@ import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
-import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.item.*
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootParams
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
@@ -36,41 +35,25 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 	// TODO: Cooldown based on how the mining time of the block? Or maybe based on the difference in mining time between the block placed and the block broken?
 	// TODO: Maybe add a mining level? Maybe like it uses the highest tier tool stored or something
 	override fun useOn(context: UseOnContext): InteractionResult {
-
 		val level = context.level as? ServerLevel ?: return InteractionResult.PASS
 		val player = context.player ?: return InteractionResult.PASS
 		val usedStack = context.itemInHand
 		val clickedPos = context.clickedPos
 		val clickedState = level.getBlockState(clickedPos)
 
-		if (clickedState.getDestroySpeed(level, clickedPos) == -1f
-			|| clickedState.`is`(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)
-		) return InteractionResult.PASS
+		if (!canRemoveBlock(player, usedStack, clickedPos, context.clickedFace)) return InteractionResult.FAIL
 
-		if (!player.mayUseItemAt(clickedPos, context.clickedFace, usedStack)) return InteractionResult.PASS
-		val component = usedStack.get(DataComponents.CONTAINER) ?: return InteractionResult.PASS
-
-		val storedStacks = component.nonEmptyItems().toList()
-
+		val storedStacks = getStoredStacks(usedStack)
 		if (storedStacks.isEmpty()) return InteractionResult.PASS
 
-		val storedBlockStacks = storedStacks.filter { it.item is BlockItem }
-		val possibleBlocksToPlace = storedBlockStacks.filter {
-			val block = (it.item as BlockItem).block
-
-			!clickedState.`is`(block) && block.getStateForPlacement(BlockPlaceContext(context)) != null
-		}
-
-		val stackToPlace = possibleBlocksToPlace.randomOrNull() ?: return InteractionResult.PASS
-
-		val stateToPlace = (stackToPlace.item as BlockItem)
-			.block
-			.getStateForPlacement(BlockPlaceContext(context))
-			?: return InteractionResult.PASS
-
-		if (!stateToPlace.canSurvive(level, clickedPos)
-			&& NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
-		) return InteractionResult.PASS
+		val (stateToPlace, stackToPlace) = getStateToPlace(
+			storedStacks,
+			context,
+			clickedState,
+			clickedPos,
+			level,
+			player
+		) ?: return InteractionResult.FAIL
 
 		val drops = if (player.hasInfiniteMaterials()) {
 			emptyList()
@@ -85,21 +68,15 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			clickedState.getDrops(lootParams)
 		}
 
-		level.captureBlockSnapshots = true
-		level.setBlockAndUpdate(clickedPos, stateToPlace)
-		level.captureBlockSnapshots = false
+		val successfullyPlaced = tryPlaceBlock(
+			level,
+			clickedPos,
+			clickedState,
+			stateToPlace,
+			player
+		)
 
-		val snapshots = level.capturedBlockSnapshots.toList()
-		level.capturedBlockSnapshots.clear()
-
-		for (snapshot in snapshots) {
-			if (NeoForge.EVENT_BUS.post(BlockEvent.EntityPlaceEvent(snapshot, clickedState, player)).isCanceled) {
-				level.restoringBlockSnapshots = true
-				snapshot.restore(snapshot.flags or Block.UPDATE_CLIENTS)
-				level.restoringBlockSnapshots = false
-				return InteractionResult.FAIL
-			}
-		}
+		if (!successfullyPlaced) return InteractionResult.FAIL
 
 		val originalStateSoundType = clickedState.getSoundType(level, clickedPos, player)
 		level.playSound(
@@ -249,6 +226,80 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
+
+		fun canRemoveBlock(
+			player: Player,
+			replacerStack: ItemStack,
+			pos: BlockPos,
+			face: Direction
+		): Boolean {
+			val level = player.level()
+			val state = level.getBlockState(pos)
+
+			return state.getDestroySpeed(level, pos) != 1f
+					&& !state.`is`(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)
+					&& player.mayUseItemAt(pos, face, replacerStack)
+		}
+
+		fun getStoredStacks(replacerStack: ItemStack): List<ItemStack> {
+			return replacerStack.get(DataComponents.CONTAINER)?.nonEmptyItems()?.toList() ?: emptyList()
+		}
+
+		fun getStateToPlace(
+			storedStacks: List<ItemStack>,
+			context: UseOnContext,
+			clickedState: BlockState,
+			clickedPos: BlockPos,
+			level: ServerLevel,
+			player: Player
+		): Pair<BlockState, ItemStack>? {
+			val storedBlockStacks = storedStacks.filter { it.item is BlockItem }
+			val possibleBlocksToPlace = storedBlockStacks.filter {
+				val block = (it.item as BlockItem).block
+
+				!clickedState.`is`(block) && block.getStateForPlacement(BlockPlaceContext(context)) != null
+			}
+
+			val stackToPlace = possibleBlocksToPlace.randomOrNull() ?: return null
+
+			val stateToPlace = (stackToPlace.item as BlockItem)
+				.block
+				.getStateForPlacement(BlockPlaceContext(context))
+				?: return null
+
+			if (!stateToPlace.canSurvive(level, clickedPos)
+				&& NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled
+			) return null
+
+			return Pair(stateToPlace, stackToPlace)
+		}
+
+		fun tryPlaceBlock(
+			level: Level,
+			clickedPos: BlockPos,
+			clickedState: BlockState,
+			stateToPlace: BlockState,
+			player: Player
+		): Boolean {
+			level.captureBlockSnapshots = true
+			level.setBlockAndUpdate(clickedPos, stateToPlace)
+			level.captureBlockSnapshots = false
+
+			val snapshots = level.capturedBlockSnapshots.toList()
+			level.capturedBlockSnapshots.clear()
+
+			for (snapshot in snapshots) {
+				if (NeoForge.EVENT_BUS.post(BlockEvent.EntityPlaceEvent(snapshot, clickedState, player)).isCanceled) {
+					level.restoringBlockSnapshots = true
+					snapshot.restore(snapshot.flags or Block.UPDATE_CLIENTS)
+					level.restoringBlockSnapshots = false
+					return false
+				}
+			}
+
+			return true
+		}
 	}
 
 }
