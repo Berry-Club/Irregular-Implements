@@ -49,7 +49,7 @@ class SpectreIlluminationHandler : SavedData() {
 			}
 
 			val packet = UpdateSpectreIlluminationPacket(chunkPosLong, newValue)
-			packet.messageNearbyPlayers()
+			packet.messageAllPlayersTrackingChunk(level, chunkPos)
 
 			forceLightUpdates(level, chunkPos)
 		}
