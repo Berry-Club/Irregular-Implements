@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams
+import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
 
@@ -55,18 +56,6 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			player
 		) ?: return InteractionResult.FAIL
 
-		val drops = if (player.hasInfiniteMaterials()) {
-			emptyList()
-		} else {
-			val lootParams = LootParams.Builder(level)
-				.withParameter(LootContextParams.ORIGIN, context.clickLocation)
-				.withParameter(LootContextParams.BLOCK_STATE, clickedState)
-				.withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(clickedPos))
-				.withParameter(LootContextParams.THIS_ENTITY, player)
-				.withParameter(LootContextParams.TOOL, Items.IRON_PICKAXE.defaultInstance)
-
-			clickedState.getDrops(lootParams)
-		}
 
 		val successfullyPlaced = tryPlaceBlock(
 			level,
@@ -96,6 +85,14 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			SoundSource.BLOCKS,
 			(newStateSoundType.volume + 1.0f) / 2.0f,
 			newStateSoundType.pitch * 0.8f
+		)
+
+		val drops = getLoot(
+			player,
+			level,
+			context.clickLocation,
+			clickedState,
+			clickedPos
 		)
 
 		for (drop in drops) {
@@ -299,6 +296,28 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			}
 
 			return true
+		}
+
+		//FIXME: THe tool param isn't being applied or something? Things always drop the most optimal loot
+		fun getLoot(
+			player: Player,
+			level: ServerLevel,
+			clickLocation: Vec3,
+			clickedState: BlockState,
+			clickedPos: BlockPos
+		): List<ItemStack> {
+			return if (player.hasInfiniteMaterials()) {
+				emptyList()
+			} else {
+				val lootParams = LootParams.Builder(level)
+					.withParameter(LootContextParams.ORIGIN, clickLocation)
+					.withParameter(LootContextParams.BLOCK_STATE, clickedState)
+					.withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(clickedPos))
+					.withParameter(LootContextParams.THIS_ENTITY, player)
+					.withParameter(LootContextParams.TOOL, Items.IRON_PICKAXE.defaultInstance)
+
+				clickedState.getDrops(lootParams)
+			}
 		}
 	}
 
