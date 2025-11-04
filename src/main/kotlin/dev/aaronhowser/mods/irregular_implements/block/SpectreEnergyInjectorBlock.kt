@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreEnergyInjectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
-import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilHandler
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionResult
@@ -49,7 +49,7 @@ class SpectreEnergyInjectorBlock : Block(
 		if (level.isServerSide && blockEntity != null) {
 			val energyHandler = blockEntity.getEnergyHandler(null)
 			val energyStored = energyHandler?.energyStored ?: 0
-			val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilSavedData.MAX_ENERGY
+			val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreCoilHandler.MAX_ENERGY
 
 			val storedFormatted = String.format("%,d", energyStored)
 			val maxFormatted = String.format("%,d", maxEnergy)

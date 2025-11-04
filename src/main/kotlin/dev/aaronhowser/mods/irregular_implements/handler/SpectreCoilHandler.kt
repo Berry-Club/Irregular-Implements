@@ -9,7 +9,7 @@ import net.minecraft.world.level.saveddata.SavedData
 import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
 
-class SpectreCoilSavedData : SavedData() {
+class SpectreCoilHandler : SavedData() {
 
 	private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
 	private val energyInjectors: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
@@ -31,7 +31,7 @@ class SpectreCoilSavedData : SavedData() {
 					coilEntries[ownerUuid] = newEnergy
 				}
 
-				this@SpectreCoilSavedData.setDirty()
+				this@SpectreCoilHandler.setDirty()
 
 				return newEnergy - currentEnergy
 			}
@@ -82,7 +82,7 @@ class SpectreCoilSavedData : SavedData() {
 					coilEntries[ownerUuid] = newEnergy
 				}
 
-				this@SpectreCoilSavedData.setDirty()
+				this@SpectreCoilHandler.setDirty()
 
 				return currentEntity - newEnergy
 			}
@@ -123,8 +123,8 @@ class SpectreCoilSavedData : SavedData() {
 	}
 
 	companion object {
-		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCoilSavedData {
-			val spectreCoilSavedData = SpectreCoilSavedData()
+		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCoilHandler {
+			val spectreCoilHandler = SpectreCoilHandler()
 
 			val listTag = tag.getList(COIL_ENTRIES_NBT, Tag.TAG_COMPOUND.toInt())
 
@@ -134,19 +134,19 @@ class SpectreCoilSavedData : SavedData() {
 				val uuid = UUID.fromString(entryTag.getString(UUID_NBT))
 				val energy = entryTag.getInt(ENERGY_NBT)
 
-				spectreCoilSavedData.coilEntries[uuid] = energy
+				spectreCoilHandler.coilEntries[uuid] = energy
 			}
 
-			return spectreCoilSavedData
+			return spectreCoilHandler
 		}
 
-		fun get(level: ServerLevel): SpectreCoilSavedData {
+		fun get(level: ServerLevel): SpectreCoilHandler {
 			if (level != level.server.overworld()) {
 				return get(level.server.overworld())
 			}
 
 			return level.dataStorage.computeIfAbsent(
-				Factory(::SpectreCoilSavedData, ::load),
+				Factory(::SpectreCoilHandler, ::load),
 				"spectre_coil"
 			)
 		}

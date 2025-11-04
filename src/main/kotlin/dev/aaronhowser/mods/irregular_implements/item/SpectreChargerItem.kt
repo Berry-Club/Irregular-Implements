@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
-import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilSavedData
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
@@ -38,7 +38,7 @@ class SpectreChargerItem(
 
 		val amountToCharge = this.type.amountGetter.get() * CHARGE_DELAY
 
-		val coil = SpectreCoilSavedData.get(level).getCoil(player.uuid)
+		val coil = SpectreCoilHandler.get(level).getCoil(player.uuid)
 
 		for (inventoryStack in player.inventory.items) {
 			val energyCapability = inventoryStack.getCapability(Capabilities.EnergyStorage.ITEM)
