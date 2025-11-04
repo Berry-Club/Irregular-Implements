@@ -74,7 +74,7 @@ object ModPacketHandler {
 			PaintBiomePacket.STREAM_CODEC
 		)
 
-		toServer(
+		toClient(
 			registrar,
 			UpdateSpectreIlluminationPacket.TYPE,
 			UpdateSpectreIlluminationPacket.STREAM_CODEC
