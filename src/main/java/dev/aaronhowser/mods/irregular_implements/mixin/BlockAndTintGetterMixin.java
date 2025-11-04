@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity;
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LightLayer;
@@ -18,7 +18,7 @@ public interface BlockAndTintGetterMixin {
 			cancellable = true
 	)
 	default void irregular_implements$getBrightness(LightLayer lightType, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
-		if (SpectreIlluminatorEntity.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
+		if (SpectreIlluminationHandler.isChunkIlluminated((BlockAndTintGetter) this, blockPos)) {
 			cir.setReturnValue(15);
 		}
 	}
@@ -29,7 +29,7 @@ public interface BlockAndTintGetterMixin {
 			cancellable = true
 	)
 	default void irregular_implements$getRawBrightness(BlockPos blockPos, int amount, CallbackInfoReturnable<Integer> cir) {
-		if (SpectreIlluminatorEntity.isChunkIlluminated(blockPos, (BlockAndTintGetter) this)) {
+		if (SpectreIlluminationHandler.isChunkIlluminated((BlockAndTintGetter) this, blockPos)) {
 			cir.setReturnValue(15);
 		}
 	}

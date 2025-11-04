@@ -1,11 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.handler
 
+import dev.aaronhowser.mods.irregular_implements.client.ClientSpectreIllumination
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateSpectreIlluminationPacket
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.saveddata.SavedData
@@ -54,6 +56,24 @@ class SpectreIlluminationHandler : SavedData() {
 			if (handler.isChunkIlluminated(chunkPos)) {
 				val packet = UpdateSpectreIlluminationPacket(chunkPos.toLong(), true)
 				packet.messagePlayer(player)
+			}
+		}
+
+		@JvmStatic
+		fun isChunkIlluminated(blockAndTintGetter: BlockAndTintGetter, blockPos: BlockPos): Boolean {
+			if (blockAndTintGetter.getBlockState(blockPos).isAir) return false
+
+			val isClientSide: Boolean = if (blockAndTintGetter is Level) {
+				blockAndTintGetter.isClientSide
+			} else {
+				false
+			}
+
+			return if (isClientSide) {
+				ClientSpectreIllumination.isChunkIlluminated(blockPos)
+			} else {
+				val level = blockAndTintGetter as? ServerLevel ?: return false
+				isChunkIlluminated(level, blockPos)
 			}
 		}
 
