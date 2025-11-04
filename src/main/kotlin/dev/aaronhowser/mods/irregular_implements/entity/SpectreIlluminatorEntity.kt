@@ -171,22 +171,6 @@ class SpectreIlluminatorEntity(
 		val ACTION_TIMER: EntityDataAccessor<Int> = SynchedEntityData.defineId(SpectreIlluminatorEntity::class.java, EntityDataSerializers.INT)
 		const val ACTION_TIMER_NBT = "ActionTimer"
 
-		@JvmStatic
-		fun isChunkIlluminated(blockPos: BlockPos, blockAndTintGetter: BlockAndTintGetter): Boolean {
-			val level: Level = when (blockAndTintGetter) {
-				is Level -> blockAndTintGetter
-
-				// If it's something that can be accessed on server, but isn't a Level, return false before it tries to load client-only class
-				is CommonLevelAccessor -> return false
-
-				else -> ClientUtil.levelFromBlockAndTintGetter(blockAndTintGetter) ?: return false
-			}
-
-			val chunkPos = ChunkPos(blockPos)
-
-			return illuminatedChunks[level].contains(chunkPos.toLong())
-		}
-
 	}
 
 }

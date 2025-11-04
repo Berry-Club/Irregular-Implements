@@ -9,6 +9,7 @@ object ClientSpectreIllumination {
 
 	private val illuminatedChunks: MutableSet<Long> = mutableSetOf()
 
+	@JvmStatic
 	fun isChunkIlluminated(blockPos: BlockPos): Boolean {
 		val chunkPosLong = ChunkPos.asLong(blockPos)
 		return illuminatedChunks.contains(chunkPosLong)

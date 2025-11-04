@@ -3,8 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import net.minecraft.ChatFormatting
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.UseOnContext
@@ -13,19 +14,20 @@ class SpectreIlluminatorItem(properties: Properties) : Item(properties) {
 
 	override fun useOn(context: UseOnContext): InteractionResult {
 		val level = context.level
+		if (level !is ServerLevel) {
+			return InteractionResult.PASS
+		}
+
 		val clickedPos = context.clickedPos
 
 		val player = context.player
 
-		if (SpectreIlluminatorEntity.isChunkIlluminated(clickedPos, level)) {
-
-			if (level.isServerSide) {
-				player?.sendSystemMessage(
-					ModMessageLang.ILLUMINATOR_ALREADY_PRESENT
-						.toComponent()
-						.withStyle(ChatFormatting.RED)
-				)
-			}
+		if (SpectreIlluminationHandler.isChunkIlluminated(level, clickedPos)) {
+			player?.sendSystemMessage(
+				ModMessageLang.ILLUMINATOR_ALREADY_PRESENT
+					.toComponent()
+					.withStyle(ChatFormatting.RED)
+			)
 
 			return InteractionResult.FAIL
 		}

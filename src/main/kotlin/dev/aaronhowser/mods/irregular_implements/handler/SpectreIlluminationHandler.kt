@@ -57,6 +57,11 @@ class SpectreIlluminationHandler : SavedData() {
 			}
 		}
 
+		fun isChunkIlluminated(level: ServerLevel, blockPos: BlockPos): Boolean {
+			val handler = get(level)
+			return handler.isChunkIlluminated(blockPos)
+		}
+
 		fun setChunkIlluminated(level: ServerLevel, blockPos: BlockPos, newValue: Boolean) {
 			val handler = get(level)
 			val chunkPos = ChunkPos(blockPos)
