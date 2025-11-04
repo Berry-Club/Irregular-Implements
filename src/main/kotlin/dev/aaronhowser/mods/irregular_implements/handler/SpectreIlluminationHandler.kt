@@ -62,8 +62,6 @@ class SpectreIlluminationHandler : SavedData() {
 
 		@JvmStatic
 		fun isChunkIlluminated(blockAndTintGetter: BlockAndTintGetter, blockPos: BlockPos): Boolean {
-			if (blockAndTintGetter.getBlockState(blockPos).isAir) return false
-
 			val isClientSide: Boolean = if (blockAndTintGetter is Level) {
 				blockAndTintGetter.isClientSide
 			} else {
