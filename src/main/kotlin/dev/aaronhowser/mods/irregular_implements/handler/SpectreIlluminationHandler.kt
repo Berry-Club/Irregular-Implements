@@ -60,6 +60,15 @@ class SpectreIlluminationHandler : SavedData() {
 			}
 		}
 
+		fun stopWatchingChunk(player: ServerPlayer, chunkPos: ChunkPos) {
+			val handler = get(player.serverLevel())
+
+			if (handler.isChunkIlluminated(chunkPos)) {
+				val packet = UpdateSpectreIlluminationPacket(chunkPos.toLong(), false)
+				packet.messagePlayer(player)
+			}
+		}
+
 		@JvmStatic
 		fun isChunkIlluminated(blockAndTintGetter: BlockAndTintGetter, blockPos: BlockPos): Boolean {
 			val isClientSide: Boolean = if (blockAndTintGetter is Level) {

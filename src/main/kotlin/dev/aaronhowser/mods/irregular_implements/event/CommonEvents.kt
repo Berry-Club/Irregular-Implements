@@ -297,4 +297,12 @@ object CommonEvents {
 		SpectreIlluminationHandler.watchChunk(player, chunkPos)
 	}
 
+	@SubscribeEvent
+	fun onChunkUnwatch(event: ChunkWatchEvent.UnWatch) {
+		val player = event.player
+		val chunkPos = event.pos
+
+		SpectreIlluminationHandler.stopWatchingChunk(player, chunkPos)
+	}
+
 }
