@@ -5,6 +5,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
+import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 abstract class ModPacket : CustomPacketPayload {
@@ -29,10 +30,10 @@ abstract class ModPacket : CustomPacketPayload {
 		}
 	}
 
-	fun messagePlayer(player: ServerPlayer) = ModPacketHandler.messagePlayer(player, this)
-	fun messageAllPlayers() = ModPacketHandler.messageAllPlayers(this)
-	fun messageServer() = ModPacketHandler.messageServer(this)
-	fun messageNearbyPlayers(serverLevel: ServerLevel, origin: Vec3, radius: Double) = ModPacketHandler.messageNearbyPlayers(this, serverLevel, origin, radius)
-	fun messageNearbyPlayers(serverLevel: ServerLevel, pos: BlockPos, radius: Double) = ModPacketHandler.messageNearbyPlayers(this, serverLevel, pos, radius)
+	fun messagePlayer(player: ServerPlayer) = PacketDistributor.sendToPlayer(player, this)
+	fun messageAllPlayers() = PacketDistributor.sendToAllPlayers(this)
+	fun messageServer() = PacketDistributor.sendToServer(this)
+	fun messageNearbyPlayers(serverLevel: ServerLevel, pos: BlockPos, radius: Double) = messageNearbyPlayers(serverLevel, pos.center, radius)
+	fun messageNearbyPlayers(serverLevel: ServerLevel, origin: Vec3, radius: Double) = PacketDistributor.sendToPlayersNear(serverLevel, null, origin.x, origin.y, origin.z, radius, this)
 
 }
