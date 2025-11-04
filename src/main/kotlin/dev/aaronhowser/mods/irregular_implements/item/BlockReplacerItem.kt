@@ -15,12 +15,18 @@ import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
-import net.minecraft.world.item.*
+import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.storage.loot.LootParams
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
 
@@ -69,7 +75,14 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 		val drops = if (player.hasInfiniteMaterials()) {
 			emptyList()
 		} else {
-			Block.getDrops(clickedState, level, clickedPos, level.getBlockEntity(clickedPos))
+			val lootParams = LootParams.Builder(level)
+				.withParameter(LootContextParams.ORIGIN, context.clickLocation)
+				.withParameter(LootContextParams.BLOCK_STATE, clickedState)
+				.withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(clickedPos))
+				.withParameter(LootContextParams.THIS_ENTITY, player)
+				.withParameter(LootContextParams.TOOL, Items.IRON_PICKAXE.defaultInstance)
+
+			clickedState.getDrops(lootParams)
 		}
 
 		level.captureBlockSnapshots = true
