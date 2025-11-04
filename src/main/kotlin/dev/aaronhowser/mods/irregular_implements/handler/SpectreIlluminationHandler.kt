@@ -52,6 +52,9 @@ class SpectreIlluminationHandler : SavedData() {
 			packet.messageAllPlayersTrackingChunk(level, chunkPos)
 
 			forceLightUpdates(level, chunkPos)
+
+			level.getChunk(blockPos).isUnsaved = true
+			handler.setDirty()
 		}
 
 		//FIXME: For some reason it doesn't work super well in chunks that are mostly empty (possibly only effects superflat levels?)
