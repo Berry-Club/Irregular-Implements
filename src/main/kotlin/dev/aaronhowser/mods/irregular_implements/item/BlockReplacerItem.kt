@@ -42,15 +42,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 		) return InteractionResult.PASS
 
 		if (!player.mayUseItemAt(clickedPos, context.clickedFace, usedStack)) return InteractionResult.PASS
-
-		//TODO: Obvious placeholder
-		val component = usedStack.get(DataComponents.CONTAINER) ?: ItemContainerContents.fromItems(
-			listOf(
-				Blocks.STONE.asItem().defaultInstance.copyWithCount(32),
-				Blocks.GRASS_BLOCK.asItem().defaultInstance.copyWithCount(32),
-				Items.DIAMOND_PICKAXE.defaultInstance
-			)
-		)
+		val component = usedStack.get(DataComponents.CONTAINER) ?: return InteractionResult.PASS
 
 		val storedStacks = component.nonEmptyItems().toList()
 
