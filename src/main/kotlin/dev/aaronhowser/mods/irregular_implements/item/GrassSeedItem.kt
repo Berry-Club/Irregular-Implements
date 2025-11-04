@@ -31,8 +31,7 @@ class GrassSeedItem(
 		val level = context.level
 
 		val clickedState = level.getBlockState(clickedPos)
-		if (
-			clickedState.`is`(resultBlock)
+		if (clickedState.`is`(resultBlock)
 			|| !clickedState.`is`(ModBlockTagsProvider.GRASS_SEEDS_COMPATIBLE)
 		) return InteractionResult.PASS
 

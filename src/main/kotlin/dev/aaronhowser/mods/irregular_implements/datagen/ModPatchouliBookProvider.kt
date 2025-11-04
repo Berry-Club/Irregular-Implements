@@ -749,6 +749,27 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.GRASS_SEEDS,
+			"Grass Seeds",
+			SpotlightPage.linkedPage(
+				ModItems.GRASS_SEEDS,
+				"Grass Seeds",
+				doubleSpacedLines(
+					"${major("Grass Seeds")} can be used on blocks like Dirt to turn them into Grass.",
+					"Specifically, it works on any block with the tag ${minor("irregular_implements:grass_seeds_compatible")}."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.GRASS_SEEDS_RED,
+				"Colored Grass Seeds",
+				doubleSpacedLines(
+					"There are also ${major("Colored Grass Seeds")}, which plant Colored Grass of their respective color.",
+					"They act exactly the same as regular Grass Blocks, but are colored."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
