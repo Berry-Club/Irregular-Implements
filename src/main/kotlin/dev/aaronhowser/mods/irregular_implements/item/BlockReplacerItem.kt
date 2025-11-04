@@ -57,13 +57,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 		) ?: return InteractionResult.FAIL
 
 
-		val successfullyPlaced = tryPlaceBlock(
-			level,
-			clickedPos,
-			clickedState,
-			stateToPlace,
-			player
-		)
+		val successfullyPlaced = tryPlaceBlock(level, clickedPos, clickedState, stateToPlace, player)
 
 		if (!successfullyPlaced) return InteractionResult.FAIL
 
@@ -87,13 +81,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			newStateSoundType.pitch * 0.8f
 		)
 
-		val drops = getLoot(
-			player,
-			level,
-			context.clickLocation,
-			clickedState,
-			clickedPos
-		)
+		val drops = getLoot(player, level, context.clickLocation, clickedState, clickedPos)
 
 		for (drop in drops) {
 			Block.popResourceFromFace(level, clickedPos, context.clickedFace, drop)
