@@ -27,6 +27,8 @@
 
 ### Fixed
 
+- Massively changed how Spectre Illumination works, which should hopefully fix all its issues and maybe make some more exciting new ones instead
+  - It's now a SavedData, synced using packets and stuff
 - Added mining particles to Glowing Mushrooms (#32)
 - Added an alias to ModBlockEntityTypes for `redstone_interface` -> `basic_redstone_interface` to prevent data loss, so 1.5.0 is no longer a breaking change
 - The Escape Rope no longer duplicates itself
