@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.client.ClientSpectreIllumination
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
@@ -41,7 +40,6 @@ import net.neoforged.neoforge.client.event.*
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
-import net.neoforged.neoforge.event.level.ChunkEvent
 
 @EventBusSubscriber(
 	modid = IrregularImplements.MOD_ID,
@@ -340,14 +338,6 @@ object ClientEvents {
 	fun onRenderLevel(event: RenderLevelStageEvent) {
 		CubeIndicatorRenderer.onRenderLevel(event)
 		LineIndicatorRenderer.onRenderLevel(event)
-	}
-
-	@SubscribeEvent
-	fun onLoadChunk(event: ChunkEvent.Load) {
-		val chunkPos = event.chunk.pos
-
-		// If the chunk is illuminated on the server, it will send a packet after this happens
-		ClientSpectreIllumination.setChunkIlluminated(chunkPos, false)
 	}
 
 }
