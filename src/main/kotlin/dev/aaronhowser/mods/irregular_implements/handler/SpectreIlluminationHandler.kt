@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.saveddata.SavedData
@@ -16,6 +17,16 @@ class SpectreIlluminationHandler : SavedData() {
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
 		tag.putLongArray(CHUNK_LONGS, illuminatedChunkLongs.toLongArray())
 		return tag
+	}
+
+	fun isChunkIlluminated(blockPos: BlockPos): Boolean {
+		val chunkPosLong = ChunkPos.asLong(blockPos)
+		return illuminatedChunkLongs.contains(chunkPosLong)
+	}
+
+	fun isChunkIlluminated(chunkPos: ChunkPos): Boolean {
+		val chunkPosLong = chunkPos.toLong()
+		return illuminatedChunkLongs.contains(chunkPosLong)
 	}
 
 	companion object {
@@ -35,6 +46,15 @@ class SpectreIlluminationHandler : SavedData() {
 				Factory(::SpectreIlluminationHandler, ::load),
 				"spectre_illumination_handler"
 			)
+		}
+
+		fun watchChunk(player: ServerPlayer, chunkPos: ChunkPos) {
+			val handler = get(player.serverLevel())
+
+			if (handler.isChunkIlluminated(chunkPos)) {
+				val packet = UpdateSpectreIlluminationPacket(chunkPos.toLong(), true)
+				packet.messagePlayer(player)
+			}
 		}
 
 		fun setChunkIlluminated(level: ServerLevel, blockPos: BlockPos, newValue: Boolean) {
