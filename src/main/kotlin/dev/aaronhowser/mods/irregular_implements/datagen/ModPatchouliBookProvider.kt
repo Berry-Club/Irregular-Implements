@@ -802,11 +802,32 @@ class ModPatchouliBookProvider(
 		}
 
 		add(
-			ModBlocks.SPECTRE_LOG,
-			"Spectre Log",
+			ModBlocks.FERTILIZED_DIRT,
+			"Fertilized Dirt",
+			SpotlightPage.linkedPage(
+				ModBlocks.FERTILIZED_DIRT,
+				"Fertilized Dirt",
+				doubleSpacedLines(
+					"${major("Fertilized Dirt")} does not need to be hydrated, cannot be trampled, and ${minor("grows crops 3 times faster")}.",
+					"You still have to till it with a Hoe to plant crops on it."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.IMBUING_STATION,
+			"Imbuing Station",
 			TextPage.basicTextPage(
-				"Spectre Log",
-				"A log block infused with otherworldly energy."
+				"Imbuing Station",
+				doubleSpacedLines(
+					"The ${major("Imbuing Station")} is used to craft ${internalLink("items/imbue_fire", "Imbues")}.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.IMBUING_STATION,
+				doubleSpacedLines(
+					"For automation, the center slot can be accessed from the top face, the other input slots can be accessed from the sides, and the output slot can be accessed from the bottom.",
+				)
 			)
 		)
 	}
