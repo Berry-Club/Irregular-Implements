@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler
 
+import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateSpectreIlluminationPacket
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -46,6 +47,9 @@ class SpectreIlluminationHandler : SavedData() {
 			} else {
 				handler.illuminatedChunkLongs.remove(chunkPosLong)
 			}
+
+			val packet = UpdateSpectreIlluminationPacket(chunkPosLong, newValue)
+			packet.messageNearbyPlayers()
 
 			forceLightUpdates(level, chunkPos)
 		}

@@ -73,6 +73,12 @@ object ModPacketHandler {
 			PaintBiomePacket.TYPE,
 			PaintBiomePacket.STREAM_CODEC
 		)
+
+		toServer(
+			registrar,
+			UpdateSpectreIlluminationPacket.TYPE,
+			UpdateSpectreIlluminationPacket.STREAM_CODEC
+		)
 	}
 
 	fun messageNearbyPlayers(packet: CustomPacketPayload, serverLevel: ServerLevel, origin: BlockPos, radius: Double) {
