@@ -684,6 +684,71 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.WHITE_STONE,
+			"White Stone",
+			TextPage.basicTextPage(
+				"White Stone",
+				doubleSpacedLines(
+					"The ${major("White Stone")} has the power to ${minor("prevent your death once")} while charged. Doing so fully discharges the item.",
+					"To recharge it, ${minor("expose it to the full moon")}. It will gain charge while it's under the night sky while the full moon is at its peak, while either dropped on the ground or in your inventory."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.WHITE_STONE,
+				"The White Stone can be rarely found in dungeon chests."
+			)
+		)
+
+		add(
+			ModItems.PORTABLE_ENDER_BRIDGE,
+			"Portable Ender Bridge",
+			SpotlightPage.linkedPage(
+				ModItems.PORTABLE_ENDER_BRIDGE,
+				"Portable Ender Bridge",
+				"The ${major("Portable Ender Bridge")} allows you to teleport to any nearby ${internalLink("blocks/ender_bridge", "anchor", "Ender Anchor")}, including through blocks!"
+			)
+		)
+
+		add(
+			ModItems.BLOCK_MOVER,
+			"Block Mover",
+			TextPage.basicTextPage(
+				"Block Mover",
+				doubleSpacedLines(
+					"The ${major("Block Mover")} allows you to pick up and move blocks around easily. This ${minor("includes blocks with block entities")}, like Chests!",
+					"Right-click a block to pick it up, then right-click again to place it down."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.BLOCK_MOVER,
+				doubleSpacedLines(
+					"Blocks with the block tag ${bad("#irregular_implements:block_mover_blacklist")} cannot be moved with the Block Mover.",
+					"By default, this includes blocks like Bedrock."
+				)
+			)
+		)
+
+		add(
+			ModItems.BLOCK_REPLACER,
+			"Block Replacer",
+			TextPage.basicTextPage(
+				"Block Replacer",
+				doubleSpacedLines(
+					"The ${major("Block Replacer")} allows you to quickly replace blocks in the world with blocks stored in the Block Replacer.",
+					"To store a block in the Block Replacer, ${minor("right-click the block stack in your inventory onto the Block Replacer")}, like a Bundle.",
+					"You can remove the stored block by right-clicking the Block Replacer itemstack onto any empty inventory slot."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.BLOCK_MOVER,
+				doubleSpacedLines(
+					"Using the item on a block in the world will break that block and place a random stored block in its place.",
+					"Blocks with the block tag ${bad("#irregular_implements:block_replacer_blacklist")} cannot be replaced with the Block Replacer."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
