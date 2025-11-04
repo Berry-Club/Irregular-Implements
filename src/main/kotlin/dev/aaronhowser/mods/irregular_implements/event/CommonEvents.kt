@@ -10,6 +10,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.GoldenChickenEntity
 import dev.aaronhowser.mods.irregular_implements.entity.SpiritEntity
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.handler.EscapeRopeHandler
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -43,6 +44,7 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import net.neoforged.neoforge.event.level.BlockEvent
+import net.neoforged.neoforge.event.level.ChunkWatchEvent
 import net.neoforged.neoforge.event.level.LevelEvent
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent
 import net.neoforged.neoforge.event.tick.LevelTickEvent
@@ -285,6 +287,14 @@ object CommonEvents {
 		if (level is ServerLevel) {
 			BetterFakePlayerFactory.unloadLevel(level)
 		}
+	}
+
+	@SubscribeEvent
+	fun onChunkWatch(event: ChunkWatchEvent.Watch) {
+		val player = event.player
+		val chunkPos = event.pos
+
+		SpectreIlluminationHandler.watchChunk(player, chunkPos)
 	}
 
 }
