@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-04T21:09:41.3017439	Patchouli Book: guide
+// 1.21.1	2025-11-04T21:15:32.0887897	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -6,6 +6,7 @@ ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_b
 a9bde0545bbd2e658f515b34817e611e63a8f1a5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_detector.json
 2534752e0e6a384401cf8f38857d715c8f886957 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_of_sticks.json
 8d176709afd867c3461cbdd7e8367e538e2ec387 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_teleporter.json
+0ec2315b94c264eb51cf26c5aed6c8899b880426 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/chat_detector.json
 6c72d86fd30422bdf9cc07776c655ffa94459c92 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/compressed_slime_block.json
 58e1f9f6bdf799bb3d5609b3e02272669ee5eac6 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/contact_button.json
 19d3076495b88c9da2a3759cd935fadd5fc979a5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/contact_lever.json
@@ -16,6 +17,7 @@ ec183ad7e70267904bd03aaa20b0cd1167ac6f92 assets/irregular_implements/patchouli_b
 4b771c5ab996e7e2443466adfad4253d6c8927a0 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/lapis_glass.json
 9e9f7e1c7fc1f112aaa044ee401d7033d6f9066a assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/moon_phase_detector.json
 721e1b5fd82c64c1113a224b57ba048786ab8637 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/oak_platform.json
+0a9d2d6fede7d9d723b449924c30fb562369dbf5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/online_detector.json
 fe73b74fe24cbb223551f4e7b55880abc4c5cb3a assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/peace_candle.json
 28fc163b7c4618ed986148eb09322969dc0946b9 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/bouncy_plate.json
 eca5be3157a5de4fbb26d2f8c5665644cbdbd32b assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rainbow_lamp.json

@@ -1196,6 +1196,41 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.ONLINE_DETECTOR,
+			"Online Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.ONLINE_DETECTOR,
+				"Online Detector",
+				doubleSpacedLines(
+					"The ${major("Online Detector")} emits a Redstone signal when the chosen player is logged in to the server.",
+					"Type the players' exact username into its GUI to set it."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.CHAT_DETECTOR,
+			"Chat Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.CHAT_DETECTOR,
+				"Chat Detector",
+				doubleSpacedLines(
+					"The ${major("Chat Detector")} emits a Redstone signal when the player that placed it says a specific phrase in chat.",
+					"The text box in its GUI is actually a ${ITALIC}regex${RESET} field, so it can be pretty fancy.",
+					"You can also toggle if the message gets canceled or not."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.GLOBAL_CHAT_DETECTOR,
+				"Global Chat Detector",
+				doubleSpacedLines(
+					"The ${major("Global Chat Detector")} works the same way, but listens to chat messages from all players instead of only whoever placed it.",
+					"It can only cancel messages sent by its owner, though."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
