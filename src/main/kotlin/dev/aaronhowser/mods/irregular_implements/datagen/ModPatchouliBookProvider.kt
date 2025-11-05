@@ -1307,6 +1307,89 @@ class ModPatchouliBookProvider(
 				.build()
 		)
 
+		add(
+			ModBlocks.ADVANCED_REDSTONE_TORCH,
+			"Advanced Redstone Torch",
+			SpotlightPage.linkedPage(
+				ModBlocks.ADVANCED_REDSTONE_TORCH,
+				"Advanced Redstone Torch",
+				doubleSpacedLines(
+					"The ${major("Advanced Redstone Torch")} has a configurable redstone output when powered and when unpowered.",
+					"USe its GUI strength to set these two values."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.BIOME_STONE_BRICKS,
+			"Biome Blocks",
+			spotlight(
+				listOf(
+					ModBlocks.BIOME_STONE,
+					ModBlocks.BIOME_COBBLESTONE,
+					ModBlocks.BIOME_STONE_BRICKS,
+					ModBlocks.BIOME_STONE_BRICKS_CRACKED,
+					ModBlocks.BIOME_STONE_BRICKS_CHISELED,
+					ModBlocks.BIOME_GLASS
+				),
+				"",
+				doubleSpacedLines(
+					"${major("Biome blocks")} change their color to match the biome they're placed in.",
+					"They'll be green in lush biomes, brown in dry biomes, etc."
+				),
+				true
+			)
+		)
+
+		add(
+			ModBlocks.SPECTRE_ENERGY_INJECTOR,
+			"Spectre Energy Injector",
+			TextPage.basicTextPage(
+				"Spectre Energy Injector",
+				doubleSpacedLines(
+					"Every player has a ${minor("Spectre Energy pool")} which acts sort of ${minor("like an Ender Chest, but for FE")} instead of items.",
+					"By default, this pool can store up to 1,000,000 FE. This amount can be changed in the server config."
+				),
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.SPECTRE_ENERGY_INJECTOR,
+				doubleSpacedLines(
+					"The ${major("Spectre Energy Injector")} allows you to ${minor("insert FE into the pool")}. It's owned by whoever placed it.",
+					"You ${bad("cannot extract from the Injector")}. You'll have to use a ${internalLink("blocks/spectre_coil_basic", "Spectre Coil")} or a ${internalLink("items/spectre_charger_basic", "Spectre Charger")} to do that."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SPECTRE_COIL_BASIC,
+			"Spectre Coils",
+			spotlight(
+				listOf(
+					ModBlocks.SPECTRE_COIL_BASIC,
+					ModBlocks.SPECTRE_COIL_REDSTONE,
+					ModBlocks.SPECTRE_COIL_ENDER,
+				),
+				"Spectre Coils",
+				doubleSpacedLines(
+					"${major("Spectre Coils")} allow you to wirelessly extract energy from your ${internalLink("blocks/spectre_energy_injector", "Spectre Energy pool")}.",
+					"Each version can pull a different amount of FE/t from the pool. Place the Coil directly on the machine you want to power."
+				),
+				true
+			),
+			spotlight(
+				listOf(
+					ModBlocks.SPECTRE_COIL_NUMBER,
+					ModBlocks.SPECTRE_COIL_GENESIS
+				),
+				"",
+				doubleSpacedLines(
+					"There are two special Coils that ${minor("generate FE")} from nothing, instead of pulling from the Spectre Energy pool.",
+					"The first can be found in dungeon chests, while the second is only obtainable via commands or creative mode.}"
+				),
+				true
+			)
+		)
+
 		plates(consumer, book)
 	}
 
