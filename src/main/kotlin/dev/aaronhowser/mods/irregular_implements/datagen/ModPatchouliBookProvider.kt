@@ -1606,6 +1606,37 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.NATURE_CORE,
+			"Nature Core",
+			TextPage.basicTextPage(
+				"Nature Core",
+				StringBuilder()
+					.append(
+						doubleSpacedLines(
+							"The ${major("Nature Core")} can be found randomly around the world, with a ${minor("Nature Chest")} nearby full of goodies.",
+							"The Nature Core itself also does a handful of things every so often. It can:$BR"
+						)
+					)
+					.append(
+						dottedLines(
+							"Convert nearby Sand into Dirt or Grass",
+							"Spawn a nearby animal",
+							"Bone Meal nearby crops",
+							"Plant saplings nearby",
+							"Repair the structure around itself"
+						)
+					)
+					.toString()
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.NATURE_CORE,
+				doubleSpacedLines(
+					"What it chooses to do is random, with the first top items in that list being more likely."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
