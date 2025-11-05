@@ -1034,6 +1034,83 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.MOON_PHASE_DETECTOR,
+			"Moon Phase Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.MOON_PHASE_DETECTOR,
+				"Moon Phase Detector",
+				doubleSpacedLines(
+					"The ${major("Moon Phase Detector")} emits a Redstone signal strength based on the current moon phase.",
+					"It emits a full signal (15) during a full moon, and no signal (0) during a new moon.",
+					"You can invert this behavior by right-clicking it."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SIDED_BLOCK_OF_REDSTONE,
+			"Sided Block of Redstone",
+			SpotlightPage.linkedPage(
+				ModBlocks.SIDED_BLOCK_OF_REDSTONE,
+				"Sided Block of Redstone",
+				doubleSpacedLines(
+					"The ${major("Sided Block of Redstone")} emits a Redstone signal only from its front face.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.COMPRESSED_SLIME_BLOCK,
+			"Compressed Slime Block",
+			SpotlightPage.linkedPage(
+				ModBlocks.COMPRESSED_SLIME_BLOCK,
+				"Compressed Slime Block",
+				doubleSpacedLines(
+					"A ${major("Compressed Slime Block")} will bounce entities that touch it up into the air.",
+					"Get it by using a Shovel on a Slime Block. You can compress it multiple times for a stronger bounce effect."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ANALOG_EMITTER,
+			"Analog Emitter",
+			SpotlightPage.linkedPage(
+				ModBlocks.ANALOG_EMITTER,
+				"Analog Emitter",
+				doubleSpacedLines(
+					"The ${major("Analog Emitter")}, when powered on its front face, emits a redstone signal with a configurable strength.",
+					"Right-click it to cycle the output strength."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.CONTACT_LEVER,
+			"Contact Lever",
+			SpotlightPage.linkedPage(
+				ModBlocks.CONTACT_LEVER,
+				"Contact Lever",
+				doubleSpacedLines(
+					"When the block in front of the ${major("Contact Lever")} is clicked, the Contact Lever will toggle between on and off.",
+					"While on, it emits a Redstone signal from its other faces."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.CONTACT_BUTTON,
+			"Contact Button",
+			SpotlightPage.linkedPage(
+				ModBlocks.CONTACT_BUTTON,
+				"Contact Button",
+				doubleSpacedLines(
+					"When the block in front of the ${major("Contact Button")} is clicked, the Contact Button will emit a short Redstone pulse from its other faces.",
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
