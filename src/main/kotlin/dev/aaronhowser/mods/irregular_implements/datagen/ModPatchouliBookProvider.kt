@@ -755,7 +755,7 @@ class ModPatchouliBookProvider(
 				)
 			),
 			SpotlightPage.linkedPage(
-				ModItems.BLOCK_MOVER,
+				ModItems.BLOCK_REPLACER,
 				doubleSpacedLines(
 					"Using the item on a block in the world will break that block and place a random stored block in its place.",
 					"Blocks with the block tag ${bad("#irregular_implements:block_replacer_blacklist")} cannot be replaced with the Block Replacer."

@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "irregular_implements:block_mover",
+      "item": "irregular_implements:block_replacer",
       "link_recipe": true,
       "text": "Using the item on a block in the world will break that block and place a random stored block in its place.$(br2)Blocks with the block tag $(c)#irregular_implements:block_replacer_blacklist$() cannot be replaced with the Block Replacer."
     }
