@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-05T16:14:20.2044899	Patchouli Book: guide
+// 1.21.1	2025-11-05T16:16:59.7329417	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -23,7 +23,7 @@ cb1389b07a66d672ec0a847f15bfaee60cece228 assets/irregular_implements/patchouli_b
 ec183ad7e70267904bd03aaa20b0cd1167ac6f92 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/inventory_tester.json
 4b771c5ab996e7e2443466adfad4253d6c8927a0 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/lapis_glass.json
 9e9f7e1c7fc1f112aaa044ee401d7033d6f9066a assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/moon_phase_detector.json
-a71feca1781d631262a7db4a88b5692c8f5e56fa assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/nature_core.json
+0338ec839d83327d6695a56525bc3c0c2a282a77 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/nature_core.json
 c8b9f6ace9f63bc550761541b5dad005d96e44f8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/notification_interface.json
 721e1b5fd82c64c1113a224b57ba048786ab8637 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/oak_platform.json
 0a9d2d6fede7d9d723b449924c30fb562369dbf5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/online_detector.json
