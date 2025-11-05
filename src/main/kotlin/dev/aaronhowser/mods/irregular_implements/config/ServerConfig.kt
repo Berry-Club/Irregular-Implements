@@ -19,6 +19,7 @@ class ServerConfig(
 	lateinit var blockReplacerUniqueBlocks: ModConfigSpec.IntValue
 	lateinit var diviningRodCheckRadius: ModConfigSpec.IntValue
 	lateinit var rainShieldChunkRadius: ModConfigSpec.IntValue
+	lateinit var slimeCubeChunkRadius: ModConfigSpec.IntValue
 	lateinit var peaceCandleChunkRadius: ModConfigSpec.IntValue
 
 	lateinit var natureCoreReplaceSandRadius: ModConfigSpec.IntValue
@@ -114,6 +115,10 @@ class ServerConfig(
 		rainShieldChunkRadius = builder
 			.comment("What chunk radius should the Rain Shield have? (0 means only the chunk the Rain Shield is in)")
 			.defineInRange("rainShieldChunkRadius", 5, 0, Int.MAX_VALUE)
+
+		slimeCubeChunkRadius = builder
+			.comment("What chunk radius should the Slime Cube have? (0 means only the chunk the Slime Cube is in)")
+			.defineInRange("slimeCubeChunkRadius", 1, 0, Int.MAX_VALUE)
 
 		peaceCandleChunkRadius = builder
 			.comment("What chunk radius should the Peace Candle have? (0 means only the chunk the Peace Candle is in)")

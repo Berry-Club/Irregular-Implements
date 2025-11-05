@@ -81,7 +81,7 @@ class SlimeCubeBlockEntity(
 			if (blockState.getValue(RainShieldBlock.ENABLED)) {
 				val chunkPos = ChunkPos(blockPos.x.shr(4), blockPos.z.shr(4))
 
-				val checkRadius = ServerConfig.CONFIG.rainShieldChunkRadius.get()
+				val checkRadius = ServerConfig.CONFIG.slimeCubeChunkRadius.get()
 				val chunkX = chunkPos.x
 				val chunkZ = chunkPos.z
 
