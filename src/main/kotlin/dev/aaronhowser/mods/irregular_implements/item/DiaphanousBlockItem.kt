@@ -11,6 +11,8 @@ import net.minecraft.world.item.ItemNameBlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.block.Blocks
+import java.util.function.Supplier
 
 class DiaphanousBlockItem(properties: Properties) : ItemNameBlockItem(
 	ModBlocks.DIAPHANOUS_BLOCK.get(), properties
@@ -57,6 +59,12 @@ class DiaphanousBlockItem(properties: Properties) : ItemNameBlockItem(
 		}
 
 		return result
+	}
+
+	companion object {
+		val DEFAULT_PROPERTIES = Supplier {
+			Properties().component(ModDataComponents.BLOCK, Blocks.STONE)
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-04T21:29:16.4872963	Patchouli Book: guide
+// 1.21.1	2025-11-05T14:01:51.0438155	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -11,7 +11,7 @@ a9bde0545bbd2e658f515b34817e611e63a8f1a5 assets/irregular_implements/patchouli_b
 58e1f9f6bdf799bb3d5609b3e02272669ee5eac6 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/contact_button.json
 19d3076495b88c9da2a3759cd935fadd5fc979a5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/contact_lever.json
 6bec694503b4efc8079f7f32e67492897526ffb4 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/custom_crafting_table.json
-5e6829d7d22b333839f6c2fc010ffde26c1c94d2 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/diaphanous_block.json
+696a60d26cac02001f55a72ba93ee62ff555f613 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/diaphanous_block.json
 9bd70a3e523c2d4b85dc7d1667567e8af90a8bb7 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/fertilized_dirt.json
 35aa171af8fac010c3d9248fbf939e94519c0e2c assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/igniter.json
 60cd729730306125c534dc410877c2894218582d assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/imbuing_station.json

@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "irregular_implements:diaphanous_block",
+      "item": "irregular_implements:diaphanous_block,irregular_implements:diaphanous_block[irregular_implements:block=\"minecraft:oak_log\"]",
       "link_recipe": true,
       "text": "Crafting it with itself will invert it, so it's visible from up close but vanishes at a distance."
     }

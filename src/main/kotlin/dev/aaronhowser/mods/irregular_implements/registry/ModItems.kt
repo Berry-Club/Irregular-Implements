@@ -60,7 +60,7 @@ object ModItems {
 
 	// Block items
 	val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
-		register("diaphanous_block", ::DiaphanousBlockItem)
+		register("diaphanous_block", ::DiaphanousBlockItem, DiaphanousBlockItem.DEFAULT_PROPERTIES)
 	val CUSTOM_CRAFTING_TABLE: DeferredItem<CustomCraftingTableBlockItem> =
 		register("custom_crafting_table", ::CustomCraftingTableBlockItem)
 

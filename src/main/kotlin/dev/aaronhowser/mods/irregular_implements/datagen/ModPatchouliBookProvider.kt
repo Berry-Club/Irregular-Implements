@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModCreativeModeTabs
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
@@ -1257,10 +1258,18 @@ class ModPatchouliBookProvider(
 					"To set the appearance, craft it with the desired block."
 				)
 			),
-			SpotlightPage.linkedPage(
-				ModBlocks.DIAPHANOUS_BLOCK,
-				"Crafting it with itself will invert it, so it's visible from up close but vanishes at a distance."
-			)
+			SpotlightPage.builder()
+				.text("Crafting it with itself will invert it, so it's visible from up close but vanishes at a distance.")
+				.linkRecipe(true)
+				.addItemLike(ModBlocks.DIAPHANOUS_BLOCK)
+				.addItemStack(
+					ModBlocks.DIAPHANOUS_BLOCK.asItem()
+						.defaultInstance
+						.apply {
+							set(ModDataComponents.BLOCK, Blocks.OAK_LOG)
+						}
+				)
+				.build()
 		)
 
 		plates(consumer, book)
