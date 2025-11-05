@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
+import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModCreativeModeTabs
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -610,7 +611,7 @@ class ModPatchouliBookProvider(
 					ModItems.SPECTRE_AXE,
 					ModItems.SPECTRE_SHOVEL
 				),
-				"",
+				" ",
 				doubleSpacedLines(
 					"The ${major("Spectre Pickaxe, Axe, and Shovel")} are each comparable to their Diamond counterpart, with higher durability and enchantability.",
 					"Each of them increases your block interaction range by 3 blocks."
@@ -832,6 +833,96 @@ class ModPatchouliBookProvider(
 				),
 				"Universal Divining Rod",
 				"You can craft them all together into one that will ${minor("show all ore types")}!",
+				true
+			)
+		)
+
+		add(
+			ModItems.SPECTRE_CHARGER_BASIC,
+			"Spectre Chargers",
+			TextPage.basicTextPage(
+				"Spectre Chargers",
+				doubleSpacedLines(
+					"${major("Spectre Chargers")} are used to charge items in your inventory using FE from your ${internalLink("blocks/spectre_energy_injector", "Spectre Energy buffer")}.",
+					"It will charge every item in your inventory that can be charged, including your armor and any equipped Curios."
+				)
+			),
+			spotlight(
+				listOf(
+					ModItems.SPECTRE_CHARGER_BASIC,
+					ModItems.SPECTRE_CHARGER_REDSTONE,
+					ModItems.SPECTRE_CHARGER_ENDER,
+					ModItems.SPECTRE_CHARGER_GENESIS
+				),
+				" ",
+				doubleSpacedLines(
+					"Each tier charges faster than the last.",
+					"The Genesis Spectre Charger is creative-only, and does not use energy from your buffer."
+				),
+				true
+			)
+		)
+
+		add(
+			ModItems.SUMMONING_PENDULUM,
+			"Summoning Pendulum",
+			TextPage.basicTextPage(
+				"Summoning Pendulum",
+				doubleSpacedLines(
+					"The ${major("Summoning Pendulum")} can be used to ${minor("store mobs to place them later")}.",
+					"Simply right-click a mob with the Pendulum to store it inside. Then, right-click anywhere to summon it back out."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.SUMMONING_PENDULUM,
+				doubleSpacedLines(
+					"The Summoning Pendulum can store up to 5 mobs at a time.",
+					"Any mobs with the entity type tag ${bad("#irregular_implements:summoning_pendulum_blacklist")} cannot be stored in the Pendulum."
+				)
+			)
+		)
+
+		add(
+			ModItems.SPECTRE_CHESTPLATE,
+			"Spectre Armor",
+			TextPage.basicTextPage(
+				"Spectre Armor",
+				doubleSpacedLines(
+					"${major("Spectre armor")} is comparable to Diamond armor, with higher durability and enchantability.",
+				)
+			),
+			spotlight(
+				listOf(
+					ModItems.SPECTRE_HELMET,
+					ModItems.SPECTRE_CHESTPLATE,
+					ModItems.SPECTRE_LEGGINGS,
+					ModItems.SPECTRE_BOOTS
+				),
+				" ",
+				"Wearing a full set also makes you slightly transparent!",
+				true
+			)
+		)
+
+		add(
+			ModItems.WEATHER_EGG,
+			"Weather Eggs",
+			TextPage.basicTextPage(
+				"Weather Eggs",
+				doubleSpacedLines(
+					"${major("Weather Eggs")} allow you to ${minor("change the weather")} when thrown.",
+					"There are 3 types: Sunny, Rainy, and Stormy.",
+					"Naturally, throwing a Sunny Egg will clear the weather, a Rainy Egg will cause rain, and a Stormy Egg will cause a thunderstorm."
+				)
+			),
+			stacksSpotlight(
+				listOf(
+					WeatherEggItem.fromWeather(WeatherEggItem.Weather.SUNNY),
+					WeatherEggItem.fromWeather(WeatherEggItem.Weather.RAINY),
+					WeatherEggItem.fromWeather(WeatherEggItem.Weather.STORMY)
+				),
+				" ",
+				"Throwing an Egg that matches the current weather will do nothing.",
 				true
 			)
 		)
@@ -1332,7 +1423,7 @@ class ModPatchouliBookProvider(
 					ModBlocks.BIOME_STONE_BRICKS_CHISELED,
 					ModBlocks.BIOME_GLASS
 				),
-				"",
+				" ",
 				doubleSpacedLines(
 					"${major("Biome blocks")} change their color to match the biome they're placed in.",
 					"They'll be green in lush biomes, brown in dry biomes, etc."
@@ -1347,7 +1438,7 @@ class ModPatchouliBookProvider(
 			TextPage.basicTextPage(
 				"Spectre Energy Injector",
 				doubleSpacedLines(
-					"Every player has a ${minor("Spectre Energy pool")} which acts sort of ${minor("like an Ender Chest, but for FE")} instead of items.",
+					"Every player has a ${minor("Spectre Energy buffer")} which acts sort of ${minor("like an Ender Chest, but for FE")} instead of items.",
 					"By default, this pool can store up to 1,000,000 FE. This amount can be changed in the server config."
 				),
 			),
@@ -1371,7 +1462,7 @@ class ModPatchouliBookProvider(
 				),
 				"Spectre Coils",
 				doubleSpacedLines(
-					"${major("Spectre Coils")} allow you to wirelessly extract energy from your ${internalLink("blocks/spectre_energy_injector", "Spectre Energy pool")}.",
+					"${major("Spectre Coils")} allow you to wirelessly extract energy from your ${internalLink("blocks/spectre_energy_injector", "Spectre Energy buffer")}.",
 					"Each version can pull a different amount of FE/t from the pool. Place the Coil directly on the machine you want to power."
 				),
 				true
@@ -1381,9 +1472,9 @@ class ModPatchouliBookProvider(
 					ModBlocks.SPECTRE_COIL_NUMBER,
 					ModBlocks.SPECTRE_COIL_GENESIS
 				),
-				"",
+				" ",
 				doubleSpacedLines(
-					"There are two special Coils that ${minor("generate FE")} from nothing, instead of pulling from the Spectre Energy pool.",
+					"There are two special Coils that ${minor("generate FE")} from nothing, instead of pulling from the Spectre Energy buffer.",
 					"The first can be found in dungeon chests, while the second is only obtainable via commands or creative mode.}"
 				),
 				true

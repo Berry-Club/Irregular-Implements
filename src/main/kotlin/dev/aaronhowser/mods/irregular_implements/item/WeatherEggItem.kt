@@ -96,7 +96,7 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 			Properties().component(ModDataComponents.WEATHER, Weather.SUNNY)
 		}
 
-		val WEATHER: ResourceLocation = OtherUtil.modResource("weather")
+		val WEATHER_PROPERTY: ResourceLocation = OtherUtil.modResource("weather")
 
 		fun getWeatherFloat(
 			stack: ItemStack,

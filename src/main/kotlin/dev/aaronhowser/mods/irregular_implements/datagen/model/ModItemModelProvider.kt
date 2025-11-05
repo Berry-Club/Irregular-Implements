@@ -82,17 +82,17 @@ class ModItemModelProvider(
 		getBuilder(getName(item).toString())
 
 			.override()
-			.predicate(WeatherEggItem.WEATHER, 0f)
+			.predicate(WeatherEggItem.WEATHER_PROPERTY, 0f)
 			.model(sunnyModel)
 			.end()
 
 			.override()
-			.predicate(WeatherEggItem.WEATHER, 1f)
+			.predicate(WeatherEggItem.WEATHER_PROPERTY, 1f)
 			.model(rainyModel)
 			.end()
 
 			.override()
-			.predicate(WeatherEggItem.WEATHER, 2f)
+			.predicate(WeatherEggItem.WEATHER_PROPERTY, 2f)
 			.model(stormyModel)
 			.end()
 

@@ -194,7 +194,7 @@ object ClientEvents {
 
 		ItemProperties.register(
 			ModItems.WEATHER_EGG.get(),
-			WeatherEggItem.WEATHER,
+			WeatherEggItem.WEATHER_PROPERTY,
 			WeatherEggItem::getWeatherFloat
 		)
 
