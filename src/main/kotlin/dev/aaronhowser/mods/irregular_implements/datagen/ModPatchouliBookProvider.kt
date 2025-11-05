@@ -823,7 +823,7 @@ class ModPatchouliBookProvider(
 				"Divining Rods",
 				doubleSpacedLines(
 					"When holding a ${major("Divining Rod")} in your hand, you'll be able to ${minor("see the corresponding ore block through walls")} at a configurable distance.",
-					"You can make a Divining Rod out of any ore item that has an item tag starting with \"${UNDERLINE}c:ores/${RESET}\", and it will show that ore type."
+					"You can make a Divining Rod out of any ore item that has an item tag starting with \"${UNDERLINE}c:ores/ ${RESET}\", and it will show that ore type."
 				),
 				true
 			),

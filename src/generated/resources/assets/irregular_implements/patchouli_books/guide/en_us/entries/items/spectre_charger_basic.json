@@ -12,7 +12,8 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:spectre_charger_basic,irregular_implements:spectre_charger_redstone,irregular_implements:spectre_charger_ender,irregular_implements:spectre_charger_genesis",
       "link_recipe": true,
-      "text": "Each tier charges faster than the last.$(br2)The Genesis Spectre Charger is creative-only, and does not use energy from your buffer."
+      "text": "Each tier charges faster than the last.$(br2)The Genesis Spectre Charger is creative-only, and does not use energy from your buffer.",
+      "title": " "
     }
   ]
 }

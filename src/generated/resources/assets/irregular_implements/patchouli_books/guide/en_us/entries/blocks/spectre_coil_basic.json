@@ -14,7 +14,8 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:spectre_coil_number,irregular_implements:spectre_coil_genesis",
       "link_recipe": true,
-      "text": "There are two special Coils that $(3)generate FE$() from nothing, instead of pulling from the Spectre Energy buffer.$(br2)The first can be found in dungeon chests, while the second is only obtainable via commands or creative mode.}"
+      "text": "There are two special Coils that $(3)generate FE$() from nothing, instead of pulling from the Spectre Energy buffer.$(br2)The first can be found in dungeon chests, while the second is only obtainable via commands or creative mode.}",
+      "title": " "
     }
   ]
 }

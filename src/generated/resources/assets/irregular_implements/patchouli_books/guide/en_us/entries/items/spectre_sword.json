@@ -13,7 +13,8 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:spectre_pickaxe,irregular_implements:spectre_axe,irregular_implements:spectre_shovel",
       "link_recipe": true,
-      "text": "The $(d)Spectre Pickaxe, Axe, and Shovel$() are each comparable to their Diamond counterpart, with higher durability and enchantability.$(br2)Each of them increases your block interaction range by 3 blocks."
+      "text": "The $(d)Spectre Pickaxe, Axe, and Shovel$() are each comparable to their Diamond counterpart, with higher durability and enchantability.$(br2)Each of them increases your block interaction range by 3 blocks.",
+      "title": " "
     }
   ]
 }
