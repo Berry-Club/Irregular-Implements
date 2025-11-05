@@ -540,9 +540,7 @@ class ModPatchouliBookProvider(
 			SpotlightPage.linkedPage(
 				ModItems.COLLAPSE_IMBUE,
 				doubleSpacedLines(
-					"The ${major("Collapse Imbue")} will inflict the Collapse effect on your opponent when you strike them.",
-					"For players, the Collapse effect inverts their movement and mouse controls.",
-					"For mobs, it confuses their pathfinding, causing them to move erratically."
+					"The ${major("Collapse Imbue")} will inflict the ${internalLink("blocks/sakanade_spores", "Collapse effect")} on your opponent when you strike them.",
 				)
 			)
 		)
@@ -1538,6 +1536,25 @@ class ModPatchouliBookProvider(
 				ModBlocks.PITCHER_PLANT,
 				doubleSpacedLines(
 					"Pitcher Plants can be found in biomes with the biome tag ${minor("c:is_wet/overworld")}."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SAKANADE_SPORES,
+			"Sakanade Spores",
+			TextPage.basicTextPage(
+				"Sakanade Spores",
+				doubleSpacedLines(
+					"${major("Sakanade Spores")} when walked through, will apply the ${minor("Collapse")} potion effect to entities.",
+					"For players, the Collapse effect inverts their movement and mouse controls.",
+					"For mobs, it confuses their pathfinding, causing them to move erratically."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.SAKANADE_SPORES,
+				doubleSpacedLines(
+					"Sakanade Spores can be found on the bottom of Giant Brown Mushrooms."
 				)
 			)
 		)

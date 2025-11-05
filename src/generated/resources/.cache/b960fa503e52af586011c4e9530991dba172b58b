@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-05T15:22:36.5627636	Patchouli Book: guide
+// 1.21.1	2025-11-05T15:26:09.9359154	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -29,6 +29,7 @@ fe73b74fe24cbb223551f4e7b55880abc4c5cb3a assets/irregular_implements/patchouli_b
 28fc163b7c4618ed986148eb09322969dc0946b9 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/bouncy_plate.json
 eca5be3157a5de4fbb26d2f8c5665644cbdbd32b assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rainbow_lamp.json
 f358f3ff7f0776ee09a6d42bb46b308af9be55f5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rain_shield.json
+10b9827e38e957ac16d0d574dc1a69f4e367f049 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/sakanade_spores.json
 fc83fe0a52bfab9a1227b99601d5ca220a865206 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/shock_absorber.json
 7b586d3f2bd350787e2fc688c50a736fa69813c8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/sided_redstone.json
 e9f1169eb72df2383cb6a3659fa7f0063724b5c8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/slime_cube.json
@@ -53,7 +54,7 @@ a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_b
 3deb8b2a9a3184f7a46cb2a31b57295c485d4c4f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
 4d78411fad6fe8f0948c9129dbf0786d5ef94c68 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_egg.json
 d35b4e7de27f9bc0d770042c627fec1413baf172 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/grass_seeds.json
-41f697269d77c191a8d299f59348a31d89980b3b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/imbue_fire.json
+bc750b18a0508225307c1ef89a8b66870547dcc5 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/imbue_fire.json
 0e9fc527ef8e0e8c09432f365d6d6fe132da0a81 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/item_filter.json
 ecafe792afa48469caf62354a9db47fb0a118e73 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_charm.json
 c2404c261c7a58c79078be397b188b63a408a917 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_waders.json

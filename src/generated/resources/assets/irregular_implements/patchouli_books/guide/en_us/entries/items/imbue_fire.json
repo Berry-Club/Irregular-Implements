@@ -42,7 +42,7 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:imbue_collapse",
       "link_recipe": true,
-      "text": "The $(d)Collapse Imbue$() will inflict the Collapse effect on your opponent when you strike them.$(br2)For players, the Collapse effect inverts their movement and mouse controls.$(br2)For mobs, it confuses their pathfinding, causing them to move erratically."
+      "text": "The $(d)Collapse Imbue$() will inflict the $(l:blocks/sakanade_spores)Collapse effect$(/l) on your opponent when you strike them."
     }
   ]
 }
