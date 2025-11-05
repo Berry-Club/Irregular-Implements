@@ -1481,6 +1481,67 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.NOTIFICATION_INTERFACE,
+			"Notification Interface",
+			TextPage.basicTextPage(
+				"Notification Interface",
+				doubleSpacedLines(
+					"The ${major("Notification Interface")}, when powered, will send a configurable notification to the player that placed it.",
+					"You can set a title, body, and icon in its GUI."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.NOTIFICATION_INTERFACE,
+				doubleSpacedLines(
+					"Server admins can also use the command \"/ii notify <player> <title> <body> <itemstack>\" to send notifications to players."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ENDER_BRIDGE,
+			"Ender Bridges",
+			spotlight(
+				listOf(
+					ModBlocks.ENDER_BRIDGE,
+					ModBlocks.PRISMARINE_ENDER_BRIDGE
+				),
+				"Ender Bridges",
+				doubleSpacedLines(
+					"${major("Ender Bridges")}, when powered, will teleport the entities standing on top of them to the ${major("Ender Anchor")} it's aimed at.",
+					"It works through blocks over any distance, as long as it's ${minor("looking DIRECTLY at the Ender Anchor")}."
+				),
+				true
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ENDER_ANCHOR,
+				doubleSpacedLines(
+					"When powered, it searches in a straight line for an Ender Anchor. If there is one, it charges based on the distance and then activates. If there's not, it will audibly fail.",
+					"The basic Bridge takes 1 tick per block traveled, while the Prismarine Bridge takes 0.5 ticks per block traveled.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.PITCHER_PLANT,
+			"Pitcher Plant",
+			TextPage.basicTextPage(
+				"Pitcher Plant",
+				doubleSpacedLines(
+					"${major("Pitcher Plants")} generate water.",
+					"You can harvest this water by using a Bucket or any other fluid-storage item on it.",
+					"It will also periodically fill adjacent fluid tanks, and can be extracted from via fluid pipes."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.PITCHER_PLANT,
+				doubleSpacedLines(
+					"Pitcher Plants can be found in biomes with the biome tag ${minor("c:is_wet/overworld")}."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
