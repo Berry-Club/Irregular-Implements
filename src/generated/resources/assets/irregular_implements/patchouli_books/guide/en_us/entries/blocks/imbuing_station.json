@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Imbuing Station$() is used to craft $(l:items/fire_imbue)Imbues$(/l).",
+      "text": "The $(d)Imbuing Station$() is used to craft $(l:items/imbue_fire)Imbues$(/l).",
       "title": "Imbuing Station"
     },
     {

@@ -830,6 +830,45 @@ class ModPatchouliBookProvider(
 				)
 			)
 		)
+
+		add(
+			ModBlocks.RAIN_SHIELD,
+			"Rain Shield",
+			SpotlightPage.linkedPage(
+				ModBlocks.RAIN_SHIELD,
+				"Rain Shield",
+				doubleSpacedLines(
+					"The ${major("Rain Shield")} prevents rain from falling in a radius around it. By default, this radius is 5 chunks.",
+					"It can be disabled with a Redstone signal."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.PEACE_CANDLE,
+			"Peace Candle",
+			SpotlightPage.linkedPage(
+				ModBlocks.PEACE_CANDLE,
+				"Peace Candle",
+				doubleSpacedLines(
+					"The ${major("Peace Candle")} prevents hostile mobs from spawning in a radius around it. By default, this radius a single chunk (so a 3x3 chunk area).",
+					"It can be disabled with a Redstone signal."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SLIME_CUBE,
+			"Slime Cube",
+			SpotlightPage.linkedPage(
+				ModBlocks.SLIME_CUBE,
+				"Slime Cube",
+				doubleSpacedLines(
+					"The ${major("Slime Cube")}, when unpowered, causes Slimes to spawn in a radius around it. By default, this radius is 1 chunk (so a 3x3 chunk area).",
+					"When powered, however, it prevents Slimes from spawning in the same area."
+				)
+			)
+		)
 	}
 
 	private fun major(text: String): String {

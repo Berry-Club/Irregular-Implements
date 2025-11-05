@@ -1,0 +1,14 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:peace_candle",
+  "name": "Peace Candle",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "irregular_implements:peace_candle",
+      "link_recipe": true,
+      "text": "The $(d)Peace Candle$() prevents hostile mobs from spawning in a radius around it. By default, this radius a single chunk (so a 3x3 chunk area).$(br2)It can be disabled with a Redstone signal.",
+      "title": "Peace Candle"
+    }
+  ]
+}
