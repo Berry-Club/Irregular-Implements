@@ -83,7 +83,7 @@ class NatureCoreBlockEntity(
 
 		val animalsNearby = level.getEntitiesOfClass(
 			Animal::class.java,
-			AABB(blockPos).inflate(radius, radius, radius)
+			AABB(blockPos).inflate(radius * 2, radius * 2, radius * 2)
 		)
 
 		if (animalsNearby.size > 2) return
