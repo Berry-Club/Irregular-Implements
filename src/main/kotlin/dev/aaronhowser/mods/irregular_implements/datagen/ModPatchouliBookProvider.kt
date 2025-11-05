@@ -1131,6 +1131,71 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.BLOCK_DETECTOR,
+			"Block Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.BLOCK_DETECTOR,
+				"Block Detector",
+				doubleSpacedLines(
+					"The ${major("Block Detector")} emits a Redstone signal when the block in front of it matches the block stored in its inventory."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.INVENTORY_TESTER,
+			"Inventory Tester",
+			TextPage.basicTextPage(
+				"Inventory Tester",
+				doubleSpacedLines(
+					"The ${major("Inventory Tester")} is placed on the side of an inventory and holds an item.",
+					"It emits a Redstone signal when that inventory is capable of accepting that item.",
+					"It also checks the ${ITALIC}side${RESET} of the inventory it's attached to. If placed on the top of a Furnace, it will only check if the Furnace can accept the item from the top slot."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.INVENTORY_TESTER,
+				doubleSpacedLines(
+					"Because of that, you may also want to use the ${internalLink("blocks/inventory_rerouter", "Inventory Rerouter")} to access the inventory's face from another side.",
+					"You can invert it in its GUI, so it emits a signal when the inventory cannot accept the item.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.BLOCK_OF_STICKS,
+			"Block of Sticks",
+			SpotlightPage.linkedPage(
+				ModBlocks.BLOCK_OF_STICKS,
+				"Block of Sticks",
+				doubleSpacedLines(
+					"The ${major("Block of Sticks")} breaks itself shortly after being placed.",
+					"This makes it an effective scaffolding block."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.RETURNING_BLOCK_OF_STICKS,
+				"Returning Block of Sticks",
+				doubleSpacedLines(
+					"When the ${major("Returning Block of Sticks")} breaks itself, it will teleport its drops to the nearest player."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SPECTRE_LENS,
+			"Spectre Lens",
+			SpotlightPage.linkedPage(
+				ModBlocks.SPECTRE_LENS,
+				"Spectre Lens",
+				doubleSpacedLines(
+					"The ${major("Spectre Lens")}, when placed on top of a Beacon, allows it to effect you from any distance, as long as you're in the same dimension.",
+					"It only extends this effect to the player that placed the Lens."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
