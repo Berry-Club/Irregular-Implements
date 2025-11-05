@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
+import kotlin.math.cos
 import kotlin.math.sin
 
 class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
@@ -30,7 +31,19 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 
 		if (displayContext == ItemDisplayContext.GUI) {
 			val time = Minecraft.getInstance().level?.gameTime ?: 0
-			val modelScale = 0.9625f + 0.0375f * sin(time.toFloat() / 2.5f)
+
+			val oscillationSpeed = 2.5f
+			val oscillationAmplitude = 0.0375f
+			val baseValue = 0.9625f
+
+			val oscillation = oscillationAmplitude * sin(time.toFloat() / oscillationSpeed)
+
+			val modelScale = if (stack.has(ModDataComponents.IS_INVERTED)) {
+				baseValue - oscillation
+			} else {
+				baseValue + oscillation
+			}
+
 			poseStack.scale(modelScale, modelScale, modelScale)
 		}
 
