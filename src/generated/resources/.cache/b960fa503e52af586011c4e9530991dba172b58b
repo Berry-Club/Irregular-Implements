@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-04T20:05:42.8170134	Patchouli Book: guide
+// 1.21.1	2025-11-04T20:08:09.1799344	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -23,7 +23,7 @@ c923a9275094eed34b3469372ebaab14120ddc95 assets/irregular_implements/patchouli_b
 a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
 3deb8b2a9a3184f7a46cb2a31b57295c485d4c4f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
 4d78411fad6fe8f0948c9129dbf0786d5ef94c68 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_egg.json
-1ffca5f63f083565de9cda239b2c5deac8db13ce assets/irregular_implements/patchouli_books/guide/en_us/entries/items/grass_seeds.json
+03c11060f3befc2acd6c7ae5eee10273bffe6bb7 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/grass_seeds.json
 41f697269d77c191a8d299f59348a31d89980b3b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/imbue_fire.json
 0e9fc527ef8e0e8c09432f365d6d6fe132da0a81 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/item_filter.json
 ecafe792afa48469caf62354a9db47fb0a118e73 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_charm.json

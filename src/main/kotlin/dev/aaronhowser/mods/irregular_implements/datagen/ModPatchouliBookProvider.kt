@@ -760,14 +760,32 @@ class ModPatchouliBookProvider(
 					"Specifically, it works on any block with the tag ${minor("irregular_implements:grass_seeds_compatible")}."
 				)
 			),
-			SpotlightPage.linkedPage(
-				ModItems.GRASS_SEEDS_RED,
-				"Colored Grass Seeds",
-				doubleSpacedLines(
-					"There are also ${major("Colored Grass Seeds")}, which plant Colored Grass of their respective color.",
-					"They act exactly the same as regular Grass Blocks, but are colored."
+			SpotlightPage.builder()
+				.addItemLike(ModItems.GRASS_SEEDS_RED)
+				.addItemLike(ModItems.GRASS_SEEDS_WHITE)
+				.addItemLike(ModItems.GRASS_SEEDS_ORANGE)
+				.addItemLike(ModItems.GRASS_SEEDS_MAGENTA)
+				.addItemLike(ModItems.GRASS_SEEDS_LIGHT_BLUE)
+				.addItemLike(ModItems.GRASS_SEEDS_YELLOW)
+				.addItemLike(ModItems.GRASS_SEEDS_LIME)
+				.addItemLike(ModItems.GRASS_SEEDS_PINK)
+				.addItemLike(ModItems.GRASS_SEEDS_GRAY)
+				.addItemLike(ModItems.GRASS_SEEDS_LIGHT_GRAY)
+				.addItemLike(ModItems.GRASS_SEEDS_CYAN)
+				.addItemLike(ModItems.GRASS_SEEDS_PURPLE)
+				.addItemLike(ModItems.GRASS_SEEDS_BLUE)
+				.addItemLike(ModItems.GRASS_SEEDS_BROWN)
+				.addItemLike(ModItems.GRASS_SEEDS_GREEN)
+				.addItemLike(ModItems.GRASS_SEEDS_RED)
+				.addItemLike(ModItems.GRASS_SEEDS_BLACK)
+				.title("Colored Grass Seeds")
+				.text(
+					doubleSpacedLines(
+						"There are also ${major("Colored Grass Seeds")}, which plant Colored Grass of their respective color.",
+						"They act exactly the same as regular Grass Blocks, but are colored."
+					)
 				)
-			)
+				.build()
 		)
 
 	}
