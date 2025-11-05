@@ -14,9 +14,11 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.Mth
 import net.minecraft.util.random.WeightedRandomList
+import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -82,21 +84,24 @@ class NatureCoreBlockEntity(
 		val radius = ServerConfig.CONFIG.natureCoreSpawnAnimalRadius.get()
 
 		val animalsNearby = level.getEntitiesOfClass(
-			Animal::class.java,
-			AABB(blockPos).inflate(radius * 2, radius * 2, radius * 2)
-		)
+			Mob::class.java,
+			AABB(blockPos).inflate(radius * 3)
+		).filter { it is Animal || it is WaterAnimal }
 
 		if (animalsNearby.size > 2) return
 
 		val radCeil = Mth.ceil(radius)
 
 		var attempts = 0
-		var pos: BlockPos
+		val pos = this.blockPos.mutable()
+
 		do {
-			pos = this.blockPos.offset(
-				level.random.nextRange(-radCeil, radCeil + 1),
-				level.random.nextRange(-radCeil, radCeil + 1),
-				level.random.nextRange(-radCeil, radCeil + 1)
+			pos.set(
+				this.blockPos.offset(
+					level.random.nextRange(-radCeil, radCeil + 1),
+					level.random.nextRange(-radCeil, radCeil + 1),
+					level.random.nextRange(-radCeil, radCeil + 1)
+				)
 			)
 
 			val fluidStateThere = level.getFluidState(pos)
@@ -106,6 +111,10 @@ class NatureCoreBlockEntity(
 			val foundValidSpot = !blockStateThere.getCollisionShape(level, pos).isEmpty
 					|| !fluidStateThere.isEmpty && !fluidStateThere.`is`(Fluids.WATER)
 		} while (foundValidSpot && attempts < 50)
+
+		while (level.isEmptyBlock(pos) && level.isEmptyBlock(pos.below())) {
+			pos.move(Direction.DOWN)
+		}
 
 		val isUnderWater = level.getFluidState(pos).`is`(Fluids.WATER)
 		val mobCategory = if (isUnderWater) {
