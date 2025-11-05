@@ -271,8 +271,11 @@ class ModPatchouliBookProvider(
 				doubleSpacedLines(
 					"The ${major("Escape Rope")} can be used to quickly get out of caves.",
 					"Hold right-click while in a cave, and it will quickly search for ${minor("the nearest location that can see the sky")}, and then teleport you there.",
-					"If it can't find a valid location, it will be dropped at your feet."
 				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.ESCAPE_ROPE,
+				"If it can't find a valid location, it will be dropped at your feet."
 			)
 		)
 
