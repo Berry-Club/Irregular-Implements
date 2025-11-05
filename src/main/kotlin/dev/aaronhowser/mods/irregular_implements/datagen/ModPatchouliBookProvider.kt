@@ -1111,6 +1111,26 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.IGNITER,
+			"Igniter",
+			TextPage.basicTextPage(
+				"Igniter",
+				doubleSpacedLines(
+					"The ${major("Igniter")} can be used to light a fire when given a Redstone signal.",
+					"It has 3 modes, which you can cycle in its GUI.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.IGNITER,
+				dottedLines(
+					"Toggle - Lights a fire when powered, and extinguishes it when unpowered.",
+					"Keep Ignited - Keeps the fire lit while powered, and does nothing when unpowered.",
+					"Ignite - Lights a fire when powered, and does nothing when unpowered."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
@@ -1192,6 +1212,16 @@ class ModPatchouliBookProvider(
 		}
 
 		return builder.build()
+	}
+
+	private fun dottedLines(vararg lines: String): String {
+		val sb = StringBuilder()
+
+		for (line in lines) {
+			sb.append(LI).append(line)
+		}
+
+		return sb.toString()
 	}
 
 }
