@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModCreativeModeTabs
@@ -955,6 +954,38 @@ class ModPatchouliBookProvider(
 				doubleSpacedLines(
 					"${major("Super Lubricated Blocks")} fully negate friction, allowing entities to move across them without slowing down.",
 					"This is very useful for transporting items, especially when used with ${internalLink("blocks/plates", "Plates")}."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.LAPIS_GLASS,
+			"Permeable Glass Blocks",
+			SpotlightPage.linkedPage(
+				ModBlocks.LAPIS_GLASS,
+				"Lapis Glass",
+				doubleSpacedLines(
+					"${major("Lapis Glass")} is solid for players, but allows all other entities to pass through it.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.QUARTZ_GLASS,
+				"Quartz Glass",
+				doubleSpacedLines(
+					"${major("Quartz Glass")} allows players to pass through it, but is solid for all other entities.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.TRIGGER_GLASS,
+			"Trigger Glass",
+			SpotlightPage.linkedPage(
+				ModBlocks.TRIGGER_GLASS,
+				"Trigger Glass",
+				doubleSpacedLines(
+					"${major("Trigger Glass")} is usually solid, but if it gets a Redstone pulse, it becomes non-solid for a short duration.",
+					"This effect propagates to all connected Trigger Glass blocks, within a distance."
 				)
 			)
 		)
