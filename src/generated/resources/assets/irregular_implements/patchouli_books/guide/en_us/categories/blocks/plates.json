@@ -1,5 +1,5 @@
 {
-  "parent": "blocks",
+  "parent": "irregular_implements:blocks",
   "description": "All of the mods' plates!",
   "icon": "irregular_implements:redstone_plate",
   "name": "Plates"

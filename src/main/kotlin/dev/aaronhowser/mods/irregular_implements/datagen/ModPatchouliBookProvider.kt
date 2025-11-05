@@ -916,8 +916,8 @@ class ModPatchouliBookProvider(
 				description = "All of the mods' plates!",
 				icon = ModBlocks.REDSTONE_PLATE
 			)
-			.parent("blocks")
-			.save(consumer, "plates")
+			.parent("irregular_implements:blocks")
+			.save(consumer, "blocks/plates")
 
 		fun add(
 			block: DeferredBlock<*>,
@@ -937,6 +937,18 @@ class ModPatchouliBookProvider(
 
 			return builder.save(consumer, block.key!!.location().path)
 		}
+
+		add(
+			ModBlocks.BOUNCY_PLATE,
+			"Bouncy Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.BOUNCY_PLATE,
+				"Bouncy Plate",
+				doubleSpacedLines(
+					"The ${major("Bouncy Plate")} will ${minor("make entities that walk over it bounce up into the air.")}",
+				)
+			)
+		)
 	}
 
 	private fun major(text: String): String {
