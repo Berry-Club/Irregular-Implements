@@ -990,6 +990,50 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.RAINBOW_LAMP,
+			"Rainbow Lamp",
+			SpotlightPage.linkedPage(
+				ModBlocks.RAINBOW_LAMP,
+				"Rainbow Lamp",
+				doubleSpacedLines(
+					"The ${major("Rainbow Lamp")} has a different color depending on the strength of the Redstone signal powering it."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SHOCK_ABSORBER,
+			"Shock Absorber",
+			SpotlightPage.linkedPage(
+				ModBlocks.SHOCK_ABSORBER,
+				"Shock Absorber",
+				doubleSpacedLines(
+					"The ${major("Shock Absorber")} fully negates fall damage when landed on.",
+					"Additionally, it will emit a Redstone signal proportional to the fall distance when landed on."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.BLOCK_TELEPORTER,
+			"Block Teleporter",
+			TextPage.basicTextPage(
+				"Block Teleporter",
+				doubleSpacedLines(
+					"The ${major("Block Teleporter")} allows you to ${minor("teleport the block in front of itself to another Block Teleporter")} when powered by Redstone.",
+					"Use a ${internalLink("items/location_filter", "Location Filter")} on a Block Teleporter to save its location, and then insert that Filter into a second Block Teleporter.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.BLOCK_TELEPORTER,
+				doubleSpacedLines(
+					"When that second Block Teleporter is powered, it will try to swap the block in front of the first Block Teleporter with the block in front of itself.",
+					"Whether or not the Block Teleporter works across dimensions can be configured, but it defaults to true."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
