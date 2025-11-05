@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
+import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModCreativeModeTabs
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -19,6 +20,7 @@ import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
@@ -801,6 +803,39 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.DIVINING_ROD,
+			"Divining Rods",
+			stacksSpotlight(
+				listOf(
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_COAL),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_COPPER),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_IRON),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_GOLD),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_REDSTONE),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_EMERALD),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_LAPIS),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_DIAMOND),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_NETHERITE_SCRAP),
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES_QUARTZ),
+				),
+				"Divining Rods",
+				doubleSpacedLines(
+					"When holding a ${major("Divining Rod")} in your hand, you'll be able to ${minor("see the corresponding ore block through walls")} at a configurable distance.",
+					"You can make a Divining Rod out of any ore item that has an item tag starting with \"${UNDERLINE}c:ores/${RESET}\", and it will show that ore type."
+				),
+				true
+			),
+			stacksSpotlight(
+				listOf(
+					DiviningRodItem.getRodForBlockTag(Tags.Blocks.ORES),
+				),
+				"Universal Divining Rod",
+				"You can craft them all together into one that will ${minor("show all ore types")}!",
+				true
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
@@ -1332,6 +1367,27 @@ class ModPatchouliBookProvider(
 
 	private fun bad(text: String): String {
 		return colored(TextColor.RED, text)
+	}
+
+	private fun stacksSpotlight(
+		list: List<ItemStack>,
+		title: String,
+		text: String,
+		linkRecipe: Boolean
+	): SpotlightPage {
+		val builder = SpotlightPage.builder()
+			.text(text)
+			.linkRecipe(linkRecipe)
+
+		if (title.isNotEmpty()) {
+			builder.title(title)
+		}
+
+		for (item in list) {
+			builder.addItemStack(item)
+		}
+
+		return builder.build()
 	}
 
 	private fun spotlight(

@@ -1,33 +1,30 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"category": "misc",
-	"key": {
-		"B": {
-			"item": "minecraft:blue_stained_glass"
-		},
-		"G": {
-			"item": "minecraft:green_stained_glass"
-		},
-		"L": {
-			"tag": "c:glass_blocks/colorless"
-		},
-		"R": {
-			"item": "minecraft:red_stained_glass"
-		},
-		"Y": {
-			"item": "minecraft:yellow_stained_glass"
-		}
-	},
-	"pattern": [
-		" G ",
-		"RLB",
-		" Y "
-	],
-	"result": {
-		"components": {
-			"irregular_implements:block": "minecraft:stone"
-		},
-		"count": 4,
-		"id": "irregular_implements:diaphanous_block"
-	}
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blue_stained_glass"
+    },
+    "G": {
+      "item": "minecraft:green_stained_glass"
+    },
+    "L": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "R": {
+      "item": "minecraft:red_stained_glass"
+    },
+    "Y": {
+      "item": "minecraft:yellow_stained_glass"
+    }
+  },
+  "pattern": [
+    " G ",
+    "RLB",
+    " Y "
+  ],
+  "result": {
+    "count": 4,
+    "id": "irregular_implements:diaphanous_block"
+  }
 }
