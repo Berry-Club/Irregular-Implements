@@ -1,8 +1,10 @@
-// 1.21.1	2025-11-04T19:48:20.1210295	Patchouli Book: guide
+// 1.21.1	2025-11-04T19:57:55.9414733	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
+df3b9658c2539f8ea8cffa38e696de3e701ff2e5 assets/irregular_implements/patchouli_books/guide/en_us/categories/plates.json
 9bd70a3e523c2d4b85dc7d1667567e8af90a8bb7 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/fertilized_dirt.json
 60cd729730306125c534dc410877c2894218582d assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/imbuing_station.json
+07e99bc61d8fbf9f7496cdaabfa1d75df79384ae assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/oak_platform.json
 05158ca2495eb6fe116f9d9d45606de071af8e16 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/peace_candle.json
 f358f3ff7f0776ee09a6d42bb46b308af9be55f5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rain_shield.json
 e9f1169eb72df2383cb6a3659fa7f0063724b5c8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/slime_cube.json

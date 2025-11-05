@@ -869,6 +869,74 @@ class ModPatchouliBookProvider(
 				)
 			)
 		)
+
+		add(
+			ModBlocks.OAK_PLATFORM,
+			"Platforms",
+			SpotlightPage.builder()
+				.linkRecipe(true)
+				.addItemLike(ModBlocks.OAK_PLATFORM)
+				.addItemLike(ModBlocks.OAK_PLATFORM)
+				.addItemLike(ModBlocks.SPRUCE_PLATFORM)
+				.addItemLike(ModBlocks.BIRCH_PLATFORM)
+				.addItemLike(ModBlocks.JUNGLE_PLATFORM)
+				.addItemLike(ModBlocks.ACACIA_PLATFORM)
+				.addItemLike(ModBlocks.DARK_OAK_PLATFORM)
+				.addItemLike(ModBlocks.CRIMSON_PLATFORM)
+				.addItemLike(ModBlocks.WARPED_PLATFORM)
+				.addItemLike(ModBlocks.MANGROVE_PLATFORM)
+				.addItemLike(ModBlocks.BAMBOO_PLATFORM)
+				.addItemLike(ModBlocks.CHERRY_PLATFORM)
+				.title("Platforms")
+				.text(
+					doubleSpacedLines(
+						"${major("Platforms")} are ${minor("solid on top but not from the bottom or sides")}.",
+						"Additionally, sneaking will allow you to fall through them."
+					)
+				)
+				.build(),
+			SpotlightPage.linkedPage(
+				ModBlocks.SUPER_LUBRICANT_PLATFORM,
+				"Super Lubricant Platform",
+				doubleSpacedLines(
+					"The ${major("Super Lubricant Platform")} acts the same way but fully negates friction, just like the other ${internalLink("blocks/super_lubricant_stone", "Super Lubricated blocks")}.",
+					"This makes it very useful for transporting items, especially when used with ${internalLink("blocks/plates", "Plates")}."
+				)
+			)
+		)
+
+		plates(consumer, book)
+	}
+
+	private fun plates(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
+		val category = PatchouliBookCategory.builder()
+			.book(book)
+			.setDisplay(
+				name = "Plates",
+				description = "All of the mods' plates!",
+				icon = ModBlocks.REDSTONE_PLATE
+			)
+			.parent("blocks")
+			.save(consumer, "plates")
+
+		fun add(
+			block: DeferredBlock<*>,
+			name: String,
+			vararg pages: AbstractPage
+		): PatchouliBookEntry {
+			val builder = PatchouliBookEntry.builder()
+				.category(category)
+				.display(
+					entryName = name,
+					icon = block
+				)
+
+			for (page in pages) {
+				builder.addPage(page)
+			}
+
+			return builder.save(consumer, block.key!!.location().path)
+		}
 	}
 
 	private fun major(text: String): String {
