@@ -4,6 +4,7 @@
 
 - Patchouli documentation
   - I had to update a Patchouli DataGen mod from 1.19 for this lol
+  - Not everything is documented, but most of it is. This update was getting a bit inflated and this is the biggest bottleneck, and I don't want to put off releasing all these changes and fixes just because I need to spend 5 more hours documenting every obscure item in the mod lol
 
 ### Changed
 
