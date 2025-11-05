@@ -847,12 +847,17 @@ class ModPatchouliBookProvider(
 		add(
 			ModBlocks.PEACE_CANDLE,
 			"Peace Candle",
-			SpotlightPage.linkedPage(
-				ModBlocks.PEACE_CANDLE,
+			TextPage.basicTextPage(
 				"Peace Candle",
 				doubleSpacedLines(
 					"The ${major("Peace Candle")} prevents hostile mobs from spawning in a radius around it. By default, this radius a single chunk (so a 3x3 chunk area).",
 					"It can be disabled with a Redstone signal."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.PEACE_CANDLE,
+				doubleSpacedLines(
+					"Peace Candles can be found in certain Village temples. Where there would be a Brewing Stand, instead you may sometimes find a Peace Candle."
 				)
 			)
 		)
@@ -902,6 +907,14 @@ class ModPatchouliBookProvider(
 					"The ${major("Super Lubricant Platform")} acts the same way but fully negates friction, just like the other ${internalLink("blocks/super_lubricant_stone", "Super Lubricated blocks")}.",
 					"This makes it very useful for transporting items, especially when used with ${internalLink("blocks/plates", "Plates")}."
 				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM,
+				"Filtered Super Lubricant Platform",
+				doubleSpacedLines(
+					"The ${major("Filtered Super Lubricant Platform")} works the same way, but can accept an ${internalLink("items/item_filter", "Item Filter")}.",
+					"Any items matching the Filter will fall through the Platform."
+				)
 			)
 		)
 
@@ -913,8 +926,8 @@ class ModPatchouliBookProvider(
 			.book(book)
 			.setDisplay(
 				name = "Plates",
-				description = "All of the mods' plates!",
-				icon = ModBlocks.REDSTONE_PLATE
+				description = "Plates generally serve some function in moving entities, especially item entities.",
+				icon = ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE
 			)
 			.parent("irregular_implements:blocks")
 			.save(consumer, "blocks/plates")

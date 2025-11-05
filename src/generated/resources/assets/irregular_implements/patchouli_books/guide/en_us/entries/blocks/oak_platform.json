@@ -16,6 +16,13 @@
       "link_recipe": true,
       "text": "The $(d)Super Lubricant Platform$() acts the same way but fully negates friction, just like the other $(l:blocks/super_lubricant_stone)Super Lubricated blocks$(/l).$(br2)This makes it very useful for transporting items, especially when used with $(l:blocks/plates)Plates$(/l).",
       "title": "Super Lubricant Platform"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "irregular_implements:filtered_super_lubricant_platform",
+      "link_recipe": true,
+      "text": "The $(d)Filtered Super Lubricant Platform$() works the same way, but can accept an $(l:items/item_filter)Item Filter$(/l).$(br2)Any items matching the Filter will fall through the Platform.",
+      "title": "Filtered Super Lubricant Platform"
     }
   ]
 }
