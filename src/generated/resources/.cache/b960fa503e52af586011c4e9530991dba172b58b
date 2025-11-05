@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-05T15:26:09.9359154	Patchouli Book: guide
+// 1.21.1	2025-11-05T15:31:43.1663788	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -77,7 +77,7 @@ aad5c06e2627cc12887ecd30b00b21bf68a534b3 assets/irregular_implements/patchouli_b
 8416e340d6fa955cf9b3fc1e743291e48c6b81bb assets/irregular_implements/patchouli_books/guide/en_us/entries/items/summoning_pendulum.json
 7d482892528f106f6c7fb576d55a12ad28f1ccca assets/irregular_implements/patchouli_books/guide/en_us/entries/items/super_lubricant_tincture.json
 7d39ee699c588a47b33b88d52e9123f93c248018 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/void_stone.json
-39d9d94f020431d75d90d589a5bdcae200dc083f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/water_walking_boots.json
+69fa5e67859057246fc32f392a6435e675ad936b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/water_walking_boots.json
 1d44e90d85a7e26fa6ea8fe0de13147b662316f4 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/weather_egg.json
 010aa89fd0d58362b7c705fa08db3240891b1951 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/white_stone.json
 8b69d58f54a38d23f4b740471445d18d20ad529e data/irregular_implements/patchouli_books/guide/book.json

@@ -406,14 +406,17 @@ class ModPatchouliBookProvider(
 		add(
 			ModItems.WATER_WALKING_BOOTS,
 			"Water Walking Boots",
-			SpotlightPage.linkedPage(
-				ModItems.WATER_WALKING_BOOTS,
+			TextPage.basicTextPage(
 				"Water Walking Boots",
 				doubleSpacedLines(
 					"The ${major("Water Walking Boots")} allow you to ${minor("walk on water")} when worn.",
 					"They do not work while sneaking, or when you're already under water.",
 					"Do note that being able to $(o)stand$() on water means you're also able to ${bad("land")} on it as well!"
 				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.WATER_WALKING_BOOTS,
+				"Water Walking Boots can be found in ${minor("Water Chests")}, which spawn in Ocean Monuments."
 			),
 			SpotlightPage.linkedPage(
 				ModItems.OBSIDIAN_WATER_WALKING_BOOTS,
