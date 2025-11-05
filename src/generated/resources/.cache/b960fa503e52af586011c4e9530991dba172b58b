@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-04T20:15:06.2788706	Patchouli Book: guide
+// 1.21.1	2025-11-04T20:19:54.3077777	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -9,6 +9,7 @@ fe73b74fe24cbb223551f4e7b55880abc4c5cb3a assets/irregular_implements/patchouli_b
 28fc163b7c4618ed986148eb09322969dc0946b9 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/bouncy_plate.json
 f358f3ff7f0776ee09a6d42bb46b308af9be55f5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rain_shield.json
 e9f1169eb72df2383cb6a3659fa7f0063724b5c8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/slime_cube.json
+7b88cd5fd699f89f2027869b9159b03b0ab80a75 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/super_lubricant_stone.json
 73ab50cf6696f9682546f8e5b4cae5105c489d01 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/biome_painter.json
 545d390034edf699e73377ae4c8732d614893f15 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/blaze_and_steel.json
 971af05093fd9a0f939bd8620294cc417c81db10 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/block_mover.json

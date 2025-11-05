@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModCreativeModeTabs
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -940,6 +942,19 @@ class ModPatchouliBookProvider(
 				doubleSpacedLines(
 					"The ${major("Filtered Super Lubricant Platform")} works the same way, but can accept an ${internalLink("items/item_filter", "Item Filter")}.",
 					"Any items matching the Filter will fall through the Platform."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SUPER_LUBRICANT_STONE,
+			"Super Lubricated Blocks",
+			SpotlightPage.linkedPage(
+				ModItemTagsProvider.SUPER_LUBRICATED_BLOCKS,
+				"Super Lubricated Blocks",
+				doubleSpacedLines(
+					"${major("Super Lubricated Blocks")} fully negate friction, allowing entities to move across them without slowing down.",
+					"This is very useful for transporting items, especially when used with ${internalLink("blocks/plates", "Plates")}."
 				)
 			)
 		)
