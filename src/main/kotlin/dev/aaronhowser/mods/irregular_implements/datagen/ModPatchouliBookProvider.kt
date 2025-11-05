@@ -1234,6 +1234,35 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.CUSTOM_CRAFTING_TABLE,
+			"Custom Crafting Table",
+			SpotlightPage.linkedPage(
+				ModBlocks.CUSTOM_CRAFTING_TABLE,
+				"Custom Crafting Table",
+				doubleSpacedLines(
+					"The ${major("Custom Crafting Table")} is functionally identical to a normal Crafting Table, but looks like the block it was crafted with.",
+					"A ring of Oak Logs, for example, around a Crafting Table in the recipe will make it look like an Oak Log block."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.DIAPHANOUS_BLOCK,
+			"Diaphanous Block",
+			TextPage.basicTextPage(
+				"Diaphanous Block",
+				doubleSpacedLines(
+					"The ${major("Diaphanous Block")} looks like another block from a distance, but vanishes as you approach.",
+					"To set the appearance, craft it with the desired block."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.DIAPHANOUS_BLOCK,
+				"Crafting it with itself will invert it, so it's visible from up close but vanishes at a distance."
+			)
+		)
+
 		plates(consumer, book)
 	}
 
