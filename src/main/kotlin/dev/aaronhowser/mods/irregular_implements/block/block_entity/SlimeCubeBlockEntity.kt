@@ -49,11 +49,11 @@ class SlimeCubeBlockEntity(
 		fun chunkHasCube(level: Level, pos: BlockPos, powered: Boolean): Boolean {
 			if (level !is SlimeCubeCarrier) return false
 
-			val chunkPos = ChunkPos(pos)
+			val chunkPosLong = ChunkPos.asLong(pos)
 
 			val cubesInThatChunk = level.getSlimeCubePositions()
 				.map(BlockPos::of)
-				.filter { ChunkPos(it) == chunkPos }
+				.filter { ChunkPos.asLong(it) ==  chunkPosLong}
 
 			if (cubesInThatChunk.isEmpty()) return false
 
