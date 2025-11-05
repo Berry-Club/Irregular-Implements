@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Imbuing Station$() is used to craft $(l:items/imbue_fire)Imbues$(/l).",
+      "text": "The $(d)Imbuing Station$() is used to craft $(l:items/imbue_fire)Imbues$(/l).$(br2)Ingredients that go in the outer slots can go in any outer slot, but the center ingredient must go in the center slot.",
       "title": "Imbuing Station"
     },
     {

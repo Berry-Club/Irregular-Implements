@@ -979,6 +979,7 @@ class ModPatchouliBookProvider(
 				"Imbuing Station",
 				doubleSpacedLines(
 					"The ${major("Imbuing Station")} is used to craft ${internalLink("items/imbue_fire", "Imbues")}.",
+					"Ingredients that go in the outer slots can go in any outer slot, but the center ingredient must go in the center slot."
 				)
 			),
 			SpotlightPage.linkedPage(
@@ -1558,6 +1559,49 @@ class ModPatchouliBookProvider(
 				ModBlocks.SAKANADE_SPORES,
 				doubleSpacedLines(
 					"Sakanade Spores can be found on the bottom of Giant Brown Mushrooms."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.BLOCK_BREAKER,
+			"Block Breaker",
+			SpotlightPage.linkedPage(
+				ModBlocks.BLOCK_BREAKER,
+				"Block Breaker",
+				doubleSpacedLines(
+					"The ${major("Block Breaker")} will break the block in front of it. It has the equivalent of an Iron Pickaxe.",
+					"Blocks broken will be placed into an inventory behind it, or dropped on the ground.",
+					"It can be disabled with a Redstone signal."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.DIAMOND_BREAKER,
+				"Diamond Breaker",
+				doubleSpacedLines(
+					"The ${major("Diamond Breaker")} can be used on the Block Breaker to upgrade it, making it equivalent to a Diamond Pickaxe.",
+					"It can also be enchanted, and the enchantments will be applied when breaking blocks!"
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ENERGY_DISTRIBUTOR,
+			"Energy Distributors",
+			SpotlightPage.linkedPage(
+				ModBlocks.ENERGY_DISTRIBUTOR,
+				"Energy Distributor",
+				doubleSpacedLines(
+					"The ${major("Energy Distributor")} allows you to evenly distribute FE among all adjacent energy storage blocks in a line.",
+					"Starting from the block in front of it, it will check each block in that direction for energy storage, and add them to its cache.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ENDER_ENERGY_DISTRIBUTOR,
+				"Ender Energy Distributor",
+				doubleSpacedLines(
+					"The Energy Distributor's energy storage is actually all of those blocks combined. Inserting into the Distributor will insert into the blocks, and the same for extracting.",
+					"The ${major("Ender Energy Distributor")} works similarly, but uses 8 ${internalLink("items/location_filter", "Location Filters")} to specify the machines in the cache."
 				)
 			)
 		)
