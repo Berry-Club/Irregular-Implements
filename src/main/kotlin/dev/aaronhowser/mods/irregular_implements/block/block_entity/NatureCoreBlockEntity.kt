@@ -30,6 +30,7 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.AABB
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.cos
+import kotlin.math.sin
 
 class NatureCoreBlockEntity(
 	pos: BlockPos,
@@ -185,7 +186,7 @@ class NatureCoreBlockEntity(
 		val rads = level.random.nextDouble() * Mth.TWO_PI
 
 		val x = Mth.floor(blockPos.x + radius * cos(rads))
-		val z = Mth.floor(blockPos.z + radius * cos(rads))
+		val z = Mth.floor(blockPos.z + radius * sin(rads))
 		val y = blockPos.y + 10
 
 		val pos = BlockPos(x, y, z).mutable()

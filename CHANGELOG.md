@@ -26,6 +26,9 @@
 - Upon emptying the Summoning Pendulum, it removes the data component entirely instead of just setting it to an empty entity nbt list
 - The Slime Cube's chunk radius is now configurable (it was before, but it was using the Rain Shield's radius)
 - Inverted Diaphaneous Blocks pulsate at an inverted amplitude as regular ones
+- Minor improvements to the Nature Core
+  - It no longer spawns mobs in the air
+  - It now plants saplings in a circle around it, rather than just on the -X -Z corner
 
 ### Fixed
 
