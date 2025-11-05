@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-04T20:08:09.1799344	Patchouli Book: guide
+// 1.21.1	2025-11-04T20:15:06.2788706	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -23,7 +23,7 @@ c923a9275094eed34b3469372ebaab14120ddc95 assets/irregular_implements/patchouli_b
 a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
 3deb8b2a9a3184f7a46cb2a31b57295c485d4c4f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
 4d78411fad6fe8f0948c9129dbf0786d5ef94c68 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_egg.json
-03c11060f3befc2acd6c7ae5eee10273bffe6bb7 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/grass_seeds.json
+d35b4e7de27f9bc0d770042c627fec1413baf172 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/grass_seeds.json
 41f697269d77c191a8d299f59348a31d89980b3b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/imbue_fire.json
 0e9fc527ef8e0e8c09432f365d6d6fe132da0a81 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/item_filter.json
 ecafe792afa48469caf62354a9db47fb0a118e73 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_charm.json
@@ -40,7 +40,7 @@ a886a5fa2c1037070dc3dcffa20b7a070fc534a7 assets/irregular_implements/patchouli_b
 9975c5ff666995e02857ece75222273d779d2176 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_anchor.json
 154bea8cc7d73b268752468bd2e24258dad6d801 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_illuminator.json
 aad5c06e2627cc12887ecd30b00b21bf68a534b3 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_key.json
-f2553bb9725513b85719035a98573fb809668423 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_sword.json
+d6bc545cba019ffe772c59ffa5ded5023cab5982 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_sword.json
 8ca490de50a130c42df2828a8392e10883c47823 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/stable_ender_pearl.json
 7d482892528f106f6c7fb576d55a12ad28f1ccca assets/irregular_implements/patchouli_books/guide/en_us/entries/items/super_lubricant_tincture.json
 7d39ee699c588a47b33b88d52e9123f93c248018 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/void_stone.json

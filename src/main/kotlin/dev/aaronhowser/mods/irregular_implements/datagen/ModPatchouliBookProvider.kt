@@ -17,6 +17,7 @@ import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
+import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
 import net.neoforged.neoforge.common.Tags
@@ -596,12 +597,18 @@ class ModPatchouliBookProvider(
 					"It increases your entity interaction range by 3 blocks, and can be used to kill Spirits."
 				)
 			),
-			SpotlightPage.linkedPage(
-				ModItems.SPECTRE_PICKAXE,
+			spotlight(
+				listOf(
+					ModItems.SPECTRE_PICKAXE,
+					ModItems.SPECTRE_AXE,
+					ModItems.SPECTRE_SHOVEL
+				),
+				"",
 				doubleSpacedLines(
 					"The ${major("Spectre Pickaxe, Axe, and Shovel")} are each comparable to their Diamond counterpart, with higher durability and enchantability.",
 					"Each of them increases your block interaction range by 3 blocks."
-				)
+				),
+				true
 			)
 		)
 
@@ -760,32 +767,33 @@ class ModPatchouliBookProvider(
 					"Specifically, it works on any block with the tag ${minor("irregular_implements:grass_seeds_compatible")}."
 				)
 			),
-			SpotlightPage.builder()
-				.addItemLike(ModItems.GRASS_SEEDS_RED)
-				.addItemLike(ModItems.GRASS_SEEDS_WHITE)
-				.addItemLike(ModItems.GRASS_SEEDS_ORANGE)
-				.addItemLike(ModItems.GRASS_SEEDS_MAGENTA)
-				.addItemLike(ModItems.GRASS_SEEDS_LIGHT_BLUE)
-				.addItemLike(ModItems.GRASS_SEEDS_YELLOW)
-				.addItemLike(ModItems.GRASS_SEEDS_LIME)
-				.addItemLike(ModItems.GRASS_SEEDS_PINK)
-				.addItemLike(ModItems.GRASS_SEEDS_GRAY)
-				.addItemLike(ModItems.GRASS_SEEDS_LIGHT_GRAY)
-				.addItemLike(ModItems.GRASS_SEEDS_CYAN)
-				.addItemLike(ModItems.GRASS_SEEDS_PURPLE)
-				.addItemLike(ModItems.GRASS_SEEDS_BLUE)
-				.addItemLike(ModItems.GRASS_SEEDS_BROWN)
-				.addItemLike(ModItems.GRASS_SEEDS_GREEN)
-				.addItemLike(ModItems.GRASS_SEEDS_RED)
-				.addItemLike(ModItems.GRASS_SEEDS_BLACK)
-				.title("Colored Grass Seeds")
-				.text(
-					doubleSpacedLines(
-						"There are also ${major("Colored Grass Seeds")}, which plant Colored Grass of their respective color.",
-						"They act exactly the same as regular Grass Blocks, but are colored."
-					)
-				)
-				.build()
+			spotlight(
+				listOf(
+					ModItems.GRASS_SEEDS_RED,
+					ModItems.GRASS_SEEDS_WHITE,
+					ModItems.GRASS_SEEDS_ORANGE,
+					ModItems.GRASS_SEEDS_MAGENTA,
+					ModItems.GRASS_SEEDS_LIGHT_BLUE,
+					ModItems.GRASS_SEEDS_YELLOW,
+					ModItems.GRASS_SEEDS_LIME,
+					ModItems.GRASS_SEEDS_PINK,
+					ModItems.GRASS_SEEDS_GRAY,
+					ModItems.GRASS_SEEDS_LIGHT_GRAY,
+					ModItems.GRASS_SEEDS_CYAN,
+					ModItems.GRASS_SEEDS_PURPLE,
+					ModItems.GRASS_SEEDS_BLUE,
+					ModItems.GRASS_SEEDS_BROWN,
+					ModItems.GRASS_SEEDS_GREEN,
+					ModItems.GRASS_SEEDS_RED,
+					ModItems.GRASS_SEEDS_BLACK
+				),
+				"Colored Grass Seeds",
+				doubleSpacedLines(
+					"There are also ${major("Colored Grass Seeds")}, which plant Colored Grass of their respective color.",
+					"They act exactly the same as regular Grass Blocks, but are colored."
+				),
+				true
+			)
 		)
 
 	}
@@ -896,28 +904,28 @@ class ModPatchouliBookProvider(
 		add(
 			ModBlocks.OAK_PLATFORM,
 			"Platforms",
-			SpotlightPage.builder()
-				.linkRecipe(true)
-				.addItemLike(ModBlocks.OAK_PLATFORM)
-				.addItemLike(ModBlocks.OAK_PLATFORM)
-				.addItemLike(ModBlocks.SPRUCE_PLATFORM)
-				.addItemLike(ModBlocks.BIRCH_PLATFORM)
-				.addItemLike(ModBlocks.JUNGLE_PLATFORM)
-				.addItemLike(ModBlocks.ACACIA_PLATFORM)
-				.addItemLike(ModBlocks.DARK_OAK_PLATFORM)
-				.addItemLike(ModBlocks.CRIMSON_PLATFORM)
-				.addItemLike(ModBlocks.WARPED_PLATFORM)
-				.addItemLike(ModBlocks.MANGROVE_PLATFORM)
-				.addItemLike(ModBlocks.BAMBOO_PLATFORM)
-				.addItemLike(ModBlocks.CHERRY_PLATFORM)
-				.title("Platforms")
-				.text(
-					doubleSpacedLines(
-						"${major("Platforms")} are ${minor("solid on top but not from the bottom or sides")}.",
-						"Additionally, sneaking will allow you to fall through them."
-					)
-				)
-				.build(),
+			spotlight(
+				listOf(
+					ModBlocks.OAK_PLATFORM,
+					ModBlocks.OAK_PLATFORM,
+					ModBlocks.SPRUCE_PLATFORM,
+					ModBlocks.BIRCH_PLATFORM,
+					ModBlocks.JUNGLE_PLATFORM,
+					ModBlocks.ACACIA_PLATFORM,
+					ModBlocks.DARK_OAK_PLATFORM,
+					ModBlocks.CRIMSON_PLATFORM,
+					ModBlocks.WARPED_PLATFORM,
+					ModBlocks.MANGROVE_PLATFORM,
+					ModBlocks.BAMBOO_PLATFORM,
+					ModBlocks.CHERRY_PLATFORM
+				),
+				"Platforms",
+				doubleSpacedLines(
+					"${major("Platforms")} are ${minor("solid on top but not from the bottom or sides")}.",
+					"Additionally, sneaking will allow you to fall through them."
+				),
+				true
+			),
 			SpotlightPage.linkedPage(
 				ModBlocks.SUPER_LUBRICANT_PLATFORM,
 				"Super Lubricant Platform",
@@ -996,6 +1004,27 @@ class ModPatchouliBookProvider(
 
 	private fun bad(text: String): String {
 		return colored(TextColor.RED, text)
+	}
+
+	private fun spotlight(
+		list: List<ItemLike>,
+		title: String,
+		text: String,
+		linkRecipe: Boolean
+	): SpotlightPage {
+		val builder = SpotlightPage.builder()
+			.text(text)
+			.linkRecipe(linkRecipe)
+
+		if (title.isNotEmpty()) {
+			builder.title(title)
+		}
+
+		for (item in list) {
+			builder.addItemLike(item)
+		}
+
+		return builder.build()
 	}
 
 }
