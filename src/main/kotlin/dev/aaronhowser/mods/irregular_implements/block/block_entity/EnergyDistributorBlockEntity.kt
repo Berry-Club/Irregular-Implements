@@ -87,7 +87,7 @@ class EnergyDistributorBlockEntity(
 		val direction = blockState.getValue(EnergyDistributorBlock.FACING)
 		val list = mutableListOf<BlockEntity>()
 
-		var checkedPos = this.worldPosition.relative(direction)
+		val checkedPos = this.worldPosition.relative(direction).mutable()
 
 		while (level.isLoaded(checkedPos) && list.size < 100) {
 			val blockEntityThere = level.getBlockEntity(checkedPos) ?: break
@@ -98,7 +98,7 @@ class EnergyDistributorBlockEntity(
 
 			if (hasEnergyStorage) {
 				list.add(blockEntityThere)
-				checkedPos = checkedPos.relative(direction)
+				checkedPos.move(direction)
 			} else {
 				break
 			}
