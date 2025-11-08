@@ -25,10 +25,10 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	LongOpenHashSet irregular_implements$rainShieldChunks = new LongOpenHashSet();
 
 	@Unique
-	LongOpenHashSet irregularImplements$slimeCubePositions = new LongOpenHashSet();
+	LongOpenHashSet irregularImplements$slimeCubeBlockPositions = new LongOpenHashSet();
 
 	@Unique
-	LongOpenHashSet irregular_implements$enderAnchorPositions = new LongOpenHashSet();
+	LongOpenHashSet irregular_implements$enderAnchorBlockPositions = new LongOpenHashSet();
 
 	@Inject(
 			method = "tickBlockEntities",
@@ -38,8 +38,8 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 
 		irregular_implements$getRainShieldChunks().clear();
 		irregular_implements$getPeaceCandleChunks().clear();
-		irregular_implements$getSlimeCubePositions().clear();
-		irregular_implements$getEnderAnchorPositions().clear();
+		irregular_implements$getSlimeCubeBlockPositions().clear();
+		irregular_implements$getEnderAnchorBlockPositions().clear();
 
 		// Doing it here because it's the only way to guarantee that it runs before the set is added to, rather than before the set is checked.
 		// I was doing it on LevelTickEvent before, but neither Pre not Post worked. The order that it was going was:
@@ -64,13 +64,13 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	}
 
 	@Override
-	public LongOpenHashSet irregular_implements$getSlimeCubePositions() {
-		return this.irregularImplements$slimeCubePositions;
+	public LongOpenHashSet irregular_implements$getSlimeCubeBlockPositions() {
+		return this.irregularImplements$slimeCubeBlockPositions;
 	}
 
 	@Unique
-	public LongOpenHashSet irregular_implements$getEnderAnchorPositions() {
-		return this.irregular_implements$enderAnchorPositions;
+	public LongOpenHashSet irregular_implements$getEnderAnchorBlockPositions() {
+		return this.irregular_implements$enderAnchorBlockPositions;
 	}
 
 	@Inject(

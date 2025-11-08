@@ -72,7 +72,7 @@ class EnderAnchorBlockEntity(
 	}
 
 	companion object {
-		fun EnderAnchorCarrier.getEnderAnchorPositionLongs(): LongOpenHashSet = this.`irregular_implements$getEnderAnchorPositions`()
+		fun EnderAnchorCarrier.getEnderAnchorPositionLongs(): LongOpenHashSet = this.`irregular_implements$getEnderAnchorBlockPositions`()
 		fun EnderAnchorCarrier.getEnderAnchorPositions(): List<BlockPos> = this.getEnderAnchorPositionLongs().map(BlockPos::of)
 
 		fun tick(

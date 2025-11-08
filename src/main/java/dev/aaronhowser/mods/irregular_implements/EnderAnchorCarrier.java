@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 
 public interface EnderAnchorCarrier {
 
-	default LongOpenHashSet irregular_implements$getEnderAnchorPositions() {
+	default LongOpenHashSet irregular_implements$getEnderAnchorBlockPositions() {
 		throw new IllegalStateException();
 	}
 
