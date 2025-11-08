@@ -1,5 +1,9 @@
 # 1.6.1
 
+### Added
+
+- Russian translation, thanks to BazZziliuS on Github
+
 ### Changed
 
 - The Slime Cube now has a default radius of 0, so it only effects the chunk it's in
