@@ -242,7 +242,7 @@ object CommonEvents {
 
 		event.registerBlock(
 			Capabilities.FluidHandler.BLOCK,
-			PitcherPlantBlock::getFluidCapability,
+			{ _, _, _, _, _ -> PitcherPlantBlock.INFINITE_WATER_HANDLER },
 			ModBlocks.PITCHER_PLANT.get()
 		)
 

@@ -112,10 +112,6 @@ class PitcherPlantBlock : FlowerBlock(
 			}
 		}
 
-		fun getFluidCapability(level: Level, pos: BlockPos, state: BlockState, entity: BlockEntity?, direction: Direction): IFluidHandler {
-			return INFINITE_WATER_HANDLER
-		}
-
 		val INFINITE_WATER_HANDLER = object : IFluidHandler {
 			override fun getTanks(): Int = 1
 			override fun getFluidInTank(tank: Int): FluidStack = FluidStack(Fluids.WATER, Int.MAX_VALUE)
