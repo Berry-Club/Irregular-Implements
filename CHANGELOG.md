@@ -1,3 +1,16 @@
+# 1.6.1
+
+### Changed
+
+- The Slime Cube now has a default radius of 0, so it only effects the chunk it's in
+
+### Fixed
+
+- The Slime Cube doesn't crash the server when placed now (#43)
+  - When making it, I reused a lot of code from the Rain Shield. Unfortunately, it was also checking for the Rain Shield's block property, instead of the Slime Cube's. That's fixed now.
+- The Slime Cube actually works now
+  - Aside from crashing, it also didn't actually work to begin with. I was packing a ChunkPos into a long and then treating it as a BlockPos, which does not work
+
 # 1.6.0
 
 ### Added

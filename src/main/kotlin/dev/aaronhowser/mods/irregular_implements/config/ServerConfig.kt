@@ -118,7 +118,7 @@ class ServerConfig(
 
 		slimeCubeChunkRadius = builder
 			.comment("What chunk radius should the Slime Cube have? (0 means only the chunk the Slime Cube is in)")
-			.defineInRange("slimeCubeChunkRadius", 1, 0, Int.MAX_VALUE)
+			.defineInRange("slimeCubeChunkRadius", 0, 0, Int.MAX_VALUE)
 
 		peaceCandleChunkRadius = builder
 			.comment("What chunk radius should the Peace Candle have? (0 means only the chunk the Peace Candle is in)")
