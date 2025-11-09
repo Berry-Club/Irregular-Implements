@@ -120,9 +120,8 @@ class PitcherPlantBlock : FlowerBlock(
 			override fun fill(resource: FluidStack, action: IFluidHandler.FluidAction): Int = 0
 
 			override fun drain(resource: FluidStack, action: IFluidHandler.FluidAction): FluidStack {
-				val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
-
 				return if (resource.`is`(Fluids.WATER)) {
+					val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
 					FluidStack(Fluids.WATER, minOf(resource.amount, configMax))
 				} else {
 					FluidStack.EMPTY
