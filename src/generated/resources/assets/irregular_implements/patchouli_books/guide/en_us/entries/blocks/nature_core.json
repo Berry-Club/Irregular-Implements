@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Nature Core$() can be found randomly around the world, with a $(3)Nature Chest$() nearby full of goodies.$(br2)The Nature Core itself also does a handful of things every so often.",
+      "text": "The $(d)Nature Core$() structure can be found randomly around the world, with a $(3)Nature Chest$() nearby full of goodies.$(br2)The Nature Core itself also does a handful of things every so often.",
       "title": "Nature Core"
     },
     {

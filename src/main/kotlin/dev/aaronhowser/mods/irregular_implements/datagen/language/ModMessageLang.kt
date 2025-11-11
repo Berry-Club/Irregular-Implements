@@ -56,6 +56,7 @@ object ModMessageLang {
 	const val NOTIFICATION_INTERFACE_DESCRIPTION = "message.irregular_implements.notification_interface.description"
 	const val GREEN_STRENGTH = "message.irregular_implements.advanced_redstone_torch.green_strength"
 	const val RED_STRENGTH = "message.irregular_implements.advanced_redstone_torch.red_strength"
+	const val ILLUMINATOR_SODIUM = "message.irregular_implements.spectre_illuminator.sodium_tooltip"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -111,6 +112,7 @@ object ModMessageLang {
 			add(NOTIFICATION_INTERFACE_DESCRIPTION, "Description")
 			add(GREEN_STRENGTH, "Green Strength")
 			add(RED_STRENGTH, "Red Strength")
+			add(ILLUMINATOR_SODIUM, "Non-functional when Sodium is installed")
 		}
 	}
 

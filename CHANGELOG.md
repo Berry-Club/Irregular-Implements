@@ -1,3 +1,10 @@
+# 1.6.2
+
+### Changed
+
+- Added a tooltip to the Spectre Illuminator if Sodium or Embeddium are installed, saying that it doesn't work
+  - I'll try to figure out how to make it work with those but my hopes aren't super high
+
 # 1.6.1
 
 ### Added

@@ -752,6 +752,7 @@
   "message.irregular_implements.redstone_tool.unloaded": "Cannot link as base %s is in an unloaded chunk.",
   "message.irregular_implements.redstone_tool.wrong_dimension": "Cannot link as base %s is in a different dimension.",
   "message.irregular_implements.spectre_illuminator.already_present": "This chunk already has a Spectre Illuminator!",
+  "message.irregular_implements.spectre_illuminator.sodium_tooltip": "Non-functional when Sodium is installed",
   "message.irregular_implements.x_radius": "X Radius: %d",
   "message.irregular_implements.y_radius": "Y Radius: %d",
   "message.irregular_implements.z_radius": "Z Radius: %d",
