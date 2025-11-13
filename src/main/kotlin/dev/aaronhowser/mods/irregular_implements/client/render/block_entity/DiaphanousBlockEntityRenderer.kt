@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

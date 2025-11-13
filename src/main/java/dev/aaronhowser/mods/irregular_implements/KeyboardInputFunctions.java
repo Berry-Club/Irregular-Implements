@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements;
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil;
+import dev.aaronhowser.mods.aaron.ClientUtil;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.world.entity.player.Player;
 

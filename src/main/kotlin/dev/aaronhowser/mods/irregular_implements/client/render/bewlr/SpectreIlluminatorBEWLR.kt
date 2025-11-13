@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer

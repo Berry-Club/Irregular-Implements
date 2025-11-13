@@ -6,7 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPo
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplySpectreAnchorRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiRecipe
 import net.minecraft.core.registries.BuiltInRegistries

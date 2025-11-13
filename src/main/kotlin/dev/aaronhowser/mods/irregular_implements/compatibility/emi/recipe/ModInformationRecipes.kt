@@ -8,7 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModInfoLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.recipe.EmiInfoRecipe
 import dev.emi.emi.api.stack.EmiIngredient

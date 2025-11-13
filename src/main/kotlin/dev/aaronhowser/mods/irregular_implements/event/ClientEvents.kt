@@ -16,7 +16,7 @@ import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticle
 import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.*
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.BiomeColors

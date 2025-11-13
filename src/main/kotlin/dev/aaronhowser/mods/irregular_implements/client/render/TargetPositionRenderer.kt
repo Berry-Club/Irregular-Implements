@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.event.ClientTickEvent
 

@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
+import dev.aaronhowser.mods.aaron.ClientUtil
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder

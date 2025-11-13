@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.util.Mth
