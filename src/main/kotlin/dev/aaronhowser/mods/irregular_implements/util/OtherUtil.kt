@@ -35,24 +35,9 @@ import java.util.*
 
 object OtherUtil {
 
-	@Suppress("UsePropertyAccessSyntax")
-	fun DyeColor.getDyeName(): String = this.getName()
-
-	@Suppress("UsePropertyAccessSyntax")
-	fun Direction.getDirectionName(): String = this.getName()
-
 	@JvmStatic
 	fun modResource(path: String): ResourceLocation =
 		ResourceLocation.fromNamespaceAndPath(IrregularImplements.MOD_ID, path)
-
-	val Boolean?.isTrue: Boolean
-		inline get() = this == true
-
-	val Entity.isClientSide: Boolean
-		get() = this.level().isClientSide
-
-	val Level.isServerSide: Boolean
-		get() = !this.isClientSide
 
 	fun getPotionStack(potion: Holder<Potion>): ItemStack {
 		return PotionContents.createItemStack(Items.POTION, potion)
@@ -145,10 +130,6 @@ object OtherUtil {
 		return level.addFreshEntity(itemEntity)
 	}
 
-	fun CompoundTag.getUuidOrNull(key: String): UUID? {
-		return if (this.hasUUID(key)) this.getUUID(key) else null
-	}
-
 	val VEC3_STREAM_CODEC: StreamCodec<ByteBuf, Vec3> = object : StreamCodec<ByteBuf, Vec3> {
 		override fun decode(buffer: ByteBuf): Vec3 = Vec3(buffer.readDouble(), buffer.readDouble(), buffer.readDouble())
 		override fun encode(buffer: ByteBuf, value: Vec3) {
@@ -170,12 +151,6 @@ object OtherUtil {
 
 	val STACK_LIST_STREAM_CODEC: StreamCodec<ByteBuf, NonNullList<ItemStack>> =
 		ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC))
-
-	fun Player.status(message: Component) = this.displayClientMessage(message, true)
-
-	fun RandomSource.nextRange(min: Float, max: Float): Float = Mth.lerp(nextFloat(), min, max)
-	fun RandomSource.nextRange(min: Double, max: Double): Double = Mth.lerp(nextDouble(), min, max)
-	fun RandomSource.nextRange(min: Int, max: Int): Int = nextInt(max - min) + min
 
 	fun lerpColor(progress: Float, start: Int, end: Int): Int {
 		val startR = (start shr 16) and 0xFF

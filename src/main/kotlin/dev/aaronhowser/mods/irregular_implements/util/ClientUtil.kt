@@ -23,8 +23,4 @@ object ClientUtil {
 			return Minecraft.getInstance().player
 		}
 
-	fun levelFromBlockAndTintGetter(blockAndTintGetter: BlockAndTintGetter): Level? {
-		return (blockAndTintGetter as? RenderChunkRegion)?.level
-	}
-
 }
