@@ -1,5 +1,10 @@
 # 1.6.2
 
+### Added
+
+- The mod now requires [Aaron](https://www.curseforge.com/minecraft/mc-mods/aaron), my new lib
+  - "Aaron" is so much funnier of a name than "Aaron Lib" or "Berry Lib" or whatever
+
 ### Changed
 
 - Added a tooltip to the Spectre Illuminator if Sodium or Embeddium are installed, saying that it doesn't work
