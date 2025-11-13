@@ -36,15 +36,15 @@ class IronDropperScreen(
 		this.redstoneModeButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_PULSE.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.RedstonePulse
+				sprite = ScreenTextures.Sprites.IronDropper.RedstonePulse
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuousPowered
+				sprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuousPowered
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_CONTINUOUS.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuous
+				sprite = ScreenTextures.Sprites.IronDropper.RedstoneContinuous
 			)
 			.size(
 				size = buttonSize
@@ -67,15 +67,15 @@ class IronDropperScreen(
 		this.delayButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_NO_DELAY.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.PickupZero
+				sprite = ScreenTextures.Sprites.IronDropper.PickupZero
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_FIVE_DELAY.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.PickupFive
+				sprite = ScreenTextures.Sprites.IronDropper.PickupFive
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_TWENTY_DELAY.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.PickupTwenty
+				sprite = ScreenTextures.Sprites.IronDropper.PickupTwenty
 			)
 			.size(
 				size = buttonSize
@@ -98,11 +98,11 @@ class IronDropperScreen(
 		this.shootModeButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.DirectionRandom
+				sprite = ScreenTextures.Sprites.IronDropper.DirectionRandom
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.DirectionForward
+				sprite = ScreenTextures.Sprites.IronDropper.DirectionForward
 			)
 			.size(
 				size = buttonSize
@@ -129,15 +129,15 @@ class IronDropperScreen(
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.EffectParticle
+				sprite = ScreenTextures.Sprites.IronDropper.EffectParticle
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_ONLY_SOUND.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.EffectSound
+				sprite = ScreenTextures.Sprites.IronDropper.EffectSound
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
-				sprite = ScreenTextures.Sprite.IronDropper.EffectBoth
+				sprite = ScreenTextures.Sprites.IronDropper.EffectBoth
 			)
 			.size(
 				size = buttonSize

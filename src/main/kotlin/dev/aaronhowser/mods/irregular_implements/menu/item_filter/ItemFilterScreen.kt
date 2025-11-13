@@ -59,11 +59,11 @@ class ItemFilterScreen(
 			.size(16)
 			.addStage(
 				message = ModTooltipLang.WHITELIST.toComponent(),
-				sprite = ScreenTextures.Sprite.ItemFilter.Whitelist
+				sprite = ScreenTextures.Sprites.ItemFilter.Whitelist
 			)
 			.addStage(
 				message = ModTooltipLang.BLACKLIST.toComponent(),
-				sprite = ScreenTextures.Sprite.ItemFilter.Blacklist
+				sprite = ScreenTextures.Sprites.ItemFilter.Blacklist
 			)
 			.currentStageGetter(
 				currentStageGetter = { if (this.menu.getIsBlacklist()) 1 else 0 }
