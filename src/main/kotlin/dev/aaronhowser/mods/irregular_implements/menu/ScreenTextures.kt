@@ -54,41 +54,41 @@ object ScreenTextures {
 			ScreenSprite(OtherUtil.modResource(path), width, height)
 
 		object BlockDestabilizer {
-			val Lazy = sprite("buttons/block_destabilizer/lazy", 13, 13)
-			val NotLazy = sprite("buttons/block_destabilizer/lazy_not", 13, 13)
-			val ShowLazyShape = sprite("buttons/block_destabilizer/show_lazy_shape", 16, 16)            //TODO: Replace with an original texture
-			val ResetLazyShape = sprite("buttons/block_destabilizer/reset_lazy_shape", 15, 12)
+			val LAZY: ScreenSprite = sprite("buttons/block_destabilizer/lazy", 13, 13)
+			val NOT_LAZY: ScreenSprite = sprite("buttons/block_destabilizer/lazy_not", 13, 13)
+			val SHOW_LAZY_SHAPE: ScreenSprite = sprite("buttons/block_destabilizer/show_lazy_shape", 16, 16)            //TODO: Replace with an original texture
+			val RESET_LAZY_SHAPE: ScreenSprite = sprite("buttons/block_destabilizer/reset_lazy_shape", 15, 12)
 		}
 
 		object ChatDetector {
-			val MessageContinue = sprite("buttons/chat_detector/message_continue", 13, 12)
-			val MessageStop = sprite("buttons/chat_detector/message_stop", 13, 12)
+			val MESSAGE_CONTINUE: ScreenSprite = sprite("buttons/chat_detector/message_continue", 13, 12)
+			val MESSAGE_BREAK: ScreenSprite = sprite("buttons/chat_detector/message_stop", 13, 12)
 		}
 
 		object IronDropper {
-			val DirectionForward = sprite("buttons/iron_dropper/direction_forward", 4, 4)
-			val DirectionRandom = sprite("buttons/iron_dropper/direction_random", 8, 8)
+			val DIRECTION_FORWARD: ScreenSprite = sprite("buttons/iron_dropper/direction_forward", 4, 4)
+			val DIRECTION_RANDOM: ScreenSprite = sprite("buttons/iron_dropper/direction_random", 8, 8)
 
-			val EffectParticle = sprite("buttons/iron_dropper/effect_particle", 14, 13)
-			val EffectSound = sprite("buttons/iron_dropper/effect_sound", 5, 8)
-			val EffectBoth = sprite("buttons/iron_dropper/effect_both", 14, 13)
+			val EFFECT_PARTICLE: ScreenSprite = sprite("buttons/iron_dropper/effect_particle", 14, 13)
+			val EFFECT_SOUND: ScreenSprite = sprite("buttons/iron_dropper/effect_sound", 5, 8)
+			val EFFECT_BOTH: ScreenSprite = sprite("buttons/iron_dropper/effect_both", 14, 13)
 
-			val PickupFive = sprite("buttons/iron_dropper/pickup_five", 10, 12)
-			val PickupTwenty = sprite("buttons/iron_dropper/pickup_twenty", 13, 9)
-			val PickupZero = sprite("buttons/iron_dropper/pickup_zero", 8, 12)
+			val PICKUP_FIVE: ScreenSprite = sprite("buttons/iron_dropper/pickup_five", 10, 12)
+			val PICKUP_TWENTY: ScreenSprite = sprite("buttons/iron_dropper/pickup_twenty", 13, 9)
+			val PICKUP_ZERO: ScreenSprite = sprite("buttons/iron_dropper/pickup_zero", 8, 12)
 
-			val RedstonePulse = sprite("buttons/iron_dropper/redstone_pulse", 8, 8)
-			val RedstoneContinuous = sprite("buttons/iron_dropper/redstone_continuous", 12, 14)
-			val RedstoneContinuousPowered = sprite("buttons/iron_dropper/redstone_continuous_powered", 12, 14)
+			val REDSTONE_PULSE: ScreenSprite = sprite("buttons/iron_dropper/redstone_pulse", 8, 8)
+			val REDSTONE_CONTINUOUS: ScreenSprite = sprite("buttons/iron_dropper/redstone_continuous", 12, 14)
+			val REDSTONE_CONTINUOUS_POWERED: ScreenSprite = sprite("buttons/iron_dropper/redstone_continuous_powered", 12, 14)
 		}
 
 		object ItemFilter {
-			val Whitelist = sprite("buttons/item_filter/whitelist", 15, 12)
-			val Blacklist = sprite("buttons/item_filter/blacklist", 15, 12)
+			val WHITELIST: ScreenSprite = sprite("buttons/item_filter/whitelist", 15, 12)
+			val BLACKLIST: ScreenSprite = sprite("buttons/item_filter/blacklist", 15, 12)
 		}
 
-		val Inverted = sprite("buttons/inventory_tester/inverted", 4, 11)
-		val Uninverted = sprite("buttons/inventory_tester/uninverted", 4, 11)
+		val INVERTED: ScreenSprite = sprite("buttons/inventory_tester/inverted", 4, 11)
+		val UNINVERTED: ScreenSprite = sprite("buttons/inventory_tester/uninverted", 4, 11)
 	}
 
 	//TODO: Check that all of these are actually used

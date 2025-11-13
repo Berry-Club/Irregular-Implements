@@ -161,11 +161,11 @@ class EntityDetectorScreen(
 			)
 			.addStage(
 				message = ModTooltipLang.UNINVERTED.toComponent(),
-				sprite = ScreenTextures.Sprites.Uninverted
+				sprite = ScreenTextures.Sprites.UNINVERTED
 			)
 			.addStage(
 				message = ModTooltipLang.INVERTED.toComponent(),
-				sprite = ScreenTextures.Sprites.Inverted
+				sprite = ScreenTextures.Sprites.INVERTED
 			)
 			.currentStageGetter(
 				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }

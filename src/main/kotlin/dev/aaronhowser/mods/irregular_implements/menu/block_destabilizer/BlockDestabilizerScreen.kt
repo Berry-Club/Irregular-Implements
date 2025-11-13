@@ -27,11 +27,11 @@ class BlockDestabilizerScreen(
 		this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.LAZY.toComponent(),
-				sprite = ScreenTextures.Sprites.BlockDestabilizer.Lazy
+				sprite = ScreenTextures.Sprites.BlockDestabilizer.LAZY
 			)
 			.addStage(
 				message = ModTooltipLang.NOT_LAZY.toComponent(),
-				sprite = ScreenTextures.Sprites.BlockDestabilizer.NotLazy
+				sprite = ScreenTextures.Sprites.BlockDestabilizer.NOT_LAZY
 			)
 			.size(
 				width = 20,
@@ -57,7 +57,7 @@ class BlockDestabilizerScreen(
 			y = this.topPos + 7,
 			width = 20,
 			height = 20,
-			menuSprite = ScreenTextures.Sprites.BlockDestabilizer.ShowLazyShape,
+			menuSprite = ScreenTextures.Sprites.BlockDestabilizer.SHOW_LAZY_SHAPE,
 			onPress = {
 				val packet = ClientClickedMenuButton(BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID)
 				packet.messageServer()
@@ -71,7 +71,7 @@ class BlockDestabilizerScreen(
 			y = this.topPos + 7,
 			width = 20,
 			height = 20,
-			menuSprite = ScreenTextures.Sprites.BlockDestabilizer.ResetLazyShape,
+			menuSprite = ScreenTextures.Sprites.BlockDestabilizer.RESET_LAZY_SHAPE,
 			onPress = {
 				val packet = ClientClickedMenuButton(BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID)
 				packet.messageServer()
