@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
-import kotlin.math.cos
 import kotlin.math.sin
 
 class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(

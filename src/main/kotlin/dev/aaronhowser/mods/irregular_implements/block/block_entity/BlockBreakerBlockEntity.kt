@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.mojang.authlib.GameProfile
-import dev.aaronhowser.mods.aaron.BetterFakePlayerFactory
 import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes

@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag

@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import org.antlr.v4.runtime.misc.MultiMap
 
-abstract class  RedstoneInterfaceBlockEntity(
+abstract class RedstoneInterfaceBlockEntity(
 	blockEntityType: BlockEntityType<*>,
 	pos: BlockPos,
 	blockState: BlockState

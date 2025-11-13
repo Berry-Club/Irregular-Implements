@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import dev.aaronhowser.mods.aaron.AaronExtensions.isServerSide
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.Direction
