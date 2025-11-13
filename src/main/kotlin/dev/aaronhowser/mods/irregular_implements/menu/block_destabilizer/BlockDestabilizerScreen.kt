@@ -5,7 +5,7 @@ import dev.aaronhowser.mods.aaron.menu.components.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -20,17 +20,17 @@ class BlockDestabilizerScreen(
 	private lateinit var showLazyShapeButton: ImprovedSpriteButton
 	private lateinit var forgetLazyShapeButton: ImprovedSpriteButton
 
-	override val background = ScreenTextures.Background.BlockDestabilizer
+	override val background = IIScreenTextures.Background.BlockDestabilizer
 
 	override fun baseInit() {
 		this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.LAZY.toComponent(),
-				sprite = ScreenTextures.Sprite.BlockDestabilizer.Lazy
+				sprite = IIScreenTextures.Sprite.BlockDestabilizer.Lazy
 			)
 			.addStage(
 				message = ModTooltipLang.NOT_LAZY.toComponent(),
-				sprite = ScreenTextures.Sprite.BlockDestabilizer.NotLazy
+				sprite = IIScreenTextures.Sprite.BlockDestabilizer.NotLazy
 			)
 			.size(
 				width = 20,
@@ -56,7 +56,7 @@ class BlockDestabilizerScreen(
 			y = this.topPos + 7,
 			width = 20,
 			height = 20,
-			menuSprite = ScreenTextures.Sprite.BlockDestabilizer.ShowLazyShape,
+			menuSprite = IIScreenTextures.Sprite.BlockDestabilizer.ShowLazyShape,
 			onPress = {
 				val packet = ClientClickedMenuButton(BlockDestabilizerMenu.SHOW_LAZY_SHAPE_BUTTON_ID)
 				packet.messageServer()
@@ -70,7 +70,7 @@ class BlockDestabilizerScreen(
 			y = this.topPos + 7,
 			width = 20,
 			height = 20,
-			menuSprite = ScreenTextures.Sprite.BlockDestabilizer.ResetLazyShape,
+			menuSprite = IIScreenTextures.Sprite.BlockDestabilizer.ResetLazyShape,
 			onPress = {
 				val packet = ClientClickedMenuButton(BlockDestabilizerMenu.RESET_LAZY_SHAPE_BUTTON_ID)
 				packet.messageServer()

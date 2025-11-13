@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.block_detector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer

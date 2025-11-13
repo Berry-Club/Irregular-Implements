@@ -1,8 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.online_detector
 
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
+import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.EditBox
@@ -17,7 +16,7 @@ class OnlineDetectorScreen(
 
 	private lateinit var usernameEditBox: EditBox
 
-	override val background = ScreenTextures.Background.OnlineDetector
+	override val background = IIScreenTextures.Background.OnlineDetector
 
 	override fun baseInit() {
 		val editBoxHeight = 20

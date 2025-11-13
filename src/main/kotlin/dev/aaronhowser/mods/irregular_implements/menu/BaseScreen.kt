@@ -12,7 +12,7 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
 	title: Component
 ) : AbstractContainerScreen<M>(menu, playerInventory, title) {
 
-	protected abstract val background: ScreenTextures.Background
+	protected abstract val background: IIScreenTextures.Background
 
 	override fun isPauseScreen(): Boolean = false
 	protected open val showTitleLabel = true

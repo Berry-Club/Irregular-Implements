@@ -3,8 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.menu.ScreenWithStrings
+import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.network.chat.Component
@@ -20,7 +19,7 @@ class NotificationInterfaceScreen(
 	private lateinit var titleEditBox: EditBox
 	private lateinit var descriptionEditBox: EditBox
 
-	override val background = ScreenTextures.Background.NotificationInterface
+	override val background = IIScreenTextures.Background.NotificationInterface
 
 	override fun baseInit() {
 		val title = EditBox(

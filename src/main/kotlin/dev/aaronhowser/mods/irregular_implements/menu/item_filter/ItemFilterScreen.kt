@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry.Companion.isNullOrEmpty
@@ -20,7 +20,7 @@ class ItemFilterScreen(
 	title: Component
 ) : BaseScreen<ItemFilterMenu>(menu, playerInventory, title) {
 
-	override val background = ScreenTextures.Background.ItemFilter
+	override val background = IIScreenTextures.Background.ItemFilter
 
 	private val leftButtons: MutableSet<Button> = mutableSetOf()
 	private val rightButtons: MutableSet<Button> = mutableSetOf()
@@ -59,11 +59,11 @@ class ItemFilterScreen(
 			.size(16)
 			.addStage(
 				message = ModTooltipLang.WHITELIST.toComponent(),
-				sprite = ScreenTextures.Sprite.ItemFilter.Whitelist
+				sprite = IIScreenTextures.Sprite.ItemFilter.Whitelist
 			)
 			.addStage(
 				message = ModTooltipLang.BLACKLIST.toComponent(),
-				sprite = ScreenTextures.Sprite.ItemFilter.Blacklist
+				sprite = IIScreenTextures.Sprite.ItemFilter.Blacklist
 			)
 			.currentStageGetter(
 				currentStageGetter = { if (this.menu.getIsBlacklist()) 1 else 0 }
