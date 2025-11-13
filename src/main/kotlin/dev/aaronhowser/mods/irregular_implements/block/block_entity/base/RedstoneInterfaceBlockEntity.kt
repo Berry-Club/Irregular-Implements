@@ -75,7 +75,7 @@ abstract class RedstoneInterfaceBlockEntity(
 			val interfaces = linkedPositions[levelPos] ?: return
 
 			interfaces.remove(interfacePos)
-			if (interfaces.isEmpty().isTrue) {
+			if (interfaces.isEmpty().isTrue()) {
 				linkedPositions.remove(levelPos)
 			}
 		}

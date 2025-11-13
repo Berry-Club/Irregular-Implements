@@ -37,10 +37,10 @@ class PlatformBlock(
 
 		val entityPassesFilter = (level.getBlockEntity(pos) as? FilteredPlatformBlockEntity)
 			?.entityPassesFilter(entity)
-			.isTrue
+			.isTrue()
 
 		val isBelow = !context.isAbove(Shapes.block(), pos, true)
-		val isDescendingOrPassesFilter = entityPassesFilter || entity?.isDescending.isTrue
+		val isDescendingOrPassesFilter = entityPassesFilter || entity?.isDescending.isTrue()
 
 		val shouldPassThrough = isBelow || isDescendingOrPassesFilter
 

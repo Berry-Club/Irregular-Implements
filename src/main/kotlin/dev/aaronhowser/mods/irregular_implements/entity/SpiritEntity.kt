@@ -46,8 +46,8 @@ class SpiritEntity(
 		if (super.isInvulnerableTo(source)) return true
 		if (source.`is`(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false
 
-		val usedSpecialWeapon = source.weaponItem?.`is`(ModItemTagsProvider.DAMAGES_SPIRITS).isTrue
-		val usedEnchantedWeapon = source.weaponItem?.isEnchanted.isTrue
+		val usedSpecialWeapon = source.weaponItem?.`is`(ModItemTagsProvider.DAMAGES_SPIRITS).isTrue()
+		val usedEnchantedWeapon = source.weaponItem?.isEnchanted.isTrue()
 		val usedMagic = source.`is`(Tags.DamageTypes.IS_MAGIC)
 
 		return !usedSpecialWeapon && !usedEnchantedWeapon && !usedMagic

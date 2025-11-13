@@ -111,7 +111,7 @@ class GlobalChatDetectorBlockEntity(
 
 	override fun onLoad() {
 		super.onLoad()
-		if (!this.level?.isClientSide.isTrue) globalDetectors.add(this)
+		if (!this.level?.isClientSide.isTrue()) globalDetectors.add(this)
 	}
 
 	// Menu stuff

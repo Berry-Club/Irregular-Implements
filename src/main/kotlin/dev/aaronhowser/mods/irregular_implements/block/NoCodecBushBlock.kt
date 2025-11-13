@@ -37,7 +37,7 @@ abstract class NoCodecBushBlock(properties: Properties) : Block(properties) {
 		val blockPos = pos.below()
 		val belowBlockState = level.getBlockState(blockPos)
 		val soilDecision = belowBlockState.canSustainPlant(level, blockPos, Direction.UP, state)
-		if (!soilDecision.isDefault()) return soilDecision.isTrue()
+		if (!soilDecision.isDefault()) return soilDecision.isTrue()()
 		return this.mayPlaceOn(belowBlockState, level, blockPos)
 	}
 

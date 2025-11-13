@@ -133,7 +133,7 @@ class RedstoneObserverBlockEntity(
 			val levelPos = LevelPos(level, targetPos)
 
 			linkedPositions[levelPos]?.remove(observerPos)
-			if (linkedPositions[levelPos]?.isEmpty().isTrue) {
+			if (linkedPositions[levelPos]?.isEmpty().isTrue()) {
 				linkedPositions.remove(levelPos)
 			}
 		}

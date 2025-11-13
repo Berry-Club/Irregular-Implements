@@ -126,7 +126,7 @@ repositories {
 		}
 	}
 
-	// For Patchouli DataGen
+	// For Patchouli DataGen and Aaron
 	maven {
 		url "https://maven.latvian.dev/releases"
 		content {

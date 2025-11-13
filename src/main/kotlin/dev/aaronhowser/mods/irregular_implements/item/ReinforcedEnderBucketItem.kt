@@ -185,7 +185,7 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 
 			val clickedStateCanContainFluid = (clickedState.block as? LiquidBlockContainer)
 				?.canPlaceLiquid(player, level, clickedPos, clickedState, contentFluid)
-				.isTrue
+				.isTrue()
 
 			val posToPlace = if (clickedStateCanContainFluid) clickedPos else clickedPos.relative(clickedFace)
 
@@ -223,7 +223,7 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 			val canBeReplaced = blockState.canBeReplaced(fluid)
 
 			val isPlaceable = if (!blockState.isAir && !canBeReplaced) {
-				(block as? LiquidBlockContainer)?.canPlaceLiquid(player, level, blockPos, blockState, fluid).isTrue
+				(block as? LiquidBlockContainer)?.canPlaceLiquid(player, level, blockPos, blockState, fluid).isTrue()
 			} else true
 
 			if (!isPlaceable) {

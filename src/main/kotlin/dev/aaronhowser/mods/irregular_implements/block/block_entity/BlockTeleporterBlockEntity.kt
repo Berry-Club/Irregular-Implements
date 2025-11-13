@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.isNotTrue
 import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.BlockTeleporterBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
@@ -30,13 +31,13 @@ class BlockTeleporterBlockEntity(
 
 	//TODO: Sound on either succeed or fail
 	fun swapBlocks(): Boolean {
-		if (level?.isClientSide.isTrue) return false
+		if (level?.isClientSide.isTrue()) return false
 
 		val stateToSend = getMyTargetBlockState() ?: return false
 		val stateToReceive = getLinkedBlockTeleporter()?.getMyTargetBlockState() ?: return false
 
 		if (!placeBlockState(stateToReceive)) return false
-		if (!getLinkedBlockTeleporter()?.placeBlockState(stateToSend).isTrue) {
+		if (getLinkedBlockTeleporter()?.placeBlockState(stateToSend).isNotTrue()) {
 			// If we can't place the target block state, revert our own placement
 			placeBlockState(stateToSend)
 			return false

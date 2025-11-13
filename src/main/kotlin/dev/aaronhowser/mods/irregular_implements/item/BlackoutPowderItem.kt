@@ -37,7 +37,7 @@ class BlackoutPowderItem(properties: Properties) : Item(properties) {
 
 			illuminator.discard()
 
-			if (!player?.hasInfiniteMaterials().isTrue) {
+			if (!player?.hasInfiniteMaterials().isTrue()) {
 				OtherUtil.dropStackAt(
 					ModItems.SPECTRE_ILLUMINATOR.toStack(),
 					illuminator.level(),

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.isNotTrue
 import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
@@ -46,7 +47,7 @@ class BlockOfSticksBlock(
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
 		return defaultBlockState().setValue(
 			SHOULD_DROP,
-			context.player?.hasInfiniteMaterials().isTrue.not()  // Only drop if placed by a player with infinite materials
+			context.player?.hasInfiniteMaterials().isNotTrue()  // Only drop if placed by a player with infinite materials
 		)
 	}
 

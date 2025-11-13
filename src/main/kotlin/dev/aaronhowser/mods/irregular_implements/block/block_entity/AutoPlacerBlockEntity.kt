@@ -60,7 +60,7 @@ class AutoPlacerBlockEntity(
 			initFakePlayer()
 		}
 
-		if (mode == Mode.WHILE_POWERED && level?.hasNeighborSignal(worldPosition).isTrue) {
+		if (mode == Mode.WHILE_POWERED && level?.hasNeighborSignal(worldPosition).isTrue()) {
 			placeBlock()
 		}
 	}

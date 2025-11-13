@@ -141,7 +141,7 @@ object ModArmorItems {
 			CuriosApi.getCuriosInventory(entity)
 				.getOrNull()
 				?.isEquipped(ModItems.OBSIDIAN_SKULL_RING.get())
-				.isTrue
+				.isTrue()
 
 		if (hasObsidianSkullRing) return true
 		if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true

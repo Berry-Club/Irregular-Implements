@@ -109,7 +109,7 @@ class ChatDetectorBlockEntity(
 
 	override fun onLoad() {
 		super.onLoad()
-		if (!this.level?.isClientSide.isTrue) detectors.add(this)
+		if (!this.level?.isClientSide.isTrue()) detectors.add(this)
 	}
 
 	// Menu stuff

@@ -86,7 +86,7 @@ class SpectreCoilBlock private constructor(
 
 		val onBlockThatCanReceivePower = level is Level && level
 			.getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
-			?.canReceive().isTrue
+			?.canReceive().isTrue()
 
 		return onBlockThatCanReceivePower
 	}

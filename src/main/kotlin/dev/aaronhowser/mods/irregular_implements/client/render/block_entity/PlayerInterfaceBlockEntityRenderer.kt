@@ -30,7 +30,7 @@ class PlayerInterfaceBlockEntityRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		val spaceAbove = blockEntity.level?.isEmptyBlock(blockEntity.blockPos.above()).isTrue
+		val spaceAbove = blockEntity.level?.isEmptyBlock(blockEntity.blockPos.above()).isTrue()
 		if (!spaceAbove) return
 
 		val skull = blockEntity.ownerHead
