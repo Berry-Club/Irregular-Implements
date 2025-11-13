@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenSprite
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 
 object ScreenTextures {
@@ -46,52 +47,48 @@ object ScreenTextures {
 		val redstoneRemoteUse: ScreenBackground = background("textures/gui/redstone_remote/use.png", 207, 41)
 		val soundRecorder: ScreenBackground = background("textures/gui/sound_recorder.png", 190, 187)
 		val voidStone: ScreenBackground = background("textures/gui/void_stone.png", 176, 133)
-
 	}
 
-	sealed class Sprite(
-		path: String,
-		val width: Int,
-		val height: Int
-	) {
-		val texture = OtherUtil.modResource(path)
+	object Sprites {
+		fun sprite(path: String, width: Int, height: Int): ScreenSprite =
+			ScreenSprite(OtherUtil.modResource(path), width, height)
 
 		object BlockDestabilizer {
-			data object Lazy : Sprite("buttons/block_destabilizer/lazy", 13, 13)
-			data object NotLazy : Sprite("buttons/block_destabilizer/lazy_not", 13, 13)
-			data object ShowLazyShape : Sprite("buttons/block_destabilizer/show_lazy_shape", 16, 16)            //TODO: Replace with an original texture
-			data object ResetLazyShape : Sprite("buttons/block_destabilizer/reset_lazy_shape", 15, 12)
+			val Lazy = sprite("buttons/block_destabilizer/lazy", 13, 13)
+			val NotLazy = sprite("buttons/block_destabilizer/lazy_not", 13, 13)
+			val ShowLazyShape = sprite("buttons/block_destabilizer/show_lazy_shape", 16, 16)            //TODO: Replace with an original texture
+			val ResetLazyShape = sprite("buttons/block_destabilizer/reset_lazy_shape", 15, 12)
 		}
 
 		object ChatDetector {
-			data object MessageContinue : Sprite("buttons/chat_detector/message_continue", 13, 12)
-			data object MessageStop : Sprite("buttons/chat_detector/message_stop", 13, 12)
+			val MessageContinue = sprite("buttons/chat_detector/message_continue", 13, 12)
+			val MessageStop = sprite("buttons/chat_detector/message_stop", 13, 12)
 		}
 
 		object IronDropper {
-			data object DirectionForward : Sprite("buttons/iron_dropper/direction_forward", 4, 4)
-			data object DirectionRandom : Sprite("buttons/iron_dropper/direction_random", 8, 8)
+			val DirectionForward = sprite("buttons/iron_dropper/direction_forward", 4, 4)
+			val DirectionRandom = sprite("buttons/iron_dropper/direction_random", 8, 8)
 
-			data object EffectParticle : Sprite("buttons/iron_dropper/effect_particle", 14, 13)
-			data object EffectSound : Sprite("buttons/iron_dropper/effect_sound", 5, 8)
-			data object EffectBoth : Sprite("buttons/iron_dropper/effect_both", 14, 13)
+			val EffectParticle = sprite("buttons/iron_dropper/effect_particle", 14, 13)
+			val EffectSound = sprite("buttons/iron_dropper/effect_sound", 5, 8)
+			val EffectBoth = sprite("buttons/iron_dropper/effect_both", 14, 13)
 
-			data object PickupFive : Sprite("buttons/iron_dropper/pickup_five", 10, 12)
-			data object PickupTwenty : Sprite("buttons/iron_dropper/pickup_twenty", 13, 9)
-			data object PickupZero : Sprite("buttons/iron_dropper/pickup_zero", 8, 12)
+			val PickupFive = sprite("buttons/iron_dropper/pickup_five", 10, 12)
+			val PickupTwenty = sprite("buttons/iron_dropper/pickup_twenty", 13, 9)
+			val PickupZero = sprite("buttons/iron_dropper/pickup_zero", 8, 12)
 
-			data object RedstonePulse : Sprite("buttons/iron_dropper/redstone_pulse", 8, 8)
-			data object RedstoneContinuous : Sprite("buttons/iron_dropper/redstone_continuous", 12, 14)
-			data object RedstoneContinuousPowered : Sprite("buttons/iron_dropper/redstone_continuous_powered", 12, 14)
+			val RedstonePulse = sprite("buttons/iron_dropper/redstone_pulse", 8, 8)
+			val RedstoneContinuous = sprite("buttons/iron_dropper/redstone_continuous", 12, 14)
+			val RedstoneContinuousPowered = sprite("buttons/iron_dropper/redstone_continuous_powered", 12, 14)
 		}
 
 		object ItemFilter {
-			data object Whitelist : Sprite("buttons/item_filter/whitelist", 15, 12)
-			data object Blacklist : Sprite("buttons/item_filter/blacklist", 15, 12)
+			val Whitelist = sprite("buttons/item_filter/whitelist", 15, 12)
+			val Blacklist = sprite("buttons/item_filter/blacklist", 15, 12)
 		}
 
-		data object Inverted : Sprite("buttons/inventory_tester/inverted", 4, 11)
-		data object Uninverted : Sprite("buttons/inventory_tester/uninverted", 4, 11)
+		val Inverted = sprite("buttons/inventory_tester/inverted", 4, 11)
+		val Uninverted = sprite("buttons/inventory_tester/uninverted", 4, 11)
 	}
 
 	//TODO: Check that all of these are actually used
