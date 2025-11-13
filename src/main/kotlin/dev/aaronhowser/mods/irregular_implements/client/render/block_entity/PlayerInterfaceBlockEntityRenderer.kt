@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.util.ClientUtil
-import dev.aaronhowser.mods.aaron.isTrue
+import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer

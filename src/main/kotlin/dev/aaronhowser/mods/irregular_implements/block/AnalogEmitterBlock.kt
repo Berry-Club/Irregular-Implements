@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.aaron.status
+import dev.aaronhowser.mods.aaron.AaronExtensions.status
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos

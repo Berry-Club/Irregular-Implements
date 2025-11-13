@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.aaron.isTrue
+import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource

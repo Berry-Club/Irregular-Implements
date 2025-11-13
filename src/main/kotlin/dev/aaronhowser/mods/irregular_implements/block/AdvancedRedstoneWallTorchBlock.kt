@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.aaron.nextRange
+import dev.aaronhowser.mods.aaron.AaronExtensions.nextRange
 import dev.aaronhowser.mods.irregular_implements.block.AdvancedRedstoneTorchBlock.Companion.GREEN_COLOR
 import dev.aaronhowser.mods.irregular_implements.block.AdvancedRedstoneTorchBlock.Companion.RED_COLOR
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedRedstoneTorchBlockEntity

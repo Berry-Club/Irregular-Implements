@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.plate
 
-import dev.aaronhowser.mods.aaron.toVec3
+import dev.aaronhowser.mods.aaron.AaronExtensions.toVec3
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.entity.Entity

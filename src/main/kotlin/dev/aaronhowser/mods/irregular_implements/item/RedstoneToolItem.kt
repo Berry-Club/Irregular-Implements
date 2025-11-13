@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.Redston
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.aaron.status
+import dev.aaronhowser.mods.aaron.AaronExtensions.status
 import net.minecraft.core.GlobalPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult

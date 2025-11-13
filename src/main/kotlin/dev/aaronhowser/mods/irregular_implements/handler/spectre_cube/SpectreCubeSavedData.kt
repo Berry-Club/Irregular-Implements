@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
-import dev.aaronhowser.mods.aaron.getUuidOrNull
+import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
-import dev.aaronhowser.mods.aaron.isTrue
+import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag

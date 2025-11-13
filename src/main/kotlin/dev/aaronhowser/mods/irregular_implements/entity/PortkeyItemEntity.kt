@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
-import dev.aaronhowser.mods.aaron.isClientSide
+import dev.aaronhowser.mods.aaron.AaronExtensions.isClientSide
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.sounds.SoundEvents

@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
-import dev.aaronhowser.mods.aaron.isClientSide
+import dev.aaronhowser.mods.aaron.AaronExtensions.isClientSide
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
-import dev.aaronhowser.mods.aaron.isTrue
-import dev.aaronhowser.mods.aaron.nextRange
+import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
+import dev.aaronhowser.mods.aaron.AaronExtensions.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag

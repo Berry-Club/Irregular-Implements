@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownGoldenEggEntity
-import dev.aaronhowser.mods.aaron.isServerSide
+import dev.aaronhowser.mods.aaron.AaronExtensions.isServerSide
 import net.minecraft.core.Direction
 import net.minecraft.core.Position
 import net.minecraft.sounds.SoundEvents

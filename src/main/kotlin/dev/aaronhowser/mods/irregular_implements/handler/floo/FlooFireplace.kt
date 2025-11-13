@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlo
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.BurningFlooFireplacePacket
-import dev.aaronhowser.mods.aaron.status
+import dev.aaronhowser.mods.aaron.AaronExtensions.status
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerPlayer

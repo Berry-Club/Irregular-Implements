@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.aaron.getDyeName
+import dev.aaronhowser.mods.aaron.AaronExtensions.getDyeName
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang

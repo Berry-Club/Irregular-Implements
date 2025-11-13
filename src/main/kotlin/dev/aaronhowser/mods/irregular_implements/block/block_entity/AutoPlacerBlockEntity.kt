@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.mojang.authlib.GameProfile
-import dev.aaronhowser.mods.aaron.isTrue
+import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.AutoPlacerBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerMenu
