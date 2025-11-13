@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.aaron.menu.components.ItemStackButton
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
@@ -14,7 +16,7 @@ class RedstoneRemoteUseScreen(
 	title: Component
 ) : BaseScreen<RedstoneRemoteUseMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.RedstoneRemoteUse
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.redstoneRemoteUse
 
 	override val showInventoryLabel: Boolean = false
 

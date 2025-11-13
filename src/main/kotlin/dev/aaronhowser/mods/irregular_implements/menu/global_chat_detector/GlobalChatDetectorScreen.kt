@@ -1,5 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector
 
+import dev.aaronhowser.mods.aaron.menu.ScreenWithStrings
+import dev.aaronhowser.mods.aaron.menu.components.MultiStageSpriteButton
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -20,7 +23,7 @@ class GlobalChatDetectorScreen(
 	private lateinit var toggleMessagePassButton: MultiStageSpriteButton
 	private lateinit var regexStringEditBox: EditBox
 
-	override val background = ScreenTextures.Background.GlobalChatDetector
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.globalChatDetector
 
 	override fun baseInit() {
 		this.inventoryLabelY -= 8

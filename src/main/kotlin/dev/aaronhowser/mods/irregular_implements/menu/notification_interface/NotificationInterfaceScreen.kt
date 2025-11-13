@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
+import dev.aaronhowser.mods.aaron.menu.ScreenWithStrings
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -19,7 +21,7 @@ class NotificationInterfaceScreen(
 	private lateinit var titleEditBox: EditBox
 	private lateinit var descriptionEditBox: EditBox
 
-	override val background = ScreenTextures.Background.NotificationInterface
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.notificationInterface
 
 	override fun baseInit() {
 		val title = EditBox(

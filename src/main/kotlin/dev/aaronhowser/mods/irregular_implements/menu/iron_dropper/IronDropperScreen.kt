@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 
+import dev.aaronhowser.mods.aaron.menu.components.MultiStageSpriteButton
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -19,7 +21,7 @@ class IronDropperScreen(
 	private lateinit var delayButton: MultiStageSpriteButton
 	private lateinit var redstoneModeButton: MultiStageSpriteButton
 
-	override val background = ScreenTextures.Background.IronDropper
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ironDropper
 
 	override fun baseInit() {
 		this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
+import dev.aaronhowser.mods.aaron.ExtraCodecs
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -44,7 +45,7 @@ class AddIndicatorsPacket(
 				BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), AddIndicatorsPacket::positions,
 				ByteBufCodecs.VAR_INT, AddIndicatorsPacket::durationTicks,
 				ByteBufCodecs.VAR_INT, AddIndicatorsPacket::color,
-				OtherUtil.VEC3_STREAM_CODEC, AddIndicatorsPacket::dimensions,
+				ExtraCodecs.VEC3_STREAM_CODEC, AddIndicatorsPacket::dimensions,
 				::AddIndicatorsPacket
 			)
 	}

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import net.minecraft.network.chat.Component
@@ -11,7 +12,7 @@ class RedstoneRemoteEditScreen(
 	title: Component
 ) : BaseScreen<RedstoneRemoteEditMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.RedstoneRemoteEdit
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.redstoneRemoteEdit
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.inventory_tester
 
+import dev.aaronhowser.mods.aaron.menu.components.MultiStageSpriteButton
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -14,7 +16,7 @@ class InventoryTesterScreen(
 	title: Component
 ) : BaseScreen<InventoryTesterMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.InventoryTester
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.inventoryTester
 
 	private lateinit var invertButton: MultiStageSpriteButton
 

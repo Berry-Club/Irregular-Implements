@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes

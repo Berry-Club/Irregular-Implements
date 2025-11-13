@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -20,7 +21,7 @@ class ItemFilterScreen(
 	title: Component
 ) : BaseScreen<ItemFilterMenu>(menu, playerInventory, title) {
 
-	override val background = ScreenTextures.Background.ItemFilter
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.itemFilter
 
 	private val leftButtons: MutableSet<Button> = mutableSetOf()
 	private val rightButtons: MutableSet<Button> = mutableSetOf()
