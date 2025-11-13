@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
-import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
+import dev.aaronhowser.mods.aaron.ServerScheduler
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 

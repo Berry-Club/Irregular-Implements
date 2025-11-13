@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
+import dev.aaronhowser.mods.aaron.ServerScheduler
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
@@ -7,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateC
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
-import dev.aaronhowser.mods.irregular_implements.util.ServerScheduler
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
