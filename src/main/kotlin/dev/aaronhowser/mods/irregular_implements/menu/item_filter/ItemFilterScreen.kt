@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry
 import dev.aaronhowser.mods.irregular_implements.util.FilterEntry.Companion.isNullOrEmpty
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.components.Button
 import net.minecraft.network.chat.Component
@@ -179,9 +178,11 @@ class ItemFilterScreen(
 				val itemTags = filterAtIndex.backupStack.tags.toList()
 
 				itemTags.map {
-					it.getComponent().withStyle(
-						if (it == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
-					)
+					Component
+						.literal(it.location().toString())
+						.withStyle(
+							if (it == filterAtIndex.tagKey) ChatFormatting.GRAY else ChatFormatting.DARK_GRAY
+						)
 				}
 			}
 

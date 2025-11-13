@@ -5,12 +5,12 @@ import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.chat.Component
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
@@ -97,7 +97,7 @@ sealed interface FilterEntry {
 				val randomItem = matchingItems[randomIndex].value()
 
 				this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
-					val tagKeyComponent = this.tagKey.getComponent()
+					val tagKeyComponent = Component.literal(this.tagKey.location().toString())
 
 					val stack = randomItem.defaultInstance
 					stack.set(

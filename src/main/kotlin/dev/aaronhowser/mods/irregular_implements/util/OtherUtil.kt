@@ -149,22 +149,6 @@ object OtherUtil {
 		return if (this.hasUUID(key)) this.getUUID(key) else null
 	}
 
-	fun TagKey<Item>.getComponent(): MutableComponent {
-		val tagLocation = this.location
-		val possibleLangKey = StringBuilder()
-			.append("tag.item.")
-			.append(tagLocation.namespace)
-			.append(".")
-			.append(tagLocation.path)
-			.toString()
-
-		return if (I18n.exists(possibleLangKey)) {
-			Component.translatable(possibleLangKey)
-		} else {
-			Component.literal(tagLocation.toString())
-		}
-	}
-
 	val VEC3_STREAM_CODEC: StreamCodec<ByteBuf, Vec3> = object : StreamCodec<ByteBuf, Vec3> {
 		override fun decode(buffer: ByteBuf): Vec3 = Vec3(buffer.readDouble(), buffer.readDouble(), buffer.readDouble())
 		override fun encode(buffer: ByteBuf, value: Vec3) {
