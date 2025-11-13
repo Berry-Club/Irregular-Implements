@@ -150,7 +150,7 @@ dependencies {
 	implementation("com.klikli_dev:modonomicon-1.21.1-neoforge:${modonomicon_version}") { transitive = false }
 
 	implementation "dev.aaronhowser.mods:patchoulidatagen-${pdg_version}"
-	implementation "dev.aaronhowser.mods:aaron-lib-${aaron_lib_version}"
+	implementation "dev.aaronhowser.mods:aaron-lib:${aaron_lib_version}"
 
 	compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
 	runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"

@@ -1,27 +1,21 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
-import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
-import net.minecraft.core.*
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.core.Holder
+import net.minecraft.core.Registry
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.MutableComponent
-import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
-import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.DyeColor
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potion
@@ -31,7 +25,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
-import java.util.*
 
 object OtherUtil {
 
@@ -41,10 +34,6 @@ object OtherUtil {
 
 	fun getPotionStack(potion: Holder<Potion>): ItemStack {
 		return PotionContents.createItemStack(Items.POTION, potion)
-	}
-
-	fun Vec3i.toVec3(): Vec3 {
-		return Vec3(this.x.toDouble(), this.y.toDouble(), this.z.toDouble())
 	}
 
 	fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
@@ -129,28 +118,6 @@ object OtherUtil {
 		if (instantPickup) itemEntity.setNoPickUpDelay()
 		return level.addFreshEntity(itemEntity)
 	}
-
-	val VEC3_STREAM_CODEC: StreamCodec<ByteBuf, Vec3> = object : StreamCodec<ByteBuf, Vec3> {
-		override fun decode(buffer: ByteBuf): Vec3 = Vec3(buffer.readDouble(), buffer.readDouble(), buffer.readDouble())
-		override fun encode(buffer: ByteBuf, value: Vec3) {
-			buffer.writeDouble(value.x)
-			buffer.writeDouble(value.y)
-			buffer.writeDouble(value.z)
-		}
-	}
-
-	val UUID_CODEC: Codec<UUID> = Codec.STRING.xmap(
-		UUID::fromString,
-		UUID::toString
-	)
-
-	val UUID_STREAM_CODEC: StreamCodec<ByteBuf, UUID> = ByteBufCodecs.STRING_UTF8.map(
-		UUID::fromString,
-		UUID::toString
-	)
-
-	val STACK_LIST_STREAM_CODEC: StreamCodec<ByteBuf, NonNullList<ItemStack>> =
-		ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.OPTIONAL_CODEC))
 
 	fun lerpColor(progress: Float, start: Int, end: Int): Int {
 		val startR = (start shr 16) and 0xFF
