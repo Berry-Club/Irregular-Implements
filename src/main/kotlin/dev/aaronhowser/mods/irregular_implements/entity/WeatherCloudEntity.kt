@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.aaron.isClientSide
+import dev.aaronhowser.mods.aaron.isServerSide
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.particles.DustParticleOptions
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag

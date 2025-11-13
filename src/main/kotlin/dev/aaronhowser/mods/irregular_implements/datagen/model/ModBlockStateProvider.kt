@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
+import dev.aaronhowser.mods.aaron.getDirectionName
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.block.plate.RedirectorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getDirectionName
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
