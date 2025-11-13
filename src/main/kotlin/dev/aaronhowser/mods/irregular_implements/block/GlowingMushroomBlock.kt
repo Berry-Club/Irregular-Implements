@@ -31,7 +31,7 @@ class GlowingMushroomBlock : NoCodecBushBlock(Properties.ofFullCopy(Blocks.RED_M
 			return true
 		}
 
-		if (!soilDecision.isDefault()) return soilDecision.isTrue()()
+		if (!soilDecision.isDefault()) return soilDecision.isTrue()
 
 		return level.getRawBrightness(pos, 0) < 13 && this.mayPlaceOn(stateBelow, level, belowPos)
 	}
