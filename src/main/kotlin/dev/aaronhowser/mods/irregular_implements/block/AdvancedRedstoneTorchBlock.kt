@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.nextRange
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedRedstoneTorchBlockEntity
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.DustParticleOptions

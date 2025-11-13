@@ -4,8 +4,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.ChangingTextButton
-import dev.aaronhowser.mods.irregular_implements.menu.MultiStageSpriteButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics

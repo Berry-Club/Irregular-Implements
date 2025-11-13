@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FilteredPlatformBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult

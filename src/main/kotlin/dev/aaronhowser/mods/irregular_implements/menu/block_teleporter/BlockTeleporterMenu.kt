@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.block_teleporter
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockTeleporterBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes

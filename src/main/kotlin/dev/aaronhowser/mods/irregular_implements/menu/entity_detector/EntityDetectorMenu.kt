@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EntityDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
