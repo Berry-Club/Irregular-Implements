@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.core.UUIDUtil
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentSerialization
@@ -21,7 +22,7 @@ data class SpecificEntity(
 		val CODEC: Codec<SpecificEntity> =
 			RecordCodecBuilder.create { instance ->
 				instance.group(
-					OtherUtil.UUID_CODEC
+					UUIDUtil.CODEC
 						.fieldOf("uuid")
 						.forGetter(SpecificEntity::uuid),
 					ComponentSerialization.CODEC
@@ -32,7 +33,7 @@ data class SpecificEntity(
 
 		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SpecificEntity> =
 			StreamCodec.composite(
-				OtherUtil.UUID_STREAM_CODEC, SpecificEntity::uuid,
+				UUIDUtil.STREAM_CODEC, SpecificEntity::uuid,
 				ComponentSerialization.STREAM_CODEC, SpecificEntity::name,
 				::SpecificEntity
 			)

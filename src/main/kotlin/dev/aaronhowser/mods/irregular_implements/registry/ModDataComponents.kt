@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.SpecificEntity
 import net.minecraft.core.GlobalPos
 import net.minecraft.core.Holder
+import net.minecraft.core.UUIDUtil
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
@@ -42,7 +43,7 @@ object ModDataComponents {
 		)
 
 	val UUID: DeferredHolder<DataComponentType<*>, DataComponentType<UUID>> =
-		register("uuid", OtherUtil.UUID_CODEC, OtherUtil.UUID_STREAM_CODEC)
+		register("uuid", UUIDUtil.CODEC, UUIDUtil.STREAM_CODEC)
 
 	val BIOME: DeferredHolder<DataComponentType<*>, DataComponentType<Holder<Biome>>> =
 		register(
