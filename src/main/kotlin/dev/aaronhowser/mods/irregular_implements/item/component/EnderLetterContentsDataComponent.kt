@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.aaron.ExtraCodecs
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -62,7 +63,7 @@ data class EnderLetterContentsDataComponent(
 
 		val STREAM_CODEC: StreamCodec<ByteBuf, EnderLetterContentsDataComponent> =
 			StreamCodec.composite(
-				OtherUtil.STACK_LIST_STREAM_CODEC, EnderLetterContentsDataComponent::stacks,
+				ExtraCodecs.STACK_LIST_STREAM_CODEC, EnderLetterContentsDataComponent::stacks,
 				ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs::optional), EnderLetterContentsDataComponent::sender,
 				ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs::optional), EnderLetterContentsDataComponent::recipient,
 				::EnderLetterContentsDataComponent

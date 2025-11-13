@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.isClientSide
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder

@@ -6,7 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
+import dev.aaronhowser.mods.aaron.isServerSide
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.Direction

@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.nextRange
 import dev.aaronhowser.mods.irregular_implements.entity.TemporaryFlooFireplaceEntity
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.FlooTokenActivatedPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.item.ItemEntity
