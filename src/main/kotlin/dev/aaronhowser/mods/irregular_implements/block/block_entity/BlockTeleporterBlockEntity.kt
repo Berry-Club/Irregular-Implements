@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaronlib.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.BlockTeleporterBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
@@ -7,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvide
 import dev.aaronhowser.mods.irregular_implements.menu.block_teleporter.BlockTeleporterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
 import net.minecraft.core.HolderLookup

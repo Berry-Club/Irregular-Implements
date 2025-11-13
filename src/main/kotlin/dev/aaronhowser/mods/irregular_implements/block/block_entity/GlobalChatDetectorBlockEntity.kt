@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaronlib.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
@@ -7,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateC
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag

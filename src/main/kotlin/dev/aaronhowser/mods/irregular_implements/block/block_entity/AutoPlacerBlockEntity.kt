@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.mojang.authlib.GameProfile
+import dev.aaronhowser.mods.aaronlib.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.AutoPlacerBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup

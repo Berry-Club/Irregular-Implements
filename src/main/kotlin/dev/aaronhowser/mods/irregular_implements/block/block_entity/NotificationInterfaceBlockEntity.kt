@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaronlib.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag

@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaronlib.isServerSide
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isServerSide
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
