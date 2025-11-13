@@ -21,7 +21,7 @@ class NotificationInterfaceScreen(
 	private lateinit var titleEditBox: EditBox
 	private lateinit var descriptionEditBox: EditBox
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.notificationInterface
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.NOTIFICATION_INTERFACE
 
 	override fun baseInit() {
 		val title = EditBox(

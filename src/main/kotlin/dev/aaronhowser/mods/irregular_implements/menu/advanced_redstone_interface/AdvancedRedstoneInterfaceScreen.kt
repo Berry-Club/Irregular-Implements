@@ -12,7 +12,7 @@ class AdvancedRedstoneInterfaceScreen(
 	title: Component
 ) : BaseScreen<AdvancedRedstoneInterfaceMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.advancedRedstoneInterface
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ADVANCED_REDSTONE_INTERFACE
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

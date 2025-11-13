@@ -12,7 +12,7 @@ class FilteredPlatformScreen(
 	title: Component
 ) : BaseScreen<FilteredPlatformMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.filteredSuperLubricantPlatform
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.FILTERED_SUPER_LUBRICANT_PLATFORM
 
 	override var showInventoryLabel: Boolean = false
 	override var showTitleLabel: Boolean = false

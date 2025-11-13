@@ -12,7 +12,7 @@ class RedstoneRemoteEditScreen(
 	title: Component
 ) : BaseScreen<RedstoneRemoteEditMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.redstoneRemoteEdit
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.REDSTONE_REMOTE_EDIT
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

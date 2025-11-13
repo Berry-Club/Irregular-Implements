@@ -17,7 +17,7 @@ class AdvancedRedstoneTorchScreen(
 	title: Component
 ) : BaseScreen<AdvancedRedstoneTorchMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.advancedRedstoneTorch
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ADVANCED_REDSTONE_TORCH
 	override val showInventoryLabel: Boolean = false
 	override val showTitleLabel: Boolean = false
 

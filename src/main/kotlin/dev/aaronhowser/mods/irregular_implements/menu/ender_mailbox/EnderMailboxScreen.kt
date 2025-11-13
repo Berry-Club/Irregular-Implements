@@ -11,7 +11,7 @@ class EnderMailboxScreen(
 	playerInventory: Inventory,
 	title: Component
 ) : BaseScreen<EnderMailboxMenu>(menu, playerInventory, title) {
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.enderMailbox
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ENDER_MAILBOX
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

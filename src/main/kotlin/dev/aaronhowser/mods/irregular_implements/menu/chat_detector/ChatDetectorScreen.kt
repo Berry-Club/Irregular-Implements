@@ -23,7 +23,7 @@ class ChatDetectorScreen(
 	private lateinit var toggleMessagePassButton: MultiStageSpriteButton
 	private lateinit var regexStringEditBox: EditBox
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.chatDetector
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.CHAT_DETECTOR
 
 	override fun baseInit() {
 		this.titleLabelX = 10

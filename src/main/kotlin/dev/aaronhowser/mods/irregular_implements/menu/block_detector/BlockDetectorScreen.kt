@@ -12,7 +12,7 @@ class BlockDetectorScreen(
 	title: Component
 ) : BaseScreen<BlockDetectorMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.blockDetector
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.BLOCK_DETECTOR
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

@@ -14,7 +14,7 @@ class IgniterScreen(
 	title: Component
 ) : BaseScreen<IgniterMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.igniter
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.IGNITER
 
 	private lateinit var changeModeButton: ChangingTextButton
 

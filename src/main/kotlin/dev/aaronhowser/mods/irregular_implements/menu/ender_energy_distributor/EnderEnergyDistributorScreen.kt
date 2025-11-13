@@ -12,7 +12,7 @@ class EnderEnergyDistributorScreen(
 	title: Component
 ) : BaseScreen<EnderEnergyDistributorMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.enderEnergyDistributor
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ENDER_ENERGY_DISTRIBUTOR
 
 	override fun baseInit() {
 		titleLabelX += 8

@@ -16,7 +16,7 @@ class InventoryTesterScreen(
 	title: Component
 ) : BaseScreen<InventoryTesterMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.inventoryTester
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.INVENTORY_TESTER
 
 	private lateinit var invertButton: MultiStageSpriteButton
 

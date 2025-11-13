@@ -12,7 +12,7 @@ class DropFilterScreen(
 	title: Component
 ) : BaseScreen<DropFilterMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.dropFilter
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.DROP_FILTER
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

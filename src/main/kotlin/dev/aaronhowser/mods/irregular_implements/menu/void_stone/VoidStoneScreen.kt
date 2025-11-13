@@ -12,7 +12,7 @@ class VoidStoneScreen(
 	title: Component
 ) : BaseScreen<VoidStoneMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.voidStone
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.VOID_STONE
 
 	override fun baseInit() {
 		this.inventoryLabelY = this.imageHeight - 94

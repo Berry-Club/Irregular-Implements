@@ -19,7 +19,7 @@ class EnderLetterScreen(
 	title: Component
 ) : BaseScreen<EnderLetterMenu>(menu, playerInventory, title), ScreenWithStrings {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.enderLetter
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ENDER_LETTER
 
 	private lateinit var recipientEditBox: EditBox
 

@@ -13,6 +13,6 @@ class AutoPlacerScreen(
 	title: Component
 ) : BaseScreen<AutoPlacerMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.autoPlacer
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.AUTO_PLACER
 
 }

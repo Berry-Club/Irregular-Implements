@@ -20,7 +20,7 @@ class EntityDetectorScreen(
 	title: Component
 ) : BaseScreen<EntityDetectorMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenBackground = ScreenTextures.Backgrounds.entityDetector
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.ENTITY_DETECTOR
 
 	private lateinit var buttonLowerX: Button
 	private lateinit var buttonRaiseX: Button
