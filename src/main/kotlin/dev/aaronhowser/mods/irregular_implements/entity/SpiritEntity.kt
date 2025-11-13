@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import dev.aaronhowser.mods.aaron.isTrue
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes

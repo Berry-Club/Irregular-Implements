@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.nextRange
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import dev.aaronhowser.mods.irregular_implements.util.StructureSchematics
 import dev.aaronhowser.mods.irregular_implements.world.feature.NatureCoreFeature
 import net.minecraft.core.BlockPos

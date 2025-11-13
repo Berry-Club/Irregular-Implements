@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
+import dev.aaronhowser.mods.aaron.isClientSide
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCapsuleItem
 import dev.aaronhowser.mods.irregular_implements.item.BiomePainterItem
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isClientSide
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 

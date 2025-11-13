@@ -6,7 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModFluidTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.isTrue
+import dev.aaronhowser.mods.aaron.isTrue
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.network.chat.Component

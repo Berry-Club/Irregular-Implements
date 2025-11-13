@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.nextRange
 import dev.aaronhowser.mods.irregular_implements.block.ItemCollectorBlock
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.nextRange
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource

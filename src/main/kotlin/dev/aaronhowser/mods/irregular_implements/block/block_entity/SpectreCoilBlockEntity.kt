@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getUuidOrNull
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup

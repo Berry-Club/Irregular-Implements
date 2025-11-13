@@ -11,7 +11,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil.getDyeName
 import net.minecraft.advancements.Criterion
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
@@ -1442,8 +1441,6 @@ class ModRecipeProvider(
 	private fun coloredThings(): List<RecipeBuilder> {
 		return buildList {
 			for (color in DyeColor.entries) {
-				color.getDyeName()
-
 				val dyeTag = dyeTags[color]
 				if (dyeTag == null) {
 					IrregularImplements.LOGGER.warn("No dye tag for color $color")

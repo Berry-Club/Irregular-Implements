@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.aaronlib.isTrue
+import dev.aaronhowser.mods.aaron.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.BlockTeleporterBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig

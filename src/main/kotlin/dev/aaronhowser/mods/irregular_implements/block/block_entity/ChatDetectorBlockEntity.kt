@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.aaronlib.getUuidOrNull
-import dev.aaronhowser.mods.aaronlib.isTrue
+import dev.aaronhowser.mods.aaron.getUuidOrNull
+import dev.aaronhowser.mods.aaron.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.ChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.chat_detector.ChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
