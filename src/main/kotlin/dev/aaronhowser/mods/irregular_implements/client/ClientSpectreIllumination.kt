@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client
 
-import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.ChunkPos
 

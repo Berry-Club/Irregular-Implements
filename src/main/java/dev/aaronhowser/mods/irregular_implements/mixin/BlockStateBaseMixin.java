@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneObserverBlockEntity;
 import dev.aaronhowser.mods.irregular_implements.handler.FluidWalkingHandler;
-import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;

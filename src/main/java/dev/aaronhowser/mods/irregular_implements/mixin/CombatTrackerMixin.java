@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.aaronhowser.mods.irregular_implements.handler.FluidWalkingHandler;
-import dev.aaronhowser.mods.irregular_implements.item.ModArmorItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.CombatEntry;
 import net.minecraft.world.damagesource.CombatTracker;

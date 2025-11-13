@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
+import dev.aaronhowser.mods.aaron.ClientUtil
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
@@ -16,7 +17,6 @@ import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticle
 import dev.aaronhowser.mods.irregular_implements.particle.FlooFlameParticle
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
 import dev.aaronhowser.mods.irregular_implements.registry.*
-import dev.aaronhowser.mods.aaron.ClientUtil
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.BiomeColors
