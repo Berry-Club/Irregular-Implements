@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
+import dev.aaronhowser.mods.aaron.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.network.codec.ByteBufCodecs

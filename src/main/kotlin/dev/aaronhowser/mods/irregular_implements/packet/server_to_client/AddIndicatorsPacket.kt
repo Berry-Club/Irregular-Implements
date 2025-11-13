@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.aaron.ExtraCodecs
+import dev.aaronhowser.mods.aaron.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.BlockPos

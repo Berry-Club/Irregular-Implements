@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
+import dev.aaronhowser.mods.aaron.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.client.NotificationToast
-import dev.aaronhowser.mods.irregular_implements.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.network.RegistryFriendlyByteBuf

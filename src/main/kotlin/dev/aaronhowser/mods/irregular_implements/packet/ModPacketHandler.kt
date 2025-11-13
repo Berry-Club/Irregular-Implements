@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet
 
+import dev.aaronhowser.mods.aaron.packet.ModPacketRegistrar
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.PaintBiomePacket
@@ -10,7 +11,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.network.registration.PayloadRegistrar
 
-object ModPacketHandler {
+object ModPacketHandler : ModPacketRegistrar {
 
 	fun registerPayloads(event: RegisterPayloadHandlersEvent) {
 		val registrar = event.registrar("1")
@@ -74,28 +75,6 @@ object ModPacketHandler {
 			UpdateSpectreIlluminationPacket.TYPE,
 			UpdateSpectreIlluminationPacket.STREAM_CODEC
 		)
-	}
-
-	private fun <T : ModPacket> toClient(
-		registrar: PayloadRegistrar,
-		packetType: CustomPacketPayload.Type<T>,
-		streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>,
-	) {
-		registrar.playToClient(
-			packetType,
-			streamCodec
-		) { packet, context -> packet.receiveOnClient(context) }
-	}
-
-	private fun <T : ModPacket> toServer(
-		registrar: PayloadRegistrar,
-		packetType: CustomPacketPayload.Type<T>,
-		streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>
-	) {
-		registrar.playToServer(
-			packetType,
-			streamCodec
-		) { packet, context -> packet.receiveOnServer(context) }
 	}
 
 }
