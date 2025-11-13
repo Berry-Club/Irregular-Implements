@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
@@ -17,7 +17,7 @@ class EntityDetectorScreen(
 	title: Component
 ) : BaseScreen<EntityDetectorMenu>(menu, playerInventory, title) {
 
-	override val background: IIScreenTextures.Background = IIScreenTextures.Background.EntityDetector
+	override val background: ScreenTextures.Background = ScreenTextures.Background.EntityDetector
 
 	private lateinit var buttonLowerX: Button
 	private lateinit var buttonRaiseX: Button
@@ -158,11 +158,11 @@ class EntityDetectorScreen(
 			)
 			.addStage(
 				message = ModTooltipLang.UNINVERTED.toComponent(),
-				sprite = IIScreenTextures.Sprite.Uninverted
+				sprite = ScreenTextures.Sprite.Uninverted
 			)
 			.addStage(
 				message = ModTooltipLang.INVERTED.toComponent(),
-				sprite = IIScreenTextures.Sprite.Inverted
+				sprite = ScreenTextures.Sprite.Inverted
 			)
 			.currentStageGetter(
 				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }

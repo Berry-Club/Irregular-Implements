@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.imbuing_station
 
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
 
@@ -11,7 +11,7 @@ class ImbuingStationScreen(
 	title: Component
 ) : BaseScreen<ImbuingStationMenu>(menu, playerInventory, title) {
 
-	override val background = IIScreenTextures.Background.ImbuingStation
+	override val background = ScreenTextures.Background.ImbuingStation
 
 	override fun baseInit() {
 		this.titleLabelX = 4

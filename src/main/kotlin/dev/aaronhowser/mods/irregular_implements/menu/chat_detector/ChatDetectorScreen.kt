@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.chat_detector
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientChangedMenuString
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.client.Minecraft
@@ -20,7 +20,7 @@ class ChatDetectorScreen(
 	private lateinit var toggleMessagePassButton: MultiStageSpriteButton
 	private lateinit var regexStringEditBox: EditBox
 
-	override val background = IIScreenTextures.Background.ChatDetector
+	override val background = ScreenTextures.Background.ChatDetector
 
 	override fun baseInit() {
 		this.titleLabelX = 10
@@ -29,11 +29,11 @@ class ChatDetectorScreen(
 		this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.STOPS_MESSAGE.toComponent(),
-				sprite = IIScreenTextures.Sprite.ChatDetector.MessageStop
+				sprite = ScreenTextures.Sprite.ChatDetector.MessageStop
 			)
 			.addStage(
 				message = ModTooltipLang.DOESNT_STOP_MESSAGE.toComponent(),
-				sprite = IIScreenTextures.Sprite.ChatDetector.MessageContinue
+				sprite = ScreenTextures.Sprite.ChatDetector.MessageContinue
 			)
 			.size(
 				width = 20,

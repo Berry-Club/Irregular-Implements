@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.imbuing_station
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ImbuingStationBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer

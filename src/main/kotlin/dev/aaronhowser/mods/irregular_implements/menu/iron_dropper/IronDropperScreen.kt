@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
-import dev.aaronhowser.mods.irregular_implements.menu.IIScreenTextures
+import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.player.Inventory
@@ -19,7 +19,7 @@ class IronDropperScreen(
 	private lateinit var delayButton: MultiStageSpriteButton
 	private lateinit var redstoneModeButton: MultiStageSpriteButton
 
-	override val background = IIScreenTextures.Background.IronDropper
+	override val background = ScreenTextures.Background.IronDropper
 
 	override fun baseInit() {
 		this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
@@ -36,15 +36,15 @@ class IronDropperScreen(
 		this.redstoneModeButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_PULSE.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.RedstonePulse
+				sprite = ScreenTextures.Sprite.IronDropper.RedstonePulse
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_CONTINUOUS_POWERED.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.RedstoneContinuousPowered
+				sprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuousPowered
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_CONTINUOUS.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.RedstoneContinuous
+				sprite = ScreenTextures.Sprite.IronDropper.RedstoneContinuous
 			)
 			.size(
 				size = buttonSize
@@ -67,15 +67,15 @@ class IronDropperScreen(
 		this.delayButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_NO_DELAY.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.PickupZero
+				sprite = ScreenTextures.Sprite.IronDropper.PickupZero
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_FIVE_DELAY.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.PickupFive
+				sprite = ScreenTextures.Sprite.IronDropper.PickupFive
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_TWENTY_DELAY.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.PickupTwenty
+				sprite = ScreenTextures.Sprite.IronDropper.PickupTwenty
 			)
 			.size(
 				size = buttonSize
@@ -98,11 +98,11 @@ class IronDropperScreen(
 		this.shootModeButton = MultiStageSpriteButton.Builder(this.font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.DirectionRandom
+				sprite = ScreenTextures.Sprite.IronDropper.DirectionRandom
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_EXACT_VELOCITY.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.DirectionForward
+				sprite = ScreenTextures.Sprite.IronDropper.DirectionForward
 			)
 			.size(
 				size = buttonSize
@@ -129,15 +129,15 @@ class IronDropperScreen(
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_ONLY_PARTICLES.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.EffectParticle
+				sprite = ScreenTextures.Sprite.IronDropper.EffectParticle
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_ONLY_SOUND.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.EffectSound
+				sprite = ScreenTextures.Sprite.IronDropper.EffectSound
 			)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_BOTH_EFFECTS.toComponent(),
-				sprite = IIScreenTextures.Sprite.IronDropper.EffectBoth
+				sprite = ScreenTextures.Sprite.IronDropper.EffectBoth
 			)
 			.size(
 				size = buttonSize
