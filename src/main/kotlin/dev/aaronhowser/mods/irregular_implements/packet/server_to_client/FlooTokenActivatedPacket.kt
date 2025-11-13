@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
-import dev.aaronhowser.mods.aaron.ExtraCodecs
+import dev.aaronhowser.mods.aaron.AaronExtraCodecs
 import dev.aaronhowser.mods.aaron.packet.ModPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -45,7 +45,7 @@ class FlooTokenActivatedPacket(
 			CustomPacketPayload.Type(OtherUtil.modResource("floo_token_activated"))
 
 		val STREAM_CODEC: StreamCodec<ByteBuf, FlooTokenActivatedPacket> =
-			ExtraCodecs.VEC3_STREAM_CODEC.map(::FlooTokenActivatedPacket, FlooTokenActivatedPacket::location)
+			AaronExtraCodecs.VEC3_STREAM_CODEC.map(::FlooTokenActivatedPacket, FlooTokenActivatedPacket::location)
 	}
 
 }

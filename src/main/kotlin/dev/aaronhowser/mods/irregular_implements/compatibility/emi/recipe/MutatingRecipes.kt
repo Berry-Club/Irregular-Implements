@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
@@ -136,7 +136,7 @@ object MutatingRecipes {
 	}
 
 	private fun diaphanousRecipes(): List<MutatingEmiRecipe> {
-		val level = ClientUtil.localLevel ?: return emptyList()
+		val level = AaronClientUtil.localLevel ?: return emptyList()
 
 		val validBlockStacks = BuiltInRegistries.BLOCK.mapNotNull { block ->
 			if (!DiaphanousBlock.isValidBlock(block, level)) return@mapNotNull null

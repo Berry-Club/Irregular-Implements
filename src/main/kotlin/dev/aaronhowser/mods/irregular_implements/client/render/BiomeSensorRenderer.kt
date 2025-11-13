@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.DeltaTracker
@@ -12,7 +12,7 @@ object BiomeSensorRenderer {
 	val LAYER_NAME = OtherUtil.modResource("biome_sensor_gui_layer")
 
 	fun tryRenderBiomeName(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-		val player = ClientUtil.localPlayer ?: return
+		val player = AaronClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.BIOME_SENSOR.get())) return
 
 		val level = player.level()

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
@@ -64,7 +64,7 @@ class RedstoneInterfaceBasicBlockEntity(
 		val level = this.level ?: return
 		if (!level.isClientSide) return
 
-		val player = ClientUtil.localPlayer ?: return
+		val player = AaronClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
 
 		CubeIndicatorRenderer.addIndicator(

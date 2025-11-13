@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.aaron.ClientUtil;
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil;
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig;
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
 import net.minecraft.client.MouseHandler;
@@ -26,7 +26,7 @@ abstract public class MouseHandlerMixin {
 	private void tryInvert(double movementTime, CallbackInfo ci) {
 		if (!ClientConfig.CONFIG.collapseInvertsMouse.get()) return;
 
-		var player = ClientUtil.getLocalPlayer();
+		var player = AaronClientUtil.getLocalPlayer();
 		if (player == null || !player.hasEffect(ModEffects.COLLAPSE)) return;
 
 		accumulatedDX = -accumulatedDX;

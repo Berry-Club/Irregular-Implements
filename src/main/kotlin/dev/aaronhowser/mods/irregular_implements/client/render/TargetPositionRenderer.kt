@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.world.item.ItemStack
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 object TargetPositionRenderer {
 
 	fun addCubeIndicators(event: ClientTickEvent.Post) {
-		val player = ClientUtil.localPlayer ?: return
+		val player = AaronClientUtil.localPlayer ?: return
 
 		fun addIndicator(stack: ItemStack) {
 			if (stack.`is`(ModItems.REDSTONE_TOOL)) return

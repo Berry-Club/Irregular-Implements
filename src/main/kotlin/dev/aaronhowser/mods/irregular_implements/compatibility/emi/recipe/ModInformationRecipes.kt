@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
@@ -135,7 +135,7 @@ object ModInformationRecipes {
 			)
 		)
 
-		val registryAccess = ClientUtil.localPlayer?.registryAccess()
+		val registryAccess = AaronClientUtil.localPlayer?.registryAccess()
 		if (registryAccess != null) {
 			recipes.add(
 				EmiInfoRecipe(

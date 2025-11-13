@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.item.LavaCharmItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -17,7 +17,7 @@ object LavaProtectionOverlayRenderer {
 	private const val WIDTH = 9
 
 	fun tryRender(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-		val player = ClientUtil.localPlayer ?: return
+		val player = AaronClientUtil.localPlayer ?: return
 		if (player.isCreative || player.isSpectator) return
 		val lavaProtector = LavaCharmItem.getFirstLavaProtector(player) ?: return
 

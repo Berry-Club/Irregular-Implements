@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import com.mojang.blaze3d.systems.RenderSystem
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.client.SpectreSpecialEffects
 import dev.aaronhowser.mods.irregular_implements.client.render.*
@@ -52,7 +52,7 @@ object ClientEvents {
 	}
 
 	private fun getLocalFoliageColor(stack: ItemStack, int: Int): Int {
-		val localPlayer = ClientUtil.localPlayer
+		val localPlayer = AaronClientUtil.localPlayer
 		val localFoliageColor = localPlayer?.level()
 			?.getBiome(localPlayer.blockPosition())
 			?.value()

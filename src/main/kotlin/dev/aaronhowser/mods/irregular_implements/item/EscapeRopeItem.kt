@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.handler.EscapeRopeHandler
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -38,7 +38,7 @@ class EscapeRopeItem(properties: Properties) : Item(properties) {
 	}
 
 	override fun isFoil(stack: ItemStack): Boolean {
-		val localPlayer = ClientUtil.localPlayer ?: return false
+		val localPlayer = AaronClientUtil.localPlayer ?: return false
 		if (localPlayer.level().canSeeSky(localPlayer.blockPosition())) return false
 
 		return localPlayer.useItem == stack

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.RenderUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.client.event.ClientTickEvent

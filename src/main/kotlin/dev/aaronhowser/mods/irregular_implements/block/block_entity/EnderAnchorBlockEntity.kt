@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -24,7 +24,7 @@ class EnderAnchorBlockEntity(
 
 		if (!level.isClientSide) return
 
-		val localPlayer = ClientUtil.localPlayer ?: return
+		val localPlayer = AaronClientUtil.localPlayer ?: return
 		if (!localPlayer.isHolding(ModItems.PORTABLE_ENDER_BRIDGE.get())) return
 
 		val distance = localPlayer.eyePosition.distanceTo(blockPos.center)

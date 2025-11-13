@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import dev.aaronhowser.mods.aaron.ExtraCodecs
+import dev.aaronhowser.mods.aaron.AaronExtraCodecs
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -48,7 +48,7 @@ data class RedstoneRemoteDataComponent(
 
 		val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, RedstoneRemoteDataComponent> =
 			StreamCodec.composite(
-				ExtraCodecs.STACK_LIST_STREAM_CODEC, RedstoneRemoteDataComponent::stacks,
+				AaronExtraCodecs.STACK_LIST_STREAM_CODEC, RedstoneRemoteDataComponent::stacks,
 				::RedstoneRemoteDataComponent
 			)
 

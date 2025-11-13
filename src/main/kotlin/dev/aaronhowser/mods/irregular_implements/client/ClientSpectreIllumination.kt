@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.ChunkPos
@@ -31,7 +31,7 @@ object ClientSpectreIllumination {
 			illuminatedChunks.remove(chunkPosLong)
 		}
 
-		val level = ClientUtil.localLevel
+		val level = AaronClientUtil.localLevel
 		if (level != null) {
 			SpectreIlluminationHandler.forceLightUpdates(level, chunkPos)
 		}

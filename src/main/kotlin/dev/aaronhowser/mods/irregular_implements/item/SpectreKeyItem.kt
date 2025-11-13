@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
 import net.minecraft.server.level.ServerPlayer
@@ -19,7 +19,7 @@ class SpectreKeyItem(properties: Properties) : Item(properties) {
 	override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 100
 
 	override fun isFoil(stack: ItemStack): Boolean {
-		return ClientUtil.localLevel?.dimension() == ModDimensions.SPECTRE_LEVEL_KEY
+		return AaronClientUtil.localLevel?.dimension() == ModDimensions.SPECTRE_LEVEL_KEY
 	}
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack?> {

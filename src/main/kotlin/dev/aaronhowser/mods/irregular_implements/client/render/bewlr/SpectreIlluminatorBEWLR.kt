@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.ClientUtil
-import dev.aaronhowser.mods.irregular_implements.util.RenderUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.client.render.RenderUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
@@ -26,7 +26,7 @@ class SpectreIlluminatorBEWLR : BlockEntityWithoutLevelRenderer(
 		poseStack.pushPose()
 		poseStack.translate(0.5, 0.5, 0.5)
 
-		val time = (ClientUtil.localPlayer?.tickCount ?: 0) / 200f
+		val time = (AaronClientUtil.localPlayer?.tickCount ?: 0) / 200f
 
 		RenderUtil.renderDragonRays(
 			poseStack = poseStack,

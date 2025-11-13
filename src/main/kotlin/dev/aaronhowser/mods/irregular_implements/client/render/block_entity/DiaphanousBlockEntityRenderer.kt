@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
@@ -32,7 +32,7 @@ class DiaphanousBlockEntityRenderer(
 	) {
 		val level = blockEntity.level ?: return
 
-		val player = ClientUtil.localPlayer ?: return
+		val player = AaronClientUtil.localPlayer ?: return
 		val distance = player.getPosition(partialTick).distanceToSqr(blockEntity.blockPos.center)
 
 		val clampedDistance = (distance - 8).coerceIn(0.0, 25.0).toFloat()

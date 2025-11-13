@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
 import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.renderer.MultiBufferSource
@@ -41,7 +41,7 @@ class PlayerInterfaceBlockEntityRenderer(
 
 		poseStack.pushPose()
 
-		val localPlayer = ClientUtil.localPlayer
+		val localPlayer = AaronClientUtil.localPlayer
 		if (localPlayer != null) {
 			val deltaPos = blockEntity.blockPos
 				.above()

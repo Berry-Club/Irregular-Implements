@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.aaron.ClientUtil
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -11,7 +11,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent
 object DiviningRodRenderer {
 
 	fun addCubeIndicators(event: ClientTickEvent.Post) {
-		val player = ClientUtil.localPlayer ?: return
+		val player = AaronClientUtil.localPlayer ?: return
 		val playerPos = player.blockPosition()
 		val level = player.level()
 

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements;
 
-import dev.aaronhowser.mods.aaron.ClientUtil;
+import dev.aaronhowser.mods.aaron.client.AaronClientUtil;
 import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.world.entity.player.Player;
@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 public interface KeyboardInputFunctions {
 
 	default void checkInvert() {
-		Player player = ClientUtil.getLocalPlayer();
+		Player player = AaronClientUtil.getLocalPlayer();
 		if (player == null) return;
 
 		KeyboardInput input = (KeyboardInput) this;
