@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.chat_detector
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.ChatDetectorBlockEntity
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
+import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory

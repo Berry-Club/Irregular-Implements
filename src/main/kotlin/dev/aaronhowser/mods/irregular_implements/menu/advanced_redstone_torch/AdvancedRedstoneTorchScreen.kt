@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_torch
 
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -16,7 +17,7 @@ class AdvancedRedstoneTorchScreen(
 	title: Component
 ) : BaseScreen<AdvancedRedstoneTorchMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.AdvancedRedstoneTorch
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.advancedRedstoneTorch
 	override val showInventoryLabel: Boolean = false
 	override val showTitleLabel: Boolean = false
 

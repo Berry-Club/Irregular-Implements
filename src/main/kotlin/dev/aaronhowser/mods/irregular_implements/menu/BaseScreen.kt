@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
@@ -12,7 +13,7 @@ abstract class BaseScreen<M : AbstractContainerMenu>(
 	title: Component
 ) : AbstractContainerScreen<M>(menu, playerInventory, title) {
 
-	protected abstract val background: ScreenTextures.Background
+	protected abstract val background: ScreenBackground
 
 	override fun isPauseScreen(): Boolean = false
 	protected open val showTitleLabel = true

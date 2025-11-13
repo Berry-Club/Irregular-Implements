@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector
 
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -16,7 +17,7 @@ class AdvancedItemCollectorScreen(
 	title: Component
 ) : BaseScreen<AdvancedItemCollectorMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.AdvancedItemCollector
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.advancedItemCollector
 
 	private lateinit var buttonLowerX: Button
 	private lateinit var buttonRaiseX: Button

@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
+import dev.aaronhowser.mods.aaron.menu.ScreenWithStrings
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.BaseScreen
@@ -17,7 +19,7 @@ class EnderLetterScreen(
 	title: Component
 ) : BaseScreen<EnderLetterMenu>(menu, playerInventory, title), ScreenWithStrings {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.EnderLetter
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.enderLetter
 
 	private lateinit var recipientEditBox: EditBox
 

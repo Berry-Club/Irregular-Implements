@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor
 
+import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderEnergyDistributorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
