@@ -1,5 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 
+import dev.aaronhowser.mods.aaron.menu.components.ChangingTextButton
+import dev.aaronhowser.mods.aaron.menu.components.MultiStageSpriteButton
+import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -17,7 +20,7 @@ class EntityDetectorScreen(
 	title: Component
 ) : BaseScreen<EntityDetectorMenu>(menu, playerInventory, title) {
 
-	override val background: ScreenTextures.Background = ScreenTextures.Background.EntityDetector
+	override val background: ScreenBackground = ScreenTextures.Backgrounds.entityDetector
 
 	private lateinit var buttonLowerX: Button
 	private lateinit var buttonRaiseX: Button
