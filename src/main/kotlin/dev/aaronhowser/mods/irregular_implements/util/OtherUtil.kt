@@ -1,9 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
+import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
 import net.minecraft.network.chat.Component
@@ -15,6 +17,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.monster.Spider
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -133,6 +136,26 @@ object OtherUtil {
 		val b = Mth.lerp(progress, startB.toFloat(), endB.toFloat()).toInt()
 
 		return (r shl 16) or (g shl 8) or b
+	}
+
+	@JvmStatic
+	fun shouldSpiderNotClimb(spider: Spider): Boolean {
+		if (!spider.horizontalCollision) return false
+
+		val adjacentPositions = BlockPos.betweenClosed(
+			spider.blockPosition().offset(-1, 0, -1),
+			spider.blockPosition().offset(1, 0, 1)
+		)
+
+		val level = spider.level()
+
+		for (pos in adjacentPositions) {
+			if (level.getBlockState(pos).`is`(ModBlockTagsProvider.SUPER_LUBRICATED)) {
+				return true
+			}
+		}
+
+		return false
 	}
 
 }
