@@ -12,6 +12,11 @@
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
 
+### Fixed
+
+- Hopefully fixed Advanced Redstone Interface unsetting its linked positions (#49)
+- Fixed Advanced Redstone Interface not dropping its items when destroyed (#49)
+
 # 1.6.1
 
 ### Added

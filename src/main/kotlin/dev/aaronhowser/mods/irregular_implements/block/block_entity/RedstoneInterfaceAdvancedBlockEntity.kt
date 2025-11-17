@@ -35,13 +35,13 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
 		override fun setChanged() {
 			super.setChanged()
-			updateLinkedPositions(this)
+			updateLinkedPositions()
 		}
 	}
 
 	private val invWrapper = InvWrapper(container)
 
-	private fun updateLinkedPositions(container: ImprovedSimpleContainer) {
+	private fun updateLinkedPositions() {
 		val level = this.level ?: return
 
 		val newList = mutableListOf<BlockPos>()
@@ -141,14 +141,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		ContainerHelper.loadAllItems(tag, container.items, registries)
-
-		linkedPositions.clear()
-		if (tag.contains(LINKS_NBT)) {
-			val longArrayTag = tag.getLongArray(LINKS_NBT)
-			for (long in longArrayTag) {
-				linkedPositions.add(BlockPos.of(long))
-			}
-		}
+		updateLinkedPositions()
 	}
 
 	override fun getDisplayName(): Component {

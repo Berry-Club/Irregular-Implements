@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.BiomeRadarBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceAdvancedBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.RedstoneInterfaceBasicBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Player
@@ -69,6 +71,17 @@ class RedstoneInterfaceBlock(
 			type,
 			RedstoneInterfaceBlockEntity::tick
 		)
+	}
+
+	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
+		if (!state.`is`(newState.block)) {
+			val be = level.getBlockEntity(pos)
+			if (be is RedstoneInterfaceAdvancedBlockEntity) {
+				Containers.dropContents(level, pos, be.container)
+			}
+		}
+
+		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 }
