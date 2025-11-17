@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.block.OnlineDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.online_detector.OnlineDetectorMenu
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup

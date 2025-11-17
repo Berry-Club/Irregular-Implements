@@ -3,8 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 import dev.aaronhowser.mods.aaron.menu.BaseScreen
 import dev.aaronhowser.mods.aaron.menu.components.ItemStackButton
 import dev.aaronhowser.mods.aaron.menu.textures.ScreenBackground
+import dev.aaronhowser.mods.aaron.packet.c2s.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.menu.ScreenTextures
-import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.ClientClickedMenuButton
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component

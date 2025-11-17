@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
 import dev.aaronhowser.mods.aaron.ServerScheduler
+import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithStrings
-import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
