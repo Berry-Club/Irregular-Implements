@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.IronDropperBlockEntity
-import dev.aaronhowser.mods.irregular_implements.menu.MenuWithButtons
+import dev.aaronhowser.mods.aaron.menu.MenuWithButtons
 import dev.aaronhowser.mods.irregular_implements.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
