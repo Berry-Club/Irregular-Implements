@@ -142,7 +142,7 @@ object ModTooltipLang {
 			add(UNINVERTED, "Uninverted")
 			add(PORTKEY_DESTINATION, "%s: %d, %d, %d")
 			add(PORTKEY_DISGUISE, "Disguised as: %s")
-			add(SODIUM_INCOMPATIBLE, "Non-functional when Sodium is installed")
+			add(SODIUM_INCOMPATIBLE, "Not fully compatible with Sodium")
 		}
 	}
 

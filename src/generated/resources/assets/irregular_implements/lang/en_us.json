@@ -821,7 +821,7 @@
   "tooltip.irregular_implements.portkey_disguise": "Disguised as: %s",
   "tooltip.irregular_implements.shift_for_more": "Hold SHIFT for more information",
   "tooltip.irregular_implements.show_lazy_shape": "Show Lazy Shape",
-  "tooltip.irregular_implements.sodium_incompatible": "Non-functional when Sodium is installed",
+  "tooltip.irregular_implements.sodium_incompatible": "Not fully compatible with Sodium",
   "tooltip.irregular_implements.stops_message": "Stops message",
   "tooltip.irregular_implements.summoning_pendulum_fraction": "Stored: %d/%d",
   "tooltip.irregular_implements.summoning_pendulum_list_each": "• %s",

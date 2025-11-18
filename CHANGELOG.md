@@ -4,11 +4,12 @@
 
 - The mod now requires [Aaron](https://www.curseforge.com/minecraft/mc-mods/aaron), my new library mod
   - "Aaron" is so much funnier of a name than "Aaron Lib" or "Berry Lib" or whatever
-- Added a tooltip to certain items if Sodium or Embeddium are installed, saying that it doesn't work
+- Added a tooltip to certain items if Sodium or Embeddium are installed, saying that it doesn't fully work
   - I'll try to figure out how to make it work with those but my hopes aren't super high
   - This applies to:
-    - Spectre Illuminator
-    - Divining Rod
+    - Spectre Illuminator (doesn't change the block light level, only entities)
+    - Divining Rod (doesn't render through blocks, which is kind of the point)
+    - Portable Ender Bridge (doesn't render through blocks, which makes it harder to use but it still kind of functions)
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
 
