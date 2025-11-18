@@ -1,6 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
+import net.neoforged.fml.ModList
 
 object ModTooltipLang {
 
@@ -69,6 +73,7 @@ object ModTooltipLang {
 	const val UNINVERTED = "tooltip.irregular_implements.uninverted"
 	const val PORTKEY_DESTINATION = "tooltip.irregular_implements.portkey_destination"
 	const val PORTKEY_DISGUISE = "tooltip.irregular_implements.portkey_disguise"
+	const val SODIUM_INCOMPATIBLE = "tooltip.irregular_implements.sodium_incompatible"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -137,6 +142,20 @@ object ModTooltipLang {
 			add(UNINVERTED, "Uninverted")
 			add(PORTKEY_DESTINATION, "%s: %d, %d, %d")
 			add(PORTKEY_DISGUISE, "Disguised as: %s")
+			add(SODIUM_INCOMPATIBLE, "Non-functional when Sodium is installed")
+		}
+	}
+
+	fun addSodiumTooltip(tooltipComponents: MutableList<Component>) {
+		val modList = ModList.get()
+		val sodiumInstalled = modList.isLoaded("sodium") || modList.isLoaded("embeddium")
+
+		if (sodiumInstalled) {
+			tooltipComponents.add(
+				SODIUM_INCOMPATIBLE
+					.toComponent()
+					.withStyle(ChatFormatting.RED)
+			)
 		}
 	}
 

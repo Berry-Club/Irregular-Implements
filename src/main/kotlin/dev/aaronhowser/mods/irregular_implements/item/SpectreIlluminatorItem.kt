@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import net.minecraft.ChatFormatting
@@ -51,16 +52,7 @@ class SpectreIlluminatorItem(properties: Properties) : Item(properties) {
 	}
 
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val modList = ModList.get()
-		val sodiumInstalled = modList.isLoaded("sodium") || modList.isLoaded("embeddium")
-
-		if (sodiumInstalled) {
-			tooltipComponents.add(
-				ModMessageLang.ILLUMINATOR_SODIUM
-					.toComponent()
-					.withStyle(ChatFormatting.RED)
-			)
-		}
+		ModTooltipLang.addSodiumTooltip(tooltipComponents)
 	}
 
 }

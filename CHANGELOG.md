@@ -4,8 +4,11 @@
 
 - The mod now requires [Aaron](https://www.curseforge.com/minecraft/mc-mods/aaron), my new library mod
   - "Aaron" is so much funnier of a name than "Aaron Lib" or "Berry Lib" or whatever
-- Added a tooltip to the Spectre Illuminator if Sodium or Embeddium are installed, saying that it doesn't work
+- Added a tooltip to certain items if Sodium or Embeddium are installed, saying that it doesn't work
   - I'll try to figure out how to make it work with those but my hopes aren't super high
+  - This applies to:
+    - Spectre Illuminator
+    - Divining Rod
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
 

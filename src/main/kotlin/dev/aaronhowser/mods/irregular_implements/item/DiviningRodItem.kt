@@ -36,6 +36,8 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		}
 
 		tooltipComponents.add(component)
+
+		ModTooltipLang.addSodiumTooltip(tooltipComponents)
 	}
 
 	companion object {
