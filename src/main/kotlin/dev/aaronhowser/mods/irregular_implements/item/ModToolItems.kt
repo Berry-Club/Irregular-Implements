@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
+import dev.aaronhowser.mods.aaron.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.world.entity.EquipmentSlotGroup

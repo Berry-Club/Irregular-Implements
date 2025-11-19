@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries

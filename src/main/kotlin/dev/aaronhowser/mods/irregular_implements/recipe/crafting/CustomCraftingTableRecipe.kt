@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
+import dev.aaronhowser.mods.aaron.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers

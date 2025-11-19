@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems

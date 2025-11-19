@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import dev.aaronhowser.mods.aaron.datagen.AaronRecipeProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
@@ -22,18 +23,16 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potions
-import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
-import net.neoforged.neoforge.common.crafting.DataComponentIngredient
 import vazkii.patchouli.api.PatchouliAPI
 import java.util.concurrent.CompletableFuture
 
 class ModRecipeProvider(
 	output: PackOutput,
 	lookupProvider: CompletableFuture<HolderLookup.Provider>
-) : RecipeProvider(output, lookupProvider) {
+) : AaronRecipeProvider(output, lookupProvider) {
 
 	override fun buildRecipes(recipeOutput: RecipeOutput) {
 		for (shapedRecipe in shapedRecipes) {
@@ -69,89 +68,6 @@ class ModRecipeProvider(
 	// Energy Distributor
 	// Ender Energy Distributor
 	// Number Spectre Coil (dungeon loot?)
-
-	private sealed class IngredientType {
-		data class TagKeyIng(val tagKey: TagKey<Item>) : IngredientType()
-		data class ItemLikeIng(val item: ItemLike) : IngredientType()
-		data class ItemStackIng(val itemStack: ItemStack) : IngredientType()
-
-		fun getIngredient(): Ingredient {
-			return when (this) {
-				is TagKeyIng -> tagKey.asIngredient()
-				is ItemLikeIng -> item.asIngredient()
-				is ItemStackIng -> if (itemStack.isComponentsPatchEmpty) {
-					Ingredient.of(itemStack)
-				} else {
-					DataComponentIngredient.of(false, itemStack)
-				}
-
-			}
-		}
-
-	}
-
-	private fun ing(tagKey: TagKey<Item>) = IngredientType.TagKeyIng(tagKey)
-	private fun ing(item: ItemLike) = IngredientType.ItemLikeIng(item)
-	private fun ing(itemStack: ItemStack) = IngredientType.ItemStackIng(itemStack)
-
-	private fun <T : IngredientType> shapedRecipe(
-		output: ItemStack,
-		patterns: String,
-		definitions: Map<Char, T>,
-		unlockedByName: String = "has_log",
-		unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
-	): ShapedRecipeBuilder {
-		var temp = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, output)
-
-		for (pattern in patterns.split(",")) {
-			temp = temp.pattern(pattern)
-		}
-
-		for (definition in definitions) {
-			temp = when (val ing = definition.value) {
-				is IngredientType.TagKeyIng -> temp.define(definition.key, ing.getIngredient())
-				is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.getIngredient())
-				is IngredientType.ItemStackIng -> temp.define(definition.key, ing.getIngredient())
-			}
-		}
-
-		return temp.unlockedBy(unlockedByName, unlockedByCriterion)
-	}
-
-	private fun <T : IngredientType> shapedRecipe(
-		output: ItemLike,
-		count: Int,
-		patterns: String,
-		definitions: Map<Char, T>,
-		unlockedByName: String = "has_log",
-		unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
-	): ShapedRecipeBuilder {
-		var temp = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, output, count)
-
-		for (pattern in patterns.split(",")) {
-			temp = temp.pattern(pattern)
-		}
-
-		for (definition in definitions) {
-			temp = when (val ing = definition.value) {
-				is IngredientType.TagKeyIng -> temp.define(definition.key, ing.getIngredient())
-				is IngredientType.ItemLikeIng -> temp.define(definition.key, ing.getIngredient())
-				is IngredientType.ItemStackIng -> temp.define(definition.key, ing.getIngredient())
-			}
-		}
-
-		return temp.unlockedBy(unlockedByName, unlockedByCriterion)
-	}
-
-	private fun <T : IngredientType> shapedRecipe(
-		output: ItemLike,
-		patterns: String,
-		definitions: Map<Char, T>,
-		unlockedByName: String = "has_log",
-		unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
-	): ShapedRecipeBuilder {
-		return shapedRecipe(output, 1, patterns, definitions, unlockedByName, unlockedByCriterion)
-	}
 
 	private val shapedRecipes: List<ShapedRecipeBuilder> = listOf(
 		shapedRecipe(
@@ -1252,8 +1168,7 @@ class ModRecipeProvider(
 				'C' to ing(Tags.Items.COBBLESTONES_NORMAL),
 				'F' to ing(Items.FLINT_AND_STEEL)
 			)
-		)
-		,
+		),
 		shapedRecipe(
 			PatchouliAPI.get().getBookStack(OtherUtil.modResource("guide")),
 			"BBB, B ,BBB",
@@ -1693,10 +1608,5 @@ class ModRecipeProvider(
 		SpecialRecipeBuilder.special(::SetEmeraldCompassPlayerRecipe) to "set_emerald_compass_player",
 		SpecialRecipeBuilder.special(::SetGoldenCompassPositionRecipe) to "set_golden_compass_position",
 	)
-
-	companion object {
-		fun ItemLike.asIngredient(): Ingredient = Ingredient.of(this)
-		fun TagKey<Item>.asIngredient(): Ingredient = Ingredient.of(this)
-	}
 
 }

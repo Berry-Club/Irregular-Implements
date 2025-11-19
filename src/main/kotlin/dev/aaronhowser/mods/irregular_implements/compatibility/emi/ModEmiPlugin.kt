@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.*
-import dev.aaronhowser.mods.irregular_implements.datagen.ModRecipeProvider.Companion.asIngredient
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
