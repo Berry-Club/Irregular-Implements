@@ -85,6 +85,9 @@ class RedstoneHandlerSavedData : SavedData() {
 	companion object {
 		private const val TAG_SAVED_SIGNALS = "saved_signals"
 
+		const val SAVED_DATA_NAME = "ii_redstone_handler"
+		const val OLD_SAVED_DATA_NAME = "redstone_handler"
+
 		private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
 			val redstoneHandlerSavedData = RedstoneHandlerSavedData()
 
@@ -106,9 +109,14 @@ class RedstoneHandlerSavedData : SavedData() {
 				return get(level.server.overworld())
 			}
 
-			return level.dataStorage.computeIfAbsent(
+			val storage = level.dataStorage
+			val factory = Factory(::RedstoneHandlerSavedData, ::load)
+
+			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
+
+			return existing ?: storage.computeIfAbsent(
 				Factory(::RedstoneHandlerSavedData, ::load),
-				"redstone_handler"
+				SAVED_DATA_NAME
 			)
 		}
 

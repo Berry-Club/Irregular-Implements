@@ -19,6 +19,7 @@
 	- Old ones are not deleted, but won't be read from if the new one exists.
 		- `ender_letter_inventories` -> `ii_ender_letter_inventories`
         - `floo_network` -> `ii_floo_network`
+        - `redstone_handler` -> `ii_redstone_handler`
 		- `spectre_coil` -> `ii_spectre_energy`
 		- `spectre_cube` -> `ii_spectre_cubes`
 		- `spectre_illumination_handler` -> `ii_spectre_illumination`
