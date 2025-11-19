@@ -3,23 +3,24 @@
 ### Changed
 
 - The mod now requires [Aaron](https://www.curseforge.com/minecraft/mc-mods/aaron), my new library mod
-  - "Aaron" is so much funnier of a name than "Aaron Lib" or "Berry Lib" or whatever
-  - The code should also be a lot cleaner, now
+	- "Aaron" is so much funnier of a name than "Aaron Lib" or "Berry Lib" or whatever
+	- The code should also be a lot cleaner, now
 - Added a tooltip to certain items if Sodium or Embeddium are installed, saying that it doesn't fully work
-  - I'll try to figure out how to make it work with those but my hopes aren't super high
-  - This applies to:
-    - Spectre Illuminator (doesn't change the block light level, only entities)
-    - Divining Rod (doesn't render through blocks, which is kind of the point)
-    - Portable Ender Bridge (doesn't render through blocks, which makes it harder to use but it still kind of functions)
+	- I'll try to figure out how to make it work with those but my hopes aren't super high
+	- This applies to:
+		- Spectre Illuminator (doesn't change the block light level, only entities)
+		- Divining Rod (doesn't render through blocks, which is kind of the point)
+		- Portable Ender Bridge (doesn't render through blocks, which makes it harder to use but it still kind of functions)
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
 - Renamed SpectreCoilHAndler to SpectreEnergyHandler
 - Renamed SavedData files
-  - They'll still try to load the old ones, but they only save the new ones. Old ones are not deleted, but won't be read from if the new one exists.
-    - `spectre_coil` -> `ii_spectre_energy`
-    - `spectre_illumination_handler` -> `ii_spectre_illumination`
-    - `ender_letter_inventories` -> `ii_ender_letter_inventories`
-    - `spectre_cube` -> `ii_spectre_cubes`
+	- That is, the files stored in `/saves/<world>/data/`
+	- Old ones are not deleted, but won't be read from if the new one exists.
+		- `ender_letter_inventories` -> `ii_ender_letter_inventories`
+		- `spectre_coil` -> `ii_spectre_energy`
+		- `spectre_cube` -> `ii_spectre_cubes`
+		- `spectre_illumination_handler` -> `ii_spectre_illumination`
 
 ### Fixed
 
@@ -27,7 +28,7 @@
 - Fixed Advanced Redstone Interface not dropping its items when destroyed (#49)
 - Marked the version range required for Kotlin for Forge
 - Fixed a stack overflow error when wireless redstone blocks try to listen or talk to other wireless redstone blocks (#51)
-  - Technically it works by making them ignore the destination block if it has the block tag `#irregular_implements:ignores_wireless_redstone`
+	- Technically it works by making them ignore the destination block if it has the block tag `#irregular_implements:ignores_wireless_redstone`
 - Fixed an integer overflow in the Spectre Energy Injector
 
 # 1.6.1
@@ -43,9 +44,9 @@
 ### Fixed
 
 - The Slime Cube doesn't crash the server when placed now (#43)
-  - When making it, I reused a lot of code from the Rain Shield. Unfortunately, it was also checking for the Rain Shield's block property, instead of the Slime Cube's. That's fixed now.
+	- When making it, I reused a lot of code from the Rain Shield. Unfortunately, it was also checking for the Rain Shield's block property, instead of the Slime Cube's. That's fixed now.
 - The Slime Cube actually works now
-  - Aside from crashing, it also didn't actually work to begin with. I was packing a ChunkPos into a long and then treating it as a BlockPos, which does not work
+	- Aside from crashing, it also didn't actually work to begin with. I was packing a ChunkPos into a long and then treating it as a BlockPos, which does not work
 - Hopefully fixed a crash when something tries to access the Pitcher Plant's fluid capability while the level was loading, maybe (#41)
 
 # 1.6.0
@@ -53,43 +54,43 @@
 ### Added
 
 - Patchouli documentation
-  - I had to update a Patchouli DataGen mod from 1.19 for this lol
-  - Not everything is documented, but most of it is. This update was getting a bit inflated and this is the biggest bottleneck, and I don't want to put off releasing all these changes and fixes just because I need to spend 5 more hours documenting every obscure item in the mod lol
+	- I had to update a Patchouli DataGen mod from 1.19 for this lol
+	- Not everything is documented, but most of it is. This update was getting a bit inflated and this is the biggest bottleneck, and I don't want to put off releasing all these changes and fixes just because I need to spend 5 more hours documenting every obscure item in the mod lol
 
 ### Changed
 
 - Renamed the item tag `#irregular_implements:fluid_tags` to `#irregular_implements:can_stand_on_fluids`, since that's what it's used for
 - The function to see if you can stand on a fluid now checks for the `#irregular_implements:can_stand_on_fluids` tag in all armor and curio slots, rather than just feet
 	- Currently no non-footwear items use that tag, but now you can add them yourself
-    - Note that this also applies to things like Horse Armor!
+	- Note that this also applies to things like Horse Armor!
 - The Biome Painter now defaults to having a radius of 2 instead of 0
-  - Now it has a default volume of 5x5x5 instead of 1x1x1
+	- Now it has a default volume of 5x5x5 instead of 1x1x1
 - Ender Anchors now have a Block Entity, which allows them to do some more stuff
 - When holding a Portable Ender Bridge, Ender Anchors now glow through blocks
 - The Portable Ender Bridge now lets you teleport to Ender Anchors even if there's a block in the way
 - The Portable Ender Bridge makes a sound when used
 - The Ender Bridge now successfully doesn't work if it doesn't work, instead of searching for an infinite distance
-  - Previously it would literally just check every (loaded) block that's in front of it, infinitely
-  - Now that Anchors have a Block Entity, I can just search if any of those are in front of it instead
-  - If there aren't, the Bridge stops "searching" after 5 seconds
-  - If there are, it waits for (distance in blocks / Bridge search speed) ticks and then teleports you
+	- Previously it would literally just check every (loaded) block that's in front of it, infinitely
+	- Now that Anchors have a Block Entity, I can just search if any of those are in front of it instead
+	- If there aren't, the Bridge stops "searching" after 5 seconds
+	- If there are, it waits for (distance in blocks / Bridge search speed) ticks and then teleports you
 - Ender Bridges now work if there's a block between it and the targeted Anchor
 - Upon emptying the Summoning Pendulum, it removes the data component entirely instead of just setting it to an empty entity nbt list
 - The Slime Cube's chunk radius is now configurable (it was before, but it was using the Rain Shield's radius)
 - Inverted Diaphaneous Blocks pulsate at an inverted amplitude as regular ones
 - Minor improvements to the Nature Core
-  - It no longer spawns mobs in the air
-  - It now plants saplings in a circle around it, rather than just on the -X -Z corner
+	- It no longer spawns mobs in the air
+	- It now plants saplings in a circle around it, rather than just on the -X -Z corner
 
 ### Fixed
 
 - Massively changed how Spectre Illumination works, which should hopefully fix all its issues and maybe make some more exciting new ones instead
-  - It's now a SavedData, synced using packets and stuff
+	- It's now a SavedData, synced using packets and stuff
 - Added mining particles to Glowing Mushrooms (#32)
 - Added an alias to ModBlockEntityTypes for `redstone_interface` -> `basic_redstone_interface` to prevent data loss, so 1.5.0 is no longer a breaking change
 - The Escape Rope no longer duplicates itself
 - Fixed the Obsidian Skull Ring not doing anything
-  - It was looking for an Obsidian Skull in curio slots instead of the Ring
+	- It was looking for an Obsidian Skull in curio slots instead of the Ring
 - Fixed the Biome Capsule not using its saved biome for its color
 - Spectre Chargers should now charge the entire inventory, including armor, the offhand, and Curio slots (#35)
 
