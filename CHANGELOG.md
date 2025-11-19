@@ -1,5 +1,10 @@
 # 1.7.0
 
+### Added
+
+- Added the `/ii spectre-energy` command
+  - Has both a `set <player> <amount>` and a `get <player>` subcommand
+
 ### Changed
 
 - The mod now requires [Aaron](https://www.curseforge.com/minecraft/mc-mods/aaron), my new library mod
