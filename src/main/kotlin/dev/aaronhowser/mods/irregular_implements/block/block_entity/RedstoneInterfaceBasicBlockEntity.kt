@@ -99,10 +99,7 @@ class RedstoneInterfaceBasicBlockEntity(
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		val l = level
-		if (l != null) {
-			this.loadFromTag(l, tag)
-		}
+		this.loadFromTag(tag)
 	}
 
 }
