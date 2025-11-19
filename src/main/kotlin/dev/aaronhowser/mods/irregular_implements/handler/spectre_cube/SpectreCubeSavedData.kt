@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
@@ -183,12 +184,7 @@ class SpectreCubeSavedData : SavedData() {
 			val storage = level.dataStorage
 			val factory = Factory(::SpectreCubeSavedData, ::load)
 
-			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
-
-			return existing ?: storage.computeIfAbsent(
-				Factory(::SpectreCubeSavedData, ::load),
-				SAVED_DATA_NAME
-			)
+			return OtherUtil.updateSavedDataLocation(storage, factory, SAVED_DATA_NAME, OLD_SAVED_DATA_NAME)
 		}
 
 		fun getSpectreLevel(level: ServerLevel): ServerLevel {

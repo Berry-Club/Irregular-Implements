@@ -26,6 +26,8 @@ import net.minecraft.world.item.alchemy.PotionContents
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.saveddata.SavedData
+import net.minecraft.world.level.storage.DimensionDataStorage
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
 
@@ -156,6 +158,29 @@ object OtherUtil {
 		}
 
 		return false
+	}
+
+	fun <T : SavedData> updateSavedDataLocation(
+		storage: DimensionDataStorage,
+		factory: SavedData.Factory<T>,
+		newFileName: String,
+		oldFileName: String
+	): T {
+		val newData = storage.get(factory, newFileName)
+		val oldData = storage.get(factory, oldFileName)
+
+		if (newData != null) {
+			return newData
+		}
+
+		if (oldData != null) {
+			storage.set(newFileName, oldData)
+			oldData.setDirty(true)
+			return oldData
+		}
+
+		// Neither exists → create new under the new name
+		return storage.computeIfAbsent(factory, newFileName)
 	}
 
 }
