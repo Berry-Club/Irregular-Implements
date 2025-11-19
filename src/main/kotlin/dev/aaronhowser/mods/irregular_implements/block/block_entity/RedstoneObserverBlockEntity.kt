@@ -34,34 +34,56 @@ class RedstoneObserverBlockEntity(
 	}
 
 	private var linkedPos: BlockPos? = null
+	private var futureLinkedPos: BlockPos? = null
 
 	override fun getLinkedPos(): BlockPos? = linkedPos
 
+	/**
+	 * Actually sets futureLinkedPos; the change will be applied on the next server tick.
+	 * The reason for this is that when the BlockEntity is first being loaded, Level is null, which means
+	 * we can't link/unlink blocks at that time.
+	 */
 	override fun setLinkedPos(pos: BlockPos?) {
+		futureLinkedPos = pos
+	}
+
+	private fun setLinkedPosFinal() {
+		if (linkedPos == futureLinkedPos) return
+		val level = this.level ?: return
+
 		val oldPos = linkedPos
 		if (oldPos != null) {
 			unlinkBlock(
-				level = this.level!!,
+				level = level,
 				observerPos = this.blockPos,
 				targetPos = oldPos
 			)
 		}
 
-		if (pos != null) {
+		val newPos = futureLinkedPos
+
+		if (newPos != null) {
 			linkBlock(
-				level = this.level!!,
+				level = level,
 				observerPos = this.blockPos,
-				targetPos = pos
+				targetPos = newPos
 			)
 		} else {
-			removeObserver(this.level!!, this.blockPos)
+			removeObserver(level, this.blockPos)
 		}
 
-		linkedPos = pos
+		linkedPos = newPos
 		setChanged()
 	}
 
-	fun clientTick() {
+	private fun serverTick() {
+		val level = this.level ?: return
+		if (level.isClientSide) return
+
+		setLinkedPosFinal()
+	}
+
+	private fun clientTick() {
 		val level = this.level ?: return
 		if (!level.isClientSide) return
 
@@ -171,6 +193,8 @@ class RedstoneObserverBlockEntity(
 		) {
 			if (level.isClientSide) {
 				blockEntity.clientTick()
+			} else {
+				blockEntity.serverTick()
 			}
 		}
 	}
