@@ -27,7 +27,7 @@
 		- `spectre_coil` -> `ii_spectre_energy`
 		- `spectre_cube` -> `ii_spectre_cubes`
 		- `spectre_illumination_handler` -> `ii_spectre_illumination`
-- Renamed the `/ii fireplace` command to `/ii floo
+- Renamed the `/ii fireplace` command to `/ii floo`
 
 ### Fixed
 
