@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-05T14:27:02.9931497	Recipes
+// 1.21.1	2025-11-19T02:27:18.5169112	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
 29c1c86238aae7a307c3aae2ad5cc37f7d24a6ea data/irregular_implements/advancement/recipes/imbuing/imbuing/fire_imbue.json
@@ -478,3 +478,5 @@ cf9a48f2bb098783c7950395886c38bb2a966c59 data/irregular_implements/recipe/wash_b
 d0695b7d5d8141a7bae8235847542fe14d4809df data/irregular_implements/recipe/weather_egg_rainy.json
 1a46ba191dff2d0d3fcdfa1999181924da2181d9 data/irregular_implements/recipe/weather_egg_stormy.json
 d2fe76a0d2ec62851e860a3bb6a04d83b8def8aa data/irregular_implements/recipe/weather_egg_sunny.json
+9e6a4aa1d5ad92c7f9b338d37147c1017c67af52 data/patchouli/advancement/recipes/misc/guide_book.json
+09ad2e61207a634e95549fed9e5521a635dd8b40 data/patchouli/recipe/guide_book.json

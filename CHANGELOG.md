@@ -1,3 +1,10 @@
+# 1.7.1
+
+### Changed
+
+- Stopped marking Modonomicon as an optional dependency, since that book is super broken rn
+- Added a recipe for the Patchouli book
+
 # 1.7.0
 
 ### Added

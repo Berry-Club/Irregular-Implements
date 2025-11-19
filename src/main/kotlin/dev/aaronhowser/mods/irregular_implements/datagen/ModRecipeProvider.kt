@@ -27,6 +27,7 @@ import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient
+import vazkii.patchouli.api.PatchouliAPI
 import java.util.concurrent.CompletableFuture
 
 class ModRecipeProvider(
@@ -1250,6 +1251,14 @@ class ModRecipeProvider(
 				'N' to ing(Tags.Items.NETHERRACKS),
 				'C' to ing(Tags.Items.COBBLESTONES_NORMAL),
 				'F' to ing(Items.FLINT_AND_STEEL)
+			)
+		)
+		,
+		shapedRecipe(
+			PatchouliAPI.get().getBookStack(OtherUtil.modResource("guide")),
+			"BBB, B ,BBB",
+			mapOf(
+				'B' to ing(Items.BOOK)
 			)
 		)
 	)

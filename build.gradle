@@ -240,9 +240,9 @@ unifiedPublishing {
 				curseforge = modrinth = "aaron"
 			}
 
-			optional {
-				curseforge = modrinth = "modonomicon"
-			}
+//			optional {
+//				curseforge = modrinth = "modonomicon"
+//			}
 
 			optional {
 				curseforge = modrinth = "patchouli"

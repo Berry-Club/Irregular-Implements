@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    }
+  },
+  "pattern": [
+    "BBB",
+    " B ",
+    "BBB"
+  ],
+  "result": {
+    "components": {
+      "patchouli:book": "irregular_implements:guide"
+    },
+    "count": 1,
+    "id": "patchouli:guide_book"
+  }
+}
