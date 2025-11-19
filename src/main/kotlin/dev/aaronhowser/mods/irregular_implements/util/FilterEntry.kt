@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.aaron.AaronExtraCodecs
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import net.minecraft.ChatFormatting
@@ -149,7 +150,7 @@ sealed interface FilterEntry {
 
 			val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, Tag> =
 				StreamCodec.composite(
-					OtherUtil.tagKeyStreamCodec(Registries.ITEM), Tag::tagKey,
+					AaronExtraCodecs.tagKeyStreamCodec(Registries.ITEM), Tag::tagKey,
 					ItemStack.STREAM_CODEC, Tag::backupStack,
 					::Tag
 				)
