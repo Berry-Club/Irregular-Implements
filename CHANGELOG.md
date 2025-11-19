@@ -18,6 +18,7 @@
 
 - Hopefully fixed Advanced Redstone Interface unsetting its linked positions (#49)
 - Fixed Advanced Redstone Interface not dropping its items when destroyed (#49)
+- Marked the version range required for Kotlin for Forge
 
 # 1.6.1
 

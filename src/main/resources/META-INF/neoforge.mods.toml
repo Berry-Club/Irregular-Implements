@@ -27,9 +27,16 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${ mod_id }]]
+modId = "kotlinforforge"
+type = "required"
+versionRange = "${kff_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
 modId = "aaron"
 type = "required"
-versionRange = "${aaron_lib_version}"
+versionRange = "${aaron_lib_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
