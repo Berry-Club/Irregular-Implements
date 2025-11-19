@@ -19,7 +19,7 @@ object ModCommands {
 	) {
 		val root = dispatcher.register(
 			Commands.literal("irregular-implements")
-				.then(FireplaceCommand.register())
+				.then(FlooCommand.register())
 				.then(NotifyCommand.register(buildContext))
 		)
 

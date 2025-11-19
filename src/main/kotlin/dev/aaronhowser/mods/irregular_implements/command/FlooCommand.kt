@@ -16,14 +16,14 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.Level
 
-object FireplaceCommand {
+object FlooCommand {
 
 	private const val FIREPLACE_NAME = "fireplace_name"
 	private const val DIMENSION = "dimension"
 
 	fun register(): ArgumentBuilder<CommandSourceStack, *> {
 		return Commands
-			.literal("fireplace")
+			.literal("floo")
 			.then(createListCommand())
 			.then(createTeleportCommand())
 	}
