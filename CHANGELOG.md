@@ -4,6 +4,7 @@
 
 - The mod now requires [Aaron](https://www.curseforge.com/minecraft/mc-mods/aaron), my new library mod
   - "Aaron" is so much funnier of a name than "Aaron Lib" or "Berry Lib" or whatever
+  - The code should also be a lot cleaner, now
 - Added a tooltip to certain items if Sodium or Embeddium are installed, saying that it doesn't fully work
   - I'll try to figure out how to make it work with those but my hopes aren't super high
   - This applies to:
