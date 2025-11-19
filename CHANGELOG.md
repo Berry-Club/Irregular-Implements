@@ -15,8 +15,10 @@
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
 - Renamed SpectreCoilHAndler to SpectreEnergyHandler
 - Renamed SavedData files
-  - They'll still try to load the old ones, but they only save the new ones
+  - They'll still try to load the old ones, but they only save the new ones. Old ones are not deleted, but won't be read from if the new one exists.
     - `spectre_coil` -> `ii_spectre_energy`
+    - `spectre_illumination_handler` -> `ii_spectre_illumination`
+    - `ender_letter_inventories` -> `ii_ender_letter_inventories`
 
 ### Fixed
 

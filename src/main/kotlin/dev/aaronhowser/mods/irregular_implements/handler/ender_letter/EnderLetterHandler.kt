@@ -42,6 +42,9 @@ class EnderLetterHandler : SavedData() {
 		const val OWNER_UUID_NBT = "OwnerUUID"
 		const val INVENTORY_NBT = "Inventory"
 
+		const val SAVED_DATA_NAME = "ii_ender_letter_inventories"
+		const val OLD_SAVED_DATA_NAME = "ender_letter_inventories"
+
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): EnderLetterHandler {
 			val handler = EnderLetterHandler()
 
@@ -67,9 +70,14 @@ class EnderLetterHandler : SavedData() {
 				return get(level.server.overworld())
 			}
 
-			return level.dataStorage.computeIfAbsent(
+			val storage = level.dataStorage
+			val factory = Factory(::EnderLetterHandler, ::load)
+
+			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
+
+			return existing ?: storage.computeIfAbsent(
 				Factory(::EnderLetterHandler, ::load),
-				"ender_letter_inventories"
+				SAVED_DATA_NAME
 			)
 		}
 
