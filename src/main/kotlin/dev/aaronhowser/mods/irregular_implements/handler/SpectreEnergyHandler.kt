@@ -36,25 +36,14 @@ class SpectreEnergyHandler : SavedData() {
 				return actualReceived
 			}
 
-			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
-				return 0
-			}
-
 			override fun getEnergyStored(): Int {
 				return playerStoredEnergy.getOrDefault(ownerUuid, 0)
 			}
 
-			override fun getMaxEnergyStored(): Int {
-				return MAX_ENERGY
-			}
-
-			override fun canExtract(): Boolean {
-				return false
-			}
-
-			override fun canReceive(): Boolean {
-				return true
-			}
+			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int = 0
+			override fun getMaxEnergyStored(): Int = getMaxEnergy()
+			override fun canExtract(): Boolean = false
+			override fun canReceive(): Boolean = true
 		}
 
 		cachedEnergyInjectors[ownerUuid] = new
@@ -67,10 +56,6 @@ class SpectreEnergyHandler : SavedData() {
 		if (existing != null) return existing
 
 		val new = object : IEnergyStorage {
-			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
-				return 0
-			}
-
 			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
 				val currentEntity = playerStoredEnergy.getOrDefault(ownerUuid, 0)
 				val newEnergy = maxOf(
@@ -91,17 +76,10 @@ class SpectreEnergyHandler : SavedData() {
 				return playerStoredEnergy.getOrDefault(ownerUuid, 0)
 			}
 
-			override fun getMaxEnergyStored(): Int {
-				return MAX_ENERGY
-			}
-
-			override fun canExtract(): Boolean {
-				return true
-			}
-
-			override fun canReceive(): Boolean {
-				return false
-			}
+			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int = 0
+			override fun getMaxEnergyStored(): Int = getMaxEnergy()
+			override fun canExtract(): Boolean = true
+			override fun canReceive(): Boolean = false
 		}
 
 		cachedCoils[ownerUuid] = new
@@ -123,6 +101,17 @@ class SpectreEnergyHandler : SavedData() {
 	}
 
 	companion object {
+		const val OLD_SAVED_DATA_NAME = "spectre_coil"
+		const val SAVED_DATA_NAME = "ii_spectre_energy"
+
+		const val PLAYER_ENERGIES_NBT = "player_energies"
+		const val PLAYER_ENERGIES_NBT_OLD = "coil_entries"
+
+		const val UUID_NBT = "uuid"
+		const val ENERGY_NBT = "energy"
+
+		fun getMaxEnergy(): Int = ServerConfig.CONFIG.spectreBufferCapacity.get()
+
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreEnergyHandler {
 			val spectreEnergyHandler = SpectreEnergyHandler()
 
@@ -158,18 +147,6 @@ class SpectreEnergyHandler : SavedData() {
 				SAVED_DATA_NAME
 			)
 		}
-
-		const val OLD_SAVED_DATA_NAME = "spectre_coil"
-		const val SAVED_DATA_NAME = "ii_spectre_energy"
-
-		const val PLAYER_ENERGIES_NBT = "player_energies"
-		const val PLAYER_ENERGIES_NBT_OLD = "coil_entries"
-
-		const val UUID_NBT = "uuid"
-		const val ENERGY_NBT = "energy"
-
-		val MAX_ENERGY: Int
-			get() = ServerConfig.CONFIG.spectreBufferCapacity.get()
 	}
 
 }

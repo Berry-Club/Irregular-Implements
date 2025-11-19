@@ -14,7 +14,6 @@
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
 - Renamed SpectreCoilHAndler to SpectreEnergyHandler
-  - Also changed the save file name from `spectre_coil` to `ii_spectre_energy`. It still tries to load the old one, but it only saves the new one.
 - Renamed SavedData files
   - They'll still try to load the old ones, but they only save the new ones
     - `spectre_coil` -> `ii_spectre_energy`

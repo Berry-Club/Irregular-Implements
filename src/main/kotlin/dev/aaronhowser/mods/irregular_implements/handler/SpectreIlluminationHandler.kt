@@ -35,6 +35,9 @@ class SpectreIlluminationHandler : SavedData() {
 	companion object {
 		const val CHUNK_LONGS = "chunk_longs"
 
+		const val OLD_SAVED_DATA_NAME = "spectre_illumination_handler"
+		const val SAVED_DATA_NAME = "ii_spectre_illumination"
+
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreIlluminationHandler {
 			val data = SpectreIlluminationHandler()
 
@@ -45,9 +48,14 @@ class SpectreIlluminationHandler : SavedData() {
 		}
 
 		fun get(level: ServerLevel): SpectreIlluminationHandler {
-			return level.dataStorage.computeIfAbsent(
+			val storage = level.dataStorage
+			val factory = Factory(::SpectreIlluminationHandler, ::load)
+
+			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
+
+			return existing ?: storage.computeIfAbsent(
 				Factory(::SpectreIlluminationHandler, ::load),
-				"spectre_illumination_handler"
+				SAVED_DATA_NAME
 			)
 		}
 
