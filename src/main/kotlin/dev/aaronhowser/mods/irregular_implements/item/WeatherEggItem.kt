@@ -41,7 +41,7 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 		override fun getSerializedName(): String = realName
 
 		companion object {
-			val CODEC: StringRepresentable.EnumCodec<Weather> = StringRepresentable.fromEnum(Weather::values)
+			val CODEC: StringRepresentable.StringRepresentableCodec<Weather> = StringRepresentable.fromEnum(Weather::values)
 			val STREAM_CODEC: StreamCodec<ByteBuf, Weather> = ByteBufCodecs.fromCodec(CODEC)
 		}
 	}
