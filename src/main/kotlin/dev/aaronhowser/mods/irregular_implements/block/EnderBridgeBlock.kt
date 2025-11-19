@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.aaron.ServerScheduler
+import dev.aaronhowser.mods.aaron.scheduler.SchedulerExtensions.scheduleTaskInTicks
 import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -104,7 +104,7 @@ class EnderBridgeBlock(
 			closestDistance / distancePerTick
 		}
 
-		ServerScheduler.scheduleTaskInTicks(tickDuration) {
+		level.scheduleTaskInTicks(tickDuration) {
 			if (level.getBlockState(pos).getValue(ENABLED)) {
 				if (closestAnchor != null && level.getBlockState(closestAnchor).`is`(ModBlocks.ENDER_ANCHOR)) {
 					foundAnchor(level, pos, closestAnchor)

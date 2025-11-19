@@ -106,7 +106,10 @@ class RedstoneObserverBlockEntity(
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		this.loadFromTag(tag)
+		val l = level
+		if (l != null) {
+			this.loadFromTag(l, tag)
+		}
 	}
 
 	// Syncs with client
