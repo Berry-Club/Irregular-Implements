@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
 import net.minecraft.core.HolderLookup
@@ -30,6 +31,10 @@ abstract class RedstoneInterfaceBlockEntity(
 
 		if (level.isLoaded(pos)) {
 			val linkedState = level.getBlockState(pos)
+			if (linkedState.`is`(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) {
+				return
+			}
+
 			linkedState.handleNeighborChanged(level, pos, this.blockState.block, pos, false)
 			level.updateNeighborsAt(pos, linkedState.block)
 		}
@@ -84,9 +89,14 @@ abstract class RedstoneInterfaceBlockEntity(
 			val globalPos = GlobalPos(level.dimension(), targetPos)
 
 			val interfaces = linkedPositions[globalPos] ?: return -1
-			if (interfaces.isEmpty()) return -1
+			val filtered = interfaces.filter {
+				level.isLoaded(it)
+						&& !level.getBlockState(it).`is`(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)
+			}
 
-			return interfaces.maxOf { level.getBestNeighborSignal(it) }
+			if (filtered.isEmpty()) return -1
+
+			return filtered.maxOf { level.getBestNeighborSignal(it) }
 		}
 
 		@JvmStatic

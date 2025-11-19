@@ -5,7 +5,9 @@ import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -166,7 +168,13 @@ class RedstoneObserverBlockEntity(
 		fun updateObservers(level: Level, targetPos: BlockPos) {
 			val levelPos = LevelPos(level, targetPos)
 
-			for (observerPos in linkedPositions[levelPos] ?: return) {
+			val positions = linkedPositions[levelPos] ?: return
+			for (observerPos in positions) {
+				val stateThere = level.getBlockState(observerPos)
+				if (stateThere.`is`(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) {
+					continue
+				}
+
 				level.updateNeighborsAt(observerPos, level.getBlockState(observerPos).block)
 			}
 		}

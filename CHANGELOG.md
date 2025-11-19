@@ -19,6 +19,8 @@
 - Hopefully fixed Advanced Redstone Interface unsetting its linked positions (#49)
 - Fixed Advanced Redstone Interface not dropping its items when destroyed (#49)
 - Marked the version range required for Kotlin for Forge
+- Fixed a stack overflow error when wireless redstone blocks try to listen or talk to other wireless redstone blocks (#51)
+  - Technically it works by making them ignore the destination block if it has the block tag `#irregular_implements:ignores_wireless_redstone`
 
 # 1.6.1
 

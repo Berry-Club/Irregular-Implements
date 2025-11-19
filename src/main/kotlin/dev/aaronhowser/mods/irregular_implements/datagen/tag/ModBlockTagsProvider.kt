@@ -498,6 +498,13 @@ class ModBlockTagsProvider(
 				BlockTags.DIRT
 			)
 
+		this.tag(IGNORES_WIRELESS_REDSTONE)
+			.add(
+				ModBlocks.BASIC_REDSTONE_INTERFACE.get(),
+				ModBlocks.ADVANCED_REDSTONE_INTERFACE.get(),
+				ModBlocks.REDSTONE_OBSERVER.get()
+			)
+
 	}
 
 	private fun colorTags() {
@@ -552,6 +559,7 @@ class ModBlockTagsProvider(
 		val NATURE_CORE_POSSIBLE_SAPLINGS = modTag("nature_core_possible_saplings")
 		val NATURE_CORE_IMMUNE = modTag("nature_core_immune")
 		val GRASS_SEEDS_COMPATIBLE = modTag("grass_seeds_compatible")
+		val IGNORES_WIRELESS_REDSTONE = modTag("ignores_wireless_redstone")
 	}
 
 }
