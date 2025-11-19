@@ -49,7 +49,7 @@ class SpectreEnergyInjectorBlock : Block(
 		if (level.isServerSide && blockEntity != null) {
 			val energyHandler = blockEntity.getEnergyHandler(null)
 			val energyStored = energyHandler?.energyStored ?: 0
-			val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreEnergyHandler.MAX_ENERGY
+			val maxEnergy = energyHandler?.maxEnergyStored ?: SpectreEnergyHandler.getMaxEnergy()
 
 			val storedFormatted = String.format("%,d", energyStored)
 			val maxFormatted = String.format("%,d", maxEnergy)
