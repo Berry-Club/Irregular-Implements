@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
-import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilHandler
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreEnergyHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -31,7 +31,7 @@ class SpectreEnergyInjectorBlockEntity(
 	fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
 		val level = this.level as? ServerLevel ?: return null
 
-		return SpectreCoilHandler.get(level).getEnergyInjector(this.ownerUuid)
+		return SpectreEnergyHandler.get(level).getEnergyInjector(this.ownerUuid)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

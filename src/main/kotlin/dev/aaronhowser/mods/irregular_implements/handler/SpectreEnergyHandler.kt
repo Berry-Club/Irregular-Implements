@@ -9,31 +9,31 @@ import net.minecraft.world.level.saveddata.SavedData
 import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
 
-class SpectreCoilHandler : SavedData() {
+class SpectreEnergyHandler : SavedData() {
 
-	private val coilEntries: MutableMap<UUID, Int> = mutableMapOf()
-	private val energyInjectors: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
-	private val coils: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
+	private val playerStoredEnergy: MutableMap<UUID, Int> = mutableMapOf()
+
+	private val cachedEnergyInjectors: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
+	private val cachedCoils: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
 
 	fun getEnergyInjector(ownerUuid: UUID): IEnergyStorage {
-		val existing = energyInjectors[ownerUuid]
+		val existing = cachedEnergyInjectors[ownerUuid]
 		if (existing != null) return existing
 
 		val new = object : IEnergyStorage {
 			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
-				val currentEnergy = coilEntries.getOrDefault(ownerUuid, 0)
-				val newEnergy = minOf(
-					this.maxEnergyStored,
-					currentEnergy + toReceive
-				)
+				val currentEnergy = playerStoredEnergy.getOrDefault(ownerUuid, 0)
+				val max = getMaxEnergyStored()
+
+				val newEnergy = (currentEnergy.toLong() + toReceive.toLong()).coerceIn(0L, max.toLong()).toInt()
+				val actualReceived = newEnergy - currentEnergy
 
 				if (!simulate) {
-					coilEntries[ownerUuid] = newEnergy
+					playerStoredEnergy[ownerUuid] = newEnergy
 				}
 
-				this@SpectreCoilHandler.setDirty()
-
-				return newEnergy - currentEnergy
+				this@SpectreEnergyHandler.setDirty()
+				return actualReceived
 			}
 
 			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
@@ -41,7 +41,7 @@ class SpectreCoilHandler : SavedData() {
 			}
 
 			override fun getEnergyStored(): Int {
-				return coilEntries.getOrDefault(ownerUuid, 0)
+				return playerStoredEnergy.getOrDefault(ownerUuid, 0)
 			}
 
 			override fun getMaxEnergyStored(): Int {
@@ -57,13 +57,13 @@ class SpectreCoilHandler : SavedData() {
 			}
 		}
 
-		energyInjectors[ownerUuid] = new
+		cachedEnergyInjectors[ownerUuid] = new
 
 		return new
 	}
 
 	fun getCoil(ownerUuid: UUID): IEnergyStorage {
-		val existing = coils[ownerUuid]
+		val existing = cachedCoils[ownerUuid]
 		if (existing != null) return existing
 
 		val new = object : IEnergyStorage {
@@ -72,23 +72,23 @@ class SpectreCoilHandler : SavedData() {
 			}
 
 			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
-				val currentEntity = coilEntries.getOrDefault(ownerUuid, 0)
+				val currentEntity = playerStoredEnergy.getOrDefault(ownerUuid, 0)
 				val newEnergy = maxOf(
 					0,
 					currentEntity - toExtract
 				)
 
 				if (!simulate) {
-					coilEntries[ownerUuid] = newEnergy
+					playerStoredEnergy[ownerUuid] = newEnergy
 				}
 
-				this@SpectreCoilHandler.setDirty()
+				this@SpectreEnergyHandler.setDirty()
 
 				return currentEntity - newEnergy
 			}
 
 			override fun getEnergyStored(): Int {
-				return coilEntries.getOrDefault(ownerUuid, 0)
+				return playerStoredEnergy.getOrDefault(ownerUuid, 0)
 			}
 
 			override fun getMaxEnergyStored(): Int {
@@ -104,14 +104,14 @@ class SpectreCoilHandler : SavedData() {
 			}
 		}
 
-		coils[ownerUuid] = new
+		cachedCoils[ownerUuid] = new
 		return new
 	}
 
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
-		val listTag = tag.getList(COIL_ENTRIES_NBT, Tag.TAG_COMPOUND.toInt())
+		val listTag = tag.getList(PLAYER_ENERGIES_NBT, Tag.TAG_COMPOUND.toInt())
 
-		for ((uuid, energy) in this.coilEntries) {
+		for ((uuid, energy) in this.playerStoredEnergy) {
 			val entryTag = CompoundTag()
 			entryTag.putString(UUID_NBT, uuid.toString())
 			entryTag.putInt(ENERGY_NBT, energy)
@@ -123,10 +123,13 @@ class SpectreCoilHandler : SavedData() {
 	}
 
 	companion object {
-		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCoilHandler {
-			val spectreCoilHandler = SpectreCoilHandler()
+		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreEnergyHandler {
+			val spectreEnergyHandler = SpectreEnergyHandler()
 
-			val listTag = tag.getList(COIL_ENTRIES_NBT, Tag.TAG_COMPOUND.toInt())
+			val newListTag = tag.getList(PLAYER_ENERGIES_NBT, Tag.TAG_COMPOUND.toInt())
+			val oldListTag = tag.getList(PLAYER_ENERGIES_NBT_OLD, Tag.TAG_COMPOUND.toInt())
+
+			val listTag = newListTag.ifEmpty { oldListTag }
 
 			for (i in 0 until listTag.count()) {
 				val entryTag = listTag.getCompound(i)
@@ -134,24 +137,34 @@ class SpectreCoilHandler : SavedData() {
 				val uuid = UUID.fromString(entryTag.getString(UUID_NBT))
 				val energy = entryTag.getInt(ENERGY_NBT)
 
-				spectreCoilHandler.coilEntries[uuid] = energy
+				spectreEnergyHandler.playerStoredEnergy[uuid] = energy
 			}
 
-			return spectreCoilHandler
+			return spectreEnergyHandler
 		}
 
-		fun get(level: ServerLevel): SpectreCoilHandler {
+		fun get(level: ServerLevel): SpectreEnergyHandler {
 			if (level != level.server.overworld()) {
 				return get(level.server.overworld())
 			}
 
-			return level.dataStorage.computeIfAbsent(
-				Factory(::SpectreCoilHandler, ::load),
-				"spectre_coil"
+			val storage = level.dataStorage
+			val factory = Factory(::SpectreEnergyHandler, ::load)
+
+			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
+
+			return existing ?: storage.computeIfAbsent(
+				Factory(::SpectreEnergyHandler, ::load),
+				SAVED_DATA_NAME
 			)
 		}
 
-		const val COIL_ENTRIES_NBT = "coil_entries"
+		const val OLD_SAVED_DATA_NAME = "spectre_coil"
+		const val SAVED_DATA_NAME = "ii_spectre_energy"
+
+		const val PLAYER_ENERGIES_NBT = "player_energies"
+		const val PLAYER_ENERGIES_NBT_OLD = "coil_entries"
+
 		const val UUID_NBT = "uuid"
 		const val ENERGY_NBT = "energy"
 

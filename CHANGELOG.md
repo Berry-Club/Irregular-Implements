@@ -13,6 +13,11 @@
     - Portable Ender Bridge (doesn't render through blocks, which makes it harder to use but it still kind of functions)
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
+- Renamed SpectreCoilHAndler to SpectreEnergyHandler
+  - Also changed the save file name from `spectre_coil` to `ii_spectre_energy`. It still tries to load the old one, but it only saves the new one.
+- Renamed SavedData files
+  - They'll still try to load the old ones, but they only save the new ones
+    - `spectre_coil` -> `ii_spectre_energy`
 
 ### Fixed
 
@@ -21,6 +26,7 @@
 - Marked the version range required for Kotlin for Forge
 - Fixed a stack overflow error when wireless redstone blocks try to listen or talk to other wireless redstone blocks (#51)
   - Technically it works by making them ignore the destination block if it has the block tag `#irregular_implements:ignores_wireless_redstone`
+- Fixed an integer overflow in the Spectre Energy Injector
 
 # 1.6.1
 

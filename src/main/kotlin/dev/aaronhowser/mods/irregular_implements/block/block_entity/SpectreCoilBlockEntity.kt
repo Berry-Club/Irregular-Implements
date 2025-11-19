@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
-import dev.aaronhowser.mods.irregular_implements.handler.SpectreCoilHandler
+import dev.aaronhowser.mods.irregular_implements.handler.SpectreEnergyHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -74,7 +74,7 @@ class SpectreCoilBlockEntity(
 		if (cachedEnergyHandler != null) return cachedEnergyHandler
 
 		val level = this.level as? ServerLevel ?: return null
-		val coil = SpectreCoilHandler.get(level).getCoil(this.ownerUuid)
+		val coil = SpectreEnergyHandler.get(level).getCoil(this.ownerUuid)
 
 		cachedEnergyHandler = object : IEnergyStorage {
 			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
@@ -122,7 +122,7 @@ class SpectreCoilBlockEntity(
 			return
 		}
 
-		val coil = SpectreCoilHandler.get(level).getCoil(this.ownerUuid)
+		val coil = SpectreEnergyHandler.get(level).getCoil(this.ownerUuid)
 
 		val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
 		if (available <= 0) return
