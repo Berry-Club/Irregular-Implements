@@ -153,6 +153,9 @@ class SpectreCubeSavedData : SavedData() {
 		const val FROM_Z = "from_z"
 		const val FROM_DIMENSION = "from_dimension"
 
+		const val SAVED_DATA_NAME = "ii_spectre_cubes"
+		const val OLD_SAVED_DATA_NAME = "spectre_cube"
+
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): SpectreCubeSavedData {
 			val data = SpectreCubeSavedData()
 
@@ -177,12 +180,15 @@ class SpectreCubeSavedData : SavedData() {
 				return get(level.server.overworld())
 			}
 
-			val savedData = level.dataStorage.computeIfAbsent(
-				Factory(::SpectreCubeSavedData, ::load),
-				"spectre_cube"
-			)
+			val storage = level.dataStorage
+			val factory = Factory(::SpectreCubeSavedData, ::load)
 
-			return savedData
+			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
+
+			return existing ?: storage.computeIfAbsent(
+				Factory(::SpectreCubeSavedData, ::load),
+				SAVED_DATA_NAME
+			)
 		}
 
 		fun getSpectreLevel(level: ServerLevel): ServerLevel {

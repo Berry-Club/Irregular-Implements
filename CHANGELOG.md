@@ -19,6 +19,7 @@
     - `spectre_coil` -> `ii_spectre_energy`
     - `spectre_illumination_handler` -> `ii_spectre_illumination`
     - `ender_letter_inventories` -> `ii_ender_letter_inventories`
+    - `spectre_cube` -> `ii_spectre_cubes`
 
 ### Fixed
 
