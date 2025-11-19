@@ -22,10 +22,20 @@ class RedstoneInterfaceBasicBlockEntity(
 ), RedstoneToolLinkable {
 
 	private var linkedPos: BlockPos? = null
-
+	private var futureLinkedPos: BlockPos? = null
 	override fun getLinkedPos(): BlockPos? = linkedPos
 
+	/**
+	 * Actually sets futureLinkedPos; the change will be applied on the next server tick.
+	 * The reason for this is that when the BlockEntity is first being loaded, Level is null, which means
+	 * we can't link/unlink blocks at that time.
+	 */
 	override fun setLinkedPos(pos: BlockPos?) {
+		futureLinkedPos = pos
+	}
+
+	private fun updateLinkedPos() {
+		if (linkedPos == futureLinkedPos) return
 		val level = this.level ?: return
 
 		val oldPos = linkedPos
@@ -39,19 +49,21 @@ class RedstoneInterfaceBasicBlockEntity(
 			updatePos(oldPos)
 		}
 
-		if (pos != null) {
+		val newPos = futureLinkedPos
+
+		if (newPos != null) {
 			linkBlock(
 				level = level,
 				interfacePos = this.blockPos,
-				targetPos = pos
+				targetPos = newPos
 			)
 
-			updatePos(pos)
+			updatePos(newPos)
 		} else {
 			removeInterface(level, this.blockPos)
 		}
 
-		linkedPos = pos
+		linkedPos = newPos
 		setChanged()
 	}
 
@@ -60,9 +72,18 @@ class RedstoneInterfaceBasicBlockEntity(
 		updatePos(pos)
 	}
 
+	private fun serverTick() {
+		val level = this.level ?: return
+		if (level.isClientSide) return
+
+		updateLinkedPos()
+	}
+
 	override fun clientTick() {
 		val level = this.level ?: return
 		if (!level.isClientSide) return
+
+		updateLinkedPos()
 
 		val player = AaronClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return

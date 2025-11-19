@@ -112,6 +112,8 @@ abstract class RedstoneInterfaceBlockEntity(
 		) {
 			if (level.isClientSide) {
 				blockEntity.clientTick()
+			} else {
+				blockEntity.updateTargets()
 			}
 		}
 	}

@@ -47,7 +47,7 @@ class RedstoneObserverBlockEntity(
 		futureLinkedPos = pos
 	}
 
-	private fun setLinkedPosFinal() {
+	private fun updateLinkedPos() {
 		if (linkedPos == futureLinkedPos) return
 		val level = this.level ?: return
 
@@ -80,12 +80,14 @@ class RedstoneObserverBlockEntity(
 		val level = this.level ?: return
 		if (level.isClientSide) return
 
-		setLinkedPosFinal()
+		updateLinkedPos()
 	}
 
 	private fun clientTick() {
 		val level = this.level ?: return
 		if (!level.isClientSide) return
+
+		updateLinkedPos()
 
 		val player = AaronClientUtil.localPlayer ?: return
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
