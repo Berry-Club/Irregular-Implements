@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import net.minecraft.core.BlockPos
+import net.minecraft.core.GlobalPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
@@ -55,48 +55,49 @@ abstract class RedstoneInterfaceBlockEntity(
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
-		private data class LevelPos(val level: Level, val pos: BlockPos)
-
 		/**
 		 * A map of a linked position to the position of every Interface that links to it
 		 */
-		private val linkedPositions: MultiMap<LevelPos, BlockPos> = MultiMap()
+		private val linkedPositions: MultiMap<GlobalPos, BlockPos> = MultiMap()
 
 		@JvmStatic
 		fun linkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
 			linkedPositions
-				.getOrPut(LevelPos(level, targetPos)) { mutableListOf() }
+				.getOrPut(GlobalPos(level.dimension(), targetPos)) { mutableListOf() }
 				.add(interfacePos)
 		}
 
 		@JvmStatic
 		fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
-			val levelPos = LevelPos(level, targetPos)
+			val globalPos = GlobalPos(level.dimension(), targetPos)
 
-			val interfaces = linkedPositions[levelPos] ?: return
-
+			val interfaces = linkedPositions[globalPos] ?: return
 			interfaces.remove(interfacePos)
-			if (interfaces.isEmpty().isTrue()) {
-				linkedPositions.remove(levelPos)
+
+			if (interfaces.isEmpty()) {
+				linkedPositions.remove(globalPos)
 			}
 		}
 
 		@JvmStatic
 		fun getLinkedPower(level: Level, targetPos: BlockPos): Int {
-			val levelPos = LevelPos(level, targetPos)
-			val interfaces = linkedPositions[levelPos] ?: return -1
+			val globalPos = GlobalPos(level.dimension(), targetPos)
+
+			val interfaces = linkedPositions[globalPos] ?: return -1
 			if (interfaces.isEmpty()) return -1
+
 			return interfaces.maxOf { level.getBestNeighborSignal(it) }
 		}
 
 		@JvmStatic
 		fun removeInterface(level: Level, interfacePos: BlockPos) {
 			val iterator = linkedPositions.entries.iterator()
+			val dimension = level.dimension()
 
 			while (iterator.hasNext()) {
-				val (levelPos, interfaces) = iterator.next()
+				val (globalPos, interfaces) = iterator.next()
 
-				if (levelPos.level == level && interfaces.contains(interfacePos)) {
+				if (globalPos.dimension == dimension && interfaces.contains(interfacePos)) {
 					interfaces.remove(interfacePos)
 					if (interfaces.isEmpty()) {
 						iterator.remove()
