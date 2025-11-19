@@ -21,6 +21,7 @@ object ModCommands {
 			Commands.literal("irregular-implements")
 				.then(FlooCommand.register())
 				.then(NotifyCommand.register(buildContext))
+				.then(SpectreEnergyCommand.register())
 		)
 
 		dispatcher.register(Commands.literal("ii").redirect(root))

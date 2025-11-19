@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.saveddata.SavedData
 import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
@@ -16,6 +17,15 @@ class SpectreEnergyHandler : SavedData() {
 
 	private val cachedEnergyInjectors: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
 	private val cachedCoils: MutableMap<UUID, IEnergyStorage> = mutableMapOf()
+
+	fun getStoredEnergy(player: Player): Int {
+		return playerStoredEnergy.getOrDefault(player.uuid, 0)
+	}
+
+	fun setStoredEnergy(player: Player, energy: Int) {
+		playerStoredEnergy[player.uuid] = energy.coerceIn(0, getMaxEnergy())
+		setDirty()
+	}
 
 	fun getEnergyInjector(ownerUuid: UUID): IEnergyStorage {
 		val existing = cachedEnergyInjectors[ownerUuid]

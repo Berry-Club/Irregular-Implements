@@ -414,6 +414,8 @@
   "book.irregular_implements.guide.items.void_stone.page_0.title": "",
   "book.irregular_implements.guide.name": "Irregular Implements Instructional Index",
   "book.irregular_implements.guide.tooltip": "A guide to all things genetic",
+  "command.irregular_implements.spectre_energy.get": "%s has %s FE in their Spectre Energy buffer.",
+  "command.irregular_implements.spectre_energy.set": "Set %s's Spectre Energy buffer to %s FE.",
   "death.fell.accident.fluid_fall.boot": "%s splattered against the surface of %s because they were wearing %s",
   "death.fell.accident.fluid_fall.generic": "%s splattered against the surface of %s because they could walk on it",
   "effect.irregular_implements.collapse": "Collapse",

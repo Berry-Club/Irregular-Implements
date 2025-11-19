@@ -56,6 +56,8 @@ object ModMessageLang {
 	const val NOTIFICATION_INTERFACE_DESCRIPTION = "message.irregular_implements.notification_interface.description"
 	const val GREEN_STRENGTH = "message.irregular_implements.advanced_redstone_torch.green_strength"
 	const val RED_STRENGTH = "message.irregular_implements.advanced_redstone_torch.red_strength"
+	const val SPECTRE_COMMAND_GET = "command.irregular_implements.spectre_energy.get"
+	const val SPECTRE_COMMAND_SET = "command.irregular_implements.spectre_energy.set"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -111,6 +113,8 @@ object ModMessageLang {
 			add(NOTIFICATION_INTERFACE_DESCRIPTION, "Description")
 			add(GREEN_STRENGTH, "Green Strength")
 			add(RED_STRENGTH, "Red Strength")
+			add(SPECTRE_COMMAND_GET, "%s has %s FE in their Spectre Energy buffer.")
+			add(SPECTRE_COMMAND_SET, "Set %s's Spectre Energy buffer to %s FE.")
 		}
 	}
 
