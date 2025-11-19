@@ -81,6 +81,9 @@ class FlooNetworkSavedData : SavedData() {
 	companion object {
 		const val NBT_FIREPLACES = "Fireplaces"
 
+		const val SAVED_DATA_NAME = "ii_floo_network"
+		const val OLD_SAVED_DATA_NAME = "floo_network"
+
 		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): FlooNetworkSavedData {
 			val data = FlooNetworkSavedData()
 
@@ -94,9 +97,14 @@ class FlooNetworkSavedData : SavedData() {
 		}
 
 		fun get(level: ServerLevel): FlooNetworkSavedData {
-			return level.dataStorage.computeIfAbsent(
+			val storage = level.dataStorage
+			val factory = Factory(::FlooNetworkSavedData, ::load)
+
+			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
+
+			return existing ?: storage.computeIfAbsent(
 				Factory(::FlooNetworkSavedData, ::load),
-				"floo_network"
+				SAVED_DATA_NAME
 			)
 		}
 
