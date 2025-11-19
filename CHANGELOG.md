@@ -18,7 +18,6 @@
 		- Portable Ender Bridge (doesn't render through blocks, which makes it harder to use but it still kind of functions)
 - Stopped trying to use localized item tag names, since the class to check if it CAN be localized doesn't exist on the server (#47)
 - Spiders now cannot climb on blocks with the block tag `#irregular_implements:super_lubricated` (#48)
-- Renamed SpectreCoilHAndler to SpectreEnergyHandler
 - Renamed SavedData files
 	- That is, the files stored in `/saves/<world>/data/`
 	- Old ones are not deleted, but won't be read from if the new one exists.
