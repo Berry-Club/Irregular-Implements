@@ -72,7 +72,7 @@ class RedstoneInterfaceBasicBlockEntity(
 		updatePos(pos)
 	}
 
-	private fun serverTick() {
+	override fun serverTick() {
 		val level = this.level ?: return
 		if (level.isClientSide) return
 

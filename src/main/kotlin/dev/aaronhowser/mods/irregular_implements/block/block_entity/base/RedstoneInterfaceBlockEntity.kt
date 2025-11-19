@@ -22,9 +22,10 @@ abstract class RedstoneInterfaceBlockEntity(
 
 	abstract fun updateTargets()
 
-	open fun clientTick() {}
+	protected open fun clientTick() {}
+	protected open fun serverTick() {}
 
-	fun updatePos(pos: BlockPos) {
+	protected fun updatePos(pos: BlockPos) {
 		val level = this.level ?: return
 
 		if (level.isLoaded(pos)) {
@@ -113,7 +114,7 @@ abstract class RedstoneInterfaceBlockEntity(
 			if (level.isClientSide) {
 				blockEntity.clientTick()
 			} else {
-				blockEntity.updateTargets()
+				blockEntity.serverTick()
 			}
 		}
 	}
