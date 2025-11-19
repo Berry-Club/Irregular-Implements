@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.handler
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
@@ -140,12 +141,7 @@ class SpectreEnergyHandler : SavedData() {
 			val storage = level.dataStorage
 			val factory = Factory(::SpectreEnergyHandler, ::load)
 
-			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
-
-			return existing ?: storage.computeIfAbsent(
-				Factory(::SpectreEnergyHandler, ::load),
-				SAVED_DATA_NAME
-			)
+			return OtherUtil.updateSavedDataLocation(storage, factory, SAVED_DATA_NAME, OLD_SAVED_DATA_NAME)
 		}
 	}
 

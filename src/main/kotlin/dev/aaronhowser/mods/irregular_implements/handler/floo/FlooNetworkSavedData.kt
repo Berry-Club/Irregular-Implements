@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -100,12 +101,7 @@ class FlooNetworkSavedData : SavedData() {
 			val storage = level.dataStorage
 			val factory = Factory(::FlooNetworkSavedData, ::load)
 
-			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
-
-			return existing ?: storage.computeIfAbsent(
-				Factory(::FlooNetworkSavedData, ::load),
-				SAVED_DATA_NAME
-			)
+			return OtherUtil.updateSavedDataLocation(storage, factory, SAVED_DATA_NAME, OLD_SAVED_DATA_NAME)
 		}
 
 	}

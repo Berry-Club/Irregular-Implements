@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.redstone_signal
 
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -112,12 +113,7 @@ class RedstoneHandlerSavedData : SavedData() {
 			val storage = level.dataStorage
 			val factory = Factory(::RedstoneHandlerSavedData, ::load)
 
-			val existing = storage.get(factory, SAVED_DATA_NAME) ?: storage.get(factory, OLD_SAVED_DATA_NAME)
-
-			return existing ?: storage.computeIfAbsent(
-				Factory(::RedstoneHandlerSavedData, ::load),
-				SAVED_DATA_NAME
-			)
+			return OtherUtil.updateSavedDataLocation(storage, factory, SAVED_DATA_NAME, OLD_SAVED_DATA_NAME)
 		}
 
 		fun tick(level: Level) {
