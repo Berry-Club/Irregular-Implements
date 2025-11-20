@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModif
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModLootTableProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.patchouli.ModPatchouliBookProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
