@@ -1,3 +1,9 @@
+# 1.7.2
+
+### Removed
+
+- Removed the Modonomicon book, pending it being fixed
+
 # 1.7.1
 
 ### Changed
