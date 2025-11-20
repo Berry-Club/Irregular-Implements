@@ -1,5 +1,9 @@
 # 1.7.2
 
+### Changed
+
+- Added more Patchouli pages
+
 ### Removed
 
 - Removed the Modonomicon book, pending it being fixed
