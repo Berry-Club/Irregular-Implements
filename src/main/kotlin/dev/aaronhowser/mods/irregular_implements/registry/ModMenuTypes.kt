@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import dev.aaronhowser.mods.aaron.registry.AaronMenuTypesRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorScreen
@@ -52,18 +53,17 @@ import dev.aaronhowser.mods.irregular_implements.menu.redstone_remote.RedstoneRe
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneMenu
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneScreen
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.world.flag.FeatureFlags
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
-import java.util.function.Supplier
 
-object ModMenuTypes {
+object ModMenuTypes : AaronMenuTypesRegistry() {
 
 	val MENU_TYPE_REGISTRY: DeferredRegister<MenuType<*>> =
 		DeferredRegister.create(BuiltInRegistries.MENU, IrregularImplements.MOD_ID)
+
+	override fun getMenuTypeRegistry(): DeferredRegister<MenuType<*>> = MENU_TYPE_REGISTRY
 
 	val IRON_DROPPER: DeferredHolder<MenuType<*>, MenuType<IronDropperMenu>> =
 		register("iron_dropper", ::IronDropperMenu)
@@ -115,10 +115,6 @@ object ModMenuTypes {
 		register("advanced_redstone_interface", ::AdvancedRedstoneInterfaceMenu)
 	val ADVANCED_REDSTONE_TORCH: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneTorchMenu>> =
 		register("advanced_redstone_torch", ::AdvancedRedstoneTorchMenu)
-
-	private fun <T : AbstractContainerMenu> register(name: String, constructor: MenuType.MenuSupplier<T>): DeferredHolder<MenuType<*>, MenuType<T>> {
-		return MENU_TYPE_REGISTRY.register(name, Supplier { MenuType(constructor, FeatureFlags.DEFAULT_FLAGS) })
-	}
 
 	fun registerScreens(event: RegisterMenuScreensEvent) {
 		event.register(IRON_DROPPER.get(), ::IronDropperScreen)

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getDyeName
+import dev.aaronhowser.mods.aaron.registry.AaronBlockRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.*
@@ -10,9 +11,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredRegister
 
-object ModBlocks {
+object ModBlocks : AaronBlockRegistry() {
 
 	val BLOCK_REGISTRY: DeferredRegister.Blocks = DeferredRegister.createBlocks(IrregularImplements.MOD_ID)
+	override fun getBlockRegistry(): DeferredRegister.Blocks = BLOCK_REGISTRY
+	override fun getItemRegistry(): DeferredRegister.Items = ModItems.ITEM_REGISTRY
 
 	val FERTILIZED_DIRT: DeferredBlock<FertilizedDirtBlock> =
 		registerBlock("fertilized_dirt", ::FertilizedDirtBlock)
@@ -372,39 +375,8 @@ object ModBlocks {
 	// - Sound Box: I just don't wanna
 	// - Fluid Display: I don't wanna (rendering is scary :( )
 
-	private fun blockWithProperties(name: String, properties: Properties) =
-		registerBlock(name) { Block(properties) }
-
-	private fun basicBlock(name: String) =
-		blockWithProperties(name, Properties.of())
-
-	private fun basicGlassBlock(name: String) =
-		registerBlock(name) { TransparentBlock(Properties.ofFullCopy(Blocks.GLASS)) }
-
-	private fun basicCopiedBlock(name: String, blockToCopy: Block) =
-		blockWithProperties(name, Properties.ofFullCopy(blockToCopy))
-
-	private fun basicStoneBlock(name: String) =
-		basicCopiedBlock(name, Blocks.STONE)
-
 	private fun coloredStone(name: String, color: DyeColor) =
 		blockWithProperties(name, Properties.ofFullCopy(Blocks.STONE).mapColor(color))
-
-	private fun <T : Block> registerBlock(
-		name: String,
-		supplier: () -> T
-	): DeferredBlock<T> {
-		val block = BLOCK_REGISTRY.register(name, supplier)
-		ModItems.ITEM_REGISTRY.registerSimpleBlockItem(name, block)
-		return block
-	}
-
-	private fun <T : Block> registerBlockWithoutItem(
-		name: String,
-		supplier: () -> T
-	): DeferredBlock<T> {
-		return BLOCK_REGISTRY.register(name, supplier)
-	}
 
 	@Suppress("REDUNDANT_ELSE_IN_WHEN")
 	fun getColoredGrass(dyeColor: DyeColor): DeferredBlock<GrassBlock>? {

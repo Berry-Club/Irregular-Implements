@@ -1,21 +1,23 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import dev.aaronhowser.mods.aaron.registry.AaronBlockEntityTypeRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
-import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
-import java.util.function.Supplier
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-object ModBlockEntityTypes {
+object ModBlockEntityTypes : AaronBlockEntityTypeRegistry() {
 
 	val BLOCK_ENTITY_REGISTRY: DeferredRegister<BlockEntityType<*>> =
-		DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, IrregularImplements.MOD_ID)
+		DeferredRegister.create(
+			BuiltInRegistries.BLOCK_ENTITY_TYPE,
+			IrregularImplements.MOD_ID
+		)
+
+	override fun getBlockEntityRegistry(): DeferredRegister<BlockEntityType<*>> = BLOCK_ENTITY_REGISTRY
 
 	val RAIN_SHIELD: DeferredHolder<BlockEntityType<*>, BlockEntityType<RainShieldBlockEntity>> =
 		register("rain_shield", ::RainShieldBlockEntity, ModBlocks.RAIN_SHIELD)
@@ -128,19 +130,6 @@ object ModBlockEntityTypes {
 			OtherUtil.modResource("redstone_interface"),
 			OtherUtil.modResource("basic_redstone_interface")
 		)
-	}
-
-	private fun <T : BlockEntity> register(
-		name: String,
-		builder: BlockEntityType.BlockEntitySupplier<out T>,
-		vararg validBlocks: DeferredBlock<*>
-	): DeferredHolder<BlockEntityType<*>, BlockEntityType<T>> {
-		return BLOCK_ENTITY_REGISTRY.register(name, Supplier {
-			BlockEntityType.Builder.of(
-				builder,
-				*validBlocks.map(DeferredBlock<*>::get).toTypedArray()
-			).build(null)
-		})
 	}
 
 }

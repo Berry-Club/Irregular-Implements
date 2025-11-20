@@ -2,10 +2,10 @@ package dev.aaronhowser.mods.irregular_implements.registry
 
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.aaron.AaronExtraCodecs
+import dev.aaronhowser.mods.aaron.registry.AaronDataComponentRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.item.component.*
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.SpecificEntity
 import net.minecraft.core.GlobalPos
 import net.minecraft.core.Holder
@@ -13,9 +13,7 @@ import net.minecraft.core.UUIDUtil
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
-import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
-import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.EntityType
@@ -28,10 +26,12 @@ import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.*
 
-object ModDataComponents {
+object ModDataComponents : AaronDataComponentRegistry() {
 
 	val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
 		DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, IrregularImplements.MOD_ID)
+
+	override fun getDataComponentRegistry(): DeferredRegister.DataComponents = DATA_COMPONENT_REGISTRY
 
 	val GLOBAL_POS: DeferredHolder<DataComponentType<*>, DataComponentType<GlobalPos>> =
 		register("global_pos", GlobalPos.CODEC, GlobalPos.STREAM_CODEC)
@@ -131,19 +131,5 @@ object ModDataComponents {
 	@JvmField
 	val HAS_LUMINOUS_POWDER: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
 		unit("has_luminous_powder")
-
-	private fun <T> register(
-		name: String,
-		codec: Codec<T>,
-		streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>
-	): DeferredHolder<DataComponentType<*>, DataComponentType<T>> {
-		return DATA_COMPONENT_REGISTRY.registerComponentType(name) {
-			it.persistent(codec).networkSynchronized(streamCodec)
-		}
-	}
-
-	private fun unit(name: String): DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> {
-		return register(name, Unit.CODEC, StreamCodec.unit(Unit.INSTANCE))
-	}
 
 }

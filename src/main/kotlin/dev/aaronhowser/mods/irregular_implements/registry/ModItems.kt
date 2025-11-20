@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import dev.aaronhowser.mods.aaron.registry.AaronItemRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import net.minecraft.core.Direction
@@ -10,18 +11,17 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.food.Foods
 import net.minecraft.world.item.*
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
-import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
-import java.util.function.Supplier
 
-object ModItems {
+object ModItems : AaronItemRegistry() {
 
 	//TODO: Check rarity for all items
 
 	val ITEM_REGISTRY: DeferredRegister.Items =
 		DeferredRegister.createItems(IrregularImplements.MOD_ID)
+
+	override fun getItemRegistry(): DeferredRegister.Items = ITEM_REGISTRY
 
 	val STABLE_ENDER_PEARL: DeferredItem<StableEnderPearlItem> =
 		register("stable_ender_pearl", ::StableEnderPearlItem, StableEnderPearlItem.DEFAULT_PROPERTIES)
@@ -304,42 +304,6 @@ object ModItems {
 	// - Sound Pattern, Recorder, Dampener (just use Super Sound Muffler)
 	// - Loot Generator (don't care)
 	// - Magnetic Force (don't care, obscure, arguably OP)
-
-	private fun basic(id: String): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerSimpleItem(id)
-	}
-
-	private fun basic(id: String, properties: Item.Properties): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerSimpleItem(id, properties)
-	}
-
-	private fun basicWithProperties(id: String, properties: Supplier<Item.Properties>): DeferredItem<Item> {
-		return ITEM_REGISTRY.registerItem(id) { Item(properties.get()) }
-	}
-
-	private fun <I : Item> register(
-		id: String,
-		builder: (Item.Properties) -> I,
-		properties: Item.Properties = Item.Properties()
-	): DeferredItem<I> {
-		return ITEM_REGISTRY.registerItem(id) { builder(properties) }
-	}
-
-	private fun <I : Item> register(
-		id: String,
-		builder: (Item.Properties) -> I,
-		properties: Supplier<Item.Properties>
-	): DeferredItem<I> {
-		return ITEM_REGISTRY.registerItem(id) { builder(properties.get()) }
-	}
-
-	private fun registerItemNameBlockItem(
-		id: String,
-		block: DeferredBlock<out Block>,
-		properties: Item.Properties = Item.Properties()
-	): DeferredItem<ItemNameBlockItem> {
-		return ITEM_REGISTRY.registerItem(id) { ItemNameBlockItem(block.get(), properties) }
-	}
 
 	private fun registerImbue(
 		id: String,
