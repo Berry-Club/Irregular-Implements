@@ -928,6 +928,43 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.LUMINOUS_POWDER,
+			"Luminous Powder",
+			TextPage.basicTextPage(
+				"Luminous Powder",
+				doubleSpacedLines(
+					"The ${major("Luminous Powder")} can be applied to any item to make it glow in the dark!",
+					"Simply craft the Powder with any item to apply it."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.LUMINOUS_POWDER,
+				doubleSpacedLines(
+					"You can ${minor("craft an illuminated item with a Water Bucket")} to clean it, removing the illumination.",
+				)
+			)
+		)
+
+		add(
+			ModItems.ENDER_LETTER,
+			"Ender Letter",
+			TextPage.basicTextPage(
+				"Ender Letter",
+				doubleSpacedLines(
+					"${major("Ender Letters")} allow you to ${minor("send items to other players")} easily.",
+					"Use the Letter to open it. You can insert ${minor("up to 9 items")} to send, and type the recipient's username in the text box."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.ENDER_LETTER,
+				doubleSpacedLines(
+					"To send the letter, simply use it on an ${internalLink("blocks/ender_mailbox", "Ender Mailbox")}. The Letter will be inserted into the recipient's mailbox, if it has room.",
+					"You can only send a letter ${bad("while the recipient is online")}, currently!"
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
@@ -1678,6 +1715,24 @@ class ModPatchouliBookProvider(
 				"Bouncy Plate",
 				doubleSpacedLines(
 					"The ${major("Bouncy Plate")} will ${minor("make entities that walk over it bounce up into the air.")}",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ENDER_MAILBOX,
+			"Ender Mailbox",
+			TextPage.basicTextPage(
+				"Ender Mailbox",
+				doubleSpacedLines(
+					"The ${major("Ender Mailbox")} allows you to send and receive ${internalLink("items/ender_letter", "Ender Letters")} to and from other players.",
+					"To send a Letter, simply use it on the Mailbox and it will be sent to the recipient."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ENDER_MAILBOX,
+				doubleSpacedLines(
+					"Using any Mailbox will show your incoming Letters, in the same way that Ender Chests show your items."
 				)
 			)
 		)

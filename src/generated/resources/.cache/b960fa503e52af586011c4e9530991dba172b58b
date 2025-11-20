@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-11T01:48:09.9902073	Patchouli Book: guide
+// 1.21.1	2025-11-20T05:39:36.8963382	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -30,6 +30,7 @@ c8b9f6ace9f63bc550761541b5dad005d96e44f8 assets/irregular_implements/patchouli_b
 fe73b74fe24cbb223551f4e7b55880abc4c5cb3a assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/peace_candle.json
 8805ea0e6d500d5e73c4059105d3b87540f5c965 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/pitcher_plant.json
 28fc163b7c4618ed986148eb09322969dc0946b9 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/bouncy_plate.json
+d675c2d3cb7201f65c86404a7b9cffc713a3192e assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/ender_mailbox.json
 eca5be3157a5de4fbb26d2f8c5665644cbdbd32b assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rainbow_lamp.json
 f358f3ff7f0776ee09a6d42bb46b308af9be55f5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/rain_shield.json
 10b9827e38e957ac16d0d574dc1a69f4e367f049 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/sakanade_spores.json
@@ -51,6 +52,7 @@ b08df5457adb3286a0bdd108b5462ddd130901ad assets/irregular_implements/patchouli_b
 526b941407d19a08bd6135ce6d84b81c032c51f4 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/drop_filter.json
 14de3f47eeffce7ea85559c1216b45bd56b5e196 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/emerald_compass.json
 1cf992606339adc3e06163eed0fbe646e234dd1b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_bucket.json
+9f80972de2bbb452d7c30c2b58853172cd821543 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_letter.json
 c923a9275094eed34b3469372ebaab14120ddc95 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/entity_filter.json
 bbc0397a90730c09b44dde5129b62688dd0f38dd assets/irregular_implements/patchouli_books/guide/en_us/entries/items/escape_rope.json
 a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
@@ -63,6 +65,7 @@ ecafe792afa48469caf62354a9db47fb0a118e73 assets/irregular_implements/patchouli_b
 c2404c261c7a58c79078be397b188b63a408a917 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lava_waders.json
 709bc0b4349210d227d73ea3d76a208a16d3dbd5 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/location_filter.json
 4c9e6d9df12ec70b7997fe5ccef189ac2dcde727 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lotus_blossom.json
+b07c9b63f92aa77396621d0f05140c7a180054e9 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/luminous_powder.json
 d59f687a2c35f3f03c7392bd697496760d894abe assets/irregular_implements/patchouli_books/guide/en_us/entries/items/magic_hood.json
 a2f07f9a005264e20b7bf842f980083643fd9745 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/obsidian_skull.json
 099889f97e8eb14a909ed35602b2f50ca9271728 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/player_filter.json
