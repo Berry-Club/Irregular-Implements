@@ -116,7 +116,7 @@ object ModMenuTypes : AaronMenuTypesRegistry() {
 	val ADVANCED_REDSTONE_TORCH: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneTorchMenu>> =
 		register("advanced_redstone_torch", ::AdvancedRedstoneTorchMenu)
 
-	fun registerScreens(event: RegisterMenuScreensEvent) {
+	override fun registerScreens(event: RegisterMenuScreensEvent) {
 		event.register(IRON_DROPPER.get(), ::IronDropperScreen)
 		event.register(BLOCK_DESTABILIZER.get(), ::BlockDestabilizerScreen)
 		event.register(CHAT_DETECTOR.get(), ::ChatDetectorScreen)
