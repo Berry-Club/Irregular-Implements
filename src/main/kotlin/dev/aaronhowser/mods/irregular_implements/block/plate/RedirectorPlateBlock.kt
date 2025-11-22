@@ -54,7 +54,7 @@ class RedirectorPlateBlock : BasePlateBlock() {
 
 		if (direction == currentOne || direction == currentTwo) return InteractionResult.FAIL
 
-		val newState = state.setValue(ACTIVE_TWO, direction)
+		val newState = state.setValue(if (player.isSecondaryUseActive) ACTIVE_TWO else ACTIVE_ONE, direction)
 		level.setBlockAndUpdate(pos, newState)
 
 		return InteractionResult.SUCCESS
