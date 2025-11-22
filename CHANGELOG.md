@@ -4,7 +4,8 @@
 
 - Gave Floo Bricks an item
 - Added more Patchouli pages
-  - Most Redstone-centric blocks have been moved to their own category in blocks
+	- Everything should have a page now, I think
+	- Most Redstone-centric blocks have been moved to their own category in blocks
 
 ### Changed
 
@@ -20,8 +21,8 @@
 - You can now change both active sides of the Redirector Plate, by sneaking or not sneaking
 - Added Fertilized Dirt to the block tag `#neoforge:villager_farmlands`
 - Allowed modpack developers to set the logic used for when a Magic Bean's Bean Stalk is done growing
-  - Change it using KubeJS, see [here](https://github.com/Berry-Club/Irregular-Implements/blob/main/src/main/kotlin/dev/aaronhowser/mods/irregular_implements/block/BeanStalkBlock.kt#L148) for an example
-  - If this predicate returns true, the block above the given pos will be turned into a Bean Pod
+	- Change it using KubeJS, see [here](https://github.com/Berry-Club/Irregular-Implements/blob/main/src/main/kotlin/dev/aaronhowser/mods/irregular_implements/block/BeanStalkBlock.kt#L148) for an example
+	- If this predicate returns true, the block above the given pos will be turned into a Bean Pod
 
 ### Fixed
 

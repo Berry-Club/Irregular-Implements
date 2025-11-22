@@ -1068,6 +1068,28 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.REDSTONE_TOOL,
+			"Redstone Tool",
+			TextPage.basicTextPage(
+				"Redstone Tool",
+				doubleSpacedLines(
+					"The ${major("Redstone Tool")} is used to ${minor("link certain wireless Redstone blocks to other locations")}.",
+					"First use it on the linkable block to save it to the Tool. Then, use the Tool on the block you want to link the saved block to.",
+					"While holding the Redstone Tool, you'll be able to see a line connecting all linked blocks near you."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.REDSTONE_TOOL,
+				doubleSpacedLines(
+					"The Redstone Tool can be used on the following blocks:" + dottedLines(
+						internalLink("blocks/redstone/basic_redstone_interface", "Basic Redstone Interface"),
+						internalLink("blocks/redstone/redstone_observer", "Redstone Observer"),
+					),
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {

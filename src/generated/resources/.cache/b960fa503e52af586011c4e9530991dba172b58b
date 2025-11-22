@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T08:45:35.3743781	Patchouli Book: guide
+// 1.21.1	2025-11-22T08:53:02.3880515	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 d3ab0269b63f310a0cdb5fac280d305eb345b997 assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/redstone.json
@@ -98,6 +98,7 @@ a2f07f9a005264e20b7bf842f980083643fd9745 assets/irregular_implements/patchouli_b
 6efa5fec438376fa97ec93123c892eab5530ca22 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/portkey.json
 d1056d1b9f368a48035327c247a362e92d1b5fda assets/irregular_implements/patchouli_books/guide/en_us/entries/items/redstone_activator.json
 a886a5fa2c1037070dc3dcffa20b7a070fc534a7 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/redstone_remote.json
+77532036f7b3c3e572c0fb0b83544b8b766d486b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/redstone_tool.json
 9975c5ff666995e02857ece75222273d779d2176 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_anchor.json
 071040a0c2b07286e0095885553b67c75e822d45 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_charger_basic.json
 b4f7a281f5e5590c6506d9258a7fe10a879670b9 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/spectre_chestplate.json
