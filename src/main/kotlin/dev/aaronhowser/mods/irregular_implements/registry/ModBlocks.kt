@@ -364,7 +364,7 @@ object ModBlocks : AaronBlockRegistry() {
 
 	// Internal
 	val FLOO_BRICK: DeferredBlock<FlooBrickBlock> =
-		registerBlockWithoutItem("floo_brick", ::FlooBrickBlock)
+		registerBlock("floo_brick", ::FlooBrickBlock)
 	val ANCIENT_BRICK = basicBlock("ancient_brick")
 
 	// Removed blocks:

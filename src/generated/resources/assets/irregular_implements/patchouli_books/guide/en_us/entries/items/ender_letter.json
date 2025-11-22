@@ -12,7 +12,7 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:ender_letter",
       "link_recipe": true,
-      "text": "To send the letter, simply use it on an $(l:blocks/ender_mailbox)Ender Mailbox$(/l). The Letter will be inserted into the recipient's mailbox, if it has room.$(br2)You can only send a letter $(c)while the recipient is online$(), currently!"
+      "text": "To send the letter, simply use it on an $(l:blocks/ender_mailbox)Ender Mailbox$(/l). The Letter will be inserted into the recipient's mailbox, if it has room."
     }
   ]
 }

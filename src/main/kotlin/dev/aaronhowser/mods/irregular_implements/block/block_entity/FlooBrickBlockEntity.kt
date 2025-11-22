@@ -153,8 +153,6 @@ class FlooBrickBlockEntity(
 					pouch.set(ModDataComponents.FLOO_POWDER, current - 1)
 				}
 			}
-
-			event.isCanceled = true
 		}
 
 

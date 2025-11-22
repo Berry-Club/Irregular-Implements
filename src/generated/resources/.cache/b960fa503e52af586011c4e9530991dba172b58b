@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-20T05:39:36.8963382	Patchouli Book: guide
+// 1.21.1	2025-11-22T01:51:06.8175981	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -52,10 +52,11 @@ b08df5457adb3286a0bdd108b5462ddd130901ad assets/irregular_implements/patchouli_b
 526b941407d19a08bd6135ce6d84b81c032c51f4 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/drop_filter.json
 14de3f47eeffce7ea85559c1216b45bd56b5e196 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/emerald_compass.json
 1cf992606339adc3e06163eed0fbe646e234dd1b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_bucket.json
-9f80972de2bbb452d7c30c2b58853172cd821543 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_letter.json
+2cb733b7dec9ab676702ebc9c70c44e8a1ec4b1d assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ender_letter.json
 c923a9275094eed34b3469372ebaab14120ddc95 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/entity_filter.json
 bbc0397a90730c09b44dde5129b62688dd0f38dd assets/irregular_implements/patchouli_books/guide/en_us/entries/items/escape_rope.json
 a6594ed9a1b45f20208f45548a058b4528314b3a assets/irregular_implements/patchouli_books/guide/en_us/entries/items/evil_tear.json
+9c9cd34a50bcfa482bf62ed177dd4366dcba5de6 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/floo_sign.json
 3deb8b2a9a3184f7a46cb2a31b57295c485d4c4f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_compass.json
 4d78411fad6fe8f0948c9129dbf0786d5ef94c68 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/golden_egg.json
 d35b4e7de27f9bc0d770042c627fec1413baf172 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/grass_seeds.json

@@ -1,0 +1,14 @@
+{
+  "category": "irregular_implements:items",
+  "icon": "irregular_implements:floo_sign",
+  "name": "Floo Teleportation",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "irregular_implements:floo_sign",
+      "link_recipe": true,
+      "text": "The $(d)Floo network$() allows you to teleport between different $(d)Floo Fireplaces$() around the world.$(br2)To make a Fireplace, use a ",
+      "title": "Floo Teleportation"
+    }
+  ]
+}

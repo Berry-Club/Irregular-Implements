@@ -964,6 +964,19 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.FLOO_SIGN,
+			"Floo Teleportation",
+			SpotlightPage.linkedPage(
+				ModItems.FLOO_SIGN,
+				"Floo Teleportation",
+				doubleSpacedLines(
+					"The ${major("Floo network")} allows you to teleport between different ${major("Floo Fireplaces")} around the world.",
+					"To make a Fireplace, use a "
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {

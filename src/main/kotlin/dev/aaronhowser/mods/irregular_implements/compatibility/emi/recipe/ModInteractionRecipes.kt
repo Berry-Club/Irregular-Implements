@@ -168,6 +168,25 @@ object ModInteractionRecipes {
 			recipes.add(spectreSaplingRecipe)
 		}
 
+		val flooableBlocks = BuiltInRegistries.BLOCK
+			.filter { it.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK) }
+			.map { it.asItem() }
+
+		if (flooableBlocks.isNotEmpty()) {
+			val flooSignEmiIngredient = ModItems.FLOO_SIGN.asEmiIngredient()
+			val blocksIngredient = EmiIngredient.of(Ingredient.of(*flooableBlocks.toTypedArray()))
+
+			val flooFireplaceRecipe = EmiWorldInteractionRecipe
+				.builder()
+				.leftInput(blocksIngredient)
+				.rightInput(flooSignEmiIngredient, false)
+				.output(EmiStack.of(ModBlocks.FLOO_BRICK.asItem()))
+				.id(OtherUtil.modResource("/interaction/floo_fireplace_creation"))
+				.build()
+
+			recipes.add(flooFireplaceRecipe)
+		}
+
 		return recipes
 	}
 
