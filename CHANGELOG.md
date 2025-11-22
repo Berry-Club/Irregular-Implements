@@ -3,6 +3,7 @@
 ### Added
 
 - Gave Floo Bricks an item
+- Added more Patchouli pages
 
 ### Changed
 
@@ -10,7 +11,6 @@
 - Bean Sprouts are now naturally generating
 - Ender Letters now uses the username cache instead of the list of online players
 	- Now you can send Letters to players that are offline, as long as they've joined the server before
-- Added more Patchouli pages
 - Floo Fireplaces no longer cancel your message when you teleport to another Fireplace
 - The function for finding the Floo Fireplace from the name you say in chat has changed slightly
 	- The max Levenshtein distance is now configurable (default 2, down from 5)
