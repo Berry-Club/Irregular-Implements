@@ -20,6 +20,7 @@ object ModPlacedFeatures {
 	val PITCHER_PLANT: ResourceKey<PlacedFeature> = registerKey("pitcher_plant")
 	val NATURE_CORE: ResourceKey<PlacedFeature> = registerKey("nature_core")
 	val GLOWING_MUSHROOM: ResourceKey<PlacedFeature> = registerKey("glowing_mushroom")
+	val BEAN_SPROUT: ResourceKey<PlacedFeature> = registerKey("bean_sprout")
 
 	fun bootstrap(context: BootstrapContext<PlacedFeature>) {
 		val configuredFeatures: HolderGetter<ConfiguredFeature<*, *>> = context.lookup(Registries.CONFIGURED_FEATURE)
@@ -30,6 +31,18 @@ object ModPlacedFeatures {
 			configuredFeatures.getOrThrow(ModConfiguredFeatures.LOTUS_BUSH),
 			listOf(
 				RarityFilter.onAverageOnceEvery(50),
+				InSquarePlacement.spread(),
+				PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+				BiomeFilter.biome()
+			)
+		)
+
+		register(
+			context,
+			BEAN_SPROUT,
+			configuredFeatures.getOrThrow(ModConfiguredFeatures.BEAN_SPROUT),
+			listOf(
+				RarityFilter.onAverageOnceEvery(30),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
 				BiomeFilter.biome()

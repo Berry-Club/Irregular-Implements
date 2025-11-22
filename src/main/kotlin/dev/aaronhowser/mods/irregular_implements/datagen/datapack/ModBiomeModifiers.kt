@@ -22,6 +22,7 @@ object ModBiomeModifiers {
 	val PITCHER_PLANT = registerKey("pitcher_plant")
 	val NATURE_CORE = registerKey("nature_core")
 	val GLOWING_MUSHROOM = registerKey("glowing_mushroom")
+	val BEAN_SPROUT = registerKey("bean_sprout")
 
 	fun bootstrap(context: BootstrapContext<BiomeModifier>) {
 		val placedFeatures: HolderGetter<PlacedFeature> = context.lookup(Registries.PLACED_FEATURE)
@@ -32,6 +33,15 @@ object ModBiomeModifiers {
 			BiomeModifiers.AddFeaturesBiomeModifier(
 				biomes.getOrThrow(ModBiomeTagsProvider.SPAWNS_LOTUS_BUSH),
 				HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LOTUS_BUSH)),
+				GenerationStep.Decoration.VEGETAL_DECORATION
+			)
+		)
+
+		context.register(
+			BEAN_SPROUT,
+			BiomeModifiers.AddFeaturesBiomeModifier(
+				biomes.getOrThrow(ModBiomeTagsProvider.SPAWNS_BEAN_SPROUT),
+				HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.BEAN_SPROUT)),
 				GenerationStep.Decoration.VEGETAL_DECORATION
 			)
 		)

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.datapack
 
+import dev.aaronhowser.mods.irregular_implements.block.BeanSproutBlock
 import dev.aaronhowser.mods.irregular_implements.block.LotusBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModFeatures
@@ -28,6 +29,7 @@ object ModConfiguredFeatures {
 	val SPECTRE_TREE = registerKey("spectre_tree")
 	val NATURE_CORE = registerKey("nature_core")
 	val GLOWING_MUSHROOM = registerKey("glowing_mushroom")
+	val BEAN_SPROUT = registerKey("bean_sprout")
 
 	fun bootstrap(context: BootstrapContext<ConfiguredFeature<*, *>>) {
 		register(
@@ -38,6 +40,17 @@ object ModConfiguredFeatures {
 				ModBlocks.LOTUS.get()
 					.defaultBlockState()
 					.setValue(LotusBlock.AGE, LotusBlock.MAXIMUM_AGE)
+			)
+		)
+
+		register(
+			context,
+			BEAN_SPROUT,
+			Feature.RANDOM_PATCH,
+			singleBlock(
+				ModBlocks.BEAN_SPROUT.get()
+					.defaultBlockState()
+					.setValue(BeanSproutBlock.AGE, BeanSproutBlock.MAXIMUM_AGE)
 			)
 		)
 

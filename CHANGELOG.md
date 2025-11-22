@@ -7,6 +7,7 @@
 
 ### Changed
 
+- Bean Sprouts are now naturally generating
 - Ender Letters now uses the username cache instead of the list of online players
 	- Now you can send Letters to players that are offline, as long as they've joined the server before
 - Added more Patchouli pages

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#irregular_implements:spawns_bean_sprout",
+  "features": "irregular_implements:bean_sprout",
+  "step": "vegetal_decoration"
+}
