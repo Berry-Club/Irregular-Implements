@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T06:29:53.5883523	Patchouli Book: guide
+// 1.21.1	2025-11-22T07:00:22.8897114	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -20,9 +20,11 @@ a9bde0545bbd2e658f515b34817e611e63a8f1a5 assets/irregular_implements/patchouli_b
 6b0197a49060afc19f5ca309339e4d509aaa1aa8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/ender_mailbox.json
 cb1389b07a66d672ec0a847f15bfaee60cece228 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/energy_distributor.json
 9bd70a3e523c2d4b85dc7d1667567e8af90a8bb7 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/fertilized_dirt.json
+15df3c4cc4dab1fad209a7000236fc5b4b382c85 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/glowing_mushroom.json
 35aa171af8fac010c3d9248fbf939e94519c0e2c assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/igniter.json
 7a00ec271b79d826972f9d2e194f741a369fde50 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/imbuing_station.json
 ec183ad7e70267904bd03aaa20b0cd1167ac6f92 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/inventory_tester.json
+5920b0c3598fe3b5a5b153337a242adaa57b4ea6 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/iron_dropper.json
 4b771c5ab996e7e2443466adfad4253d6c8927a0 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/lapis_glass.json
 9e9f7e1c7fc1f112aaa044ee401d7033d6f9066a assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/moon_phase_detector.json
 c07349a1d6bd0f0342e9341949fe297f25824d26 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/nature_core.json

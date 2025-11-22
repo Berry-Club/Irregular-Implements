@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
-import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -1810,6 +1809,44 @@ class ModPatchouliBookProvider(
 				doubleSpacedLines(
 					"You can also use a ${internalLink("items/location_filter", "Location Filter")} on the Biome Radar to save the biome's location to the Filter.",
 					"With that, you can craft it with a ${internalLink("items/golden_compass", "Golden Compass")} to make your way to the biome!"
+				)
+			)
+		)
+
+		add(
+			ModBlocks.GLOWING_MUSHROOM,
+			"Glowing Mushroom",
+			SpotlightPage.linkedPage(
+				ModBlocks.GLOWING_MUSHROOM,
+				"Glowing Mushroom",
+				doubleSpacedLines(
+					"${major("Glowing Mushrooms")} can rarely found in caves.",
+					"They can be used in any brewing recipe that would accept Glowstone Dust."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.IRON_DROPPER,
+			"Iron Dropper",
+			TextPage.basicTextPage(
+				"Iron Dropper",
+				doubleSpacedLines(
+					"The ${major("Iron Dropper")} is an upgrade to the regular Dropper, with a handful of extra features.",
+					"Inside its GUI are 4 buttons to change some settings.",
+					"Its redstone settings are:$BR" + dottedLines(
+						"Eject when pulsed",
+						"Eject while powered",
+						"Eject always"
+					)
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.IRON_DROPPER,
+				doubleSpacedLines(
+					"You can cycle the items' pickup delay through 20, 5, and 0 ticks.",
+					"You can toggle if the items shoot straight forward or if they have slightly randomized velocity.",
+					"Finally, you can toggle whether it should make particles and sounds when ejecting items or not."
 				)
 			)
 		)
