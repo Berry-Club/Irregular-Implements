@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
+import net.minecraft.world.level.block.IronBarsBlock
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
@@ -1757,13 +1758,13 @@ class ModPatchouliBookProvider(
 						.pattern(
 							arrayOf(
 								" I ",
-								"I0I",
+								"I I",
 								" I "
 							),
 							arrayOf(
-								" I ",
-								"III",
-								" I "
+								" E ",
+								"SAN",
+								" W "
 							),
 							arrayOf(
 								"   ",
@@ -1772,12 +1773,22 @@ class ModPatchouliBookProvider(
 							),
 							arrayOf(
 								"   ",
-								" R ",
+								" 0 ",
 								"   "
 							),
 						)
 						.map('I', Blocks.IRON_BARS)
-						.map('R', ModBlocks.BIOME_RADAR.get())
+						.map('N', Blocks.IRON_BARS, IronBarsBlock.NORTH, true)
+						.map('S', Blocks.IRON_BARS, IronBarsBlock.SOUTH, true)
+						.map('E', Blocks.IRON_BARS, IronBarsBlock.EAST, true)
+						.map('W', Blocks.IRON_BARS, IronBarsBlock.WEST, true)
+						.map('A', Blocks.IRON_BARS, mapOf(
+							IronBarsBlock.NORTH to true,
+							IronBarsBlock.SOUTH to true,
+							IronBarsBlock.EAST to true,
+							IronBarsBlock.WEST to true
+						))
+						.map('0', ModBlocks.BIOME_RADAR.get())
 						.build()
 				)
 				.build()

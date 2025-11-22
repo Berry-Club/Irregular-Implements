@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T03:55:11.2058792	Global Loot Modifiers : irregular_implements
+// 1.21.1	2025-11-22T04:18:40.4098125	Global Loot Modifiers : irregular_implements
 5a1bdb7a1cc5ec2637e08552871f5657f4b50ea4 data/irregular_implements/loot_modifiers/biome_crystal_abandoned_mineshaft.json
 ba423e3111de793966d906c12932a33b9416ae30 data/irregular_implements/loot_modifiers/biome_crystal_ancient_city.json
 86ab787baf984e450ad55a992e3f244ee7c7b571 data/irregular_implements/loot_modifiers/biome_crystal_ancient_city_ice_box.json
@@ -67,4 +67,4 @@ ba1a820f7c33b6fafb55ef16a38324a151f23c25 data/irregular_implements/loot_modifier
 1085b34e0193013d1e0c74ed842fdbaee97f7b52 data/irregular_implements/loot_modifiers/slime_cube_jungle_temple.json
 0ba985fe4ec28b5ca0c3c54468ada472118b8a78 data/irregular_implements/loot_modifiers/summoning_pendulum_dungeon.json
 689af308bec34f60c80f9ef6dedb8f4eaf8d420c data/irregular_implements/loot_modifiers/summoning_pendulum_stronghold.json
-4042161970d3d71400ea13721d1bd20fe2fc9568 data/neoforge/loot_modifiers/global_loot_modifiers.json
+ad802d3ffb854cc06bcd94f36e9799e8729044f4 data/neoforge/loot_modifiers/global_loot_modifiers.json

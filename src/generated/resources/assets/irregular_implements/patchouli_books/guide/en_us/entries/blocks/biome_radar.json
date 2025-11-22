@@ -14,19 +14,24 @@
       "type": "patchouli:multiblock",
       "multiblock": {
         "mapping": {
+          "0": "irregular_implements:biome_radar",
+          "A": "minecraft:iron_bars[north=true,south=true,east=true,west=true]",
+          "E": "minecraft:iron_bars[east=true]",
           "I": "minecraft:iron_bars",
-          "R": "irregular_implements:biome_radar"
+          "N": "minecraft:iron_bars[north=true]",
+          "S": "minecraft:iron_bars[south=true]",
+          "W": "minecraft:iron_bars[west=true]"
         },
         "pattern": [
           [
             " I ",
-            "I0I",
+            "I I",
             " I "
           ],
           [
-            " I ",
-            "III",
-            " I "
+            " E ",
+            "SAN",
+            " W "
           ],
           [
             "   ",
@@ -35,7 +40,7 @@
           ],
           [
             "   ",
-            " R ",
+            " 0 ",
             "   "
           ]
         ],
