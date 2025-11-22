@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-19T00:56:48.0755127	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-11-22T07:03:58.622899	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -54,3 +54,4 @@ d9329c933b78c8093b30537332647e8ad9029958 data/minecraft/tags/block/needs_iron_to
 50710d3daa5e73d16a02070ee961f41684faa90d data/minecraft/tags/block/stone_bricks.json
 eac9b124384cfb6275fd141b9c1ab1639e867bf5 data/minecraft/tags/block/valid_spawn.json
 2f034915209b69d048236ca221906e3d9b02a00a data/minecraft/tags/block/wither_immune.json
+540e1bffbef00b0d93247e12c8eb4281d0a9aed2 data/neoforge/tags/block/villager_farmlands.json

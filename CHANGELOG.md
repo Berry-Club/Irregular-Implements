@@ -17,6 +17,7 @@
 	- It logs what the requested target was, what it found, and the distance between them
 - Changed the tags used for certain world gen features
 - You can now change both active sides of the Redirector Plate, by sneaking or not sneaking
+- Added Fertilized Dirt to the block tag `#neoforge:villager_farmlands`
 
 ### Fixed
 

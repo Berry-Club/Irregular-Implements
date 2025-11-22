@@ -505,6 +505,11 @@ class ModBlockTagsProvider(
 				ModBlocks.REDSTONE_OBSERVER.get()
 			)
 
+		this.tag(Tags.Blocks.VILLAGER_FARMLANDS)
+			.add(
+				ModBlocks.FERTILIZED_DIRT.get()
+			)
+
 	}
 
 	private fun colorTags() {
