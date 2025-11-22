@@ -1877,6 +1877,28 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.ITEM_COLLECTOR,
+			"Item Collectors",
+			SpotlightPage.linkedPage(
+				ModBlocks.ITEM_COLLECTOR,
+				"Item Collector",
+				doubleSpacedLines(
+					"The ${major("Item Collector")} can be placed on an inventory, and will collect item entities in a 3 block radius around itself.",
+					"That's a 7x7x7 cube centered on the Collector."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ADVANCED_ITEM_COLLECTOR,
+				"Advanced Item Collector",
+				doubleSpacedLines(
+					"The ${major("Advanced Item Collector")} works the same, but has a configurable radius from 0 to 10 blocks.",
+					"Each dimension (X/Y/Z) has its own radius, as well.",
+					"You can optionally put an ${internalLink("items/item_filter", "Item Filter")} in it as well, and it will only collect items that match it."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
