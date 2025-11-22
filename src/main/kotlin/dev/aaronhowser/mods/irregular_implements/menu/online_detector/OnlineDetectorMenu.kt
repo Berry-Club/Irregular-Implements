@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.online_detector
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.OnlineDetectorBlockEntity
 import dev.aaronhowser.mods.aaron.menu.MenuWithStrings
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.OnlineDetectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.entity.player.Inventory

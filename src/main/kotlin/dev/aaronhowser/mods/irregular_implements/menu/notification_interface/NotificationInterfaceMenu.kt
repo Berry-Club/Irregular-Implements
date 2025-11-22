@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.NotificationInterfaceBlockEntity
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
 import dev.aaronhowser.mods.aaron.menu.MenuWithStrings
+import dev.aaronhowser.mods.irregular_implements.block.block_entity.NotificationInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container

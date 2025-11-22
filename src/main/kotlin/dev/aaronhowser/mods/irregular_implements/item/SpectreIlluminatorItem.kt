@@ -13,7 +13,6 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
-import net.neoforged.fml.ModList
 
 class SpectreIlluminatorItem(properties: Properties) : Item(properties) {
 

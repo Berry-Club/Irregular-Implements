@@ -3,7 +3,7 @@
 ### Changed
 
 - Ender Letters now uses the username cache instead of the list of online players
-  - Now you can send Letters to players that are offline, as long as they've joined the server since the last restart
+	- Now you can send Letters to players that are offline, as long as they've joined the server before
 - Added more Patchouli pages
 
 ### Removed
@@ -22,7 +22,7 @@
 ### Added
 
 - Added the `/ii spectre-energy` command
-  - Has both a `set <player> <amount>` and a `get <player>` subcommand
+	- Has both a `set <player> <amount>` and a `get <player>` subcommand
 
 ### Changed
 
@@ -41,8 +41,8 @@
 	- That is, the files stored in `/saves/<world>/data/`
 	- Old ones are not deleted, but won't be read from if the new one exists.
 		- `ender_letter_inventories` -> `ii_ender_letter_inventories`
-        - `floo_network` -> `ii_floo_network`
-        - `redstone_handler` -> `ii_redstone_handler`
+		- `floo_network` -> `ii_floo_network`
+		- `redstone_handler` -> `ii_redstone_handler`
 		- `spectre_coil` -> `ii_spectre_energy`
 		- `spectre_cube` -> `ii_spectre_cubes`
 		- `spectre_illumination_handler` -> `ii_spectre_illumination`

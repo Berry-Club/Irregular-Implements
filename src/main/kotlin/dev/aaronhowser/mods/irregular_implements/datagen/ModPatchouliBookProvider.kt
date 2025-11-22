@@ -959,8 +959,7 @@ class ModPatchouliBookProvider(
 			SpotlightPage.linkedPage(
 				ModItems.ENDER_LETTER,
 				doubleSpacedLines(
-					"To send the letter, simply use it on an ${internalLink("blocks/ender_mailbox", "Ender Mailbox")}. The Letter will be inserted into the recipient's mailbox, if it has room.",
-					"You can only send a letter ${bad("while the recipient is online")}, currently!"
+					"To send the letter, simply use it on an ${internalLink("blocks/ender_mailbox", "Ender Mailbox")}. The Letter will be inserted into the recipient's mailbox, if it has room."
 				)
 			)
 		)

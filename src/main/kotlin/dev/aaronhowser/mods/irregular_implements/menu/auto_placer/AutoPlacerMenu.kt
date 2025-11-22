@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.auto_placer
 
+import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
 import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.AutoPlacerBlockEntity
-import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer

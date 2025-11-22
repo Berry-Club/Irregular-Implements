@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.client_to_server
 
-import dev.aaronhowser.mods.aaron.packet.ModPacket
+import dev.aaronhowser.mods.aaron.packet.AaronPacket
 import dev.aaronhowser.mods.irregular_implements.item.BiomePainterItem
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -15,7 +15,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext
 class PaintBiomePacket(
 	val blockPos: BlockPos,
 	val biomeRk: ResourceKey<Biome>
-) : ModPacket() {
+) : AaronPacket() {
 
 	override fun handleOnServer(context: IPayloadContext) {
 		BiomePainterItem.handlePacket(this, context)

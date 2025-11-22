@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.aaron.AaronExtraCodecs
-import dev.aaronhowser.mods.aaron.packet.ModPacket
+import dev.aaronhowser.mods.aaron.packet.AaronPacket
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -17,7 +17,7 @@ class AddIndicatorsPacket(
 	val durationTicks: Int,
 	val color: Int,
 	val dimensions: Vec3 = Vec3(1.0, 1.0, 1.0)
-) : ModPacket() {
+) : AaronPacket() {
 
 	constructor(
 		position: BlockPos,

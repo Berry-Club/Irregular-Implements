@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
-import dev.aaronhowser.mods.aaron.packet.ModPacket
+import dev.aaronhowser.mods.aaron.packet.AaronPacket
 import dev.aaronhowser.mods.irregular_implements.client.NotificationToast
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.Minecraft
@@ -15,7 +15,7 @@ class SendClientToast(
 	val title: String,
 	val description: String,
 	val icon: ItemStack?
-) : ModPacket() {
+) : AaronPacket() {
 
 	override fun handleOnClient(context: IPayloadContext) {
 		val toast = NotificationToast(title, description, icon)

@@ -7,7 +7,6 @@ import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRend
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
