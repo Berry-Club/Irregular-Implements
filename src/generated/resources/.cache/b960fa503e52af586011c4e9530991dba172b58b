@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T07:00:22.8897114	Patchouli Book: guide
+// 1.21.1	2025-11-22T07:16:23.085137	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_books/guide/en_us/categories/items.json
@@ -7,6 +7,7 @@ ef742707e63fd4259e227cc74b1fc597f78798de assets/irregular_implements/patchouli_b
 e093c045d65939302d43afac4ea1d45db2da8b73 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/biome_radar.json
 e84f462f102253f724cf515d0960c484f73934de assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/biome_stone_bricks.json
 26789533f127f538a5662e748c6be65cfdd9364e assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_breaker.json
+83f8619dfc796e3203a74d0e4e736a4bea8020d8 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_destabilizer.json
 a9bde0545bbd2e658f515b34817e611e63a8f1a5 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_detector.json
 2534752e0e6a384401cf8f38857d715c8f886957 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_of_sticks.json
 8d176709afd867c3461cbdd7e8367e538e2ec387 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/block_teleporter.json

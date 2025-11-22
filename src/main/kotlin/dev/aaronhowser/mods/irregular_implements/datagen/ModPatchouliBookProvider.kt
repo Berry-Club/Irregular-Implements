@@ -1851,6 +1851,32 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.BLOCK_DESTABILIZER,
+			"Block Destabilizer",
+			TextPage.basicTextPage(
+				"Block Destabilizer",
+				doubleSpacedLines(
+					"The ${major("Block Destabilizer")} will cause the block in front of it, and all connected blocks of the same type, to ${minor("fall like Sand")} when it receives a Redstone pulse.",
+					"In its GUI, you can toggle various settings related to Laziness.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.BLOCK_DESTABILIZER,
+				doubleSpacedLines(
+					"When in Lazy mode, it will ${minor("remember what block positions to destabilize")}, even if they're different blocks.",
+					"If the Lazy Shape is not set, it will be set the first time it activates in Lazy mode.",
+				)
+			),
+			TextPage.basicTextPage(
+				doubleSpacedLines(
+					"Clicking the ${minor("Show Lazy Shape")} button will show cubes where all positions in the Lazy Shape are located.",
+					"Note that this part ${bad("does not work with Sodium")} very well; you're supposed to see those positions through blocks but that doesn't work.",
+					"Finally, the ${minor("Forget Lazy Shape")} button will clear the saved shape."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
