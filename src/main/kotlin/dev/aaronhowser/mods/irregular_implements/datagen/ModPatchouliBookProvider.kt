@@ -971,7 +971,7 @@ class ModPatchouliBookProvider(
 				ModItems.FLOO_SIGN,
 				"Floo Network",
 				doubleSpacedLines(
-					"The ${major("Floo network")} allows you to teleport between different ${minor("Floo Fireplaces")} around the world.",
+					"The ${major("Floo network")} allows you to teleport between different ${minor("Floo Fireplaces")} within the same dimension.",
 					"To make a Fireplace, use a ${major("Floo Sign")} on Bricks in the world. It will turn into ${minor("Floo Bricks")}, sharing the Sign's custom anvil name."
 				)
 			),
@@ -994,6 +994,19 @@ class ModPatchouliBookProvider(
 					"Sneak right-click the Floo Pouch to fill it up with Floo Powder from your inventory."
 				),
 			),
+		)
+
+		add(
+			ModItems.FLOO_TOKEN,
+			"Floo Token",
+			SpotlightPage.linkedPage(
+				ModItems.FLOO_TOKEN,
+				"Floo Token",
+				doubleSpacedLines(
+					"The ${major("Floo Token")} allows you to ${minor("teleport to any")} ${internalLink("items/floo_sign", "Floo Fireplace")} ${minor("from anywhere in the world.")}.",
+					"Throw it on the ground and wait for the fire to burn in a square. Stand in the square and then speak the name of the Fireplace you wish to teleport to."
+				)
+			)
 		)
 
 	}

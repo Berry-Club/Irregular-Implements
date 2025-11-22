@@ -1,14 +1,14 @@
 {
   "category": "irregular_implements:items",
   "icon": "irregular_implements:floo_sign",
-  "name": "Floo Teleportation",
+  "name": "Floo Network",
   "pages": [
     {
       "type": "patchouli:spotlight",
       "item": "irregular_implements:floo_sign",
       "link_recipe": true,
-      "text": "The $(d)Floo network$() allows you to teleport between different $(d)Floo Fireplaces$() around the world.$(br2)To make a Fireplace, use a $(d)Floo Sign$() on Bricks in the world. It will turn into $(d)Floo Bricks$(), sharing the Sign's custom anvil name.",
-      "title": "Floo Teleportation"
+      "text": "The $(d)Floo network$() allows you to teleport between different $(3)Floo Fireplaces$() within the same dimension.$(br2)To make a Fireplace, use a $(d)Floo Sign$() on Bricks in the world. It will turn into $(3)Floo Bricks$(), sharing the Sign's custom anvil name.",
+      "title": "Floo Network"
     },
     {
       "type": "patchouli:spotlight",
