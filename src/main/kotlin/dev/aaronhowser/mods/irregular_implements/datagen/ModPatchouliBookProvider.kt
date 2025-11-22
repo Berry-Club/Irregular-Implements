@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
+import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -20,21 +21,26 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
 import net.minecraft.data.DataGenerator
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
+import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
 import net.minecraft.world.level.block.IronBarsBlock
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.registries.DeferredBlock
 import net.neoforged.neoforge.registries.DeferredItem
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 class ModPatchouliBookProvider(
 	generator: DataGenerator,
-	bookName: String
-) : PatchouliBookProvider(generator, bookName, IrregularImplements.MOD_ID) {
+	bookName: String,
+	val lookupProvider: CompletableFuture<HolderLookup.Provider>
+) : PatchouliBookProvider(generator, lookupProvider.get(), bookName, IrregularImplements.MOD_ID) {
 
 	override fun buildPages(consumer: Consumer<PatchouliBookElement>) {
 		val book = PatchouliBook.builder()
@@ -1737,6 +1743,20 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		println("TRYING TO GET BIOME NOW")
+		println("TRYING TO GET BIOME NOW")
+		println("TRYING TO GET BIOME NOW")
+		println("TRYING TO GET BIOME NOW")
+
+		val biome = lookupProvider.get()
+			.lookupOrThrow(Registries.BIOME)
+			.getOrThrow(Biomes.PLAINS)
+
+		println("BIOME GOT!")
+		println("BIOME GOT!")
+		println("BIOME GOT!")
+		println("BIOME GOT!")
+
 		add(
 			ModBlocks.BIOME_RADAR,
 			"Biome Radar",
@@ -1744,9 +1764,8 @@ class ModPatchouliBookProvider(
 				ModBlocks.BIOME_RADAR,
 				"Biome Radar",
 				doubleSpacedLines(
-					"The ${major("Evil Tear")} can be used to make an ${minor("Artificial End Portal")}.",
-					"Make the structure shown on the opposite page and then ${minor("use the Evil Tear on the End Rod")} to activate it.",
-					"A portal will grow below it, and it will function exactly like a normal End Portal."
+					"The ${major("Biome Radar")} is a multiblock structure that ${minor("helps you find biomes")} in the world.",
+					"First, you have to actually build the structure."
 				)
 			),
 			MultiblockPage.builder()
@@ -1782,16 +1801,31 @@ class ModPatchouliBookProvider(
 						.map('S', Blocks.IRON_BARS, IronBarsBlock.SOUTH, true)
 						.map('E', Blocks.IRON_BARS, IronBarsBlock.EAST, true)
 						.map('W', Blocks.IRON_BARS, IronBarsBlock.WEST, true)
-						.map('A', Blocks.IRON_BARS, mapOf(
-							IronBarsBlock.NORTH to true,
-							IronBarsBlock.SOUTH to true,
-							IronBarsBlock.EAST to true,
-							IronBarsBlock.WEST to true
-						))
+						.map(
+							'A', Blocks.IRON_BARS, mapOf(
+								IronBarsBlock.NORTH to true,
+								IronBarsBlock.SOUTH to true,
+								IronBarsBlock.EAST to true,
+								IronBarsBlock.WEST to true
+							)
+						)
 						.map('0', ModBlocks.BIOME_RADAR.get())
 						.build()
 				)
-				.build()
+				.build(),
+			SpotlightPage.linkedPage(
+				BiomeCrystalItem.getCrystal(biome),
+				doubleSpacedLines(
+					"${major("Biome Crystals")} can be found in dungeon chests, and there's ${minor("one for every biome")}.",
+					"Insert a Biome Crystal into the Biome Radar, and the flames on the radar will start to blow in the direction of the biome, if it's found."
+				)
+			),
+			TextPage.basicTextPage(
+				doubleSpacedLines(
+					"You can also use a ${internalLink("items/location_filter", "Location Filter")} on the Biome Radar to save the biome's location to the Filter.",
+					"With that, you can craft it with a ${internalLink("items/golden_compass", "Golden Compass")} to make your way to the biome!"
+				)
+			)
 		)
 
 		plates(consumer, book)

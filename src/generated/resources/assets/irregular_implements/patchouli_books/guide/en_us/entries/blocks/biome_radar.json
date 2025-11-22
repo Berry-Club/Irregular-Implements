@@ -7,7 +7,7 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:biome_radar",
       "link_recipe": true,
-      "text": "The $(d)Evil Tear$() can be used to make an $(3)Artificial End Portal$().$(br2)Make the structure shown on the opposite page and then $(3)use the Evil Tear on the End Rod$() to activate it.$(br2)A portal will grow below it, and it will function exactly like a normal End Portal.",
+      "text": "The $(d)Biome Radar$() is a multiblock structure that $(3)helps you find biomes$() in the world.$(br2)First, you have to actually build the structure.",
       "title": "Biome Radar"
     },
     {
@@ -47,6 +47,10 @@
         "symmetrical": true
       },
       "name": "Biome Radar Antenna"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "You can also use a $(l:items/location_filter)Location Filter$(/l) on the Biome Radar to save the biome's location to the Filter.$(br2)With that, you can craft it with a $(l:items/golden_compass)Golden Compass$(/l) to make your way to the biome!"
     }
   ]
 }

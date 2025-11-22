@@ -109,7 +109,8 @@ object ModDataGen {
 			event.includeClient(),
 			ModPatchouliBookProvider(
 				generator,
-				"guide"
+				"guide",
+				lookupProvider
 			)
 		)
 
