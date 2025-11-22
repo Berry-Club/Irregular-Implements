@@ -38,17 +38,11 @@ class BeanStalkBlock(
 
 	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
 		if (this.isStrong) {
-			if (level.maxBuildHeight == pos.y + 2) {
-				val blockAbove = level.getBlockState(pos.above())
-
-				if (blockAbove.getDestroySpeed(level, pos.above()) != -1.0f) {
-					level.setBlockAndUpdate(
-						pos.above(),
-						ModBlocks.BEAN_POD.get().defaultBlockState()
-					)
-				}
-
-				return
+			if (STRONG_IS_DONE_PREDICATE.invoke(level, pos)) {
+				level.setBlockAndUpdate(
+					pos.above(),
+					ModBlocks.BEAN_POD.get().defaultBlockState()
+				)
 			}
 		} else {
 			if (pos.y >= level.maxBuildHeight || !level.isEmptyBlock(pos.above())) return
@@ -73,19 +67,17 @@ class BeanStalkBlock(
 			SoundSource.BLOCKS,
 		)
 
-		for (player in level.players()) {
-			level.sendParticles(
-				ParticleTypes.HAPPY_VILLAGER,
-				pos.above().x + 0.5,
-				pos.above().y + 0.5,
-				pos.above().z + 0.5,
-				5,
-				0.25,
-				0.25,
-				0.25,
-				0.0
-			)
-		}
+		level.sendParticles(
+			ParticleTypes.HAPPY_VILLAGER,
+			pos.above().x + 0.5,
+			pos.above().y + 0.5,
+			pos.above().z + 0.5,
+			5,
+			0.25,
+			0.25,
+			0.25,
+			0.0
+		)
 
 		level.scheduleTick(pos.above(), this, if (this.isStrong) 1 else 5)
 	}
@@ -120,6 +112,41 @@ class BeanStalkBlock(
 				blockState.`is`(ModBlocks.LESSER_BEAN_STALK.get()) -> 2f
 				else -> 1f
 			}
+		}
+
+		/**
+		 * Whether or not the Magic Bean's stalk is done growing, and the block above it should be a Bean Pod.
+		 */
+		private var STRONG_IS_DONE_PREDICATE: (Level, BlockPos) -> Boolean = ::defaultStrongIsDonePredicate
+
+		private fun defaultStrongIsDonePredicate(level: Level, pos: BlockPos): Boolean {
+			// If the block above it is at max build height, it's done
+			if (pos.y + 1 >= level.maxBuildHeight) {
+				return true
+			}
+
+			// If the block two above it is indestructible, it's done
+			// That's because if it grew again, it wouldn't be able to replace the block above itself with either another Stalk or a Bean Pod
+			val stateTwoAbove = level.getBlockState(pos.above(2))
+			return stateTwoAbove.getDestroySpeed(level, pos.above(2)) == -1.0f
+		}
+
+		/**
+		 * Mostly meant to be called from KubeJS.
+		 *
+		 * Here's an example:
+		 *
+		 * ```js
+		 * const $BeanStalkBlock = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.BeanStalkBlock')
+		 *
+		 * $BeanStalkBlock.setMagicBeanStalkIsDoneGrowingPredicate((level, pos) => pos.y >= 100)
+		 * ```
+		 *
+		 * @param predicate A predicate that takes in a [Level] and a [BlockPos] of a just-grown Magic Bean Stalk, and returns a [Boolean] of if it's done growing yet and the block above should be turned into a Bean Pod.
+		 */
+		@JvmStatic
+		fun setMagicBeanStalkIsDoneGrowingPredicate(predicate: (Level, BlockPos) -> Boolean) {
+			STRONG_IS_DONE_PREDICATE = predicate
 		}
 	}
 

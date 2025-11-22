@@ -19,6 +19,8 @@
 - Changed the tags used for certain world gen features
 - You can now change both active sides of the Redirector Plate, by sneaking or not sneaking
 - Added Fertilized Dirt to the block tag `#neoforge:villager_farmlands`
+- Allowed modpack developers to set the logic used for when a Magic Bean's Bean Stalk is done growing
+  - Change it using KubeJS, see 
 
 ### Fixed
 
