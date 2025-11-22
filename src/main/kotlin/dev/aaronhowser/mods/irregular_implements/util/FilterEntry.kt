@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.aaron.AaronExtensions.withComponent
 import dev.aaronhowser.mods.aaron.AaronExtraCodecs
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -100,14 +101,12 @@ sealed interface FilterEntry {
 				this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
 					val tagKeyComponent = Component.literal(this.tagKey.location().toString())
 
-					val stack = randomItem.defaultInstance
-					stack.set(
-						DataComponents.ITEM_NAME,
-						ModTooltipLang.ITEM_TAG
-							.toComponent(tagKeyComponent)
-					)
-
-					stack
+					randomItem
+						.withComponent(
+							DataComponents.ITEM_NAME,
+							ModTooltipLang.ITEM_TAG
+								.toComponent(tagKeyComponent)
+						)
 				}
 			}
 

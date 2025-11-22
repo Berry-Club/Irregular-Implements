@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.component.DataComponents
@@ -25,8 +26,8 @@ class PlayerInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Ent
 			blockEntity.ownerUuid = placer.uuid
 
 			if (placer is Player) {
-				val playerHead = Items.PLAYER_HEAD.defaultInstance
-				playerHead.set(DataComponents.PROFILE, ResolvableProfile(placer.gameProfile))
+				val playerHead = Items.PLAYER_HEAD
+					.withComponent(DataComponents.PROFILE, ResolvableProfile(placer.gameProfile))
 
 				blockEntity.ownerHead = playerHead
 			}

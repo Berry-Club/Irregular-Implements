@@ -61,10 +61,7 @@ class PlayerFilterItem(properties: Properties) : Item(properties) {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
 
 		fun setPlayer(stack: ItemStack, player: Player) {
-			stack.set(
-				ModDataComponents.PLAYER.get(),
-				SpecificEntity(player)
-			)
+			stack.set(ModDataComponents.PLAYER.get(), SpecificEntity(player))
 		}
 	}
 

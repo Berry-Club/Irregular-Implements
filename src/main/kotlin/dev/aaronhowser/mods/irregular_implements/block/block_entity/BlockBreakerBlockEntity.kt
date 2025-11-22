@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.mojang.authlib.GameProfile
 import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.AaronExtensions.withComponent
 import dev.aaronhowser.mods.aaron.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
@@ -342,7 +343,7 @@ class BlockBreakerBlockEntity(
 			withEnchantments: ItemEnchantments
 		): ItemStack {
 			val stack = item.defaultInstance
-			stack.set(DataComponents.UNBREAKABLE, Unbreakable(true))
+				.withComponent(DataComponents.UNBREAKABLE, Unbreakable(true))
 
 			val enchantments = ItemEnchantments.Mutable(withEnchantments)
 			enchantments.set(

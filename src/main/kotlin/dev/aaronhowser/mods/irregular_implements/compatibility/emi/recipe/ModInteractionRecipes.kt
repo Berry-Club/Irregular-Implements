@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getDyeName
+import dev.aaronhowser.mods.aaron.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
@@ -15,7 +16,6 @@ import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
@@ -55,15 +55,15 @@ object ModInteractionRecipes {
 	}
 
 	private fun slimeStackWithLore(compressionLevel: Int): ItemStack {
-		val stack = ModBlocks.COMPRESSED_SLIME_BLOCK.asItem().defaultInstance
-
 		val component = ModTooltipLang.COMPRESSED_SLIME_AMOUNT
 			.toGrayComponent(compressionLevel)
 			.withStyle {
 				it.withUnderlined(true).withItalic(false)
 			}
 
-		stack.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))
+
+		val stack = ModBlocks.COMPRESSED_SLIME_BLOCK
+			.withComponent(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(component))
 
 		return stack
 	}
@@ -178,8 +178,11 @@ object ModInteractionRecipes {
 			val flooSignEmiIngredient = ModItems.FLOO_SIGN.asEmiIngredient()
 			val blocksIngredient = EmiIngredient.of(Ingredient.of(*flooableBlocks.toTypedArray()))
 
-			val namelessFlooBrick = ModBlocks.FLOO_BRICK.asItem().defaultInstance
-			namelessFlooBrick.set(DataComponents.LORE, ItemLore(listOf(ModTooltipLang.FIREPLACE_NO_NAME.toComponent())))
+			val namelessFlooBrick = ModBlocks.FLOO_BRICK
+				.withComponent(
+					DataComponents.LORE,
+					ItemLore(listOf(ModTooltipLang.FIREPLACE_NO_NAME.toComponent()))
+				)
 
 			val flooFireplaceRecipe = EmiWorldInteractionRecipe
 				.builder()
@@ -191,12 +194,12 @@ object ModInteractionRecipes {
 
 			recipes.add(flooFireplaceRecipe)
 
-			val namedFlooSign = ModItems.FLOO_SIGN.toStack()
-			namedFlooSign.set(DataComponents.CUSTOM_NAME, ModTooltipLang.FIREPLACE_HOME.toComponent())
+			val namedFlooSign = ModItems.FLOO_SIGN
+				.withComponent(DataComponents.CUSTOM_NAME, ModTooltipLang.FIREPLACE_HOME.toComponent())
 
-			val namedFlooBlock = ModBlocks.FLOO_BRICK.asItem().defaultInstance
-			namedFlooBlock.set(DataComponents.CUSTOM_NAME, ModTooltipLang.FIREPLACE_HOME.toComponent())
-			namedFlooBlock.set(DataComponents.LORE, ItemLore(listOf(ModTooltipLang.FIREPLACE_WITH_NAME.toGrayComponent())))
+			val namedFlooBlock = ModBlocks.FLOO_BRICK
+				.withComponent(DataComponents.CUSTOM_NAME, ModTooltipLang.FIREPLACE_HOME.toComponent())
+				.withComponent(DataComponents.LORE, ItemLore(listOf(ModTooltipLang.FIREPLACE_WITH_NAME.toGrayComponent())))
 
 			val namedFlooFireplaceRecipe = EmiWorldInteractionRecipe
 				.builder()
