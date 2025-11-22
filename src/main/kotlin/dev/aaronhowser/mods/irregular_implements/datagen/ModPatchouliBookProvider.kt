@@ -1947,6 +1947,25 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.ENTITY_DETECTOR,
+			"Entity Detector",
+			TextPage.basicTextPage(
+				"Entity Detector",
+				doubleSpacedLines(
+					"The ${major("Entity Detector")} emits a Redstone signal when an entity matching its filter is within its detection area.",
+					"In its GUI you can set the radius in each dimension, if the Detector is inverted or not, and specify what type of entity to detect."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ENTITY_DETECTOR,
+				doubleSpacedLines(
+					"You can choose to detect" + dottedLines("All Entities", "Living Entities", "Animals", "Monsters", "Players", "Items", "Custom"),
+					"When in Custom mode, you can put an ${internalLink("items/entity_filter", "Entity Filter")} in the Detector to specify exactly what to detect."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
