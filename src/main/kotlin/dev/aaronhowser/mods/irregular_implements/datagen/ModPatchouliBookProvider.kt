@@ -1736,6 +1736,53 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.BIOME_RADAR,
+			"Biome Radar",
+			SpotlightPage.linkedPage(
+				ModBlocks.BIOME_RADAR,
+				"Biome Radar",
+				doubleSpacedLines(
+					"The ${major("Evil Tear")} can be used to make an ${minor("Artificial End Portal")}.",
+					"Make the structure shown on the opposite page and then ${minor("use the Evil Tear on the End Rod")} to activate it.",
+					"A portal will grow below it, and it will function exactly like a normal End Portal."
+				)
+			),
+			MultiblockPage.builder()
+				.name("Biome Radar Antenna")
+				.multiblock(
+					"Biome Radar Antenna",
+					PatchouliMultiblock.builder()
+						.setSymmetrical()
+						.pattern(
+							arrayOf(
+								" I ",
+								"I0I",
+								" I "
+							),
+							arrayOf(
+								" I ",
+								"III",
+								" I "
+							),
+							arrayOf(
+								"   ",
+								" I ",
+								"   "
+							),
+							arrayOf(
+								"   ",
+								" R ",
+								"   "
+							),
+						)
+						.map('I', Blocks.IRON_BARS)
+						.map('R', ModBlocks.BIOME_RADAR.get())
+						.build()
+				)
+				.build()
+		)
+
 		plates(consumer, book)
 	}
 

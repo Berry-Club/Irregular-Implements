@@ -1,0 +1,47 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:biome_radar",
+  "name": "Biome Radar",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "irregular_implements:biome_radar",
+      "link_recipe": true,
+      "text": "The $(d)Evil Tear$() can be used to make an $(3)Artificial End Portal$().$(br2)Make the structure shown on the opposite page and then $(3)use the Evil Tear on the End Rod$() to activate it.$(br2)A portal will grow below it, and it will function exactly like a normal End Portal.",
+      "title": "Biome Radar"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "I": "minecraft:iron_bars",
+          "R": "irregular_implements:biome_radar"
+        },
+        "pattern": [
+          [
+            " I ",
+            "I0I",
+            " I "
+          ],
+          [
+            " I ",
+            "III",
+            " I "
+          ],
+          [
+            "   ",
+            " I ",
+            "   "
+          ],
+          [
+            "   ",
+            " R ",
+            "   "
+          ]
+        ],
+        "symmetrical": true
+      },
+      "name": "Biome Radar Antenna"
+    }
+  ]
+}
