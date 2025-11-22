@@ -1461,6 +1461,20 @@ class ModBlockStateProvider(
 				)
 				.addModel()
 				.condition(RedirectorPlateBlock.ACTIVE_ONE, direction)
+
+			builder
+				.part()
+				.modelFile(activeModel)
+				.rotationY(
+					when (direction) {
+						Direction.NORTH -> 0
+						Direction.EAST -> 90
+						Direction.SOUTH -> 180
+						Direction.WEST -> 270
+						else -> 0
+					}
+				)
+				.addModel()
 				.condition(RedirectorPlateBlock.ACTIVE_TWO, direction)
 		}
 
