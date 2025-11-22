@@ -47,6 +47,7 @@ class AutoPlacerBlockEntity(
 	private var uuid: UUID? = null
 	private var fakePlayer: WeakReference<FakePlayer>? = null
 
+	// TODO: Make this configurable via GUI
 	enum class Mode { ON_PULSE, WHILE_POWERED }
 
 	private var mode: Mode = Mode.WHILE_POWERED

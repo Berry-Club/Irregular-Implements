@@ -1899,6 +1899,54 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.REDSTONE_OBSERVER,
+			"Redstone Observer",
+			SpotlightPage.linkedPage(
+				ModBlocks.REDSTONE_OBSERVER,
+				"Redstone Observer",
+				doubleSpacedLines(
+					"The ${major("Redstone Observer")} gives off the same Redstone signal strength as the block it's linked to.",
+					"Use a ${internalLink("items/redstone_tool", "Redstone Tool")} to link it to a block."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.AUTO_PLACER,
+			"Auto Placer",
+			SpotlightPage.linkedPage(
+				ModBlocks.AUTO_PLACER,
+				"Auto Placer",
+				doubleSpacedLines(
+					"The ${major("Auto Placer")} will try to place the block in its inventory in front of itself.",
+					"It tries to do this every tick that it does not have a Redstone signal."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.PLAYER_INTERFACE,
+			"Player Interface",
+			TextPage.basicTextPage(
+				"Player Interface",
+				doubleSpacedLines(
+					"The ${major("Player Interface")} allows you to ${minor("interact with the owner's inventory")} with pipes etc.",
+					"It is owned by whoever placed it.",
+					"Each face of the block aims to a different part of the player's inventory."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.PLAYER_INTERFACE,
+				dottedLines(
+					"Top - Armor slots",
+					"Bottom - Hotbar slots",
+					"North - Offhand slots",
+					"Others - Main inventory slots"
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
