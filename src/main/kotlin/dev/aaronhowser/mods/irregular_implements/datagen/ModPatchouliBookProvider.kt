@@ -1966,6 +1966,36 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.BASIC_REDSTONE_INTERFACE,
+			"Basic Redstone Interface",
+			SpotlightPage.linkedPage(
+				ModBlocks.BASIC_REDSTONE_INTERFACE,
+				"Basic Redstone Interface",
+				doubleSpacedLines(
+					"The ${major("Basic Redstone Interface")} will transmit its own received Redstone signal strength to the block it's linked to.",
+					"Use a ${internalLink("items/redstone_tool", "Redstone Tool")} to link it to a block."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ADVANCED_REDSTONE_INTERFACE,
+			"Advanced Redstone Interface",
+			TextPage.basicTextPage(
+				"Advanced Redstone Interface",
+				doubleSpacedLines(
+					"The ${major("Advanced Redstone Interface")} will transmit its own received Redstone signal strength to up to 9 linked blocks.",
+					"Insert ${internalLink("items/location_filter", "Location Filters")} into it to link it to those locations.",
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ADVANCED_REDSTONE_INTERFACE,
+				" ",
+				"Holding a ${internalLink("items/redstone_tool", "Redstone Tool")} will draw a line from it to each linked location."
+			)
+		)
+
 		plates(consumer, book)
 	}
 

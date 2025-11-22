@@ -12,7 +12,7 @@
       "type": "patchouli:spotlight",
       "item": "irregular_implements:entity_detector",
       "link_recipe": true,
-      "text": "You can choose to $(li)All Entities$(li)Living Entities$(li)Animals$(li)Monsters$(li)Players$(li)Items$(li)Custom$(br2)When in Custom mode, you can put an $(l:items/entity_filter)Entity Filter$(/l) in the Detector to specify exactly what to detect."
+      "text": "You can choose to detect$(li)All Entities$(li)Living Entities$(li)Animals$(li)Monsters$(li)Players$(li)Items$(li)Custom$(br2)When in Custom mode, you can put an $(l:items/entity_filter)Entity Filter$(/l) in the Detector to specify exactly what to detect."
     }
   ]
 }
