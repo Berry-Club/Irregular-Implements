@@ -11,6 +11,9 @@
 	- Now you can send Letters to players that are offline, as long as they've joined the server before
 - Added more Patchouli pages
 - Floo Fireplaces no longer cancel your message when you teleport to another Fireplace
+- The function for finding the Floo Fireplace from the name you say in chat has changed slightly
+	- The max Levenshtein distance is now configurable (default 2, down from 5)
+	- It logs what the requested target was, what it found, and the distance between them
 
 ### Removed
 

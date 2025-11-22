@@ -13,6 +13,7 @@ class ServerConfig(
 	lateinit var biomePainterViewHorizontalRadius: ModConfigSpec.IntValue
 	lateinit var biomePainterViewVerticalRadius: ModConfigSpec.IntValue
 
+	lateinit var flooNameMaxDistance: ModConfigSpec.IntValue
 	lateinit var blockMoverTryVaporizeFluid: ModConfigSpec.BooleanValue
 	lateinit var portableEnderBridgeRange: ModConfigSpec.IntValue
 	lateinit var summoningPendulumCapacity: ModConfigSpec.IntValue
@@ -91,6 +92,10 @@ class ServerConfig(
 		blockDestabilizerLimit = builder
 			.comment("How many blocks should the Block Destabilizer be able to drop?")
 			.defineInRange("blockDestabilizerLimit", 50, 1, Int.MAX_VALUE)
+
+		flooNameMaxDistance = builder
+			.comment("What is the maximum Levenshtein distance allowed when searching for a Floo Fireplace by name?")
+			.defineInRange("flooNameMaxDistance", 2, 0, Int.MAX_VALUE)
 
 		blockMoverTryVaporizeFluid = builder
 			.comment("Should the Block Mover try to vaporize fluids (un-water-logging a slab when moved to the Nether, etc), or should it just refuse to move the block?")

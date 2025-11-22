@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
+import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -35,7 +37,7 @@ class FlooNetworkSavedData : SavedData() {
 			if (connectedBricks.contains(fireplace.masterBlockPos)) return false
 
 			val theirName = fireplace.name
-			if (theirName != null && theirName.lowercase() == name?.lowercase()) return false
+			if (theirName != null && theirName.equals(name, ignoreCase = true)) return false
 		}
 
 		addFireplace(masterUuid, name, blockPos)
@@ -46,12 +48,17 @@ class FlooNetworkSavedData : SavedData() {
 	fun findFireplace(name: String): FlooFireplace? {
 		val fireplacesWithNames = fireplaces.filter { !it.name.isNullOrBlank() }
 
-		val maxDistance = 5
+		val maxDistance = ServerConfig.CONFIG.flooNameMaxDistance.get()
 
-		return fireplacesWithNames.map { it to Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
+		val nearest =  fireplacesWithNames.map { it to Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
 			.filter { it.second <= maxDistance }
 			.minByOrNull { it.second }
-			?.first
+
+		if (nearest != null) {
+			IrregularImplements.LOGGER.debug("Floo Fireplace found by name '${name}': '${nearest.first.name}' with distance ${nearest.second}")
+		}
+
+		return nearest?.first
 	}
 
 	fun findFireplace(flooBrickBlockEntity: FlooBrickBlockEntity): FlooFireplace? {
