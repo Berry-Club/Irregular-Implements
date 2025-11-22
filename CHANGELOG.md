@@ -4,6 +4,7 @@
 
 - Gave Floo Bricks an item
 - Added more Patchouli pages
+  - Most Redstone-centric blocks have been moved to their own category in blocks
 
 ### Changed
 

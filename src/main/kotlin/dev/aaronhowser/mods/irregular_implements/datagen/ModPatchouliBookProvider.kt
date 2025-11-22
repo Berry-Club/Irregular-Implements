@@ -1252,32 +1252,6 @@ class ModPatchouliBookProvider(
 		)
 
 		add(
-			ModBlocks.MOON_PHASE_DETECTOR,
-			"Moon Phase Detector",
-			SpotlightPage.linkedPage(
-				ModBlocks.MOON_PHASE_DETECTOR,
-				"Moon Phase Detector",
-				doubleSpacedLines(
-					"The ${major("Moon Phase Detector")} emits a Redstone signal strength based on the current moon phase.",
-					"It emits a full signal (15) during a full moon, and no signal (0) during a new moon.",
-					"You can invert this behavior by right-clicking it."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.SIDED_BLOCK_OF_REDSTONE,
-			"Sided Block of Redstone",
-			SpotlightPage.linkedPage(
-				ModBlocks.SIDED_BLOCK_OF_REDSTONE,
-				"Sided Block of Redstone",
-				doubleSpacedLines(
-					"The ${major("Sided Block of Redstone")} emits a Redstone signal only from its front face.",
-				)
-			)
-		)
-
-		add(
 			ModBlocks.COMPRESSED_SLIME_BLOCK,
 			"Compressed Slime Block",
 			SpotlightPage.linkedPage(
@@ -1286,44 +1260,6 @@ class ModPatchouliBookProvider(
 				doubleSpacedLines(
 					"A ${major("Compressed Slime Block")} will bounce entities that touch it up into the air.",
 					"Get it by using a Shovel on a Slime Block. You can compress it multiple times for a stronger bounce effect."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.ANALOG_EMITTER,
-			"Analog Emitter",
-			SpotlightPage.linkedPage(
-				ModBlocks.ANALOG_EMITTER,
-				"Analog Emitter",
-				doubleSpacedLines(
-					"The ${major("Analog Emitter")}, when powered on its front face, emits a redstone signal with a configurable strength.",
-					"Right-click it to cycle the output strength."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.CONTACT_LEVER,
-			"Contact Lever",
-			SpotlightPage.linkedPage(
-				ModBlocks.CONTACT_LEVER,
-				"Contact Lever",
-				doubleSpacedLines(
-					"When the block in front of the ${major("Contact Lever")} is clicked, the Contact Lever will toggle between on and off.",
-					"While on, it emits a Redstone signal from its other faces."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.CONTACT_BUTTON,
-			"Contact Button",
-			SpotlightPage.linkedPage(
-				ModBlocks.CONTACT_BUTTON,
-				"Contact Button",
-				doubleSpacedLines(
-					"When the block in front of the ${major("Contact Button")} is clicked, the Contact Button will emit a short Redstone pulse from its other faces.",
 				)
 			)
 		)
@@ -1344,38 +1280,6 @@ class ModPatchouliBookProvider(
 					"Toggle - Lights a fire when powered, and extinguishes it when unpowered.",
 					"Keep Ignited - Keeps the fire lit while powered, and does nothing when unpowered.",
 					"Ignite - Lights a fire when powered, and does nothing when unpowered."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.BLOCK_DETECTOR,
-			"Block Detector",
-			SpotlightPage.linkedPage(
-				ModBlocks.BLOCK_DETECTOR,
-				"Block Detector",
-				doubleSpacedLines(
-					"The ${major("Block Detector")} emits a Redstone signal when the block in front of it matches the block stored in its inventory."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.INVENTORY_TESTER,
-			"Inventory Tester",
-			TextPage.basicTextPage(
-				"Inventory Tester",
-				doubleSpacedLines(
-					"The ${major("Inventory Tester")} is placed on the side of an inventory and holds an item.",
-					"It emits a Redstone signal when that inventory is capable of accepting that item.",
-					"It also checks the ${ITALIC}side${RESET} of the inventory it's attached to. If placed on the top of a Furnace, it will only check if the Furnace can accept the item from the top slot."
-				)
-			),
-			SpotlightPage.linkedPage(
-				ModBlocks.INVENTORY_TESTER,
-				doubleSpacedLines(
-					"Because of that, you may also want to use the ${internalLink("blocks/inventory_rerouter", "Inventory Rerouter")} to access the inventory's face from another side.",
-					"You can invert it in its GUI, so it emits a signal when the inventory cannot accept the item.",
 				)
 			)
 		)
@@ -1409,41 +1313,6 @@ class ModPatchouliBookProvider(
 				doubleSpacedLines(
 					"The ${major("Spectre Lens")}, when placed on top of a Beacon, allows it to effect you from any distance, as long as you're in the same dimension.",
 					"It only extends this effect to the player that placed the Lens."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.ONLINE_DETECTOR,
-			"Online Detector",
-			SpotlightPage.linkedPage(
-				ModBlocks.ONLINE_DETECTOR,
-				"Online Detector",
-				doubleSpacedLines(
-					"The ${major("Online Detector")} emits a Redstone signal when the chosen player is logged in to the server.",
-					"Type the players' exact username into its GUI to set it."
-				)
-			)
-		)
-
-		add(
-			ModBlocks.CHAT_DETECTOR,
-			"Chat Detector",
-			SpotlightPage.linkedPage(
-				ModBlocks.CHAT_DETECTOR,
-				"Chat Detector",
-				doubleSpacedLines(
-					"The ${major("Chat Detector")} emits a Redstone signal when the player that placed it says a specific phrase in chat.",
-					"The text box in its GUI is actually a ${ITALIC}regex${RESET} field, so it can be pretty fancy.",
-					"You can also toggle if the message gets canceled or not."
-				)
-			),
-			SpotlightPage.linkedPage(
-				ModBlocks.GLOBAL_CHAT_DETECTOR,
-				"Global Chat Detector",
-				doubleSpacedLines(
-					"The ${major("Global Chat Detector")} works the same way, but listens to chat messages from all players instead of only whoever placed it.",
-					"It can only cancel messages sent by its owner, though."
 				)
 			)
 		)
@@ -1483,19 +1352,6 @@ class ModPatchouliBookProvider(
 						}
 				)
 				.build()
-		)
-
-		add(
-			ModBlocks.ADVANCED_REDSTONE_TORCH,
-			"Advanced Redstone Torch",
-			SpotlightPage.linkedPage(
-				ModBlocks.ADVANCED_REDSTONE_TORCH,
-				"Advanced Redstone Torch",
-				doubleSpacedLines(
-					"The ${major("Advanced Redstone Torch")} has a configurable redstone output when powered and when unpowered.",
-					"USe its GUI strength to set these two values."
-				)
-			)
 		)
 
 		add(
@@ -1900,19 +1756,6 @@ class ModPatchouliBookProvider(
 		)
 
 		add(
-			ModBlocks.REDSTONE_OBSERVER,
-			"Redstone Observer",
-			SpotlightPage.linkedPage(
-				ModBlocks.REDSTONE_OBSERVER,
-				"Redstone Observer",
-				doubleSpacedLines(
-					"The ${major("Redstone Observer")} gives off the same Redstone signal strength as the block it's linked to.",
-					"Use a ${internalLink("items/redstone_tool", "Redstone Tool")} to link it to a block."
-				)
-			)
-		)
-
-		add(
 			ModBlocks.AUTO_PLACER,
 			"Auto Placer",
 			SpotlightPage.linkedPage(
@@ -1943,6 +1786,66 @@ class ModPatchouliBookProvider(
 					"Bottom - Hotbar slots",
 					"North - Offhand slots",
 					"Others - Main inventory slots"
+				)
+			)
+		)
+
+		redstoneBlocks(consumer, book)
+		plates(consumer, book)
+	}
+
+	private fun redstoneBlocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
+		val category = PatchouliBookCategory.builder()
+			.book(book)
+			.setDisplay(
+				name = "Redstone blocks",
+				description = "Blocks relating to Redstone.",
+				icon = ModBlocks.REDSTONE_OBSERVER
+			)
+			.parent("irregular_implements:blocks")
+			.save(consumer, "blocks/redstone")
+
+		fun add(
+			block: DeferredBlock<*>,
+			name: String,
+			vararg pages: AbstractPage
+		): PatchouliBookEntry {
+			val builder = PatchouliBookEntry.builder()
+				.category(category)
+				.display(
+					entryName = name,
+					icon = block
+				)
+
+			for (page in pages) {
+				builder.addPage(page)
+			}
+
+			return builder.save(consumer, block.key!!.location().path)
+		}
+
+		add(
+			ModBlocks.ADVANCED_REDSTONE_TORCH,
+			"Advanced Redstone Torch",
+			SpotlightPage.linkedPage(
+				ModBlocks.ADVANCED_REDSTONE_TORCH,
+				"Advanced Redstone Torch",
+				doubleSpacedLines(
+					"The ${major("Advanced Redstone Torch")} has a configurable redstone output when powered and when unpowered.",
+					"USe its GUI strength to set these two values."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.REDSTONE_OBSERVER,
+			"Redstone Observer",
+			SpotlightPage.linkedPage(
+				ModBlocks.REDSTONE_OBSERVER,
+				"Redstone Observer",
+				doubleSpacedLines(
+					"The ${major("Redstone Observer")} gives off the same Redstone signal strength as the block it's linked to.",
+					"Use a ${internalLink("items/redstone_tool", "Redstone Tool")} to link it to a block."
 				)
 			)
 		)
@@ -1996,7 +1899,137 @@ class ModPatchouliBookProvider(
 			)
 		)
 
-		plates(consumer, book)
+		add(
+			ModBlocks.MOON_PHASE_DETECTOR,
+			"Moon Phase Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.MOON_PHASE_DETECTOR,
+				"Moon Phase Detector",
+				doubleSpacedLines(
+					"The ${major("Moon Phase Detector")} emits a Redstone signal strength based on the current moon phase.",
+					"It emits a full signal (15) during a full moon, and no signal (0) during a new moon.",
+					"You can invert this behavior by right-clicking it."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.SIDED_BLOCK_OF_REDSTONE,
+			"Sided Block of Redstone",
+			SpotlightPage.linkedPage(
+				ModBlocks.SIDED_BLOCK_OF_REDSTONE,
+				"Sided Block of Redstone",
+				doubleSpacedLines(
+					"The ${major("Sided Block of Redstone")} emits a Redstone signal only from its front face.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.CONTACT_LEVER,
+			"Contact Lever",
+			SpotlightPage.linkedPage(
+				ModBlocks.CONTACT_LEVER,
+				"Contact Lever",
+				doubleSpacedLines(
+					"When the block in front of the ${major("Contact Lever")} is clicked, the Contact Lever will toggle between on and off.",
+					"While on, it emits a Redstone signal from its other faces."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.CONTACT_BUTTON,
+			"Contact Button",
+			SpotlightPage.linkedPage(
+				ModBlocks.CONTACT_BUTTON,
+				"Contact Button",
+				doubleSpacedLines(
+					"When the block in front of the ${major("Contact Button")} is clicked, the Contact Button will emit a short Redstone pulse from its other faces.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.BLOCK_DETECTOR,
+			"Block Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.BLOCK_DETECTOR,
+				"Block Detector",
+				doubleSpacedLines(
+					"The ${major("Block Detector")} emits a Redstone signal when the block in front of it matches the block stored in its inventory."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.INVENTORY_TESTER,
+			"Inventory Tester",
+			TextPage.basicTextPage(
+				"Inventory Tester",
+				doubleSpacedLines(
+					"The ${major("Inventory Tester")} is placed on the side of an inventory and holds an item.",
+					"It emits a Redstone signal when that inventory is capable of accepting that item.",
+					"It also checks the ${ITALIC}side${RESET} of the inventory it's attached to. If placed on the top of a Furnace, it will only check if the Furnace can accept the item from the top slot."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.INVENTORY_TESTER,
+				doubleSpacedLines(
+					"Because of that, you may also want to use the ${internalLink("blocks/inventory_rerouter", "Inventory Rerouter")} to access the inventory's face from another side.",
+					"You can invert it in its GUI, so it emits a signal when the inventory cannot accept the item.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ANALOG_EMITTER,
+			"Analog Emitter",
+			SpotlightPage.linkedPage(
+				ModBlocks.ANALOG_EMITTER,
+				"Analog Emitter",
+				doubleSpacedLines(
+					"The ${major("Analog Emitter")}, when powered on its front face, emits a redstone signal with a configurable strength.",
+					"Right-click it to cycle the output strength."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ONLINE_DETECTOR,
+			"Online Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.ONLINE_DETECTOR,
+				"Online Detector",
+				doubleSpacedLines(
+					"The ${major("Online Detector")} emits a Redstone signal when the chosen player is logged in to the server.",
+					"Type the players' exact username into its GUI to set it."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.CHAT_DETECTOR,
+			"Chat Detector",
+			SpotlightPage.linkedPage(
+				ModBlocks.CHAT_DETECTOR,
+				"Chat Detector",
+				doubleSpacedLines(
+					"The ${major("Chat Detector")} emits a Redstone signal when the player that placed it says a specific phrase in chat.",
+					"The text box in its GUI is actually a ${ITALIC}regex${RESET} field, so it can be pretty fancy.",
+					"You can also toggle if the message gets canceled or not."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.GLOBAL_CHAT_DETECTOR,
+				"Global Chat Detector",
+				doubleSpacedLines(
+					"The ${major("Global Chat Detector")} works the same way, but listens to chat messages from all players instead of only whoever placed it.",
+					"It can only cancel messages sent by its owner, though."
+				)
+			)
+		)
+
 	}
 
 	private fun plates(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
