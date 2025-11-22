@@ -123,46 +123,40 @@ class FlooBrickBlockEntity(
 			if (event.isCanceled) return
 
 			val player = event.player
+			val level = player.serverLevel()
+			val message = event.message.string
 
-			val isHoldingFlooPowder = player.isHolding(ModItems.FLOO_POWDER.get())
+			val holdingPowder = player.isHolding(ModItems.FLOO_POWDER.get())
+			val pouch = player.inventory.items.firstOrNull { it.`is`(ModItems.FLOO_POUCH) }
 
-			val flooPouchStack = player.inventory.items.firstOrNull { it.`is`(ModItems.FLOO_POUCH) }
-
-			if (!player.isCreative && !isHoldingFlooPowder) {
-				if (flooPouchStack == null) return
-				if (flooPouchStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0) <= 0) return
+			if (!player.hasInfiniteMaterials() && !holdingPowder) {
+				val amount = pouch?.getOrDefault(ModDataComponents.FLOO_POWDER, 0) ?: 0
+				if (amount <= 0) return
 			}
 
-			val level = player.serverLevel()
-			val standingOnPos = player.mainSupportingBlockPos.getOrNull() ?: return
-			val standingOnBE = level.getBlockEntity(standingOnPos) as? FlooBrickBlockEntity ?: return
+			val pos = player.mainSupportingBlockPos.getOrNull() ?: return
+			val brick = level.getBlockEntity(pos) as? FlooBrickBlockEntity ?: return
+			val fireplace = FlooNetworkSavedData.get(level).findFireplace(brick) ?: return
 
-			val standingOnFireplace = FlooNetworkSavedData.get(level)
-				.findFireplace(standingOnBE)
-				?: return
+			if (!fireplace.teleportFromThis(player, message)) return
 
-			val message = event.message.string
-			val success = standingOnFireplace.teleportFromThis(player, message)
-
-			if (success) {
-				if (!player.hasInfiniteMaterials()) {
-					if (isHoldingFlooPowder) {
-						val flooPowderStack = if (player.mainHandItem.`is`(ModItems.FLOO_POWDER.get())) {
-							player.mainHandItem
-						} else {
-							player.offhandItem
-						}
-
-						flooPowderStack.shrink(1)
-					} else if (flooPouchStack != null) {
-						val currentFlooPowder = flooPouchStack.getOrDefault(ModDataComponents.FLOO_POWDER, 1)
-						flooPouchStack.set(ModDataComponents.FLOO_POWDER, currentFlooPowder - 1)
+			if (!player.hasInfiniteMaterials()) {
+				if (holdingPowder) {
+					val stack = if (player.mainHandItem.`is`(ModItems.FLOO_POWDER.get())) {
+						player.mainHandItem
+					} else {
+						player.offhandItem
 					}
+					stack.shrink(1)
+				} else if (pouch != null) {
+					val current = pouch.getOrDefault(ModDataComponents.FLOO_POWDER, 1)
+					pouch.set(ModDataComponents.FLOO_POWDER, current - 1)
 				}
 			}
 
 			event.isCanceled = true
 		}
+
 
 	}
 
