@@ -1820,6 +1820,56 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.CORRECTOR_PLATE,
+			"Corrector Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.CORRECTOR_PLATE,
+				"Corrector Plate",
+				doubleSpacedLines(
+					"Entities moving on a ${major("Corrector Plate")} will snap to the center of the block.",
+					"That is, they can only move along the path going straight between the middle of the X and Z axes of the block."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ITEM_SEALER_PLATE,
+			"Item Sealer Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.ITEM_SEALER_PLATE,
+				"Item Sealer Plate",
+				doubleSpacedLines(
+					"Any item entity that touches the ${major("Item Sealer Plate")} will be prevented from being picked up for 30 seconds."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.ITEM_REJUVENATOR_PLATE,
+			"Item Rejuvenator Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.ITEM_REJUVENATOR_PLATE,
+				"Item Rejuvenator Plate",
+				doubleSpacedLines(
+					"Any item entity that touches the ${major("Item Rejuvenator Plate")} will have its despawn timer reset to 4 minutes."
+				)
+			)
+		)
+
+		add(
+			ModBlocks.COLLECTION_PLATE,
+			"Collection Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.COLLECTION_PLATE,
+				"Collection Plate",
+				doubleSpacedLines(
+					"Any item entity that touches the ${major("Collection Plate")} will be inserted into an adjacent inventory, if possible.",
+					"The order it tries is: Down, North, South, East, East, Up."
+				)
+			)
+		)
+
 	}
 
 	private fun major(text: String): String {
