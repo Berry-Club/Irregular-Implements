@@ -14,6 +14,7 @@
 - The function for finding the Floo Fireplace from the name you say in chat has changed slightly
 	- The max Levenshtein distance is now configurable (default 2, down from 5)
 	- It logs what the requested target was, what it found, and the distance between them
+- Changed the tags used for certain world gen features
 
 ### Fixed
 

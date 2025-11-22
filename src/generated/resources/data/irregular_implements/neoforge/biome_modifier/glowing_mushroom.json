@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#c:is_overworld",
+  "biomes": "#irregular_implements:spawns_glowing_mushroom",
   "features": "irregular_implements:glowing_mushroom",
   "step": "vegetal_decoration"
 }

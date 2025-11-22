@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-11T15:08:11.2707561	Tags for minecraft:worldgen/biome mod id irregular_implements
+// 1.21.1	2025-11-22T03:36:07.6026339	Tags for minecraft:worldgen/biome mod id irregular_implements
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/irregular_implements/tags/worldgen/biome/biome_crystal_blacklist.json
 d1642d439cf092daa140100bf263ef328dfce76a data/irregular_implements/tags/worldgen/biome/has_nature_core.json
 123a8c4cf362352d397dc85738c4e8bb2ef2dc40 data/irregular_implements/tags/worldgen/biome/nature_core_acacia.json
@@ -8,3 +8,7 @@ c3d4e55bd4ed5d178abb10df76626eccdab7c209 data/irregular_implements/tags/worldgen
 a8da2438bebdb3e6080fe1d0eccb1c3de5e5a129 data/irregular_implements/tags/worldgen/biome/nature_core_mangrove.json
 5056f3bd580be2fd51c5ed3c2780ed82e9a2768a data/irregular_implements/tags/worldgen/biome/nature_core_oak.json
 5694e82971984a2dead7658fffd5c5c8c410cb6a data/irregular_implements/tags/worldgen/biome/nature_core_spruce.json
+7bd209e9e22dc14a523826fe8d8186cbea47c4b0 data/irregular_implements/tags/worldgen/biome/spawns_bean_sprout.json
+96bd20d8ad8fcac164921732d498b4d098033ef3 data/irregular_implements/tags/worldgen/biome/spawns_glowing_mushroom.json
+5694e82971984a2dead7658fffd5c5c8c410cb6a data/irregular_implements/tags/worldgen/biome/spawns_lotus_bush.json
+74ef1244118dd068a4a201e03803fdf39544f224 data/irregular_implements/tags/worldgen/biome/spawns_pitcher_plant.json

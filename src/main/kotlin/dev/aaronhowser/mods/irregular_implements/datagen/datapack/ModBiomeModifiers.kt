@@ -30,7 +30,7 @@ object ModBiomeModifiers {
 		context.register(
 			LOTUS_BUSH,
 			BiomeModifiers.AddFeaturesBiomeModifier(
-				biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
+				biomes.getOrThrow(ModBiomeTagsProvider.SPAWNS_LOTUS_BUSH),
 				HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LOTUS_BUSH)),
 				GenerationStep.Decoration.VEGETAL_DECORATION
 			)
@@ -39,7 +39,7 @@ object ModBiomeModifiers {
 		context.register(
 			PITCHER_PLANT,
 			BiomeModifiers.AddFeaturesBiomeModifier(
-				biomes.getOrThrow(Tags.Biomes.IS_WET_OVERWORLD),
+				biomes.getOrThrow(ModBiomeTagsProvider.SPAWNS_PITCHER_PLANT),
 				HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PITCHER_PLANT)),
 				GenerationStep.Decoration.VEGETAL_DECORATION
 			)
@@ -57,7 +57,7 @@ object ModBiomeModifiers {
 		context.register(
 			GLOWING_MUSHROOM,
 			BiomeModifiers.AddFeaturesBiomeModifier(
-				biomes.getOrThrow(Tags.Biomes.IS_OVERWORLD),
+				biomes.getOrThrow(ModBiomeTagsProvider.SPAWNS_GLOWING_MUSHROOM),
 				HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.GLOWING_MUSHROOM)),
 				GenerationStep.Decoration.VEGETAL_DECORATION
 			)
