@@ -1013,6 +1013,25 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.ECTOPLASM,
+			"Ectoplasm",
+			TextPage.basicTextPage(
+				"Ectoplasm",
+				doubleSpacedLines(
+					"${major("Ectoplasm")} is a material that drops when Spirits are killed.",
+					"Spirits have a chance of spawning ${minor("any time a mob dies")}. The chance increases closer to the full moon, and increases further if the Ender Dragon has ever been killed on the server."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.ECTOPLASM,
+				doubleSpacedLines(
+					"Spirits ${bad("can only be damaged via magic")}.",
+					"Splash Potions, enchanted weapons, or certain items like the ${internalLink("items/spectre_sword", "Spectre Sword")} are examples of ways to damage them."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {
@@ -1654,6 +1673,7 @@ class ModPatchouliBookProvider(
 				.build(),
 			SpotlightPage.builder()
 				.setItemsString("irregular_implements:biome_crystal[irregular_implements:biome=\"minecraft:plains\"]")
+				.linkRecipe(true)
 				.text(
 					doubleSpacedLines(
 						"${major("Biome Crystals")} can be found in dungeon chests, and there's ${minor("one for every biome")}.",
@@ -1790,6 +1810,24 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.SPECTRE_SAPLING,
+			"Spectre Sapling",
+			TextPage.basicTextPage(
+				"Spectre Sapling",
+				doubleSpacedLines(
+					"The ${major("Spectre Sapling")} grows into a translucent Spectre Tree.",
+					"Its Leaves have a chance of dropping ${internalLink("items/ectoplasm", "Ectoplasm")}, which makes it a very nice reusable source!"
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.SPECTRE_SAPLING,
+				doubleSpacedLines(
+					"Create a Spectre Sapling by right-clicking any Sapling block with an Ectoplasm."
+				)
+			)
+		)
+
 		redstoneBlocks(consumer, book)
 		plates(consumer, book)
 	}
@@ -1800,7 +1838,7 @@ class ModPatchouliBookProvider(
 			.setDisplay(
 				name = "Redstone blocks",
 				description = "Blocks relating to Redstone.",
-				icon = ModBlocks.REDSTONE_OBSERVER
+				icon = ModBlocks.ADVANCED_REDSTONE_TORCH
 			)
 			.parent("irregular_implements:blocks")
 			.save(consumer, "blocks/redstone")

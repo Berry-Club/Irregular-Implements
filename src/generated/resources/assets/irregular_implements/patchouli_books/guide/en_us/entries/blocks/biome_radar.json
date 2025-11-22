@@ -51,6 +51,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "irregular_implements:biome_crystal[irregular_implements:biome=\"minecraft:plains\"]",
+      "link_recipe": true,
       "text": "$(d)Biome Crystals$() can be found in dungeon chests, and there's $(3)one for every biome$().$(br2)Insert a Biome Crystal into the Biome Radar, and the flames on the radar will start to blow in the direction of the biome, if it's found."
     },
     {
