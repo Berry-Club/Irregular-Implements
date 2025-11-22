@@ -966,15 +966,34 @@ class ModPatchouliBookProvider(
 
 		add(
 			ModItems.FLOO_SIGN,
-			"Floo Teleportation",
+			"Floo Network",
 			SpotlightPage.linkedPage(
 				ModItems.FLOO_SIGN,
-				"Floo Teleportation",
+				"Floo Network",
 				doubleSpacedLines(
-					"The ${major("Floo network")} allows you to teleport between different ${major("Floo Fireplaces")} around the world.",
-					"To make a Fireplace, use a "
+					"The ${major("Floo network")} allows you to teleport between different ${minor("Floo Fireplaces")} around the world.",
+					"To make a Fireplace, use a ${major("Floo Sign")} on Bricks in the world. It will turn into ${minor("Floo Bricks")}, sharing the Sign's custom anvil name."
 				)
-			)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.FLOO_BRICK,
+				doubleSpacedLines(
+					"If the Sign was not named, the Fireplace will also not be named. Nameless Fireplaces ${bad("cannot be teleported to")}. but can be teleported from.",
+					"To teleport to a Fireplace, stand on any other Fireplace and then ${minor("say its name in chat")}.",
+					"Teleporting requires Floo Powder; see the next page for details."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.FLOO_POWDER,
+				"To teleport, you need to be holding ${major("Floo Powder")} in your hand. It will consume a single item per teleport."
+			),
+			SpotlightPage.linkedPage(
+				ModItems.FLOO_POUCH,
+				doubleSpacedLines(
+					"Alternatively, you can hold a ${major("Floo Pouch")}, which can hold up to 128 Floo Powder and works when held anywhere in your inventory.",
+					"Sneak right-click the Floo Pouch to fill it up with Floo Powder from your inventory."
+				),
+			),
 		)
 
 	}
