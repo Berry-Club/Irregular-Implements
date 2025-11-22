@@ -49,6 +49,11 @@
       "name": "Biome Radar Antenna"
     },
     {
+      "type": "patchouli:spotlight",
+      "item": "irregular_implements:biome_crystal[irregular_implements:biome=\"minecraft:plains\"]",
+      "text": "$(d)Biome Crystals$() can be found in dungeon chests, and there's $(3)one for every biome$().$(br2)Insert a Biome Crystal into the Biome Radar, and the flames on the radar will start to blow in the direction of the biome, if it's found."
+    },
+    {
       "type": "patchouli:text",
       "text": "You can also use a $(l:items/location_filter)Location Filter$(/l) on the Biome Radar to save the biome's location to the Filter.$(br2)With that, you can craft it with a $(l:items/golden_compass)Golden Compass$(/l) to make your way to the biome!"
     }

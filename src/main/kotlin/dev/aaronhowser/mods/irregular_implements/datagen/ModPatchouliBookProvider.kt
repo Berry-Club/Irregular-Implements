@@ -22,11 +22,9 @@ import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.Registries
 import net.minecraft.data.DataGenerator
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
-import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
 import net.minecraft.world.level.block.IronBarsBlock
@@ -1743,20 +1741,6 @@ class ModPatchouliBookProvider(
 			)
 		)
 
-		println("TRYING TO GET BIOME NOW")
-		println("TRYING TO GET BIOME NOW")
-		println("TRYING TO GET BIOME NOW")
-		println("TRYING TO GET BIOME NOW")
-
-		val biome = lookupProvider.get()
-			.lookupOrThrow(Registries.BIOME)
-			.getOrThrow(Biomes.PLAINS)
-
-		println("BIOME GOT!")
-		println("BIOME GOT!")
-		println("BIOME GOT!")
-		println("BIOME GOT!")
-
 		add(
 			ModBlocks.BIOME_RADAR,
 			"Biome Radar",
@@ -1813,13 +1797,15 @@ class ModPatchouliBookProvider(
 						.build()
 				)
 				.build(),
-			SpotlightPage.linkedPage(
-				BiomeCrystalItem.getCrystal(biome),
-				doubleSpacedLines(
-					"${major("Biome Crystals")} can be found in dungeon chests, and there's ${minor("one for every biome")}.",
-					"Insert a Biome Crystal into the Biome Radar, and the flames on the radar will start to blow in the direction of the biome, if it's found."
+			SpotlightPage.builder()
+				.setItemsString("irregular_implements:biome_crystal[irregular_implements:biome=\"minecraft:plains\"]")
+				.text(
+					doubleSpacedLines(
+						"${major("Biome Crystals")} can be found in dungeon chests, and there's ${minor("one for every biome")}.",
+						"Insert a Biome Crystal into the Biome Radar, and the flames on the radar will start to blow in the direction of the biome, if it's found."
+					)
 				)
-			),
+				.build(),
 			TextPage.basicTextPage(
 				doubleSpacedLines(
 					"You can also use a ${internalLink("items/location_filter", "Location Filter")} on the Biome Radar to save the biome's location to the Filter.",
