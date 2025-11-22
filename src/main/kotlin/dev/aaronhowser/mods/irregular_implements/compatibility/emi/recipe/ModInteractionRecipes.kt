@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getDyeName
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
+import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -177,21 +178,25 @@ object ModInteractionRecipes {
 			val flooSignEmiIngredient = ModItems.FLOO_SIGN.asEmiIngredient()
 			val blocksIngredient = EmiIngredient.of(Ingredient.of(*flooableBlocks.toTypedArray()))
 
+			val namelessFlooBrick = ModBlocks.FLOO_BRICK.asItem().defaultInstance
+			namelessFlooBrick.set(DataComponents.LORE, ItemLore(listOf(ModTooltipLang.FIREPLACE_NO_NAME.toComponent())))
+
 			val flooFireplaceRecipe = EmiWorldInteractionRecipe
 				.builder()
 				.leftInput(blocksIngredient)
 				.rightInput(flooSignEmiIngredient, false)
-				.output(EmiStack.of(ModBlocks.FLOO_BRICK.asItem()))
+				.output(EmiStack.of(namelessFlooBrick))
 				.id(OtherUtil.modResource("/interaction/floo_fireplace_creation"))
 				.build()
 
 			recipes.add(flooFireplaceRecipe)
 
 			val namedFlooSign = ModItems.FLOO_SIGN.toStack()
-			namedFlooSign.set(DataComponents.CUSTOM_NAME, Component.literal("Home"))
+			namedFlooSign.set(DataComponents.CUSTOM_NAME, ModTooltipLang.FIREPLACE_HOME.toComponent())
 
 			val namedFlooBlock = ModBlocks.FLOO_BRICK.asItem().defaultInstance
-			namedFlooBlock.set(DataComponents.CUSTOM_NAME, Component.literal("Home"))
+			namedFlooBlock.set(DataComponents.CUSTOM_NAME, ModTooltipLang.FIREPLACE_HOME.toComponent())
+			namedFlooBlock.set(DataComponents.LORE, ItemLore(listOf(ModTooltipLang.FIREPLACE_WITH_NAME.toGrayComponent())))
 
 			val namedFlooFireplaceRecipe = EmiWorldInteractionRecipe
 				.builder()

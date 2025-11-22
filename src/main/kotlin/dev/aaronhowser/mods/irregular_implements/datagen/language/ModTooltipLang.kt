@@ -74,6 +74,9 @@ object ModTooltipLang {
 	const val PORTKEY_DESTINATION = "tooltip.irregular_implements.portkey_destination"
 	const val PORTKEY_DISGUISE = "tooltip.irregular_implements.portkey_disguise"
 	const val SODIUM_INCOMPATIBLE = "tooltip.irregular_implements.sodium_incompatible"
+	const val FIREPLACE_NO_NAME = "tooltip.irregular_implements.fireplace_no_name"
+	const val FIREPLACE_HOME = "tooltip.irregular_implements.fireplace_home"
+	const val FIREPLACE_WITH_NAME = "tooltip.irregular_implements.fireplace_with_name"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -143,6 +146,9 @@ object ModTooltipLang {
 			add(PORTKEY_DESTINATION, "%s: %d, %d, %d")
 			add(PORTKEY_DISGUISE, "Disguised as: %s")
 			add(SODIUM_INCOMPATIBLE, "Not fully compatible with Sodium")
+			add(FIREPLACE_HOME, "Home")
+			add(FIREPLACE_NO_NAME, "Can be teleported from but not to")
+			add(FIREPLACE_WITH_NAME, "Can be teleported to by standing on another\nfireplace and then saying \"Home\"")
 		}
 	}
 
