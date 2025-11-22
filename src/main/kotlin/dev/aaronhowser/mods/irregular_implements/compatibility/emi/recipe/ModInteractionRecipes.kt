@@ -14,6 +14,7 @@ import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
@@ -185,6 +186,22 @@ object ModInteractionRecipes {
 				.build()
 
 			recipes.add(flooFireplaceRecipe)
+
+			val namedFlooSign = ModItems.FLOO_SIGN.toStack()
+			namedFlooSign.set(DataComponents.CUSTOM_NAME, Component.literal("Home"))
+
+			val namedFlooBlock = ModBlocks.FLOO_BRICK.asItem().defaultInstance
+			namedFlooBlock.set(DataComponents.CUSTOM_NAME, Component.literal("Home"))
+
+			val namedFlooFireplaceRecipe = EmiWorldInteractionRecipe
+				.builder()
+				.leftInput(blocksIngredient)
+				.rightInput(EmiIngredient.of(Ingredient.of(namedFlooSign)), false)
+				.output(EmiStack.of(namedFlooBlock))
+				.id(OtherUtil.modResource("/interaction/named_floo_fireplace_creation"))
+				.build()
+
+			recipes.add(namedFlooFireplaceRecipe)
 		}
 
 		return recipes
