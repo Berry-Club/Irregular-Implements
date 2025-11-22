@@ -998,7 +998,7 @@ class ModBlockStateProvider(
 			.emissivity(15, 15)
 			.end()
 
-		simpleBlock(block, luminousModel)
+		simpleBlockWithItem(block, luminousModel)
 	}
 
 	private fun slimeCube() {
