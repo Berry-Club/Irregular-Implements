@@ -1718,6 +1718,24 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.ENDER_MAILBOX,
+			"Ender Mailbox",
+			TextPage.basicTextPage(
+				"Ender Mailbox",
+				doubleSpacedLines(
+					"The ${major("Ender Mailbox")} allows you to send and receive ${internalLink("items/ender_letter", "Ender Letters")} to and from other players.",
+					"To send a Letter, simply use it on the Mailbox and it will be sent to the recipient."
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModBlocks.ENDER_MAILBOX,
+				doubleSpacedLines(
+					"Using any Mailbox will show your incoming Letters, in the same way that Ender Chests show your items."
+				)
+			)
+		)
+
 		plates(consumer, book)
 	}
 
@@ -1763,23 +1781,6 @@ class ModPatchouliBookProvider(
 			)
 		)
 
-		add(
-			ModBlocks.ENDER_MAILBOX,
-			"Ender Mailbox",
-			TextPage.basicTextPage(
-				"Ender Mailbox",
-				doubleSpacedLines(
-					"The ${major("Ender Mailbox")} allows you to send and receive ${internalLink("items/ender_letter", "Ender Letters")} to and from other players.",
-					"To send a Letter, simply use it on the Mailbox and it will be sent to the recipient."
-				)
-			),
-			SpotlightPage.linkedPage(
-				ModBlocks.ENDER_MAILBOX,
-				doubleSpacedLines(
-					"Using any Mailbox will show your incoming Letters, in the same way that Ender Chests show your items."
-				)
-			)
-		)
 	}
 
 	private fun major(text: String): String {
