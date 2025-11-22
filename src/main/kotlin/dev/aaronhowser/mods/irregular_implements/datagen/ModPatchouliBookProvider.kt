@@ -1781,6 +1781,45 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModBlocks.ACCELERATOR_PLATE,
+			"Accelerator Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.ACCELERATOR_PLATE,
+				"Accelerator Plate",
+				doubleSpacedLines(
+					"The ${major("Accelerator Plate")} will ${minor("speed up anything that's moving on it")}, up to a limit.",
+					"Whatever direction it's already moving, it'll move faster in that direction.",
+				)
+			)
+		)
+
+		add(
+			ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE,
+			"Directional Accelerator Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE,
+				"Directional Accelerator Plate",
+				doubleSpacedLines(
+					"The ${major("Directional Accelerator Plate")} will ${minor("push entities standing on it in the direction the Plate is facing")}.",
+					"Very useful for item and mob transportation!"
+				)
+			)
+		)
+
+		add(
+			ModBlocks.REDIRECTOR_PLATE,
+			"Redirector Plate",
+			SpotlightPage.linkedPage(
+				ModBlocks.REDIRECTOR_PLATE,
+				"Redirector Plate",
+				doubleSpacedLines(
+					"${major("Redirector Plates")} have two active sides. Any entity that walks onto one active side will be teleported to the other active side.",
+					"Right click to set the first active side, and sneak right-click to set the second active side."
+				)
+			)
+		)
+
 	}
 
 	private fun major(text: String): String {
