@@ -1032,6 +1032,42 @@ class ModPatchouliBookProvider(
 			)
 		)
 
+		add(
+			ModItems.BEAN,
+			"Bean",
+			SpotlightPage.linkedPage(
+				ModItems.BEAN,
+				"Bean",
+				doubleSpacedLines(
+					"A simple ${major("Bean")} that can be used in certain recipes.",
+					"You can find Beans growing around the world, in any Overworld biome that is neither hot, cold, dry, nor sparse.",
+					"Plant more by using them on any dirt block!"
+				)
+			)
+		)
+
+		add(
+			ModItems.MAGIC_BEAN,
+			"Magic Beans",
+			SpotlightPage.linkedPage(
+				ModItems.LESSER_MAGIC_BEAN,
+				"Lesser Magic Bean",
+				doubleSpacedLines(
+					"The ${major("Lesser Magic Bean")} can be planted to make a Bean Stalk grow upwards.",
+					"It will continue to grow upwards until it hits a block. It functions as a Ladder!"
+				)
+			),
+			SpotlightPage.linkedPage(
+				ModItems.MAGIC_BEAN,
+				"Magic Bean",
+				doubleSpacedLines(
+					"The ${major("Magic Bean")} is a much more powerful version! They cannot be crafted, but can be found in dungeons as well as in ${internalLink("blocks/nature_core", "Nature Core")} chests.",
+					"These grow much faster and break through most blocks. Once it reaches the top of the world, it places down a Bean Pod!",
+					"Break it open to collect some rare loot."
+				)
+			)
+		)
+
 	}
 
 	private fun blocks(consumer: Consumer<PatchouliBookElement>, book: PatchouliBook) {

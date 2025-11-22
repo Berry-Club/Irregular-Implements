@@ -84,6 +84,7 @@ class ModBiomeTagsProvider(
 		tag(SPAWNS_BEAN_SPROUT)
 			.addTag(Tags.Biomes.IS_OVERWORLD)
 			.remove(
+				Tags.Biomes.IS_HOT,
 				Tags.Biomes.IS_COLD,
 				Tags.Biomes.IS_DRY,
 				Tags.Biomes.IS_SPARSE_VEGETATION

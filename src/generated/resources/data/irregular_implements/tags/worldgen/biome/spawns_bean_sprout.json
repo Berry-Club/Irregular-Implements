@@ -1,5 +1,6 @@
 {
   "remove": [
+    "#c:is_hot",
     "#c:is_cold",
     "#c:is_dry",
     "#c:is_sparse_vegetation"

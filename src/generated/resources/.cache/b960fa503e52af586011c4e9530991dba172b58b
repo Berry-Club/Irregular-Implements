@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T08:00:28.2116968	Patchouli Book: guide
+// 1.21.1	2025-11-22T08:45:35.3743781	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 d3ab0269b63f310a0cdb5fac280d305eb345b997 assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/redstone.json
@@ -62,6 +62,7 @@ e9f1169eb72df2383cb6a3659fa7f0063724b5c8 assets/irregular_implements/patchouli_b
 abdca9d3ab0840d4e9dbfa0df147810a357652c4 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/spectre_sapling.json
 7b88cd5fd699f89f2027869b9159b03b0ab80a75 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/super_lubricant_stone.json
 b08df5457adb3286a0bdd108b5462ddd130901ad assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/trigger_glass.json
+cb5c1c805526893679a3a3a5ecd60571ba42ab1b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/bean.json
 73ab50cf6696f9682546f8e5b4cae5105c489d01 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/biome_painter.json
 545d390034edf699e73377ae4c8732d614893f15 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/blaze_and_steel.json
 971af05093fd9a0f939bd8620294cc417c81db10 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/block_mover.json
@@ -89,6 +90,7 @@ c2404c261c7a58c79078be397b188b63a408a917 assets/irregular_implements/patchouli_b
 709bc0b4349210d227d73ea3d76a208a16d3dbd5 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/location_filter.json
 4c9e6d9df12ec70b7997fe5ccef189ac2dcde727 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/lotus_blossom.json
 b07c9b63f92aa77396621d0f05140c7a180054e9 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/luminous_powder.json
+ab568c1001b274335eacb40c5b84d039247bd082 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/magic_bean.json
 d59f687a2c35f3f03c7392bd697496760d894abe assets/irregular_implements/patchouli_books/guide/en_us/entries/items/magic_hood.json
 a2f07f9a005264e20b7bf842f980083643fd9745 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/obsidian_skull.json
 099889f97e8eb14a909ed35602b2f50ca9271728 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/player_filter.json
