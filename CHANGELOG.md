@@ -2,6 +2,8 @@
 
 ### Changed
 
+- Ender Letters now uses the username cache instead of the list of online players
+  - Now you can send Letters to players that are offline, as long as they've joined the server since the last restart
 - Added more Patchouli pages
 
 ### Removed

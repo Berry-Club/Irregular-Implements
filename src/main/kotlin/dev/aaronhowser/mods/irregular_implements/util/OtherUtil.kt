@@ -2,17 +2,13 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
-import io.netty.buffer.ByteBuf
 import net.minecraft.ChatFormatting
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
-import net.minecraft.core.Registry
 import net.minecraft.network.chat.Component
-import net.minecraft.network.codec.StreamCodec
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -30,6 +26,8 @@ import net.minecraft.world.level.saveddata.SavedData
 import net.minecraft.world.level.storage.DimensionDataStorage
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
+import net.neoforged.neoforge.common.UsernameCache
+import java.util.*
 
 object OtherUtil {
 

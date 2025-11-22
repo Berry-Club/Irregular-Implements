@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.status
+import dev.aaronhowser.mods.aaron.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
@@ -8,6 +9,7 @@ import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLette
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -172,15 +174,16 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 			}
 
 			val level = player.level() as? ServerLevel ?: return false
-			val recipient = level.server.playerList.getPlayerByName(recipientName)
 
-			if (recipient == null) {
+			val recipientUuid = AaronUtil.getCachedUuid(recipientName)
+
+			if (recipientUuid == null) {
 				player.status(ModMessageLang.ENDER_LETTER_NO_RECIPIENT.toComponent(recipientName))
 				return false
 			}
 
 			val handler = EnderLetterHandler.get(level)
-			val inventory = handler.getOrCreateInventory(recipient)
+			val inventory = handler.getOrCreateInventory(recipientUuid)
 
 			if (!inventory.hasRoom()) {
 				player.status(ModMessageLang.ENDER_LETTER_RECIPIENT_NO_ROOM.toComponent(recipientName))
