@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.EmptyBlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -75,7 +76,7 @@ class DiaphanousBlock : Block(
 		fun isValidBlock(block: Block, level: Level): Boolean {
 			return try {
 				block.defaultBlockState().renderShape == RenderShape.MODEL
-						&& block.defaultBlockState().isCollisionShapeFullBlock(level, BlockPos.ZERO)    //No idea if this would crash if BlockPos.ZERO is unloaded, but just in case
+						&& block.defaultBlockState().getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO) == Shapes.block()
 						&& !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
 			} catch (e: Exception) {
 				false
