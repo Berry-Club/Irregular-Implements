@@ -1,3 +1,10 @@
+# 1.8.1
+
+### Fixed
+
+- Fixed a crash with Diaphanous Blocks (#56)
+  - PR by phit!
+
 # 1.8.0
 
 ### Added
