@@ -1,0 +1,11 @@
+# Useful Data Components
+
+There's a handful of useful data components that can be applied to items that don't have it by default.
+
+## Fluid Walking
+
+[Water Walking Boots](@irregular_implements:water_walking_boots) and the like don't actually have any special code unique to them. Instead, they just use the data component `irregular_implements:can_stand_on_fluids`, which takes a list of Fluid Tags.
+
+The mod searches for any worn armor and Curio items that have this data component, and gets all the tags specified in their components. If the player is standing above a fluid with any of those tags, they are treated as if they were on solid ground.
+
+This means you can give a Horse a `minecraft:diamond_horse_armor[irregular_implements:can_stand_on_fluids=["minecraft:water"]]` and it will be able to walk on water.
