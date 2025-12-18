@@ -38,7 +38,7 @@ class BeanStalkBlock(
 
 	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
 		if (this.isStrong) {
-			if (STRONG_IS_DONE_PREDICATE.invoke(level, pos)) {
+			if (strongStalkIsDonePredicate.invoke(level, pos)) {
 				level.setBlockAndUpdate(
 					pos.above(),
 					ModBlocks.BEAN_POD.get().defaultBlockState()
@@ -117,7 +117,7 @@ class BeanStalkBlock(
 		/**
 		 * Whether or not the Magic Bean's stalk is done growing, and the block above it should be a Bean Pod.
 		 */
-		private var STRONG_IS_DONE_PREDICATE: (Level, BlockPos) -> Boolean = ::defaultStrongIsDonePredicate
+		private var strongStalkIsDonePredicate: (Level, BlockPos) -> Boolean = ::defaultStrongIsDonePredicate
 
 		private fun defaultStrongIsDonePredicate(level: Level, pos: BlockPos): Boolean {
 			// If the block above it is at max build height, it's done
@@ -146,7 +146,7 @@ class BeanStalkBlock(
 		 */
 		@JvmStatic
 		fun setMagicBeanStalkIsDoneGrowingPredicate(predicate: (Level, BlockPos) -> Boolean) {
-			STRONG_IS_DONE_PREDICATE = predicate
+			strongStalkIsDonePredicate = predicate
 		}
 	}
 

@@ -121,23 +121,24 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		 * ```
 		 */
 		@JvmField
-		val COLORS_PER_TAG = mutableMapOf(
-			Tags.Blocks.ORES_COAL to 0x141414,
-			Tags.Blocks.ORES_IRON to 0xD3B09F,
-			Tags.Blocks.ORES_GOLD to 0xF6E950,
-			Tags.Blocks.ORES_LAPIS to 0x053096,
-			Tags.Blocks.ORES_REDSTONE to 0xD30101,
-			Tags.Blocks.ORES_EMERALD to 0x00DC00,
-			Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
-			Tags.Blocks.ORES_COPPER to 0xC6522B,
-			Tags.Blocks.ORES_QUARTZ to 0xDBCEBA,
-			Tags.Blocks.ORES_NETHERITE_SCRAP to 0xB76659,
-			oreTag("tin") to 0xAF9557,
-			oreTag("osmium") to 0x416FAF,
-			oreTag("uranium") to 0x5ED323,
-			oreTag("fluorite") to 0xC462C1,
-			oreTag("lead") to 0x5786CC
-		)
+		val COLORS_PER_TAG: MutableMap<TagKey<Block>, Int> =
+			mutableMapOf(
+				Tags.Blocks.ORES_COAL to 0x141414,
+				Tags.Blocks.ORES_IRON to 0xD3B09F,
+				Tags.Blocks.ORES_GOLD to 0xF6E950,
+				Tags.Blocks.ORES_LAPIS to 0x053096,
+				Tags.Blocks.ORES_REDSTONE to 0xD30101,
+				Tags.Blocks.ORES_EMERALD to 0x00DC00,
+				Tags.Blocks.ORES_DIAMOND to 0x57DDE5,
+				Tags.Blocks.ORES_COPPER to 0xC6522B,
+				Tags.Blocks.ORES_QUARTZ to 0xDBCEBA,
+				Tags.Blocks.ORES_NETHERITE_SCRAP to 0xB76659,
+				oreTag("tin") to 0xAF9557,
+				oreTag("osmium") to 0x416FAF,
+				oreTag("uranium") to 0x5ED323,
+				oreTag("fluorite") to 0xC462C1,
+				oreTag("lead") to 0x5786CC
+			)
 
 		fun getOverlayColor(blockState: BlockState): Int {
 			for ((tag, color) in COLORS_PER_TAG) {

@@ -1,0 +1,66 @@
+# KubeJS Support
+
+A handful of logic functions in the mod can be changed using KubeJS.
+
+## Player Interface
+
+The [Player Interface](@irregular_implements:player_interface) allows you to wirelessly connect to your player inventory as if it were a block inventory.
+
+It has a predicate that it uses to check if it's allowed to connect to a given player. By default, the predicate is
+
+```kt PlayerInterfaceBlockEntity.kt
+(Player, BlockEntity) -> Boolean = { _, _ -> true }
+```
+
+That is, it always allows connections. You can change the predicate using KubeJS to call [this method](https://github.com/Berry-Club/Irregular-Implements/blob/main/src/main/kotlin/dev/aaronhowser/mods/irregular_implements/block/block_entity/PlayerInterfaceBlockEntity.kt#L156):
+
+```js example.js
+const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
+
+$PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
+```
+
+With that example, the Player Interface will only be able to connect to its owner if they are in the same dimension.
+
+## Bean Stalk Growth
+
+The [Magic Bean Stalk](@irregular_implements:bean_pod), by default, grows upwards constantly breaking through blocks until it reaches the build height, before placing a Bean Pod.
+
+It does this using a predicate. When the predicate returns true, the block above itself will be turned into a Bean Pod instead of another Bean Stalk. The default predicate it uses is this:
+
+```kt BeanStalkBlock.kt
+		private fun defaultStrongIsDonePredicate(level: Level, pos: BlockPos): Boolean {
+			// If the block above it is at max build height, it's done
+			if (pos.y + 1 >= level.maxBuildHeight) {
+				return true
+			}
+
+			// If the block two above it is indestructible, it's done
+			// That's because if it grew again, it wouldn't be able to replace the block above itself with either another Stalk or a Bean Pod
+			val stateTwoAbove = level.getBlockState(pos.above(2))
+			return stateTwoAbove.getDestroySpeed(level, pos.above(2)) == -1.0f
+		}
+```
+
+You can change this predicate using KubeJS by calling [this method](https://github.com/Berry-Club/Irregular-Implements/blob/main/src/main/kotlin/dev/aaronhowser/mods/irregular_implements/block/BeanStalkBlock.kt#L148):
+
+```js example.js
+const $BeanStalkBlock = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.BeanStalkBlock')
+
+$BeanStalkBlock.setMagicBeanStalkIsDoneGrowingPredicate((level, pos) => pos.y >= 100)
+```
+
+## Divining Rod Colors
+
+The [Divining Rod](@irregular_implements:divining_rod) can support any item with a tag starting with `#c:ores/`. However, only ores from vanilla and Mekanism have colors by default.
+
+It does this using a map of Resource Location to RRGGBB color integer. You can add to this map using KubeJS and reflection:
+
+```js example.js
+const $DiviningRodItem = Java.loadClass('dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem')
+const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+
+$DiviningRodItem.COLORS_PER_TAG.put($ResourceLocation.fromNamespaceAndPath('c', 'ores/mythril'), 0xFF00FF)
+```
+
+This will give the Mythril Divining Rod the color `0xFF00FF`, which is magenta.
