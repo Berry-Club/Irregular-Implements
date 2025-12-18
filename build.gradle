@@ -7,6 +7,7 @@ plugins {
 	id 'net.neoforged.moddev' version '2.0.91'
 	id 'org.jetbrains.kotlin.jvm' version '2.1.21'
 	id "me.shedaniel.unified-publishing" version "0.1.+"
+	id 'org.moddedmc.wiki.toolkit' version '0.3.2'
 }
 
 def ENV = System.getenv()
@@ -81,6 +82,12 @@ neoForge {
 
 			gameDirectory = file 'runs/client'
 		}
+
+		"Wiki-Export-Client" {
+			client()
+			gameDirectory = file 'runs/wiki_exporter'
+			systemProperty 'wiki_exporter.enabled', 'true'
+		}
 	}
 
 	mods {
@@ -136,6 +143,8 @@ repositories {
 
 	maven { url 'https://maven.blamejared.com' }
 
+	maven { url "https://maven.sinytra.org" }
+
 }
 
 dependencies {
@@ -154,6 +163,8 @@ dependencies {
 
 	compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
 	runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
+
+	runtimeOnly "org.sinytra:wiki-exporter-neoforge:2.2.1+1.21.1"
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -263,5 +274,25 @@ unifiedPublishing {
 			}
 		}
 
+	}
+}
+
+wiki {
+	wikiAccessToken = ENV.MODDED_MC_WIKI_TOKEN
+
+	docs {
+		irregular_implements {
+			root = file('docs/irregular_implements')
+		}
+	}
+}
+
+tasks.named('processResources') {
+	from("$rootDir/docs") {
+		into "assets/oracle_index/books"
+		exclude "assets/items/**"
+	}
+	doLast {
+		println "processResources executed: wiki folder copied into assets/oracle_index"
 	}
 }
