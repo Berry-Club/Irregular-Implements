@@ -1,0 +1,23 @@
+---
+title: Divining Rod
+id: irregular_implements:divining_rod
+related_items: [irregular_implements:divining_rod]
+type: item
+---
+
+There is a **Divining Rod** for each ore (that is, any block/item that has a tag beginning with `#c:ores/`). When held in-hand, nearby ores of that type will be visible through walls.
+
+<Callout variant="danger">
+	The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the ores won't be highlighted.
+	</Callout>
+
+The same recipe can be used for any ore type, just substituting the actual ore itself. It follows this pattern:
+
+```
+OSO
+SES
+S S
+```
+where `O` is the ore block, `S` is a Stick, and `E` is a Spider Eye.
+
+You can also craft a universal Divining Rod that works for all ores!
