@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"C": {
+			"item": "irregular_implements:item_collector"
+		},
+		"G": {
+			"tag": "c:dusts/glowstone"
+		},
+		"T": {
+			"item": "minecraft:redstone_torch"
+		}
+	},
+	"pattern": [
+		" T ",
+		"GCG"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:advanced_item_collector"
+	}
+}

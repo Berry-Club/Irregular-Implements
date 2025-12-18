@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"P": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"S": {
+			"item": "irregular_implements:spectre_ingot"
+		}
+	},
+	"pattern": [
+		"S  ",
+		"SP ",
+		"  S"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_key"
+	}
+}

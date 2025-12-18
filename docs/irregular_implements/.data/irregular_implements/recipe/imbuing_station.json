@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"tag": "c:gems/emerald"
+		},
+		"L": {
+			"item": "minecraft:lily_pad"
+		},
+		"T": {
+			"tag": "minecraft:terracotta"
+		},
+		"V": {
+			"item": "minecraft:vine"
+		},
+		"W": {
+			"item": "minecraft:water_bucket"
+		}
+	},
+	"pattern": [
+		" W ",
+		"VTV",
+		"LEL"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:imbuing_station"
+	}
+}

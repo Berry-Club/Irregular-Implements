@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"tag": "c:ender_pearls"
+		},
+		"O": {
+			"tag": "c:stones"
+		}
+	},
+	"pattern": [
+		" O ",
+		"OEO",
+		" O "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:void_stone"
+	}
+}

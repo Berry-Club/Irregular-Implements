@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"tag": "c:ender_pearls"
+		},
+		"G": {
+			"item": "minecraft:ghast_tear"
+		},
+		"W": {
+			"item": "minecraft:wither_skeleton_skull"
+		}
+	},
+	"pattern": [
+		"W",
+		"G",
+		"E"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:evil_tear"
+	}
+}

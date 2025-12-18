@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"item": "irregular_implements:ectoplasm"
+		},
+		"G": {
+			"tag": "c:ingots/gold"
+		},
+		"L": {
+			"tag": "c:gems/lapis"
+		}
+	},
+	"pattern": [
+		"L",
+		"G",
+		"E"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:spectre_ingot"
+	}
+}

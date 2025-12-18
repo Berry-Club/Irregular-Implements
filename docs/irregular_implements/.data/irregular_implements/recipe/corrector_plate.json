@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:plate_base"
+		},
+		"I": {
+			"item": "minecraft:iron_bars"
+		}
+	},
+	"pattern": [
+		"BIB",
+		"I I",
+		"BIB"
+	],
+	"result": {
+		"count": 2,
+		"id": "irregular_implements:corrector_plate"
+	}
+}

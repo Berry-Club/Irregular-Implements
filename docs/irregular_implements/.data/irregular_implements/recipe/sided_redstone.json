@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"G": {
+			"tag": "c:gunpowders"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		"GGR",
+		"GGR",
+		"GGR"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:sided_redstone"
+	}
+}

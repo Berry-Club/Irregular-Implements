@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+		{
+			"item": "minecraft:blaze_powder"
+		},
+		{
+			"tag": "c:ingots/iron"
+		}
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:blaze_and_steel"
+	}
+}

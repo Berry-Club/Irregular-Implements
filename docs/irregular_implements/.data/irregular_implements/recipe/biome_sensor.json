@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:biome_crystal"
+		},
+		"I": {
+			"tag": "c:ingots/iron"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		"III",
+		"RBI",
+		"IRI"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:biome_sensor"
+	}
+}

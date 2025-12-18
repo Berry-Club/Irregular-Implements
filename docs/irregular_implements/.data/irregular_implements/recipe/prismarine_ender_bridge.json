@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"C": {
+			"item": "minecraft:prismarine_crystals"
+		},
+		"E": {
+			"item": "irregular_implements:ender_bridge"
+		},
+		"S": {
+			"item": "minecraft:prismarine_shard"
+		}
+	},
+	"pattern": [
+		"SCS",
+		"CEC",
+		"SCS"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:prismarine_ender_bridge"
+	}
+}

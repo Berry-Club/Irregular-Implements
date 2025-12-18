@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:plate_base"
+		},
+		"S": {
+			"tag": "c:slime_balls"
+		}
+	},
+	"pattern": [
+		"B B",
+		" S ",
+		"B B"
+	],
+	"result": {
+		"count": 2,
+		"id": "irregular_implements:bouncy_plate"
+	}
+}

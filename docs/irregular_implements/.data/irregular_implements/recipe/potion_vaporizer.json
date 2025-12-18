@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"C": {
+			"item": "minecraft:cauldron"
+		},
+		"F": {
+			"item": "minecraft:furnace"
+		},
+		"I": {
+			"tag": "c:ingots/iron"
+		},
+		"S": {
+			"tag": "c:cobblestones/normal"
+		},
+		"T": {
+			"item": "minecraft:iron_trapdoor"
+		}
+	},
+	"pattern": [
+		"STS",
+		"ICI",
+		"SFS"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:potion_vaporizer"
+	}
+}

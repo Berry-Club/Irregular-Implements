@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"item": "irregular_implements:stable_ender_pearl"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		}
+	},
+	"pattern": [
+		"OOO",
+		"OEO",
+		"OOO"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:ender_anchor"
+	}
+}

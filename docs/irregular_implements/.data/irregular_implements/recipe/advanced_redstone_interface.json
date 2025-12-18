@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"I": {
+			"item": "irregular_implements:basic_redstone_interface"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		"ROR",
+		"OIO",
+		"ROR"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:advanced_redstone_interface"
+	}
+}

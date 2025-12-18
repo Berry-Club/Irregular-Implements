@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"G": {
+			"tag": "c:ingots/gold"
+		},
+		"P": {
+			"tag": "c:ender_pearls"
+		},
+		"S": {
+			"tag": "c:strings"
+		}
+	},
+	"pattern": [
+		"SGP",
+		"GSG",
+		"PGS"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:escape_rope"
+	}
+}

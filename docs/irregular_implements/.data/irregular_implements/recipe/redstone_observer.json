@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"E": {
+			"item": "minecraft:ender_eye"
+		},
+		"Q": {
+			"tag": "c:gems/quartz"
+		},
+		"R": {
+			"tag": "c:dusts/redstone"
+		}
+	},
+	"pattern": [
+		"RQR",
+		"QEQ",
+		"RQR"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:redstone_observer"
+	}
+}

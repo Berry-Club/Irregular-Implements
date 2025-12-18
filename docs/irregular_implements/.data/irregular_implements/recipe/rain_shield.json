@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"tag": "c:rods/blaze"
+		},
+		"F": {
+			"item": "minecraft:flint"
+		},
+		"N": {
+			"tag": "c:netherracks"
+		}
+	},
+	"pattern": [
+		" F ",
+		" B ",
+		"NNN"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:rain_shield"
+	}
+}

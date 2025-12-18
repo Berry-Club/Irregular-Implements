@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:biome_crystal"
+		},
+		"G": {
+			"tag": "c:glass_blocks"
+		}
+	},
+	"pattern": [
+		"GGG",
+		"GBG",
+		"GGG"
+	],
+	"result": {
+		"count": 16,
+		"id": "irregular_implements:biome_glass"
+	}
+}

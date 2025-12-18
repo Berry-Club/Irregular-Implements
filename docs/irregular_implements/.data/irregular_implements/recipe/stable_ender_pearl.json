@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"L": {
+			"tag": "c:gems/lapis"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"P": {
+			"tag": "c:ender_pearls"
+		}
+	},
+	"pattern": [
+		"OLO",
+		"LPL",
+		"OLO"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:stable_ender_pearl"
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:ender_bucket"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"S": {
+			"item": "irregular_implements:stable_ender_pearl"
+		}
+	},
+	"pattern": [
+		"OBO",
+		" S "
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:reinforced_ender_bucket"
+	}
+}

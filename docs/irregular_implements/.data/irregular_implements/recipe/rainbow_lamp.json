@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"tag": "c:dyes/blue"
+		},
+		"G": {
+			"tag": "c:dyes/green"
+		},
+		"L": {
+			"item": "minecraft:redstone_lamp"
+		},
+		"R": {
+			"tag": "c:dyes/red"
+		}
+	},
+	"pattern": [
+		" G ",
+		"RLB"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:rainbow_lamp"
+	}
+}

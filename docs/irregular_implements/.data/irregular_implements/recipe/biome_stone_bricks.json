@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"B": {
+			"item": "irregular_implements:biome_crystal"
+		},
+		"S": {
+			"item": "minecraft:stone_bricks"
+		}
+	},
+	"pattern": [
+		"SSS",
+		"SBS",
+		"SSS"
+	],
+	"result": {
+		"count": 16,
+		"id": "irregular_implements:biome_stone_bricks"
+	}
+}

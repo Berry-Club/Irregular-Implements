@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"C": {
+			"tag": "c:cobblestones/normal"
+		},
+		"F": {
+			"item": "minecraft:flint_and_steel"
+		},
+		"N": {
+			"tag": "c:netherracks"
+		}
+	},
+	"pattern": [
+		"NCC",
+		"NFC",
+		"NCC"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:igniter"
+	}
+}

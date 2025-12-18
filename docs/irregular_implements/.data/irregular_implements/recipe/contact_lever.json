@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"I": {
+			"item": "minecraft:iron_bars"
+		},
+		"L": {
+			"item": "minecraft:lever"
+		},
+		"S": {
+			"tag": "c:stones"
+		}
+	},
+	"pattern": [
+		"SIS",
+		"SLS",
+		"SSS"
+	],
+	"result": {
+		"count": 1,
+		"id": "irregular_implements:contact_lever"
+	}
+}
