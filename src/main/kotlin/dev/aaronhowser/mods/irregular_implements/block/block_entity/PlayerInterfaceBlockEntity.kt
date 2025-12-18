@@ -56,7 +56,7 @@ class PlayerInterfaceBlockEntity(
 
 	fun getItemHandler(direction: Direction?): IItemHandler? {
 		val owner = getPlayer() ?: return null
-		if (!PLAYER_PREDICATE.invoke(owner, this)) return null
+		if (!playerPredicate.invoke(owner, this)) return null
 
 		val section = InventorySection.fromDirection(direction)
 
@@ -137,7 +137,7 @@ class PlayerInterfaceBlockEntity(
 			return playerInterfaceBlockEntity.getItemHandler(direction)
 		}
 
-		private var PLAYER_PREDICATE: (Player, BlockEntity) -> Boolean = { _, _ -> true }
+		private var playerPredicate: (Player, BlockEntity) -> Boolean = { _, _ -> true }
 
 		/**
 		 * Mostly meant to be called from KubeJS.
@@ -154,7 +154,7 @@ class PlayerInterfaceBlockEntity(
 		 */
 		@JvmStatic
 		fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
-			PLAYER_PREDICATE = predicate
+			playerPredicate = predicate
 		}
 	}
 
