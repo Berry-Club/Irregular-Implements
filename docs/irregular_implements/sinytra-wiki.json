@@ -1,0 +1,17 @@
+{
+	"id": "irregular_implements",
+	"modid": "irregular_implements",
+	"owners": ["aaronhowser1"],
+	"platforms": {
+		"curseforge": "irregular-implements",
+		"modrinth": "irregular-implements"
+	},
+	"licenses": {
+		"project": {
+			"id": "MIT"
+		}
+	},
+	"versions": {
+		"1.21.1": "main"
+	}
+}
