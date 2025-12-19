@@ -1,3 +1,9 @@
+# 1.9.0
+
+### Fixed
+
+- Fixed a mysterious NPE that sometimes happens with the Block Breaker maybe (#59)
+
 # 1.8.1
 
 ### Fixed

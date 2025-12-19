@@ -70,7 +70,9 @@ object ItemCatcher {
 		this.isCatchingDrops = false
 	}
 
-	private fun teleportTo(itemEntity: ItemEntity, magneticEntity: LivingEntity) {
+	private fun teleportTo(itemEntity: ItemEntity?, magneticEntity: LivingEntity?) {
+		if (itemEntity == null || magneticEntity == null) return
+
 		itemEntity.setNoPickUpDelay()
 		if (magneticEntity is Player) itemEntity.playerTouch(magneticEntity)
 
