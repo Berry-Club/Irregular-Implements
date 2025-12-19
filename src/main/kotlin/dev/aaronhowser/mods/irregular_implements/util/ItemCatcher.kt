@@ -70,9 +70,6 @@ object ItemCatcher {
 		for (itemEntity in event.drops) {
 			teleportTo(itemEntity, killer)
 		}
-
-		this.caughtItemEntities.clear()
-		this.isCatchingDrops = false
 	}
 
 	private fun teleportTo(itemEntity: ItemEntity?, magneticEntity: LivingEntity?) {
