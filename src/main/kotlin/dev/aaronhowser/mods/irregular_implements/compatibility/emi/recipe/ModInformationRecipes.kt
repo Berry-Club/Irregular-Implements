@@ -14,6 +14,7 @@ import dev.emi.emi.api.recipe.EmiInfoRecipe
 import dev.emi.emi.api.stack.EmiIngredient
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.EnchantedBookItem
 import net.minecraft.world.item.enchantment.EnchantmentInstance
 import net.minecraft.world.level.ItemLike
@@ -145,7 +146,9 @@ object ModInformationRecipes {
 								true,
 								EnchantedBookItem.createForEnchantment(
 									EnchantmentInstance(
-										ModEnchantments.getHolder(ModEnchantments.MAGNETIC, registryAccess),
+										registryAccess
+											.registryOrThrow(Registries.ENCHANTMENT)
+											.getHolderOrThrow(ModEnchantments.MAGNETIC),
 										1
 									)
 								)
