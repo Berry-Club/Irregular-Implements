@@ -22,12 +22,6 @@ object ModEnchantments {
 		OtherUtil.modResource("magnetic")
 	)
 
-	fun getHolder(enchantmentRk: ResourceKey<Enchantment>, registryAccess: RegistryAccess): Holder.Reference<Enchantment> {
-		return registryAccess
-			.registryOrThrow(Registries.ENCHANTMENT)
-			.getHolderOrThrow(enchantmentRk)
-	}
-
 	fun bootstrap(context: BootstrapContext<Enchantment>) {
 		context.register(
 			MAGNETIC,

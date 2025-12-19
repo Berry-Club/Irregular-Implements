@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.util
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
+import net.minecraft.core.registries.Registries
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
@@ -34,7 +35,9 @@ object ItemCatcher {
 	fun beforeDestroyBlock(player: ServerPlayer) {
 		val usedItem = player.mainHandItem
 
-		val magnetEnchant = ModEnchantments.getHolder(ModEnchantments.MAGNETIC, player.registryAccess())
+		val magnetEnchant = player.registryAccess()
+			.registryOrThrow(Registries.ENCHANTMENT)
+			.getHolderOrThrow(ModEnchantments.MAGNETIC)
 		val hasMagnetic = usedItem.getEnchantmentLevel(magnetEnchant) > 0
 
 		this.isCatchingDrops = hasMagnetic
@@ -59,7 +62,9 @@ object ItemCatcher {
 		val killer = event.source.entity as? LivingEntity ?: return
 		val usedItem = killer.mainHandItem
 
-		val magnetEnchant = ModEnchantments.getHolder(ModEnchantments.MAGNETIC, killer.registryAccess())
+		val magnetEnchant = killer.registryAccess()
+			.registryOrThrow(Registries.ENCHANTMENT)
+			.getHolderOrThrow(ModEnchantments.MAGNETIC)
 		if (usedItem.getEnchantmentLevel(magnetEnchant) < 1) return
 
 		for (itemEntity in event.drops) {
