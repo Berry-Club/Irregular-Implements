@@ -1,5 +1,11 @@
 # 1.9.0
 
+### Added
+
+- Made a wiki at moddedmc.wiki
+	- https://moddedmc.wiki/en/project/irregular-implements/latest
+	- Also added in-game support via [Oracle Index](https://modrinth.com/mod/oracle-index), which has been added as an optional dependency
+
 ### Fixed
 
 - Fixed a mysterious NPE that sometimes happens with the Block Breaker maybe (#59)

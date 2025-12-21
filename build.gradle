@@ -251,12 +251,12 @@ unifiedPublishing {
 				curseforge = modrinth = "aaron"
 			}
 
-//			optional {
-//				curseforge = modrinth = "modonomicon"
-//			}
-
 			optional {
 				curseforge = modrinth = "patchouli"
+			}
+
+			optional {
+				curseforge = modrinth = "oracle-index"
 			}
 		}
 
