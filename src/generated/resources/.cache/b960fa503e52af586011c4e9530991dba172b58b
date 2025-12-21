@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T08:53:02.3880515	Patchouli Book: guide
+// 1.21.1	2025-12-20T18:29:54.3877683	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 d3ab0269b63f310a0cdb5fac280d305eb345b997 assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/redstone.json
@@ -33,7 +33,7 @@ ca99ac816fbc1a492a2460c906cd08e3485d7229 assets/irregular_implements/patchouli_b
 600befb5ae2ca84e66f026ddd561c427647e3f5c assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/collection_plate.json
 56395a151e0fa63b042f444ea17ba37e9c27ed8b assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/corrector_plate.json
 aaef1adf83b158720ada0ac8f65e3da960cdf33c assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/directional_accelerator_plate.json
-ca03d8b55e5147c2753c228bfbf8f2ac3a207e6c assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/item_rejuvenator_plate.json
+aa4e3d49e976f4cec03181af840591b605a32302 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/item_rejuvenator_plate.json
 e809f0385929b620f0489f40f836d013cd4bd541 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/item_sealer_plate.json
 476c3a6b44e3b29eaa9cc696c223f485bc230bc7 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/plates/redirector_plate.json
 6b418b37aae766d9dcb68fc520ceec7d8b401313 assets/irregular_implements/patchouli_books/guide/en_us/entries/blocks/player_interface.json

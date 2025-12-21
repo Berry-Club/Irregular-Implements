@@ -2241,7 +2241,7 @@ class ModPatchouliBookProvider(
 				ModBlocks.ITEM_REJUVENATOR_PLATE,
 				"Item Rejuvenator Plate",
 				doubleSpacedLines(
-					"Any item entity that touches the ${major("Item Rejuvenator Plate")} will have its despawn timer reset to 4 minutes."
+					"Any item entity that touches the ${major("Item Rejuvenator Plate")} will have its despawn timer reset to 4 minutes and its age reset."
 				)
 			)
 		)
