@@ -1,7 +1,7 @@
 {
-  "values": [
-    "irregular_implements:basic_redstone_interface",
-    "irregular_implements:advanced_redstone_interface",
-    "irregular_implements:redstone_observer"
-  ]
+	"values": [
+		"irregular_implements:basic_redstone_interface",
+		"irregular_implements:advanced_redstone_interface",
+		"irregular_implements:redstone_observer"
+	]
 }

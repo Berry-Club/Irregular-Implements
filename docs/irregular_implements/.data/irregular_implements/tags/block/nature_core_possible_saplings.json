@@ -1,8 +1,8 @@
 {
-  "remove": [
-    "irregular_implements:spectre_sapling"
-  ],
-  "values": [
-    "#minecraft:saplings"
-  ]
+	"remove": [
+		"irregular_implements:spectre_sapling"
+	],
+	"values": [
+		"#minecraft:saplings"
+	]
 }

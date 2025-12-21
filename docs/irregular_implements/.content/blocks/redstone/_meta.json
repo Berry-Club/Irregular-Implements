@@ -1,0 +1,17 @@
+{
+	"advanced_redstone_interface.mdx": "Advanced Redstone Interface",
+	"advanced_redstone_torch.mdx": "Advanced Redstone Torch",
+	"analog_emitter.mdx": "Analog Emitter",
+	"basic_redstone_interface.mdx": "Basic Redstone Interface",
+	"block_detector.mdx": "Block Detector",
+	"chat_detector.mdx": "Chat Detector",
+	"contact_button.mdx": "Contact Button",
+	"contact_lever.mdx": "Contact Lever",
+	"entity_detector.mdx": "Entity Detector",
+	"inventory_tester.mdx": "Inventory Tester",
+	"moon_phase_detector.mdx": "Moon Phase Detector",
+	"online_detector.mdx": "Online Detector",
+	"redstone_observer.mdx": "Redstone Observer",
+	"sided_block_of_redstone.mdx": "Sided Block of Redstone",
+	"trigger_glass.mdx": "Trigger Glass"
+}
