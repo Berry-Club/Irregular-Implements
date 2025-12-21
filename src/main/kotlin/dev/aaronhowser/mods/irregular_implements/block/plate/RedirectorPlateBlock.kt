@@ -21,7 +21,7 @@ class RedirectorPlateBlock : BasePlateBlock() {
 		registerDefaultState(
 			defaultBlockState()
 				.setValue(ACTIVE_ONE, Direction.NORTH)
-				.setValue(ACTIVE_TWO, Direction.NORTH)
+				.setValue(ACTIVE_TWO, Direction.SOUTH)
 		)
 	}
 
