@@ -1,0 +1,22 @@
+---
+title: Energy Distributor
+id: irregular_implements:energy_distributor
+related_items: [irregular_implements:energy_distributor, irregular_implements:ender_energy_distributor]
+type: block
+---
+
+## Energy Distributor
+
+The **Energy Distributor** allows you to evenly distribute FE along a line of adjacent machines it's aimed at.
+
+Starting from the block in front of it, it will step along a straight path until it reaches a block that cannot store FE. All blocks it finds will be added to its cache.
+
+The Energy Distributor will simulate having an energy storage, which is actually made up of all machines in its cache. Any FE inserted into it is actually inserted into the cached blocks; the same for any FE removed.
+
+<ProjectRecipe id="irregular_implements:energy_distributor"/>
+
+## Ender Energy Distributor
+
+The **Ender Energy Distributor** works similarly, but uses 8 [Location Filters](@irregular_implements:location_filter) to specify the machines in its cache.
+
+<ProjectRecipe id="irregular_implements:ender_energy_distributor"/>
