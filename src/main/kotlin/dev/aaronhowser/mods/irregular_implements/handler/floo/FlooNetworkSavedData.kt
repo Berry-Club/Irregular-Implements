@@ -16,7 +16,7 @@ import java.util.*
 class FlooNetworkSavedData : SavedData() {
 
 	private val fireplaces: MutableList<FlooFireplace> = mutableListOf()
-	fun getFireplaces(): List<FlooFireplace> = fireplaces.toList()
+	fun getFireplaces(): List<FlooFireplace> = fireplaces
 
 	fun addFireplace(fireplace: FlooFireplace) {
 		fireplaces.add(fireplace)
