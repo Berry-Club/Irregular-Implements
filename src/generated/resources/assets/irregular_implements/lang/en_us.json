@@ -531,6 +531,7 @@
   "message.irregular_implements.x_radius": "X Radius: %d",
   "message.irregular_implements.y_radius": "Y Radius: %d",
   "message.irregular_implements.z_radius": "Z Radius: %d",
+  "oracle_index.title.irregular_implements": "Irregular Implements",
   "subtitle.irregular_implements.fart": "Pbbbt",
   "tag.fluid.irregular_implements.allows_lava_walking": "Allows Lava Walking",
   "tag.fluid.irregular_implements.allows_water_walking": "Allows Water Walking",

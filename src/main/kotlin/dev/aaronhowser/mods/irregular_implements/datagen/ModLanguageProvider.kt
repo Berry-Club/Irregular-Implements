@@ -23,11 +23,15 @@ class ModLanguageProvider(
 		ModMiscLang.add(this)
 		ModConfigLang.add(this)
 		ModEntityTypeLang.add(this)
+
+		add(ORACLE_INDEX, "Irregular Implements")
 	}
 
 	companion object {
 		fun String.toComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args)
 		fun String.toGrayComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args).withStyle(ChatFormatting.GRAY)
+
+		private const val ORACLE_INDEX = "oracle_index.title.irregular_implements"
 	}
 
 }
