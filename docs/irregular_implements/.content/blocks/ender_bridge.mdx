@@ -1,0 +1,21 @@
+---
+title: Ender Bridge
+id: irregular_implements:ender_bridge
+icon: irregular_implements:ender_bridge
+related_items: [irregular_implements:ender_bridge, irregular_implements:prismarine_ender_bridge, irregular_implements:ender_anchor]
+type: block
+---
+
+The **Ender Bridge** and **Prismarine Ender Bridge**, when powered by redstone, will teleport the entities above it towards the **Ender Anchor** it's aiming at.
+
+It works through blocks, and across any distance (including unloaded chunks), as long as the Anchor is loaded. It has to be aiming DIRECTLY at the Anchor, as well.
+
+When powered, it will look at every loaded Anchor and find the nearest one that it's aiming at. If there isn't one, it will audibly fail.
+
+If there *is* an Anchor. it will charge up before activating. Its charge time depends on the distance, as well the tier of Bridge.
+
+The regular Bridge takes 1 tick per block to charge, and the Prismarine Ender Bridge is twice as fast.
+
+<ProjectRecipe id="irregular_implements:ender_bridge"/>
+<ProjectRecipe id="irregular_implements:prismarine_ender_bridge"/>
+<ProjectRecipe id="irregular_implements:ender_anchor"/>
