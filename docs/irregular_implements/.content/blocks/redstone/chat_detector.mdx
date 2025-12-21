@@ -1,0 +1,24 @@
+---
+title: Chat Detector
+id: irregular_implements:chat_detector
+related_items: [irregular_implements:chat_detector, irregular_implements:global_chat_detector]
+type: block
+---
+
+## Chat Detector
+
+The **Chat Detector** emits a redstone pulse when the player that places it says a specific phrase in chat.
+
+Set the phrase in its GUI. It's actually a RegEx field, so you can do more advanced filters. Just typing in the exact phrase is enough, however.
+
+You can also toggle if the message gets canceled or not.
+
+<ProjectRecipe id="irregular_implements:chat_detector"/>
+
+## Global Chat Detector
+
+The **Global Chat Detector** works the same way, but listens to chat messages from every player instead of only its owner.
+
+It can only cancel messages from its owner, however.
+
+<ProjectRecipe id="irregular_implements:global_chat_detector"/>
