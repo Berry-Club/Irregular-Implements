@@ -1,0 +1,18 @@
+---
+title: Inventory Tester
+id: irregular_implements:inventory_tester
+related_items: [irregular_implements:inventory_tester]
+type: block
+---
+
+The **Inventory Tester** must be placed on an inventory, and stores an item in itself.
+
+It will emit a redstone signal if the inventory is capable of accepting that item.
+
+It also checks the *side* of the inventory it's attached to. If placed on top of a Furnace, it will only work if the Furnace can accept the item into its top.
+
+Because of that, you may want to also use the [Inventory Rerouter](@irregular_implements:inventory_rerouter).
+
+You can invert it in its GUI, so it emits a signal when the inventory *can't* accept the item.
+
+<PrefabObtaining/>
