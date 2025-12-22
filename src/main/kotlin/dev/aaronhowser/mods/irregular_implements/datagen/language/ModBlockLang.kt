@@ -87,7 +87,6 @@ object ModBlockLang {
 			addBlock(ModBlocks.SPECTRE_PLANKS, "Spectre Planks")
 			addBlock(ModBlocks.SPECTRE_SAPLING, "Spectre Sapling")
 			addBlock(ModBlocks.SPECTRE_LOG, "Spectre Log")
-			addBlock(ModBlocks.STRIPPED_SPECTRE_LOG, "Stripped Spectre Log")
 			addBlock(ModBlocks.SPECTRE_WOOD, "Spectre Wood")
 			addBlock(ModBlocks.SPECTRE_LEAVES, "Spectre Leaves")
 

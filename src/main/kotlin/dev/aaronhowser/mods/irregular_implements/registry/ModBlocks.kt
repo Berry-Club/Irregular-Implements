@@ -206,8 +206,6 @@ object ModBlocks : AaronBlockRegistry() {
 		registerBlock("spectre_log") { SpectreTreeBlocks.SPECTRE_LOG }
 	val SPECTRE_WOOD: DeferredBlock<Block> =
 		registerBlock("spectre_wood") { SpectreTreeBlocks.SPECTRE_WOOD }
-	val STRIPPED_SPECTRE_LOG: DeferredBlock<FlammableRotatedPillarBlock> =
-		registerBlock("stripped_spectre_log") { SpectreTreeBlocks.STRIPPED_SPECTRE_LOG }
 	val SPECTRE_LEAVES: DeferredBlock<LeavesBlock> =
 		registerBlock("spectre_leaves") { SpectreTreeBlocks.SPECTRE_LEAVES }
 	val SPECTRE_PLANKS: DeferredBlock<Block> =

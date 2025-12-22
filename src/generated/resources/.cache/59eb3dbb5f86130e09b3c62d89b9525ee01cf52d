@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T01:51:06.8125858	Loot Tables
+// 1.21.1	2025-12-21T18:10:46.3252874	Loot Tables
 546a8fc3d41f01e1e5ec7315668826530c54b3c5 data/irregular_implements/loot_table/blocks/acacia_platform.json
 ee965cb64c131c1427ce54ade7852cc60c5d666b data/irregular_implements/loot_table/blocks/accelerator_plate.json
 2905ffe00ccc14600375efa8341542cd56e57d79 data/irregular_implements/loot_table/blocks/advanced_item_collector.json
@@ -169,7 +169,6 @@ b0d7795c26cb9be347b29ae2dfab35b339f010b2 data/irregular_implements/loot_table/bl
 6b9699a1a71d0b8984272af1f96a0f3965db4185 data/irregular_implements/loot_table/blocks/stained_bricks_red.json
 2f0260f0b5dd5b96e096b86a63d1c4a36fb06b7a data/irregular_implements/loot_table/blocks/stained_bricks_white.json
 284a4058f70ced1a7b77eef4a279260cdc882d41 data/irregular_implements/loot_table/blocks/stained_bricks_yellow.json
-e72dbb2a3cbe6725091066fb00a2f3903d5f342d data/irregular_implements/loot_table/blocks/stripped_spectre_log.json
 b1299eedc0ff43c90169629228bf5279cd1b3d06 data/irregular_implements/loot_table/blocks/super_lubricant_ice.json
 5e03cc0b1089a3b3d03f2c43b39d6e38891c3e2c data/irregular_implements/loot_table/blocks/super_lubricant_platform.json
 26274d1a222a55425d4321462bbff4a6ed5ea95b data/irregular_implements/loot_table/blocks/super_lubricant_stone.json

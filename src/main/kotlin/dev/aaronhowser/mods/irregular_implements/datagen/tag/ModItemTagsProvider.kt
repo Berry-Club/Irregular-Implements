@@ -57,7 +57,6 @@ class ModItemTagsProvider(
 		this.tag(ItemTags.LOGS_THAT_BURN)
 			.add(
 				ModBlocks.SPECTRE_LOG.asItem(),
-				ModBlocks.STRIPPED_SPECTRE_LOG.asItem(),
 				ModBlocks.SPECTRE_WOOD.asItem()
 			)
 

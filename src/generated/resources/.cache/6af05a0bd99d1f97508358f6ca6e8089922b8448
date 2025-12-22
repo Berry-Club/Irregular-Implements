@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-22T07:03:58.622899	Tags for minecraft:block mod id irregular_implements
+// 1.21.1	2025-12-21T18:10:46.3323259	Tags for minecraft:block mod id irregular_implements
 d40b8189e60f63fdc8742984284238f2469a0340 data/c/tags/block/cobblestones.json
 56a63aaec14309f946835ba03e8a7349f61b377d data/c/tags/block/converts_to_spectre_sapling.json
 77880b0497e73ea20331ee68bbe0e9065984ab28 data/c/tags/block/crops/bean.json
@@ -21,7 +21,6 @@ fee0f0a57e12c2d86363bd9bfea41d892973b2c7 data/c/tags/block/dyed/red.json
 a2931841526ea0b8f10a3cddf5295de25073be4c data/c/tags/block/dyed/yellow.json
 6eaea810dd682a75f550450be7551f7732a32838 data/c/tags/block/glass_blocks.json
 becd867e8bcda7ccc4b3afd4cf8f0b3152a8069f data/c/tags/block/stones.json
-da740397a876a5b0aef7f82114a536007098d2f4 data/c/tags/block/stripped_woods.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_destabilizer_blacklist.json
 176956da2ca540b41940ab90ff1ba3684ffc12d8 data/irregular_implements/tags/block/block_mover_blacklist.json
 c11a1b2adf68dd24f9c3267892c72acee07b9e19 data/irregular_implements/tags/block/block_replacer_blacklist.json
@@ -39,8 +38,8 @@ ebac07bb3d4ab89cfbf209ca0550d323d5ce1b0c data/minecraft/tags/block/climbable.jso
 1e6a540e94d1a520c08f270578324410ce8cbe24 data/minecraft/tags/block/crops.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/dirt.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/leaves.json
-465e1934ba824f9215eb64e28f2b86d64294e60e data/minecraft/tags/block/logs_that_burn.json
-f7e8f3838b1e97bc8e5fae5445f9278a26559dc2 data/minecraft/tags/block/mineable/axe.json
+c19a52d77e07db93951f758ce1f458175315a23d data/minecraft/tags/block/logs_that_burn.json
+509e50d9724d794f8fd3e79e75cb557b4f262fd1 data/minecraft/tags/block/mineable/axe.json
 5dbf8737fd60e25cdd4cddafa0b9665747abbefc data/minecraft/tags/block/mineable/hoe.json
 0e22c0f083634e71fb51e7f49cc8f4d5d8fd79bd data/minecraft/tags/block/mineable/pickaxe.json
 ba933a0d3f17809e03c3ab5c00c33f4530b10654 data/minecraft/tags/block/mineable/shovel.json

@@ -142,16 +142,6 @@ object ModInteractionRecipes {
 			emiStack.setRemainder(EmiStack.of(damagedStack))
 		}
 
-		val stripRecipe = EmiWorldInteractionRecipe
-			.builder()
-			.leftInput(ModBlocks.SPECTRE_LOG.asEmiIngredient())
-			.rightInput(axesEmiIngredient, true)
-			.output(EmiStack.of(ModBlocks.STRIPPED_SPECTRE_LOG.asItem()))
-			.id(OtherUtil.modResource("/interaction/spectre_log_stripping"))
-			.build()
-
-		recipes.add(stripRecipe)
-
 		val convertsToSpectreSapling = BuiltInRegistries.ITEM
 			.filter { it is BlockItem && it.block.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING) }
 
