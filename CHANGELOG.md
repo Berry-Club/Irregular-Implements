@@ -12,6 +12,7 @@
 ### Fixed
 
 - Energy Distributor and Ender Energy Distributor having no recipes
+- Added some missing wiki entries
 
 # 1.9.0
 
