@@ -380,9 +380,8 @@ object ModBlocks : AaronBlockRegistry() {
 	val ANCIENT_BRICK = basicBlock("ancient_brick")
 
 	// Removed blocks:
-	// - Light Redirector: Just too hard to implement lmao	//TODO Actually would this be so hard, now?
+	// - Light Redirector: Just too hard to implement lmao
 	// - Dyeing Machine: Too hard and nobody would use
-	// - Quartz and Lapis Lamps: WAY more difficult to do now than in 1.12
 	// - Sound Dampener: Just use Super Sound Muffler instead
 	// - Sound Box: I just don't wanna
 	// - Fluid Display: I don't wanna (rendering is scary :( )
