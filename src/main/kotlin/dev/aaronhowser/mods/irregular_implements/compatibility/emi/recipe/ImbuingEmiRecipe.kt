@@ -33,14 +33,30 @@ class ImbuingEmiRecipe(
 	override fun getDisplayHeight(): Int = 64
 
 	override fun addWidgets(widgets: WidgetHolder) {
-		widgets.addTexture(BACKGROUND, 0, 0, 64, 64, 0, 0)
+		widgets.addTexture(
+			BACKGROUND,
+			0, 0,
+			64, 64,
+			0, 0,
+			64, 64,
+			64, 64
+		)
 
-		widgets.addSlot(centerSlot, 16, 16).drawBack(false)
-		widgets.addSlot(outerSlots[0], 16, 0).drawBack(false)
-		widgets.addSlot(outerSlots[1], 0, 16).drawBack(false)
-		widgets.addSlot(outerSlots[2], 16, 32).drawBack(false)
+		val topY = 3
+		val middleY = 23
+		val bottomY = 43
 
-		widgets.addSlot(outputs.first(), 32, 16).drawBack(false).recipeContext(this)
+		val leftX = 3
+		val middleX = 23
+		val rightX = 43
+
+		widgets.addSlot(outerSlots[0], middleX, topY).drawBack(false)
+		widgets.addSlot(outerSlots[1], leftX, middleY).drawBack(false)
+		widgets.addSlot(outerSlots[2], middleX, bottomY).drawBack(false)
+
+		widgets.addSlot(centerSlot, middleX, middleY).drawBack(false)
+
+		widgets.addSlot(outputs.first(), rightX, middleY).drawBack(false).recipeContext(this)
 	}
 
 	companion object {
