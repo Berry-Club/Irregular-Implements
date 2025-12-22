@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:gems/lapis"
+    },
+    "L": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ALA",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:lapis_lamp"
+  }
+}

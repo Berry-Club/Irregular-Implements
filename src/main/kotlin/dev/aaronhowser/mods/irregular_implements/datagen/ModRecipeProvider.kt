@@ -71,6 +71,22 @@ class ModRecipeProvider(
 
 	private val shapedRecipes: List<ShapedRecipeBuilder> = listOf(
 		shapedRecipe(
+			ModBlocks.LAPIS_LAMP,
+			" A ,ALA, A ",
+			mapOf(
+				'A' to ing(Tags.Items.GEMS_LAPIS),
+				'L' to ing(Items.REDSTONE_LAMP)
+			)
+		),
+		shapedRecipe(
+			ModBlocks.QUARTZ_LAMP,
+			" A ,ALA, A ",
+			mapOf(
+				'A' to ing(Tags.Items.GEMS_QUARTZ),
+				'L' to ing(Items.REDSTONE_LAMP)
+			)
+		),
+		shapedRecipe(
 			ModBlocks.FERTILIZED_DIRT,
 			2,
 			"FBF,BDB,FBF",
