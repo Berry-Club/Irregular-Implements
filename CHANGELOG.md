@@ -9,13 +9,14 @@
 ### Fixed
 
 - Fixed a mysterious NPE that sometimes happens with the Block Breaker maybe (#59)
+- Fixed Spectre Cubes thinking they're somewhere else, so second+ players wouldn't be able to use them (#57)
 
 # 1.8.1
 
 ### Fixed
 
 - Fixed a crash with Diaphanous Blocks (#56)
-  - PR by phit!
+	- PR by phit!
 
 # 1.8.0
 
