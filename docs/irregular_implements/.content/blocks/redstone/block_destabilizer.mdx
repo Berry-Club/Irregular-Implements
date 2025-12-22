@@ -1,0 +1,24 @@
+---
+title: Block Destabilizer
+id: irregular_implements:block_destabilizer
+related_items: [irregular_implements:block_destabilizer]
+type: block
+---
+
+The **Block Destabilizer** will cause the block in front of it, and all connected blocks of the same type, to fall like Sand when it receives a redstone pulse.
+
+In its GUI, you can toggle various settings.
+
+When in Lazy Mode, it will remember what block positions to destabilize, even if they're different blocks.
+
+To set the Lazy Shape, set it to Lazy Mode and then run it once. It'll save the locations of the blocks it destabilizes, and will destabilize specifically those next time regardless of what block is there.
+
+Clicking the Show Lazy Shape button will show cubes where all positions in the Lazy Shape are located.
+
+<Callout variant="danger">
+	The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Lazy Shape indicators won't be visible through blocks.
+	</Callout>
+
+Finally, the Forget Lazy Shape button will clear the saved positions.
+
+<PrefabObtaining/>
