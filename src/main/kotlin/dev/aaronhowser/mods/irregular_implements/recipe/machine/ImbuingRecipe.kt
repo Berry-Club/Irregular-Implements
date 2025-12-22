@@ -5,22 +5,26 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeTypes
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.crafting.Ingredient
-import net.minecraft.world.item.crafting.Recipe
-import net.minecraft.world.item.crafting.RecipeSerializer
-import net.minecraft.world.item.crafting.RecipeType
+import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.Level
 
-//TODO: Emi
 class ImbuingRecipe(
-	private val outerIngredients: List<Ingredient>,
-	private val centerIngredient: Ingredient,
-	private val output: ItemStack
+	val outerIngredients: List<Ingredient>,
+	val centerIngredient: Ingredient,
+	val output: ItemStack
 ) : Recipe<ImbuingInput> {
+
+	override fun getIngredients(): NonNullList<Ingredient> {
+		val list = NonNullList.create<Ingredient>()
+		list.addAll(outerIngredients)
+		list.add(centerIngredient)
+		return list
+	}
 
 	override fun matches(input: ImbuingInput, level: Level): Boolean {
 		val outerItems = input.getOuterItems()
@@ -118,6 +122,10 @@ class ImbuingRecipe(
 
 		fun hasRecipe(level: Level, input: ImbuingInput): Boolean {
 			return getRecipe(level, input) != null
+		}
+
+		fun getAllRecipes(recipeManager: RecipeManager): List<RecipeHolder<ImbuingRecipe>> {
+			return recipeManager.getAllRecipesFor(ModRecipeTypes.IMBUING.get())
 		}
 	}
 

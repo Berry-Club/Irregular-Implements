@@ -2,10 +2,13 @@ package dev.aaronhowser.mods.irregular_implements.compatibility.emi
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe.*
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
+import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
@@ -40,10 +43,20 @@ class ModEmiPlugin : EmiPlugin {
 			registry.addRecipe(anvilRecipe)
 		}
 
+		imbuingRecipes(registry)
 	}
 
 	private fun setComparisons(registry: EmiRegistry) {
 		registry.setDefaultComparison(EmiStack.of(ModItems.DIVINING_ROD), Comparison.compareComponents())
+	}
+
+	private fun imbuingRecipes(registry: EmiRegistry) {
+		registry.addCategory(IMBUING_CATEGORY)
+		registry.addWorkstation(IMBUING_CATEGORY, IMBUING_STATION_STACK)
+
+		for (recipe in ImbuingEmiRecipe.getAllRecipes(registry.recipeManager)) {
+			registry.addRecipe(recipe)
+		}
 	}
 
 	companion object {
@@ -51,6 +64,9 @@ class ModEmiPlugin : EmiPlugin {
 		fun Ingredient.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this)
 		fun ItemLike.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this.asIngredient())
 		fun TagKey<Item>.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this)
+
+		val IMBUING_STATION_STACK: EmiStack = ModBlocks.IMBUING_STATION.asEmiStack()
+		val IMBUING_CATEGORY = EmiRecipeCategory(OtherUtil.modResource("imbuing"), IMBUING_STATION_STACK)
 	}
 
 }
