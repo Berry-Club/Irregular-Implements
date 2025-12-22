@@ -72,7 +72,7 @@ class ModRecipeProvider(
 		),
 		shapedRecipe(
 			ModBlocks.ENDER_ENERGY_DISTRIBUTOR,
-			" D ,DED,D D",
+			" D ,DED, D ",
 			mapOf(
 				'D' to ing(ModItems.ENDER_DIAMOND),
 				'E' to ing(ModBlocks.ENERGY_DISTRIBUTOR)

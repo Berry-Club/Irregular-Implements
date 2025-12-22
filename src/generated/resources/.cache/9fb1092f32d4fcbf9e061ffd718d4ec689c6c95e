@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-21T18:59:55.2662003	Recipes
+// 1.21.1	2025-12-21T19:02:34.8799062	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 4fde374f75ca6a0102aa57cd63c8671d9ecef8e0 data/irregular_implements/advancement/recipes/imbuing/imbuing/energized_water.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
@@ -292,7 +292,7 @@ ce2a2554fdb724d195d8a9d8c5680d5d40369b45 data/irregular_implements/recipe/emeral
 d7017300b6d8b90b83f54a890784a4a2bac4e599 data/irregular_implements/recipe/ender_bridge.json
 2c847759161a4bcb39f1b581627b56f001a6d6b6 data/irregular_implements/recipe/ender_bucket.json
 6b70036ea81467ca4e8327947073bc93db5c8deb data/irregular_implements/recipe/ender_diamond.json
-ce6b688ae4f4074efb470cbeb486923d47b8cdaa data/irregular_implements/recipe/ender_energy_distributor.json
+b177ef0f0b64d2bad59a6fb2f09f10586ed31029 data/irregular_implements/recipe/ender_energy_distributor.json
 f06627897b2ab6d3f01184458ddd65e92bec5659 data/irregular_implements/recipe/ender_letter.json
 8f6d58e545283ade67b15b4548264ea0916c2b11 data/irregular_implements/recipe/ender_mailbox.json
 4b3e7fbe21b0b29a7d8b1fed35d53267b224412a data/irregular_implements/recipe/energy_distributor.json

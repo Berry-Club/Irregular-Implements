@@ -120,6 +120,8 @@ object ModItemLang {
 			addItem(ModItems.GRASS_SEEDS_GREEN, "Green Grass Seeds")
 			addItem(ModItems.GRASS_SEEDS_RED, "Red Grass Seeds")
 			addItem(ModItems.GRASS_SEEDS_BLACK, "Black Grass Seeds")
+			addItem(ModItems.ENDER_DIAMOND, "Ender Diamond")
+			addItem(ModItems.ENERGIZED_WATER, "Energized Water")
 		}
 	}
 
