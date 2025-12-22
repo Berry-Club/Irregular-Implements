@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "P": {
+      "tag": "c:ender_pearls"
+    }
+  },
+  "pattern": [
+    " P ",
+    "PDP",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:ender_diamond"
+  }
+}

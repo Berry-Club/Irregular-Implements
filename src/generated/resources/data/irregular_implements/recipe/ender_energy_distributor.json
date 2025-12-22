@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "irregular_implements:ender_diamond"
+    },
+    "E": {
+      "item": "irregular_implements:energy_distributor"
+    }
+  },
+  "pattern": [
+    " D ",
+    "DED",
+    "D D"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:ender_energy_distributor"
+  }
+}

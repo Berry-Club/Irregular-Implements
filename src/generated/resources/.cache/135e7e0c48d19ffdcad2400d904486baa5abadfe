@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-15T18:24:18.1032208	Item Models: irregular_implements
+// 1.21.1	2025-12-21T18:59:55.272001	Item Models: irregular_implements
 dcfcacab43954662394b8b27341fc53d5b4afbe9 assets/irregular_implements/models/item/advanced_redstone_torch.json
 7946ee02dbe853c71072010977b7e3bbe965c8af assets/irregular_implements/models/item/bean.json
 0b3fbaec5320e51a12e83788057a7607844f031f assets/irregular_implements/models/item/bean_stew.json
@@ -52,7 +52,9 @@ ca82f2cd1f0ae2622fa433f5769d3b344d9e7efd assets/irregular_implements/models/item
 11b721ba1fe2c69a184b430b556cd4cde5406692 assets/irregular_implements/models/item/emerald_compass_31.json
 bdf61868564d1ac09b315c344a7c89b4c5436e76 assets/irregular_implements/models/item/ender_bucket.json
 e461052a7ad207ca9b447e593d0b92ce47615525 assets/irregular_implements/models/item/ender_bucket_fluid.json
+9d5b45c2ae9b48d96d90cc4e9e0da8cff0204cde assets/irregular_implements/models/item/ender_diamond.json
 7091da0d57c764efc1a8a86c98b6bd0a68fb615e assets/irregular_implements/models/item/ender_letter.json
+8a04d61329ad7fdb35ba27d0a184475e6a84dac3 assets/irregular_implements/models/item/energized_water.json
 ce0bae92627930536b5dfc6a5fdb5d58e2b92383 assets/irregular_implements/models/item/entity_filter.json
 e81dc96d4a52cc18433eb61e67fb34565eaf4faf assets/irregular_implements/models/item/escape_rope.json
 9cd3d6ba6d82d3f451a44adac565a7e26b13b10d assets/irregular_implements/models/item/evil_tear.json

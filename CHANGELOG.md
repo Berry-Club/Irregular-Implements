@@ -5,6 +5,13 @@
 - Quartz Lamp and Lapis Lamp
 	- Quartz makes invisible light that stops mobs from spawning
 	- Lapis makes visible light that doesn't stop mobs from spawning
+- Ender Diamond, Energized Water
+  - Ingredients for the Energy Distributor and Ender Energy Distributor
+
+
+### Fixed
+
+- Energy Distributor and Ender Energy Distributor having no recipes
 
 # 1.9.0
 

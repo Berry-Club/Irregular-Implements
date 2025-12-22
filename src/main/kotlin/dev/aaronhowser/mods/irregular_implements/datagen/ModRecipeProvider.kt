@@ -52,24 +52,40 @@ class ModRecipeProvider(
 		}
 
 		for ((recipe, name) in specialRecipes) {
-			recipe.save(recipeOutput, OtherUtil.modResource("$name"))
+			recipe.save(recipeOutput, OtherUtil.modResource(name))
 		}
 
 		namedRecipes(recipeOutput)
 		imbuingRecipes(recipeOutput)
 	}
 
-	//TODO:
-	// Imbues
-	// Bottle of Air (just say how to get it)
-	// Lava Charm (dungeon loot)
-	// Magic Hood (dungeon loot)
-	// Water Walking Boots (loot in custom chest added to ocean monuments)
-	// Energy Distributor
-	// Ender Energy Distributor
-	// Number Spectre Coil (dungeon loot?)
-
 	private val shapedRecipes: List<ShapedRecipeBuilder> = listOf(
+		shapedRecipe(
+			ModBlocks.ENERGY_DISTRIBUTOR,
+			"IRI,BWB,IRI",
+			mapOf(
+				'I' to ing(Tags.Items.STORAGE_BLOCKS_IRON),
+				'R' to ing(Items.REPEATER),
+				'W' to ing(ModItems.ENERGIZED_WATER),
+				'B' to ing(Tags.Items.STORAGE_BLOCKS_REDSTONE)
+			)
+		),
+		shapedRecipe(
+			ModBlocks.ENDER_ENERGY_DISTRIBUTOR,
+			" D ,DED,D D",
+			mapOf(
+				'D' to ing(ModItems.ENDER_DIAMOND),
+				'E' to ing(ModBlocks.ENERGY_DISTRIBUTOR)
+			)
+		),
+		shapedRecipe(
+			ModItems.ENDER_DIAMOND,
+			" P ,PDP, P ",
+			mapOf(
+				'P' to ing(Tags.Items.ENDER_PEARLS),
+				'D' to ing(Tags.Items.GEMS_DIAMOND)
+			)
+		),
 		shapedRecipe(
 			ModBlocks.LAPIS_LAMP,
 			" A ,ALA, A ",
@@ -1537,6 +1553,18 @@ class ModRecipeProvider(
 		)
 
 		mossyCobbleRecipe.save(recipeOutput, "imbuing/mossy_cobblestone")
+
+		val energizedWater = ImbuingRecipeBuilder(
+			outerIngredients = listOf(
+				ing(Tags.Items.GUNPOWDERS).getIngredient(),
+				ing(Tags.Items.DUSTS_REDSTONE).getIngredient(),
+				ing(Tags.Items.DUSTS_GLOWSTONE).getIngredient()
+			),
+			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			outputStack = ModItems.ENERGIZED_WATER.toStack()
+		)
+
+		energizedWater.save(recipeOutput, "imbuing/energized_water")
 
 		val fireImbue = ImbuingRecipeBuilder(
 			outerIngredients = listOf(

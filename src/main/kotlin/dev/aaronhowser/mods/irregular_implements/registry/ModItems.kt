@@ -57,6 +57,8 @@ object ModItems : AaronItemRegistry() {
 		basic("obsidian_skull_ring", Item.Properties().stacksTo(1).fireResistant())
 	val DIVINING_ROD: DeferredItem<DiviningRodItem> =
 		register("divining_rod", ::DiviningRodItem, DiviningRodItem.DEFAULT_PROPERTIES)
+	val LUMINOUS_POWDER: DeferredItem<Item> =
+		basic("luminous_powder") { Item.Properties().component(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE) }
 
 	// Block items
 	val DIAPHANOUS_BLOCK: DeferredItem<DiaphanousBlockItem> =
@@ -73,7 +75,8 @@ object ModItems : AaronItemRegistry() {
 	val SUPER_LUBRICANT_TINCTURE: DeferredItem<Item> = basic("super_lubricant_tincture")
 	val SPECTRE_INGOT: DeferredItem<Item> = basic("spectre_ingot")
 	val SPECTRE_STRING: DeferredItem<Item> = basic("spectre_string")
-	val LUMINOUS_POWDER: DeferredItem<Item> = basic("luminous_powder") { Item.Properties().component(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE) }
+	val ENERGIZED_WATER: DeferredItem<Item> = basic("energized_water")
+	val ENDER_DIAMOND: DeferredItem<Item> = basic("ender_diamond")
 
 	// Bucket
 	val ENDER_BUCKET: DeferredItem<EnderBucketItem> =

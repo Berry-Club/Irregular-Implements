@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/redstone"
+    },
+    "I": {
+      "tag": "c:storage_blocks/iron"
+    },
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "W": {
+      "item": "irregular_implements:energized_water"
+    }
+  },
+  "pattern": [
+    "IRI",
+    "BWB",
+    "IRI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "irregular_implements:energy_distributor"
+  }
+}
