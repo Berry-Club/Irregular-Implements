@@ -7,7 +7,7 @@
 	- Lapis makes visible light that doesn't stop mobs from spawning
 - Ender Diamond, Energized Water
   - Ingredients for the Energy Distributor and Ender Energy Distributor
-
+- EMI support for the Imbuing Station
 
 ### Fixed
 
