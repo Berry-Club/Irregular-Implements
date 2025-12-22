@@ -200,6 +200,7 @@
   "effect.irregular_implements.imbue_poison": "Poison Imbue",
   "effect.irregular_implements.imbue_spectre": "Spectre Imbue",
   "effect.irregular_implements.imbue_wither": "Wither Imbue",
+  "emi.category.irregular_implements.imbuing": "Imbuing",
   "enchantment.irregular_implements.magnetic": "Magnetic",
   "enchantment.irregular_implements.magnetic.desc": "Teleports fresh item drops towards you",
   "entity.irregular_implements.artificial_end_portal": "Artificial End Portal",

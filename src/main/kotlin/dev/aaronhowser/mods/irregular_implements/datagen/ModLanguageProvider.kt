@@ -25,6 +25,7 @@ class ModLanguageProvider(
 		ModEntityTypeLang.add(this)
 
 		add(ORACLE_INDEX, "Irregular Implements")
+		add(EMI_IMBUING_CATEGORY, "Imbuing")
 	}
 
 	companion object {
@@ -32,6 +33,7 @@ class ModLanguageProvider(
 		fun String.toGrayComponent(vararg args: Any?): MutableComponent = Component.translatable(this, *args).withStyle(ChatFormatting.GRAY)
 
 		private const val ORACLE_INDEX = "oracle_index.title.irregular_implements"
+		private const val EMI_IMBUING_CATEGORY = "emi.category.irregular_implements.imbuing"
 	}
 
 }
