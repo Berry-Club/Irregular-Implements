@@ -102,6 +102,14 @@ class ModBlockStateProvider(
 					.modelFile(model)
 					.build()
 			}
+
+		simpleBlockItem(
+			block,
+			ItemModelBuilder(
+				modLoc("block/quartz_lamp_off"),
+				existingFileHelper
+			)
+		)
 	}
 
 	private fun lapisLamp() {
@@ -122,6 +130,14 @@ class ModBlockStateProvider(
 					.modelFile(model)
 					.build()
 			}
+
+		simpleBlockItem(
+			block,
+			ItemModelBuilder(
+				modLoc("block/lapis_lamp_off"),
+				existingFileHelper
+			)
+		)
 	}
 
 	private fun advancedRedstoneTorch() {
