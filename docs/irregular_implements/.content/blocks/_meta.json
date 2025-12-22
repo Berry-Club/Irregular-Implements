@@ -35,5 +35,7 @@
 	"spectre_lens.mdx": "Spectre Lens",
 	"spectre_sapling.mdx": "Spectre Sapling",
 	"super_lubricated_blocks.mdx": "Super Lubricated Blocks",
-	"luminous_blocks.mdx": "Luminous Blocks"
+	"luminous_blocks.mdx": "Luminous Blocks",
+	"item_collector.mdx": "Item Collector",
+	"advanced_item_collector.mdx": "Advanced Item Collector"
 }
