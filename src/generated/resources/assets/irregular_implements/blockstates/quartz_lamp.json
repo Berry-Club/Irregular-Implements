@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "irregular_implements:block/quartz_lamp_off"
+    },
+    "lit=true": {
+      "model": "irregular_implements:block/quartz_lamp_on"
+    }
+  }
+}

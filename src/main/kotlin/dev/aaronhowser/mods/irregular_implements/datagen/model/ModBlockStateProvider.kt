@@ -80,6 +80,48 @@ class ModBlockStateProvider(
 		rainShield()
 		specialChests()
 		advancedRedstoneTorch()
+		lapisLamp()
+		quartzLamp()
+	}
+
+	private fun quartzLamp() {
+		val block = ModBlocks.QUARTZ_LAMP.get()
+
+		getVariantBuilder(block)
+			.forAllStates {
+				val isLit = it.getValue(RedstoneLampBlock.LIT)
+
+				val name = name(block) + if (isLit) "_on" else "_off"
+				val model = models()
+					.cubeAll(
+						name,
+						modLoc("block/$name")
+					)
+
+				ConfiguredModel.builder()
+					.modelFile(model)
+					.build()
+			}
+	}
+
+	private fun lapisLamp() {
+		val block = ModBlocks.LAPIS_LAMP.get()
+
+		getVariantBuilder(block)
+			.forAllStates {
+				val isLit = it.getValue(RedstoneLampBlock.LIT)
+
+				val name = name(block) + if (isLit) "_on" else "_off"
+				val model = models()
+					.cubeAll(
+						name,
+						modLoc("block/$name")
+					)
+
+				ConfiguredModel.builder()
+					.modelFile(model)
+					.build()
+			}
 	}
 
 	private fun advancedRedstoneTorch() {

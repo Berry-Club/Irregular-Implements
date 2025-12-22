@@ -48,6 +48,8 @@ object ModBlockLang {
 			addBlock(ModBlocks.ADVANCED_ITEM_COLLECTOR, "Advanced Item Collector")
 			addBlock(ModBlocks.NATURE_CORE, "Nature Core")
 			addBlock(ModBlocks.RAINBOW_LAMP, "Rainbow Lamp")
+			addBlock(ModBlocks.QUARTZ_LAMP, "Quartz Lamp")
+			addBlock(ModBlocks.LAPIS_LAMP, "Lapis Lamp")
 			addBlock(ModBlocks.LOTUS, "Lotus")
 			addBlock(ModBlocks.MOON_PHASE_DETECTOR, "Moon Phase Detector")
 			addBlock(ModBlocks.ENERGY_DISTRIBUTOR, "Energy Distributor")

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "irregular_implements:block/lapis_lamp_off"
+    },
+    "lit=true": {
+      "model": "irregular_implements:block/lapis_lamp_on"
+    }
+  }
+}
