@@ -115,13 +115,27 @@ object ModBlocks : AaronBlockRegistry() {
 	val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
 		registerBlock("trigger_glass", ::TriggerGlassBlock)
 	val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
-		registerBlock("lapis_glass") { PermeableGlassBlock.LAPIS }
+		registerBlock("lapis_glass") {
+			PermeableGlassBlock(
+				isSolidForMobsOnly = false,
+				Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
+			)
+		}
 	val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
-		registerBlock("quartz_glass") { PermeableGlassBlock.QUARTZ }
+		registerBlock("quartz_glass") {
+			PermeableGlassBlock(
+				isSolidForMobsOnly = true,
+				Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
+			)
+		}
 
 	// Lamp
-	val RAINBOW_LAMP =
+	val RAINBOW_LAMP: DeferredBlock<RainbowLampBlock> =
 		registerBlock("rainbow_lamp", ::RainbowLampBlock)    //TODO: animate the item color
+	val LAPIS_LAMP: DeferredBlock<SidedLampBlock> =
+		registerBlock("lapis_lamp") { SidedLampBlock(litOnServer = false) }
+	val QUARTZ_LAMP: DeferredBlock<SidedLampBlock> =
+		registerBlock("quartz_lamp") { SidedLampBlock(litOnServer = true) }
 
 	// Ender Bridge
 	val ENDER_BRIDGE: DeferredBlock<EnderBridgeBlock> =
