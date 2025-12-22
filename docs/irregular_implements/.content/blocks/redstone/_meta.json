@@ -13,5 +13,7 @@
 	"online_detector.mdx": "Online Detector",
 	"redstone_observer.mdx": "Redstone Observer",
 	"sided_block_of_redstone.mdx": "Sided Block of Redstone",
-	"trigger_glass.mdx": "Trigger Glass"
+	"trigger_glass.mdx": "Trigger Glass",
+	"quartz_lamp.mdx": "Quartz Lamp",
+	"lapis_lamp.mdx": "Lapis Lamp"
 }
