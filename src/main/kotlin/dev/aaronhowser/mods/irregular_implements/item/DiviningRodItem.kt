@@ -27,7 +27,7 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		tooltipComponents: MutableList<Component>,
 		tooltipFlag: TooltipFlag
 	) {
-		val blockTag = stack.get(ModDataComponents.BLOCK_TAG) ?: return
+		val blockTag = stack.get(ModDataComponents.DIVINE_BLOCKS) ?: return
 
 		val component = if (blockTag == Tags.Blocks.ORES) {
 			ModTooltipLang.ALL_ORES.toGrayComponent()
@@ -51,7 +51,7 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		fun getRodForBlockTag(blockTag: TagKey<Block>): ItemStack {
 			val stack = ModItems.DIVINING_ROD.toStack()
 
-			stack.set(ModDataComponents.BLOCK_TAG, blockTag)
+			stack.set(ModDataComponents.DIVINE_BLOCKS, blockTag)
 
 			return stack
 		}
@@ -153,7 +153,7 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 		fun getItemColor(itemStack: ItemStack, tintIndex: Int): Int {
 			if (tintIndex != 1) return 0xFFFFFFFF.toInt()
 
-			val blockTag = itemStack.get(ModDataComponents.BLOCK_TAG)
+			val blockTag = itemStack.get(ModDataComponents.DIVINE_BLOCKS)
 
 			if (blockTag != null) {
 				val rgb = COLORS_PER_TAG[blockTag] ?: 0xFFFFFF

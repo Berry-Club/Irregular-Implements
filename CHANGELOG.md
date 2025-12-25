@@ -1,3 +1,10 @@
+# 1.10.1
+
+### Changed
+
+- Renamed the Data Component `block_tag` to `divine_blocks`
+	- Also added an alias so it should auto-convert existing data
+
 # 1.10.0
 
 ### Added
@@ -6,7 +13,7 @@
 	- Quartz makes invisible light that stops mobs from spawning
 	- Lapis makes visible light that doesn't stop mobs from spawning
 - Ender Diamond, Energized Water
-  - Ingredients for the Energy Distributor and Ender Energy Distributor
+	- Ingredients for the Energy Distributor and Ender Energy Distributor
 - EMI support for the Imbuing Station
 
 ### Fixed

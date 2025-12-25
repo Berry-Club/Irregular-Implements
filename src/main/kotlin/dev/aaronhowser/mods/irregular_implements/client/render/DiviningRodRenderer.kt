@@ -18,8 +18,8 @@ object DiviningRodRenderer {
 		val offHandItem = player.offhandItem
 		val mainHandItem = player.mainHandItem
 
-		val offHandTag = if (offHandItem.`is`(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.BLOCK_TAG) else null
-		val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.BLOCK_TAG) else null
+		val offHandTag = if (offHandItem.`is`(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.DIVINE_BLOCKS) else null
+		val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.DIVINE_BLOCKS) else null
 
 		if (offHandTag == null && mainHandTag == null) {
 			return

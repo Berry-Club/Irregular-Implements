@@ -9,3 +9,9 @@ There's a handful of useful data components that can be applied to items that do
 The mod searches for any worn armor and Curio items that have this data component, and gets all the tags specified in their components. If the player is standing above a fluid with any of those tags, they are treated as if they were on solid ground.
 
 This means you can give a Horse a `minecraft:diamond_horse_armor[irregular_implements:can_stand_on_fluids=["minecraft:water"]]` and it will be able to walk on water.
+
+## Divining Rod
+
+[Divining Rods](@irregular_implements:divining_rod) use the data component `irregular_implements:divine_blocks`, which takes a block tag. While holding it in either hand, blocks nearby with that tag will glow through walls.
+
+You can add this component to any item to give it the same effect.

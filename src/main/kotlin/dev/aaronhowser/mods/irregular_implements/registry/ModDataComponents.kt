@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.aaron.registry.AaronDataComponentRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.item.component.*
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.irregular_implements.util.SpecificEntity
 import net.minecraft.core.GlobalPos
 import net.minecraft.core.Holder
@@ -101,8 +102,12 @@ object ModDataComponents : AaronDataComponentRegistry() {
 	val IS_INVERTED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
 		unit("is_inverted")
 
-	val BLOCK_TAG: DeferredHolder<DataComponentType<*>, DataComponentType<TagKey<Block>>> =
-		register("block_tag", TagKey.codec(Registries.BLOCK), AaronExtraCodecs.tagKeyStreamCodec(Registries.BLOCK))
+	val DIVINE_BLOCKS: DeferredHolder<DataComponentType<*>, DataComponentType<TagKey<Block>>> =
+		register(
+			"divine_blocks",
+			TagKey.codec(Registries.BLOCK),
+			AaronExtraCodecs.tagKeyStreamCodec(Registries.BLOCK)
+		)
 
 	val IS_ANCHORED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
 		unit("is_anchored")
@@ -131,5 +136,9 @@ object ModDataComponents : AaronDataComponentRegistry() {
 	@JvmField
 	val HAS_LUMINOUS_POWDER: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =
 		unit("has_luminous_powder")
+
+	init {
+		DATA_COMPONENT_REGISTRY.addAlias(OtherUtil.modResource("block_tag"), DIVINE_BLOCKS.key!!.location())
+	}
 
 }
