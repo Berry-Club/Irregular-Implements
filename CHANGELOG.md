@@ -5,6 +5,10 @@
 - Renamed the Data Component `block_tag` to `divine_blocks`
 	- Also added an alias so it should auto-convert existing data
 
+### Fixed
+
+- Hopefully fixed a memory leak involving Chat Detectors (#45)
+
 # 1.10.0
 
 ### Added
