@@ -4,6 +4,8 @@
 
 - Renamed the Data Component `block_tag` to `divine_blocks`
 	- Also added an alias so it should auto-convert existing data
+- Lowered the amount of NBT saved in the Summoning Pendulum
+	- It strips stuff like position and fall distance and stuff, stuff that isn't relevant
 
 ### Fixed
 

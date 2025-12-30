@@ -1,12 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.getMinimalTag
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.registries.Registries
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.InteractionHand
@@ -39,8 +39,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 
 		if (entityList.size >= ServerConfig.CONFIG.summoningPendulumCapacity.get()) return InteractionResult.FAIL
 
-		val entityNbt = CompoundTag()
-		if (!interactionTarget.save(entityNbt)) return InteractionResult.FAIL
+		val entityNbt = interactionTarget.getMinimalTag(stripUniqueness = false)
 
 		val customData = CustomData.of(entityNbt)
 		entityList.add(customData)
