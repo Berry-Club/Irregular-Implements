@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -19,9 +20,10 @@ class WashBootRecipe(
 	val bootIngredient: Ingredient = DataComponentIngredient.of(
 		false,
 		DataComponentMap.builder().set(ModDataComponents.LUBRICATED, Unit.INSTANCE).build(),
-		*LubricateBootRecipe.ALL_BOOTS.map { it.item }.toTypedArray()
+		*LubricateBootRecipe.ALL_BOOTS.map(ItemStack::getItem).toTypedArray()
 	)
-	val waterIngredient: Ingredient = DataComponentIngredient.of(false, OtherUtil.getPotionStack(Potions.WATER))
+
+	val waterIngredient: Ingredient = DataComponentIngredient.of(false, Potions.WATER.getAsStack())
 
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		var bootStack: ItemStack? = null

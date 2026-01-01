@@ -11,20 +11,13 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.monster.Spider
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.alchemy.Potion
-import net.minecraft.world.item.alchemy.PotionContents
-import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.saveddata.SavedData
 import net.minecraft.world.level.storage.DimensionDataStorage
-import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
 
 object OtherUtil {
@@ -32,22 +25,6 @@ object OtherUtil {
 	@JvmStatic
 	fun modResource(path: String): ResourceLocation =
 		ResourceLocation.fromNamespaceAndPath(IrregularImplements.MOD_ID, path)
-
-	fun getPotionStack(potion: Holder<Potion>): ItemStack {
-		return PotionContents.createItemStack(Items.POTION, potion)
-	}
-
-	fun getPovResult(level: Level, entity: LivingEntity, range: Number): BlockHitResult {
-		return level.clip(
-			ClipContext(
-				entity.eyePosition,
-				entity.eyePosition.add(entity.lookAngle.scale(range.toDouble())),
-				ClipContext.Block.OUTLINE,
-				ClipContext.Fluid.NONE,
-				entity
-			)
-		)
-	}
 
 	fun getBiomeComponent(biomeHolder: Holder<Biome>): Component {
 		val biomeKey = biomeHolder.key!!
@@ -73,11 +50,6 @@ object OtherUtil {
 		} else {
 			Component.literal(location.toString())
 		}.withStyle(ChatFormatting.GRAY)
-	}
-
-	fun giveOrDropStack(itemStack: ItemStack, player: Player): Boolean {
-		return player.inventory.add(itemStack)
-				|| dropStackAt(itemStack, player, true)
 	}
 
 	fun dropStackAt(itemStack: ItemStack, entity: Entity, instantPickup: Boolean = false): Boolean {

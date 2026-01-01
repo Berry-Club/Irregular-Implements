@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.getPovResult
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -19,7 +20,7 @@ object RedstoneToolRenderer {
 
 		val level = player.level()
 
-		val clipResult = OtherUtil.getPovResult(level, player, player.blockInteractionRange())
+		val clipResult = player.getPovResult(player.blockInteractionRange())
 
 		val pos = clipResult.blockPos
 		val state = level.getBlockState(pos)

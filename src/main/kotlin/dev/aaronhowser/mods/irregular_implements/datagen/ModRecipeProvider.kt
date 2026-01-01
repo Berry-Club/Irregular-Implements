@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.aaron.datagen.AaronRecipeProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBuilder
@@ -1238,7 +1239,7 @@ class ModRecipeProvider(
 			ModItems.SUPER_LUBRICANT_TINCTURE,
 			listOf(
 				ing(Tags.Items.SEEDS),
-				ing(OtherUtil.getPotionStack(Potions.WATER)),
+				ing(Potions.WATER.getAsStack()),
 				ing(ModItems.BEAN)
 			)
 		),
@@ -1521,7 +1522,7 @@ class ModRecipeProvider(
 			"OWO,LCL,OWO",
 			mapOf(
 				'O' to ing(Tags.Items.OBSIDIANS),
-				'W' to ing(OtherUtil.getPotionStack(Potions.WATER)),
+				'W' to ing(Potions.WATER.getAsStack()),
 				'L' to ing(Tags.Items.GEMS_LAPIS),
 				'C' to ing(Items.FIRE_CHARGE),
 			)
@@ -1544,7 +1545,7 @@ class ModRecipeProvider(
 
 		val mossyCobbleRecipe = ImbuingRecipeBuilder(
 			outerIngredients = listOf(
-				ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+				ing(Potions.WATER.getAsStack()).getIngredient(),
 				ing(Items.VINE).getIngredient(),
 				ing(Items.BONE_MEAL).getIngredient()
 			),
@@ -1560,7 +1561,7 @@ class ModRecipeProvider(
 				ing(Tags.Items.DUSTS_REDSTONE).getIngredient(),
 				ing(Tags.Items.DUSTS_GLOWSTONE).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.ENERGIZED_WATER.toStack()
 		)
 
@@ -1572,7 +1573,7 @@ class ModRecipeProvider(
 				ing(Items.FLINT).getIngredient(),
 				ing(Items.BLAZE_POWDER).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.FIRE_IMBUE.toStack()
 		)
 
@@ -1584,7 +1585,7 @@ class ModRecipeProvider(
 				ing(Items.ROTTEN_FLESH).getIngredient(),
 				ing(Items.RED_MUSHROOM).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.POISON_IMBUE.toStack()
 		)
 
@@ -1596,7 +1597,7 @@ class ModRecipeProvider(
 				ing(Tags.Items.GEMS_LAPIS).getIngredient(),
 				ing(Tags.Items.DUSTS_GLOWSTONE).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.EXPERIENCE_IMBUE.toStack()
 		)
 
@@ -1608,7 +1609,7 @@ class ModRecipeProvider(
 				ing(Items.NETHER_BRICK).getIngredient(),
 				ing(Items.GHAST_TEAR).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.WITHER_IMBUE.toStack()
 		)
 
@@ -1620,7 +1621,7 @@ class ModRecipeProvider(
 				ing(Items.VINE).getIngredient(),
 				ing(Tags.Items.SLIME_BALLS).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.COLLAPSE_IMBUE.toStack()
 		)
 
@@ -1632,7 +1633,7 @@ class ModRecipeProvider(
 				ing(Tags.Items.STORAGE_BLOCKS_LAPIS).getIngredient(),
 				ing(Items.OXEYE_DAISY).getIngredient()
 			),
-			centerIngredient = ing(OtherUtil.getPotionStack(Potions.WATER)).getIngredient(),
+			centerIngredient = ing(Potions.WATER.getAsStack()).getIngredient(),
 			outputStack = ModItems.SPECTRE_IMBUE.toStack()
 		)
 

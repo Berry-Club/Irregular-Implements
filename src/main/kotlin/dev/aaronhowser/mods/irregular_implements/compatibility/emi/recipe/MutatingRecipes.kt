@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
@@ -46,7 +47,7 @@ object MutatingRecipes {
 			.virtualInput(lubricantStack)
 			.build(OtherUtil.modResource("/lubricate_boot"))
 
-		val waterStack = OtherUtil.getPotionStack(Potions.WATER)
+		val waterStack = Potions.WATER.getAsStack()
 
 		val cleanRecipe = MutatingEmiRecipe.Builder()
 			.recipePattern("BW")

@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.mojang.authlib.GameProfile
 import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.AaronExtensions.giveOrDropStack
 import dev.aaronhowser.mods.aaron.AaronExtensions.withComponent
 import dev.aaronhowser.mods.aaron.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
@@ -105,7 +106,7 @@ class BlockBreakerBlockEntity(
 	fun downgrade(player: Player) {
 		val level = level as? ServerLevel ?: return
 
-		OtherUtil.giveOrDropStack(this.diamondBreaker, player)
+		player.giveOrDropStack(this.diamondBreaker)
 		this.diamondBreaker = ItemStack.EMPTY
 
 		val basicPick = getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
@@ -129,7 +130,6 @@ class BlockBreakerBlockEntity(
 
 			val targetState = level.getBlockState(targetPos)
 
-			//FIXME: Not applying efficiency enchantment, broken at Player.getDigSpeed getAttributeValue
 			val destroyProgress = targetState.getDestroyProgress(fakePlayer, level, targetPos)
 
 			this.miningProgress += destroyProgress
