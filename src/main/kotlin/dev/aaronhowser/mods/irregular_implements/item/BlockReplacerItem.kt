@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -116,7 +117,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 		val mayInsert = storedStacks.any { it.item == other.item } || storedStacks.size + 1 <= ServerConfig.CONFIG.blockReplacerUniqueBlocks.get()
 		if (!mayInsert) return false
 
-		val newContents = OtherUtil.flattenStacks(storedStacks + other.copy())
+		val newContents = AaronUtil.flattenStacks(storedStacks + other.copy())
 		thisStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(newContents))
 
 		other.count = 0

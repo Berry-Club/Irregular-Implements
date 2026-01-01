@@ -75,29 +75,6 @@ object OtherUtil {
 		}.withStyle(ChatFormatting.GRAY)
 	}
 
-	fun flattenStacks(input: List<ItemStack>): List<ItemStack> {
-		val output = mutableListOf<ItemStack>()
-
-		for (stack in input.filter { !it.isEmpty }.map { it.copy() }) {
-			val matchingStack = output.firstOrNull { ItemStack.isSameItemSameComponents(it, stack) }
-
-			if (matchingStack != null) {
-				val amountToAdd = minOf(stack.count, matchingStack.maxStackSize - matchingStack.count)
-
-				if (amountToAdd > 0) {
-					matchingStack.grow(amountToAdd)
-					stack.shrink(amountToAdd)
-				}
-			}
-
-			if (!stack.isEmpty) {
-				output.add(stack)
-			}
-		}
-
-		return output
-	}
-
 	fun giveOrDropStack(itemStack: ItemStack, player: Player): Boolean {
 		return player.inventory.add(itemStack)
 				|| dropStackAt(itemStack, player, true)
