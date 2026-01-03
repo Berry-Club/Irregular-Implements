@@ -18,20 +18,20 @@ object ModMobEffects : AaronMobEffectsRegistry() {
 	override fun getMobEffectRegistry(): DeferredRegister<MobEffect> = EFFECT_REGISTRY
 
 	val FIRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-		register("imbue_fire", ImbueEffect(Color.ORANGE.rgb))
+		register("imbue_fire", { ImbueEffect(Color.ORANGE.rgb) })
 	val POISON_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-		register("imbue_poison", ImbueEffect(Color.GREEN.darker().rgb))
+		register("imbue_poison") { ImbueEffect(Color.GREEN.darker().rgb) }
 	val EXPERIENCE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-		register("imbue_experience", ImbueEffect(Color.YELLOW.rgb))
+		register("imbue_experience") { ImbueEffect(Color.YELLOW.rgb) }
 	val WITHER_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-		register("imbue_wither", ImbueEffect(Color.BLACK.brighter().rgb))
-	val SPECTRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =    //FIXME: No texture
-		register("imbue_spectre", ImbueEffect(0xBFEFFF))
+		register("imbue_wither") { ImbueEffect(Color.BLACK.brighter().rgb) }
+	val SPECTRE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
+		register("imbue_spectre") { ImbueEffect(0xBFEFFF) }
 	val COLLAPSE_IMBUE: DeferredHolder<MobEffect, ImbueEffect> =
-		register("imbue_collapse", ImbueEffect(Color.PINK.rgb))
+		register("imbue_collapse") { ImbueEffect(Color.PINK.rgb) }
 
 	@JvmField
 	val COLLAPSE: DeferredHolder<MobEffect, CollapseEffect> =
-		register("collapse", CollapseEffect())
+		register("collapse") { CollapseEffect() }
 
 }
