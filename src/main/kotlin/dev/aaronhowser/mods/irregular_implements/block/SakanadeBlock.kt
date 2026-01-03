@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
+import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
@@ -104,7 +104,7 @@ class SakanadeBlock : Block(
 
 	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
 		if (entity is LivingEntity) {
-			entity.addEffect(MobEffectInstance(ModEffects.COLLAPSE, 20 * 8))
+			entity.addEffect(MobEffectInstance(ModMobEffects.COLLAPSE, 20 * 8))
 		}
 	}
 

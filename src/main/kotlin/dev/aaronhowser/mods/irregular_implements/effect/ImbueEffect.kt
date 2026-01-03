@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.effect
 
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects
+import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
 import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageTypes
@@ -48,12 +48,12 @@ class ImbueEffect(
 
 			for (imbue in imbues) {
 				when (imbue) {
-					ModEffects.FIRE_IMBUE.get() -> target.igniteForSeconds(10f)
+					ModMobEffects.FIRE_IMBUE.get() -> target.igniteForSeconds(10f)
 
-					ModEffects.POISON_IMBUE.get() -> target.addEffect(MobEffectInstance(MobEffects.POISON, 20 * 10, 1))
-					ModEffects.WITHER_IMBUE.get() -> target.addEffect(MobEffectInstance(MobEffects.WITHER, 20 * 10, 1))
+					ModMobEffects.POISON_IMBUE.get() -> target.addEffect(MobEffectInstance(MobEffects.POISON, 20 * 10, 1))
+					ModMobEffects.WITHER_IMBUE.get() -> target.addEffect(MobEffectInstance(MobEffects.WITHER, 20 * 10, 1))
 
-					ModEffects.COLLAPSE_IMBUE.get() -> target.addEffect(MobEffectInstance(ModEffects.COLLAPSE, 20 * 10, 0))
+					ModMobEffects.COLLAPSE_IMBUE.get() -> target.addEffect(MobEffectInstance(ModMobEffects.COLLAPSE, 20 * 10, 0))
 				}
 			}
 		}
@@ -69,7 +69,7 @@ class ImbueEffect(
 				|| damageSource.`is`(DamageTypeTags.BYPASSES_INVULNERABILITY)
 			) return
 
-			if (entity.hasEffect(ModEffects.SPECTRE_IMBUE)
+			if (entity.hasEffect(ModMobEffects.SPECTRE_IMBUE)
 				&& entity.random.nextFloat() <= ServerConfig.CONFIG.spectreImbueChance.get()
 			) {
 				event.isCanceled = true
@@ -80,7 +80,7 @@ class ImbueEffect(
 		fun handleXpImbue(event: LivingExperienceDropEvent) {
 			val attacker = event.attackingPlayer ?: return
 
-			if (attacker.hasEffect(ModEffects.EXPERIENCE_IMBUE)) {
+			if (attacker.hasEffect(ModMobEffects.EXPERIENCE_IMBUE)) {
 				event.droppedExperience = Mth.ceil(event.droppedExperience * 1.5f)
 			}
 		}

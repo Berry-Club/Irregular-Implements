@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
+import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import org.spongepowered.asm.mixin.Final;
@@ -24,7 +24,7 @@ public class MoveControlMixin {
 			)
 	)
 	private float irregular_implements$applyCollapse(float f) {
-		return (this.mob.hasEffect(ModEffects.COLLAPSE)) ? -f : f;
+		return (this.mob.hasEffect(ModMobEffects.COLLAPSE)) ? -f : f;
 	}
 
 }

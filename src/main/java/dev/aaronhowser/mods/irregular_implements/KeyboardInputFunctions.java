@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements;
 
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil;
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
+import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.world.entity.player.Player;
 
@@ -13,7 +13,7 @@ public interface KeyboardInputFunctions {
 
 		KeyboardInput input = (KeyboardInput) this;
 
-		if (player.hasEffect(ModEffects.COLLAPSE)) {
+		if (player.hasEffect(ModMobEffects.COLLAPSE)) {
 			input.leftImpulse = -input.leftImpulse;
 			input.forwardImpulse = -input.forwardImpulse;
 		}

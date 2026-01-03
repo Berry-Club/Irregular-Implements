@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil;
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig;
-import dev.aaronhowser.mods.irregular_implements.registry.ModEffects;
+import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects;
 import net.minecraft.client.MouseHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +27,7 @@ abstract public class MouseHandlerMixin {
 		if (!ClientConfig.CONFIG.collapseInvertsMouse.get()) return;
 
 		var player = AaronClientUtil.getLocalPlayer();
-		if (player == null || !player.hasEffect(ModEffects.COLLAPSE)) return;
+		if (player == null || !player.hasEffect(ModMobEffects.COLLAPSE)) return;
 
 		accumulatedDX = -accumulatedDX;
 		accumulatedDY = -accumulatedDY;

@@ -11,7 +11,7 @@ object ModRegistries {
 		ModBlocks.BLOCK_REGISTRY,
 		ModBlockEntityTypes.BLOCK_ENTITY_REGISTRY,
 		ModCreativeModeTabs.TABS_REGISTRY,
-		ModEffects.EFFECT_REGISTRY,
+		ModMobEffects.EFFECT_REGISTRY,
 		ModEntityTypes.ENTITY_TYPE_REGISTRY,
 		ModSounds.SOUND_EVENT_REGISTRY,
 		ModArmorMaterials.ARMOR_MATERIAL_REGISTRY,

@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 import java.awt.Color
 import java.util.function.Supplier
 
-object ModEffects {
+object ModMobEffects {
 
 	val EFFECT_REGISTRY: DeferredRegister<MobEffect> =
 		DeferredRegister.create(Registries.MOB_EFFECT, IrregularImplements.MOD_ID)

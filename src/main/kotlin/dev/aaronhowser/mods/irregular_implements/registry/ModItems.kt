@@ -170,17 +170,17 @@ object ModItems : AaronItemRegistry() {
 
 	// Imbues
 	val FIRE_IMBUE: DeferredItem<ImbueItem> =
-		registerImbue("imbue_fire", ModEffects.FIRE_IMBUE)
+		registerImbue("imbue_fire", ModMobEffects.FIRE_IMBUE)
 	val POISON_IMBUE: DeferredItem<ImbueItem> =
-		registerImbue("imbue_poison", ModEffects.POISON_IMBUE)
+		registerImbue("imbue_poison", ModMobEffects.POISON_IMBUE)
 	val EXPERIENCE_IMBUE: DeferredItem<ImbueItem> =
-		registerImbue("imbue_experience", ModEffects.EXPERIENCE_IMBUE)
+		registerImbue("imbue_experience", ModMobEffects.EXPERIENCE_IMBUE)
 	val WITHER_IMBUE: DeferredItem<ImbueItem> =
-		registerImbue("imbue_wither", ModEffects.WITHER_IMBUE)
+		registerImbue("imbue_wither", ModMobEffects.WITHER_IMBUE)
 	val COLLAPSE_IMBUE: DeferredItem<ImbueItem> =
-		registerImbue("imbue_collapse", ModEffects.COLLAPSE_IMBUE)
+		registerImbue("imbue_collapse", ModMobEffects.COLLAPSE_IMBUE)
 	val SPECTRE_IMBUE: DeferredItem<ImbueItem> =
-		registerImbue("imbue_spectre", ModEffects.SPECTRE_IMBUE)
+		registerImbue("imbue_spectre", ModMobEffects.SPECTRE_IMBUE)
 
 	// Spectre
 	val SPECTRE_ILLUMINATOR: DeferredItem<SpectreIlluminatorItem> =
