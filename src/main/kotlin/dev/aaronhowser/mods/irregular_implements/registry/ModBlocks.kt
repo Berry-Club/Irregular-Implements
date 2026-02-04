@@ -114,16 +114,16 @@ object ModBlocks : AaronBlockRegistry() {
 	// Glass
 	val TRIGGER_GLASS: DeferredBlock<TriggerGlassBlock> =
 		registerBlock("trigger_glass", ::TriggerGlassBlock)
-	val LAPIS_GLASS: DeferredBlock<PermeableGlassBlock> =
+	val LAPIS_GLASS: DeferredBlock<SemiPermeableGlassBlock> =
 		registerBlock("lapis_glass") {
-			PermeableGlassBlock(
+			SemiPermeableGlassBlock(
 				isSolidForMobsOnly = false,
 				Properties.ofFullCopy(Blocks.BLUE_STAINED_GLASS)
 			)
 		}
-	val QUARTZ_GLASS: DeferredBlock<PermeableGlassBlock> =
+	val QUARTZ_GLASS: DeferredBlock<SemiPermeableGlassBlock> =
 		registerBlock("quartz_glass") {
-			PermeableGlassBlock(
+			SemiPermeableGlassBlock(
 				isSolidForMobsOnly = true,
 				Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS)
 			)

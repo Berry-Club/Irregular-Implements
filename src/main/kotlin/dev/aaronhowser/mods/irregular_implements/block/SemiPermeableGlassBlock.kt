@@ -12,7 +12,7 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 //FIXME: Update texture
-class PermeableGlassBlock(
+class SemiPermeableGlassBlock(
 	isSolidForMobsOnly: Boolean,
 	properties: Properties
 ) : TransparentBlock(properties) {
