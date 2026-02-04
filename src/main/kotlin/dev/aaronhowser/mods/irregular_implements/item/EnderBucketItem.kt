@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
@@ -90,7 +89,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 		val HAS_FLUID: ResourceLocation = OtherUtil.modResource("has_fluid")
 		fun getHasFluidPredicate(
 			stack: ItemStack,
-			localLevel: ClientLevel?,
+			localLevel: Level?,
 			holdingEntity: LivingEntity?,
 			int: Int
 		): Float {

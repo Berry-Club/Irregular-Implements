@@ -4,9 +4,7 @@ import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Com
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMiscLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import net.minecraft.core.Holder
 import net.minecraft.core.HolderSet
-import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponentMap
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext

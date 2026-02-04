@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -19,8 +18,6 @@ import net.minecraft.world.level.block.grower.TreeGrower
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
-import net.neoforged.neoforge.common.ItemAbilities
-import net.neoforged.neoforge.common.ItemAbility
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent
 import java.util.*
 

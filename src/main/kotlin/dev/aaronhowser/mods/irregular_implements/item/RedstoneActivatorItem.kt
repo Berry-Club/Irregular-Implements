@@ -7,7 +7,6 @@ import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.Redston
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.ChatFormatting
-import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
@@ -100,7 +99,7 @@ class RedstoneActivatorItem(properties: Properties) : Item(properties) {
 
 		fun getDurationFloat(
 			stack: ItemStack,
-			localLevel: ClientLevel?,
+			localLevel: Level?,
 			holdingEntity: LivingEntity?,
 			int: Int
 		): Float {

@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
-import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.Direction
 import net.minecraft.core.Position
 import net.minecraft.network.chat.Component
@@ -100,7 +99,7 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 
 		fun getWeatherFloat(
 			stack: ItemStack,
-			localLevel: ClientLevel?,
+			localLevel: Level?,
 			holdingEntity: LivingEntity?,
 			int: Int
 		): Float {

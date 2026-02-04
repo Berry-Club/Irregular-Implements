@@ -10,6 +10,7 @@
 ### Fixed
 
 - Hopefully fixed a memory leak involving Chat Detectors (#45)
+- Removed ClientLevel from some method signatures, to prevent possible crashes when loaded on servers
 
 # 1.10.0
 

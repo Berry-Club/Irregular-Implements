@@ -7,7 +7,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreEnergyHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
-import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Unit
@@ -121,7 +120,7 @@ class SpectreChargerItem(
 
 		fun getEnabledForPredicate(
 			stack: ItemStack,
-			localLevel: ClientLevel?,
+			localLevel: Level?,
 			holdingEntity: LivingEntity?,
 			int: Int
 		): Float {

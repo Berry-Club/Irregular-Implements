@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 import dev.aaronhowser.mods.aaron.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponentMap
 import net.minecraft.util.Unit

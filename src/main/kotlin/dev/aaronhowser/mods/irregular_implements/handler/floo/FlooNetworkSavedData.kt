@@ -50,7 +50,7 @@ class FlooNetworkSavedData : SavedData() {
 
 		val maxDistance = ServerConfig.CONFIG.flooNameMaxDistance.get()
 
-		val nearest =  fireplacesWithNames.map { it to Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
+		val nearest = fireplacesWithNames.map { it to Levenshtein.distance(it.name!!.lowercase(), name.lowercase()) }
 			.filter { it.second <= maxDistance }
 			.minByOrNull { it.second }
 

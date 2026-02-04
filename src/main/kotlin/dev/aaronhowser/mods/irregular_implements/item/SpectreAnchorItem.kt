@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModAttachmentTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
-import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.ChatFormatting
 import net.minecraft.util.Unit
 import net.minecraft.world.entity.player.Player

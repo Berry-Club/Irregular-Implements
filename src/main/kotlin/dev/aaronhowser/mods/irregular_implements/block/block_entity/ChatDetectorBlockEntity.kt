@@ -26,7 +26,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.ServerChatEvent
-import org.openjdk.nashorn.internal.WeakValueCache
 import java.util.*
 
 class ChatDetectorBlockEntity(
