@@ -115,9 +115,11 @@ class ImbuingRecipe(
 
 	companion object {
 		fun getRecipe(level: Level, input: ImbuingInput): ImbuingRecipe? {
-			return level.recipeManager.getAllRecipesFor(ModRecipeTypes.IMBUING.get()).find { recipeHolder ->
-				recipeHolder.value.matches(input, level)
-			}?.value
+			return getAllRecipes(level.recipeManager)
+				.firstOrNull { recipeHolder ->
+					recipeHolder.value.matches(input, level)
+				}
+				?.value
 		}
 
 		fun hasRecipe(level: Level, input: ImbuingInput): Boolean {
