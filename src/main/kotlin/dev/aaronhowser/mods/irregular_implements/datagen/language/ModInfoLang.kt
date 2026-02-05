@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.registries.BuiltInRegistries

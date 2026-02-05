@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.datagen.language
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue
 
 object ModConfigLang {

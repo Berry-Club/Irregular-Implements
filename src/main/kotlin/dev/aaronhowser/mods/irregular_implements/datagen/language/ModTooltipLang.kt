@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component

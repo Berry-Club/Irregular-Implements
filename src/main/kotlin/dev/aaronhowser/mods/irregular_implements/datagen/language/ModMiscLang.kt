@@ -1,7 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
-
 object ModMiscLang {
 
 	const val MAGNETIC_NAME = "enchantment.irregular_implements.magnetic"

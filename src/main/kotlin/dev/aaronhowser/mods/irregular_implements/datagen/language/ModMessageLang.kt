@@ -1,7 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
-
 object ModMessageLang {
 
 	const val ENDER_BRIDGE_ITERATIONS = "message.irregular_implements.ender_bridge.iterations"

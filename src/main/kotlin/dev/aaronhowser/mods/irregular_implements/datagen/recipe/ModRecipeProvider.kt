@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import vazkii.patchouli.api.PatchouliAPI
 import java.util.concurrent.CompletableFuture
-import kotlin.collections.iterator
 
 class ModRecipeProvider(
 	output: PackOutput,
