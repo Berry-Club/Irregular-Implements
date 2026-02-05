@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.neoforged.fml.ModList

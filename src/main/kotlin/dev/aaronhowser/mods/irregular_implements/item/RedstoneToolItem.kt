@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.status
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.RedstoneToolLinkable
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.GlobalPos

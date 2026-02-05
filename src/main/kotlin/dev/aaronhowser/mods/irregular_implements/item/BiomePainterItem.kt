@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.aaron.AaronExtensions.status
 import dev.aaronhowser.mods.irregular_implements.client.render.BiomePainterRenderer
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.packet.client_to_server.PaintBiomePacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

@@ -1,9 +1,8 @@
-package dev.aaronhowser.mods.irregular_implements.datagen
+package dev.aaronhowser.mods.irregular_implements.datagen.recipe
 
 import dev.aaronhowser.mods.aaron.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.aaron.datagen.AaronRecipeProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ImbuingRecipeBuilder
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.GrassSeedItem
@@ -29,6 +28,7 @@ import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import vazkii.patchouli.api.PatchouliAPI
 import java.util.concurrent.CompletableFuture
+import kotlin.collections.iterator
 
 class ModRecipeProvider(
 	output: PackOutput,

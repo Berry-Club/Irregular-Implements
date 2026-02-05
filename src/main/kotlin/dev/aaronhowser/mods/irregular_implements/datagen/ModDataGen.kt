@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModifierProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModLootTableProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.model.ModItemModelProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.recipe.ModRecipeProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator

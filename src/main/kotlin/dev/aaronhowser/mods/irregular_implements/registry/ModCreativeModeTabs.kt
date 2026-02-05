@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.ModLanguageProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
 
 object ModEffectLang {
