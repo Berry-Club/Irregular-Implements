@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-20T18:29:54.3877683	Patchouli Book: guide
+// 1.21.1	2026-02-05T05:35:43.6476677	Patchouli Book: guide
 499ebafb29413d6516de2dede0e2c14e0f789b8a assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks.json
 ab7eafb3b171ef0fb63c92bac65537aff503036e assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/plates.json
 d3ab0269b63f310a0cdb5fac280d305eb345b997 assets/irregular_implements/patchouli_books/guide/en_us/categories/blocks/redstone.json
@@ -69,7 +69,7 @@ cb5c1c805526893679a3a3a5ecd60571ba42ab1b assets/irregular_implements/patchouli_b
 19c10c721e398fc2fc8cf1addb355b256c923a1d assets/irregular_implements/patchouli_books/guide/en_us/entries/items/block_replacer.json
 0c68147d0ce66fceaf293ba7ad83daba07afdf7b assets/irregular_implements/patchouli_books/guide/en_us/entries/items/bottle_of_air.json
 8f9aca54c4298c052878ed35ac536ca49d28f3c6 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/chunk_analyzer.json
-77be0c54cebdcf2da16ce7183e39748cd1a9f72f assets/irregular_implements/patchouli_books/guide/en_us/entries/items/divining_rod.json
+00a2099315913a4dcd84bc6a8507f4d6e4e70860 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/divining_rod.json
 526b941407d19a08bd6135ce6d84b81c032c51f4 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/drop_filter.json
 a1ad72a653ddc27a14e38f1343d0528faba11855 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/ectoplasm.json
 14de3f47eeffce7ea85559c1216b45bd56b5e196 assets/irregular_implements/patchouli_books/guide/en_us/entries/items/emerald_compass.json

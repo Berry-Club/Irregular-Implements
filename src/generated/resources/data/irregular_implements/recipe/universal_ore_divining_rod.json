@@ -1,143 +1,143 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"category": "misc",
-	"key": {
-		"C": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/coal",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"D": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/diamond",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"E": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/emerald",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"G": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/gold",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"I": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/iron",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"L": {
-			"tag": "c:slime_balls"
-		},
-		"P": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/lapis",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"R": {
-			"type": "neoforge:components",
-			"components": {
-				"irregular_implements:block_tag": "c:ores/redstone",
-				"minecraft:attribute_modifiers": {
-					"modifiers": []
-				},
-				"minecraft:enchantments": {
-					"levels": {}
-				},
-				"minecraft:lore": [],
-				"minecraft:max_stack_size": 1,
-				"minecraft:rarity": "common",
-				"minecraft:repair_cost": 0
-			},
-			"items": "irregular_implements:divining_rod"
-		},
-		"S": {
-			"item": "minecraft:stick"
-		}
-	},
-	"pattern": [
-		"CSD",
-		"ILE",
-		"GPR"
-	],
-	"result": {
-		"components": {
-			"irregular_implements:block_tag": "c:ores"
-		},
-		"count": 1,
-		"id": "irregular_implements:divining_rod"
-	}
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/coal",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "D": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/diamond",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "E": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/emerald",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "G": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/gold",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "I": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/iron",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "L": {
+      "tag": "c:slime_balls"
+    },
+    "P": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/lapis",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "R": {
+      "type": "neoforge:components",
+      "components": {
+        "irregular_implements:divine_blocks": "c:ores/redstone",
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "common",
+        "minecraft:repair_cost": 0
+      },
+      "items": "irregular_implements:divining_rod"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "CSD",
+    "ILE",
+    "GPR"
+  ],
+  "result": {
+    "components": {
+      "irregular_implements:divine_blocks": "c:ores"
+    },
+    "count": 1,
+    "id": "irregular_implements:divining_rod"
+  }
 }

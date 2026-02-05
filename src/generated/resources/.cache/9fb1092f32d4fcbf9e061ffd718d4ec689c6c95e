@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-21T19:02:34.8799062	Recipes
+// 1.21.1	2026-02-05T05:35:43.6497887	Recipes
 0f2acc6f69abec732b4f9eb63dd86b41b3eb58d6 data/irregular_implements/advancement/recipes/imbuing/imbuing/collapse_imbue.json
 4fde374f75ca6a0102aa57cd63c8671d9ecef8e0 data/irregular_implements/advancement/recipes/imbuing/imbuing/energized_water.json
 41a2f9838cee3419c6cd1d445d74b90a7bde6c2e data/irregular_implements/advancement/recipes/imbuing/imbuing/experience_imbue.json
@@ -482,7 +482,7 @@ cb6432ab10cbea2e6f6d7abf11231d0ba2b8cf1e data/irregular_implements/recipe/transl
 4e11d8d108aec9ff0ae990ce6c9bde858e098a63 data/irregular_implements/recipe/translucent_luminous_block_white.json
 d4ca7a1723ca6021de8e5851d2e60be3731a3cde data/irregular_implements/recipe/translucent_luminous_block_yellow.json
 64c9b29db0e05a868902cb9d1217d1e6e05c38b6 data/irregular_implements/recipe/trigger_glass.json
-797888fbba4f987021b925b960771f3cf9b6052e data/irregular_implements/recipe/universal_ore_divining_rod.json
+8411cedb74c68e94f40e5d33f1a27ef6ab74ec14 data/irregular_implements/recipe/universal_ore_divining_rod.json
 b4c8205a0bbb9226dad3c1bb96f9a174aa79ac49 data/irregular_implements/recipe/voiding_drop_filter.json
 30230af9dfd02f3f04d7d6ca9f1d9321f5072fc8 data/irregular_implements/recipe/void_stone.json
 05dca021d75fd34335eaef07326af70c9bab9a1c data/irregular_implements/recipe/warped_platform.json
