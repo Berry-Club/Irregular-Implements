@@ -45,7 +45,7 @@ class ModRecipeProvider(
 	}
 
 	private fun shapedRecipes(recipeOutput: RecipeOutput) {
-		val recipes: List<ShapedRecipeBuilder> = listOf(
+		val recipes= listOf(
 			shapedRecipe(
 				ModBlocks.ENERGY_DISTRIBUTOR,
 				"IRI,BWB,IRI",
