@@ -1312,29 +1312,6 @@ class ModRecipeProvider(
 		}
 	}
 
-	private fun shapelessRecipe(
-		output: ItemLike,
-		count: Int,
-		requirements: List<IngredientType>,
-		unlockedByName: String = "has_log",
-		unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
-	): ShapelessRecipeBuilder {
-		var temp = ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, count)
-
-		for (requirement in requirements) {
-			temp = temp.requires(requirement.getIngredient())
-		}
-
-		return temp.unlockedBy(unlockedByName, unlockedByCriterion)
-	}
-
-	private fun shapelessRecipe(
-		output: ItemLike,
-		requirements: List<IngredientType>,
-		unlockedByName: String = "has_log",
-		unlockedByCriterion: Criterion<*> = has(ItemTags.LOGS)
-	) = shapelessRecipe(output, 1, requirements, unlockedByName, unlockedByCriterion)
-
 	private fun platforms(recipeOutput: RecipeOutput) {
 		val platformIngredientMap = mapOf(
 			ModBlocks.OAK_PLATFORM to Items.OAK_PLANKS,
