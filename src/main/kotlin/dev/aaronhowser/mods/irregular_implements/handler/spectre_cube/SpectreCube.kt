@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks

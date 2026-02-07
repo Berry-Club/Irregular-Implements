@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.getDirectionName
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDirectionName
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock

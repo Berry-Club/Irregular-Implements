@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import dev.aaronhowser.mods.aaron.AaronExtraCodecs
+import dev.aaronhowser.mods.aaron.serialization.AaronExtraCodecs
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.NonNullList

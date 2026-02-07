@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
-import dev.aaronhowser.mods.aaron.weakMutableSet
+import dev.aaronhowser.mods.aaron.misc.weakMutableSet
 import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu

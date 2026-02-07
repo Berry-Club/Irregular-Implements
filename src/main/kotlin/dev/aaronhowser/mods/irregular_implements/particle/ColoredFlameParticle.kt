@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.particle
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.nextRange
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.nextRange
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
 

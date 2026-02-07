@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.getDyeName
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDyeName
 import dev.aaronhowser.mods.aaron.registry.AaronBlockRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
-import dev.aaronhowser.mods.aaron.AaronExtraCodecs
+import dev.aaronhowser.mods.aaron.serialization.AaronExtraCodecs
 import dev.aaronhowser.mods.aaron.packet.AaronPacket
 import dev.aaronhowser.mods.irregular_implements.registry.ModParticleTypes
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil

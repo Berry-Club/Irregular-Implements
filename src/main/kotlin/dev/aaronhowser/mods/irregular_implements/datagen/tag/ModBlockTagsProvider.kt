@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.tag
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.getDyeName
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDyeName
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil

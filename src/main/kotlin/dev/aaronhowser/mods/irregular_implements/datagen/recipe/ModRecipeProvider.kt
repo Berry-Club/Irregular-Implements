@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.recipe
 
-import dev.aaronhowser.mods.aaron.AaronExtensions.getAsStack
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.aaron.datagen.AaronRecipeProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
