@@ -138,26 +138,26 @@ class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entit
 			val endRodState = level.getBlockState(endRodPos)
 			if (!endRodState.isBlock(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
 
-			if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
+			if (!level.getBlockState(endRodPos.above()).isBlock(Tags.Blocks.END_STONES)) return false
 
 			for (dX in -1..1) for (dZ in -1..1) {
 				val posThere = entityCenterPos.offset(dX, 0, dZ)
 
 				val isAir = level.getBlockState(posThere).isAir
-				val isAboveEndStone = level.getBlockState(posThere.below()).`is`(Tags.Blocks.END_STONES)
+				val isAboveEndStone = level.getBlockState(posThere.below()).isBlock(Tags.Blocks.END_STONES)
 
 				if (!isAir || !isAboveEndStone) return false
 
 				if (dX != 0) {
 					val posDx = posThere.offset(dX, 0, 0)
 					val stateDx = level.getBlockState(posDx)
-					if (!stateDx.`is`(Tags.Blocks.OBSIDIANS)) return false
+					if (!stateDx.isBlock(Tags.Blocks.OBSIDIANS)) return false
 				}
 
 				if (dZ != 0) {
 					val posDz = posThere.offset(0, 0, dZ)
 					val stateDz = level.getBlockState(posDz)
-					if (!stateDz.`is`(Tags.Blocks.OBSIDIANS)) return false
+					if (!stateDz.isBlock(Tags.Blocks.OBSIDIANS)) return false
 				}
 			}
 

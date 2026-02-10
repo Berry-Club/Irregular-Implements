@@ -1,10 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.mojang.authlib.GameProfile
+import dev.aaronhowser.mods.aaron.entity.BetterFakePlayerFactory
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.giveOrDropStack
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
-import dev.aaronhowser.mods.aaron.entity.BetterFakePlayerFactory
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -316,13 +317,13 @@ class BlockBreakerBlockEntity(
 					.flatMap { (enchantHolder, level) ->
 						enchantHolder.value().effects()
 							.get(EnchantmentEffectComponents.ATTRIBUTES)
-							?.filter { it.attribute.`is`(attribute) }
+							?.filter { it.attribute.isHolder(attribute) }
 							?.map { it.getModifier(level, EquipmentSlot.MAINHAND) }
 							?: emptyList()
 					}
 
 				val stackModifiers = itemStack.attributeModifiers.modifiers
-					.filter { it.slot.test(EquipmentSlot.MAINHAND) && it.attribute.`is`(attribute) }
+					.filter { it.slot.test(EquipmentSlot.MAINHAND) && it.attribute.isHolder(attribute) }
 					.map { it.modifier }
 
 				return enchantmentModifiers + stackModifiers

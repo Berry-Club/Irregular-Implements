@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.nextRange
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
@@ -133,7 +134,7 @@ class NatureCoreBlockEntity(
 		val filtered = entitiesThatCanSpawnHere
 			.unwrap()
 			.filterNot {
-				it.type.`is`(ModEntityTypeTagsProvider.NATURE_CORE_IMMUNE)
+				it.type.isEntity(ModEntityTypeTagsProvider.NATURE_CORE_IMMUNE)
 			}
 
 		if (filtered.isEmpty()) return

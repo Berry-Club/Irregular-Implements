@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
@@ -21,7 +22,7 @@ class DiviningRodRecipe(
 		val oreTag = getOreTag(input) ?: return false
 		if (input.width() < 3 || input.height() < 3) return false
 
-		val oresMatch = ORE_SLOTS.all { input.getItem(it).`is`(oreTag) }
+		val oresMatch = ORE_SLOTS.all { input.getItem(it).isItem(oreTag) }
 		val sticksMatch = STICK_SLOTS.all { STICKS_INGREDIENT.test(input.getItem(it)) }
 		val eyeMatch = EYE_SLOTS.all { EYE_INGREDIENT.test(input.getItem(it)) }
 
@@ -59,7 +60,7 @@ class DiviningRodRecipe(
 			return topLeftStack.tags
 				.filter { tag ->
 					tag.location.toString().startsWith("c:ores/")
-							&& topRightStack.`is`(tag)
+							&& topRightStack.isItem(tag)
 				}
 				.findFirst()
 				.getOrNull()

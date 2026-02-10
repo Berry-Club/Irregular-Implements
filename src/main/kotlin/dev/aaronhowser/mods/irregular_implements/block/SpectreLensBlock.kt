@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpectreLensBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -27,7 +28,7 @@ class SpectreLensBlock : EntityBlock, TransparentBlock(Properties.ofFullCopy(Blo
 	}
 
 	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-		return level.getBlockState(pos.below()).`is`(Blocks.BEACON)
+		return level.getBlockState(pos.below()).isBlock(Blocks.BEACON)
 	}
 
 	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {

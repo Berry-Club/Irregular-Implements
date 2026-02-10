@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticleOptions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -139,7 +140,7 @@ class BiomeRadarBlockEntity(
 	): BlockPos? {
 		return biomeCache.getOrPut(targetBiome) {
 			level.findClosestBiome3d(
-				Predicate { it.`is`(targetBiome) },
+				Predicate { it.isHolder(targetBiome) },
 				searchFrom,
 				ServerConfig.CONFIG.biomeRadarSearchRadius.get(),
 				ServerConfig.CONFIG.biomeRadarHorizontalStep.get(),

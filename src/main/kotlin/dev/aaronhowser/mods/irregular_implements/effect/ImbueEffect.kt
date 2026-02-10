@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.effect
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isDamageSource
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
 import net.minecraft.tags.DamageTypeTags
@@ -37,7 +38,7 @@ class ImbueEffect(
 			val damageSource = event.source
 
 			if (!damageSource.isDirect) return
-			if (!damageSource.`is`(DamageTypes.MOB_ATTACK) && !damageSource.`is`(DamageTypes.PLAYER_ATTACK)) return
+			if (!damageSource.isDamageSource(DamageTypes.MOB_ATTACK) && !damageSource.isDamageSource(DamageTypes.PLAYER_ATTACK)) return
 
 			val attacker = event.source.entity as? LivingEntity ?: return
 			val target = event.entity
@@ -64,9 +65,9 @@ class ImbueEffect(
 			val entity = event.entity
 			val damageSource = event.source
 
-			if (damageSource.`is`(DamageTypeTags.BYPASSES_EFFECTS)
-				|| damageSource.`is`(DamageTypeTags.BYPASSES_RESISTANCE)
-				|| damageSource.`is`(DamageTypeTags.BYPASSES_INVULNERABILITY)
+			if (damageSource.isDamageSource(DamageTypeTags.BYPASSES_EFFECTS)
+				|| damageSource.isDamageSource(DamageTypeTags.BYPASSES_RESISTANCE)
+				|| damageSource.isDamageSource(DamageTypeTags.BYPASSES_INVULNERABILITY)
 			) return
 
 			if (entity.hasEffect(ModMobEffects.SPECTRE_IMBUE)

@@ -98,7 +98,7 @@ object FluidWalkingHandler {
 
 		val bootWasResponsible = bootArmor
 			.getOrDefault(ModDataComponents.CAN_STAND_ON_FLUIDS, emptyList())
-			.any { fluidBelow.`is`(it) }
+			.any { fluidBelow.isFluid(it) }
 
 		return if (bootWasResponsible) {
 			ModMessageLang.FLUID_FALL_DEATH_BOOT.toComponent(

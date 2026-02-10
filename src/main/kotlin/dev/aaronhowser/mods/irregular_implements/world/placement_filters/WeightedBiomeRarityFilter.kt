@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.world.placement_filters
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.irregular_implements.registry.ModPlacementModifierTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
@@ -29,7 +30,7 @@ data class WeightedBiomeRarityFilter(
 		var chanceMult = this.basePoints
 
 		for ((tag, points) in pointsPerBiomeTag) {
-			if (biome.`is`(tag)) chanceMult += points
+			if (biome.isHolder(tag)) chanceMult += points
 		}
 
 		return random.nextInt(this.chanceFactor * chanceMult) == 0

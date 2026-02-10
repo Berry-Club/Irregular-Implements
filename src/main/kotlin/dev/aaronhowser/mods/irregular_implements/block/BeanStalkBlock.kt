@@ -32,7 +32,7 @@ class BeanStalkBlock(
 	override fun onPlace(state: BlockState, level: Level, pos: BlockPos, oldState: BlockState, movedByPiston: Boolean) {
 		super.onPlace(state, level, pos, oldState, movedByPiston)
 
-		if (!level.getBlockState(pos.below()).`is`(this)) {
+		if (!level.getBlockState(pos.below()).isBlock(this)) {
 			level.scheduleTick(pos, this, 5)
 		}
 	}
@@ -94,7 +94,7 @@ class BeanStalkBlock(
 	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
 		val stateBelow = level.getBlockState(pos.below())
 
-		return stateBelow.`is`(this) || stateBelow.isBlock(BlockTags.DIRT)
+		return stateBelow.isBlock(this) || stateBelow.isBlock(BlockTags.DIRT)
 	}
 
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {

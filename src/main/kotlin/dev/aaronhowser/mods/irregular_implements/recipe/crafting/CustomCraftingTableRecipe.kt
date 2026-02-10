@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -22,7 +23,7 @@ class CustomCraftingTableRecipe(
 	override fun matches(input: CraftingInput, level: Level): Boolean {
 		if (input.width() < 3 || input.height() < 3) return false
 
-		val centerIsCraftingTable = input.getItem(CRAFTING_TABLE_SLOT).`is`(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+		val centerIsCraftingTable = input.getItem(CRAFTING_TABLE_SLOT).isItem(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
 		if (!centerIsCraftingTable) return false
 
 		val baseStack = input.getItem(BASE_SLOTS.first())
@@ -30,7 +31,7 @@ class CustomCraftingTableRecipe(
 		val plankStackValid = BASE_INGREDIENT.test(baseStack) && baseStack.item is BlockItem
 		if (!plankStackValid) return false
 
-		return BASE_SLOTS.all { input.getItem(it).`is`(baseStack.item) }
+		return BASE_SLOTS.all { input.getItem(it).isItem(baseStack.item) }
 	}
 
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {

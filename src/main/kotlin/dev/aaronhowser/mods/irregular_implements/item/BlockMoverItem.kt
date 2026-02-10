@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -72,7 +73,7 @@ class BlockMoverItem(properties: Properties) : Item(properties) {
 		fun handleEntityJoinLevel(event: EntityJoinLevelEvent) {
 			val entity = event.entity
 
-			if (blockMoverPreventingContainerDrops && entity.type.`is`(ModEntityTypeTagsProvider.NOT_DROPPED_WHEN_MOVING_BLOCKS)) {
+			if (blockMoverPreventingContainerDrops && entity.type.isEntity(ModEntityTypeTagsProvider.NOT_DROPPED_WHEN_MOVING_BLOCKS)) {
 				entity.discard()
 				event.isCanceled = true
 			}

@@ -146,7 +146,7 @@ object CommonEvents {
 		val left = event.left
 		val right = event.right
 
-		if (left.isItem(ModItems.OBSIDIAN_SKULL) && right.`is`(Items.FIRE_CHARGE)) {
+		if (left.isItem(ModItems.OBSIDIAN_SKULL) && right.isItem(Items.FIRE_CHARGE)) {
 			event.cost = 10
 			event.materialCost = 1
 			event.output = ModItems.OBSIDIAN_SKULL_RING.toStack()

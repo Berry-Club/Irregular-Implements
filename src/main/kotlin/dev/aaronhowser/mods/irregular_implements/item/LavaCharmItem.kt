@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isDamageSource
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -58,7 +59,7 @@ class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 		}
 
 		fun tryBlockLavaDamage(event: LivingIncomingDamageEvent) {
-			if (event.isCanceled || !event.source.`is`(DamageTypes.LAVA)) return
+			if (event.isCanceled || !event.source.isDamageSource(DamageTypes.LAVA)) return
 
 			val entity = event.entity
 

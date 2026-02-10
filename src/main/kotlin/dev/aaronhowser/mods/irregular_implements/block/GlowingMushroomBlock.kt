@@ -49,7 +49,7 @@ class GlowingMushroomBlock : NoCodecBushBlock(Properties.ofFullCopy(Blocks.RED_M
 		)
 
 		for (checkPos in area) {
-			if (level.getBlockState(checkPos).`is`(this)) {
+			if (level.getBlockState(checkPos).isBlock(this)) {
 				if (++mushroomsNearby >= 5) {
 					return
 				}
