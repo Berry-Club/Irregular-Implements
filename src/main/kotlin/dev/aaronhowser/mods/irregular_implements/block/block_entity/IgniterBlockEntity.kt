@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.igniter.IgniterMenu
@@ -125,7 +126,7 @@ class IgniterBlockEntity(
 			val targetPos = igniterPos.relative(facing)
 			val targetState = level.getBlockState(targetPos)
 
-			if (targetState.`is`(BlockTags.FIRE)) {
+			if (targetState.isBlock(BlockTags.FIRE)) {
 				level.removeBlock(targetPos, false)
 			}
 		}

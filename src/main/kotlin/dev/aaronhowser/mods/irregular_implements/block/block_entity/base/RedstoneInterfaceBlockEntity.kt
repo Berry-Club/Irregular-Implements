@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity.base
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
@@ -31,7 +32,7 @@ abstract class RedstoneInterfaceBlockEntity(
 
 		if (level.isLoaded(pos)) {
 			val linkedState = level.getBlockState(pos)
-			if (linkedState.`is`(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) {
+			if (linkedState.isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) {
 				return
 			}
 
@@ -91,7 +92,7 @@ abstract class RedstoneInterfaceBlockEntity(
 			val interfaces = linkedPositions[globalPos] ?: return -1
 			val filtered = interfaces.filter {
 				level.isLoaded(it)
-						&& !level.getBlockState(it).`is`(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)
+						&& !level.getBlockState(it).isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)
 			}
 
 			if (filtered.isEmpty()) return -1

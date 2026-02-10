@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getMinimalTag
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isEntity
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -30,7 +31,7 @@ class SummoningPendulumItem(properties: Properties) : Item(properties) {
 		usedHand: InteractionHand
 	): InteractionResult {
 		if (player.level().isClientSide
-			|| interactionTarget.type.`is`(ModEntityTypeTagsProvider.SUMMONING_PENDULUM_BLACKLIST)
+			|| interactionTarget.type.isEntity(ModEntityTypeTagsProvider.SUMMONING_PENDULUM_BLACKLIST)
 		) return InteractionResult.PASS
 
 		val entityList = usedStack

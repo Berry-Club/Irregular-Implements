@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.NotificationInterfaceBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
@@ -71,7 +72,7 @@ class NotificationInterfaceBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.`is`(newState.block)) {
+		if (!state.isBlock(newState.block)) {
 			val be = level.getBlockEntity(pos)
 			if (be is NotificationInterfaceBlockEntity) {
 				Containers.dropContents(level, pos, be.container)

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
 import dev.aaronhowser.mods.aaron.entity.BetterFakePlayerFactory
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
@@ -145,19 +146,19 @@ object CommonEvents {
 		val left = event.left
 		val right = event.right
 
-		if (left.`is`(ModItems.OBSIDIAN_SKULL) && right.`is`(Items.FIRE_CHARGE)) {
+		if (left.isItem(ModItems.OBSIDIAN_SKULL) && right.`is`(Items.FIRE_CHARGE)) {
 			event.cost = 10
 			event.materialCost = 1
 			event.output = ModItems.OBSIDIAN_SKULL_RING.toStack()
 		}
 
-		if (left.`is`(ModItems.WATER_WALKING_BOOTS) && (right.`is`(ModItems.OBSIDIAN_SKULL) || right.`is`(ModItems.OBSIDIAN_SKULL_RING))) {
+		if (left.isItem(ModItems.WATER_WALKING_BOOTS) && (right.isItem(ModItems.OBSIDIAN_SKULL) || right.isItem(ModItems.OBSIDIAN_SKULL_RING))) {
 			event.cost = 10
 			event.materialCost = 1
 			event.output = ModItems.OBSIDIAN_WATER_WALKING_BOOTS.toStack()
 		}
 
-		if (left.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS) && right.`is`(ModItems.LAVA_CHARM)) {
+		if (left.isItem(ModItems.OBSIDIAN_WATER_WALKING_BOOTS) && right.isItem(ModItems.LAVA_CHARM)) {
 			event.cost = 15
 			event.materialCost = 1
 			event.output = ModItems.LAVA_WADERS.toStack()

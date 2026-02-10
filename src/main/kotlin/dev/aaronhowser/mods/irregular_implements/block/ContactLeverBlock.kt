@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -64,7 +65,7 @@ class ContactLeverBlock : Block(
 				val blockPos = pos.relative(direction)
 				val blockState = level.getBlockState(blockPos)
 
-				if (!blockState.`is`(ModBlocks.CONTACT_LEVER.get())) continue
+				if (!blockState.isBlock(ModBlocks.CONTACT_LEVER.get())) continue
 				if (blockState.getValue(FACING) != direction.opposite) continue
 
 				pull(level, blockPos, blockState)

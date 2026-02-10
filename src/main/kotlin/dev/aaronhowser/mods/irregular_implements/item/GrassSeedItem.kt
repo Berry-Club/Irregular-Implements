@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -31,8 +32,8 @@ class GrassSeedItem(
 		val level = context.level
 
 		val clickedState = level.getBlockState(clickedPos)
-		if (clickedState.`is`(resultBlock)
-			|| !clickedState.`is`(ModBlockTagsProvider.GRASS_SEEDS_COMPATIBLE)
+		if (clickedState.isBlock(resultBlock)
+			|| !clickedState.isBlock(ModBlockTagsProvider.GRASS_SEEDS_COMPATIBLE)
 		) return InteractionResult.PASS
 
 		level.setBlockAndUpdate(clickedPos, resultBlock.defaultBlockState())

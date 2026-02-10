@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.nextRange
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -66,12 +68,12 @@ class NatureCoreBlockEntity(
 			val blockStateThere = level.getBlockState(pos)
 			attempts++
 
-			val foundSand = blockStateThere.`is`(BlockTags.SAND)
-					&& !blockStateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
+			val foundSand = blockStateThere.isBlock(BlockTags.SAND)
+					&& !blockStateThere.isBlock(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
 		} while (foundSand && attempts < 50)
 
 		val stateThere = level.getBlockState(pos)
-		if (stateThere.`is`(BlockTags.SAND) && !stateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)) {
+		if (stateThere.isBlock(BlockTags.SAND) && !stateThere.isBlock(ModBlockTagsProvider.NATURE_CORE_IMMUNE)) {
 			val belowAir = level.isEmptyBlock(pos.above())
 			val place = if (belowAir) Blocks.GRASS_BLOCK else Blocks.DIRT
 
@@ -110,14 +112,14 @@ class NatureCoreBlockEntity(
 			attempts++
 
 			val foundValidSpot = !blockStateThere.getCollisionShape(level, pos).isEmpty
-					|| !fluidStateThere.isEmpty && !fluidStateThere.`is`(Fluids.WATER)
+					|| !fluidStateThere.isEmpty && !fluidStateThere.isFluid(Fluids.WATER)
 		} while (foundValidSpot && attempts < 50)
 
 		while (level.isEmptyBlock(pos) && level.isEmptyBlock(pos.below())) {
 			pos.move(Direction.DOWN)
 		}
 
-		val isUnderWater = level.getFluidState(pos).`is`(Fluids.WATER)
+		val isUnderWater = level.getFluidState(pos).isFluid(Fluids.WATER)
 		val mobCategory = if (isUnderWater) {
 			if (level.random.nextBoolean()) MobCategory.WATER_AMBIENT else MobCategory.WATER_CREATURE
 		} else {
@@ -165,7 +167,7 @@ class NatureCoreBlockEntity(
 			attempts++
 
 			val blockThere = blockStateThere.block
-			val success = !blockStateThere.`is`(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
+			val success = !blockStateThere.isBlock(ModBlockTagsProvider.NATURE_CORE_IMMUNE)
 					&& blockThere is BonemealableBlock
 					&& blockThere.isValidBonemealTarget(level, pos, blockStateThere)
 					&& blockThere.isBonemealSuccess(level, level.random, pos, blockStateThere)
@@ -201,7 +203,7 @@ class NatureCoreBlockEntity(
 			.filter {
 				val state = it.defaultBlockState()
 
-				state.`is`(ModBlockTagsProvider.NATURE_CORE_POSSIBLE_SAPLINGS)
+				state.isBlock(ModBlockTagsProvider.NATURE_CORE_POSSIBLE_SAPLINGS)
 						&& state.canSurvive(level, pos)
 			}
 

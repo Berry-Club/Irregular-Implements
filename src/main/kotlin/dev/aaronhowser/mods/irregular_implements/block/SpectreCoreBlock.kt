@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.handler.spectre_cube.SpectreCubeSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -35,7 +36,7 @@ class SpectreCoreBlock : Block(
 
 		val handler = SpectreCubeSavedData.get(level)
 
-		if (stack.`is`(ModItems.ECTOPLASM)) {
+		if (stack.isItem(ModItems.ECTOPLASM)) {
 			val cube = handler.getSpectreCubeFromBlockPos(level, pos)
 
 			if (cube != null) {

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -84,7 +85,7 @@ class BlockMoverItem(properties: Properties) : Item(properties) {
 
 			if (clickedState.isAir
 				|| clickedState.getDestroySpeed(level, clickedPos) == -1f
-				|| clickedState.`is`(ModBlockTagsProvider.BLOCK_MOVER_BLACKLIST)
+				|| clickedState.isBlock(ModBlockTagsProvider.BLOCK_MOVER_BLACKLIST)
 				|| !level.mayInteract(player, clickedPos)
 				|| !player.mayUseItemAt(clickedPos, context.clickedFace, stack)
 				|| NeoForge.EVENT_BUS.post(BlockEvent.BreakEvent(level, clickedPos, clickedState, player)).isCanceled

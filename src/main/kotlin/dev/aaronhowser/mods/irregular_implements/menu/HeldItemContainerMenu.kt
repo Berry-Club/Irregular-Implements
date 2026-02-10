@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -24,7 +25,7 @@ abstract class HeldItemContainerMenu(
 	) : this(deferredItem.get(), menuType, containerId, playerInventory)
 
 	open fun getHeldItemStack(): ItemStack {
-		return if (playerInventory.player.mainHandItem.`is`(item)) {
+		return if (playerInventory.player.mainHandItem.isItem(item)) {
 			playerInventory.player.mainHandItem
 		} else {
 			playerInventory.player.offhandItem
@@ -36,7 +37,7 @@ abstract class HeldItemContainerMenu(
 			InteractionHand.MAIN_HAND else InteractionHand.OFF_HAND
 
 	override fun stillValid(player: Player): Boolean {
-		return player.getItemInHand(hand).`is`(item)
+		return player.getItemInHand(hand).isItem(item)
 	}
 
 }

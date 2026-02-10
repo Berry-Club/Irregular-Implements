@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FilteredPlatformBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -76,7 +77,7 @@ class PlatformBlock(
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.`is`(newState.block)) {
+		if (!state.isBlock(newState.block)) {
 			val be = level.getBlockEntity(pos)
 			if (be is FilteredPlatformBlockEntity) {
 				Containers.dropContents(level, pos, be.container)

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
@@ -204,7 +205,7 @@ class BlockDestabilizerBlockEntity(
 		val targetBlockState = level.getBlockState(targetBlockPos)
 
 		if (targetBlockState.isAir
-			|| targetBlockState.`is`(ModBlockTagsProvider.BLOCK_DESTABILIZER_BLACKLIST)
+			|| targetBlockState.isBlock(ModBlockTagsProvider.BLOCK_DESTABILIZER_BLACKLIST)
 			|| targetBlockState.getDestroySpeed(level, targetBlockPos) <= 0
 			|| level.getBlockEntity(targetBlockPos) != null
 		) return

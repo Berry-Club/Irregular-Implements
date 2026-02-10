@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockDetectorBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -75,7 +76,7 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!newState.`is`(state.block)) {
+		if (!newState.isBlock(state.block)) {
 			val be = level.getBlockEntity(pos)
 			if (be is BlockDetectorBlockEntity) {
 				Containers.dropContents(level, pos, be.container)

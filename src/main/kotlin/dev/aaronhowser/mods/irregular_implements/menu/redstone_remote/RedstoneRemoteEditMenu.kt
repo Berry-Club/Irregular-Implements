@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -48,7 +49,7 @@ class RedstoneRemoteEditMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return player.getItemInHand(hand).`is`(ModItems.REDSTONE_REMOTE)
+		return player.getItemInHand(hand).isItem(ModItems.REDSTONE_REMOTE)
 	}
 
 }

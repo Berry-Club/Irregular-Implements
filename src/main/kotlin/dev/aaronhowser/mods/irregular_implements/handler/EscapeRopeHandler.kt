@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.status
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
@@ -70,7 +71,7 @@ object EscapeRopeHandler {
 			val level = player.serverLevel()
 			val usedItem = player.useItem
 
-			if (level != this.levelAtStart || !usedItem.`is`(ModItems.ESCAPE_ROPE)) return true
+			if (level != this.levelAtStart || !usedItem.isItem(ModItems.ESCAPE_ROPE)) return true
 
 			val limit = ServerConfig.CONFIG.escapeRopeMaxBlocks.get()
 			val maxRuns = ServerConfig.CONFIG.escapeRopeBlocksPerTick.get()

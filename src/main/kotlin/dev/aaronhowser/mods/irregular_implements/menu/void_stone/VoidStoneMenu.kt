@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.menu.void_stone
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
@@ -57,6 +58,6 @@ class VoidStoneMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return playerInventory.getSelected().`is`(ModItems.VOID_STONE)
+		return playerInventory.getSelected().isItem(ModItems.VOID_STONE)
 	}
 }

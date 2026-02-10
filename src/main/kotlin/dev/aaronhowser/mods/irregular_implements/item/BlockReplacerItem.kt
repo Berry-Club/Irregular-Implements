@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
@@ -223,7 +224,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			val state = level.getBlockState(pos)
 
 			return state.getDestroySpeed(level, pos) != 1f
-					&& !state.`is`(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)
+					&& !state.isBlock(ModBlockTagsProvider.BLOCK_REPLACER_BLACKLIST)
 					&& player.mayUseItemAt(pos, face, replacerStack)
 		}
 
@@ -243,7 +244,7 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 			val possibleBlocksToPlace = storedBlockStacks.filter {
 				val block = (it.item as BlockItem).block
 
-				!clickedState.`is`(block) && block.getStateForPlacement(BlockPlaceContext(context)) != null
+				!clickedState.isBlock(block) && block.getStateForPlacement(BlockPlaceContext(context)) != null
 			}
 
 			val stackToPlace = possibleBlocksToPlace.randomOrNull() ?: return null

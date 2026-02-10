@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.giveOrDropStack
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.attachment.DeathKeptItems
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
@@ -58,7 +59,7 @@ class SpectreAnchorItem(properties: Properties) : Item(properties) {
 			if (items.isEmpty()) return
 
 			for (item in items) {
-				if (!item.`is`(ModItems.SPECTRE_ANCHOR)) {
+				if (!item.isItem(ModItems.SPECTRE_ANCHOR)) {
 					player.sendSystemMessage(ModMessageLang.ANCHOR_USED.toComponent(item.displayName))
 					item.remove(ModDataComponents.IS_ANCHORED)
 				}

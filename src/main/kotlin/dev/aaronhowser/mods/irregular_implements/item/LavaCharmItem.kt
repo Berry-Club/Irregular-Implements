@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.world.damagesource.DamageTypes
@@ -72,11 +73,11 @@ class LavaCharmItem(properties: Properties) : Item(properties), ICurioItem {
 		}
 
 		private fun isChargedLavaCharm(stack: ItemStack): Boolean {
-			return stack.`is`(ModItems.LAVA_CHARM) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
+			return stack.isItem(ModItems.LAVA_CHARM) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
 		}
 
 		private fun isChargedLavaWader(stack: ItemStack): Boolean {
-			return stack.`is`(ModItems.LAVA_WADERS) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
+			return stack.isItem(ModItems.LAVA_WADERS) && (stack.get(ModDataComponents.CHARGE) ?: 0) > 0
 		}
 
 		fun getFirstLavaProtector(entity: LivingEntity): ItemStack? {

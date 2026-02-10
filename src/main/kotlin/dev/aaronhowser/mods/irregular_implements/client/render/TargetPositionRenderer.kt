@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.world.item.ItemStack
@@ -12,7 +13,7 @@ object TargetPositionRenderer {
 		val player = AaronClientUtil.localPlayer ?: return
 
 		fun addIndicator(stack: ItemStack) {
-			if (stack.`is`(ModItems.REDSTONE_TOOL)) return
+			if (stack.isItem(ModItems.REDSTONE_TOOL)) return
 
 			val globalPos = stack.get(ModDataComponents.GLOBAL_POS) ?: return
 			if (globalPos.dimension != player.level().dimension()) return

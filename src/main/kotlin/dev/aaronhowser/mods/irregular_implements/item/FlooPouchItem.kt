@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -30,7 +31,7 @@ class FlooPouchItem(properties: Properties) : Item(properties) {
 		if (currentFlooPowder >= MAX_FLOO_POWDER) return InteractionResultHolder.fail(usedStack)
 
 		for (invStack in player.inventory.items) {
-			if (!invStack.`is`(ModItems.FLOO_POWDER)) continue
+			if (!invStack.isItem(ModItems.FLOO_POWDER)) continue
 
 			val newCurrentFlooPowder = usedStack.getOrDefault(ModDataComponents.FLOO_POWDER, 0)
 

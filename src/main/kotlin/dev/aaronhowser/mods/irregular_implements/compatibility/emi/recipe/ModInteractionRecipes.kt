@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDyeName
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.compatibility.emi.ModEmiPlugin.Companion.asEmiIngredient
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
@@ -143,7 +144,7 @@ object ModInteractionRecipes {
 		}
 
 		val convertsToSpectreSapling = BuiltInRegistries.ITEM
-			.filter { it is BlockItem && it.block.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING) }
+			.filter { it is BlockItem && it.block.defaultBlockState().isBlock(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING) }
 
 		if (convertsToSpectreSapling.isNotEmpty()) {
 			val saplingsEmiIngredient = EmiIngredient.of(Ingredient.of(*convertsToSpectreSapling.toTypedArray()))
@@ -161,7 +162,7 @@ object ModInteractionRecipes {
 		}
 
 		val flooableBlocks = BuiltInRegistries.BLOCK
-			.filter { it.defaultBlockState().`is`(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK) }
+			.filter { it.defaultBlockState().isBlock(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK) }
 			.map { it.asItem() }
 
 		if (flooableBlocks.isNotEmpty()) {

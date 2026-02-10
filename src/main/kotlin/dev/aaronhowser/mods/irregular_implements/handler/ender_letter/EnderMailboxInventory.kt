@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.ender_letter
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
@@ -54,7 +55,7 @@ class EnderMailboxInventory(
 	override fun getSlotLimit(slot: Int): Int = 1
 
 	override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-		return stack.`is`(ModItems.ENDER_LETTER)
+		return stack.isItem(ModItems.ENDER_LETTER)
 	}
 
 	fun saveAsTag(registry: HolderLookup.Provider): CompoundTag {

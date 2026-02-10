@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -93,7 +94,7 @@ class BeanStalkBlock(
 	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
 		val stateBelow = level.getBlockState(pos.below())
 
-		return stateBelow.`is`(this) || stateBelow.`is`(BlockTags.DIRT)
+		return stateBelow.`is`(this) || stateBelow.isBlock(BlockTags.DIRT)
 	}
 
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -108,8 +109,8 @@ class BeanStalkBlock(
 			val blockState = entity.inBlockState
 
 			return when {
-				blockState.`is`(ModBlocks.BEAN_STALK.get()) -> 3f
-				blockState.`is`(ModBlocks.LESSER_BEAN_STALK.get()) -> 2f
+				blockState.isBlock(ModBlocks.BEAN_STALK.get()) -> 3f
+				blockState.isBlock(ModBlocks.LESSER_BEAN_STALK.get()) -> 2f
 				else -> 1f
 			}
 		}

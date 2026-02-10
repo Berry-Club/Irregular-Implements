@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -39,7 +40,7 @@ class BiomeCrystalItem(properties: Properties) : Item(properties) {
 				.lookupOrThrow(Registries.BIOME)
 				.listElements()
 				.toList()
-				.mapNotNull { if (it.`is`(ModBiomeTagsProvider.BIOME_CRYSTAL_BLACKLIST)) null else getCrystal(it) }
+				.mapNotNull { if (it.isHolder(ModBiomeTagsProvider.BIOME_CRYSTAL_BLACKLIST)) null else getCrystal(it) }
 		}
 
 		fun getCrystal(biomeHolder: Holder<Biome>): ItemStack {

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.aaron.misc.weakMutableSet
@@ -69,7 +70,7 @@ class GlobalChatDetectorBlockEntity(
 			pulse()
 			if (this.stopsMessage) {
 				for (item in this.container.items) {
-					if (!item.`is`(ModItems.PLAYER_FILTER)) continue
+					if (!item.isItem(ModItems.PLAYER_FILTER)) continue
 
 					val playerUuid = item.get(ModDataComponents.PLAYER)?.uuid ?: continue
 					if (playerUuid == player.uuid) return true

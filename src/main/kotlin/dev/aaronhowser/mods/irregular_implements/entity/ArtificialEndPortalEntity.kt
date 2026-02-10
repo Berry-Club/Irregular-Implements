@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -135,7 +136,7 @@ class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entit
 
 			val endRodPos = entityCenterPos.above(3)
 			val endRodState = level.getBlockState(endRodPos)
-			if (!endRodState.`is`(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
+			if (!endRodState.isBlock(Blocks.END_ROD) || endRodState.getValue(EndRodBlock.FACING) != Direction.DOWN) return false
 
 			if (!level.getBlockState(endRodPos.above()).`is`(Tags.Blocks.END_STONES)) return false
 

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.ender_letter
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerPlayer
@@ -52,7 +53,7 @@ class EnderMailboxContainer(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return player.level().getBlockState(blockPos).`is`(ModBlocks.ENDER_MAILBOX)
+		return player.level().getBlockState(blockPos).isBlock(ModBlocks.ENDER_MAILBOX)
 	}
 
 	override fun clearContent() {

@@ -260,7 +260,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 
 		fun playSound(fluidStack: FluidStack, player: Player, level: Level, blockPos: BlockPos) {
 			val soundEvent = fluidStack.fluidType.getSound(player, level, blockPos, SoundActions.BUCKET_EMPTY)
-				?: if (fluidStack.`is`(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
+				?: if (fluidStack.isFluid(FluidTags.LAVA)) SoundEvents.BUCKET_EMPTY_LAVA else SoundEvents.BUCKET_EMPTY
 
 			level.playSound(null, blockPos, soundEvent, SoundSource.BLOCKS)
 			level.gameEvent(player, GameEvent.FLUID_PLACE, blockPos)

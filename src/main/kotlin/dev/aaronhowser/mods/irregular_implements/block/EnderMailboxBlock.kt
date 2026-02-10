@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.status
 import dev.aaronhowser.mods.aaron.misc.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
@@ -107,7 +108,7 @@ class EnderMailboxBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), Entit
 		hand: InteractionHand,
 		hitResult: BlockHitResult
 	): ItemInteractionResult {
-		if (!stack.`is`(ModItems.ENDER_LETTER)) return super.useItemOn(stack, state, level, pos, player, hand, hitResult)
+		if (!stack.isItem(ModItems.ENDER_LETTER)) return super.useItemOn(stack, state, level, pos, player, hand, hitResult)
 
 		if (sendLetter(player, stack)) {
 			stack.shrink(1)

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -21,11 +22,11 @@ class InvertDiaphanousBlockRecipe(
 		val stacks = input.items().filterNot { it.isEmpty }
 
 		return stacks.size == 1
-				&& stacks.first().`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem())
+				&& stacks.first().isItem(ModBlocks.DIAPHANOUS_BLOCK.asItem())
 	}
 
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-		val inputStack = input.items().first { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
+		val inputStack = input.items().first { it.isItem(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
 		val output = inputStack.copyWithCount(1)
 
 		if (output.has(ModDataComponents.IS_INVERTED)) {

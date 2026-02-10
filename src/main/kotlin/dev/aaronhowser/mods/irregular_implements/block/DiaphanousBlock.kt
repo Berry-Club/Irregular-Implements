@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.DiaphanousBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -51,7 +53,7 @@ class DiaphanousBlock : Block(
 
 		val canInteract = (closeEnough == blockEntity.isInverted)
 				|| player.isSecondaryUseActive
-				|| player.isHolding { it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
+				|| player.isHolding { it.isItem(ModBlocks.DIAPHANOUS_BLOCK.asItem()) }
 
 		return if (canInteract) {
 			SHAPE_FULL
@@ -77,7 +79,7 @@ class DiaphanousBlock : Block(
 			return try {
 				block.defaultBlockState().renderShape == RenderShape.MODEL
 						&& block.defaultBlockState().getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO) == Shapes.block()
-						&& !block.defaultBlockState().`is`(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
+						&& !block.defaultBlockState().isBlock(ModBlockTagsProvider.DIAPHANOUS_BLOCK_BLACKLIST)
 			} catch (e: Exception) {
 				false
 			}

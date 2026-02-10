@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -139,7 +140,7 @@ class WhiteStoneItem(properties: Properties) : Item(properties) {
 		}
 
 		fun isChargedWhiteStone(itemStack: ItemStack): Boolean {
-			return itemStack.`is`(ModItems.WHITE_STONE.get()) && itemStack.get(ModDataComponents.CHARGE.get()) == MAX_CHARGE
+			return itemStack.isItem(ModItems.WHITE_STONE.get()) && itemStack.get(ModDataComponents.CHARGE.get()) == MAX_CHARGE
 		}
 
 		fun tryPreventDeath(event: LivingDeathEvent) {

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -127,7 +128,7 @@ class FlooBrickBlockEntity(
 			val message = event.message.string
 
 			val holdingPowder = player.isHolding(ModItems.FLOO_POWDER.get())
-			val pouch = player.inventory.items.firstOrNull { it.`is`(ModItems.FLOO_POUCH) }
+			val pouch = player.inventory.items.firstOrNull { it.isItem(ModItems.FLOO_POUCH) }
 
 			if (!player.hasInfiniteMaterials() && !holdingPowder) {
 				val amount = pouch?.getOrDefault(ModDataComponents.FLOO_POWDER, 0) ?: 0
@@ -142,7 +143,7 @@ class FlooBrickBlockEntity(
 
 			if (!player.hasInfiniteMaterials()) {
 				if (holdingPowder) {
-					val stack = if (player.mainHandItem.`is`(ModItems.FLOO_POWDER.get())) {
+					val stack = if (player.mainHandItem.isItem(ModItems.FLOO_POWDER.get())) {
 						player.mainHandItem
 					} else {
 						player.offhandItem

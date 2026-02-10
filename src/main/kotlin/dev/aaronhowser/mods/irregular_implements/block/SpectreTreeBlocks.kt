@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModConfiguredFeatures
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -44,7 +46,7 @@ object SpectreTreeBlocks {
 			}
 
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return adjacentBlockState.`is`(this)
+				return adjacentBlockState.isBlock(this)
 			}
 
 		}
@@ -58,7 +60,7 @@ object SpectreTreeBlocks {
 				.noOcclusion()
 		) {
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return adjacentBlockState.`is`(this)
+				return adjacentBlockState.isBlock(this)
 			}
 		}
 
@@ -102,7 +104,7 @@ object SpectreTreeBlocks {
 			}
 
 			override fun skipRendering(state: BlockState, adjacentBlockState: BlockState, side: Direction): Boolean {
-				return adjacentBlockState.`is`(this)
+				return adjacentBlockState.isBlock(this)
 			}
 		}
 
@@ -123,13 +125,13 @@ object SpectreTreeBlocks {
 
 	fun convertSaplings(event: PlayerInteractEvent.RightClickBlock) {
 		val usedStack = event.itemStack
-		if (!usedStack.`is`(ModItems.ECTOPLASM)) return
+		if (!usedStack.isItem(ModItems.ECTOPLASM)) return
 
 		val level = event.level as? ServerLevel ?: return
 		val pos = event.pos
 
 		val clickedState = level.getBlockState(pos)
-		if (!clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) return
+		if (!clickedState.isBlock(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) return
 
 		level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
 		usedStack.consume(1, event.entity)

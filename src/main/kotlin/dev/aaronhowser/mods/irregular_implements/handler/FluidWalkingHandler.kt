@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -28,7 +29,7 @@ object FluidWalkingHandler {
 
 	fun shouldEntityStandOnFluid(livingEntity: LivingEntity, fluidState: FluidState): Boolean {
 		val fluidsEntityCanStandOn = getFluidsEntityCanStandOn(livingEntity)
-		return fluidsEntityCanStandOn.any { fluidState.`is`(it) }
+		return fluidsEntityCanStandOn.any { fluidState.isFluid(it) }
 	}
 
 	fun getFluidsEntityCanStandOn(livingEntity: LivingEntity): Set<TagKey<Fluid>> {

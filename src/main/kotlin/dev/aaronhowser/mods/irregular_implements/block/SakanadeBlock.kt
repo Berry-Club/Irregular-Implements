@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
 import net.minecraft.core.BlockPos
@@ -70,7 +71,7 @@ class SakanadeBlock : Block(
 		val clickedPos = context.clickedPos
 
 		val clickedState = level.getBlockState(clickedPos)
-		val clickedThis = clickedState.`is`(this)
+		val clickedThis = clickedState.isBlock(this)
 
 		val stateToPlace = if (clickedThis) clickedState else defaultBlockState()
 
@@ -91,7 +92,7 @@ class SakanadeBlock : Block(
 		val clickedPos = useContext.clickedPos
 		val clickedState = level.getBlockState(clickedPos)
 
-		return if (clickedState.`is`(this)) countFaces(clickedState) < PROPERTY_BY_DIRECTION.size else super.canBeReplaced(state, useContext)
+		return if (clickedState.isBlock(this)) countFaces(clickedState) < PROPERTY_BY_DIRECTION.size else super.canBeReplaced(state, useContext)
 	}
 
 	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
@@ -197,7 +198,7 @@ class SakanadeBlock : Block(
 					if (!flag) {
 						if (tempState == null) tempState = level.getBlockState(pos.above())
 
-						flag = tempState!!.`is`(ModBlocks.SAKANADE_SPORES) && tempState.getValue(property)
+						flag = tempState!!.isBlock(ModBlocks.SAKANADE_SPORES) && tempState.getValue(property)
 					}
 
 					blockState = blockState.setValue(property, flag)
@@ -214,7 +215,7 @@ class SakanadeBlock : Block(
 			val property = PROPERTY_BY_DIRECTION[direction] ?: return false
 			val state = level.getBlockState(relative)
 
-			return state.`is`(ModBlocks.SAKANADE_SPORES) && state.getValue(property)
+			return state.isBlock(ModBlocks.SAKANADE_SPORES) && state.getValue(property)
 		}
 	}
 

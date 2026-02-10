@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -43,7 +44,7 @@ class GoldenChickenEntity(
 		goalSelector.addGoal(0, FloatGoal(this))
 		goalSelector.addGoal(1, PanicGoal(this, 1.4))
 		goalSelector.addGoal(2, BreedGoal(this, 1.0))
-		goalSelector.addGoal(3, TemptGoal(this, 1.0, { it.`is`(ItemTags.CHICKEN_FOOD) }, false))
+		goalSelector.addGoal(3, TemptGoal(this, 1.0, { it.isItem(ItemTags.CHICKEN_FOOD) }, false))
 		goalSelector.addGoal(4, FollowParentGoal(this, 1.1))
 		goalSelector.addGoal(5, WaterAvoidingRandomStrollGoal(this, 1.0))
 		goalSelector.addGoal(6, LookAtPlayerGoal(this, Player::class.java, 6.0f))
@@ -107,7 +108,7 @@ class GoldenChickenEntity(
 	}
 
 	override fun isFood(stack: ItemStack): Boolean {
-		return stack.`is`(ItemTags.CHICKEN_FOOD)
+		return stack.isItem(ItemTags.CHICKEN_FOOD)
 	}
 
 	override fun readAdditionalSaveData(compound: CompoundTag) {

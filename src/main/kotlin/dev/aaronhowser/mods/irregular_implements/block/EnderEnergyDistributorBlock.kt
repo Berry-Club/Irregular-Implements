@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderEnergyDistributorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
@@ -36,7 +37,7 @@ class EnderEnergyDistributorBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.`is`(newState.block)) {
+		if (!state.isBlock(newState.block)) {
 			val be = level.getBlockEntity(pos)
 			if (be is EnderEnergyDistributorBlockEntity) {
 				Containers.dropContents(level, pos, be.container)

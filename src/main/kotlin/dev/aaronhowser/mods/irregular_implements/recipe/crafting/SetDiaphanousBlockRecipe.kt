@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -42,7 +43,7 @@ class SetDiaphanousBlockRecipe(
 
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
 		val diaphanousBlockStack = input.items().first { it.item == ModBlocks.DIAPHANOUS_BLOCK.asItem() }
-		val blockStack = input.items().first { !it.isEmpty && !it.`is`(ModBlocks.DIAPHANOUS_BLOCK.asItem()) && it.item is BlockItem }
+		val blockStack = input.items().first { !it.isEmpty && !it.isItem(ModBlocks.DIAPHANOUS_BLOCK.asItem()) && it.item is BlockItem }
 
 		val output = diaphanousBlockStack.copyWithCount(1)
 		output.set(ModDataComponents.BLOCK, (blockStack.item as BlockItem).block)
@@ -55,7 +56,7 @@ class SetDiaphanousBlockRecipe(
 		for (i in items.indices) {
 			val stack = items[i]
 
-			if (stack.`is`(ModItems.DIAPHANOUS_BLOCK)) {
+			if (stack.isItem(ModItems.DIAPHANOUS_BLOCK)) {
 				items[i] = ItemStack.EMPTY
 			} else {
 				items[i] = stack.copyWithCount(1)

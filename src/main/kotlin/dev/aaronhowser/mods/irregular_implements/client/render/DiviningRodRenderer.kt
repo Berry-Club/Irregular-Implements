@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -18,8 +20,8 @@ object DiviningRodRenderer {
 		val offHandItem = player.offhandItem
 		val mainHandItem = player.mainHandItem
 
-		val offHandTag = if (offHandItem.`is`(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.DIVINE_BLOCKS) else null
-		val mainHandTag = if (mainHandItem.`is`(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.DIVINE_BLOCKS) else null
+		val offHandTag = if (offHandItem.isItem(ModItems.DIVINING_ROD)) offHandItem.get(ModDataComponents.DIVINE_BLOCKS) else null
+		val mainHandTag = if (mainHandItem.isItem(ModItems.DIVINING_ROD)) mainHandItem.get(ModDataComponents.DIVINE_BLOCKS) else null
 
 		if (offHandTag == null && mainHandTag == null) {
 			return
@@ -37,8 +39,8 @@ object DiviningRodRenderer {
 
 			val checkedState = level.getBlockState(checkedPos)
 
-			val matchesOffHand = offHandTag != null && checkedState.`is`(offHandTag)
-			val matchesMainHand = mainHandTag != null && checkedState.`is`(mainHandTag)
+			val matchesOffHand = offHandTag != null && checkedState.isBlock(offHandTag)
+			val matchesMainHand = mainHandTag != null && checkedState.isBlock(mainHandTag)
 
 			if (!matchesOffHand && !matchesMainHand) continue
 

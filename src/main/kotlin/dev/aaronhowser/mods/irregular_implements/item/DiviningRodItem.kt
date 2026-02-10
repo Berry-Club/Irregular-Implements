@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -142,7 +143,7 @@ class DiviningRodItem(properties: Properties) : Item(properties) {
 
 		fun getOverlayColor(blockState: BlockState): Int {
 			for ((tag, color) in COLORS_PER_TAG) {
-				if (blockState.`is`(tag)) {
+				if (blockState.isBlock(tag)) {
 					return (50 shl 24) or color
 				}
 			}

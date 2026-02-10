@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.handler.floo.FlooNetworkSavedData
@@ -29,7 +30,7 @@ class FlooSignItem(properties: Properties) : Item(properties) {
 		val clickedPos = context.clickedPos
 		val clickedState = level.getBlockState(clickedPos)
 
-		if (!clickedState.`is`(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK)) return InteractionResult.PASS
+		if (!clickedState.isBlock(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK)) return InteractionResult.PASS
 
 		if (createFlooBricks(context.itemInHand, player, clickedPos)) return InteractionResult.SUCCESS
 
@@ -87,7 +88,7 @@ class FlooSignItem(properties: Properties) : Item(properties) {
 				checked.add(checkedPos)
 
 				val state = level.getBlockState(checkedPos)
-				if (state.`is`(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK)) {
+				if (state.isBlock(ModBlockTagsProvider.CONVERTS_TO_FLOO_BRICK)) {
 					found.add(checkedPos)
 
 					for (dir in Direction.entries) {

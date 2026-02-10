@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import net.minecraft.core.BlockPos
@@ -64,7 +65,7 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 
 		// Failsafe
 		val renderedState = blockEntity.renderedBlockState
-		if (renderedState.`is`(this)) return SoundType.WOOD
+		if (renderedState.isBlock(this)) return SoundType.WOOD
 
 		return renderedState.getSoundType(level, pos, entity)
 	}

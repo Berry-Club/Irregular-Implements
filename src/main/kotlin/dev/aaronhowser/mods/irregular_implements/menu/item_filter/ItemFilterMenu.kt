@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.item_filter
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithButtons
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -66,7 +67,7 @@ class ItemFilterMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return player.getItemInHand(hand).`is`(ModItems.ITEM_FILTER)
+		return player.getItemInHand(hand).isItem(ModItems.ITEM_FILTER)
 	}
 
 	override fun handleButtonPressed(buttonId: Int) {

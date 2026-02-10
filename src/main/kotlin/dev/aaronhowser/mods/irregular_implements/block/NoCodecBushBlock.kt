@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.BlockTags
@@ -16,7 +17,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 abstract class NoCodecBushBlock(properties: Properties) : Block(properties) {
 
 	protected open fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
-		return state.`is`(BlockTags.DIRT) || state.getBlock() is FarmBlock
+		return state.isBlock(BlockTags.DIRT) || state.getBlock() is FarmBlock
 	}
 
 	override fun updateShape(

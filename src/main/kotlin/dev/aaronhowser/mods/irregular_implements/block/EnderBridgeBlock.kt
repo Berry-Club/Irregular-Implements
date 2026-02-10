@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.scheduler.SchedulerExtensions.scheduleTaskInTicks
 import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositions
@@ -106,7 +107,7 @@ class EnderBridgeBlock(
 
 		level.scheduleTaskInTicks(tickDuration) {
 			if (level.getBlockState(pos).getValue(ENABLED)) {
-				if (closestAnchor != null && level.getBlockState(closestAnchor).`is`(ModBlocks.ENDER_ANCHOR)) {
+				if (closestAnchor != null && level.getBlockState(closestAnchor).isBlock(ModBlocks.ENDER_ANCHOR)) {
 					foundAnchor(level, pos, closestAnchor)
 				} else {
 					turnOffBridge(level, pos, bridgeFailed = true)

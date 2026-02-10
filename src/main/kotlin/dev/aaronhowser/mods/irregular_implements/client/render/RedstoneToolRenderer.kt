@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getPovResult
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.DeltaTracker
@@ -25,7 +26,7 @@ object RedstoneToolRenderer {
 		val pos = clipResult.blockPos
 		val state = level.getBlockState(pos)
 
-		if (!state.`is`(Blocks.REDSTONE_WIRE)) return
+		if (!state.isBlock(Blocks.REDSTONE_WIRE)) return
 
 		val strength = state.getValue(RedStoneWireBlock.POWER)
 

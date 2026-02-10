@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isDamageSource
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -121,7 +123,7 @@ object ModArmorItems {
 		val target = event.entity
 		val damageSource = event.source
 
-		if (!damageSource.`is`(DamageTypeTags.IS_FIRE)) return
+		if (!damageSource.isDamageSource(DamageTypeTags.IS_FIRE)) return
 
 		val amount = event.amount
 		val chance = (amount * amount * amount) / 100
@@ -133,8 +135,8 @@ object ModArmorItems {
 
 	private fun canBlockFireDamage(entity: LivingEntity): Boolean {
 		val footItem = entity.getItemBySlot(EquipmentSlot.FEET)
-		if (footItem.`is`(ModItems.LAVA_WADERS)
-			|| footItem.`is`(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
+		if (footItem.isItem(ModItems.LAVA_WADERS)
+			|| footItem.isItem(ModItems.OBSIDIAN_WATER_WALKING_BOOTS)
 		) return true
 
 		val hasObsidianSkullRing =
@@ -144,16 +146,16 @@ object ModArmorItems {
 				.isTrue()
 
 		if (hasObsidianSkullRing) return true
-		if (entity is Player && entity.inventory.items.any { it.`is`(ModItems.OBSIDIAN_SKULL) }) return true
+		if (entity is Player && entity.inventory.items.any { it.isItem(ModItems.OBSIDIAN_SKULL) }) return true
 
-		return entity.handSlots.any { it.`is`(ModItems.OBSIDIAN_SKULL) }
+		return entity.handSlots.any { it.isItem(ModItems.OBSIDIAN_SKULL) }
 	}
 
 	fun isWearingFullSpectreArmor(entity: LivingEntity): Boolean {
-		return entity.getItemBySlot(EquipmentSlot.HEAD).`is`(ModItems.SPECTRE_HELMET.get())
-				&& entity.getItemBySlot(EquipmentSlot.CHEST).`is`(ModItems.SPECTRE_CHESTPLATE.get())
-				&& entity.getItemBySlot(EquipmentSlot.LEGS).`is`(ModItems.SPECTRE_LEGGINGS.get())
-				&& entity.getItemBySlot(EquipmentSlot.FEET).`is`(ModItems.SPECTRE_BOOTS.get())
+		return entity.getItemBySlot(EquipmentSlot.HEAD).isItem(ModItems.SPECTRE_HELMET.get())
+				&& entity.getItemBySlot(EquipmentSlot.CHEST).isItem(ModItems.SPECTRE_CHESTPLATE.get())
+				&& entity.getItemBySlot(EquipmentSlot.LEGS).isItem(ModItems.SPECTRE_LEGGINGS.get())
+				&& entity.getItemBySlot(EquipmentSlot.FEET).isItem(ModItems.SPECTRE_BOOTS.get())
 	}
 
 }

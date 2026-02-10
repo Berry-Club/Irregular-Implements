@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.menu.drop_filter.DropFilterMenu
@@ -67,7 +68,7 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 				.component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
 
 		fun stackIsDropFilter(stack: ItemStack): Boolean {
-			return stack.`is`(ModItems.DROP_FILTER) || stack.`is`(ModItems.VOIDING_DROP_FILTER)
+			return stack.isItem(ModItems.DROP_FILTER) || stack.isItem(ModItems.VOIDING_DROP_FILTER)
 		}
 
 		fun beforePickupItem(event: ItemEntityPickupEvent.Pre) {
@@ -79,9 +80,9 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 			val player = event.player
 
 			val voidingFilterStacks = player.inventory.items
-				.filter { it.`is`(ModItems.VOIDING_DROP_FILTER) }
+				.filter { it.isItem(ModItems.VOIDING_DROP_FILTER) }
 			val filterStacks = player.inventory.items
-				.filter { it.`is`(ModItems.DROP_FILTER) }
+				.filter { it.isItem(ModItems.DROP_FILTER) }
 
 			if (voidingFilterStacks.isEmpty() && filterStacks.isEmpty()) return
 

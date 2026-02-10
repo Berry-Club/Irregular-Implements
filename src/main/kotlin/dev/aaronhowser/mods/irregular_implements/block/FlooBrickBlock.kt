@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.status
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
@@ -27,7 +28,7 @@ class FlooBrickBlock : Block(
 	}
 
 	override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!oldState.`is`(newState.block)) {
+		if (!oldState.isBlock(newState.block)) {
 			val blockEntity = level.getBlockEntity(pos)
 			if (blockEntity is FlooBrickBlockEntity) blockEntity.blockBroken()
 		}

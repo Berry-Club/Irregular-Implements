@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.ChatFormatting
@@ -90,7 +91,7 @@ object OtherUtil {
 		val level = spider.level()
 
 		for (pos in adjacentPositions) {
-			if (level.getBlockState(pos).`is`(ModBlockTagsProvider.SUPER_LUBRICATED)) {
+			if (level.getBlockState(pos).isBlock(ModBlockTagsProvider.SUPER_LUBRICATED)) {
 				return true
 			}
 		}

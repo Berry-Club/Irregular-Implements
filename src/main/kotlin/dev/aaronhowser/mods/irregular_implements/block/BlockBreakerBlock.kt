@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockBreakerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -83,7 +85,7 @@ class BlockBreakerBlock : Block(
 		if (level.isClientSide) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 		val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity ?: return ItemInteractionResult.FAIL
 
-		if (!stack.`is`(ModItems.DIAMOND_BREAKER) || state.getValue(IS_UPGRADED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+		if (!stack.isItem(ModItems.DIAMOND_BREAKER) || state.getValue(IS_UPGRADED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
 		blockEntity.upgrade(stack.copyWithCount(1))
 
@@ -110,7 +112,7 @@ class BlockBreakerBlock : Block(
 	}
 
 	override fun onRemove(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!oldState.`is`(newState.block)) {
+		if (!oldState.isBlock(newState.block)) {
 			val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
 			if (blockEntity != null) {
 				OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)

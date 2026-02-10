@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.world.feature
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
@@ -88,38 +89,38 @@ class NatureCoreFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfigura
 	companion object {
 		fun getLogFromBiome(biome: Holder<Biome>): BlockState {
 			return when {
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LOG
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_DARK_OAK) -> Blocks.DARK_OAK_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_DARK_OAK) -> Blocks.DARK_OAK_LOG
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_JUNGLE) -> Blocks.JUNGLE_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_JUNGLE) -> Blocks.JUNGLE_LOG
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_SPRUCE) -> Blocks.SPRUCE_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_SPRUCE) -> Blocks.SPRUCE_LOG
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_ACACIA) -> Blocks.ACACIA_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_ACACIA) -> Blocks.ACACIA_LOG
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_MANGROVE) -> Blocks.MANGROVE_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_MANGROVE) -> Blocks.MANGROVE_LOG
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_OAK) -> Blocks.OAK_LOG
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_OAK) -> Blocks.OAK_LOG
 				else -> Blocks.OAK_LOG
 			}.defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y)
 		}
 
 		fun getLeavesFromBiome(biome: Holder<Biome>): BlockState {
 			return when {
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_BIRCH) -> Blocks.BIRCH_LEAVES
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_DARK_OAK) -> Blocks.DARK_OAK_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_DARK_OAK) -> Blocks.DARK_OAK_LEAVES
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_JUNGLE) -> Blocks.JUNGLE_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_JUNGLE) -> Blocks.JUNGLE_LEAVES
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_SPRUCE) -> Blocks.SPRUCE_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_SPRUCE) -> Blocks.SPRUCE_LEAVES
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_ACACIA) -> Blocks.ACACIA_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_ACACIA) -> Blocks.ACACIA_LEAVES
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_MANGROVE) -> Blocks.MANGROVE_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_MANGROVE) -> Blocks.MANGROVE_LEAVES
 
-				biome.`is`(ModBiomeTagsProvider.NATURE_CORE_OAK) -> Blocks.OAK_LEAVES
+				biome.isHolder(ModBiomeTagsProvider.NATURE_CORE_OAK) -> Blocks.OAK_LEAVES
 				else -> Blocks.OAK_LEAVES
 			}.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)
 		}

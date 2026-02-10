@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block.block_entity
 
 import com.google.common.base.Predicate
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticleOptions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -53,7 +54,7 @@ class BiomeRadarBlockEntity(
 			val checkPos = blockPos.offset(relPos)
 			val blockState = level.getBlockState(checkPos)
 
-			return@all blockState.`is`(Blocks.IRON_BARS)
+			return@all blockState.isBlock(Blocks.IRON_BARS)
 		}
 	}
 

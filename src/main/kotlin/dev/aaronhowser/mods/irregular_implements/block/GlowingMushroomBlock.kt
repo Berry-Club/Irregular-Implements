@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -27,7 +28,7 @@ class GlowingMushroomBlock : NoCodecBushBlock(Properties.ofFullCopy(Blocks.RED_M
 		val stateBelow = level.getBlockState(belowPos)
 		val soilDecision = stateBelow.canSustainPlant(level, belowPos, Direction.UP, state)
 
-		if (stateBelow.`is`(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		if (stateBelow.isBlock(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true
 		}
 
