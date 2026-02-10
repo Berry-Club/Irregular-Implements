@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
