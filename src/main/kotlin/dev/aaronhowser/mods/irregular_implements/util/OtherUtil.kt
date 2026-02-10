@@ -53,16 +53,6 @@ object OtherUtil {
 		}.withStyle(ChatFormatting.GRAY)
 	}
 
-	fun dropStackAt(itemStack: ItemStack, entity: Entity, instantPickup: Boolean = false): Boolean {
-		return dropStackAt(itemStack, entity.level(), entity.position(), instantPickup)
-	}
-
-	fun dropStackAt(itemStack: ItemStack, level: Level, pos: Vec3, instantPickup: Boolean = false): Boolean {
-		val itemEntity = ItemEntity(level, pos.x, pos.y, pos.z, itemStack)
-		if (instantPickup) itemEntity.setNoPickUpDelay()
-		return level.addFreshEntity(itemEntity)
-	}
-
 	fun lerpColor(progress: Float, start: Int, end: Int): Int {
 		val startR = (start shr 16) and 0xFF
 		val startG = (start shr 8) and 0xFF

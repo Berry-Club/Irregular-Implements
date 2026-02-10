@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.entity
 
+import dev.aaronhowser.mods.aaron.misc.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreIlluminationHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -77,7 +78,7 @@ class SpectreIlluminatorEntity(
 			SpectreIlluminationHandler.setChunkIlluminated(level, blockPosition(), false)
 
 			if (removalReason == RemovalReason.KILLED) {
-				OtherUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
+				AaronUtil.dropStackAt(ModItems.SPECTRE_ILLUMINATOR.toStack(), this)
 			}
 		}
 	}

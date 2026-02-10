@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.giveOrDropStack
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
+import dev.aaronhowser.mods.aaron.misc.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.block.BlockBreakerBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -176,7 +177,7 @@ class BlockBreakerBlockEntity(
 			}
 
 			if (!remainder.isEmpty) {
-				OtherUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
+				AaronUtil.dropStackAt(remainder.copy(), level, possibleInventoryPos.center, instantPickup = false)
 			}
 		}
 	}

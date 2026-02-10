@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
+import dev.aaronhowser.mods.aaron.misc.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.block.block_entity.BlockBreakerBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -115,7 +116,7 @@ class BlockBreakerBlock : Block(
 		if (!oldState.isBlock(newState.block)) {
 			val blockEntity = level.getBlockEntity(pos) as? BlockBreakerBlockEntity
 			if (blockEntity != null) {
-				OtherUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
+				AaronUtil.dropStackAt(blockEntity.diamondBreaker.copy(), level, pos.center, instantPickup = false)
 			}
 		}
 

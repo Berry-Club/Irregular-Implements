@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
+import dev.aaronhowser.mods.aaron.misc.AaronUtil
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -38,7 +39,7 @@ class BlackoutPowderItem(properties: Properties) : Item(properties) {
 			illuminator.discard()
 
 			if (!player?.hasInfiniteMaterials().isTrue()) {
-				OtherUtil.dropStackAt(
+				AaronUtil.dropStackAt(
 					ModItems.SPECTRE_ILLUMINATOR.toStack(),
 					illuminator.level(),
 					clickedPos.relative(context.clickedFace).center
