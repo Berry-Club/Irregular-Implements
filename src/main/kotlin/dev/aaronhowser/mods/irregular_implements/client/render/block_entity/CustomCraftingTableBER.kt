@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 
-class CustomCraftingTableBlockEntityRenderer(
+class CustomCraftingTableBER(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<CustomCraftingTableBlockEntity> {
 

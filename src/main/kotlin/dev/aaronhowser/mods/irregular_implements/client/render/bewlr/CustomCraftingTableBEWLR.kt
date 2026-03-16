@@ -2,10 +2,10 @@ package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer.Companion.BOTTOM
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer.Companion.SAW_AND_HAMMER
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer.Companion.SCISSORS
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBlockEntityRenderer.Companion.TOP
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.BOTTOM
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SAW_AND_HAMMER
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SCISSORS
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.TOP
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer

@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 
-class SpectreEnergyInjectorBlockEntityRenderer(
+class SpectreEnergyInjectorBER(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<SpectreEnergyInjectorBlockEntity> {
 

@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.XoroshiroRandomSource
 import net.neoforged.neoforge.client.model.data.ModelData
 import kotlin.math.cos
 
-class DiaphanousBlockEntityRenderer(
+class DiaphanousBER(
 	val context: BlockEntityRendererProvider.Context
 ) : BlockEntityRenderer<DiaphanousBlockEntity> {
 
