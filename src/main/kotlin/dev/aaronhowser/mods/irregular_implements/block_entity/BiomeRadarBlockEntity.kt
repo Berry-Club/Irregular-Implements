@@ -1,0 +1,246 @@
+package dev.aaronhowser.mods.irregular_implements.block_entity
+
+import com.google.common.base.Predicate
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
+import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticleOptions
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientGamePacketListener
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.resources.ResourceKey
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.Vec3
+
+class BiomeRadarBlockEntity(
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState) {
+
+	private var antennaValid: Boolean = false
+	private var biomePos: BlockPos? = null
+	private var biomeStack: ItemStack = ItemStack.EMPTY
+
+	// Client only
+	private var flameProgress: Double = 0.0
+
+	fun getBiomeStack(): ItemStack = biomeStack.copy()
+	fun setBiomeStack(stack: ItemStack) {
+		biomeStack = stack.copy()
+
+		searchForBiome()
+
+		setChanged()
+		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
+	}
+
+	fun getBiomePos(): BlockPos? = biomePos
+
+	private fun updateAntenna() {
+		val level = level ?: return
+
+		antennaValid = ANTENNA_RELATIVE_POSITIONS.all { relPos ->
+			val checkPos = blockPos.offset(relPos)
+			val blockState = level.getBlockState(checkPos)
+
+			return@all blockState.isBlock(Blocks.IRON_BARS)
+		}
+	}
+
+	private fun checkAntenna() {
+		val wasValid = antennaValid
+		updateAntenna()
+		val isValid = antennaValid
+
+		if (isValid == wasValid) return
+
+		if (!isValid) {
+			biomePos = null
+		}
+
+		setChanged()
+		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
+	}
+
+	private fun serverTick() {
+		val level = level ?: return
+
+		if (level.gameTime % 20 == 0L) {
+			checkAntenna()
+		}
+	}
+
+	private fun clientTick() {
+		if (!antennaValid) return
+		updateFlameProgress()
+		spawnParticles()
+	}
+
+	private fun updateFlameProgress() {
+		if (!antennaValid) {
+			flameProgress = 0.0
+			return
+		}
+
+		flameProgress = if (biomePos != null) {
+			(flameProgress + FLAME_PROGRESS_PER_TICK).coerceAtMost(1.0)
+		} else {
+			(flameProgress - FLAME_PROGRESS_PER_TICK).coerceAtLeast(0.0)
+		}
+	}
+
+	private fun spawnParticles() {
+		val level = level ?: return
+		if (level.gameTime % 3 != 0L) return
+
+		val particlePositions = PARTICLE_POINTS.map { it.offset(blockPos).bottomCenter.add(0.0, 0.2, 0.0) }
+
+		val biomePos = biomePos
+		val direction = if (biomePos == null) {
+			Vec3.ZERO
+		} else {
+			this.blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03).scale(flameProgress)
+		}
+
+		val colorInt = if (biomePos == null) {
+			0x333333
+		} else {
+			getBiomeStack().get(ModDataComponents.BIOME)?.value()?.foliageColor ?: 0x00FF00
+		}
+
+		val colorVec = Vec3.fromRGB24(colorInt).toVector3f()
+
+		for (pos in particlePositions) {
+			level.addParticle(
+				ColoredFlameParticleOptions(colorVec),
+				pos.x, pos.y, pos.z,
+				direction.x, 0.05, direction.z
+			)
+		}
+	}
+
+	private val biomeCache: MutableMap<ResourceKey<Biome>, BlockPos?> = mutableMapOf()
+
+	private fun locateBiome(
+		targetBiome: ResourceKey<Biome>,
+		searchFrom: BlockPos,
+		level: ServerLevel
+	): BlockPos? {
+		return biomeCache.getOrPut(targetBiome) {
+			level.findClosestBiome3d(
+				Predicate { it.isHolder(targetBiome) },
+				searchFrom,
+				ServerConfig.CONFIG.biomeRadarSearchRadius.get(),
+				ServerConfig.CONFIG.biomeRadarHorizontalStep.get(),
+				ServerConfig.CONFIG.biomeRadarVerticalStep.get()
+			)?.first
+		}
+	}
+
+	private fun searchForBiome() {
+		val level = level as? ServerLevel ?: return
+
+		val targetBiomeKey = biomeStack.get(ModDataComponents.BIOME)?.key
+
+		val pos = if (targetBiomeKey == null) {
+			null
+		} else {
+			locateBiome(targetBiomeKey, blockPos, level)
+		}
+
+		if (pos == biomePos) return
+
+		biomePos = pos
+		setChanged()
+		level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		antennaValid = tag.getBoolean(ANTENNA_VALID_NBT)
+
+		biomePos = if (tag.contains(BIOME_POS_NBT)) {
+			BlockPos.of(tag.getLong(BIOME_POS_NBT))
+		} else {
+			null
+		}
+
+		biomeStack = ItemStack.parseOptional(registries, tag.getCompound(BIOME_STACK_NBT))
+	}
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		tag.putBoolean(ANTENNA_VALID_NBT, antennaValid)
+		tag.put(BIOME_STACK_NBT, biomeStack.saveOptional(registries))
+
+		val bp = biomePos
+		if (bp != null) {
+			tag.putLong(BIOME_POS_NBT, bp.asLong())
+		}
+	}
+
+	// Syncs with client
+	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
+
+	companion object {
+		private const val ANTENNA_VALID_NBT = "AntennaValid"
+		private const val BIOME_POS_NBT = "BiomePos"
+		private const val BIOME_STACK_NBT = "BiomeStack"
+
+		private const val FLAME_PROGRESS_PER_TICK = 1f / 100f
+
+		val ANTENNA_RELATIVE_POSITIONS: List<BlockPos> =
+			listOf(
+				BlockPos(0, 1, 0),
+				BlockPos(0, 2, 0),
+
+				BlockPos(1, 2, 0),
+				BlockPos(-1, 2, 0),
+				BlockPos(0, 2, 1),
+				BlockPos(0, 2, -1),
+
+				BlockPos(1, 3, 0),
+				BlockPos(-1, 3, 0),
+				BlockPos(0, 3, 1),
+				BlockPos(0, 3, -1),
+			)
+
+		val PARTICLE_POINTS: List<BlockPos> =
+			listOf(
+				BlockPos(1, 4, 0),
+				BlockPos(-1, 4, 0),
+				BlockPos(0, 4, 1),
+				BlockPos(0, 4, -1),
+			)
+
+		fun tick(
+			level: Level,
+			blockPos: BlockPos,
+			blockState: BlockState,
+			blockEntity: BiomeRadarBlockEntity
+		) {
+			if (level.isClientSide) {
+				blockEntity.clientTick()
+			} else {
+				blockEntity.serverTick()
+			}
+		}
+
+	}
+
+}
