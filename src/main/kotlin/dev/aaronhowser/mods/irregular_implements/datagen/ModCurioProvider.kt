@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 import top.theillusivec4.curios.api.CuriosDataProvider
+import top.theillusivec4.curios.api.type.capability.ICurio
 import java.util.concurrent.CompletableFuture
 
 class ModCurioProvider(
@@ -17,6 +18,9 @@ class ModCurioProvider(
 		this.createEntities(PLAYERS_RULE)
 			.addPlayer()
 			.addSlots(RING_SLOT)
+
+		createSlot(RING_SLOT)
+			.size(1)
 	}
 
 	companion object {
