@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.SlimeCubeBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block_entity.SlimeCubeBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.context.BlockPlaceContext

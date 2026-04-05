@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock.Companion.TRIGGERED
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.block_detector.BlockDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos

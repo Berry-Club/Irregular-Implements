@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.aaron.serialization.AaronExtraCodecs
+import dev.aaronhowser.mods.aaron.serialization.AaronExtraStreamCodecs
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.NonNullList
@@ -62,7 +63,7 @@ data class EnderLetterContentsDataComponent(
 
 		val STREAM_CODEC: StreamCodec<ByteBuf, EnderLetterContentsDataComponent> =
 			StreamCodec.composite(
-				AaronExtraCodecs.STACK_LIST_STREAM_CODEC, EnderLetterContentsDataComponent::stacks,
+				AaronExtraStreamCodecs.STACK_LIST, EnderLetterContentsDataComponent::stacks,
 				ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs::optional), EnderLetterContentsDataComponent::sender,
 				ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs::optional), EnderLetterContentsDataComponent::recipient,
 				::EnderLetterContentsDataComponent

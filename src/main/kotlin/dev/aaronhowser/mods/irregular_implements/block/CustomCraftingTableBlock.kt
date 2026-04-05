@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.CustomCraftingTableBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.item.CustomCraftingTableBlockItem
 import net.minecraft.core.BlockPos
 import net.minecraft.stats.Stats

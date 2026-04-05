@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.SpecialChestBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block_entity.SpecialChestBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer

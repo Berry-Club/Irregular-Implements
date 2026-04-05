@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.status
 import dev.aaronhowser.mods.aaron.misc.AaronUtil
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.EnderMailboxBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block_entity.EnderMailboxBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.handler.ender_letter.EnderLetterHandler

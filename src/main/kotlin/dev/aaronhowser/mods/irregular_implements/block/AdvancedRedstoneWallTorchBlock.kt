@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.nextRange
 import dev.aaronhowser.mods.irregular_implements.block.AdvancedRedstoneTorchBlock.Companion.GREEN_COLOR
 import dev.aaronhowser.mods.irregular_implements.block.AdvancedRedstoneTorchBlock.Companion.RED_COLOR
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.AdvancedRedstoneTorchBlockEntity
+import dev.aaronhowser.mods.irregular_implements.block_entity.AdvancedRedstoneTorchBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.DustParticleOptions

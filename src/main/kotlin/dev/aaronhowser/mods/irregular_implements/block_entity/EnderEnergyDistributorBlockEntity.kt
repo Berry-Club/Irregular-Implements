@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

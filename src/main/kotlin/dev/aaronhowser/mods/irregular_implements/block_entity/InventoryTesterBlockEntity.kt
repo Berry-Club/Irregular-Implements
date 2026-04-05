@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.irregular_implements.block.InventoryTesterBlock
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.inventory_tester.InventoryTesterMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos

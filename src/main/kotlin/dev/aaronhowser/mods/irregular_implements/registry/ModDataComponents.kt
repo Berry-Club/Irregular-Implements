@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.registry
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.aaron.serialization.AaronExtraCodecs
 import dev.aaronhowser.mods.aaron.registry.AaronDataComponentRegistry
+import dev.aaronhowser.mods.aaron.serialization.AaronExtraStreamCodecs
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import dev.aaronhowser.mods.irregular_implements.item.component.*
@@ -71,7 +72,7 @@ object ModDataComponents : AaronDataComponentRegistry() {
 		register(
 			"can_stand_on_fluids",
 			TagKey.codec(Registries.FLUID).listOf(),
-			AaronExtraCodecs.tagKeyStreamCodec(Registries.FLUID).apply(ByteBufCodecs.list())
+			AaronExtraStreamCodecs.tagKeyStreamCodec(Registries.FLUID).apply(ByteBufCodecs.list())
 		)
 
 	val REDSTONE_REMOTE: DeferredHolder<DataComponentType<*>, DataComponentType<RedstoneRemoteDataComponent>> =
@@ -106,7 +107,7 @@ object ModDataComponents : AaronDataComponentRegistry() {
 		register(
 			"divine_blocks",
 			TagKey.codec(Registries.BLOCK),
-			AaronExtraCodecs.tagKeyStreamCodec(Registries.BLOCK)
+			AaronExtraStreamCodecs.tagKeyStreamCodec(Registries.BLOCK)
 		)
 
 	val IS_ANCHORED: DeferredHolder<DataComponentType<*>, DataComponentType<Unit>> =

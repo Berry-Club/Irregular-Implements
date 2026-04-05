@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
 import dev.aaronhowser.mods.aaron.serialization.AaronExtraCodecs
 import dev.aaronhowser.mods.aaron.packet.AaronPacket
+import dev.aaronhowser.mods.aaron.serialization.AaronExtraStreamCodecs
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import io.netty.buffer.ByteBuf
@@ -45,7 +46,7 @@ class AddIndicatorsPacket(
 				BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), AddIndicatorsPacket::positions,
 				ByteBufCodecs.VAR_INT, AddIndicatorsPacket::durationTicks,
 				ByteBufCodecs.VAR_INT, AddIndicatorsPacket::color,
-				AaronExtraCodecs.VEC3_STREAM_CODEC, AddIndicatorsPacket::dimensions,
+				AaronExtraStreamCodecs.VEC3, AddIndicatorsPacket::dimensions,
 				::AddIndicatorsPacket
 			)
 	}

@@ -15,7 +15,7 @@ It has a predicate that it uses to check if it's allowed to connect to a given p
 That is, it always allows connections. You can change the predicate using KubeJS to call [this method](https://github.com/Berry-Club/Irregular-Implements/blob/main/src/main/kotlin/dev/aaronhowser/mods/irregular_implements/block/block_entity/PlayerInterfaceBlockEntity.kt#L156):
 
 ```js example.js
-const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
+const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block_entity.PlayerInterfaceBlockEntity')
 
 $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
 ```

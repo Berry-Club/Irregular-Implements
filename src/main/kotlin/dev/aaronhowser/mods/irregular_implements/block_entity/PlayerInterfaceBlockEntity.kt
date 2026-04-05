@@ -145,7 +145,7 @@ class PlayerInterfaceBlockEntity(
 		 * Here's an example:
 		 *
 		 * ```js
-		 * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block.block_entity.PlayerInterfaceBlockEntity')
+		 * const $PlayerInterfaceBE = Java.loadClass('dev.aaronhowser.mods.irregular_implements.block_entity.PlayerInterfaceBlockEntity')
 		 *
 		 * $PlayerInterfaceBE.setPlayerPredicate((player, blockEntity) => player.level == blockEntity.level)
 		 * ```

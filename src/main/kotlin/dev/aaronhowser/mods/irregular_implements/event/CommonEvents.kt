@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.aaron.entity.BetterFakePlayerFactory
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
-import dev.aaronhowser.mods.irregular_implements.block.block_entity.*
+import dev.aaronhowser.mods.irregular_implements.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.command.ModCommands
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.effect.ImbueEffect
