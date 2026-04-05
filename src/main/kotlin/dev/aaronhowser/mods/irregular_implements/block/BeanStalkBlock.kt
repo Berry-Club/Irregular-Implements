@@ -39,9 +39,9 @@ class BeanStalkBlock(
 
 	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
 		if (this.isStrong) {
-			if (strongStalkIsDonePredicate.invoke(level, pos)) {
+			if (strongStalkIsDonePredicate(level, pos)) {
 				level.setBlockAndUpdate(
-					pos.above(),
+					pos,
 					ModBlocks.BEAN_POD.get().defaultBlockState()
 				)
 			}

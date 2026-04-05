@@ -12,6 +12,7 @@
 
 - Hopefully fixed a memory leak involving Chat Detectors (#45)
 - Removed ClientLevel from some method signatures, to prevent possible crashes when loaded on servers
+- Magic Beanstalks now correctly spawn the Bean Pod at their top
 
 # 1.10.0
 

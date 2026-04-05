@@ -56,7 +56,7 @@ class PlayerInterfaceBlockEntity(
 
 	fun getItemHandler(direction: Direction?): IItemHandler? {
 		val owner = getPlayer() ?: return null
-		if (!playerPredicate.invoke(owner, this)) return null
+		if (!playerPredicate(owner, this)) return null
 
 		val section = InventorySection.fromDirection(direction)
 
