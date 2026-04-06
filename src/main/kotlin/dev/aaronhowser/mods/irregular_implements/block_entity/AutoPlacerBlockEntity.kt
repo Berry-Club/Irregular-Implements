@@ -4,6 +4,8 @@ import com.mojang.authlib.GameProfile
 import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.loadItems
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.saveItems
 import dev.aaronhowser.mods.irregular_implements.block.AutoPlacerBlock
 import dev.aaronhowser.mods.irregular_implements.menu.auto_placer.AutoPlacerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -14,7 +16,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.Container
-import net.minecraft.world.ContainerHelper
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -128,15 +129,14 @@ class AutoPlacerBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		ContainerHelper.saveAllItems(tag, this.container.items, registries)
-
+		tag.saveItems(container, registries)
 		tag.putInt(MODE_NBT, if (mode == Mode.ON_PULSE) 0 else 1)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+		tag.loadItems(container, registries)
 
 		if (tag.contains(MODE_NBT)) {
 			val modeInt = tag.getInt(MODE_NBT)

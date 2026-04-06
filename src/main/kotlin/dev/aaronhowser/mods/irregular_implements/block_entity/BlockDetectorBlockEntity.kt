@@ -2,6 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.loadItems
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.saveItems
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock.Companion.TRIGGERED
 import dev.aaronhowser.mods.irregular_implements.menu.block_detector.BlockDetectorMenu
@@ -66,12 +68,12 @@ class BlockDetectorBlockEntity(
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
-		ContainerHelper.saveAllItems(tag, container.items, registries)
+		tag.saveItems(container, registries)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		ContainerHelper.loadAllItems(tag, container.items, registries)
+		tag.loadItems(container, registries)
 	}
 
 	companion object {

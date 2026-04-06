@@ -5,6 +5,8 @@ import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.loadItems
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.saveItems
 import dev.aaronhowser.mods.aaron.misc.weakMutableSet
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.block.GlobalChatDetectorBlock
@@ -93,22 +95,22 @@ class GlobalChatDetectorBlockEntity(
 		)
 	}
 
-	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.loadAdditional(tag, registries)
-
-		regexString = tag.getString(MESSAGE_REGEX_NBT)
-		stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
-
-		ContainerHelper.loadAllItems(tag, container.items, registries)
-	}
-
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
 		tag.putString(MESSAGE_REGEX_NBT, regexString)
 		tag.putBoolean(STOPS_MESSAGE_NBT, stopsMessage)
 
-		ContainerHelper.saveAllItems(tag, container.items, registries)
+		tag.saveItems(container, registries)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		regexString = tag.getString(MESSAGE_REGEX_NBT)
+		stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
+
+		tag.loadItems(container, registries)
 	}
 
 	override fun onLoad() {

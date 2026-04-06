@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.loadItems
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.saveItems
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.menu.notification_interface.NotificationInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.packet.server_to_client.SendClientToast
@@ -83,7 +85,7 @@ class NotificationInterfaceBlockEntity(
 		tag.putString(TOAST_DESCRIPTION_NBT, toastDescription)
 
 		if (!container.isEmpty) {
-			ContainerHelper.saveAllItems(tag, container.items, registries)
+			tag.saveItems(container, registries)
 		}
 	}
 
@@ -98,7 +100,7 @@ class NotificationInterfaceBlockEntity(
 		toastTitle = tag.getString(TOAST_TITLE_NBT)
 		toastDescription = tag.getString(TOAST_DESCRIPTION_NBT)
 
-		ContainerHelper.loadAllItems(tag, container.items, registries)
+		tag.loadItems(container, registries)
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {

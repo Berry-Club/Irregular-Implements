@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.loadItems
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.saveItems
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu
@@ -12,7 +14,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -87,7 +88,7 @@ class EntityDetectorBlockEntity(
 		tag.putBoolean(INVERTED_NBT, isInverted)
 		tag.putBoolean(ACTIVE_NBT, isActive)
 
-		ContainerHelper.saveAllItems(tag, container.items, registries)
+		tag.saveItems(container, registries)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -96,11 +97,12 @@ class EntityDetectorBlockEntity(
 		xRadius = tag.getInt(X_RADIUS_NBT)
 		yRadius = tag.getInt(Y_RADIUS_NBT)
 		zRadius = tag.getInt(Z_RADIUS_NBT)
-		filter = Filter.entries[tag.getInt(FILTER_NBT).coerceIn(0, Filter.entries.size - 1)]
+		val filterOrdinal = tag.getInt(FILTER_NBT)
+		filter = Filter.entries[filterOrdinal]
 		isInverted = tag.getBoolean(INVERTED_NBT)
 		isActive = tag.getBoolean(ACTIVE_NBT)
 
-		ContainerHelper.loadAllItems(tag, container.items, registries)
+		tag.loadItems(container, registries)
 	}
 
 	// Menu stuff
