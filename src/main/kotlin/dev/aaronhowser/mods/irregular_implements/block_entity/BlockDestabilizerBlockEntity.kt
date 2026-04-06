@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toBlockPos
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.menu.block_destabilizer.BlockDestabilizerMenu
@@ -141,7 +142,7 @@ class BlockDestabilizerBlockEntity(
 
 			for (tagElement in invalidBlocksTag) {
 				val posLong = (tagElement as LongTag).asLong
-				val blockPos = BlockPos.of(posLong)
+				val blockPos = posLong.toBlockPos()
 				this.lazyBlocks.add(blockPos)
 			}
 		}
@@ -150,21 +151,21 @@ class BlockDestabilizerBlockEntity(
 			val alreadyCheckedTag = tag.getList(ALREADY_CHECKED_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in alreadyCheckedTag) {
 				val posLong = (tagElement as LongTag).asLong
-				val blockPos = BlockPos.of(posLong)
+				val blockPos = posLong.toBlockPos()
 				this.alreadyChecked.add(blockPos)
 			}
 
 			val toCheckTag = tag.getList(TO_CHECK_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in toCheckTag) {
 				val posLong = (tagElement as LongTag).asLong
-				val blockPos = BlockPos.of(posLong)
+				val blockPos = posLong.toBlockPos()
 				this.toCheck.add(blockPos)
 			}
 
 			val targetBlocksTag = tag.getList(TARGET_BLOCKS_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in targetBlocksTag) {
 				val posLong = (tagElement as LongTag).asLong
-				val blockPos = BlockPos.of(posLong)
+				val blockPos = posLong.toBlockPos()
 				this.targetBlockPositions.add(blockPos)
 			}
 		}
@@ -176,7 +177,7 @@ class BlockDestabilizerBlockEntity(
 			val targetBlocksSortedTag = tag.getList(TARGET_BLOCKS_SORTED_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in targetBlocksSortedTag) {
 				val posLong = (tagElement as LongTag).asLong
-				val blockPos = BlockPos.of(posLong)
+				val blockPos = posLong.toBlockPos()
 				this.targetBlocksSorted.add(blockPos)
 			}
 		}

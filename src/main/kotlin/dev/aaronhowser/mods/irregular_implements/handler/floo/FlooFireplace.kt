@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.handler.floo
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.status
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toBlockPos
 import dev.aaronhowser.mods.irregular_implements.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
@@ -103,7 +104,7 @@ class FlooFireplace(
 		fun fromTag(tag: CompoundTag): FlooFireplace {
 			val uuid = tag.getUUID(NBT_MASTER_UUID)
 			val name = tag.getString(NBT_NAME).ifBlank { null }
-			val blockPos = BlockPos.of(tag.getLong(NBT_BLOCK_POS))
+			val blockPos = tag.getLong(NBT_BLOCK_POS).toBlockPos()
 
 			return FlooFireplace(uuid, name, blockPos)
 		}

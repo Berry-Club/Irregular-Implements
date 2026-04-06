@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.redstone_signal
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toBlockPos
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -55,7 +56,9 @@ class RedstoneHandlerSavedData : SavedData() {
 		level.updateNeighborsAt(blockPos, targetState.block)
 	}
 
-	private fun updatePosition(level: ServerLevel, blockPos: Long) = updatePosition(level, BlockPos.of(blockPos))
+	private fun updatePosition(level: ServerLevel, blockPosLong: Long) {
+		updatePosition(level, blockPosLong.toBlockPos())
+	}
 
 	fun getStrongPower(level: ServerLevel, blockPos: BlockPos, facing: Direction): Int {
 		val pos = blockPos.relative(facing.opposite)

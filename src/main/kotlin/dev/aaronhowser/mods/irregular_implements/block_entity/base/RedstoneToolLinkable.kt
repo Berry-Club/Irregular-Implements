@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity.base
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toBlockPos
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 
@@ -10,7 +11,7 @@ interface RedstoneToolLinkable {
 
 	fun loadFromTag(tag: CompoundTag) {
 		if (tag.contains(LINKED_POS_NBT)) {
-			setLinkedPos(BlockPos.of(tag.getLong(LINKED_POS_NBT)))
+			setLinkedPos(tag.getLong(LINKED_POS_NBT).toBlockPos())
 		}
 	}
 

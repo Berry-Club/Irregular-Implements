@@ -4,6 +4,7 @@ import com.google.common.base.Predicate
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toBlockPos
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.particle.ColoredFlameParticleOptions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -174,7 +175,7 @@ class BiomeRadarBlockEntity(
 		antennaValid = tag.getBoolean(ANTENNA_VALID_NBT)
 
 		biomePos = if (tag.contains(BIOME_POS_NBT)) {
-			BlockPos.of(tag.getLong(BIOME_POS_NBT))
+			tag.getLong(BIOME_POS_NBT).toBlockPos()
 		} else {
 			null
 		}

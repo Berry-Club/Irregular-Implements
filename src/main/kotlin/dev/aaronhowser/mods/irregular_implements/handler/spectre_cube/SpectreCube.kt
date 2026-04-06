@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toBlockPos
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -141,7 +142,7 @@ class SpectreCube(
 			cube.owner = tag.getUuidOrNull(OWNER_NBT)
 			cube.interiorHeight = tag.getInt(INTERIOR_HEIGHT_NBT)
 			cube.cubeIndex = tag.getInt(INDEX_NBT)
-			cube.spawnPos = BlockPos.of(tag.getLong(SPAWN_BLOCK_NBT))
+			cube.spawnPos = tag.getLong(SPAWN_BLOCK_NBT).toBlockPos()
 
 			val guestList = tag.getList(GUESTS_NBT, Tag.TAG_COMPOUND.toInt())
 			for (i in guestList.indices) {
