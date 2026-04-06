@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.element
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.override
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
@@ -333,9 +334,9 @@ class ModItemModelProvider(
 			getBuilder(getName(grassSeeds).toString())
 				.parent(ModelFile.UncheckedModelFile("item/generated"))
 				.texture("layer0", "item/grass_seeds")
-				.element()
-				.allFaces { t, u -> u.tintindex(color.id) }
-				.end()
+				.element {
+					allFaces { t, u -> u.tintindex(color.id) }
+				}
 
 			handledItems.add(grassSeeds)
 		}

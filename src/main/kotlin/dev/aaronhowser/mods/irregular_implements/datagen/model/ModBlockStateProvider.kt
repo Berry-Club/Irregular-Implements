@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.element
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDirectionName
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.particle
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
@@ -370,10 +371,10 @@ class ModBlockStateProvider(
 				.texture("texture", texture)
 				.particle(texture)
 
-				.element()
-				.from(x1, y1, z1).to(x2, y2, z2)
-				.textureAll("#texture")
-				.end()
+				.element {
+					from(x1, y1, z1).to(x2, y2, z2)
+					textureAll("#texture")
+				}
 
 			val property = SakanadeBlock.PROPERTY_BY_DIRECTION[direction] ?: continue
 
@@ -401,34 +402,38 @@ class ModBlockStateProvider(
 				.texture("body", mailboxBodyTexture)
 				.particle(mailboxBodyTexture)
 
-				.element()
-				.from(6f, 0f, 6f).to(10f, 16f, 10f)
-				.allFaces { dir, fb ->
-					when (dir) {
-						Direction.DOWN -> fb.uvs(9f, 9f, 7f, 7f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-						Direction.UP -> fb.uvs(7f, 7f, 9f, 9f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-						else -> fb.uvs(7f, 8f, 9f, 16f)
+				.element {
+					from(6f, 0f, 6f)
+					to(10f, 16f, 10f)
+
+					allFaces { dir, fb ->
+						when (dir) {
+							Direction.DOWN -> fb.uvs(9f, 9f, 7f, 7f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+							Direction.UP -> fb.uvs(7f, 7f, 9f, 9f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+							else -> fb.uvs(7f, 8f, 9f, 16f)
+						}
+
+						fb.texture("#post")
 					}
-
-					fb.texture("#post")
 				}
-				.end()
 
-				.element()
-				.from(5f, 15f, 1f).to(11f, 22f, 15f)
-				.allFaces { dir, fb ->
-					when (dir) {
-						Direction.DOWN -> fb.uvs(9.5f, 11.5f, 6.5f, 4.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-						Direction.UP -> fb.uvs(6.5f, 4.5f, 9.5f, 11.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-						Direction.NORTH -> fb.uvs(6.5f, 5f, 9.5f, 8.5f)
-						Direction.SOUTH -> fb.uvs(6.5f, 5f, 9.5f, 8.5f)
-						Direction.WEST -> fb.uvs(4.5f, 5f, 11.5f, 8.5f)
-						Direction.EAST -> fb.uvs(4.5f, 5f, 11.5f, 8.5f)
+				.element {
+					from(5f, 15f, 1f)
+					to(11f, 22f, 15f)
+
+					allFaces { dir, fb ->
+						when (dir) {
+							Direction.DOWN -> fb.uvs(9.5f, 11.5f, 6.5f, 4.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+							Direction.UP -> fb.uvs(6.5f, 4.5f, 9.5f, 11.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+							Direction.NORTH -> fb.uvs(6.5f, 5f, 9.5f, 8.5f)
+							Direction.SOUTH -> fb.uvs(6.5f, 5f, 9.5f, 8.5f)
+							Direction.WEST -> fb.uvs(4.5f, 5f, 11.5f, 8.5f)
+							Direction.EAST -> fb.uvs(4.5f, 5f, 11.5f, 8.5f)
+						}
+
+						fb.texture("#body")
 					}
-
-					fb.texture("#body")
 				}
-				.end()
 		}
 
 		getVariantBuilder(block)
@@ -455,70 +460,70 @@ class ModBlockStateProvider(
 
 				if (isFlagRaised) {
 					model
-						.element()
-						.from(4f, 23f, 4f).to(5f, 25f, 5f)
-						.allFaces { dir, fb ->
-							when (dir) {
-								Direction.DOWN -> fb.uvs(6.5f, 10f, 6f, 9.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.UP -> fb.uvs(9.5f, 9.5f, 10f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.NORTH -> fb.uvs(9.5f, 3.5f, 10f, 4.5f)
-								Direction.SOUTH -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
-								Direction.WEST -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
-								Direction.EAST -> fb.uvs(9.5f, 3.5f, 10f, 4.5f)
-							}
+						.element {
+							from(4f, 23f, 4f).to(5f, 25f, 5f)
+								.allFaces { dir, fb ->
+									when (dir) {
+										Direction.DOWN -> fb.uvs(6.5f, 10f, 6f, 9.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.UP -> fb.uvs(9.5f, 9.5f, 10f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.NORTH -> fb.uvs(9.5f, 3.5f, 10f, 4.5f)
+										Direction.SOUTH -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
+										Direction.WEST -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
+										Direction.EAST -> fb.uvs(9.5f, 3.5f, 10f, 4.5f)
+									}
 
-							fb.texture("#flag")
+									fb.texture("#flag")
+								}
 						}
-						.end()
 
-						.element()
-						.from(4f, 19f, 3f).to(5f, 25f, 4f)
-						.allFaces { dir, fb ->
-							when (dir) {
-								Direction.DOWN -> fb.uvs(6.5f, 10.5f, 6f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.UP -> fb.uvs(9.5f, 10f, 10f, 10.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.NORTH -> fb.uvs(9.5f, 3.5f, 10f, 6.5f)
-								Direction.SOUTH -> fb.uvs(6f, 3.5f, 6.5f, 6.5f)
-								Direction.WEST -> fb.uvs(5.5f, 3.5f, 6f, 6.5f)
-								Direction.EAST -> fb.uvs(10f, 3.5f, 10.5f, 6.5f)
-							}
+						.element {
+							from(4f, 19f, 3f).to(5f, 25f, 4f)
+								.allFaces { dir, fb ->
+									when (dir) {
+										Direction.DOWN -> fb.uvs(6.5f, 10.5f, 6f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.UP -> fb.uvs(9.5f, 10f, 10f, 10.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.NORTH -> fb.uvs(9.5f, 3.5f, 10f, 6.5f)
+										Direction.SOUTH -> fb.uvs(6f, 3.5f, 6.5f, 6.5f)
+										Direction.WEST -> fb.uvs(5.5f, 3.5f, 6f, 6.5f)
+										Direction.EAST -> fb.uvs(10f, 3.5f, 10.5f, 6.5f)
+									}
 
-							fb.texture("#flag")
+									fb.texture("#flag")
+								}
 						}
-						.end()
 				} else {
 					model
-						.element()
-						.from(4f, 18f, 7f).to(5f, 19f, 9f)
-						.allFaces { dir, fb ->
-							when (dir) {
-								Direction.DOWN -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
-								Direction.UP -> fb.uvs(9.5f, 3.5f, 10f, 4.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.NORTH -> fb.uvs(6.5f, 10f, 6f, 9.5f)
-								Direction.SOUTH -> fb.uvs(9.5f, 9.5f, 10f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.WEST -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
-								Direction.EAST -> fb.uvs(9.5f, 3.5f, 10f, 4.5f).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90)
-							}
+						.element {
+							from(4f, 18f, 7f).to(5f, 19f, 9f)
+								.allFaces { dir, fb ->
+									when (dir) {
+										Direction.DOWN -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
+										Direction.UP -> fb.uvs(9.5f, 3.5f, 10f, 4.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.NORTH -> fb.uvs(6.5f, 10f, 6f, 9.5f)
+										Direction.SOUTH -> fb.uvs(9.5f, 9.5f, 10f, 10f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.WEST -> fb.uvs(6f, 3.5f, 6.5f, 4.5f)
+										Direction.EAST -> fb.uvs(9.5f, 3.5f, 10f, 4.5f).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90)
+									}
 
-							fb.texture("#flag")
+									fb.texture("#flag")
+								}
 						}
-						.end()
 
-						.element()
-						.from(4f, 19f, 3f).to(5f, 20f, 9f)
-						.allFaces { dir, fb ->
-							when (dir) {
-								Direction.DOWN -> fb.uvs(6f, 3.5f, 6.5f, 6.5f)
-								Direction.UP -> fb.uvs(9.5f, 3.5f, 10f, 6.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.NORTH -> fb.uvs(6.5f, 10.5f, 6f, 10f)
-								Direction.SOUTH -> fb.uvs(9.5f, 10f, 10f, 10.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
-								Direction.WEST -> fb.uvs(5.5f, 3.5f, 6f, 6.5f)
-								Direction.EAST -> fb.uvs(10f, 3.5f, 10.5f, 6.5f).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90)
-							}
+						.element {
+							from(4f, 19f, 3f).to(5f, 20f, 9f)
+								.allFaces { dir, fb ->
+									when (dir) {
+										Direction.DOWN -> fb.uvs(6f, 3.5f, 6.5f, 6.5f)
+										Direction.UP -> fb.uvs(9.5f, 3.5f, 10f, 6.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.NORTH -> fb.uvs(6.5f, 10.5f, 6f, 10f)
+										Direction.SOUTH -> fb.uvs(9.5f, 10f, 10f, 10.5f).rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+										Direction.WEST -> fb.uvs(5.5f, 3.5f, 6f, 6.5f)
+										Direction.EAST -> fb.uvs(10f, 3.5f, 10.5f, 6.5f).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90)
+									}
 
-							fb.texture("#flag")
+									fb.texture("#flag")
+								}
 						}
-						.end()
 				}
 					.texture("flag", redstoneTexture)
 
@@ -567,57 +572,57 @@ class ModBlockStateProvider(
 				.texture("texture", texture)
 				.particle(texture)
 
-				.element()
-				.from(6f, 0f, 6f).to(10f, 1f, 10f)
-				.allFaces { direction, modelBuilder ->
-					if (direction.axis.isVertical) {
-						modelBuilder.uvs(6f, 12f, 10f, 16f)
-					} else {
-						modelBuilder.uvs(6f, 15f, 10f, 16f)
-					}
+				.element {
+					from(6f, 0f, 6f).to(10f, 1f, 10f)
+						.allFaces { direction, modelBuilder ->
+							if (direction.axis.isVertical) {
+								modelBuilder.uvs(6f, 12f, 10f, 16f)
+							} else {
+								modelBuilder.uvs(6f, 15f, 10f, 16f)
+							}
 
-					modelBuilder.texture("#texture")
+							modelBuilder.texture("#texture")
+						}
 				}
-				.end()
 
-				.element()
-				.from(6.5f, 1f, 6.5f).to(9.5f, 2f, 9.5f)
-				.allFaces { direction, modelBuilder ->
-					if (direction == Direction.DOWN) {
-						modelBuilder.uvs(9f, 15f, 7f, 14f)
-					} else {
-						modelBuilder.uvs(7f, 14f, 9f, 15f)
-					}
+				.element {
+					from(6.5f, 1f, 6.5f).to(9.5f, 2f, 9.5f)
+						.allFaces { direction, modelBuilder ->
+							if (direction == Direction.DOWN) {
+								modelBuilder.uvs(9f, 15f, 7f, 14f)
+							} else {
+								modelBuilder.uvs(7f, 14f, 9f, 15f)
+							}
 
-					modelBuilder.texture("#texture")
+							modelBuilder.texture("#texture")
+						}
 				}
-				.end()
 
-				.element()
-				.from(7.5f, 2f, 7.5f).to(8.5f, 4f, 8.5f)
-				.allFaces { direction, modelBuilder ->
-					when (direction) {
-						Direction.DOWN -> modelBuilder.uvs(7f, 13f, 6f, 12f)
-						Direction.UP -> modelBuilder.uvs(6f, 12f, 7f, 13f)
-						else -> modelBuilder.uvs(6f, 10f, 7f, 12f)
-					}
+				.element {
+					from(7.5f, 2f, 7.5f).to(8.5f, 4f, 8.5f)
+						.allFaces { direction, modelBuilder ->
+							when (direction) {
+								Direction.DOWN -> modelBuilder.uvs(7f, 13f, 6f, 12f)
+								Direction.UP -> modelBuilder.uvs(6f, 12f, 7f, 13f)
+								else -> modelBuilder.uvs(6f, 10f, 7f, 12f)
+							}
 
-					modelBuilder.texture("#texture")
+							modelBuilder.texture("#texture")
+						}
 				}
-				.end()
 
-				.element()
-				.from(7.5f, 4f, 7.5f).to(8.5f, 5f, 8.5f)
-				.allFaces { direction, modelBuilder ->
-					if (direction == Direction.DOWN) {
-						modelBuilder.uvs(7f, 10f, 6f, 9f)
-					} else {
-						modelBuilder.uvs(6f, 9f, 7f, 10f)
-					}
+				.element {
+					from(7.5f, 4f, 7.5f).to(8.5f, 5f, 8.5f)
+						.allFaces { direction, modelBuilder ->
+							if (direction == Direction.DOWN) {
+								modelBuilder.uvs(7f, 10f, 6f, 9f)
+							} else {
+								modelBuilder.uvs(6f, 9f, 7f, 10f)
+							}
 
-					modelBuilder.texture("#texture")
+							modelBuilder.texture("#texture")
+						}
 				}
-				.end()
 
 			getVariantBuilder(block)
 				.forAllStates {
@@ -687,16 +692,16 @@ class ModBlockStateProvider(
 			.texture("texture", texture)
 			.texture("side", slabTexture)
 			.particle(texture)
-			.element()
-			.from(6f, 0f, 6f).to(10f, 1f, 10f)
-			.allFaces { face, modelBuilder ->
-				if (face.axis.isVertical) {
-					modelBuilder.texture("#texture")
-				} else {
-					modelBuilder.texture("#side")
-				}
+			.element {
+				from(6f, 0f, 6f).to(10f, 1f, 10f)
+					.allFaces { face, modelBuilder ->
+						if (face.axis.isVertical) {
+							modelBuilder.texture("#texture")
+						} else {
+							modelBuilder.texture("#side")
+						}
+					}
 			}
-			.end()
 
 		getVariantBuilder(block)
 			.forAllStates {
@@ -1047,15 +1052,15 @@ class ModBlockStateProvider(
 			.particle(baseTexture)
 			.renderType(RenderType.cutoutMipped().name)
 
-			.element()
-			.cube("#base")
-			.end()
+			.element {
+				cube("#base")
+			}
 
-			.element()
-			.cube("#tint")
-			.ao(false)
-			.emissivity(15, 15)
-			.end()
+			.element {
+				cube("#tint")
+				ao(false)
+				emissivity(15, 15)
+			}
 
 		simpleBlockWithItem(block, luminousModel)
 	}
@@ -1079,16 +1084,16 @@ class ModBlockStateProvider(
 					.texture("inner", green)
 					.particle(texture)
 
-					.element()
-					.from(6f, 6f, 6f).to(10f, 10f, 10f)
-					.textureAll("#texture")
-					.end()
+					.element {
+						from(6f, 6f, 6f).to(10f, 10f, 10f)
+							.textureAll("#texture")
+					}
 
-					.element()
-					.from(7f, 7f, 7f).to(9f, 9f, 9f)
-					.textureAll("#inner")
-					.emissivity(15, 15)
-					.end()
+					.element {
+						from(7f, 7f, 7f).to(9f, 9f, 9f)
+							.textureAll("#inner")
+							.emissivity(15, 15)
+					}
 
 				ConfiguredModel
 					.builder()
@@ -1116,89 +1121,89 @@ class ModBlockStateProvider(
 			.texture("glass", mcLoc("block/glass"))
 			.texture("top", modLoc("block/biome_radar_top"))
 
-			.element()
-			.from(0f, 14f, 0f).to(16f, 16f, 16f)
-			.face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
-			.face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#top").end()
-			.face(Direction.NORTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-			.face(Direction.SOUTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-			.face(Direction.WEST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-			.face(Direction.EAST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-			.end()
+			.element {
+				from(0f, 14f, 0f).to(16f, 16f, 16f)
+					.face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
+					.face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#top").end()
+					.face(Direction.NORTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+					.face(Direction.SOUTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+					.face(Direction.WEST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+					.face(Direction.EAST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+			}
 
-			.element()
-			.from(0f, 0f, 0f).to(16f, 2f, 16f)
-			.face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
-			.face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#texture").end()
-			.face(Direction.NORTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-			.face(Direction.SOUTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-			.face(Direction.WEST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-			.face(Direction.EAST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-			.end()
+			.element {
+				from(0f, 0f, 0f).to(16f, 2f, 16f)
+					.face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
+					.face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#texture").end()
+					.face(Direction.NORTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+					.face(Direction.SOUTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+					.face(Direction.WEST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+					.face(Direction.EAST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+			}
 
-			.element()
-			.from(0f, 2f, 0f).to(2f, 14f, 2f)
-			.face(Direction.DOWN).uvs(16f, 2f, 14f, 0f).texture("#texture").end()
-			.face(Direction.UP).uvs(0f, 0f, 2f, 2f).texture("#texture").end()
-			.face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.end()
+			.element {
+				from(0f, 2f, 0f).to(2f, 14f, 2f)
+					.face(Direction.DOWN).uvs(16f, 2f, 14f, 0f).texture("#texture").end()
+					.face(Direction.UP).uvs(0f, 0f, 2f, 2f).texture("#texture").end()
+					.face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+					.face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+					.face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+					.face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			}
 
-			.element()
-			.from(14f, 2f, 0f).to(16f, 14f, 2f)
-			.face(Direction.DOWN).uvs(2f, 2f, 0f, 0f).texture("#texture").end()
-			.face(Direction.UP).uvs(14f, 0f, 16f, 2f).texture("#texture").end()
-			.face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.end()
+			.element {
+				from(14f, 2f, 0f).to(16f, 14f, 2f)
+					.face(Direction.DOWN).uvs(2f, 2f, 0f, 0f).texture("#texture").end()
+					.face(Direction.UP).uvs(14f, 0f, 16f, 2f).texture("#texture").end()
+					.face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+					.face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+					.face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+					.face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+			}
 
-			.element()
-			.from(0f, 2f, 14f).to(2f, 14f, 16f)
-			.face(Direction.DOWN).uvs(16f, 16f, 14f, 14f).texture("#texture").end()
-			.face(Direction.UP).uvs(0f, 14f, 2f, 16f).texture("#texture").end()
-			.face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.end()
+			.element {
+				from(0f, 2f, 14f).to(2f, 14f, 16f)
+					.face(Direction.DOWN).uvs(16f, 16f, 14f, 14f).texture("#texture").end()
+					.face(Direction.UP).uvs(0f, 14f, 2f, 16f).texture("#texture").end()
+					.face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+					.face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+					.face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+					.face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			}
 
-			.element()
-			.from(14f, 2f, 14f).to(16f, 14f, 16f)
-			.face(Direction.DOWN).uvs(2f, 16f, 0f, 14f).texture("#texture").end()
-			.face(Direction.UP).uvs(14f, 14f, 16f, 16f).texture("#texture").end()
-			.face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-			.face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-			.end()
+			.element {
+				from(14f, 2f, 14f).to(16f, 14f, 16f)
+					.face(Direction.DOWN).uvs(2f, 16f, 0f, 14f).texture("#texture").end()
+					.face(Direction.UP).uvs(14f, 14f, 16f, 16f).texture("#texture").end()
+					.face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+					.face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+					.face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+					.face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+			}
 
-			.element()
-			.from(0.00625f, 2f, 2f).to(0.00625f, 14f, 14f)
-			.face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.end()
+			.element {
+				from(0.00625f, 2f, 2f).to(0.00625f, 14f, 14f)
+					.face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+					.face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			}
 
-			.element()
-			.from(15.99375f, 2f, 2f).to(15.99375f, 14f, 14f)
-			.face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.end()
+			.element {
+				from(15.99375f, 2f, 2f).to(15.99375f, 14f, 14f)
+					.face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+					.face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			}
 
-			.element()
-			.from(2f, 2f, 0.00625f).to(14f, 14f, 0.00625f)
-			.face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.end()
+			.element {
+				from(2f, 2f, 0.00625f).to(14f, 14f, 0.00625f)
+					.face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+					.face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			}
 
-			.element()
-			.from(2f, 2f, 15.99375f).to(14f, 14f, 15.99375f)
-			.face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-			.end()
+			.element {
+				from(2f, 2f, 15.99375f).to(14f, 14f, 15.99375f)
+					.face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+					.face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+			}
 
 		simpleBlockWithItem(block, model)
 	}
@@ -1214,10 +1219,10 @@ class ModBlockStateProvider(
 		val pedestalModel = models()
 			.withExistingParent(name(block) + "_pedestal", "block/block")
 			.texture("all", mcLoc("block/obsidian"))
-			.element()
-			.from(1f, 0.1f, 1f).to(15f, 2f, 15f)
-			.textureAll("#all")
-			.end()
+			.element {
+				from(1f, 0.1f, 1f).to(15f, 2f, 15f)
+					.textureAll("#all")
+			}
 
 		// Makes the blockstate, still need to make the item model
 		getMultipartBuilder(block)
@@ -1236,15 +1241,15 @@ class ModBlockStateProvider(
 			.texture("pedestal", mcLoc("block/obsidian"))
 			.renderType(RenderType.translucent().name)
 
-			.element()
-			.from(0f, 0f, 0f).to(16f, 16f, 16f)
-			.textureAll("#case")
-			.end()
+			.element {
+				from(0f, 0f, 0f).to(16f, 16f, 16f)
+					.textureAll("#case")
+			}
 
-			.element()
-			.from(1f, 0.1f, 1f).to(15f, 2f, 15f)
-			.textureAll("#pedestal")
-			.end()
+			.element {
+				from(1f, 0.1f, 1f).to(15f, 2f, 15f)
+					.textureAll("#pedestal")
+			}
 
 		simpleBlockItem(block, itemModel)
 	}
@@ -1283,10 +1288,10 @@ class ModBlockStateProvider(
 			.withExistingParent(name(block), "block/thin_block")
 			.texture("texture", texture)
 			.particle(texture)
-			.element()
-			.from(0f, 0f, 0f).to(16f, 1f, 16f)
-			.textureAll("#texture")
-			.end()
+			.element {
+				from(0f, 0f, 0f).to(16f, 1f, 16f)
+					.textureAll("#texture")
+			}
 			.renderType(RenderType.translucent().name)
 
 		simpleBlockWithItem(block, model)
@@ -1727,40 +1732,39 @@ class ModBlockStateProvider(
 					.texture("side", sideOverlay)
 					.renderType(RenderType.cutout().name)
 
-					.element()
-					.from(0f, 0f, 0f).to(16f, 16f, 16f)
-					.textureAll("#all")
-					.end()
+					.element {
+						from(0f, 0f, 0f).to(16f, 16f, 16f)
+							.textureAll("#all")
+					}
 
-					.element()
-					.from(-0.01f, -0.01f, -0.01f).to(16.01f, 16.01f, 16.01f)
-					.emissivity(15, 15)
+					.element {
+						from(-0.01f, -0.01f, -0.01f).to(16.01f, 16.01f, 16.01f)
+							.emissivity(15, 15)
 
-					.face(Direction.NORTH)
-					.texture("#front")
-					.end()
+							.face(Direction.NORTH)
+							.texture("#front")
+							.end()
 
-					.face(Direction.EAST)
-					.texture("#side")
-					.end()
+							.face(Direction.EAST)
+							.texture("#side")
+							.end()
 
-					.face(Direction.SOUTH)
-					.texture("#side")
-					.end()
+							.face(Direction.SOUTH)
+							.texture("#side")
+							.end()
 
-					.face(Direction.WEST)
-					.texture("#side")
-					.end()
+							.face(Direction.WEST)
+							.texture("#side")
+							.end()
 
-					.face(Direction.UP)
-					.texture("#side")
-					.end()
+							.face(Direction.UP)
+							.texture("#side")
+							.end()
 
-					.face(Direction.DOWN)
-					.texture("#side")
-					.end()
-
-					.end()
+							.face(Direction.DOWN)
+							.texture("#side")
+							.end()
+					}
 
 				ConfiguredModel
 					.builder()
@@ -1806,15 +1810,15 @@ class ModBlockStateProvider(
 					.particle(texture)
 					.renderType(RenderType.translucent().name)
 
-					.element()
-					.from(0f, 0f, 0f).to(16f, height, 16f)
-					.textureAll("#all")
-					.end()
+					.element {
+						from(0f, 0f, 0f).to(16f, height, 16f)
+							.textureAll("#all")
+					}
 
-					.element()
-					.from(2f, innerBottom, 2f).to(14f, innerTop, 14f)
-					.textureAll("#all")
-					.end()
+					.element {
+						from(2f, innerBottom, 2f).to(14f, innerTop, 14f)
+							.textureAll("#all")
+					}
 
 				ConfiguredModel
 					.builder()
@@ -1847,10 +1851,10 @@ class ModBlockStateProvider(
 						.texture("texture", texture)
 						.particle(texture)
 
-						.element()
-						.from(0f, 0f, 0f).to(16f, 15f, 16f)
-						.textureAll("#texture")
-						.end()
+						.element {
+							from(0f, 0f, 0f).to(16f, 15f, 16f)
+								.textureAll("#texture")
+						}
 				} else {
 					models()
 						.cubeAll(
@@ -1966,13 +1970,13 @@ class ModBlockStateProvider(
 				.texture("all", texture)
 				.particle(texture)
 
-				.element()
-				.from(0f, 0f, 0f).to(16f, 16f, 16f)
-				.allFaces { _, faceBuilder ->
-					faceBuilder.tintindex(0)
+				.element {
+					from(0f, 0f, 0f).to(16f, 16f, 16f)
+						.allFaces { _, faceBuilder ->
+							faceBuilder.tintindex(0)
+						}
+						.textureAll("#all")
 				}
-				.textureAll("#all")
-				.end()
 
 			if (block == ModBlocks.BIOME_GLASS.get()) {
 				model = model.renderType(RenderType.translucent().name)
@@ -2127,42 +2131,42 @@ class ModBlockStateProvider(
 			.renderType(RenderType.cutoutMipped().name)
 
 			// Base north/south
-			.element()
-			.from(0.8f, 0f, 8f).to(15.2f, 16f, 8f)
-			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
-			.shade(false)
-			.face(Direction.NORTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
-			.face(Direction.SOUTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
-			.end()
+			.element {
+				from(0.8f, 0f, 8f).to(15.2f, 16f, 8f)
+					.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+					.shade(false)
+					.face(Direction.NORTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+					.face(Direction.SOUTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+			}
 
 			// Base east/west
-			.element()
-			.from(8f, 0f, 0.8f).to(8f, 16f, 15.2f)
-			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
-			.shade(false)
-			.face(Direction.EAST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
-			.face(Direction.WEST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
-			.end()
+			.element {
+				from(8f, 0f, 0.8f).to(8f, 16f, 15.2f)
+					.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+					.shade(false)
+					.face(Direction.EAST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+					.face(Direction.WEST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+			}
 
 			// Glow north/south
-			.element()
-			.from(0.8f, 0f, 8f).to(15.2f, 16f, 8f)
-			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
-			.shade(false)
-			.emissivity(15, 15)
-			.face(Direction.NORTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
-			.face(Direction.SOUTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
-			.end()
+			.element {
+				from(0.8f, 0f, 8f).to(15.2f, 16f, 8f)
+					.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+					.shade(false)
+					.emissivity(15, 15)
+					.face(Direction.NORTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+					.face(Direction.SOUTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+			}
 
 			// Glow east/west
-			.element()
-			.from(8f, 0f, 0.8f).to(8f, 16f, 15.2f)
-			.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
-			.shade(false)
-			.emissivity(15, 15)
-			.face(Direction.EAST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
-			.face(Direction.WEST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
-			.end()
+			.element {
+				from(8f, 0f, 0.8f).to(8f, 16f, 15.2f)
+					.rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
+					.shade(false)
+					.emissivity(15, 15)
+					.face(Direction.EAST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+					.face(Direction.WEST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+			}
 
 		simpleBlock(block, blockModel)
 
@@ -2185,11 +2189,11 @@ class ModBlockStateProvider(
 					.texture("all", opaqueTexture)
 					.particle(translucentTexture)
 
-					.element()
-					.cube("#all")
-					.ao(false)
-					.emissivity(15, 15)
-					.end()
+					.element {
+						cube("#all")
+						ao(false)
+						emissivity(15, 15)
+					}
 
 				simpleBlockWithItem(opaqueBlock, opaqueModel)
 			}
@@ -2202,11 +2206,11 @@ class ModBlockStateProvider(
 					.texture("all", translucentTexture)
 					.particle(translucentTexture)
 
-					.element()
-					.cube("#all")
-					.ao(false)
-					.emissivity(15, 15)
-					.end()
+					.element {
+						cube("#all")
+						ao(false)
+						emissivity(15, 15)
+					}
 
 				simpleBlockWithItem(translucentBlock, translucentModel)
 			}
@@ -2239,15 +2243,15 @@ class ModBlockStateProvider(
 					.particle(luminousTintTexture)
 					.renderType(RenderType.cutoutMipped().name)
 
-					.element()
-					.cube("#base")
-					.end()
+					.element {
+						cube("#base")
+					}
 
-					.element()
-					.cube("#tint")
-					.ao(false)
-					.emissivity(15, 15)
-					.end()
+					.element {
+						cube("#tint")
+						ao(false)
+						emissivity(15, 15)
+					}
 
 				simpleBlockWithItem(luminous, luminousModel)
 			}
@@ -2279,10 +2283,10 @@ class ModBlockStateProvider(
 				.texture("texture", texture)
 				.particle(texture)
 
-				.element()
-				.from(0f, 15f, 0f).to(16f, 16f, 16f)
-				.textureAll("#texture")
-				.end()
+				.element {
+					from(0f, 15f, 0f).to(16f, 16f, 16f)
+						.textureAll("#texture")
+				}
 
 			simpleBlockWithItem(deferred.get(), model)
 		}
