@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import net.minecraft.client.Minecraft
 import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.client.event.ClientTickEvent
@@ -52,22 +53,18 @@ object LineIndicatorRenderer {
 		val cameraPos = event.camera.position
 		val poseStack = event.poseStack
 
-		poseStack.pushPose()
+		poseStack.withPose {
+			poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
-		for (indicator in lineIndicators) {
-
-			RenderUtil.renderLineThroughWalls(
-				poseStack,
-				indicator.start,
-				indicator.end,
-				indicator.color
-			)
-
+			for (indicator in lineIndicators) {
+				RenderUtil.renderLineThroughWalls(
+					poseStack,
+					indicator.start,
+					indicator.end,
+					indicator.color
+				)
+			}
 		}
-
-		poseStack.popPose()
 	}
 
 }

@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.entity.WeatherCloudEntity
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
 import net.minecraft.client.renderer.MultiBufferSource
@@ -34,19 +35,17 @@ class WeatherCloudRenderer(
 		val rayLength = 1f
 		val rayWidth = 0.33f
 
-		poseStack.pushPose()
-
-		RenderUtil.renderDragonRays(
-			poseStack = poseStack,
-			time = time,
-			bufferSource = bufferSource,
-			centerColor = centerColor,
-			outerColor = outerColor,
-			rayLength = rayLength,
-			rayWidth = rayWidth
-		)
-
-		poseStack.popPose()
+		poseStack.withPose {
+			RenderUtil.renderDragonRays(
+				poseStack = poseStack,
+				time = time,
+				bufferSource = bufferSource,
+				centerColor = centerColor,
+				outerColor = outerColor,
+				rayLength = rayLength,
+				rayWidth = rayWidth
+			)
+		}
 
 		super.render(spectreIlluminatorEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
 	}

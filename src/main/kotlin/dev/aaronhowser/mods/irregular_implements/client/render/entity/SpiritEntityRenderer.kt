@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.entity.SpiritEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.model.SlimeModel
@@ -28,14 +29,12 @@ class SpiritEntityRenderer(
 	}
 
 	override fun render(entity: SpiritEntity, entityYaw: Float, partialTicks: Float, poseStack: PoseStack, buffer: MultiBufferSource, packedLight: Int) {
-		poseStack.pushPose()
+		poseStack.withPose {
+			val scale = 0.5f
+			poseStack.scale(scale, scale, scale)
 
-		val scale = 0.5f
-		poseStack.scale(scale, scale, scale)
-
-		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
-
-		poseStack.popPose()
+			super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
+		}
 	}
 
 	override fun getBlockLightLevel(entity: SpiritEntity, pos: BlockPos): Int = 15

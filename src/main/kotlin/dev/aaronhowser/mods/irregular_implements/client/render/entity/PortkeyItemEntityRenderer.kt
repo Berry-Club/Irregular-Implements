@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.entity.PortkeyItemEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.renderer.MultiBufferSource
@@ -33,36 +34,35 @@ class PortkeyItemEntityRenderer(
 		buffer: MultiBufferSource,
 		packedLight: Int
 	) {
-		poseStack.pushPose()
+		poseStack.withPose {
+			val portkeyStack = entity.item.copy()
+			val disguise = portkeyStack.get(ModDataComponents.PORTKEY_DISGUISE)
 
-		val portkeyStack = entity.item.copy()
-		val disguise = portkeyStack.get(ModDataComponents.PORTKEY_DISGUISE)
+			val renderStack = if (disguise == null || entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
+				portkeyStack
+			} else {
+				disguise.stack.copy()
+			}
 
-		val renderStack = if (disguise == null || entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
-			portkeyStack
-		} else {
-			disguise.stack.copy()
+			if (portkeyStack.has(ModDataComponents.GLOBAL_POS) && entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
+				renderStack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+			}
+
+			random.setSeed(ItemEntityRenderer.getSeedForItemStack(renderStack).toLong())
+			val bakedmodel = itemRenderer.getModel(renderStack, entity.level(), null, entity.id)
+			val flag = bakedmodel.isGui3d
+
+			val shouldBob = IClientItemExtensions.of(renderStack).shouldBobAsEntity(renderStack)
+
+			val f1 = if (shouldBob) Mth.sin((entity.getAge().toFloat() + partialTicks) / 10.0f + entity.bobOffs) * 0.1f + 0.1f else 0f
+			val f2 = bakedmodel.transforms.getTransform(ItemDisplayContext.GROUND).scale.y()
+			poseStack.translate(0.0f, f1 + 0.25f * f2, 0.0f)
+
+			val f3 = entity.getSpin(partialTicks)
+			poseStack.mulPose(Axis.YP.rotation(f3))
+			ItemEntityRenderer.renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, renderStack, bakedmodel, flag, this.random)
 		}
 
-		if (portkeyStack.has(ModDataComponents.GLOBAL_POS) && entity.age < PortkeyItemEntity.PORTKEY_PICKUP_DELAY) {
-			renderStack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-		}
-
-		random.setSeed(ItemEntityRenderer.getSeedForItemStack(renderStack).toLong())
-		val bakedmodel = itemRenderer.getModel(renderStack, entity.level(), null, entity.id)
-		val flag = bakedmodel.isGui3d
-
-		val shouldBob = IClientItemExtensions.of(renderStack).shouldBobAsEntity(renderStack)
-
-		val f1 = if (shouldBob) Mth.sin((entity.getAge().toFloat() + partialTicks) / 10.0f + entity.bobOffs) * 0.1f + 0.1f else 0f
-		val f2 = bakedmodel.transforms.getTransform(ItemDisplayContext.GROUND).scale.y()
-		poseStack.translate(0.0f, f1 + 0.25f * f2, 0.0f)
-
-		val f3 = entity.getSpin(partialTicks)
-		poseStack.mulPose(Axis.YP.rotation(f3))
-		ItemEntityRenderer.renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, renderStack, bakedmodel, flag, this.random)
-
-		poseStack.popPose()
 		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
 	}
 

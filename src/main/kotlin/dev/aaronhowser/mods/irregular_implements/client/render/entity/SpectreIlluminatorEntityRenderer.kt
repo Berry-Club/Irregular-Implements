@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.renderer.MultiBufferSource
@@ -32,20 +33,19 @@ class SpectreIlluminatorEntityRenderer(
 		val rayLength = LENGTH_START + (LENGTH_END - LENGTH_START) * percentGrown
 		val rayWidth = rayLength * WIDTH_FACTOR
 
-		poseStack.pushPose()
-		poseStack.translate(0.0, 0.5, 0.0)
+		poseStack.withPose {
+			poseStack.translate(0.0, 0.5, 0.0)
 
-		RenderUtil.renderRaysDoubleLayer(
-			poseStack = poseStack,
-			time = time,
-			bufferSource = bufferSource,
-			centerColor = centerColor,
-			outerColor = outerColor,
-			rayLength = rayLength,
-			rayWidth = rayWidth
-		)
-
-		poseStack.popPose()
+			RenderUtil.renderRaysDoubleLayer(
+				poseStack = poseStack,
+				time = time,
+				bufferSource = bufferSource,
+				centerColor = centerColor,
+				outerColor = outerColor,
+				rayLength = rayLength,
+				rayWidth = rayWidth
+			)
+		}
 
 		super.render(spectreIlluminatorEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
 	}

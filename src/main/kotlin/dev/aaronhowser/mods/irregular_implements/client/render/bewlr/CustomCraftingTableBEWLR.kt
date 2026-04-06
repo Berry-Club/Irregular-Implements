@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.BOTTOM
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SAW_AND_HAMMER
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SCISSORS
@@ -54,22 +55,20 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		poseStack.pushPose()
+		poseStack.withPose {
+			Minecraft.getInstance()
+				.itemRenderer
+				.getModel(itemToRender, null, null, 0)
+				.applyTransform(displayContext, poseStack, false)
 
-		Minecraft.getInstance()
-			.itemRenderer
-			.getModel(itemToRender, null, null, 0)
-			.applyTransform(displayContext, poseStack, false)
-
-		RenderUtil.renderTexturedCube(
-			poseStack,
-			RenderType.cutout(),
-			TOP, BOTTOM,
-			SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
-			packedLight, packedOverlay
-		)
-
-		poseStack.popPose()
+			RenderUtil.renderTexturedCube(
+				poseStack,
+				RenderType.cutout(),
+				TOP, BOTTOM,
+				SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
+				packedLight, packedOverlay
+			)
+		}
 	}
 
 	private fun renderBaseItem(
@@ -80,29 +79,28 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int,
 	) {
-		poseStack.pushPose()
+		poseStack.withPose {
 
-		poseStack.translate(-0.5, -0.5, -0.5)
-		poseStack.scale(0.999f, 0.999f, 0.999f)
-		poseStack.translate(0.5, 0.5, 0.5)
+			poseStack.translate(-0.5, -0.5, -0.5)
+			poseStack.scale(0.999f, 0.999f, 0.999f)
+			poseStack.translate(0.5, 0.5, 0.5)
 
-		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
-		poseStack.translate(0.5, 0.5, 0.5)
+			poseStack.translate(0.0005f, 0.0005f, 0.0005f)
+			poseStack.translate(0.5, 0.5, 0.5)
 
-		Minecraft.getInstance()
-			.itemRenderer
-			.renderStatic(
-				itemToRender,
-				displayContext,
-				packedLight,
-				packedOverlay,
-				poseStack,
-				buffer,
-				null,
-				0,
-			)
-
-		poseStack.popPose()
+			Minecraft.getInstance()
+				.itemRenderer
+				.renderStatic(
+					itemToRender,
+					displayContext,
+					packedLight,
+					packedOverlay,
+					poseStack,
+					buffer,
+					null,
+					0,
+				)
+		}
 	}
 
 	object ClientItemExtensions : IClientItemExtensions {

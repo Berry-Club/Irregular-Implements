@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
@@ -24,43 +25,41 @@ class DiaphanousBEWLR : BlockEntityWithoutLevelRenderer(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		poseStack.pushPose()
+		poseStack.withPose {
+			poseStack.translate(0.5, 0.5, 0.5)
 
-		poseStack.translate(0.5, 0.5, 0.5)
+			if (displayContext == ItemDisplayContext.GUI) {
+				val time = Minecraft.getInstance().level?.gameTime ?: 0
 
-		if (displayContext == ItemDisplayContext.GUI) {
-			val time = Minecraft.getInstance().level?.gameTime ?: 0
+				val oscillationSpeed = 2.5f
+				val oscillationAmplitude = 0.0375f
+				val baseValue = 0.9625f
 
-			val oscillationSpeed = 2.5f
-			val oscillationAmplitude = 0.0375f
-			val baseValue = 0.9625f
+				val oscillation = oscillationAmplitude * sin(time.toFloat() / oscillationSpeed)
 
-			val oscillation = oscillationAmplitude * sin(time.toFloat() / oscillationSpeed)
+				val modelScale = if (stack.has(ModDataComponents.IS_INVERTED)) {
+					baseValue - oscillation
+				} else {
+					baseValue + oscillation
+				}
 
-			val modelScale = if (stack.has(ModDataComponents.IS_INVERTED)) {
-				baseValue - oscillation
-			} else {
-				baseValue + oscillation
+				poseStack.scale(modelScale, modelScale, modelScale)
 			}
 
-			poseStack.scale(modelScale, modelScale, modelScale)
+			val blockToRender = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
+			val itemRenderer = Minecraft.getInstance().itemRenderer
+
+			itemRenderer.renderStatic(
+				blockToRender.asItem().defaultInstance,
+				displayContext,
+				packedLight,
+				packedOverlay,
+				poseStack,
+				buffer,
+				null,
+				0,
+			)
 		}
-
-		val blockToRender = stack.get(ModDataComponents.BLOCK) ?: Blocks.STONE
-		val itemRenderer = Minecraft.getInstance().itemRenderer
-
-		itemRenderer.renderStatic(
-			blockToRender.asItem().defaultInstance,
-			displayContext,
-			packedLight,
-			packedOverlay,
-			poseStack,
-			buffer,
-			null,
-			0,
-		)
-
-		poseStack.popPose()
 	}
 
 	object ClientItemExtensions : IClientItemExtensions {

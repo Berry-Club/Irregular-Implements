@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.block_entity.DiaphanousBlockEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
@@ -41,62 +42,60 @@ class DiaphanousBER(
 
 		val diaphBlockAlpha = if (blockEntity.isInverted) 1 - baseAlpha else baseAlpha
 
-		poseStack.pushPose()
+		poseStack.withPose {
+			val stateToRender = blockEntity.renderedBlockState
+			val model = context.blockRenderDispatcher.getBlockModel(stateToRender)
+			val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
 
-		val stateToRender = blockEntity.renderedBlockState
-		val model = context.blockRenderDispatcher.getBlockModel(stateToRender)
-		val vertexConsumer = bufferSource.getBuffer(RenderType.translucent())
+			val myState = blockEntity.blockState
 
-		val myState = blockEntity.blockState
+			for (direction in Direction.entries) {
+				val posThere = blockEntity.blockPos.relative(direction)
 
-		for (direction in Direction.entries) {
-			val posThere = blockEntity.blockPos.relative(direction)
+				val blockEntityThere = level.getBlockEntity(posThere) as? DiaphanousBlockEntity
+				val blockStateThere = level.getBlockState(posThere)
 
-			val blockEntityThere = level.getBlockEntity(posThere) as? DiaphanousBlockEntity
-			val blockStateThere = level.getBlockState(posThere)
+				val shouldSkip = blockEntityThere?.isInverted == blockEntity.isInverted
+						|| blockStateThere.hidesNeighborFace(level, posThere, myState, direction.opposite)
 
-			val shouldSkip = blockEntityThere?.isInverted == blockEntity.isInverted
-					|| blockStateThere.hidesNeighborFace(level, posThere, myState, direction.opposite)
+				if (shouldSkip) continue
 
-			if (shouldSkip) continue
+				val quads = model.getQuads(
+					stateToRender,
+					direction,
+					XoroshiroRandomSource(0, 0),
+					ModelData.EMPTY,
+					null
+				)
 
-			val quads = model.getQuads(
-				stateToRender,
-				direction,
-				XoroshiroRandomSource(0, 0),
-				ModelData.EMPTY,
-				null
-			)
+				val blockColors = Minecraft.getInstance().blockColors
 
-			val blockColors = Minecraft.getInstance().blockColors
+				for (quad in quads) {
+					val tintIndex = quad.tintIndex
 
-			for (quad in quads) {
-				val tintIndex = quad.tintIndex
+					val color = if (tintIndex == -1) {
+						0xFFFFFFFF.toInt()
+					} else {
+						blockColors.getColor(
+							stateToRender, level, blockEntity.blockPos, tintIndex
+						)
+					}
 
-				val color = if (tintIndex == -1) {
-					0xFFFFFFFF.toInt()
-				} else {
-					blockColors.getColor(
-						stateToRender, level, blockEntity.blockPos, tintIndex
+					val red = ((color shr 16) and 0xFF) / 255f
+					val green = ((color shr 8) and 0xFF) / 255f
+					val blue = (color and 0xFF) / 255f
+					var colorAlpha = ((color shr 24) and 0xFF) / 255f
+					if (colorAlpha == 0f) colorAlpha = 1f
+
+					vertexConsumer.putBulkData(
+						poseStack.last(),
+						quad,
+						red, green, blue, diaphBlockAlpha * colorAlpha,
+						packedLight, packedOverlay,
+						true
 					)
 				}
-
-				val red = ((color shr 16) and 0xFF) / 255f
-				val green = ((color shr 8) and 0xFF) / 255f
-				val blue = (color and 0xFF) / 255f
-				var colorAlpha = ((color shr 24) and 0xFF) / 255f
-				if (colorAlpha == 0f) colorAlpha = 1f
-
-				vertexConsumer.putBulkData(
-					poseStack.last(),
-					quad,
-					red, green, blue, diaphBlockAlpha * colorAlpha,
-					packedLight, packedOverlay,
-					true
-				)
 			}
 		}
-
-		poseStack.popPose()
 	}
 }

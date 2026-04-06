@@ -2,8 +2,9 @@ package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block_entity.PlayerInterfaceBlockEntity
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.renderer.MultiBufferSource
@@ -39,41 +40,40 @@ class PlayerInterfaceBER(
 		val profile = skull.get(DataComponents.PROFILE) ?: return
 		val model = skullModels[SkullBlock.Types.PLAYER] ?: return
 
-		poseStack.pushPose()
+		poseStack.withPose {
 
-		val localPlayer = AaronClientUtil.localPlayer
-		if (localPlayer != null) {
-			val deltaPos = blockEntity.blockPos
-				.above()
-				.center
-				.vectorTo(localPlayer.eyePosition)
-				.normalize()
+			val localPlayer = AaronClientUtil.localPlayer
+			if (localPlayer != null) {
+				val deltaPos = blockEntity.blockPos
+					.above()
+					.center
+					.vectorTo(localPlayer.eyePosition)
+					.normalize()
 
-			poseStack.translate(0.5, 0.5, 0.5)
+				poseStack.translate(0.5, 0.5, 0.5)
 
-			val yaw = atan2(deltaPos.x, deltaPos.z).toFloat() - 180 * Mth.DEG_TO_RAD
-			val pitch = atan2(deltaPos.y, deltaPos.horizontalDistance()).toFloat()
+				val yaw = atan2(deltaPos.x, deltaPos.z).toFloat() - 180 * Mth.DEG_TO_RAD
+				val pitch = atan2(deltaPos.y, deltaPos.horizontalDistance()).toFloat()
 
-			poseStack.mulPose(Axis.YP.rotation(yaw))
-			poseStack.mulPose(Axis.XP.rotation(pitch))
+				poseStack.mulPose(Axis.YP.rotation(yaw))
+				poseStack.mulPose(Axis.XP.rotation(pitch))
 
-			poseStack.translate(-0.5, -0.5, -0.5)
+				poseStack.translate(-0.5, -0.5, -0.5)
+			}
+
+			poseStack.translate(0f, 1.1f, 0f)
+
+			SkullBlockRenderer.renderSkull(
+				null,
+				0f,
+				0f,
+				poseStack,
+				bufferSource,
+				0xFFFFFF,
+				model,
+				SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, profile)
+			)
 		}
-
-		poseStack.translate(0f, 1.1f, 0f)
-
-		SkullBlockRenderer.renderSkull(
-			null,
-			0f,
-			0f,
-			poseStack,
-			bufferSource,
-			0xFFFFFF,
-			model,
-			SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, profile)
-		)
-
-		poseStack.popPose()
 	}
 
 }

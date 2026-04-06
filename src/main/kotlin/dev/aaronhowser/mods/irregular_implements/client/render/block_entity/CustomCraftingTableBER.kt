@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.client.renderer.MultiBufferSource
@@ -30,21 +31,19 @@ class CustomCraftingTableBER(
 			packedLight, packedOverlay
 		)
 
-		poseStack.pushPose()
+		poseStack.withPose {
+			poseStack.scale(0.999f, 0.999f, 0.999f)
+			poseStack.translate(0.0005f, 0.0005f, 0.0005f)
 
-		poseStack.scale(0.999f, 0.999f, 0.999f)
-		poseStack.translate(0.0005f, 0.0005f, 0.0005f)
-
-		@Suppress("DEPRECATION")
-		context.blockRenderDispatcher.renderSingleBlock(
-			blockEntity.renderedBlockState,
-			poseStack,
-			bufferSource,
-			packedLight,
-			packedOverlay,
-		)
-
-		poseStack.popPose()
+			@Suppress("DEPRECATION")
+			context.blockRenderDispatcher.renderSingleBlock(
+				blockEntity.renderedBlockState,
+				poseStack,
+				bufferSource,
+				packedLight,
+				packedOverlay,
+			)
+		}
 	}
 
 	companion object {

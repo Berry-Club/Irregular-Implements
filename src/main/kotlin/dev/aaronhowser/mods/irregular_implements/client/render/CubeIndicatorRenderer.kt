@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.neoforged.neoforge.client.event.ClientTickEvent
@@ -50,20 +51,18 @@ object CubeIndicatorRenderer {
 		val cameraPos = event.camera.position
 		val poseStack = event.poseStack
 
-		poseStack.pushPose()
+		poseStack.withPose {
+			poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
-		poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
-		for (indicator in cubeIndicators) {
-			RenderUtil.renderCubeThroughWalls(
-				poseStack,
-				indicator.target.center,
-				indicator.size,
-				indicator.color
-			)
+			for (indicator in cubeIndicators) {
+				RenderUtil.renderCubeThroughWalls(
+					poseStack,
+					indicator.target.center,
+					indicator.size,
+					indicator.color
+				)
+			}
 		}
-
-		poseStack.popPose()
 	}
 
 }

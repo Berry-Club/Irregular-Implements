@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.block_entity.SpectreEnergyInjectorBlockEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
@@ -21,16 +22,15 @@ class SpectreEnergyInjectorBER(
 	) {
 		val time = ((blockEntity.level?.gameTime ?: 0) + partialTick) / 200f
 
-		poseStack.pushPose()
-		poseStack.translate(0.5f, 0.6f, 0.5f)
+		poseStack.withPose {
+			poseStack.translate(0.5f, 0.6f, 0.5f)
 
-		RenderUtil.renderRaysDoubleLayer(
-			poseStack = poseStack,
-			time = time,
-			bufferSource = bufferSource
-		)
-
-		poseStack.popPose()
+			RenderUtil.renderRaysDoubleLayer(
+				poseStack = poseStack,
+				time = time,
+				bufferSource = bufferSource
+			)
+		}
 	}
 
 	override fun shouldRenderOffScreen(blockEntity: SpectreEnergyInjectorBlockEntity): Boolean {
