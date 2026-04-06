@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isNotEmpty
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -46,7 +47,7 @@ class ApplySpectreAnchorRecipe(
 		val ANCHOR_INGREDIENT: Ingredient = ModItems.SPECTRE_ANCHOR.asIngredient()
 
 		fun isApplicable(itemStack: ItemStack): Boolean {
-			return !itemStack.isEmpty
+			return itemStack.isNotEmpty()
 					&& !itemStack.isItem(ModItemTagsProvider.SPECTRE_ANCHOR_BLACKLIST)
 					&& !itemStack.has(ModDataComponents.IS_ANCHORED)
 		}
