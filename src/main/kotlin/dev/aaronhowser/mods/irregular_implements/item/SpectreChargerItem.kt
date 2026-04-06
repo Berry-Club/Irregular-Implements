@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.setUnit
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -73,7 +74,7 @@ class SpectreChargerItem(
 			if (usedStack.has(ModDataComponents.IS_ENABLED)) {
 				usedStack.remove(ModDataComponents.IS_ENABLED)
 			} else {
-				usedStack.set(ModDataComponents.IS_ENABLED, Unit.INSTANCE)
+				usedStack.setUnit(ModDataComponents.IS_ENABLED)
 			}
 		}
 

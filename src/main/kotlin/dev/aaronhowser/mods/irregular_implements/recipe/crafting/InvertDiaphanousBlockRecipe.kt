@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.setUnit
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -32,7 +33,7 @@ class InvertDiaphanousBlockRecipe(
 		if (output.has(ModDataComponents.IS_INVERTED)) {
 			output.remove(ModDataComponents.IS_INVERTED)
 		} else {
-			output.set(ModDataComponents.IS_INVERTED, Unit.INSTANCE)
+			output.setUnit(ModDataComponents.IS_INVERTED)
 		}
 
 		return output
