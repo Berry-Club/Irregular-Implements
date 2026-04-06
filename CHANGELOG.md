@@ -1,3 +1,9 @@
+# 1.10.2
+
+### Changed
+
+- Made the Aaron dependency range not have an explicit max, because updates might not always be breaking
+
 # 1.10.1
 
 ### Changed
