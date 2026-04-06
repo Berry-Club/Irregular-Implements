@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -26,8 +27,9 @@ class ApplySpectreAnchorRecipe(
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
 		val nonAnchor = input.items().first(::isApplicable)
 
-		val result = nonAnchor.copyWithCount(1)
-		result.set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
+		val result = nonAnchor
+			.copyWithCount(1)
+			.withComponent(ModDataComponents.IS_ANCHORED.get(), Unit.INSTANCE)
 
 		return result
 	}

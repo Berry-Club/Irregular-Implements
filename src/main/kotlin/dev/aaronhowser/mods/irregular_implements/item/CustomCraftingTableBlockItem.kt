@@ -1,11 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
-import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.BlockItem
@@ -51,11 +51,7 @@ class CustomCraftingTableBlockItem(properties: Properties) : BlockItem(
 
 	companion object {
 		fun ofBlock(block: Block): ItemStack {
-			val stack = ModItems.CUSTOM_CRAFTING_TABLE.toStack()
-
-			stack.set(ModDataComponents.BLOCK, block)
-
-			return stack
+			return ModBlocks.CUSTOM_CRAFTING_TABLE.withComponent(ModDataComponents.BLOCK.get(), block)
 		}
 	}
 

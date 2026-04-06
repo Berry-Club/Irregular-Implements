@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -28,8 +29,9 @@ class ApplyLuminousPowderRecipe(
 	override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
 		val nonAnchor = input.items().first(::isApplicable)
 
-		val result = nonAnchor.copyWithCount(1)
-		result.set(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE)
+		val result = nonAnchor
+			.copyWithCount(1)
+			.withComponent(ModDataComponents.HAS_LUMINOUS_POWDER.get(), Unit.INSTANCE)
 
 		return result
 	}

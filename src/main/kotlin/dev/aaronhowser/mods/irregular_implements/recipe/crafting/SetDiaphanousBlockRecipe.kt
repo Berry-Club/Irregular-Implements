@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -45,8 +46,9 @@ class SetDiaphanousBlockRecipe(
 		val diaphanousBlockStack = input.items().first { it.item == ModBlocks.DIAPHANOUS_BLOCK.asItem() }
 		val blockStack = input.items().first { !it.isEmpty && !it.isItem(ModBlocks.DIAPHANOUS_BLOCK.asItem()) && it.item is BlockItem }
 
-		val output = diaphanousBlockStack.copyWithCount(1)
-		output.set(ModDataComponents.BLOCK, (blockStack.item as BlockItem).block)
+		val output = diaphanousBlockStack
+			.copyWithCount(1)
+			.withComponent(ModDataComponents.BLOCK.get(), (blockStack.item as BlockItem).block)
 
 		return output
 	}

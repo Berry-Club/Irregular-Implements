@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen.recipe
 import dev.aaronhowser.mods.aaron.datagen.AaronRecipeProvider
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getAsStack
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
@@ -1244,9 +1245,7 @@ class ModRecipeProvider(
 		).save(recipeOutput)
 
 		shapedRecipe(
-			ItemStack(ModItems.DIAPHANOUS_BLOCK.get(), 4).also {
-				it.set(ModDataComponents.BLOCK, Blocks.STONE)
-			},
+			ModItems.DIAPHANOUS_BLOCK.toStack(4).withComponent(ModDataComponents.BLOCK.get(), Blocks.STONE),
 			" G ,RLB, Y ",
 			mapOf(
 				'G' to Items.GREEN_STAINED_GLASS.asIngredient(),

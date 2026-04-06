@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModRecipeSerializers
@@ -60,8 +61,7 @@ class LubricateBootRecipe(
 
 		if (bootStack == null || lubeStack == null) return ItemStack.EMPTY
 
-		val newBootStack = bootStack.copy()
-		newBootStack.set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
+		val newBootStack = bootStack.copy().withComponent(ModDataComponents.LUBRICATED.get(), Unit.INSTANCE)
 
 		return newBootStack
 	}

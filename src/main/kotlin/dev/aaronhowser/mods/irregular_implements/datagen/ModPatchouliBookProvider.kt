@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
@@ -1418,11 +1419,10 @@ class ModPatchouliBookProvider(
 				.linkRecipe(true)
 				.addItemLike(ModBlocks.DIAPHANOUS_BLOCK)
 				.addItemStack(
-					ModBlocks.DIAPHANOUS_BLOCK.asItem()
-						.defaultInstance
-						.apply {
-							set(ModDataComponents.BLOCK, Blocks.OAK_LOG)
-						}
+					ModBlocks.DIAPHANOUS_BLOCK.withComponent(
+						ModDataComponents.BLOCK.get(),
+						Blocks.OAK_LOG
+					)
 				)
 				.build()
 		)

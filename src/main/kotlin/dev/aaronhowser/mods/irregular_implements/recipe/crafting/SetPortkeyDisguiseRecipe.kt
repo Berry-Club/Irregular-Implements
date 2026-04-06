@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.recipe.crafting
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.asIngredient
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.item.component.PortkeyDisguiseDataComponent
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -27,8 +28,9 @@ class SetPortkeyDisguiseRecipe(
 		val portkey = input.items().first { PORTKEY_INGREDIENT.test(it) }
 		val nonPortkey = input.items().first(::isApplicable)
 
-		val result = portkey.copyWithCount(1)
-		result.set(ModDataComponents.PORTKEY_DISGUISE, PortkeyDisguiseDataComponent(nonPortkey.copy()))
+		val result = portkey
+			.copyWithCount(1)
+			.withComponent(ModDataComponents.PORTKEY_DISGUISE.get(), PortkeyDisguiseDataComponent(nonPortkey.copy()))
 
 		return result
 	}

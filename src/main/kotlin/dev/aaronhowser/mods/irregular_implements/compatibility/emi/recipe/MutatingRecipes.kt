@@ -1,7 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.compatibility.emi.recipe
 
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getAsStack
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.block.DiaphanousBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.recipe.crafting.ApplyLuminousPowderRecipe
@@ -14,6 +15,7 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.util.Unit
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.alchemy.Potions
 import net.minecraft.world.item.crafting.Ingredient
 import net.neoforged.neoforge.common.Tags
@@ -30,9 +32,7 @@ object MutatingRecipes {
 		}
 
 		val lubricating = cleanBoots.associateWith { stack ->
-			stack.copy().apply {
-				set(ModDataComponents.LUBRICATED, Unit.INSTANCE)
-			}
+			stack.copy().withComponent(ModDataComponents.LUBRICATED.get(), Unit.INSTANCE)
 		}
 
 		val cleaning = lubricating.entries.associate { (k, v) -> v to k }
@@ -62,13 +62,11 @@ object MutatingRecipes {
 
 	private fun spectreAnchor(): EmiRecipe {
 		val allStacks = (BuiltInRegistries.ITEM).mapNotNull { item ->
-			item.defaultInstance.takeIf { stack -> ApplySpectreAnchorRecipe.isApplicable(stack) }
+			item.defaultInstance.takeIf(ApplySpectreAnchorRecipe::isApplicable)
 		}
 
 		val associations = allStacks.associateWith { stack ->
-			stack.copy().apply {
-				set(ModDataComponents.IS_ANCHORED, Unit.INSTANCE)
-			}
+			stack.copy().withComponent(ModDataComponents.IS_ANCHORED.get(), Unit.INSTANCE)
 		}
 
 		val anchorStack = ModItems.SPECTRE_ANCHOR.toStack()
@@ -90,9 +88,7 @@ object MutatingRecipes {
 		}
 
 		val associations = allStacks.associateWith { stack ->
-			stack.copy().apply {
-				set(ModDataComponents.HAS_LUMINOUS_POWDER, Unit.INSTANCE)
-			}
+			stack.copy().withComponent(ModDataComponents.HAS_LUMINOUS_POWDER.get(), Unit.INSTANCE)
 		}
 
 		val luminousPowderStack = ModItems.LUMINOUS_POWDER.toStack()
@@ -116,10 +112,7 @@ object MutatingRecipes {
 
 		val associations = validOuterItems.associateWith { stack ->
 			val block = (stack.item as BlockItem).block
-
-			ModItems.CUSTOM_CRAFTING_TABLE.toStack().apply {
-				set(ModDataComponents.BLOCK, block)
-			}
+			ModItems.CUSTOM_CRAFTING_TABLE.withComponent(ModDataComponents.BLOCK.get(), block)
 		}
 
 		val craftingTableIngredient = Ingredient.of(Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
@@ -141,16 +134,12 @@ object MutatingRecipes {
 
 		val validBlockStacks = BuiltInRegistries.BLOCK.mapNotNull { block ->
 			if (!DiaphanousBlock.isValidBlock(block, level)) return@mapNotNull null
-
-			block.asItem().defaultInstance.takeUnless { it.isEmpty }
+			block.asItem().defaultInstance.takeUnless(ItemStack::isEmpty)
 		}
 
 		val setAssociations = validBlockStacks.associateWith { stack ->
-			val block = (stack.item as? BlockItem)?.block
-
-			ModItems.DIAPHANOUS_BLOCK.toStack().apply {
-				set(ModDataComponents.BLOCK, block)
-			}
+			val block = (stack.item as BlockItem).block
+			ModItems.DIAPHANOUS_BLOCK.withComponent(ModDataComponents.BLOCK.get(), block)
 		}
 
 		val defaultDiaphanousBlock = ModItems.DIAPHANOUS_BLOCK.toStack()
@@ -167,9 +156,7 @@ object MutatingRecipes {
 			.build(OtherUtil.modResource("/set_diaphanous_block"))
 
 		val invertAssociations = setAssociations.values.associateWith { stack ->
-			stack.copy().apply {
-				set(ModDataComponents.IS_INVERTED, Unit.INSTANCE)
-			}
+			stack.copy().withComponent(ModDataComponents.IS_INVERTED.get(), Unit.INSTANCE)
 		}
 
 		val invertRecipe = MutatingEmiRecipe.Builder()

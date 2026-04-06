@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBiomeTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -44,9 +45,7 @@ class BiomeCrystalItem(properties: Properties) : Item(properties) {
 		}
 
 		fun getCrystal(biomeHolder: Holder<Biome>): ItemStack {
-			val stack = ModItems.BIOME_CRYSTAL.toStack()
-			stack.set(ModDataComponents.BIOME, biomeHolder)
-			return stack
+			return ModItems.BIOME_CRYSTAL.withComponent(ModDataComponents.BIOME.get(), biomeHolder)
 		}
 
 		fun getItemColor(stack: ItemStack, tintIndex: Int): Int {
