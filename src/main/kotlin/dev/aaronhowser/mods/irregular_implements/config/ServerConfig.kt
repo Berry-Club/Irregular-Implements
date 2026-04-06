@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.config
 
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.section
 import net.neoforged.neoforge.common.ModConfigSpec
 import org.apache.commons.lang3.tuple.Pair
 
@@ -75,17 +76,15 @@ class ServerConfig(
 	}
 
 	private fun triggerGlass() {
-		builder.push(TRIGGER_GLASS_CATEGORY)
+		builder.section(TRIGGER_GLASS_CATEGORY) {
+			triggerGlassRange = builder
+				.comment("How far should the Trigger Glass effect propagate? (in blocks)")
+				.defineInRange("triggerGlassRange", 20, 1, Int.MAX_VALUE)
 
-		triggerGlassRange = builder
-			.comment("How far should the Trigger Glass effect propagate? (in blocks)")
-			.defineInRange("triggerGlassRange", 20, 1, Int.MAX_VALUE)
-
-		triggerGlassDuration = builder
-			.comment("How long should the Trigger Glass remain non-solid? (in ticks)")
-			.defineInRange("triggerGlassDuration", 20 * 3, 1, Int.MAX_VALUE)
-
-		builder.pop()
+			triggerGlassDuration = builder
+				.comment("How long should the Trigger Glass remain non-solid? (in ticks)")
+				.defineInRange("triggerGlassDuration", 20 * 3, 1, Int.MAX_VALUE)
+		}
 	}
 
 	private fun basicServerConfigs() {
@@ -175,105 +174,102 @@ class ServerConfig(
 	}
 
 	private fun spectreConfigs() {
-		builder.push(SPECTRE_CATEGORY)
+		builder.section(SPECTRE_CATEGORY) {
 
-		spectreBufferCapacity = builder
-			.comment("What is the maximum energy that a Spectre Energy network can store?")
-			.defineInRange("capacity", 1_000_000, 1, Int.MAX_VALUE)
+			spectreBufferCapacity = builder
+				.comment("What is the maximum energy that a Spectre Energy network can store?")
+				.defineInRange("capacity", 1_000_000, 1, Int.MAX_VALUE)
 
-		spectreBasicRate = builder
-			.comment("How much energy should a Basic Spectre Coil transfer per tick?")
-			.defineInRange("basicRate", 1024, 1, Int.MAX_VALUE)
+			spectreBasicRate = builder
+				.comment("How much energy should a Basic Spectre Coil transfer per tick?")
+				.defineInRange("basicRate", 1024, 1, Int.MAX_VALUE)
 
-		spectreRedstoneRate = builder
-			.comment("How much energy should a Redstone Spectre Coil transfer per tick?")
-			.defineInRange("redstoneRate", 4096, 1, Int.MAX_VALUE)
+			spectreRedstoneRate = builder
+				.comment("How much energy should a Redstone Spectre Coil transfer per tick?")
+				.defineInRange("redstoneRate", 4096, 1, Int.MAX_VALUE)
 
-		spectreEnderRate = builder
-			.comment("How much energy should an Ender Spectre Coil transfer per tick?")
-			.defineInRange("enderRate", 20480, 1, Int.MAX_VALUE)
+			spectreEnderRate = builder
+				.comment("How much energy should an Ender Spectre Coil transfer per tick?")
+				.defineInRange("enderRate", 20480, 1, Int.MAX_VALUE)
 
-		spectreNumberRate = builder
-			.comment("How much energy should a Number Spectre Coil generate per tick?")
-			.defineInRange("numberRate", 128, 1, Int.MAX_VALUE)
+			spectreNumberRate = builder
+				.comment("How much energy should a Number Spectre Coil generate per tick?")
+				.defineInRange("numberRate", 128, 1, Int.MAX_VALUE)
 
-		spectreGenesisRate = builder
-			.comment("How much energy should a Genesis Spectre Coil generate per tick?")
-			.defineInRange("genesisRate", 10_000_000, 1, Int.MAX_VALUE)
+			spectreGenesisRate = builder
+				.comment("How much energy should a Genesis Spectre Coil generate per tick?")
+				.defineInRange("genesisRate", 10_000_000, 1, Int.MAX_VALUE)
 
-		spectreChargerBasic = builder
-			.comment("How fast should the Basic Spectre Charger charge items?")
-			.defineInRange("chargerBasic", 1024, 1, Int.MAX_VALUE)
+			spectreChargerBasic = builder
+				.comment("How fast should the Basic Spectre Charger charge items?")
+				.defineInRange("chargerBasic", 1024, 1, Int.MAX_VALUE)
 
-		specterChargerRedstone = builder
-			.comment("How fast should the Redstone Spectre Charger charge items?")
-			.defineInRange("chargerRedstone", 4096, 1, Int.MAX_VALUE)
+			specterChargerRedstone = builder
+				.comment("How fast should the Redstone Spectre Charger charge items?")
+				.defineInRange("chargerRedstone", 4096, 1, Int.MAX_VALUE)
 
-		spectreChargerEnder = builder
-			.comment("How fast should the Ender Spectre Charger charge items?")
-			.defineInRange("chargerEnder", 20480, 1, Int.MAX_VALUE)
+			spectreChargerEnder = builder
+				.comment("How fast should the Ender Spectre Charger charge items?")
+				.defineInRange("chargerEnder", 20480, 1, Int.MAX_VALUE)
 
-		spectreChargerGenesis = builder
-			.comment("How fast should the Genesis Spectre Charger charge items?")
-			.defineInRange("chargerGenesis", Int.MAX_VALUE, 1, Int.MAX_VALUE)
+			spectreChargerGenesis = builder
+				.comment("How fast should the Genesis Spectre Charger charge items?")
+				.defineInRange("chargerGenesis", Int.MAX_VALUE, 1, Int.MAX_VALUE)
 
-		spectreImbueChance = builder
-			.comment("What is the chance that the Spectre Imbue will cancel incoming damage?")
-			.defineInRange("imbueProcChance", 0.1, 0.0, 1.0)
+			spectreImbueChance = builder
+				.comment("What is the chance that the Spectre Imbue will cancel incoming damage?")
+				.defineInRange("imbueProcChance", 0.1, 0.0, 1.0)
 
-		spiritMaxAge = builder
-			.comment("How long should a Spirit last before it despawns? (in ticks)")
-			.defineInRange("spiritMaxAge", 20 * 20, 1, Int.MAX_VALUE)
+			spiritMaxAge = builder
+				.comment("How long should a Spirit last before it despawns? (in ticks)")
+				.defineInRange("spiritMaxAge", 20 * 20, 1, Int.MAX_VALUE)
 
-		spiritBaseSpawnChance = builder
-			.comment("What is the base chance of a Spirit spawning when an entity dies?")
-			.defineInRange("spiritBaseSpawnChance", 0.01, 0.0, 1.0)
+			spiritBaseSpawnChance = builder
+				.comment("What is the base chance of a Spirit spawning when an entity dies?")
+				.defineInRange("spiritBaseSpawnChance", 0.01, 0.0, 1.0)
 
-		spiritSpawnChanceDragonKilledBonus = builder
-			.comment("How much is the Spirit spawn chance increased if the Ender Dragon has been killed?")
-			.defineInRange("spiritSpawnDragonKilledBonus", 0.07, 0.0, 1.0)
+			spiritSpawnChanceDragonKilledBonus = builder
+				.comment("How much is the Spirit spawn chance increased if the Ender Dragon has been killed?")
+				.defineInRange("spiritSpawnDragonKilledBonus", 0.07, 0.0, 1.0)
 
-		spiritSpawnFullMoonBonus = builder
-			.comment("How much is the Spirit spawn chance increased if it's a full moon?")
-			.defineInRange("spiritSpawnFullMoonBonus", 0.02, 0.0, 1.0)
-
-		builder.pop()
+			spiritSpawnFullMoonBonus = builder
+				.comment("How much is the Spirit spawn chance increased if it's a full moon?")
+				.defineInRange("spiritSpawnFullMoonBonus", 0.02, 0.0, 1.0)
+		}
 	}
 
 	private fun biomePainter() {
-		builder.push(BIOME_PAINTER_CATEGORY)
+		builder.section(BIOME_PAINTER_CATEGORY) {
 
-		biomePainterRadius = builder
-			.comment("The radius that the Biome Painter will affect. 0 is just the targeted block, 1 is a 3x3x3 area, etc.")
-			.defineInRange("biomePainterRadius", 2, 0, 100)
+			biomePainterRadius = builder
+				.comment("The radius that the Biome Painter will affect. 0 is just the targeted block, 1 is a 3x3x3 area, etc.")
+				.defineInRange("biomePainterRadius", 2, 0, 100)
 
-		biomePainterViewHorizontalRadius = builder
-			.comment("The horizontal that you can see and paint biomes from.")
-			.defineInRange("biomePainterViewHorizontalRadius", 10, 1, 100)
+			biomePainterViewHorizontalRadius = builder
+				.comment("The horizontal that you can see and paint biomes from.")
+				.defineInRange("biomePainterViewHorizontalRadius", 10, 1, 100)
 
-		biomePainterViewVerticalRadius = builder
-			.comment("The vertical that you can see and paint biomes from.")
-			.defineInRange("biomePainterViewVerticalRadius", 5, 1, 100)
-
-		builder.pop()
+			biomePainterViewVerticalRadius = builder
+				.comment("The vertical that you can see and paint biomes from.")
+				.defineInRange("biomePainterViewVerticalRadius", 5, 1, 100)
+		}
 	}
 
 	private fun biomeRadar() {
-		builder.push(BIOME_RADAR_CATEGORY)
+		builder.section(BIOME_RADAR_CATEGORY) {
 
-		biomeRadarSearchRadius = builder
-			.comment("The radius that the Biome Radar will search for the selected biome.")
-			.defineInRange("biomeRadarSearchRadius", 6400, 1, 10000)
+			biomeRadarSearchRadius = builder
+				.comment("The radius that the Biome Radar will search for the selected biome.")
+				.defineInRange("biomeRadarSearchRadius", 6400, 1, 10000)
 
-		biomeRadarHorizontalStep = builder
-			.comment("The horizontal step size that the Biome Radar will use when searching.")
-			.defineInRange("biomeRadarHorizontalStep", 32, 1, 100)
+			biomeRadarHorizontalStep = builder
+				.comment("The horizontal step size that the Biome Radar will use when searching.")
+				.defineInRange("biomeRadarHorizontalStep", 32, 1, 100)
 
-		biomeRadarVerticalStep = builder
-			.comment("The vertical step size that the Biome Radar will use when searching.")
-			.defineInRange("biomeRadarVerticalStep", 64, 1, 100)
-
-		builder.pop()
+			biomeRadarVerticalStep = builder
+				.comment("The vertical step size that the Biome Radar will use when searching.")
+				.defineInRange("biomeRadarVerticalStep", 64, 1, 100)
+		}
 	}
 
 	companion object {

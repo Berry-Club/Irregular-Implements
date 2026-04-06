@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.config
 
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.section
 import net.neoforged.neoforge.common.ModConfigSpec
 import org.apache.commons.lang3.tuple.Pair
 
@@ -34,29 +35,27 @@ class ClientConfig(
 	}
 
 	private fun biomePainter() {
-		builder.push(ServerConfig.BIOME_PAINTER_CATEGORY)
+		builder.section(ServerConfig.BIOME_PAINTER_CATEGORY) {
+			biomePainterCorrectBiomeCubeSize = builder
+				.comment("The size of the cube shown on correct biome positions.")
+				.defineInRange("biomePainterCorrectBiomeCubeSize", 0.05, 0.01, 1.0)
 
-		biomePainterCorrectBiomeCubeSize = builder
-			.comment("The size of the cube shown on correct biome positions.")
-			.defineInRange("biomePainterCorrectBiomeCubeSize", 0.05, 0.01, 1.0)
+			biomePainterIncorrectBiomeCubeSize = builder
+				.comment("The size of the cube shown on incorrect biome positions.")
+				.defineInRange("biomePainterIncorrectBiomeCubeSize", 0.35, 0.01, 1.0)
 
-		biomePainterIncorrectBiomeCubeSize = builder
-			.comment("The size of the cube shown on incorrect biome positions.")
-			.defineInRange("biomePainterIncorrectBiomeCubeSize", 0.35, 0.01, 1.0)
+			biomePainterCorrectBiomeCubeColor = builder
+				.comment("The color of the cube shown on correct biome positions.")
+				.defineInRange("biomePainterCorrectBiomeCubeColor", 0x6622AA00, 0, Int.MAX_VALUE)
 
-		biomePainterCorrectBiomeCubeColor = builder
-			.comment("The color of the cube shown on correct biome positions.")
-			.defineInRange("biomePainterCorrectBiomeCubeColor", 0x6622AA00, 0, Int.MAX_VALUE)
+			biomePainterIncorrectBiomeCubeColor = builder
+				.comment("The color of the cube shown on incorrect biome positions.")
+				.defineInRange("biomePainterIncorrectBiomeCubeColor", 0x66AA2200, 0, Int.MAX_VALUE)
 
-		biomePainterIncorrectBiomeCubeColor = builder
-			.comment("The color of the cube shown on incorrect biome positions.")
-			.defineInRange("biomePainterIncorrectBiomeCubeColor", 0x66AA2200, 0, Int.MAX_VALUE)
-
-		biomePainterSelectedIncorrectBiomeCubeColor = builder
-			.comment("The color of the cube shown on the selected incorrect biome position.")
-			.defineInRange("biomePainterSelectedIncorrectBiomeCubeColor", 0x662222AA, 0, Int.MAX_VALUE)
-
-		builder.pop()
+			biomePainterSelectedIncorrectBiomeCubeColor = builder
+				.comment("The color of the cube shown on the selected incorrect biome position.")
+				.defineInRange("biomePainterSelectedIncorrectBiomeCubeColor", 0x662222AA, 0, Int.MAX_VALUE)
+		}
 	}
 
 	companion object {
