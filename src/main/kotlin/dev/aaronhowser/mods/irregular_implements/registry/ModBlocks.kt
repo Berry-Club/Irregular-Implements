@@ -257,31 +257,31 @@ object ModBlocks : AaronBlockRegistry() {
 
 	// Platform
 	val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("oak_platform") { PlatformBlock.OAK }
+		registerBlock("oak_platform") { PlatformBlock(Blocks.OAK_TRAPDOOR) }
 	val SPRUCE_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("spruce_platform") { PlatformBlock.SPRUCE }
+		registerBlock("spruce_platform") { PlatformBlock(Blocks.SPRUCE_TRAPDOOR) }
 	val BIRCH_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("birch_platform") { PlatformBlock.BIRCH }
+		registerBlock("birch_platform") { PlatformBlock(Blocks.BIRCH_TRAPDOOR) }
 	val JUNGLE_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("jungle_platform") { PlatformBlock.JUNGLE }
+		registerBlock("jungle_platform") { PlatformBlock(Blocks.JUNGLE_TRAPDOOR) }
 	val ACACIA_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("acacia_platform") { PlatformBlock.ACACIA }
+		registerBlock("acacia_platform") { PlatformBlock(Blocks.ACACIA_TRAPDOOR) }
 	val DARK_OAK_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("dark_oak_platform") { PlatformBlock.DARK_OAK }
+		registerBlock("dark_oak_platform") { PlatformBlock(Blocks.DARK_OAK_TRAPDOOR) }
 	val CRIMSON_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("crimson_platform") { PlatformBlock.CRIMSON }
+		registerBlock("crimson_platform") { PlatformBlock(Blocks.CRIMSON_TRAPDOOR) }
 	val WARPED_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("warped_platform") { PlatformBlock.WARPED }
+		registerBlock("warped_platform") { PlatformBlock(Blocks.WARPED_TRAPDOOR) }
 	val MANGROVE_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("mangrove_platform") { PlatformBlock.MANGROVE }
+		registerBlock("mangrove_platform") { PlatformBlock(Blocks.MANGROVE_TRAPDOOR) }
 	val BAMBOO_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("bamboo_platform") { PlatformBlock.BAMBOO }
+		registerBlock("bamboo_platform") { PlatformBlock(Blocks.BAMBOO_TRAPDOOR) }
 	val CHERRY_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("cherry_platform") { PlatformBlock.CHERRY }
+		registerBlock("cherry_platform") { PlatformBlock(Blocks.CHERRY_TRAPDOOR) }
 	val SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("super_lubricant_platform") { PlatformBlock.SUPER_LUBE }
+		registerBlock("super_lubricant_platform") { PlatformBlock(SUPER_LUBRICANT_ICE.get()) }
 	val FILTERED_SUPER_LUBRICANT_PLATFORM: DeferredBlock<PlatformBlock> =
-		registerBlock("filtered_super_lubricant_platform") { PlatformBlock.FILTERED_SUPER_LUBE }
+		registerBlock("filtered_super_lubricant_platform", ::FilteredPlatformBlock)
 
 	// Colored blocks
 	val COLORED_GRASS_WHITE: DeferredBlock<GrassBlock> = coloredGrass(DyeColor.WHITE)
