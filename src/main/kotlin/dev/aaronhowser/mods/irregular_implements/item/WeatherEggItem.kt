@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
+import dev.aaronhowser.mods.aaron.serialization.AaronExtraStreamCodecs
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
@@ -114,7 +115,7 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 
 		companion object {
 			val CODEC: StringRepresentable.StringRepresentableCodec<Weather> = StringRepresentable.fromEnum(Weather::values)
-			val STREAM_CODEC: StreamCodec<ByteBuf, Weather> = ByteBufCodecs.fromCodec(CODEC)
+			val STREAM_CODEC: StreamCodec<ByteBuf, Weather> = AaronExtraStreamCodecs.enumStreamCodec(Weather::class.java)
 
 			fun getAllStacks(): List<ItemStack> {
 				return entries.map(Weather::getStack)
