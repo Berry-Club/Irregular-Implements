@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.element
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.face
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.transform
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.transforms
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDirectionName
@@ -1137,95 +1138,279 @@ class ModBlockStateProvider(
 			.element {
 				from(0f, 14f, 0f)
 				to(16f, 16f, 16f)
-				face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
-				face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#top").end()
-				face(Direction.NORTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-				face(Direction.SOUTH).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-				face(Direction.WEST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
-				face(Direction.EAST).uvs(0f, 0f, 16f, 2f).texture("#texture").end()
+
+				face(Direction.DOWN) {
+					uvs(16f, 16f, 0f, 0f)
+					texture("#texture")
+				}
+
+				face(Direction.UP) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#top")
+				}
+
+				face(Direction.NORTH) {
+					uvs(0f, 0f, 16f, 2f)
+					texture("#texture")
+				}
+
+				face(Direction.SOUTH) {
+					uvs(0f, 0f, 16f, 2f)
+					texture("#texture")
+				}
+
+				face(Direction.WEST) {
+					uvs(0f, 0f, 16f, 2f)
+					texture("#texture")
+				}
+
+				face(Direction.EAST) {
+					uvs(0f, 0f, 16f, 2f)
+					texture("#texture")
+				}
 			}
 
 			.element {
 				from(0f, 0f, 0f)
 				to(16f, 2f, 16f)
-				face(Direction.DOWN).uvs(16f, 16f, 0f, 0f).texture("#texture").end()
-				face(Direction.UP).uvs(0f, 0f, 16f, 16f).texture("#texture").end()
-				face(Direction.NORTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-				face(Direction.SOUTH).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-				face(Direction.WEST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
-				face(Direction.EAST).uvs(0f, 14f, 16f, 16f).texture("#texture").end()
+
+				face(Direction.DOWN) {
+					uvs(16f, 16f, 0f, 0f)
+					texture("#texture")
+				}
+
+				face(Direction.UP) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#texture")
+				}
+
+				face(Direction.NORTH) {
+					uvs(0f, 14f, 16f, 16f)
+					texture("#texture")
+				}
+
+				face(Direction.SOUTH) {
+					uvs(0f, 14f, 16f, 16f)
+					texture("#texture")
+				}
+
+				face(Direction.WEST) {
+					uvs(0f, 14f, 16f, 16f)
+					texture("#texture")
+				}
+
+				face(Direction.EAST) {
+					uvs(0f, 14f, 16f, 16f)
+					texture("#texture")
+				}
 			}
 
 			.element {
 				from(0f, 2f, 0f)
 				to(2f, 14f, 2f)
-				face(Direction.DOWN).uvs(16f, 2f, 14f, 0f).texture("#texture").end()
-				face(Direction.UP).uvs(0f, 0f, 2f, 2f).texture("#texture").end()
-				face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-				face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-				face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-				face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+
+				face(Direction.DOWN) {
+					uvs(16f, 2f, 14f, 0f)
+					texture("#texture")
+				}
+
+				face(Direction.UP) {
+					uvs(0f, 0f, 2f, 2f)
+					texture("#texture")
+				}
+
+				face(Direction.NORTH) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.SOUTH) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.WEST) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.EAST) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
 			}
 
 			.element {
 				from(14f, 2f, 0f)
 				to(16f, 14f, 2f)
-				face(Direction.DOWN).uvs(2f, 2f, 0f, 0f).texture("#texture").end()
-				face(Direction.UP).uvs(14f, 0f, 16f, 2f).texture("#texture").end()
-				face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-				face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-				face(Direction.WEST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-				face(Direction.EAST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
+
+				face(Direction.DOWN) {
+					uvs(2f, 2f, 0f, 0f)
+					texture("#texture")
+				}
+
+				face(Direction.UP) {
+					uvs(14f, 0f, 16f, 2f)
+					texture("#texture")
+				}
+
+				face(Direction.NORTH) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.SOUTH) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.WEST) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.EAST) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
 			}
 
 			.element {
 				from(0f, 2f, 14f)
 				to(2f, 14f, 16f)
-				face(Direction.DOWN).uvs(16f, 16f, 14f, 14f).texture("#texture").end()
-				face(Direction.UP).uvs(0f, 14f, 2f, 16f).texture("#texture").end()
-				face(Direction.NORTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-				face(Direction.SOUTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-				face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-				face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+
+				face(Direction.DOWN) {
+					uvs(16f, 16f, 14f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.UP) {
+					uvs(0f, 14f, 2f, 16f)
+					texture("#texture")
+				}
+
+				face(Direction.NORTH) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.SOUTH) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.WEST) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.EAST) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
 			}
 
 			.element {
 				from(14f, 2f, 14f)
 				to(16f, 14f, 16f)
-				face(Direction.DOWN).uvs(2f, 16f, 0f, 14f).texture("#texture").end()
-				face(Direction.UP).uvs(14f, 14f, 16f, 16f).texture("#texture").end()
-				face(Direction.NORTH).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
-				face(Direction.SOUTH).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-				face(Direction.WEST).uvs(14f, 2f, 16f, 14f).texture("#texture").end()
-				face(Direction.EAST).uvs(0f, 2f, 2f, 14f).texture("#texture").end()
+
+				face(Direction.DOWN) {
+					uvs(2f, 16f, 0f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.UP) {
+					uvs(14f, 14f, 16f, 16f)
+					texture("#texture")
+				}
+
+				face(Direction.NORTH) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.SOUTH) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.WEST) {
+					uvs(14f, 2f, 16f, 14f)
+					texture("#texture")
+				}
+
+				face(Direction.EAST) {
+					uvs(0f, 2f, 2f, 14f)
+					texture("#texture")
+				}
 			}
 
 			.element {
 				from(0.00625f, 2f, 2f)
 				to(0.00625f, 14f, 14f)
-				face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-				face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+
+				face(Direction.WEST) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
+
+				face(Direction.EAST) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
 			}
 
 			.element {
 				from(15.99375f, 2f, 2f)
 				to(15.99375f, 14f, 14f)
-				face(Direction.WEST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-				face(Direction.EAST).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+
+				face(Direction.WEST) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
+
+				face(Direction.EAST) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
 			}
 
 			.element {
 				from(2f, 2f, 0.00625f)
 				to(14f, 14f, 0.00625f)
-				face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-				face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+
+				face(Direction.NORTH) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
+
+				face(Direction.SOUTH) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
 			}
 
 			.element {
 				from(2f, 2f, 15.99375f)
 				to(14f, 14f, 15.99375f)
-				face(Direction.NORTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
-				face(Direction.SOUTH).uvs(0f, 0f, 16f, 16f).texture("#glass").tintindex(1).end()
+
+				face(Direction.NORTH) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
+
+				face(Direction.SOUTH) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#glass")
+					tintindex(1)
+				}
 			}
 
 		simpleBlockWithItem(block, model)
@@ -1770,27 +1955,39 @@ class ModBlockStateProvider(
 						to(16.01f, 16.01f, 16.01f)
 						emissivity(15, 15)
 
-						face(Direction.NORTH)
+						face(Direction.NORTH) {
+
+						}
 							.texture("#front")
 							.end()
 
-						face(Direction.EAST)
+						face(Direction.EAST) {
+
+						}
 							.texture("#side")
 							.end()
 
-						face(Direction.SOUTH)
+						face(Direction.SOUTH) {
+
+						}
 							.texture("#side")
 							.end()
 
-						face(Direction.WEST)
+						face(Direction.WEST) {
+
+						}
 							.texture("#side")
 							.end()
 
-						face(Direction.UP)
+						face(Direction.UP) {
+
+						}
 							.texture("#side")
 							.end()
 
-						face(Direction.DOWN)
+						face(Direction.DOWN) {
+
+						}
 							.texture("#side")
 							.end()
 					}
@@ -2169,8 +2366,16 @@ class ModBlockStateProvider(
 				to(15.2f, 16f, 8f)
 				rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
 				shade(false)
-				face(Direction.NORTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
-				face(Direction.SOUTH).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+
+				face(Direction.NORTH) {
+					texture("#base")
+					uvs(0f, 0f, 16f, 16f)
+				}
+
+				face(Direction.SOUTH) {
+					texture("#base")
+					uvs(0f, 0f, 16f, 16f)
+				}
 			}
 
 			// Base east/west
@@ -2179,8 +2384,16 @@ class ModBlockStateProvider(
 				to(8f, 16f, 15.2f)
 				rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
 				shade(false)
-				face(Direction.EAST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
-				face(Direction.WEST).texture("#base").uvs(0f, 0f, 16f, 16f).end()
+
+				face(Direction.EAST) {
+					texture("#base")
+					uvs(0f, 0f, 16f, 16f)
+				}
+
+				face(Direction.WEST) {
+					texture("#base")
+					uvs(0f, 0f, 16f, 16f)
+				}
 			}
 
 			// Glow north/south
@@ -2190,8 +2403,16 @@ class ModBlockStateProvider(
 				rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
 				shade(false)
 				emissivity(15, 15)
-				face(Direction.NORTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
-				face(Direction.SOUTH).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+
+				face(Direction.NORTH) {
+					texture("#glow")
+					uvs(0f, 0f, 16f, 16f)
+				}
+
+				face(Direction.SOUTH) {
+					texture("#glow")
+					uvs(0f, 0f, 16f, 16f)
+				}
 			}
 
 			// Glow east/west
@@ -2201,8 +2422,16 @@ class ModBlockStateProvider(
 				rotation().origin(8f, 8f, 8f).axis(Direction.Axis.Y).angle(45f).end()
 				shade(false)
 				emissivity(15, 15)
-				face(Direction.EAST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
-				face(Direction.WEST).texture("#glow").uvs(0f, 0f, 16f, 16f).end()
+
+				face(Direction.EAST) {
+					texture("#glow")
+					uvs(0f, 0f, 16f, 16f)
+				}
+
+				face(Direction.WEST) {
+					texture("#glow")
+					uvs(0f, 0f, 16f, 16f)
+				}
 			}
 
 		simpleBlock(block, blockModel)
