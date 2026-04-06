@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.model
 
+import dev.aaronhowser.mods.aaron.misc.AaronDsls.override
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.item.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -81,20 +82,20 @@ class ModItemModelProvider(
 
 		getBuilder(getName(item).toString())
 
-			.override()
-			.predicate(WeatherEggItem.WEATHER_PROPERTY, 0f)
-			.model(sunnyModel)
-			.end()
+			.override {
+				predicate(WeatherEggItem.WEATHER_PROPERTY, 0f)
+				model(sunnyModel)
+			}
 
-			.override()
-			.predicate(WeatherEggItem.WEATHER_PROPERTY, 1f)
-			.model(rainyModel)
-			.end()
+			.override {
+				predicate(WeatherEggItem.WEATHER_PROPERTY, 1f)
+				model(rainyModel)
+			}
 
-			.override()
-			.predicate(WeatherEggItem.WEATHER_PROPERTY, 2f)
-			.model(stormyModel)
-			.end()
+			.override {
+				predicate(WeatherEggItem.WEATHER_PROPERTY, 2f)
+				model(stormyModel)
+			}
 
 		handledItems.add(item)
 	}
@@ -123,10 +124,10 @@ class ModItemModelProvider(
 				.parent(ModelFile.UncheckedModelFile("item/generated"))
 				.texture("layer0", baseTexture)
 
-				.override()
-				.predicate(SpectreChargerItem.IS_ENABLED, 1f)
-				.model(glowModel)
-				.end()
+				.override {
+					predicate(SpectreChargerItem.IS_ENABLED, 1f)
+					model(glowModel)
+				}
 
 			handledItems.add(item)
 		}
@@ -175,15 +176,15 @@ class ModItemModelProvider(
 			.parent(ModelFile.UncheckedModelFile("item/handheld"))
 			.texture("layer0", "item/redstone_activator/left")
 
-			.override()
-			.predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.MEDIUM.toFloat())
-			.model(middleModel)
-			.end()
+			.override {
+				predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.MEDIUM.toFloat())
+				model(middleModel)
+			}
 
-			.override()
-			.predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.LONG.toFloat())
-			.model(rightModel)
-			.end()
+			.override {
+				predicate(RedstoneActivatorItem.DURATION, RedstoneActivatorItem.LONG.toFloat())
+				model(rightModel)
+			}
 
 		handledItems.add(item)
 	}
@@ -204,10 +205,10 @@ class ModItemModelProvider(
 				.texture("layer0", "item/emerald_compass/emerald_compass_$number")
 
 			baseModel
-				.override()
-				.predicate(EmeraldCompassItem.ANGLE, i.toFloat() / 31)
-				.model(model)
-				.end()
+				.override {
+					predicate(EmeraldCompassItem.ANGLE, i.toFloat() / 31)
+					model(model)
+				}
 		}
 
 		handledItems.add(item)
@@ -229,10 +230,10 @@ class ModItemModelProvider(
 				.texture("layer0", "item/golden_compass/golden_compass_$number")
 
 			baseModel
-				.override()
-				.predicate(GoldenCompassItem.ANGLE, i.toFloat() / 31)
-				.model(model)
-				.end()
+				.override {
+					predicate(GoldenCompassItem.ANGLE, i.toFloat() / 31)
+					model(model)
+				}
 		}
 
 		handledItems.add(item)
@@ -251,10 +252,10 @@ class ModItemModelProvider(
 			.texture("layer1", "item/ender_bucket/fluid")
 
 		enderBaseModel
-			.override()
-			.predicate(EnderBucketItem.HAS_FLUID, 1f)
-			.model(enderFluidModel)
-			.end()
+			.override {
+				predicate(EnderBucketItem.HAS_FLUID, 1f)
+				model(enderFluidModel)
+			}
 
 		val reinforcedEnderBucket = ModItems.REINFORCED_ENDER_BUCKET.get()
 		val reinforcedEnderBucketName = getName(reinforcedEnderBucket).toString()
@@ -268,10 +269,10 @@ class ModItemModelProvider(
 			.texture("layer1", "item/reinforced_ender_bucket/fluid")
 
 		reinforcedBaseModel
-			.override()
-			.predicate(EnderBucketItem.HAS_FLUID, 1f)
-			.model(reinforcedFluidModel)
-			.end()
+			.override {
+				predicate(EnderBucketItem.HAS_FLUID, 1f)
+				model(reinforcedFluidModel)
+			}
 
 		handledItems.add(enderBucket)
 		handledItems.add(reinforcedEnderBucket)
