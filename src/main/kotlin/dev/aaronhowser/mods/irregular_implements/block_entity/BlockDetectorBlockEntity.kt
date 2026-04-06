@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.block.BlockDetectorBlock.Companion.TRIGGERED
@@ -9,6 +10,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -21,13 +23,18 @@ import net.minecraft.world.level.block.state.BlockState
 class BlockDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.BLOCK_DETECTOR.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.BLOCK_DETECTOR.get(), pos, blockState), MenuProvider, ContainerContainer {
 
-	val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
-		override fun setChanged() {
-			super.setChanged()
-			checkAndUpdate()
+	private val container: ImprovedSimpleContainer =
+		object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+			override fun setChanged() {
+				super.setChanged()
+				checkAndUpdate()
+			}
 		}
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
 	}
 
 	fun isBlockDetected(): Boolean {

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.imbuing_station.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingInput
@@ -10,6 +11,7 @@ import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -26,26 +28,16 @@ import net.neoforged.neoforge.items.wrapper.RangedWrapper
 class ImbuingStationBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider {
-
-	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.saveAdditional(tag, registries)
-
-		tag.putInt(CRAFT_PROGRESS_NBT, this.progress)
-		ContainerHelper.saveAllItems(tag, this.container.items, registries)
-	}
-
-	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-		super.loadAdditional(tag, registries)
-
-		this.progress = tag.getInt(CRAFT_PROGRESS_NBT)
-		ContainerHelper.loadAllItems(tag, this.container.items, registries)
-	}
+) : BlockEntity(ModBlockEntityTypes.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
 
 	// Machine stuff
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 	private val invWrapper = InvWrapper(container)
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	fun getItemHandler(direction: Direction?): IItemHandler? {
 		return when (direction) {
@@ -69,60 +61,60 @@ class ImbuingStationBlockEntity(
 			return
 		}
 
-		this.progress++
+		progress++
 
 		if (progress >= MAX_PROGRESS) {
-			this.progress = 0
+			progress = 0
 			craftItem()
 		}
 	}
 
 	private fun craftItem() {
-		val topStack = this.container.getItem(TOP_SLOT_INDEX)
-		val leftStack = this.container.getItem(LEFT_SLOT_INDEX)
-		val bottomStack = this.container.getItem(BOTTOM_SLOT_INDEX)
+		val topStack = container.getItem(TOP_SLOT_INDEX)
+		val leftStack = container.getItem(LEFT_SLOT_INDEX)
+		val bottomStack = container.getItem(BOTTOM_SLOT_INDEX)
 
-		val centerStack = this.container.getItem(CENTER_SLOT_INDEX)
+		val centerStack = container.getItem(CENTER_SLOT_INDEX)
 		val outerStacks = listOf(topStack, leftStack, bottomStack)
 
 		val imbuingInput = ImbuingInput(outerStacks, centerStack)
 
-		val imbuingRecipe = ImbuingRecipe.getRecipe(this.level!!, imbuingInput) ?: return
+		val imbuingRecipe = ImbuingRecipe.getRecipe(level!!, imbuingInput) ?: return
 
-		val outputStack = imbuingRecipe.assemble(imbuingInput, this.level!!.registryAccess())
-		val stackInOutput = this.container.getItem(OUTPUT_SLOT_INDEX)
+		val outputStack = imbuingRecipe.assemble(imbuingInput, level!!.registryAccess())
+		val stackInOutput = container.getItem(OUTPUT_SLOT_INDEX)
 
 		if (stackInOutput.isEmpty) {
-			this.container.setItem(OUTPUT_SLOT_INDEX, outputStack)
+			container.setItem(OUTPUT_SLOT_INDEX, outputStack)
 		} else {
 			stackInOutput.grow(outputStack.count)
 		}
 
-		this.container.removeItem(TOP_SLOT_INDEX, 1)
-		this.container.removeItem(LEFT_SLOT_INDEX, 1)
-		this.container.removeItem(BOTTOM_SLOT_INDEX, 1)
-		this.container.removeItem(CENTER_SLOT_INDEX, 1)
+		container.removeItem(TOP_SLOT_INDEX, 1)
+		container.removeItem(LEFT_SLOT_INDEX, 1)
+		container.removeItem(BOTTOM_SLOT_INDEX, 1)
+		container.removeItem(CENTER_SLOT_INDEX, 1)
 
-		this.progress = 0
+		progress = 0
 	}
 
 	private fun hasRecipe(): Boolean {
-		val topStack = this.container.getItem(TOP_SLOT_INDEX)
-		val leftStack = this.container.getItem(LEFT_SLOT_INDEX)
-		val bottomStack = this.container.getItem(BOTTOM_SLOT_INDEX)
+		val topStack = container.getItem(TOP_SLOT_INDEX)
+		val leftStack = container.getItem(LEFT_SLOT_INDEX)
+		val bottomStack = container.getItem(BOTTOM_SLOT_INDEX)
 
-		val centerStack = this.container.getItem(CENTER_SLOT_INDEX)
+		val centerStack = container.getItem(CENTER_SLOT_INDEX)
 		val outerStacks = listOf(topStack, leftStack, bottomStack)
 
 		val imbuingInput = ImbuingInput(outerStacks, centerStack)
 
-		val recipe = ImbuingRecipe.getRecipe(this.level!!, imbuingInput) ?: return false
+		val recipe = ImbuingRecipe.getRecipe(level!!, imbuingInput) ?: return false
 
-		val stackInOutput = this.container.getItem(OUTPUT_SLOT_INDEX)
+		val stackInOutput = container.getItem(OUTPUT_SLOT_INDEX)
 
 		if (stackInOutput.isEmpty) return true
 
-		val recipeOutput = recipe.getResultItem(this.level!!.registryAccess())
+		val recipeOutput = recipe.getResultItem(level!!.registryAccess())
 
 		val outputCanFit = ItemStack.isSameItemSameComponents(recipeOutput, stackInOutput)
 				&& stackInOutput.count + recipeOutput.count <= stackInOutput.maxStackSize
@@ -133,11 +125,27 @@ class ImbuingStationBlockEntity(
 	// Menu stuff
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return ImbuingStationMenu(containerId, playerInventory, this.container)
+		return ImbuingStationMenu(containerId, playerInventory, container)
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
+	}
+
+	// Saving
+
+	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.saveAdditional(tag, registries)
+
+		tag.putInt(CRAFT_PROGRESS_NBT, progress)
+		ContainerHelper.saveAllItems(tag, container.items, registries)
+	}
+
+	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+		super.loadAdditional(tag, registries)
+
+		progress = tag.getInt(CRAFT_PROGRESS_NBT)
+		ContainerHelper.loadAllItems(tag, container.items, registries)
 	}
 
 	companion object {

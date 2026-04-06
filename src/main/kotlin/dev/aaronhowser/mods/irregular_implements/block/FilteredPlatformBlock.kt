@@ -13,7 +13,6 @@ import net.minecraft.world.phys.BlockHitResult
 
 class FilteredPlatformBlock : PlatformBlock(ModBlocks.SUPER_LUBRICANT_ICE.get()), EntityBlock {
 
-
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 		val blockEntity = level.getBlockEntity(pos)
 		if (blockEntity is FilteredPlatformBlockEntity) {

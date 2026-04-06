@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
@@ -11,6 +12,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -25,7 +27,15 @@ import java.util.*
 class NotificationInterfaceBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.NOTIFICATION_INTERFACE.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.NOTIFICATION_INTERFACE.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+
+	val container = ImprovedSimpleContainer(this, 1)
+	val icon: ItemStack
+		get() = container.getItem(0)
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	var ownerUuid: UUID = UUID.randomUUID()
 		set(value) {
@@ -48,36 +58,32 @@ class NotificationInterfaceBlockEntity(
 		}
 
 	fun sendStringUpdate() {
-		val level = this.level as? ServerLevel ?: return
+		val level = level as? ServerLevel ?: return
 
-		val titlePacket = UpdateClientScreenString(NotificationInterfaceMenu.TITLE_STRING_ID, this.toastTitle)
-		titlePacket.messageNearbyPlayers(level, this.blockPos.center, 16.0)
+		val titlePacket = UpdateClientScreenString(NotificationInterfaceMenu.TITLE_STRING_ID, toastTitle)
+		titlePacket.messageNearbyPlayers(level, blockPos.center, 16.0)
 
-		val descriptionPacket = UpdateClientScreenString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, this.toastDescription)
-		descriptionPacket.messageNearbyPlayers(level, this.blockPos.center, 16.0)
+		val descriptionPacket = UpdateClientScreenString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, toastDescription)
+		descriptionPacket.messageNearbyPlayers(level, blockPos.center, 16.0)
 	}
 
-	val container = ImprovedSimpleContainer(this, 1)
-	val icon: ItemStack
-		get() = this.container.getItem(0)
-
 	fun notifyOwner() {
-		val level = this.level as? ServerLevel ?: return
-		val owner = level.server.playerList.getPlayer(this.ownerUuid) ?: return
+		val level = level as? ServerLevel ?: return
+		val owner = level.server.playerList.getPlayer(ownerUuid) ?: return
 
-		val packet = SendClientToast(this.toastTitle, this.toastDescription, this.icon)
+		val packet = SendClientToast(toastTitle, toastDescription, icon)
 		packet.messagePlayer(owner)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
-		tag.putString(TOAST_TITLE_NBT, this.toastTitle)
-		tag.putString(TOAST_DESCRIPTION_NBT, this.toastDescription)
+		tag.putUUID(OWNER_UUID_NBT, ownerUuid)
+		tag.putString(TOAST_TITLE_NBT, toastTitle)
+		tag.putString(TOAST_DESCRIPTION_NBT, toastDescription)
 
-		if (!this.container.isEmpty) {
-			ContainerHelper.saveAllItems(tag, this.container.items, registries)
+		if (!container.isEmpty) {
+			ContainerHelper.saveAllItems(tag, container.items, registries)
 		}
 	}
 
@@ -86,26 +92,26 @@ class NotificationInterfaceBlockEntity(
 
 		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
 		if (uuid != null) {
-			this.ownerUuid = uuid
+			ownerUuid = uuid
 		}
 
-		this.toastTitle = tag.getString(TOAST_TITLE_NBT)
-		this.toastDescription = tag.getString(TOAST_DESCRIPTION_NBT)
+		toastTitle = tag.getString(TOAST_TITLE_NBT)
+		toastDescription = tag.getString(TOAST_DESCRIPTION_NBT)
 
-		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+		ContainerHelper.loadAllItems(tag, container.items, registries)
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return NotificationInterfaceMenu(
 			containerId,
 			playerInventory,
-			this.container,
-			ContainerLevelAccess.create(this.level!!, this.blockPos)
+			container,
+			ContainerLevelAccess.create(level!!, blockPos)
 		)
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	companion object {

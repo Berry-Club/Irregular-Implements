@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import com.mojang.authlib.GameProfile
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block.AutoPlacerBlock
@@ -12,6 +13,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.MenuProvider
@@ -35,14 +37,20 @@ import java.util.*
 class AutoPlacerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
 
-	val container: ImprovedSimpleContainer = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
-		override fun canAddItem(stack: ItemStack): Boolean {
-			return super.canAddItem(stack) && stack.item is BlockItem
+	private val container: ImprovedSimpleContainer =
+		object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+			override fun canAddItem(stack: ItemStack): Boolean {
+				return super.canAddItem(stack) && stack.item is BlockItem
+			}
 		}
-	}
+
 	private val invWrapper: InvWrapper = InvWrapper(container)
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	private var uuid: UUID? = null
 	private var fakePlayer: WeakReference<FakePlayer>? = null

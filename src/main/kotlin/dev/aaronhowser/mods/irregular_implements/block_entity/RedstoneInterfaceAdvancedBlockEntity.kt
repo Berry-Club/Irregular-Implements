@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
@@ -15,6 +16,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.LongArrayTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -28,15 +30,19 @@ import net.neoforged.neoforge.items.wrapper.InvWrapper
 class RedstoneInterfaceAdvancedBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState), MenuProvider {
+) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
 
 	private val linkedPositions: MutableList<BlockPos> = mutableListOf()
 
-	val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+	private val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
 		override fun setChanged() {
 			super.setChanged()
 			updateLinkedPositions()
 		}
+	}
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
 	}
 
 	private val invWrapper = InvWrapper(container)

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.block.InventoryTesterBlock
 import dev.aaronhowser.mods.irregular_implements.menu.inventory_tester.InventoryTesterMenu
@@ -10,6 +11,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -24,9 +26,12 @@ import net.neoforged.neoforge.items.ItemHandlerHelper
 class InventoryTesterBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	private var invertSignal: Boolean = false
 		set(value) {
@@ -38,46 +43,46 @@ class InventoryTesterBlockEntity(
 		private set(value) {
 			field = value
 			setChanged()
-			level?.updateNeighborsAt(this.blockPos, this.blockState.block)
+			level?.updateNeighborsAt(blockPos, blockState.block)
 		}
 
 	fun tick() {
 		val level = level as? ServerLevel ?: return
 		if (level.gameTime % 20 != 0L) return
 
-		val item = this.container.getItem(0)
+		val item = container.getItem(0)
 		if (item.isEmpty) {
-			if (this.isEmittingRedstone) this.isEmittingRedstone = false
+			if (isEmittingRedstone) isEmittingRedstone = false
 			return
 		}
 
-		val facing = this.blockState.getValue(InventoryTesterBlock.FACING)
-		val onBlock = this.blockPos.relative(facing)
+		val facing = blockState.getValue(InventoryTesterBlock.FACING)
+		val onBlock = blockPos.relative(facing)
 		val itemHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, onBlock, facing.opposite) ?: return
 
 		val canInsert = ItemHandlerHelper.insertItemStacked(itemHandler, item, true).isEmpty
 
-		val redstone = if (this.invertSignal) !canInsert else canInsert
+		val redstone = if (invertSignal) !canInsert else canInsert
 
-		if (redstone != this.isEmittingRedstone) {
-			this.isEmittingRedstone = redstone
+		if (redstone != isEmittingRedstone) {
+			isEmittingRedstone = redstone
 		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		ContainerHelper.saveAllItems(tag, this.container.items, registries)
-		tag.putBoolean(INVERT_SIGNAL_NBT, this.invertSignal)
-		tag.putBoolean(IS_EMITTING_REDSTONE_NBT, this.isEmittingRedstone)
+		ContainerHelper.saveAllItems(tag, container.items, registries)
+		tag.putBoolean(INVERT_SIGNAL_NBT, invertSignal)
+		tag.putBoolean(IS_EMITTING_REDSTONE_NBT, isEmittingRedstone)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		ContainerHelper.loadAllItems(tag, this.container.items, registries)
-		this.invertSignal = tag.getBoolean(INVERT_SIGNAL_NBT)
-		this.isEmittingRedstone = tag.getBoolean(IS_EMITTING_REDSTONE_NBT)
+		ContainerHelper.loadAllItems(tag, container.items, registries)
+		invertSignal = tag.getBoolean(INVERT_SIGNAL_NBT)
+		isEmittingRedstone = tag.getBoolean(IS_EMITTING_REDSTONE_NBT)
 	}
 
 	// Menu stuff
@@ -96,11 +101,11 @@ class InventoryTesterBlockEntity(
 		}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return InventoryTesterMenu(containerId, playerInventory, this.container, this.containerData)
+		return InventoryTesterMenu(containerId, playerInventory, container, containerData)
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	companion object {

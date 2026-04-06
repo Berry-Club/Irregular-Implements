@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorMenu
@@ -9,6 +10,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -21,7 +23,7 @@ import net.minecraft.world.phys.AABB
 class AdvancedItemCollectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : ItemCollectorBlockEntity(ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider {
+) : ItemCollectorBlockEntity(ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
 
 	var xRadius: Int = 5
 		set(value) {
@@ -41,40 +43,43 @@ class AdvancedItemCollectorBlockEntity(
 			setChanged()
 		}
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
+	
 	override fun getFilter(): ItemFilterDataComponent? {
-		return this.container.getItem(0).get(ModDataComponents.ITEM_FILTER)
+		return container.getItem(0).get(ModDataComponents.ITEM_FILTER)
 	}
 
 	override fun getCollectionArea(): AABB {
-		val pos = this.blockPos
 		return AABB.ofSize(
-			pos.center,
-			2 * this.xRadius.toDouble(),
-			2 * this.yRadius.toDouble(),
-			2 * this.zRadius.toDouble()
+			blockPos.center,
+			2 * xRadius.toDouble(),
+			2 * yRadius.toDouble(),
+			2 * zRadius.toDouble()
 		)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putInt(X_RADIUS_NBT, this.xRadius)
-		tag.putInt(Y_RADIUS_NBT, this.yRadius)
-		tag.putInt(Z_RADIUS_NBT, this.zRadius)
+		tag.putInt(X_RADIUS_NBT, xRadius)
+		tag.putInt(Y_RADIUS_NBT, yRadius)
+		tag.putInt(Z_RADIUS_NBT, zRadius)
 
-		ContainerHelper.saveAllItems(tag, this.container.items, registries)
+		ContainerHelper.saveAllItems(tag, container.items, registries)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		this.xRadius = tag.getInt(X_RADIUS_NBT)
-		this.yRadius = tag.getInt(Y_RADIUS_NBT)
-		this.zRadius = tag.getInt(Z_RADIUS_NBT)
+		xRadius = tag.getInt(X_RADIUS_NBT)
+		yRadius = tag.getInt(Y_RADIUS_NBT)
+		zRadius = tag.getInt(Z_RADIUS_NBT)
 
-		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+		ContainerHelper.loadAllItems(tag, container.items, registries)
 	}
 
 	// Menu stuff
@@ -106,10 +111,10 @@ class AdvancedItemCollectorBlockEntity(
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return AdvancedItemCollectorMenu(containerId, playerInventory, this.container, this.containerData)
+		return AdvancedItemCollectorMenu(containerId, playerInventory, container, containerData)
 	}
 
-	override fun getDisplayName(): Component = this.blockState.block.name
+	override fun getDisplayName(): Component = blockState.block.name
 
 	companion object {
 		const val X_RADIUS_NBT = "XRadius"

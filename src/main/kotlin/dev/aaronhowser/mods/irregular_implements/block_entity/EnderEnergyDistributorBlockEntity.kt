@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.GlobalPos
 import net.minecraft.network.chat.Component
+import net.minecraft.world.Container
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -22,11 +24,15 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 class EnderEnergyDistributorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.ENDER_ENERGY_DISTRIBUTOR.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	// Inventory stuff
 
-	val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
+	private val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	override fun getDisplayName(): Component = blockState.block.name
 

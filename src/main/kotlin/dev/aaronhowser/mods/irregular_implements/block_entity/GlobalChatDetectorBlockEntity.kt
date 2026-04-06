@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
@@ -16,6 +17,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
@@ -30,9 +32,11 @@ import net.neoforged.neoforge.event.ServerChatEvent
 class GlobalChatDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
 
 	override val syncImmediately: Boolean = true
+
+	private val container = ImprovedSimpleContainer(this, 9)
 
 	var regexString: String = ""
 		set(value) {
@@ -50,25 +54,25 @@ class GlobalChatDetectorBlockEntity(
 	private var timeOn = 0
 
 	fun sendStringUpdate() {
-		val level = this.level as? ServerLevel ?: return
+		val level = level as? ServerLevel ?: return
 
-		val packet = UpdateClientScreenString(GlobalChatDetectorMenu.REGEX_STRING_ID, this.regexString)
-		packet.messageNearbyPlayers(level, this.blockPos.center, 16.0)
+		val packet = UpdateClientScreenString(GlobalChatDetectorMenu.REGEX_STRING_ID, regexString)
+		packet.messageNearbyPlayers(level, blockPos.center, 16.0)
 	}
 
 	/**
 	 * @return true if the message should be stopped
 	 */
 	fun processMessage(player: Player, message: Component): Boolean {
-		if (this.regexString.isEmpty()) return false
+		if (regexString.isEmpty()) return false
 
 		val messageString = message.string
-		val regex = this.regexString.toRegex()
+		val regex = regexString.toRegex()
 
 		if (regex.containsMatchIn(messageString)) {
 			pulse()
-			if (this.stopsMessage) {
-				for (item in this.container.items) {
+			if (stopsMessage) {
+				for (item in container.items) {
 					if (!item.isItem(ModItems.PLAYER_FILTER)) continue
 
 					val playerUuid = item.get(ModDataComponents.PLAYER)?.uuid ?: continue
@@ -81,24 +85,21 @@ class GlobalChatDetectorBlockEntity(
 	}
 
 	private fun pulse() {
-		this.timeOn = 20 * 3
+		timeOn = 20 * 3
 
-		this.level?.setBlockAndUpdate(
-			this.blockPos,
-			this.blockState.setValue(GlobalChatDetectorBlock.ENABLED, true)
+		level?.setBlockAndUpdate(
+			blockPos,
+			blockState.setValue(GlobalChatDetectorBlock.ENABLED, true)
 		)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		val regex = tag.getString(MESSAGE_REGEX_NBT)
-		this.regexString = regex
+		regexString = tag.getString(MESSAGE_REGEX_NBT)
+		stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
 
-		val stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
-		this.stopsMessage = stopsMessage
-
-		ContainerHelper.loadAllItems(tag, this.container.items, registries)
+		ContainerHelper.loadAllItems(tag, container.items, registries)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -107,12 +108,12 @@ class GlobalChatDetectorBlockEntity(
 		tag.putString(MESSAGE_REGEX_NBT, regexString)
 		tag.putBoolean(STOPS_MESSAGE_NBT, stopsMessage)
 
-		ContainerHelper.saveAllItems(tag, this.container.items, registries)
+		ContainerHelper.saveAllItems(tag, container.items, registries)
 	}
 
 	override fun onLoad() {
 		super.onLoad()
-		if (!this.level?.isClientSide.isTrue()) globalDetectors.add(this)
+		if (!level?.isClientSide.isTrue()) globalDetectors.add(this)
 	}
 
 	// Menu stuff
@@ -121,17 +122,19 @@ class GlobalChatDetectorBlockEntity(
 		return GlobalChatDetectorMenu(
 			containerId,
 			playerInventory,
-			this.container,
-			this.containerData,
-			ContainerLevelAccess.create(this.level!!, this.blockPos)
+			container,
+			containerData,
+			ContainerLevelAccess.create(level!!, blockPos)
 		)
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
-	val container = ImprovedSimpleContainer(this, 9)
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	private val containerData = object : ContainerData {
 		override fun set(index: Int, value: Int) {
