@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
@@ -28,13 +29,7 @@ import net.minecraft.world.level.block.state.BlockState
 class IgniterBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.IGNITER.get(), pPos, pBlockState), MenuProvider {
-
-	enum class Mode(val nameComponent: Component) {
-		TOGGLE(ModTooltipLang.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered
-		IGNITE(ModTooltipLang.IGNITER_IGNITE.toComponent()),         // Make fire when powered, do nothing when unpowered
-		KEEP_IGNITED(ModTooltipLang.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
-	}
+) : SyncingBlockEntity(ModBlockEntityTypes.IGNITER.get(), pPos, pBlockState), MenuProvider {
 
 	var mode: Mode = Mode.TOGGLE
 		private set(value) {
@@ -97,10 +92,6 @@ class IgniterBlockEntity(
 		return this.blockState.block.name
 	}
 
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
-
 	companion object {
 		const val MODE_NBT = "Mode"
 
@@ -133,6 +124,12 @@ class IgniterBlockEntity(
 
 		const val CONTAINER_DATA_SIZE = 1
 		const val MODE_INDEX = 0
+	}
+
+	enum class Mode(val nameComponent: Component) {
+		TOGGLE(ModTooltipLang.IGNITER_TOGGLE.toComponent()),         // Make fire when powered, extinguish when unpowered
+		IGNITE(ModTooltipLang.IGNITER_IGNITE.toComponent()),         // Make fire when powered, do nothing when unpowered
+		KEEP_IGNITED(ModTooltipLang.IGNITER_KEEP_IGNITED.toComponent())    // Make fire when powered, make another fire if it goes out while powered
 	}
 
 }

@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import com.google.common.base.Predicate
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
@@ -27,7 +28,7 @@ import net.minecraft.world.phys.Vec3
 class BiomeRadarBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState) {
 
 	private var antennaValid: Boolean = false
 	private var biomePos: BlockPos? = null
@@ -192,10 +193,6 @@ class BiomeRadarBlockEntity(
 			tag.putLong(BIOME_POS_NBT, bp.asLong())
 		}
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		private const val ANTENNA_VALID_NBT = "AntennaValid"

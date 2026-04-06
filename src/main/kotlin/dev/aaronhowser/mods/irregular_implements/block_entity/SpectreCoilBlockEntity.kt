@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.block.SpectreCoilBlock
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreEnergyHandler
@@ -22,7 +23,7 @@ import java.util.*
 class SpectreCoilBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.SPECTRE_COIL.get(), pPos, pBlockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_COIL.get(), pPos, pBlockState) {
 
 	constructor(pos: BlockPos, blockState: BlockState, coilType: SpectreCoilBlock.Type) : this(pos, blockState) {
 		this.coilType = coilType
@@ -132,10 +133,6 @@ class SpectreCoilBlockEntity(
 
 		coil.extractEnergy(sent, false)
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		const val OWNER_UUID_NBT = "OwnerUuid"

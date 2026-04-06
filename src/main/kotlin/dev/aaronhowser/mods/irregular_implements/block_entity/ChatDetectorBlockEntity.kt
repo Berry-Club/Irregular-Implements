@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.aaron.misc.weakMutableSet
@@ -31,7 +32,7 @@ import java.util.*
 class ChatDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
 	// Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
 	var ownerUuid: UUID = UUID.randomUUID()
@@ -140,10 +141,6 @@ class ChatDetectorBlockEntity(
 	override fun getDisplayName(): Component {
 		return this.blockState.block.name
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		private val detectors: MutableSet<ChatDetectorBlockEntity> = weakMutableSet()

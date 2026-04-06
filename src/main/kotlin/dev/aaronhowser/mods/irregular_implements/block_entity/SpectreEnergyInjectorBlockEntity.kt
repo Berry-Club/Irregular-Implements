@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.handler.SpectreEnergyHandler
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -19,7 +20,7 @@ import java.util.*
 class SpectreEnergyInjectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), pPos, pBlockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), pPos, pBlockState) {
 
 	// Initialized as random, but immediately set on place or load
 	var ownerUuid: UUID = UUID.randomUUID()
@@ -48,10 +49,6 @@ class SpectreEnergyInjectorBlockEntity(
 			this.ownerUuid = uuid
 		}
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		const val OWNER_UUID_NBT = "OwnerUuid"

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
@@ -26,25 +27,7 @@ import java.util.*
 class PlayerInterfaceBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.PLAYER_INTERFACE.get(), pPos, pBlockState) {
-
-	private enum class InventorySection {
-		ARMOR,
-		HOTBAR,
-		OFFHAND,
-		MAIN;
-
-		companion object {
-			fun fromDirection(direction: Direction?): InventorySection {
-				return when (direction) {
-					Direction.UP -> ARMOR
-					Direction.DOWN -> HOTBAR
-					Direction.NORTH -> OFFHAND
-					else -> MAIN
-				}
-			}
-		}
-	}
+) : SyncingBlockEntity(ModBlockEntityTypes.PLAYER_INTERFACE.get(), pPos, pBlockState) {
 
 	var ownerUuid: UUID = UUID.randomUUID()
 	var ownerHead: ItemStack = ItemStack.EMPTY
@@ -125,10 +108,6 @@ class PlayerInterfaceBlockEntity(
 		tag.put(OWNER_HEAD_NBT, ownerHead.saveOptional(registries))
 	}
 
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
-
 	companion object {
 		const val OWNER_UUID_NBT = "OwnerUuid"
 		const val OWNER_HEAD_NBT = "OwnerHead"
@@ -155,6 +134,24 @@ class PlayerInterfaceBlockEntity(
 		@JvmStatic
 		fun setPlayerPredicate(predicate: (Player, BlockEntity) -> Boolean) {
 			playerPredicate = predicate
+		}
+	}
+
+	private enum class InventorySection {
+		ARMOR,
+		HOTBAR,
+		OFFHAND,
+		MAIN;
+
+		companion object {
+			fun fromDirection(direction: Direction?): InventorySection {
+				return when (direction) {
+					Direction.UP -> ARMOR
+					Direction.DOWN -> HOTBAR
+					Direction.NORTH -> OFFHAND
+					else -> MAIN
+				}
+			}
 		}
 	}
 

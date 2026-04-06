@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity.base
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.BlockPos
@@ -20,7 +21,7 @@ abstract class RedstoneInterfaceBlockEntity(
 	blockEntityType: BlockEntityType<*>,
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(blockEntityType, pos, blockState) {
+) : SyncingBlockEntity(blockEntityType, pos, blockState) {
 
 	abstract fun updateTargets()
 
@@ -41,12 +42,6 @@ abstract class RedstoneInterfaceBlockEntity(
 		}
 	}
 
-	override fun setChanged() {
-		super.setChanged()
-
-		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
-	}
-
 	override fun setRemoved() {
 		val level = this.level
 		if (level != null) {
@@ -55,10 +50,6 @@ abstract class RedstoneInterfaceBlockEntity(
 
 		super.setRemoved()
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		/**

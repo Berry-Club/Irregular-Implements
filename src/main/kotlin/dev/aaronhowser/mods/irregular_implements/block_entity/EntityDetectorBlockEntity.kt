@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
@@ -11,9 +12,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.protocol.Packet
-import net.minecraft.network.protocol.game.ClientGamePacketListener
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.Entity
@@ -27,14 +25,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 
 class EntityDetectorBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.ENTITY_DETECTOR.get(), pos, blockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.ENTITY_DETECTOR.get(), pos, blockState), MenuProvider {
 
 	var filter: Filter = Filter.ALL
 		private set
@@ -80,10 +77,6 @@ class EntityDetectorBlockEntity(
 		setChanged()
 	}
 
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
-
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
@@ -112,35 +105,36 @@ class EntityDetectorBlockEntity(
 
 	// Menu stuff
 
-	private val containerData = object : ContainerData {
-		override fun get(index: Int): Int {
-			return when (index) {
-				X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius
-				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius
-				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius
-				INVERTED_INDEX -> if (this@EntityDetectorBlockEntity.isInverted) 1 else 0
-				FILTER_ORDINAL_INDEX -> this@EntityDetectorBlockEntity.filter.ordinal
-				else -> 0
-			}
-		}
-
-		override fun set(index: Int, value: Int) {
-			when (index) {
-				X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius = value.coerceIn(0, 16)
-				Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius = value.coerceIn(0, 16)
-				Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius = value.coerceIn(0, 16)
-				INVERTED_INDEX -> this@EntityDetectorBlockEntity.isInverted = (value != 0)
-				FILTER_ORDINAL_INDEX -> {
-					val ordinal = value.coerceIn(0, Filter.entries.size - 1)
-					this@EntityDetectorBlockEntity.filter = Filter.entries[ordinal]
+	private val containerData: ContainerData =
+		object : ContainerData {
+			override fun get(index: Int): Int {
+				return when (index) {
+					X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius
+					Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius
+					Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius
+					INVERTED_INDEX -> if (this@EntityDetectorBlockEntity.isInverted) 1 else 0
+					FILTER_ORDINAL_INDEX -> this@EntityDetectorBlockEntity.filter.ordinal
+					else -> 0
 				}
 			}
 
-			setChanged()
-		}
+			override fun set(index: Int, value: Int) {
+				when (index) {
+					X_RADIUS_INDEX -> this@EntityDetectorBlockEntity.xRadius = value.coerceIn(0, 16)
+					Y_RADIUS_INDEX -> this@EntityDetectorBlockEntity.yRadius = value.coerceIn(0, 16)
+					Z_RADIUS_INDEX -> this@EntityDetectorBlockEntity.zRadius = value.coerceIn(0, 16)
+					INVERTED_INDEX -> this@EntityDetectorBlockEntity.isInverted = (value != 0)
+					FILTER_ORDINAL_INDEX -> {
+						val ordinal = value.coerceIn(0, Filter.entries.size - 1)
+						this@EntityDetectorBlockEntity.filter = Filter.entries[ordinal]
+					}
+				}
 
-		override fun getCount(): Int = CONTAINER_DATA_SIZE
-	}
+				setChanged()
+			}
+
+			override fun getCount(): Int = CONTAINER_DATA_SIZE
+		}
 
 	override fun getDisplayName(): Component = this.blockState.block.name
 

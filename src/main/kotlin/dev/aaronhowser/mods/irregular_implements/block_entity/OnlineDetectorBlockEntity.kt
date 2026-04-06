@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.irregular_implements.block.OnlineDetectorBlock
 import dev.aaronhowser.mods.irregular_implements.menu.online_detector.OnlineDetectorMenu
@@ -24,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockState
 class OnlineDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
 
 	var username: String = ""
 		set(value) {
@@ -69,10 +70,6 @@ class OnlineDetectorBlockEntity(
 	override fun getDisplayName(): Component {
 		return this.blockState.block.name
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		const val USERNAME_NBT = "Username"

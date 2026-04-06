@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.aaron.misc.weakMutableSet
@@ -14,9 +15,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.protocol.Packet
-import net.minecraft.network.protocol.game.ClientGamePacketListener
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.MenuProvider
@@ -26,14 +24,15 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.ServerChatEvent
 
 class GlobalChatDetectorBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+
+	override val syncImmediately: Boolean = true
 
 	var regexString: String = ""
 		set(value) {
@@ -151,10 +150,6 @@ class GlobalChatDetectorBlockEntity(
 
 		override fun getCount(): Int = CONTAINER_DATA_SIZE
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -25,7 +26,9 @@ import net.minecraft.world.level.block.state.BlockState
 class FilteredPlatformBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider {
+
+	override val syncImmediately: Boolean = true
 
 	fun entityPassesFilter(entity: Entity?): Boolean {
 		if (entity !is ItemEntity) return false
@@ -52,12 +55,6 @@ class FilteredPlatformBlockEntity(
 		ContainerHelper.loadAllItems(tag, this.container.items, registries)
 	}
 
-	override fun setChanged() {
-		super.setChanged()
-
-		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
-	}
-
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return FilteredPlatformMenu(containerId, playerInventory, this.container)
 	}
@@ -65,9 +62,5 @@ class FilteredPlatformBlockEntity(
 	override fun getDisplayName(): Component {
 		return this.blockState.block.name
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 }

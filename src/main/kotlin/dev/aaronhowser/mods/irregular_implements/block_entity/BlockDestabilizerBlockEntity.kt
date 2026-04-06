@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -37,7 +38,7 @@ import net.minecraft.world.phys.Vec3
 class BlockDestabilizerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
+) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
 
 	enum class State { IDLE, SEARCHING, DROPPING }
 
@@ -357,10 +358,6 @@ class BlockDestabilizerBlockEntity(
 		removeLazyIndicators()
 		this.lazyBlocks.clear()
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		const val STATE_NBT = "state"

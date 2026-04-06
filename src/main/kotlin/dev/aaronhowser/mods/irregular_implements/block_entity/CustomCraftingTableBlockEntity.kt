@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -16,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState
 class CustomCraftingTableBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
 
 	var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
 		set(value) {
@@ -42,10 +43,6 @@ class CustomCraftingTableBlockEntity(
 
 		this.renderedBlockState = readBlockState
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {
 		const val RENDERED_BLOCK_STATE = "RenderedBlockState"

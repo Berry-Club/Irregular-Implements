@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import com.mojang.authlib.GameProfile
+import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.entity.BetterFakePlayerFactory
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.giveOrDropStack
@@ -46,7 +47,7 @@ import java.util.*
 class BlockBreakerBlockEntity(
 	pPos: BlockPos,
 	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pPos, pBlockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pPos, pBlockState) {
 
 	private var uuid: UUID? = null
 
@@ -245,10 +246,6 @@ class BlockBreakerBlockEntity(
 			this.diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
 		}
 	}
-
-	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
-	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	class BlockBreakerFakePlayer(level: ServerLevel, gameProfile: GameProfile) : FakePlayer(level, gameProfile) {
 
