@@ -42,7 +42,7 @@
           "texture": "#side"
         },
         "north": {
-          "texture": "#side"
+          "texture": "#front"
         },
         "south": {
           "texture": "#side"
@@ -110,7 +110,7 @@
           "texture": "#side"
         },
         "north": {
-          "texture": "#side"
+          "texture": "#front"
         },
         "south": {
           "texture": "#side"

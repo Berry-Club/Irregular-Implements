@@ -1955,41 +1955,15 @@ class ModBlockStateProvider(
 						to(16.01f, 16.01f, 16.01f)
 						emissivity(15, 15)
 
-						face(Direction.NORTH) {
+						allFaces { dir, fb ->
+							val texture = if (dir == Direction.NORTH) {
+								"#front"
+							} else {
+								"#side"
+							}
 
+							fb.texture(texture)
 						}
-							.texture("#front")
-							.end()
-
-						face(Direction.EAST) {
-
-						}
-							.texture("#side")
-							.end()
-
-						face(Direction.SOUTH) {
-
-						}
-							.texture("#side")
-							.end()
-
-						face(Direction.WEST) {
-
-						}
-							.texture("#side")
-							.end()
-
-						face(Direction.UP) {
-
-						}
-							.texture("#side")
-							.end()
-
-						face(Direction.DOWN) {
-
-						}
-							.texture("#side")
-							.end()
 					}
 
 				ConfiguredModel
