@@ -57,7 +57,7 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	override fun getDisplayName(): Component {
-		return this.defaultInstance.hoverName
+		return defaultInstance.hoverName
 	}
 
 	companion object {

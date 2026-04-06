@@ -65,7 +65,7 @@ class VoidStoneItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	override fun getDisplayName(): Component {
-		return this.descriptionId.toComponent()
+		return descriptionId.toComponent()
 	}
 
 	companion object {

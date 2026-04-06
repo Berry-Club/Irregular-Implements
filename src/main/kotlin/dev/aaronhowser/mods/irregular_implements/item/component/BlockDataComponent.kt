@@ -35,7 +35,7 @@ data class BlockDataComponent(
 	fun tryPlace(level: Level, posToPlaceIn: BlockPos, player: Player?): Boolean {
 
 		// Update the shape so double chests become single, etc
-		val adjustedState = Block.updateFromNeighbourShapes(this.blockState, level, posToPlaceIn)
+		val adjustedState = Block.updateFromNeighbourShapes(blockState, level, posToPlaceIn)
 		val stateAlreadyThere = level.getBlockState(posToPlaceIn)
 
 		if (adjustedState.isAir
@@ -72,11 +72,11 @@ data class BlockDataComponent(
 			soundType.pitch * 0.8f
 		)
 
-		if (this.blockEntityNbt != null) {
+		if (blockEntityNbt != null) {
 
-			this.blockEntityNbt.putInt("x", posToPlaceIn.x)
-			this.blockEntityNbt.putInt("y", posToPlaceIn.y)
-			this.blockEntityNbt.putInt("z", posToPlaceIn.z)
+			blockEntityNbt.putInt("x", posToPlaceIn.x)
+			blockEntityNbt.putInt("y", posToPlaceIn.y)
+			blockEntityNbt.putInt("z", posToPlaceIn.z)
 
 			level.getBlockEntity(posToPlaceIn)
 				?.loadWithComponents(this.blockEntityNbt, level.registryAccess())

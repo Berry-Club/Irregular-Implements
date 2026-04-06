@@ -18,8 +18,8 @@ data class ItemFilterDataComponent(
 	constructor(filterEntries: List<FilterEntry>, isBlacklist: Boolean = false) : this(sanitizeEntries(filterEntries), isBlacklist)
 
 	fun test(testedStack: ItemStack): Boolean {
-		val passes = this.entries.any { it.test(testedStack) }
-		return passes != this.isBlacklist
+		val passes = entries.any { it.test(testedStack) }
+		return passes != isBlacklist
 	}
 
 	companion object {

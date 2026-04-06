@@ -54,23 +54,23 @@ public abstract class LevelMixin implements RainShieldCarrier, PeaceCandleCarrie
 	@Unique
 	@Override
 	public LongOpenHashSet irregular_implements$getRainShieldChunks() {
-		return this.irregular_implements$rainShieldChunks;
+		return irregular_implements$rainShieldChunks;
 	}
 
 	@Unique
 	@Override
 	public LongOpenHashSet irregular_implements$getPeaceCandleChunks() {
-		return this.irregular_implements$peaceCandleChunks;
+		return irregular_implements$peaceCandleChunks;
 	}
 
 	@Override
 	public LongOpenHashSet irregular_implements$getSlimeCubeBlockPositions() {
-		return this.irregularImplements$slimeCubeBlockPositions;
+		return irregularImplements$slimeCubeBlockPositions;
 	}
 
 	@Unique
 	public LongOpenHashSet irregular_implements$getEnderAnchorBlockPositions() {
-		return this.irregular_implements$enderAnchorBlockPositions;
+		return irregular_implements$enderAnchorBlockPositions;
 	}
 
 	@Inject(

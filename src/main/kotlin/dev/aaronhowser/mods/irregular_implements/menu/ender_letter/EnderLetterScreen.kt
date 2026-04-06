@@ -24,7 +24,7 @@ class EnderLetterScreen(
 	private lateinit var recipientEditBox: EditBox
 
 	override fun baseInit() {
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = this.imageHeight - 94
 
 		val screenWidth = this.rightPos - this.leftPos
 

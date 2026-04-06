@@ -30,14 +30,14 @@ class ItemFilterScreen(
 	private lateinit var invertBlacklistButton: Button
 
 	override fun baseInit() {
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 
 		setButtons()
 	}
 
 	private fun setButtons() {
-		this.leftButtons.clear()
-		this.rightButtons.clear()
+		leftButtons.clear()
+		rightButtons.clear()
 
 		addToggleBlacklistButton()
 
@@ -48,7 +48,7 @@ class ItemFilterScreen(
 	}
 
 	private fun addToggleBlacklistButton() {
-		val x = this.leftPos + this.imageWidth - 24
+		val x = leftPos + this.imageWidth - 24
 		val y = this.topPos + 5
 
 		val onPress = {

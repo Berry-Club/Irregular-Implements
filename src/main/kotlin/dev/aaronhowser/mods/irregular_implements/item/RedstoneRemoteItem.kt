@@ -33,7 +33,7 @@ class RedstoneRemoteItem(properties: Properties) : Item(properties), MenuProvide
 		}
 	}
 
-	override fun getDisplayName(): Component = this.defaultInstance.hoverName
+	override fun getDisplayName(): Component = defaultInstance.hoverName
 
 	companion object {
 		val DEFAULT_PROPERTIES = Supplier {

@@ -22,7 +22,7 @@ class IgniterMenu(
 			)
 
 	init {
-		this.addDataSlots(this.containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -40,13 +40,13 @@ class IgniterMenu(
 	override fun handleButtonPressed(buttonId: Int) {
 		if (buttonId != CYCLE_MODE_BUTTON_ID) return
 
-		val nextMode = when (this.mode) {
+		val nextMode = when (mode) {
 			IgniterBlockEntity.Mode.KEEP_IGNITED -> IgniterBlockEntity.Mode.IGNITE
 			IgniterBlockEntity.Mode.IGNITE -> IgniterBlockEntity.Mode.TOGGLE
 			IgniterBlockEntity.Mode.TOGGLE -> IgniterBlockEntity.Mode.KEEP_IGNITED
 		}
 
-		this.mode = nextMode
+		mode = nextMode
 	}
 
 	companion object {

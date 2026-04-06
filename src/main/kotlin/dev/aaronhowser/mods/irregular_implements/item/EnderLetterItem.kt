@@ -35,7 +35,7 @@ class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
 		return EnderLetterMenu(containerId, playerInventory)
 	}
 
-	override fun getDisplayName(): Component = this.defaultInstance.hoverName
+	override fun getDisplayName(): Component = defaultInstance.hoverName
 
 	override fun isFoil(stack: ItemStack): Boolean {
 		return super.isFoil(stack) || stack.get(ModDataComponents.ENDER_LETTER_CONTENTS)?.sender?.getOrNull() != null

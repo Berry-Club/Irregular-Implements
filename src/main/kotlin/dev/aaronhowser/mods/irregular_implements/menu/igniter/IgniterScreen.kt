@@ -19,19 +19,19 @@ class IgniterScreen(
 	private lateinit var changeModeButton: ChangingTextButton
 
 	override fun baseInit() {
-		this.changeModeButton = ChangingTextButton(
-			x = this.leftPos + 5,
-			y = this.topPos + 5,
-			width = this.imageWidth - 10,
-			height = this.imageHeight - 10,
-			messageGetter = { this.menu.mode.nameComponent },   //FIXME: For some reason this won't sync to client, it gets stuck on the first value
+		changeModeButton = ChangingTextButton(
+			x = leftPos + 5,
+			y = topPos + 5,
+			width = imageWidth - 10,
+			height = imageHeight - 10,
+			messageGetter = { menu.mode.nameComponent },   //FIXME: For some reason this won't sync to client, it gets stuck on the first value
 			onPress = {
 				val packet = ClientClickedMenuButton(IgniterMenu.CYCLE_MODE_BUTTON_ID)
 				packet.messageServer()
 			}
 		)
 
-		this.addRenderableWidget(this.changeModeButton)
+		addRenderableWidget(changeModeButton)
 	}
 
 	override var showInventoryLabel: Boolean = false

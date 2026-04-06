@@ -46,12 +46,12 @@ class SpectreIlluminatorEntity(
 	private fun removedByEntity(entity: Entity) {
 		if (entity is Player) {
 			if (entity.hasInfiniteMaterials()) {
-				this.discard()
+				discard()
 			} else {
-				this.kill()
+				kill()
 			}
 		} else {
-			this.kill()
+			kill()
 		}
 	}
 
@@ -87,31 +87,31 @@ class SpectreIlluminatorEntity(
 	override fun tick() {
 		super.tick()
 
-		if (this.actionTimer < TICKS_TO_MAX_SIZE) {
-			this.actionTimer++
+		if (actionTimer < TICKS_TO_MAX_SIZE) {
+			actionTimer++
 		}
 
 		moveToDestination()
 	}
 
 	private fun moveToDestination() {
-		if (destination == Vec3.ZERO || this.tickCount % (20 * 60) == 0) recalculateDestination()
+		if (destination == Vec3.ZERO || tickCount % (20 * 60) == 0) recalculateDestination()
 
-		if (this.position() == destination) return
+		if (position() == destination) return
 
-		val distance = this.position().distanceTo(destination)
+		val distance = position().distanceTo(destination)
 		if (distance < 0.1) {
-			this.setPos(destination)
+			setPos(destination)
 			return
 		}
 
-		val newPos = this.position().lerp(destination, 0.001)
+		val newPos = position().lerp(destination, 0.001)
 
-		this.setPos(newPos)
+		setPos(newPos)
 	}
 
 	private fun recalculateDestination() {
-		val chunkPos = ChunkPos(this.blockPosition())
+		val chunkPos = ChunkPos(blockPosition())
 		val chunk = level().getChunk(chunkPos.x, chunkPos.z)
 
 		var highestBlock = level().minBuildHeight
@@ -137,9 +137,9 @@ class SpectreIlluminatorEntity(
 	constructor(level: Level) : this(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), level)
 
 	var actionTimer: Int
-		get() = this.entityData.get(ACTION_TIMER)
+		get() = entityData.get(ACTION_TIMER)
 		private set(value) {
-			this.entityData.set(ACTION_TIMER, value)
+			entityData.set(ACTION_TIMER, value)
 		}
 
 	override fun defineSynchedData(builder: SynchedEntityData.Builder) {
@@ -147,11 +147,11 @@ class SpectreIlluminatorEntity(
 	}
 
 	override fun readAdditionalSaveData(compound: CompoundTag) {
-		this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
+		actionTimer = compound.getInt(ACTION_TIMER_NBT)
 	}
 
 	override fun addAdditionalSaveData(compound: CompoundTag) {
-		compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
+		compound.putInt(ACTION_TIMER_NBT, actionTimer)
 	}
 
 	override fun shouldRenderAtSqrDistance(distance: Double): Boolean {

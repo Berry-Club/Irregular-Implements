@@ -47,7 +47,7 @@ sealed interface FilterEntry {
 		ITEM("item", Item.CODEC);
 
 		override fun getSerializedName(): String {
-			return this.id
+			return id
 		}
 
 		companion object {
@@ -87,11 +87,11 @@ sealed interface FilterEntry {
 
 		override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
 			val time = System.currentTimeMillis() / 1000
-			if (displayStack == null || time > this.timeLastUpdated) {
-				this.timeLastUpdated = time
+			if (displayStack == null || time > timeLastUpdated) {
+				timeLastUpdated = time
 
 				val matchingItems = registries.lookupOrThrow(Registries.ITEM)
-					.get(this.tagKey)
+					.get(tagKey)
 					.getOrNull()
 					?.toList()
 					?: return ItemStack.EMPTY
@@ -99,8 +99,8 @@ sealed interface FilterEntry {
 				val randomIndex = random.nextInt(matchingItems.size)
 				val randomItem = matchingItems[randomIndex].value()
 
-				this.displayStack = this.displayStacks.computeIfAbsent(randomItem) {
-					val tagKeyComponent = Component.literal(this.tagKey.location().toString())
+				displayStack = displayStacks.computeIfAbsent(randomItem) {
+					val tagKeyComponent = Component.literal(tagKey.location().toString())
 
 					randomItem
 						.withComponent(

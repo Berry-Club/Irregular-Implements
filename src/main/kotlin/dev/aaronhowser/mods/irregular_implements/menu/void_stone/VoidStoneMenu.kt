@@ -38,7 +38,7 @@ class VoidStoneMenu(
 			}
 		}
 
-		this.addSlot(voidSlot)
+		addSlot(voidSlot)
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -49,8 +49,8 @@ class VoidStoneMenu(
 		if (slot != null && slot.hasItem()) {
 			val stackInSlot = slot.item
 
-			if (stackInSlot != this.playerInventory.getSelected()) {
-				this.moveItemStackTo(stackInSlot, 0, 1, false)
+			if (stackInSlot != playerInventory.getSelected()) {
+				moveItemStackTo(stackInSlot, 0, 1, false)
 			}
 		}
 

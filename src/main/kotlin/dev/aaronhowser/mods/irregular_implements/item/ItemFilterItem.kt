@@ -59,7 +59,7 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	override fun getDisplayName(): Component {
-		return this.defaultInstance.hoverName
+		return defaultInstance.hoverName
 	}
 
 

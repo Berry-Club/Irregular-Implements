@@ -36,16 +36,16 @@ class DiaphanousBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		val blockStateTag = NbtUtils.writeBlockState(this.renderedBlockState)
+		val blockStateTag = NbtUtils.writeBlockState(renderedBlockState)
 		tag.put(RENDERED_BLOCK_STATE, blockStateTag)
 
-		tag.putBoolean(IS_INVERTED_NBT, this.isInverted)
+		tag.putBoolean(IS_INVERTED_NBT, isInverted)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		this.isInverted = tag.getBoolean(IS_INVERTED_NBT)
+		isInverted = tag.getBoolean(IS_INVERTED_NBT)
 
 		val blockStateTag = tag.getCompound(RENDERED_BLOCK_STATE)
 		val readBlockState = NbtUtils.readBlockState(
@@ -53,7 +53,7 @@ class DiaphanousBlockEntity(
 			blockStateTag
 		)
 
-		this.renderedBlockState = readBlockState
+		renderedBlockState = readBlockState
 	}
 
 	companion object {

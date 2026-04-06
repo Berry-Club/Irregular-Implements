@@ -29,7 +29,7 @@ abstract class RedstoneInterfaceBlockEntity(
 	protected open fun serverTick() {}
 
 	protected fun updatePos(pos: BlockPos) {
-		val level = this.level ?: return
+		val level = level ?: return
 
 		if (level.isLoaded(pos)) {
 			val linkedState = level.getBlockState(pos)
@@ -37,15 +37,15 @@ abstract class RedstoneInterfaceBlockEntity(
 				return
 			}
 
-			linkedState.handleNeighborChanged(level, pos, this.blockState.block, pos, false)
+			linkedState.handleNeighborChanged(level, pos, blockState.block, pos, false)
 			level.updateNeighborsAt(pos, linkedState.block)
 		}
 	}
 
 	override fun setRemoved() {
-		val level = this.level
+		val level = level
 		if (level != null) {
-			removeInterface(level, this.blockPos)
+			removeInterface(level, blockPos)
 		}
 
 		super.setRemoved()

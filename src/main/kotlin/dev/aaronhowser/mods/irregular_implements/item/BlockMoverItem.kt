@@ -99,9 +99,9 @@ class BlockMoverItem(properties: Properties) : Item(properties) {
 			val blockDataComponent = BlockDataComponent(level.registryAccess(), clickedState, blockEntity)
 			stack.set(ModDataComponents.BLOCK_DATA, blockDataComponent)
 
-			this.blockMoverPreventingContainerDrops = true
+			blockMoverPreventingContainerDrops = true
 			level.setBlockAndUpdate(clickedPos, Blocks.AIR.defaultBlockState())
-			this.blockMoverPreventingContainerDrops = false
+			blockMoverPreventingContainerDrops = false
 
 			val soundType = clickedState.getSoundType(level, clickedPos, player)
 			level.playSound(

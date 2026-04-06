@@ -34,7 +34,7 @@ class GlowingMushroomBlock : NoCodecBushBlock(Properties.ofFullCopy(Blocks.RED_M
 
 		if (!soilDecision.isDefault()) return soilDecision.isTrue()
 
-		return level.getRawBrightness(pos, 0) < 13 && this.mayPlaceOn(stateBelow, level, belowPos)
+		return level.getRawBrightness(pos, 0) < 13 && mayPlaceOn(stateBelow, level, belowPos)
 	}
 
 	override fun randomTick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {

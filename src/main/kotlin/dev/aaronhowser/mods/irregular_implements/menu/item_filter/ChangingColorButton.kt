@@ -28,13 +28,13 @@ class ChangingColorButton(
 ) {
 
 	override fun renderWidget(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-		val color = this.colorGetter.get()
+		val color = colorGetter.get()
 
 		val red = (color shr 16 and 255) / 255.0f
 		val green = (color shr 8 and 255) / 255.0f
 		val blue = (color and 255) / 255.0f
 
-		guiGraphics.setColor(red, green, blue, this.alpha)
+		guiGraphics.setColor(red, green, blue, alpha)
 		RenderSystem.enableBlend()
 		RenderSystem.enableDepthTest()
 		guiGraphics.blitSprite(SPRITES[this.active, this.isHovered], this.x, this.y, this.getWidth(), this.getHeight())

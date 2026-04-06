@@ -66,12 +66,12 @@ class BlockBreakerBlockEntity(
 	private fun initFakePlayer() {
 		val level = level as? ServerLevel ?: return
 
-		if (this.uuid == null) {
-			this.uuid = UUID.randomUUID()
+		if (uuid == null) {
+			uuid = UUID.randomUUID()
 			setChanged()
 		}
 
-		val gameProfile = GameProfile(this.uuid, BlockBreakerFakePlayer.NAME)
+		val gameProfile = GameProfile(uuid, BlockBreakerFakePlayer.NAME)
 		val fakePlayer = BetterFakePlayerFactory.get(level, gameProfile) {
 			BlockBreakerFakePlayer(level, gameProfile)
 		}
@@ -99,7 +99,7 @@ class BlockBreakerBlockEntity(
 		val breakerEnchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
 		val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchantments)
 
-		this.diamondBreaker = insertedBreaker
+		diamondBreaker = insertedBreaker
 		setChanged()
 
 		fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, pick)
@@ -108,8 +108,8 @@ class BlockBreakerBlockEntity(
 	fun downgrade(player: Player) {
 		val level = level as? ServerLevel ?: return
 
-		player.giveOrDropStack(this.diamondBreaker)
-		this.diamondBreaker = ItemStack.EMPTY
+		player.giveOrDropStack(diamondBreaker)
+		diamondBreaker = ItemStack.EMPTY
 
 		val basicPick = getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
 

@@ -15,7 +15,7 @@ class DropFilterScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.DROP_FILTER
 
 	override fun baseInit() {
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 	}
 
 }

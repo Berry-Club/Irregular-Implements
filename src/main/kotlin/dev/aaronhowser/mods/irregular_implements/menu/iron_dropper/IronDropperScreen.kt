@@ -24,7 +24,7 @@ class IronDropperScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.IRON_DROPPER
 
 	override fun baseInit() {
-		this.titleLabelX = (this.imageWidth - font.width(this.title)) / 2
+		titleLabelX = (imageWidth - font.width(title)) / 2
 
 		val buttonSize = 20
 		val spaceBetween = 5

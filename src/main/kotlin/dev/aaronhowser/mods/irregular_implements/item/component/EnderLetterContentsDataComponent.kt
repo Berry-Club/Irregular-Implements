@@ -29,7 +29,7 @@ data class EnderLetterContentsDataComponent(
 	override fun getInventory(): NonNullList<ItemStack> = stacks
 
 	override fun setInventory(stack: ItemStack, inventory: NonNullList<ItemStack>) {
-		val newComponent = this.copy(stacks = inventory)
+		val newComponent = copy(stacks = inventory)
 
 		if (hasBeenReceived && inventory.all(ItemStack::isEmpty)) {
 			stack.shrink(1)

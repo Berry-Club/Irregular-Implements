@@ -59,7 +59,7 @@ class EnderLetterMenu(
 		for (i in 0 until EnderLetterContentsDataComponent.INVENTORY_SIZE) {
 			val x = 8 + i * 18
 			val slot = SlotItemHandler(itemHandler, i, x, y)
-			this.addSlot(slot)
+			addSlot(slot)
 		}
 	}
 
@@ -81,7 +81,7 @@ class EnderLetterMenu(
 
 	fun setNewRecipient(recipient: String): Boolean {
 		if (recipient == recipientName) return false
-		this.recipientName = recipient
+		recipientName = recipient
 
 		val oldComponent = getHeldItemStack().get(ModDataComponents.ENDER_LETTER_CONTENTS) ?: return false
 		val newComponent = oldComponent.copy(recipient = Optional.of(recipient))

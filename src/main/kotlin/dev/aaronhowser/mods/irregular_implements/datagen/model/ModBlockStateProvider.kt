@@ -944,7 +944,7 @@ class ModBlockStateProvider(
 
 		simpleBlock(saplingBlock, saplingModel)
 
-		this.itemModels()
+		itemModels()
 			.withExistingParent(name(saplingBlock), "item/generated")
 			.texture("layer0", saplingTexture)
 			.renderType(RenderType.translucent().name)
@@ -1996,7 +1996,7 @@ class ModBlockStateProvider(
 
 			simpleBlock(block, model)
 
-			this.itemModels()
+			itemModels()
 				.withExistingParent(name(block), "item/generated")
 				.texture("layer0", texture)
 		}

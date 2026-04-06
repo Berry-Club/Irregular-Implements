@@ -36,7 +36,7 @@ class SpectreChargerItem(
 			|| !stack.has(ModDataComponents.IS_ENABLED)
 		) return
 
-		val amountToCharge = this.type.amountGetter.get() * CHARGE_DELAY
+		val amountToCharge = type.amountGetter.get() * CHARGE_DELAY
 
 		val coil = SpectreEnergyHandler.get(level).getCoil(player.uuid)
 
@@ -53,7 +53,7 @@ class SpectreChargerItem(
 			val energyCapability = inventoryStack.getCapability(Capabilities.EnergyStorage.ITEM)
 			if (energyCapability == null || !energyCapability.canReceive()) continue
 
-			if (this.type == Type.GENESIS) {
+			if (type == Type.GENESIS) {
 				energyCapability.receiveEnergy(amountToCharge, false)
 				continue
 			}
@@ -81,7 +81,7 @@ class SpectreChargerItem(
 	}
 
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		val amount = this.type.amountGetter.get()
+		val amount = type.amountGetter.get()
 
 		val component = ModTooltipLang.CHARGER_CHARGES
 			.toGrayComponent(String.format("%,d", amount))
