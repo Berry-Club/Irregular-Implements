@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.AdvancedItemCollectorBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block_entity.ItemCollectorBlockEntity
@@ -33,7 +34,7 @@ import net.neoforged.neoforge.capabilities.Capabilities
 
 class ItemCollectorBlock(
 	private val isAdvanced: Boolean
-) : Block(Properties.ofFullCopy(Blocks.HOPPER)), EntityBlock {
+) : SimpleContainerBlock(Properties.ofFullCopy(Blocks.HOPPER)), EntityBlock {
 
 	init {
 		registerDefaultState(
@@ -89,17 +90,6 @@ class ItemCollectorBlock(
 		} else {
 			ItemCollectorBlockEntity(pos, state)
 		}
-	}
-
-	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.isBlock(newState.block)) {
-			val be = level.getBlockEntity(pos)
-			if (be is AdvancedItemCollectorBlockEntity) {
-				Containers.dropContents(level, pos, be.container)
-			}
-		}
-
-		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {

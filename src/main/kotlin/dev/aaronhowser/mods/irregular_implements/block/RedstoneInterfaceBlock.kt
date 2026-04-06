@@ -1,12 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneInterfaceAdvancedBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneInterfaceBasicBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
-import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Player
@@ -23,10 +22,7 @@ import net.minecraft.world.phys.BlockHitResult
 
 class RedstoneInterfaceBlock(
 	val isAdvanced: Boolean
-) : EntityBlock, Block(
-	Properties
-		.ofFullCopy(Blocks.IRON_BLOCK)
-) {
+) : SimpleContainerBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
 		return if (isAdvanced) {
@@ -71,17 +67,6 @@ class RedstoneInterfaceBlock(
 			type,
 			RedstoneInterfaceBlockEntity::tick
 		)
-	}
-
-	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.isBlock(newState.block)) {
-			val be = level.getBlockEntity(pos)
-			if (be is RedstoneInterfaceAdvancedBlockEntity) {
-				Containers.dropContents(level, pos, be.container)
-			}
-		}
-
-		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 }

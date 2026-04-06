@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block_entity.FilteredPlatformBlockEntity
@@ -24,9 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 class PlatformBlock(
 	blockToCopy: Block,
 	private val hasEntity: Boolean = false
-) : Block(
-	Properties.ofFullCopy(blockToCopy)
-), EntityBlock {
+) : SimpleContainerBlock(Properties.ofFullCopy(blockToCopy)), EntityBlock {
 
 	override fun getCollisionShape(
 		state: BlockState,
@@ -74,17 +73,6 @@ class PlatformBlock(
 		}
 
 		return super.useWithoutItem(state, level, pos, player, hitResult)
-	}
-
-	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.isBlock(newState.block)) {
-			val be = level.getBlockEntity(pos)
-			if (be is FilteredPlatformBlockEntity) {
-				Containers.dropContents(level, pos, be.container)
-			}
-		}
-
-		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	companion object {

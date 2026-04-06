@@ -1,11 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.InventoryTesterBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -27,7 +26,7 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.neoforged.neoforge.capabilities.Capabilities
 
-class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
+class InventoryTesterBlock : SimpleContainerBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
 
 	init {
 		registerDefaultState(
@@ -109,17 +108,6 @@ class InventoryTesterBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), En
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
-	}
-
-	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!state.isBlock(newState.block)) {
-			val be = level.getBlockEntity(pos)
-			if (be is InventoryTesterBlockEntity) {
-				Containers.dropContents(level, pos, be.container)
-			}
-		}
-
-		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	companion object {

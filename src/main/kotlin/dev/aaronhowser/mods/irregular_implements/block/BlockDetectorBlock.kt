@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.BlockDetectorBlockEntity
 import net.minecraft.core.BlockPos
@@ -21,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.phys.BlockHitResult
 
-class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
+class BlockDetectorBlock : SimpleContainerBlock(Properties.ofFullCopy(Blocks.DISPENSER)), EntityBlock {
 
 	init {
 		registerDefaultState(
@@ -73,17 +75,6 @@ class BlockDetectorBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Entit
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
-	}
-
-	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (!newState.isBlock(state.block)) {
-			val be = level.getBlockEntity(pos)
-			if (be is BlockDetectorBlockEntity) {
-				Containers.dropContents(level, pos, be.container)
-			}
-		}
-
-		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 	companion object {
