@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.packet.server_to_client
 
-import dev.aaronhowser.mods.aaron.serialization.AaronExtraCodecs
 import dev.aaronhowser.mods.aaron.packet.AaronPacket
 import dev.aaronhowser.mods.aaron.serialization.AaronExtraStreamCodecs
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer

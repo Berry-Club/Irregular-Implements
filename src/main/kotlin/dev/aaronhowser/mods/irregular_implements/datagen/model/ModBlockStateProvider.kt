@@ -195,7 +195,7 @@ class ModBlockStateProvider(
 		val model = models()
 			.withExistingParent(name(block), "block/end_rod")
 			.texture("end_rod", texture)
-			.particle( texture)
+			.particle(texture)
 
 		simpleBlockWithItem(block, model)
 	}
@@ -330,7 +330,7 @@ class ModBlockStateProvider(
 				textureOther,
 				textureOther
 			)
-			.particle( textureTop)
+			.particle(textureTop)
 
 		simpleBlockWithItem(block, model)
 	}
@@ -368,7 +368,7 @@ class ModBlockStateProvider(
 				.withExistingParent(name(block) + "_" + direction.getDirectionName(), "block/block")
 				.renderType(RenderType.cutout().name)
 				.texture("texture", texture)
-				.particle( texture)
+				.particle(texture)
 
 				.element()
 				.from(x1, y1, z1).to(x2, y2, z2)
@@ -399,7 +399,7 @@ class ModBlockStateProvider(
 				.withExistingParent(name, "block/block")
 				.texture("post", woodTexture)
 				.texture("body", mailboxBodyTexture)
-				.particle( mailboxBodyTexture)
+				.particle(mailboxBodyTexture)
 
 				.element()
 				.from(6f, 0f, 6f).to(10f, 16f, 10f)
@@ -565,7 +565,7 @@ class ModBlockStateProvider(
 			val model = models()
 				.withExistingParent(name(block), "block/block")
 				.texture("texture", texture)
-				.particle( texture)
+				.particle(texture)
 
 				.element()
 				.from(6f, 0f, 6f).to(10f, 1f, 10f)
@@ -686,7 +686,7 @@ class ModBlockStateProvider(
 			.withExistingParent(name(block), "block/thin_block")
 			.texture("texture", texture)
 			.texture("side", slabTexture)
-			.particle( texture)
+			.particle(texture)
 			.element()
 			.from(6f, 0f, 6f).to(10f, 1f, 10f)
 			.allFaces { face, modelBuilder ->
@@ -750,7 +750,7 @@ class ModBlockStateProvider(
 				bottom,
 				top
 			)
-			.particle( top)
+			.particle(top)
 
 		simpleBlockWithItem(block, model)
 	}
@@ -769,7 +769,7 @@ class ModBlockStateProvider(
 				bottom,
 				top
 			)
-			.particle( top)
+			.particle(top)
 
 		simpleBlockWithItem(block, model)
 	}
@@ -1044,7 +1044,7 @@ class ModBlockStateProvider(
 			.withExistingParent(name(block), mcLoc("block/block"))
 			.texture("base", baseTexture)
 			.texture("tint", tintTexture)
-			.particle( baseTexture)
+			.particle(baseTexture)
 			.renderType(RenderType.cutoutMipped().name)
 
 			.element()
@@ -1077,7 +1077,7 @@ class ModBlockStateProvider(
 					.renderType(RenderType.translucent().name)
 					.texture("texture", texture)
 					.texture("inner", green)
-					.particle( texture)
+					.particle(texture)
 
 					.element()
 					.from(6f, 6f, 6f).to(10f, 10f, 10f)
@@ -1111,7 +1111,7 @@ class ModBlockStateProvider(
 		val model = models()
 			.withExistingParent(name(block), mcLoc("block/block"))
 			.renderType(RenderType.cutout().name)
-			.particle( mcLoc("block/iron_block"))
+			.particle(mcLoc("block/iron_block"))
 			.texture("texture", mcLoc("block/iron_block"))
 			.texture("glass", mcLoc("block/glass"))
 			.texture("top", modLoc("block/biome_radar_top"))
@@ -1282,7 +1282,7 @@ class ModBlockStateProvider(
 		val model = models()
 			.withExistingParent(name(block), "block/thin_block")
 			.texture("texture", texture)
-			.particle( texture)
+			.particle(texture)
 			.element()
 			.from(0f, 0f, 0f).to(16f, 1f, 16f)
 			.textureAll("#texture")
@@ -1722,7 +1722,7 @@ class ModBlockStateProvider(
 				val model = models()
 					.withExistingParent(modelName, mcLoc("block/block"))
 					.texture("all", faceTexture)
-					.particle( faceTexture)
+					.particle(faceTexture)
 					.texture("front", frontOverlay)
 					.texture("side", sideOverlay)
 					.renderType(RenderType.cutout().name)
@@ -1803,7 +1803,7 @@ class ModBlockStateProvider(
 				val model = models()
 					.withExistingParent(modelName, mcLoc("block/block"))
 					.texture("all", texture)
-					.particle( texture)
+					.particle(texture)
 					.renderType(RenderType.translucent().name)
 
 					.element()
@@ -1845,7 +1845,7 @@ class ModBlockStateProvider(
 					models()
 						.withExistingParent(modelName, mcLoc("block/block"))
 						.texture("texture", texture)
-						.particle( texture)
+						.particle(texture)
 
 						.element()
 						.from(0f, 0f, 0f).to(16f, 15f, 16f)
@@ -1964,7 +1964,7 @@ class ModBlockStateProvider(
 			var model = models()
 				.withExistingParent(name(block), "block/block")
 				.texture("all", texture)
-				.particle( texture)
+				.particle(texture)
 
 				.element()
 				.from(0f, 0f, 0f).to(16f, 16f, 16f)
@@ -2123,7 +2123,7 @@ class ModBlockStateProvider(
 		val blockModel = models().withExistingParent(name(block), "block/block")
 			.texture("base", base)
 			.texture("glow", glow)
-			.particle( glow)
+			.particle(glow)
 			.renderType(RenderType.cutoutMipped().name)
 
 			// Base north/south
@@ -2183,7 +2183,7 @@ class ModBlockStateProvider(
 				val opaqueModel = models()
 					.withExistingParent(name(opaqueBlock), mcLoc("block/block"))
 					.texture("all", opaqueTexture)
-					.particle( translucentTexture)
+					.particle(translucentTexture)
 
 					.element()
 					.cube("#all")
@@ -2200,7 +2200,7 @@ class ModBlockStateProvider(
 					.withExistingParent(name(translucentBlock), "block/block")
 					.renderType(RenderType.translucent().name)
 					.texture("all", translucentTexture)
-					.particle( translucentTexture)
+					.particle(translucentTexture)
 
 					.element()
 					.cube("#all")
@@ -2236,7 +2236,7 @@ class ModBlockStateProvider(
 					.withExistingParent(name(luminous), mcLoc("block/block"))
 					.texture("base", luminousBaseTexture)
 					.texture("tint", luminousTintTexture)
-					.particle( luminousTintTexture)
+					.particle(luminousTintTexture)
 					.renderType(RenderType.cutoutMipped().name)
 
 					.element()
@@ -2277,7 +2277,7 @@ class ModBlockStateProvider(
 			val model = models()
 				.withExistingParent(modelName, mcLoc("block/block"))
 				.texture("texture", texture)
-				.particle( texture)
+				.particle(texture)
 
 				.element()
 				.from(0f, 15f, 0f).to(16f, 16f, 16f)
