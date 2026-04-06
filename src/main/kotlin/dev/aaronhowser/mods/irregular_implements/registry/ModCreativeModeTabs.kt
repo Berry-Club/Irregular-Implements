@@ -1,8 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.registry
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isHolder
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.irregular_implements.item.BiomeCrystalItem
 import dev.aaronhowser.mods.irregular_implements.item.DiviningRodItem
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
@@ -26,30 +29,52 @@ object ModCreativeModeTabs {
 			.title(ModItemLang.CREATIVE_TAB.toComponent())
 			.icon { (ModItems.ITEM_REGISTRY.entries.random() as DeferredItem).toStack() }
 			.displayItems { displayContext: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output ->
-				val itemsToSkip = setOf(
-					ModItems.BIOME_CRYSTAL.get(),
-					ModItems.WHITE_STONE.get(),
-					ModItems.DIVINING_ROD.get(),
-					ModItems.WEATHER_EGG.get()
-				)
 
-				val regularItems: List<Item> = ModItems.ITEM_REGISTRY.entries.map { it.get() }
-				val blockItems: Set<BlockItem> = regularItems.filterIsInstance<BlockItem>().toSet()
+				val regularItems = mutableListOf<Item>()
+				val blockItems = mutableListOf<BlockItem>()
 
-				output.acceptAll(
-					(regularItems - itemsToSkip - blockItems).map { it.defaultInstance }
-				)
+				for (deferred in ModItems.ITEM_REGISTRY.entries) {
+					if (deferred.isHolder(ModItemTagsProvider.NOT_YET_IMPLEMENTED)) continue
 
-				for (weather in WeatherEggItem.Weather.entries) {
-					output.accept(WeatherEggItem.fromWeather(weather))
+					val item = deferred.get()
+					if (item is BlockItem) {
+						blockItems.add(item)
+					} else {
+						regularItems.add(item)
+					}
 				}
 
-				output.acceptAll(DiviningRodItem.getAllOreRods())
+				for (item in regularItems) {
+					if (item == ModItems.WEATHER_EGG.get()) {
+						output.acceptAll(WeatherEggItem.Weather.getAllStacks())
+						continue
+					}
 
-				output.accept(ModItems.WHITE_STONE)
-				output.accept(ModItems.WHITE_STONE.toStack().also { it.set(ModDataComponents.CHARGE, WhiteStoneItem.MAX_CHARGE) })
+					if (item == ModItems.DIVINING_ROD.get()) {
+						output.acceptAll(DiviningRodItem.getAllOreRods())
+						continue
+					}
 
-				output.acceptAll(blockItems.map { it.defaultInstance })
+					if (item == ModItems.WHITE_STONE.get()) {
+						output.accept(item)
+						output.accept(
+							item.withComponent(
+								ModDataComponents.CHARGE.get(),
+								WhiteStoneItem.MAX_CHARGE
+							)
+						)
+					}
+
+					if (item == ModItems.BIOME_CRYSTAL.get()) {
+						continue
+					}
+
+					output.accept(item)
+				}
+
+				for (blockItem in blockItems) {
+					output.accept(blockItem)
+				}
 
 				output.acceptAll(BiomeCrystalItem.getAllCrystals(displayContext.holders))
 

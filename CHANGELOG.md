@@ -3,6 +3,8 @@
 ### Changed
 
 - Made the Aaron dependency range not have an explicit max, because updates might not always be breaking
+- Some general code improvements to make use of new Aaron features
+- Hid items that aren't implemented
 
 # 1.10.1
 

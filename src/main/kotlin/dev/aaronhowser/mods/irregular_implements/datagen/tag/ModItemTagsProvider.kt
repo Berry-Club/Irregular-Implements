@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.tag
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.add
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -26,97 +27,96 @@ class ModItemTagsProvider(
 	//TODO: Copy all block tags to item tags
 
 	override fun addTags(provider: HolderLookup.Provider) {
-
-		this.tag(NATURE_CORE_FLOWERS)
+		tag(NATURE_CORE_FLOWERS)
 			.addTag(ItemTags.FLOWERS)
 
-		this.tag(NATURE_CORE_SAPLINGS)
+		tag(NATURE_CORE_SAPLINGS)
 			.addTag(ItemTags.SAPLINGS)
 
-		this.tag(SPECTRE_ANCHOR_BLACKLIST)
+		tag(SPECTRE_ANCHOR_BLACKLIST)
 			.add(
-				ModItems.SPECTRE_ANCHOR.get()
+				ModItems.SPECTRE_ANCHOR
 			)
 
-		this.tag(CUSTOM_CRAFTING_TABLE_ITEMS)
+		tag(CUSTOM_CRAFTING_TABLE_ITEMS)
 			.addTags(
 				ItemTags.PLANKS,
 				ItemTags.LOGS
 			)
 
-		this.tag(ItemTags.MINING_LOOT_ENCHANTABLE)
+		tag(ItemTags.MINING_LOOT_ENCHANTABLE)
 			.add(
-				ModItems.DIAMOND_BREAKER.get()
+				ModItems.DIAMOND_BREAKER
 			)
 
-		this.tag(ItemTags.MINING_ENCHANTABLE)
+		tag(ItemTags.MINING_ENCHANTABLE)
 			.add(
-				ModItems.DIAMOND_BREAKER.get()
+				ModItems.DIAMOND_BREAKER
 			)
 
-		this.tag(ItemTags.LOGS_THAT_BURN)
+		tag(ItemTags.LOGS_THAT_BURN)
 			.add(
 				ModBlocks.SPECTRE_LOG.asItem(),
 				ModBlocks.SPECTRE_WOOD.asItem()
 			)
 
-		this.tag(ItemTags.PLANKS)
+		tag(ItemTags.PLANKS)
 			.add(
 				ModBlocks.SPECTRE_PLANKS.asItem()
 			)
 
-		this.tag(ENCHANTABLE_MAGNETIC)
+		tag(ENCHANTABLE_MAGNETIC)
 			.addTags(
 				Tags.Items.MINING_TOOL_TOOLS,
 				Tags.Items.MELEE_WEAPON_TOOLS
 			)
 
-		this.tag(RING_CURIO)
+		tag(RING_CURIO)
 			.add(
-				ModItems.OBSIDIAN_SKULL_RING.get(),
-				ModItems.LAVA_CHARM.get()
+				ModItems.OBSIDIAN_SKULL_RING,
+				ModItems.LAVA_CHARM
 			)
 
-		this.copy(ModBlockTagsProvider.SUPER_LUBRICATED, SUPER_LUBRICATED_BLOCKS)
+		copy(ModBlockTagsProvider.SUPER_LUBRICATED, SUPER_LUBRICATED_BLOCKS)
 
-		this.tag(Tags.Items.MELEE_WEAPON_TOOLS)
+		tag(Tags.Items.MELEE_WEAPON_TOOLS)
 			.add(
-				ModItems.SPECTRE_SWORD.get()
+				ModItems.SPECTRE_SWORD
 			)
 
-		this.tag(Tags.Items.MINING_TOOL_TOOLS)
+		tag(Tags.Items.MINING_TOOL_TOOLS)
 			.add(
-				ModItems.SPECTRE_PICKAXE.get(),
-				ModItems.SPECTRE_SHOVEL.get(),
-				ModItems.SPECTRE_AXE.get()
+				ModItems.SPECTRE_PICKAXE,
+				ModItems.SPECTRE_SHOVEL,
+				ModItems.SPECTRE_AXE
 			)
 
-		this.tag(ItemTags.AXES)
+		tag(ItemTags.AXES)
 			.add(
-				ModItems.SPECTRE_AXE.get()
+				ModItems.SPECTRE_AXE
 			)
 
-		this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
+		tag(ItemTags.BEACON_PAYMENT_ITEMS)
 			.add(
-				ModItems.SPECTRE_INGOT.get()
+				ModItems.SPECTRE_INGOT
 			)
 
-		this.tag(ItemTags.SWORDS)
+		tag(ItemTags.SWORDS)
 			.add(
-				ModItems.SPECTRE_SWORD.get()
+				ModItems.SPECTRE_SWORD
 			)
 
-		this.tag(ItemTags.SHOVELS)
+		tag(ItemTags.SHOVELS)
 			.add(
-				ModItems.SPECTRE_SHOVEL.get()
+				ModItems.SPECTRE_SHOVEL
 			)
 
-		this.tag(ItemTags.PICKAXES)
+		tag(ItemTags.PICKAXES)
 			.add(
-				ModItems.SPECTRE_PICKAXE.get()
+				ModItems.SPECTRE_PICKAXE
 			)
 
-		this.tag(ItemTags.TRIMMABLE_ARMOR)
+		tag(ItemTags.TRIMMABLE_ARMOR)
 			.remove(
 				ModItems.SPECTRE_HELMET.get(),
 				ModItems.SPECTRE_CHESTPLATE.get(),
@@ -127,112 +127,130 @@ class ModItemTagsProvider(
 				ModItems.LAVA_WADERS.get()
 			)
 
-		this.tag(ItemTags.HEAD_ARMOR)
+		tag(ItemTags.HEAD_ARMOR)
 			.add(
-				ModItems.MAGIC_HOOD.get(),
-				ModItems.SPECTRE_HELMET.get()
+				ModItems.MAGIC_HOOD,
+				ModItems.SPECTRE_HELMET
 			)
 
-		this.tag(ItemTags.CHEST_ARMOR)
+		tag(ItemTags.CHEST_ARMOR)
 			.add(
-				ModItems.SPECTRE_CHESTPLATE.get()
+				ModItems.SPECTRE_CHESTPLATE
 			)
 
-		this.tag(ItemTags.LEG_ARMOR)
+		tag(ItemTags.LEG_ARMOR)
 			.add(
-				ModItems.SPECTRE_LEGGINGS.get()
+				ModItems.SPECTRE_LEGGINGS
 			)
 
-		this.tag(ItemTags.FOOT_ARMOR)
+		tag(ItemTags.FOOT_ARMOR)
 			.add(
-				ModItems.SPECTRE_BOOTS.get(),
-				ModItems.WATER_WALKING_BOOTS.get(),
-				ModItems.OBSIDIAN_WATER_WALKING_BOOTS.get(),
-				ModItems.LAVA_WADERS.get()
+				ModItems.SPECTRE_BOOTS,
+				ModItems.WATER_WALKING_BOOTS,
+				ModItems.OBSIDIAN_WATER_WALKING_BOOTS,
+				ModItems.LAVA_WADERS
 			)
 
-		this.tag(C_RODS_OBSIDIAN)
+		tag(C_RODS_OBSIDIAN)
 			.add(
-				ModItems.OBSIDIAN_ROD.get()
+				ModItems.OBSIDIAN_ROD
 			)
 
-		this.tag(HIDE_NAME_HELMET)
+		tag(HIDE_NAME_HELMET)
 			.add(
-				ModItems.MAGIC_HOOD.get()
+				ModItems.MAGIC_HOOD
 			)
 
-		this.tag(HIDE_POTION_HELMET)
+		tag(HIDE_POTION_HELMET)
 			.add(
-				ModItems.MAGIC_HOOD.get()
+				ModItems.MAGIC_HOOD
 			)
 
-		this.tag(C_CROPS_BEAN)
-			.add(ModItems.BEAN.get())
+		tag(C_CROPS_BEAN)
+			.add(ModItems.BEAN)
 
-		this.tag(Tags.Items.CROPS)
+		tag(Tags.Items.CROPS)
 			.addTag(C_CROPS_BEAN)
 
-		this.tag(Tags.Items.SEEDS)
+		tag(Tags.Items.SEEDS)
 			.addTag(GRASS_SEEDS)
 			.add(
-				ModItems.LOTUS_SEEDS.get(),
-				ModItems.BEAN.get()
+				ModItems.LOTUS_SEEDS,
+				ModItems.BEAN
 			)
 
-		this.tag(Tags.Items.FOODS)
+		tag(Tags.Items.FOODS)
 			.add(
-				ModItems.LOTUS_BLOSSOM.get(),
-				ModItems.BEAN_STEW.get()
+				ModItems.LOTUS_BLOSSOM,
+				ModItems.BEAN_STEW
 			)
 
-		this.tag(GRASS_SEEDS)
+		tag(GRASS_SEEDS)
 			.add(
-				ModItems.GRASS_SEEDS.get(),
-				ModItems.GRASS_SEEDS_WHITE.get(),
-				ModItems.GRASS_SEEDS_ORANGE.get(),
-				ModItems.GRASS_SEEDS_MAGENTA.get(),
-				ModItems.GRASS_SEEDS_LIGHT_BLUE.get(),
-				ModItems.GRASS_SEEDS_YELLOW.get(),
-				ModItems.GRASS_SEEDS_LIME.get(),
-				ModItems.GRASS_SEEDS_PINK.get(),
-				ModItems.GRASS_SEEDS_GRAY.get(),
-				ModItems.GRASS_SEEDS_LIGHT_GRAY.get(),
-				ModItems.GRASS_SEEDS_CYAN.get(),
-				ModItems.GRASS_SEEDS_PURPLE.get(),
-				ModItems.GRASS_SEEDS_BLUE.get(),
-				ModItems.GRASS_SEEDS_BROWN.get(),
-				ModItems.GRASS_SEEDS_GREEN.get(),
-				ModItems.GRASS_SEEDS_RED.get(),
-				ModItems.GRASS_SEEDS_BLACK.get(),
+				ModItems.GRASS_SEEDS,
+				ModItems.GRASS_SEEDS_WHITE,
+				ModItems.GRASS_SEEDS_ORANGE,
+				ModItems.GRASS_SEEDS_MAGENTA,
+				ModItems.GRASS_SEEDS_LIGHT_BLUE,
+				ModItems.GRASS_SEEDS_YELLOW,
+				ModItems.GRASS_SEEDS_LIME,
+				ModItems.GRASS_SEEDS_PINK,
+				ModItems.GRASS_SEEDS_GRAY,
+				ModItems.GRASS_SEEDS_LIGHT_GRAY,
+				ModItems.GRASS_SEEDS_CYAN,
+				ModItems.GRASS_SEEDS_PURPLE,
+				ModItems.GRASS_SEEDS_BLUE,
+				ModItems.GRASS_SEEDS_BROWN,
+				ModItems.GRASS_SEEDS_GREEN,
+				ModItems.GRASS_SEEDS_RED,
+				ModItems.GRASS_SEEDS_BLACK,
 			)
 
-		this.tag(DAMAGES_SPIRITS)
+		tag(DAMAGES_SPIRITS)
 			.add(
-				ModItems.SPECTRE_SWORD.get()
+				ModItems.SPECTRE_SWORD
+			)
+
+		tag(NOT_YET_IMPLEMENTED)
+			.add(
+				ModBlocks.INVENTORY_REROUTER.asItem(),
+				ModBlocks.POTION_VAPORIZER.asItem(),
+				ModBlocks.ADVANCED_REDSTONE_REPEATER.asItem(),
+				ModBlocks.PROCESSING_PLATE.asItem(),
+				ModBlocks.FILTERED_REDIRECTOR_PLATE.asItem(),
+				ModBlocks.REDSTONE_PLATE.asItem(),
+				ModBlocks.EXTRACTION_PLATE.asItem(),
+				ModBlocks.ANCIENT_BRICK.asItem()
 			)
 	}
 
 	companion object {
+		private fun create(namespace: String, path: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath(namespace, path))
 		private fun create(id: String): TagKey<Item> = ItemTags.create(OtherUtil.modResource(id))
-		private fun common(id: String): TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", id))
+		private fun common(id: String): TagKey<Item> = create("c", id)
 
 		val GRASS_SEEDS = create("grass_seeds")
 		val SUPER_LUBRICATED_BLOCKS = create("super_lubricated")
-		val C_CROPS_BEAN = common("crops/bean")
-		val C_RODS_OBSIDIAN = common("rods/obsidian")
-		val RING_CURIO: TagKey<Item> = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"))
-		val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
-		val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
-		val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
 		val NATURE_CORE_FLOWERS = create("nature_core_flowers")
 		val NATURE_CORE_SAPLINGS = create("nature_core_saplings")
+		val CUSTOM_CRAFTING_TABLE_ITEMS = create("custom_crafting_table_items")
+
+		val ENCHANTABLE_MAGNETIC = create("enchantable/magnetic")
+		val SPECTRE_ANCHOR_BLACKLIST = create("spectre_anchor_blacklist")
+
 		val DAMAGES_SPIRITS = create("damages_spirits")
+		val NOT_YET_IMPLEMENTED = create("not_yet_implemented")
+
+		val C_CROPS_BEAN = common("crops/bean")
+		val C_RODS_OBSIDIAN = common("rods/obsidian")
+		val RING_CURIO = create("curios", "ring")
 
 		@JvmField
 		val HIDE_POTION_HELMET = create("hide_potion_helmet")
 
 		@JvmField
 		val HIDE_NAME_HELMET = create("hide_name_helmet")
+
 	}
 
 }

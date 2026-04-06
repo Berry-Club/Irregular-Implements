@@ -921,11 +921,7 @@ class ModPatchouliBookProvider(
 				)
 			),
 			stacksSpotlight(
-				listOf(
-					WeatherEggItem.fromWeather(WeatherEggItem.Weather.SUNNY),
-					WeatherEggItem.fromWeather(WeatherEggItem.Weather.RAINY),
-					WeatherEggItem.fromWeather(WeatherEggItem.Weather.STORMY)
-				),
+				WeatherEggItem.Weather.getAllStacks(),
 				" ",
 				"Throwing an Egg that matches the current weather will do nothing.",
 				true

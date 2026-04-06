@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.withComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModItemLang
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.entity.ThrownWeatherEggEntity
@@ -31,19 +32,6 @@ import java.util.function.Supplier
 
 //TODO: information recipes
 class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem {
-
-	enum class Weather(private val realName: String) : StringRepresentable {
-		SUNNY("sunny"),
-		RAINY("rainy"),
-		STORMY("stormy");
-
-		override fun getSerializedName(): String = realName
-
-		companion object {
-			val CODEC: StringRepresentable.StringRepresentableCodec<Weather> = StringRepresentable.fromEnum(Weather::values)
-			val STREAM_CODEC: StreamCodec<ByteBuf, Weather> = ByteBufCodecs.fromCodec(CODEC)
-		}
-	}
 
 	override fun getName(stack: ItemStack): Component {
 		val weather = stack.get(ModDataComponents.WEATHER) ?: Weather.SUNNY
@@ -111,16 +99,26 @@ class WeatherEggItem(properties: Properties) : Item(properties), ProjectileItem 
 				Weather.STORMY -> 2f
 			}
 		}
+	}
 
-		fun fromWeather(weather: Weather): ItemStack {
-			val stack = ModItems.WEATHER_EGG.toStack()
+	enum class Weather(private val realName: String) : StringRepresentable {
+		SUNNY("sunny"),
+		RAINY("rainy"),
+		STORMY("stormy");
 
-			stack.set(
-				ModDataComponents.WEATHER,
-				weather
-			)
+		override fun getSerializedName(): String = realName
 
-			return stack
+		fun getStack(): ItemStack {
+			return ModItems.WEATHER_EGG.withComponent(ModDataComponents.WEATHER.get(), this)
+		}
+
+		companion object {
+			val CODEC: StringRepresentable.StringRepresentableCodec<Weather> = StringRepresentable.fromEnum(Weather::values)
+			val STREAM_CODEC: StreamCodec<ByteBuf, Weather> = ByteBufCodecs.fromCodec(CODEC)
+
+			fun getAllStacks(): List<ItemStack> {
+				return entries.map(Weather::getStack)
+			}
 		}
 	}
 

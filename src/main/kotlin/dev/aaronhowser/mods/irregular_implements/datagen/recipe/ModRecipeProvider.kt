@@ -1609,7 +1609,7 @@ class ModRecipeProvider(
 		).save(recipeOutput, OtherUtil.modResource("universal_ore_divining_rod"))
 
 		shapedRecipe(
-			WeatherEggItem.fromWeather(WeatherEggItem.Weather.SUNNY).copyWithCount(2),
+			WeatherEggItem.Weather.SUNNY.getStack().copyWithCount(2),
 			"OFO,SCS,OFO",
 			mapOf(
 				'O' to Tags.Items.OBSIDIANS.asIngredient(),
@@ -1620,7 +1620,7 @@ class ModRecipeProvider(
 		).save(recipeOutput, OtherUtil.modResource("weather_egg_sunny"))
 
 		shapedRecipe(
-			WeatherEggItem.fromWeather(WeatherEggItem.Weather.RAINY).copyWithCount(2),
+			WeatherEggItem.Weather.RAINY.getStack().copyWithCount(2),
 			"OWO,LCL,OWO",
 			mapOf(
 				'O' to Tags.Items.OBSIDIANS.asIngredient(),
@@ -1631,7 +1631,7 @@ class ModRecipeProvider(
 		).save(recipeOutput, OtherUtil.modResource("weather_egg_rainy"))
 
 		shapedRecipe(
-			WeatherEggItem.fromWeather(WeatherEggItem.Weather.STORMY).copyWithCount(2),
+			WeatherEggItem.Weather.STORMY.getStack().copyWithCount(2),
 			"OSO,LCL,OSO",
 			mapOf(
 				'O' to Tags.Items.OBSIDIANS.asIngredient(),

@@ -1,0 +1,12 @@
+{
+  "values": [
+    "irregular_implements:inventory_rerouter",
+    "irregular_implements:potion_vaporizer",
+    "irregular_implements:advanced_redstone_repeater",
+    "irregular_implements:processing_plate",
+    "irregular_implements:filtered_redirector_plate",
+    "irregular_implements:redstone_plate",
+    "irregular_implements:extraction_plate",
+    "irregular_implements:ancient_brick"
+  ]
+}
