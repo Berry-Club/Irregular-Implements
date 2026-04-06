@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDefaultInstance
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
@@ -46,7 +47,7 @@ class LotusBlock : NoCodecBushBlock(
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
 		if (level.isClientSide || state.getValue(AGE) != MAXIMUM_AGE) return InteractionResult.PASS
 
-		val stack = ModItems.LOTUS_BLOSSOM.get().defaultInstance
+		val stack = ModItems.LOTUS_BLOSSOM.getDefaultInstance()
 		val added = player.inventory.add(stack)
 		if (!added) {
 			popResource(level, pos, stack)

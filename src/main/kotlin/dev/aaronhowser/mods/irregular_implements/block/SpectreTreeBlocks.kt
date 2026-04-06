@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModConfiguredFeatures
@@ -133,7 +134,7 @@ object SpectreTreeBlocks {
 		val clickedState = level.getBlockState(pos)
 		if (!clickedState.isBlock(ModBlockTagsProvider.CONVERTS_TO_SPECTRE_SAPLING)) return
 
-		level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.get().defaultBlockState())
+		level.setBlockAndUpdate(pos, ModBlocks.SPECTRE_SAPLING.defaultBlockState())
 		usedStack.consume(1, event.entity)
 
 		level.sendParticles(

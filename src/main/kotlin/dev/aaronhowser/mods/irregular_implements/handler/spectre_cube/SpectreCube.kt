@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.handler.spectre_cube
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getUuidOrNull
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModDimensions
@@ -60,12 +61,12 @@ class SpectreCube(
 		val cornerOne = getOriginPos()
 		val cornerTwo = cornerOne.offset(15, interiorHeight + 1, 15)
 
-		generateCubeShell(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.get().defaultBlockState())
+		generateCubeShell(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.defaultBlockState())
 		generateCubeShell(
 			level,
 			cornerOne.offset(7, 0, 7),
 			cornerOne.offset(8, 0, 8),
-			ModBlocks.SPECTRE_CORE.get().defaultBlockState()
+			ModBlocks.SPECTRE_CORE.defaultBlockState()
 		)
 	}
 

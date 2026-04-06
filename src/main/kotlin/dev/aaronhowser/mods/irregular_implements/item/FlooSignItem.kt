@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.FlooBrickBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
@@ -63,7 +64,7 @@ class FlooSignItem(properties: Properties) : Item(properties) {
 			if (!canCreate) return false
 
 			for (pos in blocksToConvert) {
-				level.setBlockAndUpdate(pos, ModBlocks.FLOO_BRICK.get().defaultBlockState())
+				level.setBlockAndUpdate(pos, ModBlocks.FLOO_BRICK.defaultBlockState())
 				val blockEntity = level.getBlockEntity(pos) as? FlooBrickBlockEntity ?: continue
 
 				if (pos == clickedPos) {

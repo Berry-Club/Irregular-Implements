@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
@@ -97,7 +98,7 @@ class CompressedSlimeBlock : Block(Properties.ofFullCopy(Blocks.SLIME_BLOCK)) {
 			val clickedState = event.state
 			if (clickedState.block != Blocks.SLIME_BLOCK) return
 
-			event.finalState = ModBlocks.COMPRESSED_SLIME_BLOCK.get().defaultBlockState()
+			event.finalState = ModBlocks.COMPRESSED_SLIME_BLOCK.defaultBlockState()
 		}
 	}
 

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
@@ -122,7 +123,7 @@ class SakanadeBlock : Block(
 			if (level.getBlockState(mutablePos.below()).canBeReplaced()) {
 				level.setBlock(
 					mutablePos.below(),
-					ModBlocks.SAKANADE_SPORES.get().defaultBlockState().setValue(UP, true),
+					ModBlocks.SAKANADE_SPORES.defaultBlockState().setValue(UP, true),
 					1 or 2
 				)
 			}

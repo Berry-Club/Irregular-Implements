@@ -12,14 +12,14 @@ import net.minecraft.world.item.ItemStack
 import java.util.function.Supplier
 
 class ItemFilterSlot(
-	private val filterStack: Supplier<ItemStack>,
+	private val filterStackGetter: Supplier<ItemStack>,
 	private val lookupProvider: HolderLookup.Provider,
 	x: Int,
 	y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
 
 	private val stackComponent: ItemFilterDataComponent?
-		get() = this.filterStack.get().get(ModDataComponents.ITEM_FILTER)
+		get() = this.filterStackGetter.get().get(ModDataComponents.ITEM_FILTER)
 
 	private val stackFilter: NonNullList<FilterEntry>?
 		get() = stackComponent?.entries
@@ -34,7 +34,7 @@ class ItemFilterSlot(
 		val newFilter = stackFilter.toMutableList()
 		newFilter[this.index] = FilterEntry.Empty
 
-		this.filterStack.get().set(
+		this.filterStackGetter.get().set(
 			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(
 				newFilter,
@@ -57,7 +57,7 @@ class ItemFilterSlot(
 			requireSameComponents = false
 		)
 
-		this.filterStack.get().set(
+		this.filterStackGetter.get().set(
 			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(
 				newFilter,

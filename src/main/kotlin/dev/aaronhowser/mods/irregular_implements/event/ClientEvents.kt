@@ -273,8 +273,8 @@ object ClientEvents {
 
 		event.registerItem(
 			SpecialChestBEWLR.ClientItemExtensions,
-			ModBlocks.NATURE_CHEST.get().asItem(),
-			ModBlocks.WATER_CHEST.get().asItem()
+			ModBlocks.NATURE_CHEST.asItem(),
+			ModBlocks.WATER_CHEST.asItem()
 		)
 	}
 

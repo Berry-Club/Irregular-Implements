@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.irregular_implements.block_entity.SpecialChestBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
@@ -73,7 +74,7 @@ class SpecialChestBlock private constructor(
 
 			coreRoom.placeBlock(
 				level,
-				ModBlocks.WATER_CHEST.get().defaultBlockState(),
+				ModBlocks.WATER_CHEST.defaultBlockState(),
 				x, y, z,
 				boundingBox
 			)

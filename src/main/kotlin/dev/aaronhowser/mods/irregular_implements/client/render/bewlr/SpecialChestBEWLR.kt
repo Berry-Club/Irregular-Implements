@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.irregular_implements.block_entity.SpecialChestBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.Minecraft
@@ -19,8 +20,8 @@ class SpecialChestBEWLR : BlockEntityWithoutLevelRenderer(
 
 	val dispatcher: BlockEntityRenderDispatcher = Minecraft.getInstance().blockEntityRenderDispatcher
 
-	val waterChest = SpecialChestBlockEntity.WaterChestBlockEntity(BlockPos.ZERO, ModBlocks.WATER_CHEST.get().defaultBlockState())
-	val natureChest = SpecialChestBlockEntity.NatureChestBlockEntity(BlockPos.ZERO, ModBlocks.NATURE_CHEST.get().defaultBlockState())
+	val waterChest = SpecialChestBlockEntity.WaterChestBlockEntity(BlockPos.ZERO, ModBlocks.WATER_CHEST.defaultBlockState())
+	val natureChest = SpecialChestBlockEntity.NatureChestBlockEntity(BlockPos.ZERO, ModBlocks.NATURE_CHEST.defaultBlockState())
 
 	override fun renderByItem(
 		stack: ItemStack,
@@ -31,8 +32,8 @@ class SpecialChestBEWLR : BlockEntityWithoutLevelRenderer(
 		packedOverlay: Int
 	) {
 		val chestToRender = when (stack.item) {
-			ModBlocks.WATER_CHEST.get().asItem() -> waterChest
-			ModBlocks.NATURE_CHEST.get().asItem() -> natureChest
+			ModBlocks.WATER_CHEST.asItem() -> waterChest
+			ModBlocks.NATURE_CHEST.asItem() -> natureChest
 			else -> return
 		}
 

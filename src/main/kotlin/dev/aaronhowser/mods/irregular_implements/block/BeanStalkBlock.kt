@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
@@ -42,7 +43,7 @@ class BeanStalkBlock(
 			if (strongStalkIsDonePredicate(level, pos)) {
 				level.setBlockAndUpdate(
 					pos,
-					ModBlocks.BEAN_POD.get().defaultBlockState()
+					ModBlocks.BEAN_POD.defaultBlockState()
 				)
 			}
 		} else {

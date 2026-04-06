@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.state.BlockState
@@ -14,7 +15,7 @@ object StructureSchematics {
 
 			if (dY == 0) {
 				if (dX == 0 && dZ == 0) {
-					positionedBlocks[offsetPos] = ModBlocks.NATURE_CORE.get().defaultBlockState()
+					positionedBlocks[offsetPos] = ModBlocks.NATURE_CORE.defaultBlockState()
 				} else if (dX == 0 || dZ == 0) {
 					positionedBlocks[offsetPos] = leaves
 				} else {
