@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.imbuing_station.ImbuingStationMenu
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingInput
 import dev.aaronhowser.mods.irregular_implements.recipe.machine.ImbuingRecipe

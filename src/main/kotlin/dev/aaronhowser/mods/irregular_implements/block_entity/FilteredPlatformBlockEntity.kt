@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
-import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents

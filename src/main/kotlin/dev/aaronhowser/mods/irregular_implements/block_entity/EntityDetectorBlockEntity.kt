@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
+import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
-import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorMenu

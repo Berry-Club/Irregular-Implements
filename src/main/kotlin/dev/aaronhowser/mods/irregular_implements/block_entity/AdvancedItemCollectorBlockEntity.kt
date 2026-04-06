@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
-import dev.aaronhowser.mods.irregular_implements.block_entity.base.ImprovedSimpleContainer
+import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.irregular_implements.item.component.ItemFilterDataComponent
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector.AdvancedItemCollectorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
