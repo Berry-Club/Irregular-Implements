@@ -4,11 +4,13 @@ import dev.aaronhowser.mods.aaron.misc.AaronExtensions.hasEnchantment
 import dev.aaronhowser.mods.aaron.misc.ItemCatcher
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
+import net.minecraft.core.RegistryAccess
 import net.minecraft.core.registries.Registries
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -23,11 +25,7 @@ object MagneticHandler {
 	fun beforeDestroyBlock(player: ServerPlayer) {
 		val usedItem = player.mainHandItem
 
-		val magnetEnchant = player.registryAccess()
-			.registryOrThrow(Registries.ENCHANTMENT)
-			.getHolderOrThrow(ModEnchantments.MAGNETIC)
-
-		val hasMagnetic = usedItem.getEnchantmentLevel(magnetEnchant) > 0
+		val hasMagnetic = hasMagnetic(usedItem, player.registryAccess())
 
 		if (hasMagnetic) {
 			ItemCatcher.startCatchingItems()
@@ -51,15 +49,20 @@ object MagneticHandler {
 		val killer = event.source.entity as? LivingEntity ?: return
 		val usedItem = killer.mainHandItem
 
-		val magnetEnchant = killer.registryAccess()
-			.registryOrThrow(Registries.ENCHANTMENT)
-			.getHolderOrThrow(ModEnchantments.MAGNETIC)
-
-		if (!usedItem.hasEnchantment(magnetEnchant)) return
+		val hasMagnetic = hasMagnetic(usedItem, killer.registryAccess())
+		if (!hasMagnetic) return
 
 		for (itemEntity in event.drops) {
 			teleportTo(itemEntity, killer)
 		}
+	}
+
+	private fun hasMagnetic(stack: ItemStack, registryAccess: RegistryAccess): Boolean {
+		val magnetEnchant = registryAccess
+			.registryOrThrow(Registries.ENCHANTMENT)
+			.getHolderOrThrow(ModEnchantments.MAGNETIC)
+
+		return stack.hasEnchantment(magnetEnchant)
 	}
 
 	private fun teleportTo(itemEntity: ItemEntity, magneticEntity: LivingEntity) {
