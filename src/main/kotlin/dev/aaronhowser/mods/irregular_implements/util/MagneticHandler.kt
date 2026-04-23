@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.util
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.hasEnchantment
+import dev.aaronhowser.mods.aaron.misc.ItemCatcher
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.datapack.ModEnchantments
 import net.minecraft.core.registries.Registries
@@ -10,26 +12,12 @@ import net.minecraft.world.entity.player.Player
 import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent
 
 @EventBusSubscriber(
 	modid = IrregularImplements.MOD_ID
 )
-object ItemCatcher {
-
-	private var isCatchingDrops: Boolean = false
-	private val caughtItemEntities: MutableList<ItemEntity> = mutableListOf()
-
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	fun onEntityJoinLevel(event: EntityJoinLevelEvent) {
-		if (!this.isCatchingDrops
-			|| event.isCanceled
-			|| event.entity !is ItemEntity
-		) return
-
-		caughtItemEntities.add(event.entity as ItemEntity)
-	}
+object MagneticHandler {
 
 	@JvmStatic
 	fun beforeDestroyBlock(player: ServerPlayer) {
@@ -38,21 +26,22 @@ object ItemCatcher {
 		val magnetEnchant = player.registryAccess()
 			.registryOrThrow(Registries.ENCHANTMENT)
 			.getHolderOrThrow(ModEnchantments.MAGNETIC)
+
 		val hasMagnetic = usedItem.getEnchantmentLevel(magnetEnchant) > 0
 
-		this.isCatchingDrops = hasMagnetic
+		if (hasMagnetic) {
+			ItemCatcher.startCatchingItems()
+		}
 	}
 
 	@JvmStatic
 	fun afterDestroyBlock(player: ServerPlayer) {
-		if (!this.isCatchingDrops) return
+		if (!ItemCatcher.isCatchingItems()) return
 
-		for (itemEntity in this.caughtItemEntities.toList()) {
+		val caughtItems = ItemCatcher.getCaughtItemEntities()
+		for (itemEntity in caughtItems) {
 			teleportTo(itemEntity, player)
 		}
-
-		this.caughtItemEntities.clear()
-		this.isCatchingDrops = false
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
@@ -65,23 +54,20 @@ object ItemCatcher {
 		val magnetEnchant = killer.registryAccess()
 			.registryOrThrow(Registries.ENCHANTMENT)
 			.getHolderOrThrow(ModEnchantments.MAGNETIC)
-		if (usedItem.getEnchantmentLevel(magnetEnchant) < 1) return
+
+		if (!usedItem.hasEnchantment(magnetEnchant)) return
 
 		for (itemEntity in event.drops) {
 			teleportTo(itemEntity, killer)
 		}
 	}
 
-	private fun teleportTo(itemEntity: ItemEntity?, magneticEntity: LivingEntity?) {
-		if (itemEntity == null || magneticEntity == null) return
-
+	private fun teleportTo(itemEntity: ItemEntity, magneticEntity: LivingEntity) {
+		itemEntity.target = magneticEntity.uuid
+		itemEntity.teleportTo(magneticEntity.x, magneticEntity.y, magneticEntity.z)
 		itemEntity.setNoPickUpDelay()
-		if (magneticEntity is Player) itemEntity.playerTouch(magneticEntity)
 
-		if (!itemEntity.item.isEmpty) {
-			itemEntity.target = magneticEntity.uuid
-			itemEntity.teleportTo(magneticEntity.x, magneticEntity.y, magneticEntity.z)
-		}
+		if (magneticEntity is Player) itemEntity.playerTouch(magneticEntity)
 	}
 
 }

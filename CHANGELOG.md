@@ -1,3 +1,9 @@
+# 1.11.0
+
+### Changed
+
+- The Magnetic enchantment now uses a new feature of Aaron
+
 # 1.10.2
 
 ### Changed

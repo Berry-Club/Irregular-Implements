@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.mixin;
 
-import dev.aaronhowser.mods.irregular_implements.util.ItemCatcher;
+import dev.aaronhowser.mods.irregular_implements.util.MagneticHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerPlayerGameMode;
@@ -26,7 +26,7 @@ abstract public class ServerPlayerGameModeMixin {
 			)
 	)
 	private void irregular_implements$beforeDestroy(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		ItemCatcher.beforeDestroyBlock(player);
+		MagneticHandler.beforeDestroyBlock(player);
 	}
 
 	@Inject(
@@ -38,7 +38,7 @@ abstract public class ServerPlayerGameModeMixin {
 			)
 	)
 	private void irregular_implements$afterDestroy(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		ItemCatcher.afterDestroyBlock(player);
+		MagneticHandler.afterDestroyBlock(player);
 	}
 
 }
