@@ -48,9 +48,10 @@ object FluidWalkingHandler {
 			)
 		}
 
-		CuriosApi.getCuriosInventory(livingEntity).ifPresent {
-			for (curio in it.findCurios { it.has(ModDataComponents.CAN_STAND_ON_FLUIDS) }) {
-				fluidTags.addAll(curio.stack.get(ModDataComponents.CAN_STAND_ON_FLUIDS)!!)
+		CuriosApi.getCuriosInventory(livingEntity).ifPresent { handler ->
+			for (curio in handler.findCurios { it.has(ModDataComponents.CAN_STAND_ON_FLUIDS) }) {
+				val tags = curio.stack.get(ModDataComponents.CAN_STAND_ON_FLUIDS) ?: continue
+				fluidTags.addAll(tags)
 			}
 		}
 
