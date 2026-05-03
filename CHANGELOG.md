@@ -3,6 +3,7 @@
 ### Changed
 
 - The Magnetic enchantment now uses Aaron's ItemCatcher
+- Merged a PR from unilock to improve FluidWalkingHandler's Curio support
 
 ### Fixed
 
