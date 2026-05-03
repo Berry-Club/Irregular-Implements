@@ -1,8 +1,12 @@
-# 1.11.0
+# 1.10.3
 
 ### Changed
 
-- The Magnetic enchantment now uses a new feature of Aaron
+- The Magnetic enchantment now uses Aaron's ItemCatcher
+
+### Fixed
+
+- Fixed an incompatibility with Overgeared (#69 (nice))
 
 # 1.10.2
 

@@ -86,25 +86,25 @@ object ModArmorItems {
 
 	val SPECTRE_HELMET_PROPERTIES: Item.Properties =
 		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_HELMET.defaultInstance.maxDamage * 1.25))
+			.durability(ArmorItem.Type.HELMET.getDurability(42))
 			.rarity(Rarity.UNCOMMON)
 
 
 	val SPECTRE_CHESTPLATE_PROPERTIES: Item.Properties =
 		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_CHESTPLATE.defaultInstance.maxDamage * 1.25))
+			.durability(ArmorItem.Type.CHESTPLATE.getDurability(42))
 			.rarity(Rarity.UNCOMMON)
 
 
 	val SPECTRE_LEGGINGS_PROPERTIES: Item.Properties =
 		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_LEGGINGS.defaultInstance.maxDamage * 1.25))
+			.durability(ArmorItem.Type.LEGGINGS.getDurability(42))
 			.rarity(Rarity.UNCOMMON)
 
 
 	val SPECTRE_BOOTS_PROPERTIES: Item.Properties =
 		Item.Properties()
-			.durability(Mth.floor(Items.DIAMOND_BOOTS.defaultInstance.maxDamage * 1.25))
+			.durability(ArmorItem.Type.BOOTS.getDurability(42))
 			.rarity(Rarity.UNCOMMON)
 
 	fun lubricatedTooltip(event: ItemTooltipEvent) {
