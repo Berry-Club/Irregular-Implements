@@ -4,6 +4,7 @@
 
 - Fixed the Moon Phase Detector desync (#72)
 - Fixed the Spectre Illuminator not working with Sodium
+- Fix images not working in wiki (#75)
 
 ### Changed
 
