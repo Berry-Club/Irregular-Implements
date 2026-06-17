@@ -145,6 +145,14 @@ repositories {
 
 	maven { url "https://maven.sinytra.org" }
 
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
+		}
+	}
+
 }
 
 dependencies {
@@ -160,6 +168,9 @@ dependencies {
 
 	implementation "dev.aaronhowser.mods:patchoulidatagen-${pdg_version}"
 	implementation "dev.aaronhowser.mods:aaron-1.21.1:${aaron_lib_version}"
+
+	compileOnly "maven.modrinth:sodium:mc1.21.1-0.6.13-neoforge"
+	runtimeOnly "maven.modrinth:sodium:mc1.21.1-0.6.13-neoforge"
 
 	compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
 	runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"

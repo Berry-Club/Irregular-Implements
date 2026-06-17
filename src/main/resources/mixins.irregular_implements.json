@@ -33,6 +33,7 @@
     "LevelRendererMixin",
     "LivingEntityRendererMixin",
     "MouseHandlerMixin",
-    "SheetsMixin"
+    "SheetsMixin",
+    "SodiumLevelSliceMixin"
 	]
 }

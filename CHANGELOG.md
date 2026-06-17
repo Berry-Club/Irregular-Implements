@@ -3,6 +3,7 @@
 ### Fixed
 
 - Fixed the Moon Phase Detector desync (#72)
+- Fixed the Spectre Illuminator not working with Sodium
 
 ### Changed
 
