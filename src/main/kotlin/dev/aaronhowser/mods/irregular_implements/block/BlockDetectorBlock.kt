@@ -62,8 +62,7 @@ class BlockDetectorBlock : SimpleContainerBlock(Properties.ofFullCopy(Blocks.DIS
 	}
 
 	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
-		val facing = state.getValue(FACING)
-		return direction != facing
+		return true
 	}
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
@@ -72,6 +71,10 @@ class BlockDetectorBlock : SimpleContainerBlock(Properties.ofFullCopy(Blocks.DIS
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		return getDirectSignal(state, level, pos, direction)
+	}
+
+	override fun isSignalSource(state: BlockState): Boolean {
+		return true
 	}
 
 	companion object {
