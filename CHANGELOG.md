@@ -3,6 +3,7 @@
 ### Changed
 
 - Removed message about Sodium incompatibility, because that was fixed in an Aaron update
+- Accepted a Japanese translation from hamu6251ren0725-hue
 
 # 1.10.3
 
