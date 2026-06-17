@@ -66,12 +66,13 @@ class MoonPhaseDetectorBlock : Block(
 	}
 
 	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
-		if (level.isClientSide || !player.mayInteract(level, pos)) return InteractionResult.PASS
+		if (!player.mayInteract(level, pos)) return InteractionResult.PASS
+		if (level.isClientSide) return InteractionResult.SUCCESS
 
 		val newState = state.cycle(INVERTED)
 		level.setBlockAndUpdate(pos, newState)
 
-		return InteractionResult.SUCCESS
+		return InteractionResult.CONSUME
 	}
 
 	companion object {
