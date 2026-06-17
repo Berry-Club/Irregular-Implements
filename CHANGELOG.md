@@ -1,3 +1,9 @@
+# 1.10.4
+
+### Changed
+
+- Removed message about Sodium incompatibility, because that was fixed in an Aaron update
+
 # 1.10.3
 
 ### Changed

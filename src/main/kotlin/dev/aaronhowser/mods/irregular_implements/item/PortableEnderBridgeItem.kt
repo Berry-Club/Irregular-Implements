@@ -2,9 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.item
 
 import dev.aaronhowser.mods.irregular_implements.EnderAnchorCarrier
 import dev.aaronhowser.mods.irregular_implements.block_entity.EnderAnchorBlockEntity.Companion.getEnderAnchorPositions
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import net.minecraft.core.BlockPos
-import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -12,7 +10,6 @@ import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import kotlin.math.acos
 
@@ -76,10 +73,6 @@ class PortableEnderBridgeItem(properties: Properties) : Item(properties) {
 		)
 
 		return InteractionResultHolder.success(usedStack)
-	}
-
-	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
-		ModTooltipLang.addSodiumTooltip(tooltipComponents)
 	}
 
 	companion object {

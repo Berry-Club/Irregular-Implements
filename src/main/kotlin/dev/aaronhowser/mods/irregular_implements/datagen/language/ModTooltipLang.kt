@@ -1,10 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.language
 
-import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
-import net.minecraft.ChatFormatting
-import net.minecraft.network.chat.Component
-import net.neoforged.fml.ModList
-
 object ModTooltipLang {
 
 	const val SHIFT_FOR_MORE = "tooltip.irregular_implements.shift_for_more"
@@ -72,7 +67,6 @@ object ModTooltipLang {
 	const val UNINVERTED = "tooltip.irregular_implements.uninverted"
 	const val PORTKEY_DESTINATION = "tooltip.irregular_implements.portkey_destination"
 	const val PORTKEY_DISGUISE = "tooltip.irregular_implements.portkey_disguise"
-	const val SODIUM_INCOMPATIBLE = "tooltip.irregular_implements.sodium_incompatible"
 	const val FIREPLACE_NO_NAME = "tooltip.irregular_implements.fireplace_no_name"
 	const val FIREPLACE_HOME = "tooltip.irregular_implements.fireplace_home"
 	const val FIREPLACE_WITH_NAME = "tooltip.irregular_implements.fireplace_with_name"
@@ -144,23 +138,9 @@ object ModTooltipLang {
 			add(UNINVERTED, "Uninverted")
 			add(PORTKEY_DESTINATION, "%s: %d, %d, %d")
 			add(PORTKEY_DISGUISE, "Disguised as: %s")
-			add(SODIUM_INCOMPATIBLE, "Not fully compatible with Sodium")
 			add(FIREPLACE_HOME, "Home")
 			add(FIREPLACE_NO_NAME, "Can be teleported from but not to")
 			add(FIREPLACE_WITH_NAME, "Can be teleported to by standing on another\nfireplace and then saying \"Home\"")
-		}
-	}
-
-	fun addSodiumTooltip(tooltipComponents: MutableList<Component>) {
-		val modList = ModList.get()
-		val sodiumInstalled = modList.isLoaded("sodium") || modList.isLoaded("embeddium")
-
-		if (sodiumInstalled) {
-			tooltipComponents.add(
-				SODIUM_INCOMPATIBLE
-					.toComponent()
-					.withStyle(ChatFormatting.RED)
-			)
 		}
 	}
 
