@@ -1,12 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
-import dev.aaronhowser.mods.aaron.container.ContainerContainer
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.BlockDetectorBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext

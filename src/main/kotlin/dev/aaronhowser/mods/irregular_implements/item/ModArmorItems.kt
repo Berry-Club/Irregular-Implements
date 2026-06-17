@@ -10,11 +10,13 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.Holder
 import net.minecraft.tags.DamageTypeTags
-import net.minecraft.util.Mth
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.*
+import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.ArmorMaterial
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Rarity
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent
 import net.neoforged.neoforge.registries.DeferredItem

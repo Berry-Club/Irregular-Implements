@@ -8,7 +8,6 @@ import io.netty.buffer.ByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
-import net.minecraft.world.level.ChunkPos
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 class UpdateSpectreIlluminationPacket(
