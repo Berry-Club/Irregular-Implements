@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
@@ -105,7 +105,7 @@ class EnderBucketItem(properties: Properties) : Item(properties) {
 			if (fluidContent.isEmpty) return 0xFFFFFFFF.toInt()
 			val fluidStack = fluidContent.copy()
 
-			return RenderUtil.getColorFromFluid(fluidStack)
+			return AaronRenderUtil.getColorFromFluid(fluidStack)
 		}
 
 		private fun tryFill(

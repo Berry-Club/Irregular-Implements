@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.block_entity.SpectreEnergyInjectorBlockEntity
 import net.minecraft.client.renderer.MultiBufferSource
@@ -25,7 +25,7 @@ class SpectreEnergyInjectorBER(
 		poseStack.withPose {
 			poseStack.translate(0.5f, 0.6f, 0.5f)
 
-			RenderUtil.renderRaysDoubleLayer(
+			AaronRenderUtil.renderRaysDoubleLayer(
 				poseStack = poseStack,
 				time = time,
 				bufferSource = bufferSource

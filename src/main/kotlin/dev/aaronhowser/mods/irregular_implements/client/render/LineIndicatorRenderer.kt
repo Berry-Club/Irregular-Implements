@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.client.render
 
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import net.minecraft.client.Minecraft
 import net.minecraft.world.phys.Vec3
@@ -57,7 +57,7 @@ object LineIndicatorRenderer {
 			poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
 
 			for (indicator in lineIndicators) {
-				RenderUtil.renderLineThroughWalls(
+				AaronRenderUtil.renderLineThroughWalls(
 					poseStack,
 					indicator.start,
 					indicator.end,

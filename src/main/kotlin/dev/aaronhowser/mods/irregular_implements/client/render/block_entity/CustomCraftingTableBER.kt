@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.block_entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.block_entity.CustomCraftingTableBlockEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -23,7 +23,7 @@ class CustomCraftingTableBER(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		RenderUtil.renderTexturedCube(
+		AaronRenderUtil.renderTexturedCube(
 			poseStack,
 			RenderType.cutout(),
 			TOP, BOTTOM,

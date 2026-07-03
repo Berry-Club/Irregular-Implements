@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.BOTTOM
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SAW_AND_HAMMER
@@ -61,7 +61,7 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 				.getModel(itemToRender, null, null, 0)
 				.applyTransform(displayContext, poseStack, false)
 
-			RenderUtil.renderTexturedCube(
+			AaronRenderUtil.renderTexturedCube(
 				poseStack,
 				RenderType.cutout(),
 				TOP, BOTTOM,

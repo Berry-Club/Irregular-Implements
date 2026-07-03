@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.entity.WeatherCloudEntity
 import dev.aaronhowser.mods.irregular_implements.item.WeatherEggItem
@@ -36,7 +36,7 @@ class WeatherCloudRenderer(
 		val rayWidth = 0.33f
 
 		poseStack.withPose {
-			RenderUtil.renderDragonRays(
+			AaronRenderUtil.renderDragonRays(
 				poseStack = poseStack,
 				time = time,
 				bufferSource = bufferSource,

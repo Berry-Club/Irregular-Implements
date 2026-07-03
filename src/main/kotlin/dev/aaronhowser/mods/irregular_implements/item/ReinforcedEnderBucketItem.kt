@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -110,7 +110,7 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 		val fluidContent = stack.get(ModDataComponents.SIMPLE_FLUID_CONTENT) ?: SimpleFluidContent.EMPTY
 		if (fluidContent.isEmpty) return 0xFF000000.toInt()
 
-		return RenderUtil.getColorFromFluid(fluidContent.copy())
+		return AaronRenderUtil.getColorFromFluid(fluidContent.copy())
 	}
 
 	companion object {

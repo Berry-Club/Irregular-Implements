@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.client.render.RenderUtil
+import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
 import dev.aaronhowser.mods.irregular_implements.entity.SpectreIlluminatorEntity
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
@@ -36,7 +36,7 @@ class SpectreIlluminatorEntityRenderer(
 		poseStack.withPose {
 			poseStack.translate(0.0, 0.5, 0.0)
 
-			RenderUtil.renderRaysDoubleLayer(
+			AaronRenderUtil.renderRaysDoubleLayer(
 				poseStack = poseStack,
 				time = time,
 				bufferSource = bufferSource,

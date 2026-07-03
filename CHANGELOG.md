@@ -6,6 +6,7 @@
 - Fixed the Spectre Illuminator not working with Sodium
 - Fix images not working in wiki (#75)
 - Fixed Block Detector not letting Redstone wire visually connect to it
+- Compatibility with new Aaron
 
 ### Changed
 
