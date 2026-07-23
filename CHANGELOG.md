@@ -1,3 +1,9 @@
+# 1.10.5
+
+### Fixed
+
+- Compatibility with new Aaron
+
 # 1.10.4
 
 ### Fixed

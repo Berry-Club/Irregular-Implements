@@ -41,13 +41,12 @@ class GlobalChatDetectorMenu(
 		checkContainerSize(globalChatDetectorContainer, 9)
 		globalChatDetectorContainer.startOpen(playerInventory.player)
 
-		addSlots()
-		addPlayerInventorySlots(75)
+		addSlots(75)
 
 		this.addDataSlots(containerData)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		for (containerSlotIndex in 0..8) {
 			val x = 8 + containerSlotIndex * 18
 			val y = 40

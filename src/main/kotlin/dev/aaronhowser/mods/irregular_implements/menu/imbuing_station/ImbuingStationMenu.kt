@@ -26,11 +26,10 @@ class ImbuingStationMenu(
 	init {
 		checkContainerSize(imbuingStationContainer, 4)
 
-		addSlots()
-		addPlayerInventorySlots(126)
+		addSlots(126)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val topSlot = Slot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.TOP_SLOT_INDEX,

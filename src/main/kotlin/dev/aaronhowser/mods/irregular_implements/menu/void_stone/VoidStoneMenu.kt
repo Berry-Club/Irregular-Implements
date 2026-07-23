@@ -23,11 +23,10 @@ class VoidStoneMenu(
 	private val temporaryContainer = SimpleContainer(1)
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(51)
+		addSlots(51)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val voidSlotX = 80
 		val voidSlotY = 18
 

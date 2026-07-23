@@ -30,13 +30,12 @@ class InventoryTesterMenu(
 		checkContainerDataCount(containerData, InventoryTesterBlockEntity.CONTAINER_DATA_SIZE)
 		checkContainerSize(container, InventoryTesterBlockEntity.CONTAINER_SIZE)
 
-		addSlots()
-		addPlayerInventorySlots(54)
+		addSlots(54)
 
 		this.addDataSlots(containerData)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val slot = InventoryTesterSlot(container, 64, 18)
 		this.addSlot(slot)
 	}

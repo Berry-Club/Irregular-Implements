@@ -33,14 +33,13 @@ class EntityDetectorMenu(
 		checkContainerSize(container, EntityDetectorBlockEntity.CONTAINER_SIZE)
 		container.startOpen(playerInventory.player)
 
-		addPlayerInventorySlots(153)
-		addSlots()
+		addSlots(153)
 
 		checkContainerDataCount(containerData, EntityDetectorBlockEntity.CONTAINER_DATA_SIZE)
 		this.addDataSlots(this.containerData)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val slot = FilteredSlot(container, 0, 80, 122) { it.has(ModDataComponents.ENTITY_TYPE) }
 		this.addSlot(slot)
 	}

@@ -24,11 +24,10 @@ class RedstoneRemoteEditMenu(
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(68)
+		addSlots(68)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		if (itemHandler == null) return
 
 		for (pairIndex in 0 until RedstoneRemoteDataComponent.HORIZONTAL_SLOT_COUNT) {

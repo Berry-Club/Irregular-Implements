@@ -32,8 +32,7 @@ class EnderLetterMenu(
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(51)
+		addSlots(51)
 
 		val player = playerInventory.player
 		if (player is ServerPlayer) {
@@ -51,7 +50,7 @@ class EnderLetterMenu(
 		}
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		if (itemHandler == null) return
 
 		val y = 18

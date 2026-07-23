@@ -32,13 +32,12 @@ class IronDropperMenu(
 		checkContainerSize(dispenserContainer, 9)
 		dispenserContainer.startOpen(playerInventory.player)
 
-		addSlots()
-		addPlayerInventorySlots(84)
+		addSlots(84)
 
 		this.addDataSlots(containerData)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		for (row in 0..2) {
 			for (column in 0..2) {
 				val slotIndex = column + row * 3

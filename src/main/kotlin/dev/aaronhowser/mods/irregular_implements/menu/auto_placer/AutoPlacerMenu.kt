@@ -25,11 +25,10 @@ class AutoPlacerMenu(
 			)
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(51 + 16 + 16 + 1)
+		addSlots(51 + 16 + 16 + 1)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val slot = FilteredSlot(autoPlacerContainer, 0, 80, 35) { it.item is BlockItem }
 		addSlot(slot)
 	}

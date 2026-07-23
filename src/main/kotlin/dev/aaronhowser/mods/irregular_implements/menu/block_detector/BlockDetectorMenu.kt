@@ -25,11 +25,10 @@ class BlockDetectorMenu(
 			)
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(51)
+		addSlots(51)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val slot = FilteredSlot(blockDetectorContainer, 0, 80, 18) { it.item is BlockItem }
 		addSlot(slot)
 	}

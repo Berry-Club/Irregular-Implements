@@ -23,8 +23,7 @@ class ItemFilterMenu(
 ), MenuWithButtons {
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(59)
+		addSlots(59)
 	}
 
 	private fun getFilterComponent(): ItemFilterDataComponent? {
@@ -48,7 +47,7 @@ class ItemFilterMenu(
 		)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val holderLookup = this.playerInventory.player.registryAccess()
 
 		for (index in 0 until 9) {

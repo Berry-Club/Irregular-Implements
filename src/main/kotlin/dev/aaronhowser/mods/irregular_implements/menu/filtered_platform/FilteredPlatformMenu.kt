@@ -28,11 +28,10 @@ class FilteredPlatformMenu(
 
 		platformContainer.startOpen(playerInventory.player)
 
-		addSlots()
-		addPlayerInventorySlots(47)
+		addSlots(47)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 
 		//TODO: Add an Item Filter outline to the slot background
 		val platformSlot = FilteredSlot(platformContainer, 0, 80, 10) { it.has(ModDataComponents.ITEM_FILTER) }

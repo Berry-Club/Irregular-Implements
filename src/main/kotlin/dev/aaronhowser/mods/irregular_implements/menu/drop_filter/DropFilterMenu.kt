@@ -71,11 +71,10 @@ class DropFilterMenu(
 	}
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(51)
+		addSlots(51)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val filterX = 80
 		val filterY = 18
 

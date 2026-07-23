@@ -28,11 +28,10 @@ class EnderEnergyDistributorMenu(
 		checkContainerSize(container, EnderEnergyDistributorBlockEntity.INVENTORY_SIZE)
 		container.startOpen(playerInventory.player)
 
-		addSlots()
-		addPlayerInventorySlots(49)
+		addSlots(49)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		for (i in 0 until EnderEnergyDistributorBlockEntity.INVENTORY_SIZE) {
 			val x = 17 + (i % 9) * 18
 

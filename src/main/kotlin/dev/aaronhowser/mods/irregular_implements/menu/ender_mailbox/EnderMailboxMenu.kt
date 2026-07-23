@@ -25,11 +25,10 @@ class EnderMailboxMenu(
 	)
 
 	init {
-		addSlots()
-		addPlayerInventorySlots(51)
+		addSlots(51)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val y = 18
 		for (i in 0 until 9) {
 			val x = 8 + i * 18

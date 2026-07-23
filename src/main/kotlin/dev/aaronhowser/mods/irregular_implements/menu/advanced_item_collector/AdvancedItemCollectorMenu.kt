@@ -33,13 +33,12 @@ class AdvancedItemCollectorMenu(
 		checkContainerSize(container, 1)
 		container.startOpen(playerInventory.player)
 
-		addPlayerInventorySlots(153)
-		addSlots()
+		addSlots(153)
 
 		this.addDataSlots(this.containerData)
 	}
 
-	override fun addSlots() {
+	override fun addContainerSlots() {
 		val slot = FilteredSlot(container, 0, 80, 122) { it.has(ModDataComponents.ITEM_FILTER) }
 		this.addSlot(slot)
 	}
