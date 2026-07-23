@@ -114,7 +114,7 @@ repositories {
 	// For EMI
 	maven {
 		name = "TerraformersMC"
-		url = "https://maven.terraformersmc.com/"
+		url = "https://maven.terraformersmc.com/releases/"
 	}
 
 	// For Curios
