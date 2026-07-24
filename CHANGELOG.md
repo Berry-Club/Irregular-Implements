@@ -10,6 +10,7 @@
 
 ### Changed
 
+- Whether or not the Collapse effect effects your movement is now client-configurable
 - Bean Pods now replace the final Bean Stalk block instead of being placed above it
 - Minor code improvements
 

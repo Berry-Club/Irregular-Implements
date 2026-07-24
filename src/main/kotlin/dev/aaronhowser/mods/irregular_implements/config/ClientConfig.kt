@@ -8,6 +8,7 @@ class ClientConfig(
 	private val builder: ModConfigSpec.Builder
 ) {
 
+	lateinit var collapseInvertsControls: ModConfigSpec.BooleanValue
 	lateinit var collapseInvertsMouse: ModConfigSpec.BooleanValue
 	lateinit var hideCustomCraftingTableRecipeButton: ModConfigSpec.BooleanValue
 
@@ -25,8 +26,12 @@ class ClientConfig(
 	}
 
 	private fun generalClientConfigs() {
+		collapseInvertsControls = builder
+			.comment("Should the Collapse effect invert the player's WASD movement?")
+			.define("collapseInvertsControls", true)
+
 		collapseInvertsMouse = builder
-			.comment("Should the Collapse Imbue invert the player's mouse sensitivity?")
+			.comment("Should the Collapse effect invert the player's mouse movement?")
 			.define("collapseInvertsMouse", true)
 
 		hideCustomCraftingTableRecipeButton = builder

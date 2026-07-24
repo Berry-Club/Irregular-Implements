@@ -29,6 +29,7 @@ object ModConfigLang {
 			provider.add(configString, desc)
 		}
 
+		addConfig(ClientConfig.CONFIG.collapseInvertsControls, "Collapse Inverts Controls")
 		addConfig(ClientConfig.CONFIG.collapseInvertsMouse, "Collapse Inverts Mouse")
 		addConfig(ClientConfig.CONFIG.hideCustomCraftingTableRecipeButton, "Hide Recipe Book Button In Custom Crafting Table")
 
