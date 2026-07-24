@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.entity.ChestBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-abstract class SpecialChestBlockEntity(
-	type: BlockEntityType<*>,
+class SpecialChestBlockEntity(
+	type: BlockEntityType<out ChestBlockEntity>,
 	pos: BlockPos,
 	state: BlockState
 ) : ChestBlockEntity(type, pos, state) {
@@ -17,6 +17,12 @@ abstract class SpecialChestBlockEntity(
 		return this.blockState.block.name
 	}
 
-	class NatureChestBlockEntity(pos: BlockPos, state: BlockState) : SpecialChestBlockEntity(ModBlockEntityTypes.NATURE_CHEST.get(), pos, state)
-	class WaterChestBlockEntity(pos: BlockPos, state: BlockState) : SpecialChestBlockEntity(ModBlockEntityTypes.WATER_CHEST.get(), pos, state)
+	companion object {
+		fun nature(pos: BlockPos, state: BlockState): SpecialChestBlockEntity =
+			SpecialChestBlockEntity(ModBlockEntityTypes.NATURE_CHEST.get(), pos, state)
+
+		fun water(pos: BlockPos, state: BlockState): SpecialChestBlockEntity =
+			SpecialChestBlockEntity(ModBlockEntityTypes.NATURE_CHEST.get(), pos, state)
+	}
+
 }

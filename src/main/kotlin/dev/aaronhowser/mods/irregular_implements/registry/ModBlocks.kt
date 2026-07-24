@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.aaron.registry.AaronBlockRegistry
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.*
+import dev.aaronhowser.mods.irregular_implements.block_entity.SpecialChestBlockEntity
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
@@ -55,9 +56,19 @@ object ModBlocks : AaronBlockRegistry() {
 
 	// Loot blocks
 	val NATURE_CHEST: DeferredBlock<SpecialChestBlock> =
-		registerBlock("nature_chest") { SpecialChestBlock.Type.NATURE.block }
+		registerBlock("nature_chest") {
+			SpecialChestBlock(
+				{ ModBlockEntityTypes.NATURE_CHEST.get() },
+				{ pos, state -> SpecialChestBlockEntity(ModBlockEntityTypes.NATURE_CHEST.get(), pos, state) }
+			)
+		}
 	val WATER_CHEST: DeferredBlock<SpecialChestBlock> =
-		registerBlock("water_chest") { SpecialChestBlock.Type.WATER.block }
+		registerBlock("water_chest") {
+			SpecialChestBlock(
+				{ ModBlockEntityTypes.WATER_CHEST.get() },
+				{ pos, state -> SpecialChestBlockEntity(ModBlockEntityTypes.WATER_CHEST.get(), pos, state) }
+			)
+		}
 
 	// Collectors
 	val ITEM_COLLECTOR: DeferredBlock<ItemCollectorBlock> =

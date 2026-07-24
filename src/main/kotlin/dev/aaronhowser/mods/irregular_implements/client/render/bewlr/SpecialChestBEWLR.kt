@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.irregular_implements.block_entity.SpecialChestBlockEntity
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
@@ -20,8 +21,8 @@ class SpecialChestBEWLR : BlockEntityWithoutLevelRenderer(
 
 	val dispatcher: BlockEntityRenderDispatcher = Minecraft.getInstance().blockEntityRenderDispatcher
 
-	val waterChest = SpecialChestBlockEntity.WaterChestBlockEntity(BlockPos.ZERO, ModBlocks.WATER_CHEST.defaultBlockState())
-	val natureChest = SpecialChestBlockEntity.NatureChestBlockEntity(BlockPos.ZERO, ModBlocks.NATURE_CHEST.defaultBlockState())
+	val waterChest = SpecialChestBlockEntity(ModBlockEntityTypes.WATER_CHEST.get(), BlockPos.ZERO, ModBlocks.WATER_CHEST.defaultBlockState())
+	val natureChest = SpecialChestBlockEntity(ModBlockEntityTypes.NATURE_CHEST.get(), BlockPos.ZERO, ModBlocks.NATURE_CHEST.defaultBlockState())
 
 	override fun renderByItem(
 		stack: ItemStack,

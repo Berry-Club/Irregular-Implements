@@ -1,9 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
-import dev.aaronhowser.mods.irregular_implements.block_entity.SpecialChestBlockEntity
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModChestLootSubprovider
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -21,30 +19,18 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.ChestType
 import net.minecraft.world.level.levelgen.structure.BoundingBox
 import net.minecraft.world.level.levelgen.structure.structures.OceanMonumentPieces
-import net.minecraft.world.level.material.Fluids
 import java.util.function.Supplier
 
-class SpecialChestBlock private constructor(
-	private val chestType: Type,
+class SpecialChestBlock(
+	blockEntityType: Supplier<BlockEntityType<out ChestBlockEntity>>,
+	private val blockEntityFactory: (BlockPos, BlockState) -> ChestBlockEntity,
 ) : ChestBlock(
 	Properties.ofFullCopy(Blocks.CHEST),
-	chestType.blockEntityType
+	blockEntityType
 ) {
 
-	enum class Type(val blockEntityType: Supplier<BlockEntityType<out ChestBlockEntity>>) {
-		NATURE({ ModBlockEntityTypes.NATURE_CHEST.get() }),
-		WATER({ ModBlockEntityTypes.WATER_CHEST.get() })
-
-		;
-
-		val block = SpecialChestBlock(this)
-	}
-
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-		return when (this.chestType) {
-			Type.NATURE -> SpecialChestBlockEntity.NatureChestBlockEntity(pos, state)
-			Type.WATER -> SpecialChestBlockEntity.WaterChestBlockEntity(pos, state)
-		}
+		return blockEntityFactory(pos, state)
 	}
 
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
@@ -52,11 +38,8 @@ class SpecialChestBlock private constructor(
 	}
 
 	override fun updateShape(state: BlockState, facing: Direction, facingState: BlockState, level: LevelAccessor, currentPos: BlockPos, facingPos: BlockPos): BlockState {
-		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
-		}
-
-		return state
+		return super.updateShape(state, facing, facingState, level, currentPos, facingPos)
+			.setValue(TYPE, ChestType.SINGLE)
 	}
 
 	companion object {

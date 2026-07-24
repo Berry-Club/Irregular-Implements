@@ -77,20 +77,12 @@ object ModBlockEntityTypes : AaronBlockEntityTypeRegistry() {
 		register("advanced_item_collector", ::AdvancedItemCollectorBlockEntity, ModBlocks.ADVANCED_ITEM_COLLECTOR)
 
 	@JvmField
-	val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlockEntity.NatureChestBlockEntity>> =
-		register(
-			"nature_chest",
-			{ pos, state -> SpecialChestBlockEntity.NatureChestBlockEntity(pos, state) },
-			ModBlocks.NATURE_CHEST
-		)
+	val NATURE_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlockEntity>> =
+		register("nature_chest", SpecialChestBlockEntity::nature, ModBlocks.NATURE_CHEST)
 
 	@JvmField
-	val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlockEntity.WaterChestBlockEntity>> =
-		register(
-			"water_chest",
-			{ pos, state -> SpecialChestBlockEntity.WaterChestBlockEntity(pos, state) },
-			ModBlocks.WATER_CHEST
-		)
+	val WATER_CHEST: DeferredHolder<BlockEntityType<*>, BlockEntityType<SpecialChestBlockEntity>> =
+		register("water_chest", SpecialChestBlockEntity::water, ModBlocks.WATER_CHEST)
 
 	val PEACE_CANDLE: DeferredHolder<BlockEntityType<*>, BlockEntityType<PeaceCandleBlockEntity>> =
 		register("peace_candle", ::PeaceCandleBlockEntity, ModBlocks.PEACE_CANDLE)
