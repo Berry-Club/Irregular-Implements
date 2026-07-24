@@ -253,6 +253,12 @@ object CommonEvents {
 
 		event.registerBlockEntity(
 			Capabilities.ItemHandler.BLOCK,
+			ModBlockEntityTypes.INVENTORY_REROUTER.get(),
+			InventoryRerouterBlockEntity::getItemCapability,
+		)
+
+		event.registerBlockEntity(
+			Capabilities.ItemHandler.BLOCK,
 			ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(),
 			RedstoneInterfaceAdvancedBlockEntity::getItemCapability,
 		)

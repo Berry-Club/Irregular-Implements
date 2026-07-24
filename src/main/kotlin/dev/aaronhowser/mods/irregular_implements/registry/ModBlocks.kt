@@ -30,7 +30,8 @@ object ModBlocks : AaronBlockRegistry() {
 		registerBlock("compressed_slime_block", ::CompressedSlimeBlock)
 	val BIOME_RADAR: DeferredBlock<BiomeRadarBlock> =
 		registerBlock("biome_radar", ::BiomeRadarBlock)
-	val INVENTORY_REROUTER = basicBlock("inventory_rerouter")
+	val INVENTORY_REROUTER: DeferredBlock<InventoryRerouterBlock> =
+		registerBlock("inventory_rerouter", ::InventoryRerouterBlock)
 	val SLIME_CUBE: DeferredBlock<SlimeCubeBlock> =
 		registerBlock("slime_cube", ::SlimeCubeBlock)
 	val PEACE_CANDLE: DeferredBlock<PeaceCandleBlock> =

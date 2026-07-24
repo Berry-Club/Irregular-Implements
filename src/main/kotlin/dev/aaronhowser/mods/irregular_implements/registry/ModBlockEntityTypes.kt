@@ -69,6 +69,8 @@ object ModBlockEntityTypes : AaronBlockEntityTypeRegistry() {
 		register("filtered_platform", ::FilteredPlatformBlockEntity, ModBlocks.FILTERED_SUPER_LUBRICANT_PLATFORM)
 	val INVENTORY_TESTER: DeferredHolder<BlockEntityType<*>, BlockEntityType<InventoryTesterBlockEntity>> =
 		register("inventory_tester", ::InventoryTesterBlockEntity, ModBlocks.INVENTORY_TESTER)
+	val INVENTORY_REROUTER: DeferredHolder<BlockEntityType<*>, BlockEntityType<InventoryRerouterBlockEntity>> =
+		register("inventory_rerouter", ::InventoryRerouterBlockEntity, ModBlocks.INVENTORY_REROUTER)
 	val ITEM_COLLECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<ItemCollectorBlockEntity>> =
 		register("item_collector", ::ItemCollectorBlockEntity, ModBlocks.ITEM_COLLECTOR)
 	val ADVANCED_ITEM_COLLECTOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<AdvancedItemCollectorBlockEntity>> =
