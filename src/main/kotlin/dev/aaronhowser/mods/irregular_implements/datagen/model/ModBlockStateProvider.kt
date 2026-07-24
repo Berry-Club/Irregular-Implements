@@ -50,7 +50,7 @@ class ModBlockStateProvider(
 		lotus()
 		beanSprout()
 		beanStalk()
-		basePlates()
+		basicPlates()
 		directionalAcceleratorPlate()
 		redirectorPlate()
 		filteredRedirectorPlate()
@@ -1698,18 +1698,12 @@ class ModBlockStateProvider(
 		val activeTexture = modLoc("block/plate/redirector/active")
 		val inactiveTexture = modLoc("block/plate/redirector/inactive")
 
-		val baseModel = models()
-			.pressurePlate(name(block), baseTexture)
-			.renderType(RenderType.cutout().name)
+		val baseModel = plateModel(name(block), baseTexture)
 
-		val activeModel = models()
-			.pressurePlate(name(block) + "_active", activeTexture)
-			.renderType(RenderType.cutout().name)
+		val activeModel = plateModel(name(block) + "_active", activeTexture)
 
 		//TODO: Figure out how to get this on the inactive sides
-		models()
-			.pressurePlate(name(block) + "_inactive", inactiveTexture)
-			.renderType(RenderType.cutout().name)
+		plateModel(name(block) + "_inactive", inactiveTexture)
 
 		val builder = getMultipartBuilder(block)
 			.part().modelFile(baseModel).addModel().end()
@@ -1738,9 +1732,7 @@ class ModBlockStateProvider(
 
 	private fun filteredRedirectorPlate() {
 		val block = ModBlocks.FILTERED_REDIRECTOR_PLATE.get()
-		val model = models()
-			.pressurePlate(name(block), modLoc("block/plate/filtered_redirector"))
-			.renderType(RenderType.cutout().name)
+		val model = plateModel(name(block), modLoc("block/plate/filtered_redirector"))
 
 		getVariantBuilder(block)
 			.forAllStates { state ->
@@ -1759,21 +1751,12 @@ class ModBlockStateProvider(
 
 	private fun redstonePlate() {
 		val block = ModBlocks.REDSTONE_PLATE.get()
-		val baseModel = models()
-			.pressurePlate(name(block), modLoc("block/plate/redstone/base"))
-			.renderType(RenderType.cutout().name)
-		val inputModel = models()
-			.pressurePlate(name(block) + "_input", modLoc("block/plate/redstone/red"))
-			.renderType(RenderType.cutout().name)
-		val poweredOutputModel = models()
-			.pressurePlate(name(block) + "_powered_output", modLoc("block/plate/redstone/red"))
-			.renderType(RenderType.cutout().name)
-		val unpoweredOutputModel = models()
-			.pressurePlate(name(block) + "_unpowered_output", modLoc("block/plate/redstone/light_red"))
-			.renderType(RenderType.cutout().name)
-		val inactiveModel = models()
-			.pressurePlate(name(block) + "_inactive", modLoc("block/plate/redstone/gray"))
-			.renderType(RenderType.cutout().name)
+		val baseModel = plateModel(name(block), modLoc("block/plate/redstone/base"))
+		val inputModel = plateModel(name(block) + "_input", modLoc("block/plate/redstone/red"))
+		val poweredOutputModel = plateModel(name(block) + "_powered_output", modLoc("block/plate/redstone/red"))
+		val unpoweredOutputModel =
+			plateModel(name(block) + "_unpowered_output", modLoc("block/plate/redstone/light_red"))
+		val inactiveModel = plateModel(name(block) + "_inactive", modLoc("block/plate/redstone/gray"))
 
 		val builder = getMultipartBuilder(block)
 			.part()
@@ -1813,12 +1796,8 @@ class ModBlockStateProvider(
 
 	private fun extractionPlate() {
 		val block = ModBlocks.EXTRACTION_PLATE.get()
-		val baseModel = models()
-			.pressurePlate(name(block), modLoc("block/plate/extraction/base"))
-			.renderType(RenderType.cutout().name)
-		val outputModel = models()
-			.pressurePlate(name(block) + "_output", modLoc("block/plate/extraction/output"))
-			.renderType(RenderType.cutout().name)
+		val baseModel = plateModel(name(block), modLoc("block/plate/extraction/base"))
+		val outputModel = plateModel(name(block) + "_output", modLoc("block/plate/extraction/output"))
 
 		val builder = getMultipartBuilder(block)
 			.part()
@@ -1842,9 +1821,7 @@ class ModBlockStateProvider(
 		val block = ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get()
 
 		val texture = modLoc("block/plate/directional_accelerator")
-		val model = models()
-			.pressurePlate(name(block), texture)
-			.renderType(RenderType.cutout().name)
+		val model = plateModel(name(block), texture)
 
 		getVariantBuilder(block)
 			.forAllStates {
@@ -1862,10 +1839,7 @@ class ModBlockStateProvider(
 		simpleBlockItem(block, model)
 	}
 
-	private fun basePlates() {
-
-		//TODO: Extraction, Filtered Director, Processing, Redirector, Redstone
-
+	private fun basicPlates() {
 		val plateBlocks = listOf(
 			ModBlocks.ACCELERATOR_PLATE,
 			ModBlocks.BOUNCY_PLATE,
@@ -1873,19 +1847,33 @@ class ModBlockStateProvider(
 			ModBlocks.CORRECTOR_PLATE,
 			ModBlocks.ITEM_REJUVENATOR_PLATE,
 			ModBlocks.ITEM_SEALER_PLATE
-		).map { it.get() }
+		)
 
 		for (plate in plateBlocks) {
+			val block = plate.get()
 
-			val textureName = name(plate).removeSuffix("_plate")
+			val textureName = name(block).removeSuffix("_plate")
 			val texture = modLoc("block/plate/$textureName")
 
-			val model = models()
-				.pressurePlate(name(plate), texture)
-				.renderType(RenderType.cutout().name)
-
-			simpleBlockWithItem(plate, model)
+			val model = plateModel(name(block), texture)
+			simpleBlockWithItem(block, model)
 		}
+	}
+
+	private fun plateModel(modelName: String, texture: ResourceLocation): BlockModelBuilder {
+		return models()
+			.withExistingParent(modelName, mcLoc("block/block"))
+			.texture("texture", texture)
+			.particle(texture)
+			.renderType(RenderType.cutout().name)
+			.element {
+				from(0f, 0f, 0f)
+				to(16f, 0.5f, 16f)
+				face(Direction.UP) {
+					uvs(0f, 0f, 16f, 16f)
+					texture("#texture")
+				}
+			}
 	}
 
 	private fun beanStalk() {

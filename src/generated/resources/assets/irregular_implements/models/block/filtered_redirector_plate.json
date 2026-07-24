@@ -1,7 +1,27 @@
 {
-  "parent": "minecraft:block/pressure_plate_up",
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "up": {
+          "texture": "#texture"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        0.5,
+        16
+      ]
+    }
+  ],
   "render_type": "minecraft:cutout",
   "textures": {
+    "particle": "irregular_implements:block/plate/filtered_redirector",
     "texture": "irregular_implements:block/plate/filtered_redirector"
   }
 }
