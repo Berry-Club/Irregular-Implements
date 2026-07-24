@@ -245,6 +245,7 @@ object ClientEvents {
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.WATER_CHEST.get(), ::ChestRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.PLAYER_INTERFACE.get(), ::PlayerInterfaceBER)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.BIOME_RADAR.get(), ::BiomeRadarBER)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.INVENTORY_REROUTER.get(), ::InventoryRerouterBER)
 
 		event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), ::ThrownItemRenderer)
 		event.registerEntityRenderer(ModEntityTypes.WEATHER_EGG.get(), ::ThrownItemRenderer)
