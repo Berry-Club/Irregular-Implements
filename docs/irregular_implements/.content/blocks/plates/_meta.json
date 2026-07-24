@@ -4,7 +4,10 @@
 	"collection_plate.mdx": "Collection Plate",
 	"corrector_plate.mdx": "Corrector Plate",
 	"directional_accelerator_plate.mdx": "Directional Accelerator Plate",
+	"extraction_plate.mdx": "Extraction Plate",
+	"filtered_redirector_plate.mdx": "Filtered Redirector Plate",
 	"item_rejuvenator_plate.mdx": "Item Rejuvenator Plate",
 	"item_sealer_plate.mdx": "Item Sealer Plate",
-	"redirector_plate.mdx": "Redirector Plate"
+	"redirector_plate.mdx": "Redirector Plate",
+	"redstone_plate.mdx": "Redstone Plate"
 }
