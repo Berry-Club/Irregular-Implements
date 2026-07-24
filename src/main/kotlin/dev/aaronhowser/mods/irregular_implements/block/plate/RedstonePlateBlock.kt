@@ -20,18 +20,22 @@ class RedstonePlateBlock : BasePlateBlock() {
 		registerDefaultState(
 			defaultBlockState()
 				.setValue(INPUT, Direction.NORTH)
-				.setValue(OUTPUT, Direction.SOUTH)
+				.setValue(POWERED_OUTPUT, Direction.EAST)
+				.setValue(UNPOWERED_OUTPUT, Direction.WEST)
 		)
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(INPUT, OUTPUT)
+		builder.add(INPUT, POWERED_OUTPUT, UNPOWERED_OUTPUT)
 	}
 
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState {
+		val input = context.horizontalDirection.opposite
+
 		return defaultBlockState()
-			.setValue(INPUT, context.horizontalDirection.opposite)
-			.setValue(OUTPUT, context.horizontalDirection)
+			.setValue(INPUT, input)
+			.setValue(POWERED_OUTPUT, input.clockWise)
+			.setValue(UNPOWERED_OUTPUT, input.opposite)
 	}
 
 	override fun useWithoutItem(
@@ -46,10 +50,14 @@ class RedstonePlateBlock : BasePlateBlock() {
 		val center = pos.toVec3().add(0.5, 0.0, 0.5)
 		val delta = center.vectorTo(hitResult.location)
 		val clickedDirection = Direction.getNearest(delta.x, 0.0, delta.z)
-		val property = if (player.isSecondaryUseActive) INPUT else OUTPUT
-		val otherDirection = state.getValue(if (property == INPUT) OUTPUT else INPUT)
 
-		if (clickedDirection == otherDirection || clickedDirection == state.getValue(property)) {
+		val property = if (player.isSecondaryUseActive) UNPOWERED_OUTPUT else POWERED_OUTPUT
+		val otherProperty = if (property == POWERED_OUTPUT) UNPOWERED_OUTPUT else POWERED_OUTPUT
+
+		if (clickedDirection == state.getValue(INPUT)
+			|| clickedDirection == state.getValue(otherProperty)
+			|| clickedDirection == state.getValue(property)
+		) {
 			return InteractionResult.FAIL
 		}
 
@@ -63,20 +71,21 @@ class RedstonePlateBlock : BasePlateBlock() {
 	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
 		val entry = PlateMovement.getEntryDirection(pos, entity) ?: return
 		val input = state.getValue(INPUT)
-		val output = state.getValue(OUTPUT)
+		if (entry != input) return
 
-		val destination = when (entry) {
-			input -> if (level.hasNeighborSignal(pos)) input.opposite else output
-			output -> if (level.hasNeighborSignal(pos)) output.opposite else input
-			else -> return
+		val output = if (level.hasNeighborSignal(pos)) {
+			state.getValue(POWERED_OUTPUT)
+		} else {
+			state.getValue(UNPOWERED_OUTPUT)
 		}
 
-		PlateMovement.redirect(pos, entity, entry, destination)
+		PlateMovement.redirect(pos, entity, entry, output)
 	}
 
 	companion object {
 		val INPUT: DirectionProperty = DirectionProperty.create("input", Direction.Plane.HORIZONTAL)
-		val OUTPUT: DirectionProperty = DirectionProperty.create("output", Direction.Plane.HORIZONTAL)
+		val POWERED_OUTPUT: DirectionProperty = DirectionProperty.create("powered_output", Direction.Plane.HORIZONTAL)
+		val UNPOWERED_OUTPUT: DirectionProperty = DirectionProperty.create("unpowered_output", Direction.Plane.HORIZONTAL)
 	}
 
 }

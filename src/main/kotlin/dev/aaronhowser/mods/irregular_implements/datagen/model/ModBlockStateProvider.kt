@@ -1765,16 +1765,47 @@ class ModBlockStateProvider(
 		val inputModel = models()
 			.pressurePlate(name(block) + "_input", modLoc("block/plate/redstone/red"))
 			.renderType(RenderType.cutout().name)
-		val outputModel = models()
-			.pressurePlate(name(block) + "_output", modLoc("block/plate/redstone/light_red"))
+		val poweredOutputModel = models()
+			.pressurePlate(name(block) + "_powered_output", modLoc("block/plate/redstone/red"))
+			.renderType(RenderType.cutout().name)
+		val unpoweredOutputModel = models()
+			.pressurePlate(name(block) + "_unpowered_output", modLoc("block/plate/redstone/light_red"))
+			.renderType(RenderType.cutout().name)
+		val inactiveModel = models()
+			.pressurePlate(name(block) + "_inactive", modLoc("block/plate/redstone/gray"))
 			.renderType(RenderType.cutout().name)
 
-		getVariantBuilder(block).forAllStates { state ->
-			arrayOf(
-				ConfiguredModel(baseModel),
-				ConfiguredModel(inputModel, 0, horizontalRotation(state.getValue(RedstonePlateBlock.INPUT)), false),
-				ConfiguredModel(outputModel, 0, horizontalRotation(state.getValue(RedstonePlateBlock.OUTPUT)), false)
-			)
+		val builder = getMultipartBuilder(block)
+			.part()
+			.modelFile(baseModel)
+			.addModel()
+			.end()
+
+		for (direction in Direction.Plane.HORIZONTAL) {
+			builder
+				.part()
+				.modelFile(inactiveModel)
+				.rotationY(horizontalRotation(direction))
+				.addModel()
+				.end()
+				.part()
+				.modelFile(inputModel)
+				.rotationY(horizontalRotation(direction))
+				.addModel()
+				.condition(RedstonePlateBlock.INPUT, direction)
+				.end()
+				.part()
+				.modelFile(poweredOutputModel)
+				.rotationY(horizontalRotation(direction))
+				.addModel()
+				.condition(RedstonePlateBlock.POWERED_OUTPUT, direction)
+				.end()
+				.part()
+				.modelFile(unpoweredOutputModel)
+				.rotationY(horizontalRotation(direction))
+				.addModel()
+				.condition(RedstonePlateBlock.UNPOWERED_OUTPUT, direction)
+				.end()
 		}
 
 		simpleBlockItem(block, baseModel)
