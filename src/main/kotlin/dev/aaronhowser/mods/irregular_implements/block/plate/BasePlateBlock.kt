@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block.plate
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
+import net.neoforged.neoforge.common.Tags
 
 abstract class BasePlateBlock(
 	properties: Properties =
@@ -26,7 +28,7 @@ abstract class BasePlateBlock(
 	}
 
 	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-		return canSupportRigidBlock(level, pos.below())
+		return canSupportRigidBlock(level, pos.below()) || level.getBlockState(pos.below()).isBlock(Tags.Blocks.CHESTS)
 	}
 
 	override fun updateShape(
