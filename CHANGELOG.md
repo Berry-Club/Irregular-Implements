@@ -4,6 +4,10 @@
 
 - Inventory Rerouter
 
+### Changed
+
+- Bean Pods now replace the final Bean Stalk block instead of being placed above it
+
 # 1.10.5
 
 ### Fixed

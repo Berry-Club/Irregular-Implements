@@ -45,6 +45,7 @@ class BeanStalkBlock(
 					pos,
 					ModBlocks.BEAN_POD.defaultBlockState()
 				)
+				return
 			}
 		} else {
 			if (pos.y >= level.maxBuildHeight || !level.isEmptyBlock(pos.above())) return
@@ -117,20 +118,19 @@ class BeanStalkBlock(
 		}
 
 		/**
-		 * Whether or not the Magic Bean's stalk is done growing, and the block above it should be a Bean Pod.
+		 * Whether or not the Magic Bean's stalk is done growing, and this block should become a Bean Pod.
 		 */
 		private var strongStalkIsDonePredicate: (Level, BlockPos) -> Boolean = ::defaultStrongIsDonePredicate
 
 		private fun defaultStrongIsDonePredicate(level: Level, pos: BlockPos): Boolean {
-			// If the block above it is at max build height, it's done
+			// If it cannot grow above the current block without exceeding the build height, it's done
 			if (pos.y + 1 >= level.maxBuildHeight) {
 				return true
 			}
 
-			// If the block two above it is indestructible, it's done
-			// That's because if it grew again, it wouldn't be able to replace the block above itself with either another Stalk or a Bean Pod
-			val stateTwoAbove = level.getBlockState(pos.above(2))
-			return stateTwoAbove.getDestroySpeed(level, pos.above(2)) == -1.0f
+			// If the block directly above it is indestructible, it cannot grow any farther
+			val posAbove = pos.above()
+			return level.getBlockState(posAbove).getDestroySpeed(level, posAbove) == -1.0f
 		}
 
 		/**
@@ -144,7 +144,7 @@ class BeanStalkBlock(
 		 * $BeanStalkBlock.setMagicBeanStalkIsDoneGrowingPredicate((level, pos) => pos.y >= 100)
 		 * ```
 		 *
-		 * @param predicate A predicate that takes in a [Level] and a [BlockPos] of a just-grown Magic Bean Stalk, and returns a [Boolean] of if it's done growing yet and the block above should be turned into a Bean Pod.
+		 * @param predicate A predicate that takes in a [Level] and a [BlockPos] of a just-grown Magic Bean Stalk, and returns a [Boolean] of if it's done growing yet and should be turned into a Bean Pod.
 		 */
 		@JvmStatic
 		fun setMagicBeanStalkIsDoneGrowingPredicate(predicate: (Level, BlockPos) -> Boolean) {
