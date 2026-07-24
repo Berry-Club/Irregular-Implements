@@ -22,7 +22,7 @@ public abstract class HugeBrownMushroomFeatureMixin {
 					shift = At.Shift.AFTER
 			)
 	)
-	private void a(
+	private void irregular_implements$generateSakanade(
 			LevelAccessor level,
 			RandomSource random,
 			BlockPos pos,
