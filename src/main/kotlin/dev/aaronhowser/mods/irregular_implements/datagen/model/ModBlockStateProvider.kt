@@ -56,6 +56,7 @@ class ModBlockStateProvider(
 		filteredRedirectorPlate()
 		redstonePlate()
 		extractionPlate()
+		processingPlate()
 		moonPhaseDetector()
 		shockAbsorber()
 		chatDetector()
@@ -1812,6 +1813,29 @@ class ModBlockStateProvider(
 				.rotationY(horizontalRotation(direction))
 				.addModel()
 				.condition(ExtractionPlateBlock.OUTPUT, direction)
+		}
+
+		simpleBlockItem(block, baseModel)
+	}
+
+	private fun processingPlate() {
+		val block = ModBlocks.PROCESSING_PLATE.get()
+		val baseModel = plateModel(name(block), modLoc("block/plate/processing/base"))
+		val outputModel = plateModel(name(block) + "_output", modLoc("block/plate/processing/white"))
+
+		val builder = getMultipartBuilder(block)
+			.part()
+			.modelFile(baseModel)
+			.addModel()
+			.end()
+
+		for (direction in Direction.Plane.HORIZONTAL) {
+			builder
+				.part()
+				.modelFile(outputModel)
+				.rotationY(horizontalRotation(direction))
+				.addModel()
+				.condition(ProcessingPlateBlock.OUTPUT, direction)
 		}
 
 		simpleBlockItem(block, baseModel)

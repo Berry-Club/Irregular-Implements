@@ -92,7 +92,7 @@ object ModInfoLang {
 		addInfo(ModBlocks.SHOCK_ABSORBER, "Reduces all fall damage, and also emits a redstone signal strength relative to the distance fallen.")
 		addInfo(ModBlocks.MOON_PHASE_DETECTOR, "Emits a Redstone signal depending on the current moon phase.")
 
-		addInfo(ModBlocks.PROCESSING_PLATE, "???")
+		addInfo(ModBlocks.PROCESSING_PLATE, "Inserts dropped items passing over it into the inventory below. It also extracts items from a configurable side and inserts or drops them on its output side.\n\nRight-click with an empty hand to change the extraction side. Sneak while doing so to change the output side.")
 		addInfo(ModBlocks.REDIRECTOR_PLATE, "Has two \"enabled\" sides. Entities that enter from one side are sent to the other side.")
 		addInfo(ModBlocks.FILTERED_REDIRECTOR_PLATE, "Has two \"input\" sides, and two color-coded \"output\" sides.\n\nBoth output sides have a slot for an Entity Filter, and any entity that enters from the input sides are teleported to the output with a matching Filter.")
 		addInfo(ModBlocks.REDSTONE_PLATE, "Entities moving over this plate are redirected in a configurable direction.\n\nIf powered, they instead move forward.")

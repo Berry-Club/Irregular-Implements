@@ -57,6 +57,8 @@ object ModMessageLang {
 	const val SPECTRE_COMMAND_GET = "command.irregular_implements.spectre_energy.get"
 	const val SPECTRE_COMMAND_SET = "command.irregular_implements.spectre_energy.set"
 	const val EXTRACTION_PLATE_INPUT_DIRECTION = "message.irregular_implements.extraction_plate.input_direction"
+	const val PROCESSING_PLATE_INPUT_DIRECTION = "message.irregular_implements.processing_plate.input_direction"
+	const val PROCESSING_PLATE_OUTPUT_DIRECTION = "message.irregular_implements.processing_plate.output_direction"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -115,6 +117,8 @@ object ModMessageLang {
 			add(SPECTRE_COMMAND_GET, "%s has %s FE in their Spectre Energy buffer.")
 			add(SPECTRE_COMMAND_SET, "Set %s's Spectre Energy buffer to %s FE.")
 			add(EXTRACTION_PLATE_INPUT_DIRECTION, "Extraction Plate input: %s")
+			add(PROCESSING_PLATE_INPUT_DIRECTION, "Processing Plate extraction side: %s")
+			add(PROCESSING_PLATE_OUTPUT_DIRECTION, "Processing Plate output side: %s")
 		}
 	}
 

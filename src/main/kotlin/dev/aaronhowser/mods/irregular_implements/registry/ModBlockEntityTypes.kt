@@ -122,6 +122,8 @@ object ModBlockEntityTypes : AaronBlockEntityTypeRegistry() {
 		register("filtered_redirector_plate", ::FilteredRedirectorPlateBlockEntity, ModBlocks.FILTERED_REDIRECTOR_PLATE)
 	val EXTRACTION_PLATE: DeferredHolder<BlockEntityType<*>, BlockEntityType<ExtractionPlateBlockEntity>> =
 		register("extraction_plate", ::ExtractionPlateBlockEntity, ModBlocks.EXTRACTION_PLATE)
+	val PROCESSING_PLATE: DeferredHolder<BlockEntityType<*>, BlockEntityType<ProcessingPlateBlockEntity>> =
+		register("processing_plate", ::ProcessingPlateBlockEntity, ModBlocks.PROCESSING_PLATE)
 
 	init {
 		BLOCK_ENTITY_REGISTRY.addAlias(

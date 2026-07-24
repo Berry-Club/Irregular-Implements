@@ -1,0 +1,44 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "irregular_implements:block/processing_plate"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/processing_plate_output"
+      },
+      "when": {
+        "output": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/processing_plate_output",
+        "y": 90
+      },
+      "when": {
+        "output": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/processing_plate_output",
+        "y": 180
+      },
+      "when": {
+        "output": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/processing_plate_output",
+        "y": 270
+      },
+      "when": {
+        "output": "west"
+      }
+    }
+  ]
+}

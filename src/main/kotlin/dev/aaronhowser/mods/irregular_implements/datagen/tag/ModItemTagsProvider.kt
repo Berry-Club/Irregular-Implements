@@ -215,7 +215,6 @@ class ModItemTagsProvider(
 			.add(
 				ModBlocks.POTION_VAPORIZER.asItem(),
 				ModBlocks.ADVANCED_REDSTONE_REPEATER.asItem(),
-				ModBlocks.PROCESSING_PLATE.asItem(),
 				ModBlocks.ANCIENT_BRICK.asItem()
 			)
 	}

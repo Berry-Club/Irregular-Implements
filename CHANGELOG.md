@@ -6,6 +6,7 @@
 - Redstone Plate
 - Extraction Plate
 - Filtered Redirector Plate
+- Processing Plate
 
 ### Changed
 

@@ -246,7 +246,8 @@ object ModBlocks : AaronBlockRegistry() {
 	val BIOME_GLASS = basicGlassBlock("biome_glass")    //FIXME: not skipping rendering on adjacent biome glass
 
 	// Plates
-	val PROCESSING_PLATE = basicBlock("processing_plate")
+	val PROCESSING_PLATE: DeferredBlock<ProcessingPlateBlock> =
+		registerBlock("processing_plate", ::ProcessingPlateBlock)
 	val REDIRECTOR_PLATE: DeferredBlock<RedirectorPlateBlock> =
 		registerBlock("redirector_plate", ::RedirectorPlateBlock)
 	val FILTERED_REDIRECTOR_PLATE: DeferredBlock<FilteredRedirectorPlateBlock> =
