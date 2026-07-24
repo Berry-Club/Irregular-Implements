@@ -20,6 +20,8 @@ class InventoryRerouterBlockEntity(
 
 	override val syncImmediately: Boolean = true
 
+	// Map of the actual side to the side it's set to
+	// AKA West is set to Up, or whatever
 	private val configuredSides: MutableMap<Direction, Direction> =
 		EnumMap(Direction::class.java)
 
@@ -82,6 +84,21 @@ class InventoryRerouterBlockEntity(
 		}
 	}
 
+	companion object {
+		fun getItemCapability(
+			inventoryRerouter: InventoryRerouterBlockEntity,
+			direction: Direction?
+		): IItemHandler? {
+			if (direction == null) return null
+
+			val front = inventoryRerouter.blockState
+				.getValue(InventoryRerouterBlock.FACING)
+			if (direction == front) return null
+
+			return inventoryRerouter.forwardingHandlers.getValue(direction)
+		}
+	}
+
 	private inner class ForwardingItemHandler(
 		private val exposedSide: Direction
 	) : IItemHandler {
@@ -106,21 +123,6 @@ class InventoryRerouterBlockEntity(
 
 		override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
 			return getTargetHandler(exposedSide)?.isItemValid(slot, stack) ?: false
-		}
-	}
-
-	companion object {
-		fun getItemCapability(
-			inventoryRerouter: InventoryRerouterBlockEntity,
-			direction: Direction?
-		): IItemHandler? {
-			if (direction == null) return null
-
-			val front = inventoryRerouter.blockState
-				.getValue(InventoryRerouterBlock.FACING)
-			if (direction == front) return null
-
-			return inventoryRerouter.forwardingHandlers.getValue(direction)
 		}
 	}
 
