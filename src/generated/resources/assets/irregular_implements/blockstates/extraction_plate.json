@@ -1,214 +1,44 @@
 {
-  "variants": {
-    "input=down,output=east": [
-      {
+  "multipart": [
+    {
+      "apply": {
         "model": "irregular_implements:block/extraction_plate"
+      }
+    },
+    {
+      "apply": {
+        "model": "irregular_implements:block/extraction_plate_output"
       },
-      {
+      "when": {
+        "output": "north"
+      }
+    },
+    {
+      "apply": {
         "model": "irregular_implements:block/extraction_plate_output",
         "y": 90
-      }
-    ],
-    "input=down,output=north": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
       },
-      {
-        "model": "irregular_implements:block/extraction_plate_output"
+      "when": {
+        "output": "east"
       }
-    ],
-    "input=down,output=south": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
+    },
+    {
+      "apply": {
         "model": "irregular_implements:block/extraction_plate_output",
         "y": 180
-      }
-    ],
-    "input=down,output=west": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
       },
-      {
+      "when": {
+        "output": "south"
+      }
+    },
+    {
+      "apply": {
         "model": "irregular_implements:block/extraction_plate_output",
         "y": 270
-      }
-    ],
-    "input=east,output=east": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
       },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 90
+      "when": {
+        "output": "west"
       }
-    ],
-    "input=east,output=north": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output"
-      }
-    ],
-    "input=east,output=south": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 180
-      }
-    ],
-    "input=east,output=west": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 270
-      }
-    ],
-    "input=north,output=east": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 90
-      }
-    ],
-    "input=north,output=north": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output"
-      }
-    ],
-    "input=north,output=south": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 180
-      }
-    ],
-    "input=north,output=west": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 270
-      }
-    ],
-    "input=south,output=east": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 90
-      }
-    ],
-    "input=south,output=north": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output"
-      }
-    ],
-    "input=south,output=south": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 180
-      }
-    ],
-    "input=south,output=west": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 270
-      }
-    ],
-    "input=up,output=east": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 90
-      }
-    ],
-    "input=up,output=north": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output"
-      }
-    ],
-    "input=up,output=south": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 180
-      }
-    ],
-    "input=up,output=west": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 270
-      }
-    ],
-    "input=west,output=east": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 90
-      }
-    ],
-    "input=west,output=north": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output"
-      }
-    ],
-    "input=west,output=south": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 180
-      }
-    ],
-    "input=west,output=west": [
-      {
-        "model": "irregular_implements:block/extraction_plate"
-      },
-      {
-        "model": "irregular_implements:block/extraction_plate_output",
-        "y": 270
-      }
-    ]
-  }
+    }
+  ]
 }

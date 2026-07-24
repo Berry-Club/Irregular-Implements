@@ -1868,11 +1868,19 @@ class ModBlockStateProvider(
 			.pressurePlate(name(block) + "_output", modLoc("block/plate/extraction/output"))
 			.renderType(RenderType.cutout().name)
 
-		getVariantBuilder(block).forAllStates { state ->
-			arrayOf(
-				ConfiguredModel(baseModel),
-				ConfiguredModel(outputModel, 0, horizontalRotation(state.getValue(ExtractionPlateBlock.OUTPUT)), false)
-			)
+		val builder = getMultipartBuilder(block)
+			.part()
+			.modelFile(baseModel)
+			.addModel()
+			.end()
+
+		for (direction in Direction.Plane.HORIZONTAL) {
+			builder
+				.part()
+				.modelFile(outputModel)
+				.rotationY(horizontalRotation(direction))
+				.addModel()
+				.condition(ExtractionPlateBlock.OUTPUT, direction)
 		}
 
 		simpleBlockItem(block, baseModel)
