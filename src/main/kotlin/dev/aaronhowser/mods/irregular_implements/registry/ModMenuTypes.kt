@@ -30,6 +30,8 @@ import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDete
 import dev.aaronhowser.mods.irregular_implements.menu.entity_detector.EntityDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformMenu
 import dev.aaronhowser.mods.irregular_implements.menu.filtered_platform.FilteredPlatformScreen
+import dev.aaronhowser.mods.irregular_implements.menu.filtered_redirector_plate.FilteredRedirectorPlateMenu
+import dev.aaronhowser.mods.irregular_implements.menu.filtered_redirector_plate.FilteredRedirectorPlateScreen
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorMenu
 import dev.aaronhowser.mods.irregular_implements.menu.global_chat_detector.GlobalChatDetectorScreen
 import dev.aaronhowser.mods.irregular_implements.menu.igniter.IgniterMenu
@@ -115,6 +117,8 @@ object ModMenuTypes : AaronMenuTypesRegistry() {
 		register("advanced_redstone_interface", ::AdvancedRedstoneInterfaceMenu)
 	val ADVANCED_REDSTONE_TORCH: DeferredHolder<MenuType<*>, MenuType<AdvancedRedstoneTorchMenu>> =
 		register("advanced_redstone_torch", ::AdvancedRedstoneTorchMenu)
+	val FILTERED_REDIRECTOR_PLATE: DeferredHolder<MenuType<*>, MenuType<FilteredRedirectorPlateMenu>> =
+		register("filtered_redirector_plate", ::FilteredRedirectorPlateMenu)
 
 	override fun registerScreens(event: RegisterMenuScreensEvent) {
 		event.register(IRON_DROPPER.get(), ::IronDropperScreen)
@@ -142,6 +146,7 @@ object ModMenuTypes : AaronMenuTypesRegistry() {
 		event.register(ENTITY_DETECTOR.get(), ::EntityDetectorScreen)
 		event.register(ADVANCED_REDSTONE_INTERFACE.get(), ::AdvancedRedstoneInterfaceScreen)
 		event.register(ADVANCED_REDSTONE_TORCH.get(), ::AdvancedRedstoneTorchScreen)
+		event.register(FILTERED_REDIRECTOR_PLATE.get(), ::FilteredRedirectorPlateScreen)
 	}
 
 }

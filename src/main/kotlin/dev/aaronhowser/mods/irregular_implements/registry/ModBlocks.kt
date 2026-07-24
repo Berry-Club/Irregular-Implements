@@ -249,8 +249,10 @@ object ModBlocks : AaronBlockRegistry() {
 	val PROCESSING_PLATE = basicBlock("processing_plate")
 	val REDIRECTOR_PLATE: DeferredBlock<RedirectorPlateBlock> =
 		registerBlock("redirector_plate", ::RedirectorPlateBlock)
-	val FILTERED_REDIRECTOR_PLATE = basicBlock("filtered_redirector_plate")
-	val REDSTONE_PLATE = basicBlock("redstone_plate")
+	val FILTERED_REDIRECTOR_PLATE: DeferredBlock<FilteredRedirectorPlateBlock> =
+		registerBlock("filtered_redirector_plate", ::FilteredRedirectorPlateBlock)
+	val REDSTONE_PLATE: DeferredBlock<RedstonePlateBlock> =
+		registerBlock("redstone_plate", ::RedstonePlateBlock)
 	val CORRECTOR_PLATE: DeferredBlock<CorrectorPlateBlock> =
 		registerBlock("corrector_plate", ::CorrectorPlateBlock)
 	val ITEM_SEALER_PLATE: DeferredBlock<ItemSealerPlate> =

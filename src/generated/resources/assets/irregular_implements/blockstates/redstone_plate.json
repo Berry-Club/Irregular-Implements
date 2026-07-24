@@ -1,0 +1,204 @@
+{
+  "variants": {
+    "input=east,output=east": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 90
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 90
+      }
+    ],
+    "input=east,output=north": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 90
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output"
+      }
+    ],
+    "input=east,output=south": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 90
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 180
+      }
+    ],
+    "input=east,output=west": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 90
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 270
+      }
+    ],
+    "input=north,output=east": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 90
+      }
+    ],
+    "input=north,output=north": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output"
+      }
+    ],
+    "input=north,output=south": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 180
+      }
+    ],
+    "input=north,output=west": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 270
+      }
+    ],
+    "input=south,output=east": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 180
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 90
+      }
+    ],
+    "input=south,output=north": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 180
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output"
+      }
+    ],
+    "input=south,output=south": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 180
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 180
+      }
+    ],
+    "input=south,output=west": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 180
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 270
+      }
+    ],
+    "input=west,output=east": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 270
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 90
+      }
+    ],
+    "input=west,output=north": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 270
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output"
+      }
+    ],
+    "input=west,output=south": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 270
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 180
+      }
+    ],
+    "input=west,output=west": [
+      {
+        "model": "irregular_implements:block/redstone_plate"
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_input",
+        "y": 270
+      },
+      {
+        "model": "irregular_implements:block/redstone_plate_output",
+        "y": 270
+      }
+    ]
+  }
+}
