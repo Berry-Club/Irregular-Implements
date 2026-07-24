@@ -34,6 +34,7 @@ object ModBlockLang {
 			addBlock(ModBlocks.BLOCK_OF_STICKS, "Block of Sticks")
 			addBlock(ModBlocks.RETURNING_BLOCK_OF_STICKS, "Returning Block of Sticks")
 			addBlock(ModBlocks.INVENTORY_REROUTER, "Inventory Rerouter")
+			add("message.irregular_implements.inventory_rerouter.side", "%s face rerouted to %s")
 			addBlock(ModBlocks.SLIME_CUBE, "Slime Cube")
 			addBlock(ModBlocks.PEACE_CANDLE, "Peace Candle")
 			addBlock(ModBlocks.GLOWING_MUSHROOM, "Glowing Mushroom")

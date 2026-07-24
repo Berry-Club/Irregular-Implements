@@ -213,7 +213,6 @@ class ModItemTagsProvider(
 
 		tag(NOT_YET_IMPLEMENTED)
 			.add(
-				ModBlocks.INVENTORY_REROUTER.asItem(),
 				ModBlocks.POTION_VAPORIZER.asItem(),
 				ModBlocks.ADVANCED_REDSTONE_REPEATER.asItem(),
 				ModBlocks.PROCESSING_PLATE.asItem(),

@@ -69,6 +69,7 @@ class ModBlockStateProvider(
 		customCraftingTable()
 		notificationInterface()
 		imbuingStation()
+		inventoryRerouter()
 		inventoryTester()
 		itemCollectors()
 		peaceCandle()
@@ -87,6 +88,51 @@ class ModBlockStateProvider(
 		advancedRedstoneTorch()
 		lapisLamp()
 		quartzLamp()
+	}
+
+	private fun inventoryRerouter() {
+		val block = ModBlocks.INVENTORY_REROUTER.get()
+		val side = modLoc("block/inventory_rerouter/side")
+		val front = modLoc("block/inventory_rerouter/front")
+
+		val model = models()
+			.cube(
+				name(block),
+				side,
+				side,
+				front,
+				side,
+				side,
+				side
+			)
+			.particle(side)
+
+		getVariantBuilder(block)
+			.forAllStates {
+				val facing = it.getValue(InventoryRerouterBlock.FACING)
+
+				val xRotation = when (facing) {
+					Direction.UP -> 270
+					Direction.DOWN -> 90
+					else -> 0
+				}
+
+				val yRotation = when (facing) {
+					Direction.NORTH -> 0
+					Direction.EAST -> 90
+					Direction.SOUTH -> 180
+					Direction.WEST -> 270
+					else -> 0
+				}
+
+				ConfiguredModel.builder()
+					.modelFile(model)
+					.rotationX(xRotation)
+					.rotationY(yRotation)
+					.build()
+			}
+
+		simpleBlockItem(block, model)
 	}
 
 	private fun quartzLamp() {

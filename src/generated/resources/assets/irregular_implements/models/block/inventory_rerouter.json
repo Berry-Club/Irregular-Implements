@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "irregular_implements:block/inventory_rerouter/side",
+    "east": "irregular_implements:block/inventory_rerouter/side",
+    "north": "irregular_implements:block/inventory_rerouter/front",
+    "particle": "irregular_implements:block/inventory_rerouter/side",
+    "south": "irregular_implements:block/inventory_rerouter/side",
+    "up": "irregular_implements:block/inventory_rerouter/side",
+    "west": "irregular_implements:block/inventory_rerouter/side"
+  }
+}
