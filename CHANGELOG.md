@@ -1,3 +1,9 @@
+# 1.11.0
+
+### Added
+
+- Inventory Rerouter
+
 # 1.10.5
 
 ### Fixed
