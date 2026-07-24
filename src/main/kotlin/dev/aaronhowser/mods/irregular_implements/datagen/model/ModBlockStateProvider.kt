@@ -113,19 +113,8 @@ class ModBlockStateProvider(
 			.forAllStates {
 				val facing = it.getValue(InventoryRerouterBlock.FACING)
 
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
-
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
+				val xRotation = verticalRotation(facing)
+				val yRotation = horizontalRotation(facing)
 
 				ConfiguredModel.builder()
 					.modelFile(model)
@@ -268,19 +257,8 @@ class ModBlockStateProvider(
 				val model = models()
 					.orientable(name(block), side, if (triggered) frontOn else frontOff, top)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
-
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
+				val xRotation = verticalRotation(facing)
 
 				ConfiguredModel
 					.builder()
@@ -313,19 +291,8 @@ class ModBlockStateProvider(
 			.forAllStates {
 				val facing = it.getValue(AutoPlacerBlock.FACING)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
-
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
+				val xRotation = verticalRotation(facing)
 
 				ConfiguredModel
 					.builder()
@@ -894,13 +861,7 @@ class ModBlockStateProvider(
 						.build()
 				} else {
 
-					val yRotation = when (facing) {
-						Direction.NORTH -> 0
-						Direction.EAST -> 90
-						Direction.SOUTH -> 180
-						Direction.WEST -> 270
-						else -> 0
-					}
+					val yRotation = horizontalRotation(facing)
 
 					ConfiguredModel
 						.builder()
@@ -938,19 +899,8 @@ class ModBlockStateProvider(
 				val facing = it.getValue(DirectionalBlock.FACING)
 				val isUpgraded = it.getValue(BlockBreakerBlock.IS_UPGRADED)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
-
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
+				val xRotation = verticalRotation(facing)
 
 				ConfiguredModel
 					.builder()
@@ -1570,13 +1520,7 @@ class ModBlockStateProvider(
 				val isEnabled = it.getValue(OnlineDetectorBlock.ENABLED)
 				val facing = it.getValue(OnlineDetectorBlock.HORIZONTAL_FACING)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
 
 				val modelName = name(block) + if (isEnabled) "_on" else "_off"
 
@@ -1774,30 +1718,14 @@ class ModBlockStateProvider(
 			builder
 				.part()
 				.modelFile(activeModel)
-				.rotationY(
-					when (direction) {
-						Direction.NORTH -> 0
-						Direction.EAST -> 90
-						Direction.SOUTH -> 180
-						Direction.WEST -> 270
-						else -> 0
-					}
-				)
+				.rotationY(horizontalRotation(direction))
 				.addModel()
 				.condition(RedirectorPlateBlock.ACTIVE_ONE, direction)
 
 			builder
 				.part()
 				.modelFile(activeModel)
-				.rotationY(
-					when (direction) {
-						Direction.NORTH -> 0
-						Direction.EAST -> 90
-						Direction.SOUTH -> 180
-						Direction.WEST -> 270
-						else -> 0
-					}
-				)
+				.rotationY(horizontalRotation(direction))
 				.addModel()
 				.condition(RedirectorPlateBlock.ACTIVE_TWO, direction)
 		}
@@ -1879,16 +1807,6 @@ class ModBlockStateProvider(
 		simpleBlockItem(block, baseModel)
 	}
 
-	private fun horizontalRotation(direction: Direction): Int {
-		return when (direction) {
-			Direction.NORTH -> 0
-			Direction.EAST -> 90
-			Direction.SOUTH -> 180
-			Direction.WEST -> 270
-			else -> 0
-		}
-	}
-
 	private fun directionalAcceleratorPlate() {
 		val block = ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get()
 
@@ -1901,13 +1819,7 @@ class ModBlockStateProvider(
 			.forAllStates {
 				val facing = it.getValue(DirectionalAcceleratorPlateBlock.FACING)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
 
 				ConfiguredModel
 					.builder()
@@ -2010,19 +1922,8 @@ class ModBlockStateProvider(
 			.forAllStates {
 				val facing = it.getValue(DirectionalBlock.FACING)
 
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
-
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
+				val xRotation = verticalRotation(facing)
+				val yRotation = horizontalRotation(facing)
 
 				ConfiguredModel
 					.builder()
@@ -2051,19 +1952,8 @@ class ModBlockStateProvider(
 				val facing = it.getValue(DirectionalBlock.FACING)
 				val modelName = name(block) + "_" + facing.getDirectionName().lowercase()
 
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
-
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
+				val xRotation = verticalRotation(facing)
+				val yRotation = horizontalRotation(facing)
 
 				val model = models()
 					.withExistingParent(modelName, mcLoc("block/block"))
@@ -2224,19 +2114,8 @@ class ModBlockStateProvider(
 					val facing = it.getValue(EnderBridgeBlock.FACING)
 					val enabled = it.getValue(EnderBridgeBlock.ENABLED)
 
-					val yRotation = when (facing) {
-						Direction.NORTH -> 0
-						Direction.EAST -> 90
-						Direction.SOUTH -> 180
-						Direction.WEST -> 270
-						else -> 0
-					}
-
-					val xRotation = when (facing) {
-						Direction.UP -> 270
-						Direction.DOWN -> 90
-						else -> 0
-					}
+					val yRotation = horizontalRotation(facing)
+					val xRotation = verticalRotation(facing)
 
 					val modelName = name(enderBridge) + if (enabled) "_on" else "_off"
 
@@ -2347,19 +2226,8 @@ class ModBlockStateProvider(
 				val facing = it.getValue(DirectionalBlock.FACING)
 				val enabled = it.getValue(ContactButtonBlock.ENABLED)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
-
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
+				val xRotation = verticalRotation(facing)
 
 				val modelName = name(block) + if (enabled) "_on" else "_off"
 				val sideTexture = "block/contact_button/" + if (enabled) "side_on" else "side_off"
@@ -2397,19 +2265,8 @@ class ModBlockStateProvider(
 				val facing = it.getValue(DirectionalBlock.FACING)
 				val enabled = it.getValue(ContactLeverBlock.ENABLED)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
-
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
+				val xRotation = verticalRotation(facing)
 
 				val modelName = name(block) + if (enabled) "_on" else "_off"
 				val sideTexture = "block/contact_lever/" + if (enabled) "side_on" else "side_off"
@@ -2727,19 +2584,8 @@ class ModBlockStateProvider(
 			.forAllStates {
 				val facing = it.getValue(BlockStateProperties.FACING)
 
-				val yRotation = when (facing) {
-					Direction.NORTH -> 0
-					Direction.EAST -> 90
-					Direction.SOUTH -> 180
-					Direction.WEST -> 270
-					else -> 0
-				}
-
-				val xRotation = when (facing) {
-					Direction.UP -> 270
-					Direction.DOWN -> 90
-					else -> 0
-				}
+				val yRotation = horizontalRotation(facing)
+				val xRotation = verticalRotation(facing)
 
 				ConfiguredModel
 					.builder()
@@ -2851,8 +2697,28 @@ class ModBlockStateProvider(
 		}
 	}
 
-	private fun name(block: Block): String {
-		return BuiltInRegistries.BLOCK.getKey(block).path
+	companion object {
+		private fun horizontalRotation(direction: Direction): Int {
+			return when (direction) {
+				Direction.NORTH -> 0
+				Direction.EAST -> 90
+				Direction.SOUTH -> 180
+				Direction.WEST -> 270
+				else -> 0
+			}
+		}
+
+		private fun verticalRotation(direction: Direction): Int {
+			return when (direction) {
+				Direction.UP -> 270
+				Direction.DOWN -> 90
+				else -> 0
+			}
+		}
+
+		private fun name(block: Block): String {
+			return BuiltInRegistries.BLOCK.getKey(block).path
+		}
 	}
 
 }
