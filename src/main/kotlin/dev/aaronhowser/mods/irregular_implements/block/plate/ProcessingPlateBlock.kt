@@ -66,7 +66,25 @@ class ProcessingPlateBlock : BasePlateBlock(), EntityBlock {
 		hitResult: BlockHitResult
 	): InteractionResult {
 		val property = if (player.isSecondaryUseActive) OUTPUT else INPUT
-		val directions = if (property == OUTPUT) OUTPUT_CYCLE else INPUT_CYCLE
+
+		val directions = if (property == OUTPUT) {
+			listOf(
+				Direction.NORTH,
+				Direction.EAST,
+				Direction.SOUTH,
+				Direction.WEST
+			)
+		} else {
+			listOf(
+				Direction.DOWN,
+				Direction.NORTH,
+				Direction.EAST,
+				Direction.SOUTH,
+				Direction.WEST,
+				Direction.UP
+			)
+		}
+
 		val currentDirection = state.getValue(property)
 		val nextDirection = directions[(directions.indexOf(currentDirection) + 1) % directions.size]
 
@@ -109,20 +127,5 @@ class ProcessingPlateBlock : BasePlateBlock(), EntityBlock {
 	companion object {
 		val INPUT: DirectionProperty = DirectionProperty.create("input")
 		val OUTPUT: DirectionProperty = DirectionProperty.create("output", Direction.Plane.HORIZONTAL)
-
-		private val INPUT_CYCLE = listOf(
-			Direction.DOWN,
-			Direction.NORTH,
-			Direction.EAST,
-			Direction.SOUTH,
-			Direction.WEST,
-			Direction.UP
-		)
-		private val OUTPUT_CYCLE = listOf(
-			Direction.NORTH,
-			Direction.EAST,
-			Direction.SOUTH,
-			Direction.WEST
-		)
 	}
 }
