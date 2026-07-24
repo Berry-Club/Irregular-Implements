@@ -52,13 +52,12 @@ class InventoryRerouterBlockEntity(
 	private fun getTargetHandler(exposedSide: Direction): IItemHandler? {
 		val level = level ?: return null
 		val front = blockState.getValue(InventoryRerouterBlock.FACING)
-		val targetDirection = front.opposite
 
 		if (exposedSide == front) return null
 
 		return level.getCapability(
 			Capabilities.ItemHandler.BLOCK,
-			blockPos.relative(targetDirection),
+			blockPos.relative(front),
 			getConfiguredSide(exposedSide)
 		)
 	}
@@ -93,6 +92,7 @@ class InventoryRerouterBlockEntity(
 
 			val front = inventoryRerouter.blockState
 				.getValue(InventoryRerouterBlock.FACING)
+
 			if (direction == front) return null
 
 			return inventoryRerouter.forwardingHandlers.getValue(direction)
