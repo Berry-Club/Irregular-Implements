@@ -31,7 +31,7 @@ public abstract class HugeBrownMushroomFeatureMixin {
 			HugeMushroomFeatureConfiguration config,
 			CallbackInfo ci
 	) {
-		SakanadeBlock.addToMushroom(level, pos, config, mutablePos);
+		SakanadeBlock.addToMushroom(level, pos, mutablePos);
 	}
 
 }

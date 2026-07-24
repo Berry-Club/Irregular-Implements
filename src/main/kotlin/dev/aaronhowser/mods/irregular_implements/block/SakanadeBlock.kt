@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.defaultBlockState
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModMobEffects
 import net.minecraft.core.BlockPos
@@ -22,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
@@ -35,9 +35,11 @@ class SakanadeBlock : Block(
 		.replaceable()
 ), IShearable {
 
+	private val shapesByState: Map<BlockState, VoxelShape>
+
 	init {
-		this.registerDefaultState(
-			this.stateDefinition
+		registerDefaultState(
+			stateDefinition
 				.any()
 				.setValue(NORTH, false)
 				.setValue(EAST, false)
@@ -47,7 +49,7 @@ class SakanadeBlock : Block(
 				.setValue(DOWN, false)
 		)
 
-		shapesCache = stateDefinition.possibleStates.associateWith(::calculateShape)
+		shapesByState = stateDefinition.possibleStates.associateWith(::calculateShape)
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
@@ -55,16 +57,16 @@ class SakanadeBlock : Block(
 	}
 
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-		return shapesCache[state] ?: calculateShape(state)
+		return shapesByState.getValue(state)
 	}
 
 	override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
-		return hasFaces(getUpdatedState(state, level, pos))
+		return hasFaces(removeUnsupportedFaces(state, level, pos))
 	}
 
 	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {
-		val newState = getUpdatedState(state, level, pos)
-		return if (!hasFaces(newState)) Blocks.AIR.defaultBlockState() else newState
+		val updatedState = removeUnsupportedFaces(state, level, pos)
+		return if (hasFaces(updatedState)) updatedState else Blocks.AIR.defaultBlockState()
 	}
 
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
@@ -72,28 +74,24 @@ class SakanadeBlock : Block(
 		val clickedPos = context.clickedPos
 
 		val clickedState = level.getBlockState(clickedPos)
-		val clickedThis = clickedState.isBlock(this)
+		val isAddingFace = clickedState.isBlock(this)
 
-		val stateToPlace = if (clickedThis) clickedState else defaultBlockState()
+		val stateToPlace = if (isAddingFace) clickedState else defaultBlockState()
 
 		for (direction in context.nearestLookingDirections) {
-			val property = PROPERTY_BY_DIRECTION[direction] ?: continue
-			val alreadyHasProperty = clickedThis && clickedState.getValue(property)
+			val property = PROPERTY_BY_DIRECTION.getValue(direction)
+			val alreadyHasFace = isAddingFace && clickedState.getValue(property)
 
-			if (!alreadyHasProperty && isAcceptableNeighbour(level, clickedPos.relative(direction), direction)) {
+			if (!alreadyHasFace && canAttachTo(level, clickedPos, direction)) {
 				return stateToPlace.setValue(property, true)
 			}
 		}
 
-		return if (clickedThis) stateToPlace else null
+		return null
 	}
 
 	override fun canBeReplaced(state: BlockState, useContext: BlockPlaceContext): Boolean {
-		val level = useContext.level
-		val clickedPos = useContext.clickedPos
-		val clickedState = level.getBlockState(clickedPos)
-
-		return if (clickedState.isBlock(this)) countFaces(clickedState) < PROPERTY_BY_DIRECTION.size else super.canBeReplaced(state, useContext)
+		return !useContext.itemInHand.isItem(asItem()) || countFaces(state) < PROPERTY_BY_DIRECTION.size
 	}
 
 	override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
@@ -105,30 +103,12 @@ class SakanadeBlock : Block(
 	}
 
 	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-		if (entity is LivingEntity) {
-			entity.addEffect(MobEffectInstance(ModMobEffects.COLLAPSE, 20 * 8))
-		}
+		if (level.isClientSide || entity !is LivingEntity) return
+
+		entity.addEffect(MobEffectInstance(ModMobEffects.COLLAPSE, COLLAPSE_DURATION_TICKS))
 	}
 
 	companion object {
-		@JvmStatic
-		fun addToMushroom(
-			level: LevelAccessor,
-			origin: BlockPos,
-			config: HugeMushroomFeatureConfiguration,
-			mutablePos: BlockPos.MutableBlockPos
-		) {
-			if (mutablePos.x == origin.x && mutablePos.z == origin.z) return
-
-			if (level.getBlockState(mutablePos.below()).canBeReplaced()) {
-				level.setBlock(
-					mutablePos.below(),
-					ModBlocks.SAKANADE_SPORES.defaultBlockState().setValue(UP, true),
-					1 or 2
-				)
-			}
-		}
-
 		val SHAPE_UP: VoxelShape = box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0)
 		val SHAPE_WEST: VoxelShape = box(0.0, 0.0, 0.0, 1.0, 16.0, 16.0)
 		val SHAPE_EAST: VoxelShape = box(15.0, 0.0, 0.0, 16.0, 16.0, 16.0)
@@ -145,9 +125,7 @@ class SakanadeBlock : Block(
 
 		val PROPERTY_BY_DIRECTION: Map<Direction, BooleanProperty> = PipeBlock.PROPERTY_BY_DIRECTION
 
-		private const val SHAPE_OFFSET = 1f
-
-		private lateinit var shapesCache: Map<BlockState, VoxelShape>
+		private const val COLLAPSE_DURATION_TICKS = 8 * 20
 
 		private fun calculateShape(state: BlockState): VoxelShape {
 			var voxelShape = Shapes.empty()
@@ -165,8 +143,8 @@ class SakanadeBlock : Block(
 		private fun countFaces(state: BlockState): Int {
 			var count = 0
 
-			for (property in PROPERTY_BY_DIRECTION.entries) {
-				if (state.getValue(property.value)) count++
+			for (property in PROPERTY_BY_DIRECTION.values) {
+				if (state.getValue(property)) count++
 			}
 
 			return count
@@ -176,47 +154,59 @@ class SakanadeBlock : Block(
 			return countFaces(state) > 0
 		}
 
-		fun isAcceptableNeighbour(blockReader: BlockGetter, neighborPos: BlockPos, attachedFace: Direction): Boolean {
+		private fun canAttachTo(level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+			val neighborPos = pos.relative(direction)
+			val neighborState = level.getBlockState(neighborPos)
+
+			if (neighborState.isBlock(ModBlocks.SAKANADE_SPORES)) {
+				return neighborState.getValue(PROPERTY_BY_DIRECTION.getValue(direction))
+			}
+
 			return MultifaceBlock.canAttachTo(
-				blockReader,
-				attachedFace,
+				level,
+				direction,
 				neighborPos,
-				blockReader.getBlockState(neighborPos)
+				neighborState
 			)
 		}
 
-		private fun getUpdatedState(state: BlockState, level: BlockGetter, pos: BlockPos): BlockState {
+		private fun canRemainAttached(level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
+			if (canAttachTo(level, pos, direction)) return true
 
-			var blockState = state
-			var tempState: BlockState? = null
+			val stateAbove = level.getBlockState(pos.above())
+			return stateAbove.isBlock(ModBlocks.SAKANADE_SPORES) &&
+					stateAbove.getValue(PROPERTY_BY_DIRECTION.getValue(direction))
+		}
+
+		private fun removeUnsupportedFaces(state: BlockState, level: BlockGetter, pos: BlockPos): BlockState {
+			var updatedState = state
 
 			for (direction in Direction.entries) {
-				val property = PROPERTY_BY_DIRECTION[direction] ?: continue
-
-				if (state.getValue(property)) {
-					var flag = canSupportAtFace(level, pos, direction)
-
-					if (!flag) {
-						if (tempState == null) tempState = level.getBlockState(pos.above())
-
-						flag = tempState!!.isBlock(ModBlocks.SAKANADE_SPORES) && tempState.getValue(property)
-					}
-
-					blockState = blockState.setValue(property, flag)
+				val property = PROPERTY_BY_DIRECTION.getValue(direction)
+				if (state.getValue(property) && !canRemainAttached(level, pos, direction)) {
+					updatedState = updatedState.setValue(property, false)
 				}
 			}
 
-			return blockState
+			return updatedState
 		}
 
-		private fun canSupportAtFace(level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
-			val relative = pos.relative(direction)
-			if (isAcceptableNeighbour(level, relative, direction)) return true
+		@JvmStatic
+		fun addToMushroom(
+			level: LevelAccessor,
+			origin: BlockPos,
+			mutablePos: BlockPos.MutableBlockPos
+		) {
+			if (mutablePos.x == origin.x && mutablePos.z == origin.z) return
 
-			val property = PROPERTY_BY_DIRECTION[direction] ?: return false
-			val state = level.getBlockState(relative)
+			val sporesPos = mutablePos.below()
+			if (!level.getBlockState(sporesPos).canBeReplaced()) return
 
-			return state.isBlock(ModBlocks.SAKANADE_SPORES) && state.getValue(property)
+			level.setBlock(
+				sporesPos,
+				ModBlocks.SAKANADE_SPORES.defaultBlockState().setValue(UP, true),
+				UPDATE_ALL
+			)
 		}
 	}
 
