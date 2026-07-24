@@ -22,9 +22,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.level.block.state.BlockState
 
 class FilteredPlatformBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.FILTERED_PLATFORM.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.FILTERED_PLATFORM.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	override val syncImmediately: Boolean = true
 

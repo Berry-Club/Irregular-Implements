@@ -40,7 +40,7 @@ class SpectreCubeSavedData : SavedData() {
 	fun teleportPlayerToSpectreCube(player: ServerPlayer) {
 		val spectreLevel = getSpectreLevel(player.serverLevel())
 
-		val pData = player.persistentData
+		val data = player.persistentData
 
 		val tag = CompoundTag()
 		tag.putDouble(FROM_X, player.x)
@@ -48,7 +48,7 @@ class SpectreCubeSavedData : SavedData() {
 		tag.putDouble(FROM_Z, player.z)
 		tag.putString(FROM_DIMENSION, player.level().dimension().location().toString())
 
-		pData.put(PLAYER_SPECTRE_INFO, tag)
+		data.put(PLAYER_SPECTRE_INFO, tag)
 
 		val uuid = player.uuid
 		var cube = cubes[uuid]
@@ -125,10 +125,10 @@ class SpectreCubeSavedData : SavedData() {
 	}
 
 	fun teleportPlayerBack(player: ServerPlayer) {
-		val pData = player.persistentData
-		if (!pData.contains(PLAYER_SPECTRE_INFO)) return
+		val data = player.persistentData
+		if (!data.contains(PLAYER_SPECTRE_INFO)) return
 
-		val tag = pData.getCompound(PLAYER_SPECTRE_INFO)
+		val tag = data.getCompound(PLAYER_SPECTRE_INFO)
 		val fromX = tag.getDouble(FROM_X)
 		val fromY = tag.getDouble(FROM_Y)
 		val fromZ = tag.getDouble(FROM_Z)

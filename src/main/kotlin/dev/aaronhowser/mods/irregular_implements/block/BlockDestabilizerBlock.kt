@@ -63,15 +63,15 @@ class BlockDestabilizerBlock : EntityBlock, Block(
 	}
 
 	override fun useWithoutItem(
-		pState: BlockState,
-		pLevel: Level,
-		pPos: BlockPos,
-		pPlayer: Player,
-		pHitResult: BlockHitResult
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hitResult: BlockHitResult
 	): InteractionResult {
-		val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDestabilizerBlockEntity ?: return InteractionResult.FAIL
+		val blockEntity = level.getBlockEntity(pos) as? BlockDestabilizerBlockEntity ?: return InteractionResult.FAIL
 
-		pPlayer.openMenu(blockEntity)
+		player.openMenu(blockEntity)
 		return InteractionResult.SUCCESS
 	}
 

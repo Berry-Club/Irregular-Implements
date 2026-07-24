@@ -22,9 +22,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 
 class AdvancedItemCollectorBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : ItemCollectorBlockEntity(ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : ItemCollectorBlockEntity(ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	var xRadius: Int = 5
 		set(value) {

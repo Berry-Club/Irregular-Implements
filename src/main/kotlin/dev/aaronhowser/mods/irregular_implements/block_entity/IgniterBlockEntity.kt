@@ -23,9 +23,9 @@ import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.level.block.state.BlockState
 
 class IgniterBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.IGNITER.get(), pPos, pBlockState), MenuProvider {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.IGNITER.get(), pos, blockState), MenuProvider {
 
 	var mode: Mode = Mode.TOGGLE
 		private set(value) {

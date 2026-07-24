@@ -33,9 +33,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
 
 class BlockDestabilizerBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_DESTABILIZER.get(), pPos, pBlockState), MenuProvider {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_DESTABILIZER.get(), pos, blockState), MenuProvider {
 
 	enum class State { IDLE, SEARCHING, DROPPING }
 

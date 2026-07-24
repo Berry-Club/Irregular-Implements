@@ -28,9 +28,9 @@ import net.minecraft.world.level.block.entity.DispenserBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 class IronDropperBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : DispenserBlockEntity(ModBlockEntityTypes.IRON_DROPPER.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : DispenserBlockEntity(ModBlockEntityTypes.IRON_DROPPER.get(), pos, blockState) {
 
 	var shouldShootStraight: Boolean = false
 		private set(value) {
@@ -213,7 +213,7 @@ class IronDropperBlockEntity(
 	}
 
 	// Syncs with client
-	override fun getUpdateTag(pRegistries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(pRegistries)
+	override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag = saveWithoutMetadata(registries)
 	override fun getUpdatePacket(): Packet<ClientGamePacketListener> = ClientboundBlockEntityDataPacket.create(this)
 
 	companion object {

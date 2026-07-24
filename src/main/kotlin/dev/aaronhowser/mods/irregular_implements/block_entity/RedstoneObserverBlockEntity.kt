@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.state.BlockState
 import org.antlr.v4.runtime.misc.MultiMap
 
 class RedstoneObserverBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.REDSTONE_OBSERVER.get(), pPos, pBlockState), RedstoneToolLinkable {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.REDSTONE_OBSERVER.get(), pos, blockState), RedstoneToolLinkable {
 
 	override val syncImmediately: Boolean = true
 

@@ -29,9 +29,9 @@ import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.items.wrapper.InvWrapper
 
 class RedstoneInterfaceAdvancedBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : RedstoneInterfaceBlockEntity(ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	private val linkedPositions: MutableList<BlockPos> = mutableListOf()
 

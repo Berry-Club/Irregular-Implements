@@ -36,9 +36,9 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 class AutoPlacerBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.AUTO_PLACER.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(ModBlockEntityTypes.AUTO_PLACER.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	private val container: ImprovedSimpleContainer =
 		object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {

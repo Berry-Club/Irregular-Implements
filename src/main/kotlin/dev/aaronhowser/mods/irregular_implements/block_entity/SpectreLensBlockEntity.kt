@@ -14,9 +14,9 @@ import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
 class SpectreLensBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_LENS.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_LENS.get(), pos, blockState) {
 
 	var owner: UUID? = null
 		set(value) {

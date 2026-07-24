@@ -31,9 +31,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.ServerChatEvent
 
 class GlobalChatDetectorBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.GLOBAL_CHAT_DETECTOR.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	override val syncImmediately: Boolean = true
 

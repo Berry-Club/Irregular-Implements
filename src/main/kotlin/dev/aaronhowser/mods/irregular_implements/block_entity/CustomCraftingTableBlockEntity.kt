@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 
 class CustomCraftingTableBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), pos, blockState) {
 
 	var renderedBlockState: BlockState = Blocks.OAK_PLANKS.defaultBlockState()
 		set(value) {

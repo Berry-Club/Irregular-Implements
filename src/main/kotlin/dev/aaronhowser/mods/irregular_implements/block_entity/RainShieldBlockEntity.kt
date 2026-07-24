@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.state.BlockState
  */
 //TODO: particles?
 class RainShieldBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.RAIN_SHIELD.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(ModBlockEntityTypes.RAIN_SHIELD.get(), pos, blockState) {
 
 	companion object {
 		fun RainShieldCarrier.getRainShieldChunks(): LongOpenHashSet = this.`irregular_implements$getRainShieldChunks`()

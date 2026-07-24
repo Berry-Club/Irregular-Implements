@@ -26,9 +26,9 @@ import net.neoforged.neoforge.event.ServerChatEvent
 import java.util.*
 
 class ChatDetectorBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.CHAT_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.CHAT_DETECTOR.get(), pos, blockState), MenuProvider {
 
 	// Defaults to a random one but gets immediately set either by loading from NBT or when it's placed
 	var ownerUuid: UUID = UUID.randomUUID()

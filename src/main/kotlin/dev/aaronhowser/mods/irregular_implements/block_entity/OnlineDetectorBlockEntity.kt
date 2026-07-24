@@ -19,9 +19,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
 class OnlineDetectorBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.ONLINE_DETECTOR.get(), pPos, pBlockState), MenuProvider {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.ONLINE_DETECTOR.get(), pos, blockState), MenuProvider {
 
 	var username: String = ""
 		set(value) {

@@ -17,9 +17,9 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
 
 class SpectreCoilBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_COIL.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_COIL.get(), pos, blockState) {
 
 	constructor(pos: BlockPos, blockState: BlockState, coilType: SpectreCoilBlock.Type) : this(pos, blockState) {
 		this.coilType = coilType

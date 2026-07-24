@@ -51,27 +51,27 @@ class BlockOfSticksBlock(
 	}
 
 	override fun onPlace(
-		pState: BlockState,
-		pLevel: Level,
-		pPos: BlockPos,
-		pOldState: BlockState,
-		pMovedByPiston: Boolean
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		oldState: BlockState,
+		movedByPiston: Boolean
 	) {
-		if (!pLevel.isClientSide) pLevel.scheduleTick(pPos, this, 20 * 7)
-		super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston)
+		if (!level.isClientSide) level.scheduleTick(pos, this, 20 * 7)
+		super.onPlace(state, level, pos, oldState, movedByPiston)
 	}
 
 	override fun tick(
-		pState: BlockState,
+		state: BlockState,
 		level: ServerLevel,
 		pos: BlockPos,
 		random: RandomSource
 	) {
-		val shouldDrop = pState.getValue(SHOULD_DROP)
+		val shouldDrop = state.getValue(SHOULD_DROP)
 
 		if (!this.returning) {
 			level.destroyBlock(pos, shouldDrop)
-			return super.tick(pState, level, pos, random)
+			return super.tick(state, level, pos, random)
 		}
 
 		if (shouldDrop) {
@@ -89,7 +89,7 @@ class BlockOfSticksBlock(
 
 				val dropPos = nearestPlayer?.position() ?: pos.center
 
-				val drops = getDrops(pState, level, pos, null)
+				val drops = getDrops(state, level, pos, null)
 				for (drop in drops) {
 					val itemEntity = ItemEntity(level, dropPos.x, dropPos.y, dropPos.z, drop)
 					itemEntity.setNoPickUpDelay()
@@ -103,7 +103,7 @@ class BlockOfSticksBlock(
 		}
 
 		level.destroyBlock(pos, false)
-		super.tick(pState, level, pos, random)
+		super.tick(state, level, pos, random)
 	}
 
 	companion object {

@@ -44,15 +44,15 @@ class BlockDetectorBlock : SimpleContainerBlock(Properties.ofFullCopy(Blocks.DIS
 	}
 
 	override fun useWithoutItem(
-		pState: BlockState,
-		pLevel: Level,
-		pPos: BlockPos,
-		pPlayer: Player,
-		pHitResult: BlockHitResult
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hitResult: BlockHitResult
 	): InteractionResult {
-		val blockEntity = pLevel.getBlockEntity(pPos) as? BlockDetectorBlockEntity
+		val blockEntity = level.getBlockEntity(pos) as? BlockDetectorBlockEntity
 			?: return InteractionResult.FAIL
-		pPlayer.openMenu(blockEntity)
+		player.openMenu(blockEntity)
 		return InteractionResult.SUCCESS
 	}
 

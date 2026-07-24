@@ -44,15 +44,15 @@ class GlobalChatDetectorBlock : SimpleContainerBlock(Properties.ofFullCopy(Block
 	}
 
 	override fun useWithoutItem(
-		pState: BlockState,
-		pLevel: Level,
-		pPos: BlockPos,
-		pPlayer: Player,
-		pHitResult: BlockHitResult
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hitResult: BlockHitResult
 	): InteractionResult {
-		val blockEntity = pLevel.getBlockEntity(pPos) as? GlobalChatDetectorBlockEntity ?: return InteractionResult.FAIL
+		val blockEntity = level.getBlockEntity(pos) as? GlobalChatDetectorBlockEntity ?: return InteractionResult.FAIL
 
-		pPlayer.openMenu(blockEntity)
+		player.openMenu(blockEntity)
 		blockEntity.sendStringUpdate()
 
 		return InteractionResult.SUCCESS

@@ -26,9 +26,9 @@ import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
 class NotificationInterfaceBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.NOTIFICATION_INTERFACE.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(ModBlockEntityTypes.NOTIFICATION_INTERFACE.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	val container = ImprovedSimpleContainer(this, 1)
 	val icon: ItemStack

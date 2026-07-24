@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 
 class DiaphanousBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), pos, blockState) {
 
 	override val syncImmediately: Boolean = true
 

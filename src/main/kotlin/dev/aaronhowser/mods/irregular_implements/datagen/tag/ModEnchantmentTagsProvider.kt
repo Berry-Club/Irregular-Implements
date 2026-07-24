@@ -10,10 +10,10 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
 
 class ModEnchantmentTagsProvider(
-	pOutput: PackOutput,
-	pProvider: CompletableFuture<HolderLookup.Provider>,
+	output: PackOutput,
+	provider: CompletableFuture<HolderLookup.Provider>,
 	existingFileHelper: ExistingFileHelper
-) : EnchantmentTagsProvider(pOutput, pProvider, IrregularImplements.MOD_ID, existingFileHelper) {
+) : EnchantmentTagsProvider(output, provider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(p0: HolderLookup.Provider) {
 		this.tag(EnchantmentTags.NON_TREASURE)

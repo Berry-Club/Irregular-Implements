@@ -27,9 +27,9 @@ import net.neoforged.neoforge.items.wrapper.InvWrapper
 import net.neoforged.neoforge.items.wrapper.RangedWrapper
 
 class ImbuingStationBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.IMBUING_STATION.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(ModBlockEntityTypes.IMBUING_STATION.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	// Machine stuff
 

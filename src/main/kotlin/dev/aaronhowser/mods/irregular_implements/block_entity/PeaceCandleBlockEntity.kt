@@ -14,9 +14,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent
 
 class PeaceCandleBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.PEACE_CANDLE.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(ModBlockEntityTypes.PEACE_CANDLE.get(), pos, blockState) {
 
 	companion object {
 		fun PeaceCandleCarrier.getPeaceCandleChunks(): LongOpenHashSet = this.`irregular_implements$getPeaceCandleChunks`()

@@ -13,12 +13,12 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.level.block.state.BlockState
 
 class RedstoneInterfaceBasicBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
+	pos: BlockPos,
+	blockState: BlockState
 ) : RedstoneInterfaceBlockEntity(
 	ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get(),
-	pPos,
-	pBlockState
+	pos,
+	blockState
 ), RedstoneToolLinkable {
 
 	private var linkedPos: BlockPos? = null

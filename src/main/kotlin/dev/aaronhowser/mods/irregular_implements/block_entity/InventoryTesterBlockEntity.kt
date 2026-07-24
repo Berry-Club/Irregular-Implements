@@ -25,9 +25,9 @@ import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.ItemHandlerHelper
 
 class InventoryTesterBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.INVENTORY_TESTER.get(), pPos, pBlockState), MenuProvider, ContainerContainer {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.INVENTORY_TESTER.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 	override fun getContainers(): List<Container> {

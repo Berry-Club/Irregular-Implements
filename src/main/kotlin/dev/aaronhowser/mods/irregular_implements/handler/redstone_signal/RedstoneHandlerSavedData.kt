@@ -92,10 +92,10 @@ class RedstoneHandlerSavedData : SavedData() {
 		const val SAVED_DATA_NAME = "ii_redstone_handler"
 		const val OLD_SAVED_DATA_NAME = "redstone_handler"
 
-		private fun load(pTag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
+		private fun load(tag: CompoundTag, provider: HolderLookup.Provider): RedstoneHandlerSavedData {
 			val redstoneHandlerSavedData = RedstoneHandlerSavedData()
 
-			val savedSignals = pTag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
+			val savedSignals = tag.getList(TAG_SAVED_SIGNALS, Tag.TAG_COMPOUND.toInt())
 
 			for (i in savedSignals.indices) {
 				val signalTag = savedSignals.getCompound(i)

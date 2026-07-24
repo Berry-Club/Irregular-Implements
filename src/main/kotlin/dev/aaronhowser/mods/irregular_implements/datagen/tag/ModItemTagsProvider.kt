@@ -18,11 +18,11 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.concurrent.CompletableFuture
 
 class ModItemTagsProvider(
-	pOutput: PackOutput,
-	pLookupProvider: CompletableFuture<HolderLookup.Provider>,
-	pBlockTags: CompletableFuture<TagLookup<Block>>,
+	output: PackOutput,
+	lookupProvider: CompletableFuture<HolderLookup.Provider>,
+	blockTags: CompletableFuture<TagLookup<Block>>,
 	existingFileHelper: ExistingFileHelper
-) : ItemTagsProvider(pOutput, pLookupProvider, pBlockTags, IrregularImplements.MOD_ID, existingFileHelper) {
+) : ItemTagsProvider(output, lookupProvider, blockTags, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	//TODO: Copy all block tags to item tags
 

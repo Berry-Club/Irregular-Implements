@@ -41,9 +41,9 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 class BlockBreakerBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pos, blockState) {
 
 	private var uuid: UUID? = null
 

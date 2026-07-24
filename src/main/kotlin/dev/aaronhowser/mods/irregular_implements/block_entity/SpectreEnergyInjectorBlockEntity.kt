@@ -14,9 +14,9 @@ import net.neoforged.neoforge.energy.IEnergyStorage
 import java.util.*
 
 class SpectreEnergyInjectorBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), pos, blockState) {
 
 	// Initialized as random, but immediately set on place or load
 	var ownerUuid: UUID = UUID.randomUUID()

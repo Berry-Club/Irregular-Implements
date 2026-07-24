@@ -18,9 +18,9 @@ import net.neoforged.neoforge.items.ItemHandlerHelper
 
 open class ItemCollectorBlockEntity(
 	blockEntity: BlockEntityType<out ItemCollectorBlockEntity>,
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : BlockEntity(blockEntity, pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : BlockEntity(blockEntity, pos, blockState) {
 
 	constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntityTypes.ITEM_COLLECTOR.get(), pos, blockState)
 

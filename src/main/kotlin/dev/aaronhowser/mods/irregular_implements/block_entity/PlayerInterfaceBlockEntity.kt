@@ -22,9 +22,9 @@ import net.neoforged.neoforge.items.wrapper.RangedWrapper
 import java.util.*
 
 class PlayerInterfaceBlockEntity(
-	pPos: BlockPos,
-	pBlockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.PLAYER_INTERFACE.get(), pPos, pBlockState) {
+	pos: BlockPos,
+	blockState: BlockState
+) : SyncingBlockEntity(ModBlockEntityTypes.PLAYER_INTERFACE.get(), pos, blockState) {
 
 	var ownerUuid: UUID = UUID.randomUUID()
 	var ownerHead: ItemStack = ItemStack.EMPTY
