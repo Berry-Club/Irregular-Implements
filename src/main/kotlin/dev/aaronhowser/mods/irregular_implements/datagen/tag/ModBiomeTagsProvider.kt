@@ -41,6 +41,7 @@ class ModBiomeTagsProvider(
 			.remove(Biomes.ICE_SPIKES)
 
 		tag(BIOME_CRYSTAL_BLACKLIST)    // Empty by default (blacklist is empty by default)
+
 		tag(NATURE_CORE_OAK)
 			.add(
 				Biomes.FOREST,
