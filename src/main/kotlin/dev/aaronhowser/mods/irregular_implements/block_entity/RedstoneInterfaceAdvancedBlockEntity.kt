@@ -151,6 +151,11 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		updateLinkedPositions()
 	}
 
+	override fun onLoad() {
+		super.onLoad()
+		updateLinkedPositions()
+	}
+
 	override fun getDisplayName(): Component {
 		return this.blockState.block.name
 	}

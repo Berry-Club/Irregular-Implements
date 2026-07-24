@@ -16,6 +16,7 @@
 
 ### Fixed
 
+- The Advanced Redstone Interface no longer stops working when the chunk loads
 - Plate models don't use the Pressure Plate model as a base any more, so it isn't cutting off the outermost 2 pixels
 
 # 1.10.5
