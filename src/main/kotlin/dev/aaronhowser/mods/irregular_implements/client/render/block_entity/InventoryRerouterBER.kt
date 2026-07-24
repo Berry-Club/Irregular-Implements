@@ -78,8 +78,8 @@ class InventoryRerouterBER(
 		)
 
 		private val UP_VERTICES = arrayOf(
-			Vertex(0f, MAX, 0f, 0f, 1f), Vertex(0f, MAX, 1f, 0f, 0f),
-			Vertex(1f, MAX, 1f, 1f, 0f), Vertex(1f, MAX, 0f, 1f, 1f)
+			Vertex(0f, MAX, 0f, 1f, 1f), Vertex(0f, MAX, 1f, 1f, 0f),
+			Vertex(1f, MAX, 1f, 0f, 0f), Vertex(1f, MAX, 0f, 0f, 1f)
 		)
 
 		private val NORTH_VERTICES = arrayOf(
