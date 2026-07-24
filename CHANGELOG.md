@@ -3,10 +3,14 @@
 ### Added
 
 - Inventory Rerouter
+- Redstone Plate
+- Extraction Plate
+- Filtered Redirector Plate
 
 ### Changed
 
 - Bean Pods now replace the final Bean Stalk block instead of being placed above it
+- Minor code improvements
 
 ### Fixed
 
