@@ -9,6 +9,9 @@ import dev.aaronhowser.mods.aaron.misc.AaronExtensions.particle
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
 import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.ExtractionPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.FilteredRedirectorPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.RedstonePlateBlock
 import dev.aaronhowser.mods.irregular_implements.block.plate.RedirectorPlateBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.renderer.RenderType
@@ -54,6 +57,9 @@ class ModBlockStateProvider(
 		basePlates()
 		directionalAcceleratorPlate()
 		redirectorPlate()
+		filteredRedirectorPlate()
+		redstonePlate()
+		extractionPlate()
 		moonPhaseDetector()
 		shockAbsorber()
 		chatDetector()
@@ -1804,6 +1810,82 @@ class ModBlockStateProvider(
 			block,
 			baseModel
 		)
+	}
+
+	private fun filteredRedirectorPlate() {
+		val block = ModBlocks.FILTERED_REDIRECTOR_PLATE.get()
+		val baseModel = models()
+			.pressurePlate(name(block), modLoc("block/plate/filtered_redirector/base"))
+			.renderType(RenderType.cutout().name)
+		val leftModel = models()
+			.pressurePlate(name(block) + "_left", modLoc("block/plate/filtered_redirector/left"))
+			.renderType(RenderType.cutout().name)
+		val rightModel = models()
+			.pressurePlate(name(block) + "_right", modLoc("block/plate/filtered_redirector/right"))
+			.renderType(RenderType.cutout().name)
+
+		getVariantBuilder(block).forAllStates { state ->
+			val rotation = horizontalRotation(state.getValue(FilteredRedirectorPlateBlock.INPUT))
+			arrayOf(
+				ConfiguredModel(baseModel, 0, rotation, false),
+				ConfiguredModel(leftModel, 0, rotation, false),
+				ConfiguredModel(rightModel, 0, rotation, false)
+			)
+		}
+
+		simpleBlockItem(block, baseModel)
+	}
+
+	private fun redstonePlate() {
+		val block = ModBlocks.REDSTONE_PLATE.get()
+		val baseModel = models()
+			.pressurePlate(name(block), modLoc("block/plate/redstone/base"))
+			.renderType(RenderType.cutout().name)
+		val inputModel = models()
+			.pressurePlate(name(block) + "_input", modLoc("block/plate/redstone/red"))
+			.renderType(RenderType.cutout().name)
+		val outputModel = models()
+			.pressurePlate(name(block) + "_output", modLoc("block/plate/redstone/light_red"))
+			.renderType(RenderType.cutout().name)
+
+		getVariantBuilder(block).forAllStates { state ->
+			arrayOf(
+				ConfiguredModel(baseModel),
+				ConfiguredModel(inputModel, 0, horizontalRotation(state.getValue(RedstonePlateBlock.INPUT)), false),
+				ConfiguredModel(outputModel, 0, horizontalRotation(state.getValue(RedstonePlateBlock.OUTPUT)), false)
+			)
+		}
+
+		simpleBlockItem(block, baseModel)
+	}
+
+	private fun extractionPlate() {
+		val block = ModBlocks.EXTRACTION_PLATE.get()
+		val baseModel = models()
+			.pressurePlate(name(block), modLoc("block/plate/extraction/base"))
+			.renderType(RenderType.cutout().name)
+		val outputModel = models()
+			.pressurePlate(name(block) + "_output", modLoc("block/plate/extraction/output"))
+			.renderType(RenderType.cutout().name)
+
+		getVariantBuilder(block).forAllStates { state ->
+			arrayOf(
+				ConfiguredModel(baseModel),
+				ConfiguredModel(outputModel, 0, horizontalRotation(state.getValue(ExtractionPlateBlock.OUTPUT)), false)
+			)
+		}
+
+		simpleBlockItem(block, baseModel)
+	}
+
+	private fun horizontalRotation(direction: Direction): Int {
+		return when (direction) {
+			Direction.NORTH -> 0
+			Direction.EAST -> 90
+			Direction.SOUTH -> 180
+			Direction.WEST -> 270
+			else -> 0
+		}
 	}
 
 	private fun directionalAcceleratorPlate() {

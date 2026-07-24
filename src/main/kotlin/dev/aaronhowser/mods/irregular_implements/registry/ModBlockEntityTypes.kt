@@ -118,6 +118,10 @@ object ModBlockEntityTypes : AaronBlockEntityTypeRegistry() {
 		)
 	val ENDER_ANCHOR: DeferredHolder<BlockEntityType<*>, BlockEntityType<EnderAnchorBlockEntity>> =
 		register("ender_anchor", ::EnderAnchorBlockEntity, ModBlocks.ENDER_ANCHOR)
+	val FILTERED_REDIRECTOR_PLATE: DeferredHolder<BlockEntityType<*>, BlockEntityType<FilteredRedirectorPlateBlockEntity>> =
+		register("filtered_redirector_plate", ::FilteredRedirectorPlateBlockEntity, ModBlocks.FILTERED_REDIRECTOR_PLATE)
+	val EXTRACTION_PLATE: DeferredHolder<BlockEntityType<*>, BlockEntityType<ExtractionPlateBlockEntity>> =
+		register("extraction_plate", ::ExtractionPlateBlockEntity, ModBlocks.EXTRACTION_PLATE)
 
 	init {
 		BLOCK_ENTITY_REGISTRY.addAlias(

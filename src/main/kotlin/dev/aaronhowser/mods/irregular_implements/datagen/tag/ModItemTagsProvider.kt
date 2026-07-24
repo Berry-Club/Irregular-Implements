@@ -216,9 +216,6 @@ class ModItemTagsProvider(
 				ModBlocks.POTION_VAPORIZER.asItem(),
 				ModBlocks.ADVANCED_REDSTONE_REPEATER.asItem(),
 				ModBlocks.PROCESSING_PLATE.asItem(),
-				ModBlocks.FILTERED_REDIRECTOR_PLATE.asItem(),
-				ModBlocks.REDSTONE_PLATE.asItem(),
-				ModBlocks.EXTRACTION_PLATE.asItem(),
 				ModBlocks.ANCIENT_BRICK.asItem()
 			)
 	}

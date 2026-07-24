@@ -265,7 +265,8 @@ object ModBlocks : AaronBlockRegistry() {
 		registerBlock("bouncy_plate", ::BouncyPlateBlock)
 	val COLLECTION_PLATE: DeferredBlock<CollectionPlateBlock> =
 		registerBlock("collection_plate", ::CollectionPlateBlock)
-	val EXTRACTION_PLATE = basicBlock("extraction_plate")
+	val EXTRACTION_PLATE: DeferredBlock<ExtractionPlateBlock> =
+		registerBlock("extraction_plate", ::ExtractionPlateBlock)
 
 	// Platform
 	val OAK_PLATFORM: DeferredBlock<PlatformBlock> =
