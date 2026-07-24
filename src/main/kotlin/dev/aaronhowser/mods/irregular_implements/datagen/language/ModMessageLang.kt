@@ -56,6 +56,7 @@ object ModMessageLang {
 	const val RED_STRENGTH = "message.irregular_implements.advanced_redstone_torch.red_strength"
 	const val SPECTRE_COMMAND_GET = "command.irregular_implements.spectre_energy.get"
 	const val SPECTRE_COMMAND_SET = "command.irregular_implements.spectre_energy.set"
+	const val EXTRACTION_PLATE_INPUT_DIRECTION = "message.irregular_implements.extraction_plate.input_direction"
 
 	fun add(provider: ModLanguageProvider) {
 		provider.apply {
@@ -113,6 +114,7 @@ object ModMessageLang {
 			add(RED_STRENGTH, "Red Strength")
 			add(SPECTRE_COMMAND_GET, "%s has %s FE in their Spectre Energy buffer.")
 			add(SPECTRE_COMMAND_SET, "Set %s's Spectre Energy buffer to %s FE.")
+			add(EXTRACTION_PLATE_INPUT_DIRECTION, "Extraction Plate input: %s")
 		}
 	}
 

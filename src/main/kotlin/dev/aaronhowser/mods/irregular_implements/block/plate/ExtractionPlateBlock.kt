@@ -1,7 +1,11 @@
 package dev.aaronhowser.mods.irregular_implements.block.plate
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDirectionName
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.status
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.toVec3
 import dev.aaronhowser.mods.irregular_implements.block_entity.ExtractionPlateBlockEntity
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
+import dev.aaronhowser.mods.irregular_implements.datagen.language.ModMessageLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -9,8 +13,8 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.BaseEntityBlock
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
@@ -47,15 +51,33 @@ class ExtractionPlateBlock : BasePlateBlock(), EntityBlock {
 		player: Player,
 		hitResult: BlockHitResult
 	): InteractionResult {
+		if (player.isSecondaryUseActive) {
+			return cycleInput(level, pos, state, player)
+		}
+
 		if (hitResult.direction != Direction.UP) return InteractionResult.PASS
 
 		val center = pos.toVec3().add(0.5, 0.0, 0.5)
 		val delta = center.vectorTo(hitResult.location)
 		val clickedDirection = Direction.getNearest(delta.x, 0.0, delta.z)
-		val property = if (player.isSecondaryUseActive) INPUT else OUTPUT
 
 		if (!level.isClientSide) {
-			level.setBlockAndUpdate(pos, state.setValue(property, clickedDirection))
+			level.setBlockAndUpdate(pos, state.setValue(OUTPUT, clickedDirection))
+		}
+
+		return InteractionResult.sidedSuccess(level.isClientSide)
+	}
+
+	private fun cycleInput(level: Level, pos: BlockPos, state: BlockState, player: Player): InteractionResult {
+		val currentInput = state.getValue(INPUT)
+		val nextInput = INPUT_CYCLE[(INPUT_CYCLE.indexOf(currentInput) + 1) % INPUT_CYCLE.size]
+
+		if (!level.isClientSide) {
+			level.setBlockAndUpdate(pos, state.setValue(INPUT, nextInput))
+			player.status(
+				ModMessageLang.EXTRACTION_PLATE_INPUT_DIRECTION
+					.toComponent(nextInput.getDirectionName())
+			)
 		}
 
 		return InteractionResult.sidedSuccess(level.isClientSide)
@@ -78,8 +100,17 @@ class ExtractionPlateBlock : BasePlateBlock(), EntityBlock {
 	}
 
 	companion object {
-		val INPUT: DirectionProperty = DirectionProperty.create("input", Direction.Plane.HORIZONTAL)
+		val INPUT: DirectionProperty = DirectionProperty.create("input")
 		val OUTPUT: DirectionProperty = DirectionProperty.create("output", Direction.Plane.HORIZONTAL)
+
+		private val INPUT_CYCLE = listOf(
+			Direction.NORTH,
+			Direction.EAST,
+			Direction.SOUTH,
+			Direction.WEST,
+			Direction.UP,
+			Direction.DOWN
+		)
 	}
 
 }

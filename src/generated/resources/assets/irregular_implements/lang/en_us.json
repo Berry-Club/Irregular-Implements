@@ -513,6 +513,7 @@
   "message.irregular_implements.entity_detector.filter.monster": "Monsters",
   "message.irregular_implements.entity_detector.filter.player": "Players",
   "message.irregular_implements.escape_rope_handler.progress": "Checked %s blocks",
+  "message.irregular_implements.extraction_plate.input_direction": "Extraction Plate input: %s",
   "message.irregular_implements.fe_ratio": "%s FE / %s FE",
   "message.irregular_implements.floo_brick.already_at": "You are already at %s.",
   "message.irregular_implements.floo_brick.broken": "Bugged fireplace; please break and replace it.",

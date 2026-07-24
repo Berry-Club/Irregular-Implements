@@ -1,5 +1,40 @@
 {
   "variants": {
+    "input=down,output=east": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output",
+        "y": 90
+      }
+    ],
+    "input=down,output=north": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output"
+      }
+    ],
+    "input=down,output=south": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output",
+        "y": 180
+      }
+    ],
+    "input=down,output=west": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output",
+        "y": 270
+      }
+    ],
     "input=east,output=east": [
       {
         "model": "irregular_implements:block/extraction_plate"
@@ -97,6 +132,41 @@
       }
     ],
     "input=south,output=west": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output",
+        "y": 270
+      }
+    ],
+    "input=up,output=east": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output",
+        "y": 90
+      }
+    ],
+    "input=up,output=north": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output"
+      }
+    ],
+    "input=up,output=south": [
+      {
+        "model": "irregular_implements:block/extraction_plate"
+      },
+      {
+        "model": "irregular_implements:block/extraction_plate_output",
+        "y": 180
+      }
+    ],
+    "input=up,output=west": [
       {
         "model": "irregular_implements:block/extraction_plate"
       },
