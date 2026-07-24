@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.irregular_implements.client.render.*
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.CustomCraftingTableBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.DiaphanousBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpecialChestBEWLR
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.SpecialChestRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.bewlr.SpectreIlluminatorBEWLR
 import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.*
 import dev.aaronhowser.mods.irregular_implements.client.render.entity.*
@@ -20,7 +21,6 @@ import dev.aaronhowser.mods.irregular_implements.registry.*
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.BiomeColors
-import net.minecraft.client.renderer.blockentity.ChestRenderer
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.entity.NoopRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
@@ -241,8 +241,8 @@ object ClientEvents {
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), ::DiaphanousBER)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.SPECTRE_ENERGY_INJECTOR.get(), ::SpectreEnergyInjectorBER)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUSTOM_CRAFTING_TABLE.get(), ::CustomCraftingTableBER)
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.NATURE_CHEST.get(), ::ChestRenderer)
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.WATER_CHEST.get(), ::ChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.NATURE_CHEST.get(), ::SpecialChestRenderer)
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.WATER_CHEST.get(), ::SpecialChestRenderer)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.PLAYER_INTERFACE.get(), ::PlayerInterfaceBER)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.BIOME_RADAR.get(), ::BiomeRadarBER)
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.INVENTORY_REROUTER.get(), ::InventoryRerouterBER)
