@@ -8,11 +8,7 @@ import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDirectionName
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.particle
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
-import dev.aaronhowser.mods.irregular_implements.block.plate.DirectionalAcceleratorPlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.ExtractionPlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.FilteredRedirectorPlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.RedstonePlateBlock
-import dev.aaronhowser.mods.irregular_implements.block.plate.RedirectorPlateBlock
+import dev.aaronhowser.mods.irregular_implements.block.plate.*
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Direction
@@ -1814,26 +1810,23 @@ class ModBlockStateProvider(
 
 	private fun filteredRedirectorPlate() {
 		val block = ModBlocks.FILTERED_REDIRECTOR_PLATE.get()
-		val baseModel = models()
-			.pressurePlate(name(block), modLoc("block/plate/filtered_redirector/base"))
-			.renderType(RenderType.cutout().name)
-		val leftModel = models()
-			.pressurePlate(name(block) + "_left", modLoc("block/plate/filtered_redirector/left"))
-			.renderType(RenderType.cutout().name)
-		val rightModel = models()
-			.pressurePlate(name(block) + "_right", modLoc("block/plate/filtered_redirector/right"))
+		val model = models()
+			.pressurePlate(name(block), modLoc("block/plate/filtered_redirector"))
 			.renderType(RenderType.cutout().name)
 
-		getVariantBuilder(block).forAllStates { state ->
-			val rotation = horizontalRotation(state.getValue(FilteredRedirectorPlateBlock.INPUT))
-			arrayOf(
-				ConfiguredModel(baseModel, 0, rotation, false),
-				ConfiguredModel(leftModel, 0, rotation, false),
-				ConfiguredModel(rightModel, 0, rotation, false)
-			)
-		}
+		getVariantBuilder(block)
+			.forAllStates { state ->
+				arrayOf(
+					ConfiguredModel(
+						model,
+						0,
+						horizontalRotation(state.getValue(FilteredRedirectorPlateBlock.FACING)),
+						false
+					)
+				)
+			}
 
-		simpleBlockItem(block, baseModel)
+		simpleBlockItem(block, model)
 	}
 
 	private fun redstonePlate() {

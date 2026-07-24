@@ -1,57 +1,19 @@
 {
   "variants": {
-    "input=east": [
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate",
-        "y": 90
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_left",
-        "y": 90
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_right",
-        "y": 90
-      }
-    ],
-    "input=north": [
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate"
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_left"
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_right"
-      }
-    ],
-    "input=south": [
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate",
-        "y": 180
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_left",
-        "y": 180
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_right",
-        "y": 180
-      }
-    ],
-    "input=west": [
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate",
-        "y": 270
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_left",
-        "y": 270
-      },
-      {
-        "model": "irregular_implements:block/filtered_redirector_plate_right",
-        "y": 270
-      }
-    ]
+    "facing=east": {
+      "model": "irregular_implements:block/filtered_redirector_plate",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "irregular_implements:block/filtered_redirector_plate"
+    },
+    "facing=south": {
+      "model": "irregular_implements:block/filtered_redirector_plate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irregular_implements:block/filtered_redirector_plate",
+      "y": 270
+    }
   }
 }

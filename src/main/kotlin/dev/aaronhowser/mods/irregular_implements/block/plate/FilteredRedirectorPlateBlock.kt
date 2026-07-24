@@ -19,15 +19,15 @@ import net.minecraft.world.phys.BlockHitResult
 class FilteredRedirectorPlateBlock : BasePlateBlock(), EntityBlock {
 
 	init {
-		registerDefaultState(defaultBlockState().setValue(INPUT, Direction.NORTH))
+		registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH))
 	}
 
 	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-		builder.add(INPUT)
+		builder.add(FACING)
 	}
 
 	override fun getStateForPlacement(context: BlockPlaceContext): BlockState {
-		return defaultBlockState().setValue(INPUT, context.horizontalDirection.opposite)
+		return defaultBlockState().setValue(FACING, context.horizontalDirection)
 	}
 
 	override fun useWithoutItem(
@@ -46,13 +46,13 @@ class FilteredRedirectorPlateBlock : BasePlateBlock(), EntityBlock {
 
 	override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
 		val entry = PlateMovement.getEntryDirection(pos, entity) ?: return
-		val input = state.getValue(INPUT)
-		if (entry != input && entry != input.opposite) return
+		val facing = state.getValue(FACING)
+		if (entry != facing && entry != facing.opposite) return
 
 		val blockEntity = level.getBlockEntity(pos) as? FilteredRedirectorPlateBlockEntity ?: return
 		val output = when {
-			blockEntity.matchesFilter(0, entity) -> input.clockWise
-			blockEntity.matchesFilter(1, entity) -> input.counterClockWise
+			blockEntity.matchesFilter(0, entity) -> facing.counterClockWise
+			blockEntity.matchesFilter(1, entity) -> facing.clockWise
 			else -> entry.opposite
 		}
 
@@ -64,7 +64,7 @@ class FilteredRedirectorPlateBlock : BasePlateBlock(), EntityBlock {
 	}
 
 	companion object {
-		val INPUT: DirectionProperty = DirectionProperty.create("input", Direction.Plane.HORIZONTAL)
+		val FACING: DirectionProperty = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL)
 	}
 
 }
