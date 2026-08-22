@@ -175,7 +175,7 @@ object CommonEvents {
 
 	@SubscribeEvent
 	fun onServerAboutToStart(event: ServerAboutToStartEvent) {
-		VillageAdditions.addNewVillageBuildings(event)
+		VillageAdditions.addPeaceCandleProcessors(event)
 	}
 
 	@SubscribeEvent

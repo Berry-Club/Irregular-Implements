@@ -3,10 +3,12 @@
 ### Changed
 
 - You can now compost Beans (#81)
+- Peace Candle Village generation can now be configured at startup
 
 ### Fixed
 
 - Restored the Peace Candle's model
+- Peace Candles now replace Brewing Stands in one third of Village Temples
 - Compasses are no longer too large when held (#61)
 - You can now fill Glass Bottles from Pitcher Plants (#82)
 

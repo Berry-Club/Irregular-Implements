@@ -296,7 +296,7 @@
   "info.irregular_implements.obsidian_skull_ring": "Works like the Obsidian Skull, but can be worn as a Curio.",
   "info.irregular_implements.obsidian_water_walking_boots": "Combines the effects of the Obsidian Skull and Water Walking Boots.",
   "info.irregular_implements.online_detector": "Emits a Redstone signal if the specified player is online.",
-  "info.irregular_implements.peace_candle": "Prevents natural mob spawns in a 3 chunk radius.\n\nCan be found in roughly half of Villager Temples.",
+  "info.irregular_implements.peace_candle": "Prevents natural mob spawns in a 3 chunk radius.\n\nReplaces the Brewing Stand in one third of Village Temples.",
   "info.irregular_implements.pitcher_plant": "Acts as an infinite water source.\n\nSlowly fills adjacent fluid containers.",
   "info.irregular_implements.platform": "Only solid to non-sneaking entities.",
   "info.irregular_implements.player_filter": "Acts like an Entity Filter, but specifically for the player set.\n\nSet by using it in your hand.",

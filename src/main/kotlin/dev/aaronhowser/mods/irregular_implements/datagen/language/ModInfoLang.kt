@@ -64,7 +64,7 @@ object ModInfoLang {
 		addInfo(ModBlocks.RETURNING_BLOCK_OF_STICKS, "Works like a Block of Sticks, but teleports itself to the nearest player after breaking.")
 		addInfo(ModBlocks.INVENTORY_REROUTER, "Each side can be configured to \"point\" to one side of the block in front.\n\nFor example, setting this block's bottom face to \"U\" will and then inserting items into it will try to insert those items into the top face of the block in front of it.\n\nAlso allows for extracting.")
 		addInfo(ModBlocks.SLIME_CUBE, "Causes Slimes to spawn in great numbers in the chunk its in.\n\nWhen powered, it instead prevents Slimes from spawning in the chunk.")
-		addInfo(ModBlocks.PEACE_CANDLE, "Prevents natural mob spawns in a 3 chunk radius.\n\nCan be found in roughly half of Villager Temples.")
+		addInfo(ModBlocks.PEACE_CANDLE, "Prevents natural mob spawns in a 3 chunk radius.\n\nReplaces the Brewing Stand in one third of Village Temples.")
 		addInfo(ModBlocks.NOTIFICATION_INTERFACE, "Sends a configurable toast notification to the block's owner when a Redstone signal is received.")
 		addInfo(ModBlocks.INVENTORY_TESTER, "When placed on an inventory, constantly simulates attempting to insert a configured Item Stack.\n\nIf the simulation would succeed, it emits a Redstone signal. You can invert this behavior.")
 		addInfo(ModBlocks.GLOBAL_CHAT_DETECTOR, "Emits a redstone pulse if any player sends a chat message containing the specified text.\n\nCan have a player whitelist using Player Filterss.")

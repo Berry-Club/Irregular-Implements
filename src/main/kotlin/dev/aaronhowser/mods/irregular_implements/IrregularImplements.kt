@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements
 
 import dev.aaronhowser.mods.irregular_implements.config.ClientConfig
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.config.StartupConfig
 import dev.aaronhowser.mods.irregular_implements.registry.ModRegistries
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.fml.ModContainer
@@ -36,6 +37,7 @@ class IrregularImplements(
 
 		modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.CONFIG_SPEC)
 		modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.CONFIG_SPEC)
+		modContainer.registerConfig(ModConfig.Type.STARTUP, StartupConfig.CONFIG_SPEC)
 	}
 
 }
