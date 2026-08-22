@@ -366,6 +366,7 @@
   "irregular_implements.configuration.chargerEnder": "Ender Charger Rate",
   "irregular_implements.configuration.chargerGenesis": "Genesis Charger Rate",
   "irregular_implements.configuration.chargerRedstone": "Redstone Charger Rate",
+  "irregular_implements.configuration.collapseInvertsControls": "Collapse Inverts Controls",
   "irregular_implements.configuration.collapseInvertsMouse": "Collapse Inverts Mouse",
   "irregular_implements.configuration.diviningRodCheckRadius": "Divining Rod Check Radius",
   "irregular_implements.configuration.enderRate": "Ender Coil Rate",

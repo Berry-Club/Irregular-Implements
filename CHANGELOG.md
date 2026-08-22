@@ -1,3 +1,9 @@
+# 1.12.0
+
+### Changed
+
+- You can now compost Beans (#81)
+
 # 1.11.0
 
 ### Added

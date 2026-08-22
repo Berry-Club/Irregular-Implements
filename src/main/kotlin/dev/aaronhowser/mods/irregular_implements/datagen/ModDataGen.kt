@@ -50,6 +50,10 @@ object ModDataGen {
 			event.includeServer(),
 			ModGlobalLootModifierProvider(output, lookupProvider)
 		)
+		generator.addProvider(
+			event.includeServer(),
+			ModDataMapProvider(output, lookupProvider)
+		)
 
 		generator.addProvider(
 			event.includeClient(),
