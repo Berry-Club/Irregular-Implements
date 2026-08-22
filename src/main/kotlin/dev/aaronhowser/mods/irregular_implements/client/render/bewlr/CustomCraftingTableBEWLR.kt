@@ -1,17 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.client.render.bewlr
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.aaronhowser.mods.aaron.client.render.AaronRenderUtil
 import dev.aaronhowser.mods.aaron.misc.AaronDsls.withPose
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.BOTTOM
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SAW_AND_HAMMER
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.SCISSORS
-import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER.Companion.TOP
+import dev.aaronhowser.mods.irregular_implements.client.render.block_entity.CustomCraftingTableBER
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Blocks
@@ -21,6 +17,8 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 	Minecraft.getInstance().blockEntityRenderDispatcher,
 	Minecraft.getInstance().entityModels
 ) {
+
+	val itemRenderer: ItemRenderer = Minecraft.getInstance().itemRenderer
 
 	override fun renderByItem(
 		stack: ItemStack,
@@ -35,64 +33,17 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 			.asItem()
 			.defaultInstance
 
-		renderCraftingTableOverlay(poseStack, displayContext, itemToRender, packedLight, packedOverlay)
-
-		renderBaseItem(
-			poseStack,
-			buffer,
-			displayContext,
-			itemToRender,
-			packedLight,
-			packedOverlay,
-		)
-	}
-
-	//TODO: It's translated incorrectly
-	private fun renderCraftingTableOverlay(
-		poseStack: PoseStack,
-		displayContext: ItemDisplayContext,
-		itemToRender: ItemStack,
-		packedLight: Int,
-		packedOverlay: Int
-	) {
 		poseStack.withPose {
-			Minecraft.getInstance()
-				.itemRenderer
+			itemRenderer
 				.getModel(itemToRender, null, null, 0)
 				.applyTransform(displayContext, poseStack, false)
 
-			AaronRenderUtil.renderTexturedCube(
-				poseStack,
-				RenderType.cutout(),
-				TOP, BOTTOM,
-				SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
-				packedLight, packedOverlay
-			)
-		}
-	}
+			poseStack.withPose {
+				poseStack.translate(0.5f, 0.5f, 0.5f)
 
-	private fun renderBaseItem(
-		poseStack: PoseStack,
-		buffer: MultiBufferSource,
-		displayContext: ItemDisplayContext,
-		itemToRender: ItemStack,
-		packedLight: Int,
-		packedOverlay: Int,
-	) {
-		poseStack.withPose {
-
-			poseStack.translate(-0.5, -0.5, -0.5)
-			poseStack.scale(0.999f, 0.999f, 0.999f)
-			poseStack.translate(0.5, 0.5, 0.5)
-
-			poseStack.translate(0.0005f, 0.0005f, 0.0005f)
-			poseStack.translate(0.5, 0.5, 0.5)
-
-			Minecraft.getInstance()
-				.itemRenderer
-				.renderStatic(
+				itemRenderer.renderStatic(
 					itemToRender,
-					displayContext,
+					ItemDisplayContext.NONE,
 					packedLight,
 					packedOverlay,
 					poseStack,
@@ -100,6 +51,14 @@ class CustomCraftingTableBEWLR : BlockEntityWithoutLevelRenderer(
 					null,
 					0,
 				)
+			}
+
+			CustomCraftingTableBER.renderOverlay(
+				poseStack,
+				buffer,
+				packedLight,
+				packedOverlay,
+			)
 		}
 	}
 

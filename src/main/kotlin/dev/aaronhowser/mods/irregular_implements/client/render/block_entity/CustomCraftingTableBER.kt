@@ -23,27 +23,16 @@ class CustomCraftingTableBER(
 		packedLight: Int,
 		packedOverlay: Int
 	) {
-		AaronRenderUtil.renderTexturedCube(
+		@Suppress("DEPRECATION")
+		context.blockRenderDispatcher.renderSingleBlock(
+			blockEntity.renderedBlockState,
 			poseStack,
-			RenderType.cutout(),
-			TOP, BOTTOM,
-			SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
-			packedLight, packedOverlay
+			bufferSource,
+			packedLight,
+			packedOverlay,
 		)
 
-		poseStack.withPose {
-			poseStack.scale(0.999f, 0.999f, 0.999f)
-			poseStack.translate(0.0005f, 0.0005f, 0.0005f)
-
-			@Suppress("DEPRECATION")
-			context.blockRenderDispatcher.renderSingleBlock(
-				blockEntity.renderedBlockState,
-				poseStack,
-				bufferSource,
-				packedLight,
-				packedOverlay,
-			)
-		}
+		renderOverlay(poseStack, bufferSource, packedLight, packedOverlay)
 	}
 
 	companion object {
@@ -51,6 +40,27 @@ class CustomCraftingTableBER(
 		val TOP = OtherUtil.modResource("block/custom_crafting_table/top")
 		val SAW_AND_HAMMER = OtherUtil.modResource("block/custom_crafting_table/saw_and_hammer")
 		val SCISSORS = OtherUtil.modResource("block/custom_crafting_table/scissors")
+
+		fun renderOverlay(
+			poseStack: PoseStack,
+			bufferSource: MultiBufferSource,
+			packedLight: Int,
+			packedOverlay: Int,
+		) {
+			poseStack.withPose {
+				poseStack.translate(-0.0005f, -0.0005f, -0.0005f)
+				poseStack.scale(1.001f, 1.001f, 1.001f)
+
+				AaronRenderUtil.renderTexturedCube(
+					poseStack,
+					bufferSource,
+					RenderType.cutout(),
+					TOP, BOTTOM,
+					SAW_AND_HAMMER, SCISSORS, SCISSORS, SAW_AND_HAMMER,
+					packedLight, packedOverlay
+				)
+			}
+		}
 	}
 
 }
