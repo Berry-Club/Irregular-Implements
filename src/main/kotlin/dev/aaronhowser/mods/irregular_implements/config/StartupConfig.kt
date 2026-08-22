@@ -9,6 +9,7 @@ class StartupConfig(
 ) {
 
 	lateinit var peaceCandleVillageTemplatePools: ModConfigSpec.ConfigValue<List<String>>
+	lateinit var peaceCandleVillageReplacementChance: ModConfigSpec.DoubleValue
 
 	init {
 		peaceCandleVillageGeneration()
@@ -17,6 +18,10 @@ class StartupConfig(
 	}
 
 	private fun peaceCandleVillageGeneration() {
+		peaceCandleVillageReplacementChance = builder
+			.comment("The chance that a Brewing Stand in a configured Village Template Pool is replaced with a Peace Candle.")
+			.defineInRange("peaceCandleVillageReplacementChance", 1.0 / 3.0, 0.0, 1.0)
+
 		peaceCandleVillageTemplatePools = builder
 			.comment("The Village Template Pools whose Brewing Stands may be replaced with Peace Candles. Leave empty to disable generation.")
 			.defineListAllowEmpty(

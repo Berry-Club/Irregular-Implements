@@ -33,15 +33,21 @@ object VillageAdditions {
 			.get()
 			.distinct()
 
+		val replacementChance = StartupConfig.CONFIG
+			.peaceCandleVillageReplacementChance
+			.get()
+			.toFloat()
+
 		for (poolId in poolIds) {
 			val poolLocation = ResourceLocation.parse(poolId)
-			addProcessorsToPool(templatePoolRegistry, poolLocation)
+			addProcessorsToPool(templatePoolRegistry, poolLocation, replacementChance)
 		}
 	}
 
 	private fun addProcessorsToPool(
 		templatePoolRegistry: Registry<StructureTemplatePool>,
-		poolLocation: ResourceLocation
+		poolLocation: ResourceLocation,
+		replacementChance: Float
 	) {
 		val pool = templatePoolRegistry.get(poolLocation)
 
@@ -61,7 +67,7 @@ object VillageAdditions {
 				continue
 			}
 
-			val processedElement = addPeaceCandleProcessor(legacyElement)
+			val processedElement = addPeaceCandleProcessor(legacyElement, replacementChance)
 			processedTemplates.add(Pair(processedElement, entry.second))
 		}
 
@@ -75,7 +81,10 @@ object VillageAdditions {
 		}
 	}
 
-	private fun addPeaceCandleProcessor(element: LegacySinglePoolElement): StructurePoolElement {
+	private fun addPeaceCandleProcessor(
+		element: LegacySinglePoolElement,
+		replacementChance: Float
+	): StructurePoolElement {
 		val structureProcessors = element
 			.processors
 			.value()
@@ -83,7 +92,7 @@ object VillageAdditions {
 			.toMutableList()
 
 		val brewingStandReplacementRule = ProcessorRule(
-			RandomBlockMatchTest(Blocks.BREWING_STAND, 1f / 3f),
+			RandomBlockMatchTest(Blocks.BREWING_STAND, replacementChance),
 			AlwaysTrueTest.INSTANCE,
 			ModBlocks.PEACE_CANDLE.get().defaultBlockState()
 		)
