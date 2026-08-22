@@ -21,8 +21,8 @@ class ModDataPackProvider(
 			.add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
 			.add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
-			.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
-			.add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem)
+			.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapDimensionTypes)
+			.add(Registries.LEVEL_STEM, ModDimensions::bootstrapLevelStems)
 			.add(Registries.BIOME, ModBiomes::bootstrap)
 	}
 

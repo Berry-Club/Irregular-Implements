@@ -9,6 +9,7 @@
 
 - Restored the Peace Candle's model
 - Peace Candles now replace Brewing Stands in one third of Village Temples
+- The skybox in the Spectre Dimension is no longer weird (#40)
 - Compasses are no longer too large when held (#61)
 - You can now fill Glass Bottles from Pitcher Plants (#82)
 

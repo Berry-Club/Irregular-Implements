@@ -326,7 +326,7 @@ object ClientEvents {
 
 	@SubscribeEvent
 	fun registerDimensionSpecialEffects(event: RegisterDimensionSpecialEffectsEvent) {
-		event.register(ModDimensions.SPECTRE_RL, SpectreSpecialEffects())
+		event.register(ModDimensions.SPECTRE_ID, SpectreSpecialEffects())
 	}
 
 	@SubscribeEvent
