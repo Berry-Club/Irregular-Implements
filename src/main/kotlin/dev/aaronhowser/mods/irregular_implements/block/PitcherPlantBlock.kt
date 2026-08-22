@@ -1,17 +1,24 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.util.RandomSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemUtils
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.alchemy.PotionContents
+import net.minecraft.world.item.alchemy.Potions
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
@@ -20,6 +27,7 @@ import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.BucketPickup
 import net.minecraft.world.level.block.FlowerBlock
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.BlockHitResult
 import net.neoforged.neoforge.capabilities.Capabilities
@@ -54,10 +62,22 @@ class PitcherPlantBlock : FlowerBlock(
 		hand: InteractionHand,
 		hitResult: BlockHitResult
 	): ItemInteractionResult {
+		if (stack.isItem(Items.GLASS_BOTTLE)) {
+			if (!level.isClientSide) {
+				val waterBottle = PotionContents.createItemStack(Items.POTION, Potions.WATER)
+				player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, waterBottle))
+
+				level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS)
+				level.gameEvent(player, GameEvent.FLUID_PICKUP, pos)
+			}
+
+			return ItemInteractionResult.SUCCESS
+		}
+
 		if (level.isClientSide) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
-		val usedStack = player.getItemInHand(hand)
-		val fluidCap = usedStack.getCapability(Capabilities.FluidHandler.ITEM) ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+		val fluidCap = stack.getCapability(Capabilities.FluidHandler.ITEM)
+			?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 
 		val amountThatFits = fluidCap.fill(FluidStack(Fluids.WATER, ServerConfig.CONFIG.pitcherPlantUseFillAmount.get()), IFluidHandler.FluidAction.SIMULATE)
 		fluidCap.fill(FluidStack(Fluids.WATER, amountThatFits), IFluidHandler.FluidAction.EXECUTE)
