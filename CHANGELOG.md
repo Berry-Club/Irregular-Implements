@@ -12,6 +12,7 @@
 - The skybox in the Spectre Dimension is no longer weird (#40)
 - Compasses are no longer too large when held (#61)
 - You can now fill Glass Bottles from Pitcher Plants (#82)
+- Tried, and failed, to fix the Custom Crafting Table's renderer
 
 # 1.11.0
 
