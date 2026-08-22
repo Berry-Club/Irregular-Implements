@@ -9,7 +9,6 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
 
 class BlockTeleporterMenu(
 	containerId: Int,
@@ -32,10 +31,6 @@ class BlockTeleporterMenu(
 		//TODO: Add a Location Filter outline to the slot background
 		val slot = FilteredSlot(blockTeleporterContainer, 0, 80, 18) { it.has(ModDataComponents.GLOBAL_POS) }
 		addSlot(slot)
-	}
-
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		return ItemStack.EMPTY
 	}
 
 	override fun stillValid(player: Player): Boolean {
