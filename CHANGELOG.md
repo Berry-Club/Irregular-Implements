@@ -5,6 +5,7 @@
 - You can now compost Beans (#81)
 - Peace Candle Village template pools and replacement chance can now be configured at startup
 - You can now fill Glass Bottles from Pitcher Plants (#82)
+- Block Teleporters and Collection Plates now provide sound feedback when they operate
 
 ### Fixed
 

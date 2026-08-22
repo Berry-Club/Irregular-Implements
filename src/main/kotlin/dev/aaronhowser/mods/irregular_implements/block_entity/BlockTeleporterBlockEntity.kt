@@ -17,6 +17,8 @@ import net.minecraft.core.GlobalPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -31,21 +33,37 @@ class BlockTeleporterBlockEntity(
 
 	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
 
-	//TODO: Sound on either succeed or fail
 	fun swapBlocks(): Boolean {
 		if (level?.isClientSide.isTrue()) return false
 
-		val stateToSend = getMyTargetBlockState() ?: return false
-		val stateToReceive = getLinkedBlockTeleporter()?.getMyTargetBlockState() ?: return false
+		val stateToSend = getMyTargetBlockState() ?: return finishSwap(false)
+		val linkedBlockTeleporter = getLinkedBlockTeleporter() ?: return finishSwap(false)
+		val stateToReceive = linkedBlockTeleporter.getMyTargetBlockState() ?: return finishSwap(false)
 
-		if (!placeBlockState(stateToReceive)) return false
-		if (getLinkedBlockTeleporter()?.placeBlockState(stateToSend).isNotTrue()) {
+		if (!placeBlockState(stateToReceive)) return finishSwap(false)
+		if (linkedBlockTeleporter.placeBlockState(stateToSend).isNotTrue()) {
 			// If we can't place the target block state, revert our own placement
 			placeBlockState(stateToSend)
-			return false
+			return finishSwap(false)
 		}
 
-		return true
+		return finishSwap(true)
+	}
+
+	private fun finishSwap(succeeded: Boolean): Boolean {
+		val level = level ?: return succeeded
+		val sound = if (succeeded) SoundEvents.ENDERMAN_TELEPORT else SoundEvents.DISPENSER_FAIL
+
+		level.playSound(
+			null,
+			worldPosition,
+			sound,
+			SoundSource.BLOCKS,
+			1f,
+			1f
+		)
+
+		return succeeded
 	}
 
 	private fun placeBlockState(stateToPlace: BlockState): Boolean {
