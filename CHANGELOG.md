@@ -4,6 +4,7 @@
 
 - You can now compost Beans (#81)
 - Peace Candle Village template pools and replacement chance can now be configured at startup
+- You can now fill Glass Bottles from Pitcher Plants (#82)
 
 ### Fixed
 
@@ -11,7 +12,6 @@
 - Peace Candles now replace Brewing Stands in one third of Village Temples (#23)
 - The skybox in the Spectre Dimension is no longer weird (#40)
 - Compasses are no longer too large when held (#61)
-- You can now fill Glass Bottles from Pitcher Plants (#82)
 - Tried, and failed, to fix the Custom Crafting Table's renderer
 
 # 1.11.0
