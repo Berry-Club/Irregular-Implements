@@ -9,7 +9,6 @@ import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.ItemStack
 
 class AutoPlacerMenu(
 	containerId: Int,
@@ -31,11 +30,6 @@ class AutoPlacerMenu(
 	override fun addContainerSlots() {
 		val slot = FilteredSlot(autoPlacerContainer, 0, 80, 35) { it.item is BlockItem }
 		addSlot(slot)
-	}
-
-	//TODO
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		return ItemStack.EMPTY
 	}
 
 	override fun stillValid(player: Player): Boolean {

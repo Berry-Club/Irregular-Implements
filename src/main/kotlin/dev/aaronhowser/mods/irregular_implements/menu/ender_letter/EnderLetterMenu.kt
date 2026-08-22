@@ -1,15 +1,17 @@
 package dev.aaronhowser.mods.irregular_implements.menu.ender_letter
 
+import dev.aaronhowser.mods.aaron.menu.HeldItemMenu
 import dev.aaronhowser.mods.aaron.menu.MenuWithStrings
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.aaron.packet.s2c.UpdateClientScreenString
 import dev.aaronhowser.mods.aaron.scheduler.SchedulerExtensions.scheduleTaskInTicks
 import dev.aaronhowser.mods.irregular_implements.item.component.EnderLetterContentsDataComponent
-import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -21,13 +23,21 @@ import kotlin.jvm.optionals.getOrNull
 
 class EnderLetterMenu(
 	containerId: Int,
-	playerInventory: Inventory
-) : HeldItemContainerMenu(
-	ModItems.ENDER_LETTER,
+	playerInventory: Inventory,
+	usedHand: InteractionHand
+) : HeldItemMenu(
 	ModMenuTypes.ENDER_LETTER.get(),
 	containerId,
-	playerInventory
+	playerInventory,
+	usedHand
 ), MenuWithStrings {
+
+	constructor(containerId: Int, playerInventory: Inventory, data: RegistryFriendlyByteBuf) :
+			this(containerId, playerInventory, data.readEnum(InteractionHand::class.java))
+
+	private fun getHeldItemStack(): ItemStack = playerInventory.player.getItemInHand(usedHand)
+
+	override fun isValidHeldItem(heldItem: ItemStack): Boolean = heldItem.isItem(ModItems.ENDER_LETTER)
 
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
@@ -62,12 +72,8 @@ class EnderLetterMenu(
 		}
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+	override fun quickMoveStack(player: Player, slotIndex: Int): ItemStack {
 		return ItemStack.EMPTY
-	}
-
-	override fun stillValid(player: Player): Boolean {
-		return player.getItemInHand(hand).isItem(ModItems.ENDER_LETTER)
 	}
 
 	private var recipientName: String = ""

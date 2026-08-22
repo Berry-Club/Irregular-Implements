@@ -3,24 +3,22 @@ package dev.aaronhowser.mods.irregular_implements.item
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toComponent
 import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneMenu
 import net.minecraft.core.component.DataComponents
-import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.MenuProvider
+import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.SlotAccess
-import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ClickAction
+import net.minecraft.world.inventory.MenuConstructor
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemContainerContents
 import net.minecraft.world.level.Level
 
-class VoidStoneItem(properties: Properties) : Item(properties), MenuProvider {
+class VoidStoneItem(properties: Properties) : Item(properties) {
 
 	override fun overrideOtherStackedOnMe(
 		thisStack: ItemStack,
@@ -52,20 +50,16 @@ class VoidStoneItem(properties: Properties) : Item(properties), MenuProvider {
 	}
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		player.openMenu(this)
-
 		val usedStack = player.getItemInHand(usedHand)
-		return InteractionResultHolder.success(usedStack)
-	}
+		if (!level.isClientSide) {
+			val menuConstructor = MenuConstructor { containerId, playerInventory, _ ->
+				VoidStoneMenu(containerId, playerInventory, usedHand)
+			}
+			val provider = SimpleMenuProvider(menuConstructor, descriptionId.toComponent())
+			player.openMenu(provider) { data -> data.writeEnum(usedHand) }
+		}
 
-	// Menu stuff
-
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return VoidStoneMenu(containerId, playerInventory)
-	}
-
-	override fun getDisplayName(): Component {
-		return descriptionId.toComponent()
+		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
 	}
 
 	companion object {

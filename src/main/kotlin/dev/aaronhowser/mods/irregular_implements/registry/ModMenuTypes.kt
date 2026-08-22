@@ -57,6 +57,7 @@ import dev.aaronhowser.mods.irregular_implements.menu.void_stone.VoidStoneScreen
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.inventory.MenuType
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -78,7 +79,7 @@ object ModMenuTypes : AaronMenuTypesRegistry() {
 	val IGNITER: DeferredHolder<MenuType<*>, MenuType<IgniterMenu>> =
 		register("igniter", ::IgniterMenu)
 	val VOID_STONE: DeferredHolder<MenuType<*>, MenuType<VoidStoneMenu>> =
-		register("void_stone", ::VoidStoneMenu)
+		register("void_stone") { IMenuTypeExtension.create(::VoidStoneMenu) }
 	val ONLINE_DETECTOR: DeferredHolder<MenuType<*>, MenuType<OnlineDetectorMenu>> =
 		register("online_detector", ::OnlineDetectorMenu)
 	val NOTIFICATION_INTERFACE: DeferredHolder<MenuType<*>, MenuType<NotificationInterfaceMenu>> =
@@ -86,23 +87,23 @@ object ModMenuTypes : AaronMenuTypesRegistry() {
 	val IMBUING_STATION: DeferredHolder<MenuType<*>, MenuType<ImbuingStationMenu>> =
 		register("imbuing_station", ::ImbuingStationMenu)
 	val ITEM_FILTER: DeferredHolder<MenuType<*>, MenuType<ItemFilterMenu>> =
-		register("item_filter", ::ItemFilterMenu)
+		register("item_filter") { IMenuTypeExtension.create(::ItemFilterMenu) }
 	val FILTERED_PLATFORM: DeferredHolder<MenuType<*>, MenuType<FilteredPlatformMenu>> =
 		register("filtered_platform", ::FilteredPlatformMenu)
 	val DROP_FILTER: DeferredHolder<MenuType<*>, MenuType<DropFilterMenu>> =
-		register("drop_filter", ::DropFilterMenu)
+		register("drop_filter") { IMenuTypeExtension.create(::DropFilterMenu) }
 	val INVENTORY_TESTER: DeferredHolder<MenuType<*>, MenuType<InventoryTesterMenu>> =
 		register("inventory_tester", ::InventoryTesterMenu)
 	val ADVANCED_ITEM_COLLECTOR: DeferredHolder<MenuType<*>, MenuType<AdvancedItemCollectorMenu>> =
 		register("advanced_item_collector", ::AdvancedItemCollectorMenu)
 	val REDSTONE_REMOTE_EDIT: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteEditMenu>> =
-		register("redstone_remote_edit", ::RedstoneRemoteEditMenu)
+		register("redstone_remote_edit") { IMenuTypeExtension.create(::RedstoneRemoteEditMenu) }
 	val REDSTONE_REMOTE_USE: DeferredHolder<MenuType<*>, MenuType<RedstoneRemoteUseMenu>> =
-		register("redstone_remote_use", ::RedstoneRemoteUseMenu)
+		register("redstone_remote_use") { IMenuTypeExtension.create(::RedstoneRemoteUseMenu) }
 	val ENDER_ENERGY_DISTRIBUTOR: DeferredHolder<MenuType<*>, MenuType<EnderEnergyDistributorMenu>> =
 		register("ender_energy_distributor", ::EnderEnergyDistributorMenu)
 	val ENDER_LETTER: DeferredHolder<MenuType<*>, MenuType<EnderLetterMenu>> =
-		register("ender_letter", ::EnderLetterMenu)
+		register("ender_letter") { IMenuTypeExtension.create(::EnderLetterMenu) }
 	val ENDER_MAILBOX: DeferredHolder<MenuType<*>, MenuType<EnderMailboxMenu>> =
 		register("ender_mailbox", ::EnderMailboxMenu)
 	val BLOCK_TELEPORTER: DeferredHolder<MenuType<*>, MenuType<BlockTeleporterMenu>> =

@@ -8,17 +8,16 @@ import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.MenuProvider
-import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.MenuConstructor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import kotlin.jvm.optionals.getOrNull
 
-class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
+class EnderLetterItem(properties: Properties) : Item(properties) {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
 		val usedStack = player.getItemInHand(usedHand)
@@ -26,16 +25,16 @@ class EnderLetterItem(properties: Properties) : Item(properties), MenuProvider {
 			usedStack.set(ModDataComponents.ENDER_LETTER_CONTENTS, EnderLetterContentsDataComponent())
 		}
 
-		player.openMenu(this)
+		if (!level.isClientSide) {
+			val menuConstructor = MenuConstructor { containerId, playerInventory, _ ->
+				EnderLetterMenu(containerId, playerInventory, usedHand)
+			}
+			val provider = SimpleMenuProvider(menuConstructor, usedStack.hoverName)
+			player.openMenu(provider) { data -> data.writeEnum(usedHand) }
+		}
 
-		return InteractionResultHolder.success(usedStack)
+		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
 	}
-
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return EnderLetterMenu(containerId, playerInventory)
-	}
-
-	override fun getDisplayName(): Component = defaultInstance.hoverName
 
 	override fun isFoil(stack: ItemStack): Boolean {
 		return super.isFoil(stack) || stack.get(ModDataComponents.ENDER_LETTER_CONTENTS)?.sender?.getOrNull() != null

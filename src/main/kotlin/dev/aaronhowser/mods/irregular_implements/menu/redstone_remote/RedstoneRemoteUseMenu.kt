@@ -1,33 +1,44 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.aaron.menu.HeldItemMenuWithoutInventory
 import dev.aaronhowser.mods.aaron.menu.MenuWithButtons
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.handler.redstone_signal.RedstoneHandlerSavedData
-import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 
-//TODO: Quick move stack
 class RedstoneRemoteUseMenu(
 	containerId: Int,
-	playerInventory: Inventory
-) : HeldItemContainerMenu(
-	ModItems.REDSTONE_REMOTE,
+	playerInventory: Inventory,
+	usedHand: InteractionHand
+) : HeldItemMenuWithoutInventory(
 	ModMenuTypes.REDSTONE_REMOTE_USE.get(),
 	containerId,
-	playerInventory
+	usedHand
 ), MenuWithButtons {
+
+	constructor(containerId: Int, playerInventory: Inventory, data: RegistryFriendlyByteBuf) :
+			this(containerId, playerInventory, data.readEnum(InteractionHand::class.java))
+
+	private val player = playerInventory.player
+
+	fun getHeldItemStack(): ItemStack = player.getItemInHand(usedHand)
+
+	override fun isValidHeldItem(heldItem: ItemStack): Boolean = heldItem.isItem(ModItems.REDSTONE_REMOTE)
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack {
 		return ItemStack.EMPTY
 	}
 
 	override fun handleButtonPressed(buttonId: Int) {
-		val level = playerInventory.player.level() as? ServerLevel ?: return
+		val level = player.level() as? ServerLevel ?: return
 
 		val remoteDataComponent = getHeldItemStack().get(ModDataComponents.REDSTONE_REMOTE) ?: return
 		val locationFilterStack = remoteDataComponent.getLocation(buttonId)

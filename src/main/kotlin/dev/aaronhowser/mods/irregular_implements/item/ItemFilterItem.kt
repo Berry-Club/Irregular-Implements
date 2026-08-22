@@ -11,23 +11,28 @@ import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.MenuProvider
-import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.MenuConstructor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import java.util.function.Supplier
 
-class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
+class ItemFilterItem(properties: Properties) : Item(properties) {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		player.openMenu(this)
-
 		val usedStack = player.getItemInHand(usedHand)
-		return InteractionResultHolder.success(usedStack)
+		if (!level.isClientSide) {
+			val menuConstructor = MenuConstructor { containerId, playerInventory, _ ->
+				ItemFilterMenu(containerId, playerInventory, usedHand)
+			}
+			val provider = SimpleMenuProvider(menuConstructor, usedStack.hoverName)
+			player.openMenu(provider) { data -> data.writeEnum(usedHand) }
+		}
+
+		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
 	}
 
 	override fun appendHoverText(stack: ItemStack, context: TooltipContext, tooltipComponents: MutableList<Component>, tooltipFlag: TooltipFlag) {
@@ -51,17 +56,6 @@ class ItemFilterItem(properties: Properties) : Item(properties), MenuProvider {
 			tooltipComponents.add(component)
 		}
 	}
-
-	// Menu stuff
-
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return ItemFilterMenu(containerId, playerInventory)
-	}
-
-	override fun getDisplayName(): Component {
-		return defaultInstance.hoverName
-	}
-
 
 	companion object {
 

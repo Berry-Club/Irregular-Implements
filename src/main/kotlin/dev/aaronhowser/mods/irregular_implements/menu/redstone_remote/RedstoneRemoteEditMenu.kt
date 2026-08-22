@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.irregular_implements.menu.redstone_remote
 
+import dev.aaronhowser.mods.aaron.menu.HeldItemMenu
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.item.component.RedstoneRemoteDataComponent
-import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
+import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -14,12 +16,21 @@ import net.neoforged.neoforge.items.SlotItemHandler
 
 class RedstoneRemoteEditMenu(
 	containerId: Int,
-	playerInventory: Inventory
-) : HeldItemContainerMenu(
-	ModItems.REDSTONE_REMOTE,
+	playerInventory: Inventory,
+	usedHand: InteractionHand
+) : HeldItemMenu(
 	ModMenuTypes.REDSTONE_REMOTE_EDIT.get(),
-	containerId, playerInventory
+	containerId,
+	playerInventory,
+	usedHand
 ) {
+
+	constructor(containerId: Int, playerInventory: Inventory, data: RegistryFriendlyByteBuf) :
+			this(containerId, playerInventory, data.readEnum(InteractionHand::class.java))
+
+	private fun getHeldItemStack(): ItemStack = playerInventory.player.getItemInHand(usedHand)
+
+	override fun isValidHeldItem(heldItem: ItemStack): Boolean = heldItem.isItem(ModItems.REDSTONE_REMOTE)
 
 	private val itemHandler: IItemHandler? = getHeldItemStack().getCapability(Capabilities.ItemHandler.ITEM)
 
@@ -43,12 +54,8 @@ class RedstoneRemoteEditMenu(
 		}
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+	override fun quickMoveStack(player: Player, slotIndex: Int): ItemStack {
 		return ItemStack.EMPTY
-	}
-
-	override fun stillValid(player: Player): Boolean {
-		return player.getItemInHand(hand).isItem(ModItems.REDSTONE_REMOTE)
 	}
 
 }

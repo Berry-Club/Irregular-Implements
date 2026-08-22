@@ -11,10 +11,9 @@ import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.MenuProvider
-import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.MenuConstructor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -23,12 +22,18 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.util.TriState
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent
 
-class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
+class DropFilterItem(properties: Properties) : Item(properties) {
 
 	override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-		player.openMenu(this)
-
 		val usedStack = player.getItemInHand(usedHand)
+		if (!level.isClientSide) {
+			val menuConstructor = MenuConstructor { containerId, playerInventory, _ ->
+				DropFilterMenu(containerId, playerInventory, usedHand)
+			}
+			val provider = SimpleMenuProvider(menuConstructor, usedStack.hoverName)
+			player.openMenu(provider) { data -> data.writeEnum(usedHand) }
+		}
+
 		return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
 	}
 
@@ -48,16 +53,6 @@ class DropFilterItem(properties: Properties) : Item(properties), MenuProvider {
 
 			tooltipComponents.add(component)
 		}
-	}
-
-	// Menu stuff
-
-	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return DropFilterMenu(containerId, playerInventory)
-	}
-
-	override fun getDisplayName(): Component {
-		return defaultInstance.hoverName
 	}
 
 	companion object {

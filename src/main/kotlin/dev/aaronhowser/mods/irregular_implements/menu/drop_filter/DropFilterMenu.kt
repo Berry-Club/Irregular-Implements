@@ -1,27 +1,37 @@
 package dev.aaronhowser.mods.irregular_implements.menu.drop_filter
 
-import dev.aaronhowser.mods.irregular_implements.menu.HeldItemContainerMenu
+import dev.aaronhowser.mods.aaron.menu.HeldItemMenu
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.core.NonNullList
 import net.minecraft.core.component.DataComponents
+import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemContainerContents
 
 class DropFilterMenu(
 	containerId: Int,
-	playerInventory: Inventory
-) : HeldItemContainerMenu(
-	ModItems.DROP_FILTER,
+	playerInventory: Inventory,
+	usedHand: InteractionHand
+) : HeldItemMenu(
 	ModMenuTypes.DROP_FILTER.get(),
 	containerId,
-	playerInventory
+	playerInventory,
+	usedHand
 ) {
+
+	constructor(containerId: Int, playerInventory: Inventory, data: RegistryFriendlyByteBuf) :
+			this(containerId, playerInventory, data.readEnum(InteractionHand::class.java))
+
+	private fun getHeldItemStack(): ItemStack = playerInventory.player.getItemInHand(usedHand)
+
+	override fun isValidHeldItem(heldItem: ItemStack): Boolean = heldItem.isItem(ModItems.DROP_FILTER)
 
 	val container: ItemContainerContents?
 		get() = getHeldItemStack().get(DataComponents.CONTAINER)
@@ -93,32 +103,4 @@ class DropFilterMenu(
 		this.addSlot(filterSlot)
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		val slot = slots.getOrNull(index)
-
-		if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
-
-		val stackThere = slot.item
-		val copyStack = stackThere.copy()
-
-		if (index == 0) {
-			if (!this.moveItemStackTo(stackThere, 1, 37, true)) {
-				return ItemStack.EMPTY
-			}
-		} else if (!this.moveItemStackTo(stackThere, 0, 1, false)) {
-			return ItemStack.EMPTY
-		}
-
-		if (stackThere.isEmpty) {
-			slot.setByPlayer(ItemStack.EMPTY)
-		} else {
-			slot.setChanged()
-		}
-
-		if (stackThere.count == copyStack.count) return ItemStack.EMPTY
-
-		slot.onTake(player, stackThere)
-
-		return copyStack
-	}
 }
