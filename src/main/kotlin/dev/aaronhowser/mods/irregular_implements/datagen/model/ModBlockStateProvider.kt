@@ -567,13 +567,117 @@ class ModBlockStateProvider(
 		)
 	}
 
-	//TODO
 	private fun peaceCandle() {
 		val block = ModBlocks.PEACE_CANDLE.get()
+		val bodyTexture = modLoc("block/peace_candle/body")
+		val candleTexture = modLoc("block/peace_candle/candle")
 
 		val model = models()
-			.cross(name(block), modLoc("block/peace_candle/body"))
+			.withExistingParent(name(block), "block/block")
+			.texture("body", bodyTexture)
+			.texture("candle", candleTexture)
+			.particle(bodyTexture)
 			.renderType(RenderType.cutout().name)
+
+			.element {
+				from(6f, 0f, 6f)
+				to(10f, 1f, 10f)
+				allFaces { direction, faceBuilder ->
+					when (direction) {
+						Direction.DOWN -> faceBuilder.uvs(6f, 6f, 10f, 10f)
+						Direction.UP -> faceBuilder.uvs(1f, 6f, 5f, 10f)
+						else -> faceBuilder.uvs(6f, 15f, 10f, 16f)
+					}
+
+					faceBuilder.texture("#body")
+				}
+			}
+
+			.element {
+				from(7.5f, 1f, 7.5f)
+				to(8.5f, 4f, 8.5f)
+				allFaces { direction, faceBuilder ->
+					when (direction) {
+						Direction.DOWN -> faceBuilder.uvs(7f, 12f, 9f, 14f)
+						Direction.UP -> faceBuilder.uvs(7f, 10f, 9f, 12f)
+						else -> faceBuilder.uvs(7f, 10f, 9f, 16f)
+					}
+
+					faceBuilder.texture("#candle")
+				}
+			}
+
+			.element {
+				from(5f, 1f, 6f)
+				to(6f, 2f, 10f)
+				allFaces { direction, faceBuilder ->
+					when (direction) {
+						Direction.DOWN,
+						Direction.UP -> faceBuilder.uvs(5f, 6f, 6f, 10f)
+						Direction.NORTH -> faceBuilder.uvs(10f, 14f, 11f, 15f)
+						Direction.SOUTH -> faceBuilder.uvs(5f, 14f, 6f, 15f)
+						Direction.WEST,
+						Direction.EAST -> faceBuilder.uvs(6f, 14f, 10f, 15f)
+					}
+
+					faceBuilder.texture("#body")
+				}
+			}
+
+			.element {
+				from(10f, 1f, 6f)
+				to(11f, 2f, 10f)
+				allFaces { direction, faceBuilder ->
+					when (direction) {
+						Direction.DOWN -> faceBuilder.uvs(5f, 15f, 6f, 16f)
+						Direction.UP -> faceBuilder.uvs(11f, 16f, 10f, 15f)
+						Direction.NORTH -> faceBuilder.uvs(6f, 11f, 5f, 5f)
+						Direction.SOUTH -> faceBuilder.uvs(5f, 5f, 6f, 11f)
+						Direction.WEST -> faceBuilder
+							.uvs(5f, 15f, 11f, 16f)
+							.rotation(ModelBuilder.FaceRotation.CLOCKWISE_90)
+						Direction.EAST -> faceBuilder
+							.uvs(5f, 15f, 11f, 16f)
+							.rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90)
+					}
+
+					faceBuilder.texture("#body")
+				}
+			}
+
+			.element {
+				from(6f, 1f, 5f)
+				to(10f, 2f, 6f)
+				allFaces { direction, faceBuilder ->
+					when (direction) {
+						Direction.DOWN -> faceBuilder.uvs(6f, 10f, 10f, 11f)
+						Direction.UP -> faceBuilder.uvs(6f, 5f, 10f, 6f)
+						Direction.NORTH,
+						Direction.SOUTH -> faceBuilder.uvs(6f, 14f, 10f, 15f)
+						Direction.WEST -> faceBuilder.uvs(5f, 14f, 6f, 15f)
+						Direction.EAST -> faceBuilder.uvs(10f, 14f, 11f, 15f)
+					}
+
+					faceBuilder.texture("#body")
+				}
+			}
+
+			.element {
+				from(6f, 1f, 10f)
+				to(10f, 2f, 11f)
+				allFaces { direction, faceBuilder ->
+					when (direction) {
+						Direction.DOWN -> faceBuilder.uvs(6f, 5f, 10f, 6f)
+						Direction.UP -> faceBuilder.uvs(6f, 10f, 10f, 11f)
+						Direction.NORTH,
+						Direction.SOUTH -> faceBuilder.uvs(6f, 14f, 10f, 15f)
+						Direction.WEST -> faceBuilder.uvs(10f, 14f, 11f, 15f)
+						Direction.EAST -> faceBuilder.uvs(5f, 14f, 6f, 15f)
+					}
+
+					faceBuilder.texture("#body")
+				}
+			}
 
 		simpleBlockWithItem(block, model)
 	}

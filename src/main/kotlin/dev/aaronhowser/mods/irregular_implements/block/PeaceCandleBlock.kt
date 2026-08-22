@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
+//TODO: Purple fire particle
 class PeaceCandleBlock : Block(Properties.ofFullCopy(Blocks.OBSIDIAN)), EntityBlock {
 
 	override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {

@@ -6,6 +6,7 @@
 
 ### Fixed
 
+- Restored the Peace Candle's model
 - Compasses are no longer too large when held (#61)
 - You can now fill Glass Bottles from Pitcher Plants (#82)
 

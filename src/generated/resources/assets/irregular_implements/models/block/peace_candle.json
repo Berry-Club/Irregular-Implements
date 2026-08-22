@@ -1,7 +1,283 @@
 {
-	"parent": "minecraft:block/cross",
-	"render_type": "minecraft:cutout",
-	"textures": {
-		"cross": "irregular_implements:block/peace_candle/body"
-	}
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "north": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body",
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            10.0
+          ]
+        },
+        "west": {
+          "texture": "#body"
+        }
+      },
+      "from": [
+        6,
+        0,
+        6
+      ],
+      "to": [
+        10,
+        1,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#candle",
+          "uv": [
+            7.0,
+            12.0,
+            9.0,
+            14.0
+          ]
+        },
+        "east": {
+          "texture": "#candle",
+          "uv": [
+            7.0,
+            10.0,
+            9.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#candle",
+          "uv": [
+            7.0,
+            10.0,
+            9.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#candle",
+          "uv": [
+            7.0,
+            10.0,
+            9.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#candle",
+          "uv": [
+            7.0,
+            10.0,
+            9.0,
+            12.0
+          ]
+        },
+        "west": {
+          "texture": "#candle",
+          "uv": [
+            7.0,
+            10.0,
+            9.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        7.5,
+        1,
+        7.5
+      ],
+      "to": [
+        8.5,
+        4,
+        8.5
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "north": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        }
+      },
+      "from": [
+        5,
+        1,
+        6
+      ],
+      "to": [
+        6,
+        2,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#body",
+          "uv": [
+            5.0,
+            15.0,
+            6.0,
+            16.0
+          ]
+        },
+        "east": {
+          "rotation": 270,
+          "texture": "#body",
+          "uv": [
+            5.0,
+            15.0,
+            11.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#body",
+          "uv": [
+            6.0,
+            11.0,
+            5.0,
+            5.0
+          ]
+        },
+        "south": {
+          "texture": "#body",
+          "uv": [
+            5.0,
+            5.0,
+            6.0,
+            11.0
+          ]
+        },
+        "up": {
+          "texture": "#body",
+          "uv": [
+            11.0,
+            16.0,
+            10.0,
+            15.0
+          ]
+        },
+        "west": {
+          "rotation": 90,
+          "texture": "#body",
+          "uv": [
+            5.0,
+            15.0,
+            11.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        10,
+        1,
+        6
+      ],
+      "to": [
+        11,
+        2,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "north": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        }
+      },
+      "from": [
+        6,
+        1,
+        5
+      ],
+      "to": [
+        10,
+        2,
+        6
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "north": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        }
+      },
+      "from": [
+        6,
+        1,
+        10
+      ],
+      "to": [
+        10,
+        2,
+        11
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "body": "irregular_implements:block/peace_candle/body",
+    "candle": "irregular_implements:block/peace_candle/candle",
+    "particle": "irregular_implements:block/peace_candle/body"
+  }
 }
