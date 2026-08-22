@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getAsStack
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isFluid
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
@@ -64,7 +65,7 @@ class PitcherPlantBlock : FlowerBlock(
 	): ItemInteractionResult {
 		if (stack.isItem(Items.GLASS_BOTTLE)) {
 			if (!level.isClientSide) {
-				val waterBottle = PotionContents.createItemStack(Items.POTION, Potions.WATER)
+				val waterBottle = Potions.WATER.getAsStack()
 				player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, waterBottle))
 
 				level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS)
