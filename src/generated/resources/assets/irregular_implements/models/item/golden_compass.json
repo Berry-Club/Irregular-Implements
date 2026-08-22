@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "minecraft:item/generated",
   "overrides": [
     {
       "model": "irregular_implements:item/golden_compass_16",

@@ -4,6 +4,10 @@
 
 - You can now compost Beans (#81)
 
+### Fixed
+
+- Compasses are no longer too large when held (#61)
+
 # 1.11.0
 
 ### Added

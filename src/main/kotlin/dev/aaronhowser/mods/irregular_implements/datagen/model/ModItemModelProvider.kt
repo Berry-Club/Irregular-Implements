@@ -194,7 +194,7 @@ class ModItemModelProvider(
 		val item = ModItems.EMERALD_COMPASS.get()
 
 		val baseModel = getBuilder(getName(item).toString())
-			.parent(ModelFile.UncheckedModelFile("item/handheld"))
+			.parent(ModelFile.UncheckedModelFile("item/generated"))
 			.texture("layer0", "item/emerald_compass/emerald_compass_00")
 
 		for (i in 0 until 31) {
@@ -219,7 +219,7 @@ class ModItemModelProvider(
 		val item = ModItems.GOLDEN_COMPASS.get()
 
 		val baseModel = getBuilder(getName(item).toString())
-			.parent(ModelFile.UncheckedModelFile("item/handheld"))
+			.parent(ModelFile.UncheckedModelFile("item/generated"))
 			.texture("layer0", "item/golden_compass/golden_compass_00")
 
 		for (i in 0 until 31) {
