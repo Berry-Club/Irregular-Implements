@@ -49,18 +49,35 @@ class PortkeyItemEntityRenderer(
 			}
 
 			random.setSeed(ItemEntityRenderer.getSeedForItemStack(renderStack).toLong())
-			val bakedmodel = itemRenderer.getModel(renderStack, entity.level(), null, entity.id)
-			val flag = bakedmodel.isGui3d
+			val bakedModel = itemRenderer.getModel(renderStack, entity.level(), null, entity.id)
+			val flag = bakedModel.isGui3d
 
 			val shouldBob = IClientItemExtensions.of(renderStack).shouldBobAsEntity(renderStack)
 
-			val f1 = if (shouldBob) Mth.sin((entity.getAge().toFloat() + partialTicks) / 10.0f + entity.bobOffs) * 0.1f + 0.1f else 0f
-			val f2 = bakedmodel.transforms.getTransform(ItemDisplayContext.GROUND).scale.y()
+			val f1 = if (shouldBob) {
+				Mth.sin((entity.getAge().toFloat() + partialTicks) / 10.0f + entity.bobOffs) * 0.1f + 0.1f
+			} else 0f
+
+			val f2 = bakedModel
+				.transforms
+				.getTransform(ItemDisplayContext.GROUND)
+				.scale
+				.y()
+
 			poseStack.translate(0.0f, f1 + 0.25f * f2, 0.0f)
 
 			val f3 = entity.getSpin(partialTicks)
 			poseStack.mulPose(Axis.YP.rotation(f3))
-			ItemEntityRenderer.renderMultipleFromCount(this.itemRenderer, poseStack, buffer, packedLight, renderStack, bakedmodel, flag, this.random)
+			ItemEntityRenderer.renderMultipleFromCount(
+				this.itemRenderer,
+				poseStack,
+				buffer,
+				packedLight,
+				renderStack,
+				bakedModel,
+				flag,
+				this.random
+			)
 		}
 
 		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)

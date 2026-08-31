@@ -41,8 +41,8 @@ class EnderEnergyDistributorMenu(
 		}
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		val slot = slots.getOrNull(index)
+	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
+		val slot = slots.getOrNull(clickedSlotIndex)
 		if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
 
 		val stackThere = slot.item
@@ -51,7 +51,7 @@ class EnderEnergyDistributorMenu(
 		val blockMaxInvIndex = EnderEnergyDistributorBlockEntity.INVENTORY_SIZE
 		val playerInvMaxIndex = blockMaxInvIndex + 9 * 4
 
-		if (index < blockMaxInvIndex) {
+		if (clickedSlotIndex < blockMaxInvIndex) {
 			if (!this.moveItemStackTo(stackThere, blockMaxInvIndex, playerInvMaxIndex, true)) {
 				return ItemStack.EMPTY
 			}

@@ -38,8 +38,8 @@ class FilteredPlatformMenu(
 		this.addSlot(platformSlot)
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		val slot = slots.getOrNull(index)
+	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
+		val slot = slots.getOrNull(clickedSlotIndex)
 
 		if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
 
@@ -47,7 +47,7 @@ class FilteredPlatformMenu(
 		val copyStack = stackThere.copy()
 
 		// If the slot is in the platform container
-		if (index == 0) {
+		if (clickedSlotIndex == 0) {
 			if (!this.moveItemStackTo(stackThere, 1, this.slots.size, true)) {
 				return ItemStack.EMPTY
 			}

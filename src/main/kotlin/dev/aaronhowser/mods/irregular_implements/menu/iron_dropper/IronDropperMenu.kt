@@ -49,15 +49,15 @@ class IronDropperMenu(
 		}
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
-		val slot = slots.getOrNull(index)
+	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
+		val slot = slots.getOrNull(clickedSlotIndex)
 
 		if (slot == null || !slot.hasItem()) return ItemStack.EMPTY
 
 		val stackThere = slot.item
 		val copyStack = stackThere.copy()
 
-		if (index < 9) {
+		if (clickedSlotIndex < 9) {
 			if (!this.moveItemStackTo(stackThere, 9, 45, true)) {
 				return ItemStack.EMPTY
 			}

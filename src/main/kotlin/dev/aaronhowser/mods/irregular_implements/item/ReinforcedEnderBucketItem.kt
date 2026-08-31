@@ -247,7 +247,13 @@ class ReinforcedEnderBucketItem(properties: Properties) : Item(properties) {
 				return true
 			}
 
-			if (level.isServerSide && canBeReplaced && !blockState.liquid()) level.destroyBlock(blockPos, true)
+			if (
+				level.isServerSide
+				&& canBeReplaced
+				&& blockState.fluidState.isEmpty
+			) {
+				level.destroyBlock(blockPos, true)
+			}
 
 			return if (!level.setBlock(blockPos, fluid.defaultFluidState().createLegacyBlock(), 11) && !blockState.fluidState.isSource) {
 				false

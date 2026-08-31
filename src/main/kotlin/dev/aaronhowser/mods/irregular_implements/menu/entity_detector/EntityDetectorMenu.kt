@@ -44,7 +44,7 @@ class EntityDetectorMenu(
 		this.addSlot(slot)
 	}
 
-	override fun quickMoveStack(player: Player, index: Int): ItemStack {
+	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
 		return ItemStack.EMPTY
 	}
 

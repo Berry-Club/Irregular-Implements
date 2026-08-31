@@ -68,7 +68,9 @@ object ModDataComponents : AaronDataComponentRegistry() {
 		register(
 			"entity_list",
 			CustomData.CODEC.listOf(),
-			CustomData.STREAM_CODEC.apply(ByteBufCodecs.list())
+			ByteBufCodecs.TRUSTED_COMPOUND_TAG
+				.map(CustomData::of, CustomData::copyTag)
+				.apply(ByteBufCodecs.list())
 		)
 	val CAN_STAND_ON_FLUIDS: DeferredHolder<DataComponentType<*>, DataComponentType<List<TagKey<Fluid>>>> =
 		register(
