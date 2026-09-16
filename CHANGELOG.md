@@ -1,3 +1,9 @@
+# 1.12.2
+
+### Fixed
+
+- The Nature Core only bonemeals blocks that also return true for `isValidBonemealTarget`
+
 # 1.21.1
 
 ### Changed

@@ -175,9 +175,12 @@ class NatureCoreBlockEntity(
 		} while (success && attempts < 50)
 
 		val state = level.getBlockState(pos)
-		val block = state.block as? BonemealableBlock ?: return
+		val block = state.block
 
-		block.performBonemeal(level, level.random, pos, state)
+		val canBoneMeal = block is BonemealableBlock && block.isValidBonemealTarget(level, pos, state)
+		if (canBoneMeal) {
+			block.performBonemeal(level, level.random, pos, state)
+		}
 	}
 
 	private fun plantSaplings() {
