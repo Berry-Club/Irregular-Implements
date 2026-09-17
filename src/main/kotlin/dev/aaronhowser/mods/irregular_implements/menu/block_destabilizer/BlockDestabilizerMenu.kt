@@ -42,7 +42,7 @@ class BlockDestabilizerMenu(
 	}
 
 	// Only called on server
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			TOGGLE_LAZY_BUTTON_ID -> toggleLazy()
 			SHOW_LAZY_SHAPE_BUTTON_ID -> showLazyShape()

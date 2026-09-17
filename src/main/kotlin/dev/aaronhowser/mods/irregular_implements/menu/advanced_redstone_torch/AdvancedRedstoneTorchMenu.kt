@@ -37,7 +37,7 @@ class AdvancedRedstoneTorchMenu(
 		get() = containerData.get(AdvancedRedstoneTorchBlockEntity.STRENGTH_RED_INDEX)
 		set(value) = containerData.set(AdvancedRedstoneTorchBlockEntity.STRENGTH_RED_INDEX, value)
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			DECREASE_GREEN_POWER_BUTTON_ID -> {
 				val newStrength = if (strengthGreen == 0) 15 else (strengthGreen - 1)

@@ -52,7 +52,7 @@ class InventoryTesterMenu(
 		get() = this.containerData.get(0) != 0
 		private set(value) = this.containerData.set(0, if (value) 1 else 0)
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			TOGGLE_INVERSION_BUTTON_ID -> this.isInverted = !this.isInverted
 		}

@@ -99,7 +99,7 @@ class IronDropperMenu(
 		private set(value) = containerData.set(IronDropperBlockEntity.REDSTONE_MODE_INDEX, value.ordinal)
 
 	// Only called from the server
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			SHOOT_MODE_BUTTON_ID -> this.shouldShootStraight = !this.shouldShootStraight
 			EFFECTS_BUTTON_ID -> this.shouldHaveEffects = this.shouldHaveEffects.next()

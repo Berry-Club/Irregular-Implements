@@ -76,7 +76,7 @@ class ItemFilterMenu(
 		return ItemStack.EMPTY
 	}
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			TOGGLE_BLACKLIST_BUTTON_ID -> setIsBlacklist(!getIsBlacklist())
 

@@ -37,7 +37,7 @@ class RedstoneRemoteUseMenu(
 		return ItemStack.EMPTY
 	}
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		val level = player.level() as? ServerLevel ?: return
 
 		val remoteDataComponent = getHeldItemStack().get(ModDataComponents.REDSTONE_REMOTE) ?: return

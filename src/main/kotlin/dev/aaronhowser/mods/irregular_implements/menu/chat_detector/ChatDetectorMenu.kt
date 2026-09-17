@@ -34,7 +34,7 @@ class ChatDetectorMenu(
 		get() = containerData.get(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX) == 1
 		set(value) = containerData.set(ChatDetectorBlockEntity.STOPS_MESSAGE_INDEX, if (value) 1 else 0)
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			TOGGLE_MESSAGE_PASS_BUTTON_ID -> shouldMessageStop = !shouldMessageStop
 		}

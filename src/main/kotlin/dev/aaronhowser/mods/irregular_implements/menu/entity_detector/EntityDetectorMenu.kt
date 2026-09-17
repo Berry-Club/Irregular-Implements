@@ -77,7 +77,7 @@ class EntityDetectorMenu(
 		return EntityDetectorBlockEntity.Filter.entries[ordinal]
 	}
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			LOWER_X_BUTTON_ID -> xRadius--
 			RAISE_X_BUTTON_ID -> xRadius++

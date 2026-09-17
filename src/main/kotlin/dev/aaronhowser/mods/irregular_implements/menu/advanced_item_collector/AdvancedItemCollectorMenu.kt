@@ -63,7 +63,7 @@ class AdvancedItemCollectorMenu(
 		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX)
 		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX, value)
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
 			LOWER_X_BUTTON_ID -> xRadius--
 			RAISE_X_BUTTON_ID -> xRadius++

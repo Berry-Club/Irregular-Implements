@@ -37,7 +37,7 @@ class IgniterMenu(
 		get() = IgniterBlockEntity.Mode.entries[containerData.get(IgniterBlockEntity.MODE_INDEX)]
 		set(value) = containerData.set(IgniterBlockEntity.MODE_INDEX, value.ordinal)
 
-	override fun handleButtonPressed(buttonId: Int) {
+	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		if (buttonId != CYCLE_MODE_BUTTON_ID) return
 
 		val nextMode = when (mode) {
