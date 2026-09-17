@@ -1,7 +1,8 @@
-# 1.12.2
+# 1.21.2
 
 ### Fixed
 
+- Incompatibility with latest Aaron
 - The Nature Core only bonemeals blocks that also return true for `isValidBonemealTarget`
 
 # 1.21.1
