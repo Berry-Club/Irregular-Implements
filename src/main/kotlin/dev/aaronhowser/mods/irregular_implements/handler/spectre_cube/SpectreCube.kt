@@ -24,14 +24,21 @@ class SpectreCube(
 
 	var interiorHeight = 2
 	var cubeIndex = 0
+		private set(value) {
+			field = value
+			originPos = getCubeOriginPos(value)
+		}
 
-	private var spawnPos: BlockPos = BlockPos(8, 0, 8)
-	fun getSpawnPos(): BlockPos = spawnPos
+	var spawnPos: BlockPos = BlockPos(8, 0, 8)
+		private set
+
+	var originPos: BlockPos = BlockPos.ZERO
+		private set
 
 	constructor(handler: SpectreCubeSavedData, owner: UUID, cubeIndex: Int) : this(handler) {
 		this.owner = owner
 		this.cubeIndex = cubeIndex
-		this.spawnPos = getOriginPos().offset(8, 0, 8)
+		this.spawnPos = originPos.offset(8, 0, 8)
 	}
 
 	fun toTag(): CompoundTag {
@@ -59,7 +66,7 @@ class SpectreCube(
 	fun generate(level: Level) {
 		if (level !is ServerLevel) return
 
-		val cornerOne = getOriginPos()
+		val cornerOne = originPos
 		val cornerTwo = cornerOne.offset(15, interiorHeight + 1, 15)
 
 		generateCubeShell(level, cornerOne, cornerTwo, ModBlocks.SPECTRE_BLOCK.defaultBlockState())
@@ -88,7 +95,7 @@ class SpectreCube(
 	}
 
 	private fun changeHeight(level: Level, newHeight: Int) {
-		val cornerOne = getOriginPos()
+		val cornerOne = originPos
 		val cornerTwo = cornerOne.offset(15, interiorHeight + 1, 15)
 
 		generateCubeShell(level, cornerOne, cornerTwo, Blocks.AIR.defaultBlockState())
@@ -97,8 +104,6 @@ class SpectreCube(
 
 		handler.setDirty()
 	}
-
-	fun getOriginPos(): BlockPos = getCubeOriginPos(cubeIndex)
 
 	companion object {
 

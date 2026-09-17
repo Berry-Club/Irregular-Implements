@@ -28,7 +28,8 @@ class BiomeRadarBlockEntity(
 ) : SyncingBlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState) {
 
 	private var antennaValid: Boolean = false
-	private var biomePos: BlockPos? = null
+	var biomePos: BlockPos? = null
+		private set
 	private var biomeStack: ItemStack = ItemStack.EMPTY
 
 	// Client only
@@ -43,8 +44,6 @@ class BiomeRadarBlockEntity(
 		setChanged()
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
 	}
-
-	fun getBiomePos(): BlockPos? = biomePos
 
 	private fun updateAntenna() {
 		val level = level ?: return

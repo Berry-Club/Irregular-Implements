@@ -54,7 +54,7 @@ class BiomeRadarBlock : Block(
 		val blockEntity = level.getBlockEntity(pos) as? BiomeRadarBlockEntity ?: return ItemInteractionResult.FAIL
 
 		if (clickedStack.isItem(ModItems.LOCATION_FILTER)) {
-			val biomePos = blockEntity.getBiomePos() ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+			val biomePos = blockEntity.biomePos ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
 			clickedStack.set(ModDataComponents.GLOBAL_POS, GlobalPos(level.dimension(), biomePos))
 
 			level.playSound(

@@ -57,7 +57,7 @@ class SpectreCubeSavedData : SavedData() {
 			cube = generateSpectreCube(uuid, spectreLevel)
 		}
 
-		val spawnPos = cube.getSpawnPos()
+		val spawnPos = cube.spawnPos
 
 		player.teleportTo(
 			spectreLevel,
@@ -91,7 +91,7 @@ class SpectreCubeSavedData : SavedData() {
 		for (cube in cubes.values) {
 			if (cube.cubeIndex != cubeIndex) continue
 
-			val cubeOriginX = cube.getOriginPos().x
+			val cubeOriginX = cube.originPos.x
 
 			if (pos.y < 0
 				|| pos.y > cube.interiorHeight + 1
@@ -120,7 +120,7 @@ class SpectreCubeSavedData : SavedData() {
 			return
 		}
 
-		val spawn = playersCube.getSpawnPos()
+		val spawn = playersCube.spawnPos
 		player.teleportTo(spawn.x + 0.5, spawn.y + 1.0, spawn.z + 0.5)
 	}
 

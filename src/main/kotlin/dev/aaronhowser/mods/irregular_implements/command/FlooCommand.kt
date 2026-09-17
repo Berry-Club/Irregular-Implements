@@ -117,7 +117,7 @@ object FlooCommand {
 		}
 
 		val network = FlooNetworkSavedData.get(level)
-		val fireplaces = network.getFireplaces()
+		val fireplaces = network.fireplaces
 
 		val message = {
 			val component = ModMessageLang.FIREPLACES_IN_DIMENSION
@@ -148,7 +148,7 @@ object FlooCommand {
 			val level = ctx.source.level
 			val network = FlooNetworkSavedData.get(level)
 
-			val fireplaceNames = network.getFireplaces().mapNotNull { it.name }
+			val fireplaceNames = network.fireplaces.mapNotNull { it.name }
 			SharedSuggestionProvider.suggest(fireplaceNames, builder)
 		}
 }

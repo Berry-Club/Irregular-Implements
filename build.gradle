@@ -299,3 +299,9 @@ tasks.named('processResources') {
 		println "processResources executed: wiki folder copied into assets/oracle_index"
 	}
 }
+
+compileKotlin {
+	compilerOptions {
+		freeCompilerArgs.set(["-Xexplicit-backing-fields"])
+	}
+}
