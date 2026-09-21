@@ -24,17 +24,16 @@ class SemiPermeableGlassBlock(
 		if (context !is EntityCollisionContext) return Shapes.block()
 		val entity = context.entity ?: return Shapes.block()
 
-		return when {
-			entity is Player && playersPassThrough -> Shapes.empty()
-			entity !is Player && mobsPassThrough -> Shapes.empty()
+		return when (entity) {
+			is Player if playersPassThrough -> Shapes.empty()
+			!is Player if mobsPassThrough -> Shapes.empty()
 			else -> Shapes.block()
 		}
 	}
 
-	//FIXME: Figure out why mobs won't pathfind through Lapis glass
 	override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
 		return when (pathComputationType) {
-			PathComputationType.LAND -> !mobsPassThrough
+			PathComputationType.LAND -> mobsPassThrough
 			PathComputationType.WATER -> false
 			PathComputationType.AIR -> mobsPassThrough
 		}
