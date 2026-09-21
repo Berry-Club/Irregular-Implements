@@ -1,19 +1,15 @@
-# 1.21.2
-
-### Fixed
-
-- Incompatibility with latest Aaron
-- The Nature Core only bonemeals blocks that also return true for `isValidBonemealTarget`
-
 # 1.21.1
 
 ### Changed
 
 - Block Teleporters and Collection Plates now provide sound feedback when they operate
+- Minor code changes to take advantage of new Aaron
 
 ### Fixed
 
 - Block Detectors and Block Teleporters now support shift-clicking items into their filter slots
+- Incompatibility with latest Aaron
+- The Nature Core only bonemeals blocks that also return true for `isValidBonemealTarget`
 
 # 1.12.0
 
