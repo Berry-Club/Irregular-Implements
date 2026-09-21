@@ -1,9 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.block_teleporter
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
-import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.BlockTeleporterBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -29,7 +28,7 @@ class BlockTeleporterMenu(
 
 	override fun addContainerSlots() {
 		//TODO: Add a Location Filter outline to the slot background
-		val slot = FilteredSlot(blockTeleporterContainer, 0, 80, 18) { it.has(ModDataComponents.GLOBAL_POS) }
+		val slot = ContainerSlot(blockTeleporterContainer, 0, 80, 18)
 		addSlot(slot)
 	}
 

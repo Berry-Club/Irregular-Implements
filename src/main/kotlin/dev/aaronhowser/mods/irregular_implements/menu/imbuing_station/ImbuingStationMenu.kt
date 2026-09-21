@@ -1,13 +1,13 @@
 package dev.aaronhowser.mods.irregular_implements.menu.imbuing_station
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.ImbuingStationBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class ImbuingStationMenu(
@@ -30,7 +30,7 @@ class ImbuingStationMenu(
 	}
 
 	override fun addContainerSlots() {
-		val topSlot = Slot(
+		val topSlot = ContainerSlot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.TOP_SLOT_INDEX,
 			80,
@@ -38,7 +38,7 @@ class ImbuingStationMenu(
 		)
 		this.addSlot(topSlot)
 
-		val leftSlot = Slot(
+		val leftSlot = ContainerSlot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.LEFT_SLOT_INDEX,
 			35,
@@ -46,7 +46,7 @@ class ImbuingStationMenu(
 		)
 		this.addSlot(leftSlot)
 
-		val middleSlot = Slot(
+		val middleSlot = ContainerSlot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.CENTER_SLOT_INDEX,
 			80,
@@ -54,7 +54,7 @@ class ImbuingStationMenu(
 		)
 		this.addSlot(middleSlot)
 
-		val bottomSlot = Slot(
+		val bottomSlot = ContainerSlot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.BOTTOM_SLOT_INDEX,
 			80,
@@ -62,7 +62,7 @@ class ImbuingStationMenu(
 		)
 		this.addSlot(bottomSlot)
 
-		val outputSlot = Slot(
+		val outputSlot = ContainerSlot(
 			imbuingStationContainer,
 			ImbuingStationBlockEntity.OUTPUT_SLOT_INDEX,
 			125,

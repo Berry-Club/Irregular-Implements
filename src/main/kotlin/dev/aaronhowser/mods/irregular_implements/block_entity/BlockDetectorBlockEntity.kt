@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -26,13 +27,7 @@ class BlockDetectorBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntityTypes.BLOCK_DETECTOR.get(), pos, blockState), MenuProvider, ContainerContainer {
 
-	private val container: ImprovedSimpleContainer =
-		object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
-			override fun setChanged() {
-				super.setChanged()
-				checkAndUpdate()
-			}
-		}
+	private val container: ImprovedSimpleContainer = BlockDetectorContainer()
 
 	override fun getContainers(): List<Container> {
 		return listOf(container)
@@ -77,6 +72,19 @@ class BlockDetectorBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 1
+	}
+
+	private inner class BlockDetectorContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.item is BlockItem
+		}
+
+		override fun setChanged() {
+			super.setChanged()
+			checkAndUpdate()
+		}
+
 	}
 
 }

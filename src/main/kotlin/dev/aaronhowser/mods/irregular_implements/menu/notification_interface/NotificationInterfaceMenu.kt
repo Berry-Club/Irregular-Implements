@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.notification_interface
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.aaron.menu.MenuWithStrings
 import dev.aaronhowser.mods.irregular_implements.block_entity.NotificationInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -10,7 +11,6 @@ import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class NotificationInterfaceMenu(
@@ -33,7 +33,7 @@ class NotificationInterfaceMenu(
 		addPlayerInventorySlots(64)
 
 		this.addSlot(
-			Slot(
+			ContainerSlot(
 				notificationInterfaceContainer,
 				0,
 				8,

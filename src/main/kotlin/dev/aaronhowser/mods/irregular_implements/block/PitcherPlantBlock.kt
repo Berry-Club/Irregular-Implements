@@ -133,26 +133,27 @@ class PitcherPlantBlock : FlowerBlock(
 			}
 		}
 
-		val INFINITE_WATER_HANDLER = object : IFluidHandler {
-			override fun getTanks(): Int = 1
-			override fun getFluidInTank(tank: Int): FluidStack = FluidStack(Fluids.WATER, Int.MAX_VALUE)
-			override fun getTankCapacity(tank: Int): Int = Int.MAX_VALUE
-			override fun isFluidValid(tank: Int, stack: FluidStack): Boolean = stack.isFluid(Fluids.WATER)
-			override fun fill(resource: FluidStack, action: IFluidHandler.FluidAction): Int = 0
+	}
 
-			override fun drain(resource: FluidStack, action: IFluidHandler.FluidAction): FluidStack {
-				return if (resource.isFluid(Fluids.WATER)) {
-					val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
-					FluidStack(Fluids.WATER, minOf(resource.amount, configMax))
-				} else {
-					FluidStack.EMPTY
-				}
-			}
+	object InfiniteWaterHandler : IFluidHandler {
+		override fun getTanks(): Int = 1
+		override fun getFluidInTank(tank: Int): FluidStack = FluidStack(Fluids.WATER, Int.MAX_VALUE)
+		override fun getTankCapacity(tank: Int): Int = Int.MAX_VALUE
+		override fun isFluidValid(tank: Int, stack: FluidStack): Boolean = stack.isFluid(Fluids.WATER)
+		override fun fill(resource: FluidStack, action: IFluidHandler.FluidAction): Int = 0
 
-			override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction): FluidStack {
+		override fun drain(resource: FluidStack, action: IFluidHandler.FluidAction): FluidStack {
+			return if (resource.isFluid(Fluids.WATER)) {
 				val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
-				return FluidStack(Fluids.WATER, minOf(maxDrain, configMax))
+				FluidStack(Fluids.WATER, minOf(resource.amount, configMax))
+			} else {
+				FluidStack.EMPTY
 			}
+		}
+
+		override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction): FluidStack {
+			val configMax = ServerConfig.CONFIG.pitcherPlantPipeDrainRate.get()
+			return FluidStack(Fluids.WATER, minOf(maxDrain, configMax))
 		}
 	}
 

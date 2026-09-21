@@ -1,8 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.filtered_platform
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
-import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -34,7 +33,7 @@ class FilteredPlatformMenu(
 	override fun addContainerSlots() {
 
 		//TODO: Add an Item Filter outline to the slot background
-		val platformSlot = FilteredSlot(platformContainer, 0, 80, 10) { it.has(ModDataComponents.ITEM_FILTER) }
+		val platformSlot = ContainerSlot(platformContainer, 0, 80, 10)
 		this.addSlot(platformSlot)
 	}
 

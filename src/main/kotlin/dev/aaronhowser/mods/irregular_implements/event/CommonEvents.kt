@@ -217,7 +217,7 @@ object CommonEvents {
 
 		event.registerItem(
 			Capabilities.ItemHandler.ITEM,
-			RedstoneRemoteDataComponent::getItmeCapability,
+			RedstoneRemoteDataComponent::getItemCapability,
 			ModItems.REDSTONE_REMOTE.get()
 		)
 
@@ -241,7 +241,7 @@ object CommonEvents {
 
 		event.registerBlock(
 			Capabilities.FluidHandler.BLOCK,
-			{ _, _, _, _, _ -> PitcherPlantBlock.INFINITE_WATER_HANDLER },
+			{ _, _, _, _, _ -> PitcherPlantBlock.InfiniteWaterHandler },
 			ModBlocks.PITCHER_PLANT.get()
 		)
 

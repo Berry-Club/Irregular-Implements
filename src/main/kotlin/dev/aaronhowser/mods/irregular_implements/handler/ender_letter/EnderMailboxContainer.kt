@@ -23,6 +23,7 @@ class EnderMailboxContainer(
 
 	override fun isEmpty(): Boolean = inventory?.hasRoom() == false
 	override fun getItem(slot: Int): ItemStack = inventory?.getStackInSlot(slot) ?: ItemStack.EMPTY
+	override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean = false
 
 	override fun removeItem(slot: Int, amount: Int): ItemStack {
 		val inv = inventory ?: return ItemStack.EMPTY

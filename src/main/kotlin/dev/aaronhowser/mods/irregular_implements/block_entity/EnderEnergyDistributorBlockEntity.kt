@@ -14,6 +14,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -28,7 +29,7 @@ class EnderEnergyDistributorBlockEntity(
 
 	// Inventory stuff
 
-	private val container: ImprovedSimpleContainer = ImprovedSimpleContainer(this, INVENTORY_SIZE)
+	private val container: ImprovedSimpleContainer = EnderEnergyDistributorContainer()
 
 	override fun getContainers(): List<Container> {
 		return listOf(container)
@@ -49,46 +50,7 @@ class EnderEnergyDistributorBlockEntity(
 
 	// Energy stuff
 
-	private val energyStorage: IEnergyStorage = object : IEnergyStorage {
-
-		fun extractableDestinations(): List<IEnergyStorage> = getCachedEnergyHandlers().filter(IEnergyStorage::canExtract)
-		fun insertableDestinations(): List<IEnergyStorage> = getCachedEnergyHandlers().filter(IEnergyStorage::canReceive)
-
-		override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
-			val destinations = insertableDestinations()
-
-			var amountReceived = 0
-
-			for (destination in destinations) {
-				if (amountReceived >= toReceive) break
-
-				val received = destination.receiveEnergy(toReceive - amountReceived, simulate)
-				amountReceived += received
-			}
-
-			return amountReceived
-		}
-
-		override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
-			val destinations = extractableDestinations()
-
-			var amountExtracted = 0
-
-			for (destination in destinations) {
-				if (amountExtracted >= toExtract) break
-
-				val extracted = destination.extractEnergy(toExtract - amountExtracted, simulate)
-				amountExtracted += extracted
-			}
-
-			return amountExtracted
-		}
-
-		override fun getEnergyStored(): Int = getCachedEnergyHandlers().sumOf(IEnergyStorage::getEnergyStored)
-		override fun getMaxEnergyStored(): Int = getCachedEnergyHandlers().sumOf(IEnergyStorage::getMaxEnergyStored)
-		override fun canExtract(): Boolean = getCachedEnergyHandlers().any(IEnergyStorage::canExtract)
-		override fun canReceive(): Boolean = getCachedEnergyHandlers().any(IEnergyStorage::canReceive)
-	}
+	private val energyStorage: IEnergyStorage = DistributedEnergyStorage()
 
 	private val energyCache: MutableList<BlockEntity> = mutableListOf()
 	private fun getCachedEnergyHandlers(): List<IEnergyStorage> {
@@ -149,5 +111,58 @@ class EnderEnergyDistributorBlockEntity(
 		) {
 			blockEntity.tick()
 		}
+	}
+
+	private inner class EnderEnergyDistributorContainer : ImprovedSimpleContainer(this, INVENTORY_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.GLOBAL_POS)
+		}
+
+	}
+
+	private inner class DistributedEnergyStorage : IEnergyStorage {
+
+		private fun getExtractableDestinations(): List<IEnergyStorage> {
+			return getCachedEnergyHandlers().filter(IEnergyStorage::canExtract)
+		}
+
+		private fun getInsertableDestinations(): List<IEnergyStorage> {
+			return getCachedEnergyHandlers().filter(IEnergyStorage::canReceive)
+		}
+
+		override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
+			val destinations = getInsertableDestinations()
+			var amountReceived = 0
+
+			for (destination in destinations) {
+				if (amountReceived >= toReceive) break
+
+				val received = destination.receiveEnergy(toReceive - amountReceived, simulate)
+				amountReceived += received
+			}
+
+			return amountReceived
+		}
+
+		override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
+			val destinations = getExtractableDestinations()
+			var amountExtracted = 0
+
+			for (destination in destinations) {
+				if (amountExtracted >= toExtract) break
+
+				val extracted = destination.extractEnergy(toExtract - amountExtracted, simulate)
+				amountExtracted += extracted
+			}
+
+			return amountExtracted
+		}
+
+		override fun getEnergyStored(): Int = getCachedEnergyHandlers().sumOf(IEnergyStorage::getEnergyStored)
+		override fun getMaxEnergyStored(): Int = getCachedEnergyHandlers().sumOf(IEnergyStorage::getMaxEnergyStored)
+		override fun canExtract(): Boolean = getCachedEnergyHandlers().any(IEnergyStorage::canExtract)
+		override fun canReceive(): Boolean = getCachedEnergyHandlers().any(IEnergyStorage::canReceive)
+
 	}
 }

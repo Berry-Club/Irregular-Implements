@@ -19,6 +19,7 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.state.BlockState
 
 class FilteredPlatformBlockEntity(
@@ -39,7 +40,7 @@ class FilteredPlatformBlockEntity(
 		return filter.test(entity.item)
 	}
 
-	private val container = ImprovedSimpleContainer(this, 1)
+	private val container: ImprovedSimpleContainer = FilteredPlatformContainer()
 
 	override fun getContainers(): List<Container> {
 		return listOf(container)
@@ -63,6 +64,18 @@ class FilteredPlatformBlockEntity(
 
 	override fun getDisplayName(): Component {
 		return blockState.block.name
+	}
+
+	companion object {
+		const val CONTAINER_SIZE = 1
+	}
+
+	private inner class FilteredPlatformContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.ITEM_FILTER)
+		}
+
 	}
 
 }

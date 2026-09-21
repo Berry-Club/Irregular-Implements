@@ -73,31 +73,7 @@ class SpectreCoilBlockEntity(
 		val level = this.level as? ServerLevel ?: return null
 		val coil = SpectreEnergyHandler.get(level).getCoil(this.ownerUuid)
 
-		cachedEnergyHandler = object : IEnergyStorage {
-			override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int {
-				return 0
-			}
-
-			override fun extractEnergy(toExtract: Int, simulate: Boolean): Int {
-				return 0
-			}
-
-			override fun getEnergyStored(): Int {
-				return coil.energyStored
-			}
-
-			override fun getMaxEnergyStored(): Int {
-				return coil.maxEnergyStored
-			}
-
-			override fun canExtract(): Boolean {
-				return false
-			}
-
-			override fun canReceive(): Boolean {
-				return false
-			}
-		}
+		cachedEnergyHandler = ReadOnlyEnergyStorage(coil)
 
 		return cachedEnergyHandler
 	}
@@ -148,6 +124,19 @@ class SpectreCoilBlockEntity(
 
 			blockEntity.tick()
 		}
+	}
+
+	private inner class ReadOnlyEnergyStorage(
+		private val coil: IEnergyStorage
+	) : IEnergyStorage {
+
+		override fun receiveEnergy(toReceive: Int, simulate: Boolean): Int = 0
+		override fun extractEnergy(toExtract: Int, simulate: Boolean): Int = 0
+		override fun getEnergyStored(): Int = coil.energyStored
+		override fun getMaxEnergyStored(): Int = coil.maxEnergyStored
+		override fun canExtract(): Boolean = false
+		override fun canReceive(): Boolean = false
+
 	}
 
 }

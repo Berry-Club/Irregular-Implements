@@ -4,6 +4,7 @@
 
 - Block Teleporters and Collection Plates now provide sound feedback when they operate
 - Minor code changes to take advantage of new Aaron
+- Moved a lot of inventory gatekeeping logic (speed upgrade slot can only take speed upgrades etc) to the Container rather than reimplementing it in the Slots and ItemHandlers
 
 ### Fixed
 

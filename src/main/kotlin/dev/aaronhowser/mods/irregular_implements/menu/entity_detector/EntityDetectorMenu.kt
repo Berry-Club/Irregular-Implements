@@ -2,9 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.menu.entity_detector
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithButtons
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
-import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.EntityDetectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -40,7 +39,7 @@ class EntityDetectorMenu(
 	}
 
 	override fun addContainerSlots() {
-		val slot = FilteredSlot(container, 0, 80, 122) { it.has(ModDataComponents.ENTITY_TYPE) }
+		val slot = ContainerSlot(container, 0, 80, 122)
 		this.addSlot(slot)
 	}
 

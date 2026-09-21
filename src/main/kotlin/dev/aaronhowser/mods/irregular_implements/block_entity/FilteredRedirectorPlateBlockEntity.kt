@@ -18,6 +18,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.state.BlockState
 
 class FilteredRedirectorPlateBlockEntity(
@@ -29,7 +30,7 @@ class FilteredRedirectorPlateBlockEntity(
 
 	override val syncImmediately: Boolean = true
 
-	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val container: ImprovedSimpleContainer = FilteredRedirectorPlateContainer()
 
 	fun matchesFilter(index: Int, entity: Entity): Boolean {
 		val entityType = container.getItem(index).get(ModDataComponents.ENTITY_TYPE) ?: return false
@@ -60,6 +61,14 @@ class FilteredRedirectorPlateBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 2
+	}
+
+	private inner class FilteredRedirectorPlateContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.ENTITY_TYPE)
+		}
+
 	}
 
 }

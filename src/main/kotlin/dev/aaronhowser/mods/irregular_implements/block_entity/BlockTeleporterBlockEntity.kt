@@ -23,6 +23,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -31,7 +32,7 @@ class BlockTeleporterBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntityTypes.BLOCK_TELEPORTER.get(), pos, blockState), MenuProvider {
 
-	val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	val container: ImprovedSimpleContainer = BlockTeleporterContainer()
 
 	fun swapBlocks(): Boolean {
 		if (level?.isClientSide.isTrue()) return false
@@ -133,6 +134,14 @@ class BlockTeleporterBlockEntity(
 
 	companion object {
 		const val CONTAINER_SIZE = 1
+	}
+
+	private inner class BlockTeleporterContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.GLOBAL_POS)
+		}
+
 	}
 
 }

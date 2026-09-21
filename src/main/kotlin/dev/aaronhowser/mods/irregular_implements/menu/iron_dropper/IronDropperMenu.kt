@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.menu.iron_dropper
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithButtons
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.IronDropperBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
@@ -10,7 +11,6 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
 class IronDropperMenu(
@@ -44,7 +44,7 @@ class IronDropperMenu(
 				val x = 62 + column * 18
 				val y = 17 + row * 18
 
-				this.addSlot(Slot(dispenserContainer, slotIndex, x, y))
+				this.addSlot(ContainerSlot(dispenserContainer, slotIndex, x, y))
 			}
 		}
 	}

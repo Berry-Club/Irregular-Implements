@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.menu.drop_filter
 
 import dev.aaronhowser.mods.aaron.menu.HeldItemMenu
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
@@ -11,7 +12,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemContainerContents
 
@@ -36,17 +36,31 @@ class DropFilterMenu(
 	val container: ItemContainerContents?
 		get() = getHeldItemStack().get(DataComponents.CONTAINER)
 
-	val filterContainer = object : SimpleContainer(1) {
+	val filterContainer: SimpleContainer = DropFilterContainer()
+
+	init {
+		addSlots(51)
+	}
+
+	override fun addContainerSlots() {
+		val filterSlot = DropFilterSlot(80, 18)
+		this.addSlot(filterSlot)
+	}
+
+	private inner class DropFilterContainer : SimpleContainer(1) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.ITEM_FILTER)
+		}
+
 		override fun getItems(): NonNullList<ItemStack> {
 			val items = NonNullList.withSize(1, ItemStack.EMPTY)
+			val container = this@DropFilterMenu.container ?: return items
+			val nonEmptyItems = container.nonEmptyItems().toList()
 
-			val container = this@DropFilterMenu.container
-
-			container
-				?.nonEmptyItems()
-				?.forEachIndexed { index, stack ->
-					items[index] = stack
-				}
+			for (index in nonEmptyItems.indices) {
+				items[index] = nonEmptyItems[index]
+			}
 
 			return items
 		}
@@ -70,7 +84,7 @@ class DropFilterMenu(
 			return stack
 		}
 
-		override fun addItem(stack: ItemStack): ItemStack {
+			override fun addItem(stack: ItemStack): ItemStack {
 			getHeldItemStack().set(
 				DataComponents.CONTAINER,
 				ItemContainerContents.fromItems(listOf(stack))
@@ -80,27 +94,12 @@ class DropFilterMenu(
 		}
 	}
 
-	init {
-		addSlots(51)
-	}
+	private inner class DropFilterSlot(x: Int, y: Int) : ContainerSlot(filterContainer, 0, x, y) {
 
-	override fun addContainerSlots() {
-		val filterX = 80
-		val filterY = 18
-
-		val filterSlot = object : Slot(this.filterContainer, 0, filterX, filterY) {
-
-			//TODO: Add an Item Filter outline to the slot background
-			override fun mayPlace(stack: ItemStack): Boolean {
-				return stack.has(ModDataComponents.ITEM_FILTER)
-			}
-
-			override fun set(stack: ItemStack) {
-				this@DropFilterMenu.filterContainer.addItem(stack)
-			}
+		override fun set(stack: ItemStack) {
+			filterContainer.addItem(stack)
 		}
 
-		this.addSlot(filterSlot)
 	}
 
 }

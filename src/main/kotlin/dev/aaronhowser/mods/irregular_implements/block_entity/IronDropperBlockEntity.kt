@@ -123,55 +123,7 @@ class IronDropperBlockEntity(
 		override fun getCount(): Int = CONTAINER_DATA_SIZE
 	}
 
-	val dispenseBehavior = object : DefaultDispenseItemBehavior() {
-		override fun playSound(blockSource: BlockSource) {
-			if (this@IronDropperBlockEntity.effectsMode.hasSound) super.playSound(blockSource)
-		}
-
-		override fun playAnimation(blockSource: BlockSource, direction: Direction) {
-			if (this@IronDropperBlockEntity.effectsMode.hasParticles) super.playAnimation(blockSource, direction)
-		}
-
-		override fun execute(blockSource: BlockSource, chosenStack: ItemStack): ItemStack {
-			val direction = blockSource.state().getValue(FACING)
-			val position = DispenserBlock.getDispensePosition(blockSource)
-			val stackToShoot = chosenStack.split(1)
-
-			val speed = 6
-
-			shoot(blockSource.level, stackToShoot, speed, direction, position, this@IronDropperBlockEntity.shouldShootStraight)
-
-			return chosenStack
-		}
-
-		private fun shoot(level: Level, stack: ItemStack, speed: Int, facing: Direction, position: Position, shootForward: Boolean) {
-			val x = position.x()
-			val y = position.y() - if (facing.axis == Direction.Axis.Y) 0.125 else 0.15625
-			val z = position.z()
-
-			val itemEntity = ItemEntity(level, x, y, z, stack)
-
-			if (shootForward) {
-				itemEntity.setDeltaMovement(
-					facing.stepX * speed * 0.1,
-					facing.stepY * speed * 0.1,
-					facing.stepZ * speed * 0.1
-				)
-			} else {
-				val offset = level.random.nextDouble() * 0.1 + 0.2
-
-				itemEntity.setDeltaMovement(
-					level.random.triangle(facing.stepX.toDouble() * offset, 0.0172275 * speed.toDouble()),
-					level.random.triangle(0.2, 0.0172275 * speed.toDouble()),
-					level.random.triangle(facing.stepZ.toDouble() * offset, 0.0172275 * speed.toDouble())
-				)
-			}
-
-			itemEntity.setPickUpDelay(this@IronDropperBlockEntity.pickupDelay.ticks)
-
-			level.addFreshEntity(itemEntity)
-		}
-	}
+	val dispenseBehavior: DefaultDispenseItemBehavior = IronDropperDispenseBehavior()
 
 	private fun tick() {
 		val level = this.level as? ServerLevel ?: return
@@ -237,6 +189,62 @@ class IronDropperBlockEntity(
 		) {
 			blockEntity.tick()
 		}
+	}
+
+	private inner class IronDropperDispenseBehavior : DefaultDispenseItemBehavior() {
+
+		override fun playSound(blockSource: BlockSource) {
+			if (effectsMode.hasSound) super.playSound(blockSource)
+		}
+
+		override fun playAnimation(blockSource: BlockSource, direction: Direction) {
+			if (effectsMode.hasParticles) super.playAnimation(blockSource, direction)
+		}
+
+		override fun execute(blockSource: BlockSource, chosenStack: ItemStack): ItemStack {
+			val direction = blockSource.state().getValue(FACING)
+			val position = DispenserBlock.getDispensePosition(blockSource)
+			val stackToShoot = chosenStack.split(1)
+			val speed = 6
+
+			shoot(blockSource.level, stackToShoot, speed, direction, position, shouldShootStraight)
+
+			return chosenStack
+		}
+
+		private fun shoot(
+			level: Level,
+			stack: ItemStack,
+			speed: Int,
+			facing: Direction,
+			position: Position,
+			shootForward: Boolean
+		) {
+			val x = position.x()
+			val y = position.y() - if (facing.axis == Direction.Axis.Y) 0.125 else 0.15625
+			val z = position.z()
+			val itemEntity = ItemEntity(level, x, y, z, stack)
+
+			if (shootForward) {
+				itemEntity.setDeltaMovement(
+					facing.stepX * speed * 0.1,
+					facing.stepY * speed * 0.1,
+					facing.stepZ * speed * 0.1
+				)
+			} else {
+				val offset = level.random.nextDouble() * 0.1 + 0.2
+
+				itemEntity.setDeltaMovement(
+					level.random.triangle(facing.stepX.toDouble() * offset, 0.0172275 * speed.toDouble()),
+					level.random.triangle(0.2, 0.0172275 * speed.toDouble()),
+					level.random.triangle(facing.stepZ.toDouble() * offset, 0.0172275 * speed.toDouble())
+				)
+			}
+
+			itemEntity.setPickUpDelay(pickupDelay.ticks)
+			level.addFreshEntity(itemEntity)
+		}
+
 	}
 
 }

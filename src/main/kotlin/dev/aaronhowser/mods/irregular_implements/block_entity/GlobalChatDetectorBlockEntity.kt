@@ -26,6 +26,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.ContainerLevelAccess
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.event.ServerChatEvent
@@ -37,7 +38,7 @@ class GlobalChatDetectorBlockEntity(
 
 	override val syncImmediately: Boolean = true
 
-	private val container = ImprovedSimpleContainer(this, 9)
+	private val container: ImprovedSimpleContainer = GlobalChatDetectorContainer()
 
 	var regexString: String = ""
 		set(value) {
@@ -195,7 +196,16 @@ class GlobalChatDetectorBlockEntity(
 		const val MESSAGE_REGEX_NBT = "MessageRegex"
 
 		const val CONTAINER_DATA_SIZE = 1
+		const val CONTAINER_SIZE = 9
 		const val STOPS_MESSAGE_INDEX = 0
+	}
+
+	private inner class GlobalChatDetectorContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.isItem(ModItems.PLAYER_FILTER) && stack.has(ModDataComponents.PLAYER)
+		}
+
 	}
 
 }

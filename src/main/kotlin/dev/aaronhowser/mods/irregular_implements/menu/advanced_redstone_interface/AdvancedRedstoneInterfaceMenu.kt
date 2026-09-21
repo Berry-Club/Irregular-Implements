@@ -1,9 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_interface
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
-import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneInterfaceAdvancedBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -33,7 +32,7 @@ class AdvancedRedstoneInterfaceMenu(
 
 		for (i in 0 until RedstoneInterfaceAdvancedBlockEntity.CONTAINER_SIZE) {
 			val x = 8 + i * 18
-			val slot = FilteredSlot(interfaceContainer, i, x, y) { it.has(ModDataComponents.GLOBAL_POS) }
+			val slot = ContainerSlot(interfaceContainer, i, x, y)
 			this.addSlot(slot)
 		}
 	}

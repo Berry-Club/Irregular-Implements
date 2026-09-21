@@ -38,12 +38,7 @@ class VoidStoneMenu(
 		val voidSlotX = 80
 		val voidSlotY = 18
 
-		//TODO: Figure out how to make it only void the item in the slot when you place another item into it
-		val voidSlot = object : Slot(temporaryContainer, 0, voidSlotX, voidSlotY) {
-			override fun set(stack: ItemStack) {
-				// Do nothing (voids the item)
-			}
-		}
+		val voidSlot = VoidSlot(voidSlotX, voidSlotY)
 
 		addSlot(voidSlot)
 	}
@@ -62,6 +57,14 @@ class VoidStoneMenu(
 		}
 
 		return ItemStack.EMPTY
+	}
+
+	private inner class VoidSlot(x: Int, y: Int) : Slot(temporaryContainer, 0, x, y) {
+
+		override fun set(stack: ItemStack) {
+			// Do nothing (voids the item)
+		}
+
 	}
 
 }

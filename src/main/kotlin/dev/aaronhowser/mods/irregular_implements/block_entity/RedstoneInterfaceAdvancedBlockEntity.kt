@@ -23,6 +23,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.IItemHandler
@@ -35,12 +36,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 
 	private val linkedPositions: MutableList<BlockPos> = mutableListOf()
 
-	private val container = object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
-		override fun setChanged() {
-			super.setChanged()
-			updateLinkedPositions()
-		}
-	}
+	private val container: ImprovedSimpleContainer = AdvancedRedstoneInterfaceContainer()
 
 	override fun getContainers(): List<Container> {
 		return listOf(container)
@@ -175,6 +171,19 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		): IItemHandler {
 			return advancedRedstoneInterface.getItemHandler(direction)
 		}
+	}
+
+	private inner class AdvancedRedstoneInterfaceContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.GLOBAL_POS)
+		}
+
+		override fun setChanged() {
+			super.setChanged()
+			updateLinkedPositions()
+		}
+
 	}
 
 }

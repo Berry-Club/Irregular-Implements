@@ -2,9 +2,8 @@ package dev.aaronhowser.mods.irregular_implements.menu.advanced_item_collector
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithButtons
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
-import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.AdvancedItemCollectorBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -39,7 +38,7 @@ class AdvancedItemCollectorMenu(
 	}
 
 	override fun addContainerSlots() {
-		val slot = FilteredSlot(container, 0, 80, 122) { it.has(ModDataComponents.ITEM_FILTER) }
+		val slot = ContainerSlot(container, 0, 80, 122)
 		this.addSlot(slot)
 	}
 

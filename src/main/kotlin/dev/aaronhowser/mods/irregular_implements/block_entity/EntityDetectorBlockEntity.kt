@@ -50,7 +50,7 @@ class EntityDetectorBlockEntity(
 	var isActive: Boolean = false
 		private set
 
-	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val container: ImprovedSimpleContainer = EntityDetectorContainer()
 
 	fun getFilterStack(): ItemStack = container.getItem(0)
 	fun getFilterArea(): AABB = AABB(blockPos).inflate(xRadius.toDouble(), yRadius.toDouble(), zRadius.toDouble())
@@ -168,6 +168,14 @@ class EntityDetectorBlockEntity(
 		) {
 			if (level.isServerSide) blockEntity.tick()
 		}
+	}
+
+	private inner class EntityDetectorContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.ENTITY_TYPE)
+		}
+
 	}
 
 	enum class Filter(

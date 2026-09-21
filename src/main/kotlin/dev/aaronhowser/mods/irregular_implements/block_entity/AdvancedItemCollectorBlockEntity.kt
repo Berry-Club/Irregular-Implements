@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 
@@ -44,7 +45,7 @@ class AdvancedItemCollectorBlockEntity(
 			setChanged()
 		}
 
-	private val container = ImprovedSimpleContainer(this, CONTAINER_SIZE)
+	private val container: ImprovedSimpleContainer = AdvancedItemCollectorContainer()
 
 	override fun getContainers(): List<Container> {
 		return listOf(container)
@@ -128,6 +129,14 @@ class AdvancedItemCollectorBlockEntity(
 		const val X_RADIUS_INDEX = 0
 		const val Y_RADIUS_INDEX = 1
 		const val Z_RADIUS_INDEX = 2
+	}
+
+	private inner class AdvancedItemCollectorContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.has(ModDataComponents.ITEM_FILTER)
+		}
+
 	}
 
 }

@@ -40,12 +40,7 @@ class AutoPlacerBlockEntity(
 	blockState: BlockState
 ) : BlockEntity(ModBlockEntityTypes.AUTO_PLACER.get(), pos, blockState), MenuProvider, ContainerContainer {
 
-	private val container: ImprovedSimpleContainer =
-		object : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
-			override fun canAddItem(stack: ItemStack): Boolean {
-				return super.canAddItem(stack) && stack.item is BlockItem
-			}
-		}
+	private val container: ImprovedSimpleContainer = AutoPlacerContainer()
 
 	private val invWrapper: InvWrapper = InvWrapper(container)
 
@@ -164,6 +159,14 @@ class AutoPlacerBlockEntity(
 
 			blockEntity.tick()
 		}
+	}
+
+	private inner class AutoPlacerContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
+
+		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
+			return stack.item is BlockItem
+		}
+
 	}
 
 }

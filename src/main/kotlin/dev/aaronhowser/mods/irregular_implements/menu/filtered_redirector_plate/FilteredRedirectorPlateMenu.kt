@@ -1,9 +1,8 @@
 package dev.aaronhowser.mods.irregular_implements.menu.filtered_redirector_plate
 
 import dev.aaronhowser.mods.aaron.menu.MenuWithInventory
-import dev.aaronhowser.mods.aaron.menu.components.FilteredSlot
+import dev.aaronhowser.mods.aaron.menu.components.ContainerSlot
 import dev.aaronhowser.mods.irregular_implements.block_entity.FilteredRedirectorPlateBlockEntity
-import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import dev.aaronhowser.mods.irregular_implements.registry.ModMenuTypes
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
@@ -31,9 +30,8 @@ class FilteredRedirectorPlateMenu(
 	}
 
 	override fun addContainerSlots() {
-		val isEntityFilter: (ItemStack) -> Boolean = { it.has(ModDataComponents.ENTITY_TYPE) }
-		addSlot(FilteredSlot(filterContainer, 0, 62, 10, isEntityFilter))
-		addSlot(FilteredSlot(filterContainer, 1, 98, 10, isEntityFilter))
+		addSlot(ContainerSlot(filterContainer, 0, 62, 10))
+		addSlot(ContainerSlot(filterContainer, 1, 98, 10))
 	}
 
 	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
