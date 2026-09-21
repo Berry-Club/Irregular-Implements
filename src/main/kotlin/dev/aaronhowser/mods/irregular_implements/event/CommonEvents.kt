@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.event
 
-import dev.aaronhowser.mods.aaron.entity.BetterFakePlayerFactory
+import dev.aaronhowser.mods.aaron.fake_player.BetterFakePlayerFactory
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.block.*
