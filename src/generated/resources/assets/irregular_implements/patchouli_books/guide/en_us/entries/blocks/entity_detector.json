@@ -1,0 +1,15 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:entity_detector",
+  "name": "Entity Detector",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Entity Detector$() emits a redstone signal when an entity matching its filter is within its detection area.$(br2)In its GUI you can set the radius in each dimension, if the signal is inverted or not, and specify what type of entity to detect."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "You can choose to detect:$(br)$(li)All Entities$(br)$(li)Living Entities$(br)$(li)Animals$(br)$(li)Monsters$(br)$(li)Players$(br)$(li)Items$(br)$(li)Custom$(br2)When in Custom mode, it will use an inserted $(l:irregular_implements:items/entity_filter)Entity Filter$(/l)."
+    }
+  ]
+}

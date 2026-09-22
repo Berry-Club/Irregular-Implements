@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Peace Candle$() prevents hostile mobs from spawning in a radius around it. By default, this radius a single chunk (so a 3x3 chunk area).$(br2)It can be disabled with a Redstone signal.",
-      "title": "Peace Candle"
+      "text": "The $(d)Peace Candle$() prevents hostile mobs from spawning within a radius around it. By default, this radius is a single chunk. That is, it effects a 3x3 chunk area centered on itself.$(br2)It can be disabled with a redstone signal."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:peace_candle",
-      "link_recipe": true,
-      "text": "Peace Candles can be found in certain Village temples. Where there would be a Brewing Stand, instead you may sometimes find a Peace Candle."
+      "type": "patchouli:text",
+      "text": "Peace Candles can be found in certain Village temples. Where there would be a Brewing Stand, you can sometimes instead find a Peace Candle."
     }
   ]
 }

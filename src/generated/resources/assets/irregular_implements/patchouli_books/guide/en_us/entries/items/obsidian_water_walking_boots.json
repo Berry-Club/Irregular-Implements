@@ -1,0 +1,15 @@
+{
+  "category": "irregular_implements:items",
+  "icon": "irregular_implements:obsidian_water_walking_boots",
+  "name": "Obsidian Water Walking Boots",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Obsidian Water Walking Boots$() combine the effects of the $(l:irregular_implements:items/water_walking_boots)Water Walking Boots$(/l) and the $(l:irregular_implements:items/obsidian_skull)Obsidian Skull$(/l).$(br2)Get them by combining the two in an Anvil."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Note that this does not let you walk on Lava! You'll have to use the $(l:irregular_implements:items/lava_waders)Lava Waders$(/l) for that."
+    }
+  ]
+}

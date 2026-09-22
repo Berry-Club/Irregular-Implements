@@ -1,0 +1,15 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:extraction_plate",
+  "name": "Extraction Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Extraction Plate$() moves items from an inventory on its input side toward its output side.$(br2)If an inventory is on the output side, the items are inserted into it. Otherwise, they are dropped into the world in that direction."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Right-click a side of the Plate to set the output direction. Sneak right-click anywhere on the Plate to cycle the input direction."
+    }
+  ]
+}

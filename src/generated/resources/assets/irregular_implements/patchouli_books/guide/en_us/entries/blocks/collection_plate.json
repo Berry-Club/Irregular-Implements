@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:collection_plate",
+  "name": "Collection Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Any item entity that touches an $(d)Collection Plate$() will be inserted into an adjacent inventory, if possible.$(br2)The order it tries is: Down, North, South, East, East, Up."
+    }
+  ]
+}

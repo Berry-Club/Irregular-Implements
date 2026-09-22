@@ -5,14 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Item Filter$() has a list of up to 9 items, which can act as either a blacklist or a whitelist for certain things.$(br2)Use the Filter to open it, and place items in the slots to add them to the list.$(br2)The button on the far right of the gui lets you $(3)toggle between blacklist and whitelist mode$() for the entire Filter.",
-      "title": "Item Filter"
+      "text": "The $(d)Item Filter$() has a list of up to 9 items, and can serve as either a Whitelist or a Blacklist. Toggle this using the button on the far right of the GUI.$(br2)Above each filled slot is two buttons."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:item_filter",
-      "link_recipe": true,
-      "text": "Above each filled slot is 2 buttons. The left button allows you to $(3)toggle if the slot is an Item Filter or a Tag Filter$().$(br2)The right button changes depending on the above. If the slot is an Item Filter, it allows you to $(3)toggle if it requires it to match the data components$().$(br2)If it's a Tag Filter, it allows you to $(3)cycle the tag$(). For example, putting in an Iron Ingot and setting it to be a Tag Filter, you can cycle between it being \"Beacon Payments\", \"Ingots\", \"Trim Materials\", etc."
+      "type": "patchouli:text",
+      "text": "The left button allows you to toggle if the slot is an Item Filter or a Tag Filter. For example, putting a Stick in the slot will by default make it filter for the minecraft:stick item. Changing it to a Tag Filter will make it filter one of Stick's item tags.$(br2)The right button's function changes depending on if the slot is an Item Filter or a Tag Filter."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "For Item Filter slots, it toggles whether or not the item must match the data components (like enchantments, custom names, etc) of the item in the slot.$(br2)For Tag Filter slots, it cycles which of the item's tags to filter for."
     }
   ]
 }

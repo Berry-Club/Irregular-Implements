@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Redstone Remote$() acts like the $(l:items/redstone_activator)Redstone Activator$(/l), but instead powers up to 9 selectable locations.$(br2)Sneak right-click to open its GUI. Place a filled $(l:items/location_filter)Location Filter$(/l) in one of the top slots to add it. You can optionally place any item in the slot below it to add an icon to the location button.",
-      "title": "Redstone Remote"
+      "text": "The $(d)Redstone Remote$() acts like the $(l:irregular_implements:items/redstone_activator)Redstone Activator$(/l), but can be used from a distance.$(br2)It can have up to 9 stored locations. Sneak right-click it to open its GUI, and insert set $(l:irregular_implements:items/location_filter)Location Filters$(/l). You can place an item in the slot above to give its button an icon."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:redstone_remote",
-      "link_recipe": true,
-      "text": "Use while not sneaking to access the location buttons. Clicking one will power that location for a short duration."
+      "type": "patchouli:text",
+      "text": "Right-click while not sneaking to access the location buttons. Click the button to pulse its location for a short duration."
     }
   ]
 }

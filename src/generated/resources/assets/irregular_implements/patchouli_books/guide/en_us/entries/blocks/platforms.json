@@ -1,0 +1,31 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:oak_platform",
+  "name": "Platforms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Platforms$()$(br2)$(d)Platforms$() are solid from the top, but not from the bottom or sides.$(br2)Additionally, sneaking will allow you to fall through them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Super Lubricant Platform$()$(br2)The $(d)Super Lubricant Platform$() works the same, but works like other $(l:irregular_implements:blocks/super_lubricated_blocks)Super Lubricated blocks$(/l) and negates all friction.$(br2)This makes it very useful for transporting items."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Filtered Super Lubricant Platform$()$(br2)The $(d)Filtered Super Lubricant Platform$() works the same, but can hold an $(l:irregular_implements:items/item_filter)Item Filter$(/l).$(br2)Anything matching the filter will fall through the platform."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:oak_platform"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:super_lubricant_platform"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:filtered_super_lubricant_platform"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "blocks",
+  "description": "book.irregular_implements.guide.blocks.sakanade_spores.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:sakanade_spores"
+  },
+  "name": "book.irregular_implements.guide.blocks.sakanade_spores.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.sakanade_spores.page_0.text",
+      "title": "book.irregular_implements.guide.blocks.sakanade_spores.page_0.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.sakanade_spores.page_1.text",
+      "title": "book.irregular_implements.guide.blocks.sakanade_spores.page_1.title",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 61,
+  "x": 0,
+  "y": 0
+}

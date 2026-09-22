@@ -4,11 +4,8 @@
   "name": "Glowing Mushroom",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:glowing_mushroom",
-      "link_recipe": true,
-      "text": "$(d)Glowing Mushrooms$() can rarely found in caves.$(br2)They can be used in any brewing recipe that would accept Glowstone Dust.",
-      "title": "Glowing Mushroom"
+      "type": "patchouli:text",
+      "text": "$(d)Glowing Mushrooms$() can be found growing in caves.$(br2)Any brewing recipe that would accept Glowstone Dust can also accept Glowing Mushrooms."
     }
   ]
 }

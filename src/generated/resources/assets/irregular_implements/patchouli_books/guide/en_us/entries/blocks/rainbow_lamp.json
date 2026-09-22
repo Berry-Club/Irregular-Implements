@@ -4,11 +4,8 @@
   "name": "Rainbow Lamp",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:rainbow_lamp",
-      "link_recipe": true,
-      "text": "The $(d)Rainbow Lamp$() has a different color depending on the strength of the Redstone signal powering it.",
-      "title": "Rainbow Lamp"
+      "type": "patchouli:text",
+      "text": "The $(d)Rainbow Lamp$() glows a different color depending on the redstone signal strength it's receiving."
     }
   ]
 }

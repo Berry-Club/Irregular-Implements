@@ -1,0 +1,19 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:super_lubricant_stone",
+  "name": "Super Lubricated Blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Super Lubricant Stone$() and $(d)Super Lubricant Ice$() fully negate friction, allowing entities to slide over them without slowing down."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:super_lubricant_stone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:super_lubricant_ice"
+    }
+  ]
+}

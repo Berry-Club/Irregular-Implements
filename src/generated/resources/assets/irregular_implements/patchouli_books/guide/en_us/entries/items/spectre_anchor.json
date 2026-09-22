@@ -4,10 +4,8 @@
   "name": "Spectre Anchor",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:spectre_anchor",
-      "link_recipe": true,
-      "text": "The $(d)Spectre Anchor$() can be crafted with an item to $(3)allow you to retain it after death$().$(br2)After this, the anchor is removed from the item."
+      "type": "patchouli:text",
+      "text": "The $(d)Spectre Anchor$() can be crafted together with any item to allow you to retain it after death.$(br2)After this, the Anchor is removed from the item."
     }
   ]
 }

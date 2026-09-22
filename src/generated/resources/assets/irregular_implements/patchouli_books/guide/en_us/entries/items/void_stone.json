@@ -4,10 +4,8 @@
   "name": "Void Stone",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:void_stone",
-      "link_recipe": true,
-      "text": "The $(d)Void Stone$() will $(3)delete any item$() insert into its menu."
+      "type": "patchouli:text",
+      "text": "The $(d)Void Stone$() will delete any items inserted into its GUI."
     }
   ]
 }

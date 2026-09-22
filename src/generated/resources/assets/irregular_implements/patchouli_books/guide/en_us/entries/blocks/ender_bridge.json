@@ -1,20 +1,31 @@
 {
   "category": "irregular_implements:blocks",
   "icon": "irregular_implements:ender_bridge",
-  "name": "Ender Bridges",
+  "name": "Ender Bridge",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:ender_bridge,irregular_implements:prismarine_ender_bridge",
-      "link_recipe": true,
-      "text": "$(d)Ender Bridges$(), when powered, will teleport the entities standing on top of them to the $(d)Ender Anchor$() it's aimed at.$(br2)It works through blocks over any distance, as long as it's $(3)looking DIRECTLY at the Ender Anchor$().",
-      "title": "Ender Bridges"
+      "type": "patchouli:text",
+      "text": "The $(d)Ender Bridge$() and $(d)Prismarine Ender Bridge$(), when powered by redstone, will teleport the entities above it towards the $(d)Ender Anchor$() it's aiming at.$(br2)It works through blocks, and across any distance (including unloaded chunks), as long as the Anchor is loaded. It has to be aiming DIRECTLY at the Anchor, as well."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:ender_anchor",
-      "link_recipe": true,
-      "text": "When powered, it searches in a straight line for an Ender Anchor. If there is one, it charges based on the distance and then activates. If there's not, it will audibly fail.$(br2)The basic Bridge takes 1 tick per block traveled, while the Prismarine Bridge takes 0.5 ticks per block traveled."
+      "type": "patchouli:text",
+      "text": "When powered, it will look at every loaded Anchor and find the nearest one that it's aiming at. If there isn't one, it will audibly fail.$(br2)If there *is* an Anchor. it will charge up before activating. Its charge time depends on the distance, as well the tier of Bridge."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The regular Bridge takes 1 tick per block to charge, and the Prismarine Ender Bridge is twice as fast."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:ender_bridge"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:prismarine_ender_bridge"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:ender_anchor"
     }
   ]
 }

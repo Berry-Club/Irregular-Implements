@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Notification Interface$(), when powered, will send a configurable notification to the player that placed it.$(br2)You can set a title, body, and icon in its GUI.",
-      "title": "Notification Interface"
+      "text": "The $(d)Notification Interface$() will send its owner a customizable notification when it receives a redstone pulse.$(br2)You can set the notifications title, body, and icon in its GUI."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:notification_interface",
-      "link_recipe": true,
-      "text": "Server admins can also use the command \"/ii notify <player> <title> <body> <itemstack>\" to send notifications to players."
+      "type": "patchouli:text",
+      "text": "Server admins can also use the command /ii notify     to send notifications to players."
     }
   ]
 }

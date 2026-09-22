@@ -5,14 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Golden Compass$() can be linked to a specific location, and $(3)aims towards it$().$(br2)Of course, it only works if you're in the same dimension as the location.$(br2)Is this functionally identical to simply using a Lodestone? Maybe!",
-      "title": "Golden Compass"
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:golden_compass",
-      "link_recipe": true,
-      "text": "To link the Compass to a location, craft it together with a set $(l:items/location_filter)Location Filter$(/l)."
+      "text": "The $(d)Golden Compass$() aims at a bound location, assuming it's in the same dimension as the user.$(br2)Bind the location by crafting the Compass together with a set $(l:irregular_implements:items/location_filter)Location Filter$(/l)."
     }
   ]
 }

@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(d)Portkeys$() will instantly teleport the player to a set location when they're picked up off the ground.$(br2)To set the location, $(3)click the Portkey on the ground$(), which will make it start glowing. Throw it on the ground and it will activate after several seconds, which will make it stop glowing.$(br2)The only limit is that it cannot cross dimensions. The Portkey is also $(c)consumed upon use$().",
-      "title": "Portkey"
+      "text": "The $(d)Portkey$() is used to teleport whoever picks it up.$(br2)Right-click the Portkey on a block to set its destination. Then, throw it on the ground. After a short delay, it will activate."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:portkey",
-      "link_recipe": true,
-      "text": "Additionally, you can $(3)craft the Portkey with any other item$() to disguise it. The dropped item will look like the disguise rather than the Portkey itself."
+      "type": "patchouli:text",
+      "text": "Anyone who touches the activated Portkey will be teleported instantly to the destination, assuming it's in the same dimension.$(br2)You can craft the Portkey with any other item to disguise it, making it look like the item it was crafted with."
     }
   ]
 }

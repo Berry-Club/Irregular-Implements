@@ -5,14 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Block Replacer$() allows you to quickly replace blocks in the world with blocks stored in the Block Replacer.$(br2)To store a block in the Block Replacer, $(3)right-click the block stack in your inventory onto the Block Replacer$(), like a Bundle.$(br2)You can remove the stored block by right-clicking the Block Replacer itemstack onto any empty inventory slot.",
-      "title": "Block Replacer"
+      "text": "The $(d)Block Replacer$() allows you to quickly replace blocks in the world with blocks stored in the item.$(br2)To store a block in the Replacer, right-click the block stack in your inventory onto the slot the Block Replacer is in, the same way you would use a Bundle."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:block_replacer",
-      "link_recipe": true,
-      "text": "Using the item on a block in the world will break that block and place a random stored block in its place.$(br2)Blocks with the block tag $(c)#irregular_implements:block_replacer_blacklist$() cannot be replaced with the Block Replacer."
+      "type": "patchouli:text",
+      "text": "You can empty the Replacer by right-clicking the Replacer stack onto an empty inventory slot.$(br2)Using the item on a block in the world will break that block and place a random stored block in its place."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Blocks with the block tag #irregular_implements:block_replacer_blacklist cannot be replaced with the Block Replacer."
     }
   ]
 }

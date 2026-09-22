@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Spectre Sapling$() grows into a translucent Spectre Tree.$(br2)Its Leaves have a chance of dropping $(l:items/ectoplasm)Ectoplasm$(/l), which makes it a very nice reusable source!",
-      "title": "Spectre Sapling"
+      "text": "$(d)Spectre Saplings$() grow into a translucent Spectre trees.$(br2)$(d)Spectre Leaves$() have a chance of dropping $(l:irregular_implements:items/ectoplasm)Ectoplasm$(/l), allowing it to be farmed."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:spectre_sapling",
-      "link_recipe": true,
-      "text": "Create a Spectre Sapling by right-clicking any Sapling block with an Ectoplasm."
+      "type": "patchouli:text",
+      "text": "Create a Spectre Sapling by using Ectoplasm on any other Sapling."
     }
   ]
 }

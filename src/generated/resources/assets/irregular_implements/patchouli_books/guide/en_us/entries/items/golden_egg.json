@@ -4,11 +4,8 @@
   "name": "Golden Egg",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:golden_egg",
-      "link_recipe": true,
-      "text": "The $(d)Golden Egg$() spawns a Chicken that $(3)lays Golden Ingots$() instead of Eggs.$(br2)They can be found in $(l:blocks/bean_pod)Bean Pods$(/l), which can be found at the top of planted $(l:items/magic_bean)Magic Beans$(/l)",
-      "title": "Golden Egg"
+      "type": "patchouli:text",
+      "text": "$(d)Golden Eggs$() spawn Golden Chickens when thrown. Instead of laying Eggs, Golden Chickens lay Gold Ingots.$(br2)Golden Eggs can be found in Bean Pods."
     }
   ]
 }

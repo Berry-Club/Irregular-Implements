@@ -1,0 +1,73 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "blocks",
+  "description": "book.irregular_implements.guide.blocks.platforms.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:oak_platform"
+  },
+  "name": "book.irregular_implements.guide.blocks.platforms.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.platforms.page_0.text",
+      "title": "book.irregular_implements.guide.blocks.platforms.page_0.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.platforms.page_1.text",
+      "title": "book.irregular_implements.guide.blocks.platforms.page_1.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.platforms.page_2.text",
+      "title": "book.irregular_implements.guide.blocks.platforms.page_2.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "irregular_implements:oak_platform",
+      "recipe_id_2": "irregular_implements:super_lubricant_platform",
+      "text": "",
+      "title1": "",
+      "title2": ""
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "irregular_implements:filtered_super_lubricant_platform",
+      "text": "",
+      "title1": "",
+      "title2": ""
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 37,
+  "x": 0,
+  "y": 0
+}

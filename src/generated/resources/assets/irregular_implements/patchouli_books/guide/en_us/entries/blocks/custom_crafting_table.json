@@ -4,11 +4,8 @@
   "name": "Custom Crafting Table",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:custom_crafting_table",
-      "link_recipe": true,
-      "text": "The $(d)Custom Crafting Table$() is functionally identical to a normal Crafting Table, but looks like the block it was crafted with.$(br2)A ring of Oak Logs, for example, around a Crafting Table in the recipe will make it look like an Oak Log block.",
-      "title": "Custom Crafting Table"
+      "type": "patchouli:text",
+      "text": "The $(d)Custom Crafting Table$() is functionally identical to a regular Crafting Table, but looks like the block it was crafted with.$(br2)For example, 8 Oak Logs around a Crafting Table will make a Crafting Table that looks like an Oak Log."
     }
   ]
 }

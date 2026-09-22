@@ -4,11 +4,8 @@
   "name": "Compressed Slime Block",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:compressed_slime_block",
-      "link_recipe": true,
-      "text": "A $(d)Compressed Slime Block$() will bounce entities that touch it up into the air.$(br2)Get it by using a Shovel on a Slime Block. You can compress it multiple times for a stronger bounce effect.",
-      "title": "Compressed Slime Block"
+      "type": "patchouli:text",
+      "text": "Right-clicking a Slime Block with a Shovel will turn it into a $(d)Compressed Slime Block$(). Clicking more will compress it further, or reset it.$(br2)Touching a Compressed Slime Block will launch you into the air. The more it's compressed, the higher you bounce."
     }
   ]
 }

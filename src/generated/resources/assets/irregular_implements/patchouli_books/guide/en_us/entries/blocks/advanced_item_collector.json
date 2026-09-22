@@ -1,0 +1,15 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:advanced_item_collector",
+  "name": "Advanced Item Collector",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Advanced Item Collector$() is an upgraded version of the $(l:irregular_implements:blocks/item_collector)Item Collector$(/l). Its collection volume is configurable, ranging from 0 to 10 blocks in each direction.$(br2)Each axis (X/Y/Z) can be configured independently, as well."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Additionally, you can insert an $(l:irregular_implements:items/item_filter)Item Filter$(/l), and it will only collect items that match the filter."
+    }
+  ]
+}

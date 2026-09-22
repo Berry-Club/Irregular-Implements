@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(d)Pitcher Plants$() generate water.$(br2)You can harvest this water by using a Bucket or any other fluid-storage item on it.$(br2)It will also periodically fill adjacent fluid tanks, and can be extracted from via fluid pipes.",
-      "title": "Pitcher Plant"
+      "text": "The $(d)Pitcher Plant$() generates an infinite amount of water. It can be found in wet biomes in the overworld.$(br2)Clicking a bucket or other fluid receptacle will fill it with Water."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:pitcher_plant",
-      "link_recipe": true,
-      "text": "Pitcher Plants can be found in biomes with the biome tag $(3)c:is_wet/overworld$()."
+      "type": "patchouli:text",
+      "text": "Placing it adjacent to a tank will fill the tank with water, at a configurable speed. You can also pipe water from it, also at a configurable speed."
     }
   ]
 }

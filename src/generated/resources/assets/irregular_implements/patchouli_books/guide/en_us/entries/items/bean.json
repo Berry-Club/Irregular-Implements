@@ -4,11 +4,8 @@
   "name": "Bean",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:bean",
-      "link_recipe": true,
-      "text": "A simple $(d)Bean$() that can be used in certain recipes.$(br2)You can find Beans growing around the world, in any Overworld biome that is neither hot, cold, dry, nor sparse.$(br2)Plant more by using them on any dirt block!",
-      "title": "Bean"
+      "type": "patchouli:text",
+      "text": "$(d)Beans$() can be found growing around the overworld in any biome that is neither hot, cold, dry, nor sparse.$(br2)They can be planted on any dirt-like blocks."
     }
   ]
 }

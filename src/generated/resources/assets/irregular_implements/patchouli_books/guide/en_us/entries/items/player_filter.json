@@ -5,14 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To set it, use the Filter on the player you want to filter.",
-      "title": "The $(d)Player Filter$() allows you to $(3)filter based on a specific player$()."
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:player_filter",
-      "link_recipe": true,
-      "text": "Using it while sneaking will set it to yourself."
+      "text": "The $(d)Player Filter$() allows you to filter based on a specific player.$(br2)To set it, simply use the Filter on the desired player. Sneak right-click to set it to yourself."
     }
   ]
 }

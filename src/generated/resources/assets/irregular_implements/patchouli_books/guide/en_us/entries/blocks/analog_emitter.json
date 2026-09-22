@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:analog_emitter",
+  "name": "Analog Emitter",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Analog Emitter$(), when powered from its front side, will emit a signal with a configurable strength.$(br2)Right-click it to cycle the output strength."
+    }
+  ]
+}

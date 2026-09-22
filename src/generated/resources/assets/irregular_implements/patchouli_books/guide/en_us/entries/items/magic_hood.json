@@ -4,11 +4,8 @@
   "name": "Magic Hood",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:magic_hood",
-      "link_recipe": true,
-      "text": "The $(d)Magic Hood$(), when worn, will disable your nameplate and hide your potion particles.$(br2)It can be found in dungeons and blacksmith chests.",
-      "title": "Magic Hood"
+      "type": "patchouli:text",
+      "text": "The $(d)Magic Hood$(), when worn, will hide your nameplate and potion particles.$(br2)It can be found in dungeon chests."
     }
   ]
 }

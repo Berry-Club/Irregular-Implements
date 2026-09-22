@@ -5,14 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Iron Dropper$() is an upgrade to the regular Dropper, with a handful of extra features.$(br2)Inside its GUI are 4 buttons to change some settings.$(br2)Its redstone settings are:$(br)$(li)Eject when pulsed$(li)Eject while powered$(li)Eject always",
-      "title": "Iron Dropper"
+      "text": "The $(d)Iron Dropper$() is an upgrade to the regular Dropper, with a handful of extra features.$(br2)Inside it are 4 buttons to cycle its various settings."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:iron_dropper",
-      "link_recipe": true,
-      "text": "You can cycle the items' pickup delay through 20, 5, and 0 ticks.$(br2)You can toggle if the items shoot straight forward or if they have slightly randomized velocity.$(br2)Finally, you can toggle whether it should make particles and sounds when ejecting items or not."
+      "type": "patchouli:text",
+      "text": "Redstone:$(br)$(li)Eject when pulsed$(br)$(li)Eject while powered$(br)$(li)Eject always$(br2)Pickup delay:$(br)$(li)20 ticks$(br)$(li)5 ticks$(br)$(li)0 ticks"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Trajectory:$(br)$(li)Random$(br)$(li)Straight$(br2)Effects:$(br)$(li)Particles and sound$(br)$(li)Sound only$(br)$(li)Particles only$(br)$(li)None"
     }
   ]
 }

@@ -4,11 +4,8 @@
   "name": "Fertilized Dirt",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:fertilized_dirt",
-      "link_recipe": true,
-      "text": "$(d)Fertilized Dirt$() does not need to be hydrated, cannot be trampled, and $(3)grows crops 3 times faster$().$(br2)You still have to till it with a Hoe to plant crops on it.",
-      "title": "Fertilized Dirt"
+      "type": "patchouli:text",
+      "text": "$(d)Fertilized Dirt$() does not need to be hydrated, cannot be trampled, and grows crops 3 times faster.$(br2)You still have to till it with a Hoe before seeds can be planted, however."
     }
   ]
 }

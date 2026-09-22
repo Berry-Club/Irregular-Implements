@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.irregular_implements.datagen
 
+import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModModonomiconProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.patchouli.ModPatchouliBookProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModifierProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModLootTableProvider
@@ -97,12 +100,12 @@ object ModDataGen {
 
 		val languageProvider = ModLanguageProvider(output)
 
-//		generator.addProvider(
-//			event.includeClient(),
-//			NeoBookProvider.of(
-//				event, lookupProvider, ModModonomiconProvider(languageProvider::add)
-//			)
-//		)
+		generator.addProvider(
+			event.includeClient(),
+			NeoBookProvider.of(
+				event, lookupProvider, ModModonomiconProvider(languageProvider::add)
+			)
+		)
 
 		generator.addProvider(event.includeClient(), languageProvider)
 
@@ -115,8 +118,7 @@ object ModDataGen {
 			event.includeClient(),
 			ModPatchouliBookProvider(
 				generator,
-				"guide",
-				lookupProvider
+				lookupProvider.get()
 			)
 		)
 

@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:lapis_lamp",
+  "name": "Lapis Lamp",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Lapis Lamp$(), when provided a redstone signal, will give off false light.$(br2)That is, mob spawning and other game logic will treat the area is if it were not lit, but players will see light."
+    }
+  ]
+}

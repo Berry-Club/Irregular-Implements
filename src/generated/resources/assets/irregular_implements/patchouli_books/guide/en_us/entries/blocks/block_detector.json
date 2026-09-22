@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:block_detector",
+  "name": "Block Detector",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Block Detector$() will emit a redstone signal when the block in front of it matches the block stored in its inventory."
+    }
+  ]
+}

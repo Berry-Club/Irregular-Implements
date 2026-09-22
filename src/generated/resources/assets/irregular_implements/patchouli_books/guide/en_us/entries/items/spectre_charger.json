@@ -1,0 +1,27 @@
+{
+  "category": "irregular_implements:items",
+  "icon": "irregular_implements:spectre_charger_basic",
+  "name": "Spectre Chargers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Spectre Chargers$() are used to charge items in your inventory with FE from your $(l:irregular_implements:blocks/spectre_energy_injector)Spectre Energy Buffer$(/l).$(br2)While active, it will charge every item in your inventory, including armor and Curio slots."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Each tier charges faster than the last. The $(d)Genesis Spectre Charger$() is creative only, and does not use your Spectre Energy Buffer's energy."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_charger_basic"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_charger_redstone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_charger_ender"
+    }
+  ]
+}

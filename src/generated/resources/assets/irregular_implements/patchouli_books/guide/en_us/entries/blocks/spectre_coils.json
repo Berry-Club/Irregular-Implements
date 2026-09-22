@@ -1,0 +1,27 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:spectre_coil_basic",
+  "name": "Spectre Coils",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Regular Coils$()$(br2)$(d)Spectre Coils$() allow you to extract energy from your $(l:irregular_implements:blocks/spectre_energy_injector)Spectre Energy Buffer$(/l) wirelessly.$(br2)Each tier pulls a higher RF/t. Place the Coil directly on the machine you want to charge."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Generator Coils$()$(br2)The $(d)Spectre Coil Nr. 245$() generates a small amount of RF/t for free, rather than using your Spectre Energy Buffer. It can be rarely found in dungeon chests.$(br2)The $(d)Genesis Spectre Coil$() is creative-only, and generates an infinite amount of RF/t."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_coil_basic"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_coil_redstone"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_coil_ender"
+    }
+  ]
+}

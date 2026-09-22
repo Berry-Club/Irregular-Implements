@@ -1,7 +1,9 @@
 {
+  "book_texture": "patchouli:textures/gui/book_gray.png",
   "creative_tab": "irregular_implements:creative_tab",
-  "landing_text": "Welcome to the Irregular Implements!",
-  "name": "Irregular Implements Instructional Index",
+  "landing_text": "book.irregular_implements.landing_text",
+  "name": "item.irregular_implements.guide_book",
   "show_progress": false,
-  "use_resource_pack": true
+  "use_resource_pack": true,
+  "version": "2"
 }

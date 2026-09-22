@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:corrector_plate",
+  "name": "Corrector Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Corrector Plate$() will snap any entity moving on it to be moving along the center of the block.$(br2)That is, they can only move along the plus-shaped path going straight through the middle of the block."
+    }
+  ]
+}

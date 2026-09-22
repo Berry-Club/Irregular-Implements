@@ -5,14 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Using the $(d)Redstone Activator$() will power it for a short duration.",
-      "title": "Redstone Activator"
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:redstone_activator",
-      "link_recipe": true,
-      "text": "Sneak right-click it to change the duration between 2, 20, and 100 ticks."
+      "text": "The $(d)Redstone Activator$() will provide a short redstone pulse when used on a block.$(br2)Sneak right-click to cycle the duration between 2, 20, and 100 ticks."
     }
   ]
 }

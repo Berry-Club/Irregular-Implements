@@ -4,16 +4,16 @@
   "name": "Drop Filter",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:drop_filter",
-      "link_recipe": true,
-      "text": "The $(d)Drop Filter$() can hold an $(l:items/item_filter)Item Filter$(/l), and prevents any items matching the Filter from entering your inventory."
+      "type": "patchouli:text",
+      "text": "The $(d)Drop Filter$() can hold an $(l:irregular_implements:items/item_filter)Item Filter$(/l), and will prevent items matching the filter from entering your inventory.$(br2)The $(d)Voiding Drop Filter$() does the same, but instead deletes the items matching the filter entirely."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:voiding_drop_filter",
-      "link_recipe": true,
-      "text": "The $(d)Voiding Drop Filter$() works the same way, but instead $(c)deletes any matching items$()."
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:drop_filter"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:voiding_drop_filter"
     }
   ]
 }

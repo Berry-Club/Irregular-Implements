@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Diaphanous Block$() looks like another block from a distance, but vanishes as you approach.$(br2)To set the appearance, craft it with the desired block.",
-      "title": "Diaphanous Block"
+      "text": "$(d)Diaphanous Blocks$() look like regular blocks at a distance, but vanishes as you approach, and can be walked through.$(br2)Craft a Diaphanous Block with any other block to set what it looks like."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:diaphanous_block,irregular_implements:diaphanous_block[irregular_implements:block=\"minecraft:oak_log\"]",
-      "link_recipe": true,
-      "text": "Crafting it with itself will invert it, so it's visible from up close but vanishes at a distance."
+      "type": "patchouli:text",
+      "text": "Crafting a Diaphanous Block by itself will invert it, making it invisible at a distance and solid up close."
     }
   ]
 }

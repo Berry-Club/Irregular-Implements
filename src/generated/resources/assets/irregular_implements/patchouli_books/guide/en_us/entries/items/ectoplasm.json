@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(d)Ectoplasm$() is a material that drops when Spirits are killed.$(br2)Spirits have a chance of spawning $(3)any time a mob dies$(). The chance increases closer to the full moon, and increases further if the Ender Dragon has ever been killed on the server.",
-      "title": "Ectoplasm"
+      "text": "$(d)Ectoplasm$() is a material that drops when Spirits are killed.$(br2)Spirits have a chance of spawning any time a mob dies. The chance increases the closer it is to the full moon, and increases further if the Ender Dragon has ever been killed on the server."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:ectoplasm",
-      "link_recipe": true,
-      "text": "Spirits $(c)can only be damaged via magic$().$(br2)Splash Potions, enchanted weapons, or certain items like the $(l:items/spectre_sword)Spectre Sword$(/l) are examples of ways to damage them."
+      "type": "patchouli:text",
+      "text": "Spirits can only be damaged via magic. This includes Splash Potions, enchanted items, and certain other items like the Spectre Sword."
     }
   ]
 }

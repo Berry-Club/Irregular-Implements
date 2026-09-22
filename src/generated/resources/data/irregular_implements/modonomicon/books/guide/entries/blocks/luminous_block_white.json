@@ -1,0 +1,51 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "blocks",
+  "description": "book.irregular_implements.guide.blocks.luminous_block_white.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:luminous_block_white"
+  },
+  "name": "book.irregular_implements.guide.blocks.luminous_block_white.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.luminous_block_white.page_0.text",
+      "title": "book.irregular_implements.guide.blocks.luminous_block_white.page_0.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "irregular_implements:luminous_block_white",
+      "recipe_id_2": "irregular_implements:translucent_luminous_block_white",
+      "text": "",
+      "title1": "",
+      "title2": ""
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "irregular_implements:stained_bricks_white",
+      "text": "",
+      "title1": "",
+      "title2": ""
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 20,
+  "x": 0,
+  "y": 0
+}

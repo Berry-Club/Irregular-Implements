@@ -4,11 +4,12 @@
   "name": "Portable Ender Bridge",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:portable_ender_bridge",
-      "link_recipe": true,
-      "text": "The $(d)Portable Ender Bridge$() allows you to teleport to any nearby $(l:blocks/ender_bridge#anchor)Ender Anchor$(/l), including through blocks!",
-      "title": "Portable Ender Bridge"
+      "type": "patchouli:text",
+      "text": "The $(d)Portable Ender Bridge$() can be used to teleport to $(l:irregular_implements:blocks/ender_bridge)Ender Anchors$(/l).$(br2)While held in the hand, you'll be able to see nearby Ender Bridges through blocks. Simply right-click while looking at an Ender Anchor to teleport to it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Ender Anchors won't be visible through walls."
     }
   ]
 }

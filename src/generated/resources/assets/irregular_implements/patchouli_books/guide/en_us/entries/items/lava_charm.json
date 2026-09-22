@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Lava Charm$() adds a temporary lava shield, visible above your armor bar.$(br2)While the shield is full, you will be $(a)completely immune to lava damage$(). However, it does $(c)not protect you from fire$()!$(br2)Lava will still light you on fire, and you will still take damage from that!. Maybe invest in an $(l:items/obsidian_skull)Obsidian Skull$(/l) as well?",
-      "title": "Lava Charm"
+      "text": "The $(d)Lava Charm$() can be worn as a Curio, and adds a temporary lava shield. It is visible above your armor bar.$(br2)While the shield is full, you will be completely immune to lava damage. Note that it does not protect you from fire damage, only lava damage."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:lava_charm",
-      "link_recipe": true,
-      "text": "Lava Charms can be found rarely in $(3)dungeon chests$() and more commonly in $(3)Nether Fortress chests$()."
+      "type": "patchouli:text",
+      "text": "It may be wise to also invest in an $(l:irregular_implements:items/obsidian_skull)Obsidian Skull$(/l) to protect against fire damage.$(br2)Lava Charms can be found rarely in dungeon chests, and more commonly in Nether Fortress chests."
     }
   ]
 }

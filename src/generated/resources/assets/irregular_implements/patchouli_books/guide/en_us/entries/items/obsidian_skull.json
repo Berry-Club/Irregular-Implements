@@ -4,18 +4,16 @@
   "name": "Obsidian Skull",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:obsidian_skull",
-      "link_recipe": true,
-      "text": "The $(d)Obsidian Skull$() has a chance of $(3)negating fire damage$() when held in the player's inventory.$(br2)The more damage that would have been taken, the higher the chance of negation. The exact formula is $(4)(amount^3)/100$().",
-      "title": "Obsidian Skull"
+      "type": "patchouli:text",
+      "text": "The $(d)Obsidian Skull$() has a chance of negating fire damage while in your inventory.$(br2)The more damage that would have been taken, the higher the chance of negation. The exact formula is:"
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:obsidian_skull_ring",
-      "link_recipe": true,
-      "text": "You can also craft the $(d)Obsidian Skull Ring$(), which can be worn in the Curio's ring slot!",
-      "title": "Obsidian Skull Ring"
+      "type": "patchouli:text",
+      "text": "`` (damage ^ 3) / 100 ``$(br2)The $(d)Obsidian Skull Ring$() does the exact same, but can be worn in a Curio slot."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:obsidian_skull_ring"
     }
   ]
 }

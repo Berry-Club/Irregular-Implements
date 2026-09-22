@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:quartz_lamp",
+  "name": "Quartz Lamp",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Quartz Lamp$(), when provided a redstone signal, will give off light that cannot be seen.$(br2)That is, mob spawning and other game logic will treat the area is if it were lit, but players will not see any light."
+    }
+  ]
+}

@@ -4,16 +4,20 @@
   "name": "Spectre Illuminator",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:spectre_illuminator",
-      "link_recipe": true,
-      "text": "The $(d)Spectre Illuminator$() can be used to $(3)light up an entire chunk$().$(br2)It will place an entity down that slowly floats upwards, until it's a certain distance above the highest block in the chunk."
+      "type": "patchouli:text",
+      "text": "The $(d)Spectre Illuminator$() can be used on a block to fully light up the chunk it's in.$(br2)It will place an entity that slowly floats upwards, aiming to be just above the highest block in the chunk."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:blackout_powder",
-      "link_recipe": true,
-      "text": "This can be undone either by right-clicking the entity, or using a $(d)Blackout Powder$() anywhere in the chunk."
+      "type": "patchouli:text",
+      "text": "This can be undone by either right-clicking the Illuminator entity, or by using $(d)Blackout Powder$() in the chunk."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_illuminator"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:blackout_powder"
     }
   ]
 }

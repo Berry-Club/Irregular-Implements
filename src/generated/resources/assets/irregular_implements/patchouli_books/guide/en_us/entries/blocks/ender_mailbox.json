@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Ender Mailbox$() allows you to send and receive $(l:items/ender_letter)Ender Letters$(/l) to and from other players.$(br2)To send a Letter, simply use it on the Mailbox and it will be sent to the recipient.",
-      "title": "Ender Mailbox"
+      "text": "The $(d)Ender Mailbox$() allows you to send and receive $(l:irregular_implements:items/ender_letter)Ender Letters$(/l) to and from other players.$(br2)To send a Letter, simply use it on any Mailbox, and it will be sent to the recipient if theirs is not full."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:ender_mailbox",
-      "link_recipe": true,
-      "text": "Using any Mailbox will show your incoming Letters, in the same way that Ender Chests show your items."
+      "type": "patchouli:text",
+      "text": "Using any Ender Mailbox will show your own incoming Letters, similar to an Ender Chest."
     }
   ]
 }

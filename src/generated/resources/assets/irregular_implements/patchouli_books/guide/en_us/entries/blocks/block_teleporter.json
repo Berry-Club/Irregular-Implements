@@ -5,14 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Block Teleporter$() allows you to $(3)teleport the block in front of itself to another Block Teleporter$() when powered by Redstone.$(br2)Use a $(l:items/location_filter)Location Filter$(/l) on a Block Teleporter to save its location, and then insert that Filter into a second Block Teleporter.",
-      "title": "Block Teleporter"
+      "text": "The $(d)Block Teleporter$() allows you to teleport the block in front of itself to another Block Teleporter when powered.$(br2)Use a Location Filter to save the location of one Block Teleporter, and insert it into the inventory of a second Block Teleporter."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:block_teleporter",
-      "link_recipe": true,
-      "text": "When that second Block Teleporter is powered, it will try to swap the block in front of the first Block Teleporter with the block in front of itself.$(br2)Whether or not the Block Teleporter works across dimensions can be configured, but it defaults to true."
+      "type": "patchouli:text",
+      "text": "When that second Block Teleporter is powered, it will attempt to swap the block in front of itself with the block in front of the linked Block Teleporter.$(br2)Whether or not it works between different dimensions can be configured, and defaults to true."
     }
   ]
 }

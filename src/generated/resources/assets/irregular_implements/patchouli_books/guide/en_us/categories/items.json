@@ -1,5 +1,6 @@
 {
-  "description": "All of the mods' items!",
+  "description": "All of the mod's items",
   "icon": "irregular_implements:spectre_key",
-  "name": "Items"
+  "name": "Items",
+  "sortnum": 2
 }

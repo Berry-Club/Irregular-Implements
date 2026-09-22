@@ -4,17 +4,28 @@
   "name": "Spectre Tools",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:spectre_sword",
-      "link_recipe": true,
-      "text": "The $(d)Spectre Sword$() is comparable to a Diamond Sword, with higher durability and enchantability.$(br2)It increases your entity interaction range by 3 blocks, and can be used to kill Spirits."
+      "type": "patchouli:text",
+      "text": "The $(d)Spectre Sword$() is comparable to a Diamond Sword, with higher durability and enchantability.$(br2)It increases your entity interaction range by 3 blocks, and can be used to kill $(l:irregular_implements:items/ectoplasm)Spirits$(/l)."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "irregular_implements:spectre_pickaxe,irregular_implements:spectre_axe,irregular_implements:spectre_shovel",
-      "link_recipe": true,
-      "text": "The $(d)Spectre Pickaxe, Axe, and Shovel$() are each comparable to their Diamond counterpart, with higher durability and enchantability.$(br2)Each of them increases your block interaction range by 3 blocks.",
-      "title": " "
+      "type": "patchouli:text",
+      "text": "The $(d)Spectre Pickaxe$(), $(d)Spectre Axe$(), and $(d)Spectre Shovel$() are comparable to their Diamond counterparts, with higher durability and enchantability.$(br2)They increase your block interaction range by 3 blocks."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_sword"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_pickaxe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_axe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:spectre_shovel"
     }
   ]
 }

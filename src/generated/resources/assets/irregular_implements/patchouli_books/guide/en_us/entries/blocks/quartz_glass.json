@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:quartz_glass",
+  "name": "Quartz Glass",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Quartz Glass$() allows players to pass through, but is solid for everything else."
+    }
+  ]
+}

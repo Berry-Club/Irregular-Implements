@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:contact_button",
+  "name": "Contact Button",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Contact Button$() works like a Button, but powers when the block it's aimed at is clicked, rather than when it itself is clicked."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:luminous_block_white",
+  "name": "Luminous Blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Luminous Blocks$() are always lit."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:luminous_block_white"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:translucent_luminous_block_white"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irregular_implements:stained_bricks_white"
+    }
+  ]
+}

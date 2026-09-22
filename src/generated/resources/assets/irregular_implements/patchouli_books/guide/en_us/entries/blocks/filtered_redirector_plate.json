@@ -1,0 +1,15 @@
+{
+  "category": "irregular_implements:blocks",
+  "icon": "irregular_implements:filtered_redirector_plate",
+  "name": "Filtered Redirector Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Filtered Redirector Plate$() redirects entities based on their type.$(br2)Entities entering from either end travel straight across by default. An entity matching the left filter is redirected to the left, while an entity matching the right filter is redirected to the right."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Right-click the Plate to open its filter screen, then place an $(l:irregular_implements:items/entity_filter)Entity Filter$(/l) in either slot."
+    }
+  ]
+}
