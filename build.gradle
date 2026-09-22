@@ -166,7 +166,7 @@ dependencies {
 
 	implementation("com.klikli_dev:modonomicon-1.21.1-neoforge:${modonomicon_version}") { transitive = false }
 
-	implementation "dev.aaronhowser.mods:patchoulidatagen-${pdg_version}"
+	implementation "dev.aaronhowser.mods:patchoulidatagen-1.21.1:${pdg_version}"
 	implementation "dev.aaronhowser.mods:aaron-1.21.1:${aaron_lib_version}"
 
 	compileOnly "maven.modrinth:sodium:mc1.21.1-0.6.13-neoforge"
