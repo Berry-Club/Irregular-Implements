@@ -1,0 +1,7 @@
+{
+  "parent": "irregular_implements:blocks",
+  "description": "Plates that interact with entities and inventories",
+  "icon": "irregular_implements:accelerator_plate",
+  "name": "Plates",
+  "sortnum": 1
+}

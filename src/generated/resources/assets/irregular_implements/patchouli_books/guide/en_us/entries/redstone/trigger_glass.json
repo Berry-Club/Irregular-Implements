@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:redstone",
+  "icon": "irregular_implements:trigger_glass",
+  "name": "Trigger Glass",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Trigger Glass$() is usually solid, but temporarily becomes non-solid when it receives a redstone pulse.$(br2)This effect propagates to all adjacent Trigger Glass blocks, within a distance."
+    }
+  ]
+}

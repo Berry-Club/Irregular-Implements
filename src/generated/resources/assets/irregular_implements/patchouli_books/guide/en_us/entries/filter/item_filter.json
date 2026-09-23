@@ -1,0 +1,19 @@
+{
+  "category": "irregular_implements:filter",
+  "icon": "irregular_implements:item_filter",
+  "name": "Item Filter",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Item Filter$() has a list of up to 9 items, and can serve as either a Whitelist or a Blacklist. Toggle this using the button on the far right of the GUI.$(br2)Above each filled slot is two buttons."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The left button allows you to toggle if the slot is an Item Filter or a Tag Filter. For example, putting a Stick in the slot will by default make it filter for the minecraft:stick item. Changing it to a Tag Filter will make it filter one of Stick's item tags.$(br2)The right button's function changes depending on if the slot is an Item Filter or a Tag Filter."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "For Item Filter slots, it toggles whether or not the item must match the data components (like enchantments, custom names, etc) of the item in the slot.$(br2)For Tag Filter slots, it cycles which of the item's tags to filter for."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "irregular_implements:items",
+  "description": "Items used for Floo teleportation",
+  "icon": "irregular_implements:floo_powder",
+  "name": "Floo",
+  "sortnum": 3
+}

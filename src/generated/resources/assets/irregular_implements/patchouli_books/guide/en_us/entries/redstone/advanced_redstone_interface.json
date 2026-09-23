@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:redstone",
+  "icon": "irregular_implements:advanced_redstone_interface",
+  "name": "Advanced Redstone Interface",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Advanced Redstone Interface$() will transmit its own received redstone signal strength to up to 9 linked blocks.$(br2)Insert $(l:irregular_implements:filter/location_filter)Location Filters$(/l) to link it to those blocks."
+    }
+  ]
+}

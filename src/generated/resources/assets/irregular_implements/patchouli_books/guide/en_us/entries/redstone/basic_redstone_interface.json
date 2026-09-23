@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:redstone",
+  "icon": "irregular_implements:basic_redstone_interface",
+  "name": "Basic Redstone Interface",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Basic Redstone Interface$() will transmit its own received redstone signal strength to the block it's linked to.$(br2)Use a $(l:irregular_implements:items/redstone_tool)Redstone Tool$(/l) to link it to a block."
+    }
+  ]
+}

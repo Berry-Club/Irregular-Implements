@@ -1,0 +1,28 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "floo",
+  "description": "book.irregular_implements.guide.floo.floo_powder.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "irregular_implements:floo_powder"
+  },
+  "name": "book.irregular_implements.guide.floo.floo_powder.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.floo.floo_powder.page_0.text",
+      "title": "book.irregular_implements.guide.floo.floo_powder.page_0.title",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 1,
+  "x": 0,
+  "y": 0
+}

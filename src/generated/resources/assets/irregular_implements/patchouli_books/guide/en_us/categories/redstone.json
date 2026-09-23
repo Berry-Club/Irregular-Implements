@@ -1,0 +1,7 @@
+{
+  "parent": "irregular_implements:blocks",
+  "description": "Blocks that interact with redstone signals",
+  "icon": "irregular_implements:basic_redstone_interface",
+  "name": "Redstone",
+  "sortnum": 2
+}

@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:plates",
+  "icon": "irregular_implements:directional_accelerator_plate",
+  "name": "Directional Accelerator Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Directional Accelerator Plate$() will push entities touching it in the direction the Plate is aiming."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "irregular_implements:items",
+  "description": "Filters used by other items and blocks",
+  "icon": "irregular_implements:item_filter",
+  "name": "Filter",
+  "sortnum": 2
+}

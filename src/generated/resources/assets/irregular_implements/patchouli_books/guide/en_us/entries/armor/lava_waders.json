@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:armor",
+  "icon": "irregular_implements:lava_waders",
+  "name": "Lava Waders",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Lava Waders$() combine the effects of the $(l:irregular_implements:armor/obsidian_water_walking_boots)Obsidian Water Walking Boots$(/l) and the $(l:irregular_implements:items/lava_charm)Lava Charm$(/l), as well as allowing you to walk on Lava.$(br2)Get them by combining the two in an Anvil."
+    }
+  ]
+}

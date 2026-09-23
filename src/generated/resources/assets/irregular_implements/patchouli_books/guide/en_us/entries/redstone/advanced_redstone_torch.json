@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:redstone",
+  "icon": "irregular_implements:advanced_redstone_torch",
+  "name": "Advanced Redstone Torch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Advanced Redstone Torch$() has a configurable redstone signal strength for when its powered and unpowered."
+    }
+  ]
+}

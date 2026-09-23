@@ -1,0 +1,7 @@
+{
+  "parent": "irregular_implements:items",
+  "description": "Armor and wearable items",
+  "icon": "irregular_implements:lava_waders",
+  "name": "Armor",
+  "sortnum": 1
+}

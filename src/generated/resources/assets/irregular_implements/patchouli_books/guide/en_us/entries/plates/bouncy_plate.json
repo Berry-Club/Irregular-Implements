@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:plates",
+  "icon": "irregular_implements:bouncy_plate",
+  "name": "Bouncy Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Bouncy Plate$() will launch entities that touch it into the air."
+    }
+  ]
+}

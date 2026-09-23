@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:redstone",
+  "icon": "irregular_implements:sided_redstone",
+  "name": "Sided Block of Redstone",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Sided Block of Redstone$() emits a full signal on one face, and nothing on the others."
+    }
+  ]
+}

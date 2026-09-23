@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:plates",
+  "icon": "irregular_implements:item_rejuvenator_plate",
+  "name": "Item Rejuvenator Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Any item entity that touches an $(d)Item Rejuvenator Plate$() will have its despawn timer reset to 4 minutes and its age reset."
+    }
+  ]
+}

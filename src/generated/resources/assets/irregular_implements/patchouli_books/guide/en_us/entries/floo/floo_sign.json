@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:floo",
+  "icon": "irregular_implements:floo_sign",
+  "name": "Floo Sign",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(d)Floo Signs$() are used to create Floo Fireplaces. Using the Sign on Bricks placed in the world will convert them all to Floo Bricks.$(br2)If the Floo Sign has been renamed in an Anvil, the Fireplace will be named the same. If not, the Fireplace will have no name and cannot be teleported from, not to."
+    }
+  ]
+}

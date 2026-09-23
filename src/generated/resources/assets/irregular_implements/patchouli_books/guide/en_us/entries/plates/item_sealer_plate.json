@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:plates",
+  "icon": "irregular_implements:item_sealer_plate",
+  "name": "Item Sealer Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Any item entity that touches an $(d)Item Sealer Plate$() will be prevented from being picked up for 30 seconds."
+    }
+  ]
+}

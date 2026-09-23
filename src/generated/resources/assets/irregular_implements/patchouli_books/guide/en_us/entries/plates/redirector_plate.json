@@ -1,0 +1,11 @@
+{
+  "category": "irregular_implements:plates",
+  "icon": "irregular_implements:redirector_plate",
+  "name": "Redirector Plate",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(d)Redirector Plate$() has two active sides. Any entity that moves onto one active side will be teleported to the other.$(br2)Right-click to set the first active side, and sneak right-click to set the other."
+    }
+  ]
+}
