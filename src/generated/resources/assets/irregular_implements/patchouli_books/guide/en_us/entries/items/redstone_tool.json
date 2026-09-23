@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The Redstone Tool can be used on the following blocks:$(br)$(li)$(l:irregular_implements:blocks/basic_redstone_interface)Basic Redstone Interface$(/l)$(br)$(li)$(l:irregular_implements:blocks/redstone_observer)Redstone Observer$(/l)"
+      "text": "The Redstone Tool can be used on the following blocks:$(br)$(li)$(l:irregular_implements:redstone/basic_redstone_interface)Basic Redstone Interface$(/l)$(br)$(li)$(l:irregular_implements:redstone/redstone_observer)Redstone Observer$(/l)"
     }
   ]
 }

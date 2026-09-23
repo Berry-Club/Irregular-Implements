@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The Energy Distributor will simulate having an energy storage, which is actually made up of all machines in its cache. Any FE inserted into it is actually inserted into the cached blocks; the same for any FE removed.$(br2)$(d)Ender Energy Distributor$()$(br2)The $(d)Ender Energy Distributor$() works similarly, but uses 8 $(l:irregular_implements:items/location_filter)Location Filters$(/l) to specify the machines in its cache."
+      "text": "The Energy Distributor will simulate having an energy storage, which is actually made up of all machines in its cache. Any FE inserted into it is actually inserted into the cached blocks; the same for any FE removed.$(br2)$(d)Ender Energy Distributor$()$(br2)The $(d)Ender Energy Distributor$() works similarly, but uses 8 $(l:irregular_implements:filter/location_filter)Location Filters$(/l) to specify the machines in its cache."
     },
     {
       "type": "patchouli:crafting",

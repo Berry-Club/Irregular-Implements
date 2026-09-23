@@ -14,6 +14,9 @@ import net.minecraft.resources.ResourceLocation
 object ItemsModonomiconCategory {
 
 	lateinit var bookCategory: ModonomiconBookCategory
+	lateinit var armorCategory: ModonomiconBookCategory
+	lateinit var filterCategory: ModonomiconBookCategory
+	lateinit var flooCategory: ModonomiconBookCategory
 	lateinit var lavaWaders: ModonomiconBookEntry
 	lateinit var magicHood: ModonomiconBookEntry
 	lateinit var obsidianWaterWalkingBoots: ModonomiconBookEntry
@@ -72,17 +75,44 @@ object ItemsModonomiconCategory {
 		bookCategory = book.category(
 			saveName = "items",
 			name = "Items",
-			description = "All of the mod's items",
+			description = "All of the mod's other items",
 			icon = ModItems.SPECTRE_KEY.get()
 		) {
-			sortNumber = 2
+			sortNumber = 4
+		}
+
+		armorCategory = book.category(
+			saveName = "armor",
+			name = "Armor",
+			description = "Armor and wearable items",
+			icon = ModItems.LAVA_WADERS.get()
+		) {
+			sortNumber = 5
+		}
+
+		filterCategory = book.category(
+			saveName = "filter",
+			name = "Filter",
+			description = "Filters used by other items and blocks",
+			icon = ModItems.ITEM_FILTER.get()
+		) {
+			sortNumber = 6
+		}
+
+		flooCategory = book.category(
+			saveName = "floo",
+			name = "Floo",
+			description = "Items used for Floo teleportation",
+			icon = ModItems.FLOO_POWDER.get()
+		) {
+			sortNumber = 7
 		}
 
 		addEntries()
 	}
 
 	private fun addEntries() {
-		lavaWaders = bookCategory.entry(
+		lavaWaders = armorCategory.entry(
 			saveName = "lava_waders",
 			name = "Lava Waders",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:lava_waders"))
@@ -96,7 +126,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		magicHood = bookCategory.entry(
+		magicHood = armorCategory.entry(
 			saveName = "magic_hood",
 			name = "Magic Hood",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:magic_hood"))
@@ -110,7 +140,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		obsidianWaterWalkingBoots = bookCategory.entry(
+		obsidianWaterWalkingBoots = armorCategory.entry(
 			saveName = "obsidian_water_walking_boots",
 			name = "Obsidian Water Walking Boots",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:obsidian_water_walking_boots"))
@@ -130,7 +160,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		spectreHelmet = bookCategory.entry(
+		spectreHelmet = armorCategory.entry(
 			saveName = "spectre_helmet",
 			name = "Spectre Armor",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_helmet"))
@@ -156,7 +186,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		waterWalkingBoots = bookCategory.entry(
+		waterWalkingBoots = armorCategory.entry(
 			saveName = "water_walking_boots",
 			name = "Water Walking Boots",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:water_walking_boots"))
@@ -454,7 +484,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		entityFilter = bookCategory.entry(
+		entityFilter = filterCategory.entry(
 			saveName = "entity_filter",
 			name = "Entity Filter",
 			icon = ModItems.ENTITY_FILTER.get()
@@ -468,7 +498,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		itemFilter = bookCategory.entry(
+		itemFilter = filterCategory.entry(
 			saveName = "item_filter",
 			name = "Item Filter",
 			icon = ModItems.ITEM_FILTER.get()
@@ -496,7 +526,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		locationFilter = bookCategory.entry(
+		locationFilter = filterCategory.entry(
 			saveName = "location_filter",
 			name = "Location Filter",
 			icon = ModItems.LOCATION_FILTER.get()
@@ -510,7 +540,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		playerFilter = bookCategory.entry(
+		playerFilter = filterCategory.entry(
 			saveName = "player_filter",
 			name = "Player Filter",
 			icon = ModItems.PLAYER_FILTER.get()
@@ -524,7 +554,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		flooPouch = bookCategory.entry(
+		flooPouch = flooCategory.entry(
 			saveName = "floo_pouch",
 			name = "Floo Pouch",
 			icon = ModItems.FLOO_POUCH.get()
@@ -544,7 +574,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		flooPowder = bookCategory.entry(
+		flooPowder = flooCategory.entry(
 			saveName = "floo_powder",
 			name = "Floo Powder",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:floo_powder"))
@@ -557,7 +587,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		flooSign = bookCategory.entry(
+		flooSign = flooCategory.entry(
 			saveName = "floo_sign",
 			name = "Floo Sign",
 			icon = ModItems.FLOO_SIGN.get()
@@ -571,7 +601,7 @@ object ItemsModonomiconCategory {
 		}
 
 
-		flooToken = bookCategory.entry(
+		flooToken = flooCategory.entry(
 			saveName = "floo_token",
 			name = "Floo Token",
 			icon = ModItems.FLOO_TOKEN.get()

@@ -13,6 +13,9 @@ import net.minecraft.resources.ResourceLocation
 object ItemsPatchouliCategory {
 
 	lateinit var bookCategory: PatchouliBookCategory
+	lateinit var armorCategory: PatchouliBookCategory
+	lateinit var filterCategory: PatchouliBookCategory
+	lateinit var flooCategory: PatchouliBookCategory
 	lateinit var lavaWaders: PatchouliBookEntry
 	lateinit var magicHood: PatchouliBookEntry
 	lateinit var obsidianWaterWalkingBoots: PatchouliBookEntry
@@ -71,10 +74,40 @@ object ItemsPatchouliCategory {
 		bookCategory = book.category(
 			saveName = "items",
 			name = "Items",
-			description = "All of the mod's items",
+			description = "All of the mod's other items",
 			icon = ModItems.SPECTRE_KEY.get()
 		) {
 			sortNumber = 2
+		}
+
+		armorCategory = book.category(
+			saveName = "armor",
+			name = "Armor",
+			description = "Armor and wearable items",
+			icon = ModItems.LAVA_WADERS.get()
+		) {
+			parent = bookCategory
+			sortNumber = 1
+		}
+
+		filterCategory = book.category(
+			saveName = "filter",
+			name = "Filter",
+			description = "Filters used by other items and blocks",
+			icon = ModItems.ITEM_FILTER.get()
+		) {
+			parent = bookCategory
+			sortNumber = 2
+		}
+
+		flooCategory = book.category(
+			saveName = "floo",
+			name = "Floo",
+			description = "Items used for Floo teleportation",
+			icon = ModItems.FLOO_POWDER.get()
+		) {
+			parent = bookCategory
+			sortNumber = 3
 		}
 
 		addEntries(book)
@@ -82,7 +115,7 @@ object ItemsPatchouliCategory {
 
 	private fun addEntries(book: PatchouliBook) {
 		lavaWaders = book.entry(
-			category = bookCategory,
+			category = armorCategory,
 			saveName = "lava_waders",
 			name = "Lava Waders",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:lava_waders"))
@@ -97,7 +130,7 @@ object ItemsPatchouliCategory {
 
 
 		magicHood = book.entry(
-			category = bookCategory,
+			category = armorCategory,
 			saveName = "magic_hood",
 			name = "Magic Hood",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:magic_hood"))
@@ -112,7 +145,7 @@ object ItemsPatchouliCategory {
 
 
 		obsidianWaterWalkingBoots = book.entry(
-			category = bookCategory,
+			category = armorCategory,
 			saveName = "obsidian_water_walking_boots",
 			name = "Obsidian Water Walking Boots",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:obsidian_water_walking_boots"))
@@ -133,7 +166,7 @@ object ItemsPatchouliCategory {
 
 
 		spectreHelmet = book.entry(
-			category = bookCategory,
+			category = armorCategory,
 			saveName = "spectre_helmet",
 			name = "Spectre Armor",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_helmet"))
@@ -156,7 +189,7 @@ object ItemsPatchouliCategory {
 
 
 		waterWalkingBoots = book.entry(
-			category = bookCategory,
+			category = armorCategory,
 			saveName = "water_walking_boots",
 			name = "Water Walking Boots",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:water_walking_boots"))
@@ -464,7 +497,7 @@ object ItemsPatchouliCategory {
 
 
 		entityFilter = book.entry(
-			category = bookCategory,
+			category = filterCategory,
 			saveName = "entity_filter",
 			name = "Entity Filter",
 			icon = ModItems.ENTITY_FILTER.get()
@@ -479,7 +512,7 @@ object ItemsPatchouliCategory {
 
 
 		itemFilter = book.entry(
-			category = bookCategory,
+			category = filterCategory,
 			saveName = "item_filter",
 			name = "Item Filter",
 			icon = ModItems.ITEM_FILTER.get()
@@ -508,7 +541,7 @@ object ItemsPatchouliCategory {
 
 
 		locationFilter = book.entry(
-			category = bookCategory,
+			category = filterCategory,
 			saveName = "location_filter",
 			name = "Location Filter",
 			icon = ModItems.LOCATION_FILTER.get()
@@ -523,7 +556,7 @@ object ItemsPatchouliCategory {
 
 
 		playerFilter = book.entry(
-			category = bookCategory,
+			category = filterCategory,
 			saveName = "player_filter",
 			name = "Player Filter",
 			icon = ModItems.PLAYER_FILTER.get()
@@ -538,7 +571,7 @@ object ItemsPatchouliCategory {
 
 
 		flooPouch = book.entry(
-			category = bookCategory,
+			category = flooCategory,
 			saveName = "floo_pouch",
 			name = "Floo Pouch",
 			icon = ModItems.FLOO_POUCH.get()
@@ -559,7 +592,7 @@ object ItemsPatchouliCategory {
 
 
 		flooPowder = book.entry(
-			category = bookCategory,
+			category = flooCategory,
 			saveName = "floo_powder",
 			name = "Floo Powder",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:floo_powder"))
@@ -573,7 +606,7 @@ object ItemsPatchouliCategory {
 
 
 		flooSign = book.entry(
-			category = bookCategory,
+			category = flooCategory,
 			saveName = "floo_sign",
 			name = "Floo Sign",
 			icon = ModItems.FLOO_SIGN.get()
@@ -588,7 +621,7 @@ object ItemsPatchouliCategory {
 
 
 		flooToken = book.entry(
-			category = bookCategory,
+			category = flooCategory,
 			saveName = "floo_token",
 			name = "Floo Token",
 			icon = ModItems.FLOO_TOKEN.get()

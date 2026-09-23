@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(d)Filtered Super Lubricant Platform$()$(br2)The $(d)Filtered Super Lubricant Platform$() works the same, but can hold an $(l:irregular_implements:items/item_filter)Item Filter$(/l).$(br2)Anything matching the filter will fall through the platform."
+      "text": "$(d)Filtered Super Lubricant Platform$()$(br2)The $(d)Filtered Super Lubricant Platform$() works the same, but can hold an $(l:irregular_implements:filter/item_filter)Item Filter$(/l).$(br2)Anything matching the filter will fall through the platform."
     },
     {
       "type": "patchouli:crafting",

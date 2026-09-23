@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceLocation
 object BlocksModonomiconCategory {
 
 	lateinit var bookCategory: ModonomiconBookCategory
+	lateinit var platesCategory: ModonomiconBookCategory
+	lateinit var redstoneCategory: ModonomiconBookCategory
 	lateinit var advancedItemCollector: ModonomiconBookEntry
 	lateinit var autoPlacer: ModonomiconBookEntry
 	lateinit var biomeBlocks: ModonomiconBookEntry
@@ -88,10 +90,28 @@ object BlocksModonomiconCategory {
 		bookCategory = book.category(
 			saveName = "blocks",
 			name = "Blocks",
-			description = "All of the mod's blocks",
+			description = "All of the mod's other blocks",
 			icon = ModBlocks.ENDER_ANCHOR.get()
 		) {
 			sortNumber = 1
+		}
+
+		platesCategory = book.category(
+			saveName = "plates",
+			name = "Plates",
+			description = "Plates that interact with entities and inventories",
+			icon = ModBlocks.ACCELERATOR_PLATE.get()
+		) {
+			sortNumber = 2
+		}
+
+		redstoneCategory = book.category(
+			saveName = "redstone",
+			name = "Redstone",
+			description = "Blocks that interact with redstone signals",
+			icon = ModBlocks.BASIC_REDSTONE_INTERFACE.get()
+		) {
+			sortNumber = 3
 		}
 
 		addEntries()
@@ -615,7 +635,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		acceleratorPlate = bookCategory.entry(
+		acceleratorPlate = platesCategory.entry(
 			saveName = "accelerator_plate",
 			name = "Accelerator Plate",
 			icon = ModBlocks.ACCELERATOR_PLATE.get()
@@ -629,7 +649,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		bouncyPlate = bookCategory.entry(
+		bouncyPlate = platesCategory.entry(
 			saveName = "bouncy_plate",
 			name = "Bouncy Plate",
 			icon = ModBlocks.BOUNCY_PLATE.get()
@@ -642,7 +662,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		collectionPlate = bookCategory.entry(
+		collectionPlate = platesCategory.entry(
 			saveName = "collection_plate",
 			name = "Collection Plate",
 			icon = ModBlocks.COLLECTION_PLATE.get()
@@ -656,7 +676,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		correctorPlate = bookCategory.entry(
+		correctorPlate = platesCategory.entry(
 			saveName = "corrector_plate",
 			name = "Corrector Plate",
 			icon = ModBlocks.CORRECTOR_PLATE.get()
@@ -670,7 +690,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		directionalAcceleratorPlate = bookCategory.entry(
+		directionalAcceleratorPlate = platesCategory.entry(
 			saveName = "directional_accelerator_plate",
 			name = "Directional Accelerator Plate",
 			icon = ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get()
@@ -683,7 +703,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		extractionPlate = bookCategory.entry(
+		extractionPlate = platesCategory.entry(
 			saveName = "extraction_plate",
 			name = "Extraction Plate",
 			icon = ModBlocks.EXTRACTION_PLATE.get()
@@ -703,7 +723,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		filteredRedirectorPlate = bookCategory.entry(
+		filteredRedirectorPlate = platesCategory.entry(
 			saveName = "filtered_redirector_plate",
 			name = "Filtered Redirector Plate",
 			icon = ModBlocks.FILTERED_REDIRECTOR_PLATE.get()
@@ -723,7 +743,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		itemRejuvenatorPlate = bookCategory.entry(
+		itemRejuvenatorPlate = platesCategory.entry(
 			saveName = "item_rejuvenator_plate",
 			name = "Item Rejuvenator Plate",
 			icon = ModBlocks.ITEM_REJUVENATOR_PLATE.get()
@@ -736,7 +756,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		itemSealerPlate = bookCategory.entry(
+		itemSealerPlate = platesCategory.entry(
 			saveName = "item_sealer_plate",
 			name = "Item Sealer Plate",
 			icon = ModBlocks.ITEM_SEALER_PLATE.get()
@@ -749,7 +769,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		processingPlate = bookCategory.entry(
+		processingPlate = platesCategory.entry(
 			saveName = "processing_plate",
 			name = "Processing Plate",
 			icon = ModBlocks.PROCESSING_PLATE.get()
@@ -831,7 +851,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		redirectorPlate = bookCategory.entry(
+		redirectorPlate = platesCategory.entry(
 			saveName = "redirector_plate",
 			name = "Redirector Plate",
 			icon = ModBlocks.REDIRECTOR_PLATE.get()
@@ -845,7 +865,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		redstonePlate = bookCategory.entry(
+		redstonePlate = platesCategory.entry(
 			saveName = "redstone_plate",
 			name = "Redstone Plate",
 			icon = ModBlocks.REDSTONE_PLATE.get()
@@ -961,7 +981,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		advancedRedstoneInterface = bookCategory.entry(
+		advancedRedstoneInterface = redstoneCategory.entry(
 			saveName = "advanced_redstone_interface",
 			name = "Advanced Redstone Interface",
 			icon = ModBlocks.ADVANCED_REDSTONE_INTERFACE.get()
@@ -975,7 +995,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		advancedRedstoneTorch = bookCategory.entry(
+		advancedRedstoneTorch = redstoneCategory.entry(
 			saveName = "advanced_redstone_torch",
 			name = "Advanced Redstone Torch",
 			icon = ModBlocks.ADVANCED_REDSTONE_TORCH.get()
@@ -988,7 +1008,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		analogEmitter = bookCategory.entry(
+		analogEmitter = redstoneCategory.entry(
 			saveName = "analog_emitter",
 			name = "Analog Emitter",
 			icon = ModBlocks.ANALOG_EMITTER.get()
@@ -1002,7 +1022,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		basicRedstoneInterface = bookCategory.entry(
+		basicRedstoneInterface = redstoneCategory.entry(
 			saveName = "basic_redstone_interface",
 			name = "Basic Redstone Interface",
 			icon = ModBlocks.BASIC_REDSTONE_INTERFACE.get()
@@ -1016,7 +1036,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		blockDestabilizer = bookCategory.entry(
+		blockDestabilizer = redstoneCategory.entry(
 			saveName = "block_destabilizer",
 			name = "Block Destabilizer",
 			icon = ModBlocks.BLOCK_DESTABILIZER.get()
@@ -1050,7 +1070,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		blockDetector = bookCategory.entry(
+		blockDetector = redstoneCategory.entry(
 			saveName = "block_detector",
 			name = "Block Detector",
 			icon = ModBlocks.BLOCK_DETECTOR.get()
@@ -1063,7 +1083,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		chatDetector = bookCategory.entry(
+		chatDetector = redstoneCategory.entry(
 			saveName = "chat_detector",
 			name = "Chat Detector",
 			icon = ModBlocks.CHAT_DETECTOR.get()
@@ -1098,7 +1118,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		contactButton = bookCategory.entry(
+		contactButton = redstoneCategory.entry(
 			saveName = "contact_button",
 			name = "Contact Button",
 			icon = ModBlocks.CONTACT_BUTTON.get()
@@ -1111,7 +1131,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		contactLever = bookCategory.entry(
+		contactLever = redstoneCategory.entry(
 			saveName = "contact_lever",
 			name = "Contact Lever",
 			icon = ModBlocks.CONTACT_LEVER.get()
@@ -1124,7 +1144,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		entityDetector = bookCategory.entry(
+		entityDetector = redstoneCategory.entry(
 			saveName = "entity_detector",
 			name = "Entity Detector",
 			icon = ModBlocks.ENTITY_DETECTOR.get()
@@ -1145,7 +1165,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		inventoryTester = bookCategory.entry(
+		inventoryTester = redstoneCategory.entry(
 			saveName = "inventory_tester",
 			name = "Inventory Tester",
 			icon = ModBlocks.INVENTORY_TESTER.get()
@@ -1172,7 +1192,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		ironDropper = bookCategory.entry(
+		ironDropper = redstoneCategory.entry(
 			saveName = "iron_dropper",
 			name = "Iron Dropper",
 			icon = ModBlocks.IRON_DROPPER.get()
@@ -1200,7 +1220,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		lapisLamp = bookCategory.entry(
+		lapisLamp = redstoneCategory.entry(
 			saveName = "lapis_lamp",
 			name = "Lapis Lamp",
 			icon = ModBlocks.LAPIS_LAMP.get()
@@ -1214,7 +1234,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		moonPhaseDetector = bookCategory.entry(
+		moonPhaseDetector = redstoneCategory.entry(
 			saveName = "moon_phase_detector",
 			name = "Moon Phase Detector",
 			icon = ModBlocks.MOON_PHASE_DETECTOR.get()
@@ -1234,7 +1254,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		onlineDetector = bookCategory.entry(
+		onlineDetector = redstoneCategory.entry(
 			saveName = "online_detector",
 			name = "Online Detector",
 			icon = ModBlocks.ONLINE_DETECTOR.get()
@@ -1247,7 +1267,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		quartzLamp = bookCategory.entry(
+		quartzLamp = redstoneCategory.entry(
 			saveName = "quartz_lamp",
 			name = "Quartz Lamp",
 			icon = ModBlocks.QUARTZ_LAMP.get()
@@ -1261,7 +1281,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		redstoneObserver = bookCategory.entry(
+		redstoneObserver = redstoneCategory.entry(
 			saveName = "redstone_observer",
 			name = "Redstone Observer",
 			icon = ModBlocks.REDSTONE_OBSERVER.get()
@@ -1275,7 +1295,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		sidedRedstone = bookCategory.entry(
+		sidedRedstone = redstoneCategory.entry(
 			saveName = "sided_redstone",
 			name = "Sided Block of Redstone",
 			icon = ModBlocks.SIDED_BLOCK_OF_REDSTONE.get()
@@ -1288,7 +1308,7 @@ object BlocksModonomiconCategory {
 		}
 
 
-		triggerGlass = bookCategory.entry(
+		triggerGlass = redstoneCategory.entry(
 			saveName = "trigger_glass",
 			name = "Trigger Glass",
 			icon = ModBlocks.TRIGGER_GLASS.get()

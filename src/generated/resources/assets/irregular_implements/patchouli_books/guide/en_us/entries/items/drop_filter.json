@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Drop Filter$() can hold an $(l:irregular_implements:items/item_filter)Item Filter$(/l), and will prevent items matching the filter from entering your inventory.$(br2)The $(d)Voiding Drop Filter$() does the same, but instead deletes the items matching the filter entirely."
+      "text": "The $(d)Drop Filter$() can hold an $(l:irregular_implements:filter/item_filter)Item Filter$(/l), and will prevent items matching the filter from entering your inventory.$(br2)The $(d)Voiding Drop Filter$() does the same, but instead deletes the items matching the filter entirely."
     },
     {
       "type": "patchouli:crafting",

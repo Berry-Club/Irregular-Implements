@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Then, insert a $(d)Biome Crystal$(). There's one for each Biome in the game, and they can be found in basically any chest with loot.$(br2)If the biome exists in the world, the fires on top of the Iron Bars will start blowing in its direction. If that's not enough, you can use a $(l:irregular_implements:items/location_filter)Location Filter$(/l) on it to set it to the biome's location."
+      "text": "Then, insert a $(d)Biome Crystal$(). There's one for each Biome in the game, and they can be found in basically any chest with loot.$(br2)If the biome exists in the world, the fires on top of the Iron Bars will start blowing in its direction. If that's not enough, you can use a $(l:irregular_implements:filter/location_filter)Location Filter$(/l) on it to set it to the biome's location."
     },
     {
       "type": "patchouli:text",

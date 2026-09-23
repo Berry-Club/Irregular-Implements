@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Redstone Remote$() acts like the $(l:irregular_implements:items/redstone_activator)Redstone Activator$(/l), but can be used from a distance.$(br2)It can have up to 9 stored locations. Sneak right-click it to open its GUI, and insert set $(l:irregular_implements:items/location_filter)Location Filters$(/l). You can place an item in the slot above to give its button an icon."
+      "text": "The $(d)Redstone Remote$() acts like the $(l:irregular_implements:items/redstone_activator)Redstone Activator$(/l), but can be used from a distance.$(br2)It can have up to 9 stored locations. Sneak right-click it to open its GUI, and insert set $(l:irregular_implements:filter/location_filter)Location Filters$(/l). You can place an item in the slot above to give its button an icon."
     },
     {
       "type": "patchouli:text",

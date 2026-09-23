@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Additionally, you can insert an $(l:irregular_implements:items/item_filter)Item Filter$(/l), and it will only collect items that match the filter."
+      "text": "Additionally, you can insert an $(l:irregular_implements:filter/item_filter)Item Filter$(/l), and it will only collect items that match the filter."
     }
   ]
 }
