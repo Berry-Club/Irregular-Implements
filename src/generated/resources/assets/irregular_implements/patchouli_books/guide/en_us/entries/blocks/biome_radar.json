@@ -5,15 +5,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Biome Radar$() is a multiblock structure that helps you find biomes in the world.$(br2)First, you have to actually build the structure:"
+      "text": "The $(d)Biome Radar$() is a multiblock structure that helps you find biomes in the world.$(br2)Build the structure shown on the next page."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "irregular_implements:biome_radar",
+          "C": "minecraft:iron_bars[east=true,north=true,south=true,west=true]",
+          "E": "minecraft:iron_bars[east=true,north=false,south=false,west=false]",
+          "I": "minecraft:iron_bars[east=false,north=false,south=false,west=false]",
+          "N": "minecraft:iron_bars[east=false,north=true,south=false,west=false]",
+          "S": "minecraft:iron_bars[east=false,north=false,south=true,west=false]",
+          "W": "minecraft:iron_bars[east=false,north=false,south=false,west=true]"
+        },
+        "pattern": [
+          [
+            " I ",
+            "I I",
+            " I "
+          ],
+          [
+            " E ",
+            "SCN",
+            " W "
+          ],
+          [
+            "   ",
+            " I ",
+            "   "
+          ],
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ]
+      },
+      "name": "Biome Radar",
+      "text": "Required blocks:$(br2)$(li)1 Biome Radar$(br)$(li)10 Iron Bars"
     },
     {
       "type": "patchouli:text",
-      "text": "Then, insert a $(d)Biome Crystal$(). There's one for each Biome in the game, and they can be found in basically any chest with loot.$(br2)If the biome exists in the world, the fires on top of the Iron Bars will start blowing in its direction. If that's not enough, you can use a $(l:irregular_implements:filter/location_filter)Location Filter$(/l) on it to set it to the biome's location."
+      "text": "Insert a $(d)Biome Crystal$() into the radar. There is one for each biome in the game, and they can be found in almost any chest with loot.$(br2)If the biome exists in the world, the flames above the Iron Bars will blow in its direction."
     },
     {
       "type": "patchouli:text",
-      "text": "With that, you can craft it with a $(l:irregular_implements:items/golden_compass)Golden Compass$(/l) to make your way there!"
+      "text": "Use a $(l:irregular_implements:filter/location_filter)Location Filter$(/l) on the radar to save the biome's location.$(br2)Craft that filter with a $(l:irregular_implements:items/golden_compass)Golden Compass$(/l) to make your way there!"
     }
   ]
 }

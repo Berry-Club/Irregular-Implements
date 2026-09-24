@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Server admins can also use the command /ii notify     to send notifications to players."
+      "text": "Server admins can also use the command /ii notify to send notifications to players."
     }
   ]
 }

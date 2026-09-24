@@ -1,0 +1,55 @@
+{
+  "type": "modonomicon:dense",
+  "mapping": {
+    "0": {
+      "type": "modonomicon:block",
+      "block": "irregular_implements:biome_radar"
+    },
+    "C": {
+      "type": "modonomicon:blockstate",
+      "block": "minecraft:iron_bars[east=true,north=true,south=true,west=true]"
+    },
+    "E": {
+      "type": "modonomicon:blockstate",
+      "block": "minecraft:iron_bars[east=true]"
+    },
+    "I": {
+      "type": "modonomicon:block",
+      "block": "minecraft:iron_bars"
+    },
+    "N": {
+      "type": "modonomicon:blockstate",
+      "block": "minecraft:iron_bars[north=true]"
+    },
+    "S": {
+      "type": "modonomicon:blockstate",
+      "block": "minecraft:iron_bars[south=true]"
+    },
+    "W": {
+      "type": "modonomicon:blockstate",
+      "block": "minecraft:iron_bars[west=true]"
+    }
+  },
+  "pattern": [
+    [
+      "_I_",
+      "I_I",
+      "_I_"
+    ],
+    [
+      "_E_",
+      "SCN",
+      "_W_"
+    ],
+    [
+      "___",
+      "_I_",
+      "___"
+    ],
+    [
+      "___",
+      "_0_",
+      "___"
+    ]
+  ]
+}

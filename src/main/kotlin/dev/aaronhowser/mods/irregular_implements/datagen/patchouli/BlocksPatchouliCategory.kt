@@ -4,11 +4,12 @@ import dev.aaronhowser.mods.irregular_implements.datagen.patchouli.PatchouliBook
 import dev.aaronhowser.mods.irregular_implements.datagen.patchouli.PatchouliBookText.internalLink
 import dev.aaronhowser.mods.irregular_implements.datagen.patchouli.PatchouliBookText.major
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.patchoulidatagen.patchouli.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.patchouli.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.patchouli.book_element.PatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.patchouli.multiblock.PatchouliMultiblock
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
 
 object BlocksPatchouliCategory {
 
@@ -159,7 +160,7 @@ object BlocksPatchouliCategory {
 			category = bookCategory,
 			saveName = "biome_blocks",
 			name = "Biome Blocks",
-			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:biome_stone"))
+			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("biome_stone"))
 		) {
 			textPage(
 				text = bookText(
@@ -167,17 +168,17 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:biome_stone"))
+			craftingPage(OtherUtil.modResource("biome_stone"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:biome_cobblestone"))
+			craftingPage(OtherUtil.modResource("biome_cobblestone"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:biome_bricks"))
+			craftingPage(OtherUtil.modResource("biome_bricks"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:biome_bricks_cracked"))
+			craftingPage(OtherUtil.modResource("biome_bricks_cracked"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:biome_bricks_chiseled"))
+			craftingPage(OtherUtil.modResource("biome_bricks_chiseled"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:biome_glass"))
+			craftingPage(OtherUtil.modResource("biome_glass"))
 		}
 
 
@@ -190,20 +191,29 @@ object BlocksPatchouliCategory {
 			textPage(
 				text = bookText(
 					"The ${major("Biome Radar")} is a multiblock structure that helps you find biomes in the world.",
-					"First, you have to actually build the structure:"
+					"Build the structure shown on the next page."
+				)
+			)
+
+			multiblockPage("Biome Radar") {
+				multiblock = createBiomeRadarMultiblock()
+				text = bookText(
+					"Required blocks:",
+					"- 1 Biome Radar\n- 10 Iron Bars"
+				)
+			}
+
+			textPage(
+				text = bookText(
+					"Insert a ${major("Biome Crystal")} into the radar. There is one for each biome in the game, and they can be found in almost any chest with loot.",
+					"If the biome exists in the world, the flames above the Iron Bars will blow in its direction."
 				)
 			)
 
 			textPage(
 				text = bookText(
-					"Then, insert a ${major("Biome Crystal")}. There's one for each Biome in the game, and they can be found in basically any chest with loot.",
-					"If the biome exists in the world, the fires on top of the Iron Bars will start blowing in its direction. If that's not enough, you can use a ${internalLink(ItemsPatchouliCategory.locationFilter, "Location Filter")} on it to set it to the biome's location."
-				)
-			)
-
-			textPage(
-				text = bookText(
-					"With that, you can craft it with a ${internalLink(ItemsPatchouliCategory.goldenCompass, "Golden Compass")} to make your way there!"
+					"Use a ${internalLink(ItemsPatchouliCategory.locationFilter, "Location Filter")} on the radar to save the biome's location.",
+					"Craft that filter with a ${internalLink(ItemsPatchouliCategory.goldenCompass, "Golden Compass")} to make your way there!"
 				)
 			)
 		}
@@ -237,9 +247,9 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:block_breaker"))
+			craftingPage(OtherUtil.modResource("block_breaker"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:diamond_breaker"))
+			craftingPage(OtherUtil.modResource("diamond_breaker"))
 		}
 
 
@@ -256,9 +266,9 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:block_of_sticks"))
+			craftingPage(OtherUtil.modResource("block_of_sticks"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:returning_block_of_sticks"))
+			craftingPage(OtherUtil.modResource("returning_block_of_sticks"))
 		}
 
 
@@ -361,11 +371,11 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:ender_bridge"))
+			craftingPage(OtherUtil.modResource("ender_bridge"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:prismarine_ender_bridge"))
+			craftingPage(OtherUtil.modResource("prismarine_ender_bridge"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:ender_anchor"))
+			craftingPage(OtherUtil.modResource("ender_anchor"))
 		}
 
 
@@ -412,9 +422,9 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:energy_distributor"))
+			craftingPage(OtherUtil.modResource("energy_distributor"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:ender_energy_distributor"))
+			craftingPage(OtherUtil.modResource("ender_energy_distributor"))
 		}
 
 
@@ -545,7 +555,7 @@ object BlocksPatchouliCategory {
 			category = bookCategory,
 			saveName = "luminous_block_white",
 			name = "Luminous Blocks",
-			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:luminous_block_white"))
+			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("luminous_block_white"))
 		) {
 			textPage(
 				text = bookText(
@@ -553,11 +563,11 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:luminous_block_white"))
+			craftingPage(OtherUtil.modResource("luminous_block_white"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:translucent_luminous_block_white"))
+			craftingPage(OtherUtil.modResource("translucent_luminous_block_white"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:stained_bricks_white"))
+			craftingPage(OtherUtil.modResource("stained_bricks_white"))
 		}
 
 
@@ -568,9 +578,13 @@ object BlocksPatchouliCategory {
 			icon = ModBlocks.NATURE_CORE.get()
 		) {
 			textPage(
+				text = "The ${major("Nature Core")} structure can be found randomly around the overworld, with a Nature Chest nearby full of goodies."
+			)
+
+			textPage(
 				text = bookText(
-					"The ${major("Nature Core")} structure can be found randomly around the overworld, with a Nature Chest nearby full of goodies.",
-					"The Nature Core can also do these things randomly:\n- Convert nearby Sand into Dirt/Grass\n- Spawn an animal nearby\n- Bone Meal nearby crops\n- Plant Saplings nearby\n- Repair the structure around it"
+					"The Nature Core can also do these things randomly:",
+					"- Convert nearby Sand into Dirt/Grass\n- Spawn an animal nearby\n- Bone Meal nearby crops\n- Plant Saplings nearby\n- Repair the structure around it"
 				)
 			)
 		}
@@ -591,7 +605,7 @@ object BlocksPatchouliCategory {
 
 			textPage(
 				text = bookText(
-					"Server admins can also use the command /ii notify     to send notifications to players."
+					"Server admins can also use the command /ii notify to send notifications to players."
 				)
 			)
 		}
@@ -925,17 +939,17 @@ object BlocksPatchouliCategory {
 
 			textPage(
 				text = bookText(
-					"${major("Filtered Super Lubricant Platform")}",
+					major("Filtered Super Lubricant Platform"),
 					"The ${major("Filtered Super Lubricant Platform")} works the same, but can hold an ${internalLink(ItemsPatchouliCategory.itemFilter, "Item Filter")}.",
 					"Anything matching the filter will fall through the platform."
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:oak_platform"))
+			craftingPage(OtherUtil.modResource("oak_platform"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:super_lubricant_platform"))
+			craftingPage(OtherUtil.modResource("super_lubricant_platform"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:filtered_super_lubricant_platform"))
+			craftingPage(OtherUtil.modResource("filtered_super_lubricant_platform"))
 		}
 
 
@@ -1133,9 +1147,9 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:chat_detector"))
+			craftingPage(OtherUtil.modResource("chat_detector"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:global_chat_detector"))
+			craftingPage(OtherUtil.modResource("global_chat_detector"))
 		}
 
 
@@ -1428,11 +1442,11 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:spectre_coil_basic"))
+			craftingPage(OtherUtil.modResource("spectre_coil_basic"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:spectre_coil_redstone"))
+			craftingPage(OtherUtil.modResource("spectre_coil_redstone"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:spectre_coil_ender"))
+			craftingPage(OtherUtil.modResource("spectre_coil_ender"))
 		}
 
 
@@ -1503,7 +1517,7 @@ object BlocksPatchouliCategory {
 			category = bookCategory,
 			saveName = "super_lubricated_blocks",
 			name = "Super Lubricated Blocks",
-			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:super_lubricant_stone"))
+			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("super_lubricant_stone"))
 		) {
 			textPage(
 				text = bookText(
@@ -1511,10 +1525,28 @@ object BlocksPatchouliCategory {
 				)
 			)
 
-			craftingPage(ResourceLocation.parse("irregular_implements:super_lubricant_stone"))
+			craftingPage(OtherUtil.modResource("super_lubricant_stone"))
 
-			craftingPage(ResourceLocation.parse("irregular_implements:super_lubricant_ice"))
+			craftingPage(OtherUtil.modResource("super_lubricant_ice"))
 		}
 
+	}
+
+	private fun createBiomeRadarMultiblock(): PatchouliMultiblock {
+		val multiblock = PatchouliMultiblock()
+
+		multiblock.layer(" I ", "I I", " I ")
+		multiblock.layer(" E ", "SCN", " W ")
+		multiblock.layer("   ", " I ", "   ")
+		multiblock.layer("   ", " 0 ", "   ")
+		multiblock.map('0', ModBlocks.BIOME_RADAR.get())
+		multiblock.map('I', "minecraft:iron_bars[east=false,north=false,south=false,west=false]")
+		multiblock.map('C', "minecraft:iron_bars[east=true,north=true,south=true,west=true]")
+		multiblock.map('N', "minecraft:iron_bars[east=false,north=true,south=false,west=false]")
+		multiblock.map('E', "minecraft:iron_bars[east=true,north=false,south=false,west=false]")
+		multiblock.map('S', "minecraft:iron_bars[east=false,north=false,south=true,west=false]")
+		multiblock.map('W', "minecraft:iron_bars[east=false,north=false,south=false,west=true]")
+
+		return multiblock
 	}
 }

@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.datagen
 import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModModonomiconProvider
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModonomiconMultiblockProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.patchouli.ModPatchouliBookProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider
 import dev.aaronhowser.mods.irregular_implements.datagen.loot.ModGlobalLootModifierProvider
@@ -105,6 +106,11 @@ object ModDataGen {
 			NeoBookProvider.of(
 				event, lookupProvider, ModModonomiconProvider(languageProvider::add)
 			)
+		)
+
+		generator.addProvider(
+			event.includeClient(),
+			ModonomiconMultiblockProvider(output)
 		)
 
 		generator.addProvider(event.includeClient(), languageProvider)

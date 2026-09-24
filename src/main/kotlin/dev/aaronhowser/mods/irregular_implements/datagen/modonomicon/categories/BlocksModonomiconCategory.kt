@@ -1,15 +1,18 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.categories
 
-import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModonomiconBookText.bookText
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModonomiconBookText.bookText
 import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModonomiconBookText.internalLink
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModonomiconBookText.list
+import dev.aaronhowser.mods.irregular_implements.datagen.modonomicon.ModonomiconMultiblockProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
+import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import dev.aaronhowser.mods.patchoulidatagen.modonomicon.book_element.ModonomiconBook
 import dev.aaronhowser.mods.patchoulidatagen.modonomicon.book_element.ModonomiconBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.modonomicon.book_element.ModonomiconBookEntry
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
 
 object BlocksModonomiconCategory {
 
@@ -155,7 +158,7 @@ object BlocksModonomiconCategory {
 		biomeBlocks = bookCategory.entry(
 			saveName = "biome_blocks",
 			name = "Biome Blocks",
-			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:biome_stone"))
+			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("biome_stone"))
 		) {
 			textPage(
 				text = bookText(
@@ -165,20 +168,20 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:biome_stone"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:biome_cobblestone"))
+					.withRecipeId1(OtherUtil.modResource("biome_stone"))
+					.withRecipeId2(OtherUtil.modResource("biome_cobblestone"))
 			})
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:biome_bricks"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:biome_bricks_cracked"))
+					.withRecipeId1(OtherUtil.modResource("biome_bricks"))
+					.withRecipeId2(OtherUtil.modResource("biome_bricks_cracked"))
 			})
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:biome_bricks_chiseled"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:biome_glass"))
+					.withRecipeId1(OtherUtil.modResource("biome_bricks_chiseled"))
+					.withRecipeId2(OtherUtil.modResource("biome_glass"))
 			})
 		}
 
@@ -191,20 +194,33 @@ object BlocksModonomiconCategory {
 			textPage(
 				text = bookText(
 					"The **Biome Radar** is a multiblock structure that helps you find biomes in the world.",
-					"First, you have to actually build the structure:"
+					"Build the structure shown on the next page."
+				)
+			)
+
+			customPage(factory = { _, _ ->
+				BookMultiblockPageModel.create()
+					.withMultiblockName("Biome Radar")
+					.withMultiblockId(ModonomiconMultiblockProvider.BIOME_RADAR)
+					.withText(
+						bookText(
+							"Required blocks:",
+							list("1 Biome Radar", "10 Iron Bars")
+						)
+					)
+			})
+
+			textPage(
+				text = bookText(
+					"Insert a **Biome Crystal** into the radar. There is one for each biome in the game, and they can be found in almost any chest with loot.",
+					"If the biome exists in the world, the flames above the Iron Bars will blow in its direction."
 				)
 			)
 
 			textPage(
 				text = bookText(
-					"Then, insert a **Biome Crystal**. There's one for each Biome in the game, and they can be found in basically any chest with loot.",
-					"If the biome exists in the world, the fires on top of the Iron Bars will start blowing in its direction. If that's not enough, you can use a ${internalLink(ItemsModonomiconCategory.locationFilter, "Location Filter")} on it to set it to the biome's location."
-				)
-			)
-
-			textPage(
-				text = bookText(
-					"With that, you can craft it with a ${internalLink(ItemsModonomiconCategory.goldenCompass, "Golden Compass")} to make your way there!"
+					"Use a ${internalLink(ItemsModonomiconCategory.locationFilter, "Location Filter")} on the radar to save the biome's location.",
+					"Craft that filter with a ${internalLink(ItemsModonomiconCategory.goldenCompass, "Golden Compass")} to make your way there!"
 				)
 			)
 		}
@@ -239,8 +255,8 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:block_breaker"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:diamond_breaker"))
+					.withRecipeId1(OtherUtil.modResource("block_breaker"))
+					.withRecipeId2(OtherUtil.modResource("diamond_breaker"))
 			})
 		}
 
@@ -259,8 +275,8 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:block_of_sticks"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:returning_block_of_sticks"))
+					.withRecipeId1(OtherUtil.modResource("block_of_sticks"))
+					.withRecipeId2(OtherUtil.modResource("returning_block_of_sticks"))
 			})
 		}
 
@@ -361,13 +377,13 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:ender_bridge"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:prismarine_ender_bridge"))
+					.withRecipeId1(OtherUtil.modResource("ender_bridge"))
+					.withRecipeId2(OtherUtil.modResource("prismarine_ender_bridge"))
 			})
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:ender_anchor"))
+					.withRecipeId1(OtherUtil.modResource("ender_anchor"))
 			})
 		}
 
@@ -415,8 +431,8 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:energy_distributor"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:ender_energy_distributor"))
+					.withRecipeId1(OtherUtil.modResource("energy_distributor"))
+					.withRecipeId2(OtherUtil.modResource("ender_energy_distributor"))
 			})
 		}
 
@@ -540,7 +556,7 @@ object BlocksModonomiconCategory {
 		luminousBlockWhite = bookCategory.entry(
 			saveName = "luminous_block_white",
 			name = "Luminous Blocks",
-			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:luminous_block_white"))
+			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("luminous_block_white"))
 		) {
 			textPage(
 				text = bookText(
@@ -550,13 +566,13 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:luminous_block_white"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:translucent_luminous_block_white"))
+					.withRecipeId1(OtherUtil.modResource("luminous_block_white"))
+					.withRecipeId2(OtherUtil.modResource("translucent_luminous_block_white"))
 			})
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:stained_bricks_white"))
+					.withRecipeId1(OtherUtil.modResource("stained_bricks_white"))
 			})
 		}
 
@@ -916,13 +932,13 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:oak_platform"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:super_lubricant_platform"))
+					.withRecipeId1(OtherUtil.modResource("oak_platform"))
+					.withRecipeId2(OtherUtil.modResource("super_lubricant_platform"))
 			})
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:filtered_super_lubricant_platform"))
+					.withRecipeId1(OtherUtil.modResource("filtered_super_lubricant_platform"))
 			})
 		}
 
@@ -1112,8 +1128,8 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:chat_detector"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:global_chat_detector"))
+					.withRecipeId1(OtherUtil.modResource("chat_detector"))
+					.withRecipeId2(OtherUtil.modResource("global_chat_detector"))
 			})
 		}
 
@@ -1393,13 +1409,13 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:spectre_coil_basic"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:spectre_coil_redstone"))
+					.withRecipeId1(OtherUtil.modResource("spectre_coil_basic"))
+					.withRecipeId2(OtherUtil.modResource("spectre_coil_redstone"))
 			})
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:spectre_coil_ender"))
+					.withRecipeId1(OtherUtil.modResource("spectre_coil_ender"))
 			})
 		}
 
@@ -1467,7 +1483,7 @@ object BlocksModonomiconCategory {
 		superLubricatedBlocks = bookCategory.entry(
 			saveName = "super_lubricated_blocks",
 			name = "Super Lubricated Blocks",
-			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:super_lubricant_stone"))
+			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("super_lubricant_stone"))
 		) {
 			textPage(
 				text = bookText(
@@ -1477,8 +1493,8 @@ object BlocksModonomiconCategory {
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
-					.withRecipeId1(ResourceLocation.parse("irregular_implements:super_lubricant_stone"))
-					.withRecipeId2(ResourceLocation.parse("irregular_implements:super_lubricant_ice"))
+					.withRecipeId1(OtherUtil.modResource("super_lubricant_stone"))
+					.withRecipeId2(OtherUtil.modResource("super_lubricant_ice"))
 			})
 		}
 

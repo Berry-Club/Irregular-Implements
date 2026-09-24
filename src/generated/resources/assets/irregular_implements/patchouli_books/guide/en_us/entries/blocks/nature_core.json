@@ -5,7 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(d)Nature Core$() structure can be found randomly around the overworld, with a Nature Chest nearby full of goodies.$(br2)The Nature Core can also do these things randomly:$(br)$(li)Convert nearby Sand into Dirt/Grass$(br)$(li)Spawn an animal nearby$(br)$(li)Bone Meal nearby crops$(br)$(li)Plant Saplings nearby$(br)$(li)Repair the structure around it"
+      "text": "The $(d)Nature Core$() structure can be found randomly around the overworld, with a Nature Chest nearby full of goodies."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Nature Core can also do these things randomly:$(br2)$(li)Convert nearby Sand into Dirt/Grass$(br)$(li)Spawn an animal nearby$(br)$(li)Bone Meal nearby crops$(br)$(li)Plant Saplings nearby$(br)$(li)Repair the structure around it"
     }
   ]
 }

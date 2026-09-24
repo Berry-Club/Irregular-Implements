@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-22T20:00:09.3135175	Books: irregular_implements
+// 1.21.1	2026-09-22T20:12:48.6172352	Books: irregular_implements
 46c0cdc31774336e25601fbd8e12af07968fd232 data/irregular_implements/modonomicon/books/guide/book.json
 b9ad14d6ce97d1e7201af36bd94fb33a960302f1 data/irregular_implements/modonomicon/books/guide/categories/armor.json
 502f356de3b363573651eb009ad862d358dba045 data/irregular_implements/modonomicon/books/guide/categories/blocks.json
@@ -15,7 +15,7 @@ a9a51f6c9deb5f192f1996f0758c7a0bd00d68e7 data/irregular_implements/modonomicon/b
 2220aab3de4a9fa4496780a5262d9e7dbb40da04 data/irregular_implements/modonomicon/books/guide/entries/blocks/advanced_item_collector.json
 3deadd3e976b1c19e9dfbbeb9eeb5deaa4dfae3a data/irregular_implements/modonomicon/books/guide/entries/blocks/auto_placer.json
 818abaf77cc80063dc92cb4a2ec49aa120a6feb3 data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_blocks.json
-4c8173b06179f0aabf4f0d71a68762a4b45248bb data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_radar.json
+40516067ea825fe1a0762e8045f2b49b1c7feb5f data/irregular_implements/modonomicon/books/guide/entries/blocks/biome_radar.json
 f7bf44a9f3a00ee2b8dec366d950061e36d9cd3c data/irregular_implements/modonomicon/books/guide/entries/blocks/block_breaker.json
 a551a59bd7712d9755d53936250baebd5f73def9 data/irregular_implements/modonomicon/books/guide/entries/blocks/block_of_sticks.json
 292240d4f20e66e950e0a6f2e6edffb0b7162dfd data/irregular_implements/modonomicon/books/guide/entries/blocks/block_teleporter.json

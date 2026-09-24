@@ -21,15 +21,15 @@
       "use_markdown_in_title": false
     },
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:multiblock",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
-      "text": "book.irregular_implements.guide.blocks.biome_radar.page_1.text",
-      "title": "book.irregular_implements.guide.blocks.biome_radar.page_1.title",
-      "use_markdown_in_title": false
+      "multiblock_id": "biome_radar",
+      "multiblock_name": "Biome Radar",
+      "show_visualize_button": true,
+      "text": "Required blocks: \\\n  \\\n- 1 Biome Radar\n- 10 Iron Bars\n"
     },
     {
       "type": "modonomicon:text",
@@ -40,6 +40,17 @@
       "show_title_separator": true,
       "text": "book.irregular_implements.guide.blocks.biome_radar.page_2.text",
       "title": "book.irregular_implements.guide.blocks.biome_radar.page_2.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.blocks.biome_radar.page_3.text",
+      "title": "book.irregular_implements.guide.blocks.biome_radar.page_3.title",
       "use_markdown_in_title": false
     }
   ],
