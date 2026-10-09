@@ -10,15 +10,17 @@
   "name": "book.irregular_implements.guide.floo.floo_powder.name",
   "pages": [
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:spotlight",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:floo_powder"
+      },
       "text": "book.irregular_implements.guide.floo.floo_powder.page_0.text",
-      "title": "book.irregular_implements.guide.floo.floo_powder.page_0.title",
-      "use_markdown_in_title": false
+      "title": "book.irregular_implements.guide.floo.floo_powder.page_0.title"
     }
   ],
   "show_when_any_parent_unlocked": false,

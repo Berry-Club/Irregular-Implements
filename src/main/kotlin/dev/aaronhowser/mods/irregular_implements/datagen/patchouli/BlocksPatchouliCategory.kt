@@ -1093,7 +1093,6 @@ object BlocksPatchouliCategory {
 			textPage(
 				text = bookText(
 					"Clicking the Show Lazy Shape button will show cubes where all positions in the Lazy Shape are located.",
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Lazy Shape indicators won't be visible through blocks."
 				)
 			)
 

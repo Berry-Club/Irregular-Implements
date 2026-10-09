@@ -10,15 +10,17 @@
   "name": "book.irregular_implements.guide.blocks.biome_blocks.name",
   "pages": [
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:spotlight",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:biome_stone"
+      },
       "text": "book.irregular_implements.guide.blocks.biome_blocks.page_0.text",
-      "title": "book.irregular_implements.guide.blocks.biome_blocks.page_0.title",
-      "use_markdown_in_title": false
+      "title": "book.irregular_implements.guide.blocks.biome_blocks.page_0.title"
     },
     {
       "type": "modonomicon:crafting_recipe",

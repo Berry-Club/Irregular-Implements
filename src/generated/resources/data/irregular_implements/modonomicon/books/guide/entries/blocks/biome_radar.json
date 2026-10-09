@@ -10,14 +10,27 @@
   "name": "book.irregular_implements.guide.blocks.biome_radar.name",
   "pages": [
     {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:biome_radar"
+      },
+      "text": "book.irregular_implements.guide.blocks.biome_radar.page_0.text",
+      "title": "book.irregular_implements.guide.blocks.biome_radar.page_0.title"
+    },
+    {
       "type": "modonomicon:text",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.blocks.biome_radar.page_0.text",
-      "title": "book.irregular_implements.guide.blocks.biome_radar.page_0.title",
+      "text": "book.irregular_implements.guide.blocks.biome_radar.page_1.text",
+      "title": "book.irregular_implements.guide.blocks.biome_radar.page_1.title",
       "use_markdown_in_title": false
     },
     {
@@ -38,8 +51,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.blocks.biome_radar.page_2.text",
-      "title": "book.irregular_implements.guide.blocks.biome_radar.page_2.title",
+      "text": "book.irregular_implements.guide.blocks.biome_radar.page_3.text",
+      "title": "book.irregular_implements.guide.blocks.biome_radar.page_3.title",
       "use_markdown_in_title": false
     },
     {
@@ -49,8 +62,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.blocks.biome_radar.page_3.text",
-      "title": "book.irregular_implements.guide.blocks.biome_radar.page_3.title",
+      "text": "book.irregular_implements.guide.blocks.biome_radar.page_4.text",
+      "title": "book.irregular_implements.guide.blocks.biome_radar.page_4.title",
       "use_markdown_in_title": false
     }
   ],

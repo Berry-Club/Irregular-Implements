@@ -346,7 +346,6 @@ object ItemsPatchouliCategory {
 			textPage(
 				text = bookText(
 					"There is a ${major("Divining Rod")} for each ore (that is, any block/item that has a tag beginning with #c:ores/). When held in-hand, nearby ores of that type will be visible through walls.",
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the ores won't be highlighted."
 				)
 			)
 
@@ -827,11 +826,6 @@ object ItemsPatchouliCategory {
 				)
 			)
 
-			textPage(
-				text = bookText(
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Ender Anchors won't be visible through walls."
-				)
-			)
 		}
 
 
@@ -909,7 +903,6 @@ object ItemsPatchouliCategory {
 			textPage(
 				text = bookText(
 					"While holding the Redstone Tool, you'll be able to see all links nearby through walls.",
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the line won't be visible  through blocks."
 				)
 			)
 

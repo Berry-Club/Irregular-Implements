@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "While holding the Redstone Tool, you'll be able to see all links nearby through walls.$(br2)The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the line won't be visible  through blocks."
+      "text": "While holding the Redstone Tool, you'll be able to see all links nearby through walls."
     },
     {
       "type": "patchouli:text",

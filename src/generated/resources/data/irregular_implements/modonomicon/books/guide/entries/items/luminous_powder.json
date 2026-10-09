@@ -10,14 +10,27 @@
   "name": "book.irregular_implements.guide.items.luminous_powder.name",
   "pages": [
     {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:luminous_powder"
+      },
+      "text": "book.irregular_implements.guide.items.luminous_powder.page_0.text",
+      "title": "book.irregular_implements.guide.items.luminous_powder.page_0.title"
+    },
+    {
       "type": "modonomicon:text",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.items.luminous_powder.page_0.text",
-      "title": "book.irregular_implements.guide.items.luminous_powder.page_0.title",
+      "text": "book.irregular_implements.guide.items.luminous_powder.page_1.text",
+      "title": "book.irregular_implements.guide.items.luminous_powder.page_1.title",
       "use_markdown_in_title": false
     }
   ],

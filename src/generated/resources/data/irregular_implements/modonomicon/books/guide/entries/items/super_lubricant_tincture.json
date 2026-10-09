@@ -10,14 +10,27 @@
   "name": "book.irregular_implements.guide.items.super_lubricant_tincture.name",
   "pages": [
     {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:super_lubricant_tincture"
+      },
+      "text": "book.irregular_implements.guide.items.super_lubricant_tincture.page_0.text",
+      "title": "book.irregular_implements.guide.items.super_lubricant_tincture.page_0.title"
+    },
+    {
       "type": "modonomicon:text",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.items.super_lubricant_tincture.page_0.text",
-      "title": "book.irregular_implements.guide.items.super_lubricant_tincture.page_0.title",
+      "text": "book.irregular_implements.guide.items.super_lubricant_tincture.page_1.text",
+      "title": "book.irregular_implements.guide.items.super_lubricant_tincture.page_1.title",
       "use_markdown_in_title": false
     }
   ],

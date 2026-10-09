@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Clicking the Show Lazy Shape button will show cubes where all positions in the Lazy Shape are located.$(br2)The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Lazy Shape indicators won't be visible through blocks."
+      "text": "Clicking the Show Lazy Shape button will show cubes where all positions in the Lazy Shape are located."
     },
     {
       "type": "patchouli:text",

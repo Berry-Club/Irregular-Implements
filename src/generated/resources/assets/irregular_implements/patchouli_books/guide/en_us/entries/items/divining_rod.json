@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "There is a $(d)Divining Rod$() for each ore (that is, any block/item that has a tag beginning with #c:ores/). When held in-hand, nearby ores of that type will be visible through walls.$(br2)The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the ores won't be highlighted."
+      "text": "There is a $(d)Divining Rod$() for each ore (that is, any block/item that has a tag beginning with #c:ores/). When held in-hand, nearby ores of that type will be visible through walls."
     },
     {
       "type": "patchouli:text",

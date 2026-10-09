@@ -126,10 +126,15 @@ object BlocksModonomiconCategory {
 			name = "Advanced Item Collector",
 			icon = ModBlocks.ADVANCED_ITEM_COLLECTOR.get()
 		) {
-			textPage(
-				title = "Advanced Item Collector",
+			spotlightPage(ModBlocks.ADVANCED_ITEM_COLLECTOR.get()) {
+				title = "Advanced Item Collector"
 				text = bookText(
-					"The **Advanced Item Collector** is an upgraded version of the ${internalLink(itemCollector, "Item Collector")}. Its collection volume is configurable, ranging from 0 to 10 blocks in each direction.",
+					"The **Advanced Item Collector** is an upgraded version of the ${internalLink(itemCollector, "Item Collector")}. Its collection volume is configurable, ranging from 0 to 10 blocks in each direction."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Each axis (X/Y/Z) can be configured independently, as well."
 				)
 			)
@@ -147,10 +152,15 @@ object BlocksModonomiconCategory {
 			name = "Auto Placer",
 			icon = ModBlocks.AUTO_PLACER.get()
 		) {
-			textPage(
-				title = "Auto Placer",
+			spotlightPage(ModBlocks.AUTO_PLACER.get()) {
+				title = "Auto Placer"
 				text = bookText(
-					"The **Auto Placer** will try to place the block in its inventory in front of itself.",
+					"The **Auto Placer** will try to place the block in its inventory in front of itself."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It tries to do this every tick, unless it has a redstone signal."
 				)
 			)
@@ -162,12 +172,12 @@ object BlocksModonomiconCategory {
 			name = "Biome Blocks",
 			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("biome_stone"))
 		) {
-			textPage(
-				title = "Biome Blocks",
+			spotlightPage(BuiltInRegistries.ITEM.get(OtherUtil.modResource("biome_stone"))) {
+				title = "Biome Blocks"
 				text = bookText(
 					"**Biome blocks** change color to match the biome they're in."
 				)
-			)
+			}
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
@@ -194,10 +204,15 @@ object BlocksModonomiconCategory {
 			name = "Biome Radar",
 			icon = ModBlocks.BIOME_RADAR.get()
 		) {
-			textPage(
-				title = "Biome Radar",
+			spotlightPage(ModBlocks.BIOME_RADAR.get()) {
+				title = "Biome Radar"
 				text = bookText(
-					"The **Biome Radar** is a multiblock structure that helps you find biomes in the world.",
+					"The **Biome Radar** is a multiblock structure that helps you find biomes in the world."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Build the structure shown on the next page."
 				)
 			)
@@ -235,10 +250,15 @@ object BlocksModonomiconCategory {
 			name = "Block Breaker",
 			icon = ModBlocks.BLOCK_BREAKER.get()
 		) {
-			textPage(
-				title = "Block Breaker",
+			spotlightPage(ModBlocks.BLOCK_BREAKER.get()) {
+				title = "Block Breaker"
 				text = bookText(
-					"**Block Breaker**",
+					"**Block Breaker**"
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"The **Block Breaker** will break the block in front of it. It has the equivalent of an unbreakable Iron Pickaxe.",
 					"Blocks broken will be placed into an inventory behind it, if one exists. Otherwise, it will drop to the floor behind it."
 				)
@@ -271,10 +291,15 @@ object BlocksModonomiconCategory {
 			name = "Block of Sticks",
 			icon = ModBlocks.BLOCK_OF_STICKS.get()
 		) {
-			textPage(
-				title = "Block of Sticks",
+			spotlightPage(ModBlocks.BLOCK_OF_STICKS.get()) {
+				title = "Block of Sticks"
 				text = bookText(
-					"The **Block of Sticks** breaks itself shortly after being placed.",
+					"The **Block of Sticks** breaks itself shortly after being placed."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"The **Returning Block of Sticks** will teleport itself to the nearest player when broken."
 				)
 			)
@@ -292,10 +317,15 @@ object BlocksModonomiconCategory {
 			name = "Block Teleporter",
 			icon = ModBlocks.BLOCK_TELEPORTER.get()
 		) {
-			textPage(
-				title = "Block Teleporter",
+			spotlightPage(ModBlocks.BLOCK_TELEPORTER.get()) {
+				title = "Block Teleporter"
 				text = bookText(
-					"The **Block Teleporter** allows you to teleport the block in front of itself to another Block Teleporter when powered.",
+					"The **Block Teleporter** allows you to teleport the block in front of itself to another Block Teleporter when powered."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Use a Location Filter to save the location of one Block Teleporter, and insert it into the inventory of a second Block Teleporter."
 				)
 			)
@@ -314,10 +344,15 @@ object BlocksModonomiconCategory {
 			name = "Compressed Slime Block",
 			icon = ModBlocks.COMPRESSED_SLIME_BLOCK.get()
 		) {
-			textPage(
-				title = "Compressed Slime Block",
+			spotlightPage(ModBlocks.COMPRESSED_SLIME_BLOCK.get()) {
+				title = "Compressed Slime Block"
 				text = bookText(
-					"Right-clicking a Slime Block with a Shovel will turn it into a **Compressed Slime Block**. Clicking more will compress it further, or reset it.",
+					"Right-clicking a Slime Block with a Shovel will turn it into a **Compressed Slime Block**. Clicking more will compress it further, or reset it."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Touching a Compressed Slime Block will launch you into the air. The more it's compressed, the higher you bounce."
 				)
 			)
@@ -329,10 +364,15 @@ object BlocksModonomiconCategory {
 			name = "Custom Crafting Table",
 			icon = ModBlocks.CUSTOM_CRAFTING_TABLE.get()
 		) {
-			textPage(
-				title = "Custom Crafting Table",
+			spotlightPage(ModBlocks.CUSTOM_CRAFTING_TABLE.get()) {
+				title = "Custom Crafting Table"
 				text = bookText(
-					"The **Custom Crafting Table** is functionally identical to a regular Crafting Table, but looks like the block it was crafted with.",
+					"The **Custom Crafting Table** is functionally identical to a regular Crafting Table, but looks like the block it was crafted with."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"For example, 8 Oak Logs around a Crafting Table will make a Crafting Table that looks like an Oak Log."
 				)
 			)
@@ -344,10 +384,15 @@ object BlocksModonomiconCategory {
 			name = "Diaphanous Block",
 			icon = ModBlocks.DIAPHANOUS_BLOCK.get()
 		) {
-			textPage(
-				title = "Diaphanous Block",
+			spotlightPage(ModBlocks.DIAPHANOUS_BLOCK.get()) {
+				title = "Diaphanous Block"
 				text = bookText(
-					"**Diaphanous Blocks** look like regular blocks at a distance, but vanishes as you approach, and can be walked through.",
+					"**Diaphanous Blocks** look like regular blocks at a distance, but vanishes as you approach, and can be walked through."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Craft a Diaphanous Block with any other block to set what it looks like."
 				)
 			)
@@ -365,10 +410,15 @@ object BlocksModonomiconCategory {
 			name = "Ender Bridge",
 			icon = ModBlocks.ENDER_BRIDGE.get()
 		) {
-			textPage(
-				title = "Ender Bridge",
+			spotlightPage(ModBlocks.ENDER_BRIDGE.get()) {
+				title = "Ender Bridge"
 				text = bookText(
-					"The **Ender Bridge** and **Prismarine Ender Bridge**, when powered by redstone, will teleport the entities above it towards the **Ender Anchor** it's aiming at.",
+					"The **Ender Bridge** and **Prismarine Ender Bridge**, when powered by redstone, will teleport the entities above it towards the **Ender Anchor** it's aiming at."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It works through blocks, and across any distance (including unloaded chunks), as long as the Anchor is loaded. It has to be aiming DIRECTLY at the Anchor, as well."
 				)
 			)
@@ -404,10 +454,15 @@ object BlocksModonomiconCategory {
 			name = "Ender Mailbox",
 			icon = ModBlocks.ENDER_MAILBOX.get()
 		) {
-			textPage(
-				title = "Ender Mailbox",
+			spotlightPage(ModBlocks.ENDER_MAILBOX.get()) {
+				title = "Ender Mailbox"
 				text = bookText(
-					"The **Ender Mailbox** allows you to send and receive ${internalLink(ItemsModonomiconCategory.enderLetter, "Ender Letters")} to and from other players.",
+					"The **Ender Mailbox** allows you to send and receive ${internalLink(ItemsModonomiconCategory.enderLetter, "Ender Letters")} to and from other players."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"To send a Letter, simply use it on any Mailbox, and it will be sent to the recipient if theirs is not full."
 				)
 			)
@@ -425,10 +480,15 @@ object BlocksModonomiconCategory {
 			name = "Energy Distributor",
 			icon = ModBlocks.ENERGY_DISTRIBUTOR.get()
 		) {
-			textPage(
-				title = "Energy Distributor",
+			spotlightPage(ModBlocks.ENERGY_DISTRIBUTOR.get()) {
+				title = "Energy Distributor"
 				text = bookText(
-					"**Energy Distributor**",
+					"**Energy Distributor**"
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"The **Energy Distributor** allows you to evenly distribute FE along a line of adjacent machines it's aimed at.",
 					"Starting from the block in front of it, it will step along a straight path until it reaches a block that cannot store FE. All blocks it finds will be added to its cache."
 				)
@@ -455,10 +515,15 @@ object BlocksModonomiconCategory {
 			name = "Fertilized Dirt",
 			icon = ModBlocks.FERTILIZED_DIRT.get()
 		) {
-			textPage(
-				title = "Fertilized Dirt",
+			spotlightPage(ModBlocks.FERTILIZED_DIRT.get()) {
+				title = "Fertilized Dirt"
 				text = bookText(
-					"**Fertilized Dirt** does not need to be hydrated, cannot be trampled, and grows crops 3 times faster.",
+					"**Fertilized Dirt** does not need to be hydrated, cannot be trampled, and grows crops 3 times faster."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"You still have to till it with a Hoe before seeds can be planted, however."
 				)
 			)
@@ -470,10 +535,15 @@ object BlocksModonomiconCategory {
 			name = "Glowing Mushroom",
 			icon = ModBlocks.GLOWING_MUSHROOM.get()
 		) {
-			textPage(
-				title = "Glowing Mushroom",
+			spotlightPage(ModBlocks.GLOWING_MUSHROOM.get()) {
+				title = "Glowing Mushroom"
 				text = bookText(
-					"**Glowing Mushrooms** can be found growing in caves.",
+					"**Glowing Mushrooms** can be found growing in caves."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Any brewing recipe that would accept Glowstone Dust can also accept Glowing Mushrooms."
 				)
 			)
@@ -485,10 +555,15 @@ object BlocksModonomiconCategory {
 			name = "Igniter",
 			icon = ModBlocks.IGNITER.get()
 		) {
-			textPage(
-				title = "Igniter",
+			spotlightPage(ModBlocks.IGNITER.get()) {
+				title = "Igniter"
 				text = bookText(
-					"The **Igniter** can be used to light a fire in front of itself, when given a redstone signal.",
+					"The **Igniter** can be used to light a fire in front of itself, when given a redstone signal."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It has 3 modes, set in its GUI:\n- Toggle: Lights when powered, extinguishes when unpowered\n- Keep Ignited: Keeps the fire lit while powered, does nothing when unpowered\n- Ignite: Lights when powered, does nothing when unpowered"
 				)
 			)
@@ -500,10 +575,15 @@ object BlocksModonomiconCategory {
 			name = "Imbuing Station",
 			icon = ModBlocks.IMBUING_STATION.get()
 		) {
-			textPage(
-				title = "Imbuing Station",
+			spotlightPage(ModBlocks.IMBUING_STATION.get()) {
+				title = "Imbuing Station"
 				text = bookText(
-					"The **Imbuing Station** is used to create Imbues.",
+					"The **Imbuing Station** is used to create Imbues."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Ingredients that go in the outer slots can go in any order, but the center ingredient must always go in the center slot."
 				)
 			)
@@ -521,10 +601,15 @@ object BlocksModonomiconCategory {
 			name = "Inventory Rerouter",
 			icon = ModBlocks.INVENTORY_REROUTER.get()
 		) {
-			textPage(
-				title = "Inventory Rerouter",
+			spotlightPage(ModBlocks.INVENTORY_REROUTER.get()) {
+				title = "Inventory Rerouter"
 				text = bookText(
-					"The **Inventory Rerouter** exposes the sides of an adjacent inventory from a more convenient location.",
+					"The **Inventory Rerouter** exposes the sides of an adjacent inventory from a more convenient location."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Place it so that its green face points toward the target inventory. Each of the other five faces can independently access any side of that inventory."
 				)
 			)
@@ -549,10 +634,15 @@ object BlocksModonomiconCategory {
 			name = "Item Collector",
 			icon = ModBlocks.ITEM_COLLECTOR.get()
 		) {
-			textPage(
-				title = "Item Collector",
+			spotlightPage(ModBlocks.ITEM_COLLECTOR.get()) {
+				title = "Item Collector"
 				text = bookText(
-					"The **Item Collector** can be placed on any inventory, and it will collect item entities in a 3 block radius around itself.",
+					"The **Item Collector** can be placed on any inventory, and it will collect item entities in a 3 block radius around itself."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"That's a 7x7x7 cube centered on the Collector."
 				)
 			)
@@ -564,12 +654,12 @@ object BlocksModonomiconCategory {
 			name = "Lapis Glass",
 			icon = ModBlocks.LAPIS_GLASS.get()
 		) {
-			textPage(
-				title = "Lapis Glass",
+			spotlightPage(ModBlocks.LAPIS_GLASS.get()) {
+				title = "Lapis Glass"
 				text = bookText(
 					"**Lapis Glass** is solid for players, but allows everything else to pass through."
 				)
-			)
+			}
 		}
 
 
@@ -578,12 +668,12 @@ object BlocksModonomiconCategory {
 			name = "Luminous Blocks",
 			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("luminous_block_white"))
 		) {
-			textPage(
-				title = "Luminous Blocks",
+			spotlightPage(BuiltInRegistries.ITEM.get(OtherUtil.modResource("luminous_block_white"))) {
+				title = "Luminous Blocks"
 				text = bookText(
 					"**Luminous Blocks** are always lit."
 				)
-			)
+			}
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()
@@ -603,10 +693,15 @@ object BlocksModonomiconCategory {
 			name = "Nature Core",
 			icon = ModBlocks.NATURE_CORE.get()
 		) {
-			textPage(
-				title = "Nature Core",
+			spotlightPage(ModBlocks.NATURE_CORE.get()) {
+				title = "Nature Core"
 				text = bookText(
-					"The **Nature Core** structure can be found randomly around the overworld, with a Nature Chest nearby full of goodies.",
+					"The **Nature Core** structure can be found randomly around the overworld, with a Nature Chest nearby full of goodies."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"The Nature Core can also do these things randomly:\n- Convert nearby Sand into Dirt/Grass\n- Spawn an animal nearby\n- Bone Meal nearby crops\n- Plant Saplings nearby\n- Repair the structure around it"
 				)
 			)
@@ -618,10 +713,15 @@ object BlocksModonomiconCategory {
 			name = "Notification Interface",
 			icon = ModBlocks.NOTIFICATION_INTERFACE.get()
 		) {
-			textPage(
-				title = "Notification Interface",
+			spotlightPage(ModBlocks.NOTIFICATION_INTERFACE.get()) {
+				title = "Notification Interface"
 				text = bookText(
-					"The **Notification Interface** will send its owner a customizable notification when it receives a redstone pulse.",
+					"The **Notification Interface** will send its owner a customizable notification when it receives a redstone pulse."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"You can set the notifications title, body, and icon in its GUI."
 				)
 			)
@@ -639,10 +739,15 @@ object BlocksModonomiconCategory {
 			name = "Peace Candle",
 			icon = ModBlocks.PEACE_CANDLE.get()
 		) {
-			textPage(
-				title = "Peace Candle",
+			spotlightPage(ModBlocks.PEACE_CANDLE.get()) {
+				title = "Peace Candle"
 				text = bookText(
-					"The **Peace Candle** prevents hostile mobs from spawning within a radius around it. By default, this radius is a single chunk. That is, it effects a 3x3 chunk area centered on itself.",
+					"The **Peace Candle** prevents hostile mobs from spawning within a radius around it. By default, this radius is a single chunk. That is, it effects a 3x3 chunk area centered on itself."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It can be disabled with a redstone signal."
 				)
 			)
@@ -660,10 +765,15 @@ object BlocksModonomiconCategory {
 			name = "Pitcher Plant",
 			icon = ModBlocks.PITCHER_PLANT.get()
 		) {
-			textPage(
-				title = "Pitcher Plant",
+			spotlightPage(ModBlocks.PITCHER_PLANT.get()) {
+				title = "Pitcher Plant"
 				text = bookText(
-					"The **Pitcher Plant** generates an infinite amount of water. It can be found in wet biomes in the overworld.",
+					"The **Pitcher Plant** generates an infinite amount of water. It can be found in wet biomes in the overworld."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Clicking a bucket or other fluid receptacle will fill it with Water."
 				)
 			)
@@ -681,10 +791,15 @@ object BlocksModonomiconCategory {
 			name = "Accelerator Plate",
 			icon = ModBlocks.ACCELERATOR_PLATE.get()
 		) {
-			textPage(
-				title = "Accelerator Plate",
+			spotlightPage(ModBlocks.ACCELERATOR_PLATE.get()) {
+				title = "Accelerator Plate"
 				text = bookText(
-					"The **Accelerator Plate** will speed up any entity moving on it, up to a limit.",
+					"The **Accelerator Plate** will speed up any entity moving on it, up to a limit."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Whatever direction it's already moving, it'll move that direction faster."
 				)
 			)
@@ -696,12 +811,12 @@ object BlocksModonomiconCategory {
 			name = "Bouncy Plate",
 			icon = ModBlocks.BOUNCY_PLATE.get()
 		) {
-			textPage(
-				title = "Bouncy Plate",
+			spotlightPage(ModBlocks.BOUNCY_PLATE.get()) {
+				title = "Bouncy Plate"
 				text = bookText(
 					"The **Bouncy Plate** will launch entities that touch it into the air."
 				)
-			)
+			}
 		}
 
 
@@ -710,10 +825,15 @@ object BlocksModonomiconCategory {
 			name = "Collection Plate",
 			icon = ModBlocks.COLLECTION_PLATE.get()
 		) {
-			textPage(
-				title = "Collection Plate",
+			spotlightPage(ModBlocks.COLLECTION_PLATE.get()) {
+				title = "Collection Plate"
 				text = bookText(
-					"Any item entity that touches an **Collection Plate** will be inserted into an adjacent inventory, if possible.",
+					"Any item entity that touches an **Collection Plate** will be inserted into an adjacent inventory, if possible."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"The order it tries is: Down, North, South, East, East, Up."
 				)
 			)
@@ -725,10 +845,15 @@ object BlocksModonomiconCategory {
 			name = "Corrector Plate",
 			icon = ModBlocks.CORRECTOR_PLATE.get()
 		) {
-			textPage(
-				title = "Corrector Plate",
+			spotlightPage(ModBlocks.CORRECTOR_PLATE.get()) {
+				title = "Corrector Plate"
 				text = bookText(
-					"The **Corrector Plate** will snap any entity moving on it to be moving along the center of the block.",
+					"The **Corrector Plate** will snap any entity moving on it to be moving along the center of the block."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"That is, they can only move along the plus-shaped path going straight through the middle of the block."
 				)
 			)
@@ -740,12 +865,12 @@ object BlocksModonomiconCategory {
 			name = "Directional Accelerator Plate",
 			icon = ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get()
 		) {
-			textPage(
-				title = "Directional Accelerator Plate",
+			spotlightPage(ModBlocks.DIRECTIONAL_ACCELERATOR_PLATE.get()) {
+				title = "Directional Accelerator Plate"
 				text = bookText(
 					"The **Directional Accelerator Plate** will push entities touching it in the direction the Plate is aiming."
 				)
-			)
+			}
 		}
 
 
@@ -754,10 +879,15 @@ object BlocksModonomiconCategory {
 			name = "Extraction Plate",
 			icon = ModBlocks.EXTRACTION_PLATE.get()
 		) {
-			textPage(
-				title = "Extraction Plate",
+			spotlightPage(ModBlocks.EXTRACTION_PLATE.get()) {
+				title = "Extraction Plate"
 				text = bookText(
-					"The **Extraction Plate** moves items from an inventory on its input side toward its output side.",
+					"The **Extraction Plate** moves items from an inventory on its input side toward its output side."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"If an inventory is on the output side, the items are inserted into it. Otherwise, they are dropped into the world in that direction."
 				)
 			)
@@ -775,10 +905,15 @@ object BlocksModonomiconCategory {
 			name = "Filtered Redirector Plate",
 			icon = ModBlocks.FILTERED_REDIRECTOR_PLATE.get()
 		) {
-			textPage(
-				title = "Filtered Redirector Plate",
+			spotlightPage(ModBlocks.FILTERED_REDIRECTOR_PLATE.get()) {
+				title = "Filtered Redirector Plate"
 				text = bookText(
-					"The **Filtered Redirector Plate** redirects entities based on their type.",
+					"The **Filtered Redirector Plate** redirects entities based on their type."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Entities entering from either end travel straight across by default. An entity matching the left filter is redirected to the left, while an entity matching the right filter is redirected to the right."
 				)
 			)
@@ -796,12 +931,12 @@ object BlocksModonomiconCategory {
 			name = "Item Rejuvenator Plate",
 			icon = ModBlocks.ITEM_REJUVENATOR_PLATE.get()
 		) {
-			textPage(
-				title = "Item Rejuvenator Plate",
+			spotlightPage(ModBlocks.ITEM_REJUVENATOR_PLATE.get()) {
+				title = "Item Rejuvenator Plate"
 				text = bookText(
 					"Any item entity that touches an **Item Rejuvenator Plate** will have its despawn timer reset to 4 minutes and its age reset."
 				)
-			)
+			}
 		}
 
 
@@ -810,12 +945,12 @@ object BlocksModonomiconCategory {
 			name = "Item Sealer Plate",
 			icon = ModBlocks.ITEM_SEALER_PLATE.get()
 		) {
-			textPage(
-				title = "Item Sealer Plate",
+			spotlightPage(ModBlocks.ITEM_SEALER_PLATE.get()) {
+				title = "Item Sealer Plate"
 				text = bookText(
 					"Any item entity that touches an **Item Sealer Plate** will be prevented from being picked up for 30 seconds."
 				)
-			)
+			}
 		}
 
 
@@ -824,10 +959,16 @@ object BlocksModonomiconCategory {
 			name = "Processing Plate",
 			icon = ModBlocks.PROCESSING_PLATE.get()
 		) {
-			textPage(
-				title = "Processing Plate",
+			spotlightPage(ModBlocks.PROCESSING_PLATE.get()) {
+				title = "Processing Plate"
 				text = bookText(
-					"The **Processing Plate** combines the functions of the [Collection Plate](./collection_plate) and the [Extraction Plate](./extraction_plate). It can collect dropped items into the inventory below it while independently moving items from another adjacent inventory toward its configured output.",
+					"The **Processing Plate** combines the functions of the [Collection Plate](./collection_plate) and the [Extraction Plate](./extraction_plate)."
+				)
+			}
+
+			textPage(
+				text = bookText(
+					"It can collect dropped items into the inventory below it while independently moving items from another adjacent inventory toward its configured output.",
 					"Like the other Plates, it is placed on top of a supporting block and has no collision box. Entities can move through the thin Plate, and dropped items are processed when they touch it."
 				)
 			)
@@ -907,10 +1048,15 @@ object BlocksModonomiconCategory {
 			name = "Redirector Plate",
 			icon = ModBlocks.REDIRECTOR_PLATE.get()
 		) {
-			textPage(
-				title = "Redirector Plate",
+			spotlightPage(ModBlocks.REDIRECTOR_PLATE.get()) {
+				title = "Redirector Plate"
 				text = bookText(
-					"The **Redirector Plate** has two active sides. Any entity that moves onto one active side will be teleported to the other.",
+					"The **Redirector Plate** has two active sides. Any entity that moves onto one active side will be teleported to the other."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Right-click to set the first active side, and sneak right-click to set the other."
 				)
 			)
@@ -922,10 +1068,15 @@ object BlocksModonomiconCategory {
 			name = "Redstone Plate",
 			icon = ModBlocks.REDSTONE_PLATE.get()
 		) {
-			textPage(
-				title = "Redstone Plate",
+			spotlightPage(ModBlocks.REDSTONE_PLATE.get()) {
+				title = "Redstone Plate"
 				text = bookText(
-					"The **Redstone Plate** redirects entities entering from its input side to one of two output sides.",
+					"The **Redstone Plate** redirects entities entering from its input side to one of two output sides."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"When the Plate receives a redstone signal, entities take the powered output. Otherwise, they take the unpowered output."
 				)
 			)
@@ -943,10 +1094,15 @@ object BlocksModonomiconCategory {
 			name = "Platforms",
 			icon = ModBlocks.OAK_PLATFORM.get()
 		) {
-			textPage(
-				title = "Platforms",
+			spotlightPage(ModBlocks.OAK_PLATFORM.get()) {
+				title = "Platforms"
 				text = bookText(
-					"**Platforms**",
+					"**Platforms**"
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"**Platforms** are solid from the top, but not from the bottom or sides.",
 					"Additionally, sneaking will allow you to fall through them."
 				)
@@ -986,10 +1142,15 @@ object BlocksModonomiconCategory {
 			name = "Player Interface",
 			icon = ModBlocks.PLAYER_INTERFACE.get()
 		) {
-			textPage(
-				title = "Player Interface",
+			spotlightPage(ModBlocks.PLAYER_INTERFACE.get()) {
+				title = "Player Interface"
 				text = bookText(
-					"The **Player Interface** allows you to interact with the owner's inventory via pipes and the like.",
+					"The **Player Interface** allows you to interact with the owner's inventory via pipes and the like."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Each face aims at a different part of the inventory:\n- Top: armor\n- Bottom: hotbar\n- North: offhand\n- Others: main inventory"
 				)
 			)
@@ -1001,12 +1162,12 @@ object BlocksModonomiconCategory {
 			name = "Quartz Glass",
 			icon = ModBlocks.QUARTZ_GLASS.get()
 		) {
-			textPage(
-				title = "Quartz Glass",
+			spotlightPage(ModBlocks.QUARTZ_GLASS.get()) {
+				title = "Quartz Glass"
 				text = bookText(
 					"**Quartz Glass** allows players to pass through, but is solid for everything else."
 				)
-			)
+			}
 		}
 
 
@@ -1015,10 +1176,15 @@ object BlocksModonomiconCategory {
 			name = "Rain Shield",
 			icon = ModBlocks.RAIN_SHIELD.get()
 		) {
-			textPage(
-				title = "Rain Shield",
+			spotlightPage(ModBlocks.RAIN_SHIELD.get()) {
+				title = "Rain Shield"
 				text = bookText(
-					"The **Rain Shield** prevents rain from falling in a radius around it. By default, this radius is 5 chunks.",
+					"The **Rain Shield** prevents rain from falling in a radius around it. By default, this radius is 5 chunks."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It can be disabled with a redstone signal."
 				)
 			)
@@ -1030,12 +1196,12 @@ object BlocksModonomiconCategory {
 			name = "Rainbow Lamp",
 			icon = ModBlocks.RAINBOW_LAMP.get()
 		) {
-			textPage(
-				title = "Rainbow Lamp",
+			spotlightPage(ModBlocks.RAINBOW_LAMP.get()) {
+				title = "Rainbow Lamp"
 				text = bookText(
 					"The **Rainbow Lamp** glows a different color depending on the redstone signal strength it's receiving."
 				)
-			)
+			}
 		}
 
 
@@ -1044,10 +1210,15 @@ object BlocksModonomiconCategory {
 			name = "Advanced Redstone Interface",
 			icon = ModBlocks.ADVANCED_REDSTONE_INTERFACE.get()
 		) {
-			textPage(
-				title = "Advanced Redstone Interface",
+			spotlightPage(ModBlocks.ADVANCED_REDSTONE_INTERFACE.get()) {
+				title = "Advanced Redstone Interface"
 				text = bookText(
-					"The **Advanced Redstone Interface** will transmit its own received redstone signal strength to up to 9 linked blocks.",
+					"The **Advanced Redstone Interface** will transmit its own received redstone signal strength to up to 9 linked blocks."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Insert ${internalLink(ItemsModonomiconCategory.locationFilter, "Location Filters")} to link it to those blocks."
 				)
 			)
@@ -1059,12 +1230,12 @@ object BlocksModonomiconCategory {
 			name = "Advanced Redstone Torch",
 			icon = ModBlocks.ADVANCED_REDSTONE_TORCH.get()
 		) {
-			textPage(
-				title = "Advanced Redstone Torch",
+			spotlightPage(ModBlocks.ADVANCED_REDSTONE_TORCH.get()) {
+				title = "Advanced Redstone Torch"
 				text = bookText(
 					"The **Advanced Redstone Torch** has a configurable redstone signal strength for when its powered and unpowered."
 				)
-			)
+			}
 		}
 
 
@@ -1073,10 +1244,15 @@ object BlocksModonomiconCategory {
 			name = "Analog Emitter",
 			icon = ModBlocks.ANALOG_EMITTER.get()
 		) {
-			textPage(
-				title = "Analog Emitter",
+			spotlightPage(ModBlocks.ANALOG_EMITTER.get()) {
+				title = "Analog Emitter"
 				text = bookText(
-					"The **Analog Emitter**, when powered from its front side, will emit a signal with a configurable strength.",
+					"The **Analog Emitter**, when powered from its front side, will emit a signal with a configurable strength."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Right-click it to cycle the output strength."
 				)
 			)
@@ -1088,10 +1264,15 @@ object BlocksModonomiconCategory {
 			name = "Basic Redstone Interface",
 			icon = ModBlocks.BASIC_REDSTONE_INTERFACE.get()
 		) {
-			textPage(
-				title = "Basic Redstone Interface",
+			spotlightPage(ModBlocks.BASIC_REDSTONE_INTERFACE.get()) {
+				title = "Basic Redstone Interface"
 				text = bookText(
-					"The **Basic Redstone Interface** will transmit its own received redstone signal strength to the block it's linked to.",
+					"The **Basic Redstone Interface** will transmit its own received redstone signal strength to the block it's linked to."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Use a ${internalLink(ItemsModonomiconCategory.redstoneTool, "Redstone Tool")} to link it to a block."
 				)
 			)
@@ -1103,10 +1284,15 @@ object BlocksModonomiconCategory {
 			name = "Block Destabilizer",
 			icon = ModBlocks.BLOCK_DESTABILIZER.get()
 		) {
-			textPage(
-				title = "Block Destabilizer",
+			spotlightPage(ModBlocks.BLOCK_DESTABILIZER.get()) {
+				title = "Block Destabilizer"
 				text = bookText(
-					"The **Block Destabilizer** will cause the block in front of it, and all connected blocks of the same type, to fall like Sand when it receives a redstone pulse.",
+					"The **Block Destabilizer** will cause the block in front of it, and all connected blocks of the same type, to fall like Sand when it receives a redstone pulse."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"In its GUI, you can toggle various settings."
 				)
 			)
@@ -1121,7 +1307,6 @@ object BlocksModonomiconCategory {
 			textPage(
 				text = bookText(
 					"Clicking the Show Lazy Shape button will show cubes where all positions in the Lazy Shape are located.",
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Lazy Shape indicators won't be visible through blocks."
 				)
 			)
 
@@ -1138,12 +1323,12 @@ object BlocksModonomiconCategory {
 			name = "Block Detector",
 			icon = ModBlocks.BLOCK_DETECTOR.get()
 		) {
-			textPage(
-				title = "Block Detector",
+			spotlightPage(ModBlocks.BLOCK_DETECTOR.get()) {
+				title = "Block Detector"
 				text = bookText(
 					"The **Block Detector** will emit a redstone signal when the block in front of it matches the block stored in its inventory."
 				)
-			)
+			}
 		}
 
 
@@ -1152,10 +1337,15 @@ object BlocksModonomiconCategory {
 			name = "Chat Detector",
 			icon = ModBlocks.CHAT_DETECTOR.get()
 		) {
-			textPage(
-				title = "Chat Detector",
+			spotlightPage(ModBlocks.CHAT_DETECTOR.get()) {
+				title = "Chat Detector"
 				text = bookText(
-					"**Chat Detector**",
+					"**Chat Detector**"
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"The **Chat Detector** emits a redstone pulse when the player that places it says a specific phrase in chat.",
 					"Set the phrase in its GUI. It's actually a RegEx field, so you can do more advanced filters. Just typing in the exact phrase is enough, however."
 				)
@@ -1188,12 +1378,12 @@ object BlocksModonomiconCategory {
 			name = "Contact Button",
 			icon = ModBlocks.CONTACT_BUTTON.get()
 		) {
-			textPage(
-				title = "Contact Button",
+			spotlightPage(ModBlocks.CONTACT_BUTTON.get()) {
+				title = "Contact Button"
 				text = bookText(
 					"The **Contact Button** works like a Button, but powers when the block it's aimed at is clicked, rather than when it itself is clicked."
 				)
-			)
+			}
 		}
 
 
@@ -1202,12 +1392,12 @@ object BlocksModonomiconCategory {
 			name = "Contact Lever",
 			icon = ModBlocks.CONTACT_LEVER.get()
 		) {
-			textPage(
-				title = "Contact Lever",
+			spotlightPage(ModBlocks.CONTACT_LEVER.get()) {
+				title = "Contact Lever"
 				text = bookText(
 					"The **Contact Lever** works like a Lever, but toggles when the block it's aimed at is clicked, rather than when it itself is clicked."
 				)
-			)
+			}
 		}
 
 
@@ -1216,10 +1406,15 @@ object BlocksModonomiconCategory {
 			name = "Entity Detector",
 			icon = ModBlocks.ENTITY_DETECTOR.get()
 		) {
-			textPage(
-				title = "Entity Detector",
+			spotlightPage(ModBlocks.ENTITY_DETECTOR.get()) {
+				title = "Entity Detector"
 				text = bookText(
-					"The **Entity Detector** emits a redstone signal when an entity matching its filter is within its detection area.",
+					"The **Entity Detector** emits a redstone signal when an entity matching its filter is within its detection area."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"In its GUI you can set the radius in each dimension, if the signal is inverted or not, and specify what type of entity to detect."
 				)
 			)
@@ -1238,10 +1433,15 @@ object BlocksModonomiconCategory {
 			name = "Inventory Tester",
 			icon = ModBlocks.INVENTORY_TESTER.get()
 		) {
-			textPage(
-				title = "Inventory Tester",
+			spotlightPage(ModBlocks.INVENTORY_TESTER.get()) {
+				title = "Inventory Tester"
 				text = bookText(
-					"The **Inventory Tester** must be placed on an inventory, and stores an item in itself.",
+					"The **Inventory Tester** must be placed on an inventory, and stores an item in itself."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It will emit a redstone signal if the inventory is capable of accepting that item."
 				)
 			)
@@ -1266,10 +1466,15 @@ object BlocksModonomiconCategory {
 			name = "Iron Dropper",
 			icon = ModBlocks.IRON_DROPPER.get()
 		) {
-			textPage(
-				title = "Iron Dropper",
+			spotlightPage(ModBlocks.IRON_DROPPER.get()) {
+				title = "Iron Dropper"
 				text = bookText(
-					"The **Iron Dropper** is an upgrade to the regular Dropper, with a handful of extra features.",
+					"The **Iron Dropper** is an upgrade to the regular Dropper, with a handful of extra features."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Inside it are 4 buttons to cycle its various settings."
 				)
 			)
@@ -1295,10 +1500,15 @@ object BlocksModonomiconCategory {
 			name = "Lapis Lamp",
 			icon = ModBlocks.LAPIS_LAMP.get()
 		) {
-			textPage(
-				title = "Lapis Lamp",
+			spotlightPage(ModBlocks.LAPIS_LAMP.get()) {
+				title = "Lapis Lamp"
 				text = bookText(
-					"The **Lapis Lamp**, when provided a redstone signal, will give off false light.",
+					"The **Lapis Lamp**, when provided a redstone signal, will give off false light."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"That is, mob spawning and other game logic will treat the area is if it were not lit, but players will see light."
 				)
 			)
@@ -1310,10 +1520,15 @@ object BlocksModonomiconCategory {
 			name = "Moon Phase Detector",
 			icon = ModBlocks.MOON_PHASE_DETECTOR.get()
 		) {
-			textPage(
-				title = "Moon Phase Detector",
+			spotlightPage(ModBlocks.MOON_PHASE_DETECTOR.get()) {
+				title = "Moon Phase Detector"
 				text = bookText(
-					"The **Moon Phase Detector** emits a redstone signal strength proportional to the phase of the moon.",
+					"The **Moon Phase Detector** emits a redstone signal strength proportional to the phase of the moon."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It emits a full signal during a full moon, and no signal during a new moon."
 				)
 			)
@@ -1331,12 +1546,12 @@ object BlocksModonomiconCategory {
 			name = "Online Detector",
 			icon = ModBlocks.ONLINE_DETECTOR.get()
 		) {
-			textPage(
-				title = "Online Detector",
+			spotlightPage(ModBlocks.ONLINE_DETECTOR.get()) {
+				title = "Online Detector"
 				text = bookText(
 					"The **Online Detector** emits a redstone signal when the chosen player is logged onto the server. Set the player by typing their username into its GUI."
 				)
-			)
+			}
 		}
 
 
@@ -1345,10 +1560,15 @@ object BlocksModonomiconCategory {
 			name = "Quartz Lamp",
 			icon = ModBlocks.QUARTZ_LAMP.get()
 		) {
-			textPage(
-				title = "Quartz Lamp",
+			spotlightPage(ModBlocks.QUARTZ_LAMP.get()) {
+				title = "Quartz Lamp"
 				text = bookText(
-					"The **Quartz Lamp**, when provided a redstone signal, will give off light that cannot be seen.",
+					"The **Quartz Lamp**, when provided a redstone signal, will give off light that cannot be seen."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"That is, mob spawning and other game logic will treat the area is if it were lit, but players will not see any light."
 				)
 			)
@@ -1360,10 +1580,15 @@ object BlocksModonomiconCategory {
 			name = "Redstone Observer",
 			icon = ModBlocks.REDSTONE_OBSERVER.get()
 		) {
-			textPage(
-				title = "Redstone Observer",
+			spotlightPage(ModBlocks.REDSTONE_OBSERVER.get()) {
+				title = "Redstone Observer"
 				text = bookText(
-					"The **Redstone Observer** gives off the same redstone signal output as the block it's linked to.",
+					"The **Redstone Observer** gives off the same redstone signal output as the block it's linked to."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Use a ${internalLink(ItemsModonomiconCategory.redstoneTool, "Redstone Tool")} to link it to a block."
 				)
 			)
@@ -1375,12 +1600,12 @@ object BlocksModonomiconCategory {
 			name = "Sided Block of Redstone",
 			icon = ModBlocks.SIDED_BLOCK_OF_REDSTONE.get()
 		) {
-			textPage(
-				title = "Sided Block of Redstone",
+			spotlightPage(ModBlocks.SIDED_BLOCK_OF_REDSTONE.get()) {
+				title = "Sided Block of Redstone"
 				text = bookText(
 					"The **Sided Block of Redstone** emits a full signal on one face, and nothing on the others."
 				)
-			)
+			}
 		}
 
 
@@ -1389,10 +1614,15 @@ object BlocksModonomiconCategory {
 			name = "Trigger Glass",
 			icon = ModBlocks.TRIGGER_GLASS.get()
 		) {
-			textPage(
-				title = "Trigger Glass",
+			spotlightPage(ModBlocks.TRIGGER_GLASS.get()) {
+				title = "Trigger Glass"
 				text = bookText(
-					"**Trigger Glass** is usually solid, but temporarily becomes non-solid when it receives a redstone pulse.",
+					"**Trigger Glass** is usually solid, but temporarily becomes non-solid when it receives a redstone pulse."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"This effect propagates to all adjacent Trigger Glass blocks, within a distance."
 				)
 			)
@@ -1404,10 +1634,15 @@ object BlocksModonomiconCategory {
 			name = "Sakanade Spores",
 			icon = ModBlocks.SAKANADE_SPORES.get()
 		) {
-			textPage(
-				title = "Sakanade Spores",
+			spotlightPage(ModBlocks.SAKANADE_SPORES.get()) {
+				title = "Sakanade Spores"
 				text = bookText(
-					"**Sakanade Spores** can be found on the bottom of Large Brown Mushroom caps. When touched, Sakanade Spores will inflict the Collapse effect to entities.",
+					"**Sakanade Spores** can be found on the bottom of Large Brown Mushroom caps. When touched, Sakanade Spores will inflict the Collapse effect to entities."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"For players, the Collapse effect inverts their movement and mouse controls."
 				)
 			)
@@ -1425,10 +1660,15 @@ object BlocksModonomiconCategory {
 			name = "Shock Absorber",
 			icon = ModBlocks.SHOCK_ABSORBER.get()
 		) {
-			textPage(
-				title = "Shock Absorber",
+			spotlightPage(ModBlocks.SHOCK_ABSORBER.get()) {
+				title = "Shock Absorber"
 				text = bookText(
-					"The **Shock Absorber** negates all fall damage when landed on.",
+					"The **Shock Absorber** negates all fall damage when landed on."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Additionally, it will emit a redstone signal proportional the the distance fallen."
 				)
 			)
@@ -1440,10 +1680,15 @@ object BlocksModonomiconCategory {
 			name = "Slime Cube",
 			icon = ModBlocks.SLIME_CUBE.get()
 		) {
-			textPage(
-				title = "Slime Cube",
+			spotlightPage(ModBlocks.SLIME_CUBE.get()) {
+				title = "Slime Cube"
 				text = bookText(
-					"The **Slime Cube**, when unpowered, causes Slimes to spawn in a radius around it. By default, this radius is 1 chunk (so a 3x3 chunk area centered on itself).",
+					"The **Slime Cube**, when unpowered, causes Slimes to spawn in a radius around it. By default, this radius is 1 chunk (so a 3x3 chunk area centered on itself)."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"When powered, it instead prevents Slimes from spawning in that same area."
 				)
 			)
@@ -1455,10 +1700,15 @@ object BlocksModonomiconCategory {
 			name = "Spectre Coils",
 			icon = ModBlocks.SPECTRE_COIL_BASIC.get()
 		) {
-			textPage(
-				title = "Spectre Coils",
+			spotlightPage(ModBlocks.SPECTRE_COIL_BASIC.get()) {
+				title = "Spectre Coils"
 				text = bookText(
-					"**Regular Coils**",
+					"**Regular Coils**"
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"**Spectre Coils** allow you to extract energy from your ${internalLink(spectreEnergyInjector, "Spectre Energy Buffer")} wirelessly.",
 					"Each tier pulls a higher RF/t. Place the Coil directly on the machine you want to charge."
 				)
@@ -1490,10 +1740,15 @@ object BlocksModonomiconCategory {
 			name = "Spectre Energy Injector",
 			icon = ModBlocks.SPECTRE_ENERGY_INJECTOR.get()
 		) {
-			textPage(
-				title = "Spectre Energy Injector",
+			spotlightPage(ModBlocks.SPECTRE_ENERGY_INJECTOR.get()) {
+				title = "Spectre Energy Injector"
 				text = bookText(
-					"Every player has their own Spectre Energy Buffer, which acts sort of like an Ender Chest for FE. By default, it can store 1,000,000 FE.",
+					"Every player has their own Spectre Energy Buffer, which acts sort of like an Ender Chest for FE. By default, it can store 1,000,000 FE."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"Energy can be inserted into a player's Buffer via the **Spectre Energy Injector**. Whoever placed the Injector is whose Buffer gets filled."
 				)
 			)
@@ -1511,10 +1766,15 @@ object BlocksModonomiconCategory {
 			name = "Spectre Lens",
 			icon = ModBlocks.SPECTRE_LENS.get()
 		) {
-			textPage(
-				title = "Spectre Lens",
+			spotlightPage(ModBlocks.SPECTRE_LENS.get()) {
+				title = "Spectre Lens"
 				text = bookText(
-					"The **Spectre Lens** can be placed on a Beacon to allow it to effect you from any distance, as long as you're in the same dimension.",
+					"The **Spectre Lens** can be placed on a Beacon to allow it to effect you from any distance, as long as you're in the same dimension."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"It only effects the player who placed the Lens."
 				)
 			)
@@ -1532,10 +1792,15 @@ object BlocksModonomiconCategory {
 			name = "Spectre Sapling",
 			icon = ModBlocks.SPECTRE_SAPLING.get()
 		) {
-			textPage(
-				title = "Spectre Sapling",
+			spotlightPage(ModBlocks.SPECTRE_SAPLING.get()) {
+				title = "Spectre Sapling"
 				text = bookText(
-					"**Spectre Saplings** grow into a translucent Spectre trees.",
+					"**Spectre Saplings** grow into a translucent Spectre trees."
+				)
+			}
+
+			textPage(
+				text = bookText(
 					"**Spectre Leaves** have a chance of dropping ${internalLink(ItemsModonomiconCategory.ectoplasm, "Ectoplasm")}, allowing it to be farmed."
 				)
 			)
@@ -1553,12 +1818,12 @@ object BlocksModonomiconCategory {
 			name = "Super Lubricated Blocks",
 			icon = BuiltInRegistries.ITEM.get(OtherUtil.modResource("super_lubricant_stone"))
 		) {
-			textPage(
-				title = "Super Lubricated Blocks",
+			spotlightPage(BuiltInRegistries.ITEM.get(OtherUtil.modResource("super_lubricant_stone"))) {
+				title = "Super Lubricated Blocks"
 				text = bookText(
 					"**Super Lubricant Stone** and **Super Lubricant Ice** fully negate friction, allowing entities to slide over them without slowing down."
 				)
-			)
+			}
 
 			customPage(factory = { _, _ ->
 				BookCraftingRecipePageModel.create()

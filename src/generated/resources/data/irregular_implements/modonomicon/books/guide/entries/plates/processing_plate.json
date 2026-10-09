@@ -10,15 +10,17 @@
   "name": "book.irregular_implements.guide.plates.processing_plate.name",
   "pages": [
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:spotlight",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:processing_plate"
+      },
       "text": "book.irregular_implements.guide.plates.processing_plate.page_0.text",
-      "title": "book.irregular_implements.guide.plates.processing_plate.page_0.title",
-      "use_markdown_in_title": false
+      "title": "book.irregular_implements.guide.plates.processing_plate.page_0.title"
     },
     {
       "type": "modonomicon:text",
@@ -117,6 +119,17 @@
       "show_title_separator": true,
       "text": "book.irregular_implements.guide.plates.processing_plate.page_9.text",
       "title": "book.irregular_implements.guide.plates.processing_plate.page_9.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.plates.processing_plate.page_10.text",
+      "title": "book.irregular_implements.guide.plates.processing_plate.page_10.title",
       "use_markdown_in_title": false
     }
   ],

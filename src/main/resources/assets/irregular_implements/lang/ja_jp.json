@@ -605,7 +605,6 @@
   "tooltip.irregular_implements.portkey_disguise": "見た目: %s",
   "tooltip.irregular_implements.shift_for_more": "SHIFTで詳細情報を表示",
   "tooltip.irregular_implements.show_lazy_shape": "記憶された形状表示",
-  "tooltip.irregular_implements.sodium_incompatible": "Sodiumとの互換性は完全ではありません",
   "tooltip.irregular_implements.stops_message": "メッセージ遮断",
   "tooltip.irregular_implements.summoning_pendulum_fraction": "捕獲数: %d/%d",
   "tooltip.irregular_implements.summoning_pendulum_list_each": "• %s",

@@ -117,9 +117,15 @@ object ItemsModonomiconCategory {
 			name = "Lava Waders",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:lava_waders"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:lava_waders"))) {
+				title = "Lava Waders"
+				text = bookText(
+					"**Lava Waders** combine the effects of the ${internalLink(obsidianWaterWalkingBoots, "Obsidian Water Walking Boots")} and the ${internalLink(lavaCharm, "Lava Charm")}, as well as allowing you to walk on Lava."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Lava Waders** combine the effects of the ${internalLink(obsidianWaterWalkingBoots, "Obsidian Water Walking Boots")} and the ${internalLink(lavaCharm, "Lava Charm")}, as well as allowing you to walk on Lava.",
 					"Get them by combining the two in an Anvil."
 				)
 			)
@@ -131,9 +137,15 @@ object ItemsModonomiconCategory {
 			name = "Magic Hood",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:magic_hood"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:magic_hood"))) {
+				title = "Magic Hood"
+				text = bookText(
+					"The **Magic Hood**, when worn, will hide your nameplate and potion particles."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Magic Hood**, when worn, will hide your nameplate and potion particles.",
 					"It can be found in dungeon chests."
 				)
 			)
@@ -145,9 +157,15 @@ object ItemsModonomiconCategory {
 			name = "Obsidian Water Walking Boots",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:obsidian_water_walking_boots"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:obsidian_water_walking_boots"))) {
+				title = "Obsidian Water Walking Boots"
+				text = bookText(
+					"**Obsidian Water Walking Boots** combine the effects of the ${internalLink(waterWalkingBoots, "Water Walking Boots")} and the ${internalLink(obsidianSkull, "Obsidian Skull")}."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Obsidian Water Walking Boots** combine the effects of the ${internalLink(waterWalkingBoots, "Water Walking Boots")} and the ${internalLink(obsidianSkull, "Obsidian Skull")}.",
 					"Get them by combining the two in an Anvil."
 				)
 			)
@@ -165,9 +183,15 @@ object ItemsModonomiconCategory {
 			name = "Spectre Armor",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_helmet"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_helmet"))) {
+				title = "Spectre Armor"
+				text = bookText(
+					"**Spectre Armor** is equivalent to Diamond, with higher durability and enchantability."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Spectre Armor** is equivalent to Diamond, with higher durability and enchantability.",
 					"Wearing a full set also makes you slightly transparent!"
 				)
 			)
@@ -191,9 +215,15 @@ object ItemsModonomiconCategory {
 			name = "Water Walking Boots",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:water_walking_boots"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:water_walking_boots"))) {
+				title = "Water Walking Boots"
+				text = bookText(
+					"**Water Walking Boots** allow you to walk on water. Wow!"
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Water Walking Boots** allow you to walk on water. Wow!",
 					"They do not work while already underwater, and are disabled while sneaking."
 				)
 			)
@@ -212,9 +242,15 @@ object ItemsModonomiconCategory {
 			name = "Bean",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:bean"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:bean"))) {
+				title = "Bean"
+				text = bookText(
+					"**Beans** can be found growing around the overworld in any biome that is neither hot, cold, dry, nor sparse."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Beans** can be found growing around the overworld in any biome that is neither hot, cold, dry, nor sparse.",
 					"They can be planted on any dirt-like blocks."
 				)
 			)
@@ -226,9 +262,15 @@ object ItemsModonomiconCategory {
 			name = "Biome Painter",
 			icon = ModItems.BIOME_PAINTER.get()
 		) {
+			spotlightPage(ModItems.BIOME_PAINTER.get()) {
+				title = "Biome Painter"
+				text = bookText(
+					"The **Biome Capsule** and **Biome Painter** are used together to allow you to change the biome of a location."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Biome Capsule** and **Biome Painter** are used together to allow you to change the biome of a location.",
 					"Throw the Biome Capsule on the ground, and it will absorb points of the biome it's in."
 				)
 			)
@@ -252,11 +294,12 @@ object ItemsModonomiconCategory {
 			name = "Blaze and Steel",
 			icon = ModItems.BLAZE_AND_STEEL.get()
 		) {
-			textPage(
+			spotlightPage(ModItems.BLAZE_AND_STEEL.get()) {
+				title = "Blaze and Steel"
 				text = bookText(
 					"The **Blaze and Steel** lights a much more aggressive fire, which burns and spreads much faster."
 				)
-			)
+			}
 		}
 
 
@@ -265,9 +308,15 @@ object ItemsModonomiconCategory {
 			name = "Block Mover",
 			icon = ModItems.BLOCK_MOVER.get()
 		) {
+			spotlightPage(ModItems.BLOCK_MOVER.get()) {
+				title = "Block Mover"
+				text = bookText(
+					"The **Block Mover** can pick up and place down a single block, including its block entity."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Block Mover** can pick up and place down a single block, including its block entity.",
 					"It cannot move blocks that have the block tag `#irregular_implements:block_mover_blacklist`."
 				)
 			)
@@ -279,9 +328,15 @@ object ItemsModonomiconCategory {
 			name = "Block Replacer",
 			icon = ModItems.BLOCK_REPLACER.get()
 		) {
+			spotlightPage(ModItems.BLOCK_REPLACER.get()) {
+				title = "Block Replacer"
+				text = bookText(
+					"The **Block Replacer** allows you to quickly replace blocks in the world with blocks stored in the item."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Block Replacer** allows you to quickly replace blocks in the world with blocks stored in the item.",
 					"To store a block in the Replacer, right-click the block stack in your inventory onto the slot the Block Replacer is in, the same way you would use a Bundle."
 				)
 			)
@@ -306,9 +361,15 @@ object ItemsModonomiconCategory {
 			name = "Bottle of Air",
 			icon = ModItems.BOTTLE_OF_AIR.get()
 		) {
+			spotlightPage(ModItems.BOTTLE_OF_AIR.get()) {
+				title = "Bottle of Air"
+				text = bookText(
+					"The **Bottle of Air** can be \"drunk\" to refill your air supply when underwater."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Bottle of Air** can be \"drunk\" to refill your air supply when underwater.",
 					"It can only be found in chests in Ocean Monuments."
 				)
 			)
@@ -320,9 +381,15 @@ object ItemsModonomiconCategory {
 			name = "Chunk Analyzer",
 			icon = ModItems.CHUNK_ANALYZER.get()
 		) {
+			spotlightPage(ModItems.CHUNK_ANALYZER.get()) {
+				title = "Chunk Analyzer"
+				text = bookText(
+					"The **Chunk Analyzer** can be used to see the blocks that make up the chunk you're currently standing in."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Chunk Analyzer** can be used to see the blocks that make up the chunk you're currently standing in.",
 					"The list of all blocks in the chunk, as well as their counts, will be displayed in your chat."
 				)
 			)
@@ -334,12 +401,12 @@ object ItemsModonomiconCategory {
 			name = "Divining Rod",
 			icon = ModItems.DIVINING_ROD.get()
 		) {
-			textPage(
+			spotlightPage(ModItems.DIVINING_ROD.get()) {
+				title = "Divining Rod"
 				text = bookText(
-					"There is a **Divining Rod** for each ore (that is, any block/item that has a tag beginning with `#c:ores/`). When held in-hand, nearby ores of that type will be visible through walls.",
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the ores won't be highlighted."
+					"There is a **Divining Rod** for each ore (that is, any block/item that has a tag beginning with `#c:ores/`). When held in-hand, nearby ores of that type will be visible through walls."
 				)
-			)
+			}
 
 			textPage(
 				text = bookText(
@@ -361,9 +428,15 @@ object ItemsModonomiconCategory {
 			name = "Drop Filter",
 			icon = ModItems.DROP_FILTER.get()
 		) {
+			spotlightPage(ModItems.DROP_FILTER.get()) {
+				title = "Drop Filter"
+				text = bookText(
+					"The **Drop Filter** can hold an ${internalLink(itemFilter, "Item Filter")}, and will prevent items matching the filter from entering your inventory."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Drop Filter** can hold an ${internalLink(itemFilter, "Item Filter")}, and will prevent items matching the filter from entering your inventory.",
 					"The **Voiding Drop Filter** does the same, but instead deletes the items matching the filter entirely."
 				)
 			)
@@ -381,9 +454,15 @@ object ItemsModonomiconCategory {
 			name = "Ectoplasm",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:ectoplasm"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:ectoplasm"))) {
+				title = "Ectoplasm"
+				text = bookText(
+					"**Ectoplasm** is a material that drops when Spirits are killed."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Ectoplasm** is a material that drops when Spirits are killed.",
 					"Spirits have a chance of spawning any time a mob dies. The chance increases the closer it is to the full moon, and increases further if the Ender Dragon has ever been killed on the server."
 				)
 			)
@@ -401,9 +480,15 @@ object ItemsModonomiconCategory {
 			name = "Emerald Compass",
 			icon = ModItems.EMERALD_COMPASS.get()
 		) {
+			spotlightPage(ModItems.EMERALD_COMPASS.get()) {
+				title = "Emerald Compass"
+				text = bookText(
+					"The **Emerald Compass** aims at a bound player, assuming they're online and in the same dimension as you. There are two ways to bind the Compass to a player:"
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Emerald Compass** aims at a bound player, assuming they're online and in the same dimension as you. There are two ways to bind the Compass to a player:",
 					"1. Simply right-click the Compass on them. 2. Craft the Compass together with a [Player Filter](irregular_implements:player_filter)."
 				)
 			)
@@ -415,9 +500,15 @@ object ItemsModonomiconCategory {
 			name = "Ender Bucket",
 			icon = ModItems.ENDER_BUCKET.get()
 		) {
+			spotlightPage(ModItems.ENDER_BUCKET.get()) {
+				title = "Ender Bucket"
+				text = bookText(
+					"The **Ender Bucket** can be used on a flowing fluid, and it will gather the nearest fluid source from a distance."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Ender Bucket** can be used on a flowing fluid, and it will gather the nearest fluid source from a distance.",
 					"The **Reinforced Ender Bucket** works the same, but can also store up to 10 fluid sources at once."
 				)
 			)
@@ -435,9 +526,15 @@ object ItemsModonomiconCategory {
 			name = "Ender Letter",
 			icon = ModItems.ENDER_LETTER.get()
 		) {
+			spotlightPage(ModItems.ENDER_LETTER.get()) {
+				title = "Ender Letter"
+				text = bookText(
+					"The **Ender Letter** allows you to send items to other players more easily. It can store up to 9 stacks inside itself."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Ender Letter** allows you to send items to other players more easily. It can store up to 9 stacks inside itself.",
 					"In its GUI, type the recipient's username. Then, simply use it on any ${internalLink(BlocksModonomiconCategory.enderMailbox, "Ender Mailbox")}. If the recipient's Mailbox is not full, it will be placed inside it."
 				)
 			)
@@ -449,9 +546,15 @@ object ItemsModonomiconCategory {
 			name = "Escape Rope",
 			icon = ModItems.ESCAPE_ROPE.get()
 		) {
+			spotlightPage(ModItems.ESCAPE_ROPE.get()) {
+				title = "Escape Rope"
+				text = bookText(
+					"The **Escape Rope** can be used to quickly get out of caves."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Escape Rope** can be used to quickly get out of caves.",
 					"Hold right-click, and it will try to find a path to the nearest block that can see the sky. If a path is found, you will be teleported there instantly."
 				)
 			)
@@ -469,9 +572,15 @@ object ItemsModonomiconCategory {
 			name = "Evil Tear",
 			icon = ModItems.EVIL_TEAR.get()
 		) {
+			spotlightPage(ModItems.EVIL_TEAR.get()) {
+				title = "Evil Tear"
+				text = bookText(
+					"The **Evil Tear** can be used to make an Artificial End Portal."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Evil Tear** can be used to make an Artificial End Portal.",
 					"Make the following structure (the End Rod is 3 blocks above the Obsidian, 4 above the End Stone), and then use the Tear on the End Rod."
 				)
 			)
@@ -489,9 +598,15 @@ object ItemsModonomiconCategory {
 			name = "Entity Filter",
 			icon = ModItems.ENTITY_FILTER.get()
 		) {
+			spotlightPage(ModItems.ENTITY_FILTER.get()) {
+				title = "Entity Filter"
+				text = bookText(
+					"The **Entity Filter** allows you to filter based on entity type."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Entity Filter** allows you to filter based on entity type.",
 					"To set the entity type, simply use the Filter on the desired entity. Sneak right-click to set it to Player."
 				)
 			)
@@ -503,9 +618,15 @@ object ItemsModonomiconCategory {
 			name = "Item Filter",
 			icon = ModItems.ITEM_FILTER.get()
 		) {
+			spotlightPage(ModItems.ITEM_FILTER.get()) {
+				title = "Item Filter"
+				text = bookText(
+					"The **Item Filter** has a list of up to 9 items, and can serve as either a Whitelist or a Blacklist. Toggle this using the button on the far right of the GUI."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Item Filter** has a list of up to 9 items, and can serve as either a Whitelist or a Blacklist. Toggle this using the button on the far right of the GUI.",
 					"Above each filled slot is two buttons."
 				)
 			)
@@ -531,9 +652,15 @@ object ItemsModonomiconCategory {
 			name = "Location Filter",
 			icon = ModItems.LOCATION_FILTER.get()
 		) {
+			spotlightPage(ModItems.LOCATION_FILTER.get()) {
+				title = "Location Filter"
+				text = bookText(
+					"The **Location Filter** allows you to set a location, which can then be used by other items and blocks to reference that location."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Location Filter** allows you to set a location, which can then be used by other items and blocks to reference that location.",
 					"Set the location by using the Filter on the block."
 				)
 			)
@@ -545,9 +672,15 @@ object ItemsModonomiconCategory {
 			name = "Player Filter",
 			icon = ModItems.PLAYER_FILTER.get()
 		) {
+			spotlightPage(ModItems.PLAYER_FILTER.get()) {
+				title = "Player Filter"
+				text = bookText(
+					"The **Player Filter** allows you to filter based on a specific player."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Player Filter** allows you to filter based on a specific player.",
 					"To set it, simply use the Filter on the desired player. Sneak right-click to set it to yourself."
 				)
 			)
@@ -559,9 +692,15 @@ object ItemsModonomiconCategory {
 			name = "Floo Pouch",
 			icon = ModItems.FLOO_POUCH.get()
 		) {
+			spotlightPage(ModItems.FLOO_POUCH.get()) {
+				title = "Floo Pouch"
+				text = bookText(
+					"The **Floo Pouch** can store up to 128 ${internalLink(flooPowder, "Floo Powder")}."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Floo Pouch** can store up to 128 ${internalLink(flooPowder, "Floo Powder")}.",
 					"Unlike Floo Powder, it works from anywhere in your inventory rather than just in your hand."
 				)
 			)
@@ -579,11 +718,12 @@ object ItemsModonomiconCategory {
 			name = "Floo Powder",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:floo_powder"))
 		) {
-			textPage(
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:floo_powder"))) {
+				title = "Floo Powder"
 				text = bookText(
 					"**Floo Powder** is the fuel that allows you to use Floo teleportation. It must be held in-hand when the destination is said in chat."
 				)
-			)
+			}
 		}
 
 
@@ -592,9 +732,15 @@ object ItemsModonomiconCategory {
 			name = "Floo Sign",
 			icon = ModItems.FLOO_SIGN.get()
 		) {
+			spotlightPage(ModItems.FLOO_SIGN.get()) {
+				title = "Floo Sign"
+				text = bookText(
+					"**Floo Signs** are used to create Floo Fireplaces. Using the Sign on Bricks placed in the world will convert them all to Floo Bricks."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Floo Signs** are used to create Floo Fireplaces. Using the Sign on Bricks placed in the world will convert them all to Floo Bricks.",
 					"If the Floo Sign has been renamed in an Anvil, the Fireplace will be named the same. If not, the Fireplace will have no name and cannot be teleported from, not to."
 				)
 			)
@@ -606,9 +752,15 @@ object ItemsModonomiconCategory {
 			name = "Floo Token",
 			icon = ModItems.FLOO_TOKEN.get()
 		) {
+			spotlightPage(ModItems.FLOO_TOKEN.get()) {
+				title = "Floo Token"
+				text = bookText(
+					"**Floo Tokens** allow you to use Floo teleportation from anywhere in the world."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Floo Tokens** allow you to use Floo teleportation from anywhere in the world.",
 					"Throw it on the ground and wait several seconds. It will spawn a Temporary Floo Fireplace, which will allow you to teleport to any named Floo Fireplace."
 				)
 			)
@@ -626,9 +778,15 @@ object ItemsModonomiconCategory {
 			name = "Golden Compass",
 			icon = ModItems.GOLDEN_COMPASS.get()
 		) {
+			spotlightPage(ModItems.GOLDEN_COMPASS.get()) {
+				title = "Golden Compass"
+				text = bookText(
+					"The **Golden Compass** aims at a bound location, assuming it's in the same dimension as the user."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Golden Compass** aims at a bound location, assuming it's in the same dimension as the user.",
 					"Bind the location by crafting the Compass together with a set ${internalLink(locationFilter, "Location Filter")}."
 				)
 			)
@@ -640,9 +798,15 @@ object ItemsModonomiconCategory {
 			name = "Golden Egg",
 			icon = ModItems.GOLDEN_EGG.get()
 		) {
+			spotlightPage(ModItems.GOLDEN_EGG.get()) {
+				title = "Golden Egg"
+				text = bookText(
+					"**Golden Eggs** spawn Golden Chickens when thrown. Instead of laying Eggs, Golden Chickens lay Gold Ingots."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Golden Eggs** spawn Golden Chickens when thrown. Instead of laying Eggs, Golden Chickens lay Gold Ingots.",
 					"Golden Eggs can be found in Bean Pods."
 				)
 			)
@@ -654,9 +818,15 @@ object ItemsModonomiconCategory {
 			name = "Grass Seeds",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:grass_seeds"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:grass_seeds"))) {
+				title = "Grass Seeds"
+				text = bookText(
+					"**Grass Seeds** can be used on dirt blocks to turn them into Grass."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Grass Seeds** can be used on dirt blocks to turn them into Grass.",
 					"**Colored Grass Seeds** do the same, but make Colored Grass."
 				)
 			)
@@ -674,9 +844,15 @@ object ItemsModonomiconCategory {
 			name = "Imbues",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:imbue_fire"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:imbue_fire"))) {
+				title = "Imbues"
+				text = bookText(
+					"**Imbues** are special potions that are created in the ${internalLink(BlocksModonomiconCategory.imbuingStation, "Imbuing Station")}. They provide powerful long-lasting effects when consumed."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Imbues** are special potions that are created in the ${internalLink(BlocksModonomiconCategory.imbuingStation, "Imbuing Station")}. They provide powerful long-lasting effects when consumed.",
 					"However, you can only have a single Imbue at a time. Drinking a new Imbue will replace your current one."
 				)
 			)
@@ -695,9 +871,15 @@ object ItemsModonomiconCategory {
 			name = "Lava Charm",
 			icon = ModItems.LAVA_CHARM.get()
 		) {
+			spotlightPage(ModItems.LAVA_CHARM.get()) {
+				title = "Lava Charm"
+				text = bookText(
+					"The **Lava Charm** can be worn as a Curio, and adds a temporary lava shield. It is visible above your armor bar."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Lava Charm** can be worn as a Curio, and adds a temporary lava shield. It is visible above your armor bar.",
 					"While the shield is full, you will be completely immune to lava damage. Note that it does not protect you from fire damage, only lava damage."
 				)
 			)
@@ -716,9 +898,15 @@ object ItemsModonomiconCategory {
 			name = "Lotus Blossom",
 			icon = ModItems.LOTUS_BLOSSOM.get()
 		) {
+			spotlightPage(ModItems.LOTUS_BLOSSOM.get()) {
+				title = "Lotus Blossom"
+				text = bookText(
+					"**Lotus Blossoms** can be eaten to give the player a handful of experience. Sneaking will consume the entire stack."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Lotus Blossoms** can be eaten to give the player a handful of experience. Sneaking will consume the entire stack.",
 					"Lotus Blossoms can be found in cold biomes, and can be farmed using Lotus Seeds planted on any dirt block."
 				)
 			)
@@ -730,9 +918,15 @@ object ItemsModonomiconCategory {
 			name = "Luminous Powder",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:luminous_powder"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:luminous_powder"))) {
+				title = "Luminous Powder"
+				text = bookText(
+					"**Luminous Powder** can be crafted with any item to make it glow in the dark."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Luminous Powder** can be crafted with any item to make it glow in the dark.",
 					"You can remove it by crafting the item with a Water Bucket."
 				)
 			)
@@ -744,9 +938,15 @@ object ItemsModonomiconCategory {
 			name = "Magic Beans",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:magic_bean"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:magic_bean"))) {
+				title = "Magic Beans"
+				text = bookText(
+					"**Lesser Magic Bean**"
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Lesser Magic Bean**",
 					"**Lesser Magic Beans** can be planted to make a Bean Stalk that grows upwards until it's blocked by something. It can be climbed like a ladder!",
 					"**Magic Bean**",
 					"The non-lesser **Magic Bean** is a much more powerful version. They grow much, much faster, and will break (almost) any block in their way."
@@ -772,9 +972,15 @@ object ItemsModonomiconCategory {
 			name = "Obsidian Skull",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:obsidian_skull"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:obsidian_skull"))) {
+				title = "Obsidian Skull"
+				text = bookText(
+					"The **Obsidian Skull** has a chance of negating fire damage while in your inventory."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Obsidian Skull** has a chance of negating fire damage while in your inventory.",
 					"The more damage that would have been taken, the higher the chance of negation. The exact formula is:"
 				)
 			)
@@ -798,18 +1004,19 @@ object ItemsModonomiconCategory {
 			name = "Portable Ender Bridge",
 			icon = ModItems.PORTABLE_ENDER_BRIDGE.get()
 		) {
+			spotlightPage(ModItems.PORTABLE_ENDER_BRIDGE.get()) {
+				title = "Portable Ender Bridge"
+				text = bookText(
+					"The **Portable Ender Bridge** can be used to teleport to ${internalLink(BlocksModonomiconCategory.enderBridge, "Ender Anchors")}."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Portable Ender Bridge** can be used to teleport to ${internalLink(BlocksModonomiconCategory.enderBridge, "Ender Anchors")}.",
 					"While held in the hand, you'll be able to see nearby Ender Bridges through blocks. Simply right-click while looking at an Ender Anchor to teleport to it."
 				)
 			)
 
-			textPage(
-				text = bookText(
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the Ender Anchors won't be visible through walls."
-				)
-			)
 		}
 
 
@@ -818,9 +1025,15 @@ object ItemsModonomiconCategory {
 			name = "Portkey",
 			icon = ModItems.PORTKEY.get()
 		) {
+			spotlightPage(ModItems.PORTKEY.get()) {
+				title = "Portkey"
+				text = bookText(
+					"The **Portkey** is used to teleport whoever picks it up."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Portkey** is used to teleport whoever picks it up.",
 					"Right-click the Portkey on a block to set its destination. Then, throw it on the ground. After a short delay, it will activate."
 				)
 			)
@@ -839,9 +1052,15 @@ object ItemsModonomiconCategory {
 			name = "Redstone Activator",
 			icon = ModItems.REDSTONE_ACTIVATOR.get()
 		) {
+			spotlightPage(ModItems.REDSTONE_ACTIVATOR.get()) {
+				title = "Redstone Activator"
+				text = bookText(
+					"The **Redstone Activator** will provide a short redstone pulse when used on a block."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Redstone Activator** will provide a short redstone pulse when used on a block.",
 					"Sneak right-click to cycle the duration between 2, 20, and 100 ticks."
 				)
 			)
@@ -853,9 +1072,15 @@ object ItemsModonomiconCategory {
 			name = "Redstone Remote",
 			icon = ModItems.REDSTONE_REMOTE.get()
 		) {
+			spotlightPage(ModItems.REDSTONE_REMOTE.get()) {
+				title = "Redstone Remote"
+				text = bookText(
+					"The **Redstone Remote** acts like the ${internalLink(redstoneActivator, "Redstone Activator")}, but can be used from a distance."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Redstone Remote** acts like the ${internalLink(redstoneActivator, "Redstone Activator")}, but can be used from a distance.",
 					"It can have up to 9 stored locations. Sneak right-click it to open its GUI, and insert set ${internalLink(locationFilter, "Location Filters")}. You can place an item in the slot above to give its button an icon."
 				)
 			)
@@ -873,9 +1098,15 @@ object ItemsModonomiconCategory {
 			name = "Redstone Tool",
 			icon = ModItems.REDSTONE_TOOL.get()
 		) {
+			spotlightPage(ModItems.REDSTONE_TOOL.get()) {
+				title = "Redstone Tool"
+				text = bookText(
+					"The **Redstone Tool** is used to link certain wireless redstone blocks to other locations."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Redstone Tool** is used to link certain wireless redstone blocks to other locations.",
 					"First, use it on the linkable block, so the Tool knows what's being linked. Then, use it on the destination block you want it to be linked to."
 				)
 			)
@@ -883,7 +1114,6 @@ object ItemsModonomiconCategory {
 			textPage(
 				text = bookText(
 					"While holding the Redstone Tool, you'll be able to see all links nearby through walls.",
-					"The custom render type that this uses is currently not compatible with Sodium! It won't crash, but the line won't be visible  through blocks."
 				)
 			)
 
@@ -900,9 +1130,15 @@ object ItemsModonomiconCategory {
 			name = "Spectre Anchor",
 			icon = ModItems.SPECTRE_ANCHOR.get()
 		) {
+			spotlightPage(ModItems.SPECTRE_ANCHOR.get()) {
+				title = "Spectre Anchor"
+				text = bookText(
+					"The **Spectre Anchor** can be crafted together with any item to allow you to retain it after death."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Spectre Anchor** can be crafted together with any item to allow you to retain it after death.",
 					"After this, the Anchor is removed from the item."
 				)
 			)
@@ -914,9 +1150,15 @@ object ItemsModonomiconCategory {
 			name = "Spectre Chargers",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_charger_basic"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_charger_basic"))) {
+				title = "Spectre Chargers"
+				text = bookText(
+					"**Spectre Chargers** are used to charge items in your inventory with FE from your ${internalLink(BlocksModonomiconCategory.spectreEnergyInjector, "Spectre Energy Buffer")}."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Spectre Chargers** are used to charge items in your inventory with FE from your ${internalLink(BlocksModonomiconCategory.spectreEnergyInjector, "Spectre Energy Buffer")}.",
 					"While active, it will charge every item in your inventory, including armor and Curio slots."
 				)
 			)
@@ -945,9 +1187,15 @@ object ItemsModonomiconCategory {
 			name = "Spectre Illuminator",
 			icon = ModItems.SPECTRE_ILLUMINATOR.get()
 		) {
+			spotlightPage(ModItems.SPECTRE_ILLUMINATOR.get()) {
+				title = "Spectre Illuminator"
+				text = bookText(
+					"The **Spectre Illuminator** can be used on a block to fully light up the chunk it's in."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Spectre Illuminator** can be used on a block to fully light up the chunk it's in.",
 					"It will place an entity that slowly floats upwards, aiming to be just above the highest block in the chunk."
 				)
 			)
@@ -971,9 +1219,15 @@ object ItemsModonomiconCategory {
 			name = "Spectre Key",
 			icon = ModItems.SPECTRE_KEY.get()
 		) {
+			spotlightPage(ModItems.SPECTRE_KEY.get()) {
+				title = "Spectre Key"
+				text = bookText(
+					"The **Spectre Key** can be used to teleport to a private room in another dimension, unique to each player."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Spectre Key** can be used to teleport to a private room in another dimension, unique to each player.",
 					"Once there, you can build and store items safely, and they'll remain there. Leave by either using the Spectre Key again or by clicking one of the Spectre Core blocks on the floor."
 				)
 			)
@@ -992,9 +1246,15 @@ object ItemsModonomiconCategory {
 			name = "Spectre Tools",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_sword"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:spectre_sword"))) {
+				title = "Spectre Tools"
+				text = bookText(
+					"The **Spectre Sword** is comparable to a Diamond Sword, with higher durability and enchantability."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Spectre Sword** is comparable to a Diamond Sword, with higher durability and enchantability.",
 					"It increases your entity interaction range by 3 blocks, and can be used to kill ${internalLink(ectoplasm, "Spirits")}."
 				)
 			)
@@ -1025,9 +1285,15 @@ object ItemsModonomiconCategory {
 			name = "Stable Ender Pearl",
 			icon = ModItems.STABLE_ENDER_PEARL.get()
 		) {
+			spotlightPage(ModItems.STABLE_ENDER_PEARL.get()) {
+				title = "Stable Ender Pearl"
+				text = bookText(
+					"The **Stable Ender Pearl** is used to teleport a bound player in a more controlled way."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Stable Ender Pearl** is used to teleport a bound player in a more controlled way.",
 					"Right-click the Pearl to bind it to you. After seven seconds of sitting on the ground as an item entity, it will teleport the bound player to its location, and break."
 				)
 			)
@@ -1045,9 +1311,15 @@ object ItemsModonomiconCategory {
 			name = "Summoning Pendulum",
 			icon = ModItems.SUMMONING_PENDULUM.get()
 		) {
+			spotlightPage(ModItems.SUMMONING_PENDULUM.get()) {
+				title = "Summoning Pendulum"
+				text = bookText(
+					"The **Summoning Pendulum** can be used to store up to 5 (by default) entities, and place them back down later."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Summoning Pendulum** can be used to store up to 5 (by default) entities, and place them back down later.",
 					"Right-click the Pendulum on an entity to pick it up, right-click on a block to place it down."
 				)
 			)
@@ -1059,9 +1331,15 @@ object ItemsModonomiconCategory {
 			name = "Super Lubricant Tincture",
 			icon = BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:super_lubricant_tincture"))
 		) {
+			spotlightPage(BuiltInRegistries.ITEM.get(ResourceLocation.parse("irregular_implements:super_lubricant_tincture"))) {
+				title = "Super Lubricant Tincture"
+				text = bookText(
+					"The **Super Lubricant Tincture** can be crafted with any boot item to make them completely negate friction when worn, while below a certain speed."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **Super Lubricant Tincture** can be crafted with any boot item to make them completely negate friction when worn, while below a certain speed.",
 					"You can craft lubricated boots with a Water Bottle to wash them of the lubricant."
 				)
 			)
@@ -1073,11 +1351,12 @@ object ItemsModonomiconCategory {
 			name = "Void Stone",
 			icon = ModItems.VOID_STONE.get()
 		) {
-			textPage(
+			spotlightPage(ModItems.VOID_STONE.get()) {
+				title = "Void Stone"
 				text = bookText(
 					"The **Void Stone** will delete any items inserted into its GUI."
 				)
-			)
+			}
 		}
 
 
@@ -1086,9 +1365,15 @@ object ItemsModonomiconCategory {
 			name = "Weather Eggs",
 			icon = ModItems.WEATHER_EGG.get()
 		) {
+			spotlightPage(ModItems.WEATHER_EGG.get()) {
+				title = "Weather Eggs"
+				text = bookText(
+					"**Weather Eggs** change the weather when thrown."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"**Weather Eggs** change the weather when thrown.",
 					"There are 3 types: Sunny, Rainy, and Stormy."
 				)
 			)
@@ -1107,9 +1392,15 @@ object ItemsModonomiconCategory {
 			name = "White Stone",
 			icon = ModItems.WHITE_STONE.get()
 		) {
+			spotlightPage(ModItems.WHITE_STONE.get()) {
+				title = "White Stone"
+				text = bookText(
+					"The **White Stone** has the power to prevent your death once while charged. Doing so fully discharges the item."
+				)
+			}
+
 			textPage(
 				text = bookText(
-					"The **White Stone** has the power to prevent your death once while charged. Doing so fully discharges the item.",
 					"Charge the item by exposing it to the light of the full moon, either by dropping it on the ground or holding it while standing outside. The moon must also be at its peak."
 				)
 			)

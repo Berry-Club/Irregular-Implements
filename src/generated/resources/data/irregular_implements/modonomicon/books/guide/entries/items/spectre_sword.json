@@ -10,15 +10,17 @@
   "name": "book.irregular_implements.guide.items.spectre_sword.name",
   "pages": [
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:spotlight",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:spectre_sword"
+      },
       "text": "book.irregular_implements.guide.items.spectre_sword.page_0.text",
-      "title": "book.irregular_implements.guide.items.spectre_sword.page_0.title",
-      "use_markdown_in_title": false
+      "title": "book.irregular_implements.guide.items.spectre_sword.page_0.title"
     },
     {
       "type": "modonomicon:text",
@@ -29,6 +31,17 @@
       "show_title_separator": true,
       "text": "book.irregular_implements.guide.items.spectre_sword.page_1.text",
       "title": "book.irregular_implements.guide.items.spectre_sword.page_1.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.irregular_implements.guide.items.spectre_sword.page_2.text",
+      "title": "book.irregular_implements.guide.items.spectre_sword.page_2.title",
       "use_markdown_in_title": false
     },
     {

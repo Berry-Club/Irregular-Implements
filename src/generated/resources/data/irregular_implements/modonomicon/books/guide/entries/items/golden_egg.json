@@ -10,14 +10,27 @@
   "name": "book.irregular_implements.guide.items.golden_egg.name",
   "pages": [
     {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "count": 1,
+        "item": "irregular_implements:golden_egg"
+      },
+      "text": "book.irregular_implements.guide.items.golden_egg.page_0.text",
+      "title": "book.irregular_implements.guide.items.golden_egg.page_0.title"
+    },
+    {
       "type": "modonomicon:text",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.irregular_implements.guide.items.golden_egg.page_0.text",
-      "title": "book.irregular_implements.guide.items.golden_egg.page_0.title",
+      "text": "book.irregular_implements.guide.items.golden_egg.page_1.text",
+      "title": "book.irregular_implements.guide.items.golden_egg.page_1.title",
       "use_markdown_in_title": false
     }
   ],
