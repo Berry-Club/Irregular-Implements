@@ -56,7 +56,7 @@ object ModInfoLang {
 		addInfo(ModBlocks.AUTO_PLACER, "Places blocks in front of it from its inventory.\n\nCan be disabled with a Redstone signal.")
 		provider.add(LUBRICANT, "Completely frictionless. Anything moving on it will retain its momentum.")
 		addInfo(ModBlocks.COMPRESSED_SLIME_BLOCK, "Create by clicking a Slime Block with a Shovel. Can be compressed multiple times.\n\nLaunches entities into the air.")
-		addInfo(ModBlocks.REDSTONE_OBSERVER, "Emits the same Redstone signal as a linked block. Can read and output weak, strong, and/or analog signals. \n\nUse a Redstone Tool to link it to a block.")
+		addInfo(ModBlocks.REDSTONE_OBSERVER, "Emits the same Redstone signal as a linked block on the same side the linked block outputs to. Can read and output weak, strong, and/or analog signals. \n\nUse a Redstone Tool to link it to a block.")
 		addInfo(ModBlocks.BIOME_RADAR, "Insert a Biome Crystal and provide a Redstone signal, and it will attempt to find the Crystal's biome.\n\nIf it succeeds, it will spawn particles aiming in its direction.\n\nUsing a Paper on it will create a Location Filter for the biome.")
 		addInfo(ModBlocks.IRON_DROPPER, "An upgraded Dropper, where the following can be configured:\n\n• Item pickup delay\n• Item motion randomness\n• Particle/Sound toggle\n• Redstone control")
 		addInfo(ModBlocks.IGNITER, "Sets or extinguishes the block on front of it, depending on the Redstone signal.\n\nCan be set to keep the fire lit.")

@@ -3,8 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
-import dev.aaronhowser.mods.irregular_implements.block.RedstoneObserverBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
@@ -16,10 +16,12 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
-import kotlin.math.max
 
 class RedstoneObserverBlockEntity(
 	pos: BlockPos,
@@ -40,7 +42,41 @@ class RedstoneObserverBlockEntity(
 	private var linkedPos: BlockPos? = null
 	private var futureLinkedPos: BlockPos? = null
 
+	private var directionalPower: Int = 0
+	private var directionalDirect: Int = 0
+	private var analogPower: Int = 0
+
 	override fun getLinkedPos(): BlockPos? = linkedPos
+
+	fun getDirectionalPower(): Int = directionalPower
+	fun setDirectionalPower(power: Int): Boolean {
+		if (directionalPower != power) {
+			directionalPower = power
+			return true
+		} else {
+			return false
+		}
+	}
+
+	fun getDirectionalDirect(): Int = directionalDirect
+	fun setDirectionalDirect(direct: Int): Boolean {
+		if (directionalDirect != direct) {
+			directionalDirect = direct
+			return true
+		} else {
+			return false
+		}
+	}
+
+	fun getAnalog(): Int = analogPower
+	fun setAnalog(analog: Int): Boolean {
+		if (analogPower != analog) {
+			analogPower = analog
+			return true
+		} else {
+			return false
+		}
+	}
 
 	/**
 	 * Actually sets futureLinkedPos; the change will be applied on the next server tick.
@@ -123,11 +159,17 @@ class RedstoneObserverBlockEntity(
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
+		tag.putInt("directional_power", this.directionalPower)
+		tag.putInt("directional_direct", this.directionalDirect)
+		tag.putInt("analog", this.analogPower)
 		this.saveToTag(tag)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
+		this.directionalPower = tag.getInt("directional_power")
+		this.directionalDirect = tag.getInt("directional_direct")
+		this.analogPower = tag.getInt("analog")
 		this.loadFromTag(tag)
 	}
 
@@ -146,7 +188,9 @@ class RedstoneObserverBlockEntity(
 				.let { observers ->
 					if (observerPos !in observers) {
 						observers.add(observerPos)
-						updateObservers(level,targetPos)
+						if (level.isServerSide) {
+							updateObservers(level as ServerLevel,targetPos)
+						}
 					}
 				}
 		}
@@ -162,64 +206,55 @@ class RedstoneObserverBlockEntity(
 		}
 
 		@JvmStatic
-		fun updateObservers(level: Level, targetPos: BlockPos) {
+		fun updateObservers(level: ServerLevel, targetPos: BlockPos) {
 			val targetBlock = level.getBlockState(targetPos)
 			if (targetBlock.isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) return
 
 			val positions = linkedPositions[LevelPos(level, targetPos)] ?: return
 
 			for (observerPos in positions) {
-				println("hi")
-				val observer = level.getBlockState(observerPos)
-				if (observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) {
-					val observerPower = observer.getValue(RedstoneObserverBlock.POWER)
-					val observerDirect = observer.getValue(RedstoneObserverBlock.DIRECT)
-					val observerAnalog = observer.getValue(RedstoneObserverBlock.ANALOG)
+				if (level.isLoaded(observerPos)) {
+					val observer = level.getBlockState(observerPos)
+					if (observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) {
+						val observerEntity = level.getBlockEntity(observerPos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return
+						var linkedPower = 0
+						var linkedDirect = 0
+						for (direction in NeighborUpdater.UPDATE_ORDER) {
+							val directionOrdinal = direction.ordinal
+							linkedPower = linkedPower.or(level.getSignal(targetPos,direction).shl(directionOrdinal * 4))
+							linkedDirect = linkedDirect.or(level.getDirectSignal(targetPos,direction).shl(directionOrdinal * 4))
+						}
+						val linkedAnalog = targetBlock.getAnalogOutputSignal(level,targetPos)
 
-					var tempLinkedPower = 0
-					var tempLinkedDirect = 0
-					for (direction in Direction.entries) {
-						tempLinkedPower = max(tempLinkedPower, level.getSignal(targetPos,direction))
-						tempLinkedDirect = max(tempLinkedDirect, level.getDirectSignal(targetPos, direction))
-					}
-					val maxLinkedPower = if (tempLinkedPower >= 15) 15 else tempLinkedPower
-					val maxLinkedDirect = if (tempLinkedDirect >= 15) 15 else tempLinkedDirect
-					val linkedAnalog = targetBlock.getAnalogOutputSignal(level,targetPos)
+						val powerChanged = observerEntity.setDirectionalPower(linkedPower)
+						val directChanged = observerEntity.setDirectionalDirect(linkedDirect)
+						val analogChanged = observerEntity.setAnalog(linkedAnalog)
+						updateNeighborPower(level,observerPos,observer,observerEntity,powerChanged,directChanged,analogChanged)
 
-					val powerChanged = observerPower != maxLinkedPower
-					val directChanged = observerDirect != maxLinkedDirect
-					val analogChanged = observerAnalog != linkedAnalog
-					var newObserver = observer
-					if (powerChanged) {
-						newObserver = newObserver.setValue(RedstoneObserverBlock.POWER, maxLinkedPower)
-					}
-					if (directChanged) {
-						newObserver = newObserver.setValue(RedstoneObserverBlock.DIRECT, maxLinkedDirect)
-					}
-					if (analogChanged) {
-						newObserver = newObserver.setValue(RedstoneObserverBlock.ANALOG, linkedAnalog)
-					}
-
-					if (powerChanged || directChanged || analogChanged) {
-						level.setBlock(observerPos, newObserver, 3)
-						updateNeighborPower(level, observerPos,powerChanged||directChanged, analogChanged)
 					}
 				}
 			}
 		}
 
 		@JvmStatic
-		private fun updateNeighborPower(level: Level, pos: BlockPos, power: Boolean, analog: Boolean) {
-			if (power) {
+		fun updateNeighborPower(level: ServerLevel, pos: BlockPos, observer: BlockState, observerBlockEntity: RedstoneObserverBlockEntity?, power: Boolean, direct: Boolean, analog: Boolean) {
+			val redstoneObserverBlock = ModBlocks.REDSTONE_OBSERVER.get()
+			if (power || direct) {
 				for (direction in Direction.entries) {
 					val neighborPos = pos.relative(direction)
-					level.neighborChanged(neighborPos, ModBlocks.REDSTONE_OBSERVER.get(), pos)
-					level.updateNeighborsAtExceptFromFacing(neighborPos, ModBlocks.REDSTONE_OBSERVER.get(), direction.opposite)
+					level.neighborChanged(neighborPos, redstoneObserverBlock, pos)
+					level.updateNeighborsAtExceptFromFacing(neighborPos, redstoneObserverBlock, direction.opposite)
 				}
 			}
 
 			if (analog) {
-				level.updateNeighbourForOutputSignal(pos, ModBlocks.REDSTONE_OBSERVER.get())
+				level.updateNeighbourForOutputSignal(pos, redstoneObserverBlock)
+			}
+
+			if (power || direct || analog) {
+				observerBlockEntity?.setChanged()
+				observer.updateNeighbourShapes(level, pos, 3)
+
 			}
 		}
 
