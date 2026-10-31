@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneObserverBl
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
@@ -62,7 +61,7 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 		if (level.isClientSide || isMoving) return
 
 		val blockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return
-		RedstoneObserverBlockEntity.updateNeighborPower(level as ServerLevel, pos, state, blockEntity, power = true, direct = true, analog = true)
+		RedstoneObserverBlockEntity.updateNeighborPower(level, pos, state, blockEntity, power = true, direct = true, analog = true)
 
 	}
 
@@ -77,7 +76,7 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 		super.onRemove(state, level, pos, newState, isMoving)
 
 		if (!level.isClientSide && !isMoving && state.block !== newState.block) {
-			RedstoneObserverBlockEntity.updateNeighborPower(level as ServerLevel, pos, state, null, power = true, direct = true, analog = true)
+			RedstoneObserverBlockEntity.updateNeighborPower(level, pos, state, null, power = true, direct = true, analog = true)
 		}
 	}
 
@@ -92,19 +91,19 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		val directionOrdinal = direction.ordinal
 		val bitMask = 0b1111.shl(directionOrdinal * 4)
-		val observer = level.getBlockEntity(pos,ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return 0
+		val observer = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return 0
 		return observer.getDirectionalPower().and( bitMask).ushr(directionOrdinal * 4)
 	}
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		val directionOrdinal = direction.ordinal
 		val bitMask = 0b1111.shl(directionOrdinal * 4)
-		val observer = level.getBlockEntity(pos,ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return 0
+		val observer = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return 0
 		return observer.getDirectionalDirect().and( bitMask).ushr(directionOrdinal * 4)
 	}
 
 	override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
-		val observer = level.getBlockEntity(pos,ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return 0
+		val observer = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return 0
 		return observer.getAnalog()
 	}
 

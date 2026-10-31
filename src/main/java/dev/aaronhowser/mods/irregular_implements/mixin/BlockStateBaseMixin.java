@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.mixin;
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneObserverBlockEntity;
 import dev.aaronhowser.mods.irregular_implements.handler.FluidWalkingHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -33,9 +32,8 @@ abstract public class BlockStateBaseMixin {
 			boolean isMoving,
 			CallbackInfo ci
 	) {
-		if (level.isClientSide) return;
-		RedstoneObserverBlockEntity.updateObservers((ServerLevel) level, pos);
-		RedstoneObserverBlockEntity.updateObservers((ServerLevel) level, fromPos);
+		RedstoneObserverBlockEntity.updateObservers(level, pos);
+		RedstoneObserverBlockEntity.updateObservers(level, fromPos);
 	}
 
 	@Inject(
