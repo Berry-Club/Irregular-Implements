@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 
 //TODO: Needs new name
-class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
+class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK).isRedstoneConductor(Blocks::never)), EntityBlock {
 
 	companion object {
 		@JvmField
