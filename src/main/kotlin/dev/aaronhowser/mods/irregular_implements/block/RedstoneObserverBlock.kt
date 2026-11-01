@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.redstone.NeighborUpdater
 
 //TODO: Needs new name
 class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
@@ -61,7 +62,7 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 		if (level.isClientSide || isMoving) return
 
 		val blockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return
-		RedstoneObserverBlockEntity.updateNeighborPower(level, pos, state, blockEntity, power = true, direct = true, analog = true)
+		blockEntity.updateNeighborPower(level, pos,state)
 
 	}
 
@@ -76,7 +77,12 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 		super.onRemove(state, level, pos, newState, isMoving)
 
 		if (!level.isClientSide && !isMoving && state.block !== newState.block) {
-			RedstoneObserverBlockEntity.updateNeighborPower(level, pos, state, null, power = true, direct = true, analog = true)
+			for (direction in NeighborUpdater.UPDATE_ORDER) {
+				val neighborPos = pos.relative(direction)
+				level.updateNeighborsAtExceptFromFacing(neighborPos, state.block, direction.opposite)
+
+			}
+			level.updateNeighbourForOutputSignal(pos, state.block)
 		}
 	}
 
@@ -89,15 +95,13 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 	}
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		val shiftAmount = direction.ordinal * 4
 		val observer = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		return ((observer.getDirectionalPower()).ushr(shiftAmount)).and(0b1111)
+		return observer.getDirectionalPower(direction)
 	}
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		val shiftAmount = direction.ordinal * 4
 		val observer = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		return ((observer.getDirectionalDirect()).ushr(shiftAmount)).and(0b1111)
+		return observer.getDirectionalDirect(direction)
 	}
 
 	override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
