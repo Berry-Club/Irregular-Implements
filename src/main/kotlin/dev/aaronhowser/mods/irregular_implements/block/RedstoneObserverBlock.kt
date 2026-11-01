@@ -62,7 +62,7 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK)), E
 		if (level.isClientSide || isMoving) return
 
 		val blockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return
-		blockEntity.updateNeighborPower(level, pos,state)
+		blockEntity.updateNeighborPower(level, pos, state)
 
 	}
 
