@@ -20,8 +20,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
-import kotlin.math.max
-import kotlin.math.min
 
 class RedstoneObserverBlockEntity(
 	pos: BlockPos,
