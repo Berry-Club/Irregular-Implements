@@ -20,6 +20,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
+import kotlin.math.max
+import kotlin.math.min
 
 class RedstoneObserverBlockEntity(
 	pos: BlockPos,
@@ -219,9 +221,8 @@ class RedstoneObserverBlockEntity(
 						var linkedDirect = 0
 						for (direction in NeighborUpdater.UPDATE_ORDER) {
 							val shiftAmount = direction.ordinal * 4
-							val bitMask = 0b1111
-							linkedPower = linkedPower.or(((level.getSignal(targetPos, direction)).and(bitMask)).shl(shiftAmount))
-							linkedDirect = linkedDirect.or(((level.getDirectSignal(targetPos, direction)).and(bitMask)).shl(shiftAmount))
+							linkedPower = linkedPower.or((max(0, min(level.getSignal(targetPos,direction), 15))).shl(shiftAmount))
+							linkedDirect = linkedDirect.or((max(0, min(level.getDirectSignal(targetPos,direction), 15))).shl(shiftAmount))
 						}
 						val linkedAnalog = targetBlock.getAnalogOutputSignal(level, targetPos)
 
