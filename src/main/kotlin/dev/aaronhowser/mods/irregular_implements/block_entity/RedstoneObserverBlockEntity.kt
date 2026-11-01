@@ -20,8 +20,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
-import kotlin.math.max
-import kotlin.math.min
 
 class RedstoneObserverBlockEntity(
 	pos: BlockPos,
@@ -216,13 +214,16 @@ class RedstoneObserverBlockEntity(
 				if (level.isLoaded(observerPos)) {
 					val observer = level.getBlockState(observerPos)
 					if (observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) {
-						val observerEntity = level.getBlockEntity(observerPos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return
+						val observerEntity = level.getBlockEntity(observerPos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: continue
 						var linkedPower = 0
 						var linkedDirect = 0
+						/**
+						 * Encodes the 6 directions redstone power can be from a block into a single integer using 6 4-bit sections. I'm unsure if this is more or less performant than storing the values individually for each side.
+						 */
 						for (direction in NeighborUpdater.UPDATE_ORDER) {
 							val shiftAmount = direction.ordinal * 4
-							linkedPower = linkedPower.or((max(0, min(level.getSignal(targetPos,direction), 15))).shl(shiftAmount))
-							linkedDirect = linkedDirect.or((max(0, min(level.getDirectSignal(targetPos,direction), 15))).shl(shiftAmount))
+							linkedPower = linkedPower.or((level.getSignal(targetPos,direction).coerceIn(0,15)).shl(shiftAmount))
+							linkedDirect = linkedDirect.or((level.getDirectSignal(targetPos,direction).coerceIn(0,15)).shl(shiftAmount))
 						}
 						val linkedAnalog = targetBlock.getAnalogOutputSignal(level, targetPos)
 
