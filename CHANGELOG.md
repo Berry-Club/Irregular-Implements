@@ -1,4 +1,10 @@
-# 1.21.1
+# 1.12.2
+
+### Fixed
+
+- Fixed a potential item dupe
+
+# 1.12.1
 
 ### Changed
 

@@ -14,6 +14,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.Clearable
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
@@ -25,7 +26,7 @@ import net.minecraft.world.phys.Vec3
 class BiomeRadarBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.BIOME_RADAR.get(), pos, blockState), Clearable {
 
 	private var antennaValid: Boolean = false
 	var biomePos: BlockPos? = null
@@ -43,6 +44,10 @@ class BiomeRadarBlockEntity(
 
 		setChanged()
 		level?.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_ALL_IMMEDIATE)
+	}
+
+	override fun clearContent() {
+		biomeStack = ItemStack.EMPTY
 	}
 
 	private fun updateAntenna() {

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block_entity
 
+import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isNotTrue
@@ -19,6 +20,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.world.Container
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -30,9 +32,13 @@ import net.minecraft.world.level.block.state.BlockState
 class BlockTeleporterBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : BlockEntity(ModBlockEntityTypes.BLOCK_TELEPORTER.get(), pos, blockState), MenuProvider {
+) : BlockEntity(ModBlockEntityTypes.BLOCK_TELEPORTER.get(), pos, blockState), MenuProvider, ContainerContainer {
 
 	val container: ImprovedSimpleContainer = BlockTeleporterContainer()
+
+	override fun getContainers(): List<Container> {
+		return listOf(container)
+	}
 
 	fun swapBlocks(): Boolean {
 		if (level?.isClientSide.isTrue()) return false

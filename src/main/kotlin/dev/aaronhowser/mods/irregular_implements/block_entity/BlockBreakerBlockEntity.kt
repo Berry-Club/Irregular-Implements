@@ -17,6 +17,7 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
+import net.minecraft.world.Clearable
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
@@ -37,7 +38,7 @@ import java.util.*
 class BlockBreakerBlockEntity(
 	pos: BlockPos,
 	blockState: BlockState
-) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pos, blockState) {
+) : SyncingBlockEntity(ModBlockEntityTypes.BLOCK_BREAKER.get(), pos, blockState), Clearable {
 
 	private var uuid: UUID? = null
 
@@ -52,6 +53,10 @@ class BlockBreakerBlockEntity(
 
 	var diamondBreaker: ItemStack = ItemStack.EMPTY
 		private set
+
+	override fun clearContent() {
+		diamondBreaker = ItemStack.EMPTY
+	}
 
 	private fun initFakePlayer() {
 		val level = level as? ServerLevel ?: return
