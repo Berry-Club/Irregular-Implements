@@ -2,6 +2,7 @@
 
 ### Changed
 
+- Added the `#irregular_implements:nature_core_sapling_blacklist` block tag for preventing saplings from being planted by Nature Cores (#87)
 - Added the `irregular_implements:fertilized_dirt_blacklist` that Fertilized Dirt cannot tick (#88)
 	- Includes Fertilized Dirt by default
 

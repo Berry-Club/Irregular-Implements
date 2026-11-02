@@ -424,7 +424,9 @@ class ModBlockTagsProvider(
 
 		this.tag(NATURE_CORE_POSSIBLE_SAPLINGS)
 			.addTag(BlockTags.SAPLINGS)
-			.remove(ModBlocks.SPECTRE_SAPLING.get())
+
+		this.tag(NATURE_CORE_SAPLING_BLACKLIST)
+			.add(ModBlocks.SPECTRE_SAPLING.get())
 
 		this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
 			.add(
@@ -556,6 +558,7 @@ class ModBlockTagsProvider(
 		val CONVERTS_TO_FLOO_BRICK = modTag("converts_to_floo_brick")
 		val EXCLUDED_FROM_BLOCK_TELEPORTER = modTag("excluded_from_block_teleporter")
 		val NATURE_CORE_POSSIBLE_SAPLINGS = modTag("nature_core_possible_saplings")
+		val NATURE_CORE_SAPLING_BLACKLIST = modTag("nature_core_sapling_blacklist")
 		val NATURE_CORE_IMMUNE = modTag("nature_core_immune")
 		val GRASS_SEEDS_COMPATIBLE = modTag("grass_seeds_compatible")
 		val IGNORES_WIRELESS_REDSTONE = modTag("ignores_wireless_redstone")
