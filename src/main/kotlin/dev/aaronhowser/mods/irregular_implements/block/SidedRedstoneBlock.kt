@@ -39,7 +39,7 @@ class SidedRedstoneBlock : Block(
 	}
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
-		return if (state.getValue(FACING) == direction.opposite) 16 else 0
+		return if (state.getValue(FACING) == direction.opposite) 15 else 0
 	}
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
