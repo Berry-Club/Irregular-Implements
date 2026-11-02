@@ -10,6 +10,7 @@
 
 - Fixed a potential item dupe
 - The Sided Redstone Block now emits a strength of 15 instead of 16 (#91)
+- The Block Mover and Block Replacer now notify neighboring blocks after placing blocks (#92)
 
 # 1.12.1
 

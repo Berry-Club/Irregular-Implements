@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.irregular_implements.block_entity.BlockTeleporterBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.RandomSource
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -59,18 +61,23 @@ class BlockTeleporterBlock : Block(Properties.ofFullCopy(Blocks.DISPENSER)), Ent
 		val wasPowered = state.getValue(TRIGGERED)
 
 		if (isPowered && !wasPowered) {
-			val be = level.getBlockEntity(pos) as? BlockTeleporterBlockEntity
-			be?.swapBlocks()
-
 			val newState = state.setValue(TRIGGERED, true)
 			level.setBlockAndUpdate(pos, newState)
+			level.scheduleTick(pos, this, TRIGGER_DELAY)
 		} else if (!isPowered && wasPowered) {
 			val newState = state.setValue(TRIGGERED, false)
 			level.setBlockAndUpdate(pos, newState)
 		}
 	}
 
+	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
+		val blockEntity = level.getBlockEntity(pos) as? BlockTeleporterBlockEntity ?: return
+		blockEntity.swapBlocks()
+	}
+
 	companion object {
+		const val TRIGGER_DELAY = 4
+
 		val FACING: DirectionProperty = BlockStateProperties.FACING
 		val TRIGGERED: BooleanProperty = BlockStateProperties.TRIGGERED
 	}

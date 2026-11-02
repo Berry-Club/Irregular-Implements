@@ -284,6 +284,8 @@ class BlockReplacerItem(properties: Properties) : Item(properties) {
 				}
 			}
 
+			level.updateNeighborsAt(clickedPos, stateToPlace.block)
+
 			return true
 		}
 
