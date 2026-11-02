@@ -96,17 +96,17 @@ class RedstoneObserverBlock : Block(Properties.ofFullCopy(Blocks.IRON_BLOCK).isR
 
 	override fun getSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		val observer = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		return observer.getDirectionalPower(direction)
+		return observer.getWeakPower(direction)
 	}
 
 	override fun getDirectSignal(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
 		val observer = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		return observer.getDirectionalDirect(direction)
+		return observer.getStrongPower(direction)
 	}
 
 	override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
 		val observer = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
-		return observer.getAnalog()
+		return observer.getAnalogPower()
 	}
 
 }

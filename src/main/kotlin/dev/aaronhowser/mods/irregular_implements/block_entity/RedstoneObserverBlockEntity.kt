@@ -41,29 +41,45 @@ class RedstoneObserverBlockEntity(
 	private var linkedPos: BlockPos? = null
 	private var futureLinkedPos: BlockPos? = null
 
-	private var powerMask: Long = 0
+	private var weakPower: IntArray = IntArray(Direction.entries.size)
+	private var strongPower: IntArray = IntArray(Direction.entries.size)
+	private var analogPower: Int = 0
 
 	override fun getLinkedPos(): BlockPos? = linkedPos
 
-	private fun getNibble(shift: Int): Int {
-		return ((powerMask.ushr(shift)).toInt()).and(0b1111)
+	fun getWeakPower(direction: Direction): Int {
+		return weakPower[direction.ordinal]
 	}
 
-	fun getDirectionalPower(direction: Direction): Int {
-		return getNibble(direction.ordinal * 4)
+	fun setWeakPower(power: Int, index: Int): Boolean {
+		if (weakPower[index] != power) {
+			weakPower[index] = power
+			return true
+		} else {
+			return false
+		}
 	}
 
-	fun getDirectionalDirect(direction: Direction): Int {
-		return getNibble(24 + (direction.ordinal * 4))
+	fun getStrongPower(direction: Direction): Int {
+		return strongPower[direction.ordinal]
 	}
 
-	fun getAnalog(): Int {
-		return getNibble(48)
+	fun setStrongPower(power: Int, index: Int): Boolean {
+		if (strongPower[index] != power) {
+			strongPower[index] = power
+			return true
+		} else {
+			return false
+		}
 	}
 
-	fun setPower(power: Long): Boolean {
-		if (powerMask != power) {
-			powerMask = power
+	fun getAnalogPower(): Int {
+		return analogPower
+	}
+
+	fun setAnalogPower(power: Int): Boolean {
+		if (analogPower != power) {
+			analogPower = power
 			return true
 		} else {
 			return false
@@ -151,14 +167,27 @@ class RedstoneObserverBlockEntity(
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
-		tag.putLong("power_mask", this.powerMask)
+		val list = CompoundTag()
+		list.putIntArray("weak_power", this.weakPower)
+		list.putIntArray("strong_power", this.strongPower)
+		list.putInt("analog_power", this.analogPower)
+		tag.put("directional_power",list)
 		this.saveToTag(tag)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		this.powerMask = tag.getLong("power_mask")
+		val list: CompoundTag = tag.get("directional_power") as CompoundTag
+		this.weakPower = readPowerArray(list, "weak_power")
+		this.strongPower = readPowerArray(list,"strong_power")
+		this.analogPower = list.getInt("analog_power")
 		this.loadFromTag(tag)
+	}
+
+	private fun readPowerArray(list: CompoundTag, key: String): IntArray {
+		val result = IntArray(Direction.entries.size)
+		val saved = list.getIntArray(key)
+		return saved.copyInto(result, endIndex = minOf(saved.size, result.size))
 	}
 
 	fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
@@ -219,19 +248,17 @@ class RedstoneObserverBlockEntity(
 					if (observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) {
 						val observerEntity = level.getBlockEntity(observerPos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: continue
 
-						/**
-						 * Encodes the directions redstone power can be from a block into a single integer. I'm unsure if this is more or less performant than storing the values individually for each side. However, it should use less memory.
-						 */
-						var packedPower = 0L
+						var powerChange = false
+
 						for (direction in NeighborUpdater.UPDATE_ORDER) {
-							val shiftAmount = direction.ordinal * 4
-
-							packedPower = packedPower.or((((level.getSignal(targetPos, direction)).coerceIn(0, 15)).toLong()).shl(shiftAmount))
-							packedPower = packedPower.or((((level.getDirectSignal(targetPos, direction)).coerceIn(0, 15)).toLong()).shl(24 + shiftAmount))
+							val index = direction.ordinal
+							powerChange = observerEntity.setWeakPower(level.getSignal(targetPos, direction).coerceIn(0,15), index) || powerChange
+							powerChange = observerEntity.setStrongPower(level.getDirectSignal(targetPos, direction).coerceIn(0,15), index) || powerChange
 						}
-						packedPower = packedPower.or((((targetBlock.getAnalogOutputSignal(level, targetPos)).coerceIn(0, 15)).toLong()).shl(48))
+						powerChange = observerEntity.setAnalogPower(targetBlock.getAnalogOutputSignal(level, targetPos).coerceIn(0, 15)) || powerChange
 
-						if (observerEntity.setPower(packedPower)) {
+
+						if (powerChange) {
 							observerEntity.updateNeighborPower(level, observerPos, observer)
 						}
 
