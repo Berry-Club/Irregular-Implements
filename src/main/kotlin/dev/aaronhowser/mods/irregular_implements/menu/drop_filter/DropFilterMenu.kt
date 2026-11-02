@@ -44,7 +44,7 @@ class DropFilterMenu(
 
 	override fun addContainerSlots() {
 		val filterSlot = DropFilterSlot(80, 18)
-		this.addSlot(filterSlot)
+		addSlot(filterSlot)
 	}
 
 	private inner class DropFilterContainer : SimpleContainer(1) {

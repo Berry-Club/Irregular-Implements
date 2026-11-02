@@ -15,7 +15,7 @@ class BlockDetectorScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.BLOCK_DETECTOR
 
 	override fun baseInit() {
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 	}
 
 }

@@ -37,7 +37,7 @@ class ChangingColorButton(
 		guiGraphics.setColor(red, green, blue, alpha)
 		RenderSystem.enableBlend()
 		RenderSystem.enableDepthTest()
-		guiGraphics.blitSprite(SPRITES[this.active, this.isHovered], this.x, this.y, this.getWidth(), this.getHeight())
+		guiGraphics.blitSprite(SPRITES[active, isHovered], x, y, getWidth(), getHeight())
 		guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
 
 		if (isMouseOver(mouseX.toDouble(), mouseY.toDouble())) {

@@ -24,7 +24,7 @@ class ModMobLootSubprovider(
 ) : EntityLootSubProvider(FeatureFlags.REGISTRY.allFlags(), registries) {
 
 	override fun generate() {
-		this.add(
+		add(
 			ModEntityTypes.GOLDEN_CHICKEN.get(),
 			LootTable.lootTable()
 				.withPool(
@@ -33,7 +33,7 @@ class ModMobLootSubprovider(
 						.add(
 							LootItem.lootTableItem(Items.FEATHER)
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f)))
-								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f)))
+								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0f, 1.0f)))
 						)
 				)
 				.withPool(
@@ -41,13 +41,13 @@ class ModMobLootSubprovider(
 						.setRolls(ConstantValue.exactly(1.0f))
 						.add(
 							LootItem.lootTableItem(Items.CHICKEN)
-								.apply(SmeltItemFunction.smelted().`when`(this.shouldSmeltLoot()))
-								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f)))
+								.apply(SmeltItemFunction.smelted().`when`(shouldSmeltLoot()))
+								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0f, 1.0f)))
 						)
 				)
 		)
 
-		this.add(
+		add(
 			ModEntityTypes.SPIRIT.get(),
 			LootTable.lootTable()
 				.withPool(

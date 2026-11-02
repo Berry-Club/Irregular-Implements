@@ -59,7 +59,7 @@ class ItemFilterMenu(
 	}
 
 	override fun addContainerSlots() {
-		val holderLookup = this.playerInventory.player.registryAccess()
+		val holderLookup = playerInventory.player.registryAccess()
 
 		for (index in 0 until 9) {
 			val x = 8 + index * 18
@@ -67,7 +67,7 @@ class ItemFilterMenu(
 
 			val slot = ItemFilterSlot(::getHeldItemStack, holderLookup, x, y)
 
-			this.addSlot(slot)
+			addSlot(slot)
 		}
 
 	}
@@ -88,7 +88,7 @@ class ItemFilterMenu(
 
 	// Toggles between Item Filter and Tag Filter
 	private fun pressLeftButton(slotIndex: Int) {
-		val filter = this.getFilter() ?: return
+		val filter = getFilter() ?: return
 		val entry = filter.getOrNull(slotIndex) ?: return
 
 		val newEntry = when (entry) {
@@ -120,7 +120,7 @@ class ItemFilterMenu(
 	// If it's an Item Filter, toggles between requiring the same components or not
 	// If it's a Tag Filter, cycles which Tag it's filtering
 	private fun pressRightButton(slotIndex: Int) {
-		val filter = this.getFilter() ?: return
+		val filter = getFilter() ?: return
 		val entry = filter.getOrNull(slotIndex) ?: return
 
 		if (entry is FilterEntry.Item) {

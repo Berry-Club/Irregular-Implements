@@ -25,14 +25,14 @@ class ModBlockTagsProvider(
 ) : BlockTagsProvider(output, lookupProvider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
-		this.tag(CUSTOM_CRAFTING_TABLE_BLACKLIST)
+		tag(CUSTOM_CRAFTING_TABLE_BLACKLIST)
 			.add(
 				Blocks.AIR,
 				Blocks.BEDROCK,
 				Blocks.BARRIER,
 			)
 
-		this.tag(CONVERTS_TO_SPECTRE_SAPLING)
+		tag(CONVERTS_TO_SPECTRE_SAPLING)
 			.addTag(
 				BlockTags.SAPLINGS
 			)
@@ -40,34 +40,34 @@ class ModBlockTagsProvider(
 				ModBlocks.SPECTRE_SAPLING.get()
 			)
 
-		this.tag(BlockTags.REPLACEABLE_BY_TREES)
+		tag(BlockTags.REPLACEABLE_BY_TREES)
 			.add(
 				ModBlocks.SPECTRE_LEAVES.get()
 			)
 
-		this.tag(BlockTags.LEAVES)
+		tag(BlockTags.LEAVES)
 			.add(
 				ModBlocks.SPECTRE_LEAVES.get()
 			)
 
-		this.tag(BlockTags.LOGS_THAT_BURN)
+		tag(BlockTags.LOGS_THAT_BURN)
 			.add(
 				ModBlocks.SPECTRE_LOG.get(),
 				ModBlocks.SPECTRE_WOOD.get()
 			)
 
-		this.tag(BlockTags.PLANKS)
+		tag(BlockTags.PLANKS)
 			.add(
 				ModBlocks.SPECTRE_PLANKS.get()
 			)
 
-		this.tag(DIAPHANOUS_BLOCK_BLACKLIST)
+		tag(DIAPHANOUS_BLOCK_BLACKLIST)
 			.add(
 				Blocks.CHAIN,
 				Blocks.CACTUS
 			)
 
-		this.tag(BLOCK_DESTABILIZER_BLACKLIST)
+		tag(BLOCK_DESTABILIZER_BLACKLIST)
 			.add(
 				Blocks.BEDROCK,
 				Blocks.BARRIER,
@@ -81,7 +81,7 @@ class ModBlockTagsProvider(
 				Blocks.AIR,
 			)
 
-		this.tag(BLOCK_REPLACER_BLACKLIST)
+		tag(BLOCK_REPLACER_BLACKLIST)
 			.add(
 				Blocks.BEDROCK,
 				Blocks.BARRIER,
@@ -95,7 +95,7 @@ class ModBlockTagsProvider(
 				Blocks.AIR,
 			)
 
-		this.tag(BLOCK_MOVER_BLACKLIST)
+		tag(BLOCK_MOVER_BLACKLIST)
 			.add(
 				Blocks.BEDROCK,
 				Blocks.BARRIER,
@@ -113,7 +113,7 @@ class ModBlockTagsProvider(
 
 		colorTags()
 
-		this.tag(Tags.Blocks.GLASS_BLOCKS)
+		tag(Tags.Blocks.GLASS_BLOCKS)
 			.add(
 				ModBlocks.BIOME_GLASS.get(),
 				ModBlocks.LAPIS_GLASS.get(),
@@ -137,7 +137,7 @@ class ModBlockTagsProvider(
 				ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK_BLACK.get(),
 			)
 
-		this.tag(BlockTags.STONE_BRICKS)
+		tag(BlockTags.STONE_BRICKS)
 			.add(
 				ModBlocks.BIOME_STONE_BRICKS.get(),
 				ModBlocks.BIOME_STONE_BRICKS_CHISELED.get(),
@@ -176,50 +176,50 @@ class ModBlockTagsProvider(
 				ModBlocks.LUMINOUS_STAINED_BRICKS_BLACK.get(),
 			)
 
-		this.tag(Tags.Blocks.COBBLESTONES)
+		tag(Tags.Blocks.COBBLESTONES)
 			.add(
 				ModBlocks.BIOME_COBBLESTONE.get()
 			)
 
-		this.tag(Tags.Blocks.STONES)
+		tag(Tags.Blocks.STONES)
 			.add(
 				ModBlocks.BIOME_STONE.get()
 			)
 
-		this.tag(BlockTags.SAPLINGS)
+		tag(BlockTags.SAPLINGS)
 			.add(
 				ModBlocks.SPECTRE_SAPLING.get()
 			)
 
-		this.tag(BlockTags.WITHER_IMMUNE)
+		tag(BlockTags.WITHER_IMMUNE)
 			.add(
 				ModBlocks.SPECTRE_BLOCK.get()
 			)
 
-		this.tag(BlockTags.CLIMBABLE)
+		tag(BlockTags.CLIMBABLE)
 			.add(
 				ModBlocks.BEAN_STALK.get(),
 				ModBlocks.LESSER_BEAN_STALK.get()
 			)
 
-		this.tag(C_CROPS_BEAN)
+		tag(C_CROPS_BEAN)
 			.add(
 				ModBlocks.BEAN_SPROUT.get()
 			)
 
-		this.tag(BlockTags.CROPS)
+		tag(BlockTags.CROPS)
 			.add(
 				ModBlocks.LOTUS.get()
 			)
 			.addTag(C_CROPS_BEAN)
 
-		this.tag(BlockTags.SMALL_FLOWERS)
+		tag(BlockTags.SMALL_FLOWERS)
 			.add(
 				ModBlocks.LOTUS.get(),
 				ModBlocks.PITCHER_PLANT.get()
 			)
 
-		this.tag(SUPER_LUBRICATED)
+		tag(SUPER_LUBRICATED)
 			.add(
 				ModBlocks.SUPER_LUBRICANT_ICE.get(),
 				ModBlocks.SUPER_LUBRICANT_STONE.get(),
@@ -231,25 +231,25 @@ class ModBlockTagsProvider(
 			.mapNotNull { ModBlocks.getColoredGrass(it)?.get() }
 			.toTypedArray()
 
-		this.tag(BlockTags.DIRT)
+		tag(BlockTags.DIRT)
 			.add(
 				*coloredGrassBlocks,
 				ModBlocks.FERTILIZED_DIRT.get()
 			)
 
-		this.tag(BlockTags.VALID_SPAWN)
+		tag(BlockTags.VALID_SPAWN)
 			.add(*coloredGrassBlocks)
 
-		this.tag(BlockTags.ANIMALS_SPAWNABLE_ON)
+		tag(BlockTags.ANIMALS_SPAWNABLE_ON)
 			.add(*coloredGrassBlocks)
 
-		this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
+		tag(BlockTags.MINEABLE_WITH_SHOVEL)
 			.add(
 				*coloredGrassBlocks,
 				ModBlocks.FERTILIZED_DIRT.get()
 			)
 
-		this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+		tag(BlockTags.MINEABLE_WITH_PICKAXE)
 			.add(
 				ModBlocks.ENDER_BRIDGE.get(),
 				ModBlocks.PRISMARINE_ENDER_BRIDGE.get(),
@@ -380,7 +380,7 @@ class ModBlockTagsProvider(
 				ModBlocks.AUTO_PLACER.get()
 			)
 
-		this.tag(BlockTags.MINEABLE_WITH_AXE)
+		tag(BlockTags.MINEABLE_WITH_AXE)
 			.add(
 				ModBlocks.BLOCK_OF_STICKS.get(),
 				ModBlocks.RETURNING_BLOCK_OF_STICKS.get(),
@@ -405,30 +405,30 @@ class ModBlockTagsProvider(
 				ModBlocks.WATER_CHEST.get()
 			)
 
-		this.tag(BlockTags.MINEABLE_WITH_HOE)
+		tag(BlockTags.MINEABLE_WITH_HOE)
 			.add(
 				ModBlocks.SPECTRE_LEAVES.get()
 			)
 
-		this.tag(CONVERTS_TO_FLOO_BRICK)
+		tag(CONVERTS_TO_FLOO_BRICK)
 			.add(
 				Blocks.BRICKS
 			)
 
-		this.tag(EXCLUDED_FROM_BLOCK_TELEPORTER)
+		tag(EXCLUDED_FROM_BLOCK_TELEPORTER)
 			.add(
 				Blocks.BEDROCK,
 				Blocks.BARRIER,
 				Blocks.END_PORTAL_FRAME,
 			)
 
-		this.tag(NATURE_CORE_POSSIBLE_SAPLINGS)
+		tag(NATURE_CORE_POSSIBLE_SAPLINGS)
 			.addTag(BlockTags.SAPLINGS)
 
-		this.tag(NATURE_CORE_SAPLING_BLACKLIST)
+		tag(NATURE_CORE_SAPLING_BLACKLIST)
 			.add(ModBlocks.SPECTRE_SAPLING.get())
 
-		this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
+		tag(BlockTags.NEEDS_DIAMOND_TOOL)
 			.add(
 				ModBlocks.PLAYER_INTERFACE.get(),
 				ModBlocks.ENDER_ANCHOR.get(),
@@ -446,7 +446,7 @@ class ModBlockTagsProvider(
 				ModBlocks.BLOCK_TELEPORTER.get()
 			)
 
-		this.tag(BlockTags.NEEDS_IRON_TOOL)
+		tag(BlockTags.NEEDS_IRON_TOOL)
 			.add(
 				ModBlocks.IMBUING_STATION.get(),
 				ModBlocks.ENDER_MAILBOX.get(),
@@ -461,7 +461,7 @@ class ModBlockTagsProvider(
 				ModBlocks.ADVANCED_REDSTONE_INTERFACE.get()
 			)
 
-		this.tag(BlockTags.NEEDS_STONE_TOOL)
+		tag(BlockTags.NEEDS_STONE_TOOL)
 			.add(
 				ModBlocks.POTION_VAPORIZER.get(),
 				ModBlocks.RAIN_SHIELD.get(),
@@ -487,21 +487,21 @@ class ModBlockTagsProvider(
 				ModBlocks.AUTO_PLACER.get()
 			)
 
-		this.tag(NATURE_CORE_IMMUNE)
+		tag(NATURE_CORE_IMMUNE)
 
-		this.tag(GRASS_SEEDS_COMPATIBLE)
+		tag(GRASS_SEEDS_COMPATIBLE)
 			.addTag(
 				BlockTags.DIRT
 			)
 
-		this.tag(IGNORES_WIRELESS_REDSTONE)
+		tag(IGNORES_WIRELESS_REDSTONE)
 			.add(
 				ModBlocks.BASIC_REDSTONE_INTERFACE.get(),
 				ModBlocks.ADVANCED_REDSTONE_INTERFACE.get(),
 				ModBlocks.REDSTONE_OBSERVER.get()
 			)
 
-		this.tag(Tags.Blocks.VILLAGER_FARMLANDS)
+		tag(Tags.Blocks.VILLAGER_FARMLANDS)
 			.add(
 				ModBlocks.FERTILIZED_DIRT.get()
 			)
@@ -527,12 +527,12 @@ class ModBlockTagsProvider(
 				translucentLuminousBlock
 			).toTypedArray()
 
-			this.tag(Tags.Blocks.DYED)
+			tag(Tags.Blocks.DYED)
 				.add(*notNull)
 
 			val coloredTag = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color.getDyeName()))
 
-			this.tag(coloredTag)
+			tag(coloredTag)
 				.add(*notNull)
 		}
 	}

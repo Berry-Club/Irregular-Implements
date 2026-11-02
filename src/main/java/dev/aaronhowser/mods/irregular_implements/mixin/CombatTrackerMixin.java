@@ -28,7 +28,7 @@ abstract public class CombatTrackerMixin {
 	)
 	private Component irregular_implements$addFallMessage(Component original, CombatEntry combatEntry) {
 		return (combatEntry.fallLocation() == FluidWalkingHandler.FLUID_BOOT_FALL)
-				? FluidWalkingHandler.fluidWalkingDeathMessage(this.mob)
+				? FluidWalkingHandler.fluidWalkingDeathMessage(mob)
 				: original;
 	}
 

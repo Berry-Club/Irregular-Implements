@@ -32,7 +32,7 @@ class NotificationInterfaceMenu(
 
 		addPlayerInventorySlots(64)
 
-		this.addSlot(
+		addSlot(
 			ContainerSlot(
 				notificationInterfaceContainer,
 				0,
@@ -59,10 +59,10 @@ class NotificationInterfaceMenu(
 
 	private var title: String = ""
 	fun setTitle(newTitle: String): Boolean {
-		if (newTitle == this.title) return false
-		this.title = newTitle
+		if (newTitle == title) return false
+		title = newTitle
 
-		this.containerLevelAccess.execute { level, pos ->
+		containerLevelAccess.execute { level, pos ->
 			val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity
 			blockEntity?.toastTitle = newTitle
 		}
@@ -72,10 +72,10 @@ class NotificationInterfaceMenu(
 
 	private var description: String = ""
 	fun setDescription(newDescription: String): Boolean {
-		if (newDescription == this.description) return false
-		this.description = newDescription
+		if (newDescription == description) return false
+		description = newDescription
 
-		this.containerLevelAccess.execute { level, pos ->
+		containerLevelAccess.execute { level, pos ->
 			val blockEntity = level.getBlockEntity(pos) as? NotificationInterfaceBlockEntity
 			blockEntity?.toastDescription = newDescription
 		}

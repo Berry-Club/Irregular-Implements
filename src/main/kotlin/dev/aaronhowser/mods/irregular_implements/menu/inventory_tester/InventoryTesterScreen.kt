@@ -21,16 +21,16 @@ class InventoryTesterScreen(
 	private lateinit var invertButton: MultiStageSpriteButton
 
 	override fun baseInit() {
-		this.titleLabelX = 35
-		this.inventoryLabelX = 35
-		this.inventoryLabelY = this.imageHeight - 94
+		titleLabelX = 35
+		inventoryLabelX = 35
+		inventoryLabelY = imageHeight - 94
 
 		//TODO: Update placement and size
-		this.invertButton = MultiStageSpriteButton.Builder(this.font)
+		invertButton = MultiStageSpriteButton.Builder(font)
 			.size(20)
 			.location(
-				x = this.leftPos + 90,
-				y = this.topPos + 18
+				x = leftPos + 90,
+				y = topPos + 18
 			)
 			.addStage(
 				message = ModTooltipLang.UNINVERTED.toComponent(),
@@ -41,7 +41,7 @@ class InventoryTesterScreen(
 				sprite = ScreenTextures.Sprites.INVERTED
 			)
 			.currentStageGetter(
-				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }
+				currentStageGetter = { if (menu.isInverted) 1 else 0 }
 			)
 			.onPress(
 				onPress = {
@@ -51,7 +51,7 @@ class InventoryTesterScreen(
 			)
 			.build()
 
-		this.addRenderableWidget(this.invertButton)
+		addRenderableWidget(invertButton)
 	}
 
 }

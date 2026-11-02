@@ -79,7 +79,7 @@ data class BlockDataComponent(
 			blockEntityNbt.putInt("z", posToPlaceIn.z)
 
 			level.getBlockEntity(posToPlaceIn)
-				?.loadWithComponents(this.blockEntityNbt, level.registryAccess())
+				?.loadWithComponents(blockEntityNbt, level.registryAccess())
 		}
 
 		val fluidState = level.getFluidState(posToPlaceIn)
@@ -103,6 +103,8 @@ data class BlockDataComponent(
 				fluidType.onVaporize(null, level, posToPlaceIn, fluidStack)
 			}
 		}
+
+		level.updateNeighborsAt(posToPlaceIn, adjustedState.block)
 
 		return true
 	}

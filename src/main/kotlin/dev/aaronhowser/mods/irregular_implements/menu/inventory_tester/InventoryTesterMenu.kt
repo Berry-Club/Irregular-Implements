@@ -32,12 +32,12 @@ class InventoryTesterMenu(
 
 		addSlots(54)
 
-		this.addDataSlots(containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun addContainerSlots() {
 		val slot = InventoryTesterSlot(container, 64, 18)
-		this.addSlot(slot)
+		addSlot(slot)
 	}
 
 	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
@@ -45,16 +45,16 @@ class InventoryTesterMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return this.container.stillValid(player)
+		return container.stillValid(player)
 	}
 
 	var isInverted: Boolean
-		get() = this.containerData.get(0) != 0
-		private set(value) = this.containerData.set(0, if (value) 1 else 0)
+		get() = containerData.get(0) != 0
+		private set(value) = containerData.set(0, if (value) 1 else 0)
 
 	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
-			TOGGLE_INVERSION_BUTTON_ID -> this.isInverted = !this.isInverted
+			TOGGLE_INVERSION_BUTTON_ID -> isInverted = !isInverted
 		}
 	}
 

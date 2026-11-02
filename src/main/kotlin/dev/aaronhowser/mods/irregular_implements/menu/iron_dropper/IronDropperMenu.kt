@@ -34,7 +34,7 @@ class IronDropperMenu(
 
 		addSlots(84)
 
-		this.addDataSlots(containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun addContainerSlots() {
@@ -44,7 +44,7 @@ class IronDropperMenu(
 				val x = 62 + column * 18
 				val y = 17 + row * 18
 
-				this.addSlot(ContainerSlot(dispenserContainer, slotIndex, x, y))
+				addSlot(ContainerSlot(dispenserContainer, slotIndex, x, y))
 			}
 		}
 	}
@@ -58,10 +58,10 @@ class IronDropperMenu(
 		val copyStack = stackThere.copy()
 
 		if (clickedSlotIndex < 9) {
-			if (!this.moveItemStackTo(stackThere, 9, 45, true)) {
+			if (!moveItemStackTo(stackThere, 9, 45, true)) {
 				return ItemStack.EMPTY
 			}
-		} else if (!this.moveItemStackTo(stackThere, 0, 9, false)) {
+		} else if (!moveItemStackTo(stackThere, 0, 9, false)) {
 			return ItemStack.EMPTY
 		}
 
@@ -101,10 +101,10 @@ class IronDropperMenu(
 	// Only called from the server
 	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {
-			SHOOT_MODE_BUTTON_ID -> this.shouldShootStraight = !this.shouldShootStraight
-			EFFECTS_BUTTON_ID -> this.shouldHaveEffects = this.shouldHaveEffects.next()
-			DELAY_BUTTON_ID -> this.pickupDelay = this.pickupDelay.next()
-			REDSTONE_BUTTON_ID -> this.redstoneMode = this.redstoneMode.next()
+			SHOOT_MODE_BUTTON_ID -> shouldShootStraight = !shouldShootStraight
+			EFFECTS_BUTTON_ID -> shouldHaveEffects = shouldHaveEffects.next()
+			DELAY_BUTTON_ID -> pickupDelay = pickupDelay.next()
+			REDSTONE_BUTTON_ID -> redstoneMode = redstoneMode.next()
 		}
 	}
 

@@ -15,9 +15,9 @@ class ImbuingStationScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.IMBUING_STATION
 
 	override fun baseInit() {
-		this.titleLabelX = 4
+		titleLabelX = 4
 
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 	}
 
 }

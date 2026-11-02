@@ -24,14 +24,14 @@ class EnderLetterScreen(
 	private lateinit var recipientEditBox: EditBox
 
 	override fun baseInit() {
-		inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 
-		val screenWidth = this.rightPos - this.leftPos
+		val screenWidth = rightPos - leftPos
 
 		val boxWidth = Mth.ceil(screenWidth * 0.5)
 
 		recipientEditBox = EditBox(
-			this.font,
+			font,
 			rightPos - boxWidth - 7,
 			topPos + 5,
 			boxWidth,
@@ -45,7 +45,7 @@ class EnderLetterScreen(
 	}
 
 	private fun setRecipientString(newString: String) {
-		if (this.menu.setNewRecipient(newString)) {
+		if (menu.setNewRecipient(newString)) {
 			val packet = ClientChangedMenuString(EnderLetterMenu.RECIPIENT_STRING_ID, newString)
 			packet.messageServer()
 		}
@@ -53,7 +53,7 @@ class EnderLetterScreen(
 
 	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
 		if (keyCode == 256) {
-			this.minecraft?.player?.closeContainer()
+			minecraft?.player?.closeContainer()
 		}
 
 		return if (!recipientEditBox.keyPressed(keyCode, scanCode, modifiers) && !recipientEditBox.canConsumeInput()) {

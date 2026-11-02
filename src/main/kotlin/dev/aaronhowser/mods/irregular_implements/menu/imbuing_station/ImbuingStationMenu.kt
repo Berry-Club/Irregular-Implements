@@ -36,7 +36,7 @@ class ImbuingStationMenu(
 			80,
 			9
 		)
-		this.addSlot(topSlot)
+		addSlot(topSlot)
 
 		val leftSlot = ContainerSlot(
 			imbuingStationContainer,
@@ -44,7 +44,7 @@ class ImbuingStationMenu(
 			35,
 			54
 		)
-		this.addSlot(leftSlot)
+		addSlot(leftSlot)
 
 		val middleSlot = ContainerSlot(
 			imbuingStationContainer,
@@ -52,7 +52,7 @@ class ImbuingStationMenu(
 			80,
 			54
 		)
-		this.addSlot(middleSlot)
+		addSlot(middleSlot)
 
 		val bottomSlot = ContainerSlot(
 			imbuingStationContainer,
@@ -60,7 +60,7 @@ class ImbuingStationMenu(
 			80,
 			99
 		)
-		this.addSlot(bottomSlot)
+		addSlot(bottomSlot)
 
 		val outputSlot = ContainerSlot(
 			imbuingStationContainer,
@@ -68,7 +68,7 @@ class ImbuingStationMenu(
 			125,
 			54
 		)
-		this.addSlot(outputSlot)
+		addSlot(outputSlot)
 	}
 
 	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {

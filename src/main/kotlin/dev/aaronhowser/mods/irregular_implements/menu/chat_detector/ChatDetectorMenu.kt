@@ -27,7 +27,7 @@ class ChatDetectorMenu(
 			)
 
 	init {
-		this.addDataSlots(containerData)
+		addDataSlots(containerData)
 	}
 
 	var shouldMessageStop: Boolean
@@ -46,10 +46,10 @@ class ChatDetectorMenu(
 
 	private var currentRegexString: String = ""
 	fun setRegex(regexString: String): Boolean {
-		if (regexString == this.currentRegexString) return false
-		this.currentRegexString = regexString
+		if (regexString == currentRegexString) return false
+		currentRegexString = regexString
 
-		this.containerLevelAccess.execute { level, pos ->
+		containerLevelAccess.execute { level, pos ->
 			val blockEntity = level.getBlockEntity(pos) as? ChatDetectorBlockEntity
 			blockEntity?.regexString = regexString
 		}
@@ -62,7 +62,7 @@ class ChatDetectorMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return stillValid(this.containerLevelAccess, player, ModBlocks.CHAT_DETECTOR.get())
+		return stillValid(containerLevelAccess, player, ModBlocks.CHAT_DETECTOR.get())
 	}
 
 	companion object {

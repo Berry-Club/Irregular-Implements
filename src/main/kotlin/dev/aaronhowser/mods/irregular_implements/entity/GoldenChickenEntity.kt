@@ -29,7 +29,7 @@ class GoldenChickenEntity(
 ) : Animal(entityType, level) {
 
 	init {
-		this.setPathfindingMalus(PathType.WATER, 0.0f)
+		setPathfindingMalus(PathType.WATER, 0.0f)
 	}
 
 	var flap: Float = 0f
@@ -52,39 +52,39 @@ class GoldenChickenEntity(
 	}
 
 	public override fun getDefaultDimensions(pose: Pose): EntityDimensions {
-		return if (this.isBaby) BABY_DIMENSIONS else super.getDefaultDimensions(pose)
+		return if (isBaby) BABY_DIMENSIONS else super.getDefaultDimensions(pose)
 	}
 
 	override fun aiStep() {
 		super.aiStep()
-		this.oFlap = this.flap
-		this.oFlapSpeed = this.flapSpeed
-		this.flapSpeed += (if (this.onGround()) -1.0f else 4.0f) * 0.3f
-		this.flapSpeed = Mth.clamp(this.flapSpeed, 0.0f, 1.0f)
+		oFlap = flap
+		oFlapSpeed = flapSpeed
+		flapSpeed += (if (onGround()) -1.0f else 4.0f) * 0.3f
+		flapSpeed = Mth.clamp(flapSpeed, 0.0f, 1.0f)
 
-		if (!this.onGround() && this.flapping < 1.0f) this.flapping = 1.0f
+		if (!onGround() && flapping < 1.0f) flapping = 1.0f
 
-		this.flapping *= 0.9f
-		val vec3 = this.deltaMovement
-		if (!this.onGround() && vec3.y < 0.0) {
-			this.deltaMovement = vec3.multiply(1.0, 0.6, 1.0)
+		flapping *= 0.9f
+		val vec3 = deltaMovement
+		if (!onGround() && vec3.y < 0.0) {
+			deltaMovement = vec3.multiply(1.0, 0.6, 1.0)
 		}
 
-		this.flap += this.flapping * 2.0f
-		if ((!level().isClientSide && this.isAlive && !this.isBaby) && --this.eggTime <= 0) {
-			this.playSound(SoundEvents.CHICKEN_EGG, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f)
-			this.spawnAtLocation(Items.GOLD_INGOT)
-			this.gameEvent(GameEvent.ENTITY_PLACE)
-			this.eggTime = random.nextInt(6000) + 6000
+		flap += flapping * 2.0f
+		if ((!level().isClientSide && isAlive && !isBaby) && --eggTime <= 0) {
+			playSound(SoundEvents.CHICKEN_EGG, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f)
+			spawnAtLocation(Items.GOLD_INGOT)
+			gameEvent(GameEvent.ENTITY_PLACE)
+			eggTime = random.nextInt(6000) + 6000
 		}
 	}
 
 	override fun isFlapping(): Boolean {
-		return this.flyDist > this.nextFlap
+		return flyDist > nextFlap
 	}
 
 	override fun onFlap() {
-		this.nextFlap = this.flyDist + this.flapSpeed / 2.0f
+		nextFlap = flyDist + flapSpeed / 2.0f
 	}
 
 	override fun getAmbientSound(): SoundEvent {
@@ -100,7 +100,7 @@ class GoldenChickenEntity(
 	}
 
 	override fun playStepSound(pos: BlockPos, block: BlockState) {
-		this.playSound(SoundEvents.CHICKEN_STEP, 0.15f, 1.0f)
+		playSound(SoundEvents.CHICKEN_STEP, 0.15f, 1.0f)
 	}
 
 	override fun getBreedOffspring(level: ServerLevel, otherParent: AgeableMob): GoldenChickenEntity? {
@@ -114,19 +114,19 @@ class GoldenChickenEntity(
 	override fun readAdditionalSaveData(compound: CompoundTag) {
 		super.readAdditionalSaveData(compound)
 		if (compound.contains("EggLayTime")) {
-			this.eggTime = compound.getInt("EggLayTime")
+			eggTime = compound.getInt("EggLayTime")
 		}
 	}
 
 	override fun addAdditionalSaveData(compound: CompoundTag) {
 		super.addAdditionalSaveData(compound)
-		compound.putInt("EggLayTime", this.eggTime)
+		compound.putInt("EggLayTime", eggTime)
 	}
 
 	override fun positionRider(passenger: Entity, callback: MoveFunction) {
 		super.positionRider(passenger, callback)
 		if (passenger is LivingEntity) {
-			passenger.yBodyRot = this.yBodyRot
+			passenger.yBodyRot = yBodyRot
 		}
 	}
 

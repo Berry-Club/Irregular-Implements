@@ -20,7 +20,7 @@ class EnergyDistributorBlockEntity(
 
 	private val energyCache: MutableList<BlockEntity> = mutableListOf()
 	private fun getCachedEnergyHandlers(): List<IEnergyStorage> {
-		val level = this.level ?: return emptyList()
+		val level = level ?: return emptyList()
 
 		return energyCache
 			.asSequence()
@@ -34,21 +34,21 @@ class EnergyDistributorBlockEntity(
 	}
 
 	fun tick() {
-		val tick = this.level?.gameTime ?: return
+		val tick = level?.gameTime ?: return
 		if (tick % 20L == 0L) {
 			recalculateCache()
 		}
 	}
 
 	private fun recalculateCache() {
-		val level = this.level ?: return
+		val level = level ?: return
 
 		energyCache.clear()
 
 		val direction = blockState.getValue(EnergyDistributorBlock.FACING)
 		val list = mutableListOf<BlockEntity>()
 
-		val checkedPos = this.worldPosition.relative(direction).mutable()
+		val checkedPos = worldPosition.relative(direction).mutable()
 
 		while (level.isLoaded(checkedPos) && list.size < 100) {
 			val blockEntityThere = level.getBlockEntity(checkedPos) ?: break

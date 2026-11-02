@@ -30,15 +30,15 @@ class ModBlockLootTablesSubProvider(
 
 	override fun generate() {
 
-		for (block in this.knownBlocks - this.nonDropSelfBlocks) {
+		for (block in knownBlocks - nonDropSelfBlocks) {
 			dropSelf(block)
 		}
 
-		for (block in this.noDropBlocks) {
+		for (block in noDropBlocks) {
 			add(block, noDrop())
 		}
 
-		for (block in this.dropsDirtWithoutSilkTouch) {
+		for (block in dropsDirtWithoutSilkTouch) {
 			add(block) { createSingleItemTableWithSilkTouch(it, Items.DIRT) }
 		}
 
@@ -52,7 +52,7 @@ class ModBlockLootTablesSubProvider(
 	}
 
 	private fun beanPod() {
-		val enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
+		val enchantments = registries.lookupOrThrow(Registries.ENCHANTMENT)
 
 		add(ModBlocks.BEAN_POD.get()) {
 			LootTable.lootTable()
@@ -136,15 +136,15 @@ class ModBlockLootTablesSubProvider(
 
 	private fun spectreLeaves() {
 		add(ModBlocks.SPECTRE_LEAVES.get()) {
-			val enchantmentLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
+			val enchantmentLookup = registries.lookupOrThrow(Registries.ENCHANTMENT)
 
 			createLeavesDrops(it, ModBlocks.SPECTRE_SAPLING.get(), *NORMAL_LEAVES_SAPLING_CHANCES)
 				.withPool(
 					LootPool.lootPool()
 						.setRolls(ConstantValue.exactly(1f))
-						.`when`(this.doesNotHaveSilkTouch())
+						.`when`(doesNotHaveSilkTouch())
 						.add(
-							this.applyExplosionCondition(
+							applyExplosionCondition(
 								ModBlocks.SPECTRE_LEAVES.get(),
 								LootItem.lootTableItem(ModItems.ECTOPLASM.get())
 							)
@@ -177,7 +177,7 @@ class ModBlockLootTablesSubProvider(
 								LootItem.lootTableItem(ModItems.BEAN.get())
 									.apply(
 										ApplyBonusCount.addBonusBinomialDistributionCount(
-											this.registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE),
+											registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE),
 											0.5714286f,
 											3
 										)
@@ -250,7 +250,7 @@ class ModBlockLootTablesSubProvider(
 
 		super.add(block, builder)
 
-		val hasEmpty = this.map.toString().contains("minecraft:empty")
+		val hasEmpty = map.toString().contains("minecraft:empty")
 		if (hasEmpty && wasNoEmpty) {
 			println("Here!!! It was ${block.name.string}")
 			noEmpty = false

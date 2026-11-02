@@ -56,7 +56,7 @@ class NatureCoreBlockEntity(
 		val radius = ServerConfig.CONFIG.natureCoreReplaceSandRadius.get()
 
 		var attempts = 0
-		val pos = this.blockPos.mutable()
+		val pos = blockPos.mutable()
 		do {
 			pos.set(
 				this.blockPos.offset(
