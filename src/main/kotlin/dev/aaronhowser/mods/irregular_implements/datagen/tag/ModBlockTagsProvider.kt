@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.datagen.tag
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.add
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.getDyeName
 import dev.aaronhowser.mods.irregular_implements.IrregularImplements
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
@@ -503,6 +504,8 @@ class ModBlockTagsProvider(
 				ModBlocks.FERTILIZED_DIRT.get()
 			)
 
+		tag(FERTILIZED_DIRT_BLACKLIST)
+			.add(ModBlocks.FERTILIZED_DIRT)
 	}
 
 	private fun colorTags() {
@@ -529,7 +532,6 @@ class ModBlockTagsProvider(
 
 			this.tag(coloredTag)
 				.add(*notNull)
-
 		}
 	}
 
@@ -549,7 +551,6 @@ class ModBlockTagsProvider(
 		val BLOCK_REPLACER_BLACKLIST = modTag("block_replacer_blacklist")
 		val BLOCK_DESTABILIZER_BLACKLIST = modTag("block_destabilizer_blacklist")
 		val DIAPHANOUS_BLOCK_BLACKLIST = modTag("diaphanous_block_blacklist")
-		val C_STRIPPED_WOODS = common("stripped_woods")
 		val CONVERTS_TO_SPECTRE_SAPLING = common("converts_to_spectre_sapling")
 		val CUSTOM_CRAFTING_TABLE_BLACKLIST = modTag("custom_crafting_table_blacklist")
 		val CONVERTS_TO_FLOO_BRICK = modTag("converts_to_floo_brick")
@@ -558,6 +559,7 @@ class ModBlockTagsProvider(
 		val NATURE_CORE_IMMUNE = modTag("nature_core_immune")
 		val GRASS_SEEDS_COMPATIBLE = modTag("grass_seeds_compatible")
 		val IGNORES_WIRELESS_REDSTONE = modTag("ignores_wireless_redstone")
+		val FERTILIZED_DIRT_BLACKLIST = modTag("fertilized_dirt_blacklist")
 	}
 
 }

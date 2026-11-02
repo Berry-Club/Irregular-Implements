@@ -1,5 +1,10 @@
 # 1.12.2
 
+### Changed
+
+- Added the `irregular_implements:fertilized_dirt_blacklist` that Fertilized Dirt cannot tick (#88)
+	- Includes Fertilized Dirt by default
+
 ### Fixed
 
 - Fixed a potential item dupe

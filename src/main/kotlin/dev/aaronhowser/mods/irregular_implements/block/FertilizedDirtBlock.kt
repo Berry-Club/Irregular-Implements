@@ -1,5 +1,7 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -77,9 +79,11 @@ class FertilizedDirtBlock : Block(
 		val cropPos = pos.above()
 		val cropState = level.getBlockState(cropPos)
 
-		if (cropState.isRandomlyTicking) {
-			repeat(3) {
+		if (cropState.isRandomlyTicking && !cropState.isBlock(ModBlockTagsProvider.FERTILIZED_DIRT_BLACKLIST)) {
+			var extraTicks = 0
+			while (extraTicks < 3) {
 				cropState.randomTick(level, cropPos, random)
+				extraTicks++
 			}
 		}
 	}
