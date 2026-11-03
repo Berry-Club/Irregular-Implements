@@ -51,19 +51,26 @@ abstract class RedstoneInterfaceBlockEntity(
 		 */
 		private val linkedPositions: MultiMap<GlobalPos, BlockPos> = MultiMap()
 
-		@JvmStatic
-		fun linkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
-			linkedPositions
-				.getOrPut(GlobalPos(level.dimension(), targetPos)) { mutableListOf() }
-				.let { interfaces ->
-					if (interfacePos !in interfaces) {
-						interfaces.add(interfacePos)
-					}
-				}
+		fun linkBlock(
+			level: Level,
+			interfacePos: BlockPos,
+			targetPos: BlockPos
+		) {
+			val interfacePositions = linkedPositions.getOrPut(
+				GlobalPos(level.dimension(), targetPos),
+				::mutableListOf
+			)
+
+			if (interfacePos !in interfacePositions) {
+				interfacePositions.add(interfacePos)
+			}
 		}
 
-		@JvmStatic
-		fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
+		fun unlinkBlock(
+			level: Level,
+			interfacePos: BlockPos,
+			targetPos: BlockPos
+		) {
 			val globalPos = GlobalPos(level.dimension(), targetPos)
 
 			val interfaces = linkedPositions[globalPos] ?: return
@@ -89,7 +96,6 @@ abstract class RedstoneInterfaceBlockEntity(
 			return filtered.maxOf { level.getBlockState(it).getValue(RedstoneInterfaceBlock.POWER) }
 		}
 
-		@JvmStatic
 		fun removeInterface(level: Level, interfacePos: BlockPos) {
 			val iterator = linkedPositions.entries.iterator()
 			val dimension = level.dimension()
@@ -97,7 +103,7 @@ abstract class RedstoneInterfaceBlockEntity(
 			while (iterator.hasNext()) {
 				val (globalPos, interfaces) = iterator.next()
 
-				if (globalPos.dimension == dimension && interfaces.contains(interfacePos)) {
+				if (globalPos.dimension == dimension && interfacePos in interfaces) {
 					interfaces.remove(interfacePos)
 					if (interfaces.isEmpty()) {
 						iterator.remove()
