@@ -3,8 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
@@ -21,6 +19,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
+import kotlin.jvm.optionals.getOrNull
 
 class RedstoneObserverBlockEntity(
 	pos: BlockPos,
@@ -197,24 +196,25 @@ class RedstoneObserverBlockEntity(
 
 		@JvmStatic
 		private fun linkBlock(level: Level, observerPos: BlockPos, targetPos: BlockPos) {
-			linkedPositions
-				.getOrPut(LevelPos(level, targetPos)) { mutableListOf() }
-				.let { observers ->
-					if (observerPos !in observers) {
-						observers.add(observerPos)
-						if (level.isServerSide) {
-							updateObservers(level as ServerLevel, targetPos)
-						}
-					}
+			val observers = linkedPositions.getOrPut(LevelPos(level, targetPos), ::mutableListOf)
+
+			if (observerPos !in observers) {
+				observers.add(observerPos)
+				if (level is ServerLevel) {
+					updateObservers(level, targetPos)
 				}
+			}
 		}
 
 		@JvmStatic
 		private fun unlinkBlock(level: Level, observerPos: BlockPos, targetPos: BlockPos) {
 			val levelPos = LevelPos(level, targetPos)
 
-			linkedPositions[levelPos]?.remove(observerPos)
-			if (linkedPositions[levelPos]?.isEmpty().isTrue()) {
+			val current = linkedPositions[levelPos]
+			if (current.isNullOrEmpty()) return
+
+			current.remove(observerPos)
+			if (current.isEmpty()) {
 				linkedPositions.remove(levelPos)
 			}
 		}
@@ -227,26 +227,30 @@ class RedstoneObserverBlockEntity(
 			val positions = linkedPositions[LevelPos(level, targetPos)] ?: return
 
 			for (observerPos in positions) {
-				if (level.isLoaded(observerPos)) {
-					val observer = level.getBlockState(observerPos)
-					if (observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) {
-						val observerEntity = level.getBlockEntity(observerPos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: continue
+				if (!level.isLoaded(observerPos)) continue
 
-						var powerChange = false
+				val observer = level.getBlockState(observerPos)
+				if (!observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) continue
 
-						for (direction in NeighborUpdater.UPDATE_ORDER) {
-							val index = direction.ordinal
-							powerChange = observerEntity.setWeakPower(level.getSignal(targetPos, direction).coerceIn(0, 15), index) || powerChange
-							powerChange = observerEntity.setStrongPower(level.getDirectSignal(targetPos, direction).coerceIn(0, 15), index) || powerChange
-						}
-						powerChange = observerEntity.setAnalogPower(targetBlock.getAnalogOutputSignal(level, targetPos).coerceIn(0, 15)) || powerChange
+				val observerBe = level.getBlockEntity(
+					observerPos,
+					ModBlockEntityTypes.REDSTONE_OBSERVER.get()
+				).getOrNull() ?: continue
 
+				val analogThere = targetBlock.getAnalogOutputSignal(level, targetPos).coerceIn(0, 15)
+				var didPowerChange =observerBe.setAnalogPower(analogThere)
 
-						if (powerChange) {
-							observerEntity.updateNeighborPower(level, observerPos, observer)
-						}
+				for (direction in NeighborUpdater.UPDATE_ORDER) {
+					val index = direction.ordinal
+					val weakThere = level.getSignal(targetPos, direction).coerceIn(0, 15)
+					val strongThere = level.getDirectSignal(targetPos, direction).coerceIn(0, 15)
 
-					}
+					val changeThisTime = observerBe.setWeakPower(weakThere, index) || observerBe.setStrongPower(strongThere, index)
+					if (changeThisTime) didPowerChange = true
+				}
+
+				if (didPowerChange) {
+					observerBe.updateNeighborPower(level, observerPos, observer)
 				}
 			}
 		}
