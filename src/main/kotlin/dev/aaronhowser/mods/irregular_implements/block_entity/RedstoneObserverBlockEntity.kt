@@ -16,6 +16,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
@@ -247,7 +248,7 @@ class RedstoneObserverBlockEntity(
 			}
 		}
 
-		private fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
+		fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
 			val redstoneObserverBlock = ModBlocks.REDSTONE_OBSERVER.get()
 
 			for (direction in NeighborUpdater.UPDATE_ORDER) {
@@ -257,7 +258,7 @@ class RedstoneObserverBlockEntity(
 			}
 
 			level.updateNeighbourForOutputSignal(pos, redstoneObserverBlock)
-			observer.updateNeighbourShapes(level, pos, 3)
+			observer.updateNeighbourShapes(level, pos, Block.UPDATE_ALL)
 		}
 
 		private fun removeObserver(level: Level, observerPos: BlockPos) {

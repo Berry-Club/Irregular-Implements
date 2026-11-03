@@ -54,13 +54,7 @@ class RedstoneObserverBlock : Block(
 		super.onPlace(state, level, pos, oldState, isMoving)
 
 		if (level.isClientSide || isMoving) return
-
-		val blockEntity = level
-			.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get())
-			.getOrNull()
-			?: return
-
-		blockEntity.updateNeighborPower(level, pos, state)
+		RedstoneObserverBlockEntity.updateNeighborPower(level, pos, state)
 	}
 
 
