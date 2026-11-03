@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
 import dev.aaronhowser.mods.aaron.block.SimpleContainerBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneInterfaceAdvancedBlockEntity
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneInterfaceBasicBlockEntity
@@ -30,10 +29,6 @@ import net.minecraft.world.phys.BlockHitResult
 class RedstoneInterfaceBlock(
 	val isAdvanced: Boolean
 ) : SimpleContainerBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
-
-	public override fun codec(): MapCodec<RedstoneInterfaceBlock> {
-		return if (isAdvanced) CODEC_ADVANCED else CODEC_BASIC
-	}
 
 	init {
 		registerDefaultState(
@@ -107,25 +102,18 @@ class RedstoneInterfaceBlock(
 	}
 
 	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-			if (isAdvanced) {
-				val blockEntity: RedstoneInterfaceAdvancedBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get()).get()
-				blockEntity.updateTargets()
-			} else {
-				val blockEntity: RedstoneInterfaceBasicBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get()).get()
-				blockEntity.updateTargets()
-			}
+		if (isAdvanced) {
+			val blockEntity: RedstoneInterfaceAdvancedBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get()).get()
+			blockEntity.updateTargets()
+		} else {
+			val blockEntity: RedstoneInterfaceBasicBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get()).get()
+			blockEntity.updateTargets()
+		}
 		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
 
 	companion object {
-		@JvmField
-		val CODEC_BASIC: MapCodec<RedstoneInterfaceBlock> = simpleCodec { RedstoneInterfaceBlock(false) }
-
-		@JvmField
-		val CODEC_ADVANCED: MapCodec<RedstoneInterfaceBlock> = simpleCodec { RedstoneInterfaceBlock(true) }
-
-		@JvmField
 		val POWER: IntegerProperty = BlockStateProperties.POWER
 	}
 
