@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneObserverBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -16,7 +17,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
-import kotlin.jvm.optionals.getOrNull
 
 //TODO: Needs new name
 class RedstoneObserverBlock : Block(
@@ -54,9 +54,8 @@ class RedstoneObserverBlock : Block(
 		super.onPlace(state, level, pos, oldState, isMoving)
 
 		if (level.isClientSide || isMoving) return
-		RedstoneObserverBlockEntity.updateNeighborPower(level, pos, state)
+		updateNeighborPower(level, pos, state)
 	}
-
 
 	override fun onRemove(
 		state: BlockState,
@@ -98,6 +97,21 @@ class RedstoneObserverBlock : Block(
 	override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos): Int {
 		val observer = level.getBlockEntity(pos) as? RedstoneObserverBlockEntity ?: return 0
 		return observer.getAnalogPower()
+	}
+
+	companion object {
+		fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
+			val redstoneObserverBlock = ModBlocks.REDSTONE_OBSERVER.get()
+
+			for (direction in NeighborUpdater.UPDATE_ORDER) {
+				val neighborPos = pos.relative(direction)
+				level.neighborChanged(neighborPos, redstoneObserverBlock, pos)
+				level.updateNeighborsAtExceptFromFacing(neighborPos, redstoneObserverBlock, direction.opposite)
+			}
+
+			level.updateNeighbourForOutputSignal(pos, redstoneObserverBlock)
+			observer.updateNeighbourShapes(level, pos, Block.UPDATE_ALL)
+		}
 	}
 
 }

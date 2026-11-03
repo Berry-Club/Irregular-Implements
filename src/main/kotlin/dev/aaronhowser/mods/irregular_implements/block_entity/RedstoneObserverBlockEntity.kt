@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.irregular_implements.block.RedstoneObserverBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
@@ -243,22 +244,9 @@ class RedstoneObserverBlockEntity(
 				}
 
 				if (didPowerChange) {
-					updateNeighborPower(level, observerPos, observer)
+					RedstoneObserverBlock.updateNeighborPower(level, observerPos, observer)
 				}
 			}
-		}
-
-		fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
-			val redstoneObserverBlock = ModBlocks.REDSTONE_OBSERVER.get()
-
-			for (direction in NeighborUpdater.UPDATE_ORDER) {
-				val neighborPos = pos.relative(direction)
-				level.neighborChanged(neighborPos, redstoneObserverBlock, pos)
-				level.updateNeighborsAtExceptFromFacing(neighborPos, redstoneObserverBlock, direction.opposite)
-			}
-
-			level.updateNeighbourForOutputSignal(pos, redstoneObserverBlock)
-			observer.updateNeighbourShapes(level, pos, Block.UPDATE_ALL)
 		}
 
 		private fun removeObserver(level: Level, observerPos: BlockPos) {
