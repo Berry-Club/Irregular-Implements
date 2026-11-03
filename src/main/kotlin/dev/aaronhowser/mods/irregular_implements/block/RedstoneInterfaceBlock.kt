@@ -45,7 +45,7 @@ class RedstoneInterfaceBlock(
 		}
 	}
 
-	override fun <T : BlockEntity?> getTicker(
+	override fun <T : BlockEntity> getTicker(
 		level: Level,
 		state: BlockState,
 		blockEntityType: BlockEntityType<T>
