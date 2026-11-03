@@ -31,17 +31,6 @@ class RedstoneInterfaceBlock(
 	val isAdvanced: Boolean
 ) : SimpleContainerBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK)), EntityBlock {
 
-	companion object {
-		@JvmField
-		val CODEC_BASIC: MapCodec<RedstoneInterfaceBlock> = simpleCodec { RedstoneInterfaceBlock(false) }
-
-		@JvmField
-		val CODEC_ADVANCED: MapCodec<RedstoneInterfaceBlock> = simpleCodec { RedstoneInterfaceBlock(true) }
-
-		@JvmField
-		val POWER: IntegerProperty = BlockStateProperties.POWER
-	}
-
 	public override fun codec(): MapCodec<RedstoneInterfaceBlock> {
 		return if (isAdvanced) CODEC_ADVANCED else CODEC_BASIC
 	}
@@ -127,4 +116,17 @@ class RedstoneInterfaceBlock(
 			}
 		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
+
+
+	companion object {
+		@JvmField
+		val CODEC_BASIC: MapCodec<RedstoneInterfaceBlock> = simpleCodec { RedstoneInterfaceBlock(false) }
+
+		@JvmField
+		val CODEC_ADVANCED: MapCodec<RedstoneInterfaceBlock> = simpleCodec { RedstoneInterfaceBlock(true) }
+
+		@JvmField
+		val POWER: IntegerProperty = BlockStateProperties.POWER
+	}
+
 }
