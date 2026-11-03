@@ -150,21 +150,19 @@ class RedstoneObserverBlockEntity(
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
-		val list = CompoundTag()
-		list.putIntArray("weak_power", this.weakPower)
-		list.putIntArray("strong_power", this.strongPower)
-		list.putInt("analog_power", this.analogPower)
-		tag.put("directional_power", list)
-		this.saveToTag(tag)
+
+		tag.putIntArray(WEAK_POWER_TAG, weakPower)
+		tag.putIntArray(STRONG_POWER_TAG, strongPower)
+		tag.putInt(ANALOG_POWER, analogPower)
+		saveToTag(tag)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		val list: CompoundTag = tag.get("directional_power") as CompoundTag
-		this.weakPower = readPowerArray(list, "weak_power")
-		this.strongPower = readPowerArray(list, "strong_power")
-		this.analogPower = list.getInt("analog_power")
-		this.loadFromTag(tag)
+		weakPower = readPowerArray(tag, WEAK_POWER_TAG)
+		strongPower = readPowerArray(tag, STRONG_POWER_TAG)
+		analogPower = tag.getInt(ANALOG_POWER)
+		loadFromTag(tag)
 	}
 
 	private fun readPowerArray(list: CompoundTag, key: String): IntArray {
@@ -175,19 +173,22 @@ class RedstoneObserverBlockEntity(
 
 	fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
 		val redstoneObserverBlock = ModBlocks.REDSTONE_OBSERVER.get()
+
 		for (direction in NeighborUpdater.UPDATE_ORDER) {
 			val neighborPos = pos.relative(direction)
 			level.neighborChanged(neighborPos, redstoneObserverBlock, pos)
 			level.updateNeighborsAtExceptFromFacing(neighborPos, redstoneObserverBlock, direction.opposite)
-
 		}
+
 		level.updateNeighbourForOutputSignal(pos, redstoneObserverBlock)
 		observer.updateNeighbourShapes(level, pos, 3)
 		setChanged()
 	}
 
 	companion object {
-		private data class LevelPos(val level: Level, val pos: BlockPos)
+		const val WEAK_POWER_TAG = "weak_power"
+		const val STRONG_POWER_TAG = "strong_power"
+		const val ANALOG_POWER = "analog_power"
 
 		/**
 		 * A map of a linked position to the position of every Observer that's watching it
@@ -279,5 +280,7 @@ class RedstoneObserverBlockEntity(
 			}
 		}
 	}
+
+	private data class LevelPos(val level: Level, val pos: BlockPos)
 
 }
