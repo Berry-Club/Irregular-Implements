@@ -63,7 +63,7 @@ class RedstoneInterfaceBlock(
 		)
 	}
 
-	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+	override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
 		builder.add(POWER)
 	}
 
@@ -72,26 +72,42 @@ class RedstoneInterfaceBlock(
 			.setValue(POWER, context.level.getBestNeighborSignal(context.clickedPos))
 	}
 
-	override fun canConnectRedstone(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction?): Boolean {
+	override fun canConnectRedstone(
+		state: BlockState,
+		level: BlockGetter,
+		pos: BlockPos,
+		direction: Direction?
+	): Boolean {
 		return direction != null
 	}
 
-	override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, block: Block, fromPos: BlockPos, isMoving: Boolean) {
-		val power = state.getValue(POWER)
-		val bestPower = level.getBestNeighborSignal(pos)
-		if (power != bestPower) {
-			level.setBlock(pos, state.setValue(POWER, bestPower), 3)
-			if (isAdvanced) {
-				val blockEntity: RedstoneInterfaceAdvancedBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get()).get()
-				blockEntity.updateTargets()
-			} else {
-				val blockEntity: RedstoneInterfaceBasicBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get()).get()
-				blockEntity.updateTargets()
+	override fun neighborChanged(
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		block: Block,
+		fromPos: BlockPos,
+		isMoving: Boolean
+	) {
+		val oldPower = state.getValue(POWER)
+		val newPower = level.getBestNeighborSignal(pos)
+		if (oldPower != newPower) {
+			level.setBlock(pos, state.setValue(POWER, newPower), 3)
+
+			val be = level.getBlockEntity(pos)
+			if (be is RedstoneInterfaceBlockEntity) {
+				be.updateTargets()
 			}
 		}
 	}
 
-	override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos, player: Player, hitResult: BlockHitResult): InteractionResult {
+	override fun useWithoutItem(
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		player: Player,
+		hitResult: BlockHitResult
+	): InteractionResult {
 		val blockEntity = level.getBlockEntity(pos)
 		if (blockEntity is MenuProvider) {
 			player.openMenu(blockEntity)
@@ -101,14 +117,18 @@ class RedstoneInterfaceBlock(
 		return super.useWithoutItem(state, level, pos, player, hitResult)
 	}
 
-	override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, movedByPiston: Boolean) {
-		if (isAdvanced) {
-			val blockEntity: RedstoneInterfaceAdvancedBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.ADVANCED_REDSTONE_INTERFACE.get()).get()
-			blockEntity.updateTargets()
-		} else {
-			val blockEntity: RedstoneInterfaceBasicBlockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.BASIC_REDSTONE_INTERFACE.get()).get()
-			blockEntity.updateTargets()
+	override fun onRemove(
+		state: BlockState,
+		level: Level,
+		pos: BlockPos,
+		newState: BlockState,
+		movedByPiston: Boolean
+	) {
+		val be = level.getBlockEntity(pos)
+		if (be is RedstoneInterfaceBlockEntity) {
+			be.updateTargets()
 		}
+
 		super.onRemove(state, level, pos, newState, movedByPiston)
 	}
 
