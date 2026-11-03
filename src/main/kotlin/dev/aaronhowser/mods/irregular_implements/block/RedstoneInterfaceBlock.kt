@@ -124,9 +124,11 @@ class RedstoneInterfaceBlock(
 		newState: BlockState,
 		movedByPiston: Boolean
 	) {
-		val be = level.getBlockEntity(pos)
-		if (be is RedstoneInterfaceBlockEntity) {
-			be.updateTargets()
+		if (state.block != newState.block) {
+			val be = level.getBlockEntity(pos)
+			if (be is RedstoneInterfaceBlockEntity) {
+				be.updateTargets()
+			}
 		}
 
 		super.onRemove(state, level, pos, newState, movedByPiston)
