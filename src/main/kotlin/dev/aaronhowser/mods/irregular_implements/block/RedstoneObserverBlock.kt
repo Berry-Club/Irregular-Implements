@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.irregular_implements.block
 
-import com.mojang.serialization.MapCodec
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneObserverBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
@@ -16,21 +16,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
+import kotlin.jvm.optionals.getOrNull
 
 //TODO: Needs new name
 class RedstoneObserverBlock : Block(
 	Properties.ofFullCopy(Blocks.IRON_BLOCK)
 		.isRedstoneConductor(Blocks::never)
 ), EntityBlock {
-
-	companion object {
-		@JvmField
-		val CODEC: MapCodec<RedstoneObserverBlock> = simpleCodec { RedstoneObserverBlock() }
-	}
-
-	public override fun codec(): MapCodec<RedstoneObserverBlock> {
-		return CODEC
-	}
 
 	init {
 		registerDefaultState(stateDefinition.any())
@@ -40,12 +32,11 @@ class RedstoneObserverBlock : Block(
 		return RedstoneObserverBlockEntity(pos, state)
 	}
 
-	override fun <T : BlockEntity?> getTicker(
+	override fun <T : BlockEntity> getTicker(
 		level: Level,
 		state: BlockState,
 		blockEntityType: BlockEntityType<T>
 	): BlockEntityTicker<T>? {
-
 		return BaseEntityBlock.createTickerHelper(
 			blockEntityType,
 			ModBlockEntityTypes.REDSTONE_OBSERVER.get(),
@@ -64,9 +55,12 @@ class RedstoneObserverBlock : Block(
 
 		if (level.isClientSide || isMoving) return
 
-		val blockEntity = level.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get()).orElse(null) ?: return
-		blockEntity.updateNeighborPower(level, pos, state)
+		val blockEntity = level
+			.getBlockEntity(pos, ModBlockEntityTypes.REDSTONE_OBSERVER.get())
+			.getOrNull()
+			?: return
 
+		blockEntity.updateNeighborPower(level, pos, state)
 	}
 
 
@@ -79,12 +73,12 @@ class RedstoneObserverBlock : Block(
 	) {
 		super.onRemove(state, level, pos, newState, isMoving)
 
-		if (!level.isClientSide && !isMoving && state.block !== newState.block) {
+		if (level.isServerSide && !isMoving && state.block !== newState.block) {
 			for (direction in NeighborUpdater.UPDATE_ORDER) {
 				val neighborPos = pos.relative(direction)
 				level.updateNeighborsAtExceptFromFacing(neighborPos, state.block, direction.opposite)
-
 			}
+
 			level.updateNeighbourForOutputSignal(pos, state.block)
 		}
 	}
