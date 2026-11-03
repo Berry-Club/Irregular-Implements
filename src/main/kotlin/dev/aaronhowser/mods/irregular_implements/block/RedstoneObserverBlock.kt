@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.irregular_implements.block
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isServerSide
 import dev.aaronhowser.mods.irregular_implements.block_entity.RedstoneObserverBlockEntity
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
-import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -100,17 +99,17 @@ class RedstoneObserverBlock : Block(
 	}
 
 	companion object {
-		fun updateNeighborPower(level: Level, pos: BlockPos, observer: BlockState) {
-			val redstoneObserverBlock = ModBlocks.REDSTONE_OBSERVER.get()
+		fun updateNeighborPower(level: Level, pos: BlockPos, observerState: BlockState) {
+			val block = observerState.block
 
 			for (direction in NeighborUpdater.UPDATE_ORDER) {
 				val neighborPos = pos.relative(direction)
-				level.neighborChanged(neighborPos, redstoneObserverBlock, pos)
-				level.updateNeighborsAtExceptFromFacing(neighborPos, redstoneObserverBlock, direction.opposite)
+				level.neighborChanged(neighborPos, block, pos)
+				level.updateNeighborsAtExceptFromFacing(neighborPos, block, direction.opposite)
 			}
 
-			level.updateNeighbourForOutputSignal(pos, redstoneObserverBlock)
-			observer.updateNeighbourShapes(level, pos, Block.UPDATE_ALL)
+			level.updateNeighbourForOutputSignal(pos, block)
+			observerState.updateNeighbourShapes(level, pos, UPDATE_ALL)
 		}
 	}
 
