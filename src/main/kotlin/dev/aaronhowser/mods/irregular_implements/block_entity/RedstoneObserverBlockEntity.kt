@@ -39,7 +39,7 @@ class RedstoneObserverBlockEntity(
 	}
 
 	private var linkedPos: BlockPos? = null
-	private var futureLinkedPos: BlockPos? = null
+	private var nextLinkedPos: BlockPos? = null
 
 	private var weakPower: IntArray = IntArray(Direction.entries.size)
 	private var strongPower: IntArray = IntArray(Direction.entries.size)
@@ -47,43 +47,35 @@ class RedstoneObserverBlockEntity(
 
 	override fun getLinkedPos(): BlockPos? = linkedPos
 
-	fun getWeakPower(direction: Direction): Int {
-		return weakPower[direction.ordinal]
-	}
+	fun getWeakPower(direction: Direction): Int = weakPower[direction.ordinal]
+	fun getStrongPower(direction: Direction): Int = strongPower[direction.ordinal]
+	fun getAnalogPower(): Int = analogPower
 
 	fun setWeakPower(power: Int, index: Int): Boolean {
-		if (weakPower[index] != power) {
-			weakPower[index] = power
-			return true
-		} else {
+		if (weakPower[index] == power) {
 			return false
 		}
-	}
 
-	fun getStrongPower(direction: Direction): Int {
-		return strongPower[direction.ordinal]
+		weakPower[index] = power
+		return true
 	}
 
 	fun setStrongPower(power: Int, index: Int): Boolean {
-		if (strongPower[index] != power) {
-			strongPower[index] = power
-			return true
-		} else {
+		if (strongPower[index] == power) {
 			return false
 		}
-	}
 
-	fun getAnalogPower(): Int {
-		return analogPower
+		strongPower[index] = power
+		return true
 	}
 
 	fun setAnalogPower(power: Int): Boolean {
-		if (analogPower != power) {
-			analogPower = power
-			return true
-		} else {
+		if (analogPower == power) {
 			return false
 		}
+
+		analogPower = power
+		return true
 	}
 
 	/**
@@ -92,32 +84,23 @@ class RedstoneObserverBlockEntity(
 	 * we can't link/unlink blocks at that time.
 	 */
 	override fun setLinkedPos(pos: BlockPos?) {
-		futureLinkedPos = pos
+		nextLinkedPos = pos
 	}
 
 	private fun updateLinkedPos() {
-		if (linkedPos == futureLinkedPos) return
+		if (linkedPos == nextLinkedPos) return
 		val level = this.level ?: return
 
 		val oldPos = linkedPos
 		if (oldPos != null) {
-			unlinkBlock(
-				level = level,
-				observerPos = this.blockPos,
-				targetPos = oldPos
-			)
+			unlinkBlock(level, blockPos, oldPos)
 		}
 
-		val newPos = futureLinkedPos
-
-		if (newPos != null) {
-			linkBlock(
-				level = level,
-				observerPos = this.blockPos,
-				targetPos = newPos
-			)
+		val newPos = nextLinkedPos
+		if (newPos == null) {
+			removeObserver(level, blockPos)
 		} else {
-			removeObserver(level, this.blockPos)
+			linkBlock(level, blockPos, newPos)
 		}
 
 		linkedPos = newPos
@@ -171,7 +154,7 @@ class RedstoneObserverBlockEntity(
 		list.putIntArray("weak_power", this.weakPower)
 		list.putIntArray("strong_power", this.strongPower)
 		list.putInt("analog_power", this.analogPower)
-		tag.put("directional_power",list)
+		tag.put("directional_power", list)
 		this.saveToTag(tag)
 	}
 
@@ -179,7 +162,7 @@ class RedstoneObserverBlockEntity(
 		super.loadAdditional(tag, registries)
 		val list: CompoundTag = tag.get("directional_power") as CompoundTag
 		this.weakPower = readPowerArray(list, "weak_power")
-		this.strongPower = readPowerArray(list,"strong_power")
+		this.strongPower = readPowerArray(list, "strong_power")
 		this.analogPower = list.getInt("analog_power")
 		this.loadFromTag(tag)
 	}
@@ -252,8 +235,8 @@ class RedstoneObserverBlockEntity(
 
 						for (direction in NeighborUpdater.UPDATE_ORDER) {
 							val index = direction.ordinal
-							powerChange = observerEntity.setWeakPower(level.getSignal(targetPos, direction).coerceIn(0,15), index) || powerChange
-							powerChange = observerEntity.setStrongPower(level.getDirectSignal(targetPos, direction).coerceIn(0,15), index) || powerChange
+							powerChange = observerEntity.setWeakPower(level.getSignal(targetPos, direction).coerceIn(0, 15), index) || powerChange
+							powerChange = observerEntity.setStrongPower(level.getDirectSignal(targetPos, direction).coerceIn(0, 15), index) || powerChange
 						}
 						powerChange = observerEntity.setAnalogPower(targetBlock.getAnalogOutputSignal(level, targetPos).coerceIn(0, 15)) || powerChange
 
