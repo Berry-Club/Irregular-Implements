@@ -20,10 +20,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class RainShieldBlock : EntityBlock, Block(
+class RainShieldBlock : Block(
 	Properties.ofFullCopy(Blocks.END_ROD)
 		.lightLevel { 0 }
-) {
+), EntityBlock {
 
 	init {
 		registerDefaultState(
