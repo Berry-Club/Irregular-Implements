@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block_entity.base
 
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
+import dev.aaronhowser.mods.irregular_implements.block.RedstoneInterfaceBlock
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
@@ -50,15 +51,26 @@ abstract class RedstoneInterfaceBlockEntity(
 		 */
 		private val linkedPositions: MultiMap<GlobalPos, BlockPos> = MultiMap()
 
-		@JvmStatic
-		fun linkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
-			linkedPositions
-				.getOrPut(GlobalPos(level.dimension(), targetPos)) { mutableListOf() }
-				.add(interfacePos)
+		fun linkBlock(
+			level: Level,
+			interfacePos: BlockPos,
+			targetPos: BlockPos
+		) {
+			val interfacePositions = linkedPositions.getOrPut(
+				GlobalPos(level.dimension(), targetPos),
+				::mutableListOf
+			)
+
+			if (interfacePos !in interfacePositions) {
+				interfacePositions.add(interfacePos)
+			}
 		}
 
-		@JvmStatic
-		fun unlinkBlock(level: Level, interfacePos: BlockPos, targetPos: BlockPos) {
+		fun unlinkBlock(
+			level: Level,
+			interfacePos: BlockPos,
+			targetPos: BlockPos
+		) {
 			val globalPos = GlobalPos(level.dimension(), targetPos)
 
 			val interfaces = linkedPositions[globalPos] ?: return
@@ -76,15 +88,14 @@ abstract class RedstoneInterfaceBlockEntity(
 			val interfaces = linkedPositions[globalPos] ?: return -1
 			val filtered = interfaces.filter {
 				level.isLoaded(it)
-						&& !level.getBlockState(it).isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)
+						&& !level.getBlockState(targetPos).isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)
 			}
 
 			if (filtered.isEmpty()) return -1
 
-			return filtered.maxOf { level.getBestNeighborSignal(it) }
+			return filtered.maxOf { level.getBlockState(it).getValue(RedstoneInterfaceBlock.POWER) }
 		}
 
-		@JvmStatic
 		fun removeInterface(level: Level, interfacePos: BlockPos) {
 			val iterator = linkedPositions.entries.iterator()
 			val dimension = level.dimension()
@@ -92,7 +103,7 @@ abstract class RedstoneInterfaceBlockEntity(
 			while (iterator.hasNext()) {
 				val (globalPos, interfaces) = iterator.next()
 
-				if (globalPos.dimension == dimension && interfaces.contains(interfacePos)) {
+				if (globalPos.dimension == dimension && interfacePos in interfaces) {
 					interfaces.remove(interfacePos)
 					if (interfaces.isEmpty()) {
 						iterator.remove()

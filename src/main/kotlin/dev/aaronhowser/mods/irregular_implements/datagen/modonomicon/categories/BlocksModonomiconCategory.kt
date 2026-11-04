@@ -1583,7 +1583,7 @@ object BlocksModonomiconCategory {
 			spotlightPage(ModBlocks.REDSTONE_OBSERVER.get()) {
 				title = "Redstone Observer"
 				text = bookText(
-					"The **Redstone Observer** gives off the same redstone signal output as the block it's linked to."
+					"The **Redstone Observer** gives off the same redstone signal output as the block it's linked to on the same sides that block outputs to. Can read and output weak, strong, and/or analog signals."
 				)
 			}
 

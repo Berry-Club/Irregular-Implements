@@ -33,6 +33,7 @@ abstract public class BlockStateBaseMixin {
 			CallbackInfo ci
 	) {
 		RedstoneObserverBlockEntity.updateObservers(level, pos);
+		RedstoneObserverBlockEntity.updateObservers(level, fromPos);
 	}
 
 	@Inject(

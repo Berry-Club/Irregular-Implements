@@ -1332,7 +1332,7 @@ object BlocksPatchouliCategory {
 		) {
 			textPage(
 				text = bookText(
-					"The ${major("Redstone Observer")} gives off the same redstone signal output as the block it's linked to.",
+					"The ${major("Redstone Observer")} gives off the same redstone signal output as the block it's linked to on the same sides that block outputs to. Can read and output weak, strong, and/or analog signals.",
 					"Use a ${internalLink(ItemsPatchouliCategory.redstoneTool, "Redstone Tool")} to link it to a block."
 				)
 			)

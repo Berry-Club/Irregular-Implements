@@ -3,19 +3,25 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.aaron.block_entity.SyncingBlockEntity
 import dev.aaronhowser.mods.aaron.client.AaronClientUtil
 import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isBlock
-import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isTrue
+import dev.aaronhowser.mods.irregular_implements.block.RedstoneObserverBlock
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneToolLinkable
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
+import dev.aaronhowser.mods.irregular_implements.registry.ModBlocks
 import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
+import kotlin.jvm.optionals.getOrNull
 
 class RedstoneObserverBlockEntity(
 	pos: BlockPos,
@@ -34,9 +40,47 @@ class RedstoneObserverBlockEntity(
 	}
 
 	private var linkedPos: BlockPos? = null
-	private var futureLinkedPos: BlockPos? = null
+	private var nextLinkedPos: BlockPos? = null
+
+	private var weakPower: IntArray = IntArray(Direction.entries.size)
+	private var strongPower: IntArray = IntArray(Direction.entries.size)
+	private var analogPower: Int = 0
 
 	override fun getLinkedPos(): BlockPos? = linkedPos
+
+	fun getWeakPower(direction: Direction): Int = weakPower[direction.ordinal]
+	fun getStrongPower(direction: Direction): Int = strongPower[direction.ordinal]
+	fun getAnalogPower(): Int = analogPower
+
+	fun setWeakPower(power: Int, index: Int): Boolean {
+		if (weakPower[index] == power) {
+			return false
+		}
+
+		weakPower[index] = power
+		setChanged()
+		return true
+	}
+
+	fun setStrongPower(power: Int, index: Int): Boolean {
+		if (strongPower[index] == power) {
+			return false
+		}
+
+		strongPower[index] = power
+		setChanged()
+		return true
+	}
+
+	fun setAnalogPower(power: Int): Boolean {
+		if (analogPower == power) {
+			return false
+		}
+
+		analogPower = power
+		setChanged()
+		return true
+	}
 
 	/**
 	 * Actually sets futureLinkedPos; the change will be applied on the next server tick.
@@ -44,32 +88,25 @@ class RedstoneObserverBlockEntity(
 	 * we can't link/unlink blocks at that time.
 	 */
 	override fun setLinkedPos(pos: BlockPos?) {
-		futureLinkedPos = pos
+		if (pos == nextLinkedPos) return
+		nextLinkedPos = pos
+		setChanged()
 	}
 
 	private fun updateLinkedPos() {
-		if (linkedPos == futureLinkedPos) return
+		if (linkedPos == nextLinkedPos) return
 		val level = this.level ?: return
 
 		val oldPos = linkedPos
 		if (oldPos != null) {
-			unlinkBlock(
-				level = level,
-				observerPos = this.blockPos,
-				targetPos = oldPos
-			)
+			unlinkBlock(level, blockPos, oldPos)
 		}
 
-		val newPos = futureLinkedPos
-
-		if (newPos != null) {
-			linkBlock(
-				level = level,
-				observerPos = this.blockPos,
-				targetPos = newPos
-			)
+		val newPos = nextLinkedPos
+		if (newPos == null) {
+			removeObserver(level, blockPos)
 		} else {
-			removeObserver(level, this.blockPos)
+			linkBlock(level, blockPos, newPos)
 		}
 
 		linkedPos = newPos
@@ -119,16 +156,32 @@ class RedstoneObserverBlockEntity(
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
-		this.saveToTag(tag)
+
+		tag.putIntArray(WEAK_POWER_TAG, weakPower)
+		tag.putIntArray(STRONG_POWER_TAG, strongPower)
+		tag.putInt(ANALOG_POWER, analogPower)
+		saveToTag(tag)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		this.loadFromTag(tag)
+
+		weakPower = readPowerArray(tag, WEAK_POWER_TAG)
+		strongPower = readPowerArray(tag, STRONG_POWER_TAG)
+		analogPower = tag.getInt(ANALOG_POWER)
+		loadFromTag(tag)
+	}
+
+	private fun readPowerArray(list: CompoundTag, key: String): IntArray {
+		val result = IntArray(Direction.entries.size)
+		val saved = list.getIntArray(key)
+		return saved.copyInto(result, endIndex = minOf(saved.size, result.size))
 	}
 
 	companion object {
-		private data class LevelPos(val level: Level, val pos: BlockPos)
+		const val WEAK_POWER_TAG = "weak_power"
+		const val STRONG_POWER_TAG = "strong_power"
+		const val ANALOG_POWER = "analog_power"
 
 		/**
 		 * A map of a linked position to the position of every Observer that's watching it
@@ -137,37 +190,65 @@ class RedstoneObserverBlockEntity(
 
 		@JvmStatic
 		private fun linkBlock(level: Level, observerPos: BlockPos, targetPos: BlockPos) {
-			linkedPositions
-				.getOrPut(LevelPos(level, targetPos)) { mutableListOf() }
-				.add(observerPos)
+			val observers = linkedPositions.getOrPut(LevelPos(level, targetPos), ::mutableListOf)
+
+			if (observerPos !in observers) {
+				observers.add(observerPos)
+				if (level is ServerLevel) {
+					updateObservers(level, targetPos)
+				}
+			}
 		}
 
 		@JvmStatic
 		private fun unlinkBlock(level: Level, observerPos: BlockPos, targetPos: BlockPos) {
 			val levelPos = LevelPos(level, targetPos)
 
-			linkedPositions[levelPos]?.remove(observerPos)
-			if (linkedPositions[levelPos]?.isEmpty().isTrue()) {
+			val current = linkedPositions[levelPos]
+			if (current.isNullOrEmpty()) return
+
+			current.remove(observerPos)
+			if (current.isEmpty()) {
 				linkedPositions.remove(levelPos)
 			}
 		}
 
 		@JvmStatic
 		fun updateObservers(level: Level, targetPos: BlockPos) {
-			val levelPos = LevelPos(level, targetPos)
+			val targetBlock = level.getBlockState(targetPos)
+			if (targetBlock.isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) return
 
-			val positions = linkedPositions[levelPos] ?: return
+			val positions = linkedPositions[LevelPos(level, targetPos)] ?: return
+
 			for (observerPos in positions) {
-				val stateThere = level.getBlockState(observerPos)
-				if (stateThere.isBlock(ModBlockTagsProvider.IGNORES_WIRELESS_REDSTONE)) {
-					continue
+				if (!level.isLoaded(observerPos)) continue
+
+				val observer = level.getBlockState(observerPos)
+				if (!observer.isBlock(ModBlocks.REDSTONE_OBSERVER)) continue
+
+				val observerBe = level.getBlockEntity(
+					observerPos,
+					ModBlockEntityTypes.REDSTONE_OBSERVER.get()
+				).getOrNull() ?: continue
+
+				val analogThere = targetBlock.getAnalogOutputSignal(level, targetPos).coerceIn(0, 15)
+				var didPowerChange = observerBe.setAnalogPower(analogThere)
+
+				for (direction in NeighborUpdater.UPDATE_ORDER) {
+					val index = direction.ordinal
+					val weakThere = level.getSignal(targetPos, direction).coerceIn(0, 15)
+					val strongThere = level.getDirectSignal(targetPos, direction).coerceIn(0, 15)
+
+					val changeThisTime = observerBe.setWeakPower(weakThere, index) || observerBe.setStrongPower(strongThere, index)
+					if (changeThisTime) didPowerChange = true
 				}
 
-				level.updateNeighborsAt(observerPos, level.getBlockState(observerPos).block)
+				if (didPowerChange) {
+					RedstoneObserverBlock.updateNeighborPower(level, observerPos, observer)
+				}
 			}
 		}
 
-		@JvmStatic
 		private fun removeObserver(level: Level, observerPos: BlockPos) {
 			val iterator = linkedPositions.entries.iterator()
 
@@ -196,5 +277,7 @@ class RedstoneObserverBlockEntity(
 			}
 		}
 	}
+
+	private data class LevelPos(val level: Level, val pos: BlockPos)
 
 }
