@@ -17,7 +17,6 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.redstone.NeighborUpdater
 import org.antlr.v4.runtime.misc.MultiMap
@@ -239,7 +238,7 @@ class RedstoneObserverBlockEntity(
 					val weakThere = level.getSignal(targetPos, direction).coerceIn(0, 15)
 					val strongThere = level.getDirectSignal(targetPos, direction).coerceIn(0, 15)
 
-					val changeThisTime = observerBe.setWeakPower(weakThere, index) || observerBe.setStrongPower(strongThere, index)
+					val changeThisTime = observerBe.setWeakPower(weakThere, index).or(observerBe.setStrongPower(strongThere, index))
 					if (changeThisTime) didPowerChange = true
 				}
 
