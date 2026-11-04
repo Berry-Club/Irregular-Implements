@@ -40,8 +40,8 @@ class SpectreCoilBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
-		tag.putInt(COIL_TYPE_NBT, this.coilType.ordinal)
+		tag.putUUID(OWNER_UUID_NBT, ownerUuid)
+		tag.putInt(COIL_TYPE_NBT, coilType.ordinal)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -49,7 +49,7 @@ class SpectreCoilBlockEntity(
 
 		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
 		if (uuid != null) {
-			this.ownerUuid = uuid
+			ownerUuid = uuid
 		}
 
 		val coilTypeOrdinal = tag.getInt(COIL_TYPE_NBT)
@@ -70,8 +70,8 @@ class SpectreCoilBlockEntity(
 
 		if (cachedEnergyHandler != null) return cachedEnergyHandler
 
-		val level = this.level as? ServerLevel ?: return null
-		val coil = SpectreEnergyHandler.get(level).getCoil(this.ownerUuid)
+		val level = level as? ServerLevel ?: return null
+		val coil = SpectreEnergyHandler.get(level).getCoil(ownerUuid)
 
 		cachedEnergyHandler = ReadOnlyEnergyStorage(coil)
 
@@ -81,21 +81,21 @@ class SpectreCoilBlockEntity(
 	private fun tick() {
 		val level = level as? ServerLevel ?: return
 
-		val facing = this.blockState.getValue(SpectreCoilBlock.FACING)
-		val onBlockPos = this.blockPos.relative(facing)
+		val facing = blockState.getValue(SpectreCoilBlock.FACING)
+		val onBlockPos = blockPos.relative(facing)
 
 		val energyHandler = level.getCapability(Capabilities.EnergyStorage.BLOCK, onBlockPos, facing.opposite)
 
 		if (energyHandler == null || !energyHandler.canReceive()) return
 
-		val rate = this.coilType.amountGetter.get()
+		val rate = coilType.amountGetter.get()
 
-		if (this.coilType.isGenerator) {
+		if (coilType.isGenerator) {
 			energyHandler.receiveEnergy(rate, false)
 			return
 		}
 
-		val coil = SpectreEnergyHandler.get(level).getCoil(this.ownerUuid)
+		val coil = SpectreEnergyHandler.get(level).getCoil(ownerUuid)
 
 		val available = coil.extractEnergy(rate, true)  // Simulate it, which makes it return the amount it can extract
 		if (available <= 0) return

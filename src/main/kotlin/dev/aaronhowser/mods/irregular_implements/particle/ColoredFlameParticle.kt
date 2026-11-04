@@ -22,9 +22,9 @@ class ColoredFlameParticle(
 	init {
 		val f = random.nextRange(0.6f, 1f)
 
-		this.rCol = options.color.x * f
-		this.gCol = options.color.y * f
-		this.bCol = options.color.z * f
+		rCol = options.color.x * f
+		gCol = options.color.y * f
+		bCol = options.color.z * f
 	}
 
 	override fun getRenderType(): ParticleRenderType = ParticleRenderType.PARTICLE_SHEET_OPAQUE

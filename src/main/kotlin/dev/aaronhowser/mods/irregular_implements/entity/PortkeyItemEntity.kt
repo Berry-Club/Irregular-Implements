@@ -18,9 +18,9 @@ class PortkeyItemEntity(
 		ModEntityTypes.PORTKEY_ITEM.get(),
 		itemEntity.level()
 	) {
-		this.item = itemEntity.item
-		this.setPos(itemEntity.position())
-		this.deltaMovement = itemEntity.deltaMovement
+		item = itemEntity.item
+		setPos(itemEntity.position())
+		deltaMovement = itemEntity.deltaMovement
 	}
 
 	init {

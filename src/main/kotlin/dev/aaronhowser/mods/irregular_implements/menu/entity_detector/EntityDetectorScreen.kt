@@ -33,16 +33,16 @@ class EntityDetectorScreen(
 
 	override fun baseInit() {
 
-		val lowerButtonLeft = this.guiLeft + 29
-		val raiseButtonLeft = this.guiLeft + 126
+		val lowerButtonLeft = guiLeft + 29
+		val raiseButtonLeft = guiLeft + 126
 
-		val xButtonTop = this.guiTop + 20
-		val yButtonTop = this.guiTop + 45
-		val zButtonsTop = this.guiTop + 70
+		val xButtonTop = guiTop + 20
+		val yButtonTop = guiTop + 45
+		val zButtonsTop = guiTop + 70
 
-		this.titleLabelX = 24
+		titleLabelX = 24
 
-		this.buttonLowerX = Button.Builder(
+		buttonLowerX = Button.Builder(
 			ModMessageLang.MINUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.LOWER_X_BUTTON_ID)
@@ -56,7 +56,7 @@ class EntityDetectorScreen(
 			)
 			.build()
 
-		this.buttonRaiseX = Button.Builder(
+		buttonRaiseX = Button.Builder(
 			ModMessageLang.PLUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_X_BUTTON_ID)
@@ -71,7 +71,7 @@ class EntityDetectorScreen(
 			.build()
 
 
-		this.buttonLowerY = Button.Builder(
+		buttonLowerY = Button.Builder(
 			ModMessageLang.MINUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.LOWER_Y_BUTTON_ID)
@@ -86,7 +86,7 @@ class EntityDetectorScreen(
 			.build()
 
 
-		this.buttonRaiseY = Button.Builder(
+		buttonRaiseY = Button.Builder(
 			ModMessageLang.PLUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_Y_BUTTON_ID)
@@ -101,7 +101,7 @@ class EntityDetectorScreen(
 			.build()
 
 
-		this.buttonLowerZ = Button.Builder(
+		buttonLowerZ = Button.Builder(
 			ModMessageLang.MINUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.LOWER_Z_BUTTON_ID)
@@ -116,7 +116,7 @@ class EntityDetectorScreen(
 			.build()
 
 
-		this.buttonRaiseZ = Button.Builder(
+		buttonRaiseZ = Button.Builder(
 			ModMessageLang.PLUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(EntityDetectorMenu.RAISE_Z_BUTTON_ID)
@@ -130,22 +130,22 @@ class EntityDetectorScreen(
 			)
 			.build()
 
-		this.addRenderableWidget(this.buttonLowerX)
-		this.addRenderableWidget(this.buttonRaiseX)
-		this.addRenderableWidget(this.buttonLowerY)
-		this.addRenderableWidget(this.buttonRaiseY)
-		this.addRenderableWidget(this.buttonLowerZ)
-		this.addRenderableWidget(this.buttonRaiseZ)
+		addRenderableWidget(buttonLowerX)
+		addRenderableWidget(buttonRaiseX)
+		addRenderableWidget(buttonLowerY)
+		addRenderableWidget(buttonRaiseY)
+		addRenderableWidget(buttonLowerZ)
+		addRenderableWidget(buttonRaiseZ)
 
-		val bottomButtonY = this.topPos + 95
+		val bottomButtonY = topPos + 95
 
-		this.buttonFilterType = ChangingTextButton(
+		buttonFilterType = ChangingTextButton(
 			x = lowerButtonLeft,
 			y = bottomButtonY,
 			height = 20,
 			width = 90,
 			messageGetter = {
-				this.menu.getFilter().component
+				menu.getFilter().component
 			},
 			onPress = {
 				val packet = ClientClickedMenuButton(EntityDetectorMenu.CYCLE_FILTER_BUTTON_ID)
@@ -153,7 +153,7 @@ class EntityDetectorScreen(
 			}
 		)
 
-		this.buttonToggleInversion = MultiStageSpriteButton.Builder(font)
+		buttonToggleInversion = MultiStageSpriteButton.Builder(font)
 			.size(20)
 			.location(
 				x = rightPos - 29 - 20,
@@ -168,7 +168,7 @@ class EntityDetectorScreen(
 				sprite = ScreenTextures.Sprites.INVERTED
 			)
 			.currentStageGetter(
-				currentStageGetter = { if (this.menu.isInverted) 1 else 0 }
+				currentStageGetter = { if (menu.isInverted) 1 else 0 }
 			)
 			.onPress(
 				onPress = {
@@ -178,8 +178,8 @@ class EntityDetectorScreen(
 			)
 			.build()
 
-		this.addRenderableWidget(this.buttonFilterType)
-		this.addRenderableWidget(this.buttonToggleInversion)
+		addRenderableWidget(buttonFilterType)
+		addRenderableWidget(buttonToggleInversion)
 	}
 
 	override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
@@ -189,43 +189,43 @@ class EntityDetectorScreen(
 
 	private fun drawRadiusTexts(guiGraphics: GuiGraphics) {
 
-		val middle = this.leftPos + this.imageWidth / 2
+		val middle = leftPos + imageWidth / 2
 
 		val xChars = ModMessageLang.X_RADIUS
-			.toComponent(this.menu.xRadius)
+			.toComponent(menu.xRadius)
 			.visualOrderText
 
 		guiGraphics.drawString(
-			this.font,
+			font,
 			xChars,
 			middle - font.width(xChars) / 2,
-			this.guiTop + 20 + 6,
+			guiTop + 20 + 6,
 			0x404040,
 			false
 		)
 
 		val yChars = ModMessageLang.Y_RADIUS
-			.toComponent(this.menu.yRadius)
+			.toComponent(menu.yRadius)
 			.visualOrderText
 
 		guiGraphics.drawString(
-			this.font,
+			font,
 			yChars,
 			middle - font.width(yChars) / 2,
-			this.guiTop + 45 + 6,
+			guiTop + 45 + 6,
 			0x404040,
 			false
 		)
 
 		val zChars = ModMessageLang.Z_RADIUS
-			.toComponent(this.menu.zRadius)
+			.toComponent(menu.zRadius)
 			.visualOrderText
 
 		guiGraphics.drawString(
-			this.font,
+			font,
 			zChars,
 			middle - font.width(zChars) / 2,
-			this.guiTop + 70 + 6,
+			guiTop + 70 + 6,
 			0x404040,
 			false
 		)

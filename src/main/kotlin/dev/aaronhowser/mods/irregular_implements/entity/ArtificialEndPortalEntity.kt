@@ -24,65 +24,65 @@ import net.neoforged.neoforge.common.Tags
 class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
 
 	constructor(level: Level, blockPos: BlockPos) : this(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), level) {
-		this.setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
+		setPos(blockPos.x.toDouble() + 0.5, blockPos.y.toDouble(), blockPos.z.toDouble() + 0.5)
 	}
 
 	var actionTimer: Int
-		private set(value) = this.entityData.set(ACTION_TIMER, value)
-		get() = this.entityData.get(ACTION_TIMER)
+		private set(value) = entityData.set(ACTION_TIMER, value)
+		get() = entityData.get(ACTION_TIMER)
 
 	override fun tick() {
 		super.tick()
 
-		if (this.actionTimer < MAX_ACTION_TIMER) {
+		if (actionTimer < MAX_ACTION_TIMER) {
 			actionTimer++
 
-			if (this.level().isClientSide && this.actionTimer > 40) {
+			if (level().isClientSide && actionTimer > 40) {
 				spawnParticles()
 			}
 		}
 
-		if (this.level().isClientSide) {
-			if (this.actionTimer == 85) {
-				this.level().playSound(
+		if (level().isClientSide) {
+			if (actionTimer == 85) {
+				level().playSound(
 					null,
-					this.blockPosition(),
+					blockPosition(),
 					SoundEvents.PORTAL_TRAVEL,
 					SoundSource.BLOCKS
 				)
 			}
 		} else {
-			if (this.tickCount % 40 == 0) {
-				if (!isValidPosition(this.level(), this.blockPosition(), false)) {
-					this.kill()
+			if (tickCount % 40 == 0) {
+				if (!isValidPosition(level(), blockPosition(), false)) {
+					kill()
 				}
 			}
 		}
 
-		if (this.actionTimer >= 200 && this.tickCount % 20 == 0) {
+		if (actionTimer >= 200 && tickCount % 20 == 0) {
 			teleportEntitiesToEnd()
 		}
 
 	}
 
 	private fun teleportEntitiesToEnd() {
-		val entities = this.level().getEntitiesOfClass(Entity::class.java, this.boundingBox)
+		val entities = level().getEntitiesOfClass(Entity::class.java, boundingBox)
 
 		for (entity in entities) {
 			if (entity is ArtificialEndPortalEntity) continue
 
 			entity.setAsInsidePortal(
 				Blocks.END_PORTAL as EndPortalBlock,
-				this.blockPosition()
+				blockPosition()
 			)
 		}
 	}
 
 	override fun playerTouch(player: Player) {
-		if (this.actionTimer >= 200) {
+		if (actionTimer >= 200) {
 			player.setAsInsidePortal(
 				Blocks.END_PORTAL as EndPortalBlock,
-				this.blockPosition()
+				blockPosition()
 			)
 		}
 	}
@@ -91,14 +91,14 @@ class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entit
 	private fun spawnParticles() {
 		for (i in 0..5) {
 
-			val modX = this.random.nextFloat() * 0.05f - 0.025f
-			val modZ = this.random.nextFloat() * 0.05f - 0.025f
+			val modX = random.nextFloat() * 0.05f - 0.025f
+			val modZ = random.nextFloat() * 0.05f - 0.025f
 
 			level().addParticle(
 				ParticleTypes.ENCHANT,
-				this.x + modX,
-				this.y + 2,
-				this.z + modZ,
+				x + modX,
+				y + 2,
+				z + modZ,
 				modX.toDouble() * 2,
 				1.0,
 				modZ.toDouble() * 2
@@ -111,11 +111,11 @@ class ArtificialEndPortalEntity(entityType: EntityType<*>, level: Level) : Entit
 	}
 
 	override fun readAdditionalSaveData(compound: CompoundTag) {
-		this.actionTimer = compound.getInt(ACTION_TIMER_NBT)
+		actionTimer = compound.getInt(ACTION_TIMER_NBT)
 	}
 
 	override fun addAdditionalSaveData(compound: CompoundTag) {
-		compound.putInt(ACTION_TIMER_NBT, this.actionTimer)
+		compound.putInt(ACTION_TIMER_NBT, actionTimer)
 	}
 
 	companion object {

@@ -39,7 +39,7 @@ class BeanStalkBlock(
 	}
 
 	override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-		if (this.isStrong) {
+		if (isStrong) {
 			if (strongStalkIsDonePredicate(level, pos)) {
 				level.setBlockAndUpdate(
 					pos,
@@ -60,7 +60,7 @@ class BeanStalkBlock(
 
 		level.setBlockAndUpdate(
 			pos.above(),
-			this.defaultBlockState()
+			defaultBlockState()
 		)
 
 		level.playSound(
@@ -82,7 +82,7 @@ class BeanStalkBlock(
 			0.0
 		)
 
-		level.scheduleTick(pos.above(), this, if (this.isStrong) 1 else 5)
+		level.scheduleTick(pos.above(), this, if (isStrong) 1 else 5)
 	}
 
 	override fun updateShape(state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, pos: BlockPos, neighborPos: BlockPos): BlockState {

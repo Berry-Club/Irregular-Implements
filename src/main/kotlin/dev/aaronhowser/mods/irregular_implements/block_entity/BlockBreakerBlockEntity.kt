@@ -89,7 +89,7 @@ class BlockBreakerBlockEntity(
 
 	fun upgrade(insertedBreaker: ItemStack) {
 		val level = level as? ServerLevel ?: return
-		val fakePlayer = this.fakePlayer?.get() ?: return
+		val fakePlayer = fakePlayer?.get() ?: return
 
 		val breakerEnchantments = insertedBreaker.getAllEnchantments(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
 		val pick = getPick(level, Items.DIAMOND_PICKAXE, withEnchantments = breakerEnchantments)
@@ -108,20 +108,20 @@ class BlockBreakerBlockEntity(
 
 		val basicPick = getPick(level, Items.IRON_PICKAXE, withEnchantments = ItemEnchantments.EMPTY)
 
-		this.fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, basicPick)
+		fakePlayer?.get()?.setItemInHand(InteractionHand.MAIN_HAND, basicPick)
 	}
 
 	fun tick() {
 		val level = level as? ServerLevel ?: return
 
-		if (!this.isFirstTick) {
-			this.isFirstTick = true
+		if (!isFirstTick) {
+			isFirstTick = true
 			initFakePlayer()
 		}
 
-		val fakePlayer = this.fakePlayer?.get() ?: return
+		val fakePlayer = fakePlayer?.get() ?: return
 
-		if (this.isMining) {
+		if (isMining) {
 			val facing = blockState.getValue(BlockBreakerBlock.FACING)
 			val targetPos = blockPos.relative(facing)
 
@@ -129,13 +129,13 @@ class BlockBreakerBlockEntity(
 
 			val destroyProgress = targetState.getDestroyProgress(fakePlayer, level, targetPos)
 
-			this.miningProgress += destroyProgress
+			miningProgress += destroyProgress
 
-			if (this.miningProgress < 1f) {
+			if (miningProgress < 1f) {
 				level.destroyBlockProgress(
-					this.uuid.hashCode(),
+					uuid.hashCode(),
 					targetPos,
-					Mth.ceil(this.miningProgress * 10)
+					Mth.ceil(miningProgress * 10)
 				)
 				return
 			}
@@ -145,10 +145,10 @@ class BlockBreakerBlockEntity(
 	}
 
 	private fun mineBlock(facing: Direction, fakePlayer: FakePlayer, targetPos: BlockPos, level: ServerLevel) {
-		this.isMining = false
+		isMining = false
 		resetProgress()
 
-		val possibleInventoryPos = this.blockPos.relative(facing.opposite)
+		val possibleInventoryPos = blockPos.relative(facing.opposite)
 		val inventoryBehind = level.getCapability(Capabilities.ItemHandler.BLOCK, possibleInventoryPos, facing)
 
 		// The Magnetic enchantment on the pick immediately teleports the item to the FakePlayer's inventory
@@ -178,34 +178,34 @@ class BlockBreakerBlockEntity(
 	}
 
 	private fun resetProgress() {
-		val uuid = this.uuid ?: return
+		val uuid = uuid ?: return
 		val level = level as? ServerLevel ?: return
 
 		val targetPos = blockPos.relative(blockState.getValue(BlockBreakerBlock.FACING))
 
 		level.destroyBlockProgress(uuid.hashCode(), targetPos, -1)
-		this.miningProgress = 0f
+		miningProgress = 0f
 	}
 
 	fun neighborChanged(state: BlockState, level: Level) {
 		val targetPos = blockPos.relative(state.getValue(BlockBreakerBlock.FACING))
 		val targetState = level.getBlockState(targetPos)
 
-		this.canMine = !level.hasNeighborSignal(blockPos)
+		canMine = !level.hasNeighborSignal(blockPos)
 
-		if (this.canMine) {
+		if (canMine) {
 			if (!targetState.isAir) {
-				if (!this.isMining) {
-					this.isMining = true
-					this.miningProgress = 0f
+				if (!isMining) {
+					isMining = true
+					miningProgress = 0f
 				}
 			} else {
-				this.isMining = false
+				isMining = false
 				resetProgress()
 			}
 		} else {
-			if (this.isMining) {
-				this.isMining = false
+			if (isMining) {
+				isMining = false
 				resetProgress()
 			}
 		}
@@ -214,31 +214,31 @@ class BlockBreakerBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		val uuid = this.uuid
+		val uuid = uuid
 		if (uuid != null) {
 			tag.putUUID(UUID_NBT, uuid)
 		}
 
-		tag.putBoolean(IS_MINING_NBT, this.isMining)
-		tag.putBoolean(CAN_MINE_NBT, this.canMine)
-		tag.putFloat(MINING_PROGRESS_NBT, this.miningProgress)
+		tag.putBoolean(IS_MINING_NBT, isMining)
+		tag.putBoolean(CAN_MINE_NBT, canMine)
+		tag.putFloat(MINING_PROGRESS_NBT, miningProgress)
 
-		if (!this.diamondBreaker.isEmpty) {
-			tag.put(DIAMOND_BREAKER_NBT, this.diamondBreaker.save(registries))
+		if (!diamondBreaker.isEmpty) {
+			tag.put(DIAMOND_BREAKER_NBT, diamondBreaker.save(registries))
 		}
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		this.uuid = tag.getUuidOrNull(UUID_NBT)
+		uuid = tag.getUuidOrNull(UUID_NBT)
 
-		this.isMining = tag.getBoolean(IS_MINING_NBT)
-		this.canMine = tag.getBoolean(CAN_MINE_NBT)
-		this.miningProgress = tag.getFloat(MINING_PROGRESS_NBT)
+		isMining = tag.getBoolean(IS_MINING_NBT)
+		canMine = tag.getBoolean(CAN_MINE_NBT)
+		miningProgress = tag.getFloat(MINING_PROGRESS_NBT)
 
 		if (tag.contains(DIAMOND_BREAKER_NBT)) {
-			this.diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
+			diamondBreaker = ItemStack.parseOptional(registries, tag.getCompound(DIAMOND_BREAKER_NBT))
 		}
 	}
 

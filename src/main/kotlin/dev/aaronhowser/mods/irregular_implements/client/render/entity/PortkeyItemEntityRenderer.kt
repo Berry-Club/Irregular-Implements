@@ -25,7 +25,7 @@ class PortkeyItemEntityRenderer(
 	private val itemRenderer: ItemRenderer = context.itemRenderer
 	private val random: RandomSource = RandomSource.create()
 
-	/** @see net.minecraft.client.renderer.entity.ItemEntityRenderer.render */
+	/** @see ItemEntityRenderer.render */
 	override fun render(
 		entity: PortkeyItemEntity,
 		entityYaw: Float,
@@ -69,14 +69,14 @@ class PortkeyItemEntityRenderer(
 			val f3 = entity.getSpin(partialTicks)
 			poseStack.mulPose(Axis.YP.rotation(f3))
 			ItemEntityRenderer.renderMultipleFromCount(
-				this.itemRenderer,
+				itemRenderer,
 				poseStack,
 				buffer,
 				packedLight,
 				renderStack,
 				bakedModel,
 				flag,
-				this.random
+				random
 			)
 		}
 

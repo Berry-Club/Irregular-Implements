@@ -27,10 +27,10 @@ class OnlineDetectorMenu(
 
 	private var currentUsername: String = ""
 	fun setUsername(username: String): Boolean {
-		if (this.currentUsername == username) return false
-		this.currentUsername = username
+		if (currentUsername == username) return false
+		currentUsername = username
 
-		this.containerLevelAccess.execute { level, pos ->
+		containerLevelAccess.execute { level, pos ->
 			val blockEntity = level.getBlockEntity(pos) as? OnlineDetectorBlockEntity
 			blockEntity?.username = username
 		}

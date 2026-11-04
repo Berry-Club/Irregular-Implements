@@ -34,30 +34,30 @@ class IgniterBlockEntity(
 		}
 
 	fun blockUpdated(isPowered: Boolean, wasEnabled: Boolean) {
-		val level = this.level ?: return
+		val level = level ?: return
 
 		val isTurningOn = isPowered && !wasEnabled
 		val isTurningOff = !isPowered && wasEnabled
 
-		when (this.mode) {
-			Mode.KEEP_IGNITED -> if (isPowered) ignite(level, this.blockPos, this.blockState)
+		when (mode) {
+			Mode.KEEP_IGNITED -> if (isPowered) ignite(level, blockPos, blockState)
 
-			Mode.IGNITE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState)
+			Mode.IGNITE -> if (isTurningOn) ignite(level, blockPos, blockState)
 
-			Mode.TOGGLE -> if (isTurningOn) ignite(level, this.blockPos, this.blockState) else if (isTurningOff) extinguish(level, this.blockPos, this.blockState)
+			Mode.TOGGLE -> if (isTurningOn) ignite(level, blockPos, blockState) else if (isTurningOff) extinguish(level, blockPos, blockState)
 		}
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putInt(MODE_NBT, this.mode.ordinal)
+		tag.putInt(MODE_NBT, mode.ordinal)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		this.mode = Mode.entries[tag.getInt(MODE_NBT)]
+		mode = Mode.entries[tag.getInt(MODE_NBT)]
 	}
 
 	// Menu stuff
@@ -81,11 +81,11 @@ class IgniterBlockEntity(
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return IgniterMenu(containerId, this.containerData)
+		return IgniterMenu(containerId, containerData)
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	companion object {

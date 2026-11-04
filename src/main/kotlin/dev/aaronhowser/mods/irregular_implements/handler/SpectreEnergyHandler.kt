@@ -100,7 +100,7 @@ class SpectreEnergyHandler : SavedData() {
 	override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
 		val listTag = tag.getList(PLAYER_ENERGIES_NBT, Tag.TAG_COMPOUND.toInt())
 
-		for ((uuid, energy) in this.playerStoredEnergy) {
+		for ((uuid, energy) in playerStoredEnergy) {
 			val entryTag = CompoundTag()
 			entryTag.putString(UUID_NBT, uuid.toString())
 			entryTag.putInt(ENERGY_NBT, energy)

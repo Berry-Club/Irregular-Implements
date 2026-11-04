@@ -45,7 +45,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	private val invWrapper = InvWrapper(container)
 
 	private fun updateLinkedPositions() {
-		val level = this.level ?: return
+		val level = level ?: return
 
 		val newList = mutableListOf<BlockPos>()
 
@@ -65,7 +65,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		for (pos in added) {
 			linkBlock(
 				level = level,
-				interfacePos = this.blockPos,
+				interfacePos = blockPos,
 				targetPos = pos
 			)
 
@@ -75,7 +75,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		for (pos in removed) {
 			unlinkBlock(
 				level = level,
-				interfacePos = this.blockPos,
+				interfacePos = blockPos,
 				targetPos = pos
 			)
 
@@ -93,7 +93,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	}
 
 	override fun clientTick() {
-		val level = this.level ?: return
+		val level = level ?: return
 		if (!level.isClientSide) return
 
 		val player = AaronClientUtil.localPlayer ?: return
@@ -104,7 +104,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 		if (links.isEmpty()) return
 
 		CubeIndicatorRenderer.addIndicator(
-			this.blockPos,
+			blockPos,
 			2,
 			0x32FF0000,
 			size = 0.5f
@@ -112,7 +112,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 
 		for (link in links) {
 			LineIndicatorRenderer.addIndicator(
-				start = this.blockPos.center,
+				start = blockPos.center,
 				end = link.center,
 				duration = 2,
 				color = 0xFFFF0000.toInt()
@@ -153,11 +153,11 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return AdvancedRedstoneInterfaceMenu(containerId, playerInventory, this.container)
+		return AdvancedRedstoneInterfaceMenu(containerId, playerInventory, container)
 	}
 
 	companion object {

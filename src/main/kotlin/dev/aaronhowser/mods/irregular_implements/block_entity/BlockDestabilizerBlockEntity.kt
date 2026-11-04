@@ -67,12 +67,12 @@ class BlockDestabilizerBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putInt(STATE_NBT, this.state.ordinal)
-		tag.putBoolean(LAZY_NBT, this.isLazy)
+		tag.putInt(STATE_NBT, state.ordinal)
+		tag.putBoolean(LAZY_NBT, isLazy)
 
-		if (this.lazyBlocks.isNotEmpty()) {
+		if (lazyBlocks.isNotEmpty()) {
 			val invalidBlocksTag = ListTag()
-			for (blockPos in this.lazyBlocks) {
+			for (blockPos in lazyBlocks) {
 				val posLong = blockPos.asLong()
 				val longTag = LongTag.valueOf(posLong)
 				invalidBlocksTag.add(longTag)
@@ -80,9 +80,9 @@ class BlockDestabilizerBlockEntity(
 			tag.put(LAZY_BLOCKS, invalidBlocksTag)
 		}
 
-		if (this.state == State.SEARCHING) {
+		if (state == State.SEARCHING) {
 			val alreadyCheckedTag = ListTag()
-			for (blockPos in this.alreadyChecked) {
+			for (blockPos in alreadyChecked) {
 				val posLong = blockPos.asLong()
 				val longTag = LongTag.valueOf(posLong)
 				alreadyCheckedTag.add(longTag)
@@ -90,7 +90,7 @@ class BlockDestabilizerBlockEntity(
 			tag.put(ALREADY_CHECKED_NBT, alreadyCheckedTag)
 
 			val toCheckTag = ListTag()
-			for (blockPos in this.toCheck) {
+			for (blockPos in toCheck) {
 				val posLong = blockPos.asLong()
 				val longTag = LongTag.valueOf(posLong)
 				toCheckTag.add(longTag)
@@ -98,7 +98,7 @@ class BlockDestabilizerBlockEntity(
 			tag.put(TO_CHECK_NBT, toCheckTag)
 
 			val targetBlocksTag = ListTag()
-			for (blockPos in this.targetBlockPositions) {
+			for (blockPos in targetBlockPositions) {
 				val posLong = blockPos.asLong()
 				val longTag = LongTag.valueOf(posLong)
 				targetBlocksTag.add(longTag)
@@ -106,11 +106,11 @@ class BlockDestabilizerBlockEntity(
 			tag.put(TARGET_BLOCKS_NBT, targetBlocksTag)
 		}
 
-		if (this.state == State.DROPPING) {
-			tag.putInt(DROP_COUNTER_NBT, this.dropCounter)
+		if (state == State.DROPPING) {
+			tag.putInt(DROP_COUNTER_NBT, dropCounter)
 
 			val targetBlocksSortedTag = ListTag()
-			for (blockPos in this.targetBlocksSorted) {
+			for (blockPos in targetBlocksSorted) {
 				val posLong = blockPos.asLong()
 				val longTag = LongTag.valueOf(posLong)
 				targetBlocksSortedTag.add(longTag)
@@ -118,7 +118,7 @@ class BlockDestabilizerBlockEntity(
 			tag.put(TARGET_BLOCKS_SORTED_NBT, targetBlocksSortedTag)
 		}
 
-		if (this.targetBlock != null) {
+		if (targetBlock != null) {
 			val targetBlockStateName = BuiltInRegistries.BLOCK.getKey(targetBlock!!).toString()
 			tag.putString(TARGET_STATE_BLOCK_NBT, targetBlockStateName)
 		}
@@ -128,10 +128,10 @@ class BlockDestabilizerBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		val stateOrdinal = tag.getInt(STATE_NBT)
-		this.state = State.entries[stateOrdinal]
+		state = State.entries[stateOrdinal]
 
 		val lazy = tag.getBoolean(LAZY_NBT)
-		this.isLazy = lazy
+		isLazy = lazy
 
 		if (tag.contains(LAZY_BLOCKS)) {
 			val invalidBlocksTag = tag.getList(LAZY_BLOCKS, Tag.TAG_LONG.toInt())
@@ -139,34 +139,34 @@ class BlockDestabilizerBlockEntity(
 			for (tagElement in invalidBlocksTag) {
 				val posLong = (tagElement as LongTag).asLong
 				val blockPos = posLong.toBlockPos()
-				this.lazyBlocks.add(blockPos)
+				lazyBlocks.add(blockPos)
 			}
 		}
 
-		if (this.state == State.SEARCHING) {
+		if (state == State.SEARCHING) {
 			val alreadyCheckedTag = tag.getList(ALREADY_CHECKED_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in alreadyCheckedTag) {
 				val posLong = (tagElement as LongTag).asLong
 				val blockPos = posLong.toBlockPos()
-				this.alreadyChecked.add(blockPos)
+				alreadyChecked.add(blockPos)
 			}
 
 			val toCheckTag = tag.getList(TO_CHECK_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in toCheckTag) {
 				val posLong = (tagElement as LongTag).asLong
 				val blockPos = posLong.toBlockPos()
-				this.toCheck.add(blockPos)
+				toCheck.add(blockPos)
 			}
 
 			val targetBlocksTag = tag.getList(TARGET_BLOCKS_NBT, Tag.TAG_LONG.toInt())
 			for (tagElement in targetBlocksTag) {
 				val posLong = (tagElement as LongTag).asLong
 				val blockPos = posLong.toBlockPos()
-				this.targetBlockPositions.add(blockPos)
+				targetBlockPositions.add(blockPos)
 			}
 		}
 
-		if (this.state == State.DROPPING) {
+		if (state == State.DROPPING) {
 			val dropCounter = tag.getInt(DROP_COUNTER_NBT)
 			this.dropCounter = dropCounter
 
@@ -174,7 +174,7 @@ class BlockDestabilizerBlockEntity(
 			for (tagElement in targetBlocksSortedTag) {
 				val posLong = (tagElement as LongTag).asLong
 				val blockPos = posLong.toBlockPos()
-				this.targetBlocksSorted.add(blockPos)
+				targetBlocksSorted.add(blockPos)
 			}
 		}
 
@@ -187,19 +187,19 @@ class BlockDestabilizerBlockEntity(
 
 	// Runs when the block is powered
 	fun initStart() {
-		if (this.isLazy && this.lazyBlocks.isNotEmpty()) {
-			this.targetBlockPositions.clear()
-			this.targetBlockPositions.addAll(this.lazyBlocks)
+		if (isLazy && lazyBlocks.isNotEmpty()) {
+			targetBlockPositions.clear()
+			targetBlockPositions.addAll(lazyBlocks)
 
 			initDrop()
 			return
 		}
 
-		val level = this.level ?: return
+		val level = level ?: return
 
-		val facing = this.blockState.getValue(DirectionalBlock.FACING)
+		val facing = blockState.getValue(DirectionalBlock.FACING)
 
-		val targetBlockPos = this.blockPos.relative(facing)
+		val targetBlockPos = blockPos.relative(facing)
 		val targetBlockState = level.getBlockState(targetBlockPos)
 
 		if (targetBlockState.isAir
@@ -208,36 +208,36 @@ class BlockDestabilizerBlockEntity(
 			|| level.getBlockEntity(targetBlockPos) != null
 		) return
 
-		this.targetBlock = targetBlockState.block
-		this.state = State.SEARCHING
+		targetBlock = targetBlockState.block
+		state = State.SEARCHING
 
-		this.toCheck.add(targetBlockPos)
+		toCheck.add(targetBlockPos)
 	}
 
-	// Runs every tick if `this.state` is `SEARCHING`
+	// Runs every tick if `state` is `SEARCHING`
 	private fun stepSearch() {
-		val doneSearching = this.toCheck.isEmpty() || this.targetBlockPositions.count() >= ServerConfig.CONFIG.blockDestabilizerLimit.get()
+		val doneSearching = toCheck.isEmpty() || targetBlockPositions.count() >= ServerConfig.CONFIG.blockDestabilizerLimit.get()
 		if (doneSearching) {
 			initDrop()
 			return
 		}
 
-		val nextPos = this.toCheck.removeFirst()
-		if (this.alreadyChecked.contains(nextPos)) return
+		val nextPos = toCheck.removeFirst()
+		if (alreadyChecked.contains(nextPos)) return
 
-		this.alreadyChecked.add(nextPos)
+		alreadyChecked.add(nextPos)
 
-		val level = this.level as? ServerLevel ?: return
+		val level = level as? ServerLevel ?: return
 		val checkedState = level.getBlockState(nextPos)
 
-		val shouldAdd = checkedState.block == this.targetBlock
+		val shouldAdd = checkedState.block == targetBlock
 		if (shouldAdd) {
-			this.targetBlockPositions.add(nextPos)
+			targetBlockPositions.add(nextPos)
 
 			for (direction in Direction.entries) {
 				val offsetPos = nextPos.relative(direction)
-				if (!this.alreadyChecked.contains(offsetPos)) {
-					this.toCheck.add(offsetPos)
+				if (!alreadyChecked.contains(offsetPos)) {
+					toCheck.add(offsetPos)
 				}
 			}
 		}
@@ -245,48 +245,48 @@ class BlockDestabilizerBlockEntity(
 		val color = if (shouldAdd) 0x00FF00 else 0xFF0000
 
 		val packet = AddIndicatorsPacket(nextPos, 5, color)
-		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
+		packet.messageNearbyPlayers(level, blockPos, 32.0)
 	}
 
 	// Runs once if it's done searching, or if it's in lazy and it has a lazy shape
 	private fun initDrop() {
-		this.targetBlocksSorted = this.targetBlockPositions.sortedWith(
+		targetBlocksSorted = targetBlockPositions.sortedWith(
 			compareBy<BlockPos> { it.y }
-				.thenBy { it.distSqr(this.blockPos) }
+				.thenBy { it.distSqr(blockPos) }
 		).toMutableList()
 
-		this.lazyBlocks.clear()
-		this.lazyBlocks.addAll(this.targetBlocksSorted)
+		lazyBlocks.clear()
+		lazyBlocks.addAll(targetBlocksSorted)
 
-		this.state = State.DROPPING
-		this.dropCounter = 0
+		state = State.DROPPING
+		dropCounter = 0
 
-		this.targetBlockPositions.clear()
-		this.toCheck.clear()
-		this.alreadyChecked.clear()
+		targetBlockPositions.clear()
+		toCheck.clear()
+		alreadyChecked.clear()
 	}
 
-	// Runs every tick if `this.state` is `DROPPING`
+	// Runs every tick if `state` is `DROPPING`
 	private fun dropNextBlock() {
-		if (this.dropCounter >= this.targetBlocksSorted.size) {
-			this.state = State.IDLE
-			this.targetBlocksSorted.clear()
-			this.targetBlock = null
+		if (dropCounter >= targetBlocksSorted.size) {
+			state = State.IDLE
+			targetBlocksSorted.clear()
+			targetBlock = null
 
 			return
 		}
 
-		val level = this.level ?: return
-		val checkedPos = this.targetBlocksSorted.getOrNull(this.dropCounter) ?: return
+		val level = level ?: return
+		val checkedPos = targetBlocksSorted.getOrNull(dropCounter) ?: return
 		val checkedState = level.getBlockState(checkedPos)
 
-		val shouldDrop = (checkedState.block == this.targetBlock || this.isLazy) && level.getBlockEntity(checkedPos) == null
+		val shouldDrop = (checkedState.block == targetBlock || isLazy) && level.getBlockEntity(checkedPos) == null
 
 		if (shouldDrop) {
 			FallingBlockEntity.fall(level, checkedPos, checkedState)
 		}
 
-		this.dropCounter++
+		dropCounter++
 	}
 
 	// Menu stuff
@@ -312,11 +312,11 @@ class BlockDestabilizerBlockEntity(
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
-		return BlockDestabilizerMenu(containerId, this.containerData)
+		return BlockDestabilizerMenu(containerId, containerData)
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	// Buttons
@@ -324,36 +324,36 @@ class BlockDestabilizerBlockEntity(
 	private fun toggleLazy() {
 		if (state != State.IDLE) return
 
-		this.isLazy = !this.isLazy
+		isLazy = !isLazy
 	}
 
 	private fun showLazyShape(): Boolean {
-		if (this.state != State.IDLE) return false
+		if (state != State.IDLE) return false
 
-		val level = this.level as? ServerLevel ?: return false
+		val level = level as? ServerLevel ?: return false
 
-		val packet = AddIndicatorsPacket(this.lazyBlocks.toList(), 20 * 10, 0x33FFFFFF, dimensions = Vec3(0.99, 0.99, 0.99))
-		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
+		val packet = AddIndicatorsPacket(lazyBlocks.toList(), 20 * 10, 0x33FFFFFF, dimensions = Vec3(0.99, 0.99, 0.99))
+		packet.messageNearbyPlayers(level, blockPos, 32.0)
 
 		return true
 	}
 
 	private fun removeLazyIndicators(): Boolean {
-		if (this.lazyBlocks.isEmpty()) return false
+		if (lazyBlocks.isEmpty()) return false
 
-		val level = this.level as? ServerLevel ?: return false
+		val level = level as? ServerLevel ?: return false
 
-		val packet = RemoveIndicatorsPacket(this.lazyBlocks.toList())
-		packet.messageNearbyPlayers(level, this.blockPos, 32.0)
+		val packet = RemoveIndicatorsPacket(lazyBlocks.toList())
+		packet.messageNearbyPlayers(level, blockPos, 32.0)
 
 		return true
 	}
 
 	private fun resetLazyShape() {
-		if (this.state != State.IDLE) return
+		if (state != State.IDLE) return
 
 		removeLazyIndicators()
-		this.lazyBlocks.clear()
+		lazyBlocks.clear()
 	}
 
 	companion object {

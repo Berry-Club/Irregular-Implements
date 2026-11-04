@@ -28,11 +28,11 @@ class OnlineDetectorBlockEntity(
 			field = value
 			setChanged()
 
-			if (this.level is ServerLevel) {
+			if (level is ServerLevel) {
 				checkPlayerOnline(
-					this.level as ServerLevel,
-					this.blockPos,
-					this.blockState,
+					level as ServerLevel,
+					blockPos,
+					blockState,
 					this
 				)
 			}
@@ -41,22 +41,22 @@ class OnlineDetectorBlockEntity(
 		}
 
 	fun sendStringUpdate() {
-		val level = this.level as? ServerLevel ?: return
+		val level = level as? ServerLevel ?: return
 
-		val packet = UpdateClientScreenString(OnlineDetectorMenu.USERNAME_STRING_ID, this.username)
-		packet.messageNearbyPlayers(level, this.blockPos.center, 16.0)
+		val packet = UpdateClientScreenString(OnlineDetectorMenu.USERNAME_STRING_ID, username)
+		packet.messageNearbyPlayers(level, blockPos.center, 16.0)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putString(USERNAME_NBT, this.username)
+		tag.putString(USERNAME_NBT, username)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		this.username = tag.getString(USERNAME_NBT)
+		username = tag.getString(USERNAME_NBT)
 	}
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
@@ -64,7 +64,7 @@ class OnlineDetectorBlockEntity(
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	companion object {

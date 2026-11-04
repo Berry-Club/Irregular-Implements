@@ -60,9 +60,9 @@ class ModEmiPlugin : EmiPlugin {
 	}
 
 	companion object {
-		fun ItemLike.asEmiStack(): EmiStack = EmiStack.of(this.asItem())
+		fun ItemLike.asEmiStack(): EmiStack = EmiStack.of(asItem())
 		fun Ingredient.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this)
-		fun ItemLike.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this.asIngredient())
+		fun ItemLike.asEmiIngredient(): EmiIngredient = EmiIngredient.of(asIngredient())
 		fun TagKey<Item>.asEmiIngredient(): EmiIngredient = EmiIngredient.of(this)
 
 		val IMBUING_STATION_STACK: EmiStack = ModBlocks.IMBUING_STATION.asEmiStack()

@@ -14,7 +14,7 @@ class ModCurioProvider(
 ) : CuriosDataProvider(IrregularImplements.MOD_ID, output, fileHelper, registries) {
 
 	override fun generate(registries: HolderLookup.Provider, fileHelper: ExistingFileHelper) {
-		this.createEntities(PLAYERS_RULE)
+		createEntities(PLAYERS_RULE)
 			.addPlayer()
 			.addSlots(RING_SLOT)
 

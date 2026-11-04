@@ -15,7 +15,7 @@ class AdvancedRedstoneInterfaceScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.ADVANCED_REDSTONE_INTERFACE
 
 	override fun baseInit() {
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 	}
 
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.placement.*
 import net.neoforged.neoforge.common.Tags
+import java.util.List.copyOf as copyOfList
 
 
 object ModPlacedFeatures {
@@ -108,7 +109,7 @@ object ModPlacedFeatures {
 		configuration: Holder<ConfiguredFeature<*, *>>,
 		modifiers: List<PlacementModifier>
 	) {
-		context.register(key, PlacedFeature(configuration, java.util.List.copyOf(modifiers)))
+		context.register(key, PlacedFeature(configuration, copyOfList(modifiers)))
 	}
 
 }

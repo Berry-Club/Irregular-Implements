@@ -59,7 +59,7 @@ class NatureCoreBlockEntity(
 		val pos = blockPos.mutable()
 		do {
 			pos.set(
-				this.blockPos.offset(
+				blockPos.offset(
 					level.random.nextRange(-radius, radius + 1),
 					level.random.nextRange(-radius, radius + 1),
 					level.random.nextRange(-radius, radius + 1)
@@ -97,11 +97,11 @@ class NatureCoreBlockEntity(
 		val radCeil = Mth.ceil(radius)
 
 		var attempts = 0
-		val pos = this.blockPos.mutable()
+		val pos = blockPos.mutable()
 
 		do {
 			pos.set(
-				this.blockPos.offset(
+				blockPos.offset(
 					level.random.nextRange(-radCeil, radCeil + 1),
 					level.random.nextRange(-radCeil, radCeil + 1),
 					level.random.nextRange(-radCeil, radCeil + 1)
@@ -158,7 +158,7 @@ class NatureCoreBlockEntity(
 		var attempts = 0
 		var pos: BlockPos
 		do {
-			pos = this.blockPos.offset(
+			pos = blockPos.offset(
 				level.random.nextRange(-radius, radius + 1),
 				level.random.nextRange(-radius, radius + 1),
 				level.random.nextRange(-radius, radius + 1)

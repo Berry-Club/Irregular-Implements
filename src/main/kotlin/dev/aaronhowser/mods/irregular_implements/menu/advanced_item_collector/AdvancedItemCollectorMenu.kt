@@ -34,12 +34,12 @@ class AdvancedItemCollectorMenu(
 
 		addSlots(153)
 
-		this.addDataSlots(this.containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun addContainerSlots() {
 		val slot = ContainerSlot(container, 0, 80, 122)
-		this.addSlot(slot)
+		addSlot(slot)
 	}
 
 	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
@@ -47,20 +47,20 @@ class AdvancedItemCollectorMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return this.container.stillValid(player)
+		return container.stillValid(player)
 	}
 
 	var xRadius: Int
-		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.X_RADIUS_INDEX)
-		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.X_RADIUS_INDEX, value)
+		get() = containerData.get(AdvancedItemCollectorBlockEntity.X_RADIUS_INDEX)
+		private set(value) = containerData.set(AdvancedItemCollectorBlockEntity.X_RADIUS_INDEX, value)
 
 	var yRadius: Int
-		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.Y_RADIUS_INDEX)
-		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.Y_RADIUS_INDEX, value)
+		get() = containerData.get(AdvancedItemCollectorBlockEntity.Y_RADIUS_INDEX)
+		private set(value) = containerData.set(AdvancedItemCollectorBlockEntity.Y_RADIUS_INDEX, value)
 
 	var zRadius: Int
-		get() = this.containerData.get(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX)
-		private set(value) = this.containerData.set(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX, value)
+		get() = containerData.get(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX)
+		private set(value) = containerData.set(AdvancedItemCollectorBlockEntity.Z_RADIUS_INDEX, value)
 
 	override fun handleButtonPressed(buttonId: Int, isShiftDown: Boolean) {
 		when (buttonId) {

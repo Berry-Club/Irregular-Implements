@@ -49,11 +49,11 @@ class FlooFireplace(
 		val success = fireplace.teleportToThis(player)
 
 		if (success) {
-			val myBe = this.getBlockEntity(level)
+			val myBe = getBlockEntity(level)
 			if (myBe != null) {
 				val bricks = myBe.children + myBe.blockPos
 				val packet = BurningFlooFireplacePacket(bricks)
-				packet.messageNearbyPlayers(level, this.masterBlockPos.center, 64.0)
+				packet.messageNearbyPlayers(level, masterBlockPos.center, 64.0)
 			}
 		}
 
@@ -62,7 +62,7 @@ class FlooFireplace(
 
 	fun teleportToThis(player: ServerPlayer): Boolean {
 		val level = player.serverLevel()
-		val be = level.getBlockEntity(this.masterBlockPos) as? FlooBrickBlockEntity
+		val be = level.getBlockEntity(masterBlockPos) as? FlooBrickBlockEntity
 
 		if (be == null) {
 			player.status(
@@ -72,12 +72,12 @@ class FlooFireplace(
 			)
 
 			val network = FlooNetworkSavedData.get(level)
-			network.removeFireplace(this.masterUuid)
+			network.removeFireplace(masterUuid)
 
 			return false
 		}
 
-		val destination = this.masterBlockPos.above().bottomCenter
+		val destination = masterBlockPos.above().bottomCenter
 
 		player.teleportTo(
 			level,
@@ -91,7 +91,7 @@ class FlooFireplace(
 
 		val bricks = be.children + be.blockPos
 		val packet = BurningFlooFireplacePacket(bricks)
-		packet.messageNearbyPlayers(level, this.masterBlockPos.center, 64.0)
+		packet.messageNearbyPlayers(level, masterBlockPos.center, 64.0)
 
 		return true
 	}

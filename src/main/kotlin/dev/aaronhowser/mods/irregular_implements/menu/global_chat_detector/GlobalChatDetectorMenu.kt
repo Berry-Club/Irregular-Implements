@@ -40,7 +40,7 @@ class GlobalChatDetectorMenu(
 
 		addSlots(75)
 
-		this.addDataSlots(containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun addContainerSlots() {
@@ -50,7 +50,7 @@ class GlobalChatDetectorMenu(
 
 			//TODO: Add a Player Filter outline to the slot background
 			val slot = ContainerSlot(globalChatDetectorContainer, containerSlotIndex, x, y)
-			this.addSlot(slot)
+			addSlot(slot)
 		}
 	}
 
@@ -70,10 +70,10 @@ class GlobalChatDetectorMenu(
 
 	private var currentRegexString: String = ""
 	fun setRegex(regexString: String): Boolean {
-		if (regexString == this.currentRegexString) return false
-		this.currentRegexString = regexString
+		if (regexString == currentRegexString) return false
+		currentRegexString = regexString
 
-		this.containerLevelAccess.execute { level, pos ->
+		containerLevelAccess.execute { level, pos ->
 			val blockEntity = level.getBlockEntity(pos) as? GlobalChatDetectorBlockEntity
 			blockEntity?.regexString = regexString
 		}
@@ -90,10 +90,10 @@ class GlobalChatDetectorMenu(
 		val copyStack = stackThere.copy()
 
 		if (clickedSlotIndex < 9) {
-			if (!this.moveItemStackTo(stackThere, 9, 45, true)) {
+			if (!moveItemStackTo(stackThere, 9, 45, true)) {
 				return ItemStack.EMPTY
 			}
-		} else if (!this.moveItemStackTo(stackThere, 0, 9, false)) {
+		} else if (!moveItemStackTo(stackThere, 0, 9, false)) {
 			return ItemStack.EMPTY
 		}
 
@@ -111,7 +111,7 @@ class GlobalChatDetectorMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return stillValid(this.containerLevelAccess, player, ModBlocks.GLOBAL_CHAT_DETECTOR.get())
+		return stillValid(containerLevelAccess, player, ModBlocks.GLOBAL_CHAT_DETECTOR.get())
 	}
 
 	companion object {

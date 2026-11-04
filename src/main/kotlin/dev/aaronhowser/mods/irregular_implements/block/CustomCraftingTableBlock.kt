@@ -53,7 +53,7 @@ class CustomCraftingTableBlock : Block(Properties.ofFullCopy(Blocks.CRAFTING_TAB
 			{ containerId, playerInventory, player ->
 				CraftingMenu(containerId, playerInventory, ContainerLevelAccess.create(level, pos))
 			},
-			this.name
+			name
 		)
 	}
 

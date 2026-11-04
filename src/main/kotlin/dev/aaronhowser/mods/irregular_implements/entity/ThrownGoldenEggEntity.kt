@@ -32,13 +32,13 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
 
 	private fun spawnGoldenChicken() {
 		var i = 1
-		if (this.random.nextInt(32) == 0) i = 4
+		if (random.nextInt(32) == 0) i = 4
 
 		for (j in 0 until i) {
 			val chicken = ModEntityTypes.GOLDEN_CHICKEN.get().create(level())
 			if (chicken != null) {
 				chicken.age = -24000
-				chicken.moveTo(this.x, this.y, this.z, this.yRot, 0.0f)
+				chicken.moveTo(x, y, z, yRot, 0.0f)
 
 				if (!chicken.fudgePositionAfterSizeChange(ZERO_SIZED_DIMENSIONS)) break
 
@@ -49,7 +49,7 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
 
 	override fun onHitEntity(result: EntityHitResult) {
 		super.onHitEntity(result)
-		result.entity.hurt(damageSources().thrown(this, this.owner), 0f)
+		result.entity.hurt(damageSources().thrown(this, owner), 0f)
 	}
 
 	override fun handleEntityEvent(id: Byte) {
@@ -57,13 +57,13 @@ class ThrownGoldenEggEntity : ThrowableItemProjectile {
 			for (i in 0..7) {
 				level()
 					.addParticle(
-						ItemParticleOption(ParticleTypes.ITEM, this.item),
-						this.x,
-						this.y,
-						this.z,
-						(this.random.nextDouble() - 0.5) * 0.08,
-						(this.random.nextDouble() - 0.5) * 0.08,
-						(this.random.nextDouble() - 0.5) * 0.08
+						ItemParticleOption(ParticleTypes.ITEM, item),
+						x,
+						y,
+						z,
+						(random.nextDouble() - 0.5) * 0.08,
+						(random.nextDouble() - 0.5) * 0.08,
+						(random.nextDouble() - 0.5) * 0.08
 					)
 			}
 		}

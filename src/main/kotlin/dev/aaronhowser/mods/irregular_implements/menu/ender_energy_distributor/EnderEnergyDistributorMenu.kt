@@ -36,7 +36,7 @@ class EnderEnergyDistributorMenu(
 
 			//TODO: Add an Item Filter outline to the slot background
 			val slot = ContainerSlot(container, i, x, 18)
-			this.addSlot(slot)
+			addSlot(slot)
 		}
 	}
 
@@ -51,10 +51,10 @@ class EnderEnergyDistributorMenu(
 		val playerInvMaxIndex = blockMaxInvIndex + 9 * 4
 
 		if (clickedSlotIndex < blockMaxInvIndex) {
-			if (!this.moveItemStackTo(stackThere, blockMaxInvIndex, playerInvMaxIndex, true)) {
+			if (!moveItemStackTo(stackThere, blockMaxInvIndex, playerInvMaxIndex, true)) {
 				return ItemStack.EMPTY
 			}
-		} else if (!this.moveItemStackTo(stackThere, 0, blockMaxInvIndex, false)) {
+		} else if (!moveItemStackTo(stackThere, 0, blockMaxInvIndex, false)) {
 			return ItemStack.EMPTY
 		}
 

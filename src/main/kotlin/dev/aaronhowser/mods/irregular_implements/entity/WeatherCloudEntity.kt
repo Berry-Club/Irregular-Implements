@@ -27,53 +27,53 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 		ModEntityTypes.WEATHER_CLOUD.get(),
 		level
 	) {
-		this.setPos(x, y, z)
+		setPos(x, y, z)
 		this.weather = weather
 	}
 
 	init {
-		this.noPhysics = true
+		noPhysics = true
 	}
 
 	var age: Int
-		private set(value) = this.entityData.set(AGE, value)
-		get() = this.entityData.get(AGE)
+		private set(value) = entityData.set(AGE, value)
+		get() = entityData.get(AGE)
 
 	var weather: WeatherEggItem.Weather
-		set(value) = this.entityData.set(WEATHER_TYPE, value.ordinal)
-		get() = WeatherEggItem.Weather.entries[this.entityData.get(WEATHER_TYPE)]
+		set(value) = entityData.set(WEATHER_TYPE, value.ordinal)
+		get() = WeatherEggItem.Weather.entries[entityData.get(WEATHER_TYPE)]
 
 	override fun tick() {
 		super.tick()
 
-		if (this.age < 200) {
-			this.deltaMovement = Vec3(0.0, 0.007, 0.0)
+		if (age < 200) {
+			deltaMovement = Vec3(0.0, 0.007, 0.0)
 		} else {
-			val dm = this.deltaMovement
+			val dm = deltaMovement
 			var dy = dm.y + 0.001
 			dy *= 1.02
 
-			this.deltaMovement = Vec3(dm.x, dy, dm.z)
+			deltaMovement = Vec3(dm.x, dy, dm.z)
 
-			if (this.position().y >= this.level().maxBuildHeight) {
+			if (position().y >= level().maxBuildHeight) {
 				setWeather()
-				this.discard()
+				discard()
 				return
 			}
 		}
 
-		this.age++
-		this.move(MoverType.SELF, this.deltaMovement)
+		age++
+		move(MoverType.SELF, deltaMovement)
 
-		if (this.level().isClientSide) {
+		if (level().isClientSide) {
 			spawnParticles()
 		}
 	}
 
 	private fun spawnParticles() {
-		if (!this.isClientSide) return
+		if (!isClientSide) return
 
-		when (this.weather) {
+		when (weather) {
 			WeatherEggItem.Weather.SUNNY -> spawnNiceCloud()
 			WeatherEggItem.Weather.RAINY -> spawnRainyCloud()
 			WeatherEggItem.Weather.STORMY -> spawnStormyCloud()
@@ -96,12 +96,12 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 				val elX = a * cos(t)
 				val elZ = b * sin(t)
 
-				this.level().addParticle(
+				level().addParticle(
 					ParticleTypes.SMOKE,
 					true,
-					this.x + elX,
-					this.y + yDouble / 8.0,
-					this.z + elZ,
+					x + elX,
+					y + yDouble / 8.0,
+					z + elZ,
 					0.0,
 					-0.03,
 					0.0
@@ -116,7 +116,7 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 		spawnDefaultCloud()
 
 		for (i in 0 until 2) {
-			val t = Math.PI * 2 * this.random.nextDouble()
+			val t = Math.PI * 2 * random.nextDouble()
 
 			var a = 0.25
 			var b = 0.35
@@ -127,12 +127,12 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 			val elX = a * cos(t)
 			val elZ = b * sin(t)
 
-			this.level().addParticle(
+			level().addParticle(
 				ParticleTypes.FISHING,
 				true,
-				this.x + elX,
-				this.y - 0.2,
-				this.z + elZ,
+				x + elX,
+				y - 0.2,
+				z + elZ,
 				0.0,
 				-0.05,
 				0.0
@@ -155,12 +155,12 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 		val elZ = b * sin(t)
 
 		// Temporary fallback using smoke; replace with custom particle if needed
-		this.level().addParticle(
+		level().addParticle(
 			ParticleTypes.SMOKE,
 			true,
-			this.x + elX,
-			this.y,
-			this.z + elZ,
+			x + elX,
+			y,
+			z + elZ,
 			random.nextDouble() * 0.1 - 0.05,
 			random.nextDouble() * 0.2 - 0.1,
 			random.nextDouble() * 0.1 - 0.05
@@ -168,7 +168,7 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 	}
 
 	private fun spawnNiceCloud() {
-		val level = this.level()
+		val level = level()
 		if (level.isServerSide) return
 
 		for (y in -1..1) {
@@ -191,9 +191,9 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 				level.addParticle(
 					DustParticleOptions(Vec3.fromRGB24(color).toVector3f(), 1.0F),
 					true,
-					this.x + elX,
+					x + elX,
 					this.y + y.toFloat() / 8,
-					this.z + elZ,
+					z + elZ,
 					0.0, 0.0, 0.0
 				)
 
@@ -203,10 +203,10 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 
 
 	private fun setWeather() {
-		val duration = (300 + this.random.nextInt(600)) * 20
-		val level = this.level() as? ServerLevel ?: return
+		val duration = (300 + random.nextInt(600)) * 20
+		val level = level() as? ServerLevel ?: return
 
-		when (this.weather) {
+		when (weather) {
 			WeatherEggItem.Weather.SUNNY -> level.setWeatherParameters(duration, 0, false, false)
 			WeatherEggItem.Weather.RAINY -> level.setWeatherParameters(0, duration, true, false)
 			WeatherEggItem.Weather.STORMY -> level.setWeatherParameters(0, duration, true, true)
@@ -220,13 +220,13 @@ class WeatherCloudEntity(entityType: EntityType<*>, level: Level) : Entity(entit
 	}
 
 	override fun readAdditionalSaveData(compound: CompoundTag) {
-		this.age = compound.getInt(AGE_NBT)
-		this.weather = WeatherEggItem.Weather.entries[compound.getInt(WEATHER_NBT)]
+		age = compound.getInt(AGE_NBT)
+		weather = WeatherEggItem.Weather.entries[compound.getInt(WEATHER_NBT)]
 	}
 
 	override fun addAdditionalSaveData(compound: CompoundTag) {
-		compound.putInt(AGE_NBT, this.age)
-		compound.putInt(WEATHER_NBT, this.weather.ordinal)
+		compound.putInt(AGE_NBT, age)
+		compound.putInt(WEATHER_NBT, weather.ordinal)
 	}
 
 	companion object {

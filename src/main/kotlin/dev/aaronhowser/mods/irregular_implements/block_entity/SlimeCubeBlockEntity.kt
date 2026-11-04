@@ -21,30 +21,30 @@ class SlimeCubeBlockEntity(
 
 	override fun onLoad() {
 		super.onLoad()
-		val level = this.level
+		val level = level
 		if (level is SlimeCubeCarrier) {
-			level.getSlimeCubeBlockPositions().add(this.worldPosition.asLong())
+			level.getSlimeCubeBlockPositions().add(worldPosition.asLong())
 		}
 	}
 
 	override fun setRemoved() {
 		super.setRemoved()
-		val level = this.level
+		val level = level
 		if (level is SlimeCubeCarrier) {
-			level.getSlimeCubeBlockPositions().remove(this.worldPosition.asLong())
+			level.getSlimeCubeBlockPositions().remove(worldPosition.asLong())
 		}
 	}
 
 	override fun clearRemoved() {
 		super.clearRemoved()
-		val level = this.level
+		val level = level
 		if (level is SlimeCubeCarrier) {
-			level.getSlimeCubeBlockPositions().add(this.worldPosition.asLong())
+			level.getSlimeCubeBlockPositions().add(worldPosition.asLong())
 		}
 	}
 
 	companion object {
-		fun SlimeCubeCarrier.getSlimeCubeBlockPositions(): LongOpenHashSet = this.`irregular_implements$getSlimeCubeBlockPositions`()
+		fun SlimeCubeCarrier.getSlimeCubeBlockPositions(): LongOpenHashSet = `irregular_implements$getSlimeCubeBlockPositions`()
 
 		fun chunkHasCube(level: Level, pos: BlockPos, powered: Boolean): Boolean {
 			if (level !is SlimeCubeCarrier) return false

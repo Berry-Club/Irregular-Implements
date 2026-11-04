@@ -20,7 +20,7 @@ class EnderAnchorBlockEntity(
 ) : BlockEntity(ModBlockEntityTypes.ENDER_ANCHOR.get(), pos, blockState) {
 
 	private fun clientTick() {
-		val level = this.level ?: return
+		val level = level ?: return
 
 		if (!level.isClientSide) return
 
@@ -72,8 +72,8 @@ class EnderAnchorBlockEntity(
 	}
 
 	companion object {
-		fun EnderAnchorCarrier.getEnderAnchorPositionLongs(): LongOpenHashSet = this.`irregular_implements$getEnderAnchorBlockPositions`()
-		fun EnderAnchorCarrier.getEnderAnchorPositions(): List<BlockPos> = this.getEnderAnchorPositionLongs().map(BlockPos::of)
+		fun EnderAnchorCarrier.getEnderAnchorPositionLongs(): LongOpenHashSet = `irregular_implements$getEnderAnchorBlockPositions`()
+		fun EnderAnchorCarrier.getEnderAnchorPositions(): List<BlockPos> = getEnderAnchorPositionLongs().map(BlockPos::of)
 
 		fun tick(
 			level: Level,

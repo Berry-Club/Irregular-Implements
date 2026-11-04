@@ -31,13 +31,13 @@ class AdvancedRedstoneTorchScreen(
 		val decreaseComponent = Component.literal("-")
 		val increaseComponent = Component.literal("+")
 
-		val leftX = this.guiLeft + 5
-		val rightX = this.rightPos - 5
+		val leftX = guiLeft + 5
+		val rightX = rightPos - 5
 
-		val greenY = this.guiTop + 16
-		val redY = this.guiTop + 39
+		val greenY = guiTop + 16
+		val redY = guiTop + 39
 
-		this.decreaseGreenStrengthButton = Button.Builder(
+		decreaseGreenStrengthButton = Button.Builder(
 			decreaseComponent
 		) {
 			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.DECREASE_GREEN_POWER_BUTTON_ID)
@@ -46,7 +46,7 @@ class AdvancedRedstoneTorchScreen(
 			.bounds(leftX, greenY, 10, 10)
 			.build()
 
-		this.increaseGreenStrengthButton = Button.Builder(
+		increaseGreenStrengthButton = Button.Builder(
 			increaseComponent
 		) {
 			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.INCREASE_GREEN_POWER_BUTTON_ID)
@@ -55,7 +55,7 @@ class AdvancedRedstoneTorchScreen(
 			.bounds(rightX - 10, greenY, 10, 10)
 			.build()
 
-		this.decreaseRedStrengthButton = Button.Builder(
+		decreaseRedStrengthButton = Button.Builder(
 			decreaseComponent
 		) {
 			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.DECREASE_RED_POWER_BUTTON_ID)
@@ -64,7 +64,7 @@ class AdvancedRedstoneTorchScreen(
 			.bounds(leftX, redY, 10, 10)
 			.build()
 
-		this.increaseRedStrengthButton = Button.Builder(
+		increaseRedStrengthButton = Button.Builder(
 			increaseComponent
 		) {
 			val packet = ClientClickedMenuButton(AdvancedRedstoneTorchMenu.INCREASE_RED_POWER_BUTTON_ID)
@@ -82,12 +82,12 @@ class AdvancedRedstoneTorchScreen(
 
 	override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
 
-		val centerX = this.imageWidth / 2
+		val centerX = imageWidth / 2
 
 		val greenStrengthText = ModMessageLang.GREEN_STRENGTH.toComponent()
-		val greenStrength = this.menu.strengthGreen.toString()
+		val greenStrength = menu.strengthGreen.toString()
 		val redStrengthText = ModMessageLang.RED_STRENGTH.toComponent()
-		val redStrength = this.menu.strengthRed.toString()
+		val redStrength = menu.strengthRed.toString()
 
 		guiGraphics.drawString(
 			font,

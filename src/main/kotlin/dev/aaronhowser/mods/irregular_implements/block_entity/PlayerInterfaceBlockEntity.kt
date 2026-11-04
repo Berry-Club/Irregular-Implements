@@ -30,7 +30,7 @@ class PlayerInterfaceBlockEntity(
 	var ownerHead: ItemStack = ItemStack.EMPTY
 
 	private fun getPlayer(): Player? {
-		val level = this.level as? ServerLevel ?: return null
+		val level = level as? ServerLevel ?: return null
 		return level.server.playerList.getPlayer(ownerUuid)
 	}
 
@@ -91,7 +91,7 @@ class PlayerInterfaceBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
-		if (uuid != null) this.ownerUuid = uuid
+		if (uuid != null) ownerUuid = uuid
 
 		if (tag.contains(OWNER_HEAD_NBT)) {
 			ownerHead = ItemStack.parseOptional(registries, tag.getCompound(OWNER_HEAD_NBT))

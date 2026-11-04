@@ -33,7 +33,7 @@ class AdvancedRedstoneInterfaceMenu(
 		for (i in 0 until RedstoneInterfaceAdvancedBlockEntity.CONTAINER_SIZE) {
 			val x = 8 + i * 18
 			val slot = ContainerSlot(interfaceContainer, i, x, y)
-			this.addSlot(slot)
+			addSlot(slot)
 		}
 	}
 

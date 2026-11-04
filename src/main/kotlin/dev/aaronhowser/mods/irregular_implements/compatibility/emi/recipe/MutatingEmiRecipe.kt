@@ -52,12 +52,12 @@ class MutatingEmiRecipe private constructor(
 		}
 
 		fun patternKey(key: Char, patternValue: PatternValue): Builder {
-			this.patternKeys[key] = patternValue
+			patternKeys[key] = patternValue
 			return this
 		}
 
 		fun virtualInput(input: Ingredient): Builder {
-			this.virtualInput.add(EmiIngredient.of(input))
+			virtualInput.add(EmiIngredient.of(input))
 			return this
 		}
 
@@ -66,7 +66,7 @@ class MutatingEmiRecipe private constructor(
 		}
 
 		fun virtualOutputs(vararg output: ItemStack): Builder {
-			this.virtualOutputs.addAll(output)
+			virtualOutputs.addAll(output)
 			return this
 		}
 
@@ -114,8 +114,8 @@ class MutatingEmiRecipe private constructor(
 			val x = i % 3 * 18
 			val y = i / 3 * 18
 
-			val patternChar = this.recipePattern.getOrNull(i)
-			val patternValue = this.patternKeys.getOrDefault(patternChar, PatternValue.EmptyValue)
+			val patternChar = recipePattern.getOrNull(i)
+			val patternValue = patternKeys.getOrDefault(patternChar, PatternValue.EmptyValue)
 
 			when (patternValue) {
 				is PatternValue.EmptyValue -> widgets.addSlot(x, y)

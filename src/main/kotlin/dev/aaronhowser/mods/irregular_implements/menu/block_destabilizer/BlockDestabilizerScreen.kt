@@ -24,7 +24,7 @@ class BlockDestabilizerScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.BLOCK_DESTABILIZER
 
 	override fun baseInit() {
-		this.toggleLazyButton = MultiStageSpriteButton.Builder(this.font)
+		toggleLazyButton = MultiStageSpriteButton.Builder(font)
 			.addStage(
 				message = ModTooltipLang.LAZY.toComponent(),
 				sprite = ScreenTextures.Sprites.BlockDestabilizer.LAZY
@@ -38,7 +38,7 @@ class BlockDestabilizerScreen(
 				height = 20
 			)
 			.currentStageGetter(
-				currentStageGetter = { if (this.menu.isLazy) 0 else 1 }
+				currentStageGetter = { if (menu.isLazy) 0 else 1 }
 			)
 			.onPress(
 				onPress = {
@@ -47,14 +47,14 @@ class BlockDestabilizerScreen(
 				}
 			)
 			.location(
-				x = this.leftPos + 7,
-				y = this.topPos + 7
+				x = leftPos + 7,
+				y = topPos + 7
 			)
 			.build()
 
-		this.showLazyShapeButton = ImprovedSpriteButton(
-			x = this.leftPos + 33,
-			y = this.topPos + 7,
+		showLazyShapeButton = ImprovedSpriteButton(
+			x = leftPos + 33,
+			y = topPos + 7,
 			width = 20,
 			height = 20,
 			menuSprite = ScreenTextures.Sprites.BlockDestabilizer.SHOW_LAZY_SHAPE,
@@ -63,12 +63,12 @@ class BlockDestabilizerScreen(
 				packet.messageServer()
 			},
 			message = ModTooltipLang.SHOW_LAZY_SHAPE.toComponent(),
-			font = this.font
+			font = font
 		)
 
-		this.forgetLazyShapeButton = ImprovedSpriteButton(
-			x = this.leftPos + 58,
-			y = this.topPos + 7,
+		forgetLazyShapeButton = ImprovedSpriteButton(
+			x = leftPos + 58,
+			y = topPos + 7,
 			width = 20,
 			height = 20,
 			menuSprite = ScreenTextures.Sprites.BlockDestabilizer.RESET_LAZY_SHAPE,
@@ -77,12 +77,12 @@ class BlockDestabilizerScreen(
 				packet.messageServer()
 			},
 			message = ModTooltipLang.FORGET_LAZY_SHAPE.toComponent(),
-			font = this.font
+			font = font
 		)
 
-		this.addRenderableWidget(this.toggleLazyButton)
-		this.addRenderableWidget(this.showLazyShapeButton)
-		this.addRenderableWidget(this.forgetLazyShapeButton)
+		addRenderableWidget(toggleLazyButton)
+		addRenderableWidget(showLazyShapeButton)
+		addRenderableWidget(forgetLazyShapeButton)
 	}
 
 	override var showInventoryLabel: Boolean = false

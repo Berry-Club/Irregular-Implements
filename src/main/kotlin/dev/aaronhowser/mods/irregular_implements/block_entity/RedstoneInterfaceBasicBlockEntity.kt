@@ -36,13 +36,13 @@ class RedstoneInterfaceBasicBlockEntity(
 
 	private fun updateLinkedPos() {
 		if (linkedPos == futureLinkedPos) return
-		val level = this.level ?: return
+		val level = level ?: return
 
 		val oldPos = linkedPos
 		if (oldPos != null) {
 			unlinkBlock(
 				level = level,
-				interfacePos = this.blockPos,
+				interfacePos = blockPos,
 				targetPos = oldPos
 			)
 
@@ -54,13 +54,13 @@ class RedstoneInterfaceBasicBlockEntity(
 		if (newPos != null) {
 			linkBlock(
 				level = level,
-				interfacePos = this.blockPos,
+				interfacePos = blockPos,
 				targetPos = newPos
 			)
 
 			updatePos(newPos)
 		} else {
-			removeInterface(level, this.blockPos)
+			removeInterface(level, blockPos)
 		}
 
 		linkedPos = newPos
@@ -68,19 +68,19 @@ class RedstoneInterfaceBasicBlockEntity(
 	}
 
 	override fun updateTargets() {
-		val pos = this.linkedPos ?: return
+		val pos = linkedPos ?: return
 		updatePos(pos)
 	}
 
 	override fun serverTick() {
-		val level = this.level ?: return
+		val level = level ?: return
 		if (level.isClientSide) return
 
 		updateLinkedPos()
 	}
 
 	override fun clientTick() {
-		val level = this.level ?: return
+		val level = level ?: return
 		if (!level.isClientSide) return
 
 		updateLinkedPos()
@@ -89,16 +89,16 @@ class RedstoneInterfaceBasicBlockEntity(
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
 
 		CubeIndicatorRenderer.addIndicator(
-			this.blockPos,
+			blockPos,
 			2,
 			0x32FF0000,
 			size = 0.5f
 		)
 
-		val targetPos = this.linkedPos
+		val targetPos = linkedPos
 		if (targetPos != null) {
 			LineIndicatorRenderer.addIndicator(
-				start = this.blockPos.center,
+				start = blockPos.center,
 				end = targetPos.center,
 				duration = 2,
 				color = 0xFFFF0000.toInt()
@@ -115,12 +115,12 @@ class RedstoneInterfaceBasicBlockEntity(
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
-		this.saveToTag(tag)
+		saveToTag(tag)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
-		this.loadFromTag(tag)
+		loadFromTag(tag)
 	}
 
 }

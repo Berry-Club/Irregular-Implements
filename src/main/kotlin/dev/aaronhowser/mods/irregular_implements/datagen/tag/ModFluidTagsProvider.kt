@@ -18,10 +18,10 @@ class ModFluidTagsProvider(
 ) : FluidTagsProvider(output, lookupProvider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
-		this.tag(ALLOWS_WATER_WALKING)
+		tag(ALLOWS_WATER_WALKING)
 			.addTag(FluidTags.WATER)
 
-		this.tag(ALLOWS_LAVA_WALKING)
+		tag(ALLOWS_LAVA_WALKING)
 			.addTag(FluidTags.LAVA)
 	}
 

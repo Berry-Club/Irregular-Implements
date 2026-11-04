@@ -18,6 +18,7 @@ import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.tags.TagKey
 import net.minecraft.util.StringRepresentable
+import net.minecraft.world.item.Item as MinecraftItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 import kotlin.jvm.optionals.getOrNull
@@ -72,7 +73,7 @@ sealed interface FilterEntry {
 	}
 
 	data class Tag(
-		val tagKey: TagKey<net.minecraft.world.item.Item>,
+		val tagKey: TagKey<MinecraftItem>,
 		val backupStack: ItemStack
 	) : FilterEntry {
 
@@ -80,7 +81,7 @@ sealed interface FilterEntry {
 			return Type.TAG
 		}
 
-		private val displayStacks: MutableMap<net.minecraft.world.item.Item, ItemStack> = mutableMapOf()
+		private val displayStacks: MutableMap<MinecraftItem, ItemStack> = mutableMapOf()
 		private var displayStack: ItemStack? = null
 
 		private var timeLastUpdated = 0L
@@ -111,19 +112,19 @@ sealed interface FilterEntry {
 				}
 			}
 
-			return this.displayStack ?: ItemStack.EMPTY
+			return displayStack ?: ItemStack.EMPTY
 		}
 
-		fun getNextTag(): TagKey<net.minecraft.world.item.Item> {
-			val stackTags = this.backupStack.tags.toList()
-			val currentTagIndex = stackTags.indexOf(this.tagKey)
+		fun getNextTag(): TagKey<MinecraftItem> {
+			val stackTags = backupStack.tags.toList()
+			val currentTagIndex = stackTags.indexOf(tagKey)
 
 			val nextTagIndex = (currentTagIndex + 1) % stackTags.size
 			return stackTags[nextTagIndex]
 		}
 
 		override fun test(stack: ItemStack): Boolean {
-			return stack.isItem(this.tagKey)
+			return stack.isItem(tagKey)
 		}
 
 		fun getAsSpecificItemEntry(): Item {
@@ -166,14 +167,14 @@ sealed interface FilterEntry {
 			return Type.ITEM
 		}
 
-		private val displayStack: ItemStack = this.stack.copy()
+		private val displayStack: ItemStack = stack.copy()
 
 		init {
-			if (this.requireSameComponents) {
+			if (requireSameComponents) {
 				val component = ModTooltipLang.ITEM_FILTER_REQUIRES_SAME_COMPONENTS
 					.toComponent().withStyle(ChatFormatting.RED)
 
-				this.displayStack.set(
+				displayStack.set(
 					DataComponents.LORE,
 					ItemLore(listOf(component))
 				)
@@ -181,11 +182,11 @@ sealed interface FilterEntry {
 		}
 
 		override fun getDisplayStack(registries: HolderLookup.Provider): ItemStack {
-			return this.displayStack
+			return displayStack
 		}
 
 		override fun test(stack: ItemStack): Boolean {
-			return if (this.requireSameComponents) {
+			return if (requireSameComponents) {
 				ItemStack.isSameItemSameComponents(this.stack, stack)
 			} else {
 				ItemStack.isSameItem(this.stack, stack)
@@ -196,15 +197,15 @@ sealed interface FilterEntry {
 			if (this === other) return true
 			if (other !is Item) return false
 
-			if (!ItemStack.isSameItemSameComponents(this.stack, other.stack)) return false
-			if (this.requireSameComponents != other.requireSameComponents) return false
+			if (!ItemStack.isSameItemSameComponents(stack, other.stack)) return false
+			if (requireSameComponents != other.requireSameComponents) return false
 
 			return true
 		}
 
 		override fun hashCode(): Int {
-			var result = this.stack.hashCode()
-			result = 31 * result + this.requireSameComponents.hashCode()
+			var result = stack.hashCode()
+			result = 31 * result + requireSameComponents.hashCode()
 			return result
 		}
 

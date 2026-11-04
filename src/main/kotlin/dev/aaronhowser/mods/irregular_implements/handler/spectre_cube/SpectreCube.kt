@@ -38,7 +38,7 @@ class SpectreCube(
 	constructor(handler: SpectreCubeSavedData, owner: UUID, cubeIndex: Int) : this(handler) {
 		this.owner = owner
 		this.cubeIndex = cubeIndex
-		this.spawnPos = originPos.offset(8, 0, 8)
+		spawnPos = originPos.offset(8, 0, 8)
 	}
 
 	fun toTag(): CompoundTag {

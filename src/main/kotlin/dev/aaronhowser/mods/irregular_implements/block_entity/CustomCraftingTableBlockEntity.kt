@@ -24,7 +24,7 @@ class CustomCraftingTableBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		val blockStateTag = NbtUtils.writeBlockState(this.renderedBlockState)
+		val blockStateTag = NbtUtils.writeBlockState(renderedBlockState)
 		tag.put(RENDERED_BLOCK_STATE, blockStateTag)
 	}
 
@@ -37,7 +37,7 @@ class CustomCraftingTableBlockEntity(
 			blockStateTag
 		)
 
-		this.renderedBlockState = readBlockState
+		renderedBlockState = readBlockState
 	}
 
 	companion object {

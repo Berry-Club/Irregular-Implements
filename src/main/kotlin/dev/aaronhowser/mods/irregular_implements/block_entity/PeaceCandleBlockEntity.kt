@@ -19,7 +19,7 @@ class PeaceCandleBlockEntity(
 ) : BlockEntity(ModBlockEntityTypes.PEACE_CANDLE.get(), pos, blockState) {
 
 	companion object {
-		fun PeaceCandleCarrier.getPeaceCandleChunks(): LongOpenHashSet = this.`irregular_implements$getPeaceCandleChunks`()
+		fun PeaceCandleCarrier.getPeaceCandleChunks(): LongOpenHashSet = `irregular_implements$getPeaceCandleChunks`()
 
 		fun chunkIsPreventingMonsterSpawns(level: LevelReader, blockPos: BlockPos): Boolean {
 			if (!level.isAreaLoaded(blockPos, 1)) return false

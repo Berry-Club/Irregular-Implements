@@ -24,7 +24,7 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
 	var weather: WeatherEggItem.Weather = WeatherEggItem.Weather.SUNNY
 
 	override fun onHit(result: HitResult) {
-		val level = this.level() as? ServerLevel ?: return
+		val level = level() as? ServerLevel ?: return
 
 		val currentWeather = if (level.isRaining) {
 			if (level.isThundering) WeatherEggItem.Weather.STORMY else WeatherEggItem.Weather.RAINY
@@ -32,25 +32,25 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
 			WeatherEggItem.Weather.SUNNY
 		}
 
-		if (currentWeather == this.weather) {
-			val itemEntity = ItemEntity(level, this.x, this.y, this.z, this.item)
+		if (currentWeather == weather) {
+			val itemEntity = ItemEntity(level, x, y, z, item)
 			level.addFreshEntity(itemEntity)
 
-			this.discard()
+			discard()
 			return
 		}
 
-		val weatherCloud = WeatherCloudEntity(level, this.x, this.y, this.z, this.weather)
-		weatherCloud.weather = this.weather
+		val weatherCloud = WeatherCloudEntity(level, x, y, z, weather)
+		weatherCloud.weather = weather
 		level.addFreshEntity(weatherCloud)
 
 		level().broadcastEntityEvent(this, 3.toByte())
-		this.discard()
+		discard()
 	}
 
 	override fun onHitEntity(result: EntityHitResult) {
 		super.onHitEntity(result)
-		result.entity.hurt(damageSources().thrown(this, this.owner), 0f)
+		result.entity.hurt(damageSources().thrown(this, owner), 0f)
 	}
 
 	override fun handleEntityEvent(id: Byte) {
@@ -58,13 +58,13 @@ class ThrownWeatherEggEntity : ThrowableItemProjectile {
 			for (i in 0..7) {
 				level()
 					.addParticle(
-						ItemParticleOption(ParticleTypes.ITEM, this.item),
-						this.x,
-						this.y,
-						this.z,
-						(this.random.nextDouble() - 0.5) * 0.08,
-						(this.random.nextDouble() - 0.5) * 0.08,
-						(this.random.nextDouble() - 0.5) * 0.08
+						ItemParticleOption(ParticleTypes.ITEM, item),
+						x,
+						y,
+						z,
+						(random.nextDouble() - 0.5) * 0.08,
+						(random.nextDouble() - 0.5) * 0.08,
+						(random.nextDouble() - 0.5) * 0.08
 					)
 			}
 		}

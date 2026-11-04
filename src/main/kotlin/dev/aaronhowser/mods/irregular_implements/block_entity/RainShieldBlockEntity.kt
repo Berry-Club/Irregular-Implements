@@ -3,6 +3,9 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.irregular_implements.RainShieldCarrier
 import dev.aaronhowser.mods.irregular_implements.block.RainShieldBlock
 import dev.aaronhowser.mods.irregular_implements.config.ServerConfig
+import dev.aaronhowser.mods.irregular_implements.mixin.BiomeMixin
+import dev.aaronhowser.mods.irregular_implements.mixin.LevelMixin
+import dev.aaronhowser.mods.irregular_implements.mixin.LevelRendererMixin
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
@@ -13,8 +16,8 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
 /**
- * The majority of the logic is in [dev.aaronhowser.mods.irregular_implements.mixin.LevelMixin],
- * but some is also in [dev.aaronhowser.mods.irregular_implements.mixin.BiomeMixin] and [dev.aaronhowser.mods.irregular_implements.mixin.LevelRendererMixin]
+ * The majority of the logic is in [LevelMixin],
+ * but some is also in [BiomeMixin] and [LevelRendererMixin]
  */
 //TODO: particles?
 class RainShieldBlockEntity(
@@ -23,7 +26,7 @@ class RainShieldBlockEntity(
 ) : BlockEntity(ModBlockEntityTypes.RAIN_SHIELD.get(), pos, blockState) {
 
 	companion object {
-		fun RainShieldCarrier.getRainShieldChunks(): LongOpenHashSet = this.`irregular_implements$getRainShieldChunks`()
+		fun RainShieldCarrier.getRainShieldChunks(): LongOpenHashSet = `irregular_implements$getRainShieldChunks`()
 
 		@JvmStatic
 		fun chunkIsProtectedFromRain(level: LevelReader, blockPos: BlockPos): Boolean {

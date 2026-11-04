@@ -31,9 +31,9 @@ class RedstoneObserverBlockEntity(
 	override val syncImmediately: Boolean = true
 
 	override fun setRemoved() {
-		val level = this.level
+		val level = level
 		if (level != null) {
-			removeObserver(level, this.blockPos)
+			removeObserver(level, blockPos)
 		}
 
 		super.setRemoved()
@@ -95,7 +95,7 @@ class RedstoneObserverBlockEntity(
 
 	private fun updateLinkedPos() {
 		if (linkedPos == nextLinkedPos) return
-		val level = this.level ?: return
+		val level = level ?: return
 
 		val oldPos = linkedPos
 		if (oldPos != null) {
@@ -114,14 +114,14 @@ class RedstoneObserverBlockEntity(
 	}
 
 	private fun serverTick() {
-		val level = this.level ?: return
+		val level = level ?: return
 		if (level.isClientSide) return
 
 		updateLinkedPos()
 	}
 
 	private fun clientTick() {
-		val level = this.level ?: return
+		val level = level ?: return
 		if (!level.isClientSide) return
 
 		updateLinkedPos()
@@ -130,16 +130,16 @@ class RedstoneObserverBlockEntity(
 		if (!player.isHolding(ModItems.REDSTONE_TOOL.get())) return
 
 		CubeIndicatorRenderer.addIndicator(
-			this.blockPos,
+			blockPos,
 			2,
 			0x32FF0000,
 			size = 0.5f
 		)
 
-		val targetPos = this.linkedPos
+		val targetPos = linkedPos
 		if (targetPos != null) {
 			LineIndicatorRenderer.addIndicator(
-				start = this.blockPos.center,
+				start = blockPos.center,
 				end = targetPos.center,
 				duration = 2,
 				color = 0xFFFF0000.toInt()

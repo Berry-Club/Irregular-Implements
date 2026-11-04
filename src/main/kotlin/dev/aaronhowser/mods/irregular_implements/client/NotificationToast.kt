@@ -23,16 +23,16 @@ class NotificationToast(
 			return Toast.Visibility.HIDE
 		}
 
-		guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height())
+		guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, width(), height())
 
-		if (this.icon != null) {
-			guiGraphics.renderFakeItem(this.icon, 8, 8)
+		if (icon != null) {
+			guiGraphics.renderFakeItem(icon, 8, 8)
 		}
 
 		val font = toastComponent.minecraft.font
 
-		guiGraphics.drawString(font, this.title, 30, 7, 0xFFFCFC00.toInt(), false)
-		guiGraphics.drawString(font, this.description, 30, 18, 0xFFFCFCFC.toInt(), false)
+		guiGraphics.drawString(font, title, 30, 7, 0xFFFCFC00.toInt(), false)
+		guiGraphics.drawString(font, description, 30, 18, 0xFFFCFCFC.toInt(), false)
 
 		val shouldHide = timeSinceLastVisible.toFloat() >= DISPLAY_TIME * toastComponent.notificationDisplayTimeMultiplier
 

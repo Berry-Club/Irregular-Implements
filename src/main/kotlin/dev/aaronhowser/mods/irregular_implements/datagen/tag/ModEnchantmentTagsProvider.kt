@@ -16,7 +16,7 @@ class ModEnchantmentTagsProvider(
 ) : EnchantmentTagsProvider(output, provider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(p0: HolderLookup.Provider) {
-		this.tag(EnchantmentTags.NON_TREASURE)
+		tag(EnchantmentTags.NON_TREASURE)
 			.add(ModEnchantments.MAGNETIC)
 	}
 

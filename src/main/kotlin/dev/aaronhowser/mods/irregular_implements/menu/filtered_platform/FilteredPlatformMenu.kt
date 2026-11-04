@@ -34,7 +34,7 @@ class FilteredPlatformMenu(
 
 		//TODO: Add an Item Filter outline to the slot background
 		val platformSlot = ContainerSlot(platformContainer, 0, 80, 10)
-		this.addSlot(platformSlot)
+		addSlot(platformSlot)
 	}
 
 	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
@@ -47,11 +47,11 @@ class FilteredPlatformMenu(
 
 		// If the slot is in the platform container
 		if (clickedSlotIndex == 0) {
-			if (!this.moveItemStackTo(stackThere, 1, this.slots.size, true)) {
+			if (!moveItemStackTo(stackThere, 1, slots.size, true)) {
 				return ItemStack.EMPTY
 			}
 		} else {
-			if (this.moveItemStackTo(stackThere, 0, 1, false)) {
+			if (moveItemStackTo(stackThere, 0, 1, false)) {
 				return ItemStack.EMPTY
 			}
 		}

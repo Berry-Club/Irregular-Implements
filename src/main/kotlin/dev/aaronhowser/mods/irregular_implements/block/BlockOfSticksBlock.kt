@@ -69,7 +69,7 @@ class BlockOfSticksBlock(
 	) {
 		val shouldDrop = state.getValue(SHOULD_DROP)
 
-		if (!this.returning) {
+		if (!returning) {
 			level.destroyBlock(pos, shouldDrop)
 			return super.tick(state, level, pos, random)
 		}

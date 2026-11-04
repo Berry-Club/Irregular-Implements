@@ -29,13 +29,13 @@ class IronDropperScreen(
 		val buttonSize = 20
 		val spaceBetween = 5
 
-		val rightButtonX = this.rightPos - spaceBetween - buttonSize - 2
+		val rightButtonX = rightPos - spaceBetween - buttonSize - 2
 		val leftButtonX = rightButtonX - spaceBetween - buttonSize
 
-		val topButtonY = this.topPos + spaceBetween + buttonSize / 2 + spaceBetween
+		val topButtonY = topPos + spaceBetween + buttonSize / 2 + spaceBetween
 		val bottomButtonY = topButtonY + buttonSize + spaceBetween
 
-		this.redstoneModeButton = MultiStageSpriteButton.Builder(this.font)
+		redstoneModeButton = MultiStageSpriteButton.Builder(font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_PULSE.toComponent(),
 				sprite = ScreenTextures.Sprites.IronDropper.REDSTONE_PULSE
@@ -52,7 +52,7 @@ class IronDropperScreen(
 				size = buttonSize
 			)
 			.currentStageGetter(
-				currentStageGetter = { this.menu.redstoneMode.ordinal }
+				currentStageGetter = { menu.redstoneMode.ordinal }
 			)
 			.onPress(
 				onPress = {
@@ -66,7 +66,7 @@ class IronDropperScreen(
 			)
 			.build()
 
-		this.delayButton = MultiStageSpriteButton.Builder(this.font)
+		delayButton = MultiStageSpriteButton.Builder(font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_NO_DELAY.toComponent(),
 				sprite = ScreenTextures.Sprites.IronDropper.PICKUP_ZERO
@@ -83,7 +83,7 @@ class IronDropperScreen(
 				size = buttonSize
 			)
 			.currentStageGetter(
-				currentStageGetter = { this.menu.pickupDelay.ordinal }
+				currentStageGetter = { menu.pickupDelay.ordinal }
 			)
 			.onPress(
 				onPress = {
@@ -97,7 +97,7 @@ class IronDropperScreen(
 			)
 			.build()
 
-		this.shootModeButton = MultiStageSpriteButton.Builder(this.font)
+		shootModeButton = MultiStageSpriteButton.Builder(font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_RANDOM_VELOCITY.toComponent(),
 				sprite = ScreenTextures.Sprites.IronDropper.DIRECTION_RANDOM
@@ -110,7 +110,7 @@ class IronDropperScreen(
 				size = buttonSize
 			)
 			.currentStageGetter(
-				currentStageGetter = { if (this.menu.shouldShootStraight) 1 else 0 }
+				currentStageGetter = { if (menu.shouldShootStraight) 1 else 0 }
 			)
 			.onPress(
 				onPress = {
@@ -124,7 +124,7 @@ class IronDropperScreen(
 			)
 			.build()
 
-		this.toggleEffectButton = MultiStageSpriteButton.Builder(this.font)
+		toggleEffectButton = MultiStageSpriteButton.Builder(font)
 			.addStage(
 				message = ModTooltipLang.IRON_DROPPER_NO_EFFECTS.toComponent(),
 				sprite = null
@@ -145,7 +145,7 @@ class IronDropperScreen(
 				size = buttonSize
 			)
 			.currentStageGetter(
-				currentStageGetter = { this.menu.shouldHaveEffects.ordinal }
+				currentStageGetter = { menu.shouldHaveEffects.ordinal }
 			)
 			.onPress(
 				onPress = {
@@ -159,10 +159,10 @@ class IronDropperScreen(
 			)
 			.build()
 
-		this.addRenderableWidget(this.shootModeButton)
-		this.addRenderableWidget(this.toggleEffectButton)
-		this.addRenderableWidget(this.delayButton)
-		this.addRenderableWidget(this.redstoneModeButton)
+		addRenderableWidget(shootModeButton)
+		addRenderableWidget(toggleEffectButton)
+		addRenderableWidget(delayButton)
+		addRenderableWidget(redstoneModeButton)
 	}
 
 }

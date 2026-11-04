@@ -25,9 +25,9 @@ class NotificationInterfaceScreen(
 
 	override fun baseInit() {
 		val title = EditBox(
-			this.font,
-			this.leftPos + 34,
-			this.topPos + 15,
+			font,
+			leftPos + 34,
+			topPos + 15,
 			130,
 			15,
 			Component.empty()
@@ -37,12 +37,12 @@ class NotificationInterfaceScreen(
 
 		title.setResponder(::setTitle)
 
-		this.titleEditBox = title
+		titleEditBox = title
 
 		val description = EditBox(
-			this.font,
-			this.leftPos + 34,
-			this.topPos + 18 + 22,
+			font,
+			leftPos + 34,
+			topPos + 18 + 22,
 			130,
 			15,
 			Component.empty()
@@ -52,10 +52,10 @@ class NotificationInterfaceScreen(
 
 		description.setResponder(::setDescription)
 
-		this.descriptionEditBox = description
+		descriptionEditBox = description
 
-		this.addRenderableWidget(this.titleEditBox)
-		this.addRenderableWidget(this.descriptionEditBox)
+		addRenderableWidget(titleEditBox)
+		addRenderableWidget(descriptionEditBox)
 	}
 
 	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
@@ -88,14 +88,14 @@ class NotificationInterfaceScreen(
 	}
 
 	private fun setTitle(title: String) {
-		if (this.menu.setTitle(title)) {
+		if (menu.setTitle(title)) {
 			val packet = ClientChangedMenuString(NotificationInterfaceMenu.TITLE_STRING_ID, title)
 			packet.messageServer()
 		}
 	}
 
 	private fun setDescription(description: String) {
-		if (this.menu.setDescription(description)) {
+		if (menu.setDescription(description)) {
 			val packet = ClientChangedMenuString(NotificationInterfaceMenu.DESCRIPTION_STRING_ID, description)
 			packet.messageServer()
 		}
@@ -105,8 +105,8 @@ class NotificationInterfaceScreen(
 
 	override fun receivedString(stringId: Int, stringReceived: String) {
 		when (stringId) {
-			NotificationInterfaceMenu.TITLE_STRING_ID -> this.titleEditBox.value = stringReceived
-			NotificationInterfaceMenu.DESCRIPTION_STRING_ID -> this.descriptionEditBox.value = stringReceived
+			NotificationInterfaceMenu.TITLE_STRING_ID -> titleEditBox.value = stringReceived
+			NotificationInterfaceMenu.DESCRIPTION_STRING_ID -> descriptionEditBox.value = stringReceived
 		}
 	}
 }

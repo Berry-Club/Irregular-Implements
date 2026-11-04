@@ -30,14 +30,14 @@ class ImbuingRecipe(
 		val outerItems = input.getOuterItems()
 		val innerItem = input.getCenterItem()
 
-		if (outerItems.size != this.outerIngredients.size) return false
-		if (!this.centerIngredient.test(innerItem)) return false
+		if (outerItems.size != outerIngredients.size) return false
+		if (!centerIngredient.test(innerItem)) return false
 
 		// outer item order shouldn't matter
 
 		val missingOuterItems = outerItems.toMutableList()
 
-		for (outerIngredient in this.outerIngredients) {
+		for (outerIngredient in outerIngredients) {
 
 			val iterator = missingOuterItems.iterator()
 			var found = false
@@ -58,7 +58,7 @@ class ImbuingRecipe(
 	}
 
 	override fun assemble(input: ImbuingInput, registries: HolderLookup.Provider): ItemStack {
-		return this.output.copy()
+		return output.copy()
 	}
 
 	override fun canCraftInDimensions(width: Int, height: Int): Boolean {
@@ -66,7 +66,7 @@ class ImbuingRecipe(
 	}
 
 	override fun getResultItem(registries: HolderLookup.Provider): ItemStack {
-		return this.output.copy()
+		return output.copy()
 	}
 
 	override fun getSerializer(): RecipeSerializer<*> {

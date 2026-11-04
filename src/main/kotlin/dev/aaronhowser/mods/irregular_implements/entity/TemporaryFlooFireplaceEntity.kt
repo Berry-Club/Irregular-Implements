@@ -34,16 +34,16 @@ class TemporaryFlooFireplaceEntity(
 
 		age++
 
-		val level = this.level()
+		val level = level()
 
 		if (isClientSide && age > 7) {
 			for (i in 0 until 40) {
 				val iProgress = i.toDouble() / 40
-				val x = this.x - 1 + iProgress * 2
+				val x = x - 1 + iProgress * 2
 
 				for (j in 0 until 40) {
 					val jProgress = j.toDouble() / 40
-					val z = this.z - 1 + jProgress * 2
+					val z = z - 1 + jProgress * 2
 
 					level.addParticle(
 						ModParticleTypes.FLOO_FLAME.get(),

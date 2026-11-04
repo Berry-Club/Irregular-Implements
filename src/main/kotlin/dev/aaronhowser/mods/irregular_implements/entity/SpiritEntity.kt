@@ -67,15 +67,15 @@ class SpiritEntity(
 	}
 
 	private fun spawnParticles() {
-		if (!this.isClientSide) return
+		if (!isClientSide) return
 
 		// Only spawn particles if it moved
-		if (this.x == this.xOld && this.y == this.yOld && this.z == this.zOld) return
+		if (x == xOld && y == yOld && z == zOld) return
 
 		if (random.nextFloat() < 0.5) {
 			level().addParticle(
 				ParticleTypes.ENCHANT,
-				this.x, this.y, this.z,
+				x, y, z,
 				random.nextRange(-0.01, 0.01),
 				random.nextRange(0.0, 0.02),
 				random.nextRange(-0.01, 0.01)
@@ -107,7 +107,7 @@ class SpiritEntity(
 				val modVec = spawnPos.center.add(modX, modZ, modY)
 				val modPos = BlockPos.containing(modVec)
 
-				if (this.level().getBlockState(modPos).isAir) {
+				if (level().getBlockState(modPos).isAir) {
 					newTarget = modVec
 				}
 			}
@@ -132,7 +132,7 @@ class SpiritEntity(
 	}
 
 	private fun ageAndDie() {
-		if (this.hasCustomName()) return
+		if (hasCustomName()) return
 		age++
 
 		if (age > ServerConfig.CONFIG.spiritMaxAge.get()) {

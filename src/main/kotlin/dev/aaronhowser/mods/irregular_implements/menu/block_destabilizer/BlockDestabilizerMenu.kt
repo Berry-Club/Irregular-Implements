@@ -23,7 +23,7 @@ class BlockDestabilizerMenu(
 			)
 
 	init {
-		this.addDataSlots(containerData)
+		addDataSlots(containerData)
 	}
 
 	val isLazy: Boolean

@@ -26,9 +26,9 @@ class GlobalChatDetectorScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.GLOBAL_CHAT_DETECTOR
 
 	override fun baseInit() {
-		this.inventoryLabelY -= 8
+		inventoryLabelY -= 8
 
-		this.toggleMessagePassButton = MultiStageSpriteButton.Builder(this.font)
+		toggleMessagePassButton = MultiStageSpriteButton.Builder(font)
 			.addStage(
 				message = ModTooltipLang.STOPS_MESSAGE.toComponent(),
 				sprite = ScreenTextures.Sprites.ChatDetector.MESSAGE_BREAK
@@ -42,7 +42,7 @@ class GlobalChatDetectorScreen(
 				height = 20
 			)
 			.currentStageGetter(
-				currentStageGetter = { if (this.menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
+				currentStageGetter = { if (menu.shouldMessageStop) 0 else 1 }    // 1 means it stops messages
 			)
 			.onPress(
 				onPress = {
@@ -52,40 +52,40 @@ class GlobalChatDetectorScreen(
 			)
 			.build()
 
-		this.toggleMessagePassButton.setPosition(
-			this.rightPos - this.toggleMessagePassButton.width - 5,
-			this.topPos + 5
+		toggleMessagePassButton.setPosition(
+			rightPos - toggleMessagePassButton.width - 5,
+			topPos + 5
 		)
 
-		val screenWidth = this.rightPos - this.leftPos
+		val screenWidth = rightPos - leftPos
 
-		this.regexStringEditBox = EditBox(
-			this.font,
-			this.leftPos + 5,
-			this.topPos - 5 + 20,
+		regexStringEditBox = EditBox(
+			font,
+			leftPos + 5,
+			topPos - 5 + 20,
 			screenWidth - 5 - 5 - 20 - 5,
 			20,
 			ModTooltipLang.MESSAGE_REGEX.toComponent()
 		)
 
-		this.regexStringEditBox.setCanLoseFocus(false)
-		this.regexStringEditBox.setTextColor(-1)
-		this.regexStringEditBox.setTextColorUneditable(-1)
-		this.regexStringEditBox.setResponder(::setRegexString)
-		this.regexStringEditBox.setMaxLength(10000)
+		regexStringEditBox.setCanLoseFocus(false)
+		regexStringEditBox.setTextColor(-1)
+		regexStringEditBox.setTextColorUneditable(-1)
+		regexStringEditBox.setResponder(::setRegexString)
+		regexStringEditBox.setMaxLength(10000)
 
-		addRenderableWidget(this.toggleMessagePassButton)
-		addRenderableWidget(this.regexStringEditBox)
+		addRenderableWidget(toggleMessagePassButton)
+		addRenderableWidget(regexStringEditBox)
 	}
 
 	// Behavior
 
 	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
 		if (keyCode == 256) {
-			this.minecraft?.player?.closeContainer()
+			minecraft?.player?.closeContainer()
 		}
 
-		return if (!this.regexStringEditBox.keyPressed(keyCode, scanCode, modifiers) && !this.regexStringEditBox.canConsumeInput()) {
+		return if (!regexStringEditBox.keyPressed(keyCode, scanCode, modifiers) && !regexStringEditBox.canConsumeInput()) {
 			super.keyPressed(keyCode, scanCode, modifiers)
 		} else {
 			true
@@ -93,13 +93,13 @@ class GlobalChatDetectorScreen(
 	}
 
 	override fun resize(minecraft: Minecraft, width: Int, height: Int) {
-		val currentRegexString = this.regexStringEditBox.value
+		val currentRegexString = regexStringEditBox.value
 		super.resize(minecraft, width, height)
-		this.regexStringEditBox.value = currentRegexString
+		regexStringEditBox.value = currentRegexString
 	}
 
 	private fun setRegexString(string: String) {
-		if (this.menu.setRegex(string)) {
+		if (menu.setRegex(string)) {
 			val packet = ClientChangedMenuString(GlobalChatDetectorMenu.REGEX_STRING_ID, string)
 			packet.messageServer()
 		}
@@ -107,7 +107,7 @@ class GlobalChatDetectorScreen(
 
 	override fun receivedString(stringId: Int, stringReceived: String) {
 		if (stringId == GlobalChatDetectorMenu.REGEX_STRING_ID) {
-			this.regexStringEditBox.value = stringReceived
+			regexStringEditBox.value = stringReceived
 		}
 	}
 

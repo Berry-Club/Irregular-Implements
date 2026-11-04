@@ -26,15 +26,15 @@ class SpectreEnergyInjectorBlockEntity(
 		}
 
 	fun getEnergyHandler(direction: Direction?): IEnergyStorage? {
-		val level = this.level as? ServerLevel ?: return null
+		val level = level as? ServerLevel ?: return null
 
-		return SpectreEnergyHandler.get(level).getEnergyInjector(this.ownerUuid)
+		return SpectreEnergyHandler.get(level).getEnergyInjector(ownerUuid)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putUUID(OWNER_UUID_NBT, this.ownerUuid)
+		tag.putUUID(OWNER_UUID_NBT, ownerUuid)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -42,7 +42,7 @@ class SpectreEnergyInjectorBlockEntity(
 
 		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
 		if (uuid != null) {
-			this.ownerUuid = uuid
+			ownerUuid = uuid
 		}
 	}
 

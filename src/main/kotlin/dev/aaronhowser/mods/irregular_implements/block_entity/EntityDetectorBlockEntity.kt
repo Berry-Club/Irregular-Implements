@@ -138,7 +138,7 @@ class EntityDetectorBlockEntity(
 			override fun getCount(): Int = CONTAINER_DATA_SIZE
 		}
 
-	override fun getDisplayName(): Component = this.blockState.block.name
+	override fun getDisplayName(): Component = blockState.block.name
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		return EntityDetectorMenu(containerId, playerInventory, container, containerData)

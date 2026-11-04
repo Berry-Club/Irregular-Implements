@@ -73,12 +73,12 @@ class AutoPlacerBlockEntity(
 	private fun initFakePlayer() {
 		val level = level as? ServerLevel ?: return
 
-		if (this.uuid == null) {
-			this.uuid = UUID.randomUUID()
+		if (uuid == null) {
+			uuid = UUID.randomUUID()
 			setChanged()
 		}
 
-		val gameProfile = GameProfile(this.uuid, FAKE_PLAYER_NAME)
+		val gameProfile = GameProfile(uuid, FAKE_PLAYER_NAME)
 		val fakePlayer = FakePlayerFactory.get(level, gameProfile)
 
 		fakePlayer.isSilent = true
@@ -92,15 +92,15 @@ class AutoPlacerBlockEntity(
 		val stackToPlace = container.getItem(0)
 		if (stackToPlace.isEmpty) return
 
-		val level = this.level ?: return
+		val level = level ?: return
 
-		val direction = this.blockState.getValue(AutoPlacerBlock.FACING)
+		val direction = blockState.getValue(AutoPlacerBlock.FACING)
 		val targetPos = worldPosition.relative(direction)
 
 		val blockThere = level.getBlockState(targetPos)
 		if (!blockThere.canBeReplaced()) return
 
-		val fakePlayer = this.fakePlayer?.get() ?: return
+		val fakePlayer = fakePlayer?.get() ?: return
 		fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, stackToPlace)
 
 		if (!fakePlayer.mayUseItemAt(targetPos, direction.opposite, stackToPlace)) return
@@ -118,7 +118,7 @@ class AutoPlacerBlockEntity(
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {

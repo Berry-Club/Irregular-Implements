@@ -18,7 +18,7 @@ class ModEntityTypeTagsProvider(
 ) : EntityTypeTagsProvider(output, provider, IrregularImplements.MOD_ID, existingFileHelper) {
 
 	override fun addTags(provider: HolderLookup.Provider) {
-		this.tag(SUMMONING_PENDULUM_BLACKLIST)
+		tag(SUMMONING_PENDULUM_BLACKLIST)
 			.add(
 				EntityType.PLAYER
 			)

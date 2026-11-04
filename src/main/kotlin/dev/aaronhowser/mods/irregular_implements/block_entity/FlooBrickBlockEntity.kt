@@ -39,7 +39,7 @@ class FlooBrickBlockEntity(
 		private set
 
 	fun setupMaster(uuid: UUID, facing: Direction, children: List<BlockPos>) {
-		this.isMaster = true
+		isMaster = true
 		this.uuid = uuid
 		this.facing = facing
 		this.children = children
@@ -47,7 +47,7 @@ class FlooBrickBlockEntity(
 	}
 
 	fun setupChild(masterUUID: UUID) {
-		this.isMaster = false
+		isMaster = false
 		this.masterUUID = masterUUID
 		setChanged()
 	}
@@ -62,7 +62,7 @@ class FlooBrickBlockEntity(
 
 			level.setBlockAndUpdate(worldPosition, Blocks.BRICKS.defaultBlockState())
 
-			val uuid = this.uuid
+			val uuid = uuid
 			if (uuid != null) {
 				val network = FlooNetworkSavedData.get(level)
 				network.removeFireplace(uuid)
@@ -83,7 +83,7 @@ class FlooBrickBlockEntity(
 		tag.putBoolean(IS_MASTER_TAG, isMaster)
 
 		if (isMaster) {
-			val uuid = this.uuid
+			val uuid = uuid
 			if (uuid != null) tag.putUUID(UUID_TAG, uuid)
 			tag.putInt(FACING_TAG, facing.ordinal)
 

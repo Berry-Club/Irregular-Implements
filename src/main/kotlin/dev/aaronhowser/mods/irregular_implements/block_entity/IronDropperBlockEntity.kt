@@ -126,16 +126,16 @@ class IronDropperBlockEntity(
 	val dispenseBehavior: DefaultDispenseItemBehavior = IronDropperDispenseBehavior()
 
 	private fun tick() {
-		val level = this.level as? ServerLevel ?: return
+		val level = level as? ServerLevel ?: return
 
 		val shouldDispense = level.gameTime % 4 == 0L && (
-				this.redstoneMode == RedstoneMode.CONTINUOUS ||
-						(this.redstoneMode == RedstoneMode.CONTINUOUS_POWERED && level.hasNeighborSignal(this.worldPosition))
+				redstoneMode == RedstoneMode.CONTINUOUS ||
+						(redstoneMode == RedstoneMode.CONTINUOUS_POWERED && level.hasNeighborSignal(worldPosition))
 				)
 
 		if (!shouldDispense) return
 
-		ModBlocks.IRON_DROPPER.get().dispenseFrom(level, this.blockState, this.worldPosition)
+		ModBlocks.IRON_DROPPER.get().dispenseFrom(level, blockState, worldPosition)
 	}
 
 	override fun getDefaultName(): Component {
@@ -149,19 +149,19 @@ class IronDropperBlockEntity(
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.saveAdditional(tag, registries)
 
-		tag.putBoolean(SHOOT_STRAIGHT_NBT, this.shouldShootStraight)
-		tag.putInt(EFFECTS_MODE_NBT, this.effectsMode.ordinal)
-		tag.putInt(PICKUP_DELAY_NBT, this.pickupDelay.ordinal)
-		tag.putInt(REDSTONE_MODE_NBT, this.redstoneMode.ordinal)
+		tag.putBoolean(SHOOT_STRAIGHT_NBT, shouldShootStraight)
+		tag.putInt(EFFECTS_MODE_NBT, effectsMode.ordinal)
+		tag.putInt(PICKUP_DELAY_NBT, pickupDelay.ordinal)
+		tag.putInt(REDSTONE_MODE_NBT, redstoneMode.ordinal)
 	}
 
 	override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
 		super.loadAdditional(tag, registries)
 
-		this.shouldShootStraight = tag.getBoolean(SHOOT_STRAIGHT_NBT)
-		this.effectsMode = EffectsMode.entries[tag.getInt(EFFECTS_MODE_NBT)]
-		this.pickupDelay = PickupDelay.entries[tag.getInt(PICKUP_DELAY_NBT)]
-		this.redstoneMode = RedstoneMode.entries[tag.getInt(REDSTONE_MODE_NBT)]
+		shouldShootStraight = tag.getBoolean(SHOOT_STRAIGHT_NBT)
+		effectsMode = EffectsMode.entries[tag.getInt(EFFECTS_MODE_NBT)]
+		pickupDelay = PickupDelay.entries[tag.getInt(PICKUP_DELAY_NBT)]
+		redstoneMode = RedstoneMode.entries[tag.getInt(REDSTONE_MODE_NBT)]
 	}
 
 	// Syncs with client

@@ -113,7 +113,7 @@ class BiomeRadarBlockEntity(
 		val direction = if (biomePos == null) {
 			Vec3.ZERO
 		} else {
-			this.blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03).scale(flameProgress)
+			blockPos.center.vectorTo(biomePos.center).normalize().scale(0.03).scale(flameProgress)
 		}
 
 		val colorInt = if (biomePos == null) {

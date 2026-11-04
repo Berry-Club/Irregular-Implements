@@ -25,20 +25,20 @@ open class ItemCollectorBlockEntity(
 	constructor(pos: BlockPos, blockState: BlockState) : this(ModBlockEntityTypes.ITEM_COLLECTOR.get(), pos, blockState)
 
 	protected fun tick() {
-		val level = this.level ?: return
+		val level = level ?: return
 		if (level.isClientSide || level.gameTime % 5 != 0L) return
 
-		val facing = this.blockState.getValue(ItemCollectorBlock.FACING)
-		val onPos = this.blockPos.relative(facing)
+		val facing = blockState.getValue(ItemCollectorBlock.FACING)
+		val onPos = blockPos.relative(facing)
 
 		val itemHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, onPos, facing.opposite) ?: return
 
 		val itemEntities = level.getEntitiesOfClass(
 			ItemEntity::class.java,
-			this.getCollectionArea(),
+			getCollectionArea(),
 		)
 
-		val filter = this.getFilter()
+		val filter = getFilter()
 
 		for (itemEntity in itemEntities) {
 			if (itemEntity.target != null || itemEntity.hasPickUpDelay()) continue
@@ -54,7 +54,7 @@ open class ItemCollectorBlockEntity(
 
 			level.playSound(
 				null,
-				this.blockPos,
+				blockPos,
 				SoundEvents.ITEM_PICKUP,
 				SoundSource.BLOCKS,
 				0.2f,
@@ -74,7 +74,7 @@ open class ItemCollectorBlockEntity(
 	}
 
 	open fun getCollectionArea(): AABB {
-		val pos = this.blockPos
+		val pos = blockPos
 		val radius = 3.0
 		return AABB.ofSize(
 			pos.center,

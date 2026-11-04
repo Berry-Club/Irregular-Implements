@@ -14,7 +14,7 @@ class SpecialChestBlockEntity(
 ) : ChestBlockEntity(type, pos, state) {
 
 	override fun getDefaultName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	companion object {

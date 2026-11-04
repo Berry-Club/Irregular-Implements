@@ -41,10 +41,10 @@ class ChatDetectorBlockEntity(
 		}
 
 	fun sendStringUpdate() {
-		val level = this.level as? ServerLevel ?: return
+		val level = level as? ServerLevel ?: return
 
-		val packet = UpdateClientScreenString(GlobalChatDetectorMenu.REGEX_STRING_ID, this.regexString)
-		packet.messageNearbyPlayers(level, this.blockPos.center, 16.0)
+		val packet = UpdateClientScreenString(GlobalChatDetectorMenu.REGEX_STRING_ID, regexString)
+		packet.messageNearbyPlayers(level, blockPos.center, 16.0)
 	}
 
 	var stopsMessage = false
@@ -63,25 +63,25 @@ class ChatDetectorBlockEntity(
 	 * @return true if the message should be stopped
 	 */
 	fun processMessage(player: Player, message: Component): Boolean {
-		if (this.regexString.isEmpty() || player.uuid != this.ownerUuid) return false
+		if (regexString.isEmpty() || player.uuid != ownerUuid) return false
 
 		val messageString = message.string
-		val regex = this.regexString.toRegex()
+		val regex = regexString.toRegex()
 
 		if (regex.containsMatchIn(messageString)) {
 			pulse()
-			if (this.stopsMessage) return true
+			if (stopsMessage) return true
 		}
 
 		return false
 	}
 
 	private fun pulse() {
-		this.timeOn = 20 * 3
+		timeOn = 20 * 3
 
-		this.level?.setBlockAndUpdate(
-			this.blockPos,
-			this.blockState.setValue(ChatDetectorBlock.ENABLED, true)
+		level?.setBlockAndUpdate(
+			blockPos,
+			blockState.setValue(ChatDetectorBlock.ENABLED, true)
 		)
 	}
 
@@ -89,11 +89,11 @@ class ChatDetectorBlockEntity(
 		super.loadAdditional(tag, registries)
 
 		val uuid = tag.getUuidOrNull(OWNER_UUID_NBT)
-		if (uuid != null) this.ownerUuid = uuid
+		if (uuid != null) ownerUuid = uuid
 
-		this.regexString = tag.getString(MESSAGE_REGEX_NBT)
-		this.stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
-		this.timeOn = tag.getInt(TIME_ON_NBT)
+		regexString = tag.getString(MESSAGE_REGEX_NBT)
+		stopsMessage = tag.getBoolean(STOPS_MESSAGE_NBT)
+		timeOn = tag.getInt(TIME_ON_NBT)
 	}
 
 	override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
@@ -107,7 +107,7 @@ class ChatDetectorBlockEntity(
 
 	override fun onLoad() {
 		super.onLoad()
-		if (!this.level?.isClientSide.isTrue()) detectors.add(this)
+		if (!level?.isClientSide.isTrue()) detectors.add(this)
 	}
 
 	// Menu stuff
@@ -131,11 +131,11 @@ class ChatDetectorBlockEntity(
 
 	override fun createMenu(containerId: Int, playerInventory: Inventory, player: Player): AbstractContainerMenu {
 		sendStringUpdate()
-		return ChatDetectorMenu(containerId, this.containerData, ContainerLevelAccess.create(this.level!!, this.blockPos))
+		return ChatDetectorMenu(containerId, containerData, ContainerLevelAccess.create(level!!, blockPos))
 	}
 
 	override fun getDisplayName(): Component {
-		return this.blockState.block.name
+		return blockState.block.name
 	}
 
 	companion object {

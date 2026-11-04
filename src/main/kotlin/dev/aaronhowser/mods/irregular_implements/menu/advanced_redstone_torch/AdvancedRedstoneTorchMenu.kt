@@ -23,7 +23,7 @@ class AdvancedRedstoneTorchMenu(
 
 	init {
 		checkContainerDataCount(containerData, AdvancedRedstoneTorchBlockEntity.CONTAINER_DATA_SIZE)
-		addDataSlots(this.containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun quickMoveStack(player: Player, index: Int): ItemStack = ItemStack.EMPTY

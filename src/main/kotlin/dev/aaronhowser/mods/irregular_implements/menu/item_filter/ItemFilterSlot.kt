@@ -34,11 +34,11 @@ class ItemFilterSlot(
 		val newFilter = stackFilter.toMutableList()
 		newFilter[index] = FilterEntry.Empty
 
-		this.filterStackGetter.get().set(
+		filterStackGetter.get().set(
 			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(
 				newFilter,
-				this.stackComponent?.isBlacklist ?: false
+				stackComponent?.isBlacklist ?: false
 			)
 		)
 
@@ -47,21 +47,21 @@ class ItemFilterSlot(
 
 	override fun safeInsert(stack: ItemStack): ItemStack {
 		if (stack.isEmpty) return stack
-		if (this.entryInThisSlot !is FilterEntry.Empty && this.entryInThisSlot != null) return stack
+		if (entryInThisSlot !is FilterEntry.Empty && entryInThisSlot != null) return stack
 
 		val oldFilter = stackFilter ?: return stack
 		val newFilter = ItemFilterDataComponent.sanitizeEntries(oldFilter).toMutableList()
 
-		newFilter[this.index] = FilterEntry.Item(
+		newFilter[index] = FilterEntry.Item(
 			stack.copyWithCount(1),
 			requireSameComponents = false
 		)
 
-		this.filterStackGetter.get().set(
+		filterStackGetter.get().set(
 			ModDataComponents.ITEM_FILTER,
 			ItemFilterDataComponent(
 				newFilter,
-				this.stackComponent?.isBlacklist ?: false
+				stackComponent?.isBlacklist ?: false
 			)
 		)
 

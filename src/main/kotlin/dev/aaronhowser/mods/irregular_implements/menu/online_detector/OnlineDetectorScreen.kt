@@ -23,21 +23,21 @@ class OnlineDetectorScreen(
 	override fun baseInit() {
 		val editBoxHeight = 20
 
-		this.usernameEditBox = EditBox(
-			this.font,
-			this.leftPos + 5,
-			this.bottomPos - 5 - editBoxHeight,
-			this.imageWidth - 5 - 5,
+		usernameEditBox = EditBox(
+			font,
+			leftPos + 5,
+			bottomPos - 5 - editBoxHeight,
+			imageWidth - 5 - 5,
 			editBoxHeight,
 			Component.empty()
 		)
 
-		this.usernameEditBox.setCanLoseFocus(false)
-		this.usernameEditBox.setTextColor(-1)
-		this.usernameEditBox.setTextColorUneditable(-1)
-		this.usernameEditBox.setResponder(::setUsername)
+		usernameEditBox.setCanLoseFocus(false)
+		usernameEditBox.setTextColor(-1)
+		usernameEditBox.setTextColorUneditable(-1)
+		usernameEditBox.setResponder(::setUsername)
 
-		this.addRenderableWidget(this.usernameEditBox)
+		addRenderableWidget(usernameEditBox)
 	}
 
 	override var showInventoryLabel: Boolean = false
@@ -46,10 +46,10 @@ class OnlineDetectorScreen(
 
 	override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
 		if (keyCode == 256) {
-			this.minecraft?.player?.closeContainer()
+			minecraft?.player?.closeContainer()
 		}
 
-		return if (!this.usernameEditBox.keyPressed(keyCode, scanCode, modifiers) && !this.usernameEditBox.canConsumeInput()) {
+		return if (!usernameEditBox.keyPressed(keyCode, scanCode, modifiers) && !usernameEditBox.canConsumeInput()) {
 			super.keyPressed(keyCode, scanCode, modifiers)
 		} else {
 			true
@@ -57,13 +57,13 @@ class OnlineDetectorScreen(
 	}
 
 	override fun resize(minecraft: Minecraft, width: Int, height: Int) {
-		val currentRegexString = this.usernameEditBox.value
+		val currentRegexString = usernameEditBox.value
 		super.resize(minecraft, width, height)
-		this.usernameEditBox.value = currentRegexString
+		usernameEditBox.value = currentRegexString
 	}
 
 	private fun setUsername(string: String) {
-		if (this.menu.setUsername(string)) {
+		if (menu.setUsername(string)) {
 			val packet = ClientChangedMenuString(OnlineDetectorMenu.USERNAME_STRING_ID, string)
 			packet.messageServer()
 		}
@@ -71,7 +71,7 @@ class OnlineDetectorScreen(
 
 	override fun receivedString(stringId: Int, stringReceived: String) {
 		if (stringId == OnlineDetectorMenu.USERNAME_STRING_ID) {
-			this.usernameEditBox.value = stringReceived
+			usernameEditBox.value = stringReceived
 		}
 	}
 

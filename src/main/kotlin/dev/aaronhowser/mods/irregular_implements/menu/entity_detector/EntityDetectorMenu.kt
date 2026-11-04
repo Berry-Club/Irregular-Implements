@@ -35,12 +35,12 @@ class EntityDetectorMenu(
 		addSlots(153)
 
 		checkContainerDataCount(containerData, EntityDetectorBlockEntity.CONTAINER_DATA_SIZE)
-		this.addDataSlots(this.containerData)
+		addDataSlots(containerData)
 	}
 
 	override fun addContainerSlots() {
 		val slot = ContainerSlot(container, 0, 80, 122)
-		this.addSlot(slot)
+		addSlot(slot)
 	}
 
 	override fun quickMoveStack(player: Player, clickedSlotIndex: Int): ItemStack {
@@ -48,28 +48,28 @@ class EntityDetectorMenu(
 	}
 
 	override fun stillValid(player: Player): Boolean {
-		return this.container.stillValid(player)
+		return container.stillValid(player)
 	}
 
 	var xRadius: Int
-		get() = this.containerData.get(EntityDetectorBlockEntity.X_RADIUS_INDEX)
-		private set(value) = this.containerData.set(EntityDetectorBlockEntity.X_RADIUS_INDEX, value)
+		get() = containerData.get(EntityDetectorBlockEntity.X_RADIUS_INDEX)
+		private set(value) = containerData.set(EntityDetectorBlockEntity.X_RADIUS_INDEX, value)
 
 	var yRadius: Int
-		get() = this.containerData.get(EntityDetectorBlockEntity.Y_RADIUS_INDEX)
-		private set(value) = this.containerData.set(EntityDetectorBlockEntity.Y_RADIUS_INDEX, value)
+		get() = containerData.get(EntityDetectorBlockEntity.Y_RADIUS_INDEX)
+		private set(value) = containerData.set(EntityDetectorBlockEntity.Y_RADIUS_INDEX, value)
 
 	var zRadius: Int
-		get() = this.containerData.get(EntityDetectorBlockEntity.Z_RADIUS_INDEX)
-		private set(value) = this.containerData.set(EntityDetectorBlockEntity.Z_RADIUS_INDEX, value)
+		get() = containerData.get(EntityDetectorBlockEntity.Z_RADIUS_INDEX)
+		private set(value) = containerData.set(EntityDetectorBlockEntity.Z_RADIUS_INDEX, value)
 
 	var isInverted: Boolean
-		get() = this.containerData.get(EntityDetectorBlockEntity.INVERTED_INDEX) != 0
-		private set(value) = this.containerData.set(EntityDetectorBlockEntity.INVERTED_INDEX, if (value) 1 else 0)
+		get() = containerData.get(EntityDetectorBlockEntity.INVERTED_INDEX) != 0
+		private set(value) = containerData.set(EntityDetectorBlockEntity.INVERTED_INDEX, if (value) 1 else 0)
 
 	var filterOrdinal: Int
-		get() = this.containerData.get(EntityDetectorBlockEntity.FILTER_ORDINAL_INDEX)
-		private set(value) = this.containerData.set(EntityDetectorBlockEntity.FILTER_ORDINAL_INDEX, value)
+		get() = containerData.get(EntityDetectorBlockEntity.FILTER_ORDINAL_INDEX)
+		private set(value) = containerData.set(EntityDetectorBlockEntity.FILTER_ORDINAL_INDEX, value)
 
 	fun getFilter(): EntityDetectorBlockEntity.Filter {
 		val ordinal = filterOrdinal.coerceIn(0, EntityDetectorBlockEntity.Filter.entries.size - 1)

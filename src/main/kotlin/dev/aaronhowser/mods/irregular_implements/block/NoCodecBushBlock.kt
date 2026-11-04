@@ -39,7 +39,7 @@ abstract class NoCodecBushBlock(properties: Properties) : Block(properties) {
 		val belowBlockState = level.getBlockState(blockPos)
 		val soilDecision = belowBlockState.canSustainPlant(level, blockPos, Direction.UP, state)
 		if (!soilDecision.isDefault()) return soilDecision.isTrue()
-		return this.mayPlaceOn(belowBlockState, level, blockPos)
+		return mayPlaceOn(belowBlockState, level, blockPos)
 	}
 
 	override fun propagatesSkylightDown(state: BlockState, reader: BlockGetter, pos: BlockPos): Boolean {
@@ -47,7 +47,7 @@ abstract class NoCodecBushBlock(properties: Properties) : Block(properties) {
 	}
 
 	override fun isPathfindable(state: BlockState, pathComputationType: PathComputationType): Boolean {
-		return if (pathComputationType == PathComputationType.AIR && !this.hasCollision) true else super.isPathfindable(state, pathComputationType)
+		return if (pathComputationType == PathComputationType.AIR && !hasCollision) true else super.isPathfindable(state, pathComputationType)
 	}
 
 }

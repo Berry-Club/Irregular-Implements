@@ -42,7 +42,7 @@ class EnderEnergyDistributorBlockEntity(
 	}
 
 	fun tick() {
-		val tick = this.level?.gameTime ?: return
+		val tick = level?.gameTime ?: return
 		if (tick % 20L == 0L) {
 			recalculateCache()
 		}
@@ -54,7 +54,7 @@ class EnderEnergyDistributorBlockEntity(
 
 	private val energyCache: MutableList<BlockEntity> = mutableListOf()
 	private fun getCachedEnergyHandlers(): List<IEnergyStorage> {
-		val level = this.level ?: return emptyList()
+		val level = level ?: return emptyList()
 
 		return energyCache
 			.asSequence()
@@ -68,7 +68,7 @@ class EnderEnergyDistributorBlockEntity(
 	}
 
 	private fun recalculateCache() {
-		val level = this.level ?: return
+		val level = level ?: return
 
 		energyCache.clear()
 

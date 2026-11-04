@@ -46,11 +46,11 @@ class RedstoneRemoteEditMenu(
 
 			val filterY = 18
 			val filterSlot = SlotItemHandler(itemHandler, pairIndex, x, filterY)
-			this.addSlot(filterSlot)
+			addSlot(filterSlot)
 
 			val displayY = 36
 			val displaySlot = SlotItemHandler(itemHandler, pairIndex + 9, x, displayY)
-			this.addSlot(displaySlot)
+			addSlot(displaySlot)
 		}
 	}
 

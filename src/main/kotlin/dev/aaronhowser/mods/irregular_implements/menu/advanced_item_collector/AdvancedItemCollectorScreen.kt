@@ -28,16 +28,16 @@ class AdvancedItemCollectorScreen(
 
 	override fun baseInit() {
 
-		val lowerButtonLeft = this.guiLeft + 29
-		val raiseButtonLeft = this.guiLeft + 127
+		val lowerButtonLeft = guiLeft + 29
+		val raiseButtonLeft = guiLeft + 127
 
-		val xButtonTop = this.guiTop + 20
-		val yButtonTop = this.guiTop + 45
-		val zButtonsTop = this.guiTop + 70
+		val xButtonTop = guiTop + 20
+		val yButtonTop = guiTop + 45
+		val zButtonsTop = guiTop + 70
 
-		this.titleLabelX = 26
+		titleLabelX = 26
 
-		this.buttonLowerX = Button.Builder(
+		buttonLowerX = Button.Builder(
 			ModMessageLang.MINUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_X_BUTTON_ID)
@@ -51,7 +51,7 @@ class AdvancedItemCollectorScreen(
 			)
 			.build()
 
-		this.buttonRaiseX = Button.Builder(
+		buttonRaiseX = Button.Builder(
 			ModMessageLang.PLUS_X.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_X_BUTTON_ID)
@@ -66,7 +66,7 @@ class AdvancedItemCollectorScreen(
 			.build()
 
 
-		this.buttonLowerY = Button.Builder(
+		buttonLowerY = Button.Builder(
 			ModMessageLang.MINUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Y_BUTTON_ID)
@@ -81,7 +81,7 @@ class AdvancedItemCollectorScreen(
 			.build()
 
 
-		this.buttonRaiseY = Button.Builder(
+		buttonRaiseY = Button.Builder(
 			ModMessageLang.PLUS_Y.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Y_BUTTON_ID)
@@ -96,7 +96,7 @@ class AdvancedItemCollectorScreen(
 			.build()
 
 
-		this.buttonLowerZ = Button.Builder(
+		buttonLowerZ = Button.Builder(
 			ModMessageLang.MINUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.LOWER_Z_BUTTON_ID)
@@ -111,7 +111,7 @@ class AdvancedItemCollectorScreen(
 			.build()
 
 
-		this.buttonRaiseZ = Button.Builder(
+		buttonRaiseZ = Button.Builder(
 			ModMessageLang.PLUS_Z.toComponent()
 		) {
 			val packet = ClientClickedMenuButton(AdvancedItemCollectorMenu.RAISE_Z_BUTTON_ID)
@@ -125,12 +125,12 @@ class AdvancedItemCollectorScreen(
 			)
 			.build()
 
-		this.addRenderableWidget(this.buttonLowerX)
-		this.addRenderableWidget(this.buttonRaiseX)
-		this.addRenderableWidget(this.buttonLowerY)
-		this.addRenderableWidget(this.buttonRaiseY)
-		this.addRenderableWidget(this.buttonLowerZ)
-		this.addRenderableWidget(this.buttonRaiseZ)
+		addRenderableWidget(buttonLowerX)
+		addRenderableWidget(buttonRaiseX)
+		addRenderableWidget(buttonLowerY)
+		addRenderableWidget(buttonRaiseY)
+		addRenderableWidget(buttonLowerZ)
+		addRenderableWidget(buttonRaiseZ)
 	}
 
 	override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
@@ -140,43 +140,43 @@ class AdvancedItemCollectorScreen(
 
 	private fun drawRadiusTexts(guiGraphics: GuiGraphics) {
 
-		val middle = this.leftPos + this.imageWidth / 2
+		val middle = leftPos + imageWidth / 2
 
 		val xChars = ModMessageLang.X_RADIUS
-			.toComponent(this.menu.xRadius)
+			.toComponent(menu.xRadius)
 			.visualOrderText
 
 		guiGraphics.drawString(
-			this.font,
+			font,
 			xChars,
 			middle - font.width(xChars) / 2,
-			this.guiTop + 20 + 6,
+			guiTop + 20 + 6,
 			0x404040,
 			false
 		)
 
 		val yChars = ModMessageLang.Y_RADIUS
-			.toComponent(this.menu.yRadius)
+			.toComponent(menu.yRadius)
 			.visualOrderText
 
 		guiGraphics.drawString(
-			this.font,
+			font,
 			yChars,
 			middle - font.width(yChars) / 2,
-			this.guiTop + 45 + 6,
+			guiTop + 45 + 6,
 			0x404040,
 			false
 		)
 
 		val zChars = ModMessageLang.Z_RADIUS
-			.toComponent(this.menu.zRadius)
+			.toComponent(menu.zRadius)
 			.visualOrderText
 
 		guiGraphics.drawString(
-			this.font,
+			font,
 			zChars,
 			middle - font.width(zChars) / 2,
-			this.guiTop + 70 + 6,
+			guiTop + 70 + 6,
 			0x404040,
 			false
 		)

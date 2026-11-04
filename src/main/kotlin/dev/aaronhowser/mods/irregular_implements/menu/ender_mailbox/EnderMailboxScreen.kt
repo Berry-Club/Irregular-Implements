@@ -14,7 +14,7 @@ class EnderMailboxScreen(
 	override val background: ScreenBackground = ScreenTextures.Backgrounds.ENDER_MAILBOX
 
 	override fun baseInit() {
-		this.inventoryLabelY = this.imageHeight - 94
+		inventoryLabelY = imageHeight - 94
 	}
 
 }

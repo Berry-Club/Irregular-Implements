@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 import dev.aaronhowser.mods.irregular_implements.block.plate.ExtractionPlateBlock
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.ItemStack
@@ -65,7 +66,7 @@ class ExtractionPlateBlockEntity(
 		return stack.count - remainder.count
 	}
 
-	private fun dropItem(level: ServerLevel, outputDirection: net.minecraft.core.Direction, stack: ItemStack) {
+	private fun dropItem(level: ServerLevel, outputDirection: Direction, stack: ItemStack) {
 		val center = worldPosition.center
 		val x = center.x + outputDirection.stepX * 0.65
 		val y = worldPosition.y + 0.1

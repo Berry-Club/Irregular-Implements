@@ -25,9 +25,9 @@ object EscapeRopeHandler {
 	private val runningTasks: ArrayList<Task> = ArrayList()
 
 	fun addTask(player: ServerPlayer) {
-		if (this.runningTasks.any { it.playerReference.get() == player }) return
+		if (runningTasks.any { it.playerReference.get() == player }) return
 		val task = Task(WeakReference(player))
-		this.runningTasks.add(task)
+		runningTasks.add(task)
 	}
 
 	fun tick() {
@@ -56,10 +56,10 @@ object EscapeRopeHandler {
 		private val toCheck: ArrayList<BlockPos> = ArrayList()
 		private val alreadyChecked: HashSet<BlockPos> = HashSet()
 
-		private val levelAtStart = this.playerReference.get()?.level()
+		private val levelAtStart = playerReference.get()?.level()
 
 		init {
-			val actualPlayer = this.playerReference.get()
+			val actualPlayer = playerReference.get()
 			if (actualPlayer != null) toCheck.add(actualPlayer.blockPosition())
 		}
 
@@ -67,11 +67,11 @@ object EscapeRopeHandler {
 		 * @return true if the task is done
 		 */
 		fun tick(): Boolean {
-			val player = this.playerReference.get() ?: return true
+			val player = playerReference.get() ?: return true
 			val level = player.serverLevel()
 			val usedItem = player.useItem
 
-			if (level != this.levelAtStart || !usedItem.isItem(ModItems.ESCAPE_ROPE)) return true
+			if (level != levelAtStart || !usedItem.isItem(ModItems.ESCAPE_ROPE)) return true
 
 			val limit = ServerConfig.CONFIG.escapeRopeMaxBlocks.get()
 			val maxRuns = ServerConfig.CONFIG.escapeRopeBlocksPerTick.get()

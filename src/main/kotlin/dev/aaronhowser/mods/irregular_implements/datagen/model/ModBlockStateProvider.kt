@@ -2545,7 +2545,7 @@ class ModBlockStateProvider(
 
 		val combined = modLoc("block/glowing_mushroom/combined")
 
-		this.itemModels()
+		itemModels()
 			.withExistingParent(name(block), "item/generated")
 			.texture("layer0", combined)
 	}

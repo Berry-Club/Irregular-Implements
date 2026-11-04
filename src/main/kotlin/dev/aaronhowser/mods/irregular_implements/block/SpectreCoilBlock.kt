@@ -125,7 +125,7 @@ class SpectreCoilBlock private constructor(
 	}
 
 	override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-		return SpectreCoilBlockEntity(pos, state, this.type)
+		return SpectreCoilBlockEntity(pos, state, type)
 	}
 
 	override fun <T : BlockEntity?> getTicker(level: Level, state: BlockState, blockEntityType: BlockEntityType<T>): BlockEntityTicker<T>? {
@@ -151,9 +151,9 @@ class SpectreCoilBlock private constructor(
 		tooltipComponents: MutableList<Component>,
 		tooltipFlag: TooltipFlag
 	) {
-		val amount = this.type.amountGetter.get()
+		val amount = type.amountGetter.get()
 
-		val component = if (this.type.isGenerator) {
+		val component = if (type.isGenerator) {
 			ModTooltipLang.COIL_GENERATES
 		} else {
 			ModTooltipLang.COIL_TRANSFERS
