@@ -239,7 +239,8 @@ class RedstoneObserverBlockEntity(
 					val weakThere = level.getSignal(targetPos, direction).coerceIn(0, 15)
 					val strongThere = level.getDirectSignal(targetPos, direction).coerceIn(0, 15)
 
-					val changeThisTime = observerBe.setWeakPower(weakThere, index) || observerBe.setStrongPower(strongThere, index)
+					// or instead of || to make it not short circuit
+					val changeThisTime = observerBe.setWeakPower(weakThere, index) or observerBe.setStrongPower(strongThere, index)
 					if (changeThisTime) didPowerChange = true
 				}
 
