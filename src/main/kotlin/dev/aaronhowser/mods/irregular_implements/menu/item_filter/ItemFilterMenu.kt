@@ -65,7 +65,7 @@ class ItemFilterMenu(
 			val x = 8 + index * 18
 			val y = 26
 
-			val slot = ItemFilterSlot(::getHeldItemStack, holderLookup, x, y)
+			val slot = ItemFilterSlot(::getHeldItemStack, holderLookup, index, x, y)
 
 			addSlot(slot)
 		}

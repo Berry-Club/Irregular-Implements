@@ -14,6 +14,7 @@ import java.util.function.Supplier
 class ItemFilterSlot(
 	private val filterStackGetter: Supplier<ItemStack>,
 	private val lookupProvider: HolderLookup.Provider,
+	private val filterIndex: Int,
 	x: Int,
 	y: Int
 ) : NonInteractiveResultSlot(SimpleContainer(0), 0, x, y) {
@@ -25,14 +26,14 @@ class ItemFilterSlot(
 		get() = stackComponent?.entries
 
 	private val entryInThisSlot: FilterEntry?
-		get() = stackFilter?.getOrNull(index)
+		get() = stackFilter?.getOrNull(filterIndex)
 
 	// Treating this as basically a button that removes this slot's entry from the filter component
 	override fun mayPickup(player: Player): Boolean {
 		val stackFilter = stackFilter ?: return false
 
 		val newFilter = stackFilter.toMutableList()
-		newFilter[index] = FilterEntry.Empty
+		newFilter[filterIndex] = FilterEntry.Empty
 
 		filterStackGetter.get().set(
 			ModDataComponents.ITEM_FILTER,
@@ -52,7 +53,7 @@ class ItemFilterSlot(
 		val oldFilter = stackFilter ?: return stack
 		val newFilter = ItemFilterDataComponent.sanitizeEntries(oldFilter).toMutableList()
 
-		newFilter[index] = FilterEntry.Item(
+		newFilter[filterIndex] = FilterEntry.Item(
 			stack.copyWithCount(1),
 			requireSameComponents = false
 		)

@@ -16,6 +16,7 @@
 	- PR by Mervius
 - Fixed certain things requiring the global_pos data component instead of an actual Location Filter (#93)
 	- Redstone Remote, Block Teleporter, Ender Energy Distributor, Advanced Redstone Interface
+- Fixed the Item Filter crashing (#84)
 
 # 1.12.1
 
