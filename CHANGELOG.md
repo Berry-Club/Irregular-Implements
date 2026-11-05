@@ -13,7 +13,9 @@
 - The Block Mover and Block Replacer now notify neighboring blocks after placing blocks (#92)
 - Fixed several problems with the Redstone Observer and Redstone Interface (#85) (#90)
 	- It now caches the signal strengths in a block state, rather than re-checking the destination every tick
-    - PR by Mervius
+	- PR by Mervius
+- Fixed certain things requiring the global_pos data component instead of an actual Location Filter (#93)
+	- Redstone Remote, Block Teleporter, Ender Energy Distributor, Advanced Redstone Interface
 
 # 1.12.1
 

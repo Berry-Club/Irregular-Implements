@@ -1,8 +1,10 @@
 package dev.aaronhowser.mods.irregular_implements.item
 
+import dev.aaronhowser.mods.aaron.misc.AaronExtensions.isItem
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModLanguageProvider.Companion.toGrayComponent
 import dev.aaronhowser.mods.irregular_implements.datagen.language.ModTooltipLang
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
+import dev.aaronhowser.mods.irregular_implements.registry.ModItems
 import dev.aaronhowser.mods.irregular_implements.util.OtherUtil
 import net.minecraft.core.GlobalPos
 import net.minecraft.network.chat.Component
@@ -55,6 +57,8 @@ class LocationFilterItem(properties: Properties) : Item(properties) {
 
 	companion object {
 		val DEFAULT_PROPERTIES: Properties = Properties().stacksTo(1)
+
+		fun hasSetLocation(stack: ItemStack) = stack.isItem(ModItems.LOCATION_FILTER) && stack.has(ModDataComponents.GLOBAL_POS)
 	}
 
 }

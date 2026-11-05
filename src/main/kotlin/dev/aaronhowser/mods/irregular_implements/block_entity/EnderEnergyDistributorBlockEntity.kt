@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.irregular_implements.block_entity
 
 import dev.aaronhowser.mods.aaron.container.ContainerContainer
 import dev.aaronhowser.mods.aaron.container.ImprovedSimpleContainer
+import dev.aaronhowser.mods.irregular_implements.item.LocationFilterItem
 import dev.aaronhowser.mods.irregular_implements.menu.ender_energy_distributor.EnderEnergyDistributorMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -114,11 +115,9 @@ class EnderEnergyDistributorBlockEntity(
 	}
 
 	private inner class EnderEnergyDistributorContainer : ImprovedSimpleContainer(this, INVENTORY_SIZE) {
-
 		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
-			return stack.has(ModDataComponents.GLOBAL_POS)
+			return LocationFilterItem.hasSetLocation(stack)
 		}
-
 	}
 
 	private inner class DistributedEnergyStorage : IEnergyStorage {

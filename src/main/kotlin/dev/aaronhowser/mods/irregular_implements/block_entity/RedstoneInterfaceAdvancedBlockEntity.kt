@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.aaron.misc.AaronExtensions.saveItems
 import dev.aaronhowser.mods.irregular_implements.block_entity.base.RedstoneInterfaceBlockEntity
 import dev.aaronhowser.mods.irregular_implements.client.render.CubeIndicatorRenderer
 import dev.aaronhowser.mods.irregular_implements.client.render.LineIndicatorRenderer
+import dev.aaronhowser.mods.irregular_implements.item.LocationFilterItem
 import dev.aaronhowser.mods.irregular_implements.menu.advanced_redstone_interface.AdvancedRedstoneInterfaceMenu
 import dev.aaronhowser.mods.irregular_implements.registry.ModBlockEntityTypes
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
@@ -176,7 +177,7 @@ class RedstoneInterfaceAdvancedBlockEntity(
 	private inner class AdvancedRedstoneInterfaceContainer : ImprovedSimpleContainer(this, CONTAINER_SIZE) {
 
 		override fun canPlaceItem(slot: Int, stack: ItemStack): Boolean {
-			return stack.has(ModDataComponents.GLOBAL_POS)
+			return LocationFilterItem.hasSetLocation(stack)
 		}
 
 		override fun setChanged() {

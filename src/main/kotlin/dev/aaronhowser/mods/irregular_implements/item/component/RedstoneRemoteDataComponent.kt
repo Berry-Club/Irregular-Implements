@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.irregular_implements.item.component
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.aaronhowser.mods.aaron.serialization.AaronExtraStreamCodecs
+import dev.aaronhowser.mods.irregular_implements.item.LocationFilterItem
 import dev.aaronhowser.mods.irregular_implements.registry.ModDataComponents
 import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -31,7 +32,7 @@ data class RedstoneRemoteDataComponent(
 		fun getItemCapability(stack: ItemStack, any: Any?): ItemStackHandler {
 			return object : ItemInventoryItemHandler<RedstoneRemoteDataComponent>(stack, ModDataComponents.REDSTONE_REMOTE.get()) {
 				override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-					if (slot <= HORIZONTAL_SLOT_COUNT) return stack.has(ModDataComponents.GLOBAL_POS)
+					if (slot <= HORIZONTAL_SLOT_COUNT) return LocationFilterItem.hasSetLocation(stack)
 					return true
 				}
 			}
