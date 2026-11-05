@@ -11,6 +11,9 @@
 - Fixed a potential item dupe
 - The Sided Redstone Block now emits a strength of 15 instead of 16 (#91)
 - The Block Mover and Block Replacer now notify neighboring blocks after placing blocks (#92)
+- Fixed several problems with the Redstone Observer and Redstone Interface (#85) (#90)
+	- It now caches the signal strengths in a block state, rather than re-checking the destination every tick
+    - PR by Mervius
 
 # 1.12.1
 
